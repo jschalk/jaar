@@ -39,7 +39,7 @@ def test_AgendaUnit_meld_WeightDoesNotCombine():
     assert bob1_agenda._weight == 3
 
 
-def test_AgendaUnit_meld_PartyUnits():
+def test_AgendaUnit_meld_DoesNotChangePartyUnits():
     # GIVEN
     yao_text = "Yao"
     yao_partyunit = partyunit_shop(party_id=yao_text)
@@ -61,39 +61,12 @@ def test_AgendaUnit_meld_PartyUnits():
     bob1_agenda.meld(other_agenda=bob2_agenda)
 
     # THEN
-    assert len(bob1_agenda._partys) == 2
-    assert bob1_agenda.get_party(yao_text) != None
-    assert bob1_agenda.get_party(zia_text) != None
-
-
-def test_AgendaUnit_meld_PartyUnits_ignore_partyunits_ReturnsCorrectObj():
-    # GIVEN
-    yao_text = "Yao"
-    yao_partyunit = partyunit_shop(party_id=yao_text)
-
-    bob_text = "Bob"
-    bob1_agenda = agendaunit_shop(bob_text)
-    bob1_agenda.set_partyunit(yao_partyunit)
-
-    bob2_agenda = agendaunit_shop(bob_text)
-    bob2_agenda.set_partyunit(yao_partyunit)
-    zia_text = "Zia"
-    zia_partyunit = partyunit_shop(party_id=zia_text)
-    bob2_agenda.set_partyunit(zia_partyunit)
-    assert len(bob1_agenda._partys) == 1
-    assert bob1_agenda.get_party(yao_text) != None
-    assert bob1_agenda.get_party(zia_text) is None
-
-    # WHEN
-    bob1_agenda.meld(other_agenda=bob2_agenda, ignore_partyunits=True)
-
-    # THEN
     assert len(bob1_agenda._partys) == 1
     assert bob1_agenda.get_party(yao_text) != None
     assert bob1_agenda.get_party(zia_text) is None
 
 
-def test_AgendaUnit_meld_GroupUnits_WhereGroupUnitIsMissing():
+def test_AgendaUnit_meld_DoesNotChange_groups():
     # GIVEN
     run_text = ",runners"
     run_groupunit = groupunit_shop(group_id=run_text)
@@ -118,39 +91,69 @@ def test_AgendaUnit_meld_GroupUnits_WhereGroupUnitIsMissing():
     # for x_group_id in bob1_agenda._groups.values():
     #     print(f"bob1_agenda {x_group_id.party_id=}")
 
-    assert len(bob1_agenda._groups) == 2
+    assert len(bob1_agenda._groups) == 1
     assert bob1_agenda.get_groupunit(run_text) != None
-    assert bob1_agenda.get_groupunit(swim_text) != None
+    assert bob1_agenda.get_groupunit(swim_text) is None
 
 
-def test_AgendaUnit_meld_GroupUnits_WhereGroupUnitMembershipIsDifferent():
-    # GIVEN
+# def test_AgendaUnit_meld_GroupUnits_WhereGroupUnitIsMissing():
+#     # GIVEN
+#     run_text = ",runners"
+#     run_groupunit = groupunit_shop(group_id=run_text)
 
-    bob_text = "Bob"
-    bob1_agenda = agendaunit_shop(bob_text)
-    sue_text = "Sue"
-    bob1_agenda.set_partyunit(partyunit_shop(sue_text))
+#     bob_text = "Bob"
+#     bob1_agenda = agendaunit_shop(bob_text)
+#     bob1_agenda.set_groupunit(run_groupunit)
 
-    run_text = ",runners"
-    bob1_agenda.set_groupunit(groupunit_shop(run_text))
-    bob1_agenda.get_groupunit(run_text).set_partylink(partylink_shop(sue_text))
+#     bob2_agenda = agendaunit_shop(bob_text)
+#     bob2_agenda.set_groupunit(run_groupunit)
+#     swim_text = ",swimmers"
+#     swim_groupunit = groupunit_shop(group_id=swim_text)
+#     bob2_agenda.set_groupunit(swim_groupunit)
+#     assert len(bob1_agenda._groups) == 1
+#     assert bob1_agenda.get_groupunit(run_text) != None
+#     assert bob1_agenda.get_groupunit(swim_text) is None
 
-    bob2_agenda = agendaunit_shop(bob_text)
-    yao_text = "Yao"
-    bob2_agenda.set_partyunit(partyunit_shop(yao_text))
-    bob2_agenda.set_partyunit(partyunit_shop(sue_text))
-    bob2_agenda.set_groupunit(groupunit_shop(run_text))
-    bob2_agenda.get_groupunit(run_text).set_partylink(partylink_shop(yao_text))
-    bob2_agenda.get_groupunit(run_text).set_partylink(partylink_shop(sue_text))
-    assert len(bob1_agenda._groups) == 2
-    assert len(bob1_agenda.get_groupunit(run_text)._partys) == 1
+#     # WHEN
+#     bob1_agenda.meld(other_agenda=bob2_agenda)
 
-    # WHEN
-    bob1_agenda.meld(other_agenda=bob2_agenda)
+#     # THEN
+#     # for x_group_id in bob1_agenda._groups.values():
+#     #     print(f"bob1_agenda {x_group_id.party_id=}")
 
-    # THEN
-    assert len(bob1_agenda._groups) == 3
-    assert len(bob1_agenda.get_groupunit(run_text)._partys) == 2
+#     assert len(bob1_agenda._groups) == 2
+#     assert bob1_agenda.get_groupunit(run_text) != None
+#     assert bob1_agenda.get_groupunit(swim_text) != None
+
+
+# def test_AgendaUnit_meld_GroupUnits_WhereGroupUnitMembershipIsDifferent():
+#     # GIVEN
+
+#     bob_text = "Bob"
+#     bob1_agenda = agendaunit_shop(bob_text)
+#     sue_text = "Sue"
+#     bob1_agenda.set_partyunit(partyunit_shop(sue_text))
+
+#     run_text = ",runners"
+#     bob1_agenda.set_groupunit(groupunit_shop(run_text))
+#     bob1_agenda.get_groupunit(run_text).set_partylink(partylink_shop(sue_text))
+
+#     bob2_agenda = agendaunit_shop(bob_text)
+#     yao_text = "Yao"
+#     bob2_agenda.set_partyunit(partyunit_shop(yao_text))
+#     bob2_agenda.set_partyunit(partyunit_shop(sue_text))
+#     bob2_agenda.set_groupunit(groupunit_shop(run_text))
+#     bob2_agenda.get_groupunit(run_text).set_partylink(partylink_shop(yao_text))
+#     bob2_agenda.get_groupunit(run_text).set_partylink(partylink_shop(sue_text))
+#     assert len(bob1_agenda._groups) == 2
+#     assert len(bob1_agenda.get_groupunit(run_text)._partys) == 1
+
+#     # WHEN
+#     bob1_agenda.meld(other_agenda=bob2_agenda)
+
+#     # THEN
+#     assert len(bob1_agenda._groups) == 3
+#     assert len(bob1_agenda.get_groupunit(run_text)._partys) == 2
 
 
 def test_AgendaUnit_idearoot_meld_idearoot_AttrCorrectlyMelded():
@@ -404,8 +407,8 @@ def test_AgendaUnit_meld_ReturnsCorrectObj_LargeExample():
     assert bob_idearoot._kids == yao_idearoot._kids
     assert bob_idearoot._uid == yao_idearoot._uid
     assert bob_idearoot._beliefunits == yao_idearoot._beliefunits
-    assert bob_agenda._groups == yao_agenda._groups
-    assert bob_agenda._partys == yao_agenda._partys
+    assert bob_agenda._groups != yao_agenda._groups
+    assert bob_agenda._partys != yao_agenda._partys
 
     assert len(bob_idearoot._beliefunits) == 2
     assert len(bob_idearoot._beliefunits) == len(yao_idearoot._beliefunits)
@@ -415,7 +418,7 @@ def test_AgendaUnit_meld_ReturnsCorrectObj_LargeExample():
     #     print(f"{bob_agenda_group_key=}")
     #     assert bob_agenda_group_obj.uid == yao_agenda._groups[bob_agenda_group_key].uid
     #     assert bob_agenda_group_obj == yao_agenda._groups[bob_agenda_group_key]
-    assert bob_agenda._groups == yao_agenda._groups
+    assert bob_agenda._groups != yao_agenda._groups
     assert len(bob_agenda.get_idea_dict()) == len(yao_agenda.get_idea_dict())
 
     bob_agendar_bl = bob_idearoot._balancelines
@@ -429,13 +432,13 @@ def test_AgendaUnit_meld_ReturnsCorrectObj_LargeExample():
     print(f"{yao_family_bl._agenda_credit=} {bob_idearoot._kids_total_weight=}")
     print(f"  {bob_family_bl._agenda_debt=} {bob_idearoot._kids_total_weight=}")
     print(f"  {yao_family_bl._agenda_debt=} {bob_idearoot._kids_total_weight=}")
-    assert abs(bob_family_bl._agenda_credit - yao_family_bl._agenda_credit) < 0.0001
-    assert abs(bob_family_bl._agenda_debt - yao_family_bl._agenda_debt) < 0.0001
+    assert abs(bob_family_bl._agenda_credit - yao_family_bl._agenda_credit) > 0.0001
+    assert abs(bob_family_bl._agenda_debt - yao_family_bl._agenda_debt) > 0.0001
 
     # for balanceline in bob_agendar_bl.values():
     #     if balanceline.party_id != fam_text:
     #         assert balanceline == yao_agendar_bl.get(balanceline.party_id)
-    assert bob_agendar_bl == yao_agendar_bl
+    assert bob_agendar_bl != yao_agendar_bl
     # assert x_agenda1._idearoot._balancelines == bob2_agenda._idearoot._balancelines
     # assert x_agenda1._idearoot == bob2_agenda._idearoot
 

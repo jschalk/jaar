@@ -115,6 +115,10 @@ class _last_gift_idException(Exception):
     pass
 
 
+class healerhold_group_id_Exception(Exception):
+    pass
+
+
 @dataclass
 class AgendaUnit:
     _world_id: str = None
@@ -798,7 +802,7 @@ class AgendaUnit:
         elif self.get_groupunit(new_group_id) != None:
             old_groupunit = self.get_groupunit(old_group_id)
             old_groupunit.set_group_id(group_id=new_group_id)
-            self.get_groupunit(new_group_id).meld(other_group=old_groupunit)
+            self.get_groupunit(new_group_id).merge(other_group=old_groupunit)
             self.del_groupunit(group_id=old_group_id)
         elif self.get_groupunit(new_group_id) is None:
             old_groupunit = self.get_groupunit(old_group_id)
@@ -1445,7 +1449,7 @@ class AgendaUnit:
         if healerhold != None:
             for x_group_id in healerhold._group_ids:
                 if self._groups.get(x_group_id) is None:
-                    raise Exception(
+                    raise healerhold_group_id_Exception(
                         f"Idea cannot edit healerhold because group_id '{x_group_id}' does not exist as group in Agenda"
                     )
 
@@ -2157,12 +2161,7 @@ class AgendaUnit:
     def set_meld_strategy(self, x_meld_strategy: MeldStrategy):
         self._meld_strategy = validate_meld_strategy(x_meld_strategy)
 
-    def meld(
-        self, other_agenda, party_weight: float = None, ignore_partyunits: bool = False
-    ):
-        self._meld_groups(other_agenda)
-        if not ignore_partyunits:
-            self._meld_partys(other_agenda)
+    def meld(self, other_agenda, party_weight: float = None):
         self._meld_ideas(other_agenda, party_weight)
         self._meld_beliefs(other_agenda)
         self._weight = get_meld_weight(
@@ -2200,13 +2199,6 @@ class AgendaUnit:
                 self.set_partyunit(partyunit=partyunit)
             else:
                 self.get_party(partyunit.party_id).meld(partyunit)
-
-    def _meld_groups(self, other_agenda):
-        for brx in other_agenda._groups.values():
-            if self.get_groupunit(brx.group_id) is None:
-                self.set_groupunit(y_groupunit=brx)
-            else:
-                self.get_groupunit(brx.group_id).meld(brx)
 
     def _meld_beliefs(self, other_agenda):
         for hx in other_agenda._idearoot._beliefunits.values():

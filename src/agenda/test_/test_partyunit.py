@@ -663,7 +663,7 @@ def test_partyunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteD
     assert yao_partyunit.depotlink_type == yao_depotlink_type
 
 
-def test_PartyUnit_meld_RaiseSameparty_idException():
+def test_PartyUnit_merge_RaiseSameparty_idException():
     # GIVEN
     todd_text = "Todd"
     todd_party = partyunit_shop(party_id=todd_text)
@@ -672,14 +672,14 @@ def test_PartyUnit_meld_RaiseSameparty_idException():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        todd_party.meld(mery_party)
+        todd_party.merge(mery_party)
     assert (
         str(excinfo.value)
-        == f"Meld fail PartyUnit='{todd_party.party_id}' not the same as PartyUnit='{mery_party.party_id}"
+        == f"merge fail PartyUnit='{todd_party.party_id}' not the same as PartyUnit='{mery_party.party_id}"
     )
 
 
-def test_PartyUnit_meld_CorrectlySumsWeights():
+def test_PartyUnit_merge_CorrectlySumsWeights():
     # GIVEN
     todd_text = "Todd"
     todd_party1 = partyunit_shop(
@@ -690,7 +690,7 @@ def test_PartyUnit_meld_CorrectlySumsWeights():
     assert todd_party1.debtor_weight == 19
 
     # WHEN
-    todd_party1.meld(todd_party2)
+    todd_party1.merge(todd_party2)
 
     # THEN
     assert todd_party1.creditor_weight == 12

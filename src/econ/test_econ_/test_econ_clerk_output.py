@@ -137,10 +137,11 @@ def test_EconUnit_get_refreshed_job_ReturnsCorrectAgendaObjScenario2(
     assert len(output_agenda._idearoot._beliefunits) == len(
         x2_agenda._idearoot._beliefunits
     )
-    assert len(output_agenda._partys) == 25
-    assert len(output_agenda._partys) == len(x2_agenda._partys) + 2 + 1
-    assert len(output_agenda._groups) == 37
-    assert len(output_agenda._groups) == len(x2_agenda._groups) + 2 + 1
+    assert len(output_agenda._partys) == 3
+    assert len(output_agenda._partys) != len(x1_agenda._partys)
+    assert output_agenda._partys != x1_agenda._partys
+    assert len(output_agenda._groups) == 3
+    assert set(output_agenda._groups.keys()) == {"A", "Xia", "Bob"}
     assert output_agenda._idearoot != x1_agenda._idearoot
     assert output_agenda._idearoot != x2_agenda._idearoot
 

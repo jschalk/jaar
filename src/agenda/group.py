@@ -141,29 +141,29 @@ class GroupUnit(GroupCore):
         )
         self.del_partylink(party_id=to_delete_party_id)
 
-    def meld(self, other_group):
-        self._meld_attributes_that_must_be_equal(other_group=other_group)
-        self.meld_partylinks(other_group=other_group)
+    def merge(self, other_group):
+        self._merge_attributes_that_must_be_equal(other_group=other_group)
+        self.merge_partylinks(other_group=other_group)
 
-    def meld_partylinks(self, other_group):
+    def merge_partylinks(self, other_group):
         for oba in other_group._partys.values():
             if self._partys.get(oba.party_id) is None:
                 self._partys[oba.party_id] = oba
             else:
-                self._partys[oba.party_id].meld(oba)
+                self._partys[oba.party_id].merge(oba)
 
-    def _meld_attributes_that_must_be_equal(self, other_group):
+    def _merge_attributes_that_must_be_equal(self, other_group):
         xl = [("group_id", self.group_id, other_group.group_id)]
         while xl != []:
             attrs = xl.pop()
             if attrs[1] != attrs[2]:
                 raise InvalidGroupException(
-                    f"Meld fail GroupUnit {self.group_id} .{attrs[0]}='{attrs[1]}' not the same as .{attrs[0]}='{attrs[2]}"
+                    f"merge fail GroupUnit {self.group_id} .{attrs[0]}='{attrs[1]}' not the same as .{attrs[0]}='{attrs[2]}"
                 )
 
         # if self.group_id != other_group.group_id:
         #     raise InvalidGroupException(
-        #             f"Meld fail idea={self.get_road()} {attrs[0]}:{attrs[1]} with {other_idea.get_road()} {attrs[0]}:{attrs[2]}"
+        #             f"merge fail idea={self.get_road()} {attrs[0]}:{attrs[1]} with {other_idea.get_road()} {attrs[0]}:{attrs[2]}"
         #     )
 
 

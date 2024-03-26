@@ -344,7 +344,7 @@ def test_GroupUnit_reset_agenda_importance_reset_partylinks():
     assert biker_partylink_mery._agenda_intent_debt == 0
 
 
-def test_partylink_meld_ReturnsCorrectObj_BaseScenario():
+def test_partylink_merge_ReturnsCorrectObj_BaseScenario():
     # GIVEN
     todd_party = partylink_shop(party_id="Todd")
     merry_party = partylink_shop(party_id="Merry")
@@ -356,14 +356,14 @@ def test_partylink_meld_ReturnsCorrectObj_BaseScenario():
     x2_group = groupunit_shop(group_id=bikers_group_id, _partys={})
 
     # WHEN
-    bikers_group.meld(other_group=x2_group)
+    bikers_group.merge(other_group=x2_group)
     print(f"{bikers_group.group_id=} {x2_group.group_id=}")
 
     # THEN
     assert len(bikers_group._partys) == 2
 
 
-def test_partylink_meld_ReturnsCorrectObj_GainScenario():
+def test_partylink_merge_ReturnsCorrectObj_GainScenario():
     # GIVEN
     todd_text = "Todd"
     mery_text = "Merry"
@@ -377,14 +377,14 @@ def test_partylink_meld_ReturnsCorrectObj_GainScenario():
     x2_group.set_partylink(partylink=mery_party)
 
     # WHEN
-    bikers_group.meld(other_group=x2_group)
+    bikers_group.merge(other_group=x2_group)
 
     # THEN
     assert len(bikers_group._partys) == 2
     assert bikers_group._partys.get(todd_text) != None
 
 
-def test_GroupUnit_meld_RaiseSameparty_idException():
+def test_GroupUnit_merge_RaiseSameparty_idException():
     # GIVEN
     todd_text = "Todd"
     todd_group = groupunit_shop(group_id=todd_text, _party_mirror=True)
@@ -393,10 +393,10 @@ def test_GroupUnit_meld_RaiseSameparty_idException():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        todd_group.meld(mery_group)
+        todd_group.merge(mery_group)
     assert (
         str(excinfo.value)
-        == f"Meld fail GroupUnit {todd_group.group_id} .group_id='{todd_group.group_id}' not the same as .group_id='{mery_group.group_id}"
+        == f"merge fail GroupUnit {todd_group.group_id} .group_id='{todd_group.group_id}' not the same as .group_id='{mery_group.group_id}"
     )
 
 

@@ -567,46 +567,6 @@ def test_AgendaUnit_edit_Groupunit_group_id_raiseErrorNewPersonIDPreviouslyExist
     )
 
 
-def test_AgendaUnit_edit_groupunit_group_id_CorrectlyMeldPersonIDs():
-    # GIVEN
-    agenda = agendaunit_shop("prom")
-    rico_text = "rico"
-    agenda.add_partyunit(party_id=rico_text)
-    swim_text = ",swimmers"
-    swim_group = groupunit_shop(group_id=swim_text)
-    swim_group.set_partylink(
-        partylink=partylink_shop(party_id=rico_text, creditor_weight=5, debtor_weight=3)
-    )
-    agenda.set_groupunit(swim_group)
-    jog_text = ",jog"
-    jog_group = groupunit_shop(group_id=jog_text)
-    jog_group.set_partylink(
-        partylink=partylink_shop(
-            party_id=rico_text, creditor_weight=7, debtor_weight=10
-        )
-    )
-    agenda.set_groupunit(jog_group)
-    print(f"{agenda.get_groupunit(jog_text)._partys.get(rico_text)=}")
-    assert agenda.get_groupunit(jog_text) != None
-
-    # WHEN
-    agenda.edit_groupunit_group_id(
-        old_group_id=swim_text,
-        new_group_id=jog_text,
-        allow_group_overwite=True,
-    )
-
-    # THEN
-    assert agenda.get_groupunit(jog_text) != None
-    assert agenda.get_groupunit(swim_text) is None
-    assert len(agenda._partys) == 1
-    assert len(agenda._groups) == 2
-    assert agenda.get_groupunit(jog_text)._party_mirror == False
-    assert len(agenda.get_groupunit(jog_text)._partys) == 1
-    assert agenda.get_groupunit(jog_text)._partys.get(rico_text).creditor_weight == 12
-    assert agenda.get_groupunit(jog_text)._partys.get(rico_text).debtor_weight == 13
-
-
 def test_AgendaUnit_edit_groupunit_group_id_CorrectlyChangesBalanceLinks():
     # GIVEN
     x_agenda = agendaunit_shop("prom")

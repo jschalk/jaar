@@ -257,7 +257,7 @@ class ClerkUnit:
 
     def save_output_agenda(self) -> AgendaUnit:
         x_role_agenda = self.open_role_file()
-        x_role_agenda.meld(x_role_agenda, party_weight=1, ignore_partyunits=True)
+        x_role_agenda.meld(x_role_agenda, party_weight=1)
         x_agenda = get_meld_of_agenda_files(
             primary_agenda=x_role_agenda,
             meldees_dir=self._agendas_digest_dir,

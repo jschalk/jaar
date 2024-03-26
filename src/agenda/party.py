@@ -199,10 +199,10 @@ class PartyUnit(PartyCore):
                 self._agenda_intent_debt / agenda_intent_ratio_debt_sum
             )
 
-    def meld(self, other_partyunit):
+    def merge(self, other_partyunit):
         if self.party_id != other_partyunit.party_id:
             raise InvalidPartyException(
-                f"Meld fail PartyUnit='{self.party_id}' not the same as PartyUnit='{other_partyunit.party_id}"
+                f"merge fail PartyUnit='{self.party_id}' not the same as PartyUnit='{other_partyunit.party_id}"
             )
 
         self.creditor_weight += other_partyunit.creditor_weight
@@ -350,10 +350,10 @@ class PartyLink(PartyCore):
         self._agenda_intent_credit = 0
         self._agenda_intent_debt = 0
 
-    def meld(self, other_partylink):
+    def merge(self, other_partylink):
         if self.party_id != other_partylink.party_id:
             raise InvalidPartyException(
-                f"Meld fail PartyLink='{self.party_id}' not the same as PartyLink='{other_partylink.party_id}"
+                f"merge fail PartyLink='{self.party_id}' not the same as PartyLink='{other_partylink.party_id}"
             )
         self.creditor_weight += other_partylink.creditor_weight
         self.debtor_weight += other_partylink.debtor_weight
