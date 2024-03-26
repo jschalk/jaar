@@ -56,8 +56,8 @@ def test_econunit_shop_ReturnsObj(env_dir_setup_cleanup):
 
     # WHEN
     x_econ = econunit_shop(
-        x_econ_id,
-        get_test_econ_dir(),
+        econ_id=x_econ_id,
+        econ_dir=get_test_econ_dir(),
         _manager_person_id=sue_text,
     )
 
@@ -77,7 +77,7 @@ def test_econunit_shop_ReturnsObj_WithTempNames(env_dir_setup_cleanup):
     # assert os_path.exists(econ_dir) is False
 
     # WHEN
-    x_econ = econunit_shop(x_econ_id)
+    x_econ = econunit_shop(econ_id=x_econ_id, econ_dir=get_test_econ_dir())
 
     # THEN
     assert x_econ != None
