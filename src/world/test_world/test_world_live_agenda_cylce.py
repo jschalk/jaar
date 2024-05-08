@@ -40,7 +40,6 @@ def test_WorldUnit_generate_live_agenda_ReturnsRegeneratedObj(worlds_dir_setup_c
     before_luca_agenda = luca_person.get_live_file_agenda()
     bob_text = "Bob"
     before_luca_agenda.add_partyunit(bob_text)
-    # save a incorrect live file
     luca_person.save_live_file(before_luca_agenda)
     assert luca_person.get_live_file_agenda().get_party(bob_text) != None
 
