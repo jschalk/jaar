@@ -136,6 +136,7 @@ class ClerkUnit:
                 listen_to_jefe(self._job, jefe_agenda)
 
 
+# comment created to help troubleshoot git issues
 def clerkunit_shop(
     clerk_id: PersonID, env_dir: str, create_job: bool = True
 ) -> ClerkUnit:
