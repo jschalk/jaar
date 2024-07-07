@@ -563,14 +563,14 @@ def test_CultureHeir_belief_id_in_ReturnsCorrectBoolWhen_heldbeliefsNotEmpty():
     hunt_play_dict = {hunt_text, play_text}
 
     # WHEN / THEN
-    assert x_cultureheir.belief_in(swim_dict)
-    assert x_cultureheir.belief_in(hike_dict)
-    assert x_cultureheir.belief_in(hunt_dict) is False
-    assert x_cultureheir.belief_in(hunt_hike_dict)
-    assert x_cultureheir.belief_in(hunt_play_dict) is False
+    assert x_cultureheir.has_belief(swim_dict)
+    assert x_cultureheir.has_belief(hike_dict)
+    assert x_cultureheir.has_belief(hunt_dict) is False
+    assert x_cultureheir.has_belief(hunt_hike_dict)
+    assert x_cultureheir.has_belief(hunt_play_dict) is False
 
 
-def test_CultureHeir_belief_in_ReturnsCorrectBoolWhen_heldbeliefsEmpty():
+def test_CultureHeir_has_belief_ReturnsCorrectBoolWhen_heldbeliefsEmpty():
     # GIVEN
     hike_text = ",hike"
     hike_dict = {hike_text}
@@ -588,8 +588,8 @@ def test_CultureHeir_belief_in_ReturnsCorrectBoolWhen_heldbeliefsEmpty():
     hunt_play_dict = {hunt_text, play_text}
 
     # WHEN / THEN
-    assert x_cultureheir.belief_in(hike_dict)
-    assert x_cultureheir.belief_in(hunt_dict)
-    assert x_cultureheir.belief_in(play_dict)
-    assert x_cultureheir.belief_in(hunt_hike_dict)
-    assert x_cultureheir.belief_in(hunt_play_dict)
+    assert x_cultureheir.has_belief(hike_dict)
+    assert x_cultureheir.has_belief(hunt_dict)
+    assert x_cultureheir.has_belief(play_dict)
+    assert x_cultureheir.has_belief(hunt_hike_dict)
+    assert x_cultureheir.has_belief(hunt_play_dict)

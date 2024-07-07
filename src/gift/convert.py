@@ -93,7 +93,7 @@ def get_convert_format_filenames() -> set[str]:
     }
 
 
-def get_convert_format_dict(convert_format_name: str) -> dict[str, str]:
+def get_convert_format_dict(convert_format_name: str) -> dict[str,]:
     convert_format_filename = get_json_filename(convert_format_name)
     convert_format_json = open_file(get_convert_format_dir(), convert_format_filename)
     return get_dict_from_json(convert_format_json)
@@ -106,9 +106,8 @@ def _get_headers_list(convert_format_name) -> list[str]:
 def create_convert_format(
     x_worldunit: WorldUnit, convert_format_name: str
 ) -> list[list]:
-    d1_list = []
+    d1_list = [_get_headers_list(convert_format_name)]
     if convert_format_name == jaar_format_0001_char_v0_0_0():
-        d1_list.append(_get_headers_list(convert_format_name))
         unsorted_charunits = list(x_worldunit._chars.values())
         sorted_charunits = sorted(unsorted_charunits, key=lambda x_char: x_char.char_id)
         for x_charunit in sorted_charunits:
@@ -123,7 +122,6 @@ def create_convert_format(
             d1_list.append(d2_list)
 
     elif convert_format_name == jaar_format_0002_beliefhold_v0_0_0():
-        d1_list.append(_get_headers_list(convert_format_name))
         unsorted_charunits = list(x_worldunit._chars.values())
         sorted_charunits = sorted(unsorted_charunits, key=lambda x_char: x_char.char_id)
         for x_charunit in sorted_charunits:

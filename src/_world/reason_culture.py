@@ -79,15 +79,15 @@ class CultureHeir:
         cultureunit: CultureUnit,
         world_beliefs: dict[BeliefID, BeliefUnit],
     ):
-        x_set = set()
+        x_heldbeliefs = set()
         if parent_cultureheir is None or parent_cultureheir._heldbeliefs == set():
             for heldbelief in cultureunit._heldbeliefs:
-                x_set.add(heldbelief)
+                x_heldbeliefs.add(heldbelief)
         elif cultureunit._heldbeliefs == set() or (
             parent_cultureheir._heldbeliefs == cultureunit._heldbeliefs
         ):
             for heldbelief in parent_cultureheir._heldbeliefs:
-                x_set.add(heldbelief)
+                x_heldbeliefs.add(heldbelief)
         else:
             # get all_chars of parent cultureheir beliefs
             all_parent_cultureheir_chars = self._get_all_chars(
@@ -109,10 +109,10 @@ class CultureHeir:
 
             # set dict_x = to cultureunit beliefs
             for heldbelief in cultureunit._heldbeliefs:
-                x_set.add(heldbelief)
-        self._heldbeliefs = x_set
+                x_heldbeliefs.add(heldbelief)
+        self._heldbeliefs = x_heldbeliefs
 
-    def belief_in(self, belief_ids: set[BeliefID]):
+    def has_belief(self, belief_ids: set[BeliefID]):
         return self.is_empty() or any(gn_x in self._heldbeliefs for gn_x in belief_ids)
 
 

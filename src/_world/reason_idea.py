@@ -631,7 +631,7 @@ class ReasonHeir(ReasonCore):
     def set_base_idea_active_value(self, bool_x: bool):
         self._base_idea_active_value = bool_x
 
-    def base_idea_active_requisite_satisfied(self) -> bool:
+    def is_base_idea_active_requisite_operational(self) -> bool:
         return (
             self._base_idea_active_value != None
             and self._base_idea_active_value == self.base_idea_active_requisite
@@ -648,7 +648,9 @@ class ReasonHeir(ReasonCore):
         return any_premise_true, any_task_true
 
     def _set_attr_status(self, any_premise_true: bool):
-        self._status = any_premise_true or self.base_idea_active_requisite_satisfied()
+        self._status = (
+            any_premise_true or self.is_base_idea_active_requisite_operational()
+        )
 
     def _set_attr_task(self, any_task_true: bool):
         self._task = True if any_task_true else None
