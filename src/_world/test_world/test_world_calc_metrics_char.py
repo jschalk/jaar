@@ -633,7 +633,7 @@ class FiscalAgendaMetrics:
     agenda_no_world_i_sum = 0
     agenda_yes_world_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[RoadUnit:IdeaUnit]):
+    def set_sums(self, agenda_dict: dict[RoadUnit, IdeaUnit]):
         for agenda_item in agenda_dict.values():
             self.sum_world_agenda_importance += agenda_item._world_importance
             if agenda_item._fiscallines == {}:

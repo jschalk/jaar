@@ -9,7 +9,7 @@ from copy import deepcopy as copy_deepcopy
 @dataclass
 class Translator:
     in_real_id: RealID = None
-    in_char_ids: dict[CharID:CharID] = None
+    in_char_ids: dict[CharID, CharID] = None
     in_road_delimiter: str = None
 
     def set_char_id(self, in_char_id: CharID, out_char_id: CharID):

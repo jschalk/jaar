@@ -29,7 +29,7 @@ from copy import deepcopy as copy_deepcopy
 
 @dataclass
 class ChangeUnit:
-    atomunits: dict[CRUD_command : dict[str:AtomUnit]] = None
+    atomunits: dict[CRUD_command : dict[str, AtomUnit]] = None
     _world_build_validated: bool = None
 
     def _get_crud_atomunits_list(self) -> dict[CRUD_command : list[AtomUnit]]:
@@ -824,7 +824,7 @@ class ChangeUnit:
             x_atomunit.set_required_arg("base", delete_factunit_base)
             self.set_atomunit(x_atomunit)
 
-    def get_ordered_atomunits(self, x_count: int = None) -> dict[int:AtomUnit]:
+    def get_ordered_atomunits(self, x_count: int = None) -> dict[int, AtomUnit]:
         x_count = get_0_if_None(x_count)
         x_dict = {}
         for x_atom in self.get_sorted_atomunits():
@@ -832,7 +832,7 @@ class ChangeUnit:
             x_count += 1
         return x_dict
 
-    def get_ordered_dict(self, x_count: int = None) -> dict[int:str]:
+    def get_ordered_dict(self, x_count: int = None) -> dict[int, str]:
         return {
             atom_num: atom_obj.get_dict()
             for atom_num, atom_obj in self.get_ordered_atomunits(x_count).items()
@@ -843,7 +843,7 @@ class ChangeUnit:
         return get_json_from_dict(x_dict)
 
 
-def changeunit_shop(atomunits: dict[str:str] = None):
+def changeunit_shop(atomunits: dict[str, str] = None):
     return ChangeUnit(
         atomunits=get_empty_dict_if_none(atomunits),
         _world_build_validated=False,

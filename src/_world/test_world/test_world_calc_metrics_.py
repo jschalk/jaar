@@ -582,7 +582,7 @@ def test_set_fact_WeekdayWorldItemsCorrectlyReturned():
 
 
 def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
-    # WHEN "I am cleaning the cookery since I'm in the flat and it's 8am and it's dirty and its for my family"
+    # WHEN "I am cleaning the cookery since I'm in the flat and it's 8am and it's dirty and it's for my family"
 
     # GIVEN
     zia_world = worldunit_shop("Zia")
@@ -668,7 +668,7 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     assert len(zia_world._idearoot._kids) == 3
 
 
-def get_tasks_count(agenda_dict: dict[RoadUnit:IdeaUnit]) -> int:
+def get_tasks_count(agenda_dict: dict[RoadUnit, IdeaUnit]) -> int:
     return sum(bool(x_ideaunit._task) for x_ideaunit in agenda_dict.values())
 
 

@@ -31,7 +31,7 @@ def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
     return money_magnitude
 
 
-def allot_scale(ledger: dict[str:float], scale_number: float, grain_unit: float):
+def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float):
     """
     allots the scale_number across credorledgers with credor_weighted attributes with a resolution of the grain unit.
 

@@ -7,19 +7,19 @@ from dataclasses import dataclass
 @dataclass
 class TreeMetrics:
     node_count: int = None
-    level_count: dict[int:int] = None
-    reason_bases: dict[RoadUnit:int] = None
-    fiscallinks_metrics: dict[BeliefID:FiscalLink] = None
+    level_count: dict[int, int] = None
+    reason_bases: dict[RoadUnit, int] = None
+    fiscallinks_metrics: dict[BeliefID, FiscalLink] = None
     uid_max: int = None
-    uid_dict: dict[int:int] = None
+    uid_dict: dict[int, int] = None
     all_idea_uids_are_unique: bool = None
     last_evaluated_pledge_idea_road: RoadUnit = None
 
     def evaluate_node(
         self,
         level: int,
-        reasons: dict[RoadUnit:ReasonUnit],
-        fiscallinks: dict[BeliefID:FiscalLink],
+        reasons: dict[RoadUnit, ReasonUnit],
+        fiscallinks: dict[BeliefID, FiscalLink],
         uid: int,
         pledge: bool,
         idea_road: RoadUnit,
@@ -41,7 +41,7 @@ class TreeMetrics:
         else:
             self.level_count[level] = self.level_count[level] + 1
 
-    def evaluate_reasonunits(self, reasons: dict[RoadUnit:ReasonUnit]):
+    def evaluate_reasonunits(self, reasons: dict[RoadUnit, ReasonUnit]):
         if reasons is None:
             reasons = {}
         for reason in reasons.values():
@@ -50,7 +50,7 @@ class TreeMetrics:
             else:
                 self.reason_bases[reason.base] = self.reason_bases[reason.base] + 1
 
-    def evaluate_fiscallinks(self, fiscallinks: dict[BeliefID:FiscalLink]):
+    def evaluate_fiscallinks(self, fiscallinks: dict[BeliefID, FiscalLink]):
         if fiscallinks != None:
             for fiscallink in fiscallinks.values():
                 self.fiscallinks_metrics[fiscallink.belief_id] = fiscallink
@@ -68,11 +68,11 @@ class TreeMetrics:
 
 def treemetrics_shop(
     node_count: int = None,
-    level_count: dict[int:int] = None,
-    reason_bases: dict[RoadUnit:int] = None,
-    fiscallinks_metrics: dict[BeliefID:FiscalLink] = None,
+    level_count: dict[int, int] = None,
+    reason_bases: dict[RoadUnit, int] = None,
+    fiscallinks_metrics: dict[BeliefID, FiscalLink] = None,
     uid_max: int = None,
-    uid_dict: dict[int:int] = None,
+    uid_dict: dict[int, int] = None,
 ) -> TreeMetrics:
     x_treemetrics = TreeMetrics(
         node_count=get_0_if_None(node_count),

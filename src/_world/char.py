@@ -33,7 +33,7 @@ class CharUnit(CharCore):
     credor_weight: int = None
     debtor_weight: int = None
     # special attribute: static in world json, in memory it is deleted after loading and recalculated during saving.
-    _beliefholds: dict[CharID:BeliefHold] = None
+    _beliefholds: dict[CharID, BeliefHold] = None
     # calculated fields
     _irrational_debtor_weight: int = None  # set by listening process
     _inallocable_debtor_weight: int = None  # set by listening process
@@ -169,7 +169,7 @@ class CharUnit(CharCore):
             for x_beliefhold in self._beliefholds.values()
         }
 
-    def get_dict(self, all_attrs: bool = False) -> dict[str:str]:
+    def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
             "char_id": self.char_id,
             "credor_weight": self.credor_weight,
@@ -195,14 +195,14 @@ class CharUnit(CharCore):
 
 
 # class CharUnitsshop:
-def charunits_get_from_json(charunits_json: str) -> dict[str:CharUnit]:
+def charunits_get_from_json(charunits_json: str) -> dict[str, CharUnit]:
     charunits_dict = get_dict_from_json(json_x=charunits_json)
     return charunits_get_from_dict(x_dict=charunits_dict)
 
 
 def charunits_get_from_dict(
     x_dict: dict, _road_delimiter: str = None
-) -> dict[str:CharUnit]:
+) -> dict[str, CharUnit]:
     charunits = {}
     for charunit_dict in x_dict.values():
         x_charunit = charunit_get_from_dict(charunit_dict, _road_delimiter)
@@ -261,7 +261,7 @@ class CharLink(CharCore):
     _world_agenda_cred: float = None
     _world_agenda_debt: float = None
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         return {
             "char_id": self.char_id,
             "credor_weight": self.credor_weight,
@@ -302,12 +302,12 @@ class CharLink(CharCore):
         self.debtor_weight += exterior_charlink.debtor_weight
 
 
-def charlinks_get_from_json(charlinks_json: str) -> dict[str:CharLink]:
+def charlinks_get_from_json(charlinks_json: str) -> dict[str, CharLink]:
     charlinks_dict = get_dict_from_json(json_x=charlinks_json)
     return charlinks_get_from_dict(x_dict=charlinks_dict)
 
 
-def charlinks_get_from_dict(x_dict: dict) -> dict[str:CharLink]:
+def charlinks_get_from_dict(x_dict: dict) -> dict[str, CharLink]:
     if x_dict is None:
         x_dict = {}
     charlinks = {}

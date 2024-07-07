@@ -13,7 +13,7 @@ def example_yao_texas_hubunit() -> HubUnit:
     return hubunit_shop(temp_reals_dir(), temp_real_id(), "Yao", get_texas_road())
 
 
-def example_yao_credorledger() -> dict[str:float]:
+def example_yao_credorledger() -> dict[str, float]:
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"
@@ -27,7 +27,7 @@ def example_yao_credorledger() -> dict[str:float]:
     return get_credorledger(yao_world)
 
 
-def example_bob_credorledger() -> dict[str:float]:
+def example_bob_credorledger() -> dict[str, float]:
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"
@@ -41,7 +41,7 @@ def example_bob_credorledger() -> dict[str:float]:
     return get_credorledger(bob_world)
 
 
-def example_zia_credorledger() -> dict[str:float]:
+def example_zia_credorledger() -> dict[str, float]:
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"
@@ -55,7 +55,7 @@ def example_zia_credorledger() -> dict[str:float]:
     return get_credorledger(zia_world)
 
 
-def example_yao_bob_zia_credorledgers() -> dict[OwnerID : dict[CharID:float]]:
+def example_yao_bob_zia_credorledgers() -> dict[OwnerID : dict[CharID, float]]:
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"
@@ -66,7 +66,7 @@ def example_yao_bob_zia_credorledgers() -> dict[OwnerID : dict[CharID:float]]:
     }
 
 
-def example_yao_bob_zia_tax_dues() -> dict[CharID:float]:
+def example_yao_bob_zia_tax_dues() -> dict[CharID, float]:
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"

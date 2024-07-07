@@ -41,7 +41,7 @@ class GiftUnit:
     def atomunit_exists(self, x_atomunit: AtomUnit):
         return self._changeunit.atomunit_exists(x_atomunit)
 
-    def get_step_dict(self) -> dict[str:]:
+    def get_step_dict(self) -> dict[str,]:
         return {
             "real_id": self.real_id,
             "owner_id": self.owner_id,
@@ -49,7 +49,7 @@ class GiftUnit:
             "change": self._changeunit.get_ordered_atomunits(self._change_start),
         }
 
-    def get_change_atom_numbers(self, giftunit_dict: dict[str:]) -> int:
+    def get_change_atom_numbers(self, giftunit_dict: dict[str,]) -> int:
         change_dict = giftunit_dict.get("change")
         return list(change_dict.keys())
 

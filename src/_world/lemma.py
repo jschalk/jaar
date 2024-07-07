@@ -19,7 +19,7 @@ class Lemma:
 
 @dataclass
 class Lemmas:
-    lemmas: dict[RoadUnit:Lemma] = None
+    lemmas: dict[RoadUnit, Lemma] = None
 
     def _get_loop_range_calc_fact_attr(
         self,
@@ -239,5 +239,5 @@ class Lemmas:
             )
 
 
-def lemmas_shop(lemmas: dict[RoadUnit:Lemma] = None, delimiter: str = None) -> Lemmas:
+def lemmas_shop(lemmas: dict[RoadUnit, Lemma] = None, delimiter: str = None) -> Lemmas:
     return Lemmas(lemmas=get_empty_dict_if_none(lemmas))

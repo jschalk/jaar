@@ -31,8 +31,8 @@ class AtomUnitDescriptionException(Exception):
 class AtomUnit:
     category: str = None
     crud_text: str = None
-    required_args: dict[str:str] = None
-    optional_args: dict[str:str] = None
+    required_args: dict[str, str] = None
+    optional_args: dict[str, str] = None
     atom_order: int = None
 
     def get_insert_sqlstr(self) -> str:
@@ -109,13 +109,13 @@ class AtomUnit:
             return self.optional_args.get(arg_key)
         return required_value
 
-    def get_required_args_dict(self) -> dict[str:str]:
+    def get_required_args_dict(self) -> dict[str, str]:
         return dict(self.required_args.items())
 
-    def get_optional_args_dict(self) -> dict[str:str]:
+    def get_optional_args_dict(self) -> dict[str, str]:
         return dict(self.optional_args.items())
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         required_args_dict = self.get_required_args_dict()
         optional_args_dict = self.get_optional_args_dict()
         # x_dict = {
@@ -139,8 +139,8 @@ class AtomUnit:
 def atomunit_shop(
     category: str,
     crud_text: str = None,
-    required_args: dict[str:str] = None,
-    optional_args: dict[str:str] = None,
+    required_args: dict[str, str] = None,
+    optional_args: dict[str, str] = None,
 ) -> AtomUnit:
     if is_category_ref(category):
         return AtomUnit(

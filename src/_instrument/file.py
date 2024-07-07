@@ -95,7 +95,7 @@ def count_files(dir_path: str) -> int:
 
 def dir_files(
     dir_path: str, delete_extensions: bool = None, include_dirs=None, include_files=None
-) -> dict[str:str]:
+) -> dict[str, str]:
     if include_dirs is None:
         include_dirs = True
     if include_files is None:

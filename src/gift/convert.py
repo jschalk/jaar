@@ -33,8 +33,16 @@ def credor_weight_str() -> str:
     return "credor_weight"
 
 
-def ideaunit_str() -> str:
-    return "ideaunit"
+def road_str() -> str:
+    return "road"
+
+
+def weight_str() -> str:
+    return "weight"
+
+
+def pledge_str() -> str:
+    return "pledge"
 
 
 def validate_str() -> str:
@@ -45,12 +53,20 @@ def must_be_roadnode_str() -> str:
     return "must_be_RoadNode"
 
 
+def must_be_roadunit_str() -> str:
+    return "must_be_RoadUnit"
+
+
 def must_be_str() -> str:
     return "must_be_str"
 
 
 def must_be_number_str() -> str:
     return "must_be_number"
+
+
+def must_be_bool_str() -> str:
+    return "must_be_bool"
 
 
 def get_convert_format_dir() -> str:
@@ -77,7 +93,7 @@ def get_convert_format_filenames() -> set[str]:
     }
 
 
-def get_convert_format_dict(convert_format_name: str) -> dict[str:str]:
+def get_convert_format_dict(convert_format_name: str) -> dict[str, str]:
     convert_format_filename = get_json_filename(convert_format_name)
     convert_format_json = open_file(get_convert_format_dir(), convert_format_filename)
     return get_dict_from_json(convert_format_json)

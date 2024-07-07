@@ -9,7 +9,7 @@ class OriginLink:
     char_id: CharID
     weight: float
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         return {
             "char_id": self.char_id,
             "weight": self.weight,
@@ -24,7 +24,7 @@ def originlink_shop(char_id: CharID, weight: float = None) -> OriginLink:
 
 @dataclass
 class OriginUnit:
-    _links: dict[CharID:OriginLink] = None
+    _links: dict[CharID, OriginLink] = None
 
     def set_originlink(self, char_id: CharID, weight: float):
         self._links[char_id] = originlink_shop(char_id=char_id, weight=weight)
@@ -32,7 +32,7 @@ class OriginUnit:
     def del_originlink(self, char_id: CharID):
         self._links.pop(char_id)
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         return {"_links": self.get_originlinks_dict()}
 
     def get_originlinks_dict(self):
@@ -43,7 +43,7 @@ class OriginUnit:
         return x_dict
 
 
-def originunit_shop(_links: dict[CharID:OriginLink] = None) -> OriginUnit:
+def originunit_shop(_links: dict[CharID, OriginLink] = None) -> OriginUnit:
     return OriginUnit(_links=get_empty_dict_if_none(_links))
 
 

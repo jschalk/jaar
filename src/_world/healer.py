@@ -27,7 +27,7 @@ def healerhold_shop(_belief_ids: set[BeliefID] = None) -> HealerHold:
     return HealerHold(_belief_ids=get_empty_set_if_none(_belief_ids))
 
 
-def healerhold_get_from_dict(x_dict: dict[str:set]) -> HealerHold:
+def healerhold_get_from_dict(x_dict: dict[str, set]) -> HealerHold:
     x_healerhold = healerhold_shop()
     if x_dict.get("healerhold_belief_ids") != None:
         for x_belief_id in x_dict.get("healerhold_belief_ids"):

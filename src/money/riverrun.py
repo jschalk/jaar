@@ -22,12 +22,12 @@ from dataclasses import dataclass
 class RiverRun:
     hubunit: HubUnit = None
     number: int = None
-    econ_credorledgers: dict[OwnerID : dict[CharID:float]] = None
-    tax_dues: dict[CharID:float] = None
+    econ_credorledgers: dict[OwnerID : dict[CharID, float]] = None
+    tax_dues: dict[CharID, float] = None
     cycle_max: int = None
     # calculated fields
-    _grants: dict[CharID:float] = None
-    _tax_yields: dict[CharID:float] = None
+    _grants: dict[CharID, float] = None
+    _tax_yields: dict[CharID, float] = None
     _tax_got_prev: float = None
     _tax_got_curr: float = None
     _cycle_count: int = None
@@ -35,7 +35,7 @@ class RiverRun:
     _cycle_payees_curr: set = None
     _debtor_count: int = None
     _credor_count: int = None
-    _rivergrades: dict[CharID:RiverGrade] = None
+    _rivergrades: dict[CharID, RiverGrade] = None
 
     def set_cycle_max(self, x_cycle_max: int):
         self.cycle_max = get_positive_int(x_cycle_max)
@@ -62,7 +62,7 @@ class RiverRun:
                     x_set.add(char_id)
         return x_set
 
-    def levy_tax_dues(self, cycleledger: tuple[dict[CharID:float], float]):
+    def levy_tax_dues(self, cycleledger: tuple[dict[CharID, float], float]):
         delete_from_cycleledger = []
         tax_got_total = 0
         for payee, payee_amount in cycleledger.items():
@@ -84,7 +84,7 @@ class RiverRun:
     def tax_dues_unpaid(self) -> bool:
         return len(self.tax_dues) != 0
 
-    def set_tax_dues(self, debtorledger: dict[CharID:float]):
+    def set_tax_dues(self, debtorledger: dict[CharID, float]):
         x_amount = self.hubunit.econ_money_magnitude
         self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.penny)
 
@@ -112,7 +112,7 @@ class RiverRun:
             self.add_char_tax_yield(x_char_id, x_tax_due)
             return payer_money - x_tax_due, x_tax_due
 
-    def get_ledger_dict(self) -> dict[CharID:float]:
+    def get_ledger_dict(self) -> dict[CharID, float]:
         return self.tax_dues
 
     def set_char_tax_yield(self, x_char_id: CharID, tax_yield: float):
@@ -236,8 +236,8 @@ class RiverRun:
 def riverrun_shop(
     hubunit: HubUnit,
     number: int = None,
-    econ_credorledgers: dict[OwnerID : dict[CharID:float]] = None,
-    tax_dues: dict[CharID:float] = None,
+    econ_credorledgers: dict[OwnerID : dict[CharID, float]] = None,
+    tax_dues: dict[CharID, float] = None,
     cycle_max: int = None,
 ):
     x_riverun = RiverRun(

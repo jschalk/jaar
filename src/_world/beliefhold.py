@@ -16,7 +16,7 @@ class BeliefHold(BeliefCore):
     credor_weight: float = 1.0
     debtor_weight: float = 1.0
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         return {
             "belief_id": self.belief_id,
             "credor_weight": self.credor_weight,
@@ -42,7 +42,7 @@ def beliefhold_get_from_dict(x_dict: dict) -> BeliefHold:
     )
 
 
-def beliefholds_get_from_dict(x_dict: dict) -> dict[BeliefID:BeliefHold]:
+def beliefholds_get_from_dict(x_dict: dict) -> dict[BeliefID, BeliefHold]:
     return {
         x_belief_id: beliefhold_get_from_dict(x_beliefhold_dict)
         for x_belief_id, x_beliefhold_dict in x_dict.items()

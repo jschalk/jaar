@@ -232,15 +232,15 @@ class IdeaUnit:
     _kids: dict = None
     _world_real_id: RealID = None
     _uid: int = None  # Calculated field?
-    _fiscallinks: dict[BeliefID:FiscalLink] = None
-    _fiscalheirs: dict[BeliefID:FiscalHeir] = None  # Calculated field
-    _fiscallines: dict[BeliefID:FiscalLine] = None  # Calculated field
-    _reasonunits: dict[RoadUnit:ReasonUnit] = None
-    _reasonheirs: dict[RoadUnit:ReasonHeir] = None  # Calculated field
+    _fiscallinks: dict[BeliefID, FiscalLink] = None
+    _fiscalheirs: dict[BeliefID, FiscalHeir] = None  # Calculated field
+    _fiscallines: dict[BeliefID, FiscalLine] = None  # Calculated field
+    _reasonunits: dict[RoadUnit, ReasonUnit] = None
+    _reasonheirs: dict[RoadUnit, ReasonHeir] = None  # Calculated field
     _cultureunit: CultureUnit = None
     _cultureheir: CultureHeir = None  # Calculated field
-    _factunits: dict[RoadUnit:FactUnit] = None
-    _factheirs: dict[RoadUnit:FactHeir] = None  # Calculated field
+    _factunits: dict[RoadUnit, FactUnit] = None
+    _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
     _healerhold: HealerHold = None
     _begin: float = None
     _close: float = None
@@ -268,7 +268,7 @@ class IdeaUnit:
     _all_char_debt: bool = None
     _is_expanded: bool = None
     _sibling_total_weight: int = None
-    _active_hx: dict[int:bool] = None
+    _active_hx: dict[int, bool] = None
     _road_delimiter: str = None
     _healerhold_importance: float = None
 
@@ -294,7 +294,7 @@ class IdeaUnit:
         elif prev_active != now_active:
             self._active_hx[tree_traverse_count] = now_active
 
-    def set_factheirs(self, facts: dict[RoadUnit:FactCore]):
+    def set_factheirs(self, facts: dict[RoadUnit, FactCore]):
         facts = get_empty_dict_if_none(x_dict=facts)
         self._factheirs = {}
         for h in facts.values():
@@ -325,7 +325,7 @@ class IdeaUnit:
     def set_factunit(self, factunit: FactUnit):
         self._factunits[factunit.base] = factunit
 
-    def get_factunits_dict(self) -> dict[RoadUnit:FactUnit]:
+    def get_factunits_dict(self) -> dict[RoadUnit, FactUnit]:
         return {hc.base: hc.get_dict() for hc in self._factunits.values()}
 
     def set_factunit_to_complete(self, base_factunit: FactUnit):
@@ -346,7 +346,7 @@ class IdeaUnit:
 
     def _apply_any_range_source_road_connections(
         self,
-        lemmas_dict: dict[RoadUnit:FactUnit],
+        lemmas_dict: dict[RoadUnit, FactUnit],
         missing_facts: list[FactUnit],
     ):
         for active_fact in self._factunits.values():
@@ -410,7 +410,7 @@ class IdeaUnit:
         self.set_descendant_pledge_count_zero_if_none()
         self._descendant_pledge_count += x_int
 
-    def get_descendant_roads_from_kids(self) -> dict[RoadUnit:int]:
+    def get_descendant_roads_from_kids(self) -> dict[RoadUnit, int]:
         descendant_roads = {}
         to_evaluate_ideas = list(self._kids.values())
         count_x = 0
@@ -448,7 +448,9 @@ class IdeaUnit:
     def set_parent_road(self, parent_road):
         self._parent_road = parent_road
 
-    def inherit_fiscalheirs(self, parent_fiscalheirs: dict[BeliefID:FiscalHeir] = None):
+    def inherit_fiscalheirs(
+        self, parent_fiscalheirs: dict[BeliefID, FiscalHeir] = None
+    ):
         if parent_fiscalheirs is None:
             parent_fiscalheirs = {}
 
@@ -479,7 +481,7 @@ class IdeaUnit:
             )
             self._fiscallines[x_fiscalline.belief_id] = x_fiscalline
 
-    def set_fiscallines(self, child_fiscallines: dict[BeliefID:FiscalLine] = None):
+    def set_fiscallines(self, child_fiscallines: dict[BeliefID, FiscalLine] = None):
         if child_fiscallines is None:
             child_fiscallines = {}
 
@@ -657,7 +659,7 @@ class IdeaUnit:
         if self._originunit is None:
             self._originunit = originunit_shop()
 
-    def get_originunit_dict(self) -> dict[str:str]:
+    def get_originunit_dict(self) -> dict[str, str]:
         return self._originunit.get_dict()
 
     def _meld_attributes_overide(self, exterior_idea):
@@ -880,7 +882,7 @@ class IdeaUnit:
     def set_active(
         self,
         tree_traverse_count: int,
-        world_beliefunits: dict[BeliefID:BeliefUnit] = None,
+        world_beliefunits: dict[BeliefID, BeliefUnit] = None,
         world_owner_id: CharID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
@@ -904,7 +906,7 @@ class IdeaUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active(
-        self, world_beliefunits: dict[BeliefID:BeliefUnit], world_owner_id: CharID
+        self, world_beliefunits: dict[BeliefID, BeliefUnit], world_owner_id: CharID
     ) -> bool:
         self.set_reasonheirs_status()
         x_bool = self._are_all_reasonheir_active_true()
@@ -928,15 +930,15 @@ class IdeaUnit:
         for reason in self._reasonheirs.values():
             reason.clear_status()
 
-    def _coalesce_with_reasonunits(self, reasonheirs: dict[RoadUnit:ReasonHeir]):
+    def _coalesce_with_reasonunits(self, reasonheirs: dict[RoadUnit, ReasonHeir]):
         reasonheirs_new = get_empty_dict_if_none(x_dict=deepcopy(reasonheirs))
         reasonheirs_new.update(self._reasonunits)
         return reasonheirs_new
 
     def set_reasonheirs(
         self,
-        world_idea_dict: dict[RoadUnit:],
-        reasonheirs: dict[RoadUnit:ReasonCore] = None,
+        world_idea_dict: dict[RoadUnit,],
+        reasonheirs: dict[RoadUnit, ReasonCore] = None,
     ):
         if reasonheirs is None:
             reasonheirs = self._reasonheirs
@@ -993,7 +995,7 @@ class IdeaUnit:
             x_bool = False
         return x_bool
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         x_dict = {"_weight": self._weight}
 
         if self._label != None:
@@ -1066,7 +1068,7 @@ class IdeaUnit:
     def set_cultureheir(
         self,
         parent_cultureheir: CultureHeir,
-        world_beliefs: dict[BeliefID:BeliefUnit],
+        world_beliefs: dict[BeliefID, BeliefUnit],
     ):
         self._cultureheir = cultureheir_shop()
         self._cultureheir.set_heldbeliefs(
@@ -1085,11 +1087,11 @@ def ideaunit_shop(
     _parent_road: RoadUnit = None,
     _kids: dict = None,
     _weight: int = 1,
-    _fiscallinks: dict[BeliefID:FiscalLink] = None,
-    _fiscalheirs: dict[BeliefID:FiscalHeir] = None,  # Calculated field
-    _fiscallines: dict[BeliefID:FiscalLink] = None,  # Calculated field
-    _reasonunits: dict[RoadUnit:ReasonUnit] = None,
-    _reasonheirs: dict[RoadUnit:ReasonHeir] = None,  # Calculated field
+    _fiscallinks: dict[BeliefID, FiscalLink] = None,
+    _fiscalheirs: dict[BeliefID, FiscalHeir] = None,  # Calculated field
+    _fiscallines: dict[BeliefID, FiscalLink] = None,  # Calculated field
+    _reasonunits: dict[RoadUnit, ReasonUnit] = None,
+    _reasonheirs: dict[RoadUnit, ReasonHeir] = None,  # Calculated field
     _cultureunit: CultureUnit = None,
     _cultureheir: CultureHeir = None,  # Calculated field
     _factunits: dict[FactUnit] = None,
@@ -1123,7 +1125,7 @@ def ideaunit_shop(
     _all_char_debt: bool = None,
     _is_expanded: bool = True,
     _sibling_total_weight: int = None,
-    _active_hx: dict[int:bool] = None,
+    _active_hx: dict[int, bool] = None,
     _road_delimiter: str = None,
     _healerhold_importance: float = None,
 ) -> IdeaUnit:
@@ -1195,7 +1197,7 @@ class Idea_root_LabelNotEmptyException(Exception):
     pass
 
 
-def get_obj_from_idea_dict(x_dict: dict[str:], dict_key: str) -> any:
+def get_obj_from_idea_dict(x_dict: dict[str,], dict_key: str) -> any:
     if dict_key == "_reasonunits":
         return (
             reasons_get_from_dict(x_dict[dict_key])

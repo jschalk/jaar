@@ -881,11 +881,11 @@ def test_IdeaUnit_set_cultureheir_CorrectlySetsAttr():
     assert sport_idea._cultureheir != None
     swim_cultureunit = cultureunit_shop()
     swim_cultureunit.set_heldbelief(belief_id=swim_text)
-    swim_culture_heir = cultureheir_shop()
-    swim_culture_heir.set_heldbeliefs(
+    swim_cultureheir = cultureheir_shop()
+    swim_cultureheir.set_heldbeliefs(
         cultureunit=swim_cultureunit, parent_cultureheir=None, world_beliefs=None
     )
-    assert sport_idea._cultureheir == swim_culture_heir
+    assert sport_idea._cultureheir == swim_cultureheir
 
 
 def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():

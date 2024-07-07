@@ -23,7 +23,7 @@ class InvalidBeliefException(Exception):
 @dataclass
 class BeliefUnit(BeliefCore):
     _char_mirror: bool = None  # set by WorldUnit.set_charunit()
-    _chars: dict[CharID:CharLink] = None  # set by WorldUnit.set_charunit()
+    _chars: dict[CharID, CharLink] = None  # set by WorldUnit.set_charunit()
     _road_delimiter: str = None  # calculated by WorldUnit.set_beliefunit
     # calculated by WorldUnit.calc_world_metrics()
     _world_cred: float = None
@@ -40,7 +40,7 @@ class BeliefUnit(BeliefCore):
                     belief_id, self._road_delimiter, not_roadnode_required=True
                 )
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         x_dict = {"belief_id": self.belief_id}
         if self._char_mirror:
             x_dict["_char_mirror"] = self._char_mirror
@@ -78,7 +78,7 @@ class BeliefUnit(BeliefCore):
     def clear_charlinks(self):
         self._chars = {}
 
-    def get_chars_dict(self) -> dict[str:str]:
+    def get_chars_dict(self) -> dict[str, str]:
         chars_x_dict = {}
         for char in self._chars.values():
             char_dict = char.get_dict()
@@ -152,14 +152,14 @@ class BeliefUnit(BeliefCore):
 
 
 # class BeliefUnitsshop:
-def get_from_json(beliefunits_json: str) -> dict[BeliefID:BeliefUnit]:
+def get_from_json(beliefunits_json: str) -> dict[BeliefID, BeliefUnit]:
     beliefunits_dict = get_dict_from_json(json_x=beliefunits_json)
     return get_beliefunits_from_dict(x_dict=beliefunits_dict)
 
 
 def get_beliefunits_from_dict(
     x_dict: dict, _road_delimiter: str = None
-) -> dict[BeliefID:BeliefUnit]:
+) -> dict[BeliefID, BeliefUnit]:
     beliefunits = {}
     for beliefunit_dict in x_dict.values():
         x_belief = get_beliefunit_from_dict(beliefunit_dict, _road_delimiter)
@@ -178,7 +178,7 @@ def get_beliefunit_from_dict(
     )
 
 
-def get_obj_from_beliefunit_dict(x_dict: dict[str:], dict_key: str) -> any:
+def get_obj_from_beliefunit_dict(x_dict: dict[str,], dict_key: str) -> any:
     if dict_key == "_chars":
         return charlinks_get_from_dict(x_dict.get(dict_key))
     elif dict_key in {"_char_mirror"}:
@@ -190,7 +190,7 @@ def get_obj_from_beliefunit_dict(x_dict: dict[str:], dict_key: str) -> any:
 def beliefunit_shop(
     belief_id: BeliefID,
     _char_mirror: bool = None,
-    _chars: dict[CharID:CharLink] = None,
+    _chars: dict[CharID, CharLink] = None,
     _road_delimiter: str = None,
 ) -> BeliefUnit:
     if _char_mirror is None:
@@ -213,7 +213,7 @@ class FiscalLink(BeliefCore):
     credor_weight: float = 1.0
     debtor_weight: float = 1.0
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         return {
             "belief_id": self.belief_id,
             "credor_weight": self.credor_weight,
@@ -263,9 +263,7 @@ def fiscallink_shop(
 ) -> FiscalLink:
     credor_weight = get_1_if_None(credor_weight)
     debtor_weight = get_1_if_None(debtor_weight)
-    return FiscalLink(
-        belief_id=belief_id, credor_weight=credor_weight, debtor_weight=debtor_weight
-    )
+    return FiscalLink(belief_id, credor_weight, debtor_weight=debtor_weight)
 
 
 @dataclass
@@ -281,12 +279,10 @@ class FiscalHeir(BeliefCore):
         fiscalheirs_credor_weight_sum: float,
         fiscalheirs_debtor_weight_sum: float,
     ):
-        self._world_cred = idea_world_importance * (
-            self.credor_weight / fiscalheirs_credor_weight_sum
-        )
-        self._world_debt = idea_world_importance * (
-            self.debtor_weight / fiscalheirs_debtor_weight_sum
-        )
+        credor_importance_ratio = self.credor_weight / fiscalheirs_credor_weight_sum
+        self._world_cred = idea_world_importance * credor_importance_ratio
+        debtor_importance_ratio = self.debtor_weight / fiscalheirs_debtor_weight_sum
+        self._world_debt = idea_world_importance * debtor_importance_ratio
 
 
 def fiscalheir_shop(
@@ -298,13 +294,7 @@ def fiscalheir_shop(
 ) -> FiscalHeir:
     credor_weight = get_1_if_None(credor_weight)
     debtor_weight = get_1_if_None(debtor_weight)
-    return FiscalHeir(
-        belief_id=belief_id,
-        credor_weight=credor_weight,
-        debtor_weight=debtor_weight,
-        _world_cred=_world_cred,
-        _world_debt=_world_debt,
-    )
+    return FiscalHeir(belief_id, credor_weight, debtor_weight, _world_cred, _world_debt)
 
 
 @dataclass
@@ -325,14 +315,12 @@ class FiscalLine(BeliefCore):
 
 
 def fiscalline_shop(belief_id: BeliefID, _world_cred: float, _world_debt: float):
-    return FiscalLine(
-        belief_id=belief_id, _world_cred=_world_cred, _world_debt=_world_debt
-    )
+    return FiscalLine(belief_id, _world_cred=_world_cred, _world_debt=_world_debt)
 
 
 def get_intersection_of_chars(
-    chars_x: dict[CharID:CharUnit], chars_y: dict[CharID:CharUnit]
-) -> dict[CharID:-1]:
+    chars_x: dict[CharID, CharUnit], chars_y: dict[CharID, CharUnit]
+) -> dict[CharID, int]:
     x_set = set(chars_x)
     y_set = set(chars_y)
     intersection_x = x_set.intersection(y_set)
@@ -340,8 +328,8 @@ def get_intersection_of_chars(
 
 
 def get_chars_relevant_beliefs(
-    beliefs_x: dict[BeliefID:BeliefUnit], chars_x: dict[CharID:CharUnit]
-) -> dict[BeliefID:{CharID: -1}]:
+    beliefs_x: dict[BeliefID, BeliefUnit], chars_x: dict[CharID, CharUnit]
+) -> dict[BeliefID, dict[CharID, int]]:
     relevant_beliefs = {}
     for char_id_x in chars_x:
         for belief_x in beliefs_x.values():
@@ -351,13 +339,3 @@ def get_chars_relevant_beliefs(
                 relevant_beliefs.get(belief_x.belief_id)[char_id_x] = -1
 
     return relevant_beliefs
-
-
-def get_char_relevant_beliefs(
-    beliefs_x: dict[BeliefID:BeliefUnit], char_id_x: CharID
-) -> dict[BeliefID:-1]:
-    return {
-        belief_x.belief_id: -1
-        for belief_x in beliefs_x.values()
-        if belief_x._chars.get(char_id_x) != None
-    }

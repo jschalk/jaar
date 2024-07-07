@@ -12,7 +12,7 @@ class InvalidCultureHeirPopulateException(Exception):
 class CultureUnit:
     _heldbeliefs: set[BeliefID]
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         return {"_heldbeliefs": list(self._heldbeliefs)}
 
     def set_heldbelief(self, belief_id: BeliefID):
@@ -46,24 +46,24 @@ class CultureHeir:
 
     def _get_all_chars(
         self,
-        world_beliefs: dict[BeliefID:BeliefUnit],
+        world_beliefs: dict[BeliefID, BeliefUnit],
         belief_id_set: set[BeliefID],
-    ) -> dict[BeliefID:BeliefUnit]:
+    ) -> dict[BeliefID, BeliefUnit]:
         dict_x = {}
         for belief_id_x in belief_id_set:
             dict_x |= world_beliefs.get(belief_id_x)._chars
         return dict_x
 
     def _get_all_suff_chars(
-        self, world_beliefs: dict[BeliefID:BeliefUnit]
-    ) -> dict[BeliefID:BeliefUnit]:
+        self, world_beliefs: dict[BeliefID, BeliefUnit]
+    ) -> dict[BeliefID, BeliefUnit]:
         return self._get_all_chars(world_beliefs, self._heldbeliefs)
 
     def is_empty(self) -> bool:
         return self._heldbeliefs == set()
 
     def set_owner_id_culture(
-        self, world_beliefs: dict[BeliefID:BeliefUnit], world_owner_id: CharID
+        self, world_beliefs: dict[BeliefID, BeliefUnit], world_owner_id: CharID
     ):
         self._owner_id_culture = False
         if self.is_empty():
@@ -77,7 +77,7 @@ class CultureHeir:
         self,
         parent_cultureheir,
         cultureunit: CultureUnit,
-        world_beliefs: dict[BeliefID:BeliefUnit],
+        world_beliefs: dict[BeliefID, BeliefUnit],
     ):
         x_set = set()
         if parent_cultureheir is None or parent_cultureheir._heldbeliefs == set():
@@ -104,7 +104,7 @@ class CultureHeir:
             ):
                 # else raise error
                 raise InvalidCultureHeirPopulateException(
-                    f"parent_culture_heir does not contain all chars of the idea's cultureunit\n{set(all_parent_cultureheir_chars)=}\n\n{set(all_cultureunit_chars)=}"
+                    f"parent_cultureheir does not contain all chars of the idea's cultureunit\n{set(all_parent_cultureheir_chars)=}\n\n{set(all_cultureunit_chars)=}"
                 )
 
             # set dict_x = to cultureunit beliefs

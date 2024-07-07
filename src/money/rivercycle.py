@@ -10,7 +10,7 @@ from src.listen.hubunit import HubUnit
 from dataclasses import dataclass
 
 
-def get_credorledger(x_world: WorldUnit) -> dict[CharID:float]:
+def get_credorledger(x_world: WorldUnit) -> dict[CharID, float]:
     return {
         charunit.char_id: charunit.credor_weight
         for charunit in x_world._chars.values()
@@ -18,7 +18,7 @@ def get_credorledger(x_world: WorldUnit) -> dict[CharID:float]:
     }
 
 
-def get_debtorledger(x_world: WorldUnit) -> dict[CharID:float]:
+def get_debtorledger(x_world: WorldUnit) -> dict[CharID, float]:
     return {
         charunit.char_id: charunit.debtor_weight
         for charunit in x_world._chars.values()
@@ -30,7 +30,7 @@ def get_debtorledger(x_world: WorldUnit) -> dict[CharID:float]:
 class RiverBook:
     hubunit: HubUnit = None
     owner_id: OwnerID = None
-    _rivergrants: dict[CharID:float] = None
+    _rivergrants: dict[CharID, float] = None
 
 
 def riverbook_shop(hubunit: HubUnit, owner_id: OwnerID):
@@ -58,8 +58,8 @@ def create_riverbook(
 class RiverCycle:
     hubunit: HubUnit = None
     number: int = None
-    econ_credorledgers: dict[OwnerID : dict[CharID:float]] = None
-    riverbooks: dict[CharID:RiverBook] = None
+    econ_credorledgers: dict[OwnerID : dict[CharID, float]] = None
+    riverbooks: dict[CharID, RiverBook] = None
 
     def _set_complete_riverbook(self, x_riverbook: RiverBook):
         self.riverbooks[x_riverbook.owner_id] = x_riverbook
@@ -75,7 +75,7 @@ class RiverCycle:
             )
             self._set_complete_riverbook(x_riverbook)
 
-    def create_cylceledger(self) -> dict[CharID:float]:
+    def create_cylceledger(self) -> dict[CharID, float]:
         x_dict = {}
         for x_riverbook in self.riverbooks.values():
             for payee, pay_amount in x_riverbook._rivergrants.items():
@@ -89,7 +89,7 @@ class RiverCycle:
 def rivercycle_shop(
     hubunit: HubUnit,
     number: int,
-    econ_credorledgers: dict[OwnerID : dict[CharID:float]] = None,
+    econ_credorledgers: dict[OwnerID : dict[CharID, float]] = None,
 ):
     return RiverCycle(
         hubunit=hubunit,
@@ -101,7 +101,7 @@ def rivercycle_shop(
 
 def create_init_rivercycle(
     healer_hubunit: HubUnit,
-    econ_credorledgers: dict[OwnerID : dict[CharID:float]],
+    econ_credorledgers: dict[OwnerID : dict[CharID, float]],
 ) -> RiverCycle:
     x_rivercycle = rivercycle_shop(healer_hubunit, 0, econ_credorledgers)
     init_amount = healer_hubunit.econ_money_magnitude
@@ -110,7 +110,7 @@ def create_init_rivercycle(
 
 
 def create_next_rivercycle(
-    prev_rivercycle: RiverCycle, prev_cycle_cycleledger_post_tax: dict[CharID:float]
+    prev_rivercycle: RiverCycle, prev_cycle_cycleledger_post_tax: dict[CharID, float]
 ) -> RiverCycle:
     next_rivercycle = rivercycle_shop(
         hubunit=prev_rivercycle.hubunit,

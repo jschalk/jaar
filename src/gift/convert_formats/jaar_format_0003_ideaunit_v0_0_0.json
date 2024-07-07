@@ -1,32 +1,27 @@
 {
-    "char_id": {
-        "validate": [
-            "must_be_RoadNode"
-        ]
-    },
-    "char_pool": {
-        "validate": [
-            "must_be_number"
-        ]
-    },
-    "credor_weight": {
-        "validate": [
-            "must_be_number"
-        ]
-    },
-    "debtor_weight": {
-        "validate": [
-            "must_be_number"
-        ]
-    },
     "owner_id": {
         "validate": [
             "must_be_RoadNode"
         ]
     },
+    "pledge": {
+        "validate": [
+            "must_be_bool"
+        ]
+    },
     "real_id": {
         "validate": [
             "must_be_RoadNode"
+        ]
+    },
+    "road": {
+        "validate": [
+            "must_be_RoadUnit"
+        ]
+    },
+    "weight": {
+        "validate": [
+            "must_be_number"
         ]
     }
 }

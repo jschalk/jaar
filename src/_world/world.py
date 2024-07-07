@@ -47,7 +47,6 @@ from src._world.char import (
     charunits_get_from_dict,
     charunit_shop,
     charlink_shop,
-    CharUnitExternalMetrics,
 )
 from src._world.beliefhold import beliefhold_shop
 from src._world.beliefunit import (
@@ -57,9 +56,6 @@ from src._world.beliefunit import (
     get_beliefunits_from_dict,
     beliefunit_shop,
     fiscallink_shop,
-    get_char_relevant_beliefs,
-    get_chars_relevant_beliefs,
-    get_intersection_of_chars,
 )
 from src._world.healer import HealerHold
 from src._world.reason_idea import (
@@ -129,8 +125,8 @@ class WorldUnit:
     _owner_id: OwnerID = None
     _last_gift_id: int = None
     _weight: float = None
-    _chars: dict[CharID:CharUnit] = None
-    _beliefs: dict[BeliefID:BeliefUnit] = None
+    _chars: dict[CharID, CharUnit] = None
+    _beliefs: dict[BeliefID, BeliefUnit] = None
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
@@ -142,9 +138,9 @@ class WorldUnit:
     _meld_strategy: MeldStrategy = None
     _originunit: OriginUnit = None  # In job worlds this shows source
     # calc_world_metrics Calculated field begin
-    _idea_dict: dict[RoadUnit:IdeaUnit] = None
-    _econ_dict: dict[RoadUnit:IdeaUnit] = None
-    _healers_dict: dict[HealerID : dict[RoadUnit:IdeaUnit]] = None
+    _idea_dict: dict[RoadUnit, IdeaUnit] = None
+    _econ_dict: dict[RoadUnit, IdeaUnit] = None
+    _healers_dict: dict[HealerID, dict[RoadUnit, IdeaUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
     _econs_justified: bool = None
@@ -327,7 +323,7 @@ class WorldUnit:
         # TODO grab facts
         return x_world
 
-    def _get_relevant_roads(self, roads: dict[RoadUnit:]) -> dict[RoadUnit:str]:
+    def _get_relevant_roads(self, roads: dict[RoadUnit,]) -> dict[RoadUnit, str]:
         to_evaluate_list = []
         to_evaluate_hx_dict = {}
         for road_x in roads:
@@ -382,7 +378,7 @@ class WorldUnit:
     def _evaluate_relevancy(
         self,
         to_evaluate_list: list[RoadUnit],
-        to_evaluate_hx_dict: dict[RoadUnit:int],
+        to_evaluate_hx_dict: dict[RoadUnit, int],
         to_evaluate_road: RoadUnit,
         road_type: str,
     ):
@@ -566,7 +562,7 @@ class WorldUnit:
         )
         return f"every {num_with_letter_ending} {weekday_idea_node._label} at {x_hregidea.readable_1440_time(min1440=open % 1440)}"
 
-    def get_chars_metrics(self) -> dict[BeliefID:FiscalLink]:
+    def get_chars_metrics(self) -> dict[BeliefID, FiscalLink]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.fiscallinks_metrics
 
@@ -751,7 +747,7 @@ class WorldUnit:
     def get_beliefunit(self, x_belief_id: BeliefID) -> BeliefUnit:
         return self._beliefs.get(x_belief_id)
 
-    def _create_missing_chars(self, charlinks: dict[CharID:CharLink]):
+    def _create_missing_chars(self, charlinks: dict[CharID, CharLink]):
         for charlink_x in charlinks.values():
             if self.get_char(charlink_x.char_id) is None:
                 self.set_charunit(
@@ -913,7 +909,7 @@ class WorldUnit:
                 )
         return x_lemmas
 
-    def _get_lemma_factunits(self) -> dict[RoadUnit:FactUnit]:
+    def _get_lemma_factunits(self) -> dict[RoadUnit, FactUnit]:
         # get all range-root first level kids and range_source_road
         x_lemmas = self._get_rangeroot_1stlevel_associates(
             self._get_rangeroot_factunits()
@@ -1011,7 +1007,7 @@ class WorldUnit:
     def del_fact(self, base: RoadUnit):
         self._idearoot.del_factunit(base)
 
-    def get_idea_dict(self, problem: bool = None) -> dict[RoadUnit:IdeaUnit]:
+    def get_idea_dict(self, problem: bool = None) -> dict[RoadUnit, IdeaUnit]:
         self.calc_world_metrics()
         if not problem:
             return self._idea_dict
@@ -1085,11 +1081,11 @@ class WorldUnit:
             level_count = 0
         return level_count
 
-    def get_reason_bases(self) -> dict[RoadUnit:int]:
+    def get_reason_bases(self) -> dict[RoadUnit, int]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.reason_bases
 
-    def get_missing_fact_bases(self) -> dict[RoadUnit:int]:
+    def get_missing_fact_bases(self) -> dict[RoadUnit, int]:
         tree_metrics = self.get_tree_metrics()
         reason_bases = tree_metrics.reason_bases
         missing_bases = {}
@@ -1201,7 +1197,7 @@ class WorldUnit:
 
         return x_idea
 
-    def _create_missing_beliefs_chars(self, fiscallinks: dict[BeliefID:FiscalLink]):
+    def _create_missing_beliefs_chars(self, fiscallinks: dict[BeliefID, FiscalLink]):
         for fiscallink_x in fiscallinks.values():
             if self.get_beliefunit(fiscallink_x.belief_id) is None:
                 beliefunit_x = beliefunit_shop(
@@ -1528,7 +1524,7 @@ class WorldUnit:
 
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
-    ) -> dict[RoadUnit:IdeaUnit]:
+    ) -> dict[RoadUnit, IdeaUnit]:
         self.calc_world_metrics()
         all_ideas = self._idea_dict.values()
         return {
@@ -1537,7 +1533,7 @@ class WorldUnit:
             if x_idea.is_agenda_item(necessary_base)
         }
 
-    def get_all_pledges(self) -> dict[RoadUnit:IdeaUnit]:
+    def get_all_pledges(self) -> dict[RoadUnit, IdeaUnit]:
         self.calc_world_metrics()
         all_ideas = self._idea_dict.values()
         return {x_idea.get_road(): x_idea for x_idea in all_ideas if x_idea.pledge}
@@ -1625,7 +1621,9 @@ class WorldUnit:
         for fiscallink_obj in self._beliefs.values():
             fiscallink_obj.reset_world_cred_debt()
 
-    def _set_beliefunits_world_importance(self, fiscalheirs: dict[BeliefID:FiscalLink]):
+    def _set_beliefunits_world_importance(
+        self, fiscalheirs: dict[BeliefID, FiscalLink]
+    ):
         for fiscallink_obj in fiscalheirs.values():
             self.add_to_belief_world_cred_debt(
                 belief_id=fiscallink_obj.belief_id,
@@ -1969,7 +1967,7 @@ class WorldUnit:
             if self._econs_justified and x_idea._healerhold.any_belief_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
-    def _get_healers_dict(self) -> dict[HealerID : dict[RoadUnit:IdeaUnit]]:
+    def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_belief_id in x_econ_idea._healerhold._belief_ids:
@@ -2033,28 +2031,28 @@ class WorldUnit:
 
         return list_x
 
-    def get_factunits_dict(self) -> dict[str:str]:
+    def get_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
         if self._idearoot._factunits != None:
             for fact_road, fact_obj in self._idearoot._factunits.items():
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
-    def get_chars_dict(self, all_attrs: bool = False) -> dict[str:str]:
+    def get_chars_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
         if self._chars != None:
             for char_id, char_obj in self._chars.items():
                 x_dict[char_id] = char_obj.get_dict(all_attrs)
         return x_dict
 
-    def get_beliefunits_dict(self) -> dict[str:str]:
+    def get_beliefunits_dict(self) -> dict[str, str]:
         return {
             belief_belief_id: belief_obj.get_dict()
             for belief_belief_id, belief_obj in self._beliefs.items()
             if belief_obj._char_mirror is False
         }
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         self._migrate_beliefunits_to_beliefholds()
         x_dict = {
             "_chars": self.get_chars_dict(),
@@ -2124,7 +2122,7 @@ class WorldUnit:
 
         self.calc_world_metrics()
 
-    def get_world4char(self, char_id: CharID, facts: dict[RoadUnit:FactCore]):
+    def get_world4char(self, char_id: CharID, facts: dict[RoadUnit, FactCore]):
         self.calc_world_metrics()
         world4char = worldunit_shop(_owner_id=char_id)
         world4char._idearoot._world_importance = self._idearoot._world_importance
@@ -2397,7 +2395,7 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
 
 
 def obj_from_world_dict(
-    x_dict: dict[str:], dict_key: str, _road_delimiter: str = None
+    x_dict: dict[str,], dict_key: str, _road_delimiter: str = None
 ) -> any:
     if dict_key == "_originunit":
         return (
@@ -2427,7 +2425,7 @@ def obj_from_world_dict(
         return x_dict[dict_key] if x_dict.get(dict_key) != None else None
 
 
-def get_dict_of_world_from_dict(x_dict: dict[str:dict]) -> dict[str:WorldUnit]:
+def get_dict_of_world_from_dict(x_dict: dict[str, dict]) -> dict[str, WorldUnit]:
     worldunits = {}
     for worldunit_dict in x_dict.values():
         x_world = get_from_dict(world_dict=worldunit_dict)

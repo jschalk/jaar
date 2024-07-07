@@ -166,5 +166,5 @@ def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     return list_x
 
 
-# get_db_tables(treasury_conn: Connection) -> dict[str:int]:
-# get_db_columns(treasury_conn: Connection) -> dict[str : dict[str:int]]:
+# get_db_tables(treasury_conn: Connection) -> dict[str, int]:
+# get_db_columns(treasury_conn: Connection) -> dict[str : dict[str, int]]:

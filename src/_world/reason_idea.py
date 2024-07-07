@@ -22,7 +22,7 @@ class FactCore:
     open: float = None
     nigh: float = None
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         x_dict = {
             "base": self.base,
             "pick": self.pick,
@@ -310,7 +310,7 @@ class PremiseUnit:
     def get_obj_key(self):
         return self.need
 
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         x_dict = {"need": self.need}
         if self.open != None:
             x_dict["open"] = self.open
@@ -452,7 +452,7 @@ def premiseunit_shop(
     )
 
 
-def premises_get_from_dict(x_dict: dict) -> dict[str:PremiseUnit]:
+def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
     premises = {}
     for premise_dict in x_dict.values():
         try:
@@ -481,7 +481,7 @@ def premises_get_from_dict(x_dict: dict) -> dict[str:PremiseUnit]:
 @dataclass
 class ReasonCore:
     base: RoadUnit
-    premises: dict[RoadUnit:PremiseUnit]
+    premises: dict[RoadUnit, PremiseUnit]
     base_idea_active_requisite: bool = None
     delimiter: str = None
 
@@ -552,7 +552,7 @@ class ReasonCore:
 
 def reasoncore_shop(
     base: RoadUnit,
-    premises: dict[RoadUnit:PremiseUnit] = None,
+    premises: dict[RoadUnit, PremiseUnit] = None,
     base_idea_active_requisite: bool = None,
     delimiter: str = None,
 ):
@@ -566,7 +566,7 @@ def reasoncore_shop(
 
 @dataclass
 class ReasonUnit(ReasonCore):
-    def get_dict(self) -> dict[str:str]:
+    def get_dict(self) -> dict[str, str]:
         premises_dict = {
             premise_road: premise.get_dict()
             for premise_road, premise in self.premises.items()
@@ -581,7 +581,7 @@ class ReasonUnit(ReasonCore):
 
 def reasonunit_shop(
     base: RoadUnit,
-    premises: dict[RoadUnit:PremiseUnit] = None,
+    premises: dict[RoadUnit, PremiseUnit] = None,
     base_idea_active_requisite: bool = None,
     delimiter: str = None,
 ):
@@ -620,7 +620,7 @@ class ReasonHeir(ReasonCore):
         for premise in self.premises.values():
             premise.set_status(factheir)
 
-    def _get_base_fact(self, factheirs: dict[RoadUnit:FactHeir]) -> FactHeir:
+    def _get_base_fact(self, factheirs: dict[RoadUnit, FactHeir]) -> FactHeir:
         base_fact = None
         factheirs = get_empty_dict_if_none(factheirs)
         for y_factheir in factheirs.values():
@@ -655,7 +655,7 @@ class ReasonHeir(ReasonCore):
         if self._status and self._task is None:
             self._task = False
 
-    def set_status(self, factheirs: dict[RoadUnit:FactHeir]):
+    def set_status(self, factheirs: dict[RoadUnit, FactHeir]):
         self.clear_status()
         self._set_premise_status(self._get_base_fact(factheirs))
         any_premise_true, any_task_true = self.is_any_premise_true()
@@ -665,7 +665,7 @@ class ReasonHeir(ReasonCore):
 
 def reasonheir_shop(
     base: RoadUnit,
-    premises: dict[RoadUnit:PremiseUnit] = None,
+    premises: dict[RoadUnit, PremiseUnit] = None,
     base_idea_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
@@ -684,7 +684,7 @@ def reasonheir_shop(
 
 
 # class Reasonsshop:
-def reasons_get_from_dict(reasons_dict: dict) -> dict[RoadUnit:ReasonUnit]:
+def reasons_get_from_dict(reasons_dict: dict) -> dict[RoadUnit, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(base=reason_dict["base"])

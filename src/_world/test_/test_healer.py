@@ -41,10 +41,10 @@ def test_HealerHold_get_dict_ReturnsCorrectDictWithSingleBelief_id():
     # GIVEN
     bob_belief_id = BeliefID("Bob")
     run_belief_ids = {bob_belief_id}
-    culture_x = healerhold_shop(_belief_ids=run_belief_ids)
+    x_healerhold = healerhold_shop(_belief_ids=run_belief_ids)
 
     # WHEN
-    obj_dict = culture_x.get_dict()
+    obj_dict = x_healerhold.get_dict()
 
     # THEN
     assert obj_dict != None

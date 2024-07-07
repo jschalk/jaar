@@ -4,7 +4,6 @@ from src._world.beliefunit import (
     fiscallink_shop,
     beliefunit_shop,
     get_chars_relevant_beliefs,
-    get_char_relevant_beliefs,
 )
 from src._world.char import CharID, charunit_shop, charlink_shop
 from src._world.idea import ideaunit_shop
@@ -960,61 +959,3 @@ def test_get_chars_relevant_beliefs_Returns2SingleCharBeliefs():
 
     # THEN
     assert mrg_x == {bob_text: {bob_text: -1}, sam_text: {sam_text: -1}}
-
-
-def test_get_char_relevant_beliefs_ReturnsCorrectDict():
-    # GIVEN
-    jes_text = "Jessi"
-    jes_world = worldunit_shop(jes_text)
-    bob_text = "Bob"
-    jes_world.set_charunit(charunit_shop(char_id=jes_text))
-    jes_world.set_charunit(charunit_shop(char_id=bob_text))
-
-    hike_text = "hikers"
-    jes_world.set_beliefunit(beliefunit_shop(belief_id=hike_text))
-    hike_belief = jes_world.get_beliefunit(hike_text)
-    hike_belief.set_charlink(charlink_shop(bob_text))
-
-    # WHEN
-    noa_text = "Noa"
-    noa_mrg = get_char_relevant_beliefs(jes_world._beliefs, noa_text)
-
-    # THEN
-    assert noa_mrg == {}
-
-
-def test_get_char_relevant_beliefs_ReturnsCorrectDict():
-    # GIVEN
-    jes_text = "Jessi"
-    jes_world = worldunit_shop(jes_text)
-    bob_text = "Bob"
-    noa_text = "Noa"
-    eli_text = "Eli"
-    jes_world.set_charunit(charunit_shop(char_id=jes_text))
-    jes_world.set_charunit(charunit_shop(char_id=bob_text))
-    jes_world.set_charunit(charunit_shop(char_id=noa_text))
-    jes_world.set_charunit(charunit_shop(char_id=eli_text))
-
-    swim_text = ",swimmers"
-    jes_world.set_beliefunit(beliefunit_shop(belief_id=swim_text))
-    swim_belief = jes_world.get_beliefunit(swim_text)
-    swim_belief.set_charlink(charlink_shop(bob_text))
-
-    hike_text = ",hikers"
-    jes_world.set_beliefunit(beliefunit_shop(belief_id=hike_text))
-    hike_belief = jes_world.get_beliefunit(hike_text)
-    hike_belief.set_charlink(charlink_shop(bob_text))
-    hike_belief.set_charlink(charlink_shop(noa_text))
-
-    hunt_text = ",hunters"
-    jes_world.set_beliefunit(beliefunit_shop(belief_id=hunt_text))
-    hike_belief = jes_world.get_beliefunit(hunt_text)
-    hike_belief.set_charlink(charlink_shop(noa_text))
-    hike_belief.set_charlink(charlink_shop(eli_text))
-
-    # WHEN
-    print(f"{len(jes_world._chars)=} {len(jes_world._beliefs)=}")
-    bob_mrg = get_char_relevant_beliefs(jes_world._beliefs, bob_text)
-
-    # THEN
-    assert bob_mrg == {bob_text: -1, swim_text: -1, hike_text: -1}

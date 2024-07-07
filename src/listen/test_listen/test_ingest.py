@@ -7,25 +7,6 @@ from src.listen.listen import (
 )
 
 
-# def test_create_ingest_idea_ReturnsCorrectIdea():
-#     clean_text = "clean"
-#     old_ideaunit = ideaunit_shop(clean_text, _weight=14)
-#     old_ideaunit.set_world_importance(0.5)
-#     swimmers_text = ",swimmers"
-#     old_ideaunit._cultureunit.set_heldbelief(swimmers_text)
-#     print(f"{old_ideaunit._weight=}")
-#     assert old_ideaunit._cultureunit.heldbelief_exists(swimmers_text)
-
-#     # WHEN
-#     yao_text = "Yao"
-#     new_ideaunit = create_ingest_idea(old_ideaunit, 6, 0.25, listener=yao_text)
-
-#     # THEN
-#     assert new_ideaunit._cultureunit.heldbelief_exists(swimmers_text) is False
-#     assert new_ideaunit._cultureunit.heldbelief_exists(yao_text)
-#     assert new_ideaunit._weight == 99
-
-
 def test_allocate_irrational_debtor_weight_CorrectlySetsWorldAttr():
     yao_text = "Yao"
     zia_text = "Zia"

@@ -99,7 +99,7 @@ def get_listen_structures0_fig() -> plotly_Figure:
             y=[9.0, 8.75],
             text=[
                 "Reality World Listening Structures",
-                "The want world listens to other's action worlds and builds a beling world from itself and others",
+                "The want world listens to other's action worlds and builds a new world from itself and others",
             ],
             mode="text",
         )

@@ -100,14 +100,14 @@ def get_rowdata(tablename: str, x_conn: Connection, select_sqlstr: str) -> RowDa
     return rowdata_shop(tablename, row1)
 
 
-def get_db_tables(x_conn: Connection) -> dict[str:int]:
+def get_db_tables(x_conn: Connection) -> dict[str, int]:
     sqlstr = "SELECT name FROM sqlite_schema WHERE type='table' ORDER BY name;"
     results = x_conn.execute(sqlstr)
 
     return {row[0]: 1 for row in results}
 
 
-def get_db_columns(x_conn: Connection) -> dict[str : dict[str:int]]:
+def get_db_columns(x_conn: Connection) -> dict[str : dict[str, int]]:
     table_names = get_db_tables(x_conn)
     table_column_dict = {}
     for table_name in table_names.keys():
