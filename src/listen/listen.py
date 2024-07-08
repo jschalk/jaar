@@ -207,12 +207,14 @@ def listen_to_speaker_agenda(listener: WorldUnit, speaker: WorldUnit) -> WorldUn
     return _ingest_perspective_agenda(listener, agenda)
 
 
-def listen_to_agendas_want_action(
+def listen_to_agendas_voice_action(
     listener_action: WorldUnit, listener_hubunit: HubUnit
 ):
     for x_charunit in get_ordered_debtors_roll(listener_action):
         if x_charunit.char_id == listener_action._owner_id:
-            listen_to_speaker_agenda(listener_action, listener_hubunit.get_want_world())
+            listen_to_speaker_agenda(
+                listener_action, listener_hubunit.get_voice_world()
+            )
         else:
             speaker_id = x_charunit.char_id
             speaker_action = listener_hubunit.dw_speaker_world(speaker_id)
@@ -246,8 +248,8 @@ def listen_to_facts_duty_job(new_job: WorldUnit, healer_hubunit: HubUnit):
                 listen_to_speaker_fact(new_job, speaker_job)
 
 
-def listen_to_facts_want_action(new_action: WorldUnit, listener_hubunit: HubUnit):
-    migrate_all_facts(listener_hubunit.get_want_world(), new_action)
+def listen_to_facts_voice_action(new_action: WorldUnit, listener_hubunit: HubUnit):
+    migrate_all_facts(listener_hubunit.get_voice_world(), new_action)
     for x_charunit in get_ordered_debtors_roll(new_action):
         speaker_id = x_charunit.char_id
         if speaker_id != new_action._owner_id:
@@ -256,13 +258,13 @@ def listen_to_facts_want_action(new_action: WorldUnit, listener_hubunit: HubUnit
                 listen_to_speaker_fact(new_action, speaker_action)
 
 
-def listen_to_debtors_roll_want_action(listener_hubunit: HubUnit) -> WorldUnit:
-    want = listener_hubunit.get_want_world()
-    new_world = create_listen_basis(want)
-    if want._char_debtor_pool is None:
+def listen_to_debtors_roll_voice_action(listener_hubunit: HubUnit) -> WorldUnit:
+    voice = listener_hubunit.get_voice_world()
+    new_world = create_listen_basis(voice)
+    if voice._char_debtor_pool is None:
         return new_world
-    listen_to_agendas_want_action(new_world, listener_hubunit)
-    listen_to_facts_want_action(new_world, listener_hubunit)
+    listen_to_agendas_voice_action(new_world, listener_hubunit)
+    listen_to_facts_voice_action(new_world, listener_hubunit)
     return new_world
 
 
@@ -279,22 +281,22 @@ def listen_to_debtors_roll_duty_job(
 
 
 def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
-    want = listener_hubunit.get_want_world()
-    new_action = create_listen_basis(want)
+    voice = listener_hubunit.get_voice_world()
+    new_action = create_listen_basis(voice)
     pre_action_dict = new_action.get_dict()
-    want.calc_world_metrics()
+    voice.calc_world_metrics()
     new_action.calc_world_metrics()
 
-    for x_healer_id, econ_dict in want._healers_dict.items():
+    for x_healer_id, econ_dict in voice._healers_dict.items():
         listener_id = listener_hubunit.owner_id
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.owner_id = x_healer_id
         _pick_econ_jobs_and_listen(listener_id, econ_dict, healer_hubunit, new_action)
 
     if new_action.get_dict() == pre_action_dict:
-        agenda = list(want.get_agenda_dict().values())
+        agenda = list(voice.get_agenda_dict().values())
         _ingest_perspective_agenda(new_action, agenda)
-        listen_to_speaker_fact(new_action, want)
+        listen_to_speaker_fact(new_action, voice)
 
     listener_hubunit.save_action_world(new_action)
 
@@ -337,6 +339,6 @@ def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_id: OwnerID):
     healer_hubunit.save_job_world(x_job)
 
 
-def create_action_file_from_want_file(hubunit: HubUnit):
-    x_action = listen_to_debtors_roll_want_action(hubunit)
+def create_action_file_from_voice_file(hubunit: HubUnit):
+    x_action = listen_to_debtors_roll_voice_action(hubunit)
     hubunit.save_action_world(x_action)

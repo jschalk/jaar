@@ -26,19 +26,19 @@ def create_pledge(
             x_world.edit_reason(pledge_road, reason_base, reason_premise)
 
 
-def add_want_pledge(
+def add_voice_pledge(
     x_hubunit: HubUnit,
     pledge_road: RoadUnit,
     x_belieflink: BeliefID = None,
     reason_premise: RoadUnit = None,
 ):
-    want_world = x_hubunit.get_want_world()
-    old_want_world = copy_deepcopy(want_world)
-    create_pledge(want_world, pledge_road, x_belieflink, reason_premise)
+    voice_world = x_hubunit.get_voice_world()
+    old_voice_world = copy_deepcopy(voice_world)
+    create_pledge(voice_world, pledge_road, x_belieflink, reason_premise)
     next_giftunit = x_hubunit._default_giftunit()
-    next_giftunit._changeunit.add_all_different_atomunits(old_want_world, want_world)
+    next_giftunit._changeunit.add_all_different_atomunits(old_voice_world, voice_world)
     next_giftunit.save_files()
-    x_hubunit.append_gifts_to_want_file()
+    x_hubunit.append_gifts_to_voice_file()
 
 
 def create_fact(x_world: WorldUnit, fact_pick: RoadUnit):
@@ -48,11 +48,11 @@ def create_fact(x_world: WorldUnit, fact_pick: RoadUnit):
     x_world.set_fact(fact_base, fact_pick)
 
 
-def add_want_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
-    want_world = x_hubunit.get_want_world()
-    old_want_world = copy_deepcopy(want_world)
-    create_fact(want_world, fact_pick)
+def add_voice_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
+    voice_world = x_hubunit.get_voice_world()
+    old_voice_world = copy_deepcopy(voice_world)
+    create_fact(voice_world, fact_pick)
     next_giftunit = x_hubunit._default_giftunit()
-    next_giftunit._changeunit.add_all_different_atomunits(old_want_world, want_world)
+    next_giftunit._changeunit.add_all_different_atomunits(old_voice_world, voice_world)
     next_giftunit.save_files()
-    x_hubunit.append_gifts_to_want_file()
+    x_hubunit.append_gifts_to_voice_file()

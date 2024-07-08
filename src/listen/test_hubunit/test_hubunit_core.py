@@ -125,12 +125,12 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.owner_dir() == f"{x_hubunit.owners_dir()}/{sue_text}"
     assert x_hubunit.econs_dir() == f"{x_hubunit.owner_dir()}/econs"
     assert x_hubunit.atoms_dir() == f"{x_hubunit.owner_dir()}/atoms"
-    assert x_hubunit.want_dir() == f"{x_hubunit.owner_dir()}/want"
+    assert x_hubunit.voice_dir() == f"{x_hubunit.owner_dir()}/voice"
     assert x_hubunit.action_dir() == f"{x_hubunit.owner_dir()}/action"
     assert x_hubunit.gifts_dir() == f"{x_hubunit.owner_dir()}/{get_gifts_folder()}"
-    assert x_hubunit.want_file_name() == f"{sue_text}.json"
-    x_want_file_path = f"{x_hubunit.want_dir()}/{x_hubunit.want_file_name()}"
-    assert x_hubunit.want_file_path() == x_want_file_path
+    assert x_hubunit.voice_file_name() == f"{sue_text}.json"
+    x_voice_file_path = f"{x_hubunit.voice_dir()}/{x_hubunit.voice_file_name()}"
+    assert x_hubunit.voice_file_path() == x_voice_file_path
     assert x_hubunit.action_file_name() == f"{sue_text}.json"
     x_actionpath = f"{x_hubunit.action_dir()}/{x_hubunit.action_file_name()}"
     assert x_hubunit.action_path() == x_actionpath
@@ -191,41 +191,41 @@ def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_road_delimiter():
     )
 
 
-def test_HubUnit_save_file_want_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
-    assert os_path_exists(sue_hubunit.want_file_path()) is False
+    assert os_path_exists(sue_hubunit.voice_file_path()) is False
 
     # WHEN
-    sue_hubunit.save_file_want(file_text="fooboo", replace=True)
+    sue_hubunit.save_file_voice(file_text="fooboo", replace=True)
 
     # THEN
-    assert os_path_exists(sue_hubunit.want_file_path())
+    assert os_path_exists(sue_hubunit.voice_file_path())
 
 
-def test_HubUnit_want_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
+def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
-    assert sue_hubunit.want_file_exists() is False
+    assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
-    sue_hubunit.save_file_want(file_text="fooboo", replace=True)
+    sue_hubunit.save_file_voice(file_text="fooboo", replace=True)
 
     # THEN
-    assert sue_hubunit.want_file_exists()
+    assert sue_hubunit.voice_file_exists()
 
 
-def test_HubUnit_open_file_want_OpensFile(env_dir_setup_cleanup):
+def test_HubUnit_open_file_voice_OpensFile(env_dir_setup_cleanup):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
     example_text = "fooboo"
-    sue_hubunit.save_file_want(example_text, replace=True)
+    sue_hubunit.save_file_voice(example_text, replace=True)
 
     # WHEN / THEN
-    assert sue_hubunit.open_file_want() == example_text
+    assert sue_hubunit.open_file_voice() == example_text
 
 
 def test_HubUnit_save_file_action_CorrectlySavesFile(env_dir_setup_cleanup):
@@ -265,24 +265,24 @@ def test_HubUnit_open_file_action_OpensFile(env_dir_setup_cleanup):
     assert sue_hubunit.open_file_action() == example_text
 
 
-def test_HubUnit_save_want_world_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_voice_world_CorrectlySavesFile(env_dir_setup_cleanup):
     # GIVEN
     sue_worldunit = get_world_with_4_levels()
     sue_text = sue_worldunit._owner_id
     real_id = root_label()
     sue_hubunit = hubunit_shop(env_dir(), real_id, sue_text, None)
 
-    print(f"{sue_hubunit.want_file_path()=}")
-    assert sue_hubunit.want_file_exists() is False
+    print(f"{sue_hubunit.voice_file_path()=}")
+    assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
-    sue_hubunit.save_want_world(sue_worldunit)
+    sue_hubunit.save_voice_world(sue_worldunit)
 
     # THEN
-    assert sue_hubunit.want_file_exists()
+    assert sue_hubunit.voice_file_exists()
 
 
-def test_HubUnit_save_want_world_RaisesErrorWhenWorld_action_id_IsWrong(
+def test_HubUnit_save_voice_world_RaisesErrorWhenWorld_action_id_IsWrong(
     env_dir_setup_cleanup,
 ):
     # GIVEN
@@ -294,14 +294,14 @@ def test_HubUnit_save_want_world_RaisesErrorWhenWorld_action_id_IsWrong(
     # WHEN / THEN
     yao_text = "yao"
     with pytest_raises(Exception) as excinfo:
-        sue_hubunit.save_want_world(worldunit_shop(yao_text))
+        sue_hubunit.save_voice_world(worldunit_shop(yao_text))
     assert (
         str(excinfo.value)
-        == f"WorldUnit with owner_id '{yao_text}' cannot be saved as owner_id '{sue_text}''s want world."
+        == f"WorldUnit with owner_id '{yao_text}' cannot be saved as owner_id '{sue_text}''s voice world."
     )
 
 
-def test_HubUnit_get_want_world_OpensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_voice_world_OpensFile(env_dir_setup_cleanup):
     # GIVEN
     sue_worldunit = get_world_with_4_levels()
     sue_text = sue_worldunit._owner_id
@@ -312,10 +312,10 @@ def test_HubUnit_get_want_world_OpensFile(env_dir_setup_cleanup):
     texas_text = "Texas"
     texas_road = create_road(usa_road, texas_text)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, texas_road)
-    sue_hubunit.save_want_world(sue_worldunit)
+    sue_hubunit.save_voice_world(sue_worldunit)
 
     # WHEN / THEN
-    assert sue_hubunit.get_want_world().get_dict() == sue_worldunit.get_dict()
+    assert sue_hubunit.get_voice_world().get_dict() == sue_worldunit.get_dict()
 
 
 def test_HubUnit_save_action_world_CorrectlySavesFile(env_dir_setup_cleanup):

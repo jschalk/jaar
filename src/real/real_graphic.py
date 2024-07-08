@@ -294,8 +294,8 @@ def get_real_structures0_fig() -> plotly_Figure:
     rect_height = 6
     rect_width = 6
 
-    add_river_rect(fig, 3, 5, 2.0, 6, "People want", green_str())
-    # add_river_rect(fig, 1.0, ry1 - 2, 2.0, ry1 - 6, "People want", green_str())
+    add_river_rect(fig, 3, 5, 2.0, 6, "People voice", green_str())
+    # add_river_rect(fig, 1.0, ry1 - 2, 2.0, ry1 - 6, "People voice", green_str())
 
     # add_grants_top(fig, grants1_dict(), t_y0=ry0, healer_id=sue_str())
     # add_taxs_bottom(fig, taxs1_dict(), ry1, healer_id=sue_str(), money_amt=mm)
@@ -312,8 +312,8 @@ def get_real_structures0_fig() -> plotly_Figure:
             y=[ry0 + 1.5, ry0 + 1, ry0 + 0.5],
             text=[
                 "Reality Structure",
-                "Flow of wanting to Doing",
-                "We all have an interior life where we want. And then there is what we do.",
+                "Flow of voiceing to Doing",
+                "We all have an interior life where we voice. And then there is what we do.",
             ],
             mode="text",
         )

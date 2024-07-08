@@ -36,7 +36,7 @@
 # from src.real.real_graphic import get_real_structures0_fig
 
 
-# def test_display_ideatree_GivenWorld():
+# def test_display_graphics_listed():
 #     # a_world = get_1node_world()
 #     # a_world = get_2node_world()
 #     # a_world = get_3node_world()

@@ -20,27 +20,27 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_want_world(sue_hubunit.default_want_world())
-    sue_want_world = sue_hubunit.get_want_world()
-    sue_want_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
+    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_voice_world.add_charunit(sue_text)
     texas_text = "Texas"
-    texas_road = sue_want_world.make_l1_road(texas_text)
+    texas_road = sue_voice_world.make_l1_road(texas_text)
     dallas_text = "dallas"
-    dallas_road = sue_want_world.make_road(texas_road, dallas_text)
-    sue_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    sue_want_world.add_idea(ideaunit_shop(dallas_text), texas_road)
-    sue_want_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
-    sue_want_world.edit_idea_attr(dallas_road, healerhold=healerhold_shop({sue_text}))
-    sue_want_world.calc_world_metrics()
-    assert sue_want_world._econs_justified is False
-    sue_hubunit.save_want_world(sue_want_world)
+    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
+    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_world.add_idea(ideaunit_shop(dallas_text), texas_road)
+    sue_voice_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_world.edit_idea_attr(dallas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_world.calc_world_metrics()
+    assert sue_voice_world._econs_justified is False
+    sue_hubunit.save_voice_world(sue_voice_world)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_econ_roads()
     assert (
         str(excinfo.value)
-        == f"Cannot get_econ_roads from '{sue_text}' want world because 'WorldUnit._econs_justified' is False."
+        == f"Cannot get_econ_roads from '{sue_text}' voice world because 'WorldUnit._econs_justified' is False."
     )
 
 
@@ -50,24 +50,24 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_want_world(sue_hubunit.default_want_world())
-    sue_want_world = sue_hubunit.get_want_world()
-    sue_want_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
+    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_voice_world.add_charunit(sue_text)
     texas_text = "Tex/as"
-    texas_road = sue_want_world.make_l1_road(texas_text)
-    sue_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    sue_want_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
-    sue_want_world.calc_world_metrics()
-    assert sue_want_world._econs_justified
-    assert sue_want_world._econs_buildable is False
-    sue_hubunit.save_want_world(sue_want_world)
+    texas_road = sue_voice_world.make_l1_road(texas_text)
+    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_world.calc_world_metrics()
+    assert sue_voice_world._econs_justified
+    assert sue_voice_world._econs_buildable is False
+    sue_hubunit.save_voice_world(sue_voice_world)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_econ_roads()
     assert (
         str(excinfo.value)
-        == f"Cannot get_econ_roads from '{sue_text}' want world because 'WorldUnit._econs_buildable' is False."
+        == f"Cannot get_econ_roads from '{sue_text}' voice world because 'WorldUnit._econs_buildable' is False."
     )
 
 
@@ -75,23 +75,23 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_want_world(sue_hubunit.default_want_world())
-    sue_want_world = sue_hubunit.get_want_world()
-    sue_want_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
+    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_voice_world.add_charunit(sue_text)
     texas_text = "Texas"
-    texas_road = sue_want_world.make_l1_road(texas_text)
-    sue_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    texas_road = sue_voice_world.make_l1_road(texas_text)
+    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     elpaso_text = "el paso"
-    dallas_road = sue_want_world.make_road(texas_road, dallas_text)
-    elpaso_road = sue_want_world.make_road(texas_road, elpaso_text)
+    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
+    elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
     dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
-    sue_want_world.add_idea(dallas_idea, texas_road)
-    sue_want_world.add_idea(elpaso_idea, texas_road)
-    sue_want_world.calc_world_metrics()
-    # display_ideatree(sue_want_world, mode="Econ").show()
-    sue_hubunit.save_want_world(sue_want_world)
+    sue_voice_world.add_idea(dallas_idea, texas_road)
+    sue_voice_world.add_idea(elpaso_idea, texas_road)
+    sue_voice_world.calc_world_metrics()
+    # display_ideatree(sue_voice_world, mode="Econ").show()
+    sue_hubunit.save_voice_world(sue_voice_world)
 
     # WHEN
     sue_econ_roads = sue_hubunit.get_econ_roads()
@@ -102,31 +102,31 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
     assert elpaso_road in sue_econ_roads
 
 
-def test_HubUnit_save_all_want_dutys_CorrectlySetsdutys(
+def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup,
 ):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_want_world(sue_hubunit.default_want_world())
-    sue_want_world = sue_hubunit.get_want_world()
-    sue_want_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
+    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_voice_world.add_charunit(sue_text)
     bob_text = "Bob"
-    sue_want_world.add_charunit(bob_text)
+    sue_voice_world.add_charunit(bob_text)
     texas_text = "Texas"
-    texas_road = sue_want_world.make_l1_road(texas_text)
-    sue_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    texas_road = sue_voice_world.make_l1_road(texas_text)
+    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
-    dallas_road = sue_want_world.make_road(texas_road, dallas_text)
+    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
     dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
-    sue_want_world.add_idea(dallas_idea, texas_road)
+    sue_voice_world.add_idea(dallas_idea, texas_road)
     elpaso_text = "el paso"
-    elpaso_road = sue_want_world.make_road(texas_road, elpaso_text)
+    elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
-    sue_want_world.add_idea(elpaso_idea, texas_road)
-    # sue_want_world.calc_world_metrics()
-    # display_ideatree(sue_want_world, mode="Econ").show()
-    sue_hubunit.save_want_world(sue_want_world)
+    sue_voice_world.add_idea(elpaso_idea, texas_road)
+    # sue_voice_world.calc_world_metrics()
+    # display_ideatree(sue_voice_world, mode="Econ").show()
+    sue_hubunit.save_voice_world(sue_voice_world)
     sue_dallas_hubunit = hubunit_shop(env_dir(), None, sue_text, dallas_road)
     sue_elpaso_hubunit = hubunit_shop(env_dir(), None, sue_text, elpaso_road)
     assert os_path_exists(sue_dallas_hubunit.duty_path(sue_text)) is False
@@ -134,7 +134,7 @@ def test_HubUnit_save_all_want_dutys_CorrectlySetsdutys(
     assert sue_hubunit.econ_road is None
 
     # WHEN
-    sue_hubunit.save_all_want_dutys()
+    sue_hubunit.save_all_voice_dutys()
 
     # THEN
     assert os_path_exists(sue_dallas_hubunit.duty_path(sue_text))
@@ -148,10 +148,10 @@ def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_want_world(sue_hubunit.default_want_world())
-    sue_want_world = sue_hubunit.get_want_world()
+    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
+    sue_voice_world = sue_hubunit.get_voice_world()
     texas_text = "Texas"
-    texas_road = sue_want_world.make_l1_road(texas_text)
+    texas_road = sue_voice_world.make_l1_road(texas_text)
     sue_hubunit.econ_road = texas_road
     assert os_path_exists(sue_hubunit.treasury_db_path()) is False
 
@@ -194,10 +194,10 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_want_world(sue_hubunit.default_want_world())
-    sue_want_world = sue_hubunit.get_want_world()
+    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
+    sue_voice_world = sue_hubunit.get_voice_world()
     texas_text = "Texas"
-    texas_road = sue_want_world.make_l1_road(texas_text)
+    texas_road = sue_voice_world.make_l1_road(texas_text)
     sue_hubunit.econ_road = texas_road
     assert sue_hubunit.treasury_db_file_exists() is False
 
@@ -243,27 +243,27 @@ def test_HubUnit_treasury_db_file_conn_RaisesErrorIfMissing_econ_road(
     )
 
 
-def test_HubUnit_create_want_treasury_db_files_CreatesDatabases(env_dir_setup_cleanup):
+def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(env_dir_setup_cleanup):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_want_world(sue_hubunit.default_want_world())
-    sue_want_world = sue_hubunit.get_want_world()
-    sue_want_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
+    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_voice_world.add_charunit(sue_text)
     texas_text = "Texas"
-    texas_road = sue_want_world.make_l1_road(texas_text)
-    sue_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    texas_road = sue_voice_world.make_l1_road(texas_text)
+    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     elpaso_text = "el paso"
-    dallas_road = sue_want_world.make_road(texas_road, dallas_text)
-    elpaso_road = sue_want_world.make_road(texas_road, elpaso_text)
+    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
+    elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
     dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
-    sue_want_world.add_idea(dallas_idea, texas_road)
-    sue_want_world.add_idea(elpaso_idea, texas_road)
-    sue_want_world.calc_world_metrics()
-    # display_ideatree(sue_want_world, mode="Econ").show()
-    sue_hubunit.save_want_world(sue_want_world)
+    sue_voice_world.add_idea(dallas_idea, texas_road)
+    sue_voice_world.add_idea(elpaso_idea, texas_road)
+    sue_voice_world.calc_world_metrics()
+    # display_ideatree(sue_voice_world, mode="Econ").show()
+    sue_hubunit.save_voice_world(sue_voice_world)
 
     dallas_hubunit = hubunit_shop(env_dir(), None, sue_text, dallas_road)
     elpaso_hubunit = hubunit_shop(env_dir(), None, sue_text, elpaso_road)
@@ -274,7 +274,7 @@ def test_HubUnit_create_want_treasury_db_files_CreatesDatabases(env_dir_setup_cl
     assert sue_hubunit.econ_road is None
 
     # WHEN
-    sue_hubunit.create_want_treasury_db_files()
+    sue_hubunit.create_voice_treasury_db_files()
 
     # THEN
     assert os_path_exists(dallas_hubunit.treasury_db_path())
