@@ -3,7 +3,7 @@ from src._world.char import charunit_shop
 from src.gift.change import (
     ChangeUnit,
     changeunit_shop,
-    validate_world_build_from_change,
+    world_built_from_change_is_valid,
     atomunit_shop,
     atom_update,
     atom_insert,
@@ -380,7 +380,7 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     #         print(f"{x_atom.category=}")
 
 
-def test_validate_world_build_from_change_ReturnsCorrectObjGivenNoWorld():
+def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld():
     # GIVEN
     sue_changeunit = changeunit_shop()
 
@@ -398,7 +398,7 @@ def test_validate_world_build_from_change_ReturnsCorrectObjGivenNoWorld():
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN/THEN
-    assert validate_world_build_from_change(sue_changeunit) is False
+    assert world_built_from_change_is_valid(sue_changeunit) is False
 
     # WHEN
     rico_text = "Rico"
@@ -408,7 +408,7 @@ def test_validate_world_build_from_change_ReturnsCorrectObjGivenNoWorld():
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
-    assert validate_world_build_from_change(sue_changeunit)
+    assert world_built_from_change_is_valid(sue_changeunit)
 
     # WHEN
     bob_text = "Bob"
@@ -418,10 +418,10 @@ def test_validate_world_build_from_change_ReturnsCorrectObjGivenNoWorld():
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
-    assert validate_world_build_from_change(sue_changeunit) is False
+    assert world_built_from_change_is_valid(sue_changeunit) is False
 
 
-def test_validate_world_build_from_change_ReturnsCorrectObjGivenWorld():
+def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenWorld():
     # GIVEN
     sue_world = worldunit_shop("Sue")
     sue_world.set_char_credor_pool(100)
@@ -438,7 +438,7 @@ def test_validate_world_build_from_change_ReturnsCorrectObjGivenWorld():
     # WHEN/THEN
     sue_world = worldunit_shop("Sue")
     sue_world.set_char_credor_pool(100)
-    assert validate_world_build_from_change(sue_changeunit, sue_world) is False
+    assert world_built_from_change_is_valid(sue_changeunit, sue_world) is False
 
     # WHEN
     rico_text = "Rico"
@@ -450,7 +450,7 @@ def test_validate_world_build_from_change_ReturnsCorrectObjGivenWorld():
     # THEN
     sue_world = worldunit_shop("Sue")
     sue_world.set_char_credor_pool(100)
-    assert validate_world_build_from_change(sue_changeunit, sue_world)
+    assert world_built_from_change_is_valid(sue_changeunit, sue_world)
 
     # WHEN
     bob_text = "Bob"
@@ -462,7 +462,7 @@ def test_validate_world_build_from_change_ReturnsCorrectObjGivenWorld():
     # THEN
     sue_world = worldunit_shop("Sue")
     sue_world.set_char_credor_pool(100)
-    assert validate_world_build_from_change(sue_changeunit, sue_world) is False
+    assert world_built_from_change_is_valid(sue_changeunit, sue_world) is False
 
 
 def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumber():
@@ -488,7 +488,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumbe
     sue_changeunit.set_atomunit(rico_atomunit)
 
     sue_world = worldunit_shop("Sue")
-    assert validate_world_build_from_change(sue_changeunit, sue_world)
+    assert world_built_from_change_is_valid(sue_changeunit, sue_world)
 
     # WHEN
     changeunit_dict = sue_changeunit.get_ordered_atomunits()
@@ -528,7 +528,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenStartingNumber(
     sue_changeunit.set_atomunit(rico_atomunit)
 
     sue_world = worldunit_shop("Sue")
-    assert validate_world_build_from_change(sue_changeunit, sue_world)
+    assert world_built_from_change_is_valid(sue_changeunit, sue_world)
 
     # WHEN
     changeunit_dict = sue_changeunit.get_ordered_atomunits(5)
@@ -568,7 +568,7 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_GivenStartingNumber():
     sue_changeunit.set_atomunit(rico_atomunit)
 
     sue_world = worldunit_shop("Sue")
-    assert validate_world_build_from_change(sue_changeunit, sue_world)
+    assert world_built_from_change_is_valid(sue_changeunit, sue_world)
 
     # WHEN
     changeunit_dict = sue_changeunit.get_ordered_dict(5)

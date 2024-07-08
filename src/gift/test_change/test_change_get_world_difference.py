@@ -1,4 +1,3 @@
-from src._world.beliefhold import beliefhold_shop
 from src._world.beliefunit import beliefunit_shop, fiscallink_shop
 from src._world.char import charlink_shop
 from src._world.idea import ideaunit_shop
@@ -1195,3 +1194,33 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_heldbelief
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("belief_id") == rico_text
     assert get_atomunit_total_count(sue_changeunit) == 1
+
+
+def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
+    # GIVEN
+    sue_text = "Sue"
+
+    after_sue_world = worldunit_shop(sue_text)
+    rico_text = "Rico"
+    after_sue_world.add_charunit(rico_text)
+    sports_text = "sports"
+    sports_road = after_sue_world.make_l1_road(sports_text)
+    ball_text = "basketball"
+    ball_road = after_sue_world.make_road(sports_road, ball_text)
+    after_sue_world.add_idea(ideaunit_shop(ball_text), sports_road)
+    after_ball_ideaunit = after_sue_world.get_idea_obj(ball_road)
+    after_ball_ideaunit._cultureunit.set_heldbelief(rico_text)
+
+    before_sue_world = worldunit_shop(sue_text)
+    sue1_changeunit = changeunit_shop()
+    sue1_changeunit.add_all_different_atomunits(before_sue_world, after_sue_world)
+    print(f"{sue1_changeunit.get_ordered_atomunits()}")
+    assert len(sue1_changeunit.get_ordered_atomunits()) == 4
+
+    # WHEN
+    sue2_changeunit = changeunit_shop()
+    sue2_changeunit.add_all_atomunits(after_sue_world)
+
+    # THEN
+    assert len(sue2_changeunit.get_ordered_atomunits()) == 4
+    assert sue2_changeunit == sue1_changeunit
