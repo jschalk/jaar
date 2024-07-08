@@ -73,7 +73,7 @@ def test_create_pledge_CorrectlyModifiesWorldNonpledgeIdeaTopledgeIdea():
     assert new_floor_idea.pledge
 
 
-def test_create_pledge_CorrectlySets_heldbelief():
+def test_create_pledge_CorrectlySets_belieflink():
     # GIVEN
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
@@ -83,23 +83,23 @@ def test_create_pledge_CorrectlySets_heldbelief():
     floor_road = sue_world.make_road(clean_road, floor_text)
     bob_text = "Bob"
     floor_idea = ideaunit_shop(floor_text, pledge=True)
-    floor_idea._cultureunit.set_heldbelief(bob_text)
+    floor_idea._cultureunit.set_belieflink(bob_text)
     sue_world.add_idea(floor_idea, clean_road)
     floor_idea = sue_world.get_idea_obj(floor_road)
-    assert floor_idea._cultureunit.heldbelief_exists(bob_text) is False
+    assert floor_idea._cultureunit.belieflink_exists(bob_text) is False
 
     # WHEN
     create_pledge(sue_world, floor_road, bob_text)
 
     # THEN
-    assert floor_idea._cultureunit.heldbelief_exists(bob_text)
+    assert floor_idea._cultureunit.belieflink_exists(bob_text)
     yao_text = "Yao"
     assert sue_world.char_exists(yao_text) is False
-    assert floor_idea._cultureunit.heldbelief_exists(yao_text) is False
+    assert floor_idea._cultureunit.belieflink_exists(yao_text) is False
 
     # WHEN
     create_pledge(sue_world, floor_road, yao_text)
 
     # THEN
     assert sue_world.char_exists(yao_text)
-    assert floor_idea._cultureunit.heldbelief_exists(yao_text)
+    assert floor_idea._cultureunit.belieflink_exists(yao_text)

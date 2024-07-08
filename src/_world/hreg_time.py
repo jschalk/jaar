@@ -465,8 +465,8 @@ class HregTimeIdeaSource:
         return f"{weekday_text[:3]} {monthdescription_text[:3]} {monthday_text}, {year_text} at {self.readable_1440_time(min1440)}"
 
     def readable_1440_time(self, min1440: int) -> str:
-        min_num = min1440 % 60
-        x_open_minutes = f"0{min_num:.0f}" if min_num < 10 else f"{min_num:.0f}"
+        min60 = min1440 % 60
+        x_open_minutes = f"0{min60:.0f}" if min60 < 10 else f"{min60:.0f}"
         open_24hr = int(f"{min1440 // 60:.0f}")
         open_12hr = ""
         am_pm = ""

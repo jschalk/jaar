@@ -8,16 +8,16 @@ from copy import deepcopy as copy_deepcopy
 def create_pledge(
     x_world: WorldUnit,
     pledge_road: RoadUnit,
-    x_heldbelief: BeliefID = None,
+    x_belieflink: BeliefID = None,
     reason_premise: RoadUnit = None,
 ):
     if pledge_road is not None and get_terminus_node(pledge_road) != "":
         x_idea = x_world.get_idea_obj(pledge_road, if_missing_create=True)
         x_idea.pledge = True
-        x_idea._cultureunit.set_heldbelief(x_heldbelief)
+        x_idea._cultureunit.set_belieflink(x_belieflink)
 
-        if x_world.get_beliefunit(x_heldbelief) is None:
-            x_world.add_charunit(x_heldbelief)
+        if x_world.get_beliefunit(x_belieflink) is None:
+            x_world.add_charunit(x_belieflink)
 
         if reason_premise != None:
             if x_world.idea_exists(reason_premise) is False:
@@ -29,12 +29,12 @@ def create_pledge(
 def add_want_pledge(
     x_hubunit: HubUnit,
     pledge_road: RoadUnit,
-    x_heldbelief: BeliefID = None,
+    x_belieflink: BeliefID = None,
     reason_premise: RoadUnit = None,
 ):
     want_world = x_hubunit.get_want_world()
     old_want_world = copy_deepcopy(want_world)
-    create_pledge(want_world, pledge_road, x_heldbelief, reason_premise)
+    create_pledge(want_world, pledge_road, x_belieflink, reason_premise)
     next_giftunit = x_hubunit._default_giftunit()
     next_giftunit._changeunit.add_all_different_atomunits(old_want_world, want_world)
     next_giftunit.save_files()

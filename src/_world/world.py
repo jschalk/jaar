@@ -33,7 +33,7 @@ from src._road.road import (
     CharID,
     HealerID,
     RealID,
-    roadunit_can_be_dir_path,
+    roadunit_valid_dir_path,
 )
 from src._world.meld import (
     get_meld_weight,
@@ -501,8 +501,8 @@ class WorldUnit:
         hr_x = day_x.get_kids_in_range(begin=day_rem_min, close=day_rem_min)[0]
         hr_rem_min = day_rem_min - hr_x._begin
         hr_num = int(hr_x._label.split("-")[0])
-        min_num = int(hr_rem_min % (hr_x._close - hr_x._begin))
-        return hr_num, min_num, hr_x
+        min60 = int(hr_rem_min % (hr_x._close - hr_x._begin))
+        return hr_num, min60, hr_x
 
     def get_time_dt_from_min(self, min: int) -> datetime:
         year_x = (
@@ -510,9 +510,9 @@ class WorldUnit:
         ) + self.get_time_c400yr_from_min(min=min)[0]
         month_num = self.get_time_month_from_min(min=min)[0]
         day_num = self.get_time_month_from_min(min=min)[1] + 1
-        hr_num, min_num, hr_x = self.get_time_hour_from_min(min=min)
+        hr_num, min60, hr_x = self.get_time_hour_from_min(min=min)
         return datetime(
-            year=year_x, month=month_num, day=day_num, hour=hr_num, minute=min_num
+            year=year_x, month=month_num, day=day_num, hour=hr_num, minute=min60
         )
 
     def get_jajatime_legible_one_time_event(self, jajatime_min: int) -> str:
@@ -1187,13 +1187,13 @@ class WorldUnit:
             x_idea._fiscallinks.pop(_fiscallink_belief_id)
 
         if x_idea._cultureunit != None:
-            _heldbeliefs_to_delete = [
-                _heldbelief_belief_id
-                for _heldbelief_belief_id in x_idea._cultureunit._heldbeliefs
-                if self.get_beliefunit(_heldbelief_belief_id) is None
+            _belieflinks_to_delete = [
+                _belieflink_belief_id
+                for _belieflink_belief_id in x_idea._cultureunit._belieflinks
+                if self.get_beliefunit(_belieflink_belief_id) is None
             ]
-            for _heldbelief_belief_id in _heldbeliefs_to_delete:
-                x_idea._cultureunit.del_heldbelief(_heldbelief_belief_id)
+            for _belieflink_belief_id in _belieflinks_to_delete:
+                x_idea._cultureunit.del_belieflink(_belieflink_belief_id)
 
         return x_idea
 
@@ -1982,7 +1982,7 @@ class WorldUnit:
 
     def _get_buildable_econs(self) -> bool:
         return all(
-            roadunit_can_be_dir_path(econ_road, self._road_delimiter) != False
+            roadunit_valid_dir_path(econ_road, self._road_delimiter) != False
             for econ_road in self._econ_dict.keys()
         )
 

@@ -403,7 +403,7 @@ def get_world_laundry_example1() -> WorldUnit:
         road=laundry_task_road, reason_base=basket_road, reason_premise=b_smel_road
     )
     cali_cultureunit = cultureunit_shop()
-    cali_cultureunit.set_heldbelief(cali_text)
+    cali_cultureunit.set_belieflink(cali_text)
     amos_world.edit_idea_attr(road=laundry_task_road, cultureunit=cali_cultureunit)
     # print(f"{basket_road=}")
     # print(f"{amos_world._real_id=}")
