@@ -144,8 +144,8 @@ def create_convert_format(
     elif convert_format_name == jaar_format_0002_beliefhold_v0_0_0():
         x_changeunit = changeunit_shop()
         x_changeunit.add_all_atomunits(x_worldunit)
-        category_set = [world_char_beliefhold_text()]
-        curd_set = [atom_insert()]
+        category_set = {world_char_beliefhold_text()}
+        curd_set = {atom_insert()}
         filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
         sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
         for x_beliefhold_atomunit in sorted_atomunits:
@@ -165,7 +165,7 @@ def create_convert_format(
         x_changeunit = changeunit_shop()
         x_changeunit.add_all_atomunits(x_worldunit)
         category_set = [world_ideaunit_text()]
-        curd_set = [atom_insert()]
+        curd_set = {atom_insert()}
         filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
         sorted_idea_atomunits = filtered_change.get_category_sorted_atomunits_list()
         for x_idea_atomunit in sorted_idea_atomunits:

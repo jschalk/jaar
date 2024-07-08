@@ -97,7 +97,7 @@ def test_get_headers_list_ReturnsObj():
     format_0001_headers = _get_headers_list(jaar_format_0001_char_v0_0_0())
 
     # THEN
-    print(f"{format_0001_headers=}")
+    # print(f"{format_0001_headers=}")
     assert format_0001_headers == [
         "char_id",
         "char_pool",
@@ -112,7 +112,7 @@ def test_create_convert_dataframe_ReturnsCorrectObj():
     # GIVEN / WHEN
     x_df = create_convert_dataframe(jaar_format_0001_char_v0_0_0())
     # THEN
-    print(f"{x_df.columns=}")
+    # print(f"{x_df.columns=}")
     assert list(x_df.columns) == _get_headers_list(jaar_format_0001_char_v0_0_0())
 
     # print(f"{list(x_df.to_records())=}")
@@ -127,7 +127,7 @@ def for_all_convert_formats_create_convert_dataframe():
         except Exception:
             print(f"create_convert_dataframe failed for {x_filename=}")
             return False
-        return True
+    return True
 
 
 def test_create_convert_dataframe_ReturnsCorrectObjForEvery_convert_format():
