@@ -10,38 +10,38 @@ class InvalidCultureHeirPopulateException(Exception):
 
 @dataclass
 class CultureUnit:
-    _heldbeliefs: set[BeliefID]
+    _belieflinks: set[BeliefID]
 
     def get_dict(self) -> dict[str, str]:
-        return {"_heldbeliefs": list(self._heldbeliefs)}
+        return {"_belieflinks": list(self._belieflinks)}
 
-    def set_heldbelief(self, belief_id: BeliefID):
-        self._heldbeliefs.add(belief_id)
+    def set_belieflink(self, belief_id: BeliefID):
+        self._belieflinks.add(belief_id)
 
-    def heldbelief_exists(self, belief_id: BeliefID):
-        return belief_id in self._heldbeliefs
+    def belieflink_exists(self, belief_id: BeliefID):
+        return belief_id in self._belieflinks
 
-    def del_heldbelief(self, belief_id: BeliefID):
-        self._heldbeliefs.remove(belief_id)
+    def del_belieflink(self, belief_id: BeliefID):
+        self._belieflinks.remove(belief_id)
 
-    def get_heldbelief(self, belief_id: BeliefID) -> BeliefID:
-        if self.heldbelief_exists(belief_id):
+    def get_belieflink(self, belief_id: BeliefID) -> BeliefID:
+        if self.belieflink_exists(belief_id):
             return belief_id
 
 
-def cultureunit_shop(_heldbeliefs: set[BeliefID] = None) -> CultureUnit:
-    return CultureUnit(get_empty_set_if_none(_heldbeliefs))
+def cultureunit_shop(_belieflinks: set[BeliefID] = None) -> CultureUnit:
+    return CultureUnit(get_empty_set_if_none(_belieflinks))
 
 
-def create_cultureunit(heldbelief: BeliefID):
+def create_cultureunit(belieflink: BeliefID):
     x_cultureunit = cultureunit_shop()
-    x_cultureunit.set_heldbelief(heldbelief)
+    x_cultureunit.set_belieflink(belieflink)
     return x_cultureunit
 
 
 @dataclass
 class CultureHeir:
-    _heldbeliefs: set[BeliefID]
+    _belieflinks: set[BeliefID]
     _owner_id_culture: bool
 
     def _get_all_chars(
@@ -57,10 +57,10 @@ class CultureHeir:
     def _get_all_suff_chars(
         self, world_beliefs: dict[BeliefID, BeliefUnit]
     ) -> dict[BeliefID, BeliefUnit]:
-        return self._get_all_chars(world_beliefs, self._heldbeliefs)
+        return self._get_all_chars(world_beliefs, self._belieflinks)
 
     def is_empty(self) -> bool:
-        return self._heldbeliefs == set()
+        return self._belieflinks == set()
 
     def set_owner_id_culture(
         self, world_beliefs: dict[BeliefID, BeliefUnit], world_owner_id: CharID
@@ -73,31 +73,31 @@ class CultureHeir:
             if all_suff_chars_x.get(world_owner_id) != None:
                 self._owner_id_culture = True
 
-    def set_heldbeliefs(
+    def set_belieflinks(
         self,
         parent_cultureheir,
         cultureunit: CultureUnit,
         world_beliefs: dict[BeliefID, BeliefUnit],
     ):
-        x_heldbeliefs = set()
-        if parent_cultureheir is None or parent_cultureheir._heldbeliefs == set():
-            for heldbelief in cultureunit._heldbeliefs:
-                x_heldbeliefs.add(heldbelief)
-        elif cultureunit._heldbeliefs == set() or (
-            parent_cultureheir._heldbeliefs == cultureunit._heldbeliefs
+        x_belieflinks = set()
+        if parent_cultureheir is None or parent_cultureheir._belieflinks == set():
+            for belieflink in cultureunit._belieflinks:
+                x_belieflinks.add(belieflink)
+        elif cultureunit._belieflinks == set() or (
+            parent_cultureheir._belieflinks == cultureunit._belieflinks
         ):
-            for heldbelief in parent_cultureheir._heldbeliefs:
-                x_heldbeliefs.add(heldbelief)
+            for belieflink in parent_cultureheir._belieflinks:
+                x_belieflinks.add(belieflink)
         else:
             # get all_chars of parent cultureheir beliefs
             all_parent_cultureheir_chars = self._get_all_chars(
                 world_beliefs=world_beliefs,
-                belief_id_set=parent_cultureheir._heldbeliefs,
+                belief_id_set=parent_cultureheir._belieflinks,
             )
             # get all_chars of cultureunit beliefs
             all_cultureunit_chars = self._get_all_chars(
                 world_beliefs=world_beliefs,
-                belief_id_set=cultureunit._heldbeliefs,
+                belief_id_set=cultureunit._belieflinks,
             )
             if not set(all_cultureunit_chars).issubset(
                 set(all_parent_cultureheir_chars)
@@ -108,27 +108,27 @@ class CultureHeir:
                 )
 
             # set dict_x = to cultureunit beliefs
-            for heldbelief in cultureunit._heldbeliefs:
-                x_heldbeliefs.add(heldbelief)
-        self._heldbeliefs = x_heldbeliefs
+            for belieflink in cultureunit._belieflinks:
+                x_belieflinks.add(belieflink)
+        self._belieflinks = x_belieflinks
 
     def has_belief(self, belief_ids: set[BeliefID]):
-        return self.is_empty() or any(gn_x in self._heldbeliefs for gn_x in belief_ids)
+        return self.is_empty() or any(gn_x in self._belieflinks for gn_x in belief_ids)
 
 
 def cultureheir_shop(
-    _heldbeliefs: set[BeliefID] = None, _owner_id_culture: bool = None
+    _belieflinks: set[BeliefID] = None, _owner_id_culture: bool = None
 ) -> CultureHeir:
-    _heldbeliefs = get_empty_set_if_none(_heldbeliefs)
+    _belieflinks = get_empty_set_if_none(_belieflinks)
     if _owner_id_culture is None:
         _owner_id_culture = False
 
-    return CultureHeir(_heldbeliefs=_heldbeliefs, _owner_id_culture=_owner_id_culture)
+    return CultureHeir(_belieflinks=_belieflinks, _owner_id_culture=_owner_id_culture)
 
 
 def cultureunit_get_from_dict(cultureunit_dict: dict) -> CultureUnit:
     x_cultureunit = cultureunit_shop()
-    for x_belief_id in cultureunit_dict.get("_heldbeliefs"):
-        x_cultureunit.set_heldbelief(x_belief_id)
+    for x_belief_id in cultureunit_dict.get("_belieflinks"):
+        x_cultureunit.set_belieflink(x_belief_id)
 
     return x_cultureunit

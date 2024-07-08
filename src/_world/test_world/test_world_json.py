@@ -156,7 +156,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_cultureunit():
     run_text = "runners"
     tom_world = worldunit_shop("Tom")
     x_cultureunit = cultureunit_shop()
-    x_cultureunit.set_heldbelief(belief_id=run_text)
+    x_cultureunit.set_belieflink(belief_id=run_text)
     tom_world.edit_idea_attr(cultureunit=x_cultureunit, road=tom_world._real_id)
 
     # WHEN
@@ -165,7 +165,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_cultureunit():
 
     # THEN
     assert idearoot_dict["_cultureunit"] == x_cultureunit.get_dict()
-    assert idearoot_dict["_cultureunit"] == {"_heldbeliefs": [run_text]}
+    assert idearoot_dict["_cultureunit"] == {"_belieflinks": [run_text]}
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
@@ -199,7 +199,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_CultureUnit():
     morn_road = tom_world.make_l1_road(morn_text)
     tom_world.add_l1_idea(ideaunit_shop(morn_text))
     x_cultureunit = cultureunit_shop()
-    x_cultureunit.set_heldbelief(belief_id=run_text)
+    x_cultureunit.set_belieflink(belief_id=run_text)
     tom_world.edit_idea_attr(cultureunit=x_cultureunit, road=morn_road)
 
     # WHEN
@@ -212,7 +212,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_CultureUnit():
 
     culture_dict_x = idearoot_dict[_kids][morn_text][_cultureunit]
     assert culture_dict_x == x_cultureunit.get_dict()
-    assert culture_dict_x == {"_heldbeliefs": [run_text]}
+    assert culture_dict_x == {"_belieflinks": [run_text]}
 
 
 def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
@@ -370,10 +370,10 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world.set_beliefunit(y_beliefunit=run_belief)
 
     run_cultureunit = cultureunit_shop()
-    run_cultureunit.set_heldbelief(belief_id=run_text)
+    run_cultureunit.set_belieflink(belief_id=run_text)
     zia_world.edit_idea_attr(zia_world._real_id, cultureunit=run_cultureunit)
     tim_cultureunit = cultureunit_shop()
-    tim_cultureunit.set_heldbelief(belief_id=tim_text)
+    tim_cultureunit.set_belieflink(belief_id=tim_text)
     zia_world.edit_idea_attr(shave_road, cultureunit=tim_cultureunit)
     zia_world.edit_idea_attr(shave_road, fiscallink=fiscallink_shop(tim_text))
     zia_world.edit_idea_attr(shave_road, fiscallink=fiscallink_shop(sue_text))

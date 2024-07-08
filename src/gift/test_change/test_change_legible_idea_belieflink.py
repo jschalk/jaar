@@ -4,10 +4,10 @@ from src.gift.legible import create_legible_list
 from src._world.world import worldunit_shop
 
 
-def test_create_legible_list_ReturnsObj_idea_heldbelief_INSERT():
+def test_create_legible_list_ReturnsObj_idea_belieflink_INSERT():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_idea_heldbelief"
+    category = "world_idea_belieflink"
     road_text = "road"
     casa_road = sue_world.make_l1_road("casa")
     road_value = sue_world.make_road(casa_road, "clean fridge")
@@ -24,15 +24,15 @@ def test_create_legible_list_ReturnsObj_idea_heldbelief_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_world)
 
     # THEN
-    x_str = f"heldbelief '{belief_id_value}' created for idea '{road_value}'."
+    x_str = f"belieflink '{belief_id_value}' created for idea '{road_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_heldbelief_DELETE():
+def test_create_legible_list_ReturnsObj_idea_belieflink_DELETE():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_idea_heldbelief"
+    category = "world_idea_belieflink"
     road_text = "road"
     casa_road = sue_world.make_l1_road("casa")
     road_value = sue_world.make_road(casa_road, "clean fridge")
@@ -49,6 +49,6 @@ def test_create_legible_list_ReturnsObj_idea_heldbelief_DELETE():
     legible_list = create_legible_list(x_changeunit, sue_world)
 
     # THEN
-    x_str = f"heldbelief '{belief_id_value}' deleted for idea '{road_value}'."
+    x_str = f"belieflink '{belief_id_value}' deleted for idea '{road_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

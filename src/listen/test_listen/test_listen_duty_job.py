@@ -112,7 +112,7 @@ def get_example_yao_job1_speaker() -> WorldUnit:
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._cultureunit.set_heldbelief(yao_text)
+    cook_ideaunit._cultureunit.set_belieflink(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
     return yao_speaker
@@ -127,7 +127,7 @@ def get_example_yao_job2_speaker() -> WorldUnit:
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._cultureunit.set_heldbelief(yao_text)
+    cook_ideaunit._cultureunit.set_belieflink(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
 

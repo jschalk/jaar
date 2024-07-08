@@ -389,9 +389,9 @@ class ChangeUnit:
                 after_ideaunit=insert_ideaunit,
                 insert_reasonunit_bases=set(insert_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_heldbelief_insert(
+            self.add_atomunit_idea_belieflink_insert(
                 idea_road=insert_idea_road,
-                insert_heldbelief_belief_ids=insert_ideaunit._cultureunit._heldbeliefs,
+                insert_belieflink_belief_ids=insert_ideaunit._cultureunit._belieflinks,
             )
 
     def add_atomunit_idea_updates(
@@ -512,21 +512,21 @@ class ChangeUnit:
             # update reasonunits_permises update_premise
             # update reasonunits_permises delete_premise
 
-            # insert / update / delete heldbeliefs
-            before_heldbeliefs_belief_ids = set(
-                before_ideaunit._cultureunit._heldbeliefs
+            # insert / update / delete belieflinks
+            before_belieflinks_belief_ids = set(
+                before_ideaunit._cultureunit._belieflinks
             )
-            after_heldbeliefs_belief_ids = set(after_ideaunit._cultureunit._heldbeliefs)
-            self.add_atomunit_idea_heldbelief_insert(
+            after_belieflinks_belief_ids = set(after_ideaunit._cultureunit._belieflinks)
+            self.add_atomunit_idea_belieflink_insert(
                 idea_road=idea_road,
-                insert_heldbelief_belief_ids=after_heldbeliefs_belief_ids.difference(
-                    before_heldbeliefs_belief_ids
+                insert_belieflink_belief_ids=after_belieflinks_belief_ids.difference(
+                    before_belieflinks_belief_ids
                 ),
             )
-            self.add_atomunit_idea_heldbelief_deletes(
+            self.add_atomunit_idea_belieflink_deletes(
                 idea_road=idea_road,
-                delete_heldbelief_belief_ids=before_heldbeliefs_belief_ids.difference(
-                    after_heldbeliefs_belief_ids
+                delete_belieflink_belief_ids=before_belieflinks_belief_ids.difference(
+                    after_belieflinks_belief_ids
                 ),
             )
 
@@ -556,10 +556,10 @@ class ChangeUnit:
                 before_ideaunit=delete_ideaunit,
                 delete_reasonunit_bases=set(delete_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_heldbelief_deletes(
+            self.add_atomunit_idea_belieflink_deletes(
                 idea_road=delete_idea_road,
-                delete_heldbelief_belief_ids=set(
-                    delete_ideaunit._cultureunit._heldbeliefs
+                delete_belieflink_belief_ids=set(
+                    delete_ideaunit._cultureunit._belieflinks
                 ),
             )
 
@@ -710,22 +710,22 @@ class ChangeUnit:
             x_atomunit.set_required_arg("need", delete_premise_need)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_heldbelief_insert(
-        self, idea_road: RoadUnit, insert_heldbelief_belief_ids: set
+    def add_atomunit_idea_belieflink_insert(
+        self, idea_road: RoadUnit, insert_belieflink_belief_ids: set
     ):
-        for insert_heldbelief_belief_id in insert_heldbelief_belief_ids:
-            x_atomunit = atomunit_shop("world_idea_heldbelief", atom_insert())
+        for insert_belieflink_belief_id in insert_belieflink_belief_ids:
+            x_atomunit = atomunit_shop("world_idea_belieflink", atom_insert())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("belief_id", insert_heldbelief_belief_id)
+            x_atomunit.set_required_arg("belief_id", insert_belieflink_belief_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_heldbelief_deletes(
-        self, idea_road: RoadUnit, delete_heldbelief_belief_ids: set
+    def add_atomunit_idea_belieflink_deletes(
+        self, idea_road: RoadUnit, delete_belieflink_belief_ids: set
     ):
-        for delete_heldbelief_belief_id in delete_heldbelief_belief_ids:
-            x_atomunit = atomunit_shop("world_idea_heldbelief", atom_delete())
+        for delete_belieflink_belief_id in delete_belieflink_belief_ids:
+            x_atomunit = atomunit_shop("world_idea_belieflink", atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("belief_id", delete_heldbelief_belief_id)
+            x_atomunit.set_required_arg("belief_id", delete_belieflink_belief_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_fiscallink_inserts(

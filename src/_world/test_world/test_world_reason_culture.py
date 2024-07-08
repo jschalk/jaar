@@ -35,7 +35,7 @@ def test_world_idearoot_cultureunit_CorrectlySets_idea_cultureheir():
 
     # THEN
     x_cultureheir = cultureheir_shop()
-    x_cultureheir.set_heldbeliefs(
+    x_cultureheir.set_belieflinks(
         parent_cultureheir=None, cultureunit=x_cultureunit, world_beliefs=None
     )
     assert tim_world._idearoot._cultureheir != None
@@ -64,7 +64,7 @@ def test_world_ideakid_cultureunit_EmptyCorrectlySets_idea_cultureheir():
     assert run_idea._cultureheir._owner_id_culture
 
     x_cultureheir = cultureheir_shop()
-    x_cultureheir.set_heldbeliefs(
+    x_cultureheir.set_belieflinks(
         parent_cultureheir=None,
         cultureunit=x_cultureunit,
         world_beliefs=bob_world._beliefs,
@@ -97,7 +97,7 @@ def test_world_ideakid_cultureunit_EmptyCorrectlySets_idea_cultureheir():
     assert run_idea._cultureheir._owner_id_culture
 
     x_cultureheir = cultureheir_shop()
-    x_cultureheir.set_heldbeliefs(
+    x_cultureheir.set_belieflinks(
         parent_cultureheir=None,
         cultureunit=x_cultureunit,
         world_beliefs=bob_world._beliefs,
@@ -119,7 +119,7 @@ def test_world_ideakid_cultureunit_CorrectlySets_grandchild_idea_cultureheir():
     four_road = noa_world.make_road(morn_road, four_text)
     x_cultureunit = cultureunit_shop()
     swimmers_text = ",swimmers"
-    x_cultureunit.set_heldbelief(belief_id=swimmers_text)
+    x_cultureunit.set_belieflink(belief_id=swimmers_text)
 
     noa_world.set_beliefunit(y_beliefunit=beliefunit_shop(belief_id=swimmers_text))
     noa_world.add_l1_idea(ideaunit_shop(swim_text))
@@ -136,7 +136,7 @@ def test_world_ideakid_cultureunit_CorrectlySets_grandchild_idea_cultureheir():
 
     # THEN
     x_cultureheir = cultureheir_shop()
-    x_cultureheir.set_heldbeliefs(
+    x_cultureheir.set_belieflinks(
         parent_cultureheir=None,
         cultureunit=x_cultureunit,
         world_beliefs=noa_world._beliefs,
@@ -161,12 +161,12 @@ def test_WorldUnit__get_filtered_fiscallinks_idea_CorrectlyFiltersIdea_Cultureun
     noa1_world.add_idea(ideaunit_shop(casa_text), parent_road=noa1_world._real_id)
     noa1_world.add_idea(ideaunit_shop(swim_text), parent_road=noa1_world._real_id)
     swim_cultureunit = cultureunit_shop()
-    swim_cultureunit.set_heldbelief(belief_id=xia_text)
-    swim_cultureunit.set_heldbelief(belief_id=zoa_text)
+    swim_cultureunit.set_belieflink(belief_id=xia_text)
+    swim_cultureunit.set_belieflink(belief_id=zoa_text)
     noa1_world.edit_idea_attr(swim_road, cultureunit=swim_cultureunit)
     noa1_world_swim_idea = noa1_world.get_idea_obj(swim_road)
-    noa1_world_swim_heldbeliefs = noa1_world_swim_idea._cultureunit._heldbeliefs
-    assert len(noa1_world_swim_heldbeliefs) == 2
+    noa1_world_swim_belieflinks = noa1_world_swim_idea._cultureunit._belieflinks
+    assert len(noa1_world_swim_belieflinks) == 2
 
     # WHEN
     noa2_world = worldunit_shop(noa_text)
@@ -174,9 +174,9 @@ def test_WorldUnit__get_filtered_fiscallinks_idea_CorrectlyFiltersIdea_Cultureun
     filtered_idea = noa2_world._get_filtered_fiscallinks_idea(noa1_world_swim_idea)
 
     # THEN
-    filtered_swim_heldbeliefs = filtered_idea._cultureunit._heldbeliefs
-    assert len(filtered_swim_heldbeliefs) == 1
-    assert list(filtered_swim_heldbeliefs) == [xia_text]
+    filtered_swim_belieflinks = filtered_idea._cultureunit._belieflinks
+    assert len(filtered_swim_belieflinks) == 1
+    assert list(filtered_swim_belieflinks) == [xia_text]
 
 
 def test_WorldUnit_add_idea_CorrectlyFiltersIdea_fiscallinks():
@@ -194,12 +194,12 @@ def test_WorldUnit_add_idea_CorrectlyFiltersIdea_fiscallinks():
     noa1_world.add_idea(ideaunit_shop(casa_text), parent_road=noa1_world._real_id)
     noa1_world.add_idea(ideaunit_shop(swim_text), parent_road=noa1_world._real_id)
     swim_cultureunit = cultureunit_shop()
-    swim_cultureunit.set_heldbelief(belief_id=xia_text)
-    swim_cultureunit.set_heldbelief(belief_id=zoa_text)
+    swim_cultureunit.set_belieflink(belief_id=xia_text)
+    swim_cultureunit.set_belieflink(belief_id=zoa_text)
     noa1_world.edit_idea_attr(swim_road, cultureunit=swim_cultureunit)
     noa1_world_swim_idea = noa1_world.get_idea_obj(swim_road)
-    noa1_world_swim_heldbeliefs = noa1_world_swim_idea._cultureunit._heldbeliefs
-    assert len(noa1_world_swim_heldbeliefs) == 2
+    noa1_world_swim_belieflinks = noa1_world_swim_idea._cultureunit._belieflinks
+    assert len(noa1_world_swim_belieflinks) == 2
 
     # WHEN
     noa2_world = worldunit_shop("Noa")
@@ -208,6 +208,6 @@ def test_WorldUnit_add_idea_CorrectlyFiltersIdea_fiscallinks():
 
     # THEN
     noa2_world_swim_idea = noa2_world.get_idea_obj(swim_road)
-    noa2_world_swim_heldbeliefs = noa2_world_swim_idea._cultureunit._heldbeliefs
-    assert len(noa2_world_swim_heldbeliefs) == 1
-    assert list(noa2_world_swim_heldbeliefs) == [xia_text]
+    noa2_world_swim_belieflinks = noa2_world_swim_idea._cultureunit._belieflinks
+    assert len(noa2_world_swim_belieflinks) == 1
+    assert list(noa2_world_swim_belieflinks) == [xia_text]

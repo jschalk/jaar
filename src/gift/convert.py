@@ -11,7 +11,7 @@ from src.gift.atom_config import (
     world_idea_fiscallink_text,
     world_idea_reasonunit_text,
     world_idea_reason_premiseunit_text,
-    world_idea_heldbelief_text,
+    world_idea_belieflink_text,
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )

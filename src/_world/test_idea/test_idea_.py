@@ -596,7 +596,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_idea.set_fiscallink(fiscallink_shop(yao_text))
 
     x_cultureunit = casa_idea._cultureunit
-    x_cultureunit.set_heldbelief(belief_id=yao_text)
+    x_cultureunit.set_belieflink(belief_id=yao_text)
 
     x_originunit = casa_idea._originunit
     x_originunit.set_originlink(yao_text, 1)
@@ -871,7 +871,7 @@ def test_IdeaUnit_set_cultureheir_CorrectlySetsAttr():
     swim_text = "swimmers"
     sport_text = "sports"
     sport_idea = ideaunit_shop(_label=sport_text)
-    sport_idea._cultureunit.set_heldbelief(belief_id=swim_text)
+    sport_idea._cultureunit.set_belieflink(belief_id=swim_text)
     assert sport_idea._cultureheir is None
 
     # WHEN
@@ -880,9 +880,9 @@ def test_IdeaUnit_set_cultureheir_CorrectlySetsAttr():
     # THEN
     assert sport_idea._cultureheir != None
     swim_cultureunit = cultureunit_shop()
-    swim_cultureunit.set_heldbelief(belief_id=swim_text)
+    swim_cultureunit.set_belieflink(belief_id=swim_text)
     swim_cultureheir = cultureheir_shop()
-    swim_cultureheir.set_heldbeliefs(
+    swim_cultureheir.set_belieflinks(
         cultureunit=swim_cultureunit, parent_cultureheir=None, world_beliefs=None
     )
     assert sport_idea._cultureheir == swim_cultureheir

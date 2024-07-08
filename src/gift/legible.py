@@ -51,10 +51,10 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
     x_list = [atom_delete(), "world_idea_reason_premiseunit"]
     world_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_heldbelief"]
-    world_idea_heldbelief_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_heldbelief"]
-    world_idea_heldbelief_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "world_idea_belieflink"]
+    world_idea_belieflink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "world_idea_belieflink"]
+    world_idea_belieflink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "world_idea_healerhold"]
     world_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -149,13 +149,13 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
             leg_list, world_idea_reason_premiseunit_delete_dict, x_world
         )
 
-    if world_idea_heldbelief_insert_dict != None:
-        add_world_idea_heldbelief_insert_to_legible_list(
-            leg_list, world_idea_heldbelief_insert_dict, x_world
+    if world_idea_belieflink_insert_dict != None:
+        add_world_idea_belieflink_insert_to_legible_list(
+            leg_list, world_idea_belieflink_insert_dict, x_world
         )
-    if world_idea_heldbelief_delete_dict != None:
-        add_world_idea_heldbelief_delete_to_legible_list(
-            leg_list, world_idea_heldbelief_delete_dict, x_world
+    if world_idea_belieflink_delete_dict != None:
+        add_world_idea_belieflink_delete_to_legible_list(
+            leg_list, world_idea_belieflink_delete_dict, x_world
         )
 
     if world_idea_healerhold_insert_dict != None:
@@ -665,25 +665,25 @@ def add_world_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_world_idea_heldbelief_insert_to_legible_list(
-    legible_list: list[str], idea_heldbelief_insert_dict: dict, x_world: WorldUnit
+def add_world_idea_belieflink_insert_to_legible_list(
+    legible_list: list[str], idea_belieflink_insert_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_heldbelief_insert_dict.values():
-        for idea_heldbelief_atom in road_dict.values():
-            belief_id_value = idea_heldbelief_atom.get_value("belief_id")
-            road_value = idea_heldbelief_atom.get_value("road")
-            x_str = f"heldbelief '{belief_id_value}' created for idea '{road_value}'."
+    for road_dict in idea_belieflink_insert_dict.values():
+        for idea_belieflink_atom in road_dict.values():
+            belief_id_value = idea_belieflink_atom.get_value("belief_id")
+            road_value = idea_belieflink_atom.get_value("road")
+            x_str = f"belieflink '{belief_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_world_idea_heldbelief_delete_to_legible_list(
-    legible_list: list[str], idea_heldbelief_delete_dict: dict, x_world: WorldUnit
+def add_world_idea_belieflink_delete_to_legible_list(
+    legible_list: list[str], idea_belieflink_delete_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_heldbelief_delete_dict.values():
-        for idea_heldbelief_atom in road_dict.values():
-            belief_id_value = idea_heldbelief_atom.get_value("belief_id")
-            road_value = idea_heldbelief_atom.get_value("road")
-            x_str = f"heldbelief '{belief_id_value}' deleted for idea '{road_value}'."
+    for road_dict in idea_belieflink_delete_dict.values():
+        for idea_belieflink_atom in road_dict.values():
+            belief_id_value = idea_belieflink_atom.get_value("belief_id")
+            road_value = idea_belieflink_atom.get_value("road")
+            x_str = f"belieflink '{belief_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 
