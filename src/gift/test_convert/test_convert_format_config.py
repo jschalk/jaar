@@ -51,6 +51,8 @@ from src.gift.convert import (
     jaar_format_0001_char_v0_0_0,
     jaar_format_0002_beliefhold_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
+    _get_headers_list,
+    create_convert_dataframe,
 )
 
 # from src.gift.examples.gift_env import get_codespace_gift_dir
@@ -88,6 +90,49 @@ def test_get_convert_format_filenames_ReturnsCorrectObj():
     assert jaar_format_0001_char_v0_0_0() in x_filenames
     assert jaar_format_0002_beliefhold_v0_0_0() in x_filenames
     assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
+
+
+def test_get_headers_list_ReturnsObj():
+    # GIVEN / WHEN
+    format_0001_headers = _get_headers_list(jaar_format_0001_char_v0_0_0())
+
+    # THEN
+    print(f"{format_0001_headers=}")
+    assert format_0001_headers == [
+        "char_id",
+        "char_pool",
+        "credor_weight",
+        "debtor_weight",
+        "owner_id",
+        "real_id",
+    ]
+
+
+def test_create_convert_dataframe_ReturnsCorrectObj():
+    # GIVEN / WHEN
+    x_df = create_convert_dataframe(jaar_format_0001_char_v0_0_0())
+    # THEN
+    print(f"{x_df.columns=}")
+    assert list(x_df.columns) == _get_headers_list(jaar_format_0001_char_v0_0_0())
+
+    # print(f"{list(x_df.to_records())=}")
+    # print(f"{x_df.to_records()=}")
+    # print(f"{list(x_df.to_records())=}")
+
+
+def for_all_convert_formats_create_convert_dataframe():
+    for x_filename in get_convert_format_filenames():
+        try:
+            create_convert_dataframe(x_filename)
+        except Exception:
+            print(f"create_convert_dataframe failed for {x_filename=}")
+            return False
+        return True
+
+
+def test_create_convert_dataframe_ReturnsCorrectObjForEvery_convert_format():
+    # GIVEN / WHEN / THEN
+    assert for_all_convert_formats_create_convert_dataframe()
 
 
 def test_convert_format_FilesExist():
