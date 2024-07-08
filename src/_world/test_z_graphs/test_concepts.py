@@ -33,23 +33,3 @@ def test_worldunit_explanation_ShowsExplanation0WorldConceptGraph():
     #     # worldunit_explanation3_fig.show()
     #     # worldunit_explanation4_fig.show()
     #     fiscal_explanation0_fig.show()
-
-    # assert 1 == 2
-
-    # # a_world = get_1node_world()
-    # # a_world = get_2node_world()
-    # # a_world = get_3node_world()
-    # # a_world = get_5nodeHG_world()
-    # # a_world = get_7nodeJRoot_world()
-    # a_world = get_world_with_4_levels()
-    # # a_world = world_v001()
-    # a_world.calc_world_metrics()
-    # print(f"World {a_world._real_id}: Nodes ({len(a_world._idea_dict)})")
-
-    # # WHEN
-    # x_fig = concept_world_level0(a_world)
-
-    # # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()

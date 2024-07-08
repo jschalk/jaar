@@ -17,6 +17,7 @@ from src.gift.atom_config import (
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit
 from src.gift.atom_config import config_file_dir
+from pandas import DataFrame
 
 
 def real_id_str() -> str:
@@ -113,8 +114,12 @@ def get_convert_format_dict(convert_format_name: str) -> dict[str,]:
     return get_dict_from_json(convert_format_json)
 
 
-def _get_headers_list(convert_format_name) -> list[str]:
+def _get_headers_list(convert_format_name: str) -> list[str]:
     return list(get_convert_format_dict(convert_format_name).keys())
+
+
+def create_convert_dataframe(convert_format_name: str) -> DataFrame:
+    return DataFrame(columns=_get_headers_list(convert_format_name))
 
 
 def create_convert_format(

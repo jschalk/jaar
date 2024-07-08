@@ -19,7 +19,6 @@ from src._road.jaar_refer import (
     zia_str,
 )
 from src._road.finance import default_money_magnitude
-from src._road.finance import default_money_magnitude
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
