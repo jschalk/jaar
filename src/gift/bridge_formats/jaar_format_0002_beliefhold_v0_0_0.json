@@ -1,0 +1,25 @@
+{
+    "atom_category": "world_char_beliefhold",
+    "attributes": {
+        "belief_id": {
+            "column_order": 3,
+            "sort_order": 1
+        },
+        "char_id": {
+            "column_order": 2,
+            "sort_order": 0
+        },
+        "credor_weight": {
+            "column_order": 4
+        },
+        "debtor_weight": {
+            "column_order": 5
+        },
+        "owner_id": {
+            "column_order": 1
+        },
+        "real_id": {
+            "column_order": 0
+        }
+    }
+}

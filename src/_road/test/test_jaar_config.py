@@ -1,5 +1,5 @@
 from src._road.jaar_config import (
-    want_str,
+    voice_str,
     action_str,
     get_rootpart_of_econ_dir,
     treasury_file_name,
@@ -8,8 +8,8 @@ from src._road.jaar_config import (
 )
 
 
-def test_want_str():
-    assert want_str() == "want"
+def test_voice_str():
+    assert voice_str() == "voice"
 
 
 def test_action_str():

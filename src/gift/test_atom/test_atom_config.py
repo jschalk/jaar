@@ -22,7 +22,7 @@ from src.gift.atom_config import (
     world_idea_fiscallink_text,
     world_idea_reasonunit_text,
     world_idea_reason_premiseunit_text,
-    world_idea_belieflink_text,
+    world_idea_allyhold_text,
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )
@@ -56,8 +56,8 @@ def test_world_idea_reason_premiseunit_text_ReturnsObj():
     assert world_idea_reason_premiseunit_text() == "world_idea_reason_premiseunit"
 
 
-def test_world_idea_belieflink_text_ReturnsObj():
-    assert world_idea_belieflink_text() == "world_idea_belieflink"
+def test_world_idea_allyhold_text_ReturnsObj():
+    assert world_idea_allyhold_text() == "world_idea_allyhold"
 
 
 def test_world_idea_healerhold_text_ReturnsObj():
@@ -77,7 +77,7 @@ def test_atom_config_HasCorrect_category():
         world_idea_fiscallink_text(),
         world_idea_reasonunit_text(),
         world_idea_reason_premiseunit_text(),
-        world_idea_belieflink_text(),
+        world_idea_allyhold_text(),
         world_idea_healerhold_text(),
         world_idea_factunit_text(),
     }
@@ -150,7 +150,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     # set_mog(atom_insert(), "world_char_beliefhold", 1)
     # set_mog(atom_insert(), "world_ideaunit", 2)
     # set_mog(atom_insert(), "world_idea_fiscallink", 3)
-    # set_mog(atom_insert(), "world_idea_belieflink", 4)
+    # set_mog(atom_insert(), "world_idea_allyhold", 4)
     # set_mog(atom_insert(), "world_idea_healerhold", 5)
     # set_mog(atom_insert(), "world_idea_factunit", 6)
     # set_mog(atom_insert(), "world_idea_reasonunit", 7)
@@ -165,7 +165,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     # set_mog(atom_delete(), "world_idea_reason_premiseunit", 16)
     # set_mog(atom_delete(), "world_idea_reasonunit", 17)
     # set_mog(atom_delete(), "world_idea_factunit", 18)
-    # set_mog(atom_delete(), "world_idea_belieflink", 19)
+    # set_mog(atom_delete(), "world_idea_allyhold", 19)
     # set_mog(atom_delete(), "world_idea_healerhold", 20)
     # set_mog(atom_delete(), "world_idea_fiscallink", 21)
     # set_mog(atom_delete(), "world_ideaunit", 22)
@@ -177,7 +177,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     assert 1 == q_order(atom_insert(), "world_char_beliefhold")
     assert 2 == q_order(atom_insert(), "world_ideaunit")
     assert 3 == q_order(atom_insert(), "world_idea_fiscallink")
-    assert 4 == q_order(atom_insert(), "world_idea_belieflink")
+    assert 4 == q_order(atom_insert(), "world_idea_allyhold")
     assert 5 == q_order(atom_insert(), "world_idea_healerhold")
     assert 6 == q_order(atom_insert(), "world_idea_factunit")
     assert 7 == q_order(atom_insert(), "world_idea_reasonunit")
@@ -192,7 +192,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     assert 16 == q_order(atom_delete(), "world_idea_reason_premiseunit")
     assert 17 == q_order(atom_delete(), "world_idea_reasonunit")
     assert 18 == q_order(atom_delete(), "world_idea_factunit")
-    assert 19 == q_order(atom_delete(), "world_idea_belieflink")
+    assert 19 == q_order(atom_delete(), "world_idea_allyhold")
     assert 20 == q_order(atom_delete(), "world_idea_healerhold")
     assert 21 == q_order(atom_delete(), "world_idea_fiscallink")
     assert 22 == q_order(atom_delete(), "world_ideaunit")
@@ -256,7 +256,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     cat_fiscallink = nx.get(world_idea_fiscallink_text())
     cat_reason = nx.get(world_idea_reasonunit_text())
     cat_premise = nx.get(world_idea_reason_premiseunit_text())
-    cat_belieflink = nx.get(world_idea_belieflink_text())
+    cat_allyhold = nx.get(world_idea_allyhold_text())
     cat_healerhold = nx.get(world_idea_healerhold_text())
     cat_fact = nx.get(world_idea_factunit_text())
 
@@ -267,7 +267,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert cat_fiscallink != None
     assert cat_reason != None
     assert cat_premise != None
-    assert cat_belieflink != None
+    assert cat_allyhold != None
     assert cat_healerhold != None
     assert cat_fact != None
 
@@ -278,7 +278,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     normal_specs_fiscallink = cat_fiscallink.get(normal_specs_text())
     normal_specs_reason = cat_reason.get(normal_specs_text())
     normal_specs_premise = cat_premise.get(normal_specs_text())
-    normal_specs_belieflink = cat_belieflink.get(normal_specs_text())
+    normal_specs_allyhold = cat_allyhold.get(normal_specs_text())
     normal_specs_healerhold = cat_healerhold.get(normal_specs_text())
     normal_specs_fact = cat_fact.get(normal_specs_text())
 
@@ -292,7 +292,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert normal_specs_fiscallink != None
     assert normal_specs_reason != None
     assert normal_specs_premise != None
-    assert normal_specs_belieflink != None
+    assert normal_specs_allyhold != None
     assert normal_specs_healerhold != None
     assert normal_specs_fact != None
 
@@ -303,7 +303,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     table_name_fiscallink = normal_specs_fiscallink.get(normal_table_name_text())
     table_name_reason = normal_specs_reason.get(normal_table_name_text())
     table_name_premise = normal_specs_premise.get(normal_table_name_text())
-    table_name_belieflink = normal_specs_belieflink.get(normal_table_name_text())
+    table_name_allyhold = normal_specs_allyhold.get(normal_table_name_text())
     table_name_healerhold = normal_specs_healerhold.get(normal_table_name_text())
     table_name_fact = normal_specs_fact.get(normal_table_name_text())
 
@@ -314,7 +314,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert table_name_fiscallink == "fiscallink"
     assert table_name_reason == "reason"
     assert table_name_premise == "premise"
-    assert table_name_belieflink == "belieflink"
+    assert table_name_allyhold == "allyhold"
     assert table_name_healerhold == "healerhold"
     assert table_name_fact == "fact"
 

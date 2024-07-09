@@ -1,3 +1,4 @@
+from src._instrument.python import get_False_if_None
 from src._road.road import get_default_real_id_roadnode as root_label
 from src._world.examples.example_worlds import (
     get_world_with_4_levels as example_worlds_get_world_with_4_levels,
@@ -47,7 +48,7 @@ def test_WorldUnit_clear_world_base_metrics_CorrectlySetsAttrs():
     sue_world._econ_dict = {"run": "run"}
     sue_world._healers_dict = {"run": "run"}
     assert sue_world._econs_justified == x_econ_justifed
-    assert sue_world._econs_buildable != False
+    assert get_False_if_None(sue_world._econs_buildable)
     assert sue_world._sum_healerhold_importance == x_sum_healerhold_importance
     assert sue_world._econ_dict != {}
     assert sue_world._healers_dict != {}

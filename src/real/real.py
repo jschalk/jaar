@@ -7,7 +7,7 @@ from src.listen.basis_worlds import get_default_action_world
 from src.listen.hubunit import hubunit_shop, HubUnit
 from src.listen.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_want_action,
+    listen_to_debtors_roll_voice_action,
     listen_to_debtors_roll_duty_job,
     create_job_file_from_duty_file,
 )
@@ -19,12 +19,12 @@ from sqlite3 import connect as sqlite3_connect, Connection
 @dataclass
 class RealUnit:
     """Data pipelines:
-    pipeline1: gifts->want
-    pipeline2: want->dutys
+    pipeline1: gifts->voice
+    pipeline2: voice->dutys
     pipeline3: duty->job
     pipeline4: job->action
-    pipeline5: want->action (direct)
-    pipeline6: want->job->action (through jobs)
+    pipeline5: voice->action (direct)
+    pipeline6: voice->job->action (through jobs)
     pipeline7: gifts->action (could be 5 of 6)
     """
 
@@ -116,16 +116,16 @@ class RealUnit:
 
     def init_owner_econs(self, owner_id: OwnerID):
         x_hubunit = self._get_hubunit(owner_id)
-        x_hubunit.initialize_gift_want_files()
-        x_hubunit.initialize_action_file(self.get_owner_want_from_file(owner_id))
+        x_hubunit.initialize_gift_voice_files()
+        x_hubunit.initialize_action_file(self.get_owner_voice_from_file(owner_id))
 
-    def get_owner_want_from_file(self, owner_id: OwnerID) -> WorldUnit:
-        return self._get_hubunit(owner_id).get_want_world()
+    def get_owner_voice_from_file(self, owner_id: OwnerID) -> WorldUnit:
+        return self._get_hubunit(owner_id).get_voice_world()
 
     def _set_all_healer_dutys(self, owner_id: OwnerID):
-        x_want = self.get_owner_want_from_file(owner_id)
-        x_want.calc_world_metrics()
-        for healer_id, healer_dict in x_want._healers_dict.items():
+        x_voice = self.get_owner_voice_from_file(owner_id)
+        x_voice.calc_world_metrics()
+        for healer_id, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.reals_dir,
                 self.real_id,
@@ -136,25 +136,25 @@ class RealUnit:
                 pixel=self._pixel,
             )
             for econ_road in healer_dict.keys():
-                self._set_owner_duty(healer_hubunit, econ_road, x_want)
+                self._set_owner_duty(healer_hubunit, econ_road, x_voice)
 
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
         econ_road: RoadUnit,
-        want_world: WorldUnit,
+        voice_world: WorldUnit,
     ):
         healer_hubunit.econ_road = econ_road
         healer_hubunit.create_treasury_db_file()
-        healer_hubunit.save_duty_world(want_world)
+        healer_hubunit.save_duty_world(voice_world)
 
     # action world management
     def generate_action_world(self, owner_id: OwnerID) -> WorldUnit:
         listener_hubunit = self._get_hubunit(owner_id)
-        x_want = listener_hubunit.get_want_world()
-        x_want.calc_world_metrics()
-        x_action = get_default_action_world(x_want)
-        for healer_id, healer_dict in x_want._healers_dict.items():
+        x_voice = listener_hubunit.get_voice_world()
+        x_voice.calc_world_metrics()
+        x_action = get_default_action_world(x_voice)
+        for healer_id, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 reals_dir=self.reals_dir,
                 real_id=self.real_id,
@@ -164,7 +164,7 @@ class RealUnit:
                 road_delimiter=self._road_delimiter,
                 pixel=self._pixel,
             )
-            healer_hubunit.create_want_treasury_db_files()
+            healer_hubunit.create_voice_treasury_db_files()
             for econ_road in healer_dict.keys():
                 econ_hubunit = hubunit_shop(
                     reals_dir=self.reals_dir,
@@ -175,20 +175,20 @@ class RealUnit:
                     road_delimiter=self._road_delimiter,
                     pixel=self._pixel,
                 )
-                econ_hubunit.save_duty_world(x_want)
+                econ_hubunit.save_duty_world(x_voice)
                 create_job_file_from_duty_file(econ_hubunit, owner_id)
                 x_job = econ_hubunit.get_job_world(owner_id)
                 listen_to_speaker_agenda(x_action, x_job)
 
-        # if nothing has come from want->duty->job->action pipeline use want->action pipeline
+        # if nothing has come from voice->duty->job->action pipeline use voice->action pipeline
         x_action.calc_world_metrics()
         if len(x_action._idea_dict) == 1:
-            # pipeline_want_action_text()
-            listen_to_debtors_roll_want_action(listener_hubunit)
+            # pipeline_voice_action_text()
+            listen_to_debtors_roll_voice_action(listener_hubunit)
             listener_hubunit.open_file_action()
             x_action.calc_world_metrics()
         if len(x_action._idea_dict) == 1:
-            x_action = x_want
+            x_action = x_voice
         listener_hubunit.save_action_world(x_action)
 
         return self.get_action_file_world(owner_id)

@@ -361,13 +361,13 @@ def test_is_path_valid_ReturnsCorrectObj():
 
 def test_can_active_usser_edit_paths_ReturnsCorrectObj():
     # GIVEN / WHEN / THEN
-    """I don't have the tools to test this rigth now. For now make sure it runs."""
+    """I am not able to test this correctly. For now make sure it runs."""
     assert can_active_usser_edit_paths()
 
 
 def test_is_path_existent_or_creatable_ReturnsCorrectObj():
     # GIVEN / WHEN / THEN
-    """I don't have the tools to test this rigth now. For now make sure it runs."""
+    """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_existent_or_creatable("run")
     assert (
         platform_system() == "Windows"
@@ -378,7 +378,7 @@ def test_is_path_existent_or_creatable_ReturnsCorrectObj():
 
 def test_is_path_probably_creatable_ReturnsCorrectObj():
     # GIVEN / WHEN / THEN
-    """I don't have the tools to test this rigth now. For now make sure it runs."""
+    """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_probably_creatable("run")
     assert is_path_probably_creatable("run/trail?") is False
     assert is_path_probably_creatable("run///trail") is False
@@ -386,7 +386,7 @@ def test_is_path_probably_creatable_ReturnsCorrectObj():
 
 def test_is_path_existent_or_probably_creatable_ReturnsCorrectObj():
     # GIVEN / WHEN / THEN
-    """I don't have the tools to test this rigth now. For now make sure it runs."""
+    """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_existent_or_probably_creatable("run")
     assert is_path_existent_or_probably_creatable("run/trail?") is False
     assert is_path_existent_or_probably_creatable("run///trail") is False

@@ -1,0 +1,24 @@
+{
+    "atom_category": "world_charunit",
+    "attributes": {
+        "char_id": {
+            "column_order": 3,
+            "sort_order": 3
+        },
+        "char_pool": {
+            "column_order": 2
+        },
+        "credor_weight": {
+            "column_order": 4
+        },
+        "debtor_weight": {
+            "column_order": 5
+        },
+        "owner_id": {
+            "column_order": 1
+        },
+        "real_id": {
+            "column_order": 0
+        }
+    }
+}

@@ -6,7 +6,7 @@ from src.gift.atom import (
     atom_hx_table_name,
     get_atomunit_from_rowdata,
 )
-from src._instrument.sqlite import get_rowdata, sqlite_connection
+from src._instrument.db_tool import get_rowdata, sqlite_connection
 from pytest import raises as pytest_raises
 
 

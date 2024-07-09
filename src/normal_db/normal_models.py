@@ -92,8 +92,8 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class belieflinkTable(Base):
-    __tablename__ = "belieflink"
+class allyholdTable(Base):
+    __tablename__ = "allyhold"
     uid = Column(Integer, primary_key=True)
     belief_id = Column(String)
     road = Column(String)

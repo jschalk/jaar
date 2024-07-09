@@ -33,9 +33,9 @@ def create_listen_basis(x_duty: WorldUnit) -> WorldUnit:
     return x_listen
 
 
-def get_default_action_world(want: WorldUnit) -> WorldUnit:
-    default_action_world = create_listen_basis(want)
-    default_action_world._last_gift_id = want._last_gift_id
+def get_default_action_world(voice: WorldUnit) -> WorldUnit:
+    default_action_world = create_listen_basis(voice)
+    default_action_world._last_gift_id = voice._last_gift_id
     default_action_world._char_credor_pool = None
     default_action_world._char_debtor_pool = None
     return default_action_world

@@ -3,7 +3,7 @@ from src._instrument.python import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src._instrument.sqlite import create_insert_sqlstr, RowData
+from src._instrument.db_tool import create_insert_sqlstr, RowData
 from src._road.road import create_road
 from src._world.reason_idea import factunit_shop
 from src._world.char import charunit_shop, charlink_shop
@@ -118,13 +118,6 @@ class AtomUnit:
     def get_dict(self) -> dict[str, str]:
         required_args_dict = self.get_required_args_dict()
         optional_args_dict = self.get_optional_args_dict()
-        # x_dict = {
-        #     "category": self.category,
-        #     "crud_text": self.crud_text,
-        #     "required_args": required_args_dict,
-        # }
-        # if optional_args_dict != {}:
-        #     x_dict["optional_args"] = optional_args_dict
         return {
             "category": self.category,
             "crud_text": self.crud_text,
@@ -389,14 +382,14 @@ def _modify_world_idea_reason_premiseunit_insert(x_world: WorldUnit, x_atom: Ato
     )
 
 
-def _modify_world_idea_belieflink_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_allyhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._cultureunit.del_belieflink(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._cultureunit.del_allyhold(belief_id=x_atom.get_value("belief_id"))
 
 
-def _modify_world_idea_belieflink_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_allyhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._cultureunit.set_belieflink(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._cultureunit.set_allyhold(belief_id=x_atom.get_value("belief_id"))
 
 
 def _modify_world_charunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
@@ -489,11 +482,11 @@ def _modify_world_idea_reason_premiseunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reason_premiseunit_insert(x_world, x_atom)
 
 
-def _modify_world_idea_belieflink(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_allyhold(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_belieflink_delete(x_world, x_atom)
+        _modify_world_idea_allyhold_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_belieflink_insert(x_world, x_atom)
+        _modify_world_idea_allyhold_insert(x_world, x_atom)
 
 
 def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -522,8 +515,8 @@ def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reasonunit(x_world, x_atom)
     elif x_atom.category == "world_idea_reason_premiseunit":
         _modify_world_idea_reason_premiseunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_belieflink":
-        _modify_world_idea_belieflink(x_world, x_atom)
+    elif x_atom.category == "world_idea_allyhold":
+        _modify_world_idea_allyhold(x_world, x_atom)
     elif x_atom.category == "world_charunit":
         _modify_world_charunit(x_world, x_atom)
 

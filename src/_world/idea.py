@@ -914,7 +914,7 @@ class IdeaUnit:
             x_bool
             and world_beliefunits != {}
             and world_owner_id != None
-            and self._cultureheir._belieflinks != {}
+            and self._cultureheir._allyholds != {}
         ):
             self._cultureheir.set_owner_id_culture(world_beliefunits, world_owner_id)
             if self._cultureheir._owner_id_culture is False:
@@ -1071,7 +1071,7 @@ class IdeaUnit:
         world_beliefs: dict[BeliefID, BeliefUnit],
     ):
         self._cultureheir = cultureheir_shop()
-        self._cultureheir.set_belieflinks(
+        self._cultureheir.set_allyholds(
             parent_cultureheir=parent_cultureheir,
             cultureunit=self._cultureunit,
             world_beliefs=world_beliefs,

@@ -21,7 +21,7 @@ def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_charunit_insert
     old_changeunit.add_all_different_atomunits(before_sue_world, after_sue_world)
 
     category_set = [world_charunit_text()]
-    curd_set = [atom_insert()]
+    curd_set = {atom_insert()}
     new_changeunit = get_filtered_changeunit(old_changeunit, category_set, curd_set)
 
     # THEN

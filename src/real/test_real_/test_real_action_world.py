@@ -60,9 +60,9 @@ def test_RealUnit_generate_action_world_SetsCorrectFileWithout_healerhold(
     assert before_bob_action_world.char_exists(sue_text) is False
 
     # WHEN
-    bob_want_world = bob_hubunit.get_want_world()
-    bob_want_world.add_charunit(sue_text)
-    bob_hubunit.save_want_world(bob_want_world)
+    bob_voice_world = bob_hubunit.get_voice_world()
+    bob_voice_world.add_charunit(sue_text)
+    bob_hubunit.save_voice_world(bob_voice_world)
 
     # WHEN
     after_bob_action_world = music_real.generate_action_world(bob_text)
@@ -82,17 +82,17 @@ def test_RealUnit_generate_action_world_SetsFileWith_healerhold(env_dir_setup_cl
     assert after_bob_action_world.char_exists(bob_text) is False
 
     # WHEN
-    bob_want_world = bob_hubunit.get_want_world()
-    bob_want_world.add_charunit(bob_text)
-    bob_want_world.set_char_pool(100)
+    bob_voice_world = bob_hubunit.get_voice_world()
+    bob_voice_world.add_charunit(bob_text)
+    bob_voice_world.set_char_pool(100)
     texas_text = "Texas"
-    texas_road = bob_want_world.make_l1_road(texas_text)
+    texas_road = bob_voice_world.make_l1_road(texas_text)
     elpaso_text = "el paso"
-    elpaso_road = bob_want_world.make_road(texas_road, elpaso_text)
+    elpaso_road = bob_voice_world.make_road(texas_road, elpaso_text)
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({bob_text}))
-    bob_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    bob_want_world.add_idea(elpaso_idea, texas_road)
-    bob_hubunit.save_want_world(bob_want_world)
+    bob_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    bob_voice_world.add_idea(elpaso_idea, texas_road)
+    bob_hubunit.save_voice_world(bob_voice_world)
     after_bob_action_world = music_real.generate_action_world(bob_text)
 
     # THEN
@@ -112,27 +112,27 @@ def test_RealUnit_generate_all_action_worlds_SetsCorrectFiles(
     bob_hubunit = hubunit_shop(reals_dir, music_real.real_id, bob_text, None)
     music_real.init_owner_econs(sue_text)
     sue_hubunit = hubunit_shop(reals_dir, music_real.real_id, sue_text, None)
-    bob_want_world = music_real.generate_action_world(bob_text)
-    sue_want_world = music_real.generate_action_world(sue_text)
+    bob_voice_world = music_real.generate_action_world(bob_text)
+    sue_voice_world = music_real.generate_action_world(sue_text)
 
     texas_text = "Texas"
-    texas_road = bob_want_world.make_l1_road(texas_text)
+    texas_road = bob_voice_world.make_l1_road(texas_text)
     elpaso_text = "el paso"
-    elpaso_road = bob_want_world.make_road(texas_road, elpaso_text)
+    elpaso_road = bob_voice_world.make_road(texas_road, elpaso_text)
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({bob_text}))
 
-    bob_want_world = bob_hubunit.get_want_world()
-    bob_want_world.add_charunit(bob_text)
-    bob_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    bob_want_world.add_idea(elpaso_idea, texas_road)
-    bob_hubunit.save_want_world(bob_want_world)
+    bob_voice_world = bob_hubunit.get_voice_world()
+    bob_voice_world.add_charunit(bob_text)
+    bob_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    bob_voice_world.add_idea(elpaso_idea, texas_road)
+    bob_hubunit.save_voice_world(bob_voice_world)
 
-    sue_want_world = sue_hubunit.get_want_world()
-    sue_want_world.add_charunit(sue_text)
-    sue_want_world.add_charunit(bob_text)
-    sue_want_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    sue_want_world.add_idea(elpaso_idea, texas_road)
-    sue_hubunit.save_want_world(sue_want_world)
+    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_voice_world.add_charunit(sue_text)
+    sue_voice_world.add_charunit(bob_text)
+    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_world.add_idea(elpaso_idea, texas_road)
+    sue_hubunit.save_voice_world(sue_voice_world)
 
     before_bob_action_world = music_real.get_action_file_world(bob_text)
     before_sue_action_world = music_real.get_action_file_world(sue_text)
