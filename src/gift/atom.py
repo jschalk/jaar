@@ -118,13 +118,6 @@ class AtomUnit:
     def get_dict(self) -> dict[str, str]:
         required_args_dict = self.get_required_args_dict()
         optional_args_dict = self.get_optional_args_dict()
-        # x_dict = {
-        #     "category": self.category,
-        #     "crud_text": self.crud_text,
-        #     "required_args": required_args_dict,
-        # }
-        # if optional_args_dict != {}:
-        #     x_dict["optional_args"] = optional_args_dict
         return {
             "category": self.category,
             "crud_text": self.crud_text,

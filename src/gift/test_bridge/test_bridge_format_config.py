@@ -28,7 +28,7 @@ from src.gift.atom_config import (
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )
-from src.gift.convert import (
+from src.gift.bridge import (
     real_id_str,
     owner_id_str,
     char_id_str,
@@ -45,14 +45,14 @@ from src.gift.convert import (
     must_be_roadunit_str,
     must_be_number_str,
     must_be_bool_str,
-    get_convert_format_dir,
-    get_convert_format_filenames,
-    get_convert_format_dict,
+    get_bridge_formats_dir,
+    get_bridge_filenames,
+    get_bridge_format_dict,
     jaar_format_0001_char_v0_0_0,
     jaar_format_0002_beliefhold_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
-    create_convert_dataframe,
+    create_bridge_dataframe,
 )
 
 # from src.gift.examples.gift_env import get_codespace_gift_dir
@@ -68,23 +68,23 @@ def test_str_functions_ReturnCorrectObjs():
     assert debtor_weight_str() == "debtor_weight"
     assert credor_weight_str() == "credor_weight"
     assert jaar_format_0001_char_v0_0_0() == "jaar_format_0001_char_v0_0_0"
-    x0002_convert_format = "jaar_format_0002_beliefhold_v0_0_0"
-    assert jaar_format_0002_beliefhold_v0_0_0() == x0002_convert_format
-    x0003_convert_format = "jaar_format_0003_ideaunit_v0_0_0"
-    assert jaar_format_0003_ideaunit_v0_0_0() == x0003_convert_format
+    x0002_bridge = "jaar_format_0002_beliefhold_v0_0_0"
+    assert jaar_format_0002_beliefhold_v0_0_0() == x0002_bridge
+    x0003_bridge = "jaar_format_0003_ideaunit_v0_0_0"
+    assert jaar_format_0003_ideaunit_v0_0_0() == x0003_bridge
 
 
-def test_get_convert_format_dir_ReturnsObj():
+def test_get_bridge_formats_dir_ReturnsObj():
     # GIVEN / WHEN
-    convert_format_dir = get_convert_format_dir()
+    bridge_dir = get_bridge_formats_dir()
     # THEN
-    print(f"{convert_format_dir=}")
-    assert convert_format_dir == f"{config_file_dir()}/convert_formats"
+    print(f"{bridge_dir=}")
+    assert bridge_dir == f"{config_file_dir()}/bridge_formats"
 
 
-def test_get_convert_format_filenames_ReturnsCorrectObj():
+def test_get_bridge_filenames_ReturnsCorrectObj():
     # GIVEN / WHEN
-    x_filenames = get_convert_format_filenames()
+    x_filenames = get_bridge_filenames()
     # THEN
     print(f"{x_filenames=}")
     assert jaar_format_0001_char_v0_0_0() in x_filenames
@@ -108,9 +108,9 @@ def test_get_headers_list_ReturnsObj():
     ]
 
 
-def test_create_convert_dataframe_ReturnsCorrectObj():
+def test_create_bridge_dataframe_ReturnsCorrectObj():
     # GIVEN / WHEN
-    x_df = create_convert_dataframe(jaar_format_0001_char_v0_0_0())
+    x_df = create_bridge_dataframe(jaar_format_0001_char_v0_0_0())
     # THEN
     # print(f"{x_df.columns=}")
     assert list(x_df.columns) == _get_headers_list(jaar_format_0001_char_v0_0_0())
@@ -120,55 +120,55 @@ def test_create_convert_dataframe_ReturnsCorrectObj():
     # print(f"{list(x_df.to_records())=}")
 
 
-def for_all_convert_formats_create_convert_dataframe():
-    for x_filename in get_convert_format_filenames():
+def for_all_bridges_create_bridge_dataframe():
+    for x_filename in get_bridge_filenames():
         try:
-            create_convert_dataframe(x_filename)
+            create_bridge_dataframe(x_filename)
         except Exception:
-            print(f"create_convert_dataframe failed for {x_filename=}")
+            print(f"create_bridge_dataframe failed for {x_filename=}")
             return False
     return True
 
 
-def test_create_convert_dataframe_ReturnsCorrectObjForEvery_convert_format():
+def test_create_bridge_dataframe_ReturnsCorrectObjForEvery_bridge():
     # GIVEN / WHEN / THEN
-    assert for_all_convert_formats_create_convert_dataframe()
+    assert for_all_bridges_create_bridge_dataframe()
 
 
-def test_convert_format_FilesExist():
+def test_bridge_FilesExist():
     # GIVEN
-    convert_format_dir = get_convert_format_dir()
+    bridge_dir = get_bridge_formats_dir()
 
     # WHEN
-    convert_format_files = dir_files(convert_format_dir, True)
+    bridge_files = dir_files(bridge_dir, True)
 
     # THEN
-    convert_format_filenames = set(convert_format_files.keys())
-    assert convert_format_filenames == get_convert_format_filenames()
-    assert len(convert_format_filenames) == len(get_convert_format_filenames())
+    bridge_filenames = set(bridge_files.keys())
+    assert bridge_filenames == get_bridge_filenames()
+    assert len(bridge_filenames) == len(get_bridge_filenames())
 
 
-def test_get_convert_format_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
+def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
     # GIVEN
-    convert_format_name = jaar_format_0001_char_v0_0_0()
+    bridge_name = jaar_format_0001_char_v0_0_0()
 
     # WHEN
-    convert_format_dict = get_convert_format_dict(convert_format_name)
+    bridge_dict = get_bridge_format_dict(bridge_name)
 
     # THEN
-    real_id_dict = convert_format_dict.get(real_id_str())
-    owner_id_dict = convert_format_dict.get(owner_id_str())
-    char_id_dict = convert_format_dict.get(char_id_str())
-    char_pool_dict = convert_format_dict.get(char_pool_str())
-    debtor_weight_dict = convert_format_dict.get(debtor_weight_str())
-    credor_weight_dict = convert_format_dict.get(credor_weight_str())
+    real_id_dict = bridge_dict.get(real_id_str())
+    owner_id_dict = bridge_dict.get(owner_id_str())
+    char_id_dict = bridge_dict.get(char_id_str())
+    char_pool_dict = bridge_dict.get(char_pool_str())
+    debtor_weight_dict = bridge_dict.get(debtor_weight_str())
+    credor_weight_dict = bridge_dict.get(credor_weight_str())
     assert real_id_dict != None
     assert owner_id_dict != None
     assert char_id_dict != None
     assert char_pool_dict != None
     assert debtor_weight_dict != None
     assert credor_weight_dict != None
-    assert len(convert_format_dict) == 6
+    assert len(bridge_dict) == 6
 
     real_id_validate = real_id_dict.get(validate_str())
     owner_id_validate = owner_id_dict.get(validate_str())
@@ -184,27 +184,27 @@ def test_get_convert_format_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
     assert credor_weight_validate == [must_be_number_str()]
 
 
-def test_get_convert_format_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_0_0():
+def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_0_0():
     # GIVEN
-    convert_format_name = jaar_format_0002_beliefhold_v0_0_0()
+    bridge_name = jaar_format_0002_beliefhold_v0_0_0()
 
     # WHEN
-    convert_format_dict = get_convert_format_dict(convert_format_name)
+    bridge_dict = get_bridge_format_dict(bridge_name)
 
     # THEN
-    real_id_dict = convert_format_dict.get(real_id_str())
-    owner_id_dict = convert_format_dict.get(owner_id_str())
-    char_id_dict = convert_format_dict.get(char_id_str())
-    belief_id_dict = convert_format_dict.get(belief_id_str())
-    debtor_weight_dict = convert_format_dict.get(debtor_weight_str())
-    credor_weight_dict = convert_format_dict.get(credor_weight_str())
+    real_id_dict = bridge_dict.get(real_id_str())
+    owner_id_dict = bridge_dict.get(owner_id_str())
+    char_id_dict = bridge_dict.get(char_id_str())
+    belief_id_dict = bridge_dict.get(belief_id_str())
+    debtor_weight_dict = bridge_dict.get(debtor_weight_str())
+    credor_weight_dict = bridge_dict.get(credor_weight_str())
     assert real_id_dict != None
     assert owner_id_dict != None
     assert char_id_dict != None
     assert belief_id_dict != None
     assert debtor_weight_dict != None
     assert credor_weight_dict != None
-    assert len(convert_format_dict) == 6
+    assert len(bridge_dict) == 6
 
     real_id_validate = real_id_dict.get(validate_str())
     owner_id_validate = owner_id_dict.get(validate_str())
@@ -220,25 +220,25 @@ def test_get_convert_format_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_
     assert credor_weight_validate == [must_be_number_str()]
 
 
-def test_get_convert_format_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
+def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     # GIVEN
-    convert_format_name = jaar_format_0003_ideaunit_v0_0_0()
+    bridge_name = jaar_format_0003_ideaunit_v0_0_0()
 
     # WHEN
-    convert_format_dict = get_convert_format_dict(convert_format_name)
+    bridge_dict = get_bridge_format_dict(bridge_name)
 
     # THEN
-    real_id_dict = convert_format_dict.get(real_id_str())
-    owner_id_dict = convert_format_dict.get(owner_id_str())
-    road_dict = convert_format_dict.get(road_str())
-    weight_dict = convert_format_dict.get(weight_str())
-    pledge_dict = convert_format_dict.get(pledge_str())
+    real_id_dict = bridge_dict.get(real_id_str())
+    owner_id_dict = bridge_dict.get(owner_id_str())
+    road_dict = bridge_dict.get(road_str())
+    weight_dict = bridge_dict.get(weight_str())
+    pledge_dict = bridge_dict.get(pledge_str())
     assert real_id_dict != None
     assert owner_id_dict != None
     assert road_dict != None
     assert weight_dict != None
     assert pledge_dict != None
-    assert len(convert_format_dict) == 5
+    assert len(bridge_dict) == 5
 
     real_id_validate = real_id_dict.get(validate_str())
     owner_id_validate = owner_id_dict.get(validate_str())
