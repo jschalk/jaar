@@ -360,23 +360,23 @@ def test_FiscalLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     bikers_belief_id = BeliefID("bikers")
     bikers_credor_weight = 3.0
     bikers_debtor_weight = 5.0
-    bikers_link = fiscallink_shop(
+    bikers_fiscallink = fiscallink_shop(
         belief_id=bikers_belief_id,
         credor_weight=bikers_credor_weight,
         debtor_weight=bikers_debtor_weight,
     )
 
-    print(f"{bikers_link}")
+    print(f"{bikers_fiscallink}")
 
     # WHEN
-    biker_dict = bikers_link.get_dict()
+    biker_dict = bikers_fiscallink.get_dict()
 
     # THEN
     assert biker_dict != None
     assert biker_dict == {
-        "belief_id": bikers_link.belief_id,
-        "credor_weight": bikers_link.credor_weight,
-        "debtor_weight": bikers_link.debtor_weight,
+        "belief_id": bikers_fiscallink.belief_id,
+        "credor_weight": bikers_fiscallink.credor_weight,
+        "debtor_weight": bikers_fiscallink.debtor_weight,
     }
 
 

@@ -143,8 +143,8 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     originunit_text = "_originunit"
     day_hour_originunit_dict = idearoot_dict[_kids][day_hour_text][originunit_text]
     assert day_hour_originunit_dict == day_hour_idea._originunit.get_dict()
-    _links = "_links"
-    x_world_originhold = world_dict[originunit_text][_links][yao_text]
+    originholds_text = "_originholds"
+    x_world_originhold = world_dict[originunit_text][originholds_text][yao_text]
     print(f"{x_world_originhold=}")
     assert x_world_originhold
     assert x_world_originhold["char_id"] == yao_text
@@ -330,8 +330,8 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert len(cont_reasonunits_dict) == len(cont_idea._reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_idea._reasonunits)
     originunit_text = "_originunit"
-    _links = "_links"
-    assert len(world_dict[originunit_text][_links])
+    originholds_text = "_originholds"
+    assert len(world_dict[originunit_text][originholds_text])
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
@@ -450,7 +450,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert zia_shave_idea._problem_bool
     assert json_shave_idea._problem_bool == zia_shave_idea._problem_bool
 
-    assert len(json_world._originunit._links) == 1
+    assert len(json_world._originunit._originholds) == 1
     assert json_world._originunit == zia_world._originunit
 
 

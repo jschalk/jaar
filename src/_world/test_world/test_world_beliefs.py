@@ -273,12 +273,12 @@ def test_WorldUnit_set_fiscallink_CorrectlyCalculatesInheritedFiscalLinkWorldImp
     sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
     sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
     sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    blink_rico = fiscallink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=6)
-    blink_carm = fiscallink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=1)
-    blink_patr = fiscallink_shop(belief_id=patr_text, credor_weight=10)
-    sue_world._idearoot.set_fiscallink(fiscallink=blink_rico)
-    sue_world._idearoot.set_fiscallink(fiscallink=blink_carm)
-    sue_world._idearoot.set_fiscallink(fiscallink=blink_patr)
+    rico_fiscallink = fiscallink_shop(rico_text, credor_weight=20, debtor_weight=6)
+    carm_fiscallink = fiscallink_shop(carm_text, credor_weight=10, debtor_weight=1)
+    patr_fiscallink = fiscallink_shop(patr_text, credor_weight=10)
+    sue_world._idearoot.set_fiscallink(rico_fiscallink)
+    sue_world._idearoot.set_fiscallink(carm_fiscallink)
+    sue_world._idearoot.set_fiscallink(patr_fiscallink)
     assert len(sue_world._idearoot._fiscallinks) == 3
 
     # WHEN
@@ -327,12 +327,12 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    blink_rico = fiscallink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=6)
-    blink_carm = fiscallink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=1)
-    blink_patr = fiscallink_shop(belief_id=patr_text, credor_weight=10)
-    x_world._idearoot.set_fiscallink(fiscallink=blink_rico)
-    x_world._idearoot.set_fiscallink(fiscallink=blink_carm)
-    x_world._idearoot.set_fiscallink(fiscallink=blink_patr)
+    rico_fiscallink = fiscallink_shop(rico_text, credor_weight=20, debtor_weight=6)
+    carm_fiscallink = fiscallink_shop(carm_text, credor_weight=10, debtor_weight=1)
+    patr_fiscallink = fiscallink_shop(patr_text, credor_weight=10)
+    x_world._idearoot.set_fiscallink(fiscallink=rico_fiscallink)
+    x_world._idearoot.set_fiscallink(fiscallink=carm_fiscallink)
+    x_world._idearoot.set_fiscallink(fiscallink=patr_fiscallink)
 
     assert len(x_world._beliefs) == 3
 

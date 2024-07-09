@@ -1,6 +1,6 @@
 {
     "tables": {
-        "atom_change_link": {
+        "atom2change": {
             "columns": {}
         },
         "atom_mstr": {
@@ -9,7 +9,7 @@
         "atom_hx": {
             "columns": {}
         },
-        "change_gift_link": {
+        "change2gift": {
             "columns": {}
         },
         "change_mstr": {
@@ -18,7 +18,7 @@
         "gift_mstr": {
             "columns": {}
         },
-        "gift_owner_link": {
+        "gift2owner": {
             "columns": {
                 "owner_id": {}
             }

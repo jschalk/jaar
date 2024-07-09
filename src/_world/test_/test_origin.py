@@ -62,7 +62,7 @@ def test_OriginUnit_exists():
 
     # THEN
     assert originunit_x
-    assert originunit_x._links is None
+    assert originunit_x._originholds is None
 
 
 def test_originunit_ReturnsCorrectObj():
@@ -70,7 +70,7 @@ def test_originunit_ReturnsCorrectObj():
     originunit_x = originunit_shop()
 
     # THEN
-    assert originunit_x._links == {}
+    assert originunit_x._originholds == {}
 
 
 def test_originunit_set_originhold_CorrectlySetsOriginHold():
@@ -83,9 +83,9 @@ def test_originunit_set_originhold_CorrectlySetsOriginHold():
     originunit_x.set_originhold(char_id=tim_text, weight=tim_weight)
 
     # THEN
-    assert originunit_x._links.get(tim_text) != None
-    assert originunit_x._links.get(tim_text).char_id == tim_text
-    assert originunit_x._links.get(tim_text).weight == tim_weight
+    assert originunit_x._originholds.get(tim_text) != None
+    assert originunit_x._originholds.get(tim_text).char_id == tim_text
+    assert originunit_x._originholds.get(tim_text).weight == tim_weight
 
 
 def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
@@ -94,14 +94,14 @@ def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
     tim_text = "Tim"
     tim_weight = 3
     originunit_x.set_originhold(char_id=tim_text, weight=tim_weight)
-    assert originunit_x._links.get(tim_text) != None
-    assert originunit_x._links.get(tim_text).char_id == tim_text
+    assert originunit_x._originholds.get(tim_text) != None
+    assert originunit_x._originholds.get(tim_text).char_id == tim_text
 
     # WHEN
     originunit_x.del_originhold(char_id=tim_text)
 
     # THEN
-    assert originunit_x._links.get(tim_text) is None
+    assert originunit_x._originholds.get(tim_text) is None
 
 
 def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
@@ -124,4 +124,4 @@ def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     print(f"{x_dict=}")
     assert x_dict != None
-    assert x_dict == {"_links": {roy_text: roy_ol_dict, sue_text: sue_ol_dict}}
+    assert x_dict == {"_originholds": {roy_text: roy_ol_dict, sue_text: sue_ol_dict}}

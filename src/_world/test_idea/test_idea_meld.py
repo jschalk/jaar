@@ -733,9 +733,9 @@ def test_IdeaUnit_meld_IdeaMeldingItselfCreatesOriginUnitWithCorrectOriginHold()
     # THEN
     assert x1_idea._originunit != x1_idea_copy._originunit
 
-    x1_idea_originunit_link_sue = x1_idea._originunit._links.get(sue_text)
-    x1_idea_originunit_link_tim = x1_idea._originunit._links.get(tim_text)
-    assert x1_idea_originunit_link_sue != None
-    assert x1_idea_originunit_link_sue != x1_idea_copy._originunit._links.get(sue_text)
-    assert x1_idea_originunit_link_tim == x1_idea_copy._originunit._links.get(tim_text)
+    x1_idea_originhold_sue = x1_idea._originunit._originholds.get(sue_text)
+    x1_idea_originhold_tim = x1_idea._originunit._originholds.get(tim_text)
+    assert x1_idea_originhold_sue != None
+    assert x1_idea_originhold_sue != x1_idea_copy._originunit._originholds.get(sue_text)
+    assert x1_idea_originhold_tim == x1_idea_copy._originunit._originholds.get(tim_text)
     # assert x1_idea == x1_idea_copy #Uncomment to see differences

@@ -446,13 +446,13 @@ def test_WorldUnit__meld_originholds_CorrectlySetsOriginHolds():
     sue_text = "Sue"
     sue_weight = 4
     bob_world = worldunit_shop(bob_text)
-    assert len(bob_world._originunit._links) == 0
+    assert len(bob_world._originunit._originholds) == 0
 
     # WHEN
     bob_world._meld_originholds(char_id=sue_text, char_weight=sue_weight)
 
     # THEN
-    assert len(bob_world._originunit._links) == 1
+    assert len(bob_world._originunit._originholds) == 1
     bob_sue_originunit = originunit_shop()
     bob_sue_originunit.set_originhold(char_id=sue_text, weight=sue_weight)
     assert bob_world._originunit == bob_sue_originunit
@@ -477,7 +477,7 @@ def test_WorldUnit_meld_OriginUnitsCorrectlySet():
     sue_x_world.add_idea(ideaunit_shop(free_text), parent_road=swim_road)
     sue_x_world.set_fact(base=swim_road, pick=free_road, open=23, nigh=27)
     sue_x_world.add_idea(ideaunit_shop(back_text), parent_road=swim_road)
-    assert len(bob_world._originunit._links) == 0
+    assert len(bob_world._originunit._originholds) == 0
 
     # WHEN
     bob_world.meld(sue_x_world, char_weight=sue_weight)
@@ -485,7 +485,7 @@ def test_WorldUnit_meld_OriginUnitsCorrectlySet():
     # THEN
     sue_originunit = originunit_shop()
     sue_originunit.set_originhold(char_id=sue_text, weight=sue_weight)
-    assert len(bob_world._originunit._links) == 1
+    assert len(bob_world._originunit._originholds) == 1
     assert bob_world._originunit == sue_originunit
     bob_free_idea = bob_world.get_idea_obj(free_road)
     bob_back_idea = bob_world.get_idea_obj(back_road)

@@ -1,15 +1,15 @@
 from src._road.road import create_road
 from src.gift.atom import atomunit_shop, atom_insert, atom_hx_table_name
 from src.real.journal_sqlstr import (
-    get_atom_change_link_table_create_sqlstr,
+    get_atom2change_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
     get_atom_hx_table_insert_sqlstr,
     get_atom_mstr_table_create_sqlstr,
     get_create_table_if_not_exist_sqlstrs,
-    get_change_gift_link_table_create_sqlstr,
+    get_change2gift_table_create_sqlstr,
     get_change_table_create_sqlstr,
     get_gift_table_create_sqlstr,
-    get_gift_owner_link_table_create_sqlstr,
+    get_gift2owner_table_create_sqlstr,
     get_owner_mstr_table_create_sqlstr,
     get_road_ref_table_create_sqlstr,
     get_road_ref_table_single_insert_sqlstr,
@@ -29,10 +29,10 @@ CREATE TABLE IF NOT EXISTS change_mstr (
     assert example_sqlstr == get_change_table_create_sqlstr()
 
 
-def test_get_atom_change_link_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_atom2change_table_create_sqlstr_ReturnsCorrectStr():
     # GIVEN / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE atom_change_link
+CREATE TABLE atom2change
 (
   atom_rowid INT NOT NULL
 , change_rowid INT NOT NULL
@@ -41,7 +41,7 @@ CREATE TABLE atom_change_link
 , CONSTRAINT change_fk FOREIGN KEY (change_rowid) REFERENCES change_mstr (rowid)
 )
 ;"""
-    assert example_sqlstr == get_atom_change_link_table_create_sqlstr()
+    assert example_sqlstr == get_atom2change_table_create_sqlstr()
 
 
 def test_get_gift_table_create_sqlstr_ReturnsCorrectStr():
@@ -56,10 +56,10 @@ CREATE TABLE IF NOT EXISTS gift_mstr (
     assert example_sqlstr == get_gift_table_create_sqlstr()
 
 
-def test_get_change_gift_link_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_change2gift_table_create_sqlstr_ReturnsCorrectStr():
     # GIVEN / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE change_gift_link
+CREATE TABLE change2gift
 (
   change_rowid INT NOT NULL
 , gift_rowid INT NOT NULL
@@ -68,13 +68,13 @@ CREATE TABLE change_gift_link
 , CONSTRAINT change_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
 )
 ;"""
-    assert example_sqlstr == get_change_gift_link_table_create_sqlstr()
+    assert example_sqlstr == get_change2gift_table_create_sqlstr()
 
 
-def test_get_gift_owner_link_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_gift2owner_table_create_sqlstr_ReturnsCorrectStr():
     # GIVEN / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE gift_owner_link
+CREATE TABLE gift2owner
 (
   gift_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
@@ -83,7 +83,7 @@ CREATE TABLE gift_owner_link
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""
-    assert example_sqlstr == get_gift_owner_link_table_create_sqlstr()
+    assert example_sqlstr == get_gift2owner_table_create_sqlstr()
 
 
 def test_get_owner_mstr_table_create_sqlstr_ReturnsCorrectStr():

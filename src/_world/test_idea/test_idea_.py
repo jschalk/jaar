@@ -175,7 +175,7 @@ def test_IdeaUnit_fiscallinks_exist():
     # GIVEN
     biker_credor_weight = 12
     biker_debtor_weight = 15
-    biker_link = fiscallink_shop(
+    biker_fiscallink = fiscallink_shop(
         belief_id=BeliefID("bikers2"),
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
@@ -184,23 +184,23 @@ def test_IdeaUnit_fiscallinks_exist():
     swimmer_belief_id = BeliefID("swimmers")
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
-    swimmer_link = fiscallink_shop(
+    swimmer_fiscallink = fiscallink_shop(
         belief_id=swimmer_belief_id,
         credor_weight=swimmer_credor_weight,
         debtor_weight=swimmer_debtor_weight,
     )
 
-    belief_links = {
-        swimmer_link.belief_id: swimmer_link,
-        biker_link.belief_id: biker_link,
+    x_belieflinks = {
+        swimmer_fiscallink.belief_id: swimmer_fiscallink,
+        biker_fiscallink.belief_id: biker_fiscallink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _fiscallinks=belief_links)
+    sport_idea = ideaunit_shop(_label=sport_text, _fiscallinks=x_belieflinks)
 
     # THEN
-    assert sport_idea._fiscallinks == belief_links
+    assert sport_idea._fiscallinks == x_belieflinks
 
 
 def test_IdeaUnit_get_inherited_fiscalheirs_weight_sum_SetsAttrCorrectly_WithValues():
@@ -208,7 +208,7 @@ def test_IdeaUnit_get_inherited_fiscalheirs_weight_sum_SetsAttrCorrectly_WithVal
     biker_credor_weight = 12
     biker_debtor_weight = 15
     biker_text = "bikers2"
-    biker_link = fiscalheir_shop(
+    biker_fiscallink = fiscalheir_shop(
         belief_id=BeliefID(biker_text),
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
@@ -218,20 +218,20 @@ def test_IdeaUnit_get_inherited_fiscalheirs_weight_sum_SetsAttrCorrectly_WithVal
     swimmer_belief_id = BeliefID(swimmer_text)
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
-    swimmer_link = fiscalheir_shop(
+    swimmer_fiscallink = fiscalheir_shop(
         belief_id=swimmer_belief_id,
         credor_weight=swimmer_credor_weight,
         debtor_weight=swimmer_debtor_weight,
     )
 
-    belief_links = {
-        swimmer_link.belief_id: swimmer_link,
-        biker_link.belief_id: biker_link,
+    x_belieflinks = {
+        swimmer_fiscallink.belief_id: swimmer_fiscallink,
+        biker_fiscallink.belief_id: biker_fiscallink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _fiscalheirs=belief_links)
+    sport_idea = ideaunit_shop(_label=sport_text, _fiscalheirs=x_belieflinks)
 
     # THEN
     assert sport_idea.get_fiscalheirs_credor_weight_sum() != None
@@ -468,30 +468,30 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     biker_belief_id = BeliefID("bikers")
     biker_credor_weight = 3.0
     biker_debtor_weight = 7.0
-    biker_link = fiscallink_shop(
+    biker_fiscallink = fiscallink_shop(
         biker_belief_id, biker_credor_weight, biker_debtor_weight
     )
     flyer_belief_id = BeliefID("flyers")
     flyer_credor_weight = 6.0
     flyer_debtor_weight = 9.0
-    flyer_link = fiscallink_shop(
+    flyer_fiscallink = fiscallink_shop(
         belief_id=flyer_belief_id,
         credor_weight=flyer_credor_weight,
         debtor_weight=flyer_debtor_weight,
     )
     biker_and_flyer_fiscallinks = {
-        biker_link.belief_id: biker_link,
-        flyer_link.belief_id: flyer_link,
+        biker_fiscallink.belief_id: biker_fiscallink,
+        flyer_fiscallink.belief_id: flyer_fiscallink,
     }
     biker_get_dict = {
-        "belief_id": biker_link.belief_id,
-        "credor_weight": biker_link.credor_weight,
-        "debtor_weight": biker_link.debtor_weight,
+        "belief_id": biker_fiscallink.belief_id,
+        "credor_weight": biker_fiscallink.credor_weight,
+        "debtor_weight": biker_fiscallink.debtor_weight,
     }
     flyer_get_dict = {
-        "belief_id": flyer_link.belief_id,
-        "credor_weight": flyer_link.credor_weight,
-        "debtor_weight": flyer_link.debtor_weight,
+        "belief_id": flyer_fiscallink.belief_id,
+        "credor_weight": flyer_fiscallink.credor_weight,
+        "debtor_weight": flyer_fiscallink.debtor_weight,
     }
     x1_fiscallinks = {biker_belief_id: biker_get_dict, flyer_belief_id: flyer_get_dict}
     sue_text = "Sue"
