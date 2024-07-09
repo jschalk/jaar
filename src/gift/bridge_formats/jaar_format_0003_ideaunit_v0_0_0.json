@@ -1,18 +1,22 @@
 {
     "atom_category": "world_ideaunit",
     "attributes": {
+        "label": {
+            "column_order": 5,
+            "sort_order": 2
+        },
         "owner_id": {
             "column_order": 1
+        },
+        "parent_road": {
+            "column_order": 3,
+            "sort_order": 1
         },
         "pledge": {
             "column_order": 2
         },
         "real_id": {
             "column_order": 0
-        },
-        "road": {
-            "column_order": 3,
-            "sort_order": 1
         },
         "weight": {
             "column_order": 4

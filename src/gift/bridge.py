@@ -15,8 +15,8 @@ from src.gift.atom_config import (
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )
-from src.gift.change import changeunit_shop, get_filtered_changeunit
 from src.gift.atom_config import config_file_dir
+from src.gift.change import changeunit_shop, get_filtered_changeunit
 from pandas import DataFrame, concat
 
 
@@ -48,8 +48,12 @@ def credor_weight_str() -> str:
     return "credor_weight"
 
 
-def road_str() -> str:
-    return "road"
+def parent_road_str() -> str:
+    return "parent_road"
+
+
+def label_str() -> str:
+    return "label"
 
 
 def weight_str() -> str:
@@ -136,16 +140,24 @@ def get_ascending_bools(sorting_attributes: list[str]) -> list[bool]:
     return [True for _ in sorting_attributes]
 
 
+def get_column_ordered_bridge_attributes(bridge_name: str) -> list[str]:
+    bridge_attribute_dict = get_bridge_attribute_dict(bridge_name)
+    column_order_dict = {
+        bridge_attribute: a_dict.get("column_order")
+        for bridge_attribute, a_dict in bridge_attribute_dict.items()
+    }
+    return sorted(column_order_dict, key=column_order_dict.get)
+
+
 def _get_headers_list(bridge_name: str) -> list[str]:
     return list(get_bridge_attribute_dict(bridge_name).keys())
 
 
-def create_bridge_dataframe(bridge_name: str) -> DataFrame:
-    return DataFrame(columns=_get_headers_list(bridge_name))
+def create_bridge_dataframe(d2_list: list[list[str]], bridge_name: str) -> DataFrame:
+    return DataFrame(d2_list, columns=_get_headers_list(bridge_name))
 
 
 def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
-    x_bridge = create_bridge_dataframe(bridge_name)
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_worldunit)
     category_set = {get_bridge_atom_category(bridge_name)}
@@ -153,11 +165,9 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
     d2_list = []
+    ordered_columns = get_column_ordered_bridge_attributes(bridge_name)
 
     if bridge_name == jaar_format_0001_char_v0_0_0():
-        bridge_arribute_dict = get_bridge_attribute_dict(bridge_name)
-        # for bridge_arribute in bridge_arribute_dict.values():
-
         d2_list = [
             [
                 x_atomunit.get_value(char_id_str()),
@@ -171,42 +181,35 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
         ]
 
     elif bridge_name == jaar_format_0002_beliefhold_v0_0_0():
-        for x_atomunit in sorted_atomunits:
-            char_id_value = x_atomunit.get_value(char_id_str())
-            belief_id_value = x_atomunit.get_value(belief_id_str())
-            d2_list.append(
-                [
-                    belief_id_value,
-                    char_id_value,
-                    x_atomunit.get_value(credor_weight_str()),
-                    x_atomunit.get_value(debtor_weight_str()),
-                    x_worldunit._owner_id,
-                    x_worldunit._real_id,
-                ]
-            )
-
+        d2_list = [
+            [
+                x_atomunit.get_value(belief_id_str()),
+                x_atomunit.get_value(char_id_str()),
+                x_atomunit.get_value(credor_weight_str()),
+                x_atomunit.get_value(debtor_weight_str()),
+                x_worldunit._owner_id,
+                x_worldunit._real_id,
+            ]
+            for x_atomunit in sorted_atomunits
+        ]
     elif bridge_name == jaar_format_0003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
-            parent_roadunit = x_atomunit.get_value("parent_road")
-            label_roadnode = x_atomunit.get_value("label")
-            idea_roadunit = x_worldunit.make_road(parent_roadunit, label_roadnode)
             pledge_bool = x_atomunit.get_value("pledge")
             pledge_yes_str = ""
             if pledge_bool:
                 pledge_yes_str = "Yes"
-            char_id_value = x_atomunit.get_value(char_id_str())
-            belief_id_value = x_atomunit.get_value(belief_id_str())
             d2_list.append(
                 [
+                    x_atomunit.get_value("label"),
                     x_worldunit._owner_id,
+                    x_atomunit.get_value("parent_road"),
                     pledge_yes_str,
                     x_worldunit._real_id,
-                    idea_roadunit,
                     x_atomunit.get_value("_weight"),
                 ]
             )
 
-    x_bridge = DataFrame(d2_list, columns=x_bridge.columns)
+    x_bridge = create_bridge_dataframe(d2_list, bridge_name)
     sorting_columns = get_sorting_attributes(bridge_name)
     ascending_bools = get_ascending_bools(sorting_columns)
     x_bridge.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)

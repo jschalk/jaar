@@ -33,7 +33,8 @@ from src.gift.bridge import (
     owner_id_str,
     char_id_str,
     belief_id_str,
-    road_str,
+    parent_road_str,
+    label_str,
     weight_str,
     pledge_str,
     char_pool_str,
@@ -48,6 +49,7 @@ from src.gift.bridge import (
     get_bridge_formats_dir,
     get_bridge_filenames,
     get_bridge_attribute_dict,
+    get_column_ordered_bridge_attributes,
     jaar_format_0001_char_v0_0_0,
     jaar_format_0002_beliefhold_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
@@ -106,16 +108,19 @@ def test_get_headers_list_ReturnsObj():
 
 
 def test_create_bridge_dataframe_ReturnsCorrectObj():
-    # GIVEN / WHEN
-    x_df = create_bridge_dataframe(jaar_format_0001_char_v0_0_0())
+    # GIVEN
+    empty_d2 = []
+    # WHEN
+    x_df = create_bridge_dataframe(empty_d2, jaar_format_0001_char_v0_0_0())
     # THEN
     assert list(x_df.columns) == _get_headers_list(jaar_format_0001_char_v0_0_0())
 
 
 def for_all_bridges_create_bridge_dataframe():
+    empty_d2 = []
     for x_filename in get_bridge_filenames():
         try:
-            create_bridge_dataframe(x_filename)
+            create_bridge_dataframe(empty_d2, x_filename)
         except Exception:
             print(f"create_bridge_dataframe failed for {x_filename=}")
             return False
@@ -216,18 +221,56 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_
     # THEN
     real_id_dict = bridge_dict.get(real_id_str())
     owner_id_dict = bridge_dict.get(owner_id_str())
-    road_dict = bridge_dict.get(road_str())
+    parent_road_dict = bridge_dict.get(parent_road_str())
+    label_dict = bridge_dict.get(label_str())
     weight_dict = bridge_dict.get(weight_str())
     pledge_dict = bridge_dict.get(pledge_str())
     assert real_id_dict != None
     assert owner_id_dict != None
-    assert road_dict != None
+    assert parent_road_dict != None
+    assert label_dict != None
     assert weight_dict != None
     assert pledge_dict != None
-    assert len(bridge_dict) == 5
+    assert len(bridge_dict) == 6
 
     assert real_id_dict.get(column_order_str()) == 0
     assert owner_id_dict.get(column_order_str()) == 1
-    assert road_dict.get(column_order_str()) == 3
+    assert parent_road_dict.get(column_order_str()) == 3
+    assert label_dict.get(column_order_str()) == 5
     assert weight_dict.get(column_order_str()) == 4
     assert pledge_dict.get(column_order_str()) == 2
+
+
+def test_get_column_ordered_bridge_attributes_ReturnsCorrectObj_scenario1():
+    # GIVEN
+    bridge_name = jaar_format_0001_char_v0_0_0()
+    # WHEN
+    sorted_bridge_attributes = get_column_ordered_bridge_attributes(bridge_name)
+
+    # THEN
+    assert sorted_bridge_attributes == [
+        real_id_str(),
+        owner_id_str(),
+        char_pool_str(),
+        char_id_str(),
+        credor_weight_str(),
+        debtor_weight_str(),
+    ]
+
+
+def test_get_column_ordered_bridge_attributes_ReturnsCorrectObj_scenario2():
+    # GIVEN
+    bridge_name = jaar_format_0003_ideaunit_v0_0_0()
+    # WHEN
+    sorted_bridge_attributes = get_column_ordered_bridge_attributes(bridge_name)
+
+    # THEN
+    print(f"{sorted_bridge_attributes=}")
+    assert sorted_bridge_attributes == [
+        real_id_str(),
+        owner_id_str(),
+        pledge_str(),
+        parent_road_str(),
+        weight_str(),
+        label_str(),
+    ]

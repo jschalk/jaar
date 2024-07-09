@@ -13,7 +13,8 @@ from src.gift.bridge import (
     owner_id_str,
     char_id_str,
     belief_id_str,
-    road_str,
+    parent_road_str,
+    label_str,
     weight_str,
     pledge_str,
     char_pool_str,
@@ -169,13 +170,15 @@ def test_create_bridge_Arg_jaar_format_0003_ideaunit_v0_0_0():
     assert ideaunit_format.loc[0, owner_id_str()] == sue_worldunit._owner_id
     assert ideaunit_format.loc[0, pledge_str()] == ""
     assert ideaunit_format.loc[0, real_id_str()] == music_real_id
-    assert ideaunit_format.loc[0, road_str()] == casa_road
+    assert ideaunit_format.loc[0, parent_road_str()] == music_real_id
+    assert ideaunit_format.loc[0, label_str()] == casa_text
     assert ideaunit_format.loc[0, weight_str()] == casa_weight
 
     assert ideaunit_format.loc[1, owner_id_str()] == sue_worldunit._owner_id
     assert ideaunit_format.loc[1, pledge_str()] == "Yes"
     assert ideaunit_format.loc[1, real_id_str()] == music_real_id
-    assert ideaunit_format.loc[1, road_str()] == clean_road
+    assert ideaunit_format.loc[1, parent_road_str()] == casa_road
+    assert ideaunit_format.loc[1, label_str()] == clean_text
     assert ideaunit_format.loc[1, weight_str()] == 1
 
     assert len(ideaunit_format) == 2
