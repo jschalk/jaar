@@ -1,6 +1,6 @@
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
-from src._world.beliefunit import BeliefID, fiscallink_shop
+from src._world.beliefunit import BeliefID, awardlink_shop
 from src._world.world import worldunit_shop
 from src._world.healer import healerhold_shop
 from src._world.examples.example_worlds import (
@@ -63,14 +63,14 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     zia_world.set_charunit(charunit=au_rico)
     zia_world.set_charunit(charunit=au_carm)
     zia_world.set_charunit(charunit=au_patr)
-    zia_world._idearoot.set_fiscallink(
-        fiscallink=fiscallink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
+    zia_world._idearoot.set_awardlink(
+        awardlink=awardlink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
     )
-    zia_world._idearoot.set_fiscallink(
-        fiscallink=fiscallink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
+    zia_world._idearoot.set_awardlink(
+        awardlink=awardlink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
     )
-    zia_world._idearoot.set_fiscallink(
-        fiscallink=fiscallink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
+    zia_world._idearoot.set_awardlink(
+        awardlink=awardlink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
     )
 
     # WHEN
@@ -78,15 +78,15 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     chars_metrics = zia_world.get_chars_metrics()
 
     # THEN
-    fiscallink_rico = chars_metrics[rico_text]
-    fiscallink_carm = chars_metrics[carm_text]
-    fiscallink_patr = chars_metrics[patr_text]
-    assert fiscallink_rico.belief_id != None
-    assert fiscallink_carm.belief_id != None
-    assert fiscallink_patr.belief_id != None
-    assert fiscallink_rico.belief_id == rico_text
-    assert fiscallink_carm.belief_id == carm_text
-    assert fiscallink_patr.belief_id == patr_text
+    awardlink_rico = chars_metrics[rico_text]
+    awardlink_carm = chars_metrics[carm_text]
+    awardlink_patr = chars_metrics[patr_text]
+    assert awardlink_rico.belief_id != None
+    assert awardlink_carm.belief_id != None
+    assert awardlink_patr.belief_id != None
+    assert awardlink_rico.belief_id == rico_text
+    assert awardlink_carm.belief_id == carm_text
+    assert awardlink_patr.belief_id == patr_text
     all_beliefs = zia_world._beliefs
     beliefunit_rico = all_beliefs[rico_text]
     beliefunit_carm = all_beliefs[carm_text]

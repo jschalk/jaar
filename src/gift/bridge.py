@@ -8,7 +8,7 @@ from src.gift.atom_config import (
     world_charunit_text,
     world_char_belieflink_text,
     world_ideaunit_text,
-    world_idea_fiscallink_text,
+    world_idea_awardlink_text,
     world_idea_reasonunit_text,
     world_idea_reason_premiseunit_text,
     world_idea_allyhold_text,

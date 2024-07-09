@@ -1,7 +1,7 @@
 from src._road.road import get_default_real_id_roadnode
 from src._world.beliefunit import (
     BeliefID,
-    fiscallink_shop,
+    awardlink_shop,
     beliefunit_shop,
     get_chars_relevant_beliefs,
 )
@@ -157,17 +157,17 @@ def test_examples_world_v001_HasBeliefs():
     # THEN
     print(f"{len(idea_dict)=}")
     db_idea = idea_dict.get(x_world.make_l1_road("D&B"))
-    print(f"{db_idea._label=} {db_idea._fiscallinks=}")
-    assert len(db_idea._fiscallinks) == 3
+    print(f"{db_idea._label=} {db_idea._awardlinks=}")
+    assert len(db_idea._awardlinks) == 3
     # for idea_key in idea_dict:
     #     print(f"{idea_key=}")
     #     if idea._label == "D&B":
-    #         print(f"{idea._label=} {idea._fiscallinks=}")
-    #         db_fiscallink_len = len(idea._fiscallinks)
-    # assert db_fiscallink_len == 3
+    #         print(f"{idea._label=} {idea._awardlinks=}")
+    #         db_awardlink_len = len(idea._awardlinks)
+    # assert db_awardlink_len == 3
 
 
-def test_WorldUnit_set_fiscallink_correctly_sets_fiscallinks():
+def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     # GIVEN
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
@@ -182,18 +182,18 @@ def test_WorldUnit_set_fiscallink_correctly_sets_fiscallinks():
     assert len(sue_world._beliefs) == 3
     swim_text = "swim"
     sue_world.add_l1_idea(ideaunit_shop(swim_text))
-    fiscallink_rico = fiscallink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
-    fiscallink_carm = fiscallink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
-    fiscallink_patr = fiscallink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
+    awardlink_rico = awardlink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
+    awardlink_carm = awardlink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
+    awardlink_patr = awardlink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
     swim_road = sue_world.make_l1_road(swim_text)
-    sue_world.edit_idea_attr(road=swim_road, fiscallink=fiscallink_rico)
-    sue_world.edit_idea_attr(road=swim_road, fiscallink=fiscallink_carm)
-    sue_world.edit_idea_attr(road=swim_road, fiscallink=fiscallink_patr)
+    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_rico)
+    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_carm)
+    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_patr)
 
     street_text = "streets"
     sue_world.add_idea(ideaunit_shop(street_text), parent_road=swim_road)
-    assert sue_world._idearoot._fiscallinks in (None, {})
-    assert len(sue_world._idearoot._kids[swim_text]._fiscallinks) == 3
+    assert sue_world._idearoot._awardlinks in (None, {})
+    assert len(sue_world._idearoot._kids[swim_text]._awardlinks) == 3
 
     # WHEN
     idea_dict = sue_world.get_idea_dict()
@@ -204,19 +204,19 @@ def test_WorldUnit_set_fiscallink_correctly_sets_fiscallinks():
     swim_idea = idea_dict.get(swim_road)
     street_idea = idea_dict.get(sue_world.make_road(swim_road, street_text))
 
-    assert len(swim_idea._fiscallinks) == 3
-    assert len(swim_idea._fiscalheirs) == 3
-    assert street_idea._fiscallinks in (None, {})
-    assert len(street_idea._fiscalheirs) == 3
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 3
+    assert street_idea._awardlinks in (None, {})
+    assert len(street_idea._awardheirs) == 3
 
     print(f"{len(idea_dict)}")
-    print(f"{swim_idea._fiscallinks}")
-    print(f"{swim_idea._fiscalheirs}")
-    print(f"{swim_idea._fiscalheirs}")
-    assert len(sue_world._idearoot._kids["swim"]._fiscalheirs) == 3
+    print(f"{swim_idea._awardlinks}")
+    print(f"{swim_idea._awardheirs}")
+    print(f"{swim_idea._awardheirs}")
+    assert len(sue_world._idearoot._kids["swim"]._awardheirs) == 3
 
 
-def test_WorldUnit_set_fiscallink_correctly_deletes_fiscallinks():
+def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     # GIVEN
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -231,39 +231,39 @@ def test_WorldUnit_set_fiscallink_correctly_deletes_fiscallinks():
     swim_road = x_world.make_road(prom_text, swim_text)
 
     x_world.add_l1_idea(ideaunit_shop(swim_text))
-    fiscallink_rico = fiscallink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
-    fiscallink_carm = fiscallink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
-    fiscallink_patr = fiscallink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
+    awardlink_rico = awardlink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
+    awardlink_carm = awardlink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
+    awardlink_patr = awardlink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
 
     swim_idea = x_world.get_idea_obj(swim_road)
-    x_world.edit_idea_attr(road=swim_road, fiscallink=fiscallink_rico)
-    x_world.edit_idea_attr(road=swim_road, fiscallink=fiscallink_carm)
-    x_world.edit_idea_attr(road=swim_road, fiscallink=fiscallink_patr)
+    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_rico)
+    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_carm)
+    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_patr)
 
-    assert len(swim_idea._fiscallinks) == 3
-    assert len(swim_idea._fiscalheirs) == 3
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 3
 
     # print(f"{len(idea_list)}")
-    # print(f"{idea_list[0]._fiscallinks}")
-    # print(f"{idea_list[0]._fiscalheirs}")
-    # print(f"{idea_list[1]._fiscalheirs}")
-    assert len(x_world._idearoot._kids[swim_text]._fiscallinks) == 3
-    assert len(x_world._idearoot._kids[swim_text]._fiscalheirs) == 3
+    # print(f"{idea_list[0]._awardlinks}")
+    # print(f"{idea_list[0]._awardheirs}")
+    # print(f"{idea_list[1]._awardheirs}")
+    assert len(x_world._idearoot._kids[swim_text]._awardlinks) == 3
+    assert len(x_world._idearoot._kids[swim_text]._awardheirs) == 3
 
     # WHEN
-    x_world.edit_idea_attr(road=swim_road, fiscallink_del=rico_text)
+    x_world.edit_idea_attr(road=swim_road, awardlink_del=rico_text)
 
     # THEN
     swim_idea = x_world.get_idea_obj(swim_road)
     print(f"{swim_idea._label=}")
-    print(f"{swim_idea._fiscallinks=}")
-    print(f"{swim_idea._fiscalheirs=}")
+    print(f"{swim_idea._awardlinks=}")
+    print(f"{swim_idea._awardheirs=}")
 
-    assert len(x_world._idearoot._kids[swim_text]._fiscallinks) == 2
-    assert len(x_world._idearoot._kids[swim_text]._fiscalheirs) == 2
+    assert len(x_world._idearoot._kids[swim_text]._awardlinks) == 2
+    assert len(x_world._idearoot._kids[swim_text]._awardheirs) == 2
 
 
-def test_WorldUnit_set_fiscallink_CorrectlyCalculatesInheritedFiscalLinkWorldImportance():
+def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImportance():
     # GIVEN
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
@@ -273,13 +273,13 @@ def test_WorldUnit_set_fiscallink_CorrectlyCalculatesInheritedFiscalLinkWorldImp
     sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
     sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
     sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_fiscallink = fiscallink_shop(rico_text, credor_weight=20, debtor_weight=6)
-    carm_fiscallink = fiscallink_shop(carm_text, credor_weight=10, debtor_weight=1)
-    patr_fiscallink = fiscallink_shop(patr_text, credor_weight=10)
-    sue_world._idearoot.set_fiscallink(rico_fiscallink)
-    sue_world._idearoot.set_fiscallink(carm_fiscallink)
-    sue_world._idearoot.set_fiscallink(patr_fiscallink)
-    assert len(sue_world._idearoot._fiscallinks) == 3
+    rico_awardlink = awardlink_shop(rico_text, credor_weight=20, debtor_weight=6)
+    carm_awardlink = awardlink_shop(carm_text, credor_weight=10, debtor_weight=1)
+    patr_awardlink = awardlink_shop(patr_text, credor_weight=10)
+    sue_world._idearoot.set_awardlink(rico_awardlink)
+    sue_world._idearoot.set_awardlink(carm_awardlink)
+    sue_world._idearoot.set_awardlink(patr_awardlink)
+    assert len(sue_world._idearoot._awardlinks) == 3
 
     # WHEN
     idea_dict = sue_world.get_idea_dict()
@@ -287,11 +287,11 @@ def test_WorldUnit_set_fiscallink_CorrectlyCalculatesInheritedFiscalLinkWorldImp
     # THEN
     print(f"{idea_dict.keys()=}")
     idea_prom = idea_dict.get(get_default_real_id_roadnode())
-    assert len(idea_prom._fiscalheirs) == 3
+    assert len(idea_prom._awardheirs) == 3
 
-    bheir_rico = idea_prom._fiscalheirs.get(rico_text)
-    bheir_carm = idea_prom._fiscalheirs.get(carm_text)
-    bheir_patr = idea_prom._fiscalheirs.get(patr_text)
+    bheir_rico = idea_prom._awardheirs.get(rico_text)
+    bheir_carm = idea_prom._awardheirs.get(carm_text)
+    bheir_patr = idea_prom._awardheirs.get(patr_text)
     assert bheir_rico._world_cred == 0.5
     assert bheir_rico._world_debt == 0.75
     assert bheir_carm._world_cred == 0.25
@@ -303,7 +303,7 @@ def test_WorldUnit_set_fiscallink_CorrectlyCalculatesInheritedFiscalLinkWorldImp
 
     # world_cred_sum = 0
     # world_debt_sum = 0
-    # for belief in x_world._idearoot._fiscalheirs.values():
+    # for belief in x_world._idearoot._awardheirs.values():
     #     print(f"{belief=}")
     #     assert belief._world_cred != None
     #     assert belief._world_cred in [0.25, 0.5]
@@ -327,12 +327,12 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_fiscallink = fiscallink_shop(rico_text, credor_weight=20, debtor_weight=6)
-    carm_fiscallink = fiscallink_shop(carm_text, credor_weight=10, debtor_weight=1)
-    patr_fiscallink = fiscallink_shop(patr_text, credor_weight=10)
-    x_world._idearoot.set_fiscallink(fiscallink=rico_fiscallink)
-    x_world._idearoot.set_fiscallink(fiscallink=carm_fiscallink)
-    x_world._idearoot.set_fiscallink(fiscallink=patr_fiscallink)
+    rico_awardlink = awardlink_shop(rico_text, credor_weight=20, debtor_weight=6)
+    carm_awardlink = awardlink_shop(carm_text, credor_weight=10, debtor_weight=1)
+    patr_awardlink = awardlink_shop(patr_text, credor_weight=10)
+    x_world._idearoot.set_awardlink(awardlink=rico_awardlink)
+    x_world._idearoot.set_awardlink(awardlink=carm_awardlink)
+    x_world._idearoot.set_awardlink(awardlink=patr_awardlink)
 
     assert len(x_world._beliefs) == 3
 
@@ -358,8 +358,8 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
 
     # WHEN
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(sele_text)))
-    bl_sele = fiscallink_shop(belief_id=sele_text, credor_weight=37)
-    x_world._idearoot.set_fiscallink(fiscallink=bl_sele)
+    bl_sele = awardlink_shop(belief_id=sele_text, credor_weight=37)
+    x_world._idearoot.set_awardlink(awardlink=bl_sele)
     assert len(x_world._beliefs) == 4
     x_world.calc_world_metrics()
 
@@ -402,16 +402,16 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates3levelWorldBeliefWorldImport
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_fiscallink = fiscallink_shop(
+    rico_awardlink = awardlink_shop(
         belief_id=rico_text, credor_weight=20, debtor_weight=6
     )
-    carm_fiscallink = fiscallink_shop(
+    carm_awardlink = awardlink_shop(
         belief_id=carm_text, credor_weight=10, debtor_weight=1
     )
-    parm_fiscallink = fiscallink_shop(belief_id=patr_text, credor_weight=10)
-    x_world._idearoot._kids[swim_text].set_fiscallink(fiscallink=rico_fiscallink)
-    x_world._idearoot._kids[swim_text].set_fiscallink(fiscallink=carm_fiscallink)
-    x_world._idearoot._kids[swim_text].set_fiscallink(fiscallink=parm_fiscallink)
+    parm_awardlink = awardlink_shop(belief_id=patr_text, credor_weight=10)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=rico_awardlink)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=carm_awardlink)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=parm_awardlink)
     assert len(x_world._beliefs) == 3
 
     # WHEN
@@ -448,18 +448,18 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
     x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_fiscallink = fiscallink_shop(
+    rico_awardlink = awardlink_shop(
         belief_id=rico_text, credor_weight=20, debtor_weight=6
     )
-    carm_fiscallink = fiscallink_shop(
+    carm_awardlink = awardlink_shop(
         belief_id=carm_text, credor_weight=10, debtor_weight=1
     )
-    parm_fiscallink = fiscallink_shop(belief_id=patr_text, credor_weight=10)
-    x_world._idearoot._kids[swim_text].set_fiscallink(fiscallink=rico_fiscallink)
-    x_world._idearoot._kids[swim_text].set_fiscallink(fiscallink=carm_fiscallink)
-    x_world._idearoot._kids[swim_text].set_fiscallink(fiscallink=parm_fiscallink)
+    parm_awardlink = awardlink_shop(belief_id=patr_text, credor_weight=10)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=rico_awardlink)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=carm_awardlink)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=parm_awardlink)
 
-    # no fiscallinks attached to this one
+    # no awardlinks attached to this one
     x_world.add_l1_idea(ideaunit_shop("hunt", _weight=3))
 
     # WHEN
@@ -468,22 +468,22 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     # THEN
 
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._fiscallinks[rico_text]
+        x_world._idearoot._awardlinks[rico_text]
     assert str(excinfo.value) == f"'{rico_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._fiscallinks[carm_text]
+        x_world._idearoot._awardlinks[carm_text]
     assert str(excinfo.value) == f"'{carm_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._fiscallinks[patr_text]
+        x_world._idearoot._awardlinks[patr_text]
     assert str(excinfo.value) == f"'{patr_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._kids["hunt"]._fiscalheirs[rico_text]
+        x_world._idearoot._kids["hunt"]._awardheirs[rico_text]
     assert str(excinfo.value) == f"'{rico_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._kids["hunt"]._fiscalheirs[carm_text]
+        x_world._idearoot._kids["hunt"]._awardheirs[carm_text]
     assert str(excinfo.value) == f"'{carm_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._kids["hunt"]._fiscalheirs[patr_text]
+        x_world._idearoot._kids["hunt"]._awardheirs[patr_text]
     assert str(excinfo.value) == f"'{patr_text}'"
 
     # THEN
@@ -597,7 +597,7 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldCharIDs():
     assert world.get_beliefunit(jog_text)._chars.get(rico_text).debtor_weight == 13
 
 
-def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesFiscalLinks():
+def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesAwardLinks():
     # GIVEN
     x_world = worldunit_shop("prom")
     rico_text = "rico"
@@ -612,13 +612,13 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesFiscalLinks():
     x_world.add_idea(ideaunit_shop(camping_text), parent_road=outdoor_road)
 
     camping_idea = x_world.get_idea_obj(camping_road)
-    swim_fiscallink = fiscallink_shop(
+    swim_awardlink = awardlink_shop(
         belief_id=swim_beliefunit.belief_id, credor_weight=5, debtor_weight=3
     )
-    camping_idea.set_fiscallink(swim_fiscallink)
-    assert camping_idea._fiscallinks.get(swim_text) != None
-    assert camping_idea._fiscallinks.get(swim_text).credor_weight == 5
-    assert camping_idea._fiscallinks.get(swim_text).debtor_weight == 3
+    camping_idea.set_awardlink(swim_awardlink)
+    assert camping_idea._awardlinks.get(swim_text) != None
+    assert camping_idea._awardlinks.get(swim_text).credor_weight == 5
+    assert camping_idea._awardlinks.get(swim_text).debtor_weight == 3
 
     # WHEN
     jog_text = ",jog"
@@ -627,13 +627,13 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesFiscalLinks():
     )
 
     # THEN
-    assert camping_idea._fiscallinks.get(swim_text) is None
-    assert camping_idea._fiscallinks.get(jog_text) != None
-    assert camping_idea._fiscallinks.get(jog_text).credor_weight == 5
-    assert camping_idea._fiscallinks.get(jog_text).debtor_weight == 3
+    assert camping_idea._awardlinks.get(swim_text) is None
+    assert camping_idea._awardlinks.get(jog_text) != None
+    assert camping_idea._awardlinks.get(jog_text).credor_weight == 5
+    assert camping_idea._awardlinks.get(jog_text).debtor_weight == 3
 
 
-def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldsFiscalLinesFiscalLinksFiscalHeirs():
+def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldsAwardLinesAwardLinksAwardHeirs():
     # GIVEN
     x_world = worldunit_shop("prom")
     rico_text = "rico"
@@ -653,20 +653,20 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldsFiscalLinesFiscalLink
     x_world.add_idea(ideaunit_shop(camping_text), parent_road=outdoor_road)
 
     camping_idea = x_world.get_idea_obj(camping_road)
-    swim_fiscallink = fiscallink_shop(
+    swim_awardlink = awardlink_shop(
         belief_id=swim_beliefunit.belief_id, credor_weight=5, debtor_weight=3
     )
-    camping_idea.set_fiscallink(swim_fiscallink)
-    jog_fiscallink = fiscallink_shop(
+    camping_idea.set_awardlink(swim_awardlink)
+    jog_awardlink = awardlink_shop(
         belief_id=jog_beliefunit.belief_id, credor_weight=7, debtor_weight=10
     )
-    camping_idea.set_fiscallink(jog_fiscallink)
-    assert camping_idea._fiscallinks.get(swim_text) != None
-    assert camping_idea._fiscallinks.get(swim_text).credor_weight == 5
-    assert camping_idea._fiscallinks.get(swim_text).debtor_weight == 3
-    assert camping_idea._fiscallinks.get(jog_text) != None
-    assert camping_idea._fiscallinks.get(jog_text).credor_weight == 7
-    assert camping_idea._fiscallinks.get(jog_text).debtor_weight == 10
+    camping_idea.set_awardlink(jog_awardlink)
+    assert camping_idea._awardlinks.get(swim_text) != None
+    assert camping_idea._awardlinks.get(swim_text).credor_weight == 5
+    assert camping_idea._awardlinks.get(swim_text).debtor_weight == 3
+    assert camping_idea._awardlinks.get(jog_text) != None
+    assert camping_idea._awardlinks.get(jog_text).credor_weight == 7
+    assert camping_idea._awardlinks.get(jog_text).debtor_weight == 10
 
     # WHEN
     x_world.edit_beliefunit_belief_id(
@@ -674,10 +674,10 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldsFiscalLinesFiscalLink
     )
 
     # THEN
-    assert camping_idea._fiscallinks.get(swim_text) is None
-    assert camping_idea._fiscallinks.get(jog_text) != None
-    assert camping_idea._fiscallinks.get(jog_text).credor_weight == 12
-    assert camping_idea._fiscallinks.get(jog_text).debtor_weight == 13
+    assert camping_idea._awardlinks.get(swim_text) is None
+    assert camping_idea._awardlinks.get(jog_text) != None
+    assert camping_idea._awardlinks.get(jog_text).credor_weight == 12
+    assert camping_idea._awardlinks.get(jog_text).debtor_weight == 13
 
 
 def test_WorldUnit_add_idea_CreatesMissingBeliefs():
@@ -692,8 +692,8 @@ def test_WorldUnit_add_idea_CreatesMissingBeliefs():
     )
 
     family_text = ",family"
-    fiscallink_z = fiscallink_shop(belief_id=family_text)
-    clean_cookery_idea.set_fiscallink(fiscallink=fiscallink_z)
+    awardlink_z = awardlink_shop(belief_id=family_text)
+    clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
     assert len(x_world._beliefs) == 0
     assert x_world.get_beliefunit(family_text) is None
 
@@ -706,7 +706,7 @@ def test_WorldUnit_add_idea_CreatesMissingBeliefs():
     assert x_world.get_beliefunit(family_text)._chars in (None, {})
 
 
-def test_WorldUnit__get_filtered_fiscallinks_idea_CorrectlyFiltersIdea_fiscallinks():
+def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
     # GIVEN
     noa_text = "Noa"
     x1_world = worldunit_shop(noa_text)
@@ -721,22 +721,22 @@ def test_WorldUnit__get_filtered_fiscallinks_idea_CorrectlyFiltersIdea_fiscallin
     swim_road = x1_world.make_l1_road(swim_text)
     x1_world.add_l1_idea(ideaunit_shop(casa_text))
     x1_world.add_l1_idea(ideaunit_shop(swim_text))
-    x1_world.edit_idea_attr(swim_road, fiscallink=fiscallink_shop(xia_text))
-    x1_world.edit_idea_attr(swim_road, fiscallink=fiscallink_shop(zoa_text))
+    x1_world.edit_idea_attr(swim_road, awardlink=awardlink_shop(xia_text))
+    x1_world.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
     x1_world_swim_idea = x1_world.get_idea_obj(swim_road)
-    assert len(x1_world_swim_idea._fiscallinks) == 2
+    assert len(x1_world_swim_idea._awardlinks) == 2
     x_world = worldunit_shop(noa_text)
     x_world.add_charunit(char_id=xia_text)
 
     # WHEN
-    filtered_idea = x_world._get_filtered_fiscallinks_idea(x1_world_swim_idea)
+    filtered_idea = x_world._get_filtered_awardlinks_idea(x1_world_swim_idea)
 
     # THEN
-    assert len(filtered_idea._fiscallinks) == 1
-    assert list(filtered_idea._fiscallinks.keys()) == [xia_text]
+    assert len(filtered_idea._awardlinks) == 1
+    assert list(filtered_idea._awardlinks.keys()) == [xia_text]
 
 
-def test_WorldUnit_add_idea_CorrectlyFiltersIdea_fiscallinks():
+def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     # GIVEN
     noa_text = "Noa"
     x1_world = worldunit_shop(noa_text)
@@ -752,13 +752,13 @@ def test_WorldUnit_add_idea_CorrectlyFiltersIdea_fiscallinks():
     x1_world.add_l1_idea(ideaunit_shop(casa_text))
     x1_world.add_l1_idea(ideaunit_shop(swim_text))
     x1_world.edit_idea_attr(
-        road=swim_road, fiscallink=fiscallink_shop(belief_id=xia_text)
+        road=swim_road, awardlink=awardlink_shop(belief_id=xia_text)
     )
     x1_world.edit_idea_attr(
-        road=swim_road, fiscallink=fiscallink_shop(belief_id=zoa_text)
+        road=swim_road, awardlink=awardlink_shop(belief_id=zoa_text)
     )
     x1_world_swim_idea = x1_world.get_idea_obj(swim_road)
-    assert len(x1_world_swim_idea._fiscallinks) == 2
+    assert len(x1_world_swim_idea._awardlinks) == 2
 
     # WHEN
     x_world = worldunit_shop(noa_text)
@@ -767,8 +767,8 @@ def test_WorldUnit_add_idea_CorrectlyFiltersIdea_fiscallinks():
 
     # THEN
     x_world_swim_idea = x_world.get_idea_obj(swim_road)
-    assert len(x_world_swim_idea._fiscallinks) == 1
-    assert list(x_world_swim_idea._fiscallinks.keys()) == [xia_text]
+    assert len(x_world_swim_idea._awardlinks) == 1
+    assert list(x_world_swim_idea._awardlinks.keys()) == [xia_text]
 
 
 def test_WorldUnit_add_idea_DoesNotOverwriteBeliefs():
@@ -783,8 +783,8 @@ def test_WorldUnit_add_idea_DoesNotOverwriteBeliefs():
     )
 
     family_text = ",family"
-    fiscallink_z = fiscallink_shop(belief_id=family_text)
-    clean_cookery_idea.set_fiscallink(fiscallink=fiscallink_z)
+    awardlink_z = awardlink_shop(belief_id=family_text)
+    clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
 
     beliefunit_z = beliefunit_shop(belief_id=family_text)
     beliefunit_z.set_charlink(charlink=charlink_shop(char_id="ann1"))

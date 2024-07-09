@@ -8,7 +8,7 @@ from src._world.char import (
 from src._world.beliefunit import (
     BeliefID,
     beliefunit_shop,
-    fiscallink_shop,
+    awardlink_shop,
     get_intersection_of_chars,
 )
 from src._world.examples.example_worlds import (
@@ -76,10 +76,10 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     rico_belief = rico_text
     carm_belief = carm_text
     patr_belief = patr_text
-    yao_world._idearoot.set_fiscallink(fiscallink_shop(rico_belief, credor_weight=10))
-    yao_world._idearoot.set_fiscallink(fiscallink_shop(carm_belief, credor_weight=10))
-    yao_world._idearoot.set_fiscallink(fiscallink_shop(patr_belief, credor_weight=10))
-    assert len(yao_world._idearoot._fiscallinks) == 3
+    yao_world._idearoot.set_awardlink(awardlink_shop(rico_belief, credor_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(carm_belief, credor_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(patr_belief, credor_weight=10))
+    assert len(yao_world._idearoot._awardlinks) == 3
 
 
 def test_WorldUnit_add_charunit_CorrectlySets_chars():

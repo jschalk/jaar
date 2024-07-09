@@ -1,14 +1,14 @@
 from src._world.char import charlink_shop
 from src._world.beliefunit import (
-    FiscalLine,
-    fiscalline_shop,
+    AwardLine,
+    awardline_shop,
     BeliefUnit,
     beliefunit_shop,
     BeliefID,
-    FiscalLink,
-    fiscallink_shop,
-    fiscallinks_get_from_json,
-    fiscalheir_shop,
+    AwardLink,
+    awardlink_shop,
+    awardlinks_get_from_json,
+    awardheir_shop,
     get_from_json as beliefunits_get_from_json,
     get_beliefunit_from_dict,
     get_beliefunits_from_dict,
@@ -298,46 +298,46 @@ def test_BeliefUnit_get_beliefunits_from_dict_ReturnsCorrectObjWith_road_delimit
     assert x_beliefunits == teachers_obj_check_dict
 
 
-def test_FiscalLink_exists():
+def test_AwardLink_exists():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
 
     # WHEN
-    bikers_fiscallink = FiscalLink(belief_id=bikers_belief_id)
+    bikers_awardlink = AwardLink(belief_id=bikers_belief_id)
 
     # THEN
-    assert bikers_fiscallink.belief_id == bikers_belief_id
-    assert bikers_fiscallink.credor_weight == 1.0
-    assert bikers_fiscallink.debtor_weight == 1.0
+    assert bikers_awardlink.belief_id == bikers_belief_id
+    assert bikers_awardlink.credor_weight == 1.0
+    assert bikers_awardlink.debtor_weight == 1.0
 
 
-def test_fiscallink_shop_ReturnsCorrectObj():
+def test_awardlink_shop_ReturnsCorrectObj():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
     bikers_credor_weight = 3.0
     bikers_debtor_weight = 5.0
 
     # WHEN
-    bikers_fiscallink = fiscallink_shop(
+    bikers_awardlink = awardlink_shop(
         belief_id=bikers_belief_id,
         credor_weight=bikers_credor_weight,
         debtor_weight=bikers_debtor_weight,
     )
 
     # THEN
-    assert bikers_fiscallink.credor_weight == bikers_credor_weight
-    assert bikers_fiscallink.debtor_weight == bikers_debtor_weight
+    assert bikers_awardlink.credor_weight == bikers_credor_weight
+    assert bikers_awardlink.debtor_weight == bikers_debtor_weight
 
 
-def test_FiscalHeir_set_world_importance_CorrectlySetsAttr():
+def test_AwardHeir_set_world_importance_CorrectlySetsAttr():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
     bikers_credor_weight = 3.0
     bikers_debt_weight = 6.0
-    fiscallinks_sum_credor_weight = 60
-    fiscallinks_sum_debtor_weight = 60
+    awardlinks_sum_credor_weight = 60
+    awardlinks_sum_debtor_weight = 60
     idea_world_importance = 1
-    belief_heir_x = fiscalheir_shop(
+    belief_heir_x = awardheir_shop(
         belief_id=bikers_belief_id,
         credor_weight=bikers_credor_weight,
         debtor_weight=bikers_debt_weight,
@@ -346,8 +346,8 @@ def test_FiscalHeir_set_world_importance_CorrectlySetsAttr():
     # WHEN
     belief_heir_x.set_world_cred_debt(
         idea_world_importance=idea_world_importance,
-        fiscalheirs_credor_weight_sum=fiscallinks_sum_credor_weight,
-        fiscalheirs_debtor_weight_sum=fiscallinks_sum_debtor_weight,
+        awardheirs_credor_weight_sum=awardlinks_sum_credor_weight,
+        awardheirs_debtor_weight_sum=awardlinks_sum_debtor_weight,
     )
 
     # THEN
@@ -355,75 +355,75 @@ def test_FiscalHeir_set_world_importance_CorrectlySetsAttr():
     assert belief_heir_x._world_debt == 0.1
 
 
-def test_FiscalLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
+def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
     bikers_credor_weight = 3.0
     bikers_debtor_weight = 5.0
-    bikers_fiscallink = fiscallink_shop(
+    bikers_awardlink = awardlink_shop(
         belief_id=bikers_belief_id,
         credor_weight=bikers_credor_weight,
         debtor_weight=bikers_debtor_weight,
     )
 
-    print(f"{bikers_fiscallink}")
+    print(f"{bikers_awardlink}")
 
     # WHEN
-    biker_dict = bikers_fiscallink.get_dict()
+    biker_dict = bikers_awardlink.get_dict()
 
     # THEN
     assert biker_dict != None
     assert biker_dict == {
-        "belief_id": bikers_fiscallink.belief_id,
-        "credor_weight": bikers_fiscallink.credor_weight,
-        "debtor_weight": bikers_fiscallink.debtor_weight,
+        "belief_id": bikers_awardlink.belief_id,
+        "credor_weight": bikers_awardlink.credor_weight,
+        "debtor_weight": bikers_awardlink.debtor_weight,
     }
 
 
-def test_fiscallinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
+def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
     # GIVEN
     teacher_text = "teachers"
-    teacher_fiscallink = fiscallink_shop(
+    teacher_awardlink = awardlink_shop(
         belief_id=teacher_text, credor_weight=103, debtor_weight=155
     )
-    teacher_dict = teacher_fiscallink.get_dict()
-    fiscallinks_dict = {teacher_fiscallink.belief_id: teacher_dict}
+    teacher_dict = teacher_awardlink.get_dict()
+    awardlinks_dict = {teacher_awardlink.belief_id: teacher_dict}
 
-    teachers_json = get_json_from_dict(dict_x=fiscallinks_dict)
+    teachers_json = get_json_from_dict(dict_x=awardlinks_dict)
     assert teachers_json != None
     assert x_is_json(json_x=teachers_json)
 
     # WHEN
-    fiscallinks_obj_dict = fiscallinks_get_from_json(fiscallinks_json=teachers_json)
+    awardlinks_obj_dict = awardlinks_get_from_json(awardlinks_json=teachers_json)
 
     # THEN
-    assert fiscallinks_obj_dict != None
-    teachers_obj_check_dict = {teacher_fiscallink.belief_id: teacher_fiscallink}
-    print(f"    {fiscallinks_obj_dict=}")
+    assert awardlinks_obj_dict != None
+    teachers_obj_check_dict = {teacher_awardlink.belief_id: teacher_awardlink}
+    print(f"    {awardlinks_obj_dict=}")
     print(f"{teachers_obj_check_dict=}")
-    assert fiscallinks_obj_dict == teachers_obj_check_dict
+    assert awardlinks_obj_dict == teachers_obj_check_dict
 
 
-def test_FiscalLine_exists():
+def test_AwardLine_exists():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
     bikers_world_cred = 0.33
     bikers_world_debt = 0.55
 
     # WHEN
-    bikers_fiscalline = FiscalLine(
+    bikers_awardline = AwardLine(
         belief_id=bikers_belief_id,
         _world_cred=bikers_world_cred,
         _world_debt=bikers_world_debt,
     )
 
     # THEN
-    assert bikers_fiscalline.belief_id == bikers_belief_id
-    assert bikers_fiscalline._world_cred == bikers_world_cred
-    assert bikers_fiscalline._world_debt == bikers_world_debt
+    assert bikers_awardline.belief_id == bikers_belief_id
+    assert bikers_awardline._world_cred == bikers_world_cred
+    assert bikers_awardline._world_debt == bikers_world_debt
 
 
-def test_fiscalline_shop_ReturnsCorrectObj_exists():
+def test_awardline_shop_ReturnsCorrectObj_exists():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
     bikers_belief_id = bikers_belief_id
@@ -431,31 +431,31 @@ def test_fiscalline_shop_ReturnsCorrectObj_exists():
     bikers_world_debt = 0.55
 
     # WHEN
-    biker_fiscalline = fiscalline_shop(
+    biker_awardline = awardline_shop(
         belief_id=bikers_belief_id,
         _world_cred=bikers_world_cred,
         _world_debt=bikers_world_debt,
     )
 
-    assert biker_fiscalline != None
-    assert biker_fiscalline.belief_id == bikers_belief_id
-    assert biker_fiscalline._world_cred == bikers_world_cred
-    assert biker_fiscalline._world_debt == bikers_world_debt
+    assert biker_awardline != None
+    assert biker_awardline.belief_id == bikers_belief_id
+    assert biker_awardline._world_cred == bikers_world_cred
+    assert biker_awardline._world_debt == bikers_world_debt
 
 
-def test_FiscalLine_add_world_cred_debt_CorrectlyModifiesAttr():
+def test_AwardLine_add_world_cred_debt_CorrectlyModifiesAttr():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
-    bikers_fiscalline = fiscalline_shop(
+    bikers_awardline = awardline_shop(
         belief_id=bikers_belief_id, _world_cred=0.33, _world_debt=0.55
     )
-    assert bikers_fiscalline.belief_id == bikers_belief_id
-    assert bikers_fiscalline._world_cred == 0.33
-    assert bikers_fiscalline._world_debt == 0.55
+    assert bikers_awardline.belief_id == bikers_belief_id
+    assert bikers_awardline._world_cred == 0.33
+    assert bikers_awardline._world_debt == 0.55
 
     # WHEN
-    bikers_fiscalline.add_world_cred_debt(world_cred=0.11, world_debt=0.2)
+    bikers_awardline.add_world_cred_debt(world_cred=0.11, world_debt=0.2)
 
     # THEN
-    assert bikers_fiscalline._world_cred == 0.44
-    assert bikers_fiscalline._world_debt == 0.75
+    assert bikers_awardline._world_cred == 0.44
+    assert bikers_awardline._world_debt == 0.75

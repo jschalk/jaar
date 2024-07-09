@@ -350,19 +350,19 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     sports_road = create_road(x_real_id, sports_text)
     knee_text = "knee"
     knee_road = create_road(sports_road, knee_text)
-    x_category = "world_idea_fiscallink"
+    x_category = "world_idea_awardlink"
     road_text = "road"
     belief_id_text = "belief_id"
     swimmers_text = ",Swimmers"
-    sports_fiscallink_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_fiscallink_atomunit.set_required_arg(belief_id_text, swimmers_text)
-    sports_fiscallink_atomunit.set_required_arg(road_text, sports_road)
-    knee_fiscallink_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_fiscallink_atomunit.set_required_arg(belief_id_text, swimmers_text)
-    knee_fiscallink_atomunit.set_required_arg(road_text, knee_road)
+    sports_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
+    sports_awardlink_atomunit.set_required_arg(belief_id_text, swimmers_text)
+    sports_awardlink_atomunit.set_required_arg(road_text, sports_road)
+    knee_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
+    knee_awardlink_atomunit.set_required_arg(belief_id_text, swimmers_text)
+    knee_awardlink_atomunit.set_required_arg(road_text, knee_road)
     x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(knee_fiscallink_atomunit)
-    x_changeunit.set_atomunit(sports_fiscallink_atomunit)
+    x_changeunit.set_atomunit(knee_awardlink_atomunit)
+    x_changeunit.set_atomunit(sports_awardlink_atomunit)
 
     # WHEN
     x_atom_order_list = x_changeunit.get_sorted_atomunits()
@@ -371,8 +371,8 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     assert len(x_atom_order_list) == 2
     # for atomunit in x_atom_order_list:
     #     print(f"{atomunit.required_args=}")
-    assert x_atom_order_list[0] == sports_fiscallink_atomunit
-    assert x_atom_order_list[1] == knee_fiscallink_atomunit
+    assert x_atom_order_list[0] == sports_awardlink_atomunit
+    assert x_atom_order_list[1] == knee_awardlink_atomunit
     # for crud_text, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_text=}")
     #     print(f"{len(atom_list)=}")

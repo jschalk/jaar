@@ -209,7 +209,7 @@ def beliefunit_shop(
 
 
 @dataclass
-class FiscalLink(BeliefCore):
+class AwardLink(BeliefCore):
     credor_weight: float = 1.0
     debtor_weight: float = 1.0
 
@@ -222,52 +222,52 @@ class FiscalLink(BeliefCore):
 
     def meld(
         self,
-        exterior_fiscallink,
+        exterior_awardlink,
         exterior_meld_strategy: str,
         src_meld_strategy: str,
     ):
         self.credor_weight = get_meld_weight(
             src_weight=self.credor_weight,
             src_meld_strategy=src_meld_strategy,
-            exterior_weight=exterior_fiscallink.credor_weight,
+            exterior_weight=exterior_awardlink.credor_weight,
             exterior_meld_strategy=exterior_meld_strategy,
         )
         self.debtor_weight = get_meld_weight(
             src_weight=self.debtor_weight,
             src_meld_strategy=src_meld_strategy,
-            exterior_weight=exterior_fiscallink.debtor_weight,
+            exterior_weight=exterior_awardlink.debtor_weight,
             exterior_meld_strategy=exterior_meld_strategy,
         )
 
 
-# class FiscalLinksshop:
-def fiscallinks_get_from_json(fiscallinks_json: str) -> dict[BeliefID, FiscalLink]:
-    fiscallinks_dict = get_dict_from_json(json_x=fiscallinks_json)
-    return fiscallinks_get_from_dict(x_dict=fiscallinks_dict)
+# class AwardLinksshop:
+def awardlinks_get_from_json(awardlinks_json: str) -> dict[BeliefID, AwardLink]:
+    awardlinks_dict = get_dict_from_json(json_x=awardlinks_json)
+    return awardlinks_get_from_dict(x_dict=awardlinks_dict)
 
 
-def fiscallinks_get_from_dict(x_dict: dict) -> dict[BeliefID, FiscalLink]:
-    fiscallinks = {}
-    for fiscallinks_dict in x_dict.values():
-        x_belief = fiscallink_shop(
-            belief_id=fiscallinks_dict["belief_id"],
-            credor_weight=fiscallinks_dict["credor_weight"],
-            debtor_weight=fiscallinks_dict["debtor_weight"],
+def awardlinks_get_from_dict(x_dict: dict) -> dict[BeliefID, AwardLink]:
+    awardlinks = {}
+    for awardlinks_dict in x_dict.values():
+        x_belief = awardlink_shop(
+            belief_id=awardlinks_dict["belief_id"],
+            credor_weight=awardlinks_dict["credor_weight"],
+            debtor_weight=awardlinks_dict["debtor_weight"],
         )
-        fiscallinks[x_belief.belief_id] = x_belief
-    return fiscallinks
+        awardlinks[x_belief.belief_id] = x_belief
+    return awardlinks
 
 
-def fiscallink_shop(
+def awardlink_shop(
     belief_id: BeliefID, credor_weight: float = None, debtor_weight: float = None
-) -> FiscalLink:
+) -> AwardLink:
     credor_weight = get_1_if_None(credor_weight)
     debtor_weight = get_1_if_None(debtor_weight)
-    return FiscalLink(belief_id, credor_weight, debtor_weight=debtor_weight)
+    return AwardLink(belief_id, credor_weight, debtor_weight=debtor_weight)
 
 
 @dataclass
-class FiscalHeir(BeliefCore):
+class AwardHeir(BeliefCore):
     credor_weight: float = 1.0
     debtor_weight: float = 1.0
     _world_cred: float = None
@@ -276,29 +276,29 @@ class FiscalHeir(BeliefCore):
     def set_world_cred_debt(
         self,
         idea_world_importance,
-        fiscalheirs_credor_weight_sum: float,
-        fiscalheirs_debtor_weight_sum: float,
+        awardheirs_credor_weight_sum: float,
+        awardheirs_debtor_weight_sum: float,
     ):
-        credor_importance_ratio = self.credor_weight / fiscalheirs_credor_weight_sum
+        credor_importance_ratio = self.credor_weight / awardheirs_credor_weight_sum
         self._world_cred = idea_world_importance * credor_importance_ratio
-        debtor_importance_ratio = self.debtor_weight / fiscalheirs_debtor_weight_sum
+        debtor_importance_ratio = self.debtor_weight / awardheirs_debtor_weight_sum
         self._world_debt = idea_world_importance * debtor_importance_ratio
 
 
-def fiscalheir_shop(
+def awardheir_shop(
     belief_id: BeliefID,
     credor_weight: float = None,
     debtor_weight: float = None,
     _world_cred: float = None,
     _world_debt: float = None,
-) -> FiscalHeir:
+) -> AwardHeir:
     credor_weight = get_1_if_None(credor_weight)
     debtor_weight = get_1_if_None(debtor_weight)
-    return FiscalHeir(belief_id, credor_weight, debtor_weight, _world_cred, _world_debt)
+    return AwardHeir(belief_id, credor_weight, debtor_weight, _world_cred, _world_debt)
 
 
 @dataclass
-class FiscalLine(BeliefCore):
+class AwardLine(BeliefCore):
     _world_cred: float = None
     _world_debt: float = None
 
@@ -314,8 +314,8 @@ class FiscalLine(BeliefCore):
             self._world_debt = 0
 
 
-def fiscalline_shop(belief_id: BeliefID, _world_cred: float, _world_debt: float):
-    return FiscalLine(belief_id, _world_cred=_world_cred, _world_debt=_world_debt)
+def awardline_shop(belief_id: BeliefID, _world_cred: float, _world_debt: float):
+    return AwardLine(belief_id, _world_cred=_world_cred, _world_debt=_world_debt)
 
 
 def get_intersection_of_chars(

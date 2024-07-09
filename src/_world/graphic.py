@@ -493,7 +493,7 @@ def worldunit_explanation4() -> plotly_Figure:
     return fig
 
 
-def fiscal_explanation0() -> plotly_Figure:
+def award_explanation0() -> plotly_Figure:
     fig = get_worldunit_base_fig()
 
     # Add shapes

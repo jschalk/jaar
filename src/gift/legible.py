@@ -30,12 +30,12 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
     x_list = [atom_delete(), "world_ideaunit"]
     world_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_fiscallink"]
-    world_idea_fiscallink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_fiscallink"]
-    world_idea_fiscallink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_fiscallink"]
-    world_idea_fiscallink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "world_idea_awardlink"]
+    world_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "world_idea_awardlink"]
+    world_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "world_idea_awardlink"]
+    world_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "world_idea_reasonunit"]
     world_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -110,17 +110,17 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
             leg_list, world_ideaunit_delete_dict, x_world
         )
 
-    if world_idea_fiscallink_insert_dict != None:
-        add_world_idea_fiscallink_insert_to_legible_list(
-            leg_list, world_idea_fiscallink_insert_dict, x_world
+    if world_idea_awardlink_insert_dict != None:
+        add_world_idea_awardlink_insert_to_legible_list(
+            leg_list, world_idea_awardlink_insert_dict, x_world
         )
-    if world_idea_fiscallink_update_dict != None:
-        add_world_idea_fiscallink_update_to_legible_list(
-            leg_list, world_idea_fiscallink_update_dict, x_world
+    if world_idea_awardlink_update_dict != None:
+        add_world_idea_awardlink_update_to_legible_list(
+            leg_list, world_idea_awardlink_update_dict, x_world
         )
-    if world_idea_fiscallink_delete_dict != None:
-        add_world_idea_fiscallink_delete_to_legible_list(
-            leg_list, world_idea_fiscallink_delete_dict, x_world
+    if world_idea_awardlink_delete_dict != None:
+        add_world_idea_awardlink_delete_to_legible_list(
+            leg_list, world_idea_awardlink_delete_dict, x_world
         )
 
     if world_idea_reasonunit_insert_dict != None:
@@ -497,45 +497,45 @@ def add_world_ideaunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_fiscallink_insert_to_legible_list(
-    legible_list: list[str], idea_fiscallink_insert_dict: dict, x_world: WorldUnit
+def add_world_idea_awardlink_insert_to_legible_list(
+    legible_list: list[str], idea_awardlink_insert_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_fiscallink_insert_dict.values():
-        for idea_fiscallink_atom in road_dict.values():
-            belief_id_value = idea_fiscallink_atom.get_value("belief_id")
-            road_value = idea_fiscallink_atom.get_value("road")
-            credor_weight_value = idea_fiscallink_atom.get_value("credor_weight")
-            debtor_weight_value = idea_fiscallink_atom.get_value("debtor_weight")
-            x_str = f"Fiscallink created for belief {belief_id_value} for idea '{road_value}' with credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
+    for road_dict in idea_awardlink_insert_dict.values():
+        for idea_awardlink_atom in road_dict.values():
+            belief_id_value = idea_awardlink_atom.get_value("belief_id")
+            road_value = idea_awardlink_atom.get_value("road")
+            credor_weight_value = idea_awardlink_atom.get_value("credor_weight")
+            debtor_weight_value = idea_awardlink_atom.get_value("debtor_weight")
+            x_str = f"Awardlink created for belief {belief_id_value} for idea '{road_value}' with credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_idea_fiscallink_update_to_legible_list(
-    legible_list: list[str], idea_fiscallink_update_dict: dict, x_world: WorldUnit
+def add_world_idea_awardlink_update_to_legible_list(
+    legible_list: list[str], idea_awardlink_update_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_fiscallink_update_dict.values():
-        for idea_fiscallink_atom in road_dict.values():
-            belief_id_value = idea_fiscallink_atom.get_value("belief_id")
-            road_value = idea_fiscallink_atom.get_value("road")
-            credor_weight_value = idea_fiscallink_atom.get_value("credor_weight")
-            debtor_weight_value = idea_fiscallink_atom.get_value("debtor_weight")
+    for road_dict in idea_awardlink_update_dict.values():
+        for idea_awardlink_atom in road_dict.values():
+            belief_id_value = idea_awardlink_atom.get_value("belief_id")
+            road_value = idea_awardlink_atom.get_value("road")
+            credor_weight_value = idea_awardlink_atom.get_value("credor_weight")
+            debtor_weight_value = idea_awardlink_atom.get_value("debtor_weight")
             if credor_weight_value != None and debtor_weight_value != None:
-                x_str = f"Fiscallink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
+                x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
             elif credor_weight_value != None and debtor_weight_value is None:
-                x_str = f"Fiscallink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value}."
+                x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value}."
             elif credor_weight_value is None and debtor_weight_value != None:
-                x_str = f"Fiscallink has been transited for belief {belief_id_value} for idea '{road_value}'. Now debtor_weight={debtor_weight_value}."
+                x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now debtor_weight={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_idea_fiscallink_delete_to_legible_list(
-    legible_list: list[str], idea_fiscallink_delete_dict: dict, x_world: WorldUnit
+def add_world_idea_awardlink_delete_to_legible_list(
+    legible_list: list[str], idea_awardlink_delete_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_fiscallink_delete_dict.values():
-        for idea_fiscallink_atom in road_dict.values():
-            belief_id_value = idea_fiscallink_atom.get_value("belief_id")
-            road_value = idea_fiscallink_atom.get_value("road")
-            x_str = f"Fiscallink for belief {belief_id_value}, idea '{road_value}' has been deleted."
+    for road_dict in idea_awardlink_delete_dict.values():
+        for idea_awardlink_atom in road_dict.values():
+            belief_id_value = idea_awardlink_atom.get_value("belief_id")
+            road_value = idea_awardlink_atom.get_value("road")
+            x_str = f"Awardlink for belief {belief_id_value}, idea '{road_value}' has been deleted."
             legible_list.append(x_str)
 
 

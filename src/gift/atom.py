@@ -7,7 +7,7 @@ from src._instrument.db_tool import create_insert_sqlstr, RowData
 from src._road.road import create_road
 from src._world.reason_idea import factunit_shop
 from src._world.char import charunit_shop, charlink_shop
-from src._world.beliefunit import beliefunit_shop, fiscallink_shop
+from src._world.beliefunit import beliefunit_shop, awardlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import WorldUnit
 from src.gift.atom_config import (
@@ -271,32 +271,32 @@ def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_idea_fiscallink_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_awardlink_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_world.edit_idea_attr(
         road=x_atom.get_value("road"),
-        fiscallink_del=x_atom.get_value("belief_id"),
+        awardlink_del=x_atom.get_value("belief_id"),
     )
 
 
-def _modify_world_idea_fiscallink_update(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_awardlink_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_idea = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_fiscallink = x_idea._fiscallinks.get(x_atom.get_value("belief_id"))
+    x_awardlink = x_idea._awardlinks.get(x_atom.get_value("belief_id"))
     x_credor_weight = x_atom.get_value("credor_weight")
-    if x_credor_weight != None and x_fiscallink.credor_weight != x_credor_weight:
-        x_fiscallink.credor_weight = x_credor_weight
+    if x_credor_weight != None and x_awardlink.credor_weight != x_credor_weight:
+        x_awardlink.credor_weight = x_credor_weight
     x_debtor_weight = x_atom.get_value("debtor_weight")
-    if x_debtor_weight != None and x_fiscallink.debtor_weight != x_debtor_weight:
-        x_fiscallink.debtor_weight = x_debtor_weight
-    x_world.edit_idea_attr(x_atom.get_value("road"), fiscallink=x_fiscallink)
+    if x_debtor_weight != None and x_awardlink.debtor_weight != x_debtor_weight:
+        x_awardlink.debtor_weight = x_debtor_weight
+    x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
-def _modify_world_idea_fiscallink_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_fiscallink = fiscallink_shop(
+def _modify_world_idea_awardlink_insert(x_world: WorldUnit, x_atom: AtomUnit):
+    x_awardlink = awardlink_shop(
         belief_id=x_atom.get_value("belief_id"),
         credor_weight=x_atom.get_value("credor_weight"),
         debtor_weight=x_atom.get_value("debtor_weight"),
     )
-    x_world.edit_idea_attr(x_atom.get_value("road"), fiscallink=x_fiscallink)
+    x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
 def _modify_world_idea_factunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
@@ -446,13 +446,13 @@ def _modify_world_ideaunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_ideaunit_insert(x_world, x_atom)
 
 
-def _modify_world_idea_fiscallink(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_awardlink(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_fiscallink_delete(x_world, x_atom)
+        _modify_world_idea_awardlink_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_idea_fiscallink_update(x_world, x_atom)
+        _modify_world_idea_awardlink_update(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_fiscallink_insert(x_world, x_atom)
+        _modify_world_idea_awardlink_insert(x_world, x_atom)
 
 
 def _modify_world_idea_factunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -507,8 +507,8 @@ def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_char_belieflink(x_world, x_atom)
     elif x_atom.category == "world_ideaunit":
         _modify_world_ideaunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_fiscallink":
-        _modify_world_idea_fiscallink(x_world, x_atom)
+    elif x_atom.category == "world_idea_awardlink":
+        _modify_world_idea_awardlink(x_world, x_atom)
     elif x_atom.category == "world_idea_factunit":
         _modify_world_idea_factunit(x_world, x_atom)
     elif x_atom.category == "world_idea_reasonunit":
@@ -531,7 +531,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._char_debtor_pool != y_obj._char_debtor_pool
             or x_obj._pixel != y_obj._pixel
         )
-    elif category in {"world_char_belieflink", "world_idea_fiscallink"}:
+    elif category in {"world_char_belieflink", "world_idea_awardlink"}:
         return (x_obj.credor_weight != y_obj.credor_weight) or (
             x_obj.debtor_weight != y_obj.debtor_weight
         )

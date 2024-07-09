@@ -1,6 +1,6 @@
 from src._instrument.python import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
-from src._world.beliefunit import beliefunit_shop, fiscallink_shop
+from src._world.beliefunit import beliefunit_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.healer import healerhold_shop
 from src._world.reason_culture import cultureunit_shop
@@ -375,9 +375,9 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     tim_cultureunit = cultureunit_shop()
     tim_cultureunit.set_allyhold(belief_id=tim_text)
     zia_world.edit_idea_attr(shave_road, cultureunit=tim_cultureunit)
-    zia_world.edit_idea_attr(shave_road, fiscallink=fiscallink_shop(tim_text))
-    zia_world.edit_idea_attr(shave_road, fiscallink=fiscallink_shop(sue_text))
-    zia_world.edit_idea_attr(zia_world._real_id, fiscallink=fiscallink_shop(sue_text))
+    zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(tim_text))
+    zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
+    zia_world.edit_idea_attr(zia_world._real_id, awardlink=awardlink_shop(sue_text))
     # add healerhold to shave ideaunit
     run_healerhold = healerhold_shop({run_text})
     zia_world.edit_idea_attr(shave_road, healerhold=run_healerhold)
@@ -423,7 +423,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._cultureunit == zia_world._idearoot._cultureunit
     assert json_idearoot._cultureunit == run_cultureunit
     assert len(json_idearoot._factunits) == 1
-    assert len(json_idearoot._fiscallinks) == 1
+    assert len(json_idearoot._awardlinks) == 1
 
     assert len(json_world._idearoot._kids) == 2
 
@@ -445,7 +445,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_shave_idea._originunit == zia_shave_idea._originunit
     print(f"{json_shave_idea._healerhold=}")
     assert json_shave_idea._healerhold == zia_shave_idea._healerhold
-    assert len(json_shave_idea._fiscallinks) == 2
+    assert len(json_shave_idea._awardlinks) == 2
     assert len(json_shave_idea._factunits) == 1
     assert zia_shave_idea._problem_bool
     assert json_shave_idea._problem_bool == zia_shave_idea._problem_bool

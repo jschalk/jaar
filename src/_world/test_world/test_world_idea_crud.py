@@ -3,7 +3,7 @@ from src._world.examples.example_worlds import get_world_with_4_levels
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import reasonunit_shop, factunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefunit import fiscallink_shop
+from src._world.beliefunit import awardlink_shop
 from pytest import raises as pytest_raises
 from src._road.road import default_road_delimiter_if_none
 
@@ -485,20 +485,20 @@ def test_WorldUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     _all_char_debt_new = sue_world._idearoot._kids[casa_text]._all_char_debt
     assert _all_char_debt_new == 59
 
-    # _fiscallink: dict = None,
-    sue_world._idearoot._kids[casa_text]._fiscallinks = {
-        "fun": fiscallink_shop(belief_id="fun", credor_weight=1, debtor_weight=7)
+    # _awardlink: dict = None,
+    sue_world._idearoot._kids[casa_text]._awardlinks = {
+        "fun": awardlink_shop(belief_id="fun", credor_weight=1, debtor_weight=7)
     }
-    _fiscallinks = sue_world._idearoot._kids[casa_text]._fiscallinks
-    assert _fiscallinks == {
-        "fun": fiscallink_shop(belief_id="fun", credor_weight=1, debtor_weight=7)
+    _awardlinks = sue_world._idearoot._kids[casa_text]._awardlinks
+    assert _awardlinks == {
+        "fun": awardlink_shop(belief_id="fun", credor_weight=1, debtor_weight=7)
     }
     sue_world.edit_idea_attr(
         road=casa_road,
-        fiscallink=fiscallink_shop(belief_id="fun", credor_weight=4, debtor_weight=8),
+        awardlink=awardlink_shop(belief_id="fun", credor_weight=4, debtor_weight=8),
     )
-    assert sue_world._idearoot._kids[casa_text]._fiscallinks == {
-        "fun": fiscallink_shop(belief_id="fun", credor_weight=4, debtor_weight=8)
+    assert sue_world._idearoot._kids[casa_text]._awardlinks == {
+        "fun": awardlink_shop(belief_id="fun", credor_weight=4, debtor_weight=8)
     }
 
     # _is_expanded: dict = None,
