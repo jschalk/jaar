@@ -2,36 +2,24 @@
     "atom_category": "world_char_beliefhold",
     "attributes": {
         "belief_id": {
-            "sort_order": 1,
-            "validate": [
-                "must_be_str"
-            ]
+            "column_order": 3,
+            "sort_order": 1
         },
         "char_id": {
-            "sort_order": 0,
-            "validate": [
-                "must_be_RoadNode"
-            ]
+            "column_order": 2,
+            "sort_order": 0
         },
         "credor_weight": {
-            "validate": [
-                "must_be_number"
-            ]
+            "column_order": 4
         },
         "debtor_weight": {
-            "validate": [
-                "must_be_number"
-            ]
+            "column_order": 5
         },
         "owner_id": {
-            "validate": [
-                "must_be_RoadNode"
-            ]
+            "column_order": 1
         },
         "real_id": {
-            "validate": [
-                "must_be_RoadNode"
-            ]
+            "column_order": 0
         }
     }
 }

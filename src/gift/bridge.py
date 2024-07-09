@@ -60,8 +60,8 @@ def pledge_str() -> str:
     return "pledge"
 
 
-def validate_str() -> str:
-    return "validate"
+def column_order_str() -> str:
+    return "column_order"
 
 
 def must_be_roadnode_str() -> str:
@@ -155,6 +155,9 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
     d2_list = []
 
     if bridge_name == jaar_format_0001_char_v0_0_0():
+        bridge_arribute_dict = get_bridge_attribute_dict(bridge_name)
+        # for bridge_arribute in bridge_arribute_dict.values():
+
         d2_list = [
             [
                 x_atomunit.get_value(char_id_str()),

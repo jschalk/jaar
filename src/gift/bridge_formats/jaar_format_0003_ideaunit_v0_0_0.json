@@ -2,30 +2,20 @@
     "atom_category": "world_ideaunit",
     "attributes": {
         "owner_id": {
-            "validate": [
-                "must_be_RoadNode"
-            ]
+            "column_order": 1
         },
         "pledge": {
-            "validate": [
-                "must_be_bool"
-            ]
+            "column_order": 2
         },
         "real_id": {
-            "validate": [
-                "must_be_RoadNode"
-            ]
+            "column_order": 0
         },
         "road": {
-            "sort_order": 1,
-            "validate": [
-                "must_be_RoadUnit"
-            ]
+            "column_order": 3,
+            "sort_order": 1
         },
         "weight": {
-            "validate": [
-                "must_be_number"
-            ]
+            "column_order": 4
         }
     }
 }

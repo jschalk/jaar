@@ -39,7 +39,7 @@ from src.gift.bridge import (
     char_pool_str,
     debtor_weight_str,
     credor_weight_str,
-    validate_str,
+    column_order_str,
     must_be_str,
     must_be_roadnode_str,
     must_be_roadunit_str,
@@ -54,9 +54,6 @@ from src.gift.bridge import (
     _get_headers_list,
     create_bridge_dataframe,
 )
-
-# from src.gift.examples.gift_env import get_codespace_gift_dir
-from os.path import exists as os_path_exists
 
 
 def test_str_functions_ReturnCorrectObjs():
@@ -112,12 +109,7 @@ def test_create_bridge_dataframe_ReturnsCorrectObj():
     # GIVEN / WHEN
     x_df = create_bridge_dataframe(jaar_format_0001_char_v0_0_0())
     # THEN
-    # print(f"{x_df.columns=}")
     assert list(x_df.columns) == _get_headers_list(jaar_format_0001_char_v0_0_0())
-
-    # print(f"{list(x_df.to_records())=}")
-    # print(f"{x_df.to_records()=}")
-    # print(f"{list(x_df.to_records())=}")
 
 
 def for_all_bridges_create_bridge_dataframe():
@@ -170,18 +162,18 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0(
     assert credor_weight_dict != None
     assert len(bridge_dict) == 6
 
-    real_id_validate = real_id_dict.get(validate_str())
-    owner_id_validate = owner_id_dict.get(validate_str())
-    char_id_validate = char_id_dict.get(validate_str())
-    char_pool_validate = char_pool_dict.get(validate_str())
-    debtor_weight_validate = debtor_weight_dict.get(validate_str())
-    credor_weight_validate = credor_weight_dict.get(validate_str())
-    assert real_id_validate == [must_be_roadnode_str()]
-    assert owner_id_validate == [must_be_roadnode_str()]
-    assert char_id_validate == [must_be_roadnode_str()]
-    assert char_pool_validate == [must_be_number_str()]
-    assert debtor_weight_validate == [must_be_number_str()]
-    assert credor_weight_validate == [must_be_number_str()]
+    real_id_column_order = real_id_dict.get(column_order_str())
+    owner_id_column_order = owner_id_dict.get(column_order_str())
+    char_id_column_order = char_id_dict.get(column_order_str())
+    char_pool_column_order = char_pool_dict.get(column_order_str())
+    debtor_weight_column_order = debtor_weight_dict.get(column_order_str())
+    credor_weight_column_order = credor_weight_dict.get(column_order_str())
+    assert real_id_column_order == 0
+    assert owner_id_column_order == 1
+    assert char_pool_column_order == 2
+    assert char_id_column_order == 3
+    assert debtor_weight_column_order == 5
+    assert credor_weight_column_order == 4
 
 
 def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_0_0():
@@ -206,18 +198,12 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v
     assert credor_weight_dict != None
     assert len(bridge_dict) == 6
 
-    real_id_validate = real_id_dict.get(validate_str())
-    owner_id_validate = owner_id_dict.get(validate_str())
-    char_id_validate = char_id_dict.get(validate_str())
-    belief_id_validate = belief_id_dict.get(validate_str())
-    debtor_weight_validate = debtor_weight_dict.get(validate_str())
-    credor_weight_validate = credor_weight_dict.get(validate_str())
-    assert real_id_validate == [must_be_roadnode_str()]
-    assert owner_id_validate == [must_be_roadnode_str()]
-    assert char_id_validate == [must_be_roadnode_str()]
-    assert belief_id_validate == [must_be_str()]
-    assert debtor_weight_validate == [must_be_number_str()]
-    assert credor_weight_validate == [must_be_number_str()]
+    assert real_id_dict.get(column_order_str()) == 0
+    assert owner_id_dict.get(column_order_str()) == 1
+    assert char_id_dict.get(column_order_str()) == 2
+    assert belief_id_dict.get(column_order_str()) == 3
+    assert debtor_weight_dict.get(column_order_str()) == 5
+    assert credor_weight_dict.get(column_order_str()) == 4
 
 
 def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
@@ -240,13 +226,8 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_
     assert pledge_dict != None
     assert len(bridge_dict) == 5
 
-    real_id_validate = real_id_dict.get(validate_str())
-    owner_id_validate = owner_id_dict.get(validate_str())
-    road_id_validate = road_dict.get(validate_str())
-    weight_validate = weight_dict.get(validate_str())
-    pledge_validate = pledge_dict.get(validate_str())
-    assert real_id_validate == [must_be_roadnode_str()]
-    assert owner_id_validate == [must_be_roadnode_str()]
-    assert road_id_validate == [must_be_roadunit_str()]
-    assert weight_validate == [must_be_number_str()]
-    assert pledge_validate == [must_be_bool_str()]
+    assert real_id_dict.get(column_order_str()) == 0
+    assert owner_id_dict.get(column_order_str()) == 1
+    assert road_dict.get(column_order_str()) == 3
+    assert weight_dict.get(column_order_str()) == 4
+    assert pledge_dict.get(column_order_str()) == 2
