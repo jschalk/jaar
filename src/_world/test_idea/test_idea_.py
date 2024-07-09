@@ -519,8 +519,8 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     )
     factunit_x = factunit_shop(base=week_road, pick=week_road, open=5, nigh=59)
     casa_idea.set_factunit(factunit=factunit_x)
-    casa_idea._originunit.set_originlink(char_id="Ray", weight=None)
-    casa_idea._originunit.set_originlink(char_id="Lei", weight=4)
+    casa_idea._originunit.set_originhold(char_id="Ray", weight=None)
+    casa_idea._originunit.set_originhold(char_id="Lei", weight=4)
     x_begin = 11
     x_close = 12
     x_addin = 13
@@ -599,7 +599,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     x_cultureunit.set_allyhold(belief_id=yao_text)
 
     x_originunit = casa_idea._originunit
-    x_originunit.set_originlink(yao_text, 1)
+    x_originunit.set_originhold(yao_text, 1)
 
     clean_text = "clean"
     casa_idea.add_kid(ideaunit_shop(clean_text))

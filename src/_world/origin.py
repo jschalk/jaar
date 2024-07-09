@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class OriginLink:
+class OriginHold:
     char_id: CharID
     weight: float
 
@@ -16,43 +16,43 @@ class OriginLink:
         }
 
 
-def originlink_shop(char_id: CharID, weight: float = None) -> OriginLink:
+def originhold_shop(char_id: CharID, weight: float = None) -> OriginHold:
     if weight is None:
         weight = 1
-    return OriginLink(char_id=char_id, weight=weight)
+    return OriginHold(char_id=char_id, weight=weight)
 
 
 @dataclass
 class OriginUnit:
-    _links: dict[CharID, OriginLink] = None
+    _links: dict[CharID, OriginHold] = None
 
-    def set_originlink(self, char_id: CharID, weight: float):
-        self._links[char_id] = originlink_shop(char_id=char_id, weight=weight)
+    def set_originhold(self, char_id: CharID, weight: float):
+        self._links[char_id] = originhold_shop(char_id=char_id, weight=weight)
 
-    def del_originlink(self, char_id: CharID):
+    def del_originhold(self, char_id: CharID):
         self._links.pop(char_id)
 
     def get_dict(self) -> dict[str, str]:
-        return {"_links": self.get_originlinks_dict()}
+        return {"_links": self.get_originholds_dict()}
 
-    def get_originlinks_dict(self):
+    def get_originholds_dict(self):
         x_dict = {}
         if self._links != None:
-            for originlink_x in self._links.values():
-                x_dict[originlink_x.char_id] = originlink_x.get_dict()
+            for originhold_x in self._links.values():
+                x_dict[originhold_x.char_id] = originhold_x.get_dict()
         return x_dict
 
 
-def originunit_shop(_links: dict[CharID, OriginLink] = None) -> OriginUnit:
+def originunit_shop(_links: dict[CharID, OriginHold] = None) -> OriginUnit:
     return OriginUnit(_links=get_empty_dict_if_none(_links))
 
 
 def originunit_get_from_dict(x_dict: dict) -> OriginUnit:
     originunit_x = originunit_shop()
     with contextlib_suppress(KeyError):
-        originlinks_dict = x_dict["_links"]
-        for originlink_dict in originlinks_dict.values():
-            originunit_x.set_originlink(
-                char_id=originlink_dict["char_id"], weight=originlink_dict["weight"]
+        originholds_dict = x_dict["_links"]
+        for originhold_dict in originholds_dict.values():
+            originunit_x.set_originhold(
+                char_id=originhold_dict["char_id"], weight=originhold_dict["weight"]
             )
     return originunit_x

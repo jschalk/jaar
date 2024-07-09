@@ -1,54 +1,54 @@
-from src._world.origin import OriginLink, originlink_shop, OriginUnit, originunit_shop
+from src._world.origin import OriginHold, originhold_shop, OriginUnit, originunit_shop
 from src._world.char import CharID
 from pytest import raises as pytest_raises
 
 
-def test_OriginLink_exists():
+def test_OriginHold_exists():
     # GIVEN
     roy_text = "Roy"
     roy_weight = 4
 
     # WHEN
-    originlink_x = OriginLink(char_id=roy_text, weight=roy_weight)
+    originhold_x = OriginHold(char_id=roy_text, weight=roy_weight)
 
     # THEN
-    assert originlink_x.char_id == roy_text
-    assert originlink_x.weight == roy_weight
+    assert originhold_x.char_id == roy_text
+    assert originhold_x.weight == roy_weight
 
 
-def test_originlink_shop_ReturnsCorrectObj():
+def test_originhold_shop_ReturnsCorrectObj():
     # GIVEN
     roy_text = "Roy"
     roy_weight = 4
 
     # WHEN
-    originlink_x = originlink_shop(char_id=roy_text, weight=roy_weight)
+    originhold_x = originhold_shop(char_id=roy_text, weight=roy_weight)
 
     # THEN
-    assert originlink_x.char_id == roy_text
-    assert originlink_x.weight == roy_weight
+    assert originhold_x.char_id == roy_text
+    assert originhold_x.weight == roy_weight
 
 
-def test_originlink_shop_WeightIsNot_Reason():
+def test_originhold_shop_WeightIsNot_Reason():
     # GIVEN
     roy_text = "Roy"
     # roy_char_id = CharID(roy_text)
 
     # WHEN
-    originlink_x = originlink_shop(char_id=roy_text)
+    originhold_x = originhold_shop(char_id=roy_text)
 
     # THEN
-    assert originlink_x.char_id == roy_text
-    assert originlink_x.weight == 1
+    assert originhold_x.char_id == roy_text
+    assert originhold_x.weight == 1
 
 
-def test_OriginLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
+def test_OriginHold_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # GIVEN
     roy_text = "Roy"
-    roy_originlink = originlink_shop(char_id=roy_text)
+    roy_originhold = originhold_shop(char_id=roy_text)
 
     # WHEN
-    x_dict = roy_originlink.get_dict()
+    x_dict = roy_originhold.get_dict()
 
     # THEN
     print(f"{x_dict=}")
@@ -73,14 +73,14 @@ def test_originunit_ReturnsCorrectObj():
     assert originunit_x._links == {}
 
 
-def test_originunit_set_originlink_CorrectlySetsOriginLink():
+def test_originunit_set_originhold_CorrectlySetsOriginHold():
     # GIVEN
     originunit_x = originunit_shop()
 
     # WHEN
     tim_text = "Tim"
     tim_weight = 3
-    originunit_x.set_originlink(char_id=tim_text, weight=tim_weight)
+    originunit_x.set_originhold(char_id=tim_text, weight=tim_weight)
 
     # THEN
     assert originunit_x._links.get(tim_text) != None
@@ -88,17 +88,17 @@ def test_originunit_set_originlink_CorrectlySetsOriginLink():
     assert originunit_x._links.get(tim_text).weight == tim_weight
 
 
-def test_originunit_del_originlink_CorrectlyDeletesOriginLink():
+def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
     # GIVEN
     originunit_x = originunit_shop()
     tim_text = "Tim"
     tim_weight = 3
-    originunit_x.set_originlink(char_id=tim_text, weight=tim_weight)
+    originunit_x.set_originhold(char_id=tim_text, weight=tim_weight)
     assert originunit_x._links.get(tim_text) != None
     assert originunit_x._links.get(tim_text).char_id == tim_text
 
     # WHEN
-    originunit_x.del_originlink(char_id=tim_text)
+    originunit_x.del_originhold(char_id=tim_text)
 
     # THEN
     assert originunit_x._links.get(tim_text) is None
@@ -107,16 +107,16 @@ def test_originunit_del_originlink_CorrectlyDeletesOriginLink():
 def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # GIVEN
     roy_text = "Roy"
-    roy_originlink = originlink_shop(char_id=roy_text)
-    roy_ol_dict = roy_originlink.get_dict()
+    roy_originhold = originhold_shop(char_id=roy_text)
+    roy_ol_dict = roy_originhold.get_dict()
     sue_text = "Sue"
     sue_weight = 4
-    sue_originlink = originlink_shop(char_id=sue_text, weight=sue_weight)
-    sue_ol_dict = sue_originlink.get_dict()
+    sue_originhold = originhold_shop(char_id=sue_text, weight=sue_weight)
+    sue_ol_dict = sue_originhold.get_dict()
 
     originunit_x = originunit_shop()
-    originunit_x.set_originlink(char_id=roy_text, weight=None)
-    originunit_x.set_originlink(char_id=sue_text, weight=sue_weight)
+    originunit_x.set_originhold(char_id=roy_text, weight=None)
+    originunit_x.set_originhold(char_id=sue_text, weight=sue_weight)
 
     # WHEN
     x_dict = originunit_x.get_dict()

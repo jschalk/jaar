@@ -65,7 +65,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     day_hour_text = "day_hour"
     day_hour_road = x_world.make_l1_road(day_hour_text)
     day_hour_idea = x_world.get_idea_obj(day_hour_road)
-    day_hour_idea._originunit.set_originlink(char_id="Bob", weight=2)
+    day_hour_idea._originunit.set_originhold(char_id="Bob", weight=2)
     x_world.set_fact(
         base=day_hour_road,
         pick=day_hour_road,
@@ -75,7 +75,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     time_minute = x_world.make_l1_road("day_minute")
     x_world.set_fact(base=time_minute, pick=time_minute, open=0, nigh=1440)
     yao_text = "Yao"
-    x_world._originunit.set_originlink(yao_text, 1)
+    x_world._originunit.set_originhold(yao_text, 1)
     world_weight = 23
     x_world._weight = world_weight
     x_char_credor_pool = 22
@@ -144,11 +144,11 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     day_hour_originunit_dict = idearoot_dict[_kids][day_hour_text][originunit_text]
     assert day_hour_originunit_dict == day_hour_idea._originunit.get_dict()
     _links = "_links"
-    x_world_originlink = world_dict[originunit_text][_links][yao_text]
-    print(f"{x_world_originlink=}")
-    assert x_world_originlink
-    assert x_world_originlink["char_id"] == yao_text
-    assert x_world_originlink["weight"] == 1
+    x_world_originhold = world_dict[originunit_text][_links][yao_text]
+    print(f"{x_world_originhold=}")
+    assert x_world_originhold
+    assert x_world_originhold["char_id"] == yao_text
+    assert x_world_originhold["weight"] == 1
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_cultureunit():
@@ -292,7 +292,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_world.edit_idea_attr(road=factunit_x.base, factunit=factunit_x)
     yao_world.set_max_tree_traverse(int_x=2)
     yao_text = "Yao"
-    yao_world._originunit.set_originlink(yao_text, 1)
+    yao_world._originunit.set_originhold(yao_text, 1)
 
     # WHEN
     world_dict = get_dict_from_json(json_x=yao_world.get_json())
@@ -354,7 +354,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_text = "shave"
     shave_road = zia_world.make_l1_road(shave_text)
     shave_idea_y1 = zia_world.get_idea_obj(shave_road)
-    shave_idea_y1._originunit.set_originlink(char_id="Sue", weight=4.3)
+    shave_idea_y1._originunit.set_originhold(char_id="Sue", weight=4.3)
     shave_idea_y1._problem_bool = True
     # print(f"{shave_road=}")
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")
@@ -383,7 +383,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world.edit_idea_attr(shave_road, healerhold=run_healerhold)
 
     yao_text = "Yao"
-    zia_world._originunit.set_originlink(yao_text, 1)
+    zia_world._originunit.set_originhold(yao_text, 1)
     override_text = "override"
     zia_world.set_meld_strategy(override_text)
 

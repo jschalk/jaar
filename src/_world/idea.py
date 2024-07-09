@@ -649,11 +649,11 @@ class IdeaUnit:
             self._meld_attributes_that_must_be_equal(exterior_idea=exterior_idea)
         else:
             self._meld_attributes_overide(exterior_idea=exterior_idea)
-        self._meld_originlinks(char_id, char_weight)
+        self._meld_originholds(char_id, char_weight)
 
-    def _meld_originlinks(self, char_id: CharID, char_weight: float):
+    def _meld_originholds(self, char_id: CharID, char_weight: float):
         if char_id != None:
-            self._originunit.set_originlink(char_id=char_id, weight=char_weight)
+            self._originunit.set_originhold(char_id=char_id, weight=char_weight)
 
     def set_originunit_empty_if_none(self):
         if self._originunit is None:

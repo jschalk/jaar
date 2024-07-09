@@ -2200,7 +2200,7 @@ class WorldUnit:
             exterior_weight=exterior_world._weight,
             exterior_meld_strategy="default",
         )
-        self._meld_originlinks(exterior_world._owner_id, char_weight)
+        self._meld_originholds(exterior_world._owner_id, char_weight)
 
     def _meld_ideas(self, exterior_world, char_weight: float):
         # meld idearoot
@@ -2221,7 +2221,7 @@ class WorldUnit:
             except Exception:
                 self.add_idea(idea_kid=o_idea, parent_road=o_idea._parent_road)
                 main_idea = self.get_idea_obj(o_road)
-                main_idea._originunit.set_originlink(char_id, char_weight)
+                main_idea._originunit.set_originhold(char_id, char_weight)
 
     def _meld_chars(self, exterior_world):
         for charunit in exterior_world._chars.values():
@@ -2244,9 +2244,9 @@ class WorldUnit:
             else:
                 self._idearoot._factunits.get(hx.base).meld(hx)
 
-    def _meld_originlinks(self, char_id: CharID, char_weight: float):
+    def _meld_originholds(self, char_id: CharID, char_weight: float):
         if char_id != None:
-            self._originunit.set_originlink(char_id, char_weight)
+            self._originunit.set_originhold(char_id, char_weight)
 
 
 def worldunit_shop(
