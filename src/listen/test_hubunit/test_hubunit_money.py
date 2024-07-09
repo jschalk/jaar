@@ -1,5 +1,5 @@
 from src._instrument.file import delete_dir, save_file, open_file
-from src._instrument.sqlite import check_connection
+from src._instrument.db_tool import check_connection
 from src._world.healer import healerhold_shop
 from src._world.idea import ideaunit_shop
 from src._world.graphic import display_ideatree

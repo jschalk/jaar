@@ -1,6 +1,6 @@
 from src._instrument.python import get_dict_from_json, get_nested_value
 from src._instrument.file import delete_dir, save_file, open_file
-from src._instrument.sqlite import (
+from src._instrument.db_tool import (
     get_db_tables,
     get_db_columns,
     check_connection,
