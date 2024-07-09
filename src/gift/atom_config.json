@@ -1,5 +1,5 @@
 {
-    "world_char_beliefhold": {
+    "world_char_belieflink": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
@@ -8,7 +8,7 @@
             "atom_order": 1
         },
         "normal_specs": {
-            "normal_table_name": "beliefhold"
+            "normal_table_name": "belieflink"
         },
         "optional_args": {
             "credor_weight": {

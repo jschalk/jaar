@@ -8,8 +8,8 @@ from src._instrument.python import (
 )
 from src._road.road import RoadUnit, get_terminus_node, get_parent_road
 from src._world.reason_idea import FactUnit, ReasonUnit
-from src._world.char import BeliefHold, CharID, CharUnit
-from src._world.beliefhold import BeliefHold, BeliefID
+from src._world.char import BeliefLink, CharID, CharUnit
+from src._world.belieflink import BeliefLink, BeliefID
 from src._world.idea import IdeaUnit
 from src._world.world import WorldUnit, worldunit_shop
 from src.gift.atom_config import CRUD_command
@@ -134,9 +134,9 @@ class ChangeUnit:
         self, before_world: WorldUnit, after_world: WorldUnit
     ):
         before_world.calc_world_metrics()
-        before_world._migrate_beliefunits_to_beliefholds()
+        before_world._migrate_beliefunits_to_belieflinks()
         after_world.calc_world_metrics()
-        after_world._migrate_beliefunits_to_beliefholds()
+        after_world._migrate_beliefunits_to_belieflinks()
         self.add_atomunits_worldunit_simple_attrs(before_world, after_world)
         self.add_atomunits_chars(before_world, after_world)
         self.add_atomunits_ideas(before_world, after_world)
@@ -205,12 +205,12 @@ class ChangeUnit:
             self.set_atomunit(x_atomunit)
             non_mirror_belief_ids = {
                 x_belief_id
-                for x_belief_id in insert_charunit._beliefholds.keys()
+                for x_belief_id in insert_charunit._belieflinks.keys()
                 if x_belief_id != insert_char_id
             }
-            self.add_atomunit_beliefholds_inserts(
+            self.add_atomunit_belieflinks_inserts(
                 after_charunit=insert_charunit,
-                insert_beliefhold_belief_ids=non_mirror_belief_ids,
+                insert_belieflink_belief_ids=non_mirror_belief_ids,
             )
 
     def add_atomunit_charunit_updates(
@@ -233,7 +233,7 @@ class ChangeUnit:
                         "debtor_weight", after_charunit.debtor_weight
                     )
                 self.set_atomunit(x_atomunit)
-            self.add_atomunit_beliefunit_update_beliefholds(
+            self.add_atomunit_beliefunit_update_belieflinks(
                 after_charunit=after_charunit, before_charunit=before_charunit
             )
 
@@ -247,91 +247,91 @@ class ChangeUnit:
             delete_charunit = before_world.get_char(delete_char_id)
             non_mirror_belief_ids = {
                 x_belief_id
-                for x_belief_id in delete_charunit._beliefholds.keys()
+                for x_belief_id in delete_charunit._belieflinks.keys()
                 if x_belief_id != delete_char_id
             }
-            self.add_atomunit_beliefholds_delete(delete_char_id, non_mirror_belief_ids)
+            self.add_atomunit_belieflinks_delete(delete_char_id, non_mirror_belief_ids)
 
-    def add_atomunit_beliefunit_update_beliefholds(
+    def add_atomunit_beliefunit_update_belieflinks(
         self, after_charunit: CharUnit, before_charunit: CharUnit
     ):
         # before_non_mirror_belief_ids
         before_belief_ids = {
             x_belief_id
-            for x_belief_id in before_charunit._beliefholds.keys()
+            for x_belief_id in before_charunit._belieflinks.keys()
             if x_belief_id != before_charunit.char_id
         }
         # after_non_mirror_belief_ids
         after_belief_ids = {
             x_belief_id
-            for x_belief_id in after_charunit._beliefholds.keys()
+            for x_belief_id in after_charunit._belieflinks.keys()
             if x_belief_id != after_charunit.char_id
         }
 
-        self.add_atomunit_beliefholds_inserts(
+        self.add_atomunit_belieflinks_inserts(
             after_charunit=after_charunit,
-            insert_beliefhold_belief_ids=after_belief_ids.difference(before_belief_ids),
+            insert_belieflink_belief_ids=after_belief_ids.difference(before_belief_ids),
         )
 
-        self.add_atomunit_beliefholds_delete(
+        self.add_atomunit_belieflinks_delete(
             before_char_id=after_charunit.char_id,
             before_belief_ids=before_belief_ids.difference(after_belief_ids),
         )
 
         update_belief_ids = before_belief_ids.intersection(after_belief_ids)
         for update_char_id in update_belief_ids:
-            before_beliefhold = before_charunit.get_beliefhold(update_char_id)
-            after_beliefhold = after_charunit.get_beliefhold(update_char_id)
+            before_belieflink = before_charunit.get_belieflink(update_char_id)
+            after_belieflink = after_charunit.get_belieflink(update_char_id)
             if optional_args_different(
-                "world_char_beliefhold", before_beliefhold, after_beliefhold
+                "world_char_belieflink", before_belieflink, after_belieflink
             ):
-                self.add_atomunit_beliefhold_update(
+                self.add_atomunit_belieflink_update(
                     char_id=after_charunit.char_id,
-                    before_beliefhold=before_beliefhold,
-                    after_beliefhold=after_beliefhold,
+                    before_belieflink=before_belieflink,
+                    after_belieflink=after_belieflink,
                 )
 
-    def add_atomunit_beliefholds_inserts(
+    def add_atomunit_belieflinks_inserts(
         self,
         after_charunit: CharUnit,
-        insert_beliefhold_belief_ids: list[BeliefID],
+        insert_belieflink_belief_ids: list[BeliefID],
     ):
         after_char_id = after_charunit.char_id
-        for insert_belief_id in insert_beliefhold_belief_ids:
-            after_beliefhold = after_charunit.get_beliefhold(insert_belief_id)
-            x_atomunit = atomunit_shop("world_char_beliefhold", atom_insert())
+        for insert_belief_id in insert_belieflink_belief_ids:
+            after_belieflink = after_charunit.get_belieflink(insert_belief_id)
+            x_atomunit = atomunit_shop("world_char_belieflink", atom_insert())
             x_atomunit.set_required_arg("char_id", after_char_id)
-            x_atomunit.set_required_arg("belief_id", after_beliefhold.belief_id)
-            if after_beliefhold.credor_weight != None:
+            x_atomunit.set_required_arg("belief_id", after_belieflink.belief_id)
+            if after_belieflink.credor_weight != None:
                 x_atomunit.set_optional_arg(
-                    "credor_weight", after_beliefhold.credor_weight
+                    "credor_weight", after_belieflink.credor_weight
                 )
-            if after_beliefhold.debtor_weight != None:
+            if after_belieflink.debtor_weight != None:
                 x_atomunit.set_optional_arg(
-                    "debtor_weight", after_beliefhold.debtor_weight
+                    "debtor_weight", after_belieflink.debtor_weight
                 )
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_beliefhold_update(
+    def add_atomunit_belieflink_update(
         self,
         char_id: CharID,
-        before_beliefhold: BeliefHold,
-        after_beliefhold: BeliefHold,
+        before_belieflink: BeliefLink,
+        after_belieflink: BeliefLink,
     ):
-        x_atomunit = atomunit_shop("world_char_beliefhold", atom_update())
+        x_atomunit = atomunit_shop("world_char_belieflink", atom_update())
         x_atomunit.set_required_arg("char_id", char_id)
-        x_atomunit.set_required_arg("belief_id", after_beliefhold.belief_id)
-        if after_beliefhold.credor_weight != before_beliefhold.credor_weight:
-            x_atomunit.set_optional_arg("credor_weight", after_beliefhold.credor_weight)
-        if after_beliefhold.debtor_weight != before_beliefhold.debtor_weight:
-            x_atomunit.set_optional_arg("debtor_weight", after_beliefhold.debtor_weight)
+        x_atomunit.set_required_arg("belief_id", after_belieflink.belief_id)
+        if after_belieflink.credor_weight != before_belieflink.credor_weight:
+            x_atomunit.set_optional_arg("credor_weight", after_belieflink.credor_weight)
+        if after_belieflink.debtor_weight != before_belieflink.debtor_weight:
+            x_atomunit.set_optional_arg("debtor_weight", after_belieflink.debtor_weight)
         self.set_atomunit(x_atomunit)
 
-    def add_atomunit_beliefholds_delete(
+    def add_atomunit_belieflinks_delete(
         self, before_char_id: CharID, before_belief_ids: BeliefID
     ):
         for delete_belief_id in before_belief_ids:
-            x_atomunit = atomunit_shop("world_char_beliefhold", atom_delete())
+            x_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
             x_atomunit.set_required_arg("char_id", before_char_id)
             x_atomunit.set_required_arg("belief_id", delete_belief_id)
             self.set_atomunit(x_atomunit)

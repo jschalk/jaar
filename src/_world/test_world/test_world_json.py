@@ -19,7 +19,7 @@ from src._world.examples.example_worlds import (
 from pytest import raises as pytest_raises
 
 
-def test_WorldUnit_get_dict_SetsCharUnit_beliefholds():
+def test_WorldUnit_get_dict_SetsCharUnit_belieflinks():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
@@ -40,23 +40,23 @@ def test_WorldUnit_get_dict_SetsCharUnit_beliefholds():
     run_beliefunit.set_charlink(sue_run_charlink)
     run_beliefunit.set_charlink(zia_run_charlink)
     assert len(bob_world.get_beliefunit(run_text)._chars) == 2
-    assert len(bob_world.get_char(yao_text)._beliefholds) == 0
-    assert len(bob_world.get_char(sue_text)._beliefholds) == 0
+    assert len(bob_world.get_char(yao_text)._belieflinks) == 0
+    assert len(bob_world.get_char(sue_text)._belieflinks) == 0
 
     # WHEN
     bob_world.get_dict()
 
     # THEN
-    assert len(bob_world.get_char(sue_text)._beliefholds) == 2
-    assert len(bob_world.get_char(zia_text)._beliefholds) == 2
+    assert len(bob_world.get_char(sue_text)._belieflinks) == 2
+    assert len(bob_world.get_char(zia_text)._belieflinks) == 2
     sue_charunit = bob_world.get_char(sue_text)
     zia_charunit = bob_world.get_char(zia_text)
-    sue_beliefhold = sue_charunit.get_beliefhold(run_text)
-    zia_beliefhold = zia_charunit.get_beliefhold(run_text)
-    assert sue_beliefhold.credor_weight == sue_credor_weight
-    assert sue_beliefhold.debtor_weight == sue_debtor_weight
-    assert zia_beliefhold.credor_weight == zia_credor_weight
-    assert zia_beliefhold.debtor_weight == zia_debtor_weight
+    sue_belieflink = sue_charunit.get_belieflink(run_text)
+    zia_belieflink = zia_charunit.get_belieflink(run_text)
+    assert sue_belieflink.credor_weight == sue_credor_weight
+    assert sue_belieflink.debtor_weight == sue_debtor_weight
+    assert zia_belieflink.credor_weight == zia_credor_weight
+    assert zia_belieflink.debtor_weight == zia_debtor_weight
 
 
 def test_WorldUnit_get_dict_ReturnsDictObject():
@@ -541,9 +541,9 @@ def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
         x2_world._owner_id: x2_world.get_dict(),
         x3_world._owner_id: x3_world.get_dict(),
     }
-    x1_world.clear_charunits_beliefholds()
-    x2_world.clear_charunits_beliefholds()
-    x3_world.clear_charunits_beliefholds()
+    x1_world.clear_charunits_belieflinks()
+    x2_world.clear_charunits_belieflinks()
+    x3_world.clear_charunits_belieflinks()
 
     # WHEN
     ccn_dict_of_obj = get_dict_of_world_from_dict(cn_dict_of_dicts)

@@ -6,7 +6,7 @@ from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.atom_config import (
     worldunit_text,
     world_charunit_text,
-    world_char_beliefhold_text,
+    world_char_belieflink_text,
     world_ideaunit_text,
     world_idea_fiscallink_text,
     world_idea_reasonunit_text,
@@ -96,8 +96,8 @@ def jaar_format_0001_char_v0_0_0() -> str:
     return "jaar_format_0001_char_v0_0_0"
 
 
-def jaar_format_0002_beliefhold_v0_0_0() -> str:
-    return "jaar_format_0002_beliefhold_v0_0_0"
+def jaar_format_0002_belieflink_v0_0_0() -> str:
+    return "jaar_format_0002_belieflink_v0_0_0"
 
 
 def jaar_format_0003_ideaunit_v0_0_0() -> str:
@@ -107,7 +107,7 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
 def get_bridge_filenames() -> set[str]:
     return {
         jaar_format_0001_char_v0_0_0(),
-        jaar_format_0002_beliefhold_v0_0_0(),
+        jaar_format_0002_belieflink_v0_0_0(),
         jaar_format_0003_ideaunit_v0_0_0(),
     }
 
@@ -180,7 +180,7 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
             for x_atomunit in sorted_atomunits
         ]
 
-    elif bridge_name == jaar_format_0002_beliefhold_v0_0_0():
+    elif bridge_name == jaar_format_0002_belieflink_v0_0_0():
         d2_list = [
             [
                 x_atomunit.get_value(belief_id_str()),

@@ -194,13 +194,13 @@ def _modify_world_beliefunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_char_beliefhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_belieflink_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_belief_id = x_atom.get_value("belief_id")
     x_world.get_beliefunit(x_belief_id).del_charlink(x_char_id)
 
 
-def _modify_world_char_beliefhold_update(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_belieflink_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
     x_beliefunit.edit_charlink(
         char_id=x_atom.get_value("char_id"),
@@ -209,7 +209,7 @@ def _modify_world_char_beliefhold_update(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_char_beliefhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_belieflink_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
     x_beliefunit.set_charlink(
         charlink_shop(
@@ -428,13 +428,13 @@ def _modify_world_beliefunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_beliefunit_insert(x_world, x_atom)
 
 
-def _modify_world_char_beliefhold(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_belieflink(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_char_beliefhold_delete(x_world, x_atom)
+        _modify_world_char_belieflink_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_char_beliefhold_update(x_world, x_atom)
+        _modify_world_char_belieflink_update(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_char_beliefhold_insert(x_world, x_atom)
+        _modify_world_char_belieflink_insert(x_world, x_atom)
 
 
 def _modify_world_ideaunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -503,8 +503,8 @@ def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_worldunit(x_world, x_atom)
     elif x_atom.category == "world_beliefunit":
         _modify_world_beliefunit(x_world, x_atom)
-    elif x_atom.category == "world_char_beliefhold":
-        _modify_world_char_beliefhold(x_world, x_atom)
+    elif x_atom.category == "world_char_belieflink":
+        _modify_world_char_belieflink(x_world, x_atom)
     elif x_atom.category == "world_ideaunit":
         _modify_world_ideaunit(x_world, x_atom)
     elif x_atom.category == "world_idea_fiscallink":
@@ -531,7 +531,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._char_debtor_pool != y_obj._char_debtor_pool
             or x_obj._pixel != y_obj._pixel
         )
-    elif category in {"world_char_beliefhold", "world_idea_fiscallink"}:
+    elif category in {"world_char_belieflink", "world_idea_fiscallink"}:
         return (x_obj.credor_weight != y_obj.credor_weight) or (
             x_obj.debtor_weight != y_obj.debtor_weight
         )

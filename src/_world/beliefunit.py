@@ -5,7 +5,7 @@ from src._instrument.python import (
     get_0_if_None,
 )
 from src._road.road import CharID, default_road_delimiter_if_none, validate_roadnode
-from src._world.beliefhold import BeliefID, BeliefCore
+from src._world.belieflink import BeliefID, BeliefCore
 from src._world.char import (
     CharLink,
     charlinks_get_from_dict,

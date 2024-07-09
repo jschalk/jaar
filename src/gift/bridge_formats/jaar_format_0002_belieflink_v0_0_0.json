@@ -1,5 +1,5 @@
 {
-    "atom_category": "world_char_beliefhold",
+    "atom_category": "world_char_belieflink",
     "attributes": {
         "belief_id": {
             "column_order": 3,

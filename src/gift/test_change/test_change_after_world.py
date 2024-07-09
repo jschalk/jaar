@@ -190,11 +190,11 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_charlink
     assert len(before_sue_worldunit.get_beliefunit(fly_text)._chars) == 3
 
     # WHEN
-    rico_atomunit = atomunit_shop("world_char_beliefhold", atom_delete())
+    rico_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
     rico_atomunit.set_required_arg("belief_id", run_text)
     rico_atomunit.set_required_arg("char_id", rico_text)
     # print(f"{rico_atomunit=}")
-    carm_atomunit = atomunit_shop("world_char_beliefhold", atom_delete())
+    carm_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
     carm_atomunit.set_required_arg("belief_id", fly_text)
     carm_atomunit.set_required_arg("char_id", carm_text)
     # print(f"{carm_atomunit=}")
@@ -225,7 +225,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_charlink
     assert len(before_sue_worldunit.get_beliefunit(run_text)._chars) == 1
 
     # WHEN
-    rico_atomunit = atomunit_shop("world_char_beliefhold", atom_insert())
+    rico_atomunit = atomunit_shop("world_char_belieflink", atom_insert())
     rico_atomunit.set_required_arg("belief_id", run_text)
     rico_atomunit.set_required_arg("char_id", rico_text)
     rico_run_credor_weight = 17
@@ -260,7 +260,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_charlink
     assert before_run_rico_charlink.debtor_weight == 1
 
     # WHEN
-    rico_atomunit = atomunit_shop("world_char_beliefhold", atom_update())
+    rico_atomunit = atomunit_shop("world_char_belieflink", atom_update())
     rico_atomunit.set_required_arg("belief_id", run_text)
     rico_atomunit.set_required_arg("char_id", rico_text)
     new_rico_run_credor_weight = 7

@@ -48,7 +48,7 @@ from src._world.char import (
     charunit_shop,
     charlink_shop,
 )
-from src._world.beliefhold import beliefhold_shop
+from src._world.belieflink import belieflink_shop
 from src._world.beliefunit import (
     FiscalLink,
     BeliefID,
@@ -823,28 +823,28 @@ class WorldUnit:
                 x_idea.set_fiscallink(fiscallink=new_fiscallink)
                 x_idea.del_fiscallink(belief_id=old_belief_id)
 
-    def clear_charunits_beliefholds(self):
+    def clear_charunits_belieflinks(self):
         for x_charunit in self._chars.values():
-            x_charunit.clear_beliefholds()
+            x_charunit.clear_belieflinks()
 
-    def _migrate_beliefunits_to_beliefholds(self):
-        self.clear_charunits_beliefholds()
+    def _migrate_beliefunits_to_belieflinks(self):
+        self.clear_charunits_belieflinks()
 
         for x_beliefunit in self._beliefs.values():
             for x_charlink in x_beliefunit._chars.values():
                 x_charunit = self.get_char(x_charlink.char_id)
                 if x_charunit != None:
-                    x_beliefhold = beliefhold_shop(
+                    x_belieflink = belieflink_shop(
                         x_beliefunit.belief_id,
                         credor_weight=x_charlink.credor_weight,
                         debtor_weight=x_charlink.debtor_weight,
                     )
-                    x_charunit.set_beliefhold(x_beliefhold)
+                    x_charunit.set_belieflink(x_belieflink)
 
-    def _migrate_beliefholds_to_beliefunits(self):
+    def _migrate_belieflinks_to_beliefunits(self):
         for x_charunit in self._chars.values():
-            for x_beliefhold in x_charunit._beliefholds.values():
-                x_belief_id = x_beliefhold.belief_id
+            for x_belieflink in x_charunit._belieflinks.values():
+                x_belief_id = x_belieflink.belief_id
                 if self.beliefunit_exists(x_belief_id) == False:
                     new_beliefunit = beliefunit_shop(
                         x_belief_id, _road_delimiter=self._road_delimiter
@@ -853,12 +853,12 @@ class WorldUnit:
                 x_beliefunit = self.get_beliefunit(x_belief_id)
                 x_charlink = charlink_shop(
                     x_charunit.char_id,
-                    credor_weight=x_beliefhold.credor_weight,
-                    debtor_weight=x_beliefhold.debtor_weight,
+                    credor_weight=x_belieflink.credor_weight,
+                    debtor_weight=x_belieflink.debtor_weight,
                 )
                 x_beliefunit.set_charlink(x_charlink)
 
-        self.clear_charunits_beliefholds()
+        self.clear_charunits_belieflinks()
 
     def set_time_facts(self, open: datetime = None, nigh: datetime = None) -> None:
         open_minutes = self.get_time_min_from_dt(dt=open) if open != None else None
@@ -2053,7 +2053,7 @@ class WorldUnit:
         }
 
     def get_dict(self) -> dict[str, str]:
-        self._migrate_beliefunits_to_beliefholds()
+        self._migrate_beliefunits_to_belieflinks()
         x_dict = {
             "_chars": self.get_chars_dict(),
             "_beliefs": self.get_beliefunits_dict(),
@@ -2317,7 +2317,7 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_chars = obj_from_world_dict(world_dict, "_chars", x_road_delimiter).values()
     for x_charunit in x_chars:
         x_world.set_charunit(x_charunit)
-    x_world._migrate_beliefholds_to_beliefunits()
+    x_world._migrate_belieflinks_to_beliefunits()
     x_world._originunit = obj_from_world_dict(world_dict, "_originunit")
 
     set_idearoot_from_world_dict(x_world, world_dict)

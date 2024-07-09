@@ -71,8 +71,8 @@ def world_charunit_text() -> str:
     return "world_charunit"
 
 
-def world_char_beliefhold_text() -> str:
-    return "world_char_beliefhold"
+def world_char_belieflink_text() -> str:
+    return "world_char_belieflink"
 
 
 def world_ideaunit_text() -> str:

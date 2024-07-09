@@ -1,4 +1,4 @@
-from src._world.beliefhold import beliefhold_shop
+from src._world.belieflink import belieflink_shop
 from src._world.char import (
     charunit_shop,
     charunits_get_from_json,
@@ -9,7 +9,7 @@ from src._instrument.python import x_is_json, get_json_from_dict
 from pytest import raises as pytest_raises
 
 
-def test_CharUnit_get_beliefholds_dict_ReturnObj():
+def test_CharUnit_get_belieflinks_dict_ReturnObj():
     # GIVEN
     sue_text = "Sue"
     sue_credor_weight = 11
@@ -17,26 +17,26 @@ def test_CharUnit_get_beliefholds_dict_ReturnObj():
     run_text = ",Run"
     run_credor_weight = 17
     run_debtor_weight = 23
-    sue_beliefhold = beliefhold_shop(sue_text, sue_credor_weight, sue_debtor_weight)
-    run_beliefhold = beliefhold_shop(run_text, run_credor_weight, run_debtor_weight)
+    sue_belieflink = belieflink_shop(sue_text, sue_credor_weight, sue_debtor_weight)
+    run_belieflink = belieflink_shop(run_text, run_credor_weight, run_debtor_weight)
     sue_charunit = charunit_shop(sue_text)
-    sue_charunit.set_beliefhold(sue_beliefhold)
-    sue_charunit.set_beliefhold(run_beliefhold)
+    sue_charunit.set_belieflink(sue_belieflink)
+    sue_charunit.set_belieflink(run_belieflink)
 
     # WHEN
-    sue_beliefholds_dict = sue_charunit.get_beliefholds_dict()
+    sue_belieflinks_dict = sue_charunit.get_belieflinks_dict()
 
     # THEN
-    assert sue_beliefholds_dict.get(sue_text) != None
-    assert sue_beliefholds_dict.get(run_text) != None
-    sue_beliefhold_dict = sue_beliefholds_dict.get(sue_text)
-    run_beliefhold_dict = sue_beliefholds_dict.get(run_text)
-    assert sue_beliefhold_dict == {
+    assert sue_belieflinks_dict.get(sue_text) != None
+    assert sue_belieflinks_dict.get(run_text) != None
+    sue_belieflink_dict = sue_belieflinks_dict.get(sue_text)
+    run_belieflink_dict = sue_belieflinks_dict.get(run_text)
+    assert sue_belieflink_dict == {
         "belief_id": sue_text,
         "credor_weight": sue_credor_weight,
         "debtor_weight": sue_debtor_weight,
     }
-    assert run_beliefhold_dict == {
+    assert run_belieflink_dict == {
         "belief_id": run_text,
         "credor_weight": run_credor_weight,
         "debtor_weight": run_debtor_weight,
@@ -55,22 +55,22 @@ def test_CharUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
     print(f"{bob_text}")
 
-    bob_charunit.set_beliefhold(beliefhold_shop(bob_text))
+    bob_charunit.set_belieflink(belieflink_shop(bob_text))
     run_text = "Run"
-    bob_charunit.set_beliefhold(beliefhold_shop(run_text))
+    bob_charunit.set_belieflink(belieflink_shop(run_text))
 
     # WHEN
     x_dict = bob_charunit.get_dict()
 
     # THEN
-    bl_dict = x_dict.get("_beliefholds")
+    bl_dict = x_dict.get("_belieflinks")
     print(f"{bl_dict=}")
     assert x_dict != None
     assert x_dict == {
         "char_id": bob_text,
         "credor_weight": bob_credor_weight,
         "debtor_weight": bob_debtor_weight,
-        "_beliefholds": {
+        "_belieflinks": {
             bob_text: {"belief_id": bob_text, "credor_weight": 1, "debtor_weight": 1},
             run_text: {"belief_id": run_text, "credor_weight": 1, "debtor_weight": 1},
         },
@@ -105,9 +105,9 @@ def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_charunit._world_agenda_ratio_cred = bob_world_agenda_ratio_cred
     bob_charunit._world_agenda_ratio_debt = bob_world_agenda_ratio_debt
 
-    bob_charunit.set_beliefhold(beliefhold_shop(bob_text))
+    bob_charunit.set_belieflink(belieflink_shop(bob_text))
     run_text = "Run"
-    bob_charunit.set_beliefhold(beliefhold_shop(run_text))
+    bob_charunit.set_belieflink(belieflink_shop(run_text))
 
     print(f"{bob_text}")
 
@@ -121,7 +121,7 @@ def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
         "char_id": bob_text,
         "credor_weight": bob_credor_weight,
         "debtor_weight": bob_debtor_weight,
-        "_beliefholds": bob_charunit.get_beliefholds_dict(),
+        "_belieflinks": bob_charunit.get_belieflinks_dict(),
         "_irrational_debtor_weight": bob_irrational_debtor_weight,
         "_inallocable_debtor_weight": bob_inallocable_debtor_weight,
         "_world_cred": bob_world_cred,
@@ -204,15 +204,15 @@ def test_charunit_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
     assert after_yao_charunit._road_delimiter == slash_text
 
 
-def test_charunit_get_from_dict_Returns_beliefholds():
+def test_charunit_get_from_dict_Returns_belieflinks():
     # GIVEN
     yao_text = ",Yao"
     slash_text = "/"
     before_yao_charunit = charunit_shop(yao_text, _road_delimiter=slash_text)
     bob_text = "Bob"
     zia_text = "Zia"
-    before_yao_charunit.set_beliefhold(beliefhold_shop(bob_text))
-    before_yao_charunit.set_beliefhold(beliefhold_shop(zia_text))
+    before_yao_charunit.set_belieflink(belieflink_shop(bob_text))
+    before_yao_charunit.set_belieflink(belieflink_shop(zia_text))
     yao_dict = before_yao_charunit.get_dict()
 
     # WHEN
@@ -251,7 +251,7 @@ def test_charunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
             "char_id": yao_text,
             "credor_weight": yao_credor_weight,
             "debtor_weight": yao_debtor_weight,
-            "_beliefholds": {},
+            "_belieflinks": {},
             "_irrational_debtor_weight": yao_irrational_debtor_weight,
             "_inallocable_debtor_weight": yao_inallocable_debtor_weight,
         }

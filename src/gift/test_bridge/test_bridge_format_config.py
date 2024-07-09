@@ -19,7 +19,7 @@ from src.gift.atom_config import (
     python_type_text,
     worldunit_text,
     world_charunit_text,
-    world_char_beliefhold_text,
+    world_char_belieflink_text,
     world_ideaunit_text,
     world_idea_fiscallink_text,
     world_idea_reasonunit_text,
@@ -51,7 +51,7 @@ from src.gift.bridge import (
     get_bridge_attribute_dict,
     get_column_ordered_bridge_attributes,
     jaar_format_0001_char_v0_0_0,
-    jaar_format_0002_beliefhold_v0_0_0,
+    jaar_format_0002_belieflink_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
     create_bridge_dataframe,
@@ -67,8 +67,8 @@ def test_str_functions_ReturnCorrectObjs():
     assert debtor_weight_str() == "debtor_weight"
     assert credor_weight_str() == "credor_weight"
     assert jaar_format_0001_char_v0_0_0() == "jaar_format_0001_char_v0_0_0"
-    x0002_bridge = "jaar_format_0002_beliefhold_v0_0_0"
-    assert jaar_format_0002_beliefhold_v0_0_0() == x0002_bridge
+    x0002_bridge = "jaar_format_0002_belieflink_v0_0_0"
+    assert jaar_format_0002_belieflink_v0_0_0() == x0002_bridge
     x0003_bridge = "jaar_format_0003_ideaunit_v0_0_0"
     assert jaar_format_0003_ideaunit_v0_0_0() == x0003_bridge
 
@@ -87,7 +87,7 @@ def test_get_bridge_filenames_ReturnsCorrectObj():
     # THEN
     print(f"{x_filenames=}")
     assert jaar_format_0001_char_v0_0_0() in x_filenames
-    assert jaar_format_0002_beliefhold_v0_0_0() in x_filenames
+    assert jaar_format_0002_belieflink_v0_0_0() in x_filenames
     assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
 
 
@@ -181,9 +181,9 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0(
     assert credor_weight_column_order == 4
 
 
-def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_0_0():
+def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0002_belieflink_v0_0_0():
     # GIVEN
-    bridge_name = jaar_format_0002_beliefhold_v0_0_0()
+    bridge_name = jaar_format_0002_belieflink_v0_0_0()
 
     # WHEN
     bridge_dict = get_bridge_attribute_dict(bridge_name)
