@@ -1126,7 +1126,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_belieflink_insert():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_allyhold_insert():
     # GIVEN
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
@@ -1140,7 +1140,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_belieflink
 
     after_sue_world = copy_deepcopy(before_sue_world)
     after_ball_ideaunit = after_sue_world.get_idea_obj(ball_road)
-    after_ball_ideaunit._cultureunit.set_belieflink(rico_text)
+    after_ball_ideaunit._cultureunit.set_allyhold(rico_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1150,7 +1150,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_belieflink
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        "world_idea_belieflink",
+        "world_idea_allyhold",
         ball_road,
         rico_text,
     ]
@@ -1160,7 +1160,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_belieflink
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_belieflink_delete():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_allyhold_delete():
     # GIVEN
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
@@ -1172,11 +1172,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_belieflink
     ball_road = before_sue_world.make_road(sports_road, ball_text)
     before_sue_world.add_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_world.get_idea_obj(ball_road)
-    before_ball_ideaunit._cultureunit.set_belieflink(rico_text)
+    before_ball_ideaunit._cultureunit.set_allyhold(rico_text)
 
     after_sue_world = copy_deepcopy(before_sue_world)
     after_ball_ideaunit = after_sue_world.get_idea_obj(ball_road)
-    after_ball_ideaunit._cultureunit.del_belieflink(rico_text)
+    after_ball_ideaunit._cultureunit.del_allyhold(rico_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1186,7 +1186,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_belieflink
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        "world_idea_belieflink",
+        "world_idea_allyhold",
         ball_road,
         rico_text,
     ]
@@ -1209,7 +1209,7 @@ def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     ball_road = after_sue_world.make_road(sports_road, ball_text)
     after_sue_world.add_idea(ideaunit_shop(ball_text), sports_road)
     after_ball_ideaunit = after_sue_world.get_idea_obj(ball_road)
-    after_ball_ideaunit._cultureunit.set_belieflink(rico_text)
+    after_ball_ideaunit._cultureunit.set_allyhold(rico_text)
 
     before_sue_world = worldunit_shop(sue_text)
     sue1_changeunit = changeunit_shop()

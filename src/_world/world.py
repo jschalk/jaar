@@ -1187,13 +1187,13 @@ class WorldUnit:
             x_idea._fiscallinks.pop(_fiscallink_belief_id)
 
         if x_idea._cultureunit != None:
-            _belieflinks_to_delete = [
-                _belieflink_belief_id
-                for _belieflink_belief_id in x_idea._cultureunit._belieflinks
-                if self.get_beliefunit(_belieflink_belief_id) is None
+            _allyholds_to_delete = [
+                _allyhold_belief_id
+                for _allyhold_belief_id in x_idea._cultureunit._allyholds
+                if self.get_beliefunit(_allyhold_belief_id) is None
             ]
-            for _belieflink_belief_id in _belieflinks_to_delete:
-                x_idea._cultureunit.del_belieflink(_belieflink_belief_id)
+            for _allyhold_belief_id in _allyholds_to_delete:
+                x_idea._cultureunit.del_allyhold(_allyhold_belief_id)
 
         return x_idea
 

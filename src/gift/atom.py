@@ -382,14 +382,14 @@ def _modify_world_idea_reason_premiseunit_insert(x_world: WorldUnit, x_atom: Ato
     )
 
 
-def _modify_world_idea_belieflink_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_allyhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._cultureunit.del_belieflink(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._cultureunit.del_allyhold(belief_id=x_atom.get_value("belief_id"))
 
 
-def _modify_world_idea_belieflink_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_allyhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._cultureunit.set_belieflink(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._cultureunit.set_allyhold(belief_id=x_atom.get_value("belief_id"))
 
 
 def _modify_world_charunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
@@ -482,11 +482,11 @@ def _modify_world_idea_reason_premiseunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reason_premiseunit_insert(x_world, x_atom)
 
 
-def _modify_world_idea_belieflink(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_allyhold(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_belieflink_delete(x_world, x_atom)
+        _modify_world_idea_allyhold_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_belieflink_insert(x_world, x_atom)
+        _modify_world_idea_allyhold_insert(x_world, x_atom)
 
 
 def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -515,8 +515,8 @@ def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reasonunit(x_world, x_atom)
     elif x_atom.category == "world_idea_reason_premiseunit":
         _modify_world_idea_reason_premiseunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_belieflink":
-        _modify_world_idea_belieflink(x_world, x_atom)
+    elif x_atom.category == "world_idea_allyhold":
+        _modify_world_idea_allyhold(x_world, x_atom)
     elif x_atom.category == "world_charunit":
         _modify_world_charunit(x_world, x_atom)
 
