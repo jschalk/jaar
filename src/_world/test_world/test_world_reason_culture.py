@@ -145,7 +145,7 @@ def test_world_ideakid_cultureunit_CorrectlySets_grandchild_idea_cultureheir():
     assert four_idea._cultureheir == x_cultureheir
 
 
-def test_WorldUnit__get_filtered_fiscallinks_idea_CorrectlyFiltersIdea_Cultureunit():
+def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Cultureunit():
     # GIVEN
     noa_text = "Noa"
     noa1_world = worldunit_shop(noa_text)
@@ -171,7 +171,7 @@ def test_WorldUnit__get_filtered_fiscallinks_idea_CorrectlyFiltersIdea_Cultureun
     # WHEN
     noa2_world = worldunit_shop(noa_text)
     noa2_world.add_charunit(xia_text)
-    filtered_idea = noa2_world._get_filtered_fiscallinks_idea(noa1_world_swim_idea)
+    filtered_idea = noa2_world._get_filtered_awardlinks_idea(noa1_world_swim_idea)
 
     # THEN
     filtered_swim_allyholds = filtered_idea._cultureunit._allyholds
@@ -179,7 +179,7 @@ def test_WorldUnit__get_filtered_fiscallinks_idea_CorrectlyFiltersIdea_Cultureun
     assert list(filtered_swim_allyholds) == [xia_text]
 
 
-def test_WorldUnit_add_idea_CorrectlyFiltersIdea_fiscallinks():
+def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     # GIVEN
     noa1_world = worldunit_shop("Noa")
     xia_text = "Xia"

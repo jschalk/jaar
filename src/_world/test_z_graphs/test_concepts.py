@@ -11,7 +11,7 @@ from src._world.graphic import (
     worldunit_explanation2,
     worldunit_explanation3,
     worldunit_explanation4,
-    fiscal_explanation0,
+    award_explanation0,
 )
 
 
@@ -22,7 +22,7 @@ def test_worldunit_explanation_ShowsExplanation0WorldConceptGraph():
     worldunit_explanation2_fig = worldunit_explanation2()
     worldunit_explanation3_fig = worldunit_explanation3()
     worldunit_explanation4_fig = worldunit_explanation4()
-    fiscal_explanation0_fig = fiscal_explanation0()
+    award_explanation0_fig = award_explanation0()
 
     # # THEN
     # show_figure = True
@@ -32,4 +32,4 @@ def test_worldunit_explanation_ShowsExplanation0WorldConceptGraph():
     #     # worldunit_explanation2_fig.show()
     #     # worldunit_explanation3_fig.show()
     #     # worldunit_explanation4_fig.show()
-    #     fiscal_explanation0_fig.show()
+    #     award_explanation0_fig.show()

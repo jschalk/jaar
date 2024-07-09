@@ -71,16 +71,16 @@ def world_charunit_text() -> str:
     return "world_charunit"
 
 
-def world_char_beliefhold_text() -> str:
-    return "world_char_beliefhold"
+def world_char_belieflink_text() -> str:
+    return "world_char_belieflink"
 
 
 def world_ideaunit_text() -> str:
     return "world_ideaunit"
 
 
-def world_idea_fiscallink_text() -> str:
-    return "world_idea_fiscallink"
+def world_idea_awardlink_text() -> str:
+    return "world_idea_awardlink"
 
 
 def world_idea_reasonunit_text() -> str:

@@ -31,8 +31,8 @@ def test_IdeaAttrFilter_Exists():
     assert new_obj.descendant_pledge_count is None
     assert new_obj.all_char_cred is None
     assert new_obj.all_char_debt is None
-    assert new_obj.fiscallink is None
-    assert new_obj.fiscallink_del is None
+    assert new_obj.awardlink is None
+    assert new_obj.awardlink_del is None
     assert new_obj.is_expanded is None
     assert new_obj.meld_strategy is None
 

@@ -3,7 +3,7 @@ from src._road.road import RoadUnit
 from src._world.world import worldunit_shop, get_from_json as worldunit_get_from_json
 from src._world.idea import IdeaUnit, ideaunit_shop
 from src._world.reason_idea import reasonunit_shop
-from src._world.beliefunit import beliefunit_shop, fiscallink_shop
+from src._world.beliefunit import beliefunit_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.reason_culture import cultureunit_shop
 from src._world.examples.example_worlds import (
@@ -634,8 +634,8 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     # beliefunit_z = beliefunit_shop(belief_id=family_text)
     # beliefunit_z.set_charlink(charlink=anna_charlink)
     # beliefunit_z.set_charlink(charlink=beto_charlink)
-    fiscallink_z = fiscallink_shop(belief_id=family_text)
-    clean_cookery_idea.set_fiscallink(fiscallink=fiscallink_z)
+    awardlink_z = awardlink_shop(belief_id=family_text)
+    clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
 
     assert len(zia_world._chars) == 0
     assert len(zia_world._beliefs) == 0

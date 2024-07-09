@@ -1,6 +1,6 @@
 from src._instrument.python import get_empty_dict_if_none, get_0_if_None
 from src._world.reason_idea import ReasonUnit, RoadUnit
-from src._world.beliefunit import FiscalLink, BeliefID
+from src._world.beliefunit import AwardLink, BeliefID
 from dataclasses import dataclass
 
 
@@ -9,7 +9,7 @@ class TreeMetrics:
     node_count: int = None
     level_count: dict[int, int] = None
     reason_bases: dict[RoadUnit, int] = None
-    fiscallinks_metrics: dict[BeliefID, FiscalLink] = None
+    awardlinks_metrics: dict[BeliefID, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_idea_uids_are_unique: bool = None
@@ -19,7 +19,7 @@ class TreeMetrics:
         self,
         level: int,
         reasons: dict[RoadUnit, ReasonUnit],
-        fiscallinks: dict[BeliefID, FiscalLink],
+        awardlinks: dict[BeliefID, AwardLink],
         uid: int,
         pledge: bool,
         idea_road: RoadUnit,
@@ -28,7 +28,7 @@ class TreeMetrics:
         self.evaluate_pledge(pledge=pledge, idea_road=idea_road)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
-        self.evaluate_fiscallinks(fiscallinks=fiscallinks)
+        self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
     def evaluate_pledge(self, pledge: bool, idea_road: RoadUnit):
@@ -50,10 +50,10 @@ class TreeMetrics:
             else:
                 self.reason_bases[reason.base] = self.reason_bases[reason.base] + 1
 
-    def evaluate_fiscallinks(self, fiscallinks: dict[BeliefID, FiscalLink]):
-        if fiscallinks != None:
-            for fiscallink in fiscallinks.values():
-                self.fiscallinks_metrics[fiscallink.belief_id] = fiscallink
+    def evaluate_awardlinks(self, awardlinks: dict[BeliefID, AwardLink]):
+        if awardlinks != None:
+            for awardlink in awardlinks.values():
+                self.awardlinks_metrics[awardlink.belief_id] = awardlink
 
     def evaluate_uid_max(self, uid):
         if uid != None and self.uid_max < uid:
@@ -70,7 +70,7 @@ def treemetrics_shop(
     node_count: int = None,
     level_count: dict[int, int] = None,
     reason_bases: dict[RoadUnit, int] = None,
-    fiscallinks_metrics: dict[BeliefID, FiscalLink] = None,
+    awardlinks_metrics: dict[BeliefID, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,
 ) -> TreeMetrics:
@@ -78,7 +78,7 @@ def treemetrics_shop(
         node_count=get_0_if_None(node_count),
         level_count=get_empty_dict_if_none(level_count),
         reason_bases=get_empty_dict_if_none(reason_bases),
-        fiscallinks_metrics=get_empty_dict_if_none(fiscallinks_metrics),
+        awardlinks_metrics=get_empty_dict_if_none(awardlinks_metrics),
         uid_dict=get_empty_dict_if_none(uid_dict),
         uid_max=get_0_if_None(uid_max),
     )

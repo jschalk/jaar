@@ -55,9 +55,9 @@ CREATE TABLE IF NOT EXISTS {atom_mstr_table_name()} (
     return x_str
 
 
-def get_atom_change_link_table_create_sqlstr() -> str:
+def get_atom2change_table_create_sqlstr() -> str:
     return """
-CREATE TABLE atom_change_link
+CREATE TABLE atom2change
 (
   atom_rowid INT NOT NULL
 , change_rowid INT NOT NULL
@@ -78,9 +78,9 @@ CREATE TABLE IF NOT EXISTS change_mstr (
 ;"""
 
 
-def get_change_gift_link_table_create_sqlstr() -> str:
+def get_change2gift_table_create_sqlstr() -> str:
     return """
-CREATE TABLE change_gift_link
+CREATE TABLE change2gift
 (
   change_rowid INT NOT NULL
 , gift_rowid INT NOT NULL
@@ -101,9 +101,9 @@ CREATE TABLE IF NOT EXISTS gift_mstr (
 ;"""
 
 
-def get_gift_owner_link_table_create_sqlstr() -> str:
+def get_gift2owner_table_create_sqlstr() -> str:
     return """
-CREATE TABLE gift_owner_link
+CREATE TABLE gift2owner
 (
   gift_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
@@ -156,11 +156,11 @@ WHERE road = '{road}'
 def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     list_x = [get_atom_hx_table_create_sqlstr()]
     list_x.append(get_atom_mstr_table_create_sqlstr())
-    list_x.append(get_atom_change_link_table_create_sqlstr())
+    list_x.append(get_atom2change_table_create_sqlstr())
     list_x.append(get_change_table_create_sqlstr())
-    list_x.append(get_change_gift_link_table_create_sqlstr())
+    list_x.append(get_change2gift_table_create_sqlstr())
     list_x.append(get_gift_table_create_sqlstr())
-    list_x.append(get_gift_owner_link_table_create_sqlstr())
+    list_x.append(get_gift2owner_table_create_sqlstr())
     list_x.append(get_owner_mstr_table_create_sqlstr())
     list_x.append(get_road_ref_table_create_sqlstr())
     return list_x

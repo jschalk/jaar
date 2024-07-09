@@ -8,7 +8,7 @@ from src._world.char import (
 from src._world.beliefunit import (
     BeliefID,
     beliefunit_shop,
-    fiscallink_shop,
+    awardlink_shop,
     get_intersection_of_chars,
 )
 from src._world.examples.example_worlds import (
@@ -31,12 +31,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     yao_world.set_charunit(charunit=charunit_shop(CharID(rico_text)))
     yao_world.set_charunit(charunit=charunit_shop(CharID(carm_text)))
     yao_world.set_charunit(charunit=charunit_shop(CharID(patr_text)))
-    bl_rico = fiscallink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=40)
-    bl_carm = fiscallink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=5)
-    bl_patr = fiscallink_shop(belief_id=patr_text, credor_weight=10, debtor_weight=5)
-    yao_world._idearoot.set_fiscallink(fiscallink=bl_rico)
-    yao_world._idearoot.set_fiscallink(fiscallink=bl_carm)
-    yao_world._idearoot.set_fiscallink(fiscallink=bl_patr)
+    bl_rico = awardlink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=40)
+    bl_carm = awardlink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=5)
+    bl_patr = awardlink_shop(belief_id=patr_text, credor_weight=10, debtor_weight=5)
+    yao_world._idearoot.set_awardlink(awardlink=bl_rico)
+    yao_world._idearoot.set_awardlink(awardlink=bl_carm)
+    yao_world._idearoot.set_awardlink(awardlink=bl_patr)
 
     rico_beliefunit = yao_world.get_beliefunit(rico_text)
     carm_beliefunit = yao_world.get_beliefunit(carm_text)
@@ -58,9 +58,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
 
     yao_world.calc_world_metrics()
 
-    # for fiscallink in yao_world._fiscalheirs.values():
+    # for awardlink in yao_world._awardheirs.values():
     #     print(
-    #         f"{yao_world._world_importance=} {fiscallink.belief_id=} {fiscallink._world_cred=} {fiscallink._world_debt=}"
+    #         f"{yao_world._world_importance=} {awardlink.belief_id=} {awardlink._world_cred=} {awardlink._world_debt=}"
     #     )
 
     assert rico_charlink._world_cred == 0.5
@@ -106,8 +106,8 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     # WHEN anothher pledge, check metrics are as expected
     selena_text = "selena"
     yao_world.set_charunit(charunit=charunit_shop(CharID(selena_text)))
-    yao_world._idearoot.set_fiscallink(
-        fiscallink=fiscallink_shop(
+    yao_world._idearoot.set_awardlink(
+        awardlink=awardlink_shop(
             belief_id=BeliefID(selena_text), credor_weight=20, debtor_weight=13
         )
     )
@@ -182,12 +182,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     yao_world.set_charunit(charunit=charunit_shop(CharID(rico_text)))
     yao_world.set_charunit(charunit=charunit_shop(CharID(carm_text)))
     yao_world.set_charunit(charunit=charunit_shop(CharID(patr_text)))
-    bl_rico = fiscallink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=40)
-    bl_carm = fiscallink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=5)
-    bl_patr = fiscallink_shop(belief_id=patr_text, credor_weight=10, debtor_weight=5)
-    yao_world._idearoot._kids.get(swim_text).set_fiscallink(fiscallink=bl_rico)
-    yao_world._idearoot._kids.get(swim_text).set_fiscallink(fiscallink=bl_carm)
-    yao_world._idearoot._kids.get(swim_text).set_fiscallink(fiscallink=bl_patr)
+    bl_rico = awardlink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=40)
+    bl_carm = awardlink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=5)
+    bl_patr = awardlink_shop(belief_id=patr_text, credor_weight=10, debtor_weight=5)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_rico)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_carm)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_patr)
 
     rico_charunit = yao_world._chars.get(rico_text)
     carm_charunit = yao_world._chars.get(carm_text)
@@ -248,8 +248,8 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     # WHEN anothher pledge, check metrics are as expected
     selena_text = "selena"
     yao_world.set_charunit(charunit=charunit_shop(CharID(selena_text)))
-    yao_world._idearoot.set_fiscallink(
-        fiscallink=fiscallink_shop(
+    yao_world._idearoot.set_awardlink(
+        awardlink=awardlink_shop(
             belief_id=selena_text, credor_weight=20, debtor_weight=10
         )
     )
@@ -327,14 +327,14 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     yao_world.set_charunit(charunit=charunit_shop(CharID(rico_text)))
     yao_world.set_charunit(charunit=charunit_shop(CharID(carm_text)))
     yao_world.set_charunit(charunit=charunit_shop(CharID(patr_text)))
-    bl_rico = fiscallink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=40)
-    bl_carm = fiscallink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=5)
-    bl_patr = fiscallink_shop(belief_id=patr_text, credor_weight=10, debtor_weight=5)
-    yao_world._idearoot._kids.get(swim_text).set_fiscallink(fiscallink=bl_rico)
-    yao_world._idearoot._kids.get(swim_text).set_fiscallink(fiscallink=bl_carm)
-    yao_world._idearoot._kids.get(swim_text).set_fiscallink(fiscallink=bl_patr)
+    bl_rico = awardlink_shop(belief_id=rico_text, credor_weight=20, debtor_weight=40)
+    bl_carm = awardlink_shop(belief_id=carm_text, credor_weight=10, debtor_weight=5)
+    bl_patr = awardlink_shop(belief_id=patr_text, credor_weight=10, debtor_weight=5)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_rico)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_carm)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_patr)
 
-    # no fiscallinks attached to this one
+    # no awardlinks attached to this one
     hunt_text = "hunt"
     yao_world.add_l1_idea(ideaunit_shop(hunt_text, _weight=3))
 
@@ -626,7 +626,7 @@ class CharAgendaMetrics:
 
 
 @dataclass
-class FiscalAgendaMetrics:
+class AwardAgendaMetrics:
     sum_world_agenda_importance = 0
     agenda_no_count = 0
     agenda_yes_count = 0
@@ -636,7 +636,7 @@ class FiscalAgendaMetrics:
     def set_sums(self, agenda_dict: dict[RoadUnit, IdeaUnit]):
         for agenda_item in agenda_dict.values():
             self.sum_world_agenda_importance += agenda_item._world_importance
-            if agenda_item._fiscallines == {}:
+            if agenda_item._awardlines == {}:
                 self.agenda_no_count += 1
                 self.agenda_no_world_i_sum += agenda_item._world_importance
             else:
@@ -670,19 +670,19 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
 
     # THEN
     assert len(agenda_dict) == 63
-    x_fiscalagendametrics = FiscalAgendaMetrics()
-    x_fiscalagendametrics.set_sums(agenda_dict=agenda_dict)
+    x_awardagendametrics = AwardAgendaMetrics()
+    x_awardagendametrics.set_sums(agenda_dict=agenda_dict)
     # print(f"{sum_world_agenda_importance=}")
-    assert x_fiscalagendametrics.agenda_no_count == 14
-    assert x_fiscalagendametrics.agenda_yes_count == 49
-    assert x_fiscalagendametrics.agenda_no_world_i_sum == 0.0037472680016539662
-    assert x_fiscalagendametrics.agenda_yes_world_i_sum == 0.0027965049894874455
+    assert x_awardagendametrics.agenda_no_count == 14
+    assert x_awardagendametrics.agenda_yes_count == 49
+    assert x_awardagendametrics.agenda_no_world_i_sum == 0.0037472680016539662
+    assert x_awardagendametrics.agenda_yes_world_i_sum == 0.0027965049894874455
     assert are_equal(
-        x_fiscalagendametrics.agenda_no_world_i_sum
-        + x_fiscalagendametrics.agenda_yes_world_i_sum,
-        x_fiscalagendametrics.sum_world_agenda_importance,
+        x_awardagendametrics.agenda_no_world_i_sum
+        + x_awardagendametrics.agenda_yes_world_i_sum,
+        x_awardagendametrics.sum_world_agenda_importance,
     )
-    assert x_fiscalagendametrics.sum_world_agenda_importance == 0.006543772991141412
+    assert x_awardagendametrics.sum_world_agenda_importance == 0.006543772991141412
 
     x_beliefagendametrics = BeliefAgendaMetrics()
     x_beliefagendametrics.set_sums(x_world=x_world)
@@ -693,7 +693,7 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     assert are_equal(x_beliefagendametrics.sum_charlink_cred, x_sum)
     assert are_equal(x_beliefagendametrics.sum_charlink_debt, x_sum)
     assert are_equal(
-        x_fiscalagendametrics.agenda_yes_world_i_sum,
+        x_awardagendametrics.agenda_yes_world_i_sum,
         x_beliefagendametrics.sum_beliefunit_cred,
     )
 
@@ -703,11 +703,11 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     x_charagendametrics.set_sums(x_world=x_world)
     assert are_equal(
         x_charagendametrics.sum_agenda_cred,
-        x_fiscalagendametrics.sum_world_agenda_importance,
+        x_awardagendametrics.sum_world_agenda_importance,
     )
     assert are_equal(
         x_charagendametrics.sum_agenda_debt,
-        x_fiscalagendametrics.sum_world_agenda_importance,
+        x_awardagendametrics.sum_world_agenda_importance,
     )
     assert are_equal(x_charagendametrics.sum_agenda_ratio_cred, 1)
     assert are_equal(x_charagendametrics.sum_agenda_ratio_debt, 1)

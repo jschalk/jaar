@@ -5,7 +5,7 @@ from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
 from src.gift.bridge import (
     jaar_format_0001_char_v0_0_0,
-    jaar_format_0002_beliefhold_v0_0_0,
+    jaar_format_0002_belieflink_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     get_bridge_attribute_dict,
     create_bridge,
@@ -74,7 +74,7 @@ def test_create_bridge_Arg_jaar_format_0001_char_v0_0_0():
     assert len(char_dataframe) == 3
 
 
-def test_create_bridge_Arg_jaar_format_0002_beliefhold_v0_0_0():
+def test_create_bridge_Arg_jaar_format_0002_belieflink_v0_0_0():
     # GIVEN
     sue_text = sue_str()
     bob_text = bob_str()
@@ -108,41 +108,41 @@ def test_create_bridge_Arg_jaar_format_0002_beliefhold_v0_0_0():
     sue_worldunit.set_beliefunit(ohio_beliefunit)
 
     # WHEN
-    x_bridge = jaar_format_0002_beliefhold_v0_0_0()
-    beliefhold_dataframe = create_bridge(sue_worldunit, x_bridge)
+    x_bridge = jaar_format_0002_belieflink_v0_0_0()
+    belieflink_dataframe = create_bridge(sue_worldunit, x_bridge)
 
     # THEN
-    array_headers = list(beliefhold_dataframe.columns)
+    array_headers = list(belieflink_dataframe.columns)
     bridge_dict = get_bridge_attribute_dict(x_bridge)
     assert array_headers == list(bridge_dict.keys())
-    assert beliefhold_dataframe.loc[0, real_id_str()] == music_real_id
-    assert beliefhold_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
-    assert beliefhold_dataframe.loc[0, char_id_str()] == bob_text
-    assert beliefhold_dataframe.loc[0, belief_id_str()] == iowa_text
-    assert beliefhold_dataframe.loc[0, credor_weight_str()] == bob_iowa_credor_w
-    assert beliefhold_dataframe.loc[0, debtor_weight_str()] == bob_iowa_debtor_w
+    assert belieflink_dataframe.loc[0, real_id_str()] == music_real_id
+    assert belieflink_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
+    assert belieflink_dataframe.loc[0, char_id_str()] == bob_text
+    assert belieflink_dataframe.loc[0, belief_id_str()] == iowa_text
+    assert belieflink_dataframe.loc[0, credor_weight_str()] == bob_iowa_credor_w
+    assert belieflink_dataframe.loc[0, debtor_weight_str()] == bob_iowa_debtor_w
 
-    assert beliefhold_dataframe.loc[1, real_id_str()] == music_real_id
-    assert beliefhold_dataframe.loc[1, owner_id_str()] == sue_worldunit._owner_id
-    assert beliefhold_dataframe.loc[1, char_id_str()] == sue_text
-    assert beliefhold_dataframe.loc[1, belief_id_str()] == iowa_text
-    assert beliefhold_dataframe.loc[1, credor_weight_str()] == sue_iowa_credor_w
-    assert beliefhold_dataframe.loc[1, debtor_weight_str()] == sue_iowa_debtor_w
+    assert belieflink_dataframe.loc[1, real_id_str()] == music_real_id
+    assert belieflink_dataframe.loc[1, owner_id_str()] == sue_worldunit._owner_id
+    assert belieflink_dataframe.loc[1, char_id_str()] == sue_text
+    assert belieflink_dataframe.loc[1, belief_id_str()] == iowa_text
+    assert belieflink_dataframe.loc[1, credor_weight_str()] == sue_iowa_credor_w
+    assert belieflink_dataframe.loc[1, debtor_weight_str()] == sue_iowa_debtor_w
 
-    assert beliefhold_dataframe.loc[2, real_id_str()] == music_real_id
-    assert beliefhold_dataframe.loc[2, owner_id_str()] == sue_worldunit._owner_id
-    assert beliefhold_dataframe.loc[2, char_id_str()] == yao_text
-    assert beliefhold_dataframe.loc[2, belief_id_str()] == iowa_text
-    assert beliefhold_dataframe.loc[2, credor_weight_str()] == yao_iowa_credor_w
-    assert beliefhold_dataframe.loc[2, debtor_weight_str()] == yao_iowa_debtor_w
+    assert belieflink_dataframe.loc[2, real_id_str()] == music_real_id
+    assert belieflink_dataframe.loc[2, owner_id_str()] == sue_worldunit._owner_id
+    assert belieflink_dataframe.loc[2, char_id_str()] == yao_text
+    assert belieflink_dataframe.loc[2, belief_id_str()] == iowa_text
+    assert belieflink_dataframe.loc[2, credor_weight_str()] == yao_iowa_credor_w
+    assert belieflink_dataframe.loc[2, debtor_weight_str()] == yao_iowa_debtor_w
 
-    assert beliefhold_dataframe.loc[3, real_id_str()] == music_real_id
-    assert beliefhold_dataframe.loc[3, owner_id_str()] == sue_worldunit._owner_id
-    assert beliefhold_dataframe.loc[3, char_id_str()] == yao_text
-    assert beliefhold_dataframe.loc[3, belief_id_str()] == ohio_text
-    assert beliefhold_dataframe.loc[3, credor_weight_str()] == yao_ohio_credor_w
-    assert beliefhold_dataframe.loc[3, debtor_weight_str()] == yao_ohio_debtor_w
-    assert len(beliefhold_dataframe) == 4
+    assert belieflink_dataframe.loc[3, real_id_str()] == music_real_id
+    assert belieflink_dataframe.loc[3, owner_id_str()] == sue_worldunit._owner_id
+    assert belieflink_dataframe.loc[3, char_id_str()] == yao_text
+    assert belieflink_dataframe.loc[3, belief_id_str()] == ohio_text
+    assert belieflink_dataframe.loc[3, credor_weight_str()] == yao_ohio_credor_w
+    assert belieflink_dataframe.loc[3, debtor_weight_str()] == yao_ohio_debtor_w
+    assert len(belieflink_dataframe) == 4
 
 
 def test_create_bridge_Arg_jaar_format_0003_ideaunit_v0_0_0():

@@ -386,7 +386,7 @@ def test_WorldUnit_meld_ReturnsCorrectObj_LargeExample():
     yao_world = world_v001()
 
     yao_idearoot = yao_world._idearoot
-    yao_worldr_bl = yao_idearoot._fiscallines
+    yao_worldr_bl = yao_idearoot._awardlines
     family_text = ",Family"
     yao_family_bl = yao_worldr_bl.get(family_text)
 
@@ -418,7 +418,7 @@ def test_WorldUnit_meld_ReturnsCorrectObj_LargeExample():
     assert bob_world._beliefs == yao_world._beliefs
     assert len(bob_world.get_idea_dict()) == len(yao_world.get_idea_dict())
 
-    bob_worldr_bl = bob_idearoot._fiscallines
+    bob_worldr_bl = bob_idearoot._awardlines
     bob_family_bl = bob_worldr_bl.get(family_text)
     print("Melded")
 
@@ -432,29 +432,29 @@ def test_WorldUnit_meld_ReturnsCorrectObj_LargeExample():
     assert abs(bob_family_bl._world_cred - yao_family_bl._world_cred) < 0.0001
     assert abs(bob_family_bl._world_debt - yao_family_bl._world_debt) < 0.0001
 
-    # for fiscalline in bob_worldr_bl.values():
-    #     if fiscalline.char_id != fam_text:
-    #         assert fiscalline == yao_worldr_bl.get(fiscalline.char_id)
+    # for awardline in bob_worldr_bl.values():
+    #     if awardline.char_id != fam_text:
+    #         assert awardline == yao_worldr_bl.get(awardline.char_id)
     assert bob_worldr_bl == yao_worldr_bl
-    # assert x_world1._idearoot._fiscallines == bob2_world._idearoot._fiscallines
+    # assert x_world1._idearoot._awardlines == bob2_world._idearoot._awardlines
     # assert x_world1._idearoot == bob2_world._idearoot
 
 
-def test_WorldUnit__meld_originlinks_CorrectlySetsOriginLinks():
+def test_WorldUnit__meld_originholds_CorrectlySetsOriginHolds():
     # GIVEN
     bob_text = "Bob"
     sue_text = "Sue"
     sue_weight = 4
     bob_world = worldunit_shop(bob_text)
-    assert len(bob_world._originunit._links) == 0
+    assert len(bob_world._originunit._originholds) == 0
 
     # WHEN
-    bob_world._meld_originlinks(char_id=sue_text, char_weight=sue_weight)
+    bob_world._meld_originholds(char_id=sue_text, char_weight=sue_weight)
 
     # THEN
-    assert len(bob_world._originunit._links) == 1
+    assert len(bob_world._originunit._originholds) == 1
     bob_sue_originunit = originunit_shop()
-    bob_sue_originunit.set_originlink(char_id=sue_text, weight=sue_weight)
+    bob_sue_originunit.set_originhold(char_id=sue_text, weight=sue_weight)
     assert bob_world._originunit == bob_sue_originunit
 
 
@@ -477,15 +477,15 @@ def test_WorldUnit_meld_OriginUnitsCorrectlySet():
     sue_x_world.add_idea(ideaunit_shop(free_text), parent_road=swim_road)
     sue_x_world.set_fact(base=swim_road, pick=free_road, open=23, nigh=27)
     sue_x_world.add_idea(ideaunit_shop(back_text), parent_road=swim_road)
-    assert len(bob_world._originunit._links) == 0
+    assert len(bob_world._originunit._originholds) == 0
 
     # WHEN
     bob_world.meld(sue_x_world, char_weight=sue_weight)
 
     # THEN
     sue_originunit = originunit_shop()
-    sue_originunit.set_originlink(char_id=sue_text, weight=sue_weight)
-    assert len(bob_world._originunit._links) == 1
+    sue_originunit.set_originhold(char_id=sue_text, weight=sue_weight)
+    assert len(bob_world._originunit._originholds) == 1
     assert bob_world._originunit == sue_originunit
     bob_free_idea = bob_world.get_idea_obj(free_road)
     bob_back_idea = bob_world.get_idea_obj(back_road)

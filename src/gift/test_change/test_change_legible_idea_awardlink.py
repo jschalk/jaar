@@ -4,10 +4,10 @@ from src.gift.legible import create_legible_list
 from src._world.world import worldunit_shop
 
 
-def test_create_legible_list_ReturnsObj_idea_fiscallink_INSERT():
+def test_create_legible_list_ReturnsObj_idea_awardlink_INSERT():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_idea_fiscallink"
+    category = "world_idea_awardlink"
     road_text = "road"
     casa_road = sue_world.make_l1_road("casa")
     road_value = sue_world.make_road(casa_road, "clean fridge")
@@ -30,16 +30,16 @@ def test_create_legible_list_ReturnsObj_idea_fiscallink_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_world)
 
     # THEN
-    x_str = f"Fiscallink created for belief {belief_id_value} for idea '{road_value}' with credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
+    x_str = f"Awardlink created for belief {belief_id_value} for idea '{road_value}' with credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_fiscallink_UPDATE_credor_weight_debtor_weight():
+def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_credor_weight_debtor_weight():
     # GIVEN
     sue_world = worldunit_shop("Sue")
 
-    category = "world_idea_fiscallink"
+    category = "world_idea_awardlink"
     belief_id_text = "belief_id"
     belief_id_value = f"{sue_world._road_delimiter}Swimmers"
     road_text = "road"
@@ -62,15 +62,15 @@ def test_create_legible_list_ReturnsObj_idea_fiscallink_UPDATE_credor_weight_deb
     legible_list = create_legible_list(x_changeunit, sue_world)
 
     # THEN
-    x_str = f"Fiscallink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
+    x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_fiscallink_UPDATE_credor_weight():
+def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_credor_weight():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_idea_fiscallink"
+    category = "world_idea_awardlink"
     belief_id_text = "belief_id"
     belief_id_value = f"{sue_world._road_delimiter}Swimmers"
     road_text = "road"
@@ -90,15 +90,15 @@ def test_create_legible_list_ReturnsObj_idea_fiscallink_UPDATE_credor_weight():
     legible_list = create_legible_list(x_changeunit, sue_world)
 
     # THEN
-    x_str = f"Fiscallink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value}."
+    x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_fiscallink_UPDATE_debtor_weight():
+def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_debtor_weight():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_idea_fiscallink"
+    category = "world_idea_awardlink"
     belief_id_text = "belief_id"
     belief_id_value = f"{sue_world._road_delimiter}Swimmers"
     road_text = "road"
@@ -118,15 +118,15 @@ def test_create_legible_list_ReturnsObj_idea_fiscallink_UPDATE_debtor_weight():
     legible_list = create_legible_list(x_changeunit, sue_world)
 
     # THEN
-    x_str = f"Fiscallink has been transited for belief {belief_id_value} for idea '{road_value}'. Now debtor_weight={debtor_weight_value}."
+    x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now debtor_weight={debtor_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_fiscallink_DELETE():
+def test_create_legible_list_ReturnsObj_idea_awardlink_DELETE():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_idea_fiscallink"
+    category = "world_idea_awardlink"
     road_text = "road"
     casa_road = sue_world.make_l1_road("casa")
     road_value = sue_world.make_road(casa_road, "clean fridge")
@@ -143,6 +143,8 @@ def test_create_legible_list_ReturnsObj_idea_fiscallink_DELETE():
     legible_list = create_legible_list(x_changeunit, sue_world)
 
     # THEN
-    x_str = f"Fiscallink for belief {belief_id_value}, idea '{road_value}' has been deleted."
+    x_str = (
+        f"Awardlink for belief {belief_id_value}, idea '{road_value}' has been deleted."
+    )
     print(f"{x_str=}")
     assert legible_list[0] == x_str

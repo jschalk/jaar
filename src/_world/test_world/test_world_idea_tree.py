@@ -7,7 +7,7 @@ from src._world.healer import healerhold_shop
 from src._world.char import CharID
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefunit import fiscalline_shop, fiscallink_shop
+from src._world.beliefunit import awardline_shop, awardlink_shop
 from src._world.graphic import display_ideatree
 from pytest import raises as pytest_raises
 
@@ -250,18 +250,18 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
     x_world.add_idea(vacuum_idea, parent_road=casa_road)
 
     x_world.add_charunit(char_id=sue_text)
-    x_fiscallink = fiscallink_shop(belief_id=sue_text)
+    x_awardlink = awardlink_shop(belief_id=sue_text)
 
-    x_world._idearoot._kids[casa_text]._kids[email_text].set_fiscallink(
-        fiscallink=x_fiscallink
+    x_world._idearoot._kids[casa_text]._kids[email_text].set_awardlink(
+        awardlink=x_awardlink
     )
     # print(x_world._kids[casa_text]._kids[email_text])
-    # print(x_world._kids[casa_text]._kids[email_text]._fiscallink)
+    # print(x_world._kids[casa_text]._kids[email_text]._awardlink)
 
     # WHEN
     x_world.calc_world_metrics()
     # print(x_world._kids[casa_text]._kids[email_text])
-    # print(x_world._kids[casa_text]._kids[email_text]._fiscallink)
+    # print(x_world._kids[casa_text]._kids[email_text]._awardlink)
 
     # THEN
     assert x_world._idearoot._all_char_cred is False
@@ -282,59 +282,59 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
     assert week_idea._kids[tue_text]._all_char_debt == True
 
 
-def test_WorldUnit_TreeTraverseSetsClearsFiscalLineestorsCorrectly():
+def test_WorldUnit_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     # GIVEN
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
-    # idea tree has no fiscallinks
-    assert x_world._idearoot._fiscallines == {}
-    x_world._idearoot._fiscallines = {1: "testtest"}
-    assert x_world._idearoot._fiscallines != {}
+    # idea tree has no awardlinks
+    assert x_world._idearoot._awardlines == {}
+    x_world._idearoot._awardlines = {1: "testtest"}
+    assert x_world._idearoot._awardlines != {}
 
     # WHEN
     x_world.calc_world_metrics()
 
     # THEN
-    assert not x_world._idearoot._fiscallines
+    assert not x_world._idearoot._awardlines
 
     # WHEN
     # test for level 1 and level n
     casa_text = "casa"
     casa_idea = x_world._idearoot._kids[casa_text]
-    casa_idea._fiscallines = {1: "testtest"}
-    assert casa_idea._fiscallines != {}
+    casa_idea._awardlines = {1: "testtest"}
+    assert casa_idea._awardlines != {}
     x_world.calc_world_metrics()
 
     # THEN
-    assert not x_world._idearoot._kids[casa_text]._fiscallines
+    assert not x_world._idearoot._kids[casa_text]._awardlines
 
 
-def test_WorldUnit_calc_world_metrics_TreeTraverseSetsFiscalLineestorFromRootCorrectly():
+def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorrectly():
     # GIVEN
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
-    # idea tree has no fiscallinks
-    assert x_world._idearoot._fiscallines == {}
+    # idea tree has no awardlinks
+    assert x_world._idearoot._awardlines == {}
     sue_text = "sue"
     week_text = "weekdays"
     nation_text = "nation-state"
-    sue_fiscallink = fiscallink_shop(belief_id=sue_text)
+    sue_awardlink = awardlink_shop(belief_id=sue_text)
     x_world.add_charunit(char_id=sue_text)
-    x_world._idearoot.set_fiscallink(fiscallink=sue_fiscallink)
-    # idea tree has fiscallines
-    assert x_world._idearoot._fiscalheirs.get(sue_text) is None
+    x_world._idearoot.set_awardlink(awardlink=sue_awardlink)
+    # idea tree has awardlines
+    assert x_world._idearoot._awardheirs.get(sue_text) is None
 
     # WHEN
     x_world.calc_world_metrics()
 
     # THEN
-    assert x_world._idearoot._fiscalheirs.get(sue_text) != None
-    assert x_world._idearoot._fiscalheirs.get(sue_text).belief_id == sue_text
-    assert x_world._idearoot._fiscallines != {}
+    assert x_world._idearoot._awardheirs.get(sue_text) != None
+    assert x_world._idearoot._awardheirs.get(sue_text).belief_id == sue_text
+    assert x_world._idearoot._awardlines != {}
     root_idea = x_world.get_idea_obj(road=x_world._idearoot._label)
-    sue_fiscalline = x_world._idearoot._fiscallines.get(sue_text)
-    print(f"{sue_fiscalline._world_cred=} {root_idea._world_importance=} ")
-    print(f"  {sue_fiscalline._world_debt=} {root_idea._world_importance=} ")
+    sue_awardline = x_world._idearoot._awardlines.get(sue_text)
+    print(f"{sue_awardline._world_cred=} {root_idea._world_importance=} ")
+    print(f"  {sue_awardline._world_debt=} {root_idea._world_importance=} ")
     sum_x = 0
     cat_road = x_world.make_l1_road("feed cat")
     cat_idea = x_world.get_idea_obj(cat_road)
@@ -359,44 +359,44 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsFiscalLineestorFromRootCor
     # for kid_idea in root_idea._kids.values():
     #     sum_x += kid_idea._world_importance
     #     print(f"  {kid_idea._world_importance=} {sum_x=} {kid_idea.get_road()=}")
-    assert round(sue_fiscalline._world_cred, 15) == 1
-    assert round(sue_fiscalline._world_debt, 15) == 1
-    x_fiscalline = fiscalline_shop(
+    assert round(sue_awardline._world_cred, 15) == 1
+    assert round(sue_awardline._world_debt, 15) == 1
+    x_awardline = awardline_shop(
         belief_id=sue_text,
         _world_cred=0.9999999999999998,
         _world_debt=0.9999999999999998,
     )
-    assert x_world._idearoot._fiscallines == {x_fiscalline.belief_id: x_fiscalline}
+    assert x_world._idearoot._awardlines == {x_awardline.belief_id: x_awardline}
 
 
-def test_WorldUnit_calc_world_metrics_TreeTraverseSetsFiscalLineestorFromNonRootCorrectly():
+def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootCorrectly():
     # GIVEN
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
-    # idea tree has no fiscallinks
+    # idea tree has no awardlinks
     sue_text = "sue"
-    assert x_world._idearoot._fiscallines == {}
+    assert x_world._idearoot._awardlines == {}
     x_world.add_charunit(char_id=sue_text)
-    x_fiscallink = fiscallink_shop(belief_id=sue_text)
+    x_awardlink = awardlink_shop(belief_id=sue_text)
     casa_text = "casa"
     email_text = "email"
-    x_world._idearoot._kids[casa_text].set_fiscallink(fiscallink=x_fiscallink)
+    x_world._idearoot._kids[casa_text].set_awardlink(awardlink=x_awardlink)
 
     # WHEN
-    # idea tree has fiscallinks
+    # idea tree has awardlinks
     x_world.calc_world_metrics()
 
     # THEN
-    assert x_world._idearoot._fiscallines != {}
-    x_fiscalline = fiscalline_shop(
+    assert x_world._idearoot._awardlines != {}
+    x_awardline = awardline_shop(
         belief_id=sue_text,
         _world_cred=0.23076923076923078,
         _world_debt=0.23076923076923078,
     )
-    assert x_world._idearoot._fiscallines == {x_fiscalline.belief_id: x_fiscalline}
-    assert x_world._idearoot._kids[casa_text]._fiscallines != {}
-    assert x_world._idearoot._kids[casa_text]._fiscallines == {
-        x_fiscalline.belief_id: x_fiscalline
+    assert x_world._idearoot._awardlines == {x_awardline.belief_id: x_awardline}
+    assert x_world._idearoot._kids[casa_text]._awardlines != {}
+    assert x_world._idearoot._kids[casa_text]._awardlines == {
+        x_awardline.belief_id: x_awardline
     }
 
 
@@ -415,9 +415,9 @@ def test_world4char_Exists():
 
     sue_char_id = CharID(sue_text)
     x_world.add_charunit(char_id=sue_char_id)
-    x_fiscallink = fiscallink_shop(belief_id=sue_char_id)
+    x_awardlink = awardlink_shop(belief_id=sue_char_id)
     yrx = x_world._idearoot
-    yrx._kids[casa_text]._kids[email_text].set_fiscallink(fiscallink=x_fiscallink)
+    yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=x_awardlink)
 
     # WHEN
     sue_world4char = x_world.get_world4char(facts=None, char_id=sue_char_id)
@@ -445,17 +445,17 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
 
     yao_char_id = CharID("Yao")
     x_world.add_charunit(char_id=yao_char_id)
-    yao_bl = fiscallink_shop(belief_id=yao_char_id)
+    yao_bl = awardlink_shop(belief_id=yao_char_id)
     yrx = x_world._idearoot
-    yrx._kids[week_text].set_fiscallink(fiscallink=yao_bl)
-    yrx._kids[feed_text].set_fiscallink(fiscallink=yao_bl)
+    yrx._kids[week_text].set_awardlink(awardlink=yao_bl)
+    yrx._kids[feed_text].set_awardlink(awardlink=yao_bl)
     nation_text = "nation-state"
-    yrx._kids[nation_text].set_fiscallink(fiscallink=yao_bl)
+    yrx._kids[nation_text].set_awardlink(awardlink=yao_bl)
 
     sue_char_id = CharID(sue_text)
     x_world.add_charunit(char_id=sue_char_id)
-    sue_bl = fiscallink_shop(belief_id=sue_char_id)
-    yrx._kids[casa_text]._kids[email_text].set_fiscallink(fiscallink=sue_bl)
+    sue_bl = awardlink_shop(belief_id=sue_char_id)
+    yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=sue_bl)
 
     # WHEN
     sue_world4char = x_world.get_world4char(sue_char_id, facts=None)

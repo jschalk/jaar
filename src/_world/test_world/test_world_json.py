@@ -1,6 +1,6 @@
 from src._instrument.python import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
-from src._world.beliefunit import beliefunit_shop, fiscallink_shop
+from src._world.beliefunit import beliefunit_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.healer import healerhold_shop
 from src._world.reason_culture import cultureunit_shop
@@ -19,7 +19,7 @@ from src._world.examples.example_worlds import (
 from pytest import raises as pytest_raises
 
 
-def test_WorldUnit_get_dict_SetsCharUnit_beliefholds():
+def test_WorldUnit_get_dict_SetsCharUnit_belieflinks():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
@@ -40,23 +40,23 @@ def test_WorldUnit_get_dict_SetsCharUnit_beliefholds():
     run_beliefunit.set_charlink(sue_run_charlink)
     run_beliefunit.set_charlink(zia_run_charlink)
     assert len(bob_world.get_beliefunit(run_text)._chars) == 2
-    assert len(bob_world.get_char(yao_text)._beliefholds) == 0
-    assert len(bob_world.get_char(sue_text)._beliefholds) == 0
+    assert len(bob_world.get_char(yao_text)._belieflinks) == 0
+    assert len(bob_world.get_char(sue_text)._belieflinks) == 0
 
     # WHEN
     bob_world.get_dict()
 
     # THEN
-    assert len(bob_world.get_char(sue_text)._beliefholds) == 2
-    assert len(bob_world.get_char(zia_text)._beliefholds) == 2
+    assert len(bob_world.get_char(sue_text)._belieflinks) == 2
+    assert len(bob_world.get_char(zia_text)._belieflinks) == 2
     sue_charunit = bob_world.get_char(sue_text)
     zia_charunit = bob_world.get_char(zia_text)
-    sue_beliefhold = sue_charunit.get_beliefhold(run_text)
-    zia_beliefhold = zia_charunit.get_beliefhold(run_text)
-    assert sue_beliefhold.credor_weight == sue_credor_weight
-    assert sue_beliefhold.debtor_weight == sue_debtor_weight
-    assert zia_beliefhold.credor_weight == zia_credor_weight
-    assert zia_beliefhold.debtor_weight == zia_debtor_weight
+    sue_belieflink = sue_charunit.get_belieflink(run_text)
+    zia_belieflink = zia_charunit.get_belieflink(run_text)
+    assert sue_belieflink.credor_weight == sue_credor_weight
+    assert sue_belieflink.debtor_weight == sue_debtor_weight
+    assert zia_belieflink.credor_weight == zia_credor_weight
+    assert zia_belieflink.debtor_weight == zia_debtor_weight
 
 
 def test_WorldUnit_get_dict_ReturnsDictObject():
@@ -65,7 +65,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     day_hour_text = "day_hour"
     day_hour_road = x_world.make_l1_road(day_hour_text)
     day_hour_idea = x_world.get_idea_obj(day_hour_road)
-    day_hour_idea._originunit.set_originlink(char_id="Bob", weight=2)
+    day_hour_idea._originunit.set_originhold(char_id="Bob", weight=2)
     x_world.set_fact(
         base=day_hour_road,
         pick=day_hour_road,
@@ -75,7 +75,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     time_minute = x_world.make_l1_road("day_minute")
     x_world.set_fact(base=time_minute, pick=time_minute, open=0, nigh=1440)
     yao_text = "Yao"
-    x_world._originunit.set_originlink(yao_text, 1)
+    x_world._originunit.set_originhold(yao_text, 1)
     world_weight = 23
     x_world._weight = world_weight
     x_char_credor_pool = 22
@@ -143,12 +143,12 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     originunit_text = "_originunit"
     day_hour_originunit_dict = idearoot_dict[_kids][day_hour_text][originunit_text]
     assert day_hour_originunit_dict == day_hour_idea._originunit.get_dict()
-    _links = "_links"
-    x_world_originlink = world_dict[originunit_text][_links][yao_text]
-    print(f"{x_world_originlink=}")
-    assert x_world_originlink
-    assert x_world_originlink["char_id"] == yao_text
-    assert x_world_originlink["weight"] == 1
+    originholds_text = "_originholds"
+    x_world_originhold = world_dict[originunit_text][originholds_text][yao_text]
+    print(f"{x_world_originhold=}")
+    assert x_world_originhold
+    assert x_world_originhold["char_id"] == yao_text
+    assert x_world_originhold["weight"] == 1
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_cultureunit():
@@ -292,7 +292,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_world.edit_idea_attr(road=factunit_x.base, factunit=factunit_x)
     yao_world.set_max_tree_traverse(int_x=2)
     yao_text = "Yao"
-    yao_world._originunit.set_originlink(yao_text, 1)
+    yao_world._originunit.set_originhold(yao_text, 1)
 
     # WHEN
     world_dict = get_dict_from_json(json_x=yao_world.get_json())
@@ -330,8 +330,8 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert len(cont_reasonunits_dict) == len(cont_idea._reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_idea._reasonunits)
     originunit_text = "_originunit"
-    _links = "_links"
-    assert len(world_dict[originunit_text][_links])
+    originholds_text = "_originholds"
+    assert len(world_dict[originunit_text][originholds_text])
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
@@ -354,7 +354,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_text = "shave"
     shave_road = zia_world.make_l1_road(shave_text)
     shave_idea_y1 = zia_world.get_idea_obj(shave_road)
-    shave_idea_y1._originunit.set_originlink(char_id="Sue", weight=4.3)
+    shave_idea_y1._originunit.set_originhold(char_id="Sue", weight=4.3)
     shave_idea_y1._problem_bool = True
     # print(f"{shave_road=}")
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")
@@ -375,15 +375,15 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     tim_cultureunit = cultureunit_shop()
     tim_cultureunit.set_allyhold(belief_id=tim_text)
     zia_world.edit_idea_attr(shave_road, cultureunit=tim_cultureunit)
-    zia_world.edit_idea_attr(shave_road, fiscallink=fiscallink_shop(tim_text))
-    zia_world.edit_idea_attr(shave_road, fiscallink=fiscallink_shop(sue_text))
-    zia_world.edit_idea_attr(zia_world._real_id, fiscallink=fiscallink_shop(sue_text))
+    zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(tim_text))
+    zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
+    zia_world.edit_idea_attr(zia_world._real_id, awardlink=awardlink_shop(sue_text))
     # add healerhold to shave ideaunit
     run_healerhold = healerhold_shop({run_text})
     zia_world.edit_idea_attr(shave_road, healerhold=run_healerhold)
 
     yao_text = "Yao"
-    zia_world._originunit.set_originlink(yao_text, 1)
+    zia_world._originunit.set_originhold(yao_text, 1)
     override_text = "override"
     zia_world.set_meld_strategy(override_text)
 
@@ -423,7 +423,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._cultureunit == zia_world._idearoot._cultureunit
     assert json_idearoot._cultureunit == run_cultureunit
     assert len(json_idearoot._factunits) == 1
-    assert len(json_idearoot._fiscallinks) == 1
+    assert len(json_idearoot._awardlinks) == 1
 
     assert len(json_world._idearoot._kids) == 2
 
@@ -445,12 +445,12 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_shave_idea._originunit == zia_shave_idea._originunit
     print(f"{json_shave_idea._healerhold=}")
     assert json_shave_idea._healerhold == zia_shave_idea._healerhold
-    assert len(json_shave_idea._fiscallinks) == 2
+    assert len(json_shave_idea._awardlinks) == 2
     assert len(json_shave_idea._factunits) == 1
     assert zia_shave_idea._problem_bool
     assert json_shave_idea._problem_bool == zia_shave_idea._problem_bool
 
-    assert len(json_world._originunit._links) == 1
+    assert len(json_world._originunit._originholds) == 1
     assert json_world._originunit == zia_world._originunit
 
 
@@ -541,9 +541,9 @@ def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
         x2_world._owner_id: x2_world.get_dict(),
         x3_world._owner_id: x3_world.get_dict(),
     }
-    x1_world.clear_charunits_beliefholds()
-    x2_world.clear_charunits_beliefholds()
-    x3_world.clear_charunits_beliefholds()
+    x1_world.clear_charunits_belieflinks()
+    x2_world.clear_charunits_belieflinks()
+    x3_world.clear_charunits_belieflinks()
 
     # WHEN
     ccn_dict_of_obj = get_dict_of_world_from_dict(cn_dict_of_dicts)

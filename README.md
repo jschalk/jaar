@@ -74,13 +74,13 @@ WorldUnit IdeaUnit objects
 
 WorldUnit IdeaUnit hierarchical structure
 
-WorldUnit IdeaUnit FiscalLink objects
+WorldUnit IdeaUnit AwardLink objects
 
-WorldUnit IdeaUnit FiscalLine objects
+WorldUnit IdeaUnit AwardLine objects
 
-WorldUnit IdeaUnit FiscalHeir objects
+WorldUnit IdeaUnit AwardHeir objects
 
-WorldUnit IdeaUnit FiscalHeir objects
+WorldUnit IdeaUnit AwardHeir objects
 
 WorldUnit IdeaUnit Reason PremiseUnit objects
 

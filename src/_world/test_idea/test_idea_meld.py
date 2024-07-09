@@ -1,5 +1,5 @@
 from src._world.idea import ideaunit_shop, IdeaAttrFilter, IdeaUnit
-from src._world.beliefunit import FiscalLink, BeliefID, fiscallink_shop
+from src._world.beliefunit import AwardLink, BeliefID, awardlink_shop
 from src._world.reason_idea import (
     reasonunit_shop,
     ReasonUnit,
@@ -36,8 +36,8 @@ def arbitrarily_set_idea_attr(
     descendant_pledge_count: int = None,
     all_char_cred: bool = None,
     all_char_debt: bool = None,
-    fiscallink: FiscalLink = None,
-    fiscallink_del: BeliefID = None,
+    awardlink: AwardLink = None,
+    awardlink_del: BeliefID = None,
     is_expanded: bool = None,
     pledge: bool = None,
     meld_strategy: str = None,
@@ -65,8 +65,8 @@ def arbitrarily_set_idea_attr(
         descendant_pledge_count=descendant_pledge_count,
         all_char_cred=all_char_cred,
         all_char_debt=all_char_debt,
-        fiscallink=fiscallink,
-        fiscallink_del=fiscallink_del,
+        awardlink=awardlink,
+        awardlink_del=awardlink_del,
         is_expanded=is_expanded,
         pledge=pledge,
         meld_strategy=meld_strategy,
@@ -189,7 +189,7 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_TwoReasonsMeldScenario_reasonunits():
     assert x1_idea._reasonunits[reason_base_x2] != None
 
 
-def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_fiscallinkWhen_meld_strategyEquals_default():
+def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_awardlinkWhen_meld_strategyEquals_default():
     # GIVEN
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
@@ -197,23 +197,23 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_fiscallinkWhen_meld_strate
     default_text = "default"
     arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=default_text)
     arbitrarily_set_idea_attr(
-        idea=x1_idea, fiscallink=fiscallink_shop(belief_id=br1, credor_weight=2)
+        idea=x1_idea, awardlink=awardlink_shop(belief_id=br1, credor_weight=2)
     )
     x2_idea = ideaunit_shop("Swimming")
     arbitrarily_set_idea_attr(idea=x2_idea, meld_strategy=default_text)
     arbitrarily_set_idea_attr(
-        idea=x2_idea, fiscallink=fiscallink_shop(belief_id=br1, credor_weight=3)
+        idea=x2_idea, awardlink=awardlink_shop(belief_id=br1, credor_weight=3)
     )
 
     # WHEN
     x1_idea.meld(exterior_idea=x2_idea)
 
     # THEN
-    bl_x = fiscallink_shop(belief_id=br1, credor_weight=2)
-    assert x1_idea._fiscallinks[br1] == bl_x
+    bl_x = awardlink_shop(belief_id=br1, credor_weight=2)
+    assert x1_idea._awardlinks[br1] == bl_x
 
 
-def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_fiscallinkWhen_meld_strategyEquals_sum():
+def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_awardlinkWhen_meld_strategyEquals_sum():
     # GIVEN
     sum_text = "sum"
     casa_text = "casa"
@@ -223,24 +223,24 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_fiscallinkWhen_meld_strate
     arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
     arbitrarily_set_idea_attr(
         idea=x1_idea,
-        fiscallink=fiscallink_shop(belief_id=br1, credor_weight=2, debtor_weight=3),
+        awardlink=awardlink_shop(belief_id=br1, credor_weight=2, debtor_weight=3),
     )
     x2_idea = ideaunit_shop("Swimming")
     arbitrarily_set_idea_attr(idea=x2_idea, meld_strategy=sum_text)
     arbitrarily_set_idea_attr(
         idea=x2_idea,
-        fiscallink=fiscallink_shop(belief_id=br1, credor_weight=2, debtor_weight=3),
+        awardlink=awardlink_shop(belief_id=br1, credor_weight=2, debtor_weight=3),
     )
 
     # WHEN
     x1_idea.meld(exterior_idea=x2_idea)
 
     # THEN
-    lu_x = fiscallink_shop(belief_id=br1, credor_weight=4, debtor_weight=6)
-    assert x1_idea._fiscallinks[br1] == lu_x
+    lu_x = awardlink_shop(belief_id=br1, credor_weight=4, debtor_weight=6)
+    assert x1_idea._awardlinks[br1] == lu_x
 
 
-def test_IdeaUnit_meld_ReturnsCorrectObj_TwoBeliefsScenario_fiscallink():
+def test_IdeaUnit_meld_ReturnsCorrectObj_TwoBeliefsScenario_awardlink():
     # GIVEN
     sum_text = "sum"
     casa_text = "casa"
@@ -249,24 +249,24 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_TwoBeliefsScenario_fiscallink():
     br1 = "Running"
     arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
     arbitrarily_set_idea_attr(
-        idea=x1_idea, fiscallink=fiscallink_shop(belief_id=br1, credor_weight=2)
+        idea=x1_idea, awardlink=awardlink_shop(belief_id=br1, credor_weight=2)
     )
 
     br2 = "Bears"
     x2_idea = ideaunit_shop("Swimming")
     arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
     arbitrarily_set_idea_attr(
-        idea=x2_idea, fiscallink=fiscallink_shop(belief_id=br2, credor_weight=2)
+        idea=x2_idea, awardlink=awardlink_shop(belief_id=br2, credor_weight=2)
     )
 
     # WHEN
     x1_idea.meld(exterior_idea=x2_idea)
 
     # THEN
-    lu_x1 = fiscallink_shop(belief_id=br1, credor_weight=2)
-    lu_x2 = fiscallink_shop(belief_id=br2, credor_weight=2)
-    assert x1_idea._fiscallinks[br1] == lu_x1
-    assert x1_idea._fiscallinks[br2] == lu_x2
+    lu_x1 = awardlink_shop(belief_id=br1, credor_weight=2)
+    lu_x2 = awardlink_shop(belief_id=br2, credor_weight=2)
+    assert x1_idea._awardlinks[br1] == lu_x1
+    assert x1_idea._awardlinks[br2] == lu_x2
 
 
 def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_factunits():
@@ -686,7 +686,7 @@ def test_IdeaUnit_meld_FailRaisesError_is_expanded():
     )
 
 
-def test_IdeaUnit_meld_CorrectlyCreatesOriginUnitWithOriginLink():
+def test_IdeaUnit_meld_CorrectlyCreatesOriginUnitWithOriginHold():
     # GIVEN
     label1_text = "clean"
     x1_idea = ideaunit_shop(label1_text)
@@ -703,11 +703,11 @@ def test_IdeaUnit_meld_CorrectlyCreatesOriginUnitWithOriginLink():
     # THEN
     assert x1_idea._originunit != None
     sue_originunit = originunit_shop()
-    sue_originunit.set_originlink(char_id=sue_text, weight=sue_weight)
+    sue_originunit.set_originhold(char_id=sue_text, weight=sue_weight)
     assert x1_idea._originunit == sue_originunit
 
 
-def test_IdeaUnit_meld_IdeaMeldingItselfCreatesOriginUnitWithCorrectOriginLink():
+def test_IdeaUnit_meld_IdeaMeldingItselfCreatesOriginUnitWithCorrectOriginHold():
     # GIVEN
     label1_text = "clean"
     x1_idea = ideaunit_shop(label1_text)
@@ -715,13 +715,13 @@ def test_IdeaUnit_meld_IdeaMeldingItselfCreatesOriginUnitWithCorrectOriginLink()
     tim_weight = 7
     tim_idea = ideaunit_shop(tim_text)
     ex_x1_idea_originunit = originunit_shop()
-    ex_x1_idea_originunit.set_originlink(char_id=tim_text, weight=tim_weight)
+    ex_x1_idea_originunit.set_originhold(char_id=tim_text, weight=tim_weight)
     x1_idea.meld(exterior_idea=tim_idea, char_id=tim_text, char_weight=tim_weight)
     assert x1_idea._originunit == ex_x1_idea_originunit
 
     sue_text = "Sue"
     sue_weight = 5
-    ex_x1_idea_originunit.set_originlink(char_id=sue_text, weight=sue_weight)
+    ex_x1_idea_originunit.set_originhold(char_id=sue_text, weight=sue_weight)
     assert x1_idea._originunit != ex_x1_idea_originunit
 
     x1_idea_copy = deepcopy(x1_idea)
@@ -733,9 +733,9 @@ def test_IdeaUnit_meld_IdeaMeldingItselfCreatesOriginUnitWithCorrectOriginLink()
     # THEN
     assert x1_idea._originunit != x1_idea_copy._originunit
 
-    x1_idea_originunit_link_sue = x1_idea._originunit._links.get(sue_text)
-    x1_idea_originunit_link_tim = x1_idea._originunit._links.get(tim_text)
-    assert x1_idea_originunit_link_sue != None
-    assert x1_idea_originunit_link_sue != x1_idea_copy._originunit._links.get(sue_text)
-    assert x1_idea_originunit_link_tim == x1_idea_copy._originunit._links.get(tim_text)
+    x1_idea_originhold_sue = x1_idea._originunit._originholds.get(sue_text)
+    x1_idea_originhold_tim = x1_idea._originunit._originholds.get(tim_text)
+    assert x1_idea_originhold_sue != None
+    assert x1_idea_originhold_sue != x1_idea_copy._originunit._originholds.get(sue_text)
+    assert x1_idea_originhold_tim == x1_idea_copy._originunit._originholds.get(tim_text)
     # assert x1_idea == x1_idea_copy #Uncomment to see differences

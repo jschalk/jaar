@@ -4,10 +4,10 @@ from src.gift.legible import create_legible_list
 from src._world.world import worldunit_shop
 
 
-def test_create_legible_list_ReturnsObj_char_beliefhold_INSERT():
+def test_create_legible_list_ReturnsObj_char_belieflink_INSERT():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_char_beliefhold"
+    category = "world_char_belieflink"
     belief_id_text = "belief_id"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -34,10 +34,10 @@ def test_create_legible_list_ReturnsObj_char_beliefhold_INSERT():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_beliefhold_UPDATE_credor_weight_debtor_weight():
+def test_create_legible_list_ReturnsObj_char_belieflink_UPDATE_credor_weight_debtor_weight():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_char_beliefhold"
+    category = "world_char_belieflink"
     belief_id_text = "belief_id"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -64,10 +64,10 @@ def test_create_legible_list_ReturnsObj_char_beliefhold_UPDATE_credor_weight_deb
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_beliefhold_UPDATE_credor_weight():
+def test_create_legible_list_ReturnsObj_char_belieflink_UPDATE_credor_weight():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_char_beliefhold"
+    category = "world_char_belieflink"
     belief_id_text = "belief_id"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -91,10 +91,10 @@ def test_create_legible_list_ReturnsObj_char_beliefhold_UPDATE_credor_weight():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_beliefhold_UPDATE_debtor_weight():
+def test_create_legible_list_ReturnsObj_char_belieflink_UPDATE_debtor_weight():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_char_beliefhold"
+    category = "world_char_belieflink"
     belief_id_text = "belief_id"
     char_id_text = "char_id"
     debtor_weight_text = "debtor_weight"
@@ -118,10 +118,10 @@ def test_create_legible_list_ReturnsObj_char_beliefhold_UPDATE_debtor_weight():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_beliefhold_DELETE():
+def test_create_legible_list_ReturnsObj_char_belieflink_DELETE():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    category = "world_char_beliefhold"
+    category = "world_char_belieflink"
     belief_id_text = "belief_id"
     char_id_text = "char_id"
     swim_text = f"{sue_world._road_delimiter}Swimmers"

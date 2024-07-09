@@ -3,7 +3,7 @@ from os import (
     environ as os_environ,
     getcwd as os_getcwd,
     makedirs as os_makedirs,
-    unlink as os_unlink,
+    remove as os_remove,
     scandir as os_scandir,
     listdir as os_listdir,
     rename as os_rename,
@@ -37,7 +37,7 @@ def delete_dir(dir: str):
         if os_path_isdir(dir):
             shutil_rmtree(path=dir)
         elif os_path_isfile(dir):
-            os_unlink(path=dir)
+            os_remove(path=dir)
 
 
 class InvalidFileCopyException(Exception):

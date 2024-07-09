@@ -1,5 +1,5 @@
 {
-    "world_char_beliefhold": {
+    "world_char_belieflink": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
@@ -8,7 +8,7 @@
             "atom_order": 1
         },
         "normal_specs": {
-            "normal_table_name": "beliefhold"
+            "normal_table_name": "belieflink"
         },
         "optional_args": {
             "credor_weight": {
@@ -67,6 +67,66 @@
             "atom_order": 9
         }
     },
+    "world_idea_allyhold": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 19
+        },
+        "INSERT": {
+            "atom_order": 4
+        },
+        "normal_specs": {
+            "normal_table_name": "allyhold"
+        },
+        "optional_args": {},
+        "required_args": {
+            "belief_id": {
+                "python_type": "BeliefID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false
+    },
+    "world_idea_awardlink": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 21
+        },
+        "INSERT": {
+            "atom_order": 3
+        },
+        "normal_specs": {
+            "normal_table_name": "awardlink"
+        },
+        "optional_args": {
+            "credor_weight": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "debtor_weight": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            }
+        },
+        "required_args": {
+            "belief_id": {
+                "python_type": "BeliefID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 12
+        }
+    },
     "world_idea_factunit": {
         "calculated_attrs": {},
         "DELETE": {
@@ -105,42 +165,6 @@
         "treasury_only": false,
         "UPDATE": {
             "atom_order": 13
-        }
-    },
-    "world_idea_fiscallink": {
-        "calculated_attrs": {},
-        "DELETE": {
-            "atom_order": 21
-        },
-        "INSERT": {
-            "atom_order": 3
-        },
-        "normal_specs": {
-            "normal_table_name": "fiscallink"
-        },
-        "optional_args": {
-            "credor_weight": {
-                "python_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "debtor_weight": {
-                "python_type": "float",
-                "sqlite_datatype": "REAL"
-            }
-        },
-        "required_args": {
-            "belief_id": {
-                "python_type": "BeliefID",
-                "sqlite_datatype": "TEXT"
-            },
-            "road": {
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            }
-        },
-        "treasury_only": false,
-        "UPDATE": {
-            "atom_order": 12
         }
     },
     "world_idea_healerhold": {
@@ -242,30 +266,6 @@
         "UPDATE": {
             "atom_order": 15
         }
-    },
-    "world_idea_allyhold": {
-        "calculated_attrs": {},
-        "DELETE": {
-            "atom_order": 19
-        },
-        "INSERT": {
-            "atom_order": 4
-        },
-        "normal_specs": {
-            "normal_table_name": "allyhold"
-        },
-        "optional_args": {},
-        "required_args": {
-            "belief_id": {
-                "python_type": "BeliefID",
-                "sqlite_datatype": "TEXT"
-            },
-            "road": {
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            }
-        },
-        "treasury_only": false
     },
     "world_ideaunit": {
         "calculated_attrs": {},
