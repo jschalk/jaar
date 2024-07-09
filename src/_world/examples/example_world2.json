@@ -5439,21 +5439,6 @@
                                 "_uid": 227,
                                 "_weight": 1
                             },
-                            "trout": {
-                                "_label": "trout",
-                                "_reasonunits": {
-                                    "A,WaterExistence": {
-                                        "base": "A,WaterExistence",
-                                        "premises": {
-                                            "A,WaterExistence,Williamette WaterShed,East Side of Watershed,flat": {
-                                                "need": "A,WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
-                                            }
-                                        }
-                                    }
-                                },
-                                "_uid": 228,
-                                "_weight": 1
-                            },
                             "Go climbing at east Circuit": {
                                 "_label": "Go climbing at east Circuit",
                                 "_reasonunits": {
@@ -5467,6 +5452,21 @@
                                     }
                                 },
                                 "_uid": 226,
+                                "_weight": 1
+                            },
+                            "trout": {
+                                "_label": "trout",
+                                "_reasonunits": {
+                                    "A,WaterExistence": {
+                                        "base": "A,WaterExistence",
+                                        "premises": {
+                                            "A,WaterExistence,Williamette WaterShed,East Side of Watershed,flat": {
+                                                "need": "A,WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
+                                            }
+                                        }
+                                    }
+                                },
+                                "_uid": 228,
                                 "_weight": 1
                             }
                         },
