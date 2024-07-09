@@ -47,7 +47,7 @@ from src.gift.bridge import (
     must_be_bool_str,
     get_bridge_formats_dir,
     get_bridge_filenames,
-    get_bridge_format_dict,
+    get_bridge_attribute_dict,
     jaar_format_0001_char_v0_0_0,
     jaar_format_0002_beliefhold_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
@@ -148,12 +148,12 @@ def test_bridge_FilesExist():
     assert len(bridge_filenames) == len(get_bridge_filenames())
 
 
-def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
+def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
     # GIVEN
     bridge_name = jaar_format_0001_char_v0_0_0()
 
     # WHEN
-    bridge_dict = get_bridge_format_dict(bridge_name)
+    bridge_dict = get_bridge_attribute_dict(bridge_name)
 
     # THEN
     real_id_dict = bridge_dict.get(real_id_str())
@@ -184,12 +184,12 @@ def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
     assert credor_weight_validate == [must_be_number_str()]
 
 
-def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_0_0():
+def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_0_0():
     # GIVEN
     bridge_name = jaar_format_0002_beliefhold_v0_0_0()
 
     # WHEN
-    bridge_dict = get_bridge_format_dict(bridge_name)
+    bridge_dict = get_bridge_attribute_dict(bridge_name)
 
     # THEN
     real_id_dict = bridge_dict.get(real_id_str())
@@ -220,12 +220,12 @@ def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0002_beliefhold_v0_0
     assert credor_weight_validate == [must_be_number_str()]
 
 
-def test_get_bridge_format_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
+def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     # GIVEN
     bridge_name = jaar_format_0003_ideaunit_v0_0_0()
 
     # WHEN
-    bridge_dict = get_bridge_format_dict(bridge_name)
+    bridge_dict = get_bridge_attribute_dict(bridge_name)
 
     # THEN
     real_id_dict = bridge_dict.get(real_id_str())

@@ -7,7 +7,7 @@ from src.gift.bridge import (
     jaar_format_0001_char_v0_0_0,
     jaar_format_0002_beliefhold_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
-    get_bridge_format_dict,
+    get_bridge_attribute_dict,
     create_bridge,
     real_id_str,
     owner_id_str,
@@ -47,7 +47,7 @@ def test_create_bridge_Arg_jaar_format_0001_char_v0_0_0():
 
     # THEN
     array_headers = list(char_dataframe.columns)
-    bridge_dict = get_bridge_format_dict(x_bridge)
+    bridge_dict = get_bridge_attribute_dict(x_bridge)
     assert array_headers == list(bridge_dict.keys())
     assert char_dataframe.loc[0, real_id_str()] == music_real_id
     assert char_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
@@ -112,7 +112,7 @@ def test_create_bridge_Arg_jaar_format_0002_beliefhold_v0_0_0():
 
     # THEN
     array_headers = list(beliefhold_dataframe.columns)
-    bridge_dict = get_bridge_format_dict(x_bridge)
+    bridge_dict = get_bridge_attribute_dict(x_bridge)
     assert array_headers == list(bridge_dict.keys())
     assert beliefhold_dataframe.loc[0, real_id_str()] == music_real_id
     assert beliefhold_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
@@ -164,7 +164,7 @@ def test_create_bridge_Arg_jaar_format_0003_ideaunit_v0_0_0():
 
     # THEN
     array_headers = list(ideaunit_format.columns)
-    assert array_headers == list(get_bridge_format_dict(x_bridge).keys())
+    assert array_headers == list(get_bridge_attribute_dict(x_bridge).keys())
 
     assert ideaunit_format.loc[0, owner_id_str()] == sue_worldunit._owner_id
     assert ideaunit_format.loc[0, pledge_str()] == ""

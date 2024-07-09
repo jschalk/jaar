@@ -114,8 +114,30 @@ def get_bridge_format_dict(bridge_name: str) -> dict[str,]:
     return get_dict_from_json(bridge_json)
 
 
+def get_bridge_atom_category(bridge_name: str) -> dict[str,]:
+    return get_bridge_format_dict(bridge_name).get("atom_category")
+
+
+def get_bridge_attribute_dict(bridge_name: str) -> dict[str,]:
+    return get_bridge_format_dict(bridge_name).get("attributes")
+
+
+def get_sorting_attributes(bridge_name: str) -> list[str]:
+    bridge_format_dict = get_bridge_attribute_dict(bridge_name)
+    x_list = []
+    for x_attribute_name, x_attribute_dict in bridge_format_dict.items():
+        sort_order = x_attribute_dict.get("sort_order")
+        if sort_order != None:
+            x_list.append(x_attribute_name)
+    return x_list
+
+
+def get_ascending_bools(sorting_attributes: list[str]) -> list[bool]:
+    return [True for _ in sorting_attributes]
+
+
 def _get_headers_list(bridge_name: str) -> list[str]:
-    return list(get_bridge_format_dict(bridge_name).keys())
+    return list(get_bridge_attribute_dict(bridge_name).keys())
 
 
 def create_bridge_dataframe(bridge_name: str) -> DataFrame:
@@ -124,14 +146,15 @@ def create_bridge_dataframe(bridge_name: str) -> DataFrame:
 
 def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
     x_bridge = create_bridge_dataframe(bridge_name)
+    x_changeunit = changeunit_shop()
+    x_changeunit.add_all_atomunits(x_worldunit)
+    category_set = {get_bridge_atom_category(bridge_name)}
+    curd_set = {atom_insert()}
+    filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
+    sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
+    d2_list = []
 
     if bridge_name == jaar_format_0001_char_v0_0_0():
-        x_changeunit = changeunit_shop()
-        x_changeunit.add_all_atomunits(x_worldunit)
-        category_set = {world_charunit_text()}
-        curd_set = {atom_insert()}
-        filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
-        sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
         d2_list = [
             [
                 x_atomunit.get_value(char_id_str()),
@@ -143,19 +166,8 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-        x_bridge = DataFrame(d2_list, columns=x_bridge.columns)
-        x_bridge.sort_values([char_id_str()], ascending=[True], inplace=True)
-        x_bridge.reset_index(inplace=True)
-        x_bridge.drop(columns=["index"], inplace=True)
 
     elif bridge_name == jaar_format_0002_beliefhold_v0_0_0():
-        x_changeunit = changeunit_shop()
-        x_changeunit.add_all_atomunits(x_worldunit)
-        category_set = {world_char_beliefhold_text()}
-        curd_set = {atom_insert()}
-        filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
-        sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
-        d2_list = []
         for x_atomunit in sorted_atomunits:
             char_id_value = x_atomunit.get_value(char_id_str())
             belief_id_value = x_atomunit.get_value(belief_id_str())
@@ -169,20 +181,8 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
                     x_worldunit._real_id,
                 ]
             )
-        x_bridge = DataFrame(d2_list, columns=x_bridge.columns)
-        sorting_columns = [char_id_str(), belief_id_str()]
-        x_bridge.sort_values(sorting_columns, ascending=[True, True], inplace=True)
-        x_bridge.reset_index(inplace=True)
-        x_bridge.drop(columns=["index"], inplace=True)
 
     elif bridge_name == jaar_format_0003_ideaunit_v0_0_0():
-        x_changeunit = changeunit_shop()
-        x_changeunit.add_all_atomunits(x_worldunit)
-        category_set = [world_ideaunit_text()]
-        curd_set = {atom_insert()}
-        filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
-        sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
-        d2_list = []
         for x_atomunit in sorted_atomunits:
             parent_roadunit = x_atomunit.get_value("parent_road")
             label_roadnode = x_atomunit.get_value("label")
@@ -202,10 +202,12 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
                     x_atomunit.get_value("_weight"),
                 ]
             )
-        x_bridge = DataFrame(d2_list, columns=x_bridge.columns)
-        sorting_columns = [road_str()]
-        x_bridge.sort_values(sorting_columns, ascending=[True], inplace=True)
-        x_bridge.reset_index(inplace=True)
-        x_bridge.drop(columns=["index"], inplace=True)
+
+    x_bridge = DataFrame(d2_list, columns=x_bridge.columns)
+    sorting_columns = get_sorting_attributes(bridge_name)
+    ascending_bools = get_ascending_bools(sorting_columns)
+    x_bridge.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
+    x_bridge.reset_index(inplace=True)
+    x_bridge.drop(columns=["index"], inplace=True)
 
     return x_bridge

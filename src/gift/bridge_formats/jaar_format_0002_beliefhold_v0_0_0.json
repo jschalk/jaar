@@ -1,32 +1,37 @@
 {
-    "belief_id": {
-        "validate": [
-            "must_be_str"
-        ]
-    },
-    "char_id": {
-        "validate": [
-            "must_be_RoadNode"
-        ]
-    },
-    "credor_weight": {
-        "validate": [
-            "must_be_number"
-        ]
-    },
-    "debtor_weight": {
-        "validate": [
-            "must_be_number"
-        ]
-    },
-    "owner_id": {
-        "validate": [
-            "must_be_RoadNode"
-        ]
-    },
-    "real_id": {
-        "validate": [
-            "must_be_RoadNode"
-        ]
+    "atom_category": "world_char_beliefhold",
+    "attributes": {
+        "belief_id": {
+            "sort_order": 1,
+            "validate": [
+                "must_be_str"
+            ]
+        },
+        "char_id": {
+            "sort_order": 0,
+            "validate": [
+                "must_be_RoadNode"
+            ]
+        },
+        "credor_weight": {
+            "validate": [
+                "must_be_number"
+            ]
+        },
+        "debtor_weight": {
+            "validate": [
+                "must_be_number"
+            ]
+        },
+        "owner_id": {
+            "validate": [
+                "must_be_RoadNode"
+            ]
+        },
+        "real_id": {
+            "validate": [
+                "must_be_RoadNode"
+            ]
+        }
     }
 }

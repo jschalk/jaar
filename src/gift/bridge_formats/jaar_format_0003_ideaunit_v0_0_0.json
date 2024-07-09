@@ -1,27 +1,31 @@
 {
-    "owner_id": {
-        "validate": [
-            "must_be_RoadNode"
-        ]
-    },
-    "pledge": {
-        "validate": [
-            "must_be_bool"
-        ]
-    },
-    "real_id": {
-        "validate": [
-            "must_be_RoadNode"
-        ]
-    },
-    "road": {
-        "validate": [
-            "must_be_RoadUnit"
-        ]
-    },
-    "weight": {
-        "validate": [
-            "must_be_number"
-        ]
+    "atom_category": "world_ideaunit",
+    "attributes": {
+        "owner_id": {
+            "validate": [
+                "must_be_RoadNode"
+            ]
+        },
+        "pledge": {
+            "validate": [
+                "must_be_bool"
+            ]
+        },
+        "real_id": {
+            "validate": [
+                "must_be_RoadNode"
+            ]
+        },
+        "road": {
+            "sort_order": 1,
+            "validate": [
+                "must_be_RoadUnit"
+            ]
+        },
+        "weight": {
+            "validate": [
+                "must_be_number"
+            ]
+        }
     }
 }
