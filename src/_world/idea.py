@@ -258,8 +258,8 @@ class IdeaUnit:
     _level: int = None
     _kids_total_weight: int = None
     _world_share: float = None
-    _world_fund_onset: float = None
-    _world_fund_cease: float = None
+    _budget_onset: float = None
+    _budget_cease: float = None
     _task: bool = None
     _active: bool = None
     _ancestor_pledge_count: int = None
@@ -361,20 +361,20 @@ class IdeaUnit:
 
     def set_world_share(
         self,
-        fund_onset_x: float,
+        x_budget_onset: float,
         parent_world_share: float = None,
-        parent_fund_cease: float = None,
+        parent_budget_cease: float = None,
     ):
         parent_world_share = get_1_if_None(parent_world_share)
         self.set_kids_total_weight()
         self._world_share = None
-        self._world_fund_onset = None
-        self._world_fund_cease = None
+        self._budget_onset = None
+        self._budget_cease = None
         sibling_ratio = self._weight / self._sibling_total_weight
         self._world_share = parent_world_share * sibling_ratio
-        self._world_fund_onset = fund_onset_x
-        self._world_fund_cease = self._world_fund_onset + self._world_share
-        self._world_fund_cease = min(self._world_fund_cease, parent_fund_cease)
+        self._budget_onset = x_budget_onset
+        self._budget_cease = self._budget_onset + self._world_share
+        self._budget_cease = min(self._budget_cease, parent_budget_cease)
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
@@ -1109,8 +1109,8 @@ def ideaunit_shop(
     _level: int = None,
     _kids_total_weight: int = None,
     _world_share: float = None,
-    _world_fund_onset: float = None,
-    _world_fund_cease: float = None,
+    _budget_onset: float = None,
+    _budget_cease: float = None,
     _task: bool = None,
     _active: bool = None,
     _ancestor_pledge_count: int = None,
@@ -1164,8 +1164,8 @@ def ideaunit_shop(
         _level=_level,
         _kids_total_weight=get_0_if_None(_kids_total_weight),
         _world_share=_world_share,
-        _world_fund_onset=_world_fund_onset,
-        _world_fund_cease=_world_fund_cease,
+        _budget_onset=_budget_onset,
+        _budget_cease=_budget_cease,
         _task=_task,
         _active=_active,
         _ancestor_pledge_count=_ancestor_pledge_count,

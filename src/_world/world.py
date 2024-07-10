@@ -1809,7 +1809,7 @@ class WorldUnit:
             world_beliefunits=self._beliefs,
             world_owner_id=self._owner_id,
         )
-        x_idearoot.set_world_share(fund_onset_x=0, parent_fund_cease=1)
+        x_idearoot.set_world_share(x_budget_onset=0, parent_budget_cease=1)
         x_idearoot.set_awardheirs_world_cred_debt()
         x_idearoot.set_ancestor_pledge_count(0, False)
         x_idearoot.clear_descendant_pledge_count()
@@ -1823,8 +1823,8 @@ class WorldUnit:
     def _set_kids_attributes(
         self,
         idea_kid: IdeaUnit,
-        fund_onset: float,
-        parent_fund_cease: float,
+        budget_onset: float,
+        parent_budget_cease: float,
         parent_idea: IdeaUnit,
         econ_exceptions: bool,
     ):
@@ -1842,9 +1842,9 @@ class WorldUnit:
         )
         idea_kid.set_sibling_total_weight(parent_idea._kids_total_weight)
         idea_kid.set_world_share(
-            fund_onset_x=fund_onset,
+            x_budget_onset=budget_onset,
             parent_world_share=parent_idea._world_share,
-            parent_fund_cease=parent_fund_cease,
+            parent_budget_cease=parent_budget_cease,
         )
         idea_kid.set_ancestor_pledge_count(
             parent_idea._ancestor_pledge_count, parent_idea.pledge
@@ -1899,20 +1899,20 @@ class WorldUnit:
         self._pre_tree_traverse_cred_debt_reset()
         self._set_root_attributes(econ_exceptions)
 
-        fund_onset = self._idearoot._world_fund_onset
-        parent_fund_cease = self._idearoot._world_fund_cease
+        budget_onset = self._idearoot._budget_onset
+        parent_budget_cease = self._idearoot._budget_cease
 
         cache_idea_list = []
         for idea_kid in self._idearoot._kids.values():
             self._set_kids_attributes(
                 idea_kid=idea_kid,
-                fund_onset=fund_onset,
-                parent_fund_cease=parent_fund_cease,
+                budget_onset=budget_onset,
+                parent_budget_cease=parent_budget_cease,
                 parent_idea=self._idearoot,
                 econ_exceptions=econ_exceptions,
             )
             cache_idea_list.append(idea_kid)
-            fund_onset += idea_kid._world_share
+            budget_onset += idea_kid._world_share
 
         # no function recursion, recursion by iterateing over list that can be added to by iterations
         while cache_idea_list != []:
@@ -1921,18 +1921,18 @@ class WorldUnit:
                 self._idea_dict[parent_idea.get_road()] = parent_idea
 
             if parent_idea._kids != None:
-                fund_onset = parent_idea._world_fund_onset
-                parent_fund_cease = parent_idea._world_fund_cease
+                budget_onset = parent_idea._budget_onset
+                parent_budget_cease = parent_idea._budget_cease
                 for idea_kid in parent_idea._kids.values():
                     self._set_kids_attributes(
                         idea_kid=idea_kid,
-                        fund_onset=fund_onset,
-                        parent_fund_cease=parent_fund_cease,
+                        budget_onset=budget_onset,
+                        parent_budget_cease=parent_budget_cease,
                         parent_idea=parent_idea,
                         econ_exceptions=econ_exceptions,
                     )
                     cache_idea_list.append(idea_kid)
-                    fund_onset += idea_kid._world_share
+                    budget_onset += idea_kid._world_share
 
     def _check_if_any_idea_active_status_has_altered(self):
         any_idea_active_status_has_altered = False

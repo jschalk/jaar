@@ -310,45 +310,45 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_idea_dict():
     #         )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyClears_world_fund_onset_world_fund_cease():
+def test_WorldUnit_calc_world_metrics_CorrectlyClears_budget_onset_budget_cease():
     # GIVEN
     x_world = get_world_with7amCleanTableReason()
     casa_road = x_world.make_l1_road("casa")
     catt_road = x_world.make_l1_road("feed cat")
     week_road = x_world.make_l1_road("weekdays")
-    x_world._idearoot._world_fund_onset = 13
-    x_world._idearoot._world_fund_cease = 13
-    x_world.get_idea_obj(casa_road)._world_fund_onset = 13
-    x_world.get_idea_obj(casa_road)._world_fund_cease = 13
-    x_world.get_idea_obj(catt_road)._world_fund_onset = 13
-    x_world.get_idea_obj(catt_road)._world_fund_cease = 13
-    x_world.get_idea_obj(week_road)._world_fund_onset = 13
-    x_world.get_idea_obj(week_road)._world_fund_cease = 13
+    x_world._idearoot._budget_onset = 13
+    x_world._idearoot._budget_cease = 13
+    x_world.get_idea_obj(casa_road)._budget_onset = 13
+    x_world.get_idea_obj(casa_road)._budget_cease = 13
+    x_world.get_idea_obj(catt_road)._budget_onset = 13
+    x_world.get_idea_obj(catt_road)._budget_cease = 13
+    x_world.get_idea_obj(week_road)._budget_onset = 13
+    x_world.get_idea_obj(week_road)._budget_cease = 13
 
-    assert x_world._idearoot._world_fund_onset == 13
-    assert x_world._idearoot._world_fund_cease == 13
-    assert x_world.get_idea_obj(casa_road)._world_fund_onset == 13
-    assert x_world.get_idea_obj(casa_road)._world_fund_cease == 13
-    assert x_world.get_idea_obj(catt_road)._world_fund_onset == 13
-    assert x_world.get_idea_obj(catt_road)._world_fund_cease == 13
-    assert x_world.get_idea_obj(week_road)._world_fund_onset == 13
-    assert x_world.get_idea_obj(week_road)._world_fund_cease == 13
+    assert x_world._idearoot._budget_onset == 13
+    assert x_world._idearoot._budget_cease == 13
+    assert x_world.get_idea_obj(casa_road)._budget_onset == 13
+    assert x_world.get_idea_obj(casa_road)._budget_cease == 13
+    assert x_world.get_idea_obj(catt_road)._budget_onset == 13
+    assert x_world.get_idea_obj(catt_road)._budget_cease == 13
+    assert x_world.get_idea_obj(week_road)._budget_onset == 13
+    assert x_world.get_idea_obj(week_road)._budget_cease == 13
 
     # WHEN
     x_world.calc_world_metrics()
 
     # THEN
-    assert x_world._idearoot._world_fund_onset != 13
-    assert x_world._idearoot._world_fund_cease != 13
-    assert x_world.get_idea_obj(casa_road)._world_fund_onset != 13
-    assert x_world.get_idea_obj(casa_road)._world_fund_cease != 13
-    assert x_world.get_idea_obj(catt_road)._world_fund_onset != 13
-    assert x_world.get_idea_obj(catt_road)._world_fund_cease != 13
-    assert x_world.get_idea_obj(week_road)._world_fund_onset != 13
-    assert x_world.get_idea_obj(week_road)._world_fund_cease != 13
+    assert x_world._idearoot._budget_onset != 13
+    assert x_world._idearoot._budget_cease != 13
+    assert x_world.get_idea_obj(casa_road)._budget_onset != 13
+    assert x_world.get_idea_obj(casa_road)._budget_cease != 13
+    assert x_world.get_idea_obj(catt_road)._budget_onset != 13
+    assert x_world.get_idea_obj(catt_road)._budget_cease != 13
+    assert x_world.get_idea_obj(week_road)._budget_onset != 13
+    assert x_world.get_idea_obj(week_road)._budget_cease != 13
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_world_fund_onset_world_fund_cease():
+def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_budget_onset_budget_cease():
     # GIVEN
     yao_world = worldunit_shop("Yao", _weight=10)
 
@@ -375,40 +375,40 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_world_fund_ons
     coal_idea = ideaunit_shop(coal_text, _weight=30)
     yao_world.add_l1_idea(coal_idea)
 
-    assert yao_world._idearoot._world_fund_onset is None
-    assert yao_world._idearoot._world_fund_cease is None
-    assert yao_world.get_idea_obj(auto_road)._world_fund_onset is None
-    assert yao_world.get_idea_obj(auto_road)._world_fund_cease is None
-    assert yao_world.get_idea_obj(barn_road)._world_fund_onset is None
-    assert yao_world.get_idea_obj(barn_road)._world_fund_cease is None
-    assert yao_world.get_idea_obj(coal_road)._world_fund_onset is None
-    assert yao_world.get_idea_obj(coal_road)._world_fund_cease is None
+    assert yao_world._idearoot._budget_onset is None
+    assert yao_world._idearoot._budget_cease is None
+    assert yao_world.get_idea_obj(auto_road)._budget_onset is None
+    assert yao_world.get_idea_obj(auto_road)._budget_cease is None
+    assert yao_world.get_idea_obj(barn_road)._budget_onset is None
+    assert yao_world.get_idea_obj(barn_road)._budget_cease is None
+    assert yao_world.get_idea_obj(coal_road)._budget_onset is None
+    assert yao_world.get_idea_obj(coal_road)._budget_cease is None
     lamb_before = yao_world.get_idea_obj(road=lamb_road)
-    assert lamb_before._world_fund_onset is None
-    assert lamb_before._world_fund_cease is None
+    assert lamb_before._budget_onset is None
+    assert lamb_before._budget_cease is None
     duck_before = yao_world.get_idea_obj(road=duck_road)
-    assert duck_before._world_fund_onset is None
-    assert duck_before._world_fund_cease is None
+    assert duck_before._budget_onset is None
+    assert duck_before._budget_cease is None
 
     # WHEN
     yao_world.calc_world_metrics()
 
     # THEN
-    assert yao_world._idearoot._world_fund_onset == 0.0
-    assert yao_world._idearoot._world_fund_cease == 1.0
-    assert yao_world.get_idea_obj(auto_road)._world_fund_onset == 0.0
-    assert yao_world.get_idea_obj(auto_road)._world_fund_cease == 0.1
-    assert yao_world.get_idea_obj(barn_road)._world_fund_onset == 0.1
-    assert yao_world.get_idea_obj(barn_road)._world_fund_cease == 0.7
-    assert yao_world.get_idea_obj(coal_road)._world_fund_onset == 0.7
-    assert yao_world.get_idea_obj(coal_road)._world_fund_cease == 1.0
+    assert yao_world._idearoot._budget_onset == 0.0
+    assert yao_world._idearoot._budget_cease == 1.0
+    assert yao_world.get_idea_obj(auto_road)._budget_onset == 0.0
+    assert yao_world.get_idea_obj(auto_road)._budget_cease == 0.1
+    assert yao_world.get_idea_obj(barn_road)._budget_onset == 0.1
+    assert yao_world.get_idea_obj(barn_road)._budget_cease == 0.7
+    assert yao_world.get_idea_obj(coal_road)._budget_onset == 0.7
+    assert yao_world.get_idea_obj(coal_road)._budget_cease == 1.0
 
     duck_after = yao_world.get_idea_obj(road=duck_road)
-    assert duck_after._world_fund_onset == 0.1
-    assert duck_after._world_fund_cease == 0.5
+    assert duck_after._budget_onset == 0.1
+    assert duck_after._budget_cease == 0.5
     lamb_after = yao_world.get_idea_obj(road=lamb_road)
-    assert lamb_after._world_fund_onset == 0.5
-    assert lamb_after._world_fund_cease == 0.7
+    assert lamb_after._budget_onset == 0.5
+    assert lamb_after._budget_cease == 0.7
 
 
 def test_WorldUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():

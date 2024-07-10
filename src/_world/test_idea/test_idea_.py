@@ -48,8 +48,8 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._kids_total_weight is None
     assert x_ideaunit._active_hx is None
     assert x_ideaunit._world_share is None
-    assert x_ideaunit._world_fund_onset is None
-    assert x_ideaunit._world_fund_cease is None
+    assert x_ideaunit._budget_onset is None
+    assert x_ideaunit._budget_cease is None
     assert x_ideaunit._reasonunits is None
     assert x_ideaunit._reasonheirs is None
     assert x_ideaunit._cultureunit is None
@@ -96,8 +96,8 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._kids_total_weight == 0
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._world_share is None
-    assert x_ideaunit._world_fund_onset is None
-    assert x_ideaunit._world_fund_cease is None
+    assert x_ideaunit._budget_onset is None
+    assert x_ideaunit._budget_cease is None
     assert x_ideaunit._reasonunits == {}
     assert x_ideaunit._reasonheirs == {}
     assert x_ideaunit._cultureunit == cultureunit_shop()
