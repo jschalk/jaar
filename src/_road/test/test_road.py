@@ -79,15 +79,15 @@ def test_road_road_validate_correctlyReturnsRoadUnit():
     x_s = default_road_delimiter_if_none()
     _real_id = "x"
     casa_road = f"{_real_id}{x_s}casa"
-    source_road = f"{_real_id}{x_s}source"
+    clean_road = f"{_real_id}{x_s}clean"
     fun_road = f"{_real_id}{x_s}fun"
     assert road_validate(None, x_s, _real_id) == ""
     assert road_validate("", x_s, _real_id) == ""
     assert road_validate(f"{_real_id}{x_s}casa", x_s, _real_id) == casa_road
     assert road_validate(f"A{x_s}casa", x_s, _real_id) == casa_road
-    assert road_validate(f"{x_s}source", x_s, _real_id) == source_road
-    assert road_validate(f"source{x_s}fun", x_s, _real_id) == fun_road
-    assert road_validate("source", x_s, _real_id) == _real_id
+    assert road_validate(f"{x_s}clean", x_s, _real_id) == clean_road
+    assert road_validate(f"clean{x_s}fun", x_s, _real_id) == fun_road
+    assert road_validate("clean", x_s, _real_id) == _real_id
     assert road_validate(f"AA{x_s}casa", x_s, _real_id) == casa_road
 
 
@@ -315,7 +315,7 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
     assert get_ancestor_roads(root_label()) == [root_label()]
 
 
-def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutSource():
+def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     # GIVEN
     x_s = default_road_delimiter_if_none()
     nation_text = "nation-state"
