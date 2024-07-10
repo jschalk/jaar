@@ -310,7 +310,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_idea_dict():
     #         )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyClears_world_fund():
+def test_WorldUnit_calc_world_metrics_CorrectlyClears_world_fund_onset_world_fund_cease():
     # GIVEN
     x_world = get_world_with7amCleanTableReason()
     casa_road = x_world.make_l1_road("casa")
@@ -348,7 +348,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyClears_world_fund():
     assert x_world.get_idea_obj(week_road)._world_fund_cease != 13
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_world_fund():
+def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_world_fund_onset_world_fund_cease():
     # GIVEN
     yao_world = worldunit_shop("Yao", _weight=10)
 

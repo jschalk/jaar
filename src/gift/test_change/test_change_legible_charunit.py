@@ -21,7 +21,7 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(rico_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN
@@ -77,7 +77,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE_credor_weight_debtor_wei
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(rico_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN
@@ -103,7 +103,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE_credor_weight():
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(rico_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN
@@ -131,7 +131,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE_debtor_weight():
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(rico_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN
@@ -156,7 +156,7 @@ def test_create_legible_list_ReturnsObj_charunit_DELETE():
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(rico_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN

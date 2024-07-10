@@ -148,7 +148,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     x_pixel = 0.5
     x_max_tree_traverse = 66
     x_meld_strategy = "override"
-    x_monetary_desc = "dragon funds"
+    x_monetary_desc = "dragon dollars"
     x_char_credor_pool = 77
     x_char_debtor_pool = 88
     after_sue_world._weight = x_worldUnit_weight
