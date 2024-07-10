@@ -115,7 +115,7 @@ def test_BeliefUnit_set_belief_id_SetsAttrCorrectly():
     assert swim_belief.belief_id == water_text
 
 
-def test_BeliefUnit_reset_world_importance_SetsAttrCorrectly():
+def test_BeliefUnit_reset_world_share_SetsAttrCorrectly():
     # GIVEN
     maria_belief_id = "maria"
     maria_beliefunit = beliefunit_shop(belief_id=maria_belief_id, _char_mirror=True)
@@ -329,14 +329,14 @@ def test_awardlink_shop_ReturnsCorrectObj():
     assert bikers_awardlink.debtor_weight == bikers_debtor_weight
 
 
-def test_AwardHeir_set_world_importance_CorrectlySetsAttr():
+def test_AwardHeir_set_world_share_CorrectlySetsAttr():
     # GIVEN
     bikers_belief_id = BeliefID("bikers")
     bikers_credor_weight = 3.0
     bikers_debt_weight = 6.0
     awardlinks_sum_credor_weight = 60
     awardlinks_sum_debtor_weight = 60
-    idea_world_importance = 1
+    idea_world_share = 1
     belief_heir_x = awardheir_shop(
         belief_id=bikers_belief_id,
         credor_weight=bikers_credor_weight,
@@ -345,7 +345,7 @@ def test_AwardHeir_set_world_importance_CorrectlySetsAttr():
 
     # WHEN
     belief_heir_x.set_world_cred_debt(
-        idea_world_importance=idea_world_importance,
+        idea_world_share=idea_world_share,
         awardheirs_credor_weight_sum=awardlinks_sum_credor_weight,
         awardheirs_debtor_weight_sum=awardlinks_sum_debtor_weight,
     )

@@ -1,13 +1,10 @@
 from src._road.finance import (
     PixelUnit,
     PennyUnit,
-    ThinkUnit,
     default_pixel_if_none,
     default_penny_if_none,
-    default_thinkunit_if_none,
     trim_pixel_excess,
     trim_penny_excess,
-    trim_thinkunit_excess,
 )
 from inspect import getdoc as inspect_getdoc
 
@@ -68,30 +65,3 @@ def test_trim_penny_excess_ReturnsCorrectedFloat():
     assert trim_penny_excess(num=0.5, pixel=0.01) == 0.5
     assert trim_penny_excess(num=0.56, pixel=0.1) == 0.5
     assert trim_penny_excess(num=0.56, pixel=0.133) == 0.532
-
-
-def test_ThinkUnit_exists():
-    # GIVEN
-    x_float = 0.045
-    # WHEN
-    y_thinkunit = ThinkUnit(x_float)
-    # THEN
-    assert y_thinkunit == x_float
-    assert inspect_getdoc(y_thinkunit) == "Smallest Unit of mind"
-
-
-def test_default_thinkunit_if_none_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
-    assert default_thinkunit_if_none() == 1
-    assert default_thinkunit_if_none(5) == 5
-    assert default_thinkunit_if_none(0.03) == 0.03
-
-
-def test_trim_thinkunit_excess_ReturnsCorrectedFloat():
-    # GIVEN / WHEN / THEN
-    assert trim_thinkunit_excess(num=5.5, thinkunit=1) == 5
-    assert trim_thinkunit_excess(num=0.5, thinkunit=1) == 0
-    assert trim_thinkunit_excess(num=5.5, thinkunit=0.1) == 5.5
-    assert trim_thinkunit_excess(num=0.5, thinkunit=0.01) == 0.5
-    assert trim_thinkunit_excess(num=0.56, thinkunit=0.1) == 0.5
-    assert trim_thinkunit_excess(num=0.56, thinkunit=0.133) == 0.532

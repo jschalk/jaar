@@ -60,7 +60,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
 
     # for awardlink in yao_world._awardheirs.values():
     #     print(
-    #         f"{yao_world._world_importance=} {awardlink.belief_id=} {awardlink._world_cred=} {awardlink._world_debt=}"
+    #         f"{yao_world._world_share=} {awardlink.belief_id=} {awardlink._world_cred=} {awardlink._world_debt=}"
     #     )
 
     assert rico_charlink._world_cred == 0.5
@@ -81,12 +81,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     #         assert charlink._world_debt != None
     #         assert charlink._world_debt in [0.8, 0.1]
     #         # print(
-    #         #     f"{belief.belief_id=} {charlink._world_importance=} {belief._world_importance=}"
+    #         #     f"{belief.belief_id=} {charlink._world_share=} {belief._world_share=}"
     #         # )
     #         charlink_world_cred_sum += charlink._world_cred
     #         charlink_world_debt_sum += charlink._world_debt
 
-    #         # print(f"{charlink_world_importance_sum=}")
+    #         # print(f"{charlink_world_share_sum=}")
     # assert charlink_world_cred_sum == 1.0
     # assert charlink_world_debt_sum == 1.0
 
@@ -138,12 +138,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     #         assert charlink._world_debt != None
     #         assert charlink._world_debt not in [0.8, 0.1]
     #         # print(
-    #         #     f"{belief.belief_id=} {charlink._world_importance=} {belief._world_importance=}"
+    #         #     f"{belief.belief_id=} {charlink._world_share=} {belief._world_share=}"
     #         # )
     #         charlink_world_cred_sum += charlink._world_cred
     #         charlink_world_debt_sum += charlink._world_debt
 
-    #         # print(f"{charlink_world_importance_sum=}")
+    #         # print(f"{charlink_world_share_sum=}")
     # assert charlink_world_cred_sum == 1.0
     # assert charlink_world_debt_sum > 0.9999999
     # assert charlink_world_debt_sum < 1.00000001
@@ -627,7 +627,7 @@ class CharAgendaMetrics:
 
 @dataclass
 class AwardAgendaMetrics:
-    sum_world_agenda_importance = 0
+    sum_world_agenda_share = 0
     agenda_no_count = 0
     agenda_yes_count = 0
     agenda_no_world_i_sum = 0
@@ -635,13 +635,13 @@ class AwardAgendaMetrics:
 
     def set_sums(self, agenda_dict: dict[RoadUnit, IdeaUnit]):
         for agenda_item in agenda_dict.values():
-            self.sum_world_agenda_importance += agenda_item._world_importance
+            self.sum_world_agenda_share += agenda_item._world_share
             if agenda_item._awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_world_i_sum += agenda_item._world_importance
+                self.agenda_no_world_i_sum += agenda_item._world_share
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_world_i_sum += agenda_item._world_importance
+                self.agenda_yes_world_i_sum += agenda_item._world_share
 
 
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
@@ -672,7 +672,7 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     assert len(agenda_dict) == 63
     x_awardagendametrics = AwardAgendaMetrics()
     x_awardagendametrics.set_sums(agenda_dict=agenda_dict)
-    # print(f"{sum_world_agenda_importance=}")
+    # print(f"{sum_world_agenda_share=}")
     assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
     assert x_awardagendametrics.agenda_no_world_i_sum == 0.0037472680016539662
@@ -680,9 +680,9 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     assert are_equal(
         x_awardagendametrics.agenda_no_world_i_sum
         + x_awardagendametrics.agenda_yes_world_i_sum,
-        x_awardagendametrics.sum_world_agenda_importance,
+        x_awardagendametrics.sum_world_agenda_share,
     )
-    assert x_awardagendametrics.sum_world_agenda_importance == 0.006543772991141412
+    assert x_awardagendametrics.sum_world_agenda_share == 0.006543772991141412
 
     x_beliefagendametrics = BeliefAgendaMetrics()
     x_beliefagendametrics.set_sums(x_world=x_world)
@@ -703,11 +703,11 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     x_charagendametrics.set_sums(x_world=x_world)
     assert are_equal(
         x_charagendametrics.sum_agenda_cred,
-        x_awardagendametrics.sum_world_agenda_importance,
+        x_awardagendametrics.sum_world_agenda_share,
     )
     assert are_equal(
         x_charagendametrics.sum_agenda_debt,
-        x_awardagendametrics.sum_world_agenda_importance,
+        x_awardagendametrics.sum_world_agenda_share,
     )
     assert are_equal(x_charagendametrics.sum_agenda_ratio_cred, 1)
     assert are_equal(x_charagendametrics.sum_agenda_ratio_debt, 1)

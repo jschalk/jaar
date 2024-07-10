@@ -10,6 +10,8 @@ from src._road.finance import (
     trim_pixel_excess,
     default_pixel_if_none,
     default_penny_if_none,
+    PixelUnit,
+    PennyUnit,
 )
 from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
@@ -145,7 +147,7 @@ class WorldUnit:
     _rational: bool = None
     _econs_justified: bool = None
     _econs_buildable: bool = None
-    _sum_healerhold_importance: bool = None
+    _sum_healerhold_share: bool = None
     # calc_world_metrics Calculated field end
 
     def del_last_gift_id(self):
@@ -308,7 +310,7 @@ class WorldUnit:
     def get_world_sprung_from_single_idea(self, road: RoadUnit) -> any:
         self.calc_world_metrics()
         x_idea = self.get_idea_obj(road)
-        new_weight = self._weight * x_idea._world_importance
+        new_weight = self._weight * x_idea._world_share
         x_world = worldunit_shop(_owner_id=self._idearoot._label, _weight=new_weight)
 
         for road_assc in sorted(list(self._get_relevant_roads({road}))):
@@ -1559,17 +1561,17 @@ class WorldUnit:
     def get_charunits_debtor_weight_sum(self) -> float:
         return sum(charunit.get_debtor_weight() for charunit in self._chars.values())
 
-    def _add_to_charunits_world_cred_debt(self, idea_world_importance: float):
+    def _add_to_charunits_world_cred_debt(self, idea_world_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
             au_world_cred = (
-                idea_world_importance * x_charunit.get_credor_weight()
+                idea_world_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
             au_world_debt = (
-                idea_world_importance * x_charunit.get_debtor_weight()
+                idea_world_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
             x_charunit.add_world_cred_debt(
@@ -1579,17 +1581,17 @@ class WorldUnit:
                 world_agenda_debt=0,
             )
 
-    def _add_to_charunits_world_agenda_cred_debt(self, idea_world_importance: float):
+    def _add_to_charunits_world_agenda_cred_debt(self, idea_world_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
             au_world_agenda_cred = (
-                idea_world_importance * x_charunit.get_credor_weight()
+                idea_world_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
             au_world_agenda_debt = (
-                idea_world_importance * x_charunit.get_debtor_weight()
+                idea_world_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
             x_charunit.add_world_cred_debt(
@@ -1599,17 +1601,17 @@ class WorldUnit:
                 world_agenda_debt=au_world_agenda_debt,
             )
 
-    def _set_charunits_world_agenda_importance(self, world_agenda_importance: float):
+    def _set_charunits_world_agenda_share(self, world_agenda_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
             au_world_agenda_cred = (
-                world_agenda_importance * x_charunit.get_credor_weight()
+                world_agenda_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
             au_world_agenda_debt = (
-                world_agenda_importance * x_charunit.get_debtor_weight()
+                world_agenda_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
             x_charunit.add_world_agenda_cred_debt(
@@ -1621,7 +1623,7 @@ class WorldUnit:
         for awardlink_obj in self._beliefs.values():
             awardlink_obj.reset_world_cred_debt()
 
-    def _set_beliefunits_world_importance(self, awardheirs: dict[BeliefID, AwardLink]):
+    def _set_beliefunits_world_share(self, awardheirs: dict[BeliefID, AwardLink]):
         for awardlink_obj in awardheirs.values():
             self.add_to_belief_world_cred_debt(
                 belief_id=awardlink_obj.belief_id,
@@ -1629,17 +1631,15 @@ class WorldUnit:
                 awardheir_world_debt=awardlink_obj._world_debt,
             )
 
-    def _allot_world_agenda_importance(self):
+    def _allot_world_agenda_share(self):
         for idea in self._idea_dict.values():
             # If there are no awardlines associated with idea
-            # allot world_importance via general charunit
+            # allot world_share via general charunit
             # cred ratio and debt ratio
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_world_agenda_cred_debt(
-                        idea._world_importance
-                    )
+                    self._add_to_charunits_world_agenda_cred_debt(idea._world_share)
                 else:
                     for x_awardline in idea._awardlines.values():
                         self.add_to_belief_world_agenda_cred_debt(
@@ -1648,7 +1648,7 @@ class WorldUnit:
                             awardline_world_debt=x_awardline._world_debt,
                         )
 
-    def _allot_beliefs_world_importance(self):
+    def _allot_beliefs_world_share(self):
         for belief_obj in self._beliefs.values():
             belief_obj._set_charlink_world_cred_debt()
             for charlink in belief_obj._chars.values():
@@ -1781,7 +1781,7 @@ class WorldUnit:
             if x_idea_obj._healerhold.any_belief_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
-                self._sum_healerhold_importance += x_idea_obj._world_importance
+                self._sum_healerhold_share += x_idea_obj._world_share
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True
 
@@ -1809,7 +1809,7 @@ class WorldUnit:
             world_beliefunits=self._beliefs,
             world_owner_id=self._owner_id,
         )
-        x_idearoot.set_world_importance(fund_onset_x=0, parent_fund_cease=1)
+        x_idearoot.set_world_share(fund_onset_x=0, parent_fund_cease=1)
         x_idearoot.set_awardheirs_world_cred_debt()
         x_idearoot.set_ancestor_pledge_count(0, False)
         x_idearoot.clear_descendant_pledge_count()
@@ -1818,7 +1818,7 @@ class WorldUnit:
 
         if x_idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
-            self._allot_world_importance(idea=self._idearoot)
+            self._allot_world_share(idea=self._idearoot)
 
     def _set_kids_attributes(
         self,
@@ -1841,9 +1841,9 @@ class WorldUnit:
             world_owner_id=self._owner_id,
         )
         idea_kid.set_sibling_total_weight(parent_idea._kids_total_weight)
-        idea_kid.set_world_importance(
+        idea_kid.set_world_share(
             fund_onset_x=fund_onset,
-            parent_world_importance=parent_idea._world_importance,
+            parent_world_share=parent_idea._world_share,
             parent_fund_cease=parent_fund_cease,
         )
         idea_kid.set_ancestor_pledge_count(
@@ -1855,21 +1855,21 @@ class WorldUnit:
         if idea_kid.is_kidless():
             # set idea's ancestor metrics using world root as common source
             self._set_ancestors_metrics(idea_kid.get_road(), econ_exceptions)
-            self._allot_world_importance(idea=idea_kid)
+            self._allot_world_share(idea=idea_kid)
 
-    def _allot_world_importance(self, idea: IdeaUnit):
+    def _allot_world_share(self, idea: IdeaUnit):
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
         if idea.is_awardheirless() is False:
-            self._set_beliefunits_world_importance(idea._awardheirs)
+            self._set_beliefunits_world_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_world_cred_debt(idea._world_importance)
+            self._add_to_charunits_world_cred_debt(idea._world_share)
 
-    def get_world_importance(
-        self, parent_world_importance: float, weight: int, sibling_total_weight: int
+    def get_world_share(
+        self, parent_world_share: float, weight: int, sibling_total_weight: int
     ) -> float:
         sibling_ratio = weight / sibling_total_weight
-        return parent_world_importance * sibling_ratio
+        return parent_world_share * sibling_ratio
 
     def _set_tree_traverse_starting_point(self):
         self._rational = False
@@ -1879,7 +1879,7 @@ class WorldUnit:
     def _clear_world_base_metrics(self):
         self._econs_justified = True
         self._econs_buildable = False
-        self._sum_healerhold_importance = 0
+        self._sum_healerhold_share = 0
         self._econ_dict = {}
         self._healers_dict = {}
 
@@ -1893,7 +1893,7 @@ class WorldUnit:
             self._check_if_any_idea_active_status_has_altered()
             self._tree_traverse_count += 1
         self._after_all_tree_traverses_set_cred_debt()
-        self._after_all_tree_traverses_set_healerhold_importance()
+        self._after_all_tree_traverses_set_healerhold_share()
 
     def _execute_tree_traverse(self, econ_exceptions: bool = False):
         self._pre_tree_traverse_cred_debt_reset()
@@ -1912,7 +1912,7 @@ class WorldUnit:
                 econ_exceptions=econ_exceptions,
             )
             cache_idea_list.append(idea_kid)
-            fund_onset += idea_kid._world_importance
+            fund_onset += idea_kid._world_share
 
         # no function recursion, recursion by iterateing over list that can be added to by iterations
         while cache_idea_list != []:
@@ -1932,7 +1932,7 @@ class WorldUnit:
                         econ_exceptions=econ_exceptions,
                     )
                     cache_idea_list.append(idea_kid)
-                    fund_onset += idea_kid._world_importance
+                    fund_onset += idea_kid._world_share
 
     def _check_if_any_idea_active_status_has_altered(self):
         any_idea_active_status_has_altered = False
@@ -1944,24 +1944,24 @@ class WorldUnit:
             self._rational = True
 
     def _after_all_tree_traverses_set_cred_debt(self):
-        self._allot_world_agenda_importance()
-        self._allot_beliefs_world_importance()
+        self._allot_world_agenda_share()
+        self._allot_beliefs_world_share()
         self._set_world_agenda_ratio_cred_debt()
 
-    def _after_all_tree_traverses_set_healerhold_importance(self):
+    def _after_all_tree_traverses_set_healerhold_share(self):
         self._set_econ_dict()
         self._healers_dict = self._get_healers_dict()
         self._econs_buildable = self._get_buildable_econs()
 
     def _set_econ_dict(self):
         if self._econs_justified is False:
-            self._sum_healerhold_importance = 0
+            self._sum_healerhold_share = 0
         for x_idea in self._idea_dict.values():
-            if self._sum_healerhold_importance == 0:
-                x_idea._healerhold_importance = 0
+            if self._sum_healerhold_share == 0:
+                x_idea._healerhold_share = 0
             else:
-                x_sum = self._sum_healerhold_importance
-                x_idea._healerhold_importance = x_idea._world_importance / x_sum
+                x_sum = self._sum_healerhold_share
+                x_idea._healerhold_share = x_idea._world_share / x_sum
             if self._econs_justified and x_idea._healerhold.any_belief_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
@@ -2123,7 +2123,7 @@ class WorldUnit:
     def get_world4char(self, char_id: CharID, facts: dict[RoadUnit, FactCore]):
         self.calc_world_metrics()
         world4char = worldunit_shop(_owner_id=char_id)
-        world4char._idearoot._world_importance = self._idearoot._world_importance
+        world4char._idearoot._world_share = self._idearoot._world_share
         # get char's chars: charzone
 
         # get charzone beliefs
@@ -2131,7 +2131,7 @@ class WorldUnit:
 
         # set world4char by traversing the idea tree and selecting associated beliefs
         # set root
-        not_included_world_importance = 0
+        not_included_world_share = 0
         world4char._idearoot.clear_kids()
         for ykx in self._idearoot._kids.values():
             y4a_included = any(
@@ -2142,7 +2142,7 @@ class WorldUnit:
             if y4a_included:
                 y4a_new = ideaunit_shop(
                     _label=ykx._label,
-                    _world_importance=ykx._world_importance,
+                    _world_share=ykx._world_share,
                     _reasonunits=ykx._reasonunits,
                     _awardlinks=ykx._awardlinks,
                     _begin=ykx._begin,
@@ -2152,12 +2152,12 @@ class WorldUnit:
                 )
                 world4char._idearoot._kids[ykx._label] = y4a_new
             else:
-                not_included_world_importance += ykx._world_importance
+                not_included_world_share += ykx._world_share
 
-        if not_included_world_importance > 0:
+        if not_included_world_share > 0:
             y4a_exterior = ideaunit_shop(
                 _label="__world4char__",
-                _world_importance=not_included_world_importance,
+                _world_share=not_included_world_share,
             )
             world4char._idearoot._kids[y4a_exterior._label] = y4a_exterior
 
@@ -2251,8 +2251,8 @@ def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
-    _pixel: float = None,
-    _penny: float = None,
+    _pixel: PixelUnit = None,
+    _penny: PennyUnit = None,
     _weight: float = None,
     _meld_strategy: MeldStrategy = None,
 ) -> WorldUnit:
@@ -2262,7 +2262,6 @@ def worldunit_shop(
         _real_id = get_default_real_id_roadnode()
     if _meld_strategy is None:
         _meld_strategy = get_meld_default()
-
     x_world = WorldUnit(
         _owner_id=_owner_id,
         _weight=get_1_if_None(_weight),
@@ -2278,12 +2277,15 @@ def worldunit_shop(
         _meld_strategy=validate_meld_strategy(_meld_strategy),
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
-        _sum_healerhold_importance=get_0_if_None(),
+        _sum_healerhold_share=get_0_if_None(),
     )
     x_world._idearoot = ideaunit_shop(
-        _root=True, _uid=1, _level=0, _world_real_id=x_world._real_id
+        _root=True,
+        _uid=1,
+        _level=0,
+        _world_real_id=x_world._real_id,
+        _road_delimiter=x_world._road_delimiter,
     )
-    x_world._idearoot._road_delimiter = x_world._road_delimiter
     x_world.set_max_tree_traverse(3)
     x_world._rational = False
     x_world._originunit = originunit_shop()

@@ -257,7 +257,7 @@ class IdeaUnit:
     # Calculated fields
     _level: int = None
     _kids_total_weight: int = None
-    _world_importance: float = None
+    _world_share: float = None
     _world_fund_onset: float = None
     _world_fund_cease: float = None
     _task: bool = None
@@ -270,7 +270,7 @@ class IdeaUnit:
     _sibling_total_weight: int = None
     _active_hx: dict[int, bool] = None
     _road_delimiter: str = None
-    _healerhold_importance: float = None
+    _healerhold_share: float = None
 
     def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
         # bool_x = False
@@ -359,21 +359,21 @@ class IdeaUnit:
                 if lemma_fact.base == missing_fact:
                     self.set_factunit(lemma_fact)
 
-    def set_world_importance(
+    def set_world_share(
         self,
         fund_onset_x: float,
-        parent_world_importance: float = None,
+        parent_world_share: float = None,
         parent_fund_cease: float = None,
     ):
-        parent_world_importance = get_1_if_None(parent_world_importance)
+        parent_world_share = get_1_if_None(parent_world_share)
         self.set_kids_total_weight()
-        self._world_importance = None
+        self._world_share = None
         self._world_fund_onset = None
         self._world_fund_cease = None
         sibling_ratio = self._weight / self._sibling_total_weight
-        self._world_importance = parent_world_importance * sibling_ratio
+        self._world_share = parent_world_share * sibling_ratio
         self._world_fund_onset = fund_onset_x
-        self._world_fund_cease = self._world_fund_onset + self._world_importance
+        self._world_fund_cease = self._world_fund_onset + self._world_share
         self._world_fund_cease = min(self._world_fund_cease, parent_fund_cease)
         self.set_awardheirs_world_cred_debt()
 
@@ -512,7 +512,7 @@ class IdeaUnit:
         awardheirs_debtor_weight_sum = self.get_awardheirs_debtor_weight_sum()
         for awardheir_x in self._awardheirs.values():
             awardheir_x.set_world_cred_debt(
-                idea_world_importance=self._world_importance,
+                idea_world_share=self._world_share,
                 awardheirs_credor_weight_sum=awardheirs_credor_weight_sum,
                 awardheirs_debtor_weight_sum=awardheirs_debtor_weight_sum,
             )
@@ -1108,7 +1108,7 @@ def ideaunit_shop(
     # Calculated fields
     _level: int = None,
     _kids_total_weight: int = None,
-    _world_importance: float = None,
+    _world_share: float = None,
     _world_fund_onset: float = None,
     _world_fund_cease: float = None,
     _task: bool = None,
@@ -1121,7 +1121,7 @@ def ideaunit_shop(
     _sibling_total_weight: int = None,
     _active_hx: dict[int, bool] = None,
     _road_delimiter: str = None,
-    _healerhold_importance: float = None,
+    _healerhold_share: float = None,
 ) -> IdeaUnit:
     if _meld_strategy is None:
         _meld_strategy = get_meld_default()
@@ -1163,7 +1163,7 @@ def ideaunit_shop(
         # Calculated fields
         _level=_level,
         _kids_total_weight=get_0_if_None(_kids_total_weight),
-        _world_importance=_world_importance,
+        _world_share=_world_share,
         _world_fund_onset=_world_fund_onset,
         _world_fund_cease=_world_fund_cease,
         _task=_task,
@@ -1176,7 +1176,7 @@ def ideaunit_shop(
         _sibling_total_weight=_sibling_total_weight,
         _active_hx=get_empty_dict_if_none(_active_hx),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _healerhold_importance=get_0_if_None(_healerhold_importance),
+        _healerhold_share=get_0_if_None(_healerhold_share),
     )
     if x_ideakid._root:
         x_ideakid.set_idea_label(_label=_world_real_id)

@@ -51,9 +51,9 @@ def get_speaker_perspective(speaker: WorldUnit, listener_owner_id: OwnerID):
 
 
 def _get_pixel_scaled_weight(
-    x_world_importance: float, debtor_amount: float, pixel: float
+    x_world_share: float, debtor_amount: float, pixel: float
 ) -> float:
-    x_ingest_weight = x_world_importance * debtor_amount
+    x_ingest_weight = x_world_share * debtor_amount
     return int(x_ingest_weight / pixel) * pixel
 
 
@@ -74,7 +74,7 @@ def create_ingest_idea(
     x_ideaunit: IdeaUnit, debtor_amount: float, pixel: float
 ) -> IdeaUnit:
     x_ideaunit._weight = _get_pixel_scaled_weight(
-        x_world_importance=x_ideaunit._world_importance,
+        x_world_share=x_ideaunit._world_share,
         debtor_amount=debtor_amount,
         pixel=pixel,
     )

@@ -275,14 +275,14 @@ class AwardHeir(BeliefCore):
 
     def set_world_cred_debt(
         self,
-        idea_world_importance,
+        idea_world_share,
         awardheirs_credor_weight_sum: float,
         awardheirs_debtor_weight_sum: float,
     ):
-        credor_importance_ratio = self.credor_weight / awardheirs_credor_weight_sum
-        self._world_cred = idea_world_importance * credor_importance_ratio
-        debtor_importance_ratio = self.debtor_weight / awardheirs_debtor_weight_sum
-        self._world_debt = idea_world_importance * debtor_importance_ratio
+        credor_share_ratio = self.credor_weight / awardheirs_credor_weight_sum
+        self._world_cred = idea_world_share * credor_share_ratio
+        debtor_share_ratio = self.debtor_weight / awardheirs_debtor_weight_sum
+        self._world_debt = idea_world_share * debtor_share_ratio
 
 
 def awardheir_shop(

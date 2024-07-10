@@ -827,21 +827,21 @@ def test_WorldUnit_calc_world_metrics_EveryTwoMonthReturnsCorrectObj_world_v001(
     assert from_list_get_active(road=mat_road, idea_dict=yao_world._idea_dict)
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsEmpty_sum_healerhold_importance():
+def test_WorldUnit_calc_world_metrics_CorrectlySetsEmpty_sum_healerhold_share():
     # GIVEN
     sue_world = worldunit_shop("Sue")
-    assert sue_world._sum_healerhold_importance == 0
+    assert sue_world._sum_healerhold_share == 0
     assert sue_world._econ_dict == {}
 
     # WHEN
     sue_world.calc_world_metrics()
 
     # THEN
-    assert sue_world._sum_healerhold_importance == 0
+    assert sue_world._sum_healerhold_share == 0
     assert sue_world._econ_dict == {}
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_importance():
+def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # GIVEN
     sue_world = get_world_with_4_levels_and_2reasons()
     sue_world.add_charunit("Sue")
@@ -852,15 +852,15 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_importance():
     sue_healerhold = healerhold_shop({"Sue"})
     sue_world.edit_idea_attr(oregon_road, problem_bool=True, healerhold=sue_healerhold)
     oregon_idea = sue_world.get_idea_obj(oregon_road)
-    print(f"{oregon_idea._world_importance=}")
-    assert sue_world._sum_healerhold_importance == 0
-    assert oregon_idea._healerhold_importance == 0
+    print(f"{oregon_idea._world_share=}")
+    assert sue_world._sum_healerhold_share == 0
+    assert oregon_idea._healerhold_share == 0
 
     # WHEN
     sue_world.calc_world_metrics()
     # THEN
-    assert sue_world._sum_healerhold_importance == 0.038461538461538464
-    assert oregon_idea._healerhold_importance == 1
+    assert sue_world._sum_healerhold_share == 0.038461538461538464
+    assert oregon_idea._healerhold_share == 1
 
     # WHEN
     week_road = sue_world.make_l1_road("weekdays")
@@ -868,44 +868,42 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_importance():
     mon_road = sue_world.make_road(week_road, "Monday")
     sue_world.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     mon_idea = sue_world.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._world_importance=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._world_share=}")
     sue_world.calc_world_metrics()
     # THEN
-    assert sue_world._sum_healerhold_importance != 0.038461538461538464
-    assert sue_world._sum_healerhold_importance == 0.06923076923076923
-    assert oregon_idea._healerhold_importance == 0.5555555555555556
-    assert mon_idea._healerhold_importance == 0.4444444444444444
+    assert sue_world._sum_healerhold_share != 0.038461538461538464
+    assert sue_world._sum_healerhold_share == 0.06923076923076923
+    assert oregon_idea._healerhold_share == 0.5555555555555556
+    assert mon_idea._healerhold_share == 0.4444444444444444
 
     # WHEN
     tue_road = sue_world.make_road(week_road, "Tuesday")
     sue_world.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     tue_idea = sue_world.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._world_importance=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._world_share=}")
     # sat_road = sue_world.make_road(week_road, "Saturday")
     # sat_idea = sue_world.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._world_importance=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._world_share=}")
     sue_world.calc_world_metrics()
 
     # THEN
-    assert sue_world._sum_healerhold_importance != 0.06923076923076923
-    assert sue_world._sum_healerhold_importance == 0.1
-    assert oregon_idea._healerhold_importance == 0.38461538461538464
-    assert mon_idea._healerhold_importance == 0.3076923076923077
-    assert tue_idea._healerhold_importance == 0.3076923076923077
+    assert sue_world._sum_healerhold_share != 0.06923076923076923
+    assert sue_world._sum_healerhold_share == 0.1
+    assert oregon_idea._healerhold_share == 0.38461538461538464
+    assert mon_idea._healerhold_share == 0.3076923076923077
+    assert tue_idea._healerhold_share == 0.3076923076923077
 
     # WHEN
     sue_world.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_world.get_idea_obj(week_road)
-    print(
-        f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._world_importance=}"
-    )
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._world_share=}")
     sue_world.calc_world_metrics()
     # THEN
     # display_ideatree(sue_world, "Econ").show()
-    assert sue_world._sum_healerhold_importance == 0
-    assert oregon_idea._healerhold_importance == 0
-    assert mon_idea._healerhold_importance == 0
-    assert tue_idea._healerhold_importance == 0
+    assert sue_world._sum_healerhold_share == 0
+    assert oregon_idea._healerhold_share == 0
+    assert mon_idea._healerhold_share == 0
+    assert tue_idea._healerhold_share == 0
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
@@ -933,7 +931,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     mon_road = sue_world.make_road(week_road, "Monday")
     sue_world.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     # mon_idea = sue_world.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._world_importance=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._world_share=}")
     sue_world.calc_world_metrics()
     # THEN
     assert len(sue_world._econ_dict) == 2
@@ -944,10 +942,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     tue_road = sue_world.make_road(week_road, "Tuesday")
     sue_world.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     # tue_idea = sue_world.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._world_importance=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._world_share=}")
     # sat_road = sue_world.make_road(week_road, "Saturday")
     # sat_idea = sue_world.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._world_importance=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._world_share=}")
     sue_world.calc_world_metrics()
 
     # THEN
@@ -959,9 +957,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     # WHEN
     sue_world.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_world.get_idea_obj(week_road)
-    print(
-        f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._world_importance=}"
-    )
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._world_share=}")
     sue_world.calc_world_metrics()
     # THEN
     # display_ideatree(sue_world, "Econ").show()

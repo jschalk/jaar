@@ -28,7 +28,7 @@ def get_world_agenda_dataframe(x_world: WorldUnit, base: RoadUnit = None) -> Dat
         return DataFrame(
             columns=[
                 "owner_id",
-                "world_importance",
+                "world_share",
                 "_label",
                 "_parent_road",
                 "_begin",
@@ -43,7 +43,7 @@ def get_world_agenda_dataframe(x_world: WorldUnit, base: RoadUnit = None) -> Dat
     for x_idea in agenda_dict.values():
         idea_dict = {
             "owner_id": x_world._owner_id,
-            "world_importance": x_idea._world_importance,
+            "world_share": x_idea._world_share,
             "_label": x_idea._label,
             "_parent_road": x_idea._parent_road,
             "_begin": x_idea._begin,
