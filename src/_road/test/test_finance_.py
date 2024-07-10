@@ -1,6 +1,7 @@
 from src._road.finance import (
     PixelUnit,
     PennyUnit,
+    MoneyUnit,
     default_pixel_if_none,
     default_penny_if_none,
     trim_pixel_excess,
@@ -59,9 +60,19 @@ def test_default_penny_if_none_ReturnsCorrectObj():
 
 def test_trim_penny_excess_ReturnsCorrectedFloat():
     # GIVEN / WHEN / THEN
-    assert trim_penny_excess(num=5.5, pixel=1) == 5
-    assert trim_penny_excess(num=0.5, pixel=1) == 0
-    assert trim_penny_excess(num=5.5, pixel=0.1) == 5.5
-    assert trim_penny_excess(num=0.5, pixel=0.01) == 0.5
-    assert trim_penny_excess(num=0.56, pixel=0.1) == 0.5
-    assert trim_penny_excess(num=0.56, pixel=0.133) == 0.532
+    assert trim_penny_excess(num=5.5, penny=1) == 5
+    assert trim_penny_excess(num=0.5, penny=1) == 0
+    assert trim_penny_excess(num=5.5, penny=0.1) == 5.5
+    assert trim_penny_excess(num=0.5, penny=0.01) == 0.5
+    assert trim_penny_excess(num=0.56, penny=0.1) == 0.5
+    assert trim_penny_excess(num=0.56, penny=0.133) == 0.532
+
+
+def test_MoneyUnit_exists():
+    # GIVEN
+    x_float = 0.045
+    # WHEN
+    y_moneyunit = MoneyUnit(x_float)
+    # THEN
+    assert y_moneyunit == x_float
+    assert inspect_getdoc(y_moneyunit) == "MoneyUnit inherits from float class"

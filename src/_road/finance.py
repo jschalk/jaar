@@ -4,30 +4,36 @@ class PennyUnit(float):
     pass
 
 
+class MoneyUnit(float):
+    """MoneyUnit inherits from float class"""
+
+    pass
+
+
 class PixelUnit(float):
     """Smallest Unit of credor_weight or debtor_weight"""
 
     pass
 
 
-def default_pixel_if_none(pixel: float = None) -> float:
+def default_pixel_if_none(pixel: PixelUnit = None) -> PixelUnit:
     return pixel if pixel != None else 1
 
 
-def trim_pixel_excess(num: float, pixel: float) -> float:
+def trim_pixel_excess(num: float, pixel: PixelUnit) -> float:
     return pixel * int(num / pixel)
 
 
-def default_penny_if_none(penny: float = None) -> float:
+def default_penny_if_none(penny: PennyUnit = None) -> PennyUnit:
     x_penny = penny if penny != None else 1
     return max(x_penny, 1)
 
 
-def trim_penny_excess(num: float, pixel: float) -> float:
-    return pixel * int(num / pixel)
+def trim_penny_excess(num: MoneyUnit, penny: PennyUnit) -> MoneyUnit:
+    return penny * int(num / penny)
 
 
-def default_money_magnitude() -> float:
+def default_money_magnitude() -> MoneyUnit:
     return 1000000000
 
 
