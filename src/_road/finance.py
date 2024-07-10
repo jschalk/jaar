@@ -1,5 +1,17 @@
-class FinanceUnit(float):
-    """A number that can be used for financial calculations."""
+class PennyUnit(float):
+    """Smallest Unit of Money"""
+
+    pass
+
+
+class PixelUnit(float):
+    """Smallest Unit of credor_weight or debtor_weight"""
+
+    pass
+
+
+class ThinkUnit(float):
+    """Smallest Unit of mind"""
 
     pass
 
@@ -19,6 +31,14 @@ def default_penny_if_none(penny: float = None) -> float:
 
 def trim_penny_excess(num: float, pixel: float) -> float:
     return pixel * int(num / pixel)
+
+
+def default_thinkunit_if_none(thinkunit: ThinkUnit = None) -> ThinkUnit:
+    return thinkunit if thinkunit != None else 1
+
+
+def trim_thinkunit_excess(num: float, thinkunit: ThinkUnit) -> float:
+    return thinkunit * int(num / thinkunit)
 
 
 def default_money_magnitude() -> float:
