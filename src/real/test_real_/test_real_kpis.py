@@ -117,7 +117,7 @@ def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanu
     # THEN
     agenda_colums = {
         "owner_id",
-        "world_importance",
+        "world_share",
         "_label",
         "_parent_road",
         "_begin",
@@ -158,7 +158,7 @@ def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_clean
     # THEN
     agenda_colums = {
         "owner_id",
-        "world_importance",
+        "world_share",
         "_label",
         "_parent_road",
         "_begin",

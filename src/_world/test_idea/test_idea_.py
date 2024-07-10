@@ -47,7 +47,7 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._level is None
     assert x_ideaunit._kids_total_weight is None
     assert x_ideaunit._active_hx is None
-    assert x_ideaunit._world_importance is None
+    assert x_ideaunit._world_share is None
     assert x_ideaunit._world_fund_onset is None
     assert x_ideaunit._world_fund_cease is None
     assert x_ideaunit._reasonunits is None
@@ -58,7 +58,7 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._road_delimiter is None
     assert x_ideaunit._root is None
     assert x_ideaunit._world_real_id is None
-    assert x_ideaunit._healerhold_importance is None
+    assert x_ideaunit._healerhold_share is None
 
 
 def test_ideaunit_shop_NoParametersReturnsCorrectObj():
@@ -95,7 +95,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._level is None
     assert x_ideaunit._kids_total_weight == 0
     assert x_ideaunit._active_hx == {}
-    assert x_ideaunit._world_importance is None
+    assert x_ideaunit._world_share is None
     assert x_ideaunit._world_fund_onset is None
     assert x_ideaunit._world_fund_cease is None
     assert x_ideaunit._reasonunits == {}
@@ -106,7 +106,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._road_delimiter == default_road_delimiter_if_none()
     assert x_ideaunit._root is False
     assert x_ideaunit._world_real_id == root_label()
-    assert x_ideaunit._healerhold_importance == 0
+    assert x_ideaunit._healerhold_share == 0
 
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
@@ -249,7 +249,7 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     assert biker_awardheir._world_debt is None
 
     # WHEN
-    sport_idea._world_importance = 0.25
+    sport_idea._world_share = 0.25
     sport_idea.set_awardheirs_world_cred_debt()
 
     # THEN

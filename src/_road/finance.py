@@ -1,5 +1,11 @@
-class FinanceUnit(float):
-    """A number that can be used for financial calculations."""
+class PennyUnit(float):
+    """Smallest Unit of Money"""
+
+    pass
+
+
+class PixelUnit(float):
+    """Smallest Unit of credor_weight or debtor_weight"""
 
     pass
 
@@ -53,11 +59,11 @@ def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float
     # Calculate the distribution
     x_dict = {}
     for key, obj in ledger.items():
-        # Determine the share based on credor_weight
-        share = (obj / total_credor_weight) * scale_number
+        # Determine the allot based on credor_weight
+        allot = (obj / total_credor_weight) * scale_number
 
         # Adjust to the nearest grain unit
-        alloted_value = round(share / grain_unit) * grain_unit
+        alloted_value = round(allot / grain_unit) * grain_unit
         x_dict[key] = alloted_value
 
     return x_dict

@@ -118,7 +118,7 @@ def test_BeliefUnit_clear_charlinks_SetsAttrCorrectly():
     assert swimmers_beliefunit._chars.get(yao_text) is None
 
 
-def test_BeliefUnit_reset_world_importance_reset_charlinks():
+def test_BeliefUnit_reset_world_share_reset_charlinks():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"

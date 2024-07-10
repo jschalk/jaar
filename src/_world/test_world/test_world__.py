@@ -42,7 +42,7 @@ def test_WorldUnit_Exists():
     assert x_world._rational is None
     assert x_world._econs_justified is None
     assert x_world._econs_buildable is None
-    assert x_world._sum_healerhold_importance is None
+    assert x_world._sum_healerhold_share is None
     assert str(type(x_world._idearoot)).find("None") == 8
 
 
@@ -89,7 +89,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._rational is False
     assert x_world._econs_justified is False
     assert x_world._econs_buildable is False
-    assert x_world._sum_healerhold_importance == 0
+    assert x_world._sum_healerhold_share == 0
     print(f"{type(x_world._idearoot)=}") == 0
     assert str(type(x_world._idearoot)).find(".idea.IdeaUnit'>") > 0
 

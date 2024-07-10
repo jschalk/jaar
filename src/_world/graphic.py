@@ -62,7 +62,7 @@ def _add_individual_trace(
         plotly_Scatter(
             x=[kid_idea._level - 1, kid_idea._level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_idea._world_importance),
+            marker_size=_get_dot_diameter(kid_idea._world_share),
             name=kid_idea._label,
             marker_color=_get_color_for_ideaunit_trace(kid_idea, mode=mode),
         )
@@ -70,7 +70,7 @@ def _add_individual_trace(
     anno_list.append(
         dict(
             x=kid_idea._level,
-            y=source_y + (_get_dot_diameter(kid_idea._world_importance) / 150) + 0.002,
+            y=source_y + (_get_dot_diameter(kid_idea._world_share) / 150) + 0.002,
             text=kid_idea._label,
             showarrow=False,
         )
@@ -106,7 +106,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_world: WorldUnit):
     if mode == "Task":
         x_title = "Idea Tree with task ideas in Red."
     x_title += f" (Items: {len(x_world._idea_dict)})"
-    x_title += f" (_sum_healerhold_importance: {x_world._sum_healerhold_importance})"
+    x_title += f" (_sum_healerhold_share: {x_world._sum_healerhold_share})"
     x_title += f" (_econs_justified: {x_world._econs_justified})"
     x_fig.update_layout(
         title_text=x_title,
@@ -188,7 +188,7 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
 def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "world_importance",
+        "world_share",
         "_label",
         "_parent_road",
     ]
@@ -201,7 +201,7 @@ def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.world_importance,
+                df.world_share,
                 df._label,
                 df._parent_road,
             ],
