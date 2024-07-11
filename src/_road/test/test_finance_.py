@@ -12,6 +12,7 @@ from src._road.finance import (
     trim_coin_excess,
     trim_pixel_excess,
     trim_penny_excess,
+    FiscalUnit,
 )
 from inspect import getdoc as inspect_getdoc
 
@@ -133,3 +134,47 @@ def test_trim_coin_excess_ReturnsCorrectedFloat():
     assert trim_coin_excess(num=0.5, coin=0.01) == 0.5
     assert trim_coin_excess(num=0.56, coin=0.1) == 0.5
     assert trim_coin_excess(num=0.56, coin=0.133) == 0.532
+
+
+def test_FiscalUnit_Exists():
+    # GIVEN / WHEN
+    x_fiscal = FiscalUnit()
+
+    # THEN
+    assert x_fiscal._budget is None
+    assert x_fiscal._coin is None
+    assert x_fiscal._pixel is None
+    assert x_fiscal._penny is None
+
+
+# def test_fiscalunit_shop_ReturnsCorrectObj():
+#     # GIVEN
+#     casa_text = "casa"
+#     casa_road = create_road(root_label(), casa_text)
+#     email_text = "check email"
+#     email_road = create_road(casa_road, email_text)
+
+#     # WHEN
+#     email_fiscal = fiscalunit_shop(need=email_road)
+
+#     # THEN
+#     assert email_fiscal.need == email_road
+
+
+# def test_FiscalUnit_clear_status_CorrectlySetsAttrs():
+#     # WHEN
+#     casa_text = "casa"
+#     casa_road = create_road(root_label(), casa_text)
+#     casa_fiscal = fiscalunit_shop(need=casa_road)
+#     # THEN
+#     assert casa_fiscal._status is None
+
+#     # GIVEN
+#     casa_fiscal._status = True
+#     assert casa_fiscal._status
+
+#     # WHEN
+#     casa_fiscal.clear_status()
+
+#     # THEN
+#     assert casa_fiscal._status is None
