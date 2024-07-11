@@ -23,6 +23,7 @@ from src._road.jaar_config import (
     init_gift_id,
 )
 from src._road.finance import (
+    default_coin_if_none,
     default_pixel_if_none,
     default_penny_if_none,
     default_money_magnitude_if_none,
@@ -98,6 +99,7 @@ class HubUnit:
     real_id: str = None
     econ_road: RoadUnit = None
     road_delimiter: str = None
+    coin: float = None
     pixel: float = None
     penny: float = None
     econ_money_magnitude: float = None
@@ -181,6 +183,7 @@ class HubUnit:
             _owner_id=self.owner_id,
             _real_id=self.real_id,
             _road_delimiter=self.road_delimiter,
+            _coin=self.coin,
             _pixel=self.pixel,
             _penny=self.penny,
         )
@@ -572,6 +575,7 @@ def hubunit_shop(
     owner_id: OwnerID = None,
     econ_road: RoadUnit = None,
     road_delimiter: str = None,
+    coin: float = None,
     pixel: float = None,
     penny: float = None,
     econ_money_magnitude: float = None,
@@ -587,6 +591,7 @@ def hubunit_shop(
         owner_id=validate_roadnode(owner_id, road_delimiter),
         econ_road=econ_road,
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
+        coin=default_coin_if_none(coin),
         pixel=default_pixel_if_none(pixel),
         penny=default_penny_if_none(penny),
         econ_money_magnitude=default_money_magnitude_if_none(econ_money_magnitude),

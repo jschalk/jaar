@@ -13,6 +13,7 @@ def test_HubUnit_default_voice_world_ReturnsCorrectObj():
     # GIVEN
     sue_text = "Sue"
     slash_text = "/"
+    point_nine_float = 0.9
     point_five_float = 0.5
     point_four_float = 0.4
     sue_hubunit = hubunit_shop(
@@ -21,6 +22,7 @@ def test_HubUnit_default_voice_world_ReturnsCorrectObj():
         sue_text,
         econ_road=None,
         road_delimiter=slash_text,
+        coin=point_five_float,
         pixel=point_five_float,
         penny=point_four_float,
     )
@@ -32,6 +34,7 @@ def test_HubUnit_default_voice_world_ReturnsCorrectObj():
     assert sue_default_voice._real_id == sue_hubunit.real_id
     assert sue_default_voice._owner_id == sue_hubunit.owner_id
     assert sue_default_voice._road_delimiter == sue_hubunit.road_delimiter
+    assert sue_default_voice._coin == sue_hubunit.coin
     assert sue_default_voice._pixel == sue_hubunit.pixel
     assert sue_default_voice._penny == sue_hubunit.penny
 
@@ -55,8 +58,7 @@ def test_HubUnit_create_initial_gift_files_from_default_CorrectlySavesGiftUnitFi
 ):
     # GIVEN
     sue_text = "Sue"
-    seven_int = 7
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text, pixel=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
     assert os_path_exists(init_gift_file_path) is False
@@ -75,8 +77,7 @@ def test_HubUnit_create_voice_from_gifts_CreatesvoiceFileFromGiftFiles(
 ):
     # GIVEN
     sue_text = "Sue"
-    seven_int = 7
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text, pixel=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
     sue_hubunit._create_initial_gift_files_from_default()
@@ -97,8 +98,7 @@ def test_HubUnit_create_initial_gift_and_voice_files_CreatesGiftFilesAndvoiceFil
 ):
     # GIVEN
     sue_text = "Sue"
-    seven_int = 7
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text, pixel=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
     assert os_path_exists(init_gift_file_path) is False
@@ -119,8 +119,7 @@ def test_HubUnit_create_initial_gift_files_from_voice_SavesOnlyGiftFiles(
 ):
     # GIVEN
     sue_text = "Sue"
-    seven_int = 7
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text, pixel=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     sue_voice_world = sue_hubunit.default_voice_world()
     bob_text = "Bob"
     sue_voice_world.add_charunit(bob_text)

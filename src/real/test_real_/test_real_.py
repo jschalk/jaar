@@ -1,4 +1,8 @@
-from src._road.finance import default_pixel_if_none, default_penny_if_none
+from src._road.finance import (
+    default_coin_if_none,
+    default_pixel_if_none,
+    default_penny_if_none,
+)
 from src._road.jaar_config import get_gifts_folder, get_json_filename
 from src._road.road import default_road_delimiter_if_none
 from src._world.healer import healerhold_shop
@@ -18,6 +22,7 @@ def test_RealUnit_exists(env_dir_setup_cleanup):
     assert music_real._journal_db is None
     assert music_real._gifts_dir is None
     assert music_real._road_delimiter is None
+    assert music_real._coin is None
     assert music_real._pixel is None
     assert music_real._penny is None
 
@@ -37,6 +42,7 @@ def test_realunit_shop_ReturnsRealUnit(env_dir_setup_cleanup):
     assert music_real._owners_dir != None
     assert music_real._gifts_dir != None
     assert music_real._road_delimiter == default_road_delimiter_if_none()
+    assert music_real._coin == default_coin_if_none()
     assert music_real._pixel == default_pixel_if_none()
     assert music_real._penny == default_penny_if_none()
 
@@ -45,8 +51,9 @@ def test_realunit_shop_ReturnsRealUnitWith_road_delimiter(env_dir_setup_cleanup)
     # GIVEN
     music_text = "music"
     slash_text = "/"
-    pixel_float = 9
-    penny_float = 3
+    x_coin = 7.0
+    x_pixel = 9
+    x_penny = 3
 
     # WHEN
     music_real = realunit_shop(
@@ -54,14 +61,16 @@ def test_realunit_shop_ReturnsRealUnitWith_road_delimiter(env_dir_setup_cleanup)
         reals_dir=get_test_reals_dir(),
         in_memory_journal=True,
         _road_delimiter=slash_text,
-        _pixel=pixel_float,
-        _penny=penny_float,
+        _coin=x_coin,
+        _pixel=x_pixel,
+        _penny=x_penny,
     )
 
     # THEN
     assert music_real._road_delimiter == slash_text
-    assert music_real._pixel == pixel_float
-    assert music_real._penny == penny_float
+    assert music_real._coin == x_coin
+    assert music_real._pixel == x_pixel
+    assert music_real._penny == x_penny
 
 
 def test_RealUnit_set_real_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -114,16 +123,20 @@ def test_RealUnit_init_owner_econs_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
     # GIVEN
     music_text = "music"
     slash_text = "/"
+    x_coin = 4
     x_pixel = 5
     music_real = realunit_shop(
         music_text,
         get_test_reals_dir(),
         _road_delimiter=slash_text,
+        _coin=x_coin,
         _pixel=x_pixel,
         in_memory_journal=True,
     )
     sue_text = "Sue"
-    sue_hubunit = hubunit_shop(None, music_text, sue_text, None, pixel=x_pixel)
+    sue_hubunit = hubunit_shop(
+        None, music_text, sue_text, None, pixel=x_pixel, coin=x_coin
+    )
     assert os_path_exists(sue_hubunit.action_path()) is False
 
     # WHEN
@@ -248,6 +261,7 @@ def test_RealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         owner_id=sue_text,
         econ_road=None,
         road_delimiter=music_real._road_delimiter,
+        coin=music_real._coin,
         pixel=music_real._pixel,
     )
     yao_hubunit = hubunit_shop(
@@ -256,6 +270,7 @@ def test_RealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         owner_id=yao_text,
         econ_road=None,
         road_delimiter=music_real._road_delimiter,
+        coin=music_real._coin,
         pixel=music_real._pixel,
     )
     assert music_all_owners.get(sue_text) == sue_hubunit

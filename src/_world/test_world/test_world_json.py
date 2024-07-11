@@ -76,6 +76,8 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     x_world.set_fact(base=time_minute, pick=time_minute, open=0, nigh=1440)
     yao_text = "Yao"
     x_world._originunit.set_originhold(yao_text, 1)
+    yao_coin = 23
+    x_world._coin = yao_coin
     world_weight = 23
     x_world._weight = world_weight
     x_char_credor_pool = 22
@@ -97,6 +99,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_real_id"] == x_world._real_id
     assert world_dict["_weight"] == x_world._weight
     assert world_dict["_weight"] == world_weight
+    assert world_dict["_coin"] == yao_coin
     assert world_dict["_max_tree_traverse"] == x_world._max_tree_traverse
     assert world_dict["_road_delimiter"] == x_world._road_delimiter
     assert world_dict["_char_credor_pool"] == x_world._char_credor_pool
@@ -220,8 +223,10 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     zia_world = example_worlds_get_world_x1_3levels_1reason_1facts()
     tiger_real_id = "tiger"
     zia_world.set_real_id(tiger_real_id)
-    seven_int = 7
-    zia_world._pixel = seven_int
+    x_coin = 66
+    zia_world._coin = x_coin
+    x_pixel = 7
+    zia_world._pixel = x_pixel
     x_penny = 0.3
     zia_world._penny = x_penny
     override_text = "override"
@@ -250,6 +255,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert world_dict["_real_id"] == zia_world._real_id
     assert world_dict["_weight"] == zia_world._weight
     assert world_dict["_meld_strategy"] == zia_world._meld_strategy
+    assert world_dict["_coin"] == zia_world._coin
     assert world_dict["_pixel"] == zia_world._pixel
     assert world_dict["_penny"] == zia_world._penny
     with pytest_raises(Exception) as excinfo:
@@ -340,6 +346,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world.set_max_tree_traverse(23)
     tiger_real_id = "tiger"
     zia_world.set_real_id(tiger_real_id)
+    zia_coin = 0.8
+    zia_world._coin = zia_coin
     zia_pixel = 0.5
     zia_world._pixel = zia_pixel
     zia_penny = 2
@@ -397,6 +405,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._owner_id != None
     assert json_world._owner_id == zia_world._owner_id
     assert json_world._real_id == zia_world._real_id
+    assert json_world._coin == zia_coin
+    assert json_world._coin == zia_world._coin
     assert json_world._pixel == zia_pixel
     assert json_world._pixel == zia_world._pixel
     assert json_world._penny == zia_penny

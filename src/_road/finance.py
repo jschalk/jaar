@@ -16,6 +16,20 @@ class PixelUnit(float):
     pass
 
 
+class CoinUnit(float):
+    """Smallest Unit of budget"""
+
+    pass
+
+
+def default_coin_if_none(coin: CoinUnit = None) -> CoinUnit:
+    return coin if coin != None else 1
+
+
+def trim_coin_excess(num: float, coin: CoinUnit) -> float:
+    return coin * int(num / coin)
+
+
 def default_pixel_if_none(pixel: PixelUnit = None) -> PixelUnit:
     return pixel if pixel != None else 1
 
