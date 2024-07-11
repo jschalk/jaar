@@ -1,6 +1,5 @@
 from src._instrument.python import (
     get_empty_dict_if_none,
-    get_1_if_None,
     get_0_if_None,
     get_False_if_None,
 )

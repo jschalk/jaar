@@ -1,10 +1,7 @@
 from src._world.reason_idea import factunit_shop
 from src._world.lemma import Lemma, Lemmas, lemmas_shop
 from src._world.idea import ideaunit_shop
-from src._road.road import (
-    get_default_real_id_roadnode as root_label,
-    create_road,
-)
+from src._road.road import get_default_real_id_roadnode as root_label, create_road
 
 
 def test_lemma_attributes_exist():

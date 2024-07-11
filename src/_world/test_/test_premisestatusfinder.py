@@ -4,7 +4,6 @@ from src._world.reason_idea import (
 )
 from pytest import raises as pytest_raises
 from plotly.graph_objects import Figure as plotly_figure, Scatter as plotly_Scatter
-from dataclasses import dataclass
 
 
 def test_PremiseStatusFinder_Exists():

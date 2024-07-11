@@ -1,10 +1,5 @@
 from src._world.idea import ideaunit_shop
-from src._world.reason_idea import (
-    reasonunit_shop,
-    premiseunit_shop,
-    RoadUnit,
-    factunit_shop,
-)
+from src._world.reason_idea import reasonunit_shop, premiseunit_shop, factunit_shop
 from src._road.road import get_default_real_id_roadnode as root_label, create_road
 
 

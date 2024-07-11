@@ -8,7 +8,6 @@ from src._world.reason_idea import (
 from src._road.road import (
     get_default_real_id_roadnode as root_label,
     create_road,
-    default_road_delimiter_if_none,
     find_replace_road_key_dict,
 )
 from pytest import raises as pytest_raises

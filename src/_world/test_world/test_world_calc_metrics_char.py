@@ -1,16 +1,6 @@
 from src._road.road import RoadUnit
-from src._world.char import (
-    CharID,
-    charlink_shop,
-    charunit_shop,
-    CharUnitExternalMetrics,
-)
-from src._world.beliefunit import (
-    BeliefID,
-    beliefunit_shop,
-    awardlink_shop,
-    get_intersection_of_chars,
-)
+from src._world.char import CharID, charunit_shop
+from src._world.beliefunit import BeliefID, awardlink_shop
 from src._world.examples.example_worlds import (
     world_v001 as examples_world_v001,
     world_v001_with_large_agenda as examples_world_v001_with_large_agenda,
@@ -19,7 +9,6 @@ from src._world.world import WorldUnit, worldunit_shop
 from src._world.idea import ideaunit_shop, IdeaUnit
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
-from copy import deepcopy as copy_deepcopy
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():

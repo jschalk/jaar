@@ -1,6 +1,5 @@
 from src._world.healer import healerhold_shop
 from src._world.idea import IdeaAttrFilter, ideaattrfilter_shop
-from pytest import raises as pytest_raise
 
 
 def test_IdeaAttrFilter_Exists():

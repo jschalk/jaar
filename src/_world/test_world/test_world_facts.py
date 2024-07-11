@@ -1,9 +1,5 @@
-from src._world.reason_idea import (
-    factunit_shop,
-    factunit_shop,
-    factheir_shop,
-)
-from src._world.idea import ideaunit_shop, RoadUnit
+from src._world.reason_idea import factunit_shop, factunit_shop, factheir_shop
+from src._world.idea import ideaunit_shop
 from src._world.examples.example_worlds import (
     get_world_with_4_levels as examples_get_world_with_4_levels,
 )

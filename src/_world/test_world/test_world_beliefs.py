@@ -8,7 +8,6 @@ from src._world.beliefunit import (
 from src._world.char import CharID, charunit_shop, charlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
-from src._world.examples.example_worlds import world_v001 as examples_world_v001
 from pytest import raises as pytest_raises
 
 
