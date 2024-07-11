@@ -53,7 +53,6 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._all_char_cred is None
     assert x_ideaunit._all_char_debt is None
     assert x_ideaunit._level is None
-    assert x_ideaunit._kids_total_weight is None
     assert x_ideaunit._active_hx is None
     assert x_ideaunit._world_share is None
     assert x_ideaunit._coin is None
@@ -96,7 +95,6 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._meld_strategy == "default"
     assert x_ideaunit._healerhold == healerhold_shop()
     assert x_ideaunit._level is None
-    assert x_ideaunit._kids_total_weight == 0
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._world_share is None
     assert x_ideaunit._coin is None

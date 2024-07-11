@@ -1810,8 +1810,6 @@ class WorldUnit:
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
         self._idearoot._weight = 1
-        self._idearoot.set_kids_total_weight()
-        self._idearoot.set_sibling_total_weight(1)
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
         self._idearoot.set_world_share(0, self._budget, self._budget)
@@ -1841,7 +1839,6 @@ class WorldUnit:
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
         idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        idea_kid.set_sibling_total_weight(parent_idea._kids_total_weight)
         idea_kid.set_world_share(budget_onset, budget_cease, self._budget)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)

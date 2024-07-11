@@ -256,7 +256,6 @@ class IdeaUnit:
     _problem_bool: bool = None
     # Calculated fields
     _level: int = None
-    _kids_total_weight: int = None
     _world_share: float = None
     _coin: CoinNum = None
     _budget_onset: BudgetNum = None
@@ -268,7 +267,6 @@ class IdeaUnit:
     _all_char_cred: bool = None
     _all_char_debt: bool = None
     _is_expanded: bool = None
-    _sibling_total_weight: int = None
     _active_hx: dict[int, bool] = None
     _road_delimiter: str = None
     _healerhold_share: float = None
@@ -367,8 +365,6 @@ class IdeaUnit:
         self._budget_onset = x_budget_onset
         self._budget_cease = x_budget_cease
         self._world_share = (self._budget_cease - self._budget_onset) / total_budget
-
-        self.set_kids_total_weight()
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
@@ -433,9 +429,6 @@ class IdeaUnit:
         x_int = 1 if parent_pledge else 0
         self._ancestor_pledge_count = parent_ancestor_pledge_count + x_int
 
-    def set_sibling_total_weight(self, parent_kids_total_weight):
-        self._sibling_total_weight = parent_kids_total_weight
-
     def set_level(self, parent_level):
         self._level = parent_level + 1
 
@@ -489,11 +482,6 @@ class IdeaUnit:
             self._awardlines[bl.belief_id].add_world_cred_debt(
                 world_cred=bl._world_cred, world_debt=bl._world_debt
             )
-
-    def set_kids_total_weight(self):
-        self._kids_total_weight = 0
-        for x_idea in self._kids.values():
-            self._kids_total_weight += x_idea._weight
 
     def get_awardheirs_credor_weight_sum(self) -> float:
         return sum(awardlink.credor_weight for awardlink in self._awardheirs.values())
@@ -1101,7 +1089,6 @@ def ideaunit_shop(
     _problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
-    _kids_total_weight: int = None,
     _world_share: float = None,
     _coin: CoinNum = None,
     _budget_onset: BudgetNum = None,
@@ -1113,7 +1100,6 @@ def ideaunit_shop(
     _all_char_cred: bool = None,
     _all_char_debt: bool = None,
     _is_expanded: bool = True,
-    _sibling_total_weight: int = None,
     _active_hx: dict[int, bool] = None,
     _road_delimiter: str = None,
     _healerhold_share: float = None,
@@ -1157,7 +1143,6 @@ def ideaunit_shop(
         _world_real_id=_world_real_id,
         # Calculated fields
         _level=_level,
-        _kids_total_weight=get_0_if_None(_kids_total_weight),
         _world_share=_world_share,
         _coin=_coin,
         _budget_onset=_budget_onset,
@@ -1169,7 +1154,6 @@ def ideaunit_shop(
         _all_char_cred=_all_char_cred,
         _all_char_debt=_all_char_debt,
         _is_expanded=_is_expanded,
-        _sibling_total_weight=_sibling_total_weight,
         _active_hx=get_empty_dict_if_none(_active_hx),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _healerhold_share=get_0_if_None(_healerhold_share),
