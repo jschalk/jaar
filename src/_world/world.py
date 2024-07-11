@@ -1799,30 +1799,25 @@ class WorldUnit:
             self._econs_justified = False
 
     def _set_root_attributes(self, econ_exceptions: bool):
-        x_idearoot = self._idearoot
-        x_idearoot._level = 0
-        x_idearoot.set_parent_road(parent_road="")
-        x_idearoot.set_idearoot_inherit_reasonheirs()
-        x_idearoot.set_cultureheir(parent_cultureheir=None, world_beliefs=self._beliefs)
-        x_idearoot.set_factheirs(facts=self._idearoot._factunits)
-        x_idearoot.inherit_awardheirs()
-        x_idearoot.clear_awardlines()
-        x_idearoot._weight = 1
-        x_idearoot.set_kids_total_weight()
-        x_idearoot.set_sibling_total_weight(1)
-        x_idearoot.set_active(
-            tree_traverse_count=self._tree_traverse_count,
-            world_beliefunits=self._beliefs,
-            world_owner_id=self._owner_id,
-        )
-        x_idearoot.set_world_share(x_budget_onset=0, parent_budget_cease=1)
-        x_idearoot.set_awardheirs_world_cred_debt()
-        x_idearoot.set_ancestor_pledge_count(0, False)
-        x_idearoot.clear_descendant_pledge_count()
-        x_idearoot.clear_all_char_cred_debt()
-        x_idearoot.pledge = False
-
-        if x_idearoot.is_kidless():
+        self._idearoot._level = 0
+        self._idearoot.set_parent_road("")
+        self._idearoot.set_idearoot_inherit_reasonheirs()
+        self._idearoot.set_cultureheir(None, self._beliefs)
+        self._idearoot.set_factheirs(self._idearoot._factunits)
+        self._idearoot.inherit_awardheirs()
+        self._idearoot.clear_awardlines()
+        self._idearoot._weight = 1
+        self._idearoot.set_kids_total_weight()
+        self._idearoot.set_sibling_total_weight(1)
+        tree_traverse_count = self._tree_traverse_count
+        self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
+        self._idearoot.set_world_share(x_budget_onset=0, parent_budget_cease=1)
+        self._idearoot.set_awardheirs_world_cred_debt()
+        self._idearoot.set_ancestor_pledge_count(0, False)
+        self._idearoot.clear_descendant_pledge_count()
+        self._idearoot.clear_all_char_cred_debt()
+        self._idearoot.pledge = False
+        if self._idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
             self._allot_world_share(idea=self._idearoot)
 
@@ -1834,27 +1829,21 @@ class WorldUnit:
         parent_idea: IdeaUnit,
         econ_exceptions: bool,
     ):
-        idea_kid.set_level(parent_level=parent_idea._level)
+        idea_kid.set_level(parent_idea._level)
         idea_kid.set_parent_road(parent_idea.get_road())
-        idea_kid.set_factheirs(facts=parent_idea._factheirs)
+        idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
         idea_kid.set_cultureheir(parent_idea._cultureheir, self._beliefs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
-        idea_kid.set_active(
-            tree_traverse_count=self._tree_traverse_count,
-            world_beliefunits=self._beliefs,
-            world_owner_id=self._owner_id,
-        )
+        tree_traverse_count = self._tree_traverse_count
+        idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
         idea_kid.set_sibling_total_weight(parent_idea._kids_total_weight)
         idea_kid.set_world_share(
-            x_budget_onset=budget_onset,
-            parent_world_share=parent_idea._world_share,
-            parent_budget_cease=parent_budget_cease,
+            budget_onset, parent_idea._world_share, parent_budget_cease
         )
-        idea_kid.set_ancestor_pledge_count(
-            parent_idea._ancestor_pledge_count, parent_idea.pledge
-        )
+        ancestor_pledge_count = parent_idea._ancestor_pledge_count
+        idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
         idea_kid.clear_all_char_cred_debt()
 
