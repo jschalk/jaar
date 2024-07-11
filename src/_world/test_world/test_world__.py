@@ -1,4 +1,9 @@
-from src._road.finance import default_pixel_if_none, default_penny_if_none
+from src._road.finance import (
+    default_pixel_if_none,
+    default_penny_if_none,
+    default_coin_if_none,
+    validate_budget,
+)
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
 )
@@ -26,6 +31,8 @@ def test_WorldUnit_Exists():
     assert x_world._idearoot is None
     assert x_world._max_tree_traverse is None
     assert x_world._road_delimiter is None
+    assert x_world._budget is None
+    assert x_world._coin is None
     assert x_world._pixel is None
     assert x_world._penny is None
     assert x_world._monetary_desc is None
@@ -52,8 +59,10 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     iowa_real_id = "Iowa"
     slash_road_delimiter = "/"
     override_meld_strategy = "override"
-    five_pixel = 5
-    penny_float = 1
+    x_budget = 555
+    x_coin = 7
+    x_pixel = 5
+    x_penny = 1
 
     # WHEN
     x_world = worldunit_shop(
@@ -61,8 +70,10 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _real_id=iowa_real_id,
         _road_delimiter=slash_road_delimiter,
         _meld_strategy=override_meld_strategy,
-        _pixel=five_pixel,
-        _penny=penny_float,
+        _budget=x_budget,
+        _coin=x_coin,
+        _pixel=x_pixel,
+        _penny=x_penny,
     )
     assert x_world
     assert x_world._owner_id == noa_text
@@ -73,8 +84,10 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._idearoot != None
     assert x_world._max_tree_traverse == 3
     assert x_world._road_delimiter == slash_road_delimiter
-    assert x_world._pixel == five_pixel
-    assert x_world._penny == penny_float
+    assert x_world._budget == x_budget
+    assert x_world._coin == x_coin
+    assert x_world._pixel == x_pixel
+    assert x_world._penny == x_penny
     assert x_world._monetary_desc is None
     assert x_world._char_credor_pool is None
     assert x_world._char_debtor_pool is None
@@ -111,8 +124,12 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_world._owner_id == ""
     assert x_world._real_id == root_label()
     assert x_world._road_delimiter == default_road_delimiter_if_none()
+    assert x_world._budget == validate_budget()
+    assert x_world._coin == default_coin_if_none()
     assert x_world._pixel == default_pixel_if_none()
     assert x_world._penny == default_penny_if_none()
+    assert x_world._idearoot._coin == x_world._coin
+    assert x_world._idearoot._road_delimiter == x_world._road_delimiter
 
 
 def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():

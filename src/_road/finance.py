@@ -1,40 +1,160 @@
-class PennyUnit(float):
+from src._instrument.python import get_1_if_None
+from dataclasses import dataclass
+
+
+class PennyNum(float):
     """Smallest Unit of Money"""
 
     pass
 
 
-class PixelUnit(float):
+class MoneyUnit(float):
+    """MoneyUnit inherits from float class"""
+
+    pass
+
+
+class PixelNum(float):
     """Smallest Unit of credor_weight or debtor_weight"""
 
     pass
 
 
-def default_pixel_if_none(pixel: float = None) -> float:
-    return pixel if pixel != None else 1
+class CoinNum(float):
+    """Smallest Unit of budget"""
+
+    pass
 
 
-def trim_pixel_excess(num: float, pixel: float) -> float:
+class BudgetNum(float):
+    """BudgetNum inherits from float class"""
+
+    pass
+
+
+def default_coin_if_none(coin: CoinNum = None) -> CoinNum:
+    return get_1_if_None(coin)
+
+
+def trim_coin_excess(num: float, coin: CoinNum) -> float:
+    return coin * int(num / coin)
+
+
+def default_budget() -> BudgetNum:
+    return BudgetNum(default_money_magnitude())
+
+
+def validate_budget(x_budget: int = None) -> int:
+    if x_budget is None:
+        return default_budget()
+    return max(get_1_if_None(x_budget), default_coin_if_none())
+
+
+def default_pixel_if_none(pixel: PixelNum = None) -> PixelNum:
+    return get_1_if_None(pixel)
+
+
+def trim_pixel_excess(num: float, pixel: PixelNum) -> float:
     return pixel * int(num / pixel)
 
 
-def default_penny_if_none(penny: float = None) -> float:
-    x_penny = penny if penny != None else 1
-    return max(x_penny, 1)
+def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
+    return max(get_1_if_None(penny), 1)
 
 
-def trim_penny_excess(num: float, pixel: float) -> float:
-    return pixel * int(num / pixel)
+def trim_penny_excess(num: MoneyUnit, penny: PennyNum) -> MoneyUnit:
+    return penny * int(num / penny)
 
 
-def default_money_magnitude() -> float:
+def default_money_magnitude() -> MoneyUnit:
     return 1000000000
 
 
 def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
     if money_magnitude is None:
-        money_magnitude = default_money_magnitude()
+        return default_money_magnitude()
     return money_magnitude
+
+
+@dataclass
+class FiscalUnit:
+    _budget: BudgetNum = None
+    _coin: CoinNum = None
+    _pixel: PixelNum = None
+    _penny: PennyNum = None
+
+
+def _get_missing_scale_list(
+    missing_scale: float, grain_unit: float, list_length: int
+) -> list[float]:
+    if list_length == 0 or missing_scale == 0:
+        return []
+    missing_avg = missing_scale / list_length
+    missing_base_multipler = int(missing_avg / grain_unit)
+    missing_base_scale_unit = missing_base_multipler * grain_unit
+    missing_scale_list = [missing_base_scale_unit for _ in range(list_length)]
+    missing_base_residual = missing_scale - sum(missing_scale_list)
+
+    x_count = 0
+    if missing_base_residual > 0:
+        while missing_base_residual > 0:
+            missing_scale_list[x_count] += grain_unit
+            missing_base_residual -= grain_unit
+            x_count += 1
+    else:
+        while missing_base_residual < 0:
+            missing_scale_list[x_count] -= grain_unit
+            missing_base_residual += grain_unit
+            x_count += 1
+
+    return missing_scale_list
+
+
+def _allot_missing_scale(
+    ledger: dict[str, float],
+    scale_number: float,
+    grain_unit: float,
+    missing_scale: float,
+) -> dict[str, float]:
+    missing_scale_list = _get_missing_scale_list(missing_scale, grain_unit, len(ledger))
+    changes_ledger_list = []
+    if missing_scale != 0:
+        x_count = 0
+        for x_key, x_float in sorted(ledger.items()):
+            delta_scale = missing_scale_list[x_count]
+            changes_ledger_list.append([x_key, x_float + delta_scale])
+            missing_scale -= delta_scale
+            if missing_scale == 0:
+                break
+            x_count += 1
+
+    for x_ledger_change in changes_ledger_list:
+        ledger[x_ledger_change[0]] = x_ledger_change[1]
+
+    allot_sum = sum(ledger.values())
+    if ledger != {} and allot_sum != scale_number:
+        raise ValueError(
+            f"Summation of output allots '{allot_sum}' is not equal to scale '{scale_number}'."
+        )
+    return ledger
+
+
+def _create_allot_dict(
+    ledger: dict[str, float], scale_number: float, grain_unit: float
+) -> dict[str, float]:
+    # Calculate the total credor_weight
+    total_credor_weight = sum(ledger.values())
+
+    # Calculate the distribution
+    allot_dict = {}
+    for key, obj in ledger.items():
+        # Determine the allot based on credor_weight
+        allot_amt = (obj / total_credor_weight) * scale_number
+
+        # Adjust to the nearest grain unit
+        alloted_value = round(allot_amt / grain_unit) * grain_unit
+        allot_dict[key] = alloted_value
+    return allot_dict
 
 
 def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float):
@@ -52,18 +172,6 @@ def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float
         raise ValueError(
             f"The scale number '{scale_number}' must be a multiple of the grain unit '{grain_unit}'."
         )
-
-    # Calculate the total credor_weight
-    total_credor_weight = sum(ledger.values())
-
-    # Calculate the distribution
-    x_dict = {}
-    for key, obj in ledger.items():
-        # Determine the allot based on credor_weight
-        allot = (obj / total_credor_weight) * scale_number
-
-        # Adjust to the nearest grain unit
-        alloted_value = round(allot / grain_unit) * grain_unit
-        x_dict[key] = alloted_value
-
-    return x_dict
+    allot_dict = _create_allot_dict(ledger, scale_number, grain_unit)
+    x_missing = scale_number - sum(allot_dict.values())
+    return _allot_missing_scale(allot_dict, scale_number, grain_unit, x_missing)

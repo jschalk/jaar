@@ -36,7 +36,7 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_monetary_desc():
     # GIVEN
     category = "worldunit"
     _monetary_desc_text = "_monetary_desc"
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     _monetary_desc_atomunit = atomunit_shop(category, atom_update())
     _monetary_desc_atomunit.set_arg(_monetary_desc_text, sue_monetary_desc)
     x_changeunit = changeunit_shop()
@@ -63,7 +63,7 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_credor_pool():
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(char_credor_pool_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN
@@ -107,7 +107,7 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_debtor_pool():
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(char_debtor_pool_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN
@@ -130,7 +130,7 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_credor_pool_Equal_c
     worldunit_atomunit.set_arg(char_debtor_pool_text, char_pool_int)
     x_changeunit.set_atomunit(worldunit_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_monetary_desc = "dragon funds"
+    sue_monetary_desc = "dragon dollars"
     sue_world.set_monetary_desc(sue_monetary_desc)
 
     # WHEN

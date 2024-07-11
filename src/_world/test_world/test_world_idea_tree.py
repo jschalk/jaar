@@ -388,10 +388,11 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
 
     # THEN
     assert x_world._idearoot._awardlines != {}
+    print(f"{x_world._idearoot._awardlines=}")
     x_awardline = awardline_shop(
         belief_id=sue_text,
-        _world_cred=0.23076923076923078,
-        _world_debt=0.23076923076923078,
+        _world_cred=0.23076923,
+        _world_debt=0.23076923,
     )
     assert x_world._idearoot._awardlines == {x_awardline.belief_id: x_awardline}
     assert x_world._idearoot._kids[casa_text]._awardlines != {}

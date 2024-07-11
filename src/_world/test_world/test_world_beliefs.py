@@ -138,35 +138,6 @@ def test_WorldUnit_beliefs_del_beliefunit_casasCorrectly():
     assert x_world._beliefs == {}
 
 
-def test_examples_world_v001_HasBeliefs():
-    # GIVEN / WHEN
-    x_world = examples_world_v001()
-
-    # THEN
-    assert x_world._beliefs != None
-    assert len(x_world._beliefs) == 34
-    everyone_chars_len = None
-    everyone_belief = x_world.get_beliefunit(",Everyone")
-    everyone_chars_len = len(everyone_belief._chars)
-    assert everyone_chars_len == 22
-
-    # WHEN
-    x_world.calc_world_metrics()
-    idea_dict = x_world._idea_dict
-
-    # THEN
-    print(f"{len(idea_dict)=}")
-    db_idea = idea_dict.get(x_world.make_l1_road("D&B"))
-    print(f"{db_idea._label=} {db_idea._awardlinks=}")
-    assert len(db_idea._awardlinks) == 3
-    # for idea_key in idea_dict:
-    #     print(f"{idea_key=}")
-    #     if idea._label == "D&B":
-    #         print(f"{idea._label=} {idea._awardlinks=}")
-    #         db_awardlink_len = len(idea._awardlinks)
-    # assert db_awardlink_len == 3
-
-
 def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     # GIVEN
     sue_text = "Sue"
@@ -194,6 +165,8 @@ def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     sue_world.add_idea(ideaunit_shop(street_text), parent_road=swim_road)
     assert sue_world._idearoot._awardlinks in (None, {})
     assert len(sue_world._idearoot._kids[swim_text]._awardlinks) == 3
+
+    print("WHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHAAAAAAAAAAAAAAAAAAATTTTTTTTT")
 
     # WHEN
     idea_dict = sue_world.get_idea_dict()

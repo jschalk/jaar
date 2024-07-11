@@ -10,8 +10,13 @@ from src._road.finance import (
     trim_pixel_excess,
     default_pixel_if_none,
     default_penny_if_none,
-    PixelUnit,
-    PennyUnit,
+    default_coin_if_none,
+    validate_budget,
+    PixelNum,
+    PennyNum,
+    CoinNum,
+    BudgetNum,
+    allot_scale,
 )
 from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
@@ -132,8 +137,10 @@ class WorldUnit:
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
-    _pixel: float = None
-    _penny: float = None
+    _budget: BudgetNum = None
+    _coin: CoinNum = None
+    _pixel: PixelNum = None
+    _penny: PennyNum = None
     _monetary_desc: str = None
     _char_credor_pool: int = None
     _char_debtor_pool: int = None
@@ -1143,6 +1150,8 @@ class WorldUnit:
         idea_kid._road_delimiter = self._road_delimiter
         if idea_kid._world_real_id != self._real_id:
             idea_kid._world_real_id = self._real_id
+        if idea_kid._coin != self._coin:
+            idea_kid._coin = self._coin
         if not create_missing_beliefs:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
@@ -1793,62 +1802,49 @@ class WorldUnit:
             self._econs_justified = False
 
     def _set_root_attributes(self, econ_exceptions: bool):
-        x_idearoot = self._idearoot
-        x_idearoot._level = 0
-        x_idearoot.set_parent_road(parent_road="")
-        x_idearoot.set_idearoot_inherit_reasonheirs()
-        x_idearoot.set_cultureheir(parent_cultureheir=None, world_beliefs=self._beliefs)
-        x_idearoot.set_factheirs(facts=self._idearoot._factunits)
-        x_idearoot.inherit_awardheirs()
-        x_idearoot.clear_awardlines()
-        x_idearoot._weight = 1
-        x_idearoot.set_kids_total_weight()
-        x_idearoot.set_sibling_total_weight(1)
-        x_idearoot.set_active(
-            tree_traverse_count=self._tree_traverse_count,
-            world_beliefunits=self._beliefs,
-            world_owner_id=self._owner_id,
-        )
-        x_idearoot.set_world_share(fund_onset_x=0, parent_fund_cease=1)
-        x_idearoot.set_awardheirs_world_cred_debt()
-        x_idearoot.set_ancestor_pledge_count(0, False)
-        x_idearoot.clear_descendant_pledge_count()
-        x_idearoot.clear_all_char_cred_debt()
-        x_idearoot.pledge = False
-
-        if x_idearoot.is_kidless():
+        self._idearoot._level = 0
+        self._idearoot.set_parent_road("")
+        self._idearoot.set_idearoot_inherit_reasonheirs()
+        self._idearoot.set_cultureheir(None, self._beliefs)
+        self._idearoot.set_factheirs(self._idearoot._factunits)
+        self._idearoot.inherit_awardheirs()
+        self._idearoot.clear_awardlines()
+        self._idearoot._weight = 1
+        self._idearoot.set_kids_total_weight()
+        self._idearoot.set_sibling_total_weight(1)
+        tree_traverse_count = self._tree_traverse_count
+        self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
+        self._idearoot.set_world_share(0, self._budget, self._budget)
+        self._idearoot.set_awardheirs_world_cred_debt()
+        self._idearoot.set_ancestor_pledge_count(0, False)
+        self._idearoot.clear_descendant_pledge_count()
+        self._idearoot.clear_all_char_cred_debt()
+        self._idearoot.pledge = False
+        if self._idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
             self._allot_world_share(idea=self._idearoot)
 
     def _set_kids_attributes(
         self,
         idea_kid: IdeaUnit,
-        fund_onset: float,
-        parent_fund_cease: float,
+        budget_onset: float,
+        budget_cease: float,
         parent_idea: IdeaUnit,
         econ_exceptions: bool,
     ):
-        idea_kid.set_level(parent_level=parent_idea._level)
+        idea_kid.set_level(parent_idea._level)
         idea_kid.set_parent_road(parent_idea.get_road())
-        idea_kid.set_factheirs(facts=parent_idea._factheirs)
+        idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
         idea_kid.set_cultureheir(parent_idea._cultureheir, self._beliefs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
-        idea_kid.set_active(
-            tree_traverse_count=self._tree_traverse_count,
-            world_beliefunits=self._beliefs,
-            world_owner_id=self._owner_id,
-        )
+        tree_traverse_count = self._tree_traverse_count
+        idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
         idea_kid.set_sibling_total_weight(parent_idea._kids_total_weight)
-        idea_kid.set_world_share(
-            fund_onset_x=fund_onset,
-            parent_world_share=parent_idea._world_share,
-            parent_fund_cease=parent_fund_cease,
-        )
-        idea_kid.set_ancestor_pledge_count(
-            parent_idea._ancestor_pledge_count, parent_idea.pledge
-        )
+        idea_kid.set_world_share(budget_onset, budget_cease, self._budget)
+        ancestor_pledge_count = parent_idea._ancestor_pledge_count
+        idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
         idea_kid.clear_all_char_cred_debt()
 
@@ -1899,40 +1895,65 @@ class WorldUnit:
         self._pre_tree_traverse_cred_debt_reset()
         self._set_root_attributes(econ_exceptions)
 
-        fund_onset = self._idearoot._world_fund_onset
-        parent_fund_cease = self._idearoot._world_fund_cease
+        x_idearoot_kids_items = self._idearoot._kids.items()
+        kids_ledger = {x_road: kid._weight for x_road, kid in x_idearoot_kids_items}
+        root_budget = self._idearoot._budget_cease - self._idearoot._budget_onset
+        alloted_budget = allot_scale(kids_ledger, root_budget, self._coin)
+        x_idearoot_kid_budget_onset = None
+        x_idearoot_kid_budget_cease = None
 
         cache_idea_list = []
-        for idea_kid in self._idearoot._kids.values():
+        for kid_label, idea_kid in self._idearoot._kids.items():
+            idearoot_kid_budget = alloted_budget.get(kid_label)
+            if x_idearoot_kid_budget_onset is None:
+                x_idearoot_kid_budget_onset = self._idearoot._budget_onset
+                x_idearoot_kid_budget_cease = (
+                    self._idearoot._budget_onset + idearoot_kid_budget
+                )
+            else:
+                x_idearoot_kid_budget_onset = x_idearoot_kid_budget_cease
+                x_idearoot_kid_budget_cease += idearoot_kid_budget
             self._set_kids_attributes(
                 idea_kid=idea_kid,
-                fund_onset=fund_onset,
-                parent_fund_cease=parent_fund_cease,
+                budget_onset=x_idearoot_kid_budget_onset,
+                budget_cease=x_idearoot_kid_budget_cease,
                 parent_idea=self._idearoot,
                 econ_exceptions=econ_exceptions,
             )
             cache_idea_list.append(idea_kid)
-            fund_onset += idea_kid._world_share
 
         # no function recursion, recursion by iterateing over list that can be added to by iterations
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
+
             if self._tree_traverse_count == 0:
                 self._idea_dict[parent_idea.get_road()] = parent_idea
 
+            kids_items = parent_idea._kids.items()
+            x_ledger = {x_road: idea_kid._weight for x_road, idea_kid in kids_items}
+            parent_budget = parent_idea._budget_cease - parent_idea._budget_onset
+            alloted_budget = allot_scale(x_ledger, parent_budget, self._coin)
+
             if parent_idea._kids != None:
-                fund_onset = parent_idea._world_fund_onset
-                parent_fund_cease = parent_idea._world_fund_cease
+                budget_onset = None
+                budget_cease = None
                 for idea_kid in parent_idea._kids.values():
+                    if budget_onset is None:
+                        budget_onset = parent_idea._budget_onset
+                        budget_cease = budget_onset + alloted_budget.get(
+                            idea_kid._label
+                        )
+                    else:
+                        budget_onset = budget_cease
+                        budget_cease += alloted_budget.get(idea_kid._label)
                     self._set_kids_attributes(
                         idea_kid=idea_kid,
-                        fund_onset=fund_onset,
-                        parent_fund_cease=parent_fund_cease,
+                        budget_onset=budget_onset,
+                        budget_cease=budget_cease,
                         parent_idea=parent_idea,
                         econ_exceptions=econ_exceptions,
                     )
                     cache_idea_list.append(idea_kid)
-                    fund_onset += idea_kid._world_share
 
     def _check_if_any_idea_active_status_has_altered(self):
         any_idea_active_status_has_altered = False
@@ -2057,6 +2078,8 @@ class WorldUnit:
             "_beliefs": self.get_beliefunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
+            "_budget": self._budget,
+            "_coin": self._coin,
             "_pixel": self._pixel,
             "_penny": self._penny,
             "_owner_id": self._owner_id,
@@ -2251,8 +2274,10 @@ def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
-    _pixel: PixelUnit = None,
-    _penny: PennyUnit = None,
+    _budget: BudgetNum = None,
+    _coin: CoinNum = None,
+    _pixel: PixelNum = None,
+    _penny: PennyNum = None,
     _weight: float = None,
     _meld_strategy: MeldStrategy = None,
 ) -> WorldUnit:
@@ -2272,6 +2297,8 @@ def worldunit_shop(
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _budget=validate_budget(_budget),
+        _coin=default_coin_if_none(_coin),
         _pixel=default_pixel_if_none(_pixel),
         _penny=default_penny_if_none(_penny),
         _meld_strategy=validate_meld_strategy(_meld_strategy),
@@ -2284,7 +2311,8 @@ def worldunit_shop(
         _uid=1,
         _level=0,
         _world_real_id=x_world._real_id,
-        _road_delimiter=x_world._road_delimiter,
+        # _road_delimiter=x_world._road_delimiter,
+        _coin=x_world._coin,
     )
     x_world.set_max_tree_traverse(3)
     x_world._rational = False
@@ -2304,6 +2332,8 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world.set_real_id(obj_from_world_dict(world_dict, "_real_id"))
     world_road_delimiter = obj_from_world_dict(world_dict, "_road_delimiter")
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
+    x_world._budget = validate_budget(obj_from_world_dict(world_dict, "_budget"))
+    x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
     x_world._pixel = default_pixel_if_none(obj_from_world_dict(world_dict, "_pixel"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))
     x_world._char_credor_pool = obj_from_world_dict(world_dict, "_char_credor_pool")
@@ -2348,6 +2378,7 @@ def set_idearoot_from_world_dict(x_world: WorldUnit, world_dict: dict):
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
         _world_real_id=x_world._real_id,
+        _coin=default_coin_if_none(x_world._coin),
     )
     set_idearoot_kids_from_dict(x_world, idearoot_dict)
 
@@ -2389,7 +2420,7 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
             _range_source_road=get_obj_from_idea_dict(idea_dict, "_range_source_road"),
             _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
-            _world_real_id=x_world._real_id,
+            # _world_real_id=x_world._real_id,
         )
         x_world.add_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 

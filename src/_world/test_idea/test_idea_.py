@@ -24,8 +24,17 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._weight is None
     assert x_ideaunit._label is None
     assert x_ideaunit._uid is None
-    assert x_ideaunit._all_char_cred is None
-    assert x_ideaunit._all_char_debt is None
+    assert x_ideaunit._reasonunits is None
+    assert x_ideaunit._reasonheirs is None  # calculated field
+    assert x_ideaunit._cultureunit is None
+    assert x_ideaunit._cultureheir is None  # calculated field
+    assert x_ideaunit._factunits is None
+    assert x_ideaunit._factheirs is None  # calculated field
+    assert x_ideaunit._awardlinks is None
+    assert x_ideaunit._awardlines is None  # calculated field'
+    assert x_ideaunit._awardheirs is None  # calculated field'
+    assert x_ideaunit._originunit is None
+    assert x_ideaunit._road_delimiter is None
     assert x_ideaunit._begin is None
     assert x_ideaunit._close is None
     assert x_ideaunit._addin is None
@@ -36,26 +45,20 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._range_source_road is None
     assert x_ideaunit.pledge is None
     assert x_ideaunit._problem_bool is None
-    assert x_ideaunit._descendant_pledge_count is None
-    assert x_ideaunit._awardlines is None
-    assert x_ideaunit._awardheirs is None
-    assert x_ideaunit._is_expanded is None
-    assert x_ideaunit._factheirs is None
-    assert x_ideaunit._factunits is None
     assert x_ideaunit._meld_strategy is None
     assert x_ideaunit._healerhold is None
+    # calculated_fields
+    assert x_ideaunit._descendant_pledge_count is None
+    assert x_ideaunit._is_expanded is None
+    assert x_ideaunit._all_char_cred is None
+    assert x_ideaunit._all_char_debt is None
     assert x_ideaunit._level is None
     assert x_ideaunit._kids_total_weight is None
     assert x_ideaunit._active_hx is None
     assert x_ideaunit._world_share is None
-    assert x_ideaunit._world_fund_onset is None
-    assert x_ideaunit._world_fund_cease is None
-    assert x_ideaunit._reasonunits is None
-    assert x_ideaunit._reasonheirs is None
-    assert x_ideaunit._cultureunit is None
-    assert x_ideaunit._cultureheir is None
-    assert x_ideaunit._originunit is None
-    assert x_ideaunit._road_delimiter is None
+    assert x_ideaunit._coin is None
+    assert x_ideaunit._budget_onset is None
+    assert x_ideaunit._budget_cease is None
     assert x_ideaunit._root is None
     assert x_ideaunit._world_real_id is None
     assert x_ideaunit._healerhold_share is None
@@ -96,8 +99,9 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._kids_total_weight == 0
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._world_share is None
-    assert x_ideaunit._world_fund_onset is None
-    assert x_ideaunit._world_fund_cease is None
+    assert x_ideaunit._coin is None
+    assert x_ideaunit._budget_onset is None
+    assert x_ideaunit._budget_cease is None
     assert x_ideaunit._reasonunits == {}
     assert x_ideaunit._reasonheirs == {}
     assert x_ideaunit._cultureunit == cultureunit_shop()
@@ -113,13 +117,17 @@ def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
     # GIVEN
     x_healerhold = healerhold_shop({"Sue", "Yao"})
     x_problem_bool = True
+    x_coin = 88
 
     # WHEN
-    x_ideaunit = ideaunit_shop(_healerhold=x_healerhold, _problem_bool=x_problem_bool)
+    x_ideaunit = ideaunit_shop(
+        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _coin=x_coin
+    )
 
     # THEN
     assert x_ideaunit._healerhold == x_healerhold
     assert x_ideaunit._problem_bool == x_problem_bool
+    assert x_ideaunit._coin == x_coin
 
 
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():

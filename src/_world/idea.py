@@ -4,6 +4,7 @@ from src._instrument.python import (
     get_0_if_None,
     get_False_if_None,
 )
+from src._road.finance import CoinNum, BudgetNum
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -229,7 +230,7 @@ class IdeaUnit:
     _weight: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
-    _kids: dict = None
+    _kids: dict[RoadUnit,] = None
     _world_real_id: RealID = None
     _uid: int = None  # Calculated field?
     _awardlinks: dict[BeliefID, AwardLink] = None
@@ -258,8 +259,9 @@ class IdeaUnit:
     _level: int = None
     _kids_total_weight: int = None
     _world_share: float = None
-    _world_fund_onset: float = None
-    _world_fund_cease: float = None
+    _coin: CoinNum = None
+    _budget_onset: BudgetNum = None
+    _budget_cease: BudgetNum = None
     _task: bool = None
     _active: bool = None
     _ancestor_pledge_count: int = None
@@ -273,10 +275,8 @@ class IdeaUnit:
     _healerhold_share: float = None
 
     def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
-        # bool_x = False
-        return (
-            self.pledge and self._active and self.base_reasonunit_exists(necessary_base)
-        )
+        base_reasonunit_exists = self.base_reasonunit_exists(necessary_base)
+        return self.pledge and self._active and base_reasonunit_exists
 
     def base_reasonunit_exists(self, necessary_base: RoadUnit = None) -> bool:
         return necessary_base is None or any(
@@ -361,20 +361,15 @@ class IdeaUnit:
 
     def set_world_share(
         self,
-        fund_onset_x: float,
-        parent_world_share: float = None,
-        parent_fund_cease: float = None,
+        x_budget_onset: BudgetNum,
+        x_budget_cease: BudgetNum,
+        total_budget: BudgetNum,
     ):
-        parent_world_share = get_1_if_None(parent_world_share)
+        self._budget_onset = x_budget_onset
+        self._budget_cease = x_budget_cease
+        self._world_share = (self._budget_cease - self._budget_onset) / total_budget
+
         self.set_kids_total_weight()
-        self._world_share = None
-        self._world_fund_onset = None
-        self._world_fund_cease = None
-        sibling_ratio = self._weight / self._sibling_total_weight
-        self._world_share = parent_world_share * sibling_ratio
-        self._world_fund_onset = fund_onset_x
-        self._world_fund_cease = self._world_fund_onset + self._world_share
-        self._world_fund_cease = min(self._world_fund_cease, parent_fund_cease)
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
@@ -1109,8 +1104,9 @@ def ideaunit_shop(
     _level: int = None,
     _kids_total_weight: int = None,
     _world_share: float = None,
-    _world_fund_onset: float = None,
-    _world_fund_cease: float = None,
+    _coin: CoinNum = None,
+    _budget_onset: BudgetNum = None,
+    _budget_cease: BudgetNum = None,
     _task: bool = None,
     _active: bool = None,
     _ancestor_pledge_count: int = None,
@@ -1164,8 +1160,9 @@ def ideaunit_shop(
         _level=_level,
         _kids_total_weight=get_0_if_None(_kids_total_weight),
         _world_share=_world_share,
-        _world_fund_onset=_world_fund_onset,
-        _world_fund_cease=_world_fund_cease,
+        _coin=_coin,
+        _budget_onset=_budget_onset,
+        _budget_cease=_budget_cease,
         _task=_task,
         _active=_active,
         _ancestor_pledge_count=_ancestor_pledge_count,

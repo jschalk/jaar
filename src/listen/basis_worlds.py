@@ -11,10 +11,18 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
     if x_owner_id is None:
         x_owner_id = ref_world._owner_id
     x_road_delimiter = ref_world._road_delimiter
+    x_budget = ref_world._budget
+    x_coin = ref_world._coin
     x_pixel = ref_world._pixel
     x_penny = ref_world._penny
     return worldunit_shop(
-        x_owner_id, ref_world._real_id, x_road_delimiter, x_pixel, x_penny
+        _owner_id=x_owner_id,
+        _real_id=ref_world._real_id,
+        _road_delimiter=x_road_delimiter,
+        _budget=x_budget,
+        _coin=x_coin,
+        _pixel=x_pixel,
+        _penny=x_penny,
     )
 
 

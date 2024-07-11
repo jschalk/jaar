@@ -349,6 +349,10 @@
             "normal_table_name": "world"
         },
         "optional_args": {
+            "_budget": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
             "_char_credor_pool": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
@@ -356,6 +360,10 @@
             "_char_debtor_pool": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
+            },
+            "_coin": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "_max_tree_traverse": {
                 "python_type": "int",

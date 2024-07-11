@@ -675,14 +675,14 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # print(f"{sum_world_agenda_share=}")
     assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    assert x_awardagendametrics.agenda_no_world_i_sum == 0.0037472680016539662
-    assert x_awardagendametrics.agenda_yes_world_i_sum == 0.0027965049894874455
+    assert x_awardagendametrics.agenda_no_world_i_sum == 0.0037472699999999996
+    assert x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505000000001
     assert are_equal(
         x_awardagendametrics.agenda_no_world_i_sum
         + x_awardagendametrics.agenda_yes_world_i_sum,
         x_awardagendametrics.sum_world_agenda_share,
     )
-    assert x_awardagendametrics.sum_world_agenda_share == 0.006543772991141412
+    assert x_awardagendametrics.sum_world_agenda_share == 0.006543775000000002
 
     x_beliefagendametrics = BeliefAgendaMetrics()
     x_beliefagendametrics.set_sums(x_world=x_world)
@@ -782,3 +782,41 @@ def test_WorldUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenWorldIsEmpty():
     assert noa_world_carm_char._world_agenda_ratio_debt == 0.3
     assert noa_world_patr_char._world_agenda_ratio_cred == 0.8
     assert noa_world_patr_char._world_agenda_ratio_debt == 0.5
+
+
+def test_examples_world_v001_has_chars():
+    # GIVEN / WHEN
+    yao_world = examples_world_v001()
+
+    # THEN
+    assert yao_world._chars != None
+    assert len(yao_world._chars) == 22
+
+
+def test_examples_world_v001_HasBeliefs():
+    # GIVEN / WHEN
+    x_world = examples_world_v001()
+
+    # THEN
+    assert x_world._beliefs != None
+    assert len(x_world._beliefs) == 34
+    everyone_chars_len = None
+    everyone_belief = x_world.get_beliefunit(",Everyone")
+    everyone_chars_len = len(everyone_belief._chars)
+    assert everyone_chars_len == 22
+
+    # WHEN
+    x_world.calc_world_metrics()
+    idea_dict = x_world._idea_dict
+
+    # THEN
+    print(f"{len(idea_dict)=}")
+    db_idea = idea_dict.get(x_world.make_l1_road("D&B"))
+    print(f"{db_idea._label=} {db_idea._awardlinks=}")
+    assert len(db_idea._awardlinks) == 3
+    # for idea_key in idea_dict:
+    #     print(f"{idea_key=}")
+    #     if idea._label == "D&B":
+    #         print(f"{idea._label=} {idea._awardlinks=}")
+    #         db_awardlink_len = len(idea._awardlinks)
+    # assert db_awardlink_len == 3
