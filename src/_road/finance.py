@@ -22,12 +22,30 @@ class CoinUnit(float):
     pass
 
 
+class BudgetUnit(float):
+    """BudgetUnit inherits from float class"""
+
+    pass
+
+
 def default_coin_if_none(coin: CoinUnit = None) -> CoinUnit:
     return coin if coin != None else 1
 
 
 def trim_coin_excess(num: float, coin: CoinUnit) -> float:
     return coin * int(num / coin)
+
+
+def default_budget() -> BudgetUnit:
+    return BudgetUnit(default_money_magnitude())
+
+
+def validate_budget(x_budget: int = None) -> int:
+    if x_budget is None:
+        return default_budget()
+    elif x_budget < default_coin_if_none():
+        return default_coin_if_none()
+    return x_budget
 
 
 def default_pixel_if_none(pixel: PixelUnit = None) -> PixelUnit:

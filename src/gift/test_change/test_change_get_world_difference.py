@@ -145,6 +145,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     before_sue_world = worldunit_shop(sue_text)
     after_sue_world = copy_deepcopy(before_sue_world)
     x_worldUnit_weight = 55
+    x_budget = 8000000
     x_coin = 0.8
     x_pixel = 0.5
     x_max_tree_traverse = 66
@@ -153,6 +154,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     x_char_credor_pool = 77
     x_char_debtor_pool = 88
     after_sue_world._weight = x_worldUnit_weight
+    after_sue_world._budget = x_budget
     after_sue_world._coin = x_coin
     after_sue_world._pixel = x_pixel
     after_sue_world.set_max_tree_traverse(x_max_tree_traverse)
@@ -174,6 +176,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     assert rico_atomunit.get_value("_char_credor_pool") == x_char_credor_pool
     assert rico_atomunit.get_value("_char_debtor_pool") == x_char_debtor_pool
     assert rico_atomunit.get_value("_weight") == x_worldUnit_weight
+    assert rico_atomunit.get_value("_budget") == x_budget
     assert rico_atomunit.get_value("_coin") == x_coin
     assert rico_atomunit.get_value("_pixel") == x_pixel
 

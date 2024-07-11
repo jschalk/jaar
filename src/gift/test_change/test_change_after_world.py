@@ -55,7 +55,10 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     new5_value = "override"
     new5_arg = "_meld_strategy"
     x_atomunit.set_optional_arg(new5_arg, new5_value)
-    new8_value = 0.5
+    new9_value = 55550000
+    new9_arg = "_budget"
+    x_atomunit.set_optional_arg(new9_arg, new9_value)
+    new8_value = 0.5555
     new8_arg = "_coin"
     x_atomunit.set_optional_arg(new8_arg, new8_value)
     sue_changeunit.set_atomunit(x_atomunit)
@@ -79,6 +82,8 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     assert after_sue_worldunit._meld_strategy == new5_value
     assert after_sue_worldunit._weight == new1_value
     assert after_sue_worldunit._weight != before_sue_worldunit._weight
+    assert after_sue_worldunit._budget == new9_value
+    assert after_sue_worldunit._budget != before_sue_worldunit._budget
     assert after_sue_worldunit._coin == new8_value
     assert after_sue_worldunit._coin != before_sue_worldunit._coin
     assert after_sue_worldunit._pixel == new6_value

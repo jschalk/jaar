@@ -121,12 +121,21 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     # GIVEN
     sue_text = "Sue"
     sue_real_dir = f"{env_dir()}/{root_label()}"
+    sue_budget = 50000
     sue_coin = 5
     sue_pixel = 7
     sue_hubunit = hubunit_shop(
-        env_dir(), root_label(), sue_text, None, coin=sue_coin, pixel=sue_pixel
+        env_dir(),
+        root_label(),
+        sue_text,
+        None,
+        budget=sue_budget,
+        coin=sue_coin,
+        pixel=sue_pixel,
     )
-    sue_world = worldunit_shop(sue_text, root_label(), _coin=sue_coin, _pixel=sue_pixel)
+    sue_world = worldunit_shop(
+        sue_text, root_label(), _budget=sue_budget, _coin=sue_coin, _pixel=sue_pixel
+    )
     sue_hubunit.initialize_action_file(sue_world)
     assert sue_hubunit.action_file_exists()
     delete_dir(sue_hubunit.action_path())
@@ -152,6 +161,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     action_world = worldunit_get_from_json(action_file_text)
     assert action_world._real_id == root_label()
     assert action_world._owner_id == sue_text
+    assert action_world._budget == sue_budget
     assert action_world._coin == sue_coin
     assert action_world._pixel == sue_pixel
 

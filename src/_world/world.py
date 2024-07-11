@@ -11,9 +11,11 @@ from src._road.finance import (
     default_pixel_if_none,
     default_penny_if_none,
     default_coin_if_none,
+    validate_budget,
     PixelUnit,
     PennyUnit,
     CoinUnit,
+    BudgetUnit,
 )
 from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
@@ -134,6 +136,7 @@ class WorldUnit:
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
+    _budget: BudgetUnit = None
     _coin: CoinUnit = None
     _pixel: PixelUnit = None
     _penny: PennyUnit = None
@@ -2060,6 +2063,7 @@ class WorldUnit:
             "_beliefs": self.get_beliefunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
+            "_budget": self._budget,
             "_coin": self._coin,
             "_pixel": self._pixel,
             "_penny": self._penny,
@@ -2255,6 +2259,7 @@ def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
+    _budget: BudgetUnit = None,
     _coin: CoinUnit = None,
     _pixel: PixelUnit = None,
     _penny: PennyUnit = None,
@@ -2277,9 +2282,10 @@ def worldunit_shop(
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _budget=validate_budget(_budget),
+        _coin=default_coin_if_none(_coin),
         _pixel=default_pixel_if_none(_pixel),
         _penny=default_penny_if_none(_penny),
-        _coin=default_coin_if_none(_coin),
         _meld_strategy=validate_meld_strategy(_meld_strategy),
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
@@ -2310,6 +2316,7 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world.set_real_id(obj_from_world_dict(world_dict, "_real_id"))
     world_road_delimiter = obj_from_world_dict(world_dict, "_road_delimiter")
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
+    x_world._budget = validate_budget(obj_from_world_dict(world_dict, "_budget"))
     x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
     x_world._pixel = default_pixel_if_none(obj_from_world_dict(world_dict, "_pixel"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))

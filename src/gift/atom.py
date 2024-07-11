@@ -164,6 +164,9 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
     x_arg = "_char_debtor_pool"
     if x_atom.get_value(x_arg) != None:
         x_world.set_char_debtor_pool(x_atom.get_value(x_arg))
+    x_arg = "_budget"
+    if x_atom.get_value(x_arg) != None:
+        x_world._budget = x_atom.get_value(x_arg)
     x_arg = "_coin"
     if x_atom.get_value(x_arg) != None:
         x_world._coin = x_atom.get_value(x_arg)
@@ -533,6 +536,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._char_credor_pool != y_obj._char_credor_pool
             or x_obj._char_debtor_pool != y_obj._char_debtor_pool
             or x_obj._pixel != y_obj._pixel
+            or x_obj._budget != y_obj._budget
             or x_obj._coin != y_obj._coin
         )
     elif category in {"world_char_belieflink", "world_idea_awardlink"}:

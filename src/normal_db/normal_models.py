@@ -15,6 +15,7 @@ class WorldTable(Base):
     _monetary_desc = Column(String)
     _char_credor_pool = Column(Integer)
     _char_debtor_pool = Column(Integer)
+    _budget = Column(Float)
     _coin = Column(Float)
     _pixel = Column(Float)
     _penny = Column(Float)

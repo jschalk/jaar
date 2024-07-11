@@ -1,8 +1,11 @@
 from src._road.finance import (
     CoinUnit,
+    BudgetUnit,
     PixelUnit,
     PennyUnit,
     MoneyUnit,
+    default_budget,
+    validate_budget,
     default_coin_if_none,
     default_pixel_if_none,
     default_penny_if_none,
@@ -76,6 +79,32 @@ def test_MoneyUnit_exists():
     # THEN
     assert y_moneyunit == x_float
     assert inspect_getdoc(y_moneyunit) == "MoneyUnit inherits from float class"
+
+
+def test_BudgetUnit_exists():
+    # GIVEN
+    x_float = 0.045
+    # WHEN
+    y_budgetunit = BudgetUnit(x_float)
+    # THEN
+    assert y_budgetunit == x_float
+    inspect_str = "BudgetUnit inherits from float class"
+    assert inspect_getdoc(y_budgetunit) == inspect_str
+
+
+def test_default_budget_ReturnsObj():
+    # GIVEN / WHEN / THEN
+    assert default_budget() == 1000000000
+
+
+def test_validate_budget_ReturnsObj():
+    # GIVEN / WHEN / THEN
+    assert validate_budget() == default_budget()
+    assert validate_budget(None) == default_budget()
+    assert validate_budget(0.5) == default_coin_if_none()
+    assert validate_budget(default_coin_if_none() - 0.01) == default_coin_if_none()
+    assert validate_budget(1) == 1
+    assert validate_budget(25) == 25
 
 
 def test_CoinUnit_exists():
