@@ -229,7 +229,7 @@ class IdeaUnit:
     _weight: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
-    _kids: dict = None
+    _kids: dict[RoadUnit,] = None
     _world_real_id: RealID = None
     _uid: int = None  # Calculated field?
     _awardlinks: dict[BeliefID, AwardLink] = None
@@ -273,10 +273,8 @@ class IdeaUnit:
     _healerhold_share: float = None
 
     def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
-        # bool_x = False
-        return (
-            self.pledge and self._active and self.base_reasonunit_exists(necessary_base)
-        )
+        base_reasonunit_exists = self.base_reasonunit_exists(necessary_base)
+        return self.pledge and self._active and base_reasonunit_exists
 
     def base_reasonunit_exists(self, necessary_base: RoadUnit = None) -> bool:
         return necessary_base is None or any(

@@ -2,7 +2,7 @@ from src._instrument.python import get_1_if_None
 from dataclasses import dataclass
 
 
-class PennyUnit(float):
+class PennyNum(float):
     """Smallest Unit of Money"""
 
     pass
@@ -14,34 +14,34 @@ class MoneyUnit(float):
     pass
 
 
-class PixelUnit(float):
+class PixelNum(float):
     """Smallest Unit of credor_weight or debtor_weight"""
 
     pass
 
 
-class CoinUnit(float):
+class CoinNum(float):
     """Smallest Unit of budget"""
 
     pass
 
 
-class BudgetUnit(float):
-    """BudgetUnit inherits from float class"""
+class BudgetNum(float):
+    """BudgetNum inherits from float class"""
 
     pass
 
 
-def default_coin_if_none(coin: CoinUnit = None) -> CoinUnit:
+def default_coin_if_none(coin: CoinNum = None) -> CoinNum:
     return get_1_if_None(coin)
 
 
-def trim_coin_excess(num: float, coin: CoinUnit) -> float:
+def trim_coin_excess(num: float, coin: CoinNum) -> float:
     return coin * int(num / coin)
 
 
-def default_budget() -> BudgetUnit:
-    return BudgetUnit(default_money_magnitude())
+def default_budget() -> BudgetNum:
+    return BudgetNum(default_money_magnitude())
 
 
 def validate_budget(x_budget: int = None) -> int:
@@ -50,19 +50,19 @@ def validate_budget(x_budget: int = None) -> int:
     return max(get_1_if_None(x_budget), default_coin_if_none())
 
 
-def default_pixel_if_none(pixel: PixelUnit = None) -> PixelUnit:
+def default_pixel_if_none(pixel: PixelNum = None) -> PixelNum:
     return get_1_if_None(pixel)
 
 
-def trim_pixel_excess(num: float, pixel: PixelUnit) -> float:
+def trim_pixel_excess(num: float, pixel: PixelNum) -> float:
     return pixel * int(num / pixel)
 
 
-def default_penny_if_none(penny: PennyUnit = None) -> PennyUnit:
+def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
     return max(get_1_if_None(penny), 1)
 
 
-def trim_penny_excess(num: MoneyUnit, penny: PennyUnit) -> MoneyUnit:
+def trim_penny_excess(num: MoneyUnit, penny: PennyNum) -> MoneyUnit:
     return penny * int(num / penny)
 
 
@@ -78,10 +78,10 @@ def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
 
 @dataclass
 class FiscalUnit:
-    _budget: BudgetUnit = None
-    _coin: CoinUnit = None
-    _pixel: PixelUnit = None
-    _penny: PennyUnit = None
+    _budget: BudgetNum = None
+    _coin: CoinNum = None
+    _pixel: PixelNum = None
+    _penny: PennyNum = None
 
 
 def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float):

@@ -12,10 +12,10 @@ from src._road.finance import (
     default_penny_if_none,
     default_coin_if_none,
     validate_budget,
-    PixelUnit,
-    PennyUnit,
-    CoinUnit,
-    BudgetUnit,
+    PixelNum,
+    PennyNum,
+    CoinNum,
+    BudgetNum,
 )
 from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
@@ -136,10 +136,10 @@ class WorldUnit:
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
-    _budget: BudgetUnit = None
-    _coin: CoinUnit = None
-    _pixel: PixelUnit = None
-    _penny: PennyUnit = None
+    _budget: BudgetNum = None
+    _coin: CoinNum = None
+    _pixel: PixelNum = None
+    _penny: PennyNum = None
     _monetary_desc: str = None
     _char_credor_pool: int = None
     _char_debtor_pool: int = None
@@ -2259,10 +2259,10 @@ def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
-    _budget: BudgetUnit = None,
-    _coin: CoinUnit = None,
-    _pixel: PixelUnit = None,
-    _penny: PennyUnit = None,
+    _budget: BudgetNum = None,
+    _coin: CoinNum = None,
+    _pixel: PixelNum = None,
+    _penny: PennyNum = None,
     _weight: float = None,
     _meld_strategy: MeldStrategy = None,
 ) -> WorldUnit:
