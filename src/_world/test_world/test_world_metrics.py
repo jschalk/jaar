@@ -1,3 +1,4 @@
+from src._road.finance import default_budget
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
 from src._world.beliefunit import BeliefID, awardlink_shop
@@ -395,20 +396,20 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_budget_onset_b
 
     # THEN
     assert yao_world._idearoot._budget_onset == 0.0
-    assert yao_world._idearoot._budget_cease == 1.0
+    assert yao_world._idearoot._budget_cease == default_budget()
     assert yao_world.get_idea_obj(auto_road)._budget_onset == 0.0
-    assert yao_world.get_idea_obj(auto_road)._budget_cease == 0.1
-    assert yao_world.get_idea_obj(barn_road)._budget_onset == 0.1
-    assert yao_world.get_idea_obj(barn_road)._budget_cease == 0.7
-    assert yao_world.get_idea_obj(coal_road)._budget_onset == 0.7
-    assert yao_world.get_idea_obj(coal_road)._budget_cease == 1.0
+    assert yao_world.get_idea_obj(auto_road)._budget_cease == default_budget() * 0.1
+    assert yao_world.get_idea_obj(barn_road)._budget_onset == default_budget() * 0.1
+    assert yao_world.get_idea_obj(barn_road)._budget_cease == default_budget() * 0.7
+    assert yao_world.get_idea_obj(coal_road)._budget_onset == default_budget() * 0.7
+    assert yao_world.get_idea_obj(coal_road)._budget_cease == default_budget() * 1.0
 
     duck_after = yao_world.get_idea_obj(road=duck_road)
-    assert duck_after._budget_onset == 0.1
-    assert duck_after._budget_cease == 0.5
+    assert duck_after._budget_onset == default_budget() * 0.1
+    assert duck_after._budget_cease == default_budget() * 0.5
     lamb_after = yao_world.get_idea_obj(road=lamb_road)
-    assert lamb_after._budget_onset == 0.5
-    assert lamb_after._budget_cease == 0.7
+    assert lamb_after._budget_onset == default_budget() * 0.5
+    assert lamb_after._budget_cease == default_budget() * 0.7
 
 
 def test_WorldUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():
@@ -859,7 +860,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # WHEN
     sue_world.calc_world_metrics()
     # THEN
-    assert sue_world._sum_healerhold_share == 0.038461538461538464
+    assert sue_world._sum_healerhold_share == 0.038461539
     assert oregon_idea._healerhold_share == 1
 
     # WHEN
@@ -871,10 +872,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # print(f"{mon_idea._problem_bool=} {mon_idea._world_share=}")
     sue_world.calc_world_metrics()
     # THEN
-    assert sue_world._sum_healerhold_share != 0.038461538461538464
-    assert sue_world._sum_healerhold_share == 0.06923076923076923
-    assert oregon_idea._healerhold_share == 0.5555555555555556
-    assert mon_idea._healerhold_share == 0.4444444444444444
+    assert sue_world._sum_healerhold_share != 0.038461539
+    assert sue_world._sum_healerhold_share == 0.06923077
+    assert oregon_idea._healerhold_share == 0.5555555571604939
+    assert mon_idea._healerhold_share == 0.44444444283950624
 
     # WHEN
     tue_road = sue_world.make_road(week_road, "Tuesday")
@@ -888,10 +889,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
 
     # THEN
     assert sue_world._sum_healerhold_share != 0.06923076923076923
-    assert sue_world._sum_healerhold_share == 0.1
-    assert oregon_idea._healerhold_share == 0.38461538461538464
-    assert mon_idea._healerhold_share == 0.3076923076923077
-    assert tue_idea._healerhold_share == 0.3076923076923077
+    assert sue_world._sum_healerhold_share == 0.100000001
+    assert oregon_idea._healerhold_share == 0.38461538615384616
+    assert mon_idea._healerhold_share == 0.3076923069230769
+    assert tue_idea._healerhold_share == 0.3076923069230769
 
     # WHEN
     sue_world.edit_idea_attr(week_road, healerhold=sue_healerhold)

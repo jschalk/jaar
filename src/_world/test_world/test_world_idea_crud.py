@@ -266,7 +266,7 @@ def test_WorldUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
 
 def test_WorldUnit_add_idea_CorrectlySets_world_real_id_AND_coin():
     # GIVEN'
-    x_coin = 809
+    x_coin = 500
     sue_world = get_world_with_4_levels()
     sue_world._coin = x_coin
     world_real_id = "Texas"

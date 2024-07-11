@@ -108,7 +108,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     sue_text = "Sue"
     blue_text = "blue"
     slash_text = "/"
-    x_budget = 88
+    x_budget = 99000
     x_coin = 99
     x_pixel = 5
     sue_char_pool = 800

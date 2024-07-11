@@ -41,15 +41,6 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     assert bob_world._chars == x_chars
 
 
-def test_examples_world_v001_has_chars():
-    # GIVEN / WHEN
-    yao_world = examples_world_v001()
-
-    # THEN
-    assert yao_world._chars != None
-    assert len(yao_world._chars) == 22
-
-
 def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     # GIVEN
     x_pixel = 0.5

@@ -84,6 +84,79 @@ class FiscalUnit:
     _penny: PennyNum = None
 
 
+def _get_missing_scale_list(
+    missing_scale: float, grain_unit: float, list_length: int
+) -> list[float]:
+    if list_length == 0 or missing_scale == 0:
+        return []
+    missing_avg = missing_scale / list_length
+    missing_base_multipler = int(missing_avg / grain_unit)
+    missing_base_scale_unit = missing_base_multipler * grain_unit
+    missing_scale_list = [missing_base_scale_unit for _ in range(list_length)]
+    missing_base_residual = missing_scale - sum(missing_scale_list)
+
+    x_count = 0
+    if missing_base_residual > 0:
+        while missing_base_residual > 0:
+            missing_scale_list[x_count] += grain_unit
+            missing_base_residual -= grain_unit
+            x_count += 1
+    else:
+        while missing_base_residual < 0:
+            missing_scale_list[x_count] -= grain_unit
+            missing_base_residual += grain_unit
+            x_count += 1
+
+    return missing_scale_list
+
+
+def _allot_missing_scale(
+    ledger: dict[str, float],
+    scale_number: float,
+    grain_unit: float,
+    missing_scale: float,
+) -> dict[str, float]:
+    missing_scale_list = _get_missing_scale_list(missing_scale, grain_unit, len(ledger))
+    changes_ledger_list = []
+    if missing_scale != 0:
+        x_count = 0
+        for x_key, x_float in sorted(ledger.items()):
+            delta_scale = missing_scale_list[x_count]
+            changes_ledger_list.append([x_key, x_float + delta_scale])
+            missing_scale -= delta_scale
+            if missing_scale == 0:
+                break
+            x_count += 1
+
+    for x_ledger_change in changes_ledger_list:
+        ledger[x_ledger_change[0]] = x_ledger_change[1]
+
+    allot_sum = sum(ledger.values())
+    if ledger != {} and allot_sum != scale_number:
+        raise ValueError(
+            f"Summation of output allots '{allot_sum}' is not equal to scale '{scale_number}'."
+        )
+    return ledger
+
+
+def _create_allot_dict(
+    ledger: dict[str, float], scale_number: float, grain_unit: float
+) -> dict[str, float]:
+    # Calculate the total credor_weight
+    total_credor_weight = sum(ledger.values())
+
+    # Calculate the distribution
+    allot_dict = {}
+    for key, obj in ledger.items():
+        # Determine the allot based on credor_weight
+        allot_amt = (obj / total_credor_weight) * scale_number
+
+        # Adjust to the nearest grain unit
+        alloted_value = round(allot_amt / grain_unit) * grain_unit
+        allot_dict[key] = alloted_value
+    return allot_dict
+
+
 def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float):
     """
     allots the scale_number across credorledgers with credor_weighted attributes with a resolution of the grain unit.
@@ -99,18 +172,6 @@ def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float
         raise ValueError(
             f"The scale number '{scale_number}' must be a multiple of the grain unit '{grain_unit}'."
         )
-
-    # Calculate the total credor_weight
-    total_credor_weight = sum(ledger.values())
-
-    # Calculate the distribution
-    x_dict = {}
-    for key, obj in ledger.items():
-        # Determine the allot based on credor_weight
-        allot = (obj / total_credor_weight) * scale_number
-
-        # Adjust to the nearest grain unit
-        alloted_value = round(allot / grain_unit) * grain_unit
-        x_dict[key] = alloted_value
-
-    return x_dict
+    allot_dict = _create_allot_dict(ledger, scale_number, grain_unit)
+    x_missing = scale_number - sum(allot_dict.values())
+    return _allot_missing_scale(allot_dict, scale_number, grain_unit, x_missing)

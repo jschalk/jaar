@@ -146,7 +146,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     after_sue_world = copy_deepcopy(before_sue_world)
     x_worldUnit_weight = 55
     x_budget = 8000000
-    x_coin = 0.8
+    x_coin = 8
     x_pixel = 0.5
     x_max_tree_traverse = 66
     x_meld_strategy = "override"

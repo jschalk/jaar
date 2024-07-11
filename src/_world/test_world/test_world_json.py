@@ -354,7 +354,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world.set_real_id(tiger_real_id)
     zia_budget = 80000
     zia_world._budget = zia_budget
-    zia_coin = 0.8
+    zia_coin = 8
     zia_world._coin = zia_coin
     zia_pixel = 0.5
     zia_world._pixel = zia_pixel
@@ -442,7 +442,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._reasonunits == {}
     assert json_idearoot._cultureunit == zia_world._idearoot._cultureunit
     assert json_idearoot._cultureunit == run_cultureunit
-    assert json_idearoot._coin == 0.8
+    assert json_idearoot._coin == 8
     assert json_idearoot._coin == zia_coin
     assert len(json_idearoot._factunits) == 1
     assert len(json_idearoot._awardlinks) == 1

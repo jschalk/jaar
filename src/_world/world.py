@@ -16,6 +16,7 @@ from src._road.finance import (
     PennyNum,
     CoinNum,
     BudgetNum,
+    allot_scale,
 )
 from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
@@ -1813,7 +1814,7 @@ class WorldUnit:
         self._idearoot.set_sibling_total_weight(1)
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        self._idearoot.set_world_share(x_budget_onset=0, parent_budget_cease=1)
+        self._idearoot.set_world_share(0, self._budget, self._budget)
         self._idearoot.set_awardheirs_world_cred_debt()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
@@ -1827,7 +1828,7 @@ class WorldUnit:
         self,
         idea_kid: IdeaUnit,
         budget_onset: float,
-        parent_budget_cease: float,
+        budget_cease: float,
         parent_idea: IdeaUnit,
         econ_exceptions: bool,
     ):
@@ -1841,9 +1842,7 @@ class WorldUnit:
         tree_traverse_count = self._tree_traverse_count
         idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
         idea_kid.set_sibling_total_weight(parent_idea._kids_total_weight)
-        idea_kid.set_world_share(
-            budget_onset, parent_idea._world_share, parent_budget_cease
-        )
+        idea_kid.set_world_share(budget_onset, budget_cease, self._budget)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
@@ -1896,40 +1895,65 @@ class WorldUnit:
         self._pre_tree_traverse_cred_debt_reset()
         self._set_root_attributes(econ_exceptions)
 
-        budget_onset = self._idearoot._budget_onset
-        parent_budget_cease = self._idearoot._budget_cease
+        x_idearoot_kids_items = self._idearoot._kids.items()
+        kids_ledger = {x_road: kid._weight for x_road, kid in x_idearoot_kids_items}
+        root_budget = self._idearoot._budget_cease - self._idearoot._budget_onset
+        alloted_budget = allot_scale(kids_ledger, root_budget, self._coin)
+        x_idearoot_kid_budget_onset = None
+        x_idearoot_kid_budget_cease = None
 
         cache_idea_list = []
-        for idea_kid in self._idearoot._kids.values():
+        for kid_label, idea_kid in self._idearoot._kids.items():
+            idearoot_kid_budget = alloted_budget.get(kid_label)
+            if x_idearoot_kid_budget_onset is None:
+                x_idearoot_kid_budget_onset = self._idearoot._budget_onset
+                x_idearoot_kid_budget_cease = (
+                    self._idearoot._budget_onset + idearoot_kid_budget
+                )
+            else:
+                x_idearoot_kid_budget_onset = x_idearoot_kid_budget_cease
+                x_idearoot_kid_budget_cease += idearoot_kid_budget
             self._set_kids_attributes(
                 idea_kid=idea_kid,
-                budget_onset=budget_onset,
-                parent_budget_cease=parent_budget_cease,
+                budget_onset=x_idearoot_kid_budget_onset,
+                budget_cease=x_idearoot_kid_budget_cease,
                 parent_idea=self._idearoot,
                 econ_exceptions=econ_exceptions,
             )
             cache_idea_list.append(idea_kid)
-            budget_onset += idea_kid._world_share
 
         # no function recursion, recursion by iterateing over list that can be added to by iterations
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
+
             if self._tree_traverse_count == 0:
                 self._idea_dict[parent_idea.get_road()] = parent_idea
 
+            kids_items = parent_idea._kids.items()
+            x_ledger = {x_road: idea_kid._weight for x_road, idea_kid in kids_items}
+            parent_budget = parent_idea._budget_cease - parent_idea._budget_onset
+            alloted_budget = allot_scale(x_ledger, parent_budget, self._coin)
+
             if parent_idea._kids != None:
-                budget_onset = parent_idea._budget_onset
-                parent_budget_cease = parent_idea._budget_cease
+                budget_onset = None
+                budget_cease = None
                 for idea_kid in parent_idea._kids.values():
+                    if budget_onset is None:
+                        budget_onset = parent_idea._budget_onset
+                        budget_cease = budget_onset + alloted_budget.get(
+                            idea_kid._label
+                        )
+                    else:
+                        budget_onset = budget_cease
+                        budget_cease += alloted_budget.get(idea_kid._label)
                     self._set_kids_attributes(
                         idea_kid=idea_kid,
                         budget_onset=budget_onset,
-                        parent_budget_cease=parent_budget_cease,
+                        budget_cease=budget_cease,
                         parent_idea=parent_idea,
                         econ_exceptions=econ_exceptions,
                     )
                     cache_idea_list.append(idea_kid)
-                    budget_onset += idea_kid._world_share
 
     def _check_if_any_idea_active_status_has_altered(self):
         any_idea_active_status_has_altered = False

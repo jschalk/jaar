@@ -361,20 +361,15 @@ class IdeaUnit:
 
     def set_world_share(
         self,
-        x_budget_onset: float,
-        parent_world_share: float = None,
-        parent_budget_cease: float = None,
+        x_budget_onset: BudgetNum,
+        x_budget_cease: BudgetNum,
+        total_budget: BudgetNum,
     ):
-        parent_world_share = get_1_if_None(parent_world_share)
-        self.set_kids_total_weight()
-        self._world_share = None
-        self._budget_onset = None
-        self._budget_cease = None
-        sibling_ratio = self._weight / self._sibling_total_weight
-        self._world_share = parent_world_share * sibling_ratio
         self._budget_onset = x_budget_onset
-        self._budget_cease = self._budget_onset + self._world_share
-        self._budget_cease = min(self._budget_cease, parent_budget_cease)
+        self._budget_cease = x_budget_cease
+        self._world_share = (self._budget_cease - self._budget_onset) / total_budget
+
+        self.set_kids_total_weight()
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
