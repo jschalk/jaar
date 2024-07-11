@@ -442,6 +442,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._reasonunits == {}
     assert json_idearoot._cultureunit == zia_world._idearoot._cultureunit
     assert json_idearoot._cultureunit == run_cultureunit
+    assert json_idearoot._coin == 0.8
+    assert json_idearoot._coin == zia_coin
     assert len(json_idearoot._factunits) == 1
     assert len(json_idearoot._awardlinks) == 1
 
@@ -579,6 +581,7 @@ def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
     ccn2_world = ccn_dict_of_obj.get(x2_world._owner_id)
     assert ccn2_world._idearoot._label == x2_world._idearoot._label
     assert ccn2_world._idearoot._parent_road == x2_world._idearoot._parent_road
+    assert ccn2_world._idearoot._coin == x2_world._idearoot._coin
     shave_road = ccn2_world.make_l1_road("shave")
     week_road = ccn2_world.make_l1_road("weekdays")
     assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)

@@ -1149,6 +1149,8 @@ class WorldUnit:
         idea_kid._road_delimiter = self._road_delimiter
         if idea_kid._world_real_id != self._real_id:
             idea_kid._world_real_id = self._real_id
+        if idea_kid._coin != self._coin:
+            idea_kid._coin = self._coin
         if not create_missing_beliefs:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
@@ -2285,7 +2287,8 @@ def worldunit_shop(
         _uid=1,
         _level=0,
         _world_real_id=x_world._real_id,
-        _road_delimiter=x_world._road_delimiter,
+        # _road_delimiter=x_world._road_delimiter,
+        _coin=x_world._coin,
     )
     x_world.set_max_tree_traverse(3)
     x_world._rational = False
@@ -2351,6 +2354,7 @@ def set_idearoot_from_world_dict(x_world: WorldUnit, world_dict: dict):
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
         _world_real_id=x_world._real_id,
+        _coin=default_coin_if_none(x_world._coin),
     )
     set_idearoot_kids_from_dict(x_world, idearoot_dict)
 
@@ -2392,7 +2396,7 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
             _range_source_road=get_obj_from_idea_dict(idea_dict, "_range_source_road"),
             _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
-            _world_real_id=x_world._real_id,
+            # _world_real_id=x_world._real_id,
         )
         x_world.add_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 

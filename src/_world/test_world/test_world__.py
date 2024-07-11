@@ -128,6 +128,8 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_world._coin == default_coin_if_none()
     assert x_world._pixel == default_pixel_if_none()
     assert x_world._penny == default_penny_if_none()
+    assert x_world._idearoot._coin == x_world._coin
+    assert x_world._idearoot._road_delimiter == x_world._road_delimiter
 
 
 def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():

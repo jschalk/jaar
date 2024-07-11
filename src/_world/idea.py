@@ -4,6 +4,7 @@ from src._instrument.python import (
     get_0_if_None,
     get_False_if_None,
 )
+from src._road.finance import CoinNum, BudgetNum
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -258,8 +259,9 @@ class IdeaUnit:
     _level: int = None
     _kids_total_weight: int = None
     _world_share: float = None
-    _budget_onset: float = None
-    _budget_cease: float = None
+    _coin: CoinNum = None
+    _budget_onset: BudgetNum = None
+    _budget_cease: BudgetNum = None
     _task: bool = None
     _active: bool = None
     _ancestor_pledge_count: int = None
@@ -1107,8 +1109,9 @@ def ideaunit_shop(
     _level: int = None,
     _kids_total_weight: int = None,
     _world_share: float = None,
-    _budget_onset: float = None,
-    _budget_cease: float = None,
+    _coin: CoinNum = None,
+    _budget_onset: BudgetNum = None,
+    _budget_cease: BudgetNum = None,
     _task: bool = None,
     _active: bool = None,
     _ancestor_pledge_count: int = None,
@@ -1162,6 +1165,7 @@ def ideaunit_shop(
         _level=_level,
         _kids_total_weight=get_0_if_None(_kids_total_weight),
         _world_share=_world_share,
+        _coin=_coin,
         _budget_onset=_budget_onset,
         _budget_cease=_budget_cease,
         _task=_task,
