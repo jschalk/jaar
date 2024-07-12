@@ -360,11 +360,11 @@ class IdeaUnit:
         self,
         x_bud_onset: BudNum,
         x_bud_cease: BudNum,
-        total_bud: BudNum,
+        total_bud_pool: BudNum,
     ):
         self._bud_onset = x_bud_onset
         self._bud_cease = x_bud_cease
-        self._bud_ratio = (self._bud_cease - self._bud_onset) / total_bud
+        self._bud_ratio = (self._bud_cease - self._bud_onset) / total_bud_pool
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:

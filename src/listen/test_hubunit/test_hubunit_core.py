@@ -8,7 +8,7 @@ from src._road.finance import (
     default_pixel_if_none,
     default_penny_if_none,
     default_coin_if_none,
-    validate_bud,
+    validate_bud_pool,
 )
 from src._road.jaar_config import (
     get_gifts_folder,
@@ -76,7 +76,7 @@ def test_HubUnit_Exists():
     assert x_hubunit.owner_id is None
     assert x_hubunit.econ_road is None
     assert x_hubunit.road_delimiter is None
-    assert x_hubunit.bud is None
+    assert x_hubunit.bud_pool is None
     assert x_hubunit.coin is None
     assert x_hubunit.pixel is None
     assert x_hubunit.penny is None
@@ -103,7 +103,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     x_real_id = "music"
     sue_text = "Sue"
     x_road_delimiter = "/"
-    x_bud = 13000
+    x_bud_pool = 13000
     x_coin = 13
     x_pixel = 9
     x_penny = 3
@@ -116,7 +116,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
         owner_id=sue_text,
         econ_road=None,
         road_delimiter=x_road_delimiter,
-        bud=x_bud,
+        bud_pool=x_bud_pool,
         coin=x_coin,
         pixel=x_pixel,
         penny=x_penny,
@@ -128,7 +128,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.real_id == x_real_id
     assert x_hubunit.owner_id == sue_text
     assert x_hubunit.road_delimiter == x_road_delimiter
-    assert x_hubunit.bud == x_bud
+    assert x_hubunit.bud_pool == x_bud_pool
     assert x_hubunit.coin == x_coin
     assert x_hubunit.pixel == x_pixel
     assert x_hubunit.penny == x_penny
@@ -168,7 +168,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.real_dir() == f"{get_test_reals_dir()}/{get_real_id_if_None()}"
     assert sue_hubunit.owner_id == sue_text
     assert sue_hubunit.road_delimiter == default_road_delimiter_if_none()
-    assert sue_hubunit.bud == validate_bud()
+    assert sue_hubunit.bud_pool == validate_bud_pool()
     assert sue_hubunit.coin == default_coin_if_none()
     assert sue_hubunit.pixel == default_pixel_if_none()
     assert sue_hubunit.penny == default_penny_if_none()

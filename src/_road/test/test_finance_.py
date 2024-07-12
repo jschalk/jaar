@@ -4,8 +4,8 @@ from src._road.finance import (
     PixelNum,
     PennyNum,
     MoneyUnit,
-    default_bud,
-    validate_bud,
+    default_bud_pool,
+    validate_bud_pool,
     default_coin_if_none,
     default_pixel_if_none,
     default_penny_if_none,
@@ -93,19 +93,19 @@ def test_BudNum_exists():
     assert inspect_getdoc(y_budnum) == inspect_str
 
 
-def test_default_bud_ReturnsObj():
+def test_default_bud_pool_ReturnsObj():
     # GIVEN / WHEN / THEN
-    assert default_bud() == 1000000000
+    assert default_bud_pool() == 1000000000
 
 
-def test_validate_bud_ReturnsObj():
+def test_pool_ReturnsObj():
     # GIVEN / WHEN / THEN
-    assert validate_bud() == default_bud()
-    assert validate_bud(None) == default_bud()
-    assert validate_bud(0.5) == default_coin_if_none()
-    assert validate_bud(default_coin_if_none() - 0.01) == default_coin_if_none()
-    assert validate_bud(1) == 1
-    assert validate_bud(25) == 25
+    assert validate_bud_pool() == default_bud_pool()
+    assert validate_bud_pool(None) == default_bud_pool()
+    assert validate_bud_pool(0.5) == default_coin_if_none()
+    assert validate_bud_pool(default_coin_if_none() - 0.01) == default_coin_if_none()
+    assert validate_bud_pool(1) == 1
+    assert validate_bud_pool(25) == 25
 
 
 def test_CoinNum_exists():
@@ -141,7 +141,7 @@ def test_FiscalUnit_Exists():
     x_fiscal = FiscalUnit()
 
     # THEN
-    assert x_fiscal._bud is None
+    assert x_fiscal._bud_pool is None
     assert x_fiscal._coin is None
     assert x_fiscal._pixel is None
     assert x_fiscal._penny is None

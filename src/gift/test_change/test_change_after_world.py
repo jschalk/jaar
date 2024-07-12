@@ -56,7 +56,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     new5_arg = "_meld_strategy"
     x_atomunit.set_optional_arg(new5_arg, new5_value)
     new9_value = 55550000
-    new9_arg = "_bud"
+    new9_arg = "_bud_pool"
     x_atomunit.set_optional_arg(new9_arg, new9_value)
     new8_value = 0.5555
     new8_arg = "_coin"
@@ -82,8 +82,8 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     assert after_sue_worldunit._meld_strategy == new5_value
     assert after_sue_worldunit._weight == new1_value
     assert after_sue_worldunit._weight != before_sue_worldunit._weight
-    assert after_sue_worldunit._bud == new9_value
-    assert after_sue_worldunit._bud != before_sue_worldunit._bud
+    assert after_sue_worldunit._bud_pool == new9_value
+    assert after_sue_worldunit._bud_pool != before_sue_worldunit._bud_pool
     assert after_sue_worldunit._coin == new8_value
     assert after_sue_worldunit._coin != before_sue_worldunit._coin
     assert after_sue_worldunit._pixel == new6_value

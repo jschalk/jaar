@@ -165,8 +165,8 @@ class ChangeUnit:
             )
         if before_world._weight != after_world._weight:
             x_atomunit.set_optional_arg("_weight", after_world._weight)
-        if before_world._bud != after_world._bud:
-            x_atomunit.set_optional_arg("_bud", after_world._bud)
+        if before_world._bud_pool != after_world._bud_pool:
+            x_atomunit.set_optional_arg("_bud_pool", after_world._bud_pool)
         if before_world._coin != after_world._coin:
             x_atomunit.set_optional_arg("_coin", after_world._coin)
         if before_world._pixel != after_world._pixel:

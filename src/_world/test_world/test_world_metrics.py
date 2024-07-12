@@ -1,4 +1,4 @@
-from src._road.finance import default_bud
+from src._road.finance import default_bud_pool
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
 from src._world.beliefunit import BeliefID, awardlink_shop
@@ -396,20 +396,20 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_bud_onset_bud_
 
     # THEN
     assert yao_world._idearoot._bud_onset == 0.0
-    assert yao_world._idearoot._bud_cease == default_bud()
+    assert yao_world._idearoot._bud_cease == default_bud_pool()
     assert yao_world.get_idea_obj(auto_road)._bud_onset == 0.0
-    assert yao_world.get_idea_obj(auto_road)._bud_cease == default_bud() * 0.1
-    assert yao_world.get_idea_obj(barn_road)._bud_onset == default_bud() * 0.1
-    assert yao_world.get_idea_obj(barn_road)._bud_cease == default_bud() * 0.7
-    assert yao_world.get_idea_obj(coal_road)._bud_onset == default_bud() * 0.7
-    assert yao_world.get_idea_obj(coal_road)._bud_cease == default_bud() * 1.0
+    assert yao_world.get_idea_obj(auto_road)._bud_cease == default_bud_pool() * 0.1
+    assert yao_world.get_idea_obj(barn_road)._bud_onset == default_bud_pool() * 0.1
+    assert yao_world.get_idea_obj(barn_road)._bud_cease == default_bud_pool() * 0.7
+    assert yao_world.get_idea_obj(coal_road)._bud_onset == default_bud_pool() * 0.7
+    assert yao_world.get_idea_obj(coal_road)._bud_cease == default_bud_pool() * 1.0
 
     duck_after = yao_world.get_idea_obj(road=duck_road)
-    assert duck_after._bud_onset == default_bud() * 0.1
-    assert duck_after._bud_cease == default_bud() * 0.5
+    assert duck_after._bud_onset == default_bud_pool() * 0.1
+    assert duck_after._bud_cease == default_bud_pool() * 0.5
     lamb_after = yao_world.get_idea_obj(road=lamb_road)
-    assert lamb_after._bud_onset == default_bud() * 0.5
-    assert lamb_after._bud_cease == default_bud() * 0.7
+    assert lamb_after._bud_onset == default_bud_pool() * 0.5
+    assert lamb_after._bud_cease == default_bud_pool() * 0.7
 
 
 def test_WorldUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():

@@ -8,10 +8,9 @@ def _is_empty_world(x_world: WorldUnit) -> bool:
 
 
 def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> WorldUnit:
-    if x_owner_id is None:
-        x_owner_id = ref_world._owner_id
+    x_owner_id = ref_world._owner_id if x_owner_id is None else x_owner_id
     x_road_delimiter = ref_world._road_delimiter
-    x_bud = ref_world._bud
+    x_bud_pool = ref_world._bud_pool
     x_coin = ref_world._coin
     x_pixel = ref_world._pixel
     x_penny = ref_world._penny
@@ -19,7 +18,7 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
         _owner_id=x_owner_id,
         _real_id=ref_world._real_id,
         _road_delimiter=x_road_delimiter,
-        _bud=x_bud,
+        _bud_pool=x_bud_pool,
         _coin=x_coin,
         _pixel=x_pixel,
         _penny=x_penny,

@@ -40,13 +40,13 @@ def trim_coin_excess(num: float, coin: CoinNum) -> float:
     return coin * int(num / coin)
 
 
-def default_bud() -> BudNum:
+def default_bud_pool() -> BudNum:
     return BudNum(default_money_magnitude())
 
 
-def validate_bud(x_bud: int = None) -> int:
-    x_bud = default_bud() if x_bud is None else x_bud
-    return max(get_1_if_None(x_bud), default_coin_if_none())
+def validate_bud_pool(x_bud_pool: int = None) -> int:
+    x_bud_pool = default_bud_pool() if x_bud_pool is None else x_bud_pool
+    return max(get_1_if_None(x_bud_pool), default_coin_if_none())
 
 
 def default_pixel_if_none(pixel: PixelNum = None) -> PixelNum:
@@ -75,7 +75,7 @@ def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
 
 @dataclass
 class FiscalUnit:
-    _bud: BudNum = None
+    _bud_pool: BudNum = None
     _coin: CoinNum = None
     _pixel: PixelNum = None
     _penny: PennyNum = None

@@ -349,7 +349,7 @@
             "normal_table_name": "world"
         },
         "optional_args": {
-            "_bud": {
+            "_bud_pool": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },

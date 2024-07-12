@@ -11,7 +11,7 @@ from src._road.finance import (
     default_pixel_if_none,
     default_penny_if_none,
     default_coin_if_none,
-    validate_bud,
+    validate_bud_pool,
     PixelNum,
     PennyNum,
     CoinNum,
@@ -137,7 +137,7 @@ class WorldUnit:
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
-    _bud: BudNum = None
+    _bud_pool: BudNum = None
     _coin: CoinNum = None
     _pixel: PixelNum = None
     _penny: PennyNum = None
@@ -1809,7 +1809,7 @@ class WorldUnit:
         self._idearoot._weight = 1
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        self._idearoot.set_bud_share(0, self._bud, self._bud)
+        self._idearoot.set_bud_share(0, self._bud_pool, self._bud_pool)
         self._idearoot.set_awardheirs_world_cred_debt()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
@@ -1836,7 +1836,7 @@ class WorldUnit:
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
         idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        idea_kid.set_bud_share(bud_onset, bud_cease, self._bud)
+        idea_kid.set_bud_share(bud_onset, bud_cease, self._bud_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
@@ -2068,7 +2068,7 @@ class WorldUnit:
             "_beliefs": self.get_beliefunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
-            "_bud": self._bud,
+            "_bud_pool": self._bud_pool,
             "_coin": self._coin,
             "_pixel": self._pixel,
             "_penny": self._penny,
@@ -2264,7 +2264,7 @@ def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
-    _bud: BudNum = None,
+    _bud_pool: BudNum = None,
     _coin: CoinNum = None,
     _pixel: PixelNum = None,
     _penny: PennyNum = None,
@@ -2284,7 +2284,7 @@ def worldunit_shop(
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _bud=validate_bud(_bud),
+        _bud_pool=validate_bud_pool(_bud_pool),
         _coin=default_coin_if_none(_coin),
         _pixel=default_pixel_if_none(_pixel),
         _penny=default_penny_if_none(_penny),
@@ -2319,7 +2319,7 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world.set_real_id(obj_from_world_dict(world_dict, "_real_id"))
     world_road_delimiter = obj_from_world_dict(world_dict, "_road_delimiter")
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
-    x_world._bud = validate_bud(obj_from_world_dict(world_dict, "_bud"))
+    x_world._bud_pool = validate_bud_pool(obj_from_world_dict(world_dict, "_bud_pool"))
     x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
     x_world._pixel = default_pixel_if_none(obj_from_world_dict(world_dict, "_pixel"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))
