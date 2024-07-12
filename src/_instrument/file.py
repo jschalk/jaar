@@ -54,9 +54,7 @@ def copy_dir(src_dir: str, dest_dir: str):
 
 
 def save_file(dest_dir: str, file_name: str, file_text: str, replace: bool = None):
-    if replace is None:
-        replace = True
-
+    replace = True if replace is None else replace
     if not os_path_exists(path=dest_dir):
         os_makedirs(dest_dir)
 
@@ -96,10 +94,8 @@ def count_files(dir_path: str) -> int:
 def dir_files(
     dir_path: str, delete_extensions: bool = None, include_dirs=None, include_files=None
 ) -> dict[str, str]:
-    if include_dirs is None:
-        include_dirs = True
-    if include_files is None:
-        include_files = True
+    include_dirs = True if include_dirs is None else include_dirs
+    include_files = True if include_files is None else include_files
 
     dict_x = {}
     for obj_name in os_listdir(dir_path):
@@ -127,8 +123,7 @@ def dir_files(
 def get_integer_filenames(
     dir_path: str, min_integer: int, file_extension: str = "json"
 ):
-    if min_integer is None:
-        min_integer = 0
+    min_integer = 0 if min_integer is None else min_integer
 
     x_set = set()
     if os_path_exists(dir_path) is False:
@@ -153,8 +148,7 @@ def rename_dir(src, dst):
 
 
 def get_directory_path(x_list: list[str] = None) -> str:
-    if x_list is None:
-        x_list = []
+    x_list = [] if x_list is None else x_list
     x_str = ""
     while x_list != []:
         x_level = x_list.pop(0)

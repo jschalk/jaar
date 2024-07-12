@@ -1,4 +1,4 @@
-from src._instrument.python import get_1_if_None
+from src._instrument.python import get_1_if_None as get1ifNone
 from dataclasses import dataclass
 
 
@@ -27,11 +27,7 @@ class BeliefLink(BeliefCore):
 def belieflink_shop(
     belief_id: BeliefID, credor_weight: float = None, debtor_weight: float = None
 ) -> BeliefLink:
-    credor_weight = get_1_if_None(credor_weight)
-    debtor_weight = get_1_if_None(debtor_weight)
-    return BeliefLink(
-        belief_id=belief_id, credor_weight=credor_weight, debtor_weight=debtor_weight
-    )
+    return BeliefLink(belief_id, get1ifNone(credor_weight), get1ifNone(debtor_weight))
 
 
 def belieflink_get_from_dict(x_dict: dict) -> BeliefLink:

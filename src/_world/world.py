@@ -11,11 +11,11 @@ from src._road.finance import (
     default_pixel_if_none,
     default_penny_if_none,
     default_coin_if_none,
-    validate_budget,
+    validate_bud,
     PixelNum,
     PennyNum,
     CoinNum,
-    BudgetNum,
+    BudNum,
     allot_scale,
 )
 from src._road.jaar_config import max_tree_traverse_default
@@ -137,7 +137,7 @@ class WorldUnit:
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
-    _budget: BudgetNum = None
+    _bud: BudNum = None
     _coin: CoinNum = None
     _pixel: PixelNum = None
     _penny: PennyNum = None
@@ -317,7 +317,7 @@ class WorldUnit:
     def get_world_sprung_from_single_idea(self, road: RoadUnit) -> any:
         self.calc_world_metrics()
         x_idea = self.get_idea_obj(road)
-        new_weight = self._weight * x_idea._world_share
+        new_weight = self._weight * x_idea._bud_share
         x_world = worldunit_shop(_owner_id=self._idearoot._label, _weight=new_weight)
 
         for road_assc in sorted(list(self._get_relevant_roads({road}))):
@@ -731,10 +731,8 @@ class WorldUnit:
     ):
         if y_beliefunit._road_delimiter != self._road_delimiter:
             y_beliefunit._road_delimiter = self._road_delimiter
-        if replace is None:
-            replace = False
-        if add_charlinks is None:
-            add_charlinks = False
+        replace = False if replace is None else replace
+        add_charlinks = False if add_charlinks is None else add_charlinks
         if (
             self.get_beliefunit(y_beliefunit.belief_id) is None
             or replace
@@ -958,8 +956,7 @@ class WorldUnit:
         nigh: float = None,
         create_missing_ideas: bool = None,
     ):
-        if pick is None:
-            pick = base
+        pick = base if pick is None else pick
         if create_missing_ideas:
             self._set_ideakid_if_empty(road=base)
             self._set_ideakid_if_empty(road=pick)
@@ -1570,17 +1567,17 @@ class WorldUnit:
     def get_charunits_debtor_weight_sum(self) -> float:
         return sum(charunit.get_debtor_weight() for charunit in self._chars.values())
 
-    def _add_to_charunits_world_cred_debt(self, idea_world_share: float):
+    def _add_to_charunits_world_cred_debt(self, idea_bud_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
             au_world_cred = (
-                idea_world_share * x_charunit.get_credor_weight()
+                idea_bud_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
             au_world_debt = (
-                idea_world_share * x_charunit.get_debtor_weight()
+                idea_bud_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
             x_charunit.add_world_cred_debt(
@@ -1590,17 +1587,17 @@ class WorldUnit:
                 world_agenda_debt=0,
             )
 
-    def _add_to_charunits_world_agenda_cred_debt(self, idea_world_share: float):
+    def _add_to_charunits_world_agenda_cred_debt(self, idea_bud_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
             au_world_agenda_cred = (
-                idea_world_share * x_charunit.get_credor_weight()
+                idea_bud_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
             au_world_agenda_debt = (
-                idea_world_share * x_charunit.get_debtor_weight()
+                idea_bud_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
             x_charunit.add_world_cred_debt(
@@ -1632,7 +1629,7 @@ class WorldUnit:
         for awardlink_obj in self._beliefs.values():
             awardlink_obj.reset_world_cred_debt()
 
-    def _set_beliefunits_world_share(self, awardheirs: dict[BeliefID, AwardLink]):
+    def _set_beliefunits_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
         for awardlink_obj in awardheirs.values():
             self.add_to_belief_world_cred_debt(
                 belief_id=awardlink_obj.belief_id,
@@ -1643,12 +1640,12 @@ class WorldUnit:
     def _allot_world_agenda_share(self):
         for idea in self._idea_dict.values():
             # If there are no awardlines associated with idea
-            # allot world_share via general charunit
+            # allot bud_share via general charunit
             # cred ratio and debt ratio
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_world_agenda_cred_debt(idea._world_share)
+                    self._add_to_charunits_world_agenda_cred_debt(idea._bud_share)
                 else:
                     for x_awardline in idea._awardlines.values():
                         self.add_to_belief_world_agenda_cred_debt(
@@ -1657,7 +1654,7 @@ class WorldUnit:
                             awardline_world_debt=x_awardline._world_debt,
                         )
 
-    def _allot_beliefs_world_share(self):
+    def _allot_beliefs_bud_share(self):
         for belief_obj in self._beliefs.values():
             belief_obj._set_charlink_world_cred_debt()
             for charlink in belief_obj._chars.values():
@@ -1790,7 +1787,7 @@ class WorldUnit:
             if x_idea_obj._healerhold.any_belief_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
-                self._sum_healerhold_share += x_idea_obj._world_share
+                self._sum_healerhold_share += x_idea_obj._bud_share
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True
 
@@ -1810,11 +1807,9 @@ class WorldUnit:
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
         self._idearoot._weight = 1
-        self._idearoot.set_kids_total_weight()
-        self._idearoot.set_sibling_total_weight(1)
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        self._idearoot.set_world_share(0, self._budget, self._budget)
+        self._idearoot.set_bud_share(0, self._bud, self._bud)
         self._idearoot.set_awardheirs_world_cred_debt()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
@@ -1822,13 +1817,13 @@ class WorldUnit:
         self._idearoot.pledge = False
         if self._idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
-            self._allot_world_share(idea=self._idearoot)
+            self._allot_bud_share(idea=self._idearoot)
 
     def _set_kids_attributes(
         self,
         idea_kid: IdeaUnit,
-        budget_onset: float,
-        budget_cease: float,
+        bud_onset: float,
+        bud_cease: float,
         parent_idea: IdeaUnit,
         econ_exceptions: bool,
     ):
@@ -1841,8 +1836,7 @@ class WorldUnit:
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
         idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        idea_kid.set_sibling_total_weight(parent_idea._kids_total_weight)
-        idea_kid.set_world_share(budget_onset, budget_cease, self._budget)
+        idea_kid.set_bud_share(bud_onset, bud_cease, self._bud)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
@@ -1851,21 +1845,21 @@ class WorldUnit:
         if idea_kid.is_kidless():
             # set idea's ancestor metrics using world root as common source
             self._set_ancestors_metrics(idea_kid.get_road(), econ_exceptions)
-            self._allot_world_share(idea=idea_kid)
+            self._allot_bud_share(idea=idea_kid)
 
-    def _allot_world_share(self, idea: IdeaUnit):
+    def _allot_bud_share(self, idea: IdeaUnit):
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
         if idea.is_awardheirless() is False:
-            self._set_beliefunits_world_share(idea._awardheirs)
+            self._set_beliefunits_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_world_cred_debt(idea._world_share)
+            self._add_to_charunits_world_cred_debt(idea._bud_share)
 
-    def get_world_share(
-        self, parent_world_share: float, weight: int, sibling_total_weight: int
+    def get_bud_share(
+        self, parent_bud_share: float, weight: int, sibling_total_weight: int
     ) -> float:
         sibling_ratio = weight / sibling_total_weight
-        return parent_world_share * sibling_ratio
+        return parent_bud_share * sibling_ratio
 
     def _set_tree_traverse_starting_point(self):
         self._rational = False
@@ -1897,26 +1891,24 @@ class WorldUnit:
 
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid._weight for x_road, kid in x_idearoot_kids_items}
-        root_budget = self._idearoot._budget_cease - self._idearoot._budget_onset
-        alloted_budget = allot_scale(kids_ledger, root_budget, self._coin)
-        x_idearoot_kid_budget_onset = None
-        x_idearoot_kid_budget_cease = None
+        root_bud = self._idearoot._bud_cease - self._idearoot._bud_onset
+        alloted_bud = allot_scale(kids_ledger, root_bud, self._coin)
+        x_idearoot_kid_bud_onset = None
+        x_idearoot_kid_bud_cease = None
 
         cache_idea_list = []
         for kid_label, idea_kid in self._idearoot._kids.items():
-            idearoot_kid_budget = alloted_budget.get(kid_label)
-            if x_idearoot_kid_budget_onset is None:
-                x_idearoot_kid_budget_onset = self._idearoot._budget_onset
-                x_idearoot_kid_budget_cease = (
-                    self._idearoot._budget_onset + idearoot_kid_budget
-                )
+            idearoot_kid_bud = alloted_bud.get(kid_label)
+            if x_idearoot_kid_bud_onset is None:
+                x_idearoot_kid_bud_onset = self._idearoot._bud_onset
+                x_idearoot_kid_bud_cease = self._idearoot._bud_onset + idearoot_kid_bud
             else:
-                x_idearoot_kid_budget_onset = x_idearoot_kid_budget_cease
-                x_idearoot_kid_budget_cease += idearoot_kid_budget
+                x_idearoot_kid_bud_onset = x_idearoot_kid_bud_cease
+                x_idearoot_kid_bud_cease += idearoot_kid_bud
             self._set_kids_attributes(
                 idea_kid=idea_kid,
-                budget_onset=x_idearoot_kid_budget_onset,
-                budget_cease=x_idearoot_kid_budget_cease,
+                bud_onset=x_idearoot_kid_bud_onset,
+                bud_cease=x_idearoot_kid_bud_cease,
                 parent_idea=self._idearoot,
                 econ_exceptions=econ_exceptions,
             )
@@ -1931,25 +1923,23 @@ class WorldUnit:
 
             kids_items = parent_idea._kids.items()
             x_ledger = {x_road: idea_kid._weight for x_road, idea_kid in kids_items}
-            parent_budget = parent_idea._budget_cease - parent_idea._budget_onset
-            alloted_budget = allot_scale(x_ledger, parent_budget, self._coin)
+            parent_bud = parent_idea._bud_cease - parent_idea._bud_onset
+            alloted_bud = allot_scale(x_ledger, parent_bud, self._coin)
 
             if parent_idea._kids != None:
-                budget_onset = None
-                budget_cease = None
+                bud_onset = None
+                bud_cease = None
                 for idea_kid in parent_idea._kids.values():
-                    if budget_onset is None:
-                        budget_onset = parent_idea._budget_onset
-                        budget_cease = budget_onset + alloted_budget.get(
-                            idea_kid._label
-                        )
+                    if bud_onset is None:
+                        bud_onset = parent_idea._bud_onset
+                        bud_cease = bud_onset + alloted_bud.get(idea_kid._label)
                     else:
-                        budget_onset = budget_cease
-                        budget_cease += alloted_budget.get(idea_kid._label)
+                        bud_onset = bud_cease
+                        bud_cease += alloted_bud.get(idea_kid._label)
                     self._set_kids_attributes(
                         idea_kid=idea_kid,
-                        budget_onset=budget_onset,
-                        budget_cease=budget_cease,
+                        bud_onset=bud_onset,
+                        bud_cease=bud_cease,
                         parent_idea=parent_idea,
                         econ_exceptions=econ_exceptions,
                     )
@@ -1966,7 +1956,7 @@ class WorldUnit:
 
     def _after_all_tree_traverses_set_cred_debt(self):
         self._allot_world_agenda_share()
-        self._allot_beliefs_world_share()
+        self._allot_beliefs_bud_share()
         self._set_world_agenda_ratio_cred_debt()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
@@ -1982,7 +1972,7 @@ class WorldUnit:
                 x_idea._healerhold_share = 0
             else:
                 x_sum = self._sum_healerhold_share
-                x_idea._healerhold_share = x_idea._world_share / x_sum
+                x_idea._healerhold_share = x_idea._bud_share / x_sum
             if self._econs_justified and x_idea._healerhold.any_belief_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
@@ -2078,7 +2068,7 @@ class WorldUnit:
             "_beliefs": self.get_beliefunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
-            "_budget": self._budget,
+            "_bud": self._bud,
             "_coin": self._coin,
             "_pixel": self._pixel,
             "_penny": self._penny,
@@ -2146,7 +2136,7 @@ class WorldUnit:
     def get_world4char(self, char_id: CharID, facts: dict[RoadUnit, FactCore]):
         self.calc_world_metrics()
         world4char = worldunit_shop(_owner_id=char_id)
-        world4char._idearoot._world_share = self._idearoot._world_share
+        world4char._idearoot._bud_share = self._idearoot._bud_share
         # get char's chars: charzone
 
         # get charzone beliefs
@@ -2154,7 +2144,7 @@ class WorldUnit:
 
         # set world4char by traversing the idea tree and selecting associated beliefs
         # set root
-        not_included_world_share = 0
+        not_included_bud_share = 0
         world4char._idearoot.clear_kids()
         for ykx in self._idearoot._kids.values():
             y4a_included = any(
@@ -2165,7 +2155,7 @@ class WorldUnit:
             if y4a_included:
                 y4a_new = ideaunit_shop(
                     _label=ykx._label,
-                    _world_share=ykx._world_share,
+                    _bud_share=ykx._bud_share,
                     _reasonunits=ykx._reasonunits,
                     _awardlinks=ykx._awardlinks,
                     _begin=ykx._begin,
@@ -2175,12 +2165,12 @@ class WorldUnit:
                 )
                 world4char._idearoot._kids[ykx._label] = y4a_new
             else:
-                not_included_world_share += ykx._world_share
+                not_included_bud_share += ykx._bud_share
 
-        if not_included_world_share > 0:
+        if not_included_bud_share > 0:
             y4a_exterior = ideaunit_shop(
                 _label="__world4char__",
-                _world_share=not_included_world_share,
+                _bud_share=not_included_bud_share,
             )
             world4char._idearoot._kids[y4a_exterior._label] = y4a_exterior
 
@@ -2274,19 +2264,16 @@ def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
-    _budget: BudgetNum = None,
+    _bud: BudNum = None,
     _coin: CoinNum = None,
     _pixel: PixelNum = None,
     _penny: PennyNum = None,
     _weight: float = None,
     _meld_strategy: MeldStrategy = None,
 ) -> WorldUnit:
-    if _owner_id is None:
-        _owner_id = ""
-    if _real_id is None:
-        _real_id = get_default_real_id_roadnode()
-    if _meld_strategy is None:
-        _meld_strategy = get_meld_default()
+    _owner_id = "" if _owner_id is None else _owner_id
+    _real_id = get_default_real_id_roadnode() if _real_id is None else _real_id
+    _meld_strategy = get_meld_default() if _meld_strategy is None else _meld_strategy
     x_world = WorldUnit(
         _owner_id=_owner_id,
         _weight=get_1_if_None(_weight),
@@ -2297,7 +2284,7 @@ def worldunit_shop(
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _budget=validate_budget(_budget),
+        _bud=validate_bud(_bud),
         _coin=default_coin_if_none(_coin),
         _pixel=default_pixel_if_none(_pixel),
         _penny=default_penny_if_none(_penny),
@@ -2311,7 +2298,7 @@ def worldunit_shop(
         _uid=1,
         _level=0,
         _world_real_id=x_world._real_id,
-        # _road_delimiter=x_world._road_delimiter,
+        _road_delimiter=x_world._road_delimiter,
         _coin=x_world._coin,
     )
     x_world.set_max_tree_traverse(3)
@@ -2332,7 +2319,7 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world.set_real_id(obj_from_world_dict(world_dict, "_real_id"))
     world_road_delimiter = obj_from_world_dict(world_dict, "_road_delimiter")
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
-    x_world._budget = validate_budget(obj_from_world_dict(world_dict, "_budget"))
+    x_world._bud = validate_bud(obj_from_world_dict(world_dict, "_bud"))
     x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
     x_world._pixel = default_pixel_if_none(obj_from_world_dict(world_dict, "_pixel"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))

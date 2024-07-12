@@ -390,16 +390,16 @@ def test_WorldUnit_meld_ReturnsCorrectObj_LargeExample():
     family_text = ",Family"
     yao_family_bl = yao_worldr_bl.get(family_text)
 
-    print(f"Before {yao_family_bl._world_cred=} {yao_idearoot._kids_total_weight=}")
-    print(f"Before   {yao_family_bl._world_debt=} {yao_idearoot._kids_total_weight=}")
+    print(f"Before {yao_family_bl._world_cred=} ")
+    print(f"Before   {yao_family_bl._world_debt=} ")
 
     # WHEN
     bob_world.meld(yao_world)
     bob_world.get_tree_metrics()
 
     # THEN
-    print(f"After  {yao_family_bl._world_cred=} {yao_idearoot._kids_total_weight=}")
-    print(f"After    {yao_family_bl._world_debt=} {yao_idearoot._kids_total_weight=}")
+    print(f"After  {yao_family_bl._world_cred=} ")
+    print(f"After    {yao_family_bl._world_debt=} ")
     assert bob_world._weight == yao_world._weight
     assert bob_idearoot._kids == yao_idearoot._kids
     assert bob_idearoot._uid == yao_idearoot._uid
@@ -425,10 +425,10 @@ def test_WorldUnit_meld_ReturnsCorrectObj_LargeExample():
     assert bob_family_bl != None
     # assert bob_family_bl == yao_family_bl
     # assert bob_family_bl.world_cred == yao_family_bl .world_cred
-    print(f"{bob_family_bl._world_cred=} {bob_idearoot._kids_total_weight=}")
-    print(f"{yao_family_bl._world_cred=} {bob_idearoot._kids_total_weight=}")
-    print(f"  {bob_family_bl._world_debt=} {bob_idearoot._kids_total_weight=}")
-    print(f"  {yao_family_bl._world_debt=} {bob_idearoot._kids_total_weight=}")
+    print(f"{bob_family_bl._world_cred=} ")
+    print(f"{yao_family_bl._world_cred=} ")
+    print(f"  {bob_family_bl._world_debt=} ")
+    print(f"  {yao_family_bl._world_debt=} ")
     assert abs(bob_family_bl._world_cred - yao_family_bl._world_cred) < 0.0001
     assert abs(bob_family_bl._world_debt - yao_family_bl._world_debt) < 0.0001
 

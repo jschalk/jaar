@@ -63,8 +63,7 @@ def rebuild_road(
 
 
 def is_sub_road(ref_road: RoadUnit, sub_road: RoadUnit) -> bool:
-    if ref_road is None:
-        ref_road = ""
+    ref_road = "" if ref_road is None else ref_road
     return ref_road.find(sub_road) == 0
 
 

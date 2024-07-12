@@ -17,8 +17,7 @@ class OriginHold:
 
 
 def originhold_shop(char_id: CharID, weight: float = None) -> OriginHold:
-    if weight is None:
-        weight = 1
+    weight = 1 if weight is None else weight
     return OriginHold(char_id=char_id, weight=weight)
 
 

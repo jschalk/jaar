@@ -62,7 +62,7 @@ def _add_individual_trace(
         plotly_Scatter(
             x=[kid_idea._level - 1, kid_idea._level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_idea._world_share),
+            marker_size=_get_dot_diameter(kid_idea._bud_share),
             name=kid_idea._label,
             marker_color=_get_color_for_ideaunit_trace(kid_idea, mode=mode),
         )
@@ -70,7 +70,7 @@ def _add_individual_trace(
     anno_list.append(
         dict(
             x=kid_idea._level,
-            y=source_y + (_get_dot_diameter(kid_idea._world_share) / 150) + 0.002,
+            y=source_y + (_get_dot_diameter(kid_idea._bud_share) / 150) + 0.002,
             text=kid_idea._label,
             showarrow=False,
         )
@@ -117,11 +117,11 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_world: WorldUnit):
 def display_ideatree(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     """Mode can be None, Task, Econ"""
 
+    x_world.calc_world_metrics()
     x_fig = plotly_Figure()
     source_y = 0
     trace_list = []
     anno_list = []
-    print(f"{x_world._owner_id=}")
     _add_ideaunit_traces(trace_list, anno_list, x_world, source_y, mode=mode)
     _update_layout_fig(x_fig, mode, x_world=x_world)
     while trace_list:
@@ -188,7 +188,7 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
 def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "world_share",
+        "bud_share",
         "_label",
         "_parent_road",
     ]
@@ -201,7 +201,7 @@ def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.world_share,
+                df.bud_share,
                 df._label,
                 df._parent_road,
             ],
@@ -248,9 +248,7 @@ def add_idea_rect(
     shape_x1 = home_form_x0 + (home_width * level_width1)
     shape_y0 = level_bump + base_h + 0.25
     shape_y1 = level_bump + base_h + 0.375
-    x_color = "RoyalBlue"
-    if show_red:
-        x_color = "Red"
+    x_color = "Red" if show_red else "RoyalBlue"
     fig.add_shape(
         type="rect",
         xref="paper",
@@ -301,10 +299,7 @@ def add_belief_rect(
         y0=shape_y0,
         x1=shape_x1,
         y1=shape_y1,
-        line=dict(
-            color="Green",
-            width=8,
-        ),
+        line=dict(color="Green", width=8),
         fillcolor=None,
     )
     text_y = (shape_y0 + shape_y1) / 2
@@ -490,25 +485,6 @@ def worldunit_explanation4() -> plotly_Figure:
         )
     )
 
-    return fig
-
-
-def award_explanation0() -> plotly_Figure:
-    fig = get_worldunit_base_fig()
-
-    # Add shapes
-    base_w = 0.1
-    base_h = 0.125
-    add_belief_rect(fig, base_w, base_h, 3, 0, 1, "beliefs")
-    add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
-    fig.add_trace(
-        plotly_Scatter(
-            x=[2.0],
-            y=[3.75],
-            text=["What Jaar Worlds Are Made of Explanation 0"],
-            mode="text",
-        )
-    )
     return fig
 
 

@@ -1,6 +1,4 @@
 from src._world.origin import OriginHold, originhold_shop, OriginUnit, originunit_shop
-from src._world.char import CharID
-from pytest import raises as pytest_raises
 
 
 def test_OriginHold_exists():

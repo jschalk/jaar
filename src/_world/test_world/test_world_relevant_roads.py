@@ -1,13 +1,9 @@
 from src._world.world import worldunit_shop
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import reasonunit_shop
-from src._world.char import charunit_shop, charlink_shop
-from src._world.beliefunit import beliefunit_shop
 from src._world.examples.example_worlds import (
     get_world_with_4_levels as example_worlds_get_world_with_4_levels,
-    get_world_with7amCleanTableReason as example_worlds_get_world_with7amCleanTableReason,
     get_world_mop_example1 as example_world_get_world_mop_example1,
-    get_world_laundry_example1,
 )
 
 

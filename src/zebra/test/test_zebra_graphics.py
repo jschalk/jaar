@@ -13,7 +13,7 @@
 #     worldunit_explanation2,
 #     worldunit_explanation3,
 #     worldunit_explanation4,
-#     award_explanation0,
+#     bud_explanation0,
 #     display_ideatree,
 #     get_world_chars_plotly_fig,
 #     get_world_agenda_plotly_fig,
@@ -93,7 +93,7 @@
 #     worldunit_explanation2_fig = worldunit_explanation2()
 #     worldunit_explanation3_fig = worldunit_explanation3()
 #     worldunit_explanation4_fig = worldunit_explanation4()
-#     award_explanation0_fig = award_explanation0()
+#     bud_explanation0_fig = bud_explanation0()
 
 #     # THEN
 #     worldunit_explanation0_fig.show()
@@ -101,7 +101,7 @@
 #     worldunit_explanation2_fig.show()
 #     worldunit_explanation3_fig.show()
 #     worldunit_explanation4_fig.show()
-#     award_explanation0_fig.show()
+#     bud_explanation0_fig.show()
 
 #     # GIVEN / WHEN
 #     atomunit_periodic_table0_fig = atomunit_periodic_table0()

@@ -1,8 +1,5 @@
-from src._world.belieflink import BeliefID, BeliefLink, belieflink_shop
-from src._world.char import (
-    charunit_shop,
-)
-from pytest import raises as pytest_raises
+from src._world.belieflink import belieflink_shop
+from src._world.char import charunit_shop
 
 
 def test_CharUnit_set_belieflink_CorrectlySetsAttr():

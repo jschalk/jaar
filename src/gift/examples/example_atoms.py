@@ -1,11 +1,10 @@
-from src._road.jaar_config import get_test_real_id
+from src._road.jaar_config import get_real_id_if_None
 from src._road.road import create_road, RealID
 from src.gift.atom import atomunit_shop, atom_insert, AtomUnit
 
 
 def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
-    if real_id is None:
-        real_id = get_test_real_id()
+    real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
     x_category = "world_ideaunit"
     label_text = "label"
@@ -17,8 +16,7 @@ def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
 
 
 def get_atom_example_ideaunit_ball(real_id: RealID = None) -> AtomUnit:
-    if real_id is None:
-        real_id = get_test_real_id()
+    real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
     sports_road = create_road(real_id, sports_text)
     ball_text = "basketball"
@@ -32,8 +30,7 @@ def get_atom_example_ideaunit_ball(real_id: RealID = None) -> AtomUnit:
 
 
 def get_atom_example_ideaunit_knee(real_id: RealID = None) -> AtomUnit:
-    if real_id is None:
-        real_id = get_test_real_id()
+    real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
     sports_road = create_road(real_id, sports_text)
     knee_text = "knee"

@@ -1,5 +1,7 @@
 from src._road.jaar_config import voice_str, action_str
 from src._road.finance import default_money_magnitude
+from src._world.world import WorldUnit
+from src._world.graphic import display_ideatree
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
@@ -295,4 +297,68 @@ def get_listen_structures3_fig() -> plotly_Figure:
         )
     )
 
+    return fig
+
+
+def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
+    fig = display_ideatree(x_world, mode)
+    fig.update_xaxes(range=[-1, 11])
+    fig.update_yaxes(range=[-5, 3])
+
+    green_text = "Green"
+    blue_text = "blue"
+    blue_text = "blue"
+    d_sue1_p1 = "How budget is distributed."
+    d_sue1_p2 = "Regular Budget: Green arrows, all coins end up at CharUnits"
+    d_sue1_p3 = "Agenda Budget: Blue arrows, coins from active tasks"
+    d_sue1_p4 = f"Money = {default_money_magnitude()} "
+    cultureunit_text = "      Awardlinks"
+    add_world_rect(fig, 2, -0.3, 3, 0.3, cultureunit_text)
+    add_rect_arrow(fig, 2, 0.1, 1.2, 0.1, green_text)
+    add_rect_arrow(fig, 2, -0.1, 1.2, -0.1, blue_text)
+    add_world_rect(fig, 4, -1.2, 5, -0.8, cultureunit_text)
+    add_rect_arrow(fig, 4, -0.9, 3.1, -0.9, green_text)
+    add_rect_arrow(fig, 4, -1.1, 3.1, -1.1, blue_text)
+    add_world_rect(fig, 4, -3.2, 5, -2.8, cultureunit_text)
+    add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_text)
+    add_econ__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
+    beliefunit_text = "BeliefUnit"
+    orange_text = "orange"
+    add_world_rect(fig, 5.5, -0.2, 6.25, 0.4, beliefunit_text, orange_text)
+    add_world_rect(fig, 5.5, -0.8, 6.25, -0.2, beliefunit_text, orange_text)
+    add_world_rect(fig, 5.5, -1.4, 6.25, -0.8, beliefunit_text, orange_text)
+    add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_text)
+    add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_text)
+    add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_text)
+    add_rect_arrow(fig, 5.5, 0.1, 3, 0.1, green_text)
+    add_rect_arrow(fig, 5.5, -0.1, 3, -0.1, blue_text)
+    add_rect_arrow(fig, 5.5, -0.9, 5, -0.9, green_text)
+    add_rect_arrow(fig, 5.5, -1.1, 5, -1.1, blue_text)
+    add_rect_arrow(fig, 5.5, -1.3, 5, -2.9, green_text)
+    charlink_text = "charlink"
+    darkred_text = "DarkRed"
+    add_world_rect(fig, 7, 0.4, 7.75, 1, charlink_text, darkred_text)
+    add_world_rect(fig, 7, -0.2, 7.75, 0.4, charlink_text, darkred_text)
+    add_world_rect(fig, 7, -0.8, 7.75, -0.2, charlink_text, darkred_text)
+    add_world_rect(fig, 7, -1.4, 7.75, -0.8, charlink_text, darkred_text)
+    add_rect_arrow(fig, 7, -0.4, 6.25, -0.4, blue_text)
+    add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_text)
+    add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_text)
+    add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_text)
+    charunit_text = "charunit"
+    purple_text = "purple"
+    add_world_rect(fig, 9, -0.4, 9.75, 0.2, charunit_text, purple_text)
+    add_world_rect(fig, 9, -1.0, 9.75, -0.4, charunit_text, purple_text)
+    add_world_rect(fig, 9, -1.6, 9.75, -1.0, charunit_text, purple_text)
+    add_world_rect(fig, 9, -2.2, 9.75, -1.6, charunit_text, purple_text)
+    add_world_rect(fig, 9, -4.0, 9.75, -2.2, charunit_text, purple_text)
+
+    # fig.add_trace(
+    #     plotly_Scatter(
+    #         x=[1.0],
+    #         y=[3.75],
+    #         text=["What Jaar Worlds Are Made of Explanation 0"],
+    #         mode="text",
+    #     )
+    # )
     return fig

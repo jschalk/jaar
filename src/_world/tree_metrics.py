@@ -42,8 +42,7 @@ class TreeMetrics:
             self.level_count[level] = self.level_count[level] + 1
 
     def evaluate_reasonunits(self, reasons: dict[RoadUnit, ReasonUnit]):
-        if reasons is None:
-            reasons = {}
+        reasons = {} if reasons is None else reasons
         for reason in reasons.values():
             if self.reason_bases.get(reason.base) is None:
                 self.reason_bases[reason.base] = 1

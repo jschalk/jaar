@@ -21,13 +21,13 @@ class PixelNum(float):
 
 
 class CoinNum(float):
-    """Smallest Unit of budget"""
+    """Smallest Unit of bud"""
 
     pass
 
 
-class BudgetNum(float):
-    """BudgetNum inherits from float class"""
+class BudNum(float):
+    """BudNum inherits from float class"""
 
     pass
 
@@ -40,14 +40,13 @@ def trim_coin_excess(num: float, coin: CoinNum) -> float:
     return coin * int(num / coin)
 
 
-def default_budget() -> BudgetNum:
-    return BudgetNum(default_money_magnitude())
+def default_bud() -> BudNum:
+    return BudNum(default_money_magnitude())
 
 
-def validate_budget(x_budget: int = None) -> int:
-    if x_budget is None:
-        return default_budget()
-    return max(get_1_if_None(x_budget), default_coin_if_none())
+def validate_bud(x_bud: int = None) -> int:
+    x_bud = default_bud() if x_bud is None else x_bud
+    return max(get_1_if_None(x_bud), default_coin_if_none())
 
 
 def default_pixel_if_none(pixel: PixelNum = None) -> PixelNum:
@@ -71,14 +70,12 @@ def default_money_magnitude() -> MoneyUnit:
 
 
 def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
-    if money_magnitude is None:
-        return default_money_magnitude()
-    return money_magnitude
+    return default_money_magnitude() if money_magnitude is None else money_magnitude
 
 
 @dataclass
 class FiscalUnit:
-    _budget: BudgetNum = None
+    _bud: BudNum = None
     _coin: CoinNum = None
     _pixel: PixelNum = None
     _penny: PennyNum = None

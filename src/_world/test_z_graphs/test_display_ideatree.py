@@ -27,10 +27,8 @@ def test_display_ideatree_GivenWorld():
     # WHEN
     x_fig = display_ideatree(a_world)
 
-    # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()
+    # # THEN
+    # x_fig.show()
 
 
 def test_display_ideatree_GivenWorld_shows_Tasks():
@@ -47,10 +45,8 @@ def test_display_ideatree_GivenWorld_shows_Tasks():
     # WHEN
     x_fig = display_ideatree(a_world, mode="Task")
 
-    # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()
+    # # THEN
+    # x_fig.show()
 
 
 def test_get_world_chars_plotly_fig_DisplaysCorrectInfo():
@@ -70,10 +66,8 @@ def test_get_world_chars_plotly_fig_DisplaysCorrectInfo():
     # WHEN
     x_fig = get_world_chars_plotly_fig(luca_world)
 
-    # THEN
-    # show_figure = True
-    # if show_figure:
-    #   x_fig.show()
+    # # THEN
+    # x_fig.show()
 
 
 def test_get_world_agenda_plotly_fig_DisplaysCorrectInfo():
@@ -87,6 +81,4 @@ def test_get_world_agenda_plotly_fig_DisplaysCorrectInfo():
     x_fig = get_world_agenda_plotly_fig(yao_world)
 
     # # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()
+    # x_fig.show()

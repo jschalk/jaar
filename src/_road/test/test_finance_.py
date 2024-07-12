@@ -1,11 +1,11 @@
 from src._road.finance import (
     CoinNum,
-    BudgetNum,
+    BudNum,
     PixelNum,
     PennyNum,
     MoneyUnit,
-    default_budget,
-    validate_budget,
+    default_bud,
+    validate_bud,
     default_coin_if_none,
     default_pixel_if_none,
     default_penny_if_none,
@@ -82,30 +82,30 @@ def test_MoneyUnit_exists():
     assert inspect_getdoc(y_moneyunit) == "MoneyUnit inherits from float class"
 
 
-def test_BudgetNum_exists():
+def test_BudNum_exists():
     # GIVEN
     x_float = 0.045
     # WHEN
-    y_budgetnum = BudgetNum(x_float)
+    y_budnum = BudNum(x_float)
     # THEN
-    assert y_budgetnum == x_float
-    inspect_str = "BudgetNum inherits from float class"
-    assert inspect_getdoc(y_budgetnum) == inspect_str
+    assert y_budnum == x_float
+    inspect_str = "BudNum inherits from float class"
+    assert inspect_getdoc(y_budnum) == inspect_str
 
 
-def test_default_budget_ReturnsObj():
+def test_default_bud_ReturnsObj():
     # GIVEN / WHEN / THEN
-    assert default_budget() == 1000000000
+    assert default_bud() == 1000000000
 
 
-def test_validate_budget_ReturnsObj():
+def test_validate_bud_ReturnsObj():
     # GIVEN / WHEN / THEN
-    assert validate_budget() == default_budget()
-    assert validate_budget(None) == default_budget()
-    assert validate_budget(0.5) == default_coin_if_none()
-    assert validate_budget(default_coin_if_none() - 0.01) == default_coin_if_none()
-    assert validate_budget(1) == 1
-    assert validate_budget(25) == 25
+    assert validate_bud() == default_bud()
+    assert validate_bud(None) == default_bud()
+    assert validate_bud(0.5) == default_coin_if_none()
+    assert validate_bud(default_coin_if_none() - 0.01) == default_coin_if_none()
+    assert validate_bud(1) == 1
+    assert validate_bud(25) == 25
 
 
 def test_CoinNum_exists():
@@ -115,7 +115,7 @@ def test_CoinNum_exists():
     y_coinnum = CoinNum(x_float)
     # THEN
     assert y_coinnum == x_float
-    inspect_str = "Smallest Unit of budget"
+    inspect_str = "Smallest Unit of bud"
     assert inspect_getdoc(y_coinnum) == inspect_str
 
 
@@ -141,7 +141,7 @@ def test_FiscalUnit_Exists():
     x_fiscal = FiscalUnit()
 
     # THEN
-    assert x_fiscal._budget is None
+    assert x_fiscal._bud is None
     assert x_fiscal._coin is None
     assert x_fiscal._pixel is None
     assert x_fiscal._penny is None
