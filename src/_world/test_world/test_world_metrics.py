@@ -1,4 +1,4 @@
-from src._road.finance import default_budget
+from src._road.finance import default_bud
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
 from src._world.beliefunit import BeliefID, awardlink_shop
@@ -311,45 +311,45 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_idea_dict():
     #         )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyClears_budget_onset_budget_cease():
+def test_WorldUnit_calc_world_metrics_CorrectlyClears_bud_onset_bud_cease():
     # GIVEN
     x_world = get_world_with7amCleanTableReason()
     casa_road = x_world.make_l1_road("casa")
     catt_road = x_world.make_l1_road("feed cat")
     week_road = x_world.make_l1_road("weekdays")
-    x_world._idearoot._budget_onset = 13
-    x_world._idearoot._budget_cease = 13
-    x_world.get_idea_obj(casa_road)._budget_onset = 13
-    x_world.get_idea_obj(casa_road)._budget_cease = 13
-    x_world.get_idea_obj(catt_road)._budget_onset = 13
-    x_world.get_idea_obj(catt_road)._budget_cease = 13
-    x_world.get_idea_obj(week_road)._budget_onset = 13
-    x_world.get_idea_obj(week_road)._budget_cease = 13
+    x_world._idearoot._bud_onset = 13
+    x_world._idearoot._bud_cease = 13
+    x_world.get_idea_obj(casa_road)._bud_onset = 13
+    x_world.get_idea_obj(casa_road)._bud_cease = 13
+    x_world.get_idea_obj(catt_road)._bud_onset = 13
+    x_world.get_idea_obj(catt_road)._bud_cease = 13
+    x_world.get_idea_obj(week_road)._bud_onset = 13
+    x_world.get_idea_obj(week_road)._bud_cease = 13
 
-    assert x_world._idearoot._budget_onset == 13
-    assert x_world._idearoot._budget_cease == 13
-    assert x_world.get_idea_obj(casa_road)._budget_onset == 13
-    assert x_world.get_idea_obj(casa_road)._budget_cease == 13
-    assert x_world.get_idea_obj(catt_road)._budget_onset == 13
-    assert x_world.get_idea_obj(catt_road)._budget_cease == 13
-    assert x_world.get_idea_obj(week_road)._budget_onset == 13
-    assert x_world.get_idea_obj(week_road)._budget_cease == 13
+    assert x_world._idearoot._bud_onset == 13
+    assert x_world._idearoot._bud_cease == 13
+    assert x_world.get_idea_obj(casa_road)._bud_onset == 13
+    assert x_world.get_idea_obj(casa_road)._bud_cease == 13
+    assert x_world.get_idea_obj(catt_road)._bud_onset == 13
+    assert x_world.get_idea_obj(catt_road)._bud_cease == 13
+    assert x_world.get_idea_obj(week_road)._bud_onset == 13
+    assert x_world.get_idea_obj(week_road)._bud_cease == 13
 
     # WHEN
     x_world.calc_world_metrics()
 
     # THEN
-    assert x_world._idearoot._budget_onset != 13
-    assert x_world._idearoot._budget_cease != 13
-    assert x_world.get_idea_obj(casa_road)._budget_onset != 13
-    assert x_world.get_idea_obj(casa_road)._budget_cease != 13
-    assert x_world.get_idea_obj(catt_road)._budget_onset != 13
-    assert x_world.get_idea_obj(catt_road)._budget_cease != 13
-    assert x_world.get_idea_obj(week_road)._budget_onset != 13
-    assert x_world.get_idea_obj(week_road)._budget_cease != 13
+    assert x_world._idearoot._bud_onset != 13
+    assert x_world._idearoot._bud_cease != 13
+    assert x_world.get_idea_obj(casa_road)._bud_onset != 13
+    assert x_world.get_idea_obj(casa_road)._bud_cease != 13
+    assert x_world.get_idea_obj(catt_road)._bud_onset != 13
+    assert x_world.get_idea_obj(catt_road)._bud_cease != 13
+    assert x_world.get_idea_obj(week_road)._bud_onset != 13
+    assert x_world.get_idea_obj(week_road)._bud_cease != 13
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_budget_onset_budget_cease():
+def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_bud_onset_bud_cease():
     # GIVEN
     yao_world = worldunit_shop("Yao", _weight=10)
 
@@ -376,40 +376,40 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_budget_onset_b
     coal_idea = ideaunit_shop(coal_text, _weight=30)
     yao_world.add_l1_idea(coal_idea)
 
-    assert yao_world._idearoot._budget_onset is None
-    assert yao_world._idearoot._budget_cease is None
-    assert yao_world.get_idea_obj(auto_road)._budget_onset is None
-    assert yao_world.get_idea_obj(auto_road)._budget_cease is None
-    assert yao_world.get_idea_obj(barn_road)._budget_onset is None
-    assert yao_world.get_idea_obj(barn_road)._budget_cease is None
-    assert yao_world.get_idea_obj(coal_road)._budget_onset is None
-    assert yao_world.get_idea_obj(coal_road)._budget_cease is None
+    assert yao_world._idearoot._bud_onset is None
+    assert yao_world._idearoot._bud_cease is None
+    assert yao_world.get_idea_obj(auto_road)._bud_onset is None
+    assert yao_world.get_idea_obj(auto_road)._bud_cease is None
+    assert yao_world.get_idea_obj(barn_road)._bud_onset is None
+    assert yao_world.get_idea_obj(barn_road)._bud_cease is None
+    assert yao_world.get_idea_obj(coal_road)._bud_onset is None
+    assert yao_world.get_idea_obj(coal_road)._bud_cease is None
     lamb_before = yao_world.get_idea_obj(road=lamb_road)
-    assert lamb_before._budget_onset is None
-    assert lamb_before._budget_cease is None
+    assert lamb_before._bud_onset is None
+    assert lamb_before._bud_cease is None
     duck_before = yao_world.get_idea_obj(road=duck_road)
-    assert duck_before._budget_onset is None
-    assert duck_before._budget_cease is None
+    assert duck_before._bud_onset is None
+    assert duck_before._bud_cease is None
 
     # WHEN
     yao_world.calc_world_metrics()
 
     # THEN
-    assert yao_world._idearoot._budget_onset == 0.0
-    assert yao_world._idearoot._budget_cease == default_budget()
-    assert yao_world.get_idea_obj(auto_road)._budget_onset == 0.0
-    assert yao_world.get_idea_obj(auto_road)._budget_cease == default_budget() * 0.1
-    assert yao_world.get_idea_obj(barn_road)._budget_onset == default_budget() * 0.1
-    assert yao_world.get_idea_obj(barn_road)._budget_cease == default_budget() * 0.7
-    assert yao_world.get_idea_obj(coal_road)._budget_onset == default_budget() * 0.7
-    assert yao_world.get_idea_obj(coal_road)._budget_cease == default_budget() * 1.0
+    assert yao_world._idearoot._bud_onset == 0.0
+    assert yao_world._idearoot._bud_cease == default_bud()
+    assert yao_world.get_idea_obj(auto_road)._bud_onset == 0.0
+    assert yao_world.get_idea_obj(auto_road)._bud_cease == default_bud() * 0.1
+    assert yao_world.get_idea_obj(barn_road)._bud_onset == default_bud() * 0.1
+    assert yao_world.get_idea_obj(barn_road)._bud_cease == default_bud() * 0.7
+    assert yao_world.get_idea_obj(coal_road)._bud_onset == default_bud() * 0.7
+    assert yao_world.get_idea_obj(coal_road)._bud_cease == default_bud() * 1.0
 
     duck_after = yao_world.get_idea_obj(road=duck_road)
-    assert duck_after._budget_onset == default_budget() * 0.1
-    assert duck_after._budget_cease == default_budget() * 0.5
+    assert duck_after._bud_onset == default_bud() * 0.1
+    assert duck_after._bud_cease == default_bud() * 0.5
     lamb_after = yao_world.get_idea_obj(road=lamb_road)
-    assert lamb_after._budget_onset == default_budget() * 0.5
-    assert lamb_after._budget_cease == default_budget() * 0.7
+    assert lamb_after._bud_onset == default_bud() * 0.5
+    assert lamb_after._bud_cease == default_bud() * 0.7
 
 
 def test_WorldUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():
@@ -853,7 +853,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     sue_healerhold = healerhold_shop({"Sue"})
     sue_world.edit_idea_attr(oregon_road, problem_bool=True, healerhold=sue_healerhold)
     oregon_idea = sue_world.get_idea_obj(oregon_road)
-    print(f"{oregon_idea._world_share=}")
+    print(f"{oregon_idea._bud_share=}")
     assert sue_world._sum_healerhold_share == 0
     assert oregon_idea._healerhold_share == 0
 
@@ -869,7 +869,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     mon_road = sue_world.make_road(week_road, "Monday")
     sue_world.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     mon_idea = sue_world.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._world_share=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_share=}")
     sue_world.calc_world_metrics()
     # THEN
     assert sue_world._sum_healerhold_share != 0.038461539
@@ -881,10 +881,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     tue_road = sue_world.make_road(week_road, "Tuesday")
     sue_world.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     tue_idea = sue_world.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._world_share=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_share=}")
     # sat_road = sue_world.make_road(week_road, "Saturday")
     # sat_idea = sue_world.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._world_share=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_share=}")
     sue_world.calc_world_metrics()
 
     # THEN
@@ -897,7 +897,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # WHEN
     sue_world.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_world.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._world_share=}")
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_share=}")
     sue_world.calc_world_metrics()
     # THEN
     # display_ideatree(sue_world, "Econ").show()
@@ -932,7 +932,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     mon_road = sue_world.make_road(week_road, "Monday")
     sue_world.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     # mon_idea = sue_world.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._world_share=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_share=}")
     sue_world.calc_world_metrics()
     # THEN
     assert len(sue_world._econ_dict) == 2
@@ -943,10 +943,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     tue_road = sue_world.make_road(week_road, "Tuesday")
     sue_world.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     # tue_idea = sue_world.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._world_share=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_share=}")
     # sat_road = sue_world.make_road(week_road, "Saturday")
     # sat_idea = sue_world.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._world_share=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_share=}")
     sue_world.calc_world_metrics()
 
     # THEN
@@ -958,7 +958,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     # WHEN
     sue_world.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_world.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._world_share=}")
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_share=}")
     sue_world.calc_world_metrics()
     # THEN
     # display_ideatree(sue_world, "Econ").show()

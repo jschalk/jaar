@@ -193,8 +193,7 @@ def beliefunit_shop(
     _chars: dict[CharID, CharLink] = None,
     _road_delimiter: str = None,
 ) -> BeliefUnit:
-    if _char_mirror is None:
-        _char_mirror = False
+    _char_mirror = False if _char_mirror is None else _char_mirror
     x_beliefunit = BeliefUnit(
         _char_mirror=_char_mirror,
         _chars=get_empty_dict_if_none(_chars),
@@ -275,14 +274,14 @@ class AwardHeir(BeliefCore):
 
     def set_world_cred_debt(
         self,
-        idea_world_share,
+        idea_bud_share,
         awardheirs_credor_weight_sum: float,
         awardheirs_debtor_weight_sum: float,
     ):
         credor_share_ratio = self.credor_weight / awardheirs_credor_weight_sum
-        self._world_cred = idea_world_share * credor_share_ratio
+        self._world_cred = idea_bud_share * credor_share_ratio
         debtor_share_ratio = self.debtor_weight / awardheirs_debtor_weight_sum
-        self._world_debt = idea_world_share * debtor_share_ratio
+        self._world_debt = idea_bud_share * debtor_share_ratio
 
 
 def awardheir_shop(

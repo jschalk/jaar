@@ -1,4 +1,4 @@
-from src._road.jaar_config import get_test_real_id
+from src._road.jaar_config import get_real_id_if_None
 from src._road.road import RealID
 from src.gift.atom import (
     AtomUnit,
@@ -11,8 +11,7 @@ from src.gift.change import ChangeUnit, changeunit_shop
 
 
 def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
-    if real_id is None:
-        real_id = get_test_real_id()
+    real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
     x_category = "world_ideaunit"
     label_text = "label"

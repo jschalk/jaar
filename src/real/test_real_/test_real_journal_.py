@@ -6,7 +6,7 @@ from src._instrument.db_tool import (
     check_connection,
     check_table_column_existence,
 )
-from src._road.jaar_config import get_test_real_id
+from src._road.jaar_config import get_real_id_if_None
 from src.real.real import RealUnit, realunit_shop
 from src.real.examples.real_env import (
     get_test_reals_dir,
@@ -98,7 +98,7 @@ def test_RealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # GIVEN create Real
-    x_real = RealUnit(get_test_real_id(), get_test_reals_dir())
+    x_real = RealUnit(get_real_id_if_None(), get_test_reals_dir())
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
         check_connection(x_real.get_journal_conn())
@@ -113,7 +113,7 @@ def test_RealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
 
 def test_real_set_real_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
     # GIVEN create real
-    x_real = realunit_shop(get_test_real_id(), get_test_reals_dir())
+    x_real = realunit_shop(get_real_id_if_None(), get_test_reals_dir())
 
     # WHEN
     x_real._set_real_dirs(in_memory_journal=True)

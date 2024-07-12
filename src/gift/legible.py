@@ -243,8 +243,8 @@ def add_world_charunit_insert_to_legible_list(
     legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
 ):
     x_monetary_desc = x_world._monetary_desc
-    if x_monetary_desc is None:
-        x_monetary_desc = "monetary_desc"
+    x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
+
     for charunit_atom in charunit_dict.values():
         char_id = charunit_atom.get_value("char_id")
         credor_weight_value = charunit_atom.get_value("credor_weight")
@@ -257,8 +257,8 @@ def add_world_charunit_update_to_legible_list(
     legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
 ):
     x_monetary_desc = x_world._monetary_desc
-    if x_monetary_desc is None:
-        x_monetary_desc = "monetary_desc"
+    x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
+
     for charunit_atom in charunit_dict.values():
         char_id = charunit_atom.get_value("char_id")
         credor_weight_value = charunit_atom.get_value("credor_weight")
@@ -276,8 +276,7 @@ def add_world_charunit_delete_to_legible_list(
     legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
 ):
     x_monetary_desc = x_world._monetary_desc
-    if x_monetary_desc is None:
-        x_monetary_desc = "monetary_desc"
+    x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
     for charunit_atom in charunit_dict.values():
         char_id = charunit_atom.get_value("char_id")
         x_str = f"{char_id} was removed from {x_monetary_desc} chars."
@@ -308,8 +307,7 @@ def add_world_beliefunit_delete_to_legible_list(
     legible_list: list[str], beliefunit_dict: AtomUnit, x_world: WorldUnit
 ):
     x_monetary_desc = x_world._monetary_desc
-    if x_monetary_desc is None:
-        x_monetary_desc = "monetary_desc"
+    x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
     for beliefunit_atom in beliefunit_dict.values():
         belief_id = beliefunit_atom.get_value("belief_id")
         x_str = f"The belief '{belief_id}' was deleted."

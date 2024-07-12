@@ -333,8 +333,8 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     assert x_world._idearoot._awardlines != {}
     root_idea = x_world.get_idea_obj(road=x_world._idearoot._label)
     sue_awardline = x_world._idearoot._awardlines.get(sue_text)
-    print(f"{sue_awardline._world_cred=} {root_idea._world_share=} ")
-    print(f"  {sue_awardline._world_debt=} {root_idea._world_share=} ")
+    print(f"{sue_awardline._world_cred=} {root_idea._bud_share=} ")
+    print(f"  {sue_awardline._world_debt=} {root_idea._bud_share=} ")
     sum_x = 0
     cat_road = x_world.make_l1_road("feed cat")
     cat_idea = x_world.get_idea_obj(cat_road)
@@ -345,20 +345,20 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     casa_idea = x_world.get_idea_obj(casa_road)
     nation_road = x_world.make_l1_road(nation_text)
     nation_idea = x_world.get_idea_obj(nation_road)
-    sum_x = cat_idea._world_share
-    print(f"{cat_idea._world_share=} {sum_x} ")
-    sum_x += week_idea._world_share
-    print(f"{week_idea._world_share=} {sum_x} ")
-    sum_x += casa_idea._world_share
-    print(f"{casa_idea._world_share=} {sum_x} ")
-    sum_x += nation_idea._world_share
-    print(f"{nation_idea._world_share=} {sum_x} ")
+    sum_x = cat_idea._bud_share
+    print(f"{cat_idea._bud_share=} {sum_x} ")
+    sum_x += week_idea._bud_share
+    print(f"{week_idea._bud_share=} {sum_x} ")
+    sum_x += casa_idea._bud_share
+    print(f"{casa_idea._bud_share=} {sum_x} ")
+    sum_x += nation_idea._bud_share
+    print(f"{nation_idea._bud_share=} {sum_x} ")
     assert sum_x >= 1.0
     assert sum_x < 1.00000000001
 
     # for kid_idea in root_idea._kids.values():
-    #     sum_x += kid_idea._world_share
-    #     print(f"  {kid_idea._world_share=} {sum_x=} {kid_idea.get_road()=}")
+    #     sum_x += kid_idea._bud_share
+    #     print(f"  {kid_idea._bud_share=} {sum_x=} {kid_idea.get_road()=}")
     assert round(sue_awardline._world_cred, 15) == 1
     assert round(sue_awardline._world_debt, 15) == 1
     x_awardline = awardline_shop(
@@ -473,17 +473,17 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     assert str(type(casa_idea)).find(".idea.IdeaUnit'>") > 0
 
     assert sue_world4char._idearoot._kids.get(feed_text) is None
-    assert sue_world4char._idearoot._world_share == 1
-    assert casa_idea._world_share == yrx._kids[casa_text]._world_share
+    assert sue_world4char._idearoot._bud_share == 1
+    assert casa_idea._bud_share == yrx._kids[casa_text]._bud_share
     world4char_road = sue_world4char.make_l1_road("__world4char__")
     assert sue_world4char.get_idea_obj(world4char_road) != None
 
     y4a_exteriors = sue_world4char.get_idea_obj(world4char_road)
-    exteriors_world_share = yrx._kids[week_text]._world_share
-    exteriors_world_share += yrx._kids[feed_text]._world_share
-    exteriors_world_share += yrx._kids[nation_text]._world_share
-    print(f"{exteriors_world_share=}")
-    assert round(y4a_exteriors._world_share, 15) == round(exteriors_world_share, 15)
+    exteriors_bud_share = yrx._kids[week_text]._bud_share
+    exteriors_bud_share += yrx._kids[feed_text]._bud_share
+    exteriors_bud_share += yrx._kids[nation_text]._bud_share
+    print(f"{exteriors_bud_share=}")
+    assert round(y4a_exteriors._bud_share, 15) == round(exteriors_bud_share, 15)
 
 
 def test_WorldUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():

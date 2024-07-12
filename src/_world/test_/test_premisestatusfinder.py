@@ -165,10 +165,8 @@ def add_trace(
     sought_status_text: str = "",
     premise_divisor: float = 0,
 ) -> plotly_figure:
-    if x_end is None:
-        x_end = x_int
-    if x_color is None:
-        x_color = "Black"
+    x_end = x_int if x_end is None else x_end
+    x_color = "Black" if x_color is None else x_color
     x_marker_size = 12 if x_color == "Blue" else 10
     fig.add_trace(
         plotly_Scatter(

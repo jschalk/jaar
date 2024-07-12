@@ -3,7 +3,7 @@ from src._instrument.python import (
     get_0_if_None,
     get_False_if_None,
 )
-from src._road.finance import CoinNum, BudgetNum
+from src._road.finance import CoinNum, BudNum
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -256,10 +256,10 @@ class IdeaUnit:
     _problem_bool: bool = None
     # Calculated fields
     _level: int = None
-    _world_share: float = None
+    _bud_share: float = None
     _coin: CoinNum = None
-    _budget_onset: BudgetNum = None
-    _budget_cease: BudgetNum = None
+    _bud_onset: BudNum = None
+    _bud_cease: BudNum = None
     _task: bool = None
     _active: bool = None
     _ancestor_pledge_count: int = None
@@ -356,15 +356,15 @@ class IdeaUnit:
                 if lemma_fact.base == missing_fact:
                     self.set_factunit(lemma_fact)
 
-    def set_world_share(
+    def set_bud_share(
         self,
-        x_budget_onset: BudgetNum,
-        x_budget_cease: BudgetNum,
-        total_budget: BudgetNum,
+        x_bud_onset: BudNum,
+        x_bud_cease: BudNum,
+        total_bud: BudNum,
     ):
-        self._budget_onset = x_budget_onset
-        self._budget_cease = x_budget_cease
-        self._world_share = (self._budget_cease - self._budget_onset) / total_budget
+        self._bud_onset = x_bud_onset
+        self._bud_cease = x_bud_cease
+        self._bud_share = (self._bud_cease - self._bud_onset) / total_bud
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
@@ -494,7 +494,7 @@ class IdeaUnit:
         awardheirs_debtor_weight_sum = self.get_awardheirs_debtor_weight_sum()
         for awardheir_x in self._awardheirs.values():
             awardheir_x.set_world_cred_debt(
-                idea_world_share=self._world_share,
+                idea_bud_share=self._bud_share,
                 awardheirs_credor_weight_sum=awardheirs_credor_weight_sum,
                 awardheirs_debtor_weight_sum=awardheirs_debtor_weight_sum,
             )
@@ -1089,10 +1089,10 @@ def ideaunit_shop(
     _problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
-    _world_share: float = None,
+    _bud_share: float = None,
     _coin: CoinNum = None,
-    _budget_onset: BudgetNum = None,
-    _budget_cease: BudgetNum = None,
+    _bud_onset: BudNum = None,
+    _bud_cease: BudNum = None,
     _task: bool = None,
     _active: bool = None,
     _ancestor_pledge_count: int = None,
@@ -1104,12 +1104,9 @@ def ideaunit_shop(
     _road_delimiter: str = None,
     _healerhold_share: float = None,
 ) -> IdeaUnit:
-    if _meld_strategy is None:
-        _meld_strategy = get_meld_default()
-    if _world_real_id is None:
-        _world_real_id = root_label()
-    if _healerhold is None:
-        _healerhold = healerhold_shop()
+    _meld_strategy = get_meld_default() if _meld_strategy is None else _meld_strategy
+    _world_real_id = root_label() if _world_real_id is None else _world_real_id
+    _healerhold = healerhold_shop() if _healerhold is None else _healerhold
 
     x_ideakid = IdeaUnit(
         _label=None,
@@ -1143,10 +1140,10 @@ def ideaunit_shop(
         _world_real_id=_world_real_id,
         # Calculated fields
         _level=_level,
-        _world_share=_world_share,
+        _bud_share=_bud_share,
         _coin=_coin,
-        _budget_onset=_budget_onset,
-        _budget_cease=_budget_cease,
+        _bud_onset=_bud_onset,
+        _bud_cease=_bud_cease,
         _task=_task,
         _active=_active,
         _ancestor_pledge_count=_ancestor_pledge_count,

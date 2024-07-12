@@ -81,7 +81,7 @@ def test_get_world_agenda_dataframe_ReturnsCorrectDataFrame():
     # THEN
     charunit_colums = {
         "owner_id",
-        "world_share",
+        "bud_share",
         "_label",
         "_parent_road",
         "_begin",
@@ -109,7 +109,7 @@ def test_get_world_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
     # THEN
     charunit_colums = {
         "owner_id",
-        "world_share",
+        "bud_share",
         "_label",
         "_parent_road",
         "_begin",

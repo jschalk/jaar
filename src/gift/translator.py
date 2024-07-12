@@ -1,5 +1,5 @@
 from src._instrument.python import get_empty_dict_if_none
-from src._road.jaar_config import get_test_real_id
+from src._road.jaar_config import get_real_id_if_None
 from src._road.road import RealID, CharID, default_road_delimiter_if_none
 from src.gift.atom import AtomUnit
 from dataclasses import dataclass
@@ -34,8 +34,7 @@ class Translator:
 
 
 def translator_shop(in_real_id: RealID = None):
-    if in_real_id is None:
-        in_real_id = get_test_real_id()
+    in_real_id = get_real_id_if_None(in_real_id)
     return Translator(
         in_real_id=in_real_id,
         in_char_ids=get_empty_dict_if_none(None),

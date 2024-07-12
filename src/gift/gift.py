@@ -115,10 +115,8 @@ def giftunit_shop(
     _gifts_dir: str = None,
     _atoms_dir: str = None,
 ):
-    if _changeunit is None:
-        _changeunit = changeunit_shop()
-    if real_id is None:
-        real_id = get_default_real_id_roadnode()
+    _changeunit = changeunit_shop() if _changeunit is None else _changeunit
+    real_id = get_default_real_id_roadnode() if real_id is None else real_id
     x_giftunit = GiftUnit(
         real_id=real_id,
         owner_id=owner_id,

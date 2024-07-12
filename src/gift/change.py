@@ -165,8 +165,8 @@ class ChangeUnit:
             )
         if before_world._weight != after_world._weight:
             x_atomunit.set_optional_arg("_weight", after_world._weight)
-        if before_world._budget != after_world._budget:
-            x_atomunit.set_optional_arg("_budget", after_world._budget)
+        if before_world._bud != after_world._bud:
+            x_atomunit.set_optional_arg("_bud", after_world._bud)
         if before_world._coin != after_world._coin:
             x_atomunit.set_optional_arg("_coin", after_world._coin)
         if before_world._pixel != after_world._pixel:
@@ -851,9 +851,7 @@ def changeunit_shop(atomunits: dict[str, AtomUnit] = None) -> ChangeUnit:
 def world_built_from_change_is_valid(
     x_change: ChangeUnit, x_world: WorldUnit = None
 ) -> bool:
-    if x_world is None:
-        x_world = worldunit_shop()
-
+    x_world = worldunit_shop() if x_world is None else x_world
     x_world = x_change.get_edited_world(x_world)
 
     try:

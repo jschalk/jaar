@@ -308,8 +308,7 @@ def charlinks_get_from_json(charlinks_json: str) -> dict[str, CharLink]:
 
 
 def charlinks_get_from_dict(x_dict: dict) -> dict[str, CharLink]:
-    if x_dict is None:
-        x_dict = {}
+    x_dict = {} if x_dict is None else x_dict
     charlinks = {}
     for charlinks_dict in x_dict.values():
         x_char = charlink_shop(
@@ -330,12 +329,10 @@ def charlink_shop(
     _world_agenda_cred: float = None,
     _world_agenda_debt: float = None,
 ) -> CharLink:
-    credor_weight = get_1_if_None(credor_weight)
-    debtor_weight = get_1_if_None(debtor_weight)
     return CharLink(
         char_id=char_id,
-        credor_weight=credor_weight,
-        debtor_weight=debtor_weight,
+        credor_weight=get_1_if_None(credor_weight),
+        debtor_weight=get_1_if_None(debtor_weight),
         _world_cred=_world_cred,
         _world_debt=_world_debt,
         _world_agenda_cred=_world_agenda_cred,

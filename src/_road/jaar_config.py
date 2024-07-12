@@ -2,6 +2,10 @@ def get_test_real_id():
     return "music_45"
 
 
+def get_real_id_if_None(real_id: str = None):
+    return get_test_real_id() if real_id is None else real_id
+
+
 def get_test_reals_dir():
     return "src/real/examples/reals"
 
