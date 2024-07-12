@@ -109,7 +109,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     blue_text = "blue"
     slash_text = "/"
     x_bud_pool = 99000
-    x_coin = 99
+    x_coin = 80
     x_pixel = 5
     sue_char_pool = 800
     casa_text = "casa"
@@ -139,7 +139,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     assert default_action_world._real_id == sue_worldunit._real_id
     assert default_action_world._real_id == blue_text
     assert default_action_world._road_delimiter == slash_text
-    assert default_action_world._bud_pool == x_bud_pool
+    assert default_action_world._bud_pool == sue_char_pool
     assert default_action_world._coin == x_coin
     assert default_action_world._pixel == x_pixel
     assert default_action_world._char_credor_pool is None

@@ -55,7 +55,7 @@ def test_WorldUnit_Exists():
 
 def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # GIVEN
-    noa_text = "Noa"
+    sue_text = "Sue"
     iowa_real_id = "Iowa"
     slash_road_delimiter = "/"
     override_meld_strategy = "override"
@@ -66,7 +66,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
 
     # WHEN
     x_world = worldunit_shop(
-        _owner_id=noa_text,
+        _owner_id=sue_text,
         _real_id=iowa_real_id,
         _road_delimiter=slash_road_delimiter,
         _meld_strategy=override_meld_strategy,
@@ -76,7 +76,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _penny=x_penny,
     )
     assert x_world
-    assert x_world._owner_id == noa_text
+    assert x_world._owner_id == sue_text
     assert x_world._real_id == iowa_real_id
     assert x_world._weight == 1
     assert x_world._chars == {}
@@ -109,10 +109,10 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
 
 def test_WorldUnit_shop_ReturnsCorrect_meld_strategy():
     # GIVEN
-    noa_text = "Noa"
+    sue_text = "Sue"
     iowa_real_id = "Iowa"
     # WHEN
-    x_world = worldunit_shop(noa_text, iowa_real_id)
+    x_world = worldunit_shop(sue_text, iowa_real_id)
     # THEN
     assert x_world._meld_strategy == "default"
 
@@ -216,8 +216,8 @@ def test_WorldUnit_set_max_tree_traverse_CorrectlyRaisesError():
 def test_WorldUnit_set_real_id_CorrectlySetsAttr():
     # GIVEN
     real_id_text = "Sun"
-    noa_text = "Noa"
-    x_world = worldunit_shop(_owner_id=noa_text)
+    sue_text = "Sue"
+    x_world = worldunit_shop(_owner_id=sue_text)
     assert x_world._real_id == root_label()
 
     # WHEN
@@ -230,10 +230,10 @@ def test_WorldUnit_set_real_id_CorrectlySetsAttr():
 def test_WorldUnit_set_road_delimiter_CorrectlySetsAttr():
     # GIVEN
     real_id_text = "Sun"
-    noa_text = "Noa"
+    sue_text = "Sue"
     slash_road_delimiter = "/"
     x_world = worldunit_shop(
-        _owner_id=noa_text,
+        _owner_id=sue_text,
         _real_id=real_id_text,
         _road_delimiter=slash_road_delimiter,
     )
@@ -250,10 +250,10 @@ def test_WorldUnit_set_road_delimiter_CorrectlySetsAttr():
 def test_WorldUnit_make_road_ReturnsCorrectObj():
     # GIVEN
     real_id_text = "Sun"
-    noa_text = "Noa"
+    sue_text = "Sue"
     slash_road_delimiter = "/"
     x_world = worldunit_shop(
-        _owner_id=noa_text,
+        _owner_id=sue_text,
         _real_id=real_id_text,
         _road_delimiter=slash_road_delimiter,
     )
@@ -269,26 +269,26 @@ def test_WorldUnit_make_road_ReturnsCorrectObj():
 
 def test_WorldUnit_set_meld_strategy_CorrectlySetsAttr():
     # GIVEN
-    noa_world = worldunit_shop("Noa", "Texas")
+    sue_world = worldunit_shop("Sue", "Texas")
     override_text = "override"
-    assert noa_world._meld_strategy != override_text
+    assert sue_world._meld_strategy != override_text
 
     # WHEN
-    noa_world.set_meld_strategy(override_text)
+    sue_world.set_meld_strategy(override_text)
 
     # THEN
-    assert noa_world._meld_strategy == override_text
+    assert sue_world._meld_strategy == override_text
 
 
 def test_WorldUnit_set_meld_strategy_RaisesErrorWithIneligible_meld_strategy():
     # GIVEN
-    noa_world = worldunit_shop("Noa", "Texas")
+    sue_world = worldunit_shop("Sue", "Texas")
     incorrect_override_text = "oVerride"
-    assert noa_world._meld_strategy != incorrect_override_text
+    assert sue_world._meld_strategy != incorrect_override_text
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        noa_world.set_meld_strategy(incorrect_override_text)
+        sue_world.set_meld_strategy(incorrect_override_text)
     assert (
         str(excinfo.value)
         == f"'{incorrect_override_text}' is ineligible meld_strategy."
@@ -297,41 +297,41 @@ def test_WorldUnit_set_meld_strategy_RaisesErrorWithIneligible_meld_strategy():
 
 def test_WorldUnit_set_monetary_desc_SetsAttrCorrectly():
     # GIVEN
-    noa_world = worldunit_shop("Noa", "Texas")
-    noa_monetary_desc = "Folos"
-    assert noa_world._monetary_desc != noa_monetary_desc
+    sue_world = worldunit_shop("Sue", "Texas")
+    sue_monetary_desc = "Folos"
+    assert sue_world._monetary_desc != sue_monetary_desc
 
     # WHEN
-    noa_world.set_monetary_desc(noa_monetary_desc)
+    sue_world.set_monetary_desc(sue_monetary_desc)
 
     # THEN
-    assert noa_world._monetary_desc == noa_monetary_desc
+    assert sue_world._monetary_desc == sue_monetary_desc
 
 
 def test_WorldUnit_set_last_gift_id_SetsAttrCorrectly():
     # GIVEN
-    noa_world = worldunit_shop("Noa", "Texas")
-    assert noa_world._last_gift_id is None
+    sue_world = worldunit_shop("Sue", "Texas")
+    assert sue_world._last_gift_id is None
 
     # WHEN
     x_last_gift_id = 89
-    noa_world.set_last_gift_id(x_last_gift_id)
+    sue_world.set_last_gift_id(x_last_gift_id)
 
     # THEN
-    assert noa_world._last_gift_id == x_last_gift_id
+    assert sue_world._last_gift_id == x_last_gift_id
 
 
 def test_WorldUnit_set_last_gift_id_RaisesError():
     # GIVEN
-    noa_world = worldunit_shop("Noa", "Texas")
+    sue_world = worldunit_shop("Sue", "Texas")
     old_last_gift_id = 89
-    noa_world.set_last_gift_id(old_last_gift_id)
+    sue_world.set_last_gift_id(old_last_gift_id)
 
     # WHEN / THEN
     new_last_gift_id = 72
     assert new_last_gift_id < old_last_gift_id
     with pytest_raises(Exception) as excinfo:
-        noa_world.set_last_gift_id(new_last_gift_id)
+        sue_world.set_last_gift_id(new_last_gift_id)
     assert (
         str(excinfo.value)
         == f"Cannot set _last_gift_id to {new_last_gift_id} because it is less than {old_last_gift_id}."
@@ -340,13 +340,26 @@ def test_WorldUnit_set_last_gift_id_RaisesError():
 
 def test_WorldUnit_del_last_gift_id_SetsAttrCorrectly():
     # GIVEN
-    noa_world = worldunit_shop("Noa", "Texas")
+    sue_world = worldunit_shop("Sue", "Texas")
     old_last_gift_id = 89
-    noa_world.set_last_gift_id(old_last_gift_id)
-    assert noa_world._last_gift_id != None
+    sue_world.set_last_gift_id(old_last_gift_id)
+    assert sue_world._last_gift_id != None
 
     # WHEN
-    noa_world.del_last_gift_id()
+    sue_world.del_last_gift_id()
 
     # WHEN
-    assert noa_world._last_gift_id is None
+    assert sue_world._last_gift_id is None
+
+
+def test_WorldUnit_set_bud_pool_CorrectlySetsAttr():
+    # GIVEN
+    sue_world = worldunit_shop("Sue", "Texas")
+    sue_bud_pool = 99000
+    assert sue_world._bud_pool == validate_bud_pool()
+
+    # WHEN
+    sue_world.set_bud_pool(sue_bud_pool)
+
+    # THEN
+    assert sue_world._bud_pool == 99000

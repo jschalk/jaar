@@ -49,6 +49,12 @@ def validate_bud_pool(x_bud_pool: int = None) -> int:
     return max(get_1_if_None(x_bud_pool), default_coin_if_none())
 
 
+# def validate_bud_pool(x_bud_pool: BudNum = None, x_coin: CoinNum = None) -> int:
+#     x_coin = default_coin_if_none() if x_coin is None else x_coin
+#     x_bud_pool = default_bud_pool() if x_bud_pool is None else x_bud_pool
+#     return max(get_1_if_None(x_bud_pool), default_coin_if_none())
+
+
 def default_pixel_if_none(pixel: PixelNum = None) -> PixelNum:
     return get_1_if_None(pixel)
 

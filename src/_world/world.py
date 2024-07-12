@@ -170,6 +170,9 @@ class WorldUnit:
     def set_monetary_desc(self, x_monetary_desc: str):
         self._monetary_desc = x_monetary_desc
 
+    def set_bud_pool(self, x_bud_pool):
+        self._bud_pool = validate_bud_pool(x_bud_pool)
+
     def set_char_pool(self, x_char_pool: int):
         self.set_char_credor_pool(
             new_char_credor_pool=x_char_pool,
@@ -181,6 +184,7 @@ class WorldUnit:
             update_chars_debtor_weight=True,
             correct_pixel_issues=True,
         )
+        self.set_bud_pool(x_char_pool)
 
     def set_char_credor_pool(
         self,
