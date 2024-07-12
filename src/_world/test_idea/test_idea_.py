@@ -54,7 +54,7 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._all_char_debt is None
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx is None
-    assert x_ideaunit._bud_share is None
+    assert x_ideaunit._bud_ratio is None
     assert x_ideaunit._coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
@@ -96,7 +96,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._healerhold == healerhold_shop()
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
-    assert x_ideaunit._bud_share is None
+    assert x_ideaunit._bud_ratio is None
     assert x_ideaunit._coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
@@ -255,7 +255,7 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     assert biker_awardheir._world_debt is None
 
     # WHEN
-    sport_idea._bud_share = 0.25
+    sport_idea._bud_ratio = 0.25
     sport_idea.set_awardheirs_world_cred_debt()
 
     # THEN

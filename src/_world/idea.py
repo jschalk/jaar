@@ -256,7 +256,7 @@ class IdeaUnit:
     _problem_bool: bool = None
     # Calculated fields
     _level: int = None
-    _bud_share: float = None
+    _bud_ratio: float = None
     _coin: CoinNum = None
     _bud_onset: BudNum = None
     _bud_cease: BudNum = None
@@ -364,7 +364,7 @@ class IdeaUnit:
     ):
         self._bud_onset = x_bud_onset
         self._bud_cease = x_bud_cease
-        self._bud_share = (self._bud_cease - self._bud_onset) / total_bud
+        self._bud_ratio = (self._bud_cease - self._bud_onset) / total_bud
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
@@ -494,7 +494,7 @@ class IdeaUnit:
         awardheirs_debtor_weight_sum = self.get_awardheirs_debtor_weight_sum()
         for awardheir_x in self._awardheirs.values():
             awardheir_x.set_world_cred_debt(
-                idea_bud_share=self._bud_share,
+                idea_bud_share=self._bud_ratio,
                 awardheirs_credor_weight_sum=awardheirs_credor_weight_sum,
                 awardheirs_debtor_weight_sum=awardheirs_debtor_weight_sum,
             )
@@ -1089,7 +1089,7 @@ def ideaunit_shop(
     _problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
-    _bud_share: float = None,
+    _bud_ratio: float = None,
     _coin: CoinNum = None,
     _bud_onset: BudNum = None,
     _bud_cease: BudNum = None,
@@ -1140,7 +1140,7 @@ def ideaunit_shop(
         _world_real_id=_world_real_id,
         # Calculated fields
         _level=_level,
-        _bud_share=_bud_share,
+        _bud_ratio=_bud_ratio,
         _coin=_coin,
         _bud_onset=_bud_onset,
         _bud_cease=_bud_cease,

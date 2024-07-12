@@ -65,12 +65,12 @@ def test_WorldUnit_get_agenda_dict_WithLargeWorldImportance():
     # THEN
     assert agenda_dict
     assert len(agenda_dict) == 2
-    assert agenda_dict.get(x_world.make_l1_road("feed cat"))._bud_share
+    assert agenda_dict.get(x_world.make_l1_road("feed cat"))._bud_ratio
 
     casa_text = "casa"
     print(f"{agenda_dict.keys()=} {x_world.make_l1_road(casa_text)=}")
     print(f"{agenda_dict.get(x_world.make_l1_road(casa_text))._label=}")
-    assert agenda_dict.get(x_world.make_l1_road(casa_text))._bud_share
+    assert agenda_dict.get(x_world.make_l1_road(casa_text))._bud_ratio
 
 
 def test_WorldUnit_get_agenda_WithNo7amItemExample():

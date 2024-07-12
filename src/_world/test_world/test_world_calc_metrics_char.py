@@ -624,13 +624,13 @@ class AwardAgendaMetrics:
 
     def set_sums(self, agenda_dict: dict[RoadUnit, IdeaUnit]):
         for agenda_item in agenda_dict.values():
-            self.sum_world_agenda_share += agenda_item._bud_share
+            self.sum_world_agenda_share += agenda_item._bud_ratio
             if agenda_item._awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_world_i_sum += agenda_item._bud_share
+                self.agenda_no_world_i_sum += agenda_item._bud_ratio
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_world_i_sum += agenda_item._bud_share
+                self.agenda_yes_world_i_sum += agenda_item._bud_ratio
 
 
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():

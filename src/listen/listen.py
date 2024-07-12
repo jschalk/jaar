@@ -74,7 +74,7 @@ def create_ingest_idea(
     x_ideaunit: IdeaUnit, debtor_amount: float, pixel: float
 ) -> IdeaUnit:
     x_ideaunit._weight = _get_pixel_scaled_weight(
-        x_bud_share=x_ideaunit._bud_share,
+        x_bud_share=x_ideaunit._bud_ratio,
         debtor_amount=debtor_amount,
         pixel=pixel,
     )

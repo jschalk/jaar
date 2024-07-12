@@ -317,7 +317,7 @@ class WorldUnit:
     def get_world_sprung_from_single_idea(self, road: RoadUnit) -> any:
         self.calc_world_metrics()
         x_idea = self.get_idea_obj(road)
-        new_weight = self._weight * x_idea._bud_share
+        new_weight = self._weight * x_idea._bud_ratio
         x_world = worldunit_shop(_owner_id=self._idearoot._label, _weight=new_weight)
 
         for road_assc in sorted(list(self._get_relevant_roads({road}))):
@@ -1645,7 +1645,7 @@ class WorldUnit:
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_world_agenda_cred_debt(idea._bud_share)
+                    self._add_to_charunits_world_agenda_cred_debt(idea._bud_ratio)
                 else:
                     for x_awardline in idea._awardlines.values():
                         self.add_to_belief_world_agenda_cred_debt(
@@ -1787,7 +1787,7 @@ class WorldUnit:
             if x_idea_obj._healerhold.any_belief_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
-                self._sum_healerhold_share += x_idea_obj._bud_share
+                self._sum_healerhold_share += x_idea_obj._bud_ratio
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True
 
@@ -1853,7 +1853,7 @@ class WorldUnit:
         if idea.is_awardheirless() is False:
             self._set_beliefunits_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_world_cred_debt(idea._bud_share)
+            self._add_to_charunits_world_cred_debt(idea._bud_ratio)
 
     def get_bud_share(
         self, parent_bud_share: float, weight: int, sibling_total_weight: int
@@ -1972,7 +1972,7 @@ class WorldUnit:
                 x_idea._healerhold_share = 0
             else:
                 x_sum = self._sum_healerhold_share
-                x_idea._healerhold_share = x_idea._bud_share / x_sum
+                x_idea._healerhold_share = x_idea._bud_ratio / x_sum
             if self._econs_justified and x_idea._healerhold.any_belief_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
@@ -2136,7 +2136,7 @@ class WorldUnit:
     def get_world4char(self, char_id: CharID, facts: dict[RoadUnit, FactCore]):
         self.calc_world_metrics()
         world4char = worldunit_shop(_owner_id=char_id)
-        world4char._idearoot._bud_share = self._idearoot._bud_share
+        world4char._idearoot._bud_ratio = self._idearoot._bud_ratio
         # get char's chars: charzone
 
         # get charzone beliefs
@@ -2155,7 +2155,7 @@ class WorldUnit:
             if y4a_included:
                 y4a_new = ideaunit_shop(
                     _label=ykx._label,
-                    _bud_share=ykx._bud_share,
+                    _bud_ratio=ykx._bud_ratio,
                     _reasonunits=ykx._reasonunits,
                     _awardlinks=ykx._awardlinks,
                     _begin=ykx._begin,
@@ -2165,12 +2165,12 @@ class WorldUnit:
                 )
                 world4char._idearoot._kids[ykx._label] = y4a_new
             else:
-                not_included_bud_share += ykx._bud_share
+                not_included_bud_share += ykx._bud_ratio
 
         if not_included_bud_share > 0:
             y4a_exterior = ideaunit_shop(
                 _label="__world4char__",
-                _bud_share=not_included_bud_share,
+                _bud_ratio=not_included_bud_share,
             )
             world4char._idearoot._kids[y4a_exterior._label] = y4a_exterior
 

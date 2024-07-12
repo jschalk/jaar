@@ -853,7 +853,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     sue_healerhold = healerhold_shop({"Sue"})
     sue_world.edit_idea_attr(oregon_road, problem_bool=True, healerhold=sue_healerhold)
     oregon_idea = sue_world.get_idea_obj(oregon_road)
-    print(f"{oregon_idea._bud_share=}")
+    print(f"{oregon_idea._bud_ratio=}")
     assert sue_world._sum_healerhold_share == 0
     assert oregon_idea._healerhold_share == 0
 
@@ -869,7 +869,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     mon_road = sue_world.make_road(week_road, "Monday")
     sue_world.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     mon_idea = sue_world.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_share=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_ratio=}")
     sue_world.calc_world_metrics()
     # THEN
     assert sue_world._sum_healerhold_share != 0.038461539
@@ -881,10 +881,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     tue_road = sue_world.make_road(week_road, "Tuesday")
     sue_world.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     tue_idea = sue_world.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_share=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_ratio=}")
     # sat_road = sue_world.make_road(week_road, "Saturday")
     # sat_idea = sue_world.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_share=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_ratio=}")
     sue_world.calc_world_metrics()
 
     # THEN
@@ -897,7 +897,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # WHEN
     sue_world.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_world.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_share=}")
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_ratio=}")
     sue_world.calc_world_metrics()
     # THEN
     # display_ideatree(sue_world, "Econ").show()
@@ -932,7 +932,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     mon_road = sue_world.make_road(week_road, "Monday")
     sue_world.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     # mon_idea = sue_world.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_share=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_ratio=}")
     sue_world.calc_world_metrics()
     # THEN
     assert len(sue_world._econ_dict) == 2
@@ -943,10 +943,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     tue_road = sue_world.make_road(week_road, "Tuesday")
     sue_world.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     # tue_idea = sue_world.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_share=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_ratio=}")
     # sat_road = sue_world.make_road(week_road, "Saturday")
     # sat_idea = sue_world.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_share=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_ratio=}")
     sue_world.calc_world_metrics()
 
     # THEN
@@ -958,7 +958,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
     # WHEN
     sue_world.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_world.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_share=}")
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_ratio=}")
     sue_world.calc_world_metrics()
     # THEN
     # display_ideatree(sue_world, "Econ").show()
