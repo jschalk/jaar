@@ -14,8 +14,8 @@ class MoneyUnit(float):
     pass
 
 
-class bitNum(float):
-    """Smallest Unit of credor_weight or debtor_weight"""
+class BitHum(float):
+    """Smallest Unit of credor_weight or debtor_weight ala 'give me the slightest bit of respect!'"""
 
     pass
 
@@ -55,11 +55,11 @@ def validate_bud_pool(x_bud_pool: int = None) -> int:
 #     return max(get_1_if_None(x_bud_pool), default_coin_if_none())
 
 
-def default_bit_if_none(bit: bitNum = None) -> bitNum:
+def default_bit_if_none(bit: BitHum = None) -> BitHum:
     return get_1_if_None(bit)
 
 
-def trim_bit_excess(num: float, bit: bitNum) -> float:
+def trim_bit_excess(num: float, bit: BitHum) -> float:
     return bit * int(num / bit)
 
 
@@ -83,7 +83,7 @@ def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
 class FiscalUnit:
     _bud_pool: BudNum = None
     _coin: CoinNum = None
-    _bit: bitNum = None
+    _bit: BitHum = None
     _penny: PennyNum = None
 
 

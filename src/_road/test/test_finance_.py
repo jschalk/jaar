@@ -1,7 +1,7 @@
 from src._road.finance import (
     CoinNum,
     BudNum,
-    bitNum,
+    BitHum,
     PennyNum,
     MoneyUnit,
     default_bud_pool,
@@ -17,15 +17,15 @@ from src._road.finance import (
 from inspect import getdoc as inspect_getdoc
 
 
-def test_bitNum_exists():
+def test_BitHum_exists():
     # GIVEN
     x_float = 0.045
     # WHEN
-    y_bitnum = bitNum(x_float)
+    y_BitHum = BitHum(x_float)
     # THEN
-    assert y_bitnum == x_float
-    inspect_str = "Smallest Unit of credor_weight or debtor_weight"
-    assert inspect_getdoc(y_bitnum) == inspect_str
+    assert y_BitHum == x_float
+    inspect_str = "Smallest Unit of credor_weight or debtor_weight ala 'give me the slightest bit of respect!'"
+    assert inspect_getdoc(y_BitHum) == inspect_str
 
 
 def test_default_bit_if_none_ReturnsCorrectObj():
