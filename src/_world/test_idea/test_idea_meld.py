@@ -12,7 +12,7 @@ from pytest import raises as pytest_raises
 from copy import deepcopy
 
 
-def arbitrarily_set_idea_attr(
+def override_set_idea_attr(
     idea: IdeaUnit,
     weight: int = None,
     uid: int = None,
@@ -85,14 +85,14 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_reasonunits():
 
     _label_text = "clean"
     x1_idea = ideaunit_shop(_label_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x1_idea,
         reason_base=reason_base_x1,
         reason_premise=reason_base_x1,
     )
 
     x2_idea = ideaunit_shop(_label_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x2_idea,
         reason_base=reason_base_x1,
         reason_premise=reason_base_x1,
@@ -123,14 +123,14 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_TwoReasonsScenario_reasonunits():
 
     _label_text = "clean"
     x1_idea = ideaunit_shop(_label_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x1_idea,
         reason_base=reason_base_x1,
         reason_premise=reason_base_x1,
     )
 
     x2_idea = ideaunit_shop(_label_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x2_idea,
         reason_base=reason_base_x2,
         reason_premise=reason_base_x2,
@@ -158,19 +158,19 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_TwoReasonsMeldScenario_reasonunits():
 
     _label_text = "clean"
     x1_idea = ideaunit_shop(_label_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x1_idea,
         reason_base=reason_base_x1,
         reason_premise=reason_base_x1,
     )
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x1_idea,
         reason_base=reason_base_x2,
         reason_premise=reason_base_x2,
     )
 
     x2_idea = ideaunit_shop(_label_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x2_idea,
         reason_base=reason_base_x2,
         reason_premise=reason_base_x2,
@@ -195,13 +195,13 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_awardlinkWhen_meld_strateg
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
     br1 = "Running"
     default_text = "default"
-    arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=default_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(idea=x1_idea, meld_strategy=default_text)
+    override_set_idea_attr(
         idea=x1_idea, awardlink=awardlink_shop(belief_id=br1, credor_weight=2)
     )
     x2_idea = ideaunit_shop("Swimming")
-    arbitrarily_set_idea_attr(idea=x2_idea, meld_strategy=default_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(idea=x2_idea, meld_strategy=default_text)
+    override_set_idea_attr(
         idea=x2_idea, awardlink=awardlink_shop(belief_id=br1, credor_weight=3)
     )
 
@@ -220,14 +220,14 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_BaseScenario_awardlinkWhen_meld_strateg
 
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
     br1 = "Running"
-    arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
+    override_set_idea_attr(
         idea=x1_idea,
         awardlink=awardlink_shop(belief_id=br1, credor_weight=2, debtor_weight=3),
     )
     x2_idea = ideaunit_shop("Swimming")
-    arbitrarily_set_idea_attr(idea=x2_idea, meld_strategy=sum_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(idea=x2_idea, meld_strategy=sum_text)
+    override_set_idea_attr(
         idea=x2_idea,
         awardlink=awardlink_shop(belief_id=br1, credor_weight=2, debtor_weight=3),
     )
@@ -247,15 +247,15 @@ def test_IdeaUnit_meld_ReturnsCorrectObj_TwoBeliefsScenario_awardlink():
 
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
     br1 = "Running"
-    arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
+    override_set_idea_attr(
         idea=x1_idea, awardlink=awardlink_shop(belief_id=br1, credor_weight=2)
     )
 
     br2 = "Bears"
     x2_idea = ideaunit_shop("Swimming")
-    arbitrarily_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(idea=x1_idea, meld_strategy=sum_text)
+    override_set_idea_attr(
         idea=x2_idea, awardlink=awardlink_shop(belief_id=br2, credor_weight=2)
     )
 
@@ -336,7 +336,7 @@ def test_IdeaUnit_meld_CorrectlyMeldsRangeAttributesWhen_meld_strategyEquals_def
     label1_text = "clean"
     texas_text = "texas"
     x1_idea = ideaunit_shop(label1_text, _world_real_id=texas_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x1_idea,
         uid=x_uid,
         weight=7,
@@ -356,7 +356,7 @@ def test_IdeaUnit_meld_CorrectlyMeldsRangeAttributesWhen_meld_strategyEquals_def
 
     label2_text = "cook"
     x2_idea = ideaunit_shop(label2_text, _world_real_id=texas_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x2_idea,
         uid=x_uid,
         weight=7,
@@ -408,7 +408,7 @@ def test_IdeaUnit_meld_CorrectlyMeldsRangeAttributesWhen_meld_strategyEquals_ove
     label1_text = "clean"
     texas_text = "texas"
     x1_idea = ideaunit_shop(label1_text, _world_real_id=texas_text)
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x1_idea,
         uid=x_uid,
         weight=7,
@@ -430,7 +430,7 @@ def test_IdeaUnit_meld_CorrectlyMeldsRangeAttributesWhen_meld_strategyEquals_ove
     x2_idea = ideaunit_shop(label2_text, _world_real_id=texas_text)
     x2_uid = "uid2xx"
     override_text = "override"
-    arbitrarily_set_idea_attr(
+    override_set_idea_attr(
         idea=x2_idea,
         uid=x2_uid,
         weight=77,
@@ -475,7 +475,7 @@ def test_IdeaUnit_meld_FailRaisesError_uid():
     x_val = "test_uid1"
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, uid=x_val)
+    override_set_idea_attr(idea=x1_idea, uid=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -498,7 +498,7 @@ def test_IdeaUnit_meld_FailRaisesError_begin():
     x_val = 77
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, begin=x_val)
+    override_set_idea_attr(idea=x1_idea, begin=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -515,7 +515,7 @@ def test_IdeaUnit_meld_FailRaisesError_close():
     x_val = 77
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, close=x_val)
+    override_set_idea_attr(idea=x1_idea, close=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -532,7 +532,7 @@ def test_IdeaUnit_meld_FailRaisesError_addin():
     x_val = 77
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, addin=x_val)
+    override_set_idea_attr(idea=x1_idea, addin=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
     print(f"{x2_idea._addin=}")
 
@@ -550,7 +550,7 @@ def test_IdeaUnit_meld_FailRaisesError_denom():
     x_val = 15
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, denom=x_val)
+    override_set_idea_attr(idea=x1_idea, denom=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -567,7 +567,7 @@ def test_IdeaUnit_meld_FailRaisesError_numor():
     x_val = 77
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, numor=x_val)
+    override_set_idea_attr(idea=x1_idea, numor=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -584,7 +584,7 @@ def test_IdeaUnit_meld_FailRaisesError_reest():
     x_val = 77
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, reest=x_val)
+    override_set_idea_attr(idea=x1_idea, reest=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -601,7 +601,7 @@ def test_IdeaUnit_meld_FailRaisesError_range_source_road():
     x_val = "test_range_source_road1"
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, range_source_road=x_val)
+    override_set_idea_attr(idea=x1_idea, range_source_road=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -618,7 +618,7 @@ def test_IdeaUnit_meld_FailRaisesError_numeric_road():
     x_val = "test_numeric_road1"
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, numeric_road=x_val)
+    override_set_idea_attr(idea=x1_idea, numeric_road=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -635,7 +635,7 @@ def test_IdeaUnit_meld_FailRaisesError_pledge():
     x_val = True
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, pledge=x_val)
+    override_set_idea_attr(idea=x1_idea, pledge=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
     # WHEN/THEN
@@ -654,8 +654,8 @@ def test_IdeaUnit_meld_FailRaisesError_pledge():
 #     x_val = "test_all_char_cred1"
 #     x_val = "test_all_char_debt1"
 #     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-#     arbitrarily_set_idea_attr(idea=x1_idea, all_char_cred=x_val)
-#     arbitrarily_set_idea_attr(idea=x1_idea, all_char_debt=x_val)
+#     override_set_idea_attr(idea=x1_idea, all_char_cred=x_val)
+#     override_set_idea_attr(idea=x1_idea, all_char_debt=x_val)
 #     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
 
 #     # WHEN/THEN
@@ -673,9 +673,9 @@ def test_IdeaUnit_meld_FailRaisesError_is_expanded():
     outside_val = True
     casa_text = "casa"
     x1_idea = ideaunit_shop("clean", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x1_idea, is_expanded=x_val)
+    override_set_idea_attr(idea=x1_idea, is_expanded=x_val)
     x2_idea = ideaunit_shop("cook", _parent_road=casa_text)
-    arbitrarily_set_idea_attr(idea=x2_idea, is_expanded=outside_val)
+    override_set_idea_attr(idea=x2_idea, is_expanded=outside_val)
 
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
