@@ -865,30 +865,6 @@ def test_WorldUnit_set_beliefunit_create_missing_chars_DoesNotReplaceChars():
     assert bob_world._chars.get(beto_text).debtor_weight == 71
 
 
-def test_WorldUnit_get_beliefunits_dict_ReturnsCorrectObj():
-    # GIVEN
-    bob_world = worldunit_shop("Bob")
-    swim_text = ",swimmers"
-    run_text = ",runners"
-    fly_text = ",flyers"
-    yao_text = "Yao"
-    bob_world.set_charunit(charunit_shop(yao_text))
-    bob_world.set_beliefunit(y_beliefunit=beliefunit_shop(belief_id=swim_text))
-    bob_world.set_beliefunit(y_beliefunit=beliefunit_shop(belief_id=run_text))
-    bob_world.set_beliefunit(y_beliefunit=beliefunit_shop(belief_id=fly_text))
-    assert len(bob_world._beliefs) == 4
-
-    # WHEN
-    x_beliefunits_dict = bob_world.get_beliefunits_dict()
-
-    # THEN
-    assert x_beliefunits_dict.get(fly_text) != None
-    assert x_beliefunits_dict.get(run_text) != None
-    assert x_beliefunits_dict.get(swim_text) != None
-    assert x_beliefunits_dict.get(yao_text) is None
-    assert len(x_beliefunits_dict) == 3
-
-
 def test_get_chars_relevant_beliefs_ReturnsEmptyDict():
     # GIVEN
     bob_text = "Bob"

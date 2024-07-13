@@ -314,7 +314,8 @@ def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
     yao_action.calc_world_metrics()
     assert yao_action._chars.keys() == yao_voice0._chars.keys()
     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
-    assert yao_action.get_beliefunits_dict() == yao_voice0.get_beliefunits_dict()
+    assert yao_action.get_dict().get("_chars") == yao_voice0.get_dict().get("_chars")
+    assert len(yao_action.get_dict().get("_chars")) == 3
     assert len(yao_action._idea_dict) == 10
     print(f"{yao_action._idea_dict.keys()=}")
     print(f"{yao_action.get_factunits_dict().keys()=}")
@@ -382,7 +383,8 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_action.calc_world_metrics()
     assert yao_action._chars.keys() == yao_voice0._chars.keys()
     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
-    assert yao_action.get_beliefunits_dict() == yao_voice0.get_beliefunits_dict()
+    assert yao_action.get_dict().get("_chars") == yao_voice0.get_dict().get("_chars")
+    assert len(yao_action.get_dict().get("_chars")) == 3
     assert len(yao_action._idea_dict) == 4
     print(f"{yao_action._idea_dict.keys()=}")
     print(f"{yao_action.get_factunits_dict().keys()=}")

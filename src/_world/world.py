@@ -2051,25 +2051,17 @@ class WorldUnit:
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
-    def get_chars_dict(self, all_attrs: bool = False) -> dict[str, str]:
+    def get_charunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
         if self._chars != None:
             for char_id, char_obj in self._chars.items():
                 x_dict[char_id] = char_obj.get_dict(all_attrs)
         return x_dict
 
-    def get_beliefunits_dict(self) -> dict[str, str]:
-        return {
-            belief_belief_id: belief_obj.get_dict()
-            for belief_belief_id, belief_obj in self._beliefs.items()
-            if belief_obj._char_mirror is False
-        }
-
     def get_dict(self) -> dict[str, str]:
         self._migrate_beliefunits_to_belieflinks()
         x_dict = {
-            "_chars": self.get_chars_dict(),
-            "_beliefs": self.get_beliefunits_dict(),
+            "_chars": self.get_charunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
             "_bud_pool": self._bud_pool,

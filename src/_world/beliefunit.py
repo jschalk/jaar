@@ -45,7 +45,7 @@ class BeliefUnit(BeliefCore):
         if self._char_mirror:
             x_dict["_char_mirror"] = self._char_mirror
         if self._chars not in [{}, None]:
-            x_dict["_chars"] = self.get_chars_dict()
+            x_dict["_chars"] = self.get_charunits_dict()
 
         return x_dict
 
@@ -78,7 +78,7 @@ class BeliefUnit(BeliefCore):
     def clear_charlinks(self):
         self._chars = {}
 
-    def get_chars_dict(self) -> dict[str, str]:
+    def get_charunits_dict(self) -> dict[str, str]:
         chars_x_dict = {}
         for char in self._chars.values():
             char_dict = char.get_dict()

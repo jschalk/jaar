@@ -112,8 +112,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_last_gift_id"] == x_world._last_gift_id
     assert len(world_dict["_chars"]) == len(x_world._chars)
     assert len(world_dict["_chars"]) != 12
-    assert len(world_dict["_beliefs"]) == 12
-    assert len(world_dict["_beliefs"]) != len(x_world._beliefs)
+    assert world_dict.get("_beliefs") is None
 
     x_idearoot = x_world._idearoot
     idearoot_dict = world_dict["_idearoot"]

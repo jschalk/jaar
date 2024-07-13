@@ -41,7 +41,7 @@ def test_create_empty_world_ReturnsCorrectObj():
     assert yao_empty_job._owner_id == zia_text
     assert yao_empty_job._real_id == yao_voice._real_id
     assert yao_empty_job._last_gift_id is None
-    assert yao_empty_job.get_beliefunits_dict() == {}
+    assert yao_empty_job.get_charunits_dict() == {}
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
     assert yao_empty_job._bud_pool == yao_voice._bud_pool
     assert yao_empty_job._coin == yao_voice._coin
@@ -86,7 +86,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._owner_id == yao_duty._owner_id
     assert yao_basis_job._real_id == yao_duty._real_id
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
-    assert yao_basis_job.get_beliefunits_dict() == yao_duty.get_beliefunits_dict()
+    assert yao_basis_job.get_charunits_dict() == yao_duty.get_charunits_dict()
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
     assert yao_basis_job._bud_pool == yao_duty._bud_pool
     assert yao_basis_job._coin == yao_duty._coin
@@ -98,7 +98,10 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
     assert len(yao_basis_job._idea_dict) == 1
     job_zia_charunit = yao_basis_job.get_char(zia_text)
-    assert yao_basis_job.get_chars_dict().keys() == yao_duty.get_chars_dict().keys()
+    assert (
+        yao_basis_job.get_charunits_dict().keys()
+        == yao_duty.get_charunits_dict().keys()
+    )
     assert job_zia_charunit._irrational_debtor_weight == 0
     assert job_zia_charunit._inallocable_debtor_weight == 0
 
@@ -145,6 +148,5 @@ def test_get_default_action_world_ReturnsCorrectObj():
     assert default_action_world._char_credor_pool is None
     assert default_action_world._char_debtor_pool is None
     assert default_action_world._max_tree_traverse == sue_max_tree_traverse
-    assert len(default_action_world.get_chars_dict()) == 1
-    assert len(default_action_world.get_beliefunits_dict()) == 1
+    assert len(default_action_world.get_charunits_dict()) == 1
     assert len(default_action_world._idea_dict) == 1
