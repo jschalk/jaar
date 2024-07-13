@@ -7,7 +7,7 @@ from src._instrument.db_tool import create_insert_sqlstr, RowData
 from src._road.road import create_road
 from src._world.reason_idea import factunit_shop
 from src._world.char import charunit_shop, charlink_shop
-from src._world.beliefunit import beliefunit_shop, awardlink_shop
+from src._world.beliefbox import beliefbox_shop, awardlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import WorldUnit
 from src.gift.atom_config import (
@@ -184,31 +184,31 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
         x_world._penny = x_atom.get_value(x_arg)
 
 
-def _modify_world_beliefunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_beliefbox_delete(x_world: WorldUnit, x_atom: AtomUnit):
     belief_id = x_atom.get_value("belief_id")
-    x_world.del_beliefunit(belief_id)
+    x_world.del_beliefbox(belief_id)
 
 
-def _modify_world_beliefunit_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
+def _modify_world_beliefbox_update(x_world: WorldUnit, x_atom: AtomUnit):
+    x_beliefbox = x_world.get_beliefbox(x_atom.get_value("belief_id"))
 
 
-def _modify_world_beliefunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = beliefunit_shop(belief_id=x_atom.get_value("belief_id"))
-    x_world.set_beliefunit(
-        x_beliefunit, create_missing_chars=False, replace=False, add_charlinks=False
+def _modify_world_beliefbox_insert(x_world: WorldUnit, x_atom: AtomUnit):
+    x_beliefbox = beliefbox_shop(belief_id=x_atom.get_value("belief_id"))
+    x_world.set_beliefbox(
+        x_beliefbox, create_missing_chars=False, replace=False, add_charlinks=False
     )
 
 
 def _modify_world_char_belieflink_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_belief_id = x_atom.get_value("belief_id")
-    x_world.get_beliefunit(x_belief_id).del_charlink(x_char_id)
+    x_world.get_beliefbox(x_belief_id).del_charlink(x_char_id)
 
 
 def _modify_world_char_belieflink_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
-    x_beliefunit.edit_charlink(
+    x_beliefbox = x_world.get_beliefbox(x_atom.get_value("belief_id"))
+    x_beliefbox.edit_charlink(
         char_id=x_atom.get_value("char_id"),
         credor_weight=x_atom.get_value("credor_weight"),
         debtor_weight=x_atom.get_value("debtor_weight"),
@@ -216,8 +216,8 @@ def _modify_world_char_belieflink_update(x_world: WorldUnit, x_atom: AtomUnit):
 
 
 def _modify_world_char_belieflink_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
-    x_beliefunit.set_charlink(
+    x_beliefbox = x_world.get_beliefbox(x_atom.get_value("belief_id"))
+    x_beliefbox.set_charlink(
         charlink_shop(
             char_id=x_atom.get_value("char_id"),
             credor_weight=x_atom.get_value("credor_weight"),
@@ -425,13 +425,13 @@ def _modify_world_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_update_worldunit(x_world, x_atom)
 
 
-def _modify_world_beliefunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_beliefbox(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_beliefunit_delete(x_world, x_atom)
+        _modify_world_beliefbox_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_beliefunit_update(x_world, x_atom)
+        _modify_world_beliefbox_update(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_beliefunit_insert(x_world, x_atom)
+        _modify_world_beliefbox_insert(x_world, x_atom)
 
 
 def _modify_world_char_belieflink(x_world: WorldUnit, x_atom: AtomUnit):
@@ -507,8 +507,8 @@ def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
 def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.category == "worldunit":
         _modify_world_worldunit(x_world, x_atom)
-    elif x_atom.category == "world_beliefunit":
-        _modify_world_beliefunit(x_world, x_atom)
+    elif x_atom.category == "world_beliefbox":
+        _modify_world_beliefbox(x_world, x_atom)
     elif x_atom.category == "world_char_belieflink":
         _modify_world_char_belieflink(x_world, x_atom)
     elif x_atom.category == "world_ideaunit":

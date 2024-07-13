@@ -1,6 +1,6 @@
 from src._instrument.python import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
-from src._world.beliefunit import beliefunit_shop, awardlink_shop
+from src._world.beliefbox import beliefbox_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.healer import healerhold_shop
 from src._world.reason_culture import cultureunit_shop
@@ -33,13 +33,13 @@ def test_WorldUnit_get_dict_SetsCharUnit_belieflinks():
     bob_world.add_charunit(sue_text)
     bob_world.add_charunit(zia_text)
     run_text = ",Run"
-    bob_world.set_beliefunit(beliefunit_shop(run_text))
-    run_beliefunit = bob_world.get_beliefunit(run_text)
+    bob_world.set_beliefbox(beliefbox_shop(run_text))
+    run_beliefbox = bob_world.get_beliefbox(run_text)
     sue_run_charlink = charlink_shop(sue_text, sue_credor_weight, sue_debtor_weight)
     zia_run_charlink = charlink_shop(zia_text, zia_credor_weight, zia_debtor_weight)
-    run_beliefunit.set_charlink(sue_run_charlink)
-    run_beliefunit.set_charlink(zia_run_charlink)
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 2
+    run_beliefbox.set_charlink(sue_run_charlink)
+    run_beliefbox.set_charlink(zia_run_charlink)
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 2
     assert len(bob_world.get_char(yao_text)._belieflinks) == 0
     assert len(bob_world.get_char(sue_text)._belieflinks) == 0
 
@@ -179,9 +179,9 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     yao_text = "Yao"
     tom_world.add_charunit(yao_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(yao_text))
-    tom_world.set_beliefunit(run_beliefunit)
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(yao_text))
+    tom_world.set_beliefbox(run_beliefbox)
     run_healerhold = healerhold_shop()
     run_healerhold.set_belief_id(x_belief_id=run_text)
     tom_world.edit_idea_attr(road=tom_world._real_id, healerhold=run_healerhold)
@@ -198,7 +198,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_CultureUnit():
     # GIVEN
     tom_world = worldunit_shop("Tom")
     run_text = ",run"
-    tom_world.set_beliefunit(y_beliefunit=beliefunit_shop(run_text))
+    tom_world.set_beliefbox(y_beliefbox=beliefbox_shop(run_text))
 
     morn_text = "morning"
     morn_road = tom_world.make_l1_road(morn_text)
@@ -238,9 +238,9 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_text = "Yao"
     zia_world.add_charunit(yao_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(yao_text))
-    zia_world.set_beliefunit(run_beliefunit)
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(yao_text))
+    zia_world.set_beliefbox(run_beliefbox)
     run_healerhold = healerhold_shop({run_text})
     zia_world.edit_idea_attr(road=zia_world._real_id, healerhold=run_healerhold)
     zia_world.edit_idea_attr(road=zia_world._real_id, problem_bool=True)
@@ -379,10 +379,10 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     tim_text = "Tim"
     zia_world.add_charunit(char_id=tim_text)
     run_text = ",runners"
-    run_belief = beliefunit_shop(belief_id=run_text)
+    run_belief = beliefbox_shop(belief_id=run_text)
     run_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
     run_belief.set_charlink(charlink=charlink_shop(char_id=tim_text))
-    zia_world.set_beliefunit(y_beliefunit=run_belief)
+    zia_world.set_beliefbox(y_beliefbox=run_belief)
 
     run_cultureunit = cultureunit_shop()
     run_cultureunit.set_allyhold(belief_id=run_text)
@@ -514,19 +514,19 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample(
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
     yao_text = "Yao"
     swim_text = f"{slash_delimiter}Swimmers"
-    swim_beliefunit = beliefunit_shop(swim_text, _road_delimiter=slash_delimiter)
-    swim_beliefunit.set_charlink(charlink_shop(yao_text))
+    swim_beliefbox = beliefbox_shop(swim_text, _road_delimiter=slash_delimiter)
+    swim_beliefbox.set_charlink(charlink_shop(yao_text))
     before_bob_world.add_charunit(yao_text)
-    before_bob_world.set_beliefunit(swim_beliefunit)
-    assert before_bob_world.get_beliefunit(swim_text) != None
+    before_bob_world.set_beliefbox(swim_beliefbox)
+    assert before_bob_world.get_beliefbox(swim_text) != None
 
     # WHEN
     bob_json = before_bob_world.get_json()
     after_bob_world = worldunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_beliefunit = after_bob_world.get_beliefunit(swim_text)
-    assert after_bob_beliefunit._road_delimiter == slash_delimiter
+    after_bob_beliefbox = after_bob_world.get_beliefbox(swim_text)
+    assert after_bob_beliefbox._road_delimiter == slash_delimiter
 
 
 def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():

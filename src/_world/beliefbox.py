@@ -21,10 +21,10 @@ class InvalidBeliefException(Exception):
 
 
 @dataclass
-class BeliefUnit(BeliefCore):
+class BeliefBox(BeliefCore):
     _char_mirror: bool = None  # set by WorldUnit.set_charunit()
     _chars: dict[CharID, CharLink] = None  # set by WorldUnit.set_charunit()
-    _road_delimiter: str = None  # calculated by WorldUnit.set_beliefunit
+    _road_delimiter: str = None  # calculated by WorldUnit.set_beliefbox
     # calculated by WorldUnit.calc_world_metrics()
     _world_cred: float = None
     _world_debt: float = None
@@ -142,7 +142,7 @@ class BeliefUnit(BeliefCore):
             attrs = xl.pop()
             if attrs[1] != attrs[2]:
                 raise InvalidBeliefException(
-                    f"Meld fail BeliefUnit {self.belief_id} .{attrs[0]}='{attrs[1]}' not the equal as .{attrs[0]}='{attrs[2]}"
+                    f"Meld fail BeliefBox {self.belief_id} .{attrs[0]}='{attrs[1]}' not the equal as .{attrs[0]}='{attrs[2]}"
                 )
 
         # if self.belief_id != exterior_belief.belief_id:
@@ -151,34 +151,34 @@ class BeliefUnit(BeliefCore):
         #     )
 
 
-# class BeliefUnitsshop:
-def get_from_json(beliefunits_json: str) -> dict[BeliefID, BeliefUnit]:
-    beliefunits_dict = get_dict_from_json(json_x=beliefunits_json)
-    return get_beliefunits_from_dict(x_dict=beliefunits_dict)
+# class BeliefBoxsshop:
+def get_from_json(beliefboxs_json: str) -> dict[BeliefID, BeliefBox]:
+    beliefboxs_dict = get_dict_from_json(json_x=beliefboxs_json)
+    return get_beliefboxs_from_dict(x_dict=beliefboxs_dict)
 
 
-def get_beliefunits_from_dict(
+def get_beliefboxs_from_dict(
     x_dict: dict, _road_delimiter: str = None
-) -> dict[BeliefID, BeliefUnit]:
-    beliefunits = {}
-    for beliefunit_dict in x_dict.values():
-        x_belief = get_beliefunit_from_dict(beliefunit_dict, _road_delimiter)
-        beliefunits[x_belief.belief_id] = x_belief
-    return beliefunits
+) -> dict[BeliefID, BeliefBox]:
+    beliefboxs = {}
+    for beliefbox_dict in x_dict.values():
+        x_belief = get_beliefbox_from_dict(beliefbox_dict, _road_delimiter)
+        beliefboxs[x_belief.belief_id] = x_belief
+    return beliefboxs
 
 
-def get_beliefunit_from_dict(
-    beliefunit_dict: dict, _road_delimiter: str = None
-) -> BeliefUnit:
-    return beliefunit_shop(
-        belief_id=beliefunit_dict["belief_id"],
-        _char_mirror=get_obj_from_beliefunit_dict(beliefunit_dict, "_char_mirror"),
-        _chars=get_obj_from_beliefunit_dict(beliefunit_dict, "_chars"),
+def get_beliefbox_from_dict(
+    beliefbox_dict: dict, _road_delimiter: str = None
+) -> BeliefBox:
+    return beliefbox_shop(
+        belief_id=beliefbox_dict["belief_id"],
+        _char_mirror=get_obj_from_beliefbox_dict(beliefbox_dict, "_char_mirror"),
+        _chars=get_obj_from_beliefbox_dict(beliefbox_dict, "_chars"),
         _road_delimiter=_road_delimiter,
     )
 
 
-def get_obj_from_beliefunit_dict(x_dict: dict[str,], dict_key: str) -> any:
+def get_obj_from_beliefbox_dict(x_dict: dict[str,], dict_key: str) -> any:
     if dict_key == "_chars":
         return charlinks_get_from_dict(x_dict.get(dict_key))
     elif dict_key in {"_char_mirror"}:
@@ -187,14 +187,14 @@ def get_obj_from_beliefunit_dict(x_dict: dict[str,], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) != None else None
 
 
-def beliefunit_shop(
+def beliefbox_shop(
     belief_id: BeliefID,
     _char_mirror: bool = None,
     _chars: dict[CharID, CharLink] = None,
     _road_delimiter: str = None,
-) -> BeliefUnit:
+) -> BeliefBox:
     _char_mirror = False if _char_mirror is None else _char_mirror
-    x_beliefunit = BeliefUnit(
+    x_beliefbox = BeliefBox(
         _char_mirror=_char_mirror,
         _chars=get_empty_dict_if_none(_chars),
         _world_cred=get_0_if_None(),
@@ -203,8 +203,8 @@ def beliefunit_shop(
         _world_agenda_debt=get_0_if_None(),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
     )
-    x_beliefunit.set_belief_id(belief_id=belief_id)
-    return x_beliefunit
+    x_beliefbox.set_belief_id(belief_id=belief_id)
+    return x_beliefbox
 
 
 @dataclass
@@ -327,7 +327,7 @@ def get_intersection_of_chars(
 
 
 def get_chars_relevant_beliefs(
-    beliefs_x: dict[BeliefID, BeliefUnit], chars_x: dict[CharID, CharUnit]
+    beliefs_x: dict[BeliefID, BeliefBox], chars_x: dict[CharID, CharUnit]
 ) -> dict[BeliefID, dict[CharID, int]]:
     relevant_beliefs = {}
     for char_id_x in chars_x:

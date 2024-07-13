@@ -101,7 +101,7 @@ def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
     add_rect_text(fig, x=text_x, y=text_y, text=atomplotyshape.display_text)
 
 
-def add_beliefunits_circle(fig: plotly_Figure):
+def add_beliefboxs_circle(fig: plotly_Figure):
     home_form_x0 = 0.2
     home_form_x1 = 1 - 0.2
     home_width = home_form_x1 - home_form_x0
@@ -126,7 +126,7 @@ def add_beliefunits_circle(fig: plotly_Figure):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text="BeliefUnits")
+    add_rect_text(fig, x=text_x, y=text_y, text="BeliefBoxs")
 
 
 def add_different_ideas_circle(fig: plotly_Figure):
@@ -273,7 +273,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
     add_atom_rect(fig, world_char_belieflink_delete)
     add_atom_rect(fig, world_charunit_delete)
     add_atom_rect(fig, worldunit_update)
-    add_beliefunits_circle(fig)
+    add_beliefboxs_circle(fig)
     add_different_ideas_circle(fig)
 
     fig.add_trace(

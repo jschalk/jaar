@@ -3,7 +3,7 @@ from src._road.road import RoadUnit
 from src._world.world import worldunit_shop, get_from_json as worldunit_get_from_json
 from src._world.idea import IdeaUnit, ideaunit_shop
 from src._world.reason_idea import reasonunit_shop
-from src._world.beliefunit import beliefunit_shop, awardlink_shop
+from src._world.beliefbox import beliefbox_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.reason_culture import cultureunit_shop
 from src._world.examples.example_worlds import (
@@ -631,9 +631,9 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     # beto_charlink = charlink_shop(char_id=beto_text)
 
     family_text = ",family"
-    # beliefunit_z = beliefunit_shop(belief_id=family_text)
-    # beliefunit_z.set_charlink(charlink=anna_charlink)
-    # beliefunit_z.set_charlink(charlink=beto_charlink)
+    # beliefbox_z = beliefbox_shop(belief_id=family_text)
+    # beliefbox_z.set_charlink(charlink=anna_charlink)
+    # beliefbox_z.set_charlink(charlink=beto_charlink)
     awardlink_z = awardlink_shop(belief_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
 
@@ -786,9 +786,9 @@ def test_agenda_IsSetByCultureUnit_2CharBelief():
     bob_world.add_charunit(char_id=sue_text)
 
     run_text = ",runners"
-    run_belief = beliefunit_shop(belief_id=run_text)
+    run_belief = beliefbox_shop(belief_id=run_text)
     run_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    bob_world.set_beliefunit(y_beliefunit=run_belief)
+    bob_world.set_beliefbox(y_beliefbox=run_belief)
 
     run_cultureunit = cultureunit_shop()
     run_cultureunit.set_allyhold(belief_id=run_text)
@@ -802,7 +802,7 @@ def test_agenda_IsSetByCultureUnit_2CharBelief():
 
     # WHEN
     run_belief.set_charlink(charlink=charlink_shop(char_id=bob_text))
-    bob_world.set_beliefunit(y_beliefunit=run_belief)
+    bob_world.set_beliefbox(y_beliefbox=run_belief)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 1

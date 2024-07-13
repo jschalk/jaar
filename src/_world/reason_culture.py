@@ -1,5 +1,5 @@
 from src._instrument.python import get_empty_set_if_none
-from src._world.beliefunit import BeliefUnit, BeliefID
+from src._world.beliefbox import BeliefBox, BeliefID
 from src._world.char import CharID
 from dataclasses import dataclass
 
@@ -46,24 +46,24 @@ class CultureHeir:
 
     def _get_all_chars(
         self,
-        world_beliefs: dict[BeliefID, BeliefUnit],
+        world_beliefs: dict[BeliefID, BeliefBox],
         belief_id_set: set[BeliefID],
-    ) -> dict[BeliefID, BeliefUnit]:
+    ) -> dict[BeliefID, BeliefBox]:
         dict_x = {}
         for belief_id_x in belief_id_set:
             dict_x |= world_beliefs.get(belief_id_x)._chars
         return dict_x
 
     def _get_all_suff_chars(
-        self, world_beliefs: dict[BeliefID, BeliefUnit]
-    ) -> dict[BeliefID, BeliefUnit]:
+        self, world_beliefs: dict[BeliefID, BeliefBox]
+    ) -> dict[BeliefID, BeliefBox]:
         return self._get_all_chars(world_beliefs, self._allyholds)
 
     def is_empty(self) -> bool:
         return self._allyholds == set()
 
     def set_owner_id_culture(
-        self, world_beliefs: dict[BeliefID, BeliefUnit], world_owner_id: CharID
+        self, world_beliefs: dict[BeliefID, BeliefBox], world_owner_id: CharID
     ):
         self._owner_id_culture = False
         if self.is_empty():
@@ -77,7 +77,7 @@ class CultureHeir:
         self,
         parent_cultureheir,
         cultureunit: CultureUnit,
-        world_beliefs: dict[BeliefID, BeliefUnit],
+        world_beliefs: dict[BeliefID, BeliefBox],
     ):
         x_allyholds = set()
         if parent_cultureheir is None or parent_cultureheir._allyholds == set():

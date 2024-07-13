@@ -1,5 +1,5 @@
 from src._world.idea import ideaunit_shop, IdeaAttrFilter, IdeaUnit
-from src._world.beliefunit import AwardLink, BeliefID, awardlink_shop
+from src._world.beliefbox import AwardLink, BeliefID, awardlink_shop
 from src._world.reason_idea import (
     reasonunit_shop,
     ReasonUnit,

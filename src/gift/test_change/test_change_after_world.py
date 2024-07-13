@@ -1,9 +1,9 @@
 from src._road.road import get_terminus_node, get_parent_road
-from src._world.beliefunit import awardlink_shop
+from src._world.beliefbox import awardlink_shop
 from src._world.char import charlink_shop
 from src._world.reason_idea import factunit_shop
 from src._world.idea import ideaunit_shop
-from src._world.beliefunit import beliefunit_shop
+from src._world.beliefbox import beliefbox_shop
 from src._world.world import worldunit_shop
 from src.gift.atom import (
     atom_update,
@@ -187,18 +187,18 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_charlink
     before_sue_worldunit.add_charunit(carm_text)
     before_sue_worldunit.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    run_beliefbox.set_charlink(charlink_shop(carm_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(carm_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    before_sue_worldunit.set_beliefunit(fly_beliefunit)
-    assert len(before_sue_worldunit.get_beliefunit(run_text)._chars) == 2
-    assert len(before_sue_worldunit.get_beliefunit(fly_text)._chars) == 3
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(rico_text))
+    fly_beliefbox.set_charlink(charlink_shop(carm_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    before_sue_worldunit.set_beliefbox(fly_beliefbox)
+    assert len(before_sue_worldunit.get_beliefbox(run_text)._chars) == 2
+    assert len(before_sue_worldunit.get_beliefbox(fly_text)._chars) == 3
 
     # WHEN
     rico_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
@@ -215,8 +215,8 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_charlink
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    assert len(after_sue_worldunit.get_beliefunit(fly_text)._chars) == 2
-    assert len(after_sue_worldunit.get_beliefunit(run_text)._chars) == 1
+    assert len(after_sue_worldunit.get_beliefbox(fly_text)._chars) == 2
+    assert len(after_sue_worldunit.get_beliefbox(run_text)._chars) == 1
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_charlink():
@@ -230,10 +230,10 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_charlink
     before_sue_worldunit.add_charunit(carm_text)
     before_sue_worldunit.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    assert len(before_sue_worldunit.get_beliefunit(run_text)._chars) == 1
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(carm_text))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    assert len(before_sue_worldunit.get_beliefbox(run_text)._chars) == 1
 
     # WHEN
     rico_atomunit = atomunit_shop("world_char_belieflink", atom_insert())
@@ -247,9 +247,9 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_charlink
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    assert len(after_sue_worldunit.get_beliefunit(run_text)._chars) == 2
-    after_run_beliefunit = after_sue_worldunit.get_beliefunit(run_text)
-    after_run_rico_charlink = after_run_beliefunit.get_charlink(rico_text)
+    assert len(after_sue_worldunit.get_beliefbox(run_text)._chars) == 2
+    after_run_beliefbox = after_sue_worldunit.get_beliefbox(run_text)
+    after_run_rico_charlink = after_run_beliefbox.get_charlink(rico_text)
     assert after_run_rico_charlink != None
     assert after_run_rico_charlink.credor_weight == rico_run_credor_weight
 
@@ -261,12 +261,12 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_charlink
     rico_text = "Rico"
     before_sue_worldunit.add_charunit(rico_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
+    run_beliefbox = beliefbox_shop(run_text)
     old_rico_run_credor_weight = 3
-    run_beliefunit.set_charlink(charlink_shop(rico_text, old_rico_run_credor_weight))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    before_run_beliefunit = before_sue_worldunit.get_beliefunit(run_text)
-    before_run_rico_charlink = before_run_beliefunit.get_charlink(rico_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text, old_rico_run_credor_weight))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    before_run_beliefbox = before_sue_worldunit.get_beliefbox(run_text)
+    before_run_rico_charlink = before_run_beliefbox.get_charlink(rico_text)
     assert before_run_rico_charlink.credor_weight == old_rico_run_credor_weight
     assert before_run_rico_charlink.debtor_weight == 1
 
@@ -284,8 +284,8 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_charlink
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    after_run_beliefunit = after_sue_worldunit.get_beliefunit(run_text)
-    after_run_rico_charlink = after_run_beliefunit.get_charlink(rico_text)
+    after_run_beliefbox = after_sue_worldunit.get_beliefbox(run_text)
+    after_run_rico_charlink = after_run_beliefbox.get_charlink(rico_text)
     assert after_run_rico_charlink.credor_weight == new_rico_run_credor_weight
     assert after_run_rico_charlink.debtor_weight == new_rico_run_debtor_weight
 
@@ -426,16 +426,16 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_awa
     before_sue_au.add_charunit(carm_text)
     before_sue_au.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    run_beliefbox.set_charlink(charlink_shop(carm_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(carm_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
-    before_sue_au.set_beliefunit(fly_beliefunit)
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(rico_text))
+    fly_beliefbox.set_charlink(charlink_shop(carm_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
+    before_sue_au.set_beliefbox(fly_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -474,9 +474,9 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_awa
     before_sue_au.add_charunit(rico_text)
     before_sue_au.add_charunit(carm_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -516,9 +516,9 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_awa
     before_sue_au.add_charunit(rico_text)
     before_sue_au.add_charunit(carm_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -1024,15 +1024,15 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     before_sue_worldunit.add_charunit(carm_text)
     before_sue_worldunit.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    run_beliefbox.set_charlink(charlink_shop(carm_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    before_sue_worldunit.set_beliefunit(fly_beliefunit)
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(rico_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    before_sue_worldunit.set_beliefbox(fly_beliefbox)
     assert before_sue_worldunit._weight != 55
     assert before_sue_worldunit._max_tree_traverse != 66
     assert before_sue_worldunit._char_credor_pool != 77
@@ -1040,8 +1040,8 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     assert before_sue_worldunit._meld_strategy != "override"
     assert before_sue_worldunit.char_exists(rico_text)
     assert before_sue_worldunit.char_exists(carm_text)
-    assert before_sue_worldunit.get_beliefunit(run_text) != None
-    assert before_sue_worldunit.get_beliefunit(fly_text) != None
+    assert before_sue_worldunit.get_beliefbox(run_text) != None
+    assert before_sue_worldunit.get_beliefbox(fly_text) != None
 
     # WHEN
     ex1_changeunit = get_changeunit_example1()

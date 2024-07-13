@@ -42,7 +42,7 @@ from src._world.reason_idea import (
     reasons_get_from_dict,
     factunits_get_from_dict,
 )
-from src._world.beliefunit import (
+from src._world.beliefbox import (
     AwardHeir,
     AwardLink,
     awardlinks_get_from_dict,
@@ -50,7 +50,7 @@ from src._world.beliefunit import (
     AwardLine,
     awardline_shop,
     awardheir_shop,
-    BeliefUnit,
+    BeliefBox,
 )
 from src._world.origin import OriginUnit, originunit_get_from_dict
 from src._world.origin import originunit_shop
@@ -858,11 +858,11 @@ class IdeaUnit:
     def set_active(
         self,
         tree_traverse_count: int,
-        world_beliefunits: dict[BeliefID, BeliefUnit] = None,
+        world_beliefboxs: dict[BeliefID, BeliefBox] = None,
         world_owner_id: CharID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active(world_beliefunits, world_owner_id)
+        self._active = self._create_active(world_beliefboxs, world_owner_id)
         self._set_idea_task()
         self.record_active_hx(
             tree_traverse_count=tree_traverse_count,
@@ -882,17 +882,17 @@ class IdeaUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active(
-        self, world_beliefunits: dict[BeliefID, BeliefUnit], world_owner_id: CharID
+        self, world_beliefboxs: dict[BeliefID, BeliefBox], world_owner_id: CharID
     ) -> bool:
         self.set_reasonheirs_status()
         x_bool = self._are_all_reasonheir_active_true()
         if (
             x_bool
-            and world_beliefunits != {}
+            and world_beliefboxs != {}
             and world_owner_id != None
             and self._cultureheir._allyholds != {}
         ):
-            self._cultureheir.set_owner_id_culture(world_beliefunits, world_owner_id)
+            self._cultureheir.set_owner_id_culture(world_beliefboxs, world_owner_id)
             if self._cultureheir._owner_id_culture is False:
                 x_bool = False
         return x_bool
@@ -1044,7 +1044,7 @@ class IdeaUnit:
     def set_cultureheir(
         self,
         parent_cultureheir: CultureHeir,
-        world_beliefs: dict[BeliefID, BeliefUnit],
+        world_beliefs: dict[BeliefID, BeliefBox],
     ):
         self._cultureheir = cultureheir_shop()
         self._cultureheir.set_allyholds(

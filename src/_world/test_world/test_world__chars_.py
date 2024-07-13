@@ -1,6 +1,6 @@
 from src._world.char import CharID, charlink_shop, charunit_shop
-from src._world.beliefunit import (
-    beliefunit_shop,
+from src._world.beliefbox import (
+    beliefbox_shop,
     awardlink_shop,
     get_intersection_of_chars,
 )
@@ -76,7 +76,7 @@ def test_WorldUnit_add_charunit_CorrectlySets_chars():
     # THEN
     assert len(yao_world._chars) == 3
     assert len(yao_world._beliefs) == 3
-    assert yao_world.get_beliefunit(rico_text)._char_mirror == True
+    assert yao_world.get_beliefbox(rico_text)._char_mirror == True
     assert yao_world._chars.get(patr_text).credor_weight == 17
     assert yao_world._chars.get(carm_text).debtor_weight == 5
     assert yao_world._chars.get(patr_text)._bit == x_bit
@@ -97,15 +97,15 @@ def test_WorldUnit_char_exists_ReturnsObj():
     assert bob_world.char_exists(yao_text)
 
 
-def test_WorldUnit_set_char_CorrectlyUpdate_char_mirror_BeliefUnit():
+def test_WorldUnit_set_char_CorrectlyUpdate_char_mirror_BeliefBox():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     rico_text = "rico"
     before_rico_credor = 7
     before_rico_debtor = 17
     yao_world.add_charunit(rico_text, before_rico_credor, before_rico_debtor)
-    rico_beliefunit = yao_world.get_beliefunit(rico_text)
-    rico_charlink = rico_beliefunit.get_charlink(rico_text)
+    rico_beliefbox = yao_world.get_beliefbox(rico_text)
+    rico_charlink = rico_beliefbox.get_charlink(rico_text)
     assert rico_charlink.credor_weight != before_rico_credor
     assert rico_charlink.debtor_weight != before_rico_debtor
     assert rico_charlink.credor_weight == 1
@@ -200,9 +200,9 @@ def test_WorldUnit_get_char_belief_ids_ReturnsCorrectObj():
 
     # WHEN / THEN
     swimmers = ",swimmers"
-    swim_belief = beliefunit_shop(belief_id=swimmers)
+    swim_belief = beliefbox_shop(belief_id=swimmers)
     swim_belief.set_charlink(charlink_shop(carm_text))
-    yao_world.set_beliefunit(swim_belief)
+    yao_world.set_beliefbox(swim_belief)
     assert yao_world.get_char_belief_ids(carm_text) == [carm_text, swimmers]
 
 
@@ -217,8 +217,8 @@ def test_WorldUnit_edit_charunit_char_id_CorrectlyModifiesCharUnit_char_id():
     assert yao_world._chars.get(rico_text) != None
     assert yao_world._chars.get(rico_text).credor_weight == 13
     assert len(yao_world._beliefs) == 3
-    assert yao_world.get_beliefunit(rico_text) != None
-    assert yao_world.get_beliefunit(rico_text)._char_mirror == True
+    assert yao_world.get_beliefbox(rico_text) != None
+    assert yao_world.get_beliefbox(rico_text)._char_mirror == True
 
     # WHEN
     beto_text = "beta"
@@ -235,9 +235,9 @@ def test_WorldUnit_edit_charunit_char_id_CorrectlyModifiesCharUnit_char_id():
     assert yao_world._chars.get(rico_text) is None
     assert len(yao_world._chars) == 3
     assert len(yao_world._beliefs) == 3
-    assert yao_world.get_beliefunit(rico_text) is None
-    assert yao_world.get_beliefunit(beto_text) != None
-    assert yao_world.get_beliefunit(beto_text)._char_mirror == True
+    assert yao_world.get_beliefbox(rico_text) is None
+    assert yao_world.get_beliefbox(beto_text) != None
+    assert yao_world.get_beliefbox(beto_text)._char_mirror == True
 
 
 def test_WorldUnit_CharUnit_raiseErrorNewchar_idPreviouslyExists():
@@ -252,8 +252,8 @@ def test_WorldUnit_CharUnit_raiseErrorNewchar_idPreviouslyExists():
     assert yao_world._chars.get(rico_text) != None
     assert yao_world._chars.get(rico_text).credor_weight == 13
     assert len(yao_world._beliefs) == 3
-    assert yao_world.get_beliefunit(rico_text) != None
-    assert yao_world.get_beliefunit(rico_text)._char_mirror == True
+    assert yao_world.get_beliefbox(rico_text) != None
+    assert yao_world.get_beliefbox(rico_text)._char_mirror == True
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -269,7 +269,7 @@ def test_WorldUnit_CharUnit_raiseErrorNewchar_idPreviouslyExists():
     )
 
 
-def test_WorldUnit_CharUnit_CorrectlyModifiesBeliefUnitCharLinks():
+def test_WorldUnit_CharUnit_CorrectlyModifiesBeliefBoxCharLinks():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     rico_text = "rico"
@@ -281,16 +281,16 @@ def test_WorldUnit_CharUnit_CorrectlyModifiesBeliefUnitCharLinks():
 
     swim_text = ",swimmers"
     carmen_char_dict = {CharID(carm_text): charlink_shop(carm_text)}
-    swim_belief = beliefunit_shop(belief_id=swim_text, _chars=carmen_char_dict)
+    swim_belief = beliefbox_shop(belief_id=swim_text, _chars=carmen_char_dict)
     swim_belief.set_charlink(
         charlink_shop(carm_text, credor_weight=5, debtor_weight=18)
     )
     swim_belief.set_charlink(
         charlink_shop(rico_text, credor_weight=7, debtor_weight=30)
     )
-    yao_world.set_beliefunit(y_beliefunit=swim_belief)
+    yao_world.set_beliefbox(y_beliefbox=swim_belief)
 
-    swim_belief = yao_world.get_beliefunit(swim_text)
+    swim_belief = yao_world.get_beliefbox(swim_text)
     assert len(swim_belief._chars) == 2
     assert swim_belief.get_charlink(rico_text) != None
     assert swim_belief.get_charlink(rico_text).credor_weight == 7
@@ -325,14 +325,14 @@ def test_WorldUnit_CharUnit_CorrectlyMergeschar_ids():
 
     swim_text = ",swimmers"
     carmen_char_dict = {CharID(carm_text): charlink_shop(carm_text)}
-    swim_belief = beliefunit_shop(belief_id=swim_text, _chars=carmen_char_dict)
+    swim_belief = beliefbox_shop(belief_id=swim_text, _chars=carmen_char_dict)
     swim_belief.set_charlink(
         charlink=charlink_shop(carm_text, credor_weight=5, debtor_weight=18)
     )
     swim_belief.set_charlink(
         charlink=charlink_shop(rico_text, credor_weight=7, debtor_weight=30)
     )
-    yao_world.set_beliefunit(y_beliefunit=swim_belief)
+    yao_world.set_beliefbox(y_beliefbox=swim_belief)
 
     assert len(yao_world._chars) == 3
     assert yao_world._chars.get(rico_text) != None
@@ -355,7 +355,7 @@ def test_WorldUnit_CharUnit_CorrectlyMergeschar_ids():
     assert len(yao_world._chars) == 2
 
 
-def test_WorldUnit_CharUnit_CorrectlyMergesBeliefUnitCharLinks():
+def test_WorldUnit_CharUnit_CorrectlyMergesBeliefBoxCharLinks():
     # GIVEN
     # GIVEN
     yao_world = worldunit_shop("Yao")
@@ -368,16 +368,16 @@ def test_WorldUnit_CharUnit_CorrectlyMergesBeliefUnitCharLinks():
 
     swim_text = ",swimmers"
     carmen_char_dict = {CharID(carm_text): charlink_shop(carm_text)}
-    swim_belief = beliefunit_shop(belief_id=swim_text, _chars=carmen_char_dict)
+    swim_belief = beliefbox_shop(belief_id=swim_text, _chars=carmen_char_dict)
     swim_belief.set_charlink(
         charlink=charlink_shop(carm_text, credor_weight=5, debtor_weight=18)
     )
     swim_belief.set_charlink(
         charlink=charlink_shop(rico_text, credor_weight=7, debtor_weight=30)
     )
-    yao_world.set_beliefunit(y_beliefunit=swim_belief)
+    yao_world.set_beliefbox(y_beliefbox=swim_belief)
 
-    swim_belief = yao_world.get_beliefunit(swim_text)
+    swim_belief = yao_world.get_beliefbox(swim_text)
     assert len(swim_belief._chars) == 2
     assert swim_belief.get_charlink(rico_text) != None
     assert swim_belief.get_charlink(rico_text).credor_weight == 7
@@ -402,7 +402,7 @@ def test_WorldUnit_CharUnit_CorrectlyMergesBeliefUnitCharLinks():
     assert len(swim_belief._chars) == 1
 
 
-def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefUnitPreviouslyExists():
+def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefBoxPreviouslyExists():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     rico_text = "rico"
@@ -410,14 +410,14 @@ def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefUnitPreviouslyExists():
     anna_text = "anna"
     yao_world.add_charunit(anna_text, credor_weight=17)
     carmen_text = ",carmen"
-    carmen_belief = beliefunit_shop(belief_id=carmen_text)
+    carmen_belief = beliefbox_shop(belief_id=carmen_text)
     carmen_belief.set_charlink(charlink=charlink_shop(rico_text))
     carmen_belief.set_charlink(charlink=charlink_shop(anna_text))
-    yao_world.set_beliefunit(y_beliefunit=carmen_belief)
+    yao_world.set_beliefbox(y_beliefbox=carmen_belief)
     assert len(yao_world._beliefs) == 3
     assert yao_world._chars.get(carmen_text) is None
-    assert yao_world.get_beliefunit(carmen_text)._char_mirror is False
-    assert len(yao_world.get_beliefunit(carmen_text)._chars) == 2
+    assert yao_world.get_beliefbox(carmen_text)._char_mirror is False
+    assert len(yao_world.get_beliefbox(carmen_text)._chars) == 2
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -433,7 +433,7 @@ def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefUnitPreviouslyExists():
     )
 
 
-# def test_WorldUnit_CharUnit_CorrectlyOverwriteNewCharIDBeliefUnit():
+# def test_WorldUnit_CharUnit_CorrectlyOverwriteNewCharIDBeliefBox():
 #     # GIVEN
 #     yao_world = worldunit_shop("Yao")
 #     rico_text = "rico"
@@ -441,25 +441,25 @@ def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefUnitPreviouslyExists():
 #     anna_text = "anna"
 #     yao_world.add_charunit(anna_text, credor_weight=17)
 #     carmen_text = ",carmen"
-#     carmen_belief = beliefunit_shop(belief_id=carmen_text)
+#     carmen_belief = beliefbox_shop(belief_id=carmen_text)
 #     carmen_belief.set_charlink(
 #         charlink=charlink_shop(rico_text, credor_weight=3)
 #     )
 #     carmen_belief.set_charlink(
 #         charlink=charlink_shop(anna_text, credor_weight=5)
 #     )
-#     yao_world.set_beliefunit(y_beliefunit=carmen_belief)
+#     yao_world.set_beliefbox(y_beliefbox=carmen_belief)
 #     assert len(yao_world._beliefs) == 3
 #     assert yao_world._chars.get(rico_text) != None
 #     assert yao_world._chars.get(carmen_text) is None
-#     assert yao_world.get_beliefunit(carmen_text)._char_mirror is False
-#     assert len(yao_world.get_beliefunit(carmen_text)._chars) == 2
+#     assert yao_world.get_beliefbox(carmen_text)._char_mirror is False
+#     assert len(yao_world.get_beliefbox(carmen_text)._chars) == 2
 #     assert (
-#         yao_world.get_beliefunit(carmen_text)._chars.get(anna_text).credor_weight
+#         yao_world.get_beliefbox(carmen_text)._chars.get(anna_text).credor_weight
 #         == 5
 #     )
 #     assert (
-#         yao_world.get_beliefunit(carmen_text)._chars.get(rico_text).credor_weight
+#         yao_world.get_beliefbox(carmen_text)._chars.get(rico_text).credor_weight
 #         == 3
 #     )
 
@@ -474,11 +474,11 @@ def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefUnitPreviouslyExists():
 #     assert len(yao_world._beliefs) == 2
 #     assert yao_world._chars.get(rico_text) is None
 #     assert yao_world._chars.get(carmen_text) != None
-#     assert yao_world.get_beliefunit(carmen_text)._char_mirror == True
-#     assert len(yao_world.get_beliefunit(carmen_text)._chars) == 1
-#     assert yao_world.get_beliefunit(carmen_text)._chars.get(rico_text) is None
+#     assert yao_world.get_beliefbox(carmen_text)._char_mirror == True
+#     assert len(yao_world.get_beliefbox(carmen_text)._chars) == 1
+#     assert yao_world.get_beliefbox(carmen_text)._chars.get(rico_text) is None
 #     assert (
-#         yao_world.get_beliefunit(carmen_text)._chars.get(carmen_text).credor_weight
+#         yao_world.get_beliefbox(carmen_text)._chars.get(carmen_text).credor_weight
 #         == 1
 #     )
 
@@ -493,9 +493,9 @@ def test_WorldUnit_get_charunits_char_id_list_ReturnsListOfCharUnits():
     noa_world.set_charunit(charunit=charunit_shop(will_text))
     noa_world.set_charunit(charunit=charunit_shop(fry_text))
     fun_text = ",fun people"
-    fun_belief = beliefunit_shop(belief_id=fun_text)
+    fun_belief = beliefbox_shop(belief_id=fun_text)
     fun_belief.set_charlink(charlink=charlink_shop(will_text))
-    noa_world.set_beliefunit(y_beliefunit=fun_belief)
+    noa_world.set_beliefbox(y_beliefbox=fun_belief)
     assert len(noa_world._beliefs) == 4
     assert len(noa_world._chars) == 3
 

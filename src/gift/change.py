@@ -134,9 +134,9 @@ class ChangeUnit:
         self, before_world: WorldUnit, after_world: WorldUnit
     ):
         before_world.calc_world_metrics()
-        before_world._migrate_beliefunits_to_belieflinks()
+        before_world._migrate_beliefboxs_to_belieflinks()
         after_world.calc_world_metrics()
-        after_world._migrate_beliefunits_to_belieflinks()
+        after_world._migrate_beliefboxs_to_belieflinks()
         self.add_atomunits_worldunit_simple_attrs(before_world, after_world)
         self.add_atomunits_chars(before_world, after_world)
         self.add_atomunits_ideas(before_world, after_world)
@@ -237,7 +237,7 @@ class ChangeUnit:
                         "debtor_weight", after_charunit.debtor_weight
                     )
                 self.set_atomunit(x_atomunit)
-            self.add_atomunit_beliefunit_update_belieflinks(
+            self.add_atomunit_beliefbox_update_belieflinks(
                 after_charunit=after_charunit, before_charunit=before_charunit
             )
 
@@ -256,7 +256,7 @@ class ChangeUnit:
             }
             self.add_atomunit_belieflinks_delete(delete_char_id, non_mirror_belief_ids)
 
-    def add_atomunit_beliefunit_update_belieflinks(
+    def add_atomunit_beliefbox_update_belieflinks(
         self, after_charunit: CharUnit, before_charunit: CharUnit
     ):
         # before_non_mirror_belief_ids

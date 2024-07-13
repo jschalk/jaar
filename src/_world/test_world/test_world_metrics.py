@@ -1,7 +1,7 @@
 from src._road.finance import default_bud_pool
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
-from src._world.beliefunit import BeliefID, awardlink_shop
+from src._world.beliefbox import BeliefID, awardlink_shop
 from src._world.world import worldunit_shop
 from src._world.healer import healerhold_shop
 from src._world.examples.example_worlds import (
@@ -89,12 +89,12 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     assert awardlink_carm.belief_id == carm_text
     assert awardlink_patr.belief_id == patr_text
     all_beliefs = zia_world._beliefs
-    beliefunit_rico = all_beliefs[rico_text]
-    beliefunit_carm = all_beliefs[carm_text]
-    beliefunit_patr = all_beliefs[patr_text]
-    assert beliefunit_rico._char_mirror == True
-    assert beliefunit_carm._char_mirror == True
-    assert beliefunit_patr._char_mirror == True
+    beliefbox_rico = all_beliefs[rico_text]
+    beliefbox_carm = all_beliefs[carm_text]
+    beliefbox_patr = all_beliefs[patr_text]
+    assert beliefbox_rico._char_mirror == True
+    assert beliefbox_carm._char_mirror == True
+    assert beliefbox_patr._char_mirror == True
 
 
 def _check_all_objects_in_dict_are_correct_type(x_dict: dict, type_str: str) -> bool:

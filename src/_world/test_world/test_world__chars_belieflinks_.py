@@ -1,22 +1,22 @@
 from src._world.char import charlink_shop
 from src._world.belieflink import belieflink_shop
-from src._world.beliefunit import beliefunit_shop
+from src._world.beliefbox import beliefbox_shop
 from src._world.world import worldunit_shop
 
 
-def test_WorldUnit_migrate_beliefunits_to_belieflinks_MigratesEmptySet():
+def test_WorldUnit_migrate_beliefboxs_to_belieflinks_MigratesEmptySet():
     # GIVEN
     bob_world = worldunit_shop("Bob")
     assert bob_world._chars == {}
 
     # WHEN
-    bob_world._migrate_beliefunits_to_belieflinks()
+    bob_world._migrate_beliefboxs_to_belieflinks()
 
     # THEN
     assert bob_world._chars == {}
 
 
-def test_WorldUnit_migrate_beliefunits_to_belieflinks_Migrates_charlinks_Without_credor_weight():
+def test_WorldUnit_migrate_beliefboxs_to_belieflinks_Migrates_charlinks_Without_credor_weight():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
@@ -26,25 +26,25 @@ def test_WorldUnit_migrate_beliefunits_to_belieflinks_Migrates_charlinks_Without
     bob_world.add_charunit(sue_text)
     bob_world.add_charunit(zia_text)
     run_text = ",Run"
-    bob_world.set_beliefunit(beliefunit_shop(run_text))
-    run_beliefunit = bob_world.get_beliefunit(run_text)
-    run_beliefunit.set_charlink(charlink_shop(sue_text))
-    run_beliefunit.set_charlink(charlink_shop(zia_text))
-    assert len(bob_world.get_beliefunit(yao_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(sue_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(zia_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 2
+    bob_world.set_beliefbox(beliefbox_shop(run_text))
+    run_beliefbox = bob_world.get_beliefbox(run_text)
+    run_beliefbox.set_charlink(charlink_shop(sue_text))
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
+    assert len(bob_world.get_beliefbox(yao_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(sue_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(zia_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 2
     assert len(bob_world.get_char(yao_text)._belieflinks) == 0
     assert len(bob_world.get_char(sue_text)._belieflinks) == 0
 
     # WHEN
-    bob_world._migrate_beliefunits_to_belieflinks()
+    bob_world._migrate_beliefboxs_to_belieflinks()
 
     # THEN
-    assert len(bob_world.get_beliefunit(yao_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(sue_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(zia_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 2
+    assert len(bob_world.get_beliefbox(yao_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(sue_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(zia_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 2
     assert len(bob_world.get_char(yao_text)._belieflinks) == 1
     assert len(bob_world.get_char(sue_text)._belieflinks) == 2
     assert len(bob_world.get_char(zia_text)._belieflinks) == 2
@@ -53,21 +53,21 @@ def test_WorldUnit_migrate_beliefunits_to_belieflinks_Migrates_charlinks_Without
     assert yao_charunit.get_belieflink(yao_text) == yao_belieflink
 
     # GIVEN
-    run_beliefunit.del_charlink(zia_text)
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 1
+    run_beliefbox.del_charlink(zia_text)
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 1
 
     # WHEN
-    bob_world._migrate_beliefunits_to_belieflinks()
+    bob_world._migrate_beliefboxs_to_belieflinks()
 
     # THEN
-    assert len(bob_world.get_beliefunit(sue_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(zia_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(sue_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(zia_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 1
     assert len(bob_world.get_char(sue_text)._belieflinks) == 2
     assert len(bob_world.get_char(zia_text)._belieflinks) == 1
 
 
-def test_WorldUnit_migrate_beliefunits_to_belieflinks_Migrates_charlinks_With_credor_weight():
+def test_WorldUnit_migrate_beliefboxs_to_belieflinks_Migrates_charlinks_With_credor_weight():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
@@ -77,8 +77,8 @@ def test_WorldUnit_migrate_beliefunits_to_belieflinks_Migrates_charlinks_With_cr
     bob_world.add_charunit(sue_text)
     bob_world.add_charunit(zia_text)
     run_text = ",Run"
-    bob_world.set_beliefunit(beliefunit_shop(run_text))
-    run_beliefunit = bob_world.get_beliefunit(run_text)
+    bob_world.set_beliefbox(beliefbox_shop(run_text))
+    run_beliefbox = bob_world.get_beliefbox(run_text)
     sue_run_credor_weight = 11
     sue_run_debtor_weight = 13
     zia_run_credor_weight = 17
@@ -89,14 +89,14 @@ def test_WorldUnit_migrate_beliefunits_to_belieflinks_Migrates_charlinks_With_cr
     zia_run_charlink = charlink_shop(
         zia_text, zia_run_credor_weight, zia_run_debtor_weight
     )
-    run_beliefunit.set_charlink(sue_run_charlink)
-    run_beliefunit.set_charlink(zia_run_charlink)
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 2
+    run_beliefbox.set_charlink(sue_run_charlink)
+    run_beliefbox.set_charlink(zia_run_charlink)
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 2
     assert len(bob_world.get_char(yao_text)._belieflinks) == 0
     assert len(bob_world.get_char(sue_text)._belieflinks) == 0
 
     # WHEN
-    bob_world._migrate_beliefunits_to_belieflinks()
+    bob_world._migrate_beliefboxs_to_belieflinks()
 
     # THEN
     assert len(bob_world.get_char(sue_text)._belieflinks) == 2
@@ -111,21 +111,21 @@ def test_WorldUnit_migrate_beliefunits_to_belieflinks_Migrates_charlinks_With_cr
     assert zia_belieflink.debtor_weight == zia_run_debtor_weight
 
 
-def test_WorldUnit_migrate_belieflinks_to_beliefunits_MigratesEmptySet():
+def test_WorldUnit_migrate_belieflinks_to_beliefboxs_MigratesEmptySet():
     # GIVEN
     bob_world = worldunit_shop("Bob")
     assert bob_world._chars == {}
     assert bob_world._beliefs == {}
 
     # WHEN
-    bob_world._migrate_belieflinks_to_beliefunits()
+    bob_world._migrate_belieflinks_to_beliefboxs()
 
     # THEN
     assert bob_world._chars == {}
     assert bob_world._beliefs == {}
 
 
-def test_WorldUnit_migrate_belieflinks_to_beliefunits_Migrates_charlinks_Without_credor_weight():
+def test_WorldUnit_migrate_belieflinks_to_beliefboxs_Migrates_charlinks_Without_credor_weight():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
@@ -150,25 +150,25 @@ def test_WorldUnit_migrate_belieflinks_to_beliefunits_Migrates_charlinks_Without
     assert set(bob_world._beliefs.keys()) == {yao_text, sue_text, zia_text}
 
     # WHEN
-    bob_world._migrate_belieflinks_to_beliefunits()
+    bob_world._migrate_belieflinks_to_beliefboxs()
 
     # THEN
-    assert len(bob_world.get_beliefunit(yao_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(sue_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(zia_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 2
+    assert len(bob_world.get_beliefbox(yao_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(sue_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(zia_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 2
     assert len(bob_world.get_char(yao_text)._belieflinks) == 0
     assert len(bob_world.get_char(sue_text)._belieflinks) == 0
     assert len(bob_world.get_char(zia_text)._belieflinks) == 0
 
-    run_beliefunit = bob_world.get_beliefunit(run_text)
-    assert run_beliefunit._chars.get(zia_text) == charlink_shop(zia_text)
-    assert run_beliefunit._chars.get(sue_text) == charlink_shop(sue_text)
+    run_beliefbox = bob_world.get_beliefbox(run_text)
+    assert run_beliefbox._chars.get(zia_text) == charlink_shop(zia_text)
+    assert run_beliefbox._chars.get(sue_text) == charlink_shop(sue_text)
     yao_charunit = bob_world.get_char(yao_text)
     assert yao_charunit.get_belieflink(yao_text) is None
 
 
-def test_WorldUnit_migrate_belieflinks_to_beliefunits_Migrates_charlinks_With_credor_weight():
+def test_WorldUnit_migrate_belieflinks_to_beliefboxs_Migrates_charlinks_With_credor_weight():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
@@ -203,13 +203,13 @@ def test_WorldUnit_migrate_belieflinks_to_beliefunits_Migrates_charlinks_With_cr
     assert set(bob_world._beliefs.keys()) == {yao_text, sue_text, zia_text}
 
     # WHEN
-    bob_world._migrate_belieflinks_to_beliefunits()
+    bob_world._migrate_belieflinks_to_beliefboxs()
 
     # THEN
-    assert len(bob_world.get_beliefunit(yao_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(sue_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(zia_text)._chars) == 1
-    assert len(bob_world.get_beliefunit(run_text)._chars) == 2
+    assert len(bob_world.get_beliefbox(yao_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(sue_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(zia_text)._chars) == 1
+    assert len(bob_world.get_beliefbox(run_text)._chars) == 2
     assert len(bob_world.get_char(yao_text)._belieflinks) == 0
     assert len(bob_world.get_char(sue_text)._belieflinks) == 0
     assert len(bob_world.get_char(zia_text)._belieflinks) == 0
@@ -220,10 +220,10 @@ def test_WorldUnit_migrate_belieflinks_to_beliefunits_Migrates_charlinks_With_cr
     static_zia_run_charlink = charlink_shop(
         zia_text, zia_run_credor_weight, zia_run_debtor_weight
     )
-    run_beliefunit = bob_world.get_beliefunit(run_text)
-    assert run_beliefunit._chars.get(zia_text) != None
-    assert run_beliefunit._chars.get(sue_text) != None
-    gen_zia_run_charlink = run_beliefunit._chars.get(zia_text)
-    gen_sue_run_charlink = run_beliefunit._chars.get(sue_text)
+    run_beliefbox = bob_world.get_beliefbox(run_text)
+    assert run_beliefbox._chars.get(zia_text) != None
+    assert run_beliefbox._chars.get(sue_text) != None
+    gen_zia_run_charlink = run_beliefbox._chars.get(zia_text)
+    gen_sue_run_charlink = run_beliefbox._chars.get(sue_text)
     assert gen_sue_run_charlink == static_sue_run_charlink
     assert gen_zia_run_charlink == static_zia_run_charlink

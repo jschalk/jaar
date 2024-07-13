@@ -1,6 +1,6 @@
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefunit import beliefunit_shop
+from src._world.beliefbox import beliefbox_shop
 from src._world.char import charunit_shop, charlink_shop
 from src._world.origin import originunit_shop
 from pytest import raises as pytest_raises
@@ -93,23 +93,23 @@ def test_WorldUnit_meld_CharUnits_ignore_charunits_ReturnsCorrectObj():
     assert bob1_world.char_exists(zia_text) is False
 
 
-def test_WorldUnit_meld_BeliefUnits_WhereBeliefUnitIsMissing():
+def test_WorldUnit_meld_BeliefBoxs_WhereBeliefBoxIsMissing():
     # GIVEN
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(belief_id=run_text)
+    run_beliefbox = beliefbox_shop(belief_id=run_text)
 
     bob_text = "Bob"
     bob1_world = worldunit_shop(bob_text)
-    bob1_world.set_beliefunit(run_beliefunit)
+    bob1_world.set_beliefbox(run_beliefbox)
 
     bob2_world = worldunit_shop(bob_text)
-    bob2_world.set_beliefunit(run_beliefunit)
+    bob2_world.set_beliefbox(run_beliefbox)
     swim_text = ",swimmers"
-    swim_beliefunit = beliefunit_shop(belief_id=swim_text)
-    bob2_world.set_beliefunit(swim_beliefunit)
+    swim_beliefbox = beliefbox_shop(belief_id=swim_text)
+    bob2_world.set_beliefbox(swim_beliefbox)
     assert len(bob1_world._beliefs) == 1
-    assert bob1_world.get_beliefunit(run_text) != None
-    assert bob1_world.get_beliefunit(swim_text) is None
+    assert bob1_world.get_beliefbox(run_text) != None
+    assert bob1_world.get_beliefbox(swim_text) is None
 
     # WHEN
     bob1_world.meld(exterior_world=bob2_world)
@@ -119,11 +119,11 @@ def test_WorldUnit_meld_BeliefUnits_WhereBeliefUnitIsMissing():
     #     print(f"bob1_world {x_belief_id.char_id=}")
 
     assert len(bob1_world._beliefs) == 2
-    assert bob1_world.get_beliefunit(run_text) != None
-    assert bob1_world.get_beliefunit(swim_text) != None
+    assert bob1_world.get_beliefbox(run_text) != None
+    assert bob1_world.get_beliefbox(swim_text) != None
 
 
-def test_WorldUnit_meld_BeliefUnits_WhereBeliefUnitMembershipIsDifferent():
+def test_WorldUnit_meld_BeliefBoxs_WhereBeliefBoxMembershipIsDifferent():
     # GIVEN
 
     bob_text = "Bob"
@@ -132,25 +132,25 @@ def test_WorldUnit_meld_BeliefUnits_WhereBeliefUnitMembershipIsDifferent():
     bob1_world.set_charunit(charunit_shop(sue_text))
 
     run_text = ",runners"
-    bob1_world.set_beliefunit(beliefunit_shop(run_text))
-    bob1_world.get_beliefunit(run_text).set_charlink(charlink_shop(sue_text))
+    bob1_world.set_beliefbox(beliefbox_shop(run_text))
+    bob1_world.get_beliefbox(run_text).set_charlink(charlink_shop(sue_text))
 
     bob2_world = worldunit_shop(bob_text)
     yao_text = "Yao"
     bob2_world.set_charunit(charunit_shop(yao_text))
     bob2_world.set_charunit(charunit_shop(sue_text))
-    bob2_world.set_beliefunit(beliefunit_shop(run_text))
-    bob2_world.get_beliefunit(run_text).set_charlink(charlink_shop(yao_text))
-    bob2_world.get_beliefunit(run_text).set_charlink(charlink_shop(sue_text))
+    bob2_world.set_beliefbox(beliefbox_shop(run_text))
+    bob2_world.get_beliefbox(run_text).set_charlink(charlink_shop(yao_text))
+    bob2_world.get_beliefbox(run_text).set_charlink(charlink_shop(sue_text))
     assert len(bob1_world._beliefs) == 2
-    assert len(bob1_world.get_beliefunit(run_text)._chars) == 1
+    assert len(bob1_world.get_beliefbox(run_text)._chars) == 1
 
     # WHEN
     bob1_world.meld(exterior_world=bob2_world)
 
     # THEN
     assert len(bob1_world._beliefs) == 3
-    assert len(bob1_world.get_beliefunit(run_text)._chars) == 2
+    assert len(bob1_world.get_beliefbox(run_text)._chars) == 2
 
 
 def test_WorldUnit_idearoot_meld_idearoot_AttrCorrectlyMelded():
@@ -342,8 +342,8 @@ def test_WorldUnit_meld_BeliefsMeldedBefore_Chars():
     yao2_world = worldunit_shop(yao_text)
     bob_text = "Bob"
     yao2_world.set_charunit(charunit_shop(bob_text))
-    assert yao2_world.get_beliefunit(bob_text) != None
-    yao2_world.set_beliefunit(beliefunit_shop(bob_text, _char_mirror=True))
+    assert yao2_world.get_beliefbox(bob_text) != None
+    yao2_world.set_beliefbox(beliefbox_shop(bob_text, _char_mirror=True))
 
     # WHEN/THEN
     assert yao1_world.meld(yao2_world) is None  # No error raised

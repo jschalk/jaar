@@ -1,4 +1,4 @@
-from src._world.beliefunit import beliefunit_shop, awardlink_shop
+from src._world.beliefbox import beliefbox_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import factunit_shop
@@ -194,14 +194,14 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_belieflink
     after_sue_world.add_charunit(yao_text)
     after_sue_world.add_charunit(zia_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
+    run_beliefbox = beliefbox_shop(run_text)
     yao_run_credor_weight = 77
     yao_run_debtor_weight = 88
     yao_charlink = charlink_shop(yao_text, yao_run_credor_weight, yao_run_debtor_weight)
-    run_beliefunit.set_charlink(yao_charlink)
-    run_beliefunit.set_charlink(charlink_shop(zia_text))
-    after_sue_world.set_beliefunit(run_beliefunit)
-    # print(f"{after_sue_world.get_beliefunit(run_text)=}")
+    run_beliefbox.set_charlink(yao_charlink)
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
+    after_sue_world.set_beliefbox(run_beliefbox)
+    # print(f"{after_sue_world.get_beliefbox(run_text)=}")
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -242,19 +242,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_belieflink
     before_sue_world.add_charunit(rico_text)
     before_sue_world.add_charunit(zia_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
+    run_beliefbox = beliefbox_shop(run_text)
     before_rico_credor_weight = 77
     before_rico_debtor_weight = 88
-    run_beliefunit.set_charlink(
+    run_beliefbox.set_charlink(
         charlink_shop(rico_text, before_rico_credor_weight, before_rico_debtor_weight)
     )
-    run_beliefunit.set_charlink(charlink_shop(zia_text))
-    before_sue_world.set_beliefunit(run_beliefunit)
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
+    before_sue_world.set_beliefbox(run_beliefbox)
     after_sue_world = copy_deepcopy(before_sue_world)
-    after_run_beliefunit = after_sue_world.get_beliefunit(run_text)
+    after_run_beliefbox = after_sue_world.get_beliefbox(run_text)
     after_rico_credor_weight = 55
     after_rico_debtor_weight = 66
-    after_run_beliefunit.edit_charlink(
+    after_run_beliefbox.edit_charlink(
         rico_text, after_rico_credor_weight, after_rico_debtor_weight
     )
 
@@ -263,7 +263,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_belieflink
     sue_changeunit.add_all_different_atomunits(before_sue_world, after_sue_world)
 
     # THEN
-    # x_keylist = [atom_update(), "world_beliefunit", run_text]
+    # x_keylist = [atom_update(), "world_beliefbox", run_text]
     # rico_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     # assert rico_atomunit.get_value("belief_id") == run_text
     # print(f"\n{sue_changeunit.atomunits=}")
@@ -291,24 +291,24 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_belieflink
     before_sue_world.add_charunit(zia_text)
     before_sue_world.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(zia_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(zia_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_world.set_beliefunit(run_beliefunit)
-    before_sue_world.set_beliefunit(fly_beliefunit)
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(rico_text))
+    fly_beliefbox.set_charlink(charlink_shop(zia_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_world.set_beliefbox(run_beliefbox)
+    before_sue_world.set_beliefbox(fly_beliefbox)
     after_sue_world = copy_deepcopy(before_sue_world)
-    after_sue_world.del_beliefunit(run_text)
-    after_fly_beliefunit = after_sue_world.get_beliefunit(fly_text)
-    after_fly_beliefunit.del_charlink(dizz_text)
-    assert len(before_sue_world.get_beliefunit(fly_text)._chars) == 3
-    assert len(before_sue_world.get_beliefunit(run_text)._chars) == 2
-    assert len(after_sue_world.get_beliefunit(fly_text)._chars) == 2
-    assert after_sue_world.get_beliefunit(run_text) is None
+    after_sue_world.del_beliefbox(run_text)
+    after_fly_beliefbox = after_sue_world.get_beliefbox(fly_text)
+    after_fly_beliefbox.del_charlink(dizz_text)
+    assert len(before_sue_world.get_beliefbox(fly_text)._chars) == 3
+    assert len(before_sue_world.get_beliefbox(run_text)._chars) == 2
+    assert len(after_sue_world.get_beliefbox(fly_text)._chars) == 2
+    assert after_sue_world.get_beliefbox(run_text) is None
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -511,16 +511,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.add_charunit(zia_text)
     before_sue_au.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(zia_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(zia_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
-    before_sue_au.set_beliefunit(fly_beliefunit)
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(rico_text))
+    fly_beliefbox.set_charlink(charlink_shop(zia_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
+    before_sue_au.set_beliefbox(fly_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -563,16 +563,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.add_charunit(zia_text)
     before_sue_au.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(zia_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(zia_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
-    before_sue_au.set_beliefunit(fly_beliefunit)
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(rico_text))
+    fly_beliefbox.set_charlink(charlink_shop(zia_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
+    before_sue_au.set_beliefbox(fly_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -624,9 +624,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.add_charunit(rico_text)
     before_sue_au.add_charunit(zia_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(rico_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"

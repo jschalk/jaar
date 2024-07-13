@@ -5,7 +5,7 @@ from src._world.reason_culture import (
     cultureheir_shop,
     create_cultureunit,
 )
-from src._world.beliefunit import BeliefID, beliefunit_shop
+from src._world.beliefbox import BeliefID, beliefbox_shop
 from src._world.char import charlink_shop
 from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
@@ -175,10 +175,10 @@ def test_CultureHeir_get_all_suff_chars_ReturnsSingleDictWithAllChars_v2():
     x_world.add_charunit(char_id=bob_text)
 
     swim_text = ",swim"
-    swim_belief = beliefunit_shop(belief_id=swim_text)
+    swim_belief = beliefbox_shop(belief_id=swim_text)
     swim_belief.set_charlink(charlink=charlink_shop(char_id=jim_text))
     swim_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefunit(y_beliefunit=swim_belief)
+    x_world.set_beliefbox(y_beliefbox=swim_belief)
 
     x_allyholds = {swim_text}
     x_cultureheir = cultureheir_shop(_allyholds=x_allyholds)
@@ -265,10 +265,10 @@ def test_CultureHeir_set_owner_id_culture_CorrectlySetsAttribute_NonEmptyx_allyh
     x_world.add_charunit(char_id=bob_text)
 
     swim_text = ",swim"
-    swim_belief = beliefunit_shop(belief_id=swim_text)
+    swim_belief = beliefbox_shop(belief_id=swim_text)
     swim_belief.set_charlink(charlink=charlink_shop(char_id=jim_text))
     swim_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefunit(y_beliefunit=swim_belief)
+    x_world.set_beliefbox(y_beliefbox=swim_belief)
 
     x_allyholds = {swim_text}
     x_cultureheir = cultureheir_shop(_allyholds=x_allyholds)
@@ -278,7 +278,7 @@ def test_CultureHeir_set_owner_id_culture_CorrectlySetsAttribute_NonEmptyx_allyh
 
     # WHEN
     swim_belief.del_charlink(char_id=jim_text)
-    x_world.set_beliefunit(y_beliefunit=swim_belief)
+    x_world.set_beliefbox(y_beliefbox=swim_belief)
     x_cultureheir.set_owner_id_culture(x_world._beliefs, x_world._owner_id)
 
     # THEN
@@ -296,10 +296,10 @@ def test_CultureHeir_set__CorrectlySetsAttribute_NonEmptyx_allyholds_v3():
     x_world.add_charunit(char_id=bob_text)
 
     swim_text = ",swim"
-    swim_belief = beliefunit_shop(belief_id=swim_text)
+    swim_belief = beliefbox_shop(belief_id=swim_text)
     swim_belief.set_charlink(charlink=charlink_shop(char_id=jim_text))
     swim_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefunit(y_beliefunit=swim_belief)
+    x_world.set_beliefbox(y_beliefbox=swim_belief)
 
     x_allyholds = {swim_text}
     x_cultureheir = cultureheir_shop(_allyholds=x_allyholds)
@@ -309,7 +309,7 @@ def test_CultureHeir_set__CorrectlySetsAttribute_NonEmptyx_allyholds_v3():
 
     # WHEN
     swim_belief.del_charlink(char_id=jim_text)
-    x_world.set_beliefunit(y_beliefunit=swim_belief)
+    x_world.set_beliefbox(y_beliefbox=swim_belief)
     x_cultureheir.set_owner_id_culture(x_world._beliefs, x_world._owner_id)
 
     # THEN
@@ -436,17 +436,17 @@ def test_CultureHeir_set_allyhold_CultureUnit_NotEqual_ParentCultureHeir_NonEmpt
     x_world.add_charunit(char_id=tom_text)
 
     swim2_text = ",swim2"
-    swim2_belief = beliefunit_shop(belief_id=swim2_text)
+    swim2_belief = beliefbox_shop(belief_id=swim2_text)
     swim2_belief.set_charlink(charlink=charlink_shop(char_id=jim_text))
     swim2_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefunit(y_beliefunit=swim2_belief)
+    x_world.set_beliefbox(y_beliefbox=swim2_belief)
 
     swim3_text = ",swim3"
-    swim3_belief = beliefunit_shop(belief_id=swim3_text)
+    swim3_belief = beliefbox_shop(belief_id=swim3_text)
     swim3_belief.set_charlink(charlink=charlink_shop(char_id=jim_text))
     swim3_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
     swim3_belief.set_charlink(charlink=charlink_shop(char_id=tom_text))
-    x_world.set_beliefunit(y_beliefunit=swim3_belief)
+    x_world.set_beliefbox(y_beliefbox=swim3_belief)
 
     parent_cultureunit = cultureunit_shop()
     parent_cultureunit.set_allyhold(belief_id=swim3_text)
@@ -483,17 +483,17 @@ def test_CultureHeir_set_allyhold_CultureUnit_NotEqualParentCultureHeir_RaisesEr
     x_world.add_charunit(char_id=tom_text)
 
     swim2_text = ",swim2"
-    swim2_belief = beliefunit_shop(belief_id=swim2_text)
+    swim2_belief = beliefbox_shop(belief_id=swim2_text)
     swim2_belief.set_charlink(charlink=charlink_shop(char_id=jim_text))
     swim2_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefunit(y_beliefunit=swim2_belief)
+    x_world.set_beliefbox(y_beliefbox=swim2_belief)
 
     swim3_text = ",swim3"
-    swim3_belief = beliefunit_shop(belief_id=swim3_text)
+    swim3_belief = beliefbox_shop(belief_id=swim3_text)
     swim3_belief.set_charlink(charlink=charlink_shop(char_id=jim_text))
     swim3_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
     swim3_belief.set_charlink(charlink=charlink_shop(char_id=tom_text))
-    x_world.set_beliefunit(y_beliefunit=swim3_belief)
+    x_world.set_beliefbox(y_beliefbox=swim3_belief)
 
     parent_cultureunit = cultureunit_shop()
     parent_cultureunit.set_allyhold(belief_id=swim2_text)

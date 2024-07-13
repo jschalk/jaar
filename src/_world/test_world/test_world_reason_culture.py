@@ -1,7 +1,7 @@
 from src._world.reason_culture import cultureheir_shop, cultureunit_shop
 from src._world.world import worldunit_shop
 from src._world.idea import ideaunit_shop
-from src._world.beliefunit import beliefunit_shop
+from src._world.beliefbox import beliefbox_shop
 
 
 def test_world_edit_idea_attr_CorrectlySetsCultureUnit():
@@ -121,7 +121,7 @@ def test_world_ideakid_cultureunit_CorrectlySets_grandchild_idea_cultureheir():
     swimmers_text = ",swimmers"
     x_cultureunit.set_allyhold(belief_id=swimmers_text)
 
-    noa_world.set_beliefunit(y_beliefunit=beliefunit_shop(belief_id=swimmers_text))
+    noa_world.set_beliefbox(y_beliefbox=beliefbox_shop(belief_id=swimmers_text))
     noa_world.add_l1_idea(ideaunit_shop(swim_text))
     noa_world.add_idea(ideaunit_shop(morn_text), parent_road=swim_road)
     noa_world.add_idea(ideaunit_shop(four_text), parent_road=morn_road)

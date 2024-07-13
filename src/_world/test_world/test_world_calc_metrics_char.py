@@ -1,6 +1,6 @@
 from src._road.road import RoadUnit
 from src._world.char import CharID, charunit_shop
-from src._world.beliefunit import BeliefID, awardlink_shop
+from src._world.beliefbox import BeliefID, awardlink_shop
 from src._world.examples.example_worlds import (
     world_v001 as examples_world_v001,
     world_v001_with_large_agenda as examples_world_v001_with_large_agenda,
@@ -27,12 +27,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     yao_world._idearoot.set_awardlink(awardlink=bl_carm)
     yao_world._idearoot.set_awardlink(awardlink=bl_patr)
 
-    rico_beliefunit = yao_world.get_beliefunit(rico_text)
-    carm_beliefunit = yao_world.get_beliefunit(carm_text)
-    patr_beliefunit = yao_world.get_beliefunit(patr_text)
-    rico_charlink = rico_beliefunit._chars.get(rico_text)
-    carm_charlink = carm_beliefunit._chars.get(carm_text)
-    patr_charlink = patr_beliefunit._chars.get(patr_text)
+    rico_beliefbox = yao_world.get_beliefbox(rico_text)
+    carm_beliefbox = yao_world.get_beliefbox(carm_text)
+    patr_beliefbox = yao_world.get_beliefbox(patr_text)
+    rico_charlink = rico_beliefbox._chars.get(rico_text)
+    carm_charlink = carm_beliefbox._chars.get(carm_text)
+    patr_charlink = patr_beliefbox._chars.get(patr_text)
     rico_charlink._world_cred is None
     rico_charlink._world_debt is None
     carm_charlink._world_cred is None
@@ -103,8 +103,8 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     yao_world.calc_world_metrics()
 
     # THEN
-    selena_beliefunit = yao_world.get_beliefunit(selena_text)
-    selena_charlink = selena_beliefunit._chars.get(selena_text)
+    selena_beliefbox = yao_world.get_beliefbox(selena_text)
+    selena_charlink = selena_beliefbox._chars.get(selena_text)
 
     assert rico_charlink._world_cred != 0.25
     assert rico_charlink._world_debt != 0.8
@@ -331,45 +331,45 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     yao_world.calc_world_metrics()
 
     # THEN
-    rico_beliefunit = yao_world.get_beliefunit(rico_text)
-    carm_beliefunit = yao_world.get_beliefunit(carm_text)
-    patr_beliefunit = yao_world.get_beliefunit(patr_text)
-    assert rico_beliefunit._world_cred != 0.5
-    assert rico_beliefunit._world_debt != 0.8
-    assert carm_beliefunit._world_cred != 0.25
-    assert carm_beliefunit._world_debt != 0.1
-    assert patr_beliefunit._world_cred != 0.25
-    assert patr_beliefunit._world_debt != 0.1
+    rico_beliefbox = yao_world.get_beliefbox(rico_text)
+    carm_beliefbox = yao_world.get_beliefbox(carm_text)
+    patr_beliefbox = yao_world.get_beliefbox(patr_text)
+    assert rico_beliefbox._world_cred != 0.5
+    assert rico_beliefbox._world_debt != 0.8
+    assert carm_beliefbox._world_cred != 0.25
+    assert carm_beliefbox._world_debt != 0.1
+    assert patr_beliefbox._world_cred != 0.25
+    assert patr_beliefbox._world_debt != 0.1
     assert (
-        rico_beliefunit._world_cred
-        + carm_beliefunit._world_cred
-        + patr_beliefunit._world_cred
+        rico_beliefbox._world_cred
+        + carm_beliefbox._world_cred
+        + patr_beliefbox._world_cred
         == 0.25
     )
     assert (
-        rico_beliefunit._world_debt
-        + carm_beliefunit._world_debt
-        + patr_beliefunit._world_debt
+        rico_beliefbox._world_debt
+        + carm_beliefbox._world_debt
+        + patr_beliefbox._world_debt
         == 0.25
     )
 
-    # beliefunit_world_cred_sum = 0.0
-    # beliefunit_world_debt_sum = 0.0
-    # for beliefunit in yao_world._beliefs.values():
-    #     assert beliefunit._world_cred != None
-    #     assert beliefunit._world_cred not in [0.25, 0.5]
-    #     assert beliefunit._world_debt != None
-    #     assert beliefunit._world_debt not in [0.8, 0.1]
+    # beliefbox_world_cred_sum = 0.0
+    # beliefbox_world_debt_sum = 0.0
+    # for beliefbox in yao_world._beliefs.values():
+    #     assert beliefbox._world_cred != None
+    #     assert beliefbox._world_cred not in [0.25, 0.5]
+    #     assert beliefbox._world_debt != None
+    #     assert beliefbox._world_debt not in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.belief_id=} {beliefunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{belief.belief_id=} {beliefbox._world_credor=} {belief._world_credor=}"
     #     # )
-    #     print(f"{beliefunit.belief_id=} {beliefunit._world_cred=} {beliefunit._world_debt=} ")
-    #     # print(f"{beliefunit_world_cred_sum=}")
-    #     # print(f"{beliefunit_world_debt_sum=}")
-    #     beliefunit_world_cred_sum += beliefunit._world_cred
-    #     beliefunit_world_debt_sum += beliefunit._world_debt
-    # assert beliefunit_world_cred_sum == 0.25
-    # assert beliefunit_world_debt_sum == 0.25
+    #     print(f"{beliefbox.belief_id=} {beliefbox._world_cred=} {beliefbox._world_debt=} ")
+    #     # print(f"{beliefbox_world_cred_sum=}")
+    #     # print(f"{beliefbox_world_debt_sum=}")
+    #     beliefbox_world_cred_sum += beliefbox._world_cred
+    #     beliefbox_world_debt_sum += beliefbox._world_debt
+    # assert beliefbox_world_cred_sum == 0.25
+    # assert beliefbox_world_debt_sum == 0.25
 
     rico_charunit = yao_world._chars.get(rico_text)
     carm_charunit = yao_world._chars.get(carm_text)
@@ -569,12 +569,12 @@ def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_char_debtor_poolWhenChar
     yao_world.calc_world_metrics()
 
 
-def clear_all_charunits_beliefunits_world_agenda_cred_debt(x_world: WorldUnit):
+def clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world: WorldUnit):
     # DELETE world_agenda_debt and world_agenda_cred
-    for beliefunit_x in x_world._beliefs.values():
-        beliefunit_x.reset_world_cred_debt()
-        # for charlink_x in beliefunit_x._chars.values():
-        #     print(f"{beliefunit_x.belief_id=} {charlink_x.credor_weight=}  {charlink_x._world_cred:.6f} {charlink_x.debtor_weight=} {charlink_x._world_debt:.6f} {charlink_x.} ")
+    for beliefbox_x in x_world._beliefs.values():
+        beliefbox_x.reset_world_cred_debt()
+        # for charlink_x in beliefbox_x._chars.values():
+        #     print(f"{beliefbox_x.belief_id=} {charlink_x.credor_weight=}  {charlink_x._world_cred:.6f} {charlink_x.debtor_weight=} {charlink_x._world_debt:.6f} {charlink_x.} ")
 
     # DELETE world_agenda_debt and world_agenda_cred
     for x_charunit in x_world._chars.values():
@@ -583,17 +583,17 @@ def clear_all_charunits_beliefunits_world_agenda_cred_debt(x_world: WorldUnit):
 
 @dataclass
 class BeliefAgendaMetrics:
-    sum_beliefunit_cred: float = 0
-    sum_beliefunit_debt: float = 0
+    sum_beliefbox_cred: float = 0
+    sum_beliefbox_debt: float = 0
     sum_charlink_cred: float = 0
     sum_charlink_debt: float = 0
     charlink_count: int = 0
 
     def set_sums(self, x_world: WorldUnit):
-        for beliefunit_x in x_world._beliefs.values():
-            self.sum_beliefunit_cred += beliefunit_x._world_agenda_cred
-            self.sum_beliefunit_debt += beliefunit_x._world_agenda_debt
-            for charlink_x in beliefunit_x._chars.values():
+        for beliefbox_x in x_world._beliefs.values():
+            self.sum_beliefbox_cred += beliefbox_x._world_agenda_cred
+            self.sum_beliefbox_debt += beliefbox_x._world_agenda_debt
+            for charlink_x in beliefbox_x._chars.values():
                 self.sum_charlink_cred += charlink_x._world_agenda_cred
                 self.sum_charlink_debt += charlink_x._world_agenda_debt
                 self.charlink_count += 1
@@ -636,13 +636,13 @@ class AwardAgendaMetrics:
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # GIVEN
     x_world = examples_world_v001_with_large_agenda()
-    clear_all_charunits_beliefunits_world_agenda_cred_debt(x_world=x_world)
+    clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world=x_world)
 
     # TEST world_agenda_debt and world_agenda_cred are empty
     x_beliefagendametrics = BeliefAgendaMetrics()
     x_beliefagendametrics.set_sums(x_world=x_world)
-    assert x_beliefagendametrics.sum_beliefunit_cred == 0
-    assert x_beliefagendametrics.sum_beliefunit_debt == 0
+    assert x_beliefagendametrics.sum_beliefbox_cred == 0
+    assert x_beliefagendametrics.sum_beliefbox_debt == 0
     assert x_beliefagendametrics.sum_charlink_cred == 0
     assert x_beliefagendametrics.sum_charlink_debt == 0
 
@@ -677,13 +677,13 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     x_beliefagendametrics.set_sums(x_world=x_world)
     assert x_beliefagendametrics.charlink_count == 81
     x_sum = 0.0027965049894874455
-    assert are_equal(x_beliefagendametrics.sum_beliefunit_cred, x_sum)
-    assert are_equal(x_beliefagendametrics.sum_beliefunit_debt, x_sum)
+    assert are_equal(x_beliefagendametrics.sum_beliefbox_cred, x_sum)
+    assert are_equal(x_beliefagendametrics.sum_beliefbox_debt, x_sum)
     assert are_equal(x_beliefagendametrics.sum_charlink_cred, x_sum)
     assert are_equal(x_beliefagendametrics.sum_charlink_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_world_i_sum,
-        x_beliefagendametrics.sum_beliefunit_cred,
+        x_beliefagendametrics.sum_beliefbox_cred,
     )
 
     assert all_charunits_have_legitimate_values(x_world)
@@ -790,7 +790,7 @@ def test_examples_world_v001_HasBeliefs():
     assert x_world._beliefs != None
     assert len(x_world._beliefs) == 34
     everyone_chars_len = None
-    everyone_belief = x_world.get_beliefunit(",Everyone")
+    everyone_belief = x_world.get_beliefbox(",Everyone")
     everyone_chars_len = len(everyone_belief._chars)
     assert everyone_chars_len == 22
 

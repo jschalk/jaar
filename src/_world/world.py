@@ -56,12 +56,12 @@ from src._world.char import (
     charlink_shop,
 )
 from src._world.belieflink import belieflink_shop
-from src._world.beliefunit import (
+from src._world.beliefbox import (
     AwardLink,
     BeliefID,
-    BeliefUnit,
-    get_beliefunits_from_dict,
-    beliefunit_shop,
+    BeliefBox,
+    get_beliefboxs_from_dict,
+    beliefbox_shop,
     awardlink_shop,
 )
 from src._world.healer import HealerHold
@@ -133,7 +133,7 @@ class WorldUnit:
     _last_gift_id: int = None
     _weight: float = None
     _chars: dict[CharID, CharUnit] = None
-    _beliefs: dict[BeliefID, BeliefUnit] = None
+    _beliefs: dict[BeliefID, BeliefBox] = None
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
@@ -421,21 +421,21 @@ class WorldUnit:
         awardheir_dict = {
             awardheir_belief_id: 1 for awardheir_belief_id in awardheir_list
         }
-        non_single_beliefunits = {
-            beliefunit.belief_id: beliefunit
-            for beliefunit in self._beliefs.values()
-            if beliefunit._char_mirror != True
+        non_single_beliefboxs = {
+            beliefbox.belief_id: beliefbox
+            for beliefbox in self._beliefs.values()
+            if beliefbox._char_mirror != True
         }
-        # check all non_char_mirror_beliefunits are in awardheirs
-        for non_single_belief in non_single_beliefunits.values():
+        # check all non_char_mirror_beliefboxs are in awardheirs
+        for non_single_belief in non_single_beliefboxs.values():
             if awardheir_dict.get(non_single_belief.belief_id) is None:
                 return False
 
         # get dict of all charlinks that are in all awardheirs
         awardheir_charunits = {}
         for awardheir_char_id in awardheir_dict:
-            beliefunit = self.get_beliefunit(awardheir_char_id)
-            for charlink in beliefunit._chars.values():
+            beliefbox = self.get_beliefbox(awardheir_char_id)
+            for charlink in beliefbox._chars.values():
                 awardheir_charunits[charlink.char_id] = self.get_char(charlink.char_id)
 
         # check all world._chars are in awardheir_charunits
@@ -653,13 +653,13 @@ class WorldUnit:
                 debtor_weight=1,
             )
             charlinks = {charlink.char_id: charlink}
-            belief_unit = beliefunit_shop(
+            belief_unit = beliefbox_shop(
                 charunit.char_id,
                 _char_mirror=True,
                 _chars=charlinks,
                 _road_delimiter=self._road_delimiter,
             )
-            self.set_beliefunit(y_beliefunit=belief_unit)
+            self.set_beliefbox(y_beliefbox=belief_unit)
 
     def char_exists(self, char_id: CharID) -> bool:
         return self.get_char(char_id) != None
@@ -673,7 +673,7 @@ class WorldUnit:
     ):
         # Handle scenarios: some are unacceptable
         old_char_id_credor_weight = self.get_char(old_char_id).credor_weight
-        new_char_id_beliefunit = self.get_beliefunit(new_char_id)
+        new_char_id_beliefbox = self.get_beliefbox(new_char_id)
         new_char_id_charunit = self.get_char(new_char_id)
         if not allow_char_overwite and new_char_id_charunit != None:
             raise InvalidWorldException(
@@ -681,27 +681,27 @@ class WorldUnit:
             )
         elif (
             not allow_nonsingle_belief_overwrite
-            and new_char_id_beliefunit != None
-            and new_char_id_beliefunit._char_mirror is False
+            and new_char_id_beliefbox != None
+            and new_char_id_beliefbox._char_mirror is False
         ):
             raise InvalidWorldException(
                 f"Char '{old_char_id}' modify to '{new_char_id}' failed since non-single belief '{new_char_id}' exists."
             )
         elif (
             allow_nonsingle_belief_overwrite
-            and new_char_id_beliefunit != None
-            and new_char_id_beliefunit._char_mirror is False
+            and new_char_id_beliefbox != None
+            and new_char_id_beliefbox._char_mirror is False
         ):
-            self.del_beliefunit(belief_id=new_char_id)
+            self.del_beliefbox(belief_id=new_char_id)
         elif self.char_exists(new_char_id):
             old_char_id_credor_weight += new_char_id_charunit.credor_weight
 
         # upsert new charunit
         self.add_charunit(char_id=new_char_id, credor_weight=old_char_id_credor_weight)
-        # modify all influenced beliefunits charlinks
+        # modify all influenced beliefboxs charlinks
         for old_char_belief_id in self.get_char_belief_ids(old_char_id):
-            old_char_beliefunit = self.get_beliefunit(old_char_belief_id)
-            old_char_beliefunit._shift_charlink(old_char_id, new_char_id)
+            old_char_beliefbox = self.get_beliefbox(old_char_belief_id)
+            old_char_beliefbox._shift_charlink(old_char_id, new_char_id)
         self.del_charunit(char_id=old_char_id)
 
     def edit_charunit(
@@ -726,36 +726,36 @@ class WorldUnit:
         char_id_lowercase_ordered_list = sorted(list(char_id_dict))
         return [char_id_dict[char_id_l] for char_id_l in char_id_lowercase_ordered_list]
 
-    def set_beliefunit(
+    def set_beliefbox(
         self,
-        y_beliefunit: BeliefUnit,
+        y_beliefbox: BeliefBox,
         create_missing_chars: bool = None,
         replace: bool = True,
         add_charlinks: bool = None,
     ):
-        if y_beliefunit._road_delimiter != self._road_delimiter:
-            y_beliefunit._road_delimiter = self._road_delimiter
+        if y_beliefbox._road_delimiter != self._road_delimiter:
+            y_beliefbox._road_delimiter = self._road_delimiter
         replace = False if replace is None else replace
         add_charlinks = False if add_charlinks is None else add_charlinks
         if (
-            self.get_beliefunit(y_beliefunit.belief_id) is None
+            self.get_beliefbox(y_beliefbox.belief_id) is None
             or replace
             and not add_charlinks
         ):
-            self._beliefs[y_beliefunit.belief_id] = y_beliefunit
+            self._beliefs[y_beliefbox.belief_id] = y_beliefbox
 
         if add_charlinks:
-            x_beliefunit = self.get_beliefunit(y_beliefunit.belief_id)
-            for x_charlink in y_beliefunit._chars.values():
-                x_beliefunit.set_charlink(x_charlink)
+            x_beliefbox = self.get_beliefbox(y_beliefbox.belief_id)
+            for x_charlink in y_beliefbox._chars.values():
+                x_beliefbox.set_charlink(x_charlink)
 
         if create_missing_chars:
-            self._create_missing_chars(charlinks=y_beliefunit._chars)
+            self._create_missing_chars(charlinks=y_beliefbox._chars)
 
-    def beliefunit_exists(self, belief_id: BeliefID) -> bool:
+    def beliefbox_exists(self, belief_id: BeliefID) -> bool:
         return self._beliefs.get(belief_id) != None
 
-    def get_beliefunit(self, x_belief_id: BeliefID) -> BeliefUnit:
+    def get_beliefbox(self, x_belief_id: BeliefID) -> BeliefBox:
         return self._beliefs.get(x_belief_id)
 
     def _create_missing_chars(self, charlinks: dict[CharID, CharLink]):
@@ -769,31 +769,31 @@ class WorldUnit:
                     )
                 )
 
-    def del_beliefunit(self, belief_id: BeliefID):
+    def del_beliefbox(self, belief_id: BeliefID):
         self._beliefs.pop(belief_id)
 
-    def edit_beliefunit_belief_id(
+    def edit_beliefbox_belief_id(
         self,
         old_belief_id: BeliefID,
         new_belief_id: BeliefID,
         allow_belief_overwite: bool,
     ):
-        if not allow_belief_overwite and self.get_beliefunit(new_belief_id) != None:
+        if not allow_belief_overwite and self.get_beliefbox(new_belief_id) != None:
             raise InvalidWorldException(
                 f"Belief '{old_belief_id}' modify to '{new_belief_id}' failed since '{new_belief_id}' exists."
             )
-        elif self.get_beliefunit(new_belief_id) != None:
-            old_beliefunit = self.get_beliefunit(old_belief_id)
-            old_beliefunit.set_belief_id(belief_id=new_belief_id)
-            self.get_beliefunit(new_belief_id).meld(exterior_belief=old_beliefunit)
-            self.del_beliefunit(belief_id=old_belief_id)
-        elif self.get_beliefunit(new_belief_id) is None:
-            old_beliefunit = self.get_beliefunit(old_belief_id)
-            beliefunit_x = beliefunit_shop(
-                new_belief_id, old_beliefunit._char_mirror, old_beliefunit._chars
+        elif self.get_beliefbox(new_belief_id) != None:
+            old_beliefbox = self.get_beliefbox(old_belief_id)
+            old_beliefbox.set_belief_id(belief_id=new_belief_id)
+            self.get_beliefbox(new_belief_id).meld(exterior_belief=old_beliefbox)
+            self.del_beliefbox(belief_id=old_belief_id)
+        elif self.get_beliefbox(new_belief_id) is None:
+            old_beliefbox = self.get_beliefbox(old_belief_id)
+            beliefbox_x = beliefbox_shop(
+                new_belief_id, old_beliefbox._char_mirror, old_beliefbox._chars
             )
-            self.set_beliefunit(y_beliefunit=beliefunit_x)
-            self.del_beliefunit(belief_id=old_belief_id)
+            self.set_beliefbox(y_beliefbox=beliefbox_x)
+            self.del_beliefbox(belief_id=old_belief_id)
 
         self._edit_awardlinks_belief_id(
             old_belief_id=old_belief_id,
@@ -838,36 +838,36 @@ class WorldUnit:
         for x_charunit in self._chars.values():
             x_charunit.clear_belieflinks()
 
-    def _migrate_beliefunits_to_belieflinks(self):
+    def _migrate_beliefboxs_to_belieflinks(self):
         self.clear_charunits_belieflinks()
 
-        for x_beliefunit in self._beliefs.values():
-            for x_charlink in x_beliefunit._chars.values():
+        for x_beliefbox in self._beliefs.values():
+            for x_charlink in x_beliefbox._chars.values():
                 x_charunit = self.get_char(x_charlink.char_id)
                 if x_charunit != None:
                     x_belieflink = belieflink_shop(
-                        x_beliefunit.belief_id,
+                        x_beliefbox.belief_id,
                         credor_weight=x_charlink.credor_weight,
                         debtor_weight=x_charlink.debtor_weight,
                     )
                     x_charunit.set_belieflink(x_belieflink)
 
-    def _migrate_belieflinks_to_beliefunits(self):
+    def _migrate_belieflinks_to_beliefboxs(self):
         for x_charunit in self._chars.values():
             for x_belieflink in x_charunit._belieflinks.values():
                 x_belief_id = x_belieflink.belief_id
-                if self.beliefunit_exists(x_belief_id) == False:
-                    new_beliefunit = beliefunit_shop(
+                if self.beliefbox_exists(x_belief_id) == False:
+                    new_beliefbox = beliefbox_shop(
                         x_belief_id, _road_delimiter=self._road_delimiter
                     )
-                    self.set_beliefunit(new_beliefunit)
-                x_beliefunit = self.get_beliefunit(x_belief_id)
+                    self.set_beliefbox(new_beliefbox)
+                x_beliefbox = self.get_beliefbox(x_belief_id)
                 x_charlink = charlink_shop(
                     x_charunit.char_id,
                     credor_weight=x_belieflink.credor_weight,
                     debtor_weight=x_belieflink.debtor_weight,
                 )
-                x_beliefunit.set_charlink(x_charlink)
+                x_beliefbox.set_charlink(x_charlink)
 
         self.clear_charunits_belieflinks()
 
@@ -1193,7 +1193,7 @@ class WorldUnit:
         _awardlinks_to_delete = [
             _awardlink_belief_id
             for _awardlink_belief_id in x_idea._awardlinks.keys()
-            if self.get_beliefunit(_awardlink_belief_id) is None
+            if self.get_beliefbox(_awardlink_belief_id) is None
         ]
         for _awardlink_belief_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_belief_id)
@@ -1202,7 +1202,7 @@ class WorldUnit:
             _allyholds_to_delete = [
                 _allyhold_belief_id
                 for _allyhold_belief_id in x_idea._cultureunit._allyholds
-                if self.get_beliefunit(_allyhold_belief_id) is None
+                if self.get_beliefbox(_allyhold_belief_id) is None
             ]
             for _allyhold_belief_id in _allyholds_to_delete:
                 x_idea._cultureunit.del_allyhold(_allyhold_belief_id)
@@ -1211,11 +1211,9 @@ class WorldUnit:
 
     def _create_missing_beliefs_chars(self, awardlinks: dict[BeliefID, AwardLink]):
         for awardlink_x in awardlinks.values():
-            if self.get_beliefunit(awardlink_x.belief_id) is None:
-                beliefunit_x = beliefunit_shop(
-                    belief_id=awardlink_x.belief_id, _chars={}
-                )
-                self.set_beliefunit(y_beliefunit=beliefunit_x)
+            if self.get_beliefbox(awardlink_x.belief_id) is None:
+                beliefbox_x = beliefbox_shop(belief_id=awardlink_x.belief_id, _chars={})
+                self.set_beliefbox(y_beliefbox=beliefbox_x)
 
     def _create_missing_ideas(self, road):
         self.calc_world_metrics()
@@ -1629,11 +1627,11 @@ class WorldUnit:
                 world_agenda_debt=au_world_agenda_debt,
             )
 
-    def _reset_beliefunits_world_cred_debt(self):
+    def _reset_beliefboxs_world_cred_debt(self):
         for awardlink_obj in self._beliefs.values():
             awardlink_obj.reset_world_cred_debt()
 
-    def _set_beliefunits_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
+    def _set_beliefboxs_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
         for awardlink_obj in awardheirs.values():
             self.add_to_belief_world_cred_debt(
                 belief_id=awardlink_obj.belief_id,
@@ -1688,9 +1686,9 @@ class WorldUnit:
 
     def get_char_belief_ids(self, char_id: CharID) -> list[BeliefID]:
         return [
-            x_beliefunit.belief_id
-            for x_beliefunit in self._beliefs.values()
-            if x_beliefunit.charlink_exists(char_id)
+            x_beliefbox.belief_id
+            for x_beliefbox in self._beliefs.values()
+            if x_beliefbox.charlink_exists(char_id)
         ]
 
     def _reset_charunit_world_cred_debt(self):
@@ -1855,7 +1853,7 @@ class WorldUnit:
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
         if idea.is_awardheirless() is False:
-            self._set_beliefunits_bud_share(idea._awardheirs)
+            self._set_beliefboxs_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
             self._add_to_charunits_world_cred_debt(idea._bud_ratio)
 
@@ -1984,8 +1982,8 @@ class WorldUnit:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_belief_id in x_econ_idea._healerhold._belief_ids:
-                x_beliefunit = self.get_beliefunit(x_belief_id)
-                for x_char_id in x_beliefunit._chars.keys():
+                x_beliefbox = self.get_beliefbox(x_belief_id)
+                for x_char_id in x_beliefbox._chars.keys():
                     if _healers_dict.get(x_char_id) is None:
                         _healers_dict[x_char_id] = {x_econ_road: x_econ_idea}
                     else:
@@ -2008,8 +2006,8 @@ class WorldUnit:
             raise CharUnitsCredorDebtorSumException(
                 f"'{self._owner_id}' is_charunits_debtor_weight_sum_correct is False. _char_debtor_pool={self._char_debtor_pool}. charunits_debtor_weight_sum={self.get_charunits_debtor_weight_sum()}"
             )
-        self._reset_beliefunits_world_cred_debt()
-        self._reset_beliefunits_world_cred_debt()
+        self._reset_beliefboxs_world_cred_debt()
+        self._reset_beliefboxs_world_cred_debt()
         self._reset_charunit_world_cred_debt()
 
     def get_heir_road_list(self, x_road: RoadUnit) -> list[RoadUnit]:
@@ -2059,7 +2057,7 @@ class WorldUnit:
         return x_dict
 
     def get_dict(self) -> dict[str, str]:
-        self._migrate_beliefunits_to_belieflinks()
+        self._migrate_beliefboxs_to_belieflinks()
         x_dict = {
             "_chars": self.get_charunits_dict(),
             "_originunit": self._originunit.get_dict(),
@@ -2239,10 +2237,10 @@ class WorldUnit:
 
     def _meld_beliefs(self, exterior_world):
         for brx in exterior_world._beliefs.values():
-            if self.get_beliefunit(brx.belief_id) is None:
-                self.set_beliefunit(y_beliefunit=brx)
+            if self.get_beliefbox(brx.belief_id) is None:
+                self.set_beliefbox(y_beliefbox=brx)
             else:
-                self.get_beliefunit(brx.belief_id).meld(brx)
+                self.get_beliefbox(brx.belief_id).meld(brx)
 
     def _meld_facts(self, exterior_world):
         for hx in exterior_world._idearoot._factunits.values():
@@ -2330,7 +2328,7 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_chars = obj_from_world_dict(world_dict, "_chars", x_road_delimiter).values()
     for x_charunit in x_chars:
         x_world.set_charunit(x_charunit)
-    x_world._migrate_belieflinks_to_beliefunits()
+    x_world._migrate_belieflinks_to_beliefboxs()
     x_world._originunit = obj_from_world_dict(world_dict, "_originunit")
 
     set_idearoot_from_world_dict(x_world, world_dict)
@@ -2425,9 +2423,9 @@ def obj_from_world_dict(
         )
     elif dict_key == "_beliefs":
         return (
-            get_beliefunits_from_dict(x_dict[dict_key], _road_delimiter)
+            get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
             if x_dict.get(dict_key) != None
-            else get_beliefunits_from_dict(x_dict[dict_key], _road_delimiter)
+            else get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
         )
     elif dict_key == "_max_tree_traverse":
         return (

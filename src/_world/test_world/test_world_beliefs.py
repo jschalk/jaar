@@ -1,8 +1,8 @@
 from src._road.road import get_default_real_id_roadnode
-from src._world.beliefunit import (
+from src._world.beliefbox import (
     BeliefID,
     awardlink_shop,
-    beliefunit_shop,
+    beliefbox_shop,
     get_chars_relevant_beliefs,
 )
 from src._world.char import CharID, charunit_shop, charlink_shop
@@ -11,129 +11,129 @@ from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_WorldUnit_beliefs_get_beliefunit_ReturnsCorrectObj():
+def test_WorldUnit_beliefs_get_beliefbox_ReturnsCorrectObj():
     # GIVEN
     x_world = worldunit_shop()
     swim_text = ",swimmers"
-    # x_world.set_beliefunit(y_beliefunit=beliefunit_shop(belief_id=swim_text))
-    swim_beliefs = {swim_text: beliefunit_shop(belief_id=swim_text)}
+    # x_world.set_beliefbox(y_beliefbox=beliefbox_shop(belief_id=swim_text))
+    swim_beliefs = {swim_text: beliefbox_shop(belief_id=swim_text)}
     x_world._beliefs = swim_beliefs
 
     # WHEN
-    swim_beliefunit = x_world.get_beliefunit(swim_text)
+    swim_beliefbox = x_world.get_beliefbox(swim_text)
 
     # THEN
-    assert swim_beliefunit == beliefunit_shop(belief_id=swim_text)
+    assert swim_beliefbox == beliefbox_shop(belief_id=swim_text)
 
 
-def test_WorldUnit_beliefs_set_beliefunit_CorrectlySetAttr():
+def test_WorldUnit_beliefs_set_beliefbox_CorrectlySetAttr():
     # GIVEN
     swim_text = ",swimmers"
     x_world = worldunit_shop()
 
     # WHEN
-    x_world.set_beliefunit(y_beliefunit=beliefunit_shop(belief_id=swim_text))
+    x_world.set_beliefbox(y_beliefbox=beliefbox_shop(belief_id=swim_text))
 
     # THEN
     assert len(x_world._beliefs) == 1
-    swim_beliefs = {swim_text: beliefunit_shop(belief_id=swim_text)}
+    swim_beliefs = {swim_text: beliefbox_shop(belief_id=swim_text)}
     assert len(x_world._beliefs) == len(swim_beliefs)
-    assert x_world.get_beliefunit(swim_text) != None
-    swim_beliefunit = x_world.get_beliefunit(swim_text)
-    assert swim_beliefunit._chars == swim_beliefs.get(swim_text)._chars
-    assert x_world.get_beliefunit(swim_text) == swim_beliefs.get(swim_text)
+    assert x_world.get_beliefbox(swim_text) != None
+    swim_beliefbox = x_world.get_beliefbox(swim_text)
+    assert swim_beliefbox._chars == swim_beliefs.get(swim_text)._chars
+    assert x_world.get_beliefbox(swim_text) == swim_beliefs.get(swim_text)
     assert x_world._beliefs == swim_beliefs
 
 
-def test_WorldUnit_beliefs_set_beliefunit_CorrectlyReplacesBelief():
+def test_WorldUnit_beliefs_set_beliefbox_CorrectlyReplacesBelief():
     # GIVEN
     swim_text = ",swimmers"
     x_world = worldunit_shop()
-    swim1_belief = beliefunit_shop(swim_text)
+    swim1_belief = beliefbox_shop(swim_text)
     bob_text = "Bob"
     swim1_belief.set_charlink(charlink_shop(bob_text))
-    x_world.set_beliefunit(swim1_belief)
-    assert len(x_world.get_beliefunit(swim_text)._chars) == 1
+    x_world.set_beliefbox(swim1_belief)
+    assert len(x_world.get_beliefbox(swim_text)._chars) == 1
 
     # WHEN
     yao_text = "Yao"
-    swim2_belief = beliefunit_shop(swim_text)
+    swim2_belief = beliefbox_shop(swim_text)
     swim2_belief.set_charlink(charlink_shop(bob_text))
     swim2_belief.set_charlink(charlink_shop(yao_text))
-    x_world.set_beliefunit(swim2_belief, replace=False)
+    x_world.set_beliefbox(swim2_belief, replace=False)
 
     # THEN
-    assert len(x_world.get_beliefunit(swim_text)._chars) == 1
+    assert len(x_world.get_beliefbox(swim_text)._chars) == 1
 
     # WHEN / THEN
-    x_world.set_beliefunit(swim2_belief, replace=True)
-    assert len(x_world.get_beliefunit(swim_text)._chars) == 2
+    x_world.set_beliefbox(swim2_belief, replace=True)
+    assert len(x_world.get_beliefbox(swim_text)._chars) == 2
 
 
-def test_WorldUnit_beliefs_beliefunit_exists_ReturnsCorrectObj():
+def test_WorldUnit_beliefs_beliefbox_exists_ReturnsCorrectObj():
     # GIVEN
     swim_text = ",swimmers"
     sue_world = worldunit_shop("Sue")
-    swim1_belief = beliefunit_shop(swim_text)
+    swim1_belief = beliefbox_shop(swim_text)
     bob_text = "Bob"
     swim1_belief.set_charlink(charlink_shop(bob_text))
-    assert sue_world.beliefunit_exists(swim_text) == False
+    assert sue_world.beliefbox_exists(swim_text) == False
 
     # WHEN
-    sue_world.set_beliefunit(swim1_belief)
+    sue_world.set_beliefbox(swim1_belief)
 
     # THEN
-    assert sue_world.beliefunit_exists(swim_text)
+    assert sue_world.beliefbox_exists(swim_text)
 
 
-# def test_WorldUnit_beliefs_set_beliefunit_RaisesErrorWhen_char_mirrorSubmitted():
+# def test_WorldUnit_beliefs_set_beliefbox_RaisesErrorWhen_char_mirrorSubmitted():
 #     # GIVEN
 #     yao_world = worldunit_shop("Yao")
 #     bob_text = "Bob"
 #     yao_world.set_charunit(charunit_shop(bob_text))
-#     bob_beliefunit = yao_world.get_beliefunit(bob_text)
+#     bob_beliefbox = yao_world.get_beliefbox(bob_text)
 
 #     # WHEN
 #     with pytest_raises(Exception) as excinfo:
-#         yao_world.set_beliefunit(bob_beliefunit)
+#         yao_world.set_beliefbox(bob_beliefbox)
 #     assert (
 #         str(excinfo.value)
-#         == f"WorldUnit.set_beliefunit('{bob_text}') fails because belief is _char_mirror."
+#         == f"WorldUnit.set_beliefbox('{bob_text}') fails because belief is _char_mirror."
 #     )
 
 
-def test_WorldUnit_beliefs_set_beliefunit_CorrectlySets_charlinks():
+def test_WorldUnit_beliefs_set_beliefbox_CorrectlySets_charlinks():
     # GIVEN
     swim_text = ",swimmers"
     x_world = worldunit_shop()
-    swim1_belief = beliefunit_shop(swim_text)
+    swim1_belief = beliefbox_shop(swim_text)
     bob_text = "Bob"
     swim1_belief.set_charlink(charlink_shop(bob_text))
-    x_world.set_beliefunit(swim1_belief)
-    assert len(x_world.get_beliefunit(swim_text)._chars) == 1
+    x_world.set_beliefbox(swim1_belief)
+    assert len(x_world.get_beliefbox(swim_text)._chars) == 1
 
     # WHEN
     yao_text = "Yao"
-    swim2_belief = beliefunit_shop(swim_text)
+    swim2_belief = beliefbox_shop(swim_text)
     swim2_belief.set_charlink(charlink_shop(bob_text))
     swim2_belief.set_charlink(charlink_shop(yao_text))
-    x_world.set_beliefunit(swim2_belief, add_charlinks=True)
+    x_world.set_beliefbox(swim2_belief, add_charlinks=True)
 
     # THEN
-    assert len(x_world.get_beliefunit(swim_text)._chars) == 2
+    assert len(x_world.get_beliefbox(swim_text)._chars) == 2
 
 
-def test_WorldUnit_beliefs_del_beliefunit_casasCorrectly():
+def test_WorldUnit_beliefs_del_beliefbox_casasCorrectly():
     # GIVEN
     x_world = worldunit_shop()
     swim_text = "swimmers"
-    swim_belief = beliefunit_shop(belief_id=BeliefID(swim_text))
-    x_world.set_beliefunit(y_beliefunit=swim_belief)
-    assert x_world.get_beliefunit(swim_text) != None
+    swim_belief = beliefbox_shop(belief_id=BeliefID(swim_text))
+    x_world.set_beliefbox(y_beliefbox=swim_belief)
+    assert x_world.get_beliefbox(swim_text) != None
 
     # WHEN
-    x_world.del_beliefunit(belief_id=swim_text)
-    assert x_world.get_beliefunit(swim_text) is None
+    x_world.del_beliefbox(belief_id=swim_text)
+    assert x_world.get_beliefbox(swim_text) is None
     assert x_world._beliefs == {}
 
 
@@ -312,9 +312,9 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     x_world.calc_world_metrics()
 
     # THEN
-    belief_rico = x_world.get_beliefunit(rico_text)
-    belief_carm = x_world.get_beliefunit(carm_text)
-    belief_patr = x_world.get_beliefunit(patr_text)
+    belief_rico = x_world.get_beliefbox(rico_text)
+    belief_carm = x_world.get_beliefbox(carm_text)
+    belief_patr = x_world.get_beliefbox(patr_text)
     assert belief_rico._world_cred == 0.5
     assert belief_rico._world_debt == 0.75
     assert belief_carm._world_cred == 0.25
@@ -336,7 +336,7 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     x_world.calc_world_metrics()
 
     # THEN
-    belief_sele = x_world.get_beliefunit(sele_text)
+    belief_sele = x_world.get_beliefbox(sele_text)
     assert belief_rico._world_cred != 0.5
     assert belief_rico._world_debt != 0.75
     assert belief_carm._world_cred != 0.25
@@ -390,9 +390,9 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates3levelWorldBeliefWorldImport
     x_world.calc_world_metrics()
 
     # THEN
-    belief_rico = x_world.get_beliefunit(rico_text)
-    belief_carm = x_world.get_beliefunit(carm_text)
-    belief_patr = x_world.get_beliefunit(patr_text)
+    belief_rico = x_world.get_beliefbox(rico_text)
+    belief_carm = x_world.get_beliefbox(carm_text)
+    belief_patr = x_world.get_beliefbox(patr_text)
     assert belief_rico._world_cred == 0.5
     assert belief_rico._world_debt == 0.75
     assert belief_carm._world_cred == 0.25
@@ -459,9 +459,9 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     assert str(excinfo.value) == f"'{patr_text}'"
 
     # THEN
-    belief_rico = x_world.get_beliefunit(rico_text)
-    belief_carm = x_world.get_beliefunit(carm_text)
-    belief_patr = x_world.get_beliefunit(patr_text)
+    belief_rico = x_world.get_beliefbox(rico_text)
+    belief_carm = x_world.get_beliefbox(carm_text)
+    belief_patr = x_world.get_beliefbox(patr_text)
     assert belief_rico._world_cred == 0.125
     assert belief_rico._world_debt == 0.1875
     assert belief_carm._world_cred == 0.0625
@@ -478,34 +478,34 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     )
 
 
-def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyCreatesNewCharID():
+def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyCreatesNewCharID():
     # GIVEN
     world = worldunit_shop("prom")
     rico_text = "rico"
     world.add_charunit(char_id=rico_text)
     swim_text = ",swimmers"
-    swim_belief = beliefunit_shop(belief_id=swim_text)
+    swim_belief = beliefbox_shop(belief_id=swim_text)
     swim_belief.set_charlink(charlink=charlink_shop(char_id=rico_text))
-    world.set_beliefunit(swim_belief)
+    world.set_beliefbox(swim_belief)
     assert len(world._chars) == 1
     assert len(world._beliefs) == 2
-    assert world.get_beliefunit(swim_text) != None
-    assert world.get_beliefunit(swim_text)._char_mirror is False
-    assert len(world.get_beliefunit(swim_text)._chars) == 1
+    assert world.get_beliefbox(swim_text) != None
+    assert world.get_beliefbox(swim_text)._char_mirror is False
+    assert len(world.get_beliefbox(swim_text)._chars) == 1
 
     # WHEN
     jog_text = ",jog"
-    world.edit_beliefunit_belief_id(
+    world.edit_beliefbox_belief_id(
         old_belief_id=swim_text, new_belief_id=jog_text, allow_belief_overwite=False
     )
 
     # THEN
-    assert world.get_beliefunit(jog_text) != None
-    assert world.get_beliefunit(swim_text) is None
+    assert world.get_beliefbox(jog_text) != None
+    assert world.get_beliefbox(swim_text) is None
     assert len(world._chars) == 1
     assert len(world._beliefs) == 2
-    assert world.get_beliefunit(jog_text)._char_mirror is False
-    assert len(world.get_beliefunit(jog_text)._chars) == 1
+    assert world.get_beliefbox(jog_text)._char_mirror is False
+    assert len(world.get_beliefbox(jog_text)._chars) == 1
 
 
 def test_WorldUnit_edit_Beliefunit_belief_id_raiseErrorNewCharIDPreviouslyExists():
@@ -514,13 +514,13 @@ def test_WorldUnit_edit_Beliefunit_belief_id_raiseErrorNewCharIDPreviouslyExists
     rico_text = "rico"
     world.add_charunit(char_id=rico_text)
     swim_text = ",swimmers"
-    world.set_beliefunit(beliefunit_shop(belief_id=swim_text))
+    world.set_beliefbox(beliefbox_shop(belief_id=swim_text))
     jog_text = ",jog"
-    world.set_beliefunit(beliefunit_shop(belief_id=jog_text))
+    world.set_beliefbox(beliefbox_shop(belief_id=jog_text))
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        world.edit_beliefunit_belief_id(
+        world.edit_beliefbox_belief_id(
             old_belief_id=swim_text,
             new_belief_id=jog_text,
             allow_belief_overwite=False,
@@ -531,52 +531,52 @@ def test_WorldUnit_edit_Beliefunit_belief_id_raiseErrorNewCharIDPreviouslyExists
     )
 
 
-def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldCharIDs():
+def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyMeldCharIDs():
     # GIVEN
     world = worldunit_shop("prom")
     rico_text = "rico"
     world.add_charunit(char_id=rico_text)
     swim_text = ",swimmers"
-    swim_belief = beliefunit_shop(belief_id=swim_text)
+    swim_belief = beliefbox_shop(belief_id=swim_text)
     swim_belief.set_charlink(
         charlink=charlink_shop(char_id=rico_text, credor_weight=5, debtor_weight=3)
     )
-    world.set_beliefunit(swim_belief)
+    world.set_beliefbox(swim_belief)
     jog_text = ",jog"
-    jog_belief = beliefunit_shop(belief_id=jog_text)
+    jog_belief = beliefbox_shop(belief_id=jog_text)
     jog_belief.set_charlink(
         charlink=charlink_shop(char_id=rico_text, credor_weight=7, debtor_weight=10)
     )
-    world.set_beliefunit(jog_belief)
-    print(f"{world.get_beliefunit(jog_text)._chars.get(rico_text)=}")
-    assert world.get_beliefunit(jog_text) != None
+    world.set_beliefbox(jog_belief)
+    print(f"{world.get_beliefbox(jog_text)._chars.get(rico_text)=}")
+    assert world.get_beliefbox(jog_text) != None
 
     # WHEN
-    world.edit_beliefunit_belief_id(
+    world.edit_beliefbox_belief_id(
         old_belief_id=swim_text,
         new_belief_id=jog_text,
         allow_belief_overwite=True,
     )
 
     # THEN
-    assert world.get_beliefunit(jog_text) != None
-    assert world.get_beliefunit(swim_text) is None
+    assert world.get_beliefbox(jog_text) != None
+    assert world.get_beliefbox(swim_text) is None
     assert len(world._chars) == 1
     assert len(world._beliefs) == 2
-    assert world.get_beliefunit(jog_text)._char_mirror is False
-    assert len(world.get_beliefunit(jog_text)._chars) == 1
-    assert world.get_beliefunit(jog_text)._chars.get(rico_text).credor_weight == 12
-    assert world.get_beliefunit(jog_text)._chars.get(rico_text).debtor_weight == 13
+    assert world.get_beliefbox(jog_text)._char_mirror is False
+    assert len(world.get_beliefbox(jog_text)._chars) == 1
+    assert world.get_beliefbox(jog_text)._chars.get(rico_text).credor_weight == 12
+    assert world.get_beliefbox(jog_text)._chars.get(rico_text).debtor_weight == 13
 
 
-def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesAwardLinks():
+def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyModifiesAwardLinks():
     # GIVEN
     x_world = worldunit_shop("prom")
     rico_text = "rico"
     x_world.add_charunit(char_id=rico_text)
     swim_text = ",swimmers"
-    swim_beliefunit = beliefunit_shop(belief_id=swim_text)
-    x_world.set_beliefunit(swim_beliefunit)
+    swim_beliefbox = beliefbox_shop(belief_id=swim_text)
+    x_world.set_beliefbox(swim_beliefbox)
     outdoor_text = "outdoors"
     outdoor_road = x_world.make_road(x_world._owner_id, outdoor_text)
     camping_text = "camping"
@@ -585,7 +585,7 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesAwardLinks():
 
     camping_idea = x_world.get_idea_obj(camping_road)
     swim_awardlink = awardlink_shop(
-        belief_id=swim_beliefunit.belief_id, credor_weight=5, debtor_weight=3
+        belief_id=swim_beliefbox.belief_id, credor_weight=5, debtor_weight=3
     )
     camping_idea.set_awardlink(swim_awardlink)
     assert camping_idea._awardlinks.get(swim_text) != None
@@ -594,7 +594,7 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesAwardLinks():
 
     # WHEN
     jog_text = ",jog"
-    x_world.edit_beliefunit_belief_id(
+    x_world.edit_beliefbox_belief_id(
         old_belief_id=swim_text, new_belief_id=jog_text, allow_belief_overwite=False
     )
 
@@ -605,18 +605,18 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyModifiesAwardLinks():
     assert camping_idea._awardlinks.get(jog_text).debtor_weight == 3
 
 
-def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldsAwardLinesAwardLinksAwardHeirs():
+def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyMeldsAwardLinesAwardLinksAwardHeirs():
     # GIVEN
     x_world = worldunit_shop("prom")
     rico_text = "rico"
     x_world.add_charunit(char_id=rico_text)
     swim_text = ",swimmers"
-    swim_beliefunit = beliefunit_shop(belief_id=swim_text)
-    x_world.set_beliefunit(swim_beliefunit)
+    swim_beliefbox = beliefbox_shop(belief_id=swim_text)
+    x_world.set_beliefbox(swim_beliefbox)
 
     jog_text = ",jog"
-    jog_beliefunit = beliefunit_shop(belief_id=jog_text)
-    x_world.set_beliefunit(jog_beliefunit)
+    jog_beliefbox = beliefbox_shop(belief_id=jog_text)
+    x_world.set_beliefbox(jog_beliefbox)
 
     outdoor_text = "outdoors"
     outdoor_road = x_world.make_road(x_world._owner_id, outdoor_text)
@@ -626,11 +626,11 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldsAwardLinesAwardLinksA
 
     camping_idea = x_world.get_idea_obj(camping_road)
     swim_awardlink = awardlink_shop(
-        belief_id=swim_beliefunit.belief_id, credor_weight=5, debtor_weight=3
+        belief_id=swim_beliefbox.belief_id, credor_weight=5, debtor_weight=3
     )
     camping_idea.set_awardlink(swim_awardlink)
     jog_awardlink = awardlink_shop(
-        belief_id=jog_beliefunit.belief_id, credor_weight=7, debtor_weight=10
+        belief_id=jog_beliefbox.belief_id, credor_weight=7, debtor_weight=10
     )
     camping_idea.set_awardlink(jog_awardlink)
     assert camping_idea._awardlinks.get(swim_text) != None
@@ -641,7 +641,7 @@ def test_WorldUnit_edit_beliefunit_belief_id_CorrectlyMeldsAwardLinesAwardLinksA
     assert camping_idea._awardlinks.get(jog_text).debtor_weight == 10
 
     # WHEN
-    x_world.edit_beliefunit_belief_id(
+    x_world.edit_beliefbox_belief_id(
         old_belief_id=swim_text, new_belief_id=jog_text, allow_belief_overwite=True
     )
 
@@ -667,15 +667,15 @@ def test_WorldUnit_add_idea_CreatesMissingBeliefs():
     awardlink_z = awardlink_shop(belief_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
     assert len(x_world._beliefs) == 0
-    assert x_world.get_beliefunit(family_text) is None
+    assert x_world.get_beliefbox(family_text) is None
 
     # WHEN
     x_world.add_l1_idea(clean_cookery_idea, create_missing_beliefs=True)
 
     # THEN
     assert len(x_world._beliefs) == 1
-    assert x_world.get_beliefunit(family_text) != None
-    assert x_world.get_beliefunit(family_text)._chars in (None, {})
+    assert x_world.get_beliefbox(family_text) != None
+    assert x_world.get_beliefbox(family_text)._chars in (None, {})
 
 
 def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
@@ -758,15 +758,15 @@ def test_WorldUnit_add_idea_DoesNotOverwriteBeliefs():
     awardlink_z = awardlink_shop(belief_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
 
-    beliefunit_z = beliefunit_shop(belief_id=family_text)
-    beliefunit_z.set_charlink(charlink=charlink_shop(char_id="ann1"))
-    beliefunit_z.set_charlink(charlink=charlink_shop(char_id="bet1"))
-    bob_world.set_beliefunit(y_beliefunit=beliefunit_z)
+    beliefbox_z = beliefbox_shop(belief_id=family_text)
+    beliefbox_z.set_charlink(charlink=charlink_shop(char_id="ann1"))
+    beliefbox_z.set_charlink(charlink=charlink_shop(char_id="bet1"))
+    bob_world.set_beliefbox(y_beliefbox=beliefbox_z)
 
     # assert len(bob_world._beliefs) == 0
-    # assert bob_world.get_beliefunit(family_text) is None
+    # assert bob_world.get_beliefbox(family_text) is None
     assert len(bob_world._beliefs) == 1
-    assert len(bob_world.get_beliefunit(family_text)._chars) == 2
+    assert len(bob_world.get_beliefbox(family_text)._chars) == 2
 
     # WHEN
     bob_world.add_idea(
@@ -778,41 +778,41 @@ def test_WorldUnit_add_idea_DoesNotOverwriteBeliefs():
     # THEN
 
     # assert len(bob_world._beliefs) == 1
-    # assert len(bob_world.get_beliefunit(family_text)._chars) == 0
-    # beliefunit_z = beliefunit_shop(belief_id=family_text)
-    # beliefunit_z.set_charlink(charlink=charlink_shop(char_id="ann2"))
-    # beliefunit_z.set_charlink(charlink=charlink_shop(char_id="bet2"))
-    # bob_world.set_beliefunit(y_beliefunit=beliefunit_z)
+    # assert len(bob_world.get_beliefbox(family_text)._chars) == 0
+    # beliefbox_z = beliefbox_shop(belief_id=family_text)
+    # beliefbox_z.set_charlink(charlink=charlink_shop(char_id="ann2"))
+    # beliefbox_z.set_charlink(charlink=charlink_shop(char_id="bet2"))
+    # bob_world.set_beliefbox(y_beliefbox=beliefbox_z)
 
     assert len(bob_world._beliefs) == 1
-    assert len(bob_world.get_beliefunit(family_text)._chars) == 2
+    assert len(bob_world.get_beliefbox(family_text)._chars) == 2
 
 
-def test_WorldUnit_set_beliefunit_create_missing_chars_DoesCreateMissingChars():
+def test_WorldUnit_set_beliefbox_create_missing_chars_DoesCreateMissingChars():
     # GIVEN
     bob_world = worldunit_shop("Bob")
     family_text = ",family"
     anna_text = "anna"
     beto_text = "beto"
-    beliefunit_z = beliefunit_shop(belief_id=family_text)
-    beliefunit_z.set_charlink(
+    beliefbox_z = beliefbox_shop(belief_id=family_text)
+    beliefbox_z.set_charlink(
         charlink=charlink_shop(char_id=anna_text, credor_weight=3, debtor_weight=7)
     )
-    beliefunit_z.set_charlink(
+    beliefbox_z.set_charlink(
         charlink=charlink_shop(char_id=beto_text, credor_weight=5, debtor_weight=11)
     )
 
-    assert beliefunit_z._chars.get(anna_text).credor_weight == 3
-    assert beliefunit_z._chars.get(anna_text).debtor_weight == 7
+    assert beliefbox_z._chars.get(anna_text).credor_weight == 3
+    assert beliefbox_z._chars.get(anna_text).debtor_weight == 7
 
-    assert beliefunit_z._chars.get(beto_text).credor_weight == 5
-    assert beliefunit_z._chars.get(beto_text).debtor_weight == 11
+    assert beliefbox_z._chars.get(beto_text).credor_weight == 5
+    assert beliefbox_z._chars.get(beto_text).debtor_weight == 11
 
     assert len(bob_world._chars) == 0
     assert len(bob_world._beliefs) == 0
 
     # WHEN
-    bob_world.set_beliefunit(y_beliefunit=beliefunit_z, create_missing_chars=True)
+    bob_world.set_beliefbox(y_beliefbox=beliefbox_z, create_missing_chars=True)
 
     # THEN
     assert len(bob_world._chars) == 2
@@ -824,7 +824,7 @@ def test_WorldUnit_set_beliefunit_create_missing_chars_DoesCreateMissingChars():
     assert bob_world._chars.get(beto_text).debtor_weight == 11
 
 
-def test_WorldUnit_set_beliefunit_create_missing_chars_DoesNotReplaceChars():
+def test_WorldUnit_set_beliefbox_create_missing_chars_DoesNotReplaceChars():
     # GIVEN
     bob_world = worldunit_shop("Bob")
     family_text = ",family"
@@ -836,18 +836,18 @@ def test_WorldUnit_set_beliefunit_create_missing_chars_DoesNotReplaceChars():
     bob_world.set_charunit(
         charunit_shop(char_id=beto_text, credor_weight=46, debtor_weight=71)
     )
-    beliefunit_z = beliefunit_shop(belief_id=family_text)
-    beliefunit_z.set_charlink(
+    beliefbox_z = beliefbox_shop(belief_id=family_text)
+    beliefbox_z.set_charlink(
         charlink=charlink_shop(char_id=anna_text, credor_weight=3, debtor_weight=7)
     )
-    beliefunit_z.set_charlink(
+    beliefbox_z.set_charlink(
         charlink=charlink_shop(char_id=beto_text, credor_weight=5, debtor_weight=11)
     )
 
-    assert beliefunit_z._chars.get(anna_text).credor_weight == 3
-    assert beliefunit_z._chars.get(anna_text).debtor_weight == 7
-    assert beliefunit_z._chars.get(beto_text).credor_weight == 5
-    assert beliefunit_z._chars.get(beto_text).debtor_weight == 11
+    assert beliefbox_z._chars.get(anna_text).credor_weight == 3
+    assert beliefbox_z._chars.get(anna_text).debtor_weight == 7
+    assert beliefbox_z._chars.get(beto_text).credor_weight == 5
+    assert beliefbox_z._chars.get(beto_text).debtor_weight == 11
     assert len(bob_world._chars) == 2
     assert bob_world._chars.get(anna_text).credor_weight == 17
     assert bob_world._chars.get(anna_text).debtor_weight == 88
@@ -855,7 +855,7 @@ def test_WorldUnit_set_beliefunit_create_missing_chars_DoesNotReplaceChars():
     assert bob_world._chars.get(beto_text).debtor_weight == 71
 
     # WHEN
-    bob_world.set_beliefunit(y_beliefunit=beliefunit_z, create_missing_chars=True)
+    bob_world.set_beliefbox(y_beliefbox=beliefbox_z, create_missing_chars=True)
 
     # THEN
     assert len(bob_world._chars) == 2
