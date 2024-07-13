@@ -169,8 +169,8 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_bud_pool", after_world._bud_pool)
         if before_world._coin != after_world._coin:
             x_atomunit.set_optional_arg("_coin", after_world._coin)
-        if before_world._pixel != after_world._pixel:
-            x_atomunit.set_optional_arg("_pixel", after_world._pixel)
+        if before_world._bit != after_world._bit:
+            x_atomunit.set_optional_arg("_bit", after_world._bit)
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_chars(self, before_world: WorldUnit, after_world: WorldUnit):

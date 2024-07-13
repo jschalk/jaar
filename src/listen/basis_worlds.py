@@ -12,7 +12,7 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
     x_road_delimiter = ref_world._road_delimiter
     x_bud_pool = ref_world._bud_pool
     x_coin = ref_world._coin
-    x_pixel = ref_world._pixel
+    x_bit = ref_world._bit
     x_penny = ref_world._penny
     return worldunit_shop(
         _owner_id=x_owner_id,
@@ -20,7 +20,7 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
         _road_delimiter=x_road_delimiter,
         _bud_pool=x_bud_pool,
         _coin=x_coin,
-        _pixel=x_pixel,
+        _bit=x_bit,
         _penny=x_penny,
     )
 

@@ -176,9 +176,9 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
     x_arg = "_weight"
     if x_atom.get_value(x_arg) != None:
         x_world._weight = x_atom.get_value(x_arg)
-    x_arg = "_pixel"
+    x_arg = "_bit"
     if x_atom.get_value(x_arg) != None:
-        x_world._pixel = x_atom.get_value(x_arg)
+        x_world._bit = x_atom.get_value(x_arg)
     x_arg = "_penny"
     if x_atom.get_value(x_arg) != None:
         x_world._penny = x_atom.get_value(x_arg)
@@ -535,7 +535,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._meld_strategy != y_obj._meld_strategy
             or x_obj._char_credor_pool != y_obj._char_credor_pool
             or x_obj._char_debtor_pool != y_obj._char_debtor_pool
-            or x_obj._pixel != y_obj._pixel
+            or x_obj._bit != y_obj._bit
             or x_obj._bud_pool != y_obj._bud_pool
             or x_obj._coin != y_obj._coin
         )

@@ -147,7 +147,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     x_worldUnit_weight = 55
     x_bud_pool = 8000000
     x_coin = 8
-    x_pixel = 0.5
+    x_bit = 0.5
     x_max_tree_traverse = 66
     x_meld_strategy = "override"
     x_monetary_desc = "dragon dollars"
@@ -156,7 +156,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     after_sue_world._weight = x_worldUnit_weight
     after_sue_world._bud_pool = x_bud_pool
     after_sue_world._coin = x_coin
-    after_sue_world._pixel = x_pixel
+    after_sue_world._bit = x_bit
     after_sue_world.set_max_tree_traverse(x_max_tree_traverse)
     after_sue_world.set_meld_strategy(x_meld_strategy)
     after_sue_world.set_monetary_desc(x_monetary_desc)
@@ -178,7 +178,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     assert rico_atomunit.get_value("_weight") == x_worldUnit_weight
     assert rico_atomunit.get_value("_bud_pool") == x_bud_pool
     assert rico_atomunit.get_value("_coin") == x_coin
-    assert rico_atomunit.get_value("_pixel") == x_pixel
+    assert rico_atomunit.get_value("_bit") == x_bit
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1

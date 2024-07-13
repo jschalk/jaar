@@ -63,7 +63,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     x_atomunit.set_optional_arg(new8_arg, new8_value)
     sue_changeunit.set_atomunit(x_atomunit)
     new6_value = 0.5
-    new6_arg = "_pixel"
+    new6_arg = "_bit"
     x_atomunit.set_optional_arg(new6_arg, new6_value)
     sue_changeunit.set_atomunit(x_atomunit)
     new7_value = 0.025
@@ -86,8 +86,8 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     assert after_sue_worldunit._bud_pool != before_sue_worldunit._bud_pool
     assert after_sue_worldunit._coin == new8_value
     assert after_sue_worldunit._coin != before_sue_worldunit._coin
-    assert after_sue_worldunit._pixel == new6_value
-    assert after_sue_worldunit._pixel != before_sue_worldunit._pixel
+    assert after_sue_worldunit._bit == new6_value
+    assert after_sue_worldunit._bit != before_sue_worldunit._bit
     assert after_sue_worldunit._penny == new7_value
     assert after_sue_worldunit._penny != before_sue_worldunit._penny
 

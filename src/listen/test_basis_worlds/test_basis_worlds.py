@@ -45,7 +45,7 @@ def test_create_empty_world_ReturnsCorrectObj():
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
     assert yao_empty_job._bud_pool == yao_voice._bud_pool
     assert yao_empty_job._coin == yao_voice._coin
-    assert yao_empty_job._pixel == yao_voice._pixel
+    assert yao_empty_job._bit == yao_voice._bit
     assert yao_empty_job._penny == yao_voice._penny
     assert yao_empty_job._monetary_desc is None
     assert yao_empty_job._char_credor_pool != yao_voice._char_credor_pool
@@ -90,7 +90,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
     assert yao_basis_job._bud_pool == yao_duty._bud_pool
     assert yao_basis_job._coin == yao_duty._coin
-    assert yao_basis_job._pixel == yao_duty._pixel
+    assert yao_basis_job._bit == yao_duty._bit
     assert yao_basis_job._monetary_desc == yao_duty._monetary_desc
     assert yao_basis_job._char_credor_pool == yao_duty._char_credor_pool
     assert yao_basis_job._char_debtor_pool == yao_duty._char_debtor_pool
@@ -110,14 +110,14 @@ def test_get_default_action_world_ReturnsCorrectObj():
     slash_text = "/"
     x_bud_pool = 99000
     x_coin = 80
-    x_pixel = 5
+    x_bit = 5
     sue_char_pool = 800
     casa_text = "casa"
     bob_text = "Bob"
     last_gift_id = 7
     sue_max_tree_traverse = 9
     sue_worldunit = worldunit_shop(
-        sue_text, blue_text, slash_text, x_bud_pool, x_coin, x_pixel
+        sue_text, blue_text, slash_text, x_bud_pool, x_coin, x_bit
     )
     sue_worldunit.set_last_gift_id(last_gift_id)
     sue_worldunit.add_charunit(bob_text, 3, 4)
@@ -141,7 +141,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     assert default_action_world._road_delimiter == slash_text
     assert default_action_world._bud_pool == sue_char_pool
     assert default_action_world._coin == x_coin
-    assert default_action_world._pixel == x_pixel
+    assert default_action_world._bit == x_bit
     assert default_action_world._char_credor_pool is None
     assert default_action_world._char_debtor_pool is None
     assert default_action_world._max_tree_traverse == sue_max_tree_traverse

@@ -381,7 +381,7 @@
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_pixel": {
+            "_bit": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },

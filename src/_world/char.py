@@ -1,6 +1,6 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json, get_0_if_None
 from src._road.road import CharID, default_road_delimiter_if_none, validate_roadnode
-from src._road.finance import default_pixel_if_none
+from src._road.finance import default_bit_if_none
 from src._world.belieflink import BeliefID, BeliefLink, belieflinks_get_from_dict
 from dataclasses import dataclass
 
@@ -9,7 +9,7 @@ class InvalidCharException(Exception):
     pass
 
 
-class _pixel_RatioException(Exception):
+class _bit_RatioException(Exception):
     pass
 
 
@@ -17,7 +17,7 @@ class _pixel_RatioException(Exception):
 class CharCore:
     char_id: CharID = None
     _road_delimiter: str = None
-    _pixel: float = None
+    _bit: float = None
 
     def set_char_id(self, x_char_id: CharID):
         self.char_id = validate_roadnode(x_char_id, self._road_delimiter)
@@ -45,8 +45,8 @@ class CharUnit(CharCore):
     _world_agenda_ratio_cred: float = None
     _world_agenda_ratio_debt: float = None
 
-    def set_pixel(self, x_pixel: float):
-        self._pixel = x_pixel
+    def set_bit(self, x_bit: float):
+        self._bit = x_bit
 
     def set_credor_debtor_weight(
         self,
@@ -59,16 +59,16 @@ class CharUnit(CharCore):
             self.set_debtor_weight(debtor_weight)
 
     def set_credor_weight(self, credor_weight: int):
-        if (credor_weight / self._pixel).is_integer() is False:
-            raise _pixel_RatioException(
-                f"'{credor_weight}' is not divisible by pixel '{self._pixel}'"
+        if (credor_weight / self._bit).is_integer() is False:
+            raise _bit_RatioException(
+                f"'{credor_weight}' is not divisible by bit '{self._bit}'"
             )
         self.credor_weight = credor_weight
 
     def set_debtor_weight(self, debtor_weight: int):
-        if (debtor_weight / self._pixel).is_integer() is False:
-            raise _pixel_RatioException(
-                f"'{debtor_weight}' is not divisible by pixel '{self._pixel}'"
+        if (debtor_weight / self._bit).is_integer() is False:
+            raise _bit_RatioException(
+                f"'{debtor_weight}' is not divisible by bit '{self._bit}'"
             )
         self.debtor_weight = debtor_weight
 
@@ -231,7 +231,7 @@ def charunit_shop(
     credor_weight: int = None,
     debtor_weight: int = None,
     _road_delimiter: str = None,
-    _pixel: float = None,
+    _bit: float = None,
 ) -> CharUnit:
     x_charunit = CharUnit(
         credor_weight=get_1_if_None(credor_weight),
@@ -246,7 +246,7 @@ def charunit_shop(
         _world_agenda_ratio_cred=get_0_if_None(),
         _world_agenda_ratio_debt=get_0_if_None(),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _pixel=default_pixel_if_none(_pixel),
+        _bit=default_bit_if_none(_bit),
     )
     x_charunit.set_char_id(x_char_id=char_id)
     return x_charunit

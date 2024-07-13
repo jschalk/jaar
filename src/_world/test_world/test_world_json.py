@@ -230,8 +230,8 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     zia_world._bud_pool = x_bud_pool
     x_coin = 66
     zia_world._coin = x_coin
-    x_pixel = 7
-    zia_world._pixel = x_pixel
+    x_bit = 7
+    zia_world._bit = x_bit
     x_penny = 0.3
     zia_world._penny = x_penny
     override_text = "override"
@@ -262,7 +262,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert world_dict["_meld_strategy"] == zia_world._meld_strategy
     assert world_dict["_bud_pool"] == zia_world._bud_pool
     assert world_dict["_coin"] == zia_world._coin
-    assert world_dict["_pixel"] == zia_world._pixel
+    assert world_dict["_bit"] == zia_world._bit
     assert world_dict["_penny"] == zia_world._penny
     with pytest_raises(Exception) as excinfo:
         world_dict["_char_credor_pool"]
@@ -356,8 +356,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world._bud_pool = zia_bud_pool
     zia_coin = 8
     zia_world._coin = zia_coin
-    zia_pixel = 0.5
-    zia_world._pixel = zia_pixel
+    zia_bit = 0.5
+    zia_world._bit = zia_bit
     zia_penny = 2
     zia_world._penny = zia_penny
     zia_char_credor_pool = 2
@@ -417,8 +417,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._bud_pool == zia_world._bud_pool
     assert json_world._coin == zia_coin
     assert json_world._coin == zia_world._coin
-    assert json_world._pixel == zia_pixel
-    assert json_world._pixel == zia_world._pixel
+    assert json_world._bit == zia_bit
+    assert json_world._bit == zia_world._bit
     assert json_world._penny == zia_penny
     assert json_world._penny == zia_world._penny
     assert json_world._max_tree_traverse == 23

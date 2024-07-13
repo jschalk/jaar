@@ -1,5 +1,5 @@
 from src._road.finance import (
-    default_pixel_if_none,
+    default_bit_if_none,
     default_penny_if_none,
     default_coin_if_none,
     validate_bud_pool,
@@ -33,7 +33,7 @@ def test_WorldUnit_Exists():
     assert x_world._road_delimiter is None
     assert x_world._bud_pool is None
     assert x_world._coin is None
-    assert x_world._pixel is None
+    assert x_world._bit is None
     assert x_world._penny is None
     assert x_world._monetary_desc is None
     assert x_world._char_credor_pool is None
@@ -61,7 +61,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     override_meld_strategy = "override"
     x_bud_pool = 555
     x_coin = 7
-    x_pixel = 5
+    x_bit = 5
     x_penny = 1
 
     # WHEN
@@ -72,7 +72,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _meld_strategy=override_meld_strategy,
         _bud_pool=x_bud_pool,
         _coin=x_coin,
-        _pixel=x_pixel,
+        _bit=x_bit,
         _penny=x_penny,
     )
     assert x_world
@@ -86,7 +86,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._road_delimiter == slash_road_delimiter
     assert x_world._bud_pool == x_bud_pool
     assert x_world._coin == x_coin
-    assert x_world._pixel == x_pixel
+    assert x_world._bit == x_bit
     assert x_world._penny == x_penny
     assert x_world._monetary_desc is None
     assert x_world._char_credor_pool is None
@@ -126,7 +126,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_world._road_delimiter == default_road_delimiter_if_none()
     assert x_world._bud_pool == validate_bud_pool()
     assert x_world._coin == default_coin_if_none()
-    assert x_world._pixel == default_pixel_if_none()
+    assert x_world._bit == default_bit_if_none()
     assert x_world._penny == default_penny_if_none()
     assert x_world._idearoot._coin == x_world._coin
     assert x_world._idearoot._road_delimiter == x_world._road_delimiter

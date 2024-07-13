@@ -1,6 +1,6 @@
 from src._instrument.file import set_dir, delete_dir, dir_files
 from src._road.jaar_config import get_gifts_folder
-from src._road.finance import default_pixel_if_none, default_penny_if_none
+from src._road.finance import default_bit_if_none, default_penny_if_none
 from src._road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, RealID
 from src._world.world import WorldUnit
 from src.listen.basis_worlds import get_default_action_world
@@ -36,7 +36,7 @@ class RealUnit:
     _gifts_dir: str = None
     _road_delimiter: str = None
     _coin: float = None
-    _pixel: float = None
+    _bit: float = None
     _penny: float = None
 
     # directory setup
@@ -65,7 +65,7 @@ class RealUnit:
                 owner_id=x_owner_id,
                 econ_road=None,
                 road_delimiter=self._road_delimiter,
-                pixel=self._pixel,
+                bit=self._bit,
             )
             for x_owner_id in x_owner_ids
         }
@@ -112,7 +112,7 @@ class RealUnit:
             reals_dir=self.reals_dir,
             econ_road=None,
             road_delimiter=self._road_delimiter,
-            pixel=self._pixel,
+            bit=self._bit,
         )
 
     def init_owner_econs(self, owner_id: OwnerID):
@@ -134,7 +134,7 @@ class RealUnit:
                 econ_road=None,
                 # "duty_job",
                 road_delimiter=self._road_delimiter,
-                pixel=self._pixel,
+                bit=self._bit,
             )
             for econ_road in healer_dict.keys():
                 self._set_owner_duty(healer_hubunit, econ_road, x_voice)
@@ -163,7 +163,7 @@ class RealUnit:
                 econ_road=None,
                 # "duty_job",
                 road_delimiter=self._road_delimiter,
-                pixel=self._pixel,
+                bit=self._bit,
             )
             healer_hubunit.create_voice_treasury_db_files()
             for econ_road in healer_dict.keys():
@@ -174,7 +174,7 @@ class RealUnit:
                     econ_road=econ_road,
                     # "duty_job",
                     road_delimiter=self._road_delimiter,
-                    pixel=self._pixel,
+                    bit=self._bit,
                 )
                 econ_hubunit.save_duty_world(x_voice)
                 create_job_file_from_duty_file(econ_hubunit, owner_id)
@@ -208,15 +208,15 @@ def realunit_shop(
     in_memory_journal: bool = None,
     _road_delimiter: str = None,
     _coin: float = None,
-    _pixel: float = None,
+    _bit: float = None,
     _penny: float = None,
 ) -> RealUnit:
     real_x = RealUnit(
         real_id=real_id,
         reals_dir=reals_dir,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _coin=default_pixel_if_none(_coin),
-        _pixel=default_pixel_if_none(_pixel),
+        _coin=default_bit_if_none(_coin),
+        _bit=default_bit_if_none(_bit),
         _penny=default_penny_if_none(_penny),
     )
     real_x._set_real_dirs(in_memory_journal=in_memory_journal)

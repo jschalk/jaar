@@ -26,7 +26,7 @@ def _ingest_perspective_agenda(
     listener: WorldUnit, agenda: list[IdeaUnit]
 ) -> WorldUnit:
     debtor_amount = listener._char_debtor_pool
-    ingest_list = generate_ingest_list(agenda, debtor_amount, listener._pixel)
+    ingest_list = generate_ingest_list(agenda, debtor_amount, listener._bit)
     for ingest_ideaunit in ingest_list:
         _ingest_single_ideaunit(listener, ingest_ideaunit)
     return listener
@@ -50,46 +50,46 @@ def get_speaker_perspective(speaker: WorldUnit, listener_owner_id: OwnerID):
     return listener_hubunit.get_perspective_world(speaker)
 
 
-def _get_pixel_scaled_weight(
-    x_bud_share: float, debtor_amount: float, pixel: float
+def _get_bit_scaled_weight(
+    x_bud_share: float, debtor_amount: float, bit: float
 ) -> float:
     x_ingest_weight = x_bud_share * debtor_amount
-    return int(x_ingest_weight / pixel) * pixel
+    return int(x_ingest_weight / bit) * bit
 
 
-def _allot_ingest(x_list: list[IdeaUnit], nonallocated_ingest: float, pixel: float):
+def _allot_ingest(x_list: list[IdeaUnit], nonallocated_ingest: float, bit: float):
     # TODO very slow needs to be optimized
     if x_list:
         x_count = 0
         while nonallocated_ingest > 0:
             x_ideaunit = x_list[x_count]
-            x_ideaunit._weight += pixel
-            nonallocated_ingest -= pixel
+            x_ideaunit._weight += bit
+            nonallocated_ingest -= bit
             x_count += 1
             if x_count == len(x_list):
                 x_count = 0
 
 
 def create_ingest_idea(
-    x_ideaunit: IdeaUnit, debtor_amount: float, pixel: float
+    x_ideaunit: IdeaUnit, debtor_amount: float, bit: float
 ) -> IdeaUnit:
-    x_ideaunit._weight = _get_pixel_scaled_weight(
+    x_ideaunit._weight = _get_bit_scaled_weight(
         x_bud_share=x_ideaunit._bud_ratio,
         debtor_amount=debtor_amount,
-        pixel=pixel,
+        bit=bit,
     )
     return x_ideaunit
 
 
 def generate_ingest_list(
-    item_list: list[IdeaUnit], debtor_amount: float, pixel: float
+    item_list: list[IdeaUnit], debtor_amount: float, bit: float
 ) -> list[IdeaUnit]:
     x_list = [
-        create_ingest_idea(x_ideaunit, debtor_amount, pixel) for x_ideaunit in item_list
+        create_ingest_idea(x_ideaunit, debtor_amount, bit) for x_ideaunit in item_list
     ]
     sum_scaled_ingest = sum(x_ideaunit._weight for x_ideaunit in item_list)
     nonallocated_ingest = debtor_amount - sum_scaled_ingest
-    _allot_ingest(x_list, nonallocated_ingest, pixel)
+    _allot_ingest(x_list, nonallocated_ingest, bit)
     return x_list
 
 

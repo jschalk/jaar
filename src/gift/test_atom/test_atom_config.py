@@ -331,7 +331,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert worldunit_columns.get("_char_debtor_pool") != None
     assert worldunit_columns.get("_bud_pool") != None
     assert worldunit_columns.get("_coin") != None
-    assert worldunit_columns.get("_pixel") != None
+    assert worldunit_columns.get("_bit") != None
     assert worldunit_columns.get("_penny") != None
     assert worldunit_columns.get("_weight") != None
 

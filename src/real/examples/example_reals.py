@@ -42,7 +42,7 @@ def create_example_real1() -> RealUnit:
         owner_id=yao_hubunit.owner_id,
         econ_road=None,
         road_delimiter=yao_hubunit.road_delimiter,
-        pixel=yao_hubunit.pixel,
+        bit=yao_hubunit.bit,
     )
     x_hubunit.save_voice_world(yao_voice_world)
     yao_hubunit.create_voice_treasury_db_files()

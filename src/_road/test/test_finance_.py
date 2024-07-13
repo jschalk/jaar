@@ -1,48 +1,48 @@
 from src._road.finance import (
     CoinNum,
     BudNum,
-    PixelNum,
+    bitNum,
     PennyNum,
     MoneyUnit,
     default_bud_pool,
     validate_bud_pool,
     default_coin_if_none,
-    default_pixel_if_none,
+    default_bit_if_none,
     default_penny_if_none,
     trim_coin_excess,
-    trim_pixel_excess,
+    trim_bit_excess,
     trim_penny_excess,
     FiscalUnit,
 )
 from inspect import getdoc as inspect_getdoc
 
 
-def test_PixelNum_exists():
+def test_bitNum_exists():
     # GIVEN
     x_float = 0.045
     # WHEN
-    y_pixelnum = PixelNum(x_float)
+    y_bitnum = bitNum(x_float)
     # THEN
-    assert y_pixelnum == x_float
+    assert y_bitnum == x_float
     inspect_str = "Smallest Unit of credor_weight or debtor_weight"
-    assert inspect_getdoc(y_pixelnum) == inspect_str
+    assert inspect_getdoc(y_bitnum) == inspect_str
 
 
-def test_default_pixel_if_none_ReturnsCorrectObj():
+def test_default_bit_if_none_ReturnsCorrectObj():
     # GIVEN / WHEN / THEN
-    assert default_pixel_if_none() == 1
-    assert default_pixel_if_none(5) == 5
-    assert default_pixel_if_none(0.03) == 0.03
+    assert default_bit_if_none() == 1
+    assert default_bit_if_none(5) == 5
+    assert default_bit_if_none(0.03) == 0.03
 
 
-def test_trim_pixel_excess_ReturnsCorrectedFloat():
+def test_trim_bit_excess_ReturnsCorrectedFloat():
     # GIVEN / WHEN / THEN
-    assert trim_pixel_excess(num=5.5, pixel=1) == 5
-    assert trim_pixel_excess(num=0.5, pixel=1) == 0
-    assert trim_pixel_excess(num=5.5, pixel=0.1) == 5.5
-    assert trim_pixel_excess(num=0.5, pixel=0.01) == 0.5
-    assert trim_pixel_excess(num=0.56, pixel=0.1) == 0.5
-    assert trim_pixel_excess(num=0.56, pixel=0.133) == 0.532
+    assert trim_bit_excess(num=5.5, bit=1) == 5
+    assert trim_bit_excess(num=0.5, bit=1) == 0
+    assert trim_bit_excess(num=5.5, bit=0.1) == 5.5
+    assert trim_bit_excess(num=0.5, bit=0.01) == 0.5
+    assert trim_bit_excess(num=0.56, bit=0.1) == 0.5
+    assert trim_bit_excess(num=0.56, bit=0.133) == 0.532
 
 
 def test_PennyNum_exists():
@@ -143,7 +143,7 @@ def test_FiscalUnit_Exists():
     # THEN
     assert x_fiscal._bud_pool is None
     assert x_fiscal._coin is None
-    assert x_fiscal._pixel is None
+    assert x_fiscal._bit is None
     assert x_fiscal._penny is None
 
 

@@ -14,7 +14,7 @@ class MoneyUnit(float):
     pass
 
 
-class PixelNum(float):
+class bitNum(float):
     """Smallest Unit of credor_weight or debtor_weight"""
 
     pass
@@ -55,12 +55,12 @@ def validate_bud_pool(x_bud_pool: int = None) -> int:
 #     return max(get_1_if_None(x_bud_pool), default_coin_if_none())
 
 
-def default_pixel_if_none(pixel: PixelNum = None) -> PixelNum:
-    return get_1_if_None(pixel)
+def default_bit_if_none(bit: bitNum = None) -> bitNum:
+    return get_1_if_None(bit)
 
 
-def trim_pixel_excess(num: float, pixel: PixelNum) -> float:
-    return pixel * int(num / pixel)
+def trim_bit_excess(num: float, bit: bitNum) -> float:
+    return bit * int(num / bit)
 
 
 def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
@@ -83,7 +83,7 @@ def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
 class FiscalUnit:
     _bud_pool: BudNum = None
     _coin: CoinNum = None
-    _pixel: PixelNum = None
+    _bit: bitNum = None
     _penny: PennyNum = None
 
 

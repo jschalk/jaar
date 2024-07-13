@@ -7,12 +7,12 @@ from src._instrument.python import (
     get_empty_dict_if_none,
 )
 from src._road.finance import (
-    trim_pixel_excess,
-    default_pixel_if_none,
+    trim_bit_excess,
+    default_bit_if_none,
     default_penny_if_none,
     default_coin_if_none,
     validate_bud_pool,
-    PixelNum,
+    bitNum,
     PennyNum,
     CoinNum,
     BudNum,
@@ -114,7 +114,7 @@ class Exception_econs_justified(Exception):
     pass
 
 
-class _pixel_RatioException(Exception):
+class _bit_RatioException(Exception):
     pass
 
 
@@ -139,7 +139,7 @@ class WorldUnit:
     _road_delimiter: str = None
     _bud_pool: BudNum = None
     _coin: CoinNum = None
-    _pixel: PixelNum = None
+    _bit: bitNum = None
     _penny: PennyNum = None
     _monetary_desc: str = None
     _char_credor_pool: int = None
@@ -177,12 +177,12 @@ class WorldUnit:
         self.set_char_credor_pool(
             new_char_credor_pool=x_char_pool,
             update_chars_credor_weight=True,
-            correct_pixel_issues=True,
+            correct_bit_issues=True,
         )
         self.set_char_debtor_pool(
             new_char_debtor_pool=x_char_pool,
             update_chars_debtor_weight=True,
-            correct_pixel_issues=True,
+            correct_bit_issues=True,
         )
         self.set_bud_pool(x_char_pool)
 
@@ -190,11 +190,11 @@ class WorldUnit:
         self,
         new_char_credor_pool: int,
         update_chars_credor_weight: bool = False,
-        correct_pixel_issues: bool = False,
+        correct_bit_issues: bool = False,
     ):
-        if (new_char_credor_pool / self._pixel).is_integer() is False:
-            raise _pixel_RatioException(
-                f"World '{self._owner_id}' cannot set _char_credor_pool='{new_char_credor_pool}'. It is not divisible by pixel '{self._pixel}'"
+        if (new_char_credor_pool / self._bit).is_integer() is False:
+            raise _bit_RatioException(
+                f"World '{self._owner_id}' cannot set _char_credor_pool='{new_char_credor_pool}'. It is not divisible by bit '{self._bit}'"
             )
 
         if update_chars_credor_weight:
@@ -202,16 +202,16 @@ class WorldUnit:
             if old_char_credor_pool != 0:
                 x_ratio = new_char_credor_pool / old_char_credor_pool
                 for x_char in self._chars.values():
-                    new_char_credor_weight = trim_pixel_excess(
-                        num=x_char.credor_weight * x_ratio, pixel=x_char._pixel
+                    new_char_credor_weight = trim_bit_excess(
+                        num=x_char.credor_weight * x_ratio, bit=x_char._bit
                     )
                     x_char.set_credor_weight(new_char_credor_weight)
 
         self._char_credor_pool = new_char_credor_pool
-        if correct_pixel_issues:
-            self._correct_any_credor_pixel_issues()
+        if correct_bit_issues:
+            self._correct_any_credor_bit_issues()
 
-    def _correct_any_credor_pixel_issues(self):
+    def _correct_any_credor_bit_issues(self):
         if self.get_charunits_credor_weight_sum() != self._char_credor_pool:
             missing_credor_weight = (
                 self._char_credor_pool - self.get_charunits_credor_weight_sum()
@@ -219,21 +219,21 @@ class WorldUnit:
             if len(self._chars) > 0:
                 charunits = list(self._chars.values())
                 # chars_count = len(self._chars)
-                # pixel_count = missing_credor_weight / self._pixel
-                # if pixel_count <= chars_count:
-                for _ in range(0, missing_credor_weight, self._pixel):
+                # bit_count = missing_credor_weight / self._bit
+                # if bit_count <= chars_count:
+                for _ in range(0, missing_credor_weight, self._bit):
                     x_charunit = charunits.pop()
-                    x_charunit.set_credor_weight(x_charunit.credor_weight + self._pixel)
+                    x_charunit.set_credor_weight(x_charunit.credor_weight + self._bit)
 
     def set_char_debtor_pool(
         self,
         new_char_debtor_pool: int,
         update_chars_debtor_weight: bool = False,
-        correct_pixel_issues: bool = False,
+        correct_bit_issues: bool = False,
     ):
-        if (new_char_debtor_pool / self._pixel).is_integer() is False:
-            raise _pixel_RatioException(
-                f"World '{self._owner_id}' cannot set _char_debtor_pool='{new_char_debtor_pool}'. It is not divisible by pixel '{self._pixel}'"
+        if (new_char_debtor_pool / self._bit).is_integer() is False:
+            raise _bit_RatioException(
+                f"World '{self._owner_id}' cannot set _char_debtor_pool='{new_char_debtor_pool}'. It is not divisible by bit '{self._bit}'"
             )
 
         if update_chars_debtor_weight:
@@ -241,15 +241,15 @@ class WorldUnit:
             if old_char_debtor_pool != 0:
                 x_ratio = new_char_debtor_pool / old_char_debtor_pool
                 for x_char in self._chars.values():
-                    new_char_debtor_weight = trim_pixel_excess(
-                        num=x_char.debtor_weight * x_ratio, pixel=x_char._pixel
+                    new_char_debtor_weight = trim_bit_excess(
+                        num=x_char.debtor_weight * x_ratio, bit=x_char._bit
                     )
                     x_char.set_debtor_weight(new_char_debtor_weight)
         self._char_debtor_pool = new_char_debtor_pool
-        if correct_pixel_issues:
-            self._correct_any_debtor_pixel_issues()
+        if correct_bit_issues:
+            self._correct_any_debtor_bit_issues()
 
-    def _correct_any_debtor_pixel_issues(self):
+    def _correct_any_debtor_bit_issues(self):
         if self.get_charunits_debtor_weight_sum() != self._char_debtor_pool:
             missing_debtor_weight = (
                 self._char_debtor_pool - self.get_charunits_debtor_weight_sum()
@@ -257,11 +257,11 @@ class WorldUnit:
             if len(self._chars) > 0:
                 charunits = list(self._chars.values())
                 # chars_count = len(self._chars)
-                # pixel_count = missing_debtor_weight / self._pixel
-                # if pixel_count <= chars_count:
-                for _ in range(0, missing_debtor_weight, self._pixel):
+                # bit_count = missing_debtor_weight / self._bit
+                # if bit_count <= chars_count:
+                for _ in range(0, missing_debtor_weight, self._bit):
                     x_charunit = charunits.pop()
-                    x_charunit.set_debtor_weight(x_charunit.debtor_weight + self._pixel)
+                    x_charunit.set_debtor_weight(x_charunit.debtor_weight + self._bit)
 
     def make_road(
         self,
@@ -640,8 +640,8 @@ class WorldUnit:
     def set_charunit(self, charunit: CharUnit):
         if charunit._road_delimiter != self._road_delimiter:
             charunit._road_delimiter = self._road_delimiter
-        if charunit._pixel != self._pixel:
-            charunit._pixel = self._pixel
+        if charunit._bit != self._bit:
+            charunit._bit = self._bit
         self._chars[charunit.char_id] = charunit
 
         try:
@@ -2074,7 +2074,7 @@ class WorldUnit:
             "_weight": self._weight,
             "_bud_pool": self._bud_pool,
             "_coin": self._coin,
-            "_pixel": self._pixel,
+            "_bit": self._bit,
             "_penny": self._penny,
             "_owner_id": self._owner_id,
             "_real_id": self._real_id,
@@ -2270,7 +2270,7 @@ def worldunit_shop(
     _road_delimiter: str = None,
     _bud_pool: BudNum = None,
     _coin: CoinNum = None,
-    _pixel: PixelNum = None,
+    _bit: bitNum = None,
     _penny: PennyNum = None,
     _weight: float = None,
     _meld_strategy: MeldStrategy = None,
@@ -2290,7 +2290,7 @@ def worldunit_shop(
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _bud_pool=validate_bud_pool(_bud_pool),
         _coin=default_coin_if_none(_coin),
-        _pixel=default_pixel_if_none(_pixel),
+        _bit=default_bit_if_none(_bit),
         _penny=default_penny_if_none(_penny),
         _meld_strategy=validate_meld_strategy(_meld_strategy),
         _econs_justified=get_False_if_None(),
@@ -2325,7 +2325,7 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
     x_world._bud_pool = validate_bud_pool(obj_from_world_dict(world_dict, "_bud_pool"))
     x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
-    x_world._pixel = default_pixel_if_none(obj_from_world_dict(world_dict, "_pixel"))
+    x_world._bit = default_bit_if_none(obj_from_world_dict(world_dict, "_bit"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))
     x_world._char_credor_pool = obj_from_world_dict(world_dict, "_char_credor_pool")
     x_world._char_debtor_pool = obj_from_world_dict(world_dict, "_char_debtor_pool")

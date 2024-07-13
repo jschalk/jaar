@@ -123,7 +123,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     sue_real_dir = f"{env_dir()}/{root_label()}"
     sue_bud_pool = 50000
     sue_coin = 5
-    sue_pixel = 7
+    sue_bit = 7
     sue_hubunit = hubunit_shop(
         env_dir(),
         root_label(),
@@ -131,10 +131,10 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
         None,
         bud_pool=sue_bud_pool,
         coin=sue_coin,
-        pixel=sue_pixel,
+        bit=sue_bit,
     )
     sue_world = worldunit_shop(
-        sue_text, root_label(), _bud_pool=sue_bud_pool, _coin=sue_coin, _pixel=sue_pixel
+        sue_text, root_label(), _bud_pool=sue_bud_pool, _coin=sue_coin, _bit=sue_bit
     )
     sue_hubunit.initialize_action_file(sue_world)
     assert sue_hubunit.action_file_exists()
@@ -163,7 +163,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     assert action_world._owner_id == sue_text
     assert action_world._bud_pool == sue_bud_pool
     assert action_world._coin == sue_coin
-    assert action_world._pixel == sue_pixel
+    assert action_world._bit == sue_bit
 
 
 def test_HubUnit_initialize_action_file_CreatesDirsAndFiles(env_dir_setup_cleanup):

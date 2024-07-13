@@ -30,8 +30,8 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
 
 def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     # GIVEN
-    x_pixel = 0.5
-    yao_world = worldunit_shop("Yao", _pixel=x_pixel)
+    x_bit = 0.5
+    yao_world = worldunit_shop("Yao", _bit=x_bit)
     yao_world.calc_world_metrics()
     assert len(yao_world._chars) == 0
     assert len(yao_world._beliefs) == 0
@@ -45,7 +45,7 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     yao_world.set_charunit(charunit=charunit_shop(CharID(patr_text)))
 
     # THEN
-    assert yao_world._chars.get(rico_text)._pixel == x_pixel
+    assert yao_world._chars.get(rico_text)._bit == x_bit
     assert len(yao_world._chars) == 3
     assert len(yao_world._beliefs) == 3
     assert yao_world._beliefs["rico"]._char_mirror == True
@@ -62,8 +62,8 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
 
 def test_WorldUnit_add_charunit_CorrectlySets_chars():
     # GIVEN
-    x_pixel = 0.5
-    yao_world = worldunit_shop("Yao", _pixel=x_pixel)
+    x_bit = 0.5
+    yao_world = worldunit_shop("Yao", _bit=x_bit)
     rico_text = "rico"
     carm_text = "carmen"
     patr_text = "patrick"
@@ -79,7 +79,7 @@ def test_WorldUnit_add_charunit_CorrectlySets_chars():
     assert yao_world.get_beliefunit(rico_text)._char_mirror == True
     assert yao_world._chars.get(patr_text).credor_weight == 17
     assert yao_world._chars.get(carm_text).debtor_weight == 5
-    assert yao_world._chars.get(patr_text)._pixel == x_pixel
+    assert yao_world._chars.get(patr_text)._bit == x_bit
 
 
 def test_WorldUnit_char_exists_ReturnsObj():
