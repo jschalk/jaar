@@ -1,11 +1,10 @@
 from src._road.road import get_default_real_id_roadnode
 from src._world.beliefbox import (
-    BeliefID,
     awardlink_shop,
     beliefbox_shop,
     get_chars_relevant_beliefs,
 )
-from src._world.char import CharID, charunit_shop, charlink_shop
+from src._world.char import charunit_shop, charlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
@@ -126,8 +125,8 @@ def test_WorldUnit_beliefs_set_beliefbox_CorrectlySets_charlinks():
 def test_WorldUnit_beliefs_del_beliefbox_casasCorrectly():
     # GIVEN
     x_world = worldunit_shop()
-    swim_text = "swimmers"
-    swim_belief = beliefbox_shop(belief_id=BeliefID(swim_text))
+    swim_text = ",swimmers"
+    swim_belief = beliefbox_shop(belief_id=swim_text)
     x_world.set_beliefbox(y_beliefbox=swim_belief)
     assert x_world.get_beliefbox(swim_text) != None
 
@@ -152,9 +151,9 @@ def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     assert len(sue_world._beliefs) == 3
     swim_text = "swim"
     sue_world.add_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(belief_id=BeliefID(yao_text), credor_weight=10)
-    awardlink_zia = awardlink_shop(belief_id=BeliefID(zia_text), credor_weight=10)
-    awardlink_Xio = awardlink_shop(belief_id=BeliefID(Xio_text), credor_weight=10)
+    awardlink_yao = awardlink_shop(belief_id=yao_text, credor_weight=10)
+    awardlink_zia = awardlink_shop(belief_id=zia_text, credor_weight=10)
+    awardlink_Xio = awardlink_shop(belief_id=Xio_text, credor_weight=10)
     swim_road = sue_world.make_l1_road(swim_text)
     sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_yao)
     sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_zia)
@@ -203,9 +202,9 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     swim_road = x_world.make_road(prom_text, swim_text)
 
     x_world.add_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(belief_id=BeliefID(yao_text), credor_weight=10)
-    awardlink_zia = awardlink_shop(belief_id=BeliefID(zia_text), credor_weight=10)
-    awardlink_Xio = awardlink_shop(belief_id=BeliefID(Xio_text), credor_weight=10)
+    awardlink_yao = awardlink_shop(belief_id=yao_text, credor_weight=10)
+    awardlink_zia = awardlink_shop(belief_id=zia_text, credor_weight=10)
+    awardlink_Xio = awardlink_shop(belief_id=Xio_text, credor_weight=10)
 
     swim_idea = x_world.get_idea_obj(swim_road)
     x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_yao)

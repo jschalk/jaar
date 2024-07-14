@@ -182,12 +182,12 @@ def test_IdeaUnit_awardlinks_exist():
     biker_credor_weight = 12
     biker_debtor_weight = 15
     biker_awardlink = awardlink_shop(
-        belief_id=BeliefID("bikers2"),
+        belief_id="bikers2",
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
     )
 
-    swimmer_belief_id = BeliefID("swimmers")
+    swimmer_belief_id = "swimmers"
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
     swimmer_awardlink = awardlink_shop(
@@ -215,13 +215,13 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     biker_debtor_weight = 15
     biker_text = "bikers2"
     biker_awardlink = awardheir_shop(
-        belief_id=BeliefID(biker_text),
+        belief_id=biker_text,
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
     )
 
     swimmer_text = "swimmers"
-    swimmer_belief_id = BeliefID(swimmer_text)
+    swimmer_belief_id = swimmer_text
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
     swimmer_awardlink = awardheir_shop(
@@ -471,13 +471,13 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
             base=states_road, premises={usa_premise.need: usa_premise}, _status=False
         ),
     }
-    biker_belief_id = BeliefID("bikers")
+    biker_belief_id = "bikers"
     biker_credor_weight = 3.0
     biker_debtor_weight = 7.0
     biker_awardlink = awardlink_shop(
         biker_belief_id, biker_credor_weight, biker_debtor_weight
     )
-    flyer_belief_id = BeliefID("flyers")
+    flyer_belief_id = "flyers"
     flyer_credor_weight = 6.0
     flyer_debtor_weight = 9.0
     flyer_awardlink = awardlink_shop(

@@ -39,7 +39,7 @@ def test_healerhold_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
 
 def test_HealerHold_get_dict_ReturnsCorrectDictWithSingleBelief_id():
     # GIVEN
-    bob_belief_id = BeliefID("Bob")
+    bob_belief_id = "Bob"
     run_belief_ids = {bob_belief_id}
     x_healerhold = healerhold_shop(_belief_ids=run_belief_ids)
 

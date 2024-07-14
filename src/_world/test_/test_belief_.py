@@ -298,26 +298,26 @@ def test_BeliefBox_get_beliefboxs_from_dict_ReturnsCorrectObjWith_road_delimiter
 
 def test_AwardLink_exists():
     # GIVEN
-    bikers_belief_id = BeliefID("bikers")
+    bikers_text = "bikers"
 
     # WHEN
-    bikers_awardlink = AwardLink(belief_id=bikers_belief_id)
+    bikers_awardlink = AwardLink(belief_id=bikers_text)
 
     # THEN
-    assert bikers_awardlink.belief_id == bikers_belief_id
+    assert bikers_awardlink.belief_id == bikers_text
     assert bikers_awardlink.credor_weight == 1.0
     assert bikers_awardlink.debtor_weight == 1.0
 
 
 def test_awardlink_shop_ReturnsCorrectObj():
     # GIVEN
-    bikers_belief_id = BeliefID("bikers")
+    bikers_text = "bikers"
     bikers_credor_weight = 3.0
     bikers_debtor_weight = 5.0
 
     # WHEN
     bikers_awardlink = awardlink_shop(
-        belief_id=bikers_belief_id,
+        belief_id=bikers_text,
         credor_weight=bikers_credor_weight,
         debtor_weight=bikers_debtor_weight,
     )
@@ -329,14 +329,14 @@ def test_awardlink_shop_ReturnsCorrectObj():
 
 def test_AwardHeir_set_bud_share_CorrectlySetsAttr():
     # GIVEN
-    bikers_belief_id = BeliefID("bikers")
+    bikers_text = "bikers"
     bikers_credor_weight = 3.0
     bikers_debt_weight = 6.0
     awardlinks_sum_credor_weight = 60
     awardlinks_sum_debtor_weight = 60
     idea_bud_share = 1
     belief_heir_x = awardheir_shop(
-        belief_id=bikers_belief_id,
+        belief_id=bikers_text,
         credor_weight=bikers_credor_weight,
         debtor_weight=bikers_debt_weight,
     )
@@ -355,11 +355,11 @@ def test_AwardHeir_set_bud_share_CorrectlySetsAttr():
 
 def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # GIVEN
-    bikers_belief_id = BeliefID("bikers")
+    bikers_text = "bikers"
     bikers_credor_weight = 3.0
     bikers_debtor_weight = 5.0
     bikers_awardlink = awardlink_shop(
-        belief_id=bikers_belief_id,
+        belief_id=bikers_text,
         credor_weight=bikers_credor_weight,
         debtor_weight=bikers_debtor_weight,
     )
@@ -404,50 +404,50 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
 
 def test_AwardLine_exists():
     # GIVEN
-    bikers_belief_id = BeliefID("bikers")
+    bikers_text = "bikers"
     bikers_world_cred = 0.33
     bikers_world_debt = 0.55
 
     # WHEN
     bikers_awardline = AwardLine(
-        belief_id=bikers_belief_id,
+        belief_id=bikers_text,
         _world_cred=bikers_world_cred,
         _world_debt=bikers_world_debt,
     )
 
     # THEN
-    assert bikers_awardline.belief_id == bikers_belief_id
+    assert bikers_awardline.belief_id == bikers_text
     assert bikers_awardline._world_cred == bikers_world_cred
     assert bikers_awardline._world_debt == bikers_world_debt
 
 
 def test_awardline_shop_ReturnsCorrectObj_exists():
     # GIVEN
-    bikers_belief_id = BeliefID("bikers")
-    bikers_belief_id = bikers_belief_id
+    bikers_text = "bikers"
+    bikers_text = bikers_text
     bikers_world_cred = 0.33
     bikers_world_debt = 0.55
 
     # WHEN
     biker_awardline = awardline_shop(
-        belief_id=bikers_belief_id,
+        belief_id=bikers_text,
         _world_cred=bikers_world_cred,
         _world_debt=bikers_world_debt,
     )
 
     assert biker_awardline != None
-    assert biker_awardline.belief_id == bikers_belief_id
+    assert biker_awardline.belief_id == bikers_text
     assert biker_awardline._world_cred == bikers_world_cred
     assert biker_awardline._world_debt == bikers_world_debt
 
 
 def test_AwardLine_add_world_cred_debt_CorrectlyModifiesAttr():
     # GIVEN
-    bikers_belief_id = BeliefID("bikers")
+    bikers_text = "bikers"
     bikers_awardline = awardline_shop(
-        belief_id=bikers_belief_id, _world_cred=0.33, _world_debt=0.55
+        belief_id=bikers_text, _world_cred=0.33, _world_debt=0.55
     )
-    assert bikers_awardline.belief_id == bikers_belief_id
+    assert bikers_awardline.belief_id == bikers_text
     assert bikers_awardline._world_cred == 0.33
     assert bikers_awardline._world_debt == 0.55
 

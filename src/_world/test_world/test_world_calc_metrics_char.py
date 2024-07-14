@@ -20,12 +20,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     yao_world.set_charunit(charunit_shop(sue_text))
     yao_world.set_charunit(charunit_shop(bob_text))
     yao_world.set_charunit(charunit_shop(zia_text))
-    bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=20, debtor_weight=40)
-    bl_bob = awardlink_shop(belief_id=bob_text, credor_weight=10, debtor_weight=5)
-    bl_zia = awardlink_shop(belief_id=zia_text, credor_weight=10, debtor_weight=5)
-    yao_world._idearoot.set_awardlink(awardlink=bl_sue)
-    yao_world._idearoot.set_awardlink(awardlink=bl_bob)
-    yao_world._idearoot.set_awardlink(awardlink=bl_zia)
+    bl_sue = awardlink_shop(sue_text, 20, debtor_weight=40)
+    bl_bob = awardlink_shop(bob_text, 10, debtor_weight=5)
+    bl_zia = awardlink_shop(zia_text, 10, debtor_weight=5)
+    yao_world._idearoot.set_awardlink(bl_sue)
+    yao_world._idearoot.set_awardlink(bl_bob)
+    yao_world._idearoot.set_awardlink(bl_zia)
 
     sue_beliefbox = yao_world.get_beliefbox(sue_text)
     bob_beliefbox = yao_world.get_beliefbox(bob_text)
@@ -49,7 +49,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
 
     # for awardlink in yao_world._awardheirs.values():
     #     print(
-    #         f"{yao_world._bud_share=} {awardlink.belief_id=} {awardlink._world_cred=} {awardlink._world_debt=}"
+    #         f"{yao_world._bud_share=} {awardlink.} {awardlink._world_cred=} {awardlink._world_debt=}"
     #     )
 
     assert sue_charlink._world_cred == 0.5
@@ -62,7 +62,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     # charlink_world_cred_sum = 0.0
     # charlink_world_debt_sum = 0.0
     # for belief in yao_world._beliefs.values():
-    #     # print(f"{belief.belief_id=} {belief._chars=}")
+    #     # print(f"{belief.} {belief._chars=}")
 
     #     for charlink in belief._chars.values():
     #         assert charlink._world_cred != None
@@ -70,7 +70,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     #         assert charlink._world_debt != None
     #         assert charlink._world_debt in [0.8, 0.1]
     #         # print(
-    #         #     f"{belief.belief_id=} {charlink._bud_share=} {belief._bud_share=}"
+    #         #     f"{belief.} {charlink._bud_share=} {belief._bud_share=}"
     #         # )
     #         charlink_world_cred_sum += charlink._world_cred
     #         charlink_world_debt_sum += charlink._world_debt
@@ -91,11 +91,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     # WHEN anothher pledge, check metrics are as expected
     selena_text = "selena"
     yao_world.set_charunit(charunit_shop(selena_text))
-    yao_world._idearoot.set_awardlink(
-        awardlink=awardlink_shop(
-            belief_id=BeliefID(selena_text), credor_weight=20, debtor_weight=13
-        )
-    )
+    yao_world._idearoot.set_awardlink(awardlink_shop(selena_text, 20, debtor_weight=13))
     yao_world.calc_world_metrics()
 
     # THEN
@@ -115,7 +111,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     # charlink_world_debt_sum = 0.0
 
     # for belief in yao_world._beliefs.values():
-    #     # print(f"{belief.belief_id=} {belief._chars=}")
+    #     # print(f"{belief.} {belief._chars=}")
 
     #     for charlink in belief._chars.values():
     #         assert charlink._world_cred != None
@@ -123,7 +119,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     #         assert charlink._world_debt != None
     #         assert charlink._world_debt not in [0.8, 0.1]
     #         # print(
-    #         #     f"{belief.belief_id=} {charlink._bud_share=} {belief._bud_share=}"
+    #         #     f"{belief.} {charlink._bud_share=} {belief._bud_share=}"
     #         # )
     #         charlink_world_cred_sum += charlink._world_cred
     #         charlink_world_debt_sum += charlink._world_debt
@@ -167,12 +163,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     yao_world.set_charunit(charunit_shop(sue_text))
     yao_world.set_charunit(charunit_shop(bob_text))
     yao_world.set_charunit(charunit_shop(zia_text))
-    bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=20, debtor_weight=40)
-    bl_bob = awardlink_shop(belief_id=bob_text, credor_weight=10, debtor_weight=5)
-    bl_zia = awardlink_shop(belief_id=zia_text, credor_weight=10, debtor_weight=5)
-    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_sue)
-    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_bob)
-    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_zia)
+    bl_sue = awardlink_shop(sue_text, 20, debtor_weight=40)
+    bl_bob = awardlink_shop(bob_text, 10, debtor_weight=5)
+    bl_zia = awardlink_shop(zia_text, 10, debtor_weight=5)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(bl_sue)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(bl_bob)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(bl_zia)
 
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
@@ -214,7 +210,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     #     assert charunit._world_debt != None
     #     assert charunit._world_debt in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.belief_id=} {charunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{belief.} {charunit._world_credor=} {belief._world_credor=}"
     #     # )
     #     print(f"{charunit.} {charunit._world_cred=} {charunit._world_debt=} ")
     #     # print(f"{charunit_world_cred_sum=}")
@@ -229,11 +225,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     # WHEN anothher pledge, check metrics are as expected
     selena_text = "selena"
     yao_world.set_charunit(charunit_shop(selena_text))
-    yao_world._idearoot.set_awardlink(
-        awardlink=awardlink_shop(
-            belief_id=selena_text, credor_weight=20, debtor_weight=10
-        )
-    )
+    yao_world._idearoot.set_awardlink(awardlink_shop(selena_text, 20, debtor_weight=10))
     yao_world.calc_world_metrics()
 
     # THEN
@@ -280,7 +272,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     #     assert charunit._world_debt != None
     #     assert charunit._world_debt not in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.belief_id=} {charunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{belief.} {charunit._world_credor=} {belief._world_credor=}"
     #     # )
     #     print(f"{charunit.} {charunit._world_cred=} {charunit._world_debt=} ")
     #     # print(f"{charunit_world_cred_sum=}")
@@ -304,12 +296,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     yao_world.set_charunit(charunit_shop(sue_text))
     yao_world.set_charunit(charunit_shop(bob_text))
     yao_world.set_charunit(charunit_shop(zia_text))
-    bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=20, debtor_weight=40)
-    bl_bob = awardlink_shop(belief_id=bob_text, credor_weight=10, debtor_weight=5)
-    bl_zia = awardlink_shop(belief_id=zia_text, credor_weight=10, debtor_weight=5)
-    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_sue)
-    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_bob)
-    yao_world._idearoot._kids.get(swim_text).set_awardlink(awardlink=bl_zia)
+    bl_sue = awardlink_shop(sue_text, 20, debtor_weight=40)
+    bl_bob = awardlink_shop(bob_text, 10, debtor_weight=5)
+    bl_zia = awardlink_shop(zia_text, 10, debtor_weight=5)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(bl_sue)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(bl_bob)
+    yao_world._idearoot._kids.get(swim_text).set_awardlink(bl_zia)
 
     # no awardlinks attached to this one
     hunt_text = "hunt"
@@ -349,9 +341,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     #     assert beliefbox._world_debt != None
     #     assert beliefbox._world_debt not in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.belief_id=} {beliefbox._world_credor=} {belief._world_credor=}"
+    #     #     f"{belief.} {beliefbox._world_credor=} {belief._world_credor=}"
     #     # )
-    #     print(f"{beliefbox.belief_id=} {beliefbox._world_cred=} {beliefbox._world_debt=} ")
+    #     print(f"{beliefbox.} {beliefbox._world_cred=} {beliefbox._world_debt=} ")
     #     # print(f"{beliefbox_world_cred_sum=}")
     #     # print(f"{beliefbox_world_debt_sum=}")
     #     beliefbox_world_cred_sum += beliefbox._world_cred
@@ -387,7 +379,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     #     assert charunit._world_debt != None
     #     assert charunit._world_debt not in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.belief_id=} {charunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{belief.} {charunit._world_credor=} {belief._world_credor=}"
     #     # )
     #     print(f"{charunit.} {charunit._world_cred=} {charunit._world_debt=} ")
     #     # print(f"{charunit_world_cred_sum=}")
@@ -406,7 +398,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_world.set_charunit(charunit_shop(sue_text, credor_weight=8))
+    yao_world.set_charunit(charunit_shop(sue_text, 8))
     yao_world.set_charunit(charunit_shop(bob_text))
     yao_world.set_charunit(charunit_shop(zia_text))
     sue_charunit = yao_world.get_char(sue_text)
@@ -439,7 +431,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
     #     assert charunit._world_debt != None
     #     assert charunit._world_debt not in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.belief_id=} {charunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{belief.} {charunit._world_credor=} {belief._world_credor=}"
     #     # )
     #     print(f"{charunit.} {charunit._world_cred=} {charunit._world_debt=} ")
     #     # print(f"{charunit_world_cred_sum=}")
@@ -554,7 +546,7 @@ def clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world: WorldUnit):
     for beliefbox_x in x_world._beliefs.values():
         beliefbox_x.reset_world_cred_debt()
         # for charlink_x in beliefbox_x._chars.values():
-        #     print(f"{beliefbox_x.belief_id=} {charlink_x.credor_weight=}  {charlink_x._world_cred:.6f} {charlink_x.debtor_weight=} {charlink_x._world_debt:.6f} {charlink_x.} ")
+        #     print(f"{beliefbox_x.} {charlink_x.}  {charlink_x._world_cred:.6f} {charlink_x.debtor_weight=} {charlink_x._world_debt:.6f} {charlink_x.} ")
 
     # DELETE world_agenda_debt and world_agenda_cred
     for x_charunit in x_world._chars.values():
@@ -712,9 +704,9 @@ def test_WorldUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenWorldIsEmpty():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    sue_charunit = charunit_shop(sue_text, credor_weight=0.5, debtor_weight=2)
-    bob_charunit = charunit_shop(bob_text, credor_weight=1.5, debtor_weight=3)
-    zia_charunit = charunit_shop(zia_text, credor_weight=8, debtor_weight=5)
+    sue_charunit = charunit_shop(sue_text, 0.5, debtor_weight=2)
+    bob_charunit = charunit_shop(bob_text, 1.5, debtor_weight=3)
+    zia_charunit = charunit_shop(zia_text, 8, debtor_weight=5)
     noa_world.set_charunit(sue_charunit)
     noa_world.set_charunit(bob_charunit)
     noa_world.set_charunit(zia_charunit)
