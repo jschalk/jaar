@@ -14,8 +14,8 @@ class MoneyUnit(float):
     pass
 
 
-class RespectUnit(float):
-    """RespectUnit inherits from float class"""
+class RespectNum(float):
+    """RespectNum inherits from float class"""
 
     pass
 
@@ -74,11 +74,11 @@ def trim_bit_excess(num: float, bit: BitHum) -> float:
     return bit * int(num / bit)
 
 
-def default_respect_num() -> RespectUnit:
-    return RespectUnit(default_bud_pool())
+def default_respect_num() -> RespectNum:
+    return RespectNum(default_bud_pool())
 
 
-def validate_respect_num(x_respect_num: RespectUnit = None) -> RespectUnit:
+def validate_respect_num(x_respect_num: RespectNum = None) -> RespectNum:
     x_respect_num = default_respect_num() if x_respect_num is None else x_respect_num
     return max(x_respect_num, default_bit_if_none(x_respect_num))
 

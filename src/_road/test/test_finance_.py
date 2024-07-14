@@ -4,7 +4,7 @@ from src._road.finance import (
     BitHum,
     PennyNum,
     MoneyUnit,
-    RespectUnit,
+    RespectNum,
     default_bud_pool,
     validate_bud_pool,
     default_respect_num,
@@ -50,14 +50,14 @@ def test_trim_bit_excess_ReturnsCorrectedFloat():
     assert trim_bit_excess(num=0.56, bit=0.133) == 0.532
 
 
-def test_RespectUnit_exists():
+def test_RespectNum_exists():
     # GIVEN
     x_float = 0.045
     # WHEN
-    y_respectunit = RespectUnit(x_float)
+    y_RespectNum = RespectNum(x_float)
     # THEN
-    assert y_respectunit == x_float
-    assert inspect_getdoc(y_respectunit) == "RespectUnit inherits from float class"
+    assert y_RespectNum == x_float
+    assert inspect_getdoc(y_RespectNum) == "RespectNum inherits from float class"
 
 
 def test_PennyNum_exists():

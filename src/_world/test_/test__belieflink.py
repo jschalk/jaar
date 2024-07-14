@@ -35,6 +35,8 @@ def test_BeliefLink_exists():
     assert swim_belieflink.belief_id == swim_text
     assert swim_belieflink.credor_weight == 1.0
     assert swim_belieflink.debtor_weight == 1.0
+    assert swim_belieflink._credor_pool is None
+    assert swim_belieflink._debtor_pool is None
 
 
 def test_belieflink_shop_ReturnsCorrectObj():
@@ -53,6 +55,8 @@ def test_belieflink_shop_ReturnsCorrectObj():
     # THEN
     assert swim_belieflink.credor_weight == swim_credor_weight
     assert swim_belieflink.debtor_weight == swim_debtor_weight
+    assert swim_belieflink._credor_pool == 0
+    assert swim_belieflink._debtor_pool == 0
 
 
 def test_BeliefLink_get_dict_ReturnsDictWithNecessaryDataForJSON():

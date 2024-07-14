@@ -1,7 +1,12 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json, get_0_if_None
 from src._road.road import CharID, default_road_delimiter_if_none, validate_roadnode
-from src._road.finance import default_bit_if_none
-from src._world.belieflink import BeliefID, BeliefLink, belieflinks_get_from_dict
+from src._road.finance import default_bit_if_none, RespectNum, allot_scale
+from src._world.belieflink import (
+    BeliefID,
+    BeliefLink,
+    belieflinks_get_from_dict,
+    belieflink_shop,
+)
 from dataclasses import dataclass
 
 
@@ -35,6 +40,8 @@ class CharUnit(CharCore):
     # special attribute: static in world json, in memory it is deleted after loading and recalculated during saving.
     _belieflinks: dict[CharID, BeliefLink] = None
     # calculated fields
+    _credor_pool: RespectNum = None
+    _debtor_pool: RespectNum = None
     _irrational_debtor_weight: int = None  # set by listening process
     _inallocable_debtor_weight: int = None  # set by listening process
     # set by World.calc_world_metrics()
@@ -133,6 +140,15 @@ class CharUnit(CharCore):
                 self._world_agenda_debt / world_agenda_ratio_debt_sum
             )
 
+    def add_belieflink(
+        self,
+        belief_id: BeliefID,
+        credor_weight: float = None,
+        debtor_weight: float = None,
+    ):
+        x_belieflink = belieflink_shop(belief_id, credor_weight, debtor_weight)
+        self.set_belieflink(x_belieflink)
+
     def set_belieflink(self, belieflink: BeliefLink):
         self._belieflinks[belieflink.belief_id] = belieflink
 
@@ -147,6 +163,26 @@ class CharUnit(CharCore):
 
     def clear_belieflinks(self):
         self._belieflinks = {}
+
+    def set_credor_pool(self, credor_pool: RespectNum):
+        self._credor_pool = credor_pool
+        ledger_dict = {
+            x_belieflink.belief_id: x_belieflink.credor_weight
+            for x_belieflink in self._belieflinks.values()
+        }
+        allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
+        for x_belief_id, belief_credor_pool in allot_dict.items():
+            self.get_belieflink(x_belief_id)._credor_pool = belief_credor_pool
+
+    def set_debtor_pool(self, debtor_pool: RespectNum):
+        self._debtor_pool = debtor_pool
+        ledger_dict = {
+            x_belieflink.belief_id: x_belieflink.debtor_weight
+            for x_belieflink in self._belieflinks.values()
+        }
+        allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
+        for x_belief_id, belief_debtor_pool in allot_dict.items():
+            self.get_belieflink(x_belief_id)._debtor_pool = belief_debtor_pool
 
     def get_belieflinks_dict(self) -> dict:
         return {
@@ -226,14 +262,16 @@ def charunit_shop(
         credor_weight=get_1_if_None(credor_weight),
         debtor_weight=get_1_if_None(debtor_weight),
         _belieflinks={},
-        _irrational_debtor_weight=get_0_if_None(),
-        _inallocable_debtor_weight=get_0_if_None(),
-        _world_cred=get_0_if_None(),
-        _world_debt=get_0_if_None(),
-        _world_agenda_cred=get_0_if_None(),
-        _world_agenda_debt=get_0_if_None(),
-        _world_agenda_ratio_cred=get_0_if_None(),
-        _world_agenda_ratio_debt=get_0_if_None(),
+        _credor_pool=0,
+        _debtor_pool=0,
+        _irrational_debtor_weight=0,
+        _inallocable_debtor_weight=0,
+        _world_cred=0,
+        _world_debt=0,
+        _world_agenda_cred=0,
+        _world_agenda_debt=0,
+        _world_agenda_ratio_cred=0,
+        _world_agenda_ratio_debt=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _bit=default_bit_if_none(_bit),
     )
