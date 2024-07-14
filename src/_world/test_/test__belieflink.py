@@ -37,6 +37,7 @@ def test_BeliefLink_exists():
     assert swim_belieflink.debtor_weight == 1.0
     assert swim_belieflink._credor_pool is None
     assert swim_belieflink._debtor_pool is None
+    assert swim_belieflink._char_id is None
 
 
 def test_belieflink_shop_ReturnsCorrectObj():
@@ -57,6 +58,19 @@ def test_belieflink_shop_ReturnsCorrectObj():
     assert swim_belieflink.debtor_weight == swim_debtor_weight
     assert swim_belieflink._credor_pool == 0
     assert swim_belieflink._debtor_pool == 0
+    assert swim_belieflink._char_id is None
+
+
+def test_belieflink_shop_ReturnsCorrectObjAttr_char_id():
+    # GIVEN
+    swim_text = "swim"
+    yao_text = "Yao"
+
+    # WHEN
+    swim_belieflink = belieflink_shop(swim_text, _char_id=yao_text)
+
+    # THEN
+    assert swim_belieflink._char_id == yao_text
 
 
 def test_BeliefLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
@@ -89,15 +103,17 @@ def test_belieflink_get_from_dict_ReturnsObj():
     swim_text = "swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
+    yao_text = "Yao"
     before_swim_belieflink = belieflink_shop(
         belief_id=swim_text,
         credor_weight=swim_credor_weight,
         debtor_weight=swim_debtor_weight,
+        _char_id=yao_text,
     )
     swim_belieflink_dict = before_swim_belieflink.get_dict()
 
     # WHEN
-    after_swim_belieflink = belieflink_get_from_dict(swim_belieflink_dict)
+    after_swim_belieflink = belieflink_get_from_dict(swim_belieflink_dict, yao_text)
 
     # THEN
     assert before_swim_belieflink == after_swim_belieflink
@@ -109,16 +125,20 @@ def test_belieflinks_get_from_dict_ReturnsObj():
     swim_text = "swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
+    yao_text = "Yao"
     before_swim_belieflink = belieflink_shop(
         belief_id=swim_text,
         credor_weight=swim_credor_weight,
         debtor_weight=swim_debtor_weight,
+        _char_id=yao_text,
     )
     before_swim_belieflinks_objs = {swim_text: before_swim_belieflink}
     swim_belieflinks_dict = {swim_text: before_swim_belieflink.get_dict()}
 
     # WHEN
-    after_swim_belieflinks_objs = belieflinks_get_from_dict(swim_belieflinks_dict)
+    after_swim_belieflinks_objs = belieflinks_get_from_dict(
+        swim_belieflinks_dict, yao_text
+    )
 
     # THEN
     assert before_swim_belieflinks_objs == after_swim_belieflinks_objs

@@ -2,7 +2,30 @@ from src._world.belieflink import belieflink_shop
 from src._world.char import charunit_shop
 
 
-def test_CharUnit_set_belieflink_CorrectlySetsAttr():
+def test_CharUnit_set_belieflink_SetsAttr():
+    # GIVEN
+    run_text = ",run"
+    yao_text = "Yao"
+    run_credor_weight = 66
+    run_debtor_weight = 85
+    yao_charunit = charunit_shop(yao_text)
+    assert yao_charunit._belieflinks == {}
+
+    # WHEN
+    yao_charunit.set_belieflink(
+        belieflink_shop(run_text, run_credor_weight, run_debtor_weight)
+    )
+
+    # THEN
+    assert len(yao_charunit._belieflinks) == 1
+    run_belieflink = yao_charunit._belieflinks.get(run_text)
+    assert run_belieflink.belief_id == run_text
+    assert run_belieflink.credor_weight == run_credor_weight
+    assert run_belieflink.debtor_weight == run_debtor_weight
+    assert run_belieflink._char_id == yao_text
+
+
+def test_CharUnit_set_belieflink_SetsMultipleAttr():
     # GIVEN
     run_text = ",run"
     fly_text = ",fly"

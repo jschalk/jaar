@@ -49,7 +49,7 @@ def test_WorldUnit_migrate_beliefboxs_to_belieflinks_Migrates_charlinks_Without_
     assert len(bob_world.get_char(sue_text)._belieflinks) == 2
     assert len(bob_world.get_char(zia_text)._belieflinks) == 2
     yao_charunit = bob_world.get_char(yao_text)
-    yao_belieflink = belieflink_shop(yao_text)
+    yao_belieflink = belieflink_shop(yao_text, _char_id=yao_text)
     assert yao_charunit.get_belieflink(yao_text) == yao_belieflink
 
     # GIVEN

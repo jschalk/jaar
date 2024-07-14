@@ -141,8 +141,9 @@ class CharUnit(CharCore):
         x_belieflink = belieflink_shop(belief_id, credor_weight, debtor_weight)
         self.set_belieflink(x_belieflink)
 
-    def set_belieflink(self, belieflink: BeliefLink):
-        self._belieflinks[belieflink.belief_id] = belieflink
+    def set_belieflink(self, x_belieflink: BeliefLink):
+        x_belieflink._char_id = self.char_id
+        self._belieflinks[x_belieflink.belief_id] = x_belieflink
 
     def get_belieflink(self, belief_id: BeliefID) -> BeliefLink:
         return self._belieflinks.get(belief_id)
@@ -228,15 +229,16 @@ def charunits_get_from_dict(
 
 
 def charunit_get_from_dict(charunit_dict: dict, _road_delimiter: str) -> CharUnit:
+    x_char_id = charunit_dict["char_id"]
+    x_credor_weight = charunit_dict["credor_weight"]
+    x_debtor_weight = charunit_dict["debtor_weight"]
+    x_belieflinks_dict = charunit_dict["_belieflinks"]
+    x_charunit = charunit_shop(
+        x_char_id, x_credor_weight, x_debtor_weight, _road_delimiter
+    )
+    x_charunit._belieflinks = belieflinks_get_from_dict(x_belieflinks_dict, x_char_id)
     _irrational_debtor_weight = charunit_dict.get("_irrational_debtor_weight", 0)
     _inallocable_debtor_weight = charunit_dict.get("_inallocable_debtor_weight", 0)
-    x_charunit = charunit_shop(
-        char_id=charunit_dict["char_id"],
-        credor_weight=charunit_dict["credor_weight"],
-        debtor_weight=charunit_dict["debtor_weight"],
-        _road_delimiter=_road_delimiter,
-    )
-    x_charunit._belieflinks = belieflinks_get_from_dict(charunit_dict["_belieflinks"])
     x_charunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
     x_charunit.add_inallocable_debtor_weight(get_0_if_None(_inallocable_debtor_weight))
 
