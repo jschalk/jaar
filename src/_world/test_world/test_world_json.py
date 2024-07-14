@@ -3,7 +3,7 @@ from src._road.road import default_road_delimiter_if_none
 from src._world.beliefbox import beliefbox_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.healer import healerhold_shop
-from src._world.reason_culture import cultureunit_shop
+from src._world.reason_doer import doerunit_shop
 from src._world.reason_idea import factunit_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import (
@@ -156,21 +156,21 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert x_world_originhold["weight"] == 1
 
 
-def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_cultureunit():
+def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
     # GIVEN
     run_text = "runners"
     tom_world = worldunit_shop("Tom")
-    x_cultureunit = cultureunit_shop()
-    x_cultureunit.set_allyhold(belief_id=run_text)
-    tom_world.edit_idea_attr(cultureunit=x_cultureunit, road=tom_world._real_id)
+    x_doerunit = doerunit_shop()
+    x_doerunit.set_beliefhold(belief_id=run_text)
+    tom_world.edit_idea_attr(doerunit=x_doerunit, road=tom_world._real_id)
 
     # WHEN
     world_dict = tom_world.get_dict()
     idearoot_dict = world_dict.get("_idearoot")
 
     # THEN
-    assert idearoot_dict["_cultureunit"] == x_cultureunit.get_dict()
-    assert idearoot_dict["_cultureunit"] == {"_allyholds": [run_text]}
+    assert idearoot_dict["_doerunit"] == x_doerunit.get_dict()
+    assert idearoot_dict["_doerunit"] == {"_beliefholds": [run_text]}
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
@@ -194,7 +194,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     assert idearoot_dict["_healerhold"] == run_healerhold.get_dict()
 
 
-def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_CultureUnit():
+def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     # GIVEN
     tom_world = worldunit_shop("Tom")
     run_text = ",run"
@@ -203,9 +203,9 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_CultureUnit():
     morn_text = "morning"
     morn_road = tom_world.make_l1_road(morn_text)
     tom_world.add_l1_idea(ideaunit_shop(morn_text))
-    x_cultureunit = cultureunit_shop()
-    x_cultureunit.set_allyhold(belief_id=run_text)
-    tom_world.edit_idea_attr(cultureunit=x_cultureunit, road=morn_road)
+    x_doerunit = doerunit_shop()
+    x_doerunit.set_beliefhold(belief_id=run_text)
+    tom_world.edit_idea_attr(doerunit=x_doerunit, road=morn_road)
 
     # WHEN
     world_dict = tom_world.get_dict()
@@ -213,11 +213,11 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_CultureUnit():
 
     # THEN
     _kids = "_kids"
-    _cultureunit = "_cultureunit"
+    _doerunit = "_doerunit"
 
-    culture_dict_x = idearoot_dict[_kids][morn_text][_cultureunit]
-    assert culture_dict_x == x_cultureunit.get_dict()
-    assert culture_dict_x == {"_allyholds": [run_text]}
+    doer_dict_x = idearoot_dict[_kids][morn_text][_doerunit]
+    assert doer_dict_x == x_doerunit.get_dict()
+    assert doer_dict_x == {"_beliefholds": [run_text]}
 
 
 def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
@@ -384,12 +384,12 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     run_belief.set_charlink(charlink=charlink_shop(char_id=tim_text))
     zia_world.set_beliefbox(y_beliefbox=run_belief)
 
-    run_cultureunit = cultureunit_shop()
-    run_cultureunit.set_allyhold(belief_id=run_text)
-    zia_world.edit_idea_attr(zia_world._real_id, cultureunit=run_cultureunit)
-    tim_cultureunit = cultureunit_shop()
-    tim_cultureunit.set_allyhold(belief_id=tim_text)
-    zia_world.edit_idea_attr(shave_road, cultureunit=tim_cultureunit)
+    run_doerunit = doerunit_shop()
+    run_doerunit.set_beliefhold(belief_id=run_text)
+    zia_world.edit_idea_attr(zia_world._real_id, doerunit=run_doerunit)
+    tim_doerunit = doerunit_shop()
+    tim_doerunit.set_beliefhold(belief_id=tim_text)
+    zia_world.edit_idea_attr(shave_road, doerunit=tim_doerunit)
     zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(tim_text))
     zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
     zia_world.edit_idea_attr(zia_world._real_id, awardlink=awardlink_shop(sue_text))
@@ -439,8 +439,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._parent_road == ""
     assert json_idearoot._parent_road == zia_world._idearoot._parent_road
     assert json_idearoot._reasonunits == {}
-    assert json_idearoot._cultureunit == zia_world._idearoot._cultureunit
-    assert json_idearoot._cultureunit == run_cultureunit
+    assert json_idearoot._doerunit == zia_world._idearoot._doerunit
+    assert json_idearoot._doerunit == run_doerunit
     assert json_idearoot._coin == 8
     assert json_idearoot._coin == zia_coin
     assert len(json_idearoot._factunits) == 1
@@ -461,8 +461,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     json_shave_idea = json_world.get_idea_obj(shave_road)
     zia_shave_idea = zia_world.get_idea_obj(shave_road)
     assert len(json_shave_idea._reasonunits) == 1
-    assert json_shave_idea._cultureunit == zia_shave_idea._cultureunit
-    assert json_shave_idea._cultureunit == tim_cultureunit
+    assert json_shave_idea._doerunit == zia_shave_idea._doerunit
+    assert json_shave_idea._doerunit == tim_doerunit
     assert json_shave_idea._originunit == zia_shave_idea._originunit
     print(f"{json_shave_idea._healerhold=}")
     assert json_shave_idea._healerhold == zia_shave_idea._healerhold

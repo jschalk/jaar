@@ -12,7 +12,7 @@ from src._world.world import (
     worldunit_shop,
     get_from_json as worldunit_get_from_json,
 )
-from src._world.reason_culture import cultureunit_shop
+from src._world.reason_doer import doerunit_shop
 from src._world.examples.world_env import get_world_examples_dir as env_dir
 
 
@@ -394,9 +394,9 @@ def get_world_laundry_example1() -> WorldUnit:
     amos_world.edit_idea_attr(
         road=laundry_task_road, reason_base=basket_road, reason_premise=b_smel_road
     )
-    cali_cultureunit = cultureunit_shop()
-    cali_cultureunit.set_allyhold(cali_text)
-    amos_world.edit_idea_attr(road=laundry_task_road, cultureunit=cali_cultureunit)
+    cali_doerunit = doerunit_shop()
+    cali_doerunit.set_beliefhold(cali_text)
+    amos_world.edit_idea_attr(road=laundry_task_road, doerunit=cali_doerunit)
     # print(f"{basket_road=}")
     # print(f"{amos_world._real_id=}")
     amos_world.set_fact(base=basket_road, pick=b_full_road)

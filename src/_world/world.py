@@ -73,7 +73,7 @@ from src._world.reason_idea import (
     RoadUnit,
     factunit_shop,
 )
-from src._world.reason_culture import CultureUnit
+from src._world.reason_doer import DoerUnit
 from src._world.tree_metrics import TreeMetrics, treemetrics_shop
 from src._world.hreg_time import HregTimeIdeaSource as HregIdea
 from src._world.lemma import lemmas_shop, Lemmas
@@ -1198,14 +1198,14 @@ class WorldUnit:
         for _awardlink_belief_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_belief_id)
 
-        if x_idea._cultureunit != None:
-            _allyholds_to_delete = [
-                _allyhold_belief_id
-                for _allyhold_belief_id in x_idea._cultureunit._allyholds
-                if self.get_beliefbox(_allyhold_belief_id) is None
+        if x_idea._doerunit != None:
+            _beliefholds_to_delete = [
+                _beliefhold_belief_id
+                for _beliefhold_belief_id in x_idea._doerunit._beliefholds
+                if self.get_beliefbox(_beliefhold_belief_id) is None
             ]
-            for _allyhold_belief_id in _allyholds_to_delete:
-                x_idea._cultureunit.del_allyhold(_allyhold_belief_id)
+            for _beliefhold_belief_id in _beliefholds_to_delete:
+                x_idea._doerunit.del_beliefhold(_beliefhold_belief_id)
 
         return x_idea
 
@@ -1460,7 +1460,7 @@ class WorldUnit:
         reason_del_premise_base: RoadUnit = None,
         reason_del_premise_need: RoadUnit = None,
         reason_base_idea_active_requisite: str = None,
-        cultureunit: CultureUnit = None,
+        doerunit: DoerUnit = None,
         healerhold: HealerHold = None,
         begin: float = None,
         close: float = None,
@@ -1500,7 +1500,7 @@ class WorldUnit:
             reason_del_premise_base=reason_del_premise_base,
             reason_del_premise_need=reason_del_premise_need,
             reason_base_idea_active_requisite=reason_base_idea_active_requisite,
-            cultureunit=cultureunit,
+            doerunit=doerunit,
             healerhold=healerhold,
             begin=begin,
             close=close,
@@ -1804,7 +1804,7 @@ class WorldUnit:
         self._idearoot._level = 0
         self._idearoot.set_parent_road("")
         self._idearoot.set_idearoot_inherit_reasonheirs()
-        self._idearoot.set_cultureheir(None, self._beliefs)
+        self._idearoot.set_doerheir(None, self._beliefs)
         self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
@@ -1833,7 +1833,7 @@ class WorldUnit:
         idea_kid.set_parent_road(parent_idea.get_road())
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
-        idea_kid.set_cultureheir(parent_idea._cultureheir, self._beliefs)
+        idea_kid.set_doerheir(parent_idea._doerheir, self._beliefs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
@@ -2352,7 +2352,7 @@ def set_idearoot_from_world_dict(x_world: WorldUnit, world_dict: dict):
         _range_source_road=get_obj_from_idea_dict(idearoot_dict, "_range_source_road"),
         _numeric_road=get_obj_from_idea_dict(idearoot_dict, "_numeric_road"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
-        _cultureunit=get_obj_from_idea_dict(idearoot_dict, "_cultureunit"),
+        _doerunit=get_obj_from_idea_dict(idearoot_dict, "_doerunit"),
         _healerhold=get_obj_from_idea_dict(idearoot_dict, "_healerhold"),
         _factunits=get_obj_from_idea_dict(idearoot_dict, "_factunits"),
         _awardlinks=get_obj_from_idea_dict(idearoot_dict, "_awardlinks"),
@@ -2393,7 +2393,7 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
             _problem_bool=get_obj_from_idea_dict(idea_dict, "_problem_bool"),
             _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
-            _cultureunit=get_obj_from_idea_dict(idea_dict, "_cultureunit"),
+            _doerunit=get_obj_from_idea_dict(idea_dict, "_doerunit"),
             _healerhold=get_obj_from_idea_dict(idea_dict, "_healerhold"),
             _originunit=get_obj_from_idea_dict(idea_dict, "_originunit"),
             _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),

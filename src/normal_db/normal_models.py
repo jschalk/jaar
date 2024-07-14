@@ -94,8 +94,8 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class allyholdTable(Base):
-    __tablename__ = "allyhold"
+class beliefholdTable(Base):
+    __tablename__ = "beliefhold"
     uid = Column(Integer, primary_key=True)
     belief_id = Column(String)
     road = Column(String)

@@ -17,12 +17,12 @@ from src._road.road import (
 )
 from src._world.meld import get_meld_default
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
-from src._world.reason_culture import (
-    CultureUnit,
-    CultureHeir,
-    cultureunit_shop,
-    cultureheir_shop,
-    cultureunit_get_from_dict,
+from src._world.reason_doer import (
+    DoerUnit,
+    DoerHeir,
+    doerunit_shop,
+    doerheir_shop,
+    doerunit_get_from_dict,
 )
 from src._world.reason_idea import (
     FactCore,
@@ -80,7 +80,7 @@ class IdeaAttrFilter:
     reason_del_premise_base: RoadUnit = None
     reason_del_premise_need: RoadUnit = None
     reason_base_idea_active_requisite: str = None
-    cultureunit: CultureUnit = None
+    doerunit: DoerUnit = None
     healerhold: HealerHold = None
     begin: float = None
     close: float = None
@@ -164,7 +164,7 @@ def ideaattrfilter_shop(
     reason_del_premise_base: RoadUnit = None,
     reason_del_premise_need: RoadUnit = None,
     reason_base_idea_active_requisite: str = None,
-    cultureunit: CultureUnit = None,
+    doerunit: DoerUnit = None,
     healerhold: HealerHold = None,
     begin: float = None,
     close: float = None,
@@ -197,7 +197,7 @@ def ideaattrfilter_shop(
         reason_del_premise_base=reason_del_premise_base,
         reason_del_premise_need=reason_del_premise_need,
         reason_base_idea_active_requisite=reason_base_idea_active_requisite,
-        cultureunit=cultureunit,
+        doerunit=doerunit,
         healerhold=healerhold,
         begin=begin,
         close=close,
@@ -237,8 +237,8 @@ class IdeaUnit:
     _awardlines: dict[BeliefID, AwardLine] = None  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None  # Calculated field
-    _cultureunit: CultureUnit = None
-    _cultureheir: CultureHeir = None  # Calculated field
+    _doerunit: DoerUnit = None
+    _doerheir: DoerHeir = None  # Calculated field
     _factunits: dict[RoadUnit, FactUnit] = None
     _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
     _healerhold: HealerHold = None
@@ -699,8 +699,8 @@ class IdeaUnit:
                 base=idea_attr.reason_base,
                 base_idea_active_requisite=idea_attr.reason_base_idea_active_requisite,
             )
-        if idea_attr.cultureunit != None:
-            self._cultureunit = idea_attr.cultureunit
+        if idea_attr.doerunit != None:
+            self._doerunit = idea_attr.doerunit
         if idea_attr.healerhold != None:
             self._healerhold = idea_attr.healerhold
         if idea_attr.begin != None:
@@ -890,10 +890,10 @@ class IdeaUnit:
             x_bool
             and world_beliefboxs != {}
             and world_owner_id != None
-            and self._cultureheir._allyholds != {}
+            and self._doerheir._beliefholds != {}
         ):
-            self._cultureheir.set_owner_id_culture(world_beliefboxs, world_owner_id)
-            if self._cultureheir._owner_id_culture is False:
+            self._doerheir.set_owner_id_doer(world_beliefboxs, world_owner_id)
+            if self._doerheir._owner_id_doer is False:
                 x_bool = False
         return x_bool
 
@@ -982,8 +982,8 @@ class IdeaUnit:
             x_dict["_kids"] = self.get_kids_dict()
         if self._reasonunits not in [{}, None]:
             x_dict["_reasonunits"] = self.get_reasonunits_dict()
-        if self._cultureunit not in [None, cultureunit_shop()]:
-            x_dict["_cultureunit"] = self.get_cultureunit_dict()
+        if self._doerunit not in [None, doerunit_shop()]:
+            x_dict["_doerunit"] = self.get_doerunit_dict()
         if self._healerhold not in [None, healerhold_shop()]:
             x_dict["_healerhold"] = self._healerhold.get_dict()
         if self._awardlinks not in [{}, None]:
@@ -1037,24 +1037,24 @@ class IdeaUnit:
             dict_x=self._factunits, old_road=old_road, new_road=new_road
         )
 
-    def set_cultureunit_empty_if_none(self):
-        if self._cultureunit is None:
-            self._cultureunit = cultureunit_shop()
+    def set_doerunit_empty_if_none(self):
+        if self._doerunit is None:
+            self._doerunit = doerunit_shop()
 
-    def set_cultureheir(
+    def set_doerheir(
         self,
-        parent_cultureheir: CultureHeir,
+        parent_doerheir: DoerHeir,
         world_beliefs: dict[BeliefID, BeliefBox],
     ):
-        self._cultureheir = cultureheir_shop()
-        self._cultureheir.set_allyholds(
-            parent_cultureheir=parent_cultureheir,
-            cultureunit=self._cultureunit,
+        self._doerheir = doerheir_shop()
+        self._doerheir.set_beliefholds(
+            parent_doerheir=parent_doerheir,
+            doerunit=self._doerunit,
             world_beliefs=world_beliefs,
         )
 
-    def get_cultureunit_dict(self):
-        return self._cultureunit.get_dict()
+    def get_doerunit_dict(self):
+        return self._doerunit.get_dict()
 
 
 def ideaunit_shop(
@@ -1068,8 +1068,8 @@ def ideaunit_shop(
     _awardlines: dict[BeliefID, AwardLink] = None,  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None,
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None,  # Calculated field
-    _cultureunit: CultureUnit = None,
-    _cultureheir: CultureHeir = None,  # Calculated field
+    _doerunit: DoerUnit = None,
+    _doerheir: DoerHeir = None,  # Calculated field
     _factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
     _healerhold: HealerHold = None,
@@ -1119,8 +1119,8 @@ def ideaunit_shop(
         _awardlines=get_empty_dict_if_none(_awardlines),
         _reasonunits=get_empty_dict_if_none(_reasonunits),
         _reasonheirs=get_empty_dict_if_none(_reasonheirs),
-        _cultureunit=_cultureunit,
-        _cultureheir=_cultureheir,
+        _doerunit=_doerunit,
+        _doerheir=_doerheir,
         _factunits=get_empty_dict_if_none(_factunits),
         _factheirs=get_empty_dict_if_none(_factheirs),
         _healerhold=_healerhold,
@@ -1159,7 +1159,7 @@ def ideaunit_shop(
         x_ideakid.set_idea_label(_label=_world_real_id)
     else:
         x_ideakid.set_idea_label(_label=_label)
-    x_ideakid.set_cultureunit_empty_if_none()
+    x_ideakid.set_doerunit_empty_if_none()
     x_ideakid.set_originunit_empty_if_none()
     return x_ideakid
 
@@ -1175,11 +1175,11 @@ def get_obj_from_idea_dict(x_dict: dict[str,], dict_key: str) -> any:
             if x_dict.get(dict_key) != None
             else None
         )
-    elif dict_key == "_cultureunit":
+    elif dict_key == "_doerunit":
         return (
-            cultureunit_get_from_dict(x_dict[dict_key])
+            doerunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) != None
-            else cultureunit_shop()
+            else doerunit_shop()
         )
     elif dict_key == "_healerhold":
         return (

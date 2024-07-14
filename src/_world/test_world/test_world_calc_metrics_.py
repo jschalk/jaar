@@ -5,7 +5,7 @@ from src._world.idea import IdeaUnit, ideaunit_shop
 from src._world.reason_idea import reasonunit_shop
 from src._world.beliefbox import beliefbox_shop, awardlink_shop
 from src._world.char import charlink_shop
-from src._world.reason_culture import cultureunit_shop
+from src._world.reason_doer import doerunit_shop
 from src._world.examples.example_worlds import (
     get_world_with_4_levels as example_worlds_get_world_with_4_levels,
     get_world_with_4_levels_and_2reasons as example_worlds_get_world_with_4_levels_and_2reasons,
@@ -177,7 +177,7 @@ def test_WorldUnit_get_all_pledges_ReturnsCorrectObj():
     sweep_idea = zia_world.get_idea_obj(sweep_road)
     bob_text = "Bob"
     zia_world.add_charunit(bob_text)
-    sweep_idea._cultureunit.set_allyhold(bob_text)
+    sweep_idea._doerunit.set_beliefhold(bob_text)
     print(f"{sweep_idea}")
     agenda_dict = zia_world.get_agenda_dict()
     assert agenda_dict.get(clean_road) != None
@@ -737,7 +737,7 @@ def test_Isue116Resolved_correctlySetsTaskAsTrue():
     assert get_tasks_count(pledge_idea_list) == 64
 
 
-def test_agenda_IsSetByCultureUnit_1CharBelief():
+def test_agenda_IsSetByDoerUnit_1CharBelief():
     # GIVEN
     bob_text = "Bob"
     bob_world = worldunit_shop(bob_text)
@@ -748,23 +748,23 @@ def test_agenda_IsSetByCultureUnit_1CharBelief():
 
     sue_text = "Sue"
     bob_world.add_charunit(char_id=sue_text)
-    cultureunit_sue = cultureunit_shop()
-    cultureunit_sue.set_allyhold(belief_id=sue_text)
+    doerunit_sue = doerunit_shop()
+    doerunit_sue.set_beliefhold(belief_id=sue_text)
     assert len(bob_world.get_agenda_dict()) == 1
 
     # WHEN
-    bob_world.edit_idea_attr(road=casa_road, cultureunit=cultureunit_sue)
+    bob_world.edit_idea_attr(road=casa_road, doerunit=doerunit_sue)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 0
 
     # WHEN
     bob_world.add_charunit(char_id=bob_text)
-    cultureunit_bob = cultureunit_shop()
-    cultureunit_bob.set_allyhold(belief_id=bob_text)
+    doerunit_bob = doerunit_shop()
+    doerunit_bob.set_beliefhold(belief_id=bob_text)
 
     # WHEN
-    bob_world.edit_idea_attr(road=casa_road, cultureunit=cultureunit_bob)
+    bob_world.edit_idea_attr(road=casa_road, doerunit=doerunit_bob)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 1
@@ -773,7 +773,7 @@ def test_agenda_IsSetByCultureUnit_1CharBelief():
     # print(f"{agenda_dict[0]._label=}")
 
 
-def test_agenda_IsSetByCultureUnit_2CharBelief():
+def test_agenda_IsSetByDoerUnit_2CharBelief():
     # GIVEN
     bob_text = "Bob"
     bob_world = worldunit_shop(bob_text)
@@ -790,12 +790,12 @@ def test_agenda_IsSetByCultureUnit_2CharBelief():
     run_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
     bob_world.set_beliefbox(y_beliefbox=run_belief)
 
-    run_cultureunit = cultureunit_shop()
-    run_cultureunit.set_allyhold(belief_id=run_text)
+    run_doerunit = doerunit_shop()
+    run_doerunit.set_beliefhold(belief_id=run_text)
     assert len(bob_world.get_agenda_dict()) == 1
 
     # WHEN
-    bob_world.edit_idea_attr(road=casa_road, cultureunit=run_cultureunit)
+    bob_world.edit_idea_attr(road=casa_road, doerunit=run_doerunit)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 0
