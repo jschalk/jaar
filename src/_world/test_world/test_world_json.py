@@ -355,12 +355,12 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world._bud_pool = zia_bud_pool
     zia_coin = 8
     zia_world._coin = zia_coin
-    zia_bit = 0.5
+    zia_bit = 5
     zia_world._bit = zia_bit
     zia_penny = 2
     zia_world._penny = zia_penny
-    zia_char_credor_pool = 2
-    zia_char_debtor_pool = 2
+    zia_char_credor_pool = 200
+    zia_char_debtor_pool = 200
     zia_world.set_char_credor_pool(zia_char_credor_pool)
     zia_world.set_char_debtor_pool(zia_char_debtor_pool)
     zia_last_gift_id = 73
@@ -375,7 +375,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")
 
     sue_text = "Sue"
-    zia_world.add_charunit(char_id=sue_text)
+    zia_world.add_charunit(char_id=sue_text, credor_weight=199, debtor_weight=199)
     tim_text = "Tim"
     zia_world.add_charunit(char_id=tim_text)
     run_text = ",runners"

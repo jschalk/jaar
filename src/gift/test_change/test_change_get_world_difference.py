@@ -147,12 +147,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     x_worldUnit_weight = 55
     x_bud_pool = 8000000
     x_coin = 8
-    x_bit = 0.5
+    x_bit = 5
     x_max_tree_traverse = 66
     x_meld_strategy = "override"
     x_monetary_desc = "dragon dollars"
-    x_char_credor_pool = 77
-    x_char_debtor_pool = 88
+    x_char_credor_pool = 770
+    x_char_debtor_pool = 880
     after_sue_world._weight = x_worldUnit_weight
     after_sue_world._bud_pool = x_bud_pool
     after_sue_world._coin = x_coin

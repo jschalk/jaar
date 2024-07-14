@@ -30,7 +30,7 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
 
 def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     # GIVEN
-    x_bit = 0.5
+    x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     yao_world.calc_world_metrics()
     assert len(yao_world._chars) == 0
@@ -62,7 +62,7 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
 
 def test_WorldUnit_add_charunit_CorrectlySets_chars():
     # GIVEN
-    x_bit = 0.5
+    x_bit = 6
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     rico_text = "rico"
     carm_text = "carmen"

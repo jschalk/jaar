@@ -100,7 +100,7 @@ def test_charunit_shop_CorrectlySetsAttributes_bit():
     yao_charunit = charunit_shop("Yao", _bit=bit_float)
 
     # THEN
-    assert yao_charunit._bit == bit_float
+    assert yao_charunit._bit == 1
 
 
 def test_CharUnit_set_bit_CorrectlySetsAttribute():

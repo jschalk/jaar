@@ -1,6 +1,6 @@
 from src._instrument.python import get_empty_set_if_none
 from src._world.beliefbox import BeliefBox, BeliefID
-from src._world.char import CharID
+from src._world.char import CharID, CharUnit
 from dataclasses import dataclass
 
 

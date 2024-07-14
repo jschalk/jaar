@@ -2,6 +2,7 @@ from src._world.reason_idea import factunit_shop, factunit_shop, factheir_shop
 from src._world.idea import ideaunit_shop
 from src._world.examples.example_worlds import (
     get_world_with_4_levels as examples_get_world_with_4_levels,
+    get_world_1Task_1CE0MinutesReason_1Fact as example_worlds_get_world_1Task_1CE0MinutesReason_1Fact,
 )
 from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
@@ -788,3 +789,27 @@ def test_WorldUnit_get_fact_ReturnsFactUnit():
     # THEN
     static_situations_base = sue_world._idearoot._factunits.get(situations_road)
     assert generated_situations_base == static_situations_base
+
+
+def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
+    # GIVEN
+    x_world = example_worlds_get_world_1Task_1CE0MinutesReason_1Fact()
+    mail_text = "obtain mail"
+    assert x_world != None
+    assert len(x_world._idearoot._kids[mail_text]._reasonunits) == 1
+    idea_dict = x_world.get_idea_dict()
+    # for idea in idea_dict:
+    #     print(idea._label)
+    mail_idea = idea_dict.get(x_world.make_l1_road(mail_text))
+    assert mail_idea.pledge == True
+    assert mail_idea._task == True
+
+    # WHEN
+    ced_min_label = "CE0_minutes"
+    ced_road = x_world.make_l1_road(ced_min_label)
+    x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
+    x_world.calc_world_metrics()
+
+    # THEN
+    assert mail_idea.pledge == True
+    assert mail_idea._task is False

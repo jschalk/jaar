@@ -427,14 +427,14 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
 
     # WHEN
     sue_text = "Sue"
-    jim_text = "Jim"
-    healerhold_dict = {"healerhold_belief_ids": [sue_text, jim_text]}
+    zia_text = "Zia"
+    healerhold_dict = {"healerhold_belief_ids": [sue_text, zia_text]}
     ideaunit_dict = {healerhold_key: healerhold_dict}
 
     # THEN
     static_healerhold = healerhold_shop()
     static_healerhold.set_belief_id(x_belief_id=sue_text)
-    static_healerhold.set_belief_id(x_belief_id=jim_text)
+    static_healerhold.set_belief_id(x_belief_id=zia_text)
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) != None
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
 

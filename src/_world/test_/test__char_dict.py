@@ -276,16 +276,16 @@ def test_charunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
 def test_CharUnit_meld_RaiseEqualchar_idException():
     # GIVEN
     sue_text = "Sue"
-    sue_char = charunit_shop(sue_text)
+    sue_charunit = charunit_shop(sue_text)
     yao_text = "Yao"
-    yao_char = charunit_shop(yao_text)
+    yao_charunit = charunit_shop(yao_text)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_char.meld(yao_char)
+        sue_charunit.meld(yao_charunit)
     assert (
         str(excinfo.value)
-        == f"Meld fail CharUnit='{sue_char.char_id}' not the equal as CharUnit='{yao_char.char_id}"
+        == f"Meld fail CharUnit='{sue_charunit.char_id}' not the equal as CharUnit='{yao_charunit.char_id}"
     )
 
 
