@@ -22,7 +22,7 @@ def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     return insert_ideaunit_atomunit
 
 
-def get_changeunit_carm_example() -> ChangeUnit:
+def get_changeunit_sue_example() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
     worldunit_text = "worldunit"
@@ -32,10 +32,10 @@ def get_changeunit_carm_example() -> ChangeUnit:
     sue_changeunit.set_atomunit(pool_atomunit)
 
     category = "world_charunit"
-    carm_text = "Carmen"
-    carm_atomunit = atomunit_shop(category, atom_delete())
-    carm_atomunit.set_required_arg("char_id", carm_text)
-    sue_changeunit.set_atomunit(carm_atomunit)
+    sue_text = "Sue"
+    sue_atomunit = atomunit_shop(category, atom_delete())
+    sue_atomunit.set_required_arg("char_id", sue_text)
+    sue_changeunit.set_atomunit(sue_atomunit)
     return sue_changeunit
 
 
@@ -57,9 +57,9 @@ def get_changeunit_example1() -> ChangeUnit:
     sue_changeunit.set_atomunit(x_atomunit)
 
     category = "world_charunit"
-    carm_text = "Carmen"
+    sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("char_id", carm_text)
+    x_atomunit.set_required_arg("char_id", sue_text)
     sue_changeunit.set_atomunit(x_atomunit)
     return sue_changeunit
 
@@ -73,8 +73,8 @@ def get_changeunit_example2() -> ChangeUnit:
     x_atomunit.set_optional_arg(x_attribute, 77)
 
     category = "world_charunit"
-    carm_text = "Carmen"
+    sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("char_id", carm_text)
+    x_atomunit.set_required_arg("char_id", sue_text)
     sue_changeunit.set_atomunit(x_atomunit)
     return sue_changeunit

@@ -51,7 +51,7 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
     clean_atomunit.set_arg(_reest_text, _reest_value)
     clean_atomunit.set_arg(_weight_text, _weight_value)
     clean_atomunit.set_arg(pledge_text, pledge_value)
-    # print(f"{rico_atomunit=}")
+
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(clean_atomunit)
 
@@ -111,7 +111,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE():
     clean_atomunit.set_arg(_reest_text, _reest_value)
     clean_atomunit.set_arg(_weight_text, _weight_value)
     clean_atomunit.set_arg(pledge_text, pledge_value)
-    # print(f"{rico_atomunit=}")
+
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(clean_atomunit)
 
@@ -135,7 +135,7 @@ def test_create_legible_list_ReturnsObj_charunit_DELETE():
     clean_atomunit = atomunit_shop(category, atom_delete())
     clean_atomunit.set_arg(label_text, label_value)
     clean_atomunit.set_arg(parent_road_text, parent_road_value)
-    # print(f"{rico_atomunit=}")
+
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(clean_atomunit)
 

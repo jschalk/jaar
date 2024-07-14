@@ -4,7 +4,7 @@ from src._road.road import get_default_real_id_roadnode as root_label
 from src.gift.change import changeunit_shop
 from src.gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
 from src.gift.examples.example_atoms import get_atom_example_ideaunit_sports
-from src.gift.examples.example_changes import get_changeunit_carm_example
+from src.gift.examples.example_changes import get_changeunit_sue_example
 
 
 def test_get_gifts_folder_ReturnsCorrectObj():
@@ -62,7 +62,7 @@ def test_giftunit_shop_ReturnsCorrectObjGivenNonEmptyArgs():
     bob_text = "Bob"
     bob_gift_id = 13
     sue_text = "Sue"
-    bob_changeunit = get_changeunit_carm_example()
+    bob_changeunit = get_changeunit_sue_example()
     bob_change_start = 6
     bob_gifts_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
@@ -131,7 +131,7 @@ def test_GiftUnit_del_face_SetsAttribute():
     farm_giftunit.del_face()
 
     # THEN
-    assert (farm_giftunit._face_id == yao_text) is False
+    assert farm_giftunit._face_id != yao_text
     assert farm_giftunit._face_id is None
 
 
@@ -234,8 +234,8 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithChangePopulated():
     # GIVEN
     bob_text = "Bob"
-    carm_changeunit = get_changeunit_carm_example()
-    farm_giftunit = giftunit_shop(bob_text, _changeunit=carm_changeunit)
+    sue_changeunit = get_changeunit_sue_example()
+    farm_giftunit = giftunit_shop(bob_text, _changeunit=sue_changeunit)
 
     # WHEN
     x_dict = farm_giftunit.get_step_dict()
@@ -243,23 +243,23 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithChangePopulated():
     # THEN
     change_text = "change"
     assert x_dict.get(change_text) != None
-    assert x_dict.get(change_text) == carm_changeunit.get_ordered_atomunits()
-    carm_atomunits_dict = x_dict.get(change_text)
-    print(f"{len(carm_changeunit.get_sorted_atomunits())=}")
-    print(f"{carm_atomunits_dict.keys()=}")
-    # print(f"{carm_atomunits_dict.get(0)=}")
-    assert carm_atomunits_dict.get(2) is None
-    assert carm_atomunits_dict.get(0) != None
-    assert carm_atomunits_dict.get(1) != None
+    assert x_dict.get(change_text) == sue_changeunit.get_ordered_atomunits()
+    sue_atomunits_dict = x_dict.get(change_text)
+    print(f"{len(sue_changeunit.get_sorted_atomunits())=}")
+    print(f"{sue_atomunits_dict.keys()=}")
+    # print(f"{sue_atomunits_dict.get(0)=}")
+    assert sue_atomunits_dict.get(2) is None
+    assert sue_atomunits_dict.get(0) != None
+    assert sue_atomunits_dict.get(1) != None
 
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
     # GIVEN
     bob_text = "Bob"
-    carm_changeunit = get_changeunit_carm_example()
+    sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
     farm_giftunit = giftunit_shop(
-        bob_text, _changeunit=carm_changeunit, _change_start=farm_change_start
+        bob_text, _changeunit=sue_changeunit, _change_start=farm_change_start
     )
 
     # WHEN
@@ -268,26 +268,26 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
     # THEN
     change_text = "change"
     assert x_dict.get(change_text) != None
-    assert x_dict.get(change_text) == carm_changeunit.get_ordered_atomunits(
+    assert x_dict.get(change_text) == sue_changeunit.get_ordered_atomunits(
         farm_change_start
     )
-    carm_atomunits_dict = x_dict.get(change_text)
-    print(f"{len(carm_changeunit.get_sorted_atomunits())=}")
-    print(f"{carm_atomunits_dict.keys()=}")
-    # print(f"{carm_atomunits_dict.get(0)=}")
-    assert carm_atomunits_dict.get(farm_change_start + 2) is None
-    assert carm_atomunits_dict.get(farm_change_start + 0) != None
-    assert carm_atomunits_dict.get(farm_change_start + 1) != None
+    sue_atomunits_dict = x_dict.get(change_text)
+    print(f"{len(sue_changeunit.get_sorted_atomunits())=}")
+    print(f"{sue_atomunits_dict.keys()=}")
+    # print(f"{sue_atomunits_dict.get(0)=}")
+    assert sue_atomunits_dict.get(farm_change_start + 2) is None
+    assert sue_atomunits_dict.get(farm_change_start + 0) != None
+    assert sue_atomunits_dict.get(farm_change_start + 1) != None
 
 
 def test_GiftUnit_get_change_atom_numbers_ReturnsCorrectObj():
     # GIVEN
     bob_text = "Bob"
     yao_text = "Yao"
-    carm_changeunit = get_changeunit_carm_example()
+    sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
     farm_giftunit = giftunit_shop(bob_text)
-    farm_giftunit.set_changeunit(carm_changeunit)
+    farm_giftunit.set_changeunit(sue_changeunit)
     farm_giftunit.set_change_start(farm_change_start)
     farm_giftunit.set_face(yao_text)
     farm_dict = farm_giftunit.get_step_dict()
@@ -302,10 +302,10 @@ def test_GiftUnit_get_changemetric_dict_ReturnsCorrectObj():
     # GIVEN
     bob_text = "Bob"
     yao_text = "Yao"
-    carm_changeunit = get_changeunit_carm_example()
+    sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
     farm_giftunit = giftunit_shop(bob_text)
-    farm_giftunit.set_changeunit(carm_changeunit)
+    farm_giftunit.set_changeunit(sue_changeunit)
     farm_giftunit.set_change_start(farm_change_start)
     farm_giftunit.set_face(yao_text)
 
@@ -336,10 +336,10 @@ def test_GiftUnit_get_changemetric_json_ReturnsCorrectObj():
     bob_text = "Bob"
     sue_text = "Sue"
     yao_text = "Yao"
-    carm_changeunit = get_changeunit_carm_example()
+    sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
     farm_giftunit = giftunit_shop(bob_text)
-    farm_giftunit.set_changeunit(carm_changeunit)
+    farm_giftunit.set_changeunit(sue_changeunit)
     farm_giftunit.set_change_start(farm_change_start)
     farm_giftunit.set_face(sue_text)
     farm_giftunit.set_face(yao_text)

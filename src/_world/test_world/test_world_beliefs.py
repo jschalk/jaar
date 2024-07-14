@@ -141,24 +141,24 @@ def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     # GIVEN
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
-    rico_text = "rico"
-    carm_text = "carmen"
-    patr_text = "patrick"
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
 
     assert len(sue_world._chars) == 3
     assert len(sue_world._beliefs) == 3
     swim_text = "swim"
     sue_world.add_l1_idea(ideaunit_shop(swim_text))
-    awardlink_rico = awardlink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
-    awardlink_carm = awardlink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
-    awardlink_patr = awardlink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
+    awardlink_yao = awardlink_shop(belief_id=BeliefID(yao_text), credor_weight=10)
+    awardlink_zia = awardlink_shop(belief_id=BeliefID(zia_text), credor_weight=10)
+    awardlink_Xio = awardlink_shop(belief_id=BeliefID(Xio_text), credor_weight=10)
     swim_road = sue_world.make_l1_road(swim_text)
-    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_rico)
-    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_carm)
-    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_patr)
+    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_yao)
+    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_zia)
+    sue_world.edit_idea_attr(road=swim_road, awardlink=awardlink_Xio)
 
     street_text = "streets"
     sue_world.add_idea(ideaunit_shop(street_text), parent_road=swim_road)
@@ -192,25 +192,25 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     # GIVEN
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
-    rico_text = "rico"
-    carm_text = "carmen"
-    patr_text = "patrick"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
 
     swim_text = "swim"
     swim_road = x_world.make_road(prom_text, swim_text)
 
     x_world.add_l1_idea(ideaunit_shop(swim_text))
-    awardlink_rico = awardlink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
-    awardlink_carm = awardlink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
-    awardlink_patr = awardlink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
+    awardlink_yao = awardlink_shop(belief_id=BeliefID(yao_text), credor_weight=10)
+    awardlink_zia = awardlink_shop(belief_id=BeliefID(zia_text), credor_weight=10)
+    awardlink_Xio = awardlink_shop(belief_id=BeliefID(Xio_text), credor_weight=10)
 
     swim_idea = x_world.get_idea_obj(swim_road)
-    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_rico)
-    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_carm)
-    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_patr)
+    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_yao)
+    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_zia)
+    x_world.edit_idea_attr(road=swim_road, awardlink=awardlink_Xio)
 
     assert len(swim_idea._awardlinks) == 3
     assert len(swim_idea._awardheirs) == 3
@@ -223,7 +223,7 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     assert len(x_world._idearoot._kids[swim_text]._awardheirs) == 3
 
     # WHEN
-    x_world.edit_idea_attr(road=swim_road, awardlink_del=rico_text)
+    x_world.edit_idea_attr(road=swim_road, awardlink_del=yao_text)
 
     # THEN
     swim_idea = x_world.get_idea_obj(swim_road)
@@ -239,18 +239,18 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     # GIVEN
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
-    rico_text = "rico"
-    carm_text = "carmen"
-    patr_text = "patrick"
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_awardlink = awardlink_shop(rico_text, credor_weight=20, debtor_weight=6)
-    carm_awardlink = awardlink_shop(carm_text, credor_weight=10, debtor_weight=1)
-    patr_awardlink = awardlink_shop(patr_text, credor_weight=10)
-    sue_world._idearoot.set_awardlink(rico_awardlink)
-    sue_world._idearoot.set_awardlink(carm_awardlink)
-    sue_world._idearoot.set_awardlink(patr_awardlink)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    yao_awardlink = awardlink_shop(yao_text, credor_weight=20, debtor_weight=6)
+    zia_awardlink = awardlink_shop(zia_text, credor_weight=10, debtor_weight=1)
+    Xio_awardlink = awardlink_shop(Xio_text, credor_weight=10)
+    sue_world._idearoot.set_awardlink(yao_awardlink)
+    sue_world._idearoot.set_awardlink(zia_awardlink)
+    sue_world._idearoot.set_awardlink(Xio_awardlink)
     assert len(sue_world._idearoot._awardlinks) == 3
 
     # WHEN
@@ -261,17 +261,17 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     idea_prom = idea_dict.get(get_default_real_id_roadnode())
     assert len(idea_prom._awardheirs) == 3
 
-    bheir_rico = idea_prom._awardheirs.get(rico_text)
-    bheir_carm = idea_prom._awardheirs.get(carm_text)
-    bheir_patr = idea_prom._awardheirs.get(patr_text)
-    assert bheir_rico._world_cred == 0.5
-    assert bheir_rico._world_debt == 0.75
-    assert bheir_carm._world_cred == 0.25
-    assert bheir_carm._world_debt == 0.125
-    assert bheir_patr._world_cred == 0.25
-    assert bheir_patr._world_debt == 0.125
-    assert bheir_rico._world_cred + bheir_carm._world_cred + bheir_patr._world_cred == 1
-    assert bheir_rico._world_debt + bheir_carm._world_debt + bheir_patr._world_debt == 1
+    bheir_yao = idea_prom._awardheirs.get(yao_text)
+    bheir_zia = idea_prom._awardheirs.get(zia_text)
+    bheir_Xio = idea_prom._awardheirs.get(Xio_text)
+    assert bheir_yao._world_cred == 0.5
+    assert bheir_yao._world_debt == 0.75
+    assert bheir_zia._world_cred == 0.25
+    assert bheir_zia._world_debt == 0.125
+    assert bheir_Xio._world_cred == 0.25
+    assert bheir_Xio._world_debt == 0.125
+    assert bheir_yao._world_cred + bheir_zia._world_cred + bheir_Xio._world_cred == 1
+    assert bheir_yao._world_debt + bheir_zia._world_debt + bheir_Xio._world_debt == 1
 
     # world_cred_sum = 0
     # world_debt_sum = 0
@@ -292,19 +292,19 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     # GIVEN
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
-    rico_text = "rico"
-    carm_text = "carmen"
-    patr_text = "patrick"
-    sele_text = "selena"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_awardlink = awardlink_shop(rico_text, credor_weight=20, debtor_weight=6)
-    carm_awardlink = awardlink_shop(carm_text, credor_weight=10, debtor_weight=1)
-    patr_awardlink = awardlink_shop(patr_text, credor_weight=10)
-    x_world._idearoot.set_awardlink(awardlink=rico_awardlink)
-    x_world._idearoot.set_awardlink(awardlink=carm_awardlink)
-    x_world._idearoot.set_awardlink(awardlink=patr_awardlink)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    sue_text = "Sue"
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    yao_awardlink = awardlink_shop(yao_text, credor_weight=20, debtor_weight=6)
+    zia_awardlink = awardlink_shop(zia_text, credor_weight=10, debtor_weight=1)
+    Xio_awardlink = awardlink_shop(Xio_text, credor_weight=10)
+    x_world._idearoot.set_awardlink(awardlink=yao_awardlink)
+    x_world._idearoot.set_awardlink(awardlink=zia_awardlink)
+    x_world._idearoot.set_awardlink(awardlink=Xio_awardlink)
 
     assert len(x_world._beliefs) == 3
 
@@ -312,51 +312,47 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     x_world.calc_world_metrics()
 
     # THEN
-    belief_rico = x_world.get_beliefbox(rico_text)
-    belief_carm = x_world.get_beliefbox(carm_text)
-    belief_patr = x_world.get_beliefbox(patr_text)
-    assert belief_rico._world_cred == 0.5
-    assert belief_rico._world_debt == 0.75
-    assert belief_carm._world_cred == 0.25
-    assert belief_carm._world_debt == 0.125
-    assert belief_patr._world_cred == 0.25
-    assert belief_patr._world_debt == 0.125
-    assert (
-        belief_rico._world_cred + belief_carm._world_cred + belief_patr._world_cred == 1
-    )
-    assert (
-        belief_rico._world_debt + belief_carm._world_debt + belief_patr._world_debt == 1
-    )
+    belief_yao = x_world.get_beliefbox(yao_text)
+    belief_zia = x_world.get_beliefbox(zia_text)
+    belief_Xio = x_world.get_beliefbox(Xio_text)
+    assert belief_yao._world_cred == 0.5
+    assert belief_yao._world_debt == 0.75
+    assert belief_zia._world_cred == 0.25
+    assert belief_zia._world_debt == 0.125
+    assert belief_Xio._world_cred == 0.25
+    assert belief_Xio._world_debt == 0.125
+    assert belief_yao._world_cred + belief_zia._world_cred + belief_Xio._world_cred == 1
+    assert belief_yao._world_debt + belief_zia._world_debt + belief_Xio._world_debt == 1
 
     # WHEN
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(sele_text)))
-    bl_sele = awardlink_shop(belief_id=sele_text, credor_weight=37)
-    x_world._idearoot.set_awardlink(awardlink=bl_sele)
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(sue_text)))
+    bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=37)
+    x_world._idearoot.set_awardlink(awardlink=bl_sue)
     assert len(x_world._beliefs) == 4
     x_world.calc_world_metrics()
 
     # THEN
-    belief_sele = x_world.get_beliefbox(sele_text)
-    assert belief_rico._world_cred != 0.5
-    assert belief_rico._world_debt != 0.75
-    assert belief_carm._world_cred != 0.25
-    assert belief_carm._world_debt != 0.125
-    assert belief_patr._world_cred != 0.25
-    assert belief_patr._world_debt != 0.125
-    assert belief_sele._world_cred != None
-    assert belief_sele._world_debt != None
+    belief_sue = x_world.get_beliefbox(sue_text)
+    assert belief_yao._world_cred != 0.5
+    assert belief_yao._world_debt != 0.75
+    assert belief_zia._world_cred != 0.25
+    assert belief_zia._world_debt != 0.125
+    assert belief_Xio._world_cred != 0.25
+    assert belief_Xio._world_debt != 0.125
+    assert belief_sue._world_cred != None
+    assert belief_sue._world_debt != None
     assert (
-        belief_rico._world_cred
-        + belief_carm._world_cred
-        + belief_patr._world_cred
-        + belief_sele._world_cred
+        belief_yao._world_cred
+        + belief_zia._world_cred
+        + belief_Xio._world_cred
+        + belief_sue._world_cred
         == 1
     )
     assert (
-        belief_rico._world_debt
-        + belief_carm._world_debt
-        + belief_patr._world_debt
-        + belief_sele._world_debt
+        belief_yao._world_debt
+        + belief_zia._world_debt
+        + belief_Xio._world_debt
+        + belief_sue._world_debt
         == 1
     )
 
@@ -368,21 +364,21 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates3levelWorldBeliefWorldImport
     swim_text = "swim"
     x_world.add_l1_idea(ideaunit_shop(swim_text))
 
-    rico_text = "rico"
-    carm_text = "carmen"
-    patr_text = "patrick"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_awardlink = awardlink_shop(
-        belief_id=rico_text, credor_weight=20, debtor_weight=6
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    yao_awardlink = awardlink_shop(
+        belief_id=yao_text, credor_weight=20, debtor_weight=6
     )
-    carm_awardlink = awardlink_shop(
-        belief_id=carm_text, credor_weight=10, debtor_weight=1
+    zia_awardlink = awardlink_shop(
+        belief_id=zia_text, credor_weight=10, debtor_weight=1
     )
-    parm_awardlink = awardlink_shop(belief_id=patr_text, credor_weight=10)
-    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=rico_awardlink)
-    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=carm_awardlink)
+    parm_awardlink = awardlink_shop(belief_id=Xio_text, credor_weight=10)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=yao_awardlink)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=zia_awardlink)
     x_world._idearoot._kids[swim_text].set_awardlink(awardlink=parm_awardlink)
     assert len(x_world._beliefs) == 3
 
@@ -390,21 +386,17 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates3levelWorldBeliefWorldImport
     x_world.calc_world_metrics()
 
     # THEN
-    belief_rico = x_world.get_beliefbox(rico_text)
-    belief_carm = x_world.get_beliefbox(carm_text)
-    belief_patr = x_world.get_beliefbox(patr_text)
-    assert belief_rico._world_cred == 0.5
-    assert belief_rico._world_debt == 0.75
-    assert belief_carm._world_cred == 0.25
-    assert belief_carm._world_debt == 0.125
-    assert belief_patr._world_cred == 0.25
-    assert belief_patr._world_debt == 0.125
-    assert (
-        belief_rico._world_cred + belief_carm._world_cred + belief_patr._world_cred == 1
-    )
-    assert (
-        belief_rico._world_debt + belief_carm._world_debt + belief_patr._world_debt == 1
-    )
+    belief_yao = x_world.get_beliefbox(yao_text)
+    belief_zia = x_world.get_beliefbox(zia_text)
+    belief_Xio = x_world.get_beliefbox(Xio_text)
+    assert belief_yao._world_cred == 0.5
+    assert belief_yao._world_debt == 0.75
+    assert belief_zia._world_cred == 0.25
+    assert belief_zia._world_debt == 0.125
+    assert belief_Xio._world_cred == 0.25
+    assert belief_Xio._world_debt == 0.125
+    assert belief_yao._world_cred + belief_zia._world_cred + belief_Xio._world_cred == 1
+    assert belief_yao._world_debt + belief_zia._world_debt + belief_Xio._world_debt == 1
 
 
 def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithBeliefEmptyAncestors():
@@ -414,21 +406,21 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     swim_text = "swim"
     x_world.add_l1_idea(ideaunit_shop(swim_text))
 
-    rico_text = "rico"
-    carm_text = "carmen"
-    patr_text = "patrick"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(rico_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(carm_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(patr_text)))
-    rico_awardlink = awardlink_shop(
-        belief_id=rico_text, credor_weight=20, debtor_weight=6
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    yao_awardlink = awardlink_shop(
+        belief_id=yao_text, credor_weight=20, debtor_weight=6
     )
-    carm_awardlink = awardlink_shop(
-        belief_id=carm_text, credor_weight=10, debtor_weight=1
+    zia_awardlink = awardlink_shop(
+        belief_id=zia_text, credor_weight=10, debtor_weight=1
     )
-    parm_awardlink = awardlink_shop(belief_id=patr_text, credor_weight=10)
-    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=rico_awardlink)
-    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=carm_awardlink)
+    parm_awardlink = awardlink_shop(belief_id=Xio_text, credor_weight=10)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=yao_awardlink)
+    x_world._idearoot._kids[swim_text].set_awardlink(awardlink=zia_awardlink)
     x_world._idearoot._kids[swim_text].set_awardlink(awardlink=parm_awardlink)
 
     # no awardlinks attached to this one
@@ -440,52 +432,50 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     # THEN
 
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._awardlinks[rico_text]
-    assert str(excinfo.value) == f"'{rico_text}'"
+        x_world._idearoot._awardlinks[yao_text]
+    assert str(excinfo.value) == f"'{yao_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._awardlinks[carm_text]
-    assert str(excinfo.value) == f"'{carm_text}'"
+        x_world._idearoot._awardlinks[zia_text]
+    assert str(excinfo.value) == f"'{zia_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._awardlinks[patr_text]
-    assert str(excinfo.value) == f"'{patr_text}'"
+        x_world._idearoot._awardlinks[Xio_text]
+    assert str(excinfo.value) == f"'{Xio_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._kids["hunt"]._awardheirs[rico_text]
-    assert str(excinfo.value) == f"'{rico_text}'"
+        x_world._idearoot._kids["hunt"]._awardheirs[yao_text]
+    assert str(excinfo.value) == f"'{yao_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._kids["hunt"]._awardheirs[carm_text]
-    assert str(excinfo.value) == f"'{carm_text}'"
+        x_world._idearoot._kids["hunt"]._awardheirs[zia_text]
+    assert str(excinfo.value) == f"'{zia_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_world._idearoot._kids["hunt"]._awardheirs[patr_text]
-    assert str(excinfo.value) == f"'{patr_text}'"
+        x_world._idearoot._kids["hunt"]._awardheirs[Xio_text]
+    assert str(excinfo.value) == f"'{Xio_text}'"
 
     # THEN
-    belief_rico = x_world.get_beliefbox(rico_text)
-    belief_carm = x_world.get_beliefbox(carm_text)
-    belief_patr = x_world.get_beliefbox(patr_text)
-    assert belief_rico._world_cred == 0.125
-    assert belief_rico._world_debt == 0.1875
-    assert belief_carm._world_cred == 0.0625
-    assert belief_carm._world_debt == 0.03125
-    assert belief_patr._world_cred == 0.0625
-    assert belief_patr._world_debt == 0.03125
+    belief_yao = x_world.get_beliefbox(yao_text)
+    belief_zia = x_world.get_beliefbox(zia_text)
+    belief_Xio = x_world.get_beliefbox(Xio_text)
+    assert belief_yao._world_cred == 0.125
+    assert belief_yao._world_debt == 0.1875
+    assert belief_zia._world_cred == 0.0625
+    assert belief_zia._world_debt == 0.03125
+    assert belief_Xio._world_cred == 0.0625
+    assert belief_Xio._world_debt == 0.03125
     assert (
-        belief_rico._world_cred + belief_carm._world_cred + belief_patr._world_cred
-        == 0.25
+        belief_yao._world_cred + belief_zia._world_cred + belief_Xio._world_cred == 0.25
     )
     assert (
-        belief_rico._world_debt + belief_carm._world_debt + belief_patr._world_debt
-        == 0.25
+        belief_yao._world_debt + belief_zia._world_debt + belief_Xio._world_debt == 0.25
     )
 
 
 def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyCreatesNewCharID():
     # GIVEN
     world = worldunit_shop("prom")
-    rico_text = "rico"
-    world.add_charunit(char_id=rico_text)
+    yao_text = "Yao"
+    world.add_charunit(char_id=yao_text)
     swim_text = ",swimmers"
     swim_belief = beliefbox_shop(belief_id=swim_text)
-    swim_belief.set_charlink(charlink=charlink_shop(char_id=rico_text))
+    swim_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
     world.set_beliefbox(swim_belief)
     assert len(world._chars) == 1
     assert len(world._beliefs) == 2
@@ -511,8 +501,8 @@ def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyCreatesNewCharID():
 def test_WorldUnit_edit_Beliefunit_belief_id_raiseErrorNewCharIDPreviouslyExists():
     # GIVEN
     world = worldunit_shop("prom")
-    rico_text = "rico"
-    world.add_charunit(char_id=rico_text)
+    yao_text = "Yao"
+    world.add_charunit(char_id=yao_text)
     swim_text = ",swimmers"
     world.set_beliefbox(beliefbox_shop(belief_id=swim_text))
     jog_text = ",jog"
@@ -534,21 +524,21 @@ def test_WorldUnit_edit_Beliefunit_belief_id_raiseErrorNewCharIDPreviouslyExists
 def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyMeldCharIDs():
     # GIVEN
     world = worldunit_shop("prom")
-    rico_text = "rico"
-    world.add_charunit(char_id=rico_text)
+    yao_text = "Yao"
+    world.add_charunit(char_id=yao_text)
     swim_text = ",swimmers"
     swim_belief = beliefbox_shop(belief_id=swim_text)
     swim_belief.set_charlink(
-        charlink=charlink_shop(char_id=rico_text, credor_weight=5, debtor_weight=3)
+        charlink=charlink_shop(char_id=yao_text, credor_weight=5, debtor_weight=3)
     )
     world.set_beliefbox(swim_belief)
     jog_text = ",jog"
     jog_belief = beliefbox_shop(belief_id=jog_text)
     jog_belief.set_charlink(
-        charlink=charlink_shop(char_id=rico_text, credor_weight=7, debtor_weight=10)
+        charlink=charlink_shop(char_id=yao_text, credor_weight=7, debtor_weight=10)
     )
     world.set_beliefbox(jog_belief)
-    print(f"{world.get_beliefbox(jog_text)._chars.get(rico_text)=}")
+    print(f"{world.get_beliefbox(jog_text)._chars.get(yao_text)=}")
     assert world.get_beliefbox(jog_text) != None
 
     # WHEN
@@ -565,15 +555,15 @@ def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyMeldCharIDs():
     assert len(world._beliefs) == 2
     assert world.get_beliefbox(jog_text)._char_mirror is False
     assert len(world.get_beliefbox(jog_text)._chars) == 1
-    assert world.get_beliefbox(jog_text)._chars.get(rico_text).credor_weight == 12
-    assert world.get_beliefbox(jog_text)._chars.get(rico_text).debtor_weight == 13
+    assert world.get_beliefbox(jog_text)._chars.get(yao_text).credor_weight == 12
+    assert world.get_beliefbox(jog_text)._chars.get(yao_text).debtor_weight == 13
 
 
 def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyModifiesAwardLinks():
     # GIVEN
     x_world = worldunit_shop("prom")
-    rico_text = "rico"
-    x_world.add_charunit(char_id=rico_text)
+    yao_text = "Yao"
+    x_world.add_charunit(char_id=yao_text)
     swim_text = ",swimmers"
     swim_beliefbox = beliefbox_shop(belief_id=swim_text)
     x_world.set_beliefbox(swim_beliefbox)
@@ -608,8 +598,8 @@ def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyModifiesAwardLinks():
 def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyMeldsAwardLinesAwardLinksAwardHeirs():
     # GIVEN
     x_world = worldunit_shop("prom")
-    rico_text = "rico"
-    x_world.add_charunit(char_id=rico_text)
+    yao_text = "Yao"
+    x_world.add_charunit(char_id=yao_text)
     swim_text = ",swimmers"
     swim_beliefbox = beliefbox_shop(belief_id=swim_text)
     x_world.set_beliefbox(swim_beliefbox)
@@ -792,21 +782,21 @@ def test_WorldUnit_set_beliefbox_create_missing_chars_DoesCreateMissingChars():
     # GIVEN
     bob_world = worldunit_shop("Bob")
     family_text = ",family"
-    anna_text = "anna"
-    beto_text = "beto"
+    yao_text = "Yao"
+    sue_text = "Sue"
     beliefbox_z = beliefbox_shop(belief_id=family_text)
     beliefbox_z.set_charlink(
-        charlink=charlink_shop(char_id=anna_text, credor_weight=3, debtor_weight=7)
+        charlink=charlink_shop(char_id=yao_text, credor_weight=3, debtor_weight=7)
     )
     beliefbox_z.set_charlink(
-        charlink=charlink_shop(char_id=beto_text, credor_weight=5, debtor_weight=11)
+        charlink=charlink_shop(char_id=sue_text, credor_weight=5, debtor_weight=11)
     )
 
-    assert beliefbox_z._chars.get(anna_text).credor_weight == 3
-    assert beliefbox_z._chars.get(anna_text).debtor_weight == 7
+    assert beliefbox_z._chars.get(yao_text).credor_weight == 3
+    assert beliefbox_z._chars.get(yao_text).debtor_weight == 7
 
-    assert beliefbox_z._chars.get(beto_text).credor_weight == 5
-    assert beliefbox_z._chars.get(beto_text).debtor_weight == 11
+    assert beliefbox_z._chars.get(sue_text).credor_weight == 5
+    assert beliefbox_z._chars.get(sue_text).debtor_weight == 11
 
     assert len(bob_world._chars) == 0
     assert len(bob_world._beliefs) == 0
@@ -817,52 +807,52 @@ def test_WorldUnit_set_beliefbox_create_missing_chars_DoesCreateMissingChars():
     # THEN
     assert len(bob_world._chars) == 2
     assert len(bob_world._beliefs) == 3
-    assert bob_world._chars.get(anna_text).credor_weight == 3
-    assert bob_world._chars.get(anna_text).debtor_weight == 7
+    assert bob_world._chars.get(yao_text).credor_weight == 3
+    assert bob_world._chars.get(yao_text).debtor_weight == 7
 
-    assert bob_world._chars.get(beto_text).credor_weight == 5
-    assert bob_world._chars.get(beto_text).debtor_weight == 11
+    assert bob_world._chars.get(sue_text).credor_weight == 5
+    assert bob_world._chars.get(sue_text).debtor_weight == 11
 
 
 def test_WorldUnit_set_beliefbox_create_missing_chars_DoesNotReplaceChars():
     # GIVEN
     bob_world = worldunit_shop("Bob")
     family_text = ",family"
-    anna_text = "anna"
-    beto_text = "beto"
+    yao_text = "Yao"
+    sue_text = "Sue"
     bob_world.set_charunit(
-        charunit_shop(char_id=anna_text, credor_weight=17, debtor_weight=88)
+        charunit_shop(char_id=yao_text, credor_weight=17, debtor_weight=88)
     )
     bob_world.set_charunit(
-        charunit_shop(char_id=beto_text, credor_weight=46, debtor_weight=71)
+        charunit_shop(char_id=sue_text, credor_weight=46, debtor_weight=71)
     )
     beliefbox_z = beliefbox_shop(belief_id=family_text)
     beliefbox_z.set_charlink(
-        charlink=charlink_shop(char_id=anna_text, credor_weight=3, debtor_weight=7)
+        charlink=charlink_shop(char_id=yao_text, credor_weight=3, debtor_weight=7)
     )
     beliefbox_z.set_charlink(
-        charlink=charlink_shop(char_id=beto_text, credor_weight=5, debtor_weight=11)
+        charlink=charlink_shop(char_id=sue_text, credor_weight=5, debtor_weight=11)
     )
 
-    assert beliefbox_z._chars.get(anna_text).credor_weight == 3
-    assert beliefbox_z._chars.get(anna_text).debtor_weight == 7
-    assert beliefbox_z._chars.get(beto_text).credor_weight == 5
-    assert beliefbox_z._chars.get(beto_text).debtor_weight == 11
+    assert beliefbox_z._chars.get(yao_text).credor_weight == 3
+    assert beliefbox_z._chars.get(yao_text).debtor_weight == 7
+    assert beliefbox_z._chars.get(sue_text).credor_weight == 5
+    assert beliefbox_z._chars.get(sue_text).debtor_weight == 11
     assert len(bob_world._chars) == 2
-    assert bob_world._chars.get(anna_text).credor_weight == 17
-    assert bob_world._chars.get(anna_text).debtor_weight == 88
-    assert bob_world._chars.get(beto_text).credor_weight == 46
-    assert bob_world._chars.get(beto_text).debtor_weight == 71
+    assert bob_world._chars.get(yao_text).credor_weight == 17
+    assert bob_world._chars.get(yao_text).debtor_weight == 88
+    assert bob_world._chars.get(sue_text).credor_weight == 46
+    assert bob_world._chars.get(sue_text).debtor_weight == 71
 
     # WHEN
     bob_world.set_beliefbox(y_beliefbox=beliefbox_z, create_missing_chars=True)
 
     # THEN
     assert len(bob_world._chars) == 2
-    assert bob_world._chars.get(anna_text).credor_weight == 17
-    assert bob_world._chars.get(anna_text).debtor_weight == 88
-    assert bob_world._chars.get(beto_text).credor_weight == 46
-    assert bob_world._chars.get(beto_text).debtor_weight == 71
+    assert bob_world._chars.get(yao_text).credor_weight == 17
+    assert bob_world._chars.get(yao_text).debtor_weight == 88
+    assert bob_world._chars.get(sue_text).credor_weight == 46
+    assert bob_world._chars.get(sue_text).debtor_weight == 71
 
 
 def test_get_chars_relevant_beliefs_ReturnsEmptyDict():
@@ -870,10 +860,9 @@ def test_get_chars_relevant_beliefs_ReturnsEmptyDict():
     bob_text = "Bob"
     world_with_chars = worldunit_shop(bob_text)
 
-    sam_text = "sam"
-    wil_text = "wil"
+    yao_text = "Yao"
     world_with_chars.set_charunit(charunit=charunit_shop(char_id=bob_text))
-    world_with_chars.set_charunit(charunit=charunit_shop(char_id=sam_text))
+    world_with_chars.set_charunit(charunit=charunit_shop(char_id=yao_text))
 
     world_with_beliefs = worldunit_shop()
 
@@ -890,20 +879,20 @@ def test_get_chars_relevant_beliefs_ReturnsEmptyDict():
 def test_get_chars_relevant_beliefs_Returns2SingleCharBeliefs():
     # GIVEN
     bob_text = "Bob"
-    sam_text = "Sam"
-    wil_text = "Wil"
+    yao_text = "Yao"
+    zia_text = "Zia"
     world_3beliefs = worldunit_shop(bob_text)
     world_3beliefs.set_charunit(charunit=charunit_shop(char_id=bob_text))
-    world_3beliefs.set_charunit(charunit=charunit_shop(char_id=sam_text))
-    world_3beliefs.set_charunit(charunit=charunit_shop(char_id=wil_text))
+    world_3beliefs.set_charunit(charunit=charunit_shop(char_id=yao_text))
+    world_3beliefs.set_charunit(charunit=charunit_shop(char_id=zia_text))
 
     world_2chars = worldunit_shop(bob_text)
     world_2chars.set_charunit(charunit=charunit_shop(char_id=bob_text))
-    world_2chars.set_charunit(charunit=charunit_shop(char_id=sam_text))
+    world_2chars.set_charunit(charunit=charunit_shop(char_id=yao_text))
 
     # WHEN
     print(f"{len(world_2chars._chars)=} {len(world_3beliefs._beliefs)=}")
     mrg_x = get_chars_relevant_beliefs(world_3beliefs._beliefs, world_2chars._chars)
 
     # THEN
-    assert mrg_x == {bob_text: {bob_text: -1}, sam_text: {sam_text: -1}}
+    assert mrg_x == {bob_text: {bob_text: -1}, yao_text: {yao_text: -1}}

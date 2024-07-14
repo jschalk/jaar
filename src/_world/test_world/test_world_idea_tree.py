@@ -241,7 +241,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
     mon_text = "Monday"
     tue_text = "Tuesday"
     vacuum_text = "vacuum"
-    sue_text = "sue"
+    sue_text = "Sue"
 
     casa_road = x_world.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
@@ -315,7 +315,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     x_world.calc_world_metrics()
     # idea tree has no awardlinks
     assert x_world._idearoot._awardlines == {}
-    sue_text = "sue"
+    sue_text = "Sue"
     week_text = "weekdays"
     nation_text = "nation-state"
     sue_awardlink = awardlink_shop(belief_id=sue_text)
@@ -374,7 +374,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
     # idea tree has no awardlinks
-    sue_text = "sue"
+    sue_text = "Sue"
     assert x_world._idearoot._awardlines == {}
     x_world.add_charunit(char_id=sue_text)
     x_awardlink = awardlink_shop(belief_id=sue_text)
@@ -407,7 +407,7 @@ def test_world4char_Exists():
     email_text = "email"
     casa_text = "casa"
     vacuum_text = "vacuum"
-    sue_text = "sue"
+    sue_text = "Sue"
     casa_road = x_world.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
     x_world.add_idea(email_idea, parent_road=casa_road)
@@ -435,7 +435,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     email_text = "email"
     casa_text = "casa"
     vacuum_text = "vacuum"
-    sue_text = "sue"
+    sue_text = "Sue"
     week_text = "weekdays"
     feed_text = "feed cat"
     casa_road = x_world.make_l1_road(casa_text)

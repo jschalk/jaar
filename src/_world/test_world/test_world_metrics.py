@@ -52,26 +52,26 @@ def test_WorldUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
 
 def test_WorldUnit_3AdvocatesNoideaunit_shop():
     # GIVEN
-    rico_text = "rico"
-    carm_text = "carmen"
-    patr_text = "patrick"
+    yao_text = "Yao"
+    sue_text = "Sue"
+    zia_text = "Zia"
 
     zia_world = worldunit_shop("Zia")
-    au_rico = charunit_shop(char_id=rico_text)
-    au_carm = charunit_shop(char_id=carm_text)
-    au_patr = charunit_shop(char_id=patr_text)
-    # print(f"{rico=}")
-    zia_world.set_charunit(charunit=au_rico)
-    zia_world.set_charunit(charunit=au_carm)
-    zia_world.set_charunit(charunit=au_patr)
+    au_yao = charunit_shop(char_id=yao_text)
+    au_sue = charunit_shop(char_id=sue_text)
+    au_zia = charunit_shop(char_id=zia_text)
+    # print(f"{yao=}")
+    zia_world.set_charunit(charunit=au_yao)
+    zia_world.set_charunit(charunit=au_sue)
+    zia_world.set_charunit(charunit=au_zia)
     zia_world._idearoot.set_awardlink(
-        awardlink=awardlink_shop(belief_id=BeliefID(rico_text), credor_weight=10)
+        awardlink=awardlink_shop(belief_id=BeliefID(yao_text), credor_weight=10)
     )
     zia_world._idearoot.set_awardlink(
-        awardlink=awardlink_shop(belief_id=BeliefID(carm_text), credor_weight=10)
+        awardlink=awardlink_shop(belief_id=BeliefID(sue_text), credor_weight=10)
     )
     zia_world._idearoot.set_awardlink(
-        awardlink=awardlink_shop(belief_id=BeliefID(patr_text), credor_weight=10)
+        awardlink=awardlink_shop(belief_id=BeliefID(zia_text), credor_weight=10)
     )
 
     # WHEN
@@ -79,22 +79,22 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     chars_metrics = zia_world.get_chars_metrics()
 
     # THEN
-    awardlink_rico = chars_metrics[rico_text]
-    awardlink_carm = chars_metrics[carm_text]
-    awardlink_patr = chars_metrics[patr_text]
-    assert awardlink_rico.belief_id != None
-    assert awardlink_carm.belief_id != None
-    assert awardlink_patr.belief_id != None
-    assert awardlink_rico.belief_id == rico_text
-    assert awardlink_carm.belief_id == carm_text
-    assert awardlink_patr.belief_id == patr_text
+    awardlink_yao = chars_metrics[yao_text]
+    awardlink_sue = chars_metrics[sue_text]
+    awardlink_zia = chars_metrics[zia_text]
+    assert awardlink_yao.belief_id != None
+    assert awardlink_sue.belief_id != None
+    assert awardlink_zia.belief_id != None
+    assert awardlink_yao.belief_id == yao_text
+    assert awardlink_sue.belief_id == sue_text
+    assert awardlink_zia.belief_id == zia_text
     all_beliefs = zia_world._beliefs
-    beliefbox_rico = all_beliefs[rico_text]
-    beliefbox_carm = all_beliefs[carm_text]
-    beliefbox_patr = all_beliefs[patr_text]
-    assert beliefbox_rico._char_mirror == True
-    assert beliefbox_carm._char_mirror == True
-    assert beliefbox_patr._char_mirror == True
+    beliefbox_yao = all_beliefs[yao_text]
+    beliefbox_sue = all_beliefs[sue_text]
+    beliefbox_zia = all_beliefs[zia_text]
+    assert beliefbox_yao._char_mirror == True
+    assert beliefbox_sue._char_mirror == True
+    assert beliefbox_zia._char_mirror == True
 
 
 def _check_all_objects_in_dict_are_correct_type(x_dict: dict, type_str: str) -> bool:

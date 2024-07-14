@@ -74,7 +74,7 @@ def test_HubUnit_save_action_file_RaisesErrorWhenWorld_action_id_IsWrong(
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text, None)
 
     # WHEN / THEN
-    yao_text = "yao"
+    yao_text = "Yao"
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.save_action_world(worldunit_shop(yao_text))
     assert (

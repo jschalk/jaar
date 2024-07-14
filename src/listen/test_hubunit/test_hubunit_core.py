@@ -307,7 +307,7 @@ def test_HubUnit_save_voice_world_RaisesErrorWhenWorld_action_id_IsWrong(
     sue_hubunit = hubunit_shop(env_dir(), real_id, sue_text, None)
 
     # WHEN / THEN
-    yao_text = "yao"
+    yao_text = "Yao"
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.save_voice_world(worldunit_shop(yao_text))
     assert (
@@ -388,7 +388,7 @@ def test_HubUnit_save_action_world_RaisesErrorWhenWorld_action_id_IsWrong(
     sue_hubunit = hubunit_shop(env_dir(), real_id, sue_text, None)
 
     # WHEN / THEN
-    yao_text = "yao"
+    yao_text = "Yao"
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.save_action_world(worldunit_shop(yao_text))
     assert (

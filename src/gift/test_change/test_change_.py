@@ -201,8 +201,8 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
     z_atom = sue_atoms_list[1]
     print(f"{z_atom=}")
     print(delete_dict.get("world_charunit").keys())
-    carmen_charunit_delete = delete_dict.get("world_charunit").get("Carmen")
-    assert sue_atoms_list[1] == carmen_charunit_delete
+    zia_charunit_delete = delete_dict.get("world_charunit").get("Zia")
+    assert sue_atoms_list[1] == zia_charunit_delete
     # print(f"{sue_atom_order_dict.keys()=}")
     # # print(f"{sue_atom_order_dict.get(atom_update())=}")
     # assert len(sue_atom_order_dict.get(atom_update())) == 1
@@ -296,10 +296,10 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     # THEN
     assert len(sue_atom_order_list) == 2
     print(delete_dict.get("world_charunit").keys())
-    carmen_charunit_delete = delete_dict.get("world_charunit").get("Carmen")
+    zia_charunit_delete = delete_dict.get("world_charunit").get("Zia")
     # for atomunit in sue_atom_order_list:
     #     print(f"{atomunit.atom_order=}")
-    assert sue_atom_order_list[0] == carmen_charunit_delete
+    assert sue_atom_order_list[0] == zia_charunit_delete
     assert sue_atom_order_list[1] == update_dict.get(worldunit_text)
     # for crud_text, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_text=}")
@@ -391,9 +391,9 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld():
     sue_changeunit.set_atomunit(x_atomunit)
 
     category = "world_charunit"
-    carm_text = "Carmen"
+    zia_text = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("char_id", carm_text)
+    x_atomunit.set_arg("char_id", zia_text)
     x_atomunit.set_arg("credor_weight", 70)
     sue_changeunit.set_atomunit(x_atomunit)
 
@@ -401,9 +401,9 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld():
     assert world_built_from_change_is_valid(sue_changeunit) is False
 
     # WHEN
-    rico_text = "Rico"
+    yao_text = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("char_id", rico_text)
+    x_atomunit.set_arg("char_id", yao_text)
     x_atomunit.set_arg("credor_weight", 30)
     sue_changeunit.set_atomunit(x_atomunit)
 
@@ -429,9 +429,9 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenWorld():
     sue_changeunit = changeunit_shop()
 
     category = "world_charunit"
-    carm_text = "Carmen"
+    zia_text = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("char_id", carm_text)
+    x_atomunit.set_arg("char_id", zia_text)
     x_atomunit.set_arg("credor_weight", 70)
     sue_changeunit.set_atomunit(x_atomunit)
 
@@ -441,9 +441,9 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenWorld():
     assert world_built_from_change_is_valid(sue_changeunit, sue_world) is False
 
     # WHEN
-    rico_text = "Rico"
+    yao_text = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("char_id", rico_text)
+    x_atomunit.set_arg("char_id", yao_text)
     x_atomunit.set_arg("credor_weight", 30)
     sue_changeunit.set_atomunit(x_atomunit)
 
@@ -474,18 +474,18 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumbe
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"
-    carm_text = "Carmen"
-    carm_atomunit = atomunit_shop(category, atom_insert())
-    carm_atomunit.set_arg("char_id", carm_text)
-    carm_atomunit.set_arg("credor_weight", 70)
-    sue_changeunit.set_atomunit(carm_atomunit)
+    zia_text = "Zia"
+    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit.set_arg("char_id", zia_text)
+    zia_atomunit.set_arg("credor_weight", 70)
+    sue_changeunit.set_atomunit(zia_atomunit)
     sue_world = worldunit_shop("Sue")
     sue_world.set_char_credor_pool(100)
-    rico_text = "Rico"
-    rico_atomunit = atomunit_shop(category, atom_insert())
-    rico_atomunit.set_arg("char_id", rico_text)
-    rico_atomunit.set_arg("credor_weight", 30)
-    sue_changeunit.set_atomunit(rico_atomunit)
+    yao_text = "Yao"
+    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit.set_arg("char_id", yao_text)
+    yao_atomunit.set_arg("credor_weight", 30)
+    sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_world = worldunit_shop("Sue")
     assert world_built_from_change_is_valid(sue_changeunit, sue_world)
@@ -494,14 +494,14 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumbe
     changeunit_dict = sue_changeunit.get_ordered_atomunits()
 
     # THEN
-    # change_carm = changeunit_dict.get(0)
-    # change_rico = changeunit_dict.get(1)
+    # change_zia = changeunit_dict.get(0)
+    # change_yao = changeunit_dict.get(1)
     # change_pool = changeunit_dict.get(2)
-    # assert change_carm == carm_atomunit
-    # assert change_rico == rico_atomunit
+    # assert change_zia == zia_atomunit
+    # assert change_yao == yao_atomunit
     # assert change_pool == pool_atomunit
-    assert changeunit_dict.get(0) == carm_atomunit
-    assert changeunit_dict.get(1) == rico_atomunit
+    assert changeunit_dict.get(0) == zia_atomunit
+    assert changeunit_dict.get(1) == yao_atomunit
     assert changeunit_dict.get(2) == pool_atomunit
 
 
@@ -514,18 +514,18 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenStartingNumber(
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"
-    carm_text = "Carmen"
-    carm_atomunit = atomunit_shop(category, atom_insert())
-    carm_atomunit.set_arg("char_id", carm_text)
-    carm_atomunit.set_arg("credor_weight", 70)
-    sue_changeunit.set_atomunit(carm_atomunit)
+    zia_text = "Zia"
+    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit.set_arg("char_id", zia_text)
+    zia_atomunit.set_arg("credor_weight", 70)
+    sue_changeunit.set_atomunit(zia_atomunit)
     sue_world = worldunit_shop("Sue")
     sue_world.set_char_credor_pool(100)
-    rico_text = "Rico"
-    rico_atomunit = atomunit_shop(category, atom_insert())
-    rico_atomunit.set_arg("char_id", rico_text)
-    rico_atomunit.set_arg("credor_weight", 30)
-    sue_changeunit.set_atomunit(rico_atomunit)
+    yao_text = "Yao"
+    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit.set_arg("char_id", yao_text)
+    yao_atomunit.set_arg("credor_weight", 30)
+    sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_world = worldunit_shop("Sue")
     assert world_built_from_change_is_valid(sue_changeunit, sue_world)
@@ -534,14 +534,14 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenStartingNumber(
     changeunit_dict = sue_changeunit.get_ordered_atomunits(5)
 
     # THEN
-    # change_carm = changeunit_dict.get(0)
-    # change_rico = changeunit_dict.get(1)
+    # change_zia = changeunit_dict.get(0)
+    # change_yao = changeunit_dict.get(1)
     # change_pool = changeunit_dict.get(2)
-    # assert change_carm == carm_atomunit
-    # assert change_rico == rico_atomunit
+    # assert change_zia == zia_atomunit
+    # assert change_yao == yao_atomunit
     # assert change_pool == pool_atomunit
-    assert changeunit_dict.get(5) == carm_atomunit
-    assert changeunit_dict.get(6) == rico_atomunit
+    assert changeunit_dict.get(5) == zia_atomunit
+    assert changeunit_dict.get(6) == yao_atomunit
     assert changeunit_dict.get(7) == pool_atomunit
 
 
@@ -554,18 +554,18 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_GivenStartingNumber():
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"
-    carm_text = "Carmen"
-    carm_atomunit = atomunit_shop(category, atom_insert())
-    carm_atomunit.set_arg("char_id", carm_text)
-    carm_atomunit.set_arg("credor_weight", 70)
-    sue_changeunit.set_atomunit(carm_atomunit)
+    zia_text = "Zia"
+    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit.set_arg("char_id", zia_text)
+    zia_atomunit.set_arg("credor_weight", 70)
+    sue_changeunit.set_atomunit(zia_atomunit)
     sue_world = worldunit_shop("Sue")
     sue_world.set_char_credor_pool(100)
-    rico_text = "Rico"
-    rico_atomunit = atomunit_shop(category, atom_insert())
-    rico_atomunit.set_arg("char_id", rico_text)
-    rico_atomunit.set_arg("credor_weight", 30)
-    sue_changeunit.set_atomunit(rico_atomunit)
+    yao_text = "Yao"
+    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit.set_arg("char_id", yao_text)
+    yao_atomunit.set_arg("credor_weight", 30)
+    sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_world = worldunit_shop("Sue")
     assert world_built_from_change_is_valid(sue_changeunit, sue_world)
@@ -574,14 +574,14 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_GivenStartingNumber():
     changeunit_dict = sue_changeunit.get_ordered_dict(5)
 
     # THEN
-    # change_carm = changeunit_dict.get(0)
-    # change_rico = changeunit_dict.get(1)
+    # change_zia = changeunit_dict.get(0)
+    # change_yao = changeunit_dict.get(1)
     # change_pool = changeunit_dict.get(2)
-    # assert change_carm == carm_atomunit
-    # assert change_rico == rico_atomunit
+    # assert change_zia == zia_atomunit
+    # assert change_yao == yao_atomunit
     # assert change_pool == pool_atomunit
-    assert changeunit_dict.get(5) == carm_atomunit.get_dict()
-    assert changeunit_dict.get(6) == rico_atomunit.get_dict()
+    assert changeunit_dict.get(5) == zia_atomunit.get_dict()
+    assert changeunit_dict.get(6) == yao_atomunit.get_dict()
     assert changeunit_dict.get(7) == pool_atomunit.get_dict()
 
 
@@ -594,16 +594,16 @@ def test_ChangeUnit_get_json_ReturnsCorrectObj():
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"
-    carm_text = "Carmen"
-    carm_atomunit = atomunit_shop(category, atom_insert())
-    carm_atomunit.set_arg("char_id", carm_text)
-    carm_atomunit.set_arg("credor_weight", 70)
-    sue_changeunit.set_atomunit(carm_atomunit)
-    rico_text = "Rico"
-    rico_atomunit = atomunit_shop(category, atom_insert())
-    rico_atomunit.set_arg("char_id", rico_text)
-    rico_atomunit.set_arg("credor_weight", 30)
-    sue_changeunit.set_atomunit(rico_atomunit)
+    zia_text = "Zia"
+    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit.set_arg("char_id", zia_text)
+    zia_atomunit.set_arg("credor_weight", 70)
+    sue_changeunit.set_atomunit(zia_atomunit)
+    yao_text = "Yao"
+    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit.set_arg("char_id", yao_text)
+    yao_atomunit.set_arg("credor_weight", 30)
+    sue_changeunit.set_atomunit(yao_atomunit)
 
     # WHEN
     change_start_int = 5
@@ -619,14 +619,14 @@ def test_ChangeUnit_atomunit_exists_ReturnsCorrectObj():
 
     # WHEN / THEN
     category = "world_charunit"
-    carm_text = "Carmen"
-    carm_atomunit = atomunit_shop(category, atom_insert())
-    carm_atomunit.set_arg("char_id", carm_text)
-    carm_atomunit.set_arg("credor_weight", 70)
-    assert farm_changeunit.atomunit_exists(carm_atomunit) is False
+    zia_text = "Zia"
+    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit.set_arg("char_id", zia_text)
+    zia_atomunit.set_arg("credor_weight", 70)
+    assert farm_changeunit.atomunit_exists(zia_atomunit) is False
 
     # WHEN
-    farm_changeunit.set_atomunit(carm_atomunit)
+    farm_changeunit.set_atomunit(zia_atomunit)
 
     # THEN
-    assert farm_changeunit.atomunit_exists(carm_atomunit)
+    assert farm_changeunit.atomunit_exists(zia_atomunit)
