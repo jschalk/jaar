@@ -50,6 +50,7 @@ def test_beliefbox_shop_ReturnsCorrectObj():
     assert swim_beliefbox != None
     assert swim_beliefbox.belief_id != None
     assert swim_beliefbox.belief_id == swim_text
+    assert swim_beliefbox._chars == {}
     assert swim_beliefbox._world_cred == 0
     assert swim_beliefbox._world_debt == 0
     assert swim_beliefbox._world_agenda_cred == 0
@@ -115,7 +116,7 @@ def test_BeliefBox_set_belief_id_SetsAttrCorrectly():
 def test_BeliefBox_reset_bud_share_SetsAttrCorrectly():
     # GIVEN
     maria_belief_id = "maria"
-    maria_beliefbox = beliefbox_shop(belief_id=maria_belief_id, _char_mirror=True)
+    maria_beliefbox = beliefbox_shop(maria_belief_id, _char_mirror=True)
     maria_beliefbox._world_cred = 0.33
     maria_beliefbox._world_debt = 0.44
     maria_beliefbox._world_agenda_cred = 0.13
