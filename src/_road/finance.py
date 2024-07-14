@@ -14,6 +14,12 @@ class MoneyUnit(float):
     pass
 
 
+class RespectUnit(float):
+    """RespectUnit inherits from float class"""
+
+    pass
+
+
 class BitHum(float):
     """Smallest Unit of credor_weight or debtor_weight ala 'give me the slightest bit of respect!'"""
 
@@ -49,6 +55,11 @@ def validate_bud_pool(x_bud_pool: int = None) -> int:
     return max(get_1_if_None(x_bud_pool), default_coin_if_none())
 
 
+def valid_fiscal_ratio(big_number: float, small_number: float) -> bool:
+    """Checks that big_number is wholly divisible by small_number"""
+    return (big_number % small_number) == 0
+
+
 # def validate_bud_pool(x_bud_pool: BudNum = None, x_coin: CoinNum = None) -> int:
 #     x_coin = default_coin_if_none() if x_coin is None else x_coin
 #     x_bud_pool = default_bud_pool() if x_bud_pool is None else x_bud_pool
@@ -56,11 +67,20 @@ def validate_bud_pool(x_bud_pool: int = None) -> int:
 
 
 def default_bit_if_none(bit: BitHum = None) -> BitHum:
-    return get_1_if_None(bit)
+    return max(get_1_if_None(bit), 1)
 
 
 def trim_bit_excess(num: float, bit: BitHum) -> float:
     return bit * int(num / bit)
+
+
+def default_respect_num() -> RespectUnit:
+    return RespectUnit(default_bud_pool())
+
+
+def validate_respect_num(x_respect_num: RespectUnit = None) -> RespectUnit:
+    x_respect_num = default_respect_num() if x_respect_num is None else x_respect_num
+    return max(x_respect_num, default_bit_if_none(x_respect_num))
 
 
 def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
