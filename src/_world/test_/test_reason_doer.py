@@ -7,7 +7,6 @@ from src._world.reason_doer import (
 )
 from src._world.beliefbox import BeliefID, beliefbox_shop
 from src._world.char import charlink_shop
-from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
 
 
@@ -150,15 +149,17 @@ def test_DoerHeir_get_all_suff_chars_ReturnsSingleDictWithAllChars_v1():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
+    yao_beliefunit = beliefbox_shop(yao_text, _char_mirror=True)
+    sue_beliefunit = beliefbox_shop(sue_text, _char_mirror=True)
+    yao_beliefunit.set_charlink(charlink_shop(yao_text))
+    sue_beliefunit.set_charlink(charlink_shop(sue_text))
+    x_beliefunits = {yao_text: yao_beliefunit, sue_text: sue_beliefunit}
 
     x_beliefholds = {yao_text}
     x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
 
     # WHEN
-    all_chars = x_doerheir._get_all_suff_chars(world_beliefs=x_world._beliefs)
+    all_chars = x_doerheir._get_all_suff_chars(x_beliefunits)
 
     # THEN
     assert len(all_chars) == 1
@@ -169,22 +170,28 @@ def test_DoerHeir_get_all_suff_chars_ReturnsSingleDictWithAllChars_v2():
     yao_text = "Yao"
     sue_text = "Sue"
     bob_text = "Bob"
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
-    x_world.add_charunit(char_id=bob_text)
+    yao_beliefunit = beliefbox_shop(yao_text, _char_mirror=True)
+    sue_beliefunit = beliefbox_shop(sue_text, _char_mirror=True)
+    bob_beliefunit = beliefbox_shop(bob_text, _char_mirror=True)
+    yao_beliefunit.set_charlink(charlink_shop(yao_text))
+    sue_beliefunit.set_charlink(charlink_shop(sue_text))
 
     swim_text = ",swim"
-    swim_belief = beliefbox_shop(belief_id=swim_text)
-    swim_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
-    swim_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefbox(y_beliefbox=swim_belief)
+    swim_beliefunit = beliefbox_shop(belief_id=swim_text)
+    swim_beliefunit.set_charlink(charlink=charlink_shop(char_id=yao_text))
+    swim_beliefunit.set_charlink(charlink=charlink_shop(char_id=sue_text))
+    x_beliefunits = {
+        yao_text: yao_beliefunit,
+        sue_text: sue_beliefunit,
+        bob_text: bob_beliefunit,
+        swim_text: swim_beliefunit,
+    }
 
     x_beliefholds = {swim_text}
     x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
 
     # WHEN
-    all_chars = x_doerheir._get_all_suff_chars(world_beliefs=x_world._beliefs)
+    all_chars = x_doerheir._get_all_suff_chars(x_beliefunits)
 
     # THEN
     assert len(all_chars) == 2
@@ -208,22 +215,19 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_beliefholds
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
-
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
-    world_owner_id = x_world._owner_id
-    world_beliefs = x_world._beliefs
-    print(f"{len(world_beliefs)=}")
-    # print(f"{world_beliefs.get(yao_text)=}")
-    # print(f"{world_beliefs.get(sue_text)=}")
+    yao_beliefunit = beliefbox_shop(yao_text, _char_mirror=True)
+    sue_beliefunit = beliefbox_shop(sue_text, _char_mirror=True)
+    yao_beliefunit.set_charlink(charlink_shop(yao_text))
+    sue_beliefunit.set_charlink(charlink_shop(sue_text))
+    x_beliefunits = {yao_text: yao_beliefunit, sue_text: sue_beliefunit}
+    world_owner_id = yao_text
 
     x_beliefholds = {yao_text}
     x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
     assert x_doerheir._owner_id_doer is False
 
     # WHEN
-    x_doerheir.set_owner_id_doer(world_beliefs, world_owner_id)
+    x_doerheir.set_owner_id_doer(x_beliefunits, world_owner_id)
 
     # THEN
     assert x_doerheir._owner_id_doer
@@ -233,22 +237,18 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_beliefholds
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
-
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
-    world_owner_id = x_world._owner_id
-    world_beliefs = x_world._beliefs
-    print(f"{len(world_beliefs)=}")
-    # print(f"{world_beliefs.get(yao_text)=}")
-    # print(f"{world_beliefs.get(sue_text)=}")
-
+    yao_beliefunit = beliefbox_shop(yao_text, _char_mirror=True)
+    sue_beliefunit = beliefbox_shop(sue_text, _char_mirror=True)
+    yao_beliefunit.set_charlink(charlink_shop(yao_text))
+    sue_beliefunit.set_charlink(charlink_shop(sue_text))
+    x_beliefunits = {yao_text: yao_beliefunit, sue_text: sue_beliefunit}
+    world_owner_id = yao_text
     x_beliefholds = {sue_text}
     x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
     assert x_doerheir._owner_id_doer is False
 
     # WHEN
-    x_doerheir.set_owner_id_doer(world_beliefs, world_owner_id)
+    x_doerheir.set_owner_id_doer(x_beliefunits, world_owner_id)
 
     # THEN
     assert x_doerheir._owner_id_doer is False
@@ -259,58 +259,32 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_beliefholds
     yao_text = "Yao"
     sue_text = "Sue"
     bob_text = "Bob"
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
-    x_world.add_charunit(char_id=bob_text)
+    yao_beliefunit = beliefbox_shop(yao_text, _char_mirror=True)
+    sue_beliefunit = beliefbox_shop(sue_text, _char_mirror=True)
+    bob_beliefunit = beliefbox_shop(bob_text, _char_mirror=True)
+    yao_beliefunit.set_charlink(charlink_shop(yao_text))
+    sue_beliefunit.set_charlink(charlink_shop(sue_text))
 
     swim_text = ",swim"
-    swim_belief = beliefbox_shop(belief_id=swim_text)
-    swim_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
-    swim_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefbox(y_beliefbox=swim_belief)
+    swim_beliefunit = beliefbox_shop(belief_id=swim_text)
+    swim_beliefunit.set_charlink(charlink=charlink_shop(char_id=yao_text))
+    swim_beliefunit.set_charlink(charlink=charlink_shop(char_id=sue_text))
+    x_beliefunits = {
+        yao_text: yao_beliefunit,
+        sue_text: sue_beliefunit,
+        bob_text: bob_beliefunit,
+        swim_text: swim_beliefunit,
+    }
 
     x_beliefholds = {swim_text}
     x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
     assert x_doerheir._owner_id_doer is False
-    x_doerheir.set_owner_id_doer(x_world._beliefs, x_world._owner_id)
+    x_doerheir.set_owner_id_doer(x_beliefunits, world_owner_id=yao_text)
     assert x_doerheir._owner_id_doer
 
     # WHEN
-    swim_belief.del_charlink(char_id=yao_text)
-    x_world.set_beliefbox(y_beliefbox=swim_belief)
-    x_doerheir.set_owner_id_doer(x_world._beliefs, x_world._owner_id)
-
-    # THEN
-    assert x_doerheir._owner_id_doer is False
-
-
-def test_DoerHeir_set__CorrectlySetsAttribute_NonEmptyx_beliefholds_v3():
-    # GIVEN
-    yao_text = "Yao"
-    sue_text = "Sue"
-    bob_text = "Bob"
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
-    x_world.add_charunit(char_id=bob_text)
-
-    swim_text = ",swim"
-    swim_belief = beliefbox_shop(belief_id=swim_text)
-    swim_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
-    swim_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefbox(y_beliefbox=swim_belief)
-
-    x_beliefholds = {swim_text}
-    x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
-    assert x_doerheir._owner_id_doer is False
-    x_doerheir.set_owner_id_doer(x_world._beliefs, x_world._owner_id)
-    assert x_doerheir._owner_id_doer
-
-    # WHEN
-    swim_belief.del_charlink(char_id=yao_text)
-    x_world.set_beliefbox(y_beliefbox=swim_belief)
-    x_doerheir.set_owner_id_doer(x_world._beliefs, x_world._owner_id)
+    swim_beliefunit.del_charlink(yao_text)
+    x_doerheir.set_owner_id_doer(x_beliefunits, yao_text)
 
     # THEN
     assert x_doerheir._owner_id_doer is False
@@ -425,24 +399,31 @@ def test_DoerHeir_set_beliefhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
-    x_world.add_charunit(char_id=bob_text)
-    x_world.add_charunit(char_id=zia_text)
+    yao_beliefunit = beliefbox_shop(yao_text, _char_mirror=True)
+    sue_beliefunit = beliefbox_shop(sue_text, _char_mirror=True)
+    bob_beliefunit = beliefbox_shop(bob_text, _char_mirror=True)
+    bob_beliefunit = beliefbox_shop(zia_text, _char_mirror=True)
+    yao_beliefunit.set_charlink(charlink_shop(yao_text))
+    sue_beliefunit.set_charlink(charlink_shop(sue_text))
 
     swim2_text = ",swim2"
-    swim2_belief = beliefbox_shop(belief_id=swim2_text)
-    swim2_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
-    swim2_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefbox(y_beliefbox=swim2_belief)
+    swim2_beliefunit = beliefbox_shop(belief_id=swim2_text)
+    swim2_beliefunit.set_charlink(charlink=charlink_shop(char_id=yao_text))
+    swim2_beliefunit.set_charlink(charlink=charlink_shop(char_id=sue_text))
 
     swim3_text = ",swim3"
-    swim3_belief = beliefbox_shop(belief_id=swim3_text)
-    swim3_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
-    swim3_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    swim3_belief.set_charlink(charlink=charlink_shop(char_id=zia_text))
-    x_world.set_beliefbox(y_beliefbox=swim3_belief)
+    swim3_beliefunit = beliefbox_shop(belief_id=swim3_text)
+    swim3_beliefunit.set_charlink(charlink=charlink_shop(char_id=yao_text))
+    swim3_beliefunit.set_charlink(charlink=charlink_shop(char_id=sue_text))
+    swim3_beliefunit.set_charlink(charlink=charlink_shop(char_id=zia_text))
+
+    x_beliefunits = {
+        yao_text: yao_beliefunit,
+        sue_text: sue_beliefunit,
+        bob_text: bob_beliefunit,
+        swim2_text: swim2_beliefunit,
+        swim3_text: swim3_beliefunit,
+    }
 
     parent_doerunit = doerunit_shop()
     parent_doerunit.set_beliefhold(belief_id=swim3_text)
@@ -456,9 +437,7 @@ def test_DoerHeir_set_beliefhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
 
     # WHEN
     x_doerheir = doerheir_shop()
-    x_doerheir.set_beliefholds(
-        parent_doerheir, doerunit_swim2, world_beliefs=x_world._beliefs
-    )
+    x_doerheir.set_beliefholds(parent_doerheir, doerunit_swim2, x_beliefunits)
 
     # THEN
     assert x_doerheir._beliefholds == doerunit_swim2._beliefholds
@@ -472,31 +451,36 @@ def test_DoerHeir_set_beliefhold_DoerUnit_NotEqualParentDoerHeir_RaisesError():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    x_world = worldunit_shop(_owner_id=yao_text)
-    x_world.add_charunit(char_id=yao_text)
-    x_world.add_charunit(char_id=sue_text)
-    x_world.add_charunit(char_id=bob_text)
-    x_world.add_charunit(char_id=zia_text)
+    yao_beliefunit = beliefbox_shop(yao_text, _char_mirror=True)
+    sue_beliefunit = beliefbox_shop(sue_text, _char_mirror=True)
+    bob_beliefunit = beliefbox_shop(bob_text, _char_mirror=True)
+    bob_beliefunit = beliefbox_shop(zia_text, _char_mirror=True)
+    yao_beliefunit.set_charlink(charlink_shop(yao_text))
+    sue_beliefunit.set_charlink(charlink_shop(sue_text))
 
     swim2_text = ",swim2"
-    swim2_belief = beliefbox_shop(belief_id=swim2_text)
-    swim2_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
-    swim2_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    x_world.set_beliefbox(y_beliefbox=swim2_belief)
+    swim2_beliefunit = beliefbox_shop(belief_id=swim2_text)
+    swim2_beliefunit.set_charlink(charlink=charlink_shop(char_id=yao_text))
+    swim2_beliefunit.set_charlink(charlink=charlink_shop(char_id=sue_text))
 
     swim3_text = ",swim3"
-    swim3_belief = beliefbox_shop(belief_id=swim3_text)
-    swim3_belief.set_charlink(charlink=charlink_shop(char_id=yao_text))
-    swim3_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    swim3_belief.set_charlink(charlink=charlink_shop(char_id=zia_text))
-    x_world.set_beliefbox(y_beliefbox=swim3_belief)
+    swim3_beliefunit = beliefbox_shop(belief_id=swim3_text)
+    swim3_beliefunit.set_charlink(charlink=charlink_shop(char_id=yao_text))
+    swim3_beliefunit.set_charlink(charlink=charlink_shop(char_id=sue_text))
+    swim3_beliefunit.set_charlink(charlink=charlink_shop(char_id=zia_text))
+
+    x_beliefunits = {
+        yao_text: yao_beliefunit,
+        sue_text: sue_beliefunit,
+        bob_text: bob_beliefunit,
+        swim2_text: swim2_beliefunit,
+        swim3_text: swim3_beliefunit,
+    }
 
     parent_doerunit = doerunit_shop()
-    parent_doerunit.set_beliefhold(belief_id=swim2_text)
+    parent_doerunit.set_beliefhold(swim2_text)
     parent_doerheir = doerheir_shop()
-    parent_doerheir.set_beliefholds(
-        parent_doerheir=None, doerunit=parent_doerunit, world_beliefs=None
-    )
+    parent_doerheir.set_beliefholds(None, parent_doerunit, x_beliefunits)
 
     doerunit_swim3 = doerunit_shop()
     doerunit_swim3.set_beliefhold(belief_id=swim3_text)
@@ -506,9 +490,7 @@ def test_DoerHeir_set_beliefhold_DoerUnit_NotEqualParentDoerHeir_RaisesError():
     all_parent_doerheir_chars = {yao_text, sue_text}
     all_doerunit_chars = {yao_text, sue_text, zia_text}
     with pytest_raises(Exception) as excinfo:
-        x_doerheir.set_beliefholds(
-            parent_doerheir, doerunit_swim3, world_beliefs=x_world._beliefs
-        )
+        x_doerheir.set_beliefholds(parent_doerheir, doerunit_swim3, x_beliefunits)
     assert (
         str(excinfo.value)
         == f"parent_doerheir does not contain all chars of the idea's doerunit\n{set(all_parent_doerheir_chars)=}\n\n{set(all_doerunit_chars)=}"
