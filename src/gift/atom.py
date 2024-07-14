@@ -170,9 +170,6 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
     x_arg = "_coin"
     if x_atom.get_value(x_arg) != None:
         x_world._coin = x_atom.get_value(x_arg)
-    x_arg = "_meld_strategy"
-    if x_atom.get_value(x_arg) != None:
-        x_world.set_meld_strategy(x_atom.get_value(x_arg))
     x_arg = "_weight"
     if x_atom.get_value(x_arg) != None:
         x_world._weight = x_atom.get_value(x_arg)
@@ -247,7 +244,6 @@ def _modify_world_ideaunit_update(x_world: WorldUnit, x_atom: AtomUnit):
         begin=x_atom.get_value("_begin"),
         close=x_atom.get_value("_close"),
         denom=x_atom.get_value("_denom"),
-        meld_strategy=x_atom.get_value("_meld_strategy"),
         numeric_road=x_atom.get_value("_numeric_road"),
         numor=x_atom.get_value("_numor"),
         range_source_road=x_atom.get_value("_range_source_road"),
@@ -265,7 +261,6 @@ def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
             _begin=x_atom.get_value("_begin"),
             _close=x_atom.get_value("_close"),
             _denom=x_atom.get_value("_denom"),
-            _meld_strategy=x_atom.get_value("_meld_strategy"),
             _numeric_road=x_atom.get_value("_numeric_road"),
             _numor=x_atom.get_value("_numor"),
             pledge=x_atom.get_value("pledge"),
@@ -532,7 +527,6 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
         return (
             x_obj._weight != y_obj._weight
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
-            or x_obj._meld_strategy != y_obj._meld_strategy
             or x_obj._char_credor_pool != y_obj._char_credor_pool
             or x_obj._char_debtor_pool != y_obj._char_debtor_pool
             or x_obj._bit != y_obj._bit
@@ -549,7 +543,6 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._begin != y_obj._begin
             or x_obj._close != y_obj._close
             or x_obj._denom != y_obj._denom
-            or x_obj._meld_strategy != y_obj._meld_strategy
             or x_obj._numeric_road != y_obj._numeric_road
             or x_obj._numor != y_obj._numor
             or x_obj._range_source_road != y_obj._range_source_road

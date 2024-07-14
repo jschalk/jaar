@@ -45,7 +45,6 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._range_source_road is None
     assert x_ideaunit.pledge is None
     assert x_ideaunit._problem_bool is None
-    assert x_ideaunit._meld_strategy is None
     assert x_ideaunit._healerhold is None
     # calculated_fields
     assert x_ideaunit._descendant_pledge_count is None
@@ -92,7 +91,6 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._is_expanded == True
     assert x_ideaunit._factheirs == {}
     assert x_ideaunit._factunits == {}
-    assert x_ideaunit._meld_strategy == "default"
     assert x_ideaunit._healerhold == healerhold_shop()
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
@@ -570,8 +568,6 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_idea._is_expanded
     assert casa_dict.get("_is_expanded") is None
     assert len(casa_dict["_factunits"]) == len(casa_idea.get_factunits_dict())
-    assert casa_idea._meld_strategy == "default"
-    assert casa_dict.get("_meld_strategy") is None
 
 
 def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
@@ -592,7 +588,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_idea._is_expanded = False
     casa_idea.pledge = True
     ignore_text = "ignore"
-    casa_idea._meld_strategy = ignore_text
 
     a_text = "a"
     a_road = create_road(root_label(), a_text)
@@ -612,7 +607,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
 
     assert not casa_idea._is_expanded
     assert casa_idea.pledge
-    assert casa_idea._meld_strategy != "default"
     assert casa_idea._factunits != None
     assert casa_idea._awardlinks != None
     assert casa_idea._doerunit != None
@@ -625,7 +619,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     # THEN
     assert casa_dict.get("_is_expanded") is False
     assert casa_dict.get("pledge")
-    assert casa_dict.get("_meld_strategy") == ignore_text
     assert casa_dict.get("_factunits") != None
     assert casa_dict.get("_awardlinks") != None
     assert casa_dict.get("_doerunit") != None
@@ -638,7 +631,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     casa_idea = ideaunit_shop()
     assert casa_idea._is_expanded
     assert casa_idea.pledge is False
-    assert casa_idea._meld_strategy == "default"
     assert casa_idea._factunits == {}
     assert casa_idea._awardlinks == {}
     assert casa_idea._doerunit == doerunit_shop()
@@ -652,7 +644,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     # THEN
     assert casa_dict.get("_is_expanded") is None
     assert casa_dict.get("pledge") is None
-    assert casa_dict.get("_meld_strategy") is None
     assert casa_dict.get("_factunits") is None
     assert casa_dict.get("_awardlinks") is None
     assert casa_dict.get("_doerunit") is None

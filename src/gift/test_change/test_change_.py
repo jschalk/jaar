@@ -265,16 +265,6 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 #     assert len(ex1_changeunit.atomunits.get(atom_update()).keys()) == 4
 #     assert x_atomunit == ex1_changeunit.atomunits.get(atom_update()).get(x_attribute)
 
-#     # WHEN
-#     new5_value = "override"
-#     x_attribute = "_meld_strategy"
-#     required_args = {x_attribute: new5_value}
-#     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, required_args)
-#     ex1_changeunit.set_atomunit(x_atomunit)
-#     # THEN
-#     assert len(ex1_changeunit.atomunits.get(atom_update()).keys()) == 5
-#     assert x_atomunit == ex1_changeunit.atomunits.get(atom_update()).get(x_attribute)
-
 
 def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     # GIVEN

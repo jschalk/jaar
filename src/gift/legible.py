@@ -189,13 +189,11 @@ def add_worldunit_legible_list(
     optional_args = x_atom.optional_args
     _weight_text = "_weight"
     _max_tree_traverse_text = "_max_tree_traverse"
-    _meld_strategy_text = "_meld_strategy"
     _monetary_desc_text = "_monetary_desc"
     _char_credor_pool_text = "_char_credor_pool"
     _char_debtor_pool_text = "_char_debtor_pool"
 
     _max_tree_traverse_value = optional_args.get(_max_tree_traverse_text)
-    _meld_strategy_value = optional_args.get(_meld_strategy_text)
     _monetary_desc_value = optional_args.get(_monetary_desc_text)
     _char_credor_pool_value = optional_args.get(_char_credor_pool_text)
     _char_debtor_pool_value = optional_args.get(_char_debtor_pool_text)
@@ -208,10 +206,6 @@ def add_worldunit_legible_list(
     if _max_tree_traverse_value != None:
         legible_list.append(
             f"{x_world._owner_id}'s maximum number of World output evaluations transited to {_max_tree_traverse_value}"
-        )
-    if _meld_strategy_value != None:
-        legible_list.append(
-            f"{x_world._owner_id}'s Meld strategy transited to '{_meld_strategy_value}'"
         )
     if _monetary_desc_value != None:
         legible_list.append(
@@ -365,7 +359,6 @@ def add_world_ideaunit_insert_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _meld_strategy_text = "_meld_strategy"
     _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
@@ -381,7 +374,6 @@ def add_world_ideaunit_insert_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _meld_strategy_value = ideaunit_atom.get_value(_meld_strategy_text)
             _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
@@ -400,8 +392,6 @@ def add_world_ideaunit_insert_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value != None:
                 x_str += f"_denom={_denom_value}."
-            if _meld_strategy_value != None:
-                x_str += f"_meld_strategy={_meld_strategy_value}."
             if _numeric_road_value != None:
                 x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value != None:
@@ -429,7 +419,6 @@ def add_world_ideaunit_update_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _meld_strategy_text = "_meld_strategy"
     _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
@@ -445,7 +434,6 @@ def add_world_ideaunit_update_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _meld_strategy_value = ideaunit_atom.get_value(_meld_strategy_text)
             _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
@@ -462,8 +450,6 @@ def add_world_ideaunit_update_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value != None:
                 x_str += f"_denom={_denom_value}."
-            if _meld_strategy_value != None:
-                x_str += f"_meld_strategy={_meld_strategy_value}."
             if _numeric_road_value != None:
                 x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value != None:

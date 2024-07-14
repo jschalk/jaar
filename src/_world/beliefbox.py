@@ -12,7 +12,6 @@ from src._world.char import (
     charlink_shop,
     CharUnit,
 )
-from src._world.meld import get_meld_weight
 from dataclasses import dataclass
 
 
@@ -125,31 +124,6 @@ class BeliefBox(BeliefCore):
         )
         self.del_charlink(char_id=to_delete_char_id)
 
-    def meld(self, exterior_belief):
-        self._meld_attributes_that_must_be_equal(exterior_belief=exterior_belief)
-        self.meld_charlinks(exterior_belief=exterior_belief)
-
-    def meld_charlinks(self, exterior_belief):
-        for oba in exterior_belief._chars.values():
-            if self._chars.get(oba.char_id) is None:
-                self._chars[oba.char_id] = oba
-            else:
-                self._chars[oba.char_id].meld(oba)
-
-    def _meld_attributes_that_must_be_equal(self, exterior_belief):
-        xl = [("belief_id", self.belief_id, exterior_belief.belief_id)]
-        while xl != []:
-            attrs = xl.pop()
-            if attrs[1] != attrs[2]:
-                raise InvalidBeliefException(
-                    f"Meld fail BeliefBox {self.belief_id} .{attrs[0]}='{attrs[1]}' not the equal as .{attrs[0]}='{attrs[2]}"
-                )
-
-        # if self.belief_id != exterior_belief.belief_id:
-        #     raise InvalidBeliefException(
-        #             f"Meld fail idea={self.get_road()} {attrs[0]}:{attrs[1]} with {exterior_idea.get_road()} {attrs[0]}:{attrs[2]}"
-        #     )
-
 
 # class BeliefBoxsshop:
 def get_from_json(beliefboxs_json: str) -> dict[BeliefID, BeliefBox]:
@@ -218,25 +192,6 @@ class AwardLink(BeliefCore):
             "credor_weight": self.credor_weight,
             "debtor_weight": self.debtor_weight,
         }
-
-    def meld(
-        self,
-        exterior_awardlink,
-        exterior_meld_strategy: str,
-        src_meld_strategy: str,
-    ):
-        self.credor_weight = get_meld_weight(
-            src_weight=self.credor_weight,
-            src_meld_strategy=src_meld_strategy,
-            exterior_weight=exterior_awardlink.credor_weight,
-            exterior_meld_strategy=exterior_meld_strategy,
-        )
-        self.debtor_weight = get_meld_weight(
-            src_weight=self.debtor_weight,
-            src_meld_strategy=src_meld_strategy,
-            exterior_weight=exterior_awardlink.debtor_weight,
-            exterior_meld_strategy=exterior_meld_strategy,
-        )
 
 
 # class AwardLinksshop:

@@ -39,7 +39,6 @@ def test_WorldUnit_Exists():
     assert x_world._char_credor_pool is None
     assert x_world._char_debtor_pool is None
     assert x_world._last_gift_id is None
-    assert x_world._meld_strategy is None
     assert x_world._originunit is None
 
     assert x_world._idea_dict is None
@@ -58,7 +57,6 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     sue_text = "Sue"
     iowa_real_id = "Iowa"
     slash_road_delimiter = "/"
-    override_meld_strategy = "override"
     x_bud_pool = 555
     x_coin = 7
     x_bit = 5
@@ -69,7 +67,6 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _owner_id=sue_text,
         _real_id=iowa_real_id,
         _road_delimiter=slash_road_delimiter,
-        _meld_strategy=override_meld_strategy,
         _bud_pool=x_bud_pool,
         _coin=x_coin,
         _bit=x_bit,
@@ -92,7 +89,6 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._char_credor_pool is None
     assert x_world._char_debtor_pool is None
     assert x_world._last_gift_id is None
-    assert x_world._meld_strategy == override_meld_strategy
     assert x_world._originunit == originunit_shop()
 
     assert x_world._idea_dict == {}
@@ -105,16 +101,6 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._sum_healerhold_share == 0
     print(f"{type(x_world._idearoot)=}") == 0
     assert str(type(x_world._idearoot)).find(".idea.IdeaUnit'>") > 0
-
-
-def test_WorldUnit_shop_ReturnsCorrect_meld_strategy():
-    # GIVEN
-    sue_text = "Sue"
-    iowa_real_id = "Iowa"
-    # WHEN
-    x_world = worldunit_shop(sue_text, iowa_real_id)
-    # THEN
-    assert x_world._meld_strategy == "default"
 
 
 def test_WorldUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
@@ -265,34 +251,6 @@ def test_WorldUnit_make_road_ReturnsCorrectObj():
 
     # THEN
     assert v1_casa_road == v2_casa_road
-
-
-def test_WorldUnit_set_meld_strategy_CorrectlySetsAttr():
-    # GIVEN
-    sue_world = worldunit_shop("Sue", "Texas")
-    override_text = "override"
-    assert sue_world._meld_strategy != override_text
-
-    # WHEN
-    sue_world.set_meld_strategy(override_text)
-
-    # THEN
-    assert sue_world._meld_strategy == override_text
-
-
-def test_WorldUnit_set_meld_strategy_RaisesErrorWithIneligible_meld_strategy():
-    # GIVEN
-    sue_world = worldunit_shop("Sue", "Texas")
-    incorrect_override_text = "oVerride"
-    assert sue_world._meld_strategy != incorrect_override_text
-
-    # WHEN
-    with pytest_raises(Exception) as excinfo:
-        sue_world.set_meld_strategy(incorrect_override_text)
-    assert (
-        str(excinfo.value)
-        == f"'{incorrect_override_text}' is ineligible meld_strategy."
-    )
 
 
 def test_WorldUnit_set_monetary_desc_SetsAttrCorrectly():

@@ -139,22 +139,6 @@ def test_BeliefBox_reset_bud_share_SetsAttrCorrectly():
     assert maria_beliefbox._world_agenda_debt == 0
 
 
-def test_BeliefBox_meld_RaiseEqualchar_idException():
-    # GIVEN
-    sue_text = "Sue"
-    sue_belief = beliefbox_shop(belief_id=sue_text, _char_mirror=True)
-    yao_text = "Yao"
-    yao_belief = beliefbox_shop(belief_id=yao_text, _char_mirror=True)
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        sue_belief.meld(yao_belief)
-    assert (
-        str(excinfo.value)
-        == f"Meld fail BeliefBox {sue_belief.belief_id} .belief_id='{sue_belief.belief_id}' not the equal as .belief_id='{yao_belief.belief_id}"
-    )
-
-
 def test_BeliefBox_get_dict_ReturnsDictWithAttrsCorrectlySet():
     # GIVEN
     yao_text = "Yao"

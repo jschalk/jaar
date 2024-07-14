@@ -149,7 +149,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     x_coin = 8
     x_bit = 5
     x_max_tree_traverse = 66
-    x_meld_strategy = "override"
     x_monetary_desc = "dragon dollars"
     x_char_credor_pool = 770
     x_char_debtor_pool = 880
@@ -158,7 +157,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     after_sue_world._coin = x_coin
     after_sue_world._bit = x_bit
     after_sue_world.set_max_tree_traverse(x_max_tree_traverse)
-    after_sue_world.set_meld_strategy(x_meld_strategy)
     after_sue_world.set_monetary_desc(x_monetary_desc)
     after_sue_world.set_char_credor_pool(x_char_credor_pool)
     after_sue_world.set_char_debtor_pool(x_char_debtor_pool)
@@ -171,7 +169,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     x_keylist = [atom_update(), "worldunit"]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("_max_tree_traverse") == x_max_tree_traverse
-    assert xio_atomunit.get_value("_meld_strategy") == x_meld_strategy
     assert xio_atomunit.get_value("_monetary_desc") == x_monetary_desc
     assert xio_atomunit.get_value("_char_credor_pool") == x_char_credor_pool
     assert xio_atomunit.get_value("_char_debtor_pool") == x_char_debtor_pool
@@ -391,7 +388,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     music_text = "music"
     music_begin = 34
     music_close = 78
-    music_meld_strategy = "override"
     music_weight = 55
     music_pledge = True
     music_road = after_sue_world.make_l1_road(music_text)
@@ -400,7 +396,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
             music_text,
             _begin=music_begin,
             _close=music_close,
-            _meld_strategy=music_meld_strategy,
             _weight=music_weight,
             pledge=music_pledge,
         )
@@ -429,7 +424,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     assert ball_atomunit.get_value("parent_road") == after_sue_world._real_id
     assert ball_atomunit.get_value("_begin") == music_begin
     assert ball_atomunit.get_value("_close") == music_close
-    assert ball_atomunit.get_value("_meld_strategy") == music_meld_strategy
     assert ball_atomunit.get_value("_weight") == music_weight
     assert ball_atomunit.get_value("pledge") == music_pledge
 
@@ -445,7 +439,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     music_text = "music"
     before_music_begin = 34
     before_music_close = 78
-    before_music_meld_strategy = "override"
     before_music_weight = 55
     before_music_pledge = True
     music_road = before_sue_world.make_l1_road(music_text)
@@ -454,7 +447,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
             music_text,
             _begin=before_music_begin,
             _close=before_music_close,
-            _meld_strategy=before_music_meld_strategy,
             _weight=before_music_weight,
             pledge=before_music_pledge,
         )
@@ -463,14 +455,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     after_sue_world = copy_deepcopy(before_sue_world)
     after_music_begin = 99
     after_music_close = 111
-    after_music_meld_strategy = "default"
     after_music_weight = 22
     after_music_pledge = False
     after_sue_world.edit_idea_attr(
         music_road,
         begin=after_music_begin,
         close=after_music_close,
-        meld_strategy=after_music_meld_strategy,
         weight=after_music_weight,
         pledge=after_music_pledge,
     )
@@ -493,7 +483,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     assert ball_atomunit.get_value("label") == music_text
     assert ball_atomunit.get_value("_begin") == after_music_begin
     assert ball_atomunit.get_value("_close") == after_music_close
-    assert ball_atomunit.get_value("_meld_strategy") == after_music_meld_strategy
     assert ball_atomunit.get_value("_weight") == after_music_weight
     assert ball_atomunit.get_value("pledge") == after_music_pledge
 

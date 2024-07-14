@@ -161,26 +161,3 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_max_tree_traverse():
     # THEN
     x_str = f"{sue_world._owner_id}'s maximum number of World output evaluations transited to {max_tree_traverse_int}"
     assert legible_list[0] == x_str
-
-
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_meld_strategy():
-    # GIVEN
-    category = "worldunit"
-    meld_strategy_text = "_meld_strategy"
-    meld_strategy_value = "override"
-    meld_strategy_atomunit = atomunit_shop(category, atom_update())
-    meld_strategy_atomunit.set_arg(meld_strategy_text, meld_strategy_value)
-
-    print(f"{meld_strategy_atomunit=}")
-    x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(meld_strategy_atomunit)
-    sue_world = worldunit_shop("Sue")
-
-    # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
-
-    # THEN
-    x_str = (
-        f"{sue_world._owner_id}'s Meld strategy transited to '{meld_strategy_value}'"
-    )
-    assert legible_list[0] == x_str

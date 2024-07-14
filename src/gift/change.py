@@ -151,8 +151,6 @@ class ChangeUnit:
             x_atomunit.set_optional_arg(
                 "_max_tree_traverse", after_world._max_tree_traverse
             )
-        if before_world._meld_strategy != after_world._meld_strategy:
-            x_atomunit.set_optional_arg("_meld_strategy", after_world._meld_strategy)
         if before_world._monetary_desc != after_world._monetary_desc:
             x_atomunit.set_optional_arg("_monetary_desc", after_world._monetary_desc)
         if before_world._char_credor_pool != after_world._char_credor_pool:
@@ -368,9 +366,6 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_begin", insert_ideaunit._begin)
             x_atomunit.set_optional_arg("_close", insert_ideaunit._close)
             x_atomunit.set_optional_arg("_denom", insert_ideaunit._denom)
-            x_atomunit.set_optional_arg(
-                "_meld_strategy", insert_ideaunit._meld_strategy
-            )
             x_atomunit.set_optional_arg("_numeric_road", insert_ideaunit._numeric_road)
             x_atomunit.set_optional_arg("_numor", insert_ideaunit._numor)
             x_atomunit.set_optional_arg(
@@ -418,10 +413,6 @@ class ChangeUnit:
                     x_atomunit.set_optional_arg("_close", after_ideaunit._close)
                 if before_ideaunit._denom != after_ideaunit._denom:
                     x_atomunit.set_optional_arg("_denom", after_ideaunit._denom)
-                if before_ideaunit._meld_strategy != after_ideaunit._meld_strategy:
-                    x_atomunit.set_optional_arg(
-                        "_meld_strategy", after_ideaunit._meld_strategy
-                    )
                 if before_ideaunit._numeric_road != after_ideaunit._numeric_road:
                     x_atomunit.set_optional_arg(
                         "_numeric_road", after_ideaunit._numeric_road

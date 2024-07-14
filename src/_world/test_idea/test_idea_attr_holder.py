@@ -33,7 +33,6 @@ def test_IdeaAttrFilter_Exists():
     assert new_obj.awardlink is None
     assert new_obj.awardlink_del is None
     assert new_obj.is_expanded is None
-    assert new_obj.meld_strategy is None
 
 
 def test_IdeaAttrFilter_CorrectlyCalculatesPremiseRanges():

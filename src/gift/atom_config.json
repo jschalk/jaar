@@ -67,30 +67,6 @@
             "atom_order": 9
         }
     },
-    "world_idea_beliefhold": {
-        "calculated_attrs": {},
-        "DELETE": {
-            "atom_order": 19
-        },
-        "INSERT": {
-            "atom_order": 4
-        },
-        "normal_specs": {
-            "normal_table_name": "beliefhold"
-        },
-        "optional_args": {},
-        "required_args": {
-            "belief_id": {
-                "python_type": "BeliefID",
-                "sqlite_datatype": "TEXT"
-            },
-            "road": {
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            }
-        },
-        "treasury_only": false
-    },
     "world_idea_awardlink": {
         "calculated_attrs": {},
         "DELETE": {
@@ -126,6 +102,30 @@
         "UPDATE": {
             "atom_order": 12
         }
+    },
+    "world_idea_beliefhold": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 19
+        },
+        "INSERT": {
+            "atom_order": 4
+        },
+        "normal_specs": {
+            "normal_table_name": "beliefhold"
+        },
+        "optional_args": {},
+        "required_args": {
+            "belief_id": {
+                "python_type": "BeliefID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false
     },
     "world_idea_factunit": {
         "calculated_attrs": {},
@@ -295,10 +295,6 @@
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_meld_strategy": {
-                "python_type": "str",
-                "sqlite_datatype": "TEXT"
-            },
             "_numeric_road": {
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -349,6 +345,10 @@
             "normal_table_name": "world"
         },
         "optional_args": {
+            "_bit": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
             "_bud_pool": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
@@ -369,19 +369,11 @@
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_meld_strategy": {
-                "python_type": "bool",
-                "sqlite_datatype": "TEXT"
-            },
             "_monetary_desc": {
                 "python_type": "str",
                 "sqlite_datatype": "TEXT"
             },
             "_penny": {
-                "python_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_bit": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },

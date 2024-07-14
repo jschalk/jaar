@@ -87,7 +87,6 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     x_world.set_char_credor_pool(x_char_credor_pool)
     x_world.set_char_debtor_pool(x_char_debtor_pool)
     override_text = "override"
-    x_world.set_meld_strategy(override_text)
     x_last_gift_id = 77
     x_world.set_last_gift_id(x_last_gift_id)
 
@@ -108,7 +107,6 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_char_credor_pool"] == x_world._char_credor_pool
     assert world_dict["_char_debtor_pool"] == x_world._char_debtor_pool
     assert world_dict["_char_debtor_pool"] == x_world._char_debtor_pool
-    assert world_dict["_meld_strategy"] == x_world._meld_strategy
     assert world_dict["_last_gift_id"] == x_world._last_gift_id
     assert len(world_dict["_chars"]) == len(x_world._chars)
     assert len(world_dict["_chars"]) != 12
@@ -234,7 +232,6 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     x_penny = 0.3
     zia_world._penny = x_penny
     override_text = "override"
-    zia_world.set_meld_strategy(override_text)
     yao_text = "Yao"
     zia_world.add_charunit(yao_text)
     run_text = ",runners"
@@ -258,7 +255,6 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert world_dict["_owner_id"] == zia_world._owner_id
     assert world_dict["_real_id"] == zia_world._real_id
     assert world_dict["_weight"] == zia_world._weight
-    assert world_dict["_meld_strategy"] == zia_world._meld_strategy
     assert world_dict["_bud_pool"] == zia_world._bud_pool
     assert world_dict["_coin"] == zia_world._coin
     assert world_dict["_bit"] == zia_world._bit
@@ -400,7 +396,6 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     yao_text = "Yao"
     zia_world._originunit.set_originhold(yao_text, 1)
     override_text = "override"
-    zia_world.set_meld_strategy(override_text)
 
     # WHEN
     x_json = zia_world.get_json()
@@ -427,8 +422,6 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._char_debtor_pool == zia_world._char_debtor_pool
     assert json_world._char_credor_pool == zia_char_credor_pool
     assert json_world._char_debtor_pool == zia_char_debtor_pool
-    assert json_world._meld_strategy == zia_world._meld_strategy
-    assert json_world._meld_strategy == override_text
     assert json_world._last_gift_id == zia_world._last_gift_id
     assert json_world._last_gift_id == zia_last_gift_id
     print(f"{json_world._beliefs.keys()=}")

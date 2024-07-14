@@ -52,9 +52,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     new4_value = 88
     new4_arg = "_char_debtor_pool"
     x_atomunit.set_optional_arg(new4_arg, new4_value)
-    new5_value = "override"
-    new5_arg = "_meld_strategy"
-    x_atomunit.set_optional_arg(new5_arg, new5_value)
     new9_value = 55550000
     new9_arg = "_bud_pool"
     x_atomunit.set_optional_arg(new9_arg, new9_value)
@@ -79,7 +76,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     assert after_sue_worldunit._max_tree_traverse == new2_value
     assert after_sue_worldunit._char_credor_pool == new3_value
     assert after_sue_worldunit._char_debtor_pool == new4_value
-    assert after_sue_worldunit._meld_strategy == new5_value
     assert after_sue_worldunit._weight == new1_value
     assert after_sue_worldunit._weight != before_sue_worldunit._weight
     assert after_sue_worldunit._bud_pool == new9_value
@@ -344,7 +340,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_ideaunit
     # x_begin = 1000
     # x_close = 1700
     # x_denom = 17
-    x_meld_strategy = "override"
     x_numeric_road = None
     # x_numor = 10
     x_pledge = True
@@ -355,7 +350,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_ideaunit
     # insert_disc_atomunit.set_optional_arg("_begin", x_begin)
     # insert_disc_atomunit.set_optional_arg("_close", x_close)
     # insert_disc_atomunit.set_optional_arg("_denom", x_denom)
-    insert_disc_atomunit.set_optional_arg("_meld_strategy", x_meld_strategy)
     insert_disc_atomunit.set_optional_arg("_numeric_road", x_numeric_road)
     # insert_disc_atomunit.set_optional_arg("_numor", x_numor)
     insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
@@ -381,7 +375,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     before_sue_worldunit.add_idea(ideaunit_shop(ball_text), sports_road)
     assert before_sue_worldunit.get_idea_obj(ball_road)._begin is None
     assert before_sue_worldunit.get_idea_obj(ball_road)._close is None
-    assert before_sue_worldunit.get_idea_obj(ball_road)._meld_strategy == "default"
     assert before_sue_worldunit.get_idea_obj(ball_road).pledge is False
 
     # WHEN
@@ -389,7 +382,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     x_begin = 1000
     x_close = 1700
     # x_denom = 17
-    x_meld_strategy = "override"
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop("world_ideaunit", atom_update())
@@ -399,7 +391,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     insert_disc_atomunit.set_optional_arg("_begin", x_begin)
     insert_disc_atomunit.set_optional_arg("_close", x_close)
     # insert_disc_atomunit.set_optional_arg("_denom", x_denom)
-    insert_disc_atomunit.set_optional_arg("_meld_strategy", x_meld_strategy)
     # insert_disc_atomunit.set_optional_arg("_numor", x_numor)
     insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
 
@@ -411,7 +402,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     # THEN
     assert after_sue_worldunit.get_idea_obj(ball_road)._begin == x_begin
     assert after_sue_worldunit.get_idea_obj(ball_road)._close == x_close
-    assert after_sue_worldunit.get_idea_obj(ball_road)._meld_strategy == x_meld_strategy
     assert after_sue_worldunit.get_idea_obj(ball_road).pledge
 
 
@@ -1037,7 +1027,6 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     assert before_sue_worldunit._max_tree_traverse != 66
     assert before_sue_worldunit._char_credor_pool != 77
     assert before_sue_worldunit._char_debtor_pool != 88
-    assert before_sue_worldunit._meld_strategy != "override"
     assert before_sue_worldunit.char_exists(yao_text)
     assert before_sue_worldunit.char_exists(zia_text)
     assert before_sue_worldunit.get_beliefbox(run_text) != None
@@ -1052,6 +1041,5 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     assert after_sue_worldunit._max_tree_traverse == 66
     assert after_sue_worldunit._char_credor_pool == 77
     assert after_sue_worldunit._char_debtor_pool == 88
-    assert after_sue_worldunit._meld_strategy == "override"
     assert after_sue_worldunit.char_exists(yao_text)
     assert after_sue_worldunit.char_exists(zia_text) is False

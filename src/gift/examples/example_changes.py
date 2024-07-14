@@ -32,8 +32,6 @@ def get_changeunit_example1() -> ChangeUnit:
     x_atomunit.set_optional_arg(x_attribute, 77)
     x_attribute = "_char_debtor_pool"
     x_atomunit.set_optional_arg(x_attribute, 88)
-    x_attribute = "_meld_strategy"
-    x_atomunit.set_optional_arg(x_attribute, "override")
     sue_changeunit.set_atomunit(x_atomunit)
 
     category = "world_charunit"

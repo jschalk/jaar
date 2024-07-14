@@ -11,7 +11,6 @@ class WorldTable(Base):
     __tablename__ = "world"
     uid = Column(Integer, primary_key=True)
     _max_tree_traverse = Column(Integer)
-    _meld_strategy = Column(String)
     _monetary_desc = Column(String)
     _char_credor_pool = Column(Integer)
     _char_debtor_pool = Column(Integer)
@@ -56,7 +55,6 @@ class IdeaTable(Base):
     _begin = Column(Float)
     _close = Column(Float)
     _denom = Column(Integer)
-    _meld_strategy = Column(String)
     _numeric_road = Column(String)
     _numor = Column(Integer)
     _problem_bool = Column(Integer)

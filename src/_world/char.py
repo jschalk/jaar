@@ -133,17 +133,6 @@ class CharUnit(CharCore):
                 self._world_agenda_debt / world_agenda_ratio_debt_sum
             )
 
-    def meld(self, exterior_charunit):
-        if self.char_id != exterior_charunit.char_id:
-            raise InvalidCharException(
-                f"Meld fail CharUnit='{self.char_id}' not the equal as CharUnit='{exterior_charunit.char_id}"
-            )
-
-        self.credor_weight += exterior_charunit.credor_weight
-        self.debtor_weight += exterior_charunit.debtor_weight
-        self._irrational_debtor_weight += exterior_charunit._irrational_debtor_weight
-        self._inallocable_debtor_weight += exterior_charunit._inallocable_debtor_weight
-
     def set_belieflink(self, belieflink: BeliefLink):
         self._belieflinks[belieflink.belief_id] = belieflink
 
@@ -292,14 +281,6 @@ class CharLink(CharCore):
         self._world_debt = 0
         self._world_agenda_cred = 0
         self._world_agenda_debt = 0
-
-    def meld(self, exterior_charlink):
-        if self.char_id != exterior_charlink.char_id:
-            raise InvalidCharException(
-                f"Meld fail CharLink='{self.char_id}' not the equal as CharLink='{exterior_charlink.char_id}"
-            )
-        self.credor_weight += exterior_charlink.credor_weight
-        self.debtor_weight += exterior_charlink.debtor_weight
 
 
 def charlinks_get_from_json(charlinks_json: str) -> dict[str, CharLink]:

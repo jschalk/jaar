@@ -549,20 +549,6 @@ def test_WorldUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     print(f"{casa_road=} {end_road=}")
 
 
-def test_WorldUnit_edit_idea_attr_worldIsAbleToEdit_meld_strategy_AnyIdeaIfInvaildThrowsError():
-    sue_world = get_world_with_4_levels()
-    casa_road = sue_world.make_l1_road("casa")
-
-    # WHEN / THEN
-    ineligible_meld_strategy = "yahoo9"
-    with pytest_raises(Exception) as excinfo:
-        sue_world.edit_idea_attr(casa_road, meld_strategy=ineligible_meld_strategy)
-    assert (
-        str(excinfo.value)
-        == f"'{ineligible_meld_strategy}' is ineligible meld_strategy."
-    )
-
-
 def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsError():
     yao_world = worldunit_shop("Yao")
     # WHEN / THEN

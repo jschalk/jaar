@@ -15,7 +15,6 @@ from src._road.road import (
     RealID,
     CharID,
 )
-from src._world.meld import get_meld_default
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
 from src._world.reason_doer import (
     DoerUnit,
@@ -54,7 +53,6 @@ from src._world.beliefbox import (
 )
 from src._world.origin import OriginUnit, originunit_get_from_dict
 from src._world.origin import originunit_shop
-from src._world.meld import get_meld_weight, validate_meld_strategy
 from dataclasses import dataclass
 from copy import deepcopy
 
@@ -98,7 +96,6 @@ class IdeaAttrFilter:
     awardlink: AwardLink = None
     awardlink_del: BeliefID = None
     is_expanded: bool = None
-    meld_strategy: str = None
     problem_bool: bool = None
 
     def get_premise_need(self):
@@ -182,7 +179,6 @@ def ideaattrfilter_shop(
     awardlink: AwardLink = None,
     awardlink_del: BeliefID = None,
     is_expanded: bool = None,
-    meld_strategy: str = None,
     problem_bool: bool = None,
 ) -> IdeaAttrFilter:
     x_ideaattrfilter = IdeaAttrFilter(
@@ -215,7 +211,6 @@ def ideaattrfilter_shop(
         awardlink=awardlink,
         awardlink_del=awardlink_del,
         is_expanded=is_expanded,
-        meld_strategy=meld_strategy,
         problem_bool=problem_bool,
     )
     if x_ideaattrfilter.has_ratio_attrs():
@@ -252,7 +247,6 @@ class IdeaUnit:
     _numeric_road: RoadUnit = None
     pledge: bool = None
     _originunit: OriginUnit = None
-    _meld_strategy: str = None
     _problem_bool: bool = None
     # Calculated fields
     _level: int = None
@@ -573,108 +567,12 @@ class IdeaUnit:
             new_factunits[new_base_road] = factunit_obj
         self._factunits = new_factunits
 
-    def _meld_reasonunits(self, exterior_idea):
-        for lx in exterior_idea._reasonunits.values():
-            if self._reasonunits.get(lx.base) is None:
-                self._reasonunits[lx.base] = lx
-            else:
-                self._reasonunits.get(lx.base).meld(lx)
-
-    def _meld_awardlinks(self, exterior_idea):
-        for bl in exterior_idea._awardlinks.values():
-            if self._awardlinks.get(bl.belief_id) != None:
-                self._awardlinks.get(bl.belief_id).meld(
-                    exterior_awardlink=bl,
-                    exterior_meld_strategy=exterior_idea._meld_strategy,
-                    src_meld_strategy=self._meld_strategy,
-                )
-            else:
-                self._awardlinks[bl.belief_id] = bl
-
-    def _meld_factunits(self, exterior_idea):
-        for hc in exterior_idea._factunits.values():
-            if self._factunits.get(hc.base) is None:
-                self._factunits[hc.base] = hc
-            else:
-                self._factunits.get(hc.base).meld(hc)
-
-    def meld(
-        self,
-        exterior_idea,
-        _idearoot: bool = None,
-        char_id: CharID = None,
-        char_weight: float = None,
-    ):
-        if _idearoot and self._label != exterior_idea._label:
-            raise InvalidIdeaException(
-                f"Meld fail idearoot _label '{self._label}' not the equal as '{exterior_idea._label}'"
-            )
-        if _idearoot:
-            self._weight = 1
-        else:
-            self._weight = get_meld_weight(
-                src_weight=self._weight,
-                src_meld_strategy=self._meld_strategy,
-                exterior_weight=exterior_idea._weight,
-                exterior_meld_strategy=exterior_idea._meld_strategy,
-            )
-        self._meld_reasonunits(exterior_idea=exterior_idea)
-        self._meld_awardlinks(exterior_idea=exterior_idea)
-        self._meld_factunits(exterior_idea=exterior_idea)
-        if exterior_idea._meld_strategy != "override":
-            self._meld_attributes_that_must_be_equal(exterior_idea=exterior_idea)
-        else:
-            self._meld_attributes_overide(exterior_idea=exterior_idea)
-        self._meld_originholds(char_id, char_weight)
-
-    def _meld_originholds(self, char_id: CharID, char_weight: float):
-        if char_id != None:
-            self._originunit.set_originhold(char_id=char_id, weight=char_weight)
-
     def set_originunit_empty_if_none(self):
         if self._originunit is None:
             self._originunit = originunit_shop()
 
     def get_originunit_dict(self) -> dict[str, str]:
         return self._originunit.get_dict()
-
-    def _meld_attributes_overide(self, exterior_idea):
-        self._uid = exterior_idea._uid
-        self._begin = exterior_idea._begin
-        self._close = exterior_idea._close
-        self._addin = exterior_idea._addin
-        self._denom = exterior_idea._denom
-        self._numor = exterior_idea._numor
-        self._reest = exterior_idea._reest
-        self._range_source_road = exterior_idea._range_source_road
-        self._numeric_road = exterior_idea._numeric_road
-        self.pledge = exterior_idea.pledge
-        self._is_expanded = exterior_idea._is_expanded
-
-    def _meld_attributes_that_must_be_equal(self, exterior_idea):
-        to_be_equal_attributes = [
-            ("_uid", self._uid, exterior_idea._uid),
-            ("_begin", self._begin, exterior_idea._begin),
-            ("_close", self._close, exterior_idea._close),
-            ("_addin", self._addin, exterior_idea._addin),
-            ("_denom", self._denom, exterior_idea._denom),
-            ("_numor", self._numor, exterior_idea._numor),
-            ("_reest", self._reest, exterior_idea._reest),
-            (
-                "_range_source_road",
-                self._range_source_road,
-                exterior_idea._range_source_road,
-            ),
-            ("_numeric_road", self._numeric_road, exterior_idea._numeric_road),
-            ("pledge", self.pledge, exterior_idea.pledge),
-            ("_is_expanded", self._is_expanded, exterior_idea._is_expanded),
-        ]
-        while to_be_equal_attributes != []:
-            attrs = to_be_equal_attributes.pop()
-            if attrs[1] != attrs[2]:
-                raise InvalidIdeaException(
-                    f"Meld fail idea={self.get_road()} {attrs[0]}:{attrs[1]} with {exterior_idea.get_road()} {attrs[0]}:{attrs[2]}"
-                )
 
     def _set_idea_attr(self, idea_attr: IdeaAttrFilter):
         if idea_attr.weight != None:
@@ -733,8 +631,6 @@ class IdeaUnit:
             self._is_expanded = idea_attr.is_expanded
         if idea_attr.pledge != None:
             self.pledge = idea_attr.pledge
-        if idea_attr.meld_strategy != None:
-            self._meld_strategy = validate_meld_strategy(idea_attr.meld_strategy)
         if idea_attr.factunit != None:
             self.set_factunit(idea_attr.factunit)
         if idea_attr.problem_bool != None:
@@ -1014,8 +910,6 @@ class IdeaUnit:
             x_dict["_factunits"] = self.get_factunits_dict()
         if self._is_expanded is False:
             x_dict["_is_expanded"] = self._is_expanded
-        if self._meld_strategy != "default":
-            x_dict["_meld_strategy"] = self._meld_strategy
 
         return x_dict
 
@@ -1083,7 +977,6 @@ def ideaunit_shop(
     _numeric_road: RoadUnit = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
-    _meld_strategy: str = None,
     _root: bool = None,
     _world_real_id: RealID = None,
     _problem_bool: bool = None,
@@ -1104,7 +997,6 @@ def ideaunit_shop(
     _road_delimiter: str = None,
     _healerhold_share: float = None,
 ) -> IdeaUnit:
-    _meld_strategy = get_meld_default() if _meld_strategy is None else _meld_strategy
     _world_real_id = root_label() if _world_real_id is None else _world_real_id
     _healerhold = healerhold_shop() if _healerhold is None else _healerhold
 
@@ -1135,7 +1027,6 @@ def ideaunit_shop(
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
         _originunit=_originunit,
-        _meld_strategy=_meld_strategy,
         _root=get_False_if_None(_root),
         _world_real_id=_world_real_id,
         # Calculated fields
@@ -1211,7 +1102,5 @@ def get_obj_from_idea_dict(x_dict: dict[str,], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) != None else False
     elif dict_key in {"_is_expanded"}:
         return x_dict[dict_key] if x_dict.get(dict_key) != None else True
-    # elif dict_key == "_meld_strategy":
-    #     return x_dict[dict_key] if x_dict.get(dict_key) != None else "default"
     else:
         return x_dict[dict_key] if x_dict.get(dict_key) != None else None
