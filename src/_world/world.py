@@ -2194,12 +2194,6 @@ def obj_from_world_dict(
             if x_dict.get(dict_key) != None
             else charunits_get_from_dict(x_dict[dict_key], _road_delimiter)
         )
-    elif dict_key == "_beliefs":
-        return (
-            get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
-            if x_dict.get(dict_key) != None
-            else get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
-        )
     elif dict_key == "_max_tree_traverse":
         return (
             x_dict[dict_key]
