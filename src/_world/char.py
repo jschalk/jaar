@@ -282,13 +282,6 @@ class CharLink(CharCore):
     _world_agenda_cred: float = None
     _world_agenda_debt: float = None
 
-    def get_dict(self) -> dict[str, str]:
-        return {
-            "char_id": self.char_id,
-            "credor_weight": self.credor_weight,
-            "debtor_weight": self.debtor_weight,
-        }
-
     def set_world_cred_debt(
         self,
         charlinks_credor_weight_sum: float,
@@ -313,24 +306,6 @@ class CharLink(CharCore):
         self._world_debt = 0
         self._world_agenda_cred = 0
         self._world_agenda_debt = 0
-
-
-def charlinks_get_from_json(charlinks_json: str) -> dict[str, CharLink]:
-    charlinks_dict = get_dict_from_json(json_x=charlinks_json)
-    return charlinks_get_from_dict(x_dict=charlinks_dict)
-
-
-def charlinks_get_from_dict(x_dict: dict) -> dict[str, CharLink]:
-    x_dict = {} if x_dict is None else x_dict
-    charlinks = {}
-    for charlinks_dict in x_dict.values():
-        x_char = charlink_shop(
-            char_id=charlinks_dict["char_id"],
-            credor_weight=charlinks_dict["credor_weight"],
-            debtor_weight=charlinks_dict["debtor_weight"],
-        )
-        charlinks[x_char.char_id] = x_char
-    return charlinks
 
 
 def charlink_shop(

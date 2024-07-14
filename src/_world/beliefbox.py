@@ -8,7 +8,6 @@ from src._road.road import CharID, default_road_delimiter_if_none, validate_road
 from src._world.belieflink import BeliefID, BeliefCore
 from src._world.char import (
     CharLink,
-    charlinks_get_from_dict,
     charlink_shop,
     CharUnit,
 )
@@ -39,15 +38,6 @@ class BeliefBox(BeliefCore):
                     belief_id, self._road_delimiter, not_roadnode_required=True
                 )
 
-    def get_dict(self) -> dict[str, str]:
-        x_dict = {"belief_id": self.belief_id}
-        if self._char_mirror:
-            x_dict["_char_mirror"] = self._char_mirror
-        if self._chars not in [{}, None]:
-            x_dict["_chars"] = self.get_charunits_dict()
-
-        return x_dict
-
     def reset_world_cred_debt(self):
         self._world_cred = 0
         self._world_debt = 0
@@ -76,13 +66,6 @@ class BeliefBox(BeliefCore):
 
     def clear_charlinks(self):
         self._chars = {}
-
-    def get_charunits_dict(self) -> dict[str, str]:
-        chars_x_dict = {}
-        for char in self._chars.values():
-            char_dict = char.get_dict()
-            chars_x_dict[char_dict["char_id"]] = char_dict
-        return chars_x_dict
 
     def set_charlink(self, charlink: CharLink):
         self._chars[charlink.char_id] = charlink
@@ -123,42 +106,6 @@ class BeliefBox(BeliefCore):
             )
         )
         self.del_charlink(char_id=to_delete_char_id)
-
-
-# class BeliefBoxsshop:
-def get_from_json(beliefboxs_json: str) -> dict[BeliefID, BeliefBox]:
-    beliefboxs_dict = get_dict_from_json(json_x=beliefboxs_json)
-    return get_beliefboxs_from_dict(x_dict=beliefboxs_dict)
-
-
-def get_beliefboxs_from_dict(
-    x_dict: dict, _road_delimiter: str = None
-) -> dict[BeliefID, BeliefBox]:
-    beliefboxs = {}
-    for beliefbox_dict in x_dict.values():
-        x_belief = get_beliefbox_from_dict(beliefbox_dict, _road_delimiter)
-        beliefboxs[x_belief.belief_id] = x_belief
-    return beliefboxs
-
-
-def get_beliefbox_from_dict(
-    beliefbox_dict: dict, _road_delimiter: str = None
-) -> BeliefBox:
-    return beliefbox_shop(
-        belief_id=beliefbox_dict["belief_id"],
-        _char_mirror=get_obj_from_beliefbox_dict(beliefbox_dict, "_char_mirror"),
-        _chars=get_obj_from_beliefbox_dict(beliefbox_dict, "_chars"),
-        _road_delimiter=_road_delimiter,
-    )
-
-
-def get_obj_from_beliefbox_dict(x_dict: dict[str,], dict_key: str) -> any:
-    if dict_key == "_chars":
-        return charlinks_get_from_dict(x_dict.get(dict_key))
-    elif dict_key in {"_char_mirror"}:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else False
-    else:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else None
 
 
 def beliefbox_shop(
