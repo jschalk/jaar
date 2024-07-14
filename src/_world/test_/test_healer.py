@@ -1,5 +1,5 @@
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
-from src._world.beliefunit import BeliefID
+from src._world.beliefbox import BeliefID
 
 
 def test_HealerHold_exists():
@@ -39,7 +39,7 @@ def test_healerhold_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
 
 def test_HealerHold_get_dict_ReturnsCorrectDictWithSingleBelief_id():
     # GIVEN
-    bob_belief_id = BeliefID("Bob")
+    bob_belief_id = "Bob"
     run_belief_ids = {bob_belief_id}
     x_healerhold = healerhold_shop(_belief_ids=run_belief_ids)
 
@@ -60,8 +60,8 @@ def test_HealerHold_set_belief_id_CorrectlySets_belief_ids_v1():
     assert len(x_healerhold._belief_ids) == 0
 
     # WHEN
-    jim_text = "Jim"
-    x_healerhold.set_belief_id(x_belief_id=jim_text)
+    yao_text = "Yao"
+    x_healerhold.set_belief_id(x_belief_id=yao_text)
 
     # THEN
     assert len(x_healerhold._belief_ids) == 1
@@ -70,9 +70,9 @@ def test_HealerHold_set_belief_id_CorrectlySets_belief_ids_v1():
 def test_HealerHold_del_belief_id_CorrectlyDeletes_belief_ids_v1():
     # GIVEN
     x_healerhold = healerhold_shop()
-    jim_text = "Jim"
+    yao_text = "Yao"
     sue_text = "Sue"
-    x_healerhold.set_belief_id(x_belief_id=jim_text)
+    x_healerhold.set_belief_id(x_belief_id=yao_text)
     x_healerhold.set_belief_id(x_belief_id=sue_text)
     assert len(x_healerhold._belief_ids) == 2
 
@@ -86,16 +86,16 @@ def test_HealerHold_del_belief_id_CorrectlyDeletes_belief_ids_v1():
 def test_HealerHold_belief_id_exists_ReturnsCorrectObj():
     # GIVEN
     x_healerhold = healerhold_shop()
-    jim_text = "Jim"
+    yao_text = "Yao"
     sue_text = "Sue"
-    assert x_healerhold.belief_id_exists(jim_text) is False
+    assert x_healerhold.belief_id_exists(yao_text) is False
     assert x_healerhold.belief_id_exists(sue_text) is False
 
     # WHEN
-    x_healerhold.set_belief_id(x_belief_id=jim_text)
+    x_healerhold.set_belief_id(x_belief_id=yao_text)
 
     # THEN
-    assert x_healerhold.belief_id_exists(jim_text)
+    assert x_healerhold.belief_id_exists(yao_text)
     assert x_healerhold.belief_id_exists(sue_text) is False
 
 
@@ -110,12 +110,12 @@ def test_HealerHold_any_belief_id_exists_ReturnsCorrectObj():
     assert x_healerhold.any_belief_id_exists()
 
     # WHEN / THEN
-    jim_text = "Jim"
-    x_healerhold.set_belief_id(x_belief_id=jim_text)
+    yao_text = "Yao"
+    x_healerhold.set_belief_id(x_belief_id=yao_text)
     assert x_healerhold.any_belief_id_exists()
 
     # WHEN / THEN
-    x_healerhold.del_belief_id(x_belief_id=jim_text)
+    x_healerhold.del_belief_id(x_belief_id=yao_text)
     assert x_healerhold.any_belief_id_exists()
 
     # WHEN / THEN
@@ -132,10 +132,10 @@ def test_healerhold_get_from_dict_ReturnsCorrectObj():
 
     # WHEN / THEN
     sue_text = "Sue"
-    jim_text = "Jim"
+    yao_text = "Yao"
     static_healerhold = healerhold_shop()
     static_healerhold.set_belief_id(x_belief_id=sue_text)
-    static_healerhold.set_belief_id(x_belief_id=jim_text)
+    static_healerhold.set_belief_id(x_belief_id=yao_text)
 
-    sue_dict = {"healerhold_belief_ids": [sue_text, jim_text]}
+    sue_dict = {"healerhold_belief_ids": [sue_text, yao_text]}
     assert healerhold_get_from_dict(sue_dict) == static_healerhold

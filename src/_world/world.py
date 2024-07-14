@@ -7,12 +7,12 @@ from src._instrument.python import (
     get_empty_dict_if_none,
 )
 from src._road.finance import (
-    trim_pixel_excess,
-    default_pixel_if_none,
+    valid_fiscal_ratio,
+    default_bit_if_none,
     default_penny_if_none,
     default_coin_if_none,
-    validate_bud,
-    PixelNum,
+    validate_bud_pool,
+    BitHum,
     PennyNum,
     CoinNum,
     BudNum,
@@ -42,12 +42,7 @@ from src._road.road import (
     RealID,
     roadunit_valid_dir_path,
 )
-from src._world.meld import (
-    get_meld_weight,
-    MeldStrategy,
-    get_meld_default,
-    validate_meld_strategy,
-)
+
 from src._world.char import (
     CharUnit,
     CharLink,
@@ -56,12 +51,12 @@ from src._world.char import (
     charlink_shop,
 )
 from src._world.belieflink import belieflink_shop
-from src._world.beliefunit import (
+from src._world.beliefbox import (
     AwardLink,
     BeliefID,
-    BeliefUnit,
-    get_beliefunits_from_dict,
-    beliefunit_shop,
+    BeliefBox,
+    get_beliefboxs_from_dict,
+    beliefbox_shop,
     awardlink_shop,
 )
 from src._world.healer import HealerHold
@@ -73,7 +68,7 @@ from src._world.reason_idea import (
     RoadUnit,
     factunit_shop,
 )
-from src._world.reason_culture import CultureUnit
+from src._world.reason_doer import DoerUnit
 from src._world.tree_metrics import TreeMetrics, treemetrics_shop
 from src._world.hreg_time import HregTimeIdeaSource as HregIdea
 from src._world.lemma import lemmas_shop, Lemmas
@@ -114,7 +109,7 @@ class Exception_econs_justified(Exception):
     pass
 
 
-class _pixel_RatioException(Exception):
+class _bit_RatioException(Exception):
     pass
 
 
@@ -133,18 +128,17 @@ class WorldUnit:
     _last_gift_id: int = None
     _weight: float = None
     _chars: dict[CharID, CharUnit] = None
-    _beliefs: dict[BeliefID, BeliefUnit] = None
+    _beliefs: dict[BeliefID, BeliefBox] = None
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
-    _bud: BudNum = None
+    _bud_pool: BudNum = None
     _coin: CoinNum = None
-    _pixel: PixelNum = None
+    _bit: BitHum = None
     _penny: PennyNum = None
     _monetary_desc: str = None
-    _char_credor_pool: int = None
-    _char_debtor_pool: int = None
-    _meld_strategy: MeldStrategy = None
+    _credor_respect: int = None
+    _debtor_respect: int = None
     _originunit: OriginUnit = None  # In job worlds this shows source
     # calc_world_metrics Calculated field begin
     _idea_dict: dict[RoadUnit, IdeaUnit] = None
@@ -170,94 +164,41 @@ class WorldUnit:
     def set_monetary_desc(self, x_monetary_desc: str):
         self._monetary_desc = x_monetary_desc
 
-    def set_char_pool(self, x_char_pool: int):
-        self.set_char_credor_pool(
-            new_char_credor_pool=x_char_pool,
-            update_chars_credor_weight=True,
-            correct_pixel_issues=True,
-        )
-        self.set_char_debtor_pool(
-            new_char_debtor_pool=x_char_pool,
-            update_chars_debtor_weight=True,
-            correct_pixel_issues=True,
-        )
+    def set_bud_pool(self, x_bud_pool):
+        self._bud_pool = validate_bud_pool(x_bud_pool)
 
-    def set_char_credor_pool(
-        self,
-        new_char_credor_pool: int,
-        update_chars_credor_weight: bool = False,
-        correct_pixel_issues: bool = False,
-    ):
-        if (new_char_credor_pool / self._pixel).is_integer() is False:
-            raise _pixel_RatioException(
-                f"World '{self._owner_id}' cannot set _char_credor_pool='{new_char_credor_pool}'. It is not divisible by pixel '{self._pixel}'"
+    def set_char_respect(self, x_char_pool: int):
+        self.set_credor_respect(x_char_pool)
+        self.set_debtor_resepect(x_char_pool)
+        self.set_bud_pool(x_char_pool)
+
+    def set_credor_respect(self, new_credor_respect: int):
+        if valid_fiscal_ratio(new_credor_respect, self._bit) is False:
+            raise _bit_RatioException(
+                f"World '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
             )
+        self._credor_respect = new_credor_respect
 
-        if update_chars_credor_weight:
-            old_char_credor_pool = self.get_charunits_credor_weight_sum()
-            if old_char_credor_pool != 0:
-                x_ratio = new_char_credor_pool / old_char_credor_pool
-                for x_char in self._chars.values():
-                    new_char_credor_weight = trim_pixel_excess(
-                        num=x_char.credor_weight * x_ratio, pixel=x_char._pixel
-                    )
-                    x_char.set_credor_weight(new_char_credor_weight)
-
-        self._char_credor_pool = new_char_credor_pool
-        if correct_pixel_issues:
-            self._correct_any_credor_pixel_issues()
-
-    def _correct_any_credor_pixel_issues(self):
-        if self.get_charunits_credor_weight_sum() != self._char_credor_pool:
-            missing_credor_weight = (
-                self._char_credor_pool - self.get_charunits_credor_weight_sum()
+    def set_debtor_resepect(self, new_debtor_respect: int):
+        if valid_fiscal_ratio(new_debtor_respect, self._bit) is False:
+            raise _bit_RatioException(
+                f"World '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
             )
-            if len(self._chars) > 0:
-                charunits = list(self._chars.values())
-                # chars_count = len(self._chars)
-                # pixel_count = missing_credor_weight / self._pixel
-                # if pixel_count <= chars_count:
-                for _ in range(0, missing_credor_weight, self._pixel):
-                    x_charunit = charunits.pop()
-                    x_charunit.set_credor_weight(x_charunit.credor_weight + self._pixel)
+        self._debtor_respect = new_debtor_respect
 
-    def set_char_debtor_pool(
-        self,
-        new_char_debtor_pool: int,
-        update_chars_debtor_weight: bool = False,
-        correct_pixel_issues: bool = False,
-    ):
-        if (new_char_debtor_pool / self._pixel).is_integer() is False:
-            raise _pixel_RatioException(
-                f"World '{self._owner_id}' cannot set _char_debtor_pool='{new_char_debtor_pool}'. It is not divisible by pixel '{self._pixel}'"
-            )
-
-        if update_chars_debtor_weight:
-            old_char_debtor_pool = self.get_charunits_debtor_weight_sum()
-            if old_char_debtor_pool != 0:
-                x_ratio = new_char_debtor_pool / old_char_debtor_pool
-                for x_char in self._chars.values():
-                    new_char_debtor_weight = trim_pixel_excess(
-                        num=x_char.debtor_weight * x_ratio, pixel=x_char._pixel
-                    )
-                    x_char.set_debtor_weight(new_char_debtor_weight)
-        self._char_debtor_pool = new_char_debtor_pool
-        if correct_pixel_issues:
-            self._correct_any_debtor_pixel_issues()
-
-    def _correct_any_debtor_pixel_issues(self):
-        if self.get_charunits_debtor_weight_sum() != self._char_debtor_pool:
+    def _correct_any_debtor_bit_issues(self):
+        if self.get_charunits_debtor_weight_sum() != self._debtor_respect:
             missing_debtor_weight = (
-                self._char_debtor_pool - self.get_charunits_debtor_weight_sum()
+                self._debtor_respect - self.get_charunits_debtor_weight_sum()
             )
             if len(self._chars) > 0:
                 charunits = list(self._chars.values())
                 # chars_count = len(self._chars)
-                # pixel_count = missing_debtor_weight / self._pixel
-                # if pixel_count <= chars_count:
-                for _ in range(0, missing_debtor_weight, self._pixel):
+                # bit_count = missing_debtor_weight / self._bit
+                # if bit_count <= chars_count:
+                for _ in range(0, missing_debtor_weight, self._bit):
                     x_charunit = charunits.pop()
-                    x_charunit.set_debtor_weight(x_charunit.debtor_weight + self._pixel)
+                    x_charunit.set_debtor_weight(x_charunit.debtor_weight + self._bit)
 
     def make_road(
         self,
@@ -317,7 +258,7 @@ class WorldUnit:
     def get_world_sprung_from_single_idea(self, road: RoadUnit) -> any:
         self.calc_world_metrics()
         x_idea = self.get_idea_obj(road)
-        new_weight = self._weight * x_idea._bud_share
+        new_weight = self._weight * x_idea._bud_ratio
         x_world = worldunit_shop(_owner_id=self._idearoot._label, _weight=new_weight)
 
         for road_assc in sorted(list(self._get_relevant_roads({road}))):
@@ -417,21 +358,21 @@ class WorldUnit:
         awardheir_dict = {
             awardheir_belief_id: 1 for awardheir_belief_id in awardheir_list
         }
-        non_single_beliefunits = {
-            beliefunit.belief_id: beliefunit
-            for beliefunit in self._beliefs.values()
-            if beliefunit._char_mirror != True
+        non_single_beliefboxs = {
+            beliefbox.belief_id: beliefbox
+            for beliefbox in self._beliefs.values()
+            if beliefbox._char_mirror != True
         }
-        # check all non_char_mirror_beliefunits are in awardheirs
-        for non_single_belief in non_single_beliefunits.values():
+        # check all non_char_mirror_beliefboxs are in awardheirs
+        for non_single_belief in non_single_beliefboxs.values():
             if awardheir_dict.get(non_single_belief.belief_id) is None:
                 return False
 
         # get dict of all charlinks that are in all awardheirs
         awardheir_charunits = {}
         for awardheir_char_id in awardheir_dict:
-            beliefunit = self.get_beliefunit(awardheir_char_id)
-            for charlink in beliefunit._chars.values():
+            beliefbox = self.get_beliefbox(awardheir_char_id)
+            for charlink in beliefbox._chars.values():
                 awardheir_charunits[charlink.char_id] = self.get_char(charlink.char_id)
 
         # check all world._chars are in awardheir_charunits
@@ -631,31 +572,31 @@ class WorldUnit:
             debtor_weight=debtor_weight,
             _road_delimiter=self._road_delimiter,
         )
-        self.set_charunit(charunit=charunit)
+        self.set_charunit(charunit)
 
-    def set_charunit(self, charunit: CharUnit):
-        if charunit._road_delimiter != self._road_delimiter:
-            charunit._road_delimiter = self._road_delimiter
-        if charunit._pixel != self._pixel:
-            charunit._pixel = self._pixel
-        self._chars[charunit.char_id] = charunit
+    def set_charunit(self, x_charunit: CharUnit):
+        if x_charunit._road_delimiter != self._road_delimiter:
+            x_charunit._road_delimiter = self._road_delimiter
+        if x_charunit._bit != self._bit:
+            x_charunit._bit = self._bit
+        self._chars[x_charunit.char_id] = x_charunit
 
         try:
-            self._beliefs[charunit.char_id]
+            self._beliefs[x_charunit.char_id]
         except KeyError:
             charlink = charlink_shop(
-                char_id=CharID(charunit.char_id),
+                char_id=x_charunit.char_id,
                 credor_weight=1,
                 debtor_weight=1,
             )
             charlinks = {charlink.char_id: charlink}
-            belief_unit = beliefunit_shop(
-                charunit.char_id,
+            belief_unit = beliefbox_shop(
+                x_charunit.char_id,
                 _char_mirror=True,
                 _chars=charlinks,
                 _road_delimiter=self._road_delimiter,
             )
-            self.set_beliefunit(y_beliefunit=belief_unit)
+            self.set_beliefbox(y_beliefbox=belief_unit)
 
     def char_exists(self, char_id: CharID) -> bool:
         return self.get_char(char_id) != None
@@ -669,7 +610,7 @@ class WorldUnit:
     ):
         # Handle scenarios: some are unacceptable
         old_char_id_credor_weight = self.get_char(old_char_id).credor_weight
-        new_char_id_beliefunit = self.get_beliefunit(new_char_id)
+        new_char_id_beliefbox = self.get_beliefbox(new_char_id)
         new_char_id_charunit = self.get_char(new_char_id)
         if not allow_char_overwite and new_char_id_charunit != None:
             raise InvalidWorldException(
@@ -677,27 +618,27 @@ class WorldUnit:
             )
         elif (
             not allow_nonsingle_belief_overwrite
-            and new_char_id_beliefunit != None
-            and new_char_id_beliefunit._char_mirror is False
+            and new_char_id_beliefbox != None
+            and new_char_id_beliefbox._char_mirror is False
         ):
             raise InvalidWorldException(
                 f"Char '{old_char_id}' modify to '{new_char_id}' failed since non-single belief '{new_char_id}' exists."
             )
         elif (
             allow_nonsingle_belief_overwrite
-            and new_char_id_beliefunit != None
-            and new_char_id_beliefunit._char_mirror is False
+            and new_char_id_beliefbox != None
+            and new_char_id_beliefbox._char_mirror is False
         ):
-            self.del_beliefunit(belief_id=new_char_id)
+            self.del_beliefbox(belief_id=new_char_id)
         elif self.char_exists(new_char_id):
             old_char_id_credor_weight += new_char_id_charunit.credor_weight
 
         # upsert new charunit
         self.add_charunit(char_id=new_char_id, credor_weight=old_char_id_credor_weight)
-        # modify all influenced beliefunits charlinks
+        # modify all influenced beliefboxs charlinks
         for old_char_belief_id in self.get_char_belief_ids(old_char_id):
-            old_char_beliefunit = self.get_beliefunit(old_char_belief_id)
-            old_char_beliefunit._shift_charlink(old_char_id, new_char_id)
+            old_char_beliefbox = self.get_beliefbox(old_char_belief_id)
+            old_char_beliefbox._shift_charlink(old_char_id, new_char_id)
         self.del_charunit(char_id=old_char_id)
 
     def edit_charunit(
@@ -722,148 +663,86 @@ class WorldUnit:
         char_id_lowercase_ordered_list = sorted(list(char_id_dict))
         return [char_id_dict[char_id_l] for char_id_l in char_id_lowercase_ordered_list]
 
-    def set_beliefunit(
+    def set_beliefbox(
         self,
-        y_beliefunit: BeliefUnit,
+        y_beliefbox: BeliefBox,
         create_missing_chars: bool = None,
         replace: bool = True,
         add_charlinks: bool = None,
     ):
-        if y_beliefunit._road_delimiter != self._road_delimiter:
-            y_beliefunit._road_delimiter = self._road_delimiter
+        if y_beliefbox._road_delimiter != self._road_delimiter:
+            y_beliefbox._road_delimiter = self._road_delimiter
         replace = False if replace is None else replace
         add_charlinks = False if add_charlinks is None else add_charlinks
         if (
-            self.get_beliefunit(y_beliefunit.belief_id) is None
+            self.get_beliefbox(y_beliefbox.belief_id) is None
             or replace
             and not add_charlinks
         ):
-            self._beliefs[y_beliefunit.belief_id] = y_beliefunit
+            self._beliefs[y_beliefbox.belief_id] = y_beliefbox
 
         if add_charlinks:
-            x_beliefunit = self.get_beliefunit(y_beliefunit.belief_id)
-            for x_charlink in y_beliefunit._chars.values():
-                x_beliefunit.set_charlink(x_charlink)
+            x_beliefbox = self.get_beliefbox(y_beliefbox.belief_id)
+            for x_charlink in y_beliefbox._chars.values():
+                x_beliefbox.set_charlink(x_charlink)
 
         if create_missing_chars:
-            self._create_missing_chars(charlinks=y_beliefunit._chars)
+            self._create_missing_chars(charlinks=y_beliefbox._chars)
 
-    def beliefunit_exists(self, belief_id: BeliefID) -> bool:
+    def beliefbox_exists(self, belief_id: BeliefID) -> bool:
         return self._beliefs.get(belief_id) != None
 
-    def get_beliefunit(self, x_belief_id: BeliefID) -> BeliefUnit:
+    def get_beliefbox(self, x_belief_id: BeliefID) -> BeliefBox:
         return self._beliefs.get(x_belief_id)
 
     def _create_missing_chars(self, charlinks: dict[CharID, CharLink]):
         for charlink_x in charlinks.values():
             if self.get_char(charlink_x.char_id) is None:
                 self.set_charunit(
-                    charunit=charunit_shop(
+                    x_charunit=charunit_shop(
                         char_id=charlink_x.char_id,
                         credor_weight=charlink_x.credor_weight,
                         debtor_weight=charlink_x.debtor_weight,
                     )
                 )
 
-    def del_beliefunit(self, belief_id: BeliefID):
+    def del_beliefbox(self, belief_id: BeliefID):
         self._beliefs.pop(belief_id)
-
-    def edit_beliefunit_belief_id(
-        self,
-        old_belief_id: BeliefID,
-        new_belief_id: BeliefID,
-        allow_belief_overwite: bool,
-    ):
-        if not allow_belief_overwite and self.get_beliefunit(new_belief_id) != None:
-            raise InvalidWorldException(
-                f"Belief '{old_belief_id}' modify to '{new_belief_id}' failed since '{new_belief_id}' exists."
-            )
-        elif self.get_beliefunit(new_belief_id) != None:
-            old_beliefunit = self.get_beliefunit(old_belief_id)
-            old_beliefunit.set_belief_id(belief_id=new_belief_id)
-            self.get_beliefunit(new_belief_id).meld(exterior_belief=old_beliefunit)
-            self.del_beliefunit(belief_id=old_belief_id)
-        elif self.get_beliefunit(new_belief_id) is None:
-            old_beliefunit = self.get_beliefunit(old_belief_id)
-            beliefunit_x = beliefunit_shop(
-                new_belief_id, old_beliefunit._char_mirror, old_beliefunit._chars
-            )
-            self.set_beliefunit(y_beliefunit=beliefunit_x)
-            self.del_beliefunit(belief_id=old_belief_id)
-
-        self._edit_awardlinks_belief_id(
-            old_belief_id=old_belief_id,
-            new_belief_id=new_belief_id,
-            allow_belief_overwite=allow_belief_overwite,
-        )
-
-    def _edit_awardlinks_belief_id(
-        self,
-        old_belief_id: BeliefID,
-        new_belief_id: BeliefID,
-        allow_belief_overwite: bool,
-    ):
-        for x_idea in self.get_idea_dict().values():
-            if (
-                x_idea._awardlinks.get(new_belief_id) != None
-                and x_idea._awardlinks.get(old_belief_id) != None
-            ):
-                old_awardlink = x_idea._awardlinks.get(old_belief_id)
-                old_awardlink.belief_id = new_belief_id
-                x_idea._awardlinks.get(new_belief_id).meld(
-                    exterior_awardlink=old_awardlink,
-                    exterior_meld_strategy="sum",
-                    src_meld_strategy="sum",
-                )
-
-                x_idea.del_awardlink(belief_id=old_belief_id)
-            elif (
-                x_idea._awardlinks.get(new_belief_id) is None
-                and x_idea._awardlinks.get(old_belief_id) != None
-            ):
-                old_awardlink = x_idea._awardlinks.get(old_belief_id)
-                new_awardlink = awardlink_shop(
-                    belief_id=new_belief_id,
-                    credor_weight=old_awardlink.credor_weight,
-                    debtor_weight=old_awardlink.debtor_weight,
-                )
-                x_idea.set_awardlink(awardlink=new_awardlink)
-                x_idea.del_awardlink(belief_id=old_belief_id)
 
     def clear_charunits_belieflinks(self):
         for x_charunit in self._chars.values():
             x_charunit.clear_belieflinks()
 
-    def _migrate_beliefunits_to_belieflinks(self):
+    def _migrate_beliefboxs_to_belieflinks(self):
         self.clear_charunits_belieflinks()
 
-        for x_beliefunit in self._beliefs.values():
-            for x_charlink in x_beliefunit._chars.values():
+        for x_beliefbox in self._beliefs.values():
+            for x_charlink in x_beliefbox._chars.values():
                 x_charunit = self.get_char(x_charlink.char_id)
                 if x_charunit != None:
                     x_belieflink = belieflink_shop(
-                        x_beliefunit.belief_id,
+                        x_beliefbox.belief_id,
                         credor_weight=x_charlink.credor_weight,
                         debtor_weight=x_charlink.debtor_weight,
                     )
                     x_charunit.set_belieflink(x_belieflink)
 
-    def _migrate_belieflinks_to_beliefunits(self):
+    def _migrate_belieflinks_to_beliefboxs(self):
         for x_charunit in self._chars.values():
             for x_belieflink in x_charunit._belieflinks.values():
                 x_belief_id = x_belieflink.belief_id
-                if self.beliefunit_exists(x_belief_id) == False:
-                    new_beliefunit = beliefunit_shop(
+                if self.beliefbox_exists(x_belief_id) == False:
+                    new_beliefbox = beliefbox_shop(
                         x_belief_id, _road_delimiter=self._road_delimiter
                     )
-                    self.set_beliefunit(new_beliefunit)
-                x_beliefunit = self.get_beliefunit(x_belief_id)
+                    self.set_beliefbox(new_beliefbox)
+                x_beliefbox = self.get_beliefbox(x_belief_id)
                 x_charlink = charlink_shop(
                     x_charunit.char_id,
                     credor_weight=x_belieflink.credor_weight,
                     debtor_weight=x_belieflink.debtor_weight,
                 )
-                x_beliefunit.set_charlink(x_charlink)
+                x_beliefbox.set_charlink(x_charlink)
 
         self.clear_charunits_belieflinks()
 
@@ -1189,29 +1068,27 @@ class WorldUnit:
         _awardlinks_to_delete = [
             _awardlink_belief_id
             for _awardlink_belief_id in x_idea._awardlinks.keys()
-            if self.get_beliefunit(_awardlink_belief_id) is None
+            if self.get_beliefbox(_awardlink_belief_id) is None
         ]
         for _awardlink_belief_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_belief_id)
 
-        if x_idea._cultureunit != None:
-            _allyholds_to_delete = [
-                _allyhold_belief_id
-                for _allyhold_belief_id in x_idea._cultureunit._allyholds
-                if self.get_beliefunit(_allyhold_belief_id) is None
+        if x_idea._doerunit != None:
+            _beliefholds_to_delete = [
+                _beliefhold_belief_id
+                for _beliefhold_belief_id in x_idea._doerunit._beliefholds
+                if self.get_beliefbox(_beliefhold_belief_id) is None
             ]
-            for _allyhold_belief_id in _allyholds_to_delete:
-                x_idea._cultureunit.del_allyhold(_allyhold_belief_id)
+            for _beliefhold_belief_id in _beliefholds_to_delete:
+                x_idea._doerunit.del_beliefhold(_beliefhold_belief_id)
 
         return x_idea
 
     def _create_missing_beliefs_chars(self, awardlinks: dict[BeliefID, AwardLink]):
         for awardlink_x in awardlinks.values():
-            if self.get_beliefunit(awardlink_x.belief_id) is None:
-                beliefunit_x = beliefunit_shop(
-                    belief_id=awardlink_x.belief_id, _chars={}
-                )
-                self.set_beliefunit(y_beliefunit=beliefunit_x)
+            if self.get_beliefbox(awardlink_x.belief_id) is None:
+                beliefbox_x = beliefbox_shop(belief_id=awardlink_x.belief_id, _chars={})
+                self.set_beliefbox(y_beliefbox=beliefbox_x)
 
     def _create_missing_ideas(self, road):
         self.calc_world_metrics()
@@ -1458,7 +1335,7 @@ class WorldUnit:
         reason_del_premise_base: RoadUnit = None,
         reason_del_premise_need: RoadUnit = None,
         reason_base_idea_active_requisite: str = None,
-        cultureunit: CultureUnit = None,
+        doerunit: DoerUnit = None,
         healerhold: HealerHold = None,
         begin: float = None,
         close: float = None,
@@ -1476,7 +1353,6 @@ class WorldUnit:
         awardlink: AwardLink = None,
         awardlink_del: BeliefID = None,
         is_expanded: bool = None,
-        meld_strategy: MeldStrategy = None,
         problem_bool: bool = None,
     ):
         if healerhold != None:
@@ -1498,7 +1374,7 @@ class WorldUnit:
             reason_del_premise_base=reason_del_premise_base,
             reason_del_premise_need=reason_del_premise_need,
             reason_base_idea_active_requisite=reason_base_idea_active_requisite,
-            cultureunit=cultureunit,
+            doerunit=doerunit,
             healerhold=healerhold,
             begin=begin,
             close=close,
@@ -1516,7 +1392,6 @@ class WorldUnit:
             is_expanded=is_expanded,
             pledge=pledge,
             factunit=factunit,
-            meld_strategy=meld_strategy,
             problem_bool=problem_bool,
         )
         if x_ideaattrfilter.has_numeric_attrs():
@@ -1549,17 +1424,6 @@ class WorldUnit:
     def set_agenda_task_complete(self, task_road: RoadUnit, base: RoadUnit):
         pledge_item = self.get_idea_obj(task_road)
         pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
-
-    def is_charunits_credor_weight_sum_correct(self) -> bool:
-        x_sum = self.get_charunits_credor_weight_sum()
-        return x_sum in (0, self._char_credor_pool) or self._char_credor_pool is None
-
-    def is_charunits_debtor_weight_sum_correct(self) -> bool:
-        x_debtor_weight_sum = self.get_charunits_debtor_weight_sum()
-        char_debtor_pool = self._char_debtor_pool
-        x_debtor_weight_empty_or_pool = x_debtor_weight_sum in (char_debtor_pool, 0)
-        no_char_debtor_pool = self._char_debtor_pool is None
-        return no_char_debtor_pool or x_debtor_weight_empty_or_pool
 
     def get_charunits_credor_weight_sum(self) -> float:
         return sum(charunit.get_credor_weight() for charunit in self._chars.values())
@@ -1625,11 +1489,11 @@ class WorldUnit:
                 world_agenda_debt=au_world_agenda_debt,
             )
 
-    def _reset_beliefunits_world_cred_debt(self):
+    def _reset_beliefboxs_world_cred_debt(self):
         for awardlink_obj in self._beliefs.values():
             awardlink_obj.reset_world_cred_debt()
 
-    def _set_beliefunits_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
+    def _set_beliefboxs_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
         for awardlink_obj in awardheirs.values():
             self.add_to_belief_world_cred_debt(
                 belief_id=awardlink_obj.belief_id,
@@ -1645,7 +1509,7 @@ class WorldUnit:
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_world_agenda_cred_debt(idea._bud_share)
+                    self._add_to_charunits_world_agenda_cred_debt(idea._bud_ratio)
                 else:
                     for x_awardline in idea._awardlines.values():
                         self.add_to_belief_world_agenda_cred_debt(
@@ -1684,9 +1548,9 @@ class WorldUnit:
 
     def get_char_belief_ids(self, char_id: CharID) -> list[BeliefID]:
         return [
-            x_beliefunit.belief_id
-            for x_beliefunit in self._beliefs.values()
-            if x_beliefunit.charlink_exists(char_id)
+            x_beliefbox.belief_id
+            for x_beliefbox in self._beliefs.values()
+            if x_beliefbox.charlink_exists(char_id)
         ]
 
     def _reset_charunit_world_cred_debt(self):
@@ -1787,7 +1651,7 @@ class WorldUnit:
             if x_idea_obj._healerhold.any_belief_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
-                self._sum_healerhold_share += x_idea_obj._bud_share
+                self._sum_healerhold_share += x_idea_obj._bud_ratio
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True
 
@@ -1802,14 +1666,14 @@ class WorldUnit:
         self._idearoot._level = 0
         self._idearoot.set_parent_road("")
         self._idearoot.set_idearoot_inherit_reasonheirs()
-        self._idearoot.set_cultureheir(None, self._beliefs)
+        self._idearoot.set_doerheir(None, self._beliefs)
         self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
         self._idearoot._weight = 1
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        self._idearoot.set_bud_share(0, self._bud, self._bud)
+        self._idearoot.set_bud_share(0, self._bud_pool, self._bud_pool)
         self._idearoot.set_awardheirs_world_cred_debt()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
@@ -1831,12 +1695,12 @@ class WorldUnit:
         idea_kid.set_parent_road(parent_idea.get_road())
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
-        idea_kid.set_cultureheir(parent_idea._cultureheir, self._beliefs)
+        idea_kid.set_doerheir(parent_idea._doerheir, self._beliefs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
         idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
-        idea_kid.set_bud_share(bud_onset, bud_cease, self._bud)
+        idea_kid.set_bud_share(bud_onset, bud_cease, self._bud_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
@@ -1851,9 +1715,9 @@ class WorldUnit:
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
         if idea.is_awardheirless() is False:
-            self._set_beliefunits_bud_share(idea._awardheirs)
+            self._set_beliefboxs_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_world_cred_debt(idea._bud_share)
+            self._add_to_charunits_world_cred_debt(idea._bud_ratio)
 
     def get_bud_share(
         self, parent_bud_share: float, weight: int, sibling_total_weight: int
@@ -1972,7 +1836,7 @@ class WorldUnit:
                 x_idea._healerhold_share = 0
             else:
                 x_sum = self._sum_healerhold_share
-                x_idea._healerhold_share = x_idea._bud_share / x_sum
+                x_idea._healerhold_share = x_idea._bud_ratio / x_sum
             if self._econs_justified and x_idea._healerhold.any_belief_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
@@ -1980,8 +1844,8 @@ class WorldUnit:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_belief_id in x_econ_idea._healerhold._belief_ids:
-                x_beliefunit = self.get_beliefunit(x_belief_id)
-                for x_char_id in x_beliefunit._chars.keys():
+                x_beliefbox = self.get_beliefbox(x_belief_id)
+                for x_char_id in x_beliefbox._chars.keys():
                     if _healers_dict.get(x_char_id) is None:
                         _healers_dict[x_char_id] = {x_econ_road: x_econ_idea}
                     else:
@@ -1996,16 +1860,8 @@ class WorldUnit:
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
-        if self.is_charunits_credor_weight_sum_correct() is False:
-            raise CharUnitsCredorDebtorSumException(
-                f"'{self._owner_id}' is_charunits_credor_weight_sum_correct is False. _char_credor_pool={self._char_credor_pool}. charunits_credor_weight_sum={self.get_charunits_credor_weight_sum()}"
-            )
-        if self.is_charunits_debtor_weight_sum_correct() is False:
-            raise CharUnitsCredorDebtorSumException(
-                f"'{self._owner_id}' is_charunits_debtor_weight_sum_correct is False. _char_debtor_pool={self._char_debtor_pool}. charunits_debtor_weight_sum={self.get_charunits_debtor_weight_sum()}"
-            )
-        self._reset_beliefunits_world_cred_debt()
-        self._reset_beliefunits_world_cred_debt()
+        self._reset_beliefboxs_world_cred_debt()
+        self._reset_beliefboxs_world_cred_debt()
         self._reset_charunit_world_cred_debt()
 
     def get_heir_road_list(self, x_road: RoadUnit) -> list[RoadUnit]:
@@ -2047,30 +1903,22 @@ class WorldUnit:
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
-    def get_chars_dict(self, all_attrs: bool = False) -> dict[str, str]:
+    def get_charunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
         if self._chars != None:
             for char_id, char_obj in self._chars.items():
                 x_dict[char_id] = char_obj.get_dict(all_attrs)
         return x_dict
 
-    def get_beliefunits_dict(self) -> dict[str, str]:
-        return {
-            belief_belief_id: belief_obj.get_dict()
-            for belief_belief_id, belief_obj in self._beliefs.items()
-            if belief_obj._char_mirror is False
-        }
-
     def get_dict(self) -> dict[str, str]:
-        self._migrate_beliefunits_to_belieflinks()
+        self._migrate_beliefboxs_to_belieflinks()
         x_dict = {
-            "_chars": self.get_chars_dict(),
-            "_beliefs": self.get_beliefunits_dict(),
+            "_chars": self.get_charunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
-            "_bud": self._bud,
+            "_bud_pool": self._bud_pool,
             "_coin": self._coin,
-            "_pixel": self._pixel,
+            "_bit": self._bit,
             "_penny": self._penny,
             "_owner_id": self._owner_id,
             "_real_id": self._real_id,
@@ -2078,12 +1926,10 @@ class WorldUnit:
             "_road_delimiter": self._road_delimiter,
             "_idearoot": self._idearoot.get_dict(),
         }
-        if self._char_credor_pool != None:
-            x_dict["_char_credor_pool"] = self._char_credor_pool
-        if self._char_debtor_pool != None:
-            x_dict["_char_debtor_pool"] = self._char_debtor_pool
-        if self._meld_strategy != get_meld_default():
-            x_dict["_meld_strategy"] = self._meld_strategy
+        if self._credor_respect != None:
+            x_dict["_credor_respect"] = self._credor_respect
+        if self._debtor_respect != None:
+            x_dict["_debtor_respect"] = self._debtor_respect
         if self._last_gift_id != None:
             x_dict["_last_gift_id"] = self._last_gift_id
 
@@ -2136,7 +1982,7 @@ class WorldUnit:
     def get_world4char(self, char_id: CharID, facts: dict[RoadUnit, FactCore]):
         self.calc_world_metrics()
         world4char = worldunit_shop(_owner_id=char_id)
-        world4char._idearoot._bud_share = self._idearoot._bud_share
+        world4char._idearoot._bud_ratio = self._idearoot._bud_ratio
         # get char's chars: charzone
 
         # get charzone beliefs
@@ -2155,7 +2001,7 @@ class WorldUnit:
             if y4a_included:
                 y4a_new = ideaunit_shop(
                     _label=ykx._label,
-                    _bud_share=ykx._bud_share,
+                    _bud_ratio=ykx._bud_ratio,
                     _reasonunits=ykx._reasonunits,
                     _awardlinks=ykx._awardlinks,
                     _begin=ykx._begin,
@@ -2165,12 +2011,12 @@ class WorldUnit:
                 )
                 world4char._idearoot._kids[ykx._label] = y4a_new
             else:
-                not_included_bud_share += ykx._bud_share
+                not_included_bud_share += ykx._bud_ratio
 
         if not_included_bud_share > 0:
             y4a_exterior = ideaunit_shop(
                 _label="__world4char__",
-                _bud_share=not_included_bud_share,
+                _bud_ratio=not_included_bud_share,
             )
             world4char._idearoot._kids[y4a_exterior._label] = y4a_exterior
 
@@ -2191,89 +2037,19 @@ class WorldUnit:
         x_list.pop(0)
         return x_list
 
-    def set_meld_strategy(self, x_meld_strategy: MeldStrategy):
-        self._meld_strategy = validate_meld_strategy(x_meld_strategy)
-
-    def meld(
-        self,
-        exterior_world,
-        char_weight: float = None,
-        ignore_charunits: bool = False,
-    ):
-        self._meld_beliefs(exterior_world)
-        if not ignore_charunits:
-            self._meld_chars(exterior_world)
-        self._meld_ideas(exterior_world, char_weight)
-        self._meld_facts(exterior_world)
-        self._weight = get_meld_weight(
-            src_weight=self._weight,
-            src_meld_strategy="default",
-            exterior_weight=exterior_world._weight,
-            exterior_meld_strategy="default",
-        )
-        self._meld_originholds(exterior_world._owner_id, char_weight)
-
-    def _meld_ideas(self, exterior_world, char_weight: float):
-        # meld idearoot
-        self._idearoot.meld(exterior_idea=exterior_world._idearoot, _idearoot=True)
-
-        # meld all exterior ideas
-        char_id = exterior_world._owner_id
-        o_idea_list = exterior_world.get_idea_list_without_idearoot()
-        for o_idea in o_idea_list:
-            o_road = road_validate(
-                self.make_road(o_idea._parent_road, o_idea._label),
-                self._road_delimiter,
-                self._real_id,
-            )
-            try:
-                main_idea = self.get_idea_obj(o_road)
-                main_idea.meld(o_idea, False, char_id, char_weight)
-            except Exception:
-                self.add_idea(idea_kid=o_idea, parent_road=o_idea._parent_road)
-                main_idea = self.get_idea_obj(o_road)
-                main_idea._originunit.set_originhold(char_id, char_weight)
-
-    def _meld_chars(self, exterior_world):
-        for charunit in exterior_world._chars.values():
-            if self.get_char(charunit.char_id) is None:
-                self.set_charunit(charunit=charunit)
-            else:
-                self.get_char(charunit.char_id).meld(charunit)
-
-    def _meld_beliefs(self, exterior_world):
-        for brx in exterior_world._beliefs.values():
-            if self.get_beliefunit(brx.belief_id) is None:
-                self.set_beliefunit(y_beliefunit=brx)
-            else:
-                self.get_beliefunit(brx.belief_id).meld(brx)
-
-    def _meld_facts(self, exterior_world):
-        for hx in exterior_world._idearoot._factunits.values():
-            if self._idearoot._factunits.get(hx.base) is None:
-                self.set_fact(base=hx.base, pick=hx.fact, open=hx.open, nigh=hx.nigh)
-            else:
-                self._idearoot._factunits.get(hx.base).meld(hx)
-
-    def _meld_originholds(self, char_id: CharID, char_weight: float):
-        if char_id != None:
-            self._originunit.set_originhold(char_id, char_weight)
-
 
 def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
-    _bud: BudNum = None,
+    _bud_pool: BudNum = None,
     _coin: CoinNum = None,
-    _pixel: PixelNum = None,
+    _bit: BitHum = None,
     _penny: PennyNum = None,
     _weight: float = None,
-    _meld_strategy: MeldStrategy = None,
 ) -> WorldUnit:
     _owner_id = "" if _owner_id is None else _owner_id
     _real_id = get_default_real_id_roadnode() if _real_id is None else _real_id
-    _meld_strategy = get_meld_default() if _meld_strategy is None else _meld_strategy
     x_world = WorldUnit(
         _owner_id=_owner_id,
         _weight=get_1_if_None(_weight),
@@ -2284,11 +2060,10 @@ def worldunit_shop(
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _bud=validate_bud(_bud),
+        _bud_pool=validate_bud_pool(_bud_pool),
         _coin=default_coin_if_none(_coin),
-        _pixel=default_pixel_if_none(_pixel),
+        _bit=default_bit_if_none(_bit),
         _penny=default_penny_if_none(_penny),
-        _meld_strategy=validate_meld_strategy(_meld_strategy),
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
         _sum_healerhold_share=get_0_if_None(),
@@ -2319,22 +2094,18 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world.set_real_id(obj_from_world_dict(world_dict, "_real_id"))
     world_road_delimiter = obj_from_world_dict(world_dict, "_road_delimiter")
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
-    x_world._bud = validate_bud(obj_from_world_dict(world_dict, "_bud"))
+    x_world._bud_pool = validate_bud_pool(obj_from_world_dict(world_dict, "_bud_pool"))
     x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
-    x_world._pixel = default_pixel_if_none(obj_from_world_dict(world_dict, "_pixel"))
+    x_world._bit = default_bit_if_none(obj_from_world_dict(world_dict, "_bit"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))
-    x_world._char_credor_pool = obj_from_world_dict(world_dict, "_char_credor_pool")
-    x_world._char_debtor_pool = obj_from_world_dict(world_dict, "_char_debtor_pool")
-    if obj_from_world_dict(world_dict, "_meld_strategy") is None:
-        x_world._meld_strategy = get_meld_default()
-    else:
-        x_world._meld_strategy = obj_from_world_dict(world_dict, "_meld_strategy")
+    x_world._credor_respect = obj_from_world_dict(world_dict, "_credor_respect")
+    x_world._debtor_respect = obj_from_world_dict(world_dict, "_debtor_respect")
     x_world._last_gift_id = obj_from_world_dict(world_dict, "_last_gift_id")
     x_road_delimiter = x_world._road_delimiter
     x_chars = obj_from_world_dict(world_dict, "_chars", x_road_delimiter).values()
     for x_charunit in x_chars:
         x_world.set_charunit(x_charunit)
-    x_world._migrate_belieflinks_to_beliefunits()
+    x_world._migrate_belieflinks_to_beliefboxs()
     x_world._originunit = obj_from_world_dict(world_dict, "_originunit")
 
     set_idearoot_from_world_dict(x_world, world_dict)
@@ -2358,7 +2129,7 @@ def set_idearoot_from_world_dict(x_world: WorldUnit, world_dict: dict):
         _range_source_road=get_obj_from_idea_dict(idearoot_dict, "_range_source_road"),
         _numeric_road=get_obj_from_idea_dict(idearoot_dict, "_numeric_road"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
-        _cultureunit=get_obj_from_idea_dict(idearoot_dict, "_cultureunit"),
+        _doerunit=get_obj_from_idea_dict(idearoot_dict, "_doerunit"),
         _healerhold=get_obj_from_idea_dict(idearoot_dict, "_healerhold"),
         _factunits=get_obj_from_idea_dict(idearoot_dict, "_factunits"),
         _awardlinks=get_obj_from_idea_dict(idearoot_dict, "_awardlinks"),
@@ -2399,7 +2170,7 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
             _problem_bool=get_obj_from_idea_dict(idea_dict, "_problem_bool"),
             _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
-            _cultureunit=get_obj_from_idea_dict(idea_dict, "_cultureunit"),
+            _doerunit=get_obj_from_idea_dict(idea_dict, "_doerunit"),
             _healerhold=get_obj_from_idea_dict(idea_dict, "_healerhold"),
             _originunit=get_obj_from_idea_dict(idea_dict, "_originunit"),
             _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),
@@ -2429,9 +2200,9 @@ def obj_from_world_dict(
         )
     elif dict_key == "_beliefs":
         return (
-            get_beliefunits_from_dict(x_dict[dict_key], _road_delimiter)
+            get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
             if x_dict.get(dict_key) != None
-            else get_beliefunits_from_dict(x_dict[dict_key], _road_delimiter)
+            else get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
         )
     elif dict_key == "_max_tree_traverse":
         return (

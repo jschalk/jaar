@@ -7,7 +7,7 @@ from src._instrument.db_tool import create_insert_sqlstr, RowData
 from src._road.road import create_road
 from src._world.reason_idea import factunit_shop
 from src._world.char import charunit_shop, charlink_shop
-from src._world.beliefunit import beliefunit_shop, awardlink_shop
+from src._world.beliefbox import beliefbox_shop, awardlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import WorldUnit
 from src.gift.atom_config import (
@@ -158,57 +158,54 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
     x_arg = "_max_tree_traverse"
     if x_atom.get_value(x_arg) != None:
         x_world.set_max_tree_traverse(x_atom.get_value(x_arg))
-    x_arg = "_char_credor_pool"
+    x_arg = "_credor_respect"
     if x_atom.get_value(x_arg) != None:
-        x_world.set_char_credor_pool(x_atom.get_value(x_arg))
-    x_arg = "_char_debtor_pool"
+        x_world.set_credor_respect(x_atom.get_value(x_arg))
+    x_arg = "_debtor_respect"
     if x_atom.get_value(x_arg) != None:
-        x_world.set_char_debtor_pool(x_atom.get_value(x_arg))
-    x_arg = "_bud"
+        x_world.set_debtor_resepect(x_atom.get_value(x_arg))
+    x_arg = "_bud_pool"
     if x_atom.get_value(x_arg) != None:
-        x_world._bud = x_atom.get_value(x_arg)
+        x_world._bud_pool = x_atom.get_value(x_arg)
     x_arg = "_coin"
     if x_atom.get_value(x_arg) != None:
         x_world._coin = x_atom.get_value(x_arg)
-    x_arg = "_meld_strategy"
-    if x_atom.get_value(x_arg) != None:
-        x_world.set_meld_strategy(x_atom.get_value(x_arg))
     x_arg = "_weight"
     if x_atom.get_value(x_arg) != None:
         x_world._weight = x_atom.get_value(x_arg)
-    x_arg = "_pixel"
+    x_arg = "_bit"
     if x_atom.get_value(x_arg) != None:
-        x_world._pixel = x_atom.get_value(x_arg)
+        x_world._bit = x_atom.get_value(x_arg)
     x_arg = "_penny"
     if x_atom.get_value(x_arg) != None:
         x_world._penny = x_atom.get_value(x_arg)
 
 
-def _modify_world_beliefunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_beliefbox_delete(x_world: WorldUnit, x_atom: AtomUnit):
     belief_id = x_atom.get_value("belief_id")
-    x_world.del_beliefunit(belief_id)
+    x_world.del_beliefbox(belief_id)
 
 
-def _modify_world_beliefunit_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
+def _modify_world_beliefbox_update(x_world: WorldUnit, x_atom: AtomUnit):
+    x_beliefbox = x_world.get_beliefbox(x_atom.get_value("belief_id"))
 
 
-def _modify_world_beliefunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = beliefunit_shop(belief_id=x_atom.get_value("belief_id"))
-    x_world.set_beliefunit(
-        x_beliefunit, create_missing_chars=False, replace=False, add_charlinks=False
+def _modify_world_beliefbox_insert(x_world: WorldUnit, x_atom: AtomUnit):
+    x_beliefbox = beliefbox_shop(belief_id=x_atom.get_value("belief_id"))
+    x_world.set_beliefbox(
+        x_beliefbox, create_missing_chars=False, replace=False, add_charlinks=False
     )
 
 
 def _modify_world_char_belieflink_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_belief_id = x_atom.get_value("belief_id")
-    x_world.get_beliefunit(x_belief_id).del_charlink(x_char_id)
+    x_world.get_beliefbox(x_belief_id).del_charlink(x_char_id)
 
 
 def _modify_world_char_belieflink_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
-    x_beliefunit.edit_charlink(
+    x_beliefbox = x_world.get_beliefbox(x_atom.get_value("belief_id"))
+    x_beliefbox.edit_charlink(
         char_id=x_atom.get_value("char_id"),
         credor_weight=x_atom.get_value("credor_weight"),
         debtor_weight=x_atom.get_value("debtor_weight"),
@@ -216,8 +213,8 @@ def _modify_world_char_belieflink_update(x_world: WorldUnit, x_atom: AtomUnit):
 
 
 def _modify_world_char_belieflink_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_beliefunit = x_world.get_beliefunit(x_atom.get_value("belief_id"))
-    x_beliefunit.set_charlink(
+    x_beliefbox = x_world.get_beliefbox(x_atom.get_value("belief_id"))
+    x_beliefbox.set_charlink(
         charlink_shop(
             char_id=x_atom.get_value("char_id"),
             credor_weight=x_atom.get_value("credor_weight"),
@@ -247,7 +244,6 @@ def _modify_world_ideaunit_update(x_world: WorldUnit, x_atom: AtomUnit):
         begin=x_atom.get_value("_begin"),
         close=x_atom.get_value("_close"),
         denom=x_atom.get_value("_denom"),
-        meld_strategy=x_atom.get_value("_meld_strategy"),
         numeric_road=x_atom.get_value("_numeric_road"),
         numor=x_atom.get_value("_numor"),
         range_source_road=x_atom.get_value("_range_source_road"),
@@ -265,7 +261,6 @@ def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
             _begin=x_atom.get_value("_begin"),
             _close=x_atom.get_value("_close"),
             _denom=x_atom.get_value("_denom"),
-            _meld_strategy=x_atom.get_value("_meld_strategy"),
             _numeric_road=x_atom.get_value("_numeric_road"),
             _numor=x_atom.get_value("_numor"),
             pledge=x_atom.get_value("pledge"),
@@ -388,14 +383,14 @@ def _modify_world_idea_reason_premiseunit_insert(x_world: WorldUnit, x_atom: Ato
     )
 
 
-def _modify_world_idea_allyhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_beliefhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._cultureunit.del_allyhold(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._doerunit.del_beliefhold(belief_id=x_atom.get_value("belief_id"))
 
 
-def _modify_world_idea_allyhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_beliefhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._cultureunit.set_allyhold(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._doerunit.set_beliefhold(belief_id=x_atom.get_value("belief_id"))
 
 
 def _modify_world_charunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
@@ -425,13 +420,13 @@ def _modify_world_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_update_worldunit(x_world, x_atom)
 
 
-def _modify_world_beliefunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_beliefbox(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_beliefunit_delete(x_world, x_atom)
+        _modify_world_beliefbox_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_beliefunit_update(x_world, x_atom)
+        _modify_world_beliefbox_update(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_beliefunit_insert(x_world, x_atom)
+        _modify_world_beliefbox_insert(x_world, x_atom)
 
 
 def _modify_world_char_belieflink(x_world: WorldUnit, x_atom: AtomUnit):
@@ -488,11 +483,11 @@ def _modify_world_idea_reason_premiseunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reason_premiseunit_insert(x_world, x_atom)
 
 
-def _modify_world_idea_allyhold(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_beliefhold(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_allyhold_delete(x_world, x_atom)
+        _modify_world_idea_beliefhold_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_allyhold_insert(x_world, x_atom)
+        _modify_world_idea_beliefhold_insert(x_world, x_atom)
 
 
 def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -507,8 +502,8 @@ def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
 def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.category == "worldunit":
         _modify_world_worldunit(x_world, x_atom)
-    elif x_atom.category == "world_beliefunit":
-        _modify_world_beliefunit(x_world, x_atom)
+    elif x_atom.category == "world_beliefbox":
+        _modify_world_beliefbox(x_world, x_atom)
     elif x_atom.category == "world_char_belieflink":
         _modify_world_char_belieflink(x_world, x_atom)
     elif x_atom.category == "world_ideaunit":
@@ -521,8 +516,8 @@ def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reasonunit(x_world, x_atom)
     elif x_atom.category == "world_idea_reason_premiseunit":
         _modify_world_idea_reason_premiseunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_allyhold":
-        _modify_world_idea_allyhold(x_world, x_atom)
+    elif x_atom.category == "world_idea_beliefhold":
+        _modify_world_idea_beliefhold(x_world, x_atom)
     elif x_atom.category == "world_charunit":
         _modify_world_charunit(x_world, x_atom)
 
@@ -532,11 +527,10 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
         return (
             x_obj._weight != y_obj._weight
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
-            or x_obj._meld_strategy != y_obj._meld_strategy
-            or x_obj._char_credor_pool != y_obj._char_credor_pool
-            or x_obj._char_debtor_pool != y_obj._char_debtor_pool
-            or x_obj._pixel != y_obj._pixel
-            or x_obj._bud != y_obj._bud
+            or x_obj._credor_respect != y_obj._credor_respect
+            or x_obj._debtor_respect != y_obj._debtor_respect
+            or x_obj._bit != y_obj._bit
+            or x_obj._bud_pool != y_obj._bud_pool
             or x_obj._coin != y_obj._coin
         )
     elif category in {"world_char_belieflink", "world_idea_awardlink"}:
@@ -549,7 +543,6 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._begin != y_obj._begin
             or x_obj._close != y_obj._close
             or x_obj._denom != y_obj._denom
-            or x_obj._meld_strategy != y_obj._meld_strategy
             or x_obj._numeric_road != y_obj._numeric_road
             or x_obj._numor != y_obj._numor
             or x_obj._range_source_road != y_obj._range_source_road

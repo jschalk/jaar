@@ -79,18 +79,18 @@ def get_atom_example_factunit_knee(real_id: RealID = None) -> AtomUnit:
     return insert_factunit_atomunit
 
 
-def get_changeunit_carm_example() -> ChangeUnit:
+def get_changeunit_sue_example() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
-    pool_attribute = "_char_credor_pool"
+    pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
 
     category = "world_charunit"
-    carm_text = "Carmen"
-    carm_atomunit = atomunit_shop(category, atom_delete())
-    carm_atomunit.set_required_arg("char_id", carm_text)
-    sue_changeunit.set_atomunit(carm_atomunit)
+    sue_text = "Sue"
+    sue_atomunit = atomunit_shop(category, atom_delete())
+    sue_atomunit.set_required_arg("char_id", sue_text)
+    sue_changeunit.set_atomunit(sue_atomunit)
     return sue_changeunit

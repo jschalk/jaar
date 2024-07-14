@@ -62,7 +62,7 @@ def _add_individual_trace(
         plotly_Scatter(
             x=[kid_idea._level - 1, kid_idea._level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_idea._bud_share),
+            marker_size=_get_dot_diameter(kid_idea._bud_ratio),
             name=kid_idea._label,
             marker_color=_get_color_for_ideaunit_trace(kid_idea, mode=mode),
         )
@@ -70,7 +70,7 @@ def _add_individual_trace(
     anno_list.append(
         dict(
             x=kid_idea._level,
-            y=source_y + (_get_dot_diameter(kid_idea._bud_share) / 150) + 0.002,
+            y=source_y + (_get_dot_diameter(kid_idea._bud_ratio) / 150) + 0.002,
             text=kid_idea._label,
             showarrow=False,
         )
@@ -142,9 +142,9 @@ def display_ideatree(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
 def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
     column_header_list = [
         "char_id",
-        "_char_credor_pool",
+        "_credor_respect",
         "credor_weight",
-        "_char_debtor_pool",
+        "_debtor_respect",
         "debtor_weight",
         "_world_cred",
         "_world_debt",
@@ -152,8 +152,8 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         "_world_agenda_debt",
     ]
     df = get_world_charunits_dataframe(x_world)
-    df.insert(1, "_char_credor_pool", x_world._char_credor_pool)
-    df.insert(4, "_char_debtor_pool", x_world._char_debtor_pool)
+    df.insert(1, "_credor_respect", x_world._credor_respect)
+    df.insert(4, "_debtor_respect", x_world._debtor_respect)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -162,9 +162,9 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.char_id,
-                df._char_credor_pool,
+                df._credor_respect,
                 df.credor_weight,
-                df._char_debtor_pool,
+                df._debtor_respect,
                 df.debtor_weight,
                 df._world_cred,
                 df._world_debt,
@@ -188,7 +188,7 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
 def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "bud_share",
+        "bud_ratio",
         "_label",
         "_parent_road",
     ]
@@ -201,7 +201,7 @@ def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.bud_share,
+                df.bud_ratio,
                 df._label,
                 df._parent_road,
             ],

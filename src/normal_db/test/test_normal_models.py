@@ -14,7 +14,7 @@ from src.normal_db.normal_models import (
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
-    allyholdTable,
+    beliefholdTable,
     HealerHoldTable,
     FactTable,
 )
@@ -88,13 +88,13 @@ def test_normalized_table_CharUnitTable_Exists():
 
 # def test_normalized_table_BeliefTable_Exists():
 #     # GIVEN
-#     config_category = get_normalized_world_table_build().get("world_beliefunit")
+#     config_category = get_normalized_world_table_build().get("world_beliefbox")
 #     mapper = inspect(BeliefTable)
 #     print_out_expected_class_attribute_declarations(config_category)
 
 #     # WHEN / THEN
 #     config_table_name = get_config_table_name(config_category)
-#     assert config_table_name == "beliefunit"
+#     assert config_table_name == "beliefbox"
 #     assert config_table_name == BeliefTable.__tablename__
 #     all_columns_are_as_config_requires(mapper, config_category)
 
@@ -166,16 +166,16 @@ def test_normalized_table_PremiseTable_premise_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_allyholdTable_allyhold_Exists():
+def test_normalized_table_beliefholdTable_beliefhold_Exists():
     # GIVEN
-    config_category = get_normalized_world_table_build().get("world_idea_allyhold")
-    mapper = inspect(allyholdTable)
+    config_category = get_normalized_world_table_build().get("world_idea_beliefhold")
+    mapper = inspect(beliefholdTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "allyhold"
-    assert config_table_name == allyholdTable.__tablename__
+    assert config_table_name == "beliefhold"
+    assert config_table_name == beliefholdTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 

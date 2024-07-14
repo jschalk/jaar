@@ -11,7 +11,7 @@ from src.gift.atom_config import (
     world_idea_awardlink_text,
     world_idea_reasonunit_text,
     world_idea_reason_premiseunit_text,
-    world_idea_allyhold_text,
+    world_idea_beliefhold_text,
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )
@@ -171,7 +171,7 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
         d2_list = [
             [
                 x_atomunit.get_value(char_id_str()),
-                x_worldunit._char_debtor_pool,
+                x_worldunit._debtor_respect,
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
                 x_worldunit._owner_id,

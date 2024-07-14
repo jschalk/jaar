@@ -3,7 +3,7 @@ from src._world.examples.example_worlds import get_world_with_4_levels
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import reasonunit_shop, factunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefunit import awardlink_shop
+from src._world.beliefbox import awardlink_shop
 from pytest import raises as pytest_raises
 from src._road.road import default_road_delimiter_if_none
 
@@ -547,20 +547,6 @@ def test_WorldUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_world._idearoot._kids[casa_text]._problem_bool == x_problem_bool
 
     print(f"{casa_road=} {end_road=}")
-
-
-def test_WorldUnit_edit_idea_attr_worldIsAbleToEdit_meld_strategy_AnyIdeaIfInvaildThrowsError():
-    sue_world = get_world_with_4_levels()
-    casa_road = sue_world.make_l1_road("casa")
-
-    # WHEN / THEN
-    ineligible_meld_strategy = "yahoo9"
-    with pytest_raises(Exception) as excinfo:
-        sue_world.edit_idea_attr(casa_road, meld_strategy=ineligible_meld_strategy)
-    assert (
-        str(excinfo.value)
-        == f"'{ineligible_meld_strategy}' is ineligible meld_strategy."
-    )
 
 
 def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsError():

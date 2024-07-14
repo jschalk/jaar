@@ -1,5 +1,5 @@
 from src._road.road import default_road_delimiter_if_none
-from src._road.finance import default_pixel_if_none
+from src._road.finance import default_bit_if_none
 from src._world.char import CharUnit, charunit_shop
 from pytest import raises as pytest_raises
 
@@ -19,6 +19,8 @@ def test_CharUnit_exists():
     assert bob_charunit.credor_weight is None
     assert bob_charunit.debtor_weight is None
     # calculated fields
+    assert bob_charunit._credor_pool is None
+    assert bob_charunit._debtor_pool is None
     assert bob_charunit._belieflinks is None
     assert bob_charunit._irrational_debtor_weight is None
     assert bob_charunit._inallocable_debtor_weight is None
@@ -27,7 +29,7 @@ def test_CharUnit_exists():
     assert bob_charunit._world_agenda_cred is None
     assert bob_charunit._world_agenda_debt is None
     assert bob_charunit._road_delimiter is None
-    assert bob_charunit._pixel is None
+    assert bob_charunit._bit is None
 
 
 def test_CharUnit_set_char_id_CorrectlySetsAttr():
@@ -68,6 +70,8 @@ def test_charunit_shop_CorrectlySetsAttributes():
     assert yao_charunit.credor_weight == 1
     assert yao_charunit.debtor_weight == 1
     # calculated fields
+    assert yao_charunit._credor_pool == 0
+    assert yao_charunit._debtor_pool == 0
     assert yao_charunit._belieflinks == {}
     assert yao_charunit._irrational_debtor_weight == 0
     assert yao_charunit._inallocable_debtor_weight == 0
@@ -78,7 +82,7 @@ def test_charunit_shop_CorrectlySetsAttributes():
     assert yao_charunit._world_agenda_ratio_cred == 0
     assert yao_charunit._world_agenda_ratio_debt == 0
     assert yao_charunit._road_delimiter == default_road_delimiter_if_none()
-    assert yao_charunit._pixel == default_pixel_if_none()
+    assert yao_charunit._bit == default_bit_if_none()
 
 
 def test_charunit_shop_CorrectlySetsAttributes_road_delimiter():
@@ -92,28 +96,28 @@ def test_charunit_shop_CorrectlySetsAttributes_road_delimiter():
     assert yao_charunit._road_delimiter == slash_text
 
 
-def test_charunit_shop_CorrectlySetsAttributes_pixel():
+def test_charunit_shop_CorrectlySetsAttributes_bit():
     # GIVEN
-    pixel_float = 00.45
+    bit_float = 00.45
 
     # WHEN
-    yao_charunit = charunit_shop("Yao", _pixel=pixel_float)
+    yao_charunit = charunit_shop("Yao", _bit=bit_float)
 
     # THEN
-    assert yao_charunit._pixel == pixel_float
+    assert yao_charunit._bit == 1
 
 
-def test_CharUnit_set_pixel_CorrectlySetsAttribute():
+def test_CharUnit_set_bit_CorrectlySetsAttribute():
     # GIVEN
     bob_charunit = charunit_shop("Bob")
-    assert bob_charunit._pixel == 1
+    assert bob_charunit._bit == 1
 
     # WHEN
-    x_pixel = 5
-    bob_charunit.set_pixel(x_pixel)
+    x_bit = 5
+    bob_charunit.set_bit(x_bit)
 
     # THEN
-    assert bob_charunit._pixel == x_pixel
+    assert bob_charunit._bit == x_bit
 
 
 def test_CharUnit_set_credor_weight_CorrectlySetsAttribute():
@@ -128,24 +132,6 @@ def test_CharUnit_set_credor_weight_CorrectlySetsAttribute():
     assert bob_charunit.credor_weight == x_credor_weight
 
 
-def test_CharUnit_set_credor_weight_RaisesErrorWhen_credor_weight_IsNotMultiple():
-    # GIVEN
-    bob_charunit = charunit_shop("Bob")
-    x_credor_weight = 23
-    bob_charunit.set_credor_weight(x_credor_weight)
-    assert bob_charunit._pixel == 1
-    assert bob_charunit.credor_weight == x_credor_weight
-
-    # WHEN
-    new_credor_weight = 13.5
-    with pytest_raises(Exception) as excinfo:
-        bob_charunit.set_credor_weight(new_credor_weight)
-    assert (
-        str(excinfo.value)
-        == f"'{new_credor_weight}' is not divisible by pixel '{bob_charunit._pixel}'"
-    )
-
-
 def test_CharUnit_set_debtor_weight_CorrectlySetsAttribute():
     # GIVEN
     bob_charunit = charunit_shop("Bob")
@@ -156,24 +142,6 @@ def test_CharUnit_set_debtor_weight_CorrectlySetsAttribute():
 
     # THEN
     assert bob_charunit.debtor_weight == x_debtor_weight
-
-
-def test_CharUnit_set_debtor_weight_RaisesErrorWhen_debtor_weight_IsNotMultiple():
-    # GIVEN
-    bob_charunit = charunit_shop("Bob")
-    x_debtor_weight = 23
-    bob_charunit.set_debtor_weight(x_debtor_weight)
-    assert bob_charunit._pixel == 1
-    assert bob_charunit.debtor_weight == x_debtor_weight
-
-    # WHEN
-    new_debtor_weight = 13.5
-    with pytest_raises(Exception) as excinfo:
-        bob_charunit.set_debtor_weight(new_debtor_weight)
-    assert (
-        str(excinfo.value)
-        == f"'{new_debtor_weight}' is not divisible by pixel '{bob_charunit._pixel}'"
-    )
 
 
 def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeNoNulls():

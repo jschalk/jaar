@@ -24,8 +24,8 @@ from src._road.jaar_config import (
 )
 from src._road.finance import (
     default_coin_if_none,
-    validate_bud,
-    default_pixel_if_none,
+    validate_bud_pool,
+    default_bit_if_none,
     default_penny_if_none,
     default_money_magnitude_if_none,
 )
@@ -100,9 +100,9 @@ class HubUnit:
     real_id: str = None
     econ_road: RoadUnit = None
     road_delimiter: str = None
-    bud: float = None
+    bud_pool: float = None
     coin: float = None
-    pixel: float = None
+    bit: float = None
     penny: float = None
     econ_money_magnitude: float = None
 
@@ -185,9 +185,9 @@ class HubUnit:
             _owner_id=self.owner_id,
             _real_id=self.real_id,
             _road_delimiter=self.road_delimiter,
-            _bud=self.bud,
+            _bud_pool=self.bud_pool,
             _coin=self.coin,
-            _pixel=self.pixel,
+            _bit=self.bit,
             _penny=self.penny,
         )
         x_worldunit._last_gift_id = init_gift_id()
@@ -496,7 +496,7 @@ class HubUnit:
             real_id=self.real_id,
             owner_id=speaker_id,
             road_delimiter=self.road_delimiter,
-            pixel=self.pixel,
+            bit=self.bit,
         )
         return speaker_hubunit.get_action_world()
 
@@ -516,7 +516,7 @@ class HubUnit:
             owner_id=healer_id,
             econ_road=self.econ_road,
             road_delimiter=self.road_delimiter,
-            pixel=self.pixel,
+            bit=self.bit,
         )
         return speaker_hubunit.get_job_world(speaker_id)
 
@@ -578,14 +578,13 @@ def hubunit_shop(
     owner_id: OwnerID = None,
     econ_road: RoadUnit = None,
     road_delimiter: str = None,
-    bud: float = None,
+    bud_pool: float = None,
     coin: float = None,
-    pixel: float = None,
+    bit: float = None,
     penny: float = None,
     econ_money_magnitude: float = None,
 ) -> HubUnit:
-    if reals_dir is None:
-        reals_dir = get_test_reals_dir()
+    reals_dir = get_test_reals_dir() if reals_dir is None else reals_dir
     real_id = get_real_id_if_None(real_id)
 
     return HubUnit(
@@ -594,9 +593,9 @@ def hubunit_shop(
         owner_id=validate_roadnode(owner_id, road_delimiter),
         econ_road=econ_road,
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
-        bud=validate_bud(bud),
+        bud_pool=validate_bud_pool(bud_pool),
         coin=default_coin_if_none(coin),
-        pixel=default_pixel_if_none(pixel),
+        bit=default_bit_if_none(bit),
         penny=default_penny_if_none(penny),
         econ_money_magnitude=default_money_magnitude_if_none(econ_money_magnitude),
     )

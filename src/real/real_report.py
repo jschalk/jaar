@@ -135,7 +135,7 @@ def get_real_voices_agenda_dataframe(x_real: RealUnit) -> DataFrame:
 def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "bud_share",
+        "bud_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -154,7 +154,7 @@ def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.bud_share,
+                df.bud_ratio,
                 df._label,
                 df._parent_road,
                 df._begin,
@@ -194,7 +194,7 @@ def get_real_actions_agenda_dataframe(x_real: RealUnit) -> DataFrame:
 def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "bud_share",
+        "bud_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -213,7 +213,7 @@ def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.bud_share,
+                df.bud_ratio,
                 df._label,
                 df._parent_road,
                 df._begin,

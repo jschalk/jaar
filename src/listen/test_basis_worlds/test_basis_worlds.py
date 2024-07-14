@@ -1,4 +1,4 @@
-from src._world.beliefunit import beliefunit_shop
+from src._world.beliefbox import beliefbox_shop
 from src._world.char import charlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
@@ -27,11 +27,11 @@ def test_create_empty_world_ReturnsCorrectObj():
     duty_zia_charunit = yao_voice.get_char(zia_text)
     duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
     duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
-    swim_belief = beliefunit_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
+    swim_belief = beliefbox_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
     swim_belief.set_charlink(charlink_shop(zia_text))
-    yao_voice.set_beliefunit(swim_belief)
-    yao_voice.set_char_credor_pool(zia_credor_pool, True)
-    yao_voice.set_char_debtor_pool(zia_debtor_pool, True)
+    yao_voice.set_beliefbox(swim_belief)
+    yao_voice.set_credor_respect(zia_credor_pool)
+    yao_voice.set_debtor_resepect(zia_debtor_pool)
 
     # WHEN
     yao_empty_job = create_empty_world(yao_voice, x_owner_id=zia_text)
@@ -41,17 +41,17 @@ def test_create_empty_world_ReturnsCorrectObj():
     assert yao_empty_job._owner_id == zia_text
     assert yao_empty_job._real_id == yao_voice._real_id
     assert yao_empty_job._last_gift_id is None
-    assert yao_empty_job.get_beliefunits_dict() == {}
+    assert yao_empty_job.get_charunits_dict() == {}
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
-    assert yao_empty_job._bud == yao_voice._bud
+    assert yao_empty_job._bud_pool == yao_voice._bud_pool
     assert yao_empty_job._coin == yao_voice._coin
-    assert yao_empty_job._pixel == yao_voice._pixel
+    assert yao_empty_job._bit == yao_voice._bit
     assert yao_empty_job._penny == yao_voice._penny
     assert yao_empty_job._monetary_desc is None
-    assert yao_empty_job._char_credor_pool != yao_voice._char_credor_pool
-    assert yao_empty_job._char_credor_pool is None
-    assert yao_empty_job._char_debtor_pool != yao_voice._char_debtor_pool
-    assert yao_empty_job._char_debtor_pool is None
+    assert yao_empty_job._credor_respect != yao_voice._credor_respect
+    assert yao_empty_job._credor_respect is None
+    assert yao_empty_job._debtor_respect != yao_voice._debtor_respect
+    assert yao_empty_job._debtor_respect is None
     yao_empty_job.calc_world_metrics()
     assert yao_empty_job._chars == {}
 
@@ -65,19 +65,19 @@ def test_create_listen_basis_ReturnsCorrectObj():
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
-    zia_credor_pool = 87
-    zia_debtor_pool = 81
+    zia_credor_pool = 8700
+    zia_debtor_pool = 8100
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     zia_irrational_debtor_weight = 11
     zia_inallocable_debtor_weight = 22
     duty_zia_charunit = yao_duty.get_char(zia_text)
     duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
     duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
-    swim_belief = beliefunit_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
+    swim_belief = beliefbox_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
     swim_belief.set_charlink(charlink_shop(zia_text))
-    yao_duty.set_beliefunit(swim_belief)
-    yao_duty.set_char_credor_pool(zia_credor_pool, True)
-    yao_duty.set_char_debtor_pool(zia_debtor_pool, True)
+    yao_duty.set_beliefbox(swim_belief)
+    yao_duty.set_credor_respect(zia_credor_pool)
+    yao_duty.set_debtor_resepect(zia_debtor_pool)
 
     # WHEN
     yao_basis_job = create_listen_basis(yao_duty)
@@ -86,19 +86,22 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._owner_id == yao_duty._owner_id
     assert yao_basis_job._real_id == yao_duty._real_id
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
-    assert yao_basis_job.get_beliefunits_dict() == yao_duty.get_beliefunits_dict()
+    assert yao_basis_job.get_charunits_dict() == yao_duty.get_charunits_dict()
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
-    assert yao_basis_job._bud == yao_duty._bud
+    assert yao_basis_job._bud_pool == yao_duty._bud_pool
     assert yao_basis_job._coin == yao_duty._coin
-    assert yao_basis_job._pixel == yao_duty._pixel
+    assert yao_basis_job._bit == yao_duty._bit
     assert yao_basis_job._monetary_desc == yao_duty._monetary_desc
-    assert yao_basis_job._char_credor_pool == yao_duty._char_credor_pool
-    assert yao_basis_job._char_debtor_pool == yao_duty._char_debtor_pool
+    assert yao_basis_job._credor_respect == yao_duty._credor_respect
+    assert yao_basis_job._debtor_respect == yao_duty._debtor_respect
     yao_basis_job.calc_world_metrics()
     assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
     assert len(yao_basis_job._idea_dict) == 1
     job_zia_charunit = yao_basis_job.get_char(zia_text)
-    assert yao_basis_job.get_chars_dict().keys() == yao_duty.get_chars_dict().keys()
+    assert (
+        yao_basis_job.get_charunits_dict().keys()
+        == yao_duty.get_charunits_dict().keys()
+    )
     assert job_zia_charunit._irrational_debtor_weight == 0
     assert job_zia_charunit._inallocable_debtor_weight == 0
 
@@ -108,24 +111,24 @@ def test_get_default_action_world_ReturnsCorrectObj():
     sue_text = "Sue"
     blue_text = "blue"
     slash_text = "/"
-    x_bud = 99000
-    x_coin = 99
-    x_pixel = 5
+    x_bud_pool = 99000
+    x_coin = 80
+    x_bit = 5
     sue_char_pool = 800
     casa_text = "casa"
     bob_text = "Bob"
     last_gift_id = 7
     sue_max_tree_traverse = 9
     sue_worldunit = worldunit_shop(
-        sue_text, blue_text, slash_text, x_bud, x_coin, x_pixel
+        sue_text, blue_text, slash_text, x_bud_pool, x_coin, x_bit
     )
     sue_worldunit.set_last_gift_id(last_gift_id)
     sue_worldunit.add_charunit(bob_text, 3, 4)
     swim_text = "/swimmers"
-    swim_beliefunit = beliefunit_shop(swim_text, _road_delimiter=slash_text)
-    swim_beliefunit.edit_charlink(bob_text)
-    sue_worldunit.set_beliefunit(swim_beliefunit)
-    sue_worldunit.set_char_pool(sue_char_pool)
+    swim_beliefbox = beliefbox_shop(swim_text, _road_delimiter=slash_text)
+    swim_beliefbox.edit_charlink(bob_text)
+    sue_worldunit.set_beliefbox(swim_beliefbox)
+    sue_worldunit.set_char_respect(sue_char_pool)
     sue_worldunit.add_l1_idea(ideaunit_shop(casa_text))
     sue_worldunit.set_max_tree_traverse(sue_max_tree_traverse)
 
@@ -139,12 +142,11 @@ def test_get_default_action_world_ReturnsCorrectObj():
     assert default_action_world._real_id == sue_worldunit._real_id
     assert default_action_world._real_id == blue_text
     assert default_action_world._road_delimiter == slash_text
-    assert default_action_world._bud == x_bud
+    assert default_action_world._bud_pool == sue_char_pool
     assert default_action_world._coin == x_coin
-    assert default_action_world._pixel == x_pixel
-    assert default_action_world._char_credor_pool is None
-    assert default_action_world._char_debtor_pool is None
+    assert default_action_world._bit == x_bit
+    assert default_action_world._credor_respect is None
+    assert default_action_world._debtor_respect is None
     assert default_action_world._max_tree_traverse == sue_max_tree_traverse
-    assert len(default_action_world.get_chars_dict()) == 1
-    assert len(default_action_world.get_beliefunits_dict()) == 1
+    assert len(default_action_world.get_charunits_dict()) == 1
     assert len(default_action_world._idea_dict) == 1

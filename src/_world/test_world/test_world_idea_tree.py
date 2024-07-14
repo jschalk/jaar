@@ -7,7 +7,7 @@ from src._world.healer import healerhold_shop
 from src._world.char import CharID
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefunit import awardline_shop, awardlink_shop
+from src._world.beliefbox import awardline_shop, awardlink_shop
 from src._world.graphic import display_ideatree
 from pytest import raises as pytest_raises
 
@@ -241,7 +241,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
     mon_text = "Monday"
     tue_text = "Tuesday"
     vacuum_text = "vacuum"
-    sue_text = "sue"
+    sue_text = "Sue"
 
     casa_road = x_world.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
@@ -315,7 +315,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     x_world.calc_world_metrics()
     # idea tree has no awardlinks
     assert x_world._idearoot._awardlines == {}
-    sue_text = "sue"
+    sue_text = "Sue"
     week_text = "weekdays"
     nation_text = "nation-state"
     sue_awardlink = awardlink_shop(belief_id=sue_text)
@@ -333,8 +333,8 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     assert x_world._idearoot._awardlines != {}
     root_idea = x_world.get_idea_obj(road=x_world._idearoot._label)
     sue_awardline = x_world._idearoot._awardlines.get(sue_text)
-    print(f"{sue_awardline._world_cred=} {root_idea._bud_share=} ")
-    print(f"  {sue_awardline._world_debt=} {root_idea._bud_share=} ")
+    print(f"{sue_awardline._world_cred=} {root_idea._bud_ratio=} ")
+    print(f"  {sue_awardline._world_debt=} {root_idea._bud_ratio=} ")
     sum_x = 0
     cat_road = x_world.make_l1_road("feed cat")
     cat_idea = x_world.get_idea_obj(cat_road)
@@ -345,20 +345,20 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     casa_idea = x_world.get_idea_obj(casa_road)
     nation_road = x_world.make_l1_road(nation_text)
     nation_idea = x_world.get_idea_obj(nation_road)
-    sum_x = cat_idea._bud_share
-    print(f"{cat_idea._bud_share=} {sum_x} ")
-    sum_x += week_idea._bud_share
-    print(f"{week_idea._bud_share=} {sum_x} ")
-    sum_x += casa_idea._bud_share
-    print(f"{casa_idea._bud_share=} {sum_x} ")
-    sum_x += nation_idea._bud_share
-    print(f"{nation_idea._bud_share=} {sum_x} ")
+    sum_x = cat_idea._bud_ratio
+    print(f"{cat_idea._bud_ratio=} {sum_x} ")
+    sum_x += week_idea._bud_ratio
+    print(f"{week_idea._bud_ratio=} {sum_x} ")
+    sum_x += casa_idea._bud_ratio
+    print(f"{casa_idea._bud_ratio=} {sum_x} ")
+    sum_x += nation_idea._bud_ratio
+    print(f"{nation_idea._bud_ratio=} {sum_x} ")
     assert sum_x >= 1.0
     assert sum_x < 1.00000000001
 
     # for kid_idea in root_idea._kids.values():
-    #     sum_x += kid_idea._bud_share
-    #     print(f"  {kid_idea._bud_share=} {sum_x=} {kid_idea.get_road()=}")
+    #     sum_x += kid_idea._bud_ratio
+    #     print(f"  {kid_idea._bud_ratio=} {sum_x=} {kid_idea.get_road()=}")
     assert round(sue_awardline._world_cred, 15) == 1
     assert round(sue_awardline._world_debt, 15) == 1
     x_awardline = awardline_shop(
@@ -374,7 +374,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
     # idea tree has no awardlinks
-    sue_text = "sue"
+    sue_text = "Sue"
     assert x_world._idearoot._awardlines == {}
     x_world.add_charunit(char_id=sue_text)
     x_awardlink = awardlink_shop(belief_id=sue_text)
@@ -407,14 +407,14 @@ def test_world4char_Exists():
     email_text = "email"
     casa_text = "casa"
     vacuum_text = "vacuum"
-    sue_text = "sue"
+    sue_text = "Sue"
     casa_road = x_world.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
     x_world.add_idea(email_idea, parent_road=casa_road)
     vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
     x_world.add_idea(vacuum_idea, parent_road=casa_road)
 
-    sue_char_id = CharID(sue_text)
+    sue_char_id = sue_text
     x_world.add_charunit(char_id=sue_char_id)
     x_awardlink = awardlink_shop(belief_id=sue_char_id)
     yrx = x_world._idearoot
@@ -435,7 +435,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     email_text = "email"
     casa_text = "casa"
     vacuum_text = "vacuum"
-    sue_text = "sue"
+    sue_text = "Sue"
     week_text = "weekdays"
     feed_text = "feed cat"
     casa_road = x_world.make_l1_road(casa_text)
@@ -444,7 +444,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
     x_world.add_idea(vacuum_idea, parent_road=casa_road)
 
-    yao_char_id = CharID("Yao")
+    yao_char_id = "Yao"
     x_world.add_charunit(char_id=yao_char_id)
     yao_bl = awardlink_shop(belief_id=yao_char_id)
     yrx = x_world._idearoot
@@ -453,7 +453,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     nation_text = "nation-state"
     yrx._kids[nation_text].set_awardlink(awardlink=yao_bl)
 
-    sue_char_id = CharID(sue_text)
+    sue_char_id = sue_text
     x_world.add_charunit(char_id=sue_char_id)
     sue_bl = awardlink_shop(belief_id=sue_char_id)
     yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=sue_bl)
@@ -473,17 +473,17 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     assert str(type(casa_idea)).find(".idea.IdeaUnit'>") > 0
 
     assert sue_world4char._idearoot._kids.get(feed_text) is None
-    assert sue_world4char._idearoot._bud_share == 1
-    assert casa_idea._bud_share == yrx._kids[casa_text]._bud_share
+    assert sue_world4char._idearoot._bud_ratio == 1
+    assert casa_idea._bud_ratio == yrx._kids[casa_text]._bud_ratio
     world4char_road = sue_world4char.make_l1_road("__world4char__")
     assert sue_world4char.get_idea_obj(world4char_road) != None
 
     y4a_exteriors = sue_world4char.get_idea_obj(world4char_road)
-    exteriors_bud_share = yrx._kids[week_text]._bud_share
-    exteriors_bud_share += yrx._kids[feed_text]._bud_share
-    exteriors_bud_share += yrx._kids[nation_text]._bud_share
+    exteriors_bud_share = yrx._kids[week_text]._bud_ratio
+    exteriors_bud_share += yrx._kids[feed_text]._bud_ratio
+    exteriors_bud_share += yrx._kids[nation_text]._bud_ratio
     print(f"{exteriors_bud_share=}")
-    assert round(y4a_exteriors._bud_share, 15) == round(exteriors_bud_share, 15)
+    assert round(y4a_exteriors._bud_ratio, 15) == round(exteriors_bud_share, 15)
 
 
 def test_WorldUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():

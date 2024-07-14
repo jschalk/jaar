@@ -4,14 +4,14 @@ from src._road.road import (
     default_road_delimiter_if_none,
 )
 from src._world.healer import healerhold_shop
-from src._world.beliefunit import BeliefID, awardlink_shop, awardheir_shop
+from src._world.beliefbox import BeliefID, awardlink_shop, awardheir_shop
 from src._world.reason_idea import (
     reasonunit_shop,
     reasonheir_shop,
     factunit_shop,
     premiseunit_shop,
 )
-from src._world.reason_culture import cultureunit_shop, cultureheir_shop
+from src._world.reason_doer import doerunit_shop, doerheir_shop
 from src._world.origin import originunit_shop
 from src._world.idea import IdeaUnit, ideaunit_shop, get_obj_from_idea_dict
 from pytest import raises as pytest_raises
@@ -26,8 +26,8 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._uid is None
     assert x_ideaunit._reasonunits is None
     assert x_ideaunit._reasonheirs is None  # calculated field
-    assert x_ideaunit._cultureunit is None
-    assert x_ideaunit._cultureheir is None  # calculated field
+    assert x_ideaunit._doerunit is None
+    assert x_ideaunit._doerheir is None  # calculated field
     assert x_ideaunit._factunits is None
     assert x_ideaunit._factheirs is None  # calculated field
     assert x_ideaunit._awardlinks is None
@@ -45,7 +45,6 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._range_source_road is None
     assert x_ideaunit.pledge is None
     assert x_ideaunit._problem_bool is None
-    assert x_ideaunit._meld_strategy is None
     assert x_ideaunit._healerhold is None
     # calculated_fields
     assert x_ideaunit._descendant_pledge_count is None
@@ -54,7 +53,7 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._all_char_debt is None
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx is None
-    assert x_ideaunit._bud_share is None
+    assert x_ideaunit._bud_ratio is None
     assert x_ideaunit._coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
@@ -92,18 +91,17 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._is_expanded == True
     assert x_ideaunit._factheirs == {}
     assert x_ideaunit._factunits == {}
-    assert x_ideaunit._meld_strategy == "default"
     assert x_ideaunit._healerhold == healerhold_shop()
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
-    assert x_ideaunit._bud_share is None
+    assert x_ideaunit._bud_ratio is None
     assert x_ideaunit._coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
     assert x_ideaunit._reasonunits == {}
     assert x_ideaunit._reasonheirs == {}
-    assert x_ideaunit._cultureunit == cultureunit_shop()
-    assert x_ideaunit._cultureheir is None
+    assert x_ideaunit._doerunit == doerunit_shop()
+    assert x_ideaunit._doerheir is None
     assert x_ideaunit._originunit == originunit_shop()
     assert x_ideaunit._road_delimiter == default_road_delimiter_if_none()
     assert x_ideaunit._root is False
@@ -182,12 +180,12 @@ def test_IdeaUnit_awardlinks_exist():
     biker_credor_weight = 12
     biker_debtor_weight = 15
     biker_awardlink = awardlink_shop(
-        belief_id=BeliefID("bikers2"),
+        belief_id="bikers2",
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
     )
 
-    swimmer_belief_id = BeliefID("swimmers")
+    swimmer_belief_id = "swimmers"
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
     swimmer_awardlink = awardlink_shop(
@@ -215,13 +213,13 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     biker_debtor_weight = 15
     biker_text = "bikers2"
     biker_awardlink = awardheir_shop(
-        belief_id=BeliefID(biker_text),
+        belief_id=biker_text,
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
     )
 
     swimmer_text = "swimmers"
-    swimmer_belief_id = BeliefID(swimmer_text)
+    swimmer_belief_id = swimmer_text
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
     swimmer_awardlink = awardheir_shop(
@@ -255,7 +253,7 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     assert biker_awardheir._world_debt is None
 
     # WHEN
-    sport_idea._bud_share = 0.25
+    sport_idea._bud_ratio = 0.25
     sport_idea.set_awardheirs_world_cred_debt()
 
     # THEN
@@ -427,14 +425,14 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
 
     # WHEN
     sue_text = "Sue"
-    jim_text = "Jim"
-    healerhold_dict = {"healerhold_belief_ids": [sue_text, jim_text]}
+    zia_text = "Zia"
+    healerhold_dict = {"healerhold_belief_ids": [sue_text, zia_text]}
     ideaunit_dict = {healerhold_key: healerhold_dict}
 
     # THEN
     static_healerhold = healerhold_shop()
     static_healerhold.set_belief_id(x_belief_id=sue_text)
-    static_healerhold.set_belief_id(x_belief_id=jim_text)
+    static_healerhold.set_belief_id(x_belief_id=zia_text)
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) != None
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
 
@@ -471,13 +469,13 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
             base=states_road, premises={usa_premise.need: usa_premise}, _status=False
         ),
     }
-    biker_belief_id = BeliefID("bikers")
+    biker_belief_id = "bikers"
     biker_credor_weight = 3.0
     biker_debtor_weight = 7.0
     biker_awardlink = awardlink_shop(
         biker_belief_id, biker_credor_weight, biker_debtor_weight
     )
-    flyer_belief_id = BeliefID("flyers")
+    flyer_belief_id = "flyers"
     flyer_credor_weight = 6.0
     flyer_debtor_weight = 9.0
     flyer_awardlink = awardlink_shop(
@@ -502,7 +500,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     x1_awardlinks = {biker_belief_id: biker_get_dict, flyer_belief_id: flyer_get_dict}
     sue_text = "Sue"
     yao_text = "Yao"
-    sue_cultureunit = cultureunit_shop({sue_text: -1, yao_text: -1})
+    sue_doerunit = doerunit_shop({sue_text: -1, yao_text: -1})
     yao_healerhold = healerhold_shop({yao_text})
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
@@ -516,7 +514,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _level=1,
         _reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
-        _cultureunit=sue_cultureunit,
+        _doerunit=sue_doerunit,
         _healerhold=yao_healerhold,
         _active=True,
         _range_source_road="test123",
@@ -552,7 +550,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_reasonunits"] == casa_idea.get_reasonunits_dict()
     assert casa_dict["_awardlinks"] == casa_idea.get_awardlinks_dict()
     assert casa_dict["_awardlinks"] == x1_awardlinks
-    assert casa_dict["_cultureunit"] == sue_cultureunit.get_dict()
+    assert casa_dict["_doerunit"] == sue_doerunit.get_dict()
     assert casa_dict["_healerhold"] == yao_healerhold.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
     assert casa_dict["_weight"] == casa_idea._weight
@@ -570,8 +568,6 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_idea._is_expanded
     assert casa_dict.get("_is_expanded") is None
     assert len(casa_dict["_factunits"]) == len(casa_idea.get_factunits_dict())
-    assert casa_idea._meld_strategy == "default"
-    assert casa_dict.get("_meld_strategy") is None
 
 
 def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
@@ -592,7 +588,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_idea._is_expanded = False
     casa_idea.pledge = True
     ignore_text = "ignore"
-    casa_idea._meld_strategy = ignore_text
 
     a_text = "a"
     a_road = create_road(root_label(), a_text)
@@ -601,8 +596,8 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     yao_text = "Yao"
     casa_idea.set_awardlink(awardlink_shop(yao_text))
 
-    x_cultureunit = casa_idea._cultureunit
-    x_cultureunit.set_allyhold(belief_id=yao_text)
+    x_doerunit = casa_idea._doerunit
+    x_doerunit.set_beliefhold(belief_id=yao_text)
 
     x_originunit = casa_idea._originunit
     x_originunit.set_originhold(yao_text, 1)
@@ -612,10 +607,9 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
 
     assert not casa_idea._is_expanded
     assert casa_idea.pledge
-    assert casa_idea._meld_strategy != "default"
     assert casa_idea._factunits != None
     assert casa_idea._awardlinks != None
-    assert casa_idea._cultureunit != None
+    assert casa_idea._doerunit != None
     assert casa_idea._originunit != None
     assert casa_idea._kids != {}
 
@@ -625,10 +619,9 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     # THEN
     assert casa_dict.get("_is_expanded") is False
     assert casa_dict.get("pledge")
-    assert casa_dict.get("_meld_strategy") == ignore_text
     assert casa_dict.get("_factunits") != None
     assert casa_dict.get("_awardlinks") != None
-    assert casa_dict.get("_cultureunit") != None
+    assert casa_dict.get("_doerunit") != None
     assert casa_dict.get("_originunit") != None
     assert casa_dict.get("_kids") != None
 
@@ -638,10 +631,9 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     casa_idea = ideaunit_shop()
     assert casa_idea._is_expanded
     assert casa_idea.pledge is False
-    assert casa_idea._meld_strategy == "default"
     assert casa_idea._factunits == {}
     assert casa_idea._awardlinks == {}
-    assert casa_idea._cultureunit == cultureunit_shop()
+    assert casa_idea._doerunit == doerunit_shop()
     assert casa_idea._healerhold == healerhold_shop()
     assert casa_idea._originunit == originunit_shop()
     assert casa_idea._kids == {}
@@ -652,10 +644,9 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     # THEN
     assert casa_dict.get("_is_expanded") is None
     assert casa_dict.get("pledge") is None
-    assert casa_dict.get("_meld_strategy") is None
     assert casa_dict.get("_factunits") is None
     assert casa_dict.get("_awardlinks") is None
-    assert casa_dict.get("_cultureunit") is None
+    assert casa_dict.get("_doerunit") is None
     assert casa_dict.get("_healerhold") is None
     assert casa_dict.get("_originunit") is None
     assert casa_dict.get("_kids") is None
@@ -857,41 +848,41 @@ def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
     assert clean_idea._active_hx == {0: False}
 
 
-def test_IdeaUnit_set_cultureunit_empty_if_none():
+def test_IdeaUnit_set_doerunit_empty_if_none():
     # GIVEN
     run_text = "run"
     run_idea = ideaunit_shop(_label=run_text)
-    run_idea._cultureunit = None
-    assert run_idea._cultureunit is None
+    run_idea._doerunit = None
+    assert run_idea._doerunit is None
 
     # WHEN
-    run_idea.set_cultureunit_empty_if_none()
+    run_idea.set_doerunit_empty_if_none()
 
     # THEN
-    assert run_idea._cultureunit != None
-    assert run_idea._cultureunit == cultureunit_shop()
+    assert run_idea._doerunit != None
+    assert run_idea._doerunit == doerunit_shop()
 
 
-def test_IdeaUnit_set_cultureheir_CorrectlySetsAttr():
+def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     # GIVEN
     swim_text = "swimmers"
     sport_text = "sports"
     sport_idea = ideaunit_shop(_label=sport_text)
-    sport_idea._cultureunit.set_allyhold(belief_id=swim_text)
-    assert sport_idea._cultureheir is None
+    sport_idea._doerunit.set_beliefhold(belief_id=swim_text)
+    assert sport_idea._doerheir is None
 
     # WHEN
-    sport_idea.set_cultureheir(parent_cultureheir=None, world_beliefs=None)
+    sport_idea.set_doerheir(parent_doerheir=None, world_beliefs=None)
 
     # THEN
-    assert sport_idea._cultureheir != None
-    swim_cultureunit = cultureunit_shop()
-    swim_cultureunit.set_allyhold(belief_id=swim_text)
-    swim_cultureheir = cultureheir_shop()
-    swim_cultureheir.set_allyholds(
-        cultureunit=swim_cultureunit, parent_cultureheir=None, world_beliefs=None
+    assert sport_idea._doerheir != None
+    swim_doerunit = doerunit_shop()
+    swim_doerunit.set_beliefhold(belief_id=swim_text)
+    swim_doerheir = doerheir_shop()
+    swim_doerheir.set_beliefholds(
+        doerunit=swim_doerunit, parent_doerheir=None, world_beliefs=None
     )
-    assert sport_idea._cultureheir == swim_cultureheir
+    assert sport_idea._doerheir == swim_doerheir
 
 
 def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():

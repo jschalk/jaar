@@ -74,7 +74,7 @@ def test_HubUnit_save_action_file_RaisesErrorWhenWorld_action_id_IsWrong(
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text, None)
 
     # WHEN / THEN
-    yao_text = "yao"
+    yao_text = "Yao"
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.save_action_world(worldunit_shop(yao_text))
     assert (
@@ -121,20 +121,20 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     # GIVEN
     sue_text = "Sue"
     sue_real_dir = f"{env_dir()}/{root_label()}"
-    sue_bud = 50000
+    sue_bud_pool = 50000
     sue_coin = 5
-    sue_pixel = 7
+    sue_bit = 7
     sue_hubunit = hubunit_shop(
         env_dir(),
         root_label(),
         sue_text,
         None,
-        bud=sue_bud,
+        bud_pool=sue_bud_pool,
         coin=sue_coin,
-        pixel=sue_pixel,
+        bit=sue_bit,
     )
     sue_world = worldunit_shop(
-        sue_text, root_label(), _bud=sue_bud, _coin=sue_coin, _pixel=sue_pixel
+        sue_text, root_label(), _bud_pool=sue_bud_pool, _coin=sue_coin, _bit=sue_bit
     )
     sue_hubunit.initialize_action_file(sue_world)
     assert sue_hubunit.action_file_exists()
@@ -161,9 +161,9 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     action_world = worldunit_get_from_json(action_file_text)
     assert action_world._real_id == root_label()
     assert action_world._owner_id == sue_text
-    assert action_world._bud == sue_bud
+    assert action_world._bud_pool == sue_bud_pool
     assert action_world._coin == sue_coin
-    assert action_world._pixel == sue_pixel
+    assert action_world._bit == sue_bit
 
 
 def test_HubUnit_initialize_action_file_CreatesDirsAndFiles(env_dir_setup_cleanup):

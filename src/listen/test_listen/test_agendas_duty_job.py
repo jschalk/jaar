@@ -28,7 +28,7 @@ from src.listen.examples.example_listen import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_WorldWhenNo_allyholdIsSet(
+def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_WorldWhenNo_beliefholdIsSet(
     env_dir_setup_cleanup,
 ):
     # GIVEN
@@ -39,7 +39,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_WorldWhenNo_allyholdIsS
     zia_debtor_weight = 41
     zia_pool = 87
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_pool(zia_pool)
+    yao_duty.set_char_respect(zia_pool)
 
     zia_job = worldunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
@@ -67,7 +67,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_World(env_dir_setup_cle
     zia_debtor_weight = 41
     zia_pool = 87
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_pool(zia_pool)
+    yao_duty.set_char_respect(zia_pool)
 
     zia_job = worldunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
@@ -75,8 +75,8 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_World(env_dir_setup_cle
     zia_job.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_job_world(zia_job)
 
@@ -135,7 +135,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobWorldWithDetailsDecidedB
     yao_bob_debtor_weight = 5
     yao_duty.add_charunit(zia_text, None, yao_zia_debtor_weight)
     yao_duty.add_charunit(bob_text, None, yao_bob_debtor_weight)
-    yao_duty.set_char_pool(100)
+    yao_duty.set_char_respect(100)
     new_yao_action2 = create_listen_basis(yao_duty)
     assert new_yao_action2.idea_exists(cook_road()) is False
 
@@ -167,7 +167,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalWorld(
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_world(yao_duty)
 
@@ -178,8 +178,8 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalWorld(
     zia_job.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_dakota_hubunit.save_job_world(zia_job)
 
     sue_job = worldunit_shop(sue_text)
@@ -189,7 +189,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalWorld(
     vacuum_road = sue_job.make_l1_road(vacuum_text)
     sue_job.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_job.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._cultureunit.set_allyhold(yao_text)
+    vacuum_ideaunit._doerunit.set_beliefhold(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_job.make_l1_road(egg_text)
@@ -243,7 +243,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobWorld(
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_world(yao_duty)
 
@@ -253,8 +253,8 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobWorld(
     zia_job.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_job_world(zia_job)
 
@@ -288,7 +288,7 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     zia_debtor_weight = 41
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_pool = 87
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
     # save yao without task to dutys
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_world(yao_duty)
@@ -301,8 +301,8 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     zia_job.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_dakota_hubunit.save_job_world(zia_job)
 
     # save yao with task to jobs
@@ -311,7 +311,7 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     vacuum_road = yao_old_job.make_l1_road(vacuum_text)
     yao_old_job.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = yao_old_job.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._cultureunit.set_allyhold(yao_text)
+    vacuum_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_dakota_hubunit.save_job_world(yao_old_job)
 
     # WHEN

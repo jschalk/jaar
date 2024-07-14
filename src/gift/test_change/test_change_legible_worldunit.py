@@ -51,10 +51,10 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_monetary_desc():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_credor_pool():
+def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect():
     # GIVEN
     category = "worldunit"
-    char_credor_pool_text = "_char_credor_pool"
+    char_credor_pool_text = "_credor_respect"
     char_credor_pool_int = 71
     char_credor_pool_atomunit = atomunit_shop(category, atom_update())
     char_credor_pool_atomunit.set_arg(char_credor_pool_text, char_credor_pool_int)
@@ -74,10 +74,10 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_credor_pool():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_credor_pool_With_monetary_desc_None():
+def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect_With_monetary_desc_None():
     # GIVEN
     category = "worldunit"
-    char_credor_pool_text = "_char_credor_pool"
+    char_credor_pool_text = "_credor_respect"
     char_credor_pool_int = 71
     char_credor_pool_atomunit = atomunit_shop(category, atom_update())
     char_credor_pool_atomunit.set_arg(char_credor_pool_text, char_credor_pool_int)
@@ -95,10 +95,10 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_credor_pool_With_mo
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_debtor_pool():
+def test_create_legible_list_ReturnsObjGivenWorldUpdate_debtor_respect():
     # GIVEN
     category = "worldunit"
-    char_debtor_pool_text = "_char_debtor_pool"
+    char_debtor_pool_text = "_debtor_respect"
     char_debtor_pool_int = 78
     char_debtor_pool_atomunit = atomunit_shop(category, atom_update())
     char_debtor_pool_atomunit.set_arg(char_debtor_pool_text, char_debtor_pool_int)
@@ -118,12 +118,12 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_debtor_pool():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_char_credor_pool_Equal_char_debtor_pool():
+def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect_Equal_debtor_respect():
     # GIVEN
     x_changeunit = changeunit_shop()
     category = "worldunit"
-    char_credor_pool_text = "_char_credor_pool"
-    char_debtor_pool_text = "_char_debtor_pool"
+    char_credor_pool_text = "_credor_respect"
+    char_debtor_pool_text = "_debtor_respect"
     char_pool_int = 83
     worldunit_atomunit = atomunit_shop(category, atom_update())
     worldunit_atomunit.set_arg(char_credor_pool_text, char_pool_int)
@@ -160,27 +160,4 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_max_tree_traverse():
 
     # THEN
     x_str = f"{sue_world._owner_id}'s maximum number of World output evaluations transited to {max_tree_traverse_int}"
-    assert legible_list[0] == x_str
-
-
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_meld_strategy():
-    # GIVEN
-    category = "worldunit"
-    meld_strategy_text = "_meld_strategy"
-    meld_strategy_value = "override"
-    meld_strategy_atomunit = atomunit_shop(category, atom_update())
-    meld_strategy_atomunit.set_arg(meld_strategy_text, meld_strategy_value)
-
-    print(f"{meld_strategy_atomunit=}")
-    x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(meld_strategy_atomunit)
-    sue_world = worldunit_shop("Sue")
-
-    # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
-
-    # THEN
-    x_str = (
-        f"{sue_world._owner_id}'s Meld strategy transited to '{meld_strategy_value}'"
-    )
     assert legible_list[0] == x_str

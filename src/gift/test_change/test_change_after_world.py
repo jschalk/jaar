@@ -1,9 +1,9 @@
 from src._road.road import get_terminus_node, get_parent_road
-from src._world.beliefunit import awardlink_shop
+from src._world.beliefbox import awardlink_shop
 from src._world.char import charlink_shop
 from src._world.reason_idea import factunit_shop
 from src._world.idea import ideaunit_shop
-from src._world.beliefunit import beliefunit_shop
+from src._world.beliefbox import beliefbox_shop
 from src._world.world import worldunit_shop
 from src.gift.atom import (
     atom_update,
@@ -47,23 +47,20 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     new2_arg = "_max_tree_traverse"
     x_atomunit.set_optional_arg(new2_arg, new2_value)
     new3_value = 77
-    new3_arg = "_char_credor_pool"
+    new3_arg = "_credor_respect"
     x_atomunit.set_optional_arg(new3_arg, new3_value)
     new4_value = 88
-    new4_arg = "_char_debtor_pool"
+    new4_arg = "_debtor_respect"
     x_atomunit.set_optional_arg(new4_arg, new4_value)
-    new5_value = "override"
-    new5_arg = "_meld_strategy"
-    x_atomunit.set_optional_arg(new5_arg, new5_value)
     new9_value = 55550000
-    new9_arg = "_bud"
+    new9_arg = "_bud_pool"
     x_atomunit.set_optional_arg(new9_arg, new9_value)
     new8_value = 0.5555
     new8_arg = "_coin"
     x_atomunit.set_optional_arg(new8_arg, new8_value)
     sue_changeunit.set_atomunit(x_atomunit)
     new6_value = 0.5
-    new6_arg = "_pixel"
+    new6_arg = "_bit"
     x_atomunit.set_optional_arg(new6_arg, new6_value)
     sue_changeunit.set_atomunit(x_atomunit)
     new7_value = 0.025
@@ -77,17 +74,16 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     # THEN
     print(f"{sue_changeunit.atomunits.keys()=}")
     assert after_sue_worldunit._max_tree_traverse == new2_value
-    assert after_sue_worldunit._char_credor_pool == new3_value
-    assert after_sue_worldunit._char_debtor_pool == new4_value
-    assert after_sue_worldunit._meld_strategy == new5_value
+    assert after_sue_worldunit._credor_respect == new3_value
+    assert after_sue_worldunit._debtor_respect == new4_value
     assert after_sue_worldunit._weight == new1_value
     assert after_sue_worldunit._weight != before_sue_worldunit._weight
-    assert after_sue_worldunit._bud == new9_value
-    assert after_sue_worldunit._bud != before_sue_worldunit._bud
+    assert after_sue_worldunit._bud_pool == new9_value
+    assert after_sue_worldunit._bud_pool != before_sue_worldunit._bud_pool
     assert after_sue_worldunit._coin == new8_value
     assert after_sue_worldunit._coin != before_sue_worldunit._coin
-    assert after_sue_worldunit._pixel == new6_value
-    assert after_sue_worldunit._pixel != before_sue_worldunit._pixel
+    assert after_sue_worldunit._bit == new6_value
+    assert after_sue_worldunit._bit != before_sue_worldunit._bit
     assert after_sue_worldunit._penny == new7_value
     assert after_sue_worldunit._penny != before_sue_worldunit._penny
 
@@ -98,14 +94,14 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_char():
     sue_text = "Sue"
 
     before_sue_worldunit = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
-    before_sue_worldunit.add_charunit(rico_text)
-    before_sue_worldunit.add_charunit(carm_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    before_sue_worldunit.add_charunit(yao_text)
+    before_sue_worldunit.add_charunit(zia_text)
 
     category = "world_charunit"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("char_id", carm_text)
+    x_atomunit.set_required_arg("char_id", zia_text)
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN
@@ -114,8 +110,8 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_char():
     # THEN
     print(f"{sue_changeunit.atomunits=}")
     assert after_sue_worldunit != before_sue_worldunit
-    assert after_sue_worldunit.char_exists(rico_text)
-    assert after_sue_worldunit.char_exists(carm_text) is False
+    assert after_sue_worldunit.char_exists(yao_text)
+    assert after_sue_worldunit.char_exists(zia_text) is False
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_char():
@@ -124,16 +120,16 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_char():
     sue_text = "Sue"
 
     before_sue_worldunit = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
-    before_sue_worldunit.add_charunit(rico_text)
-    assert before_sue_worldunit.char_exists(rico_text)
-    assert before_sue_worldunit.char_exists(carm_text) is False
+    yao_text = "Yao"
+    zia_text = "Zia"
+    before_sue_worldunit.add_charunit(yao_text)
+    assert before_sue_worldunit.char_exists(yao_text)
+    assert before_sue_worldunit.char_exists(zia_text) is False
 
     # WHEN
     category = "world_charunit"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_required_arg("char_id", carm_text)
+    x_atomunit.set_required_arg("char_id", zia_text)
     x_credor_weight = 55
     x_debtor_weight = 66
     x_atomunit.set_optional_arg("credor_weight", x_credor_weight)
@@ -143,12 +139,12 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_char():
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    rico_charunit = after_sue_worldunit.get_char(rico_text)
-    carm_charunit = after_sue_worldunit.get_char(carm_text)
-    assert rico_charunit != None
-    assert carm_charunit != None
-    assert carm_charunit.credor_weight == x_credor_weight
-    assert carm_charunit.debtor_weight == x_debtor_weight
+    yao_charunit = after_sue_worldunit.get_char(yao_text)
+    zia_charunit = after_sue_worldunit.get_char(zia_text)
+    assert yao_charunit != None
+    assert zia_charunit != None
+    assert zia_charunit.credor_weight == x_credor_weight
+    assert zia_charunit.debtor_weight == x_debtor_weight
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_char():
@@ -157,137 +153,137 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_char():
     sue_text = "Sue"
 
     before_sue_worldunit = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    before_sue_worldunit.add_charunit(rico_text)
-    assert before_sue_worldunit.get_char(rico_text).credor_weight == 1
+    yao_text = "Yao"
+    before_sue_worldunit.add_charunit(yao_text)
+    assert before_sue_worldunit.get_char(yao_text).credor_weight == 1
 
     # WHEN
     category = "world_charunit"
     x_atomunit = atomunit_shop(category, atom_update())
-    x_atomunit.set_required_arg("char_id", rico_text)
-    rico_credor_weight = 55
-    x_atomunit.set_optional_arg("credor_weight", rico_credor_weight)
+    x_atomunit.set_required_arg("char_id", yao_text)
+    yao_credor_weight = 55
+    x_atomunit.set_optional_arg("credor_weight", yao_credor_weight)
     sue_changeunit.set_atomunit(x_atomunit)
     print(f"{sue_changeunit.atomunits.keys()=}")
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    rico_char = after_sue_worldunit.get_char(rico_text)
-    assert rico_char.credor_weight == rico_credor_weight
+    yao_char = after_sue_worldunit.get_char(yao_text)
+    assert yao_char.credor_weight == yao_credor_weight
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_charlink():
     # GIVEN
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
+    yao_text = "Yao"
+    zia_text = "Zia"
     dizz_text = "Dizzy"
-    before_sue_worldunit.add_charunit(rico_text)
-    before_sue_worldunit.add_charunit(carm_text)
+    before_sue_worldunit.add_charunit(yao_text)
+    before_sue_worldunit.add_charunit(zia_text)
     before_sue_worldunit.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(yao_text))
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(carm_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    before_sue_worldunit.set_beliefunit(fly_beliefunit)
-    assert len(before_sue_worldunit.get_beliefunit(run_text)._chars) == 2
-    assert len(before_sue_worldunit.get_beliefunit(fly_text)._chars) == 3
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(yao_text))
+    fly_beliefbox.set_charlink(charlink_shop(zia_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    before_sue_worldunit.set_beliefbox(fly_beliefbox)
+    assert len(before_sue_worldunit.get_beliefbox(run_text)._chars) == 2
+    assert len(before_sue_worldunit.get_beliefbox(fly_text)._chars) == 3
 
     # WHEN
-    rico_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
-    rico_atomunit.set_required_arg("belief_id", run_text)
-    rico_atomunit.set_required_arg("char_id", rico_text)
-    # print(f"{rico_atomunit=}")
-    carm_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
-    carm_atomunit.set_required_arg("belief_id", fly_text)
-    carm_atomunit.set_required_arg("char_id", carm_text)
-    # print(f"{carm_atomunit=}")
+    yao_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
+    yao_atomunit.set_required_arg("belief_id", run_text)
+    yao_atomunit.set_required_arg("char_id", yao_text)
+    # print(f"{yao_atomunit=}")
+    zia_atomunit = atomunit_shop("world_char_belieflink", atom_delete())
+    zia_atomunit.set_required_arg("belief_id", fly_text)
+    zia_atomunit.set_required_arg("char_id", zia_text)
+    # print(f"{zia_atomunit=}")
     sue_changeunit = changeunit_shop()
-    sue_changeunit.set_atomunit(rico_atomunit)
-    sue_changeunit.set_atomunit(carm_atomunit)
+    sue_changeunit.set_atomunit(yao_atomunit)
+    sue_changeunit.set_atomunit(zia_atomunit)
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    assert len(after_sue_worldunit.get_beliefunit(fly_text)._chars) == 2
-    assert len(after_sue_worldunit.get_beliefunit(run_text)._chars) == 1
+    assert len(after_sue_worldunit.get_beliefbox(fly_text)._chars) == 2
+    assert len(after_sue_worldunit.get_beliefbox(run_text)._chars) == 1
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_charlink():
     # GIVEN
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
+    yao_text = "Yao"
+    zia_text = "Zia"
     dizz_text = "Dizzy"
-    before_sue_worldunit.add_charunit(rico_text)
-    before_sue_worldunit.add_charunit(carm_text)
+    before_sue_worldunit.add_charunit(yao_text)
+    before_sue_worldunit.add_charunit(zia_text)
     before_sue_worldunit.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    assert len(before_sue_worldunit.get_beliefunit(run_text)._chars) == 1
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    assert len(before_sue_worldunit.get_beliefbox(run_text)._chars) == 1
 
     # WHEN
-    rico_atomunit = atomunit_shop("world_char_belieflink", atom_insert())
-    rico_atomunit.set_required_arg("belief_id", run_text)
-    rico_atomunit.set_required_arg("char_id", rico_text)
-    rico_run_credor_weight = 17
-    rico_atomunit.set_optional_arg("credor_weight", rico_run_credor_weight)
-    print(f"{rico_atomunit=}")
+    yao_atomunit = atomunit_shop("world_char_belieflink", atom_insert())
+    yao_atomunit.set_required_arg("belief_id", run_text)
+    yao_atomunit.set_required_arg("char_id", yao_text)
+    yao_run_credor_weight = 17
+    yao_atomunit.set_optional_arg("credor_weight", yao_run_credor_weight)
+    print(f"{yao_atomunit=}")
     sue_changeunit = changeunit_shop()
-    sue_changeunit.set_atomunit(rico_atomunit)
+    sue_changeunit.set_atomunit(yao_atomunit)
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    assert len(after_sue_worldunit.get_beliefunit(run_text)._chars) == 2
-    after_run_beliefunit = after_sue_worldunit.get_beliefunit(run_text)
-    after_run_rico_charlink = after_run_beliefunit.get_charlink(rico_text)
-    assert after_run_rico_charlink != None
-    assert after_run_rico_charlink.credor_weight == rico_run_credor_weight
+    assert len(after_sue_worldunit.get_beliefbox(run_text)._chars) == 2
+    after_run_beliefbox = after_sue_worldunit.get_beliefbox(run_text)
+    after_run_yao_charlink = after_run_beliefbox.get_charlink(yao_text)
+    assert after_run_yao_charlink != None
+    assert after_run_yao_charlink.credor_weight == yao_run_credor_weight
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_charlink():
     # GIVEN
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    before_sue_worldunit.add_charunit(rico_text)
+    yao_text = "Yao"
+    before_sue_worldunit.add_charunit(yao_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    old_rico_run_credor_weight = 3
-    run_beliefunit.set_charlink(charlink_shop(rico_text, old_rico_run_credor_weight))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    before_run_beliefunit = before_sue_worldunit.get_beliefunit(run_text)
-    before_run_rico_charlink = before_run_beliefunit.get_charlink(rico_text)
-    assert before_run_rico_charlink.credor_weight == old_rico_run_credor_weight
-    assert before_run_rico_charlink.debtor_weight == 1
+    run_beliefbox = beliefbox_shop(run_text)
+    old_yao_run_credor_weight = 3
+    run_beliefbox.set_charlink(charlink_shop(yao_text, old_yao_run_credor_weight))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    before_run_beliefbox = before_sue_worldunit.get_beliefbox(run_text)
+    before_run_yao_charlink = before_run_beliefbox.get_charlink(yao_text)
+    assert before_run_yao_charlink.credor_weight == old_yao_run_credor_weight
+    assert before_run_yao_charlink.debtor_weight == 1
 
     # WHEN
-    rico_atomunit = atomunit_shop("world_char_belieflink", atom_update())
-    rico_atomunit.set_required_arg("belief_id", run_text)
-    rico_atomunit.set_required_arg("char_id", rico_text)
-    new_rico_run_credor_weight = 7
-    new_rico_run_debtor_weight = 11
-    rico_atomunit.set_optional_arg("credor_weight", new_rico_run_credor_weight)
-    rico_atomunit.set_optional_arg("debtor_weight", new_rico_run_debtor_weight)
-    print(f"{rico_atomunit=}")
+    yao_atomunit = atomunit_shop("world_char_belieflink", atom_update())
+    yao_atomunit.set_required_arg("belief_id", run_text)
+    yao_atomunit.set_required_arg("char_id", yao_text)
+    new_yao_run_credor_weight = 7
+    new_yao_run_debtor_weight = 11
+    yao_atomunit.set_optional_arg("credor_weight", new_yao_run_credor_weight)
+    yao_atomunit.set_optional_arg("debtor_weight", new_yao_run_debtor_weight)
+    print(f"{yao_atomunit=}")
     sue_changeunit = changeunit_shop()
-    sue_changeunit.set_atomunit(rico_atomunit)
+    sue_changeunit.set_atomunit(yao_atomunit)
     after_sue_worldunit = sue_changeunit.get_edited_world(before_sue_worldunit)
 
     # THEN
-    after_run_beliefunit = after_sue_worldunit.get_beliefunit(run_text)
-    after_run_rico_charlink = after_run_beliefunit.get_charlink(rico_text)
-    assert after_run_rico_charlink.credor_weight == new_rico_run_credor_weight
-    assert after_run_rico_charlink.debtor_weight == new_rico_run_debtor_weight
+    after_run_beliefbox = after_sue_worldunit.get_beliefbox(run_text)
+    after_run_yao_charlink = after_run_beliefbox.get_charlink(yao_text)
+    assert after_run_yao_charlink.credor_weight == new_yao_run_credor_weight
+    assert after_run_yao_charlink.debtor_weight == new_yao_run_debtor_weight
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_ideaunit():
@@ -344,7 +340,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_ideaunit
     # x_begin = 1000
     # x_close = 1700
     # x_denom = 17
-    x_meld_strategy = "override"
     x_numeric_road = None
     # x_numor = 10
     x_pledge = True
@@ -355,7 +350,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_ideaunit
     # insert_disc_atomunit.set_optional_arg("_begin", x_begin)
     # insert_disc_atomunit.set_optional_arg("_close", x_close)
     # insert_disc_atomunit.set_optional_arg("_denom", x_denom)
-    insert_disc_atomunit.set_optional_arg("_meld_strategy", x_meld_strategy)
     insert_disc_atomunit.set_optional_arg("_numeric_road", x_numeric_road)
     # insert_disc_atomunit.set_optional_arg("_numor", x_numor)
     insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
@@ -381,7 +375,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     before_sue_worldunit.add_idea(ideaunit_shop(ball_text), sports_road)
     assert before_sue_worldunit.get_idea_obj(ball_road)._begin is None
     assert before_sue_worldunit.get_idea_obj(ball_road)._close is None
-    assert before_sue_worldunit.get_idea_obj(ball_road)._meld_strategy == "default"
     assert before_sue_worldunit.get_idea_obj(ball_road).pledge is False
 
     # WHEN
@@ -389,7 +382,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     x_begin = 1000
     x_close = 1700
     # x_denom = 17
-    x_meld_strategy = "override"
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop("world_ideaunit", atom_update())
@@ -399,7 +391,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     insert_disc_atomunit.set_optional_arg("_begin", x_begin)
     insert_disc_atomunit.set_optional_arg("_close", x_close)
     # insert_disc_atomunit.set_optional_arg("_denom", x_denom)
-    insert_disc_atomunit.set_optional_arg("_meld_strategy", x_meld_strategy)
     # insert_disc_atomunit.set_optional_arg("_numor", x_numor)
     insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
 
@@ -411,7 +402,6 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
     # THEN
     assert after_sue_worldunit.get_idea_obj(ball_road)._begin == x_begin
     assert after_sue_worldunit.get_idea_obj(ball_road)._close == x_close
-    assert after_sue_worldunit.get_idea_obj(ball_road)._meld_strategy == x_meld_strategy
     assert after_sue_worldunit.get_idea_obj(ball_road).pledge
 
 
@@ -419,23 +409,23 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_awa
     # GIVEN
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
+    yao_text = "Yao"
+    zia_text = "Zia"
     dizz_text = "Dizzy"
-    before_sue_au.add_charunit(rico_text)
-    before_sue_au.add_charunit(carm_text)
+    before_sue_au.add_charunit(yao_text)
+    before_sue_au.add_charunit(zia_text)
     before_sue_au.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(yao_text))
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(carm_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
-    before_sue_au.set_beliefunit(fly_beliefunit)
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(yao_text))
+    fly_beliefbox.set_charlink(charlink_shop(zia_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
+    before_sue_au.set_beliefbox(fly_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -469,14 +459,14 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_awa
     # GIVEN
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
-    before_sue_au.add_charunit(rico_text)
-    before_sue_au.add_charunit(carm_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    before_sue_au.add_charunit(yao_text)
+    before_sue_au.add_charunit(zia_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(yao_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -511,14 +501,14 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_awa
     # GIVEN
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
-    before_sue_au.add_charunit(rico_text)
-    before_sue_au.add_charunit(carm_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    before_sue_au.add_charunit(yao_text)
+    before_sue_au.add_charunit(zia_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    before_sue_au.set_beliefunit(run_beliefunit)
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(yao_text))
+    before_sue_au.set_beliefbox(run_beliefbox)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -955,93 +945,92 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_rea
     assert after_ball_idea.get_reasonunit(knee_road) is None
 
 
-def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_allyhold():
+def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_beliefhold():
     # GIVEN
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    before_sue_au.add_charunit(rico_text)
+    yao_text = "Yao"
+    before_sue_au.add_charunit(yao_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.add_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_ideaunit._cultureunit._allyholds == set()
+    assert before_ball_ideaunit._doerunit._beliefholds == set()
 
     # WHEN
-    update_disc_atomunit = atomunit_shop("world_idea_allyhold", atom_insert())
+    update_disc_atomunit = atomunit_shop("world_idea_beliefhold", atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("belief_id", rico_text)
+    update_disc_atomunit.set_required_arg("belief_id", yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_changeunit.get_edited_world(before_sue_au)
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._cultureunit._allyholds != {}
-    assert after_ball_ideaunit._cultureunit.get_allyhold(rico_text) != None
+    assert after_ball_ideaunit._doerunit._beliefholds != {}
+    assert after_ball_ideaunit._doerunit.get_beliefhold(yao_text) != None
 
 
-def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_allyhold():
+def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_beliefhold():
     # GIVEN
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    before_sue_au.add_charunit(rico_text)
+    yao_text = "Yao"
+    before_sue_au.add_charunit(yao_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.add_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    before_ball_ideaunit._cultureunit.set_allyhold(rico_text)
-    assert before_ball_ideaunit._cultureunit._allyholds != {}
-    assert before_ball_ideaunit._cultureunit.get_allyhold(rico_text) != None
+    before_ball_ideaunit._doerunit.set_beliefhold(yao_text)
+    assert before_ball_ideaunit._doerunit._beliefholds != {}
+    assert before_ball_ideaunit._doerunit.get_beliefhold(yao_text) != None
 
     # WHEN
-    update_disc_atomunit = atomunit_shop("world_idea_allyhold", atom_delete())
+    update_disc_atomunit = atomunit_shop("world_idea_beliefhold", atom_delete())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("belief_id", rico_text)
+    update_disc_atomunit.set_required_arg("belief_id", yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
-    print(f"{before_sue_au.get_idea_obj(ball_road)._cultureunit=}")
+    print(f"{before_sue_au.get_idea_obj(ball_road)._doerunit=}")
     after_sue_au = sue_changeunit.get_edited_world(before_sue_au)
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._cultureunit._allyholds == set()
+    assert after_ball_ideaunit._doerunit._beliefholds == set()
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     # GIVEN
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    carm_text = "Carmen"
+    yao_text = "Yao"
+    zia_text = "Zia"
     dizz_text = "Dizzy"
-    before_sue_worldunit.add_charunit(rico_text)
-    before_sue_worldunit.add_charunit(carm_text)
+    before_sue_worldunit.add_charunit(yao_text)
+    before_sue_worldunit.add_charunit(zia_text)
     before_sue_worldunit.add_charunit(dizz_text)
     run_text = ",runners"
-    run_beliefunit = beliefunit_shop(run_text)
-    run_beliefunit.set_charlink(charlink_shop(rico_text))
-    run_beliefunit.set_charlink(charlink_shop(carm_text))
+    run_beliefbox = beliefbox_shop(run_text)
+    run_beliefbox.set_charlink(charlink_shop(yao_text))
+    run_beliefbox.set_charlink(charlink_shop(zia_text))
     fly_text = ",flyers"
-    fly_beliefunit = beliefunit_shop(fly_text)
-    fly_beliefunit.set_charlink(charlink_shop(rico_text))
-    fly_beliefunit.set_charlink(charlink_shop(dizz_text))
-    before_sue_worldunit.set_beliefunit(run_beliefunit)
-    before_sue_worldunit.set_beliefunit(fly_beliefunit)
+    fly_beliefbox = beliefbox_shop(fly_text)
+    fly_beliefbox.set_charlink(charlink_shop(yao_text))
+    fly_beliefbox.set_charlink(charlink_shop(dizz_text))
+    before_sue_worldunit.set_beliefbox(run_beliefbox)
+    before_sue_worldunit.set_beliefbox(fly_beliefbox)
     assert before_sue_worldunit._weight != 55
     assert before_sue_worldunit._max_tree_traverse != 66
-    assert before_sue_worldunit._char_credor_pool != 77
-    assert before_sue_worldunit._char_debtor_pool != 88
-    assert before_sue_worldunit._meld_strategy != "override"
-    assert before_sue_worldunit.char_exists(rico_text)
-    assert before_sue_worldunit.char_exists(carm_text)
-    assert before_sue_worldunit.get_beliefunit(run_text) != None
-    assert before_sue_worldunit.get_beliefunit(fly_text) != None
+    assert before_sue_worldunit._credor_respect != 77
+    assert before_sue_worldunit._debtor_respect != 88
+    assert before_sue_worldunit.char_exists(yao_text)
+    assert before_sue_worldunit.char_exists(zia_text)
+    assert before_sue_worldunit.get_beliefbox(run_text) != None
+    assert before_sue_worldunit.get_beliefbox(fly_text) != None
 
     # WHEN
     ex1_changeunit = get_changeunit_example1()
@@ -1050,8 +1039,7 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     # THEN
     assert after_sue_worldunit._weight == 55
     assert after_sue_worldunit._max_tree_traverse == 66
-    assert after_sue_worldunit._char_credor_pool == 77
-    assert after_sue_worldunit._char_debtor_pool == 88
-    assert after_sue_worldunit._meld_strategy == "override"
-    assert after_sue_worldunit.char_exists(rico_text)
-    assert after_sue_worldunit.char_exists(carm_text) is False
+    assert after_sue_worldunit._credor_respect == 77
+    assert after_sue_worldunit._debtor_respect == 88
+    assert after_sue_worldunit.char_exists(yao_text)
+    assert after_sue_worldunit.char_exists(zia_text) is False

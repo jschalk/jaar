@@ -6,7 +6,7 @@ from src.gift.translator import Translator, translator_shop
 
 # from src.gift.gift import giftunit_shop, get_init_gift_id_if_None
 # from src.gift.examples.example_atoms import get_atom_example_ideaunit_sports
-# from src.gift.examples.example_changes import get_changeunit_carm_example
+# from src.gift.examples.example_changes import get_changeunit_sue_example
 from copy import deepcopy as copy_deepcopy
 
 

@@ -99,7 +99,7 @@ def get_example_yao_world() -> WorldUnit:
     yao_speaker.add_charunit(yao_text, debtor_weight=10)
     yao_speaker.add_charunit(zia_text, debtor_weight=30)
     yao_speaker.add_charunit(bob_text, debtor_weight=40)
-    yao_speaker.set_char_pool(80)
+    yao_speaker.set_char_respect(80)
     return yao_speaker
 
 
@@ -107,12 +107,12 @@ def get_example_yao_job1_speaker() -> WorldUnit:
     yao_text = "Yao"
     yao_speaker = get_example_yao_world()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_pool(40)
+    yao_speaker.set_char_respect(40)
     yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
     return yao_speaker
@@ -122,12 +122,12 @@ def get_example_yao_job2_speaker() -> WorldUnit:
     yao_text = "Yao"
     yao_speaker = get_example_yao_world()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_pool(30)
+    yao_speaker.set_char_respect(30)
     yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
 
@@ -142,7 +142,7 @@ def get_example_yao_job2_speaker() -> WorldUnit:
 def get_example_yao_job3_speaker() -> WorldUnit:
     yao_speaker = get_example_yao_world()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_pool(10)
+    yao_speaker.set_char_respect(10)
     yao_speaker.add_idea(ideaunit_shop(sweep_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(dirty_text()), sanitation_road())
     yao_speaker.add_idea(ideaunit_shop(clean_text()), sanitation_road())
@@ -314,7 +314,8 @@ def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
     yao_action.calc_world_metrics()
     assert yao_action._chars.keys() == yao_voice0._chars.keys()
     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
-    assert yao_action.get_beliefunits_dict() == yao_voice0.get_beliefunits_dict()
+    assert yao_action.get_dict().get("_chars") == yao_voice0.get_dict().get("_chars")
+    assert len(yao_action.get_dict().get("_chars")) == 3
     assert len(yao_action._idea_dict) == 10
     print(f"{yao_action._idea_dict.keys()=}")
     print(f"{yao_action.get_factunits_dict().keys()=}")
@@ -382,7 +383,8 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_action.calc_world_metrics()
     assert yao_action._chars.keys() == yao_voice0._chars.keys()
     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
-    assert yao_action.get_beliefunits_dict() == yao_voice0.get_beliefunits_dict()
+    assert yao_action.get_dict().get("_chars") == yao_voice0.get_dict().get("_chars")
+    assert len(yao_action.get_dict().get("_chars")) == 3
     assert len(yao_action._idea_dict) == 4
     print(f"{yao_action._idea_dict.keys()=}")
     print(f"{yao_action.get_factunits_dict().keys()=}")

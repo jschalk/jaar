@@ -12,7 +12,7 @@ from src._world.world import (
     worldunit_shop,
     get_from_json as worldunit_get_from_json,
 )
-from src._world.reason_culture import cultureunit_shop
+from src._world.reason_doer import doerunit_shop
 from src._world.examples.world_env import get_world_examples_dir as env_dir
 
 
@@ -236,9 +236,7 @@ def get_world_1Task_1CE0MinutesReason_1Fact() -> WorldUnit:
     bob_world.add_l1_idea(mail_task)
 
     premise_x = premiseunit_shop(need=ced_road, open=80, nigh=90)
-    x_task_reason = reasonunit_shop(
-        base=premise_x.need, premises={premise_x.need: premise_x}
-    )
+    x_task_reason = reasonunit_shop(premise_x.need, {premise_x.need: premise_x})
     mail_road = bob_world.make_l1_road(mail_label)
     bob_world.edit_idea_attr(road=mail_road, reason=x_task_reason)
 
@@ -246,14 +244,8 @@ def get_world_1Task_1CE0MinutesReason_1Fact() -> WorldUnit:
     # print(
     #     f"1Task_1CE0MinutesReason_1Fact 2. {len(bob_world._idearoot._kids)=} {x_fact.base=}"
     # )
-    bob_world.set_fact(
-        base=x_fact.base,
-        pick=x_fact.pick,
-        open=x_fact.open,
-        nigh=x_fact.nigh,
-    )
+    bob_world.set_fact(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
     # print(f"1Task_1CE0MinutesReason_1Fact 3. {len(bob_world._idearoot._kids)=}")
-
     return bob_world
 
 
@@ -402,9 +394,9 @@ def get_world_laundry_example1() -> WorldUnit:
     amos_world.edit_idea_attr(
         road=laundry_task_road, reason_base=basket_road, reason_premise=b_smel_road
     )
-    cali_cultureunit = cultureunit_shop()
-    cali_cultureunit.set_allyhold(cali_text)
-    amos_world.edit_idea_attr(road=laundry_task_road, cultureunit=cali_cultureunit)
+    cali_doerunit = doerunit_shop()
+    cali_doerunit.set_beliefhold(cali_text)
+    amos_world.edit_idea_attr(road=laundry_task_road, doerunit=cali_doerunit)
     # print(f"{basket_road=}")
     # print(f"{amos_world._real_id=}")
     amos_world.set_fact(base=basket_road, pick=b_full_road)

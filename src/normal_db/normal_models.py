@@ -11,13 +11,12 @@ class WorldTable(Base):
     __tablename__ = "world"
     uid = Column(Integer, primary_key=True)
     _max_tree_traverse = Column(Integer)
-    _meld_strategy = Column(String)
     _monetary_desc = Column(String)
-    _char_credor_pool = Column(Integer)
-    _char_debtor_pool = Column(Integer)
-    _bud = Column(Float)
+    _credor_respect = Column(Integer)
+    _debtor_respect = Column(Integer)
+    _bud_pool = Column(Float)
     _coin = Column(Float)
-    _pixel = Column(Float)
+    _bit = Column(Float)
     _penny = Column(Float)
     _weight = Column(Integer)
 
@@ -32,7 +31,7 @@ class CharUnitTable(Base):
 
 
 class BeliefTable(Base):
-    __tablename__ = "beliefunit"
+    __tablename__ = "beliefbox"
 
     uid = Column(Integer, primary_key=True)
     belief_id = Column(String)
@@ -56,7 +55,6 @@ class IdeaTable(Base):
     _begin = Column(Float)
     _close = Column(Float)
     _denom = Column(Integer)
-    _meld_strategy = Column(String)
     _numeric_road = Column(String)
     _numor = Column(Integer)
     _problem_bool = Column(Integer)
@@ -94,8 +92,8 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class allyholdTable(Base):
-    __tablename__ = "allyhold"
+class beliefholdTable(Base):
+    __tablename__ = "beliefhold"
     uid = Column(Integer, primary_key=True)
     belief_id = Column(String)
     road = Column(String)

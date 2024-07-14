@@ -1,5 +1,5 @@
 from src._road.jaar_refer import sue_str, bob_str, yao_str
-from src._world.beliefunit import beliefunit_shop
+from src._world.beliefbox import beliefbox_shop
 from src._world.char import charlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
@@ -40,7 +40,7 @@ def test_create_bridge_Arg_jaar_format_0001_char_v0_0_0():
     sue_worldunit.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     sue_worldunit.add_charunit(bob_text, bob_credor_weight, bob_debtor_weight)
     sue_worldunit.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
-    sue_worldunit.set_char_pool(music_pool)
+    sue_worldunit.set_char_respect(music_pool)
 
     # WHEN
     x_bridge = jaar_format_0001_char_v0_0_0()
@@ -94,18 +94,18 @@ def test_create_bridge_Arg_jaar_format_0002_belieflink_v0_0_0():
     ohio_text = ",Ohio"
     yao_ohio_credor_w = 73
     yao_ohio_debtor_w = 67
-    iowa_beliefunit = beliefunit_shop(iowa_text)
-    ohio_beliefunit = beliefunit_shop(ohio_text)
+    iowa_beliefbox = beliefbox_shop(iowa_text)
+    ohio_beliefbox = beliefbox_shop(ohio_text)
     sue_iowa_charlink = charlink_shop(sue_text, sue_iowa_credor_w, sue_iowa_debtor_w)
     bob_iowa_charlink = charlink_shop(bob_text, bob_iowa_credor_w, bob_iowa_debtor_w)
     yao_iowa_charlink = charlink_shop(yao_text, yao_iowa_credor_w, yao_iowa_debtor_w)
     yao_ohio_charlink = charlink_shop(yao_text, yao_ohio_credor_w, yao_ohio_debtor_w)
-    iowa_beliefunit.set_charlink(sue_iowa_charlink)
-    iowa_beliefunit.set_charlink(bob_iowa_charlink)
-    iowa_beliefunit.set_charlink(yao_iowa_charlink)
-    ohio_beliefunit.set_charlink(yao_ohio_charlink)
-    sue_worldunit.set_beliefunit(iowa_beliefunit)
-    sue_worldunit.set_beliefunit(ohio_beliefunit)
+    iowa_beliefbox.set_charlink(sue_iowa_charlink)
+    iowa_beliefbox.set_charlink(bob_iowa_charlink)
+    iowa_beliefbox.set_charlink(yao_iowa_charlink)
+    ohio_beliefbox.set_charlink(yao_ohio_charlink)
+    sue_worldunit.set_beliefbox(iowa_beliefbox)
+    sue_worldunit.set_beliefbox(ohio_beliefbox)
 
     # WHEN
     x_bridge = jaar_format_0002_belieflink_v0_0_0()

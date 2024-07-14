@@ -134,9 +134,9 @@ class ChangeUnit:
         self, before_world: WorldUnit, after_world: WorldUnit
     ):
         before_world.calc_world_metrics()
-        before_world._migrate_beliefunits_to_belieflinks()
+        before_world._migrate_beliefboxs_to_belieflinks()
         after_world.calc_world_metrics()
-        after_world._migrate_beliefunits_to_belieflinks()
+        after_world._migrate_beliefboxs_to_belieflinks()
         self.add_atomunits_worldunit_simple_attrs(before_world, after_world)
         self.add_atomunits_chars(before_world, after_world)
         self.add_atomunits_ideas(before_world, after_world)
@@ -151,26 +151,20 @@ class ChangeUnit:
             x_atomunit.set_optional_arg(
                 "_max_tree_traverse", after_world._max_tree_traverse
             )
-        if before_world._meld_strategy != after_world._meld_strategy:
-            x_atomunit.set_optional_arg("_meld_strategy", after_world._meld_strategy)
         if before_world._monetary_desc != after_world._monetary_desc:
             x_atomunit.set_optional_arg("_monetary_desc", after_world._monetary_desc)
-        if before_world._char_credor_pool != after_world._char_credor_pool:
-            x_atomunit.set_optional_arg(
-                "_char_credor_pool", after_world._char_credor_pool
-            )
-        if before_world._char_debtor_pool != after_world._char_debtor_pool:
-            x_atomunit.set_optional_arg(
-                "_char_debtor_pool", after_world._char_debtor_pool
-            )
+        if before_world._credor_respect != after_world._credor_respect:
+            x_atomunit.set_optional_arg("_credor_respect", after_world._credor_respect)
+        if before_world._debtor_respect != after_world._debtor_respect:
+            x_atomunit.set_optional_arg("_debtor_respect", after_world._debtor_respect)
         if before_world._weight != after_world._weight:
             x_atomunit.set_optional_arg("_weight", after_world._weight)
-        if before_world._bud != after_world._bud:
-            x_atomunit.set_optional_arg("_bud", after_world._bud)
+        if before_world._bud_pool != after_world._bud_pool:
+            x_atomunit.set_optional_arg("_bud_pool", after_world._bud_pool)
         if before_world._coin != after_world._coin:
             x_atomunit.set_optional_arg("_coin", after_world._coin)
-        if before_world._pixel != after_world._pixel:
-            x_atomunit.set_optional_arg("_pixel", after_world._pixel)
+        if before_world._bit != after_world._bit:
+            x_atomunit.set_optional_arg("_bit", after_world._bit)
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_chars(self, before_world: WorldUnit, after_world: WorldUnit):
@@ -237,7 +231,7 @@ class ChangeUnit:
                         "debtor_weight", after_charunit.debtor_weight
                     )
                 self.set_atomunit(x_atomunit)
-            self.add_atomunit_beliefunit_update_belieflinks(
+            self.add_atomunit_beliefbox_update_belieflinks(
                 after_charunit=after_charunit, before_charunit=before_charunit
             )
 
@@ -256,7 +250,7 @@ class ChangeUnit:
             }
             self.add_atomunit_belieflinks_delete(delete_char_id, non_mirror_belief_ids)
 
-    def add_atomunit_beliefunit_update_belieflinks(
+    def add_atomunit_beliefbox_update_belieflinks(
         self, after_charunit: CharUnit, before_charunit: CharUnit
     ):
         # before_non_mirror_belief_ids
@@ -368,9 +362,6 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_begin", insert_ideaunit._begin)
             x_atomunit.set_optional_arg("_close", insert_ideaunit._close)
             x_atomunit.set_optional_arg("_denom", insert_ideaunit._denom)
-            x_atomunit.set_optional_arg(
-                "_meld_strategy", insert_ideaunit._meld_strategy
-            )
             x_atomunit.set_optional_arg("_numeric_road", insert_ideaunit._numeric_road)
             x_atomunit.set_optional_arg("_numor", insert_ideaunit._numor)
             x_atomunit.set_optional_arg(
@@ -393,9 +384,9 @@ class ChangeUnit:
                 after_ideaunit=insert_ideaunit,
                 insert_reasonunit_bases=set(insert_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_allyhold_insert(
+            self.add_atomunit_idea_beliefhold_insert(
                 idea_road=insert_idea_road,
-                insert_allyhold_belief_ids=insert_ideaunit._cultureunit._allyholds,
+                insert_beliefhold_belief_ids=insert_ideaunit._doerunit._beliefholds,
             )
 
     def add_atomunit_idea_updates(
@@ -418,10 +409,6 @@ class ChangeUnit:
                     x_atomunit.set_optional_arg("_close", after_ideaunit._close)
                 if before_ideaunit._denom != after_ideaunit._denom:
                     x_atomunit.set_optional_arg("_denom", after_ideaunit._denom)
-                if before_ideaunit._meld_strategy != after_ideaunit._meld_strategy:
-                    x_atomunit.set_optional_arg(
-                        "_meld_strategy", after_ideaunit._meld_strategy
-                    )
                 if before_ideaunit._numeric_road != after_ideaunit._numeric_road:
                     x_atomunit.set_optional_arg(
                         "_numeric_road", after_ideaunit._numeric_road
@@ -516,19 +503,19 @@ class ChangeUnit:
             # update reasonunits_permises update_premise
             # update reasonunits_permises delete_premise
 
-            # insert / update / delete allyholds
-            before_allyholds_belief_ids = set(before_ideaunit._cultureunit._allyholds)
-            after_allyholds_belief_ids = set(after_ideaunit._cultureunit._allyholds)
-            self.add_atomunit_idea_allyhold_insert(
+            # insert / update / delete beliefholds
+            before_beliefholds_belief_ids = set(before_ideaunit._doerunit._beliefholds)
+            after_beliefholds_belief_ids = set(after_ideaunit._doerunit._beliefholds)
+            self.add_atomunit_idea_beliefhold_insert(
                 idea_road=idea_road,
-                insert_allyhold_belief_ids=after_allyholds_belief_ids.difference(
-                    before_allyholds_belief_ids
+                insert_beliefhold_belief_ids=after_beliefholds_belief_ids.difference(
+                    before_beliefholds_belief_ids
                 ),
             )
-            self.add_atomunit_idea_allyhold_deletes(
+            self.add_atomunit_idea_beliefhold_deletes(
                 idea_road=idea_road,
-                delete_allyhold_belief_ids=before_allyholds_belief_ids.difference(
-                    after_allyholds_belief_ids
+                delete_beliefhold_belief_ids=before_beliefholds_belief_ids.difference(
+                    after_beliefholds_belief_ids
                 ),
             )
 
@@ -558,9 +545,11 @@ class ChangeUnit:
                 before_ideaunit=delete_ideaunit,
                 delete_reasonunit_bases=set(delete_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_allyhold_deletes(
+            self.add_atomunit_idea_beliefhold_deletes(
                 idea_road=delete_idea_road,
-                delete_allyhold_belief_ids=set(delete_ideaunit._cultureunit._allyholds),
+                delete_beliefhold_belief_ids=set(
+                    delete_ideaunit._doerunit._beliefholds
+                ),
             )
 
     def add_atomunit_idea_reasonunit_inserts(
@@ -710,22 +699,22 @@ class ChangeUnit:
             x_atomunit.set_required_arg("need", delete_premise_need)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_allyhold_insert(
-        self, idea_road: RoadUnit, insert_allyhold_belief_ids: set
+    def add_atomunit_idea_beliefhold_insert(
+        self, idea_road: RoadUnit, insert_beliefhold_belief_ids: set
     ):
-        for insert_allyhold_belief_id in insert_allyhold_belief_ids:
-            x_atomunit = atomunit_shop("world_idea_allyhold", atom_insert())
+        for insert_beliefhold_belief_id in insert_beliefhold_belief_ids:
+            x_atomunit = atomunit_shop("world_idea_beliefhold", atom_insert())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("belief_id", insert_allyhold_belief_id)
+            x_atomunit.set_required_arg("belief_id", insert_beliefhold_belief_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_allyhold_deletes(
-        self, idea_road: RoadUnit, delete_allyhold_belief_ids: set
+    def add_atomunit_idea_beliefhold_deletes(
+        self, idea_road: RoadUnit, delete_beliefhold_belief_ids: set
     ):
-        for delete_allyhold_belief_id in delete_allyhold_belief_ids:
-            x_atomunit = atomunit_shop("world_idea_allyhold", atom_delete())
+        for delete_beliefhold_belief_id in delete_beliefhold_belief_ids:
+            x_atomunit = atomunit_shop("world_idea_beliefhold", atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("belief_id", delete_allyhold_belief_id)
+            x_atomunit.set_required_arg("belief_id", delete_beliefhold_belief_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_inserts(

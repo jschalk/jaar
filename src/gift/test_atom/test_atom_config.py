@@ -22,7 +22,7 @@ from src.gift.atom_config import (
     world_idea_awardlink_text,
     world_idea_reasonunit_text,
     world_idea_reason_premiseunit_text,
-    world_idea_allyhold_text,
+    world_idea_beliefhold_text,
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )
@@ -56,8 +56,8 @@ def test_world_idea_reason_premiseunit_text_ReturnsObj():
     assert world_idea_reason_premiseunit_text() == "world_idea_reason_premiseunit"
 
 
-def test_world_idea_allyhold_text_ReturnsObj():
-    assert world_idea_allyhold_text() == "world_idea_allyhold"
+def test_world_idea_beliefhold_text_ReturnsObj():
+    assert world_idea_beliefhold_text() == "world_idea_beliefhold"
 
 
 def test_world_idea_healerhold_text_ReturnsObj():
@@ -77,7 +77,7 @@ def test_atom_config_HasCorrect_category():
         world_idea_awardlink_text(),
         world_idea_reasonunit_text(),
         world_idea_reason_premiseunit_text(),
-        world_idea_allyhold_text(),
+        world_idea_beliefhold_text(),
         world_idea_healerhold_text(),
         world_idea_factunit_text(),
     }
@@ -150,7 +150,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     # set_mog(atom_insert(), "world_char_belieflink", 1)
     # set_mog(atom_insert(), "world_ideaunit", 2)
     # set_mog(atom_insert(), "world_idea_awardlink", 3)
-    # set_mog(atom_insert(), "world_idea_allyhold", 4)
+    # set_mog(atom_insert(), "world_idea_beliefhold", 4)
     # set_mog(atom_insert(), "world_idea_healerhold", 5)
     # set_mog(atom_insert(), "world_idea_factunit", 6)
     # set_mog(atom_insert(), "world_idea_reasonunit", 7)
@@ -165,7 +165,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     # set_mog(atom_delete(), "world_idea_reason_premiseunit", 16)
     # set_mog(atom_delete(), "world_idea_reasonunit", 17)
     # set_mog(atom_delete(), "world_idea_factunit", 18)
-    # set_mog(atom_delete(), "world_idea_allyhold", 19)
+    # set_mog(atom_delete(), "world_idea_beliefhold", 19)
     # set_mog(atom_delete(), "world_idea_healerhold", 20)
     # set_mog(atom_delete(), "world_idea_awardlink", 21)
     # set_mog(atom_delete(), "world_ideaunit", 22)
@@ -177,7 +177,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     assert 1 == q_order(atom_insert(), "world_char_belieflink")
     assert 2 == q_order(atom_insert(), "world_ideaunit")
     assert 3 == q_order(atom_insert(), "world_idea_awardlink")
-    assert 4 == q_order(atom_insert(), "world_idea_allyhold")
+    assert 4 == q_order(atom_insert(), "world_idea_beliefhold")
     assert 5 == q_order(atom_insert(), "world_idea_healerhold")
     assert 6 == q_order(atom_insert(), "world_idea_factunit")
     assert 7 == q_order(atom_insert(), "world_idea_reasonunit")
@@ -192,7 +192,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderBelief():
     assert 16 == q_order(atom_delete(), "world_idea_reason_premiseunit")
     assert 17 == q_order(atom_delete(), "world_idea_reasonunit")
     assert 18 == q_order(atom_delete(), "world_idea_factunit")
-    assert 19 == q_order(atom_delete(), "world_idea_allyhold")
+    assert 19 == q_order(atom_delete(), "world_idea_beliefhold")
     assert 20 == q_order(atom_delete(), "world_idea_healerhold")
     assert 21 == q_order(atom_delete(), "world_idea_awardlink")
     assert 22 == q_order(atom_delete(), "world_ideaunit")
@@ -237,8 +237,8 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 110
-    assert atom_columns.get("worldunit_UPDATE__char_credor_pool") == "INTEGER"
+    assert len(atom_columns) == 107
+    assert atom_columns.get("worldunit_UPDATE__credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
 
@@ -256,7 +256,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     cat_awardlink = nx.get(world_idea_awardlink_text())
     cat_reason = nx.get(world_idea_reasonunit_text())
     cat_premise = nx.get(world_idea_reason_premiseunit_text())
-    cat_allyhold = nx.get(world_idea_allyhold_text())
+    cat_beliefhold = nx.get(world_idea_beliefhold_text())
     cat_healerhold = nx.get(world_idea_healerhold_text())
     cat_fact = nx.get(world_idea_factunit_text())
 
@@ -267,7 +267,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert cat_awardlink != None
     assert cat_reason != None
     assert cat_premise != None
-    assert cat_allyhold != None
+    assert cat_beliefhold != None
     assert cat_healerhold != None
     assert cat_fact != None
 
@@ -278,7 +278,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     normal_specs_awardlink = cat_awardlink.get(normal_specs_text())
     normal_specs_reason = cat_reason.get(normal_specs_text())
     normal_specs_premise = cat_premise.get(normal_specs_text())
-    normal_specs_allyhold = cat_allyhold.get(normal_specs_text())
+    normal_specs_beliefhold = cat_beliefhold.get(normal_specs_text())
     normal_specs_healerhold = cat_healerhold.get(normal_specs_text())
     normal_specs_fact = cat_fact.get(normal_specs_text())
 
@@ -292,7 +292,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert normal_specs_awardlink != None
     assert normal_specs_reason != None
     assert normal_specs_premise != None
-    assert normal_specs_allyhold != None
+    assert normal_specs_beliefhold != None
     assert normal_specs_healerhold != None
     assert normal_specs_fact != None
 
@@ -303,7 +303,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     table_name_awardlink = normal_specs_awardlink.get(normal_table_name_text())
     table_name_reason = normal_specs_reason.get(normal_table_name_text())
     table_name_premise = normal_specs_premise.get(normal_table_name_text())
-    table_name_allyhold = normal_specs_allyhold.get(normal_table_name_text())
+    table_name_beliefhold = normal_specs_beliefhold.get(normal_table_name_text())
     table_name_healerhold = normal_specs_healerhold.get(normal_table_name_text())
     table_name_fact = normal_specs_fact.get(normal_table_name_text())
 
@@ -314,7 +314,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert table_name_awardlink == "awardlink"
     assert table_name_reason == "reason"
     assert table_name_premise == "premise"
-    assert table_name_allyhold == "allyhold"
+    assert table_name_beliefhold == "beliefhold"
     assert table_name_healerhold == "healerhold"
     assert table_name_fact == "fact"
 
@@ -322,16 +322,15 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert cat_worldunit.get(columns_text) != None
 
     worldunit_columns = cat_worldunit.get(columns_text)
-    assert len(worldunit_columns) == 11
+    assert len(worldunit_columns) == 10
     assert worldunit_columns.get("uid") != None
     assert worldunit_columns.get("_max_tree_traverse") != None
-    assert worldunit_columns.get("_meld_strategy") != None
     assert worldunit_columns.get("_monetary_desc") != None
-    assert worldunit_columns.get("_char_credor_pool") != None
-    assert worldunit_columns.get("_char_debtor_pool") != None
-    assert worldunit_columns.get("_bud") != None
+    assert worldunit_columns.get("_credor_respect") != None
+    assert worldunit_columns.get("_debtor_respect") != None
+    assert worldunit_columns.get("_bud_pool") != None
     assert worldunit_columns.get("_coin") != None
-    assert worldunit_columns.get("_pixel") != None
+    assert worldunit_columns.get("_bit") != None
     assert worldunit_columns.get("_penny") != None
     assert worldunit_columns.get("_weight") != None
 

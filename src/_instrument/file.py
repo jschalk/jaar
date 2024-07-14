@@ -227,7 +227,7 @@ def is_path_existent_or_creatable(path: str) -> bool:
 def is_path_probably_creatable(path: str = None) -> bool:
     """
     `True` if the active usser has sufficient permissions to create **siblings**
-    (i.e., arbitrary files in the parent directory) of the passed path;
+    (i.e., arbiitrary files in the parent directory) of the passed path;
     `False` othherwise.
     """
     # Parent directory of the passed path. If empty, we substitute the active

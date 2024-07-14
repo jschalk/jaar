@@ -68,12 +68,12 @@ def get_example_zia_speaker() -> WorldUnit:
     yao_text = "Yao"
     zia_speaker.add_charunit(yao_text, debtor_weight=12)
     cook_ideaunit = zia_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     zia_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
     zia_speaker.set_fact(eat_road(), full_road())
-    zia_speaker.set_char_pool(100)
+    zia_speaker.set_char_respect(100)
     return zia_speaker
 
 
@@ -86,12 +86,12 @@ def get_example_bob_speaker() -> WorldUnit:
     yao_text = "Yao"
     bob_speaker.add_charunit(yao_text, debtor_weight=12)
     cook_ideaunit = bob_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     bob_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
     bob_speaker.set_fact(eat_road(), hungry_road())
-    bob_speaker.set_char_pool(100)
+    bob_speaker.set_char_respect(100)
     return bob_speaker
 
 
@@ -103,12 +103,12 @@ def get_example_yao_speaker() -> WorldUnit:
     yao_speaker.add_charunit(yao_text, debtor_weight=12)
     yao_speaker.add_charunit(zia_text, debtor_weight=36)
     yao_speaker.add_charunit(bob_text, debtor_weight=48)
-    yao_speaker.set_char_pool(100)
+    yao_speaker.set_char_respect(100)
     yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )

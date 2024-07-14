@@ -16,8 +16,8 @@ def create_example_real1() -> RealUnit:
     yao_hubunit = hubunit_shop(None, music_text, yao_text, None)
     yao_voice_world = yao_hubunit.get_voice_world()
 
-    yao_voice_world.set_char_credor_pool(101)
-    yao_voice_world.set_char_debtor_pool(1000)
+    yao_voice_world.set_credor_respect(101)
+    yao_voice_world.set_debtor_resepect(1000)
 
     yao_voice_world.add_charunit(yao_text, 34, 600)
     yao_voice_world.calc_world_metrics()
@@ -42,7 +42,7 @@ def create_example_real1() -> RealUnit:
         owner_id=yao_hubunit.owner_id,
         econ_road=None,
         road_delimiter=yao_hubunit.road_delimiter,
-        pixel=yao_hubunit.pixel,
+        bit=yao_hubunit.bit,
     )
     x_hubunit.save_voice_world(yao_voice_world)
     yao_hubunit.create_voice_treasury_db_files()
@@ -70,12 +70,12 @@ def create_example_real2() -> RealUnit:
     wei_voice_world = wei_hubunit.get_voice_world()
     zia_voice_world = zia_hubunit.get_voice_world()
 
-    yao_voice_world.set_char_credor_pool(101)
-    wei_voice_world.set_char_credor_pool(75)
-    zia_voice_world.set_char_credor_pool(52)
-    yao_voice_world.set_char_debtor_pool(1000)
-    wei_voice_world.set_char_debtor_pool(750)
-    zia_voice_world.set_char_debtor_pool(500)
+    yao_voice_world.set_credor_respect(101)
+    wei_voice_world.set_credor_respect(75)
+    zia_voice_world.set_credor_respect(52)
+    yao_voice_world.set_debtor_resepect(1000)
+    wei_voice_world.set_debtor_resepect(750)
+    zia_voice_world.set_debtor_resepect(500)
 
     yao_voice_world.add_charunit(yao_text, 34, 600)
     yao_voice_world.add_charunit(zia_text, 57, 300)
@@ -208,12 +208,12 @@ def create_example_real4() -> RealUnit:
     zia_voice_world.add_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
 
     # display_ideatree(yao_voice_world, mode="Econ").show()
-    yao_voice_world.set_char_credor_pool(101)
-    wei_voice_world.set_char_credor_pool(75)
-    zia_voice_world.set_char_credor_pool(52)
-    yao_voice_world.set_char_debtor_pool(1000)
-    wei_voice_world.set_char_debtor_pool(750)
-    zia_voice_world.set_char_debtor_pool(500)
+    yao_voice_world.set_credor_respect(101)
+    wei_voice_world.set_credor_respect(75)
+    zia_voice_world.set_credor_respect(52)
+    yao_voice_world.set_debtor_resepect(1000)
+    wei_voice_world.set_debtor_resepect(750)
+    zia_voice_world.set_debtor_resepect(500)
 
     yao_voice_world.add_charunit(yao_text, 34, 600)
     yao_voice_world.add_charunit(zia_text, 57, 300)

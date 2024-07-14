@@ -15,14 +15,13 @@ from src._road.road import (
     RealID,
     CharID,
 )
-from src._world.meld import get_meld_default
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
-from src._world.reason_culture import (
-    CultureUnit,
-    CultureHeir,
-    cultureunit_shop,
-    cultureheir_shop,
-    cultureunit_get_from_dict,
+from src._world.reason_doer import (
+    DoerUnit,
+    DoerHeir,
+    doerunit_shop,
+    doerheir_shop,
+    doerunit_get_from_dict,
 )
 from src._world.reason_idea import (
     FactCore,
@@ -42,7 +41,7 @@ from src._world.reason_idea import (
     reasons_get_from_dict,
     factunits_get_from_dict,
 )
-from src._world.beliefunit import (
+from src._world.beliefbox import (
     AwardHeir,
     AwardLink,
     awardlinks_get_from_dict,
@@ -50,11 +49,10 @@ from src._world.beliefunit import (
     AwardLine,
     awardline_shop,
     awardheir_shop,
-    BeliefUnit,
+    BeliefBox,
 )
 from src._world.origin import OriginUnit, originunit_get_from_dict
 from src._world.origin import originunit_shop
-from src._world.meld import get_meld_weight, validate_meld_strategy
 from dataclasses import dataclass
 from copy import deepcopy
 
@@ -80,7 +78,7 @@ class IdeaAttrFilter:
     reason_del_premise_base: RoadUnit = None
     reason_del_premise_need: RoadUnit = None
     reason_base_idea_active_requisite: str = None
-    cultureunit: CultureUnit = None
+    doerunit: DoerUnit = None
     healerhold: HealerHold = None
     begin: float = None
     close: float = None
@@ -98,7 +96,6 @@ class IdeaAttrFilter:
     awardlink: AwardLink = None
     awardlink_del: BeliefID = None
     is_expanded: bool = None
-    meld_strategy: str = None
     problem_bool: bool = None
 
     def get_premise_need(self):
@@ -164,7 +161,7 @@ def ideaattrfilter_shop(
     reason_del_premise_base: RoadUnit = None,
     reason_del_premise_need: RoadUnit = None,
     reason_base_idea_active_requisite: str = None,
-    cultureunit: CultureUnit = None,
+    doerunit: DoerUnit = None,
     healerhold: HealerHold = None,
     begin: float = None,
     close: float = None,
@@ -182,7 +179,6 @@ def ideaattrfilter_shop(
     awardlink: AwardLink = None,
     awardlink_del: BeliefID = None,
     is_expanded: bool = None,
-    meld_strategy: str = None,
     problem_bool: bool = None,
 ) -> IdeaAttrFilter:
     x_ideaattrfilter = IdeaAttrFilter(
@@ -197,7 +193,7 @@ def ideaattrfilter_shop(
         reason_del_premise_base=reason_del_premise_base,
         reason_del_premise_need=reason_del_premise_need,
         reason_base_idea_active_requisite=reason_base_idea_active_requisite,
-        cultureunit=cultureunit,
+        doerunit=doerunit,
         healerhold=healerhold,
         begin=begin,
         close=close,
@@ -215,7 +211,6 @@ def ideaattrfilter_shop(
         awardlink=awardlink,
         awardlink_del=awardlink_del,
         is_expanded=is_expanded,
-        meld_strategy=meld_strategy,
         problem_bool=problem_bool,
     )
     if x_ideaattrfilter.has_ratio_attrs():
@@ -237,8 +232,8 @@ class IdeaUnit:
     _awardlines: dict[BeliefID, AwardLine] = None  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None  # Calculated field
-    _cultureunit: CultureUnit = None
-    _cultureheir: CultureHeir = None  # Calculated field
+    _doerunit: DoerUnit = None
+    _doerheir: DoerHeir = None  # Calculated field
     _factunits: dict[RoadUnit, FactUnit] = None
     _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
     _healerhold: HealerHold = None
@@ -252,11 +247,10 @@ class IdeaUnit:
     _numeric_road: RoadUnit = None
     pledge: bool = None
     _originunit: OriginUnit = None
-    _meld_strategy: str = None
     _problem_bool: bool = None
     # Calculated fields
     _level: int = None
-    _bud_share: float = None
+    _bud_ratio: float = None
     _coin: CoinNum = None
     _bud_onset: BudNum = None
     _bud_cease: BudNum = None
@@ -360,11 +354,11 @@ class IdeaUnit:
         self,
         x_bud_onset: BudNum,
         x_bud_cease: BudNum,
-        total_bud: BudNum,
+        total_bud_pool: BudNum,
     ):
         self._bud_onset = x_bud_onset
         self._bud_cease = x_bud_cease
-        self._bud_share = (self._bud_cease - self._bud_onset) / total_bud
+        self._bud_ratio = (self._bud_cease - self._bud_onset) / total_bud_pool
         self.set_awardheirs_world_cred_debt()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
@@ -494,7 +488,7 @@ class IdeaUnit:
         awardheirs_debtor_weight_sum = self.get_awardheirs_debtor_weight_sum()
         for awardheir_x in self._awardheirs.values():
             awardheir_x.set_world_cred_debt(
-                idea_bud_share=self._bud_share,
+                idea_bud_share=self._bud_ratio,
                 awardheirs_credor_weight_sum=awardheirs_credor_weight_sum,
                 awardheirs_debtor_weight_sum=awardheirs_debtor_weight_sum,
             )
@@ -573,108 +567,12 @@ class IdeaUnit:
             new_factunits[new_base_road] = factunit_obj
         self._factunits = new_factunits
 
-    def _meld_reasonunits(self, exterior_idea):
-        for lx in exterior_idea._reasonunits.values():
-            if self._reasonunits.get(lx.base) is None:
-                self._reasonunits[lx.base] = lx
-            else:
-                self._reasonunits.get(lx.base).meld(lx)
-
-    def _meld_awardlinks(self, exterior_idea):
-        for bl in exterior_idea._awardlinks.values():
-            if self._awardlinks.get(bl.belief_id) != None:
-                self._awardlinks.get(bl.belief_id).meld(
-                    exterior_awardlink=bl,
-                    exterior_meld_strategy=exterior_idea._meld_strategy,
-                    src_meld_strategy=self._meld_strategy,
-                )
-            else:
-                self._awardlinks[bl.belief_id] = bl
-
-    def _meld_factunits(self, exterior_idea):
-        for hc in exterior_idea._factunits.values():
-            if self._factunits.get(hc.base) is None:
-                self._factunits[hc.base] = hc
-            else:
-                self._factunits.get(hc.base).meld(hc)
-
-    def meld(
-        self,
-        exterior_idea,
-        _idearoot: bool = None,
-        char_id: CharID = None,
-        char_weight: float = None,
-    ):
-        if _idearoot and self._label != exterior_idea._label:
-            raise InvalidIdeaException(
-                f"Meld fail idearoot _label '{self._label}' not the equal as '{exterior_idea._label}'"
-            )
-        if _idearoot:
-            self._weight = 1
-        else:
-            self._weight = get_meld_weight(
-                src_weight=self._weight,
-                src_meld_strategy=self._meld_strategy,
-                exterior_weight=exterior_idea._weight,
-                exterior_meld_strategy=exterior_idea._meld_strategy,
-            )
-        self._meld_reasonunits(exterior_idea=exterior_idea)
-        self._meld_awardlinks(exterior_idea=exterior_idea)
-        self._meld_factunits(exterior_idea=exterior_idea)
-        if exterior_idea._meld_strategy != "override":
-            self._meld_attributes_that_must_be_equal(exterior_idea=exterior_idea)
-        else:
-            self._meld_attributes_overide(exterior_idea=exterior_idea)
-        self._meld_originholds(char_id, char_weight)
-
-    def _meld_originholds(self, char_id: CharID, char_weight: float):
-        if char_id != None:
-            self._originunit.set_originhold(char_id=char_id, weight=char_weight)
-
     def set_originunit_empty_if_none(self):
         if self._originunit is None:
             self._originunit = originunit_shop()
 
     def get_originunit_dict(self) -> dict[str, str]:
         return self._originunit.get_dict()
-
-    def _meld_attributes_overide(self, exterior_idea):
-        self._uid = exterior_idea._uid
-        self._begin = exterior_idea._begin
-        self._close = exterior_idea._close
-        self._addin = exterior_idea._addin
-        self._denom = exterior_idea._denom
-        self._numor = exterior_idea._numor
-        self._reest = exterior_idea._reest
-        self._range_source_road = exterior_idea._range_source_road
-        self._numeric_road = exterior_idea._numeric_road
-        self.pledge = exterior_idea.pledge
-        self._is_expanded = exterior_idea._is_expanded
-
-    def _meld_attributes_that_must_be_equal(self, exterior_idea):
-        to_be_equal_attributes = [
-            ("_uid", self._uid, exterior_idea._uid),
-            ("_begin", self._begin, exterior_idea._begin),
-            ("_close", self._close, exterior_idea._close),
-            ("_addin", self._addin, exterior_idea._addin),
-            ("_denom", self._denom, exterior_idea._denom),
-            ("_numor", self._numor, exterior_idea._numor),
-            ("_reest", self._reest, exterior_idea._reest),
-            (
-                "_range_source_road",
-                self._range_source_road,
-                exterior_idea._range_source_road,
-            ),
-            ("_numeric_road", self._numeric_road, exterior_idea._numeric_road),
-            ("pledge", self.pledge, exterior_idea.pledge),
-            ("_is_expanded", self._is_expanded, exterior_idea._is_expanded),
-        ]
-        while to_be_equal_attributes != []:
-            attrs = to_be_equal_attributes.pop()
-            if attrs[1] != attrs[2]:
-                raise InvalidIdeaException(
-                    f"Meld fail idea={self.get_road()} {attrs[0]}:{attrs[1]} with {exterior_idea.get_road()} {attrs[0]}:{attrs[2]}"
-                )
 
     def _set_idea_attr(self, idea_attr: IdeaAttrFilter):
         if idea_attr.weight != None:
@@ -699,8 +597,8 @@ class IdeaUnit:
                 base=idea_attr.reason_base,
                 base_idea_active_requisite=idea_attr.reason_base_idea_active_requisite,
             )
-        if idea_attr.cultureunit != None:
-            self._cultureunit = idea_attr.cultureunit
+        if idea_attr.doerunit != None:
+            self._doerunit = idea_attr.doerunit
         if idea_attr.healerhold != None:
             self._healerhold = idea_attr.healerhold
         if idea_attr.begin != None:
@@ -733,8 +631,6 @@ class IdeaUnit:
             self._is_expanded = idea_attr.is_expanded
         if idea_attr.pledge != None:
             self.pledge = idea_attr.pledge
-        if idea_attr.meld_strategy != None:
-            self._meld_strategy = validate_meld_strategy(idea_attr.meld_strategy)
         if idea_attr.factunit != None:
             self.set_factunit(idea_attr.factunit)
         if idea_attr.problem_bool != None:
@@ -858,11 +754,11 @@ class IdeaUnit:
     def set_active(
         self,
         tree_traverse_count: int,
-        world_beliefunits: dict[BeliefID, BeliefUnit] = None,
+        world_beliefboxs: dict[BeliefID, BeliefBox] = None,
         world_owner_id: CharID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active(world_beliefunits, world_owner_id)
+        self._active = self._create_active(world_beliefboxs, world_owner_id)
         self._set_idea_task()
         self.record_active_hx(
             tree_traverse_count=tree_traverse_count,
@@ -882,18 +778,18 @@ class IdeaUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active(
-        self, world_beliefunits: dict[BeliefID, BeliefUnit], world_owner_id: CharID
+        self, world_beliefboxs: dict[BeliefID, BeliefBox], world_owner_id: CharID
     ) -> bool:
         self.set_reasonheirs_status()
         x_bool = self._are_all_reasonheir_active_true()
         if (
             x_bool
-            and world_beliefunits != {}
+            and world_beliefboxs != {}
             and world_owner_id != None
-            and self._cultureheir._allyholds != {}
+            and self._doerheir._beliefholds != {}
         ):
-            self._cultureheir.set_owner_id_culture(world_beliefunits, world_owner_id)
-            if self._cultureheir._owner_id_culture is False:
+            self._doerheir.set_owner_id_doer(world_beliefboxs, world_owner_id)
+            if self._doerheir._owner_id_doer is False:
                 x_bool = False
         return x_bool
 
@@ -982,8 +878,8 @@ class IdeaUnit:
             x_dict["_kids"] = self.get_kids_dict()
         if self._reasonunits not in [{}, None]:
             x_dict["_reasonunits"] = self.get_reasonunits_dict()
-        if self._cultureunit not in [None, cultureunit_shop()]:
-            x_dict["_cultureunit"] = self.get_cultureunit_dict()
+        if self._doerunit not in [None, doerunit_shop()]:
+            x_dict["_doerunit"] = self.get_doerunit_dict()
         if self._healerhold not in [None, healerhold_shop()]:
             x_dict["_healerhold"] = self._healerhold.get_dict()
         if self._awardlinks not in [{}, None]:
@@ -1014,8 +910,6 @@ class IdeaUnit:
             x_dict["_factunits"] = self.get_factunits_dict()
         if self._is_expanded is False:
             x_dict["_is_expanded"] = self._is_expanded
-        if self._meld_strategy != "default":
-            x_dict["_meld_strategy"] = self._meld_strategy
 
         return x_dict
 
@@ -1037,24 +931,24 @@ class IdeaUnit:
             dict_x=self._factunits, old_road=old_road, new_road=new_road
         )
 
-    def set_cultureunit_empty_if_none(self):
-        if self._cultureunit is None:
-            self._cultureunit = cultureunit_shop()
+    def set_doerunit_empty_if_none(self):
+        if self._doerunit is None:
+            self._doerunit = doerunit_shop()
 
-    def set_cultureheir(
+    def set_doerheir(
         self,
-        parent_cultureheir: CultureHeir,
-        world_beliefs: dict[BeliefID, BeliefUnit],
+        parent_doerheir: DoerHeir,
+        world_beliefs: dict[BeliefID, BeliefBox],
     ):
-        self._cultureheir = cultureheir_shop()
-        self._cultureheir.set_allyholds(
-            parent_cultureheir=parent_cultureheir,
-            cultureunit=self._cultureunit,
+        self._doerheir = doerheir_shop()
+        self._doerheir.set_beliefholds(
+            parent_doerheir=parent_doerheir,
+            doerunit=self._doerunit,
             world_beliefs=world_beliefs,
         )
 
-    def get_cultureunit_dict(self):
-        return self._cultureunit.get_dict()
+    def get_doerunit_dict(self):
+        return self._doerunit.get_dict()
 
 
 def ideaunit_shop(
@@ -1068,8 +962,8 @@ def ideaunit_shop(
     _awardlines: dict[BeliefID, AwardLink] = None,  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None,
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None,  # Calculated field
-    _cultureunit: CultureUnit = None,
-    _cultureheir: CultureHeir = None,  # Calculated field
+    _doerunit: DoerUnit = None,
+    _doerheir: DoerHeir = None,  # Calculated field
     _factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
     _healerhold: HealerHold = None,
@@ -1083,13 +977,12 @@ def ideaunit_shop(
     _numeric_road: RoadUnit = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
-    _meld_strategy: str = None,
     _root: bool = None,
     _world_real_id: RealID = None,
     _problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
-    _bud_share: float = None,
+    _bud_ratio: float = None,
     _coin: CoinNum = None,
     _bud_onset: BudNum = None,
     _bud_cease: BudNum = None,
@@ -1104,7 +997,6 @@ def ideaunit_shop(
     _road_delimiter: str = None,
     _healerhold_share: float = None,
 ) -> IdeaUnit:
-    _meld_strategy = get_meld_default() if _meld_strategy is None else _meld_strategy
     _world_real_id = root_label() if _world_real_id is None else _world_real_id
     _healerhold = healerhold_shop() if _healerhold is None else _healerhold
 
@@ -1119,8 +1011,8 @@ def ideaunit_shop(
         _awardlines=get_empty_dict_if_none(_awardlines),
         _reasonunits=get_empty_dict_if_none(_reasonunits),
         _reasonheirs=get_empty_dict_if_none(_reasonheirs),
-        _cultureunit=_cultureunit,
-        _cultureheir=_cultureheir,
+        _doerunit=_doerunit,
+        _doerheir=_doerheir,
         _factunits=get_empty_dict_if_none(_factunits),
         _factheirs=get_empty_dict_if_none(_factheirs),
         _healerhold=_healerhold,
@@ -1135,12 +1027,11 @@ def ideaunit_shop(
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
         _originunit=_originunit,
-        _meld_strategy=_meld_strategy,
         _root=get_False_if_None(_root),
         _world_real_id=_world_real_id,
         # Calculated fields
         _level=_level,
-        _bud_share=_bud_share,
+        _bud_ratio=_bud_ratio,
         _coin=_coin,
         _bud_onset=_bud_onset,
         _bud_cease=_bud_cease,
@@ -1159,7 +1050,7 @@ def ideaunit_shop(
         x_ideakid.set_idea_label(_label=_world_real_id)
     else:
         x_ideakid.set_idea_label(_label=_label)
-    x_ideakid.set_cultureunit_empty_if_none()
+    x_ideakid.set_doerunit_empty_if_none()
     x_ideakid.set_originunit_empty_if_none()
     return x_ideakid
 
@@ -1175,11 +1066,11 @@ def get_obj_from_idea_dict(x_dict: dict[str,], dict_key: str) -> any:
             if x_dict.get(dict_key) != None
             else None
         )
-    elif dict_key == "_cultureunit":
+    elif dict_key == "_doerunit":
         return (
-            cultureunit_get_from_dict(x_dict[dict_key])
+            doerunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) != None
-            else cultureunit_shop()
+            else doerunit_shop()
         )
     elif dict_key == "_healerhold":
         return (
@@ -1211,7 +1102,5 @@ def get_obj_from_idea_dict(x_dict: dict[str,], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) != None else False
     elif dict_key in {"_is_expanded"}:
         return x_dict[dict_key] if x_dict.get(dict_key) != None else True
-    # elif dict_key == "_meld_strategy":
-    #     return x_dict[dict_key] if x_dict.get(dict_key) != None else "default"
     else:
         return x_dict[dict_key] if x_dict.get(dict_key) != None else None

@@ -27,7 +27,7 @@ from src.listen.examples.example_listen import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_allyholdIsSet(
+def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_beliefholdIsSet(
     env_dir_setup_cleanup,
 ):
     # GIVEN
@@ -38,7 +38,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_allyholdIsSet(
     zia_debtor_weight = 41
     zia_pool = 87
     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_voice.set_char_pool(zia_pool)
+    yao_voice.set_char_respect(zia_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     yao_hubunit.save_voice_world(yao_voice)
 
@@ -69,7 +69,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
     zia_debtor_weight = 41
     zia_pool = 87
     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_voice.set_char_pool(zia_pool)
+    yao_voice.set_char_respect(zia_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     yao_hubunit.save_voice_world(yao_voice)
 
@@ -79,8 +79,8 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
     zia_action.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_world(zia_action)
     new_yao_action = create_listen_basis(yao_voice)
@@ -140,7 +140,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_deb
     yao_bob_debtor_weight = 5
     yao_voice.add_charunit(zia_text, None, yao_zia_debtor_weight)
     yao_voice.add_charunit(bob_text, None, yao_bob_debtor_weight)
-    yao_voice.set_char_pool(100)
+    yao_voice.set_char_respect(100)
     new_yao_action2 = create_listen_basis(yao_voice)
     assert new_yao_action2.idea_exists(cook_road()) is False
 
@@ -170,7 +170,7 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_c
     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_voice.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_voice.set_char_pool(yao_pool)
+    yao_voice.set_char_respect(yao_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     yao_hubunit.save_voice_world(yao_voice)
 
@@ -181,8 +181,8 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_c
     zia_action.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_world(zia_action)
 
@@ -193,7 +193,7 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_c
     vacuum_road = sue_action.make_l1_road(vacuum_text)
     sue_action.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_action.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._cultureunit.set_allyhold(yao_text)
+    vacuum_ideaunit._doerunit.set_beliefhold(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_action.make_l1_road(egg_text)
@@ -251,7 +251,7 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_voice.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_voice.set_char_pool(yao_pool)
+    yao_voice.set_char_respect(yao_pool)
     yao_hubunit.save_voice_world(yao_voice)
 
     zia_action = worldunit_shop(zia_text)
@@ -260,8 +260,8 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
     zia_action.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_world(zia_action)
 
@@ -295,7 +295,7 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     zia_debtor_weight = 41
     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_pool = 87
-    yao_voice.set_char_pool(yao_pool)
+    yao_voice.set_char_respect(yao_pool)
     # save yao without task to dutys
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     yao_hubunit.save_voice_world(yao_voice)
@@ -308,8 +308,8 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     zia_action.add_charunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
-    cook_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    cook_ideaunit._doerunit.set_beliefhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_world(zia_action)
 
@@ -319,7 +319,7 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     vacuum_road = yao_old_action.make_l1_road(vacuum_text)
     yao_old_action.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = yao_old_action.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._cultureunit.set_allyhold(yao_text)
+    vacuum_ideaunit._doerunit.set_beliefhold(yao_text)
     yao_hubunit.save_action_world(yao_old_action)
 
     # WHEN

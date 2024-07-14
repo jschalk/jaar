@@ -84,7 +84,7 @@ def test_RealUnit_generate_action_world_SetsFileWith_healerhold(env_dir_setup_cl
     # WHEN
     bob_voice_world = bob_hubunit.get_voice_world()
     bob_voice_world.add_charunit(bob_text)
-    bob_voice_world.set_char_pool(100)
+    bob_voice_world.set_char_respect(100)
     texas_text = "Texas"
     texas_road = bob_voice_world.make_l1_road(texas_text)
     elpaso_text = "el paso"

@@ -1,48 +1,63 @@
 from src._road.finance import (
     CoinNum,
     BudNum,
-    PixelNum,
+    BitHum,
     PennyNum,
     MoneyUnit,
-    default_bud,
-    validate_bud,
+    RespectNum,
+    default_bud_pool,
+    validate_bud_pool,
+    default_respect_num,
+    validate_respect_num,
     default_coin_if_none,
-    default_pixel_if_none,
+    default_bit_if_none,
     default_penny_if_none,
     trim_coin_excess,
-    trim_pixel_excess,
+    trim_bit_excess,
     trim_penny_excess,
     FiscalUnit,
+    valid_fiscal_ratio,
 )
 from inspect import getdoc as inspect_getdoc
 
 
-def test_PixelNum_exists():
+def test_BitHum_exists():
     # GIVEN
     x_float = 0.045
     # WHEN
-    y_pixelnum = PixelNum(x_float)
+    y_BitHum = BitHum(x_float)
     # THEN
-    assert y_pixelnum == x_float
-    inspect_str = "Smallest Unit of credor_weight or debtor_weight"
-    assert inspect_getdoc(y_pixelnum) == inspect_str
+    assert y_BitHum == x_float
+    inspect_str = "Smallest Unit of credor_weight or debtor_weight ala 'give me the slightest bit of respect!'"
+    assert inspect_getdoc(y_BitHum) == inspect_str
 
 
-def test_default_pixel_if_none_ReturnsCorrectObj():
+def test_default_bit_if_none_ReturnsCorrectObj():
     # GIVEN / WHEN / THEN
-    assert default_pixel_if_none() == 1
-    assert default_pixel_if_none(5) == 5
-    assert default_pixel_if_none(0.03) == 0.03
+    assert default_bit_if_none() == 1
+    assert default_bit_if_none(None) == 1
+    assert default_bit_if_none(5) == 5
+    assert default_bit_if_none(0.03) == 1
 
 
-def test_trim_pixel_excess_ReturnsCorrectedFloat():
+def test_trim_bit_excess_ReturnsCorrectedFloat():
     # GIVEN / WHEN / THEN
-    assert trim_pixel_excess(num=5.5, pixel=1) == 5
-    assert trim_pixel_excess(num=0.5, pixel=1) == 0
-    assert trim_pixel_excess(num=5.5, pixel=0.1) == 5.5
-    assert trim_pixel_excess(num=0.5, pixel=0.01) == 0.5
-    assert trim_pixel_excess(num=0.56, pixel=0.1) == 0.5
-    assert trim_pixel_excess(num=0.56, pixel=0.133) == 0.532
+    assert trim_bit_excess(num=5.5, bit=1) == 5
+    assert trim_bit_excess(num=0.5, bit=1) == 0
+    assert trim_bit_excess(num=5.5, bit=0.1) == 5.5
+    assert trim_bit_excess(num=0.5, bit=0.01) == 0.5
+    assert trim_bit_excess(num=0.56, bit=0.1) == 0.5
+    assert trim_bit_excess(num=0.56, bit=0.133) == 0.532
+
+
+def test_RespectNum_exists():
+    # GIVEN
+    x_float = 0.045
+    # WHEN
+    y_RespectNum = RespectNum(x_float)
+    # THEN
+    assert y_RespectNum == x_float
+    assert inspect_getdoc(y_RespectNum) == "RespectNum inherits from float class"
 
 
 def test_PennyNum_exists():
@@ -93,19 +108,19 @@ def test_BudNum_exists():
     assert inspect_getdoc(y_budnum) == inspect_str
 
 
-def test_default_bud_ReturnsObj():
+def test_default_bud_pool_ReturnsObj():
     # GIVEN / WHEN / THEN
-    assert default_bud() == 1000000000
+    assert default_bud_pool() == 1000000000
 
 
-def test_validate_bud_ReturnsObj():
+def test_validate_bud_pool_ReturnsObj():
     # GIVEN / WHEN / THEN
-    assert validate_bud() == default_bud()
-    assert validate_bud(None) == default_bud()
-    assert validate_bud(0.5) == default_coin_if_none()
-    assert validate_bud(default_coin_if_none() - 0.01) == default_coin_if_none()
-    assert validate_bud(1) == 1
-    assert validate_bud(25) == 25
+    assert validate_bud_pool() == default_bud_pool()
+    assert validate_bud_pool(None) == default_bud_pool()
+    assert validate_bud_pool(0.5) == default_coin_if_none()
+    assert validate_bud_pool(default_coin_if_none() - 0.01) == default_coin_if_none()
+    assert validate_bud_pool(1) == 1
+    assert validate_bud_pool(25) == 25
 
 
 def test_CoinNum_exists():
@@ -141,40 +156,33 @@ def test_FiscalUnit_Exists():
     x_fiscal = FiscalUnit()
 
     # THEN
-    assert x_fiscal._bud is None
+    assert x_fiscal._bud_pool is None
     assert x_fiscal._coin is None
-    assert x_fiscal._pixel is None
+    assert x_fiscal._bit is None
     assert x_fiscal._penny is None
 
 
-# def test_fiscalunit_shop_ReturnsCorrectObj():
-#     # GIVEN
-#     casa_text = "casa"
-#     casa_road = create_road(root_label(), casa_text)
-#     email_text = "check email"
-#     email_road = create_road(casa_road, email_text)
-
-#     # WHEN
-#     email_fiscal = fiscalunit_shop(need=email_road)
-
-#     # THEN
-#     assert email_fiscal.need == email_road
+def test_default_respect_num_ReturnsObj():
+    # GIVEN / WHEN / THEN
+    assert default_respect_num() == default_bud_pool()
 
 
-# def test_FiscalUnit_clear_status_CorrectlySetsAttrs():
-#     # WHEN
-#     casa_text = "casa"
-#     casa_road = create_road(root_label(), casa_text)
-#     casa_fiscal = fiscalunit_shop(need=casa_road)
-#     # THEN
-#     assert casa_fiscal._status is None
+def test_validate_respect_num_ReturnsObj():
+    # GIVEN / WHEN / THEN
+    assert validate_respect_num() == default_respect_num()
+    assert validate_respect_num(None) == default_respect_num()
+    assert validate_respect_num(0.5) == default_bit_if_none()
+    assert validate_respect_num(0.5) == 1
+    assert validate_respect_num(default_coin_if_none() - 0.01) == default_coin_if_none()
+    assert validate_respect_num(1) == 1
+    assert validate_respect_num(25) == 25
 
-#     # GIVEN
-#     casa_fiscal._status = True
-#     assert casa_fiscal._status
 
-#     # WHEN
-#     casa_fiscal.clear_status()
-
-#     # THEN
-#     assert casa_fiscal._status is None
+def test_valid_fiscal_ratio_ReturnsObj():
+    # GIVEN / WHEN / THEN
+    assert valid_fiscal_ratio(10, 1)
+    assert valid_fiscal_ratio(10, 3) is False
+    assert valid_fiscal_ratio(10.1, 1) is False
+    assert valid_fiscal_ratio(10.1, 0.1) is False
+    inspect_str = """Checks that big_number is wholly divisible by small_number"""
+    assert inspect_getdoc(valid_fiscal_ratio) == inspect_str

@@ -15,6 +15,9 @@ class BeliefCore:
 class BeliefLink(BeliefCore):
     credor_weight: float = 1.0
     debtor_weight: float = 1.0
+    # calculated fields
+    _credor_pool: float = None
+    _debtor_pool: float = None
 
     def get_dict(self) -> dict[str, str]:
         return {
@@ -27,7 +30,13 @@ class BeliefLink(BeliefCore):
 def belieflink_shop(
     belief_id: BeliefID, credor_weight: float = None, debtor_weight: float = None
 ) -> BeliefLink:
-    return BeliefLink(belief_id, get1ifNone(credor_weight), get1ifNone(debtor_weight))
+    return BeliefLink(
+        belief_id=belief_id,
+        credor_weight=get1ifNone(credor_weight),
+        debtor_weight=get1ifNone(debtor_weight),
+        _credor_pool=0,
+        _debtor_pool=0,
+    )
 
 
 def belieflink_get_from_dict(x_dict: dict) -> BeliefLink:

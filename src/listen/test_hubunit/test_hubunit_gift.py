@@ -305,7 +305,7 @@ def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
-    yao_text = "yao"
+    yao_text = "Yao"
     x0_giftunit = sue_hubunit._default_giftunit()
     x0_giftunit.set_face(yao_text)
     sue_hubunit.save_gift_file(x0_giftunit)
@@ -332,7 +332,7 @@ def test_HubUnit_get_giftunit_RaisesExceptionWhenFileDoesNotExist(
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
-    yao_text = "yao"
+    yao_text = "Yao"
     x0_giftunit = sue_hubunit._default_giftunit()
     x0_giftunit.set_face(yao_text)
     sue_hubunit.save_gift_file(x0_giftunit)

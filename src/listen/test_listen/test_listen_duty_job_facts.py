@@ -34,7 +34,7 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     zia_debtor_weight = 41
     zia_pool = 87
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_pool(zia_pool)
+    yao_duty.set_char_respect(zia_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_world(yao_duty)
 
@@ -65,14 +65,14 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     yao_pool = 87
     zia_text = "Zia"
     yao_duty.add_charunit(zia_text, yao_credor_weight, yao_debtor_weight)
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_world(yao_duty)
 
     zia_job = get_example_zia_speaker()
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
-    clean_ideaunit._cultureunit.set_allyhold(yao_text)
+    clean_ideaunit._doerunit.set_beliefhold(yao_text)
     sue_texas_hubunit.save_job_world(zia_job)
 
     new_yao_job = create_listen_basis(yao_duty)
@@ -232,7 +232,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
     yao_bob_debtor_weight = 5
     yao_duty.add_charunit(zia_text, None, yao_zia_debtor_weight)
     yao_duty.add_charunit(bob_text, None, yao_bob_debtor_weight)
-    yao_duty.set_char_pool(100)
+    yao_duty.set_char_respect(100)
     new_yao_job2 = create_listen_basis(yao_duty)
     listen_to_agendas_duty_job(new_yao_job2, sue_texas_hubunit)
     listen_to_facts_duty_job(new_yao_job2, sue_texas_hubunit)
@@ -263,7 +263,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
 #     sweep_road = sue_speaker.make_road(casa_road, sweep_text)
 
 #     sue_speaker.add_charunit(yao_text)
-#     sue_speaker.set_char_pool(20)
+#     sue_speaker.set_char_respect(20)
 #     sue_speaker.add_idea(ideaunit_shop(clean_text), status_road)
 #     sue_speaker.add_idea(ideaunit_shop(dirty_text), status_road)
 #     sue_speaker.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
@@ -271,7 +271,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
 #         sweep_road, reason_base=status_road, reason_premise=dirty_road
 #     )
 #     sweep_idea = sue_speaker.get_idea_obj(sweep_road)
-#     sweep_idea._cultureunit.set_allyhold(yao_text)
+#     sweep_idea._doerunit.set_beliefhold(yao_text)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_job_world(sue_text, sue_speaker.get_json(), True)
@@ -301,7 +301,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
 #     yao_text = "Yao"
 #     yao_duty = worldunit_shop(yao_text)
 #     yao_duty.add_charunit(yao_text)
-#     yao_duty.set_char_pool(20)
+#     yao_duty.set_char_respect(20)
 #     casa_text = "casa"
 #     casa_road = yao_duty.make_l1_road(casa_text)
 #     status_text = "status"

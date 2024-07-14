@@ -51,10 +51,10 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
     x_list = [atom_delete(), "world_idea_reason_premiseunit"]
     world_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_allyhold"]
-    world_idea_allyhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_allyhold"]
-    world_idea_allyhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "world_idea_beliefhold"]
+    world_idea_beliefhold_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "world_idea_beliefhold"]
+    world_idea_beliefhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "world_idea_healerhold"]
     world_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -149,13 +149,13 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
             leg_list, world_idea_reason_premiseunit_delete_dict, x_world
         )
 
-    if world_idea_allyhold_insert_dict != None:
-        add_world_idea_allyhold_insert_to_legible_list(
-            leg_list, world_idea_allyhold_insert_dict, x_world
+    if world_idea_beliefhold_insert_dict != None:
+        add_world_idea_beliefhold_insert_to_legible_list(
+            leg_list, world_idea_beliefhold_insert_dict, x_world
         )
-    if world_idea_allyhold_delete_dict != None:
-        add_world_idea_allyhold_delete_to_legible_list(
-            leg_list, world_idea_allyhold_delete_dict, x_world
+    if world_idea_beliefhold_delete_dict != None:
+        add_world_idea_beliefhold_delete_to_legible_list(
+            leg_list, world_idea_beliefhold_delete_dict, x_world
         )
 
     if world_idea_healerhold_insert_dict != None:
@@ -189,16 +189,14 @@ def add_worldunit_legible_list(
     optional_args = x_atom.optional_args
     _weight_text = "_weight"
     _max_tree_traverse_text = "_max_tree_traverse"
-    _meld_strategy_text = "_meld_strategy"
     _monetary_desc_text = "_monetary_desc"
-    _char_credor_pool_text = "_char_credor_pool"
-    _char_debtor_pool_text = "_char_debtor_pool"
+    _credor_respect_text = "_credor_respect"
+    _debtor_respect_text = "_debtor_respect"
 
     _max_tree_traverse_value = optional_args.get(_max_tree_traverse_text)
-    _meld_strategy_value = optional_args.get(_meld_strategy_text)
     _monetary_desc_value = optional_args.get(_monetary_desc_text)
-    _char_credor_pool_value = optional_args.get(_char_credor_pool_text)
-    _char_debtor_pool_value = optional_args.get(_char_debtor_pool_text)
+    _credor_respect_value = optional_args.get(_credor_respect_text)
+    _debtor_respect_value = optional_args.get(_debtor_respect_text)
     _weight_value = optional_args.get(_weight_text)
 
     x_monetary_desc = x_world._monetary_desc
@@ -209,29 +207,25 @@ def add_worldunit_legible_list(
         legible_list.append(
             f"{x_world._owner_id}'s maximum number of World output evaluations transited to {_max_tree_traverse_value}"
         )
-    if _meld_strategy_value != None:
-        legible_list.append(
-            f"{x_world._owner_id}'s Meld strategy transited to '{_meld_strategy_value}'"
-        )
     if _monetary_desc_value != None:
         legible_list.append(
             f"{x_world._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
         )
     if (
-        _char_credor_pool_value != None
-        and _char_debtor_pool_value != None
-        and _char_credor_pool_value == _char_debtor_pool_value
+        _credor_respect_value != None
+        and _debtor_respect_value != None
+        and _credor_respect_value == _debtor_respect_value
     ):
         legible_list.append(
-            f"{x_monetary_desc} total pool is now {_char_credor_pool_value}"
+            f"{x_monetary_desc} total pool is now {_credor_respect_value}"
         )
-    elif _char_credor_pool_value != None:
+    elif _credor_respect_value != None:
         legible_list.append(
-            f"{x_monetary_desc} credor pool is now {_char_credor_pool_value}"
+            f"{x_monetary_desc} credor pool is now {_credor_respect_value}"
         )
-    elif _char_debtor_pool_value != None:
+    elif _debtor_respect_value != None:
         legible_list.append(
-            f"{x_monetary_desc} debtor pool is now {_char_debtor_pool_value}"
+            f"{x_monetary_desc} debtor pool is now {_debtor_respect_value}"
         )
     if _weight_value != None:
         legible_list.append(
@@ -283,33 +277,33 @@ def add_world_charunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_world_beliefunit_insert_to_legible_list(
-    legible_list: list[str], beliefunit_dict: AtomUnit, x_world: WorldUnit
+def add_world_beliefbox_insert_to_legible_list(
+    legible_list: list[str], beliefbox_dict: AtomUnit, x_world: WorldUnit
 ):
-    for beliefunit_atom in beliefunit_dict.values():
-        belief_id = beliefunit_atom.get_value("belief_id")
+    for beliefbox_atom in beliefbox_dict.values():
+        belief_id = beliefbox_atom.get_value("belief_id")
         x_str = f"The belief '{belief_id}' was created"
         x_str += "."
         legible_list.append(x_str)
 
 
-def add_world_beliefunit_update_to_legible_list(
-    legible_list: list[str], beliefunit_dict: AtomUnit, x_world: WorldUnit
+def add_world_beliefbox_update_to_legible_list(
+    legible_list: list[str], beliefbox_dict: AtomUnit, x_world: WorldUnit
 ):
-    for beliefunit_atom in beliefunit_dict.values():
-        belief_id = beliefunit_atom.get_value("belief_id")
+    for beliefbox_atom in beliefbox_dict.values():
+        belief_id = beliefbox_atom.get_value("belief_id")
         x_str = f"The belief '{belief_id}'"
         x_str += "."
         legible_list.append(x_str)
 
 
-def add_world_beliefunit_delete_to_legible_list(
-    legible_list: list[str], beliefunit_dict: AtomUnit, x_world: WorldUnit
+def add_world_beliefbox_delete_to_legible_list(
+    legible_list: list[str], beliefbox_dict: AtomUnit, x_world: WorldUnit
 ):
     x_monetary_desc = x_world._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
-    for beliefunit_atom in beliefunit_dict.values():
-        belief_id = beliefunit_atom.get_value("belief_id")
+    for beliefbox_atom in beliefbox_dict.values():
+        belief_id = beliefbox_atom.get_value("belief_id")
         x_str = f"The belief '{belief_id}' was deleted."
         legible_list.append(x_str)
 
@@ -365,7 +359,6 @@ def add_world_ideaunit_insert_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _meld_strategy_text = "_meld_strategy"
     _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
@@ -381,7 +374,6 @@ def add_world_ideaunit_insert_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _meld_strategy_value = ideaunit_atom.get_value(_meld_strategy_text)
             _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
@@ -400,8 +392,6 @@ def add_world_ideaunit_insert_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value != None:
                 x_str += f"_denom={_denom_value}."
-            if _meld_strategy_value != None:
-                x_str += f"_meld_strategy={_meld_strategy_value}."
             if _numeric_road_value != None:
                 x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value != None:
@@ -429,7 +419,6 @@ def add_world_ideaunit_update_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _meld_strategy_text = "_meld_strategy"
     _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
@@ -445,7 +434,6 @@ def add_world_ideaunit_update_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _meld_strategy_value = ideaunit_atom.get_value(_meld_strategy_text)
             _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
@@ -462,8 +450,6 @@ def add_world_ideaunit_update_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value != None:
                 x_str += f"_denom={_denom_value}."
-            if _meld_strategy_value != None:
-                x_str += f"_meld_strategy={_meld_strategy_value}."
             if _numeric_road_value != None:
                 x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value != None:
@@ -663,25 +649,25 @@ def add_world_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_world_idea_allyhold_insert_to_legible_list(
-    legible_list: list[str], idea_allyhold_insert_dict: dict, x_world: WorldUnit
+def add_world_idea_beliefhold_insert_to_legible_list(
+    legible_list: list[str], idea_beliefhold_insert_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_allyhold_insert_dict.values():
-        for idea_allyhold_atom in road_dict.values():
-            belief_id_value = idea_allyhold_atom.get_value("belief_id")
-            road_value = idea_allyhold_atom.get_value("road")
-            x_str = f"allyhold '{belief_id_value}' created for idea '{road_value}'."
+    for road_dict in idea_beliefhold_insert_dict.values():
+        for idea_beliefhold_atom in road_dict.values():
+            belief_id_value = idea_beliefhold_atom.get_value("belief_id")
+            road_value = idea_beliefhold_atom.get_value("road")
+            x_str = f"beliefhold '{belief_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_world_idea_allyhold_delete_to_legible_list(
-    legible_list: list[str], idea_allyhold_delete_dict: dict, x_world: WorldUnit
+def add_world_idea_beliefhold_delete_to_legible_list(
+    legible_list: list[str], idea_beliefhold_delete_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_allyhold_delete_dict.values():
-        for idea_allyhold_atom in road_dict.values():
-            belief_id_value = idea_allyhold_atom.get_value("belief_id")
-            road_value = idea_allyhold_atom.get_value("road")
-            x_str = f"allyhold '{belief_id_value}' deleted for idea '{road_value}'."
+    for road_dict in idea_beliefhold_delete_dict.values():
+        for idea_beliefhold_atom in road_dict.values():
+            belief_id_value = idea_beliefhold_atom.get_value("belief_id")
+            road_value = idea_beliefhold_atom.get_value("road")
+            x_str = f"beliefhold '{belief_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 

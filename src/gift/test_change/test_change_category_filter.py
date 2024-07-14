@@ -12,10 +12,10 @@ def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_charunit_insert
     before_sue_world = worldunit_shop(sue_text)
     before_sue_world.add_charunit(yao_text)
     after_sue_world = worldunit_shop(sue_text)
-    rico_text = "Rico"
-    rico_credor_weight = 33
-    rico_debtor_weight = 44
-    after_sue_world.add_charunit(rico_text, rico_credor_weight, rico_debtor_weight)
+    bob_text = "Bob"
+    bob_credor_weight = 33
+    bob_debtor_weight = 44
+    after_sue_world.add_charunit(bob_text, bob_credor_weight, bob_debtor_weight)
     after_sue_world.add_l1_idea(ideaunit_shop("casa"))
     old_changeunit = changeunit_shop()
     old_changeunit.add_all_different_atomunits(before_sue_world, after_sue_world)
@@ -29,7 +29,7 @@ def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_charunit_insert
     assert len(new_changeunit.get_category_sorted_atomunits_list()) == 1
     sue_insert_dict = new_changeunit.atomunits.get(atom_insert())
     sue_charunit_dict = sue_insert_dict.get("world_charunit")
-    rico_atomunit = sue_charunit_dict.get(rico_text)
-    assert rico_atomunit.get_value("char_id") == rico_text
-    assert rico_atomunit.get_value("credor_weight") == rico_credor_weight
-    assert rico_atomunit.get_value("debtor_weight") == rico_debtor_weight
+    bob_atomunit = sue_charunit_dict.get(bob_text)
+    assert bob_atomunit.get_value("char_id") == bob_text
+    assert bob_atomunit.get_value("credor_weight") == bob_credor_weight
+    assert bob_atomunit.get_value("debtor_weight") == bob_debtor_weight

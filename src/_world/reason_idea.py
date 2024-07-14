@@ -57,30 +57,6 @@ class FactCore:
     def get_obj_key(self):
         return self.base
 
-    def meld(self, exterior_factcore, equal_reason: bool = False):
-        if equal_reason and exterior_factcore.base != self.base:
-            raise InvalidReasonException(
-                f"Meld fail: base={exterior_factcore.base} is different {self.base=}"
-            )
-        elif equal_reason and exterior_factcore.pick != self.pick:
-            raise InvalidReasonException(
-                f"Meld fail: pick={exterior_factcore.pick} is different {self.pick=}"
-            )
-        elif equal_reason and exterior_factcore.open != self.open:
-            raise InvalidReasonException(
-                f"Meld fail: base={exterior_factcore.base} open={exterior_factcore.open} is different {self.open=}"
-            )
-        elif equal_reason and exterior_factcore.nigh != self.nigh:
-            raise InvalidReasonException(
-                f"Meld fail: base={exterior_factcore.base} nigh={exterior_factcore.nigh} is different {self.nigh=}"
-            )
-        else:
-            self.base = exterior_factcore.base
-            self.pick = exterior_factcore.pick
-            self.open = exterior_factcore.open
-            self.nigh = exterior_factcore.nigh
-        return self
-
 
 @dataclass
 class FactUnit(FactCore):
@@ -414,26 +390,6 @@ class PremiseUnit:
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         self.need = rebuild_road(self.need, old_road, new_road)
 
-    def meld(self, exterior_premise):
-        if exterior_premise.need != self.need:
-            raise InvalidReasonException(
-                f"Meld fail: need={exterior_premise.need} is different {self.need=}"
-            )
-        elif exterior_premise.open != self.open:
-            raise InvalidReasonException(
-                f"Meld fail: need={exterior_premise.need} open={exterior_premise.open} is different {self.open=}"
-            )
-        elif exterior_premise.nigh != self.nigh:
-            raise InvalidReasonException(
-                f"Meld fail: need={exterior_premise.need} nigh={exterior_premise.nigh} is different {self.nigh=}"
-            )
-        elif exterior_premise.divisor != self.divisor:
-            raise InvalidReasonException(
-                f"Meld fail: need={exterior_premise.need} divisor={exterior_premise.divisor} is different {self.divisor=}"
-            )
-
-        return self
-
 
 # class premisesshop:
 def premiseunit_shop(
@@ -536,18 +492,6 @@ class ReasonCore:
         self.premises = find_replace_road_key_dict(
             dict_x=self.premises, old_road=old_road, new_road=new_road
         )
-
-    def meld(self, exterior_reason):
-        for premise_x in exterior_reason.premises.values():
-            if self.premises.get(premise_x.need) is None:
-                self.premises[premise_x.need] = premise_x
-            else:
-                self.premises.get(premise_x.need).meld(premise_x)
-        if exterior_reason.base != self.base:
-            raise InvalidReasonException(
-                f"Meld fail: reason={exterior_reason.base} is different {self.base=}"
-            )
-        return self
 
 
 def reasoncore_shop(

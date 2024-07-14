@@ -47,6 +47,10 @@ class RoadUnit(str):
     pass
 
 
+class BeliefID(str):  # Created to help track the concept
+    pass
+
+
 def default_road_delimiter_if_none(delimiter: str = None) -> str:
     return delimiter if delimiter != None else ","
 
