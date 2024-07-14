@@ -39,7 +39,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_WorldWhenNo_beliefholdI
     zia_debtor_weight = 41
     zia_pool = 87
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_pool(zia_pool)
+    yao_duty.set_char_respect(zia_pool)
 
     zia_job = worldunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
@@ -67,7 +67,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_World(env_dir_setup_cle
     zia_debtor_weight = 41
     zia_pool = 87
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_pool(zia_pool)
+    yao_duty.set_char_respect(zia_pool)
 
     zia_job = worldunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
@@ -135,7 +135,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobWorldWithDetailsDecidedB
     yao_bob_debtor_weight = 5
     yao_duty.add_charunit(zia_text, None, yao_zia_debtor_weight)
     yao_duty.add_charunit(bob_text, None, yao_bob_debtor_weight)
-    yao_duty.set_char_pool(100)
+    yao_duty.set_char_respect(100)
     new_yao_action2 = create_listen_basis(yao_duty)
     assert new_yao_action2.idea_exists(cook_road()) is False
 
@@ -167,7 +167,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalWorld(
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_world(yao_duty)
 
@@ -243,7 +243,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobWorld(
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_world(yao_duty)
 
@@ -288,7 +288,7 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     zia_debtor_weight = 41
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_pool = 87
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
     # save yao without task to dutys
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_world(yao_duty)

@@ -153,14 +153,10 @@ class ChangeUnit:
             )
         if before_world._monetary_desc != after_world._monetary_desc:
             x_atomunit.set_optional_arg("_monetary_desc", after_world._monetary_desc)
-        if before_world._char_credor_pool != after_world._char_credor_pool:
-            x_atomunit.set_optional_arg(
-                "_char_credor_pool", after_world._char_credor_pool
-            )
-        if before_world._char_debtor_pool != after_world._char_debtor_pool:
-            x_atomunit.set_optional_arg(
-                "_char_debtor_pool", after_world._char_debtor_pool
-            )
+        if before_world._credor_respect != after_world._credor_respect:
+            x_atomunit.set_optional_arg("_credor_respect", after_world._credor_respect)
+        if before_world._debtor_respect != after_world._debtor_respect:
+            x_atomunit.set_optional_arg("_debtor_respect", after_world._debtor_respect)
         if before_world._weight != after_world._weight:
             x_atomunit.set_optional_arg("_weight", after_world._weight)
         if before_world._bud_pool != after_world._bud_pool:

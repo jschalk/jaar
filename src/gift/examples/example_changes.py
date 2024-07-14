@@ -7,7 +7,7 @@ def get_changeunit_sue_example() -> ChangeUnit:
 
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
-    pool_attribute = "_char_credor_pool"
+    pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
 
@@ -28,9 +28,9 @@ def get_changeunit_example1() -> ChangeUnit:
     x_atomunit.set_optional_arg(weight_name, 55)
     x_attribute = "_max_tree_traverse"
     x_atomunit.set_optional_arg(x_attribute, 66)
-    x_attribute = "_char_credor_pool"
+    x_attribute = "_credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 77)
-    x_attribute = "_char_debtor_pool"
+    x_attribute = "_debtor_respect"
     x_atomunit.set_optional_arg(x_attribute, 88)
     sue_changeunit.set_atomunit(x_atomunit)
 

@@ -84,7 +84,7 @@ def get_changeunit_sue_example() -> ChangeUnit:
 
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
-    pool_attribute = "_char_credor_pool"
+    pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
 

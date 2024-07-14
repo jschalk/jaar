@@ -158,12 +158,12 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
     x_arg = "_max_tree_traverse"
     if x_atom.get_value(x_arg) != None:
         x_world.set_max_tree_traverse(x_atom.get_value(x_arg))
-    x_arg = "_char_credor_pool"
+    x_arg = "_credor_respect"
     if x_atom.get_value(x_arg) != None:
-        x_world.set_char_credor_pool(x_atom.get_value(x_arg))
-    x_arg = "_char_debtor_pool"
+        x_world.set_credor_respect(x_atom.get_value(x_arg))
+    x_arg = "_debtor_respect"
     if x_atom.get_value(x_arg) != None:
-        x_world.set_char_debtor_pool(x_atom.get_value(x_arg))
+        x_world.set_debtor_resepect(x_atom.get_value(x_arg))
     x_arg = "_bud_pool"
     if x_atom.get_value(x_arg) != None:
         x_world._bud_pool = x_atom.get_value(x_arg)
@@ -527,8 +527,8 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
         return (
             x_obj._weight != y_obj._weight
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
-            or x_obj._char_credor_pool != y_obj._char_credor_pool
-            or x_obj._char_debtor_pool != y_obj._char_debtor_pool
+            or x_obj._credor_respect != y_obj._credor_respect
+            or x_obj._debtor_respect != y_obj._debtor_respect
             or x_obj._bit != y_obj._bit
             or x_obj._bud_pool != y_obj._bud_pool
             or x_obj._coin != y_obj._coin

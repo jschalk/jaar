@@ -47,10 +47,10 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     new2_arg = "_max_tree_traverse"
     x_atomunit.set_optional_arg(new2_arg, new2_value)
     new3_value = 77
-    new3_arg = "_char_credor_pool"
+    new3_arg = "_credor_respect"
     x_atomunit.set_optional_arg(new3_arg, new3_value)
     new4_value = 88
-    new4_arg = "_char_debtor_pool"
+    new4_arg = "_debtor_respect"
     x_atomunit.set_optional_arg(new4_arg, new4_value)
     new9_value = 55550000
     new9_arg = "_bud_pool"
@@ -74,8 +74,8 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     # THEN
     print(f"{sue_changeunit.atomunits.keys()=}")
     assert after_sue_worldunit._max_tree_traverse == new2_value
-    assert after_sue_worldunit._char_credor_pool == new3_value
-    assert after_sue_worldunit._char_debtor_pool == new4_value
+    assert after_sue_worldunit._credor_respect == new3_value
+    assert after_sue_worldunit._debtor_respect == new4_value
     assert after_sue_worldunit._weight == new1_value
     assert after_sue_worldunit._weight != before_sue_worldunit._weight
     assert after_sue_worldunit._bud_pool == new9_value
@@ -1025,8 +1025,8 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     before_sue_worldunit.set_beliefbox(fly_beliefbox)
     assert before_sue_worldunit._weight != 55
     assert before_sue_worldunit._max_tree_traverse != 66
-    assert before_sue_worldunit._char_credor_pool != 77
-    assert before_sue_worldunit._char_debtor_pool != 88
+    assert before_sue_worldunit._credor_respect != 77
+    assert before_sue_worldunit._debtor_respect != 88
     assert before_sue_worldunit.char_exists(yao_text)
     assert before_sue_worldunit.char_exists(zia_text)
     assert before_sue_worldunit.get_beliefbox(run_text) != None
@@ -1039,7 +1039,7 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     # THEN
     assert after_sue_worldunit._weight == 55
     assert after_sue_worldunit._max_tree_traverse == 66
-    assert after_sue_worldunit._char_credor_pool == 77
-    assert after_sue_worldunit._char_debtor_pool == 88
+    assert after_sue_worldunit._credor_respect == 77
+    assert after_sue_worldunit._debtor_respect == 88
     assert after_sue_worldunit.char_exists(yao_text)
     assert after_sue_worldunit.char_exists(zia_text) is False

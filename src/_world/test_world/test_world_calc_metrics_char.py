@@ -443,102 +443,36 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
     # assert charunit_world_debt_sum < 1.00000001
 
 
-def test_WorldUnit_calc_world_metrics_RaisesErrorWhen_is_charunits_credor_weight_sum_correct_IsFalse():
-    # GIVEN
-    yao_text = "Yao"
-    yao_world = worldunit_shop(yao_text)
-    sue_text = "Sue"
-    bob_text = "Bob"
-    zia_text = "Zia"
-    sue_credor_weight = 20
-    bob_credor_weight = 30
-    zia_credor_weight = 50
-    yao_world.set_charunit(charunit_shop(sue_text, None, sue_credor_weight))
-    yao_world.set_charunit(charunit_shop(bob_text, None, bob_credor_weight))
-    yao_world.set_charunit(charunit_shop(zia_text, None, zia_credor_weight))
-    assert yao_world._char_credor_pool is None
-    assert yao_world.is_charunits_credor_weight_sum_correct()
-    assert yao_world.calc_world_metrics() is None
+# def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_credor_respectWhenCharSumIsZero():
+#     # GIVEN
+#     yao_world = worldunit_shop("Yao")
+#     assert yao_world._credor_respect is None
+#     assert yao_world.is_charunits_credor_weight_sum_correct()
+#     assert yao_world.calc_world_metrics() is None
 
-    # WHEN
-    x_int = 13
-    yao_world.set_char_credor_pool(x_int)
-    assert yao_world.is_charunits_credor_weight_sum_correct() is False
-    with pytest_raises(Exception) as excinfo:
-        yao_world.calc_world_metrics()
-    assert (
-        str(excinfo.value)
-        == f"'{yao_text}' is_charunits_credor_weight_sum_correct is False. _char_credor_pool={x_int}. charunits_credor_weight_sum={yao_world.get_charunits_credor_weight_sum()}"
-    )
+#     # WHEN
+#     x_int = 13
+#     yao_world.set_credor_respect(x_int)
 
-    # WHEN / THEN
-    yao_world.set_char_credor_pool(yao_world.get_charunits_credor_weight_sum())
-    assert yao_world.calc_world_metrics() is None
+#     # THEN
+#     assert yao_world.is_charunits_credor_weight_sum_correct()
+#     yao_world.calc_world_metrics()
 
 
-def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_char_credor_poolWhenCharSumIsZero():
-    # GIVEN
-    yao_world = worldunit_shop("Yao")
-    assert yao_world._char_credor_pool is None
-    assert yao_world.is_charunits_credor_weight_sum_correct()
-    assert yao_world.calc_world_metrics() is None
+# def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_debtor_respectWhenCharSumIsZero():
+#     # GIVEN
+#     yao_world = worldunit_shop("Yao")
+#     assert yao_world._credor_respect is None
+#     assert yao_world.is_charunits_debtor_weight_sum_correct()
+#     assert yao_world.calc_world_metrics() is None
 
-    # WHEN
-    x_int = 13
-    yao_world.set_char_credor_pool(x_int)
+#     # WHEN
+#     x_int = 13
+#     yao_world.set_debtor_resepect(x_int)
 
-    # THEN
-    assert yao_world.is_charunits_credor_weight_sum_correct()
-    yao_world.calc_world_metrics()
-
-
-def test_WorldUnit_calc_world_metrics_RaisesErrorWhen_is_charunits_debtor_weight_sum_correct_IsFalse():
-    # GIVEN
-    yao_text = "Yao"
-    yao_world = worldunit_shop(yao_text)
-    sue_text = "Sue"
-    bob_text = "Bob"
-    zia_text = "Zia"
-    sue_debtor_weight = 15
-    bob_debtor_weight = 25
-    zia_debtor_weight = 40
-    yao_world.set_charunit(charunit_shop(sue_text, sue_debtor_weight))
-    yao_world.set_charunit(charunit_shop(bob_text, bob_debtor_weight))
-    yao_world.set_charunit(charunit_shop(zia_text, zia_debtor_weight))
-    assert yao_world._char_debtor_pool is None
-    assert yao_world.is_charunits_debtor_weight_sum_correct()
-    assert yao_world.calc_world_metrics() is None
-
-    # WHEN
-    x_int = 13
-    yao_world.set_char_debtor_pool(x_int)
-    assert yao_world.is_charunits_debtor_weight_sum_correct() is False
-    with pytest_raises(Exception) as excinfo:
-        yao_world.calc_world_metrics()
-    assert (
-        str(excinfo.value)
-        == f"'{yao_text}' is_charunits_debtor_weight_sum_correct is False. _char_debtor_pool={x_int}. charunits_debtor_weight_sum={yao_world.get_charunits_debtor_weight_sum()}"
-    )
-
-    # WHEN / THEN
-    yao_world.set_char_debtor_pool(yao_world.get_charunits_debtor_weight_sum())
-    assert yao_world.calc_world_metrics() is None
-
-
-def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_char_debtor_poolWhenCharSumIsZero():
-    # GIVEN
-    yao_world = worldunit_shop("Yao")
-    assert yao_world._char_credor_pool is None
-    assert yao_world.is_charunits_debtor_weight_sum_correct()
-    assert yao_world.calc_world_metrics() is None
-
-    # WHEN
-    x_int = 13
-    yao_world.set_char_debtor_pool(x_int)
-
-    # THEN
-    assert yao_world.is_charunits_debtor_weight_sum_correct()
-    yao_world.calc_world_metrics()
+#     # THEN
+#     assert yao_world.is_charunits_debtor_weight_sum_correct()
+#     yao_world.calc_world_metrics()
 
 
 def clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world: WorldUnit):

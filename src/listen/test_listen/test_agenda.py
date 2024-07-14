@@ -27,7 +27,7 @@ def test_listen_to_speaker_agenda_ReturnsEqualWorld():
     yao_worldunit = worldunit_shop(yao_text)
     zia_text = "Zia"
     yao_worldunit.add_charunit(zia_text)
-    yao_worldunit.set_char_pool(100)
+    yao_worldunit.set_char_respect(100)
     zia_worldunit = worldunit_shop(zia_text)
 
     # WHEN
@@ -44,7 +44,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskWorld():
     zia_text = "Zia"
     before_yao_worldunit.add_charunit(zia_text)
     yao_char_debtor_weight = 77
-    before_yao_worldunit.set_char_pool(yao_char_debtor_weight)
+    before_yao_worldunit.set_char_respect(yao_char_debtor_weight)
     clean_text = "clean"
     zia_clean_ideaunit = ideaunit_shop(clean_text, pledge=True)
     zia_clean_ideaunit._doerunit.set_beliefhold(yao_text)
@@ -77,7 +77,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskWorld():
     zia_text = "Zia"
     before_yao_worldunit.add_charunit(zia_text)
     yao_debtor_weight = 77
-    before_yao_worldunit.set_char_pool(yao_debtor_weight)
+    before_yao_worldunit.set_char_respect(yao_debtor_weight)
     zia_worldunit = worldunit_shop(zia_text)
     zia_worldunit.add_charunit(yao_text)
     clean_text = "clean"
@@ -115,7 +115,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskWorld():
     zia_text = "Zia"
     before_yao_worldunit.add_charunit(zia_text)
     yao_debtor_weight = 55
-    before_yao_worldunit.set_char_pool(yao_debtor_weight)
+    before_yao_worldunit.set_char_respect(yao_debtor_weight)
     zia_text = "Zia"
     zia_worldunit = worldunit_shop(zia_text)
     zia_worldunit.add_charunit(yao_text)
@@ -170,7 +170,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskWorldWhereAnIdeaU
     zia_text = "Zia"
     before_yao_worldunit.add_charunit(zia_text)
     yao_debtor_weight = 55
-    before_yao_worldunit.set_char_pool(yao_debtor_weight)
+    before_yao_worldunit.set_char_respect(yao_debtor_weight)
     zia_text = "Zia"
     zia_worldunit = worldunit_shop(zia_text)
     zia_worldunit.add_charunit(yao_text)
@@ -235,7 +235,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalWorld():
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
 
     sue_worldunit = worldunit_shop(sue_text)
     sue_worldunit.set_max_tree_traverse(5)
@@ -270,7 +270,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalWorld():
     yao_job = create_empty_world(yao_duty, yao_text)
     yao_job.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_job.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
-    yao_job.set_char_pool(yao_pool)
+    yao_job.set_char_respect(yao_pool)
     yao_job = listen_to_speaker_agenda(yao_job, sue_worldunit)
 
     # THEN irrational world is ignored
@@ -297,14 +297,14 @@ def test_listen_to_speaker_agenda_ProcessesBarrenWorld():
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_pool(yao_pool)
+    yao_duty.set_char_respect(yao_pool)
 
     # WHEN
     sue_job = create_empty_world(yao_duty, sue_text)
     yao_job = create_empty_world(yao_duty, yao_text)
     yao_job.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_job.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
-    yao_job.set_char_pool(yao_pool)
+    yao_job.set_char_respect(yao_pool)
     yao_job = listen_to_speaker_agenda(yao_job, speaker=sue_job)
 
     # THEN irrational world is ignored

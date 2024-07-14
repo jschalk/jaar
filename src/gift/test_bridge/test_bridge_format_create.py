@@ -40,7 +40,7 @@ def test_create_bridge_Arg_jaar_format_0001_char_v0_0_0():
     sue_worldunit.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     sue_worldunit.add_charunit(bob_text, bob_credor_weight, bob_debtor_weight)
     sue_worldunit.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
-    sue_worldunit.set_char_pool(music_pool)
+    sue_worldunit.set_char_respect(music_pool)
 
     # WHEN
     x_bridge = jaar_format_0001_char_v0_0_0()

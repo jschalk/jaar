@@ -30,8 +30,8 @@ def test_create_empty_world_ReturnsCorrectObj():
     swim_belief = beliefbox_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
     swim_belief.set_charlink(charlink_shop(zia_text))
     yao_voice.set_beliefbox(swim_belief)
-    yao_voice.set_char_credor_pool(zia_credor_pool, True)
-    yao_voice.set_char_debtor_pool(zia_debtor_pool, True)
+    yao_voice.set_credor_respect(zia_credor_pool)
+    yao_voice.set_debtor_resepect(zia_debtor_pool)
 
     # WHEN
     yao_empty_job = create_empty_world(yao_voice, x_owner_id=zia_text)
@@ -48,10 +48,10 @@ def test_create_empty_world_ReturnsCorrectObj():
     assert yao_empty_job._bit == yao_voice._bit
     assert yao_empty_job._penny == yao_voice._penny
     assert yao_empty_job._monetary_desc is None
-    assert yao_empty_job._char_credor_pool != yao_voice._char_credor_pool
-    assert yao_empty_job._char_credor_pool is None
-    assert yao_empty_job._char_debtor_pool != yao_voice._char_debtor_pool
-    assert yao_empty_job._char_debtor_pool is None
+    assert yao_empty_job._credor_respect != yao_voice._credor_respect
+    assert yao_empty_job._credor_respect is None
+    assert yao_empty_job._debtor_respect != yao_voice._debtor_respect
+    assert yao_empty_job._debtor_respect is None
     yao_empty_job.calc_world_metrics()
     assert yao_empty_job._chars == {}
 
@@ -65,8 +65,8 @@ def test_create_listen_basis_ReturnsCorrectObj():
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
-    zia_credor_pool = 87
-    zia_debtor_pool = 81
+    zia_credor_pool = 8700
+    zia_debtor_pool = 8100
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     zia_irrational_debtor_weight = 11
     zia_inallocable_debtor_weight = 22
@@ -76,8 +76,8 @@ def test_create_listen_basis_ReturnsCorrectObj():
     swim_belief = beliefbox_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
     swim_belief.set_charlink(charlink_shop(zia_text))
     yao_duty.set_beliefbox(swim_belief)
-    yao_duty.set_char_credor_pool(zia_credor_pool, True)
-    yao_duty.set_char_debtor_pool(zia_debtor_pool, True)
+    yao_duty.set_credor_respect(zia_credor_pool)
+    yao_duty.set_debtor_resepect(zia_debtor_pool)
 
     # WHEN
     yao_basis_job = create_listen_basis(yao_duty)
@@ -92,8 +92,8 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._coin == yao_duty._coin
     assert yao_basis_job._bit == yao_duty._bit
     assert yao_basis_job._monetary_desc == yao_duty._monetary_desc
-    assert yao_basis_job._char_credor_pool == yao_duty._char_credor_pool
-    assert yao_basis_job._char_debtor_pool == yao_duty._char_debtor_pool
+    assert yao_basis_job._credor_respect == yao_duty._credor_respect
+    assert yao_basis_job._debtor_respect == yao_duty._debtor_respect
     yao_basis_job.calc_world_metrics()
     assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
     assert len(yao_basis_job._idea_dict) == 1
@@ -128,7 +128,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     swim_beliefbox = beliefbox_shop(swim_text, _road_delimiter=slash_text)
     swim_beliefbox.edit_charlink(bob_text)
     sue_worldunit.set_beliefbox(swim_beliefbox)
-    sue_worldunit.set_char_pool(sue_char_pool)
+    sue_worldunit.set_char_respect(sue_char_pool)
     sue_worldunit.add_l1_idea(ideaunit_shop(casa_text))
     sue_worldunit.set_max_tree_traverse(sue_max_tree_traverse)
 
@@ -145,8 +145,8 @@ def test_get_default_action_world_ReturnsCorrectObj():
     assert default_action_world._bud_pool == sue_char_pool
     assert default_action_world._coin == x_coin
     assert default_action_world._bit == x_bit
-    assert default_action_world._char_credor_pool is None
-    assert default_action_world._char_debtor_pool is None
+    assert default_action_world._credor_respect is None
+    assert default_action_world._debtor_respect is None
     assert default_action_world._max_tree_traverse == sue_max_tree_traverse
     assert len(default_action_world.get_charunits_dict()) == 1
     assert len(default_action_world._idea_dict) == 1

@@ -247,7 +247,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     new3_value = 77
-#     x_attribute = "_char_credor_pool"
+#     x_attribute = "_credor_respect"
 #     required_args = {x_attribute: new3_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, required_args)
 #     ex1_changeunit.set_atomunit(x_atomunit)
@@ -257,7 +257,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     new4_value = 88
-#     x_attribute = "_char_debtor_pool"
+#     x_attribute = "_debtor_respect"
 #     required_args = {x_attribute: new4_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, required_args)
 #     ex1_changeunit.set_atomunit(x_atomunit)
@@ -370,13 +370,13 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     #         print(f"{x_atom.category=}")
 
 
-def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld():
+def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld_scenario1():
     # GIVEN
     sue_changeunit = changeunit_shop()
 
     worldunit_text = "worldunit"
     x_atomunit = atomunit_shop(worldunit_text, atom_update())
-    x_attribute = "_char_credor_pool"
+    x_attribute = "_credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 100)
     sue_changeunit.set_atomunit(x_atomunit)
 
@@ -384,12 +384,16 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld():
     zia_text = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg("char_id", zia_text)
-    x_atomunit.set_arg("credor_weight", 70)
+    x_atomunit.set_arg("credor_weight", "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN/THEN
     assert world_built_from_change_is_valid(sue_changeunit) is False
 
+
+def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld_scenario2():
+    sue_changeunit = changeunit_shop()
+    category = "world_charunit"
     # WHEN
     yao_text = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
@@ -404,55 +408,11 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld():
     bob_text = "Bob"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg("char_id", bob_text)
-    x_atomunit.set_arg("credor_weight", 35)
+    x_atomunit.set_arg("credor_weight", "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
     assert world_built_from_change_is_valid(sue_changeunit) is False
-
-
-def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenWorld():
-    # GIVEN
-    sue_world = worldunit_shop("Sue")
-    sue_world.set_char_credor_pool(100)
-
-    sue_changeunit = changeunit_shop()
-
-    category = "world_charunit"
-    zia_text = "Zia"
-    x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("char_id", zia_text)
-    x_atomunit.set_arg("credor_weight", 70)
-    sue_changeunit.set_atomunit(x_atomunit)
-
-    # WHEN/THEN
-    sue_world = worldunit_shop("Sue")
-    sue_world.set_char_credor_pool(100)
-    assert world_built_from_change_is_valid(sue_changeunit, sue_world) is False
-
-    # WHEN
-    yao_text = "Yao"
-    x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("char_id", yao_text)
-    x_atomunit.set_arg("credor_weight", 30)
-    sue_changeunit.set_atomunit(x_atomunit)
-
-    # THEN
-    sue_world = worldunit_shop("Sue")
-    sue_world.set_char_credor_pool(100)
-    assert world_built_from_change_is_valid(sue_changeunit, sue_world)
-
-    # WHEN
-    bob_text = "Bob"
-    x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("char_id", bob_text)
-    x_atomunit.set_arg("credor_weight", 35)
-    sue_changeunit.set_atomunit(x_atomunit)
-
-    # THEN
-    sue_world = worldunit_shop("Sue")
-    sue_world.set_char_credor_pool(100)
-    assert world_built_from_change_is_valid(sue_changeunit, sue_world) is False
 
 
 def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumber():
@@ -460,7 +420,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumbe
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
-    pool_attribute = "_char_credor_pool"
+    pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"
@@ -470,7 +430,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumbe
     zia_atomunit.set_arg("credor_weight", 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_world.set_char_credor_pool(100)
+    sue_world.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg("char_id", yao_text)
@@ -500,7 +460,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenStartingNumber(
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
-    pool_attribute = "_char_credor_pool"
+    pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"
@@ -510,7 +470,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenStartingNumber(
     zia_atomunit.set_arg("credor_weight", 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_world.set_char_credor_pool(100)
+    sue_world.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg("char_id", yao_text)
@@ -540,7 +500,7 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_GivenStartingNumber():
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
-    pool_attribute = "_char_credor_pool"
+    pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"
@@ -550,7 +510,7 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_GivenStartingNumber():
     zia_atomunit.set_arg("credor_weight", 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_world = worldunit_shop("Sue")
-    sue_world.set_char_credor_pool(100)
+    sue_world.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg("char_id", yao_text)
@@ -580,7 +540,7 @@ def test_ChangeUnit_get_json_ReturnsCorrectObj():
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
-    pool_attribute = "_char_credor_pool"
+    pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "world_charunit"

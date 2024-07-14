@@ -353,11 +353,11 @@
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_char_credor_pool": {
+            "_credor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_char_debtor_pool": {
+            "_debtor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

@@ -150,16 +150,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     x_bit = 5
     x_max_tree_traverse = 66
     x_monetary_desc = "dragon dollars"
-    x_char_credor_pool = 770
-    x_char_debtor_pool = 880
+    x_credor_respect = 770
+    x_debtor_respect = 880
     after_sue_world._weight = x_worldUnit_weight
     after_sue_world._bud_pool = x_bud_pool
     after_sue_world._coin = x_coin
     after_sue_world._bit = x_bit
     after_sue_world.set_max_tree_traverse(x_max_tree_traverse)
     after_sue_world.set_monetary_desc(x_monetary_desc)
-    after_sue_world.set_char_credor_pool(x_char_credor_pool)
-    after_sue_world.set_char_debtor_pool(x_char_debtor_pool)
+    after_sue_world.set_credor_respect(x_credor_respect)
+    after_sue_world.set_debtor_resepect(x_debtor_respect)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -170,8 +170,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("_max_tree_traverse") == x_max_tree_traverse
     assert xio_atomunit.get_value("_monetary_desc") == x_monetary_desc
-    assert xio_atomunit.get_value("_char_credor_pool") == x_char_credor_pool
-    assert xio_atomunit.get_value("_char_debtor_pool") == x_char_debtor_pool
+    assert xio_atomunit.get_value("_credor_respect") == x_credor_respect
+    assert xio_atomunit.get_value("_debtor_respect") == x_debtor_respect
     assert xio_atomunit.get_value("_weight") == x_worldUnit_weight
     assert xio_atomunit.get_value("_bud_pool") == x_bud_pool
     assert xio_atomunit.get_value("_coin") == x_coin

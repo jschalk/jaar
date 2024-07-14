@@ -66,17 +66,9 @@ class CharUnit(CharCore):
             self.set_debtor_weight(debtor_weight)
 
     def set_credor_weight(self, credor_weight: int):
-        if (credor_weight / self._bit).is_integer() is False:
-            raise _bit_RatioException(
-                f"'{credor_weight}' is not divisible by bit '{self._bit}'"
-            )
         self.credor_weight = credor_weight
 
     def set_debtor_weight(self, debtor_weight: int):
-        if (debtor_weight / self._bit).is_integer() is False:
-            raise _bit_RatioException(
-                f"'{debtor_weight}' is not divisible by bit '{self._bit}'"
-            )
         self.debtor_weight = debtor_weight
 
     def get_credor_weight(self):

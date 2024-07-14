@@ -61,7 +61,7 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     yao_world.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_world.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_world.set_char_pool(yao_pool)
+    yao_world.set_char_respect(yao_pool)
 
     # WHEN
     ordered_chars1 = get_ordered_debtors_roll(yao_world)
@@ -95,7 +95,7 @@ def test_get_ordered_debtors_roll_DoesNotReturnZero_debtor_weight():
     sue_text = "Sue"
     sue_debtor_weight = 51
     yao_pool = 92
-    yao_world.set_char_pool(yao_pool)
+    yao_world.set_char_respect(yao_pool)
     bob_text = "Bob"
     bob_debtor_weight = 75
     xio_text = "Xio"
@@ -133,7 +133,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
     sweep_road = yao_listener.make_road(casa_road, sweep_text)
 
     yao_listener.add_charunit(yao_text)
-    yao_listener.set_char_pool(20)
+    yao_listener.set_char_respect(20)
     yao_listener.add_idea(ideaunit_shop(clean_text), status_road)
     yao_listener.add_idea(ideaunit_shop(dirty_text), status_road)
     yao_listener.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
@@ -158,7 +158,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_text = "Yao"
     yao_listener = worldunit_shop(yao_text)
     yao_listener.add_charunit(yao_text)
-    yao_listener.set_char_pool(20)
+    yao_listener.set_char_respect(20)
     casa_text = "casa"
     casa_road = yao_listener.make_l1_road(casa_text)
     status_text = "status"
@@ -226,7 +226,7 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     snow_road = yao_src.make_road(weather_road, snow_text)
 
     yao_src.add_charunit(yao_text)
-    yao_src.set_char_pool(20)
+    yao_src.set_char_respect(20)
     yao_src.add_idea(ideaunit_shop(clean_text), status_road)
     yao_src.add_idea(ideaunit_shop(dirty_text), status_road)
     yao_src.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)

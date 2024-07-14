@@ -36,8 +36,8 @@ def test_WorldUnit_Exists():
     assert x_world._bit is None
     assert x_world._penny is None
     assert x_world._monetary_desc is None
-    assert x_world._char_credor_pool is None
-    assert x_world._char_debtor_pool is None
+    assert x_world._credor_respect is None
+    assert x_world._debtor_respect is None
     assert x_world._last_gift_id is None
     assert x_world._originunit is None
 
@@ -86,8 +86,8 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._bit == x_bit
     assert x_world._penny == x_penny
     assert x_world._monetary_desc is None
-    assert x_world._char_credor_pool is None
-    assert x_world._char_debtor_pool is None
+    assert x_world._credor_respect is None
+    assert x_world._debtor_respect is None
     assert x_world._last_gift_id is None
     assert x_world._originunit == originunit_shop()
 

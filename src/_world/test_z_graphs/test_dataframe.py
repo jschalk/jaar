@@ -9,8 +9,8 @@ from src._world.report import (
 def test_get_world_charunits_dataframe_ReturnsCorrectDataFrame():
     # GIVEN
     luca_world = worldunit_shop()
-    luca_world.set_char_credor_pool(500)
-    luca_world.set_char_debtor_pool(400)
+    luca_world.set_credor_respect(500)
+    luca_world.set_debtor_resepect(400)
     yao_text = "Yao"
     yao_credor_weight = 66
     yao_debtor_weight = 77

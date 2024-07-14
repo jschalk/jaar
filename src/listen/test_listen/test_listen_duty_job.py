@@ -99,7 +99,7 @@ def get_example_yao_world() -> WorldUnit:
     yao_speaker.add_charunit(yao_text, debtor_weight=10)
     yao_speaker.add_charunit(zia_text, debtor_weight=30)
     yao_speaker.add_charunit(bob_text, debtor_weight=40)
-    yao_speaker.set_char_pool(80)
+    yao_speaker.set_char_respect(80)
     return yao_speaker
 
 
@@ -107,7 +107,7 @@ def get_example_yao_job1_speaker() -> WorldUnit:
     yao_text = "Yao"
     yao_speaker = get_example_yao_world()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_pool(40)
+    yao_speaker.set_char_respect(40)
     yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
@@ -122,7 +122,7 @@ def get_example_yao_job2_speaker() -> WorldUnit:
     yao_text = "Yao"
     yao_speaker = get_example_yao_world()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_pool(30)
+    yao_speaker.set_char_respect(30)
     yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
@@ -142,7 +142,7 @@ def get_example_yao_job2_speaker() -> WorldUnit:
 def get_example_yao_job3_speaker() -> WorldUnit:
     yao_speaker = get_example_yao_world()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_pool(10)
+    yao_speaker.set_char_respect(10)
     yao_speaker.add_idea(ideaunit_shop(sweep_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(dirty_text()), sanitation_road())
     yao_speaker.add_idea(ideaunit_shop(clean_text()), sanitation_road())

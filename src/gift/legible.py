@@ -190,13 +190,13 @@ def add_worldunit_legible_list(
     _weight_text = "_weight"
     _max_tree_traverse_text = "_max_tree_traverse"
     _monetary_desc_text = "_monetary_desc"
-    _char_credor_pool_text = "_char_credor_pool"
-    _char_debtor_pool_text = "_char_debtor_pool"
+    _credor_respect_text = "_credor_respect"
+    _debtor_respect_text = "_debtor_respect"
 
     _max_tree_traverse_value = optional_args.get(_max_tree_traverse_text)
     _monetary_desc_value = optional_args.get(_monetary_desc_text)
-    _char_credor_pool_value = optional_args.get(_char_credor_pool_text)
-    _char_debtor_pool_value = optional_args.get(_char_debtor_pool_text)
+    _credor_respect_value = optional_args.get(_credor_respect_text)
+    _debtor_respect_value = optional_args.get(_debtor_respect_text)
     _weight_value = optional_args.get(_weight_text)
 
     x_monetary_desc = x_world._monetary_desc
@@ -212,20 +212,20 @@ def add_worldunit_legible_list(
             f"{x_world._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
         )
     if (
-        _char_credor_pool_value != None
-        and _char_debtor_pool_value != None
-        and _char_credor_pool_value == _char_debtor_pool_value
+        _credor_respect_value != None
+        and _debtor_respect_value != None
+        and _credor_respect_value == _debtor_respect_value
     ):
         legible_list.append(
-            f"{x_monetary_desc} total pool is now {_char_credor_pool_value}"
+            f"{x_monetary_desc} total pool is now {_credor_respect_value}"
         )
-    elif _char_credor_pool_value != None:
+    elif _credor_respect_value != None:
         legible_list.append(
-            f"{x_monetary_desc} credor pool is now {_char_credor_pool_value}"
+            f"{x_monetary_desc} credor pool is now {_credor_respect_value}"
         )
-    elif _char_debtor_pool_value != None:
+    elif _debtor_respect_value != None:
         legible_list.append(
-            f"{x_monetary_desc} debtor pool is now {_char_debtor_pool_value}"
+            f"{x_monetary_desc} debtor pool is now {_debtor_respect_value}"
         )
     if _weight_value != None:
         legible_list.append(

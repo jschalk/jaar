@@ -132,24 +132,6 @@ def test_CharUnit_set_credor_weight_CorrectlySetsAttribute():
     assert bob_charunit.credor_weight == x_credor_weight
 
 
-def test_CharUnit_set_credor_weight_RaisesErrorWhen_credor_weight_IsNotMultiple():
-    # GIVEN
-    bob_charunit = charunit_shop("Bob")
-    x_credor_weight = 23
-    bob_charunit.set_credor_weight(x_credor_weight)
-    assert bob_charunit._bit == 1
-    assert bob_charunit.credor_weight == x_credor_weight
-
-    # WHEN
-    new_credor_weight = 13.5
-    with pytest_raises(Exception) as excinfo:
-        bob_charunit.set_credor_weight(new_credor_weight)
-    assert (
-        str(excinfo.value)
-        == f"'{new_credor_weight}' is not divisible by bit '{bob_charunit._bit}'"
-    )
-
-
 def test_CharUnit_set_debtor_weight_CorrectlySetsAttribute():
     # GIVEN
     bob_charunit = charunit_shop("Bob")
@@ -160,24 +142,6 @@ def test_CharUnit_set_debtor_weight_CorrectlySetsAttribute():
 
     # THEN
     assert bob_charunit.debtor_weight == x_debtor_weight
-
-
-def test_CharUnit_set_debtor_weight_RaisesErrorWhen_debtor_weight_IsNotMultiple():
-    # GIVEN
-    bob_charunit = charunit_shop("Bob")
-    x_debtor_weight = 23
-    bob_charunit.set_debtor_weight(x_debtor_weight)
-    assert bob_charunit._bit == 1
-    assert bob_charunit.debtor_weight == x_debtor_weight
-
-    # WHEN
-    new_debtor_weight = 13.5
-    with pytest_raises(Exception) as excinfo:
-        bob_charunit.set_debtor_weight(new_debtor_weight)
-    assert (
-        str(excinfo.value)
-        == f"'{new_debtor_weight}' is not divisible by bit '{bob_charunit._bit}'"
-    )
 
 
 def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeNoNulls():

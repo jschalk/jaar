@@ -12,7 +12,7 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 
 
-class Missing_char_debtor_poolException(Exception):
+class Missing_debtor_respectException(Exception):
     pass
 
 
@@ -25,7 +25,7 @@ def generate_perspective_agenda(perspective_world: WorldUnit) -> list[IdeaUnit]:
 def _ingest_perspective_agenda(
     listener: WorldUnit, agenda: list[IdeaUnit]
 ) -> WorldUnit:
-    debtor_amount = listener._char_debtor_pool
+    debtor_amount = listener._debtor_respect
     ingest_list = generate_ingest_list(agenda, debtor_amount, listener._bit)
     for ingest_ideaunit in ingest_list:
         _ingest_single_ideaunit(listener, ingest_ideaunit)
@@ -190,13 +190,13 @@ def listen_to_speaker_fact(
 
 def listen_to_speaker_agenda(listener: WorldUnit, speaker: WorldUnit) -> WorldUnit:
     if listener.char_exists(speaker._owner_id) is False:
-        raise Missing_char_debtor_poolException(
+        raise Missing_debtor_respectException(
             f"listener '{listener._owner_id}' world is assumed to have {speaker._owner_id} charunit."
         )
     perspective_world = get_speaker_perspective(speaker, listener._owner_id)
     if perspective_world._rational is False:
         return _allocate_irrational_debtor_weight(listener, speaker._owner_id)
-    if listener._char_debtor_pool is None:
+    if listener._debtor_respect is None:
         return _allocate_inallocable_debtor_weight(listener, speaker._owner_id)
     if listener._owner_id != speaker._owner_id:
         agenda = generate_perspective_agenda(perspective_world)
@@ -261,7 +261,7 @@ def listen_to_facts_voice_action(new_action: WorldUnit, listener_hubunit: HubUni
 def listen_to_debtors_roll_voice_action(listener_hubunit: HubUnit) -> WorldUnit:
     voice = listener_hubunit.get_voice_world()
     new_world = create_listen_basis(voice)
-    if voice._char_debtor_pool is None:
+    if voice._debtor_respect is None:
         return new_world
     listen_to_agendas_voice_action(new_world, listener_hubunit)
     listen_to_facts_voice_action(new_world, listener_hubunit)
@@ -273,7 +273,7 @@ def listen_to_debtors_roll_duty_job(
 ) -> WorldUnit:
     duty = healer_hubunit.get_duty_world(listener_id)
     new_duty = create_listen_basis(duty)
-    if duty._char_debtor_pool is None:
+    if duty._debtor_respect is None:
         return new_duty
     listen_to_agendas_duty_job(new_duty, healer_hubunit)
     listen_to_facts_duty_job(new_duty, healer_hubunit)

@@ -82,10 +82,10 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     x_world._coin = yao_coin
     world_weight = 23
     x_world._weight = world_weight
-    x_char_credor_pool = 22
-    x_char_debtor_pool = 22
-    x_world.set_char_credor_pool(x_char_credor_pool)
-    x_world.set_char_debtor_pool(x_char_debtor_pool)
+    x_credor_respect = 22
+    x_debtor_respect = 22
+    x_world.set_credor_respect(x_credor_respect)
+    x_world.set_debtor_resepect(x_debtor_respect)
     override_text = "override"
     x_last_gift_id = 77
     x_world.set_last_gift_id(x_last_gift_id)
@@ -104,9 +104,9 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_coin"] == yao_coin
     assert world_dict["_max_tree_traverse"] == x_world._max_tree_traverse
     assert world_dict["_road_delimiter"] == x_world._road_delimiter
-    assert world_dict["_char_credor_pool"] == x_world._char_credor_pool
-    assert world_dict["_char_debtor_pool"] == x_world._char_debtor_pool
-    assert world_dict["_char_debtor_pool"] == x_world._char_debtor_pool
+    assert world_dict["_credor_respect"] == x_world._credor_respect
+    assert world_dict["_debtor_respect"] == x_world._debtor_respect
+    assert world_dict["_debtor_respect"] == x_world._debtor_respect
     assert world_dict["_last_gift_id"] == x_world._last_gift_id
     assert len(world_dict["_chars"]) == len(x_world._chars)
     assert len(world_dict["_chars"]) != 12
@@ -260,11 +260,11 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert world_dict["_bit"] == zia_world._bit
     assert world_dict["_penny"] == zia_world._penny
     with pytest_raises(Exception) as excinfo:
-        world_dict["_char_credor_pool"]
-    assert str(excinfo.value) == "'_char_credor_pool'"
+        world_dict["_credor_respect"]
+    assert str(excinfo.value) == "'_credor_respect'"
     with pytest_raises(Exception) as excinfo:
-        world_dict["_char_debtor_pool"]
-    assert str(excinfo.value) == "'_char_debtor_pool'"
+        world_dict["_debtor_respect"]
+    assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
         world_dict["_last_gift_id"]
 
@@ -355,10 +355,10 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world._bit = zia_bit
     zia_penny = 2
     zia_world._penny = zia_penny
-    zia_char_credor_pool = 200
-    zia_char_debtor_pool = 200
-    zia_world.set_char_credor_pool(zia_char_credor_pool)
-    zia_world.set_char_debtor_pool(zia_char_debtor_pool)
+    zia_credor_respect = 200
+    zia_debtor_respect = 200
+    zia_world.set_credor_respect(zia_credor_respect)
+    zia_world.set_debtor_resepect(zia_debtor_respect)
     zia_last_gift_id = 73
     zia_world.set_last_gift_id(zia_last_gift_id)
 
@@ -418,10 +418,10 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._max_tree_traverse == 23
     assert json_world._max_tree_traverse == zia_world._max_tree_traverse
     assert json_world._road_delimiter == zia_world._road_delimiter
-    assert json_world._char_credor_pool == zia_world._char_credor_pool
-    assert json_world._char_debtor_pool == zia_world._char_debtor_pool
-    assert json_world._char_credor_pool == zia_char_credor_pool
-    assert json_world._char_debtor_pool == zia_char_debtor_pool
+    assert json_world._credor_respect == zia_world._credor_respect
+    assert json_world._debtor_respect == zia_world._debtor_respect
+    assert json_world._credor_respect == zia_credor_respect
+    assert json_world._debtor_respect == zia_debtor_respect
     assert json_world._last_gift_id == zia_world._last_gift_id
     assert json_world._last_gift_id == zia_last_gift_id
     print(f"{json_world._beliefs.keys()=}")

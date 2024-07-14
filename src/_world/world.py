@@ -7,7 +7,7 @@ from src._instrument.python import (
     get_empty_dict_if_none,
 )
 from src._road.finance import (
-    trim_bit_excess,
+    valid_fiscal_ratio,
     default_bit_if_none,
     default_penny_if_none,
     default_coin_if_none,
@@ -137,8 +137,8 @@ class WorldUnit:
     _bit: BitHum = None
     _penny: PennyNum = None
     _monetary_desc: str = None
-    _char_credor_pool: int = None
-    _char_debtor_pool: int = None
+    _credor_respect: int = None
+    _debtor_respect: int = None
     _originunit: OriginUnit = None  # In job worlds this shows source
     # calc_world_metrics Calculated field begin
     _idea_dict: dict[RoadUnit, IdeaUnit] = None
@@ -167,86 +167,29 @@ class WorldUnit:
     def set_bud_pool(self, x_bud_pool):
         self._bud_pool = validate_bud_pool(x_bud_pool)
 
-    def set_char_pool(self, x_char_pool: int):
-        self.set_char_credor_pool(
-            new_char_credor_pool=x_char_pool,
-            update_chars_credor_weight=True,
-            correct_bit_issues=True,
-        )
-        self.set_char_debtor_pool(
-            new_char_debtor_pool=x_char_pool,
-            update_chars_debtor_weight=True,
-            correct_bit_issues=True,
-        )
+    def set_char_respect(self, x_char_pool: int):
+        self.set_credor_respect(x_char_pool)
+        self.set_debtor_resepect(x_char_pool)
         self.set_bud_pool(x_char_pool)
 
-    def set_char_credor_pool(
-        self,
-        new_char_credor_pool: int,
-        update_chars_credor_weight: bool = False,
-        correct_bit_issues: bool = False,
-    ):
-        if (new_char_credor_pool / self._bit).is_integer() is False:
+    def set_credor_respect(self, new_credor_respect: int):
+        if valid_fiscal_ratio(new_credor_respect, self._bit) is False:
             raise _bit_RatioException(
-                f"World '{self._owner_id}' cannot set _char_credor_pool='{new_char_credor_pool}'. It is not divisible by bit '{self._bit}'"
+                f"World '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
             )
+        self._credor_respect = new_credor_respect
 
-        if update_chars_credor_weight:
-            old_char_credor_pool = self.get_charunits_credor_weight_sum()
-            if old_char_credor_pool != 0:
-                x_ratio = new_char_credor_pool / old_char_credor_pool
-                for x_char in self._chars.values():
-                    new_char_credor_weight = trim_bit_excess(
-                        num=x_char.credor_weight * x_ratio, bit=x_char._bit
-                    )
-                    x_char.set_credor_weight(new_char_credor_weight)
-
-        self._char_credor_pool = new_char_credor_pool
-        if correct_bit_issues:
-            self._correct_any_credor_bit_issues()
-
-    def _correct_any_credor_bit_issues(self):
-        if self.get_charunits_credor_weight_sum() != self._char_credor_pool:
-            missing_credor_weight = (
-                self._char_credor_pool - self.get_charunits_credor_weight_sum()
-            )
-            if len(self._chars) > 0:
-                charunits = list(self._chars.values())
-                # chars_count = len(self._chars)
-                # bit_count = missing_credor_weight / self._bit
-                # if bit_count <= chars_count:
-                for _ in range(0, missing_credor_weight, self._bit):
-                    x_charunit = charunits.pop()
-                    x_charunit.set_credor_weight(x_charunit.credor_weight + self._bit)
-
-    def set_char_debtor_pool(
-        self,
-        new_char_debtor_pool: int,
-        update_chars_debtor_weight: bool = False,
-        correct_bit_issues: bool = False,
-    ):
-        if (new_char_debtor_pool / self._bit).is_integer() is False:
+    def set_debtor_resepect(self, new_debtor_respect: int):
+        if valid_fiscal_ratio(new_debtor_respect, self._bit) is False:
             raise _bit_RatioException(
-                f"World '{self._owner_id}' cannot set _char_debtor_pool='{new_char_debtor_pool}'. It is not divisible by bit '{self._bit}'"
+                f"World '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
             )
-
-        if update_chars_debtor_weight:
-            old_char_debtor_pool = self.get_charunits_debtor_weight_sum()
-            if old_char_debtor_pool != 0:
-                x_ratio = new_char_debtor_pool / old_char_debtor_pool
-                for x_char in self._chars.values():
-                    new_char_debtor_weight = trim_bit_excess(
-                        num=x_char.debtor_weight * x_ratio, bit=x_char._bit
-                    )
-                    x_char.set_debtor_weight(new_char_debtor_weight)
-        self._char_debtor_pool = new_char_debtor_pool
-        if correct_bit_issues:
-            self._correct_any_debtor_bit_issues()
+        self._debtor_respect = new_debtor_respect
 
     def _correct_any_debtor_bit_issues(self):
-        if self.get_charunits_debtor_weight_sum() != self._char_debtor_pool:
+        if self.get_charunits_debtor_weight_sum() != self._debtor_respect:
             missing_debtor_weight = (
-                self._char_debtor_pool - self.get_charunits_debtor_weight_sum()
+                self._debtor_respect - self.get_charunits_debtor_weight_sum()
             )
             if len(self._chars) > 0:
                 charunits = list(self._chars.values())
@@ -1482,17 +1425,6 @@ class WorldUnit:
         pledge_item = self.get_idea_obj(task_road)
         pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
 
-    def is_charunits_credor_weight_sum_correct(self) -> bool:
-        x_sum = self.get_charunits_credor_weight_sum()
-        return x_sum in (0, self._char_credor_pool) or self._char_credor_pool is None
-
-    def is_charunits_debtor_weight_sum_correct(self) -> bool:
-        x_debtor_weight_sum = self.get_charunits_debtor_weight_sum()
-        char_debtor_pool = self._char_debtor_pool
-        x_debtor_weight_empty_or_pool = x_debtor_weight_sum in (char_debtor_pool, 0)
-        no_char_debtor_pool = self._char_debtor_pool is None
-        return no_char_debtor_pool or x_debtor_weight_empty_or_pool
-
     def get_charunits_credor_weight_sum(self) -> float:
         return sum(charunit.get_credor_weight() for charunit in self._chars.values())
 
@@ -1928,14 +1860,6 @@ class WorldUnit:
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
-        if self.is_charunits_credor_weight_sum_correct() is False:
-            raise CharUnitsCredorDebtorSumException(
-                f"'{self._owner_id}' is_charunits_credor_weight_sum_correct is False. _char_credor_pool={self._char_credor_pool}. charunits_credor_weight_sum={self.get_charunits_credor_weight_sum()}"
-            )
-        if self.is_charunits_debtor_weight_sum_correct() is False:
-            raise CharUnitsCredorDebtorSumException(
-                f"'{self._owner_id}' is_charunits_debtor_weight_sum_correct is False. _char_debtor_pool={self._char_debtor_pool}. charunits_debtor_weight_sum={self.get_charunits_debtor_weight_sum()}"
-            )
         self._reset_beliefboxs_world_cred_debt()
         self._reset_beliefboxs_world_cred_debt()
         self._reset_charunit_world_cred_debt()
@@ -2002,10 +1926,10 @@ class WorldUnit:
             "_road_delimiter": self._road_delimiter,
             "_idearoot": self._idearoot.get_dict(),
         }
-        if self._char_credor_pool != None:
-            x_dict["_char_credor_pool"] = self._char_credor_pool
-        if self._char_debtor_pool != None:
-            x_dict["_char_debtor_pool"] = self._char_debtor_pool
+        if self._credor_respect != None:
+            x_dict["_credor_respect"] = self._credor_respect
+        if self._debtor_respect != None:
+            x_dict["_debtor_respect"] = self._debtor_respect
         if self._last_gift_id != None:
             x_dict["_last_gift_id"] = self._last_gift_id
 
@@ -2174,8 +2098,8 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
     x_world._bit = default_bit_if_none(obj_from_world_dict(world_dict, "_bit"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))
-    x_world._char_credor_pool = obj_from_world_dict(world_dict, "_char_credor_pool")
-    x_world._char_debtor_pool = obj_from_world_dict(world_dict, "_char_debtor_pool")
+    x_world._credor_respect = obj_from_world_dict(world_dict, "_credor_respect")
+    x_world._debtor_respect = obj_from_world_dict(world_dict, "_debtor_respect")
     x_world._last_gift_id = obj_from_world_dict(world_dict, "_last_gift_id")
     x_road_delimiter = x_world._road_delimiter
     x_chars = obj_from_world_dict(world_dict, "_chars", x_road_delimiter).values()

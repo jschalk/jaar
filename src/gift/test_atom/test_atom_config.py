@@ -238,7 +238,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
 
     # THEN
     assert len(atom_columns) == 107
-    assert atom_columns.get("worldunit_UPDATE__char_credor_pool") == "INTEGER"
+    assert atom_columns.get("worldunit_UPDATE__credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
 
@@ -326,8 +326,8 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert worldunit_columns.get("uid") != None
     assert worldunit_columns.get("_max_tree_traverse") != None
     assert worldunit_columns.get("_monetary_desc") != None
-    assert worldunit_columns.get("_char_credor_pool") != None
-    assert worldunit_columns.get("_char_debtor_pool") != None
+    assert worldunit_columns.get("_credor_respect") != None
+    assert worldunit_columns.get("_debtor_respect") != None
     assert worldunit_columns.get("_bud_pool") != None
     assert worldunit_columns.get("_coin") != None
     assert worldunit_columns.get("_bit") != None

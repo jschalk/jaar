@@ -31,10 +31,10 @@ def create_listen_basis(x_duty: WorldUnit) -> WorldUnit:
     x_listen._beliefs = x_duty._beliefs
     x_listen.set_monetary_desc(x_duty._monetary_desc)
     x_listen.set_max_tree_traverse(x_duty._max_tree_traverse)
-    if x_duty._char_credor_pool != None:
-        x_listen.set_char_credor_pool(x_duty._char_credor_pool)
-    if x_duty._char_debtor_pool != None:
-        x_listen.set_char_debtor_pool(x_duty._char_debtor_pool)
+    if x_duty._credor_respect != None:
+        x_listen.set_credor_respect(x_duty._credor_respect)
+    if x_duty._debtor_respect != None:
+        x_listen.set_debtor_resepect(x_duty._debtor_respect)
     for x_charunit in x_listen._chars.values():
         x_charunit.reset_listen_calculated_attrs()
     return x_listen
@@ -43,6 +43,6 @@ def create_listen_basis(x_duty: WorldUnit) -> WorldUnit:
 def get_default_action_world(voice: WorldUnit) -> WorldUnit:
     default_action_world = create_listen_basis(voice)
     default_action_world._last_gift_id = voice._last_gift_id
-    default_action_world._char_credor_pool = None
-    default_action_world._char_debtor_pool = None
+    default_action_world._credor_respect = None
+    default_action_world._debtor_respect = None
     return default_action_world

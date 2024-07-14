@@ -29,7 +29,7 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
     yao_text = "Yao"
     yao_speaker = worldunit_shop(yao_text)
     yao_speaker.add_charunit(yao_text)
-    yao_speaker.set_char_pool(20)
+    yao_speaker.set_char_respect(20)
     casa_text = "casa"
     casa_road = yao_speaker.make_l1_road(casa_text)
     status_text = "status"
