@@ -648,7 +648,7 @@ class WorldUnit:
             self._beliefs[charunit.char_id]
         except KeyError:
             charlink = charlink_shop(
-                char_id=CharID(charunit.char_id),
+                char_id=charunit.char_id,
                 credor_weight=1,
                 debtor_weight=1,
             )

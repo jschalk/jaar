@@ -30,7 +30,6 @@ def test_originhold_shop_ReturnsCorrectObj():
 def test_originhold_shop_WeightIsNot_Reason():
     # GIVEN
     roy_text = "Roy"
-    # roy_char_id = CharID(roy_text)
 
     # WHEN
     originhold_x = originhold_shop(char_id=roy_text)

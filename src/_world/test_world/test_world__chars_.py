@@ -40,9 +40,9 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     zia_text = "Zia"
     sue_text = "Sue"
     xio_text = "Xio"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(zia_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(sue_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(xio_text)))
+    yao_world.set_charunit(charunit=charunit_shop(zia_text))
+    yao_world.set_charunit(charunit=charunit_shop(sue_text))
+    yao_world.set_charunit(charunit=charunit_shop(xio_text))
 
     # THEN
     assert yao_world._chars.get(zia_text)._bit == x_bit
@@ -189,9 +189,9 @@ def test_WorldUnit_get_char_belief_ids_ReturnsCorrectObj():
     zia_text = "Zia"
     sue_text = "Sue"
     xio_text = "Xio"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(zia_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(sue_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(xio_text)))
+    yao_world.set_charunit(charunit=charunit_shop(zia_text))
+    yao_world.set_charunit(charunit=charunit_shop(sue_text))
+    yao_world.set_charunit(charunit=charunit_shop(xio_text))
 
     # WHEN / THEN
     assert yao_world.get_char_belief_ids(sue_text) == [sue_text]
@@ -278,7 +278,7 @@ def test_WorldUnit_CharUnit_CorrectlyModifiesBeliefBoxCharLinks():
     yao_world.add_charunit(xio_text, credor_weight=17)
 
     swim_text = ",swimmers"
-    sue_char_dict = {CharID(sue_text): charlink_shop(sue_text)}
+    sue_char_dict = {sue_text: charlink_shop(sue_text)}
     swim_belief = beliefbox_shop(belief_id=swim_text, _chars=sue_char_dict)
     swim_belief.set_charlink(charlink_shop(sue_text, credor_weight=5, debtor_weight=18))
     swim_belief.set_charlink(charlink_shop(zia_text, credor_weight=7, debtor_weight=30))
@@ -318,7 +318,7 @@ def test_WorldUnit_CharUnit_CorrectlyMergeschar_ids():
     yao_world.add_charunit(xio_text, credor_weight=17)
 
     swim_text = ",swimmers"
-    sue_char_dict = {CharID(sue_text): charlink_shop(sue_text)}
+    sue_char_dict = {sue_text: charlink_shop(sue_text)}
     swim_belief = beliefbox_shop(belief_id=swim_text, _chars=sue_char_dict)
     swim_belief.set_charlink(
         charlink=charlink_shop(sue_text, credor_weight=5, debtor_weight=18)
@@ -361,7 +361,7 @@ def test_WorldUnit_CharUnit_CorrectlyMergesBeliefBoxCharLinks():
     yao_world.add_charunit(xio_text, credor_weight=17)
 
     swim_text = ",swimmers"
-    sue_char_dict = {CharID(sue_text): charlink_shop(sue_text)}
+    sue_char_dict = {sue_text: charlink_shop(sue_text)}
     swim_belief = beliefbox_shop(belief_id=swim_text, _chars=sue_char_dict)
     swim_belief.set_charlink(
         charlink=charlink_shop(sue_text, credor_weight=5, debtor_weight=18)

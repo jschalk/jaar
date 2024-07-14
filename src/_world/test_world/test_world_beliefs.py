@@ -144,9 +144,9 @@ def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=yao_text))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=zia_text))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=Xio_text))
 
     assert len(sue_world._chars) == 3
     assert len(sue_world._beliefs) == 3
@@ -195,9 +195,9 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=yao_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=zia_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=Xio_text))
 
     swim_text = "swim"
     swim_road = x_world.make_road(prom_text, swim_text)
@@ -242,9 +242,9 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
-    sue_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=yao_text))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=zia_text))
+    sue_world.set_charunit(charunit=charunit_shop(char_id=Xio_text))
     yao_awardlink = awardlink_shop(yao_text, credor_weight=20, debtor_weight=6)
     zia_awardlink = awardlink_shop(zia_text, credor_weight=10, debtor_weight=1)
     Xio_awardlink = awardlink_shop(Xio_text, credor_weight=10)
@@ -296,9 +296,9 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     zia_text = "Zia"
     Xio_text = "Xio"
     sue_text = "Sue"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=yao_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=zia_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=Xio_text))
     yao_awardlink = awardlink_shop(yao_text, credor_weight=20, debtor_weight=6)
     zia_awardlink = awardlink_shop(zia_text, credor_weight=10, debtor_weight=1)
     Xio_awardlink = awardlink_shop(Xio_text, credor_weight=10)
@@ -325,7 +325,7 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates1LevelWorldBeliefWorldImport
     assert belief_yao._world_debt + belief_zia._world_debt + belief_Xio._world_debt == 1
 
     # WHEN
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(sue_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=sue_text))
     bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=37)
     x_world._idearoot.set_awardlink(awardlink=bl_sue)
     assert len(x_world._beliefs) == 4
@@ -367,9 +367,9 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculates3levelWorldBeliefWorldImport
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=yao_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=zia_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=Xio_text))
     yao_awardlink = awardlink_shop(
         belief_id=yao_text, credor_weight=20, debtor_weight=6
     )
@@ -409,9 +409,9 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(yao_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(zia_text)))
-    x_world.set_charunit(charunit=charunit_shop(char_id=CharID(Xio_text)))
+    x_world.set_charunit(charunit=charunit_shop(char_id=yao_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=zia_text))
+    x_world.set_charunit(charunit=charunit_shop(char_id=Xio_text))
     yao_awardlink = awardlink_shop(
         belief_id=yao_text, credor_weight=20, debtor_weight=6
     )
@@ -468,7 +468,7 @@ def test_WorldUnit_get_idea_list_CorrectlyCalculatesBeliefWorldImportanceLWwithB
     )
 
 
-def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyCreatesNewCharID():
+def test_WorldUnit_edit_beliefbox_belief_id_CorrectlyCreatesNew():
     # GIVEN
     world = worldunit_shop("prom")
     yao_text = "Yao"

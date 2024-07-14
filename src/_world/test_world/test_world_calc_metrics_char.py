@@ -17,9 +17,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(sue_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(bob_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(zia_text)))
+    yao_world.set_charunit(charunit=charunit_shop(sue_text))
+    yao_world.set_charunit(charunit=charunit_shop(bob_text))
+    yao_world.set_charunit(charunit=charunit_shop(zia_text))
     bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=20, debtor_weight=40)
     bl_bob = awardlink_shop(belief_id=bob_text, credor_weight=10, debtor_weight=5)
     bl_zia = awardlink_shop(belief_id=zia_text, credor_weight=10, debtor_weight=5)
@@ -90,7 +90,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharLinkWorldCredAndDebt():
 
     # WHEN anothher pledge, check metrics are as expected
     selena_text = "selena"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(selena_text)))
+    yao_world.set_charunit(charunit=charunit_shop(selena_text))
     yao_world._idearoot.set_awardlink(
         awardlink=awardlink_shop(
             belief_id=BeliefID(selena_text), credor_weight=20, debtor_weight=13
@@ -164,9 +164,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(sue_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(bob_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(zia_text)))
+    yao_world.set_charunit(charunit=charunit_shop(sue_text))
+    yao_world.set_charunit(charunit=charunit_shop(bob_text))
+    yao_world.set_charunit(charunit=charunit_shop(zia_text))
     bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=20, debtor_weight=40)
     bl_bob = awardlink_shop(belief_id=bob_text, credor_weight=10, debtor_weight=5)
     bl_zia = awardlink_shop(belief_id=zia_text, credor_weight=10, debtor_weight=5)
@@ -228,7 +228,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
 
     # WHEN anothher pledge, check metrics are as expected
     selena_text = "selena"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(selena_text)))
+    yao_world.set_charunit(charunit=charunit_shop(selena_text))
     yao_world._idearoot.set_awardlink(
         awardlink=awardlink_shop(
             belief_id=selena_text, credor_weight=20, debtor_weight=10
@@ -301,9 +301,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(sue_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(bob_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(zia_text)))
+    yao_world.set_charunit(charunit=charunit_shop(sue_text))
+    yao_world.set_charunit(charunit=charunit_shop(bob_text))
+    yao_world.set_charunit(charunit=charunit_shop(zia_text))
     bl_sue = awardlink_shop(belief_id=sue_text, credor_weight=20, debtor_weight=40)
     bl_bob = awardlink_shop(belief_id=bob_text, credor_weight=10, debtor_weight=5)
     bl_zia = awardlink_shop(belief_id=zia_text, credor_weight=10, debtor_weight=5)
@@ -406,9 +406,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_world.set_charunit(charunit=charunit_shop(CharID(sue_text), credor_weight=8))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(bob_text)))
-    yao_world.set_charunit(charunit=charunit_shop(CharID(zia_text)))
+    yao_world.set_charunit(charunit=charunit_shop(sue_text, credor_weight=8))
+    yao_world.set_charunit(charunit=charunit_shop(bob_text))
+    yao_world.set_charunit(charunit=charunit_shop(zia_text))
     sue_charunit = yao_world._chars.get(sue_text)
     bob_charunit = yao_world._chars.get(bob_text)
     zia_charunit = yao_world._chars.get(zia_text)

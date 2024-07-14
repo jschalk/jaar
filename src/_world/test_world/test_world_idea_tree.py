@@ -414,7 +414,7 @@ def test_world4char_Exists():
     vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
     x_world.add_idea(vacuum_idea, parent_road=casa_road)
 
-    sue_char_id = CharID(sue_text)
+    sue_char_id = sue_text
     x_world.add_charunit(char_id=sue_char_id)
     x_awardlink = awardlink_shop(belief_id=sue_char_id)
     yrx = x_world._idearoot
@@ -444,7 +444,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
     x_world.add_idea(vacuum_idea, parent_road=casa_road)
 
-    yao_char_id = CharID("Yao")
+    yao_char_id = "Yao"
     x_world.add_charunit(char_id=yao_char_id)
     yao_bl = awardlink_shop(belief_id=yao_char_id)
     yrx = x_world._idearoot
@@ -453,7 +453,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
     nation_text = "nation-state"
     yrx._kids[nation_text].set_awardlink(awardlink=yao_bl)
 
-    sue_char_id = CharID(sue_text)
+    sue_char_id = sue_text
     x_world.add_charunit(char_id=sue_char_id)
     sue_bl = awardlink_shop(belief_id=sue_char_id)
     yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=sue_bl)
