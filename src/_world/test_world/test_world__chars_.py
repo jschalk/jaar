@@ -18,7 +18,7 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     bob_world = worldunit_shop("Bob", _road_delimiter=slash_text)
 
     # WHEN
-    bob_world.set_charunit(charunit=yao_charunit)
+    bob_world.set_charunit(yao_charunit)
 
     # THEN
     assert bob_world._chars.get(yao_text)._road_delimiter == slash_text
@@ -40,9 +40,9 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     zia_text = "Zia"
     sue_text = "Sue"
     xio_text = "Xio"
-    yao_world.set_charunit(charunit=charunit_shop(zia_text))
-    yao_world.set_charunit(charunit=charunit_shop(sue_text))
-    yao_world.set_charunit(charunit=charunit_shop(xio_text))
+    yao_world.set_charunit(charunit_shop(zia_text))
+    yao_world.set_charunit(charunit_shop(sue_text))
+    yao_world.set_charunit(charunit_shop(xio_text))
 
     # THEN
     assert yao_world._chars.get(zia_text)._bit == x_bit
@@ -189,9 +189,9 @@ def test_WorldUnit_get_char_belief_ids_ReturnsCorrectObj():
     zia_text = "Zia"
     sue_text = "Sue"
     xio_text = "Xio"
-    yao_world.set_charunit(charunit=charunit_shop(zia_text))
-    yao_world.set_charunit(charunit=charunit_shop(sue_text))
-    yao_world.set_charunit(charunit=charunit_shop(xio_text))
+    yao_world.set_charunit(charunit_shop(zia_text))
+    yao_world.set_charunit(charunit_shop(sue_text))
+    yao_world.set_charunit(charunit_shop(xio_text))
 
     # WHEN / THEN
     assert yao_world.get_char_belief_ids(sue_text) == [sue_text]
@@ -212,8 +212,8 @@ def test_WorldUnit_edit_charunit_char_id_CorrectlyModifiesCharUnit_char_id():
     yao_world.add_charunit("Sue")
     yao_world.add_charunit("Xio", credor_weight=17)
     assert len(yao_world._chars) == 3
-    assert yao_world._chars.get(zia_text) != None
-    assert yao_world._chars.get(zia_text).credor_weight == 13
+    assert yao_world.get_char(zia_text) != None
+    assert yao_world.get_char(zia_text).credor_weight == 13
     assert len(yao_world._beliefs) == 3
     assert yao_world.get_beliefbox(zia_text) != None
     assert yao_world.get_beliefbox(zia_text)._char_mirror == True
@@ -228,9 +228,9 @@ def test_WorldUnit_edit_charunit_char_id_CorrectlyModifiesCharUnit_char_id():
     )
 
     # THEN
-    assert yao_world._chars.get(beto_text) != None
-    assert yao_world._chars.get(beto_text).credor_weight == 13
-    assert yao_world._chars.get(zia_text) is None
+    assert yao_world.get_char(beto_text) != None
+    assert yao_world.get_char(beto_text).credor_weight == 13
+    assert yao_world.get_char(zia_text) is None
     assert len(yao_world._chars) == 3
     assert len(yao_world._beliefs) == 3
     assert yao_world.get_beliefbox(zia_text) is None
@@ -247,8 +247,8 @@ def test_WorldUnit_CharUnit_raiseErrorNewchar_idPreviouslyExists():
     yao_world.add_charunit(sue_text)
     yao_world.add_charunit("Xio", credor_weight=17)
     assert len(yao_world._chars) == 3
-    assert yao_world._chars.get(zia_text) != None
-    assert yao_world._chars.get(zia_text).credor_weight == 13
+    assert yao_world.get_char(zia_text) != None
+    assert yao_world.get_char(zia_text).credor_weight == 13
     assert len(yao_world._beliefs) == 3
     assert yao_world.get_beliefbox(zia_text) != None
     assert yao_world.get_beliefbox(zia_text)._char_mirror == True
@@ -329,10 +329,10 @@ def test_WorldUnit_CharUnit_CorrectlyMergeschar_ids():
     yao_world.set_beliefbox(y_beliefbox=swim_belief)
 
     assert len(yao_world._chars) == 3
-    assert yao_world._chars.get(zia_text) != None
-    assert yao_world._chars.get(zia_text).credor_weight == 13
-    assert yao_world._chars.get(sue_text) != None
-    assert yao_world._chars.get(sue_text).credor_weight == 3
+    assert yao_world.get_char(zia_text) != None
+    assert yao_world.get_char(zia_text).credor_weight == 13
+    assert yao_world.get_char(sue_text) != None
+    assert yao_world.get_char(sue_text).credor_weight == 3
 
     # WHEN / THEN
     yao_world.edit_charunit_char_id(
@@ -343,9 +343,9 @@ def test_WorldUnit_CharUnit_CorrectlyMergeschar_ids():
     )
 
     # THEN
-    assert yao_world._chars.get(sue_text) != None
-    assert yao_world._chars.get(sue_text).credor_weight == 16
-    assert yao_world._chars.get(zia_text) is None
+    assert yao_world.get_char(sue_text) != None
+    assert yao_world.get_char(sue_text).credor_weight == 16
+    assert yao_world.get_char(zia_text) is None
     assert len(yao_world._chars) == 2
 
 
@@ -409,7 +409,7 @@ def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefBoxPreviouslyExists():
     sue_belief.set_charlink(charlink=charlink_shop(anna_text))
     yao_world.set_beliefbox(y_beliefbox=sue_belief)
     assert len(yao_world._beliefs) == 3
-    assert yao_world._chars.get(sue_text) is None
+    assert yao_world.get_char(sue_text) is None
     assert yao_world.get_beliefbox(sue_text)._char_mirror is False
     assert len(yao_world.get_beliefbox(sue_text)._chars) == 2
 
@@ -444,8 +444,8 @@ def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefBoxPreviouslyExists():
 #     )
 #     yao_world.set_beliefbox(y_beliefbox=sue_belief)
 #     assert len(yao_world._beliefs) == 3
-#     assert yao_world._chars.get(zia_text) != None
-#     assert yao_world._chars.get(sue_text) is None
+#     assert yao_world.get_char(zia_text) != None
+#     assert yao_world.get_char(sue_text) is None
 #     assert yao_world.get_beliefbox(sue_text)._char_mirror is False
 #     assert len(yao_world.get_beliefbox(sue_text)._chars) == 2
 #     assert (
@@ -466,8 +466,8 @@ def test_WorldUnit_CharUnit_raiseErrorNewCharIDBeliefBoxPreviouslyExists():
 #     )
 
 #     assert len(yao_world._beliefs) == 2
-#     assert yao_world._chars.get(zia_text) is None
-#     assert yao_world._chars.get(sue_text) != None
+#     assert yao_world.get_char(zia_text) is None
+#     assert yao_world.get_char(sue_text) != None
 #     assert yao_world.get_beliefbox(sue_text)._char_mirror == True
 #     assert len(yao_world.get_beliefbox(sue_text)._chars) == 1
 #     assert yao_world.get_beliefbox(sue_text)._chars.get(zia_text) is None
@@ -483,9 +483,9 @@ def test_WorldUnit_get_charunits_char_id_list_ReturnsListOfCharUnits():
     sam_text = "sam"
     will_text = "will"
     fry_text = "fry"
-    noa_world.set_charunit(charunit=charunit_shop(sam_text))
-    noa_world.set_charunit(charunit=charunit_shop(will_text))
-    noa_world.set_charunit(charunit=charunit_shop(fry_text))
+    noa_world.set_charunit(charunit_shop(sam_text))
+    noa_world.set_charunit(charunit_shop(will_text))
+    noa_world.set_charunit(charunit_shop(fry_text))
     fun_text = ",fun people"
     fun_belief = beliefbox_shop(belief_id=fun_text)
     fun_belief.set_charlink(charlink=charlink_shop(will_text))
@@ -513,16 +513,16 @@ def test_get_intersection_of_chars_ReturnsUnionOfKeysOfTwoDictionarys_scenario1(
     wil_text = "wil"
     fry_text = "fry"
     elu_text = "Elu"
-    bob_world.set_charunit(charunit=charunit_shop(bob_text))
-    bob_world.set_charunit(charunit=charunit_shop(sam_text))
-    bob_world.set_charunit(charunit=charunit_shop(wil_text))
-    bob_world.set_charunit(charunit=charunit_shop(fry_text))
+    bob_world.set_charunit(charunit_shop(bob_text))
+    bob_world.set_charunit(charunit_shop(sam_text))
+    bob_world.set_charunit(charunit_shop(wil_text))
+    bob_world.set_charunit(charunit_shop(fry_text))
 
     y_world = worldunit_shop()
-    y_world.set_charunit(charunit=charunit_shop(bob_text))
-    y_world.set_charunit(charunit=charunit_shop(wil_text))
-    y_world.set_charunit(charunit=charunit_shop(fry_text))
-    y_world.set_charunit(charunit=charunit_shop(elu_text))
+    y_world.set_charunit(charunit_shop(bob_text))
+    y_world.set_charunit(charunit_shop(wil_text))
+    y_world.set_charunit(charunit_shop(fry_text))
+    y_world.set_charunit(charunit_shop(elu_text))
 
     # WHEN
     print(f"{len(bob_world._chars)=} {len(y_world._chars)=}")

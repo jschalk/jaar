@@ -635,26 +635,26 @@ class WorldUnit:
             debtor_weight=debtor_weight,
             _road_delimiter=self._road_delimiter,
         )
-        self.set_charunit(charunit=charunit)
+        self.set_charunit(charunit)
 
-    def set_charunit(self, charunit: CharUnit):
-        if charunit._road_delimiter != self._road_delimiter:
-            charunit._road_delimiter = self._road_delimiter
-        if charunit._bit != self._bit:
-            charunit._bit = self._bit
-        self._chars[charunit.char_id] = charunit
+    def set_charunit(self, x_charunit: CharUnit):
+        if x_charunit._road_delimiter != self._road_delimiter:
+            x_charunit._road_delimiter = self._road_delimiter
+        if x_charunit._bit != self._bit:
+            x_charunit._bit = self._bit
+        self._chars[x_charunit.char_id] = x_charunit
 
         try:
-            self._beliefs[charunit.char_id]
+            self._beliefs[x_charunit.char_id]
         except KeyError:
             charlink = charlink_shop(
-                char_id=charunit.char_id,
+                char_id=x_charunit.char_id,
                 credor_weight=1,
                 debtor_weight=1,
             )
             charlinks = {charlink.char_id: charlink}
             belief_unit = beliefbox_shop(
-                charunit.char_id,
+                x_charunit.char_id,
                 _char_mirror=True,
                 _chars=charlinks,
                 _road_delimiter=self._road_delimiter,
@@ -762,7 +762,7 @@ class WorldUnit:
         for charlink_x in charlinks.values():
             if self.get_char(charlink_x.char_id) is None:
                 self.set_charunit(
-                    charunit=charunit_shop(
+                    x_charunit=charunit_shop(
                         char_id=charlink_x.char_id,
                         credor_weight=charlink_x.credor_weight,
                         debtor_weight=charlink_x.debtor_weight,
@@ -2231,7 +2231,7 @@ class WorldUnit:
     def _meld_chars(self, exterior_world):
         for charunit in exterior_world._chars.values():
             if self.get_char(charunit.char_id) is None:
-                self.set_charunit(charunit=charunit)
+                self.set_charunit(charunit)
             else:
                 self.get_char(charunit.char_id).meld(charunit)
 
