@@ -1725,6 +1725,9 @@ class WorldUnit:
         sibling_ratio = weight / sibling_total_weight
         return parent_bud_share * sibling_ratio
 
+    def _calc_charunit_metrics(self):
+        pass
+
     def _set_tree_traverse_starting_point(self):
         self._rational = False
         self._tree_traverse_count = 0
