@@ -1,3 +1,4 @@
+from src._world.char import charunit_shop
 from src._world.beliefbox import awardlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import factunit_shop
@@ -66,7 +67,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_insert
     xio_text = "Xio"
     xio_credor_weight = 33
     xio_debtor_weight = 44
-    after_sue_world.add_charunit(xio_text, xio_credor_weight, xio_debtor_weight)
+    xio_charunit = charunit_shop(xio_text, xio_credor_weight, xio_debtor_weight)
+    after_sue_world.set_charunit(xio_charunit, auto_set_belieflink=False)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -187,8 +189,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_belieflink
     after_sue_world = copy_deepcopy(before_sue_world)
     yao_text = "Yao"
     zia_text = "Zia"
-    after_sue_world.add_charunit(yao_text)
-    after_sue_world.add_charunit(zia_text)
+    temp_yao_charunit = charunit_shop(yao_text)
+    temp_zia_charunit = charunit_shop(zia_text)
+    after_sue_world.set_charunit(temp_yao_charunit, auto_set_belieflink=False)
+    after_sue_world.set_charunit(temp_zia_charunit, auto_set_belieflink=False)
     after_yao_charunit = after_sue_world.get_char(yao_text)
     after_zia_charunit = after_sue_world.get_char(zia_text)
     run_text = ",runners"
@@ -1195,7 +1199,8 @@ def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
 
     after_sue_world = worldunit_shop(sue_text)
     xio_text = "Xio"
-    after_sue_world.add_charunit(xio_text)
+    temp_xio_charunit = charunit_shop(xio_text)
+    after_sue_world.set_charunit(temp_xio_charunit, auto_set_belieflink=False)
     sports_text = "sports"
     sports_road = after_sue_world.make_l1_road(sports_text)
     ball_text = "basketball"

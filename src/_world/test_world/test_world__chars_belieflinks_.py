@@ -34,8 +34,8 @@ def test_WorldUnit_migrate_beliefboxs_to_belieflinks_Migrates_charlinks_Without_
     assert len(bob_world.get_beliefbox(sue_text)._chars) == 1
     assert len(bob_world.get_beliefbox(zia_text)._chars) == 1
     assert len(bob_world.get_beliefbox(run_text)._chars) == 2
-    assert len(bob_world.get_char(yao_text)._belieflinks) == 0
-    assert len(bob_world.get_char(sue_text)._belieflinks) == 0
+    assert len(bob_world.get_char(yao_text)._belieflinks) == 1
+    assert len(bob_world.get_char(sue_text)._belieflinks) == 1
 
     # WHEN
     bob_world._migrate_beliefboxs_to_belieflinks()
@@ -92,8 +92,8 @@ def test_WorldUnit_migrate_beliefboxs_to_belieflinks_Migrates_charlinks_With_cre
     run_beliefbox.set_charlink(sue_run_charlink)
     run_beliefbox.set_charlink(zia_run_charlink)
     assert len(bob_world.get_beliefbox(run_text)._chars) == 2
-    assert len(bob_world.get_char(yao_text)._belieflinks) == 0
-    assert len(bob_world.get_char(sue_text)._belieflinks) == 0
+    assert len(bob_world.get_char(yao_text)._belieflinks) == 1
+    assert len(bob_world.get_char(sue_text)._belieflinks) == 1
 
     # WHEN
     bob_world._migrate_beliefboxs_to_belieflinks()
@@ -252,10 +252,10 @@ def test_WorldUnit_get_belief_ids_dict_ReturnsObj():
     # THEN
     print(f"{belief_ids_dict=}")
     all_belief_ids = {yao_text, sue_text, zia_text, run_text, swim_text}
-    assert set(belief_ids_dict.keys()) != all_belief_ids
-    assert set(belief_ids_dict.keys()) == {swim_text, run_text}
+    assert set(belief_ids_dict.keys()) == all_belief_ids
+    assert set(belief_ids_dict.keys()) != {swim_text, run_text}
     assert belief_ids_dict.get(swim_text) == {zia_text}
     assert belief_ids_dict.get(run_text) == {zia_text, sue_text}
-    assert belief_ids_dict.get(yao_text) != {yao_text}
-    assert belief_ids_dict.get(sue_text) != {sue_text}
-    assert belief_ids_dict.get(zia_text) != {zia_text}
+    assert belief_ids_dict.get(yao_text) == {yao_text}
+    assert belief_ids_dict.get(sue_text) == {sue_text}
+    assert belief_ids_dict.get(zia_text) == {zia_text}

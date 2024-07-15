@@ -40,8 +40,8 @@ def test_WorldUnit_get_dict_SetsCharUnit_belieflinks():
     run_beliefbox.set_charlink(sue_run_charlink)
     run_beliefbox.set_charlink(zia_run_charlink)
     assert len(bob_world.get_beliefbox(run_text)._chars) == 2
-    assert len(bob_world.get_char(yao_text)._belieflinks) == 0
-    assert len(bob_world.get_char(sue_text)._belieflinks) == 0
+    assert len(bob_world.get_char(yao_text)._belieflinks) == 1
+    assert len(bob_world.get_char(sue_text)._belieflinks) == 1
 
     # WHEN
     bob_world.get_dict()

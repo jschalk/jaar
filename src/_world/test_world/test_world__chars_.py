@@ -13,6 +13,7 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     # GIVEN
     yao_text = "Yao"
     yao_charunit = charunit_shop(yao_text)
+    yao_charunit.add_belieflink(yao_text)
     deepcopy_yao_charunit = copy_deepcopy(yao_charunit)
     slash_text = "/"
     bob_world = worldunit_shop("Bob", _road_delimiter=slash_text)
@@ -26,6 +27,58 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     assert bob_world._chars != x_chars
     deepcopy_yao_charunit._road_delimiter = bob_world._road_delimiter
     assert bob_world._chars == x_chars
+
+
+def test_WorldUnit_set_char_DoesNotSet_char_id_belieflink():
+    # GIVEN
+    x_bit = 5
+    yao_world = worldunit_shop("Yao", _bit=x_bit)
+    zia_text = "Zia"
+
+    # WHEN
+    yao_world.set_charunit(charunit_shop(zia_text), auto_set_belieflink=False)
+
+    # THEN
+    assert yao_world.get_char(zia_text).get_belieflink(zia_text) is None
+
+
+def test_WorldUnit_set_char_DoesSet_char_id_belieflink():
+    # GIVEN
+    x_bit = 5
+    yao_world = worldunit_shop("Yao", _bit=x_bit)
+    zia_text = "Zia"
+
+    # WHEN
+    yao_world.set_charunit(charunit_shop(zia_text))
+
+    # THEN
+    zia_zia_belieflink = yao_world.get_char(zia_text).get_belieflink(zia_text)
+    assert zia_zia_belieflink != None
+    assert zia_zia_belieflink.credor_weight == 1
+    assert zia_zia_belieflink.debtor_weight == 1
+
+
+def test_WorldUnit_set_char_DoesNotOverRide_char_id_belieflink():
+    # GIVEN
+    x_bit = 5
+    yao_world = worldunit_shop("Yao", _bit=x_bit)
+    zia_text = "Zia"
+    ohio_text = "Ohio"
+    zia_ohio_credor_w = 33
+    zia_ohio_debtor_w = 44
+    zia_charunit = charunit_shop(zia_text)
+    zia_charunit.add_belieflink(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
+
+    # WHEN
+    yao_world.set_charunit(zia_charunit)
+
+    # THEN
+    zia_ohio_belieflink = yao_world.get_char(zia_text).get_belieflink(ohio_text)
+    assert zia_ohio_belieflink != None
+    assert zia_ohio_belieflink.credor_weight == zia_ohio_credor_w
+    assert zia_ohio_belieflink.debtor_weight == zia_ohio_debtor_w
+    zia_zia_belieflink = yao_world.get_char(zia_text).get_belieflink(zia_text)
+    assert zia_zia_belieflink is None
 
 
 def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():

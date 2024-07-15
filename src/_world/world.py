@@ -576,11 +576,13 @@ class WorldUnit:
         )
         self.set_charunit(charunit)
 
-    def set_charunit(self, x_charunit: CharUnit):
+    def set_charunit(self, x_charunit: CharUnit, auto_set_belieflink: bool = True):
         if x_charunit._road_delimiter != self._road_delimiter:
             x_charunit._road_delimiter = self._road_delimiter
         if x_charunit._bit != self._bit:
             x_charunit._bit = self._bit
+        if auto_set_belieflink and x_charunit.belieflinks_exist() is False:
+            x_charunit.add_belieflink(x_charunit.char_id)
         self._chars[x_charunit.char_id] = x_charunit
 
         try:

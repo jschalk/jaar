@@ -76,6 +76,34 @@ def test_belieflink_exists_ReturnsCorrectObj():
     assert yao_charunit.belieflink_exists(climb_text) is False
 
 
+def test_belieflinks_exist_ReturnsCorrectObj():
+    # GIVEN
+    run_text = ",run"
+    fly_text = ",fly"
+    yao_charunit = charunit_shop("Yao")
+    assert yao_charunit.belieflinks_exist() is False
+
+    # WHEN
+    yao_charunit.set_belieflink(belieflink_shop(run_text))
+    # THEN
+    assert yao_charunit.belieflinks_exist()
+
+    # WHEN
+    yao_charunit.set_belieflink(belieflink_shop(fly_text))
+    # THEN
+    assert yao_charunit.belieflinks_exist()
+
+    # WHEN
+    yao_charunit.delete_belieflink(fly_text)
+    # THEN
+    assert yao_charunit.belieflinks_exist()
+
+    # WHEN
+    yao_charunit.delete_belieflink(run_text)
+    # THEN
+    assert yao_charunit.belieflinks_exist() is False
+
+
 def test_CharUnit_del_belieflink_SetsAttrCorrectly():
     # GIVEN
     run_text = ",run"

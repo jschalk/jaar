@@ -136,7 +136,7 @@ def test_create_cross_Arg_jaar_format_0002_belieflink_v0_0_0():
     assert belieflink_dataframe.loc[3, belief_id_str()] == ohio_text
     assert belieflink_dataframe.loc[3, credor_weight_str()] == yao_ohio_credor_w
     assert belieflink_dataframe.loc[3, debtor_weight_str()] == yao_ohio_debtor_w
-    assert len(belieflink_dataframe) == 4
+    assert len(belieflink_dataframe) == 7
 
 
 def test_create_cross_Arg_jaar_format_0003_ideaunit_v0_0_0():

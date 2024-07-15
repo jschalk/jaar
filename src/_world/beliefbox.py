@@ -23,6 +23,10 @@ class InvalidBeliefException(Exception):
     pass
 
 
+class belieflink_belief_id_Exception(Exception):
+    pass
+
+
 @dataclass
 class BeliefBox(BeliefCore):
     _char_mirror: bool = None  # set by WorldUnit.set_charunit()
@@ -261,7 +265,7 @@ class BeliefStory(BeliefCore):
 
     def set_belieflink(self, x_belieflink: BeliefLink):
         if x_belieflink.belief_id != self.belief_id:
-            raise Exception(
+            raise belieflink_belief_id_Exception(
                 f"BeliefStory.belief_id={self.belief_id} cannot set belieflink.belief_id={x_belieflink.belief_id}"
             )
 

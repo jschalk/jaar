@@ -154,6 +154,9 @@ class CharUnit(CharCore):
     def delete_belieflink(self, belief_id: BeliefID):
         return self._belieflinks.pop(belief_id)
 
+    def belieflinks_exist(self):
+        return len(self._belieflinks) != 0
+
     def clear_belieflinks(self):
         self._belieflinks = {}
 
