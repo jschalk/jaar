@@ -1,5 +1,3 @@
-from src._world.beliefbox import beliefbox_shop
-from src._world.char import charlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
 from src.listen.basis_worlds import (
@@ -27,9 +25,8 @@ def test_create_empty_world_ReturnsCorrectObj():
     duty_zia_charunit = yao_voice.get_char(zia_text)
     duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
     duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
-    swim_belief = beliefbox_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
-    swim_belief.set_charlink(charlink_shop(zia_text))
-    yao_voice.set_beliefbox(swim_belief)
+    zia_charunit = yao_voice.get_char(zia_text)
+    zia_charunit.add_belieflink(f"{slash_text}swimmers")
     yao_voice.set_credor_respect(zia_credor_pool)
     yao_voice.set_debtor_resepect(zia_debtor_pool)
 
@@ -73,9 +70,8 @@ def test_create_listen_basis_ReturnsCorrectObj():
     duty_zia_charunit = yao_duty.get_char(zia_text)
     duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
     duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
-    swim_belief = beliefbox_shop(f"{slash_text}swimmers", _road_delimiter=slash_text)
-    swim_belief.set_charlink(charlink_shop(zia_text))
-    yao_duty.set_beliefbox(swim_belief)
+    zia_charunit = yao_duty.get_char(zia_text)
+    zia_charunit.add_belieflink(f"{slash_text}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
     yao_duty.set_debtor_resepect(zia_debtor_pool)
 
@@ -124,10 +120,8 @@ def test_get_default_action_world_ReturnsCorrectObj():
     )
     sue_worldunit.set_last_gift_id(last_gift_id)
     sue_worldunit.add_charunit(bob_text, 3, 4)
-    swim_text = "/swimmers"
-    swim_beliefbox = beliefbox_shop(swim_text, _road_delimiter=slash_text)
-    swim_beliefbox.edit_charlink(bob_text)
-    sue_worldunit.set_beliefbox(swim_beliefbox)
+    bob_charunit = sue_worldunit.get_char(bob_text)
+    bob_charunit.add_belieflink(f"{slash_text}swimmers")
     sue_worldunit.set_char_respect(sue_char_pool)
     sue_worldunit.add_l1_idea(ideaunit_shop(casa_text))
     sue_worldunit.set_max_tree_traverse(sue_max_tree_traverse)

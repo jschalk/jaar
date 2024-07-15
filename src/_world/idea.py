@@ -14,6 +14,7 @@ from src._road.road import (
     replace_road_delimiter,
     RealID,
     CharID,
+    BeliefID,
 )
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
 from src._world.reason_doer import (
@@ -45,7 +46,6 @@ from src._world.beliefbox import (
     AwardHeir,
     AwardLink,
     awardlinks_get_from_dict,
-    BeliefID,
     AwardLine,
     awardline_shop,
     awardheir_shop,

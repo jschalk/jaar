@@ -15,7 +15,7 @@ def create_pledge(
         x_idea.pledge = True
         x_idea._doerunit.set_beliefhold(x_beliefhold)
 
-        if x_world.get_beliefbox(x_beliefhold) is None:
+        if x_world.char_exists(x_beliefhold) is False:
             x_world.add_charunit(x_beliefhold)
 
         if reason_premise != None:
