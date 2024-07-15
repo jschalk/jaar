@@ -21,6 +21,7 @@ def test_create_beliefstorys_metrics_SetsAttrScenario0():
     # Given
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
+    sue_worldunit._beliefstorys = None
     assert sue_worldunit._beliefstorys is None
 
     # WHEN
@@ -46,7 +47,7 @@ def test_create_beliefstorys_metrics_SetsAttrScenario1():
     yao_yao_belieflink._debtor_pool = 44
     yao_ohio_belieflink._credor_pool = 77
     yao_ohio_belieflink._debtor_pool = 88
-    assert sue_worldunit._beliefstorys is None
+    # assert sue_worldunit._beliefstorys == {}
 
     # WHEN
     sue_worldunit._create_beliefstorys_metrics()

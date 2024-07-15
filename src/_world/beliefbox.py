@@ -260,6 +260,11 @@ class BeliefStory(BeliefCore):
     _debtor_pool: float = None
 
     def set_belieflink(self, x_belieflink: BeliefLink):
+        if x_belieflink.belief_id != self.belief_id:
+            raise Exception(
+                f"BeliefStory.belief_id={self.belief_id} cannot set belieflink.belief_id={x_belieflink.belief_id}"
+            )
+
         self._belieflinks[x_belieflink._char_id] = x_belieflink
         self._add_credor_pool(x_belieflink._credor_pool)
         self._add_debtor_pool(x_belieflink._debtor_pool)

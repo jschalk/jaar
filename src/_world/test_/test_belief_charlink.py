@@ -1,6 +1,7 @@
 from src._world.belieflink import belieflink_shop
 from src._world.beliefbox import beliefbox_shop, beliefstory_shop
 from src._world.char import charlink_shop
+from pytest import raises as pytest_raises
 
 
 def test_BeliefBox_set_charlink_CorrectlySetsAttr():
@@ -228,3 +229,24 @@ def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
     # THEN
     assert ohio_beliefstory._credor_pool == 88
     assert ohio_beliefstory._debtor_pool == 8800
+
+
+def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
+    # GIVEN
+    yao_text = "Yao"
+    ohio_text = "Ohio"
+    iowa_text = "Iowa"
+    yao_ohio_belieflink = belieflink_shop(ohio_text)
+    yao_ohio_belieflink._char_id = yao_text
+    yao_ohio_belieflink._char_id = yao_text
+    yao_ohio_belieflink._credor_pool = 66
+    yao_ohio_belieflink._debtor_pool = 6600
+    iowa_beliefstory = beliefstory_shop(iowa_text)
+
+    # WHEN/THEN
+    with pytest_raises(Exception) as excinfo:
+        iowa_beliefstory.set_belieflink(yao_ohio_belieflink)
+    assert (
+        str(excinfo.value)
+        == f"BeliefStory.belief_id={iowa_text} cannot set belieflink.belief_id={ohio_text}"
+    )
