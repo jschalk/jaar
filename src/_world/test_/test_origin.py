@@ -75,30 +75,30 @@ def test_originunit_set_originhold_CorrectlySetsOriginHold():
     originunit_x = originunit_shop()
 
     # WHEN
-    tim_text = "Tim"
-    tim_weight = 3
-    originunit_x.set_originhold(char_id=tim_text, weight=tim_weight)
+    yao_text = "Yao"
+    yao_weight = 3
+    originunit_x.set_originhold(char_id=yao_text, weight=yao_weight)
 
     # THEN
-    assert originunit_x._originholds.get(tim_text) != None
-    assert originunit_x._originholds.get(tim_text).char_id == tim_text
-    assert originunit_x._originholds.get(tim_text).weight == tim_weight
+    assert originunit_x._originholds.get(yao_text) != None
+    assert originunit_x._originholds.get(yao_text).char_id == yao_text
+    assert originunit_x._originholds.get(yao_text).weight == yao_weight
 
 
 def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
     # GIVEN
     originunit_x = originunit_shop()
-    tim_text = "Tim"
-    tim_weight = 3
-    originunit_x.set_originhold(char_id=tim_text, weight=tim_weight)
-    assert originunit_x._originholds.get(tim_text) != None
-    assert originunit_x._originholds.get(tim_text).char_id == tim_text
+    yao_text = "Yao"
+    yao_weight = 3
+    originunit_x.set_originhold(char_id=yao_text, weight=yao_weight)
+    assert originunit_x._originholds.get(yao_text) != None
+    assert originunit_x._originholds.get(yao_text).char_id == yao_text
 
     # WHEN
-    originunit_x.del_originhold(char_id=tim_text)
+    originunit_x.del_originhold(char_id=yao_text)
 
     # THEN
-    assert originunit_x._originholds.get(tim_text) is None
+    assert originunit_x._originholds.get(yao_text) is None
 
 
 def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():

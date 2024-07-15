@@ -30,11 +30,11 @@ class CharUnitTable(Base):
     debtor_weight = Column(Integer)
 
 
-class BeliefTable(Base):
-    __tablename__ = "beliefbox"
+# class BeliefTable(Base):
+#     __tablename__ = "beliefstory"
 
-    uid = Column(Integer, primary_key=True)
-    belief_id = Column(String)
+#     uid = Column(Integer, primary_key=True)
+#     belief_id = Column(String)
 
 
 class BeliefLinkTable(Base):

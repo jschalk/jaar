@@ -8,7 +8,6 @@ from src.gift.atom_config import (
 from src.normal_db.normal_models import (
     WorldTable,
     CharUnitTable,
-    BeliefTable,
     BeliefLinkTable,
     IdeaTable,
     AwardLinkTable,
