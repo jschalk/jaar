@@ -15,6 +15,9 @@ from src._road.road import (
     RealID,
     CharID,
     BeliefID,
+    RoadUnit,
+    rebuild_road,
+    find_replace_road_key_dict,
 )
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
 from src._world.reason_doer import (
@@ -36,9 +39,6 @@ from src._world.reason_idea import (
     factunit_shop,
     ReasonHeir,
     reasonheir_shop,
-    RoadUnit,
-    rebuild_road,
-    find_replace_road_key_dict,
     reasons_get_from_dict,
     factunits_get_from_dict,
 )
