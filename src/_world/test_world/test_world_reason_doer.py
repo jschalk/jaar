@@ -1,7 +1,7 @@
 from src._world.reason_doer import doerheir_shop, doerunit_shop
 from src._world.world import worldunit_shop
 from src._world.idea import ideaunit_shop
-from src._world.beliefbox import beliefbox_shop
+from src._world.beliefstory import beliefbox_shop
 
 
 def test_world_edit_idea_attr_CorrectlySetsDoerUnit():

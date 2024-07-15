@@ -1,5 +1,5 @@
 from src._world.belieflink import belieflink_shop
-from src._world.beliefbox import beliefbox_shop, beliefstory_shop
+from src._world.beliefstory import beliefbox_shop, beliefstory_shop
 from src._world.char import charlink_shop
 from pytest import raises as pytest_raises
 

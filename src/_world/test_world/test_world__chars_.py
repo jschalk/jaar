@@ -1,5 +1,5 @@
 from src._world.char import CharID, charlink_shop, charunit_shop
-from src._world.beliefbox import (
+from src._world.beliefstory import (
     beliefbox_shop,
     awardlink_shop,
     get_intersection_of_chars,

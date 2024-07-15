@@ -1,5 +1,5 @@
 from src._road.road import get_default_real_id_roadnode
-from src._world.beliefbox import (
+from src._world.beliefstory import (
     awardlink_shop,
     beliefbox_shop,
     get_chars_relevant_beliefs,

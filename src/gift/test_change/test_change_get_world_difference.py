@@ -1,5 +1,5 @@
 from src._world.char import charunit_shop
-from src._world.beliefbox import awardlink_shop
+from src._world.beliefstory import awardlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import factunit_shop
 from src._world.world import worldunit_shop

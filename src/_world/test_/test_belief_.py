@@ -1,4 +1,4 @@
-from src._world.beliefbox import (
+from src._world.beliefstory import (
     AwardLine,
     awardline_shop,
     BeliefBox,

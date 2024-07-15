@@ -52,7 +52,7 @@ from src._world.char import (
     charlink_shop,
 )
 from src._world.belieflink import belieflink_shop
-from src._world.beliefbox import (
+from src._world.beliefstory import (
     AwardLink,
     BeliefID,
     BeliefBox,
