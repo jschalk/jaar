@@ -1,6 +1,6 @@
 from src._road.road import RoadUnit
-from src._world.char import CharID, charunit_shop
-from src._world.beliefbox import BeliefID, awardlink_shop
+from src._world.char import charunit_shop
+from src._world.beliefbox import awardlink_shop
 from src._world.examples.example_worlds import (
     world_v001 as examples_world_v001,
     world_v001_with_large_agenda as examples_world_v001_with_large_agenda,

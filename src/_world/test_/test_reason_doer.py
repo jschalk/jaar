@@ -1,3 +1,4 @@
+from src._road.road import BeliefID
 from src._world.reason_doer import (
     DoerUnit,
     doerunit_shop,
@@ -5,7 +6,7 @@ from src._world.reason_doer import (
     doerheir_shop,
     create_doerunit,
 )
-from src._world.beliefbox import BeliefID, beliefbox_shop
+from src._world.beliefbox import beliefbox_shop
 from src._world.char import charlink_shop
 from pytest import raises as pytest_raises
 

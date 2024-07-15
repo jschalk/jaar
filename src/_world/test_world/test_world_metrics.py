@@ -1,7 +1,7 @@
 from src._road.finance import default_bud_pool
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
-from src._world.beliefbox import BeliefID, awardlink_shop
+from src._world.beliefbox import awardlink_shop
 from src._world.world import worldunit_shop
 from src._world.healer import healerhold_shop
 from src._world.examples.example_worlds import (
