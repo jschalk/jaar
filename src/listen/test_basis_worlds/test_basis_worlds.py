@@ -1,3 +1,4 @@
+from src._road.finance import default_respect_num
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
 from src.listen.basis_worlds import (
@@ -139,8 +140,8 @@ def test_get_default_action_world_ReturnsCorrectObj():
     assert default_action_world._bud_pool == sue_char_pool
     assert default_action_world._coin == x_coin
     assert default_action_world._bit == x_bit
-    assert default_action_world._credor_respect is None
-    assert default_action_world._debtor_respect is None
+    assert default_action_world._credor_respect == default_respect_num()
+    assert default_action_world._debtor_respect == default_respect_num()
     assert default_action_world._max_tree_traverse == sue_max_tree_traverse
     assert len(default_action_world.get_charunits_dict()) == 1
     assert len(default_action_world._idea_dict) == 1

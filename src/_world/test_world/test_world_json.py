@@ -260,12 +260,14 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert world_dict["_coin"] == zia_world._coin
     assert world_dict["_bit"] == zia_world._bit
     assert world_dict["_penny"] == zia_world._penny
-    with pytest_raises(Exception) as excinfo:
-        world_dict["_credor_respect"]
-    assert str(excinfo.value) == "'_credor_respect'"
-    with pytest_raises(Exception) as excinfo:
-        world_dict["_debtor_respect"]
-    assert str(excinfo.value) == "'_debtor_respect'"
+    assert world_dict["_credor_respect"] == zia_world._credor_respect
+    assert world_dict["_debtor_respect"] == zia_world._debtor_respect
+    # with pytest_raises(Exception) as excinfo:
+    #     world_dict["_credor_respect"]
+    # assert str(excinfo.value) == "'_credor_respect'"
+    # with pytest_raises(Exception) as excinfo:
+    #     world_dict["_debtor_respect"]
+    # assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
         world_dict["_last_gift_id"]
 

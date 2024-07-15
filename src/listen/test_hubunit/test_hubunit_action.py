@@ -123,7 +123,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     sue_real_dir = f"{env_dir()}/{root_label()}"
     sue_bud_pool = 50000
     sue_coin = 5
-    sue_bit = 7
+    sue_bit = 25
     sue_hubunit = hubunit_shop(
         env_dir(),
         root_label(),

@@ -88,6 +88,7 @@ def test_HubUnit_get_duty_world_OpensFile(env_dir_setup_cleanup):
     bob_text = "Bob"
     bob_world = get_world_with_4_levels()
     bob_world.set_owner_id(bob_text)
+    bob_world._calc_charunit_metrics()
     sue_hubunit.save_duty_world(bob_world)
 
     # WHEN / THEN
@@ -168,6 +169,7 @@ def test_HubUnit_get_job_world_OpensFile(env_dir_setup_cleanup):
     bob_text = "Bob"
     bob_world = get_world_with_4_levels()
     bob_world.set_owner_id(bob_text)
+    bob_world._calc_charunit_metrics()
     sue_hubunit.save_job_world(bob_world)
 
     # WHEN / THEN

@@ -75,7 +75,7 @@ def test_WorldUnit_calc_charunit_metrics_Clears_beliefs():
     sue_worldunit._calc_charunit_metrics()
 
     # THEN
-    assert sue_worldunit._beliefs == {}
+    assert sue_worldunit._beliefs != {}
     assert sue_worldunit._beliefstorys == {}
 
 

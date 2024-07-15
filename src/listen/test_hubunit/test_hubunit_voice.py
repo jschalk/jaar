@@ -93,6 +93,7 @@ def test_HubUnit_create_voice_from_gifts_CreatesvoiceFileFromGiftFiles(
     # THEN
     assert sue_hubunit.voice_file_exists()
     static_sue_voice = sue_hubunit._merge_any_gifts(sue_hubunit.default_voice_world())
+    static_sue_voice._calc_charunit_metrics()
     assert sue_hubunit.get_voice_world().get_dict() == static_sue_voice.get_dict()
 
 
@@ -114,6 +115,7 @@ def test_HubUnit_create_initial_gift_and_voice_files_CreatesGiftFilesAndvoiceFil
     assert os_path_exists(init_gift_file_path)
     assert sue_hubunit.voice_file_exists()
     static_sue_voice = sue_hubunit._merge_any_gifts(sue_hubunit.default_voice_world())
+    static_sue_voice._calc_charunit_metrics()
     assert sue_hubunit.get_voice_world().get_dict() == static_sue_voice.get_dict()
 
 
@@ -144,7 +146,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
 ):
     # GIVEN
     sue_text = "Sue"
-    seven_int = 7
+    seven_int = 25
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text, bit=seven_int)
     assert sue_hubunit.voice_file_exists() is False
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_id()}.json"
@@ -167,7 +169,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
 ):
     # GIVEN
     sue_text = "Sue"
-    seven_int = 7
+    seven_int = 25
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text, bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     assert sue_hubunit.voice_file_exists()
@@ -192,7 +194,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
 ):
     # GIVEN
     sue_text = "Sue"
-    seven_int = 7
+    seven_int = 25
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text, bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     sue_voice_world = sue_hubunit.get_voice_world()

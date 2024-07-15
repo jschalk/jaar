@@ -421,6 +421,7 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # GIVEN
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
+    yao_duty._calc_charunit_metrics()
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_world(yao_duty)
     assert sue_texas_hubunit.job_file_exists(yao_text) is False
@@ -431,6 +432,7 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # GIVEN
     assert sue_texas_hubunit.job_file_exists(yao_text)
     yao_job = sue_texas_hubunit.get_job_world(yao_text)
+    yao_job._calc_charunit_metrics()
     assert yao_job._owner_id != None
     assert yao_job._owner_id == yao_text
     assert yao_job.get_dict() == yao_duty.get_dict()

@@ -12,6 +12,7 @@ def test_HubUnit_get_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_own
     # GIVEN
     bob_text = "Bob"
     bob_worldunit = get_world_with_4_levels()
+    bob_worldunit._calc_charunit_metrics()
     bob_worldunit.set_owner_id(bob_text)
 
     sue_text = "Sue"
@@ -34,6 +35,7 @@ def test_HubUnit_get_dw_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_
     bob_text = "Bob"
     bob_worldunit = get_world_with_4_levels()
     bob_worldunit.set_owner_id(bob_text)
+    bob_worldunit._calc_charunit_metrics()
     bob_hubunit = hubunit_shop(env_dir(), real_id(), bob_text)
     bob_hubunit.save_action_world(bob_worldunit)
 
@@ -62,6 +64,7 @@ def test_HubUnit_rj_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_owne
     yao_text = "Yao"
     yao_worldunit = get_world_with_4_levels()
     yao_worldunit.set_owner_id(yao_text)
+    yao_worldunit._calc_charunit_metrics()
 
     bob_iowa_hubunit = hubunit_shop(env_dir(), real_id(), bob_text, iowa_road)
     bob_iowa_hubunit.save_job_world(yao_worldunit)

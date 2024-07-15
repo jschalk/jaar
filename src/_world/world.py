@@ -1756,7 +1756,6 @@ class WorldUnit:
                 self._beliefstorys[belief_id] = x_beliefstory
 
     def _calc_charunit_metrics(self):
-        self._beliefs = {}
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
         x_charunits = self._chars.values()
@@ -1783,6 +1782,7 @@ class WorldUnit:
         self._healers_dict = {}
 
     def calc_world_metrics(self, econ_exceptions: bool = False):
+        self._calc_charunit_metrics()
         self._set_tree_traverse_starting_point()
         max_count = self._max_tree_traverse
 
