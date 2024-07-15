@@ -6,10 +6,11 @@ from src._world.belieflink import (
     belieflink_get_from_dict,
     belieflinks_get_from_dict,
 )
+from pytest import raises as pytest_raises
 
 
 def test_BeliefID_exists():
-    bikers_belief_id = BeliefID("bikers")
+    bikers_belief_id = BeliefID(",bikers")
     assert bikers_belief_id != None
     assert str(type(bikers_belief_id)).find(".belieflink.BeliefID") > 0
 
@@ -26,7 +27,7 @@ def test_BeliefCore_exists():
 
 def test_BeliefLink_exists():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
 
     # WHEN
     swim_belieflink = BeliefLink(belief_id=swim_text)
@@ -42,9 +43,10 @@ def test_BeliefLink_exists():
 
 def test_belieflink_shop_ReturnsCorrectObj():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
+    yao_text = "Yao"
 
     # WHEN
     swim_belieflink = belieflink_shop(
@@ -63,7 +65,7 @@ def test_belieflink_shop_ReturnsCorrectObj():
 
 def test_belieflink_shop_ReturnsCorrectObjAttr_char_id():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     yao_text = "Yao"
 
     # WHEN
@@ -73,9 +75,26 @@ def test_belieflink_shop_ReturnsCorrectObjAttr_char_id():
     assert swim_belieflink._char_id == yao_text
 
 
+# def test_BeliefLink_set_belief_id_RaisesErrorIf_belief_id_IsNotCharIDAndIsRoadNode():
+#     # GIVEN
+#     slash_text = "/"
+#     # bob_text = f"Bob{slash_text}Texas"
+#     bob_text = "Bob"
+#     # swim_text = f"{slash_text}swim"
+#     swim_text = ",swim"
+
+#     # WHEN / THEN
+#     with pytest_raises(Exception) as excinfo:
+#         belieflink_shop(swim_text, _char_id=bob_text, _road_delimiter=slash_text)
+#     assert (
+#         str(excinfo.value)
+#         == f"'{swim_text}' needs to not be a RoadNode. Must contain delimiter: '{slash_text}'"
+#     )
+
+
 def test_BeliefLink_set_credor_weight_SetsAttr():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     old_credor_weight = 3.0
     swim_debtor_weight = 5.0
     swim_belieflink = belieflink_shop(swim_text, old_credor_weight, swim_debtor_weight)
@@ -93,7 +112,7 @@ def test_BeliefLink_set_credor_weight_SetsAttr():
 
 def test_BeliefLink_set_credor_weight_SetsAttr():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     old_credor_weight = 3.0
     swim_debtor_weight = 5.0
     swim_belieflink = belieflink_shop(swim_text, old_credor_weight, swim_debtor_weight)
@@ -110,7 +129,7 @@ def test_BeliefLink_set_credor_weight_SetsAttr():
 
 def test_BeliefLink_set_debtor_weight_SetsAttr():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     swim_credor_weight = 3.0
     old_debtor_weight = 5.0
     swim_belieflink = belieflink_shop(swim_text, swim_credor_weight, old_debtor_weight)
@@ -128,7 +147,7 @@ def test_BeliefLink_set_debtor_weight_SetsAttr():
 
 def test_BeliefLink_set_debtor_weight_SetsAttr():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     swim_credor_weight = 3.0
     old_debtor_weight = 5.0
     swim_belieflink = belieflink_shop(swim_text, swim_credor_weight, old_debtor_weight)
@@ -145,7 +164,7 @@ def test_BeliefLink_set_debtor_weight_SetsAttr():
 
 def test_BeliefLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
     swim_belieflink = belieflink_shop(
@@ -170,7 +189,7 @@ def test_BeliefLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
 def test_belieflink_get_from_dict_ReturnsObj():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
     yao_text = "Yao"
@@ -192,7 +211,7 @@ def test_belieflink_get_from_dict_ReturnsObj():
 
 def test_belieflinks_get_from_dict_ReturnsObj():
     # GIVEN
-    swim_text = "swim"
+    swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
     yao_text = "Yao"

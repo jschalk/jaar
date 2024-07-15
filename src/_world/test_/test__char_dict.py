@@ -219,6 +219,7 @@ def test_charunit_get_from_dict_Returns_belieflinks():
     after_yao_charunit = charunit_get_from_dict(yao_dict, slash_text)
 
     # THEN
+    assert before_yao_charunit._belieflinks == after_yao_charunit._belieflinks
     assert before_yao_charunit == after_yao_charunit
     assert after_yao_charunit._road_delimiter == slash_text
 

@@ -160,15 +160,12 @@ def create_cross_dataframe(d2_list: list[list[str]], cross_name: str) -> DataFra
 def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_worldunit)
-    print(f"{x_changeunit=}")
     category_set = {get_cross_atom_category(cross_name)}
-    print(f"{category_set=}")
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
     d2_list = []
     ordered_columns = get_column_ordered_cross_attributes(cross_name)
-    print(f"{sorted_atomunits=}")
 
     if cross_name == jaar_format_0001_char_v0_0_0():
         d2_list = [
