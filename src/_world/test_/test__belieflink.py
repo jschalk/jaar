@@ -14,14 +14,14 @@ def test_BeliefID_exists():
     assert str(type(bikers_belief_id)).find(".belieflink.BeliefID") > 0
 
 
-def test_BeliefBox_exists():
+def test_BeliefCore_exists():
     # GIVEN
     swim_text = ",swimmers"
     # WHEN
-    swim_beliefbox = BeliefCore(belief_id=swim_text)
+    swim_beliefcore = BeliefCore(belief_id=swim_text)
     # THEN
-    assert swim_beliefbox != None
-    assert swim_beliefbox.belief_id == swim_text
+    assert swim_beliefcore != None
+    assert swim_beliefcore.belief_id == swim_text
 
 
 def test_BeliefLink_exists():
