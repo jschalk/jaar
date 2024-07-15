@@ -204,7 +204,7 @@ def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
     # GIVEN
     yao_text = "Yao"
     sue_text = "Sue"
-    ohio_text = "Ohio"
+    ohio_text = ",Ohio"
     yao_ohio_belieflink = belieflink_shop(ohio_text)
     sue_ohio_belieflink = belieflink_shop(ohio_text)
     yao_ohio_belieflink._char_id = yao_text
@@ -234,8 +234,8 @@ def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
 def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
     # GIVEN
     yao_text = "Yao"
-    ohio_text = "Ohio"
-    iowa_text = "Iowa"
+    ohio_text = ",Ohio"
+    iowa_text = ",Iowa"
     yao_ohio_belieflink = belieflink_shop(ohio_text)
     yao_ohio_belieflink._char_id = yao_text
     yao_ohio_belieflink._char_id = yao_text

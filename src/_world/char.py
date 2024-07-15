@@ -1,5 +1,10 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json, get_0_if_None
-from src._road.road import CharID, default_road_delimiter_if_none, validate_roadnode
+from src._road.road import (
+    CharID,
+    default_road_delimiter_if_none,
+    validate_roadnode,
+    is_roadnode,
+)
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
 from src._world.belieflink import (
     BeliefID,
@@ -142,6 +147,13 @@ class CharUnit(CharCore):
         self.set_belieflink(x_belieflink)
 
     def set_belieflink(self, x_belieflink: BeliefLink):
+        x_belief_id = x_belieflink.belief_id
+        belief_id_is_char_id = is_roadnode(x_belief_id, self._road_delimiter)
+        if belief_id_is_char_id and self.char_id != x_belief_id:
+            raise Exception(
+                f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_belief_id}'."
+            )
+
         x_belieflink._char_id = self.char_id
         self._belieflinks[x_belieflink.belief_id] = x_belieflink
 

@@ -63,7 +63,7 @@ def test_WorldUnit_set_char_DoesNotOverRide_char_id_belieflink():
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
-    ohio_text = "Ohio"
+    ohio_text = ",Ohio"
     zia_ohio_credor_w = 33
     zia_ohio_debtor_w = 44
     zia_charunit = charunit_shop(zia_text)
