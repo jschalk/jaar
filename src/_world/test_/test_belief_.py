@@ -1,14 +1,14 @@
-from src._world.char import charlink_shop
 from src._world.beliefbox import (
     AwardLine,
     awardline_shop,
     BeliefBox,
     beliefbox_shop,
-    BeliefID,
     AwardLink,
     awardlink_shop,
     awardlinks_get_from_json,
     awardheir_shop,
+    BeliefStory,
+    beliefstory_shop,
 )
 from src._road.road import (
     get_default_real_id_roadnode as root_label,
@@ -298,3 +298,71 @@ def test_AwardLine_add_world_cred_debt_CorrectlyModifiesAttr():
     # THEN
     assert bikers_awardline._world_cred == 0.44
     assert bikers_awardline._world_debt == 0.75
+
+
+def test_BeliefStory_exists():
+    # GIVEN
+    swim_text = ",swimmers"
+    # WHEN
+    swim_beliefstory = BeliefStory(belief_id=swim_text)
+    # THEN
+    assert swim_beliefstory != None
+    assert swim_beliefstory.belief_id == swim_text
+    assert swim_beliefstory._belieflinks is None
+    assert swim_beliefstory._world_cred is None
+    assert swim_beliefstory._world_debt is None
+    assert swim_beliefstory._world_agenda_cred is None
+    assert swim_beliefstory._world_agenda_debt is None
+    assert swim_beliefstory._credor_pool is None
+    assert swim_beliefstory._debtor_pool is None
+    assert swim_beliefstory._road_delimiter is None
+
+
+def test_beliefstory_shop_ReturnsCorrectObj():
+    # GIVEN
+    swim_text = ",swimmers"
+    nation_road = create_road(root_label(), "nation-states")
+    usa_road = create_road(nation_road, "USA")
+
+    # WHEN
+    swim_beliefstory = beliefstory_shop(belief_id=swim_text)
+
+    # THEN
+    print(f"{swim_text}")
+    assert swim_beliefstory != None
+    assert swim_beliefstory.belief_id != None
+    assert swim_beliefstory.belief_id == swim_text
+    assert swim_beliefstory._belieflinks == {}
+    assert swim_beliefstory._world_cred == 0
+    assert swim_beliefstory._world_debt == 0
+    assert swim_beliefstory._world_agenda_cred == 0
+    assert swim_beliefstory._world_agenda_debt == 0
+    assert swim_beliefstory._credor_pool == 0
+    assert swim_beliefstory._debtor_pool == 0
+    assert swim_beliefstory._road_delimiter == default_road_delimiter_if_none()
+
+
+def test_beliefstory_shop_ReturnsCorrectObj_road_delimiter():
+    # GIVEN
+    swim_text = "/swimmers"
+    slash_text = "/"
+
+    # WHEN
+    swim_beliefstory = beliefstory_shop(belief_id=swim_text, _road_delimiter=slash_text)
+
+    # THEN
+    assert swim_beliefstory._road_delimiter == slash_text
+
+
+# def test_BeliefStory_set_belief_id_RaisesErrorIfParameterContains_road_delimiter_And_char_mirror_True():
+#     # GIVEN
+#     slash_text = "/"
+#     bob_text = f"Bob{slash_text}Texas"
+
+#     # WHEN / THEN
+#     with pytest_raises(Exception) as excinfo:
+#         beliefstory_shop(bob_text, _char_mirror=True, _road_delimiter=slash_text)
+#     assert (
+#         str(excinfo.value)
+#         == f"'{bob_text}' needs to be a RoadNode. Cannot contain delimiter: '{slash_text}'"
+#     )

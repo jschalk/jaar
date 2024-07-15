@@ -17,6 +17,7 @@ from src._road.finance import (
     CoinNum,
     BudNum,
     allot_scale,
+    validate_respect_num,
 )
 from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
@@ -51,7 +52,14 @@ from src._world.char import (
     charlink_shop,
 )
 from src._world.belieflink import belieflink_shop
-from src._world.beliefbox import AwardLink, BeliefID, BeliefBox, beliefbox_shop
+from src._world.beliefbox import (
+    AwardLink,
+    BeliefID,
+    BeliefBox,
+    beliefbox_shop,
+    BeliefStory,
+    beliefstory_shop,
+)
 from src._world.healer import HealerHold
 from src._world.reason_idea import (
     FactCore,
@@ -142,6 +150,7 @@ class WorldUnit:
     _econs_justified: bool = None
     _econs_buildable: bool = None
     _sum_healerhold_share: bool = None
+    _beliefstorys: dict[BeliefID, BeliefStory] = None
     # calc_world_metrics Calculated field end
 
     def del_last_gift_id(self):
@@ -505,7 +514,7 @@ class WorldUnit:
         )
         return f"every {num_with_letter_ending} {weekday_idea_node._label} at {x_hregidea.readable_1440_time(min1440=open % 1440)}"
 
-    def get_chars_metrics(self) -> dict[BeliefID, AwardLink]:
+    def get_awardlinks_metrics(self) -> dict[BeliefID, AwardLink]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
@@ -1730,8 +1739,31 @@ class WorldUnit:
         sibling_ratio = weight / sibling_total_weight
         return parent_bud_share * sibling_ratio
 
+    def _create_beliefstorys_metrics(self):
+        self._beliefstorys = {}
+        for belief_id, char_id_set in self.get_belief_ids_dict().items():
+            x_beliefstory = beliefstory_shop(
+                belief_id, _road_delimiter=self._road_delimiter
+            )
+            for x_char_id in char_id_set:
+                x_belieflink = self.get_char(x_char_id).get_belieflink(belief_id)
+                x_beliefstory.set_belieflink(x_belieflink)
+                self._beliefstorys[belief_id] = x_beliefstory
+
     def _calc_charunit_metrics(self):
-        pass
+        self._beliefs = {}
+        self._credor_respect = validate_respect_num(self._credor_respect)
+        self._debtor_respect = validate_respect_num(self._debtor_respect)
+        x_charunits = self._chars.values()
+        credor_ledger = {x_char.char_id: x_char.credor_weight for x_char in x_charunits}
+        debtor_ledger = {x_char.char_id: x_char.debtor_weight for x_char in x_charunits}
+        credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
+        debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
+        for x_char_id, char_credor_pool in credor_allot.items():
+            self.get_char(x_char_id).set_credor_pool(char_credor_pool)
+        for x_char_id, char_debtor_pool in debtor_allot.items():
+            self.get_char(x_char_id).set_debtor_pool(char_debtor_pool)
+        self._create_beliefstorys_metrics()
 
     def _set_tree_traverse_starting_point(self):
         self._rational = False

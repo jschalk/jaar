@@ -73,8 +73,8 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     zia_worldunit._idearoot.set_awardlink(awardlink_shop(zia_text, credor_weight=10))
 
     # WHEN
-    assert zia_worldunit.get_chars_metrics() != None
-    chars_metrics = zia_worldunit.get_chars_metrics()
+    assert zia_worldunit.get_awardlinks_metrics() != None
+    chars_metrics = zia_worldunit.get_awardlinks_metrics()
 
     # THEN
     awardlink_yao = chars_metrics[yao_text]

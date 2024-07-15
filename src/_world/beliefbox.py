@@ -4,8 +4,13 @@ from src._instrument.python import (
     get_dict_from_json,
     get_0_if_None,
 )
-from src._road.road import CharID, default_road_delimiter_if_none, validate_roadnode
-from src._world.belieflink import BeliefID, BeliefCore
+from src._road.road import (
+    BeliefID,
+    CharID,
+    default_road_delimiter_if_none,
+    validate_roadnode,
+)
+from src._world.belieflink import BeliefCore, BeliefLink
 from src._world.char import (
     CharLink,
     charlink_shop,
@@ -240,3 +245,52 @@ def get_chars_relevant_beliefs(
                 relevant_beliefs.get(belief_x.belief_id)[char_id_x] = -1
 
     return relevant_beliefs
+
+
+@dataclass
+class BeliefStory(BeliefCore):
+    _belieflinks: dict[CharID, BeliefLink] = None  # set by WorldUnit.set_charunit()
+    _road_delimiter: str = None  # calculated by WorldUnit.set_beliefbox
+    # calculated by WorldUnit.calc_world_metrics()
+    _world_cred: float = None
+    _world_debt: float = None
+    _world_agenda_cred: float = None
+    _world_agenda_debt: float = None
+    _credor_pool: float = None
+    _debtor_pool: float = None
+
+    def set_belieflink(self, x_belieflink: BeliefLink):
+        self._belieflinks[x_belieflink._char_id] = x_belieflink
+        self._add_credor_pool(x_belieflink._credor_pool)
+        self._add_debtor_pool(x_belieflink._debtor_pool)
+
+    def _add_credor_pool(self, x_credor_pool: float):
+        self._credor_pool += x_credor_pool
+
+    def _add_debtor_pool(self, x_debtor_pool: float):
+        self._debtor_pool += x_debtor_pool
+
+    def get_belieflink(self, x_char_id: CharID) -> BeliefLink:
+        return self._belieflinks.get(x_char_id)
+
+    def belieflink_exists(self, x_char_id: CharID) -> bool:
+        return self.get_belieflink(x_char_id) != None
+
+    def del_charlink(self, char_id):
+        self._belieflinks.pop(char_id)
+
+
+def beliefstory_shop(belief_id: BeliefID, _road_delimiter: str = None) -> BeliefStory:
+    return BeliefStory(
+        belief_id=belief_id,
+        _belieflinks={},
+        _world_cred=0,
+        _world_debt=0,
+        _world_agenda_cred=0,
+        _world_agenda_debt=0,
+        _credor_pool=0,
+        _debtor_pool=0,
+        _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+    )
+    # x_beliefstory.set_belief_id(belief_id=belief_id)
+    # return x_beliefstory
