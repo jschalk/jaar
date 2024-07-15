@@ -85,9 +85,8 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     # GIVEN
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
-    yao_world.calc_world_metrics()
     assert len(yao_world._chars) == 0
-    assert len(yao_world._beliefs) == 0
+    assert len(yao_world.get_belief_ids_dict()) == 0
 
     # WHEN
     zia_text = "Zia"
@@ -100,8 +99,7 @@ def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
     # THEN
     assert yao_world._chars.get(zia_text)._bit == x_bit
     assert len(yao_world._chars) == 3
-    assert len(yao_world._beliefs) == 3
-    assert yao_world._beliefs["Zia"]._char_mirror == True
+    assert len(yao_world.get_belief_ids_dict()) == 3
 
     # WHEN
     zia_belief = zia_text

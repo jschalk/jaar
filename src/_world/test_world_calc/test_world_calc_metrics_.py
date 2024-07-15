@@ -7,6 +7,7 @@ from src._world.beliefstory import beliefbox_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.reason_doer import doerunit_shop
 from src._world.examples.example_worlds import (
+    get_world_1Task_1CE0MinutesReason_1Fact,
     get_world_with_4_levels as example_worlds_get_world_with_4_levels,
     get_world_with_4_levels_and_2reasons as example_worlds_get_world_with_4_levels_and_2reasons,
     get_world_with7amCleanTableReason as example_worlds_get_world_with7amCleanTableReason,
@@ -922,3 +923,27 @@ def test_WorldUnit_calc_world_metrics_Sets_deletes_awardheirs():
     # THEN
     assert len(swim_idea._awardlinks) == 2
     assert len(swim_idea._awardheirs) == 2
+
+
+def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
+    # GIVEN
+    x_world = get_world_1Task_1CE0MinutesReason_1Fact()
+    mail_text = "obtain mail"
+    assert x_world != None
+    assert len(x_world._idearoot._kids[mail_text]._reasonunits) == 1
+    idea_dict = x_world.get_idea_dict()
+    # for idea in idea_dict:
+    #     print(idea._label)
+    mail_idea = idea_dict.get(x_world.make_l1_road(mail_text))
+    assert mail_idea.pledge == True
+    assert mail_idea._task == True
+
+    # WHEN
+    ced_min_label = "CE0_minutes"
+    ced_road = x_world.make_l1_road(ced_min_label)
+    x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
+    x_world.calc_world_metrics()
+
+    # THEN
+    assert mail_idea.pledge == True
+    assert mail_idea._task is False

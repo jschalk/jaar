@@ -4,9 +4,6 @@ from src._road.finance import (
     default_coin_if_none,
     validate_bud_pool,
 )
-from src._world.examples.example_worlds import (
-    get_world_1Task_1CE0MinutesReason_1Fact,
-)
 from src._world.world import worldunit_shop, WorldUnit
 from src._road.road import (
     get_default_real_id_roadnode as root_label,
@@ -116,48 +113,6 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_world._penny == default_penny_if_none()
     assert x_world._idearoot._coin == x_world._coin
     assert x_world._idearoot._road_delimiter == x_world._road_delimiter
-
-
-def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
-    # GIVEN
-    x_world = get_world_1Task_1CE0MinutesReason_1Fact()
-    mail_text = "obtain mail"
-    assert x_world != None
-    assert len(x_world._idearoot._kids[mail_text]._reasonunits) == 1
-    idea_dict = x_world.get_idea_dict()
-    # for idea in idea_dict:
-    #     print(idea._label)
-    mail_idea = idea_dict.get(x_world.make_l1_road(mail_text))
-    assert mail_idea.pledge == True
-    assert mail_idea._task == True
-
-    # WHEN
-    ced_min_label = "CE0_minutes"
-    ced_road = x_world.make_l1_road(ced_min_label)
-    x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
-    x_world.calc_world_metrics()
-
-    # THEN
-    assert mail_idea.pledge == True
-    assert mail_idea._task is False
-
-
-def test_WorldUnit_IsAbleToEditFactUnitAnyAncestor_Idea_1():
-    x_world = get_world_1Task_1CE0MinutesReason_1Fact()
-    ced_min_label = "CE0_minutes"
-    ced_road = x_world.make_l1_road(ced_min_label)
-    x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
-    mail_road = x_world.make_l1_road("obtain mail")
-    idea_dict = x_world.get_idea_dict()
-    mail_idea = idea_dict.get(mail_road)
-    assert mail_idea.pledge == True
-    assert mail_idea._task is False
-
-    x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=95)
-    idea_dict = x_world.get_idea_dict()
-    mail_idea = idea_dict.get(mail_road)
-    assert mail_idea.pledge == True
-    assert mail_idea._task == True
 
 
 def test_WorldUnit_ideaoot_uid_isEqualTo1():

@@ -258,8 +258,8 @@ def test_WorldUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     # for idea_kid in sue_world._idearoot._kids.values():
     #     print(f"{idea_kid._label=}")
     assert sue_world._idearoot.get_kid(buildings_text) != None
-    assert sue_world.get_idea_obj(road=buildings_road) != None
-    assert sue_world.get_idea_obj(road=cookery_dirty_road) != None
+    assert sue_world.get_idea_obj(buildings_road) != None
+    assert sue_world.get_idea_obj(cookery_dirty_road) != None
     assert sue_world.get_idea_count() == 22
     assert sue_world.get_level_count(level=3) == 4
 
@@ -270,8 +270,7 @@ def test_WorldUnit_add_idea_CorrectlySets_world_real_id_AND_coin():
     sue_world = get_world_with_4_levels()
     sue_world._coin = x_coin
     world_real_id = "Texas"
-    sue_world.set_real_id(real_id=world_real_id)
-    sue_world.calc_world_metrics()
+    sue_world.set_real_id(world_real_id)
     assert sue_world._real_id == world_real_id
 
     casa_road = sue_world.make_l1_road("casa")
@@ -306,42 +305,41 @@ def test_WorldUnit_del_idea_obj_Level1CanBeDeleted_ChildrenDeleted():
     week_road = sue_world.make_l1_road(week_text)
     sun_text = "Sunday"
     sun_road = sue_world.make_road(week_road, sun_text)
-    assert sue_world.get_idea_obj(road=week_road)
-    assert sue_world.get_idea_obj(road=sun_road)
+    assert sue_world.get_idea_obj(week_road)
+    assert sue_world.get_idea_obj(sun_road)
 
     # WHEN
     sue_world.del_idea_obj(road=week_road)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
-        sue_world.get_idea_obj(road=week_road)
+        sue_world.get_idea_obj(week_road)
     assert str(excinfo.value) == f"get_idea_obj failed. no item at '{week_road}'"
     new_sunday_road = sue_world.make_l1_road("Sunday")
     with pytest_raises(Exception) as excinfo:
-        sue_world.get_idea_obj(road=new_sunday_road)
+        sue_world.get_idea_obj(new_sunday_road)
     assert str(excinfo.value) == f"get_idea_obj failed. no item at '{new_sunday_road}'"
 
 
 def test_WorldUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
     # GIVEN
     sue_world = get_world_with_4_levels()
-    sue_world.calc_world_metrics()
     week_text = "weekdays"
     week_road = sue_world.make_l1_road(week_text)
     sun_text = "Sunday"
     old_sunday_road = sue_world.make_road(week_road, sun_text)
-    assert sue_world.get_idea_obj(road=old_sunday_road)
+    assert sue_world.get_idea_obj(old_sunday_road)
 
     # WHEN
     sue_world.del_idea_obj(road=week_road, del_children=False)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
-        sue_world.get_idea_obj(road=old_sunday_road)
+        sue_world.get_idea_obj(old_sunday_road)
     assert str(excinfo.value) == f"get_idea_obj failed. no item at '{old_sunday_road}'"
     new_sunday_road = sue_world.make_l1_road(sun_text)
-    assert sue_world.get_idea_obj(road=new_sunday_road)
-    new_sunday_idea = sue_world.get_idea_obj(road=new_sunday_road)
+    assert sue_world.get_idea_obj(new_sunday_road)
+    new_sunday_idea = sue_world.get_idea_obj(new_sunday_road)
     assert new_sunday_idea._parent_road == sue_world._real_id
 
 
@@ -358,23 +356,21 @@ def test_WorldUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenInherited():
     usa_oregon_road = sue_world.make_road(usa_road, oregon_text)
     states_texas_road = sue_world.make_road(states_road, texas_text)
     states_oregon_road = sue_world.make_road(states_road, oregon_text)
-    sue_world.calc_world_metrics()
-    assert sue_world._idea_dict.get(usa_road) != None
-    assert sue_world._idea_dict.get(usa_texas_road) != None
-    assert sue_world._idea_dict.get(usa_oregon_road) != None
-    assert sue_world._idea_dict.get(states_texas_road) is None
-    assert sue_world._idea_dict.get(states_oregon_road) is None
+    assert sue_world.idea_exists(usa_road)
+    assert sue_world.idea_exists(usa_texas_road)
+    assert sue_world.idea_exists(usa_oregon_road)
+    assert sue_world.idea_exists(states_texas_road) is False
+    assert sue_world.idea_exists(states_oregon_road) is False
 
     # WHEN
     sue_world.del_idea_obj(road=usa_road, del_children=False)
 
     # THEN
-    sue_world.calc_world_metrics()
-    assert sue_world._idea_dict.get(states_texas_road) != None
-    assert sue_world._idea_dict.get(states_oregon_road) != None
-    assert sue_world._idea_dict.get(usa_texas_road) is None
-    assert sue_world._idea_dict.get(usa_oregon_road) is None
-    assert sue_world._idea_dict.get(usa_road) is None
+    assert sue_world.idea_exists(states_texas_road)
+    assert sue_world.idea_exists(states_oregon_road)
+    assert sue_world.idea_exists(usa_texas_road) is False
+    assert sue_world.idea_exists(usa_oregon_road) is False
+    assert sue_world.idea_exists(usa_road) is False
 
 
 def test_WorldUnit_del_idea_obj_Level2CanBeDeleted_ChildrenDeleted():
@@ -382,14 +378,14 @@ def test_WorldUnit_del_idea_obj_Level2CanBeDeleted_ChildrenDeleted():
     sue_world = get_world_with_4_levels()
     wkday_road = sue_world.make_l1_road("weekdays")
     monday_road = sue_world.make_road(wkday_road, "Monday")
-    assert sue_world.get_idea_obj(road=monday_road)
+    assert sue_world.get_idea_obj(monday_road)
 
     # WHEN
     sue_world.del_idea_obj(road=monday_road)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
-        sue_world.get_idea_obj(road=monday_road)
+        sue_world.get_idea_obj(monday_road)
     assert str(excinfo.value) == f"get_idea_obj failed. no item at '{monday_road}'"
 
 
@@ -402,14 +398,14 @@ def test_WorldUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenDeleted():
     usa_road = sue_world.make_road(states_road, usa_text)
     texas_text = "Texas"
     usa_texas_road = sue_world.make_road(usa_road, texas_text)
-    assert sue_world.get_idea_obj(road=usa_texas_road)
+    assert sue_world.get_idea_obj(usa_texas_road)
 
     # WHEN
     sue_world.del_idea_obj(road=usa_texas_road)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
-        sue_world.get_idea_obj(road=usa_texas_road)
+        sue_world.get_idea_obj(usa_texas_road)
     assert str(excinfo.value) == f"get_idea_obj failed. no item at '{usa_texas_road}'"
 
 
@@ -576,7 +572,7 @@ def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaIfInvaildDenomThr
     # GIVEN
     yao_world.edit_idea_attr(road=casa_road, begin=44, close=110)
     yao_world.edit_idea_attr(road=clean_road, denom=11)
-    clean_idea = yao_world.get_idea_obj(road=clean_road)
+    clean_idea = yao_world.get_idea_obj(clean_road)
     assert clean_idea._begin == 4
     assert clean_idea._close == 10
 
@@ -594,7 +590,7 @@ def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaInvaildDenomThrow
     c_road = yao_world.make_road(w_road, clean)
     yao_world.add_idea(clean_idea, parent_road=w_road)
 
-    clean_idea = yao_world.get_idea_obj(road=c_road)
+    clean_idea = yao_world.get_idea_obj(c_road)
 
     day = "day_range"
     day_idea = ideaunit_shop(day, _begin=44, _close=110)
@@ -623,7 +619,7 @@ def test_WorldUnit_edit_idea_attr_worldWhenParentAndNumeric_roadBothHaveRangeThr
     day_road = yao_world.make_l1_road(day_text)
     yao_world.add_l1_idea(day_idea)
 
-    casa_idea = yao_world.get_idea_obj(road=casa_road)
+    casa_idea = yao_world.get_idea_obj(casa_road)
     assert casa_idea._begin is None
     assert casa_idea._close is None
 
@@ -639,7 +635,7 @@ def test_WorldUnit_edit_idea_attr_worldWhenParentAndNumeric_roadBothHaveRangeThr
     yao_world.edit_idea_attr(road=casa_road, numeric_road=day_road)
 
     # THEN
-    casa_idea3 = yao_world.get_idea_obj(road=casa_road)
+    casa_idea3 = yao_world.get_idea_obj(casa_road)
     assert casa_idea3._addin is None
     assert casa_idea3._numor is None
     assert casa_idea3._denom is None
@@ -666,7 +662,7 @@ def test_WorldUnit_edit_idea_attr_RaisesErrorWhen_healerhold_belief_ids_DoNotExi
     day_road = yao_world.make_l1_road(day_text)
     yao_world.add_l1_idea(day_idea)
 
-    casa_idea = yao_world.get_idea_obj(road=casa_road)
+    casa_idea = yao_world.get_idea_obj(casa_road)
     assert casa_idea._begin is None
     assert casa_idea._close is None
 
@@ -727,17 +723,16 @@ def test_WorldUnit_add_idea_adoptee_CorrectlyAddsAdoptee():
     hike_text = "hike"
     noa_world.add_idea(ideaunit_shop(hike_text), parent_road=sports_road)
 
-    noa_world.calc_world_metrics()
     sports_swim_road = noa_world.make_road(sports_road, swim_text)
     sports_hike_road = noa_world.make_road(sports_road, hike_text)
-    assert noa_world._idea_dict.get(sports_swim_road) != None
-    assert noa_world._idea_dict.get(sports_hike_road) != None
+    assert noa_world.idea_exists(sports_swim_road)
+    assert noa_world.idea_exists(sports_hike_road)
     summer_text = "summer"
     summer_road = noa_world.make_road(sports_road, summer_text)
     summer_swim_road = noa_world.make_road(summer_road, swim_text)
     summer_hike_road = noa_world.make_road(summer_road, hike_text)
-    assert noa_world._idea_dict.get(summer_swim_road) is None
-    assert noa_world._idea_dict.get(summer_hike_road) is None
+    assert noa_world.idea_exists(summer_swim_road) is False
+    assert noa_world.idea_exists(summer_hike_road) is False
 
     # WHEN / THEN
     noa_world.add_idea(
@@ -749,11 +744,10 @@ def test_WorldUnit_add_idea_adoptee_CorrectlyAddsAdoptee():
     # THEN
     summer_idea = noa_world.get_idea_obj(summer_road)
     print(f"{summer_idea._kids.keys()=}")
-    noa_world.calc_world_metrics()
-    assert noa_world._idea_dict.get(summer_swim_road) != None
-    assert noa_world._idea_dict.get(summer_hike_road) != None
-    assert noa_world._idea_dict.get(sports_swim_road) is None
-    assert noa_world._idea_dict.get(sports_hike_road) is None
+    assert noa_world.idea_exists(summer_swim_road)
+    assert noa_world.idea_exists(summer_hike_road)
+    assert noa_world.idea_exists(sports_swim_road) is False
+    assert noa_world.idea_exists(sports_hike_road) is False
 
 
 def test_WorldUnit_add_idea_bundling_SetsNewParentWithWeightEqualToSumOfAdoptedIdeas():
@@ -771,21 +765,20 @@ def test_WorldUnit_add_idea_bundling_SetsNewParentWithWeightEqualToSumOfAdoptedI
     bball_weight = 7
     noa_world.add_idea(ideaunit_shop(bball_text, _weight=bball_weight), sports_road)
 
-    noa_world.calc_world_metrics()
     sports_swim_road = noa_world.make_road(sports_road, swim_text)
     sports_hike_road = noa_world.make_road(sports_road, hike_text)
     sports_bball_road = noa_world.make_road(sports_road, bball_text)
-    assert noa_world._idea_dict.get(sports_swim_road)._weight == swim_weight
-    assert noa_world._idea_dict.get(sports_hike_road)._weight == hike_weight
-    assert noa_world._idea_dict.get(sports_bball_road)._weight == bball_weight
+    assert noa_world.get_idea_obj(sports_swim_road)._weight == swim_weight
+    assert noa_world.get_idea_obj(sports_hike_road)._weight == hike_weight
+    assert noa_world.get_idea_obj(sports_bball_road)._weight == bball_weight
     summer_text = "summer"
     summer_road = noa_world.make_road(sports_road, summer_text)
     summer_swim_road = noa_world.make_road(summer_road, swim_text)
     summer_hike_road = noa_world.make_road(summer_road, hike_text)
     summer_bball_road = noa_world.make_road(summer_road, bball_text)
-    assert noa_world._idea_dict.get(summer_swim_road) is None
-    assert noa_world._idea_dict.get(summer_hike_road) is None
-    assert noa_world._idea_dict.get(summer_bball_road) is None
+    assert noa_world.idea_exists(summer_swim_road) is False
+    assert noa_world.idea_exists(summer_hike_road) is False
+    assert noa_world.idea_exists(summer_bball_road) is False
 
     # WHEN / THEN
     noa_world.add_idea(
@@ -796,14 +789,13 @@ def test_WorldUnit_add_idea_bundling_SetsNewParentWithWeightEqualToSumOfAdoptedI
     )
 
     # THEN
-    noa_world.calc_world_metrics()
-    assert noa_world._idea_dict.get(summer_road)._weight == swim_weight + hike_weight
-    assert noa_world._idea_dict.get(summer_swim_road)._weight == swim_weight
-    assert noa_world._idea_dict.get(summer_hike_road)._weight == hike_weight
-    assert noa_world._idea_dict.get(summer_bball_road) is None
-    assert noa_world._idea_dict.get(sports_swim_road) is None
-    assert noa_world._idea_dict.get(sports_hike_road) is None
-    assert noa_world._idea_dict.get(sports_bball_road) != None
+    assert noa_world.get_idea_obj(summer_road)._weight == swim_weight + hike_weight
+    assert noa_world.get_idea_obj(summer_swim_road)._weight == swim_weight
+    assert noa_world.get_idea_obj(summer_hike_road)._weight == hike_weight
+    assert noa_world.idea_exists(summer_bball_road) is False
+    assert noa_world.idea_exists(sports_swim_road) is False
+    assert noa_world.idea_exists(sports_hike_road) is False
+    assert noa_world.idea_exists(sports_bball_road)
 
 
 def test_WorldUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState():
@@ -813,57 +805,50 @@ def test_WorldUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState()
     noa_world.add_l1_idea(ideaunit_shop(sports_text, _weight=2))
     swim_text = "swim"
     swim_weight = 3
-    noa_world.add_idea(
-        ideaunit_shop(swim_text, _weight=swim_weight), parent_road=sports_road
-    )
+    noa_world.add_idea(ideaunit_shop(swim_text, _weight=swim_weight), sports_road)
     hike_text = "hike"
     hike_weight = 5
-    noa_world.add_idea(
-        ideaunit_shop(hike_text, _weight=hike_weight), parent_road=sports_road
-    )
+    noa_world.add_idea(ideaunit_shop(hike_text, _weight=hike_weight), sports_road)
     bball_text = "bball"
     bball_weight = 7
-    noa_world.add_idea(
-        ideaunit_shop(bball_text, _weight=bball_weight), parent_road=sports_road
-    )
+    noa_world.add_idea(ideaunit_shop(bball_text, _weight=bball_weight), sports_road)
 
-    noa_world.calc_world_metrics()
     sports_swim_road = noa_world.make_road(sports_road, swim_text)
     sports_hike_road = noa_world.make_road(sports_road, hike_text)
     sports_bball_road = noa_world.make_road(sports_road, bball_text)
-    assert noa_world._idea_dict.get(sports_swim_road)._weight == swim_weight
-    assert noa_world._idea_dict.get(sports_hike_road)._weight == hike_weight
-    assert noa_world._idea_dict.get(sports_bball_road)._weight == bball_weight
+    assert noa_world.get_idea_obj(sports_swim_road)._weight == swim_weight
+    assert noa_world.get_idea_obj(sports_hike_road)._weight == hike_weight
+    assert noa_world.get_idea_obj(sports_bball_road)._weight == bball_weight
     summer_text = "summer"
     summer_road = noa_world.make_road(sports_road, summer_text)
     summer_swim_road = noa_world.make_road(summer_road, swim_text)
     summer_hike_road = noa_world.make_road(summer_road, hike_text)
     summer_bball_road = noa_world.make_road(summer_road, bball_text)
-    assert noa_world._idea_dict.get(summer_swim_road) is None
-    assert noa_world._idea_dict.get(summer_hike_road) is None
-    assert noa_world._idea_dict.get(summer_bball_road) is None
+    assert noa_world.idea_exists(summer_swim_road) is False
+    assert noa_world.idea_exists(summer_hike_road) is False
+    assert noa_world.idea_exists(summer_bball_road) is False
     noa_world.add_idea(
         idea_kid=ideaunit_shop(summer_text),
         parent_road=sports_road,
         adoptees=[swim_text, hike_text],
         bundling=True,
     )
-    noa_world.calc_world_metrics()
-    assert noa_world._idea_dict.get(summer_road)._weight == swim_weight + hike_weight
-    assert noa_world._idea_dict.get(summer_swim_road)._weight == swim_weight
-    assert noa_world._idea_dict.get(summer_hike_road)._weight == hike_weight
-    assert noa_world._idea_dict.get(summer_bball_road) is None
-    assert noa_world._idea_dict.get(sports_swim_road) is None
-    assert noa_world._idea_dict.get(sports_hike_road) is None
-    assert noa_world._idea_dict.get(sports_bball_road) != None
+    assert noa_world.get_idea_obj(summer_road)._weight == swim_weight + hike_weight
+    assert noa_world.get_idea_obj(summer_swim_road)._weight == swim_weight
+    assert noa_world.get_idea_obj(summer_hike_road)._weight == hike_weight
+    assert noa_world.idea_exists(summer_bball_road) is False
+    assert noa_world.idea_exists(sports_swim_road) is False
+    assert noa_world.idea_exists(sports_hike_road) is False
+    assert noa_world.idea_exists(sports_bball_road)
     print(f"{noa_world._idea_dict.keys()=}")
 
     # WHEN
     noa_world.del_idea_obj(road=summer_road, del_children=False)
 
     # THEN
-    noa_world.calc_world_metrics()
-    print(f"{noa_world._idea_dict.keys()=}")
-    assert noa_world._idea_dict.get(sports_swim_road)._weight == swim_weight
-    assert noa_world._idea_dict.get(sports_hike_road)._weight == hike_weight
-    assert noa_world._idea_dict.get(sports_bball_road)._weight == bball_weight
+    sports_swim_idea = noa_world.get_idea_obj(sports_swim_road)
+    sports_hike_idea = noa_world.get_idea_obj(sports_hike_road)
+    sports_bball_idea = noa_world.get_idea_obj(sports_bball_road)
+    assert sports_swim_idea._weight == swim_weight
+    assert sports_hike_idea._weight == hike_weight
+    assert sports_bball_idea._weight == bball_weight
