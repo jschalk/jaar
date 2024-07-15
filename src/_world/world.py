@@ -1373,7 +1373,10 @@ class WorldUnit:
     ):
         if healerhold != None:
             for x_belief_id in healerhold._belief_ids:
-                if self._beliefs.get(x_belief_id) is None:
+                if (
+                    self._beliefs.get(x_belief_id) is None
+                    and self.get_belief_ids_dict().get(x_belief_id) is None
+                ):
                     raise healerhold_belief_id_Exception(
                         f"Idea cannot edit healerhold because belief_id '{x_belief_id}' does not exist as belief in World"
                     )
@@ -1417,9 +1420,9 @@ class WorldUnit:
         x_idea = self.get_idea_obj(road)
         x_idea._set_idea_attr(idea_attr=x_ideaattrfilter)
 
-        # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
-        if awardlink_del != None or awardlink != None:
-            self.calc_world_metrics()
+        # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
+        # if awardlink_del != None or awardlink != None:
+        #     self.calc_world_metrics()
 
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
@@ -1953,7 +1956,7 @@ class WorldUnit:
         return x_dict
 
     def get_dict(self) -> dict[str, str]:
-        self._migrate_beliefboxs_to_belieflinks()
+        # self._migrate_beliefboxs_to_belieflinks()
         x_dict = {
             "_chars": self.get_charunits_dict(),
             "_originunit": self._originunit.get_dict(),

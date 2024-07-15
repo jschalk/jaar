@@ -210,14 +210,7 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     x_world.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
 
     assert len(swim_idea._awardlinks) == 3
-    assert len(swim_idea._awardheirs) == 3
-
-    # print(f"{len(idea_list)}")
-    # print(f"{idea_list[0]._awardlinks}")
-    # print(f"{idea_list[0]._awardheirs}")
-    # print(f"{idea_list[1]._awardheirs}")
     assert len(x_world._idearoot._kids[swim_text]._awardlinks) == 3
-    assert len(x_world._idearoot._kids[swim_text]._awardheirs) == 3
 
     # WHEN
     x_world.edit_idea_attr(swim_road, awardlink_del=yao_text)
@@ -229,7 +222,6 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     print(f"{swim_idea._awardheirs=}")
 
     assert len(x_world._idearoot._kids[swim_text]._awardlinks) == 2
-    assert len(x_world._idearoot._kids[swim_text]._awardheirs) == 2
 
 
 def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImportance():
