@@ -649,6 +649,18 @@ class WorldUnit:
     def get_char(self, char_id: CharID) -> CharUnit:
         return self._chars.get(char_id)
 
+    def get_belief_ids_dict(self) -> dict[BeliefID, set[CharID]]:
+        x_dict = {}
+        for x_charunit in self._chars.values():
+            for x_belief_id in x_charunit._belieflinks.keys():
+                char_id_set = x_dict.get(x_belief_id)
+                if char_id_set is None:
+                    x_dict[x_belief_id] = {x_charunit.char_id}
+                else:
+                    char_id_set.add(x_charunit.char_id)
+                    x_dict[x_belief_id] = char_id_set
+        return x_dict
+
     def get_charunits_char_id_list(self) -> dict[CharID]:
         char_id_list = list(self._chars.keys())
         char_id_list.append("")

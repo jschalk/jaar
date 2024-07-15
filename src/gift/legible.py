@@ -277,37 +277,6 @@ def add_world_charunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_world_beliefbox_insert_to_legible_list(
-    legible_list: list[str], beliefbox_dict: AtomUnit, x_world: WorldUnit
-):
-    for beliefbox_atom in beliefbox_dict.values():
-        belief_id = beliefbox_atom.get_value("belief_id")
-        x_str = f"The belief '{belief_id}' was created"
-        x_str += "."
-        legible_list.append(x_str)
-
-
-def add_world_beliefbox_update_to_legible_list(
-    legible_list: list[str], beliefbox_dict: AtomUnit, x_world: WorldUnit
-):
-    for beliefbox_atom in beliefbox_dict.values():
-        belief_id = beliefbox_atom.get_value("belief_id")
-        x_str = f"The belief '{belief_id}'"
-        x_str += "."
-        legible_list.append(x_str)
-
-
-def add_world_beliefbox_delete_to_legible_list(
-    legible_list: list[str], beliefbox_dict: AtomUnit, x_world: WorldUnit
-):
-    x_monetary_desc = x_world._monetary_desc
-    x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
-    for beliefbox_atom in beliefbox_dict.values():
-        belief_id = beliefbox_atom.get_value("belief_id")
-        x_str = f"The belief '{belief_id}' was deleted."
-        legible_list.append(x_str)
-
-
 def add_world_char_belieflink_insert_to_legible_list(
     legible_list: list[str], char_belieflink_insert_dict: dict, x_world: WorldUnit
 ):

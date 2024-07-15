@@ -21,6 +21,14 @@ class BeliefLink(BeliefCore):
     _debtor_pool: float = None
     _char_id: CharID = None
 
+    def set_credor_weight(self, x_credor_weight: float):
+        if x_credor_weight != None:
+            self.credor_weight = x_credor_weight
+
+    def set_debtor_weight(self, x_debtor_weight: float):
+        if x_debtor_weight != None:
+            self.debtor_weight = x_debtor_weight
+
     def get_dict(self) -> dict[str, str]:
         return {
             "belief_id": self.belief_id,

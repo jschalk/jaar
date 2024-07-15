@@ -73,6 +73,76 @@ def test_belieflink_shop_ReturnsCorrectObjAttr_char_id():
     assert swim_belieflink._char_id == yao_text
 
 
+def test_BeliefLink_set_credor_weight_SetsAttr():
+    # GIVEN
+    swim_text = "swim"
+    old_credor_weight = 3.0
+    swim_debtor_weight = 5.0
+    swim_belieflink = belieflink_shop(swim_text, old_credor_weight, swim_debtor_weight)
+    assert swim_belieflink.credor_weight == old_credor_weight
+    assert swim_belieflink.debtor_weight == swim_debtor_weight
+
+    # WHEN
+    new_swim_credor_weight = 44
+    swim_belieflink.set_credor_weight(new_swim_credor_weight)
+
+    # THEN
+    assert swim_belieflink.credor_weight == new_swim_credor_weight
+    assert swim_belieflink.debtor_weight == swim_debtor_weight
+
+
+def test_BeliefLink_set_credor_weight_SetsAttr():
+    # GIVEN
+    swim_text = "swim"
+    old_credor_weight = 3.0
+    swim_debtor_weight = 5.0
+    swim_belieflink = belieflink_shop(swim_text, old_credor_weight, swim_debtor_weight)
+    assert swim_belieflink.credor_weight == old_credor_weight
+    assert swim_belieflink.debtor_weight == swim_debtor_weight
+
+    # WHEN
+    swim_belieflink.set_credor_weight(None)
+
+    # THEN
+    assert swim_belieflink.credor_weight == old_credor_weight
+    assert swim_belieflink.debtor_weight == swim_debtor_weight
+
+
+def test_BeliefLink_set_debtor_weight_SetsAttr():
+    # GIVEN
+    swim_text = "swim"
+    swim_credor_weight = 3.0
+    old_debtor_weight = 5.0
+    swim_belieflink = belieflink_shop(swim_text, swim_credor_weight, old_debtor_weight)
+    assert swim_belieflink.credor_weight == swim_credor_weight
+    assert swim_belieflink.debtor_weight == old_debtor_weight
+
+    # WHEN
+    new_debtor_weight = 55
+    swim_belieflink.set_debtor_weight(new_debtor_weight)
+
+    # THEN
+    assert swim_belieflink.credor_weight == swim_credor_weight
+    assert swim_belieflink.debtor_weight == new_debtor_weight
+
+
+def test_BeliefLink_set_debtor_weight_SetsAttr():
+    # GIVEN
+    swim_text = "swim"
+    swim_credor_weight = 3.0
+    old_debtor_weight = 5.0
+    swim_belieflink = belieflink_shop(swim_text, swim_credor_weight, old_debtor_weight)
+    assert swim_belieflink.credor_weight == swim_credor_weight
+    assert swim_belieflink.debtor_weight == old_debtor_weight
+
+    # WHEN
+    swim_belieflink.set_debtor_weight(None)
+
+    # THEN
+    assert swim_belieflink.credor_weight == swim_credor_weight
+    assert swim_belieflink.debtor_weight == old_debtor_weight
+
+
 def test_BeliefLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # GIVEN
     swim_text = "swim"

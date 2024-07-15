@@ -160,12 +160,15 @@ def create_bridge_dataframe(d2_list: list[list[str]], bridge_name: str) -> DataF
 def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_worldunit)
+    print(f"{x_changeunit=}")
     category_set = {get_bridge_atom_category(bridge_name)}
+    print(f"{category_set=}")
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
     d2_list = []
     ordered_columns = get_column_ordered_bridge_attributes(bridge_name)
+    print(f"{sorted_atomunits=}")
 
     if bridge_name == jaar_format_0001_char_v0_0_0():
         d2_list = [

@@ -1,6 +1,5 @@
 from src._road.jaar_refer import sue_str, bob_str, yao_str
-from src._world.beliefbox import beliefbox_shop
-from src._world.char import charlink_shop
+from src._world.char import charunit_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
 from src.gift.bridge import (
@@ -94,18 +93,13 @@ def test_create_bridge_Arg_jaar_format_0002_belieflink_v0_0_0():
     ohio_text = ",Ohio"
     yao_ohio_credor_w = 73
     yao_ohio_debtor_w = 67
-    iowa_beliefbox = beliefbox_shop(iowa_text)
-    ohio_beliefbox = beliefbox_shop(ohio_text)
-    sue_iowa_charlink = charlink_shop(sue_text, sue_iowa_credor_w, sue_iowa_debtor_w)
-    bob_iowa_charlink = charlink_shop(bob_text, bob_iowa_credor_w, bob_iowa_debtor_w)
-    yao_iowa_charlink = charlink_shop(yao_text, yao_iowa_credor_w, yao_iowa_debtor_w)
-    yao_ohio_charlink = charlink_shop(yao_text, yao_ohio_credor_w, yao_ohio_debtor_w)
-    iowa_beliefbox.set_charlink(sue_iowa_charlink)
-    iowa_beliefbox.set_charlink(bob_iowa_charlink)
-    iowa_beliefbox.set_charlink(yao_iowa_charlink)
-    ohio_beliefbox.set_charlink(yao_ohio_charlink)
-    sue_worldunit.set_beliefbox(iowa_beliefbox)
-    sue_worldunit.set_beliefbox(ohio_beliefbox)
+    sue_charunit = sue_worldunit.get_char(sue_text)
+    bob_charunit = sue_worldunit.get_char(bob_text)
+    yao_charunit = sue_worldunit.get_char(yao_text)
+    sue_charunit.add_belieflink(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
+    bob_charunit.add_belieflink(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
+    yao_charunit.add_belieflink(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
+    yao_charunit.add_belieflink(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
 
     # WHEN
     x_bridge = jaar_format_0002_belieflink_v0_0_0()
