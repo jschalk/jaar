@@ -1,6 +1,6 @@
 from src._instrument.file import dir_files
 from src.gift.atom_config import config_file_dir
-from src.gift.bridge import (
+from src.gift.cross import (
     real_id_str,
     owner_id_str,
     char_id_str,
@@ -18,15 +18,15 @@ from src.gift.bridge import (
     # must_be_roadunit_str,
     # must_be_number_str,
     # must_be_bool_str,
-    get_bridge_formats_dir,
-    get_bridge_filenames,
-    get_bridge_attribute_dict,
-    get_column_ordered_bridge_attributes,
+    get_cross_formats_dir,
+    get_cross_filenames,
+    get_cross_attribute_dict,
+    get_column_ordered_cross_attributes,
     jaar_format_0001_char_v0_0_0,
     jaar_format_0002_belieflink_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
-    create_bridge_dataframe,
+    create_cross_dataframe,
 )
 
 
@@ -39,23 +39,23 @@ def test_str_functions_ReturnCorrectObjs():
     assert debtor_weight_str() == "debtor_weight"
     assert credor_weight_str() == "credor_weight"
     assert jaar_format_0001_char_v0_0_0() == "jaar_format_0001_char_v0_0_0"
-    x0002_bridge = "jaar_format_0002_belieflink_v0_0_0"
-    assert jaar_format_0002_belieflink_v0_0_0() == x0002_bridge
-    x0003_bridge = "jaar_format_0003_ideaunit_v0_0_0"
-    assert jaar_format_0003_ideaunit_v0_0_0() == x0003_bridge
+    x0002_cross = "jaar_format_0002_belieflink_v0_0_0"
+    assert jaar_format_0002_belieflink_v0_0_0() == x0002_cross
+    x0003_cross = "jaar_format_0003_ideaunit_v0_0_0"
+    assert jaar_format_0003_ideaunit_v0_0_0() == x0003_cross
 
 
-def test_get_bridge_formats_dir_ReturnsObj():
+def test_get_cross_formats_dir_ReturnsObj():
     # GIVEN / WHEN
-    bridge_dir = get_bridge_formats_dir()
+    cross_dir = get_cross_formats_dir()
     # THEN
-    print(f"{bridge_dir=}")
-    assert bridge_dir == f"{config_file_dir()}/bridge_formats"
+    print(f"{cross_dir=}")
+    assert cross_dir == f"{config_file_dir()}/cross_formats"
 
 
-def test_get_bridge_filenames_ReturnsCorrectObj():
+def test_get_cross_filenames_ReturnsCorrectObj():
     # GIVEN / WHEN
-    x_filenames = get_bridge_filenames()
+    x_filenames = get_cross_filenames()
     # THEN
     print(f"{x_filenames=}")
     assert jaar_format_0001_char_v0_0_0() in x_filenames
@@ -79,65 +79,65 @@ def test_get_headers_list_ReturnsObj():
     ]
 
 
-def test_create_bridge_dataframe_ReturnsCorrectObj():
+def test_create_cross_dataframe_ReturnsCorrectObj():
     # GIVEN
     empty_d2 = []
     # WHEN
-    x_df = create_bridge_dataframe(empty_d2, jaar_format_0001_char_v0_0_0())
+    x_df = create_cross_dataframe(empty_d2, jaar_format_0001_char_v0_0_0())
     # THEN
     assert list(x_df.columns) == _get_headers_list(jaar_format_0001_char_v0_0_0())
 
 
-def for_all_bridges_create_bridge_dataframe():
+def for_all_crosss_create_cross_dataframe():
     empty_d2 = []
-    for x_filename in get_bridge_filenames():
+    for x_filename in get_cross_filenames():
         try:
-            create_bridge_dataframe(empty_d2, x_filename)
+            create_cross_dataframe(empty_d2, x_filename)
         except Exception:
-            print(f"create_bridge_dataframe failed for {x_filename=}")
+            print(f"create_cross_dataframe failed for {x_filename=}")
             return False
     return True
 
 
-def test_create_bridge_dataframe_ReturnsCorrectObjForEvery_bridge():
+def test_create_cross_dataframe_ReturnsCorrectObjForEvery_cross():
     # GIVEN / WHEN / THEN
-    assert for_all_bridges_create_bridge_dataframe()
+    assert for_all_crosss_create_cross_dataframe()
 
 
-def test_bridge_FilesExist():
+def test_cross_FilesExist():
     # GIVEN
-    bridge_dir = get_bridge_formats_dir()
+    cross_dir = get_cross_formats_dir()
 
     # WHEN
-    bridge_files = dir_files(bridge_dir, True)
+    cross_files = dir_files(cross_dir, True)
 
     # THEN
-    bridge_filenames = set(bridge_files.keys())
-    assert bridge_filenames == get_bridge_filenames()
-    assert len(bridge_filenames) == len(get_bridge_filenames())
+    cross_filenames = set(cross_files.keys())
+    assert cross_filenames == get_cross_filenames()
+    assert len(cross_filenames) == len(get_cross_filenames())
 
 
-def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
+def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
     # GIVEN
-    bridge_name = jaar_format_0001_char_v0_0_0()
+    cross_name = jaar_format_0001_char_v0_0_0()
 
     # WHEN
-    bridge_dict = get_bridge_attribute_dict(bridge_name)
+    cross_dict = get_cross_attribute_dict(cross_name)
 
     # THEN
-    real_id_dict = bridge_dict.get(real_id_str())
-    owner_id_dict = bridge_dict.get(owner_id_str())
-    char_id_dict = bridge_dict.get(char_id_str())
-    char_pool_dict = bridge_dict.get(char_pool_str())
-    debtor_weight_dict = bridge_dict.get(debtor_weight_str())
-    credor_weight_dict = bridge_dict.get(credor_weight_str())
+    real_id_dict = cross_dict.get(real_id_str())
+    owner_id_dict = cross_dict.get(owner_id_str())
+    char_id_dict = cross_dict.get(char_id_str())
+    char_pool_dict = cross_dict.get(char_pool_str())
+    debtor_weight_dict = cross_dict.get(debtor_weight_str())
+    credor_weight_dict = cross_dict.get(credor_weight_str())
     assert real_id_dict != None
     assert owner_id_dict != None
     assert char_id_dict != None
     assert char_pool_dict != None
     assert debtor_weight_dict != None
     assert credor_weight_dict != None
-    assert len(bridge_dict) == 6
+    assert len(cross_dict) == 6
 
     real_id_column_order = real_id_dict.get(column_order_str())
     owner_id_column_order = owner_id_dict.get(column_order_str())
@@ -153,27 +153,27 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0(
     assert credor_weight_column_order == 4
 
 
-def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0002_belieflink_v0_0_0():
+def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_belieflink_v0_0_0():
     # GIVEN
-    bridge_name = jaar_format_0002_belieflink_v0_0_0()
+    cross_name = jaar_format_0002_belieflink_v0_0_0()
 
     # WHEN
-    bridge_dict = get_bridge_attribute_dict(bridge_name)
+    cross_dict = get_cross_attribute_dict(cross_name)
 
     # THEN
-    real_id_dict = bridge_dict.get(real_id_str())
-    owner_id_dict = bridge_dict.get(owner_id_str())
-    char_id_dict = bridge_dict.get(char_id_str())
-    belief_id_dict = bridge_dict.get(belief_id_str())
-    debtor_weight_dict = bridge_dict.get(debtor_weight_str())
-    credor_weight_dict = bridge_dict.get(credor_weight_str())
+    real_id_dict = cross_dict.get(real_id_str())
+    owner_id_dict = cross_dict.get(owner_id_str())
+    char_id_dict = cross_dict.get(char_id_str())
+    belief_id_dict = cross_dict.get(belief_id_str())
+    debtor_weight_dict = cross_dict.get(debtor_weight_str())
+    credor_weight_dict = cross_dict.get(credor_weight_str())
     assert real_id_dict != None
     assert owner_id_dict != None
     assert char_id_dict != None
     assert belief_id_dict != None
     assert debtor_weight_dict != None
     assert credor_weight_dict != None
-    assert len(bridge_dict) == 6
+    assert len(cross_dict) == 6
 
     assert real_id_dict.get(column_order_str()) == 0
     assert owner_id_dict.get(column_order_str()) == 1
@@ -183,27 +183,27 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0002_belieflink_v
     assert credor_weight_dict.get(column_order_str()) == 4
 
 
-def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
+def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     # GIVEN
-    bridge_name = jaar_format_0003_ideaunit_v0_0_0()
+    cross_name = jaar_format_0003_ideaunit_v0_0_0()
 
     # WHEN
-    bridge_dict = get_bridge_attribute_dict(bridge_name)
+    cross_dict = get_cross_attribute_dict(cross_name)
 
     # THEN
-    real_id_dict = bridge_dict.get(real_id_str())
-    owner_id_dict = bridge_dict.get(owner_id_str())
-    parent_road_dict = bridge_dict.get(parent_road_str())
-    label_dict = bridge_dict.get(label_str())
-    weight_dict = bridge_dict.get(weight_str())
-    pledge_dict = bridge_dict.get(pledge_str())
+    real_id_dict = cross_dict.get(real_id_str())
+    owner_id_dict = cross_dict.get(owner_id_str())
+    parent_road_dict = cross_dict.get(parent_road_str())
+    label_dict = cross_dict.get(label_str())
+    weight_dict = cross_dict.get(weight_str())
+    pledge_dict = cross_dict.get(pledge_str())
     assert real_id_dict != None
     assert owner_id_dict != None
     assert parent_road_dict != None
     assert label_dict != None
     assert weight_dict != None
     assert pledge_dict != None
-    assert len(bridge_dict) == 6
+    assert len(cross_dict) == 6
 
     assert real_id_dict.get(column_order_str()) == 0
     assert owner_id_dict.get(column_order_str()) == 1
@@ -213,14 +213,14 @@ def test_get_bridge_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_
     assert pledge_dict.get(column_order_str()) == 2
 
 
-def test_get_column_ordered_bridge_attributes_ReturnsCorrectObj_scenario1():
+def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
     # GIVEN
-    bridge_name = jaar_format_0001_char_v0_0_0()
+    cross_name = jaar_format_0001_char_v0_0_0()
     # WHEN
-    sorted_bridge_attributes = get_column_ordered_bridge_attributes(bridge_name)
+    sorted_cross_attributes = get_column_ordered_cross_attributes(cross_name)
 
     # THEN
-    assert sorted_bridge_attributes == [
+    assert sorted_cross_attributes == [
         real_id_str(),
         owner_id_str(),
         char_pool_str(),
@@ -230,15 +230,15 @@ def test_get_column_ordered_bridge_attributes_ReturnsCorrectObj_scenario1():
     ]
 
 
-def test_get_column_ordered_bridge_attributes_ReturnsCorrectObj_scenario2():
+def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario2():
     # GIVEN
-    bridge_name = jaar_format_0003_ideaunit_v0_0_0()
+    cross_name = jaar_format_0003_ideaunit_v0_0_0()
     # WHEN
-    sorted_bridge_attributes = get_column_ordered_bridge_attributes(bridge_name)
+    sorted_cross_attributes = get_column_ordered_cross_attributes(cross_name)
 
     # THEN
-    print(f"{sorted_bridge_attributes=}")
-    assert sorted_bridge_attributes == [
+    print(f"{sorted_cross_attributes=}")
+    assert sorted_cross_attributes == [
         real_id_str(),
         owner_id_str(),
         pledge_str(),

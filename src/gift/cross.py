@@ -88,8 +88,8 @@ def must_be_bool_str() -> str:
     return "must_be_bool"
 
 
-def get_bridge_formats_dir() -> str:
-    return f"{config_file_dir()}/bridge_formats"
+def get_cross_formats_dir() -> str:
+    return f"{config_file_dir()}/cross_formats"
 
 
 def jaar_format_0001_char_v0_0_0() -> str:
@@ -104,7 +104,7 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
     return "jaar_format_0003_ideaunit_v0_0_0"
 
 
-def get_bridge_filenames() -> set[str]:
+def get_cross_filenames() -> set[str]:
     return {
         jaar_format_0001_char_v0_0_0(),
         jaar_format_0002_belieflink_v0_0_0(),
@@ -112,24 +112,24 @@ def get_bridge_filenames() -> set[str]:
     }
 
 
-def get_bridge_format_dict(bridge_name: str) -> dict[str,]:
-    bridge_filename = get_json_filename(bridge_name)
-    bridge_json = open_file(get_bridge_formats_dir(), bridge_filename)
-    return get_dict_from_json(bridge_json)
+def get_cross_format_dict(cross_name: str) -> dict[str,]:
+    cross_filename = get_json_filename(cross_name)
+    cross_json = open_file(get_cross_formats_dir(), cross_filename)
+    return get_dict_from_json(cross_json)
 
 
-def get_bridge_atom_category(bridge_name: str) -> dict[str,]:
-    return get_bridge_format_dict(bridge_name).get("atom_category")
+def get_cross_atom_category(cross_name: str) -> dict[str,]:
+    return get_cross_format_dict(cross_name).get("atom_category")
 
 
-def get_bridge_attribute_dict(bridge_name: str) -> dict[str,]:
-    return get_bridge_format_dict(bridge_name).get("attributes")
+def get_cross_attribute_dict(cross_name: str) -> dict[str,]:
+    return get_cross_format_dict(cross_name).get("attributes")
 
 
-def get_sorting_attributes(bridge_name: str) -> list[str]:
-    bridge_format_dict = get_bridge_attribute_dict(bridge_name)
+def get_sorting_attributes(cross_name: str) -> list[str]:
+    cross_format_dict = get_cross_attribute_dict(cross_name)
     x_list = []
-    for x_attribute_name, x_attribute_dict in bridge_format_dict.items():
+    for x_attribute_name, x_attribute_dict in cross_format_dict.items():
         sort_order = x_attribute_dict.get("sort_order")
         if sort_order != None:
             x_list.append(x_attribute_name)
@@ -140,37 +140,37 @@ def get_ascending_bools(sorting_attributes: list[str]) -> list[bool]:
     return [True for _ in sorting_attributes]
 
 
-def get_column_ordered_bridge_attributes(bridge_name: str) -> list[str]:
-    bridge_attribute_dict = get_bridge_attribute_dict(bridge_name)
+def get_column_ordered_cross_attributes(cross_name: str) -> list[str]:
+    cross_attribute_dict = get_cross_attribute_dict(cross_name)
     column_order_dict = {
-        bridge_attribute: a_dict.get("column_order")
-        for bridge_attribute, a_dict in bridge_attribute_dict.items()
+        cross_attribute: a_dict.get("column_order")
+        for cross_attribute, a_dict in cross_attribute_dict.items()
     }
     return sorted(column_order_dict, key=column_order_dict.get)
 
 
-def _get_headers_list(bridge_name: str) -> list[str]:
-    return list(get_bridge_attribute_dict(bridge_name).keys())
+def _get_headers_list(cross_name: str) -> list[str]:
+    return list(get_cross_attribute_dict(cross_name).keys())
 
 
-def create_bridge_dataframe(d2_list: list[list[str]], bridge_name: str) -> DataFrame:
-    return DataFrame(d2_list, columns=_get_headers_list(bridge_name))
+def create_cross_dataframe(d2_list: list[list[str]], cross_name: str) -> DataFrame:
+    return DataFrame(d2_list, columns=_get_headers_list(cross_name))
 
 
-def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
+def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_worldunit)
     print(f"{x_changeunit=}")
-    category_set = {get_bridge_atom_category(bridge_name)}
+    category_set = {get_cross_atom_category(cross_name)}
     print(f"{category_set=}")
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
     d2_list = []
-    ordered_columns = get_column_ordered_bridge_attributes(bridge_name)
+    ordered_columns = get_column_ordered_cross_attributes(cross_name)
     print(f"{sorted_atomunits=}")
 
-    if bridge_name == jaar_format_0001_char_v0_0_0():
+    if cross_name == jaar_format_0001_char_v0_0_0():
         d2_list = [
             [
                 x_atomunit.get_value(char_id_str()),
@@ -183,7 +183,7 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
             for x_atomunit in sorted_atomunits
         ]
 
-    elif bridge_name == jaar_format_0002_belieflink_v0_0_0():
+    elif cross_name == jaar_format_0002_belieflink_v0_0_0():
         d2_list = [
             [
                 x_atomunit.get_value(belief_id_str()),
@@ -195,7 +195,7 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-    elif bridge_name == jaar_format_0003_ideaunit_v0_0_0():
+    elif cross_name == jaar_format_0003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
             pledge_bool = x_atomunit.get_value("pledge")
             pledge_yes_str = ""
@@ -212,11 +212,11 @@ def create_bridge(x_worldunit: WorldUnit, bridge_name: str) -> DataFrame:
                 ]
             )
 
-    x_bridge = create_bridge_dataframe(d2_list, bridge_name)
-    sorting_columns = get_sorting_attributes(bridge_name)
+    x_cross = create_cross_dataframe(d2_list, cross_name)
+    sorting_columns = get_sorting_attributes(cross_name)
     ascending_bools = get_ascending_bools(sorting_columns)
-    x_bridge.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
-    x_bridge.reset_index(inplace=True)
-    x_bridge.drop(columns=["index"], inplace=True)
+    x_cross.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
+    x_cross.reset_index(inplace=True)
+    x_cross.drop(columns=["index"], inplace=True)
 
-    return x_bridge
+    return x_cross
