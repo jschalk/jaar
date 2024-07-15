@@ -159,40 +159,6 @@ def test_WorldUnit_get_agenda_DoesNotReturnPledgeItemsOutsideRange():
     assert len(agenda_dict) == 0
 
 
-def test_WorldUnit_get_all_pledges_ReturnsCorrectObj():
-    # GIVEN
-    zia_text = "Zia"
-    zia_world = worldunit_shop(zia_text)
-    casa_text = "casa"
-    casa_road = zia_world.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = zia_world.make_road(casa_road, clean_text)
-    sweep_text = "sweep"
-    sweep_road = zia_world.make_road(clean_road, sweep_text)
-    couch_text = "couch"
-    couch_road = zia_world.make_road(casa_road, couch_text)
-    zia_world.add_idea(ideaunit_shop(couch_text), casa_road)
-    zia_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    zia_world.add_idea(ideaunit_shop(sweep_text, pledge=True), clean_road)
-    sweep_idea = zia_world.get_idea_obj(sweep_road)
-    bob_text = "Bob"
-    zia_world.add_charunit(bob_text)
-    sweep_idea._doerunit.set_beliefhold(bob_text)
-    print(f"{sweep_idea}")
-    agenda_dict = zia_world.get_agenda_dict()
-    assert agenda_dict.get(clean_road) != None
-    assert agenda_dict.get(sweep_road) is None
-    assert agenda_dict.get(couch_road) is None
-
-    # WHEN
-    all_pledges_dict = zia_world.get_all_pledges()
-
-    # THEN
-    assert all_pledges_dict.get(sweep_road) == zia_world.get_idea_obj(sweep_road)
-    assert all_pledges_dict.get(clean_road) == zia_world.get_idea_obj(clean_road)
-    assert all_pledges_dict.get(couch_road) is None
-
-
 def test_example_worlds_world_v001_AgendaExists():
     # GIVEN
     x_world = example_worlds_world_v001()
@@ -879,3 +845,37 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
     # THEN
     assert bob_agenda_dict == {}
+
+
+def test_WorldUnit_get_all_pledges_ReturnsCorrectObj():
+    # GIVEN
+    zia_text = "Zia"
+    zia_world = worldunit_shop(zia_text)
+    casa_text = "casa"
+    casa_road = zia_world.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = zia_world.make_road(casa_road, clean_text)
+    sweep_text = "sweep"
+    sweep_road = zia_world.make_road(clean_road, sweep_text)
+    couch_text = "couch"
+    couch_road = zia_world.make_road(casa_road, couch_text)
+    zia_world.add_idea(ideaunit_shop(couch_text), casa_road)
+    zia_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    zia_world.add_idea(ideaunit_shop(sweep_text, pledge=True), clean_road)
+    sweep_idea = zia_world.get_idea_obj(sweep_road)
+    bob_text = "Bob"
+    zia_world.add_charunit(bob_text)
+    sweep_idea._doerunit.set_beliefhold(bob_text)
+    print(f"{sweep_idea}")
+    agenda_dict = zia_world.get_agenda_dict()
+    assert agenda_dict.get(clean_road) != None
+    assert agenda_dict.get(sweep_road) is None
+    assert agenda_dict.get(couch_road) is None
+
+    # WHEN
+    all_pledges_dict = zia_world.get_all_pledges()
+
+    # THEN
+    assert all_pledges_dict.get(sweep_road) == zia_world.get_idea_obj(sweep_road)
+    assert all_pledges_dict.get(clean_road) == zia_world.get_idea_obj(clean_road)
+    assert all_pledges_dict.get(couch_road) is None

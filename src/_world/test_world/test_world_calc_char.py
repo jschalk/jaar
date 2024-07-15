@@ -68,12 +68,14 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario0():
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     assert sue_worldunit._beliefs == {}
+    assert sue_worldunit._beliefstorys == {}
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
 
     # THEN
     assert sue_worldunit._beliefs == {}
+    assert sue_worldunit._beliefstorys == {}
 
 
 def test_WorldUnit_calc_charunit_metrics_Clears_beliefs():
@@ -81,13 +83,16 @@ def test_WorldUnit_calc_charunit_metrics_Clears_beliefs():
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     sue_worldunit._beliefs = "yeah"
+    sue_worldunit._beliefstorys = "ohio"
     assert sue_worldunit._beliefs != {}
+    assert sue_worldunit._beliefstorys != {}
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
 
     # THEN
     assert sue_worldunit._beliefs == {}
+    assert sue_worldunit._beliefstorys == {}
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():

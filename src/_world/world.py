@@ -2098,6 +2098,7 @@ def worldunit_shop(
         _real_id=_real_id,
         _chars=get_empty_dict_if_none(None),
         _beliefs=get_empty_dict_if_none(None),
+        _beliefstorys={},
         _idea_dict=get_empty_dict_if_none(None),
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),

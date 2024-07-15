@@ -268,6 +268,10 @@ class BeliefStory(BeliefCore):
             raise belieflink_belief_id_Exception(
                 f"BeliefStory.belief_id={self.belief_id} cannot set belieflink.belief_id={x_belieflink.belief_id}"
             )
+        if x_belieflink._char_id is None:
+            raise belieflink_belief_id_Exception(
+                f"belieflink belief_id={x_belieflink.belief_id} cannot be set when _char_id is None."
+            )
 
         self._belieflinks[x_belieflink._char_id] = x_belieflink
         self._add_credor_pool(x_belieflink._credor_pool)

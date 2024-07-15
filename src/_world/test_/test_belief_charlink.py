@@ -231,7 +231,7 @@ def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
     assert ohio_beliefstory._debtor_pool == 8800
 
 
-def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
+def test_BeliefStory_set_belieflink_RaisesErrorIf_belieflink_belief_id_IsWrong():
     # GIVEN
     yao_text = "Yao"
     ohio_text = ",Ohio"
@@ -249,4 +249,19 @@ def test_BeliefStory_set_belieflink_SetsAttr_credor_pool_debtor_pool():
     assert (
         str(excinfo.value)
         == f"BeliefStory.belief_id={iowa_text} cannot set belieflink.belief_id={ohio_text}"
+    )
+
+
+def test_BeliefStory_set_belieflink_RaisesErrorIf_char_id_IsNone():
+    # GIVEN
+    ohio_text = ",Ohio"
+    ohio_beliefstory = beliefstory_shop(ohio_text)
+    yao_ohio_belieflink = belieflink_shop(ohio_text)
+    assert yao_ohio_belieflink._char_id is None
+
+    with pytest_raises(Exception) as excinfo:
+        ohio_beliefstory.set_belieflink(yao_ohio_belieflink)
+    assert (
+        str(excinfo.value)
+        == f"belieflink belief_id={ohio_text} cannot be set when _char_id is None."
     )
