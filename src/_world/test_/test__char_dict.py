@@ -56,7 +56,7 @@ def test_CharUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     print(f"{bob_text}")
 
     bob_charunit.set_belieflink(belieflink_shop(bob_text))
-    run_text = "Run"
+    run_text = ",Run"
     bob_charunit.set_belieflink(belieflink_shop(run_text))
 
     # WHEN
@@ -106,7 +106,7 @@ def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_charunit._world_agenda_ratio_debt = bob_world_agenda_ratio_debt
 
     bob_charunit.set_belieflink(belieflink_shop(bob_text))
-    run_text = "Run"
+    run_text = ",Run"
     bob_charunit.set_belieflink(belieflink_shop(run_text))
 
     print(f"{bob_text}")
@@ -209,10 +209,10 @@ def test_charunit_get_from_dict_Returns_belieflinks():
     yao_text = ",Yao"
     slash_text = "/"
     before_yao_charunit = charunit_shop(yao_text, _road_delimiter=slash_text)
-    bob_text = "Bob"
-    zia_text = "Zia"
-    before_yao_charunit.set_belieflink(belieflink_shop(bob_text))
-    before_yao_charunit.set_belieflink(belieflink_shop(zia_text))
+    ohio_text = f"{slash_text}ohio"
+    iowa_text = f"{slash_text}iowa"
+    before_yao_charunit.set_belieflink(belieflink_shop(ohio_text))
+    before_yao_charunit.set_belieflink(belieflink_shop(iowa_text))
     yao_dict = before_yao_charunit.get_dict()
 
     # WHEN

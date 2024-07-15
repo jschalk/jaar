@@ -1,6 +1,5 @@
-from src._world.char import charlink_shop, charlinks_get_from_json
+from src._world.char import charlink_shop
 from src._instrument.python import x_is_json, get_json_from_dict
-from pytest import raises as pytest_raises
 
 
 def test_CharLink_exists():
@@ -93,41 +92,3 @@ def test_charlink_shop_reset_world_cred_debt():
     # THEN
     assert yao_charlink._world_cred == 0
     assert yao_charlink._world_debt == 0
-
-
-def test_CharLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
-    # GIVEN
-    yao_text = "Yao"
-    yao_charlink = charlink_shop(yao_text, credor_weight=12, debtor_weight=19)
-    print(f"{yao_charlink}")
-
-    # WHEN
-    biker_dict = yao_charlink.get_dict()
-
-    # THEN
-    assert biker_dict != None
-    assert biker_dict == {
-        "char_id": yao_text,
-        "credor_weight": 12,
-        "debtor_weight": 19,
-    }
-
-
-def test_CharLink_get_from_JSON_ReturnsCorrectObj_SimpleExample():
-    # GIVEN
-    yao_text = "Yao"
-    yao_json_dict = {
-        yao_text: {"char_id": yao_text, "credor_weight": 12, "debtor_weight": 19}
-    }
-    yao_json_text = get_json_from_dict(dict_x=yao_json_dict)
-    assert x_is_json(json_x=yao_json_text)
-
-    # WHEN
-    yao_obj_dict = charlinks_get_from_json(charlinks_json=yao_json_text)
-
-    # THEN
-    assert yao_obj_dict != None
-
-    yao_charlink = charlink_shop(yao_text, credor_weight=12, debtor_weight=19)
-    charlinks_dict = {yao_charlink.char_id: yao_charlink}
-    assert yao_obj_dict == charlinks_dict

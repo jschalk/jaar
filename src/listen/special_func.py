@@ -1,5 +1,4 @@
-from src._road.road import RoadUnit, get_terminus_node, get_parent_road
-from src._world.beliefbox import BeliefID
+from src._road.road import RoadUnit, get_terminus_node, get_parent_road, BeliefID
 from src._world.world import WorldUnit
 from src.listen.hubunit import HubUnit
 from copy import deepcopy as copy_deepcopy
@@ -16,7 +15,7 @@ def create_pledge(
         x_idea.pledge = True
         x_idea._doerunit.set_beliefhold(x_beliefhold)
 
-        if x_world.get_beliefbox(x_beliefhold) is None:
+        if x_world.char_exists(x_beliefhold) is False:
             x_world.add_charunit(x_beliefhold)
 
         if reason_premise != None:

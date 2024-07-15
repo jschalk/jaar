@@ -1,5 +1,5 @@
+from src._road.road import BeliefID
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
-from src._world.beliefbox import BeliefID
 
 
 def test_HealerHold_exists():

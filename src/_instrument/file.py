@@ -249,7 +249,7 @@ def is_path_probably_creatable(path: str = None) -> bool:
 def is_path_existent_or_probably_creatable(path: str) -> bool:
     """
     `True` if the passed path is a valid path on the active OS _and_
-    either actively exists or is hypotheticallly creatable in a cross-platform
+    either actively exists or is hypotheticallly creatable in a crooss-platform
     manner optimized for POSIX-unfriendly filesystems; `False` othherwise.
     This function is guaranteed to _never_ raise exceptions.
     """

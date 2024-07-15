@@ -4,7 +4,7 @@ from src._road.road import (
     default_road_delimiter_if_none,
 )
 from src._world.healer import healerhold_shop
-from src._world.beliefbox import BeliefID, awardlink_shop, awardheir_shop
+from src._world.beliefstory import awardlink_shop, awardheir_shop
 from src._world.reason_idea import (
     reasonunit_shop,
     reasonheir_shop,

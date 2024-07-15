@@ -1,8 +1,32 @@
 from src._world.belieflink import belieflink_shop
 from src._world.char import charunit_shop
+from pytest import raises as pytest_raises
 
 
-def test_CharUnit_set_belieflink_CorrectlySetsAttr():
+def test_CharUnit_set_belieflink_SetsAttr():
+    # GIVEN
+    run_text = ",run"
+    yao_text = "Yao"
+    run_credor_weight = 66
+    run_debtor_weight = 85
+    yao_charunit = charunit_shop(yao_text)
+    assert yao_charunit._belieflinks == {}
+
+    # WHEN
+    yao_charunit.set_belieflink(
+        belieflink_shop(run_text, run_credor_weight, run_debtor_weight)
+    )
+
+    # THEN
+    assert len(yao_charunit._belieflinks) == 1
+    run_belieflink = yao_charunit._belieflinks.get(run_text)
+    assert run_belieflink.belief_id == run_text
+    assert run_belieflink.credor_weight == run_credor_weight
+    assert run_belieflink.debtor_weight == run_debtor_weight
+    assert run_belieflink._char_id == yao_text
+
+
+def test_CharUnit_set_belieflink_SetsMultipleAttr():
     # GIVEN
     run_text = ",run"
     fly_text = ",fly"
@@ -21,6 +45,21 @@ def test_CharUnit_set_belieflink_CorrectlySetsAttr():
         fly_belieflink.belief_id: fly_belieflink,
     }
     assert yao_charunit._belieflinks == yao_belieflinks
+
+
+def test_CharUnit_set_belieflink_RaisesErrorIf_belief_idIsCharIDAndNotCharUnit_char_id():
+    # GIVEN
+    yao_text = "Yao"
+    yao_charunit = charunit_shop(yao_text)
+    bob_text = "Bob"
+    bob_belieflink = belieflink_shop(bob_text)
+
+    with pytest_raises(Exception) as excinfo:
+        yao_charunit.set_belieflink(bob_belieflink)
+    assert (
+        str(excinfo.value)
+        == f"CharUnit with char_id='{yao_text}' cannot have link to '{bob_text}'."
+    )
 
 
 def test_CharUnit_get_belieflink_ReturnsCorrectObj():
@@ -51,6 +90,34 @@ def test_belieflink_exists_ReturnsCorrectObj():
     assert yao_charunit.belieflink_exists(fly_text)
     climb_text = ",climbers"
     assert yao_charunit.belieflink_exists(climb_text) is False
+
+
+def test_belieflinks_exist_ReturnsCorrectObj():
+    # GIVEN
+    run_text = ",run"
+    fly_text = ",fly"
+    yao_charunit = charunit_shop("Yao")
+    assert yao_charunit.belieflinks_exist() is False
+
+    # WHEN
+    yao_charunit.set_belieflink(belieflink_shop(run_text))
+    # THEN
+    assert yao_charunit.belieflinks_exist()
+
+    # WHEN
+    yao_charunit.set_belieflink(belieflink_shop(fly_text))
+    # THEN
+    assert yao_charunit.belieflinks_exist()
+
+    # WHEN
+    yao_charunit.delete_belieflink(fly_text)
+    # THEN
+    assert yao_charunit.belieflinks_exist()
+
+    # WHEN
+    yao_charunit.delete_belieflink(run_text)
+    # THEN
+    assert yao_charunit.belieflinks_exist() is False
 
 
 def test_CharUnit_del_belieflink_SetsAttrCorrectly():
@@ -147,16 +214,16 @@ def test_CharUnit_set_debtor_pool_SetAttr():
 
 def test_CharUnit_set_credor_pool_Sets_belieflinks():
     # GIVEN
-    sue_text = "Sue"
-    yao_text = "Yao"
+    ohio_text = ",Ohio"
+    iowa_text = ",Iowa"
     sue_credor_weight = 1
     yao_credor_weight = 4
     bob_charunit = charunit_shop("Bob")
-    bob_charunit.add_belieflink(sue_text, sue_credor_weight)
-    bob_charunit.add_belieflink(yao_text, yao_credor_weight)
+    bob_charunit.add_belieflink(ohio_text, sue_credor_weight)
+    bob_charunit.add_belieflink(iowa_text, yao_credor_weight)
     assert bob_charunit._credor_pool == 0
-    sue_belieflink = bob_charunit.get_belieflink(sue_text)
-    yao_belieflink = bob_charunit.get_belieflink(yao_text)
+    sue_belieflink = bob_charunit.get_belieflink(ohio_text)
+    yao_belieflink = bob_charunit.get_belieflink(iowa_text)
     assert sue_belieflink._credor_pool == 0
     assert yao_belieflink._credor_pool == 0
 
@@ -172,16 +239,16 @@ def test_CharUnit_set_credor_pool_Sets_belieflinks():
 
 def test_CharUnit_set_debtor_pool_Sets_belieflinks():
     # GIVEN
-    sue_text = "Sue"
-    yao_text = "Yao"
+    ohio_text = ",Ohio"
+    iowa_text = ",Iowa"
     sue_debtor_weight = 1
     yao_debtor_weight = 4
     bob_charunit = charunit_shop("Bob")
-    bob_charunit.add_belieflink(sue_text, 2, sue_debtor_weight)
-    bob_charunit.add_belieflink(yao_text, 2, yao_debtor_weight)
+    bob_charunit.add_belieflink(ohio_text, 2, sue_debtor_weight)
+    bob_charunit.add_belieflink(iowa_text, 2, yao_debtor_weight)
     assert bob_charunit._debtor_pool == 0
-    sue_belieflink = bob_charunit.get_belieflink(sue_text)
-    yao_belieflink = bob_charunit.get_belieflink(yao_text)
+    sue_belieflink = bob_charunit.get_belieflink(ohio_text)
+    yao_belieflink = bob_charunit.get_belieflink(iowa_text)
     assert sue_belieflink._debtor_pool == 0
     assert yao_belieflink._debtor_pool == 0
 

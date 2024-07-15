@@ -1,14 +1,13 @@
 from src._road.jaar_refer import sue_str, bob_str, yao_str
-from src._world.beliefbox import beliefbox_shop
-from src._world.char import charlink_shop
+from src._world.char import charunit_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
-from src.gift.bridge import (
+from src.gift.cross import (
     jaar_format_0001_char_v0_0_0,
     jaar_format_0002_belieflink_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
-    get_bridge_attribute_dict,
-    create_bridge,
+    get_cross_attribute_dict,
+    create_cross,
     real_id_str,
     owner_id_str,
     char_id_str,
@@ -23,7 +22,7 @@ from src.gift.bridge import (
 )
 
 
-def test_create_bridge_Arg_jaar_format_0001_char_v0_0_0():
+def test_create_cross_Arg_jaar_format_0001_char_v0_0_0():
     # GIVEN
     sue_text = sue_str()
     bob_text = bob_str()
@@ -43,13 +42,13 @@ def test_create_bridge_Arg_jaar_format_0001_char_v0_0_0():
     sue_worldunit.set_char_respect(music_pool)
 
     # WHEN
-    x_bridge = jaar_format_0001_char_v0_0_0()
-    char_dataframe = create_bridge(sue_worldunit, x_bridge)
+    x_cross = jaar_format_0001_char_v0_0_0()
+    char_dataframe = create_cross(sue_worldunit, x_cross)
 
     # THEN
     array_headers = list(char_dataframe.columns)
-    bridge_dict = get_bridge_attribute_dict(x_bridge)
-    assert array_headers == list(bridge_dict.keys())
+    cross_dict = get_cross_attribute_dict(x_cross)
+    assert array_headers == list(cross_dict.keys())
     assert char_dataframe.loc[0, real_id_str()] == music_real_id
     assert char_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
     assert char_dataframe.loc[0, char_pool_str()] == music_pool
@@ -74,7 +73,7 @@ def test_create_bridge_Arg_jaar_format_0001_char_v0_0_0():
     assert len(char_dataframe) == 3
 
 
-def test_create_bridge_Arg_jaar_format_0002_belieflink_v0_0_0():
+def test_create_cross_Arg_jaar_format_0002_belieflink_v0_0_0():
     # GIVEN
     sue_text = sue_str()
     bob_text = bob_str()
@@ -94,27 +93,22 @@ def test_create_bridge_Arg_jaar_format_0002_belieflink_v0_0_0():
     ohio_text = ",Ohio"
     yao_ohio_credor_w = 73
     yao_ohio_debtor_w = 67
-    iowa_beliefbox = beliefbox_shop(iowa_text)
-    ohio_beliefbox = beliefbox_shop(ohio_text)
-    sue_iowa_charlink = charlink_shop(sue_text, sue_iowa_credor_w, sue_iowa_debtor_w)
-    bob_iowa_charlink = charlink_shop(bob_text, bob_iowa_credor_w, bob_iowa_debtor_w)
-    yao_iowa_charlink = charlink_shop(yao_text, yao_iowa_credor_w, yao_iowa_debtor_w)
-    yao_ohio_charlink = charlink_shop(yao_text, yao_ohio_credor_w, yao_ohio_debtor_w)
-    iowa_beliefbox.set_charlink(sue_iowa_charlink)
-    iowa_beliefbox.set_charlink(bob_iowa_charlink)
-    iowa_beliefbox.set_charlink(yao_iowa_charlink)
-    ohio_beliefbox.set_charlink(yao_ohio_charlink)
-    sue_worldunit.set_beliefbox(iowa_beliefbox)
-    sue_worldunit.set_beliefbox(ohio_beliefbox)
+    sue_charunit = sue_worldunit.get_char(sue_text)
+    bob_charunit = sue_worldunit.get_char(bob_text)
+    yao_charunit = sue_worldunit.get_char(yao_text)
+    sue_charunit.add_belieflink(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
+    bob_charunit.add_belieflink(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
+    yao_charunit.add_belieflink(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
+    yao_charunit.add_belieflink(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
 
     # WHEN
-    x_bridge = jaar_format_0002_belieflink_v0_0_0()
-    belieflink_dataframe = create_bridge(sue_worldunit, x_bridge)
+    x_cross = jaar_format_0002_belieflink_v0_0_0()
+    belieflink_dataframe = create_cross(sue_worldunit, x_cross)
 
     # THEN
     array_headers = list(belieflink_dataframe.columns)
-    bridge_dict = get_bridge_attribute_dict(x_bridge)
-    assert array_headers == list(bridge_dict.keys())
+    cross_dict = get_cross_attribute_dict(x_cross)
+    assert array_headers == list(cross_dict.keys())
     assert belieflink_dataframe.loc[0, real_id_str()] == music_real_id
     assert belieflink_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
     assert belieflink_dataframe.loc[0, char_id_str()] == bob_text
@@ -142,10 +136,10 @@ def test_create_bridge_Arg_jaar_format_0002_belieflink_v0_0_0():
     assert belieflink_dataframe.loc[3, belief_id_str()] == ohio_text
     assert belieflink_dataframe.loc[3, credor_weight_str()] == yao_ohio_credor_w
     assert belieflink_dataframe.loc[3, debtor_weight_str()] == yao_ohio_debtor_w
-    assert len(belieflink_dataframe) == 4
+    assert len(belieflink_dataframe) == 7
 
 
-def test_create_bridge_Arg_jaar_format_0003_ideaunit_v0_0_0():
+def test_create_cross_Arg_jaar_format_0003_ideaunit_v0_0_0():
     # GIVEN
     sue_text = sue_str()
     bob_text = bob_str()
@@ -160,12 +154,12 @@ def test_create_bridge_Arg_jaar_format_0003_ideaunit_v0_0_0():
     sue_worldunit.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
-    x_bridge = jaar_format_0003_ideaunit_v0_0_0()
-    ideaunit_format = create_bridge(sue_worldunit, x_bridge)
+    x_cross = jaar_format_0003_ideaunit_v0_0_0()
+    ideaunit_format = create_cross(sue_worldunit, x_cross)
 
     # THEN
     array_headers = list(ideaunit_format.columns)
-    assert array_headers == list(get_bridge_attribute_dict(x_bridge).keys())
+    assert array_headers == list(get_cross_attribute_dict(x_cross).keys())
 
     assert ideaunit_format.loc[0, owner_id_str()] == sue_worldunit._owner_id
     assert ideaunit_format.loc[0, pledge_str()] == ""

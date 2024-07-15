@@ -4,11 +4,15 @@ from src._instrument.python import (
     get_dict_from_json,
     get_0_if_None,
 )
-from src._road.road import CharID, default_road_delimiter_if_none, validate_roadnode
-from src._world.belieflink import BeliefID, BeliefCore
+from src._road.road import (
+    BeliefID,
+    CharID,
+    default_road_delimiter_if_none,
+    validate_roadnode,
+)
+from src._world.belieflink import BeliefCore, BeliefLink
 from src._world.char import (
     CharLink,
-    charlinks_get_from_dict,
     charlink_shop,
     CharUnit,
 )
@@ -16,6 +20,10 @@ from dataclasses import dataclass
 
 
 class InvalidBeliefException(Exception):
+    pass
+
+
+class belieflink_belief_id_Exception(Exception):
     pass
 
 
@@ -38,15 +46,6 @@ class BeliefBox(BeliefCore):
                 self.belief_id = validate_roadnode(
                     belief_id, self._road_delimiter, not_roadnode_required=True
                 )
-
-    def get_dict(self) -> dict[str, str]:
-        x_dict = {"belief_id": self.belief_id}
-        if self._char_mirror:
-            x_dict["_char_mirror"] = self._char_mirror
-        if self._chars not in [{}, None]:
-            x_dict["_chars"] = self.get_charunits_dict()
-
-        return x_dict
 
     def reset_world_cred_debt(self):
         self._world_cred = 0
@@ -76,13 +75,6 @@ class BeliefBox(BeliefCore):
 
     def clear_charlinks(self):
         self._chars = {}
-
-    def get_charunits_dict(self) -> dict[str, str]:
-        chars_x_dict = {}
-        for char in self._chars.values():
-            char_dict = char.get_dict()
-            chars_x_dict[char_dict["char_id"]] = char_dict
-        return chars_x_dict
 
     def set_charlink(self, charlink: CharLink):
         self._chars[charlink.char_id] = charlink
@@ -123,42 +115,6 @@ class BeliefBox(BeliefCore):
             )
         )
         self.del_charlink(char_id=to_delete_char_id)
-
-
-# class BeliefBoxsshop:
-def get_from_json(beliefboxs_json: str) -> dict[BeliefID, BeliefBox]:
-    beliefboxs_dict = get_dict_from_json(json_x=beliefboxs_json)
-    return get_beliefboxs_from_dict(x_dict=beliefboxs_dict)
-
-
-def get_beliefboxs_from_dict(
-    x_dict: dict, _road_delimiter: str = None
-) -> dict[BeliefID, BeliefBox]:
-    beliefboxs = {}
-    for beliefbox_dict in x_dict.values():
-        x_belief = get_beliefbox_from_dict(beliefbox_dict, _road_delimiter)
-        beliefboxs[x_belief.belief_id] = x_belief
-    return beliefboxs
-
-
-def get_beliefbox_from_dict(
-    beliefbox_dict: dict, _road_delimiter: str = None
-) -> BeliefBox:
-    return beliefbox_shop(
-        belief_id=beliefbox_dict["belief_id"],
-        _char_mirror=get_obj_from_beliefbox_dict(beliefbox_dict, "_char_mirror"),
-        _chars=get_obj_from_beliefbox_dict(beliefbox_dict, "_chars"),
-        _road_delimiter=_road_delimiter,
-    )
-
-
-def get_obj_from_beliefbox_dict(x_dict: dict[str,], dict_key: str) -> any:
-    if dict_key == "_chars":
-        return charlinks_get_from_dict(x_dict.get(dict_key))
-    elif dict_key in {"_char_mirror"}:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else False
-    else:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else None
 
 
 def beliefbox_shop(
@@ -293,3 +249,61 @@ def get_chars_relevant_beliefs(
                 relevant_beliefs.get(belief_x.belief_id)[char_id_x] = -1
 
     return relevant_beliefs
+
+
+@dataclass
+class BeliefStory(BeliefCore):
+    _belieflinks: dict[CharID, BeliefLink] = None  # set by WorldUnit.set_charunit()
+    _road_delimiter: str = None  # calculated by WorldUnit.set_beliefbox
+    # calculated by WorldUnit.calc_world_metrics()
+    _world_cred: float = None
+    _world_debt: float = None
+    _world_agenda_cred: float = None
+    _world_agenda_debt: float = None
+    _credor_pool: float = None
+    _debtor_pool: float = None
+
+    def set_belieflink(self, x_belieflink: BeliefLink):
+        if x_belieflink.belief_id != self.belief_id:
+            raise belieflink_belief_id_Exception(
+                f"BeliefStory.belief_id={self.belief_id} cannot set belieflink.belief_id={x_belieflink.belief_id}"
+            )
+        if x_belieflink._char_id is None:
+            raise belieflink_belief_id_Exception(
+                f"belieflink belief_id={x_belieflink.belief_id} cannot be set when _char_id is None."
+            )
+
+        self._belieflinks[x_belieflink._char_id] = x_belieflink
+        self._add_credor_pool(x_belieflink._credor_pool)
+        self._add_debtor_pool(x_belieflink._debtor_pool)
+
+    def _add_credor_pool(self, x_credor_pool: float):
+        self._credor_pool += x_credor_pool
+
+    def _add_debtor_pool(self, x_debtor_pool: float):
+        self._debtor_pool += x_debtor_pool
+
+    def get_belieflink(self, x_char_id: CharID) -> BeliefLink:
+        return self._belieflinks.get(x_char_id)
+
+    def belieflink_exists(self, x_char_id: CharID) -> bool:
+        return self.get_belieflink(x_char_id) != None
+
+    def del_charlink(self, char_id):
+        self._belieflinks.pop(char_id)
+
+
+def beliefstory_shop(belief_id: BeliefID, _road_delimiter: str = None) -> BeliefStory:
+    return BeliefStory(
+        belief_id=belief_id,
+        _belieflinks={},
+        _world_cred=0,
+        _world_debt=0,
+        _world_agenda_cred=0,
+        _world_agenda_debt=0,
+        _credor_pool=0,
+        _debtor_pool=0,
+        _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+    )
+    # x_beliefstory.set_belief_id(belief_id=belief_id)
+    # return x_beliefstory

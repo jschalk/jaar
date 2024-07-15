@@ -1,5 +1,10 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json, get_0_if_None
-from src._road.road import CharID, default_road_delimiter_if_none, validate_roadnode
+from src._road.road import (
+    CharID,
+    default_road_delimiter_if_none,
+    validate_roadnode,
+    is_roadnode,
+)
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
 from src._world.belieflink import (
     BeliefID,
@@ -141,8 +146,16 @@ class CharUnit(CharCore):
         x_belieflink = belieflink_shop(belief_id, credor_weight, debtor_weight)
         self.set_belieflink(x_belieflink)
 
-    def set_belieflink(self, belieflink: BeliefLink):
-        self._belieflinks[belieflink.belief_id] = belieflink
+    def set_belieflink(self, x_belieflink: BeliefLink):
+        x_belief_id = x_belieflink.belief_id
+        belief_id_is_char_id = is_roadnode(x_belief_id, self._road_delimiter)
+        if belief_id_is_char_id and self.char_id != x_belief_id:
+            raise Exception(
+                f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_belief_id}'."
+            )
+
+        x_belieflink._char_id = self.char_id
+        self._belieflinks[x_belieflink.belief_id] = x_belieflink
 
     def get_belieflink(self, belief_id: BeliefID) -> BeliefLink:
         return self._belieflinks.get(belief_id)
@@ -152,6 +165,9 @@ class CharUnit(CharCore):
 
     def delete_belieflink(self, belief_id: BeliefID):
         return self._belieflinks.pop(belief_id)
+
+    def belieflinks_exist(self):
+        return len(self._belieflinks) != 0
 
     def clear_belieflinks(self):
         self._belieflinks = {}
@@ -228,15 +244,16 @@ def charunits_get_from_dict(
 
 
 def charunit_get_from_dict(charunit_dict: dict, _road_delimiter: str) -> CharUnit:
+    x_char_id = charunit_dict["char_id"]
+    x_credor_weight = charunit_dict["credor_weight"]
+    x_debtor_weight = charunit_dict["debtor_weight"]
+    x_belieflinks_dict = charunit_dict["_belieflinks"]
+    x_charunit = charunit_shop(
+        x_char_id, x_credor_weight, x_debtor_weight, _road_delimiter
+    )
+    x_charunit._belieflinks = belieflinks_get_from_dict(x_belieflinks_dict, x_char_id)
     _irrational_debtor_weight = charunit_dict.get("_irrational_debtor_weight", 0)
     _inallocable_debtor_weight = charunit_dict.get("_inallocable_debtor_weight", 0)
-    x_charunit = charunit_shop(
-        char_id=charunit_dict["char_id"],
-        credor_weight=charunit_dict["credor_weight"],
-        debtor_weight=charunit_dict["debtor_weight"],
-        _road_delimiter=_road_delimiter,
-    )
-    x_charunit._belieflinks = belieflinks_get_from_dict(charunit_dict["_belieflinks"])
     x_charunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
     x_charunit.add_inallocable_debtor_weight(get_0_if_None(_inallocable_debtor_weight))
 
@@ -280,13 +297,6 @@ class CharLink(CharCore):
     _world_agenda_cred: float = None
     _world_agenda_debt: float = None
 
-    def get_dict(self) -> dict[str, str]:
-        return {
-            "char_id": self.char_id,
-            "credor_weight": self.credor_weight,
-            "debtor_weight": self.debtor_weight,
-        }
-
     def set_world_cred_debt(
         self,
         charlinks_credor_weight_sum: float,
@@ -311,24 +321,6 @@ class CharLink(CharCore):
         self._world_debt = 0
         self._world_agenda_cred = 0
         self._world_agenda_debt = 0
-
-
-def charlinks_get_from_json(charlinks_json: str) -> dict[str, CharLink]:
-    charlinks_dict = get_dict_from_json(json_x=charlinks_json)
-    return charlinks_get_from_dict(x_dict=charlinks_dict)
-
-
-def charlinks_get_from_dict(x_dict: dict) -> dict[str, CharLink]:
-    x_dict = {} if x_dict is None else x_dict
-    charlinks = {}
-    for charlinks_dict in x_dict.values():
-        x_char = charlink_shop(
-            char_id=charlinks_dict["char_id"],
-            credor_weight=charlinks_dict["credor_weight"],
-            debtor_weight=charlinks_dict["debtor_weight"],
-        )
-        charlinks[x_char.char_id] = x_char
-    return charlinks
 
 
 def charlink_shop(

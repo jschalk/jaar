@@ -3,10 +3,11 @@ from src._road.road import RoadUnit
 from src._world.world import worldunit_shop, get_from_json as worldunit_get_from_json
 from src._world.idea import IdeaUnit, ideaunit_shop
 from src._world.reason_idea import reasonunit_shop
-from src._world.beliefbox import beliefbox_shop, awardlink_shop
+from src._world.beliefstory import beliefbox_shop, awardlink_shop
 from src._world.char import charlink_shop
 from src._world.reason_doer import doerunit_shop
 from src._world.examples.example_worlds import (
+    get_world_1Task_1CE0MinutesReason_1Fact,
     get_world_with_4_levels as example_worlds_get_world_with_4_levels,
     get_world_with_4_levels_and_2reasons as example_worlds_get_world_with_4_levels_and_2reasons,
     get_world_with7amCleanTableReason as example_worlds_get_world_with7amCleanTableReason,
@@ -157,40 +158,6 @@ def test_WorldUnit_get_agenda_DoesNotReturnPledgeItemsOutsideRange():
 
     agenda_dict = zia_world.get_agenda_dict()
     assert len(agenda_dict) == 0
-
-
-def test_WorldUnit_get_all_pledges_ReturnsCorrectObj():
-    # GIVEN
-    zia_text = "Zia"
-    zia_world = worldunit_shop(zia_text)
-    casa_text = "casa"
-    casa_road = zia_world.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = zia_world.make_road(casa_road, clean_text)
-    sweep_text = "sweep"
-    sweep_road = zia_world.make_road(clean_road, sweep_text)
-    couch_text = "couch"
-    couch_road = zia_world.make_road(casa_road, couch_text)
-    zia_world.add_idea(ideaunit_shop(couch_text), casa_road)
-    zia_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    zia_world.add_idea(ideaunit_shop(sweep_text, pledge=True), clean_road)
-    sweep_idea = zia_world.get_idea_obj(sweep_road)
-    bob_text = "Bob"
-    zia_world.add_charunit(bob_text)
-    sweep_idea._doerunit.set_beliefhold(bob_text)
-    print(f"{sweep_idea}")
-    agenda_dict = zia_world.get_agenda_dict()
-    assert agenda_dict.get(clean_road) != None
-    assert agenda_dict.get(sweep_road) is None
-    assert agenda_dict.get(couch_road) is None
-
-    # WHEN
-    all_pledges_dict = zia_world.get_all_pledges()
-
-    # THEN
-    assert all_pledges_dict.get(sweep_road) == zia_world.get_idea_obj(sweep_road)
-    assert all_pledges_dict.get(clean_road) == zia_world.get_idea_obj(clean_road)
-    assert all_pledges_dict.get(couch_road) is None
 
 
 def test_example_worlds_world_v001_AgendaExists():
@@ -631,9 +598,6 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     # beto_charlink = charlink_shop(char_id=beto_text)
 
     family_text = ",family"
-    # beliefbox_z = beliefbox_shop(belief_id=family_text)
-    # beliefbox_z.set_charlink(charlink=anna_charlink)
-    # beliefbox_z.set_charlink(charlink=beto_charlink)
     awardlink_z = awardlink_shop(belief_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
 
@@ -747,7 +711,7 @@ def test_agenda_IsSetByDoerUnit_1CharBelief():
     assert len(bob_world.get_agenda_dict()) == 1
 
     sue_text = "Sue"
-    bob_world.add_charunit(char_id=sue_text)
+    bob_world.add_charunit(sue_text)
     doerunit_sue = doerunit_shop()
     doerunit_sue.set_beliefhold(belief_id=sue_text)
     assert len(bob_world.get_agenda_dict()) == 1
@@ -759,7 +723,7 @@ def test_agenda_IsSetByDoerUnit_1CharBelief():
     assert len(bob_world.get_agenda_dict()) == 0
 
     # WHEN
-    bob_world.add_charunit(char_id=bob_text)
+    bob_world.add_charunit(bob_text)
     doerunit_bob = doerunit_shop()
     doerunit_bob.set_beliefhold(belief_id=bob_text)
 
@@ -777,18 +741,19 @@ def test_agenda_IsSetByDoerUnit_2CharBelief():
     # GIVEN
     bob_text = "Bob"
     bob_world = worldunit_shop(bob_text)
-    bob_world.add_charunit(char_id=bob_text)
+    bob_world.add_charunit(bob_text)
     casa_text = "casa"
     casa_road = bob_world.make_road(bob_text, casa_text)
     bob_world.add_l1_idea(ideaunit_shop(casa_text, pledge=True))
 
     sue_text = "Sue"
-    bob_world.add_charunit(char_id=sue_text)
-
+    bob_world.add_charunit(sue_text)
     run_text = ",runners"
-    run_belief = beliefbox_shop(belief_id=run_text)
-    run_belief.set_charlink(charlink=charlink_shop(char_id=sue_text))
-    bob_world.set_beliefbox(y_beliefbox=run_belief)
+    run_belief = beliefbox_shop(run_text)
+    run_belief.set_charlink(charlink_shop(char_id=sue_text))
+    bob_world.set_beliefbox(run_belief)
+    # sue_charunit = bob_world.get_char(sue_text)
+    # sue_charunit.add_belieflink(run_text)
 
     run_doerunit = doerunit_shop()
     run_doerunit.set_beliefhold(belief_id=run_text)
@@ -801,8 +766,8 @@ def test_agenda_IsSetByDoerUnit_2CharBelief():
     assert len(bob_world.get_agenda_dict()) == 0
 
     # WHEN
-    run_belief.set_charlink(charlink=charlink_shop(char_id=bob_text))
-    bob_world.set_beliefbox(y_beliefbox=run_belief)
+    run_belief.set_charlink(charlink_shop(char_id=bob_text))
+    bob_world.set_beliefbox(run_belief)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 1
@@ -879,3 +844,106 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
     # THEN
     assert bob_agenda_dict == {}
+
+
+def test_WorldUnit_get_all_pledges_ReturnsCorrectObj():
+    # GIVEN
+    zia_text = "Zia"
+    zia_world = worldunit_shop(zia_text)
+    casa_text = "casa"
+    casa_road = zia_world.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = zia_world.make_road(casa_road, clean_text)
+    sweep_text = "sweep"
+    sweep_road = zia_world.make_road(clean_road, sweep_text)
+    couch_text = "couch"
+    couch_road = zia_world.make_road(casa_road, couch_text)
+    zia_world.add_idea(ideaunit_shop(couch_text), casa_road)
+    zia_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    zia_world.add_idea(ideaunit_shop(sweep_text, pledge=True), clean_road)
+    sweep_idea = zia_world.get_idea_obj(sweep_road)
+    bob_text = "Bob"
+    zia_world.add_charunit(bob_text)
+    sweep_idea._doerunit.set_beliefhold(bob_text)
+    print(f"{sweep_idea}")
+    agenda_dict = zia_world.get_agenda_dict()
+    assert agenda_dict.get(clean_road) != None
+    assert agenda_dict.get(sweep_road) is None
+    assert agenda_dict.get(couch_road) is None
+
+    # WHEN
+    all_pledges_dict = zia_world.get_all_pledges()
+
+    # THEN
+    assert all_pledges_dict.get(sweep_road) == zia_world.get_idea_obj(sweep_road)
+    assert all_pledges_dict.get(clean_road) == zia_world.get_idea_obj(clean_road)
+    assert all_pledges_dict.get(couch_road) is None
+
+
+def test_WorldUnit_calc_world_metrics_Sets_deletes_awardheirs():
+    # GIVEN
+    prom_text = "prom"
+    x_world = worldunit_shop(prom_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    x_world.add_charunit(yao_text)
+    x_world.add_charunit(zia_text)
+    x_world.add_charunit(Xio_text)
+
+    swim_text = "swim"
+    swim_road = x_world.make_road(prom_text, swim_text)
+
+    x_world.add_l1_idea(ideaunit_shop(swim_text))
+    awardlink_yao = awardlink_shop(yao_text, credor_weight=10)
+    awardlink_zia = awardlink_shop(zia_text, credor_weight=10)
+    awardlink_Xio = awardlink_shop(Xio_text, credor_weight=10)
+
+    swim_idea = x_world.get_idea_obj(swim_road)
+    x_world.edit_idea_attr(swim_road, awardlink=awardlink_yao)
+    x_world.edit_idea_attr(swim_road, awardlink=awardlink_zia)
+    x_world.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
+
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 0
+
+    # WHEN
+    x_world.calc_world_metrics()
+
+    # THEN
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 3
+    x_world.edit_idea_attr(swim_road, awardlink_del=yao_text)
+    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea._awardheirs) == 3
+
+    # WHEN
+    x_world.calc_world_metrics()
+
+    # THEN
+    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea._awardheirs) == 2
+
+
+def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
+    # GIVEN
+    x_world = get_world_1Task_1CE0MinutesReason_1Fact()
+    mail_text = "obtain mail"
+    assert x_world != None
+    assert len(x_world._idearoot._kids[mail_text]._reasonunits) == 1
+    idea_dict = x_world.get_idea_dict()
+    # for idea in idea_dict:
+    #     print(idea._label)
+    mail_idea = idea_dict.get(x_world.make_l1_road(mail_text))
+    assert mail_idea.pledge == True
+    assert mail_idea._task == True
+
+    # WHEN
+    ced_min_label = "CE0_minutes"
+    ced_road = x_world.make_l1_road(ced_min_label)
+    x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
+    x_world.calc_world_metrics()
+
+    # THEN
+    assert mail_idea.pledge == True
+    assert mail_idea._task is False

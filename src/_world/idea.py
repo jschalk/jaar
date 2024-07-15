@@ -14,6 +14,10 @@ from src._road.road import (
     replace_road_delimiter,
     RealID,
     CharID,
+    BeliefID,
+    RoadUnit,
+    rebuild_road,
+    find_replace_road_key_dict,
 )
 from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
 from src._world.reason_doer import (
@@ -35,21 +39,17 @@ from src._world.reason_idea import (
     factunit_shop,
     ReasonHeir,
     reasonheir_shop,
-    RoadUnit,
-    rebuild_road,
-    find_replace_road_key_dict,
     reasons_get_from_dict,
     factunits_get_from_dict,
 )
-from src._world.beliefbox import (
+from src._world.beliefstory import (
     AwardHeir,
     AwardLink,
     awardlinks_get_from_dict,
-    BeliefID,
     AwardLine,
     awardline_shop,
     awardheir_shop,
-    BeliefBox,
+    BeliefStory,
 )
 from src._world.origin import OriginUnit, originunit_get_from_dict
 from src._world.origin import originunit_shop
@@ -754,11 +754,11 @@ class IdeaUnit:
     def set_active(
         self,
         tree_traverse_count: int,
-        world_beliefboxs: dict[BeliefID, BeliefBox] = None,
+        world_beliefstorys: dict[BeliefID, BeliefStory] = None,
         world_owner_id: CharID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active(world_beliefboxs, world_owner_id)
+        self._active = self._create_active(world_beliefstorys, world_owner_id)
         self._set_idea_task()
         self.record_active_hx(
             tree_traverse_count=tree_traverse_count,
@@ -778,17 +778,17 @@ class IdeaUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active(
-        self, world_beliefboxs: dict[BeliefID, BeliefBox], world_owner_id: CharID
+        self, world_beliefstorys: dict[BeliefID, BeliefStory], world_owner_id: CharID
     ) -> bool:
         self.set_reasonheirs_status()
         x_bool = self._are_all_reasonheir_active_true()
         if (
             x_bool
-            and world_beliefboxs != {}
+            and world_beliefstorys != {}
             and world_owner_id != None
             and self._doerheir._beliefholds != {}
         ):
-            self._doerheir.set_owner_id_doer(world_beliefboxs, world_owner_id)
+            self._doerheir.set_owner_id_doer(world_beliefstorys, world_owner_id)
             if self._doerheir._owner_id_doer is False:
                 x_bool = False
         return x_bool
@@ -938,7 +938,7 @@ class IdeaUnit:
     def set_doerheir(
         self,
         parent_doerheir: DoerHeir,
-        world_beliefs: dict[BeliefID, BeliefBox],
+        world_beliefs: dict[BeliefID, BeliefStory],
     ):
         self._doerheir = doerheir_shop()
         self._doerheir.set_beliefholds(

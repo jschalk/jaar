@@ -17,6 +17,7 @@ from src._road.finance import (
     CoinNum,
     BudNum,
     allot_scale,
+    validate_respect_num,
 )
 from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
@@ -51,13 +52,13 @@ from src._world.char import (
     charlink_shop,
 )
 from src._world.belieflink import belieflink_shop
-from src._world.beliefbox import (
+from src._world.beliefstory import (
     AwardLink,
     BeliefID,
     BeliefBox,
-    get_beliefboxs_from_dict,
     beliefbox_shop,
-    awardlink_shop,
+    BeliefStory,
+    beliefstory_shop,
 )
 from src._world.healer import HealerHold
 from src._world.reason_idea import (
@@ -149,6 +150,7 @@ class WorldUnit:
     _econs_justified: bool = None
     _econs_buildable: bool = None
     _sum_healerhold_share: bool = None
+    _beliefstorys: dict[BeliefID, BeliefStory] = None
     # calc_world_metrics Calculated field end
 
     def del_last_gift_id(self):
@@ -512,7 +514,7 @@ class WorldUnit:
         )
         return f"every {num_with_letter_ending} {weekday_idea_node._label} at {x_hregidea.readable_1440_time(min1440=open % 1440)}"
 
-    def get_chars_metrics(self) -> dict[BeliefID, AwardLink]:
+    def get_awardlinks_metrics(self) -> dict[BeliefID, AwardLink]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
@@ -574,11 +576,13 @@ class WorldUnit:
         )
         self.set_charunit(charunit)
 
-    def set_charunit(self, x_charunit: CharUnit):
+    def set_charunit(self, x_charunit: CharUnit, auto_set_belieflink: bool = True):
         if x_charunit._road_delimiter != self._road_delimiter:
             x_charunit._road_delimiter = self._road_delimiter
         if x_charunit._bit != self._bit:
             x_charunit._bit = self._bit
+        if auto_set_belieflink and x_charunit.belieflinks_exist() is False:
+            x_charunit.add_belieflink(x_charunit.char_id)
         self._chars[x_charunit.char_id] = x_charunit
 
         try:
@@ -655,6 +659,18 @@ class WorldUnit:
 
     def get_char(self, char_id: CharID) -> CharUnit:
         return self._chars.get(char_id)
+
+    def get_belief_ids_dict(self) -> dict[BeliefID, set[CharID]]:
+        x_dict = {}
+        for x_charunit in self._chars.values():
+            for x_belief_id in x_charunit._belieflinks.keys():
+                char_id_set = x_dict.get(x_belief_id)
+                if char_id_set is None:
+                    x_dict[x_belief_id] = {x_charunit.char_id}
+                else:
+                    char_id_set.add(x_charunit.char_id)
+                    x_dict[x_belief_id] = char_id_set
+        return x_dict
 
     def get_charunits_char_id_list(self) -> dict[CharID]:
         char_id_list = list(self._chars.keys())
@@ -1357,7 +1373,10 @@ class WorldUnit:
     ):
         if healerhold != None:
             for x_belief_id in healerhold._belief_ids:
-                if self._beliefs.get(x_belief_id) is None:
+                if (
+                    self._beliefs.get(x_belief_id) is None
+                    and self.get_belief_ids_dict().get(x_belief_id) is None
+                ):
                     raise healerhold_belief_id_Exception(
                         f"Idea cannot edit healerhold because belief_id '{x_belief_id}' does not exist as belief in World"
                     )
@@ -1401,9 +1420,9 @@ class WorldUnit:
         x_idea = self.get_idea_obj(road)
         x_idea._set_idea_attr(idea_attr=x_ideaattrfilter)
 
-        # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
-        if awardlink_del != None or awardlink != None:
-            self.calc_world_metrics()
+        # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
+        # if awardlink_del != None or awardlink != None:
+        #     self.calc_world_metrics()
 
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
@@ -1725,6 +1744,32 @@ class WorldUnit:
         sibling_ratio = weight / sibling_total_weight
         return parent_bud_share * sibling_ratio
 
+    def _create_beliefstorys_metrics(self):
+        self._beliefstorys = {}
+        for belief_id, char_id_set in self.get_belief_ids_dict().items():
+            x_beliefstory = beliefstory_shop(
+                belief_id, _road_delimiter=self._road_delimiter
+            )
+            for x_char_id in char_id_set:
+                x_belieflink = self.get_char(x_char_id).get_belieflink(belief_id)
+                x_beliefstory.set_belieflink(x_belieflink)
+                self._beliefstorys[belief_id] = x_beliefstory
+
+    def _calc_charunit_metrics(self):
+        self._beliefs = {}
+        self._credor_respect = validate_respect_num(self._credor_respect)
+        self._debtor_respect = validate_respect_num(self._debtor_respect)
+        x_charunits = self._chars.values()
+        credor_ledger = {x_char.char_id: x_char.credor_weight for x_char in x_charunits}
+        debtor_ledger = {x_char.char_id: x_char.debtor_weight for x_char in x_charunits}
+        credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
+        debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
+        for x_char_id, char_credor_pool in credor_allot.items():
+            self.get_char(x_char_id).set_credor_pool(char_credor_pool)
+        for x_char_id, char_debtor_pool in debtor_allot.items():
+            self.get_char(x_char_id).set_debtor_pool(char_debtor_pool)
+        self._create_beliefstorys_metrics()
+
     def _set_tree_traverse_starting_point(self):
         self._rational = False
         self._tree_traverse_count = 0
@@ -1911,7 +1956,7 @@ class WorldUnit:
         return x_dict
 
     def get_dict(self) -> dict[str, str]:
-        self._migrate_beliefboxs_to_belieflinks()
+        # self._migrate_beliefboxs_to_belieflinks()
         x_dict = {
             "_chars": self.get_charunits_dict(),
             "_originunit": self._originunit.get_dict(),
@@ -2056,6 +2101,7 @@ def worldunit_shop(
         _real_id=_real_id,
         _chars=get_empty_dict_if_none(None),
         _beliefs=get_empty_dict_if_none(None),
+        _beliefstorys={},
         _idea_dict=get_empty_dict_if_none(None),
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
@@ -2197,12 +2243,6 @@ def obj_from_world_dict(
             charunits_get_from_dict(x_dict[dict_key], _road_delimiter)
             if x_dict.get(dict_key) != None
             else charunits_get_from_dict(x_dict[dict_key], _road_delimiter)
-        )
-    elif dict_key == "_beliefs":
-        return (
-            get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
-            if x_dict.get(dict_key) != None
-            else get_beliefboxs_from_dict(x_dict[dict_key], _road_delimiter)
         )
     elif dict_key == "_max_tree_traverse":
         return (

@@ -1,5 +1,5 @@
 from src._instrument.python import get_empty_set_if_none
-from src._world.beliefbox import BeliefID
+from src._road.road import BeliefID
 from dataclasses import dataclass
 
 
