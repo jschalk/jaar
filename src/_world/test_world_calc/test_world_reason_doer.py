@@ -1,7 +1,6 @@
 from src._world.reason_doer import doerheir_shop, doerunit_shop
 from src._world.world import worldunit_shop
 from src._world.idea import ideaunit_shop
-from src._world.beliefstory import beliefbox_shop
 
 
 def test_world_edit_idea_attr_CorrectlySetsDoerUnit():
@@ -121,7 +120,11 @@ def test_world_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     swimmers_text = ",swimmers"
     x_doerunit.set_beliefhold(belief_id=swimmers_text)
 
-    noa_world.set_beliefbox(y_beliefbox=beliefbox_shop(belief_id=swimmers_text))
+    yao_text = "Yao"
+    noa_world.add_charunit(yao_text)
+    yao_charunit = noa_world.get_char(yao_text)
+    yao_charunit.add_belieflink(swimmers_text)
+
     noa_world.add_l1_idea(ideaunit_shop(swim_text))
     noa_world.add_idea(ideaunit_shop(morn_text), parent_road=swim_road)
     noa_world.add_idea(ideaunit_shop(four_text), parent_road=morn_road)

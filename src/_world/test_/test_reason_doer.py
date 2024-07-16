@@ -146,60 +146,6 @@ def test_doerheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
     assert x_doerheir._owner_id_doer == _owner_id_x_doerunit
 
 
-# def test_DoerHeir_get_all_suff_chars_ReturnsSingleDictWithAllChars_v1():
-#     # GIVEN
-#     yao_text = "Yao"
-#     sue_text = "Sue"
-#     yao_beliefstory = beliefstory_shop(yao_text)
-#     sue_beliefstory = beliefstory_shop(sue_text)
-#     yao_beliefstory.set_belieflink(belieflink_shop(yao_text))
-#     sue_beliefstory.set_belieflink(belieflink_shop(sue_text))
-#     x_beliefstorys = {yao_text: yao_beliefstory, sue_text: sue_beliefstory}
-
-#     x_beliefholds = {yao_text}
-#     x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
-
-#     # WHEN
-#     all_chars = x_doerheir._get_all_suff_chars(x_beliefstorys)
-
-#     # THEN
-#     assert len(all_chars) == 1
-#     assert all_chars == {yao_text}
-
-
-# def test_DoerHeir_get_all_suff_chars_ReturnsSingleDictWithAllChars_v2():
-#     # GIVEN
-#     yao_text = "Yao"
-#     sue_text = "Sue"
-#     bob_text = "Bob"
-#     yao_beliefstory = beliefstory_shop(yao_text)
-#     sue_beliefstory = beliefstory_shop(sue_text)
-#     bob_beliefstory = beliefstory_shop(bob_text)
-#     yao_beliefstory.set_belieflink(belieflink_shop(yao_text))
-#     sue_beliefstory.set_belieflink(belieflink_shop(sue_text))
-
-#     swim_text = ",swim"
-#     swim_beliefstory = beliefstory_shop(belief_id=swim_text)
-#     swim_beliefstory.set_belieflink(belieflink_shop(yao_text))
-#     swim_beliefstory.set_belieflink(belieflink_shop(sue_text))
-#     x_beliefstorys = {
-#         yao_text: yao_beliefstory,
-#         sue_text: sue_beliefstory,
-#         bob_text: bob_beliefstory,
-#         swim_text: swim_beliefstory,
-#     }
-
-#     x_beliefholds = {swim_text}
-#     x_doerheir = doerheir_shop(_beliefholds=x_beliefholds)
-
-#     # WHEN
-#     all_chars = x_doerheir._get_all_suff_chars(x_beliefstorys)
-
-#     # THEN
-#     assert len(all_chars) == 2
-#     assert all_chars == {yao_text, sue_text}
-
-
 def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_Emptyx_beliefholds():
     # GIVEN
     x_beliefholds = set()

@@ -54,11 +54,6 @@ class DoerHeir:
             dict_x |= world_beliefstorys.get(belief_id_x)._belieflinks
         return dict_x
 
-    def _get_all_suff_chars(
-        self, world_beliefstorys: dict[BeliefID, BeliefStory]
-    ) -> dict[BeliefID, BeliefStory]:
-        return self._get_all_chars(world_beliefstorys, self._beliefholds)
-
     def is_empty(self) -> bool:
         return self._beliefholds == set()
 
