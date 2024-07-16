@@ -228,15 +228,6 @@ def awardline_shop(belief_id: BeliefID, _world_cred: float, _world_debt: float):
     return AwardLine(belief_id, _world_cred=_world_cred, _world_debt=_world_debt)
 
 
-def get_intersection_of_chars(
-    chars_x: dict[CharID, CharUnit], chars_y: dict[CharID, CharUnit]
-) -> dict[CharID, int]:
-    x_set = set(chars_x)
-    y_set = set(chars_y)
-    intersection_x = x_set.intersection(y_set)
-    return {char_id_x: -1 for char_id_x in intersection_x}
-
-
 @dataclass
 class BeliefStory(BeliefCore):
     _belieflinks: dict[CharID, BeliefLink] = None  # set by WorldUnit.set_charunit()

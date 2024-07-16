@@ -1,9 +1,5 @@
-from src._world.char import CharID, charlink_shop, charunit_shop
-from src._world.beliefstory import (
-    beliefbox_shop,
-    awardlink_shop,
-    get_intersection_of_chars,
-)
+from src._world.char import charunit_shop
+from src._world.beliefstory import awardlink_shop
 from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -231,31 +227,3 @@ def test_WorldUnit_get_char_ReturnsCorrectObj():
     # THEN
     assert zia_char == yao_world._chars.get(zia_text)
     assert sue_char == yao_world._chars.get(sue_text)
-
-
-def test_get_intersection_of_chars_ReturnsUnionOfKeysOfTwoDictionarys_scenario1():
-    # GIVEN
-    bob_text = "Bob"
-    bob_world = worldunit_shop(bob_text)
-
-    sam_text = "sam"
-    wil_text = "wil"
-    fry_text = "fry"
-    elu_text = "Elu"
-    bob_world.set_charunit(charunit_shop(bob_text))
-    bob_world.set_charunit(charunit_shop(sam_text))
-    bob_world.set_charunit(charunit_shop(wil_text))
-    bob_world.set_charunit(charunit_shop(fry_text))
-
-    y_world = worldunit_shop()
-    y_world.set_charunit(charunit_shop(bob_text))
-    y_world.set_charunit(charunit_shop(wil_text))
-    y_world.set_charunit(charunit_shop(fry_text))
-    y_world.set_charunit(charunit_shop(elu_text))
-
-    # WHEN
-    print(f"{len(bob_world._chars)=} {len(y_world._chars)=}")
-    intersection_x = get_intersection_of_chars(bob_world._chars, y_world._chars)
-
-    # THEN
-    assert intersection_x == {bob_text: -1, wil_text: -1, fry_text: -1}

@@ -1318,7 +1318,7 @@ class WorldUnit:
         for beliefstory_obj in self._beliefstorys.values():
             beliefstory_obj.reset_world_cred_debt()
 
-    def _set_beliefboxs_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
+    def _set_beliefstorys_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
         for awardlink_obj in awardheirs.values():
             self.add_to_beliefstory_world_cred_debt(
                 belief_id=awardlink_obj.belief_id,
@@ -1535,7 +1535,7 @@ class WorldUnit:
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
         if idea.is_awardheirless() is False:
-            self._set_beliefboxs_bud_share(idea._awardheirs)
+            self._set_beliefstorys_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
             self._add_to_charunits_world_cred_debt(idea._bud_ratio)
 
