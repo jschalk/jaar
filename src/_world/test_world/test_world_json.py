@@ -299,7 +299,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_world.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=59)
     factunit_x = factunit_shop(day_min_road, day_min_road, 5, 59)
     yao_world.edit_idea_attr(road=factunit_x.base, factunit=factunit_x)
-    yao_world.set_max_tree_traverse(int_x=2)
+    yao_world.set_max_tree_traverse(2)
     yao_text = "Yao"
     yao_world._originunit.set_originhold(yao_text, 1)
 

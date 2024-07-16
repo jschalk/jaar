@@ -93,12 +93,12 @@ class DoerHeir:
             for beliefhold in parent_doerheir._beliefholds:
                 x_beliefholds.add(beliefhold)
         else:
-            # get all_chars of parent doerheir beliefs
+            # get all_chars of parent doerheir beliefboxs
             all_parent_doerheir_chars = self._get_all_chars(
                 world_beliefboxs=world_beliefboxs,
                 belief_id_set=parent_doerheir._beliefholds,
             )
-            # get all_chars of doerunit beliefs
+            # get all_chars of doerunit beliefboxs
             all_doerunit_chars = self._get_all_chars(
                 world_beliefboxs=world_beliefboxs,
                 belief_id_set=doerunit._beliefholds,
@@ -109,7 +109,7 @@ class DoerHeir:
                     f"parent_doerheir does not contain all chars of the idea's doerunit\n{set(all_parent_doerheir_chars)=}\n\n{set(all_doerunit_chars)=}"
                 )
 
-            # set dict_x = to doerunit beliefs
+            # set dict_x = to doerunit beliefboxs
             for beliefhold in doerunit._beliefholds:
                 x_beliefholds.add(beliefhold)
         self._beliefholds = x_beliefholds

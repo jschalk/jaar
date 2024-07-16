@@ -77,7 +77,7 @@ def test_WorldUnit_set_char_DoesNotOverRide_char_id_belieflink():
     assert zia_zia_belieflink is None
 
 
-def test_WorldUnit_set_char_CorrectlySets_chars_beliefs():
+def test_WorldUnit_set_char_CorrectlySets_chars_belieflinks():
     # GIVEN
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)

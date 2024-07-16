@@ -131,7 +131,7 @@ def test_WorldUnit_set_max_tree_traverse_CorrectlySetsInt():
     assert zia_world._max_tree_traverse == 3
 
     # WHEN
-    zia_world.set_max_tree_traverse(int_x=11)
+    zia_world.set_max_tree_traverse(x_int=11)
 
     # THEN
     assert zia_world._max_tree_traverse == 11
@@ -142,13 +142,30 @@ def test_WorldUnit_set_max_tree_traverse_CorrectlyRaisesError():
     zia_text = "Zia"
     zia_world = worldunit_shop(_owner_id=zia_text)
     assert zia_world._max_tree_traverse == 3
+    zia_tree_traverse = 1
 
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
-        zia_world.set_max_tree_traverse(int_x=1)
+        zia_world.set_max_tree_traverse(x_int=zia_tree_traverse)
     assert (
         str(excinfo.value)
         == "set_max_tree_traverse: input '1' must be number that is 2 or greater"
+    )
+
+
+def test_WorldUnit_set_max_tree_traverse_CorrectlyRaisesError():
+    # GIVEN
+    zia_text = "Zia"
+    zia_world = worldunit_shop(_owner_id=zia_text)
+    assert zia_world._max_tree_traverse == 3
+
+    # WHEN/THEN
+    zia_tree_traverse = 3.5
+    with pytest_raises(Exception) as excinfo:
+        zia_world.set_max_tree_traverse(x_int=zia_tree_traverse)
+    assert (
+        str(excinfo.value)
+        == f"set_max_tree_traverse: input '{zia_tree_traverse}' must be number that is 2 or greater"
     )
 
 

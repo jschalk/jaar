@@ -239,31 +239,13 @@ class WorldUnit:
         self.edit_idea_label(old_road=old_real_id, new_label=self._real_id)
         self.calc_world_metrics()
 
-    def set_max_tree_traverse(self, int_x: int):
-        if int_x < 2:
+    def set_max_tree_traverse(self, x_int: int):
+        if x_int < 2 or float(x_int).is_integer() is False:
             raise InvalidWorldException(
-                f"set_max_tree_traverse: input '{int_x}' must be number that is 2 or greater"
+                f"set_max_tree_traverse: input '{x_int}' must be number that is 2 or greater"
             )
         else:
-            self._max_tree_traverse = int_x
-
-    def get_world_sprung_from_single_idea(self, road: RoadUnit) -> any:
-        self.calc_world_metrics()
-        x_idea = self.get_idea_obj(road)
-        new_weight = self._weight * x_idea._bud_ratio
-        x_world = worldunit_shop(_owner_id=self._idearoot._label, _weight=new_weight)
-
-        for road_assc in sorted(list(self._get_relevant_roads({road}))):
-            src_yx = self.get_idea_obj(road_assc)
-            new_yx = copy_deepcopy(src_yx)
-            if new_yx._parent_road != "":
-                x_world.add_idea(new_yx, parent_road=new_yx._parent_road)
-            x_world.calc_world_metrics()
-
-        # TODO grab beliefs
-        # TODO grab all belief chars
-        # TODO grab facts
-        return x_world
+            self._max_tree_traverse = x_int
 
     def _get_relevant_roads(self, roads: dict[RoadUnit,]) -> dict[RoadUnit, str]:
         to_evaluate_list = []

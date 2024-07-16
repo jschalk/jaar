@@ -680,7 +680,7 @@ def test_WorldUnit_tree_traverse_count_CorrectlyCountsTreeTraversesForIrrational
     assert x_world._tree_traverse_count == 3
 
     # WHEN
-    x_world.set_max_tree_traverse(int_x=21)
+    x_world.set_max_tree_traverse(21)
     x_world.calc_world_metrics()
 
     # THEN
