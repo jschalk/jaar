@@ -574,46 +574,6 @@ class WorldUnit:
     def char_exists(self, char_id: CharID) -> bool:
         return self.get_char(char_id) != None
 
-    def edit_charunit_char_id(
-        self,
-        old_char_id: CharID,
-        new_char_id: CharID,
-        allow_char_overwite: bool,
-        allow_nonsingle_belief_overwrite: bool,
-    ):
-        # Handle scenarios: some are unacceptable
-        old_char_id_credor_weight = self.get_char(old_char_id).credor_weight
-        new_char_id_beliefbox = self.get_beliefbox(new_char_id)
-        new_char_id_charunit = self.get_char(new_char_id)
-        if not allow_char_overwite and new_char_id_charunit != None:
-            raise InvalidWorldException(
-                f"Char '{old_char_id}' modify to '{new_char_id}' failed since '{new_char_id}' exists."
-            )
-        elif (
-            not allow_nonsingle_belief_overwrite
-            and new_char_id_beliefbox != None
-            and new_char_id_beliefbox._char_mirror is False
-        ):
-            raise InvalidWorldException(
-                f"Char '{old_char_id}' modify to '{new_char_id}' failed since non-single belief '{new_char_id}' exists."
-            )
-        elif (
-            allow_nonsingle_belief_overwrite
-            and new_char_id_beliefbox != None
-            and new_char_id_beliefbox._char_mirror is False
-        ):
-            self.del_beliefbox(belief_id=new_char_id)
-        elif self.char_exists(new_char_id):
-            old_char_id_credor_weight += new_char_id_charunit.credor_weight
-
-        # upsert new charunit
-        self.add_charunit(char_id=new_char_id, credor_weight=old_char_id_credor_weight)
-        # modify all influenced beliefboxs charlinks
-        for old_char_belief_id in self.get_char_belief_ids(old_char_id):
-            old_char_beliefbox = self.get_beliefbox(old_char_belief_id)
-            old_char_beliefbox._shift_charlink(old_char_id, new_char_id)
-        self.del_charunit(char_id=old_char_id)
-
     def edit_charunit(
         self, char_id: CharID, credor_weight: int = None, debtor_weight: int = None
     ):
@@ -1303,10 +1263,7 @@ class WorldUnit:
     ):
         if healerhold != None:
             for x_belief_id in healerhold._belief_ids:
-                if (
-                    self._beliefs.get(x_belief_id) is None
-                    and self.get_belief_ids_dict().get(x_belief_id) is None
-                ):
+                if self.get_belief_ids_dict().get(x_belief_id) is None:
                     raise healerhold_belief_id_Exception(
                         f"Idea cannot edit healerhold because belief_id '{x_belief_id}' does not exist as belief in World"
                     )
@@ -1494,13 +1451,6 @@ class WorldUnit:
                 world_charunit_total_credor_weight=self.get_charunits_credor_weight_sum(),
                 world_charunit_total_debtor_weight=self.get_charunits_debtor_weight_sum(),
             )
-
-    def get_char_belief_ids(self, char_id: CharID) -> list[BeliefID]:
-        return [
-            x_beliefbox.belief_id
-            for x_beliefbox in self._beliefs.values()
-            if x_beliefbox.charlink_exists(char_id)
-        ]
 
     def _reset_charunit_world_cred_debt(self):
         for charunit in self._chars.values():
@@ -1962,7 +1912,7 @@ class WorldUnit:
         # get char's chars: charzone
 
         # get charzone beliefs
-        char_beliefs = self.get_char_belief_ids(char_id=char_id)
+        char_beliefs = self.get_belief_ids_dict().get(char_id)
 
         # set world4char by traversing the idea tree and selecting associated beliefs
         # set root
