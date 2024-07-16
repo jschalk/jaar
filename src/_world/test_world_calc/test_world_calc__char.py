@@ -51,14 +51,12 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario0():
     # GIVEN
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
-    assert sue_worldunit._beliefs == {}
     assert sue_worldunit._beliefstorys == {}
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
 
     # THEN
-    assert sue_worldunit._beliefs == {}
     assert sue_worldunit._beliefstorys == {}
 
 
@@ -127,7 +125,6 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
     assert yao_charunit._debtor_pool == 0
     assert yao_charunit.get_belieflink(yao_text)._credor_pool == 0
     assert yao_charunit.get_belieflink(yao_text)._debtor_pool == 0
-    # assert sue_worldunit._beliefs == {}
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()

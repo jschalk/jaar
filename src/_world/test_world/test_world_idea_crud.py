@@ -852,3 +852,151 @@ def test_WorldUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState()
     assert sports_swim_idea._weight == swim_weight
     assert sports_hike_idea._weight == hike_weight
     assert sports_bball_idea._weight == bball_weight
+
+
+def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
+    # GIVEN
+    sue_text = "Sue"
+    sue_world = worldunit_shop(sue_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    sue_world.add_charunit(yao_text)
+    sue_world.add_charunit(zia_text)
+    sue_world.add_charunit(Xio_text)
+
+    assert len(sue_world._chars) == 3
+    assert len(sue_world.get_belief_ids_dict()) == 3
+    swim_text = "swim"
+    sue_world.add_l1_idea(ideaunit_shop(swim_text))
+    awardlink_yao = awardlink_shop(yao_text, credor_weight=10)
+    awardlink_zia = awardlink_shop(zia_text, credor_weight=10)
+    awardlink_Xio = awardlink_shop(Xio_text, credor_weight=10)
+    swim_road = sue_world.make_l1_road(swim_text)
+    sue_world.edit_idea_attr(swim_road, awardlink=awardlink_yao)
+    sue_world.edit_idea_attr(swim_road, awardlink=awardlink_zia)
+    sue_world.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
+
+    street_text = "streets"
+    sue_world.add_idea(ideaunit_shop(street_text), parent_road=swim_road)
+    assert sue_world._idearoot._awardlinks in (None, {})
+    assert len(sue_world._idearoot._kids[swim_text]._awardlinks) == 3
+
+    # WHEN
+    idea_dict = sue_world.get_idea_dict()
+
+    # THEN
+    print(f"{idea_dict.keys()=} ")
+    swim_idea = idea_dict.get(swim_road)
+    street_idea = idea_dict.get(sue_world.make_road(swim_road, street_text))
+
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 3
+    assert street_idea._awardlinks in (None, {})
+    assert len(street_idea._awardheirs) == 3
+
+    print(f"{len(idea_dict)}")
+    print(f"{swim_idea._awardlinks}")
+    print(f"{swim_idea._awardheirs}")
+    print(f"{swim_idea._awardheirs}")
+    assert len(sue_world._idearoot._kids["swim"]._awardheirs) == 3
+
+
+def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
+    # GIVEN
+    prom_text = "prom"
+    x_world = worldunit_shop(prom_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    x_world.add_charunit(yao_text)
+    x_world.add_charunit(zia_text)
+    x_world.add_charunit(Xio_text)
+
+    swim_text = "swim"
+    swim_road = x_world.make_road(prom_text, swim_text)
+
+    x_world.add_l1_idea(ideaunit_shop(swim_text))
+    awardlink_yao = awardlink_shop(yao_text, credor_weight=10)
+    awardlink_zia = awardlink_shop(zia_text, credor_weight=10)
+    awardlink_Xio = awardlink_shop(Xio_text, credor_weight=10)
+
+    swim_idea = x_world.get_idea_obj(swim_road)
+    x_world.edit_idea_attr(swim_road, awardlink=awardlink_yao)
+    x_world.edit_idea_attr(swim_road, awardlink=awardlink_zia)
+    x_world.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
+
+    assert len(swim_idea._awardlinks) == 3
+    assert len(x_world._idearoot._kids[swim_text]._awardlinks) == 3
+
+    # WHEN
+    x_world.edit_idea_attr(swim_road, awardlink_del=yao_text)
+
+    # THEN
+    swim_idea = x_world.get_idea_obj(swim_road)
+    print(f"{swim_idea._label=}")
+    print(f"{swim_idea._awardlinks=}")
+    print(f"{swim_idea._awardheirs=}")
+
+    assert len(x_world._idearoot._kids[swim_text]._awardlinks) == 2
+
+
+def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
+    # GIVEN
+    noa_text = "Noa"
+    x1_world = worldunit_shop(noa_text)
+    xia_text = "Xia"
+    zoa_text = "Zoa"
+    x1_world.add_charunit(xia_text)
+    x1_world.add_charunit(zoa_text)
+
+    casa_text = "casa"
+    casa_road = x1_world.make_l1_road(casa_text)
+    swim_text = "swim"
+    swim_road = x1_world.make_l1_road(swim_text)
+    x1_world.add_l1_idea(ideaunit_shop(casa_text))
+    x1_world.add_l1_idea(ideaunit_shop(swim_text))
+    x1_world.edit_idea_attr(swim_road, awardlink=awardlink_shop(xia_text))
+    x1_world.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
+    x1_world_swim_idea = x1_world.get_idea_obj(swim_road)
+    assert len(x1_world_swim_idea._awardlinks) == 2
+    x_world = worldunit_shop(noa_text)
+    x_world.add_charunit(xia_text)
+
+    # WHEN
+    filtered_idea = x_world._get_filtered_awardlinks_idea(x1_world_swim_idea)
+
+    # THEN
+    assert len(filtered_idea._awardlinks) == 1
+    assert list(filtered_idea._awardlinks.keys()) == [xia_text]
+
+
+def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
+    # GIVEN
+    noa_text = "Noa"
+    x1_world = worldunit_shop(noa_text)
+    xia_text = "Xia"
+    zoa_text = "Zoa"
+    x1_world.add_charunit(xia_text)
+    x1_world.add_charunit(zoa_text)
+
+    casa_text = "casa"
+    casa_road = x1_world.make_l1_road(casa_text)
+    swim_text = "swim"
+    swim_road = x1_world.make_l1_road(swim_text)
+    x1_world.add_l1_idea(ideaunit_shop(casa_text))
+    x1_world.add_l1_idea(ideaunit_shop(swim_text))
+    x1_world.edit_idea_attr(swim_road, awardlink=awardlink_shop(xia_text))
+    x1_world.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
+    x1_world_swim_idea = x1_world.get_idea_obj(swim_road)
+    assert len(x1_world_swim_idea._awardlinks) == 2
+
+    # WHEN
+    x_world = worldunit_shop(noa_text)
+    x_world.add_charunit(xia_text)
+    x_world.add_l1_idea(x1_world_swim_idea, create_missing_ideas=False)
+
+    # THEN
+    x_world_swim_idea = x_world.get_idea_obj(swim_road)
+    assert len(x_world_swim_idea._awardlinks) == 1
+    assert list(x_world_swim_idea._awardlinks.keys()) == [xia_text]

@@ -28,7 +28,6 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
 def create_listen_basis(x_duty: WorldUnit) -> WorldUnit:
     x_listen = create_empty_world(x_duty, x_owner_id=x_duty._owner_id)
     x_listen._chars = x_duty._chars
-    x_listen._beliefs = x_duty._beliefs
     x_listen.set_monetary_desc(x_duty._monetary_desc)
     x_listen.set_max_tree_traverse(x_duty._max_tree_traverse)
     if x_duty._credor_respect != None:

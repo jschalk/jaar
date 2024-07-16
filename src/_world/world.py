@@ -44,19 +44,10 @@ from src._road.road import (
     roadunit_valid_dir_path,
 )
 
-from src._world.char import (
-    CharUnit,
-    CharLink,
-    charunits_get_from_dict,
-    charunit_shop,
-    charlink_shop,
-)
-from src._world.belieflink import belieflink_shop
+from src._world.char import CharUnit, charunits_get_from_dict, charunit_shop
 from src._world.beliefstory import (
     AwardLink,
     BeliefID,
-    BeliefBox,
-    beliefbox_shop,
     BeliefStory,
     beliefstory_shop,
 )
@@ -129,7 +120,6 @@ class WorldUnit:
     _last_gift_id: int = None
     _weight: float = None
     _chars: dict[CharID, CharUnit] = None
-    _beliefs: dict[BeliefID, BeliefBox] = None
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
@@ -531,7 +521,6 @@ class WorldUnit:
                 )
 
     def del_charunit(self, char_id: str):
-        self._beliefs.pop(char_id)
         self._chars.pop(char_id)
 
     def add_charunit(
@@ -553,23 +542,6 @@ class WorldUnit:
         if auto_set_belieflink and x_charunit.belieflinks_exist() is False:
             x_charunit.add_belieflink(x_charunit.char_id)
         self._chars[x_charunit.char_id] = x_charunit
-
-        try:
-            self._beliefs[x_charunit.char_id]
-        except KeyError:
-            charlink = charlink_shop(
-                char_id=x_charunit.char_id,
-                credor_weight=1,
-                debtor_weight=1,
-            )
-            charlinks = {charlink.char_id: charlink}
-            belief_unit = beliefbox_shop(
-                x_charunit.char_id,
-                _char_mirror=True,
-                _chars=charlinks,
-                _road_delimiter=self._road_delimiter,
-            )
-            self.set_beliefbox(y_beliefbox=belief_unit)
 
     def char_exists(self, char_id: CharID) -> bool:
         return self.get_char(char_id) != None
@@ -601,61 +573,8 @@ class WorldUnit:
                     x_dict[x_belief_id] = char_id_set
         return x_dict
 
-    def get_charunits_char_id_list(self) -> dict[CharID]:
-        char_id_list = list(self._chars.keys())
-        char_id_list.append("")
-        char_id_dict = {char_id.lower(): char_id for char_id in char_id_list}
-        char_id_lowercase_ordered_list = sorted(list(char_id_dict))
-        return [char_id_dict[char_id_l] for char_id_l in char_id_lowercase_ordered_list]
-
-    def set_beliefbox(
-        self,
-        y_beliefbox: BeliefBox,
-        create_missing_chars: bool = None,
-        replace: bool = True,
-        add_charlinks: bool = None,
-    ):
-        if y_beliefbox._road_delimiter != self._road_delimiter:
-            y_beliefbox._road_delimiter = self._road_delimiter
-        replace = False if replace is None else replace
-        add_charlinks = False if add_charlinks is None else add_charlinks
-        if (
-            self.get_beliefbox(y_beliefbox.belief_id) is None
-            or replace
-            and not add_charlinks
-        ):
-            self._beliefs[y_beliefbox.belief_id] = y_beliefbox
-
-        if add_charlinks:
-            x_beliefbox = self.get_beliefbox(y_beliefbox.belief_id)
-            for x_charlink in y_beliefbox._chars.values():
-                x_beliefbox.set_charlink(x_charlink)
-
-        if create_missing_chars:
-            self._create_missing_chars(charlinks=y_beliefbox._chars)
-
-    def beliefbox_exists(self, belief_id: BeliefID) -> bool:
-        return self._beliefs.get(belief_id) != None
-
-    def get_beliefbox(self, x_belief_id: BeliefID) -> BeliefBox:
-        return self._beliefs.get(x_belief_id)
-
     def get_beliefstory(self, x_belief_id: BeliefID) -> BeliefStory:
         return self._beliefstorys.get(x_belief_id)
-
-    def _create_missing_chars(self, charlinks: dict[CharID, CharLink]):
-        for charlink_x in charlinks.values():
-            if self.get_char(charlink_x.char_id) is None:
-                self.set_charunit(
-                    x_charunit=charunit_shop(
-                        char_id=charlink_x.char_id,
-                        credor_weight=charlink_x.credor_weight,
-                        debtor_weight=charlink_x.debtor_weight,
-                    )
-                )
-
-    def del_beliefbox(self, belief_id: BeliefID):
-        self._beliefs.pop(belief_id)
 
     def clear_charunits_belieflinks(self):
         for x_charunit in self._chars.values():
@@ -1981,7 +1900,6 @@ def worldunit_shop(
         _weight=get_1_if_None(_weight),
         _real_id=_real_id,
         _chars=get_empty_dict_if_none(None),
-        _beliefs=get_empty_dict_if_none(None),
         _beliefstorys={},
         _idea_dict=get_empty_dict_if_none(None),
         _econ_dict=get_empty_dict_if_none(None),

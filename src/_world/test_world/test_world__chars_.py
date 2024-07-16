@@ -126,8 +126,7 @@ def test_WorldUnit_add_charunit_CorrectlySets_chars():
 
     # THEN
     assert len(yao_world._chars) == 3
-    assert len(yao_world._beliefs) == 3
-    assert yao_world.get_beliefbox(zia_text)._char_mirror == True
+    assert len(yao_world.get_belief_ids_dict()) == 3
     assert yao_world._chars.get(xio_text).credor_weight == 17
     assert yao_world._chars.get(sue_text).debtor_weight == 5
     assert yao_world._chars.get(xio_text)._bit == x_bit
@@ -148,19 +147,19 @@ def test_WorldUnit_char_exists_ReturnsObj():
     assert bob_world.char_exists(yao_text)
 
 
-def test_WorldUnit_set_char_CorrectlyUpdate_char_mirror_BeliefBox():
+def test_WorldUnit_set_char_Creates_belieflink():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     zia_text = "Zia"
     before_zia_credor = 7
     before_zia_debtor = 17
     yao_world.add_charunit(zia_text, before_zia_credor, before_zia_debtor)
-    zia_beliefbox = yao_world.get_beliefbox(zia_text)
-    zia_charlink = zia_beliefbox.get_charlink(zia_text)
-    assert zia_charlink.credor_weight != before_zia_credor
-    assert zia_charlink.debtor_weight != before_zia_debtor
-    assert zia_charlink.credor_weight == 1
-    assert zia_charlink.debtor_weight == 1
+    zia_charunit = yao_world.get_char(zia_text)
+    zia_belieflink = zia_charunit.get_belieflink(zia_text)
+    assert zia_belieflink.credor_weight != before_zia_credor
+    assert zia_belieflink.debtor_weight != before_zia_debtor
+    assert zia_belieflink.credor_weight == 1
+    assert zia_belieflink.debtor_weight == 1
 
     # WHEN
     after_zia_credor = 11
@@ -168,10 +167,10 @@ def test_WorldUnit_set_char_CorrectlyUpdate_char_mirror_BeliefBox():
     yao_world.set_charunit(charunit_shop(zia_text, after_zia_credor, after_zia_debtor))
 
     # THEN
-    assert zia_charlink.credor_weight != after_zia_credor
-    assert zia_charlink.debtor_weight != after_zia_debtor
-    assert zia_charlink.credor_weight == 1
-    assert zia_charlink.debtor_weight == 1
+    assert zia_belieflink.credor_weight != after_zia_credor
+    assert zia_belieflink.debtor_weight != after_zia_debtor
+    assert zia_belieflink.credor_weight == 1
+    assert zia_belieflink.debtor_weight == 1
 
 
 def test_WorldUnit_edit_char_RaiseExceptionWhenCharDoesNotExist():
@@ -232,33 +231,6 @@ def test_WorldUnit_get_char_ReturnsCorrectObj():
     # THEN
     assert zia_char == yao_world._chars.get(zia_text)
     assert sue_char == yao_world._chars.get(sue_text)
-
-
-def test_WorldUnit_get_charunits_char_id_list_ReturnsListOfCharUnits():
-    # GIVEN
-    noa_world = worldunit_shop("Noa")
-    sam_text = "sam"
-    will_text = "will"
-    fry_text = "fry"
-    noa_world.set_charunit(charunit_shop(sam_text))
-    noa_world.set_charunit(charunit_shop(will_text))
-    noa_world.set_charunit(charunit_shop(fry_text))
-    fun_text = ",fun people"
-    fun_belief = beliefbox_shop(belief_id=fun_text)
-    fun_belief.set_charlink(charlink=charlink_shop(will_text))
-    noa_world.set_beliefbox(y_beliefbox=fun_belief)
-    assert len(noa_world._beliefs) == 4
-    assert len(noa_world._chars) == 3
-
-    # WHEN
-    charunit_list_x = noa_world.get_charunits_char_id_list()
-
-    # THEN
-    assert len(charunit_list_x) == 4
-    assert charunit_list_x[0] == ""
-    assert charunit_list_x[1] == fry_text
-    assert charunit_list_x[2] == sam_text
-    assert charunit_list_x[3] == will_text
 
 
 def test_get_intersection_of_chars_ReturnsUnionOfKeysOfTwoDictionarys_scenario1():

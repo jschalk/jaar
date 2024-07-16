@@ -24,7 +24,6 @@ def test_WorldUnit_Exists():
     assert x_world._owner_id is None
     assert x_world._weight is None
     assert x_world._chars is None
-    assert x_world._beliefs is None
     assert x_world._idearoot is None
     assert x_world._max_tree_traverse is None
     assert x_world._road_delimiter is None
@@ -74,7 +73,6 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._real_id == iowa_real_id
     assert x_world._weight == 1
     assert x_world._chars == {}
-    assert x_world._beliefs == {}
     assert x_world._idearoot != None
     assert x_world._max_tree_traverse == 3
     assert x_world._road_delimiter == slash_road_delimiter

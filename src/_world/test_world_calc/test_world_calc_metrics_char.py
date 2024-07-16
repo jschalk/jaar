@@ -10,6 +10,59 @@ from src._world.idea import ideaunit_shop, IdeaUnit
 from dataclasses import dataclass
 
 
+def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImportance():
+    # GIVEN
+    sue_text = "Sue"
+    sue_world = worldunit_shop(sue_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    sue_world.set_charunit(charunit_shop(yao_text))
+    sue_world.set_charunit(charunit_shop(zia_text))
+    sue_world.set_charunit(charunit_shop(Xio_text))
+    yao_awardlink = awardlink_shop(yao_text, credor_weight=20, debtor_weight=6)
+    zia_awardlink = awardlink_shop(zia_text, credor_weight=10, debtor_weight=1)
+    Xio_awardlink = awardlink_shop(Xio_text, credor_weight=10)
+    sue_world._idearoot.set_awardlink(yao_awardlink)
+    sue_world._idearoot.set_awardlink(zia_awardlink)
+    sue_world._idearoot.set_awardlink(Xio_awardlink)
+    assert len(sue_world._idearoot._awardlinks) == 3
+
+    # WHEN
+    idea_dict = sue_world.get_idea_dict()
+
+    # THEN
+    print(f"{idea_dict.keys()=}")
+    idea_prom = idea_dict.get(sue_world._real_id)
+    assert len(idea_prom._awardheirs) == 3
+
+    bheir_yao = idea_prom._awardheirs.get(yao_text)
+    bheir_zia = idea_prom._awardheirs.get(zia_text)
+    bheir_Xio = idea_prom._awardheirs.get(Xio_text)
+    assert bheir_yao._world_cred == 0.5
+    assert bheir_yao._world_debt == 0.75
+    assert bheir_zia._world_cred == 0.25
+    assert bheir_zia._world_debt == 0.125
+    assert bheir_Xio._world_cred == 0.25
+    assert bheir_Xio._world_debt == 0.125
+    assert bheir_yao._world_cred + bheir_zia._world_cred + bheir_Xio._world_cred == 1
+    assert bheir_yao._world_debt + bheir_zia._world_debt + bheir_Xio._world_debt == 1
+
+    # world_cred_sum = 0
+    # world_debt_sum = 0
+    # for belief in x_world._idearoot._awardheirs.values():
+    #     print(f"{belief=}")
+    #     assert belief._world_cred != None
+    #     assert belief._world_cred in [0.25, 0.5]
+    #     assert belief._world_debt != None
+    #     assert belief._world_debt in [0.75, 0.125]
+    #     world_cred_sum += belief._world_cred
+    #     world_debt_sum += belief._world_debt
+
+    # assert world_cred_sum == 1
+    # assert world_debt_sum == 1
+
+
 def test_WorldUnit_calc_world_metrics_CorrectlySetsBelieflinkWorldCredAndDebt():
     # GIVEN
     yao_world = worldunit_shop("Yao")

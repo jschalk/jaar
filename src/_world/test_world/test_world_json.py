@@ -426,8 +426,6 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._debtor_respect == zia_debtor_respect
     assert json_world._last_gift_id == zia_world._last_gift_id
     assert json_world._last_gift_id == zia_last_gift_id
-    print(f"{json_world._beliefs.keys()=}")
-    print(f"{zia_world._beliefs.keys()=}")
     # assert json_world._beliefs == zia_world._beliefs
 
     json_idearoot = json_world._idearoot

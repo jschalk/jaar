@@ -54,7 +54,6 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldBeliefWorldI
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
     assert len(x_world.get_belief_ids_dict()) == 4
-    assert len(x_world._beliefs) == 4
 
     # WHEN
     x_world.calc_world_metrics()
@@ -101,7 +100,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldBeliefWorldI
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(parm_awardlink)
-    assert len(x_world._beliefs) == 3
+    assert len(x_world.get_belief_ids_dict()) == 3
 
     # WHEN
     x_world.calc_world_metrics()

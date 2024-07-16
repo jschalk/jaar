@@ -237,20 +237,6 @@ def get_intersection_of_chars(
     return {char_id_x: -1 for char_id_x in intersection_x}
 
 
-def get_chars_relevant_beliefs(
-    beliefs_x: dict[BeliefID, BeliefBox], chars_x: dict[CharID, CharUnit]
-) -> dict[BeliefID, dict[CharID, int]]:
-    relevant_beliefs = {}
-    for char_id_x in chars_x:
-        for belief_x in beliefs_x.values():
-            if belief_x._chars.get(char_id_x) != None:
-                if relevant_beliefs.get(belief_x.belief_id) is None:
-                    relevant_beliefs[belief_x.belief_id] = {}
-                relevant_beliefs.get(belief_x.belief_id)[char_id_x] = -1
-
-    return relevant_beliefs
-
-
 @dataclass
 class BeliefStory(BeliefCore):
     _belieflinks: dict[CharID, BeliefLink] = None  # set by WorldUnit.set_charunit()
