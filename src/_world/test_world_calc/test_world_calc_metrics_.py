@@ -589,13 +589,6 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     daytime_reason.set_premise(premise=daytime_road, open=open_8am, nigh=nigh_8am)
     clean_cookery_idea.set_reasonunit(reason=daytime_reason)
 
-    # anna_text = "anna"
-    # anna_charunit = charunit_shop(char_id=anna_text)
-    # anna_charlink = charlink_shop(char_id=anna_text)
-    # beto_text = "beto"
-    # beto_charunit = charunit_shop(char_id=beto_text)
-    # beto_charlink = charlink_shop(char_id=beto_text)
-
     family_text = ",family"
     awardlink_z = awardlink_shop(belief_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink_z)

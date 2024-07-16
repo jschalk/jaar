@@ -1,8 +1,6 @@
 from src._world.beliefstory import (
     AwardLine,
     awardline_shop,
-    BeliefBox,
-    beliefbox_shop,
     AwardLink,
     awardlink_shop,
     awardlinks_get_from_json,
@@ -17,124 +15,6 @@ from src._road.road import (
 )
 from src._instrument.python import x_is_json, get_json_from_dict
 from pytest import raises as pytest_raises
-
-
-def test_BeliefBox_exists():
-    # GIVEN
-    swim_text = ",swimmers"
-    # WHEN
-    swim_beliefbox = BeliefBox(belief_id=swim_text)
-    # THEN
-    assert swim_beliefbox != None
-    assert swim_beliefbox.belief_id == swim_text
-    assert swim_beliefbox._char_mirror is None
-    assert swim_beliefbox._chars is None
-    assert swim_beliefbox._world_cred is None
-    assert swim_beliefbox._world_debt is None
-    assert swim_beliefbox._world_agenda_cred is None
-    assert swim_beliefbox._world_agenda_debt is None
-    assert swim_beliefbox._road_delimiter is None
-
-
-def test_beliefbox_shop_ReturnsCorrectObj():
-    # GIVEN
-    swim_text = ",swimmers"
-    nation_road = create_road(root_label(), "nation-states")
-    usa_road = create_road(nation_road, "USA")
-
-    # WHEN
-    swim_beliefbox = beliefbox_shop(belief_id=swim_text)
-
-    # THEN
-    print(f"{swim_text}")
-    assert swim_beliefbox != None
-    assert swim_beliefbox.belief_id != None
-    assert swim_beliefbox.belief_id == swim_text
-    assert swim_beliefbox._chars == {}
-    assert swim_beliefbox._world_cred == 0
-    assert swim_beliefbox._world_debt == 0
-    assert swim_beliefbox._world_agenda_cred == 0
-    assert swim_beliefbox._world_agenda_debt == 0
-    assert swim_beliefbox._road_delimiter == default_road_delimiter_if_none()
-
-
-def test_beliefbox_shop_ReturnsCorrectObj_road_delimiter():
-    # GIVEN
-    swim_text = "/swimmers"
-    slash_text = "/"
-
-    # WHEN
-    swim_beliefbox = beliefbox_shop(belief_id=swim_text, _road_delimiter=slash_text)
-
-    # THEN
-    assert swim_beliefbox._road_delimiter == slash_text
-
-
-def test_BeliefBox_set_belief_id_RaisesErrorIfParameterContains_road_delimiter_And_char_mirror_True():
-    # GIVEN
-    slash_text = "/"
-    bob_text = f"Bob{slash_text}Texas"
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        beliefbox_shop(bob_text, _char_mirror=True, _road_delimiter=slash_text)
-    assert (
-        str(excinfo.value)
-        == f"'{bob_text}' needs to be a RoadNode. Cannot contain delimiter: '{slash_text}'"
-    )
-
-
-def test_BeliefBox_set_belief_id_RaisesErrorIfParameterDoesNotContain_road_delimiter_char_mirror_False():
-    # GIVEN
-    comma_text = ","
-    texas_text = f"Texas{comma_text}Arkansas"
-
-    # WHEN / THEN
-    slash_text = "/"
-    with pytest_raises(Exception) as excinfo:
-        beliefbox_shop(belief_id=texas_text, _road_delimiter=slash_text)
-    assert (
-        str(excinfo.value)
-        == f"'{texas_text}' needs to not be a RoadNode. Must contain delimiter: '{slash_text}'"
-    )
-
-
-def test_BeliefBox_set_belief_id_SetsAttrCorrectly():
-    # GIVEN
-    swim_text = ",swimmers"
-    swim_belief = beliefbox_shop(belief_id=swim_text)
-    assert swim_belief.belief_id == swim_text
-
-    # WHEN
-    water_text = ",water people"
-    swim_belief.set_belief_id(belief_id=water_text)
-
-    # THEN
-    assert swim_belief.belief_id == water_text
-
-
-def test_BeliefBox_reset_bud_share_SetsAttrCorrectly():
-    # GIVEN
-    maria_belief_id = "maria"
-    maria_beliefbox = beliefbox_shop(maria_belief_id, _char_mirror=True)
-    maria_beliefbox._world_cred = 0.33
-    maria_beliefbox._world_debt = 0.44
-    maria_beliefbox._world_agenda_cred = 0.13
-    maria_beliefbox._world_agenda_debt = 0.23
-    print(f"{maria_beliefbox}")
-    assert maria_beliefbox._world_cred == 0.33
-    assert maria_beliefbox._world_debt == 0.44
-    assert maria_beliefbox._world_agenda_cred == 0.13
-    assert maria_beliefbox._world_agenda_debt == 0.23
-
-    # WHEN
-    maria_beliefbox.reset_world_cred_debt()
-
-    # THEN
-    assert maria_beliefbox._world_cred == 0
-    assert maria_beliefbox._world_debt == 0
-    assert maria_beliefbox._world_agenda_cred == 0
-    assert maria_beliefbox._world_agenda_debt == 0
 
 
 def test_AwardLink_exists():

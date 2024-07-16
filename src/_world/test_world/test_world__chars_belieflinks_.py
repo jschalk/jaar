@@ -1,6 +1,3 @@
-from src._world.char import charlink_shop
-from src._world.belieflink import belieflink_shop
-from src._world.beliefstory import beliefbox_shop
 from src._world.world import worldunit_shop
 
 
