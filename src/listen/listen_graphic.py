@@ -335,12 +335,12 @@ def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     add_rect_arrow(fig, 5.5, -0.9, 5, -0.9, green_text)
     add_rect_arrow(fig, 5.5, -1.1, 5, -1.1, blue_text)
     add_rect_arrow(fig, 5.5, -1.3, 5, -2.9, green_text)
-    charlink_text = "charlink"
+    belieflink_text = "belieflink"
     darkred_text = "DarkRed"
-    add_world_rect(fig, 7, 0.4, 7.75, 1, charlink_text, darkred_text)
-    add_world_rect(fig, 7, -0.2, 7.75, 0.4, charlink_text, darkred_text)
-    add_world_rect(fig, 7, -0.8, 7.75, -0.2, charlink_text, darkred_text)
-    add_world_rect(fig, 7, -1.4, 7.75, -0.8, charlink_text, darkred_text)
+    add_world_rect(fig, 7, 0.4, 7.75, 1, belieflink_text, darkred_text)
+    add_world_rect(fig, 7, -0.2, 7.75, 0.4, belieflink_text, darkred_text)
+    add_world_rect(fig, 7, -0.8, 7.75, -0.2, belieflink_text, darkred_text)
+    add_world_rect(fig, 7, -1.4, 7.75, -0.8, belieflink_text, darkred_text)
     add_rect_arrow(fig, 7, -0.4, 6.25, -0.4, blue_text)
     add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_text)
     add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_text)

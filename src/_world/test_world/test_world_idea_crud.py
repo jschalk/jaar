@@ -679,33 +679,33 @@ def test_WorldUnit_edit_idea_attr_RaisesErrorWhen_healerhold_belief_ids_DoNotExi
 
 def test_WorldUnit_add_idea_MustReorderKidsDictToBeAlphabetical():
     # GIVEN
-    noa_world = worldunit_shop("Noa")
+    bob_world = worldunit_shop("Bob")
     casa_text = "casa"
-    noa_world.add_l1_idea(ideaunit_shop(casa_text))
+    bob_world.add_l1_idea(ideaunit_shop(casa_text))
     swim_text = "swim"
-    noa_world.add_l1_idea(ideaunit_shop(swim_text))
+    bob_world.add_l1_idea(ideaunit_shop(swim_text))
 
     # WHEN
-    idea_list = list(noa_world._idearoot._kids.values())
+    idea_list = list(bob_world._idearoot._kids.values())
 
     # THEN
     assert idea_list[0]._label == casa_text
 
 
 def test_WorldUnit_add_idea_adoptee_RaisesErrorIfAdopteeIdeaDoesNotHaveCorrectParent():
-    noa_world = worldunit_shop("Noa")
+    bob_world = worldunit_shop("Bob")
     sports_text = "sports"
-    sports_road = noa_world.make_l1_road(sports_text)
-    noa_world.add_l1_idea(ideaunit_shop(sports_text))
+    sports_road = bob_world.make_l1_road(sports_text)
+    bob_world.add_l1_idea(ideaunit_shop(sports_text))
     swim_text = "swim"
-    noa_world.add_idea(ideaunit_shop(swim_text), parent_road=sports_road)
+    bob_world.add_idea(ideaunit_shop(swim_text), parent_road=sports_road)
 
     # WHEN / THEN
     summer_text = "summer"
     hike_text = "hike"
-    hike_road = noa_world.make_road(sports_road, hike_text)
+    hike_road = bob_world.make_road(sports_road, hike_text)
     with pytest_raises(Exception) as excinfo:
-        noa_world.add_idea(
+        bob_world.add_idea(
             idea_kid=ideaunit_shop(summer_text),
             parent_road=sports_road,
             adoptees=[swim_text, hike_text],
@@ -714,74 +714,74 @@ def test_WorldUnit_add_idea_adoptee_RaisesErrorIfAdopteeIdeaDoesNotHaveCorrectPa
 
 
 def test_WorldUnit_add_idea_adoptee_CorrectlyAddsAdoptee():
-    noa_world = worldunit_shop("Noa")
+    bob_world = worldunit_shop("Bob")
     sports_text = "sports"
-    sports_road = noa_world.make_l1_road(sports_text)
-    noa_world.add_l1_idea(ideaunit_shop(sports_text))
+    sports_road = bob_world.make_l1_road(sports_text)
+    bob_world.add_l1_idea(ideaunit_shop(sports_text))
     swim_text = "swim"
-    noa_world.add_idea(ideaunit_shop(swim_text), parent_road=sports_road)
+    bob_world.add_idea(ideaunit_shop(swim_text), parent_road=sports_road)
     hike_text = "hike"
-    noa_world.add_idea(ideaunit_shop(hike_text), parent_road=sports_road)
+    bob_world.add_idea(ideaunit_shop(hike_text), parent_road=sports_road)
 
-    sports_swim_road = noa_world.make_road(sports_road, swim_text)
-    sports_hike_road = noa_world.make_road(sports_road, hike_text)
-    assert noa_world.idea_exists(sports_swim_road)
-    assert noa_world.idea_exists(sports_hike_road)
+    sports_swim_road = bob_world.make_road(sports_road, swim_text)
+    sports_hike_road = bob_world.make_road(sports_road, hike_text)
+    assert bob_world.idea_exists(sports_swim_road)
+    assert bob_world.idea_exists(sports_hike_road)
     summer_text = "summer"
-    summer_road = noa_world.make_road(sports_road, summer_text)
-    summer_swim_road = noa_world.make_road(summer_road, swim_text)
-    summer_hike_road = noa_world.make_road(summer_road, hike_text)
-    assert noa_world.idea_exists(summer_swim_road) is False
-    assert noa_world.idea_exists(summer_hike_road) is False
+    summer_road = bob_world.make_road(sports_road, summer_text)
+    summer_swim_road = bob_world.make_road(summer_road, swim_text)
+    summer_hike_road = bob_world.make_road(summer_road, hike_text)
+    assert bob_world.idea_exists(summer_swim_road) is False
+    assert bob_world.idea_exists(summer_hike_road) is False
 
     # WHEN / THEN
-    noa_world.add_idea(
+    bob_world.add_idea(
         idea_kid=ideaunit_shop(summer_text),
         parent_road=sports_road,
         adoptees=[swim_text, hike_text],
     )
 
     # THEN
-    summer_idea = noa_world.get_idea_obj(summer_road)
+    summer_idea = bob_world.get_idea_obj(summer_road)
     print(f"{summer_idea._kids.keys()=}")
-    assert noa_world.idea_exists(summer_swim_road)
-    assert noa_world.idea_exists(summer_hike_road)
-    assert noa_world.idea_exists(sports_swim_road) is False
-    assert noa_world.idea_exists(sports_hike_road) is False
+    assert bob_world.idea_exists(summer_swim_road)
+    assert bob_world.idea_exists(summer_hike_road)
+    assert bob_world.idea_exists(sports_swim_road) is False
+    assert bob_world.idea_exists(sports_hike_road) is False
 
 
 def test_WorldUnit_add_idea_bundling_SetsNewParentWithWeightEqualToSumOfAdoptedIdeas():
-    noa_world = worldunit_shop("Noa")
+    bob_world = worldunit_shop("Bob")
     sports_text = "sports"
-    sports_road = noa_world.make_l1_road(sports_text)
-    noa_world.add_l1_idea(ideaunit_shop(sports_text, _weight=2))
+    sports_road = bob_world.make_l1_road(sports_text)
+    bob_world.add_l1_idea(ideaunit_shop(sports_text, _weight=2))
     swim_text = "swim"
     swim_weight = 3
-    noa_world.add_idea(ideaunit_shop(swim_text, _weight=swim_weight), sports_road)
+    bob_world.add_idea(ideaunit_shop(swim_text, _weight=swim_weight), sports_road)
     hike_text = "hike"
     hike_weight = 5
-    noa_world.add_idea(ideaunit_shop(hike_text, _weight=hike_weight), sports_road)
+    bob_world.add_idea(ideaunit_shop(hike_text, _weight=hike_weight), sports_road)
     bball_text = "bball"
     bball_weight = 7
-    noa_world.add_idea(ideaunit_shop(bball_text, _weight=bball_weight), sports_road)
+    bob_world.add_idea(ideaunit_shop(bball_text, _weight=bball_weight), sports_road)
 
-    sports_swim_road = noa_world.make_road(sports_road, swim_text)
-    sports_hike_road = noa_world.make_road(sports_road, hike_text)
-    sports_bball_road = noa_world.make_road(sports_road, bball_text)
-    assert noa_world.get_idea_obj(sports_swim_road)._weight == swim_weight
-    assert noa_world.get_idea_obj(sports_hike_road)._weight == hike_weight
-    assert noa_world.get_idea_obj(sports_bball_road)._weight == bball_weight
+    sports_swim_road = bob_world.make_road(sports_road, swim_text)
+    sports_hike_road = bob_world.make_road(sports_road, hike_text)
+    sports_bball_road = bob_world.make_road(sports_road, bball_text)
+    assert bob_world.get_idea_obj(sports_swim_road)._weight == swim_weight
+    assert bob_world.get_idea_obj(sports_hike_road)._weight == hike_weight
+    assert bob_world.get_idea_obj(sports_bball_road)._weight == bball_weight
     summer_text = "summer"
-    summer_road = noa_world.make_road(sports_road, summer_text)
-    summer_swim_road = noa_world.make_road(summer_road, swim_text)
-    summer_hike_road = noa_world.make_road(summer_road, hike_text)
-    summer_bball_road = noa_world.make_road(summer_road, bball_text)
-    assert noa_world.idea_exists(summer_swim_road) is False
-    assert noa_world.idea_exists(summer_hike_road) is False
-    assert noa_world.idea_exists(summer_bball_road) is False
+    summer_road = bob_world.make_road(sports_road, summer_text)
+    summer_swim_road = bob_world.make_road(summer_road, swim_text)
+    summer_hike_road = bob_world.make_road(summer_road, hike_text)
+    summer_bball_road = bob_world.make_road(summer_road, bball_text)
+    assert bob_world.idea_exists(summer_swim_road) is False
+    assert bob_world.idea_exists(summer_hike_road) is False
+    assert bob_world.idea_exists(summer_bball_road) is False
 
     # WHEN / THEN
-    noa_world.add_idea(
+    bob_world.add_idea(
         idea_kid=ideaunit_shop(summer_text),
         parent_road=sports_road,
         adoptees=[swim_text, hike_text],
@@ -789,66 +789,66 @@ def test_WorldUnit_add_idea_bundling_SetsNewParentWithWeightEqualToSumOfAdoptedI
     )
 
     # THEN
-    assert noa_world.get_idea_obj(summer_road)._weight == swim_weight + hike_weight
-    assert noa_world.get_idea_obj(summer_swim_road)._weight == swim_weight
-    assert noa_world.get_idea_obj(summer_hike_road)._weight == hike_weight
-    assert noa_world.idea_exists(summer_bball_road) is False
-    assert noa_world.idea_exists(sports_swim_road) is False
-    assert noa_world.idea_exists(sports_hike_road) is False
-    assert noa_world.idea_exists(sports_bball_road)
+    assert bob_world.get_idea_obj(summer_road)._weight == swim_weight + hike_weight
+    assert bob_world.get_idea_obj(summer_swim_road)._weight == swim_weight
+    assert bob_world.get_idea_obj(summer_hike_road)._weight == hike_weight
+    assert bob_world.idea_exists(summer_bball_road) is False
+    assert bob_world.idea_exists(sports_swim_road) is False
+    assert bob_world.idea_exists(sports_hike_road) is False
+    assert bob_world.idea_exists(sports_bball_road)
 
 
 def test_WorldUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState():
-    noa_world = worldunit_shop("Noa")
+    bob_world = worldunit_shop("Bob")
     sports_text = "sports"
-    sports_road = noa_world.make_l1_road(sports_text)
-    noa_world.add_l1_idea(ideaunit_shop(sports_text, _weight=2))
+    sports_road = bob_world.make_l1_road(sports_text)
+    bob_world.add_l1_idea(ideaunit_shop(sports_text, _weight=2))
     swim_text = "swim"
     swim_weight = 3
-    noa_world.add_idea(ideaunit_shop(swim_text, _weight=swim_weight), sports_road)
+    bob_world.add_idea(ideaunit_shop(swim_text, _weight=swim_weight), sports_road)
     hike_text = "hike"
     hike_weight = 5
-    noa_world.add_idea(ideaunit_shop(hike_text, _weight=hike_weight), sports_road)
+    bob_world.add_idea(ideaunit_shop(hike_text, _weight=hike_weight), sports_road)
     bball_text = "bball"
     bball_weight = 7
-    noa_world.add_idea(ideaunit_shop(bball_text, _weight=bball_weight), sports_road)
+    bob_world.add_idea(ideaunit_shop(bball_text, _weight=bball_weight), sports_road)
 
-    sports_swim_road = noa_world.make_road(sports_road, swim_text)
-    sports_hike_road = noa_world.make_road(sports_road, hike_text)
-    sports_bball_road = noa_world.make_road(sports_road, bball_text)
-    assert noa_world.get_idea_obj(sports_swim_road)._weight == swim_weight
-    assert noa_world.get_idea_obj(sports_hike_road)._weight == hike_weight
-    assert noa_world.get_idea_obj(sports_bball_road)._weight == bball_weight
+    sports_swim_road = bob_world.make_road(sports_road, swim_text)
+    sports_hike_road = bob_world.make_road(sports_road, hike_text)
+    sports_bball_road = bob_world.make_road(sports_road, bball_text)
+    assert bob_world.get_idea_obj(sports_swim_road)._weight == swim_weight
+    assert bob_world.get_idea_obj(sports_hike_road)._weight == hike_weight
+    assert bob_world.get_idea_obj(sports_bball_road)._weight == bball_weight
     summer_text = "summer"
-    summer_road = noa_world.make_road(sports_road, summer_text)
-    summer_swim_road = noa_world.make_road(summer_road, swim_text)
-    summer_hike_road = noa_world.make_road(summer_road, hike_text)
-    summer_bball_road = noa_world.make_road(summer_road, bball_text)
-    assert noa_world.idea_exists(summer_swim_road) is False
-    assert noa_world.idea_exists(summer_hike_road) is False
-    assert noa_world.idea_exists(summer_bball_road) is False
-    noa_world.add_idea(
+    summer_road = bob_world.make_road(sports_road, summer_text)
+    summer_swim_road = bob_world.make_road(summer_road, swim_text)
+    summer_hike_road = bob_world.make_road(summer_road, hike_text)
+    summer_bball_road = bob_world.make_road(summer_road, bball_text)
+    assert bob_world.idea_exists(summer_swim_road) is False
+    assert bob_world.idea_exists(summer_hike_road) is False
+    assert bob_world.idea_exists(summer_bball_road) is False
+    bob_world.add_idea(
         idea_kid=ideaunit_shop(summer_text),
         parent_road=sports_road,
         adoptees=[swim_text, hike_text],
         bundling=True,
     )
-    assert noa_world.get_idea_obj(summer_road)._weight == swim_weight + hike_weight
-    assert noa_world.get_idea_obj(summer_swim_road)._weight == swim_weight
-    assert noa_world.get_idea_obj(summer_hike_road)._weight == hike_weight
-    assert noa_world.idea_exists(summer_bball_road) is False
-    assert noa_world.idea_exists(sports_swim_road) is False
-    assert noa_world.idea_exists(sports_hike_road) is False
-    assert noa_world.idea_exists(sports_bball_road)
-    print(f"{noa_world._idea_dict.keys()=}")
+    assert bob_world.get_idea_obj(summer_road)._weight == swim_weight + hike_weight
+    assert bob_world.get_idea_obj(summer_swim_road)._weight == swim_weight
+    assert bob_world.get_idea_obj(summer_hike_road)._weight == hike_weight
+    assert bob_world.idea_exists(summer_bball_road) is False
+    assert bob_world.idea_exists(sports_swim_road) is False
+    assert bob_world.idea_exists(sports_hike_road) is False
+    assert bob_world.idea_exists(sports_bball_road)
+    print(f"{bob_world._idea_dict.keys()=}")
 
     # WHEN
-    noa_world.del_idea_obj(road=summer_road, del_children=False)
+    bob_world.del_idea_obj(road=summer_road, del_children=False)
 
     # THEN
-    sports_swim_idea = noa_world.get_idea_obj(sports_swim_road)
-    sports_hike_idea = noa_world.get_idea_obj(sports_hike_road)
-    sports_bball_idea = noa_world.get_idea_obj(sports_bball_road)
+    sports_swim_idea = bob_world.get_idea_obj(sports_swim_road)
+    sports_hike_idea = bob_world.get_idea_obj(sports_hike_road)
+    sports_bball_idea = bob_world.get_idea_obj(sports_bball_road)
     assert sports_swim_idea._weight == swim_weight
     assert sports_hike_idea._weight == hike_weight
     assert sports_bball_idea._weight == bball_weight
@@ -943,8 +943,8 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
 
 def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
     # GIVEN
-    noa_text = "Noa"
-    x1_world = worldunit_shop(noa_text)
+    bob_text = "Bob"
+    x1_world = worldunit_shop(bob_text)
     xia_text = "Xia"
     zoa_text = "Zoa"
     x1_world.add_charunit(xia_text)
@@ -960,7 +960,7 @@ def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks
     x1_world.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
     x1_world_swim_idea = x1_world.get_idea_obj(swim_road)
     assert len(x1_world_swim_idea._awardlinks) == 2
-    x_world = worldunit_shop(noa_text)
+    x_world = worldunit_shop(bob_text)
     x_world.add_charunit(xia_text)
 
     # WHEN
@@ -973,8 +973,8 @@ def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks
 
 def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     # GIVEN
-    noa_text = "Noa"
-    x1_world = worldunit_shop(noa_text)
+    bob_text = "Bob"
+    x1_world = worldunit_shop(bob_text)
     xia_text = "Xia"
     zoa_text = "Zoa"
     x1_world.add_charunit(xia_text)
@@ -992,7 +992,7 @@ def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     assert len(x1_world_swim_idea._awardlinks) == 2
 
     # WHEN
-    x_world = worldunit_shop(noa_text)
+    x_world = worldunit_shop(bob_text)
     x_world.add_charunit(xia_text)
     x_world.add_l1_idea(x1_world_swim_idea, create_missing_ideas=False)
 

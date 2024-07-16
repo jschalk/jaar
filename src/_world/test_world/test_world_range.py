@@ -73,14 +73,14 @@ def test_worldAddingIdeaWithAddinCorrectlyTransformsRangeScenario2():
 
 def test_get_idea_ranged_kids_ReturnsAllChildren():
     # GIVEN
-    noa_world = worldunit_shop("Noa")
-    noa_world.set_time_hreg_ideas(c400_count=7)
+    bob_world = worldunit_shop("Bob")
+    bob_world.set_time_hreg_ideas(c400_count=7)
 
     # WHEN
-    time_road = noa_world.make_l1_road("time")
-    tech_road = noa_world.make_road(time_road, "tech")
-    week_road = noa_world.make_road(tech_road, "week")
-    ranged_ideas = noa_world.get_idea_ranged_kids(idea_road=week_road)
+    time_road = bob_world.make_l1_road("time")
+    tech_road = bob_world.make_road(time_road, "tech")
+    week_road = bob_world.make_road(tech_road, "week")
+    ranged_ideas = bob_world.get_idea_ranged_kids(idea_road=week_road)
 
     # # THEN
     assert len(ranged_ideas) == 7
@@ -88,16 +88,16 @@ def test_get_idea_ranged_kids_ReturnsAllChildren():
 
 def test_get_idea_ranged_kids_ReturnsSomeChildrenScen1():
     # GIVEN
-    noa_world = worldunit_shop("Noa")
-    noa_world.set_time_hreg_ideas(c400_count=7)
+    bob_world = worldunit_shop("Bob")
+    bob_world.set_time_hreg_ideas(c400_count=7)
 
     # WHEN
-    time_road = noa_world.make_l1_road("time")
-    tech_road = noa_world.make_road(time_road, "tech")
-    week_road = noa_world.make_road(tech_road, "week")
+    time_road = bob_world.make_l1_road("time")
+    tech_road = bob_world.make_road(time_road, "tech")
+    week_road = bob_world.make_road(tech_road, "week")
     begin_x = 1440
     close_x = 4 * 1440
-    ranged_ideas = noa_world.get_idea_ranged_kids(week_road, begin_x, close_x)
+    ranged_ideas = bob_world.get_idea_ranged_kids(week_road, begin_x, close_x)
 
     # THEN
     # for idea_x in ranged_ideas.values():
@@ -109,26 +109,26 @@ def test_get_idea_ranged_kids_ReturnsSomeChildrenScen1():
 
 def test_get_idea_ranged_kids_ReturnsSomeChildrenScen2():
     # GIVEN
-    noa_world = worldunit_shop("Noa")
-    noa_world.set_time_hreg_ideas(c400_count=7)
+    bob_world = worldunit_shop("Bob")
+    bob_world.set_time_hreg_ideas(c400_count=7)
 
     # WHEN THEN
-    time_road = noa_world.make_l1_road("time")
-    tech_road = noa_world.make_road(time_road, "tech")
-    week_road = noa_world.make_road(tech_road, "week")
-    assert len(noa_world.get_idea_ranged_kids(week_road, begin=0, close=1440)) == 1
-    assert len(noa_world.get_idea_ranged_kids(week_road, begin=0, close=2000)) == 2
-    assert len(noa_world.get_idea_ranged_kids(week_road, begin=0, close=3000)) == 3
+    time_road = bob_world.make_l1_road("time")
+    tech_road = bob_world.make_road(time_road, "tech")
+    week_road = bob_world.make_road(tech_road, "week")
+    assert len(bob_world.get_idea_ranged_kids(week_road, begin=0, close=1440)) == 1
+    assert len(bob_world.get_idea_ranged_kids(week_road, begin=0, close=2000)) == 2
+    assert len(bob_world.get_idea_ranged_kids(week_road, begin=0, close=3000)) == 3
 
 
 def test_get_idea_ranged_kids_ReturnsSomeChildrenScen3():
     # GIVEN
-    noa_world = worldunit_shop("Noa")
-    noa_world.set_time_hreg_ideas(c400_count=7)
+    bob_world = worldunit_shop("Bob")
+    bob_world.set_time_hreg_ideas(c400_count=7)
 
     # WHEN THEN
-    time_road = noa_world.make_l1_road("time")
-    tech_road = noa_world.make_road(time_road, "tech")
-    week_road = noa_world.make_road(tech_road, "week")
-    assert len(noa_world.get_idea_ranged_kids(idea_road=week_road, begin=0)) == 1
-    assert len(noa_world.get_idea_ranged_kids(idea_road=week_road, begin=1440)) == 1
+    time_road = bob_world.make_l1_road("time")
+    tech_road = bob_world.make_road(time_road, "tech")
+    week_road = bob_world.make_road(tech_road, "week")
+    assert len(bob_world.get_idea_ranged_kids(idea_road=week_road, begin=0)) == 1
+    assert len(bob_world.get_idea_ranged_kids(idea_road=week_road, begin=1440)) == 1

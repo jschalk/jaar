@@ -98,7 +98,7 @@ def test_normalized_table_CharUnitTable_Exists():
 #     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_BeliefLinkTable_charlink_Exists():
+def test_normalized_table_BeliefLinkTable_belieflink_Exists():
     # GIVEN
     config_category = get_normalized_world_table_build().get("world_char_belieflink")
     mapper = inspect(BeliefLinkTable)

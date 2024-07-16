@@ -614,49 +614,49 @@ def are_equal(x1: float, x2: float):
 
 def test_WorldUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenWorldIsEmpty():
     # GIVEN
-    noa_world = worldunit_shop("Noa")
+    yao_world = worldunit_shop("Yao")
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
     sue_charunit = charunit_shop(sue_text, 0.5, debtor_weight=2)
     bob_charunit = charunit_shop(bob_text, 1.5, debtor_weight=3)
     zia_charunit = charunit_shop(zia_text, 8, debtor_weight=5)
-    noa_world.set_charunit(sue_charunit)
-    noa_world.set_charunit(bob_charunit)
-    noa_world.set_charunit(zia_charunit)
-    noa_world_sue_char = noa_world.get_char(sue_text)
-    noa_world_bob_char = noa_world.get_char(bob_text)
-    noa_world_zia_char = noa_world.get_char(zia_text)
+    yao_world.set_charunit(sue_charunit)
+    yao_world.set_charunit(bob_charunit)
+    yao_world.set_charunit(zia_charunit)
+    yao_world_sue_char = yao_world.get_char(sue_text)
+    yao_world_bob_char = yao_world.get_char(bob_text)
+    yao_world_zia_char = yao_world.get_char(zia_text)
 
-    assert noa_world_sue_char._world_agenda_cred in [0, None]
-    assert noa_world_sue_char._world_agenda_debt in [0, None]
-    assert noa_world_bob_char._world_agenda_cred in [0, None]
-    assert noa_world_bob_char._world_agenda_debt in [0, None]
-    assert noa_world_zia_char._world_agenda_cred in [0, None]
-    assert noa_world_zia_char._world_agenda_debt in [0, None]
-    assert noa_world_sue_char._world_agenda_ratio_cred != 0.05
-    assert noa_world_sue_char._world_agenda_ratio_debt != 0.2
-    assert noa_world_bob_char._world_agenda_ratio_cred != 0.15
-    assert noa_world_bob_char._world_agenda_ratio_debt != 0.3
-    assert noa_world_zia_char._world_agenda_ratio_cred != 0.8
-    assert noa_world_zia_char._world_agenda_ratio_debt != 0.5
+    assert yao_world_sue_char._world_agenda_cred in [0, None]
+    assert yao_world_sue_char._world_agenda_debt in [0, None]
+    assert yao_world_bob_char._world_agenda_cred in [0, None]
+    assert yao_world_bob_char._world_agenda_debt in [0, None]
+    assert yao_world_zia_char._world_agenda_cred in [0, None]
+    assert yao_world_zia_char._world_agenda_debt in [0, None]
+    assert yao_world_sue_char._world_agenda_ratio_cred != 0.05
+    assert yao_world_sue_char._world_agenda_ratio_debt != 0.2
+    assert yao_world_bob_char._world_agenda_ratio_cred != 0.15
+    assert yao_world_bob_char._world_agenda_ratio_debt != 0.3
+    assert yao_world_zia_char._world_agenda_ratio_cred != 0.8
+    assert yao_world_zia_char._world_agenda_ratio_debt != 0.5
 
     # WHEN
-    noa_world.calc_world_metrics()
+    yao_world.calc_world_metrics()
 
     # THEN
-    assert noa_world_sue_char._world_agenda_cred == 0
-    assert noa_world_sue_char._world_agenda_debt == 0
-    assert noa_world_bob_char._world_agenda_cred == 0
-    assert noa_world_bob_char._world_agenda_debt == 0
-    assert noa_world_zia_char._world_agenda_cred == 0
-    assert noa_world_zia_char._world_agenda_debt == 0
-    assert noa_world_sue_char._world_agenda_ratio_cred == 0.05
-    assert noa_world_sue_char._world_agenda_ratio_debt == 0.2
-    assert noa_world_bob_char._world_agenda_ratio_cred == 0.15
-    assert noa_world_bob_char._world_agenda_ratio_debt == 0.3
-    assert noa_world_zia_char._world_agenda_ratio_cred == 0.8
-    assert noa_world_zia_char._world_agenda_ratio_debt == 0.5
+    assert yao_world_sue_char._world_agenda_cred == 0
+    assert yao_world_sue_char._world_agenda_debt == 0
+    assert yao_world_bob_char._world_agenda_cred == 0
+    assert yao_world_bob_char._world_agenda_debt == 0
+    assert yao_world_zia_char._world_agenda_cred == 0
+    assert yao_world_zia_char._world_agenda_debt == 0
+    assert yao_world_sue_char._world_agenda_ratio_cred == 0.05
+    assert yao_world_sue_char._world_agenda_ratio_debt == 0.2
+    assert yao_world_bob_char._world_agenda_ratio_cred == 0.15
+    assert yao_world_bob_char._world_agenda_ratio_debt == 0.3
+    assert yao_world_zia_char._world_agenda_ratio_cred == 0.8
+    assert yao_world_zia_char._world_agenda_ratio_debt == 0.5
 
 
 def test_examples_world_v001_has_chars():
