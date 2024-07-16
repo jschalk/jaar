@@ -252,7 +252,7 @@ def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value("parent_road"),
         create_missing_ideas=False,
-        create_missing_beliefs=False,
+        filter_out_missing_awardlinks_belief_ids=False,
         create_missing_ancestors=False,
     )
 

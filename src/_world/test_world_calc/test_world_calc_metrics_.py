@@ -3,8 +3,7 @@ from src._road.road import RoadUnit
 from src._world.world import worldunit_shop, get_from_json as worldunit_get_from_json
 from src._world.idea import IdeaUnit, ideaunit_shop
 from src._world.reason_idea import reasonunit_shop
-from src._world.beliefstory import beliefbox_shop, awardlink_shop
-from src._world.char import charlink_shop
+from src._world.beliefstory import awardlink_shop
 from src._world.reason_doer import doerunit_shop
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
@@ -556,7 +555,7 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
 
     zia_world.calc_world_metrics()
     assert len(zia_world._chars) == 0
-    assert len(zia_world._beliefs) == 0
+    assert len(zia_world.get_belief_ids_dict()) == 0
     assert len(zia_world._idearoot._kids) == 0
 
     clean_things_text = "cleaning things"
@@ -564,7 +563,7 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     clean_cookery_text = "clean cookery"
     clean_cookery_road = zia_world.make_road(clean_things_road, clean_cookery_text)
     clean_cookery_idea = ideaunit_shop(
-        _label=clean_cookery_text, _parent_road=clean_things_road
+        clean_cookery_text, _parent_road=clean_things_road
     )
     print(f"{clean_cookery_idea.get_road()=}")
     house_text = "house"
@@ -599,10 +598,10 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
 
     family_text = ",family"
     awardlink_z = awardlink_shop(belief_id=family_text)
-    clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
+    clean_cookery_idea.set_awardlink(awardlink_z)
 
     assert len(zia_world._chars) == 0
-    assert len(zia_world._beliefs) == 0
+    assert len(zia_world.get_belief_ids_dict()) == 0
     assert len(zia_world._idearoot._kids) == 1
     assert zia_world.get_idea_obj(daytime_road)._begin == 0
     assert zia_world.get_idea_obj(daytime_road)._close == 1440
@@ -625,9 +624,8 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     assert zia_world.get_idea_obj(cookery_dirty_road) != None
     assert zia_world.get_idea_obj(daytime_road)._begin == 0
     assert zia_world.get_idea_obj(daytime_road)._close == 1440
-    assert len(zia_world._beliefs) == 1
-    assert zia_world._beliefs.get(family_text) != None
-    assert zia_world._beliefs.get(family_text)._chars in (None, {})
+    assert len(zia_world.get_belief_ids_dict()) == 0
+    assert zia_world.get_belief_ids_dict().get(family_text) is None
 
     assert len(zia_world._idearoot._kids) == 3
 

@@ -207,7 +207,9 @@ def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     # WHEN
     noa2_world = worldunit_shop("Noa")
     noa2_world.add_charunit(xia_text)
-    noa2_world.add_l1_idea(noa1_world_swim_idea, create_missing_beliefs=False)
+    noa2_world.add_l1_idea(
+        noa1_world_swim_idea, filter_out_missing_awardlinks_belief_ids=False
+    )
 
     # THEN
     noa2_world_swim_idea = noa2_world.get_idea_obj(swim_road)

@@ -86,22 +86,6 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     assert awardlink_yao.belief_id == yao_text
     assert awardlink_sue.belief_id == sue_text
     assert awardlink_zia.belief_id == zia_text
-    all_beliefs = zia_worldunit._beliefs
-    beliefbox_yao = all_beliefs[yao_text]
-    beliefbox_sue = all_beliefs[sue_text]
-    beliefbox_zia = all_beliefs[zia_text]
-    assert beliefbox_yao._char_mirror == True
-    assert beliefbox_sue._char_mirror == True
-    assert beliefbox_zia._char_mirror == True
-
-
-def _check_all_objects_in_dict_are_correct_type(x_dict: dict, type_str: str) -> bool:
-    bool_x = True
-    for x_value in x_dict.values():
-        if type_str not in str(type(x_value)):
-            bool_x = False
-        print(f"/t{type(x_value)=} {type_str=} {str(type(x_value)).find(type_str)=}")
-    return bool_x
 
 
 def test_WorldUnit_calc_world_metrics_CreatesFullyPopulated_idea_dict():
@@ -307,6 +291,15 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_idea_dict():
     #         assert _check_all_objects_in_dict_are_correct_type(
     #             x_dict=reason.premises, type_str="src._worldunit.reason.PremiseUnit"
     #         )
+
+
+# def _check_all_objects_in_dict_are_correct_type(x_dict: dict, type_str: str) -> bool:
+#     bool_x = True
+#     for x_value in x_dict.values():
+#         if type_str not in str(type(x_value)):
+#             bool_x = False
+#         print(f"/t{type(x_value)=} {type_str=} {str(type(x_value)).find(type_str)=}")
+#     return bool_x
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyClears_bud_onset_bud_cease():

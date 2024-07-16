@@ -289,8 +289,34 @@ class BeliefStory(BeliefCore):
     def belieflink_exists(self, x_char_id: CharID) -> bool:
         return self.get_belieflink(x_char_id) != None
 
-    def del_charlink(self, char_id):
+    def del_belieflink(self, char_id):
         self._belieflinks.pop(char_id)
+
+    def reset_world_cred_debt(self):
+        self._world_cred = 0
+        self._world_debt = 0
+        self._world_agenda_cred = 0
+        self._world_agenda_debt = 0
+        for belieflink in self._belieflinks.values():
+            belieflink.reset_world_cred_debt()
+
+    def _set_belieflink_world_cred_debt(self):
+        belieflinks_credor_weight_sum = sum(
+            belieflink.credor_weight for belieflink in self._belieflinks.values()
+        )
+        belieflinks_debtor_weight_sum = sum(
+            belieflink.debtor_weight for belieflink in self._belieflinks.values()
+        )
+
+        for belieflink in self._belieflinks.values():
+            belieflink.set_world_cred_debt(
+                belieflinks_credor_weight_sum=belieflinks_credor_weight_sum,
+                belieflinks_debtor_weight_sum=belieflinks_debtor_weight_sum,
+                belief_world_cred=self._world_cred,
+                belief_world_debt=self._world_debt,
+                belief_world_agenda_cred=self._world_agenda_cred,
+                belief_world_agenda_debt=self._world_agenda_debt,
+            )
 
 
 def beliefstory_shop(belief_id: BeliefID, _road_delimiter: str = None) -> BeliefStory:

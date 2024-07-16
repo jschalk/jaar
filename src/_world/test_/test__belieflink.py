@@ -10,9 +10,9 @@ from pytest import raises as pytest_raises
 
 
 def test_BeliefID_exists():
-    bikers_belief_id = BeliefID(",bikers")
-    assert bikers_belief_id != None
-    assert str(type(bikers_belief_id)).find(".belieflink.BeliefID") > 0
+    ohio_belief_id = BeliefID(",ohio")
+    assert ohio_belief_id != None
+    assert str(type(ohio_belief_id)).find(".belieflink.BeliefID") > 0
 
 
 def test_BeliefCore_exists():
@@ -38,6 +38,12 @@ def test_BeliefLink_exists():
     assert swim_belieflink.debtor_weight == 1.0
     assert swim_belieflink._credor_pool is None
     assert swim_belieflink._debtor_pool is None
+    assert swim_belieflink._world_cred is None
+    assert swim_belieflink._world_debt is None
+    assert swim_belieflink._world_agenda_cred is None
+    assert swim_belieflink._world_agenda_debt is None
+    assert swim_belieflink._world_agenda_ratio_cred is None
+    assert swim_belieflink._world_agenda_ratio_debt is None
     assert swim_belieflink._char_id is None
 
 
@@ -46,7 +52,6 @@ def test_belieflink_shop_ReturnsCorrectObj():
     swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
-    yao_text = "Yao"
 
     # WHEN
     swim_belieflink = belieflink_shop(
@@ -60,6 +65,12 @@ def test_belieflink_shop_ReturnsCorrectObj():
     assert swim_belieflink.debtor_weight == swim_debtor_weight
     assert swim_belieflink._credor_pool == 0
     assert swim_belieflink._debtor_pool == 0
+    assert swim_belieflink._world_cred is None
+    assert swim_belieflink._world_debt is None
+    assert swim_belieflink._world_agenda_cred is None
+    assert swim_belieflink._world_agenda_debt is None
+    assert swim_belieflink._world_agenda_ratio_cred is None
+    assert swim_belieflink._world_agenda_ratio_debt is None
     assert swim_belieflink._char_id is None
 
 
@@ -232,3 +243,70 @@ def test_belieflinks_get_from_dict_ReturnsObj():
     # THEN
     assert before_swim_belieflinks_objs == after_swim_belieflinks_objs
     assert after_swim_belieflinks_objs.get(swim_text) == before_swim_belieflink
+
+
+def test_BeliefLink_reset_world_cred_debt_SetsAttrCorrectly():
+    # GIVEN
+    bob_belieflink = belieflink_shop("Bob")
+    bob_belieflink._world_cred = 0.27
+    bob_belieflink._world_debt = 0.37
+    bob_belieflink._world_agenda_cred = 0.41
+    bob_belieflink._world_agenda_debt = 0.51
+    bob_belieflink._world_agenda_ratio_cred = 0.433
+    bob_belieflink._world_agenda_ratio_debt = 0.533
+    assert bob_belieflink._world_cred == 0.27
+    assert bob_belieflink._world_debt == 0.37
+    assert bob_belieflink._world_agenda_cred == 0.41
+    assert bob_belieflink._world_agenda_debt == 0.51
+    assert bob_belieflink._world_agenda_ratio_cred == 0.433
+    assert bob_belieflink._world_agenda_ratio_debt == 0.533
+
+    # WHEN
+    bob_belieflink.reset_world_cred_debt()
+
+    # THEN
+    assert bob_belieflink._world_cred == 0
+    assert bob_belieflink._world_debt == 0
+    assert bob_belieflink._world_agenda_cred == 0
+    assert bob_belieflink._world_agenda_debt == 0
+    assert bob_belieflink._world_agenda_ratio_cred == 0
+    assert bob_belieflink._world_agenda_ratio_debt == 0
+
+
+def test_BeliefLink_set_world_cred_debt_SetsAttrCorrectly():
+    # GIVEN
+    yao_text = "Yao"
+    ohio_text = ",Ohio"
+    ohio_credor_weight = 3.0
+    belieflinks_sum_credor_weight = 60
+    belief_world_cred = 0.5
+    belief_world_agenda_cred = 0.98
+
+    ohio_debtor_weight = 13.0
+    belieflinks_sum_debtor_weight = 26.0
+    belief_world_debt = 0.9
+    belief_world_agenda_debt = 0.5151
+
+    ohio_yao_belieflink = belieflink_shop(
+        ohio_text, ohio_credor_weight, ohio_debtor_weight
+    )
+    assert ohio_yao_belieflink._world_cred is None
+    assert ohio_yao_belieflink._world_debt is None
+    assert ohio_yao_belieflink._world_agenda_cred is None
+    assert ohio_yao_belieflink._world_agenda_debt is None
+
+    # WHEN
+    ohio_yao_belieflink.set_world_cred_debt(
+        belieflinks_credor_weight_sum=belieflinks_sum_credor_weight,
+        belieflinks_debtor_weight_sum=belieflinks_sum_debtor_weight,
+        belief_world_cred=belief_world_cred,
+        belief_world_debt=belief_world_debt,
+        belief_world_agenda_cred=belief_world_agenda_cred,
+        belief_world_agenda_debt=belief_world_agenda_debt,
+    )
+
+    # THEN
+    assert ohio_yao_belieflink._world_cred == 0.025
+    assert ohio_yao_belieflink._world_debt == 0.45
+    assert ohio_yao_belieflink._world_agenda_cred == 0.049
+    assert ohio_yao_belieflink._world_agenda_debt == 0.25755

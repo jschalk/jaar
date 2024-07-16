@@ -232,7 +232,7 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_beliefholds
     assert x_doerheir._owner_id_doer
 
     # WHEN
-    swim_beliefstory.del_charlink(yao_text)
+    swim_beliefstory.del_belieflink(yao_text)
     x_doerheir.set_owner_id_doer(x_beliefstorys, yao_text)
 
     # THEN

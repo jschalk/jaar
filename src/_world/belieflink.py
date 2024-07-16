@@ -1,4 +1,4 @@
-from src._instrument.python import get_1_if_None as get1ifNone
+from src._instrument.python import get_1_if_None
 from src._road.road import CharID
 from dataclasses import dataclass
 
@@ -19,6 +19,12 @@ class BeliefLink(BeliefCore):
     # calculated fields
     _credor_pool: float = None
     _debtor_pool: float = None
+    _world_cred: float = None
+    _world_debt: float = None
+    _world_agenda_cred: float = None
+    _world_agenda_debt: float = None
+    _world_agenda_ratio_cred: float = None
+    _world_agenda_ratio_debt: float = None
     _char_id: CharID = None
 
     def set_credor_weight(self, x_credor_weight: float):
@@ -36,6 +42,33 @@ class BeliefLink(BeliefCore):
             "debtor_weight": self.debtor_weight,
         }
 
+    def reset_world_cred_debt(self):
+        self._world_cred = 0
+        self._world_debt = 0
+        self._world_agenda_cred = 0
+        self._world_agenda_debt = 0
+        self._world_agenda_ratio_cred = 0
+        self._world_agenda_ratio_debt = 0
+
+    def set_world_cred_debt(
+        self,
+        belieflinks_credor_weight_sum: float,
+        belieflinks_debtor_weight_sum: float,
+        belief_world_cred: float,
+        belief_world_debt: float,
+        belief_world_agenda_cred: float,
+        belief_world_agenda_debt: float,
+    ):
+        belief_world_cred = get_1_if_None(belief_world_cred)
+        belief_world_debt = get_1_if_None(belief_world_debt)
+        credor_ratio = self.credor_weight / belieflinks_credor_weight_sum
+        debtor_ratio = self.debtor_weight / belieflinks_debtor_weight_sum
+
+        self._world_cred = belief_world_cred * credor_ratio
+        self._world_debt = belief_world_debt * debtor_ratio
+        self._world_agenda_cred = belief_world_agenda_cred * credor_ratio
+        self._world_agenda_debt = belief_world_agenda_debt * debtor_ratio
+
 
 def belieflink_shop(
     belief_id: BeliefID,
@@ -45,8 +78,8 @@ def belieflink_shop(
 ) -> BeliefLink:
     return BeliefLink(
         belief_id=belief_id,
-        credor_weight=get1ifNone(credor_weight),
-        debtor_weight=get1ifNone(debtor_weight),
+        credor_weight=get_1_if_None(credor_weight),
+        debtor_weight=get_1_if_None(debtor_weight),
         _credor_pool=0,
         _debtor_pool=0,
         _char_id=_char_id,

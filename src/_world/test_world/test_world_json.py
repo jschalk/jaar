@@ -518,7 +518,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample(
     after_bob_world = worldunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_beliefstory = after_bob_world._beliefstorys.get(swim_text)
+    after_bob_beliefstory = after_bob_world.get_beliefstory(swim_text)
     assert after_bob_beliefstory._road_delimiter == slash_delimiter
 
 

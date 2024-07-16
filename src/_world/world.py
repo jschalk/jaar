@@ -502,6 +502,15 @@ class WorldUnit:
                 belief._world_cred += awardheir_world_cred
                 belief._world_debt += awardheir_world_debt
 
+        x_beliefstory = self.get_beliefstory(belief_id)
+        if (
+            x_beliefstory != None
+            and awardheir_world_cred != None
+            and awardheir_world_debt != None
+        ):
+            x_beliefstory._world_cred += awardheir_world_cred
+            x_beliefstory._world_debt += awardheir_world_debt
+
     def add_to_belief_world_agenda_cred_debt(
         self,
         belief_id: BeliefID,
@@ -516,6 +525,10 @@ class WorldUnit:
             ):
                 belief._world_agenda_cred += awardline_world_cred
                 belief._world_agenda_debt += awardline_world_debt
+        # x_beliefstory = self.get_beliefstory(belief_id)
+        # if awardline_world_cred != None and awardline_world_debt!=None:
+        #     x_beliefstory._world_agenda_cred += awardline_world_cred
+        #     x_beliefstory._world_agenda_debt += awardline_world_debt
 
     def add_to_charunit_world_cred_debt(
         self,
@@ -684,6 +697,9 @@ class WorldUnit:
     def get_beliefbox(self, x_belief_id: BeliefID) -> BeliefBox:
         return self._beliefs.get(x_belief_id)
 
+    def get_beliefstory(self, x_belief_id: BeliefID) -> BeliefStory:
+        return self._beliefstorys.get(x_belief_id)
+
     def _create_missing_chars(self, charlinks: dict[CharID, CharLink]):
         for charlink_x in charlinks.values():
             if self.get_char(charlink_x.char_id) is None:
@@ -701,39 +717,6 @@ class WorldUnit:
     def clear_charunits_belieflinks(self):
         for x_charunit in self._chars.values():
             x_charunit.clear_belieflinks()
-
-    def _migrate_beliefboxs_to_belieflinks(self):
-        self.clear_charunits_belieflinks()
-
-        for x_beliefbox in self._beliefs.values():
-            for x_charlink in x_beliefbox._chars.values():
-                x_charunit = self.get_char(x_charlink.char_id)
-                if x_charunit != None:
-                    x_belieflink = belieflink_shop(
-                        x_beliefbox.belief_id,
-                        credor_weight=x_charlink.credor_weight,
-                        debtor_weight=x_charlink.debtor_weight,
-                    )
-                    x_charunit.set_belieflink(x_belieflink)
-
-    def _migrate_belieflinks_to_beliefboxs(self):
-        for x_charunit in self._chars.values():
-            for x_belieflink in x_charunit._belieflinks.values():
-                x_belief_id = x_belieflink.belief_id
-                if self.beliefbox_exists(x_belief_id) == False:
-                    new_beliefbox = beliefbox_shop(
-                        x_belief_id, _road_delimiter=self._road_delimiter
-                    )
-                    self.set_beliefbox(new_beliefbox)
-                x_beliefbox = self.get_beliefbox(x_belief_id)
-                x_charlink = charlink_shop(
-                    x_charunit.char_id,
-                    credor_weight=x_belieflink.credor_weight,
-                    debtor_weight=x_belieflink.debtor_weight,
-                )
-                x_beliefbox.set_charlink(x_charlink)
-
-        self.clear_charunits_belieflinks()
 
     def set_time_facts(self, open: datetime = None, nigh: datetime = None) -> None:
         open_minutes = self.get_time_min_from_dt(dt=open) if open != None else None
@@ -975,7 +958,7 @@ class WorldUnit:
         self,
         idea_kid: IdeaUnit,
         create_missing_ideas: bool = None,
-        create_missing_beliefs: bool = None,
+        filter_out_missing_awardlinks_belief_ids: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -984,7 +967,7 @@ class WorldUnit:
             idea_kid=idea_kid,
             parent_road=self._real_id,
             create_missing_ideas=create_missing_ideas,
-            create_missing_beliefs=create_missing_beliefs,
+            filter_out_missing_awardlinks_belief_ids=filter_out_missing_awardlinks_belief_ids,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -994,7 +977,7 @@ class WorldUnit:
         self,
         idea_kid: IdeaUnit,
         parent_road: RoadUnit,
-        create_missing_beliefs: bool = None,
+        filter_out_missing_awardlinks_belief_ids: bool = None,
         create_missing_ideas: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -1017,7 +1000,7 @@ class WorldUnit:
             idea_kid._world_real_id = self._real_id
         if idea_kid._coin != self._coin:
             idea_kid._coin = self._coin
-        if not create_missing_beliefs:
+        if not filter_out_missing_awardlinks_belief_ids:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
 
@@ -1050,14 +1033,12 @@ class WorldUnit:
 
         if create_missing_ideas:
             self._create_missing_ideas(road=kid_road)
-        if create_missing_beliefs:
-            self._create_missing_beliefs_chars(awardlinks=idea_kid._awardlinks)
 
     def _get_filtered_awardlinks_idea(self, x_idea: IdeaUnit) -> IdeaUnit:
         _awardlinks_to_delete = [
             _awardlink_belief_id
             for _awardlink_belief_id in x_idea._awardlinks.keys()
-            if self.get_beliefbox(_awardlink_belief_id) is None
+            if self.get_belief_ids_dict().get(_awardlink_belief_id) is None
         ]
         for _awardlink_belief_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_belief_id)
@@ -1066,18 +1047,11 @@ class WorldUnit:
             _beliefholds_to_delete = [
                 _beliefhold_belief_id
                 for _beliefhold_belief_id in x_idea._doerunit._beliefholds
-                if self.get_beliefbox(_beliefhold_belief_id) is None
+                if self.get_belief_ids_dict().get(_beliefhold_belief_id) is None
             ]
             for _beliefhold_belief_id in _beliefholds_to_delete:
                 x_idea._doerunit.del_beliefhold(_beliefhold_belief_id)
-
         return x_idea
-
-    def _create_missing_beliefs_chars(self, awardlinks: dict[BeliefID, AwardLink]):
-        for awardlink_x in awardlinks.values():
-            if self.get_beliefbox(awardlink_x.belief_id) is None:
-                beliefbox_x = beliefbox_shop(belief_id=awardlink_x.belief_id, _chars={})
-                self.set_beliefbox(y_beliefbox=beliefbox_x)
 
     def _create_missing_ideas(self, road):
         self.calc_world_metrics()
@@ -1482,8 +1456,10 @@ class WorldUnit:
             )
 
     def _reset_beliefboxs_world_cred_debt(self):
-        for awardlink_obj in self._beliefs.values():
-            awardlink_obj.reset_world_cred_debt()
+        for beliefbox_obj in self._beliefs.values():
+            beliefbox_obj.reset_world_cred_debt()
+        for beliefstory_obj in self._beliefstorys.values():
+            beliefstory_obj.reset_world_cred_debt()
 
     def _set_beliefboxs_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
         for awardlink_obj in awardheirs.values():
@@ -1521,6 +1497,16 @@ class WorldUnit:
                     world_agenda_cred=charlink._world_agenda_cred,
                     world_agenda_debt=charlink._world_agenda_debt,
                 )
+        for x_beliefstory in self._beliefstorys.values():
+            x_beliefstory._set_belieflink_world_cred_debt()
+            # for x_belieflink in x_beliefstory._belieflinks.values():
+            #     self.add_to_charunit_world_cred_debt(
+            #         charunit_char_id=x_belieflink._char_id,
+            #         world_cred=x_belieflink._world_cred,
+            #         world_debt=x_belieflink._world_debt,
+            #         world_agenda_cred=x_belieflink._world_agenda_cred,
+            #         world_agenda_debt=x_belieflink._world_agenda_debt,
+            #     )
 
     def _set_world_agenda_ratio_cred_debt(self):
         world_agenda_ratio_cred_sum = 0
@@ -1743,6 +1729,7 @@ class WorldUnit:
         for x_char_id, char_debtor_pool in debtor_allot.items():
             self.get_char(x_char_id).set_debtor_pool(char_debtor_pool)
         self._create_beliefstorys_metrics()
+        self._reset_charunit_world_cred_debt()
 
     def _set_tree_traverse_starting_point(self):
         self._rational = False
@@ -1864,7 +1851,7 @@ class WorldUnit:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_belief_id in x_econ_idea._healerhold._belief_ids:
-                x_beliefstory = self._beliefstorys.get(x_belief_id)
+                x_beliefstory = self.get_beliefstory(x_belief_id)
                 for x_char_id in x_beliefstory._belieflinks.keys():
                     if _healers_dict.get(x_char_id) is None:
                         _healers_dict[x_char_id] = {x_econ_road: x_econ_idea}
@@ -1880,7 +1867,6 @@ class WorldUnit:
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
-        self._reset_beliefboxs_world_cred_debt()
         self._reset_beliefboxs_world_cred_debt()
         self._reset_charunit_world_cred_debt()
 
@@ -1931,7 +1917,6 @@ class WorldUnit:
         return x_dict
 
     def get_dict(self) -> dict[str, str]:
-        # self._migrate_beliefboxs_to_belieflinks()
         x_dict = {
             "_chars": self.get_charunits_dict(),
             "_originunit": self._originunit.get_dict(),
@@ -2047,7 +2032,7 @@ class WorldUnit:
         self.add_idea(
             idea_kid=idea_kid,
             parent_road=self.make_road(idea_kid._parent_road),
-            create_missing_beliefs=True,
+            filter_out_missing_awardlinks_belief_ids=True,
             create_missing_ideas=True,
         )
 
@@ -2127,7 +2112,6 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     for x_charunit in x_chars:
         x_world.set_charunit(x_charunit)
     x_world._originunit = obj_from_world_dict(world_dict, "_originunit")
-
     set_idearoot_from_world_dict(x_world, world_dict)
     x_world.calc_world_metrics()  # clean up tree traverse defined fields
     return x_world
@@ -2213,11 +2197,7 @@ def obj_from_world_dict(
             else originunit_shop()
         )
     elif dict_key == "_chars":
-        return (
-            charunits_get_from_dict(x_dict[dict_key], _road_delimiter)
-            if x_dict.get(dict_key) != None
-            else charunits_get_from_dict(x_dict[dict_key], _road_delimiter)
-        )
+        return charunits_get_from_dict(x_dict[dict_key], _road_delimiter)
     elif dict_key == "_max_tree_traverse":
         return (
             x_dict[dict_key]

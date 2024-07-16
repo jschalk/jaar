@@ -277,32 +277,6 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     # assert world_debt_sum == 1
 
 
-def test_WorldUnit_add_idea_CreatesMissingBeliefs():
-    # GIVEN
-    bob_text = "Bob"
-    x_world = worldunit_shop(bob_text)
-    casa_road = x_world.make_l1_road("casa")
-    new_idea_parent_road = x_world.make_road(casa_road, "cleaning")
-    clean_cookery_text = "clean_cookery"
-    clean_cookery_idea = ideaunit_shop(
-        _weight=40, _label=clean_cookery_text, pledge=True
-    )
-
-    family_text = ",family"
-    awardlink_z = awardlink_shop(family_text)
-    clean_cookery_idea.set_awardlink(awardlink=awardlink_z)
-    assert len(x_world._beliefs) == 0
-    assert x_world.get_beliefbox(family_text) is None
-
-    # WHEN
-    x_world.add_l1_idea(clean_cookery_idea, create_missing_beliefs=True)
-
-    # THEN
-    assert len(x_world._beliefs) == 1
-    assert x_world.get_beliefbox(family_text) != None
-    assert x_world.get_beliefbox(family_text)._chars in (None, {})
-
-
 def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
     # GIVEN
     noa_text = "Noa"
@@ -393,7 +367,7 @@ def test_WorldUnit_add_idea_DoesNotOverwriteBeliefs():
     bob_world.add_idea(
         idea_kid=clean_cookery_idea,
         parent_road=new_idea_parent_road,
-        create_missing_beliefs=True,
+        filter_out_missing_awardlinks_belief_ids=True,
     )
 
     # THEN
