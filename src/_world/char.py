@@ -19,10 +19,6 @@ class InvalidCharException(Exception):
     pass
 
 
-class _bit_RatioException(Exception):
-    pass
-
-
 @dataclass
 class CharCore:
     char_id: CharID = None

@@ -353,33 +353,6 @@ class WorldUnit:
         all_ideas_set = set(self.get_idea_tree_ordered_road_list())
         return all_ideas_set == all_ideas_set.intersection(pledge_idea_assoc_set)
 
-    def _are_all_chars_beliefs_are_in_idea_kid(self, road: RoadUnit) -> bool:
-        idea_kid = self.get_idea_obj(road)
-        # get dict of all idea awardheirs
-        awardheir_list = idea_kid._awardheirs.keys()
-        awardheir_dict = {
-            awardheir_belief_id: 1 for awardheir_belief_id in awardheir_list
-        }
-        non_single_beliefboxs = {
-            beliefbox.belief_id: beliefbox
-            for beliefbox in self._beliefs.values()
-            if beliefbox._char_mirror != True
-        }
-        # check all non_char_mirror_beliefboxs are in awardheirs
-        for non_single_belief in non_single_beliefboxs.values():
-            if awardheir_dict.get(non_single_belief.belief_id) is None:
-                return False
-
-        # get dict of all charlinks that are in all awardheirs
-        awardheir_charunits = {}
-        for awardheir_char_id in awardheir_dict:
-            beliefbox = self.get_beliefbox(awardheir_char_id)
-            for charlink in beliefbox._chars.values():
-                awardheir_charunits[charlink.char_id] = self.get_char(charlink.char_id)
-
-        # check all world._chars are in awardheir_charunits
-        return len(self._chars) == len(awardheir_charunits)
-
     def get_time_min_from_dt(self, dt: datetime) -> float:
         x_hregidea = HregIdea(self._road_delimiter)
         return x_hregidea.get_time_min_from_dt(dt=dt)
@@ -1685,13 +1658,15 @@ class WorldUnit:
         self._idearoot._level = 0
         self._idearoot.set_parent_road("")
         self._idearoot.set_idearoot_inherit_reasonheirs()
-        self._idearoot.set_doerheir(None, self._beliefs)
+        self._idearoot.set_doerheir(None, self._beliefstorys)
         self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
         self._idearoot._weight = 1
         tree_traverse_count = self._tree_traverse_count
-        self._idearoot.set_active(tree_traverse_count, self._beliefs, self._owner_id)
+        self._idearoot.set_active(
+            tree_traverse_count, self._beliefstorys, self._owner_id
+        )
         self._idearoot.set_bud_share(0, self._bud_pool, self._bud_pool)
         self._idearoot.set_awardheirs_world_cred_debt()
         self._idearoot.set_ancestor_pledge_count(0, False)
@@ -1714,11 +1689,11 @@ class WorldUnit:
         idea_kid.set_parent_road(parent_idea.get_road())
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
-        idea_kid.set_doerheir(parent_idea._doerheir, self._beliefs)
+        idea_kid.set_doerheir(parent_idea._doerheir, self._beliefstorys)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
-        idea_kid.set_active(tree_traverse_count, self._beliefs, self._owner_id)
+        idea_kid.set_active(tree_traverse_count, self._beliefstorys, self._owner_id)
         idea_kid.set_bud_share(bud_onset, bud_cease, self._bud_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
@@ -1889,8 +1864,8 @@ class WorldUnit:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_belief_id in x_econ_idea._healerhold._belief_ids:
-                x_beliefbox = self.get_beliefbox(x_belief_id)
-                for x_char_id in x_beliefbox._chars.keys():
+                x_beliefstory = self._beliefstorys.get(x_belief_id)
+                for x_char_id in x_beliefstory._belieflinks.keys():
                     if _healers_dict.get(x_char_id) is None:
                         _healers_dict[x_char_id] = {x_econ_road: x_econ_idea}
                     else:
@@ -2151,7 +2126,6 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_chars = obj_from_world_dict(world_dict, "_chars", x_road_delimiter).values()
     for x_charunit in x_chars:
         x_world.set_charunit(x_charunit)
-    x_world._migrate_belieflinks_to_beliefboxs()
     x_world._originunit = obj_from_world_dict(world_dict, "_originunit")
 
     set_idearoot_from_world_dict(x_world, world_dict)

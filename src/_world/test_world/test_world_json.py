@@ -518,8 +518,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample(
     after_bob_world = worldunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_beliefbox = after_bob_world.get_beliefbox(swim_text)
-    assert after_bob_beliefbox._road_delimiter == slash_delimiter
+    after_bob_beliefstory = after_bob_world._beliefstorys.get(swim_text)
+    assert after_bob_beliefstory._road_delimiter == slash_delimiter
 
 
 def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():
@@ -538,51 +538,57 @@ def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():
     assert x1_world._weight == x2_world._weight
     assert x1_world._idearoot._weight == 1
     assert x1_world._idearoot._weight == x2_world._idearoot._weight
-    # assert x1_world._idearoot._kids == x2_world._idearoot._kids
+    assert x1_world._idearoot._kids == x2_world._idearoot._kids
 
 
-# def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
-#     # GIVEN
-#     x1_world = example_worlds_world_v001()
-#     x2_world = example_worlds_get_world_x1_3levels_1reason_1facts()
-#     x3_world = example_worlds_get_world_base_time_example()
-#     print(f"{x1_world._owner_id}")
-#     print(f"{x2_world._owner_id}")
-#     print(f"{x3_world._owner_id}")
+def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
+    # GIVEN
+    x1_world = example_worlds_world_v001()
+    x2_world = example_worlds_get_world_x1_3levels_1reason_1facts()
+    x3_world = example_worlds_get_world_base_time_example()
+    print(f"{x1_world._owner_id}")
+    print(f"{x2_world._owner_id}")
+    print(f"{x3_world._owner_id}")
 
-#     cn_dict_of_dicts = {
-#         x1_world._owner_id: x1_world.get_dict(),
-#         x2_world._owner_id: x2_world.get_dict(),
-#         x3_world._owner_id: x3_world.get_dict(),
-#     }
-#     x1_world.clear_charunits_belieflinks()
-#     x2_world.clear_charunits_belieflinks()
-#     x3_world.clear_charunits_belieflinks()
+    cn_dict_of_dicts = {
+        x1_world._owner_id: x1_world.get_dict(),
+        x2_world._owner_id: x2_world.get_dict(),
+        x3_world._owner_id: x3_world.get_dict(),
+    }
 
-#     # WHEN
-#     ccn_dict_of_obj = get_dict_of_world_from_dict(cn_dict_of_dicts)
+    # WHEN
+    ccn_dict_of_obj = get_dict_of_world_from_dict(cn_dict_of_dicts)
 
-#     # THEN
-#     assert ccn_dict_of_obj.get(x1_world._owner_id) != None
-#     assert ccn_dict_of_obj.get(x2_world._owner_id) != None
-#     assert ccn_dict_of_obj.get(x3_world._owner_id) != None
-#     cc1_idea_root = ccn_dict_of_obj.get(x1_world._owner_id)._idearoot
-#     assert cc1_idea_root._originunit == x1_world._idearoot._originunit
-#     assert ccn_dict_of_obj.get(x1_world._owner_id)._idea_dict == x1_world._idea_dict
-#     assert ccn_dict_of_obj.get(x1_world._owner_id) == x1_world
-#     ccn2_world = ccn_dict_of_obj.get(x2_world._owner_id)
-#     assert ccn2_world._idearoot._label == x2_world._idearoot._label
-#     assert ccn2_world._idearoot._parent_road == x2_world._idearoot._parent_road
-#     assert ccn2_world._idearoot._coin == x2_world._idearoot._coin
-#     shave_road = ccn2_world.make_l1_road("shave")
-#     week_road = ccn2_world.make_l1_road("weekdays")
-#     assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)
-#     assert ccn2_world.get_idea_obj(week_road) == x2_world.get_idea_obj(week_road)
-#     assert ccn2_world._idearoot == x2_world._idearoot
-#     print(f"{ccn2_world._idea_dict.keys()=}")
-#     print(f"{x2_world._idea_dict.keys()=}")
-#     assert ccn2_world._idea_dict == x2_world._idea_dict
-#     assert ccn2_world == x2_world
-#     ccn_world3 = ccn_dict_of_obj.get(x3_world._owner_id)
-#     x3_world.calc_world_metrics()
-#     assert ccn_world3 == x3_world
+    # THEN
+    assert ccn_dict_of_obj.get(x1_world._owner_id) != None
+    assert ccn_dict_of_obj.get(x2_world._owner_id) != None
+    assert ccn_dict_of_obj.get(x3_world._owner_id) != None
+
+    ccn2_world = ccn_dict_of_obj.get(x2_world._owner_id)
+    assert ccn2_world._idearoot._label == x2_world._idearoot._label
+    assert ccn2_world._idearoot._parent_road == x2_world._idearoot._parent_road
+    assert ccn2_world._idearoot._coin == x2_world._idearoot._coin
+    shave_road = ccn2_world.make_l1_road("shave")
+    week_road = ccn2_world.make_l1_road("weekdays")
+    assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)
+    assert ccn2_world.get_idea_obj(week_road) == x2_world.get_idea_obj(week_road)
+    assert ccn2_world._idearoot == x2_world._idearoot
+    print(f"{ccn2_world._idea_dict.keys()=}")
+    print(f"{x2_world._idea_dict.keys()=}")
+    assert ccn2_world._idea_dict == x2_world._idea_dict
+    assert ccn2_world == x2_world
+
+    ccn_world3 = ccn_dict_of_obj.get(x3_world._owner_id)
+    x3_world.calc_world_metrics()
+    assert ccn_world3 == x3_world
+
+    cc1_idea_root = ccn_dict_of_obj.get(x1_world._owner_id)._idearoot
+    assert cc1_idea_root._originunit == x1_world._idearoot._originunit
+    ccn_world1 = ccn_dict_of_obj.get(x1_world._owner_id)
+    assert ccn_world1._idea_dict == x1_world._idea_dict
+    philipa_text = "Philipa"
+    ccn_philipa_charunit = ccn_world1.get_char(philipa_text)
+    x1_philipa_charunit = x1_world.get_char(philipa_text)
+    assert ccn_philipa_charunit._belieflinks == x1_philipa_charunit._belieflinks
+    assert ccn_world1 == x1_world
+    assert ccn_dict_of_obj.get(x1_world._owner_id) == x1_world

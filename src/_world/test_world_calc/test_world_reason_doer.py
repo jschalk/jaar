@@ -36,7 +36,7 @@ def test_world_idearoot_doerunit_CorrectlySets_idea_doerheir():
     # THEN
     x_doerheir = doerheir_shop()
     x_doerheir.set_beliefholds(
-        parent_doerheir=None, doerunit=x_doerunit, world_beliefs=None
+        parent_doerheir=None, doerunit=x_doerunit, world_beliefstorys=None
     )
     assert tim_world._idearoot._doerheir != None
     assert tim_world._idearoot._doerheir == x_doerheir
@@ -67,9 +67,9 @@ def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     x_doerheir.set_beliefholds(
         parent_doerheir=None,
         doerunit=x_doerunit,
-        world_beliefs=bob_world._beliefs,
+        world_beliefstorys=bob_world._beliefstorys,
     )
-    x_doerheir.set_owner_id_doer(bob_world._beliefs, bob_world._owner_id)
+    x_doerheir.set_owner_id_doer(bob_world._beliefstorys, bob_world._owner_id)
     print(f"{x_doerheir._owner_id_doer=}")
     assert run_idea._doerheir._owner_id_doer == x_doerheir._owner_id_doer
     assert run_idea._doerheir == x_doerheir
@@ -100,9 +100,9 @@ def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     x_doerheir.set_beliefholds(
         parent_doerheir=None,
         doerunit=x_doerunit,
-        world_beliefs=bob_world._beliefs,
+        world_beliefstorys=bob_world._beliefstorys,
     )
-    x_doerheir.set_owner_id_doer(bob_world._beliefs, bob_world._owner_id)
+    x_doerheir.set_owner_id_doer(bob_world._beliefstorys, bob_world._owner_id)
     print(f"{x_doerheir._owner_id_doer=}")
     assert run_idea._doerheir._owner_id_doer == x_doerheir._owner_id_doer
     assert run_idea._doerheir == x_doerheir
@@ -139,7 +139,7 @@ def test_world_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     x_doerheir.set_beliefholds(
         parent_doerheir=None,
         doerunit=x_doerunit,
-        world_beliefs=noa_world._beliefs,
+        world_beliefstorys=noa_world._beliefstorys,
     )
     assert four_idea._doerheir != None
     assert four_idea._doerheir == x_doerheir

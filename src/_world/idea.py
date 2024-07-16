@@ -938,13 +938,13 @@ class IdeaUnit:
     def set_doerheir(
         self,
         parent_doerheir: DoerHeir,
-        world_beliefs: dict[BeliefID, BeliefStory],
+        world_beliefstorys: dict[BeliefID, BeliefStory],
     ):
         self._doerheir = doerheir_shop()
         self._doerheir.set_beliefholds(
             parent_doerheir=parent_doerheir,
             doerunit=self._doerunit,
-            world_beliefs=world_beliefs,
+            world_beliefstorys=world_beliefstorys,
         )
 
     def get_doerunit_dict(self):

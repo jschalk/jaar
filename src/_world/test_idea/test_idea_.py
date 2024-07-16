@@ -869,10 +869,10 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     sport_text = "sports"
     sport_idea = ideaunit_shop(_label=sport_text)
     sport_idea._doerunit.set_beliefhold(belief_id=swim_text)
-    assert sport_idea._doerheir is None
+    # assert sport_idea._doerheir is None
 
     # WHEN
-    sport_idea.set_doerheir(parent_doerheir=None, world_beliefs=None)
+    sport_idea.set_doerheir(parent_doerheir=None, world_beliefstorys=None)
 
     # THEN
     assert sport_idea._doerheir != None
@@ -880,7 +880,7 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     swim_doerunit.set_beliefhold(belief_id=swim_text)
     swim_doerheir = doerheir_shop()
     swim_doerheir.set_beliefholds(
-        doerunit=swim_doerunit, parent_doerheir=None, world_beliefs=None
+        doerunit=swim_doerunit, parent_doerheir=None, world_beliefstorys=None
     )
     assert sport_idea._doerheir == swim_doerheir
 

@@ -320,9 +320,9 @@ def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
     yao_voice0_bob = yao_voice0_chars.get("Bob")
     print(f"{yao_action_bob=}")
     print(f"{yao_voice0_bob=}")
-    # assert yao_action_bob == yao_voice0_bob
+    assert yao_action_bob == yao_voice0_bob
     assert yao_action_chars.keys() == yao_voice0_chars.keys()
-    # assert yao_action_chars == yao_voice0_chars
+    assert yao_action_chars == yao_voice0_chars
     assert len(yao_action.get_dict().get("_chars")) == 3
     assert len(yao_action._idea_dict) == 10
     print(f"{yao_action._idea_dict.keys()=}")
@@ -397,9 +397,9 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_voice0_bob = yao_voice0_chars.get("Bob")
     print(f"{yao_action_bob=}")
     print(f"{yao_voice0_bob=}")
-    # assert yao_action_bob == yao_voice0_bob
+    assert yao_action_bob == yao_voice0_bob
     assert yao_action_chars.keys() == yao_voice0_chars.keys()
-    # assert yao_action_chars == yao_voice0_chars
+    assert yao_action_chars == yao_voice0_chars
     assert len(yao_action.get_dict().get("_chars")) == 3
     assert len(yao_action._idea_dict) == 4
     print(f"{yao_action._idea_dict.keys()=}")

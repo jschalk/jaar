@@ -749,11 +749,8 @@ def test_agenda_IsSetByDoerUnit_2CharBelief():
     sue_text = "Sue"
     bob_world.add_charunit(sue_text)
     run_text = ",runners"
-    run_belief = beliefbox_shop(run_text)
-    run_belief.set_charlink(charlink_shop(char_id=sue_text))
-    bob_world.set_beliefbox(run_belief)
-    # sue_charunit = bob_world.get_char(sue_text)
-    # sue_charunit.add_belieflink(run_text)
+    sue_charunit = bob_world.get_char(sue_text)
+    sue_charunit.add_belieflink(run_text)
 
     run_doerunit = doerunit_shop()
     run_doerunit.set_beliefhold(belief_id=run_text)
@@ -766,8 +763,8 @@ def test_agenda_IsSetByDoerUnit_2CharBelief():
     assert len(bob_world.get_agenda_dict()) == 0
 
     # WHEN
-    run_belief.set_charlink(charlink_shop(char_id=bob_text))
-    bob_world.set_beliefbox(run_belief)
+    bob_charunit = bob_world.get_char(bob_text)
+    bob_charunit.add_belieflink(run_text)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 1
