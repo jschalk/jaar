@@ -1,21 +1,21 @@
 from src._world.world import worldunit_shop
 
 
-def test_create_beliefstorys_metrics_SetsAttrScenario0():
+def test_create_beliefboxs_metrics_SetsAttrScenario0():
     # GIVEN
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
-    sue_worldunit._beliefstorys = None
-    assert sue_worldunit._beliefstorys is None
+    sue_worldunit._beliefboxs = None
+    assert sue_worldunit._beliefboxs is None
 
     # WHEN
-    sue_worldunit._create_beliefstorys_metrics()
+    sue_worldunit._create_beliefboxs_metrics()
 
     # THEN
-    assert sue_worldunit._beliefstorys == {}
+    assert sue_worldunit._beliefboxs == {}
 
 
-def test_create_beliefstorys_metrics_SetsAttrScenario1():
+def test_create_beliefboxs_metrics_SetsAttrScenario1():
     # GIVEN
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
@@ -31,33 +31,33 @@ def test_create_beliefstorys_metrics_SetsAttrScenario1():
     yao_yao_belieflink._debtor_pool = 44
     yao_ohio_belieflink._credor_pool = 77
     yao_ohio_belieflink._debtor_pool = 88
-    # assert sue_worldunit._beliefstorys == {}
+    # assert sue_worldunit._beliefboxs == {}
 
     # WHEN
-    sue_worldunit._create_beliefstorys_metrics()
+    sue_worldunit._create_beliefboxs_metrics()
 
     # THEN
-    assert len(sue_worldunit._beliefstorys) == 2
-    assert set(sue_worldunit._beliefstorys.keys()) == {yao_text, ohio_text}
-    ohio_beliefstory = sue_worldunit.get_beliefstory(ohio_text)
-    assert ohio_beliefstory._credor_pool == 77
-    assert ohio_beliefstory._debtor_pool == 88
-    yao_beliefstory = sue_worldunit.get_beliefstory(yao_text)
-    assert yao_beliefstory._credor_pool == 66
-    assert yao_beliefstory._debtor_pool == 44
+    assert len(sue_worldunit._beliefboxs) == 2
+    assert set(sue_worldunit._beliefboxs.keys()) == {yao_text, ohio_text}
+    ohio_beliefbox = sue_worldunit.get_beliefbox(ohio_text)
+    assert ohio_beliefbox._credor_pool == 77
+    assert ohio_beliefbox._debtor_pool == 88
+    yao_beliefbox = sue_worldunit.get_beliefbox(yao_text)
+    assert yao_beliefbox._credor_pool == 66
+    assert yao_beliefbox._debtor_pool == 44
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario0():
     # GIVEN
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
-    assert sue_worldunit._beliefstorys == {}
+    assert sue_worldunit._beliefboxs == {}
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
 
     # THEN
-    assert sue_worldunit._beliefstorys == {}
+    assert sue_worldunit._beliefboxs == {}
 
 
 def test_WorldUnit_calc_charunit_metrics_Clears_beliefs():
@@ -65,16 +65,16 @@ def test_WorldUnit_calc_charunit_metrics_Clears_beliefs():
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     sue_worldunit._beliefs = "yeah"
-    sue_worldunit._beliefstorys = "ohio"
+    sue_worldunit._beliefboxs = "ohio"
     assert sue_worldunit._beliefs != {}
-    assert sue_worldunit._beliefstorys != {}
+    assert sue_worldunit._beliefboxs != {}
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
 
     # THEN
     assert sue_worldunit._beliefs != {}
-    assert sue_worldunit._beliefstorys == {}
+    assert sue_worldunit._beliefboxs == {}
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():
@@ -89,7 +89,7 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():
     assert yao_charunit._debtor_pool == 0
     assert yao_charunit.get_belieflink(yao_text)._credor_pool == 0
     assert yao_charunit.get_belieflink(yao_text)._debtor_pool == 0
-    # assert sue_worldunit._beliefstorys == {}
+    # assert sue_worldunit._beliefboxs == {}
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
@@ -106,9 +106,9 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():
     assert yao_belieflink._debtor_pool == sue_worldunit._debtor_respect
     assert yao_belieflink._credor_pool == 1000000000
     assert yao_belieflink._debtor_pool == 1000000000
-    yao_beliefstory = sue_worldunit.get_beliefstory(yao_text)
-    beliefstory_yao_belieflink = yao_beliefstory.get_belieflink(yao_text)
-    assert yao_belieflink == beliefstory_yao_belieflink
+    yao_beliefbox = sue_worldunit.get_beliefbox(yao_text)
+    beliefbox_yao_belieflink = yao_beliefbox.get_belieflink(yao_text)
+    assert yao_belieflink == beliefbox_yao_belieflink
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
@@ -148,9 +148,9 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
     assert yao_ohio_belieflink._debtor_pool == sue_worldunit._debtor_respect * 0.2
     assert yao_ohio_belieflink._credor_pool == 750000000
     assert yao_ohio_belieflink._debtor_pool == 200000000
-    assert len(sue_worldunit._beliefstorys) == 2
-    ohio_beliefstory = sue_worldunit.get_beliefstory(ohio_text)
-    assert len(ohio_beliefstory._belieflinks) == 1
+    assert len(sue_worldunit._beliefboxs) == 2
+    ohio_beliefbox = sue_worldunit.get_beliefbox(ohio_text)
+    assert len(ohio_beliefbox._belieflinks) == 1
 
 
 def test_WorldUnit_reset_charunit_world_cred_debt_SetsAttr():

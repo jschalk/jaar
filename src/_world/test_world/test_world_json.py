@@ -1,6 +1,6 @@
 from src._instrument.python import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
-from src._world.beliefstory import awardlink_shop
+from src._world.beliefbox import awardlink_shop
 from src._world.healer import healerhold_shop
 from src._world.reason_doer import doerunit_shop
 from src._world.reason_idea import factunit_shop
@@ -515,8 +515,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample(
     after_bob_world = worldunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_beliefstory = after_bob_world.get_beliefstory(swim_text)
-    assert after_bob_beliefstory._road_delimiter == slash_delimiter
+    after_bob_beliefbox = after_bob_world.get_beliefbox(swim_text)
+    assert after_bob_beliefbox._road_delimiter == slash_delimiter
 
 
 def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():

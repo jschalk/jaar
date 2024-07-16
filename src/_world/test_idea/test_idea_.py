@@ -4,7 +4,7 @@ from src._road.road import (
     default_road_delimiter_if_none,
 )
 from src._world.healer import healerhold_shop
-from src._world.beliefstory import awardlink_shop, awardheir_shop
+from src._world.beliefbox import awardlink_shop, awardheir_shop
 from src._world.reason_idea import (
     reasonunit_shop,
     reasonheir_shop,
@@ -872,7 +872,7 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     # assert sport_idea._doerheir is None
 
     # WHEN
-    sport_idea.set_doerheir(parent_doerheir=None, world_beliefstorys=None)
+    sport_idea.set_doerheir(parent_doerheir=None, world_beliefboxs=None)
 
     # THEN
     assert sport_idea._doerheir != None
@@ -880,7 +880,7 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     swim_doerunit.set_beliefhold(belief_id=swim_text)
     swim_doerheir = doerheir_shop()
     swim_doerheir.set_beliefholds(
-        doerunit=swim_doerunit, parent_doerheir=None, world_beliefstorys=None
+        doerunit=swim_doerunit, parent_doerheir=None, world_beliefboxs=None
     )
     assert sport_idea._doerheir == swim_doerheir
 

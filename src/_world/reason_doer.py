@@ -1,5 +1,5 @@
 from src._instrument.python import get_empty_set_if_none
-from src._world.beliefstory import BeliefStory, BeliefID
+from src._world.beliefbox import BeliefBox, BeliefID
 from src._world.char import CharID
 from dataclasses import dataclass
 
@@ -46,33 +46,33 @@ class DoerHeir:
 
     def _get_all_chars(
         self,
-        world_beliefstorys: dict[BeliefID, BeliefStory],
+        world_beliefboxs: dict[BeliefID, BeliefBox],
         belief_id_set: set[BeliefID],
-    ) -> dict[BeliefID, BeliefStory]:
+    ) -> dict[BeliefID, BeliefBox]:
         dict_x = {}
         for belief_id_x in belief_id_set:
-            dict_x |= world_beliefstorys.get(belief_id_x)._belieflinks
+            dict_x |= world_beliefboxs.get(belief_id_x)._belieflinks
         return dict_x
 
     def is_empty(self) -> bool:
         return self._beliefholds == set()
 
     def set_owner_id_doer(
-        self, world_beliefstorys: dict[BeliefID, BeliefStory], world_owner_id: CharID
+        self, world_beliefboxs: dict[BeliefID, BeliefBox], world_owner_id: CharID
     ):
         self._owner_id_doer = self.get_owner_id_doer_bool(
-            world_beliefstorys, world_owner_id
+            world_beliefboxs, world_owner_id
         )
 
     def get_owner_id_doer_bool(
-        self, world_beliefstorys: dict[BeliefID, BeliefStory], world_owner_id: CharID
+        self, world_beliefboxs: dict[BeliefID, BeliefBox], world_owner_id: CharID
     ) -> bool:
         if self._beliefholds == set():
             return True
 
-        for x_belief_id, x_beliefstory in world_beliefstorys.items():
+        for x_belief_id, x_beliefbox in world_beliefboxs.items():
             if x_belief_id in self._beliefholds:
-                for x_char_id in x_beliefstory._belieflinks.keys():
+                for x_char_id in x_beliefbox._belieflinks.keys():
                     if x_char_id == world_owner_id:
                         return True
         return False
@@ -81,7 +81,7 @@ class DoerHeir:
         self,
         parent_doerheir,
         doerunit: DoerUnit,
-        world_beliefstorys: dict[BeliefID, BeliefStory],
+        world_beliefboxs: dict[BeliefID, BeliefBox],
     ):
         x_beliefholds = set()
         if parent_doerheir is None or parent_doerheir._beliefholds == set():
@@ -95,12 +95,12 @@ class DoerHeir:
         else:
             # get all_chars of parent doerheir beliefs
             all_parent_doerheir_chars = self._get_all_chars(
-                world_beliefstorys=world_beliefstorys,
+                world_beliefboxs=world_beliefboxs,
                 belief_id_set=parent_doerheir._beliefholds,
             )
             # get all_chars of doerunit beliefs
             all_doerunit_chars = self._get_all_chars(
-                world_beliefstorys=world_beliefstorys,
+                world_beliefboxs=world_beliefboxs,
                 belief_id_set=doerunit._beliefholds,
             )
             if not set(all_doerunit_chars).issubset(set(all_parent_doerheir_chars)):

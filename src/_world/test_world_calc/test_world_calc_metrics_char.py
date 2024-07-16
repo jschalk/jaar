@@ -1,6 +1,6 @@
 from src._road.road import RoadUnit
 from src._world.char import charunit_shop
-from src._world.beliefstory import awardlink_shop
+from src._world.beliefbox import awardlink_shop
 from src._world.examples.example_worlds import (
     world_v001 as examples_world_v001,
     world_v001_with_large_agenda as examples_world_v001_with_large_agenda,
@@ -125,8 +125,8 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsBelieflinkWorldCredAndDebt():
     yao_world.calc_world_metrics()
 
     # THEN
-    xio_beliefstory = yao_world.get_beliefstory(xio_text)
-    xio_xio_belieflink = xio_beliefstory.get_belieflink(xio_text)
+    xio_beliefbox = yao_world.get_beliefbox(xio_text)
+    xio_xio_belieflink = xio_beliefbox.get_belieflink(xio_text)
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
@@ -327,25 +327,25 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     yao_world.calc_world_metrics()
 
     # THEN
-    sue_beliefstory = yao_world.get_beliefstory(sue_text)
-    bob_beliefstory = yao_world.get_beliefstory(bob_text)
-    zia_beliefstory = yao_world.get_beliefstory(zia_text)
-    assert sue_beliefstory._world_cred != 0.5
-    assert sue_beliefstory._world_debt != 0.8
-    assert bob_beliefstory._world_cred != 0.25
-    assert bob_beliefstory._world_debt != 0.1
-    assert zia_beliefstory._world_cred != 0.25
-    assert zia_beliefstory._world_debt != 0.1
+    sue_beliefbox = yao_world.get_beliefbox(sue_text)
+    bob_beliefbox = yao_world.get_beliefbox(bob_text)
+    zia_beliefbox = yao_world.get_beliefbox(zia_text)
+    assert sue_beliefbox._world_cred != 0.5
+    assert sue_beliefbox._world_debt != 0.8
+    assert bob_beliefbox._world_cred != 0.25
+    assert bob_beliefbox._world_debt != 0.1
+    assert zia_beliefbox._world_cred != 0.25
+    assert zia_beliefbox._world_debt != 0.1
     assert (
-        sue_beliefstory._world_cred
-        + bob_beliefstory._world_cred
-        + zia_beliefstory._world_cred
+        sue_beliefbox._world_cred
+        + bob_beliefbox._world_cred
+        + zia_beliefbox._world_cred
         == 0.25
     )
     assert (
-        sue_beliefstory._world_debt
-        + bob_beliefstory._world_debt
-        + zia_beliefstory._world_debt
+        sue_beliefbox._world_debt
+        + bob_beliefbox._world_debt
+        + zia_beliefbox._world_debt
         == 0.25
     )
 
@@ -454,12 +454,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
 #     yao_world.calc_world_metrics()
 
 
-def clear_all_charunits_beliefstorys_world_agenda_cred_debt(x_world: WorldUnit):
+def clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world: WorldUnit):
     # DELETE world_agenda_debt and world_agenda_cred
-    for beliefstory_x in x_world._beliefstorys.values():
-        beliefstory_x.reset_world_cred_debt()
-        # for belieflink_x in beliefstory_x._chars.values():
-        #     print(f"{beliefstory_x.} {belieflink_x.}  {belieflink_x._world_cred:.6f} {belieflink_x.debtor_weight=} {belieflink_x._world_debt:.6f} {belieflink_x.} ")
+    for beliefbox_x in x_world._beliefboxs.values():
+        beliefbox_x.reset_world_cred_debt()
+        # for belieflink_x in beliefbox_x._chars.values():
+        #     print(f"{beliefbox_x.} {belieflink_x.}  {belieflink_x._world_cred:.6f} {belieflink_x.debtor_weight=} {belieflink_x._world_debt:.6f} {belieflink_x.} ")
 
     # DELETE world_agenda_debt and world_agenda_cred
     for x_charunit in x_world._chars.values():
@@ -468,17 +468,17 @@ def clear_all_charunits_beliefstorys_world_agenda_cred_debt(x_world: WorldUnit):
 
 @dataclass
 class BeliefAgendaMetrics:
-    sum_beliefstory_cred: float = 0
-    sum_beliefstory_debt: float = 0
+    sum_beliefbox_cred: float = 0
+    sum_beliefbox_debt: float = 0
     sum_belieflink_cred: float = 0
     sum_belieflink_debt: float = 0
     belieflink_count: int = 0
 
     def set_sums(self, x_world: WorldUnit):
-        for x_beliefstory in x_world._beliefstorys.values():
-            self.sum_beliefstory_cred += x_beliefstory._world_agenda_cred
-            self.sum_beliefstory_debt += x_beliefstory._world_agenda_debt
-            for belieflink_x in x_beliefstory._belieflinks.values():
+        for x_beliefbox in x_world._beliefboxs.values():
+            self.sum_beliefbox_cred += x_beliefbox._world_agenda_cred
+            self.sum_beliefbox_debt += x_beliefbox._world_agenda_debt
+            for belieflink_x in x_beliefbox._belieflinks.values():
                 self.sum_belieflink_cred += belieflink_x._world_agenda_cred
                 self.sum_belieflink_debt += belieflink_x._world_agenda_debt
                 self.belieflink_count += 1
@@ -521,13 +521,13 @@ class AwardAgendaMetrics:
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # GIVEN
     x_world = examples_world_v001_with_large_agenda()
-    clear_all_charunits_beliefstorys_world_agenda_cred_debt(x_world=x_world)
+    clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world=x_world)
 
     # TEST world_agenda_debt and world_agenda_cred are empty
     x_beliefagendametrics = BeliefAgendaMetrics()
     x_beliefagendametrics.set_sums(x_world=x_world)
-    assert x_beliefagendametrics.sum_beliefstory_cred == 0
-    assert x_beliefagendametrics.sum_beliefstory_debt == 0
+    assert x_beliefagendametrics.sum_beliefbox_cred == 0
+    assert x_beliefagendametrics.sum_beliefbox_debt == 0
     assert x_beliefagendametrics.sum_belieflink_cred == 0
     assert x_beliefagendametrics.sum_belieflink_debt == 0
 
@@ -562,13 +562,13 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     x_beliefagendametrics.set_sums(x_world=x_world)
     assert x_beliefagendametrics.belieflink_count == 81
     x_sum = 0.0027965049894874455
-    assert are_equal(x_beliefagendametrics.sum_beliefstory_cred, x_sum)
-    assert are_equal(x_beliefagendametrics.sum_beliefstory_debt, x_sum)
+    assert are_equal(x_beliefagendametrics.sum_beliefbox_cred, x_sum)
+    assert are_equal(x_beliefagendametrics.sum_beliefbox_debt, x_sum)
     assert are_equal(x_beliefagendametrics.sum_belieflink_cred, x_sum)
     assert are_equal(x_beliefagendametrics.sum_belieflink_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_world_i_sum,
-        x_beliefagendametrics.sum_beliefstory_cred,
+        x_beliefagendametrics.sum_beliefbox_cred,
     )
 
     assert all_charunits_have_legitimate_values(x_world)
@@ -672,10 +672,10 @@ def test_examples_world_v001_HasBeliefs():
     x_world = examples_world_v001()
 
     # THEN
-    assert x_world._beliefstorys != None
-    assert len(x_world._beliefstorys) == 34
+    assert x_world._beliefboxs != None
+    assert len(x_world._beliefboxs) == 34
     everyone_chars_len = None
-    everyone_belief = x_world.get_beliefstory(",Everyone")
+    everyone_belief = x_world.get_beliefbox(",Everyone")
     everyone_chars_len = len(everyone_belief._belieflinks)
     assert everyone_chars_len == 22
 

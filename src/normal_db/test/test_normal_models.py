@@ -87,13 +87,13 @@ def test_normalized_table_CharUnitTable_Exists():
 
 # def test_normalized_table_BeliefTable_Exists():
 #     # GIVEN
-#     config_category = get_normalized_world_table_build().get("world_beliefstory")
+#     config_category = get_normalized_world_table_build().get("world_beliefbox")
 #     mapper = inspect(BeliefTable)
 #     print_out_expected_class_attribute_declarations(config_category)
 
 #     # WHEN / THEN
 #     config_table_name = get_config_table_name(config_category)
-#     assert config_table_name == "beliefstory"
+#     assert config_table_name == "beliefbox"
 #     assert config_table_name == BeliefTable.__tablename__
 #     all_columns_are_as_config_requires(mapper, config_category)
 

@@ -7,7 +7,7 @@ from src._world.healer import healerhold_shop
 from src._world.char import CharID
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefstory import awardline_shop, awardlink_shop
+from src._world.beliefbox import awardline_shop, awardlink_shop
 from src._world.graphic import display_ideatree
 from pytest import raises as pytest_raises
 

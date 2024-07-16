@@ -45,11 +45,11 @@ from src._road.road import (
 )
 
 from src._world.char import CharUnit, charunits_get_from_dict, charunit_shop
-from src._world.beliefstory import (
+from src._world.beliefbox import (
     AwardLink,
     BeliefID,
-    BeliefStory,
-    beliefstory_shop,
+    BeliefBox,
+    beliefbox_shop,
 )
 from src._world.healer import HealerHold
 from src._world.reason_idea import (
@@ -140,7 +140,7 @@ class WorldUnit:
     _econs_justified: bool = None
     _econs_buildable: bool = None
     _sum_healerhold_share: bool = None
-    _beliefstorys: dict[BeliefID, BeliefStory] = None
+    _beliefboxs: dict[BeliefID, BeliefBox] = None
     # calc_world_metrics Calculated field end
 
     def del_last_gift_id(self):
@@ -481,27 +481,27 @@ class WorldUnit:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
-    def add_to_beliefstory_world_cred_debt(
+    def add_to_beliefbox_world_cred_debt(
         self,
         belief_id: BeliefID,
         awardheir_world_cred: float,
         awardheir_world_debt: float,
     ):
-        x_beliefstory = self.get_beliefstory(belief_id)
-        if x_beliefstory != None:
-            x_beliefstory._world_cred += awardheir_world_cred
-            x_beliefstory._world_debt += awardheir_world_debt
+        x_beliefbox = self.get_beliefbox(belief_id)
+        if x_beliefbox != None:
+            x_beliefbox._world_cred += awardheir_world_cred
+            x_beliefbox._world_debt += awardheir_world_debt
 
-    def add_to_beliefstory_world_agenda_cred_debt(
+    def add_to_beliefbox_world_agenda_cred_debt(
         self,
         belief_id: BeliefID,
         awardline_world_cred: float,
         awardline_world_debt: float,
     ):
-        x_beliefstory = self.get_beliefstory(belief_id)
+        x_beliefbox = self.get_beliefbox(belief_id)
         if awardline_world_cred != None and awardline_world_debt != None:
-            x_beliefstory._world_agenda_cred += awardline_world_cred
-            x_beliefstory._world_agenda_debt += awardline_world_debt
+            x_beliefbox._world_agenda_cred += awardline_world_cred
+            x_beliefbox._world_agenda_debt += awardline_world_debt
 
     def add_to_charunit_world_cred_debt(
         self,
@@ -573,8 +573,8 @@ class WorldUnit:
                     x_dict[x_belief_id] = char_id_set
         return x_dict
 
-    def get_beliefstory(self, x_belief_id: BeliefID) -> BeliefStory:
-        return self._beliefstorys.get(x_belief_id)
+    def get_beliefbox(self, x_belief_id: BeliefID) -> BeliefBox:
+        return self._beliefboxs.get(x_belief_id)
 
     def clear_charunits_belieflinks(self):
         for x_charunit in self._chars.values():
@@ -1314,13 +1314,13 @@ class WorldUnit:
                 world_agenda_debt=au_world_agenda_debt,
             )
 
-    def _reset_beliefstorys_world_cred_debt(self):
-        for beliefstory_obj in self._beliefstorys.values():
-            beliefstory_obj.reset_world_cred_debt()
+    def _reset_beliefboxs_world_cred_debt(self):
+        for beliefbox_obj in self._beliefboxs.values():
+            beliefbox_obj.reset_world_cred_debt()
 
-    def _set_beliefstorys_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
+    def _set_beliefboxs_bud_share(self, awardheirs: dict[BeliefID, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            self.add_to_beliefstory_world_cred_debt(
+            self.add_to_beliefbox_world_cred_debt(
                 belief_id=awardlink_obj.belief_id,
                 awardheir_world_cred=awardlink_obj._world_cred,
                 awardheir_world_debt=awardlink_obj._world_debt,
@@ -1337,16 +1337,16 @@ class WorldUnit:
                     self._add_to_charunits_world_agenda_cred_debt(idea._bud_ratio)
                 else:
                     for x_awardline in idea._awardlines.values():
-                        self.add_to_beliefstory_world_agenda_cred_debt(
+                        self.add_to_beliefbox_world_agenda_cred_debt(
                             belief_id=x_awardline.belief_id,
                             awardline_world_cred=x_awardline._world_cred,
                             awardline_world_debt=x_awardline._world_debt,
                         )
 
-    def _allot_beliefstorys_bud_share(self):
-        for x_beliefstory in self._beliefstorys.values():
-            x_beliefstory._set_belieflink_world_cred_debt()
-            for x_belieflink in x_beliefstory._belieflinks.values():
+    def _allot_beliefboxs_bud_share(self):
+        for x_beliefbox in self._beliefboxs.values():
+            x_beliefbox._set_belieflink_world_cred_debt()
+            for x_belieflink in x_beliefbox._belieflinks.values():
                 self.add_to_charunit_world_cred_debt(
                     charunit_char_id=x_belieflink._char_id,
                     world_cred=x_belieflink._world_cred,
@@ -1484,15 +1484,13 @@ class WorldUnit:
         self._idearoot._level = 0
         self._idearoot.set_parent_road("")
         self._idearoot.set_idearoot_inherit_reasonheirs()
-        self._idearoot.set_doerheir(None, self._beliefstorys)
+        self._idearoot.set_doerheir(None, self._beliefboxs)
         self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
         self._idearoot._weight = 1
         tree_traverse_count = self._tree_traverse_count
-        self._idearoot.set_active(
-            tree_traverse_count, self._beliefstorys, self._owner_id
-        )
+        self._idearoot.set_active(tree_traverse_count, self._beliefboxs, self._owner_id)
         self._idearoot.set_bud_share(0, self._bud_pool, self._bud_pool)
         self._idearoot.set_awardheirs_world_cred_debt()
         self._idearoot.set_ancestor_pledge_count(0, False)
@@ -1515,11 +1513,11 @@ class WorldUnit:
         idea_kid.set_parent_road(parent_idea.get_road())
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
-        idea_kid.set_doerheir(parent_idea._doerheir, self._beliefstorys)
+        idea_kid.set_doerheir(parent_idea._doerheir, self._beliefboxs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
-        idea_kid.set_active(tree_traverse_count, self._beliefstorys, self._owner_id)
+        idea_kid.set_active(tree_traverse_count, self._beliefboxs, self._owner_id)
         idea_kid.set_bud_share(bud_onset, bud_cease, self._bud_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
@@ -1535,7 +1533,7 @@ class WorldUnit:
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
         if idea.is_awardheirless() is False:
-            self._set_beliefstorys_bud_share(idea._awardheirs)
+            self._set_beliefboxs_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
             self._add_to_charunits_world_cred_debt(idea._bud_ratio)
 
@@ -1545,16 +1543,16 @@ class WorldUnit:
         sibling_ratio = weight / sibling_total_weight
         return parent_bud_share * sibling_ratio
 
-    def _create_beliefstorys_metrics(self):
-        self._beliefstorys = {}
+    def _create_beliefboxs_metrics(self):
+        self._beliefboxs = {}
         for belief_id, char_id_set in self.get_belief_ids_dict().items():
-            x_beliefstory = beliefstory_shop(
+            x_beliefbox = beliefbox_shop(
                 belief_id, _road_delimiter=self._road_delimiter
             )
             for x_char_id in char_id_set:
                 x_belieflink = self.get_char(x_char_id).get_belieflink(belief_id)
-                x_beliefstory.set_belieflink(x_belieflink)
-                self._beliefstorys[belief_id] = x_beliefstory
+                x_beliefbox.set_belieflink(x_belieflink)
+                self._beliefboxs[belief_id] = x_beliefbox
 
     def _calc_charunit_metrics(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
@@ -1568,7 +1566,7 @@ class WorldUnit:
             self.get_char(x_char_id).set_credor_pool(char_credor_pool)
         for x_char_id, char_debtor_pool in debtor_allot.items():
             self.get_char(x_char_id).set_debtor_pool(char_debtor_pool)
-        self._create_beliefstorys_metrics()
+        self._create_beliefboxs_metrics()
         self._reset_charunit_world_cred_debt()
 
     def _set_tree_traverse_starting_point(self):
@@ -1667,7 +1665,7 @@ class WorldUnit:
 
     def _after_all_tree_traverses_set_cred_debt(self):
         self._allot_world_agenda_share()
-        self._allot_beliefstorys_bud_share()
+        self._allot_beliefboxs_bud_share()
         self._set_world_agenda_ratio_cred_debt()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
@@ -1691,8 +1689,8 @@ class WorldUnit:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_belief_id in x_econ_idea._healerhold._belief_ids:
-                x_beliefstory = self.get_beliefstory(x_belief_id)
-                for x_char_id in x_beliefstory._belieflinks.keys():
+                x_beliefbox = self.get_beliefbox(x_belief_id)
+                for x_char_id in x_beliefbox._belieflinks.keys():
                     if _healers_dict.get(x_char_id) is None:
                         _healers_dict[x_char_id] = {x_econ_road: x_econ_idea}
                     else:
@@ -1707,7 +1705,7 @@ class WorldUnit:
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
-        self._reset_beliefstorys_world_cred_debt()
+        self._reset_beliefboxs_world_cred_debt()
         self._reset_charunit_world_cred_debt()
 
     def get_heir_road_list(self, x_road: RoadUnit) -> list[RoadUnit]:
@@ -1900,7 +1898,7 @@ def worldunit_shop(
         _weight=get_1_if_None(_weight),
         _real_id=_real_id,
         _chars=get_empty_dict_if_none(None),
-        _beliefstorys={},
+        _beliefboxs={},
         _idea_dict=get_empty_dict_if_none(None),
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),

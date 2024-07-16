@@ -104,7 +104,7 @@ def awardline_shop(belief_id: BeliefID, _world_cred: float, _world_debt: float):
 
 
 @dataclass
-class BeliefStory(BeliefCore):
+class BeliefBox(BeliefCore):
     _belieflinks: dict[CharID, BeliefLink] = None  # set by WorldUnit.set_charunit()
     _road_delimiter: str = None  # calculated by WorldUnit
     # calculated by WorldUnit.calc_world_metrics()
@@ -118,7 +118,7 @@ class BeliefStory(BeliefCore):
     def set_belieflink(self, x_belieflink: BeliefLink):
         if x_belieflink.belief_id != self.belief_id:
             raise belieflink_belief_id_Exception(
-                f"BeliefStory.belief_id={self.belief_id} cannot set belieflink.belief_id={x_belieflink.belief_id}"
+                f"BeliefBox.belief_id={self.belief_id} cannot set belieflink.belief_id={x_belieflink.belief_id}"
             )
         if x_belieflink._char_id is None:
             raise belieflink_belief_id_Exception(
@@ -171,8 +171,8 @@ class BeliefStory(BeliefCore):
             )
 
 
-def beliefstory_shop(belief_id: BeliefID, _road_delimiter: str = None) -> BeliefStory:
-    return BeliefStory(
+def beliefbox_shop(belief_id: BeliefID, _road_delimiter: str = None) -> BeliefBox:
+    return BeliefBox(
         belief_id=belief_id,
         _belieflinks={},
         _world_cred=0,
@@ -183,5 +183,5 @@ def beliefstory_shop(belief_id: BeliefID, _road_delimiter: str = None) -> Belief
         _debtor_pool=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
     )
-    # x_beliefstory.set_belief_id(belief_id=belief_id)
-    # return x_beliefstory
+    # x_beliefbox.set_belief_id(belief_id=belief_id)
+    # return x_beliefbox

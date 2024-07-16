@@ -31,7 +31,7 @@ class CharUnitTable(Base):
 
 
 # class BeliefTable(Base):
-#     __tablename__ = "beliefstory"
+#     __tablename__ = "beliefbox"
 
 #     uid = Column(Integer, primary_key=True)
 #     belief_id = Column(String)

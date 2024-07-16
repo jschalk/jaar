@@ -1,4 +1,4 @@
-from src._world.beliefstory import awardlink_shop
+from src._world.beliefbox import awardlink_shop
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
 )
@@ -32,20 +32,20 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldBeliefWorldI
     x_world.calc_world_metrics()
 
     # THEN
-    yao_beliefstory = x_world.get_beliefstory(yao_text)
-    zia_beliefstory = x_world.get_beliefstory(zia_text)
-    xio_beliefstory = x_world.get_beliefstory(xio_text)
-    assert yao_beliefstory._world_cred == 0.5
-    assert yao_beliefstory._world_debt == 0.75
-    assert zia_beliefstory._world_cred == 0.25
-    assert zia_beliefstory._world_debt == 0.125
-    assert xio_beliefstory._world_cred == 0.25
-    assert xio_beliefstory._world_debt == 0.125
-    cred_sum1 = yao_beliefstory._world_cred
-    cred_sum1 += zia_beliefstory._world_cred + xio_beliefstory._world_cred
+    yao_beliefbox = x_world.get_beliefbox(yao_text)
+    zia_beliefbox = x_world.get_beliefbox(zia_text)
+    xio_beliefbox = x_world.get_beliefbox(xio_text)
+    assert yao_beliefbox._world_cred == 0.5
+    assert yao_beliefbox._world_debt == 0.75
+    assert zia_beliefbox._world_cred == 0.25
+    assert zia_beliefbox._world_debt == 0.125
+    assert xio_beliefbox._world_cred == 0.25
+    assert xio_beliefbox._world_debt == 0.125
+    cred_sum1 = yao_beliefbox._world_cred
+    cred_sum1 += zia_beliefbox._world_cred + xio_beliefbox._world_cred
     assert cred_sum1 == 1
-    debt_sum1 = yao_beliefstory._world_debt
-    debt_sum1 += zia_beliefstory._world_debt + xio_beliefstory._world_debt
+    debt_sum1 = yao_beliefbox._world_debt
+    debt_sum1 += zia_beliefbox._world_debt + xio_beliefbox._world_debt
     assert debt_sum1 == 1
 
     # GIVEN
@@ -59,23 +59,23 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldBeliefWorldI
     x_world.calc_world_metrics()
 
     # THEN
-    yao_beliefstory = x_world.get_beliefstory(yao_text)
-    zia_beliefstory = x_world.get_beliefstory(zia_text)
-    xio_beliefstory = x_world.get_beliefstory(xio_text)
-    sue_beliefstory = x_world.get_beliefstory(sue_text)
-    assert yao_beliefstory._world_cred != 0.5
-    assert yao_beliefstory._world_debt != 0.75
-    assert zia_beliefstory._world_cred != 0.25
-    assert zia_beliefstory._world_debt != 0.125
-    assert xio_beliefstory._world_cred != 0.25
-    assert xio_beliefstory._world_debt != 0.125
-    assert sue_beliefstory._world_cred != None
-    assert sue_beliefstory._world_debt != None
-    cred_sum1 = yao_beliefstory._world_cred + zia_beliefstory._world_cred
-    cred_sum1 += xio_beliefstory._world_cred + sue_beliefstory._world_cred
+    yao_beliefbox = x_world.get_beliefbox(yao_text)
+    zia_beliefbox = x_world.get_beliefbox(zia_text)
+    xio_beliefbox = x_world.get_beliefbox(xio_text)
+    sue_beliefbox = x_world.get_beliefbox(sue_text)
+    assert yao_beliefbox._world_cred != 0.5
+    assert yao_beliefbox._world_debt != 0.75
+    assert zia_beliefbox._world_cred != 0.25
+    assert zia_beliefbox._world_debt != 0.125
+    assert xio_beliefbox._world_cred != 0.25
+    assert xio_beliefbox._world_debt != 0.125
+    assert sue_beliefbox._world_cred != None
+    assert sue_beliefbox._world_debt != None
+    cred_sum1 = yao_beliefbox._world_cred + zia_beliefbox._world_cred
+    cred_sum1 += xio_beliefbox._world_cred + sue_beliefbox._world_cred
     assert cred_sum1 == 1
-    debt_sum1 = yao_beliefstory._world_debt + zia_beliefstory._world_debt
-    debt_sum1 += xio_beliefstory._world_debt + sue_beliefstory._world_debt
+    debt_sum1 = yao_beliefbox._world_debt + zia_beliefbox._world_debt
+    debt_sum1 += xio_beliefbox._world_debt + sue_beliefbox._world_debt
     assert round(debt_sum1) == 1
 
 
@@ -106,25 +106,25 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldBeliefWorldI
     x_world.calc_world_metrics()
 
     # THEN
-    yao_beliefstory = x_world.get_beliefstory(yao_text)
-    zia_beliefstory = x_world.get_beliefstory(zia_text)
-    xio_beliefstory = x_world.get_beliefstory(xio_text)
-    assert yao_beliefstory._world_cred == 0.5
-    assert yao_beliefstory._world_debt == 0.75
-    assert zia_beliefstory._world_cred == 0.25
-    assert zia_beliefstory._world_debt == 0.125
-    assert xio_beliefstory._world_cred == 0.25
-    assert xio_beliefstory._world_debt == 0.125
+    yao_beliefbox = x_world.get_beliefbox(yao_text)
+    zia_beliefbox = x_world.get_beliefbox(zia_text)
+    xio_beliefbox = x_world.get_beliefbox(xio_text)
+    assert yao_beliefbox._world_cred == 0.5
+    assert yao_beliefbox._world_debt == 0.75
+    assert zia_beliefbox._world_cred == 0.25
+    assert zia_beliefbox._world_debt == 0.125
+    assert xio_beliefbox._world_cred == 0.25
+    assert xio_beliefbox._world_debt == 0.125
     assert (
-        yao_beliefstory._world_cred
-        + zia_beliefstory._world_cred
-        + xio_beliefstory._world_cred
+        yao_beliefbox._world_cred
+        + zia_beliefbox._world_cred
+        + xio_beliefbox._world_cred
         == 1
     )
     assert (
-        yao_beliefstory._world_debt
-        + zia_beliefstory._world_debt
-        + xio_beliefstory._world_debt
+        yao_beliefbox._world_debt
+        + zia_beliefbox._world_debt
+        + xio_beliefbox._world_debt
         == 1
     )
 
@@ -179,25 +179,25 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesBeliefWorldImportanceLW
     assert str(excinfo.value) == f"'{xio_text}'"
 
     # THEN
-    yao_beliefstory = x_world.get_beliefstory(yao_text)
-    zia_beliefstory = x_world.get_beliefstory(zia_text)
-    xio_beliefstory = x_world.get_beliefstory(xio_text)
-    assert yao_beliefstory._world_cred == 0.125
-    assert yao_beliefstory._world_debt == 0.1875
-    assert zia_beliefstory._world_cred == 0.0625
-    assert zia_beliefstory._world_debt == 0.03125
-    assert xio_beliefstory._world_cred == 0.0625
-    assert xio_beliefstory._world_debt == 0.03125
+    yao_beliefbox = x_world.get_beliefbox(yao_text)
+    zia_beliefbox = x_world.get_beliefbox(zia_text)
+    xio_beliefbox = x_world.get_beliefbox(xio_text)
+    assert yao_beliefbox._world_cred == 0.125
+    assert yao_beliefbox._world_debt == 0.1875
+    assert zia_beliefbox._world_cred == 0.0625
+    assert zia_beliefbox._world_debt == 0.03125
+    assert xio_beliefbox._world_cred == 0.0625
+    assert xio_beliefbox._world_debt == 0.03125
     assert (
-        yao_beliefstory._world_cred
-        + zia_beliefstory._world_cred
-        + xio_beliefstory._world_cred
+        yao_beliefbox._world_cred
+        + zia_beliefbox._world_cred
+        + xio_beliefbox._world_cred
         == 0.25
     )
     assert (
-        yao_beliefstory._world_debt
-        + zia_beliefstory._world_debt
-        + xio_beliefstory._world_debt
+        yao_beliefbox._world_debt
+        + zia_beliefbox._world_debt
+        + xio_beliefbox._world_debt
         == 0.25
     )
 
