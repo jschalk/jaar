@@ -724,6 +724,7 @@ class WorldUnit:
         }
 
     def get_tree_metrics(self) -> TreeMetrics:
+        self.calc_world_metrics()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_node(
             level=self._idearoot._level,
@@ -1932,7 +1933,6 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
         x_world.set_charunit(x_charunit)
     x_world._originunit = obj_from_world_dict(world_dict, "_originunit")
     set_idearoot_from_world_dict(x_world, world_dict)
-    x_world.calc_world_metrics()  # clean up tree traverse defined fields
     return x_world
 
 
@@ -1941,6 +1941,7 @@ def set_idearoot_from_world_dict(x_world: WorldUnit, world_dict: dict):
     x_world._idearoot = ideaunit_shop(
         _root=True,
         _label=x_world._real_id,
+        _parent_road="",
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
         _weight=get_obj_from_idea_dict(idearoot_dict, "_weight"),
         _begin=get_obj_from_idea_dict(idearoot_dict, "_begin"),

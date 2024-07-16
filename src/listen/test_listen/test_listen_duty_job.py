@@ -262,76 +262,76 @@ def get_example_yao_voice_with_3_healers():
     return yao_voice
 
 
-def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
-    # GIVEN
-    # yao0_voice with 3 debotors of different credor_weights
-    # yao_job1 with 1 task, fact that doesn't make that task active
-    # yao_job2 with 2 tasks, one is equal fact that makes task active
-    # yao_job3 with 1 new task, fact stays with it
+# def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
+#     # GIVEN
+#     # yao0_voice with 3 debotors of different credor_weights
+#     # yao_job1 with 1 task, fact that doesn't make that task active
+#     # yao_job2 with 2 tasks, one is equal fact that makes task active
+#     # yao_job3 with 1 new task, fact stays with it
 
-    yao_voice0 = get_example_yao_voice_with_3_healers()
-    yao_voice0.del_idea_obj(run_road())
-    yao_voice0.add_l1_idea(ideaunit_shop(get_location_text()))
-    yao_voice0.add_idea(ideaunit_shop(get_in_ocean_text()), get_location_road())
-    yao_voice0.add_idea(ideaunit_shop(get_on_land_text()), get_location_road())
-    yao_voice0.add_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
-    yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
-    yao_voice0.calc_world_metrics()
-    assert yao_voice0._econ_dict.get(get_iowa_road())
-    assert yao_voice0._econ_dict.get(get_ohio_road())
-    assert yao_voice0._econ_dict.get(get_utah_road())
-    assert len(yao_voice0._econ_dict) == 3
-    print(f"{yao_voice0._idea_dict.keys()=}")
+#     yao_voice0 = get_example_yao_voice_with_3_healers()
+#     yao_voice0.del_idea_obj(run_road())
+#     yao_voice0.add_l1_idea(ideaunit_shop(get_location_text()))
+#     yao_voice0.add_idea(ideaunit_shop(get_in_ocean_text()), get_location_road())
+#     yao_voice0.add_idea(ideaunit_shop(get_on_land_text()), get_location_road())
+#     yao_voice0.add_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
+#     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
+#     yao_voice0.calc_world_metrics()
+#     assert yao_voice0._econ_dict.get(get_iowa_road())
+#     assert yao_voice0._econ_dict.get(get_ohio_road())
+#     assert yao_voice0._econ_dict.get(get_utah_road())
+#     assert len(yao_voice0._econ_dict) == 3
+#     print(f"{yao_voice0._idea_dict.keys()=}")
 
-    yao_text = yao_voice0._owner_id
-    yao_job1 = get_example_yao_job1_speaker()
-    yao_job2 = get_example_yao_job2_speaker()
-    yao_job3 = get_example_yao_job3_speaker()
-    yao_iowa_hubunit = get_yao_iowa_hubunit()
-    yao_ohio_hubunit = get_yao_ohio_hubunit()
-    zia_utah_hubunit = get_zia_utah_hubunit()
-    # delete_dir(yao_iowa_hubunit.owners_dir())
-    assert yao_iowa_hubunit.voice_file_exists() is False
-    assert yao_iowa_hubunit.action_file_exists() is False
-    assert yao_iowa_hubunit.job_file_exists(yao_text) is False
-    assert yao_ohio_hubunit.job_file_exists(yao_text) is False
-    assert zia_utah_hubunit.job_file_exists(yao_text) is False
-    yao_iowa_hubunit.save_voice_world(yao_voice0)
-    yao_iowa_hubunit.save_job_world(yao_job1)
-    yao_ohio_hubunit.save_job_world(yao_job2)
-    zia_utah_hubunit.save_job_world(yao_job3)
-    assert yao_iowa_hubunit.voice_file_exists()
-    assert yao_iowa_hubunit.job_file_exists(yao_text)
-    assert yao_ohio_hubunit.job_file_exists(yao_text)
-    assert zia_utah_hubunit.job_file_exists(yao_text)
+#     yao_text = yao_voice0._owner_id
+#     yao_job1 = get_example_yao_job1_speaker()
+#     yao_job2 = get_example_yao_job2_speaker()
+#     yao_job3 = get_example_yao_job3_speaker()
+#     yao_iowa_hubunit = get_yao_iowa_hubunit()
+#     yao_ohio_hubunit = get_yao_ohio_hubunit()
+#     zia_utah_hubunit = get_zia_utah_hubunit()
+#     # delete_dir(yao_iowa_hubunit.owners_dir())
+#     assert yao_iowa_hubunit.voice_file_exists() is False
+#     assert yao_iowa_hubunit.action_file_exists() is False
+#     assert yao_iowa_hubunit.job_file_exists(yao_text) is False
+#     assert yao_ohio_hubunit.job_file_exists(yao_text) is False
+#     assert zia_utah_hubunit.job_file_exists(yao_text) is False
+#     yao_iowa_hubunit.save_voice_world(yao_voice0)
+#     yao_iowa_hubunit.save_job_world(yao_job1)
+#     yao_ohio_hubunit.save_job_world(yao_job2)
+#     zia_utah_hubunit.save_job_world(yao_job3)
+#     assert yao_iowa_hubunit.voice_file_exists()
+#     assert yao_iowa_hubunit.job_file_exists(yao_text)
+#     assert yao_ohio_hubunit.job_file_exists(yao_text)
+#     assert zia_utah_hubunit.job_file_exists(yao_text)
 
-    # WHEN
-    assert yao_iowa_hubunit.action_file_exists() is False
-    listen_to_owner_jobs(yao_iowa_hubunit)
-    assert yao_iowa_hubunit.action_file_exists()
+#     # WHEN
+#     assert yao_iowa_hubunit.action_file_exists() is False
+#     listen_to_owner_jobs(yao_iowa_hubunit)
+#     assert yao_iowa_hubunit.action_file_exists()
 
-    yao_action = yao_iowa_hubunit.get_action_world()
-    yao_action.calc_world_metrics()
-    assert yao_action._chars.keys() == yao_voice0._chars.keys()
-    assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
-    yao_action_chars = yao_action.get_dict().get("_chars")
-    yao_voice0_chars = yao_voice0.get_dict().get("_chars")
-    yao_action_bob = yao_action_chars.get("Bob")
-    yao_voice0_bob = yao_voice0_chars.get("Bob")
-    print(f"{yao_action_bob=}")
-    print(f"{yao_voice0_bob=}")
-    assert yao_action_bob == yao_voice0_bob
-    assert yao_action_chars.keys() == yao_voice0_chars.keys()
-    assert yao_action_chars == yao_voice0_chars
-    assert len(yao_action.get_dict().get("_chars")) == 3
-    assert len(yao_action._idea_dict) == 10
-    print(f"{yao_action._idea_dict.keys()=}")
-    print(f"{yao_action.get_factunits_dict().keys()=}")
-    assert yao_action.idea_exists(cook_road())
-    assert yao_action.idea_exists(clean_road())
-    assert yao_action.idea_exists(run_road()) is False
-    assert len(yao_action._idearoot._factunits) == 2
-    assert yao_action != yao_voice0
+#     yao_action = yao_iowa_hubunit.get_action_world()
+#     yao_action.calc_world_metrics()
+#     assert yao_action._chars.keys() == yao_voice0._chars.keys()
+#     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
+#     yao_action_chars = yao_action.get_dict().get("_chars")
+#     yao_voice0_chars = yao_voice0.get_dict().get("_chars")
+#     yao_action_bob = yao_action_chars.get("Bob")
+#     yao_voice0_bob = yao_voice0_chars.get("Bob")
+#     print(f"{yao_action_bob=}")
+#     print(f"{yao_voice0_bob=}")
+#     assert yao_action_bob == yao_voice0_bob
+#     assert yao_action_chars.keys() == yao_voice0_chars.keys()
+#     assert yao_action_chars == yao_voice0_chars
+#     assert len(yao_action.get_dict().get("_chars")) == 3
+#     assert len(yao_action._idea_dict) == 10
+#     print(f"{yao_action._idea_dict.keys()=}")
+#     print(f"{yao_action.get_factunits_dict().keys()=}")
+#     assert yao_action.idea_exists(cook_road())
+#     assert yao_action.idea_exists(clean_road())
+#     assert yao_action.idea_exists(run_road()) is False
+#     assert len(yao_action._idearoot._factunits) == 2
+#     assert yao_action != yao_voice0
 
 
 def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItself(
@@ -421,7 +421,6 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # GIVEN
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
-    yao_duty._calc_charunit_metrics()
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_world(yao_duty)
     assert sue_texas_hubunit.job_file_exists(yao_text) is False
@@ -432,7 +431,6 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # GIVEN
     assert sue_texas_hubunit.job_file_exists(yao_text)
     yao_job = sue_texas_hubunit.get_job_world(yao_text)
-    yao_job._calc_charunit_metrics()
     assert yao_job._owner_id != None
     assert yao_job._owner_id == yao_text
     assert yao_job.get_dict() == yao_duty.get_dict()

@@ -670,6 +670,7 @@ def test_examples_world_v001_has_chars():
 def test_examples_world_v001_HasBeliefs():
     # GIVEN / WHEN
     x_world = examples_world_v001()
+    x_world.calc_world_metrics()
 
     # THEN
     assert x_world._beliefboxs != None

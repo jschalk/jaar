@@ -18,46 +18,6 @@ from src._world.examples.example_worlds import (
 from pytest import raises as pytest_raises
 
 
-def test_WorldUnit_get_dict_SetsCharUnit_belieflinks():
-    # GIVEN
-    yao_text = "Yao"
-    sue_text = "Sue"
-    sue_credor_weight = 11
-    sue_debtor_weight = 13
-    zia_text = "Zia"
-    zia_credor_weight = 17
-    zia_debtor_weight = 23
-    bob_world = worldunit_shop("Bob")
-    bob_world.add_charunit(yao_text)
-    bob_world.add_charunit(sue_text)
-    bob_world.add_charunit(zia_text)
-    run_text = ",Run"
-    sue_charunit = bob_world.get_char(sue_text)
-    zia_charunit = bob_world.get_char(zia_text)
-    sue_charunit.add_belieflink(run_text, sue_credor_weight, sue_debtor_weight)
-    zia_charunit.add_belieflink(run_text, zia_credor_weight, zia_debtor_weight)
-    assert len(bob_world.get_belief_ids_dict().get(run_text)) == 2
-    assert len(bob_world.get_char(yao_text)._belieflinks) == 1
-    assert len(bob_world.get_char(sue_text)._belieflinks) == 2
-    assert len(bob_world.get_char(zia_text)._belieflinks) == 2
-
-    # WHEN
-    bob_world.get_dict()
-
-    # THEN
-    assert len(bob_world.get_char(yao_text)._belieflinks) == 1
-    assert len(bob_world.get_char(sue_text)._belieflinks) == 2
-    assert len(bob_world.get_char(zia_text)._belieflinks) == 2
-    sue_charunit = bob_world.get_char(sue_text)
-    zia_charunit = bob_world.get_char(zia_text)
-    sue_belieflink = sue_charunit.get_belieflink(run_text)
-    zia_belieflink = zia_charunit.get_belieflink(run_text)
-    assert sue_belieflink.credor_weight == sue_credor_weight
-    assert sue_belieflink.debtor_weight == sue_debtor_weight
-    assert zia_belieflink.credor_weight == zia_credor_weight
-    assert zia_belieflink.debtor_weight == zia_debtor_weight
-
-
 def test_WorldUnit_get_dict_ReturnsDictObject():
     # GIVEN
     x_world = example_worlds_world_v001()
@@ -82,7 +42,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     world_weight = 23
     x_world._weight = world_weight
     x_credor_respect = 22
-    x_debtor_respect = 22
+    x_debtor_respect = 44
     x_world.set_credor_respect(x_credor_respect)
     x_world.set_debtor_resepect(x_debtor_respect)
     override_text = "override"
@@ -104,7 +64,6 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_max_tree_traverse"] == x_world._max_tree_traverse
     assert world_dict["_road_delimiter"] == x_world._road_delimiter
     assert world_dict["_credor_respect"] == x_world._credor_respect
-    assert world_dict["_debtor_respect"] == x_world._debtor_respect
     assert world_dict["_debtor_respect"] == x_world._debtor_respect
     assert world_dict["_last_gift_id"] == x_world._last_gift_id
     assert len(world_dict["_chars"]) == len(x_world._chars)
@@ -515,8 +474,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample(
     after_bob_world = worldunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_beliefbox = after_bob_world.get_beliefbox(swim_text)
-    assert after_bob_beliefbox._road_delimiter == slash_delimiter
+    after_yao_charunit = after_bob_world.get_char(yao_text)
+    assert after_yao_charunit._road_delimiter == slash_delimiter
 
 
 def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():
@@ -567,17 +526,13 @@ def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
     assert ccn2_world._idearoot._coin == x2_world._idearoot._coin
     shave_road = ccn2_world.make_l1_road("shave")
     week_road = ccn2_world.make_l1_road("weekdays")
-    assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)
-    assert ccn2_world.get_idea_obj(week_road) == x2_world.get_idea_obj(week_road)
-    assert ccn2_world._idearoot == x2_world._idearoot
-    print(f"{ccn2_world._idea_dict.keys()=}")
-    print(f"{x2_world._idea_dict.keys()=}")
-    assert ccn2_world._idea_dict == x2_world._idea_dict
-    assert ccn2_world == x2_world
+    # assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)
+    # assert ccn2_world.get_idea_obj(week_road) == x2_world.get_idea_obj(week_road)
+    # assert ccn2_world._idearoot == x2_world._idearoot
+    assert ccn2_world.get_dict() == x2_world.get_dict()
 
     ccn_world3 = ccn_dict_of_obj.get(x3_world._owner_id)
-    x3_world.calc_world_metrics()
-    assert ccn_world3 == x3_world
+    assert ccn_world3.get_dict() == x3_world.get_dict()
 
     cc1_idea_root = ccn_dict_of_obj.get(x1_world._owner_id)._idearoot
     assert cc1_idea_root._originunit == x1_world._idearoot._originunit

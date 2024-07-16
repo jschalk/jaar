@@ -319,7 +319,6 @@ def test_HubUnit_save_voice_world_RaisesErrorWhenWorld_action_id_IsWrong(
 def test_HubUnit_get_voice_world_OpensFile(env_dir_setup_cleanup):
     # GIVEN
     sue_worldunit = get_world_with_4_levels()
-    sue_worldunit._calc_charunit_metrics()
     sue_text = sue_worldunit._owner_id
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -355,7 +354,6 @@ def test_HubUnit_save_action_world_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_get_action_world_OpensFile(env_dir_setup_cleanup):
     # GIVEN
     sue_worldunit = get_world_with_4_levels()
-    sue_worldunit._calc_charunit_metrics()
     sue_text = sue_worldunit._owner_id
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)

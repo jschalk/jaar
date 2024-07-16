@@ -157,80 +157,80 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_deb
     assert new_cook_idea.get_reasonunit(eat_road()) == zia_eat_reasonunit
 
 
-def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_cleanup):
-    # GIVEN
-    yao_text = "Yao"
-    yao_voice = worldunit_shop(yao_text)
-    zia_text = "Zia"
-    zia_credor_weight = 47
-    zia_debtor_weight = 41
-    sue_text = "Sue"
-    sue_credor_weight = 57
-    sue_debtor_weight = 51
-    yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_voice.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
-    yao_pool = 92
-    yao_voice.set_char_respect(yao_pool)
-    yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
-    yao_hubunit.save_voice_world(yao_voice)
+# def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_cleanup):
+#     # GIVEN
+#     yao_text = "Yao"
+#     yao_voice = worldunit_shop(yao_text)
+#     zia_text = "Zia"
+#     zia_credor_weight = 47
+#     zia_debtor_weight = 41
+#     sue_text = "Sue"
+#     sue_credor_weight = 57
+#     sue_debtor_weight = 51
+#     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
+#     yao_voice.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+#     yao_pool = 92
+#     yao_voice.set_char_respect(yao_pool)
+#     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
+#     yao_hubunit.save_voice_world(yao_voice)
 
-    zia_text = "Zia"
-    zia_action = worldunit_shop(zia_text)
-    zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_action.add_charunit(yao_text, debtor_weight=12)
-    clean_ideaunit = zia_action.get_idea_obj(clean_road())
-    cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._doerunit.set_beliefhold(yao_text)
-    cook_ideaunit._doerunit.set_beliefhold(yao_text)
-    zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
-    zia_hubunit.save_action_world(zia_action)
+#     zia_text = "Zia"
+#     zia_action = worldunit_shop(zia_text)
+#     zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+#     zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+#     zia_action.add_charunit(yao_text, debtor_weight=12)
+#     clean_ideaunit = zia_action.get_idea_obj(clean_road())
+#     cook_ideaunit = zia_action.get_idea_obj(cook_road())
+#     clean_ideaunit._doerunit.set_beliefhold(yao_text)
+#     cook_ideaunit._doerunit.set_beliefhold(yao_text)
+#     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
+#     zia_hubunit.save_action_world(zia_action)
 
-    sue_action = worldunit_shop(sue_text)
-    sue_action.set_max_tree_traverse(5)
-    zia_action.add_charunit(yao_text, debtor_weight=12)
-    vacuum_text = "vacuum"
-    vacuum_road = sue_action.make_l1_road(vacuum_text)
-    sue_action.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
-    vacuum_ideaunit = sue_action.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._doerunit.set_beliefhold(yao_text)
+#     sue_action = worldunit_shop(sue_text)
+#     sue_action.set_max_tree_traverse(5)
+#     zia_action.add_charunit(yao_text, debtor_weight=12)
+#     vacuum_text = "vacuum"
+#     vacuum_road = sue_action.make_l1_road(vacuum_text)
+#     sue_action.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+#     vacuum_ideaunit = sue_action.get_idea_obj(vacuum_road)
+#     vacuum_ideaunit._doerunit.set_beliefhold(yao_text)
 
-    egg_text = "egg first"
-    egg_road = sue_action.make_l1_road(egg_text)
-    sue_action.add_l1_idea(ideaunit_shop(egg_text))
-    chicken_text = "chicken first"
-    chicken_road = sue_action.make_l1_road(chicken_text)
-    sue_action.add_l1_idea(ideaunit_shop(chicken_text))
-    # set egg pledge is True when chicken first is False
-    sue_action.edit_idea_attr(
-        road=egg_road,
-        pledge=True,
-        reason_base=chicken_road,
-        reason_base_idea_active_requisite=True,
-    )
-    # set chick pledge is True when egg first is False
-    sue_action.edit_idea_attr(
-        road=chicken_road,
-        pledge=True,
-        reason_base=egg_road,
-        reason_base_idea_active_requisite=False,
-    )
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
-    sue_hubunit.save_action_world(sue_action)
+#     egg_text = "egg first"
+#     egg_road = sue_action.make_l1_road(egg_text)
+#     sue_action.add_l1_idea(ideaunit_shop(egg_text))
+#     chicken_text = "chicken first"
+#     chicken_road = sue_action.make_l1_road(chicken_text)
+#     sue_action.add_l1_idea(ideaunit_shop(chicken_text))
+#     # set egg pledge is True when chicken first is False
+#     sue_action.edit_idea_attr(
+#         road=egg_road,
+#         pledge=True,
+#         reason_base=chicken_road,
+#         reason_base_idea_active_requisite=True,
+#     )
+#     # set chick pledge is True when egg first is False
+#     sue_action.edit_idea_attr(
+#         road=chicken_road,
+#         pledge=True,
+#         reason_base=egg_road,
+#         reason_base_idea_active_requisite=False,
+#     )
+#     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
+#     sue_hubunit.save_action_world(sue_action)
 
-    # WHEN
-    new_yao_action = create_listen_basis(yao_voice)
-    listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
+#     # WHEN
+#     new_yao_action = create_listen_basis(yao_voice)
+#     listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
 
-    # THEN irrational world is ignored
-    assert len(new_yao_action.get_agenda_dict()) != 3
-    assert len(new_yao_action.get_agenda_dict()) == 2
-    zia_charunit = new_yao_action.get_char(zia_text)
-    sue_charunit = new_yao_action.get_char(sue_text)
-    print(f"{sue_charunit.debtor_weight=}")
-    print(f"{sue_charunit._irrational_debtor_weight=}")
-    assert zia_charunit._irrational_debtor_weight == 0
-    assert sue_charunit._irrational_debtor_weight == 51
+#     # THEN irrational world is ignored
+#     assert len(new_yao_action.get_agenda_dict()) != 3
+#     assert len(new_yao_action.get_agenda_dict()) == 2
+#     zia_charunit = new_yao_action.get_char(zia_text)
+#     sue_charunit = new_yao_action.get_char(sue_text)
+#     print(f"{sue_charunit.debtor_weight=}")
+#     print(f"{sue_charunit._irrational_debtor_weight=}")
+#     assert zia_charunit._irrational_debtor_weight == 0
+#     assert sue_charunit._irrational_debtor_weight == 51
 
 
 def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(

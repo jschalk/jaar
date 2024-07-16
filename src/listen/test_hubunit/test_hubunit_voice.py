@@ -93,7 +93,6 @@ def test_HubUnit_create_voice_from_gifts_CreatesvoiceFileFromGiftFiles(
     # THEN
     assert sue_hubunit.voice_file_exists()
     static_sue_voice = sue_hubunit._merge_any_gifts(sue_hubunit.default_voice_world())
-    static_sue_voice._calc_charunit_metrics()
     assert sue_hubunit.get_voice_world().get_dict() == static_sue_voice.get_dict()
 
 
@@ -115,7 +114,6 @@ def test_HubUnit_create_initial_gift_and_voice_files_CreatesGiftFilesAndvoiceFil
     assert os_path_exists(init_gift_file_path)
     assert sue_hubunit.voice_file_exists()
     static_sue_voice = sue_hubunit._merge_any_gifts(sue_hubunit.default_voice_world())
-    static_sue_voice._calc_charunit_metrics()
     assert sue_hubunit.get_voice_world().get_dict() == static_sue_voice.get_dict()
 
 
