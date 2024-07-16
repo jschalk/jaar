@@ -518,81 +518,80 @@ class AwardAgendaMetrics:
                 self.agenda_yes_world_i_sum += agenda_item._bud_ratio
 
 
-# def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
-#     # GIVEN
-#     x_world = examples_world_v001_with_large_agenda()
-#     clear_all_charunits_beliefstorys_world_agenda_cred_debt(x_world=x_world)
+def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
+    # GIVEN
+    x_world = examples_world_v001_with_large_agenda()
+    clear_all_charunits_beliefstorys_world_agenda_cred_debt(x_world=x_world)
 
-#     # TEST world_agenda_debt and world_agenda_cred are empty
-#     x_beliefagendametrics = BeliefAgendaMetrics()
-#     x_beliefagendametrics.set_sums(x_world=x_world)
-#     assert x_beliefagendametrics.sum_beliefstory_cred == 0
-#     assert x_beliefagendametrics.sum_beliefstory_debt == 0
-#     assert x_beliefagendametrics.sum_belieflink_cred == 0
-#     assert x_beliefagendametrics.sum_belieflink_debt == 0
+    # TEST world_agenda_debt and world_agenda_cred are empty
+    x_beliefagendametrics = BeliefAgendaMetrics()
+    x_beliefagendametrics.set_sums(x_world=x_world)
+    assert x_beliefagendametrics.sum_beliefstory_cred == 0
+    assert x_beliefagendametrics.sum_beliefstory_debt == 0
+    assert x_beliefagendametrics.sum_belieflink_cred == 0
+    assert x_beliefagendametrics.sum_belieflink_debt == 0
 
-#     # TEST world_agenda_debt and world_agenda_cred are empty
-#     x_charagendametrics = CharAgendaMetrics()
-#     x_charagendametrics.set_sums(x_world=x_world)
-#     assert x_charagendametrics.sum_agenda_cred == 0
-#     assert x_charagendametrics.sum_agenda_debt == 0
-#     assert x_charagendametrics.sum_agenda_ratio_cred == 0
-#     assert x_charagendametrics.sum_agenda_ratio_debt == 0
+    # TEST world_agenda_debt and world_agenda_cred are empty
+    x_charagendametrics = CharAgendaMetrics()
+    x_charagendametrics.set_sums(x_world=x_world)
+    assert x_charagendametrics.sum_agenda_cred == 0
+    assert x_charagendametrics.sum_agenda_debt == 0
+    assert x_charagendametrics.sum_agenda_ratio_cred == 0
+    assert x_charagendametrics.sum_agenda_ratio_debt == 0
 
-#     # WHEN
-#     agenda_dict = x_world.get_agenda_dict()
+    # WHEN
+    agenda_dict = x_world.get_agenda_dict()
 
-#     # THEN
-#     assert len(agenda_dict) == 63
-#     x_awardagendametrics = AwardAgendaMetrics()
-#     x_awardagendametrics.set_sums(agenda_dict=agenda_dict)
-#     # print(f"{sum_world_agenda_share=}")
-#     # assert x_awardagendametrics.agenda_no_count == 14
-#     assert x_awardagendametrics.agenda_yes_count == 49
-#     assert x_awardagendametrics.agenda_no_world_i_sum == 0.0037472699999999996
-#     assert x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505000000001
-#     assert are_equal(
-#         x_awardagendametrics.agenda_no_world_i_sum
-#         + x_awardagendametrics.agenda_yes_world_i_sum,
-#         x_awardagendametrics.sum_world_agenda_share,
-#     )
-#     assert x_awardagendametrics.sum_world_agenda_share == 0.006543775000000002
+    # THEN
+    assert len(agenda_dict) == 63
+    x_awardagendametrics = AwardAgendaMetrics()
+    x_awardagendametrics.set_sums(agenda_dict=agenda_dict)
+    # print(f"{sum_world_agenda_share=}")
+    # assert x_awardagendametrics.agenda_no_count == 14
+    assert x_awardagendametrics.agenda_yes_count == 49
+    assert x_awardagendametrics.agenda_no_world_i_sum == 0.0037472699999999996
+    assert x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505000000001
+    assert are_equal(
+        x_awardagendametrics.agenda_no_world_i_sum
+        + x_awardagendametrics.agenda_yes_world_i_sum,
+        x_awardagendametrics.sum_world_agenda_share,
+    )
+    assert x_awardagendametrics.sum_world_agenda_share == 0.006543775000000002
 
-#     x_beliefagendametrics = BeliefAgendaMetrics()
-#     x_beliefagendametrics.set_sums(x_world=x_world)
-#     assert x_beliefagendametrics.belieflink_count == 81
-#     x_sum = 0.0027965049894874455
-#     assert are_equal(x_beliefagendametrics.sum_beliefstory_cred, x_sum)
-#     assert are_equal(x_beliefagendametrics.sum_beliefstory_debt, x_sum)
-#     assert are_equal(x_beliefagendametrics.sum_belieflink_cred, x_sum)
-#     assert are_equal(x_beliefagendametrics.sum_belieflink_debt, x_sum)
-#     assert are_equal(
-#         x_awardagendametrics.agenda_yes_world_i_sum,
-#         x_beliefagendametrics.sum_beliefstory_cred,
-#     )
+    x_beliefagendametrics = BeliefAgendaMetrics()
+    x_beliefagendametrics.set_sums(x_world=x_world)
+    assert x_beliefagendametrics.belieflink_count == 81
+    x_sum = 0.0027965049894874455
+    assert are_equal(x_beliefagendametrics.sum_beliefstory_cred, x_sum)
+    assert are_equal(x_beliefagendametrics.sum_beliefstory_debt, x_sum)
+    assert are_equal(x_beliefagendametrics.sum_belieflink_cred, x_sum)
+    assert are_equal(x_beliefagendametrics.sum_belieflink_debt, x_sum)
+    assert are_equal(
+        x_awardagendametrics.agenda_yes_world_i_sum,
+        x_beliefagendametrics.sum_beliefstory_cred,
+    )
 
-#     assert all_charunits_have_legitimate_values(x_world)
+    assert all_charunits_have_legitimate_values(x_world)
 
-#     x_charagendametrics = CharAgendaMetrics()
-#     x_charagendametrics.set_sums(x_world=x_world)
-#     assert are_equal(
-#         x_charagendametrics.sum_agenda_cred,
-#         x_awardagendametrics.sum_world_agenda_share,
-#     )
-#     assert are_equal(
-#         x_charagendametrics.sum_agenda_debt,
-#         x_awardagendametrics.sum_world_agenda_share,
-#     )
-#     assert are_equal(x_charagendametrics.sum_agenda_ratio_cred, 1)
-#     assert are_equal(x_charagendametrics.sum_agenda_ratio_debt, 1)
+    x_charagendametrics = CharAgendaMetrics()
+    x_charagendametrics.set_sums(x_world=x_world)
+    assert are_equal(
+        x_charagendametrics.sum_agenda_cred,
+        x_awardagendametrics.sum_world_agenda_share,
+    )
+    assert are_equal(
+        x_charagendametrics.sum_agenda_debt,
+        x_awardagendametrics.sum_world_agenda_share,
+    )
+    assert are_equal(x_charagendametrics.sum_agenda_ratio_cred, 1)
+    assert are_equal(x_charagendametrics.sum_agenda_ratio_debt, 1)
 
-#     # charunit_world_cred_sum = 0.0
-#     # charunit_world_debt_sum = 0.0
+    # charunit_world_cred_sum = 0.0
+    # charunit_world_debt_sum = 0.0
 
-#     # assert charunit_world_cred_sum == 1.0
-#     # assert charunit_world_debt_sum > 0.9999999
-#     # assert charunit_world_debt_sum < 1.00000001
-#     assert 1 == 2
+    # assert charunit_world_cred_sum == 1.0
+    # assert charunit_world_debt_sum > 0.9999999
+    # assert charunit_world_debt_sum < 1.00000001
 
 
 def all_charunits_have_legitimate_values(x_world: WorldUnit):
