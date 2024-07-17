@@ -457,7 +457,7 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     assert sue_hubunit.gift_file_exists(three_int)
 
 
-def test_HubUnit_merge_any_gifts_ReturnsEqualObj(env_dir_setup_cleanup):
+def test_HubUnit_merge_any_gifts_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # GIVEN
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)

@@ -68,7 +68,7 @@ def test_Translator_out_char_id_exists_ReturnsObj():
     assert music_translator.out_char_id_exists(susan_text)
 
 
-def test_Translator_get_in_char_id_ReturnsEqualObj():
+def test_Translator_get_in_char_id_ReturnsObj_Equal():
     # GIVEN
     music_translator = translator_shop()
     yao_text = "Yao"
@@ -77,7 +77,7 @@ def test_Translator_get_in_char_id_ReturnsEqualObj():
     assert yao_text == music_translator.get_in_char_id(yao_text)
 
 
-def test_Translator_get_in_char_id_ReturnsNotEqualObj():
+def test_Translator_get_in_char_id_ReturnsObj_NotEqual():
     # GIVEN
     sue_text = "Sue"
     susan_text = "Susan"
