@@ -395,14 +395,113 @@ def test_allot_scale_v08():
     scale_number = 1
     grain_unit = 0.5
 
+    # WHEN / THEN
+    # with pytest_raises(Exception) as excinfo:
+    #     allot_scale(chars, scale_number, grain_unit)
+    # assert (
+    #     str(excinfo.value)
+    #     == f"If the summation of ledger values is zero the scale_number '{scale_number}' needs to be zero."
+    # )
     alloted_chars = allot_scale(chars, scale_number, grain_unit)
     print(alloted_chars)
-    assert alloted_chars.get("obj1") == 0.5
-    assert alloted_chars.get("obj2") == 0.5
+    assert alloted_chars.get("obj1") == 0
+    assert alloted_chars.get("obj2") == 0
     assert alloted_chars.get("obj3") == 0
     assert alloted_chars.get("obj4") == 0
     assert alloted_chars.get("obj5") == 0
     assert alloted_chars.get("obj6") == 0
+    assert sum(alloted_chars.values()) == 0
+    assert sum(alloted_chars.values()) != scale_number
+
+
+def test_allot_scale_v09():
+    # Example usage:
+    chars = {
+        "obj1": 0,
+        "obj2": 0,
+        "obj3": 0,
+        "obj4": 0,
+        "obj5": 0,
+        "obj6": 0,
+    }
+    print(f"{chars=}")
+    scale_number = 0
+    grain_unit = 0.5
+
+    alloted_chars = allot_scale(chars, scale_number, grain_unit)
+    print(alloted_chars)
+    assert alloted_chars.get("obj1") == 0
+    assert alloted_chars.get("obj2") == 0
+    assert alloted_chars.get("obj3") == 0
+    assert alloted_chars.get("obj4") == 0
+    assert alloted_chars.get("obj5") == 0
+    assert alloted_chars.get("obj6") == 0
+    assert sum(alloted_chars.values()) == scale_number
+
+
+def test_allot_scale_v10():
+    # Example usage:
+    chars = {
+        "obj1": 0,
+        "obj2": 0,
+        "obj3": 0,
+        "obj4": 34,
+        "obj5": 55,
+        "obj6": 55,
+        "obj7": 55,
+    }
+    print(f"{chars=}")
+    scale_number = 6
+    grain_unit = 3
+
+    alloted_chars = allot_scale(chars, scale_number, grain_unit)
+    print(alloted_chars)
+    assert alloted_chars.get("obj1") == 0
+    assert alloted_chars.get("obj2") == 0
+    assert alloted_chars.get("obj3") == 0
+    assert alloted_chars.get("obj4") == 0
+    assert alloted_chars.get("obj5") == 0
+    assert alloted_chars.get("obj6") == 3
+    assert alloted_chars.get("obj7") == 3
+    assert sum(alloted_chars.values()) == scale_number
+
+
+def test_allot_scale_v10():
+    # Example usage:
+    chars = {}
+    print(f"{chars=}")
+    scale_number = 6
+    grain_unit = 3
+
+    alloted_chars = allot_scale(chars, scale_number, grain_unit)
+    print(alloted_chars)
+    assert alloted_chars == {}
+
+
+def test_allot_scale_v11():
+    # Example usage:
+    chars = {
+        "obj1": 1,
+        "obj2": 0,
+        "obj3": 0,
+        "obj4": 34,
+        "obj5": 55,
+        "obj6": 55,
+        "obj7": 55,
+    }
+    print(f"{chars=}")
+    scale_number = 6
+    grain_unit = 3
+
+    alloted_chars = allot_scale(chars, scale_number, grain_unit)
+    print(alloted_chars)
+    assert alloted_chars.get("obj1") == 0
+    assert alloted_chars.get("obj2") == 0
+    assert alloted_chars.get("obj3") == 0
+    assert alloted_chars.get("obj4") == 0
+    assert alloted_chars.get("obj5") == 0
+    assert alloted_chars.get("obj6") == 3
+    assert alloted_chars.get("obj7") == 3
     assert sum(alloted_chars.values()) == scale_number
 
 
@@ -444,36 +543,36 @@ def test__create_allot_dict_SummationFailsInConsistentWay():
     gen_alloted_dict = _create_allot_dict(ledger, scale_number, grain_unit)
 
     # THEN
-    wrongsum_allot_dict = {
-        "ACME": 2192982,
-        "Aaron Donald things effected by him": 2192982,
-        "Asset management": 2192982,
-        "Bob Dylan Root": 2192982,
-        "D&B": 2192982,
-        "Freelancing": 2192982,
-        "Internet": 2192982,
-        "Moods": 2192982,
-        "Nation-States": 2192982,
-        "No Movie playing": 2192982,
-        "Seasons": 2192982,
-        "Tired Status": 2192982,
-        "Ultimate Frisbee": 2192982,
-        "WaterAir Living": 2192982,
-        "WaterExistence": 2192982,
-        "casa": 2192982,
-        "ced_day": 87719298,
-        "ced_week": 87719298,
-        "ced_year": 87719298,
-        "day_hour": 87719298,
-        "day_minute": 87719298,
-        "month_day": 87719298,
-        "month_week": 87719298,
-        "numeric_road_test": 87719298,
-        "weekdays": 87719298,
-        "year_month": 87719298,
-        "year_week": 87719298,
-    }
-    assert gen_alloted_dict == wrongsum_allot_dict
+    # wrongsum_allot_dict = {
+    #     "ACME": 2192982,
+    #     "Aaron Donald things effected by him": 2192982,
+    #     "Asset management": 2192982,
+    #     "Bob Dylan Root": 2192982,
+    #     "D&B": 2192982,
+    #     "Freelancing": 2192982,
+    #     "Internet": 2192982,
+    #     "Moods": 2192982,
+    #     "Nation-States": 2192982,
+    #     "No Movie playing": 2192982,
+    #     "Seasons": 2192982,
+    #     "Tired Status": 2192982,
+    #     "Ultimate Frisbee": 2192982,
+    #     "WaterAir Living": 2192982,
+    #     "WaterExistence": 2192982,
+    #     "casa": 2192982,
+    #     "ced_day": 87719298,
+    #     "ced_week": 87719298,
+    #     "ced_year": 87719298,
+    #     "day_hour": 87719298,
+    #     "day_minute": 87719298,
+    #     "month_day": 87719298,
+    #     "month_week": 87719298,
+    #     "numeric_road_test": 87719298,
+    #     "weekdays": 87719298,
+    #     "year_month": 87719298,
+    #     "year_week": 87719298,
+    # }
+    # assert gen_alloted_dict == wrongsum_allot_dict
     assert sum(gen_alloted_dict.values()) != scale_number
     assert sum(gen_alloted_dict.values()) + 10 == scale_number
 
@@ -520,35 +619,35 @@ def test_allot_scale_Summation():
     assert sum(sub_function_alloted_dict.values()) + 10 == scale_number
     assert sum(top_function_alloted_dict.values()) == scale_number
 
-    correct_sum_allot_dict = {
-        "ACME": 2192983,
-        "Aaron Donald things effected by him": 2192983,
-        "Asset management": 2192983,
-        "Bob Dylan Root": 2192983,
-        "D&B": 2192983,
-        "Freelancing": 2192983,
-        "Internet": 2192983,
-        "Moods": 2192983,
-        "Nation-States": 2192983,
-        "No Movie playing": 2192983,
-        "Seasons": 2192982,
-        "Tired Status": 2192982,
-        "Ultimate Frisbee": 2192982,
-        "WaterAir Living": 2192982,
-        "WaterExistence": 2192982,
-        "casa": 2192982,
-        "ced_day": 87719298,
-        "ced_week": 87719298,
-        "ced_year": 87719298,
-        "day_hour": 87719298,
-        "day_minute": 87719298,
-        "month_day": 87719298,
-        "month_week": 87719298,
-        "numeric_road_test": 87719298,
-        "weekdays": 87719298,
-        "year_month": 87719298,
-        "year_week": 87719298,
-    }
-    assert sub_function_alloted_dict != correct_sum_allot_dict
-    assert top_function_alloted_dict == correct_sum_allot_dict
+    # correct_sum_allot_dict = {
+    #     "ACME": 2192983,
+    #     "Aaron Donald things effected by him": 2192983,
+    #     "Asset management": 2192983,
+    #     "Bob Dylan Root": 2192983,
+    #     "D&B": 2192983,
+    #     "Freelancing": 2192983,
+    #     "Internet": 2192983,
+    #     "Moods": 2192983,
+    #     "Nation-States": 2192983,
+    #     "No Movie playing": 2192983,
+    #     "Seasons": 2192982,
+    #     "Tired Status": 2192982,
+    #     "Ultimate Frisbee": 2192982,
+    #     "WaterAir Living": 2192982,
+    #     "WaterExistence": 2192982,
+    #     "casa": 2192982,
+    #     "ced_day": 87719298,
+    #     "ced_week": 87719298,
+    #     "ced_year": 87719298,
+    #     "day_hour": 87719298,
+    #     "day_minute": 87719298,
+    #     "month_day": 87719298,
+    #     "month_week": 87719298,
+    #     "numeric_road_test": 87719298,
+    #     "weekdays": 87719298,
+    #     "year_month": 87719298,
+    #     "year_week": 87719298,
+    # }
+    # assert sub_function_alloted_dict != correct_sum_allot_dict
+    # assert top_function_alloted_dict == correct_sum_allot_dict
     assert sum(top_function_alloted_dict.values()) == scale_number

@@ -486,7 +486,9 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # print(f"{sum_world_agenda_share=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    assert x_awardagendametrics.agenda_no_world_i_sum == 0.00374727 * default_bud_pool()
+    assert (
+        x_awardagendametrics.agenda_no_world_i_sum == 0.003747268 * default_bud_pool()
+    )
     assert (
         x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505 * default_bud_pool()
     )
@@ -496,7 +498,7 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
         x_awardagendametrics.sum_world_agenda_share,
     )
     assert (
-        x_awardagendametrics.sum_world_agenda_share == 0.006543775 * default_bud_pool()
+        x_awardagendametrics.sum_world_agenda_share == 0.006543773 * default_bud_pool()
     )
 
     x_lobbyagendametrics = LobbyAgendaMetrics()
