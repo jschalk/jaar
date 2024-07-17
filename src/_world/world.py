@@ -1841,6 +1841,8 @@ def worldunit_shop(
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _credor_respect=validate_respect_num(),
+        _debtor_respect=validate_respect_num(),
         _bud_pool=validate_bud_pool(_bud_pool),
         _bud_coin=default_bud_coin_if_none(_bud_coin),
         _bit=default_bit_if_none(_bit),

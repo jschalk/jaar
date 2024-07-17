@@ -504,6 +504,7 @@ class HubUnit:
         # get copy of world without any metrics
         perspective_world = worldunit_get_from_json(speaker.get_json())
         perspective_world.set_owner_id(self.owner_id)
+        perspective_world.calc_world_metrics()
         return perspective_world
 
     def get_dw_perspective_world(self, speaker_id: OwnerID) -> WorldUnit:

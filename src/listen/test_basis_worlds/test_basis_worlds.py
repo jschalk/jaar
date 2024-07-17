@@ -1,4 +1,4 @@
-from src._road.finance import default_respect_num
+from src._road.finance import default_respect_num, validate_respect_num
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
 from src.listen.basis_worlds import (
@@ -47,9 +47,9 @@ def test_create_empty_world_ReturnsCorrectObj():
     assert yao_empty_job._penny == yao_voice._penny
     assert yao_empty_job._monetary_desc is None
     assert yao_empty_job._credor_respect != yao_voice._credor_respect
-    assert yao_empty_job._credor_respect is None
+    assert yao_empty_job._credor_respect == validate_respect_num()
     assert yao_empty_job._debtor_respect != yao_voice._debtor_respect
-    assert yao_empty_job._debtor_respect is None
+    assert yao_empty_job._debtor_respect == validate_respect_num()
     yao_empty_job.calc_world_metrics()
     assert yao_empty_job._chars == {}
 
