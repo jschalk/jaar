@@ -30,12 +30,12 @@ def test_get_real_voices_chars_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup
         "credor_weight",
         "debtor_weight",
         "_lobbylinks",
-        "_world_cred",
-        "_world_debt",
-        "_world_agenda_cred",
-        "_world_agenda_debt",
-        "_world_agenda_ratio_cred",
-        "_world_agenda_ratio_debt",
+        "_bud_give",
+        "_bud_take",
+        "_bud_agenda_give",
+        "_bud_agenda_take",
+        "_bud_agenda_ratio_give",
+        "_bud_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -75,12 +75,12 @@ def test_get_real_actions_chars_dataframe_ReturnsCorrectObj(
         "credor_weight",
         "debtor_weight",
         "_lobbylinks",
-        "_world_cred",
-        "_world_debt",
-        "_world_agenda_cred",
-        "_world_agenda_debt",
-        "_world_agenda_ratio_cred",
-        "_world_agenda_ratio_debt",
+        "_bud_give",
+        "_bud_take",
+        "_bud_agenda_give",
+        "_bud_agenda_take",
+        "_bud_agenda_ratio_give",
+        "_bud_agenda_ratio_take",
         "_inallocable_debtor_weight",
     }
     print(f"{set(x_df.columns)=}")

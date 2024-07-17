@@ -91,19 +91,19 @@ def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_charunit.add_irrational_debtor_weight(bob_irrational_debtor_weight)
     bob_charunit.add_inallocable_debtor_weight(bob_inallocable_debtor_weight)
 
-    bob_world_cred = 55
-    bob_world_debt = 47
-    bob_world_agenda_cred = 51
-    bob_world_agenda_debt = 67
-    bob_world_agenda_ratio_cred = 71
-    bob_world_agenda_ratio_debt = 73
+    bob_bud_give = 55
+    bob_bud_take = 47
+    bob_bud_agenda_give = 51
+    bob_bud_agenda_take = 67
+    bob_bud_agenda_ratio_give = 71
+    bob_bud_agenda_ratio_take = 73
 
-    bob_charunit._world_cred = bob_world_cred
-    bob_charunit._world_debt = bob_world_debt
-    bob_charunit._world_agenda_cred = bob_world_agenda_cred
-    bob_charunit._world_agenda_debt = bob_world_agenda_debt
-    bob_charunit._world_agenda_ratio_cred = bob_world_agenda_ratio_cred
-    bob_charunit._world_agenda_ratio_debt = bob_world_agenda_ratio_debt
+    bob_charunit._bud_give = bob_bud_give
+    bob_charunit._bud_take = bob_bud_take
+    bob_charunit._bud_agenda_give = bob_bud_agenda_give
+    bob_charunit._bud_agenda_take = bob_bud_agenda_take
+    bob_charunit._bud_agenda_ratio_give = bob_bud_agenda_ratio_give
+    bob_charunit._bud_agenda_ratio_take = bob_bud_agenda_ratio_take
 
     bob_charunit.set_lobbylink(lobbylink_shop(bob_text))
     run_text = ",Run"
@@ -124,12 +124,12 @@ def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
         "_lobbylinks": bob_charunit.get_lobbylinks_dict(),
         "_irrational_debtor_weight": bob_irrational_debtor_weight,
         "_inallocable_debtor_weight": bob_inallocable_debtor_weight,
-        "_world_cred": bob_world_cred,
-        "_world_debt": bob_world_debt,
-        "_world_agenda_cred": bob_world_agenda_cred,
-        "_world_agenda_debt": bob_world_agenda_debt,
-        "_world_agenda_ratio_cred": bob_world_agenda_ratio_cred,
-        "_world_agenda_ratio_debt": bob_world_agenda_ratio_debt,
+        "_bud_give": bob_bud_give,
+        "_bud_take": bob_bud_take,
+        "_bud_agenda_give": bob_bud_agenda_give,
+        "_bud_agenda_take": bob_bud_agenda_take,
+        "_bud_agenda_ratio_give": bob_bud_agenda_ratio_give,
+        "_bud_agenda_ratio_take": bob_bud_agenda_ratio_take,
     }
 
 

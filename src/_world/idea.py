@@ -359,7 +359,7 @@ class IdeaUnit:
         self._bud_onset = x_bud_onset
         self._bud_cease = x_bud_cease
         self._bud_ratio = (self._bud_cease - self._bud_onset) / total_bud_pool
-        self.set_awardheirs_world_cred_debt()
+        self.set_awardheirs_bud_give_take()
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
         return [
@@ -455,8 +455,8 @@ class IdeaUnit:
         for bh in self._awardheirs.values():
             x_awardline = awardline_shop(
                 lobby_id=bh.lobby_id,
-                _world_cred=bh._world_cred,
-                _world_debt=bh._world_debt,
+                _bud_give=bh._bud_give,
+                _bud_take=bh._bud_take,
             )
             self._awardlines[x_awardline.lobby_id] = x_awardline
 
@@ -469,12 +469,12 @@ class IdeaUnit:
             if self._awardlines.get(bl.lobby_id) is None:
                 self._awardlines[bl.lobby_id] = awardline_shop(
                     lobby_id=bl.lobby_id,
-                    _world_cred=0,
-                    _world_debt=0,
+                    _bud_give=0,
+                    _bud_take=0,
                 )
 
-            self._awardlines[bl.lobby_id].add_world_cred_debt(
-                world_cred=bl._world_cred, world_debt=bl._world_debt
+            self._awardlines[bl.lobby_id].add_bud_give_take(
+                bud_give=bl._bud_give, bud_take=bl._bud_take
             )
 
     def get_awardheirs_credor_weight_sum(self) -> float:
@@ -483,11 +483,11 @@ class IdeaUnit:
     def get_awardheirs_debtor_weight_sum(self) -> float:
         return sum(awardlink.debtor_weight for awardlink in self._awardheirs.values())
 
-    def set_awardheirs_world_cred_debt(self):
+    def set_awardheirs_bud_give_take(self):
         awardheirs_credor_weight_sum = self.get_awardheirs_credor_weight_sum()
         awardheirs_debtor_weight_sum = self.get_awardheirs_debtor_weight_sum()
         for awardheir_x in self._awardheirs.values():
-            awardheir_x.set_world_cred_debt(
+            awardheir_x.set_bud_give_take(
                 idea_bud_share=self._bud_ratio,
                 awardheirs_credor_weight_sum=awardheirs_credor_weight_sum,
                 awardheirs_debtor_weight_sum=awardheirs_debtor_weight_sum,

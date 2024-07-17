@@ -246,24 +246,24 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     assert len(sport_idea._awardheirs) == 2
 
     swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._world_cred is None
-    assert swimmer_awardheir._world_debt is None
+    assert swimmer_awardheir._bud_give is None
+    assert swimmer_awardheir._bud_take is None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._world_cred is None
-    assert biker_awardheir._world_debt is None
+    assert biker_awardheir._bud_give is None
+    assert biker_awardheir._bud_take is None
 
     # WHEN
     sport_idea._bud_ratio = 0.25
-    sport_idea.set_awardheirs_world_cred_debt()
+    sport_idea.set_awardheirs_bud_give_take()
 
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
     swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._world_cred != None
-    assert swimmer_awardheir._world_debt != None
+    assert swimmer_awardheir._bud_give != None
+    assert swimmer_awardheir._bud_take != None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._world_cred != None
-    assert biker_awardheir._world_debt != None
+    assert biker_awardheir._bud_give != None
+    assert biker_awardheir._bud_take != None
 
 
 def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
@@ -275,7 +275,7 @@ def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
 
     # WHEN / THEN
     # does not crash with empty set
-    sport_idea.set_awardheirs_world_cred_debt()
+    sport_idea.set_awardheirs_bud_give_take()
 
 
 def test_IdeaUnit_set_reasonheirsCorrectlySourcesFromOutside():

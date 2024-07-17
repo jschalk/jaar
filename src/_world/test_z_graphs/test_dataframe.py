@@ -29,12 +29,12 @@ def test_get_world_charunits_dataframe_ReturnsCorrectDataFrame():
         "credor_weight",
         "debtor_weight",
         "_lobbylinks",
-        "_world_cred",
-        "_world_debt",
-        "_world_agenda_cred",
-        "_world_agenda_debt",
-        "_world_agenda_ratio_cred",
-        "_world_agenda_ratio_debt",
+        "_bud_give",
+        "_bud_take",
+        "_bud_agenda_give",
+        "_bud_agenda_take",
+        "_bud_agenda_ratio_give",
+        "_bud_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
 
@@ -54,12 +54,12 @@ def test_get_world_charunits_dataframe_ReturnsCorrectEmptyDataFrame():
         "char_id",
         "credor_weight",
         "debtor_weight",
-        "_world_cred",
-        "_world_debt",
-        "_world_agenda_cred",
-        "_world_agenda_debt",
-        "_world_agenda_ratio_cred",
-        "_world_agenda_ratio_debt",
+        "_bud_give",
+        "_bud_take",
+        "_bud_agenda_give",
+        "_bud_agenda_take",
+        "_bud_agenda_ratio_give",
+        "_bud_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
 

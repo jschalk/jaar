@@ -63,15 +63,15 @@ def test_AwardHeir_set_bud_share_CorrectlySetsAttr():
     )
 
     # WHEN
-    lobby_heir_x.set_world_cred_debt(
+    lobby_heir_x.set_bud_give_take(
         idea_bud_share=idea_bud_share,
         awardheirs_credor_weight_sum=awardlinks_sum_credor_weight,
         awardheirs_debtor_weight_sum=awardlinks_sum_debtor_weight,
     )
 
     # THEN
-    assert lobby_heir_x._world_cred == 0.05
-    assert lobby_heir_x._world_debt == 0.1
+    assert lobby_heir_x._bud_give == 0.05
+    assert lobby_heir_x._bud_take == 0.1
 
 
 def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
@@ -126,58 +126,58 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
 def test_AwardLine_exists():
     # ESTABLISH
     bikers_text = "bikers"
-    bikers_world_cred = 0.33
-    bikers_world_debt = 0.55
+    bikers_bud_give = 0.33
+    bikers_bud_take = 0.55
 
     # WHEN
     bikers_awardline = AwardLine(
         lobby_id=bikers_text,
-        _world_cred=bikers_world_cred,
-        _world_debt=bikers_world_debt,
+        _bud_give=bikers_bud_give,
+        _bud_take=bikers_bud_take,
     )
 
     # THEN
     assert bikers_awardline.lobby_id == bikers_text
-    assert bikers_awardline._world_cred == bikers_world_cred
-    assert bikers_awardline._world_debt == bikers_world_debt
+    assert bikers_awardline._bud_give == bikers_bud_give
+    assert bikers_awardline._bud_take == bikers_bud_take
 
 
 def test_awardline_shop_ReturnsCorrectObj_exists():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_text = bikers_text
-    bikers_world_cred = 0.33
-    bikers_world_debt = 0.55
+    bikers_bud_give = 0.33
+    bikers_bud_take = 0.55
 
     # WHEN
     biker_awardline = awardline_shop(
         lobby_id=bikers_text,
-        _world_cred=bikers_world_cred,
-        _world_debt=bikers_world_debt,
+        _bud_give=bikers_bud_give,
+        _bud_take=bikers_bud_take,
     )
 
     assert biker_awardline != None
     assert biker_awardline.lobby_id == bikers_text
-    assert biker_awardline._world_cred == bikers_world_cred
-    assert biker_awardline._world_debt == bikers_world_debt
+    assert biker_awardline._bud_give == bikers_bud_give
+    assert biker_awardline._bud_take == bikers_bud_take
 
 
-def test_AwardLine_add_world_cred_debt_CorrectlyModifiesAttr():
+def test_AwardLine_add_bud_give_take_CorrectlyModifiesAttr():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_awardline = awardline_shop(
-        lobby_id=bikers_text, _world_cred=0.33, _world_debt=0.55
+        lobby_id=bikers_text, _bud_give=0.33, _bud_take=0.55
     )
     assert bikers_awardline.lobby_id == bikers_text
-    assert bikers_awardline._world_cred == 0.33
-    assert bikers_awardline._world_debt == 0.55
+    assert bikers_awardline._bud_give == 0.33
+    assert bikers_awardline._bud_take == 0.55
 
     # WHEN
-    bikers_awardline.add_world_cred_debt(world_cred=0.11, world_debt=0.2)
+    bikers_awardline.add_bud_give_take(bud_give=0.11, bud_take=0.2)
 
     # THEN
-    assert bikers_awardline._world_cred == 0.44
-    assert bikers_awardline._world_debt == 0.75
+    assert bikers_awardline._bud_give == 0.44
+    assert bikers_awardline._bud_take == 0.75
 
 
 def test_LobbyBox_exists():
@@ -189,10 +189,10 @@ def test_LobbyBox_exists():
     assert swim_lobbybox != None
     assert swim_lobbybox.lobby_id == swim_text
     assert swim_lobbybox._lobbylinks is None
-    assert swim_lobbybox._world_cred is None
-    assert swim_lobbybox._world_debt is None
-    assert swim_lobbybox._world_agenda_cred is None
-    assert swim_lobbybox._world_agenda_debt is None
+    assert swim_lobbybox._bud_give is None
+    assert swim_lobbybox._bud_take is None
+    assert swim_lobbybox._bud_agenda_give is None
+    assert swim_lobbybox._bud_agenda_take is None
     assert swim_lobbybox._credor_pool is None
     assert swim_lobbybox._debtor_pool is None
     assert swim_lobbybox._road_delimiter is None
@@ -213,10 +213,10 @@ def test_lobbybox_shop_ReturnsCorrectObj():
     assert swim_lobbybox.lobby_id != None
     assert swim_lobbybox.lobby_id == swim_text
     assert swim_lobbybox._lobbylinks == {}
-    assert swim_lobbybox._world_cred == 0
-    assert swim_lobbybox._world_debt == 0
-    assert swim_lobbybox._world_agenda_cred == 0
-    assert swim_lobbybox._world_agenda_debt == 0
+    assert swim_lobbybox._bud_give == 0
+    assert swim_lobbybox._bud_take == 0
+    assert swim_lobbybox._bud_agenda_give == 0
+    assert swim_lobbybox._bud_agenda_take == 0
     assert swim_lobbybox._credor_pool == 0
     assert swim_lobbybox._debtor_pool == 0
     assert swim_lobbybox._road_delimiter == default_road_delimiter_if_none()

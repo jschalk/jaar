@@ -19,6 +19,10 @@ class InvalidCharException(Exception):
     pass
 
 
+class _lobbylink_Exception(Exception):
+    pass
+
+
 @dataclass
 class CharCore:
     char_id: CharID = None
@@ -46,12 +50,12 @@ class CharUnit(CharCore):
     _irrational_debtor_weight: int = None  # set by listening process
     _inallocable_debtor_weight: int = None  # set by listening process
     # set by World.calc_world_metrics()
-    _world_cred: float = None
-    _world_debt: float = None
-    _world_agenda_cred: float = None
-    _world_agenda_debt: float = None
-    _world_agenda_ratio_cred: float = None
-    _world_agenda_ratio_debt: float = None
+    _bud_give: float = None
+    _bud_take: float = None
+    _bud_agenda_give: float = None
+    _bud_agenda_take: float = None
+    _bud_agenda_ratio_give: float = None
+    _bud_agenda_ratio_take: float = None
 
     def set_bit(self, x_bit: float):
         self._bit = x_bit
@@ -78,13 +82,13 @@ class CharUnit(CharCore):
     def get_debtor_weight(self):
         return get_1_if_None(self.debtor_weight)
 
-    def reset_world_cred_debt(self):
-        self._world_cred = 0
-        self._world_debt = 0
-        self._world_agenda_cred = 0
-        self._world_agenda_debt = 0
-        self._world_agenda_ratio_cred = 0
-        self._world_agenda_ratio_debt = 0
+    def reset_bud_give_take(self):
+        self._bud_give = 0
+        self._bud_take = 0
+        self._bud_agenda_give = 0
+        self._bud_agenda_take = 0
+        self._bud_agenda_ratio_give = 0
+        self._bud_agenda_ratio_take = 0
 
     def add_irrational_debtor_weight(self, x_irrational_debtor_weight: float):
         self._irrational_debtor_weight += x_irrational_debtor_weight
@@ -96,41 +100,41 @@ class CharUnit(CharCore):
         self._irrational_debtor_weight = 0
         self._inallocable_debtor_weight = 0
 
-    def add_world_cred_debt(
+    def add_bud_give_take(
         self,
-        world_cred: float,
-        world_debt,
+        bud_give: float,
+        bud_take,
         world_agenda_cred: float,
         world_agenda_debt,
     ):
-        self._world_cred += world_cred
-        self._world_debt += world_debt
-        self._world_agenda_cred += world_agenda_cred
-        self._world_agenda_debt += world_agenda_debt
+        self._bud_give += bud_give
+        self._bud_take += bud_take
+        self._bud_agenda_give += world_agenda_cred
+        self._bud_agenda_take += world_agenda_debt
 
-    def set_world_agenda_ratio_cred_debt(
+    def set_bud_agenda_ratio_give_take(
         self,
-        world_agenda_ratio_cred_sum: float,
-        world_agenda_ratio_debt_sum: float,
+        bud_agenda_ratio_give_sum: float,
+        bud_agenda_ratio_take_sum: float,
         world_charunit_total_credor_weight: float,
         world_charunit_total_debtor_weight: float,
     ):
-        if world_agenda_ratio_cred_sum == 0:
-            self._world_agenda_ratio_cred = (
+        if bud_agenda_ratio_give_sum == 0:
+            self._bud_agenda_ratio_give = (
                 self.get_credor_weight() / world_charunit_total_credor_weight
             )
         else:
-            self._world_agenda_ratio_cred = (
-                self._world_agenda_cred / world_agenda_ratio_cred_sum
+            self._bud_agenda_ratio_give = (
+                self._bud_agenda_give / bud_agenda_ratio_give_sum
             )
 
-        if world_agenda_ratio_debt_sum == 0:
-            self._world_agenda_ratio_debt = (
+        if bud_agenda_ratio_take_sum == 0:
+            self._bud_agenda_ratio_take = (
                 self.get_debtor_weight() / world_charunit_total_debtor_weight
             )
         else:
-            self._world_agenda_ratio_debt = (
-                self._world_agenda_debt / world_agenda_ratio_debt_sum
+            self._bud_agenda_ratio_take = (
+                self._bud_agenda_take / bud_agenda_ratio_take_sum
             )
 
     def add_lobbylink(
@@ -146,7 +150,7 @@ class CharUnit(CharCore):
         x_lobby_id = x_lobbylink.lobby_id
         lobby_id_is_char_id = is_roadnode(x_lobby_id, self._road_delimiter)
         if lobby_id_is_char_id and self.char_id != x_lobby_id:
-            raise Exception(
+            raise _lobbylink_Exception(
                 f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_lobby_id}'."
             )
 
@@ -215,12 +219,12 @@ class CharUnit(CharCore):
         return x_dict
 
     def _all_attrs_necessary_in_dict(self, x_dict):
-        x_dict["_world_cred"] = self._world_cred
-        x_dict["_world_debt"] = self._world_debt
-        x_dict["_world_agenda_cred"] = self._world_agenda_cred
-        x_dict["_world_agenda_debt"] = self._world_agenda_debt
-        x_dict["_world_agenda_ratio_cred"] = self._world_agenda_ratio_cred
-        x_dict["_world_agenda_ratio_debt"] = self._world_agenda_ratio_debt
+        x_dict["_bud_give"] = self._bud_give
+        x_dict["_bud_take"] = self._bud_take
+        x_dict["_bud_agenda_give"] = self._bud_agenda_give
+        x_dict["_bud_agenda_take"] = self._bud_agenda_take
+        x_dict["_bud_agenda_ratio_give"] = self._bud_agenda_ratio_give
+        x_dict["_bud_agenda_ratio_take"] = self._bud_agenda_ratio_take
 
 
 # class CharUnitsshop:
@@ -271,12 +275,12 @@ def charunit_shop(
         _debtor_pool=0,
         _irrational_debtor_weight=0,
         _inallocable_debtor_weight=0,
-        _world_cred=0,
-        _world_debt=0,
-        _world_agenda_cred=0,
-        _world_agenda_debt=0,
-        _world_agenda_ratio_cred=0,
-        _world_agenda_ratio_debt=0,
+        _bud_give=0,
+        _bud_take=0,
+        _bud_agenda_give=0,
+        _bud_agenda_take=0,
+        _bud_agenda_ratio_give=0,
+        _bud_agenda_ratio_take=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _bit=default_bit_if_none(_bit),
     )

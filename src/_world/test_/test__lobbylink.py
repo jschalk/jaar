@@ -37,12 +37,12 @@ def test_LobbyLink_exists():
     assert swim_lobbylink.debtor_weight == 1.0
     assert swim_lobbylink._credor_pool is None
     assert swim_lobbylink._debtor_pool is None
-    assert swim_lobbylink._world_cred is None
-    assert swim_lobbylink._world_debt is None
-    assert swim_lobbylink._world_agenda_cred is None
-    assert swim_lobbylink._world_agenda_debt is None
-    assert swim_lobbylink._world_agenda_ratio_cred is None
-    assert swim_lobbylink._world_agenda_ratio_debt is None
+    assert swim_lobbylink._bud_give is None
+    assert swim_lobbylink._bud_take is None
+    assert swim_lobbylink._bud_agenda_give is None
+    assert swim_lobbylink._bud_agenda_take is None
+    assert swim_lobbylink._bud_agenda_ratio_give is None
+    assert swim_lobbylink._bud_agenda_ratio_take is None
     assert swim_lobbylink._char_id is None
 
 
@@ -64,12 +64,12 @@ def test_lobbylink_shop_ReturnsCorrectObj():
     assert swim_lobbylink.debtor_weight == swim_debtor_weight
     assert swim_lobbylink._credor_pool == 0
     assert swim_lobbylink._debtor_pool == 0
-    assert swim_lobbylink._world_cred is None
-    assert swim_lobbylink._world_debt is None
-    assert swim_lobbylink._world_agenda_cred is None
-    assert swim_lobbylink._world_agenda_debt is None
-    assert swim_lobbylink._world_agenda_ratio_cred is None
-    assert swim_lobbylink._world_agenda_ratio_debt is None
+    assert swim_lobbylink._bud_give is None
+    assert swim_lobbylink._bud_take is None
+    assert swim_lobbylink._bud_agenda_give is None
+    assert swim_lobbylink._bud_agenda_take is None
+    assert swim_lobbylink._bud_agenda_ratio_give is None
+    assert swim_lobbylink._bud_agenda_ratio_take is None
     assert swim_lobbylink._char_id is None
 
 
@@ -244,68 +244,68 @@ def test_lobbylinks_get_from_dict_ReturnsObj():
     assert after_swim_lobbylinks_objs.get(swim_text) == before_swim_lobbylink
 
 
-def test_LobbyLink_reset_world_cred_debt_SetsAttrCorrectly():
+def test_LobbyLink_reset_bud_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_lobbylink = lobbylink_shop("Bob")
-    bob_lobbylink._world_cred = 0.27
-    bob_lobbylink._world_debt = 0.37
-    bob_lobbylink._world_agenda_cred = 0.41
-    bob_lobbylink._world_agenda_debt = 0.51
-    bob_lobbylink._world_agenda_ratio_cred = 0.433
-    bob_lobbylink._world_agenda_ratio_debt = 0.533
-    assert bob_lobbylink._world_cred == 0.27
-    assert bob_lobbylink._world_debt == 0.37
-    assert bob_lobbylink._world_agenda_cred == 0.41
-    assert bob_lobbylink._world_agenda_debt == 0.51
-    assert bob_lobbylink._world_agenda_ratio_cred == 0.433
-    assert bob_lobbylink._world_agenda_ratio_debt == 0.533
+    bob_lobbylink._bud_give = 0.27
+    bob_lobbylink._bud_take = 0.37
+    bob_lobbylink._bud_agenda_give = 0.41
+    bob_lobbylink._bud_agenda_take = 0.51
+    bob_lobbylink._bud_agenda_ratio_give = 0.433
+    bob_lobbylink._bud_agenda_ratio_take = 0.533
+    assert bob_lobbylink._bud_give == 0.27
+    assert bob_lobbylink._bud_take == 0.37
+    assert bob_lobbylink._bud_agenda_give == 0.41
+    assert bob_lobbylink._bud_agenda_take == 0.51
+    assert bob_lobbylink._bud_agenda_ratio_give == 0.433
+    assert bob_lobbylink._bud_agenda_ratio_take == 0.533
 
     # WHEN
-    bob_lobbylink.reset_world_cred_debt()
+    bob_lobbylink.reset_bud_give_take()
 
     # THEN
-    assert bob_lobbylink._world_cred == 0
-    assert bob_lobbylink._world_debt == 0
-    assert bob_lobbylink._world_agenda_cred == 0
-    assert bob_lobbylink._world_agenda_debt == 0
-    assert bob_lobbylink._world_agenda_ratio_cred == 0
-    assert bob_lobbylink._world_agenda_ratio_debt == 0
+    assert bob_lobbylink._bud_give == 0
+    assert bob_lobbylink._bud_take == 0
+    assert bob_lobbylink._bud_agenda_give == 0
+    assert bob_lobbylink._bud_agenda_take == 0
+    assert bob_lobbylink._bud_agenda_ratio_give == 0
+    assert bob_lobbylink._bud_agenda_ratio_take == 0
 
 
-def test_LobbyLink_set_world_cred_debt_SetsAttrCorrectly():
+def test_LobbyLink_set_bud_give_take_SetsAttrCorrectly():
     # ESTABLISH
     yao_text = "Yao"
     ohio_text = ",Ohio"
     ohio_credor_weight = 3.0
     lobbylinks_sum_credor_weight = 60
-    lobby_world_cred = 0.5
-    lobby_world_agenda_cred = 0.98
+    lobby_bud_give = 0.5
+    lobby_bud_agenda_give = 0.98
 
     ohio_debtor_weight = 13.0
     lobbylinks_sum_debtor_weight = 26.0
-    lobby_world_debt = 0.9
-    lobby_world_agenda_debt = 0.5151
+    lobby_bud_take = 0.9
+    lobby_bud_agenda_take = 0.5151
 
     ohio_yao_lobbylink = lobbylink_shop(
         ohio_text, ohio_credor_weight, ohio_debtor_weight
     )
-    assert ohio_yao_lobbylink._world_cred is None
-    assert ohio_yao_lobbylink._world_debt is None
-    assert ohio_yao_lobbylink._world_agenda_cred is None
-    assert ohio_yao_lobbylink._world_agenda_debt is None
+    assert ohio_yao_lobbylink._bud_give is None
+    assert ohio_yao_lobbylink._bud_take is None
+    assert ohio_yao_lobbylink._bud_agenda_give is None
+    assert ohio_yao_lobbylink._bud_agenda_take is None
 
     # WHEN
-    ohio_yao_lobbylink.set_world_cred_debt(
+    ohio_yao_lobbylink.set_bud_give_take(
         lobbylinks_credor_weight_sum=lobbylinks_sum_credor_weight,
         lobbylinks_debtor_weight_sum=lobbylinks_sum_debtor_weight,
-        lobby_world_cred=lobby_world_cred,
-        lobby_world_debt=lobby_world_debt,
-        lobby_world_agenda_cred=lobby_world_agenda_cred,
-        lobby_world_agenda_debt=lobby_world_agenda_debt,
+        lobby_bud_give=lobby_bud_give,
+        lobby_bud_take=lobby_bud_take,
+        lobby_bud_agenda_give=lobby_bud_agenda_give,
+        lobby_bud_agenda_take=lobby_bud_agenda_take,
     )
 
     # THEN
-    assert ohio_yao_lobbylink._world_cred == 0.025
-    assert ohio_yao_lobbylink._world_debt == 0.45
-    assert ohio_yao_lobbylink._world_agenda_cred == 0.049
-    assert ohio_yao_lobbylink._world_agenda_debt == 0.25755
+    assert ohio_yao_lobbylink._bud_give == 0.025
+    assert ohio_yao_lobbylink._bud_take == 0.45
+    assert ohio_yao_lobbylink._bud_agenda_give == 0.049
+    assert ohio_yao_lobbylink._bud_agenda_take == 0.25755

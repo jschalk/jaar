@@ -463,41 +463,41 @@ class WorldUnit:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
-    def add_to_lobbybox_world_cred_debt(
+    def add_to_lobbybox_bud_give_take(
         self,
         lobby_id: LobbyID,
-        awardheir_world_cred: float,
-        awardheir_world_debt: float,
+        awardheir_bud_give: float,
+        awardheir_bud_take: float,
     ):
         x_lobbybox = self.get_lobbybox(lobby_id)
         if x_lobbybox != None:
-            x_lobbybox._world_cred += awardheir_world_cred
-            x_lobbybox._world_debt += awardheir_world_debt
+            x_lobbybox._bud_give += awardheir_bud_give
+            x_lobbybox._bud_take += awardheir_bud_take
 
-    def add_to_lobbybox_world_agenda_cred_debt(
+    def add_to_lobbybox_bud_agenda_give_take(
         self,
         lobby_id: LobbyID,
-        awardline_world_cred: float,
-        awardline_world_debt: float,
+        awardline_bud_give: float,
+        awardline_bud_take: float,
     ):
         x_lobbybox = self.get_lobbybox(lobby_id)
-        if awardline_world_cred != None and awardline_world_debt != None:
-            x_lobbybox._world_agenda_cred += awardline_world_cred
-            x_lobbybox._world_agenda_debt += awardline_world_debt
+        if awardline_bud_give != None and awardline_bud_take != None:
+            x_lobbybox._bud_agenda_give += awardline_bud_give
+            x_lobbybox._bud_agenda_take += awardline_bud_take
 
-    def add_to_charunit_world_cred_debt(
+    def add_to_charunit_bud_give_take(
         self,
         charunit_char_id: CharID,
-        world_cred,
-        world_debt: float,
+        bud_give,
+        bud_take: float,
         world_agenda_cred: float,
         world_agenda_debt: float,
     ):
         for charunit in self._chars.values():
             if charunit.char_id == charunit_char_id:
-                charunit.add_world_cred_debt(
-                    world_cred=world_cred,
-                    world_debt=world_debt,
+                charunit.add_bud_give_take(
+                    bud_give=bud_give,
+                    bud_take=bud_take,
                     world_agenda_cred=world_agenda_cred,
                     world_agenda_debt=world_agenda_debt,
                 )
@@ -1239,44 +1239,44 @@ class WorldUnit:
     def get_charunits_debtor_weight_sum(self) -> float:
         return sum(charunit.get_debtor_weight() for charunit in self._chars.values())
 
-    def _add_to_charunits_world_cred_debt(self, idea_bud_share: float):
+    def _add_to_charunits_bud_give_take(self, idea_bud_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
-            au_world_cred = (
+            au_bud_give = (
                 idea_bud_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
-            au_world_debt = (
+            au_bud_take = (
                 idea_bud_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
-            x_charunit.add_world_cred_debt(
-                world_cred=au_world_cred,
-                world_debt=au_world_debt,
+            x_charunit.add_bud_give_take(
+                bud_give=au_bud_give,
+                bud_take=au_bud_take,
                 world_agenda_cred=0,
                 world_agenda_debt=0,
             )
 
-    def _add_to_charunits_world_agenda_cred_debt(self, idea_bud_share: float):
+    def _add_to_charunits_bud_agenda_give_take(self, idea_bud_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
-            au_world_agenda_cred = (
+            au_bud_agenda_give = (
                 idea_bud_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
-            au_world_agenda_debt = (
+            au_bud_agenda_take = (
                 idea_bud_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
-            x_charunit.add_world_cred_debt(
-                world_cred=0,
-                world_debt=0,
-                world_agenda_cred=au_world_agenda_cred,
-                world_agenda_debt=au_world_agenda_debt,
+            x_charunit.add_bud_give_take(
+                bud_give=0,
+                bud_take=0,
+                world_agenda_cred=au_bud_agenda_give,
+                world_agenda_debt=au_bud_agenda_take,
             )
 
     def _set_charunits_world_agenda_share(self, world_agenda_share: float):
@@ -1284,29 +1284,29 @@ class WorldUnit:
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
-            au_world_agenda_cred = (
+            au_bud_agenda_give = (
                 world_agenda_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
-            au_world_agenda_debt = (
+            au_bud_agenda_take = (
                 world_agenda_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
-            x_charunit.add_world_agenda_cred_debt(
-                world_agenda_cred=au_world_agenda_cred,
-                world_agenda_debt=au_world_agenda_debt,
+            x_charunit.add_bud_agenda_give_take(
+                world_agenda_cred=au_bud_agenda_give,
+                world_agenda_debt=au_bud_agenda_take,
             )
 
-    def _reset_lobbyboxs_world_cred_debt(self):
+    def _reset_lobbyboxs_bud_give_take(self):
         for lobbybox_obj in self._lobbyboxs.values():
-            lobbybox_obj.reset_world_cred_debt()
+            lobbybox_obj.reset_bud_give_take()
 
     def _set_lobbyboxs_bud_share(self, awardheirs: dict[LobbyID, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            self.add_to_lobbybox_world_cred_debt(
+            self.add_to_lobbybox_bud_give_take(
                 lobby_id=awardlink_obj.lobby_id,
-                awardheir_world_cred=awardlink_obj._world_cred,
-                awardheir_world_debt=awardlink_obj._world_debt,
+                awardheir_bud_give=awardlink_obj._bud_give,
+                awardheir_bud_take=awardlink_obj._bud_take,
             )
 
     def _allot_world_agenda_share(self):
@@ -1317,46 +1317,46 @@ class WorldUnit:
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_world_agenda_cred_debt(idea._bud_ratio)
+                    self._add_to_charunits_bud_agenda_give_take(idea._bud_ratio)
                 else:
                     for x_awardline in idea._awardlines.values():
-                        self.add_to_lobbybox_world_agenda_cred_debt(
+                        self.add_to_lobbybox_bud_agenda_give_take(
                             lobby_id=x_awardline.lobby_id,
-                            awardline_world_cred=x_awardline._world_cred,
-                            awardline_world_debt=x_awardline._world_debt,
+                            awardline_bud_give=x_awardline._bud_give,
+                            awardline_bud_take=x_awardline._bud_take,
                         )
 
     def _allot_lobbyboxs_bud_share(self):
         for x_lobbybox in self._lobbyboxs.values():
-            x_lobbybox._set_lobbylink_world_cred_debt()
+            x_lobbybox._set_lobbylink_bud_give_take()
             for x_lobbylink in x_lobbybox._lobbylinks.values():
-                self.add_to_charunit_world_cred_debt(
+                self.add_to_charunit_bud_give_take(
                     charunit_char_id=x_lobbylink._char_id,
-                    world_cred=x_lobbylink._world_cred,
-                    world_debt=x_lobbylink._world_debt,
-                    world_agenda_cred=x_lobbylink._world_agenda_cred,
-                    world_agenda_debt=x_lobbylink._world_agenda_debt,
+                    bud_give=x_lobbylink._bud_give,
+                    bud_take=x_lobbylink._bud_take,
+                    world_agenda_cred=x_lobbylink._bud_agenda_give,
+                    world_agenda_debt=x_lobbylink._bud_agenda_take,
                 )
 
-    def _set_world_agenda_ratio_cred_debt(self):
-        world_agenda_ratio_cred_sum = 0
-        world_agenda_ratio_debt_sum = 0
+    def _set_bud_agenda_ratio_give_take(self):
+        bud_agenda_ratio_give_sum = 0
+        bud_agenda_ratio_take_sum = 0
 
         for x_charunit in self._chars.values():
-            world_agenda_ratio_cred_sum += x_charunit._world_agenda_cred
-            world_agenda_ratio_debt_sum += x_charunit._world_agenda_debt
+            bud_agenda_ratio_give_sum += x_charunit._bud_agenda_give
+            bud_agenda_ratio_take_sum += x_charunit._bud_agenda_take
 
         for x_charunit in self._chars.values():
-            x_charunit.set_world_agenda_ratio_cred_debt(
-                world_agenda_ratio_cred_sum=world_agenda_ratio_cred_sum,
-                world_agenda_ratio_debt_sum=world_agenda_ratio_debt_sum,
+            x_charunit.set_bud_agenda_ratio_give_take(
+                bud_agenda_ratio_give_sum=bud_agenda_ratio_give_sum,
+                bud_agenda_ratio_take_sum=bud_agenda_ratio_take_sum,
                 world_charunit_total_credor_weight=self.get_charunits_credor_weight_sum(),
                 world_charunit_total_debtor_weight=self.get_charunits_debtor_weight_sum(),
             )
 
-    def _reset_charunit_world_cred_debt(self):
+    def _reset_charunit_bud_give_take(self):
         for charunit in self._chars.values():
-            charunit.reset_world_cred_debt()
+            charunit.reset_bud_give_take()
 
     def idea_exists(self, road: RoadUnit) -> bool:
         if road is None:
@@ -1475,7 +1475,7 @@ class WorldUnit:
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
         self._idearoot.set_bud_share(0, self._bud_pool, self._bud_pool)
-        self._idearoot.set_awardheirs_world_cred_debt()
+        self._idearoot.set_awardheirs_bud_give_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
         self._idearoot.clear_all_char_cred_debt()
@@ -1518,7 +1518,7 @@ class WorldUnit:
         if idea.is_awardheirless() is False:
             self._set_lobbyboxs_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_world_cred_debt(idea._bud_ratio)
+            self._add_to_charunits_bud_give_take(idea._bud_ratio)
 
     def get_bud_share(
         self, parent_bud_share: float, weight: int, sibling_total_weight: int
@@ -1548,7 +1548,7 @@ class WorldUnit:
         for x_char_id, char_debtor_pool in debtor_allot.items():
             self.get_char(x_char_id).set_debtor_pool(char_debtor_pool)
         self._create_lobbyboxs_metrics()
-        self._reset_charunit_world_cred_debt()
+        self._reset_charunit_bud_give_take()
 
     def _set_tree_traverse_starting_point(self):
         self._rational = False
@@ -1647,7 +1647,7 @@ class WorldUnit:
     def _after_all_tree_traverses_set_cred_debt(self):
         self._allot_world_agenda_share()
         self._allot_lobbyboxs_bud_share()
-        self._set_world_agenda_ratio_cred_debt()
+        self._set_bud_agenda_ratio_give_take()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
         self._set_econ_dict()
@@ -1686,8 +1686,8 @@ class WorldUnit:
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
-        self._reset_lobbyboxs_world_cred_debt()
-        self._reset_charunit_world_cred_debt()
+        self._reset_lobbyboxs_bud_give_take()
+        self._reset_charunit_bud_give_take()
 
     def get_heir_road_list(self, x_road: RoadUnit) -> list[RoadUnit]:
         road_list = self.get_idea_tree_ordered_road_list()

@@ -315,8 +315,8 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     assert x_world._idearoot._awardlines != {}
     root_idea = x_world.get_idea_obj(road=x_world._idearoot._label)
     sue_awardline = x_world._idearoot._awardlines.get(sue_text)
-    print(f"{sue_awardline._world_cred=} {root_idea._bud_ratio=} ")
-    print(f"  {sue_awardline._world_debt=} {root_idea._bud_ratio=} ")
+    print(f"{sue_awardline._bud_give=} {root_idea._bud_ratio=} ")
+    print(f"  {sue_awardline._bud_take=} {root_idea._bud_ratio=} ")
     sum_x = 0
     cat_road = x_world.make_l1_road("cat have dinner")
     cat_idea = x_world.get_idea_obj(cat_road)
@@ -341,12 +341,12 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     # for kid_idea in root_idea._kids.values():
     #     sum_x += kid_idea._bud_ratio
     #     print(f"  {kid_idea._bud_ratio=} {sum_x=} {kid_idea.get_road()=}")
-    assert round(sue_awardline._world_cred, 15) == 1
-    assert round(sue_awardline._world_debt, 15) == 1
+    assert round(sue_awardline._bud_give, 15) == 1
+    assert round(sue_awardline._bud_take, 15) == 1
     x_awardline = awardline_shop(
         lobby_id=sue_text,
-        _world_cred=0.9999999999999998,
-        _world_debt=0.9999999999999998,
+        _bud_give=0.9999999999999998,
+        _bud_take=0.9999999999999998,
     )
     assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
 
@@ -373,8 +373,8 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
     print(f"{x_world._idearoot._awardlines=}")
     x_awardline = awardline_shop(
         lobby_id=sue_text,
-        _world_cred=0.23076923,
-        _world_debt=0.23076923,
+        _bud_give=0.23076923,
+        _bud_take=0.23076923,
     )
     assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
     assert x_world._idearoot._kids[casa_text]._awardlines != {}
