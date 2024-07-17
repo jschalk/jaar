@@ -1,5 +1,5 @@
 from src._instrument.python import get_empty_set_if_none
-from src._world.lobbybox import LobbyBox, LobbyID
+from src._world.lobby import LobbyBox, LobbyID
 from src._world.char import CharID
 from dataclasses import dataclass
 

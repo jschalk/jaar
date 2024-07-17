@@ -42,7 +42,7 @@ from src._world.reason_idea import (
     reasons_get_from_dict,
     factunits_get_from_dict,
 )
-from src._world.lobbybox import (
+from src._world.lobby import (
     AwardHeir,
     AwardLink,
     awardlinks_get_from_dict,

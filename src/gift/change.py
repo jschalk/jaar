@@ -9,7 +9,7 @@ from src._instrument.python import (
 from src._road.road import RoadUnit, get_terminus_node, get_parent_road
 from src._world.reason_idea import FactUnit, ReasonUnit
 from src._world.char import LobbyLink, CharID, CharUnit
-from src._world.lobbylink import LobbyLink, LobbyID
+from src._world.lobby import LobbyLink, LobbyID
 from src._world.idea import IdeaUnit
 from src._world.world import WorldUnit, worldunit_shop
 from src.gift.atom_config import CRUD_command

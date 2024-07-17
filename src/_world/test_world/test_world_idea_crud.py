@@ -3,7 +3,7 @@ from src._world.examples.example_worlds import get_world_with_4_levels
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import reasonunit_shop, factunit_shop
 from src._world.world import worldunit_shop
-from src._world.lobbybox import awardlink_shop
+from src._world.lobby import awardlink_shop
 from pytest import raises as pytest_raises
 from src._road.road import default_road_delimiter_if_none
 

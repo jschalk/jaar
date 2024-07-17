@@ -1,4 +1,4 @@
-from src._world.lobbylink import (
+from src._world.lobby import (
     LobbyCore,
     LobbyID,
     lobbylink_shop,
@@ -12,7 +12,6 @@ from pytest import raises as pytest_raises
 def test_LobbyID_exists():
     ohio_lobby_id = LobbyID(",ohio")
     assert ohio_lobby_id != None
-    assert str(type(ohio_lobby_id)).find(".lobbylink.LobbyID") > 0
 
 
 def test_LobbyCore_exists():

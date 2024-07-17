@@ -1,5 +1,5 @@
 from src._world.char import charunit_shop
-from src._world.lobbybox import awardlink_shop
+from src._world.lobby import awardlink_shop
 from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy

@@ -1,4 +1,4 @@
-from src._world.lobbylink import lobbylink_shop
+from src._world.lobby import lobbylink_shop
 from src._world.char import charunit_shop
 from pytest import raises as pytest_raises
 

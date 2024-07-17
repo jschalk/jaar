@@ -1,4 +1,4 @@
-from src._world.lobbybox import awardlink_shop
+from src._world.lobby import awardlink_shop
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
 )

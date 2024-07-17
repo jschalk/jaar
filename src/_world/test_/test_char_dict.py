@@ -1,4 +1,4 @@
-from src._world.lobbylink import lobbylink_shop
+from src._world.lobby import lobbylink_shop
 from src._world.char import (
     charunit_shop,
     charunits_get_from_json,

@@ -1,5 +1,5 @@
-from src._world.lobbylink import lobbylink_shop
-from src._world.lobbybox import lobbybox_shop
+from src._world.lobby import lobbylink_shop
+from src._world.lobby import lobbybox_shop
 from pytest import raises as pytest_raises
 
 

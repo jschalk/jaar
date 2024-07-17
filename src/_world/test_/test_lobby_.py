@@ -1,4 +1,4 @@
-from src._world.lobbybox import (
+from src._world.lobby import (
     AwardLine,
     awardline_shop,
     AwardLink,

@@ -45,7 +45,7 @@ from src._road.road import (
 )
 
 from src._world.char import CharUnit, charunits_get_from_dict, charunit_shop
-from src._world.lobbybox import (
+from src._world.lobby import (
     AwardLink,
     LobbyID,
     LobbyBox,

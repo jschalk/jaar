@@ -6,7 +6,7 @@ from src._road.road import (
     is_roadnode,
 )
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
-from src._world.lobbylink import (
+from src._world.lobby import (
     LobbyID,
     LobbyLink,
     lobbylinks_get_from_dict,
