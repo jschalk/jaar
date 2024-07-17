@@ -181,30 +181,30 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
         x_world._penny = x_atom.get_value(x_arg)
 
 
-def _modify_world_char_lobbylink_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbyship_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_lobby_id = x_atom.get_value("lobby_id")
-    x_world.get_char(x_char_id).delete_lobbylink(x_lobby_id)
+    x_world.get_char(x_char_id).delete_lobbyship(x_lobby_id)
 
 
-def _modify_world_char_lobbylink_update(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbyship_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_lobby_id = x_atom.get_value("lobby_id")
     x_charunit = x_world.get_char(x_char_id)
-    x_lobbylink = x_charunit.get_lobbylink(x_lobby_id)
+    x_lobbyship = x_charunit.get_lobbyship(x_lobby_id)
     x_credor_weight = x_atom.get_value("credor_weight")
     x_debtor_weight = x_atom.get_value("debtor_weight")
-    x_lobbylink.set_credor_weight(x_credor_weight)
-    x_lobbylink.set_debtor_weight(x_debtor_weight)
+    x_lobbyship.set_credor_weight(x_credor_weight)
+    x_lobbyship.set_debtor_weight(x_debtor_weight)
 
 
-def _modify_world_char_lobbylink_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbyship_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_lobby_id = x_atom.get_value("lobby_id")
     x_credor_weight = x_atom.get_value("credor_weight")
     x_debtor_weight = x_atom.get_value("debtor_weight")
     x_charunit = x_world.get_char(x_char_id)
-    x_charunit.add_lobbylink(x_lobby_id, x_credor_weight, x_debtor_weight)
+    x_charunit.add_lobbyship(x_lobby_id, x_credor_weight, x_debtor_weight)
 
 
 def _modify_world_ideaunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
@@ -404,13 +404,13 @@ def _modify_world_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_update_worldunit(x_world, x_atom)
 
 
-def _modify_world_char_lobbylink(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbyship(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_char_lobbylink_delete(x_world, x_atom)
+        _modify_world_char_lobbyship_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_char_lobbylink_update(x_world, x_atom)
+        _modify_world_char_lobbyship_update(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_char_lobbylink_insert(x_world, x_atom)
+        _modify_world_char_lobbyship_insert(x_world, x_atom)
 
 
 def _modify_world_ideaunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -477,8 +477,8 @@ def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
 def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.category == "worldunit":
         _modify_world_worldunit(x_world, x_atom)
-    elif x_atom.category == "world_char_lobbylink":
-        _modify_world_char_lobbylink(x_world, x_atom)
+    elif x_atom.category == "world_char_lobbyship":
+        _modify_world_char_lobbyship(x_world, x_atom)
     elif x_atom.category == "world_ideaunit":
         _modify_world_ideaunit(x_world, x_atom)
     elif x_atom.category == "world_idea_awardlink":
@@ -506,7 +506,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._bud_pool != y_obj._bud_pool
             or x_obj._bud_coin != y_obj._bud_coin
         )
-    elif category in {"world_char_lobbylink"}:
+    elif category in {"world_char_lobbyship"}:
         return (x_obj.credor_weight != y_obj.credor_weight) or (
             x_obj.debtor_weight != y_obj.debtor_weight
         )

@@ -213,17 +213,17 @@ def test_IdeaUnit_awardlinks_exist():
         take_weight=swimmer_take_weight,
     )
 
-    x_lobbylinks = {
+    x_lobbyships = {
         swimmer_awardlink.lobby_id: swimmer_awardlink,
         biker_awardlink.lobby_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_lobbylinks)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_lobbyships)
 
     # THEN
-    assert sport_idea._awardlinks == x_lobbylinks
+    assert sport_idea._awardlinks == x_lobbyships
 
 
 def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValues():
@@ -247,14 +247,14 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
         take_weight=swimmer_take_weight,
     )
 
-    x_lobbylinks = {
+    x_lobbyships = {
         swimmer_awardlink.lobby_id: swimmer_awardlink,
         biker_awardlink.lobby_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbylinks)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbyships)
 
     # THEN
     assert sport_idea.get_awardheirs_give_weight_sum() != None

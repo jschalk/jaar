@@ -7,7 +7,7 @@ class InvalidLobbyException(Exception):
     pass
 
 
-class lobbylink_lobby_id_Exception(Exception):
+class lobbyship_lobby_id_Exception(Exception):
     pass
 
 
@@ -17,7 +17,7 @@ class LobbyCore:
 
 
 @dataclass
-class LobbyLink(LobbyCore):
+class LobbyShip(LobbyCore):
     credor_weight: float = 1.0
     debtor_weight: float = 1.0
     # calculated fields
@@ -56,8 +56,8 @@ class LobbyLink(LobbyCore):
 
     def set_bud_give_take(
         self,
-        lobbylinks_credor_weight_sum: float,
-        lobbylinks_debtor_weight_sum: float,
+        lobbyships_credor_weight_sum: float,
+        lobbyships_debtor_weight_sum: float,
         lobby_bud_give: float,
         lobby_bud_take: float,
         lobby_bud_agenda_give: float,
@@ -65,8 +65,8 @@ class LobbyLink(LobbyCore):
     ):
         lobby_bud_give = get_1_if_None(lobby_bud_give)
         lobby_bud_take = get_1_if_None(lobby_bud_take)
-        credor_ratio = self.credor_weight / lobbylinks_credor_weight_sum
-        debtor_ratio = self.debtor_weight / lobbylinks_debtor_weight_sum
+        credor_ratio = self.credor_weight / lobbyships_credor_weight_sum
+        debtor_ratio = self.debtor_weight / lobbyships_debtor_weight_sum
 
         self._bud_give = lobby_bud_give * credor_ratio
         self._bud_take = lobby_bud_take * debtor_ratio
@@ -74,13 +74,13 @@ class LobbyLink(LobbyCore):
         self._bud_agenda_take = lobby_bud_agenda_take * debtor_ratio
 
 
-def lobbylink_shop(
+def lobbyship_shop(
     lobby_id: LobbyID,
     credor_weight: float = None,
     debtor_weight: float = None,
     _char_id: CharID = None,
-) -> LobbyLink:
-    return LobbyLink(
+) -> LobbyShip:
+    return LobbyShip(
         lobby_id=lobby_id,
         credor_weight=get_1_if_None(credor_weight),
         debtor_weight=get_1_if_None(debtor_weight),
@@ -90,8 +90,8 @@ def lobbylink_shop(
     )
 
 
-def lobbylink_get_from_dict(x_dict: dict, x_char_id: CharID) -> LobbyLink:
-    return lobbylink_shop(
+def lobbyship_get_from_dict(x_dict: dict, x_char_id: CharID) -> LobbyShip:
+    return lobbyship_shop(
         lobby_id=x_dict.get("lobby_id"),
         credor_weight=x_dict.get("credor_weight"),
         debtor_weight=x_dict.get("debtor_weight"),
@@ -99,12 +99,12 @@ def lobbylink_get_from_dict(x_dict: dict, x_char_id: CharID) -> LobbyLink:
     )
 
 
-def lobbylinks_get_from_dict(
+def lobbyships_get_from_dict(
     x_dict: dict, x_char_id: CharID
-) -> dict[LobbyID, LobbyLink]:
+) -> dict[LobbyID, LobbyShip]:
     return {
-        x_lobby_id: lobbylink_get_from_dict(x_lobbylink_dict, x_char_id)
-        for x_lobby_id, x_lobbylink_dict in x_dict.items()
+        x_lobby_id: lobbyship_get_from_dict(x_lobbyship_dict, x_char_id)
+        for x_lobby_id, x_lobbyship_dict in x_dict.items()
     }
 
 
@@ -201,7 +201,7 @@ def awardline_shop(lobby_id: LobbyID, _bud_give: float, _bud_take: float):
 
 @dataclass
 class LobbyBox(LobbyCore):
-    _lobbylinks: dict[CharID, LobbyLink] = None  # set by WorldUnit.set_charunit()
+    _lobbyships: dict[CharID, LobbyShip] = None  # set by WorldUnit.set_charunit()
     _road_delimiter: str = None  # calculated by WorldUnit
     # calculated by WorldUnit.calc_world_metrics()
     _bud_give: float = None
@@ -211,19 +211,19 @@ class LobbyBox(LobbyCore):
     _credor_pool: float = None
     _debtor_pool: float = None
 
-    def set_lobbylink(self, x_lobbylink: LobbyLink):
-        if x_lobbylink.lobby_id != self.lobby_id:
-            raise lobbylink_lobby_id_Exception(
-                f"LobbyBox.lobby_id={self.lobby_id} cannot set lobbylink.lobby_id={x_lobbylink.lobby_id}"
+    def set_lobbyship(self, x_lobbyship: LobbyShip):
+        if x_lobbyship.lobby_id != self.lobby_id:
+            raise lobbyship_lobby_id_Exception(
+                f"LobbyBox.lobby_id={self.lobby_id} cannot set lobbyship.lobby_id={x_lobbyship.lobby_id}"
             )
-        if x_lobbylink._char_id is None:
-            raise lobbylink_lobby_id_Exception(
-                f"lobbylink lobby_id={x_lobbylink.lobby_id} cannot be set when _char_id is None."
+        if x_lobbyship._char_id is None:
+            raise lobbyship_lobby_id_Exception(
+                f"lobbyship lobby_id={x_lobbyship.lobby_id} cannot be set when _char_id is None."
             )
 
-        self._lobbylinks[x_lobbylink._char_id] = x_lobbylink
-        self._add_credor_pool(x_lobbylink._credor_pool)
-        self._add_debtor_pool(x_lobbylink._debtor_pool)
+        self._lobbyships[x_lobbyship._char_id] = x_lobbyship
+        self._add_credor_pool(x_lobbyship._credor_pool)
+        self._add_debtor_pool(x_lobbyship._debtor_pool)
 
     def _add_credor_pool(self, x_credor_pool: float):
         self._credor_pool += x_credor_pool
@@ -231,35 +231,35 @@ class LobbyBox(LobbyCore):
     def _add_debtor_pool(self, x_debtor_pool: float):
         self._debtor_pool += x_debtor_pool
 
-    def get_lobbylink(self, x_char_id: CharID) -> LobbyLink:
-        return self._lobbylinks.get(x_char_id)
+    def get_lobbyship(self, x_char_id: CharID) -> LobbyShip:
+        return self._lobbyships.get(x_char_id)
 
-    def lobbylink_exists(self, x_char_id: CharID) -> bool:
-        return self.get_lobbylink(x_char_id) != None
+    def lobbyship_exists(self, x_char_id: CharID) -> bool:
+        return self.get_lobbyship(x_char_id) != None
 
-    def del_lobbylink(self, char_id):
-        self._lobbylinks.pop(char_id)
+    def del_lobbyship(self, char_id):
+        self._lobbyships.pop(char_id)
 
     def reset_bud_give_take(self):
         self._bud_give = 0
         self._bud_take = 0
         self._bud_agenda_give = 0
         self._bud_agenda_take = 0
-        for lobbylink in self._lobbylinks.values():
-            lobbylink.reset_bud_give_take()
+        for lobbyship in self._lobbyships.values():
+            lobbyship.reset_bud_give_take()
 
-    def _set_lobbylink_bud_give_take(self):
-        lobbylinks_credor_weight_sum = sum(
-            lobbylink.credor_weight for lobbylink in self._lobbylinks.values()
+    def _set_lobbyship_bud_give_take(self):
+        lobbyships_credor_weight_sum = sum(
+            lobbyship.credor_weight for lobbyship in self._lobbyships.values()
         )
-        lobbylinks_debtor_weight_sum = sum(
-            lobbylink.debtor_weight for lobbylink in self._lobbylinks.values()
+        lobbyships_debtor_weight_sum = sum(
+            lobbyship.debtor_weight for lobbyship in self._lobbyships.values()
         )
 
-        for lobbylink in self._lobbylinks.values():
-            lobbylink.set_bud_give_take(
-                lobbylinks_credor_weight_sum=lobbylinks_credor_weight_sum,
-                lobbylinks_debtor_weight_sum=lobbylinks_debtor_weight_sum,
+        for lobbyship in self._lobbyships.values():
+            lobbyship.set_bud_give_take(
+                lobbyships_credor_weight_sum=lobbyships_credor_weight_sum,
+                lobbyships_debtor_weight_sum=lobbyships_debtor_weight_sum,
                 lobby_bud_give=self._bud_give,
                 lobby_bud_take=self._bud_take,
                 lobby_bud_agenda_give=self._bud_agenda_give,
@@ -270,7 +270,7 @@ class LobbyBox(LobbyCore):
 def lobbybox_shop(lobby_id: LobbyID, _road_delimiter: str = None) -> LobbyBox:
     return LobbyBox(
         lobby_id=lobby_id,
-        _lobbylinks={},
+        _lobbyships={},
         _bud_give=0,
         _bud_take=0,
         _bud_agenda_give=0,

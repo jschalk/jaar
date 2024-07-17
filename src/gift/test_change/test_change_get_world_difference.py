@@ -68,7 +68,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_insert
     xio_credor_weight = 33
     xio_debtor_weight = 44
     xio_charunit = charunit_shop(xio_text, xio_credor_weight, xio_debtor_weight)
-    after_sue_world.set_charunit(xio_charunit, auto_set_lobbylink=False)
+    after_sue_world.set_charunit(xio_charunit, auto_set_lobbyship=False)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -182,7 +182,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_insert():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbyship_insert():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
@@ -191,23 +191,23 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     zia_text = "Zia"
     temp_yao_charunit = charunit_shop(yao_text)
     temp_zia_charunit = charunit_shop(zia_text)
-    after_sue_world.set_charunit(temp_yao_charunit, auto_set_lobbylink=False)
-    after_sue_world.set_charunit(temp_zia_charunit, auto_set_lobbylink=False)
+    after_sue_world.set_charunit(temp_yao_charunit, auto_set_lobbyship=False)
+    after_sue_world.set_charunit(temp_zia_charunit, auto_set_lobbyship=False)
     after_yao_charunit = after_sue_world.get_char(yao_text)
     after_zia_charunit = after_sue_world.get_char(zia_text)
     run_text = ",runners"
     zia_run_credor_w = 77
     zia_run_debtor_w = 88
-    after_zia_charunit.add_lobbylink(run_text, zia_run_credor_w, zia_run_debtor_w)
+    after_zia_charunit.add_lobbyship(run_text, zia_run_credor_w, zia_run_debtor_w)
     print(f"{after_sue_world.get_lobby_ids_dict()=}")
 
     # WHEN
     sue_changeunit = changeunit_shop()
-    print(f"{after_sue_world.get_char(zia_text)._lobbylinks=}")
+    print(f"{after_sue_world.get_char(zia_text)._lobbyships=}")
     sue_changeunit.add_all_different_atomunits(before_sue_world, after_sue_world)
     # print(f"{sue_changeunit.atomunits.get(atom_insert()).keys()=}")
     # print(
-    #     sue_changeunit.atomunits.get(atom_insert()).get("world_char_lobbylink").keys()
+    #     sue_changeunit.atomunits.get(atom_insert()).get("world_char_lobbyship").keys()
     # )
 
     # THEN
@@ -221,7 +221,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{zia_atomunit=}")
 
-    x_keylist = [atom_insert(), "world_char_lobbylink", zia_text, run_text]
+    x_keylist = [atom_insert(), "world_char_lobbyship", zia_text, run_text]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("char_id") == zia_text
     assert run_atomunit.get_value("lobby_id") == run_text
@@ -236,7 +236,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     assert get_atomunit_total_count(sue_changeunit) == 3
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_update():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbyship_update():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
@@ -248,12 +248,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     before_xio_credor_w = 77
     before_xio_debtor_w = 88
     before_xio_char = before_sue_world.get_char(xio_text)
-    before_xio_char.add_lobbylink(run_text, before_xio_credor_w, before_xio_debtor_w)
+    before_xio_char.add_lobbyship(run_text, before_xio_credor_w, before_xio_debtor_w)
     after_sue_world = copy_deepcopy(before_sue_world)
     after_xio_charunit = after_sue_world.get_char(xio_text)
     after_xio_credor_w = 55
     after_xio_debtor_w = 66
-    after_xio_charunit.add_lobbylink(run_text, after_xio_credor_w, after_xio_debtor_w)
+    after_xio_charunit.add_lobbyship(run_text, after_xio_credor_w, after_xio_debtor_w)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -266,7 +266,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     # print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{xio_atomunit=}")
 
-    x_keylist = [atom_update(), "world_char_lobbylink", xio_text, run_text]
+    x_keylist = [atom_update(), "world_char_lobbyship", xio_text, run_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("char_id") == xio_text
     assert xio_atomunit.get_value("lobby_id") == run_text
@@ -277,7 +277,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_delete():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbyship_delete():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
@@ -291,21 +291,21 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     before_zia_charunit = before_sue_world.get_char(zia_text)
     before_bob_charunit = before_sue_world.get_char(bob_text)
     run_text = ",runners"
-    before_xio_charunit.add_lobbylink(run_text)
-    before_zia_charunit.add_lobbylink(run_text)
+    before_xio_charunit.add_lobbyship(run_text)
+    before_zia_charunit.add_lobbyship(run_text)
     fly_text = ",flyers"
-    before_xio_charunit.add_lobbylink(fly_text)
-    before_zia_charunit.add_lobbylink(fly_text)
-    before_bob_charunit.add_lobbylink(fly_text)
+    before_xio_charunit.add_lobbyship(fly_text)
+    before_zia_charunit.add_lobbyship(fly_text)
+    before_bob_charunit.add_lobbyship(fly_text)
     before_lobby_ids_dict = before_sue_world.get_lobby_ids_dict()
 
     after_sue_world = copy_deepcopy(before_sue_world)
     after_xio_charunit = after_sue_world.get_char(xio_text)
     after_zia_charunit = after_sue_world.get_char(zia_text)
     after_bob_charunit = after_sue_world.get_char(bob_text)
-    after_xio_charunit.delete_lobbylink(run_text)
-    after_zia_charunit.delete_lobbylink(run_text)
-    after_bob_charunit.delete_lobbylink(fly_text)
+    after_xio_charunit.delete_lobbyship(run_text)
+    after_zia_charunit.delete_lobbyship(run_text)
+    after_bob_charunit.delete_lobbyship(fly_text)
     after_lobby_ids_dict = after_sue_world.get_lobby_ids_dict()
     assert len(before_lobby_ids_dict.get(fly_text)) == 3
     assert len(before_lobby_ids_dict.get(run_text)) == 2
@@ -317,7 +317,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
     sue_changeunit.add_all_different_atomunits(before_sue_world, after_sue_world)
 
     # THEN
-    x_keylist = [atom_delete(), "world_char_lobbylink", bob_text, fly_text]
+    x_keylist = [atom_delete(), "world_char_lobbyship", bob_text, fly_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("char_id") == bob_text
     assert xio_atomunit.get_value("lobby_id") == fly_text
@@ -508,12 +508,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     zia_charunit = before_sue_au.get_char(zia_text)
     bob_charunit = before_sue_au.get_char(bob_text)
     run_text = ",runners"
-    xio_charunit.add_lobbylink(run_text)
-    zia_charunit.add_lobbylink(run_text)
+    xio_charunit.add_lobbyship(run_text)
+    zia_charunit.add_lobbyship(run_text)
     fly_text = ",flyers"
-    xio_charunit.add_lobbylink(fly_text)
-    zia_charunit.add_lobbylink(fly_text)
-    bob_charunit.add_lobbylink(fly_text)
+    xio_charunit.add_lobbyship(fly_text)
+    zia_charunit.add_lobbyship(fly_text)
+    bob_charunit.add_lobbyship(fly_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -559,12 +559,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     zia_charunit = before_sue_au.get_char(zia_text)
     bob_charunit = before_sue_au.get_char(bob_text)
     run_text = ",runners"
-    xio_charunit.add_lobbylink(run_text)
-    zia_charunit.add_lobbylink(run_text)
+    xio_charunit.add_lobbyship(run_text)
+    zia_charunit.add_lobbyship(run_text)
     fly_text = ",flyers"
-    xio_charunit.add_lobbylink(fly_text)
-    zia_charunit.add_lobbylink(fly_text)
-    bob_charunit.add_lobbylink(fly_text)
+    xio_charunit.add_lobbyship(fly_text)
+    zia_charunit.add_lobbyship(fly_text)
+    bob_charunit.add_lobbyship(fly_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -611,7 +611,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.add_charunit(zia_text)
     xio_charunit = before_sue_au.get_char(xio_text)
     run_text = ",runners"
-    xio_charunit.add_lobbylink(run_text)
+    xio_charunit.add_lobbyship(run_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -1194,7 +1194,7 @@ def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     after_sue_world = worldunit_shop(sue_text)
     xio_text = "Xio"
     temp_xio_charunit = charunit_shop(xio_text)
-    after_sue_world.set_charunit(temp_xio_charunit, auto_set_lobbylink=False)
+    after_sue_world.set_charunit(temp_xio_charunit, auto_set_lobbyship=False)
     sports_text = "sports"
     sports_road = after_sue_world.make_l1_road(sports_text)
     ball_text = "basketball"

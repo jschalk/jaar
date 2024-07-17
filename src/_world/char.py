@@ -8,9 +8,9 @@ from src._road.road import (
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
 from src._world.lobby import (
     LobbyID,
-    LobbyLink,
-    lobbylinks_get_from_dict,
-    lobbylink_shop,
+    LobbyShip,
+    lobbyships_get_from_dict,
+    lobbyship_shop,
 )
 from dataclasses import dataclass
 
@@ -19,7 +19,7 @@ class InvalidCharException(Exception):
     pass
 
 
-class _lobbylink_Exception(Exception):
+class _lobbyship_Exception(Exception):
     pass
 
 
@@ -35,7 +35,7 @@ class CharCore:
 
 @dataclass
 class CharUnit(CharCore):
-    """This represents the relationship from the WorldUnit._owner_id to the CharUnit.char_id
+    """This represents the WorldUnit._owner_id's opinion of the CharUnit.char_id
     CharUnit.credor_weight represents how much credor_weight the _owner_id projects to the char_id
     CharUnit.debtor_weight represents how much debtor_weight the _owner_id projects to the char_id
     """
@@ -43,7 +43,7 @@ class CharUnit(CharCore):
     credor_weight: int = None
     debtor_weight: int = None
     # special attribute: static in world json, in memory it is deleted after loading and recalculated during saving.
-    _lobbylinks: dict[CharID, LobbyLink] = None
+    _lobbyships: dict[CharID, LobbyShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
@@ -137,69 +137,69 @@ class CharUnit(CharCore):
                 self._bud_agenda_take / bud_agenda_ratio_take_sum
             )
 
-    def add_lobbylink(
+    def add_lobbyship(
         self,
         lobby_id: LobbyID,
         credor_weight: float = None,
         debtor_weight: float = None,
     ):
-        x_lobbylink = lobbylink_shop(lobby_id, credor_weight, debtor_weight)
-        self.set_lobbylink(x_lobbylink)
+        x_lobbyship = lobbyship_shop(lobby_id, credor_weight, debtor_weight)
+        self.set_lobbyship(x_lobbyship)
 
-    def set_lobbylink(self, x_lobbylink: LobbyLink):
-        x_lobby_id = x_lobbylink.lobby_id
+    def set_lobbyship(self, x_lobbyship: LobbyShip):
+        x_lobby_id = x_lobbyship.lobby_id
         lobby_id_is_char_id = is_roadnode(x_lobby_id, self._road_delimiter)
         if lobby_id_is_char_id and self.char_id != x_lobby_id:
-            raise _lobbylink_Exception(
+            raise _lobbyship_Exception(
                 f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_lobby_id}'."
             )
 
-        x_lobbylink._char_id = self.char_id
-        self._lobbylinks[x_lobbylink.lobby_id] = x_lobbylink
+        x_lobbyship._char_id = self.char_id
+        self._lobbyships[x_lobbyship.lobby_id] = x_lobbyship
 
-    def get_lobbylink(self, lobby_id: LobbyID) -> LobbyLink:
-        return self._lobbylinks.get(lobby_id)
+    def get_lobbyship(self, lobby_id: LobbyID) -> LobbyShip:
+        return self._lobbyships.get(lobby_id)
 
-    def lobbylink_exists(self, lobby_id: LobbyID) -> bool:
-        return self._lobbylinks.get(lobby_id) != None
+    def lobbyship_exists(self, lobby_id: LobbyID) -> bool:
+        return self._lobbyships.get(lobby_id) != None
 
-    def delete_lobbylink(self, lobby_id: LobbyID):
-        return self._lobbylinks.pop(lobby_id)
+    def delete_lobbyship(self, lobby_id: LobbyID):
+        return self._lobbyships.pop(lobby_id)
 
-    def lobbylinks_exist(self):
-        return len(self._lobbylinks) != 0
+    def lobbyships_exist(self):
+        return len(self._lobbyships) != 0
 
-    def clear_lobbylinks(self):
-        self._lobbylinks = {}
+    def clear_lobbyships(self):
+        self._lobbyships = {}
 
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_lobbylink.lobby_id: x_lobbylink.credor_weight
-            for x_lobbylink in self._lobbylinks.values()
+            x_lobbyship.lobby_id: x_lobbyship.credor_weight
+            for x_lobbyship in self._lobbyships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
         for x_lobby_id, lobby_credor_pool in allot_dict.items():
-            self.get_lobbylink(x_lobby_id)._credor_pool = lobby_credor_pool
+            self.get_lobbyship(x_lobby_id)._credor_pool = lobby_credor_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_lobbylink.lobby_id: x_lobbylink.debtor_weight
-            for x_lobbylink in self._lobbylinks.values()
+            x_lobbyship.lobby_id: x_lobbyship.debtor_weight
+            for x_lobbyship in self._lobbyships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
         for x_lobby_id, lobby_debtor_pool in allot_dict.items():
-            self.get_lobbylink(x_lobby_id)._debtor_pool = lobby_debtor_pool
+            self.get_lobbyship(x_lobby_id)._debtor_pool = lobby_debtor_pool
 
-    def get_lobbylinks_dict(self) -> dict:
+    def get_lobbyships_dict(self) -> dict:
         return {
-            x_lobbylink.lobby_id: {
-                "lobby_id": x_lobbylink.lobby_id,
-                "credor_weight": x_lobbylink.credor_weight,
-                "debtor_weight": x_lobbylink.debtor_weight,
+            x_lobbyship.lobby_id: {
+                "lobby_id": x_lobbyship.lobby_id,
+                "credor_weight": x_lobbyship.credor_weight,
+                "debtor_weight": x_lobbyship.debtor_weight,
             }
-            for x_lobbylink in self._lobbylinks.values()
+            for x_lobbyship in self._lobbyships.values()
         }
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
@@ -207,7 +207,7 @@ class CharUnit(CharCore):
             "char_id": self.char_id,
             "credor_weight": self.credor_weight,
             "debtor_weight": self.debtor_weight,
-            "_lobbylinks": self.get_lobbylinks_dict(),
+            "_lobbyships": self.get_lobbyships_dict(),
         }
         if self._irrational_debtor_weight not in [None, 0]:
             x_dict["_irrational_debtor_weight"] = self._irrational_debtor_weight
@@ -247,11 +247,11 @@ def charunit_get_from_dict(charunit_dict: dict, _road_delimiter: str) -> CharUni
     x_char_id = charunit_dict["char_id"]
     x_credor_weight = charunit_dict["credor_weight"]
     x_debtor_weight = charunit_dict["debtor_weight"]
-    x_lobbylinks_dict = charunit_dict["_lobbylinks"]
+    x_lobbyships_dict = charunit_dict["_lobbyships"]
     x_charunit = charunit_shop(
         x_char_id, x_credor_weight, x_debtor_weight, _road_delimiter
     )
-    x_charunit._lobbylinks = lobbylinks_get_from_dict(x_lobbylinks_dict, x_char_id)
+    x_charunit._lobbyships = lobbyships_get_from_dict(x_lobbyships_dict, x_char_id)
     _irrational_debtor_weight = charunit_dict.get("_irrational_debtor_weight", 0)
     _inallocable_debtor_weight = charunit_dict.get("_inallocable_debtor_weight", 0)
     x_charunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
@@ -270,7 +270,7 @@ def charunit_shop(
     x_charunit = CharUnit(
         credor_weight=get_1_if_None(credor_weight),
         debtor_weight=get_1_if_None(debtor_weight),
-        _lobbylinks={},
+        _lobbyships={},
         _credor_pool=0,
         _debtor_pool=0,
         _irrational_debtor_weight=0,

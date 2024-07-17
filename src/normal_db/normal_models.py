@@ -37,8 +37,8 @@ class CharUnitTable(Base):
 #     lobby_id = Column(String)
 
 
-class LobbyLinkTable(Base):
-    __tablename__ = "lobbylink"
+class LobbyShipTable(Base):
+    __tablename__ = "lobbyship"
     uid = Column(Integer, primary_key=True)
     lobby_id = Column(String)
     char_id = Column(String)

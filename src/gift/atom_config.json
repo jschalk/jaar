@@ -1,5 +1,5 @@
 {
-    "world_char_lobbylink": {
+    "world_char_lobbyship": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
@@ -8,7 +8,7 @@
             "atom_order": 1
         },
         "normal_specs": {
-            "normal_table_name": "lobbylink"
+            "normal_table_name": "lobbyship"
         },
         "optional_args": {
             "credor_weight": {
@@ -349,11 +349,11 @@
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_bud_pool": {
+            "_bud_coin": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_bud_coin": {
+            "_bud_pool": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },

@@ -8,8 +8,8 @@ from src._instrument.python import (
 )
 from src._road.road import RoadUnit, get_terminus_node, get_parent_road
 from src._world.reason_idea import FactUnit, ReasonUnit
-from src._world.char import LobbyLink, CharID, CharUnit
-from src._world.lobby import LobbyLink, LobbyID
+from src._world.char import LobbyShip, CharID, CharUnit
+from src._world.lobby import LobbyShip, LobbyID
 from src._world.idea import IdeaUnit
 from src._world.world import WorldUnit, worldunit_shop
 from src.gift.atom_config import CRUD_command
@@ -199,10 +199,10 @@ class ChangeUnit:
                     "debtor_weight", insert_charunit.debtor_weight
                 )
             self.set_atomunit(x_atomunit)
-            all_lobby_ids = set(insert_charunit._lobbylinks.keys())
-            self.add_atomunit_lobbylinks_inserts(
+            all_lobby_ids = set(insert_charunit._lobbyships.keys())
+            self.add_atomunit_lobbyships_inserts(
                 after_charunit=insert_charunit,
-                insert_lobbylink_lobby_ids=all_lobby_ids,
+                insert_lobbyship_lobby_ids=all_lobby_ids,
             )
 
     def add_atomunit_charunit_updates(
@@ -225,7 +225,7 @@ class ChangeUnit:
                         "debtor_weight", after_charunit.debtor_weight
                     )
                 self.set_atomunit(x_atomunit)
-            self.add_atomunit_charunit_update_lobbylinks(
+            self.add_atomunit_charunit_update_lobbyships(
                 after_charunit=after_charunit, before_charunit=before_charunit
             )
 
@@ -239,91 +239,91 @@ class ChangeUnit:
             delete_charunit = before_world.get_char(delete_char_id)
             non_mirror_lobby_ids = {
                 x_lobby_id
-                for x_lobby_id in delete_charunit._lobbylinks.keys()
+                for x_lobby_id in delete_charunit._lobbyships.keys()
                 if x_lobby_id != delete_char_id
             }
-            self.add_atomunit_lobbylinks_delete(delete_char_id, non_mirror_lobby_ids)
+            self.add_atomunit_lobbyships_delete(delete_char_id, non_mirror_lobby_ids)
 
-    def add_atomunit_charunit_update_lobbylinks(
+    def add_atomunit_charunit_update_lobbyships(
         self, after_charunit: CharUnit, before_charunit: CharUnit
     ):
         # before_non_mirror_lobby_ids
         before_lobby_ids = {
             x_lobby_id
-            for x_lobby_id in before_charunit._lobbylinks.keys()
+            for x_lobby_id in before_charunit._lobbyships.keys()
             if x_lobby_id != before_charunit.char_id
         }
         # after_non_mirror_lobby_ids
         after_lobby_ids = {
             x_lobby_id
-            for x_lobby_id in after_charunit._lobbylinks.keys()
+            for x_lobby_id in after_charunit._lobbyships.keys()
             if x_lobby_id != after_charunit.char_id
         }
 
-        self.add_atomunit_lobbylinks_inserts(
+        self.add_atomunit_lobbyships_inserts(
             after_charunit=after_charunit,
-            insert_lobbylink_lobby_ids=after_lobby_ids.difference(before_lobby_ids),
+            insert_lobbyship_lobby_ids=after_lobby_ids.difference(before_lobby_ids),
         )
 
-        self.add_atomunit_lobbylinks_delete(
+        self.add_atomunit_lobbyships_delete(
             before_char_id=after_charunit.char_id,
             before_lobby_ids=before_lobby_ids.difference(after_lobby_ids),
         )
 
         update_lobby_ids = before_lobby_ids.intersection(after_lobby_ids)
         for update_char_id in update_lobby_ids:
-            before_lobbylink = before_charunit.get_lobbylink(update_char_id)
-            after_lobbylink = after_charunit.get_lobbylink(update_char_id)
+            before_lobbyship = before_charunit.get_lobbyship(update_char_id)
+            after_lobbyship = after_charunit.get_lobbyship(update_char_id)
             if optional_args_different(
-                "world_char_lobbylink", before_lobbylink, after_lobbylink
+                "world_char_lobbyship", before_lobbyship, after_lobbyship
             ):
-                self.add_atomunit_lobbylink_update(
+                self.add_atomunit_lobbyship_update(
                     char_id=after_charunit.char_id,
-                    before_lobbylink=before_lobbylink,
-                    after_lobbylink=after_lobbylink,
+                    before_lobbyship=before_lobbyship,
+                    after_lobbyship=after_lobbyship,
                 )
 
-    def add_atomunit_lobbylinks_inserts(
+    def add_atomunit_lobbyships_inserts(
         self,
         after_charunit: CharUnit,
-        insert_lobbylink_lobby_ids: list[LobbyID],
+        insert_lobbyship_lobby_ids: list[LobbyID],
     ):
         after_char_id = after_charunit.char_id
-        for insert_lobby_id in insert_lobbylink_lobby_ids:
-            after_lobbylink = after_charunit.get_lobbylink(insert_lobby_id)
-            x_atomunit = atomunit_shop("world_char_lobbylink", atom_insert())
+        for insert_lobby_id in insert_lobbyship_lobby_ids:
+            after_lobbyship = after_charunit.get_lobbyship(insert_lobby_id)
+            x_atomunit = atomunit_shop("world_char_lobbyship", atom_insert())
             x_atomunit.set_required_arg("char_id", after_char_id)
-            x_atomunit.set_required_arg("lobby_id", after_lobbylink.lobby_id)
-            if after_lobbylink.credor_weight != None:
+            x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
+            if after_lobbyship.credor_weight != None:
                 x_atomunit.set_optional_arg(
-                    "credor_weight", after_lobbylink.credor_weight
+                    "credor_weight", after_lobbyship.credor_weight
                 )
-            if after_lobbylink.debtor_weight != None:
+            if after_lobbyship.debtor_weight != None:
                 x_atomunit.set_optional_arg(
-                    "debtor_weight", after_lobbylink.debtor_weight
+                    "debtor_weight", after_lobbyship.debtor_weight
                 )
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_lobbylink_update(
+    def add_atomunit_lobbyship_update(
         self,
         char_id: CharID,
-        before_lobbylink: LobbyLink,
-        after_lobbylink: LobbyLink,
+        before_lobbyship: LobbyShip,
+        after_lobbyship: LobbyShip,
     ):
-        x_atomunit = atomunit_shop("world_char_lobbylink", atom_update())
+        x_atomunit = atomunit_shop("world_char_lobbyship", atom_update())
         x_atomunit.set_required_arg("char_id", char_id)
-        x_atomunit.set_required_arg("lobby_id", after_lobbylink.lobby_id)
-        if after_lobbylink.credor_weight != before_lobbylink.credor_weight:
-            x_atomunit.set_optional_arg("credor_weight", after_lobbylink.credor_weight)
-        if after_lobbylink.debtor_weight != before_lobbylink.debtor_weight:
-            x_atomunit.set_optional_arg("debtor_weight", after_lobbylink.debtor_weight)
+        x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
+        if after_lobbyship.credor_weight != before_lobbyship.credor_weight:
+            x_atomunit.set_optional_arg("credor_weight", after_lobbyship.credor_weight)
+        if after_lobbyship.debtor_weight != before_lobbyship.debtor_weight:
+            x_atomunit.set_optional_arg("debtor_weight", after_lobbyship.debtor_weight)
         self.set_atomunit(x_atomunit)
 
-    def add_atomunit_lobbylinks_delete(
+    def add_atomunit_lobbyships_delete(
         self, before_char_id: CharID, before_lobby_ids: LobbyID
     ):
         for delete_lobby_id in before_lobby_ids:
-            x_atomunit = atomunit_shop("world_char_lobbylink", atom_delete())
+            x_atomunit = atomunit_shop("world_char_lobbyship", atom_delete())
             x_atomunit.set_required_arg("char_id", before_char_id)
             x_atomunit.set_required_arg("lobby_id", delete_lobby_id)
             self.set_atomunit(x_atomunit)

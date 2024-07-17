@@ -16,12 +16,12 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
     charunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "world_charunit"])
     charunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "world_charunit"])
 
-    x_list = [atom_insert(), "world_char_lobbylink"]
-    char_lobbylink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_char_lobbylink"]
-    char_lobbylink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_char_lobbylink"]
-    char_lobbylink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "world_char_lobbyship"]
+    char_lobbyship_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "world_char_lobbyship"]
+    char_lobbyship_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "world_char_lobbyship"]
+    char_lobbyship_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "world_ideaunit"]
     world_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -84,17 +84,17 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
             leg_list, charunit_delete_dict, x_world
         )
 
-    if char_lobbylink_insert_dict != None:
-        add_world_char_lobbylink_insert_to_legible_list(
-            leg_list, char_lobbylink_insert_dict, x_world
+    if char_lobbyship_insert_dict != None:
+        add_world_char_lobbyship_insert_to_legible_list(
+            leg_list, char_lobbyship_insert_dict, x_world
         )
-    if char_lobbylink_update_dict != None:
-        add_world_char_lobbylink_update_to_legible_list(
-            leg_list, char_lobbylink_update_dict, x_world
+    if char_lobbyship_update_dict != None:
+        add_world_char_lobbyship_update_to_legible_list(
+            leg_list, char_lobbyship_update_dict, x_world
         )
-    if char_lobbylink_delete_dict != None:
-        add_world_char_lobbylink_delete_to_legible_list(
-            leg_list, char_lobbylink_delete_dict, x_world
+    if char_lobbyship_delete_dict != None:
+        add_world_char_lobbyship_delete_to_legible_list(
+            leg_list, char_lobbyship_delete_dict, x_world
         )
 
     if world_ideaunit_insert_dict != None:
@@ -277,28 +277,28 @@ def add_world_charunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_world_char_lobbylink_insert_to_legible_list(
-    legible_list: list[str], char_lobbylink_insert_dict: dict, x_world: WorldUnit
+def add_world_char_lobbyship_insert_to_legible_list(
+    legible_list: list[str], char_lobbyship_insert_dict: dict, x_world: WorldUnit
 ):
-    for char_lobbylink_dict in char_lobbylink_insert_dict.values():
-        for char_lobbylink_atom in char_lobbylink_dict.values():
-            lobby_id = char_lobbylink_atom.get_value("lobby_id")
-            char_id = char_lobbylink_atom.get_value("char_id")
-            credor_weight_value = char_lobbylink_atom.get_value("credor_weight")
-            debtor_weight_value = char_lobbylink_atom.get_value("debtor_weight")
+    for char_lobbyship_dict in char_lobbyship_insert_dict.values():
+        for char_lobbyship_atom in char_lobbyship_dict.values():
+            lobby_id = char_lobbyship_atom.get_value("lobby_id")
+            char_id = char_lobbyship_atom.get_value("char_id")
+            credor_weight_value = char_lobbyship_atom.get_value("credor_weight")
+            debtor_weight_value = char_lobbyship_atom.get_value("debtor_weight")
             x_str = f"Lobby '{lobby_id}' has new member {char_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_char_lobbylink_update_to_legible_list(
-    legible_list: list[str], char_lobbylink_update_dict: dict, x_world: WorldUnit
+def add_world_char_lobbyship_update_to_legible_list(
+    legible_list: list[str], char_lobbyship_update_dict: dict, x_world: WorldUnit
 ):
-    for char_lobbylink_dict in char_lobbylink_update_dict.values():
-        for char_lobbylink_atom in char_lobbylink_dict.values():
-            lobby_id = char_lobbylink_atom.get_value("lobby_id")
-            char_id = char_lobbylink_atom.get_value("char_id")
-            credor_weight_value = char_lobbylink_atom.get_value("credor_weight")
-            debtor_weight_value = char_lobbylink_atom.get_value("debtor_weight")
+    for char_lobbyship_dict in char_lobbyship_update_dict.values():
+        for char_lobbyship_atom in char_lobbyship_dict.values():
+            lobby_id = char_lobbyship_atom.get_value("lobby_id")
+            char_id = char_lobbyship_atom.get_value("char_id")
+            credor_weight_value = char_lobbyship_atom.get_value("credor_weight")
+            debtor_weight_value = char_lobbyship_atom.get_value("debtor_weight")
             if credor_weight_value != None and debtor_weight_value != None:
                 x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
             elif credor_weight_value != None and debtor_weight_value is None:
@@ -308,13 +308,13 @@ def add_world_char_lobbylink_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_char_lobbylink_delete_to_legible_list(
-    legible_list: list[str], char_lobbylink_delete_dict: dict, x_world: WorldUnit
+def add_world_char_lobbyship_delete_to_legible_list(
+    legible_list: list[str], char_lobbyship_delete_dict: dict, x_world: WorldUnit
 ):
-    for char_lobbylink_dict in char_lobbylink_delete_dict.values():
-        for char_lobbylink_atom in char_lobbylink_dict.values():
-            lobby_id = char_lobbylink_atom.get_value("lobby_id")
-            char_id = char_lobbylink_atom.get_value("char_id")
+    for char_lobbyship_dict in char_lobbyship_delete_dict.values():
+        for char_lobbyship_atom in char_lobbyship_dict.values():
+            lobby_id = char_lobbyship_atom.get_value("lobby_id")
+            char_id = char_lobbyship_atom.get_value("char_id")
             x_str = f"Lobby '{lobby_id}' no longer has member {char_id}."
             legible_list.append(x_str)
 

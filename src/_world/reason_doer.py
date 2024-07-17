@@ -51,7 +51,7 @@ class DoerHeir:
     ) -> dict[LobbyID, LobbyBox]:
         dict_x = {}
         for lobby_id_x in lobby_id_set:
-            dict_x |= world_lobbyboxs.get(lobby_id_x)._lobbylinks
+            dict_x |= world_lobbyboxs.get(lobby_id_x)._lobbyships
         return dict_x
 
     def is_empty(self) -> bool:
@@ -72,7 +72,7 @@ class DoerHeir:
 
         for x_lobby_id, x_lobbybox in world_lobbyboxs.items():
             if x_lobby_id in self._lobbyholds:
-                for x_char_id in x_lobbybox._lobbylinks.keys():
+                for x_char_id in x_lobbybox._lobbyships.keys():
                     if x_char_id == world_owner_id:
                         return True
         return False

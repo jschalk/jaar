@@ -4,10 +4,10 @@ from src.gift.legible import create_legible_list
 from src._world.world import worldunit_shop
 
 
-def test_create_legible_list_ReturnsObj_char_lobbylink_INSERT():
+def test_create_legible_list_ReturnsObj_char_lobbyship_INSERT():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
-    category = "world_char_lobbylink"
+    category = "world_char_lobbyship"
     lobby_id_text = "lobby_id"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -34,10 +34,10 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_INSERT():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight_debtor_weight():
+def test_create_legible_list_ReturnsObj_char_lobbyship_UPDATE_credor_weight_debtor_weight():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
-    category = "world_char_lobbylink"
+    category = "world_char_lobbyship"
     lobby_id_text = "lobby_id"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -64,10 +64,10 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight_debt
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight():
+def test_create_legible_list_ReturnsObj_char_lobbyship_UPDATE_credor_weight():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
-    category = "world_char_lobbylink"
+    category = "world_char_lobbyship"
     lobby_id_text = "lobby_id"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -91,10 +91,10 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_debtor_weight():
+def test_create_legible_list_ReturnsObj_char_lobbyship_UPDATE_debtor_weight():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
-    category = "world_char_lobbylink"
+    category = "world_char_lobbyship"
     lobby_id_text = "lobby_id"
     char_id_text = "char_id"
     debtor_weight_text = "debtor_weight"
@@ -118,10 +118,10 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_debtor_weight():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_char_lobbylink_DELETE():
+def test_create_legible_list_ReturnsObj_char_lobbyship_DELETE():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
-    category = "world_char_lobbylink"
+    category = "world_char_lobbyship"
     lobby_id_text = "lobby_id"
     char_id_text = "char_id"
     swim_text = f"{sue_world._road_delimiter}Swimmers"

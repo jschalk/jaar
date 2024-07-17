@@ -23,7 +23,7 @@ from src.gift.cross import (
     get_cross_attribute_dict,
     get_column_ordered_cross_attributes,
     jaar_format_0001_char_v0_0_0,
-    jaar_format_0002_lobbylink_v0_0_0,
+    jaar_format_0002_lobbyship_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
     create_cross_dataframe,
@@ -39,8 +39,8 @@ def test_str_functions_ReturnCorrectObjs():
     assert debtor_weight_str() == "debtor_weight"
     assert credor_weight_str() == "credor_weight"
     assert jaar_format_0001_char_v0_0_0() == "jaar_format_0001_char_v0_0_0"
-    x0002_cross = "jaar_format_0002_lobbylink_v0_0_0"
-    assert jaar_format_0002_lobbylink_v0_0_0() == x0002_cross
+    x0002_cross = "jaar_format_0002_lobbyship_v0_0_0"
+    assert jaar_format_0002_lobbyship_v0_0_0() == x0002_cross
     x0003_cross = "jaar_format_0003_ideaunit_v0_0_0"
     assert jaar_format_0003_ideaunit_v0_0_0() == x0003_cross
 
@@ -59,7 +59,7 @@ def test_get_cross_filenames_ReturnsCorrectObj():
     # THEN
     print(f"{x_filenames=}")
     assert jaar_format_0001_char_v0_0_0() in x_filenames
-    assert jaar_format_0002_lobbylink_v0_0_0() in x_filenames
+    assert jaar_format_0002_lobbyship_v0_0_0() in x_filenames
     assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
 
 
@@ -153,9 +153,9 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0()
     assert credor_weight_column_order == 4
 
 
-def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbylink_v0_0_0():
+def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_0_0():
     # ESTABLISH
-    cross_name = jaar_format_0002_lobbylink_v0_0_0()
+    cross_name = jaar_format_0002_lobbyship_v0_0_0()
 
     # WHEN
     cross_dict = get_cross_attribute_dict(cross_name)

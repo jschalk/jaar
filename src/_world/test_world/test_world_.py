@@ -3,6 +3,7 @@ from src._road.finance import (
     default_penny_if_none,
     default_bud_coin_if_none,
     validate_bud_pool,
+    validate_respect_num,
 )
 from src._world.world import worldunit_shop, WorldUnit
 from src._road.road import (
@@ -81,8 +82,8 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._bit == x_bit
     assert x_world._penny == x_penny
     assert x_world._monetary_desc is None
-    assert x_world._credor_respect is None
-    assert x_world._debtor_respect is None
+    assert x_world._credor_respect == validate_respect_num()
+    assert x_world._debtor_respect == validate_respect_num()
     assert x_world._last_gift_id is None
     assert x_world._originunit == originunit_shop()
 
