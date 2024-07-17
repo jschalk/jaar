@@ -329,30 +329,30 @@ def get_world_irrational_example() -> WorldUnit:
 
 
 def get_world_mop_example1():
-    neo_world = worldunit_shop("Neo")
+    sue_world = worldunit_shop("Sue")
     casa_text = "casa"
-    casa_road = neo_world.make_l1_road(casa_text)
+    casa_road = sue_world.make_l1_road(casa_text)
     floor_text = "mop floor"
-    floor_road = neo_world.make_road(casa_road, floor_text)
+    floor_road = sue_world.make_road(casa_road, floor_text)
     floor_idea = ideaunit_shop(floor_text, pledge=True)
-    neo_world.add_idea(floor_idea, casa_road)
-    neo_world.add_l1_idea(ideaunit_shop("unimportant"))
+    sue_world.add_idea(floor_idea, casa_road)
+    sue_world.add_l1_idea(ideaunit_shop("unimportant"))
 
     status_text = "cleaniness status"
-    status_road = neo_world.make_road(casa_road, status_text)
-    neo_world.add_idea(ideaunit_shop(status_text), casa_road)
+    status_road = sue_world.make_road(casa_road, status_text)
+    sue_world.add_idea(ideaunit_shop(status_text), casa_road)
 
     clean_text = "clean"
-    clean_road = neo_world.make_road(status_road, clean_text)
-    neo_world.add_idea(ideaunit_shop(clean_text), status_road)
-    neo_world.add_idea(ideaunit_shop("very_much"), clean_road)
-    neo_world.add_idea(ideaunit_shop("moderately"), clean_road)
-    neo_world.add_idea(ideaunit_shop("dirty"), status_road)
+    clean_road = sue_world.make_road(status_road, clean_text)
+    sue_world.add_idea(ideaunit_shop(clean_text), status_road)
+    sue_world.add_idea(ideaunit_shop("very_much"), clean_road)
+    sue_world.add_idea(ideaunit_shop("moderately"), clean_road)
+    sue_world.add_idea(ideaunit_shop("dirty"), status_road)
 
     floor_reason = reasonunit_shop(status_road)
     floor_reason.set_premise(premise=status_road)
-    neo_world.edit_idea_attr(road=floor_road, reason=floor_reason)
-    return neo_world
+    sue_world.edit_idea_attr(road=floor_road, reason=floor_reason)
+    return sue_world
 
 
 def get_world_laundry_example1() -> WorldUnit:

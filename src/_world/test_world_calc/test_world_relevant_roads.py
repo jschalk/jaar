@@ -57,37 +57,37 @@ def test_WorldUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
 
 def test_WorldUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     # ESTABLISH
-    neo_world = worldunit_shop(_owner_id="Neo")
+    sue_world = worldunit_shop(_owner_id="Sue")
     casa_text = "casa"
-    casa_road = neo_world.make_l1_road(casa_text)
+    casa_road = sue_world.make_l1_road(casa_text)
     floor_text = "mop floor"
-    floor_road = neo_world.make_road(casa_road, floor_text)
+    floor_road = sue_world.make_road(casa_road, floor_text)
     floor_idea = ideaunit_shop(floor_text)
-    neo_world.add_idea(floor_idea, parent_road=casa_road)
+    sue_world.add_idea(floor_idea, parent_road=casa_road)
 
     unim_text = "unimportant"
-    unim_road = neo_world.make_l1_road(unim_text)
+    unim_road = sue_world.make_l1_road(unim_text)
     unim_idea = ideaunit_shop(unim_text)
-    neo_world.add_idea(unim_idea, parent_road=neo_world._real_id)
+    sue_world.add_idea(unim_idea, parent_road=sue_world._real_id)
 
     status_text = "cleaniness status"
-    status_road = neo_world.make_road(casa_road, status_text)
+    status_road = sue_world.make_road(casa_road, status_text)
     status_idea = ideaunit_shop(status_text)
-    neo_world.add_idea(status_idea, parent_road=casa_road)
+    sue_world.add_idea(status_idea, parent_road=casa_road)
     floor_reason = reasonunit_shop(base=status_road)
     floor_reason.set_premise(premise=status_road)
-    neo_world.edit_idea_attr(road=floor_road, reason=floor_reason)
+    sue_world.edit_idea_attr(road=floor_road, reason=floor_reason)
 
     # WHEN
-    neo_world.calc_world_metrics()
+    sue_world.calc_world_metrics()
     floor_dict = {floor_road}
-    relevant_roads = neo_world._get_relevant_roads(floor_dict)
+    relevant_roads = sue_world._get_relevant_roads(floor_dict)
 
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 4
     assert relevant_roads == {
-        neo_world._real_id: -1,
+        sue_world._real_id: -1,
         casa_road: -1,
         status_road: -1,
         floor_road: -1,

@@ -935,3 +935,30 @@ def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
     # THEN
     assert mail_idea.pledge == True
     assert mail_idea._task is False
+
+
+def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weight():
+    sue_world = worldunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_world.make_l1_road(casa_text)
+    floor_text = "mop floor"
+    floor_road = sue_world.make_road(casa_road, floor_text)
+    floor_idea = ideaunit_shop(floor_text, pledge=True)
+    sue_world.add_idea(floor_idea, casa_road)
+    sue_world.add_l1_idea(ideaunit_shop("unimportant"))
+
+    status_text = "cleaniness status"
+    status_road = sue_world.make_road(casa_road, status_text)
+    sue_world.add_idea(ideaunit_shop(status_text), casa_road)
+
+    clean_text = "clean"
+    clean_road = sue_world.make_road(status_road, clean_text)
+    sue_world.add_idea(ideaunit_shop(clean_text), status_road)
+    sue_world.add_idea(ideaunit_shop("very_much"), clean_road)
+    sue_world.add_idea(ideaunit_shop("moderately"), clean_road)
+    sue_world.add_idea(ideaunit_shop("dirty"), status_road)
+
+    floor_reason = reasonunit_shop(status_road)
+    floor_reason.set_premise(premise=status_road)
+    sue_world.edit_idea_attr(road=floor_road, reason=floor_reason)
+    return sue_world
