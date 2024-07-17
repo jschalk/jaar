@@ -1,5 +1,5 @@
 from src._world.char import charunit_shop
-from src._world.beliefbox import awardlink_shop
+from src._world.lobbybox import awardlink_shop
 from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -9,7 +9,7 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     # GIVEN
     yao_text = "Yao"
     yao_charunit = charunit_shop(yao_text)
-    yao_charunit.add_belieflink(yao_text)
+    yao_charunit.add_lobbylink(yao_text)
     deepcopy_yao_charunit = copy_deepcopy(yao_charunit)
     slash_text = "/"
     bob_world = worldunit_shop("Bob", _road_delimiter=slash_text)
@@ -25,20 +25,20 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     assert bob_world._chars == x_chars
 
 
-def test_WorldUnit_set_char_DoesNotSet_char_id_belieflink():
+def test_WorldUnit_set_char_DoesNotSet_char_id_lobbylink():
     # GIVEN
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
 
     # WHEN
-    yao_world.set_charunit(charunit_shop(zia_text), auto_set_belieflink=False)
+    yao_world.set_charunit(charunit_shop(zia_text), auto_set_lobbylink=False)
 
     # THEN
-    assert yao_world.get_char(zia_text).get_belieflink(zia_text) is None
+    assert yao_world.get_char(zia_text).get_lobbylink(zia_text) is None
 
 
-def test_WorldUnit_set_char_DoesSet_char_id_belieflink():
+def test_WorldUnit_set_char_DoesSet_char_id_lobbylink():
     # GIVEN
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
@@ -48,13 +48,13 @@ def test_WorldUnit_set_char_DoesSet_char_id_belieflink():
     yao_world.set_charunit(charunit_shop(zia_text))
 
     # THEN
-    zia_zia_belieflink = yao_world.get_char(zia_text).get_belieflink(zia_text)
-    assert zia_zia_belieflink != None
-    assert zia_zia_belieflink.credor_weight == 1
-    assert zia_zia_belieflink.debtor_weight == 1
+    zia_zia_lobbylink = yao_world.get_char(zia_text).get_lobbylink(zia_text)
+    assert zia_zia_lobbylink != None
+    assert zia_zia_lobbylink.credor_weight == 1
+    assert zia_zia_lobbylink.debtor_weight == 1
 
 
-def test_WorldUnit_set_char_DoesNotOverRide_char_id_belieflink():
+def test_WorldUnit_set_char_DoesNotOverRide_char_id_lobbylink():
     # GIVEN
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
@@ -63,26 +63,26 @@ def test_WorldUnit_set_char_DoesNotOverRide_char_id_belieflink():
     zia_ohio_credor_w = 33
     zia_ohio_debtor_w = 44
     zia_charunit = charunit_shop(zia_text)
-    zia_charunit.add_belieflink(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
+    zia_charunit.add_lobbylink(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
 
     # WHEN
     yao_world.set_charunit(zia_charunit)
 
     # THEN
-    zia_ohio_belieflink = yao_world.get_char(zia_text).get_belieflink(ohio_text)
-    assert zia_ohio_belieflink != None
-    assert zia_ohio_belieflink.credor_weight == zia_ohio_credor_w
-    assert zia_ohio_belieflink.debtor_weight == zia_ohio_debtor_w
-    zia_zia_belieflink = yao_world.get_char(zia_text).get_belieflink(zia_text)
-    assert zia_zia_belieflink is None
+    zia_ohio_lobbylink = yao_world.get_char(zia_text).get_lobbylink(ohio_text)
+    assert zia_ohio_lobbylink != None
+    assert zia_ohio_lobbylink.credor_weight == zia_ohio_credor_w
+    assert zia_ohio_lobbylink.debtor_weight == zia_ohio_debtor_w
+    zia_zia_lobbylink = yao_world.get_char(zia_text).get_lobbylink(zia_text)
+    assert zia_zia_lobbylink is None
 
 
-def test_WorldUnit_set_char_CorrectlySets_chars_belieflinks():
+def test_WorldUnit_set_char_CorrectlySets_chars_lobbylinks():
     # GIVEN
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     assert len(yao_world._chars) == 0
-    assert len(yao_world.get_belief_ids_dict()) == 0
+    assert len(yao_world.get_lobby_ids_dict()) == 0
 
     # WHEN
     zia_text = "Zia"
@@ -95,15 +95,15 @@ def test_WorldUnit_set_char_CorrectlySets_chars_belieflinks():
     # THEN
     assert yao_world._chars.get(zia_text)._bit == x_bit
     assert len(yao_world._chars) == 3
-    assert len(yao_world.get_belief_ids_dict()) == 3
+    assert len(yao_world.get_lobby_ids_dict()) == 3
 
     # WHEN
-    zia_belief = zia_text
-    sue_belief = sue_text
-    xio_belief = xio_text
-    yao_world._idearoot.set_awardlink(awardlink_shop(zia_belief, credor_weight=10))
-    yao_world._idearoot.set_awardlink(awardlink_shop(sue_belief, credor_weight=10))
-    yao_world._idearoot.set_awardlink(awardlink_shop(xio_belief, credor_weight=10))
+    zia_lobby = zia_text
+    sue_lobby = sue_text
+    xio_lobby = xio_text
+    yao_world._idearoot.set_awardlink(awardlink_shop(zia_lobby, credor_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(sue_lobby, credor_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(xio_lobby, credor_weight=10))
     assert len(yao_world._idearoot._awardlinks) == 3
 
 
@@ -122,7 +122,7 @@ def test_WorldUnit_add_charunit_CorrectlySets_chars():
 
     # THEN
     assert len(yao_world._chars) == 3
-    assert len(yao_world.get_belief_ids_dict()) == 3
+    assert len(yao_world.get_lobby_ids_dict()) == 3
     assert yao_world._chars.get(xio_text).credor_weight == 17
     assert yao_world._chars.get(sue_text).debtor_weight == 5
     assert yao_world._chars.get(xio_text)._bit == x_bit
@@ -143,7 +143,7 @@ def test_WorldUnit_char_exists_ReturnsObj():
     assert bob_world.char_exists(yao_text)
 
 
-def test_WorldUnit_set_char_Creates_belieflink():
+def test_WorldUnit_set_char_Creates_lobbylink():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     zia_text = "Zia"
@@ -151,11 +151,11 @@ def test_WorldUnit_set_char_Creates_belieflink():
     before_zia_debtor = 17
     yao_world.add_charunit(zia_text, before_zia_credor, before_zia_debtor)
     zia_charunit = yao_world.get_char(zia_text)
-    zia_belieflink = zia_charunit.get_belieflink(zia_text)
-    assert zia_belieflink.credor_weight != before_zia_credor
-    assert zia_belieflink.debtor_weight != before_zia_debtor
-    assert zia_belieflink.credor_weight == 1
-    assert zia_belieflink.debtor_weight == 1
+    zia_lobbylink = zia_charunit.get_lobbylink(zia_text)
+    assert zia_lobbylink.credor_weight != before_zia_credor
+    assert zia_lobbylink.debtor_weight != before_zia_debtor
+    assert zia_lobbylink.credor_weight == 1
+    assert zia_lobbylink.debtor_weight == 1
 
     # WHEN
     after_zia_credor = 11
@@ -163,10 +163,10 @@ def test_WorldUnit_set_char_Creates_belieflink():
     yao_world.set_charunit(charunit_shop(zia_text, after_zia_credor, after_zia_debtor))
 
     # THEN
-    assert zia_belieflink.credor_weight != after_zia_credor
-    assert zia_belieflink.debtor_weight != after_zia_debtor
-    assert zia_belieflink.credor_weight == 1
-    assert zia_belieflink.debtor_weight == 1
+    assert zia_lobbylink.credor_weight != after_zia_credor
+    assert zia_lobbylink.debtor_weight != after_zia_debtor
+    assert zia_lobbylink.credor_weight == 1
+    assert zia_lobbylink.debtor_weight == 1
 
 
 def test_WorldUnit_edit_char_RaiseExceptionWhenCharDoesNotExist():

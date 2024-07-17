@@ -1,21 +1,22 @@
 {
+    "_bit": 1,
     "_chars": {
         "A a ron Jones": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "belief_id": ",OceanVista Apt",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",OceanVista Apt"
                 },
                 "A a ron Jones": {
-                    "belief_id": "A a ron Jones",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "A a ron Jones"
                 }
             },
             "char_id": "A a ron Jones",
@@ -23,26 +24,26 @@
             "debtor_weight": 1
         },
         "America": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Family": {
-                    "belief_id": ",Family",
                     "credor_weight": 6.45,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Family"
                 },
                 ",Friends": {
-                    "belief_id": ",Friends",
                     "credor_weight": 6.1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Friends"
                 },
                 "America": {
-                    "belief_id": "America",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "America"
                 }
             },
             "char_id": "America",
@@ -50,21 +51,21 @@
             "debtor_weight": 1
         },
         "Anna": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Family": {
-                    "belief_id": ",Family",
                     "credor_weight": 6.2,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Family"
                 },
                 "Anna": {
-                    "belief_id": "Anna",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Anna"
                 }
             },
             "char_id": "Anna",
@@ -72,26 +73,26 @@
             "debtor_weight": 1
         },
         "Benjamin Stoddert": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "belief_id": ",ACME General",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Benjamin Stoddert": {
-                    "belief_id": "Benjamin Stoddert",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Benjamin Stoddert"
                 }
             },
             "char_id": "Benjamin Stoddert",
@@ -99,26 +100,26 @@
             "debtor_weight": 1
         },
         "Bob302": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 6.25,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",appreciates US DOLLAR": {
-                    "belief_id": ",appreciates US DOLLAR",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Bob302": {
-                    "belief_id": "Bob302",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Bob302"
                 }
             },
             "char_id": "Bob302",
@@ -126,26 +127,26 @@
             "debtor_weight": 1
         },
         "Chuck Lee": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "belief_id": ",ACME General",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Chuck Lee": {
-                    "belief_id": "Chuck Lee",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Chuck Lee"
                 }
             },
             "char_id": "Chuck Lee",
@@ -153,21 +154,21 @@
             "debtor_weight": 1
         },
         "Ernesto Chavez": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "belief_id": ",Philosophy",
                     "credor_weight": 6.5,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Philosophy"
                 },
                 "Ernesto Chavez": {
-                    "belief_id": "Ernesto Chavez",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Ernesto Chavez"
                 }
             },
             "char_id": "Ernesto Chavez",
@@ -175,21 +176,21 @@
             "debtor_weight": 1
         },
         "Jacque Chirac": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "belief_id": ",OceanVista Apt",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",OceanVista Apt"
                 },
                 "Jacque Chirac": {
-                    "belief_id": "Jacque Chirac",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Jacque Chirac"
                 }
             },
             "char_id": "Jacque Chirac",
@@ -197,21 +198,21 @@
             "debtor_weight": 1
         },
         "Jane Randolph": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Jane Randolph": {
-                    "belief_id": "Jane Randolph",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Jane Randolph"
                 }
             },
             "char_id": "Jane Randolph",
@@ -219,21 +220,21 @@
             "debtor_weight": 1
         },
         "Maria Reynolds": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 6.75,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Maria Reynolds": {
-                    "belief_id": "Maria Reynolds",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Maria Reynolds"
                 }
             },
             "char_id": "Maria Reynolds",
@@ -241,26 +242,26 @@
             "debtor_weight": 1
         },
         "Martha Doubs": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "belief_id": ",ACME General",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Martha Doubs": {
-                    "belief_id": "Martha Doubs",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Martha Doubs"
                 }
             },
             "char_id": "Martha Doubs",
@@ -268,26 +269,26 @@
             "debtor_weight": 1
         },
         "Mikayla": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 10,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "belief_id": ",Philosophy",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Philosophy"
                 },
                 "Mikayla": {
-                    "belief_id": "Mikayla",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Mikayla"
                 }
             },
             "char_id": "Mikayla",
@@ -295,21 +296,21 @@
             "debtor_weight": 1
         },
         "Norberto": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "belief_id": ",OceanVista Apt",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",OceanVista Apt"
                 },
                 "Norberto": {
-                    "belief_id": "Norberto",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Norberto"
                 }
             },
             "char_id": "Norberto",
@@ -317,26 +318,26 @@
             "debtor_weight": 1
         },
         "Perrison": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",appreciates US DOLLAR": {
-                    "belief_id": ",appreciates US DOLLAR",
                     "credor_weight": 5,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Friends": {
-                    "belief_id": ",Friends",
                     "credor_weight": 6.4,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Friends"
                 },
                 "Perrison": {
-                    "belief_id": "Perrison",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Perrison"
                 }
             },
             "char_id": "Perrison",
@@ -344,26 +345,26 @@
             "debtor_weight": 1
         },
         "Philipa": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Climate Death": {
-                    "belief_id": ",Climate Death",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "belief_id": ",Philosophy",
                     "credor_weight": 52,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Philosophy"
                 },
                 "Philipa": {
-                    "belief_id": "Philipa",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Philipa"
                 }
             },
             "char_id": "Philipa",
@@ -371,21 +372,21 @@
             "debtor_weight": 1
         },
         "Prashant": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",appreciates US DOLLAR": {
-                    "belief_id": ",appreciates US DOLLAR",
                     "credor_weight": 2,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Prashant": {
-                    "belief_id": "Prashant",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Prashant"
                 }
             },
             "char_id": "Prashant",
@@ -393,51 +394,51 @@
             "debtor_weight": 1
         },
         "Renee Elise Goldsberry": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",appreciates US DOLLAR": {
-                    "belief_id": ",appreciates US DOLLAR",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Climate Death": {
-                    "belief_id": ",Climate Death",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Friends": {
-                    "belief_id": ",Friends",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Friends"
                 },
                 ",hurt by us dollar": {
-                    "belief_id": ",hurt by us dollar",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",hurt by us dollar"
                 },
                 ",People who identify by UTEP": {
-                    "belief_id": ",People who identify by UTEP",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",People who identify by UTEP"
                 },
                 ",Philosophy": {
-                    "belief_id": ",Philosophy",
                     "credor_weight": 3,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Philosophy"
                 },
                 ",SHOW ME2": {
-                    "belief_id": ",SHOW ME2",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",SHOW ME2"
                 },
                 "Renee Elise Goldsberry": {
-                    "belief_id": "Renee Elise Goldsberry",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Renee Elise Goldsberry"
                 }
             },
             "char_id": "Renee Elise Goldsberry",
@@ -445,26 +446,26 @@
             "debtor_weight": 1
         },
         "Sam zamora": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "belief_id": ",ACME General",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Sam zamora": {
-                    "belief_id": "Sam zamora",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Sam zamora"
                 }
             },
             "char_id": "Sam zamora",
@@ -472,21 +473,21 @@
             "debtor_weight": 1
         },
         "Shadwell Harris": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Shadwell Harris": {
-                    "belief_id": "Shadwell Harris",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Shadwell Harris"
                 }
             },
             "char_id": "Shadwell Harris",
@@ -494,21 +495,21 @@
             "debtor_weight": 1
         },
         "Thomas OSU": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Climate Death": {
-                    "belief_id": ",Climate Death",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "Thomas OSU": {
-                    "belief_id": "Thomas OSU",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Thomas OSU"
                 }
             },
             "char_id": "Thomas OSU",
@@ -516,21 +517,21 @@
             "debtor_weight": 1
         },
         "Travis Fox": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 ",Family": {
-                    "belief_id": ",Family",
                     "credor_weight": 6.35,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Family"
                 },
                 "Travis Fox": {
-                    "belief_id": "Travis Fox",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "Travis Fox"
                 }
             },
             "char_id": "Travis Fox",
@@ -538,21 +539,21 @@
             "debtor_weight": 1
         },
         "WIlliam Wallace": {
-            "_belieflinks": {
+            "_lobbylinks": {
                 ",ACME DevOps": {
-                    "belief_id": ",ACME DevOps",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "belief_id": ",Everyone",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": ",Everyone"
                 },
                 "WIlliam Wallace": {
-                    "belief_id": "WIlliam Wallace",
                     "credor_weight": 1,
-                    "debtor_weight": 1
+                    "debtor_weight": 1,
+                    "lobby_id": "WIlliam Wallace"
                 }
             },
             "char_id": "WIlliam Wallace",
@@ -1514,9 +1515,9 @@
                     "call Crazy pete to say hi": {
                         "_awardlinks": {
                             "Perrison": {
-                                "belief_id": "Perrison",
                                 "credor_weight": 1.0,
-                                "debtor_weight": 1
+                                "debtor_weight": 1,
+                                "lobby_id": "Perrison"
                             }
                         },
                         "_label": "call Crazy pete to say hi",
@@ -1558,9 +1559,9 @@
                             "check cat water": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "check cat water",
@@ -1603,9 +1604,9 @@
                             "clean baby seats": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "clean baby seats",
@@ -1629,9 +1630,9 @@
                             "clean bathroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "clean bathroom",
@@ -1655,9 +1656,9 @@
                             "clean cat poo": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "clean cat poo",
@@ -1682,9 +1683,9 @@
                             "clean humidifiers": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "clean humidifiers",
@@ -1708,9 +1709,9 @@
                             "clean sheets couch blankets": {
                                 "_awardlinks": {
                                     "Perrison": {
-                                        "belief_id": "Perrison",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": "Perrison"
                                     }
                                 },
                                 "_label": "clean sheets couch blankets",
@@ -1734,9 +1735,9 @@
                             "clean table": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "clean table",
@@ -1760,9 +1761,9 @@
                             "deep clean play mat": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "deep clean play mat",
@@ -1786,9 +1787,9 @@
                             "empty roomba": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "empty roomba",
@@ -1812,9 +1813,9 @@
                             "empty roomba Friday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "empty roomba Friday",
@@ -1861,9 +1862,9 @@
                             "laundry monday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "laundry monday",
@@ -1895,9 +1896,9 @@
                             "laundry saturday": {
                                 "_awardlinks": {
                                     "Travis Fox": {
-                                        "belief_id": "Travis Fox",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": "Travis Fox"
                                     }
                                 },
                                 "_label": "laundry saturday",
@@ -1958,9 +1959,9 @@
                             "laundry wednesday": {
                                 "_awardlinks": {
                                     "America": {
-                                        "belief_id": "America",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": "America"
                                     }
                                 },
                                 "_label": "laundry wednesday",
@@ -2010,9 +2011,9 @@
                             "prepare_bed clean bedroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "prepare_bed clean bedroom",
@@ -2036,9 +2037,9 @@
                             "roomba bedroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "roomba bedroom",
@@ -2062,9 +2063,9 @@
                             "roomba bedroom Friday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "roomba bedroom Friday",
@@ -2088,9 +2089,9 @@
                             "roomba living area": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "roomba living area",
@@ -2114,9 +2115,9 @@
                             "roomba living area thur": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "roomba living area thur",
@@ -2140,9 +2141,9 @@
                             "roomba maintenance": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "roomba maintenance",
@@ -2166,9 +2167,9 @@
                             "wipe down play mat2": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "wipe down play mat2",
@@ -2210,9 +2211,9 @@
                             "5 push-ups": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "5 push-ups",
@@ -2236,9 +2237,9 @@
                             "check protein for week is adequate": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "check protein for week is adequate",
@@ -2262,9 +2263,9 @@
                             "clip body nails": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "clip body nails",
@@ -2288,9 +2289,9 @@
                             "cook veggies every morning": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "cook veggies every morning",
@@ -2314,9 +2315,9 @@
                             "morning multivitamin": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "morning multivitamin",
@@ -2358,9 +2359,9 @@
                             "noce hair removal": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "noce hair removal",
@@ -2384,9 +2385,9 @@
                             "pull ear hair": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "pull ear hair",
@@ -2410,9 +2411,9 @@
                             "shampoo hair": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "shampoo hair",
@@ -2436,9 +2437,9 @@
                             "straight back for 45 secs": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "straight back for 45 secs",
@@ -2536,9 +2537,9 @@
                             "trim beard": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "trim beard",
@@ -2564,9 +2565,9 @@
                                     "bike or something": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "belief_id": ",Family",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": ",Family"
                                             }
                                         },
                                         "_label": "bike or something",
@@ -2590,9 +2591,9 @@
                                     "chest and arms (mon)": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "belief_id": ",Family",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": ",Family"
                                             }
                                         },
                                         "_kids": {
@@ -2646,9 +2647,9 @@
                                     "core lower back": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "belief_id": ",Family",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": ",Family"
                                             }
                                         },
                                         "_label": "core lower back",
@@ -2672,9 +2673,9 @@
                                     "rest": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "belief_id": ",Family",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": ",Family"
                                             }
                                         },
                                         "_label": "rest",
@@ -2697,9 +2698,9 @@
                                     "shoulders and upper back": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "belief_id": ",Family",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": ",Family"
                                             }
                                         },
                                         "_kids": {
@@ -2739,9 +2740,9 @@
                                     "squats hamstrings and calves": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "belief_id": ",Family",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": ",Family"
                                             }
                                         },
                                         "_label": "squats hamstrings and calves",
@@ -2778,9 +2779,9 @@
                             "be reponsible for rent": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "be reponsible for rent",
@@ -2803,9 +2804,9 @@
                             "be responsible for expenses card": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "be responsible for expenses card",
@@ -2828,9 +2829,9 @@
                             "be responsible for utilities": {
                                 "_awardlinks": {
                                     "Perrison": {
-                                        "belief_id": "Perrison",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": "Perrison"
                                     }
                                 },
                                 "_label": "be responsible for utilities",
@@ -2853,9 +2854,9 @@
                             "set aside a little bucks for fun the week": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "set aside a little bucks for fun the week",
@@ -2883,9 +2884,9 @@
                     "Housing": {
                         "_awardlinks": {
                             ",OceanVista Apt": {
-                                "belief_id": ",OceanVista Apt",
                                 "credor_weight": 1.0,
-                                "debtor_weight": 1
+                                "debtor_weight": 1,
+                                "lobby_id": ",OceanVista Apt"
                             }
                         },
                         "_is_expanded": false,
@@ -2931,9 +2932,9 @@
                                                     "heater maintenance": {
                                                         "_awardlinks": {
                                                             "Norberto": {
-                                                                "belief_id": "Norberto",
                                                                 "credor_weight": 1.0,
-                                                                "debtor_weight": 1
+                                                                "debtor_weight": 1,
+                                                                "lobby_id": "Norberto"
                                                             }
                                                         },
                                                         "_label": "heater maintenance",
@@ -3021,9 +3022,9 @@
                             "clip oldest nails": {
                                 "_awardlinks": {
                                     "America": {
-                                        "belief_id": "America",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": "America"
                                     }
                                 },
                                 "_label": "clip oldest nails",
@@ -3055,9 +3056,9 @@
                             "get rid of toy buy new toy": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "belief_id": ",Family",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Family"
                                     }
                                 },
                                 "_label": "get rid of toy buy new toy",
@@ -3123,9 +3124,9 @@
                     "say hi to birds": {
                         "_awardlinks": {
                             ",Family": {
-                                "belief_id": ",Family",
                                 "credor_weight": 1.0,
-                                "debtor_weight": 1
+                                "debtor_weight": 1,
+                                "lobby_id": ",Family"
                             }
                         },
                         "_label": "say hi to birds",
@@ -3155,19 +3156,19 @@
             "D&B": {
                 "_awardlinks": {
                     ",Climate Death": {
-                        "belief_id": ",Climate Death",
                         "credor_weight": 1.0,
-                        "debtor_weight": 1
+                        "debtor_weight": 1,
+                        "lobby_id": ",Climate Death"
                     },
                     ",Family": {
-                        "belief_id": ",Family",
                         "credor_weight": 1.0,
-                        "debtor_weight": 1
+                        "debtor_weight": 1,
+                        "lobby_id": ",Family"
                     },
                     "America": {
-                        "belief_id": "America",
                         "credor_weight": 1.0,
-                        "debtor_weight": 1
+                        "debtor_weight": 1,
+                        "lobby_id": "America"
                     }
                 },
                 "_is_expanded": false,
@@ -3175,18 +3176,18 @@
                     "bens friends be desperate for of housing support": {
                         "_awardlinks": {
                             "Renee Elise Goldsberry": {
-                                "belief_id": "Renee Elise Goldsberry",
                                 "credor_weight": 1.0,
-                                "debtor_weight": 1
+                                "debtor_weight": 1,
+                                "lobby_id": "Renee Elise Goldsberry"
                             }
                         },
                         "_kids": {
                             "Ask Aaron monthly what I can do": {
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
-                                        "belief_id": "Renee Elise Goldsberry",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": "Renee Elise Goldsberry"
                                     }
                                 },
                                 "_label": "Ask Aaron monthly what I can do",
@@ -3221,9 +3222,9 @@
                     "develop D&B software": {
                         "_awardlinks": {
                             ",hurt by us dollar": {
-                                "belief_id": ",hurt by us dollar",
                                 "credor_weight": 1.0,
-                                "debtor_weight": 1
+                                "debtor_weight": 1,
+                                "lobby_id": ",hurt by us dollar"
                             }
                         },
                         "_kids": {
@@ -3274,9 +3275,9 @@
                             "donate to influential people that are pro-Climate Death": {
                                 "_awardlinks": {
                                     ",Climate Death": {
-                                        "belief_id": ",Climate Death",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Climate Death"
                                     }
                                 },
                                 "_label": "donate to influential people that are pro-Climate Death",
@@ -3387,18 +3388,18 @@
                             "sympathetic receptive to Aaron": {
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
-                                        "belief_id": "Renee Elise Goldsberry",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": "Renee Elise Goldsberry"
                                     }
                                 },
                                 "_kids": {
                                     "be available for phone call": {
                                         "_awardlinks": {
                                             "Renee Elise Goldsberry": {
-                                                "belief_id": "Renee Elise Goldsberry",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": "Renee Elise Goldsberry"
                                             }
                                         },
                                         "_label": "be available for phone call",
@@ -3430,14 +3431,14 @@
                                     "call Aaron and discuss methodology": {
                                         "_awardlinks": {
                                             ",Climate Death": {
-                                                "belief_id": ",Climate Death",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": ",Climate Death"
                                             },
                                             "Renee Elise Goldsberry": {
-                                                "belief_id": "Renee Elise Goldsberry",
                                                 "credor_weight": 1.0,
-                                                "debtor_weight": 1
+                                                "debtor_weight": 1,
+                                                "lobby_id": "Renee Elise Goldsberry"
                                             }
                                         },
                                         "_label": "call Aaron and discuss methodology",
@@ -3501,9 +3502,9 @@
                             "write letters about Climate Death to congressman": {
                                 "_awardlinks": {
                                     ",Climate Death": {
-                                        "belief_id": ",Climate Death",
                                         "credor_weight": 1.0,
-                                        "debtor_weight": 1
+                                        "debtor_weight": 1,
+                                        "lobby_id": ",Climate Death"
                                     }
                                 },
                                 "_label": "write letters about Climate Death to congressman",
@@ -5532,7 +5533,6 @@
     },
     "_owner_id": "Bob",
     "_penny": 1,
-    "_bit": 1,
     "_real_id": "A",
     "_road_delimiter": ",",
     "_weight": 1

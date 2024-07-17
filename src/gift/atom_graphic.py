@@ -101,7 +101,7 @@ def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
     add_rect_text(fig, x=text_x, y=text_y, text=atomplotyshape.display_text)
 
 
-def add_beliefboxs_circle(fig: plotly_Figure):
+def add_lobbyboxs_circle(fig: plotly_Figure):
     home_form_x0 = 0.2
     home_form_x1 = 1 - 0.2
     home_width = home_form_x1 - home_form_x0
@@ -126,7 +126,7 @@ def add_beliefboxs_circle(fig: plotly_Figure):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text="BeliefBoxs")
+    add_rect_text(fig, x=text_x, y=text_y, text="LobbyBoxs")
 
 
 def add_different_ideas_circle(fig: plotly_Figure):
@@ -169,16 +169,16 @@ def atomunit_periodic_table0() -> plotly_Figure:
 
     premise_text = "world_idea_reason_premiseunit"
     world_charunit_insert = get_insert_rect("world_charunit")
-    world_char_belieflink_insert = get_insert_rect("world_char_belieflink")
+    world_char_lobbylink_insert = get_insert_rect("world_char_lobbylink")
     world_ideaunit_insert = get_insert_rect("world_ideaunit")
     world_idea_awardlink_insert = get_insert_rect("world_idea_awardlink")
-    world_idea_beliefhold_insert = get_insert_rect("world_idea_beliefhold")
+    world_idea_lobbyhold_insert = get_insert_rect("world_idea_lobbyhold")
     world_idea_healerhold_insert = get_insert_rect("world_idea_healerhold")
     world_idea_factunit_insert = get_insert_rect("world_idea_factunit")
     world_idea_reasonunit_insert = get_insert_rect("world_idea_reasonunit")
     world_idea_reason_premiseunit_insert = get_insert_rect(premise_text)
     world_charunit_update = get_update_rect("world_charunit")
-    world_char_belieflink_update = get_update_rect("world_char_belieflink")
+    world_char_lobbylink_update = get_update_rect("world_char_lobbylink")
     world_ideaunit_update = get_update_rect("world_ideaunit")
     world_idea_awardlink_update = get_update_rect("world_idea_awardlink")
     world_idea_factunit_update = get_update_rect("world_idea_factunit")
@@ -187,11 +187,11 @@ def atomunit_periodic_table0() -> plotly_Figure:
     world_idea_reason_premiseunit_delete = get_delete_rect(premise_text)
     world_idea_reasonunit_delete = get_delete_rect("world_idea_reasonunit")
     world_idea_factunit_delete = get_delete_rect("world_idea_factunit")
-    world_idea_beliefhold_delete = get_delete_rect("world_idea_beliefhold")
+    world_idea_lobbyhold_delete = get_delete_rect("world_idea_lobbyhold")
     world_idea_healerhold_delete = get_delete_rect("world_idea_healerhold")
     world_idea_awardlink_delete = get_delete_rect("world_idea_awardlink")
     world_ideaunit_delete = get_delete_rect("world_ideaunit")
-    world_char_belieflink_delete = get_delete_rect("world_char_belieflink")
+    world_char_lobbylink_delete = get_delete_rect("world_char_lobbylink")
     world_charunit_delete = get_delete_rect("world_charunit")
     worldunit_update = get_update_rect("worldunit")
 
@@ -199,13 +199,13 @@ def atomunit_periodic_table0() -> plotly_Figure:
     world_charunit_insert.set_level(0, 0, 0.25, green_text)
     world_charunit_update.set_level(0, 0.25, 0.75, green_text)
     world_charunit_delete.set_level(0, 0.75, 1, green_text)
-    world_char_belieflink_insert.set_level(1, 0, 0.3, green_text)
-    world_char_belieflink_update.set_level(1, 0.3, 0.7, green_text)
-    world_char_belieflink_delete.set_level(1, 0.7, 1, green_text)
+    world_char_lobbylink_insert.set_level(1, 0, 0.3, green_text)
+    world_char_lobbylink_update.set_level(1, 0.3, 0.7, green_text)
+    world_char_lobbylink_delete.set_level(1, 0.7, 1, green_text)
     world_idea_healerhold_insert.set_level(3, 0.2, 0.4)
     world_idea_healerhold_delete.set_level(3, 0.6, 0.8)
-    world_idea_beliefhold_insert.set_level(4, 0.2, 0.4)
-    world_idea_beliefhold_delete.set_level(4, 0.6, 0.8)
+    world_idea_lobbyhold_insert.set_level(4, 0.2, 0.4)
+    world_idea_lobbyhold_delete.set_level(4, 0.6, 0.8)
     world_idea_awardlink_insert.set_level(5, 0.2, 0.4, green_text)
     world_idea_awardlink_update.set_level(5, 0.4, 0.6, green_text)
     world_idea_awardlink_delete.set_level(5, 0.6, 0.8, green_text)
@@ -225,7 +225,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
 
     # world_ideaunit_insert = get_insert_rect("world_ideaunit")
     # world_idea_awardlink_insert = get_insert_rect("world_idea_awardlink")
-    # world_idea_beliefhold_insert = get_insert_rect("world_idea_beliefhold")
+    # world_idea_lobbyhold_insert = get_insert_rect("world_idea_lobbyhold")
     # world_idea_healerhold_insert = get_insert_rect("world_idea_healerhold")
     # world_idea_factunit_insert = get_insert_rect("world_idea_factunit")
     # world_idea_reasonunit_insert = get_insert_rect("world_idea_reasonunit")
@@ -238,7 +238,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
     # world_idea_reason_premiseunit_delete = get_delete_rect(premise_text)
     # world_idea_reasonunit_delete = get_delete_rect("world_idea_reasonunit")
     # world_idea_factunit_delete = get_delete_rect("world_idea_factunit")
-    # world_idea_beliefhold_delete = get_delete_rect("world_idea_beliefhold")
+    # world_idea_lobbyhold_delete = get_delete_rect("world_idea_lobbyhold")
     # world_idea_healerhold_delete = get_delete_rect("world_idea_healerhold")
     # world_idea_awardlink_delete = get_delete_rect("world_idea_awardlink")
     # world_ideaunit_delete = get_delete_rect("world_ideaunit")
@@ -248,21 +248,21 @@ def atomunit_periodic_table0() -> plotly_Figure:
 
     # Add shapes
     add_atom_rect(fig, world_charunit_insert)
-    add_atom_rect(fig, world_char_belieflink_insert)
-    add_atom_rect(fig, world_idea_beliefhold_insert)
+    add_atom_rect(fig, world_char_lobbylink_insert)
+    add_atom_rect(fig, world_idea_lobbyhold_insert)
     add_atom_rect(fig, world_idea_healerhold_insert)
     add_atom_rect(fig, world_idea_factunit_insert)
     add_atom_rect(fig, world_idea_reasonunit_insert)
     add_atom_rect(fig, world_idea_reason_premiseunit_insert)
     add_atom_rect(fig, world_charunit_update)
-    add_atom_rect(fig, world_char_belieflink_update)
+    add_atom_rect(fig, world_char_lobbylink_update)
     add_atom_rect(fig, world_idea_factunit_update)
     add_atom_rect(fig, world_idea_reason_premiseunit_update)
     add_atom_rect(fig, world_idea_reasonunit_update)
     add_atom_rect(fig, world_idea_reason_premiseunit_delete)
     add_atom_rect(fig, world_idea_reasonunit_delete)
     add_atom_rect(fig, world_idea_factunit_delete)
-    add_atom_rect(fig, world_idea_beliefhold_delete)
+    add_atom_rect(fig, world_idea_lobbyhold_delete)
     add_atom_rect(fig, world_idea_healerhold_delete)
     add_atom_rect(fig, world_idea_awardlink_insert)
     add_atom_rect(fig, world_idea_awardlink_update)
@@ -270,10 +270,10 @@ def atomunit_periodic_table0() -> plotly_Figure:
     add_atom_rect(fig, world_ideaunit_insert)
     add_atom_rect(fig, world_ideaunit_update)
     add_atom_rect(fig, world_ideaunit_delete)
-    add_atom_rect(fig, world_char_belieflink_delete)
+    add_atom_rect(fig, world_char_lobbylink_delete)
     add_atom_rect(fig, world_charunit_delete)
     add_atom_rect(fig, worldunit_update)
-    add_beliefboxs_circle(fig)
+    add_lobbyboxs_circle(fig)
     add_different_ideas_circle(fig)
 
     fig.add_trace(

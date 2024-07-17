@@ -395,7 +395,7 @@ def get_world_laundry_example1() -> WorldUnit:
         road=laundry_task_road, reason_base=basket_road, reason_premise=b_smel_road
     )
     cali_doerunit = doerunit_shop()
-    cali_doerunit.set_beliefhold(cali_text)
+    cali_doerunit.set_lobbyhold(cali_text)
     amos_world.edit_idea_attr(road=laundry_task_road, doerunit=cali_doerunit)
     # print(f"{basket_road=}")
     # print(f"{amos_world._real_id=}")

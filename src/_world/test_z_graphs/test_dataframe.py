@@ -28,7 +28,7 @@ def test_get_world_charunits_dataframe_ReturnsCorrectDataFrame():
         "char_id",
         "credor_weight",
         "debtor_weight",
-        "_belieflinks",
+        "_lobbylinks",
         "_world_cred",
         "_world_debt",
         "_world_agenda_cred",

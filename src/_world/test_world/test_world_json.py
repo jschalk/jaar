@@ -1,6 +1,6 @@
 from src._instrument.python import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
-from src._world.beliefbox import awardlink_shop
+from src._world.lobbybox import awardlink_shop
 from src._world.healer import healerhold_shop
 from src._world.reason_doer import doerunit_shop
 from src._world.reason_idea import factunit_shop
@@ -68,7 +68,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_last_gift_id"] == x_world._last_gift_id
     assert len(world_dict["_chars"]) == len(x_world._chars)
     assert len(world_dict["_chars"]) != 12
-    assert world_dict.get("_beliefs") is None
+    assert world_dict.get("_lobbys") is None
 
     x_idearoot = x_world._idearoot
     idearoot_dict = world_dict["_idearoot"]
@@ -117,7 +117,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
     run_text = "runners"
     sue_world = worldunit_shop("Sue")
     x_doerunit = doerunit_shop()
-    x_doerunit.set_beliefhold(belief_id=run_text)
+    x_doerunit.set_lobbyhold(lobby_id=run_text)
     sue_world.edit_idea_attr(doerunit=x_doerunit, road=sue_world._real_id)
 
     # WHEN
@@ -126,7 +126,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
 
     # THEN
     assert idearoot_dict["_doerunit"] == x_doerunit.get_dict()
-    assert idearoot_dict["_doerunit"] == {"_beliefholds": [run_text]}
+    assert idearoot_dict["_doerunit"] == {"_lobbyholds": [run_text]}
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
@@ -136,9 +136,9 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     sue_world.add_charunit(yao_text)
     run_text = ",runners"
     yao_charunit = sue_world.get_char(yao_text)
-    yao_charunit.add_belieflink(run_text)
+    yao_charunit.add_lobbylink(run_text)
     run_healerhold = healerhold_shop()
-    run_healerhold.set_belief_id(x_belief_id=run_text)
+    run_healerhold.set_lobby_id(x_lobby_id=run_text)
     sue_world.edit_idea_attr(road=sue_world._real_id, healerhold=run_healerhold)
 
     # WHEN
@@ -156,13 +156,13 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     sue_world.add_charunit(yao_text)
     run_text = ",runners"
     yao_charunit = sue_world.get_char(yao_text)
-    yao_charunit.add_belieflink(run_text)
+    yao_charunit.add_lobbylink(run_text)
 
     morn_text = "morning"
     morn_road = sue_world.make_l1_road(morn_text)
     sue_world.add_l1_idea(ideaunit_shop(morn_text))
     x_doerunit = doerunit_shop()
-    x_doerunit.set_beliefhold(belief_id=run_text)
+    x_doerunit.set_lobbyhold(lobby_id=run_text)
     sue_world.edit_idea_attr(doerunit=x_doerunit, road=morn_road)
 
     # WHEN
@@ -175,7 +175,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
 
     doer_dict_x = idearoot_dict[_kids][morn_text][_doerunit]
     assert doer_dict_x == x_doerunit.get_dict()
-    assert doer_dict_x == {"_beliefholds": [run_text]}
+    assert doer_dict_x == {"_lobbyholds": [run_text]}
 
 
 def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
@@ -196,7 +196,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     run_text = ",runners"
     zia_world.add_charunit(yao_text)
     yao_charunit = zia_world.get_char(yao_text)
-    yao_charunit.add_belieflink(run_text)
+    yao_charunit.add_lobbylink(run_text)
     run_healerhold = healerhold_shop({run_text})
     zia_world.edit_idea_attr(road=zia_world._real_id, healerhold=run_healerhold)
     zia_world.edit_idea_attr(road=zia_world._real_id, problem_bool=True)
@@ -243,7 +243,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     idearoot_healerhold = idearoot_dict["_healerhold"]
     print(f"{idearoot_healerhold=}")
     assert len(idearoot_healerhold) == 1
-    assert x_idearoot._healerhold.any_belief_id_exists()
+    assert x_idearoot._healerhold.any_lobby_id_exists()
     assert x_idearoot._problem_bool
 
 
@@ -338,13 +338,13 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     run_text = ",runners"
     sue_charunit = zia_world.get_char(sue_text)
     tim_charunit = zia_world.get_char(tim_text)
-    sue_charunit.add_belieflink(run_text)
-    tim_charunit.add_belieflink(run_text)
+    sue_charunit.add_lobbylink(run_text)
+    tim_charunit.add_lobbylink(run_text)
     run_doerunit = doerunit_shop()
-    run_doerunit.set_beliefhold(belief_id=run_text)
+    run_doerunit.set_lobbyhold(lobby_id=run_text)
     zia_world.edit_idea_attr(zia_world._real_id, doerunit=run_doerunit)
     tim_doerunit = doerunit_shop()
-    tim_doerunit.set_beliefhold(belief_id=tim_text)
+    tim_doerunit.set_lobbyhold(lobby_id=tim_text)
     zia_world.edit_idea_attr(shave_road, doerunit=tim_doerunit)
     zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(tim_text))
     zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
@@ -384,7 +384,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._debtor_respect == zia_debtor_respect
     assert json_world._last_gift_id == zia_world._last_gift_id
     assert json_world._last_gift_id == zia_last_gift_id
-    # assert json_world._beliefs == zia_world._beliefs
+    # assert json_world._lobbys == zia_world._lobbys
 
     json_idearoot = json_world._idearoot
     assert json_idearoot._parent_road == ""
@@ -459,7 +459,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_CharExample():
     assert after_bob_charunit._road_delimiter == slash_delimiter
 
 
-def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample():
+def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
     # GIVEN
     slash_delimiter = "/"
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
@@ -467,7 +467,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample(
     swim_text = f"{slash_delimiter}Swimmers"
     before_bob_world.add_charunit(yao_text)
     yao_charunit = before_bob_world.get_char(yao_text)
-    yao_charunit.add_belieflink(swim_text)
+    yao_charunit.add_lobbylink(swim_text)
 
     # WHEN
     bob_json = before_bob_world.get_json()
@@ -541,6 +541,6 @@ def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
     philipa_text = "Philipa"
     ccn_philipa_charunit = ccn_world1.get_char(philipa_text)
     x1_philipa_charunit = x1_world.get_char(philipa_text)
-    assert ccn_philipa_charunit._belieflinks == x1_philipa_charunit._belieflinks
+    assert ccn_philipa_charunit._lobbylinks == x1_philipa_charunit._lobbylinks
     assert ccn_world1 == x1_world
     assert ccn_dict_of_obj.get(x1_world._owner_id) == x1_world

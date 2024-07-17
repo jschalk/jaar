@@ -1,5 +1,5 @@
 from src._instrument.python import get_empty_set_if_none
-from src._world.beliefbox import BeliefBox, BeliefID
+from src._world.lobbybox import LobbyBox, LobbyID
 from src._world.char import CharID
 from dataclasses import dataclass
 
@@ -10,98 +10,98 @@ class InvalidDoerHeirPopulateException(Exception):
 
 @dataclass
 class DoerUnit:
-    _beliefholds: set[BeliefID]
+    _lobbyholds: set[LobbyID]
 
     def get_dict(self) -> dict[str, str]:
-        return {"_beliefholds": list(self._beliefholds)}
+        return {"_lobbyholds": list(self._lobbyholds)}
 
-    def set_beliefhold(self, belief_id: BeliefID):
-        self._beliefholds.add(belief_id)
+    def set_lobbyhold(self, lobby_id: LobbyID):
+        self._lobbyholds.add(lobby_id)
 
-    def beliefhold_exists(self, belief_id: BeliefID):
-        return belief_id in self._beliefholds
+    def lobbyhold_exists(self, lobby_id: LobbyID):
+        return lobby_id in self._lobbyholds
 
-    def del_beliefhold(self, belief_id: BeliefID):
-        self._beliefholds.remove(belief_id)
+    def del_lobbyhold(self, lobby_id: LobbyID):
+        self._lobbyholds.remove(lobby_id)
 
-    def get_beliefhold(self, belief_id: BeliefID) -> BeliefID:
-        if self.beliefhold_exists(belief_id):
-            return belief_id
-
-
-def doerunit_shop(_beliefholds: set[BeliefID] = None) -> DoerUnit:
-    return DoerUnit(get_empty_set_if_none(_beliefholds))
+    def get_lobbyhold(self, lobby_id: LobbyID) -> LobbyID:
+        if self.lobbyhold_exists(lobby_id):
+            return lobby_id
 
 
-def create_doerunit(beliefhold: BeliefID):
+def doerunit_shop(_lobbyholds: set[LobbyID] = None) -> DoerUnit:
+    return DoerUnit(get_empty_set_if_none(_lobbyholds))
+
+
+def create_doerunit(lobbyhold: LobbyID):
     x_doerunit = doerunit_shop()
-    x_doerunit.set_beliefhold(beliefhold)
+    x_doerunit.set_lobbyhold(lobbyhold)
     return x_doerunit
 
 
 @dataclass
 class DoerHeir:
-    _beliefholds: set[BeliefID]
+    _lobbyholds: set[LobbyID]
     _owner_id_doer: bool
 
     def _get_all_chars(
         self,
-        world_beliefboxs: dict[BeliefID, BeliefBox],
-        belief_id_set: set[BeliefID],
-    ) -> dict[BeliefID, BeliefBox]:
+        world_lobbyboxs: dict[LobbyID, LobbyBox],
+        lobby_id_set: set[LobbyID],
+    ) -> dict[LobbyID, LobbyBox]:
         dict_x = {}
-        for belief_id_x in belief_id_set:
-            dict_x |= world_beliefboxs.get(belief_id_x)._belieflinks
+        for lobby_id_x in lobby_id_set:
+            dict_x |= world_lobbyboxs.get(lobby_id_x)._lobbylinks
         return dict_x
 
     def is_empty(self) -> bool:
-        return self._beliefholds == set()
+        return self._lobbyholds == set()
 
     def set_owner_id_doer(
-        self, world_beliefboxs: dict[BeliefID, BeliefBox], world_owner_id: CharID
+        self, world_lobbyboxs: dict[LobbyID, LobbyBox], world_owner_id: CharID
     ):
         self._owner_id_doer = self.get_owner_id_doer_bool(
-            world_beliefboxs, world_owner_id
+            world_lobbyboxs, world_owner_id
         )
 
     def get_owner_id_doer_bool(
-        self, world_beliefboxs: dict[BeliefID, BeliefBox], world_owner_id: CharID
+        self, world_lobbyboxs: dict[LobbyID, LobbyBox], world_owner_id: CharID
     ) -> bool:
-        if self._beliefholds == set():
+        if self._lobbyholds == set():
             return True
 
-        for x_belief_id, x_beliefbox in world_beliefboxs.items():
-            if x_belief_id in self._beliefholds:
-                for x_char_id in x_beliefbox._belieflinks.keys():
+        for x_lobby_id, x_lobbybox in world_lobbyboxs.items():
+            if x_lobby_id in self._lobbyholds:
+                for x_char_id in x_lobbybox._lobbylinks.keys():
                     if x_char_id == world_owner_id:
                         return True
         return False
 
-    def set_beliefholds(
+    def set_lobbyholds(
         self,
         parent_doerheir,
         doerunit: DoerUnit,
-        world_beliefboxs: dict[BeliefID, BeliefBox],
+        world_lobbyboxs: dict[LobbyID, LobbyBox],
     ):
-        x_beliefholds = set()
-        if parent_doerheir is None or parent_doerheir._beliefholds == set():
-            for beliefhold in doerunit._beliefholds:
-                x_beliefholds.add(beliefhold)
-        elif doerunit._beliefholds == set() or (
-            parent_doerheir._beliefholds == doerunit._beliefholds
+        x_lobbyholds = set()
+        if parent_doerheir is None or parent_doerheir._lobbyholds == set():
+            for lobbyhold in doerunit._lobbyholds:
+                x_lobbyholds.add(lobbyhold)
+        elif doerunit._lobbyholds == set() or (
+            parent_doerheir._lobbyholds == doerunit._lobbyholds
         ):
-            for beliefhold in parent_doerheir._beliefholds:
-                x_beliefholds.add(beliefhold)
+            for lobbyhold in parent_doerheir._lobbyholds:
+                x_lobbyholds.add(lobbyhold)
         else:
-            # get all_chars of parent doerheir beliefboxs
+            # get all_chars of parent doerheir lobbyboxs
             all_parent_doerheir_chars = self._get_all_chars(
-                world_beliefboxs=world_beliefboxs,
-                belief_id_set=parent_doerheir._beliefholds,
+                world_lobbyboxs=world_lobbyboxs,
+                lobby_id_set=parent_doerheir._lobbyholds,
             )
-            # get all_chars of doerunit beliefboxs
+            # get all_chars of doerunit lobbyboxs
             all_doerunit_chars = self._get_all_chars(
-                world_beliefboxs=world_beliefboxs,
-                belief_id_set=doerunit._beliefholds,
+                world_lobbyboxs=world_lobbyboxs,
+                lobby_id_set=doerunit._lobbyholds,
             )
             if not set(all_doerunit_chars).issubset(set(all_parent_doerheir_chars)):
                 # else raise error
@@ -109,28 +109,28 @@ class DoerHeir:
                     f"parent_doerheir does not contain all chars of the idea's doerunit\n{set(all_parent_doerheir_chars)=}\n\n{set(all_doerunit_chars)=}"
                 )
 
-            # set dict_x = to doerunit beliefboxs
-            for beliefhold in doerunit._beliefholds:
-                x_beliefholds.add(beliefhold)
-        self._beliefholds = x_beliefholds
+            # set dict_x = to doerunit lobbyboxs
+            for lobbyhold in doerunit._lobbyholds:
+                x_lobbyholds.add(lobbyhold)
+        self._lobbyholds = x_lobbyholds
 
-    def has_belief(self, belief_ids: set[BeliefID]):
-        return self.is_empty() or any(gn_x in self._beliefholds for gn_x in belief_ids)
+    def has_lobby(self, lobby_ids: set[LobbyID]):
+        return self.is_empty() or any(gn_x in self._lobbyholds for gn_x in lobby_ids)
 
 
 def doerheir_shop(
-    _beliefholds: set[BeliefID] = None, _owner_id_doer: bool = None
+    _lobbyholds: set[LobbyID] = None, _owner_id_doer: bool = None
 ) -> DoerHeir:
-    _beliefholds = get_empty_set_if_none(_beliefholds)
+    _lobbyholds = get_empty_set_if_none(_lobbyholds)
     if _owner_id_doer is None:
         _owner_id_doer = False
 
-    return DoerHeir(_beliefholds=_beliefholds, _owner_id_doer=_owner_id_doer)
+    return DoerHeir(_lobbyholds=_lobbyholds, _owner_id_doer=_owner_id_doer)
 
 
 def doerunit_get_from_dict(doerunit_dict: dict) -> DoerUnit:
     x_doerunit = doerunit_shop()
-    for x_belief_id in doerunit_dict.get("_beliefholds"):
-        x_doerunit.set_beliefhold(x_belief_id)
+    for x_lobby_id in doerunit_dict.get("_lobbyholds"):
+        x_doerunit.set_lobbyhold(x_lobby_id)
 
     return x_doerunit

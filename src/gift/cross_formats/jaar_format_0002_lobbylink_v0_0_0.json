@@ -1,7 +1,7 @@
 {
-    "atom_category": "world_char_belieflink",
+    "atom_category": "world_char_lobbylink",
     "attributes": {
-        "belief_id": {
+        "lobby_id": {
             "column_order": 3,
             "sort_order": 1
         },

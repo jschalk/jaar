@@ -1,4 +1,4 @@
-from src._road.road import RoadUnit, get_terminus_node, get_parent_road, BeliefID
+from src._road.road import RoadUnit, get_terminus_node, get_parent_road, LobbyID
 from src._world.world import WorldUnit
 from src.listen.hubunit import HubUnit
 from copy import deepcopy as copy_deepcopy
@@ -7,16 +7,16 @@ from copy import deepcopy as copy_deepcopy
 def create_pledge(
     x_world: WorldUnit,
     pledge_road: RoadUnit,
-    x_beliefhold: BeliefID = None,
+    x_lobbyhold: LobbyID = None,
     reason_premise: RoadUnit = None,
 ):
     if pledge_road is not None and get_terminus_node(pledge_road) != "":
         x_idea = x_world.get_idea_obj(pledge_road, if_missing_create=True)
         x_idea.pledge = True
-        x_idea._doerunit.set_beliefhold(x_beliefhold)
+        x_idea._doerunit.set_lobbyhold(x_lobbyhold)
 
-        if x_beliefhold != None and x_world.char_exists(x_beliefhold) is False:
-            x_world.add_charunit(x_beliefhold)
+        if x_lobbyhold != None and x_world.char_exists(x_lobbyhold) is False:
+            x_world.add_charunit(x_lobbyhold)
 
         if reason_premise != None:
             if x_world.idea_exists(reason_premise) is False:
@@ -28,12 +28,12 @@ def create_pledge(
 def add_voice_pledge(
     x_hubunit: HubUnit,
     pledge_road: RoadUnit,
-    x_beliefhold: BeliefID = None,
+    x_lobbyhold: LobbyID = None,
     reason_premise: RoadUnit = None,
 ):
     voice_world = x_hubunit.get_voice_world()
     old_voice_world = copy_deepcopy(voice_world)
-    create_pledge(voice_world, pledge_road, x_beliefhold, reason_premise)
+    create_pledge(voice_world, pledge_road, x_lobbyhold, reason_premise)
     next_giftunit = x_hubunit._default_giftunit()
     next_giftunit._changeunit.add_all_different_atomunits(old_voice_world, voice_world)
     next_giftunit.save_files()

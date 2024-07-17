@@ -7,7 +7,7 @@ from src._world.healer import healerhold_shop
 from src._world.char import CharID
 from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefbox import awardline_shop, awardlink_shop
+from src._world.lobbybox import awardline_shop, awardlink_shop
 from src._world.graphic import display_ideatree
 from pytest import raises as pytest_raises
 
@@ -250,7 +250,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
     x_world.add_idea(vacuum_idea, parent_road=casa_road)
 
     x_world.add_charunit(char_id=sue_text)
-    x_awardlink = awardlink_shop(belief_id=sue_text)
+    x_awardlink = awardlink_shop(lobby_id=sue_text)
 
     x_world._idearoot._kids[casa_text]._kids[email_text].set_awardlink(
         awardlink=x_awardlink
@@ -318,7 +318,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     sue_text = "Sue"
     week_text = "weekdays"
     nation_text = "nation-state"
-    sue_awardlink = awardlink_shop(belief_id=sue_text)
+    sue_awardlink = awardlink_shop(lobby_id=sue_text)
     x_world.add_charunit(char_id=sue_text)
     x_world._idearoot.set_awardlink(awardlink=sue_awardlink)
     # idea tree has awardlines
@@ -329,7 +329,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
 
     # THEN
     assert x_world._idearoot._awardheirs.get(sue_text) != None
-    assert x_world._idearoot._awardheirs.get(sue_text).belief_id == sue_text
+    assert x_world._idearoot._awardheirs.get(sue_text).lobby_id == sue_text
     assert x_world._idearoot._awardlines != {}
     root_idea = x_world.get_idea_obj(road=x_world._idearoot._label)
     sue_awardline = x_world._idearoot._awardlines.get(sue_text)
@@ -362,11 +362,11 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     assert round(sue_awardline._world_cred, 15) == 1
     assert round(sue_awardline._world_debt, 15) == 1
     x_awardline = awardline_shop(
-        belief_id=sue_text,
+        lobby_id=sue_text,
         _world_cred=0.9999999999999998,
         _world_debt=0.9999999999999998,
     )
-    assert x_world._idearoot._awardlines == {x_awardline.belief_id: x_awardline}
+    assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
 
 
 def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootCorrectly():
@@ -377,7 +377,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
     sue_text = "Sue"
     assert x_world._idearoot._awardlines == {}
     x_world.add_charunit(char_id=sue_text)
-    x_awardlink = awardlink_shop(belief_id=sue_text)
+    x_awardlink = awardlink_shop(lobby_id=sue_text)
     casa_text = "casa"
     email_text = "email"
     x_world._idearoot._kids[casa_text].set_awardlink(awardlink=x_awardlink)
@@ -390,14 +390,14 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
     assert x_world._idearoot._awardlines != {}
     print(f"{x_world._idearoot._awardlines=}")
     x_awardline = awardline_shop(
-        belief_id=sue_text,
+        lobby_id=sue_text,
         _world_cred=0.23076923,
         _world_debt=0.23076923,
     )
-    assert x_world._idearoot._awardlines == {x_awardline.belief_id: x_awardline}
+    assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
     assert x_world._idearoot._kids[casa_text]._awardlines != {}
     assert x_world._idearoot._kids[casa_text]._awardlines == {
-        x_awardline.belief_id: x_awardline
+        x_awardline.lobby_id: x_awardline
     }
 
 
@@ -416,7 +416,7 @@ def test_world4char_Exists():
 
     sue_char_id = sue_text
     x_world.add_charunit(char_id=sue_char_id)
-    x_awardlink = awardlink_shop(belief_id=sue_char_id)
+    x_awardlink = awardlink_shop(lobby_id=sue_char_id)
     yrx = x_world._idearoot
     yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=x_awardlink)
 
@@ -429,7 +429,7 @@ def test_world4char_Exists():
     assert sue_world4char._owner_id == sue_char_id
 
 
-def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
+def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
     # GIVEN
     x_world = example_worlds_get_world_with_4_levels()
     email_text = "email"
@@ -446,7 +446,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
 
     yao_char_id = "Yao"
     x_world.add_charunit(char_id=yao_char_id)
-    yao_bl = awardlink_shop(belief_id=yao_char_id)
+    yao_bl = awardlink_shop(lobby_id=yao_char_id)
     yrx = x_world._idearoot
     yrx._kids[week_text].set_awardlink(awardlink=yao_bl)
     yrx._kids[feed_text].set_awardlink(awardlink=yao_bl)
@@ -455,7 +455,7 @@ def test_world4char_hasCorrectLevel1StructureNoBelieflessAncestors():
 
     sue_char_id = sue_text
     x_world.add_charunit(char_id=sue_char_id)
-    sue_bl = awardlink_shop(belief_id=sue_char_id)
+    sue_bl = awardlink_shop(lobby_id=sue_char_id)
     yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=sue_bl)
 
     # WHEN
@@ -629,7 +629,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenThereAre
     assert sue_world._econs_justified
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_belief_id_exists_IsTrue():
+def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_lobby_id_exists_IsTrue():
     # GIVEN
     sue_world = worldunit_shop("Sue")
     sue_world.add_l1_idea(ideaunit_shop("Texas", _healerhold=healerhold_shop({"Yao"})))

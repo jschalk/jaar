@@ -27,7 +27,7 @@ def test_create_empty_world_ReturnsCorrectObj():
     duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
     duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
     zia_charunit = yao_voice.get_char(zia_text)
-    zia_charunit.add_belieflink(f"{slash_text}swimmers")
+    zia_charunit.add_lobbylink(f"{slash_text}swimmers")
     yao_voice.set_credor_respect(zia_credor_pool)
     yao_voice.set_debtor_resepect(zia_debtor_pool)
 
@@ -72,7 +72,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
     duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
     zia_charunit = yao_duty.get_char(zia_text)
-    zia_charunit.add_belieflink(f"{slash_text}swimmers")
+    zia_charunit.add_lobbylink(f"{slash_text}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
     yao_duty.set_debtor_resepect(zia_debtor_pool)
 
@@ -122,7 +122,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     sue_worldunit.set_last_gift_id(last_gift_id)
     sue_worldunit.add_charunit(bob_text, 3, 4)
     bob_charunit = sue_worldunit.get_char(bob_text)
-    bob_charunit.add_belieflink(f"{slash_text}swimmers")
+    bob_charunit.add_lobbylink(f"{slash_text}swimmers")
     sue_worldunit.set_char_respect(sue_char_pool)
     sue_worldunit.add_l1_idea(ideaunit_shop(casa_text))
     sue_worldunit.set_max_tree_traverse(sue_max_tree_traverse)

@@ -4,7 +4,7 @@ from src._road.road import (
     OwnerID,
     CharID,
     RoadUnit,
-    BeliefID,
+    LobbyID,
     rebuild_road,
     is_sub_road,
     get_all_road_nodes,
@@ -637,7 +637,7 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObjGivenSlashNotDelimiterEdgeCase
     assert roadunit_valid_dir_path(lap_road, delimiter=",") is False
 
 
-def test_BeliefID_exists():
-    bikers_belief_id = BeliefID("bikers")
-    assert bikers_belief_id != None
-    assert str(type(bikers_belief_id)).find("src._road.road.BeliefID") > 0
+def test_LobbyID_exists():
+    bikers_lobby_id = LobbyID("bikers")
+    assert bikers_lobby_id != None
+    assert str(type(bikers_lobby_id)).find("src._road.road.LobbyID") > 0

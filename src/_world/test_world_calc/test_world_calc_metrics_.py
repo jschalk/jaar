@@ -3,7 +3,7 @@ from src._road.road import RoadUnit
 from src._world.world import worldunit_shop, get_from_json as worldunit_get_from_json
 from src._world.idea import IdeaUnit, ideaunit_shop
 from src._world.reason_idea import reasonunit_shop
-from src._world.beliefbox import awardlink_shop
+from src._world.lobbybox import awardlink_shop
 from src._world.reason_doer import doerunit_shop
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
@@ -555,7 +555,7 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
 
     zia_world.calc_world_metrics()
     assert len(zia_world._chars) == 0
-    assert len(zia_world.get_belief_ids_dict()) == 0
+    assert len(zia_world.get_lobby_ids_dict()) == 0
     assert len(zia_world._idearoot._kids) == 0
 
     clean_things_text = "cleaning things"
@@ -590,11 +590,11 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     clean_cookery_idea.set_reasonunit(reason=daytime_reason)
 
     family_text = ",family"
-    awardlink_z = awardlink_shop(belief_id=family_text)
+    awardlink_z = awardlink_shop(lobby_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink_z)
 
     assert len(zia_world._chars) == 0
-    assert len(zia_world.get_belief_ids_dict()) == 0
+    assert len(zia_world.get_lobby_ids_dict()) == 0
     assert len(zia_world._idearoot._kids) == 1
     assert zia_world.get_idea_obj(daytime_road)._begin == 0
     assert zia_world.get_idea_obj(daytime_road)._close == 1440
@@ -617,8 +617,8 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     assert zia_world.get_idea_obj(cookery_dirty_road) != None
     assert zia_world.get_idea_obj(daytime_road)._begin == 0
     assert zia_world.get_idea_obj(daytime_road)._close == 1440
-    assert len(zia_world.get_belief_ids_dict()) == 0
-    assert zia_world.get_belief_ids_dict().get(family_text) is None
+    assert len(zia_world.get_lobby_ids_dict()) == 0
+    assert zia_world.get_lobby_ids_dict().get(family_text) is None
 
     assert len(zia_world._idearoot._kids) == 3
 
@@ -692,7 +692,7 @@ def test_Isue116Resolved_correctlySetsTaskAsTrue():
     assert get_tasks_count(pledge_idea_list) == 64
 
 
-def test_agenda_IsSetByDoerUnit_1CharBelief():
+def test_agenda_IsSetByDoerUnit_1CharLobby():
     # GIVEN
     bob_text = "Bob"
     bob_world = worldunit_shop(bob_text)
@@ -704,7 +704,7 @@ def test_agenda_IsSetByDoerUnit_1CharBelief():
     sue_text = "Sue"
     bob_world.add_charunit(sue_text)
     doerunit_sue = doerunit_shop()
-    doerunit_sue.set_beliefhold(belief_id=sue_text)
+    doerunit_sue.set_lobbyhold(lobby_id=sue_text)
     assert len(bob_world.get_agenda_dict()) == 1
 
     # WHEN
@@ -716,7 +716,7 @@ def test_agenda_IsSetByDoerUnit_1CharBelief():
     # WHEN
     bob_world.add_charunit(bob_text)
     doerunit_bob = doerunit_shop()
-    doerunit_bob.set_beliefhold(belief_id=bob_text)
+    doerunit_bob.set_lobbyhold(lobby_id=bob_text)
 
     # WHEN
     bob_world.edit_idea_attr(road=casa_road, doerunit=doerunit_bob)
@@ -728,7 +728,7 @@ def test_agenda_IsSetByDoerUnit_1CharBelief():
     # print(f"{agenda_dict[0]._label=}")
 
 
-def test_agenda_IsSetByDoerUnit_2CharBelief():
+def test_agenda_IsSetByDoerUnit_2CharLobby():
     # GIVEN
     bob_text = "Bob"
     bob_world = worldunit_shop(bob_text)
@@ -741,10 +741,10 @@ def test_agenda_IsSetByDoerUnit_2CharBelief():
     bob_world.add_charunit(sue_text)
     run_text = ",runners"
     sue_charunit = bob_world.get_char(sue_text)
-    sue_charunit.add_belieflink(run_text)
+    sue_charunit.add_lobbylink(run_text)
 
     run_doerunit = doerunit_shop()
-    run_doerunit.set_beliefhold(belief_id=run_text)
+    run_doerunit.set_lobbyhold(lobby_id=run_text)
     assert len(bob_world.get_agenda_dict()) == 1
 
     # WHEN
@@ -755,7 +755,7 @@ def test_agenda_IsSetByDoerUnit_2CharBelief():
 
     # WHEN
     bob_charunit = bob_world.get_char(bob_text)
-    bob_charunit.add_belieflink(run_text)
+    bob_charunit.add_lobbylink(run_text)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 1
@@ -852,7 +852,7 @@ def test_WorldUnit_get_all_pledges_ReturnsCorrectObj():
     sweep_idea = zia_world.get_idea_obj(sweep_road)
     bob_text = "Bob"
     zia_world.add_charunit(bob_text)
-    sweep_idea._doerunit.set_beliefhold(bob_text)
+    sweep_idea._doerunit.set_lobbyhold(bob_text)
     print(f"{sweep_idea}")
     agenda_dict = zia_world.get_agenda_dict()
     assert agenda_dict.get(clean_road) != None

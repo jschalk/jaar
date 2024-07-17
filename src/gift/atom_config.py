@@ -71,8 +71,8 @@ def world_charunit_text() -> str:
     return "world_charunit"
 
 
-def world_char_belieflink_text() -> str:
-    return "world_char_belieflink"
+def world_char_lobbylink_text() -> str:
+    return "world_char_lobbylink"
 
 
 def world_ideaunit_text() -> str:
@@ -91,8 +91,8 @@ def world_idea_reason_premiseunit_text() -> str:
     return "world_idea_reason_premiseunit"
 
 
-def world_idea_beliefhold_text() -> str:
-    return "world_idea_beliefhold"
+def world_idea_lobbyhold_text() -> str:
+    return "world_idea_lobbyhold"
 
 
 def world_idea_healerhold_text() -> str:

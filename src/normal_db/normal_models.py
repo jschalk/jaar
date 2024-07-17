@@ -30,17 +30,17 @@ class CharUnitTable(Base):
     debtor_weight = Column(Integer)
 
 
-# class BeliefTable(Base):
-#     __tablename__ = "beliefbox"
+# class LobbyTable(Base):
+#     __tablename__ = "lobbybox"
 
 #     uid = Column(Integer, primary_key=True)
-#     belief_id = Column(String)
+#     lobby_id = Column(String)
 
 
-class BeliefLinkTable(Base):
-    __tablename__ = "belieflink"
+class LobbyLinkTable(Base):
+    __tablename__ = "lobbylink"
     uid = Column(Integer, primary_key=True)
-    belief_id = Column(String)
+    lobby_id = Column(String)
     char_id = Column(String)
     credor_weight = Column(Integer)
     debtor_weight = Column(Integer)
@@ -67,7 +67,7 @@ class IdeaTable(Base):
 class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
-    belief_id = Column(String)
+    lobby_id = Column(String)
     road = Column(String)
     credor_weight = Column(Float)
     debtor_weight = Column(Float)
@@ -92,17 +92,17 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class beliefholdTable(Base):
-    __tablename__ = "beliefhold"
+class lobbyholdTable(Base):
+    __tablename__ = "lobbyhold"
     uid = Column(Integer, primary_key=True)
-    belief_id = Column(String)
+    lobby_id = Column(String)
     road = Column(String)
 
 
 class HealerHoldTable(Base):
     __tablename__ = "healerhold"
     uid = Column(Integer, primary_key=True)
-    belief_id = Column(String)
+    lobby_id = Column(String)
     road = Column(String)
 
 

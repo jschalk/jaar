@@ -342,13 +342,13 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     knee_road = create_road(sports_road, knee_text)
     x_category = "world_idea_awardlink"
     road_text = "road"
-    belief_id_text = "belief_id"
+    lobby_id_text = "lobby_id"
     swimmers_text = ",Swimmers"
     sports_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_awardlink_atomunit.set_required_arg(belief_id_text, swimmers_text)
+    sports_awardlink_atomunit.set_required_arg(lobby_id_text, swimmers_text)
     sports_awardlink_atomunit.set_required_arg(road_text, sports_road)
     knee_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_awardlink_atomunit.set_required_arg(belief_id_text, swimmers_text)
+    knee_awardlink_atomunit.set_required_arg(lobby_id_text, swimmers_text)
     knee_awardlink_atomunit.set_required_arg(road_text, knee_road)
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(knee_awardlink_atomunit)

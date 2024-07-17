@@ -6,12 +6,12 @@ from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.atom_config import (
     worldunit_text,
     world_charunit_text,
-    world_char_belieflink_text,
+    world_char_lobbylink_text,
     world_ideaunit_text,
     world_idea_awardlink_text,
     world_idea_reasonunit_text,
     world_idea_reason_premiseunit_text,
-    world_idea_beliefhold_text,
+    world_idea_lobbyhold_text,
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )
@@ -32,8 +32,8 @@ def char_id_str() -> str:
     return "char_id"
 
 
-def belief_id_str() -> str:
-    return "belief_id"
+def lobby_id_str() -> str:
+    return "lobby_id"
 
 
 def char_pool_str() -> str:
@@ -96,8 +96,8 @@ def jaar_format_0001_char_v0_0_0() -> str:
     return "jaar_format_0001_char_v0_0_0"
 
 
-def jaar_format_0002_belieflink_v0_0_0() -> str:
-    return "jaar_format_0002_belieflink_v0_0_0"
+def jaar_format_0002_lobbylink_v0_0_0() -> str:
+    return "jaar_format_0002_lobbylink_v0_0_0"
 
 
 def jaar_format_0003_ideaunit_v0_0_0() -> str:
@@ -107,7 +107,7 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
 def get_cross_filenames() -> set[str]:
     return {
         jaar_format_0001_char_v0_0_0(),
-        jaar_format_0002_belieflink_v0_0_0(),
+        jaar_format_0002_lobbylink_v0_0_0(),
         jaar_format_0003_ideaunit_v0_0_0(),
     }
 
@@ -180,10 +180,10 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
             for x_atomunit in sorted_atomunits
         ]
 
-    elif cross_name == jaar_format_0002_belieflink_v0_0_0():
+    elif cross_name == jaar_format_0002_lobbylink_v0_0_0():
         d2_list = [
             [
-                x_atomunit.get_value(belief_id_str()),
+                x_atomunit.get_value(lobby_id_str()),
                 x_atomunit.get_value(char_id_str()),
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),

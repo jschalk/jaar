@@ -1,4 +1,4 @@
-from src._world.beliefbox import awardlink_shop
+from src._world.lobbybox import awardlink_shop
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
 )
@@ -8,7 +8,7 @@ from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldBeliefWorldImportance():
+def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldImportance():
     # GIVEN
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -26,26 +26,26 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldBeliefWorldI
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
-    assert len(x_world.get_belief_ids_dict()) == 3
+    assert len(x_world.get_lobby_ids_dict()) == 3
 
     # WHEN
     x_world.calc_world_metrics()
 
     # THEN
-    yao_beliefbox = x_world.get_beliefbox(yao_text)
-    zia_beliefbox = x_world.get_beliefbox(zia_text)
-    xio_beliefbox = x_world.get_beliefbox(xio_text)
-    assert yao_beliefbox._world_cred == 0.5
-    assert yao_beliefbox._world_debt == 0.75
-    assert zia_beliefbox._world_cred == 0.25
-    assert zia_beliefbox._world_debt == 0.125
-    assert xio_beliefbox._world_cred == 0.25
-    assert xio_beliefbox._world_debt == 0.125
-    cred_sum1 = yao_beliefbox._world_cred
-    cred_sum1 += zia_beliefbox._world_cred + xio_beliefbox._world_cred
+    yao_lobbybox = x_world.get_lobbybox(yao_text)
+    zia_lobbybox = x_world.get_lobbybox(zia_text)
+    xio_lobbybox = x_world.get_lobbybox(xio_text)
+    assert yao_lobbybox._world_cred == 0.5
+    assert yao_lobbybox._world_debt == 0.75
+    assert zia_lobbybox._world_cred == 0.25
+    assert zia_lobbybox._world_debt == 0.125
+    assert xio_lobbybox._world_cred == 0.25
+    assert xio_lobbybox._world_debt == 0.125
+    cred_sum1 = yao_lobbybox._world_cred
+    cred_sum1 += zia_lobbybox._world_cred + xio_lobbybox._world_cred
     assert cred_sum1 == 1
-    debt_sum1 = yao_beliefbox._world_debt
-    debt_sum1 += zia_beliefbox._world_debt + xio_beliefbox._world_debt
+    debt_sum1 = yao_lobbybox._world_debt
+    debt_sum1 += zia_lobbybox._world_debt + xio_lobbybox._world_debt
     assert debt_sum1 == 1
 
     # GIVEN
@@ -53,33 +53,33 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldBeliefWorldI
     sue_awardlink = awardlink_shop(sue_text, credor_weight=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
-    assert len(x_world.get_belief_ids_dict()) == 4
+    assert len(x_world.get_lobby_ids_dict()) == 4
 
     # WHEN
     x_world.calc_world_metrics()
 
     # THEN
-    yao_beliefbox = x_world.get_beliefbox(yao_text)
-    zia_beliefbox = x_world.get_beliefbox(zia_text)
-    xio_beliefbox = x_world.get_beliefbox(xio_text)
-    sue_beliefbox = x_world.get_beliefbox(sue_text)
-    assert yao_beliefbox._world_cred != 0.5
-    assert yao_beliefbox._world_debt != 0.75
-    assert zia_beliefbox._world_cred != 0.25
-    assert zia_beliefbox._world_debt != 0.125
-    assert xio_beliefbox._world_cred != 0.25
-    assert xio_beliefbox._world_debt != 0.125
-    assert sue_beliefbox._world_cred != None
-    assert sue_beliefbox._world_debt != None
-    cred_sum1 = yao_beliefbox._world_cred + zia_beliefbox._world_cred
-    cred_sum1 += xio_beliefbox._world_cred + sue_beliefbox._world_cred
+    yao_lobbybox = x_world.get_lobbybox(yao_text)
+    zia_lobbybox = x_world.get_lobbybox(zia_text)
+    xio_lobbybox = x_world.get_lobbybox(xio_text)
+    sue_lobbybox = x_world.get_lobbybox(sue_text)
+    assert yao_lobbybox._world_cred != 0.5
+    assert yao_lobbybox._world_debt != 0.75
+    assert zia_lobbybox._world_cred != 0.25
+    assert zia_lobbybox._world_debt != 0.125
+    assert xio_lobbybox._world_cred != 0.25
+    assert xio_lobbybox._world_debt != 0.125
+    assert sue_lobbybox._world_cred != None
+    assert sue_lobbybox._world_debt != None
+    cred_sum1 = yao_lobbybox._world_cred + zia_lobbybox._world_cred
+    cred_sum1 += xio_lobbybox._world_cred + sue_lobbybox._world_cred
     assert cred_sum1 == 1
-    debt_sum1 = yao_beliefbox._world_debt + zia_beliefbox._world_debt
-    debt_sum1 += xio_beliefbox._world_debt + sue_beliefbox._world_debt
+    debt_sum1 = yao_lobbybox._world_debt + zia_lobbybox._world_debt
+    debt_sum1 += xio_lobbybox._world_debt + sue_lobbybox._world_debt
     assert round(debt_sum1) == 1
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldBeliefWorldImportance():
+def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldImportance():
     # GIVEN
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -100,36 +100,32 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldBeliefWorldI
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(parm_awardlink)
-    assert len(x_world.get_belief_ids_dict()) == 3
+    assert len(x_world.get_lobby_ids_dict()) == 3
 
     # WHEN
     x_world.calc_world_metrics()
 
     # THEN
-    yao_beliefbox = x_world.get_beliefbox(yao_text)
-    zia_beliefbox = x_world.get_beliefbox(zia_text)
-    xio_beliefbox = x_world.get_beliefbox(xio_text)
-    assert yao_beliefbox._world_cred == 0.5
-    assert yao_beliefbox._world_debt == 0.75
-    assert zia_beliefbox._world_cred == 0.25
-    assert zia_beliefbox._world_debt == 0.125
-    assert xio_beliefbox._world_cred == 0.25
-    assert xio_beliefbox._world_debt == 0.125
+    yao_lobbybox = x_world.get_lobbybox(yao_text)
+    zia_lobbybox = x_world.get_lobbybox(zia_text)
+    xio_lobbybox = x_world.get_lobbybox(xio_text)
+    assert yao_lobbybox._world_cred == 0.5
+    assert yao_lobbybox._world_debt == 0.75
+    assert zia_lobbybox._world_cred == 0.25
+    assert zia_lobbybox._world_debt == 0.125
+    assert xio_lobbybox._world_cred == 0.25
+    assert xio_lobbybox._world_debt == 0.125
     assert (
-        yao_beliefbox._world_cred
-        + zia_beliefbox._world_cred
-        + xio_beliefbox._world_cred
+        yao_lobbybox._world_cred + zia_lobbybox._world_cred + xio_lobbybox._world_cred
         == 1
     )
     assert (
-        yao_beliefbox._world_debt
-        + zia_beliefbox._world_debt
-        + xio_beliefbox._world_debt
+        yao_lobbybox._world_debt + zia_lobbybox._world_debt + xio_lobbybox._world_debt
         == 1
     )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesBeliefWorldImportanceLWwithBeliefEmptyAncestors():
+def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesLobbyWorldImportanceLWwithLobbyEmptyAncestors():
     # GIVEN
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -179,25 +175,21 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesBeliefWorldImportanceLW
     assert str(excinfo.value) == f"'{xio_text}'"
 
     # THEN
-    yao_beliefbox = x_world.get_beliefbox(yao_text)
-    zia_beliefbox = x_world.get_beliefbox(zia_text)
-    xio_beliefbox = x_world.get_beliefbox(xio_text)
-    assert yao_beliefbox._world_cred == 0.125
-    assert yao_beliefbox._world_debt == 0.1875
-    assert zia_beliefbox._world_cred == 0.0625
-    assert zia_beliefbox._world_debt == 0.03125
-    assert xio_beliefbox._world_cred == 0.0625
-    assert xio_beliefbox._world_debt == 0.03125
+    yao_lobbybox = x_world.get_lobbybox(yao_text)
+    zia_lobbybox = x_world.get_lobbybox(zia_text)
+    xio_lobbybox = x_world.get_lobbybox(xio_text)
+    assert yao_lobbybox._world_cred == 0.125
+    assert yao_lobbybox._world_debt == 0.1875
+    assert zia_lobbybox._world_cred == 0.0625
+    assert zia_lobbybox._world_debt == 0.03125
+    assert xio_lobbybox._world_cred == 0.0625
+    assert xio_lobbybox._world_debt == 0.03125
     assert (
-        yao_beliefbox._world_cred
-        + zia_beliefbox._world_cred
-        + xio_beliefbox._world_cred
+        yao_lobbybox._world_cred + zia_lobbybox._world_cred + xio_lobbybox._world_cred
         == 0.25
     )
     assert (
-        yao_beliefbox._world_debt
-        + zia_beliefbox._world_debt
-        + xio_beliefbox._world_debt
+        yao_lobbybox._world_debt + zia_lobbybox._world_debt + xio_lobbybox._world_debt
         == 0.25
     )
 

@@ -47,7 +47,7 @@ class RoadUnit(str):
     pass
 
 
-class BeliefID(str):  # Created to help track the concept
+class LobbyID(str):  # Created to help track the concept
     pass
 
 

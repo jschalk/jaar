@@ -6,11 +6,11 @@ from src._road.road import (
     is_roadnode,
 )
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
-from src._world.belieflink import (
-    BeliefID,
-    BeliefLink,
-    belieflinks_get_from_dict,
-    belieflink_shop,
+from src._world.lobbylink import (
+    LobbyID,
+    LobbyLink,
+    lobbylinks_get_from_dict,
+    lobbylink_shop,
 )
 from dataclasses import dataclass
 
@@ -39,7 +39,7 @@ class CharUnit(CharCore):
     credor_weight: int = None
     debtor_weight: int = None
     # special attribute: static in world json, in memory it is deleted after loading and recalculated during saving.
-    _belieflinks: dict[CharID, BeliefLink] = None
+    _lobbylinks: dict[CharID, LobbyLink] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
@@ -133,69 +133,69 @@ class CharUnit(CharCore):
                 self._world_agenda_debt / world_agenda_ratio_debt_sum
             )
 
-    def add_belieflink(
+    def add_lobbylink(
         self,
-        belief_id: BeliefID,
+        lobby_id: LobbyID,
         credor_weight: float = None,
         debtor_weight: float = None,
     ):
-        x_belieflink = belieflink_shop(belief_id, credor_weight, debtor_weight)
-        self.set_belieflink(x_belieflink)
+        x_lobbylink = lobbylink_shop(lobby_id, credor_weight, debtor_weight)
+        self.set_lobbylink(x_lobbylink)
 
-    def set_belieflink(self, x_belieflink: BeliefLink):
-        x_belief_id = x_belieflink.belief_id
-        belief_id_is_char_id = is_roadnode(x_belief_id, self._road_delimiter)
-        if belief_id_is_char_id and self.char_id != x_belief_id:
+    def set_lobbylink(self, x_lobbylink: LobbyLink):
+        x_lobby_id = x_lobbylink.lobby_id
+        lobby_id_is_char_id = is_roadnode(x_lobby_id, self._road_delimiter)
+        if lobby_id_is_char_id and self.char_id != x_lobby_id:
             raise Exception(
-                f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_belief_id}'."
+                f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_lobby_id}'."
             )
 
-        x_belieflink._char_id = self.char_id
-        self._belieflinks[x_belieflink.belief_id] = x_belieflink
+        x_lobbylink._char_id = self.char_id
+        self._lobbylinks[x_lobbylink.lobby_id] = x_lobbylink
 
-    def get_belieflink(self, belief_id: BeliefID) -> BeliefLink:
-        return self._belieflinks.get(belief_id)
+    def get_lobbylink(self, lobby_id: LobbyID) -> LobbyLink:
+        return self._lobbylinks.get(lobby_id)
 
-    def belieflink_exists(self, belief_id: BeliefID) -> bool:
-        return self._belieflinks.get(belief_id) != None
+    def lobbylink_exists(self, lobby_id: LobbyID) -> bool:
+        return self._lobbylinks.get(lobby_id) != None
 
-    def delete_belieflink(self, belief_id: BeliefID):
-        return self._belieflinks.pop(belief_id)
+    def delete_lobbylink(self, lobby_id: LobbyID):
+        return self._lobbylinks.pop(lobby_id)
 
-    def belieflinks_exist(self):
-        return len(self._belieflinks) != 0
+    def lobbylinks_exist(self):
+        return len(self._lobbylinks) != 0
 
-    def clear_belieflinks(self):
-        self._belieflinks = {}
+    def clear_lobbylinks(self):
+        self._lobbylinks = {}
 
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_belieflink.belief_id: x_belieflink.credor_weight
-            for x_belieflink in self._belieflinks.values()
+            x_lobbylink.lobby_id: x_lobbylink.credor_weight
+            for x_lobbylink in self._lobbylinks.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
-        for x_belief_id, belief_credor_pool in allot_dict.items():
-            self.get_belieflink(x_belief_id)._credor_pool = belief_credor_pool
+        for x_lobby_id, lobby_credor_pool in allot_dict.items():
+            self.get_lobbylink(x_lobby_id)._credor_pool = lobby_credor_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_belieflink.belief_id: x_belieflink.debtor_weight
-            for x_belieflink in self._belieflinks.values()
+            x_lobbylink.lobby_id: x_lobbylink.debtor_weight
+            for x_lobbylink in self._lobbylinks.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
-        for x_belief_id, belief_debtor_pool in allot_dict.items():
-            self.get_belieflink(x_belief_id)._debtor_pool = belief_debtor_pool
+        for x_lobby_id, lobby_debtor_pool in allot_dict.items():
+            self.get_lobbylink(x_lobby_id)._debtor_pool = lobby_debtor_pool
 
-    def get_belieflinks_dict(self) -> dict:
+    def get_lobbylinks_dict(self) -> dict:
         return {
-            x_belieflink.belief_id: {
-                "belief_id": x_belieflink.belief_id,
-                "credor_weight": x_belieflink.credor_weight,
-                "debtor_weight": x_belieflink.debtor_weight,
+            x_lobbylink.lobby_id: {
+                "lobby_id": x_lobbylink.lobby_id,
+                "credor_weight": x_lobbylink.credor_weight,
+                "debtor_weight": x_lobbylink.debtor_weight,
             }
-            for x_belieflink in self._belieflinks.values()
+            for x_lobbylink in self._lobbylinks.values()
         }
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
@@ -203,7 +203,7 @@ class CharUnit(CharCore):
             "char_id": self.char_id,
             "credor_weight": self.credor_weight,
             "debtor_weight": self.debtor_weight,
-            "_belieflinks": self.get_belieflinks_dict(),
+            "_lobbylinks": self.get_lobbylinks_dict(),
         }
         if self._irrational_debtor_weight not in [None, 0]:
             x_dict["_irrational_debtor_weight"] = self._irrational_debtor_weight
@@ -243,11 +243,11 @@ def charunit_get_from_dict(charunit_dict: dict, _road_delimiter: str) -> CharUni
     x_char_id = charunit_dict["char_id"]
     x_credor_weight = charunit_dict["credor_weight"]
     x_debtor_weight = charunit_dict["debtor_weight"]
-    x_belieflinks_dict = charunit_dict["_belieflinks"]
+    x_lobbylinks_dict = charunit_dict["_lobbylinks"]
     x_charunit = charunit_shop(
         x_char_id, x_credor_weight, x_debtor_weight, _road_delimiter
     )
-    x_charunit._belieflinks = belieflinks_get_from_dict(x_belieflinks_dict, x_char_id)
+    x_charunit._lobbylinks = lobbylinks_get_from_dict(x_lobbylinks_dict, x_char_id)
     _irrational_debtor_weight = charunit_dict.get("_irrational_debtor_weight", 0)
     _inallocable_debtor_weight = charunit_dict.get("_inallocable_debtor_weight", 0)
     x_charunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
@@ -266,7 +266,7 @@ def charunit_shop(
     x_charunit = CharUnit(
         credor_weight=get_1_if_None(credor_weight),
         debtor_weight=get_1_if_None(debtor_weight),
-        _belieflinks={},
+        _lobbylinks={},
         _credor_pool=0,
         _debtor_pool=0,
         _irrational_debtor_weight=0,

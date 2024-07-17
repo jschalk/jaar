@@ -3,7 +3,7 @@ from src._world.examples.example_worlds import get_world_with_4_levels
 from src._world.idea import ideaunit_shop
 from src._world.reason_idea import reasonunit_shop, factunit_shop
 from src._world.world import worldunit_shop
-from src._world.beliefbox import awardlink_shop
+from src._world.lobbybox import awardlink_shop
 from pytest import raises as pytest_raises
 from src._road.road import default_road_delimiter_if_none
 
@@ -486,18 +486,18 @@ def test_WorldUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 
     # _awardlink: dict = None,
     sue_world._idearoot._kids[casa_text]._awardlinks = {
-        "fun": awardlink_shop(belief_id="fun", credor_weight=1, debtor_weight=7)
+        "fun": awardlink_shop(lobby_id="fun", credor_weight=1, debtor_weight=7)
     }
     _awardlinks = sue_world._idearoot._kids[casa_text]._awardlinks
     assert _awardlinks == {
-        "fun": awardlink_shop(belief_id="fun", credor_weight=1, debtor_weight=7)
+        "fun": awardlink_shop(lobby_id="fun", credor_weight=1, debtor_weight=7)
     }
     sue_world.edit_idea_attr(
         road=casa_road,
-        awardlink=awardlink_shop(belief_id="fun", credor_weight=4, debtor_weight=8),
+        awardlink=awardlink_shop(lobby_id="fun", credor_weight=4, debtor_weight=8),
     )
     assert sue_world._idearoot._kids[casa_text]._awardlinks == {
-        "fun": awardlink_shop(belief_id="fun", credor_weight=4, debtor_weight=8)
+        "fun": awardlink_shop(lobby_id="fun", credor_weight=4, debtor_weight=8)
     }
 
     # _is_expanded: dict = None,
@@ -651,7 +651,7 @@ def test_WorldUnit_edit_idea_attr_worldWhenParentAndNumeric_roadBothHaveRangeThr
     assert casa_idea3._addin == 0
 
 
-def test_WorldUnit_edit_idea_attr_RaisesErrorWhen_healerhold_belief_ids_DoNotExist():
+def test_WorldUnit_edit_idea_attr_RaisesErrorWhen_healerhold_lobby_ids_DoNotExist():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     casa_text = "casa"
@@ -673,7 +673,7 @@ def test_WorldUnit_edit_idea_attr_RaisesErrorWhen_healerhold_belief_ids_DoNotExi
         yao_world.edit_idea_attr(road=casa_road, healerhold=x_healerhold)
     assert (
         str(excinfo.value)
-        == f"Idea cannot edit healerhold because belief_id '{sue_text}' does not exist as belief in World"
+        == f"Idea cannot edit healerhold because lobby_id '{sue_text}' does not exist as lobby in World"
     )
 
 
@@ -866,7 +866,7 @@ def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     sue_world.add_charunit(Xio_text)
 
     assert len(sue_world._chars) == 3
-    assert len(sue_world.get_belief_ids_dict()) == 3
+    assert len(sue_world.get_lobby_ids_dict()) == 3
     swim_text = "swim"
     sue_world.add_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, credor_weight=10)

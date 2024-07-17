@@ -3,17 +3,17 @@ from src._road.road import CharID
 from dataclasses import dataclass
 
 
-class BeliefID(str):  # Created to help track the concept
+class LobbyID(str):  # Created to help track the concept
     pass
 
 
 @dataclass
-class BeliefCore:
-    belief_id: BeliefID = None
+class LobbyCore:
+    lobby_id: LobbyID = None
 
 
 @dataclass
-class BeliefLink(BeliefCore):
+class LobbyLink(LobbyCore):
     credor_weight: float = 1.0
     debtor_weight: float = 1.0
     # calculated fields
@@ -37,7 +37,7 @@ class BeliefLink(BeliefCore):
 
     def get_dict(self) -> dict[str, str]:
         return {
-            "belief_id": self.belief_id,
+            "lobby_id": self.lobby_id,
             "credor_weight": self.credor_weight,
             "debtor_weight": self.debtor_weight,
         }
@@ -52,32 +52,32 @@ class BeliefLink(BeliefCore):
 
     def set_world_cred_debt(
         self,
-        belieflinks_credor_weight_sum: float,
-        belieflinks_debtor_weight_sum: float,
-        belief_world_cred: float,
-        belief_world_debt: float,
-        belief_world_agenda_cred: float,
-        belief_world_agenda_debt: float,
+        lobbylinks_credor_weight_sum: float,
+        lobbylinks_debtor_weight_sum: float,
+        lobby_world_cred: float,
+        lobby_world_debt: float,
+        lobby_world_agenda_cred: float,
+        lobby_world_agenda_debt: float,
     ):
-        belief_world_cred = get_1_if_None(belief_world_cred)
-        belief_world_debt = get_1_if_None(belief_world_debt)
-        credor_ratio = self.credor_weight / belieflinks_credor_weight_sum
-        debtor_ratio = self.debtor_weight / belieflinks_debtor_weight_sum
+        lobby_world_cred = get_1_if_None(lobby_world_cred)
+        lobby_world_debt = get_1_if_None(lobby_world_debt)
+        credor_ratio = self.credor_weight / lobbylinks_credor_weight_sum
+        debtor_ratio = self.debtor_weight / lobbylinks_debtor_weight_sum
 
-        self._world_cred = belief_world_cred * credor_ratio
-        self._world_debt = belief_world_debt * debtor_ratio
-        self._world_agenda_cred = belief_world_agenda_cred * credor_ratio
-        self._world_agenda_debt = belief_world_agenda_debt * debtor_ratio
+        self._world_cred = lobby_world_cred * credor_ratio
+        self._world_debt = lobby_world_debt * debtor_ratio
+        self._world_agenda_cred = lobby_world_agenda_cred * credor_ratio
+        self._world_agenda_debt = lobby_world_agenda_debt * debtor_ratio
 
 
-def belieflink_shop(
-    belief_id: BeliefID,
+def lobbylink_shop(
+    lobby_id: LobbyID,
     credor_weight: float = None,
     debtor_weight: float = None,
     _char_id: CharID = None,
-) -> BeliefLink:
-    return BeliefLink(
-        belief_id=belief_id,
+) -> LobbyLink:
+    return LobbyLink(
+        lobby_id=lobby_id,
         credor_weight=get_1_if_None(credor_weight),
         debtor_weight=get_1_if_None(debtor_weight),
         _credor_pool=0,
@@ -86,19 +86,19 @@ def belieflink_shop(
     )
 
 
-def belieflink_get_from_dict(x_dict: dict, x_char_id: CharID) -> BeliefLink:
-    return belieflink_shop(
-        belief_id=x_dict.get("belief_id"),
+def lobbylink_get_from_dict(x_dict: dict, x_char_id: CharID) -> LobbyLink:
+    return lobbylink_shop(
+        lobby_id=x_dict.get("lobby_id"),
         credor_weight=x_dict.get("credor_weight"),
         debtor_weight=x_dict.get("debtor_weight"),
         _char_id=x_char_id,
     )
 
 
-def belieflinks_get_from_dict(
+def lobbylinks_get_from_dict(
     x_dict: dict, x_char_id: CharID
-) -> dict[BeliefID, BeliefLink]:
+) -> dict[LobbyID, LobbyLink]:
     return {
-        x_belief_id: belieflink_get_from_dict(x_belieflink_dict, x_char_id)
-        for x_belief_id, x_belieflink_dict in x_dict.items()
+        x_lobby_id: lobbylink_get_from_dict(x_lobbylink_dict, x_char_id)
+        for x_lobby_id, x_lobbylink_dict in x_dict.items()
     }

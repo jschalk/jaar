@@ -4,7 +4,7 @@ from src._road.road import (
     default_road_delimiter_if_none,
 )
 from src._world.healer import healerhold_shop
-from src._world.beliefbox import awardlink_shop, awardheir_shop
+from src._world.lobbybox import awardlink_shop, awardheir_shop
 from src._world.reason_idea import (
     reasonunit_shop,
     reasonheir_shop,
@@ -180,31 +180,31 @@ def test_IdeaUnit_awardlinks_exist():
     biker_credor_weight = 12
     biker_debtor_weight = 15
     biker_awardlink = awardlink_shop(
-        belief_id="bikers2",
+        lobby_id="bikers2",
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
     )
 
-    swimmer_belief_id = "swimmers"
+    swimmer_lobby_id = "swimmers"
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
     swimmer_awardlink = awardlink_shop(
-        belief_id=swimmer_belief_id,
+        lobby_id=swimmer_lobby_id,
         credor_weight=swimmer_credor_weight,
         debtor_weight=swimmer_debtor_weight,
     )
 
-    x_belieflinks = {
-        swimmer_awardlink.belief_id: swimmer_awardlink,
-        biker_awardlink.belief_id: biker_awardlink,
+    x_lobbylinks = {
+        swimmer_awardlink.lobby_id: swimmer_awardlink,
+        biker_awardlink.lobby_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_belieflinks)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_lobbylinks)
 
     # THEN
-    assert sport_idea._awardlinks == x_belieflinks
+    assert sport_idea._awardlinks == x_lobbylinks
 
 
 def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValues():
@@ -213,29 +213,29 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     biker_debtor_weight = 15
     biker_text = "bikers2"
     biker_awardlink = awardheir_shop(
-        belief_id=biker_text,
+        lobby_id=biker_text,
         credor_weight=biker_credor_weight,
         debtor_weight=biker_debtor_weight,
     )
 
     swimmer_text = "swimmers"
-    swimmer_belief_id = swimmer_text
+    swimmer_lobby_id = swimmer_text
     swimmer_credor_weight = 29
     swimmer_debtor_weight = 32
     swimmer_awardlink = awardheir_shop(
-        belief_id=swimmer_belief_id,
+        lobby_id=swimmer_lobby_id,
         credor_weight=swimmer_credor_weight,
         debtor_weight=swimmer_debtor_weight,
     )
 
-    x_belieflinks = {
-        swimmer_awardlink.belief_id: swimmer_awardlink,
-        biker_awardlink.belief_id: biker_awardlink,
+    x_lobbylinks = {
+        swimmer_awardlink.lobby_id: swimmer_awardlink,
+        biker_awardlink.lobby_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_belieflinks)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbylinks)
 
     # THEN
     assert sport_idea.get_awardheirs_credor_weight_sum() != None
@@ -426,13 +426,13 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
     # WHEN
     sue_text = "Sue"
     zia_text = "Zia"
-    healerhold_dict = {"healerhold_belief_ids": [sue_text, zia_text]}
+    healerhold_dict = {"healerhold_lobby_ids": [sue_text, zia_text]}
     ideaunit_dict = {healerhold_key: healerhold_dict}
 
     # THEN
     static_healerhold = healerhold_shop()
-    static_healerhold.set_belief_id(x_belief_id=sue_text)
-    static_healerhold.set_belief_id(x_belief_id=zia_text)
+    static_healerhold.set_lobby_id(x_lobby_id=sue_text)
+    static_healerhold.set_lobby_id(x_lobby_id=zia_text)
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) != None
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
 
@@ -469,35 +469,35 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
             base=states_road, premises={usa_premise.need: usa_premise}, _status=False
         ),
     }
-    biker_belief_id = "bikers"
+    biker_lobby_id = "bikers"
     biker_credor_weight = 3.0
     biker_debtor_weight = 7.0
     biker_awardlink = awardlink_shop(
-        biker_belief_id, biker_credor_weight, biker_debtor_weight
+        biker_lobby_id, biker_credor_weight, biker_debtor_weight
     )
-    flyer_belief_id = "flyers"
+    flyer_lobby_id = "flyers"
     flyer_credor_weight = 6.0
     flyer_debtor_weight = 9.0
     flyer_awardlink = awardlink_shop(
-        belief_id=flyer_belief_id,
+        lobby_id=flyer_lobby_id,
         credor_weight=flyer_credor_weight,
         debtor_weight=flyer_debtor_weight,
     )
     biker_and_flyer_awardlinks = {
-        biker_awardlink.belief_id: biker_awardlink,
-        flyer_awardlink.belief_id: flyer_awardlink,
+        biker_awardlink.lobby_id: biker_awardlink,
+        flyer_awardlink.lobby_id: flyer_awardlink,
     }
     biker_get_dict = {
-        "belief_id": biker_awardlink.belief_id,
+        "lobby_id": biker_awardlink.lobby_id,
         "credor_weight": biker_awardlink.credor_weight,
         "debtor_weight": biker_awardlink.debtor_weight,
     }
     flyer_get_dict = {
-        "belief_id": flyer_awardlink.belief_id,
+        "lobby_id": flyer_awardlink.lobby_id,
         "credor_weight": flyer_awardlink.credor_weight,
         "debtor_weight": flyer_awardlink.debtor_weight,
     }
-    x1_awardlinks = {biker_belief_id: biker_get_dict, flyer_belief_id: flyer_get_dict}
+    x1_awardlinks = {biker_lobby_id: biker_get_dict, flyer_lobby_id: flyer_get_dict}
     sue_text = "Sue"
     yao_text = "Yao"
     sue_doerunit = doerunit_shop({sue_text: -1, yao_text: -1})
@@ -597,7 +597,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_idea.set_awardlink(awardlink_shop(yao_text))
 
     x_doerunit = casa_idea._doerunit
-    x_doerunit.set_beliefhold(belief_id=yao_text)
+    x_doerunit.set_lobbyhold(lobby_id=yao_text)
 
     x_originunit = casa_idea._originunit
     x_originunit.set_originhold(yao_text, 1)
@@ -868,19 +868,19 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     swim_text = "swimmers"
     sport_text = "sports"
     sport_idea = ideaunit_shop(_label=sport_text)
-    sport_idea._doerunit.set_beliefhold(belief_id=swim_text)
+    sport_idea._doerunit.set_lobbyhold(lobby_id=swim_text)
     # assert sport_idea._doerheir is None
 
     # WHEN
-    sport_idea.set_doerheir(parent_doerheir=None, world_beliefboxs=None)
+    sport_idea.set_doerheir(parent_doerheir=None, world_lobbyboxs=None)
 
     # THEN
     assert sport_idea._doerheir != None
     swim_doerunit = doerunit_shop()
-    swim_doerunit.set_beliefhold(belief_id=swim_text)
+    swim_doerunit.set_lobbyhold(lobby_id=swim_text)
     swim_doerheir = doerheir_shop()
-    swim_doerheir.set_beliefholds(
-        doerunit=swim_doerunit, parent_doerheir=None, world_beliefboxs=None
+    swim_doerheir.set_lobbyholds(
+        doerunit=swim_doerunit, parent_doerheir=None, world_lobbyboxs=None
     )
     assert sport_idea._doerheir == swim_doerheir
 

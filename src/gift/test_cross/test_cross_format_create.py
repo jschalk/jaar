@@ -4,14 +4,14 @@ from src._world.idea import ideaunit_shop
 from src._world.world import worldunit_shop
 from src.gift.cross import (
     jaar_format_0001_char_v0_0_0,
-    jaar_format_0002_belieflink_v0_0_0,
+    jaar_format_0002_lobbylink_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     get_cross_attribute_dict,
     create_cross,
     real_id_str,
     owner_id_str,
     char_id_str,
-    belief_id_str,
+    lobby_id_str,
     parent_road_str,
     label_str,
     weight_str,
@@ -73,7 +73,7 @@ def test_create_cross_Arg_jaar_format_0001_char_v0_0_0():
     assert len(char_dataframe) == 3
 
 
-def test_create_cross_Arg_jaar_format_0002_belieflink_v0_0_0():
+def test_create_cross_Arg_jaar_format_0002_lobbylink_v0_0_0():
     # GIVEN
     sue_text = sue_str()
     bob_text = bob_str()
@@ -96,47 +96,47 @@ def test_create_cross_Arg_jaar_format_0002_belieflink_v0_0_0():
     sue_charunit = sue_worldunit.get_char(sue_text)
     bob_charunit = sue_worldunit.get_char(bob_text)
     yao_charunit = sue_worldunit.get_char(yao_text)
-    sue_charunit.add_belieflink(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
-    bob_charunit.add_belieflink(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
-    yao_charunit.add_belieflink(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
-    yao_charunit.add_belieflink(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
+    sue_charunit.add_lobbylink(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
+    bob_charunit.add_lobbylink(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
+    yao_charunit.add_lobbylink(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
+    yao_charunit.add_lobbylink(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
 
     # WHEN
-    x_cross = jaar_format_0002_belieflink_v0_0_0()
-    belieflink_dataframe = create_cross(sue_worldunit, x_cross)
+    x_cross = jaar_format_0002_lobbylink_v0_0_0()
+    lobbylink_dataframe = create_cross(sue_worldunit, x_cross)
 
     # THEN
-    array_headers = list(belieflink_dataframe.columns)
+    array_headers = list(lobbylink_dataframe.columns)
     cross_dict = get_cross_attribute_dict(x_cross)
     assert array_headers == list(cross_dict.keys())
-    assert belieflink_dataframe.loc[0, real_id_str()] == music_real_id
-    assert belieflink_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
-    assert belieflink_dataframe.loc[0, char_id_str()] == bob_text
-    assert belieflink_dataframe.loc[0, belief_id_str()] == iowa_text
-    assert belieflink_dataframe.loc[0, credor_weight_str()] == bob_iowa_credor_w
-    assert belieflink_dataframe.loc[0, debtor_weight_str()] == bob_iowa_debtor_w
+    assert lobbylink_dataframe.loc[0, real_id_str()] == music_real_id
+    assert lobbylink_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
+    assert lobbylink_dataframe.loc[0, char_id_str()] == bob_text
+    assert lobbylink_dataframe.loc[0, lobby_id_str()] == iowa_text
+    assert lobbylink_dataframe.loc[0, credor_weight_str()] == bob_iowa_credor_w
+    assert lobbylink_dataframe.loc[0, debtor_weight_str()] == bob_iowa_debtor_w
 
-    assert belieflink_dataframe.loc[1, real_id_str()] == music_real_id
-    assert belieflink_dataframe.loc[1, owner_id_str()] == sue_worldunit._owner_id
-    assert belieflink_dataframe.loc[1, char_id_str()] == sue_text
-    assert belieflink_dataframe.loc[1, belief_id_str()] == iowa_text
-    assert belieflink_dataframe.loc[1, credor_weight_str()] == sue_iowa_credor_w
-    assert belieflink_dataframe.loc[1, debtor_weight_str()] == sue_iowa_debtor_w
+    assert lobbylink_dataframe.loc[1, real_id_str()] == music_real_id
+    assert lobbylink_dataframe.loc[1, owner_id_str()] == sue_worldunit._owner_id
+    assert lobbylink_dataframe.loc[1, char_id_str()] == sue_text
+    assert lobbylink_dataframe.loc[1, lobby_id_str()] == iowa_text
+    assert lobbylink_dataframe.loc[1, credor_weight_str()] == sue_iowa_credor_w
+    assert lobbylink_dataframe.loc[1, debtor_weight_str()] == sue_iowa_debtor_w
 
-    assert belieflink_dataframe.loc[2, real_id_str()] == music_real_id
-    assert belieflink_dataframe.loc[2, owner_id_str()] == sue_worldunit._owner_id
-    assert belieflink_dataframe.loc[2, char_id_str()] == yao_text
-    assert belieflink_dataframe.loc[2, belief_id_str()] == iowa_text
-    assert belieflink_dataframe.loc[2, credor_weight_str()] == yao_iowa_credor_w
-    assert belieflink_dataframe.loc[2, debtor_weight_str()] == yao_iowa_debtor_w
+    assert lobbylink_dataframe.loc[2, real_id_str()] == music_real_id
+    assert lobbylink_dataframe.loc[2, owner_id_str()] == sue_worldunit._owner_id
+    assert lobbylink_dataframe.loc[2, char_id_str()] == yao_text
+    assert lobbylink_dataframe.loc[2, lobby_id_str()] == iowa_text
+    assert lobbylink_dataframe.loc[2, credor_weight_str()] == yao_iowa_credor_w
+    assert lobbylink_dataframe.loc[2, debtor_weight_str()] == yao_iowa_debtor_w
 
-    assert belieflink_dataframe.loc[3, real_id_str()] == music_real_id
-    assert belieflink_dataframe.loc[3, owner_id_str()] == sue_worldunit._owner_id
-    assert belieflink_dataframe.loc[3, char_id_str()] == yao_text
-    assert belieflink_dataframe.loc[3, belief_id_str()] == ohio_text
-    assert belieflink_dataframe.loc[3, credor_weight_str()] == yao_ohio_credor_w
-    assert belieflink_dataframe.loc[3, debtor_weight_str()] == yao_ohio_debtor_w
-    assert len(belieflink_dataframe) == 7
+    assert lobbylink_dataframe.loc[3, real_id_str()] == music_real_id
+    assert lobbylink_dataframe.loc[3, owner_id_str()] == sue_worldunit._owner_id
+    assert lobbylink_dataframe.loc[3, char_id_str()] == yao_text
+    assert lobbylink_dataframe.loc[3, lobby_id_str()] == ohio_text
+    assert lobbylink_dataframe.loc[3, credor_weight_str()] == yao_ohio_credor_w
+    assert lobbylink_dataframe.loc[3, debtor_weight_str()] == yao_ohio_debtor_w
+    assert len(lobbylink_dataframe) == 7
 
 
 def test_create_cross_Arg_jaar_format_0003_ideaunit_v0_0_0():

@@ -1,7 +1,7 @@
 from src._instrument.python import get_empty_dict_if_none, get_0_if_None
-from src._road.road import BeliefID
+from src._road.road import LobbyID
 from src._world.reason_idea import ReasonUnit, RoadUnit
-from src._world.beliefbox import AwardLink
+from src._world.lobbybox import AwardLink
 from dataclasses import dataclass
 
 
@@ -10,7 +10,7 @@ class TreeMetrics:
     node_count: int = None
     level_count: dict[int, int] = None
     reason_bases: dict[RoadUnit, int] = None
-    awardlinks_metrics: dict[BeliefID, AwardLink] = None
+    awardlinks_metrics: dict[LobbyID, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_idea_uids_are_unique: bool = None
@@ -20,7 +20,7 @@ class TreeMetrics:
         self,
         level: int,
         reasons: dict[RoadUnit, ReasonUnit],
-        awardlinks: dict[BeliefID, AwardLink],
+        awardlinks: dict[LobbyID, AwardLink],
         uid: int,
         pledge: bool,
         idea_road: RoadUnit,
@@ -50,10 +50,10 @@ class TreeMetrics:
             else:
                 self.reason_bases[reason.base] = self.reason_bases[reason.base] + 1
 
-    def evaluate_awardlinks(self, awardlinks: dict[BeliefID, AwardLink]):
+    def evaluate_awardlinks(self, awardlinks: dict[LobbyID, AwardLink]):
         if awardlinks != None:
             for awardlink in awardlinks.values():
-                self.awardlinks_metrics[awardlink.belief_id] = awardlink
+                self.awardlinks_metrics[awardlink.lobby_id] = awardlink
 
     def evaluate_uid_max(self, uid):
         if uid != None and self.uid_max < uid:
@@ -70,7 +70,7 @@ def treemetrics_shop(
     node_count: int = None,
     level_count: dict[int, int] = None,
     reason_bases: dict[RoadUnit, int] = None,
-    awardlinks_metrics: dict[BeliefID, AwardLink] = None,
+    awardlinks_metrics: dict[LobbyID, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,
 ) -> TreeMetrics:

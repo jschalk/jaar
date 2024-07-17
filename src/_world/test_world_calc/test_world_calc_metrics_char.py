@@ -1,6 +1,6 @@
 from src._road.road import RoadUnit
 from src._world.char import charunit_shop
-from src._world.beliefbox import awardlink_shop
+from src._world.lobbybox import awardlink_shop
 from src._world.examples.example_worlds import (
     world_v001 as examples_world_v001,
     world_v001_with_large_agenda as examples_world_v001_with_large_agenda,
@@ -50,20 +50,20 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
 
     # world_cred_sum = 0
     # world_debt_sum = 0
-    # for belief in x_world._idearoot._awardheirs.values():
-    #     print(f"{belief=}")
-    #     assert belief._world_cred != None
-    #     assert belief._world_cred in [0.25, 0.5]
-    #     assert belief._world_debt != None
-    #     assert belief._world_debt in [0.75, 0.125]
-    #     world_cred_sum += belief._world_cred
-    #     world_debt_sum += belief._world_debt
+    # for lobby in x_world._idearoot._awardheirs.values():
+    #     print(f"{lobby=}")
+    #     assert lobby._world_cred != None
+    #     assert lobby._world_cred in [0.25, 0.5]
+    #     assert lobby._world_debt != None
+    #     assert lobby._world_debt in [0.75, 0.125]
+    #     world_cred_sum += lobby._world_cred
+    #     world_debt_sum += lobby._world_debt
 
     # assert world_cred_sum == 1
     # assert world_debt_sum == 1
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsBelieflinkWorldCredAndDebt():
+def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     sue_text = "Sue"
@@ -82,39 +82,39 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsBelieflinkWorldCredAndDebt():
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
-    sue_sue_belieflink = sue_charunit.get_belieflink(sue_text)
-    bob_bob_belieflink = bob_charunit.get_belieflink(bob_text)
-    zia_zia_belieflink = zia_charunit.get_belieflink(zia_text)
-    assert sue_sue_belieflink._world_cred is None
-    assert sue_sue_belieflink._world_debt is None
-    assert bob_bob_belieflink._world_cred is None
-    assert bob_bob_belieflink._world_debt is None
-    assert zia_zia_belieflink._world_cred is None
-    assert zia_zia_belieflink._world_debt is None
+    sue_sue_lobbylink = sue_charunit.get_lobbylink(sue_text)
+    bob_bob_lobbylink = bob_charunit.get_lobbylink(bob_text)
+    zia_zia_lobbylink = zia_charunit.get_lobbylink(zia_text)
+    assert sue_sue_lobbylink._world_cred is None
+    assert sue_sue_lobbylink._world_debt is None
+    assert bob_bob_lobbylink._world_cred is None
+    assert bob_bob_lobbylink._world_debt is None
+    assert zia_zia_lobbylink._world_cred is None
+    assert zia_zia_lobbylink._world_debt is None
 
     # WHEN
     yao_world.calc_world_metrics()
 
     # THEN
-    assert sue_sue_belieflink._world_cred == 0.5
-    assert sue_sue_belieflink._world_debt == 0.8
-    assert bob_bob_belieflink._world_cred == 0.25
-    assert bob_bob_belieflink._world_debt == 0.1
-    assert zia_zia_belieflink._world_cred == 0.25
-    assert zia_zia_belieflink._world_debt == 0.1
+    assert sue_sue_lobbylink._world_cred == 0.5
+    assert sue_sue_lobbylink._world_debt == 0.8
+    assert bob_bob_lobbylink._world_cred == 0.25
+    assert bob_bob_lobbylink._world_debt == 0.1
+    assert zia_zia_lobbylink._world_cred == 0.25
+    assert zia_zia_lobbylink._world_debt == 0.1
 
-    belieflink_cred_sum = (
-        sue_sue_belieflink._world_cred
-        + bob_bob_belieflink._world_cred
-        + zia_zia_belieflink._world_cred
+    lobbylink_cred_sum = (
+        sue_sue_lobbylink._world_cred
+        + bob_bob_lobbylink._world_cred
+        + zia_zia_lobbylink._world_cred
     )
-    assert belieflink_cred_sum == 1.0
-    belieflink_debt_sum = (
-        sue_sue_belieflink._world_debt
-        + bob_bob_belieflink._world_debt
-        + zia_zia_belieflink._world_debt
+    assert lobbylink_cred_sum == 1.0
+    lobbylink_debt_sum = (
+        sue_sue_lobbylink._world_debt
+        + bob_bob_lobbylink._world_debt
+        + zia_zia_lobbylink._world_debt
     )
-    assert belieflink_debt_sum == 1.0
+    assert lobbylink_debt_sum == 1.0
 
     # GIVEN anothher pledge, check metrics are as expected
     xio_text = "Xio"
@@ -125,42 +125,42 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsBelieflinkWorldCredAndDebt():
     yao_world.calc_world_metrics()
 
     # THEN
-    xio_beliefbox = yao_world.get_beliefbox(xio_text)
-    xio_xio_belieflink = xio_beliefbox.get_belieflink(xio_text)
+    xio_lobbybox = yao_world.get_lobbybox(xio_text)
+    xio_xio_lobbylink = xio_lobbybox.get_lobbylink(xio_text)
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
-    sue_sue_belieflink = sue_charunit.get_belieflink(sue_text)
-    bob_bob_belieflink = bob_charunit.get_belieflink(bob_text)
-    zia_zia_belieflink = zia_charunit.get_belieflink(zia_text)
-    assert sue_sue_belieflink._world_cred != 0.25
-    assert sue_sue_belieflink._world_debt != 0.8
-    assert bob_bob_belieflink._world_cred != 0.25
-    assert bob_bob_belieflink._world_debt != 0.1
-    assert zia_zia_belieflink._world_cred != 0.5
-    assert zia_zia_belieflink._world_debt != 0.1
-    assert xio_xio_belieflink._world_cred != None
-    assert xio_xio_belieflink._world_debt != None
+    sue_sue_lobbylink = sue_charunit.get_lobbylink(sue_text)
+    bob_bob_lobbylink = bob_charunit.get_lobbylink(bob_text)
+    zia_zia_lobbylink = zia_charunit.get_lobbylink(zia_text)
+    assert sue_sue_lobbylink._world_cred != 0.25
+    assert sue_sue_lobbylink._world_debt != 0.8
+    assert bob_bob_lobbylink._world_cred != 0.25
+    assert bob_bob_lobbylink._world_debt != 0.1
+    assert zia_zia_lobbylink._world_cred != 0.5
+    assert zia_zia_lobbylink._world_debt != 0.1
+    assert xio_xio_lobbylink._world_cred != None
+    assert xio_xio_lobbylink._world_debt != None
 
     assert (
-        sue_sue_belieflink._world_cred
-        + bob_bob_belieflink._world_cred
-        + zia_zia_belieflink._world_cred
-        + xio_xio_belieflink._world_cred
+        sue_sue_lobbylink._world_cred
+        + bob_bob_lobbylink._world_cred
+        + zia_zia_lobbylink._world_cred
+        + xio_xio_lobbylink._world_cred
         == 1.0
     )
     assert (
-        sue_sue_belieflink._world_debt
-        + bob_bob_belieflink._world_debt
-        + zia_zia_belieflink._world_debt
-        + xio_xio_belieflink._world_debt
+        sue_sue_lobbylink._world_debt
+        + bob_bob_lobbylink._world_debt
+        + zia_zia_lobbylink._world_debt
+        + xio_xio_lobbylink._world_debt
         > 0.9999999
     )
     assert (
-        sue_sue_belieflink._world_debt
-        + bob_bob_belieflink._world_debt
-        + zia_zia_belieflink._world_debt
-        + xio_xio_belieflink._world_debt
+        sue_sue_lobbylink._world_debt
+        + bob_bob_lobbylink._world_debt
+        + zia_zia_lobbylink._world_debt
+        + xio_xio_lobbylink._world_debt
         < 1.0
     )
 
@@ -224,7 +224,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     #     assert charunit._world_debt != None
     #     assert charunit._world_debt in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.} {charunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{lobby.} {charunit._world_credor=} {lobby._world_credor=}"
     #     # )
     #     print(f"{charunit.} {charunit._world_cred=} {charunit._world_debt=} ")
     #     # print(f"{charunit_world_cred_sum=}")
@@ -286,7 +286,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     #     assert charunit._world_debt != None
     #     assert charunit._world_debt not in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.} {charunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{lobby.} {charunit._world_credor=} {lobby._world_credor=}"
     #     # )
     #     print(f"{charunit.} {charunit._world_cred=} {charunit._world_debt=} ")
     #     # print(f"{charunit_world_cred_sum=}")
@@ -299,7 +299,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     # assert charunit_world_debt_sum < 1.00000001
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldImportance():
+def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImportance():
     # GIVEN
     yao_world = worldunit_shop("Yao")
     swim_text = "swim"
@@ -327,25 +327,21 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartBeliefedLWCharUnitWorldIm
     yao_world.calc_world_metrics()
 
     # THEN
-    sue_beliefbox = yao_world.get_beliefbox(sue_text)
-    bob_beliefbox = yao_world.get_beliefbox(bob_text)
-    zia_beliefbox = yao_world.get_beliefbox(zia_text)
-    assert sue_beliefbox._world_cred != 0.5
-    assert sue_beliefbox._world_debt != 0.8
-    assert bob_beliefbox._world_cred != 0.25
-    assert bob_beliefbox._world_debt != 0.1
-    assert zia_beliefbox._world_cred != 0.25
-    assert zia_beliefbox._world_debt != 0.1
+    sue_lobbybox = yao_world.get_lobbybox(sue_text)
+    bob_lobbybox = yao_world.get_lobbybox(bob_text)
+    zia_lobbybox = yao_world.get_lobbybox(zia_text)
+    assert sue_lobbybox._world_cred != 0.5
+    assert sue_lobbybox._world_debt != 0.8
+    assert bob_lobbybox._world_cred != 0.25
+    assert bob_lobbybox._world_debt != 0.1
+    assert zia_lobbybox._world_cred != 0.25
+    assert zia_lobbybox._world_debt != 0.1
     assert (
-        sue_beliefbox._world_cred
-        + bob_beliefbox._world_cred
-        + zia_beliefbox._world_cred
+        sue_lobbybox._world_cred + bob_lobbybox._world_cred + zia_lobbybox._world_cred
         == 0.25
     )
     assert (
-        sue_beliefbox._world_debt
-        + bob_beliefbox._world_debt
-        + zia_beliefbox._world_debt
+        sue_lobbybox._world_debt + bob_lobbybox._world_debt + zia_lobbybox._world_debt
         == 0.25
     )
 
@@ -410,7 +406,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
     #     assert charunit._world_debt != None
     #     assert charunit._world_debt not in [0.8, 0.1]
     #     # print(
-    #     #     f"{belief.} {charunit._world_credor=} {belief._world_credor=}"
+    #     #     f"{lobby.} {charunit._world_credor=} {lobby._world_credor=}"
     #     # )
     #     print(f"{charunit.} {charunit._world_cred=} {charunit._world_debt=} ")
     #     # print(f"{charunit_world_cred_sum=}")
@@ -454,12 +450,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
 #     yao_world.calc_world_metrics()
 
 
-def clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world: WorldUnit):
+def clear_all_charunits_lobbyboxs_world_agenda_cred_debt(x_world: WorldUnit):
     # DELETE world_agenda_debt and world_agenda_cred
-    for beliefbox_x in x_world._beliefboxs.values():
-        beliefbox_x.reset_world_cred_debt()
-        # for belieflink_x in beliefbox_x._chars.values():
-        #     print(f"{beliefbox_x.} {belieflink_x.}  {belieflink_x._world_cred:.6f} {belieflink_x.debtor_weight=} {belieflink_x._world_debt:.6f} {belieflink_x.} ")
+    for lobbybox_x in x_world._lobbyboxs.values():
+        lobbybox_x.reset_world_cred_debt()
+        # for lobbylink_x in lobbybox_x._chars.values():
+        #     print(f"{lobbybox_x.} {lobbylink_x.}  {lobbylink_x._world_cred:.6f} {lobbylink_x.debtor_weight=} {lobbylink_x._world_debt:.6f} {lobbylink_x.} ")
 
     # DELETE world_agenda_debt and world_agenda_cred
     for x_charunit in x_world._chars.values():
@@ -467,21 +463,21 @@ def clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world: WorldUnit):
 
 
 @dataclass
-class BeliefAgendaMetrics:
-    sum_beliefbox_cred: float = 0
-    sum_beliefbox_debt: float = 0
-    sum_belieflink_cred: float = 0
-    sum_belieflink_debt: float = 0
-    belieflink_count: int = 0
+class LobbyAgendaMetrics:
+    sum_lobbybox_cred: float = 0
+    sum_lobbybox_debt: float = 0
+    sum_lobbylink_cred: float = 0
+    sum_lobbylink_debt: float = 0
+    lobbylink_count: int = 0
 
     def set_sums(self, x_world: WorldUnit):
-        for x_beliefbox in x_world._beliefboxs.values():
-            self.sum_beliefbox_cred += x_beliefbox._world_agenda_cred
-            self.sum_beliefbox_debt += x_beliefbox._world_agenda_debt
-            for belieflink_x in x_beliefbox._belieflinks.values():
-                self.sum_belieflink_cred += belieflink_x._world_agenda_cred
-                self.sum_belieflink_debt += belieflink_x._world_agenda_debt
-                self.belieflink_count += 1
+        for x_lobbybox in x_world._lobbyboxs.values():
+            self.sum_lobbybox_cred += x_lobbybox._world_agenda_cred
+            self.sum_lobbybox_debt += x_lobbybox._world_agenda_debt
+            for lobbylink_x in x_lobbybox._lobbylinks.values():
+                self.sum_lobbylink_cred += lobbylink_x._world_agenda_cred
+                self.sum_lobbylink_debt += lobbylink_x._world_agenda_debt
+                self.lobbylink_count += 1
 
 
 @dataclass
@@ -521,15 +517,15 @@ class AwardAgendaMetrics:
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # GIVEN
     x_world = examples_world_v001_with_large_agenda()
-    clear_all_charunits_beliefboxs_world_agenda_cred_debt(x_world=x_world)
+    clear_all_charunits_lobbyboxs_world_agenda_cred_debt(x_world=x_world)
 
     # TEST world_agenda_debt and world_agenda_cred are empty
-    x_beliefagendametrics = BeliefAgendaMetrics()
-    x_beliefagendametrics.set_sums(x_world=x_world)
-    assert x_beliefagendametrics.sum_beliefbox_cred == 0
-    assert x_beliefagendametrics.sum_beliefbox_debt == 0
-    assert x_beliefagendametrics.sum_belieflink_cred == 0
-    assert x_beliefagendametrics.sum_belieflink_debt == 0
+    x_lobbyagendametrics = LobbyAgendaMetrics()
+    x_lobbyagendametrics.set_sums(x_world=x_world)
+    assert x_lobbyagendametrics.sum_lobbybox_cred == 0
+    assert x_lobbyagendametrics.sum_lobbybox_debt == 0
+    assert x_lobbyagendametrics.sum_lobbylink_cred == 0
+    assert x_lobbyagendametrics.sum_lobbylink_debt == 0
 
     # TEST world_agenda_debt and world_agenda_cred are empty
     x_charagendametrics = CharAgendaMetrics()
@@ -558,17 +554,17 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     )
     assert x_awardagendametrics.sum_world_agenda_share == 0.006543775000000002
 
-    x_beliefagendametrics = BeliefAgendaMetrics()
-    x_beliefagendametrics.set_sums(x_world=x_world)
-    assert x_beliefagendametrics.belieflink_count == 81
+    x_lobbyagendametrics = LobbyAgendaMetrics()
+    x_lobbyagendametrics.set_sums(x_world=x_world)
+    assert x_lobbyagendametrics.lobbylink_count == 81
     x_sum = 0.0027965049894874455
-    assert are_equal(x_beliefagendametrics.sum_beliefbox_cred, x_sum)
-    assert are_equal(x_beliefagendametrics.sum_beliefbox_debt, x_sum)
-    assert are_equal(x_beliefagendametrics.sum_belieflink_cred, x_sum)
-    assert are_equal(x_beliefagendametrics.sum_belieflink_debt, x_sum)
+    assert are_equal(x_lobbyagendametrics.sum_lobbybox_cred, x_sum)
+    assert are_equal(x_lobbyagendametrics.sum_lobbybox_debt, x_sum)
+    assert are_equal(x_lobbyagendametrics.sum_lobbylink_cred, x_sum)
+    assert are_equal(x_lobbyagendametrics.sum_lobbylink_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_world_i_sum,
-        x_beliefagendametrics.sum_beliefbox_cred,
+        x_lobbyagendametrics.sum_lobbybox_cred,
     )
 
     assert all_charunits_have_legitimate_values(x_world)
@@ -667,17 +663,17 @@ def test_examples_world_v001_has_chars():
     assert len(yao_world._chars) == 22
 
 
-def test_examples_world_v001_HasBeliefs():
+def test_examples_world_v001_HasLobbys():
     # GIVEN / WHEN
     x_world = examples_world_v001()
     x_world.calc_world_metrics()
 
     # THEN
-    assert x_world._beliefboxs != None
-    assert len(x_world._beliefboxs) == 34
+    assert x_world._lobbyboxs != None
+    assert len(x_world._lobbyboxs) == 34
     everyone_chars_len = None
-    everyone_belief = x_world.get_beliefbox(",Everyone")
-    everyone_chars_len = len(everyone_belief._belieflinks)
+    everyone_lobby = x_world.get_lobbybox(",Everyone")
+    everyone_chars_len = len(everyone_lobby._lobbylinks)
     assert everyone_chars_len == 22
 
     # WHEN
