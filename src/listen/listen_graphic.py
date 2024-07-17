@@ -309,8 +309,8 @@ def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     blue_text = "blue"
     blue_text = "blue"
     d_sue1_p1 = "How budget is distributed."
-    d_sue1_p2 = "Regular Budget: Green arrows, all coins end up at CharUnits"
-    d_sue1_p3 = "Agenda Budget: Blue arrows, coins from active tasks"
+    d_sue1_p2 = "Regular Budget: Green arrows, all bud_coins end up at CharUnits"
+    d_sue1_p3 = "Agenda Budget: Blue arrows, bud_coins from active tasks"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
     doerunit_text = "      Awardlinks"
     add_world_rect(fig, 2, -0.3, 3, 0.3, doerunit_text)

@@ -1,5 +1,5 @@
 from src._road.finance import (
-    CoinNum,
+    BudCoin,
     BudNum,
     BitHum,
     PennyNum,
@@ -9,10 +9,10 @@ from src._road.finance import (
     validate_bud_pool,
     default_respect_num,
     validate_respect_num,
-    default_coin_if_none,
+    default_bud_coin_if_none,
     default_bit_if_none,
     default_penny_if_none,
-    trim_coin_excess,
+    trim_bud_coin_excess,
     trim_bit_excess,
     trim_penny_excess,
     FiscalUnit,
@@ -117,38 +117,41 @@ def test_validate_bud_pool_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert validate_bud_pool() == default_bud_pool()
     assert validate_bud_pool(None) == default_bud_pool()
-    assert validate_bud_pool(0.5) == default_coin_if_none()
-    assert validate_bud_pool(default_coin_if_none() - 0.01) == default_coin_if_none()
+    assert validate_bud_pool(0.5) == default_bud_coin_if_none()
+    assert (
+        validate_bud_pool(default_bud_coin_if_none() - 0.01)
+        == default_bud_coin_if_none()
+    )
     assert validate_bud_pool(1) == 1
     assert validate_bud_pool(25) == 25
 
 
-def test_CoinNum_exists():
+def test_BudCoin_exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_coinnum = CoinNum(x_float)
+    y_bud_coinnum = BudCoin(x_float)
     # THEN
-    assert y_coinnum == x_float
+    assert y_bud_coinnum == x_float
     inspect_str = "Smallest Unit of bud"
-    assert inspect_getdoc(y_coinnum) == inspect_str
+    assert inspect_getdoc(y_bud_coinnum) == inspect_str
 
 
-def test_default_coin_if_none_ReturnsCorrectObj():
+def test_default_bud_coin_if_none_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert default_coin_if_none() == 1
-    assert default_coin_if_none(5) == 5
-    assert default_coin_if_none(0.03) == 0.03
+    assert default_bud_coin_if_none() == 1
+    assert default_bud_coin_if_none(5) == 5
+    assert default_bud_coin_if_none(0.03) == 0.03
 
 
-def test_trim_coin_excess_ReturnsCorrectedFloat():
+def test_trim_bud_coin_excess_ReturnsCorrectedFloat():
     # ESTABLISH / WHEN / THEN
-    assert trim_coin_excess(num=5.5, coin=1) == 5
-    assert trim_coin_excess(num=0.5, coin=1) == 0
-    assert trim_coin_excess(num=5.5, coin=0.1) == 5.5
-    assert trim_coin_excess(num=0.5, coin=0.01) == 0.5
-    assert trim_coin_excess(num=0.56, coin=0.1) == 0.5
-    assert trim_coin_excess(num=0.56, coin=0.133) == 0.532
+    assert trim_bud_coin_excess(num=5.5, bud_coin=1) == 5
+    assert trim_bud_coin_excess(num=0.5, bud_coin=1) == 0
+    assert trim_bud_coin_excess(num=5.5, bud_coin=0.1) == 5.5
+    assert trim_bud_coin_excess(num=0.5, bud_coin=0.01) == 0.5
+    assert trim_bud_coin_excess(num=0.56, bud_coin=0.1) == 0.5
+    assert trim_bud_coin_excess(num=0.56, bud_coin=0.133) == 0.532
 
 
 def test_FiscalUnit_Exists():
@@ -157,7 +160,7 @@ def test_FiscalUnit_Exists():
 
     # THEN
     assert x_fiscal._bud_pool is None
-    assert x_fiscal._coin is None
+    assert x_fiscal._bud_coin is None
     assert x_fiscal._bit is None
     assert x_fiscal._penny is None
 
@@ -173,7 +176,10 @@ def test_validate_respect_num_ReturnsObj():
     assert validate_respect_num(None) == default_respect_num()
     assert validate_respect_num(0.5) == default_bit_if_none()
     assert validate_respect_num(0.5) == 1
-    assert validate_respect_num(default_coin_if_none() - 0.01) == default_coin_if_none()
+    assert (
+        validate_respect_num(default_bud_coin_if_none() - 0.01)
+        == default_bud_coin_if_none()
+    )
     assert validate_respect_num(1) == 1
     assert validate_respect_num(25) == 25
 

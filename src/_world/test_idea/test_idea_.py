@@ -54,7 +54,7 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx is None
     assert x_ideaunit._bud_ratio is None
-    assert x_ideaunit._coin is None
+    assert x_ideaunit._bud_coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
     assert x_ideaunit._root is None
@@ -95,7 +95,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._bud_ratio is None
-    assert x_ideaunit._coin is None
+    assert x_ideaunit._bud_coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
     assert x_ideaunit._reasonunits == {}
@@ -113,17 +113,17 @@ def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
     # ESTABLISH
     x_healerhold = healerhold_shop({"Sue", "Yao"})
     x_problem_bool = True
-    x_coin = 88
+    x_bud_coin = 88
 
     # WHEN
     x_ideaunit = ideaunit_shop(
-        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _coin=x_coin
+        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _bud_coin=x_bud_coin
     )
 
     # THEN
     assert x_ideaunit._healerhold == x_healerhold
     assert x_ideaunit._problem_bool == x_problem_bool
-    assert x_ideaunit._coin == x_coin
+    assert x_ideaunit._bud_coin == x_bud_coin
 
 
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():

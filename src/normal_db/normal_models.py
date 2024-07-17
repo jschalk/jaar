@@ -15,7 +15,7 @@ class WorldTable(Base):
     _credor_respect = Column(Integer)
     _debtor_respect = Column(Integer)
     _bud_pool = Column(Float)
-    _coin = Column(Float)
+    _bud_coin = Column(Float)
     _bit = Column(Float)
     _penny = Column(Float)
     _weight = Column(Integer)

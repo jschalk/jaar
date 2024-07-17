@@ -26,7 +26,7 @@ class BitHum(float):
     pass
 
 
-class CoinNum(float):
+class BudCoin(float):
     """Smallest Unit of bud"""
 
     pass
@@ -38,12 +38,12 @@ class BudNum(float):
     pass
 
 
-def default_coin_if_none(coin: CoinNum = None) -> CoinNum:
-    return get_1_if_None(coin)
+def default_bud_coin_if_none(bud_coin: BudCoin = None) -> BudCoin:
+    return get_1_if_None(bud_coin)
 
 
-def trim_coin_excess(num: float, coin: CoinNum) -> float:
-    return coin * int(num / coin)
+def trim_bud_coin_excess(num: float, bud_coin: BudCoin) -> float:
+    return bud_coin * int(num / bud_coin)
 
 
 def default_bud_pool() -> BudNum:
@@ -52,7 +52,7 @@ def default_bud_pool() -> BudNum:
 
 def validate_bud_pool(x_bud_pool: int = None) -> int:
     x_bud_pool = default_bud_pool() if x_bud_pool is None else x_bud_pool
-    return max(get_1_if_None(x_bud_pool), default_coin_if_none())
+    return max(get_1_if_None(x_bud_pool), default_bud_coin_if_none())
 
 
 def valid_fiscal_ratio(big_number: float, small_number: float) -> bool:
@@ -60,10 +60,10 @@ def valid_fiscal_ratio(big_number: float, small_number: float) -> bool:
     return (big_number % small_number) == 0
 
 
-# def validate_bud_pool(x_bud_pool: BudNum = None, x_coin: CoinNum = None) -> int:
-#     x_coin = default_coin_if_none() if x_coin is None else x_coin
+# def validate_bud_pool(x_bud_pool: BudNum = None, x_bud_coin: BudCoin = None) -> int:
+#     x_bud_coin = default_bud_coin_if_none() if x_bud_coin is None else x_bud_coin
 #     x_bud_pool = default_bud_pool() if x_bud_pool is None else x_bud_pool
-#     return max(get_1_if_None(x_bud_pool), default_coin_if_none())
+#     return max(get_1_if_None(x_bud_pool), default_bud_coin_if_none())
 
 
 def default_bit_if_none(bit: BitHum = None) -> BitHum:
@@ -102,7 +102,7 @@ def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
 @dataclass
 class FiscalUnit:
     _bud_pool: BudNum = None
-    _coin: CoinNum = None
+    _bud_coin: BudCoin = None
     _bit: BitHum = None
     _penny: PennyNum = None
 

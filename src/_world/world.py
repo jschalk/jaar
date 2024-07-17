@@ -10,11 +10,11 @@ from src._road.finance import (
     valid_fiscal_ratio,
     default_bit_if_none,
     default_penny_if_none,
-    default_coin_if_none,
+    default_bud_coin_if_none,
     validate_bud_pool,
     BitHum,
     PennyNum,
-    CoinNum,
+    BudCoin,
     BudNum,
     allot_scale,
     validate_respect_num,
@@ -124,7 +124,7 @@ class WorldUnit:
     _max_tree_traverse: int = None
     _road_delimiter: str = None
     _bud_pool: BudNum = None
-    _coin: CoinNum = None
+    _bud_coin: BudCoin = None
     _bit: BitHum = None
     _penny: PennyNum = None
     _monetary_desc: str = None
@@ -843,8 +843,8 @@ class WorldUnit:
         idea_kid._road_delimiter = self._road_delimiter
         if idea_kid._world_real_id != self._real_id:
             idea_kid._world_real_id = self._real_id
-        if idea_kid._coin != self._coin:
-            idea_kid._coin = self._coin
+        if idea_kid._bud_coin != self._bud_coin:
+            idea_kid._bud_coin = self._bud_coin
         if not filter_out_missing_awardlinks_lobby_ids:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
@@ -1582,7 +1582,7 @@ class WorldUnit:
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid._weight for x_road, kid in x_idearoot_kids_items}
         root_bud = self._idearoot._bud_cease - self._idearoot._bud_onset
-        alloted_bud = allot_scale(kids_ledger, root_bud, self._coin)
+        alloted_bud = allot_scale(kids_ledger, root_bud, self._bud_coin)
         x_idearoot_kid_bud_onset = None
         x_idearoot_kid_bud_cease = None
 
@@ -1614,7 +1614,7 @@ class WorldUnit:
             kids_items = parent_idea._kids.items()
             x_ledger = {x_road: idea_kid._weight for x_road, idea_kid in kids_items}
             parent_bud = parent_idea._bud_cease - parent_idea._bud_onset
-            alloted_bud = allot_scale(x_ledger, parent_bud, self._coin)
+            alloted_bud = allot_scale(x_ledger, parent_bud, self._bud_coin)
 
             if parent_idea._kids != None:
                 bud_onset = None
@@ -1741,7 +1741,7 @@ class WorldUnit:
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
             "_bud_pool": self._bud_pool,
-            "_coin": self._coin,
+            "_bud_coin": self._bud_coin,
             "_bit": self._bit,
             "_penny": self._penny,
             "_owner_id": self._owner_id,
@@ -1867,7 +1867,7 @@ def worldunit_shop(
     _real_id: RealID = None,
     _road_delimiter: str = None,
     _bud_pool: BudNum = None,
-    _coin: CoinNum = None,
+    _bud_coin: BudCoin = None,
     _bit: BitHum = None,
     _penny: PennyNum = None,
     _weight: float = None,
@@ -1885,7 +1885,7 @@ def worldunit_shop(
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _bud_pool=validate_bud_pool(_bud_pool),
-        _coin=default_coin_if_none(_coin),
+        _bud_coin=default_bud_coin_if_none(_bud_coin),
         _bit=default_bit_if_none(_bit),
         _penny=default_penny_if_none(_penny),
         _econs_justified=get_False_if_None(),
@@ -1898,7 +1898,7 @@ def worldunit_shop(
         _level=0,
         _world_real_id=x_world._real_id,
         _road_delimiter=x_world._road_delimiter,
-        _coin=x_world._coin,
+        _bud_coin=x_world._bud_coin,
     )
     x_world.set_max_tree_traverse(3)
     x_world._rational = False
@@ -1919,7 +1919,9 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     world_road_delimiter = obj_from_world_dict(world_dict, "_road_delimiter")
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
     x_world._bud_pool = validate_bud_pool(obj_from_world_dict(world_dict, "_bud_pool"))
-    x_world._coin = default_coin_if_none(obj_from_world_dict(world_dict, "_coin"))
+    x_world._bud_coin = default_bud_coin_if_none(
+        obj_from_world_dict(world_dict, "_bud_coin")
+    )
     x_world._bit = default_bit_if_none(obj_from_world_dict(world_dict, "_bit"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))
     x_world._credor_respect = obj_from_world_dict(world_dict, "_credor_respect")
@@ -1958,7 +1960,7 @@ def set_idearoot_from_world_dict(x_world: WorldUnit, world_dict: dict):
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
         _world_real_id=x_world._real_id,
-        _coin=default_coin_if_none(x_world._coin),
+        _bud_coin=default_bud_coin_if_none(x_world._bud_coin),
     )
     set_idearoot_kids_from_dict(x_world, idearoot_dict)
 

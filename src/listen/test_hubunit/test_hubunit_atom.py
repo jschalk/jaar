@@ -163,7 +163,7 @@ def test_HubUnit_get_world_from_atom_files_ReturnsFileWithZeroAtoms(
     assert yao_world._real_id == yao_hubunit.real_id
     assert yao_world._road_delimiter == yao_hubunit.road_delimiter
     assert yao_world._bud_pool == yao_hubunit.bud_pool
-    assert yao_world._coin == yao_hubunit.coin
+    assert yao_world._bud_coin == yao_hubunit.bud_coin
     assert yao_world._bit == yao_hubunit.bit
 
 

@@ -3,7 +3,7 @@ from src._instrument.python import (
     get_0_if_None,
     get_False_if_None,
 )
-from src._road.finance import CoinNum, BudNum
+from src._road.finance import BudCoin, BudNum
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -251,7 +251,7 @@ class IdeaUnit:
     # Calculated fields
     _level: int = None
     _bud_ratio: float = None
-    _coin: CoinNum = None
+    _bud_coin: BudCoin = None
     _bud_onset: BudNum = None
     _bud_cease: BudNum = None
     _task: bool = None
@@ -983,7 +983,7 @@ def ideaunit_shop(
     # Calculated fields
     _level: int = None,
     _bud_ratio: float = None,
-    _coin: CoinNum = None,
+    _bud_coin: BudCoin = None,
     _bud_onset: BudNum = None,
     _bud_cease: BudNum = None,
     _task: bool = None,
@@ -1032,7 +1032,7 @@ def ideaunit_shop(
         # Calculated fields
         _level=_level,
         _bud_ratio=_bud_ratio,
-        _coin=_coin,
+        _bud_coin=_bud_coin,
         _bud_onset=_bud_onset,
         _bud_cease=_bud_cease,
         _task=_task,

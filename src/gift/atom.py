@@ -167,9 +167,9 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
     x_arg = "_bud_pool"
     if x_atom.get_value(x_arg) != None:
         x_world._bud_pool = x_atom.get_value(x_arg)
-    x_arg = "_coin"
+    x_arg = "_bud_coin"
     if x_atom.get_value(x_arg) != None:
-        x_world._coin = x_atom.get_value(x_arg)
+        x_world._bud_coin = x_atom.get_value(x_arg)
     x_arg = "_weight"
     if x_atom.get_value(x_arg) != None:
         x_world._weight = x_atom.get_value(x_arg)
@@ -505,7 +505,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._debtor_respect != y_obj._debtor_respect
             or x_obj._bit != y_obj._bit
             or x_obj._bud_pool != y_obj._bud_pool
-            or x_obj._coin != y_obj._coin
+            or x_obj._bud_coin != y_obj._bud_coin
         )
     elif category in {"world_char_lobbylink", "world_idea_awardlink"}:
         return (x_obj.credor_weight != y_obj.credor_weight) or (
