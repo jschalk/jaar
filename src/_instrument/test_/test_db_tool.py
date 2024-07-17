@@ -34,7 +34,7 @@ def test_sqlite_null_ReturnsCorrectObj():
 
 
 def test_sqlite_create_insert_sqlstr_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_table = "kubo_trains"
     eagle_id_text = "eagle_id"
     train_id_text = "train_id"
@@ -76,7 +76,7 @@ def test_RowData_Exists():
 
 
 def test_rowdata_shop_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     x_tablename = "earth"
     with sqlite_connection(":memory:") as conn:
         res = conn.execute("SELECT 'Earth' AS name, 6378 AS radius")
@@ -100,7 +100,7 @@ def test_rowdata_shop_ReturnsObj():
 
 
 def test_rowdata_shop_RaiseErrorIf_row_dict_IsNotDict():
-    # GIVEN
+    # ESTABLISH
     x_tablename = "earth"
 
     # WHEN / THEN
@@ -117,7 +117,7 @@ def test_rowdata_shop_RaiseErrorIf_row_dict_IsNotDict():
 
 
 def test_rowdata_shop_ReturnsObjWithoutNone():
-    # GIVEN
+    # ESTABLISH
     x_tablename = "earth"
     with sqlite_connection(":memory:") as conn:
         # conn.row_factory = dict_factory
@@ -137,7 +137,7 @@ def test_rowdata_shop_ReturnsObjWithoutNone():
 
 
 def test_get_rowdata_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_tablename = "earth"
 
     # WHEN

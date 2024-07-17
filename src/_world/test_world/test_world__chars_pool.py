@@ -3,7 +3,7 @@ from pytest import raises as pytest_raises
 
 
 def test_WorldUnit_set_credor_respect_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia")
 
     # WHEN
@@ -15,7 +15,7 @@ def test_WorldUnit_set_credor_respect_CorrectlySetsAttr():
 
 
 def test_WorldUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_world = worldunit_shop(zia_text)
     x_credor_respect = 23
@@ -34,7 +34,7 @@ def test_WorldUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
 
 
 def test_WorldUnit_set_debtor_resepect_CorrectlySetsInt():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_world = worldunit_shop(_owner_id=zia_text)
     zia_debtor_respect = 13
@@ -47,7 +47,7 @@ def test_WorldUnit_set_debtor_resepect_CorrectlySetsInt():
 
 
 def test_WorldUnit_set_debtor_resepect_RaisesErrorWhenArgIsNotMultiple():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_world = worldunit_shop(zia_text)
     x_debtor_respect = 23
@@ -66,7 +66,7 @@ def test_WorldUnit_set_debtor_resepect_RaisesErrorWhenArgIsNotMultiple():
 
 
 def test_WorldUnit_set_char_respect_CorrectlySetsAttrs():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     old_credor_respect = 77
     old_debtor_respect = 88

@@ -18,7 +18,7 @@ from src.real.journal_sqlstr import (
 
 
 def test_get_change_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE IF NOT EXISTS change_mstr (
   author_owner_id VARCHAR(255) NOT NULL
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS change_mstr (
 
 
 def test_get_atom2change_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE atom2change
 (
@@ -45,7 +45,7 @@ CREATE TABLE atom2change
 
 
 def test_get_gift_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE IF NOT EXISTS gift_mstr (
   author_owner_id VARCHAR(255) NOT NULL
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS gift_mstr (
 
 
 def test_get_change2gift_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE change2gift
 (
@@ -72,7 +72,7 @@ CREATE TABLE change2gift
 
 
 def test_get_gift2owner_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE gift2owner
 (
@@ -87,7 +87,7 @@ CREATE TABLE gift2owner
 
 
 def test_get_owner_mstr_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE owner_mstr
 (
@@ -99,7 +99,7 @@ CREATE TABLE owner_mstr
 
 
 def test_get_road_ref_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE IF NOT EXISTS road_ref (
   road VARCHAR(255) NOT NULL
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS road_ref (
 
 
 def test_get_road_ref_table_single_insert_sqlstr_ReturnsCorrectStr():
-    # GIVEN
+    # ESTABLISH
     music_text = "Music"
     slash_text = "/"
     texas_road = create_road(music_text, "texas", delimiter=slash_text)
@@ -131,7 +131,7 @@ VALUES (
 
 
 def test_get_road_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
-    # GIVEN
+    # ESTABLISH
     music_text = "Music"
     slash_text = "/"
     texas_road = create_road(music_text, "texas", delimiter=slash_text)
@@ -150,7 +150,7 @@ WHERE road = '{texas_road}'
 
 
 def test_get_atom_hx_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     generated_sqlstr = get_atom_hx_table_create_sqlstr()
 
     # THEN
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS atom_hx (
         "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_idea_reasonunit_text) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_text) == 3787
+    assert generated_sqlstr.find(example_idea_reasonunit_text) == 3755
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -206,7 +206,7 @@ VALUES (
 
 
 def test_get_atom_mstr_table_create_sqlstr_ReturnsCorrectStr():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     generated_sqlstr = get_atom_mstr_table_create_sqlstr()
 
     # THEN
@@ -218,16 +218,16 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5703
+    assert generated_sqlstr.find(end_sqlstr) == 5675
     example_idea_reasonunit_text = (
         "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_idea_reasonunit_text) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_text) == 3819
+    assert generated_sqlstr.find(example_idea_reasonunit_text) == 3787
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert len(get_create_table_if_not_exist_sqlstrs()) == 9
 
     # SELECT name FROM my_db.sqlite_master WHERE type='table

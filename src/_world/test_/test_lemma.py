@@ -14,7 +14,7 @@ def test_lemma_attributes_exist():
 
 
 def test_lemmas_attributes_exist():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_lemma = Lemmas
 
     # THEN
@@ -30,7 +30,7 @@ def test_lemmas_shop_CorrectReturnsObj():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario1():
-    # GIVEN
+    # ESTABLISH
     x_lemmas_x = lemmas_shop()
 
     # WHEN
@@ -53,7 +53,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario1():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario2():
-    # GIVEN
+    # ESTABLISH
     x_lemmas_x = lemmas_shop()
 
     # WHEN
@@ -74,7 +74,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario2():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario3_denom():
-    # GIVEN
+    # ESTABLISH
     x_lemmas = lemmas_shop()
 
     # WHEN
@@ -103,7 +103,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario3_denom():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario3_2_denom():
-    # GIVEN
+    # ESTABLISH
     x_lemmas = lemmas_shop()
 
     # WHEN
@@ -128,7 +128,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario3_2_denom():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario4_denomReest():
-    # GIVEN
+    # ESTABLISH
     x_lemmas_x = lemmas_shop()
 
     # WHEN
@@ -157,7 +157,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario4_denomReest():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario5_denomReest():
-    # GIVEN
+    # ESTABLISH
     x_lemmas_x = lemmas_shop()
 
     # WHEN
@@ -186,7 +186,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario5_denomReest():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario6_denomReest():
-    # GIVEN
+    # ESTABLISH
     hist_road = create_road(root_label(), "histoory")
     x_lemmas_x = lemmas_shop()
     idea_src = ideaunit_shop(
@@ -258,7 +258,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario6_denomReest():
 
 
 def test_lemmas_create_new_fact_createsCorrectFact_scenario7_denomReest():
-    # GIVEN
+    # ESTABLISH
     x_lemmas_x = lemmas_shop()
 
     # WHEN
@@ -287,7 +287,7 @@ def test_lemmas_create_new_fact_createsCorrectFact_scenario7_denomReest():
 
 
 def test_lemmas_get_unevaluated_lemma_ReturnsCorrectLemmaWhenEmpty():
-    # GIVEN empty x_lemmas
+    # ESTABLISH empty x_lemmas
     x_lemmas = lemmas_shop()
 
     # WHEN
@@ -301,7 +301,7 @@ def test_lemmas_get_unevaluated_lemma_ReturnsCorrectLemmaWhenEmpty():
 
 
 def test_lemmas_get_unevaluated_lemma_ReturnsCorrectLemmaWhenPopulated():
-    # GIVEN 2 in x_lemmas
+    # ESTABLISH 2 in x_lemmas
     hist_road = create_road(root_label(), "histoory")
     x_lemmas_x = lemmas_shop()
     x_lemmas_x.lemmas = {}
@@ -337,7 +337,7 @@ def test_lemmas_get_unevaluated_lemma_ReturnsCorrectLemmaWhenPopulated():
 
 
 def test_lemmas_is_lemmas_incomplete_ReturnsCorrectBoolWhenPopulated():
-    # GIVEN
+    # ESTABLISH
     hist_road = create_road(root_label(), "histoory")
     z_lemmas = lemmas_shop()
     z_lemmas.lemmas = {}
@@ -386,7 +386,7 @@ def test_lemmas_is_lemmas_incomplete_ReturnsCorrectBoolWhenPopulated():
 
 
 def test_lemmas_is_lemmas_incomplete_ReturnsCorrectBoolWhenEmpty():
-    # GIVEN
+    # ESTABLISH
     z_lemmas = lemmas_shop()
     z_lemmas.lemmas = {}
     print(f"Does not exist: {z_lemmas=}")

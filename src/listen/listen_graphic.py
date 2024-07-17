@@ -309,8 +309,8 @@ def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     blue_text = "blue"
     blue_text = "blue"
     d_sue1_p1 = "How budget is distributed."
-    d_sue1_p2 = "Regular Budget: Green arrows, all coins end up at CharUnits"
-    d_sue1_p3 = "Agenda Budget: Blue arrows, coins from active tasks"
+    d_sue1_p2 = "Regular Budget: Green arrows, all bud_coins end up at CharUnits"
+    d_sue1_p3 = "Agenda Budget: Blue arrows, bud_coins from active tasks"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
     doerunit_text = "      Awardlinks"
     add_world_rect(fig, 2, -0.3, 3, 0.3, doerunit_text)
@@ -322,11 +322,11 @@ def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     add_world_rect(fig, 4, -3.2, 5, -2.8, doerunit_text)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_text)
     add_econ__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    beliefstory_text = "BeliefStory"
+    lobbybox_text = "LobbyBox"
     orange_text = "orange"
-    add_world_rect(fig, 5.5, -0.2, 6.25, 0.4, beliefstory_text, orange_text)
-    add_world_rect(fig, 5.5, -0.8, 6.25, -0.2, beliefstory_text, orange_text)
-    add_world_rect(fig, 5.5, -1.4, 6.25, -0.8, beliefstory_text, orange_text)
+    add_world_rect(fig, 5.5, -0.2, 6.25, 0.4, lobbybox_text, orange_text)
+    add_world_rect(fig, 5.5, -0.8, 6.25, -0.2, lobbybox_text, orange_text)
+    add_world_rect(fig, 5.5, -1.4, 6.25, -0.8, lobbybox_text, orange_text)
     add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_text)
     add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_text)
     add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_text)
@@ -335,12 +335,12 @@ def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     add_rect_arrow(fig, 5.5, -0.9, 5, -0.9, green_text)
     add_rect_arrow(fig, 5.5, -1.1, 5, -1.1, blue_text)
     add_rect_arrow(fig, 5.5, -1.3, 5, -2.9, green_text)
-    charlink_text = "charlink"
+    lobbylink_text = "lobbylink"
     darkred_text = "DarkRed"
-    add_world_rect(fig, 7, 0.4, 7.75, 1, charlink_text, darkred_text)
-    add_world_rect(fig, 7, -0.2, 7.75, 0.4, charlink_text, darkred_text)
-    add_world_rect(fig, 7, -0.8, 7.75, -0.2, charlink_text, darkred_text)
-    add_world_rect(fig, 7, -1.4, 7.75, -0.8, charlink_text, darkred_text)
+    add_world_rect(fig, 7, 0.4, 7.75, 1, lobbylink_text, darkred_text)
+    add_world_rect(fig, 7, -0.2, 7.75, 0.4, lobbylink_text, darkred_text)
+    add_world_rect(fig, 7, -0.8, 7.75, -0.2, lobbylink_text, darkred_text)
+    add_world_rect(fig, 7, -1.4, 7.75, -0.8, lobbylink_text, darkred_text)
     add_rect_arrow(fig, 7, -0.4, 6.25, -0.4, blue_text)
     add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_text)
     add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_text)

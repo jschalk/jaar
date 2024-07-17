@@ -11,7 +11,7 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
     x_owner_id = ref_world._owner_id if x_owner_id is None else x_owner_id
     x_road_delimiter = ref_world._road_delimiter
     x_bud_pool = ref_world._bud_pool
-    x_coin = ref_world._coin
+    x_bud_coin = ref_world._bud_coin
     x_bit = ref_world._bit
     x_penny = ref_world._penny
     return worldunit_shop(
@@ -19,7 +19,7 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
         _real_id=ref_world._real_id,
         _road_delimiter=x_road_delimiter,
         _bud_pool=x_bud_pool,
-        _coin=x_coin,
+        _bud_coin=x_bud_coin,
         _bit=x_bit,
         _penny=x_penny,
     )
@@ -28,7 +28,6 @@ def create_empty_world(ref_world: WorldUnit, x_owner_id: OwnerID = None) -> Worl
 def create_listen_basis(x_duty: WorldUnit) -> WorldUnit:
     x_listen = create_empty_world(x_duty, x_owner_id=x_duty._owner_id)
     x_listen._chars = x_duty._chars
-    x_listen._beliefs = x_duty._beliefs
     x_listen.set_monetary_desc(x_duty._monetary_desc)
     x_listen.set_max_tree_traverse(x_duty._max_tree_traverse)
     if x_duty._credor_respect != None:

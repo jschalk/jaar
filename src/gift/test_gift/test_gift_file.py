@@ -16,7 +16,7 @@ from os.path import exists as os_path_exists
 
 
 def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"
@@ -46,7 +46,7 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 
 def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"
@@ -73,7 +73,7 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 
 def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"
@@ -100,7 +100,7 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 
 def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"
@@ -135,7 +135,7 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 
 def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"
@@ -161,7 +161,7 @@ def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 
 def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"
@@ -198,7 +198,7 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
 
 
 def test_GiftUnit_create_changeunit_from_atom_files_SetsAttr(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"
@@ -231,7 +231,7 @@ def test_GiftUnit_create_changeunit_from_atom_files_SetsAttr(env_dir_setup_clean
 
 
 def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     x_real_dir = f"{reals_dir()}/{real_id()}"
     x_owners_dir = f"{x_real_dir}/owners"
     sue_text = "Sue"

@@ -1,5 +1,5 @@
 {
-    "world_char_belieflink": {
+    "world_char_lobbylink": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
@@ -8,7 +8,7 @@
             "atom_order": 1
         },
         "normal_specs": {
-            "normal_table_name": "belieflink"
+            "normal_table_name": "lobbylink"
         },
         "optional_args": {
             "credor_weight": {
@@ -21,12 +21,12 @@
             }
         },
         "required_args": {
-            "belief_id": {
-                "python_type": "BeliefID",
-                "sqlite_datatype": "TEXT"
-            },
             "char_id": {
                 "python_type": "CharID",
+                "sqlite_datatype": "TEXT"
+            },
+            "lobby_id": {
+                "python_type": "LobbyID",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -79,18 +79,18 @@
             "normal_table_name": "awardlink"
         },
         "optional_args": {
-            "credor_weight": {
+            "give_weight": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "debtor_weight": {
+            "take_weight": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "required_args": {
-            "belief_id": {
-                "python_type": "BeliefID",
+            "lobby_id": {
+                "python_type": "LobbyID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
@@ -102,30 +102,6 @@
         "UPDATE": {
             "atom_order": 12
         }
-    },
-    "world_idea_beliefhold": {
-        "calculated_attrs": {},
-        "DELETE": {
-            "atom_order": 19
-        },
-        "INSERT": {
-            "atom_order": 4
-        },
-        "normal_specs": {
-            "normal_table_name": "beliefhold"
-        },
-        "optional_args": {},
-        "required_args": {
-            "belief_id": {
-                "python_type": "BeliefID",
-                "sqlite_datatype": "TEXT"
-            },
-            "road": {
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            }
-        },
-        "treasury_only": false
     },
     "world_idea_factunit": {
         "calculated_attrs": {},
@@ -180,8 +156,32 @@
         },
         "optional_args": {},
         "required_args": {
-            "belief_id": {
-                "python_type": "BeliefID",
+            "lobby_id": {
+                "python_type": "LobbyID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false
+    },
+    "world_idea_lobbyhold": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 19
+        },
+        "INSERT": {
+            "atom_order": 4
+        },
+        "normal_specs": {
+            "normal_table_name": "lobbyhold"
+        },
+        "optional_args": {},
+        "required_args": {
+            "lobby_id": {
+                "python_type": "LobbyID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
@@ -353,6 +353,10 @@
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
+            "_bud_coin": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
             "_credor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
@@ -360,10 +364,6 @@
             "_debtor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
-            },
-            "_coin": {
-                "python_type": "float",
-                "sqlite_datatype": "REAL"
             },
             "_max_tree_traverse": {
                 "python_type": "int",

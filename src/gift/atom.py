@@ -7,7 +7,7 @@ from src._instrument.db_tool import create_insert_sqlstr, RowData
 from src._road.road import create_road
 from src._world.reason_idea import factunit_shop
 from src._world.char import charunit_shop
-from src._world.beliefstory import awardlink_shop
+from src._world.lobby import awardlink_shop
 from src._world.idea import ideaunit_shop
 from src._world.world import WorldUnit
 from src.gift.atom_config import (
@@ -167,9 +167,9 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
     x_arg = "_bud_pool"
     if x_atom.get_value(x_arg) != None:
         x_world._bud_pool = x_atom.get_value(x_arg)
-    x_arg = "_coin"
+    x_arg = "_bud_coin"
     if x_atom.get_value(x_arg) != None:
-        x_world._coin = x_atom.get_value(x_arg)
+        x_world._bud_coin = x_atom.get_value(x_arg)
     x_arg = "_weight"
     if x_atom.get_value(x_arg) != None:
         x_world._weight = x_atom.get_value(x_arg)
@@ -181,31 +181,30 @@ def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
         x_world._penny = x_atom.get_value(x_arg)
 
 
-def _modify_world_char_belieflink_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbylink_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
-    x_belief_id = x_atom.get_value("belief_id")
-    x_world.get_char(x_char_id).delete_belieflink(x_belief_id)
-    print("_modify_world_char_belieflink_delete")
+    x_lobby_id = x_atom.get_value("lobby_id")
+    x_world.get_char(x_char_id).delete_lobbylink(x_lobby_id)
 
 
-def _modify_world_char_belieflink_update(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbylink_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
-    x_belief_id = x_atom.get_value("belief_id")
+    x_lobby_id = x_atom.get_value("lobby_id")
     x_charunit = x_world.get_char(x_char_id)
-    x_belieflink = x_charunit.get_belieflink(x_belief_id)
+    x_lobbylink = x_charunit.get_lobbylink(x_lobby_id)
     x_credor_weight = x_atom.get_value("credor_weight")
     x_debtor_weight = x_atom.get_value("debtor_weight")
-    x_belieflink.set_credor_weight(x_credor_weight)
-    x_belieflink.set_debtor_weight(x_debtor_weight)
+    x_lobbylink.set_credor_weight(x_credor_weight)
+    x_lobbylink.set_debtor_weight(x_debtor_weight)
 
 
-def _modify_world_char_belieflink_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbylink_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
-    x_belief_id = x_atom.get_value("belief_id")
+    x_lobby_id = x_atom.get_value("lobby_id")
     x_credor_weight = x_atom.get_value("credor_weight")
     x_debtor_weight = x_atom.get_value("debtor_weight")
     x_charunit = x_world.get_char(x_char_id)
-    x_charunit.add_belieflink(x_belief_id, x_credor_weight, x_debtor_weight)
+    x_charunit.add_lobbylink(x_lobby_id, x_credor_weight, x_debtor_weight)
 
 
 def _modify_world_ideaunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
@@ -252,7 +251,7 @@ def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value("parent_road"),
         create_missing_ideas=False,
-        create_missing_beliefs=False,
+        filter_out_missing_awardlinks_lobby_ids=False,
         create_missing_ancestors=False,
     )
 
@@ -260,27 +259,27 @@ def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
 def _modify_world_idea_awardlink_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_world.edit_idea_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value("belief_id"),
+        awardlink_del=x_atom.get_value("lobby_id"),
     )
 
 
 def _modify_world_idea_awardlink_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_idea = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_awardlink = x_idea._awardlinks.get(x_atom.get_value("belief_id"))
-    x_credor_weight = x_atom.get_value("credor_weight")
-    if x_credor_weight != None and x_awardlink.credor_weight != x_credor_weight:
-        x_awardlink.credor_weight = x_credor_weight
-    x_debtor_weight = x_atom.get_value("debtor_weight")
-    if x_debtor_weight != None and x_awardlink.debtor_weight != x_debtor_weight:
-        x_awardlink.debtor_weight = x_debtor_weight
+    x_awardlink = x_idea._awardlinks.get(x_atom.get_value("lobby_id"))
+    x_give_weight = x_atom.get_value("give_weight")
+    if x_give_weight != None and x_awardlink.give_weight != x_give_weight:
+        x_awardlink.give_weight = x_give_weight
+    x_take_weight = x_atom.get_value("take_weight")
+    if x_take_weight != None and x_awardlink.take_weight != x_take_weight:
+        x_awardlink.take_weight = x_take_weight
     x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
 def _modify_world_idea_awardlink_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        belief_id=x_atom.get_value("belief_id"),
-        credor_weight=x_atom.get_value("credor_weight"),
-        debtor_weight=x_atom.get_value("debtor_weight"),
+        lobby_id=x_atom.get_value("lobby_id"),
+        give_weight=x_atom.get_value("give_weight"),
+        take_weight=x_atom.get_value("take_weight"),
     )
     x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
@@ -368,14 +367,14 @@ def _modify_world_idea_reason_premiseunit_insert(x_world: WorldUnit, x_atom: Ato
     )
 
 
-def _modify_world_idea_beliefhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_lobbyhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.del_beliefhold(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._doerunit.del_lobbyhold(lobby_id=x_atom.get_value("lobby_id"))
 
 
-def _modify_world_idea_beliefhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_lobbyhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.set_beliefhold(belief_id=x_atom.get_value("belief_id"))
+    x_ideaunit._doerunit.set_lobbyhold(lobby_id=x_atom.get_value("lobby_id"))
 
 
 def _modify_world_charunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
@@ -405,13 +404,13 @@ def _modify_world_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_update_worldunit(x_world, x_atom)
 
 
-def _modify_world_char_belieflink(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_char_lobbylink(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_char_belieflink_delete(x_world, x_atom)
+        _modify_world_char_lobbylink_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_char_belieflink_update(x_world, x_atom)
+        _modify_world_char_lobbylink_update(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_char_belieflink_insert(x_world, x_atom)
+        _modify_world_char_lobbylink_insert(x_world, x_atom)
 
 
 def _modify_world_ideaunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -459,11 +458,11 @@ def _modify_world_idea_reason_premiseunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reason_premiseunit_insert(x_world, x_atom)
 
 
-def _modify_world_idea_beliefhold(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_world_idea_lobbyhold(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_beliefhold_delete(x_world, x_atom)
+        _modify_world_idea_lobbyhold_delete(x_world, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_beliefhold_insert(x_world, x_atom)
+        _modify_world_idea_lobbyhold_insert(x_world, x_atom)
 
 
 def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
@@ -478,8 +477,8 @@ def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
 def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
     if x_atom.category == "worldunit":
         _modify_world_worldunit(x_world, x_atom)
-    elif x_atom.category == "world_char_belieflink":
-        _modify_world_char_belieflink(x_world, x_atom)
+    elif x_atom.category == "world_char_lobbylink":
+        _modify_world_char_lobbylink(x_world, x_atom)
     elif x_atom.category == "world_ideaunit":
         _modify_world_ideaunit(x_world, x_atom)
     elif x_atom.category == "world_idea_awardlink":
@@ -490,8 +489,8 @@ def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
         _modify_world_idea_reasonunit(x_world, x_atom)
     elif x_atom.category == "world_idea_reason_premiseunit":
         _modify_world_idea_reason_premiseunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_beliefhold":
-        _modify_world_idea_beliefhold(x_world, x_atom)
+    elif x_atom.category == "world_idea_lobbyhold":
+        _modify_world_idea_lobbyhold(x_world, x_atom)
     elif x_atom.category == "world_charunit":
         _modify_world_charunit(x_world, x_atom)
 
@@ -505,11 +504,15 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._debtor_respect != y_obj._debtor_respect
             or x_obj._bit != y_obj._bit
             or x_obj._bud_pool != y_obj._bud_pool
-            or x_obj._coin != y_obj._coin
+            or x_obj._bud_coin != y_obj._bud_coin
         )
-    elif category in {"world_char_belieflink", "world_idea_awardlink"}:
+    elif category in {"world_char_lobbylink"}:
         return (x_obj.credor_weight != y_obj.credor_weight) or (
             x_obj.debtor_weight != y_obj.debtor_weight
+        )
+    elif category in {"world_idea_awardlink"}:
+        return (x_obj.give_weight != y_obj.give_weight) or (
+            x_obj.take_weight != y_obj.take_weight
         )
     elif category == "world_ideaunit":
         return (

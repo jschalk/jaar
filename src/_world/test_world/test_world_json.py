@@ -1,7 +1,6 @@
 from src._instrument.python import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
-from src._world.beliefstory import awardlink_shop
-from src._world.char import charlink_shop
+from src._world.lobby import awardlink_shop
 from src._world.healer import healerhold_shop
 from src._world.reason_doer import doerunit_shop
 from src._world.reason_idea import factunit_shop
@@ -19,48 +18,8 @@ from src._world.examples.example_worlds import (
 from pytest import raises as pytest_raises
 
 
-def test_WorldUnit_get_dict_SetsCharUnit_belieflinks():
-    # GIVEN
-    yao_text = "Yao"
-    sue_text = "Sue"
-    sue_credor_weight = 11
-    sue_debtor_weight = 13
-    zia_text = "Zia"
-    zia_credor_weight = 17
-    zia_debtor_weight = 23
-    bob_world = worldunit_shop("Bob")
-    bob_world.add_charunit(yao_text)
-    bob_world.add_charunit(sue_text)
-    bob_world.add_charunit(zia_text)
-    run_text = ",Run"
-    sue_charunit = bob_world.get_char(sue_text)
-    zia_charunit = bob_world.get_char(zia_text)
-    sue_charunit.add_belieflink(run_text, sue_credor_weight, sue_debtor_weight)
-    zia_charunit.add_belieflink(run_text, zia_credor_weight, zia_debtor_weight)
-    assert len(bob_world.get_belief_ids_dict().get(run_text)) == 2
-    assert len(bob_world.get_char(yao_text)._belieflinks) == 1
-    assert len(bob_world.get_char(sue_text)._belieflinks) == 2
-    assert len(bob_world.get_char(zia_text)._belieflinks) == 2
-
-    # WHEN
-    bob_world.get_dict()
-
-    # THEN
-    assert len(bob_world.get_char(yao_text)._belieflinks) == 1
-    assert len(bob_world.get_char(sue_text)._belieflinks) == 2
-    assert len(bob_world.get_char(zia_text)._belieflinks) == 2
-    sue_charunit = bob_world.get_char(sue_text)
-    zia_charunit = bob_world.get_char(zia_text)
-    sue_belieflink = sue_charunit.get_belieflink(run_text)
-    zia_belieflink = zia_charunit.get_belieflink(run_text)
-    assert sue_belieflink.credor_weight == sue_credor_weight
-    assert sue_belieflink.debtor_weight == sue_debtor_weight
-    assert zia_belieflink.credor_weight == zia_credor_weight
-    assert zia_belieflink.debtor_weight == zia_debtor_weight
-
-
 def test_WorldUnit_get_dict_ReturnsDictObject():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_world_v001()
     day_hour_text = "day_hour"
     day_hour_road = x_world.make_l1_road(day_hour_text)
@@ -78,12 +37,12 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     x_world._originunit.set_originhold(yao_text, 1)
     yao_bud_pool = 23000
     x_world._bud_pool = yao_bud_pool
-    yao_coin = 23
-    x_world._coin = yao_coin
+    yao_bud_coin = 23
+    x_world._bud_coin = yao_bud_coin
     world_weight = 23
     x_world._weight = world_weight
     x_credor_respect = 22
-    x_debtor_respect = 22
+    x_debtor_respect = 44
     x_world.set_credor_respect(x_credor_respect)
     x_world.set_debtor_resepect(x_debtor_respect)
     override_text = "override"
@@ -101,16 +60,15 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_weight"] == x_world._weight
     assert world_dict["_weight"] == world_weight
     assert world_dict["_bud_pool"] == yao_bud_pool
-    assert world_dict["_coin"] == yao_coin
+    assert world_dict["_bud_coin"] == yao_bud_coin
     assert world_dict["_max_tree_traverse"] == x_world._max_tree_traverse
     assert world_dict["_road_delimiter"] == x_world._road_delimiter
     assert world_dict["_credor_respect"] == x_world._credor_respect
     assert world_dict["_debtor_respect"] == x_world._debtor_respect
-    assert world_dict["_debtor_respect"] == x_world._debtor_respect
     assert world_dict["_last_gift_id"] == x_world._last_gift_id
     assert len(world_dict["_chars"]) == len(x_world._chars)
     assert len(world_dict["_chars"]) != 12
-    assert world_dict.get("_beliefs") is None
+    assert world_dict.get("_lobbys") is None
 
     x_idearoot = x_world._idearoot
     idearoot_dict = world_dict["_idearoot"]
@@ -155,11 +113,11 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
-    # GIVEN
+    # ESTABLISH
     run_text = "runners"
     sue_world = worldunit_shop("Sue")
     x_doerunit = doerunit_shop()
-    x_doerunit.set_beliefhold(belief_id=run_text)
+    x_doerunit.set_lobbyhold(lobby_id=run_text)
     sue_world.edit_idea_attr(doerunit=x_doerunit, road=sue_world._real_id)
 
     # WHEN
@@ -168,19 +126,19 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
 
     # THEN
     assert idearoot_dict["_doerunit"] == x_doerunit.get_dict()
-    assert idearoot_dict["_doerunit"] == {"_beliefholds": [run_text]}
+    assert idearoot_dict["_doerunit"] == {"_lobbyholds": [run_text]}
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
     sue_world.add_charunit(yao_text)
     run_text = ",runners"
     yao_charunit = sue_world.get_char(yao_text)
-    yao_charunit.add_belieflink(run_text)
+    yao_charunit.add_lobbylink(run_text)
     run_healerhold = healerhold_shop()
-    run_healerhold.set_belief_id(x_belief_id=run_text)
+    run_healerhold.set_lobby_id(x_lobby_id=run_text)
     sue_world.edit_idea_attr(road=sue_world._real_id, healerhold=run_healerhold)
 
     # WHEN
@@ -192,19 +150,19 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
     sue_world.add_charunit(yao_text)
     run_text = ",runners"
     yao_charunit = sue_world.get_char(yao_text)
-    yao_charunit.add_belieflink(run_text)
+    yao_charunit.add_lobbylink(run_text)
 
     morn_text = "morning"
     morn_road = sue_world.make_l1_road(morn_text)
     sue_world.add_l1_idea(ideaunit_shop(morn_text))
     x_doerunit = doerunit_shop()
-    x_doerunit.set_beliefhold(belief_id=run_text)
+    x_doerunit.set_lobbyhold(lobby_id=run_text)
     sue_world.edit_idea_attr(doerunit=x_doerunit, road=morn_road)
 
     # WHEN
@@ -217,18 +175,18 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
 
     doer_dict_x = idearoot_dict[_kids][morn_text][_doerunit]
     assert doer_dict_x == x_doerunit.get_dict()
-    assert doer_dict_x == {"_beliefholds": [run_text]}
+    assert doer_dict_x == {"_lobbyholds": [run_text]}
 
 
 def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
-    # GIVEN
+    # ESTABLISH
     zia_world = example_worlds_get_world_x1_3levels_1reason_1facts()
     tiger_real_id = "tiger"
     zia_world.set_real_id(tiger_real_id)
     x_bud_pool = 66000
     zia_world._bud_pool = x_bud_pool
-    x_coin = 66
-    zia_world._coin = x_coin
+    x_bud_coin = 66
+    zia_world._bud_coin = x_bud_coin
     x_bit = 7
     zia_world._bit = x_bit
     x_penny = 0.3
@@ -238,7 +196,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     run_text = ",runners"
     zia_world.add_charunit(yao_text)
     yao_charunit = zia_world.get_char(yao_text)
-    yao_charunit.add_belieflink(run_text)
+    yao_charunit.add_lobbylink(run_text)
     run_healerhold = healerhold_shop({run_text})
     zia_world.edit_idea_attr(road=zia_world._real_id, healerhold=run_healerhold)
     zia_world.edit_idea_attr(road=zia_world._real_id, problem_bool=True)
@@ -257,15 +215,17 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert world_dict["_real_id"] == zia_world._real_id
     assert world_dict["_weight"] == zia_world._weight
     assert world_dict["_bud_pool"] == zia_world._bud_pool
-    assert world_dict["_coin"] == zia_world._coin
+    assert world_dict["_bud_coin"] == zia_world._bud_coin
     assert world_dict["_bit"] == zia_world._bit
     assert world_dict["_penny"] == zia_world._penny
-    with pytest_raises(Exception) as excinfo:
-        world_dict["_credor_respect"]
-    assert str(excinfo.value) == "'_credor_respect'"
-    with pytest_raises(Exception) as excinfo:
-        world_dict["_debtor_respect"]
-    assert str(excinfo.value) == "'_debtor_respect'"
+    assert world_dict["_credor_respect"] == zia_world._credor_respect
+    assert world_dict["_debtor_respect"] == zia_world._debtor_respect
+    # with pytest_raises(Exception) as excinfo:
+    #     world_dict["_credor_respect"]
+    # assert str(excinfo.value) == "'_credor_respect'"
+    # with pytest_raises(Exception) as excinfo:
+    #     world_dict["_debtor_respect"]
+    # assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
         world_dict["_last_gift_id"]
 
@@ -283,12 +243,12 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     idearoot_healerhold = idearoot_dict["_healerhold"]
     print(f"{idearoot_healerhold=}")
     assert len(idearoot_healerhold) == 1
-    assert x_idearoot._healerhold.any_belief_id_exists()
+    assert x_idearoot._healerhold.any_lobby_id_exists()
     assert x_idearoot._problem_bool
 
 
 def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
-    # GIVEN
+    # ESTABLISH
     yao_world = example_worlds_world_v001()
     day_hour_text = "day_hour"
     day_hour_road = yao_world.make_l1_road(day_hour_text)
@@ -298,7 +258,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_world.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=59)
     factunit_x = factunit_shop(day_min_road, day_min_road, 5, 59)
     yao_world.edit_idea_attr(road=factunit_x.base, factunit=factunit_x)
-    yao_world.set_max_tree_traverse(int_x=2)
+    yao_world.set_max_tree_traverse(2)
     yao_text = "Yao"
     yao_world._originunit.set_originhold(yao_text, 1)
 
@@ -343,15 +303,15 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
-    # GIVEN
+    # ESTABLISH
     zia_world = example_worlds_get_world_x1_3levels_1reason_1facts()
     zia_world.set_max_tree_traverse(23)
     tiger_real_id = "tiger"
     zia_world.set_real_id(tiger_real_id)
     zia_bud_pool = 80000
     zia_world._bud_pool = zia_bud_pool
-    zia_coin = 8
-    zia_world._coin = zia_coin
+    zia_bud_coin = 8
+    zia_world._bud_coin = zia_bud_coin
     zia_bit = 5
     zia_world._bit = zia_bit
     zia_penny = 2
@@ -378,13 +338,13 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     run_text = ",runners"
     sue_charunit = zia_world.get_char(sue_text)
     tim_charunit = zia_world.get_char(tim_text)
-    sue_charunit.add_belieflink(run_text)
-    tim_charunit.add_belieflink(run_text)
+    sue_charunit.add_lobbylink(run_text)
+    tim_charunit.add_lobbylink(run_text)
     run_doerunit = doerunit_shop()
-    run_doerunit.set_beliefhold(belief_id=run_text)
+    run_doerunit.set_lobbyhold(lobby_id=run_text)
     zia_world.edit_idea_attr(zia_world._real_id, doerunit=run_doerunit)
     tim_doerunit = doerunit_shop()
-    tim_doerunit.set_beliefhold(belief_id=tim_text)
+    tim_doerunit.set_lobbyhold(lobby_id=tim_text)
     zia_world.edit_idea_attr(shave_road, doerunit=tim_doerunit)
     zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(tim_text))
     zia_world.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
@@ -409,8 +369,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._real_id == zia_world._real_id
     assert json_world._bud_pool == zia_bud_pool
     assert json_world._bud_pool == zia_world._bud_pool
-    assert json_world._coin == zia_coin
-    assert json_world._coin == zia_world._coin
+    assert json_world._bud_coin == zia_bud_coin
+    assert json_world._bud_coin == zia_world._bud_coin
     assert json_world._bit == zia_bit
     assert json_world._bit == zia_world._bit
     assert json_world._penny == zia_penny
@@ -424,9 +384,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._debtor_respect == zia_debtor_respect
     assert json_world._last_gift_id == zia_world._last_gift_id
     assert json_world._last_gift_id == zia_last_gift_id
-    print(f"{json_world._beliefs.keys()=}")
-    print(f"{zia_world._beliefs.keys()=}")
-    # assert json_world._beliefs == zia_world._beliefs
+    # assert json_world._lobbys == zia_world._lobbys
 
     json_idearoot = json_world._idearoot
     assert json_idearoot._parent_road == ""
@@ -434,8 +392,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._reasonunits == {}
     assert json_idearoot._doerunit == zia_world._idearoot._doerunit
     assert json_idearoot._doerunit == run_doerunit
-    assert json_idearoot._coin == 8
-    assert json_idearoot._coin == zia_coin
+    assert json_idearoot._bud_coin == 8
+    assert json_idearoot._bud_coin == zia_bud_coin
     assert len(json_idearoot._factunits) == 1
     assert len(json_idearoot._awardlinks) == 1
 
@@ -469,7 +427,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_Example():
-    # GIVEN
+    # ESTABLISH
     slash_delimiter = "/"
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
     assert before_bob_world._road_delimiter != default_road_delimiter_if_none()
@@ -485,7 +443,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_Example():
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_CharExample():
-    # GIVEN
+    # ESTABLISH
     slash_delimiter = "/"
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
     bob_text = ",Bob"
@@ -501,27 +459,27 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_CharExample():
     assert after_bob_charunit._road_delimiter == slash_delimiter
 
 
-def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_BeliefExample():
-    # GIVEN
+def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
+    # ESTABLISH
     slash_delimiter = "/"
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
     yao_text = "Yao"
     swim_text = f"{slash_delimiter}Swimmers"
     before_bob_world.add_charunit(yao_text)
     yao_charunit = before_bob_world.get_char(yao_text)
-    yao_charunit.add_belieflink(swim_text)
+    yao_charunit.add_lobbylink(swim_text)
 
     # WHEN
     bob_json = before_bob_world.get_json()
     after_bob_world = worldunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_beliefbox = after_bob_world.get_beliefbox(swim_text)
-    assert after_bob_beliefbox._road_delimiter == slash_delimiter
+    after_yao_charunit = after_bob_world.get_char(yao_text)
+    assert after_yao_charunit._road_delimiter == slash_delimiter
 
 
 def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():
-    # GIVEN
+    # ESTABLISH
     x1_world = example_worlds_world_v001()
     x1_world._weight = 15
     assert 15 == x1_world._weight
@@ -536,51 +494,53 @@ def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():
     assert x1_world._weight == x2_world._weight
     assert x1_world._idearoot._weight == 1
     assert x1_world._idearoot._weight == x2_world._idearoot._weight
-    # assert x1_world._idearoot._kids == x2_world._idearoot._kids
+    assert x1_world._idearoot._kids == x2_world._idearoot._kids
 
 
-# def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
-#     # GIVEN
-#     x1_world = example_worlds_world_v001()
-#     x2_world = example_worlds_get_world_x1_3levels_1reason_1facts()
-#     x3_world = example_worlds_get_world_base_time_example()
-#     print(f"{x1_world._owner_id}")
-#     print(f"{x2_world._owner_id}")
-#     print(f"{x3_world._owner_id}")
+def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
+    # ESTABLISH
+    x1_world = example_worlds_world_v001()
+    x2_world = example_worlds_get_world_x1_3levels_1reason_1facts()
+    x3_world = example_worlds_get_world_base_time_example()
+    print(f"{x1_world._owner_id}")
+    print(f"{x2_world._owner_id}")
+    print(f"{x3_world._owner_id}")
 
-#     cn_dict_of_dicts = {
-#         x1_world._owner_id: x1_world.get_dict(),
-#         x2_world._owner_id: x2_world.get_dict(),
-#         x3_world._owner_id: x3_world.get_dict(),
-#     }
-#     x1_world.clear_charunits_belieflinks()
-#     x2_world.clear_charunits_belieflinks()
-#     x3_world.clear_charunits_belieflinks()
+    cn_dict_of_dicts = {
+        x1_world._owner_id: x1_world.get_dict(),
+        x2_world._owner_id: x2_world.get_dict(),
+        x3_world._owner_id: x3_world.get_dict(),
+    }
 
-#     # WHEN
-#     ccn_dict_of_obj = get_dict_of_world_from_dict(cn_dict_of_dicts)
+    # WHEN
+    ccn_dict_of_obj = get_dict_of_world_from_dict(cn_dict_of_dicts)
 
-#     # THEN
-#     assert ccn_dict_of_obj.get(x1_world._owner_id) != None
-#     assert ccn_dict_of_obj.get(x2_world._owner_id) != None
-#     assert ccn_dict_of_obj.get(x3_world._owner_id) != None
-#     cc1_idea_root = ccn_dict_of_obj.get(x1_world._owner_id)._idearoot
-#     assert cc1_idea_root._originunit == x1_world._idearoot._originunit
-#     assert ccn_dict_of_obj.get(x1_world._owner_id)._idea_dict == x1_world._idea_dict
-#     assert ccn_dict_of_obj.get(x1_world._owner_id) == x1_world
-#     ccn2_world = ccn_dict_of_obj.get(x2_world._owner_id)
-#     assert ccn2_world._idearoot._label == x2_world._idearoot._label
-#     assert ccn2_world._idearoot._parent_road == x2_world._idearoot._parent_road
-#     assert ccn2_world._idearoot._coin == x2_world._idearoot._coin
-#     shave_road = ccn2_world.make_l1_road("shave")
-#     week_road = ccn2_world.make_l1_road("weekdays")
-#     assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)
-#     assert ccn2_world.get_idea_obj(week_road) == x2_world.get_idea_obj(week_road)
-#     assert ccn2_world._idearoot == x2_world._idearoot
-#     print(f"{ccn2_world._idea_dict.keys()=}")
-#     print(f"{x2_world._idea_dict.keys()=}")
-#     assert ccn2_world._idea_dict == x2_world._idea_dict
-#     assert ccn2_world == x2_world
-#     ccn_world3 = ccn_dict_of_obj.get(x3_world._owner_id)
-#     x3_world.calc_world_metrics()
-#     assert ccn_world3 == x3_world
+    # THEN
+    assert ccn_dict_of_obj.get(x1_world._owner_id) != None
+    assert ccn_dict_of_obj.get(x2_world._owner_id) != None
+    assert ccn_dict_of_obj.get(x3_world._owner_id) != None
+
+    ccn2_world = ccn_dict_of_obj.get(x2_world._owner_id)
+    assert ccn2_world._idearoot._label == x2_world._idearoot._label
+    assert ccn2_world._idearoot._parent_road == x2_world._idearoot._parent_road
+    assert ccn2_world._idearoot._bud_coin == x2_world._idearoot._bud_coin
+    shave_road = ccn2_world.make_l1_road("shave")
+    week_road = ccn2_world.make_l1_road("weekdays")
+    # assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)
+    # assert ccn2_world.get_idea_obj(week_road) == x2_world.get_idea_obj(week_road)
+    # assert ccn2_world._idearoot == x2_world._idearoot
+    assert ccn2_world.get_dict() == x2_world.get_dict()
+
+    ccn_world3 = ccn_dict_of_obj.get(x3_world._owner_id)
+    assert ccn_world3.get_dict() == x3_world.get_dict()
+
+    cc1_idea_root = ccn_dict_of_obj.get(x1_world._owner_id)._idearoot
+    assert cc1_idea_root._originunit == x1_world._idearoot._originunit
+    ccn_world1 = ccn_dict_of_obj.get(x1_world._owner_id)
+    assert ccn_world1._idea_dict == x1_world._idea_dict
+    philipa_text = "Philipa"
+    ccn_philipa_charunit = ccn_world1.get_char(philipa_text)
+    x1_philipa_charunit = x1_world.get_char(philipa_text)
+    assert ccn_philipa_charunit._lobbylinks == x1_philipa_charunit._lobbylinks
+    assert ccn_world1 == x1_world
+    assert ccn_dict_of_obj.get(x1_world._owner_id) == x1_world

@@ -6,12 +6,12 @@ from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.atom_config import (
     worldunit_text,
     world_charunit_text,
-    world_char_belieflink_text,
+    world_char_lobbylink_text,
     world_ideaunit_text,
     world_idea_awardlink_text,
     world_idea_reasonunit_text,
     world_idea_reason_premiseunit_text,
-    world_idea_beliefhold_text,
+    world_idea_lobbyhold_text,
     world_idea_healerhold_text,
     world_idea_factunit_text,
 )
@@ -32,8 +32,8 @@ def char_id_str() -> str:
     return "char_id"
 
 
-def belief_id_str() -> str:
-    return "belief_id"
+def lobby_id_str() -> str:
+    return "lobby_id"
 
 
 def char_pool_str() -> str:
@@ -96,8 +96,8 @@ def jaar_format_0001_char_v0_0_0() -> str:
     return "jaar_format_0001_char_v0_0_0"
 
 
-def jaar_format_0002_belieflink_v0_0_0() -> str:
-    return "jaar_format_0002_belieflink_v0_0_0"
+def jaar_format_0002_lobbylink_v0_0_0() -> str:
+    return "jaar_format_0002_lobbylink_v0_0_0"
 
 
 def jaar_format_0003_ideaunit_v0_0_0() -> str:
@@ -107,7 +107,7 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
 def get_cross_filenames() -> set[str]:
     return {
         jaar_format_0001_char_v0_0_0(),
-        jaar_format_0002_belieflink_v0_0_0(),
+        jaar_format_0002_lobbylink_v0_0_0(),
         jaar_format_0003_ideaunit_v0_0_0(),
     }
 
@@ -160,15 +160,12 @@ def create_cross_dataframe(d2_list: list[list[str]], cross_name: str) -> DataFra
 def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_worldunit)
-    print(f"{x_changeunit=}")
     category_set = {get_cross_atom_category(cross_name)}
-    print(f"{category_set=}")
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
     d2_list = []
     ordered_columns = get_column_ordered_cross_attributes(cross_name)
-    print(f"{sorted_atomunits=}")
 
     if cross_name == jaar_format_0001_char_v0_0_0():
         d2_list = [
@@ -183,10 +180,10 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
             for x_atomunit in sorted_atomunits
         ]
 
-    elif cross_name == jaar_format_0002_belieflink_v0_0_0():
+    elif cross_name == jaar_format_0002_lobbylink_v0_0_0():
         d2_list = [
             [
-                x_atomunit.get_value(belief_id_str()),
+                x_atomunit.get_value(lobby_id_str()),
                 x_atomunit.get_value(char_id_str()),
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),

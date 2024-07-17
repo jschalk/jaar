@@ -16,12 +16,12 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
     charunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "world_charunit"])
     charunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "world_charunit"])
 
-    x_list = [atom_insert(), "world_char_belieflink"]
-    char_belieflink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_char_belieflink"]
-    char_belieflink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_char_belieflink"]
-    char_belieflink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "world_char_lobbylink"]
+    char_lobbylink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "world_char_lobbylink"]
+    char_lobbylink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "world_char_lobbylink"]
+    char_lobbylink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "world_ideaunit"]
     world_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -51,10 +51,10 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
     x_list = [atom_delete(), "world_idea_reason_premiseunit"]
     world_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_beliefhold"]
-    world_idea_beliefhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_beliefhold"]
-    world_idea_beliefhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "world_idea_lobbyhold"]
+    world_idea_lobbyhold_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "world_idea_lobbyhold"]
+    world_idea_lobbyhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "world_idea_healerhold"]
     world_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -84,17 +84,17 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
             leg_list, charunit_delete_dict, x_world
         )
 
-    if char_belieflink_insert_dict != None:
-        add_world_char_belieflink_insert_to_legible_list(
-            leg_list, char_belieflink_insert_dict, x_world
+    if char_lobbylink_insert_dict != None:
+        add_world_char_lobbylink_insert_to_legible_list(
+            leg_list, char_lobbylink_insert_dict, x_world
         )
-    if char_belieflink_update_dict != None:
-        add_world_char_belieflink_update_to_legible_list(
-            leg_list, char_belieflink_update_dict, x_world
+    if char_lobbylink_update_dict != None:
+        add_world_char_lobbylink_update_to_legible_list(
+            leg_list, char_lobbylink_update_dict, x_world
         )
-    if char_belieflink_delete_dict != None:
-        add_world_char_belieflink_delete_to_legible_list(
-            leg_list, char_belieflink_delete_dict, x_world
+    if char_lobbylink_delete_dict != None:
+        add_world_char_lobbylink_delete_to_legible_list(
+            leg_list, char_lobbylink_delete_dict, x_world
         )
 
     if world_ideaunit_insert_dict != None:
@@ -149,13 +149,13 @@ def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
             leg_list, world_idea_reason_premiseunit_delete_dict, x_world
         )
 
-    if world_idea_beliefhold_insert_dict != None:
-        add_world_idea_beliefhold_insert_to_legible_list(
-            leg_list, world_idea_beliefhold_insert_dict, x_world
+    if world_idea_lobbyhold_insert_dict != None:
+        add_world_idea_lobbyhold_insert_to_legible_list(
+            leg_list, world_idea_lobbyhold_insert_dict, x_world
         )
-    if world_idea_beliefhold_delete_dict != None:
-        add_world_idea_beliefhold_delete_to_legible_list(
-            leg_list, world_idea_beliefhold_delete_dict, x_world
+    if world_idea_lobbyhold_delete_dict != None:
+        add_world_idea_lobbyhold_delete_to_legible_list(
+            leg_list, world_idea_lobbyhold_delete_dict, x_world
         )
 
     if world_idea_healerhold_insert_dict != None:
@@ -277,45 +277,45 @@ def add_world_charunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_world_char_belieflink_insert_to_legible_list(
-    legible_list: list[str], char_belieflink_insert_dict: dict, x_world: WorldUnit
+def add_world_char_lobbylink_insert_to_legible_list(
+    legible_list: list[str], char_lobbylink_insert_dict: dict, x_world: WorldUnit
 ):
-    for char_belieflink_dict in char_belieflink_insert_dict.values():
-        for char_belieflink_atom in char_belieflink_dict.values():
-            belief_id = char_belieflink_atom.get_value("belief_id")
-            char_id = char_belieflink_atom.get_value("char_id")
-            credor_weight_value = char_belieflink_atom.get_value("credor_weight")
-            debtor_weight_value = char_belieflink_atom.get_value("debtor_weight")
-            x_str = f"Belief '{belief_id}' has new member {char_id} with belief_cred={credor_weight_value} and belief_debt={debtor_weight_value}."
+    for char_lobbylink_dict in char_lobbylink_insert_dict.values():
+        for char_lobbylink_atom in char_lobbylink_dict.values():
+            lobby_id = char_lobbylink_atom.get_value("lobby_id")
+            char_id = char_lobbylink_atom.get_value("char_id")
+            credor_weight_value = char_lobbylink_atom.get_value("credor_weight")
+            debtor_weight_value = char_lobbylink_atom.get_value("debtor_weight")
+            x_str = f"Lobby '{lobby_id}' has new member {char_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_char_belieflink_update_to_legible_list(
-    legible_list: list[str], char_belieflink_update_dict: dict, x_world: WorldUnit
+def add_world_char_lobbylink_update_to_legible_list(
+    legible_list: list[str], char_lobbylink_update_dict: dict, x_world: WorldUnit
 ):
-    for char_belieflink_dict in char_belieflink_update_dict.values():
-        for char_belieflink_atom in char_belieflink_dict.values():
-            belief_id = char_belieflink_atom.get_value("belief_id")
-            char_id = char_belieflink_atom.get_value("char_id")
-            credor_weight_value = char_belieflink_atom.get_value("credor_weight")
-            debtor_weight_value = char_belieflink_atom.get_value("debtor_weight")
+    for char_lobbylink_dict in char_lobbylink_update_dict.values():
+        for char_lobbylink_atom in char_lobbylink_dict.values():
+            lobby_id = char_lobbylink_atom.get_value("lobby_id")
+            char_id = char_lobbylink_atom.get_value("char_id")
+            credor_weight_value = char_lobbylink_atom.get_value("credor_weight")
+            debtor_weight_value = char_lobbylink_atom.get_value("debtor_weight")
             if credor_weight_value != None and debtor_weight_value != None:
-                x_str = f"Belief '{belief_id}' member {char_id} has new belief_cred={credor_weight_value} and belief_debt={debtor_weight_value}."
+                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
             elif credor_weight_value != None and debtor_weight_value is None:
-                x_str = f"Belief '{belief_id}' member {char_id} has new belief_cred={credor_weight_value}."
+                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value}."
             elif credor_weight_value is None and debtor_weight_value != None:
-                x_str = f"Belief '{belief_id}' member {char_id} has new belief_debt={debtor_weight_value}."
+                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_char_belieflink_delete_to_legible_list(
-    legible_list: list[str], char_belieflink_delete_dict: dict, x_world: WorldUnit
+def add_world_char_lobbylink_delete_to_legible_list(
+    legible_list: list[str], char_lobbylink_delete_dict: dict, x_world: WorldUnit
 ):
-    for char_belieflink_dict in char_belieflink_delete_dict.values():
-        for char_belieflink_atom in char_belieflink_dict.values():
-            belief_id = char_belieflink_atom.get_value("belief_id")
-            char_id = char_belieflink_atom.get_value("char_id")
-            x_str = f"Belief '{belief_id}' no longer has member {char_id}."
+    for char_lobbylink_dict in char_lobbylink_delete_dict.values():
+        for char_lobbylink_atom in char_lobbylink_dict.values():
+            lobby_id = char_lobbylink_atom.get_value("lobby_id")
+            char_id = char_lobbylink_atom.get_value("char_id")
+            x_str = f"Lobby '{lobby_id}' no longer has member {char_id}."
             legible_list.append(x_str)
 
 
@@ -455,11 +455,11 @@ def add_world_idea_awardlink_insert_to_legible_list(
 ):
     for road_dict in idea_awardlink_insert_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            belief_id_value = idea_awardlink_atom.get_value("belief_id")
+            lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            credor_weight_value = idea_awardlink_atom.get_value("credor_weight")
-            debtor_weight_value = idea_awardlink_atom.get_value("debtor_weight")
-            x_str = f"Awardlink created for belief {belief_id_value} for idea '{road_value}' with credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
+            give_weight_value = idea_awardlink_atom.get_value("give_weight")
+            take_weight_value = idea_awardlink_atom.get_value("take_weight")
+            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with give_weight={give_weight_value} and take_weight={take_weight_value}."
             legible_list.append(x_str)
 
 
@@ -468,16 +468,16 @@ def add_world_idea_awardlink_update_to_legible_list(
 ):
     for road_dict in idea_awardlink_update_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            belief_id_value = idea_awardlink_atom.get_value("belief_id")
+            lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            credor_weight_value = idea_awardlink_atom.get_value("credor_weight")
-            debtor_weight_value = idea_awardlink_atom.get_value("debtor_weight")
-            if credor_weight_value != None and debtor_weight_value != None:
-                x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
-            elif credor_weight_value != None and debtor_weight_value is None:
-                x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value}."
-            elif credor_weight_value is None and debtor_weight_value != None:
-                x_str = f"Awardlink has been transited for belief {belief_id_value} for idea '{road_value}'. Now debtor_weight={debtor_weight_value}."
+            give_weight_value = idea_awardlink_atom.get_value("give_weight")
+            take_weight_value = idea_awardlink_atom.get_value("take_weight")
+            if give_weight_value != None and take_weight_value != None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value} and take_weight={take_weight_value}."
+            elif give_weight_value != None and take_weight_value is None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value}."
+            elif give_weight_value is None and take_weight_value != None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_weight={take_weight_value}."
             legible_list.append(x_str)
 
 
@@ -486,9 +486,9 @@ def add_world_idea_awardlink_delete_to_legible_list(
 ):
     for road_dict in idea_awardlink_delete_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            belief_id_value = idea_awardlink_atom.get_value("belief_id")
+            lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            x_str = f"Awardlink for belief {belief_id_value}, idea '{road_value}' has been deleted."
+            x_str = f"Awardlink for lobby {lobby_id_value}, idea '{road_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -618,25 +618,25 @@ def add_world_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_world_idea_beliefhold_insert_to_legible_list(
-    legible_list: list[str], idea_beliefhold_insert_dict: dict, x_world: WorldUnit
+def add_world_idea_lobbyhold_insert_to_legible_list(
+    legible_list: list[str], idea_lobbyhold_insert_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_beliefhold_insert_dict.values():
-        for idea_beliefhold_atom in road_dict.values():
-            belief_id_value = idea_beliefhold_atom.get_value("belief_id")
-            road_value = idea_beliefhold_atom.get_value("road")
-            x_str = f"beliefhold '{belief_id_value}' created for idea '{road_value}'."
+    for road_dict in idea_lobbyhold_insert_dict.values():
+        for idea_lobbyhold_atom in road_dict.values():
+            lobby_id_value = idea_lobbyhold_atom.get_value("lobby_id")
+            road_value = idea_lobbyhold_atom.get_value("road")
+            x_str = f"lobbyhold '{lobby_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_world_idea_beliefhold_delete_to_legible_list(
-    legible_list: list[str], idea_beliefhold_delete_dict: dict, x_world: WorldUnit
+def add_world_idea_lobbyhold_delete_to_legible_list(
+    legible_list: list[str], idea_lobbyhold_delete_dict: dict, x_world: WorldUnit
 ):
-    for road_dict in idea_beliefhold_delete_dict.values():
-        for idea_beliefhold_atom in road_dict.values():
-            belief_id_value = idea_beliefhold_atom.get_value("belief_id")
-            road_value = idea_beliefhold_atom.get_value("road")
-            x_str = f"beliefhold '{belief_id_value}' deleted for idea '{road_value}'."
+    for road_dict in idea_lobbyhold_delete_dict.values():
+        for idea_lobbyhold_atom in road_dict.values():
+            lobby_id_value = idea_lobbyhold_atom.get_value("lobby_id")
+            road_value = idea_lobbyhold_atom.get_value("road")
+            x_str = f"lobbyhold '{lobby_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -645,9 +645,9 @@ def add_world_idea_healerhold_insert_to_legible_list(
 ):
     for road_dict in idea_healerhold_insert_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            belief_id_value = idea_healerhold_atom.get_value("belief_id")
+            lobby_id_value = idea_healerhold_atom.get_value("lobby_id")
             road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{belief_id_value}' created for idea '{road_value}'."
+            x_str = f"Healerhold '{lobby_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -656,9 +656,9 @@ def add_world_idea_healerhold_delete_to_legible_list(
 ):
     for road_dict in idea_healerhold_delete_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            belief_id_value = idea_healerhold_atom.get_value("belief_id")
+            lobby_id_value = idea_healerhold_atom.get_value("lobby_id")
             road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{belief_id_value}' deleted for idea '{road_value}'."
+            x_str = f"Healerhold '{lobby_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 

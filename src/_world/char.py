@@ -6,11 +6,11 @@ from src._road.road import (
     is_roadnode,
 )
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
-from src._world.belieflink import (
-    BeliefID,
-    BeliefLink,
-    belieflinks_get_from_dict,
-    belieflink_shop,
+from src._world.lobby import (
+    LobbyID,
+    LobbyLink,
+    lobbylinks_get_from_dict,
+    lobbylink_shop,
 )
 from dataclasses import dataclass
 
@@ -19,7 +19,7 @@ class InvalidCharException(Exception):
     pass
 
 
-class _bit_RatioException(Exception):
+class _lobbylink_Exception(Exception):
     pass
 
 
@@ -36,26 +36,26 @@ class CharCore:
 @dataclass
 class CharUnit(CharCore):
     """This represents the relationship from the WorldUnit._owner_id to the CharUnit.char_id
-    CharUnit.credor_weight represents how much credor_weight the _owner_id gives the char_id
-    CharUnit.debtor_weight represents how much debtor_weight the _owner_id gives the char_id
+    CharUnit.credor_weight represents how much credor_weight the _owner_id projects to the char_id
+    CharUnit.debtor_weight represents how much debtor_weight the _owner_id projects to the char_id
     """
 
     credor_weight: int = None
     debtor_weight: int = None
     # special attribute: static in world json, in memory it is deleted after loading and recalculated during saving.
-    _belieflinks: dict[CharID, BeliefLink] = None
+    _lobbylinks: dict[CharID, LobbyLink] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
     _irrational_debtor_weight: int = None  # set by listening process
     _inallocable_debtor_weight: int = None  # set by listening process
     # set by World.calc_world_metrics()
-    _world_cred: float = None
-    _world_debt: float = None
-    _world_agenda_cred: float = None
-    _world_agenda_debt: float = None
-    _world_agenda_ratio_cred: float = None
-    _world_agenda_ratio_debt: float = None
+    _bud_give: float = None
+    _bud_take: float = None
+    _bud_agenda_give: float = None
+    _bud_agenda_take: float = None
+    _bud_agenda_ratio_give: float = None
+    _bud_agenda_ratio_take: float = None
 
     def set_bit(self, x_bit: float):
         self._bit = x_bit
@@ -82,13 +82,13 @@ class CharUnit(CharCore):
     def get_debtor_weight(self):
         return get_1_if_None(self.debtor_weight)
 
-    def reset_world_cred_debt(self):
-        self._world_cred = 0
-        self._world_debt = 0
-        self._world_agenda_cred = 0
-        self._world_agenda_debt = 0
-        self._world_agenda_ratio_cred = 0
-        self._world_agenda_ratio_debt = 0
+    def reset_bud_give_take(self):
+        self._bud_give = 0
+        self._bud_take = 0
+        self._bud_agenda_give = 0
+        self._bud_agenda_take = 0
+        self._bud_agenda_ratio_give = 0
+        self._bud_agenda_ratio_take = 0
 
     def add_irrational_debtor_weight(self, x_irrational_debtor_weight: float):
         self._irrational_debtor_weight += x_irrational_debtor_weight
@@ -100,106 +100,106 @@ class CharUnit(CharCore):
         self._irrational_debtor_weight = 0
         self._inallocable_debtor_weight = 0
 
-    def add_world_cred_debt(
+    def add_bud_give_take(
         self,
-        world_cred: float,
-        world_debt,
+        bud_give: float,
+        bud_take,
         world_agenda_cred: float,
         world_agenda_debt,
     ):
-        self._world_cred += world_cred
-        self._world_debt += world_debt
-        self._world_agenda_cred += world_agenda_cred
-        self._world_agenda_debt += world_agenda_debt
+        self._bud_give += bud_give
+        self._bud_take += bud_take
+        self._bud_agenda_give += world_agenda_cred
+        self._bud_agenda_take += world_agenda_debt
 
-    def set_world_agenda_ratio_cred_debt(
+    def set_bud_agenda_ratio_give_take(
         self,
-        world_agenda_ratio_cred_sum: float,
-        world_agenda_ratio_debt_sum: float,
+        bud_agenda_ratio_give_sum: float,
+        bud_agenda_ratio_take_sum: float,
         world_charunit_total_credor_weight: float,
         world_charunit_total_debtor_weight: float,
     ):
-        if world_agenda_ratio_cred_sum == 0:
-            self._world_agenda_ratio_cred = (
+        if bud_agenda_ratio_give_sum == 0:
+            self._bud_agenda_ratio_give = (
                 self.get_credor_weight() / world_charunit_total_credor_weight
             )
         else:
-            self._world_agenda_ratio_cred = (
-                self._world_agenda_cred / world_agenda_ratio_cred_sum
+            self._bud_agenda_ratio_give = (
+                self._bud_agenda_give / bud_agenda_ratio_give_sum
             )
 
-        if world_agenda_ratio_debt_sum == 0:
-            self._world_agenda_ratio_debt = (
+        if bud_agenda_ratio_take_sum == 0:
+            self._bud_agenda_ratio_take = (
                 self.get_debtor_weight() / world_charunit_total_debtor_weight
             )
         else:
-            self._world_agenda_ratio_debt = (
-                self._world_agenda_debt / world_agenda_ratio_debt_sum
+            self._bud_agenda_ratio_take = (
+                self._bud_agenda_take / bud_agenda_ratio_take_sum
             )
 
-    def add_belieflink(
+    def add_lobbylink(
         self,
-        belief_id: BeliefID,
+        lobby_id: LobbyID,
         credor_weight: float = None,
         debtor_weight: float = None,
     ):
-        x_belieflink = belieflink_shop(belief_id, credor_weight, debtor_weight)
-        self.set_belieflink(x_belieflink)
+        x_lobbylink = lobbylink_shop(lobby_id, credor_weight, debtor_weight)
+        self.set_lobbylink(x_lobbylink)
 
-    def set_belieflink(self, x_belieflink: BeliefLink):
-        x_belief_id = x_belieflink.belief_id
-        belief_id_is_char_id = is_roadnode(x_belief_id, self._road_delimiter)
-        if belief_id_is_char_id and self.char_id != x_belief_id:
-            raise Exception(
-                f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_belief_id}'."
+    def set_lobbylink(self, x_lobbylink: LobbyLink):
+        x_lobby_id = x_lobbylink.lobby_id
+        lobby_id_is_char_id = is_roadnode(x_lobby_id, self._road_delimiter)
+        if lobby_id_is_char_id and self.char_id != x_lobby_id:
+            raise _lobbylink_Exception(
+                f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_lobby_id}'."
             )
 
-        x_belieflink._char_id = self.char_id
-        self._belieflinks[x_belieflink.belief_id] = x_belieflink
+        x_lobbylink._char_id = self.char_id
+        self._lobbylinks[x_lobbylink.lobby_id] = x_lobbylink
 
-    def get_belieflink(self, belief_id: BeliefID) -> BeliefLink:
-        return self._belieflinks.get(belief_id)
+    def get_lobbylink(self, lobby_id: LobbyID) -> LobbyLink:
+        return self._lobbylinks.get(lobby_id)
 
-    def belieflink_exists(self, belief_id: BeliefID) -> bool:
-        return self._belieflinks.get(belief_id) != None
+    def lobbylink_exists(self, lobby_id: LobbyID) -> bool:
+        return self._lobbylinks.get(lobby_id) != None
 
-    def delete_belieflink(self, belief_id: BeliefID):
-        return self._belieflinks.pop(belief_id)
+    def delete_lobbylink(self, lobby_id: LobbyID):
+        return self._lobbylinks.pop(lobby_id)
 
-    def belieflinks_exist(self):
-        return len(self._belieflinks) != 0
+    def lobbylinks_exist(self):
+        return len(self._lobbylinks) != 0
 
-    def clear_belieflinks(self):
-        self._belieflinks = {}
+    def clear_lobbylinks(self):
+        self._lobbylinks = {}
 
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_belieflink.belief_id: x_belieflink.credor_weight
-            for x_belieflink in self._belieflinks.values()
+            x_lobbylink.lobby_id: x_lobbylink.credor_weight
+            for x_lobbylink in self._lobbylinks.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
-        for x_belief_id, belief_credor_pool in allot_dict.items():
-            self.get_belieflink(x_belief_id)._credor_pool = belief_credor_pool
+        for x_lobby_id, lobby_credor_pool in allot_dict.items():
+            self.get_lobbylink(x_lobby_id)._credor_pool = lobby_credor_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_belieflink.belief_id: x_belieflink.debtor_weight
-            for x_belieflink in self._belieflinks.values()
+            x_lobbylink.lobby_id: x_lobbylink.debtor_weight
+            for x_lobbylink in self._lobbylinks.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
-        for x_belief_id, belief_debtor_pool in allot_dict.items():
-            self.get_belieflink(x_belief_id)._debtor_pool = belief_debtor_pool
+        for x_lobby_id, lobby_debtor_pool in allot_dict.items():
+            self.get_lobbylink(x_lobby_id)._debtor_pool = lobby_debtor_pool
 
-    def get_belieflinks_dict(self) -> dict:
+    def get_lobbylinks_dict(self) -> dict:
         return {
-            x_belieflink.belief_id: {
-                "belief_id": x_belieflink.belief_id,
-                "credor_weight": x_belieflink.credor_weight,
-                "debtor_weight": x_belieflink.debtor_weight,
+            x_lobbylink.lobby_id: {
+                "lobby_id": x_lobbylink.lobby_id,
+                "credor_weight": x_lobbylink.credor_weight,
+                "debtor_weight": x_lobbylink.debtor_weight,
             }
-            for x_belieflink in self._belieflinks.values()
+            for x_lobbylink in self._lobbylinks.values()
         }
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
@@ -207,7 +207,7 @@ class CharUnit(CharCore):
             "char_id": self.char_id,
             "credor_weight": self.credor_weight,
             "debtor_weight": self.debtor_weight,
-            "_belieflinks": self.get_belieflinks_dict(),
+            "_lobbylinks": self.get_lobbylinks_dict(),
         }
         if self._irrational_debtor_weight not in [None, 0]:
             x_dict["_irrational_debtor_weight"] = self._irrational_debtor_weight
@@ -219,12 +219,12 @@ class CharUnit(CharCore):
         return x_dict
 
     def _all_attrs_necessary_in_dict(self, x_dict):
-        x_dict["_world_cred"] = self._world_cred
-        x_dict["_world_debt"] = self._world_debt
-        x_dict["_world_agenda_cred"] = self._world_agenda_cred
-        x_dict["_world_agenda_debt"] = self._world_agenda_debt
-        x_dict["_world_agenda_ratio_cred"] = self._world_agenda_ratio_cred
-        x_dict["_world_agenda_ratio_debt"] = self._world_agenda_ratio_debt
+        x_dict["_bud_give"] = self._bud_give
+        x_dict["_bud_take"] = self._bud_take
+        x_dict["_bud_agenda_give"] = self._bud_agenda_give
+        x_dict["_bud_agenda_take"] = self._bud_agenda_take
+        x_dict["_bud_agenda_ratio_give"] = self._bud_agenda_ratio_give
+        x_dict["_bud_agenda_ratio_take"] = self._bud_agenda_ratio_take
 
 
 # class CharUnitsshop:
@@ -247,11 +247,11 @@ def charunit_get_from_dict(charunit_dict: dict, _road_delimiter: str) -> CharUni
     x_char_id = charunit_dict["char_id"]
     x_credor_weight = charunit_dict["credor_weight"]
     x_debtor_weight = charunit_dict["debtor_weight"]
-    x_belieflinks_dict = charunit_dict["_belieflinks"]
+    x_lobbylinks_dict = charunit_dict["_lobbylinks"]
     x_charunit = charunit_shop(
         x_char_id, x_credor_weight, x_debtor_weight, _road_delimiter
     )
-    x_charunit._belieflinks = belieflinks_get_from_dict(x_belieflinks_dict, x_char_id)
+    x_charunit._lobbylinks = lobbylinks_get_from_dict(x_lobbylinks_dict, x_char_id)
     _irrational_debtor_weight = charunit_dict.get("_irrational_debtor_weight", 0)
     _inallocable_debtor_weight = charunit_dict.get("_inallocable_debtor_weight", 0)
     x_charunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
@@ -270,81 +270,19 @@ def charunit_shop(
     x_charunit = CharUnit(
         credor_weight=get_1_if_None(credor_weight),
         debtor_weight=get_1_if_None(debtor_weight),
-        _belieflinks={},
+        _lobbylinks={},
         _credor_pool=0,
         _debtor_pool=0,
         _irrational_debtor_weight=0,
         _inallocable_debtor_weight=0,
-        _world_cred=0,
-        _world_debt=0,
-        _world_agenda_cred=0,
-        _world_agenda_debt=0,
-        _world_agenda_ratio_cred=0,
-        _world_agenda_ratio_debt=0,
+        _bud_give=0,
+        _bud_take=0,
+        _bud_agenda_give=0,
+        _bud_agenda_take=0,
+        _bud_agenda_ratio_give=0,
+        _bud_agenda_ratio_take=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _bit=default_bit_if_none(_bit),
     )
     x_charunit.set_char_id(x_char_id=char_id)
     return x_charunit
-
-
-@dataclass
-class CharLink(CharCore):
-    credor_weight: float = 1.0
-    debtor_weight: float = 1.0
-    _world_cred: float = None
-    _world_debt: float = None
-    _world_agenda_cred: float = None
-    _world_agenda_debt: float = None
-
-    def set_world_cred_debt(
-        self,
-        charlinks_credor_weight_sum: float,
-        charlinks_debtor_weight_sum: float,
-        belief_world_cred: float,
-        belief_world_debt: float,
-        belief_world_agenda_cred: float,
-        belief_world_agenda_debt: float,
-    ):
-        belief_world_cred = get_1_if_None(belief_world_cred)
-        belief_world_debt = get_1_if_None(belief_world_debt)
-        credor_ratio = self.credor_weight / charlinks_credor_weight_sum
-        debtor_ratio = self.debtor_weight / charlinks_debtor_weight_sum
-
-        self._world_cred = belief_world_cred * credor_ratio
-        self._world_debt = belief_world_debt * debtor_ratio
-        self._world_agenda_cred = belief_world_agenda_cred * credor_ratio
-        self._world_agenda_debt = belief_world_agenda_debt * debtor_ratio
-
-    def reset_world_cred_debt(self):
-        self._world_cred = 0
-        self._world_debt = 0
-        self._world_agenda_cred = 0
-        self._world_agenda_debt = 0
-
-
-def charlink_shop(
-    char_id: CharID,
-    credor_weight: float = None,
-    debtor_weight: float = None,
-    _world_cred: float = None,
-    _world_debt: float = None,
-    _world_agenda_cred: float = None,
-    _world_agenda_debt: float = None,
-) -> CharLink:
-    return CharLink(
-        char_id=char_id,
-        credor_weight=get_1_if_None(credor_weight),
-        debtor_weight=get_1_if_None(debtor_weight),
-        _world_cred=_world_cred,
-        _world_debt=_world_debt,
-        _world_agenda_cred=_world_agenda_cred,
-        _world_agenda_debt=_world_agenda_debt,
-    )
-
-
-@dataclass
-class CharUnitExternalMetrics:
-    internal_char_id: CharID = None
-    credor_operational: bool = None
-    debtor_operational: bool = None

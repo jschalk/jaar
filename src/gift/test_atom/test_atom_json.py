@@ -8,7 +8,7 @@ from src._instrument.python import x_is_json
 
 
 def test_AtomUnit_get_dict_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sports_text = "sports"
     sports_road = create_road("a", sports_text)
     ball_text = "basketball"
@@ -41,7 +41,7 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
 
 
 def test_AtomUnit_get_json_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sports_text = "sports"
     sports_road = create_road("a", sports_text)
     ball_text = "basketball"
@@ -69,7 +69,7 @@ def test_AtomUnit_get_json_ReturnsCorrectObj():
 
 
 def test_atomunit_get_from_json_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sports_text = "sports"
     sports_road = create_road("a", sports_text)
     ball_text = "basketball"

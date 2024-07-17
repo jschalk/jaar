@@ -8,24 +8,24 @@ from src.gift.examples.example_changes import get_changeunit_sue_example
 
 
 def test_get_gifts_folder_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert get_gifts_folder() == "gifts"
 
 
 def test_init_gift_id_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert init_gift_id() == 0
 
 
 def test_get_init_gift_id_if_None_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert get_init_gift_id_if_None() == init_gift_id()
     assert get_init_gift_id_if_None(None) == init_gift_id()
     assert get_init_gift_id_if_None(1) == 1
 
 
 def test_GiftUnit_exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_giftunit = GiftUnit()
 
     # THEN
@@ -39,8 +39,8 @@ def test_GiftUnit_exists():
     assert x_giftunit._atoms_dir is None
 
 
-def test_giftunit_shop_ReturnsCorrectObjGivenEmptyArgs():
-    # GIVEN
+def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
+    # ESTABLISH
     bob_text = "Bob"
 
     # WHEN
@@ -57,8 +57,8 @@ def test_giftunit_shop_ReturnsCorrectObjGivenEmptyArgs():
     assert farm_giftunit._atoms_dir is None
 
 
-def test_giftunit_shop_ReturnsCorrectObjGivenNonEmptyArgs():
-    # GIVEN
+def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
+    # ESTABLISH
     bob_text = "Bob"
     bob_gift_id = 13
     sue_text = "Sue"
@@ -91,8 +91,8 @@ def test_giftunit_shop_ReturnsCorrectObjGivenNonEmptyArgs():
     assert farm_giftunit._atoms_dir == bob_atoms_dir
 
 
-def test_giftunit_shop_ReturnsCorrectObjGivenSomeArgs_v1():
-    # GIVEN
+def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
+    # ESTABLISH
     bob_text = "Bob"
     yao_text = "Yao"
 
@@ -105,7 +105,7 @@ def test_giftunit_shop_ReturnsCorrectObjGivenSomeArgs_v1():
 
 
 def test_GiftUnit_set_face_SetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     farm_giftunit = giftunit_shop(owner_id=bob_text)
     sue_text = "Sue"
@@ -120,7 +120,7 @@ def test_GiftUnit_set_face_SetsAttribute():
 
 
 def test_GiftUnit_del_face_SetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     farm_giftunit = giftunit_shop(owner_id=bob_text)
     yao_text = "Yao"
@@ -136,7 +136,7 @@ def test_GiftUnit_del_face_SetsAttribute():
 
 
 def test_GiftUnit_set_changeunit_SetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     farm_giftunit = giftunit_shop(owner_id=bob_text)
     assert farm_giftunit._changeunit == changeunit_shop()
@@ -151,7 +151,7 @@ def test_GiftUnit_set_changeunit_SetsAttribute():
 
 
 def test_GiftUnit_set_change_start_SetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     farm_giftunit = giftunit_shop(bob_text)
     assert farm_giftunit._change_start == 0
@@ -165,7 +165,7 @@ def test_GiftUnit_set_change_start_SetsAttribute():
 
 
 def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     farm_changeunit = changeunit_shop()
     farm_giftunit = giftunit_shop(owner_id=bob_text)
@@ -186,7 +186,7 @@ def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
 
 
 def test_GiftUnit_del_changeunit_SetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     farm_changeunit = changeunit_shop()
     farm_changeunit.set_atomunit(get_atom_example_ideaunit_sports())
@@ -202,7 +202,7 @@ def test_GiftUnit_del_changeunit_SetsAttribute():
 
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     sue_text = "Sue"
     music_text = "music"
@@ -232,7 +232,7 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
 
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithChangePopulated():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     sue_changeunit = get_changeunit_sue_example()
     farm_giftunit = giftunit_shop(bob_text, _changeunit=sue_changeunit)
@@ -254,7 +254,7 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithChangePopulated():
 
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
@@ -281,7 +281,7 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
 
 
 def test_GiftUnit_get_change_atom_numbers_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     yao_text = "Yao"
     sue_changeunit = get_changeunit_sue_example()
@@ -299,7 +299,7 @@ def test_GiftUnit_get_change_atom_numbers_ReturnsCorrectObj():
 
 
 def test_GiftUnit_get_changemetric_dict_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     yao_text = "Yao"
     sue_changeunit = get_changeunit_sue_example()
@@ -332,7 +332,7 @@ def test_GiftUnit_get_changemetric_dict_ReturnsCorrectObj():
 
 
 def test_GiftUnit_get_changemetric_json_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     sue_text = "Sue"
     yao_text = "Yao"

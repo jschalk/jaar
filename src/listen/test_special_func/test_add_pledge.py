@@ -8,7 +8,7 @@ from src.listen.examples.listen_env import (
 
 
 def test_add_voice_pledge_Addspledgegift(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()
@@ -30,8 +30,8 @@ def test_add_voice_pledge_Addspledgegift(env_dir_setup_cleanup):
     assert new_sue_voice.idea_exists(clean_road)
 
 
-def test_add_voice_pledge_SetsvoiceWorldpledgeIdea_beliefhold(env_dir_setup_cleanup):
-    # GIVEN
+def test_add_voice_pledge_SetsvoiceWorldpledgeIdea_lobbyhold(env_dir_setup_cleanup):
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()
@@ -42,18 +42,18 @@ def test_add_voice_pledge_SetsvoiceWorldpledgeIdea_beliefhold(env_dir_setup_clea
 
     # WHEN
     bob_text = "Bob"
-    add_voice_pledge(sue_hubunit, clean_road, x_beliefhold=bob_text)
+    add_voice_pledge(sue_hubunit, clean_road, x_lobbyhold=bob_text)
 
     # THEN
     new_sue_voice = sue_hubunit.get_voice_world()
     assert new_sue_voice.idea_exists(clean_road)
     clean_idea = new_sue_voice.get_idea_obj(clean_road)
-    print(f"{clean_idea._doerunit._beliefholds=}")
-    assert clean_idea._doerunit.beliefhold_exists(bob_text)
+    print(f"{clean_idea._doerunit._lobbyholds=}")
+    assert clean_idea._doerunit.lobbyhold_exists(bob_text)
 
 
 def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()
@@ -79,7 +79,7 @@ def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
 
 
 def test_add_voice_fact_CanAdd_factunit(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()

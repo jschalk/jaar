@@ -6,7 +6,7 @@ from src.money.examples.example_credorledgers import example_yao_hubunit
 
 
 def test_get_credorledger_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
@@ -29,7 +29,7 @@ def test_get_credorledger_ReturnsCorrectObj():
 
 
 def test_get_credorledger_ReturnsCorrectObjWithNoEmpty_credor_weight():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
@@ -52,7 +52,7 @@ def test_get_credorledger_ReturnsCorrectObjWithNoEmpty_credor_weight():
 
 
 def test_get_debtorledger_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
@@ -75,7 +75,7 @@ def test_get_debtorledger_ReturnsCorrectObj():
 
 
 def test_get_debtorledger_ReturnsCorrectObjWithNoEmpty_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
@@ -98,7 +98,7 @@ def test_get_debtorledger_ReturnsCorrectObjWithNoEmpty_debtor_weight():
 
 
 def test_RiverRun_set_char_tax_due_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_hubunit = hubunit_shop(None, None, bob_text)
     bob_riverrun = riverrun_shop(bob_hubunit)
@@ -114,7 +114,7 @@ def test_RiverRun_set_char_tax_due_SetsAttr():
 
 
 def test_RiverRun_tax_dues_unpaid_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     x_riverrun = riverrun_shop(yao_hubunit)
     assert x_riverrun.tax_dues_unpaid() == False
@@ -146,7 +146,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
 
 
 def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -178,7 +178,7 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
 
 
 def test_RiverRun_char_has_tax_due_ReturnsCorrectBool():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -213,7 +213,7 @@ def test_RiverRun_char_has_tax_due_ReturnsCorrectBool():
 
 
 def test_RiverRun_delete_tax_due_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 88
     bob_penny = 11
@@ -233,7 +233,7 @@ def test_RiverRun_delete_tax_due_SetsAttr():
 
 
 def test_RiverRun_get_char_tax_due_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -268,7 +268,7 @@ def test_RiverRun_get_char_tax_due_ReturnsCorrectObj():
 
 
 def test_RiverRun_levy_tax_due_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1

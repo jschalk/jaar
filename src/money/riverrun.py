@@ -188,7 +188,6 @@ class RiverRun:
             x_cyclelegder, tax_got_curr = self.levy_tax_dues(x_cyclelegder)
 
             self._set_tax_got_attrs(tax_got_curr)
-            print(f"{self._tax_got_curr=} {self._tax_got_prev=}")
             self._cycle_payees_prev = self._cycle_payees_curr
             self._cycle_payees_curr = set(x_cyclelegder.keys())
             self._cycle_count += 1

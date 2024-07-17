@@ -26,7 +26,7 @@ from src.listen.examples.example_listen import (
 
 
 def test_listen_to_facts_duty_job_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -57,7 +57,7 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
 def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     yao_credor_weight = 47
@@ -72,7 +72,7 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     zia_job = get_example_zia_speaker()
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
-    clean_ideaunit._doerunit.set_beliefhold(yao_text)
+    clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     sue_texas_hubunit.save_job_world(zia_job)
 
     new_yao_job = create_listen_basis(yao_duty)
@@ -91,7 +91,7 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
 def test_listen_to_facts_duty_job_GetsFactsFromSrcWorldSelfNotSpeakerSelf(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     # yao_duty has fact eat_road = full
     # yao_job has fact eat_road = hungry
     # new_yao_job picks yao_duty fact eat_road = full
@@ -123,7 +123,7 @@ def test_listen_to_facts_duty_job_GetsFactsFromSrcWorldSelfNotSpeakerSelf(
 def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v1(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_duty = get_example_yao_speaker()
     yao_duty.del_fact(eat_road())
     assert yao_duty.get_fact(eat_road()) is None
@@ -160,7 +160,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
 def test_listen_to_facts_duty_job_SetsPrioritizesSelfFactsOverSpeakers(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_duty = get_example_yao_speaker()
     yao_duty.set_fact(eat_road(), full_road())
     assert yao_duty.get_fact(eat_road()).pick == full_road()
@@ -189,7 +189,7 @@ def test_listen_to_facts_duty_job_SetsPrioritizesSelfFactsOverSpeakers(
 def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v2(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     zia_job = get_example_zia_speaker()
     zia_text = zia_job._owner_id
     zia_job.set_fact(eat_road(), eat_road())
@@ -247,7 +247,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
 
 
 # def test_listen_to_facts_duty_job_SetsFact(env_dir_setup_cleanup):
-#     # GIVEN
+#     # ESTABLISH
 #     yao_text = "Yao"
 #     sue_text = "Sue"
 #     sue_speaker = worldunit_shop(yao_text)
@@ -271,7 +271,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
 #         sweep_road, reason_base=status_road, reason_premise=dirty_road
 #     )
 #     sweep_idea = sue_speaker.get_idea_obj(sweep_road)
-#     sweep_idea._doerunit.set_beliefhold(yao_text)
+#     sweep_idea._doerunit.set_lobbyhold(yao_text)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_job_world(sue_text, sue_speaker.get_json(), True)
@@ -297,7 +297,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirWorld_v
 
 
 # def test_listen_to_facts_duty_job_DoesNotOverrideFact():
-#     # GIVEN
+#     # ESTABLISH
 #     yao_text = "Yao"
 #     yao_duty = worldunit_shop(yao_text)
 #     yao_duty.add_charunit(yao_text)

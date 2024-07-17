@@ -17,7 +17,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
     env_dir_setup_cleanup,
 ):
 
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
@@ -47,7 +47,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
 def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
@@ -72,7 +72,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
 
 
 def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
@@ -105,7 +105,7 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
@@ -145,7 +145,7 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
 def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
@@ -165,14 +165,14 @@ def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
 def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
     env_dir_setup_cleanup,
 ):
-    # GIVEN create econ
+    # ESTABLISH create econ
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, get_texas_road())
     delete_dir(sue_hubunit.treasury_db_path())  # clear out any treasury.db file
     sue_hubunit.create_treasury_db_file()
     assert os_path_exists(sue_hubunit.treasury_db_path())
 
-    # GIVEN
+    # ESTABLISH
     x_file_text = "Texas Dallas ElPaso"
     db_file = treasury_file_name()
     save_file(
@@ -191,7 +191,7 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
 
 
 def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
@@ -211,7 +211,7 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
 # def test_HubUnit_treasury_db_file_conn_CreatesTreasuryDBIfDoesNotExist(
 #     env_dir_setup_cleanup,
 # ):
-#     # GIVEN create
+#     # ESTABLISH create
 #     sue_text = "Sue"
 #     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, get_texas_road())
 
@@ -230,7 +230,7 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_treasury_db_file_conn_RaisesErrorIfMissing_econ_road(
     env_dir_setup_cleanup,
 ):
-    # GIVEN create
+    # ESTABLISH create
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
 
@@ -244,7 +244,7 @@ def test_HubUnit_treasury_db_file_conn_RaisesErrorIfMissing_econ_road(
 
 
 def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())

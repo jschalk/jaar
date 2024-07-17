@@ -54,7 +54,7 @@ VALUES (
 
 
 def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
-    # GIVEN
+    # ESTABLISH
     sports_text = "sports"
     sports_road = create_road("a", sports_text)
     ball_text = "basketball"
@@ -91,7 +91,7 @@ VALUES (
 
 
 def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
-    # GIVEN
+    # ESTABLISH
     sports_text = "sports"
     sports_road = create_road("a", sports_text)
     ball_text = "basketball"

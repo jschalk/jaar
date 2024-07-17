@@ -6,12 +6,10 @@ def get_world_with_4_levels() -> WorldUnit:
     sue_world = worldunit_shop(_owner_id="Sue", _weight=10)
 
     casa = "casa"
-    idea_kid_casa = ideaunit_shop(casa, _weight=30, pledge=True)
-    sue_world.add_l1_idea(idea_kid_casa)
+    sue_world.add_l1_idea(ideaunit_shop(casa, _weight=30, pledge=True))
 
-    cat = "feed cat"
-    idea_kid_feedcat = ideaunit_shop(cat, _weight=30, pledge=True)
-    sue_world.add_l1_idea(idea_kid_feedcat)
+    cat = "cat have dinner"
+    sue_world.add_l1_idea(ideaunit_shop(cat, _weight=30, pledge=True))
 
     week_text = "weekdays"
     week_road = sue_world.make_l1_road(week_text)
@@ -88,9 +86,8 @@ def get_bud_explanation_world() -> WorldUnit:
     sue_world.add_idea(ideaunit_shop(sweep_text, _weight=30, pledge=True), clean_road)
     sue_world.add_idea(ideaunit_shop(dish_text, _weight=30, pledge=True), clean_road)
 
-    feed_text = "feed cat"
-    idea_kid_feedcat = ideaunit_shop(feed_text, _weight=30, pledge=True)
-    sue_world.add_l1_idea(idea_kid_feedcat)
+    cat_text = "cat have dinner"
+    sue_world.add_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
 
     # week_text = "weekdays"
     # week_road = sue_world.make_l1_road(week_text)

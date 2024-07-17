@@ -2,7 +2,7 @@ from src._world.tree_metrics import TreeMetrics, treemetrics_shop
 
 
 def test_TreeMetrics_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_tree_metrics = TreeMetrics()
 
     # THEN
@@ -17,7 +17,7 @@ def test_TreeMetrics_Exists():
 
 
 def test_treemetrics_shop_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_tree_metrics = treemetrics_shop()
 
     # THEN
@@ -35,5 +35,5 @@ def test_treemetrics_shop_ReturnsCorrectObj():
     # def evaluate_pledge(self, pledge: bool, idea_road: RoadUnit):
     # def evaluate_level(self, level):
     # def evaluate_reasonunits(self, reasons: dict[RoadUnit, ReasonUnit]):
-    # def evaluate_awardlinks(self, awardlinks: dict[BeliefID, AwardLink]):
+    # def evaluate_awardlinks(self, awardlinks: dict[LobbyID, AwardLink]):
     # def evaluate_uid_max(self, uid):

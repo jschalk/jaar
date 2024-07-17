@@ -15,7 +15,7 @@ from os.path import exists as os_path_exists
 
 
 def test_HubUnit_atom_file_name_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     one_int = 1
@@ -28,7 +28,7 @@ def test_HubUnit_atom_file_name_ReturnsCorrectObj():
 
 
 def test_HubUnit_atom_file_path_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     one_int = 1
@@ -42,7 +42,7 @@ def test_HubUnit_atom_file_path_ReturnsCorrectObj():
 
 
 def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     one_int = 1
@@ -58,7 +58,7 @@ def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     five_int = 5
@@ -74,7 +74,7 @@ def test_HubUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 
 def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     ten_int = 10
@@ -89,7 +89,7 @@ def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     ten_int = 10
@@ -103,7 +103,7 @@ def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanu
 def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObjWhenDirIsEmpty(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
 
@@ -112,7 +112,7 @@ def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObjWhenDirIsEmpty(
 
 
 def test_HubUnit_get_next_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     # WHEN / THEN
@@ -127,7 +127,7 @@ def test_HubUnit_get_next_atom_file_number_ReturnsCorrectObj(env_dir_setup_clean
 
 
 def test_HubUnit_save_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
     ten_int = 10
@@ -151,7 +151,7 @@ def test_HubUnit_save_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_get_world_from_atom_files_ReturnsFileWithZeroAtoms(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
 
@@ -163,14 +163,14 @@ def test_HubUnit_get_world_from_atom_files_ReturnsFileWithZeroAtoms(
     assert yao_world._real_id == yao_hubunit.real_id
     assert yao_world._road_delimiter == yao_hubunit.road_delimiter
     assert yao_world._bud_pool == yao_hubunit.bud_pool
-    assert yao_world._coin == yao_hubunit.coin
+    assert yao_world._bud_coin == yao_hubunit.bud_coin
     assert yao_world._bit == yao_hubunit.bit
 
 
 def test_HubUnit_get_world_from_atom_files_ReturnsCorrectFile_SimpleIdea(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
 
@@ -194,7 +194,7 @@ def test_HubUnit_get_world_from_atom_files_ReturnsCorrectFile_SimpleIdea(
 def test_HubUnit_get_world_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
 

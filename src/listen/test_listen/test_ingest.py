@@ -25,7 +25,7 @@ def test_allocate_irrational_debtor_weight_CorrectlySetsWorldAttr():
 
 
 def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_speaker = worldunit_shop(yao_text)
     yao_speaker.add_charunit(yao_text)
@@ -57,7 +57,7 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v1():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_worldunit = worldunit_shop(zia_text)
     clean_text = "clean"
@@ -82,7 +82,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v2():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_worldunit = worldunit_shop(zia_text)
     clean_text = "clean"
@@ -113,7 +113,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v3():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_worldunit = worldunit_shop(zia_text)
     clean_text = "clean"
@@ -142,7 +142,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v4():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_worldunit = worldunit_shop(zia_text)
     clean_text = "clean"

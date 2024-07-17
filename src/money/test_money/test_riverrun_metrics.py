@@ -3,7 +3,7 @@ from src.money.riverrun import riverrun_shop
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario01():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_credor_weight = 500
@@ -40,7 +40,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario02():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_credor_weight = 500
@@ -84,7 +84,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario03():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_credor_weight = 500
@@ -133,7 +133,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario04():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_yao_credor_weight = 500
@@ -184,7 +184,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario05():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_credor_weight = 500
@@ -215,7 +215,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
 
 
 def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_credor_weight = 500
@@ -236,7 +236,7 @@ def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
 
 
 def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_riverrun = riverrun_shop(example_yao_hubunit())
     yao_text = "Yao"
     bob_text = "Bob"

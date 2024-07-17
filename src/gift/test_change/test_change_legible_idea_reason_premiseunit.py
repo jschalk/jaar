@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithOutNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reason_premiseunit"
     road_text = "road"
@@ -34,7 +34,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithOutNu
 
 
 def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reason_premiseunit"
     road_text = "road"
@@ -72,7 +72,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumer
 
 
 def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithOutNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reason_premiseunit"
     road_text = "road"
@@ -101,7 +101,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithOutNu
 
 
 def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reason_premiseunit"
     road_text = "road"
@@ -139,7 +139,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumer
 
 
 def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_DELETE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reason_premiseunit"
     road_text = "road"

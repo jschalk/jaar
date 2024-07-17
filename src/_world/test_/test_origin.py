@@ -2,7 +2,7 @@ from src._world.origin import OriginHold, originhold_shop, OriginUnit, originuni
 
 
 def test_OriginHold_exists():
-    # GIVEN
+    # ESTABLISH
     roy_text = "Roy"
     roy_weight = 4
 
@@ -15,7 +15,7 @@ def test_OriginHold_exists():
 
 
 def test_originhold_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     roy_text = "Roy"
     roy_weight = 4
 
@@ -28,7 +28,7 @@ def test_originhold_shop_ReturnsCorrectObj():
 
 
 def test_originhold_shop_WeightIsNot_Reason():
-    # GIVEN
+    # ESTABLISH
     roy_text = "Roy"
 
     # WHEN
@@ -40,7 +40,7 @@ def test_originhold_shop_WeightIsNot_Reason():
 
 
 def test_OriginHold_get_dict_ReturnsDictWithNecessaryDataForJSON():
-    # GIVEN
+    # ESTABLISH
     roy_text = "Roy"
     roy_originhold = originhold_shop(char_id=roy_text)
 
@@ -54,7 +54,7 @@ def test_OriginHold_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
 
 def test_OriginUnit_exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     originunit_x = OriginUnit()
 
     # THEN
@@ -63,7 +63,7 @@ def test_OriginUnit_exists():
 
 
 def test_originunit_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     originunit_x = originunit_shop()
 
     # THEN
@@ -71,7 +71,7 @@ def test_originunit_ReturnsCorrectObj():
 
 
 def test_originunit_set_originhold_CorrectlySetsOriginHold():
-    # GIVEN
+    # ESTABLISH
     originunit_x = originunit_shop()
 
     # WHEN
@@ -86,7 +86,7 @@ def test_originunit_set_originhold_CorrectlySetsOriginHold():
 
 
 def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
-    # GIVEN
+    # ESTABLISH
     originunit_x = originunit_shop()
     yao_text = "Yao"
     yao_weight = 3
@@ -102,7 +102,7 @@ def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
 
 
 def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
-    # GIVEN
+    # ESTABLISH
     roy_text = "Roy"
     roy_originhold = originhold_shop(char_id=roy_text)
     roy_ol_dict = roy_originhold.get_dict()

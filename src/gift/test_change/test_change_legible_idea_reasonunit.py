@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_With_base_idea_active_requisite():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reasonunit"
     road_text = "road"
@@ -35,7 +35,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_With_base_idea_ac
 
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_Without_base_idea_active_requisite():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reasonunit"
     road_text = "road"
@@ -60,7 +60,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_Without_base_idea
 
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_requisite_IsTrue():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reasonunit"
     base_text = "base"
@@ -90,7 +90,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_
 
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_requisite_IsNone():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reasonunit"
     base_text = "base"
@@ -115,7 +115,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_
 
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_DELETE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_reasonunit"
     road_text = "road"

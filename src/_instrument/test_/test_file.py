@@ -22,7 +22,7 @@ from os.path import exists as os_path_exist
 
 
 def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "x1.txt"
     x2_file_name = "x2.txt"
@@ -41,7 +41,7 @@ def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
 
 
 def test_dir_files_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
     x2_name = "x2"
@@ -63,7 +63,7 @@ def test_dir_files_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 
 def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
     x2_name = "x2"
@@ -93,7 +93,7 @@ def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
 
 
 def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
     x1_file_ext = "txt"
@@ -125,7 +125,7 @@ def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
 def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     temp_dir = f"{env_dir}/temp_does_not_exist"
     assert os_path_exist(temp_dir) is False
@@ -139,7 +139,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
 
 
 def test_get_integer_filenames_GrabsFileNamesWithIntegers_v0(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "1.json"
     x2_file_name = "2.json"
@@ -158,7 +158,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegers_v0(env_dir_setup_clean
 def test_get_integer_filenames_GrabsFileNamesWithIntegersWithCorrectExtension(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     z_file_name = "z.json"
     x1_file_name = "1.json"
@@ -184,10 +184,10 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersWithCorrectExtension(
     assert get_integer_filenames(env_dir, None, "txt") == {1, 3}
 
 
-def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThanGiven(
+def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThan_min_integer(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     z_file_name = "z.json"
     x1_file_name = "1.json"
@@ -208,10 +208,10 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThanGiven(
     assert get_integer_filenames(env_dir, 0, "txt") == {1, 3}
 
 
-def test_open_file_OpensFilesCorrectlyWhenGivenDirectoryAndFileName(
+def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_file_name(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
     x2_name = "x2"
@@ -230,10 +230,10 @@ def test_open_file_OpensFilesCorrectlyWhenGivenDirectoryAndFileName(
     assert open_file(dest_dir=env_dir, file_name=x2_file_name) == x2_file_text
 
 
-def test_open_file_OpensFilesCorrectlyWhenGivenOnlyFilePath(
+def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
     x2_name = "x2"
@@ -257,7 +257,7 @@ def test_open_file_OpensFilesCorrectlyWhenGivenOnlyFilePath(
 
 
 def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x_old_name = "x_old"
     # x_new_name = "x_new"
@@ -284,7 +284,7 @@ def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
 
 
 def test_save_file_DoesNotreplaceFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x_old_name = "x_old"
     # x_new_name = "x_new"
@@ -313,7 +313,7 @@ def test_save_file_DoesNotreplaceFile(env_dir_setup_cleanup):
 def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     does_not_exist_dir = f"{env_dir}/swim"
 
@@ -325,7 +325,7 @@ def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(
 
 
 def test_get_directory_path_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     texas_text = "texas"
     dallas_text = "dallas"
     elpaso_text = "el paso"
@@ -346,7 +346,7 @@ def test_get_directory_path_ReturnsCorrectObj():
 
 
 def test_is_path_valid_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert is_path_valid("run")
     assert is_path_valid("run/trail")
     assert is_path_valid("run/,trail")
@@ -360,13 +360,13 @@ def test_is_path_valid_ReturnsCorrectObj():
 
 
 def test_can_active_usser_edit_paths_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert can_active_usser_edit_paths()
 
 
 def test_is_path_existent_or_creatable_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_existent_or_creatable("run")
     assert (
@@ -377,7 +377,7 @@ def test_is_path_existent_or_creatable_ReturnsCorrectObj():
 
 
 def test_is_path_probably_creatable_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_probably_creatable("run")
     assert is_path_probably_creatable("run/trail?") is False
@@ -385,7 +385,7 @@ def test_is_path_probably_creatable_ReturnsCorrectObj():
 
 
 def test_is_path_existent_or_probably_creatable_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_existent_or_probably_creatable("run")
     assert is_path_existent_or_probably_creatable("run/trail?") is False
@@ -393,7 +393,7 @@ def test_is_path_existent_or_probably_creatable_ReturnsCorrectObj():
 
 
 def test_get_all_dirs_with_file_ReturnsCorrectDirectorys(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "x1.txt"
     x1_file_text = "trying this"

@@ -6,7 +6,7 @@ from src.money.examples.example_credorledgers import example_yao_hubunit
 
 
 def test_RiverRun_set_char_tax_yield_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_hubunit = hubunit_shop(None, None, bob_text)
     bob_riverrun = riverrun_shop(bob_hubunit)
@@ -22,7 +22,7 @@ def test_RiverRun_set_char_tax_yield_SetsAttr():
 
 
 def test_RiverRun_tax_yields_is_empty_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     x_riverrun = riverrun_shop(yao_hubunit)
     assert x_riverrun.tax_yields_is_empty()
@@ -54,7 +54,7 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
 
 
 def test_RiverRun_reset_tax_yields_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -80,7 +80,7 @@ def test_RiverRun_reset_tax_yields_CorrectlySetsAttr():
 
 
 def test_RiverRun_char_has_tax_yield_ReturnsCorrectBool():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -113,7 +113,7 @@ def test_RiverRun_char_has_tax_yield_ReturnsCorrectBool():
 
 
 def test_RiverRun_delete_tax_yield_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 88
     bob_penny = 11
@@ -133,7 +133,7 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
 
 
 def test_RiverRun_get_char_tax_yield_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -166,7 +166,7 @@ def test_RiverRun_get_char_tax_yield_ReturnsCorrectObj():
 
 
 def test_RiverRun_add_char_tax_yield_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -198,7 +198,7 @@ def test_RiverRun_add_char_tax_yield_ReturnsCorrectObj():
 
 
 def test_RiverRun_levy_tax_due_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_money_amount = 1000
     bob_penny = 1
@@ -234,7 +234,7 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_char_tax_due(bob_text) == 0
     assert bob_riverrun.get_char_tax_yield(bob_text) == 380
 
-    # GIVEN
+    # ESTABLISH
     assert bob_riverrun.get_char_tax_due(sue_text) == 560
     assert bob_riverrun.get_char_tax_yield(sue_text) == 0
     # WHEN
@@ -244,7 +244,7 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_char_tax_due(sue_text) == 0
     assert bob_riverrun.get_char_tax_yield(sue_text) == 560
 
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     assert bob_riverrun.get_char_tax_due(zia_text) == 0
     assert bob_riverrun.get_char_tax_yield(zia_text) == 0
@@ -255,7 +255,7 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_char_tax_due(zia_text) == 0
     assert bob_riverrun.get_char_tax_yield(zia_text) == 0
 
-    # GIVEN
+    # ESTABLISH
     assert bob_riverrun.get_char_tax_due(yao_text) == 60
     assert bob_riverrun.get_char_tax_yield(yao_text) == 0
     # WHEN
@@ -267,7 +267,7 @@ def test_RiverRun_levy_tax_due_SetsAttr():
 
 
 def test_RiverRun_set_tax_got_attrs_SetsAttrs():
-    # GIVEN
+    # ESTABLISH
     six_tax_got = 6
     ten_tax_got = 10
     x_riverrun = riverrun_shop(example_yao_hubunit())
@@ -288,7 +288,7 @@ def test_RiverRun_set_tax_got_attrs_SetsAttrs():
 
 
 def test_RiverRun_tax_gotten_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     six_tax_got = 6
     ten_tax_got = 10
     x_riverrun = riverrun_shop(example_yao_hubunit())
@@ -303,7 +303,7 @@ def test_RiverRun_tax_gotten_ReturnsObj():
     assert x_riverrun._tax_got_curr == six_tax_got
     assert x_riverrun._tax_gotten()
 
-    # GIVEN
+    # ESTABLISH
     x_riverrun._set_tax_got_attrs(six_tax_got)
     # THEN
     assert x_riverrun._tax_got_prev == six_tax_got

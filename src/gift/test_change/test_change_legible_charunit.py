@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_charunit_INSERT():
-    # GIVEN
+    # ESTABLISH
     category = "world_charunit"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -34,7 +34,7 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
 
 
 def test_create_legible_list_ReturnsObj_charunit_INSERT_monetary_desc_IsNone():
-    # GIVEN
+    # ESTABLISH
     category = "world_charunit"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -61,7 +61,7 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT_monetary_desc_IsNone():
 
 
 def test_create_legible_list_ReturnsObj_charunit_UPDATE_credor_weight_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     category = "world_charunit"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -90,7 +90,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE_credor_weight_debtor_wei
 
 
 def test_create_legible_list_ReturnsObj_charunit_UPDATE_credor_weight():
-    # GIVEN
+    # ESTABLISH
     category = "world_charunit"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
@@ -116,7 +116,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE_credor_weight():
 
 
 def test_create_legible_list_ReturnsObj_charunit_UPDATE_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     category = "world_charunit"
     char_id_text = "char_id"
     debtor_weight_text = "debtor_weight"
@@ -142,7 +142,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE_debtor_weight():
 
 
 def test_create_legible_list_ReturnsObj_charunit_DELETE():
-    # GIVEN
+    # ESTABLISH
     category = "world_charunit"
     char_id_text = "char_id"
     yao_text = "Yao"

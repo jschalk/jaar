@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_factunit"
     road_text = "road"
@@ -34,7 +34,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumericArgs(
 
 
 def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_factunit"
     road_text = "road"
@@ -69,7 +69,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumericArgs():
 
 
 def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_factunit"
     road_text = "road"
@@ -98,7 +98,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumericArgs(
 
 
 def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumericArgs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_factunit"
     road_text = "road"
@@ -133,7 +133,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumericArgs():
 
 
 def test_create_legible_list_ReturnsObj_idea_factunit_DELETE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_factunit"
     road_text = "road"

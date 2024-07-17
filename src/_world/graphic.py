@@ -40,9 +40,9 @@ def _get_color_for_ideaunit_trace(x_ideaunit: IdeaUnit, mode: str) -> str:
     elif mode == "Task":
         return "Red" if x_ideaunit.pledge else "Pink"
     elif mode == "Econ":
-        if x_ideaunit._problem_bool and x_ideaunit._healerhold.any_belief_id_exists():
+        if x_ideaunit._problem_bool and x_ideaunit._healerhold.any_lobby_id_exists():
             return "Purple"
-        elif x_ideaunit._healerhold.any_belief_id_exists():
+        elif x_ideaunit._healerhold.any_lobby_id_exists():
             return "Blue"
         elif x_ideaunit._problem_bool:
             return "Red"
@@ -146,10 +146,10 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         "credor_weight",
         "_debtor_respect",
         "debtor_weight",
-        "_world_cred",
-        "_world_debt",
-        "_world_agenda_cred",
-        "_world_agenda_debt",
+        "_bud_give",
+        "_bud_take",
+        "_bud_agenda_give",
+        "_bud_agenda_take",
     ]
     df = get_world_charunits_dataframe(x_world)
     df.insert(1, "_credor_respect", x_world._credor_respect)
@@ -166,10 +166,10 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
                 df.credor_weight,
                 df._debtor_respect,
                 df.debtor_weight,
-                df._world_cred,
-                df._world_debt,
-                df._world_agenda_cred,
-                df._world_agenda_debt,
+                df._bud_give,
+                df._bud_take,
+                df._bud_agenda_give,
+                df._bud_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -268,7 +268,7 @@ def add_idea_rect(
     add_rect_text(fig, x=text_x, y=text_y, text=display_text)
 
 
-def add_belief_rect(
+def add_lobby_rect(
     fig: plotly_Figure,
     base_width,
     base_h,
@@ -356,7 +356,7 @@ def worldunit_explanation0() -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    add_belief_rect(fig, base_w, base_h, 1, 0, 1, "beliefs")
+    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
     fig.add_trace(
         plotly_Scatter(
@@ -375,10 +375,10 @@ def worldunit_explanation1() -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    add_belief_rect(fig, base_w, base_h, 2, 0, 0.2, "belief1")
-    add_belief_rect(fig, base_w, base_h, 2, 0.2, 0.4, "belief2")
-    add_belief_rect(fig, base_w, base_h, 2, 0.4, 0.6, "belief3")
-    add_belief_rect(fig, base_w, base_h, 2, 0.6, 1, "belief4")
+    add_lobby_rect(fig, base_w, base_h, 2, 0, 0.2, "lobby1")
+    add_lobby_rect(fig, base_w, base_h, 2, 0.2, 0.4, "lobby2")
+    add_lobby_rect(fig, base_w, base_h, 2, 0.4, 0.6, "lobby3")
+    add_lobby_rect(fig, base_w, base_h, 2, 0.6, 1, "lobby4")
     add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "char0")
     add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "char1")
     add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "char2")
@@ -391,7 +391,7 @@ def worldunit_explanation1() -> plotly_Figure:
             text=[
                 "What Jaar Worlds Are Made of Explanation 1",
                 "People are in blue",
-                "Beliefs are in green",
+                "Lobbys are in green",
             ],
             mode="text",
         )
@@ -407,7 +407,7 @@ def worldunit_explanation2() -> plotly_Figure:
     base_w = 0.1
     base_h = 0.125
     add_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
-    add_belief_rect(fig, base_w, base_h, 1, 0, 1, "beliefs")
+    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
     fig.add_trace(
@@ -438,7 +438,7 @@ def worldunit_explanation3() -> plotly_Figure:
     add_idea_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Idea")
     add_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Idea")
     add_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
-    add_belief_rect(fig, base_w, base_h, 1, 0, 1, "beliefs")
+    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
     fig.add_trace(
@@ -469,7 +469,7 @@ def worldunit_explanation4() -> plotly_Figure:
     add_idea_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
     add_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
     add_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
-    add_belief_rect(fig, base_w, base_h, 1, 0, 1, "beliefs")
+    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
     fig.add_trace(

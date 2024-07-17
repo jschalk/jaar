@@ -8,7 +8,7 @@ from src._world.examples.example_worlds import (
 
 
 def test_WorldUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
 
@@ -22,7 +22,7 @@ def test_WorldUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
 
 
 def test_WorldUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
 
@@ -37,7 +37,7 @@ def test_WorldUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
 
 
 def test_WorldUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
 
@@ -56,7 +56,7 @@ def test_WorldUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
 
 
 def test_WorldUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
-    # GIVEN
+    # ESTABLISH
     neo_world = worldunit_shop(_owner_id="Neo")
     casa_text = "casa"
     casa_road = neo_world.make_l1_road(casa_text)
@@ -96,7 +96,7 @@ def test_WorldUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
 
 
 def test_WorldUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
-    # GIVEN
+    # ESTABLISH
     x_world = example_world_get_world_mop_example1()
     casa_text = "casa"
     casa_road = x_world.make_l1_road(casa_text)
@@ -147,7 +147,7 @@ def test_WorldUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
 
 
 def test_WorldUnit_get_relevant_roads_numeric_road_ReturnSimple():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_world = worldunit_shop(_owner_id=yao_text)
     casa_text = "casa"
@@ -180,7 +180,7 @@ def test_WorldUnit_get_relevant_roads_numeric_road_ReturnSimple():
 
 
 def test_WorldUnit_get_relevant_roads_range_source_road_ReturnSimple():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_world = worldunit_shop(_owner_id=yao_text)
     min_range_text = "a_minute_range"

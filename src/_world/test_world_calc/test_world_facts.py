@@ -9,7 +9,7 @@ from pytest import raises as pytest_raises
 
 
 def test_WorldUnit_set_fact_CorrectlyModifiesAttr_1():
-    # GIVEN
+    # ESTABLISH
     x_world = examples_get_world_with_4_levels()
     weekday_road = x_world.make_l1_road("weekdays")
     sunday_road = x_world.make_road(weekday_road, "Sunday")
@@ -21,13 +21,13 @@ def test_WorldUnit_set_fact_CorrectlyModifiesAttr_1():
     x_idearoot._factunits = {}
     assert not x_idearoot._factunits
 
-    # GIVEN
+    # ESTABLISH
     x_world.set_fact(base=weekday_road, pick=sunday_road)
 
     # THEN
     assert x_idearoot._factunits == {sunday_world_fact.base: sunday_world_fact}
 
-    # GIVEN
+    # ESTABLISH
     x_idearoot._factunits = {}
     assert not x_idearoot._factunits
     usa_week_road = x_world.make_l1_road("nation-state")
@@ -46,7 +46,7 @@ def test_WorldUnit_set_fact_CorrectlyModifiesAttr_1():
 
 
 def test_WorldUnit_set_fact_CorrectlyModifiesAttr_2():
-    # GIVEN
+    # ESTABLISH
     x_world = examples_get_world_with_4_levels()
     weekday_road = x_world.make_l1_road("weekdays")
     sunday_road = x_world.make_road(weekday_road, "Sunday")
@@ -61,7 +61,7 @@ def test_WorldUnit_set_fact_CorrectlyModifiesAttr_2():
 
 
 def test_WorldUnit_set_fact_CorrectlyModifiesAttrWhen_pick_IsNone():
-    # GIVEN
+    # ESTABLISH
     x_world = examples_get_world_with_4_levels()
     weekday_road = x_world.make_l1_road("weekdays")
 
@@ -75,7 +75,7 @@ def test_WorldUnit_set_fact_CorrectlyModifiesAttrWhen_pick_IsNone():
 
 
 def test_WorldUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
-    # GIVEN
+    # ESTABLISH
     x_world = examples_get_world_with_4_levels()
     weekday_road = x_world.make_l1_road("weekdays")
     x_world.set_fact(base=weekday_road, open=5, nigh=7)
@@ -94,7 +94,7 @@ def test_WorldUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
 
 
 def test_WorldUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIsNotRangeRoot():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
@@ -120,7 +120,7 @@ def test_WorldUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdea
 
 
 def test_WorldUnit_del_fact_CorrectlyModifiesAttr():
-    # GIVEN
+    # ESTABLISH
     x_world = examples_get_world_with_4_levels()
     weekday_road = x_world.make_l1_road("weekdays")
     sunday_road = x_world.make_road(weekday_road, "Sunday")
@@ -137,7 +137,7 @@ def test_WorldUnit_del_fact_CorrectlyModifiesAttr():
 
 
 def test_WorldUnit_get_idea_list_FactHeirsCorrectlyInherited():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     swim_text = "swim"
     swim_road = bob_world.make_l1_road(swim_text)
@@ -193,7 +193,7 @@ def test_WorldUnit_get_idea_list_FactHeirsCorrectlyInherited():
 
 
 def test_WorldUnit_get_idea_list_FactUnitCorrectlyTransformsfactheir_shop():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     swim_text = "swim"
     swim_road = bob_world.make_l1_road(swim_text)
@@ -231,7 +231,7 @@ def test_WorldUnit_get_idea_list_FactUnitCorrectlyTransformsfactheir_shop():
 
 
 def test_WorldUnit_get_idea_list_FactHeirCorrectlyDeletesFactUnit():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     swim_text = "swim"
     swim_road = sue_world.make_l1_road(swim_text)
@@ -265,7 +265,7 @@ def test_WorldUnit_get_idea_list_FactHeirCorrectlyDeletesFactUnit():
 
 
 def test_get_ranged_facts():
-    # GIVEN a single ranged fact
+    # ESTABLISH a single ranged fact
     sue_world = worldunit_shop("Sue")
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
@@ -279,7 +279,7 @@ def test_get_ranged_facts():
     # sue_world.edit_idea_attr(road=c_road, reason_base=time_road, reason_premise=time_road, reason_premise_open=5, reason_premise_nigh=10)
 
     sue_world.set_fact(base=time_road, pick=time_road, open=5, nigh=10)
-    print(f"Given a single ranged fact {sue_world._idearoot._factunits=}")
+    print(f"Establish a single ranged fact {sue_world._idearoot._factunits=}")
     assert len(sue_world._idearoot._factunits) == 1
 
     # WHEN / THEN
@@ -310,7 +310,7 @@ def test_get_ranged_facts():
 
 
 def test_get_roots_ranged_facts():
-    # GIVEN a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
+    # ESTABLISH a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
     sue_world = worldunit_shop("Sue")
     time_text = "time"
     sue_world.add_l1_idea(ideaunit_shop(time_text, _begin=0, _close=140))
@@ -325,7 +325,7 @@ def test_get_roots_ranged_facts():
     sue_world.set_fact(base=time_road, pick=time_road, open=5, nigh=10)
     sue_world.set_fact(base=m_x_road, pick=sue_world.make_road(m_x_road, happy))
     print(
-        f"Given a root ranged fact and non-range fact:\n{sue_world._idearoot._factunits=}"
+        f"Establish a root ranged fact and non-range fact:\n{sue_world._idearoot._factunits=}"
     )
     assert len(sue_world._idearoot._factunits) == 2
 
@@ -678,7 +678,7 @@ def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario6():
 
 
 def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario7():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     sue_world.set_time_hreg_ideas(c400_count=7)
     time_road = sue_world.make_l1_road("time")
@@ -719,7 +719,7 @@ def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario7():
 
 
 def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario8():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     sue_world.set_time_hreg_ideas(c400_count=7)
     time_road = sue_world.make_l1_road("time")
@@ -757,7 +757,7 @@ def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario8():
 
 
 def test_WorldUnit_set_fact_create_missing_ideas_CreatesBaseAndFact():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     situations_text = "situations"
     situations_road = sue_world.make_l1_road(situations_text)
@@ -775,7 +775,7 @@ def test_WorldUnit_set_fact_create_missing_ideas_CreatesBaseAndFact():
 
 
 def test_WorldUnit_get_fact_ReturnsFactUnit():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     situations_text = "situations"
     situations_road = sue_world.make_l1_road(situations_text)
@@ -792,7 +792,7 @@ def test_WorldUnit_get_fact_ReturnsFactUnit():
 
 
 def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_1Task_1CE0MinutesReason_1Fact()
     mail_text = "obtain mail"
     assert x_world != None

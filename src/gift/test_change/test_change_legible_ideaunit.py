@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_charunit_INSERT():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_ideaunit"
     label_text = "label"
@@ -62,7 +62,7 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
 
 
 def test_create_legible_list_ReturnsObj_charunit_UPDATE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_ideaunit"
     label_text = "label"
@@ -119,7 +119,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE():
 
 
 def test_create_legible_list_ReturnsObj_charunit_DELETE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_ideaunit"
     label_text = "label"

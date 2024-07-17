@@ -4,7 +4,7 @@ from src._road.road import (
     default_road_delimiter_if_none,
 )
 from src._world.healer import healerhold_shop
-from src._world.beliefstory import awardlink_shop, awardheir_shop
+from src._world.lobby import awardlink_shop, awardheir_shop
 from src._world.reason_idea import (
     reasonunit_shop,
     reasonheir_shop,
@@ -54,16 +54,16 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx is None
     assert x_ideaunit._bud_ratio is None
-    assert x_ideaunit._coin is None
+    assert x_ideaunit._bud_coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
     assert x_ideaunit._root is None
     assert x_ideaunit._world_real_id is None
-    assert x_ideaunit._healerhold_share is None
+    assert x_ideaunit._healerhold_ratio is None
 
 
 def test_ideaunit_shop_NoParametersReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_ideaunit = ideaunit_shop()
 
     # THEN
@@ -95,7 +95,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._bud_ratio is None
-    assert x_ideaunit._coin is None
+    assert x_ideaunit._bud_coin is None
     assert x_ideaunit._bud_onset is None
     assert x_ideaunit._bud_cease is None
     assert x_ideaunit._reasonunits == {}
@@ -106,28 +106,28 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._road_delimiter == default_road_delimiter_if_none()
     assert x_ideaunit._root is False
     assert x_ideaunit._world_real_id == root_label()
-    assert x_ideaunit._healerhold_share == 0
+    assert x_ideaunit._healerhold_ratio == 0
 
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_healerhold = healerhold_shop({"Sue", "Yao"})
     x_problem_bool = True
-    x_coin = 88
+    x_bud_coin = 88
 
     # WHEN
     x_ideaunit = ideaunit_shop(
-        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _coin=x_coin
+        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _bud_coin=x_bud_coin
     )
 
     # THEN
     assert x_ideaunit._healerhold == x_healerhold
     assert x_ideaunit._problem_bool == x_problem_bool
-    assert x_ideaunit._coin == x_coin
+    assert x_ideaunit._bud_coin == x_bud_coin
 
 
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     round_text = "round_things"
     round_road = create_road(root_label(), round_text)
     ball_text = "ball"
@@ -140,7 +140,7 @@ def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():
 
 
 def test_IdeaUnit_get_road_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     round_text = "round_things"
     slash_text = "/"
     round_road = create_road(root_label(), round_text, delimiter=slash_text)
@@ -157,7 +157,7 @@ def test_IdeaUnit_get_road_ReturnsCorrectObj():
 
 
 def test_IdeaUnit_set_parent_road_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     round_text = "round_things"
     slash_text = "/"
     round_road = create_road(root_label(), round_text, delimiter=slash_text)
@@ -176,110 +176,110 @@ def test_IdeaUnit_set_parent_road_ReturnsCorrectObj():
 
 
 def test_IdeaUnit_awardlinks_exist():
-    # GIVEN
-    biker_credor_weight = 12
-    biker_debtor_weight = 15
+    # ESTABLISH
+    biker_give_weight = 12
+    biker_take_weight = 15
     biker_awardlink = awardlink_shop(
-        belief_id="bikers2",
-        credor_weight=biker_credor_weight,
-        debtor_weight=biker_debtor_weight,
+        lobby_id="bikers2",
+        give_weight=biker_give_weight,
+        take_weight=biker_take_weight,
     )
 
-    swimmer_belief_id = "swimmers"
-    swimmer_credor_weight = 29
-    swimmer_debtor_weight = 32
+    swimmer_lobby_id = "swimmers"
+    swimmer_give_weight = 29
+    swimmer_take_weight = 32
     swimmer_awardlink = awardlink_shop(
-        belief_id=swimmer_belief_id,
-        credor_weight=swimmer_credor_weight,
-        debtor_weight=swimmer_debtor_weight,
+        lobby_id=swimmer_lobby_id,
+        give_weight=swimmer_give_weight,
+        take_weight=swimmer_take_weight,
     )
 
-    x_belieflinks = {
-        swimmer_awardlink.belief_id: swimmer_awardlink,
-        biker_awardlink.belief_id: biker_awardlink,
+    x_lobbylinks = {
+        swimmer_awardlink.lobby_id: swimmer_awardlink,
+        biker_awardlink.lobby_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_belieflinks)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_lobbylinks)
 
     # THEN
-    assert sport_idea._awardlinks == x_belieflinks
+    assert sport_idea._awardlinks == x_lobbylinks
 
 
 def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValues():
-    # GIVEN
-    biker_credor_weight = 12
-    biker_debtor_weight = 15
+    # ESTABLISH
+    biker_give_weight = 12
+    biker_take_weight = 15
     biker_text = "bikers2"
     biker_awardlink = awardheir_shop(
-        belief_id=biker_text,
-        credor_weight=biker_credor_weight,
-        debtor_weight=biker_debtor_weight,
+        lobby_id=biker_text,
+        give_weight=biker_give_weight,
+        take_weight=biker_take_weight,
     )
 
     swimmer_text = "swimmers"
-    swimmer_belief_id = swimmer_text
-    swimmer_credor_weight = 29
-    swimmer_debtor_weight = 32
+    swimmer_lobby_id = swimmer_text
+    swimmer_give_weight = 29
+    swimmer_take_weight = 32
     swimmer_awardlink = awardheir_shop(
-        belief_id=swimmer_belief_id,
-        credor_weight=swimmer_credor_weight,
-        debtor_weight=swimmer_debtor_weight,
+        lobby_id=swimmer_lobby_id,
+        give_weight=swimmer_give_weight,
+        take_weight=swimmer_take_weight,
     )
 
-    x_belieflinks = {
-        swimmer_awardlink.belief_id: swimmer_awardlink,
-        biker_awardlink.belief_id: biker_awardlink,
+    x_lobbylinks = {
+        swimmer_awardlink.lobby_id: swimmer_awardlink,
+        biker_awardlink.lobby_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_belieflinks)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbylinks)
 
     # THEN
-    assert sport_idea.get_awardheirs_credor_weight_sum() != None
-    assert sport_idea.get_awardheirs_credor_weight_sum() == 41
-    assert sport_idea.get_awardheirs_debtor_weight_sum() != None
-    assert sport_idea.get_awardheirs_debtor_weight_sum() == 47
+    assert sport_idea.get_awardheirs_give_weight_sum() != None
+    assert sport_idea.get_awardheirs_give_weight_sum() == 41
+    assert sport_idea.get_awardheirs_take_weight_sum() != None
+    assert sport_idea.get_awardheirs_take_weight_sum() == 47
 
     assert len(sport_idea._awardheirs) == 2
 
     swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._world_cred is None
-    assert swimmer_awardheir._world_debt is None
+    assert swimmer_awardheir._bud_give is None
+    assert swimmer_awardheir._bud_take is None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._world_cred is None
-    assert biker_awardheir._world_debt is None
+    assert biker_awardheir._bud_give is None
+    assert biker_awardheir._bud_take is None
 
     # WHEN
     sport_idea._bud_ratio = 0.25
-    sport_idea.set_awardheirs_world_cred_debt()
+    sport_idea.set_awardheirs_bud_give_bud_take()
 
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
     swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._world_cred != None
-    assert swimmer_awardheir._world_debt != None
+    assert swimmer_awardheir._bud_give != None
+    assert swimmer_awardheir._bud_take != None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._world_cred != None
-    assert biker_awardheir._world_debt != None
+    assert biker_awardheir._bud_give != None
+    assert biker_awardheir._bud_take != None
 
 
 def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
-    # GIVEN /WHEN
+    # ESTABLISH /WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(_label=sport_text)
-    assert sport_idea.get_awardheirs_credor_weight_sum() != None
-    assert sport_idea.get_awardheirs_debtor_weight_sum() != None
+    assert sport_idea.get_awardheirs_give_weight_sum() != None
+    assert sport_idea.get_awardheirs_take_weight_sum() != None
 
     # WHEN / THEN
     # does not crash with empty set
-    sport_idea.set_awardheirs_world_cred_debt()
+    sport_idea.set_awardheirs_bud_give_bud_take()
 
 
 def test_IdeaUnit_set_reasonheirsCorrectlySourcesFromOutside():
-    # GIVEN
+    # ESTABLISH
     ball_text = "ball"
     ball_road = create_road(ball_text)
     run_text = "run"
@@ -300,7 +300,7 @@ def test_IdeaUnit_set_reasonheirsCorrectlySourcesFromOutside():
 
 
 def test_IdeaUnit_set_reasonheirsCorrectlySourcesFromSelf():
-    # GIVEN
+    # ESTABLISH
     ball_text = "ball"
     ball_road = create_road(ball_text)
     run_text = "run"
@@ -322,7 +322,7 @@ def test_IdeaUnit_set_reasonheirsCorrectlySourcesFromSelf():
 
 
 def test_IdeaUnit_clear_descendant_pledge_count_ClearsCorrectly():
-    # GIVEN
+    # ESTABLISH
     ball_text = "ball"
     ball_idea = ideaunit_shop(_label=ball_text, _descendant_pledge_count=55)
     assert ball_idea._descendant_pledge_count == 55
@@ -335,7 +335,7 @@ def test_IdeaUnit_clear_descendant_pledge_count_ClearsCorrectly():
 
 
 def test_IdeaUnit_add_to_descendant_pledge_count_CorrectlyAdds():
-    # GIVEN
+    # ESTABLISH
     ball_text = "ball"
     ball_idea = ideaunit_shop(_label=ball_text, _descendant_pledge_count=55)
     ball_idea.clear_descendant_pledge_count()
@@ -355,7 +355,7 @@ def test_IdeaUnit_add_to_descendant_pledge_count_CorrectlyAdds():
 
 
 def test_IdeaUnit_clear_all_char_cred_debt_ClearsCorrectly():
-    # GIVEN
+    # ESTABLISH
     ball_text = "ball"
     ball_idea = ideaunit_shop(_label=ball_text, _all_char_cred=55, _all_char_debt=33)
     assert ball_idea._all_char_cred == 55
@@ -370,7 +370,7 @@ def test_IdeaUnit_clear_all_char_cred_debt_ClearsCorrectly():
 
 
 def test_get_kids_in_range_GetsCorrectIdeas():
-    # GIVEN
+    # ESTABLISH
     mon366_text = "366months"
     mon366_idea = ideaunit_shop(_label=mon366_text, _begin=0, _close=366)
     jan_text = "Jan"
@@ -389,28 +389,28 @@ def test_get_kids_in_range_GetsCorrectIdeas():
 
 
 def test_get_obj_from_idea_dict_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     field_text = "_is_expanded"
     # WHEN / THEN
     assert get_obj_from_idea_dict({field_text: True}, field_text)
     assert get_obj_from_idea_dict({}, field_text)
     assert get_obj_from_idea_dict({field_text: False}, field_text) is False
 
-    # GIVEN
+    # ESTABLISH
     field_text = "pledge"
     # WHEN / THEN
     assert get_obj_from_idea_dict({field_text: True}, field_text)
     assert get_obj_from_idea_dict({}, field_text) is False
     assert get_obj_from_idea_dict({field_text: False}, field_text) is False
 
-    # GIVEN
+    # ESTABLISH
     field_text = "_problem_bool"
     # WHEN / THEN
     assert get_obj_from_idea_dict({field_text: True}, field_text)
     assert get_obj_from_idea_dict({}, field_text) is False
     assert get_obj_from_idea_dict({field_text: False}, field_text) is False
 
-    # GIVEN
+    # ESTABLISH
     field_text = "_kids"
     # WHEN / THEN
     assert get_obj_from_idea_dict({field_text: {}}, field_text) == {}
@@ -418,7 +418,7 @@ def test_get_obj_from_idea_dict_ReturnsCorrectObj():
 
 
 def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
-    # GIVEN
+    # ESTABLISH
     # WHEN / THEN
     healerhold_key = "_healerhold"
     assert get_obj_from_idea_dict({}, healerhold_key) == healerhold_shop()
@@ -426,19 +426,19 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
     # WHEN
     sue_text = "Sue"
     zia_text = "Zia"
-    healerhold_dict = {"healerhold_belief_ids": [sue_text, zia_text]}
+    healerhold_dict = {"healerhold_lobby_ids": [sue_text, zia_text]}
     ideaunit_dict = {healerhold_key: healerhold_dict}
 
     # THEN
     static_healerhold = healerhold_shop()
-    static_healerhold.set_belief_id(x_belief_id=sue_text)
-    static_healerhold.set_belief_id(x_belief_id=zia_text)
+    static_healerhold.set_lobby_id(x_lobby_id=sue_text)
+    static_healerhold.set_lobby_id(x_lobby_id=zia_text)
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) != None
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
 
 
 def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
-    # GIVEN
+    # ESTABLISH
     week_text = "weekdays"
     week_road = create_road(root_label(), week_text)
     wed_text = "Wednesday"
@@ -469,35 +469,35 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
             base=states_road, premises={usa_premise.need: usa_premise}, _status=False
         ),
     }
-    biker_belief_id = "bikers"
-    biker_credor_weight = 3.0
-    biker_debtor_weight = 7.0
+    biker_lobby_id = "bikers"
+    biker_give_weight = 3.0
+    biker_take_weight = 7.0
     biker_awardlink = awardlink_shop(
-        biker_belief_id, biker_credor_weight, biker_debtor_weight
+        biker_lobby_id, biker_give_weight, biker_take_weight
     )
-    flyer_belief_id = "flyers"
-    flyer_credor_weight = 6.0
-    flyer_debtor_weight = 9.0
+    flyer_lobby_id = "flyers"
+    flyer_give_weight = 6.0
+    flyer_take_weight = 9.0
     flyer_awardlink = awardlink_shop(
-        belief_id=flyer_belief_id,
-        credor_weight=flyer_credor_weight,
-        debtor_weight=flyer_debtor_weight,
+        lobby_id=flyer_lobby_id,
+        give_weight=flyer_give_weight,
+        take_weight=flyer_take_weight,
     )
     biker_and_flyer_awardlinks = {
-        biker_awardlink.belief_id: biker_awardlink,
-        flyer_awardlink.belief_id: flyer_awardlink,
+        biker_awardlink.lobby_id: biker_awardlink,
+        flyer_awardlink.lobby_id: flyer_awardlink,
     }
     biker_get_dict = {
-        "belief_id": biker_awardlink.belief_id,
-        "credor_weight": biker_awardlink.credor_weight,
-        "debtor_weight": biker_awardlink.debtor_weight,
+        "lobby_id": biker_awardlink.lobby_id,
+        "give_weight": biker_awardlink.give_weight,
+        "take_weight": biker_awardlink.take_weight,
     }
     flyer_get_dict = {
-        "belief_id": flyer_awardlink.belief_id,
-        "credor_weight": flyer_awardlink.credor_weight,
-        "debtor_weight": flyer_awardlink.debtor_weight,
+        "lobby_id": flyer_awardlink.lobby_id,
+        "give_weight": flyer_awardlink.give_weight,
+        "take_weight": flyer_awardlink.take_weight,
     }
-    x1_awardlinks = {biker_belief_id: biker_get_dict, flyer_belief_id: flyer_get_dict}
+    x1_awardlinks = {biker_lobby_id: biker_get_dict, flyer_lobby_id: flyer_get_dict}
     sue_text = "Sue"
     yao_text = "Yao"
     sue_doerunit = doerunit_shop({sue_text: -1, yao_text: -1})
@@ -571,7 +571,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
 
 
 def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
-    # GIVEN
+    # ESTABLISH
     casa_idea = ideaunit_shop()
 
     # WHEN
@@ -583,7 +583,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
 
 
 def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
-    # GIVEN
+    # ESTABLISH
     casa_idea = ideaunit_shop()
     casa_idea._is_expanded = False
     casa_idea.pledge = True
@@ -597,7 +597,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_idea.set_awardlink(awardlink_shop(yao_text))
 
     x_doerunit = casa_idea._doerunit
-    x_doerunit.set_beliefhold(belief_id=yao_text)
+    x_doerunit.set_lobbyhold(lobby_id=yao_text)
 
     x_originunit = casa_idea._originunit
     x_originunit.set_originhold(yao_text, 1)
@@ -627,7 +627,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
 
 
 def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
-    # GIVEN
+    # ESTABLISH
     casa_idea = ideaunit_shop()
     assert casa_idea._is_expanded
     assert casa_idea.pledge is False
@@ -653,7 +653,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
 
 
 def test_IdeaUnit_vaild_DenomCorrectInheritsBeginAndClose():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     clean_text = "clean"
     # parent idea
@@ -674,7 +674,7 @@ def test_IdeaUnit_vaild_DenomCorrectInheritsBeginAndClose():
 
 
 def test_IdeaUnit_invaild_DenomThrowsError():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     parent_idea = ideaunit_shop(_label=casa_text)
     casa_text = "casa"
@@ -696,7 +696,7 @@ def test_IdeaUnit_invaild_DenomThrowsError():
 
 
 def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(_label=clean_text)
     dirty_text = "dirty"
@@ -711,7 +711,7 @@ def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(_label=clean_text)
     dirty_text = "dirty"
@@ -728,7 +728,7 @@ def test_IdeaUnit_get_reasonheir_ReturnsCorrectObj():
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsNone():
-    # GIVEN
+    # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(_label=clean_text)
     dirty_text = "dirty"
@@ -745,7 +745,7 @@ def test_IdeaUnit_get_reasonheir_ReturnsNone():
 
 
 def test_IdeaUnit_set_active_SetsNullactive_hxToNonEmpty():
-    # GIVEN
+    # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(_label=clean_text)
     assert clean_idea._active_hx == {}
@@ -757,7 +757,7 @@ def test_IdeaUnit_set_active_SetsNullactive_hxToNonEmpty():
 
 
 def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
-    # GIVEN
+    # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(_label=clean_text)
     clean_idea._active_hx = {0: True, 4: False}
@@ -769,7 +769,7 @@ def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
 
 
 # def test_IdeaUnit_set_active_IfFullactive_hxResetToFalse():
-#     # GIVEN
+#     # ESTABLISH
 # clean_text = "clean"
 # clean_idea = ideaunit_shop(_label=clean_text)
 #     clean_idea.set_reason_premise(
@@ -788,7 +788,7 @@ def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
 
 
 def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
-    # GIVEN
+    # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(_label=clean_text)
     assert clean_idea._active_hx == {}
@@ -849,7 +849,7 @@ def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
 
 
 def test_IdeaUnit_set_doerunit_empty_if_none():
-    # GIVEN
+    # ESTABLISH
     run_text = "run"
     run_idea = ideaunit_shop(_label=run_text)
     run_idea._doerunit = None
@@ -864,29 +864,29 @@ def test_IdeaUnit_set_doerunit_empty_if_none():
 
 
 def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     swim_text = "swimmers"
     sport_text = "sports"
     sport_idea = ideaunit_shop(_label=sport_text)
-    sport_idea._doerunit.set_beliefhold(belief_id=swim_text)
-    assert sport_idea._doerheir is None
+    sport_idea._doerunit.set_lobbyhold(lobby_id=swim_text)
+    # assert sport_idea._doerheir is None
 
     # WHEN
-    sport_idea.set_doerheir(parent_doerheir=None, world_beliefs=None)
+    sport_idea.set_doerheir(parent_doerheir=None, world_lobbyboxs=None)
 
     # THEN
     assert sport_idea._doerheir != None
     swim_doerunit = doerunit_shop()
-    swim_doerunit.set_beliefhold(belief_id=swim_text)
+    swim_doerunit.set_lobbyhold(lobby_id=swim_text)
     swim_doerheir = doerheir_shop()
-    swim_doerheir.set_beliefholds(
-        doerunit=swim_doerunit, parent_doerheir=None, world_beliefs=None
+    swim_doerheir.set_lobbyholds(
+        doerunit=swim_doerunit, parent_doerheir=None, world_lobbyboxs=None
     )
     assert sport_idea._doerheir == swim_doerheir
 
 
 def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():
-    # GIVEN
+    # ESTABLISH
     nation_text = "nation-state"
     nation_idea = ideaunit_shop(_label=nation_text, _parent_road=root_label())
 
@@ -898,7 +898,7 @@ def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():
 
 
 def test_IdeaUnit_get_descendants_Returns3DescendantsRoadUnits():
-    # GIVEN
+    # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
@@ -929,7 +929,7 @@ def test_IdeaUnit_get_descendants_Returns3DescendantsRoadUnits():
 
 
 def test_IdeaUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
-    # GIVEN
+    # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
@@ -946,7 +946,7 @@ def test_IdeaUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
 
 
 def test_IdeaUnit_clear_kids_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
@@ -962,7 +962,7 @@ def test_IdeaUnit_clear_kids_CorrectlySetsAttr():
 
 
 def test_IdeaUnit_get_kid_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
@@ -984,7 +984,7 @@ def test_IdeaUnit_get_kid_ReturnsCorrectObj():
 
 
 def test_IdeaUnit_del_kid_CorrectModifiesAttr():
-    # GIVEN
+    # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
@@ -1003,3 +1003,18 @@ def test_IdeaUnit_del_kid_CorrectModifiesAttr():
 
     # THEN
     assert len(nation_idea._kids) == 1
+
+
+def test_IdeaUnit_get_bud_share_ReturnsObj():
+    # ESTABLISH
+    nation_text = "nation-state"
+    nation_road = create_road(root_label(), nation_text)
+    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
+
+    # WHEN / THEN
+    assert nation_idea.get_bud_share() == 0
+
+    # WHEN / THEN
+    nation_idea._bud_onset = 3
+    nation_idea._bud_cease = 14
+    assert nation_idea.get_bud_share() == 11

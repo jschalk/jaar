@@ -3,7 +3,7 @@ from src.money.riverrun import riverrun_shop
 
 
 def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario01():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_tax_due = 222
@@ -25,7 +25,7 @@ def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario01():
 
 
 def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario02():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     bob_text = "Bob"
@@ -55,7 +55,7 @@ def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario02():
 
 
 def test_RiverRun_cycle_payees_vary_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     x_riverrun = riverrun_shop(example_yao_hubunit())
     # WHEN / THEN
@@ -70,7 +70,7 @@ def test_RiverRun_cycle_payees_vary_ReturnsCorrectObj():
 
 
 def test_RiverRun_cycles_vary_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_tax_got = 5
     x_riverrun = riverrun_shop(example_yao_hubunit())

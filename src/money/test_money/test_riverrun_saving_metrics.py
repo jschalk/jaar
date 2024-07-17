@@ -5,7 +5,7 @@ from os.path import exists as os_path_exists
 
 
 def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_texas_hubunit()
     yao_text = "Yao"
     yao_credor_weight = 500
@@ -23,7 +23,7 @@ def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup)
 
 
 def test_RiverRun_save_rivergrade_files_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_hubunit = example_yao_texas_hubunit()
     yao_text = "Yao"
     bob_text = "Bob"

@@ -1,7 +1,7 @@
 from src._road.finance import default_bud_pool
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
-from src._world.beliefstory import awardlink_shop
+from src._world.lobby import awardlink_shop
 from src._world.world import worldunit_shop
 from src._world.healer import healerhold_shop
 from src._world.examples.example_worlds import (
@@ -16,7 +16,7 @@ from src._world.world import worldunit_shop
 
 
 def test_WorldUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
-    # GIVEN
+    # ESTABLISH
     yao_worldunit = world_v001()
 
     # WHEN
@@ -32,7 +32,7 @@ def test_WorldUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
 
 
 def test_WorldUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
-    # GIVEN
+    # ESTABLISH
     yao_worldunit = world_v001()
     missing_bases = yao_worldunit.get_missing_fact_bases()
     assert missing_bases != None
@@ -55,7 +55,7 @@ def test_WorldUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
 
 
 def test_WorldUnit_3AdvocatesNoideaunit_shop():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     zia_text = "Zia"
@@ -68,9 +68,9 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     zia_worldunit.set_charunit(yao_charunit)
     zia_worldunit.set_charunit(sue_charunit)
     zia_worldunit.set_charunit(zia_charunit)
-    zia_worldunit._idearoot.set_awardlink(awardlink_shop(yao_text, credor_weight=10))
-    zia_worldunit._idearoot.set_awardlink(awardlink_shop(sue_text, credor_weight=10))
-    zia_worldunit._idearoot.set_awardlink(awardlink_shop(zia_text, credor_weight=10))
+    zia_worldunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_weight=10))
+    zia_worldunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_weight=10))
+    zia_worldunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_weight=10))
 
     # WHEN
     assert zia_worldunit.get_awardlinks_metrics() != None
@@ -80,32 +80,16 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     awardlink_yao = chars_metrics[yao_text]
     awardlink_sue = chars_metrics[sue_text]
     awardlink_zia = chars_metrics[zia_text]
-    assert awardlink_yao.belief_id != None
-    assert awardlink_sue.belief_id != None
-    assert awardlink_zia.belief_id != None
-    assert awardlink_yao.belief_id == yao_text
-    assert awardlink_sue.belief_id == sue_text
-    assert awardlink_zia.belief_id == zia_text
-    all_beliefs = zia_worldunit._beliefs
-    beliefbox_yao = all_beliefs[yao_text]
-    beliefbox_sue = all_beliefs[sue_text]
-    beliefbox_zia = all_beliefs[zia_text]
-    assert beliefbox_yao._char_mirror == True
-    assert beliefbox_sue._char_mirror == True
-    assert beliefbox_zia._char_mirror == True
-
-
-def _check_all_objects_in_dict_are_correct_type(x_dict: dict, type_str: str) -> bool:
-    bool_x = True
-    for x_value in x_dict.values():
-        if type_str not in str(type(x_value)):
-            bool_x = False
-        print(f"/t{type(x_value)=} {type_str=} {str(type(x_value)).find(type_str)=}")
-    return bool_x
+    assert awardlink_yao.lobby_id != None
+    assert awardlink_sue.lobby_id != None
+    assert awardlink_zia.lobby_id != None
+    assert awardlink_yao.lobby_id == yao_text
+    assert awardlink_sue.lobby_id == sue_text
+    assert awardlink_zia.lobby_id == zia_text
 
 
 def test_WorldUnit_calc_world_metrics_CreatesFullyPopulated_idea_dict():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels_and_2reasons()
 
     # WHEN
@@ -116,7 +100,7 @@ def test_WorldUnit_calc_world_metrics_CreatesFullyPopulated_idea_dict():
 
 
 def test_WorldUnit_calc_world_metrics_SetsSatiateStatusCorrectlyWhenFactSaysNo():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = sue_worldunit.make_l1_road(week_text)
@@ -143,7 +127,7 @@ def test_WorldUnit_calc_world_metrics_SetsSatiateStatusCorrectlyWhenFactSaysNo()
 
 
 def test_WorldUnit_calc_world_metrics_SetsSatiateStatusCorrectlyWhenFactModifies():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = sue_worldunit.make_l1_road(week_text)
@@ -187,7 +171,7 @@ def test_WorldUnit_calc_world_metrics_SetsSatiateStatusCorrectlyWhenFactModifies
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_idea_dict():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = sue_worldunit.make_l1_road(week_text)
@@ -309,11 +293,20 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_idea_dict():
     #         )
 
 
+# def _check_all_objects_in_dict_are_correct_type(x_dict: dict, type_str: str) -> bool:
+#     bool_x = True
+#     for x_value in x_dict.values():
+#         if type_str not in str(type(x_value)):
+#             bool_x = False
+#         print(f"/t{type(x_value)=} {type_str=} {str(type(x_value)).find(type_str)=}")
+#     return bool_x
+
+
 def test_WorldUnit_calc_world_metrics_CorrectlyClears_bud_onset_bud_cease():
-    # GIVEN
+    # ESTABLISH
     x_worldunit = get_world_with7amCleanTableReason()
     casa_road = x_worldunit.make_l1_road("casa")
-    catt_road = x_worldunit.make_l1_road("feed cat")
+    catt_road = x_worldunit.make_l1_road("cat have dinner")
     week_road = x_worldunit.make_l1_road("weekdays")
     x_worldunit._idearoot._bud_onset = 13
     x_worldunit._idearoot._bud_cease = 13
@@ -348,7 +341,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyClears_bud_onset_bud_cease():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_bud_onset_bud_cease():
-    # GIVEN
+    # ESTABLISH
     yao_worldunit = worldunit_shop("Yao", _weight=10)
 
     auto_text = "auto"
@@ -411,7 +404,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesIdeaAttr_bud_onset_bud_
 
 
 def test_WorldUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():
-    # GIVEN
+    # ESTABLISH
     x_worldunit = get_world_with7amCleanTableReason()
 
     # WHEN
@@ -430,7 +423,7 @@ def test_WorldUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes(
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesRangeAttributes():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with7amCleanTableReason()
     sue_worldunit.calc_world_metrics()
     house_text = "housemanagement"
@@ -476,7 +469,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesRangeAttributes():
 
 
 def test_get_agenda_dict_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels_and_2reasons()
 
     # WHEN
@@ -554,7 +547,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsData_world_v001():
 
 
 def test_WorldUnit_calc_world_metrics_OptionWeekdaysReturnsCorrectObj_world_v001():
-    # GIVEN
+    # ESTABLISH
     yao_worldunit = world_v001()
 
     day_hr_text = "day_hour"
@@ -657,7 +650,7 @@ def test_WorldUnit_calc_world_metrics_OptionWeekdaysReturnsCorrectObj_world_v001
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_world_v001():
-    # GIVEN
+    # ESTABLISH
     yao_worldunit = world_v001()
     day_text = "day_hour"
     day_road = yao_worldunit.make_l1_road(day_text)
@@ -737,7 +730,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsIdeaUnitsActiveWithEvery6Week
 
 
 def test_WorldUnit_calc_world_metrics_EveryIdeaHasActiveStatus_world_v001():
-    # GIVEN
+    # ESTABLISH
     yao_worldunit = world_v001()
 
     # WHEN
@@ -778,7 +771,7 @@ def test_WorldUnit_calc_world_metrics_EveryIdeaHasActiveStatus_world_v001():
 
 
 def test_WorldUnit_calc_world_metrics_EveryTwoMonthReturnsCorrectObj_world_v001():
-    # GIVEN
+    # ESTABLISH
     yao_worldunit = world_v001()
     minute_text = "day_minute"
     minute_road = yao_worldunit.make_l1_road(minute_text)
@@ -829,7 +822,7 @@ def test_WorldUnit_calc_world_metrics_EveryTwoMonthReturnsCorrectObj_world_v001(
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsEmpty_sum_healerhold_share():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = worldunit_shop("Sue")
     assert sue_worldunit._sum_healerhold_share == 0
     assert sue_worldunit._econ_dict == {}
@@ -843,7 +836,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsEmpty_sum_healerhold_share():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels_and_2reasons()
     sue_worldunit.add_charunit("Sue")
     sue_worldunit.calc_world_metrics()
@@ -857,13 +850,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     oregon_idea = sue_worldunit.get_idea_obj(oregon_road)
     print(f"{oregon_idea._bud_ratio=}")
     assert sue_worldunit._sum_healerhold_share == 0
-    assert oregon_idea._healerhold_share == 0
+    assert oregon_idea._healerhold_ratio == 0
 
     # WHEN
     sue_worldunit.calc_world_metrics()
     # THEN
-    assert sue_worldunit._sum_healerhold_share == 0.038461539
-    assert oregon_idea._healerhold_share == 1
+    assert sue_worldunit._sum_healerhold_share == 0.038461539 * default_bud_pool()
+    assert oregon_idea._healerhold_ratio == 1
 
     # WHEN
     week_road = sue_worldunit.make_l1_road("weekdays")
@@ -874,10 +867,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # print(f"{mon_idea._problem_bool=} {mon_idea._bud_ratio=}")
     sue_worldunit.calc_world_metrics()
     # THEN
-    assert sue_worldunit._sum_healerhold_share != 0.038461539
-    assert sue_worldunit._sum_healerhold_share == 0.06923077
-    assert oregon_idea._healerhold_share == 0.5555555571604939
-    assert mon_idea._healerhold_share == 0.44444444283950624
+    assert sue_worldunit._sum_healerhold_share != 0.038461539 * default_bud_pool()
+    assert sue_worldunit._sum_healerhold_share == 0.06923077 * default_bud_pool()
+    assert oregon_idea._healerhold_ratio == 0.5555555571604938
+    assert mon_idea._healerhold_ratio == 0.4444444428395062
 
     # WHEN
     tue_road = sue_worldunit.make_road(week_road, "Tuesday")
@@ -890,11 +883,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     sue_worldunit.calc_world_metrics()
 
     # THEN
-    assert sue_worldunit._sum_healerhold_share != 0.06923076923076923
-    assert sue_worldunit._sum_healerhold_share == 0.100000001
-    assert oregon_idea._healerhold_share == 0.38461538615384616
-    assert mon_idea._healerhold_share == 0.3076923069230769
-    assert tue_idea._healerhold_share == 0.3076923069230769
+    assert (
+        sue_worldunit._sum_healerhold_share != 0.06923076923076923 * default_bud_pool()
+    )
+    assert sue_worldunit._sum_healerhold_share == 0.100000001 * default_bud_pool()
+    assert oregon_idea._healerhold_ratio == 0.38461538615384616
+    assert mon_idea._healerhold_ratio == 0.3076923069230769
+    assert tue_idea._healerhold_ratio == 0.3076923069230769
 
     # WHEN
     sue_worldunit.edit_idea_attr(week_road, healerhold=sue_healerhold)
@@ -904,13 +899,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # THEN
     # display_ideatree(sue_world, "Econ").show()
     assert sue_worldunit._sum_healerhold_share == 0
-    assert oregon_idea._healerhold_share == 0
-    assert mon_idea._healerhold_share == 0
-    assert tue_idea._healerhold_share == 0
+    assert oregon_idea._healerhold_ratio == 0
+    assert mon_idea._healerhold_ratio == 0
+    assert tue_idea._healerhold_ratio == 0
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels_and_2reasons()
     sue_worldunit.add_charunit("Sue")
     sue_worldunit.calc_world_metrics()
@@ -971,7 +966,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
 
 
 # def test_world_metrics_CorrectlySets_healers_dict():
-#     # GIVEN
+#     # ESTABLISH
 #     sue_text = "Sue"
 #     bob_text = "Bob"
 #     sue_worldunit = get_world_with_4_levels_and_2reasons()
@@ -984,7 +979,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
 #     # THEN
 #     assert sue_worldunit._healers_dict == {}
 
-#     # GIVEN
+#     # ESTABLISH
 #     nation_road = sue_worldunit.make_l1_road("nation-state")
 #     usa_road = sue_worldunit.make_road(nation_road, "USA")
 #     oregon_road = sue_worldunit.make_road(usa_road, "Oregon")
@@ -1008,7 +1003,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_healers_dict():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     bob_text = "Bob"
     sue_worldunit = get_world_with_4_levels_and_2reasons()
@@ -1021,7 +1016,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_healers_dict():
     # THEN
     assert sue_worldunit._healers_dict == {}
 
-    # GIVEN
+    # ESTABLISH
     nation_road = sue_worldunit.make_l1_road("nation-state")
     usa_road = sue_worldunit.make_road(nation_road, "USA")
     oregon_road = sue_worldunit.make_road(usa_road, "Oregon")
@@ -1049,7 +1044,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_healers_dict():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_buildable_True():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     bob_text = "Bob"
     sue_worldunit = get_world_with_4_levels_and_2reasons()
@@ -1062,7 +1057,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_buildable_True():
     # THEN
     assert sue_worldunit._econs_buildable
 
-    # GIVEN
+    # ESTABLISH
     nation_road = sue_worldunit.make_l1_road("nation-state")
     usa_road = sue_worldunit.make_road(nation_road, "USA")
     oregon_road = sue_worldunit.make_road(usa_road, "Oregon")
@@ -1084,7 +1079,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_buildable_True():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_buildable_False():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     bob_text = "Bob"
     sue_worldunit = get_world_with_4_levels_and_2reasons()
@@ -1097,7 +1092,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_buildable_False():
     # THEN
     assert sue_worldunit._econs_buildable
 
-    # GIVEN
+    # ESTABLISH
     nation_road = sue_worldunit.make_l1_road("nation-state")
     usa_road = sue_worldunit.make_road(nation_road, "USA")
     oregon_road = sue_worldunit.make_road(usa_road, "Oregon")

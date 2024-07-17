@@ -17,7 +17,7 @@ def test_action_str():
 
 
 def test_get_rootpart_of_econ_dir_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert get_rootpart_of_econ_dir() == "idearoot"
 
 

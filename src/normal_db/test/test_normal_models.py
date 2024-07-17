@@ -8,12 +8,12 @@ from src.gift.atom_config import (
 from src.normal_db.normal_models import (
     WorldTable,
     CharUnitTable,
-    BeliefLinkTable,
+    LobbyLinkTable,
     IdeaTable,
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
-    beliefholdTable,
+    lobbyholdTable,
     HealerHoldTable,
     FactTable,
 )
@@ -61,7 +61,7 @@ def print_out_expected_class_attribute_declarations(config_category):
 
 
 def test_normalized_table_WorldTable_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("worldunit")
     mapper = inspect(WorldTable)
 
@@ -73,7 +73,7 @@ def test_normalized_table_WorldTable_Exists():
 
 
 def test_normalized_table_CharUnitTable_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_charunit")
     mapper = inspect(CharUnitTable)
     # print_out_expected_class_attribute_declarations(config_category)
@@ -85,34 +85,34 @@ def test_normalized_table_CharUnitTable_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-# def test_normalized_table_BeliefTable_Exists():
-#     # GIVEN
-#     config_category = get_normalized_world_table_build().get("world_beliefstory")
-#     mapper = inspect(BeliefTable)
+# def test_normalized_table_LobbyTable_Exists():
+#     # ESTABLISH
+#     config_category = get_normalized_world_table_build().get("world_lobbybox")
+#     mapper = inspect(LobbyTable)
 #     print_out_expected_class_attribute_declarations(config_category)
 
 #     # WHEN / THEN
 #     config_table_name = get_config_table_name(config_category)
-#     assert config_table_name == "beliefstory"
-#     assert config_table_name == BeliefTable.__tablename__
+#     assert config_table_name == "lobbybox"
+#     assert config_table_name == LobbyTable.__tablename__
 #     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_BeliefLinkTable_charlink_Exists():
-    # GIVEN
-    config_category = get_normalized_world_table_build().get("world_char_belieflink")
-    mapper = inspect(BeliefLinkTable)
+def test_normalized_table_LobbyLinkTable_lobbylink_Exists():
+    # ESTABLISH
+    config_category = get_normalized_world_table_build().get("world_char_lobbylink")
+    mapper = inspect(LobbyLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "belieflink"
-    assert config_table_name == BeliefLinkTable.__tablename__
+    assert config_table_name == "lobbylink"
+    assert config_table_name == LobbyLinkTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 
 def test_normalized_table_IdeaTable_idea_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_ideaunit")
     mapper = inspect(IdeaTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -125,7 +125,7 @@ def test_normalized_table_IdeaTable_idea_Exists():
 
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_awardlink")
     mapper = inspect(AwardLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -138,7 +138,7 @@ def test_normalized_table_AwardLinkTable_awardlink_Exists():
 
 
 def test_normalized_table_ReasonTable_reason_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_reasonunit")
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -151,7 +151,7 @@ def test_normalized_table_ReasonTable_reason_Exists():
 
 
 def test_normalized_table_PremiseTable_premise_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get(
         "world_idea_reason_premiseunit"
     )
@@ -165,21 +165,21 @@ def test_normalized_table_PremiseTable_premise_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_beliefholdTable_beliefhold_Exists():
-    # GIVEN
-    config_category = get_normalized_world_table_build().get("world_idea_beliefhold")
-    mapper = inspect(beliefholdTable)
+def test_normalized_table_lobbyholdTable_lobbyhold_Exists():
+    # ESTABLISH
+    config_category = get_normalized_world_table_build().get("world_idea_lobbyhold")
+    mapper = inspect(lobbyholdTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "beliefhold"
-    assert config_table_name == beliefholdTable.__tablename__
+    assert config_table_name == "lobbyhold"
+    assert config_table_name == lobbyholdTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 
 def test_normalized_table_HealerHoldTable_healerhold_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_healerhold")
     mapper = inspect(HealerHoldTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -192,7 +192,7 @@ def test_normalized_table_HealerHoldTable_healerhold_Exists():
 
 
 def test_normalized_table_FactTable_fact_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_factunit")
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_category)

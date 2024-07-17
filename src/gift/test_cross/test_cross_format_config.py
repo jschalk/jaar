@@ -4,7 +4,7 @@ from src.gift.cross import (
     real_id_str,
     owner_id_str,
     char_id_str,
-    belief_id_str,
+    lobby_id_str,
     parent_road_str,
     label_str,
     weight_str,
@@ -23,7 +23,7 @@ from src.gift.cross import (
     get_cross_attribute_dict,
     get_column_ordered_cross_attributes,
     jaar_format_0001_char_v0_0_0,
-    jaar_format_0002_belieflink_v0_0_0,
+    jaar_format_0002_lobbylink_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
     create_cross_dataframe,
@@ -31,7 +31,7 @@ from src.gift.cross import (
 
 
 def test_str_functions_ReturnCorrectObjs():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert real_id_str() == "real_id"
     assert owner_id_str() == "owner_id"
     assert char_id_str() == "char_id"
@@ -39,14 +39,14 @@ def test_str_functions_ReturnCorrectObjs():
     assert debtor_weight_str() == "debtor_weight"
     assert credor_weight_str() == "credor_weight"
     assert jaar_format_0001_char_v0_0_0() == "jaar_format_0001_char_v0_0_0"
-    x0002_cross = "jaar_format_0002_belieflink_v0_0_0"
-    assert jaar_format_0002_belieflink_v0_0_0() == x0002_cross
+    x0002_cross = "jaar_format_0002_lobbylink_v0_0_0"
+    assert jaar_format_0002_lobbylink_v0_0_0() == x0002_cross
     x0003_cross = "jaar_format_0003_ideaunit_v0_0_0"
     assert jaar_format_0003_ideaunit_v0_0_0() == x0003_cross
 
 
 def test_get_cross_formats_dir_ReturnsObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     cross_dir = get_cross_formats_dir()
     # THEN
     print(f"{cross_dir=}")
@@ -54,17 +54,17 @@ def test_get_cross_formats_dir_ReturnsObj():
 
 
 def test_get_cross_filenames_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_filenames = get_cross_filenames()
     # THEN
     print(f"{x_filenames=}")
     assert jaar_format_0001_char_v0_0_0() in x_filenames
-    assert jaar_format_0002_belieflink_v0_0_0() in x_filenames
+    assert jaar_format_0002_lobbylink_v0_0_0() in x_filenames
     assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
 
 
 def test_get_headers_list_ReturnsObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     format_0001_headers = _get_headers_list(jaar_format_0001_char_v0_0_0())
 
     # THEN
@@ -80,7 +80,7 @@ def test_get_headers_list_ReturnsObj():
 
 
 def test_create_cross_dataframe_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     empty_d2 = []
     # WHEN
     x_df = create_cross_dataframe(empty_d2, jaar_format_0001_char_v0_0_0())
@@ -100,12 +100,12 @@ def for_all_crosss_create_cross_dataframe():
 
 
 def test_create_cross_dataframe_ReturnsCorrectObjForEvery_cross():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert for_all_crosss_create_cross_dataframe()
 
 
 def test_cross_FilesExist():
-    # GIVEN
+    # ESTABLISH
     cross_dir = get_cross_formats_dir()
 
     # WHEN
@@ -118,7 +118,7 @@ def test_cross_FilesExist():
 
 
 def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0001_char_v0_0_0()
 
     # WHEN
@@ -153,9 +153,9 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0()
     assert credor_weight_column_order == 4
 
 
-def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_belieflink_v0_0_0():
-    # GIVEN
-    cross_name = jaar_format_0002_belieflink_v0_0_0()
+def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbylink_v0_0_0():
+    # ESTABLISH
+    cross_name = jaar_format_0002_lobbylink_v0_0_0()
 
     # WHEN
     cross_dict = get_cross_attribute_dict(cross_name)
@@ -164,13 +164,13 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_belieflink_v0
     real_id_dict = cross_dict.get(real_id_str())
     owner_id_dict = cross_dict.get(owner_id_str())
     char_id_dict = cross_dict.get(char_id_str())
-    belief_id_dict = cross_dict.get(belief_id_str())
+    lobby_id_dict = cross_dict.get(lobby_id_str())
     debtor_weight_dict = cross_dict.get(debtor_weight_str())
     credor_weight_dict = cross_dict.get(credor_weight_str())
     assert real_id_dict != None
     assert owner_id_dict != None
     assert char_id_dict != None
-    assert belief_id_dict != None
+    assert lobby_id_dict != None
     assert debtor_weight_dict != None
     assert credor_weight_dict != None
     assert len(cross_dict) == 6
@@ -178,13 +178,13 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_belieflink_v0
     assert real_id_dict.get(column_order_str()) == 0
     assert owner_id_dict.get(column_order_str()) == 1
     assert char_id_dict.get(column_order_str()) == 2
-    assert belief_id_dict.get(column_order_str()) == 3
+    assert lobby_id_dict.get(column_order_str()) == 3
     assert debtor_weight_dict.get(column_order_str()) == 5
     assert credor_weight_dict.get(column_order_str()) == 4
 
 
 def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0003_ideaunit_v0_0_0()
 
     # WHEN
@@ -214,7 +214,7 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0
 
 
 def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0001_char_v0_0_0()
     # WHEN
     sorted_cross_attributes = get_column_ordered_cross_attributes(cross_name)
@@ -231,7 +231,7 @@ def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
 
 
 def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario2():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0003_ideaunit_v0_0_0()
     # WHEN
     sorted_cross_attributes = get_column_ordered_cross_attributes(cross_name)

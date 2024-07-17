@@ -7,7 +7,7 @@ from src._road.road import (
 from src._road.finance import (
     default_bit_if_none,
     default_penny_if_none,
-    default_coin_if_none,
+    default_bud_coin_if_none,
     validate_bud_pool,
 )
 from src._road.jaar_config import (
@@ -28,7 +28,7 @@ from os.path import exists as os_path_exists
 
 
 def test_get_econ_path_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     peru_text = "peru"
     sue_hubunit = hubunit_shop(None, real_id=peru_text, owner_id=sue_text)
@@ -67,7 +67,7 @@ def test_get_econ_path_ReturnsCorrectObj():
 
 
 def test_HubUnit_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_hubunit = HubUnit()
 
     # THEN
@@ -77,14 +77,14 @@ def test_HubUnit_Exists():
     assert x_hubunit.econ_road is None
     assert x_hubunit.road_delimiter is None
     assert x_hubunit.bud_pool is None
-    assert x_hubunit.coin is None
+    assert x_hubunit.bud_coin is None
     assert x_hubunit.bit is None
     assert x_hubunit.penny is None
     assert x_hubunit.econ_money_magnitude is None
 
 
 def test_HubUnit_RaisesError_econ_road_DoesNotExist():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_hubunit = HubUnit(bob_text)
 
@@ -98,13 +98,13 @@ def test_HubUnit_RaisesError_econ_road_DoesNotExist():
 
 
 def test_hubunit_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_reals_dir = "src/real/examples"
     x_real_id = "music"
     sue_text = "Sue"
     x_road_delimiter = "/"
     x_bud_pool = 13000
-    x_coin = 13
+    x_bud_coin = 13
     x_bit = 9
     x_penny = 3
     x_money_magnitude = 900
@@ -117,7 +117,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
         econ_road=None,
         road_delimiter=x_road_delimiter,
         bud_pool=x_bud_pool,
-        coin=x_coin,
+        bud_coin=x_bud_coin,
         bit=x_bit,
         penny=x_penny,
         econ_money_magnitude=x_money_magnitude,
@@ -129,7 +129,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.owner_id == sue_text
     assert x_hubunit.road_delimiter == x_road_delimiter
     assert x_hubunit.bud_pool == x_bud_pool
-    assert x_hubunit.coin == x_coin
+    assert x_hubunit.bud_coin == x_bud_coin
     assert x_hubunit.bit == x_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.econ_money_magnitude == x_money_magnitude
@@ -150,7 +150,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
 
 
 def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -169,7 +169,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.owner_id == sue_text
     assert sue_hubunit.road_delimiter == default_road_delimiter_if_none()
     assert sue_hubunit.bud_pool == validate_bud_pool()
-    assert sue_hubunit.coin == default_coin_if_none()
+    assert sue_hubunit.bud_coin == default_bud_coin_if_none()
     assert sue_hubunit.bit == default_bit_if_none()
     assert sue_hubunit.penny == default_penny_if_none()
     assert sue_hubunit.owners_dir() == f"{sue_hubunit.real_dir()}/owners"
@@ -193,7 +193,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
 
 
 def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_road_delimiter():
-    # GIVEN
+    # ESTABLISH
     slash_text = "/"
     bob_text = f"Bob{slash_text}Sue"
 
@@ -207,7 +207,7 @@ def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_road_delimiter():
 
 
 def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
     assert os_path_exists(sue_hubunit.voice_file_path()) is False
@@ -220,7 +220,7 @@ def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
     assert sue_hubunit.voice_file_exists() is False
@@ -233,7 +233,7 @@ def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 
 
 def test_HubUnit_open_file_voice_OpensFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
     example_text = "fooboo"
@@ -244,7 +244,7 @@ def test_HubUnit_open_file_voice_OpensFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_save_file_action_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
     assert os_path_exists(sue_hubunit.action_path()) is False
@@ -257,7 +257,7 @@ def test_HubUnit_save_file_action_CorrectlySavesFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_action_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
     assert sue_hubunit.action_file_exists() is False
@@ -270,7 +270,7 @@ def test_HubUnit_action_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 
 
 def test_HubUnit_open_file_action_OpensFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
     example_text = "fooboo"
@@ -281,7 +281,7 @@ def test_HubUnit_open_file_action_OpensFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_save_voice_world_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels()
     sue_text = sue_worldunit._owner_id
     real_id = root_label()
@@ -300,7 +300,7 @@ def test_HubUnit_save_voice_world_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_save_voice_world_RaisesErrorWhenWorld_action_id_IsWrong(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
 
     real_id = root_label()
@@ -317,7 +317,7 @@ def test_HubUnit_save_voice_world_RaisesErrorWhenWorld_action_id_IsWrong(
 
 
 def test_HubUnit_get_voice_world_OpensFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels()
     sue_text = sue_worldunit._owner_id
     nation_text = "nation-state"
@@ -334,7 +334,7 @@ def test_HubUnit_get_voice_world_OpensFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_save_action_world_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels()
     sue_text = sue_worldunit._owner_id
 
@@ -352,7 +352,7 @@ def test_HubUnit_save_action_world_CorrectlySavesFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_get_action_world_OpensFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels()
     sue_text = sue_worldunit._owner_id
     nation_text = "nation-state"
@@ -369,7 +369,7 @@ def test_HubUnit_get_action_world_OpensFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_get_action_world_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_worldunit = get_world_with_4_levels()
     sue_text = sue_worldunit._owner_id
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
@@ -381,7 +381,7 @@ def test_HubUnit_get_action_world_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cl
 def test_HubUnit_save_action_world_RaisesErrorWhenWorld_action_id_IsWrong(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
 
     real_id = root_label()

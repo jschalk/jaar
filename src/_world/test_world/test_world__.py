@@ -1,7 +1,7 @@
 from src._road.finance import (
     default_bit_if_none,
     default_penny_if_none,
-    default_coin_if_none,
+    default_bud_coin_if_none,
     validate_bud_pool,
 )
 from src._world.world import worldunit_shop, WorldUnit
@@ -14,7 +14,7 @@ from pytest import raises as pytest_raises
 
 
 def test_WorldUnit_Exists():
-    # GIVEN
+    # ESTABLISH
 
     # WHEN
     x_world = WorldUnit()
@@ -24,12 +24,11 @@ def test_WorldUnit_Exists():
     assert x_world._owner_id is None
     assert x_world._weight is None
     assert x_world._chars is None
-    assert x_world._beliefs is None
     assert x_world._idearoot is None
     assert x_world._max_tree_traverse is None
     assert x_world._road_delimiter is None
     assert x_world._bud_pool is None
-    assert x_world._coin is None
+    assert x_world._bud_coin is None
     assert x_world._bit is None
     assert x_world._penny is None
     assert x_world._monetary_desc is None
@@ -50,12 +49,12 @@ def test_WorldUnit_Exists():
 
 
 def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     iowa_real_id = "Iowa"
     slash_road_delimiter = "/"
     x_bud_pool = 555
-    x_coin = 7
+    x_bud_coin = 7
     x_bit = 5
     x_penny = 1
 
@@ -65,7 +64,7 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _real_id=iowa_real_id,
         _road_delimiter=slash_road_delimiter,
         _bud_pool=x_bud_pool,
-        _coin=x_coin,
+        _bud_coin=x_bud_coin,
         _bit=x_bit,
         _penny=x_penny,
     )
@@ -74,12 +73,11 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._real_id == iowa_real_id
     assert x_world._weight == 1
     assert x_world._chars == {}
-    assert x_world._beliefs == {}
     assert x_world._idearoot != None
     assert x_world._max_tree_traverse == 3
     assert x_world._road_delimiter == slash_road_delimiter
     assert x_world._bud_pool == x_bud_pool
-    assert x_world._coin == x_coin
+    assert x_world._bud_coin == x_bud_coin
     assert x_world._bit == x_bit
     assert x_world._penny == x_penny
     assert x_world._monetary_desc is None
@@ -101,22 +99,22 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
 
 
 def test_WorldUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_world = worldunit_shop()
 
     assert x_world._owner_id == ""
     assert x_world._real_id == root_label()
     assert x_world._road_delimiter == default_road_delimiter_if_none()
     assert x_world._bud_pool == validate_bud_pool()
-    assert x_world._coin == default_coin_if_none()
+    assert x_world._bud_coin == default_bud_coin_if_none()
     assert x_world._bit == default_bit_if_none()
     assert x_world._penny == default_penny_if_none()
-    assert x_world._idearoot._coin == x_world._coin
+    assert x_world._idearoot._bud_coin == x_world._bud_coin
     assert x_world._idearoot._road_delimiter == x_world._road_delimiter
 
 
 def test_WorldUnit_ideaoot_uid_isEqualTo1():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
 
     # WHEN
@@ -127,35 +125,52 @@ def test_WorldUnit_ideaoot_uid_isEqualTo1():
 
 
 def test_WorldUnit_set_max_tree_traverse_CorrectlySetsInt():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_world = worldunit_shop(_owner_id=zia_text)
     assert zia_world._max_tree_traverse == 3
 
     # WHEN
-    zia_world.set_max_tree_traverse(int_x=11)
+    zia_world.set_max_tree_traverse(x_int=11)
 
     # THEN
     assert zia_world._max_tree_traverse == 11
 
 
 def test_WorldUnit_set_max_tree_traverse_CorrectlyRaisesError():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_world = worldunit_shop(_owner_id=zia_text)
     assert zia_world._max_tree_traverse == 3
+    zia_tree_traverse = 1
 
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
-        zia_world.set_max_tree_traverse(int_x=1)
+        zia_world.set_max_tree_traverse(x_int=zia_tree_traverse)
     assert (
         str(excinfo.value)
         == "set_max_tree_traverse: input '1' must be number that is 2 or greater"
     )
 
 
+def test_WorldUnit_set_max_tree_traverse_CorrectlyRaisesError():
+    # ESTABLISH
+    zia_text = "Zia"
+    zia_world = worldunit_shop(_owner_id=zia_text)
+    assert zia_world._max_tree_traverse == 3
+
+    # WHEN/THEN
+    zia_tree_traverse = 3.5
+    with pytest_raises(Exception) as excinfo:
+        zia_world.set_max_tree_traverse(x_int=zia_tree_traverse)
+    assert (
+        str(excinfo.value)
+        == f"set_max_tree_traverse: input '{zia_tree_traverse}' must be number that is 2 or greater"
+    )
+
+
 def test_WorldUnit_set_real_id_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     real_id_text = "Sun"
     sue_text = "Sue"
     x_world = worldunit_shop(_owner_id=sue_text)
@@ -169,7 +184,7 @@ def test_WorldUnit_set_real_id_CorrectlySetsAttr():
 
 
 def test_WorldUnit_set_road_delimiter_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     real_id_text = "Sun"
     sue_text = "Sue"
     slash_road_delimiter = "/"
@@ -189,7 +204,7 @@ def test_WorldUnit_set_road_delimiter_CorrectlySetsAttr():
 
 
 def test_WorldUnit_make_road_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     real_id_text = "Sun"
     sue_text = "Sue"
     slash_road_delimiter = "/"
@@ -209,7 +224,7 @@ def test_WorldUnit_make_road_ReturnsCorrectObj():
 
 
 def test_WorldUnit_set_monetary_desc_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue", "Texas")
     sue_monetary_desc = "Folos"
     assert sue_world._monetary_desc != sue_monetary_desc
@@ -222,7 +237,7 @@ def test_WorldUnit_set_monetary_desc_SetsAttrCorrectly():
 
 
 def test_WorldUnit_set_last_gift_id_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue", "Texas")
     assert sue_world._last_gift_id is None
 
@@ -235,7 +250,7 @@ def test_WorldUnit_set_last_gift_id_SetsAttrCorrectly():
 
 
 def test_WorldUnit_set_last_gift_id_RaisesError():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue", "Texas")
     old_last_gift_id = 89
     sue_world.set_last_gift_id(old_last_gift_id)
@@ -252,7 +267,7 @@ def test_WorldUnit_set_last_gift_id_RaisesError():
 
 
 def test_WorldUnit_del_last_gift_id_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue", "Texas")
     old_last_gift_id = 89
     sue_world.set_last_gift_id(old_last_gift_id)
@@ -266,7 +281,7 @@ def test_WorldUnit_del_last_gift_id_SetsAttrCorrectly():
 
 
 def test_WorldUnit_set_bud_pool_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue", "Texas")
     sue_bud_pool = 99000
     assert sue_world._bud_pool == validate_bud_pool()

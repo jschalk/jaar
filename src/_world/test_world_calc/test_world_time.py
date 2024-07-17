@@ -101,7 +101,7 @@ def test_get_time_dt_from_min_ReturnsCorrectObj():
 
 
 def test_get_time_():
-    # GIVEN
+    # ESTABLISH
     kia_world = worldunit_shop(_owner_id="Kia")
     kia_world.set_time_hreg_ideas(c400_count=6)
 
@@ -304,60 +304,60 @@ def test_get_time_():
 
 
 def test_get_jajatime_repeating_legible_text_correctlyText():
-    # GIVEN
-    noa_world = worldunit_shop(_owner_id="Noa")
-    noa_world.set_time_hreg_ideas(c400_count=7)
+    # ESTABLISH
+    yao_world = worldunit_shop(_owner_id="Yao")
+    yao_world.set_time_hreg_ideas(c400_count=7)
 
     # WHEN / THEN
-    every_day_8am_text = noa_world.get_jajatime_repeating_legible_text(
+    every_day_8am_text = yao_world.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=1440
     )
     print(f"ReturnsDailyText {every_day_8am_text=}")
     assert every_day_8am_text == "every day at 8am"
 
-    every_2nd_day_8_10am_text = noa_world.get_jajatime_repeating_legible_text(
+    every_2nd_day_8_10am_text = yao_world.get_jajatime_repeating_legible_text(
         open=490, nigh=490, divisor=2880
     )
     print(f"ReturnsEvery2DaysText: {every_2nd_day_8_10am_text=}")
     assert every_2nd_day_8_10am_text == "every 2nd day at 8:10am"
 
-    ReturnsEvery6DaysText = noa_world.get_jajatime_repeating_legible_text(
+    ReturnsEvery6DaysText = yao_world.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=8640
     )
     print(f"ReturnsEvery6DaysText: {ReturnsEvery6DaysText=}")
     assert ReturnsEvery6DaysText == "every 6th day at 8am"
 
-    every_saturday_8am_text = noa_world.get_jajatime_repeating_legible_text(
+    every_saturday_8am_text = yao_world.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=10080
     )
     print(f"ReturnsWeeklyText: {every_saturday_8am_text=}")
     assert every_saturday_8am_text == "every Saturday at 8am"
 
-    sat_2nd_8am_text = noa_world.get_jajatime_repeating_legible_text(
+    sat_2nd_8am_text = yao_world.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=20160
     )
     print(f"ReturnsEvery2WeeksText: {sat_2nd_8am_text=}")
     assert sat_2nd_8am_text == "every 2nd Saturday at 8am"
 
-    sat_6th_8am_text = noa_world.get_jajatime_repeating_legible_text(
+    sat_6th_8am_text = yao_world.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=60480
     )
     print(f"ReturnsEvery6WeeksText: {sat_6th_8am_text=}")
     assert sat_6th_8am_text == "every 6th Saturday at 8am"
 
-    feb_1st_9am_text = noa_world.get_jajatime_repeating_legible_text(
+    feb_1st_9am_text = yao_world.get_jajatime_repeating_legible_text(
         open=1064041020.0, nigh=1064041020.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
     assert feb_1st_9am_text == "Wed Feb 1st, 2023 at 9am"
 
-    feb_1st_7pm_text = noa_world.get_jajatime_repeating_legible_text(
+    feb_1st_7pm_text = yao_world.get_jajatime_repeating_legible_text(
         open=1064041620.0, nigh=1064041620.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
     assert feb_1st_7pm_text == "Wed Feb 1st, 2023 at 7pm"
 
-    feb_2nd_12am_text = noa_world.get_jajatime_repeating_legible_text(
+    feb_2nd_12am_text = yao_world.get_jajatime_repeating_legible_text(
         open=1064041920.0, nigh=1064041920.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMidnight {feb_2nd_12am_text=}")

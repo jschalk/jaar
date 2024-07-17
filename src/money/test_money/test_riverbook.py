@@ -9,7 +9,7 @@ from src.money.rivercycle import (
 
 
 def test_RiverBook_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_riverbook = RiverBook()
 
     # THEN
@@ -19,7 +19,7 @@ def test_RiverBook_Exists():
 
 
 def test_riverbook_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_text)
 
@@ -34,7 +34,7 @@ def test_riverbook_shop_ReturnsCorrectObj():
 
 
 def test_create_riverbook_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     yao_world = worldunit_shop(yao_text)

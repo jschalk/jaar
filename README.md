@@ -68,7 +68,7 @@ WorldUnit objects
 
 WorldUnit CharUnit objects
 
-WorldUnit BeliefStory objects
+WorldUnit LobbyBox objects
 
 WorldUnit IdeaUnit objects
 

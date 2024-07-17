@@ -4,7 +4,7 @@ from src._road.road import get_default_real_id_roadnode as root_label, create_ro
 
 
 def test_IdeaUnit_find_replace_road_CorrectlyModifies_parent_road():
-    # GIVEN Idea with _parent_road that will be different
+    # ESTABLISH Idea with _parent_road that will be different
     old_casa_text = "casa1"
     old_casa_road = create_road(root_label(), old_casa_text)
     bloomers_text = "bloomers"
@@ -28,7 +28,7 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_parent_road():
 
 
 def test_IdeaUnit_find_replace_road_CorrectlyModifies_range_source_road_numeric_road():
-    # GIVEN Idea with special road and numeric road that will be different
+    # ESTABLISH Idea with special road and numeric road that will be different
     casa_text = "casa1"
     casa_road = create_road(root_label(), casa_text)
     bloomers_text = "bloomers"
@@ -68,7 +68,7 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_range_source_road_numeric_
 
 
 def test_IdeaUnit_find_replace_road_CorrectlyModifies_reasonunits():
-    # GIVEN Idea with reason that will be different
+    # ESTABLISH Idea with reason that will be different
     casa_text = "casa1"
     casa_road = create_road(root_label(), casa_text)
     bloomers_text = "bloomers"
@@ -122,7 +122,7 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_reasonunits():
 
 
 def test_IdeaUnit_find_replace_road_CorrectlyModifies_factunits():
-    # GIVEN Idea with factunit that will be different
+    # ESTABLISH Idea with factunit that will be different
     roses_text = "roses"
     old_water_text = "water"
     old_water_road = create_road(root_label(), old_water_text)
@@ -159,7 +159,7 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_factunits():
 
 
 def test_IdeaUnit_get_obj_key_ReturnsCorrectInfo():
-    # GIVEN
+    # ESTABLISH
     red_text = "red"
 
     # WHEN
@@ -170,7 +170,7 @@ def test_IdeaUnit_get_obj_key_ReturnsCorrectInfo():
 
 
 def test_IdeaUnit_set_road_delimiter_CorrectlyModifiesReasonRoadUnits():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     casa_idea = ideaunit_shop(casa_text)
     casa_idea.set_parent_road("")
