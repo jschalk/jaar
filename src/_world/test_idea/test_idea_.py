@@ -69,7 +69,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     # THEN
     assert x_ideaunit
     assert x_ideaunit._kids == {}
-    assert x_ideaunit._weight >= 1
+    assert x_ideaunit._weight == 1
     assert x_ideaunit._label is None
     assert x_ideaunit._uid is None
     assert x_ideaunit._all_char_cred is None
@@ -107,6 +107,25 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._root is False
     assert x_ideaunit._world_real_id == root_label()
     assert x_ideaunit._healerhold_ratio == 0
+
+
+def test_ideaunit_shop_Allows_weightToBeZero():
+    # ESTABLISH
+    zero_int = 0
+    # WHEN
+    x_ideaunit = ideaunit_shop("run", _weight=zero_int)
+    # THEN
+    assert x_ideaunit._weight == zero_int
+
+
+def test_ideaunit_shop_Allows_doesNotAllow_weightToBeNegative():
+    # ESTABLISH
+    negative_int = -4
+    # WHEN
+    x_ideaunit = ideaunit_shop("run", _weight=negative_int)
+    # THEN
+    zero_int = 0
+    assert x_ideaunit._weight == zero_int
 
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
