@@ -59,7 +59,7 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._bud_cease is None
     assert x_ideaunit._root is None
     assert x_ideaunit._world_real_id is None
-    assert x_ideaunit._healerhold_share is None
+    assert x_ideaunit._healerhold_ratio is None
 
 
 def test_ideaunit_shop_NoParametersReturnsCorrectObj():
@@ -106,7 +106,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._road_delimiter == default_road_delimiter_if_none()
     assert x_ideaunit._root is False
     assert x_ideaunit._world_real_id == root_label()
-    assert x_ideaunit._healerhold_share == 0
+    assert x_ideaunit._healerhold_ratio == 0
 
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
@@ -254,7 +254,7 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
 
     # WHEN
     sport_idea._bud_ratio = 0.25
-    sport_idea.set_awardheirs_bud_give_take()
+    sport_idea.set_awardheirs_bud_give_bud_take()
 
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
@@ -275,7 +275,7 @@ def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
 
     # WHEN / THEN
     # does not crash with empty set
-    sport_idea.set_awardheirs_bud_give_take()
+    sport_idea.set_awardheirs_bud_give_bud_take()
 
 
 def test_IdeaUnit_set_reasonheirsCorrectlySourcesFromOutside():
@@ -1003,3 +1003,18 @@ def test_IdeaUnit_del_kid_CorrectModifiesAttr():
 
     # THEN
     assert len(nation_idea._kids) == 1
+
+
+def test_IdeaUnit_get_bud_share_ReturnsObj():
+    # ESTABLISH
+    nation_text = "nation-state"
+    nation_road = create_road(root_label(), nation_text)
+    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
+
+    # WHEN / THEN
+    assert nation_idea.get_bud_share() == 0
+
+    # WHEN / THEN
+    nation_idea._bud_onset = 3
+    nation_idea._bud_cease = 14
+    assert nation_idea.get_bud_share() == 11

@@ -185,7 +185,6 @@ def _modify_world_char_lobbylink_delete(x_world: WorldUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_lobby_id = x_atom.get_value("lobby_id")
     x_world.get_char(x_char_id).delete_lobbylink(x_lobby_id)
-    print("_modify_world_char_lobbylink_delete")
 
 
 def _modify_world_char_lobbylink_update(x_world: WorldUnit, x_atom: AtomUnit):

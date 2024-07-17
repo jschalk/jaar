@@ -1,3 +1,4 @@
+from src._road.finance import default_bud_pool
 from src._world.lobby import awardlink_shop
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
@@ -35,18 +36,18 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldIm
     yao_lobbybox = x_world.get_lobbybox(yao_text)
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
-    assert yao_lobbybox._bud_give == 0.5
-    assert yao_lobbybox._bud_take == 0.75
-    assert zia_lobbybox._bud_give == 0.25
-    assert zia_lobbybox._bud_take == 0.125
-    assert xio_lobbybox._bud_give == 0.25
-    assert xio_lobbybox._bud_take == 0.125
+    assert yao_lobbybox._bud_give == 0.5 * default_bud_pool()
+    assert yao_lobbybox._bud_take == 0.75 * default_bud_pool()
+    assert zia_lobbybox._bud_give == 0.25 * default_bud_pool()
+    assert zia_lobbybox._bud_take == 0.125 * default_bud_pool()
+    assert xio_lobbybox._bud_give == 0.25 * default_bud_pool()
+    assert xio_lobbybox._bud_take == 0.125 * default_bud_pool()
     cred_sum1 = yao_lobbybox._bud_give
     cred_sum1 += zia_lobbybox._bud_give + xio_lobbybox._bud_give
-    assert cred_sum1 == 1
+    assert cred_sum1 == 1 * default_bud_pool()
     debt_sum1 = yao_lobbybox._bud_take
     debt_sum1 += zia_lobbybox._bud_take + xio_lobbybox._bud_take
-    assert debt_sum1 == 1
+    assert debt_sum1 == 1 * default_bud_pool()
 
     # ESTABLISH
     x_world.set_charunit(charunit_shop(sue_text))
@@ -63,20 +64,20 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldIm
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
     sue_lobbybox = x_world.get_lobbybox(sue_text)
-    assert yao_lobbybox._bud_give != 0.5
-    assert yao_lobbybox._bud_take != 0.75
-    assert zia_lobbybox._bud_give != 0.25
-    assert zia_lobbybox._bud_take != 0.125
-    assert xio_lobbybox._bud_give != 0.25
-    assert xio_lobbybox._bud_take != 0.125
+    assert yao_lobbybox._bud_give != 0.5 * default_bud_pool()
+    assert yao_lobbybox._bud_take != 0.75 * default_bud_pool()
+    assert zia_lobbybox._bud_give != 0.25 * default_bud_pool()
+    assert zia_lobbybox._bud_take != 0.125 * default_bud_pool()
+    assert xio_lobbybox._bud_give != 0.25 * default_bud_pool()
+    assert xio_lobbybox._bud_take != 0.125 * default_bud_pool()
     assert sue_lobbybox._bud_give != None
     assert sue_lobbybox._bud_take != None
     cred_sum1 = yao_lobbybox._bud_give + zia_lobbybox._bud_give
     cred_sum1 += xio_lobbybox._bud_give + sue_lobbybox._bud_give
-    assert cred_sum1 == 1
+    assert cred_sum1 == 1 * default_bud_pool()
     debt_sum1 = yao_lobbybox._bud_take + zia_lobbybox._bud_take
     debt_sum1 += xio_lobbybox._bud_take + sue_lobbybox._bud_take
-    assert round(debt_sum1) == 1
+    assert round(debt_sum1) == 1 * default_bud_pool()
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldImportance():
@@ -109,14 +110,20 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldIm
     yao_lobbybox = x_world.get_lobbybox(yao_text)
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
-    assert yao_lobbybox._bud_give == 0.5
-    assert yao_lobbybox._bud_take == 0.75
-    assert zia_lobbybox._bud_give == 0.25
-    assert zia_lobbybox._bud_take == 0.125
-    assert xio_lobbybox._bud_give == 0.25
-    assert xio_lobbybox._bud_take == 0.125
-    assert yao_lobbybox._bud_give + zia_lobbybox._bud_give + xio_lobbybox._bud_give == 1
-    assert yao_lobbybox._bud_take + zia_lobbybox._bud_take + xio_lobbybox._bud_take == 1
+    assert yao_lobbybox._bud_give == 0.5 * default_bud_pool()
+    assert yao_lobbybox._bud_take == 0.75 * default_bud_pool()
+    assert zia_lobbybox._bud_give == 0.25 * default_bud_pool()
+    assert zia_lobbybox._bud_take == 0.125 * default_bud_pool()
+    assert xio_lobbybox._bud_give == 0.25 * default_bud_pool()
+    assert xio_lobbybox._bud_take == 0.125 * default_bud_pool()
+    assert (
+        yao_lobbybox._bud_give + zia_lobbybox._bud_give + xio_lobbybox._bud_give
+        == 1 * default_bud_pool()
+    )
+    assert (
+        yao_lobbybox._bud_take + zia_lobbybox._bud_take + xio_lobbybox._bud_take
+        == 1 * default_bud_pool()
+    )
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesLobbyWorldImportanceLWwithLobbyEmptyAncestors():
@@ -172,17 +179,19 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesLobbyWorldImportanceLWw
     yao_lobbybox = x_world.get_lobbybox(yao_text)
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
-    assert yao_lobbybox._bud_give == 0.125
-    assert yao_lobbybox._bud_take == 0.1875
-    assert zia_lobbybox._bud_give == 0.0625
-    assert zia_lobbybox._bud_take == 0.03125
-    assert xio_lobbybox._bud_give == 0.0625
-    assert xio_lobbybox._bud_take == 0.03125
+    assert yao_lobbybox._bud_give == 0.125 * default_bud_pool()
+    assert yao_lobbybox._bud_take == 0.1875 * default_bud_pool()
+    assert zia_lobbybox._bud_give == 0.0625 * default_bud_pool()
+    assert zia_lobbybox._bud_take == 0.03125 * default_bud_pool()
+    assert xio_lobbybox._bud_give == 0.0625 * default_bud_pool()
+    assert xio_lobbybox._bud_take == 0.03125 * default_bud_pool()
     assert (
-        yao_lobbybox._bud_give + zia_lobbybox._bud_give + xio_lobbybox._bud_give == 0.25
+        yao_lobbybox._bud_give + zia_lobbybox._bud_give + xio_lobbybox._bud_give
+        == 0.25 * default_bud_pool()
     )
     assert (
-        yao_lobbybox._bud_take + zia_lobbybox._bud_take + xio_lobbybox._bud_take == 0.25
+        yao_lobbybox._bud_take + zia_lobbybox._bud_take + xio_lobbybox._bud_take
+        == 0.25 * default_bud_pool()
     )
 
 

@@ -356,7 +356,7 @@ def test_awardlink_shop_ReturnsCorrectObj():
     assert bikers_awardlink.take_weight == bikers_take_weight
 
 
-def test_AwardHeir_set_bud_share_CorrectlySetsAttr():
+def test_AwardHeir_set_bud_attr_CorrectlySetsAttr():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_give_weight = 3.0

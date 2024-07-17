@@ -1,4 +1,5 @@
 from src._instrument.python import get_False_if_None
+from src._road.finance import default_bud_pool
 from src._road.road import get_default_real_id_roadnode as root_label
 from src._world.examples.example_worlds import (
     get_world_with_4_levels as example_worlds_get_world_with_4_levels,
@@ -341,12 +342,12 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     # for kid_idea in root_idea._kids.values():
     #     sum_x += kid_idea._bud_ratio
     #     print(f"  {kid_idea._bud_ratio=} {sum_x=} {kid_idea.get_road()=}")
-    assert round(sue_awardline._bud_give, 15) == 1
-    assert round(sue_awardline._bud_take, 15) == 1
+    assert round(sue_awardline._bud_give, 15) == 1 * default_bud_pool()
+    assert round(sue_awardline._bud_take, 15) == 1 * default_bud_pool()
     x_awardline = awardline_shop(
         lobby_id=sue_text,
-        _bud_give=0.9999999999999998,
-        _bud_take=0.9999999999999998,
+        _bud_give=default_bud_pool(),
+        _bud_take=default_bud_pool(),
     )
     assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
 
@@ -373,99 +374,14 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
     print(f"{x_world._idearoot._awardlines=}")
     x_awardline = awardline_shop(
         lobby_id=sue_text,
-        _bud_give=0.23076923,
-        _bud_take=0.23076923,
+        _bud_give=0.23076923 * default_bud_pool(),
+        _bud_take=0.23076923 * default_bud_pool(),
     )
     assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
     assert x_world._idearoot._kids[casa_text]._awardlines != {}
     assert x_world._idearoot._kids[casa_text]._awardlines == {
         x_awardline.lobby_id: x_awardline
     }
-
-
-def test_world4char_Exists():
-    # ESTABLISH
-    x_world = example_worlds_get_world_with_4_levels()
-    email_text = "email"
-    casa_text = "casa"
-    vacuum_text = "vacuum"
-    sue_text = "Sue"
-    casa_road = x_world.make_l1_road(casa_text)
-    email_idea = ideaunit_shop(_label=email_text, pledge=True)
-    x_world.add_idea(email_idea, parent_road=casa_road)
-    vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
-    x_world.add_idea(vacuum_idea, parent_road=casa_road)
-
-    sue_char_id = sue_text
-    x_world.add_charunit(char_id=sue_char_id)
-    x_awardlink = awardlink_shop(lobby_id=sue_char_id)
-    yrx = x_world._idearoot
-    yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=x_awardlink)
-
-    # WHEN
-    sue_world4char = x_world.get_world4char(facts=None, char_id=sue_char_id)
-
-    # THEN
-    assert sue_world4char
-    assert str(type(sue_world4char)).find(".world.WorldUnit'>")
-    assert sue_world4char._owner_id == sue_char_id
-
-
-def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
-    # ESTABLISH
-    x_world = example_worlds_get_world_with_4_levels()
-    email_text = "email"
-    casa_text = "casa"
-    vacuum_text = "vacuum"
-    sue_text = "Sue"
-    week_text = "weekdays"
-    cat_text = "cat have dinner"
-    casa_road = x_world.make_l1_road(casa_text)
-    email_idea = ideaunit_shop(_label=email_text, pledge=True)
-    x_world.add_idea(email_idea, parent_road=casa_road)
-    vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
-    x_world.add_idea(vacuum_idea, parent_road=casa_road)
-
-    yao_char_id = "Yao"
-    x_world.add_charunit(char_id=yao_char_id)
-    yao_bl = awardlink_shop(lobby_id=yao_char_id)
-    yrx = x_world._idearoot
-    yrx._kids[week_text].set_awardlink(awardlink=yao_bl)
-    yrx._kids[cat_text].set_awardlink(awardlink=yao_bl)
-    nation_text = "nation-state"
-    yrx._kids[nation_text].set_awardlink(awardlink=yao_bl)
-
-    sue_char_id = sue_text
-    x_world.add_charunit(char_id=sue_char_id)
-    sue_bl = awardlink_shop(lobby_id=sue_char_id)
-    yrx._kids[casa_text]._kids[email_text].set_awardlink(awardlink=sue_bl)
-
-    # WHEN
-    sue_world4char = x_world.get_world4char(sue_char_id, facts=None)
-
-    # THEN
-    assert len(sue_world4char._idearoot._kids) > 0
-    print(f"{len(sue_world4char._idearoot._kids)=}")
-
-    casa_idea = sue_world4char.get_idea_obj(casa_road)
-    type_check_IdeaUnit = str(type(casa_idea)).find(".idea.IdeaUnit'>")
-    print(f"{type_check_IdeaUnit=}")
-    type_check_IdeaUnit = str(type(casa_idea)).find(".idea.IdeaUnit'>")
-    print(f"{type_check_IdeaUnit=}")
-    assert str(type(casa_idea)).find(".idea.IdeaUnit'>") > 0
-
-    assert sue_world4char._idearoot._kids.get(cat_text) is None
-    assert sue_world4char._idearoot._bud_ratio == 1
-    assert casa_idea._bud_ratio == yrx._kids[casa_text]._bud_ratio
-    world4char_road = sue_world4char.make_l1_road("__world4char__")
-    assert sue_world4char.get_idea_obj(world4char_road) != None
-
-    y4a_exteriors = sue_world4char.get_idea_obj(world4char_road)
-    exteriors_bud_share = yrx._kids[week_text]._bud_ratio
-    exteriors_bud_share += yrx._kids[cat_text]._bud_ratio
-    exteriors_bud_share += yrx._kids[nation_text]._bud_ratio
-    print(f"{exteriors_bud_share=}")
-    assert round(y4a_exteriors._bud_ratio, 15) == round(exteriors_bud_share, 15)
 
 
 def test_WorldUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():

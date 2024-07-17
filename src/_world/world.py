@@ -240,7 +240,7 @@ class WorldUnit:
         self.calc_world_metrics()
 
     def set_max_tree_traverse(self, x_int: int):
-        if x_int < 2 or float(x_int).is_integer() is False:
+        if x_int < 2 or not float(x_int).is_integer():
             raise InvalidWorldException(
                 f"set_max_tree_traverse: input '{x_int}' must be number that is 2 or greater"
             )
@@ -1317,7 +1317,7 @@ class WorldUnit:
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_bud_agenda_give_take(idea._bud_ratio)
+                    self._add_to_charunits_bud_agenda_give_take(idea.get_bud_share())
                 else:
                     for x_awardline in idea._awardlines.values():
                         self.add_to_lobbybox_bud_agenda_give_take(
@@ -1452,7 +1452,8 @@ class WorldUnit:
             if x_idea_obj._healerhold.any_lobby_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
-                self._sum_healerhold_share += x_idea_obj._bud_ratio
+                print(f"{x_idea_obj.get_bud_share()=}")
+                self._sum_healerhold_share += x_idea_obj.get_bud_share()
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True
 
@@ -1474,8 +1475,8 @@ class WorldUnit:
         self._idearoot._weight = 1
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
-        self._idearoot.set_bud_share(0, self._bud_pool, self._bud_pool)
-        self._idearoot.set_awardheirs_bud_give_take()
+        self._idearoot.set_bud_attr(0, self._bud_pool, self._bud_pool)
+        self._idearoot.set_awardheirs_bud_give_bud_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
         self._idearoot.clear_all_char_cred_debt()
@@ -1501,7 +1502,7 @@ class WorldUnit:
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
         idea_kid.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
-        idea_kid.set_bud_share(bud_onset, bud_cease, self._bud_pool)
+        idea_kid.set_bud_attr(bud_onset, bud_cease, self._bud_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
@@ -1518,7 +1519,7 @@ class WorldUnit:
         if idea.is_awardheirless() is False:
             self._set_lobbyboxs_bud_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_bud_give_take(idea._bud_ratio)
+            self._add_to_charunits_bud_give_take(idea.get_bud_share())
 
     def get_bud_share(
         self, parent_bud_share: float, weight: int, sibling_total_weight: int
@@ -1659,10 +1660,10 @@ class WorldUnit:
             self._sum_healerhold_share = 0
         for x_idea in self._idea_dict.values():
             if self._sum_healerhold_share == 0:
-                x_idea._healerhold_share = 0
+                x_idea._healerhold_ratio = 0
             else:
                 x_sum = self._sum_healerhold_share
-                x_idea._healerhold_share = x_idea._bud_ratio / x_sum
+                x_idea._healerhold_ratio = x_idea.get_bud_share() / x_sum
             if self._econs_justified and x_idea._healerhold.any_lobby_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
@@ -1802,49 +1803,6 @@ class WorldUnit:
                 )
 
         self.calc_world_metrics()
-
-    def get_world4char(self, char_id: CharID, facts: dict[RoadUnit, FactCore]):
-        self.calc_world_metrics()
-        world4char = worldunit_shop(_owner_id=char_id)
-        world4char._idearoot._bud_ratio = self._idearoot._bud_ratio
-        # get char's chars: charzone
-
-        # get charzone lobbys
-        char_lobbys = self.get_lobby_ids_dict().get(char_id)
-
-        # set world4char by traversing the idea tree and selecting associated lobbys
-        # set root
-        not_included_bud_share = 0
-        world4char._idearoot.clear_kids()
-        for ykx in self._idearoot._kids.values():
-            y4a_included = any(
-                lobby_ancestor.lobby_id in char_lobbys
-                for lobby_ancestor in ykx._awardlines.values()
-            )
-
-            if y4a_included:
-                y4a_new = ideaunit_shop(
-                    _label=ykx._label,
-                    _bud_ratio=ykx._bud_ratio,
-                    _reasonunits=ykx._reasonunits,
-                    _awardlinks=ykx._awardlinks,
-                    _begin=ykx._begin,
-                    _close=ykx._close,
-                    pledge=ykx.pledge,
-                    _task=ykx._task,
-                )
-                world4char._idearoot._kids[ykx._label] = y4a_new
-            else:
-                not_included_bud_share += ykx._bud_ratio
-
-        if not_included_bud_share > 0:
-            y4a_exterior = ideaunit_shop(
-                _label="__world4char__",
-                _bud_ratio=not_included_bud_share,
-            )
-            world4char._idearoot._kids[y4a_exterior._label] = y4a_exterior
-
-        return world4char
 
     def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
         idea_kid.pledge = True
@@ -2003,7 +1961,6 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
             _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
             # _world_real_id=x_world._real_id,
         )
-        print(f"{x_ideakid.get_road()=}")
         x_world.add_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 
 

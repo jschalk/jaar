@@ -1,3 +1,4 @@
+from src._road.finance import default_bud_pool
 from src._road.road import RoadUnit
 from src._world.char import charunit_shop
 from src._world.lobby import awardlink_shop
@@ -39,14 +40,20 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     bheir_yao = idea_prom._awardheirs.get(yao_text)
     bheir_zia = idea_prom._awardheirs.get(zia_text)
     bheir_Xio = idea_prom._awardheirs.get(Xio_text)
-    assert bheir_yao._bud_give == 0.5
-    assert bheir_yao._bud_take == 0.75
-    assert bheir_zia._bud_give == 0.25
-    assert bheir_zia._bud_take == 0.125
-    assert bheir_Xio._bud_give == 0.25
-    assert bheir_Xio._bud_take == 0.125
-    assert bheir_yao._bud_give + bheir_zia._bud_give + bheir_Xio._bud_give == 1
-    assert bheir_yao._bud_take + bheir_zia._bud_take + bheir_Xio._bud_take == 1
+    assert bheir_yao._bud_give == 0.5 * default_bud_pool()
+    assert bheir_yao._bud_take == 0.75 * default_bud_pool()
+    assert bheir_zia._bud_give == 0.25 * default_bud_pool()
+    assert bheir_zia._bud_take == 0.125 * default_bud_pool()
+    assert bheir_Xio._bud_give == 0.25 * default_bud_pool()
+    assert bheir_Xio._bud_take == 0.125 * default_bud_pool()
+    assert (
+        bheir_yao._bud_give + bheir_zia._bud_give + bheir_Xio._bud_give
+        == 1 * default_bud_pool()
+    )
+    assert (
+        bheir_yao._bud_take + bheir_zia._bud_take + bheir_Xio._bud_take
+        == 1 * default_bud_pool()
+    )
 
     # bud_give_sum = 0
     # bud_take_sum = 0
@@ -96,25 +103,25 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
     yao_world.calc_world_metrics()
 
     # THEN
-    assert sue_sue_lobbylink._bud_give == 0.5
-    assert sue_sue_lobbylink._bud_take == 0.8
-    assert bob_bob_lobbylink._bud_give == 0.25
-    assert bob_bob_lobbylink._bud_take == 0.1
-    assert zia_zia_lobbylink._bud_give == 0.25
-    assert zia_zia_lobbylink._bud_take == 0.1
+    assert sue_sue_lobbylink._bud_give == 0.5 * default_bud_pool()
+    assert sue_sue_lobbylink._bud_take == 0.8 * default_bud_pool()
+    assert bob_bob_lobbylink._bud_give == 0.25 * default_bud_pool()
+    assert bob_bob_lobbylink._bud_take == 0.1 * default_bud_pool()
+    assert zia_zia_lobbylink._bud_give == 0.25 * default_bud_pool()
+    assert zia_zia_lobbylink._bud_take == 0.1 * default_bud_pool()
 
     lobbylink_cred_sum = (
         sue_sue_lobbylink._bud_give
         + bob_bob_lobbylink._bud_give
         + zia_zia_lobbylink._bud_give
     )
-    assert lobbylink_cred_sum == 1.0
+    assert lobbylink_cred_sum == 1.0 * default_bud_pool()
     lobbylink_debt_sum = (
         sue_sue_lobbylink._bud_take
         + bob_bob_lobbylink._bud_take
         + zia_zia_lobbylink._bud_take
     )
-    assert lobbylink_debt_sum == 1.0
+    assert lobbylink_debt_sum == 1.0 * default_bud_pool()
 
     # ESTABLISH anothher pledge, check metrics are as expected
     xio_text = "Xio"
@@ -133,36 +140,30 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
     sue_sue_lobbylink = sue_charunit.get_lobbylink(sue_text)
     bob_bob_lobbylink = bob_charunit.get_lobbylink(bob_text)
     zia_zia_lobbylink = zia_charunit.get_lobbylink(zia_text)
-    assert sue_sue_lobbylink._bud_give != 0.25
-    assert sue_sue_lobbylink._bud_take != 0.8
-    assert bob_bob_lobbylink._bud_give != 0.25
-    assert bob_bob_lobbylink._bud_take != 0.1
-    assert zia_zia_lobbylink._bud_give != 0.5
-    assert zia_zia_lobbylink._bud_take != 0.1
+    assert sue_sue_lobbylink._bud_give != 0.25 * default_bud_pool()
+    assert sue_sue_lobbylink._bud_take != 0.8 * default_bud_pool()
+    assert bob_bob_lobbylink._bud_give != 0.25 * default_bud_pool()
+    assert bob_bob_lobbylink._bud_take != 0.1 * default_bud_pool()
+    assert zia_zia_lobbylink._bud_give != 0.5 * default_bud_pool()
+    assert zia_zia_lobbylink._bud_take != 0.1 * default_bud_pool()
     assert xio_xio_lobbylink._bud_give != None
     assert xio_xio_lobbylink._bud_take != None
 
-    assert (
+    x_bud_give_sum = (
         sue_sue_lobbylink._bud_give
         + bob_bob_lobbylink._bud_give
         + zia_zia_lobbylink._bud_give
         + xio_xio_lobbylink._bud_give
-        == 1.0
     )
-    assert (
+    print(f"{x_bud_give_sum=}")
+    assert x_bud_give_sum == 1.0 * default_bud_pool()
+    x_bud_take_sum = (
         sue_sue_lobbylink._bud_take
         + bob_bob_lobbylink._bud_take
         + zia_zia_lobbylink._bud_take
         + xio_xio_lobbylink._bud_take
-        > 0.9999999
     )
-    assert (
-        sue_sue_lobbylink._bud_take
-        + bob_bob_lobbylink._bud_take
-        + zia_zia_lobbylink._bud_take
-        + xio_xio_lobbylink._bud_take
-        < 1.0
-    )
+    assert x_bud_take_sum == 1.0 * default_bud_pool()
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
@@ -199,21 +200,20 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     yao_world.calc_world_metrics()
 
     # THEN
-    charunit_bud_give_sum = 0.0
-    charunit_bud_take_sum = 0.0
-
-    assert sue_charunit._bud_give == 0.5
-    assert sue_charunit._bud_take == 0.8
-    assert bob_charunit._bud_give == 0.25
-    assert bob_charunit._bud_take == 0.1
-    assert zia_charunit._bud_give == 0.25
-    assert zia_charunit._bud_take == 0.1
+    assert sue_charunit._bud_give == 0.5 * default_bud_pool()
+    assert sue_charunit._bud_take == 0.8 * default_bud_pool()
+    assert bob_charunit._bud_give == 0.25 * default_bud_pool()
+    assert bob_charunit._bud_take == 0.1 * default_bud_pool()
+    assert zia_charunit._bud_give == 0.25 * default_bud_pool()
+    assert zia_charunit._bud_take == 0.1 * default_bud_pool()
 
     assert (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give == 1.0
+        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
+        == 1.0 * default_bud_pool()
     )
     assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take == 1.0
+        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
+        == 1.0 * default_bud_pool()
     )
 
     # WHEN anothher pledge, check metrics are as expected
@@ -225,34 +225,36 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     # THEN
     xio_charunit = yao_world.get_char(xio_text)
 
-    assert sue_charunit._bud_give != 0.5
-    assert sue_charunit._bud_take != 0.8
-    assert bob_charunit._bud_give != 0.25
-    assert bob_charunit._bud_take != 0.1
-    assert zia_charunit._bud_give != 0.25
-    assert zia_charunit._bud_take != 0.1
+    assert sue_charunit._bud_give != 0.5 * default_bud_pool()
+    assert sue_charunit._bud_take != 0.8 * default_bud_pool()
+    assert bob_charunit._bud_give != 0.25 * default_bud_pool()
+    assert bob_charunit._bud_take != 0.1 * default_bud_pool()
+    assert zia_charunit._bud_give != 0.25 * default_bud_pool()
+    assert zia_charunit._bud_take != 0.1 * default_bud_pool()
     assert xio_charunit._bud_give != None
     assert xio_charunit._bud_take != None
 
-    assert (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give < 1.0
+    sum_charunit_bud_give = (
+        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
     )
+    assert sum_charunit_bud_give < 1.0 * default_bud_pool()
     assert (
         sue_charunit._bud_give
         + bob_charunit._bud_give
         + zia_charunit._bud_give
         + xio_charunit._bud_give
-        == 1.0
+        == 1.0 * default_bud_pool()
     )
     assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take < 1.0
+        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
+        < 1.0 * default_bud_pool()
     )
     assert (
         sue_charunit._bud_take
         + bob_charunit._bud_take
         + zia_charunit._bud_take
         + xio_charunit._bud_take
-        == 1.0
+        == 1.0 * default_bud_pool()
     )
 
 
@@ -287,35 +289,39 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImp
     sue_lobbybox = yao_world.get_lobbybox(sue_text)
     bob_lobbybox = yao_world.get_lobbybox(bob_text)
     zia_lobbybox = yao_world.get_lobbybox(zia_text)
-    assert sue_lobbybox._bud_give != 0.5
-    assert sue_lobbybox._bud_take != 0.8
-    assert bob_lobbybox._bud_give != 0.25
-    assert bob_lobbybox._bud_take != 0.1
-    assert zia_lobbybox._bud_give != 0.25
-    assert zia_lobbybox._bud_take != 0.1
+    assert sue_lobbybox._bud_give != 0.5 * default_bud_pool()
+    assert sue_lobbybox._bud_take != 0.8 * default_bud_pool()
+    assert bob_lobbybox._bud_give != 0.25 * default_bud_pool()
+    assert bob_lobbybox._bud_take != 0.1 * default_bud_pool()
+    assert zia_lobbybox._bud_give != 0.25 * default_bud_pool()
+    assert zia_lobbybox._bud_take != 0.1 * default_bud_pool()
     assert (
-        sue_lobbybox._bud_give + bob_lobbybox._bud_give + zia_lobbybox._bud_give == 0.25
+        sue_lobbybox._bud_give + bob_lobbybox._bud_give + zia_lobbybox._bud_give
+        == 0.25 * default_bud_pool()
     )
     assert (
-        sue_lobbybox._bud_take + bob_lobbybox._bud_take + zia_lobbybox._bud_take == 0.25
+        sue_lobbybox._bud_take + bob_lobbybox._bud_take + zia_lobbybox._bud_take
+        == 0.25 * default_bud_pool()
     )
 
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
 
-    assert sue_charunit._bud_give == 0.375
-    assert sue_charunit._bud_take == 0.45
-    assert bob_charunit._bud_give == 0.3125
-    assert bob_charunit._bud_take == 0.275
-    assert zia_charunit._bud_give == 0.3125
-    assert zia_charunit._bud_take == 0.275
+    assert sue_charunit._bud_give == 0.375 * default_bud_pool()
+    assert sue_charunit._bud_take == 0.45 * default_bud_pool()
+    assert bob_charunit._bud_give == 0.3125 * default_bud_pool()
+    assert bob_charunit._bud_take == 0.275 * default_bud_pool()
+    assert zia_charunit._bud_give == 0.3125 * default_bud_pool()
+    assert zia_charunit._bud_take == 0.275 * default_bud_pool()
 
     assert (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give == 1.0
+        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
+        == 1.0 * default_bud_pool()
     )
     assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take == 1.0
+        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
+        == 1.0 * default_bud_pool()
     )
 
 
@@ -344,10 +350,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
 
     # THEN
     assert (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give == 1.0
+        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
+        == 1.0 * default_bud_pool()
     )
     assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take == 1.0
+        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
+        == 1.0 * default_bud_pool()
     )
 
 
@@ -438,13 +446,13 @@ class AwardAgendaMetrics:
 
     def set_sums(self, agenda_dict: dict[RoadUnit, IdeaUnit]):
         for agenda_item in agenda_dict.values():
-            self.sum_world_agenda_share += agenda_item._bud_ratio
+            self.sum_world_agenda_share += agenda_item.get_bud_share()
             if agenda_item._awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_world_i_sum += agenda_item._bud_ratio
+                self.agenda_no_world_i_sum += agenda_item.get_bud_share()
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_world_i_sum += agenda_item._bud_ratio
+                self.agenda_yes_world_i_sum += agenda_item.get_bud_share()
 
 
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
@@ -478,19 +486,24 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # print(f"{sum_world_agenda_share=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    assert x_awardagendametrics.agenda_no_world_i_sum == 0.0037472699999999996
-    assert x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505000000001
+    assert x_awardagendametrics.agenda_no_world_i_sum == 0.00374727 * default_bud_pool()
+    assert (
+        x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505 * default_bud_pool()
+    )
     assert are_equal(
         x_awardagendametrics.agenda_no_world_i_sum
         + x_awardagendametrics.agenda_yes_world_i_sum,
         x_awardagendametrics.sum_world_agenda_share,
     )
-    assert x_awardagendametrics.sum_world_agenda_share == 0.006543775000000002
+    assert (
+        x_awardagendametrics.sum_world_agenda_share == 0.006543775 * default_bud_pool()
+    )
 
     x_lobbyagendametrics = LobbyAgendaMetrics()
     x_lobbyagendametrics.set_sums(x_world=x_world)
     assert x_lobbyagendametrics.lobbylink_count == 81
-    x_sum = 0.0027965049894874455
+    x_sum = 2796504.9999999995
+    print(f"{x_lobbyagendametrics.sum_lobbybox_cred=}")
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_cred, x_sum)
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_debt, x_sum)
     assert are_equal(x_lobbyagendametrics.sum_lobbylink_cred, x_sum)
@@ -536,7 +549,7 @@ def all_charunits_have_legitimate_values(x_world: WorldUnit):
 
 
 def are_equal(x1: float, x2: float):
-    e10 = 0.0000000001
+    e10 = 0.0000001
     return abs(x1 - x2) < e10
 
 

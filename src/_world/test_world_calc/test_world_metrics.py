@@ -850,13 +850,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     oregon_idea = sue_worldunit.get_idea_obj(oregon_road)
     print(f"{oregon_idea._bud_ratio=}")
     assert sue_worldunit._sum_healerhold_share == 0
-    assert oregon_idea._healerhold_share == 0
+    assert oregon_idea._healerhold_ratio == 0
 
     # WHEN
     sue_worldunit.calc_world_metrics()
     # THEN
-    assert sue_worldunit._sum_healerhold_share == 0.038461539
-    assert oregon_idea._healerhold_share == 1
+    assert sue_worldunit._sum_healerhold_share == 0.038461539 * default_bud_pool()
+    assert oregon_idea._healerhold_ratio == 1
 
     # WHEN
     week_road = sue_worldunit.make_l1_road("weekdays")
@@ -867,10 +867,10 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # print(f"{mon_idea._problem_bool=} {mon_idea._bud_ratio=}")
     sue_worldunit.calc_world_metrics()
     # THEN
-    assert sue_worldunit._sum_healerhold_share != 0.038461539
-    assert sue_worldunit._sum_healerhold_share == 0.06923077
-    assert oregon_idea._healerhold_share == 0.5555555571604939
-    assert mon_idea._healerhold_share == 0.44444444283950624
+    assert sue_worldunit._sum_healerhold_share != 0.038461539 * default_bud_pool()
+    assert sue_worldunit._sum_healerhold_share == 0.06923077 * default_bud_pool()
+    assert oregon_idea._healerhold_ratio == 0.5555555571604938
+    assert mon_idea._healerhold_ratio == 0.4444444428395062
 
     # WHEN
     tue_road = sue_worldunit.make_road(week_road, "Tuesday")
@@ -883,11 +883,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     sue_worldunit.calc_world_metrics()
 
     # THEN
-    assert sue_worldunit._sum_healerhold_share != 0.06923076923076923
-    assert sue_worldunit._sum_healerhold_share == 0.100000001
-    assert oregon_idea._healerhold_share == 0.38461538615384616
-    assert mon_idea._healerhold_share == 0.3076923069230769
-    assert tue_idea._healerhold_share == 0.3076923069230769
+    assert (
+        sue_worldunit._sum_healerhold_share != 0.06923076923076923 * default_bud_pool()
+    )
+    assert sue_worldunit._sum_healerhold_share == 0.100000001 * default_bud_pool()
+    assert oregon_idea._healerhold_ratio == 0.38461538615384616
+    assert mon_idea._healerhold_ratio == 0.3076923069230769
+    assert tue_idea._healerhold_ratio == 0.3076923069230769
 
     # WHEN
     sue_worldunit.edit_idea_attr(week_road, healerhold=sue_healerhold)
@@ -897,9 +899,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_sum_healerhold_share():
     # THEN
     # display_ideatree(sue_world, "Econ").show()
     assert sue_worldunit._sum_healerhold_share == 0
-    assert oregon_idea._healerhold_share == 0
-    assert mon_idea._healerhold_share == 0
-    assert tue_idea._healerhold_share == 0
+    assert oregon_idea._healerhold_ratio == 0
+    assert mon_idea._healerhold_ratio == 0
+    assert tue_idea._healerhold_ratio == 0
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econ_dict_v1():

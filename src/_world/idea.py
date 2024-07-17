@@ -263,7 +263,7 @@ class IdeaUnit:
     _is_expanded: bool = None
     _active_hx: dict[int, bool] = None
     _road_delimiter: str = None
-    _healerhold_share: float = None
+    _healerhold_ratio: float = None
 
     def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
         base_reasonunit_exists = self.base_reasonunit_exists(necessary_base)
@@ -350,7 +350,7 @@ class IdeaUnit:
                 if lemma_fact.base == missing_fact:
                     self.set_factunit(lemma_fact)
 
-    def set_bud_share(
+    def set_bud_attr(
         self,
         x_bud_onset: BudNum,
         x_bud_cease: BudNum,
@@ -359,7 +359,13 @@ class IdeaUnit:
         self._bud_onset = x_bud_onset
         self._bud_cease = x_bud_cease
         self._bud_ratio = (self._bud_cease - self._bud_onset) / total_bud_pool
-        self.set_awardheirs_bud_give_take()
+        self.set_awardheirs_bud_give_bud_take()
+
+    def get_bud_share(self) -> float:
+        if self._bud_onset is None or self._bud_cease is None:
+            return 0
+        else:
+            return self._bud_cease - self._bud_onset
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
         return [
@@ -483,12 +489,12 @@ class IdeaUnit:
     def get_awardheirs_take_weight_sum(self) -> float:
         return sum(awardlink.take_weight for awardlink in self._awardheirs.values())
 
-    def set_awardheirs_bud_give_take(self):
+    def set_awardheirs_bud_give_bud_take(self):
         awardheirs_give_weight_sum = self.get_awardheirs_give_weight_sum()
         awardheirs_take_weight_sum = self.get_awardheirs_take_weight_sum()
         for awardheir_x in self._awardheirs.values():
             awardheir_x.set_bud_give_take(
-                idea_bud_share=self._bud_ratio,
+                idea_bud_share=self.get_bud_share(),
                 awardheirs_give_weight_sum=awardheirs_give_weight_sum,
                 awardheirs_take_weight_sum=awardheirs_take_weight_sum,
             )
@@ -995,7 +1001,7 @@ def ideaunit_shop(
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
     _road_delimiter: str = None,
-    _healerhold_share: float = None,
+    _healerhold_ratio: float = None,
 ) -> IdeaUnit:
     _world_real_id = root_label() if _world_real_id is None else _world_real_id
     _healerhold = healerhold_shop() if _healerhold is None else _healerhold
@@ -1044,7 +1050,7 @@ def ideaunit_shop(
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_none(_active_hx),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _healerhold_share=get_0_if_None(_healerhold_share),
+        _healerhold_ratio=get_0_if_None(_healerhold_ratio),
     )
     if x_ideakid._root:
         x_ideakid.set_idea_label(_label=_world_real_id)
