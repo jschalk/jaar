@@ -717,8 +717,8 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("world_idea_awardlink", atom_insert())
             x_atomunit.set_required_arg("road", after_ideaunit.get_road())
             x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
-            x_atomunit.set_optional_arg("credor_weight", after_awardlink.credor_weight)
-            x_atomunit.set_optional_arg("debtor_weight", after_awardlink.debtor_weight)
+            x_atomunit.set_optional_arg("give_weight", after_awardlink.give_weight)
+            x_atomunit.set_optional_arg("take_weight", after_awardlink.take_weight)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_updates(
@@ -738,13 +738,13 @@ class ChangeUnit:
                 x_atomunit = atomunit_shop("world_idea_awardlink", atom_update())
                 x_atomunit.set_required_arg("road", before_ideaunit.get_road())
                 x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
-                if before_awardlink.credor_weight != after_awardlink.credor_weight:
+                if before_awardlink.give_weight != after_awardlink.give_weight:
                     x_atomunit.set_optional_arg(
-                        "credor_weight", after_awardlink.credor_weight
+                        "give_weight", after_awardlink.give_weight
                     )
-                if before_awardlink.debtor_weight != after_awardlink.debtor_weight:
+                if before_awardlink.take_weight != after_awardlink.take_weight:
                     x_atomunit.set_optional_arg(
-                        "debtor_weight", after_awardlink.debtor_weight
+                        "take_weight", after_awardlink.take_weight
                     )
                 self.set_atomunit(x_atomunit)
 

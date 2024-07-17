@@ -101,9 +101,9 @@ def test_WorldUnit_set_char_CorrectlySets_chars_lobbylinks():
     zia_lobby = zia_text
     sue_lobby = sue_text
     xio_lobby = xio_text
-    yao_world._idearoot.set_awardlink(awardlink_shop(zia_lobby, credor_weight=10))
-    yao_world._idearoot.set_awardlink(awardlink_shop(sue_lobby, credor_weight=10))
-    yao_world._idearoot.set_awardlink(awardlink_shop(xio_lobby, credor_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(zia_lobby, give_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(sue_lobby, give_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(xio_lobby, give_weight=10))
     assert len(yao_world._idearoot._awardlinks) == 3
 
 

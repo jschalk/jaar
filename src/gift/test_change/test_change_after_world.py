@@ -473,17 +473,17 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_awa
     run_awardlink = before_sue_worldunit.get_idea_obj(ball_road)._awardlinks.get(
         run_text
     )
-    assert run_awardlink.credor_weight == 1
-    assert run_awardlink.debtor_weight == 1
+    assert run_awardlink.give_weight == 1
+    assert run_awardlink.take_weight == 1
 
     # WHEN
-    x_credor_weight = 55
-    x_debtor_weight = 66
+    x_give_weight = 55
+    x_take_weight = 66
     update_disc_atomunit = atomunit_shop("world_idea_awardlink", atom_update())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("lobby_id", run_text)
-    update_disc_atomunit.set_optional_arg("credor_weight", x_credor_weight)
-    update_disc_atomunit.set_optional_arg("debtor_weight", x_debtor_weight)
+    update_disc_atomunit.set_optional_arg("give_weight", x_give_weight)
+    update_disc_atomunit.set_optional_arg("take_weight", x_take_weight)
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
@@ -491,9 +491,9 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_awa
 
     # THEN
     run_awardlink = after_sue_au.get_idea_obj(ball_road)._awardlinks.get(run_text)
-    print(f"{run_awardlink.credor_weight=}")
-    assert run_awardlink.credor_weight == x_credor_weight
-    assert run_awardlink.debtor_weight == x_debtor_weight
+    print(f"{run_awardlink.give_weight=}")
+    assert run_awardlink.give_weight == x_give_weight
+    assert run_awardlink.take_weight == x_take_weight
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_awardlink():
@@ -516,13 +516,13 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_awa
     assert before_ball_idea._awardlinks.get(run_text) is None
 
     # WHEN
-    x_credor_weight = 55
-    x_debtor_weight = 66
+    x_give_weight = 55
+    x_take_weight = 66
     update_disc_atomunit = atomunit_shop("world_idea_awardlink", atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("lobby_id", run_text)
-    update_disc_atomunit.set_optional_arg("credor_weight", x_credor_weight)
-    update_disc_atomunit.set_optional_arg("debtor_weight", x_debtor_weight)
+    update_disc_atomunit.set_optional_arg("give_weight", x_give_weight)
+    update_disc_atomunit.set_optional_arg("take_weight", x_take_weight)
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)

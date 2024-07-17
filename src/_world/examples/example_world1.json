@@ -1554,8 +1554,8 @@
                     "call high school friend": {
                         "_awardlinks": {
                             "Perrison": {
-                                "credor_weight": 1.0,
-                                "debtor_weight": 1.0,
+                                "give_weight": 1.0,
+                                "take_weight": 1.0,
                                 "lobby_id": "Perrison"
                             }
                         },
@@ -1608,8 +1608,8 @@
                             "check cat water": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -1675,8 +1675,8 @@
                             "clean baby seats": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -1719,8 +1719,8 @@
                             "clean bathroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -1752,8 +1752,8 @@
                             "clean cat poo": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -1793,8 +1793,8 @@
                             "clean humidifiers": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -1834,8 +1834,8 @@
                             "clean sheets couch blankets": {
                                 "_awardlinks": {
                                     "Perrison": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": "Perrison"
                                     }
                                 },
@@ -1886,8 +1886,8 @@
                             "clean table": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -1927,8 +1927,8 @@
                             "deep clean play mat": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -1979,8 +1979,8 @@
                             "empty roomba": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2020,8 +2020,8 @@
                             "empty roomba Friday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2061,8 +2061,8 @@
                             "laundry monday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2102,8 +2102,8 @@
                             "laundry saturday": {
                                 "_awardlinks": {
                                     "Travis Fox": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": "Travis Fox"
                                     }
                                 },
@@ -2143,8 +2143,8 @@
                             "laundry wednesday": {
                                 "_awardlinks": {
                                     "America": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": "America"
                                     }
                                 },
@@ -2209,8 +2209,8 @@
                             "prepare_bed clean bedroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2242,8 +2242,8 @@
                             "roomba bedroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2283,8 +2283,8 @@
                             "roomba bedroom Friday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2324,8 +2324,8 @@
                             "roomba living area": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2365,8 +2365,8 @@
                             "roomba living area thur": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2406,8 +2406,8 @@
                             "roomba maintenance": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2447,8 +2447,8 @@
                             "wipe down play mat2": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2505,8 +2505,8 @@
                             "5 push-ups": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2530,8 +2530,8 @@
                             "check protein for week is adequate": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2555,8 +2555,8 @@
                             "clip nails": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2588,8 +2588,8 @@
                             "cook veggies every morning": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2613,8 +2613,8 @@
                             "daily exercise 20min": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2658,8 +2658,8 @@
                             "morning multivitamin": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2700,8 +2700,8 @@
                             "noce hair removal": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2736,8 +2736,8 @@
                             "pull ear hair": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2772,8 +2772,8 @@
                             "shampoo hair": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2805,8 +2805,8 @@
                             "straight back for 45 secs": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2830,8 +2830,8 @@
                             "trim beard": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -2865,8 +2865,8 @@
                                     "bike or something": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": ",Family"
                                             }
                                         },
@@ -2898,8 +2898,8 @@
                                     "chest and arms (mon)": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": ",Family"
                                             }
                                         },
@@ -2971,8 +2971,8 @@
                                     "core lower back": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": ",Family"
                                             }
                                         },
@@ -3004,8 +3004,8 @@
                                     "rest": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": ",Family"
                                             }
                                         },
@@ -3027,8 +3027,8 @@
                                     "shoulders and upper back": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": ",Family"
                                             }
                                         },
@@ -3075,8 +3075,8 @@
                                     "squats hamstrings and calves": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": ",Family"
                                             }
                                         },
@@ -3121,8 +3121,8 @@
                             "be reponsible for rent": {
                                 "_awardlinks": {
                                     "Perrison": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": "Perrison"
                                     }
                                 },
@@ -3154,8 +3154,8 @@
                             "be responsible for expenses card": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -3187,8 +3187,8 @@
                             "be responsible for utilities": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -3220,8 +3220,8 @@
                             "set resturant bucks for the week": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -3258,8 +3258,8 @@
                     "Housing": {
                         "_awardlinks": {
                             ",OceanVista Apt": {
-                                "credor_weight": 1.0,
-                                "debtor_weight": 1.0,
+                                "give_weight": 1.0,
+                                "take_weight": 1.0,
                                 "lobby_id": ",OceanVista Apt"
                             }
                         },
@@ -3306,8 +3306,8 @@
                                                     "heater maintenance": {
                                                         "_awardlinks": {
                                                             "Norberto": {
-                                                                "credor_weight": 1.0,
-                                                                "debtor_weight": 1.0,
+                                                                "give_weight": 1.0,
+                                                                "take_weight": 1.0,
                                                                 "lobby_id": "Norberto"
                                                             }
                                                         },
@@ -3397,8 +3397,8 @@
                             "clip fingernails": {
                                 "_awardlinks": {
                                     "America": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": "America"
                                     }
                                 },
@@ -3449,8 +3449,8 @@
                             "get rid of toy get new toy": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Family"
                                     }
                                 },
@@ -3534,8 +3534,8 @@
                     "say hi to birds": {
                         "_awardlinks": {
                             ",Family": {
-                                "credor_weight": 1.0,
-                                "debtor_weight": 1.0,
+                                "give_weight": 1.0,
+                                "take_weight": 1.0,
                                 "lobby_id": ",Family"
                             }
                         },
@@ -3590,18 +3590,18 @@
             "D&B": {
                 "_awardlinks": {
                     ",Climate Death": {
-                        "credor_weight": 1.0,
-                        "debtor_weight": 1.0,
+                        "give_weight": 1.0,
+                        "take_weight": 1.0,
                         "lobby_id": ",Climate Death"
                     },
                     ",Family": {
-                        "credor_weight": 1.0,
-                        "debtor_weight": 1.0,
+                        "give_weight": 1.0,
+                        "take_weight": 1.0,
                         "lobby_id": ",Family"
                     },
                     "America": {
-                        "credor_weight": 1.0,
-                        "debtor_weight": 1.0,
+                        "give_weight": 1.0,
+                        "take_weight": 1.0,
                         "lobby_id": "America"
                     }
                 },
@@ -3610,8 +3610,8 @@
                     "Aarons friends are desperate for of housing support": {
                         "_awardlinks": {
                             "Renee Elise Goldsberry": {
-                                "credor_weight": 1.0,
-                                "debtor_weight": 1.0,
+                                "give_weight": 1.0,
+                                "take_weight": 1.0,
                                 "lobby_id": "Renee Elise Goldsberry"
                             }
                         },
@@ -3620,8 +3620,8 @@
                             "Ask Chuck monthly what I can do": {
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": "Renee Elise Goldsberry"
                                     }
                                 },
@@ -3657,8 +3657,8 @@
                     "develop D&B software": {
                         "_awardlinks": {
                             ",hurt by us dollar": {
-                                "credor_weight": 1.0,
-                                "debtor_weight": 1.0,
+                                "give_weight": 1.0,
+                                "take_weight": 1.0,
                                 "lobby_id": ",hurt by us dollar"
                             }
                         },
@@ -3718,8 +3718,8 @@
                             "donate to influential people that are pro-Climate Death": {
                                 "_awardlinks": {
                                     ",Climate Death": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Climate Death"
                                     }
                                 },
@@ -3804,8 +3804,8 @@
                             "sympathetic receptive to David": {
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": "Renee Elise Goldsberry"
                                     }
                                 },
@@ -3813,8 +3813,8 @@
                                     "be available for phone call": {
                                         "_awardlinks": {
                                             "Renee Elise Goldsberry": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": "Renee Elise Goldsberry"
                                             }
                                         },
@@ -3846,13 +3846,13 @@
                                     "call David and discuss methodology": {
                                         "_awardlinks": {
                                             ",Climate Death": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": ",Climate Death"
                                             },
                                             "Renee Elise Goldsberry": {
-                                                "credor_weight": 1.0,
-                                                "debtor_weight": 1.0,
+                                                "give_weight": 1.0,
+                                                "take_weight": 1.0,
                                                 "lobby_id": "Renee Elise Goldsberry"
                                             }
                                         },
@@ -3928,8 +3928,8 @@
                             "write letters about Climate Death to congressman": {
                                 "_awardlinks": {
                                     ",Climate Death": {
-                                        "credor_weight": 1.0,
-                                        "debtor_weight": 1.0,
+                                        "give_weight": 1.0,
+                                        "take_weight": 1.0,
                                         "lobby_id": ",Climate Death"
                                     }
                                 },

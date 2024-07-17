@@ -68,9 +68,9 @@ def test_WorldUnit_3AdvocatesNoideaunit_shop():
     zia_worldunit.set_charunit(yao_charunit)
     zia_worldunit.set_charunit(sue_charunit)
     zia_worldunit.set_charunit(zia_charunit)
-    zia_worldunit._idearoot.set_awardlink(awardlink_shop(yao_text, credor_weight=10))
-    zia_worldunit._idearoot.set_awardlink(awardlink_shop(sue_text, credor_weight=10))
-    zia_worldunit._idearoot.set_awardlink(awardlink_shop(zia_text, credor_weight=10))
+    zia_worldunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_weight=10))
+    zia_worldunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_weight=10))
+    zia_worldunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_weight=10))
 
     # WHEN
     assert zia_worldunit.get_awardlinks_metrics() != None

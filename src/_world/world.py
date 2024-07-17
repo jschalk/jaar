@@ -1981,7 +1981,6 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
             kid_label = get_obj_from_idea_dict(idea_dict, "_label")
             kid_dict[parent_road_text] = x_world.make_road(parent_road, kid_label)
             to_evaluate_idea_dicts.append(kid_dict)
-
         x_ideakid = ideaunit_shop(
             _label=get_obj_from_idea_dict(idea_dict, "_label"),
             _weight=get_obj_from_idea_dict(idea_dict, "_weight"),
@@ -2004,6 +2003,7 @@ def set_idearoot_kids_from_dict(x_world: WorldUnit, idearoot_dict: dict):
             _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
             # _world_real_id=x_world._real_id,
         )
+        print(f"{x_ideakid.get_road()=}")
         x_world.add_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 
 

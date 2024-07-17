@@ -177,21 +177,21 @@ def test_IdeaUnit_set_parent_road_ReturnsCorrectObj():
 
 def test_IdeaUnit_awardlinks_exist():
     # ESTABLISH
-    biker_credor_weight = 12
-    biker_debtor_weight = 15
+    biker_give_weight = 12
+    biker_take_weight = 15
     biker_awardlink = awardlink_shop(
         lobby_id="bikers2",
-        credor_weight=biker_credor_weight,
-        debtor_weight=biker_debtor_weight,
+        give_weight=biker_give_weight,
+        take_weight=biker_take_weight,
     )
 
     swimmer_lobby_id = "swimmers"
-    swimmer_credor_weight = 29
-    swimmer_debtor_weight = 32
+    swimmer_give_weight = 29
+    swimmer_take_weight = 32
     swimmer_awardlink = awardlink_shop(
         lobby_id=swimmer_lobby_id,
-        credor_weight=swimmer_credor_weight,
-        debtor_weight=swimmer_debtor_weight,
+        give_weight=swimmer_give_weight,
+        take_weight=swimmer_take_weight,
     )
 
     x_lobbylinks = {
@@ -209,23 +209,23 @@ def test_IdeaUnit_awardlinks_exist():
 
 def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValues():
     # ESTABLISH
-    biker_credor_weight = 12
-    biker_debtor_weight = 15
+    biker_give_weight = 12
+    biker_take_weight = 15
     biker_text = "bikers2"
     biker_awardlink = awardheir_shop(
         lobby_id=biker_text,
-        credor_weight=biker_credor_weight,
-        debtor_weight=biker_debtor_weight,
+        give_weight=biker_give_weight,
+        take_weight=biker_take_weight,
     )
 
     swimmer_text = "swimmers"
     swimmer_lobby_id = swimmer_text
-    swimmer_credor_weight = 29
-    swimmer_debtor_weight = 32
+    swimmer_give_weight = 29
+    swimmer_take_weight = 32
     swimmer_awardlink = awardheir_shop(
         lobby_id=swimmer_lobby_id,
-        credor_weight=swimmer_credor_weight,
-        debtor_weight=swimmer_debtor_weight,
+        give_weight=swimmer_give_weight,
+        take_weight=swimmer_take_weight,
     )
 
     x_lobbylinks = {
@@ -238,10 +238,10 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbylinks)
 
     # THEN
-    assert sport_idea.get_awardheirs_credor_weight_sum() != None
-    assert sport_idea.get_awardheirs_credor_weight_sum() == 41
-    assert sport_idea.get_awardheirs_debtor_weight_sum() != None
-    assert sport_idea.get_awardheirs_debtor_weight_sum() == 47
+    assert sport_idea.get_awardheirs_give_weight_sum() != None
+    assert sport_idea.get_awardheirs_give_weight_sum() == 41
+    assert sport_idea.get_awardheirs_take_weight_sum() != None
+    assert sport_idea.get_awardheirs_take_weight_sum() == 47
 
     assert len(sport_idea._awardheirs) == 2
 
@@ -270,8 +270,8 @@ def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(_label=sport_text)
-    assert sport_idea.get_awardheirs_credor_weight_sum() != None
-    assert sport_idea.get_awardheirs_debtor_weight_sum() != None
+    assert sport_idea.get_awardheirs_give_weight_sum() != None
+    assert sport_idea.get_awardheirs_take_weight_sum() != None
 
     # WHEN / THEN
     # does not crash with empty set
@@ -470,18 +470,18 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         ),
     }
     biker_lobby_id = "bikers"
-    biker_credor_weight = 3.0
-    biker_debtor_weight = 7.0
+    biker_give_weight = 3.0
+    biker_take_weight = 7.0
     biker_awardlink = awardlink_shop(
-        biker_lobby_id, biker_credor_weight, biker_debtor_weight
+        biker_lobby_id, biker_give_weight, biker_take_weight
     )
     flyer_lobby_id = "flyers"
-    flyer_credor_weight = 6.0
-    flyer_debtor_weight = 9.0
+    flyer_give_weight = 6.0
+    flyer_take_weight = 9.0
     flyer_awardlink = awardlink_shop(
         lobby_id=flyer_lobby_id,
-        credor_weight=flyer_credor_weight,
-        debtor_weight=flyer_debtor_weight,
+        give_weight=flyer_give_weight,
+        take_weight=flyer_take_weight,
     )
     biker_and_flyer_awardlinks = {
         biker_awardlink.lobby_id: biker_awardlink,
@@ -489,13 +489,13 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     }
     biker_get_dict = {
         "lobby_id": biker_awardlink.lobby_id,
-        "credor_weight": biker_awardlink.credor_weight,
-        "debtor_weight": biker_awardlink.debtor_weight,
+        "give_weight": biker_awardlink.give_weight,
+        "take_weight": biker_awardlink.take_weight,
     }
     flyer_get_dict = {
         "lobby_id": flyer_awardlink.lobby_id,
-        "credor_weight": flyer_awardlink.credor_weight,
-        "debtor_weight": flyer_awardlink.debtor_weight,
+        "give_weight": flyer_awardlink.give_weight,
+        "take_weight": flyer_awardlink.take_weight,
     }
     x1_awardlinks = {biker_lobby_id: biker_get_dict, flyer_lobby_id: flyer_get_dict}
     sue_text = "Sue"

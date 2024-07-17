@@ -883,9 +883,9 @@ def test_WorldUnit_calc_world_metrics_Sets_deletes_awardheirs():
     swim_road = x_world.make_road(prom_text, swim_text)
 
     x_world.add_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(yao_text, credor_weight=10)
-    awardlink_zia = awardlink_shop(zia_text, credor_weight=10)
-    awardlink_Xio = awardlink_shop(Xio_text, credor_weight=10)
+    awardlink_yao = awardlink_shop(yao_text, give_weight=10)
+    awardlink_zia = awardlink_shop(zia_text, give_weight=10)
+    awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
 
     swim_idea = x_world.get_idea_obj(swim_road)
     x_world.edit_idea_attr(swim_road, awardlink=awardlink_yao)

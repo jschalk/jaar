@@ -437,16 +437,16 @@ class IdeaUnit:
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
                 lobby_id=ib.lobby_id,
-                credor_weight=ib.credor_weight,
-                debtor_weight=ib.debtor_weight,
+                give_weight=ib.give_weight,
+                take_weight=ib.take_weight,
             )
             self._awardheirs[awardheir.lobby_id] = awardheir
 
         for ib in self._awardlinks.values():
             awardheir = awardheir_shop(
                 lobby_id=ib.lobby_id,
-                credor_weight=ib.credor_weight,
-                debtor_weight=ib.debtor_weight,
+                give_weight=ib.give_weight,
+                take_weight=ib.take_weight,
             )
             self._awardheirs[awardheir.lobby_id] = awardheir
 
@@ -477,20 +477,20 @@ class IdeaUnit:
                 bud_give=bl._bud_give, bud_take=bl._bud_take
             )
 
-    def get_awardheirs_credor_weight_sum(self) -> float:
-        return sum(awardlink.credor_weight for awardlink in self._awardheirs.values())
+    def get_awardheirs_give_weight_sum(self) -> float:
+        return sum(awardlink.give_weight for awardlink in self._awardheirs.values())
 
-    def get_awardheirs_debtor_weight_sum(self) -> float:
-        return sum(awardlink.debtor_weight for awardlink in self._awardheirs.values())
+    def get_awardheirs_take_weight_sum(self) -> float:
+        return sum(awardlink.take_weight for awardlink in self._awardheirs.values())
 
     def set_awardheirs_bud_give_take(self):
-        awardheirs_credor_weight_sum = self.get_awardheirs_credor_weight_sum()
-        awardheirs_debtor_weight_sum = self.get_awardheirs_debtor_weight_sum()
+        awardheirs_give_weight_sum = self.get_awardheirs_give_weight_sum()
+        awardheirs_take_weight_sum = self.get_awardheirs_take_weight_sum()
         for awardheir_x in self._awardheirs.values():
             awardheir_x.set_bud_give_take(
                 idea_bud_share=self._bud_ratio,
-                awardheirs_credor_weight_sum=awardheirs_credor_weight_sum,
-                awardheirs_debtor_weight_sum=awardheirs_debtor_weight_sum,
+                awardheirs_give_weight_sum=awardheirs_give_weight_sum,
+                awardheirs_take_weight_sum=awardheirs_take_weight_sum,
             )
 
     def clear_awardlines(self):

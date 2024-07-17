@@ -79,11 +79,11 @@
             "normal_table_name": "awardlink"
         },
         "optional_args": {
-            "credor_weight": {
+            "give_weight": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "debtor_weight": {
+            "take_weight": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             }

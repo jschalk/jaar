@@ -457,9 +457,9 @@ def add_world_idea_awardlink_insert_to_legible_list(
         for idea_awardlink_atom in road_dict.values():
             lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            credor_weight_value = idea_awardlink_atom.get_value("credor_weight")
-            debtor_weight_value = idea_awardlink_atom.get_value("debtor_weight")
-            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
+            give_weight_value = idea_awardlink_atom.get_value("give_weight")
+            take_weight_value = idea_awardlink_atom.get_value("take_weight")
+            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with give_weight={give_weight_value} and take_weight={take_weight_value}."
             legible_list.append(x_str)
 
 
@@ -470,14 +470,14 @@ def add_world_idea_awardlink_update_to_legible_list(
         for idea_awardlink_atom in road_dict.values():
             lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            credor_weight_value = idea_awardlink_atom.get_value("credor_weight")
-            debtor_weight_value = idea_awardlink_atom.get_value("debtor_weight")
-            if credor_weight_value != None and debtor_weight_value != None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value} and debtor_weight={debtor_weight_value}."
-            elif credor_weight_value != None and debtor_weight_value is None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now credor_weight={credor_weight_value}."
-            elif credor_weight_value is None and debtor_weight_value != None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now debtor_weight={debtor_weight_value}."
+            give_weight_value = idea_awardlink_atom.get_value("give_weight")
+            take_weight_value = idea_awardlink_atom.get_value("take_weight")
+            if give_weight_value != None and take_weight_value != None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value} and take_weight={take_weight_value}."
+            elif give_weight_value != None and take_weight_value is None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value}."
+            elif give_weight_value is None and take_weight_value != None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_weight={take_weight_value}."
             legible_list.append(x_str)
 
 

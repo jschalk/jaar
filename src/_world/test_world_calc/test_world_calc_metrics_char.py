@@ -20,9 +20,9 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     sue_world.set_charunit(charunit_shop(yao_text))
     sue_world.set_charunit(charunit_shop(zia_text))
     sue_world.set_charunit(charunit_shop(Xio_text))
-    yao_awardlink = awardlink_shop(yao_text, credor_weight=20, debtor_weight=6)
-    zia_awardlink = awardlink_shop(zia_text, credor_weight=10, debtor_weight=1)
-    Xio_awardlink = awardlink_shop(Xio_text, credor_weight=10)
+    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
+    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
+    Xio_awardlink = awardlink_shop(Xio_text, give_weight=10)
     sue_world._idearoot.set_awardlink(yao_awardlink)
     sue_world._idearoot.set_awardlink(zia_awardlink)
     sue_world._idearoot.set_awardlink(Xio_awardlink)
@@ -72,9 +72,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
     yao_world.set_charunit(charunit_shop(sue_text))
     yao_world.set_charunit(charunit_shop(bob_text))
     yao_world.set_charunit(charunit_shop(zia_text))
-    sue_awardlink = awardlink_shop(sue_text, 20, debtor_weight=40)
-    bob_awardlink = awardlink_shop(bob_text, 10, debtor_weight=5)
-    zia_awardlink = awardlink_shop(zia_text, 10, debtor_weight=5)
+    sue_awardlink = awardlink_shop(sue_text, 20, take_weight=40)
+    bob_awardlink = awardlink_shop(bob_text, 10, take_weight=5)
+    zia_awardlink = awardlink_shop(zia_text, 10, take_weight=5)
     yao_world.edit_idea_attr(yao_world._real_id, awardlink=sue_awardlink)
     yao_world.edit_idea_attr(yao_world._real_id, awardlink=bob_awardlink)
     yao_world.edit_idea_attr(yao_world._real_id, awardlink=zia_awardlink)
@@ -119,7 +119,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
     # ESTABLISH anothher pledge, check metrics are as expected
     xio_text = "Xio"
     yao_world.set_charunit(charunit_shop(xio_text))
-    yao_world._idearoot.set_awardlink(awardlink_shop(xio_text, 20, debtor_weight=13))
+    yao_world._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=13))
 
     # WHEN
     yao_world.calc_world_metrics()
@@ -177,9 +177,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     yao_world.set_charunit(charunit_shop(sue_text))
     yao_world.set_charunit(charunit_shop(bob_text))
     yao_world.set_charunit(charunit_shop(zia_text))
-    bl_sue = awardlink_shop(sue_text, 20, debtor_weight=40)
-    bl_bob = awardlink_shop(bob_text, 10, debtor_weight=5)
-    bl_zia = awardlink_shop(zia_text, 10, debtor_weight=5)
+    bl_sue = awardlink_shop(sue_text, 20, take_weight=40)
+    bl_bob = awardlink_shop(bob_text, 10, take_weight=5)
+    bl_zia = awardlink_shop(zia_text, 10, take_weight=5)
     yao_world.get_idea_obj(swim_road).set_awardlink(bl_sue)
     yao_world.get_idea_obj(swim_road).set_awardlink(bl_bob)
     yao_world.get_idea_obj(swim_road).set_awardlink(bl_zia)
@@ -219,7 +219,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     # WHEN anothher pledge, check metrics are as expected
     xio_text = "Xio"
     yao_world.set_charunit(charunit_shop(xio_text))
-    yao_world._idearoot.set_awardlink(awardlink_shop(xio_text, 20, debtor_weight=10))
+    yao_world._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=10))
     yao_world.calc_world_metrics()
 
     # THEN
@@ -268,9 +268,9 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImp
     yao_world.set_charunit(charunit_shop(sue_text))
     yao_world.set_charunit(charunit_shop(bob_text))
     yao_world.set_charunit(charunit_shop(zia_text))
-    sue_awardlink = awardlink_shop(sue_text, 20, debtor_weight=40)
-    bob_awardlink = awardlink_shop(bob_text, 10, debtor_weight=5)
-    zia_awardlink = awardlink_shop(zia_text, 10, debtor_weight=5)
+    sue_awardlink = awardlink_shop(sue_text, 20, take_weight=40)
+    bob_awardlink = awardlink_shop(bob_text, 10, take_weight=5)
+    zia_awardlink = awardlink_shop(zia_text, 10, take_weight=5)
     swim_idea = yao_world.get_idea_obj(swim_road)
     swim_idea.set_awardlink(sue_awardlink)
     swim_idea.set_awardlink(bob_awardlink)

@@ -486,18 +486,18 @@ def test_WorldUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 
     # _awardlink: dict = None,
     sue_world._idearoot._kids[casa_text]._awardlinks = {
-        "fun": awardlink_shop(lobby_id="fun", credor_weight=1, debtor_weight=7)
+        "fun": awardlink_shop(lobby_id="fun", give_weight=1, take_weight=7)
     }
     _awardlinks = sue_world._idearoot._kids[casa_text]._awardlinks
     assert _awardlinks == {
-        "fun": awardlink_shop(lobby_id="fun", credor_weight=1, debtor_weight=7)
+        "fun": awardlink_shop(lobby_id="fun", give_weight=1, take_weight=7)
     }
     sue_world.edit_idea_attr(
         road=casa_road,
-        awardlink=awardlink_shop(lobby_id="fun", credor_weight=4, debtor_weight=8),
+        awardlink=awardlink_shop(lobby_id="fun", give_weight=4, take_weight=8),
     )
     assert sue_world._idearoot._kids[casa_text]._awardlinks == {
-        "fun": awardlink_shop(lobby_id="fun", credor_weight=4, debtor_weight=8)
+        "fun": awardlink_shop(lobby_id="fun", give_weight=4, take_weight=8)
     }
 
     # _is_expanded: dict = None,
@@ -869,9 +869,9 @@ def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
     assert len(sue_world.get_lobby_ids_dict()) == 3
     swim_text = "swim"
     sue_world.add_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(yao_text, credor_weight=10)
-    awardlink_zia = awardlink_shop(zia_text, credor_weight=10)
-    awardlink_Xio = awardlink_shop(Xio_text, credor_weight=10)
+    awardlink_yao = awardlink_shop(yao_text, give_weight=10)
+    awardlink_zia = awardlink_shop(zia_text, give_weight=10)
+    awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
     swim_road = sue_world.make_l1_road(swim_text)
     sue_world.edit_idea_attr(swim_road, awardlink=awardlink_yao)
     sue_world.edit_idea_attr(swim_road, awardlink=awardlink_zia)
@@ -917,9 +917,9 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
     swim_road = x_world.make_road(prom_text, swim_text)
 
     x_world.add_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(yao_text, credor_weight=10)
-    awardlink_zia = awardlink_shop(zia_text, credor_weight=10)
-    awardlink_Xio = awardlink_shop(Xio_text, credor_weight=10)
+    awardlink_yao = awardlink_shop(yao_text, give_weight=10)
+    awardlink_zia = awardlink_shop(zia_text, give_weight=10)
+    awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
 
     swim_idea = x_world.get_idea_obj(swim_road)
     x_world.edit_idea_attr(swim_road, awardlink=awardlink_yao)

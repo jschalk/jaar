@@ -267,20 +267,20 @@ def _modify_world_idea_awardlink_delete(x_world: WorldUnit, x_atom: AtomUnit):
 def _modify_world_idea_awardlink_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_idea = x_world.get_idea_obj(x_atom.get_value("road"))
     x_awardlink = x_idea._awardlinks.get(x_atom.get_value("lobby_id"))
-    x_credor_weight = x_atom.get_value("credor_weight")
-    if x_credor_weight != None and x_awardlink.credor_weight != x_credor_weight:
-        x_awardlink.credor_weight = x_credor_weight
-    x_debtor_weight = x_atom.get_value("debtor_weight")
-    if x_debtor_weight != None and x_awardlink.debtor_weight != x_debtor_weight:
-        x_awardlink.debtor_weight = x_debtor_weight
+    x_give_weight = x_atom.get_value("give_weight")
+    if x_give_weight != None and x_awardlink.give_weight != x_give_weight:
+        x_awardlink.give_weight = x_give_weight
+    x_take_weight = x_atom.get_value("take_weight")
+    if x_take_weight != None and x_awardlink.take_weight != x_take_weight:
+        x_awardlink.take_weight = x_take_weight
     x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
 def _modify_world_idea_awardlink_insert(x_world: WorldUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
         lobby_id=x_atom.get_value("lobby_id"),
-        credor_weight=x_atom.get_value("credor_weight"),
-        debtor_weight=x_atom.get_value("debtor_weight"),
+        give_weight=x_atom.get_value("give_weight"),
+        take_weight=x_atom.get_value("take_weight"),
     )
     x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
@@ -507,9 +507,13 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._bud_pool != y_obj._bud_pool
             or x_obj._bud_coin != y_obj._bud_coin
         )
-    elif category in {"world_char_lobbylink", "world_idea_awardlink"}:
+    elif category in {"world_char_lobbylink"}:
         return (x_obj.credor_weight != y_obj.credor_weight) or (
             x_obj.debtor_weight != y_obj.debtor_weight
+        )
+    elif category in {"world_idea_awardlink"}:
+        return (x_obj.give_weight != y_obj.give_weight) or (
+            x_obj.take_weight != y_obj.take_weight
         )
     elif category == "world_ideaunit":
         return (
