@@ -6,7 +6,7 @@ from src.gift.change import changeunit_shop, get_filtered_changeunit
 
 
 def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_charunit_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     yao_text = "Yao"
     before_sue_world = worldunit_shop(sue_text)

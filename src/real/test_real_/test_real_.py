@@ -28,7 +28,7 @@ def test_RealUnit_exists(env_dir_setup_cleanup):
 
 
 def test_realunit_shop_ReturnsRealUnit(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
 
     # WHEN
@@ -48,7 +48,7 @@ def test_realunit_shop_ReturnsRealUnit(env_dir_setup_cleanup):
 
 
 def test_realunit_shop_ReturnsRealUnitWith_road_delimiter(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     slash_text = "/"
     x_coin = 7.0
@@ -74,7 +74,7 @@ def test_realunit_shop_ReturnsRealUnitWith_road_delimiter(env_dir_setup_cleanup)
 
 
 def test_RealUnit_set_real_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = RealUnit(real_id=music_text, reals_dir=get_test_reals_dir())
     x_real_dir = f"{get_test_reals_dir()}/{music_text}"
@@ -107,7 +107,7 @@ def test_RealUnit_set_real_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 
 
 def test_realunit_shop_SetsRealsDirs(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
 
     # WHEN
@@ -120,7 +120,7 @@ def test_realunit_shop_SetsRealsDirs(env_dir_setup_cleanup):
 
 
 def test_RealUnit_init_owner_econs_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     slash_text = "/"
     x_coin = 4
@@ -146,7 +146,7 @@ def test_RealUnit_init_owner_econs_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
 
 
 def test_RealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(music_text, get_test_reals_dir(), in_memory_journal=True)
     sue_text = "Sue"
@@ -168,7 +168,7 @@ def test_RealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_clea
 def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(music_text, get_test_reals_dir(), in_memory_journal=True)
     sue_text = "Sue"
@@ -239,7 +239,7 @@ def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
 
 
 def test_RealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_real = realunit_shop("music", get_test_reals_dir(), in_memory_journal=True)
     sue_text = "Sue"
     yao_text = "Yao"

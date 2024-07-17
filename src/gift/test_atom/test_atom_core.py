@@ -3,7 +3,7 @@ from src.gift.atom import AtomUnit, atomunit_shop, atom_insert, atom_delete
 
 
 def test_AtomUnit_exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_atomunit = AtomUnit()
 
     # THEN
@@ -15,7 +15,7 @@ def test_AtomUnit_exists():
 
 
 def test_atomunit_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_credor_weight = 55
     bob_debtor_weight = 66
@@ -44,7 +44,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
 
 
 def test_AtomUnit_set_required_arg_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     charunit_text = "world_charunit"
     charunit_atomunit = atomunit_shop(charunit_text, atom_insert())
@@ -59,7 +59,7 @@ def test_AtomUnit_set_required_arg_CorrectlySetsAttr():
 
 
 def test_AtomUnit_set_optional_arg_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     charunit_text = "world_charunit"
     charunit_atomunit = atomunit_shop(charunit_text, atom_insert())
@@ -74,7 +74,7 @@ def test_AtomUnit_set_optional_arg_CorrectlySetsAttr():
 
 
 def test_AtomUnit_get_value_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     charunit_text = "world_charunit"
     charunit_atomunit = atomunit_shop(charunit_text, atom_insert())
@@ -170,7 +170,7 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_CharUnit_INSERT():
 
 
 def test_AtomUnit_get_value_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_credor_weight = 55
     bob_debtor_weight = 66
@@ -214,7 +214,7 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_CharUnit_DELETE():
 
 
 def test_AtomUnit_set_atom_order_SetCorrectAttr():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_credor_weight = 55
     bob_debtor_weight = 66
@@ -234,7 +234,7 @@ def test_AtomUnit_set_atom_order_SetCorrectAttr():
 
 
 def test_AtomUnit_set_arg_SetsAny_required_arg_optional_arg():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_credor_weight = 55
     bob_debtor_weight = 66

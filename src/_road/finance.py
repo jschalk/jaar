@@ -21,7 +21,7 @@ class RespectNum(float):
 
 
 class BitHum(float):
-    """Smallest Unit of credor_weight or debtor_weight ala 'give me the slightest bit of respect!'"""
+    """Smallest Unit of credor_weight or debtor_weight ala 'the slightest bit of respect!'"""
 
     pass
 

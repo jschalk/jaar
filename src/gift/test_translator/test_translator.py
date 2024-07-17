@@ -11,7 +11,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 def test_Translator_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_translator = Translator()
 
     # THEN
@@ -21,7 +21,7 @@ def test_Translator_Exists():
 
 
 def test_translator_shop_WithOutParametersReturnsObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     music_translator = translator_shop()
 
     # THEN
@@ -31,7 +31,7 @@ def test_translator_shop_WithOutParametersReturnsObj():
 
 
 def test_translator_shop_WithParametersReturnsObj():
-    # GIVEN
+    # ESTABLISH
     music_text = "Music89"
 
     # WHEN
@@ -41,7 +41,7 @@ def test_translator_shop_WithParametersReturnsObj():
 
 
 def test_Translator_set_char_id_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     susan_text = "Susan"
     music_translator = translator_shop()
@@ -55,7 +55,7 @@ def test_Translator_set_char_id_SetsAttr():
 
 
 def test_Translator_out_char_id_exists_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     susan_text = "Susan"
     music_translator = translator_shop()
@@ -69,7 +69,7 @@ def test_Translator_out_char_id_exists_ReturnsObj():
 
 
 def test_Translator_get_in_char_id_ReturnsObj_Equal():
-    # GIVEN
+    # ESTABLISH
     music_translator = translator_shop()
     yao_text = "Yao"
 
@@ -78,7 +78,7 @@ def test_Translator_get_in_char_id_ReturnsObj_Equal():
 
 
 def test_Translator_get_in_char_id_ReturnsObj_NotEqual():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     susan_text = "Susan"
     music_translator = translator_shop()
@@ -89,7 +89,7 @@ def test_Translator_get_in_char_id_ReturnsObj_NotEqual():
 
 
 def test_Translator_translate_char_id_ReturnsObjWithNoChanges():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     x_category = "world_charunit"
     char_id_text = "char_id"
@@ -113,7 +113,7 @@ def test_Translator_translate_char_id_ReturnsObjWithNoChanges():
 
 
 def test_Translator_translate_char_id_ReturnsObjWithChange_char_id():
-    # GIVEN
+    # ESTABLISH
     susan_text = "Susan"
     x_category = "world_charunit"
     char_id_text = "char_id"

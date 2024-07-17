@@ -9,7 +9,7 @@ from src.listen.examples.listen_env import (
 
 
 def test_HubUnit_get_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_owner_id():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_worldunit = get_world_with_4_levels()
     bob_worldunit.set_owner_id(bob_text)
@@ -30,7 +30,7 @@ def test_HubUnit_get_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_own
 def test_HubUnit_get_dw_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_owner_id(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_worldunit = get_world_with_4_levels()
     bob_worldunit.set_owner_id(bob_text)
@@ -53,7 +53,7 @@ def test_HubUnit_get_dw_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_
 def test_HubUnit_rj_perspective_world_ReturnsWorldWith_owner_idSetToHubUnit_owner_id(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(real_id(), nation_text)
     iowa_road = create_road(nation_road, "Iowa")

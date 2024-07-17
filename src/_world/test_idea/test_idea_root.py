@@ -4,7 +4,7 @@ from pytest import raises as pytest_raises
 
 
 def test_ideaunit_shop_With_root_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_idearoot = ideaunit_shop(_root=True)
 
     # THEN
@@ -16,7 +16,7 @@ def test_ideaunit_shop_With_root_ReturnsCorrectObj():
 
 
 def test_IdeaUnit_set_idea_label_get_default_real_id_roadnode_DoesNotRaisesError():
-    # GIVEN
+    # ESTABLISH
     x_idearoot = ideaunit_shop(_root=True)
 
     # WHEN
@@ -28,7 +28,7 @@ def test_IdeaUnit_set_idea_label_get_default_real_id_roadnode_DoesNotRaisesError
 
 
 def test_IdeaUnit_set_idea_label_CorrectlyDoesNotRaisesError():
-    # GIVEN
+    # ESTABLISH
     el_paso_text = "El Paso"
     x_idearoot = ideaunit_shop(_root=True, _world_real_id=el_paso_text)
 
@@ -40,7 +40,7 @@ def test_IdeaUnit_set_idea_label_CorrectlyDoesNotRaisesError():
 
 
 def test_IdeaUnit_set_idea_label_DoesRaisesError():
-    # GIVEN
+    # ESTABLISH
     el_paso_text = "El Paso"
     x_idearoot = ideaunit_shop(_root=True, _world_real_id=el_paso_text)
 
@@ -55,7 +55,7 @@ def test_IdeaUnit_set_idea_label_DoesRaisesError():
 
 
 def test_IdeaUnit_set_idea_label_RaisesErrorWhen_world_real_id_IsNone():
-    # GIVEN
+    # ESTABLISH
     x_idearoot = ideaunit_shop(_root=True)
 
     # WHEN / THEN
@@ -69,7 +69,7 @@ def test_IdeaUnit_set_idea_label_RaisesErrorWhen_world_real_id_IsNone():
 
 
 def test_IdeaUnit_set_idea_label_world_real_id_EqualRootLabelDoesNotRaisesError():
-    # GIVEN
+    # ESTABLISH
     x_idearoot = ideaunit_shop(_root=True, _world_real_id=root_label())
 
     # WHEN

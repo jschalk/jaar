@@ -13,7 +13,7 @@ from pytest import raises as pytest_raises
 
 
 def test_WorldUnit_set_tree_traverse_starting_point_CorrectlySetsAttrs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     x_rational = True
     x_tree_traverse_count = 555
@@ -38,7 +38,7 @@ def test_WorldUnit_set_tree_traverse_starting_point_CorrectlySetsAttrs():
 
 
 def test_WorldUnit_clear_world_base_metrics_CorrectlySetsAttrs():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     x_econ_justifed = False
     x_sum_healerhold_share = 140
@@ -66,7 +66,7 @@ def test_WorldUnit_clear_world_base_metrics_CorrectlySetsAttrs():
 
 
 def test_WorldUnit_calc_world_metrics_ClearsDescendantAttributes():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     # test root status:
     casa_text = "casa"
@@ -120,7 +120,7 @@ def test_WorldUnit_calc_world_metrics_ClearsDescendantAttributes():
 
 
 def test_WorldUnit_get_idea_obj_ReturnsIdea():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     nation_text = "nation-state"
     nation_road = x_world.make_l1_road(nation_text)
@@ -159,7 +159,7 @@ def test_WorldUnit_get_idea_obj_ReturnsIdea():
 
 
 def test_WorldUnit_calc_world_metrics_RootOnlyCorrectlySetsDescendantAttributes():
-    # GIVEN
+    # ESTABLISH
     tim_world = worldunit_shop(_owner_id="Tim")
     assert tim_world._idearoot._descendant_pledge_count is None
     assert tim_world._idearoot._all_char_cred is None
@@ -175,7 +175,7 @@ def test_WorldUnit_calc_world_metrics_RootOnlyCorrectlySetsDescendantAttributes(
 
 
 def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_1():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
     casa_road = x_world.make_l1_road(casa_text)
@@ -215,7 +215,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_1(
 
 
 def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     email_text = "email"
     casa_text = "casa"
@@ -265,7 +265,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
 
 
 def test_WorldUnit_TreeTraverseSetsClearsAwardLineestorsCorrectly():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
     # idea tree has no awardlinks
@@ -292,7 +292,7 @@ def test_WorldUnit_TreeTraverseSetsClearsAwardLineestorsCorrectly():
 
 
 def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorrectly():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
     # idea tree has no awardlinks
@@ -318,7 +318,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     print(f"{sue_awardline._world_cred=} {root_idea._bud_ratio=} ")
     print(f"  {sue_awardline._world_debt=} {root_idea._bud_ratio=} ")
     sum_x = 0
-    cat_road = x_world.make_l1_road("give cat food")
+    cat_road = x_world.make_l1_road("cat have dinner")
     cat_idea = x_world.get_idea_obj(cat_road)
     week_road = x_world.make_l1_road(week_text)
     week_idea = x_world.get_idea_obj(week_road)
@@ -352,7 +352,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
 
 
 def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootCorrectly():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     x_world.calc_world_metrics()
     # idea tree has no awardlinks
@@ -384,7 +384,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
 
 
 def test_world4char_Exists():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     email_text = "email"
     casa_text = "casa"
@@ -412,14 +412,14 @@ def test_world4char_Exists():
 
 
 def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     email_text = "email"
     casa_text = "casa"
     vacuum_text = "vacuum"
     sue_text = "Sue"
     week_text = "weekdays"
-    cat_text = "give cat food"
+    cat_text = "cat have dinner"
     casa_road = x_world.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
     x_world.add_idea(email_idea, parent_road=casa_road)
@@ -469,7 +469,7 @@ def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
 
 
 def test_WorldUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     week_text = "weekdays"
     assert x_world.get_idea_tree_ordered_road_list()
@@ -496,7 +496,7 @@ def test_WorldUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():
 
 
 def test_WorldUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadUnits():
-    # GIVEN
+    # ESTABLISH
     tim_world = worldunit_shop("Tim")
 
     # WHEN
@@ -514,7 +514,7 @@ def test_WorldUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoa
 
 
 def test_WorldUnit_get_heir_road_list_returnsCorrectList():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     week_text = "weekdays"
     weekdays = x_world.make_l1_road(week_text)
@@ -535,10 +535,10 @@ def test_WorldUnit_get_heir_road_list_returnsCorrectList():
 
 
 def test_WorldUnit_idea_exists_ReturnsCorrectBool():
-    # GIVEN
+    # ESTABLISH
     sue_world = example_worlds_get_world_with_4_levels()
     sue_world.calc_world_metrics()
-    cat_road = sue_world.make_l1_road("give cat food")
+    cat_road = sue_world.make_l1_road("cat have dinner")
     week_road = sue_world.make_l1_road("weekdays")
     casa_road = sue_world.make_l1_road("casa")
     nation_road = sue_world.make_l1_road("nation-state")
@@ -588,7 +588,7 @@ def test_WorldUnit_idea_exists_ReturnsCorrectBool():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenWorldUnitEmpty():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     assert sue_world._econs_justified is False
 
@@ -600,7 +600,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenWorldUni
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenThereAreNotAny():
-    # GIVEN
+    # ESTABLISH
     sue_world = example_worlds_get_world_with_4_levels()
     assert sue_world._econs_justified is False
 
@@ -612,7 +612,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenThereAre
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_lobby_id_exists_IsTrue():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     sue_world.add_l1_idea(ideaunit_shop("Texas", _healerhold=healerhold_shop({"Yao"})))
     assert sue_world._econs_justified is False
@@ -625,7 +625,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSingleId
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSingleProblemAndEcon():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
     sue_world.add_charunit(yao_text)
@@ -643,7 +643,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSinglePr
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLevelAboveProblem():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
     sue_world.add_charunit(yao_text)
@@ -664,7 +664,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLe
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLevelBelowProblem():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     texas_text = "Texas"
     texas_road = sue_world.make_l1_road(texas_text)
@@ -681,7 +681,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLe
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyRaisesErrorWhenEconIsLevelBelowProblem():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     texas_text = "Texas"
     texas_road = sue_world.make_l1_road(texas_text)
@@ -702,7 +702,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyRaisesErrorWhenEconIsLevelBelowPr
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenTwoEconsAreOneTheEqualLine():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_healerhold = healerhold_shop({"Yao"})
     texas_text = "Texas"
@@ -725,7 +725,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenTwoEcons
 
 
 def test_WorldUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_healerhold = healerhold_shop({"Yao"})
     texas_text = "Texas"
@@ -751,7 +751,7 @@ def test_WorldUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
 
 
 def test_WorldUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     texas_text = "Texas"
     sue_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))

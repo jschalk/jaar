@@ -4,7 +4,7 @@ from src.money.examples.example_credorledgers import example_yao_hubunit
 
 
 def test_RiverRun_set_initial_rivergrade_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_number = 8
     yao_riverrun = riverrun_shop(yao_hubunit, yao_number)
@@ -31,7 +31,7 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
 
 
 def test_RiverRun_rivergrades_is_empty_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_number = 8
     yao_riverrun = riverrun_shop(yao_hubunit, yao_number)
@@ -47,7 +47,7 @@ def test_RiverRun_rivergrades_is_empty_ReturnsObj():
 
 
 def test_RiverRun_rivergrade_exists_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_number = 8
     yao_riverrun = riverrun_shop(yao_hubunit, yao_number)
@@ -66,7 +66,7 @@ def test_RiverRun_rivergrade_exists_ReturnsObj():
 
 
 def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     bob_text = "Bob"
@@ -96,7 +96,7 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
 
 
 def test_RiverRun_set_all_initial_rivergrades_CorrectlyOverWritesPrevious():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     bob_text = "Bob"

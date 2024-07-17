@@ -14,7 +14,7 @@ from src._world.graphic import (
 
 
 def test_worldunit_explanation_ShowsExplanation0WorldConceptGraph():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     ideatree1 = display_ideatree(get_world_with_4_levels())
     ideatree2 = display_ideatree(get_world_with_4_levels_and_2reasons(), "Task")
     ideatree3 = display_ideatree(get_world_x1_3levels_1reason_1facts())

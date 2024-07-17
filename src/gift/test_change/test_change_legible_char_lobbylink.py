@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_char_lobbylink_INSERT():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_char_lobbylink"
     lobby_id_text = "lobby_id"
@@ -35,7 +35,7 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_INSERT():
 
 
 def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_char_lobbylink"
     lobby_id_text = "lobby_id"
@@ -65,7 +65,7 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight_debt
 
 
 def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_char_lobbylink"
     lobby_id_text = "lobby_id"
@@ -92,7 +92,7 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_credor_weight():
 
 
 def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_char_lobbylink"
     lobby_id_text = "lobby_id"
@@ -119,7 +119,7 @@ def test_create_legible_list_ReturnsObj_char_lobbylink_UPDATE_debtor_weight():
 
 
 def test_create_legible_list_ReturnsObj_char_lobbylink_DELETE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_char_lobbylink"
     lobby_id_text = "lobby_id"

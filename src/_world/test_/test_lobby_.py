@@ -18,7 +18,7 @@ from pytest import raises as pytest_raises
 
 
 def test_AwardLink_exists():
-    # GIVEN
+    # ESTABLISH
     bikers_text = "bikers"
 
     # WHEN
@@ -31,7 +31,7 @@ def test_AwardLink_exists():
 
 
 def test_awardlink_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bikers_text = "bikers"
     bikers_credor_weight = 3.0
     bikers_debtor_weight = 5.0
@@ -49,7 +49,7 @@ def test_awardlink_shop_ReturnsCorrectObj():
 
 
 def test_AwardHeir_set_bud_share_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     bikers_text = "bikers"
     bikers_credor_weight = 3.0
     bikers_debt_weight = 6.0
@@ -75,7 +75,7 @@ def test_AwardHeir_set_bud_share_CorrectlySetsAttr():
 
 
 def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
-    # GIVEN
+    # ESTABLISH
     bikers_text = "bikers"
     bikers_credor_weight = 3.0
     bikers_debtor_weight = 5.0
@@ -100,7 +100,7 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
 
 def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
-    # GIVEN
+    # ESTABLISH
     teacher_text = "teachers"
     teacher_awardlink = awardlink_shop(
         lobby_id=teacher_text, credor_weight=103, debtor_weight=155
@@ -124,7 +124,7 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
 
 
 def test_AwardLine_exists():
-    # GIVEN
+    # ESTABLISH
     bikers_text = "bikers"
     bikers_world_cred = 0.33
     bikers_world_debt = 0.55
@@ -143,7 +143,7 @@ def test_AwardLine_exists():
 
 
 def test_awardline_shop_ReturnsCorrectObj_exists():
-    # GIVEN
+    # ESTABLISH
     bikers_text = "bikers"
     bikers_text = bikers_text
     bikers_world_cred = 0.33
@@ -163,7 +163,7 @@ def test_awardline_shop_ReturnsCorrectObj_exists():
 
 
 def test_AwardLine_add_world_cred_debt_CorrectlyModifiesAttr():
-    # GIVEN
+    # ESTABLISH
     bikers_text = "bikers"
     bikers_awardline = awardline_shop(
         lobby_id=bikers_text, _world_cred=0.33, _world_debt=0.55
@@ -181,7 +181,7 @@ def test_AwardLine_add_world_cred_debt_CorrectlyModifiesAttr():
 
 
 def test_LobbyBox_exists():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swimmers"
     # WHEN
     swim_lobbybox = LobbyBox(lobby_id=swim_text)
@@ -199,7 +199,7 @@ def test_LobbyBox_exists():
 
 
 def test_lobbybox_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swimmers"
     nation_road = create_road(root_label(), "nation-states")
     usa_road = create_road(nation_road, "USA")
@@ -223,7 +223,7 @@ def test_lobbybox_shop_ReturnsCorrectObj():
 
 
 def test_lobbybox_shop_ReturnsCorrectObj_road_delimiter():
-    # GIVEN
+    # ESTABLISH
     swim_text = "/swimmers"
     slash_text = "/"
 
@@ -235,7 +235,7 @@ def test_lobbybox_shop_ReturnsCorrectObj_road_delimiter():
 
 
 # def test_LobbyBox_set_lobby_id_RaisesErrorIfParameterContains_road_delimiter_And_char_mirror_True():
-#     # GIVEN
+#     # ESTABLISH
 #     slash_text = "/"
 #     bob_text = f"Bob{slash_text}Texas"
 

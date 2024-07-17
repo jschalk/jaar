@@ -16,7 +16,7 @@ from pytest import raises as pytest_raises
 
 
 def test_ChangeUnit_exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_changeunit = ChangeUnit()
 
     # THEN
@@ -25,7 +25,7 @@ def test_ChangeUnit_exists():
 
 
 def test_changeunit_shop_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     ex1_changeunit = changeunit_shop()
 
     # THEN
@@ -34,7 +34,7 @@ def test_changeunit_shop_ReturnsCorrectObj():
 
 
 def test_ChangeUnit_set_atomunit_CorrectlySets_WorldUnitSimpleAttrs():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = changeunit_shop()
     attribute_value = 55
     category = "worldunit"
@@ -64,7 +64,7 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_WorldUnitSimpleAttrs():
 
 
 def test_ChangeUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = changeunit_shop()
     x_category = "world_charunit"
     world_weight_atomunit = atomunit_shop(x_category, atom_update())
@@ -81,7 +81,7 @@ def test_ChangeUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
 
 
 def test_ChangeUnit_get_atom_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     opt_arg1 = "_weight"
@@ -100,7 +100,7 @@ def test_ChangeUnit_get_atom_ReturnsCorrectObj():
 
 
 def test_ChangeUnit_add_atomunit_CorrectlySets_WorldUnitSimpleAttrs():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = changeunit_shop()
     assert ex1_changeunit.atomunits == {}
 
@@ -126,7 +126,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_WorldUnitSimpleAttrs():
 
 
 def test_ChangeUnit_add_atomunit_CorrectlySets_WorldUnit_charunits():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = changeunit_shop()
     assert ex1_changeunit.atomunits == {}
 
@@ -160,7 +160,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_WorldUnit_charunits():
 
 
 def test_ChangeUnit_get_crud_atomunits_list_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = get_changeunit_example1()
     assert len(ex1_changeunit.atomunits.get(atom_update()).keys()) == 1
     assert ex1_changeunit.atomunits.get(atom_insert()) is None
@@ -183,7 +183,7 @@ def test_ChangeUnit_get_crud_atomunits_list_ReturnsCorrectObj():
 
 
 def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = get_changeunit_example1()
     update_dict = ex1_changeunit.atomunits.get(atom_update())
     assert len(update_dict.keys()) == 1
@@ -215,7 +215,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 
 # def test_ChangeUnit_add_atomunit_CorrectlySets_WorldUnit_max_tree_traverse():
-#     # GIVEN
+#     # ESTABLISH
 #     ex1_changeunit = changeunit_shop(get_sue_road())
 #     assert ex1_changeunit.atomunits == {}
 
@@ -267,7 +267,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 
 def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = get_changeunit_example1()
     worldunit_text = "worldunit"
     world_charunit_text = "world_charunit"
@@ -299,7 +299,7 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
 
 
 def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_IdeaUnitsSorted():
-    # GIVEN
+    # ESTABLISH
     x_real_id = root_label()
     sports_text = "sports"
     sports_road = create_road(x_real_id, sports_text)
@@ -334,7 +334,7 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_IdeaUnitsSorted():
 
 
 def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
-    # GIVEN
+    # ESTABLISH
     x_real_id = root_label()
     sports_text = "sports"
     sports_road = create_road(x_real_id, sports_text)
@@ -370,8 +370,8 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     #         print(f"{x_atom.category=}")
 
 
-def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld_scenario1():
-    # GIVEN
+def test_world_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoWorld_scenario1():
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
 
     worldunit_text = "worldunit"
@@ -391,7 +391,7 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld_scenario
     assert world_built_from_change_is_valid(sue_changeunit) is False
 
 
-def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld_scenario2():
+def test_world_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoWorld_scenario2():
     sue_changeunit = changeunit_shop()
     category = "world_charunit"
     # WHEN
@@ -415,8 +415,8 @@ def test_world_built_from_change_is_valid_ReturnsCorrectObjGivenNoWorld_scenario
     assert world_built_from_change_is_valid(sue_changeunit) is False
 
 
-def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumber():
-    # GIVEN
+def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStartingNumber():
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
@@ -455,8 +455,8 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenNoStartingNumbe
     assert changeunit_dict.get(2) == pool_atomunit
 
 
-def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenStartingNumber():
-    # GIVEN
+def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartingNumber():
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
@@ -495,8 +495,8 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_GivenStartingNumber(
     assert changeunit_dict.get(7) == pool_atomunit
 
 
-def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_GivenStartingNumber():
-    # GIVEN
+def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumber():
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
@@ -536,7 +536,7 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_GivenStartingNumber():
 
 
 def test_ChangeUnit_get_json_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     worldunit_text = "worldunit"
     pool_atomunit = atomunit_shop(worldunit_text, atom_update())
@@ -564,7 +564,7 @@ def test_ChangeUnit_get_json_ReturnsCorrectObj():
 
 
 def test_ChangeUnit_atomunit_exists_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     farm_changeunit = changeunit_shop()
 
     # WHEN / THEN

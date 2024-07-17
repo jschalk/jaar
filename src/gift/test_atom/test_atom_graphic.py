@@ -9,7 +9,7 @@ from src.gift.atom_graphic import atomunit_periodic_table0
 
 
 def test_atomunit_periodic_table0_ShowsExplanation0Graph():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     atomunit_periodic_table0_fig = atomunit_periodic_table0()
 
     # # THEN

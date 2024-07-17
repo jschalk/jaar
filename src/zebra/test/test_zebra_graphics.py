@@ -63,7 +63,7 @@
 #     # THEN
 #     display_ideatree(b_world, mode="Task").show()
 
-#     # GIVEN
+#     # ESTABLISH
 #     luca_world = worldunit_shop()
 #     luca_world.set_credor_respect(500)
 #     luca_world.set_debtor_resepect(400)
@@ -87,7 +87,7 @@
 #     # WHEN
 #     get_world_agenda_plotly_fig(yao_world).show()
 
-#     # GIVEN / WHEN
+#     # ESTABLISH / WHEN
 #     worldunit_explanation0_fig = worldunit_explanation0()
 #     worldunit_explanation1_fig = worldunit_explanation1()
 #     worldunit_explanation2_fig = worldunit_explanation2()
@@ -103,7 +103,7 @@
 #     worldunit_explanation4_fig.show()
 #     bud_explanation0_fig.show()
 
-#     # GIVEN / WHEN
+#     # ESTABLISH / WHEN
 #     atomunit_periodic_table0_fig = atomunit_periodic_table0()
 #     atomunit_periodic_table0_fig.show()
 
@@ -118,7 +118,7 @@
 #     listen_structures2_fig.show()
 #     listen_structures3_fig.show()
 
-#     # GIVEN / WHEN
+#     # ESTABLISH / WHEN
 #     money_structures0_fig = get_money_structures0_fig()
 #     money_structures1_fig = get_money_structures1_fig()
 #     money_structures2_fig = get_money_structures2_fig()
@@ -134,7 +134,7 @@
 #     money_structures4_fig.show()
 #     money_structures5_fig.show()
 
-#     # GIVEN / WHEN
+#     # ESTABLISH / WHEN
 #     real_structures0_fig = get_real_structures0_fig()
 
 #     # THEN

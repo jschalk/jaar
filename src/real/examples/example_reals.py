@@ -8,7 +8,7 @@ from src.real.examples.real_env import get_test_reals_dir
 
 
 def create_example_real1() -> RealUnit:
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(music_text, get_test_reals_dir(), in_memory_journal=True)
     yao_text = "Yao"
@@ -54,7 +54,7 @@ def create_example_real1() -> RealUnit:
 
 
 def create_example_real2() -> RealUnit:
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(music_text, get_test_reals_dir(), in_memory_journal=True)
     yao_text = "Yao"
@@ -120,7 +120,7 @@ def create_example_real2() -> RealUnit:
 
 
 def create_example_real3() -> RealUnit:
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(music_text, get_test_reals_dir(), in_memory_journal=True)
     yao_text = "Yao"
@@ -168,7 +168,7 @@ def create_example_real3() -> RealUnit:
 
 
 def create_example_real4() -> RealUnit:
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(music_text, get_test_reals_dir(), in_memory_journal=True)
     yao_text = "Yao"

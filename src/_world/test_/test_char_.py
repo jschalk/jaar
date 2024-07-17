@@ -5,7 +5,7 @@ from pytest import raises as pytest_raises
 
 
 def test_CharUnit_exists():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
 
     # WHEN
@@ -33,7 +33,7 @@ def test_CharUnit_exists():
 
 
 def test_CharUnit_set_char_id_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     x_charunit = CharUnit()
 
     # WHEN
@@ -45,7 +45,7 @@ def test_CharUnit_set_char_id_CorrectlySetsAttr():
 
 
 def test_CharUnit_set_char_id_RaisesErrorIfParameterContains_road_delimiter():
-    # GIVEN
+    # ESTABLISH
     slash_text = "/"
     texas_text = f"Texas{slash_text}Arkansas"
 
@@ -86,7 +86,7 @@ def test_charunit_shop_CorrectlySetsAttributes():
 
 
 def test_charunit_shop_CorrectlySetsAttributes_road_delimiter():
-    # GIVEN
+    # ESTABLISH
     slash_text = "/"
 
     # WHEN
@@ -97,7 +97,7 @@ def test_charunit_shop_CorrectlySetsAttributes_road_delimiter():
 
 
 def test_charunit_shop_CorrectlySetsAttributes_bit():
-    # GIVEN
+    # ESTABLISH
     bit_float = 00.45
 
     # WHEN
@@ -108,7 +108,7 @@ def test_charunit_shop_CorrectlySetsAttributes_bit():
 
 
 def test_CharUnit_set_bit_CorrectlySetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     assert bob_charunit._bit == 1
 
@@ -121,7 +121,7 @@ def test_CharUnit_set_bit_CorrectlySetsAttribute():
 
 
 def test_CharUnit_set_credor_weight_CorrectlySetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
 
     # WHEN
@@ -133,7 +133,7 @@ def test_CharUnit_set_credor_weight_CorrectlySetsAttribute():
 
 
 def test_CharUnit_set_debtor_weight_CorrectlySetsAttribute():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
 
     # WHEN
@@ -145,7 +145,7 @@ def test_CharUnit_set_debtor_weight_CorrectlySetsAttribute():
 
 
 def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeNoNulls():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
 
     # WHEN
@@ -157,7 +157,7 @@ def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeNoNulls():
 
 
 def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeWithNullsAndStartingValues():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob", credor_weight=45, debtor_weight=56)
 
     # WHEN
@@ -169,7 +169,7 @@ def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeWithNullsAndSta
 
 
 def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeWithNullsAndNoStartingValues():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
 
     # WHEN
@@ -181,7 +181,7 @@ def test_CharUnit_set_credor_debtor_weight_CorrectlySetsAttributeWithNullsAndNoS
 
 
 def test_CharUnit_add_irrational_debtor_weight_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     assert bob_charunit._irrational_debtor_weight == 0
 
@@ -201,7 +201,7 @@ def test_CharUnit_add_irrational_debtor_weight_SetsAttrCorrectly():
 
 
 def test_CharUnit_add_inallocable_debtor_weight_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     assert bob_charunit._inallocable_debtor_weight == 0
 
@@ -221,7 +221,7 @@ def test_CharUnit_add_inallocable_debtor_weight_SetsAttrCorrectly():
 
 
 def test_CharUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     bob_int1 = 11
     bob_int2 = 22
@@ -239,7 +239,7 @@ def test_CharUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
 
 
 def test_CharUnit_reset_world_cred_debt_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     bob_charunit._world_cred = 0.27
     bob_charunit._world_debt = 0.37
@@ -267,7 +267,7 @@ def test_CharUnit_reset_world_cred_debt_SetsAttrCorrectly():
 
 
 def test_CharUnit_add_world_cred_debt_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     bob_charunit._world_cred = 0.4106
     bob_charunit._world_debt = 0.1106
@@ -292,7 +292,7 @@ def test_CharUnit_add_world_cred_debt_SetsAttrCorrectly():
 
 
 def test_CharUnit_set_world_agenda_ratio_cred_debt_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob", credor_weight=15, debtor_weight=7)
     bob_charunit._world_cred = 0.4106
     bob_charunit._world_debt = 0.1106

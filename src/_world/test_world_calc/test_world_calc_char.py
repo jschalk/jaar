@@ -2,7 +2,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_lobbyboxs_metrics_SetsAttrScenario0():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     sue_worldunit._lobbyboxs = None
@@ -16,7 +16,7 @@ def test_create_lobbyboxs_metrics_SetsAttrScenario0():
 
 
 def test_create_lobbyboxs_metrics_SetsAttrScenario1():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -48,7 +48,7 @@ def test_create_lobbyboxs_metrics_SetsAttrScenario1():
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario0():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     assert sue_worldunit._lobbyboxs == {}
@@ -61,7 +61,7 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario0():
 
 
 def test_WorldUnit_calc_charunit_metrics_Clears_lobbys():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     sue_worldunit._lobbys = "yeah"
@@ -78,7 +78,7 @@ def test_WorldUnit_calc_charunit_metrics_Clears_lobbys():
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -112,7 +112,7 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -154,7 +154,7 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
 
 
 def test_WorldUnit_reset_charunit_world_cred_debt_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"

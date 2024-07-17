@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_idea_lobbyhold_INSERT():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_lobbyhold"
     road_text = "road"
@@ -30,7 +30,7 @@ def test_create_legible_list_ReturnsObj_idea_lobbyhold_INSERT():
 
 
 def test_create_legible_list_ReturnsObj_idea_lobbyhold_DELETE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_lobbyhold"
     road_text = "road"

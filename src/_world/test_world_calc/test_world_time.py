@@ -101,7 +101,7 @@ def test_get_time_dt_from_min_ReturnsCorrectObj():
 
 
 def test_get_time_():
-    # GIVEN
+    # ESTABLISH
     kia_world = worldunit_shop(_owner_id="Kia")
     kia_world.set_time_hreg_ideas(c400_count=6)
 
@@ -304,7 +304,7 @@ def test_get_time_():
 
 
 def test_get_jajatime_repeating_legible_text_correctlyText():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop(_owner_id="Yao")
     yao_world.set_time_hreg_ideas(c400_count=7)
 

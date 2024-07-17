@@ -3,7 +3,7 @@ from src.money.rivercycle import RiverGrade, rivergrade_shop
 
 
 def test_RiverGrade_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_rivergrade = RiverGrade()
 
     # THEN
@@ -42,7 +42,7 @@ def test_RiverGrade_Exists():
 
 
 def test_rivergrade_shop_ReturnsCorrectObjWithArg():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     yao_hubunit = example_yao_hubunit()
     ten_int = 10
@@ -75,7 +75,7 @@ def test_rivergrade_shop_ReturnsCorrectObjWithArg():
 
 
 def test_rivergrade_shop_ReturnsCorrectObjWithoutArgs():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     yao_hubunit = example_yao_hubunit()
 
@@ -102,7 +102,7 @@ def test_rivergrade_shop_ReturnsCorrectObjWithoutArgs():
 
 
 def test_RiverGrade_set_tax_due_amount_SetsCorrectAttrs():
-    # GIVEN
+    # ESTABLISH
     x_rivergrade = RiverGrade()
     assert x_rivergrade.tax_bill_amount is None
     assert x_rivergrade.tax_paid_amount is None
@@ -132,7 +132,7 @@ def test_RiverGrade_set_tax_due_amount_SetsCorrectAttrs():
 
 
 def test_RiverGrade_get_dict_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     yao_hubunit = example_yao_hubunit()
     ten_int = 10
@@ -192,7 +192,7 @@ def test_RiverGrade_get_dict_ReturnsCorrectObj():
 
 
 def test_RiverGrade_get_json_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     yao_hubunit = example_yao_hubunit()
     ten_int = 10

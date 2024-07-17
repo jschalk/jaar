@@ -7,7 +7,7 @@ from src._world.report import (
 
 
 def test_get_world_charunits_dataframe_ReturnsCorrectDataFrame():
-    # GIVEN
+    # ESTABLISH
     luca_world = worldunit_shop()
     luca_world.set_credor_respect(500)
     luca_world.set_debtor_resepect(400)
@@ -43,7 +43,7 @@ def test_get_world_charunits_dataframe_ReturnsCorrectDataFrame():
 
 
 def test_get_world_charunits_dataframe_ReturnsCorrectEmptyDataFrame():
-    # GIVEN
+    # ESTABLISH
     luca_world = worldunit_shop()
 
     # WHEN
@@ -68,7 +68,7 @@ def test_get_world_charunits_dataframe_ReturnsCorrectEmptyDataFrame():
 
 
 def test_get_world_agenda_dataframe_ReturnsCorrectDataFrame():
-    # GIVEN
+    # ESTABLISH
     yao_world = world_v001_with_large_agenda()
     week_text = "weekdays"
     week_road = yao_world.make_l1_road(week_text)
@@ -98,7 +98,7 @@ def test_get_world_agenda_dataframe_ReturnsCorrectDataFrame():
 
 
 def test_get_world_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     assert len(yao_world.get_agenda_dict()) == 0
 

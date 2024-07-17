@@ -34,7 +34,7 @@ from platform import system as platform_system
 
 
 def test_RoadNode_exists():
-    # GIVEN
+    # ESTABLISH
     empty_str = ""
     # WHEN
     x_road = RoadNode(empty_str)
@@ -47,7 +47,7 @@ def test_RoadNode_exists():
 
 
 def test_RoadUnit_exists():
-    # GIVEN
+    # ESTABLISH
     empty_str = ""
     # WHEN
     x_road = RoadUnit(empty_str)
@@ -93,7 +93,7 @@ def test_road_road_validate_correctlyReturnsRoadUnit():
 
 
 def test_road_create_road_ReturnsCorrectRoadUnitWith_delimiter():
-    # GIVEN
+    # ESTABLISH
     rose_text = "rose"
     comma_delimiter = ","
     comma_delimiter_rose_road = f"{root_label()}{comma_delimiter}{rose_text}"
@@ -119,7 +119,7 @@ def test_road_create_road_ReturnsCorrectRoadUnitWith_delimiter():
 
 
 def test_road_rebuild_road_ReturnsCorrectRoadUnit():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
     bloomers_text = "bloomers"
@@ -139,7 +139,7 @@ def test_road_rebuild_road_ReturnsCorrectRoadUnit():
 
 
 def test_road_get_all_road_nodes_ReturnsRoadNodes():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     casa_text = "casa"
     casa_road = f"{root_label()}{x_s}{casa_text}"
@@ -160,7 +160,7 @@ def test_road_get_all_road_nodes_ReturnsRoadNodes():
 
 
 def test_road_get_terminus_node_ReturnsRoadNode():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     casa_text = "casa"
     casa_road = f"{root_label()}{x_s}{casa_text}"
@@ -177,7 +177,7 @@ def test_road_get_terminus_node_ReturnsRoadNode():
 
 
 def test_road_get_terminus_node_ReturnsRoadNodeWhenNonDefaultDelimiter():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     bloomers_text = "bloomers"
     roses_text = "roses"
@@ -194,7 +194,7 @@ def test_road_get_terminus_node_ReturnsRoadNodeWhenNonDefaultDelimiter():
 
 
 def test_road_get_root_node_from_road_ReturnsRoadNode():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
     bloomers_text = "bloomers"
@@ -210,7 +210,7 @@ def test_road_get_root_node_from_road_ReturnsRoadNode():
 
 
 def test_road_get_parent_road_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     casa_text = "casa"
     casa_road = f"{root_label()}{x_s}{casa_text}"
@@ -227,7 +227,7 @@ def test_road_get_parent_road_ReturnsCorrectObj():
 
 
 def test_road_create_road_without_root_node_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     casa_text = "casa"
     casa_road = f"{root_label()}{x_s}{casa_text}"
@@ -267,7 +267,7 @@ class EmptyObj:
 
 
 def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     old_seasons_road = f"{root_label()}{x_s}casa{x_s}seasons"
     old_dict_x = {old_seasons_road: EmptyObj(old_seasons_road)}
@@ -287,7 +287,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
 
 
 def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     nation_text = "nation-state"
     nation_road = f"{root_label()}{x_s}{nation_text}"
@@ -317,7 +317,7 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
 
 
 def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     nation_text = "nation-state"
     nation_road = f"{root_label()}{x_s}{nation_text}"
@@ -345,7 +345,7 @@ def test_road_get_default_real_id_roadnode_ReturnsCorrectObj():
 
 
 def test_road_create_road_from_nodes_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     root_list = get_all_road_nodes(root_label())
     casa_text = "casa"
@@ -366,7 +366,7 @@ def test_road_create_road_from_nodes_ReturnsCorrectObj():
 
 
 def test_road_create_road_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     casa_text = "casa"
     casa_road = f"{root_label()}{x_s}{casa_text}"
@@ -385,7 +385,7 @@ def test_road_create_road_ReturnsCorrectObj():
 
 
 def test_Roadnode_exists():
-    # GIVEN
+    # ESTABLISH
     empty_text = ""
 
     # WHEN
@@ -407,7 +407,7 @@ def test_Roadnode_is_node_ReturnsCorrectBool():
 
 
 def test_get_diff_road_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     casa_text = "casa"
     casa_road = f"{root_label()}{x_s}{casa_text}"
@@ -427,7 +427,7 @@ def test_get_diff_road_ReturnsCorrectObj():
 
 
 def test_is_heir_road_CorrectlyIdentifiesHeirs():
-    # GIVEN
+    # ESTABLISH
     x_s = default_road_delimiter_if_none()
     usa_text = "USA"
     usa_road = f"{root_label()}{x_s}Nation-States{x_s}{usa_text}"
@@ -448,7 +448,7 @@ def test_is_heir_road_CorrectlyIdentifiesHeirs():
 
 
 def test_replace_road_delimiter_ReturnsNewObj():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     gen_casa_road = create_road(root_label(), casa_text)
     comma_delimiter = default_road_delimiter_if_none()
@@ -468,7 +468,7 @@ def test_replace_road_delimiter_ReturnsNewObj():
 
 
 def test_replace_road_delimiter_CorrectlyRaisesError():
-    # GIVEN
+    # ESTABLISH
     cooker_text = "cooker/cleaner"
     gen_cooker_road = create_road(root_label(), cooker_text)
     comma_delimiter = default_road_delimiter_if_none()
@@ -491,7 +491,7 @@ def test_replace_road_delimiter_CorrectlyRaisesError():
 
 
 def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
-    # GIVEN
+    # ESTABLISH
     cooker_text = "/cooker"
     cleaner_text = "cleaner"
     comma_delimiter = default_road_delimiter_if_none()
@@ -513,7 +513,7 @@ def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
 
 
 def test_HealerID_exists():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     # WHEN
     bob_healer_id = HealerID(bob_text)
@@ -526,7 +526,7 @@ def test_HealerID_exists():
 
 
 def test_OwnerID_exists():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     # WHEN
     bob_owner_id = OwnerID(bob_text)
@@ -539,7 +539,7 @@ def test_OwnerID_exists():
 
 
 def test_CharID_exists():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     # WHEN
     bob_char_id = CharID(bob_text)
@@ -552,7 +552,7 @@ def test_CharID_exists():
 
 
 def test_validate_roadnode_RaisesErrorWhenNotRoadNode():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob, Tom"
     slash_text = "/"
     assert bob_text == validate_roadnode(bob_text, x_delimiter=slash_text)
@@ -568,7 +568,7 @@ def test_validate_roadnode_RaisesErrorWhenNotRoadNode():
 
 
 def test_validate_roadnode_RaisesErrorWhenRoadNode():
-    # GIVEN
+    # ESTABLISH
     slash_text = "/"
     bob_text = f"Bob{slash_text}Tom"
     assert bob_text == validate_roadnode(
@@ -588,7 +588,7 @@ def test_validate_roadnode_RaisesErrorWhenRoadNode():
 
 
 def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_delimiter():
-    # GIVEN
+    # ESTABLISH
     comma_text = ","
     # WHEN / THEN
     assert roadunit_valid_dir_path("run", delimiter=comma_text)
@@ -601,7 +601,7 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_delimiter():
 
 
 def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_delimiter():
-    # GIVEN
+    # ESTABLISH
     question_text = "?"
     sport_text = "sport"
     run_text = "run,"
@@ -620,8 +620,8 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_delimiter():
     ) or platform_system() == "Linux"
 
 
-def test_roadunit_valid_dir_path_ReturnsCorrectObjGivenSlashNotDelimiterEdgeCases():
-    # GIVEN
+def test_roadunit_valid_dir_path_ReturnsCorrectObjWhereSlashNotDelimiterEdgeCases():
+    # ESTABLISH
     question_text = "?"
     sport_text = "sport"
     run_text = "run/swim"

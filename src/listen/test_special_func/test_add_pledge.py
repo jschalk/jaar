@@ -8,7 +8,7 @@ from src.listen.examples.listen_env import (
 
 
 def test_add_voice_pledge_Addspledgegift(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()
@@ -31,7 +31,7 @@ def test_add_voice_pledge_Addspledgegift(env_dir_setup_cleanup):
 
 
 def test_add_voice_pledge_SetsvoiceWorldpledgeIdea_lobbyhold(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()
@@ -53,7 +53,7 @@ def test_add_voice_pledge_SetsvoiceWorldpledgeIdea_lobbyhold(env_dir_setup_clean
 
 
 def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()
@@ -79,7 +79,7 @@ def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
 
 
 def test_add_voice_fact_CanAdd_factunit(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
     sue_hubunit.initialize_gift_voice_files()

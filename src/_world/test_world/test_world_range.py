@@ -3,7 +3,7 @@ from src._world.world import worldunit_shop
 
 
 def test_worldAddingIdeaWithAddinCorrectlyTransformsRangeScenario1():
-    # GIVEN
+    # ESTABLISH
     mia_world = worldunit_shop("Mia", _weight=10)
 
     l1 = "level1"
@@ -36,7 +36,7 @@ def test_worldAddingIdeaWithAddinCorrectlyTransformsRangeScenario1():
 
 
 def test_worldAddingIdeaWithAddinCorrectlyTransformsRangeScenario2():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop(_owner_id="Bob", _weight=10)
 
     l1 = "level1"
@@ -72,7 +72,7 @@ def test_worldAddingIdeaWithAddinCorrectlyTransformsRangeScenario2():
 
 
 def test_get_idea_ranged_kids_ReturnsAllChildren():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     bob_world.set_time_hreg_ideas(c400_count=7)
 
@@ -87,7 +87,7 @@ def test_get_idea_ranged_kids_ReturnsAllChildren():
 
 
 def test_get_idea_ranged_kids_ReturnsSomeChildrenScen1():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     bob_world.set_time_hreg_ideas(c400_count=7)
 
@@ -108,7 +108,7 @@ def test_get_idea_ranged_kids_ReturnsSomeChildrenScen1():
 
 
 def test_get_idea_ranged_kids_ReturnsSomeChildrenScen2():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     bob_world.set_time_hreg_ideas(c400_count=7)
 
@@ -122,7 +122,7 @@ def test_get_idea_ranged_kids_ReturnsSomeChildrenScen2():
 
 
 def test_get_idea_ranged_kids_ReturnsSomeChildrenScen3():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     bob_world.set_time_hreg_ideas(c400_count=7)
 

@@ -3,7 +3,7 @@ from src._world.healer import HealerHold, healerhold_shop, healerhold_get_from_d
 
 
 def test_HealerHold_exists():
-    # GIVEN
+    # ESTABLISH
     run_text = ",runners"
     run_lobby_ids = {run_text}
 
@@ -16,7 +16,7 @@ def test_HealerHold_exists():
 
 
 def test_healerhold_shop_ReturnsCorrectWithCorrectAttributes_v1():
-    # GIVEN
+    # ESTABLISH
     run_text = ",runners"
     run_lobby_ids = {run_text}
 
@@ -29,7 +29,7 @@ def test_healerhold_shop_ReturnsCorrectWithCorrectAttributes_v1():
 
 
 def test_healerhold_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_healerhold = healerhold_shop()
 
     # THEN
@@ -38,7 +38,7 @@ def test_healerhold_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
 
 
 def test_HealerHold_get_dict_ReturnsCorrectDictWithSingleLobby_id():
-    # GIVEN
+    # ESTABLISH
     bob_lobby_id = "Bob"
     run_lobby_ids = {bob_lobby_id}
     x_healerhold = healerhold_shop(_lobby_ids=run_lobby_ids)
@@ -55,7 +55,7 @@ def test_HealerHold_get_dict_ReturnsCorrectDictWithSingleLobby_id():
 
 
 def test_HealerHold_set_lobby_id_CorrectlySets_lobby_ids_v1():
-    # GIVEN
+    # ESTABLISH
     x_healerhold = healerhold_shop()
     assert len(x_healerhold._lobby_ids) == 0
 
@@ -68,7 +68,7 @@ def test_HealerHold_set_lobby_id_CorrectlySets_lobby_ids_v1():
 
 
 def test_HealerHold_del_lobby_id_CorrectlyDeletes_lobby_ids_v1():
-    # GIVEN
+    # ESTABLISH
     x_healerhold = healerhold_shop()
     yao_text = "Yao"
     sue_text = "Sue"
@@ -84,7 +84,7 @@ def test_HealerHold_del_lobby_id_CorrectlyDeletes_lobby_ids_v1():
 
 
 def test_HealerHold_lobby_id_exists_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_healerhold = healerhold_shop()
     yao_text = "Yao"
     sue_text = "Sue"
@@ -100,7 +100,7 @@ def test_HealerHold_lobby_id_exists_ReturnsCorrectObj():
 
 
 def test_HealerHold_any_lobby_id_exists_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_healerhold = healerhold_shop()
     assert x_healerhold.any_lobby_id_exists() is False
 
@@ -124,7 +124,7 @@ def test_HealerHold_any_lobby_id_exists_ReturnsCorrectObj():
 
 
 def test_healerhold_get_from_dict_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     empty_dict = {}
 
     # WHEN / THEN

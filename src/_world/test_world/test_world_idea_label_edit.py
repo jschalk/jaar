@@ -12,7 +12,7 @@ from src._road.road import (
 
 
 def test_WorldUnit_edit_idea_label_FailsWhenIdeaDoesNotExist():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
 
     casa_text = "casa"
@@ -29,7 +29,7 @@ def test_WorldUnit_edit_idea_label_FailsWhenIdeaDoesNotExist():
 
 
 def test_WorldUnit_edit_idea_label_RaisesErrorForLevel0IdeaWhen_real_id_isNone():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_world = worldunit_shop(_owner_id=yao_text)
 
@@ -64,7 +64,7 @@ def test_WorldUnit_edit_idea_label_RaisesErrorForLevel0IdeaWhen_real_id_isNone()
 
 
 def test_WorldUnit_edit_idea_label_RaisesErrorForLevel0When_real_id_IsDifferent():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_world = worldunit_shop(_owner_id=yao_text)
     casa_text = "casa"
@@ -97,7 +97,7 @@ def test_WorldUnit_edit_idea_label_RaisesErrorForLevel0When_real_id_IsDifferent(
 
 
 def test_world_set_real_id_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_world = worldunit_shop(_owner_id=yao_text)
     casa_text = "casa"
@@ -131,7 +131,7 @@ def test_world_set_real_id_CorrectlySetsAttr():
 
 
 def test_WorldUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
-    # GIVEN Idea with kids that will be different
+    # ESTABLISH Idea with kids that will be different
     yao_text = "Yao"
     yao_world = worldunit_shop(yao_text)
 
@@ -179,7 +179,7 @@ def test_WorldUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
 
 
 def test_world_edit_idea_label_Modifies_factunits():
-    # GIVEN world with factunits that will be different
+    # ESTABLISH world with factunits that will be different
     yao_text = "Yao"
     yao_world = worldunit_shop(yao_text)
 
@@ -229,7 +229,7 @@ def test_world_edit_idea_label_Modifies_factunits():
 
 
 def test_world_edit_idea_label_Modifies_idearoot_range_source_road():
-    # GIVEN this should never happen but best be thorough
+    # ESTABLISH this should never happen but best be thorough
     yao_world = worldunit_shop("Yao")
     old_casa_text = "casa"
     old_casa_road = yao_world.make_l1_road(old_casa_text)
@@ -283,7 +283,7 @@ def test_world_edit_idea_label_ModifiesIdeaUnitN_range_source_road():
 
 
 def test_world_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels_and_2reasons_2facts()
     old_weekday_text = "weekdays"
     old_weekday_road = sue_world.make_l1_road(old_weekday_text)
@@ -328,7 +328,7 @@ def test_world_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
 
 
 def test_world_set_owner_id_CorrectlyModifiesBoth():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels_and_2reasons_2facts()
     assert sue_world._owner_id == "Sue"
     assert sue_world._idearoot._label == sue_world._real_id
@@ -347,7 +347,7 @@ def test_world_set_owner_id_CorrectlyModifiesBoth():
 
 
 def test_world_edit_idea_label_RaisesErrorIfdelimiterIsInLabel():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels_and_2reasons_2facts()
     old_weekday_text = "weekdays"
     old_weekday_road = sue_world.make_l1_road(old_weekday_text)
@@ -363,7 +363,7 @@ def test_world_edit_idea_label_RaisesErrorIfdelimiterIsInLabel():
 
 
 def test_world_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnIdea_label():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia", "Texas")
     print(f"{zia_world._max_tree_traverse=}")
     casa_text = "casa"
@@ -385,7 +385,7 @@ def test_world_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnIdea_label():
 
 
 def test_world_set_road_delimiter_CorrectlyModifies_parent_road():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia", "Texas")
     casa_text = "casa"
     zia_world.add_l1_idea(ideaunit_shop(casa_text))
@@ -416,7 +416,7 @@ def test_world_set_road_delimiter_CorrectlyModifies_parent_road():
 
 
 def test_world_set_road_delimiter_CorrectlyModifiesReasonUnit():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia", "Texas")
     casa_text = "casa"
     zia_world.add_l1_idea(ideaunit_shop(casa_text))
@@ -455,7 +455,7 @@ def test_world_set_road_delimiter_CorrectlyModifiesReasonUnit():
 
 
 def test_world_set_road_delimiter_CorrectlyModifiesFactUnit():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia", "Texas")
     casa_text = "casa"
     zia_world.add_l1_idea(ideaunit_shop(casa_text))
@@ -493,7 +493,7 @@ def test_world_set_road_delimiter_CorrectlyModifiesFactUnit():
 
 
 def test_world_set_road_delimiter_CorrectlyModifies_numeric_roadAND_range_source_road():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia", "Texas")
     casa_text = "casa"
     zia_world.add_l1_idea(ideaunit_shop(casa_text))

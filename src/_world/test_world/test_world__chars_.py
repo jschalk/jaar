@@ -6,7 +6,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 def test_WorldUnit_set_charunit_SetObjCorrectly():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_charunit = charunit_shop(yao_text)
     yao_charunit.add_lobbylink(yao_text)
@@ -26,7 +26,7 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
 
 
 def test_WorldUnit_set_char_DoesNotSet_char_id_lobbylink():
-    # GIVEN
+    # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
@@ -39,7 +39,7 @@ def test_WorldUnit_set_char_DoesNotSet_char_id_lobbylink():
 
 
 def test_WorldUnit_set_char_DoesSet_char_id_lobbylink():
-    # GIVEN
+    # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
@@ -55,7 +55,7 @@ def test_WorldUnit_set_char_DoesSet_char_id_lobbylink():
 
 
 def test_WorldUnit_set_char_DoesNotOverRide_char_id_lobbylink():
-    # GIVEN
+    # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
@@ -78,7 +78,7 @@ def test_WorldUnit_set_char_DoesNotOverRide_char_id_lobbylink():
 
 
 def test_WorldUnit_set_char_CorrectlySets_chars_lobbylinks():
-    # GIVEN
+    # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     assert len(yao_world._chars) == 0
@@ -108,7 +108,7 @@ def test_WorldUnit_set_char_CorrectlySets_chars_lobbylinks():
 
 
 def test_WorldUnit_add_charunit_CorrectlySets_chars():
-    # GIVEN
+    # ESTABLISH
     x_bit = 6
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
@@ -129,14 +129,14 @@ def test_WorldUnit_add_charunit_CorrectlySets_chars():
 
 
 def test_WorldUnit_char_exists_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     yao_text = "Yao"
 
     # WHEN / THEN
     assert bob_world.char_exists(yao_text) is False
 
-    # GIVEN
+    # ESTABLISH
     bob_world.add_charunit(yao_text)
 
     # WHEN / THEN
@@ -144,7 +144,7 @@ def test_WorldUnit_char_exists_ReturnsObj():
 
 
 def test_WorldUnit_set_char_Creates_lobbylink():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     zia_text = "Zia"
     before_zia_credor = 7
@@ -170,7 +170,7 @@ def test_WorldUnit_set_char_Creates_lobbylink():
 
 
 def test_WorldUnit_edit_char_RaiseExceptionWhenCharDoesNotExist():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     zia_text = "Zia"
     zia_credor_weight = 55
@@ -182,7 +182,7 @@ def test_WorldUnit_edit_char_RaiseExceptionWhenCharDoesNotExist():
 
 
 def test_WorldUnit_edit_char_CorrectlyUpdatesObj():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     zia_text = "Zia"
     old_zia_credor_weight = 55
@@ -213,7 +213,7 @@ def test_WorldUnit_edit_char_CorrectlyUpdatesObj():
 
 
 def test_WorldUnit_get_char_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     zia_text = "Zia"
     sue_text = "Sue"

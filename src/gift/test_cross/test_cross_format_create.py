@@ -23,7 +23,7 @@ from src.gift.cross import (
 
 
 def test_create_cross_Arg_jaar_format_0001_char_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
     yao_text = yao_str()
@@ -74,7 +74,7 @@ def test_create_cross_Arg_jaar_format_0001_char_v0_0_0():
 
 
 def test_create_cross_Arg_jaar_format_0002_lobbylink_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
     yao_text = yao_str()
@@ -140,7 +140,7 @@ def test_create_cross_Arg_jaar_format_0002_lobbylink_v0_0_0():
 
 
 def test_create_cross_Arg_jaar_format_0003_ideaunit_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
     music_real_id = "music56"

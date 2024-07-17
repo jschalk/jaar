@@ -9,7 +9,7 @@ from src.listen.listen import (
 
 
 def test_get_debtors_roll_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -27,7 +27,7 @@ def test_get_debtors_roll_ReturnsObj():
 
 
 def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -49,7 +49,7 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
 
 
 def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_world = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -72,7 +72,7 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     assert ordered_chars1[0].get_dict() == sue_char.get_dict()
     assert ordered_chars1 == [sue_char, zia_char]
 
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_debtor_weight = 75
     yao_world.add_charunit(bob_text, 0, bob_debtor_weight)
@@ -87,7 +87,7 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
 
 
 def test_get_ordered_debtors_roll_DoesNotReturnZero_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_world = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -118,7 +118,7 @@ def test_get_ordered_debtors_roll_DoesNotReturnZero_debtor_weight():
 
 
 def test_set_listen_to_speaker_fact_SetsFact():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_listener = worldunit_shop(yao_text)
     casa_text = "casa"
@@ -154,7 +154,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
 
 
 def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_listener = worldunit_shop(yao_text)
     yao_listener.add_charunit(yao_text)
@@ -205,7 +205,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
 
 
 def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_src = worldunit_shop(yao_text)
     casa_text = "casa"

@@ -16,7 +16,7 @@ from src.money.rivercycle import (
 
 
 def test_RiverCylce_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_rivercycle = RiverCycle()
 
     # THEN
@@ -27,7 +27,7 @@ def test_RiverCylce_Exists():
 
 
 def test_rivercycle_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     one_int = 1
     yao_hubunit = hubunit_shop(None, None, "Yao")
 
@@ -42,7 +42,7 @@ def test_rivercycle_shop_ReturnsCorrectObj():
 
 
 def test_RiverCylce_set_complete_riverbook_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     one_int = 1
     yao_hubunit = hubunit_shop(None, None, "Yao")
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
@@ -59,7 +59,7 @@ def test_RiverCylce_set_complete_riverbook_CorrectlySetsAttr():
 
 
 def test_RiverCylce_set_riverbook_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     one_int = 1
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_text)
@@ -81,7 +81,7 @@ def test_RiverCylce_set_riverbook_CorrectlySetsAttr():
 
 
 def test_RiverCylce_create_cylceledger_ReturnsCorrectObjOneRiverBook():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_text)
     one_int = 1
@@ -98,7 +98,7 @@ def test_RiverCylce_create_cylceledger_ReturnsCorrectObjOneRiverBook():
 
 
 def test_RiverCylce_create_cylceledger_ReturnsCorrectObjTwoRiverBooks():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     yao_hubunit = hubunit_shop(None, None, yao_text)
@@ -123,7 +123,7 @@ def test_RiverCylce_create_cylceledger_ReturnsCorrectObjTwoRiverBooks():
 
 
 def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_text)
     yao_world = worldunit_shop(yao_text)
@@ -141,7 +141,7 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
 
 
 def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"
@@ -172,7 +172,7 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
 
 
 def test_create_next_rivercycle_ReturnsObjScenarioThree_charunit():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"
@@ -219,7 +219,7 @@ def test_create_next_rivercycle_ReturnsObjScenarioThree_charunit():
 
 
 def test_create_next_rivercycle_ReturnsObjDoesNotReference_cycleledger_From_prev_rivercycle():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"

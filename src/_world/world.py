@@ -338,7 +338,7 @@ class WorldUnit:
         return int(min / c400_min), c400_idea, min % c400_min
 
     def get_time_c400yr_from_min(self, min: int):
-        # GIVEN int minutes within 400 year range return year and remainder minutes
+        # ESTABLISH int minutes within 400 year range return year and remainder minutes
         c400_count, c400_idea, c400yr_min = self.get_time_c400_from_min(min=min)
         c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
         cXXXyr_min = c400yr_min - c100_4_96y._begin

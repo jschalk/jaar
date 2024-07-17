@@ -11,7 +11,7 @@ from os.path import exists as os_path_exists
 
 
 def test_HubUnit_action_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text, None)
     assert os_path_exists(sue_hubunit.action_path()) is False
@@ -30,7 +30,7 @@ def test_HubUnit_action_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 
 
 def test_HubUnit_save_action_file_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text, None)
     assert sue_hubunit.action_file_exists() is False
@@ -69,7 +69,7 @@ def test_HubUnit_save_action_file_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_save_action_file_RaisesErrorWhenWorld_action_id_IsWrong(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text, None)
 
@@ -84,7 +84,7 @@ def test_HubUnit_save_action_file_RaisesErrorWhenWorld_action_id_IsWrong(
 
 
 def test_HubUnit_initialize_action_file_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text, None)
     sue_world = worldunit_shop(sue_text, root_label())
@@ -100,7 +100,7 @@ def test_HubUnit_initialize_action_file_CorrectlySavesFile(env_dir_setup_cleanup
     bob_text = "Bob"
     assert action_world.char_exists(bob_text) is False
 
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop(sue_text)
     sue_world.add_charunit(bob_text)
     sue_hubunit.save_action_world(sue_world)
@@ -118,7 +118,7 @@ def test_HubUnit_initialize_action_file_CorrectlySavesFile(env_dir_setup_cleanup
 def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_real_dir = f"{env_dir()}/{root_label()}"
     sue_bud_pool = 50000
@@ -167,7 +167,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
 
 
 def test_HubUnit_initialize_action_file_CreatesDirsAndFiles(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text, None)
     delete_dir(sue_hubunit.real_dir())

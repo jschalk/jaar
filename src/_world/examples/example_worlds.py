@@ -59,7 +59,7 @@ def get_world_with_4_levels() -> WorldUnit:
     casa_text = "casa"
     sue_world.add_l1_idea(ideaunit_shop(casa_text, _weight=30, pledge=True))
 
-    cat_text = "give cat food"
+    cat_text = "cat have dinner"
     sue_world.add_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
 
     week_text = "weekdays"

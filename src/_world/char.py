@@ -32,8 +32,8 @@ class CharCore:
 @dataclass
 class CharUnit(CharCore):
     """This represents the relationship from the WorldUnit._owner_id to the CharUnit.char_id
-    CharUnit.credor_weight represents how much credor_weight the _owner_id gives the char_id
-    CharUnit.debtor_weight represents how much debtor_weight the _owner_id gives the char_id
+    CharUnit.credor_weight represents how much credor_weight the _owner_id projects to the char_id
+    CharUnit.debtor_weight represents how much debtor_weight the _owner_id projects to the char_id
     """
 
     credor_weight: int = None

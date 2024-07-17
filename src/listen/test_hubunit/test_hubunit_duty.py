@@ -13,7 +13,7 @@ from os.path import exists as os_path_exists
 
 
 def test_HubUnit_create_econ_dir_if_missing_CreatesDirectory(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -32,7 +32,7 @@ def test_HubUnit_create_econ_dir_if_missing_CreatesDirectory(env_dir_setup_clean
 
 
 def test_HubUnit_save_duty_world_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -54,7 +54,7 @@ def test_HubUnit_save_duty_world_CorrectlySavesFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -76,7 +76,7 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 
 
 def test_HubUnit_get_duty_world_OpensFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -95,7 +95,7 @@ def test_HubUnit_get_duty_world_OpensFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_delete_duty_file_DeletesWorldFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     sue_world = get_world_with_4_levels()
     sue_text = sue_world._owner_id
@@ -112,7 +112,7 @@ def test_HubUnit_delete_duty_file_DeletesWorldFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_save_job_world_CorrectlySavesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -134,7 +134,7 @@ def test_HubUnit_save_job_world_CorrectlySavesFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_job_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -156,7 +156,7 @@ def test_HubUnit_job_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 
 
 def test_HubUnit_get_job_world_OpensFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -175,7 +175,7 @@ def test_HubUnit_get_job_world_OpensFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_get_job_world_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -191,7 +191,7 @@ def test_HubUnit_get_job_world_ReturnsNoneIfFileDoesNotExist(env_dir_setup_clean
 
 
 def test_HubUnit_delete_job_file_DeletesWorldFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     sue_world = get_world_with_4_levels()
     sue_text = sue_world._owner_id
@@ -207,7 +207,7 @@ def test_HubUnit_delete_job_file_DeletesWorldFile(env_dir_setup_cleanup):
 
 
 def test_HubUnit_delete_treasury_db_file_DeletesFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     texas_hubunit.create_treasury_db_file()
     assert texas_hubunit.treasury_db_file_exists()

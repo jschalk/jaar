@@ -139,7 +139,7 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
 
 
 def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderLobby():
-    # GIVEN
+    # ESTABLISH
     atom_order_text = "atom_order"
     mog = atom_order_text
 
@@ -227,13 +227,13 @@ def check_every_arg_dict_has_elements(atom_config_dict):
 
 
 def test_atom_config_AllArgsHave_python_type_sqlite_datatype():
-    # GIVEN
+    # ESTABLISH
     # WHEN / THEN
     assert check_every_arg_dict_has_elements(get_atom_config_dict())
 
 
 def test_get_flattened_atom_table_build_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
@@ -243,7 +243,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
 
 
 def test_get_normalized_world_table_build_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     normalized_world_table_build = get_normalized_world_table_build()
     nx = normalized_world_table_build
 

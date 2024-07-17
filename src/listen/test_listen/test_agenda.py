@@ -6,7 +6,7 @@ from pytest import raises as pytest_raises
 
 
 def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_worldunit = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -22,7 +22,7 @@ def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():
 
 
 def test_listen_to_speaker_agenda_ReturnsEqualWorld():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_worldunit = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -38,7 +38,7 @@ def test_listen_to_speaker_agenda_ReturnsEqualWorld():
 
 
 def test_listen_to_speaker_agenda_ReturnsSingleTaskWorld():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     before_yao_worldunit = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -71,7 +71,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskWorld():
 
 
 def test_listen_to_speaker_agenda_ReturnsLevel2TaskWorld():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     before_yao_worldunit = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -109,7 +109,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskWorld():
 
 
 def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskWorld():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     before_yao_worldunit = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -164,7 +164,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskWorld():
 
 
 def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskWorldWhereAnIdeaUnitAlreadyExists():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     before_yao_worldunit = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -223,7 +223,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskWorldWhereAnIdeaU
 
 
 # def test_listen_to_speaker_agenda_ProcessesIrrationalWorld():
-#     # GIVEN
+#     # ESTABLISH
 #     yao_text = "Yao"
 #     yao_duty = worldunit_shop(yao_text)
 #     zia_text = "Zia"
@@ -286,7 +286,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskWorldWhereAnIdeaU
 
 
 def test_listen_to_speaker_agenda_ProcessesBarrenWorld():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     zia_text = "Zia"

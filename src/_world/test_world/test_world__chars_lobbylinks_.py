@@ -2,7 +2,7 @@ from src._world.world import worldunit_shop
 
 
 def test_WorldUnit_get_lobby_ids_dict_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     zia_text = "Zia"

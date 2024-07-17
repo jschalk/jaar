@@ -10,7 +10,7 @@ from pytest import raises as pytest_raises
 
 
 def test_CharUnit_get_lobbylinks_dict_ReturnObj():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_credor_weight = 11
     sue_debtor_weight = 13
@@ -44,7 +44,7 @@ def test_CharUnit_get_lobbylinks_dict_ReturnObj():
 
 
 def test_CharUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_charunit = charunit_shop(bob_text)
 
@@ -78,7 +78,7 @@ def test_CharUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
 
 def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_charunit = charunit_shop(bob_text)
 
@@ -134,7 +134,7 @@ def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
 
 
 def test_CharUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsZerp():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_charunit = charunit_shop(bob_text)
     assert bob_charunit._irrational_debtor_weight == 0
@@ -152,7 +152,7 @@ def test_CharUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsZerp()
 
 
 def test_CharUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNumber():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_charunit = charunit_shop(bob_text)
     bob_irrational_debtor_weight = 87
@@ -172,7 +172,7 @@ def test_CharUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNumber
 
 
 def test_CharUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNone():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     bob_charunit = charunit_shop(bob_text)
     bob_charunit._irrational_debtor_weight = None
@@ -190,7 +190,7 @@ def test_CharUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNone()
 
 
 def test_charunit_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
-    # GIVEN
+    # ESTABLISH
     yao_text = ",Yao"
     slash_text = "/"
     before_yao_charunit = charunit_shop(yao_text, _road_delimiter=slash_text)
@@ -205,7 +205,7 @@ def test_charunit_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
 
 
 def test_charunit_get_from_dict_Returns_lobbylinks():
-    # GIVEN
+    # ESTABLISH
     yao_text = ",Yao"
     slash_text = "/"
     before_yao_charunit = charunit_shop(yao_text, _road_delimiter=slash_text)
@@ -225,7 +225,7 @@ def test_charunit_get_from_dict_Returns_lobbylinks():
 
 
 def test_charunits_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
-    # GIVEN
+    # ESTABLISH
     yao_text = ",Yao"
     slash_text = "/"
     yao_charunit = charunit_shop(yao_text, _road_delimiter=slash_text)
@@ -241,7 +241,7 @@ def test_charunits_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
 
 
 def test_charunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteData():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_credor_weight = 13
     yao_debtor_weight = 17

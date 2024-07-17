@@ -19,7 +19,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 def test_HubUnit_get_max_gift_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
 
@@ -29,7 +29,7 @@ def test_HubUnit_get_max_gift_file_number_ReturnsCorrectObj(env_dir_setup_cleanu
     assert sue_hubunit._get_next_gift_file_number() == init_gift_id()
     assert sue_hubunit._get_next_gift_file_number() == 0
 
-    # GIVEN
+    # ESTABLISH
     six_int = 6
     save_file(sue_hubunit.gifts_dir(), sue_hubunit.gift_file_name(six_int), "x")
 
@@ -39,7 +39,7 @@ def test_HubUnit_get_max_gift_file_number_ReturnsCorrectObj(env_dir_setup_cleanu
 
 
 def test_HubUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     assert sue_hubunit.gift_file_exists(None) is False
@@ -166,7 +166,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_owner_id_IsWrong(
 def test_HubUnit_save_gift_file_RaisesErrorIf_replace_IsFalse(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     x_gift_id = 0
@@ -228,7 +228,7 @@ def test_HubUnit_validate_giftunit_ReturnsObjWithAttributesFixed(
 def test_HubUnit_save_gift_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     next_int = sue_hubunit._get_next_gift_file_number()
@@ -254,7 +254,7 @@ def test_HubUnit_save_gift_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
 def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
 
@@ -275,7 +275,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesE
 def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     delete_dir(sue_hubunit.gifts_dir())
@@ -302,7 +302,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExi
 def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     yao_text = "Yao"
@@ -329,7 +329,7 @@ def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
 def test_HubUnit_get_giftunit_RaisesExceptionWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     yao_text = "Yao"
@@ -353,7 +353,7 @@ def test_HubUnit_get_giftunit_RaisesExceptionWhenFileDoesNotExist(
 def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     six_int = 6
@@ -386,7 +386,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
 def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     delete_dir(sue_hubunit.gifts_dir())
@@ -407,7 +407,7 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
 
 
 def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     sue2_giftunit = sue_2atomunits_giftunit()
@@ -428,7 +428,7 @@ def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
 
 
 def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     two_int = 2
@@ -458,7 +458,7 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
 
 
 def test_HubUnit_merge_any_gifts_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
@@ -475,7 +475,7 @@ def test_HubUnit_merge_any_gifts_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
 def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     sue_hubunit.save_gift_file(sue_1atomunits_giftunit())
@@ -500,7 +500,7 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
 def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())

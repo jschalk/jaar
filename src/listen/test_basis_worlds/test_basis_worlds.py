@@ -9,7 +9,7 @@ from src.listen.basis_worlds import (
 
 
 def test_create_empty_world_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     slash_text = "/"
     penny_float = 0.7
@@ -55,7 +55,7 @@ def test_create_empty_world_ReturnsCorrectObj():
 
 
 def test_create_listen_basis_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     slash_text = "/"
     yao_duty = worldunit_shop(yao_text, _road_delimiter=slash_text)
@@ -104,7 +104,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
 
 
 def test_get_default_action_world_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     blue_text = "blue"
     slash_text = "/"

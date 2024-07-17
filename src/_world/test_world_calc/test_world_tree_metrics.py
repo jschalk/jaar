@@ -5,7 +5,7 @@ from src._road.road import create_road_from_nodes
 
 
 def test_WorldUnit_get_tree_metrics_exists():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop(_owner_id="Zia")
 
     # WHEN
@@ -19,7 +19,7 @@ def test_WorldUnit_get_tree_metrics_exists():
 
 
 def test_WorldUnit_get_tree_metrics_get_idea_uid_max_correctlyGetsMaxIdeaUID():
-    # GIVEN
+    # ESTABLISH
     yao_world = world_v001()
 
     # WHEN
@@ -31,7 +31,7 @@ def test_WorldUnit_get_tree_metrics_get_idea_uid_max_correctlyGetsMaxIdeaUID():
 
 
 def test_WorldUnit_get_tree_metrics_CorrectlySetsBoolean_all_idea_uids_are_unique():
-    # GIVEN
+    # ESTABLISH
     yao_world = world_v001()
 
     # WHEN
@@ -43,7 +43,7 @@ def test_WorldUnit_get_tree_metrics_CorrectlySetsBoolean_all_idea_uids_are_uniqu
 
 
 def test_WorldUnit_get_tree_set_all_idea_uids_unique():
-    # GIVEN
+    # ESTABLISH
     yao_world = world_v001()
     tree_metrics_before = yao_world.get_tree_metrics()
     assert len(tree_metrics_before.uid_dict) == 219
@@ -61,7 +61,7 @@ def test_WorldUnit_get_tree_set_all_idea_uids_unique():
 
 
 def test_WorldUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
-    # GIVEN
+    # ESTABLISH
     zia_text = "Zia"
     zia_world = worldunit_shop(_owner_id=zia_text)
     swim_text = "swim"
@@ -79,7 +79,7 @@ def test_WorldUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
 
 
 def test_WorldUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
-    # GIVEN
+    # ESTABLISH
     nia_text = "Nia"
     nia_world = worldunit_shop(nia_text, _weight=10)
     weekdays = "weekdays"
@@ -91,7 +91,7 @@ def test_WorldUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
 
 
 def test_WorldUnit_get_tree_metrics_Returns_pledge_IdeaRoadUnit():
-    # GIVEN
+    # ESTABLISH
     yao_world = world_v001()
     yao_tree_metrics = yao_world.get_tree_metrics()
 

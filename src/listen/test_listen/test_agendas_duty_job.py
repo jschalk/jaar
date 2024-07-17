@@ -31,7 +31,7 @@ from os.path import exists as os_path_exists
 def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_WorldWhenNo_lobbyholdIsSet(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -59,7 +59,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_WorldWhenNo_lobbyholdIs
 
 
 def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_World(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -96,7 +96,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_World(env_dir_setup_cle
 def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobWorldWithDetailsDecidedBy_debtor_weight(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     zia_job = get_example_zia_speaker()
     bob_job = get_example_bob_speaker()
     bob_job.edit_idea_attr(
@@ -155,7 +155,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobWorldWithDetailsDecidedB
 # def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalWorld(
 #     env_dir_setup_cleanup,
 # ):
-#     # GIVEN
+#     # ESTABLISH
 #     yao_text = "Yao"
 #     yao_duty = worldunit_shop(yao_text)
 #     zia_text = "Zia"
@@ -231,7 +231,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobWorldWithDetailsDecidedB
 def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobWorld(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -276,7 +276,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobWorld(
 def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     yao_text = "Yao"
@@ -326,7 +326,7 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
 def test_listen_to_agenda_duty_job_agenda_GetsAgendaFromSrcWorldNotSpeakerSelf(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     # yao_duty has task run_road
     # yao_job has task clean_road
     # yao_new_job picks yao_duty task run_road and not clean_road

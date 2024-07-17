@@ -15,7 +15,7 @@ def test_LobbyID_exists():
 
 
 def test_LobbyCore_exists():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swimmers"
     # WHEN
     swim_lobbycore = LobbyCore(lobby_id=swim_text)
@@ -25,7 +25,7 @@ def test_LobbyCore_exists():
 
 
 def test_LobbyLink_exists():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
 
     # WHEN
@@ -47,7 +47,7 @@ def test_LobbyLink_exists():
 
 
 def test_lobbylink_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
@@ -74,7 +74,7 @@ def test_lobbylink_shop_ReturnsCorrectObj():
 
 
 def test_lobbylink_shop_ReturnsCorrectObjAttr_char_id():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     yao_text = "Yao"
 
@@ -86,7 +86,7 @@ def test_lobbylink_shop_ReturnsCorrectObjAttr_char_id():
 
 
 # def test_LobbyLink_set_lobby_id_RaisesErrorIf_lobby_id_IsNotCharIDAndIsRoadNode():
-#     # GIVEN
+#     # ESTABLISH
 #     slash_text = "/"
 #     # bob_text = f"Bob{slash_text}Texas"
 #     bob_text = "Bob"
@@ -103,7 +103,7 @@ def test_lobbylink_shop_ReturnsCorrectObjAttr_char_id():
 
 
 def test_LobbyLink_set_credor_weight_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     old_credor_weight = 3.0
     swim_debtor_weight = 5.0
@@ -121,7 +121,7 @@ def test_LobbyLink_set_credor_weight_SetsAttr():
 
 
 def test_LobbyLink_set_credor_weight_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     old_credor_weight = 3.0
     swim_debtor_weight = 5.0
@@ -138,7 +138,7 @@ def test_LobbyLink_set_credor_weight_SetsAttr():
 
 
 def test_LobbyLink_set_debtor_weight_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     swim_credor_weight = 3.0
     old_debtor_weight = 5.0
@@ -156,7 +156,7 @@ def test_LobbyLink_set_debtor_weight_SetsAttr():
 
 
 def test_LobbyLink_set_debtor_weight_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     swim_credor_weight = 3.0
     old_debtor_weight = 5.0
@@ -173,7 +173,7 @@ def test_LobbyLink_set_debtor_weight_SetsAttr():
 
 
 def test_LobbyLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
@@ -198,7 +198,7 @@ def test_LobbyLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
 
 def test_lobbylink_get_from_dict_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
@@ -220,7 +220,7 @@ def test_lobbylink_get_from_dict_ReturnsObj():
 
 
 def test_lobbylinks_get_from_dict_ReturnsObj():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     swim_credor_weight = 3.0
     swim_debtor_weight = 5.0
@@ -245,7 +245,7 @@ def test_lobbylinks_get_from_dict_ReturnsObj():
 
 
 def test_LobbyLink_reset_world_cred_debt_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     bob_lobbylink = lobbylink_shop("Bob")
     bob_lobbylink._world_cred = 0.27
     bob_lobbylink._world_debt = 0.37
@@ -273,7 +273,7 @@ def test_LobbyLink_reset_world_cred_debt_SetsAttrCorrectly():
 
 
 def test_LobbyLink_set_world_cred_debt_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     ohio_text = ",Ohio"
     ohio_credor_weight = 3.0

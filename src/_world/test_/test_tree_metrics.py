@@ -2,7 +2,7 @@ from src._world.tree_metrics import TreeMetrics, treemetrics_shop
 
 
 def test_TreeMetrics_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_tree_metrics = TreeMetrics()
 
     # THEN
@@ -17,7 +17,7 @@ def test_TreeMetrics_Exists():
 
 
 def test_treemetrics_shop_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_tree_metrics = treemetrics_shop()
 
     # THEN

@@ -11,7 +11,7 @@ from pytest import raises as pytest_raises
 
 
 def test_FactUnit_exists():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
     sunday_text = "Sunday"
@@ -30,7 +30,7 @@ def test_FactUnit_exists():
 
 
 def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
     weekday_fact = factunit_shop(weekday_road, weekday_road, open=1.0, nigh=5.0)
@@ -46,7 +46,7 @@ def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
 
 
 def test_FactUnit_set_pick_to_base_SetsAttr_1():
-    # GIVEN
+    # ESTABLISH
     floor_text = "floor"
     floor_road = create_road(root_label(), floor_text)
     dirty_text = "dirty"
@@ -64,7 +64,7 @@ def test_FactUnit_set_pick_to_base_SetsAttr_1():
 
 
 def test_FactUnit_set_pick_to_base_SetsAttr_2():
-    # GIVEN
+    # ESTABLISH
     floor_text = "floor"
     floor_road = create_road(root_label(), floor_text)
     dirty_text = "dirty"
@@ -82,7 +82,7 @@ def test_FactUnit_set_pick_to_base_SetsAttr_2():
 
 
 def test_FactUnit_set_attr_SetsAttrCorrectly_2():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
     weekday_fact = factunit_shop(weekday_road, weekday_road, open=1.0, nigh=5.0)
@@ -106,7 +106,7 @@ def test_FactUnit_set_attr_SetsAttrCorrectly_2():
 
 
 def test_FactUnit_get_dict_ReturnsDict():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
     sunday_text = "Sunday"
@@ -133,7 +133,7 @@ def test_FactUnit_get_dict_ReturnsDict():
 
 
 def test_FactUnit_get_dict_ReturnsPartialDict():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
     sunday_text = "Sunday"
@@ -154,7 +154,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
 
 
 def test_FactUnit_find_replace_road_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekday"
     old_weekday_road = create_road(root_label(), weekday_text)
     sunday_text = "Sunday"
@@ -177,7 +177,7 @@ def test_FactUnit_find_replace_road_SetsAttrCorrectly():
 
 
 def test_FactHeir_IsModifiedByFactUnit():
-    # GIVEN
+    # ESTABLISH
     ced_min_text = "ced_minute"
     min_road = create_road(root_label(), ced_min_text)
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
@@ -190,7 +190,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     # THEN
     assert ced_factheir.open == 20
 
-    # GIVEN
+    # ESTABLISH
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
     ced_factunit = factunit_shop(min_road, min_road, 30.0, 30.0)
     assert ced_factheir.open == 10
@@ -199,7 +199,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     ced_factheir.transform(factunit=ced_factunit)
     assert ced_factheir.open == 30
 
-    # GIVEN
+    # ESTABLISH
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
     ced_factunit = factunit_shop(min_road, min_road, 35.0, 57.0)
     assert ced_factheir.open == 10
@@ -210,7 +210,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     # THEN
     assert ced_factheir.open == 10
 
-    # GIVEN
+    # ESTABLISH
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
     ced_factunit = factunit_shop(min_road, min_road, 5.0, 7.0)
     assert ced_factheir.open == 10
@@ -223,7 +223,7 @@ def test_FactHeir_IsModifiedByFactUnit():
 
 
 def test_FactHeir_is_range_ReturnsRangeStatus():
-    # GIVEN
+    # ESTABLISH
     ced_min_text = "ced_minute"
     min_road = create_road(root_label(), ced_min_text)
 
@@ -237,7 +237,7 @@ def test_FactHeir_is_range_ReturnsRangeStatus():
 
 
 def test_factheir_is_range_ReturnsRangeStatus():
-    # GIVEN
+    # ESTABLISH
     ced_min_text = "ced_minute"
     min_road = create_road(root_label(), ced_min_text)
 
@@ -255,7 +255,7 @@ def test_factheir_is_range_ReturnsRangeStatus():
 
 
 def test_FactCore_get_obj_key_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     ced_min_text = "ced_minute"
     min_road = create_road(root_label(), ced_min_text)
     secs_text = "secs"
@@ -269,7 +269,7 @@ def test_FactCore_get_obj_key_SetsAttrCorrectly():
 
 
 def test_factunits_get_from_dict_CorrectlyBuildsObj():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
     sunday_text = "Sunday"
@@ -293,7 +293,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
 
 
 def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
     sunday_text = "Sunday"

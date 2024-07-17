@@ -4,7 +4,7 @@ from src._world.idea import ideaunit_shop
 
 
 def test_world_edit_idea_attr_CorrectlySetsDoerUnit():
-    # GIVEN
+    # ESTABLISH
     xio_world = worldunit_shop("Xio")
     run_text = "run"
     run_road = xio_world.make_l1_road(run_text)
@@ -21,7 +21,7 @@ def test_world_edit_idea_attr_CorrectlySetsDoerUnit():
 
 
 def test_world_idearoot_doerunit_CorrectlySets_idea_doerheir():
-    # GIVEN
+    # ESTABLISH
     x_doerunit = doerunit_shop()
 
     tim_world = worldunit_shop("Tim")
@@ -42,7 +42,7 @@ def test_world_idearoot_doerunit_CorrectlySets_idea_doerheir():
 
 
 def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     x_doerunit = doerunit_shop()
     bob_world = worldunit_shop(bob_text)
@@ -75,7 +75,7 @@ def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
 
 
 def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     x_doerunit = doerunit_shop()
     bob_world = worldunit_shop(bob_text)
@@ -108,7 +108,7 @@ def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
 
 
 def test_world_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     swim_text = "swimming"
     swim_road = sue_world.make_l1_road(swim_text)
@@ -149,7 +149,7 @@ def test_world_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
 
 
 def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue1_world = worldunit_shop(sue_text)
     xia_text = "Xia"
@@ -183,7 +183,7 @@ def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit()
 
 
 def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
-    # GIVEN
+    # ESTABLISH
     sue1_world = worldunit_shop("Sue")
     xia_text = "Xia"
     zoa_text = "Zoa"

@@ -46,7 +46,7 @@ def get_atomunit_total_count(x_changeunit: ChangeUnit) -> int:
 
 
 def test_ChangeUnit_create_atomunits_CorrectHandlesEmptyWorlds():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     sue_changeunit = changeunit_shop()
     assert sue_changeunit.atomunits == {}
@@ -60,7 +60,7 @@ def test_ChangeUnit_create_atomunits_CorrectHandlesEmptyWorlds():
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     after_sue_world = copy_deepcopy(before_sue_world)
@@ -88,7 +88,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_insert
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     before_sue_world.add_charunit("Yao")
@@ -115,7 +115,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_delete
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     after_sue_world = copy_deepcopy(before_sue_world)
@@ -141,7 +141,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_charunit_update
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simple_attrs_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     after_sue_world = copy_deepcopy(before_sue_world)
@@ -183,7 +183,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     after_sue_world = copy_deepcopy(before_sue_world)
@@ -237,7 +237,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     xio_text = "Xio"
@@ -278,7 +278,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     xio_text = "Xio"
@@ -331,7 +331,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_char_lobbylink_
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -374,7 +374,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -436,7 +436,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -495,7 +495,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     xio_text = "Xio"
@@ -546,7 +546,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     xio_text = "Xio"
@@ -608,7 +608,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     xio_text = "Xio"
@@ -654,7 +654,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -708,7 +708,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_u
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -753,7 +753,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_i
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -797,7 +797,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_d
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -855,7 +855,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -914,7 +914,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -983,7 +983,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -1028,7 +1028,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_update():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -1080,7 +1080,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -1124,7 +1124,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_insert():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     xio_text = "Xio"
@@ -1158,7 +1158,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_delete():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_world = worldunit_shop(sue_text)
     xio_text = "Xio"
@@ -1194,7 +1194,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
 
 
 def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
 
     after_sue_world = worldunit_shop(sue_text)

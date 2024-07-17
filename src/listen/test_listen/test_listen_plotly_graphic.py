@@ -9,7 +9,7 @@ from src.listen.listen_graphic import (
 
 
 def test_listen_structures0_ShowsExplanation0Graph():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     # listen_structures0_fig = get_listen_structures0_fig()
     # listen_structures1_fig = get_listen_structures1_fig()
     # listen_structures2_fig = get_listen_structures2_fig()
@@ -25,7 +25,7 @@ def test_listen_structures0_ShowsExplanation0Graph():
 
 
 def test_bud_explanation_Graph():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_worldunit = get_bud_explanation_world()
     bud_explanation0_fig = bud_explanation0(x_worldunit, "Task")
 

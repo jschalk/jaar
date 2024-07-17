@@ -16,7 +16,7 @@ from pytest import raises as pytest_raises
 
 
 def test_ReasonCore_attributesExist():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wed_text = "wednesday"
@@ -37,7 +37,7 @@ def test_ReasonCore_attributesExist():
 
 
 def test_reasoncore_shop_ReturnsCorrectAttrWith_delimiter():
-    # GIVEN
+    # ESTABLISH
     slash_text = "/"
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text, delimiter=slash_text)
@@ -51,7 +51,7 @@ def test_reasoncore_shop_ReturnsCorrectAttrWith_delimiter():
 
 
 def test_reasonheir_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
 
@@ -64,7 +64,7 @@ def test_reasonheir_shop_ReturnsCorrectObj():
 
 
 def test_ReasonHeir_clear_CorrectlyClearsField():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
     email_text = "check email"
@@ -77,7 +77,7 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
     # THEN
     assert casa_reason._status is None
 
-    # GIVEN
+    # ESTABLISH
     casa_reason._status = True
     assert casa_reason._status
     # WHEN
@@ -88,7 +88,7 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
 
 
 def test_ReasonHeir_set_status_CorrectlySetsStatus():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     fri_text = "friday"
@@ -110,7 +110,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     # THEN
     assert wkday_reason._status == True
 
-    # GIVEN
+    # ESTABLISH
     thu_premise = premiseunit_shop(need=thu_road)
     two_premises = {wed_premise.need: wed_premise, thu_premise.need: thu_premise}
     two_reason = reasonheir_shop(base=wkday_road, premises=two_premises)
@@ -122,7 +122,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     # THEN
     assert two_reason._status == True
 
-    # GIVEN
+    # ESTABLISH
     two_reason.clear_status()
     assert two_reason._status is None
     # WHEN
@@ -134,7 +134,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
 
 
 def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wed_text = "wednesday"
@@ -148,7 +148,7 @@ def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
 
 
 def test_ReasonHeir_set_base_idea_active_value_Correctly():
-    # GIVEN
+    # ESTABLISH
     day_text = "day"
     day_road = create_road(root_label(), day_text)
     day_reason = reasonheir_shop(base=day_road)
@@ -162,7 +162,7 @@ def test_ReasonHeir_set_base_idea_active_value_Correctly():
 
 
 def test_ReasonHeir_set_status_WorldTrueCorrectlySetsStatusTrue():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     week_reason = reasonheir_shop(base=wkday_road, base_idea_active_requisite=True)
@@ -177,7 +177,7 @@ def test_ReasonHeir_set_status_WorldTrueCorrectlySetsStatusTrue():
 
 
 def test_ReasonHeir_set_status_WorldFalseCorrectlySetsStatusTrue():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wkday_reason = reasonheir_shop(wkday_road, base_idea_active_requisite=False)
@@ -192,7 +192,7 @@ def test_ReasonHeir_set_status_WorldFalseCorrectlySetsStatusTrue():
 
 
 def test_ReasonHeir_set_status_WorldTrueCorrectlySetsStatusFalse():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wkday_reason = reasonheir_shop(wkday_road, base_idea_active_requisite=True)
@@ -207,7 +207,7 @@ def test_ReasonHeir_set_status_WorldTrueCorrectlySetsStatusFalse():
 
 
 def test_ReasonHeir_set_status_WorldNoneCorrectlySetsStatusFalse():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wkday_reason = reasonheir_shop(wkday_road, base_idea_active_requisite=True)
@@ -222,7 +222,7 @@ def test_ReasonHeir_set_status_WorldNoneCorrectlySetsStatusFalse():
 
 
 def test_reasonunit_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
 
@@ -235,7 +235,7 @@ def test_reasonunit_shop_ReturnsCorrectObj():
 
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wed_text = "wednesday"
@@ -258,7 +258,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
 
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_base_idea_active_requisite():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wkday_base_idea_active_requisite = True
@@ -280,7 +280,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_base_idea_active_requisite()
 
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wed_text = "wednesday"
@@ -306,7 +306,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
 
 
 def test_reasons_get_from_dict_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
     wkday_base_idea_active_requisite = False
@@ -332,7 +332,7 @@ def test_reasons_get_from_dict_ReturnsCorrectObj():
 
 
 def test_ReasonHeir_correctSetsPledgeState():
-    # GIVEN
+    # ESTABLISH
     day_text = "ced_day"
     day_road = create_road(root_label(), day_text)
     range_3_to_6_premise = premiseunit_shop(need=day_road, open=3, nigh=6)
@@ -366,7 +366,7 @@ def test_ReasonHeir_correctSetsPledgeState():
 
 
 def test_ReasonCore_get_premises_count():
-    # GIVEN
+    # ESTABLISH
     day_text = "day"
     day_road = create_road(root_label(), day_text)
 
@@ -384,7 +384,7 @@ def test_ReasonCore_get_premises_count():
 
 
 def test_ReasonCore_set_premise_CorrectlySetsPremise():
-    # GIVEN
+    # ESTABLISH
     day_text = "day"
     day_road = create_road(root_label(), day_text)
     day_reason = reasoncore_shop(base=day_road)
@@ -401,7 +401,7 @@ def test_ReasonCore_set_premise_CorrectlySetsPremise():
 
 
 def test_ReasonCore_get_single_premis_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     day_road = create_road(root_label(), "day")
     day_reason = reasoncore_shop(base=day_road)
     day_reason.set_premise(premise=day_road, open=3, nigh=6)
@@ -416,7 +416,7 @@ def test_ReasonCore_get_single_premis_ReturnsCorrectObj():
 
 
 def test_ReasonCore_del_premise_CorrectlyDeletesPremise():
-    # GIVEN
+    # ESTABLISH
     day_text = "day"
     day_road = create_road(root_label(), day_text)
     day_reason = reasoncore_shop(base=day_road)
@@ -431,7 +431,7 @@ def test_ReasonCore_del_premise_CorrectlyDeletesPremise():
 
 
 def test_ReasonCore_find_replace_road_casas():
-    # GIVEN
+    # ESTABLISH
     weekday_text = "weekday"
     sunday_text = "Sunday"
     old_weekday_road = create_road(root_label(), weekday_text)
@@ -461,7 +461,7 @@ def test_ReasonCore_find_replace_road_casas():
 
 
 def test_ReasonCore_set_delimiter_SetsAttrsCorrectly():
-    # GIVEN
+    # ESTABLISH
     week_text = "weekday"
     sun_text = "Sunday"
     slash_text = "/"
@@ -487,7 +487,7 @@ def test_ReasonCore_set_delimiter_SetsAttrsCorrectly():
 
 
 def test_ReasonCore_get_obj_key():
-    # GIVEN
+    # ESTABLISH
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
     email_text = "check email"

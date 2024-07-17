@@ -9,7 +9,7 @@ from pytest import raises as pytest_raises
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldImportance():
-    # GIVEN
+    # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
     yao_text = "Yao"
@@ -48,7 +48,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldIm
     debt_sum1 += zia_lobbybox._world_debt + xio_lobbybox._world_debt
     assert debt_sum1 == 1
 
-    # GIVEN
+    # ESTABLISH
     x_world.set_charunit(charunit_shop(sue_text))
     sue_awardlink = awardlink_shop(sue_text, credor_weight=37)
     x_idearoot.set_awardlink(sue_awardlink)
@@ -80,7 +80,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldIm
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldImportance():
-    # GIVEN
+    # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
     swim_text = "swim"
@@ -126,7 +126,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldIm
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesLobbyWorldImportanceLWwithLobbyEmptyAncestors():
-    # GIVEN
+    # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
     swim_text = "swim"

@@ -15,7 +15,7 @@
 # def test_RealUnit_get_atom_hx_table_insert_sqlstr_CorrectlyInsertsIntoDatabase(
 #     env_dir_setup_cleanup,
 # ):
-#     # GIVEN
+#     # ESTABLISH
 #     music_text = "music"
 #     music_real = realunit_shop(music_text, get_test_reals_dir())
 #     # with music_real.get_journal_conn() as journal_conn:

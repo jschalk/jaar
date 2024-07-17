@@ -9,7 +9,7 @@ from src.money.money_graphic import (
 
 
 def test_money_graphics_ExplainThingsWell():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     # money_structures0_fig = get_money_structures0_fig()
     # money_structures1_fig = get_money_structures1_fig()
     # money_structures2_fig = get_money_structures2_fig()

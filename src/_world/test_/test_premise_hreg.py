@@ -3,7 +3,7 @@ from pytest import raises as pytest_raises
 
 
 def test_PremiseUnitHregTime_attributesSet_x_weeks():
-    # GIVEN
+    # ESTABLISH
     wu = PremiseUnitHregTime()
     wu._every_x_days = 4
     wu._every_x_months = 2
@@ -36,7 +36,7 @@ def test_PremiseUnitHregTime_attributesSet_x_weeks():
 
 
 def test_PremiseUnitHregTime_attributesSet_x_weeksGetsException_remainder_weeks_TooBig():
-    # GIVEN
+    # ESTABLISH
     wu = PremiseUnitHregTime()
 
     # WHEN / THEN
@@ -56,7 +56,7 @@ def test_PremiseUnitHregTime_attributesSet_x_weeksGetsException_remainder_weeks_
 
 
 def test_PremiseUnitHregTime_attributesSet_x_weeksGetsException_remainder_weeks_LessThanZero():
-    # GIVEN
+    # ESTABLISH
     wu = PremiseUnitHregTime()
 
     # WHEN / THEN
@@ -73,7 +73,7 @@ def test_PremiseUnitHregTime_attributesSet_x_weeksGetsException_remainder_weeks_
 
 
 def test_PremiseUnitHregTime_attributesSet_weekday1():
-    # GIVEN
+    # ESTABLISH
     wu = PremiseUnitHregTime()
     # WHEN
     wu._set_weekday(weekday="Sunday")
@@ -82,7 +82,7 @@ def test_PremiseUnitHregTime_attributesSet_weekday1():
 
 
 def test_PremiseUnitHregTime_attributesSet_start_hr1():
-    # GIVEN
+    # ESTABLISH
     wu = PremiseUnitHregTime()
     # WHEN
     wu._set_start_hr(1)
@@ -91,7 +91,7 @@ def test_PremiseUnitHregTime_attributesSet_start_hr1():
 
 
 def test_PremiseUnitHregTime_attributesSet_weekdayInvalid():
-    # GIVEN
+    # ESTABLISH
     wu = PremiseUnitHregTime()
     # WHEN
     wu._set_weekday(weekday="FUNFUN")

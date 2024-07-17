@@ -9,7 +9,7 @@ from src._road.road import default_road_delimiter_if_none
 
 
 def test_WorldUnit_add_idea_RaisesErrorWhen_parent_road_IsInvalid():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia")
     invalid_rootnode_swim_road = "swimming"
     assert invalid_rootnode_swim_road != zia_world._real_id
@@ -27,7 +27,7 @@ def test_WorldUnit_add_idea_RaisesErrorWhen_parent_road_IsInvalid():
 
 
 def test_WorldUnit_add_idea_RaisesErrorWhen_parent_road_IdeaDoesNotExist():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia")
     swim_road = zia_world.make_l1_road("swimming")
     casa_text = "casa"
@@ -46,7 +46,7 @@ def test_WorldUnit_add_idea_RaisesErrorWhen_parent_road_IdeaDoesNotExist():
 
 
 def test_WorldUnit_add_idea_RaisesErrorWhen_label_IsNotNode():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia")
     swim_road = zia_world.make_l1_road("swimming")
     casa_text = "casa"
@@ -63,7 +63,7 @@ def test_WorldUnit_add_idea_RaisesErrorWhen_label_IsNotNode():
 
 
 def test_WorldUnit_add_l1_idea_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     zia_world = worldunit_shop("Zia")
     casa_text = "casa"
     casa_road = zia_world.make_l1_road(casa_text)
@@ -77,7 +77,7 @@ def test_WorldUnit_add_l1_idea_CorrectlySetsAttr():
 
 
 def test_WorldUnit_IdeaUnit_kids_CanHaveKids():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     sue_world = get_world_with_4_levels()
     sue_world.calc_world_metrics()
 
@@ -98,7 +98,7 @@ def test_WorldUnit_IdeaUnit_kids_CanHaveKids():
 
 
 def test_WorldUnit_add_idea_CanAddKidTo_idearoot():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     sue_world.calc_world_metrics()
 
@@ -119,7 +119,7 @@ def test_WorldUnit_add_idea_CanAddKidTo_idearoot():
 
 
 def test_WorldUnit_add_idea_CanAddKidToKidIdea():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     sue_world.calc_world_metrics()
     assert sue_world.get_idea_count() == 17
@@ -145,7 +145,7 @@ def test_WorldUnit_add_idea_CanAddKidToKidIdea():
 
 
 def test_WorldUnit_add_idea_CanAddKidToGrandkidIdea():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     sue_world.calc_world_metrics()
 
@@ -167,7 +167,7 @@ def test_WorldUnit_add_idea_CanAddKidToGrandkidIdea():
 
 
 def test_WorldUnit_add_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
-    # GIVEN
+    # ESTABLISH
     slash_text = "/"
     assert slash_text != default_road_delimiter_if_none()
     bob_world = worldunit_shop("Bob", _road_delimiter=slash_text)
@@ -197,7 +197,7 @@ def test_WorldUnit_add_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
 
 
 def test_WorldUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     sue_world.calc_world_metrics()
 
@@ -222,7 +222,7 @@ def test_WorldUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
 
 
 def test_WorldUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     sue_world.calc_world_metrics()
 
@@ -265,7 +265,7 @@ def test_WorldUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
 
 
 def test_WorldUnit_add_idea_CorrectlySets_world_real_id_AND_coin():
-    # GIVEN'
+    # ESTABLISH'
     x_coin = 500
     sue_world = get_world_with_4_levels()
     sue_world._coin = x_coin
@@ -288,7 +288,7 @@ def test_WorldUnit_add_idea_CorrectlySets_world_real_id_AND_coin():
 
 
 def test_WorldUnit_del_idea_obj_Level0CannotBeDeleted():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     root_road = sue_world._real_id
 
@@ -299,7 +299,7 @@ def test_WorldUnit_del_idea_obj_Level0CannotBeDeleted():
 
 
 def test_WorldUnit_del_idea_obj_Level1CanBeDeleted_ChildrenDeleted():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     week_text = "weekdays"
     week_road = sue_world.make_l1_road(week_text)
@@ -322,7 +322,7 @@ def test_WorldUnit_del_idea_obj_Level1CanBeDeleted_ChildrenDeleted():
 
 
 def test_WorldUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     week_text = "weekdays"
     week_road = sue_world.make_l1_road(week_text)
@@ -344,7 +344,7 @@ def test_WorldUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
 
 
 def test_WorldUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenInherited():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     states_text = "nation-state"
     states_road = sue_world.make_l1_road(states_text)
@@ -374,7 +374,7 @@ def test_WorldUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenInherited():
 
 
 def test_WorldUnit_del_idea_obj_Level2CanBeDeleted_ChildrenDeleted():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     wkday_road = sue_world.make_l1_road("weekdays")
     monday_road = sue_world.make_road(wkday_road, "Monday")
@@ -390,7 +390,7 @@ def test_WorldUnit_del_idea_obj_Level2CanBeDeleted_ChildrenDeleted():
 
 
 def test_WorldUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenDeleted():
-    # GIVEN
+    # ESTABLISH
     sue_world = get_world_with_4_levels()
     states_text = "nation-state"
     states_road = sue_world.make_l1_road(states_text)
@@ -569,7 +569,7 @@ def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaIfInvaildDenomThr
         == f"Idea cannot edit numor=1/denom/reest of '{clean_road}' if parent '{casa_road}' or ideaunit._numeric_road does not have begin/close range"
     )
 
-    # GIVEN
+    # ESTABLISH
     yao_world.edit_idea_attr(road=casa_road, begin=44, close=110)
     yao_world.edit_idea_attr(road=clean_road, denom=11)
     clean_idea = yao_world.get_idea_obj(clean_road)
@@ -578,7 +578,7 @@ def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaIfInvaildDenomThr
 
 
 def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaInvaildDenomThrowsError():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     casa = "casa"
     w_road = yao_world.make_l1_road(casa)
@@ -609,7 +609,7 @@ def test_WorldUnit_edit_idea_attr_worldIsAbleToEditDenomAnyIdeaInvaildDenomThrow
 
 
 def test_WorldUnit_edit_idea_attr_worldWhenParentAndNumeric_roadBothHaveRangeThrowError():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     casa_text = "casa"
     casa_road = yao_world.make_l1_road(casa_text)
@@ -652,7 +652,7 @@ def test_WorldUnit_edit_idea_attr_worldWhenParentAndNumeric_roadBothHaveRangeThr
 
 
 def test_WorldUnit_edit_idea_attr_RaisesErrorWhen_healerhold_lobby_ids_DoNotExist():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     casa_text = "casa"
     casa_road = yao_world.make_l1_road(casa_text)
@@ -678,7 +678,7 @@ def test_WorldUnit_edit_idea_attr_RaisesErrorWhen_healerhold_lobby_ids_DoNotExis
 
 
 def test_WorldUnit_add_idea_MustReorderKidsDictToBeAlphabetical():
-    # GIVEN
+    # ESTABLISH
     bob_world = worldunit_shop("Bob")
     casa_text = "casa"
     bob_world.add_l1_idea(ideaunit_shop(casa_text))
@@ -855,7 +855,7 @@ def test_WorldUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState()
 
 
 def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -903,7 +903,7 @@ def test_WorldUnit_set_awardlink_correctly_sets_awardlinks():
 
 
 def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
-    # GIVEN
+    # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
     yao_text = "Yao"
@@ -942,7 +942,7 @@ def test_WorldUnit_set_awardlink_correctly_deletes_awardlinks():
 
 
 def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     x1_world = worldunit_shop(bob_text)
     xia_text = "Xia"
@@ -972,7 +972,7 @@ def test_WorldUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks
 
 
 def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     x1_world = worldunit_shop(bob_text)
     xia_text = "Xia"

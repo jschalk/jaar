@@ -7,7 +7,7 @@ from plotly.graph_objects import Figure as plotly_figure, Scatter as plotly_Scat
 
 
 def test_PremiseStatusFinder_Exists():
-    # GIVEN
+    # ESTABLISH
     x_premise_open = 1
     x_premise_nigh = 1
     x_premise_divisor = 1
@@ -32,7 +32,7 @@ def test_PremiseStatusFinder_Exists():
 
 
 def test_premisestatusfinder_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_premise_open = 1
     x_premise_nigh = 1
     x_premise_divisor = 1
@@ -127,7 +127,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
 
 
 def test_PremiseStatusFinder_AbbrevationMethodsReturnCorrectObjs():
-    # GIVEN
+    # ESTABLISH
     x_premise_open = 1
     x_premise_nigh = 2
     x_premise_divisor = 3
@@ -554,7 +554,7 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj():
 
 
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_01():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     segr_obj = premisestatusfinder_shop(
         premise_open=1305.0,
         premise_nigh=1305.0,
@@ -579,7 +579,7 @@ def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_0
 
 
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_02():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     segr_obj = premisestatusfinder_shop(
         premise_open=1305.0,
         premise_nigh=1305.0,
@@ -602,7 +602,7 @@ def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_0
 
 
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_03():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     segr_obj = premisestatusfinder_shop(
         premise_open=1305.0,
         premise_nigh=1305.0,

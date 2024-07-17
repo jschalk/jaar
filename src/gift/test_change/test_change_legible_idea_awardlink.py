@@ -5,7 +5,7 @@ from src._world.world import worldunit_shop
 
 
 def test_create_legible_list_ReturnsObj_idea_awardlink_INSERT():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_awardlink"
     road_text = "road"
@@ -36,7 +36,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_INSERT():
 
 
 def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_credor_weight_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
 
     category = "world_idea_awardlink"
@@ -68,7 +68,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_credor_weight_debt
 
 
 def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_credor_weight():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_awardlink"
     lobby_id_text = "lobby_id"
@@ -96,7 +96,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_credor_weight():
 
 
 def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_debtor_weight():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_awardlink"
     lobby_id_text = "lobby_id"
@@ -124,7 +124,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_debtor_weight():
 
 
 def test_create_legible_list_ReturnsObj_idea_awardlink_DELETE():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     category = "world_idea_awardlink"
     road_text = "road"

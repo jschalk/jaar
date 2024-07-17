@@ -8,7 +8,7 @@ from os.path import exists as os_path_exists
 
 
 def test_RealUnit_generate_action_world_Sets_action_WorldFile(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "Music"
     music_real = realunit_shop(music_text, get_test_reals_dir(), True)
     sue_text = "Sue"
@@ -29,7 +29,7 @@ def test_RealUnit_generate_action_world_Sets_action_WorldFile(env_dir_setup_clea
 
 
 def test_RealUnit_generate_action_world_ReturnsRegeneratedObj(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_real = realunit_shop("music", get_test_reals_dir(), True)
     sue_text = "Sue"
     music_real.init_owner_econs(sue_text)
@@ -50,7 +50,7 @@ def test_RealUnit_generate_action_world_ReturnsRegeneratedObj(env_dir_setup_clea
 def test_RealUnit_generate_action_world_SetsCorrectFileWithout_healerhold(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     music_real = realunit_shop("music", get_test_reals_dir(), True)
     bob_text = "Bob"
     music_real.init_owner_econs(bob_text)
@@ -72,7 +72,7 @@ def test_RealUnit_generate_action_world_SetsCorrectFileWithout_healerhold(
 
 
 def test_RealUnit_generate_action_world_SetsFileWith_healerhold(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_real = realunit_shop("music", get_test_reals_dir(), True)
 
     bob_text = "Bob"
@@ -102,7 +102,7 @@ def test_RealUnit_generate_action_world_SetsFileWith_healerhold(env_dir_setup_cl
 def test_RealUnit_generate_all_action_worlds_SetsCorrectFiles(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     music_real = realunit_shop("music", get_test_reals_dir(), True)
 
     bob_text = "Bob"

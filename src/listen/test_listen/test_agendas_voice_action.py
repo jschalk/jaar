@@ -30,7 +30,7 @@ from os.path import exists as os_path_exists
 def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_lobbyholdIsSet(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_voice = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -61,7 +61,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_lobbyholdIsSet(
 
 
 def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_voice = worldunit_shop(yao_text)
     zia_text = "Zia"
@@ -97,7 +97,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
 def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_debtor_weight(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     zia_action = get_example_zia_speaker()
     bob_action = get_example_bob_speaker()
     bob_action.edit_idea_attr(
@@ -158,7 +158,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_deb
 
 
 # def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_cleanup):
-#     # GIVEN
+#     # ESTABLISH
 #     yao_text = "Yao"
 #     yao_voice = worldunit_shop(yao_text)
 #     zia_text = "Zia"
@@ -236,7 +236,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_deb
 def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     delete_dir(yao_hubunit.voice_file_path())  # don't know why I have to do this...
@@ -283,7 +283,7 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
 def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_voice = worldunit_shop(yao_text)
     yao_text = "Yao"

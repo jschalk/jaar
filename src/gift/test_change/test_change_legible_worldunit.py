@@ -4,8 +4,8 @@ from src.gift.legible import create_legible_list
 from src._world.world import worldunit_shop
 
 
-def test_create_legible_list_ReturnsObjGivenEmptyChange():
-    # GIVEN / WHEN
+def test_create_legible_list_ReturnsObjEstablishWithEmptyChange():
+    # ESTABLISH / WHEN
     x_changeunit = changeunit_shop()
     sue_world = worldunit_shop("Sue")
 
@@ -13,8 +13,8 @@ def test_create_legible_list_ReturnsObjGivenEmptyChange():
     assert create_legible_list(x_changeunit, sue_world) == []
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_weight():
-    # GIVEN
+def test_create_legible_list_ReturnsObjEstablishWithWorldUpdate_weight():
+    # ESTABLISH
     category = "worldunit"
     weight_text = "_weight"
     weight_int = 55
@@ -32,8 +32,8 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_weight():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_monetary_desc():
-    # GIVEN
+def test_create_legible_list_ReturnsObjEstablishWithWorldUpdate_monetary_desc():
+    # ESTABLISH
     category = "worldunit"
     _monetary_desc_text = "_monetary_desc"
     sue_monetary_desc = "dragon dollars"
@@ -51,8 +51,8 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_monetary_desc():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect():
-    # GIVEN
+def test_create_legible_list_ReturnsObjEstablishWithWorldUpdate_credor_respect():
+    # ESTABLISH
     category = "worldunit"
     char_credor_pool_text = "_credor_respect"
     char_credor_pool_int = 71
@@ -74,8 +74,8 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect_With_monetary_desc_None():
-    # GIVEN
+def test_create_legible_list_ReturnsObjEstablishWithWorldUpdate_credor_respect_With_monetary_desc_None():
+    # ESTABLISH
     category = "worldunit"
     char_credor_pool_text = "_credor_respect"
     char_credor_pool_int = 71
@@ -95,8 +95,8 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect_With_mone
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_debtor_respect():
-    # GIVEN
+def test_create_legible_list_ReturnsObjEstablishWithWorldUpdate_debtor_respect():
+    # ESTABLISH
     category = "worldunit"
     char_debtor_pool_text = "_debtor_respect"
     char_debtor_pool_int = 78
@@ -118,8 +118,8 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_debtor_respect():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect_Equal_debtor_respect():
-    # GIVEN
+def test_create_legible_list_ReturnsObjEstablishWithWorldUpdate_credor_respect_Equal_debtor_respect():
+    # ESTABLISH
     x_changeunit = changeunit_shop()
     category = "worldunit"
     char_credor_pool_text = "_credor_respect"
@@ -142,8 +142,8 @@ def test_create_legible_list_ReturnsObjGivenWorldUpdate_credor_respect_Equal_deb
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjGivenWorldUpdate_max_tree_traverse():
-    # GIVEN
+def test_create_legible_list_ReturnsObjEstablishWithWorldUpdate_max_tree_traverse():
+    # ESTABLISH
     category = "worldunit"
     max_tree_traverse_text = "_max_tree_traverse"
     max_tree_traverse_int = 71

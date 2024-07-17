@@ -19,7 +19,7 @@ from pytest import raises as pytest_raises
 
 
 def test_WorldUnit_get_dict_ReturnsDictObject():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_world_v001()
     day_hour_text = "day_hour"
     day_hour_road = x_world.make_l1_road(day_hour_text)
@@ -113,7 +113,7 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
-    # GIVEN
+    # ESTABLISH
     run_text = "runners"
     sue_world = worldunit_shop("Sue")
     x_doerunit = doerunit_shop()
@@ -130,7 +130,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
     sue_world.add_charunit(yao_text)
@@ -150,7 +150,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
 
 
 def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
-    # GIVEN
+    # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
     sue_world.add_charunit(yao_text)
@@ -179,7 +179,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
 
 
 def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
-    # GIVEN
+    # ESTABLISH
     zia_world = example_worlds_get_world_x1_3levels_1reason_1facts()
     tiger_real_id = "tiger"
     zia_world.set_real_id(tiger_real_id)
@@ -248,7 +248,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 
 
 def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
-    # GIVEN
+    # ESTABLISH
     yao_world = example_worlds_world_v001()
     day_hour_text = "day_hour"
     day_hour_road = yao_world.make_l1_road(day_hour_text)
@@ -303,7 +303,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_BigExample():
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
-    # GIVEN
+    # ESTABLISH
     zia_world = example_worlds_get_world_x1_3levels_1reason_1facts()
     zia_world.set_max_tree_traverse(23)
     tiger_real_id = "tiger"
@@ -427,7 +427,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_Example():
-    # GIVEN
+    # ESTABLISH
     slash_delimiter = "/"
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
     assert before_bob_world._road_delimiter != default_road_delimiter_if_none()
@@ -443,7 +443,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_Example():
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_CharExample():
-    # GIVEN
+    # ESTABLISH
     slash_delimiter = "/"
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
     bob_text = ",Bob"
@@ -460,7 +460,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_CharExample():
 
 
 def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
-    # GIVEN
+    # ESTABLISH
     slash_delimiter = "/"
     before_bob_world = worldunit_shop("Bob", _road_delimiter=slash_delimiter)
     yao_text = "Yao"
@@ -479,7 +479,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample()
 
 
 def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():
-    # GIVEN
+    # ESTABLISH
     x1_world = example_worlds_world_v001()
     x1_world._weight = 15
     assert 15 == x1_world._weight
@@ -498,7 +498,7 @@ def test_worldunit_get_from_json_jsonExportCorrectyExportsWorldUnit_weight():
 
 
 def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
-    # GIVEN
+    # ESTABLISH
     x1_world = example_worlds_world_v001()
     x2_world = example_worlds_get_world_x1_3levels_1reason_1facts()
     x3_world = example_worlds_get_world_base_time_example()

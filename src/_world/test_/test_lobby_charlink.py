@@ -4,7 +4,7 @@ from pytest import raises as pytest_raises
 
 
 def test_LobbyBox_set_lobbylink_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     swim_text = ",swimmers"
@@ -27,7 +27,7 @@ def test_LobbyBox_set_lobbylink_CorrectlySetsAttr():
 
 
 def test_LobbyBox_set_lobbylink_SetsAttr_credor_pool_debtor_pool():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     ohio_text = ",Ohio"
@@ -58,7 +58,7 @@ def test_LobbyBox_set_lobbylink_SetsAttr_credor_pool_debtor_pool():
 
 
 def test_LobbyBox_set_lobbylink_RaisesErrorIf_lobbylink_lobby_id_IsWrong():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     ohio_text = ",Ohio"
     iowa_text = ",Iowa"
@@ -79,7 +79,7 @@ def test_LobbyBox_set_lobbylink_RaisesErrorIf_lobbylink_lobby_id_IsWrong():
 
 
 def test_LobbyBox_set_lobbylink_RaisesErrorIf_char_id_IsNone():
-    # GIVEN
+    # ESTABLISH
     ohio_text = ",Ohio"
     ohio_lobbybox = lobbybox_shop(ohio_text)
     yao_ohio_lobbylink = lobbylink_shop(ohio_text)

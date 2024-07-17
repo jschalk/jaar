@@ -12,7 +12,7 @@ from pytest import raises as pytest_raises
 
 
 def test_DoerUnit_exists():
-    # GIVEN
+    # ESTABLISH
     x_lobbyholds = {1}
 
     # WHEN
@@ -24,7 +24,7 @@ def test_DoerUnit_exists():
 
 
 def test_doerunit_shop_ReturnsCorrectWithCorrectAttributes_v1():
-    # GIVEN
+    # ESTABLISH
     x_lobbyholds = {1}
 
     # WHEN
@@ -36,7 +36,7 @@ def test_doerunit_shop_ReturnsCorrectWithCorrectAttributes_v1():
 
 
 def test_doerunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_doerunit = doerunit_shop()
 
     # THEN
@@ -45,7 +45,7 @@ def test_doerunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
 
 
 def test_create_doerunit_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     swim_lobby_id = LobbyID("swimmers")
 
     # WHEN
@@ -57,7 +57,7 @@ def test_create_doerunit_ReturnsCorrectObj():
 
 
 def test_DoerUnit_get_dict_ReturnsCorrectDictWithSingle_lobbyhold():
-    # GIVEN
+    # ESTABLISH
     bob_lobby_id = LobbyID("Bob")
     x_lobbyholds = {bob_lobby_id: bob_lobby_id}
     x_doerunit = doerunit_shop(_lobbyholds=x_lobbyholds)
@@ -73,7 +73,7 @@ def test_DoerUnit_get_dict_ReturnsCorrectDictWithSingle_lobbyhold():
 
 
 def test_DoerUnit_set_lobbyhold_CorrectlySets_lobbyholds_v1():
-    # GIVEN
+    # ESTABLISH
     x_doerunit = doerunit_shop()
     assert len(x_doerunit._lobbyholds) == 0
 
@@ -86,7 +86,7 @@ def test_DoerUnit_set_lobbyhold_CorrectlySets_lobbyholds_v1():
 
 
 def test_DoerUnit_lobbyhold_exists_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     x_doerunit = doerunit_shop()
     yao_text = "Yao"
     assert x_doerunit.lobbyhold_exists(yao_text) is False
@@ -99,7 +99,7 @@ def test_DoerUnit_lobbyhold_exists_ReturnsCorrectObj():
 
 
 def test_DoerUnit_del_lobbyhold_CorrectlyDeletes_lobbyholds_v1():
-    # GIVEN
+    # ESTABLISH
     x_doerunit = doerunit_shop()
     yao_text = "Yao"
     sue_text = "Sue"
@@ -115,7 +115,7 @@ def test_DoerUnit_del_lobbyhold_CorrectlyDeletes_lobbyholds_v1():
 
 
 def test_DoerHeir_exists():
-    # GIVEN
+    # ESTABLISH
     x_lobbyholds = {1}
     _owner_id_x_doerunit = True
 
@@ -129,7 +129,7 @@ def test_DoerHeir_exists():
 
 
 def test_doerheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
-    # GIVEN
+    # ESTABLISH
     x_lobbyholds = {1}
     _owner_id_x_doerunit = "example"
 
@@ -145,7 +145,7 @@ def test_doerheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
 
 
 def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_Emptyx_lobbyholds():
-    # GIVEN
+    # ESTABLISH
     x_lobbyholds = set()
     x_doerheir = doerheir_shop(_lobbyholds=x_lobbyholds)
     assert x_doerheir._owner_id_doer is False
@@ -159,7 +159,7 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_Emptyx_lobbyholds():
 
 
 def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_v1():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     yao_lobbybox = lobbybox_shop(yao_text)
@@ -181,7 +181,7 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_
 
 
 def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_v2():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     yao_lobbybox = lobbybox_shop(yao_text)
@@ -202,7 +202,7 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_
 
 
 def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_v3():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     bob_text = "Bob"
@@ -238,7 +238,7 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_
 
 
 def test_DoerHeir_set_lobbyhold_DoerUnitEmpty_ParentDoerHeirEmpty():
-    # GIVEN
+    # ESTABLISH
     x_doerheir = doerheir_shop(_lobbyholds={})
     parent_doerheir_empty = doerheir_shop()
     x_doerunit = doerunit_shop()
@@ -255,7 +255,7 @@ def test_DoerHeir_set_lobbyhold_DoerUnitEmpty_ParentDoerHeirEmpty():
 
 
 def test_DoerHeir_set_lobbyhold_DoerUnitNotEmpty_ParentDoerHeirIsNone():
-    # GIVEN
+    # ESTABLISH
     kent_text = "kent"
     swim_text = ",swim"
     x_doerunit = doerunit_shop()
@@ -273,7 +273,7 @@ def test_DoerHeir_set_lobbyhold_DoerUnitNotEmpty_ParentDoerHeirIsNone():
 
 
 def test_DoerHeir_set_lobbyhold_DoerUnitNotEmpty_ParentDoerHeirEmpty():
-    # GIVEN
+    # ESTABLISH
     kent_text = "kent"
     swim_text = ",swim"
     x_doerunit = doerunit_shop()
@@ -292,7 +292,7 @@ def test_DoerHeir_set_lobbyhold_DoerUnitNotEmpty_ParentDoerHeirEmpty():
 
 
 def test_DoerHeir_set_lobbyhold_DoerUnitEmpty_ParentDoerHeirNotEmpty():
-    # GIVEN
+    # ESTABLISH
     kent_text = "kent"
     swim_text = ",swim"
     doerunit_swim = doerunit_shop()
@@ -318,7 +318,7 @@ def test_DoerHeir_set_lobbyhold_DoerUnitEmpty_ParentDoerHeirNotEmpty():
 
 
 def test_DoerHeir_set_lobbyhold_DoerUnitEqualParentDoerHeir_NonEmpty():
-    # GIVEN
+    # ESTABLISH
     kent_text = "kent"
     swim_text = ",swim"
     doerunit_swim = doerunit_shop()
@@ -341,7 +341,7 @@ def test_DoerHeir_set_lobbyhold_DoerUnitEqualParentDoerHeir_NonEmpty():
 
 
 def test_DoerHeir_set_lobbyhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
     bob_text = "Bob"
@@ -393,7 +393,7 @@ def test_DoerHeir_set_lobbyhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
 
 
 # def test_DoerHeir_set_lobbyhold_DoerUnit_NotEqualParentDoerHeir_RaisesError():
-#     # GIVEN
+#     # ESTABLISH
 #     yao_text = "Yao"
 #     sue_text = "Sue"
 #     bob_text = "Bob"
@@ -445,7 +445,7 @@ def test_DoerHeir_set_lobbyhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
 
 
 def test_DoerUnit_get_lobbyhold_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     climb_text = ",climbers"
     walk_text = ",walkers"
     swim_text = ",swimmers"
@@ -463,7 +463,7 @@ def test_DoerUnit_get_lobbyhold_ReturnsCorrectObj():
 
 
 def test_DoerHeir_lobby_id_in_ReturnsCorrectBoolWhen_lobbyholdsNotEmpty():
-    # GIVEN
+    # ESTABLISH
     swim_text = ",swim"
     hike_text = ",hike"
     swim_dict = {swim_text}
@@ -496,7 +496,7 @@ def test_DoerHeir_lobby_id_in_ReturnsCorrectBoolWhen_lobbyholdsNotEmpty():
 
 
 def test_DoerHeir_has_lobby_ReturnsCorrectBoolWhen_lobbyholdsEmpty():
-    # GIVEN
+    # ESTABLISH
     hike_text = ",hike"
     hike_dict = {hike_text}
     x_doerunit = doerunit_shop()

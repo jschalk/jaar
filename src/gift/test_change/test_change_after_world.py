@@ -14,7 +14,7 @@ from src.gift.examples.example_changes import get_changeunit_example1
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_SimplestScenario():
-    # GIVEN
+    # ESTABLISH
     ex1_changeunit = changeunit_shop()
 
     # WHEN
@@ -29,7 +29,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_SimplestScenario():
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
-    # GIVEN
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
 
@@ -87,7 +87,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_char():
-    # GIVEN
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
 
@@ -113,7 +113,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_char():
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_char():
-    # GIVEN
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
 
@@ -146,7 +146,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_char():
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_char():
-    # GIVEN
+    # ESTABLISH
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
 
@@ -171,7 +171,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_char():
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_lobbylink():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -215,7 +215,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_lobbylin
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_lobbylink():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -251,7 +251,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_lobbylin
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_lobbylink():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -284,7 +284,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_lobbylin
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_ideaunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -319,7 +319,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_ideaunit
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_ideaunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -362,7 +362,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_ideaunit
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit_SimpleAttributes():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -403,7 +403,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_ideaunit
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_awardlink():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -453,7 +453,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_awa
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_awardlink():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -497,7 +497,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_awa
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_awardlink():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -534,7 +534,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_awa
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_factunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -576,7 +576,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_fac
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_factunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -612,7 +612,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_fac
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_factunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -662,7 +662,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_fac
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_reason_premiseunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -717,7 +717,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_rea
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_reason_premiseunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -770,7 +770,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_rea
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_reason_premiseunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -815,7 +815,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_rea
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_reasonunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -857,7 +857,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_rea
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_reasonunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -910,7 +910,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_update_idea_rea
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_reasonunit():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     sports_text = "sports"
@@ -944,7 +944,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_rea
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_lobbyhold():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -972,7 +972,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_insert_idea_lob
 
 
 def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_lobbyhold():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_au = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -1002,7 +1002,7 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnit_delete_idea_lob
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     before_sue_worldunit = worldunit_shop(sue_text)
     yao_text = "Yao"

@@ -7,7 +7,7 @@ from src.money.riverrun import RiverRun, riverrun_shop
 
 
 def test_RiverRun_Exists():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_riverrun = RiverRun()
 
     # THEN
@@ -30,7 +30,7 @@ def test_RiverRun_Exists():
 
 
 def test_RiverRun_set_cycle_max_CorrectlySetsAttr():
-    # GIVEN
+    # ESTABLISH
     x_riverrun = RiverRun()
     assert x_riverrun.cycle_max is None
 
@@ -52,7 +52,7 @@ def test_RiverRun_set_cycle_max_CorrectlySetsAttr():
 
 
 def test_riverrun_shop_ReturnsCorrectObjWithArg():
-    # GIVEN
+    # ESTABLISH
     ten_int = 10
     yao_hubunit = example_yao_hubunit()
     econ_credorledgers = example_yao_bob_zia_credorledgers()
@@ -85,7 +85,7 @@ def test_riverrun_shop_ReturnsCorrectObjWithArg():
 
 
 def test_riverrun_shop_ReturnsCorrectObjWithoutArgs():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
 
     # WHEN
@@ -104,7 +104,7 @@ def test_riverrun_shop_ReturnsCorrectObjWithoutArgs():
 
 
 def test_RiverRun_set_econ_credorledger_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     yao_credor_weight = 500
@@ -121,7 +121,7 @@ def test_RiverRun_set_econ_credorledger_SetsAttr():
 
 
 def test_RiverRun_delete_econ_credorledgers_owner_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     bob_text = "Bob"
@@ -143,7 +143,7 @@ def test_RiverRun_delete_econ_credorledgers_owner_SetsAttr():
 
 
 def test_RiverRun_get_all_econ_credorledger_char_ids_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
     bob_text = "Bob"

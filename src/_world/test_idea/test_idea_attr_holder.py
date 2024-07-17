@@ -36,7 +36,7 @@ def test_IdeaAttrFilter_Exists():
 
 
 def test_IdeaAttrFilter_CorrectlyCalculatesPremiseRanges():
-    # GIVEN
+    # ESTABLISH
     idea_attr = IdeaAttrFilter(reason_premise="some_road")
     assert idea_attr.reason_premise_open is None
     assert idea_attr.reason_premise_nigh is None
@@ -60,7 +60,7 @@ def test_IdeaAttrFilter_CorrectlyCalculatesPremiseRanges():
 
 
 def test_ideaattrfilter_shop_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     sue_healerhold = healerhold_shop({"Sue", "Yim"})
 
     # WHEN

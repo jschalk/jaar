@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 
 def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImportance():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
     yao_text = "Yao"
@@ -64,7 +64,7 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     sue_text = "Sue"
     bob_text = "Bob"
@@ -116,7 +116,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
     )
     assert lobbylink_debt_sum == 1.0
 
-    # GIVEN anothher pledge, check metrics are as expected
+    # ESTABLISH anothher pledge, check metrics are as expected
     xio_text = "Xio"
     yao_world.set_charunit(charunit_shop(xio_text))
     yao_world._idearoot.set_awardlink(awardlink_shop(xio_text, 20, debtor_weight=13))
@@ -166,7 +166,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     swim_text = "swim"
     swim_road = yao_world.make_l1_road(swim_text)
@@ -300,7 +300,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImportance():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     swim_text = "swim"
     swim_road = yao_world.make_l1_road(swim_text)
@@ -367,7 +367,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImp
 
 
 def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     yao_world.add_l1_idea(ideaunit_shop("swim"))
     sue_text = "Sue"
@@ -419,7 +419,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
 
 
 # def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_credor_respectWhenCharSumIsZero():
-#     # GIVEN
+#     # ESTABLISH
 #     yao_world = worldunit_shop("Yao")
 #     assert yao_world._credor_respect is None
 #     assert yao_world.is_charunits_credor_weight_sum_correct()
@@ -435,7 +435,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
 
 
 # def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_debtor_respectWhenCharSumIsZero():
-#     # GIVEN
+#     # ESTABLISH
 #     yao_world = worldunit_shop("Yao")
 #     assert yao_world._credor_respect is None
 #     assert yao_world.is_charunits_debtor_weight_sum_correct()
@@ -515,7 +515,7 @@ class AwardAgendaMetrics:
 
 
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
-    # GIVEN
+    # ESTABLISH
     x_world = examples_world_v001_with_large_agenda()
     clear_all_charunits_lobbyboxs_world_agenda_cred_debt(x_world=x_world)
 
@@ -608,7 +608,7 @@ def are_equal(x1: float, x2: float):
 
 
 def test_WorldUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenWorldIsEmpty():
-    # GIVEN
+    # ESTABLISH
     yao_world = worldunit_shop("Yao")
     sue_text = "Sue"
     bob_text = "Bob"
@@ -655,7 +655,7 @@ def test_WorldUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenWorldIsEmpty():
 
 
 def test_examples_world_v001_has_chars():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     yao_world = examples_world_v001()
 
     # THEN
@@ -664,7 +664,7 @@ def test_examples_world_v001_has_chars():
 
 
 def test_examples_world_v001_HasLobbys():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_world = examples_world_v001()
     x_world.calc_world_metrics()
 

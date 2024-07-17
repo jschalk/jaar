@@ -5,7 +5,7 @@ from src.real.real_graphic import (
 
 
 def test_real_graphics_ExplainThingsWell():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     real_structures0_fig = get_real_structures0_fig()
     # real_structures1_fig = get_real_structures1_fig()
     # real_structures2_fig = get_real_structures2_fig()

@@ -8,7 +8,7 @@ from pytest import raises as pytest_raises
 
 
 def test_create_missing_distribution_list_ReturnsObjScenario00():
-    # GIVEN
+    # ESTABLISH
     x_missing_scale = 0
     x_grain = 0
     x_list_length = 0
@@ -23,7 +23,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario00():
 
 
 def test_create_missing_distribution_list_ReturnsObjScenario01():
-    # GIVEN
+    # ESTABLISH
     x_missing_scale = 0
     x_grain = 5
     x_list_length = 3
@@ -38,7 +38,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario01():
 
 
 def test_create_missing_distribution_list_ReturnsObjScenario02():
-    # GIVEN
+    # ESTABLISH
     x_missing = 60
     x_grain = 5
     x_list_length = 3
@@ -51,7 +51,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario02():
 
 
 def test_create_missing_distribution_list_ReturnsObjScenario03():
-    # GIVEN
+    # ESTABLISH
     x_missing_scale = 40
     x_grain = 5
     x_list_length = 3
@@ -66,7 +66,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario03():
 
 
 def test_create_missing_distribution_list_ReturnsObjScenario04():
-    # GIVEN
+    # ESTABLISH
     x_missing_scale = -20
     x_grain = 5
     x_list_length = 4
@@ -81,7 +81,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario04():
 
 
 def test_create_missing_distribution_list_ReturnsObjScenario05():
-    # GIVEN
+    # ESTABLISH
     x_missing_scale = -35
     x_grain = 5
     x_list_length = 4
@@ -96,7 +96,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario05():
 
 
 def test_allot_missing_scale_DistributesTheMissingScale_scenario01():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     sue_text = "Sue"
     yao_text = "Yao"
@@ -135,7 +135,7 @@ def test_allot_missing_scale_DistributesTheMissingScale_scenario01():
 
 
 def test_allot_missing_scale_DistributesTheMissingScale_scenario02():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     sue_text = "Sue"
     yao_text = "Yao"
@@ -175,7 +175,7 @@ def test_allot_missing_scale_DistributesTheMissingScale_scenario02():
 
 
 def test_allot_missing_scale_RaisesErrorWhen_ledgerSummationIsNot_scale_number():
-    # GIVEN
+    # ESTABLISH
     bob_text = "Bob"
     sue_text = "Sue"
     yao_text = "Yao"
@@ -208,7 +208,7 @@ def test_allot_missing_scale_RaisesErrorWhen_ledgerSummationIsNot_scale_number()
 
 
 def test_allot_missing_scale_CorrectlyReturnsEmpty_ledger():
-    # GIVEN
+    # ESTABLISH
     before_ledger = {}
     x_missing_scale = 44
     x_grain = 1
@@ -224,7 +224,7 @@ def test_allot_missing_scale_CorrectlyReturnsEmpty_ledger():
 
 
 def test_allot_scale_v01():
-    # GIVEN
+    # ESTABLISH
     credorledger = {"obj1": 1.0, "obj2": 2.0, "obj3": 3.0}
     print(f"{credorledger=}")
     scale_number = 100
@@ -382,7 +382,7 @@ def test_allot_scale_v07():
 
 
 def test__create_allot_dict_SummationFailsInConsistentWay():
-    # GIVEN
+    # ESTABLISH
     ledger = {
         "ACME": 1,
         "Aaron Donald things effected by him": 1,
@@ -454,7 +454,7 @@ def test__create_allot_dict_SummationFailsInConsistentWay():
 
 
 def test_allot_scale_Summation():
-    # GIVEN
+    # ESTABLISH
     ledger = {
         "ACME": 1,
         "Aaron Donald things effected by him": 1,

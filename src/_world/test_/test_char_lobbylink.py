@@ -4,7 +4,7 @@ from pytest import raises as pytest_raises
 
 
 def test_CharUnit_set_lobbylink_SetsAttr():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     yao_text = "Yao"
     run_credor_weight = 66
@@ -27,7 +27,7 @@ def test_CharUnit_set_lobbylink_SetsAttr():
 
 
 def test_CharUnit_set_lobbylink_SetsMultipleAttr():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     fly_text = ",fly"
     run_lobbylink = lobbylink_shop(run_text, credor_weight=13, debtor_weight=7)
@@ -48,7 +48,7 @@ def test_CharUnit_set_lobbylink_SetsMultipleAttr():
 
 
 def test_CharUnit_set_lobbylink_RaisesErrorIf_lobby_idIsCharIDAndNotCharUnit_char_id():
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_charunit = charunit_shop(yao_text)
     bob_text = "Bob"
@@ -63,7 +63,7 @@ def test_CharUnit_set_lobbylink_RaisesErrorIf_lobby_idIsCharIDAndNotCharUnit_cha
 
 
 def test_CharUnit_get_lobbylink_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     fly_text = ",fly"
     yao_charunit = charunit_shop("Yao")
@@ -78,7 +78,7 @@ def test_CharUnit_get_lobbylink_ReturnsCorrectObj():
 
 
 def test_lobbylink_exists_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     fly_text = ",fly"
     yao_charunit = charunit_shop("Yao")
@@ -93,7 +93,7 @@ def test_lobbylink_exists_ReturnsCorrectObj():
 
 
 def test_lobbylinks_exist_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     fly_text = ",fly"
     yao_charunit = charunit_shop("Yao")
@@ -121,7 +121,7 @@ def test_lobbylinks_exist_ReturnsCorrectObj():
 
 
 def test_CharUnit_del_lobbylink_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     fly_text = ",fly"
     run_lobbylink = lobbylink_shop(run_text)
@@ -145,7 +145,7 @@ def test_CharUnit_del_lobbylink_SetsAttrCorrectly():
 
 
 def test_CharUnit_clear_lobbylinks_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     fly_text = ",fly"
     run_lobbylink = lobbylink_shop(run_text)
@@ -169,7 +169,7 @@ def test_CharUnit_clear_lobbylinks_SetsAttrCorrectly():
 
 
 def test_CharUnit_add_lobbylink_SetsAttrCorrectly():
-    # GIVEN
+    # ESTABLISH
     run_text = ",run"
     run_credor_weight = ",run"
     run_debtor_weight = ",run"
@@ -187,7 +187,7 @@ def test_CharUnit_add_lobbylink_SetsAttrCorrectly():
 
 
 def test_CharUnit_set_credor_pool_SetAttr():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     assert bob_charunit._credor_pool == 0
 
@@ -200,7 +200,7 @@ def test_CharUnit_set_credor_pool_SetAttr():
 
 
 def test_CharUnit_set_debtor_pool_SetAttr():
-    # GIVEN
+    # ESTABLISH
     bob_charunit = charunit_shop("Bob")
     assert bob_charunit._debtor_pool == 0
 
@@ -213,7 +213,7 @@ def test_CharUnit_set_debtor_pool_SetAttr():
 
 
 def test_CharUnit_set_credor_pool_Sets_lobbylinks():
-    # GIVEN
+    # ESTABLISH
     ohio_text = ",Ohio"
     iowa_text = ",Iowa"
     sue_credor_weight = 1
@@ -238,7 +238,7 @@ def test_CharUnit_set_credor_pool_Sets_lobbylinks():
 
 
 def test_CharUnit_set_debtor_pool_Sets_lobbylinks():
-    # GIVEN
+    # ESTABLISH
     ohio_text = ",Ohio"
     iowa_text = ",Iowa"
     sue_debtor_weight = 1

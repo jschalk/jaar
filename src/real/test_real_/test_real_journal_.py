@@ -17,7 +17,7 @@ from pytest import raises as pytest_raises
 
 
 def test_RealUnit_get_journal_db_path_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = RealUnit(real_id=music_text, reals_dir=get_test_reals_dir())
 
@@ -33,7 +33,7 @@ def test_RealUnit_get_journal_db_path_ReturnsCorrectObj():
 def test_RealUnit_create_journal_db_CreatesDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(real_id=music_text, reals_dir=get_test_reals_dir())
     assert os_path_exists(music_real.get_journal_db_path())
@@ -50,7 +50,7 @@ def test_RealUnit_create_journal_db_CreatesDBIfDoesNotExist(
 def test_RealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(real_id=music_text, reals_dir=get_test_reals_dir())
     delete_dir(dir=music_real.get_journal_db_path())  # clear out any treasury.db file
@@ -76,7 +76,7 @@ def test_RealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
 
 
 def test_RealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     music_text = "music"
     music_real = realunit_shop(
         real_id=music_text, reals_dir=get_test_reals_dir(), in_memory_journal=True
@@ -97,7 +97,7 @@ def test_RealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
 def test_RealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
-    # GIVEN create Real
+    # ESTABLISH create Real
     x_real = RealUnit(get_real_id_if_None(), get_test_reals_dir())
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
@@ -112,7 +112,7 @@ def test_RealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
 
 
 def test_real_set_real_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
-    # GIVEN create real
+    # ESTABLISH create real
     x_real = realunit_shop(get_real_id_if_None(), get_test_reals_dir())
 
     # WHEN

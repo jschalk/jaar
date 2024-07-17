@@ -31,7 +31,7 @@ from src.gift.cross import (
 
 
 def test_str_functions_ReturnCorrectObjs():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert real_id_str() == "real_id"
     assert owner_id_str() == "owner_id"
     assert char_id_str() == "char_id"
@@ -46,7 +46,7 @@ def test_str_functions_ReturnCorrectObjs():
 
 
 def test_get_cross_formats_dir_ReturnsObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     cross_dir = get_cross_formats_dir()
     # THEN
     print(f"{cross_dir=}")
@@ -54,7 +54,7 @@ def test_get_cross_formats_dir_ReturnsObj():
 
 
 def test_get_cross_filenames_ReturnsCorrectObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     x_filenames = get_cross_filenames()
     # THEN
     print(f"{x_filenames=}")
@@ -64,7 +64,7 @@ def test_get_cross_filenames_ReturnsCorrectObj():
 
 
 def test_get_headers_list_ReturnsObj():
-    # GIVEN / WHEN
+    # ESTABLISH / WHEN
     format_0001_headers = _get_headers_list(jaar_format_0001_char_v0_0_0())
 
     # THEN
@@ -80,7 +80,7 @@ def test_get_headers_list_ReturnsObj():
 
 
 def test_create_cross_dataframe_ReturnsCorrectObj():
-    # GIVEN
+    # ESTABLISH
     empty_d2 = []
     # WHEN
     x_df = create_cross_dataframe(empty_d2, jaar_format_0001_char_v0_0_0())
@@ -100,12 +100,12 @@ def for_all_crosss_create_cross_dataframe():
 
 
 def test_create_cross_dataframe_ReturnsCorrectObjForEvery_cross():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert for_all_crosss_create_cross_dataframe()
 
 
 def test_cross_FilesExist():
-    # GIVEN
+    # ESTABLISH
     cross_dir = get_cross_formats_dir()
 
     # WHEN
@@ -118,7 +118,7 @@ def test_cross_FilesExist():
 
 
 def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0001_char_v0_0_0()
 
     # WHEN
@@ -154,7 +154,7 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0()
 
 
 def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbylink_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0002_lobbylink_v0_0_0()
 
     # WHEN
@@ -184,7 +184,7 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbylink_v0_
 
 
 def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0003_ideaunit_v0_0_0()
 
     # WHEN
@@ -214,7 +214,7 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0
 
 
 def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0001_char_v0_0_0()
     # WHEN
     sorted_cross_attributes = get_column_ordered_cross_attributes(cross_name)
@@ -231,7 +231,7 @@ def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
 
 
 def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario2():
-    # GIVEN
+    # ESTABLISH
     cross_name = jaar_format_0003_ideaunit_v0_0_0()
     # WHEN
     sorted_cross_attributes = get_column_ordered_cross_attributes(cross_name)

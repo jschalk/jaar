@@ -6,7 +6,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 def test_create_pledge_EqualWorldWithEmptyParameters():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
     old_sue_world = copy_deepcopy(sue_world)
@@ -26,7 +26,7 @@ def test_create_pledge_EqualWorldWithEmptyParameters():
 
 
 def test_create_pledge_CorrectlyAddspledgeToWorld():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     new_sue_world = worldunit_shop(sue_text)
     old_sue_world = copy_deepcopy(new_sue_world)
@@ -44,7 +44,7 @@ def test_create_pledge_CorrectlyAddspledgeToWorld():
 
 
 def test_create_pledge_CorrectlyModifiesWorldNonpledgeIdeaTopledgeIdea():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
     clean_text = "clean"
@@ -74,7 +74,7 @@ def test_create_pledge_CorrectlyModifiesWorldNonpledgeIdeaTopledgeIdea():
 
 
 def test_create_pledge_CorrectlySets_lobbyhold():
-    # GIVEN
+    # ESTABLISH
     sue_text = "Sue"
     sue_world = worldunit_shop(sue_text)
     clean_text = "clean"

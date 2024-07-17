@@ -10,14 +10,14 @@ from pytest import raises as pytest_raises
 
 
 def test_get_1_if_None():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert get_1_if_None(None) == 1
     assert get_1_if_None(2) == 2
     assert get_1_if_None(-3) == -3
 
 
 def test_add_dict_if_missing_CorrectAddsDict():
-    # GIVEN
+    # ESTABLISH
     y_dict = {}
 
     # WHEN
@@ -31,7 +31,7 @@ def test_add_dict_if_missing_CorrectAddsDict():
 
 
 def test_place_obj_in_dict_CorrectAddsDict():
-    # GIVEN
+    # ESTABLISH
     y_dict = {}
 
     # WHEN
@@ -46,7 +46,7 @@ def test_place_obj_in_dict_CorrectAddsDict():
 
 
 def test_get_all_nondictionary_objs_ReturnsCorrectDict():
-    # GIVEN
+    # ESTABLISH
     y_dict = {}
     sports_text = "sports"
     run_text = "running"
@@ -206,7 +206,7 @@ def test_get_nested_value_ReturnsNoneWhen_if_missing_return_None_True():
 
 
 def test_get_positive_int_ReturnsCorrectObj():
-    # GIVEN / WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert get_positive_int(None) == 0
     assert get_positive_int("sports") == 0
     assert get_positive_int() == 0

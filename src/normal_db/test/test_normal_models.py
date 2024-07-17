@@ -61,7 +61,7 @@ def print_out_expected_class_attribute_declarations(config_category):
 
 
 def test_normalized_table_WorldTable_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("worldunit")
     mapper = inspect(WorldTable)
 
@@ -73,7 +73,7 @@ def test_normalized_table_WorldTable_Exists():
 
 
 def test_normalized_table_CharUnitTable_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_charunit")
     mapper = inspect(CharUnitTable)
     # print_out_expected_class_attribute_declarations(config_category)
@@ -86,7 +86,7 @@ def test_normalized_table_CharUnitTable_Exists():
 
 
 # def test_normalized_table_LobbyTable_Exists():
-#     # GIVEN
+#     # ESTABLISH
 #     config_category = get_normalized_world_table_build().get("world_lobbybox")
 #     mapper = inspect(LobbyTable)
 #     print_out_expected_class_attribute_declarations(config_category)
@@ -99,7 +99,7 @@ def test_normalized_table_CharUnitTable_Exists():
 
 
 def test_normalized_table_LobbyLinkTable_lobbylink_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_char_lobbylink")
     mapper = inspect(LobbyLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -112,7 +112,7 @@ def test_normalized_table_LobbyLinkTable_lobbylink_Exists():
 
 
 def test_normalized_table_IdeaTable_idea_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_ideaunit")
     mapper = inspect(IdeaTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -125,7 +125,7 @@ def test_normalized_table_IdeaTable_idea_Exists():
 
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_awardlink")
     mapper = inspect(AwardLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -138,7 +138,7 @@ def test_normalized_table_AwardLinkTable_awardlink_Exists():
 
 
 def test_normalized_table_ReasonTable_reason_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_reasonunit")
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -151,7 +151,7 @@ def test_normalized_table_ReasonTable_reason_Exists():
 
 
 def test_normalized_table_PremiseTable_premise_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get(
         "world_idea_reason_premiseunit"
     )
@@ -166,7 +166,7 @@ def test_normalized_table_PremiseTable_premise_Exists():
 
 
 def test_normalized_table_lobbyholdTable_lobbyhold_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_lobbyhold")
     mapper = inspect(lobbyholdTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -179,7 +179,7 @@ def test_normalized_table_lobbyholdTable_lobbyhold_Exists():
 
 
 def test_normalized_table_HealerHoldTable_healerhold_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_healerhold")
     mapper = inspect(HealerHoldTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -192,7 +192,7 @@ def test_normalized_table_HealerHoldTable_healerhold_Exists():
 
 
 def test_normalized_table_FactTable_fact_Exists():
-    # GIVEN
+    # ESTABLISH
     config_category = get_normalized_world_table_build().get("world_idea_factunit")
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_category)

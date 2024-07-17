@@ -263,7 +263,7 @@ def get_example_yao_voice_with_3_healers():
 
 
 # def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
-#     # GIVEN
+#     # ESTABLISH
 #     # yao0_voice with 3 debotors of different credor_weights
 #     # yao_job1 with 1 task, fact that doesn't make that task active
 #     # yao_job2 with 2 tasks, one is equal fact that makes task active
@@ -337,7 +337,7 @@ def get_example_yao_voice_with_3_healers():
 def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItself(
     env_dir_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     # yao0_voice with 3 debotors of different credor_weights
     # yao_job1 with 1 task, fact that doesn't make that task active
     # yao_job2 with 2 tasks, one is equal fact that makes task active
@@ -418,7 +418,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
 
 
 def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
-    # GIVEN
+    # ESTABLISH
     yao_text = "Yao"
     yao_duty = worldunit_shop(yao_text)
     sue_texas_hubunit = get_texas_hubunit()
@@ -428,7 +428,7 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # WHEN
     create_job_file_from_duty_file(sue_texas_hubunit, yao_text)
 
-    # GIVEN
+    # ESTABLISH
     assert sue_texas_hubunit.job_file_exists(yao_text)
     yao_job = sue_texas_hubunit.get_job_world(yao_text)
     assert yao_job._owner_id != None

@@ -14,7 +14,7 @@ from src._world.world import worldunit_shop
 
 
 def test_WorldUnit_ReasonUnits_create():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
     casa_road = x_world.make_l1_road(casa_text)
@@ -40,7 +40,7 @@ def test_WorldUnit_ReasonUnits_create():
 
 
 def test_WorldUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_road = x_world.make_l1_road("casa")
     week_road = x_world.make_l1_road("weekdays")
@@ -62,7 +62,7 @@ def test_WorldUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
 
 
 def test_WorldUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
-    # GIVEN
+    # ESTABLISH
     slash_text = "/"
     bob_world = worldunit_shop("Bob", _road_delimiter=slash_text)
     casa_text = "casa"
@@ -93,7 +93,7 @@ def test_WorldUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
 
 
 def test_WorldUnit_set_reasonunits_status():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
     casa_road = x_world.make_l1_road(casa_text)
@@ -121,7 +121,7 @@ def test_WorldUnit_set_reasonunits_status():
 
 
 def test_agenda_returned_WhenNoReasonsExist():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
 
     # WHEN
@@ -130,12 +130,12 @@ def test_agenda_returned_WhenNoReasonsExist():
     # THEN
     casa_road = x_world.make_l1_road("casa")
     assert x_world.get_idea_obj(casa_road)._task == True
-    cat_road = x_world.make_l1_road("give cat food")
+    cat_road = x_world.make_l1_road("cat have dinner")
     assert x_world.get_idea_obj(cat_road)._task == True
 
 
 def test_WorldUnit_reasonheirs_AreCorrectlyInherited_v1():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     print(f"{x_world._real_id=}")
     print(f"{x_world._idearoot._label=}")
@@ -192,7 +192,7 @@ def test_WorldUnit_reasonheirs_AreCorrectlyInherited_v1():
 
 
 def test_WorldUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
-    # GIVEN
+    # ESTABLISH
     a4_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
     casa_road = a4_world.make_l1_road(casa_text)
@@ -334,7 +334,7 @@ def test_WorldUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
 
 
 def test_WorldUnit_ReasonUnits_set_UnCoupledMethod():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
     casa_road = x_world.make_l1_road(casa_text)
@@ -362,7 +362,7 @@ def test_WorldUnit_ReasonUnits_set_UnCoupledMethod():
     print(f" {casa_wk_reason1.base=}")
     assert casa_idea1._reasonunits[week_road] == casa_wk_reason1
 
-    # GIVEN
+    # ESTABLISH
     divisor_x = 34
     open_x = 12
     nigh_x = 12
@@ -408,7 +408,7 @@ def test_WorldUnit_ReasonUnits_set_UnCoupledMethod():
 
 
 def test_WorldUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
     casa_road = x_world.make_l1_road(casa_text)
@@ -438,7 +438,7 @@ def test_WorldUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
 
 
 def test_WorldUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa = "casa"
     casa_road = x_world.make_l1_road(casa)
@@ -468,7 +468,7 @@ def test_WorldUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh
 
 
 def test_WorldUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_PremiseUnits():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_road = x_world.make_l1_road("casa")
     weekday_road = x_world.make_l1_road("weekdays")
@@ -511,7 +511,7 @@ def test_WorldUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_P
 
 
 def test_WorldUnit_ReasonUnits_del_reason_premise_UncoupledMethod2():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_road = x_world.make_l1_road("casa")
     weekdays_road = x_world.make_l1_road("weekdays")
@@ -527,7 +527,7 @@ def test_WorldUnit_ReasonUnits_del_reason_premise_UncoupledMethod2():
 def test_WorldUnit_edit_idea_attr_worldIsAbleToEdit_base_idea_active_requisite_AnyIdeaIfInvaildThrowsError():
     # _base_idea_active_requisite: str = None
     # must be 1 of 3: bool: True, bool: False, str="Set to Ignore"
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
     casa_road = x_world.make_l1_road(casa_text)
@@ -583,7 +583,7 @@ def test_WorldUnit_edit_idea_attr_worldIsAbleToEdit_base_idea_active_requisite_A
 
 
 def test_WorldUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
-    # GIVEN an World with 5 ideas, 1 Fact:
+    # ESTABLISH an World with 5 ideas, 1 Fact:
     # 1. idea(...,weekdays) exists
     # 2. idea(...,weekdays,wednesday) exists
     # 3. idea(...,weekdays,thursday) exists
@@ -643,7 +643,7 @@ def test_WorldUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
 
 
 def test_WorldUnit_calc_world_metrics_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     assert x_world._rational is False
     # x_world.calc_world_metrics()
@@ -660,7 +660,7 @@ def test_WorldUnit_calc_world_metrics_SetsRationalAttrToFalseWhen_max_tree_trave
 
 
 def test_WorldUnit_tree_traverses_StopWhenEqualStatusIsDetected():
-    # GIVEN
+    # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     assert x_world._max_tree_traverse != 2
 
@@ -674,7 +674,7 @@ def test_WorldUnit_tree_traverses_StopWhenEqualStatusIsDetected():
 
 
 def test_WorldUnit_tree_traverse_count_CorrectlyCountsTreeTraversesForIrrationalWorlds():
-    # GIVEN irrational world
+    # ESTABLISH irrational world
     x_world = example_worlds_get_world_irrational_example()
     x_world.calc_world_metrics()
     assert x_world._tree_traverse_count == 3
