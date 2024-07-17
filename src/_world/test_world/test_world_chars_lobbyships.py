@@ -14,9 +14,9 @@ def test_WorldUnit_get_lobby_ids_dict_ReturnsObj():
     zia_charunit = bob_world.get_char(zia_text)
     run_text = ",Run"
     swim_text = ",Swim"
-    sue_charunit.add_lobbylink(run_text)
-    zia_charunit.add_lobbylink(run_text)
-    zia_charunit.add_lobbylink(swim_text)
+    sue_charunit.add_lobbyship(run_text)
+    zia_charunit.add_lobbyship(run_text)
+    zia_charunit.add_lobbyship(swim_text)
 
     # WHEN
     lobby_ids_dict = bob_world.get_lobby_ids_dict()

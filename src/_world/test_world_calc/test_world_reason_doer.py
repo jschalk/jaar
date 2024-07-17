@@ -123,7 +123,7 @@ def test_world_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     yao_text = "Yao"
     sue_world.add_charunit(yao_text)
     yao_charunit = sue_world.get_char(yao_text)
-    yao_charunit.add_lobbylink(swimmers_text)
+    yao_charunit.add_lobbyship(swimmers_text)
 
     sue_world.add_l1_idea(ideaunit_shop(swim_text))
     sue_world.add_idea(ideaunit_shop(morn_text), parent_road=swim_road)

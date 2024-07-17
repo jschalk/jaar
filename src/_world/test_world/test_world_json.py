@@ -136,7 +136,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     sue_world.add_charunit(yao_text)
     run_text = ",runners"
     yao_charunit = sue_world.get_char(yao_text)
-    yao_charunit.add_lobbylink(run_text)
+    yao_charunit.add_lobbyship(run_text)
     run_healerhold = healerhold_shop()
     run_healerhold.set_lobby_id(x_lobby_id=run_text)
     sue_world.edit_idea_attr(road=sue_world._real_id, healerhold=run_healerhold)
@@ -156,7 +156,7 @@ def test_WorldUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     sue_world.add_charunit(yao_text)
     run_text = ",runners"
     yao_charunit = sue_world.get_char(yao_text)
-    yao_charunit.add_lobbylink(run_text)
+    yao_charunit.add_lobbyship(run_text)
 
     morn_text = "morning"
     morn_road = sue_world.make_l1_road(morn_text)
@@ -196,7 +196,7 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     run_text = ",runners"
     zia_world.add_charunit(yao_text)
     yao_charunit = zia_world.get_char(yao_text)
-    yao_charunit.add_lobbylink(run_text)
+    yao_charunit.add_lobbyship(run_text)
     run_healerhold = healerhold_shop({run_text})
     zia_world.edit_idea_attr(road=zia_world._real_id, healerhold=run_healerhold)
     zia_world.edit_idea_attr(road=zia_world._real_id, problem_bool=True)
@@ -338,8 +338,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     run_text = ",runners"
     sue_charunit = zia_world.get_char(sue_text)
     tim_charunit = zia_world.get_char(tim_text)
-    sue_charunit.add_lobbylink(run_text)
-    tim_charunit.add_lobbylink(run_text)
+    sue_charunit.add_lobbyship(run_text)
+    tim_charunit.add_lobbyship(run_text)
     run_doerunit = doerunit_shop()
     run_doerunit.set_lobbyhold(lobby_id=run_text)
     zia_world.edit_idea_attr(zia_world._real_id, doerunit=run_doerunit)
@@ -467,7 +467,7 @@ def test_worldunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample()
     swim_text = f"{slash_delimiter}Swimmers"
     before_bob_world.add_charunit(yao_text)
     yao_charunit = before_bob_world.get_char(yao_text)
-    yao_charunit.add_lobbylink(swim_text)
+    yao_charunit.add_lobbyship(swim_text)
 
     # WHEN
     bob_json = before_bob_world.get_json()
@@ -541,6 +541,6 @@ def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
     philipa_text = "Philipa"
     ccn_philipa_charunit = ccn_world1.get_char(philipa_text)
     x1_philipa_charunit = x1_world.get_char(philipa_text)
-    assert ccn_philipa_charunit._lobbylinks == x1_philipa_charunit._lobbylinks
+    assert ccn_philipa_charunit._lobbyships == x1_philipa_charunit._lobbyships
     assert ccn_world1 == x1_world
     assert ccn_dict_of_obj.get(x1_world._owner_id) == x1_world

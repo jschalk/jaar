@@ -21,7 +21,7 @@ def test_CharUnit_exists():
     # calculated fields
     assert bob_charunit._credor_pool is None
     assert bob_charunit._debtor_pool is None
-    assert bob_charunit._lobbylinks is None
+    assert bob_charunit._lobbyships is None
     assert bob_charunit._irrational_debtor_weight is None
     assert bob_charunit._inallocable_debtor_weight is None
     assert bob_charunit._bud_give is None
@@ -72,7 +72,7 @@ def test_charunit_shop_CorrectlySetsAttributes():
     # calculated fields
     assert yao_charunit._credor_pool == 0
     assert yao_charunit._debtor_pool == 0
-    assert yao_charunit._lobbylinks == {}
+    assert yao_charunit._lobbyships == {}
     assert yao_charunit._irrational_debtor_weight == 0
     assert yao_charunit._inallocable_debtor_weight == 0
     assert yao_charunit._bud_give == 0

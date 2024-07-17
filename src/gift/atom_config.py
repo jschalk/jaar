@@ -71,8 +71,8 @@ def world_charunit_text() -> str:
     return "world_charunit"
 
 
-def world_char_lobbylink_text() -> str:
-    return "world_char_lobbylink"
+def world_char_lobbyship_text() -> str:
+    return "world_char_lobbyship"
 
 
 def world_ideaunit_text() -> str:

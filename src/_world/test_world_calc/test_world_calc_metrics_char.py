@@ -70,7 +70,7 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     # assert bud_take_sum == 1
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
+def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbyLinkWorldCredAndDebt():
     # ESTABLISH
     yao_world = worldunit_shop("Yao")
     sue_text = "Sue"
@@ -89,39 +89,39 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
-    sue_sue_lobbylink = sue_charunit.get_lobbylink(sue_text)
-    bob_bob_lobbylink = bob_charunit.get_lobbylink(bob_text)
-    zia_zia_lobbylink = zia_charunit.get_lobbylink(zia_text)
-    assert sue_sue_lobbylink._bud_give is None
-    assert sue_sue_lobbylink._bud_take is None
-    assert bob_bob_lobbylink._bud_give is None
-    assert bob_bob_lobbylink._bud_take is None
-    assert zia_zia_lobbylink._bud_give is None
-    assert zia_zia_lobbylink._bud_take is None
+    sue_sue_lobbyship = sue_charunit.get_lobbyship(sue_text)
+    bob_bob_lobbyship = bob_charunit.get_lobbyship(bob_text)
+    zia_zia_lobbyship = zia_charunit.get_lobbyship(zia_text)
+    assert sue_sue_lobbyship._bud_give is None
+    assert sue_sue_lobbyship._bud_take is None
+    assert bob_bob_lobbyship._bud_give is None
+    assert bob_bob_lobbyship._bud_take is None
+    assert zia_zia_lobbyship._bud_give is None
+    assert zia_zia_lobbyship._bud_take is None
 
     # WHEN
     yao_world.calc_world_metrics()
 
     # THEN
-    assert sue_sue_lobbylink._bud_give == 0.5 * default_bud_pool()
-    assert sue_sue_lobbylink._bud_take == 0.8 * default_bud_pool()
-    assert bob_bob_lobbylink._bud_give == 0.25 * default_bud_pool()
-    assert bob_bob_lobbylink._bud_take == 0.1 * default_bud_pool()
-    assert zia_zia_lobbylink._bud_give == 0.25 * default_bud_pool()
-    assert zia_zia_lobbylink._bud_take == 0.1 * default_bud_pool()
+    assert sue_sue_lobbyship._bud_give == 0.5 * default_bud_pool()
+    assert sue_sue_lobbyship._bud_take == 0.8 * default_bud_pool()
+    assert bob_bob_lobbyship._bud_give == 0.25 * default_bud_pool()
+    assert bob_bob_lobbyship._bud_take == 0.1 * default_bud_pool()
+    assert zia_zia_lobbyship._bud_give == 0.25 * default_bud_pool()
+    assert zia_zia_lobbyship._bud_take == 0.1 * default_bud_pool()
 
-    lobbylink_cred_sum = (
-        sue_sue_lobbylink._bud_give
-        + bob_bob_lobbylink._bud_give
-        + zia_zia_lobbylink._bud_give
+    lobbyship_cred_sum = (
+        sue_sue_lobbyship._bud_give
+        + bob_bob_lobbyship._bud_give
+        + zia_zia_lobbyship._bud_give
     )
-    assert lobbylink_cred_sum == 1.0 * default_bud_pool()
-    lobbylink_debt_sum = (
-        sue_sue_lobbylink._bud_take
-        + bob_bob_lobbylink._bud_take
-        + zia_zia_lobbylink._bud_take
+    assert lobbyship_cred_sum == 1.0 * default_bud_pool()
+    lobbyship_debt_sum = (
+        sue_sue_lobbyship._bud_take
+        + bob_bob_lobbyship._bud_take
+        + zia_zia_lobbyship._bud_take
     )
-    assert lobbylink_debt_sum == 1.0 * default_bud_pool()
+    assert lobbyship_debt_sum == 1.0 * default_bud_pool()
 
     # ESTABLISH anothher pledge, check metrics are as expected
     xio_text = "Xio"
@@ -133,35 +133,35 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbylinkWorldCredAndDebt():
 
     # THEN
     xio_lobbybox = yao_world.get_lobbybox(xio_text)
-    xio_xio_lobbylink = xio_lobbybox.get_lobbylink(xio_text)
+    xio_xio_lobbyship = xio_lobbybox.get_lobbyship(xio_text)
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
-    sue_sue_lobbylink = sue_charunit.get_lobbylink(sue_text)
-    bob_bob_lobbylink = bob_charunit.get_lobbylink(bob_text)
-    zia_zia_lobbylink = zia_charunit.get_lobbylink(zia_text)
-    assert sue_sue_lobbylink._bud_give != 0.25 * default_bud_pool()
-    assert sue_sue_lobbylink._bud_take != 0.8 * default_bud_pool()
-    assert bob_bob_lobbylink._bud_give != 0.25 * default_bud_pool()
-    assert bob_bob_lobbylink._bud_take != 0.1 * default_bud_pool()
-    assert zia_zia_lobbylink._bud_give != 0.5 * default_bud_pool()
-    assert zia_zia_lobbylink._bud_take != 0.1 * default_bud_pool()
-    assert xio_xio_lobbylink._bud_give != None
-    assert xio_xio_lobbylink._bud_take != None
+    sue_sue_lobbyship = sue_charunit.get_lobbyship(sue_text)
+    bob_bob_lobbyship = bob_charunit.get_lobbyship(bob_text)
+    zia_zia_lobbyship = zia_charunit.get_lobbyship(zia_text)
+    assert sue_sue_lobbyship._bud_give != 0.25 * default_bud_pool()
+    assert sue_sue_lobbyship._bud_take != 0.8 * default_bud_pool()
+    assert bob_bob_lobbyship._bud_give != 0.25 * default_bud_pool()
+    assert bob_bob_lobbyship._bud_take != 0.1 * default_bud_pool()
+    assert zia_zia_lobbyship._bud_give != 0.5 * default_bud_pool()
+    assert zia_zia_lobbyship._bud_take != 0.1 * default_bud_pool()
+    assert xio_xio_lobbyship._bud_give != None
+    assert xio_xio_lobbyship._bud_take != None
 
     x_bud_give_sum = (
-        sue_sue_lobbylink._bud_give
-        + bob_bob_lobbylink._bud_give
-        + zia_zia_lobbylink._bud_give
-        + xio_xio_lobbylink._bud_give
+        sue_sue_lobbyship._bud_give
+        + bob_bob_lobbyship._bud_give
+        + zia_zia_lobbyship._bud_give
+        + xio_xio_lobbyship._bud_give
     )
     print(f"{x_bud_give_sum=}")
     assert x_bud_give_sum == 1.0 * default_bud_pool()
     x_bud_take_sum = (
-        sue_sue_lobbylink._bud_take
-        + bob_bob_lobbylink._bud_take
-        + zia_zia_lobbylink._bud_take
-        + xio_xio_lobbylink._bud_take
+        sue_sue_lobbyship._bud_take
+        + bob_bob_lobbyship._bud_take
+        + zia_zia_lobbyship._bud_take
+        + xio_xio_lobbyship._bud_take
     )
     assert x_bud_take_sum == 1.0 * default_bud_pool()
 
@@ -395,8 +395,8 @@ def clear_all_charunits_lobbyboxs_bud_agenda_give_take(x_world: WorldUnit):
     # DELETE world_agenda_debt and world_agenda_cred
     for lobbybox_x in x_world._lobbyboxs.values():
         lobbybox_x.reset_bud_give_take()
-        # for lobbylink_x in lobbybox_x._chars.values():
-        #     print(f"{lobbybox_x.} {lobbylink_x.}  {lobbylink_x._bud_give:.6f} {lobbylink_x.debtor_weight=} {lobbylink__bud_take:t:.6f} {lobbylink_x.} ")
+        # for lobbyship_x in lobbybox_x._chars.values():
+        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._bud_give:.6f} {lobbyship_x.debtor_weight=} {lobbyship__bud_take:t:.6f} {lobbyship_x.} ")
 
     # DELETE world_agenda_debt and world_agenda_cred
     for x_charunit in x_world._chars.values():
@@ -407,18 +407,18 @@ def clear_all_charunits_lobbyboxs_bud_agenda_give_take(x_world: WorldUnit):
 class LobbyAgendaMetrics:
     sum_lobbybox_cred: float = 0
     sum_lobbybox_debt: float = 0
-    sum_lobbylink_cred: float = 0
-    sum_lobbylink_debt: float = 0
-    lobbylink_count: int = 0
+    sum_lobbyship_cred: float = 0
+    sum_lobbyship_debt: float = 0
+    lobbyship_count: int = 0
 
     def set_sums(self, x_world: WorldUnit):
         for x_lobbybox in x_world._lobbyboxs.values():
             self.sum_lobbybox_cred += x_lobbybox._bud_agenda_give
             self.sum_lobbybox_debt += x_lobbybox._bud_agenda_take
-            for lobbylink_x in x_lobbybox._lobbylinks.values():
-                self.sum_lobbylink_cred += lobbylink_x._bud_agenda_give
-                self.sum_lobbylink_debt += lobbylink_x._bud_agenda_take
-                self.lobbylink_count += 1
+            for lobbyship_x in x_lobbybox._lobbyships.values():
+                self.sum_lobbyship_cred += lobbyship_x._bud_agenda_give
+                self.sum_lobbyship_debt += lobbyship_x._bud_agenda_take
+                self.lobbyship_count += 1
 
 
 @dataclass
@@ -465,8 +465,8 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     x_lobbyagendametrics.set_sums(x_world=x_world)
     assert x_lobbyagendametrics.sum_lobbybox_cred == 0
     assert x_lobbyagendametrics.sum_lobbybox_debt == 0
-    assert x_lobbyagendametrics.sum_lobbylink_cred == 0
-    assert x_lobbyagendametrics.sum_lobbylink_debt == 0
+    assert x_lobbyagendametrics.sum_lobbyship_cred == 0
+    assert x_lobbyagendametrics.sum_lobbyship_debt == 0
 
     # TEST world_agenda_debt and world_agenda_cred are empty
     x_charagendametrics = CharAgendaMetrics()
@@ -503,13 +503,13 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
 
     x_lobbyagendametrics = LobbyAgendaMetrics()
     x_lobbyagendametrics.set_sums(x_world=x_world)
-    assert x_lobbyagendametrics.lobbylink_count == 81
+    assert x_lobbyagendametrics.lobbyship_count == 81
     x_sum = 2796504.9999999995
     print(f"{x_lobbyagendametrics.sum_lobbybox_cred=}")
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_cred, x_sum)
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_debt, x_sum)
-    assert are_equal(x_lobbyagendametrics.sum_lobbylink_cred, x_sum)
-    assert are_equal(x_lobbyagendametrics.sum_lobbylink_debt, x_sum)
+    assert are_equal(x_lobbyagendametrics.sum_lobbyship_cred, x_sum)
+    assert are_equal(x_lobbyagendametrics.sum_lobbyship_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_world_i_sum,
         x_lobbyagendametrics.sum_lobbybox_cred,
@@ -621,7 +621,7 @@ def test_examples_world_v001_HasLobbys():
     assert len(x_world._lobbyboxs) == 34
     everyone_chars_len = None
     everyone_lobby = x_world.get_lobbybox(",Everyone")
-    everyone_chars_len = len(everyone_lobby._lobbylinks)
+    everyone_chars_len = len(everyone_lobby._lobbyships)
     assert everyone_chars_len == 22
 
     # WHEN

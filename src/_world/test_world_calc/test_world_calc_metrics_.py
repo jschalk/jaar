@@ -741,7 +741,7 @@ def test_agenda_IsSetByDoerUnit_2CharLobby():
     bob_world.add_charunit(sue_text)
     run_text = ",runners"
     sue_charunit = bob_world.get_char(sue_text)
-    sue_charunit.add_lobbylink(run_text)
+    sue_charunit.add_lobbyship(run_text)
 
     run_doerunit = doerunit_shop()
     run_doerunit.set_lobbyhold(lobby_id=run_text)
@@ -755,7 +755,7 @@ def test_agenda_IsSetByDoerUnit_2CharLobby():
 
     # WHEN
     bob_charunit = bob_world.get_char(bob_text)
-    bob_charunit.add_lobbylink(run_text)
+    bob_charunit.add_lobbyship(run_text)
 
     # THEN
     assert len(bob_world.get_agenda_dict()) == 1

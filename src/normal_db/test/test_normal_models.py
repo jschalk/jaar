@@ -8,7 +8,7 @@ from src.gift.atom_config import (
 from src.normal_db.normal_models import (
     WorldTable,
     CharUnitTable,
-    LobbyLinkTable,
+    LobbyShipTable,
     IdeaTable,
     AwardLinkTable,
     ReasonTable,
@@ -98,16 +98,16 @@ def test_normalized_table_CharUnitTable_Exists():
 #     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_LobbyLinkTable_lobbylink_Exists():
+def test_normalized_table_LobbyShipTable_lobbyship_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_char_lobbylink")
-    mapper = inspect(LobbyLinkTable)
+    config_category = get_normalized_world_table_build().get("world_char_lobbyship")
+    mapper = inspect(LobbyShipTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "lobbylink"
-    assert config_table_name == LobbyLinkTable.__tablename__
+    assert config_table_name == "lobbyship"
+    assert config_table_name == LobbyShipTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 

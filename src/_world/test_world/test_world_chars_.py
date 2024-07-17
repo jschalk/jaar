@@ -9,7 +9,7 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     # ESTABLISH
     yao_text = "Yao"
     yao_charunit = charunit_shop(yao_text)
-    yao_charunit.add_lobbylink(yao_text)
+    yao_charunit.add_lobbyship(yao_text)
     deepcopy_yao_charunit = copy_deepcopy(yao_charunit)
     slash_text = "/"
     bob_world = worldunit_shop("Bob", _road_delimiter=slash_text)
@@ -25,20 +25,20 @@ def test_WorldUnit_set_charunit_SetObjCorrectly():
     assert bob_world._chars == x_chars
 
 
-def test_WorldUnit_set_char_DoesNotSet_char_id_lobbylink():
+def test_WorldUnit_set_char_DoesNotSet_char_id_lobbyship():
     # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
 
     # WHEN
-    yao_world.set_charunit(charunit_shop(zia_text), auto_set_lobbylink=False)
+    yao_world.set_charunit(charunit_shop(zia_text), auto_set_lobbyship=False)
 
     # THEN
-    assert yao_world.get_char(zia_text).get_lobbylink(zia_text) is None
+    assert yao_world.get_char(zia_text).get_lobbyship(zia_text) is None
 
 
-def test_WorldUnit_set_char_DoesSet_char_id_lobbylink():
+def test_WorldUnit_set_char_DoesSet_char_id_lobbyship():
     # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
@@ -48,13 +48,13 @@ def test_WorldUnit_set_char_DoesSet_char_id_lobbylink():
     yao_world.set_charunit(charunit_shop(zia_text))
 
     # THEN
-    zia_zia_lobbylink = yao_world.get_char(zia_text).get_lobbylink(zia_text)
-    assert zia_zia_lobbylink != None
-    assert zia_zia_lobbylink.credor_weight == 1
-    assert zia_zia_lobbylink.debtor_weight == 1
+    zia_zia_lobbyship = yao_world.get_char(zia_text).get_lobbyship(zia_text)
+    assert zia_zia_lobbyship != None
+    assert zia_zia_lobbyship.credor_weight == 1
+    assert zia_zia_lobbyship.debtor_weight == 1
 
 
-def test_WorldUnit_set_char_DoesNotOverRide_char_id_lobbylink():
+def test_WorldUnit_set_char_DoesNotOverRide_char_id_lobbyship():
     # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
@@ -63,21 +63,21 @@ def test_WorldUnit_set_char_DoesNotOverRide_char_id_lobbylink():
     zia_ohio_credor_w = 33
     zia_ohio_debtor_w = 44
     zia_charunit = charunit_shop(zia_text)
-    zia_charunit.add_lobbylink(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
+    zia_charunit.add_lobbyship(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
 
     # WHEN
     yao_world.set_charunit(zia_charunit)
 
     # THEN
-    zia_ohio_lobbylink = yao_world.get_char(zia_text).get_lobbylink(ohio_text)
-    assert zia_ohio_lobbylink != None
-    assert zia_ohio_lobbylink.credor_weight == zia_ohio_credor_w
-    assert zia_ohio_lobbylink.debtor_weight == zia_ohio_debtor_w
-    zia_zia_lobbylink = yao_world.get_char(zia_text).get_lobbylink(zia_text)
-    assert zia_zia_lobbylink is None
+    zia_ohio_lobbyship = yao_world.get_char(zia_text).get_lobbyship(ohio_text)
+    assert zia_ohio_lobbyship != None
+    assert zia_ohio_lobbyship.credor_weight == zia_ohio_credor_w
+    assert zia_ohio_lobbyship.debtor_weight == zia_ohio_debtor_w
+    zia_zia_lobbyship = yao_world.get_char(zia_text).get_lobbyship(zia_text)
+    assert zia_zia_lobbyship is None
 
 
-def test_WorldUnit_set_char_CorrectlySets_chars_lobbylinks():
+def test_WorldUnit_set_char_CorrectlySets_chars_lobbyships():
     # ESTABLISH
     x_bit = 5
     yao_world = worldunit_shop("Yao", _bit=x_bit)
@@ -143,7 +143,7 @@ def test_WorldUnit_char_exists_ReturnsObj():
     assert bob_world.char_exists(yao_text)
 
 
-def test_WorldUnit_set_char_Creates_lobbylink():
+def test_WorldUnit_set_char_Creates_lobbyship():
     # ESTABLISH
     yao_world = worldunit_shop("Yao")
     zia_text = "Zia"
@@ -151,11 +151,11 @@ def test_WorldUnit_set_char_Creates_lobbylink():
     before_zia_debtor = 17
     yao_world.add_charunit(zia_text, before_zia_credor, before_zia_debtor)
     zia_charunit = yao_world.get_char(zia_text)
-    zia_lobbylink = zia_charunit.get_lobbylink(zia_text)
-    assert zia_lobbylink.credor_weight != before_zia_credor
-    assert zia_lobbylink.debtor_weight != before_zia_debtor
-    assert zia_lobbylink.credor_weight == 1
-    assert zia_lobbylink.debtor_weight == 1
+    zia_lobbyship = zia_charunit.get_lobbyship(zia_text)
+    assert zia_lobbyship.credor_weight != before_zia_credor
+    assert zia_lobbyship.debtor_weight != before_zia_debtor
+    assert zia_lobbyship.credor_weight == 1
+    assert zia_lobbyship.debtor_weight == 1
 
     # WHEN
     after_zia_credor = 11
@@ -163,10 +163,10 @@ def test_WorldUnit_set_char_Creates_lobbylink():
     yao_world.set_charunit(charunit_shop(zia_text, after_zia_credor, after_zia_debtor))
 
     # THEN
-    assert zia_lobbylink.credor_weight != after_zia_credor
-    assert zia_lobbylink.debtor_weight != after_zia_debtor
-    assert zia_lobbylink.credor_weight == 1
-    assert zia_lobbylink.debtor_weight == 1
+    assert zia_lobbyship.credor_weight != after_zia_credor
+    assert zia_lobbyship.debtor_weight != after_zia_debtor
+    assert zia_lobbyship.credor_weight == 1
+    assert zia_lobbyship.debtor_weight == 1
 
 
 def test_WorldUnit_edit_char_RaiseExceptionWhenCharDoesNotExist():

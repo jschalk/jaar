@@ -516,13 +516,13 @@ class WorldUnit:
         )
         self.set_charunit(charunit)
 
-    def set_charunit(self, x_charunit: CharUnit, auto_set_lobbylink: bool = True):
+    def set_charunit(self, x_charunit: CharUnit, auto_set_lobbyship: bool = True):
         if x_charunit._road_delimiter != self._road_delimiter:
             x_charunit._road_delimiter = self._road_delimiter
         if x_charunit._bit != self._bit:
             x_charunit._bit = self._bit
-        if auto_set_lobbylink and x_charunit.lobbylinks_exist() is False:
-            x_charunit.add_lobbylink(x_charunit.char_id)
+        if auto_set_lobbyship and x_charunit.lobbyships_exist() is False:
+            x_charunit.add_lobbyship(x_charunit.char_id)
         self._chars[x_charunit.char_id] = x_charunit
 
     def char_exists(self, char_id: CharID) -> bool:
@@ -546,7 +546,7 @@ class WorldUnit:
     def get_lobby_ids_dict(self) -> dict[LobbyID, set[CharID]]:
         x_dict = {}
         for x_charunit in self._chars.values():
-            for x_lobby_id in x_charunit._lobbylinks.keys():
+            for x_lobby_id in x_charunit._lobbyships.keys():
                 char_id_set = x_dict.get(x_lobby_id)
                 if char_id_set is None:
                     x_dict[x_lobby_id] = {x_charunit.char_id}
@@ -558,9 +558,9 @@ class WorldUnit:
     def get_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
         return self._lobbyboxs.get(x_lobby_id)
 
-    def clear_charunits_lobbylinks(self):
+    def clear_charunits_lobbyships(self):
         for x_charunit in self._chars.values():
-            x_charunit.clear_lobbylinks()
+            x_charunit.clear_lobbyships()
 
     def set_time_facts(self, open: datetime = None, nigh: datetime = None) -> None:
         open_minutes = self.get_time_min_from_dt(dt=open) if open != None else None
@@ -1328,14 +1328,14 @@ class WorldUnit:
 
     def _allot_lobbyboxs_bud_share(self):
         for x_lobbybox in self._lobbyboxs.values():
-            x_lobbybox._set_lobbylink_bud_give_take()
-            for x_lobbylink in x_lobbybox._lobbylinks.values():
+            x_lobbybox._set_lobbyship_bud_give_take()
+            for x_lobbyship in x_lobbybox._lobbyships.values():
                 self.add_to_charunit_bud_give_take(
-                    charunit_char_id=x_lobbylink._char_id,
-                    bud_give=x_lobbylink._bud_give,
-                    bud_take=x_lobbylink._bud_take,
-                    world_agenda_cred=x_lobbylink._bud_agenda_give,
-                    world_agenda_debt=x_lobbylink._bud_agenda_take,
+                    charunit_char_id=x_lobbyship._char_id,
+                    bud_give=x_lobbyship._bud_give,
+                    bud_take=x_lobbyship._bud_take,
+                    world_agenda_cred=x_lobbyship._bud_agenda_give,
+                    world_agenda_debt=x_lobbyship._bud_agenda_take,
                 )
 
     def _set_bud_agenda_ratio_give_take(self):
@@ -1531,8 +1531,8 @@ class WorldUnit:
         for lobby_id, char_id_set in self.get_lobby_ids_dict().items():
             x_lobbybox = lobbybox_shop(lobby_id, _road_delimiter=self._road_delimiter)
             for x_char_id in char_id_set:
-                x_lobbylink = self.get_char(x_char_id).get_lobbylink(lobby_id)
-                x_lobbybox.set_lobbylink(x_lobbylink)
+                x_lobbyship = self.get_char(x_char_id).get_lobbyship(lobby_id)
+                x_lobbybox.set_lobbyship(x_lobbyship)
                 self._lobbyboxs[lobby_id] = x_lobbybox
 
     def _calc_charunit_metrics(self):
@@ -1671,7 +1671,7 @@ class WorldUnit:
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_lobby_id in x_econ_idea._healerhold._lobby_ids:
                 x_lobbybox = self.get_lobbybox(x_lobby_id)
-                for x_char_id in x_lobbybox._lobbylinks.keys():
+                for x_char_id in x_lobbybox._lobbyships.keys():
                     if _healers_dict.get(x_char_id) is None:
                         _healers_dict[x_char_id] = {x_econ_road: x_econ_idea}
                     else:

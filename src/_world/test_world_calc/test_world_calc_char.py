@@ -22,15 +22,15 @@ def test_create_lobbyboxs_metrics_SetsAttrScenario1():
     yao_text = "Yao"
     sue_worldunit.add_charunit(yao_text)
     yao_charunit = sue_worldunit.get_char(yao_text)
-    yao_charunit.add_lobbylink(yao_text)
+    yao_charunit.add_lobbyship(yao_text)
     ohio_text = ",Ohio"
-    yao_charunit.add_lobbylink(ohio_text)
-    yao_yao_lobbylink = yao_charunit.get_lobbylink(yao_text)
-    yao_ohio_lobbylink = yao_charunit.get_lobbylink(ohio_text)
-    yao_yao_lobbylink._credor_pool = 66
-    yao_yao_lobbylink._debtor_pool = 44
-    yao_ohio_lobbylink._credor_pool = 77
-    yao_ohio_lobbylink._debtor_pool = 88
+    yao_charunit.add_lobbyship(ohio_text)
+    yao_yao_lobbyship = yao_charunit.get_lobbyship(yao_text)
+    yao_ohio_lobbyship = yao_charunit.get_lobbyship(ohio_text)
+    yao_yao_lobbyship._credor_pool = 66
+    yao_yao_lobbyship._debtor_pool = 44
+    yao_ohio_lobbyship._credor_pool = 77
+    yao_ohio_lobbyship._debtor_pool = 88
     # assert sue_worldunit._lobbyboxs == {}
 
     # WHEN
@@ -84,11 +84,11 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():
     yao_text = "Yao"
     sue_worldunit.add_charunit(yao_text)
     yao_charunit = sue_worldunit.get_char(yao_text)
-    yao_charunit.add_lobbylink(yao_text)
+    yao_charunit.add_lobbyship(yao_text)
     assert yao_charunit._credor_pool == 0
     assert yao_charunit._debtor_pool == 0
-    assert yao_charunit.get_lobbylink(yao_text)._credor_pool == 0
-    assert yao_charunit.get_lobbylink(yao_text)._debtor_pool == 0
+    assert yao_charunit.get_lobbyship(yao_text)._credor_pool == 0
+    assert yao_charunit.get_lobbyship(yao_text)._debtor_pool == 0
     # assert sue_worldunit._lobbyboxs == {}
 
     # WHEN
@@ -99,16 +99,16 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario1():
     assert yao_charunit._debtor_pool != 0
     assert yao_charunit._credor_pool == sue_worldunit._credor_respect
     assert yao_charunit._debtor_pool == sue_worldunit._debtor_respect
-    yao_lobbylink = yao_charunit.get_lobbylink(yao_text)
-    assert yao_lobbylink._credor_pool != 0
-    assert yao_lobbylink._debtor_pool != 0
-    assert yao_lobbylink._credor_pool == sue_worldunit._credor_respect
-    assert yao_lobbylink._debtor_pool == sue_worldunit._debtor_respect
-    assert yao_lobbylink._credor_pool == 1000000000
-    assert yao_lobbylink._debtor_pool == 1000000000
+    yao_lobbyship = yao_charunit.get_lobbyship(yao_text)
+    assert yao_lobbyship._credor_pool != 0
+    assert yao_lobbyship._debtor_pool != 0
+    assert yao_lobbyship._credor_pool == sue_worldunit._credor_respect
+    assert yao_lobbyship._debtor_pool == sue_worldunit._debtor_respect
+    assert yao_lobbyship._credor_pool == 1000000000
+    assert yao_lobbyship._debtor_pool == 1000000000
     yao_lobbybox = sue_worldunit.get_lobbybox(yao_text)
-    lobbybox_yao_lobbylink = yao_lobbybox.get_lobbylink(yao_text)
-    assert yao_lobbylink == lobbybox_yao_lobbylink
+    lobbybox_yao_lobbyship = yao_lobbybox.get_lobbyship(yao_text)
+    assert yao_lobbyship == lobbybox_yao_lobbyship
 
 
 def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
@@ -118,13 +118,13 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
     yao_text = "Yao"
     sue_worldunit.add_charunit(yao_text)
     yao_charunit = sue_worldunit.get_char(yao_text)
-    yao_charunit.add_lobbylink(yao_text, 1, 4)
+    yao_charunit.add_lobbyship(yao_text, 1, 4)
     ohio_text = ",Ohio"
-    yao_charunit.add_lobbylink(ohio_text, 3, 1)
+    yao_charunit.add_lobbyship(ohio_text, 3, 1)
     assert yao_charunit._credor_pool == 0
     assert yao_charunit._debtor_pool == 0
-    assert yao_charunit.get_lobbylink(yao_text)._credor_pool == 0
-    assert yao_charunit.get_lobbylink(yao_text)._debtor_pool == 0
+    assert yao_charunit.get_lobbyship(yao_text)._credor_pool == 0
+    assert yao_charunit.get_lobbyship(yao_text)._debtor_pool == 0
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
@@ -132,25 +132,25 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
     # THEN
     assert sue_worldunit.get_char(yao_text)._credor_pool != 0
     assert sue_worldunit.get_char(yao_text)._debtor_pool != 0
-    assert yao_charunit.get_lobbylink(yao_text)._credor_pool != 0
-    assert yao_charunit.get_lobbylink(yao_text)._debtor_pool != 0
-    yao_yao_lobbylink = yao_charunit.get_lobbylink(yao_text)
-    assert yao_yao_lobbylink._credor_pool != 0
-    assert yao_yao_lobbylink._debtor_pool != 0
-    assert yao_yao_lobbylink._credor_pool == sue_worldunit._credor_respect * 0.25
-    assert yao_yao_lobbylink._debtor_pool == sue_worldunit._debtor_respect * 0.8
-    assert yao_yao_lobbylink._credor_pool == 250000000
-    assert yao_yao_lobbylink._debtor_pool == 800000000
-    yao_ohio_lobbylink = yao_charunit.get_lobbylink(ohio_text)
-    assert yao_ohio_lobbylink._credor_pool != 0
-    assert yao_ohio_lobbylink._debtor_pool != 0
-    assert yao_ohio_lobbylink._credor_pool == sue_worldunit._credor_respect * 0.75
-    assert yao_ohio_lobbylink._debtor_pool == sue_worldunit._debtor_respect * 0.2
-    assert yao_ohio_lobbylink._credor_pool == 750000000
-    assert yao_ohio_lobbylink._debtor_pool == 200000000
+    assert yao_charunit.get_lobbyship(yao_text)._credor_pool != 0
+    assert yao_charunit.get_lobbyship(yao_text)._debtor_pool != 0
+    yao_yao_lobbyship = yao_charunit.get_lobbyship(yao_text)
+    assert yao_yao_lobbyship._credor_pool != 0
+    assert yao_yao_lobbyship._debtor_pool != 0
+    assert yao_yao_lobbyship._credor_pool == sue_worldunit._credor_respect * 0.25
+    assert yao_yao_lobbyship._debtor_pool == sue_worldunit._debtor_respect * 0.8
+    assert yao_yao_lobbyship._credor_pool == 250000000
+    assert yao_yao_lobbyship._debtor_pool == 800000000
+    yao_ohio_lobbyship = yao_charunit.get_lobbyship(ohio_text)
+    assert yao_ohio_lobbyship._credor_pool != 0
+    assert yao_ohio_lobbyship._debtor_pool != 0
+    assert yao_ohio_lobbyship._credor_pool == sue_worldunit._credor_respect * 0.75
+    assert yao_ohio_lobbyship._debtor_pool == sue_worldunit._debtor_respect * 0.2
+    assert yao_ohio_lobbyship._credor_pool == 750000000
+    assert yao_ohio_lobbyship._debtor_pool == 200000000
     assert len(sue_worldunit._lobbyboxs) == 2
     ohio_lobbybox = sue_worldunit.get_lobbybox(ohio_text)
-    assert len(ohio_lobbybox._lobbylinks) == 1
+    assert len(ohio_lobbybox._lobbyships) == 1
 
 
 def test_WorldUnit_reset_charunit_bud_give_take_SetsAttr():

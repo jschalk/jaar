@@ -1,10 +1,6 @@
 {
-    "atom_category": "world_char_lobbylink",
+    "atom_category": "world_char_lobbyship",
     "attributes": {
-        "lobby_id": {
-            "column_order": 3,
-            "sort_order": 1
-        },
         "char_id": {
             "column_order": 2,
             "sort_order": 0
@@ -14,6 +10,10 @@
         },
         "debtor_weight": {
             "column_order": 5
+        },
+        "lobby_id": {
+            "column_order": 3,
+            "sort_order": 1
         },
         "owner_id": {
             "column_order": 1
