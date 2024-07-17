@@ -158,7 +158,7 @@ def test_WorldUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     assert r_idea_red._parent_road == old_roses_road
 
     # WHEN
-    new_casa_text = "globe"
+    new_casa_text = "casita"
     new_casa_road = yao_world.make_l1_road(new_casa_text)
     yao_world.edit_idea_label(old_road=old_casa_road, new_label=new_casa_text)
 
@@ -238,7 +238,7 @@ def test_world_edit_idea_label_Modifies_idearoot_range_source_road():
     assert yao_world._idearoot._range_source_road == old_casa_road
 
     # WHEN
-    new_casa_text = "globe"
+    new_casa_text = "casita"
     yao_world.edit_idea_label(old_road=old_casa_road, new_label=new_casa_text)
 
     # THEN
