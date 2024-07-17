@@ -3446,7 +3446,7 @@
                                 "_weight": 1,
                                 "pledge": true
                             },
-                            "get rid of toy buy new toy": {
+                            "get rid of toy get new toy": {
                                 "_awardlinks": {
                                     ",Family": {
                                         "credor_weight": 1.0,
@@ -3454,7 +3454,7 @@
                                         "lobby_id": ",Family"
                                     }
                                 },
-                                "_label": "get rid of toy buy new toy",
+                                "_label": "get rid of toy get new toy",
                                 "_reasonunits": {
                                     "music,day_minute": {
                                         "base": "music,day_minute",
