@@ -162,6 +162,15 @@ def _allot_missing_scale(
     return ledger
 
 
+def _calc_allot_value(obj, total_credor_weight, scale_number, grain_unit):
+    if total_credor_weight == 0:
+        return 0
+    # Determine the allot based on credor_weight
+    allot_amt = (obj / total_credor_weight) * scale_number
+    # Adjust to the nearest grain unit
+    return round(allot_amt / grain_unit) * grain_unit
+
+
 def _create_allot_dict(
     ledger: dict[str, float], scale_number: float, grain_unit: float
 ) -> dict[str, float]:
@@ -171,11 +180,9 @@ def _create_allot_dict(
     # Calculate the distribution
     allot_dict = {}
     for key, obj in ledger.items():
-        # Determine the allot based on credor_weight
-        allot_amt = (obj / total_credor_weight) * scale_number
-
-        # Adjust to the nearest grain unit
-        alloted_value = round(allot_amt / grain_unit) * grain_unit
+        alloted_value = _calc_allot_value(
+            obj, total_credor_weight, scale_number, grain_unit
+        )
         allot_dict[key] = alloted_value
     return allot_dict
 

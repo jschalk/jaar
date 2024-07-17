@@ -381,6 +381,31 @@ def test_allot_scale_v07():
     assert sum(alloted_chars.values()) == scale_number
 
 
+def test_allot_scale_v08():
+    # Example usage:
+    chars = {
+        "obj1": 0,
+        "obj2": 0,
+        "obj3": 0,
+        "obj4": 0,
+        "obj5": 0,
+        "obj6": 0,
+    }
+    print(f"{chars=}")
+    scale_number = 1
+    grain_unit = 0.5
+
+    alloted_chars = allot_scale(chars, scale_number, grain_unit)
+    print(alloted_chars)
+    assert alloted_chars.get("obj1") == 0.5
+    assert alloted_chars.get("obj2") == 0.5
+    assert alloted_chars.get("obj3") == 0
+    assert alloted_chars.get("obj4") == 0
+    assert alloted_chars.get("obj5") == 0
+    assert alloted_chars.get("obj6") == 0
+    assert sum(alloted_chars.values()) == scale_number
+
+
 def test__create_allot_dict_SummationFailsInConsistentWay():
     # ESTABLISH
     ledger = {

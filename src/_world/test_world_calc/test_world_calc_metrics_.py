@@ -953,12 +953,35 @@ def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weight(
 
     clean_text = "clean"
     clean_road = sue_world.make_road(status_road, clean_text)
-    sue_world.add_idea(ideaunit_shop(clean_text), status_road)
-    sue_world.add_idea(ideaunit_shop("very_much"), clean_road)
-    sue_world.add_idea(ideaunit_shop("moderately"), clean_road)
-    sue_world.add_idea(ideaunit_shop("dirty"), status_road)
+    very_text = "very_much"
+    mod_text = "moderately"
+    dirty_text = "dirty"
+    very_road = sue_world.make_road(clean_road, very_text)
+    mod_road = sue_world.make_road(clean_road, mod_text)
+    dirty_road = sue_world.make_road(clean_road, dirty_text)
 
-    floor_reason = reasonunit_shop(status_road)
-    floor_reason.set_premise(premise=status_road)
-    sue_world.edit_idea_attr(road=floor_road, reason=floor_reason)
-    return sue_world
+    sue_world.add_idea(ideaunit_shop(clean_text, _weight=0), status_road)
+    sue_world.add_idea(ideaunit_shop(very_text), clean_road)
+    sue_world.add_idea(ideaunit_shop(mod_text, _weight=2), clean_road)
+    sue_world.add_idea(ideaunit_shop(dirty_text), clean_road)
+
+    assert sue_world.get_idea_obj(casa_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(floor_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(status_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(clean_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(very_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(mod_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(dirty_road)._bud_ratio is None
+
+    # WHEN
+    sue_world.calc_world_metrics()
+
+    # THEN
+    print(f"{sue_world._bud_pool=}")
+    assert sue_world.get_idea_obj(casa_road)._bud_ratio == 0.5
+    assert sue_world.get_idea_obj(floor_road)._bud_ratio == 0.25
+    assert sue_world.get_idea_obj(status_road)._bud_ratio == 0.25
+    assert sue_world.get_idea_obj(clean_road)._bud_ratio == 0.25
+    assert sue_world.get_idea_obj(very_road)._bud_ratio == 0.0625
+    assert sue_world.get_idea_obj(mod_road)._bud_ratio == 0.125
+    assert sue_world.get_idea_obj(dirty_road)._bud_ratio == 0.0625
