@@ -186,24 +186,6 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_1(
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
     x_world.add_idea(email_idea, parent_road=casa_road)
 
-    # idea ",{week_text},Sunday"
-    # idea ",{week_text},Monday"
-    # idea ",{week_text},Tuesday"
-    # idea ",{week_text},Wednesday"
-    # idea ",{week_text},Thursday"
-    # idea ",{week_text},Friday"
-    # idea ",{week_text},Saturday"
-    # idea ",{week_text}"
-    # idea ",{nation_text},USA,Texas"
-    # idea ",{nation_text},USA,Oregon"
-    # idea ",{nation_text},USA"
-    # idea ",{nation_text},France"
-    # idea ",{nation_text},Brazil"
-    # idea ",{nation_text}"
-    # idea "casa"  # , pledge=True)
-    # idea feed_text  # , pledge=True)
-    # idea "
-
     # test root status:
     x_idearoot = x_world.get_idea_obj(x_world._real_id)
     assert x_idearoot._descendant_pledge_count is None
@@ -336,7 +318,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     print(f"{sue_awardline._world_cred=} {root_idea._bud_ratio=} ")
     print(f"  {sue_awardline._world_debt=} {root_idea._bud_ratio=} ")
     sum_x = 0
-    cat_road = x_world.make_l1_road("feed cat")
+    cat_road = x_world.make_l1_road("give cat food")
     cat_idea = x_world.get_idea_obj(cat_road)
     week_road = x_world.make_l1_road(week_text)
     week_idea = x_world.get_idea_obj(week_road)
@@ -437,7 +419,7 @@ def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
     vacuum_text = "vacuum"
     sue_text = "Sue"
     week_text = "weekdays"
-    feed_text = "feed cat"
+    cat_text = "give cat food"
     casa_road = x_world.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
     x_world.add_idea(email_idea, parent_road=casa_road)
@@ -449,7 +431,7 @@ def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
     yao_bl = awardlink_shop(lobby_id=yao_char_id)
     yrx = x_world._idearoot
     yrx._kids[week_text].set_awardlink(awardlink=yao_bl)
-    yrx._kids[feed_text].set_awardlink(awardlink=yao_bl)
+    yrx._kids[cat_text].set_awardlink(awardlink=yao_bl)
     nation_text = "nation-state"
     yrx._kids[nation_text].set_awardlink(awardlink=yao_bl)
 
@@ -472,7 +454,7 @@ def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
     print(f"{type_check_IdeaUnit=}")
     assert str(type(casa_idea)).find(".idea.IdeaUnit'>") > 0
 
-    assert sue_world4char._idearoot._kids.get(feed_text) is None
+    assert sue_world4char._idearoot._kids.get(cat_text) is None
     assert sue_world4char._idearoot._bud_ratio == 1
     assert casa_idea._bud_ratio == yrx._kids[casa_text]._bud_ratio
     world4char_road = sue_world4char.make_l1_road("__world4char__")
@@ -480,7 +462,7 @@ def test_world4char_hasCorrectLevel1StructureNoLobbylessAncestors():
 
     y4a_exteriors = sue_world4char.get_idea_obj(world4char_road)
     exteriors_bud_share = yrx._kids[week_text]._bud_ratio
-    exteriors_bud_share += yrx._kids[feed_text]._bud_ratio
+    exteriors_bud_share += yrx._kids[cat_text]._bud_ratio
     exteriors_bud_share += yrx._kids[nation_text]._bud_ratio
     print(f"{exteriors_bud_share=}")
     assert round(y4a_exteriors._bud_ratio, 15) == round(exteriors_bud_share, 15)
@@ -556,7 +538,7 @@ def test_WorldUnit_idea_exists_ReturnsCorrectBool():
     # GIVEN
     sue_world = example_worlds_get_world_with_4_levels()
     sue_world.calc_world_metrics()
-    cat_road = sue_world.make_l1_road("feed cat")
+    cat_road = sue_world.make_l1_road("give cat food")
     week_road = sue_world.make_l1_road("weekdays")
     casa_road = sue_world.make_l1_road("casa")
     nation_road = sue_world.make_l1_road("nation-state")

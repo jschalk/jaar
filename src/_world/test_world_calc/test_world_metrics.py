@@ -306,7 +306,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyClears_bud_onset_bud_cease():
     # GIVEN
     x_worldunit = get_world_with7amCleanTableReason()
     casa_road = x_worldunit.make_l1_road("casa")
-    catt_road = x_worldunit.make_l1_road("feed cat")
+    catt_road = x_worldunit.make_l1_road("give cat food")
     week_road = x_worldunit.make_l1_road("weekdays")
     x_worldunit._idearoot._bud_onset = 13
     x_worldunit._idearoot._bud_cease = 13

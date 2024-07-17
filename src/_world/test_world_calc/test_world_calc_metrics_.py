@@ -29,7 +29,7 @@ def test_WorldUnit_get_agenda_dict_ReturnsCorrectObj():
     assert len(agenda_dict) == 2
     print(f"{agenda_dict.keys()=}")
     assert bob_world.make_l1_road("casa") in agenda_dict.keys()
-    assert bob_world.make_l1_road("feed cat") in agenda_dict.keys()
+    assert bob_world.make_l1_road("give cat food") in agenda_dict.keys()
 
 
 def test_WorldUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
@@ -52,7 +52,7 @@ def test_WorldUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
 
     assert len(agenda_dict) == 1
     print(f"{agenda_dict=}")
-    assert x_world.make_l1_road("feed cat") in agenda_dict.keys()
+    assert x_world.make_l1_road("give cat food") in agenda_dict.keys()
 
 
 def test_WorldUnit_get_agenda_dict_WithLargeWorldImportance():
@@ -65,7 +65,7 @@ def test_WorldUnit_get_agenda_dict_WithLargeWorldImportance():
     # THEN
     assert agenda_dict
     assert len(agenda_dict) == 2
-    assert agenda_dict.get(x_world.make_l1_road("feed cat"))._bud_ratio
+    assert agenda_dict.get(x_world.make_l1_road("give cat food"))._bud_ratio
 
     casa_text = "casa"
     print(f"{agenda_dict.keys()=} {x_world.make_l1_road(casa_text)=}")
@@ -88,7 +88,7 @@ def test_WorldUnit_get_agenda_WithNo7amItemExample():
     # print(f"{agenda_dict[0]._label=}")
     assert len(agenda_dict) == 1
 
-    cat_text = "feed cat"
+    cat_text = "give cat food"
     cat_agenda_item = agenda_dict.get(x_world.make_l1_road(cat_text))
     assert cat_agenda_item._label != clean_text
 

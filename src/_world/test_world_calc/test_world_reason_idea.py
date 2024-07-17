@@ -130,7 +130,7 @@ def test_agenda_returned_WhenNoReasonsExist():
     # THEN
     casa_road = x_world.make_l1_road("casa")
     assert x_world.get_idea_obj(casa_road)._task == True
-    cat_road = x_world.make_l1_road("feed cat")
+    cat_road = x_world.make_l1_road("give cat food")
     assert x_world.get_idea_obj(cat_road)._task == True
 
 

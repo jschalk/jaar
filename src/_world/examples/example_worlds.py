@@ -56,13 +56,11 @@ def world_v002() -> WorldUnit:
 def get_world_with_4_levels() -> WorldUnit:
     sue_world = worldunit_shop(_owner_id="Sue", _weight=10)
 
-    casa = "casa"
-    idea_kid_casa = ideaunit_shop(casa, _weight=30, pledge=True)
-    sue_world.add_l1_idea(idea_kid_casa)
+    casa_text = "casa"
+    sue_world.add_l1_idea(ideaunit_shop(casa_text, _weight=30, pledge=True))
 
-    cat = "feed cat"
-    idea_kid_feedcat = ideaunit_shop(cat, _weight=30, pledge=True)
-    sue_world.add_l1_idea(idea_kid_feedcat)
+    cat_text = "give cat food"
+    sue_world.add_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
 
     week_text = "weekdays"
     week_road = sue_world.make_l1_road(week_text)
