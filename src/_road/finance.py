@@ -143,7 +143,7 @@ def _allot_missing_scale(
     changes_ledger_list = []
     if missing_scale != 0:
         x_count = 0
-        for x_key, x_float in sorted(ledger.items()):
+        for x_key, x_float in sorted(ledger.items(), key=lambda kv: (-kv[1], kv[0])):
             delta_scale = missing_scale_list[x_count]
             changes_ledger_list.append([x_key, x_float + delta_scale])
             missing_scale -= delta_scale
@@ -162,22 +162,24 @@ def _allot_missing_scale(
     return ledger
 
 
+def _calc_allot_value(obj, total_credor_weight, scale_number, grain_unit):
+    if total_credor_weight == 0:
+        return 0
+    # Determine the allot based on credor_weight
+    allot_amt = (obj / total_credor_weight) * scale_number
+    # Adjust to the nearest grain unit
+    return round(allot_amt / grain_unit) * grain_unit
+
+
 def _create_allot_dict(
     ledger: dict[str, float], scale_number: float, grain_unit: float
 ) -> dict[str, float]:
     # Calculate the total credor_weight
     total_credor_weight = sum(ledger.values())
-
-    # Calculate the distribution
-    allot_dict = {}
-    for key, obj in ledger.items():
-        # Determine the allot based on credor_weight
-        allot_amt = (obj / total_credor_weight) * scale_number
-
-        # Adjust to the nearest grain unit
-        alloted_value = round(allot_amt / grain_unit) * grain_unit
-        allot_dict[key] = alloted_value
-    return allot_dict
+    return {
+        x_key: _calc_allot_value(x_obj, total_credor_weight, scale_number, grain_unit)
+        for x_key, x_obj in ledger.items()
+    }
 
 
 def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float):
@@ -195,6 +197,16 @@ def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float
         raise ValueError(
             f"The scale number '{scale_number}' must be a multiple of the grain unit '{grain_unit}'."
         )
+    if not ledger:
+        return {}
+    # any ledger key with value zero will be not be alloted any scale_number
+    zero_values = {x_key for x_key, x_value in ledger.items() if x_value == 0}
+    for x_key in zero_values:
+        ledger.pop(x_key)
     allot_dict = _create_allot_dict(ledger, scale_number, grain_unit)
     x_missing = scale_number - sum(allot_dict.values())
-    return _allot_missing_scale(allot_dict, scale_number, grain_unit, x_missing)
+    allot_dict = _allot_missing_scale(allot_dict, scale_number, grain_unit, x_missing)
+    # add back in ledger keys that by definition were to have    value zero
+    for x_key in zero_values:
+        allot_dict[x_key] = 0
+    return allot_dict

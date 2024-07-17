@@ -869,7 +869,7 @@ class WorldUnit:
                 new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
                 self.add_idea(adoptee_idea, new_adoptee_parent_road)
                 self.edit_idea_attr(
-                    road=new_adoptee_parent_road, weight=adoptee_idea._weight
+                    new_adoptee_parent_road, weight=adoptee_idea._weight
                 )
                 self.del_idea_obj(adoptee_road)
 
@@ -1452,7 +1452,6 @@ class WorldUnit:
             if x_idea_obj._healerhold.any_lobby_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
-                print(f"{x_idea_obj.get_bud_share()=}")
                 self._sum_healerhold_share += x_idea_obj.get_bud_share()
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True

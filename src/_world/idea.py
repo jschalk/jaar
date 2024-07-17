@@ -2,6 +2,7 @@ from src._instrument.python import (
     get_empty_dict_if_none,
     get_0_if_None,
     get_False_if_None,
+    get_positive_int,
 )
 from src._road.finance import BudCoin, BudNum
 from src._road.road import (
@@ -1011,7 +1012,7 @@ def ideaunit_shop(
         _uid=_uid,
         _parent_road=_parent_road,
         _kids=get_empty_dict_if_none(_kids),
-        _weight=_weight,
+        _weight=get_positive_int(_weight),
         _awardlinks=get_empty_dict_if_none(_awardlinks),
         _awardheirs=get_empty_dict_if_none(_awardheirs),
         _awardlines=get_empty_dict_if_none(_awardlines),

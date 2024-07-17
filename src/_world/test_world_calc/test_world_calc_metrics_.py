@@ -935,3 +935,96 @@ def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
     # THEN
     assert mail_idea.pledge == True
     assert mail_idea._task is False
+
+
+def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario0():
+    sue_world = worldunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_world.make_l1_road(casa_text)
+    floor_text = "mop floor"
+    floor_road = sue_world.make_road(casa_road, floor_text)
+    floor_idea = ideaunit_shop(floor_text, pledge=True)
+    sue_world.add_idea(floor_idea, casa_road)
+    sue_world.add_l1_idea(ideaunit_shop("unimportant"))
+
+    status_text = "cleaniness status"
+    status_road = sue_world.make_road(casa_road, status_text)
+    sue_world.add_idea(ideaunit_shop(status_text, _weight=0), casa_road)
+
+    non_text = "not clean"
+    yes_text = "yes clean"
+    non_road = sue_world.make_road(status_road, non_text)
+    yes_road = sue_world.make_road(status_road, yes_text)
+    sue_world.add_idea(ideaunit_shop(non_text), status_road)
+    sue_world.add_idea(ideaunit_shop(yes_text, _weight=2), status_road)
+
+    assert sue_world.get_idea_obj(casa_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(floor_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(status_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(non_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(yes_road)._bud_ratio is None
+
+    # WHEN
+    sue_world.calc_world_metrics()
+
+    # THEN
+    print(f"{sue_world._bud_pool=}")
+    assert sue_world.get_idea_obj(casa_road)._bud_ratio == 0.5
+    assert sue_world.get_idea_obj(floor_road)._bud_ratio == 0.5
+    assert sue_world.get_idea_obj(status_road)._bud_ratio == 0.0
+    assert sue_world.get_idea_obj(non_road)._bud_ratio == 0.0
+    assert sue_world.get_idea_obj(yes_road)._bud_ratio == 0.0
+
+
+def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario1():
+    sue_world = worldunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_world.make_l1_road(casa_text)
+    floor_text = "mop floor"
+    floor_road = sue_world.make_road(casa_road, floor_text)
+    floor_idea = ideaunit_shop(floor_text, pledge=True)
+    sue_world.add_idea(floor_idea, casa_road)
+    sue_world.add_l1_idea(ideaunit_shop("unimportant"))
+
+    status_text = "cleaniness status"
+    status_road = sue_world.make_road(casa_road, status_text)
+    sue_world.add_idea(ideaunit_shop(status_text), casa_road)
+
+    status_idea = sue_world.get_idea_obj(status_road)
+    print(f"{status_idea._weight=}")
+    print("This should raise error: 'Ideaunit._'")
+
+    clean_text = "clean"
+    clean_road = sue_world.make_road(status_road, clean_text)
+    very_text = "very_much"
+    mod_text = "moderately"
+    dirty_text = "dirty"
+
+    sue_world.add_idea(ideaunit_shop(clean_text, _weight=0), status_road)
+    sue_world.add_idea(ideaunit_shop(very_text), clean_road)
+    sue_world.add_idea(ideaunit_shop(mod_text, _weight=2), clean_road)
+    sue_world.add_idea(ideaunit_shop(dirty_text), clean_road)
+
+    very_road = sue_world.make_road(clean_road, very_text)
+    mod_road = sue_world.make_road(clean_road, mod_text)
+    dirty_road = sue_world.make_road(clean_road, dirty_text)
+    assert sue_world.get_idea_obj(casa_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(floor_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(status_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(clean_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(very_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(mod_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(dirty_road)._bud_ratio is None
+
+    # WHEN
+    sue_world.calc_world_metrics()
+
+    # THEN
+    print(f"{sue_world._bud_pool=}")
+    assert sue_world.get_idea_obj(casa_road)._bud_ratio == 0.5
+    assert sue_world.get_idea_obj(floor_road)._bud_ratio == 0.25
+    assert sue_world.get_idea_obj(status_road)._bud_ratio == 0.25
+    assert sue_world.get_idea_obj(clean_road)._bud_ratio == 0
+    assert sue_world.get_idea_obj(very_road)._bud_ratio == 0
+    assert sue_world.get_idea_obj(mod_road)._bud_ratio == 0
+    assert sue_world.get_idea_obj(dirty_road)._bud_ratio == 0
