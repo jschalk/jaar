@@ -183,10 +183,10 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
     elif cross_name == jaar_format_0002_lobbyship_v0_0_0():
         d2_list = [
             [
-                x_atomunit.get_value(lobby_id_str()),
                 x_atomunit.get_value(char_id_str()),
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
+                x_atomunit.get_value(lobby_id_str()),
                 x_worldunit._owner_id,
                 x_worldunit._real_id,
             ]

@@ -108,6 +108,7 @@ def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
     # THEN
     array_headers = list(lobbyship_dataframe.columns)
     cross_dict = get_cross_attribute_dict(x_cross)
+    print(f"{len(lobbyship_dataframe)=}")
     assert array_headers == list(cross_dict.keys())
     assert lobbyship_dataframe.loc[0, real_id_str()] == music_real_id
     assert lobbyship_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
@@ -116,26 +117,26 @@ def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
     assert lobbyship_dataframe.loc[0, credor_weight_str()] == bob_iowa_credor_w
     assert lobbyship_dataframe.loc[0, debtor_weight_str()] == bob_iowa_debtor_w
 
-    assert lobbyship_dataframe.loc[1, real_id_str()] == music_real_id
-    assert lobbyship_dataframe.loc[1, owner_id_str()] == sue_worldunit._owner_id
-    assert lobbyship_dataframe.loc[1, char_id_str()] == sue_text
-    assert lobbyship_dataframe.loc[1, lobby_id_str()] == iowa_text
-    assert lobbyship_dataframe.loc[1, credor_weight_str()] == sue_iowa_credor_w
-    assert lobbyship_dataframe.loc[1, debtor_weight_str()] == sue_iowa_debtor_w
-
     assert lobbyship_dataframe.loc[2, real_id_str()] == music_real_id
     assert lobbyship_dataframe.loc[2, owner_id_str()] == sue_worldunit._owner_id
-    assert lobbyship_dataframe.loc[2, char_id_str()] == yao_text
+    assert lobbyship_dataframe.loc[2, char_id_str()] == sue_text
     assert lobbyship_dataframe.loc[2, lobby_id_str()] == iowa_text
-    assert lobbyship_dataframe.loc[2, credor_weight_str()] == yao_iowa_credor_w
-    assert lobbyship_dataframe.loc[2, debtor_weight_str()] == yao_iowa_debtor_w
+    assert lobbyship_dataframe.loc[2, credor_weight_str()] == sue_iowa_credor_w
+    assert lobbyship_dataframe.loc[2, debtor_weight_str()] == sue_iowa_debtor_w
 
-    assert lobbyship_dataframe.loc[3, real_id_str()] == music_real_id
-    assert lobbyship_dataframe.loc[3, owner_id_str()] == sue_worldunit._owner_id
-    assert lobbyship_dataframe.loc[3, char_id_str()] == yao_text
-    assert lobbyship_dataframe.loc[3, lobby_id_str()] == ohio_text
-    assert lobbyship_dataframe.loc[3, credor_weight_str()] == yao_ohio_credor_w
-    assert lobbyship_dataframe.loc[3, debtor_weight_str()] == yao_ohio_debtor_w
+    assert lobbyship_dataframe.loc[4, real_id_str()] == music_real_id
+    assert lobbyship_dataframe.loc[4, owner_id_str()] == sue_worldunit._owner_id
+    assert lobbyship_dataframe.loc[4, char_id_str()] == yao_text
+    assert lobbyship_dataframe.loc[4, lobby_id_str()] == iowa_text
+    assert lobbyship_dataframe.loc[4, credor_weight_str()] == yao_iowa_credor_w
+    assert lobbyship_dataframe.loc[4, debtor_weight_str()] == yao_iowa_debtor_w
+
+    assert lobbyship_dataframe.loc[5, real_id_str()] == music_real_id
+    assert lobbyship_dataframe.loc[5, owner_id_str()] == sue_worldunit._owner_id
+    assert lobbyship_dataframe.loc[5, char_id_str()] == yao_text
+    assert lobbyship_dataframe.loc[5, lobby_id_str()] == ohio_text
+    assert lobbyship_dataframe.loc[5, credor_weight_str()] == yao_ohio_credor_w
+    assert lobbyship_dataframe.loc[5, debtor_weight_str()] == yao_ohio_debtor_w
     assert len(lobbyship_dataframe) == 7
 
 
