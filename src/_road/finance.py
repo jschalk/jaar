@@ -20,7 +20,7 @@ class RespectNum(float):
     pass
 
 
-class BitHum(float):
+class BitNum(float):
     """Smallest Unit of credor_weight or debtor_weight ala 'the slightest bit of respect!'"""
 
     pass
@@ -66,11 +66,11 @@ def valid_fiscal_ratio(big_number: float, small_number: float) -> bool:
 #     return max(get_1_if_None(x_bud_pool), default_bud_coin_if_none())
 
 
-def default_bit_if_none(bit: BitHum = None) -> BitHum:
+def default_bit_if_none(bit: BitNum = None) -> BitNum:
     return max(get_1_if_None(bit), 1)
 
 
-def trim_bit_excess(num: float, bit: BitHum) -> float:
+def trim_bit_excess(num: float, bit: BitNum) -> float:
     return bit * int(num / bit)
 
 
@@ -103,7 +103,7 @@ def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
 class FiscalUnit:
     _bud_pool: BudNum = None
     _bud_coin: BudCoin = None
-    _bit: BitHum = None
+    _bit: BitNum = None
     _penny: PennyNum = None
 
 

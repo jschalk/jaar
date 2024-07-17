@@ -12,7 +12,7 @@ from src._road.finance import (
     default_penny_if_none,
     default_bud_coin_if_none,
     validate_bud_pool,
-    BitHum,
+    BitNum,
     PennyNum,
     BudCoin,
     BudNum,
@@ -125,7 +125,7 @@ class WorldUnit:
     _road_delimiter: str = None
     _bud_pool: BudNum = None
     _bud_coin: BudCoin = None
-    _bit: BitHum = None
+    _bit: BitNum = None
     _penny: PennyNum = None
     _monetary_desc: str = None
     _credor_respect: int = None
@@ -1868,7 +1868,7 @@ def worldunit_shop(
     _road_delimiter: str = None,
     _bud_pool: BudNum = None,
     _bud_coin: BudCoin = None,
-    _bit: BitHum = None,
+    _bit: BitNum = None,
     _penny: PennyNum = None,
     _weight: float = None,
 ) -> WorldUnit:
