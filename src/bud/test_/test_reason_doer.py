@@ -66,7 +66,7 @@ def test_DoerUnit_get_dict_ReturnsCorrectDictWithSingle_lobbyhold():
     obj_dict = x_doerunit.get_dict()
 
     # THEN
-    assert obj_dict != None
+    assert obj_dict is not None
     example_dict = {"_lobbyholds": [bob_lobby_id]}
     print(f"{example_dict=}")
     assert obj_dict == example_dict
@@ -191,7 +191,7 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_
     x_lobbyboxs = {yao_text: yao_lobbybox, sue_text: sue_lobbybox}
     x_lobbyholds = {sue_text}
     x_doerheir = doerheir_shop(_lobbyholds=x_lobbyholds)
-    assert yao_lobbybox.get_lobbyship(yao_text) != None
+    assert yao_lobbybox.get_lobbyship(yao_text) is not None
     assert x_doerheir._owner_id_doer is False
 
     # WHEN
@@ -457,8 +457,8 @@ def test_DoerUnit_get_lobbyhold_ReturnsCorrectObj():
     x_doerunit.set_lobbyhold(swim_text)
 
     # WHEN / THEN
-    assert x_doerunit.get_lobbyhold(walk_text) != None
-    assert x_doerunit.get_lobbyhold(swim_text) != None
+    assert x_doerunit.get_lobbyhold(walk_text) is not None
+    assert x_doerunit.get_lobbyhold(swim_text) is not None
     assert x_doerunit.get_lobbyhold(run_text) is None
 
 

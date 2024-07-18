@@ -27,9 +27,9 @@ class FactCore:
             "base": self.base,
             "pick": self.pick,
         }
-        if self.open != None:
+        if self.open is not None:
             x_dict["open"] = self.open
-        if self.nigh != None:
+        if self.nigh is not None:
             x_dict["nigh"] = self.nigh
         return x_dict
 
@@ -38,11 +38,11 @@ class FactCore:
         self.nigh = None
 
     def set_attr(self, pick: RoadUnit = None, open: float = None, nigh: float = None):
-        if pick != None:
+        if pick is not None:
             self.pick = pick
-        if open != None:
+        if open is not None:
             self.open = open
-        if nigh != None:
+        if nigh is not None:
             self.nigh = nigh
 
     def set_pick_to_base(self):
@@ -100,14 +100,18 @@ def factunit_shop(
 class FactHeir(FactCore):
     def transform(self, factunit: FactUnit):
         if (
-            (self.open != None and factunit.open != None and self.nigh != None)
+            (
+                self.open is not None
+                and factunit.open is not None
+                and self.nigh is not None
+            )
             and self.open <= factunit.open
             and self.nigh >= factunit.open
         ):
             self.open = factunit.open
 
     def is_range(self):
-        return self.open != None and self.nigh != None
+        return self.open is not None and self.nigh is not None
 
 
 def factheir_shop(
@@ -288,12 +292,12 @@ class PremiseUnit:
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {"need": self.need}
-        if self.open != None:
+        if self.open is not None:
             x_dict["open"] = self.open
-        if self.nigh != None:
+        if self.nigh is not None:
             x_dict["nigh"] = self.nigh
 
-        if self.divisor != None:
+        if self.divisor is not None:
             x_dict["divisor"] = self.divisor
 
         return x_dict
@@ -338,10 +342,12 @@ class PremiseUnit:
         return self._is_range() or self._is_segregate()
 
     def _is_segregate(self):
-        return self.divisor != None and self.open != None and self.nigh != None
+        return (
+            self.divisor is not None and self.open is not None and self.nigh is not None
+        )
 
     def _is_range(self):
-        return self.divisor is None and self.open != None and self.nigh != None
+        return self.divisor is None and self.open is not None and self.nigh is not None
 
     def _get_task_status(self, factheir: FactHeir) -> bool:
         x_task = None
@@ -518,7 +524,7 @@ class ReasonUnit(ReasonCore):
         x_dict = {"base": self.base}
         if premises_dict != {}:
             x_dict["premises"] = premises_dict
-        if self.base_idea_active_requisite != None:
+        if self.base_idea_active_requisite is not None:
             x_dict["base_idea_active_requisite"] = self.base_idea_active_requisite
         return x_dict
 
@@ -577,7 +583,7 @@ class ReasonHeir(ReasonCore):
 
     def is_base_idea_active_requisite_operational(self) -> bool:
         return (
-            self._base_idea_active_value != None
+            self._base_idea_active_value is not None
             and self._base_idea_active_value == self.base_idea_active_requisite
         )
 
@@ -634,11 +640,11 @@ def reasons_get_from_dict(reasons_dict: dict) -> dict[RoadUnit, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(base=reason_dict["base"])
-        if reason_dict.get("premises") != None:
+        if reason_dict.get("premises") is not None:
             x_reasonunit.premises = premises_get_from_dict(
                 x_dict=reason_dict["premises"]
             )
-        if reason_dict.get("base_idea_active_requisite") != None:
+        if reason_dict.get("base_idea_active_requisite") is not None:
             x_reasonunit.base_idea_active_requisite = reason_dict.get(
                 "base_idea_active_requisite"
             )

@@ -45,7 +45,7 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     new_yao_job = create_listen_basis(yao_duty)
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job, sue_texas_hubunit)
-    assert new_yao_job.get_missing_fact_bases().get(eat_road()) != None
+    assert new_yao_job.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
     listen_to_facts_duty_job(new_yao_job, sue_texas_hubunit)
@@ -78,14 +78,14 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     new_yao_job = create_listen_basis(yao_duty)
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job, sue_texas_hubunit)
-    assert new_yao_job.get_missing_fact_bases().get(eat_road()) != None
+    assert new_yao_job.get_missing_fact_bases().get(eat_road()) is not None
     assert new_yao_job.get_fact(eat_road()) is None
 
     # WHEN
     listen_to_facts_duty_job(new_yao_job, sue_texas_hubunit)
 
     # THEN
-    assert new_yao_job.get_fact(eat_road()) != None
+    assert new_yao_job.get_fact(eat_road()) is not None
 
 
 def test_listen_to_facts_duty_job_GetsFactsFromSrcBudSelfNotSpeakerSelf(
@@ -110,13 +110,13 @@ def test_listen_to_facts_duty_job_GetsFactsFromSrcBudSelfNotSpeakerSelf(
     assert new_yao_job.get_fact(eat_road()) is None
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job, sue_texas_hubunit)
-    assert new_yao_job.get_missing_fact_bases().get(eat_road()) != None
+    assert new_yao_job.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
     listen_to_facts_duty_job(new_yao_job, sue_texas_hubunit)
 
     # THEN
-    assert new_yao_job.get_fact(eat_road()) != None
+    assert new_yao_job.get_fact(eat_road()) is not None
     assert new_yao_job.get_fact(eat_road()).pick == full_road()
 
 
@@ -145,7 +145,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v1(
     listen_to_agendas_duty_job(new_yao_job, sue_texas_hubunit)
     print(f"{new_yao_job.get_missing_fact_bases().keys()=}")
     print(f"{new_yao_job._idearoot._factunits.keys()=}")
-    assert new_yao_job.get_missing_fact_bases().get(eat_road()) != None
+    assert new_yao_job.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
     listen_to_facts_duty_job(new_yao_job, sue_texas_hubunit)
@@ -176,13 +176,13 @@ def test_listen_to_facts_duty_job_SetsPrioritizesSelfFactsOverSpeakers(
     assert new_yao_job.get_fact(eat_road()) is None
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job, sue_texas_hubunit)
-    assert new_yao_job.get_missing_fact_bases().get(eat_road()) != None
+    assert new_yao_job.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
     listen_to_facts_duty_job(new_yao_job, sue_texas_hubunit)
 
     # THEN
-    assert new_yao_job.get_fact(eat_road()) != None
+    assert new_yao_job.get_fact(eat_road()) is not None
     assert new_yao_job.get_fact(eat_road()).pick == full_road()
 
 
@@ -213,7 +213,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
     listen_to_agendas_duty_job(new_yao_job1, sue_texas_hubunit)
     print(f"{new_yao_job1.get_missing_fact_bases().keys()=}")
     print(f"{new_yao_job1._idearoot._factunits.keys()=}")
-    assert new_yao_job1.get_missing_fact_bases().get(eat_road()) != None
+    assert new_yao_job1.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
     listen_to_facts_duty_job(new_yao_job1, sue_texas_hubunit)
@@ -283,7 +283,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     # assert new_yao_job.get_missing_fact_bases().get(status_road) is None
 #     listen_to_agendas_duty_job(new_yao_job, texas_hubunit)
 #     print(f"{new_yao_job.get_idea_dict().keys()=}")
-#     assert new_yao_job.get_missing_fact_bases().get(status_road) != None
+#     assert new_yao_job.get_missing_fact_bases().get(status_road) is not None
 
 #     # assert new_yao_job.get_missing_fact_bases().keys() == {status_road}
 #     # sue_speaker.set_fact(status_road, clean_road, create_missing_ideas=True)

@@ -410,7 +410,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_action.idea_exists(get_swim_road())
     assert yao_action.idea_exists(get_in_ocean_road())
     assert yao_action.idea_exists(get_on_land_road()) is False
-    assert yao_action.get_fact(get_location_road()) != None
+    assert yao_action.get_fact(get_location_road()) is not None
     assert yao_action.get_fact(get_location_road()).pick == get_in_ocean_road()
     assert len(yao_action.get_agenda_dict()) == 1
     assert len(yao_action._idearoot._factunits) == 1
@@ -431,6 +431,6 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # ESTABLISH
     assert sue_texas_hubunit.job_file_exists(yao_text)
     yao_job = sue_texas_hubunit.get_job_bud(yao_text)
-    assert yao_job._owner_id != None
+    assert yao_job._owner_id is not None
     assert yao_job._owner_id == yao_text
     assert yao_job.get_dict() == yao_duty.get_dict()

@@ -6,7 +6,7 @@ def test_TreeMetrics_Exists():
     x_tree_metrics = TreeMetrics()
 
     # THEN
-    assert x_tree_metrics != None
+    assert x_tree_metrics is not None
     assert x_tree_metrics.node_count is None
     assert x_tree_metrics.level_count is None
     assert x_tree_metrics.reason_bases is None
@@ -21,7 +21,7 @@ def test_treemetrics_shop_ReturnsCorrectObj():
     x_tree_metrics = treemetrics_shop()
 
     # THEN
-    assert x_tree_metrics != None
+    assert x_tree_metrics is not None
     assert x_tree_metrics.node_count == 0
     assert x_tree_metrics.level_count == {}
     assert x_tree_metrics.reason_bases == {}

@@ -147,7 +147,7 @@ class BudUnit:
         self._last_gift_id = None
 
     def set_last_gift_id(self, x_last_gift_id: int):
-        if self._last_gift_id != None and x_last_gift_id < self._last_gift_id:
+        if self._last_gift_id is not None and x_last_gift_id < self._last_gift_id:
             raise _last_gift_idException(
                 f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
             )
@@ -264,7 +264,7 @@ class BudUnit:
                     road_type="reasonunit_base",
                 )
 
-            if x_idea._numeric_road != None:
+            if x_idea._numeric_road is not None:
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
                     to_evaluate_hx_dict=to_evaluate_hx_dict,
@@ -272,7 +272,7 @@ class BudUnit:
                     road_type="numeric_road",
                 )
 
-            if x_idea._range_source_road != None:
+            if x_idea._range_source_road is not None:
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
                     to_evaluate_hx_dict=to_evaluate_hx_dict,
@@ -417,9 +417,9 @@ class BudUnit:
         str_x = "test3"
         if divisor is None:
             str_x = self.get_jajatime_legible_one_time_event(jajatime_min=open)
-        elif divisor != None and divisor % 10080 == 0:
+        elif divisor is not None and divisor % 10080 == 0:
             str_x = self._get_jajatime_week_legible_text(open, divisor)
-        elif divisor != None and divisor % 1440 == 0:
+        elif divisor is not None and divisor % 1440 == 0:
             if divisor == 1440:
                 str_x = f"every day at {x_hregidea.readable_1440_time(min1440=open)}"
             else:
@@ -463,7 +463,7 @@ class BudUnit:
         awardheir_fund_take: float,
     ):
         x_lobbybox = self.get_lobbybox(lobby_id)
-        if x_lobbybox != None:
+        if x_lobbybox is not None:
             x_lobbybox._fund_give += awardheir_fund_give
             x_lobbybox._fund_take += awardheir_fund_take
 
@@ -474,7 +474,7 @@ class BudUnit:
         awardline_fund_take: float,
     ):
         x_lobbybox = self.get_lobbybox(lobby_id)
-        if awardline_fund_give != None and awardline_fund_take != None:
+        if awardline_fund_give is not None and awardline_fund_take is not None:
             x_lobbybox._fund_agenda_give += awardline_fund_give
             x_lobbybox._fund_agenda_take += awardline_fund_take
 
@@ -519,7 +519,7 @@ class BudUnit:
         self._chars[x_charunit.char_id] = x_charunit
 
     def char_exists(self, char_id: CharID) -> bool:
-        return self.get_char(char_id) != None
+        return self.get_char(char_id) is not None
 
     def edit_charunit(
         self, char_id: CharID, credor_weight: int = None, debtor_weight: int = None
@@ -527,9 +527,9 @@ class BudUnit:
         if self._chars.get(char_id) is None:
             raise CharMissingException(f"CharUnit '{char_id}' does not exist.")
         x_charunit = self.get_char(char_id)
-        if credor_weight != None:
+        if credor_weight is not None:
             x_charunit.set_credor_weight(credor_weight)
-        if debtor_weight != None:
+        if debtor_weight is not None:
             x_charunit.set_debtor_weight(debtor_weight)
         self.set_charunit(x_charunit)
 
@@ -556,8 +556,8 @@ class BudUnit:
             x_charunit.clear_lobbyships()
 
     def set_time_facts(self, open: datetime = None, nigh: datetime = None) -> None:
-        open_minutes = self.get_time_min_from_dt(dt=open) if open != None else None
-        nigh_minutes = self.get_time_min_from_dt(dt=nigh) if nigh != None else None
+        open_minutes = self.get_time_min_from_dt(dt=open) if open is not None else None
+        nigh_minutes = self.get_time_min_from_dt(dt=nigh) if nigh is not None else None
         time_road = self.make_l1_road("time")
         minutes_fact = self.make_road(time_road, "jajatime")
         self.set_fact(
@@ -581,8 +581,8 @@ class BudUnit:
         return [
             fact
             for fact in self._idearoot._factunits.values()
-            if fact.open != None
-            and fact.nigh != None
+            if fact.open is not None
+            and fact.nigh is not None
             and self._is_idea_rangeroot(idea_road=fact.base)
         ]
 
@@ -596,7 +596,7 @@ class BudUnit:
             for kid in fact_idea._kids.values():
                 x_lemmas.eval(x_idea=kid, src_fact=fact, src_idea=fact_idea)
 
-            if fact_idea._range_source_road != None:
+            if fact_idea._range_source_road is not None:
                 x_lemmas.eval(
                     x_idea=self.get_idea_obj(fact_idea._range_source_road),
                     src_fact=fact,
@@ -653,12 +653,12 @@ class BudUnit:
         fact_base_idea = self.get_idea_obj(base)
         x_idearoot = self.get_idea_obj(self._real_id)
         x_open = None
-        if nigh != None and open is None:
+        if nigh is not None and open is None:
             x_open = x_idearoot._factunits.get(base).open
         else:
             x_open = open
         x_nigh = None
-        if open != None and nigh is None:
+        if open is not None and nigh is None:
             x_nigh = x_idearoot._factunits.get(base).nigh
         else:
             x_nigh = nigh
@@ -853,7 +853,7 @@ class BudUnit:
         parent_road_idea.add_kid(idea_kid)
 
         kid_road = self.make_road(parent_road, idea_kid._label)
-        if adoptees != None:
+        if adoptees is not None:
             weight_sum = 0
             for adoptee_label in adoptees:
                 adoptee_road = self.make_road(parent_road, adoptee_label)
@@ -881,7 +881,7 @@ class BudUnit:
         for _awardlink_lobby_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_lobby_id)
 
-        if x_idea._doerunit != None:
+        if x_idea._doerunit is not None:
             _lobbyholds_to_delete = [
                 _lobbyhold_lobby_id
                 for _lobbyhold_lobby_id in x_idea._doerunit._lobbyholds
@@ -899,9 +899,9 @@ class BudUnit:
             self._set_ideakid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
                 self._set_ideakid_if_empty(road=premise_x.need)
-        if posted_idea._range_source_road != None:
+        if posted_idea._range_source_road is not None:
             self._set_ideakid_if_empty(road=posted_idea._range_source_road)
-        if posted_idea._numeric_road != None:
+        if posted_idea._numeric_road is not None:
             self._set_ideakid_if_empty(road=posted_idea._numeric_road)
 
     def _set_ideakid_if_empty(self, road: RoadUnit):
@@ -978,7 +978,7 @@ class BudUnit:
         while idea_iter_list != []:
             listed_idea = idea_iter_list.pop()
             # put all idea_children in idea list
-            if listed_idea._kids != None:
+            if listed_idea._kids is not None:
                 for idea_kid in listed_idea._kids.values():
                     idea_iter_list.append(idea_kid)
                     if is_sub_road(
@@ -1008,10 +1008,10 @@ class BudUnit:
         x_iaf = ideaattrfilter
         anc_roads = get_ancestor_roads(road=idea_road)
         if (
-            x_iaf.addin != None
-            or x_iaf.numor != None
-            or x_iaf.denom != None
-            or x_iaf.reest != None
+            x_iaf.addin is not None
+            or x_iaf.numor is not None
+            or x_iaf.denom is not None
+            or x_iaf.reest is not None
         ) and len(anc_roads) == 1:
             raise InvalidBudException("Root Idea cannot have numor denom reest.")
         parent_road = self._real_id if len(anc_roads) == 1 else anc_roads[1]
@@ -1025,11 +1025,11 @@ class BudUnit:
         numeric_begin = None
         numeric_close = None
         numeric_range = None
-        if x_iaf.numeric_road != None:
+        if x_iaf.numeric_road is not None:
             numeric_idea = self.get_idea_obj(x_iaf.numeric_road)
             numeric_begin = numeric_idea._begin
             numeric_close = numeric_idea._close
-            numeric_range = numeric_begin != None and numeric_close != None
+            numeric_range = numeric_begin is not None and numeric_close is not None
 
         if parent_has_range and x_iaf.addin not in [None, 0]:
             parent_begin = parent_begin + x_iaf.addin
@@ -1053,7 +1053,7 @@ class BudUnit:
             raise InvalidBudException(
                 "Idea has begin-close range parent, cannot have numeric_road"
             )
-        elif not parent_has_range and not numeric_range and x_iaf.numor != None:
+        elif not parent_has_range and not numeric_range and x_iaf.numor is not None:
             raise InvalidBudException(
                 f"Idea cannot edit numor={x_iaf.numor}/denom/reest of '{idea_road}' if parent '{parent_road}' or ideaunit._numeric_road does not have begin/close range"
             )
@@ -1074,25 +1074,25 @@ class BudUnit:
         numeric_begin: float,
         numeric_close: float,
     ):
-        if not reest and parent_has_range and numor != None:
+        if not reest and parent_has_range and numor is not None:
             begin = parent_begin * numor / denom
             close = parent_close * numor / denom
         elif not reest and parent_has_range and numor is None:
             begin = parent_begin
             close = parent_close
-        elif not reest and numeric_range and numor != None:
+        elif not reest and numeric_range and numor is not None:
             begin = numeric_begin * numor / denom
             close = numeric_close * numor / denom
         elif not reest and numeric_range and numor is None:
             begin = numeric_begin
             close = numeric_close
-        elif reest and parent_has_range and numor != None:
+        elif reest and parent_has_range and numor is not None:
             begin = parent_begin * numor % denom
             close = parent_close * numor % denom
         elif reest and parent_has_range and numor is None:
             begin = 0
             close = parent_close - parent_begin
-        elif reest and numeric_range and numor != None:
+        elif reest and numeric_range and numor is not None:
             begin = numeric_begin * numor % denom
             close = numeric_close * numor % denom
         elif reest and numeric_range and numor is None:
@@ -1156,7 +1156,7 @@ class BudUnit:
         is_expanded: bool = None,
         problem_bool: bool = None,
     ):
-        if healerhold != None:
+        if healerhold is not None:
             for x_lobby_id in healerhold._lobby_ids:
                 if self.get_lobby_ids_dict().get(x_lobby_id) is None:
                     raise healerhold_lobby_id_Exception(
@@ -1203,7 +1203,7 @@ class BudUnit:
         x_idea._set_idea_attr(idea_attr=x_ideaattrfilter)
 
         # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
-        # if awardlink_del != None or awardlink != None:
+        # if awardlink_del is not None or awardlink is not None:
         #     self.settle_bud()
 
     def get_agenda_dict(
@@ -1398,7 +1398,7 @@ class BudUnit:
         if begin is None and close is None:
             begin = parent_idea._begin
             close = parent_idea._close
-        elif begin != None and close is None:
+        elif begin is not None and close is None:
             close = begin
 
         idea_list = parent_idea.get_kids_in_range(begin=begin, close=close)
@@ -1611,7 +1611,7 @@ class BudUnit:
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self._fund_coin)
 
-            if parent_idea._kids != None:
+            if parent_idea._kids is not None:
                 fund_onset = None
                 fund_cease = None
                 for idea_kid in parent_idea._kids.values():
@@ -1633,7 +1633,7 @@ class BudUnit:
     def _check_if_any_idea_active_status_has_altered(self):
         any_idea_active_status_has_altered = False
         for idea in self._idea_dict.values():
-            if idea._active_hx.get(self._tree_traverse_count) != None:
+            if idea._active_hx.get(self._tree_traverse_count) is not None:
                 any_idea_active_status_has_altered = True
 
         if any_idea_active_status_has_altered is False:
@@ -1718,14 +1718,14 @@ class BudUnit:
 
     def get_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
-        if self._idearoot._factunits != None:
+        if self._idearoot._factunits is not None:
             for fact_road, fact_obj in self._idearoot._factunits.items():
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
     def get_charunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
-        if self._chars != None:
+        if self._chars is not None:
             for char_id, char_obj in self._chars.items():
                 x_dict[char_id] = char_obj.get_dict(all_attrs)
         return x_dict
@@ -1745,11 +1745,11 @@ class BudUnit:
             "_road_delimiter": self._road_delimiter,
             "_idearoot": self._idearoot.get_dict(),
         }
-        if self._credor_respect != None:
+        if self._credor_respect is not None:
             x_dict["_credor_respect"] = self._credor_respect
-        if self._debtor_respect != None:
+        if self._debtor_respect is not None:
             x_dict["_debtor_respect"] = self._debtor_respect
-        if self._last_gift_id != None:
+        if self._last_gift_id is not None:
             x_dict["_last_gift_id"] = self._last_gift_id
 
         return x_dict
@@ -1764,7 +1764,7 @@ class BudUnit:
         while len(ideabase_list) != 0:
             yb = ideabase_list.pop(0)
             range_source_road_x = None
-            if yb.sr != None:
+            if yb.sr is not None:
                 range_source_road_x = self.make_l1_road(yb.sr)
 
             x_idea = ideaunit_shop(
@@ -1783,12 +1783,12 @@ class BudUnit:
             self.add_idea(x_idea, parent_road=road_x)
 
             numeric_road_x = None
-            if yb.nr != None:
+            if yb.nr is not None:
                 numeric_road_x = self.make_l1_road(yb.nr)
                 self.edit_idea_attr(
                     road=self.make_road(road_x, yb.n), numeric_road=numeric_road_x
                 )
-            if yb.a != None:
+            if yb.a is not None:
                 self.edit_idea_attr(
                     road=self.make_road(road_x, yb.n),
                     addin=yb.a,
@@ -1966,7 +1966,7 @@ def obj_from_bud_dict(
     if dict_key == "_originunit":
         return (
             originunit_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else originunit_shop()
         )
     elif dict_key == "_chars":
@@ -1974,11 +1974,11 @@ def obj_from_bud_dict(
     elif dict_key == "_max_tree_traverse":
         return (
             x_dict[dict_key]
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else max_tree_traverse_default()
         )
     else:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else None
+        return x_dict[dict_key] if x_dict.get(dict_key) is not None else None
 
 
 def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:

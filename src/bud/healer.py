@@ -29,7 +29,7 @@ def healerhold_shop(_lobby_ids: set[LobbyID] = None) -> HealerHold:
 
 def healerhold_get_from_dict(x_dict: dict[str, set]) -> HealerHold:
     x_healerhold = healerhold_shop()
-    if x_dict.get("healerhold_lobby_ids") != None:
+    if x_dict.get("healerhold_lobby_ids") is not None:
         for x_lobby_id in x_dict.get("healerhold_lobby_ids"):
             x_healerhold.set_lobby_id(x_lobby_id=x_lobby_id)
     return x_healerhold

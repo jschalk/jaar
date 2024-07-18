@@ -70,8 +70,8 @@ def test_BudUnit_settle_bud_CorrectlyCalculates1LevelBudLobbyBudImportance():
     assert zia_lobbybox._fund_take != 0.125 * default_fund_pool()
     assert xio_lobbybox._fund_give != 0.25 * default_fund_pool()
     assert xio_lobbybox._fund_take != 0.125 * default_fund_pool()
-    assert sue_lobbybox._fund_give != None
-    assert sue_lobbybox._fund_take != None
+    assert sue_lobbybox._fund_give is not None
+    assert sue_lobbybox._fund_take is not None
     cred_sum1 = yao_lobbybox._fund_give + zia_lobbybox._fund_give
     cred_sum1 += xio_lobbybox._fund_give + sue_lobbybox._fund_give
     assert cred_sum1 == 1 * default_fund_pool()
@@ -274,9 +274,9 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudImportanc
     # fund_take_sum = 0
     # for lobby in x_bud._idearoot._awardheirs.values():
     #     print(f"{lobby=}")
-    #     assert lobby._fund_give != None
+    #     assert lobby._fund_give is not None
     #     assert lobby._fund_give in [0.25, 0.5]
-    #     assert lobby._fund_take != None
+    #     assert lobby._fund_take is not None
     #     assert lobby._fund_take in [0.75, 0.125]
     #     fund_give_sum += lobby._fund_give
     #     fund_take_sum += lobby._fund_take
@@ -361,8 +361,8 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     assert bob_bob_lobbyship._fund_take != 0.1 * default_fund_pool()
     assert zia_zia_lobbyship._fund_give != 0.5 * default_fund_pool()
     assert zia_zia_lobbyship._fund_take != 0.1 * default_fund_pool()
-    assert xio_xio_lobbyship._fund_give != None
-    assert xio_xio_lobbyship._fund_take != None
+    assert xio_xio_lobbyship._fund_give is not None
+    assert xio_xio_lobbyship._fund_take is not None
 
     x_fund_give_sum = (
         sue_sue_lobbyship._fund_give
@@ -446,8 +446,8 @@ def test_BudUnit_settle_bud_CorrectlySetsCharUnitBudImportance():
     assert bob_charunit._fund_take != 0.1 * default_fund_pool()
     assert zia_charunit._fund_give != 0.25 * default_fund_pool()
     assert zia_charunit._fund_take != 0.1 * default_fund_pool()
-    assert xio_charunit._fund_give != None
-    assert xio_charunit._fund_take != None
+    assert xio_charunit._fund_give is not None
+    assert xio_charunit._fund_take is not None
 
     sum_charunit_fund_give = (
         sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
@@ -820,7 +820,7 @@ def test_examples_bud_v001_has_chars():
     yao_bud = examples_bud_v001()
 
     # THEN
-    assert yao_bud._chars != None
+    assert yao_bud._chars is not None
     assert len(yao_bud._chars) == 22
 
 
@@ -830,7 +830,7 @@ def test_examples_bud_v001_HasLobbys():
     x_bud.settle_bud()
 
     # THEN
-    assert x_bud._lobbyboxs != None
+    assert x_bud._lobbyboxs is not None
     assert len(x_bud._lobbyboxs) == 34
     everyone_chars_len = None
     everyone_lobby = x_bud.get_lobbybox(",Everyone")

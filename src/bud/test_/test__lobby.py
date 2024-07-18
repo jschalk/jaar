@@ -25,7 +25,7 @@ from pytest import raises as pytest_raises
 
 def test_LobbyID_exists():
     ohio_lobby_id = LobbyID(",ohio")
-    assert ohio_lobby_id != None
+    assert ohio_lobby_id is not None
 
 
 def test_LobbyCore_exists():
@@ -34,7 +34,7 @@ def test_LobbyCore_exists():
     # WHEN
     swim_lobbycore = LobbyCore(lobby_id=swim_text)
     # THEN
-    assert swim_lobbycore != None
+    assert swim_lobbycore is not None
     assert swim_lobbycore.lobby_id == swim_text
 
 
@@ -203,7 +203,7 @@ def test_LobbyShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     swim_dict = swim_lobbyship.get_dict()
 
     # THEN
-    assert swim_dict != None
+    assert swim_dict is not None
     assert swim_dict == {
         "lobby_id": swim_lobbyship.lobby_id,
         "credor_weight": swim_lobbyship.credor_weight,
@@ -399,7 +399,7 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     biker_dict = bikers_awardlink.get_dict()
 
     # THEN
-    assert biker_dict != None
+    assert biker_dict is not None
     assert biker_dict == {
         "lobby_id": bikers_awardlink.lobby_id,
         "give_weight": bikers_awardlink.give_weight,
@@ -417,14 +417,14 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
     awardlinks_dict = {teacher_awardlink.lobby_id: teacher_dict}
 
     teachers_json = get_json_from_dict(dict_x=awardlinks_dict)
-    assert teachers_json != None
+    assert teachers_json is not None
     assert x_is_json(json_x=teachers_json)
 
     # WHEN
     awardlinks_obj_dict = awardlinks_get_from_json(awardlinks_json=teachers_json)
 
     # THEN
-    assert awardlinks_obj_dict != None
+    assert awardlinks_obj_dict is not None
     teachers_obj_check_dict = {teacher_awardlink.lobby_id: teacher_awardlink}
     print(f"    {awardlinks_obj_dict=}")
     print(f"{teachers_obj_check_dict=}")
@@ -464,7 +464,7 @@ def test_awardline_shop_ReturnsCorrectObj_exists():
         _fund_take=bikers_fund_take,
     )
 
-    assert biker_awardline != None
+    assert biker_awardline is not None
     assert biker_awardline.lobby_id == bikers_text
     assert biker_awardline._fund_give == bikers_fund_give
     assert biker_awardline._fund_take == bikers_fund_take
@@ -494,7 +494,7 @@ def test_LobbyBox_exists():
     # WHEN
     swim_lobbybox = LobbyBox(lobby_id=swim_text)
     # THEN
-    assert swim_lobbybox != None
+    assert swim_lobbybox is not None
     assert swim_lobbybox.lobby_id == swim_text
     assert swim_lobbybox._lobbyships is None
     assert swim_lobbybox._fund_give is None
@@ -517,8 +517,8 @@ def test_lobbybox_shop_ReturnsCorrectObj():
 
     # THEN
     print(f"{swim_text}")
-    assert swim_lobbybox != None
-    assert swim_lobbybox.lobby_id != None
+    assert swim_lobbybox is not None
+    assert swim_lobbybox.lobby_id is not None
     assert swim_lobbybox.lobby_id == swim_text
     assert swim_lobbybox._lobbyships == {}
     assert swim_lobbybox._fund_give == 0

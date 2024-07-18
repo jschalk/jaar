@@ -129,7 +129,7 @@ def test_get_time_():
 #     x_bud = budunit_shop(_owner_id=bob_text)
 #     x_bud.set_time_hreg_ideas(c400_count=6)
 #     idea_x = x_bud.get_idea_obj(x_bud.make_l1_road("hreg")
-#     assert idea_x != None
+#     assert idea_x is not None
 #     assert x_bud.get_kid("hreg"]
 #     for kid in x_bud.get_kid("hreg"]._kids.values():
 #         print(f"hreg kid= {kid._label=}")
@@ -147,7 +147,7 @@ def test_get_time_():
 #     print(f"added {hreg_label}")
 #     x_bud.set_time_hreg_ideas(c400_count=6)
 #     hreg_idea = x_bud.get_kid(hreg_label]
-#     assert hreg_idea != None
+#     assert hreg_idea is not None
 #     assert hreg_idea._begin == 0
 #     assert hreg_idea._close == 1262278080
 
@@ -157,16 +157,16 @@ def test_get_time_():
 #     x_bud.set_time_hreg_ideas(c400_count=6)
 #     weekday_label = "weekday"
 #     weekday = x_bud.get_idea_obj(x_bud.make_l1_road("hreg,{weekday_label}")
-#     assert weekday != None
+#     assert weekday is not None
 #     assert weekday._begin == 0
 #     assert weekday._close == 7
-#     assert weekday.get_kid("Sunday"] != None
-#     assert weekday.get_kid("Monday"] != None
-#     assert weekday.get_kid("Tuesday"] != None
-#     assert weekday.get_kid("Wednesday"] != None
-#     assert weekday.get_kid("Thursday"] != None
-#     assert weekday.get_kid("Friday"] != None
-#     assert weekday.get_kid("Saturday"] != None
+#     assert weekday.get_kid("Sunday"] is not None
+#     assert weekday.get_kid("Monday"] is not None
+#     assert weekday.get_kid("Tuesday"] is not None
+#     assert weekday.get_kid("Wednesday"] is not None
+#     assert weekday.get_kid("Thursday"] is not None
+#     assert weekday.get_kid("Friday"] is not None
+#     assert weekday.get_kid("Saturday"] is not None
 
 
 # def test_time_hreg_set_CorrectlyCreates400YearsegmentCount():
@@ -178,7 +178,7 @@ def test_get_time_():
 #     timetech_road = x_bud.make_l1_road("hreg,{timetech_label}"
 #     print(f"{timetech_road=}")
 #     timetech = x_bud.get_idea_obj(timetech_road)
-#     assert timetech != None
+#     assert timetech is not None
 #     assert timetech._begin == 0
 #     assert timetech._close == c400_count
 
@@ -192,7 +192,7 @@ def test_get_time_():
 #     hy400_road = x_bud.make_l1_road("hreg,{hy400_label}"
 #     print(f"{hy400_road=}")
 #     hy400_idea = h_x_bud.get_idea_obj(hy400_road)
-#     assert hy400_idea != None
+#     assert hy400_idea is not None
 #     assert hy400_idea._begin is None
 #     assert hy400_idea._close is None
 #     assert hy400_idea.divisor == 400
@@ -201,7 +201,7 @@ def test_get_time_():
 #     hy400c1_road = create_road(hy400_road,hy400c1_label)
 #     print(f"{hy400c1_road=}")
 #     hy400c1_idea = hy400_idea.get_kid(hy400c1_label]
-#     assert hy400c1_idea != None
+#     assert hy400c1_idea is not None
 #     assert hy400c1_idea._begin == 0
 #     assert hy400c1_idea._close == 100
 #     assert hy400c1_idea.divisor is None
@@ -210,7 +210,7 @@ def test_get_time_():
 #     hy400c14y_road = create_road(hy400c1_road,hy400c14y_label}"
 #     print(f"{hy400c14y_road=}")
 #     hy400c14y_idea = hy400c1_idea.get_kid(hy400c14y_label]
-#     assert hy400c14y_idea != None
+#     assert hy400c14y_idea is not None
 #     assert hy400c14y_idea._begin is None
 #     assert hy400c14y_idea._close is None
 #     assert hy400c14y_idea.divisor == 4
@@ -219,7 +219,7 @@ def test_get_time_():
 #     hy400c3_road = create_road(hy400_road,hy400c3_label}"
 #     print(f"{hy400c3_road=}")
 #     hy400c3_idea = hy400_idea.get_kid(hy400c3_label]
-#     assert hy400c3_idea != None
+#     assert hy400c3_idea is not None
 #     assert hy400c3_idea._begin == 100
 #     assert hy400c3_idea._close == 400
 #     assert hy400c3_idea.divisor is None
@@ -228,7 +228,7 @@ def test_get_time_():
 #     hy400c3c1_road = create_road(hy400c3_road,hy400c3c1_label}"
 #     print(f"{hy400c3c1_road=}")
 #     hy400c3c1_idea = hy400c3_idea.get_kid(hy400c3c1_label]
-#     assert hy400c3c1_idea != None
+#     assert hy400c3c1_idea is not None
 #     assert hy400c3c1_idea._begin is None
 #     assert hy400c3c1_idea._close is None
 #     assert hy400c3c1_idea.divisor == 100
@@ -237,7 +237,7 @@ def test_get_time_():
 #     hy400c3c14y_road = create_road(hy400c3c1_road,hy400c3c14y_label}"
 #     print(f"{hy400c3c14y_road=}")
 #     hy400c3c14y_idea = hy400c3c1_idea.get_kid(hy400c3c14y_label]
-#     assert hy400c3c14y_idea != None
+#     assert hy400c3c14y_idea is not None
 #     assert hy400c3c14y_idea._begin == 0
 #     assert hy400c3c14y_idea._close == 4
 #     assert hy400c3c14y_idea.divisor is None
@@ -246,7 +246,7 @@ def test_get_time_():
 #     hy400c3c196_road = create_road(hy400c3c1_road,hy400c3c196_label}"
 #     print(f"{hy400c3c196_road=}")
 #     hy400c3c196_idea = hy400c3c1_idea.get_kid(hy400c3c196_label]
-#     assert hy400c3c196_idea != None
+#     assert hy400c3c196_idea is not None
 #     assert hy400c3c196_idea._begin == 4
 #     assert hy400c3c196_idea._close == 100
 #     assert hy400c3c196_idea.divisor is None
@@ -255,7 +255,7 @@ def test_get_time_():
 #     hy400c3c196ry_road = create_road(hy400c3c196_road,hy400c3c196ry_label}"
 #     print(f"{hy400c3c196ry_road=}")
 #     hy400c3c196ry_idea = hy400c3c196_idea.get_kid(hy400c3c196ry_label]
-#     assert hy400c3c196ry_idea != None
+#     assert hy400c3c196ry_idea is not None
 #     assert hy400c3c196ry_idea._begin is None
 #     assert hy400c3c196ry_idea._close is None
 #     assert hy400c3c196ry_idea.divisor == 4
@@ -270,7 +270,7 @@ def test_get_time_():
 #     hy400_road = x_bud.make_l1_road("hreg,{hy400_label}"
 #     print(f"{hy400_road=}")
 #     hy400_idea = h_x_bud.get_idea_obj(hy400_road)
-#     assert hy400_idea != None
+#     assert hy400_idea is not None
 #     assert hy400_idea._begin is None
 #     assert hy400_idea._close is None
 #     assert hy400_idea.divisor == 146097
@@ -280,7 +280,7 @@ def test_get_time_():
 #     x_bud = examples.get_bud_base_time_example()
 #     x_bud.set_time_hreg_ideas(c400_count=6)
 #     timetech = x_bud.get_idea_obj(x_bud.make_l1_road("hreg,day_range")
-#     assert timetech != None
+#     assert timetech is not None
 #     assert timetech._begin == 0
 #     assert timetech._close == 876582
 
@@ -293,9 +293,9 @@ def test_get_time_():
 # print(f"{woork_wk_reason.base=}")
 # bud_x.edit_idea_attr(road=woork_road, reason=woork_wk_reason)
 # woork_idea = bud_x.get_kid("woork"]
-# assert woork_idea._reasonunits != None
+# assert woork_idea._reasonunits is not None
 # print(woork_idea._reasonunits)
-# assert woork_idea._reasonunits[weekday_road] != None
+# assert woork_idea._reasonunits[weekday_road] is not None
 # assert woork_idea._reasonunits[weekday_road] == woork_wk_reason
 
 # x_bud = examples.get_bud_gregorian_years()

@@ -53,7 +53,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     bud_dict = x_bud.get_dict()
 
     # THEN
-    assert bud_dict != None
+    assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["_owner_id"] == x_bud._owner_id
     assert bud_dict["_real_id"] == x_bud._real_id
@@ -87,7 +87,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     month_week_idea_x = x_bud.get_idea_obj(month_week_road)
     print("check real_id,month_week...range_source_road equal to...")
     month_week_special_dict = idearoot_dict[_kids][month_week_text][_range_source_road]
-    assert month_week_special_dict != None
+    assert month_week_special_dict is not None
     assert month_week_special_dict == x_bud.make_l1_road("ced_week")
     assert month_week_special_dict == month_week_idea_x._range_source_road
 
@@ -97,7 +97,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     num1_idea_x = x_bud.get_idea_obj(num1_road)
     print(f"check {num1_road}...numeric_road equal to...")
     num1_dict_numeric_road = idearoot_dict[_kids][num1_text][_numeric_road]
-    assert num1_dict_numeric_road != None
+    assert num1_dict_numeric_road is not None
     assert num1_dict_numeric_road == month_week_road
     assert num1_dict_numeric_road == num1_idea_x._numeric_road
 
@@ -207,7 +207,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     # THEN
     _kids = "_kids"
 
-    assert x_json != None
+    assert x_json is not None
     assert True == x_is_json(x_json)
     bud_dict = get_dict_from_json(x_json)
 
@@ -364,7 +364,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
     # THEN
     assert str(type(json_bud)).find(".bud.BudUnit'>") > 0
-    assert json_bud._owner_id != None
+    assert json_bud._owner_id is not None
     assert json_bud._owner_id == zia_bud._owner_id
     assert json_bud._real_id == zia_bud._real_id
     assert json_bud._fund_pool == zia_fund_pool
@@ -516,9 +516,9 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     ccn_dict_of_obj = get_dict_of_bud_from_dict(cn_dict_of_dicts)
 
     # THEN
-    assert ccn_dict_of_obj.get(x1_bud._owner_id) != None
-    assert ccn_dict_of_obj.get(x2_bud._owner_id) != None
-    assert ccn_dict_of_obj.get(x3_bud._owner_id) != None
+    assert ccn_dict_of_obj.get(x1_bud._owner_id) is not None
+    assert ccn_dict_of_obj.get(x2_bud._owner_id) is not None
+    assert ccn_dict_of_obj.get(x3_bud._owner_id) is not None
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud._owner_id)
     assert ccn2_bud._idearoot._label == x2_bud._idearoot._label

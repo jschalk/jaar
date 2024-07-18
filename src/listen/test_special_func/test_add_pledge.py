@@ -73,9 +73,9 @@ def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
     new_sue_voice = sue_hubunit.get_voice_bud()
     clean_idea = new_sue_voice.get_idea_obj(clean_road)
     print(f"{clean_idea._reasonunits.keys()=}")
-    assert clean_idea.get_reasonunit(house_estimation_road) != None
+    assert clean_idea.get_reasonunit(house_estimation_road) is not None
     house_reasonunit = clean_idea.get_reasonunit(house_estimation_road)
-    assert house_reasonunit.get_premise(dirty_road) != None
+    assert house_reasonunit.get_premise(dirty_road) is not None
 
 
 def test_add_voice_fact_CanAdd_factunit(env_dir_setup_cleanup):
@@ -97,5 +97,5 @@ def test_add_voice_fact_CanAdd_factunit(env_dir_setup_cleanup):
     # THEN
     new_sue_voice = sue_hubunit.get_voice_bud()
     assert new_sue_voice.idea_exists(dirty_road)
-    assert new_sue_voice.get_fact(house_estimation_road) != None
+    assert new_sue_voice.get_fact(house_estimation_road) is not None
     assert new_sue_voice.get_fact(house_estimation_road).pick == dirty_road

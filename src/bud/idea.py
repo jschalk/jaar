@@ -110,7 +110,7 @@ class IdeaAttrFilter:
         premise_denom,
         # premise_reest,
     ):
-        if self.reason_premise != None:
+        if self.reason_premise is not None:
             if self.reason_premise_open is None:
                 self.reason_premise_open = premise_open
             if self.reason_premise_nigh is None:
@@ -124,16 +124,19 @@ class IdeaAttrFilter:
 
     def has_numeric_attrs(self):
         return (
-            self.begin != None
-            or self.close != None
-            or self.numor != None
-            or self.numeric_road != None
-            or self.addin != None
+            self.begin is not None
+            or self.close is not None
+            or self.numor is not None
+            or self.numeric_road is not None
+            or self.addin is not None
         )
 
     def has_ratio_attrs(self):
         return (
-            self.denom != None or self.numor != None or self.reest or self.addin != None
+            self.denom is not None
+            or self.numor is not None
+            or self.reest
+            or self.addin is not None
         )
 
     def set_ratio_attr_defaults_if_none(self):
@@ -147,7 +150,7 @@ class IdeaAttrFilter:
             self.reest = False
 
     def has_reason_premise(self):
-        return self.reason_premise != None
+        return self.reason_premise is not None
 
 
 def ideaattrfilter_shop(
@@ -306,8 +309,8 @@ class IdeaUnit:
         for factunit in self._factunits.values():
             if (
                 factunit.base == factheir.base
-                and factunit.nigh != None
-                and factheir.open != None
+                and factunit.nigh is not None
+                and factheir.open is not None
             ) and factunit.nigh < factheir.open:
                 delete_factunit = True
 
@@ -506,16 +509,16 @@ class IdeaUnit:
     def set_idea_label(self, _label: str):
         if (
             self._root
-            and _label != None
+            and _label is not None
             and _label != self._bud_real_id
-            and self._bud_real_id != None
+            and self._bud_real_id is not None
         ):
             raise Idea_root_LabelNotEmptyException(
                 f"Cannot set idearoot to string different than '{self._bud_real_id}'"
             )
         elif self._root and self._bud_real_id is None:
             self._label = root_label()
-        # elif _label != None:
+        # elif _label is not None:
         else:
             self._label = _label
 
@@ -533,13 +536,13 @@ class IdeaUnit:
             old_delimiter=old_delimiter,
             new_delimiter=self._road_delimiter,
         )
-        if self._numeric_road != None:
+        if self._numeric_road is not None:
             self._numeric_road = replace_road_delimiter(
                 road=self._numeric_road,
                 old_delimiter=old_delimiter,
                 new_delimiter=self._road_delimiter,
             )
-        if self._range_source_road != None:
+        if self._range_source_road is not None:
             self._range_source_road = replace_road_delimiter(
                 road=self._range_source_road,
                 old_delimiter=old_delimiter,
@@ -582,13 +585,13 @@ class IdeaUnit:
         return self._originunit.get_dict()
 
     def _set_idea_attr(self, idea_attr: IdeaAttrFilter):
-        if idea_attr.weight != None:
+        if idea_attr.weight is not None:
             self._weight = idea_attr.weight
-        if idea_attr.uid != None:
+        if idea_attr.uid is not None:
             self._uid = idea_attr.uid
-        if idea_attr.reason != None:
+        if idea_attr.reason is not None:
             self.set_reasonunit(reason=idea_attr.reason)
-        if idea_attr.reason_base != None and idea_attr.reason_premise != None:
+        if idea_attr.reason_base is not None and idea_attr.reason_premise is not None:
             self.set_reason_premise(
                 base=idea_attr.reason_base,
                 premise=idea_attr.reason_premise,
@@ -597,50 +600,50 @@ class IdeaUnit:
                 divisor=idea_attr.reason_premise_divisor,
             )
         if (
-            idea_attr.reason_base != None
-            and idea_attr.reason_base_idea_active_requisite != None
+            idea_attr.reason_base is not None
+            and idea_attr.reason_base_idea_active_requisite is not None
         ):
             self.set_reason_base_idea_active_requisite(
                 base=idea_attr.reason_base,
                 base_idea_active_requisite=idea_attr.reason_base_idea_active_requisite,
             )
-        if idea_attr.doerunit != None:
+        if idea_attr.doerunit is not None:
             self._doerunit = idea_attr.doerunit
-        if idea_attr.healerhold != None:
+        if idea_attr.healerhold is not None:
             self._healerhold = idea_attr.healerhold
-        if idea_attr.begin != None:
+        if idea_attr.begin is not None:
             self._begin = idea_attr.begin
-        if idea_attr.close != None:
+        if idea_attr.close is not None:
             self._close = idea_attr.close
-        if idea_attr.addin != None:
+        if idea_attr.addin is not None:
             self._addin = idea_attr.addin
-        if idea_attr.numor != None:
+        if idea_attr.numor is not None:
             self._numor = idea_attr.numor
-        if idea_attr.denom != None:
+        if idea_attr.denom is not None:
             self._denom = idea_attr.denom
-        if idea_attr.reest != None:
+        if idea_attr.reest is not None:
             self._reest = idea_attr.reest
-        if idea_attr.numeric_road != None:
+        if idea_attr.numeric_road is not None:
             self._numeric_road = idea_attr.numeric_road
-        if idea_attr.range_source_road != None:
+        if idea_attr.range_source_road is not None:
             self._range_source_road = idea_attr.range_source_road
-        if idea_attr.descendant_pledge_count != None:
+        if idea_attr.descendant_pledge_count is not None:
             self._descendant_pledge_count = idea_attr.descendant_pledge_count
-        if idea_attr.all_char_cred != None:
+        if idea_attr.all_char_cred is not None:
             self._all_char_cred = idea_attr.all_char_cred
-        if idea_attr.all_char_debt != None:
+        if idea_attr.all_char_debt is not None:
             self._all_char_debt = idea_attr.all_char_debt
-        if idea_attr.awardlink != None:
+        if idea_attr.awardlink is not None:
             self.set_awardlink(awardlink=idea_attr.awardlink)
-        if idea_attr.awardlink_del != None:
+        if idea_attr.awardlink_del is not None:
             self.del_awardlink(lobby_id=idea_attr.awardlink_del)
-        if idea_attr.is_expanded != None:
+        if idea_attr.is_expanded is not None:
             self._is_expanded = idea_attr.is_expanded
-        if idea_attr.pledge != None:
+        if idea_attr.pledge is not None:
             self.pledge = idea_attr.pledge
-        if idea_attr.factunit != None:
+        if idea_attr.factunit is not None:
             self.set_factunit(idea_attr.factunit)
-        if idea_attr.problem_bool != None:
+        if idea_attr.problem_bool is not None:
             self._problem_bool = idea_attr.problem_bool
 
         self._del_reasonunit_all_cases(
@@ -651,15 +654,15 @@ class IdeaUnit:
 
     def _set_addin_to_zero_if_any_transformations_exist(self):
         if (
-            self._begin != None
-            and self._close != None
-            and (self._numor != None or self._denom != None)
+            self._begin is not None
+            and self._close is not None
+            and (self._numor is not None or self._denom is not None)
             and self._addin is None
         ):
             self._addin = 0
 
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
-        if base != None and premise != None:
+        if base is not None and premise is not None:
             self.del_reasonunit_premise(base=base, premise=premise)
             if len(self._reasonunits[base].premises) == 0:
                 self.del_reasonunit_base(base=base)
@@ -706,9 +709,9 @@ class IdeaUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, idea_kid):
-        if idea_kid._numor != None:
-            # if idea_kid._denom != None:
-            # if idea_kid._reest != None:
+        if idea_kid._numor is not None:
+            # if idea_kid._denom is not None:
+            # if idea_kid._reest is not None:
             if self._begin is None or self._close is None:
                 raise InvalidIdeaException(
                     f"Idea {idea_kid.get_road()} cannot have numor,denom,reest if parent does not have begin/close range"
@@ -792,7 +795,7 @@ class IdeaUnit:
         if (
             x_bool
             and bud_lobbyboxs != {}
-            and bud_owner_id != None
+            and bud_owner_id is not None
             and self._doerheir._lobbyholds != {}
         ):
             self._doerheir.set_owner_id_doer(bud_lobbyboxs, bud_owner_id)
@@ -831,9 +834,9 @@ class IdeaUnit:
             )
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            # if bud_idea_dict != None:
+            # if bud_idea_dict is not None:
             base_idea = bud_idea_dict.get(old_reasonheir.base)
-            if base_idea != None:
+            if base_idea is not None:
                 new_reasonheir.set_base_idea_active_value(base_idea._active)
 
             self._reasonheirs[new_reasonheir.base] = new_reasonheir
@@ -864,7 +867,7 @@ class IdeaUnit:
         return self._kids == {}
 
     def is_arithmetic(self):
-        return self._begin != None and self._close != None
+        return self._begin is not None and self._close is not None
 
     def is_awardheirless(self):
         x_bool = None
@@ -877,9 +880,9 @@ class IdeaUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {"_weight": self._weight}
 
-        if self._label != None:
+        if self._label is not None:
             x_dict["_label"] = self._label
-        if self._uid != None:
+        if self._uid is not None:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
             x_dict["_kids"] = self.get_kids_dict()
@@ -893,21 +896,21 @@ class IdeaUnit:
             x_dict["_awardlinks"] = self.get_awardlinks_dict()
         if self._originunit not in [None, originunit_shop()]:
             x_dict["_originunit"] = self.get_originunit_dict()
-        if self._begin != None:
+        if self._begin is not None:
             x_dict["_begin"] = self._begin
-        if self._close != None:
+        if self._close is not None:
             x_dict["_close"] = self._close
-        if self._addin != None:
+        if self._addin is not None:
             x_dict["_addin"] = self._addin
-        if self._numor != None:
+        if self._numor is not None:
             x_dict["_numor"] = self._numor
-        if self._denom != None:
+        if self._denom is not None:
             x_dict["_denom"] = self._denom
-        if self._reest != None:
+        if self._reest is not None:
             x_dict["_reest"] = self._reest
-        if self._range_source_road != None:
+        if self._range_source_road is not None:
             x_dict["_range_source_road"] = self._range_source_road
-        if self._numeric_road != None:
+        if self._numeric_road is not None:
             x_dict["_numeric_road"] = self._numeric_road
         if self.pledge:
             x_dict["pledge"] = self.pledge
@@ -1070,44 +1073,44 @@ def get_obj_from_idea_dict(x_dict: dict[str,], dict_key: str) -> any:
     if dict_key == "_reasonunits":
         return (
             reasons_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else None
         )
     elif dict_key == "_doerunit":
         return (
             doerunit_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else doerunit_shop()
         )
     elif dict_key == "_healerhold":
         return (
             healerhold_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else healerhold_shop()
         )
     elif dict_key == "_originunit":
         return (
             originunit_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else originunit_shop()
         )
     elif dict_key == "_factunits":
         return (
             factunits_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else factunits_get_from_dict({})
         )
     elif dict_key == "_awardlinks":
         return (
             awardlinks_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) != None
+            if x_dict.get(dict_key) is not None
             else awardlinks_get_from_dict({})
         )
     elif dict_key in {"_kids"}:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else {}
+        return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}
     elif dict_key in {"pledge", "_problem_bool"}:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else False
+        return x_dict[dict_key] if x_dict.get(dict_key) is not None else False
     elif dict_key in {"_is_expanded"}:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else True
+        return x_dict[dict_key] if x_dict.get(dict_key) is not None else True
     else:
-        return x_dict[dict_key] if x_dict.get(dict_key) != None else None
+        return x_dict[dict_key] if x_dict.get(dict_key) is not None else None

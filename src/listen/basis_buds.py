@@ -30,9 +30,9 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
     x_listen._chars = x_duty._chars
     x_listen.set_monetary_desc(x_duty._monetary_desc)
     x_listen.set_max_tree_traverse(x_duty._max_tree_traverse)
-    if x_duty._credor_respect != None:
+    if x_duty._credor_respect is not None:
         x_listen.set_credor_respect(x_duty._credor_respect)
-    if x_duty._debtor_respect != None:
+    if x_duty._debtor_respect is not None:
         x_listen.set_debtor_resepect(x_duty._debtor_respect)
     for x_charunit in x_listen._chars.values():
         x_charunit.reset_listen_calculated_attrs()

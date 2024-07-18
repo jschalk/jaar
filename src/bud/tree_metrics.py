@@ -51,12 +51,12 @@ class TreeMetrics:
                 self.reason_bases[reason.base] = self.reason_bases[reason.base] + 1
 
     def evaluate_awardlinks(self, awardlinks: dict[LobbyID, AwardLink]):
-        if awardlinks != None:
+        if awardlinks is not None:
             for awardlink in awardlinks.values():
                 self.awardlinks_metrics[awardlink.lobby_id] = awardlink
 
     def evaluate_uid_max(self, uid):
-        if uid != None and self.uid_max < uid:
+        if uid is not None and self.uid_max < uid:
             self.uid_max = uid
 
         if self.uid_dict.get(uid) is None:

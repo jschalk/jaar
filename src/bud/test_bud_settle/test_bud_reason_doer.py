@@ -37,7 +37,7 @@ def test_bud_idearoot_doerunit_CorrectlySets_idea_doerheir():
     x_doerheir.set_lobbyholds(
         parent_doerheir=None, doerunit=x_doerunit, bud_lobbyboxs=None
     )
-    assert tim_bud._idearoot._doerheir != None
+    assert tim_bud._idearoot._doerheir is not None
     assert tim_bud._idearoot._doerheir == x_doerheir
 
 
@@ -59,7 +59,7 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     bob_bud.settle_bud()
 
     # THEN
-    assert run_idea._doerheir != None
+    assert run_idea._doerheir is not None
     assert run_idea._doerheir._owner_id_doer
 
     x_doerheir = doerheir_shop()
@@ -92,7 +92,7 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     bob_bud.settle_bud()
 
     # THEN
-    assert run_idea._doerheir != None
+    assert run_idea._doerheir is not None
     assert run_idea._doerheir._owner_id_doer
 
     x_doerheir = doerheir_shop()
@@ -144,7 +144,7 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
         doerunit=x_doerunit,
         bud_lobbyboxs=sue_bud._lobbyboxs,
     )
-    assert four_idea._doerheir != None
+    assert four_idea._doerheir is not None
     assert four_idea._doerheir == x_doerheir
 
 

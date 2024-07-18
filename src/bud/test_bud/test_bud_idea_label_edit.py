@@ -151,9 +151,9 @@ def test_BudUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     r_idea_roses = yao_bud.get_idea_obj(old_roses_road)
     r_idea_bloomers = yao_bud.get_idea_obj(old_bloomers_road)
 
-    assert r_idea_bloomers._kids.get(roses_text) != None
+    assert r_idea_bloomers._kids.get(roses_text) is not None
     assert r_idea_roses._parent_road == old_bloomers_road
-    assert r_idea_roses._kids.get(red_text) != None
+    assert r_idea_roses._kids.get(red_text) is not None
     r_idea_red = r_idea_roses._kids.get(red_text)
     assert r_idea_red._parent_road == old_roses_road
 
@@ -163,16 +163,16 @@ def test_BudUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     yao_bud.edit_idea_label(old_road=old_casa_road, new_label=new_casa_text)
 
     # THEN
-    assert yao_bud._idearoot._kids.get(new_casa_text) != None
+    assert yao_bud._idearoot._kids.get(new_casa_text) is not None
     assert yao_bud._idearoot._kids.get(old_casa_text) is None
 
     assert r_idea_bloomers._parent_road == new_casa_road
-    assert r_idea_bloomers._kids.get(roses_text) != None
+    assert r_idea_bloomers._kids.get(roses_text) is not None
 
     r_idea_roses = r_idea_bloomers._kids.get(roses_text)
     new_bloomers_road = yao_bud.make_road(new_casa_road, bloomers_text)
     assert r_idea_roses._parent_road == new_bloomers_road
-    assert r_idea_roses._kids.get(red_text) != None
+    assert r_idea_roses._kids.get(red_text) is not None
     r_idea_red = r_idea_roses._kids.get(red_text)
     new_roses_road = yao_bud.make_road(new_bloomers_road, roses_text)
     assert r_idea_red._parent_road == new_roses_road
@@ -200,7 +200,7 @@ def test_bud_edit_idea_label_Modifies_factunits():
     yao_bud.set_fact(base=old_water_road, pick=old_rain_road)
 
     idea_x = yao_bud.get_idea_obj(roses_road)
-    assert yao_bud._idearoot._factunits[old_water_road] != None
+    assert yao_bud._idearoot._factunits[old_water_road] is not None
     old_water_rain_factunit = yao_bud._idearoot._factunits[old_water_road]
     assert old_water_rain_factunit.base == old_water_road
     assert old_water_rain_factunit.pick == old_rain_road
@@ -214,7 +214,7 @@ def test_bud_edit_idea_label_Modifies_factunits():
 
     # THEN
     assert yao_bud._idearoot._factunits.get(old_water_road) is None
-    assert yao_bud._idearoot._factunits.get(new_water_road) != None
+    assert yao_bud._idearoot._factunits.get(new_water_road) is not None
     new_water_rain_factunit = yao_bud._idearoot._factunits[new_water_road]
     assert new_water_rain_factunit.base == new_water_road
     new_rain_road = yao_bud.make_road(new_water_road, rain_text)
@@ -293,10 +293,10 @@ def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
     # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.need: wed_premise})
     # nation_reason = reasonunit_shop(nationstate, premises={usa_premise.need: usa_premise})
     assert len(casa_idea._reasonunits) == 2
-    assert casa_idea._reasonunits.get(old_weekday_road) != None
+    assert casa_idea._reasonunits.get(old_weekday_road) is not None
     wednesday_idea = sue_bud.get_idea_obj(old_weekday_road)
     casa_weekday_reason = casa_idea._reasonunits.get(old_weekday_road)
-    assert casa_weekday_reason.premises.get(old_wednesday_road) != None
+    assert casa_weekday_reason.premises.get(old_wednesday_road) is not None
     assert (
         casa_weekday_reason.premises.get(old_wednesday_road).need == old_wednesday_road
     )
@@ -317,10 +317,10 @@ def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
     print(f"AFTER {wednesday_idea._parent_road=}")
 
     # THEN
-    assert casa_idea._reasonunits.get(new_weekday_road) != None
+    assert casa_idea._reasonunits.get(new_weekday_road) is not None
     assert casa_idea._reasonunits.get(old_weekday_road) is None
     casa_weekday_reason = casa_idea._reasonunits.get(new_weekday_road)
-    assert casa_weekday_reason.premises.get(new_wednesday_road) != None
+    assert casa_weekday_reason.premises.get(new_wednesday_road) is not None
     assert (
         casa_weekday_reason.premises.get(new_wednesday_road).need == new_wednesday_road
     )
@@ -431,9 +431,9 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
     comma_casa_road = zia_bud.make_l1_road(casa_text)
     zia_bud.edit_idea_attr(road=comma_casa_road, reason=comma_time_reasonunit)
     casa_idea = zia_bud.get_idea_obj(comma_casa_road)
-    assert casa_idea._reasonunits.get(comma_time_road) != None
+    assert casa_idea._reasonunits.get(comma_time_road) is not None
     gen_time_reasonunit = casa_idea._reasonunits.get(comma_time_road)
-    assert gen_time_reasonunit.premises.get(comma_8am_road) != None
+    assert gen_time_reasonunit.premises.get(comma_8am_road) is not None
 
     # WHEN
     slash_text = "/"
@@ -446,9 +446,9 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
     casa_idea = zia_bud.get_idea_obj(slash_casa_road)
     slash_time_road = zia_bud.make_l1_road(time_text)
     slash_8am_road = zia_bud.make_road(slash_time_road, _8am_text)
-    assert casa_idea._reasonunits.get(slash_time_road) != None
+    assert casa_idea._reasonunits.get(slash_time_road) is not None
     gen_time_reasonunit = casa_idea._reasonunits.get(slash_time_road)
-    assert gen_time_reasonunit.premises.get(slash_8am_road) != None
+    assert gen_time_reasonunit.premises.get(slash_8am_road) is not None
 
     assert casa_idea._reasonunits.get(comma_time_road) is None
     assert gen_time_reasonunit.premises.get(comma_8am_road) is None
@@ -469,7 +469,7 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     zia_bud.edit_idea_attr(comma_casa_road, factunit=comma_time_factunit)
     casa_idea = zia_bud.get_idea_obj(comma_casa_road)
     print(f"{casa_idea._factunits=} {comma_time_road=}")
-    assert casa_idea._factunits.get(comma_time_road) != None
+    assert casa_idea._factunits.get(comma_time_road) is not None
     gen_time_factunit = casa_idea._factunits.get(comma_time_road)
 
     # WHEN
@@ -482,11 +482,11 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     casa_idea = zia_bud.get_idea_obj(slash_casa_road)
     slash_time_road = zia_bud.make_l1_road(time_text)
     slash_8am_road = zia_bud.make_road(slash_time_road, _8am_text)
-    assert casa_idea._factunits.get(slash_time_road) != None
+    assert casa_idea._factunits.get(slash_time_road) is not None
     gen_time_factunit = casa_idea._factunits.get(slash_time_road)
-    assert gen_time_factunit.base != None
+    assert gen_time_factunit.base is not None
     assert gen_time_factunit.base == slash_time_road
-    assert gen_time_factunit.pick != None
+    assert gen_time_factunit.pick is not None
     assert gen_time_factunit.pick == slash_8am_road
 
     assert casa_idea._factunits.get(comma_time_road) is None

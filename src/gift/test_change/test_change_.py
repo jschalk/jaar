@@ -60,7 +60,7 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     x_category_atomunit = x_update_dict.get(category)
     print(f"{x_category_atomunit=}")
     assert x_category_atomunit == bud_weight_atomunit
-    assert bud_weight_atomunit.atom_order != None
+    assert bud_weight_atomunit.atom_order is not None
 
 
 def test_ChangeUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
@@ -121,7 +121,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     assert len(ex1_changeunit.atomunits) == 1
     x_update_dict = ex1_changeunit.atomunits.get(atom_update())
     x_atomunit = x_update_dict.get(budunit_text)
-    assert x_atomunit != None
+    assert x_atomunit is not None
     assert x_atomunit.category == budunit_text
 
 
@@ -155,7 +155,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnit_charunits():
     assert len(ex1_changeunit.atomunits) == 1
     assert (
         ex1_changeunit.atomunits.get(atom_insert()).get(charunit_text).get(bob_text)
-        != None
+        is not None
     )
 
 
@@ -273,11 +273,11 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     bud_charunit_text = "bud_charunit"
     update_dict = ex1_changeunit.atomunits.get(atom_update())
     assert len(update_dict.keys()) == 1
-    assert update_dict.get(budunit_text) != None
+    assert update_dict.get(budunit_text) is not None
     print(f"atom_order 28 {ex1_changeunit.atomunits.get(atom_update()).keys()=}")
     delete_dict = ex1_changeunit.atomunits.get(atom_delete())
     assert len(delete_dict.keys()) == 1
-    assert delete_dict.get(bud_charunit_text) != None
+    assert delete_dict.get(bud_charunit_text) is not None
     print(f"atom_order 26 {ex1_changeunit.atomunits.get(atom_delete()).keys()=}")
 
     # WHEN

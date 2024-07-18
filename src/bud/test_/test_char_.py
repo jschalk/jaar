@@ -13,8 +13,8 @@ def test_CharUnit_exists():
 
     # THEN
     print(f"{bob_text}")
-    assert bob_charunit != None
-    assert bob_charunit.char_id != None
+    assert bob_charunit is not None
+    assert bob_charunit.char_id is not None
     assert bob_charunit.char_id == bob_text
     assert bob_charunit.credor_weight is None
     assert bob_charunit.debtor_weight is None

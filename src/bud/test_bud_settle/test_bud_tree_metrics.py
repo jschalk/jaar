@@ -12,10 +12,10 @@ def test_BudUnit_get_tree_metrics_exists():
     zia_bud_tree_metrics = zia_bud.get_tree_metrics()
 
     # THEN
-    assert zia_bud_tree_metrics.node_count != None
-    assert zia_bud_tree_metrics.reason_bases != None
-    assert zia_bud_tree_metrics.level_count != None
-    assert zia_bud_tree_metrics.awardlinks_metrics != None
+    assert zia_bud_tree_metrics.node_count is not None
+    assert zia_bud_tree_metrics.reason_bases is not None
+    assert zia_bud_tree_metrics.level_count is not None
+    assert zia_bud_tree_metrics.awardlinks_metrics is not None
 
 
 def test_BudUnit_get_tree_metrics_get_idea_uid_max_correctlyGetsMaxIdeaUID():
@@ -75,7 +75,7 @@ def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
     zia_bud.set_all_idea_uids_unique()
 
     # THEN
-    assert zia_bud.get_idea_obj(swim_road)._uid != None
+    assert zia_bud.get_idea_obj(swim_road)._uid is not None
 
 
 def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():

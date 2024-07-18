@@ -71,8 +71,8 @@ def test_CharUnit_get_lobbyship_ReturnsCorrectObj():
     yao_charunit.set_lobbyship(lobbyship_shop(fly_text, 23, 5))
 
     # WHEN / THEN
-    assert yao_charunit.get_lobbyship(run_text) != None
-    assert yao_charunit.get_lobbyship(fly_text) != None
+    assert yao_charunit.get_lobbyship(run_text) is not None
+    assert yao_charunit.get_lobbyship(fly_text) is not None
     climb_text = ",climbers"
     assert yao_charunit.get_lobbyship(climb_text) is None
 
@@ -180,7 +180,7 @@ def test_CharUnit_add_lobbyship_SetsAttrCorrectly():
     yao_charunit.add_lobbyship(run_text, run_credor_weight, run_debtor_weight)
 
     # THEN
-    assert yao_charunit.get_lobbyship(run_text) != None
+    assert yao_charunit.get_lobbyship(run_text) is not None
     run_lobbyship = yao_charunit.get_lobbyship(run_text)
     assert run_lobbyship.credor_weight == run_credor_weight
     assert run_lobbyship.debtor_weight == run_debtor_weight

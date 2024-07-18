@@ -319,8 +319,8 @@ def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
     y1_giftunit = sue_hubunit.get_giftunit(x1_giftunit._gift_id)
 
     # THEN
-    assert y0_giftunit != None
-    assert y1_giftunit != None
+    assert y0_giftunit is not None
+    assert y1_giftunit is not None
     assert yao_text in y0_giftunit._face_id
     assert bob_text not in y0_giftunit._face_id
     assert bob_text in y1_giftunit._face_id

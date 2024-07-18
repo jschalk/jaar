@@ -253,7 +253,7 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     assert yao_dst.idea_exists(dirty_road)
     assert yao_dst.idea_exists(rain_road)
     assert yao_dst.idea_exists(snow_road)
-    assert yao_dst.get_fact(weather_road) != None
-    assert yao_dst.get_fact(status_road) != None
+    assert yao_dst.get_fact(weather_road) is not None
+    assert yao_dst.get_fact(status_road) is not None
     assert yao_dst.get_fact(weather_road).pick == rain_road
     assert yao_dst.get_fact(status_road).pick == clean_road

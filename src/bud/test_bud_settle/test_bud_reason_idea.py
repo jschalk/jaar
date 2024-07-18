@@ -33,9 +33,9 @@ def test_BudUnit_ReasonUnits_create():
 
     # THEN
     casa_idea = x_bud.get_idea_obj(casa_road)
-    assert casa_idea._reasonunits != None
+    assert casa_idea._reasonunits is not None
     print(casa_idea._reasonunits)
-    assert casa_idea._reasonunits[weekday_road] != None
+    assert casa_idea._reasonunits[weekday_road] is not None
     assert casa_idea._reasonunits[weekday_road] == casa_wk_reason
 
 
@@ -114,9 +114,9 @@ def test_BudUnit_set_reasonunits_status():
 
     # THEN
     casa_idea = x_bud.get_idea_obj(casa_road)
-    assert casa_idea._reasonunits != None
+    assert casa_idea._reasonunits is not None
     print(casa_idea._reasonunits)
-    assert casa_idea._reasonunits[weekday_road] != None
+    assert casa_idea._reasonunits[weekday_road] is not None
     assert casa_idea._reasonunits[weekday_road] == casa_wk_reason
 
 
@@ -162,7 +162,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     casa_idea = x_bud.get_idea_obj(casa_road)
     assert casa_idea._reasonunits != {}
     # print(casa_idea._reasonunits)
-    assert casa_idea._reasonunits[week_road] != None
+    assert casa_idea._reasonunits[week_road] is not None
     assert casa_idea._reasonunits[week_road] == casa_wk_build_reasonunit
     try:
         casa_idea._reasonheirs[week_road]
@@ -348,9 +348,9 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
 
     # THEN
     casa_idea1 = x_bud.get_idea_obj(casa_road)
-    assert casa_idea1._reasonunits != None
+    assert casa_idea1._reasonunits is not None
     print(casa_idea1._reasonunits)
-    assert casa_idea1._reasonunits[week_road] != None
+    assert casa_idea1._reasonunits[week_road] is not None
     assert casa_idea1._reasonunits[week_road].premises[wed_road].open is None
     assert casa_idea1._reasonunits[week_road].premises[wed_road].nigh is None
 
@@ -429,7 +429,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
 
     # THEN
     casa_idea1 = x_bud.get_idea_obj(casa_road)
-    assert casa_idea1._reasonunits[time_road] != None
+    assert casa_idea1._reasonunits[time_road] is not None
     assert casa_idea1._reasonunits[time_road].premises[week_road].divisor == 7
     assert casa_idea1._reasonunits[time_road].premises[week_road].open == 2
     assert casa_idea1._reasonunits[time_road].premises[week_road].nigh == 5
@@ -459,7 +459,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh()
 
     # THEN
     casa_idea1 = x_bud.get_idea_obj(casa_road)
-    assert casa_idea1._reasonunits[time_road] != None
+    assert casa_idea1._reasonunits[time_road] is not None
     assert casa_idea1._reasonunits[time_road].premises[rus_war_road].divisor is None
     assert casa_idea1._reasonunits[time_road].premises[rus_war_road].open == 22
     assert casa_idea1._reasonunits[time_road].premises[rus_war_road].nigh == 34

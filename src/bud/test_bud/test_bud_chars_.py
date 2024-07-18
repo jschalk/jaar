@@ -49,7 +49,7 @@ def test_BudUnit_set_char_DoesSet_char_id_lobbyship():
 
     # THEN
     zia_zia_lobbyship = yao_bud.get_char(zia_text).get_lobbyship(zia_text)
-    assert zia_zia_lobbyship != None
+    assert zia_zia_lobbyship is not None
     assert zia_zia_lobbyship.credor_weight == 1
     assert zia_zia_lobbyship.debtor_weight == 1
 
@@ -70,7 +70,7 @@ def test_BudUnit_set_char_DoesNotOverRide_char_id_lobbyship():
 
     # THEN
     zia_ohio_lobbyship = yao_bud.get_char(zia_text).get_lobbyship(ohio_text)
-    assert zia_ohio_lobbyship != None
+    assert zia_ohio_lobbyship is not None
     assert zia_ohio_lobbyship.credor_weight == zia_ohio_credor_w
     assert zia_ohio_lobbyship.debtor_weight == zia_ohio_debtor_w
     zia_zia_lobbyship = yao_bud.get_char(zia_text).get_lobbyship(zia_text)

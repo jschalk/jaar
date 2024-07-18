@@ -69,107 +69,107 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     bud_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
-    if budunit_atom != None:
+    if budunit_atom is not None:
         add_budunit_legible_list(leg_list, budunit_atom, x_bud)
-    if charunit_insert_dict != None:
+    if charunit_insert_dict is not None:
         add_bud_charunit_insert_to_legible_list(leg_list, charunit_insert_dict, x_bud)
-    if charunit_update_dict != None:
+    if charunit_update_dict is not None:
         add_bud_charunit_update_to_legible_list(leg_list, charunit_update_dict, x_bud)
-    if charunit_delete_dict != None:
+    if charunit_delete_dict is not None:
         add_bud_charunit_delete_to_legible_list(leg_list, charunit_delete_dict, x_bud)
 
-    if char_lobbyship_insert_dict != None:
+    if char_lobbyship_insert_dict is not None:
         add_bud_char_lobbyship_insert_to_legible_list(
             leg_list, char_lobbyship_insert_dict, x_bud
         )
-    if char_lobbyship_update_dict != None:
+    if char_lobbyship_update_dict is not None:
         add_bud_char_lobbyship_update_to_legible_list(
             leg_list, char_lobbyship_update_dict, x_bud
         )
-    if char_lobbyship_delete_dict != None:
+    if char_lobbyship_delete_dict is not None:
         add_bud_char_lobbyship_delete_to_legible_list(
             leg_list, char_lobbyship_delete_dict, x_bud
         )
 
-    if bud_ideaunit_insert_dict != None:
+    if bud_ideaunit_insert_dict is not None:
         add_bud_ideaunit_insert_to_legible_list(
             leg_list, bud_ideaunit_insert_dict, x_bud
         )
-    if bud_ideaunit_update_dict != None:
+    if bud_ideaunit_update_dict is not None:
         add_bud_ideaunit_update_to_legible_list(
             leg_list, bud_ideaunit_update_dict, x_bud
         )
-    if bud_ideaunit_delete_dict != None:
+    if bud_ideaunit_delete_dict is not None:
         add_bud_ideaunit_delete_to_legible_list(
             leg_list, bud_ideaunit_delete_dict, x_bud
         )
 
-    if bud_idea_awardlink_insert_dict != None:
+    if bud_idea_awardlink_insert_dict is not None:
         add_bud_idea_awardlink_insert_to_legible_list(
             leg_list, bud_idea_awardlink_insert_dict, x_bud
         )
-    if bud_idea_awardlink_update_dict != None:
+    if bud_idea_awardlink_update_dict is not None:
         add_bud_idea_awardlink_update_to_legible_list(
             leg_list, bud_idea_awardlink_update_dict, x_bud
         )
-    if bud_idea_awardlink_delete_dict != None:
+    if bud_idea_awardlink_delete_dict is not None:
         add_bud_idea_awardlink_delete_to_legible_list(
             leg_list, bud_idea_awardlink_delete_dict, x_bud
         )
 
-    if bud_idea_reasonunit_insert_dict != None:
+    if bud_idea_reasonunit_insert_dict is not None:
         add_bud_idea_reasonunit_insert_to_legible_list(
             leg_list, bud_idea_reasonunit_insert_dict, x_bud
         )
-    if bud_idea_reasonunit_update_dict != None:
+    if bud_idea_reasonunit_update_dict is not None:
         add_bud_idea_reasonunit_update_to_legible_list(
             leg_list, bud_idea_reasonunit_update_dict, x_bud
         )
-    if bud_idea_reasonunit_delete_dict != None:
+    if bud_idea_reasonunit_delete_dict is not None:
         add_bud_idea_reasonunit_delete_to_legible_list(
             leg_list, bud_idea_reasonunit_delete_dict, x_bud
         )
 
-    if bud_idea_reason_premiseunit_insert_dict != None:
+    if bud_idea_reason_premiseunit_insert_dict is not None:
         add_bud_reason_premiseunit_insert_to_legible_list(
             leg_list, bud_idea_reason_premiseunit_insert_dict, x_bud
         )
-    if bud_idea_reason_premiseunit_update_dict != None:
+    if bud_idea_reason_premiseunit_update_dict is not None:
         add_bud_reason_premiseunit_update_to_legible_list(
             leg_list, bud_idea_reason_premiseunit_update_dict, x_bud
         )
-    if bud_idea_reason_premiseunit_delete_dict != None:
+    if bud_idea_reason_premiseunit_delete_dict is not None:
         add_bud_reason_premiseunit_delete_to_legible_list(
             leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
         )
 
-    if bud_idea_lobbyhold_insert_dict != None:
+    if bud_idea_lobbyhold_insert_dict is not None:
         add_bud_idea_lobbyhold_insert_to_legible_list(
             leg_list, bud_idea_lobbyhold_insert_dict, x_bud
         )
-    if bud_idea_lobbyhold_delete_dict != None:
+    if bud_idea_lobbyhold_delete_dict is not None:
         add_bud_idea_lobbyhold_delete_to_legible_list(
             leg_list, bud_idea_lobbyhold_delete_dict, x_bud
         )
 
-    if bud_idea_healerhold_insert_dict != None:
+    if bud_idea_healerhold_insert_dict is not None:
         add_bud_idea_healerhold_insert_to_legible_list(
             leg_list, bud_idea_healerhold_insert_dict, x_bud
         )
-    if bud_idea_healerhold_delete_dict != None:
+    if bud_idea_healerhold_delete_dict is not None:
         add_bud_idea_healerhold_delete_to_legible_list(
             leg_list, bud_idea_healerhold_delete_dict, x_bud
         )
 
-    if bud_idea_factunit_insert_dict != None:
+    if bud_idea_factunit_insert_dict is not None:
         add_bud_idea_factunit_insert_to_legible_list(
             leg_list, bud_idea_factunit_insert_dict, x_bud
         )
-    if bud_idea_factunit_update_dict != None:
+    if bud_idea_factunit_update_dict is not None:
         add_bud_idea_factunit_update_to_legible_list(
             leg_list, bud_idea_factunit_update_dict, x_bud
         )
-    if bud_idea_factunit_delete_dict != None:
+    if bud_idea_factunit_delete_dict is not None:
         add_bud_idea_factunit_delete_to_legible_list(
             leg_list, bud_idea_factunit_delete_dict, x_bud
         )
@@ -195,31 +195,31 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     if x_monetary_desc is None:
         x_monetary_desc = f"{x_bud._owner_id}'s monetary_desc"
 
-    if _max_tree_traverse_value != None:
+    if _max_tree_traverse_value is not None:
         legible_list.append(
             f"{x_bud._owner_id}'s maximum number of Bud output evaluations transited to {_max_tree_traverse_value}"
         )
-    if _monetary_desc_value != None:
+    if _monetary_desc_value is not None:
         legible_list.append(
             f"{x_bud._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
         )
     if (
-        _credor_respect_value != None
-        and _debtor_respect_value != None
+        _credor_respect_value is not None
+        and _debtor_respect_value is not None
         and _credor_respect_value == _debtor_respect_value
     ):
         legible_list.append(
             f"{x_monetary_desc} total pool is now {_credor_respect_value}"
         )
-    elif _credor_respect_value != None:
+    elif _credor_respect_value is not None:
         legible_list.append(
             f"{x_monetary_desc} credor pool is now {_credor_respect_value}"
         )
-    elif _debtor_respect_value != None:
+    elif _debtor_respect_value is not None:
         legible_list.append(
             f"{x_monetary_desc} debtor pool is now {_debtor_respect_value}"
         )
-    if _weight_value != None:
+    if _weight_value is not None:
         legible_list.append(
             f"{x_bud._owner_id}'s bud weight was transited to {_weight_value}"
         )
@@ -249,11 +249,11 @@ def add_bud_charunit_update_to_legible_list(
         char_id = charunit_atom.get_value("char_id")
         credor_weight_value = charunit_atom.get_value("credor_weight")
         debtor_weight_value = charunit_atom.get_value("debtor_weight")
-        if credor_weight_value != None and debtor_weight_value != None:
+        if credor_weight_value is not None and debtor_weight_value is not None:
             x_str = f"{char_id} now has {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt."
-        elif credor_weight_value != None and debtor_weight_value is None:
+        elif credor_weight_value is not None and debtor_weight_value is None:
             x_str = f"{char_id} now has {credor_weight_value} {x_monetary_desc} cred."
-        elif credor_weight_value is None and debtor_weight_value != None:
+        elif credor_weight_value is None and debtor_weight_value is not None:
             x_str = f"{char_id} now has {debtor_weight_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
@@ -291,11 +291,11 @@ def add_bud_char_lobbyship_update_to_legible_list(
             char_id = char_lobbyship_atom.get_value("char_id")
             credor_weight_value = char_lobbyship_atom.get_value("credor_weight")
             debtor_weight_value = char_lobbyship_atom.get_value("debtor_weight")
-            if credor_weight_value != None and debtor_weight_value != None:
+            if credor_weight_value is not None and debtor_weight_value is not None:
                 x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
-            elif credor_weight_value != None and debtor_weight_value is None:
+            elif credor_weight_value is not None and debtor_weight_value is None:
                 x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value}."
-            elif credor_weight_value is None and debtor_weight_value != None:
+            elif credor_weight_value is None and debtor_weight_value is not None:
                 x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
@@ -345,27 +345,27 @@ def add_bud_ideaunit_insert_to_legible_list(
             x_str = (
                 f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
             )
-            if _addin_value != None:
+            if _addin_value is not None:
                 x_str += f"_addin={_addin_value}."
-            if _begin_value != None:
+            if _begin_value is not None:
                 x_str += f"_begin={_begin_value}."
-            if _close_value != None:
+            if _close_value is not None:
                 x_str += f"_close={_close_value}."
-            if _denom_value != None:
+            if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value != None:
+            if _numeric_road_value is not None:
                 x_str += f"_numeric_road={_numeric_road_value}."
-            if _numor_value != None:
+            if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
-            if _problem_bool_value != None:
+            if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _range_source_road_value != None:
+            if _range_source_road_value is not None:
                 x_str += f"_range_source_road={_range_source_road_value}."
-            if _reest_value != None:
+            if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value != None:
+            if _weight_value is not None:
                 x_str += f"_weight={_weight_value}."
-            if pledge_value != None:
+            if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
             legible_list.append(x_str)
@@ -403,27 +403,27 @@ def add_bud_ideaunit_update_to_legible_list(
             _weight_value = ideaunit_atom.get_value(_weight_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
-            if _addin_value != None:
+            if _addin_value is not None:
                 x_str += f"_addin={_addin_value}."
-            if _begin_value != None:
+            if _begin_value is not None:
                 x_str += f"_begin={_begin_value}."
-            if _close_value != None:
+            if _close_value is not None:
                 x_str += f"_close={_close_value}."
-            if _denom_value != None:
+            if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value != None:
+            if _numeric_road_value is not None:
                 x_str += f"_numeric_road={_numeric_road_value}."
-            if _numor_value != None:
+            if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
-            if _problem_bool_value != None:
+            if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _range_source_road_value != None:
+            if _range_source_road_value is not None:
                 x_str += f"_range_source_road={_range_source_road_value}."
-            if _reest_value != None:
+            if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value != None:
+            if _weight_value is not None:
                 x_str += f"_weight={_weight_value}."
-            if pledge_value != None:
+            if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
             legible_list.append(x_str)
@@ -464,11 +464,11 @@ def add_bud_idea_awardlink_update_to_legible_list(
             road_value = idea_awardlink_atom.get_value("road")
             give_weight_value = idea_awardlink_atom.get_value("give_weight")
             take_weight_value = idea_awardlink_atom.get_value("take_weight")
-            if give_weight_value != None and take_weight_value != None:
+            if give_weight_value is not None and take_weight_value is not None:
                 x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value} and take_weight={take_weight_value}."
-            elif give_weight_value != None and take_weight_value is None:
+            elif give_weight_value is not None and take_weight_value is None:
                 x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value}."
-            elif give_weight_value is None and take_weight_value != None:
+            elif give_weight_value is None and take_weight_value is not None:
                 x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_weight={take_weight_value}."
             legible_list.append(x_str)
 
@@ -497,7 +497,7 @@ def add_bud_idea_reasonunit_insert_to_legible_list(
             x_str = (
                 f"ReasonUnit created for idea '{road_value}' with base '{base_value}'."
             )
-            if base_idea_active_requisite_value != None:
+            if base_idea_active_requisite_value is not None:
                 x_str += (
                     f" base_idea_active_requisite={base_idea_active_requisite_value}."
                 )
@@ -514,7 +514,7 @@ def add_bud_idea_reasonunit_update_to_legible_list(
             base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
                 "base_idea_active_requisite"
             )
-            if base_idea_active_requisite_value != None:
+            if base_idea_active_requisite_value is not None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
             elif base_idea_active_requisite_value is None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' and no longer checks base active mode."
@@ -553,11 +553,11 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
                 nigh_value = idea_reason_premiseunit_atom.get_value(nigh_text)
                 open_value = idea_reason_premiseunit_atom.get_value(open_text)
                 x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for idea '{road_value}'."
-                if open_value != None:
+                if open_value is not None:
                     x_str += f" Open={open_value}."
-                if nigh_value != None:
+                if nigh_value is not None:
                     x_str += f" Nigh={nigh_value}."
-                if divisor_value != None:
+                if divisor_value is not None:
                     x_str += f" Divisor={divisor_value}."
                 legible_list.append(x_str)
 
@@ -583,11 +583,11 @@ def add_bud_reason_premiseunit_update_to_legible_list(
                 nigh_value = idea_reason_premiseunit_atom.get_value(nigh_text)
                 open_value = idea_reason_premiseunit_atom.get_value(open_text)
                 x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for idea '{road_value}'."
-                if open_value != None:
+                if open_value is not None:
                     x_str += f" Open={open_value}."
-                if nigh_value != None:
+                if nigh_value is not None:
                     x_str += f" Nigh={nigh_value}."
-                if divisor_value != None:
+                if divisor_value is not None:
                     x_str += f" Divisor={divisor_value}."
                 legible_list.append(x_str)
 
@@ -670,9 +670,9 @@ def add_bud_idea_factunit_insert_to_legible_list(
             nigh_value = idea_factunit_atom.get_value(nigh_text)
             open_value = idea_factunit_atom.get_value(open_text)
             x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for idea '{road_value}'."
-            if open_value != None:
+            if open_value is not None:
                 x_str += f" Open={open_value}."
-            if nigh_value != None:
+            if nigh_value is not None:
                 x_str += f" Nigh={nigh_value}."
             legible_list.append(x_str)
 
@@ -693,9 +693,9 @@ def add_bud_idea_factunit_update_to_legible_list(
             nigh_value = idea_factunit_atom.get_value(nigh_text)
             open_value = idea_factunit_atom.get_value(open_text)
             x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for idea '{road_value}'."
-            if open_value != None:
+            if open_value is not None:
                 x_str += f" Open={open_value}."
-            if nigh_value != None:
+            if nigh_value is not None:
                 x_str += f" Nigh={nigh_value}."
             legible_list.append(x_str)
 

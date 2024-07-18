@@ -271,7 +271,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLineestorFromRootCorrectly():
     x_bud.settle_bud()
 
     # THEN
-    assert x_bud._idearoot._awardheirs.get(sue_text) != None
+    assert x_bud._idearoot._awardheirs.get(sue_text) is not None
     assert x_bud._idearoot._awardheirs.get(sue_text).lobby_id == sue_text
     assert x_bud._idearoot._awardlines != {}
     root_idea = x_bud.get_idea_obj(road=x_bud._idearoot._label)

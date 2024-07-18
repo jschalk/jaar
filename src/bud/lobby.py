@@ -32,11 +32,11 @@ class LobbyShip(LobbyCore):
     _char_id: CharID = None
 
     def set_credor_weight(self, x_credor_weight: float):
-        if x_credor_weight != None:
+        if x_credor_weight is not None:
             self.credor_weight = x_credor_weight
 
     def set_debtor_weight(self, x_debtor_weight: float):
-        if x_debtor_weight != None:
+        if x_debtor_weight is not None:
             self.debtor_weight = x_debtor_weight
 
     def get_dict(self) -> dict[str, str]:
@@ -235,7 +235,7 @@ class LobbyBox(LobbyCore):
         return self._lobbyships.get(x_char_id)
 
     def lobbyship_exists(self, x_char_id: CharID) -> bool:
-        return self.get_lobbyship(x_char_id) != None
+        return self.get_lobbyship(x_char_id) is not None
 
     def del_lobbyship(self, char_id):
         self._lobbyships.pop(char_id)

@@ -271,7 +271,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
     x_s = default_road_delimiter_if_none()
     old_seasons_road = f"{root_label()}{x_s}casa{x_s}seasons"
     old_dict_x = {old_seasons_road: EmptyObj(old_seasons_road)}
-    assert old_dict_x.get(old_seasons_road) != None
+    assert old_dict_x.get(old_seasons_road) is not None
 
     # WHEN
     new_seasons_road = f"{root_label()}{x_s}casa{x_s}kookies"
@@ -282,7 +282,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
     assert new_dict_x != {}
     assert len(new_dict_x) == 1
     print(f"{new_dict_x=}")
-    assert new_dict_x.get(new_seasons_road) != None
+    assert new_dict_x.get(new_seasons_road) is not None
     assert new_dict_x.get(old_seasons_road) is None
 
 
@@ -301,7 +301,7 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
 
     # THEN
     print(f"{texas_road=}")
-    assert x_roads != None
+    assert x_roads is not None
     texas_ancestor_roads = [
         texas_road,
         usa_road,
@@ -331,7 +331,7 @@ def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
 
     # THEN
     print(f"{texas_road=}")
-    assert x_roads != None
+    assert x_roads is not None
     texas_forefather_roads = {
         nation_road: None,
         usa_road: None,
@@ -639,5 +639,5 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObjWhereSlashNotDelimiterEdgeCase
 
 def test_LobbyID_exists():
     bikers_lobby_id = LobbyID("bikers")
-    assert bikers_lobby_id != None
+    assert bikers_lobby_id is not None
     assert str(type(bikers_lobby_id)).find("src._road.road.LobbyID") > 0

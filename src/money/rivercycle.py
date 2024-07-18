@@ -66,7 +66,7 @@ class RiverCycle:
 
     def set_riverbook(self, book_char_id: CharID, book_money_amount: float):
         owner_credorledger = self.econ_credorledgers.get(book_char_id)
-        if owner_credorledger != None:
+        if owner_credorledger is not None:
             x_riverbook = create_riverbook(
                 hubunit=self.hubunit,
                 owner_id=book_char_id,
@@ -152,7 +152,7 @@ class RiverGrade:
 
     def set_tax_paid_bool(self):
         self.tax_paid_bool = (
-            self.tax_bill_amount != None
+            self.tax_bill_amount is not None
             and self.tax_bill_amount == self.tax_paid_amount
         )
 

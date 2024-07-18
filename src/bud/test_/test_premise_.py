@@ -633,7 +633,7 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndOpen_Nigh():
     premise_dict = week_premise.get_dict()
 
     # THEN
-    assert premise_dict != None
+    assert premise_dict is not None
     static_dict = {"need": week_road, "open": 1, "nigh": 1, "divisor": 6}
     assert premise_dict == static_dict
 
@@ -650,7 +650,7 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithOpenAndNigh():
     premise_dict = week_premise.get_dict()
 
     # THEN
-    assert premise_dict != None
+    assert premise_dict is not None
     static_dict = {"need": week_road, "open": 1, "nigh": 4}
     assert premise_dict == static_dict
 
@@ -667,7 +667,7 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithOnlyRoadUnit():
     premise_dict = week_premise.get_dict()
 
     # THEN
-    assert premise_dict != None
+    assert premise_dict is not None
     static_dict = {"need": week_road}
     assert premise_dict == static_dict
 

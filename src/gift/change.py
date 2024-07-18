@@ -50,11 +50,11 @@ class ChangeUnit:
 
         ordered_list = []
         for x_list in atom_order_key_dict.values():
-            if x_list[0].required_args.get("parent_road") != None:
+            if x_list[0].required_args.get("parent_road") is not None:
                 x_list = sorted(
                     x_list, key=lambda x: x.required_args.get("parent_road")
                 )
-            if x_list[0].required_args.get("road") != None:
+            if x_list[0].required_args.get("road") is not None:
                 x_list = sorted(x_list, key=lambda x: x.required_args.get("road"))
             ordered_list.extend(x_list)
         return ordered_list
@@ -186,11 +186,11 @@ class ChangeUnit:
             insert_charunit = after_bud.get_char(insert_char_id)
             x_atomunit = atomunit_shop("bud_charunit", atom_insert())
             x_atomunit.set_required_arg("char_id", insert_charunit.char_id)
-            if insert_charunit.credor_weight != None:
+            if insert_charunit.credor_weight is not None:
                 x_atomunit.set_optional_arg(
                     "credor_weight", insert_charunit.credor_weight
                 )
-            if insert_charunit.debtor_weight != None:
+            if insert_charunit.debtor_weight is not None:
                 x_atomunit.set_optional_arg(
                     "debtor_weight", insert_charunit.debtor_weight
                 )
@@ -286,11 +286,11 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_char_lobbyship", atom_insert())
             x_atomunit.set_required_arg("char_id", after_char_id)
             x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
-            if after_lobbyship.credor_weight != None:
+            if after_lobbyship.credor_weight is not None:
                 x_atomunit.set_optional_arg(
                     "credor_weight", after_lobbyship.credor_weight
                 )
-            if after_lobbyship.debtor_weight != None:
+            if after_lobbyship.debtor_weight is not None:
                 x_atomunit.set_optional_arg(
                     "debtor_weight", after_lobbyship.debtor_weight
                 )
@@ -540,7 +540,7 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_idea_reasonunit", atom_insert())
             x_atomunit.set_required_arg("road", after_ideaunit.get_road())
             x_atomunit.set_required_arg("base", after_reasonunit.base)
-            if after_reasonunit.base_idea_active_requisite != None:
+            if after_reasonunit.base_idea_active_requisite is not None:
                 x_atomunit.set_optional_arg(
                     "base_idea_active_requisite",
                     after_reasonunit.base_idea_active_requisite,
@@ -631,11 +631,11 @@ class ChangeUnit:
             x_atomunit.set_required_arg("road", idea_road)
             x_atomunit.set_required_arg("base", after_reasonunit.base)
             x_atomunit.set_required_arg("need", after_premiseunit.need)
-            if after_premiseunit.open != None:
+            if after_premiseunit.open is not None:
                 x_atomunit.set_optional_arg("open", after_premiseunit.open)
-            if after_premiseunit.nigh != None:
+            if after_premiseunit.nigh is not None:
                 x_atomunit.set_optional_arg("nigh", after_premiseunit.nigh)
-            if after_premiseunit.divisor != None:
+            if after_premiseunit.divisor is not None:
                 x_atomunit.set_optional_arg("divisor", after_premiseunit.divisor)
             self.set_atomunit(x_atomunit)
 
@@ -751,11 +751,11 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_idea_factunit", atom_insert())
             x_atomunit.set_required_arg("road", ideaunit.get_road())
             x_atomunit.set_required_arg("base", insert_factunit.base)
-            if insert_factunit.pick != None:
+            if insert_factunit.pick is not None:
                 x_atomunit.set_optional_arg("pick", insert_factunit.pick)
-            if insert_factunit.open != None:
+            if insert_factunit.open is not None:
                 x_atomunit.set_optional_arg("open", insert_factunit.open)
-            if insert_factunit.nigh != None:
+            if insert_factunit.nigh is not None:
                 x_atomunit.set_optional_arg("nigh", insert_factunit.nigh)
             self.set_atomunit(x_atomunit)
 

@@ -193,7 +193,7 @@ def test_BudUnit_add_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
 
     # THEN
     casa_idea = bob_bud.get_idea_obj(casa_road)
-    assert casa_idea._reasonunits.get(week_road) != None
+    assert casa_idea._reasonunits.get(week_road) is not None
 
 
 def test_BudUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
@@ -257,9 +257,9 @@ def test_BudUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     print(f"{(len(new_idea_parent_road) == 1)=}")
     # for idea_kid in sue_bud._idearoot._kids.values():
     #     print(f"{idea_kid._label=}")
-    assert sue_bud._idearoot.get_kid(buildings_text) != None
-    assert sue_bud.get_idea_obj(buildings_road) != None
-    assert sue_bud.get_idea_obj(cookery_dirty_road) != None
+    assert sue_bud._idearoot.get_kid(buildings_text) is not None
+    assert sue_bud.get_idea_obj(buildings_road) is not None
+    assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
     assert sue_bud.get_idea_count() == 22
     assert sue_bud.get_level_count(level=3) == 4
 
@@ -1014,7 +1014,7 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
     brazil_idea = x_bud.get_idea_obj(road=brazil_road)
 
     # THEN
-    assert brazil_idea != None
+    assert brazil_idea is not None
     assert brazil_idea._label == brazil_text
 
     # WHEN
@@ -1023,14 +1023,14 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
     week_idea = x_bud.get_idea_obj(road=week_road)
 
     # THEN
-    assert week_idea != None
+    assert week_idea is not None
     assert week_idea._label == week_text
 
     # WHEN
     root_idea = x_bud.get_idea_obj(road=x_bud._real_id)
 
     # THEN
-    assert root_idea != None
+    assert root_idea is not None
     assert root_idea._label == x_bud._real_id
 
     # WHEN / THEN

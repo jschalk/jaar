@@ -16,7 +16,7 @@ class Translator:
         self.in_char_ids[out_char_id] = in_char_id
 
     def out_char_id_exists(self, out_char_id: CharID) -> bool:
-        return self.in_char_ids.get(out_char_id) != None
+        return self.in_char_ids.get(out_char_id) is not None
 
     def get_in_char_id(self, out_char_id: CharID) -> CharID:
         if self.out_char_id_exists(out_char_id):

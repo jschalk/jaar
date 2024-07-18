@@ -47,7 +47,7 @@ def test_HealerHold_get_dict_ReturnsCorrectDictWithSingleLobby_id():
     obj_dict = x_healerhold.get_dict()
 
     # THEN
-    assert obj_dict != None
+    assert obj_dict is not None
     run_list = [bob_lobby_id]
     example_dict = {"healerhold_lobby_ids": run_list}
     print(f"{example_dict=}")

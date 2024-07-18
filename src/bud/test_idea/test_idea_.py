@@ -257,9 +257,9 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbyships)
 
     # THEN
-    assert sport_idea.get_awardheirs_give_weight_sum() != None
+    assert sport_idea.get_awardheirs_give_weight_sum() is not None
     assert sport_idea.get_awardheirs_give_weight_sum() == 41
-    assert sport_idea.get_awardheirs_take_weight_sum() != None
+    assert sport_idea.get_awardheirs_take_weight_sum() is not None
     assert sport_idea.get_awardheirs_take_weight_sum() == 47
 
     assert len(sport_idea._awardheirs) == 2
@@ -278,19 +278,19 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
     swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._fund_give != None
-    assert swimmer_awardheir._fund_take != None
+    assert swimmer_awardheir._fund_give is not None
+    assert swimmer_awardheir._fund_take is not None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._fund_give != None
-    assert biker_awardheir._fund_take != None
+    assert biker_awardheir._fund_give is not None
+    assert biker_awardheir._fund_take is not None
 
 
 def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(_label=sport_text)
-    assert sport_idea.get_awardheirs_give_weight_sum() != None
-    assert sport_idea.get_awardheirs_take_weight_sum() != None
+    assert sport_idea.get_awardheirs_give_weight_sum() is not None
+    assert sport_idea.get_awardheirs_take_weight_sum() is not None
 
     # WHEN / THEN
     # does not crash with empty set
@@ -452,7 +452,7 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
     static_healerhold = healerhold_shop()
     static_healerhold.set_lobby_id(x_lobby_id=sue_text)
     static_healerhold.set_lobby_id(x_lobby_id=zia_text)
-    assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) != None
+    assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) is not None
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
 
 
@@ -563,7 +563,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     casa_dict = casa_idea.get_dict()
 
     # THEN
-    assert casa_dict != None
+    assert casa_dict is not None
     assert len(casa_dict["_kids"]) == 1
     assert casa_dict["_kids"] == casa_idea.get_kids_dict()
     assert casa_dict["_reasonunits"] == casa_idea.get_reasonunits_dict()
@@ -597,7 +597,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
     casa_dict = casa_idea.get_dict()
 
     # THEN
-    assert casa_dict != None
+    assert casa_dict is not None
     assert casa_dict == {"_weight": 1}
 
 
@@ -626,10 +626,10 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
 
     assert not casa_idea._is_expanded
     assert casa_idea.pledge
-    assert casa_idea._factunits != None
-    assert casa_idea._awardlinks != None
-    assert casa_idea._doerunit != None
-    assert casa_idea._originunit != None
+    assert casa_idea._factunits is not None
+    assert casa_idea._awardlinks is not None
+    assert casa_idea._doerunit is not None
+    assert casa_idea._originunit is not None
     assert casa_idea._kids != {}
 
     # WHEN
@@ -638,11 +638,11 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     # THEN
     assert casa_dict.get("_is_expanded") is False
     assert casa_dict.get("pledge")
-    assert casa_dict.get("_factunits") != None
-    assert casa_dict.get("_awardlinks") != None
-    assert casa_dict.get("_doerunit") != None
-    assert casa_dict.get("_originunit") != None
-    assert casa_dict.get("_kids") != None
+    assert casa_dict.get("_factunits") is not None
+    assert casa_dict.get("_awardlinks") is not None
+    assert casa_dict.get("_doerunit") is not None
+    assert casa_dict.get("_originunit") is not None
+    assert casa_dict.get("_kids") is not None
 
 
 def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
@@ -725,7 +725,7 @@ def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
     x_reasonunit = clean_idea.get_reasonunit(base=dirty_text)
 
     # THEN
-    assert x_reasonunit != None
+    assert x_reasonunit is not None
     assert x_reasonunit.base == dirty_text
 
 
@@ -742,7 +742,7 @@ def test_IdeaUnit_get_reasonheir_ReturnsCorrectObj():
     reason_heir_z = clean_idea.get_reasonheir(base=dirty_text)
 
     # THEN
-    assert reason_heir_z != None
+    assert reason_heir_z is not None
     assert reason_heir_z.base == dirty_text
 
 
@@ -878,7 +878,7 @@ def test_IdeaUnit_set_doerunit_empty_if_none():
     run_idea.set_doerunit_empty_if_none()
 
     # THEN
-    assert run_idea._doerunit != None
+    assert run_idea._doerunit is not None
     assert run_idea._doerunit == doerunit_shop()
 
 
@@ -894,7 +894,7 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     sport_idea.set_doerheir(parent_doerheir=None, bud_lobbyboxs=None)
 
     # THEN
-    assert sport_idea._doerheir != None
+    assert sport_idea._doerheir is not None
     swim_doerunit = doerunit_shop()
     swim_doerunit.set_lobbyhold(lobby_id=swim_text)
     swim_doerheir = doerheir_shop()
@@ -942,9 +942,9 @@ def test_IdeaUnit_get_descendants_Returns3DescendantsRoadUnits():
 
     # THEN
     assert len(nation_descendants) == 3
-    assert nation_descendants.get(usa_road) != None
-    assert nation_descendants.get(texas_road) != None
-    assert nation_descendants.get(iowa_road) != None
+    assert nation_descendants.get(usa_road) is not None
+    assert nation_descendants.get(texas_road) is not None
+    assert nation_descendants.get(iowa_road) is not None
 
 
 def test_IdeaUnit_get_descendants_ErrorRaisedIfInfiniteLoop():

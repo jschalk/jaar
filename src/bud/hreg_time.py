@@ -671,7 +671,7 @@ class PremiseUnitHregTime:
 
     def get_jajatime_open(self):
         x_open = None
-        if self._every_x_weeks != None and self._x_week_remainder != None:
+        if self._every_x_weeks is not None and self._x_week_remainder is not None:
             x_open = (
                 (self._x_week_remainder * 10080)
                 + (self._start_hr * 60)
@@ -679,7 +679,7 @@ class PremiseUnitHregTime:
             )
             self._set_open_weekday()
             x_open += self._between_weekday_open
-        elif self._every_x_days != None and self._x_days_remainder != None:
+        elif self._every_x_days is not None and self._x_days_remainder is not None:
             x_open = (
                 (self._x_days_remainder * 1440)
                 + (self._start_hr * 60)
@@ -690,9 +690,9 @@ class PremiseUnitHregTime:
 
     @property
     def jajatime_divisor(self):
-        if self._every_x_weeks != None and self._x_week_remainder != None:
+        if self._every_x_weeks is not None and self._x_week_remainder is not None:
             return self._every_x_weeks * 10080
-        elif self._every_x_days != None and self._x_days_remainder != None:
+        elif self._every_x_days is not None and self._x_days_remainder is not None:
             return self._every_x_days * 1440
 
     @property

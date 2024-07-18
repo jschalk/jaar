@@ -31,7 +31,7 @@ def add_river_rect(
     line_dict = dict(color=x_color, width=4)
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
     add_rect_text(fig, x0, y1, display_text)
-    if money_supply != None:
+    if money_supply is not None:
         money_percent = f"{int(((x1 - x0) * 12.5))}%"
         add_rect_text(fig, x0, y1 - 0.2, str(money_percent))
         money_amt = round((((x1 - x0) * 12.5) / 100) * money_supply)
@@ -47,7 +47,7 @@ def add_column_rect(
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
     if money_supply is None:
         add_rect_text(fig, x0, y0, display_text)
-    if money_supply != None:
+    if money_supply is not None:
         money_percent = f"{display_text} {int(((y0 - y1) * 12.5))}%"
         add_rect_text(fig, x0, y0, str(money_percent))
         money_amt = round((((y0 - y1) * 12.5) / 100) * money_supply)

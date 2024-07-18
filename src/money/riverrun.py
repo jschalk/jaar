@@ -89,7 +89,7 @@ class RiverRun:
         self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.penny)
 
     def char_has_tax_due(self, x_char_id: CharID) -> bool:
-        return self.tax_dues.get(x_char_id) != None
+        return self.tax_dues.get(x_char_id) is not None
 
     def get_char_tax_due(self, x_char_id: CharID) -> float:
         x_tax_due = self.tax_dues.get(x_char_id)
@@ -125,7 +125,7 @@ class RiverRun:
         self._tax_yields = {}
 
     def char_has_tax_yield(self, x_char_id: CharID) -> bool:
-        return self._tax_yields.get(x_char_id) != None
+        return self._tax_yields.get(x_char_id) is not None
 
     def get_char_tax_yield(self, x_char_id: CharID) -> float:
         x_tax_yield = self._tax_yields.get(x_char_id)
@@ -146,7 +146,7 @@ class RiverRun:
         return self._rivergrades == {}
 
     def rivergrade_exists(self, char_id: CharID) -> bool:
-        return self._rivergrades.get(char_id) != None
+        return self._rivergrades.get(char_id) is not None
 
     def _get_char_grant(self, char_id: CharID) -> float:
         return get_0_if_None(self._grants.get(char_id))

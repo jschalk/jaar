@@ -248,7 +248,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
     wkday_reason_dict = wkday_reason.get_dict()
 
     # THEN
-    assert wkday_reason_dict != None
+    assert wkday_reason_dict is not None
     static_wkday_reason_dict = {
         "base": wkday_road,
         "premises": {wed_road: {"need": wed_road}},
@@ -270,7 +270,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_base_idea_active_requisite()
     wkday_reason_dict = wkday_reason.get_dict()
 
     # THEN
-    assert wkday_reason_dict != None
+    assert wkday_reason_dict is not None
     static_wkday_reason_dict = {
         "base": wkday_road,
         "base_idea_active_requisite": wkday_base_idea_active_requisite,
@@ -296,7 +296,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
     wkday_reason_dict = wkday_reason.get_dict()
 
     # THEN
-    assert wkday_reason_dict != None
+    assert wkday_reason_dict is not None
     static_wkday_reason_dict = {
         "base": wkday_road,
         "premises": {wed_road: {"need": wed_road}, thu_road: {"need": thu_road}},
@@ -314,7 +314,7 @@ def test_reasons_get_from_dict_ReturnsCorrectObj():
         wkday_road, base_idea_active_requisite=wkday_base_idea_active_requisite
     )
     x_wkday_reasonunits_dict = {wkday_reasonunit.base: wkday_reasonunit.get_dict()}
-    assert x_wkday_reasonunits_dict != None
+    assert x_wkday_reasonunits_dict is not None
     static_wkday_reason_dict = {
         wkday_road: {
             "base": wkday_road,
@@ -454,7 +454,7 @@ def test_ReasonCore_find_replace_road_casas():
     # THEN
     assert x_reason.base == new_weekday_road
     assert len(x_reason.premises) == 1
-    assert x_reason.premises.get(new_sunday_road) != None
+    assert x_reason.premises.get(new_sunday_road) is not None
     assert x_reason.premises.get(old_sunday_road) is None
     print(f"{x_reason.premises=}")
     assert x_reason.premises.get(new_sunday_road).need == new_sunday_road
@@ -482,7 +482,7 @@ def test_ReasonCore_set_delimiter_SetsAttrsCorrectly():
     star_week_road = create_road(root_label(), week_text, delimiter=star_text)
     star_sun_road = create_road(star_week_road, sun_text, delimiter=star_text)
     assert week_reasonunit.base == star_week_road
-    assert week_reasonunit.premises.get(star_sun_road) != None
+    assert week_reasonunit.premises.get(star_sun_road) is not None
     assert week_reasonunit.premises.get(star_sun_road).need == star_sun_road
 
 

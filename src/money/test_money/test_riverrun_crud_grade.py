@@ -23,7 +23,7 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
         yao_hubunit, bob_text, yao_number, x_debtor_count, x_credor_count
     )
     bob_rivergrade.grant_amount = 0
-    assert yao_riverrun._rivergrades.get(bob_text) != None
+    assert yao_riverrun._rivergrades.get(bob_text) is not None
     gen_rivergrade = yao_riverrun._rivergrades.get(bob_text)
     assert gen_rivergrade.debtor_count == x_debtor_count
     assert gen_rivergrade.credor_count == x_credor_count

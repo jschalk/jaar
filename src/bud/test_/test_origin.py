@@ -49,7 +49,7 @@ def test_OriginHold_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
     # THEN
     print(f"{x_dict=}")
-    assert x_dict != None
+    assert x_dict is not None
     assert x_dict == {"char_id": roy_text, "weight": 1}
 
 
@@ -80,7 +80,7 @@ def test_originunit_set_originhold_CorrectlySetsOriginHold():
     originunit_x.set_originhold(char_id=yao_text, weight=yao_weight)
 
     # THEN
-    assert originunit_x._originholds.get(yao_text) != None
+    assert originunit_x._originholds.get(yao_text) is not None
     assert originunit_x._originholds.get(yao_text).char_id == yao_text
     assert originunit_x._originholds.get(yao_text).weight == yao_weight
 
@@ -91,7 +91,7 @@ def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
     yao_text = "Yao"
     yao_weight = 3
     originunit_x.set_originhold(char_id=yao_text, weight=yao_weight)
-    assert originunit_x._originholds.get(yao_text) != None
+    assert originunit_x._originholds.get(yao_text) is not None
     assert originunit_x._originholds.get(yao_text).char_id == yao_text
 
     # WHEN
@@ -120,5 +120,5 @@ def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
     # THEN
     print(f"{x_dict=}")
-    assert x_dict != None
+    assert x_dict is not None
     assert x_dict == {"_originholds": {roy_text: roy_ol_dict, sue_text: sue_ol_dict}}

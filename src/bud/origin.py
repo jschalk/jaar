@@ -36,7 +36,7 @@ class OriginUnit:
 
     def get_originholds_dict(self):
         x_dict = {}
-        if self._originholds != None:
+        if self._originholds is not None:
             for originhold_x in self._originholds.values():
                 x_dict[originhold_x.char_id] = originhold_x.get_dict()
         return x_dict

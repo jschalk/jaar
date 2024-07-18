@@ -156,28 +156,28 @@ def get_from_json(x_str: str) -> AtomUnit:
 
 def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     x_arg = "_max_tree_traverse"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud.set_max_tree_traverse(x_atom.get_value(x_arg))
     x_arg = "_credor_respect"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud.set_credor_respect(x_atom.get_value(x_arg))
     x_arg = "_debtor_respect"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud.set_debtor_resepect(x_atom.get_value(x_arg))
     x_arg = "_fund_pool"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud._fund_pool = x_atom.get_value(x_arg)
     x_arg = "_fund_coin"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud._fund_coin = x_atom.get_value(x_arg)
     x_arg = "_weight"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud._weight = x_atom.get_value(x_arg)
     x_arg = "_bit"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud._bit = x_atom.get_value(x_arg)
     x_arg = "_penny"
-    if x_atom.get_value(x_arg) != None:
+    if x_atom.get_value(x_arg) is not None:
         x_bud._penny = x_atom.get_value(x_arg)
 
 
@@ -267,10 +267,10 @@ def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_awardlink = x_idea._awardlinks.get(x_atom.get_value("lobby_id"))
     x_give_weight = x_atom.get_value("give_weight")
-    if x_give_weight != None and x_awardlink.give_weight != x_give_weight:
+    if x_give_weight is not None and x_awardlink.give_weight != x_give_weight:
         x_awardlink.give_weight = x_give_weight
     x_take_weight = x_atom.get_value("take_weight")
-    if x_take_weight != None and x_awardlink.take_weight != x_take_weight:
+    if x_take_weight is not None and x_awardlink.take_weight != x_take_weight:
         x_awardlink.take_weight = x_take_weight
     x_bud.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 

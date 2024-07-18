@@ -74,7 +74,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._real_id == iowa_real_id
     assert x_bud._weight == 1
     assert x_bud._chars == {}
-    assert x_bud._idearoot != None
+    assert x_bud._idearoot is not None
     assert x_bud._max_tree_traverse == 3
     assert x_bud._road_delimiter == slash_road_delimiter
     assert x_bud._fund_pool == x_fund_pool
@@ -272,7 +272,7 @@ def test_BudUnit_del_last_gift_id_SetsAttrCorrectly():
     sue_bud = budunit_shop("Sue", "Texas")
     old_last_gift_id = 89
     sue_bud.set_last_gift_id(old_last_gift_id)
-    assert sue_bud._last_gift_id != None
+    assert sue_bud._last_gift_id is not None
 
     # WHEN
     sue_bud.del_last_gift_id()

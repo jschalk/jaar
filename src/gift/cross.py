@@ -131,7 +131,7 @@ def get_sorting_attributes(cross_name: str) -> list[str]:
     x_list = []
     for x_attribute_name, x_attribute_dict in cross_format_dict.items():
         sort_order = x_attribute_dict.get("sort_order")
-        if sort_order != None:
+        if sort_order is not None:
             x_list.append(x_attribute_name)
     return x_list
 

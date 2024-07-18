@@ -137,7 +137,7 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
     # THEN
     assert yao_init_rivercycle.number == 0
     assert len(yao_init_rivercycle.riverbooks) == 1
-    assert yao_init_rivercycle.riverbooks.get(yao_text) != None
+    assert yao_init_rivercycle.riverbooks.get(yao_text) is not None
 
 
 def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
@@ -164,7 +164,7 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
     assert yao_init_rivercycle.number == 0
     assert len(yao_init_rivercycle.riverbooks) == 1
     yao_riverbook = yao_init_rivercycle.riverbooks.get(yao_text)
-    assert yao_riverbook != None
+    assert yao_riverbook is not None
     assert len(yao_riverbook._rivergrants) == 3
     assert yao_riverbook._rivergrants.get(yao_text) == 350000000
     assert yao_riverbook._rivergrants.get(bob_text) == 150000000
@@ -199,9 +199,9 @@ def test_create_next_rivercycle_ReturnsObjScenarioThree_charunit():
     yao_riverbook = next_rivercycle.riverbooks.get(yao_text)
     bob_riverbook = next_rivercycle.riverbooks.get(bob_text)
     zia_riverbook = next_rivercycle.riverbooks.get(zia_text)
-    assert yao_riverbook != None
-    assert bob_riverbook != None
-    assert zia_riverbook != None
+    assert yao_riverbook is not None
+    assert bob_riverbook is not None
+    assert zia_riverbook is not None
     assert len(yao_riverbook._rivergrants) == 3
     assert yao_riverbook._rivergrants.get(yao_text) == 122500000
     assert yao_riverbook._rivergrants.get(bob_text) == 52500000
@@ -247,9 +247,9 @@ def test_create_next_rivercycle_ReturnsObjDoesNotReference_cycleledger_From_prev
     yao_riverbook = next_rivercycle.riverbooks.get(yao_text)
     bob_riverbook = next_rivercycle.riverbooks.get(bob_text)
     zia_riverbook = next_rivercycle.riverbooks.get(zia_text)
-    assert yao_riverbook != None
-    assert bob_riverbook != None
-    assert zia_riverbook != None
+    assert yao_riverbook is not None
+    assert bob_riverbook is not None
+    assert zia_riverbook is not None
     assert len(yao_riverbook._rivergrants) == 3
     assert yao_riverbook._rivergrants.get(yao_text) == 122500000
     assert yao_riverbook._rivergrants.get(bob_text) == 52500000

@@ -169,7 +169,7 @@ def test_example_buds_bud_v001_AgendaExists():
     # for idea_kid in x_bud._idearoot._kids.values():
     #     # print(idea_kid._label)
     #     assert str(type(idea_kid)) != "<class 'str'>"
-    #     assert idea_kid.pledge != None
+    #     assert idea_kid.pledge is not None
 
     # WHEN
     agenda_dict = x_bud.get_agenda_dict()
@@ -177,7 +177,7 @@ def test_example_buds_bud_v001_AgendaExists():
     # THEN
     assert len(agenda_dict) > 0
     assert len(agenda_dict) == 17
-    # assert agenda_dict[0].pledge != None
+    # assert agenda_dict[0].pledge is not None
     # assert str(type(agenda_dict[0])) != "<class 'str'>"
     # assert str(type(agenda_dict[9])) != "<class 'str'>"
     # assert str(type(agenda_dict[12])) != "<class 'str'>"
@@ -608,13 +608,13 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     #     print(f"  {idea_kid=}")
 
     print(f"{clean_cookery_idea.get_road()=}")
-    assert zia_bud.get_idea_obj(clean_cookery_road) != None
+    assert zia_bud.get_idea_obj(clean_cookery_road) is not None
     assert zia_bud.get_idea_obj(clean_cookery_road)._label == clean_cookery_text
     assert zia_bud.get_idea_obj(clean_cookery_road).pledge
     assert len(zia_bud.get_idea_obj(clean_cookery_road)._reasonunits) == 2
-    assert zia_bud.get_idea_obj(clean_things_road) != None
-    assert zia_bud.get_idea_obj(cookery_room_road) != None
-    assert zia_bud.get_idea_obj(cookery_dirty_road) != None
+    assert zia_bud.get_idea_obj(clean_things_road) is not None
+    assert zia_bud.get_idea_obj(cookery_room_road) is not None
+    assert zia_bud.get_idea_obj(cookery_dirty_road) is not None
     assert zia_bud.get_idea_obj(daytime_road)._begin == 0
     assert zia_bud.get_idea_obj(daytime_road)._close == 1440
     assert len(zia_bud.get_lobby_ids_dict()) == 0
@@ -855,7 +855,7 @@ def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
     sweep_idea._doerunit.set_lobbyhold(bob_text)
     print(f"{sweep_idea}")
     agenda_dict = zia_bud.get_agenda_dict()
-    assert agenda_dict.get(clean_road) != None
+    assert agenda_dict.get(clean_road) is not None
     assert agenda_dict.get(sweep_road) is None
     assert agenda_dict.get(couch_road) is None
 
@@ -917,7 +917,7 @@ def test_BudUnit_set_fact_IsAbleToSetTaskAsComplete():
     # ESTABLISH
     x_bud = get_bud_1Task_1CE0MinutesReason_1Fact()
     mail_text = "obtain mail"
-    assert x_bud != None
+    assert x_bud is not None
     assert len(x_bud._idearoot._kids[mail_text]._reasonunits) == 1
     idea_dict = x_bud.get_idea_dict()
     # for idea in idea_dict:

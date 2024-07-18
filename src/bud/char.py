@@ -65,9 +65,9 @@ class CharUnit(CharCore):
         credor_weight: float = None,
         debtor_weight: float = None,
     ):
-        if credor_weight != None:
+        if credor_weight is not None:
             self.set_credor_weight(credor_weight)
-        if debtor_weight != None:
+        if debtor_weight is not None:
             self.set_debtor_weight(debtor_weight)
 
     def set_credor_weight(self, credor_weight: int):
@@ -161,7 +161,7 @@ class CharUnit(CharCore):
         return self._lobbyships.get(lobby_id)
 
     def lobbyship_exists(self, lobby_id: LobbyID) -> bool:
-        return self._lobbyships.get(lobby_id) != None
+        return self._lobbyships.get(lobby_id) is not None
 
     def delete_lobbyship(self, lobby_id: LobbyID):
         return self._lobbyships.pop(lobby_id)

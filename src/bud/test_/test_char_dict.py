@@ -27,8 +27,8 @@ def test_CharUnit_get_lobbyships_dict_ReturnObj():
     sue_lobbyships_dict = sue_charunit.get_lobbyships_dict()
 
     # THEN
-    assert sue_lobbyships_dict.get(sue_text) != None
-    assert sue_lobbyships_dict.get(run_text) != None
+    assert sue_lobbyships_dict.get(sue_text) is not None
+    assert sue_lobbyships_dict.get(run_text) is not None
     sue_lobbyship_dict = sue_lobbyships_dict.get(sue_text)
     run_lobbyship_dict = sue_lobbyships_dict.get(run_text)
     assert sue_lobbyship_dict == {
@@ -65,7 +65,7 @@ def test_CharUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     bl_dict = x_dict.get("_lobbyships")
     print(f"{bl_dict=}")
-    assert x_dict != None
+    assert x_dict is not None
     assert x_dict == {
         "char_id": bob_text,
         "credor_weight": bob_credor_weight,
@@ -116,7 +116,7 @@ def test_CharUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
 
     # THEN
     print(f"{x_dict=}")
-    assert x_dict != None
+    assert x_dict is not None
     assert x_dict == {
         "char_id": bob_text,
         "credor_weight": bob_credor_weight,
@@ -264,7 +264,7 @@ def test_charunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
     yao_obj_dict = charunits_get_from_json(charunits_json=yao_json_text)
 
     # THEN
-    assert yao_obj_dict[yao_text] != None
+    assert yao_obj_dict[yao_text] is not None
     yao_charunit = yao_obj_dict[yao_text]
 
     assert yao_charunit.char_id == yao_text

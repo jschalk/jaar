@@ -39,8 +39,8 @@ def test_realunit_shop_ReturnsRealUnit(env_dir_setup_cleanup):
     # THEN
     assert music_real.real_id == music_text
     assert music_real.reals_dir == get_test_reals_dir()
-    assert music_real._owners_dir != None
-    assert music_real._gifts_dir != None
+    assert music_real._owners_dir is not None
+    assert music_real._gifts_dir is not None
     assert music_real._road_delimiter == default_road_delimiter_if_none()
     assert music_real._fund_coin == default_fund_coin_if_none()
     assert music_real._bit == default_bit_if_none()
@@ -163,7 +163,7 @@ def test_RealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_clea
     gen_sue_voice = music_real.get_owner_voice_from_file(sue_text)
 
     # THEN
-    assert gen_sue_voice != None
+    assert gen_sue_voice is not None
     assert gen_sue_voice.char_exists(bob_text)
 
 

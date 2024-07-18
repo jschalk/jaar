@@ -525,10 +525,10 @@ def yr_elucidation(idea):
         for base in hh_wo_matched_reason:
             print(f"Facts that don't matter to this Idea: {base}")
 
-    # if idea._reasonunits != None:
+    # if idea._reasonunits is not None:
     #     for lu in idea._reasonunits.values():
     #         print(f"  ReasonUnit   '{lu.base}' premises: {len(lu.premises)} ")
-    if idea._reasonheirs != None:
+    if idea._reasonheirs is not None:
         filter_x = True
         yr_print_idea_base_info(idea=idea, filter=True)
 
@@ -549,7 +549,7 @@ def yr_elucidation(idea):
                     )
                 print("")
     # print(idea._factheirs)
-    # print(f"{(idea._factheirs != None)=}")
+    # print(f"{(idea._factheirs is not None)=}")
     # print(f"{len(idea._factheirs)=} ")
 
     print("")
@@ -558,9 +558,9 @@ def yr_elucidation(idea):
 def yr_print_fact(lh_base, lh_status, premises, factheirs):
     for ww in premises.values():
         ww_open = ""
-        ww_open = f"\topen:{ww.open}" if ww.open != None else ""
+        ww_open = f"\topen:{ww.open}" if ww.open is not None else ""
         ww_nigh = ""
-        ww_nigh = f"\tnigh:{ww.nigh}" if ww.nigh != None else ""
+        ww_nigh = f"\tnigh:{ww.nigh}" if ww.nigh is not None else ""
         ww_task = f" Task: {ww._task}"
         hh_open = ""
         hh_nigh = ""
@@ -571,9 +571,9 @@ def yr_print_fact(lh_base, lh_status, premises, factheirs):
 
         for hh in factheirs.values():
             if hh.base == lh_base:
-                if hh.open != None:
+                if hh.open is not None:
                     hh_open = f"\topen:{hh.open}"
-                if hh.nigh != None:
+                if hh.nigh is not None:
                     hh_nigh = f"\tnigh:{hh.nigh}"
                 hh_pick = hh.pick
                 # if hh_pick != "":

@@ -22,7 +22,7 @@ def test_FactUnit_exists():
 
     # THEN
     print(sunday_fact)
-    assert sunday_fact != None
+    assert sunday_fact is not None
     assert sunday_fact.base == weekday_road
     assert sunday_fact.pick == sunday_road
     assert sunday_fact.open == 1.9
@@ -70,8 +70,8 @@ def test_FactUnit_set_pick_to_base_SetsAttr_2():
     dirty_text = "dirty"
     dirty_road = create_road(root_label(), dirty_text)
     floor_fact = factunit_shop(floor_road, dirty_road, 1, 6)
-    assert floor_fact.open != None
-    assert floor_fact.nigh != None
+    assert floor_fact.open is not None
+    assert floor_fact.nigh is not None
 
     # WHEN
     floor_fact.set_pick_to_base()
@@ -122,7 +122,7 @@ def test_FactUnit_get_dict_ReturnsDict():
     fact_dict = sunday_fact.get_dict()
 
     # THEN
-    assert fact_dict != None
+    assert fact_dict is not None
     static_dict = {
         "base": weekday_road,
         "pick": sunday_road,
@@ -145,7 +145,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
     fact_dict = sunday_fact.get_dict()
 
     # THEN
-    assert fact_dict != None
+    assert fact_dict is not None
     static_dict = {
         "base": weekday_road,
         "pick": sunday_road,

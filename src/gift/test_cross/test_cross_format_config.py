@@ -131,12 +131,12 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0()
     char_pool_dict = cross_dict.get(char_pool_str())
     debtor_weight_dict = cross_dict.get(debtor_weight_str())
     credor_weight_dict = cross_dict.get(credor_weight_str())
-    assert real_id_dict != None
-    assert owner_id_dict != None
-    assert char_id_dict != None
-    assert char_pool_dict != None
-    assert debtor_weight_dict != None
-    assert credor_weight_dict != None
+    assert real_id_dict is not None
+    assert owner_id_dict is not None
+    assert char_id_dict is not None
+    assert char_pool_dict is not None
+    assert debtor_weight_dict is not None
+    assert credor_weight_dict is not None
     assert len(cross_dict) == 6
 
     real_id_column_order = real_id_dict.get(column_order_str())
@@ -167,12 +167,12 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_
     lobby_id_dict = cross_dict.get(lobby_id_str())
     debtor_weight_dict = cross_dict.get(debtor_weight_str())
     credor_weight_dict = cross_dict.get(credor_weight_str())
-    assert real_id_dict != None
-    assert owner_id_dict != None
-    assert char_id_dict != None
-    assert lobby_id_dict != None
-    assert debtor_weight_dict != None
-    assert credor_weight_dict != None
+    assert real_id_dict is not None
+    assert owner_id_dict is not None
+    assert char_id_dict is not None
+    assert lobby_id_dict is not None
+    assert debtor_weight_dict is not None
+    assert credor_weight_dict is not None
     assert len(cross_dict) == 6
 
     assert real_id_dict.get(column_order_str()) == 0
@@ -197,12 +197,12 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0
     label_dict = cross_dict.get(label_str())
     weight_dict = cross_dict.get(weight_str())
     pledge_dict = cross_dict.get(pledge_str())
-    assert real_id_dict != None
-    assert owner_id_dict != None
-    assert parent_road_dict != None
-    assert label_dict != None
-    assert weight_dict != None
-    assert pledge_dict != None
+    assert real_id_dict is not None
+    assert owner_id_dict is not None
+    assert parent_road_dict is not None
+    assert label_dict is not None
+    assert weight_dict is not None
+    assert pledge_dict is not None
     assert len(cross_dict) == 6
 
     assert real_id_dict.get(column_order_str()) == 0

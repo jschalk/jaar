@@ -17,7 +17,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     print(sunday_bud_fact)
     x_idearoot = x_bud._idearoot
     x_idearoot._factunits = {sunday_bud_fact.base: sunday_bud_fact}
-    assert x_idearoot._factunits != None
+    assert x_idearoot._factunits is not None
     x_idearoot._factunits = {}
     assert not x_idearoot._factunits
 
@@ -41,7 +41,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     x_bud.set_fact(base=usa_week_road, pick=usa_week_road, open=608, nigh=610)
 
     # THEN
-    assert x_idearoot._factunits != None
+    assert x_idearoot._factunits is not None
     assert x_idearoot._factunits == {usa_week_unit.base: usa_week_unit}
 
 
@@ -169,9 +169,9 @@ def test_BudUnit_get_idea_list_FactHeirsCorrectlyInherited():
     facts_none_range = {fact_none_range.base: fact_none_range}
 
     # THEN
-    assert swim_idea._factheirs != None
-    assert fast_idea._factheirs != None
-    assert slow_idea._factheirs != None
+    assert swim_idea._factheirs is not None
+    assert fast_idea._factheirs is not None
+    assert slow_idea._factheirs is not None
     assert swim_idea._factheirs == factheirs_set_range
     assert fast_idea._factheirs == factheirs_set_range
     assert slow_idea._factheirs == factheirs_set_range
@@ -765,9 +765,9 @@ def test_BudUnit_set_fact_create_missing_ideas_CreatesBaseAndFact():
     sue_bud.set_fact(situations_road, climate_road, create_missing_ideas=True)
 
     # THEN
-    assert sue_bud._idearoot.get_kid(situations_text) != None
-    assert sue_bud.get_idea_obj(situations_road) != None
-    assert sue_bud.get_idea_obj(climate_road) != None
+    assert sue_bud._idearoot.get_kid(situations_text) is not None
+    assert sue_bud.get_idea_obj(situations_road) is not None
+    assert sue_bud.get_idea_obj(climate_road) is not None
 
 
 def test_BudUnit_get_fact_ReturnsFactUnit():
@@ -791,7 +791,7 @@ def test_BudUnit_set_fact_IsAbleToSetTaskAsComplete():
     # ESTABLISH
     x_bud = example_buds_get_bud_1Task_1CE0MinutesReason_1Fact()
     mail_text = "obtain mail"
-    assert x_bud != None
+    assert x_bud is not None
     assert len(x_bud._idearoot._kids[mail_text]._reasonunits) == 1
     idea_dict = x_bud.get_idea_dict()
     # for idea in idea_dict:

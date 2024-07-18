@@ -87,7 +87,7 @@ def test_atom_config_HasCorrect_category():
 
 def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
     for category, category_dict in atom_config_dict.items():
-        if category_dict.get(atom_insert()) != None:
+        if category_dict.get(atom_insert()) is not None:
             category_insert = category_dict.get(atom_insert())
             if category_insert.get(atom_order_text) is None:
                 print(
@@ -95,7 +95,7 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
                 )
                 return False
 
-        if category_dict.get(atom_update()) != None:
+        if category_dict.get(atom_update()) is not None:
             category_update = category_dict.get(atom_update())
             if category_update.get(atom_order_text) is None:
                 print(
@@ -103,7 +103,7 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
                 )
                 return False
 
-        if category_dict.get(atom_delete()) != None:
+        if category_dict.get(atom_delete()) is not None:
             category_delete = category_dict.get(atom_delete())
             if category_delete.get(atom_order_text) is None:
                 print(
@@ -209,7 +209,7 @@ def _every_category_dict_has_arg_elements(category_dict: dict) -> bool:
         if x_dict.get(sqlite_datatype_text()) is None:
             print(f"sqlite_datatype_text failed for {required_arg=}")
             return False
-    if category_dict.get(optional_args_text()) != None:
+    if category_dict.get(optional_args_text()) is not None:
         for optional_arg, x_dict in category_dict.get(optional_args_text()).items():
             if x_dict.get(python_type_text()) is None:
                 print(f"python_type_text failed for {optional_arg=}")
@@ -260,16 +260,16 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     cat_healerhold = nx.get(bud_idea_healerhold_text())
     cat_fact = nx.get(bud_idea_factunit_text())
 
-    assert cat_budunit != None
-    assert cat_charunit != None
-    assert cat_lobbyship != None
-    assert cat_idea != None
-    assert cat_awardlink != None
-    assert cat_reason != None
-    assert cat_premise != None
-    assert cat_lobbyhold != None
-    assert cat_healerhold != None
-    assert cat_fact != None
+    assert cat_budunit is not None
+    assert cat_charunit is not None
+    assert cat_lobbyship is not None
+    assert cat_idea is not None
+    assert cat_awardlink is not None
+    assert cat_reason is not None
+    assert cat_premise is not None
+    assert cat_lobbyhold is not None
+    assert cat_healerhold is not None
+    assert cat_fact is not None
 
     normal_specs_budunit = cat_budunit.get(normal_specs_text())
     normal_specs_charunit = cat_charunit.get(normal_specs_text())
@@ -285,16 +285,16 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     columns_text = "columns"
     print(f"{cat_budunit.keys()=}")
     print(f"{normal_specs_text()=}")
-    assert normal_specs_budunit != None
-    assert normal_specs_charunit != None
-    assert normal_specs_lobbyship != None
-    assert normal_specs_idea != None
-    assert normal_specs_awardlink != None
-    assert normal_specs_reason != None
-    assert normal_specs_premise != None
-    assert normal_specs_lobbyhold != None
-    assert normal_specs_healerhold != None
-    assert normal_specs_fact != None
+    assert normal_specs_budunit is not None
+    assert normal_specs_charunit is not None
+    assert normal_specs_lobbyship is not None
+    assert normal_specs_idea is not None
+    assert normal_specs_awardlink is not None
+    assert normal_specs_reason is not None
+    assert normal_specs_premise is not None
+    assert normal_specs_lobbyhold is not None
+    assert normal_specs_healerhold is not None
+    assert normal_specs_fact is not None
 
     table_name_budunit = normal_specs_budunit.get(normal_table_name_text())
     table_name_charunit = normal_specs_charunit.get(normal_table_name_text())
@@ -319,28 +319,28 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert table_name_fact == "fact"
 
     assert len(cat_budunit) == 2
-    assert cat_budunit.get(columns_text) != None
+    assert cat_budunit.get(columns_text) is not None
 
     budunit_columns = cat_budunit.get(columns_text)
     assert len(budunit_columns) == 10
-    assert budunit_columns.get("uid") != None
-    assert budunit_columns.get("_max_tree_traverse") != None
-    assert budunit_columns.get("_monetary_desc") != None
-    assert budunit_columns.get("_credor_respect") != None
-    assert budunit_columns.get("_debtor_respect") != None
-    assert budunit_columns.get("_fund_pool") != None
-    assert budunit_columns.get("_fund_coin") != None
-    assert budunit_columns.get("_bit") != None
-    assert budunit_columns.get("_penny") != None
-    assert budunit_columns.get("_weight") != None
+    assert budunit_columns.get("uid") is not None
+    assert budunit_columns.get("_max_tree_traverse") is not None
+    assert budunit_columns.get("_monetary_desc") is not None
+    assert budunit_columns.get("_credor_respect") is not None
+    assert budunit_columns.get("_debtor_respect") is not None
+    assert budunit_columns.get("_fund_pool") is not None
+    assert budunit_columns.get("_fund_coin") is not None
+    assert budunit_columns.get("_bit") is not None
+    assert budunit_columns.get("_penny") is not None
+    assert budunit_columns.get("_weight") is not None
 
     assert len(cat_charunit) == 2
     charunit_columns = cat_charunit.get(columns_text)
     assert len(charunit_columns) == 4
-    assert charunit_columns.get("uid") != None
-    assert charunit_columns.get("char_id") != None
-    assert charunit_columns.get("credor_weight") != None
-    assert charunit_columns.get("debtor_weight") != None
+    assert charunit_columns.get("uid") is not None
+    assert charunit_columns.get("char_id") is not None
+    assert charunit_columns.get("credor_weight") is not None
+    assert charunit_columns.get("debtor_weight") is not None
 
     char_id_dict = charunit_columns.get("char_id")
     assert len(char_id_dict) == 2

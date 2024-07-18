@@ -126,7 +126,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
         catergory_insert = category_dict.get(atom_insert())
         catergory_update = category_dict.get(atom_update())
         catergory_delete = category_dict.get(atom_delete())
-        if catergory_insert != None:
+        if catergory_insert is not None:
             required_args = category_dict.get(required_args_text())
             optional_args = category_dict.get(optional_args_text())
             for required_arg, x_value in required_args.items():
@@ -145,7 +145,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
                     optional_arg,
                     x_value,
                 )
-        if catergory_update != None:
+        if catergory_update is not None:
             required_args = category_dict.get(required_args_text())
             optional_args = category_dict.get(optional_args_text())
             for required_arg, x_value in required_args.items():
@@ -164,7 +164,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
                     optional_arg,
                     x_value,
                 )
-        if catergory_delete != None:
+        if catergory_delete is not None:
             required_args = category_dict.get(required_args_text())
             for required_arg, x_value in required_args.items():
                 add_to_atom_table_columns(
@@ -193,14 +193,14 @@ def get_normalized_bud_table_build() -> dict[str : dict[str,]]:
         }
         required_args = category_dict.get(required_args_text())
         optional_args = category_dict.get(optional_args_text())
-        if required_args != None:
+        if required_args is not None:
             for required_arg, x_value in required_args.items():
                 normal_columns_dict[required_arg] = {
                     sqlite_datatype_text(): x_value.get(sqlite_datatype_text()),
                     nullable_text(): False,
                 }
 
-        if optional_args != None:
+        if optional_args is not None:
             for optional_arg, x_value in optional_args.items():
                 normal_columns_dict[optional_arg] = {
                     sqlite_datatype_text(): x_value.get(sqlite_datatype_text()),

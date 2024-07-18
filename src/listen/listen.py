@@ -176,7 +176,7 @@ def listen_to_speaker_fact(
         missing_fact_bases = list(listener.get_missing_fact_bases())
     for missing_fact_base in missing_fact_bases:
         x_factunit = speaker.get_fact(missing_fact_base)
-        if x_factunit != None:
+        if x_factunit is not None:
             listener.set_fact(
                 base=x_factunit.base,
                 pick=x_factunit.pick,
@@ -238,7 +238,7 @@ def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
     for x_charunit in get_ordered_debtors_roll(new_job):
         if x_charunit.char_id != new_job._owner_id:
             speaker_job = healer_hubunit.get_job_bud(x_charunit.char_id)
-            if speaker_job != None:
+            if speaker_job is not None:
                 listen_to_speaker_fact(new_job, speaker_job)
 
 
@@ -248,7 +248,7 @@ def listen_to_facts_voice_action(new_action: BudUnit, listener_hubunit: HubUnit)
         speaker_id = x_charunit.char_id
         if speaker_id != new_action._owner_id:
             speaker_action = listener_hubunit.dw_speaker_bud(speaker_id)
-            if speaker_action != None:
+            if speaker_action is not None:
                 listen_to_speaker_fact(new_action, speaker_action)
 
 

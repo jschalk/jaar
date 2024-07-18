@@ -25,9 +25,9 @@ def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
     # THEN
     print(f"{yao_bud_metrics.level_count=}")
     print(f"{yao_bud_metrics.reason_bases=}")
-    assert yao_bud_metrics != None
+    assert yao_bud_metrics is not None
     reason_bases_x = yao_bud_metrics.reason_bases
-    assert reason_bases_x != None
+    assert reason_bases_x is not None
     assert len(reason_bases_x) > 0
 
 
@@ -35,7 +35,7 @@ def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
     # ESTABLISH
     yao_budunit = bud_v001()
     missing_bases = yao_budunit.get_missing_fact_bases()
-    assert missing_bases != None
+    assert missing_bases is not None
     print(f"{missing_bases=}")
     print(f"{len(missing_bases)=}")
     assert len(missing_bases) == 11
@@ -73,16 +73,16 @@ def test_BudUnit_3AdvocatesNoideaunit_shop():
     zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_weight=10))
 
     # WHEN
-    assert zia_budunit.get_awardlinks_metrics() != None
+    assert zia_budunit.get_awardlinks_metrics() is not None
     chars_metrics = zia_budunit.get_awardlinks_metrics()
 
     # THEN
     awardlink_yao = chars_metrics[yao_text]
     awardlink_sue = chars_metrics[sue_text]
     awardlink_zia = chars_metrics[zia_text]
-    assert awardlink_yao.lobby_id != None
-    assert awardlink_sue.lobby_id != None
-    assert awardlink_zia.lobby_id != None
+    assert awardlink_yao.lobby_id is not None
+    assert awardlink_sue.lobby_id is not None
+    assert awardlink_zia.lobby_id is not None
     assert awardlink_yao.lobby_id == yao_text
     assert awardlink_sue.lobby_id == sue_text
     assert awardlink_zia.lobby_id == zia_text
@@ -273,7 +273,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     # print("iterate through every idea...")
     # for x_idea in idea_dict:
     #     if str(type(x_idea)).find(".idea.IdeaUnit'>") > 0:
-    #         assert x_idea._active != None
+    #         assert x_idea._active is not None
 
     #     # print("")
     #     # print(f"{x_idea._label=}")
@@ -285,9 +285,9 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     #     for reason in x_idea._reasonheirs.values():
     #         assert str(type(reason)).find(".reason.ReasonHeir'>") > 0
     #         print(f"    {reason.base=}")
-    #         assert reason._status != None
+    #         assert reason._status is not None
     #         for premise_x in reason.premises.values():
-    #             assert premise_x._status != None
+    #             assert premise_x._status is not None
     #         assert _check_all_objects_in_dict_are_correct_type(
     #             x_dict=reason.premises, type_str="src.budunit.reason.PremiseUnit"
     #         )
@@ -476,7 +476,7 @@ def test_get_agenda_dict_ReturnsCorrectObj():
     pledge_items = sue_budunit.get_agenda_dict()
 
     # THEN
-    assert pledge_items != None
+    assert pledge_items is not None
     assert len(pledge_items) > 0
     assert len(pledge_items) == 1
 
@@ -501,15 +501,15 @@ def test_BudUnit_settle_bud_CorrectlySetsData_bud_v001():
     inter_text = "Internet"
     inter_road = yao_budunit.make_l1_road(inter_text)
     yao_budunit.set_fact(base=inter_road, pick=inter_road)
-    assert yao_budunit != None
+    assert yao_budunit is not None
     # print(f"{yao_budunit._owner_id=}")
     # print(f"{len(yao_budunit._idearoot._kids)=}")
     ulty_text = "Ultimate Frisbee"
     ulty_road = yao_budunit.make_l1_road(ulty_text)
 
     # if yao_budunit._idearoot._kids["Ultimate Frisbee"]._label == "Ultimate Frisbee":
-    assert yao_budunit._idearoot._kids[ulty_text]._reasonunits != None
-    assert yao_budunit._owner_id != None
+    assert yao_budunit._idearoot._kids[ulty_text]._reasonunits is not None
+    assert yao_budunit._owner_id is not None
 
     # for fact in yao_budunit._idearoot._factunits.values():
     #     print(f"{fact=}")
@@ -761,12 +761,12 @@ def test_BudUnit_settle_bud_EveryIdeaHasActiveStatus_bud_v001():
     # for idea in idea_list_without_idearoot:
     #     idea_kid_count += 1
     #     print(f"{idea._label=} {idea_kid_count=}")
-    #     assert idea._active != None
+    #     assert idea._active is not None
     #     assert idea._active in (True, False)
     # assert idea_kid_count == len(idea_list_without_idearoot)
 
     assert len(yao_budunit._idea_dict) == sum(
-        idea._active != None for idea in yao_budunit._idea_dict.values()
+        idea._active is not None for idea in yao_budunit._idea_dict.values()
     )
 
 
@@ -923,7 +923,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
     sue_budunit.settle_bud()
     # THEN
     assert len(sue_budunit._econ_dict) == 1
-    assert sue_budunit._econ_dict.get(oregon_road) != None
+    assert sue_budunit._econ_dict.get(oregon_road) is not None
 
     # WHEN
     week_road = sue_budunit.make_l1_road("weekdays")
@@ -935,8 +935,8 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
     sue_budunit.settle_bud()
     # THEN
     assert len(sue_budunit._econ_dict) == 2
-    assert sue_budunit._econ_dict.get(oregon_road) != None
-    assert sue_budunit._econ_dict.get(mon_road) != None
+    assert sue_budunit._econ_dict.get(oregon_road) is not None
+    assert sue_budunit._econ_dict.get(mon_road) is not None
 
     # WHEN
     tue_road = sue_budunit.make_road(week_road, "Tuesday")
@@ -950,9 +950,9 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
 
     # THEN
     assert len(sue_budunit._econ_dict) == 3
-    assert sue_budunit._econ_dict.get(oregon_road) != None
-    assert sue_budunit._econ_dict.get(mon_road) != None
-    assert sue_budunit._econ_dict.get(tue_road) != None
+    assert sue_budunit._econ_dict.get(oregon_road) is not None
+    assert sue_budunit._econ_dict.get(mon_road) is not None
+    assert sue_budunit._econ_dict.get(tue_road) is not None
 
     # WHEN
     sue_budunit.edit_idea_attr(week_road, healerhold=sue_healerhold)

@@ -52,13 +52,13 @@ class Lemmas:
                 src_nigh=src_idea_close,
             )
             # # if both are not null return r1_nigh as fact_open and r2_open as fact_nigh
-            # if r1_open != None and r1_nigh != None and r2_open != None and r2_nigh != None:
+            # if r1_open is not None and r1_nigh is not None and r2_open is not None and r2_nigh is not None:
             #     fact_open = r1_nigh
             #     fact_nigh = r2_open
-            if r1_open != None and r1_nigh != None:
+            if r1_open is not None and r1_nigh is not None:
                 fact_open = r1_open
                 fact_nigh = r1_nigh
-            elif r2_open != None and r2_nigh != None:
+            elif r2_open is not None and r2_nigh is not None:
                 fact_open = r2_open
                 fact_nigh = r2_nigh
 
@@ -186,7 +186,11 @@ class Lemmas:
                 src_open=src_open,
                 src_nigh=src_nigh,
             )
-        elif idea_numor != None and idea_denom != None and idea_reest in (False, None):
+        elif (
+            idea_numor is not None
+            and idea_denom is not None
+            and idea_reest in (False, None)
+        ):
             fact_open, fact_nigh = self._get_multipler_calc_fact_attr(
                 idea_begin=idea_begin,
                 idea_close=idea_close,
@@ -195,7 +199,7 @@ class Lemmas:
                 src_open=src_open,
                 src_nigh=src_nigh,
             )
-        elif idea_numor != None and idea_denom != None and idea_reest == True:
+        elif idea_numor is not None and idea_denom is not None and idea_reest == True:
             fact_open, fact_nigh = self._get_remainder_calc_fact_attr(
                 idea_begin=idea_begin,
                 idea_close=idea_close,

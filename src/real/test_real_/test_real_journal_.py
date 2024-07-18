@@ -90,7 +90,7 @@ def test_RealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     music_real._create_journal_db(in_memory=True)
 
     # THEN
-    assert music_real._journal_db != None
+    assert music_real._journal_db is not None
     assert os_path_exists(music_real.get_journal_db_path()) is False
 
 
