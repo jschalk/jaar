@@ -171,8 +171,8 @@ def test_CharUnit_clear_lobbyships_SetsAttrCorrectly():
 def test_CharUnit_add_lobbyship_SetsAttrCorrectly():
     # ESTABLISH
     run_text = ",run"
-    run_credor_weight = ",run"
-    run_debtor_weight = ",run"
+    run_credor_weight = 78
+    run_debtor_weight = 99
     yao_charunit = charunit_shop("Yao")
     assert yao_charunit.get_lobbyship(run_text) is None
 
