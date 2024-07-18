@@ -302,8 +302,8 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLineestorFromRootCorrectly():
     # for kid_idea in root_idea._kids.values():
     #     sum_x += kid_idea._fund_ratio
     #     print(f"  {kid_idea._fund_ratio=} {sum_x=} {kid_idea.get_road()=}")
-    assert round(sue_awardline._fund_give, 15) == 1 * default_fund_pool()
-    assert round(sue_awardline._fund_take, 15) == 1 * default_fund_pool()
+    assert round(sue_awardline._fund_give, 15) == default_fund_pool()
+    assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(
         lobby_id=sue_text,
         _fund_give=default_fund_pool(),
