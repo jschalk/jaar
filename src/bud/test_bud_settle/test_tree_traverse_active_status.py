@@ -7,7 +7,7 @@ from src.bud.healer import healerhold_shop
 from src.bud.examples.example_buds import (
     get_bud_with_4_levels_and_2reasons,
     get_bud_with7amCleanTableReason,
-    bud_v001,
+    budunit_v001,
     from_list_get_active,
 )
 from src.bud.idea import ideaunit_shop
@@ -307,9 +307,9 @@ def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
     assert len(pledge_items) == 1
 
 
-def test_BudUnit_settle_bud_CorrectlySetsData_bud_v001():
+def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     # ESTABLISH
-    yao_budunit = bud_v001()
+    yao_budunit = budunit_v001()
     print(f"{yao_budunit.get_reason_bases()=}")
     # day_hour = f"{yao_budunit._real_id},day_hour"
     # yao_budunit.set_fact(base=day_hour, pick=day_hour, open=0, nigh=23)
@@ -376,9 +376,9 @@ def test_BudUnit_settle_bud_CorrectlySetsData_bud_v001():
     assert yao_budunit._idea_dict.get(laundry_road)._active is False
 
 
-def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_bud_v001():
+def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     # ESTABLISH
-    yao_budunit = bud_v001()
+    yao_budunit = budunit_v001()
 
     day_hr_text = "day_hour"
     day_hr_road = yao_budunit.make_l1_road(day_hr_text)
@@ -479,9 +479,9 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_bud_v001():
     # assert YR.get_active(road=bird_idea, idea_dict=idea_dict) is False
 
 
-def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bud_v001():
+def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_budunit_v001():
     # ESTABLISH
-    yao_budunit = bud_v001()
+    yao_budunit = budunit_v001()
     day_text = "day_hour"
     day_road = yao_budunit.make_l1_road(day_text)
     min_text = "day_minute"
@@ -559,9 +559,9 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     assert week_premise.divisor == 6 and week_premise.open == 1
 
 
-def test_BudUnit_settle_bud_EveryIdeaHasActiveStatus_bud_v001():
+def test_BudUnit_settle_bud_EveryIdeaHasActiveStatus_budunit_v001():
     # ESTABLISH
-    yao_budunit = bud_v001()
+    yao_budunit = budunit_v001()
 
     # WHEN
     yao_budunit.settle_bud()
@@ -600,9 +600,9 @@ def test_BudUnit_settle_bud_EveryIdeaHasActiveStatus_bud_v001():
     )
 
 
-def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_bud_v001():
+def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
     # ESTABLISH
-    yao_budunit = bud_v001()
+    yao_budunit = budunit_v001()
     minute_text = "day_minute"
     minute_road = yao_budunit.make_l1_road(minute_text)
     yao_budunit.set_fact(base=minute_road, pick=minute_road, open=0, nigh=1399)

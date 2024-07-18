@@ -1,12 +1,16 @@
 from src._road.finance import default_fund_pool
+from src._road.road import RoadUnit
+from src.bud.char import charunit_shop
 from src.bud.lobby import awardlink_shop
 from src.bud.examples.example_buds import (
+    budunit_v001,
+    budunit_v001_with_large_agenda as budunit_v001_with_large_agenda,
     get_bud_1Task_1CE0MinutesReason_1Fact,
 )
-from src.bud.char import charunit_shop
-from src.bud.idea import ideaunit_shop
-from src.bud.bud import budunit_shop
+from src.bud.bud import BudUnit, budunit_shop
+from src.bud.idea import ideaunit_shop, IdeaUnit
 from pytest import raises as pytest_raises
+from dataclasses import dataclass
 
 
 def test_BudUnit_settle_bud_CorrectlyCalculates1LevelBudLobbyBudImportance():
@@ -211,19 +215,6 @@ def test_BudUnit_IsAbleToEditFactUnitAnyAncestor_Idea_1():
     mail_idea = idea_dict.get(mail_road)
     assert mail_idea.pledge == True
     assert mail_idea._task == True
-
-
-from src._road.finance import default_fund_pool
-from src._road.road import RoadUnit
-from src.bud.char import charunit_shop
-from src.bud.lobby import awardlink_shop
-from src.bud.examples.example_buds import (
-    bud_v001 as examples_bud_v001,
-    bud_v001_with_large_agenda as examples_bud_v001_with_large_agenda,
-)
-from src.bud.bud import BudUnit, budunit_shop
-from src.bud.idea import ideaunit_shop, IdeaUnit
-from dataclasses import dataclass
 
 
 def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudImportance():
@@ -574,38 +565,6 @@ def test_BudUnit_settle_bud_CorrectlySetsCharAttrs():
     )
 
 
-# def test_BudUnit_settle_bud_DoesNotRaiseError_credor_respectWhenCharSumIsZero():
-#     # ESTABLISH
-#     yao_bud = budunit_shop("Yao")
-#     assert yao_bud._credor_respect is None
-#     assert yao_bud.is_charunits_credor_weight_sum_correct()
-#     assert yao_bud.settle_bud() is None
-
-#     # WHEN
-#     x_int = 13
-#     yao_bud.set_credor_respect(x_int)
-
-#     # THEN
-#     assert yao_bud.is_charunits_credor_weight_sum_correct()
-#     yao_bud.settle_bud()
-
-
-# def test_BudUnit_settle_bud_DoesNotRaiseError_debtor_respectWhenCharSumIsZero():
-#     # ESTABLISH
-#     yao_bud = budunit_shop("Yao")
-#     assert yao_bud._credor_respect is None
-#     assert yao_bud.is_charunits_debtor_weight_sum_correct()
-#     assert yao_bud.settle_bud() is None
-
-#     # WHEN
-#     x_int = 13
-#     yao_bud.set_debtor_resepect(x_int)
-
-#     # THEN
-#     assert yao_bud.is_charunits_debtor_weight_sum_correct()
-#     yao_bud.settle_bud()
-
-
 def clear_all_charunits_lobbyboxs_fund_agenda_give_take(x_bud: BudUnit):
     # DELETE bud_agenda_debt and bud_agenda_cred
     for lobbybox_x in x_bud._lobbyboxs.values():
@@ -672,7 +631,7 @@ class AwardAgendaMetrics:
 
 def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # ESTABLISH
-    x_bud = examples_bud_v001_with_large_agenda()
+    x_bud = budunit_v001_with_large_agenda()
     clear_all_charunits_lobbyboxs_fund_agenda_give_take(x_bud=x_bud)
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
@@ -815,18 +774,9 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     assert yao_bud_zia_char._fund_agenda_ratio_take == 0.5
 
 
-def test_examples_bud_v001_has_chars():
+def test_BudUnit_settle_bud_CreatesLobbyBoxWith_budunit_v001():
     # ESTABLISH / WHEN
-    yao_bud = examples_bud_v001()
-
-    # THEN
-    assert yao_bud._chars is not None
-    assert len(yao_bud._chars) == 22
-
-
-def test_examples_bud_v001_HasLobbys():
-    # ESTABLISH / WHEN
-    x_bud = examples_bud_v001()
+    x_bud = budunit_v001()
     x_bud.settle_bud()
 
     # THEN
@@ -844,7 +794,6 @@ def test_examples_bud_v001_HasLobbys():
     # THEN
     # print(f"{len(idea_dict)=}")
     db_idea = idea_dict.get(x_bud.make_l1_road("D&B"))
-    # print(f"{db_idea._label=} {db_idea._awardlinks=}")
     assert len(db_idea._awardlinks) == 3
     # for idea_key in idea_dict:
     #     print(f"{idea_key=}")

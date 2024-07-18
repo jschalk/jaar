@@ -1,4 +1,4 @@
-from src.bud.examples.example_buds import bud_v001
+from src.bud.examples.example_buds import budunit_v001
 from src.bud.lobby import awardlink_shop
 from src.bud.char import charunit_shop
 from src.bud.bud import budunit_shop
@@ -22,7 +22,7 @@ def test_BudUnit_get_tree_metrics_exists():
 
 def test_BudUnit_get_tree_metrics_get_idea_uid_max_correctlyGetsMaxIdeaUID():
     # ESTABLISH
-    yao_bud = bud_v001()
+    yao_bud = budunit_v001()
 
     # WHEN
     tree_metrics_x = yao_bud.get_tree_metrics()
@@ -34,7 +34,7 @@ def test_BudUnit_get_tree_metrics_get_idea_uid_max_correctlyGetsMaxIdeaUID():
 
 def test_BudUnit_get_tree_metrics_CorrectlySetsBoolean_all_idea_uids_are_unique():
     # ESTABLISH
-    yao_bud = bud_v001()
+    yao_bud = budunit_v001()
 
     # WHEN
     tree_metrics_x = yao_bud.get_tree_metrics()
@@ -46,7 +46,7 @@ def test_BudUnit_get_tree_metrics_CorrectlySetsBoolean_all_idea_uids_are_unique(
 
 def test_BudUnit_get_tree_set_all_idea_uids_unique():
     # ESTABLISH
-    yao_bud = bud_v001()
+    yao_bud = budunit_v001()
     tree_metrics_before = yao_bud.get_tree_metrics()
     assert len(tree_metrics_before.uid_dict) == 219
 
@@ -94,7 +94,7 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
 
 def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaRoadUnit():
     # ESTABLISH
-    yao_bud = bud_v001()
+    yao_bud = budunit_v001()
     yao_tree_metrics = yao_bud.get_tree_metrics()
 
     # WHEN/THEN
@@ -112,7 +112,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaRoadUnit():
 
 def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
     # ESTABLISH
-    yao_budunit = bud_v001()
+    yao_budunit = budunit_v001()
 
     # WHEN
     yao_bud_metrics = yao_budunit.get_tree_metrics()
@@ -128,7 +128,7 @@ def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
 
 def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
     # ESTABLISH
-    yao_budunit = bud_v001()
+    yao_budunit = budunit_v001()
     missing_bases = yao_budunit.get_missing_fact_bases()
     assert missing_bases is not None
     print(f"{missing_bases=}")

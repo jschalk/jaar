@@ -1,5 +1,5 @@
 from src.bud.examples.example_buds import (
-    bud_v001_with_large_agenda,
+    budunit_v001_with_large_agenda,
     get_bud_with_4_levels,
     get_bud_laundry_example1,
     get_bud_with_4_levels_and_2reasons,
@@ -20,7 +20,7 @@ def test_display_ideatree_Scenario0():
     # a_bud = get_5nodeHG_bud()
     # a_bud = get_7nodeJRoot_bud()
     a_bud = get_bud_with_4_levels()
-    # a_bud = bud_v001()
+    # a_bud = budunit_v001()
     a_bud.settle_bud()
     print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
 
@@ -38,7 +38,7 @@ def test_display_ideatree_Scenario1_shows_Tasks():
     # a_bud = get_5nodeHG_bud()
     # a_bud = get_7nodeJRoot_bud()
     a_bud = get_bud_laundry_example1()
-    # a_bud = bud_v001()
+    # a_bud = budunit_v001()
     a_bud.settle_bud()
     print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
 
@@ -72,7 +72,7 @@ def test_get_bud_chars_plotly_fig_DisplaysCorrectInfo():
 
 def test_get_bud_agenda_plotly_fig_DisplaysCorrectInfo():
     # ESTABLISH
-    yao_bud = bud_v001_with_large_agenda()
+    yao_bud = budunit_v001_with_large_agenda()
     week_text = "weekdays"
     week_road = yao_bud.make_l1_road(week_text)
     assert len(yao_bud.get_agenda_dict()) == 63

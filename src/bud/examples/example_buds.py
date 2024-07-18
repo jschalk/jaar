@@ -16,12 +16,12 @@ from src.bud.reason_doer import doerunit_shop
 from src.bud.examples.bud_env import get_bud_examples_dir as env_dir
 
 
-def bud_v001() -> BudUnit:
+def budunit_v001() -> BudUnit:
     return budunit_get_from_json(open_file(env_dir(), "example_bud1.json"))
 
 
-def bud_v001_with_large_agenda() -> BudUnit:
-    yao_bud = bud_v001()
+def budunit_v001_with_large_agenda() -> BudUnit:
+    yao_bud = budunit_v001()
     day_minute_road = yao_bud.make_l1_road("day_minute")
     month_week_road = yao_bud.make_l1_road("month_week")
     nations_road = yao_bud.make_l1_road("Nation-States")
@@ -47,7 +47,7 @@ def bud_v001_with_large_agenda() -> BudUnit:
     return yao_bud
 
 
-def bud_v002() -> BudUnit:
+def budunit_v002() -> BudUnit:
     bob_bud = budunit_get_from_json(open_file(env_dir(), "example_bud2.json"))
     print(f"{bob_bud._real_id=} {bob_bud._road_delimiter=}")
     return bob_bud

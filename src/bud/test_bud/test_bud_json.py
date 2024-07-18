@@ -11,7 +11,7 @@ from src.bud.bud import (
     get_dict_of_bud_from_dict,
 )
 from src.bud.examples.example_buds import (
-    bud_v001 as example_buds_bud_v001,
+    budunit_v001,
     get_bud_x1_3levels_1reason_1facts as example_buds_get_bud_x1_3levels_1reason_1facts,
     get_bud_base_time_example as example_buds_get_bud_base_time_example,
 )
@@ -20,7 +20,7 @@ from pytest import raises as pytest_raises
 
 def test_BudUnit_get_dict_ReturnsDictObject():
     # ESTABLISH
-    x_bud = example_buds_bud_v001()
+    x_bud = budunit_v001()
     day_hour_text = "day_hour"
     day_hour_road = x_bud.make_l1_road(day_hour_text)
     day_hour_idea = x_bud.get_idea_obj(day_hour_road)
@@ -249,7 +249,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 
 def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # ESTABLISH
-    yao_bud = example_buds_bud_v001()
+    yao_bud = budunit_v001()
     day_hour_text = "day_hour"
     day_hour_road = yao_bud.make_l1_road(day_hour_text)
     yao_bud.set_fact(base=day_hour_road, pick=day_hour_road, open=0, nigh=23)
@@ -480,7 +480,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
 
 def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_weight():
     # ESTABLISH
-    x1_bud = example_buds_bud_v001()
+    x1_bud = budunit_v001()
     x1_bud._weight = 15
     assert 15 == x1_bud._weight
     assert x1_bud._idearoot._weight != x1_bud._weight
@@ -499,7 +499,7 @@ def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_weight():
 
 def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     # ESTABLISH
-    x1_bud = example_buds_bud_v001()
+    x1_bud = budunit_v001()
     x2_bud = example_buds_get_bud_x1_3levels_1reason_1facts()
     x3_bud = example_buds_get_bud_base_time_example()
     print(f"{x1_bud._owner_id}")
@@ -544,3 +544,12 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_philipa_charunit._lobbyships == x1_philipa_charunit._lobbyships
     assert ccn_bud1 == x1_bud
     assert ccn_dict_of_obj.get(x1_bud._owner_id) == x1_bud
+
+
+def test_budunit_get_from_json_CheckExampleHasCorrectAttrs_budunit_v001():
+    # ESTABLISH / WHEN
+    yao_bud = budunit_v001()
+
+    # THEN
+    assert yao_bud._chars is not None
+    assert len(yao_bud._chars) == 22
