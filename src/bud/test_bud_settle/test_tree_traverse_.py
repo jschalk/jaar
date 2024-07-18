@@ -539,6 +539,51 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLineestorFromNonRootCorrectly()
     }
 
 
+def test_BudUnit_settle_bud_Sets_deletes_awardheirs():
+    # ESTABLISH
+    prom_text = "prom"
+    x_bud = budunit_shop(prom_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    x_bud.add_charunit(yao_text)
+    x_bud.add_charunit(zia_text)
+    x_bud.add_charunit(Xio_text)
+
+    swim_text = "swim"
+    swim_road = x_bud.make_road(prom_text, swim_text)
+
+    x_bud.add_l1_idea(ideaunit_shop(swim_text))
+    awardlink_yao = awardlink_shop(yao_text, give_weight=10)
+    awardlink_zia = awardlink_shop(zia_text, give_weight=10)
+    awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
+
+    swim_idea = x_bud.get_idea_obj(swim_road)
+    x_bud.edit_idea_attr(swim_road, awardlink=awardlink_yao)
+    x_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
+    x_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
+
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 0
+
+    # WHEN
+    x_bud.settle_bud()
+
+    # THEN
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 3
+    x_bud.edit_idea_attr(swim_road, awardlink_del=yao_text)
+    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea._awardheirs) == 3
+
+    # WHEN
+    x_bud.settle_bud()
+
+    # THEN
+    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea._awardheirs) == 2
+
+
 def test_BudUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():
     # ESTABLISH
     x_bud = example_buds_get_bud_with_4_levels()
