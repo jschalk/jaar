@@ -19,7 +19,7 @@ class InvalidCharException(Exception):
     pass
 
 
-class _lobbyship_Exception(Exception):
+class Bad_char_idLobbyShipException(Exception):
     pass
 
 
@@ -150,7 +150,7 @@ class CharUnit(CharCore):
         x_lobby_id = x_lobbyship.lobby_id
         lobby_id_is_char_id = is_roadnode(x_lobby_id, self._road_delimiter)
         if lobby_id_is_char_id and self.char_id != x_lobby_id:
-            raise _lobbyship_Exception(
+            raise Bad_char_idLobbyShipException(
                 f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_lobby_id}'."
             )
 

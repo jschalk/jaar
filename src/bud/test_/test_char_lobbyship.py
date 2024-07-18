@@ -3,7 +3,7 @@ from src.bud.char import charunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_CharUnit_set_lobbyship_SetsAttr():
+def test_CharUnit_set_lobbyship_SetsAttr_lobbyships():
     # ESTABLISH
     run_text = ",run"
     yao_text = "Yao"
