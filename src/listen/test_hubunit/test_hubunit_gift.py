@@ -447,11 +447,11 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     assert sue_hubunit.gift_file_exists(three_int) is False
 
     # WHEN
-    before_world = sue_hubunit.default_voice_world()
+    before_bud = sue_hubunit.default_voice_bud()
     bob_text = "Bob"
-    after_world = copy_deepcopy(before_world)
-    after_world.add_charunit(bob_text)
-    sue_hubunit.create_save_gift_file(before_world, after_world)
+    after_bud = copy_deepcopy(before_bud)
+    after_bud.add_charunit(bob_text)
+    sue_hubunit.create_save_gift_file(before_bud, after_bud)
 
     # THEN
     assert sue_hubunit.gift_file_exists(three_int)
@@ -461,15 +461,15 @@ def test_HubUnit_merge_any_gifts_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    voice_world = sue_hubunit.get_voice_world()
-    voice_world._last_gift_id is None
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    voice_bud = sue_hubunit.get_voice_bud()
+    voice_bud._last_gift_id is None
 
     # WHEN
-    new_world = sue_hubunit._merge_any_gifts(voice_world)
+    new_bud = sue_hubunit._merge_any_gifts(voice_bud)
 
     # THEN
-    assert new_world == voice_world
+    assert new_bud == voice_bud
 
 
 def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
@@ -479,22 +479,22 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     sue_hubunit.save_gift_file(sue_1atomunits_giftunit())
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    voice_world = sue_hubunit.get_voice_world()
-    print(f"{voice_world._real_id=}")
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    voice_bud = sue_hubunit.get_voice_bud()
+    print(f"{voice_bud._real_id=}")
     print(f"{sue_hubunit.real_id=}")
     sports_text = "sports"
-    sports_road = voice_world.make_l1_road(sports_text)
+    sports_road = voice_bud.make_l1_road(sports_text)
     knee_text = "knee"
-    knee_road = voice_world.make_road(sports_road, knee_text)
-    assert voice_world.idea_exists(sports_road) is False
+    knee_road = voice_bud.make_road(sports_road, knee_text)
+    assert voice_bud.idea_exists(sports_road) is False
 
     # WHEN
-    new_world = sue_hubunit._merge_any_gifts(voice_world)
+    new_bud = sue_hubunit._merge_any_gifts(voice_bud)
 
     # THEN
-    assert new_world != voice_world
-    assert new_world.idea_exists(sports_road)
+    assert new_bud != voice_bud
+    assert new_bud.idea_exists(sports_road)
 
 
 def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
@@ -504,20 +504,20 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_text)
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    voice_world = sue_hubunit.get_voice_world()
-    print(f"{voice_world._real_id=}")
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    voice_bud = sue_hubunit.get_voice_bud()
+    print(f"{voice_bud._real_id=}")
     sports_text = "sports"
-    sports_road = voice_world.make_l1_road(sports_text)
+    sports_road = voice_bud.make_l1_road(sports_text)
     knee_text = "knee"
-    knee_road = voice_world.make_road(sports_road, knee_text)
-    assert voice_world.idea_exists(sports_road) is False
-    assert voice_world.idea_exists(knee_road) is False
+    knee_road = voice_bud.make_road(sports_road, knee_text)
+    assert voice_bud.idea_exists(sports_road) is False
+    assert voice_bud.idea_exists(knee_road) is False
 
     # WHEN
-    new_world = sue_hubunit._merge_any_gifts(voice_world)
+    new_bud = sue_hubunit._merge_any_gifts(voice_bud)
 
     # THEN
-    assert new_world != voice_world
-    assert new_world.idea_exists(sports_road)
-    assert new_world.idea_exists(knee_road)
+    assert new_bud != voice_bud
+    assert new_bud.idea_exists(sports_road)
+    assert new_bud.idea_exists(knee_road)

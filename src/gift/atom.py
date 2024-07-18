@@ -5,11 +5,11 @@ from src._instrument.python import (
 )
 from src._instrument.db_tool import create_insert_sqlstr, RowData
 from src._road.road import create_road
-from src._world.reason_idea import factunit_shop
-from src._world.char import charunit_shop
-from src._world.lobby import awardlink_shop
-from src._world.idea import ideaunit_shop
-from src._world.world import WorldUnit
+from src.bud.reason_idea import factunit_shop
+from src.bud.char import charunit_shop
+from src.bud.lobby import awardlink_shop
+from src.bud.idea import ideaunit_shop
+from src.bud.bud import BudUnit
 from src.gift.atom_config import (
     get_category_from_dict,
     atom_delete,
@@ -154,43 +154,43 @@ def get_from_json(x_str: str) -> AtomUnit:
     return x_atom
 
 
-def _modify_world_update_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     x_arg = "_max_tree_traverse"
     if x_atom.get_value(x_arg) != None:
-        x_world.set_max_tree_traverse(x_atom.get_value(x_arg))
+        x_bud.set_max_tree_traverse(x_atom.get_value(x_arg))
     x_arg = "_credor_respect"
     if x_atom.get_value(x_arg) != None:
-        x_world.set_credor_respect(x_atom.get_value(x_arg))
+        x_bud.set_credor_respect(x_atom.get_value(x_arg))
     x_arg = "_debtor_respect"
     if x_atom.get_value(x_arg) != None:
-        x_world.set_debtor_resepect(x_atom.get_value(x_arg))
+        x_bud.set_debtor_resepect(x_atom.get_value(x_arg))
     x_arg = "_fund_pool"
     if x_atom.get_value(x_arg) != None:
-        x_world._fund_pool = x_atom.get_value(x_arg)
+        x_bud._fund_pool = x_atom.get_value(x_arg)
     x_arg = "_fund_coin"
     if x_atom.get_value(x_arg) != None:
-        x_world._fund_coin = x_atom.get_value(x_arg)
+        x_bud._fund_coin = x_atom.get_value(x_arg)
     x_arg = "_weight"
     if x_atom.get_value(x_arg) != None:
-        x_world._weight = x_atom.get_value(x_arg)
+        x_bud._weight = x_atom.get_value(x_arg)
     x_arg = "_bit"
     if x_atom.get_value(x_arg) != None:
-        x_world._bit = x_atom.get_value(x_arg)
+        x_bud._bit = x_atom.get_value(x_arg)
     x_arg = "_penny"
     if x_atom.get_value(x_arg) != None:
-        x_world._penny = x_atom.get_value(x_arg)
+        x_bud._penny = x_atom.get_value(x_arg)
 
 
-def _modify_world_char_lobbyship_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_char_lobbyship_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_lobby_id = x_atom.get_value("lobby_id")
-    x_world.get_char(x_char_id).delete_lobbyship(x_lobby_id)
+    x_bud.get_char(x_char_id).delete_lobbyship(x_lobby_id)
 
 
-def _modify_world_char_lobbyship_update(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_char_lobbyship_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_lobby_id = x_atom.get_value("lobby_id")
-    x_charunit = x_world.get_char(x_char_id)
+    x_charunit = x_bud.get_char(x_char_id)
     x_lobbyship = x_charunit.get_lobbyship(x_lobby_id)
     x_credor_weight = x_atom.get_value("credor_weight")
     x_debtor_weight = x_atom.get_value("debtor_weight")
@@ -198,31 +198,31 @@ def _modify_world_char_lobbyship_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_lobbyship.set_debtor_weight(x_debtor_weight)
 
 
-def _modify_world_char_lobbyship_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_char_lobbyship_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_char_id = x_atom.get_value("char_id")
     x_lobby_id = x_atom.get_value("lobby_id")
     x_credor_weight = x_atom.get_value("credor_weight")
     x_debtor_weight = x_atom.get_value("debtor_weight")
-    x_charunit = x_world.get_char(x_char_id)
+    x_charunit = x_bud.get_char(x_char_id)
     x_charunit.add_lobbyship(x_lobby_id, x_credor_weight, x_debtor_weight)
 
 
-def _modify_world_ideaunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
         x_atom.get_value("parent_road"),
         x_atom.get_value("label"),
-        delimiter=x_world._road_delimiter,
+        delimiter=x_bud._road_delimiter,
     )
-    x_world.del_idea_obj(idea_road, del_children=x_atom.get_value("del_children"))
+    x_bud.del_idea_obj(idea_road, del_children=x_atom.get_value("del_children"))
 
 
-def _modify_world_ideaunit_update(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
         x_atom.get_value("parent_road"),
         x_atom.get_value("label"),
-        delimiter=x_world._road_delimiter,
+        delimiter=x_bud._road_delimiter,
     )
-    x_world.edit_idea_attr(
+    x_bud.edit_idea_attr(
         road=idea_road,
         addin=x_atom.get_value("_addin"),
         begin=x_atom.get_value("_begin"),
@@ -237,8 +237,8 @@ def _modify_world_ideaunit_update(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.add_idea(
+def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.add_idea(
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value("label"),
             _addin=x_atom.get_value("_addin"),
@@ -256,15 +256,15 @@ def _modify_world_ideaunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_idea_awardlink_delete(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.edit_idea_attr(
+def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
         awardlink_del=x_atom.get_value("lobby_id"),
     )
 
 
-def _modify_world_idea_awardlink_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_idea = x_world.get_idea_obj(x_atom.get_value("road"))
+def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
+    x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_awardlink = x_idea._awardlinks.get(x_atom.get_value("lobby_id"))
     x_give_weight = x_atom.get_value("give_weight")
     if x_give_weight != None and x_awardlink.give_weight != x_give_weight:
@@ -272,25 +272,25 @@ def _modify_world_idea_awardlink_update(x_world: WorldUnit, x_atom: AtomUnit):
     x_take_weight = x_atom.get_value("take_weight")
     if x_take_weight != None and x_awardlink.take_weight != x_take_weight:
         x_awardlink.take_weight = x_take_weight
-    x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
+    x_bud.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
-def _modify_world_idea_awardlink_insert(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
         lobby_id=x_atom.get_value("lobby_id"),
         give_weight=x_atom.get_value("give_weight"),
         take_weight=x_atom.get_value("take_weight"),
     )
-    x_world.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
+    x_bud.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
-def _modify_world_idea_factunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
-    x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
+def _modify_bud_idea_factunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_ideaunit.del_factunit(x_atom.get_value("base"))
 
 
-def _modify_world_idea_factunit_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
+def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_factunit = x_ideaunit._factunits.get(x_atom.get_value("base"))
     x_factunit.set_attr(
         pick=x_atom.get_value("pick"),
@@ -300,8 +300,8 @@ def _modify_world_idea_factunit_update(x_world: WorldUnit, x_atom: AtomUnit):
     # x_ideaunit.set_factunit(x_factunit)
 
 
-def _modify_world_idea_factunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.edit_idea_attr(
+def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
         factunit=factunit_shop(
             base=x_atom.get_value("base"),
@@ -312,13 +312,13 @@ def _modify_world_idea_factunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_idea_reasonunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
-    x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
+def _modify_bud_idea_reasonunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_ideaunit.del_reasonunit_base(x_atom.get_value("base"))
 
 
-def _modify_world_idea_reasonunit_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.edit_idea_attr(
+def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_idea_active_requisite=x_atom.get_value(
@@ -327,8 +327,8 @@ def _modify_world_idea_reasonunit_update(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_idea_reasonunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.edit_idea_attr(
+def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_idea_active_requisite=x_atom.get_value(
@@ -337,16 +337,16 @@ def _modify_world_idea_reasonunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_idea_reason_premiseunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.edit_idea_attr(
+def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
         reason_del_premise_base=x_atom.get_value("base"),
         reason_del_premise_need=x_atom.get_value("need"),
     )
 
 
-def _modify_world_idea_reason_premiseunit_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.edit_idea_attr(
+def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_premise=x_atom.get_value("need"),
@@ -356,8 +356,8 @@ def _modify_world_idea_reason_premiseunit_update(x_world: WorldUnit, x_atom: Ato
     )
 
 
-def _modify_world_idea_reason_premiseunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
+def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_ideaunit.set_reason_premise(
         base=x_atom.get_value("base"),
         premise=x_atom.get_value("need"),
@@ -367,30 +367,30 @@ def _modify_world_idea_reason_premiseunit_insert(x_world: WorldUnit, x_atom: Ato
     )
 
 
-def _modify_world_idea_lobbyhold_delete(x_world: WorldUnit, x_atom: AtomUnit):
-    x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
+def _modify_bud_idea_lobbyhold_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_ideaunit._doerunit.del_lobbyhold(lobby_id=x_atom.get_value("lobby_id"))
 
 
-def _modify_world_idea_lobbyhold_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_ideaunit = x_world.get_idea_obj(x_atom.get_value("road"))
+def _modify_bud_idea_lobbyhold_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_ideaunit._doerunit.set_lobbyhold(lobby_id=x_atom.get_value("lobby_id"))
 
 
-def _modify_world_charunit_delete(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.del_charunit(x_atom.get_value("char_id"))
+def _modify_bud_charunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.del_charunit(x_atom.get_value("char_id"))
 
 
-def _modify_world_charunit_update(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.edit_charunit(
+def _modify_bud_charunit_update(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.edit_charunit(
         char_id=x_atom.get_value("char_id"),
         credor_weight=x_atom.get_value("credor_weight"),
         debtor_weight=x_atom.get_value("debtor_weight"),
     )
 
 
-def _modify_world_charunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
-    x_world.set_charunit(
+def _modify_bud_charunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_bud.set_charunit(
         charunit_shop(
             char_id=x_atom.get_value("char_id"),
             credor_weight=x_atom.get_value("credor_weight"),
@@ -399,104 +399,104 @@ def _modify_world_charunit_insert(x_world: WorldUnit, x_atom: AtomUnit):
     )
 
 
-def _modify_world_worldunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_update():
-        _modify_world_update_worldunit(x_world, x_atom)
+        _modify_bud_update_budunit(x_bud, x_atom)
 
 
-def _modify_world_char_lobbyship(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_char_lobbyship(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_char_lobbyship_delete(x_world, x_atom)
+        _modify_bud_char_lobbyship_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_char_lobbyship_update(x_world, x_atom)
+        _modify_bud_char_lobbyship_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_char_lobbyship_insert(x_world, x_atom)
+        _modify_bud_char_lobbyship_insert(x_bud, x_atom)
 
 
-def _modify_world_ideaunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_ideaunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_ideaunit_delete(x_world, x_atom)
+        _modify_bud_ideaunit_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_ideaunit_update(x_world, x_atom)
+        _modify_bud_ideaunit_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_ideaunit_insert(x_world, x_atom)
+        _modify_bud_ideaunit_insert(x_bud, x_atom)
 
 
-def _modify_world_idea_awardlink(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_idea_awardlink(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_awardlink_delete(x_world, x_atom)
+        _modify_bud_idea_awardlink_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_idea_awardlink_update(x_world, x_atom)
+        _modify_bud_idea_awardlink_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_awardlink_insert(x_world, x_atom)
+        _modify_bud_idea_awardlink_insert(x_bud, x_atom)
 
 
-def _modify_world_idea_factunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_idea_factunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_factunit_delete(x_world, x_atom)
+        _modify_bud_idea_factunit_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_idea_factunit_update(x_world, x_atom)
+        _modify_bud_idea_factunit_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_factunit_insert(x_world, x_atom)
+        _modify_bud_idea_factunit_insert(x_bud, x_atom)
 
 
-def _modify_world_idea_reasonunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_idea_reasonunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_reasonunit_delete(x_world, x_atom)
+        _modify_bud_idea_reasonunit_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_idea_reasonunit_update(x_world, x_atom)
+        _modify_bud_idea_reasonunit_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_reasonunit_insert(x_world, x_atom)
+        _modify_bud_idea_reasonunit_insert(x_bud, x_atom)
 
 
-def _modify_world_idea_reason_premiseunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_idea_reason_premiseunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_reason_premiseunit_delete(x_world, x_atom)
+        _modify_bud_idea_reason_premiseunit_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_idea_reason_premiseunit_update(x_world, x_atom)
+        _modify_bud_idea_reason_premiseunit_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_reason_premiseunit_insert(x_world, x_atom)
+        _modify_bud_idea_reason_premiseunit_insert(x_bud, x_atom)
 
 
-def _modify_world_idea_lobbyhold(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_idea_lobbyhold(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_idea_lobbyhold_delete(x_world, x_atom)
+        _modify_bud_idea_lobbyhold_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_idea_lobbyhold_insert(x_world, x_atom)
+        _modify_bud_idea_lobbyhold_insert(x_bud, x_atom)
 
 
-def _modify_world_charunit(x_world: WorldUnit, x_atom: AtomUnit):
+def _modify_bud_charunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_world_charunit_delete(x_world, x_atom)
+        _modify_bud_charunit_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_world_charunit_update(x_world, x_atom)
+        _modify_bud_charunit_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_world_charunit_insert(x_world, x_atom)
+        _modify_bud_charunit_insert(x_bud, x_atom)
 
 
-def modify_world_with_atomunit(x_world: WorldUnit, x_atom: AtomUnit):
-    if x_atom.category == "worldunit":
-        _modify_world_worldunit(x_world, x_atom)
-    elif x_atom.category == "world_char_lobbyship":
-        _modify_world_char_lobbyship(x_world, x_atom)
-    elif x_atom.category == "world_ideaunit":
-        _modify_world_ideaunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_awardlink":
-        _modify_world_idea_awardlink(x_world, x_atom)
-    elif x_atom.category == "world_idea_factunit":
-        _modify_world_idea_factunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_reasonunit":
-        _modify_world_idea_reasonunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_reason_premiseunit":
-        _modify_world_idea_reason_premiseunit(x_world, x_atom)
-    elif x_atom.category == "world_idea_lobbyhold":
-        _modify_world_idea_lobbyhold(x_world, x_atom)
-    elif x_atom.category == "world_charunit":
-        _modify_world_charunit(x_world, x_atom)
+def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
+    if x_atom.category == "budunit":
+        _modify_bud_budunit(x_bud, x_atom)
+    elif x_atom.category == "bud_char_lobbyship":
+        _modify_bud_char_lobbyship(x_bud, x_atom)
+    elif x_atom.category == "bud_ideaunit":
+        _modify_bud_ideaunit(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_awardlink":
+        _modify_bud_idea_awardlink(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_factunit":
+        _modify_bud_idea_factunit(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_reasonunit":
+        _modify_bud_idea_reasonunit(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_reason_premiseunit":
+        _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_lobbyhold":
+        _modify_bud_idea_lobbyhold(x_bud, x_atom)
+    elif x_atom.category == "bud_charunit":
+        _modify_bud_charunit(x_bud, x_atom)
 
 
 def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
-    if category == "worldunit":
+    if category == "budunit":
         return (
             x_obj._weight != y_obj._weight
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
@@ -506,15 +506,15 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._fund_pool != y_obj._fund_pool
             or x_obj._fund_coin != y_obj._fund_coin
         )
-    elif category in {"world_char_lobbyship"}:
+    elif category in {"bud_char_lobbyship"}:
         return (x_obj.credor_weight != y_obj.credor_weight) or (
             x_obj.debtor_weight != y_obj.debtor_weight
         )
-    elif category in {"world_idea_awardlink"}:
+    elif category in {"bud_idea_awardlink"}:
         return (x_obj.give_weight != y_obj.give_weight) or (
             x_obj.take_weight != y_obj.take_weight
         )
-    elif category == "world_ideaunit":
+    elif category == "bud_ideaunit":
         return (
             x_obj._addin != y_obj._addin
             or x_obj._begin != y_obj._begin
@@ -527,21 +527,21 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._weight != y_obj._weight
             or x_obj.pledge != y_obj.pledge
         )
-    elif category == "world_idea_factunit":
+    elif category == "bud_idea_factunit":
         return (
             (x_obj.pick != y_obj.pick)
             or (x_obj.open != y_obj.open)
             or (x_obj.nigh != y_obj.nigh)
         )
-    elif category == "world_idea_reasonunit":
+    elif category == "bud_idea_reasonunit":
         return x_obj.base_idea_active_requisite != y_obj.base_idea_active_requisite
-    elif category == "world_idea_reason_premiseunit":
+    elif category == "bud_idea_reason_premiseunit":
         return (
             x_obj.open != y_obj.open
             or x_obj.nigh != y_obj.nigh
             or x_obj.divisor != y_obj.divisor
         )
-    elif category == "world_charunit":
+    elif category == "bud_charunit":
         return (x_obj.credor_weight != y_obj.credor_weight) or (
             x_obj.debtor_weight != y_obj.debtor_weight
         )

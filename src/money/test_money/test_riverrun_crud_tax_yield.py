@@ -1,4 +1,4 @@
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.money.rivercycle import get_debtorledger
 from src.money.riverrun import riverrun_shop
@@ -211,11 +211,11 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     bob_tax_yield = 38
     sue_tax_yield = 56
     yao_tax_yield = 6
-    bob_world = worldunit_shop(bob_text)
-    bob_world.add_charunit(bob_text, 2, bob_tax_yield)
-    bob_world.add_charunit(sue_text, 2, sue_tax_yield)
-    bob_world.add_charunit(yao_text, 2, yao_tax_yield)
-    bob_debtorledger = get_debtorledger(bob_world)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_charunit(bob_text, 2, bob_tax_yield)
+    bob_bud.add_charunit(sue_text, 2, sue_tax_yield)
+    bob_bud.add_charunit(yao_text, 2, yao_tax_yield)
+    bob_debtorledger = get_debtorledger(bob_bud)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_char_tax_due(bob_text) == 380
     assert bob_riverrun.get_char_tax_yield(bob_text) == 0

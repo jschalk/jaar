@@ -1,5 +1,5 @@
 from src._road.road import OwnerID, CharID
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 from src.listen.hubunit import HubUnit, hubunit_shop
 from src.money.examples.econ_env import temp_reals_dir, temp_real_id, get_texas_road
 from src.money.rivercycle import get_credorledger
@@ -20,11 +20,11 @@ def example_yao_credorledger() -> dict[str, float]:
     yao_credor_weight = 7
     bob_credor_weight = 3
     zia_credor_weight = 10
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(yao_text, yao_credor_weight)
-    yao_world.add_charunit(bob_text, bob_credor_weight)
-    yao_world.add_charunit(zia_text, zia_credor_weight)
-    return get_credorledger(yao_world)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_charunit(yao_text, yao_credor_weight)
+    yao_bud.add_charunit(bob_text, bob_credor_weight)
+    yao_bud.add_charunit(zia_text, zia_credor_weight)
+    return get_credorledger(yao_bud)
 
 
 def example_bob_credorledger() -> dict[str, float]:
@@ -34,11 +34,11 @@ def example_bob_credorledger() -> dict[str, float]:
     yao_credor_weight = 1
     bob_credor_weight = 7
     zia_credor_weight = 42
-    bob_world = worldunit_shop(bob_text)
-    bob_world.add_charunit(yao_text, yao_credor_weight)
-    bob_world.add_charunit(bob_text, bob_credor_weight)
-    bob_world.add_charunit(zia_text, zia_credor_weight)
-    return get_credorledger(bob_world)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_charunit(yao_text, yao_credor_weight)
+    bob_bud.add_charunit(bob_text, bob_credor_weight)
+    bob_bud.add_charunit(zia_text, zia_credor_weight)
+    return get_credorledger(bob_bud)
 
 
 def example_zia_credorledger() -> dict[str, float]:
@@ -48,11 +48,11 @@ def example_zia_credorledger() -> dict[str, float]:
     yao_credor_weight = 89
     bob_credor_weight = 150
     zia_credor_weight = 61
-    zia_world = worldunit_shop(zia_text)
-    zia_world.add_charunit(yao_text, yao_credor_weight)
-    zia_world.add_charunit(bob_text, bob_credor_weight)
-    zia_world.add_charunit(zia_text, zia_credor_weight)
-    return get_credorledger(zia_world)
+    zia_bud = budunit_shop(zia_text)
+    zia_bud.add_charunit(yao_text, yao_credor_weight)
+    zia_bud.add_charunit(bob_text, bob_credor_weight)
+    zia_bud.add_charunit(zia_text, zia_credor_weight)
+    return get_credorledger(zia_bud)
 
 
 def example_yao_bob_zia_credorledgers() -> dict[OwnerID : dict[CharID, float]]:

@@ -5,23 +5,23 @@ from src._instrument.python import (
 )
 from src._road.finance import allot_scale
 from src._road.road import CharID, OwnerID
-from src._world.world import WorldUnit
+from src.bud.bud import BudUnit
 from src.listen.hubunit import HubUnit
 from dataclasses import dataclass
 
 
-def get_credorledger(x_world: WorldUnit) -> dict[CharID, float]:
+def get_credorledger(x_bud: BudUnit) -> dict[CharID, float]:
     return {
         charunit.char_id: charunit.credor_weight
-        for charunit in x_world._chars.values()
+        for charunit in x_bud._chars.values()
         if charunit.credor_weight > 0
     }
 
 
-def get_debtorledger(x_world: WorldUnit) -> dict[CharID, float]:
+def get_debtorledger(x_bud: BudUnit) -> dict[CharID, float]:
     return {
         charunit.char_id: charunit.debtor_weight
-        for charunit in x_world._chars.values()
+        for charunit in x_bud._chars.values()
         if charunit.debtor_weight > 0
     }
 

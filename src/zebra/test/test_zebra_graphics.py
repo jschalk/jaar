@@ -1,22 +1,22 @@
-# from src._world.examples.example_worlds import (
-#     world_v001_with_large_agenda,
-#     get_world_with_4_levels,
-#     get_world_with_4_levels_and_2reasons,
-#     get_world_x1_3levels_1reason_1facts,
-#     get_world_laundry_example1,
+# from src.bud.examples.example_buds import (
+#     bud_v001_with_large_agenda,
+#     get_bud_with_4_levels,
+#     get_bud_with_4_levels_and_2reasons,
+#     get_bud_x1_3levels_1reason_1facts,
+#     get_bud_laundry_example1,
 # )
 
-# from src._world.world import worldunit_shop
-# from src._world.graphic import (
-#     worldunit_explanation0,
-#     worldunit_explanation1,
-#     worldunit_explanation2,
-#     worldunit_explanation3,
-#     worldunit_explanation4,
+# from src.bud.bud import budunit_shop
+# from src.bud.graphic import (
+#     budunit_explanation0,
+#     budunit_explanation1,
+#     budunit_explanation2,
+#     budunit_explanation3,
+#     budunit_explanation4,
 #     fund_explanation0,
 #     display_ideatree,
-#     get_world_chars_plotly_fig,
-#     get_world_agenda_plotly_fig,
+#     get_bud_chars_plotly_fig,
+#     get_bud_agenda_plotly_fig,
 # )
 # from src.gift.atom_graphic import atomunit_periodic_table0
 # from src.listen.listen_graphic import (
@@ -37,70 +37,70 @@
 
 
 # def test_display_graphics_listed():
-#     # a_world = get_1node_world()
-#     # a_world = get_2node_world()
-#     # a_world = get_3node_world()
-#     # a_world = get_5nodeHG_world()
-#     # a_world = get_7nodeJRoot_world()
-#     # a_world = world_v001()
-#     a_world = get_world_with_4_levels()
-#     a_world.settle_world()
-#     print(f"World {a_world._real_id}: Nodes ({len(a_world._idea_dict)})")
+#     # a_bud = get_1node_bud()
+#     # a_bud = get_2node_bud()
+#     # a_bud = get_3node_bud()
+#     # a_bud = get_5nodeHG_bud()
+#     # a_bud = get_7nodeJRoot_bud()
+#     # a_bud = bud_v001()
+#     a_bud = get_bud_with_4_levels()
+#     a_bud.settle_bud()
+#     print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
 
 #     # THEN
-#     display_ideatree(a_world).show()
+#     display_ideatree(a_bud).show()
 
-#     # b_world = get_1node_world()
-#     # b_world = get_2node_world()
-#     # b_world = get_3node_world()
-#     # b_world = get_5nodeHG_world()
-#     # b_world = get_7nodeJRoot_world()
-#     b_world = get_world_laundry_example1()
-#     # b_world = world_v001()
-#     b_world.settle_world()
-#     print(f"World {b_world._real_id}: Nodes ({len(b_world._idea_dict)})")
+#     # b_bud = get_1node_bud()
+#     # b_bud = get_2node_bud()
+#     # b_bud = get_3node_bud()
+#     # b_bud = get_5nodeHG_bud()
+#     # b_bud = get_7nodeJRoot_bud()
+#     b_bud = get_bud_laundry_example1()
+#     # b_bud = bud_v001()
+#     b_bud.settle_bud()
+#     print(f"Bud {b_bud._real_id}: Nodes ({len(b_bud._idea_dict)})")
 
 #     # THEN
-#     display_ideatree(b_world, mode="Task").show()
+#     display_ideatree(b_bud, mode="Task").show()
 
 #     # ESTABLISH
-#     luca_world = worldunit_shop()
-#     luca_world.set_credor_respect(500)
-#     luca_world.set_debtor_resepect(400)
+#     luca_bud = budunit_shop()
+#     luca_bud.set_credor_respect(500)
+#     luca_bud.set_debtor_resepect(400)
 #     yao_text = "Yao"
 #     yao_credor_weight = 66
 #     yao_debtor_weight = 77
-#     luca_world.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
+#     luca_bud.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
 #     sue_text = "Sue"
 #     sue_credor_weight = 434
 #     sue_debtor_weight = 323
-#     luca_world.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+#     luca_bud.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
 
 #     # WHEN
-#     get_world_chars_plotly_fig(luca_world).show()
+#     get_bud_chars_plotly_fig(luca_bud).show()
 
-#     yao_world = world_v001_with_large_agenda()
+#     yao_bud = bud_v001_with_large_agenda()
 #     week_text = "weekdays"
-#     week_road = yao_world.make_l1_road(week_text)
-#     assert len(yao_world.get_agenda_dict()) == 63
+#     week_road = yao_bud.make_l1_road(week_text)
+#     assert len(yao_bud.get_agenda_dict()) == 63
 
 #     # WHEN
-#     get_world_agenda_plotly_fig(yao_world).show()
+#     get_bud_agenda_plotly_fig(yao_bud).show()
 
 #     # ESTABLISH / WHEN
-#     worldunit_explanation0_fig = worldunit_explanation0()
-#     worldunit_explanation1_fig = worldunit_explanation1()
-#     worldunit_explanation2_fig = worldunit_explanation2()
-#     worldunit_explanation3_fig = worldunit_explanation3()
-#     worldunit_explanation4_fig = worldunit_explanation4()
+#     budunit_explanation0_fig = budunit_explanation0()
+#     budunit_explanation1_fig = budunit_explanation1()
+#     budunit_explanation2_fig = budunit_explanation2()
+#     budunit_explanation3_fig = budunit_explanation3()
+#     budunit_explanation4_fig = budunit_explanation4()
 #     fund_explanation0_fig = fund_explanation0()
 
 #     # THEN
-#     worldunit_explanation0_fig.show()
-#     worldunit_explanation1_fig.show()
-#     worldunit_explanation2_fig.show()
-#     worldunit_explanation3_fig.show()
-#     worldunit_explanation4_fig.show()
+#     budunit_explanation0_fig.show()
+#     budunit_explanation1_fig.show()
+#     budunit_explanation2_fig.show()
+#     budunit_explanation3_fig.show()
+#     budunit_explanation4_fig.show()
 #     fund_explanation0_fig.show()
 
 #     # ESTABLISH / WHEN

@@ -1,5 +1,5 @@
-from src._world.idea import ideaunit_shop
-from src._world.world import worldunit_shop
+from src.bud.idea import ideaunit_shop
+from src.bud.bud import budunit_shop
 from src.listen.listen import (
     migrate_all_facts,
     get_debtors_roll,
@@ -11,12 +11,12 @@ from src.listen.listen import (
 def test_get_debtors_roll_ReturnsObj():
     # ESTABLISH
     yao_text = "Yao"
-    yao_duty = worldunit_shop(yao_text)
+    yao_duty = budunit_shop(yao_text)
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.settle_world()
+    yao_duty.settle_bud()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
@@ -29,7 +29,7 @@ def test_get_debtors_roll_ReturnsObj():
 def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
     # ESTABLISH
     yao_text = "Yao"
-    yao_duty = worldunit_shop(yao_text)
+    yao_duty = budunit_shop(yao_text)
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
@@ -38,7 +38,7 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
     wei_debtor_weight = 0
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(wei_text, wei_credor_weight, wei_debtor_weight)
-    yao_duty.settle_world()
+    yao_duty.settle_bud()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
@@ -51,35 +51,35 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
 def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     # ESTABLISH
     yao_text = "Yao"
-    yao_world = worldunit_shop(yao_text)
+    yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
     sue_text = "Sue"
     sue_credor_weight = 57
     sue_debtor_weight = 51
-    yao_world.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_world.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    yao_bud.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_bud.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_world.set_char_respect(yao_pool)
+    yao_bud.set_char_respect(yao_pool)
 
     # WHEN
-    ordered_chars1 = get_ordered_debtors_roll(yao_world)
+    ordered_chars1 = get_ordered_debtors_roll(yao_bud)
 
     # THEN
-    zia_char = yao_world.get_char(zia_text)
-    sue_char = yao_world.get_char(sue_text)
+    zia_char = yao_bud.get_char(zia_text)
+    sue_char = yao_bud.get_char(sue_text)
     assert ordered_chars1[0].get_dict() == sue_char.get_dict()
     assert ordered_chars1 == [sue_char, zia_char]
 
     # ESTABLISH
     bob_text = "Bob"
     bob_debtor_weight = 75
-    yao_world.add_charunit(bob_text, 0, bob_debtor_weight)
-    bob_char = yao_world.get_char(bob_text)
+    yao_bud.add_charunit(bob_text, 0, bob_debtor_weight)
+    bob_char = yao_bud.get_char(bob_text)
 
     # WHEN
-    ordered_chars2 = get_ordered_debtors_roll(yao_world)
+    ordered_chars2 = get_ordered_debtors_roll(yao_bud)
 
     # THEN
     assert ordered_chars2[0].get_dict() == bob_char.get_dict()
@@ -89,30 +89,30 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
 def test_get_ordered_debtors_roll_DoesNotReturnZero_debtor_weight():
     # ESTABLISH
     yao_text = "Yao"
-    yao_world = worldunit_shop(yao_text)
+    yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
     zia_debtor_weight = 41
     sue_text = "Sue"
     sue_debtor_weight = 51
     yao_pool = 92
-    yao_world.set_char_respect(yao_pool)
+    yao_bud.set_char_respect(yao_pool)
     bob_text = "Bob"
     bob_debtor_weight = 75
     xio_text = "Xio"
-    yao_world.add_charunit(zia_text, 0, zia_debtor_weight)
-    yao_world.add_charunit(sue_text, 0, sue_debtor_weight)
-    yao_world.add_charunit(bob_text, 0, bob_debtor_weight)
-    yao_world.add_charunit(yao_text, 0, 0)
-    yao_world.add_charunit(xio_text, 0, 0)
+    yao_bud.add_charunit(zia_text, 0, zia_debtor_weight)
+    yao_bud.add_charunit(sue_text, 0, sue_debtor_weight)
+    yao_bud.add_charunit(bob_text, 0, bob_debtor_weight)
+    yao_bud.add_charunit(yao_text, 0, 0)
+    yao_bud.add_charunit(xio_text, 0, 0)
 
     # WHEN
-    ordered_chars2 = get_ordered_debtors_roll(yao_world)
+    ordered_chars2 = get_ordered_debtors_roll(yao_bud)
 
     # THEN
     assert len(ordered_chars2) == 3
-    zia_char = yao_world.get_char(zia_text)
-    sue_char = yao_world.get_char(sue_text)
-    bob_char = yao_world.get_char(bob_text)
+    zia_char = yao_bud.get_char(zia_text)
+    sue_char = yao_bud.get_char(sue_text)
+    bob_char = yao_bud.get_char(bob_text)
     assert ordered_chars2[0].get_dict() == bob_char.get_dict()
     assert ordered_chars2 == [bob_char, sue_char, zia_char]
 
@@ -120,7 +120,7 @@ def test_get_ordered_debtors_roll_DoesNotReturnZero_debtor_weight():
 def test_set_listen_to_speaker_fact_SetsFact():
     # ESTABLISH
     yao_text = "Yao"
-    yao_listener = worldunit_shop(yao_text)
+    yao_listener = budunit_shop(yao_text)
     casa_text = "casa"
     casa_road = yao_listener.make_l1_road(casa_text)
     status_text = "status"
@@ -142,7 +142,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
     )
     missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
 
-    yao_speaker = worldunit_shop(yao_text)
+    yao_speaker = budunit_shop(yao_text)
     yao_speaker.set_fact(status_road, clean_road, create_missing_ideas=True)
     assert yao_listener.get_missing_fact_bases().keys() == {status_road}
 
@@ -156,7 +156,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
 def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     # ESTABLISH
     yao_text = "Yao"
-    yao_listener = worldunit_shop(yao_text)
+    yao_listener = budunit_shop(yao_text)
     yao_listener.add_charunit(yao_text)
     yao_listener.set_char_respect(20)
     casa_text = "casa"
@@ -190,7 +190,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     assert yao_listener.get_fact(status_road).pick == dirty_road
 
     # WHEN
-    yao_speaker = worldunit_shop(yao_text)
+    yao_speaker = budunit_shop(yao_text)
     yao_speaker.set_fact(status_road, clean_road, create_missing_ideas=True)
     yao_speaker.set_fact(fridge_road, running_road, create_missing_ideas=True)
     missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
@@ -207,7 +207,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
 def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     # ESTABLISH
     yao_text = "Yao"
-    yao_src = worldunit_shop(yao_text)
+    yao_src = budunit_shop(yao_text)
     casa_text = "casa"
     casa_road = yao_src.make_l1_road(casa_text)
     status_text = "status"
@@ -237,7 +237,7 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     yao_src.set_fact(weather_road, rain_road)
     yao_src.set_fact(status_road, clean_road)
 
-    yao_dst = worldunit_shop(yao_text)
+    yao_dst = budunit_shop(yao_text)
     assert yao_dst.idea_exists(clean_road) is False
     assert yao_dst.idea_exists(dirty_road) is False
     assert yao_dst.idea_exists(rain_road) is False

@@ -1,19 +1,19 @@
 from src._instrument.file import open_file
 from src._instrument.python import get_dict_from_json
 from src._road.jaar_config import get_json_filename
-from src._world.world import WorldUnit
+from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.atom_config import (
-    worldunit_text,
-    world_charunit_text,
-    world_char_lobbyship_text,
-    world_ideaunit_text,
-    world_idea_awardlink_text,
-    world_idea_reasonunit_text,
-    world_idea_reason_premiseunit_text,
-    world_idea_lobbyhold_text,
-    world_idea_healerhold_text,
-    world_idea_factunit_text,
+    budunit_text,
+    bud_charunit_text,
+    bud_char_lobbyship_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_lobbyhold_text,
+    bud_idea_healerhold_text,
+    bud_idea_factunit_text,
 )
 from src.gift.atom_config import config_file_dir
 from src.gift.change import changeunit_shop, get_filtered_changeunit
@@ -157,9 +157,9 @@ def create_cross_dataframe(d2_list: list[list[str]], cross_name: str) -> DataFra
     return DataFrame(d2_list, columns=_get_headers_list(cross_name))
 
 
-def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
+def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
-    x_changeunit.add_all_atomunits(x_worldunit)
+    x_changeunit.add_all_atomunits(x_budunit)
     category_set = {get_cross_atom_category(cross_name)}
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
@@ -171,11 +171,11 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
         d2_list = [
             [
                 x_atomunit.get_value(char_id_str()),
-                x_worldunit._debtor_respect,
+                x_budunit._debtor_respect,
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
-                x_worldunit._owner_id,
-                x_worldunit._real_id,
+                x_budunit._owner_id,
+                x_budunit._real_id,
             ]
             for x_atomunit in sorted_atomunits
         ]
@@ -187,8 +187,8 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
                 x_atomunit.get_value(lobby_id_str()),
-                x_worldunit._owner_id,
-                x_worldunit._real_id,
+                x_budunit._owner_id,
+                x_budunit._real_id,
             ]
             for x_atomunit in sorted_atomunits
         ]
@@ -201,10 +201,10 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
             d2_list.append(
                 [
                     x_atomunit.get_value("label"),
-                    x_worldunit._owner_id,
+                    x_budunit._owner_id,
                     x_atomunit.get_value("parent_road"),
                     pledge_yes_str,
-                    x_worldunit._real_id,
+                    x_budunit._real_id,
                     x_atomunit.get_value("_weight"),
                 ]
             )

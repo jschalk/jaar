@@ -1,4 +1,4 @@
-from src.listen.examples.example_listen_worlds import get_fund_explanation_world
+from src.listen.examples.example_listen_buds import get_fund_explanation_bud
 from src.listen.listen_graphic import (
     get_listen_structures0_fig,
     get_listen_structures1_fig,
@@ -26,8 +26,8 @@ def test_listen_structures0_ShowsExplanation0Graph():
 
 def test_fund_explanation_Graph():
     # ESTABLISH / WHEN
-    x_worldunit = get_fund_explanation_world()
-    fund_explanation0_fig = fund_explanation0(x_worldunit, "Task")
+    x_budunit = get_fund_explanation_bud()
+    fund_explanation0_fig = fund_explanation0(x_budunit, "Task")
 
     # THEN
     # fund_explanation0_fig.show()

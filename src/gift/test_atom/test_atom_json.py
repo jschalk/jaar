@@ -15,7 +15,7 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
-    x_category = "world_idea_factunit"
+    x_category = "bud_idea_factunit"
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -48,7 +48,7 @@ def test_AtomUnit_get_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
-    x_category = "world_idea_factunit"
+    x_category = "bud_idea_factunit"
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -76,7 +76,7 @@ def test_atomunit_get_from_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
-    x_category = "world_idea_factunit"
+    x_category = "bud_idea_factunit"
     road_text = "road"
     base_text = "base"
     open_text = "open"

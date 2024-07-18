@@ -1,4 +1,4 @@
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.money.rivercycle import get_credorledger, get_debtorledger
 from src.money.riverrun import riverrun_shop
@@ -13,13 +13,13 @@ def test_get_credorledger_ReturnsCorrectObj():
     yao_credor_weight = 8
     bob_credor_weight = 48
     sue_credor_weight = 66
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(bob_text, yao_credor_weight)
-    yao_world.add_charunit(sue_text, bob_credor_weight)
-    yao_world.add_charunit(yao_text, sue_credor_weight)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_charunit(bob_text, yao_credor_weight)
+    yao_bud.add_charunit(sue_text, bob_credor_weight)
+    yao_bud.add_charunit(yao_text, sue_credor_weight)
 
     # WHEN
-    yao_credorledger = get_credorledger(yao_world)
+    yao_credorledger = get_credorledger(yao_bud)
 
     # THEN
     assert len(yao_credorledger) == 3
@@ -36,13 +36,13 @@ def test_get_credorledger_ReturnsCorrectObjWithNoEmpty_credor_weight():
     yao_credor_weight = 8
     bob_credor_weight = 0
     sue_credor_weight = 66
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(bob_text, bob_credor_weight)
-    yao_world.add_charunit(sue_text, sue_credor_weight)
-    yao_world.add_charunit(yao_text, yao_credor_weight)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_charunit(bob_text, bob_credor_weight)
+    yao_bud.add_charunit(sue_text, sue_credor_weight)
+    yao_bud.add_charunit(yao_text, yao_credor_weight)
 
     # WHEN
-    yao_credorledger = get_credorledger(yao_world)
+    yao_credorledger = get_credorledger(yao_bud)
 
     # THEN
     assert yao_credorledger.get(bob_text) is None
@@ -59,13 +59,13 @@ def test_get_debtorledger_ReturnsCorrectObj():
     yao_debtor_weight = 8
     bob_debtor_weight = 48
     sue_debtor_weight = 66
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(bob_text, 2, bob_debtor_weight)
-    yao_world.add_charunit(sue_text, 2, sue_debtor_weight)
-    yao_world.add_charunit(yao_text, 2, yao_debtor_weight)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_charunit(bob_text, 2, bob_debtor_weight)
+    yao_bud.add_charunit(sue_text, 2, sue_debtor_weight)
+    yao_bud.add_charunit(yao_text, 2, yao_debtor_weight)
 
     # WHEN
-    yao_debtorledger = get_debtorledger(yao_world)
+    yao_debtorledger = get_debtorledger(yao_bud)
 
     # THEN
     assert len(yao_debtorledger) == 3
@@ -82,13 +82,13 @@ def test_get_debtorledger_ReturnsCorrectObjWithNoEmpty_debtor_weight():
     yao_debtor_weight = 8
     bob_debtor_weight = 48
     sue_debtor_weight = 0
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(bob_text, 2, bob_debtor_weight)
-    yao_world.add_charunit(sue_text, 2, sue_debtor_weight)
-    yao_world.add_charunit(yao_text, 2, yao_debtor_weight)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_charunit(bob_text, 2, bob_debtor_weight)
+    yao_bud.add_charunit(sue_text, 2, sue_debtor_weight)
+    yao_bud.add_charunit(yao_text, 2, yao_debtor_weight)
 
     # WHEN
-    yao_debtorledger = get_debtorledger(yao_world)
+    yao_debtorledger = get_debtorledger(yao_bud)
 
     # THEN
     assert yao_debtorledger.get(bob_text) == bob_debtor_weight
@@ -159,11 +159,11 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
     bob_debtor_weight = 38
     sue_debtor_weight = 56
     yao_debtor_weight = 6
-    bob_world = worldunit_shop(bob_text)
-    bob_world.add_charunit(bob_text, 2, bob_debtor_weight)
-    bob_world.add_charunit(sue_text, 2, sue_debtor_weight)
-    bob_world.add_charunit(yao_text, 2, yao_debtor_weight)
-    bob_debtorledger = get_debtorledger(bob_world)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_charunit(bob_text, 2, bob_debtor_weight)
+    bob_bud.add_charunit(sue_text, 2, sue_debtor_weight)
+    bob_bud.add_charunit(yao_text, 2, yao_debtor_weight)
+    bob_debtorledger = get_debtorledger(bob_bud)
     assert bob_riverrun.tax_dues_unpaid() == False
 
     # WHEN
@@ -192,11 +192,11 @@ def test_RiverRun_char_has_tax_due_ReturnsCorrectBool():
     yao_debtor_weight = 6
     bob_debtor_weight = 38
     sue_debtor_weight = 56
-    bob_world = worldunit_shop(bob_text)
-    bob_world.add_charunit(bob_text, 2, bob_debtor_weight)
-    bob_world.add_charunit(sue_text, 2, sue_debtor_weight)
-    bob_world.add_charunit(yao_text, 2, yao_debtor_weight)
-    bob_debtorledger = get_debtorledger(bob_world)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_charunit(bob_text, 2, bob_debtor_weight)
+    bob_bud.add_charunit(sue_text, 2, sue_debtor_weight)
+    bob_bud.add_charunit(yao_text, 2, yao_debtor_weight)
+    bob_debtorledger = get_debtorledger(bob_bud)
     assert bob_riverrun.char_has_tax_due(bob_text) == False
     assert bob_riverrun.char_has_tax_due(sue_text) == False
     assert bob_riverrun.char_has_tax_due(yao_text) == False
@@ -247,11 +247,11 @@ def test_RiverRun_get_char_tax_due_ReturnsCorrectObj():
     bob_debtor_weight = 38
     sue_debtor_weight = 56
     yao_debtor_weight = 6
-    bob_world = worldunit_shop(bob_text)
-    bob_world.add_charunit(bob_text, 2, bob_debtor_weight)
-    bob_world.add_charunit(sue_text, 2, sue_debtor_weight)
-    bob_world.add_charunit(yao_text, 2, yao_debtor_weight)
-    bob_debtorledger = get_debtorledger(bob_world)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_charunit(bob_text, 2, bob_debtor_weight)
+    bob_bud.add_charunit(sue_text, 2, sue_debtor_weight)
+    bob_bud.add_charunit(yao_text, 2, yao_debtor_weight)
+    bob_debtorledger = get_debtorledger(bob_bud)
     assert bob_riverrun.char_has_tax_due(bob_text) == False
     assert bob_riverrun.get_char_tax_due(bob_text) == 0
     assert bob_riverrun.char_has_tax_due(zia_text) == False
@@ -281,11 +281,11 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     bob_debtor_weight = 38
     sue_debtor_weight = 56
     yao_debtor_weight = 6
-    bob_world = worldunit_shop(bob_text)
-    bob_world.add_charunit(bob_text, 2, bob_debtor_weight)
-    bob_world.add_charunit(sue_text, 2, sue_debtor_weight)
-    bob_world.add_charunit(yao_text, 2, yao_debtor_weight)
-    bob_debtorledger = get_debtorledger(bob_world)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_charunit(bob_text, 2, bob_debtor_weight)
+    bob_bud.add_charunit(sue_text, 2, sue_debtor_weight)
+    bob_bud.add_charunit(yao_text, 2, yao_debtor_weight)
+    bob_debtorledger = get_debtorledger(bob_bud)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_char_tax_due(bob_text) == 380, 0
 

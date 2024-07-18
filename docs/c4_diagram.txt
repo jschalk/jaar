@@ -6,10 +6,10 @@ workspace {
     model {
         activeperson = person "Active Person" "Ready to listen, judge, lead."
         jaar = person "Datastore and procedures" "Connect to othhers."
-        interface = softwareSystem "Interface" "Listening to needs, judging metrics, leading with world."
+        interface = softwareSystem "Interface" "Listening to needs, judging metrics, leading with bud."
         listener = softwareSystem "Listens to othhers" "Goes to Econ and listens"
         judger = softwareSystem "Metrics to judge" "Who is listened to and who is a healer"
-        leader = softwareSystem "world" "What should be done by whom"
+        leader = softwareSystem "bud" "What should be done by whom"
 
 
         activeperson -> interface "connection"

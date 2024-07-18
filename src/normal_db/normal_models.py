@@ -7,8 +7,8 @@ class Base(DeclarativeBase):
     pass
 
 
-class WorldTable(Base):
-    __tablename__ = "world"
+class BudTable(Base):
+    __tablename__ = "bud"
     uid = Column(Integer, primary_key=True)
     _max_tree_traverse = Column(Integer)
     _monetary_desc = Column(String)

@@ -63,7 +63,7 @@ def test_get_real_actions_chars_dataframe_ReturnsCorrectObj(
 ):
     # ESTABLISH
     music_real = create_example_real2()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
     x_df = get_real_actions_chars_dataframe(music_real)
@@ -95,7 +95,7 @@ def test_get_real_actions_chars_plotly_fig_DisplaysCorrectInfo(
 ):
     # ESTABLISH
     music_real = create_example_real2()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
     x_fig = get_real_actions_chars_plotly_fig(music_real)
@@ -150,7 +150,7 @@ def test_get_real_voices_agenda_plotly_fig_DisplaysCorrectInfo(env_dir_setup_cle
 def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     music_real = create_example_real4()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
     x_df = get_real_actions_agenda_dataframe(music_real)
@@ -180,7 +180,7 @@ def test_get_real_actions_agenda_plotly_fig_DisplaysCorrectInfo(
 ):
     # ESTABLISH
     music_real = create_example_real4()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
     x_fig = get_real_actions_agenda_plotly_fig(music_real)

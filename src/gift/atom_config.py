@@ -63,44 +63,44 @@ def optional_args_text() -> str:
     return "optional_args"
 
 
-def worldunit_text() -> str:
-    return "worldunit"
+def budunit_text() -> str:
+    return "budunit"
 
 
-def world_charunit_text() -> str:
-    return "world_charunit"
+def bud_charunit_text() -> str:
+    return "bud_charunit"
 
 
-def world_char_lobbyship_text() -> str:
-    return "world_char_lobbyship"
+def bud_char_lobbyship_text() -> str:
+    return "bud_char_lobbyship"
 
 
-def world_ideaunit_text() -> str:
-    return "world_ideaunit"
+def bud_ideaunit_text() -> str:
+    return "bud_ideaunit"
 
 
-def world_idea_awardlink_text() -> str:
-    return "world_idea_awardlink"
+def bud_idea_awardlink_text() -> str:
+    return "bud_idea_awardlink"
 
 
-def world_idea_reasonunit_text() -> str:
-    return "world_idea_reasonunit"
+def bud_idea_reasonunit_text() -> str:
+    return "bud_idea_reasonunit"
 
 
-def world_idea_reason_premiseunit_text() -> str:
-    return "world_idea_reason_premiseunit"
+def bud_idea_reason_premiseunit_text() -> str:
+    return "bud_idea_reason_premiseunit"
 
 
-def world_idea_lobbyhold_text() -> str:
-    return "world_idea_lobbyhold"
+def bud_idea_lobbyhold_text() -> str:
+    return "bud_idea_lobbyhold"
 
 
-def world_idea_healerhold_text() -> str:
-    return "world_idea_healerhold"
+def bud_idea_healerhold_text() -> str:
+    return "bud_idea_healerhold"
 
 
-def world_idea_factunit_text() -> str:
-    return "world_idea_factunit"
+def bud_idea_factunit_text() -> str:
+    return "bud_idea_factunit"
 
 
 def get_atom_config_file_name() -> str:
@@ -177,7 +177,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
     return atom_table_columns
 
 
-def get_normalized_world_table_build() -> dict[str : dict[str,]]:
+def get_normalized_bud_table_build() -> dict[str : dict[str,]]:
     normal_tables_dict = {}
     atom_config = get_atom_config_dict()
     for x_category, category_dict in atom_config.items():

@@ -91,7 +91,7 @@ def test_Translator_get_in_char_id_ReturnsObj_NotEqual():
 def test_Translator_translate_char_id_ReturnsObjWithNoChanges():
     # ESTABLISH
     yao_text = "Yao"
-    x_category = "world_charunit"
+    x_category = "bud_charunit"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
     charunit_atom = atomunit_shop(x_category, atom_insert())
@@ -115,7 +115,7 @@ def test_Translator_translate_char_id_ReturnsObjWithNoChanges():
 def test_Translator_translate_char_id_ReturnsObjWithChange_char_id():
     # ESTABLISH
     susan_text = "Susan"
-    x_category = "world_charunit"
+    x_category = "bud_charunit"
     char_id_text = "char_id"
     credor_weight_text = "credor_weight"
     charunit_atom = atomunit_shop(x_category, atom_insert())

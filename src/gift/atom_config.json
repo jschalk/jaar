@@ -1,5 +1,5 @@
 {
-    "world_char_lobbyship": {
+    "bud_char_lobbyship": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
@@ -35,7 +35,7 @@
             "atom_order": 10
         }
     },
-    "world_charunit": {
+    "bud_charunit": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 24
@@ -67,7 +67,7 @@
             "atom_order": 9
         }
     },
-    "world_idea_awardlink": {
+    "bud_idea_awardlink": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 21
@@ -103,7 +103,7 @@
             "atom_order": 12
         }
     },
-    "world_idea_factunit": {
+    "bud_idea_factunit": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 18
@@ -143,7 +143,7 @@
             "atom_order": 13
         }
     },
-    "world_idea_healerhold": {
+    "bud_idea_healerhold": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 20
@@ -167,7 +167,7 @@
         },
         "treasury_only": false
     },
-    "world_idea_lobbyhold": {
+    "bud_idea_lobbyhold": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 19
@@ -191,7 +191,7 @@
         },
         "treasury_only": false
     },
-    "world_idea_reason_premiseunit": {
+    "bud_idea_reason_premiseunit": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 16
@@ -235,7 +235,7 @@
             "atom_order": 14
         }
     },
-    "world_idea_reasonunit": {
+    "bud_idea_reasonunit": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 17
@@ -267,7 +267,7 @@
             "atom_order": 15
         }
     },
-    "world_ideaunit": {
+    "bud_ideaunit": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 22
@@ -339,10 +339,10 @@
             "atom_order": 11
         }
     },
-    "worldunit": {
+    "budunit": {
         "calculated_attrs": {},
         "normal_specs": {
-            "normal_table_name": "world"
+            "normal_table_name": "bud"
         },
         "optional_args": {
             "_bit": {

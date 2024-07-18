@@ -1,10 +1,10 @@
-# from src._world.examples.example_worlds import (
-#     world_v001_with_large_agenda,
-#     get_world_with_4_levels,
-#     get_world_with_4_levels_and_2reasons,
-#     get_world_x1_3levels_1reason_1facts,
+# from src.bud.examples.example_buds import (
+#     bud_v001_with_large_agenda,
+#     get_bud_with_4_levels,
+#     get_bud_with_4_levels_and_2reasons,
+#     get_bud_x1_3levels_1reason_1facts,
 # )
-# from src._world.world import worldunit_shop
+# from src.bud.bud import budunit_shop
 from src.gift.atom_graphic import atomunit_periodic_table0
 
 

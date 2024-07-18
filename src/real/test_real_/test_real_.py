@@ -5,8 +5,8 @@ from src._road.finance import (
 )
 from src._road.jaar_config import get_gifts_folder, get_json_filename
 from src._road.road import default_road_delimiter_if_none
-from src._world.healer import healerhold_shop
-from src._world.idea import ideaunit_shop
+from src.bud.healer import healerhold_shop
+from src.bud.idea import ideaunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.real.real import RealUnit, realunit_shop
 from src.real.examples.real_env import get_test_reals_dir, env_dir_setup_cleanup
@@ -155,9 +155,9 @@ def test_RealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_clea
     music_real.init_owner_econs(sue_text)
     sue_hubunit = hubunit_shop(None, music_text, sue_text, None)
     bob_text = "Bob"
-    sue_voice = sue_hubunit.get_voice_world()
+    sue_voice = sue_hubunit.get_voice_bud()
     sue_voice.add_charunit(bob_text)
-    sue_hubunit.save_voice_world(sue_voice)
+    sue_hubunit.save_voice_bud(sue_voice)
 
     # WHEN
     gen_sue_voice = music_real.get_owner_voice_from_file(sue_text)
@@ -179,33 +179,33 @@ def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     music_real.init_owner_econs(yao_text)
     sue_hubunit = hubunit_shop(None, music_text, sue_text, None)
     yao_hubunit = hubunit_shop(None, music_text, yao_text, None)
-    sue_voice_world = sue_hubunit.get_voice_world()
-    yao_voice_world = yao_hubunit.get_voice_world()
+    sue_voice_bud = sue_hubunit.get_voice_bud()
+    yao_voice_bud = yao_hubunit.get_voice_bud()
 
-    sue_voice_world.add_charunit(sue_text)
-    sue_voice_world.add_charunit(yao_text)
-    yao_voice_world.add_charunit(sue_text)
-    yao_voice_world.add_charunit(yao_text)
+    sue_voice_bud.add_charunit(sue_text)
+    sue_voice_bud.add_charunit(yao_text)
+    yao_voice_bud.add_charunit(sue_text)
+    yao_voice_bud.add_charunit(yao_text)
     texas_text = "Texas"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
-    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    yao_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
+    sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    yao_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
-    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
+    dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerhold = healerhold_shop({sue_text, yao_text})
     dallas_idea = ideaunit_shop(dallas_text, _healerhold=dallas_healerhold)
     elpaso_text = "el paso"
-    elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
+    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
     elpaso_healerhold = healerhold_shop({sue_text})
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
 
-    sue_voice_world.add_idea(dallas_idea, texas_road)
-    sue_voice_world.add_idea(elpaso_idea, texas_road)
-    yao_voice_world.add_idea(dallas_idea, texas_road)
-    yao_voice_world.add_idea(elpaso_idea, texas_road)
-    # display_ideatree(sue_voice_world.settle_world(), mode="Econ").show()
-    sue_hubunit.save_voice_world(sue_voice_world)
-    yao_hubunit.save_voice_world(yao_voice_world)
+    sue_voice_bud.add_idea(dallas_idea, texas_road)
+    sue_voice_bud.add_idea(elpaso_idea, texas_road)
+    yao_voice_bud.add_idea(dallas_idea, texas_road)
+    yao_voice_bud.add_idea(elpaso_idea, texas_road)
+    # display_ideatree(sue_voice_bud.settle_bud(), mode="Econ").show()
+    sue_hubunit.save_voice_bud(sue_voice_bud)
+    yao_hubunit.save_voice_bud(yao_voice_bud)
     sue_file_name = get_json_filename(sue_text)
     yao_file_name = get_json_filename(yao_text)
     sue_dallas_hubunit = hubunit_shop(None, music_text, sue_text, dallas_road)

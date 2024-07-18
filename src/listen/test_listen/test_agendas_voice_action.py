@@ -1,7 +1,7 @@
 from src._instrument.file import delete_dir, save_file
 from src._road.jaar_config import get_json_filename
-from src._world.idea import ideaunit_shop
-from src._world.world import worldunit_shop
+from src.bud.idea import ideaunit_shop
+from src.bud.bud import budunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.listen.listen import create_listen_basis, listen_to_agendas_voice_action
 from src.listen.examples.listen_env import (
@@ -27,12 +27,12 @@ from src.listen.examples.example_listen import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_lobbyholdIsSet(
+def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_lobbyholdIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     yao_text = "Yao"
-    yao_voice = worldunit_shop(yao_text)
+    yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
@@ -40,14 +40,14 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_lobbyholdIsSet(
     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_voice.set_char_respect(zia_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
-    yao_hubunit.save_voice_world(yao_voice)
+    yao_hubunit.save_voice_bud(yao_voice)
 
-    zia_action = worldunit_shop(zia_text)
+    zia_action = budunit_shop(zia_text)
     zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_charunit(yao_text, debtor_weight=12)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
-    zia_hubunit.save_action_world(zia_action)
+    zia_hubunit.save_action_bud(zia_action)
 
     new_yao_action = create_listen_basis(yao_voice)
     assert len(new_yao_action.get_agenda_dict()) == 0
@@ -60,10 +60,10 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWhenNo_lobbyholdIsSet(
     assert len(new_yao_action.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
+def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
     # ESTABLISH
     yao_text = "Yao"
-    yao_voice = worldunit_shop(yao_text)
+    yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
@@ -71,9 +71,9 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
     yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_voice.set_char_respect(zia_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
-    yao_hubunit.save_voice_world(yao_voice)
+    yao_hubunit.save_voice_bud(yao_voice)
 
-    zia_action = worldunit_shop(zia_text)
+    zia_action = budunit_shop(zia_text)
     zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_charunit(yao_text, debtor_weight=12)
@@ -82,7 +82,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     cook_ideaunit._doerunit.set_lobbyhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
-    zia_hubunit.save_action_world(zia_action)
+    zia_hubunit.save_action_bud(zia_action)
     new_yao_action = create_listen_basis(yao_voice)
     assert len(new_yao_action.get_agenda_dict()) == 0
 
@@ -94,7 +94,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorld(env_dir_setup_cleanup):
     assert len(new_yao_action.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_debtor_weight(
+def test_listen_to_agendas_voice_action_AddsTasksToBudWithDetailsDecidedBy_debtor_weight(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -114,13 +114,13 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_deb
     bob_text = bob_action._owner_id
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     bob_hubunit = hubunit_shop(env_dir(), None, bob_text)
-    zia_hubunit.save_action_world(zia_action)
-    bob_hubunit.save_action_world(bob_action)
+    zia_hubunit.save_action_bud(zia_action)
+    bob_hubunit.save_action_bud(bob_action)
 
     yao_voice = get_example_yao_speaker()
     yao_text = yao_voice._owner_id
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
-    yao_hubunit.save_voice_world(yao_voice)
+    yao_hubunit.save_voice_bud(yao_voice)
 
     new_yao_action1 = create_listen_basis(yao_voice)
     assert new_yao_action1.idea_exists(cook_road()) is False
@@ -157,10 +157,10 @@ def test_listen_to_agendas_voice_action_AddsTasksToWorldWithDetailsDecidedBy_deb
     assert new_cook_idea.get_reasonunit(eat_road()) == zia_eat_reasonunit
 
 
-def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_cleanup):
+def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cleanup):
     # ESTABLISH
     yao_text = "Yao"
-    yao_voice = worldunit_shop(yao_text)
+    yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
@@ -172,10 +172,10 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_c
     yao_pool = 92
     yao_voice.set_char_respect(yao_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
-    yao_hubunit.save_voice_world(yao_voice)
+    yao_hubunit.save_voice_bud(yao_voice)
 
     zia_text = "Zia"
-    zia_action = worldunit_shop(zia_text)
+    zia_action = budunit_shop(zia_text)
     zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_charunit(yao_text, debtor_weight=12)
@@ -184,9 +184,9 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_c
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     cook_ideaunit._doerunit.set_lobbyhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
-    zia_hubunit.save_action_world(zia_action)
+    zia_hubunit.save_action_bud(zia_action)
 
-    sue_action = worldunit_shop(sue_text)
+    sue_action = budunit_shop(sue_text)
     sue_action.set_max_tree_traverse(5)
     zia_action.add_charunit(yao_text, debtor_weight=12)
     vacuum_text = "vacuum"
@@ -216,13 +216,13 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_c
         reason_base_idea_active_requisite=False,
     )
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
-    sue_hubunit.save_action_world(sue_action)
+    sue_hubunit.save_action_bud(sue_action)
 
     # WHEN
     new_yao_action = create_listen_basis(yao_voice)
     listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
 
-    # THEN irrational world is ignored
+    # THEN irrational bud is ignored
     assert len(new_yao_action.get_agenda_dict()) != 3
     assert len(new_yao_action.get_agenda_dict()) == 2
     zia_charunit = new_yao_action.get_char(zia_text)
@@ -233,7 +233,7 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalWorld(env_dir_setup_c
     assert sue_charunit._irrational_debtor_weight == 51
 
 
-def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
+def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -241,7 +241,7 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     delete_dir(yao_hubunit.voice_file_path())  # don't know why I have to do this...
     print(f"{os_path_exists(yao_hubunit.voice_file_path())=}")
-    yao_voice = worldunit_shop(yao_text)
+    yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
     sue_text = "Sue"
     zia_credor_weight = 47
@@ -252,9 +252,9 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
     yao_voice.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
     yao_voice.set_char_respect(yao_pool)
-    yao_hubunit.save_voice_world(yao_voice)
+    yao_hubunit.save_voice_bud(yao_voice)
 
-    zia_action = worldunit_shop(zia_text)
+    zia_action = budunit_shop(zia_text)
     zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_charunit(yao_text, debtor_weight=12)
@@ -263,13 +263,13 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorWorld(
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     cook_ideaunit._doerunit.set_lobbyhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
-    zia_hubunit.save_action_world(zia_action)
+    zia_hubunit.save_action_bud(zia_action)
 
     # WHEN
     new_yao_action = create_listen_basis(yao_voice)
     listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
 
-    # THEN irrational world is ignored
+    # THEN irrational bud is ignored
     assert len(new_yao_action.get_agenda_dict()) != 3
     assert len(new_yao_action.get_agenda_dict()) == 2
     zia_charunit = new_yao_action.get_char(zia_text)
@@ -285,7 +285,7 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
 ):
     # ESTABLISH
     yao_text = "Yao"
-    yao_voice = worldunit_shop(yao_text)
+    yao_voice = budunit_shop(yao_text)
     yao_text = "Yao"
     yao_credor_weight = 57
     yao_debtor_weight = 51
@@ -298,11 +298,11 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     yao_voice.set_char_respect(yao_pool)
     # save yao without task to dutys
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
-    yao_hubunit.save_voice_world(yao_voice)
+    yao_hubunit.save_voice_bud(yao_voice)
 
     # Save Zia to action
     zia_text = "Zia"
-    zia_action = worldunit_shop(zia_text)
+    zia_action = budunit_shop(zia_text)
     zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_charunit(yao_text, debtor_weight=12)
@@ -311,21 +311,21 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     cook_ideaunit._doerunit.set_lobbyhold(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
-    zia_hubunit.save_action_world(zia_action)
+    zia_hubunit.save_action_bud(zia_action)
 
     # save yao with task to dutys
-    yao_old_action = worldunit_shop(yao_text)
+    yao_old_action = budunit_shop(yao_text)
     vacuum_text = "vacuum"
     vacuum_road = yao_old_action.make_l1_road(vacuum_text)
     yao_old_action.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = yao_old_action.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
-    yao_hubunit.save_action_world(yao_old_action)
+    yao_hubunit.save_action_bud(yao_old_action)
 
     # WHEN
     new_yao_action = create_listen_basis(yao_voice)
     listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
 
-    # THEN irrational world is ignored
+    # THEN irrational bud is ignored
     assert len(new_yao_action.get_agenda_dict()) != 3
     assert len(new_yao_action.get_agenda_dict()) == 2

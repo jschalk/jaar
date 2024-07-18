@@ -4,9 +4,9 @@ from src._road.road import (
     get_root_node_from_road,
     OwnerID,
 )
-from src._world.idea import IdeaUnit
-from src._world.world import WorldUnit, CharUnit
-from src.listen.basis_worlds import create_empty_world, create_listen_basis
+from src.bud.idea import IdeaUnit
+from src.bud.bud import BudUnit, CharUnit
+from src.listen.basis_buds import create_empty_bud, create_listen_basis
 from src.listen.hubunit import HubUnit, hubunit_shop
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -16,15 +16,13 @@ class Missing_debtor_respectException(Exception):
     pass
 
 
-def generate_perspective_agenda(perspective_world: WorldUnit) -> list[IdeaUnit]:
-    for x_factunit in perspective_world._idearoot._factunits.values():
+def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
+    for x_factunit in perspective_bud._idearoot._factunits.values():
         x_factunit.set_pick_to_base()
-    return list(perspective_world.get_agenda_dict().values())
+    return list(perspective_bud.get_agenda_dict().values())
 
 
-def _ingest_perspective_agenda(
-    listener: WorldUnit, agenda: list[IdeaUnit]
-) -> WorldUnit:
+def _ingest_perspective_agenda(listener: BudUnit, agenda: list[IdeaUnit]) -> BudUnit:
     debtor_amount = listener._debtor_respect
     ingest_list = generate_ingest_list(agenda, debtor_amount, listener._bit)
     for ingest_ideaunit in ingest_list:
@@ -32,22 +30,22 @@ def _ingest_perspective_agenda(
     return listener
 
 
-def _allocate_irrational_debtor_weight(listener: WorldUnit, speaker_owner_id: OwnerID):
+def _allocate_irrational_debtor_weight(listener: BudUnit, speaker_owner_id: OwnerID):
     speaker_charunit = listener.get_char(speaker_owner_id)
     speaker_debtor_weight = speaker_charunit.debtor_weight
     speaker_charunit.add_irrational_debtor_weight(speaker_debtor_weight)
     return listener
 
 
-def _allocate_inallocable_debtor_weight(listener: WorldUnit, speaker_owner_id: OwnerID):
+def _allocate_inallocable_debtor_weight(listener: BudUnit, speaker_owner_id: OwnerID):
     speaker_charunit = listener.get_char(speaker_owner_id)
     speaker_charunit.add_inallocable_debtor_weight(speaker_charunit.debtor_weight)
     return listener
 
 
-def get_speaker_perspective(speaker: WorldUnit, listener_owner_id: OwnerID):
+def get_speaker_perspective(speaker: BudUnit, listener_owner_id: OwnerID):
     listener_hubunit = hubunit_shop("", "", listener_owner_id)
-    return listener_hubunit.get_perspective_world(speaker)
+    return listener_hubunit.get_perspective_bud(speaker)
 
 
 def _get_bit_scaled_weight(
@@ -93,7 +91,7 @@ def generate_ingest_list(
     return x_list
 
 
-def _ingest_single_ideaunit(listener: WorldUnit, ingest_ideaunit: IdeaUnit):
+def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):
     weight_data = _create_weight_data(listener, ingest_ideaunit.get_road())
 
     if listener.idea_exists(ingest_ideaunit.get_road()) is False:
@@ -114,7 +112,7 @@ class WeightReplaceOrAddData:
     replace_weight_list: list = None
 
 
-def _create_weight_data(listener: WorldUnit, x_road: RoadUnit) -> list:
+def _create_weight_data(listener: BudUnit, x_road: RoadUnit) -> list:
     weight_data = WeightReplaceOrAddData()
     weight_data.add_to_weight_list = []
     weight_data.replace_weight_list = []
@@ -130,7 +128,7 @@ def _create_weight_data(listener: WorldUnit, x_road: RoadUnit) -> list:
 
 
 def _add_and_replace_ideaunit_weights(
-    listener: WorldUnit,
+    listener: BudUnit,
     replace_weight_list: list[RoadUnit],
     add_to_weight_list: list[RoadUnit],
     x_weight: float,
@@ -142,7 +140,7 @@ def _add_and_replace_ideaunit_weights(
         x_ideaunit._weight += x_weight
 
 
-def get_debtors_roll(x_duty: WorldUnit) -> list[CharUnit]:
+def get_debtors_roll(x_duty: BudUnit) -> list[CharUnit]:
     return [
         x_charunit
         for x_charunit in x_duty._chars.values()
@@ -150,13 +148,13 @@ def get_debtors_roll(x_duty: WorldUnit) -> list[CharUnit]:
     ]
 
 
-def get_ordered_debtors_roll(x_world: WorldUnit) -> list[CharUnit]:
-    chars_ordered_list = get_debtors_roll(x_world)
+def get_ordered_debtors_roll(x_bud: BudUnit) -> list[CharUnit]:
+    chars_ordered_list = get_debtors_roll(x_bud)
     chars_ordered_list.sort(key=lambda x: (x.debtor_weight, x.char_id), reverse=True)
     return chars_ordered_list
 
 
-def migrate_all_facts(src_listener: WorldUnit, dst_listener: WorldUnit):
+def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
     for x_factunit in src_listener._idearoot._factunits.values():
         base_road = x_factunit.base
         pick_road = x_factunit.pick
@@ -170,10 +168,10 @@ def migrate_all_facts(src_listener: WorldUnit, dst_listener: WorldUnit):
 
 
 def listen_to_speaker_fact(
-    listener: WorldUnit,
-    speaker: WorldUnit,
+    listener: BudUnit,
+    speaker: BudUnit,
     missing_fact_bases: list[RoadUnit] = None,
-) -> WorldUnit:
+) -> BudUnit:
     if missing_fact_bases is None:
         missing_fact_bases = list(listener.get_missing_fact_bases())
     for missing_fact_base in missing_fact_bases:
@@ -188,90 +186,86 @@ def listen_to_speaker_fact(
             )
 
 
-def listen_to_speaker_agenda(listener: WorldUnit, speaker: WorldUnit) -> WorldUnit:
+def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     if listener.char_exists(speaker._owner_id) is False:
         raise Missing_debtor_respectException(
-            f"listener '{listener._owner_id}' world is assumed to have {speaker._owner_id} charunit."
+            f"listener '{listener._owner_id}' bud is assumed to have {speaker._owner_id} charunit."
         )
-    perspective_world = get_speaker_perspective(speaker, listener._owner_id)
-    if perspective_world._rational is False:
+    perspective_bud = get_speaker_perspective(speaker, listener._owner_id)
+    if perspective_bud._rational is False:
         return _allocate_irrational_debtor_weight(listener, speaker._owner_id)
     if listener._debtor_respect is None:
         return _allocate_inallocable_debtor_weight(listener, speaker._owner_id)
     if listener._owner_id != speaker._owner_id:
-        agenda = generate_perspective_agenda(perspective_world)
+        agenda = generate_perspective_agenda(perspective_bud)
     else:
-        agenda = list(perspective_world.get_all_pledges().values())
+        agenda = list(perspective_bud.get_all_pledges().values())
     if len(agenda) == 0:
         return _allocate_inallocable_debtor_weight(listener, speaker._owner_id)
     return _ingest_perspective_agenda(listener, agenda)
 
 
-def listen_to_agendas_voice_action(
-    listener_action: WorldUnit, listener_hubunit: HubUnit
-):
+def listen_to_agendas_voice_action(listener_action: BudUnit, listener_hubunit: HubUnit):
     for x_charunit in get_ordered_debtors_roll(listener_action):
         if x_charunit.char_id == listener_action._owner_id:
-            listen_to_speaker_agenda(
-                listener_action, listener_hubunit.get_voice_world()
-            )
+            listen_to_speaker_agenda(listener_action, listener_hubunit.get_voice_bud())
         else:
             speaker_id = x_charunit.char_id
-            speaker_action = listener_hubunit.dw_speaker_world(speaker_id)
+            speaker_action = listener_hubunit.dw_speaker_bud(speaker_id)
             if speaker_action is None:
-                speaker_action = create_empty_world(listener_action, speaker_id)
+                speaker_action = create_empty_bud(listener_action, speaker_id)
             listen_to_speaker_agenda(listener_action, speaker_action)
 
 
-def listen_to_agendas_duty_job(listener_job: WorldUnit, healer_hubunit: HubUnit):
+def listen_to_agendas_duty_job(listener_job: BudUnit, healer_hubunit: HubUnit):
     listener_id = listener_job._owner_id
     for x_charunit in get_ordered_debtors_roll(listener_job):
         if x_charunit.char_id == listener_id:
-            listener_duty = healer_hubunit.get_duty_world(listener_id)
+            listener_duty = healer_hubunit.get_duty_bud(listener_id)
             listen_to_speaker_agenda(listener_job, listener_duty)
         else:
             speaker_id = x_charunit.char_id
             healer_id = healer_hubunit.owner_id
-            speaker_job = healer_hubunit.rj_speaker_world(healer_id, speaker_id)
+            speaker_job = healer_hubunit.rj_speaker_bud(healer_id, speaker_id)
             if speaker_job is None:
-                speaker_job = create_empty_world(listener_job, speaker_id)
+                speaker_job = create_empty_bud(listener_job, speaker_id)
             listen_to_speaker_agenda(listener_job, speaker_job)
 
 
-def listen_to_facts_duty_job(new_job: WorldUnit, healer_hubunit: HubUnit):
-    duty = healer_hubunit.get_duty_world(new_job._owner_id)
+def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
+    duty = healer_hubunit.get_duty_bud(new_job._owner_id)
     migrate_all_facts(duty, new_job)
     for x_charunit in get_ordered_debtors_roll(new_job):
         if x_charunit.char_id != new_job._owner_id:
-            speaker_job = healer_hubunit.get_job_world(x_charunit.char_id)
+            speaker_job = healer_hubunit.get_job_bud(x_charunit.char_id)
             if speaker_job != None:
                 listen_to_speaker_fact(new_job, speaker_job)
 
 
-def listen_to_facts_voice_action(new_action: WorldUnit, listener_hubunit: HubUnit):
-    migrate_all_facts(listener_hubunit.get_voice_world(), new_action)
+def listen_to_facts_voice_action(new_action: BudUnit, listener_hubunit: HubUnit):
+    migrate_all_facts(listener_hubunit.get_voice_bud(), new_action)
     for x_charunit in get_ordered_debtors_roll(new_action):
         speaker_id = x_charunit.char_id
         if speaker_id != new_action._owner_id:
-            speaker_action = listener_hubunit.dw_speaker_world(speaker_id)
+            speaker_action = listener_hubunit.dw_speaker_bud(speaker_id)
             if speaker_action != None:
                 listen_to_speaker_fact(new_action, speaker_action)
 
 
-def listen_to_debtors_roll_voice_action(listener_hubunit: HubUnit) -> WorldUnit:
-    voice = listener_hubunit.get_voice_world()
-    new_world = create_listen_basis(voice)
+def listen_to_debtors_roll_voice_action(listener_hubunit: HubUnit) -> BudUnit:
+    voice = listener_hubunit.get_voice_bud()
+    new_bud = create_listen_basis(voice)
     if voice._debtor_respect is None:
-        return new_world
-    listen_to_agendas_voice_action(new_world, listener_hubunit)
-    listen_to_facts_voice_action(new_world, listener_hubunit)
-    return new_world
+        return new_bud
+    listen_to_agendas_voice_action(new_bud, listener_hubunit)
+    listen_to_facts_voice_action(new_bud, listener_hubunit)
+    return new_bud
 
 
 def listen_to_debtors_roll_duty_job(
     healer_hubunit: HubUnit, listener_id: OwnerID
-) -> WorldUnit:
-    duty = healer_hubunit.get_duty_world(listener_id)
+) -> BudUnit:
+    duty = healer_hubunit.get_duty_bud(listener_id)
     new_duty = create_listen_basis(duty)
     if duty._debtor_respect is None:
         return new_duty
@@ -281,11 +275,11 @@ def listen_to_debtors_roll_duty_job(
 
 
 def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
-    voice = listener_hubunit.get_voice_world()
+    voice = listener_hubunit.get_voice_bud()
     new_action = create_listen_basis(voice)
     pre_action_dict = new_action.get_dict()
-    voice.settle_world()
-    new_action.settle_world()
+    voice.settle_bud()
+    new_action.settle_bud()
 
     for x_healer_id, econ_dict in voice._healers_dict.items():
         listener_id = listener_hubunit.owner_id
@@ -298,14 +292,14 @@ def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
         _ingest_perspective_agenda(new_action, agenda)
         listen_to_speaker_fact(new_action, voice)
 
-    listener_hubunit.save_action_world(new_action)
+    listener_hubunit.save_action_bud(new_action)
 
 
 def _pick_econ_jobs_and_listen(
     listener_id: OwnerID,
     econ_dict: dict[RoadUnit],
     healer_hubunit: HubUnit,
-    new_action: WorldUnit,
+    new_action: BudUnit,
 ):
     for econ_path in econ_dict:
         healer_hubunit.econ_road = econ_path
@@ -313,17 +307,17 @@ def _pick_econ_jobs_and_listen(
 
 
 def pick_econ_job_and_listen(
-    listener_owner_id: OwnerID, healer_hubunit: HubUnit, new_action: WorldUnit
+    listener_owner_id: OwnerID, healer_hubunit: HubUnit, new_action: BudUnit
 ):
     listener_id = listener_owner_id
     if healer_hubunit.job_file_exists(listener_id):
-        econ_job = healer_hubunit.get_job_world(listener_id)
+        econ_job = healer_hubunit.get_job_bud(listener_id)
     else:
-        econ_job = create_empty_world(new_action, new_action._owner_id)
+        econ_job = create_empty_bud(new_action, new_action._owner_id)
     listen_to_job_agenda(new_action, econ_job)
 
 
-def listen_to_job_agenda(listener: WorldUnit, job: WorldUnit):
+def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
     for x_idea in job._idea_dict.values():
         if listener.idea_exists(x_idea.get_road()) is False:
             listener.add_idea(x_idea, x_idea._parent_road)
@@ -331,14 +325,14 @@ def listen_to_job_agenda(listener: WorldUnit, job: WorldUnit):
             listener.add_idea(x_idea, x_idea._parent_road)
     for x_fact_road, x_fact_unit in job._idearoot._factunits.items():
         listener._idearoot.set_factunit(x_fact_unit)
-    listener.settle_world()
+    listener.settle_bud()
 
 
 def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_id: OwnerID):
     x_job = listen_to_debtors_roll_duty_job(healer_hubunit, listener_id=owner_id)
-    healer_hubunit.save_job_world(x_job)
+    healer_hubunit.save_job_bud(x_job)
 
 
 def create_action_file_from_voice_file(hubunit: HubUnit):
     x_action = listen_to_debtors_roll_voice_action(hubunit)
-    hubunit.save_action_world(x_action)
+    hubunit.save_action_bud(x_action)

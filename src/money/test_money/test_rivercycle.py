@@ -1,4 +1,4 @@
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.money.examples.example_credorledgers import (
     example_yao_credorledger,
@@ -126,9 +126,9 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
     # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_text)
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(yao_text)
-    yao_credorledger = get_credorledger(yao_world)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_charunit(yao_text)
+    yao_credorledger = get_credorledger(yao_bud)
     econ_credorledgers = {yao_text: yao_credorledger}
 
     # WHEN
@@ -149,11 +149,11 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
     bob_credor_weight = 3
     zia_credor_weight = 10
     yao_hubunit = hubunit_shop(None, None, yao_text)
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(yao_text, yao_credor_weight)
-    yao_world.add_charunit(bob_text, bob_credor_weight)
-    yao_world.add_charunit(zia_text, zia_credor_weight)
-    yao_credorledger = get_credorledger(yao_world)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_charunit(yao_text, yao_credor_weight)
+    yao_bud.add_charunit(bob_text, bob_credor_weight)
+    yao_bud.add_charunit(zia_text, zia_credor_weight)
+    yao_credorledger = get_credorledger(yao_bud)
     econ_credorledgers = {yao_text: yao_credorledger}
     print(f"{econ_credorledgers=}")
 

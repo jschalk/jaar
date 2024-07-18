@@ -64,31 +64,31 @@ screenshots and elucidatory text.
 <!-- TODO: Add elucidations -->
 base attributes vs reason attributess
 
-WorldUnit objects
+BudUnit objects
 
-WorldUnit CharUnit objects
+BudUnit CharUnit objects
 
-WorldUnit LobbyBox objects
+BudUnit LobbyBox objects
 
-WorldUnit IdeaUnit objects
+BudUnit IdeaUnit objects
 
-WorldUnit IdeaUnit hierarchical structure
+BudUnit IdeaUnit hierarchical structure
 
-WorldUnit IdeaUnit AwardLink objects
+BudUnit IdeaUnit AwardLink objects
 
-WorldUnit IdeaUnit AwardLine objects
+BudUnit IdeaUnit AwardLine objects
 
-WorldUnit IdeaUnit AwardHeir objects
+BudUnit IdeaUnit AwardHeir objects
 
-WorldUnit IdeaUnit AwardHeir objects
+BudUnit IdeaUnit AwardHeir objects
 
-WorldUnit IdeaUnit Reason PremiseUnit objects
+BudUnit IdeaUnit Reason PremiseUnit objects
 
-WorldUnit IdeaUnit Reason PremiseHeir objects
+BudUnit IdeaUnit Reason PremiseHeir objects
 
-WorldUnit IdeaUnit FactUnit objects
+BudUnit IdeaUnit FactUnit objects
 
-WorldUnit IdeaUnit FactHeir objects
+BudUnit IdeaUnit FactHeir objects
 
 
 ## 1.3 Test-Driven-Development

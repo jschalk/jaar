@@ -1,4 +1,4 @@
-from src._world.char import charunit_shop
+from src.bud.char import charunit_shop
 from src.gift.atom import AtomUnit, atomunit_shop, atom_insert, atom_delete
 
 
@@ -25,7 +25,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
     bob_required_dict = {"char_id": "huh"}
     bob_optional_dict = {cw_text: bob_charunit.get_dict().get(cw_text)}
     bob_optional_dict[dw_text] = bob_charunit.get_dict().get(dw_text)
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
 
     # WHEN
     x_atomunit = atomunit_shop(
@@ -46,7 +46,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
 def test_AtomUnit_set_required_arg_CorrectlySetsAttr():
     # ESTABLISH
     bob_text = "Bob"
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     charunit_atomunit = atomunit_shop(charunit_text, atom_insert())
     assert charunit_atomunit.required_args == {}
 
@@ -61,7 +61,7 @@ def test_AtomUnit_set_required_arg_CorrectlySetsAttr():
 def test_AtomUnit_set_optional_arg_CorrectlySetsAttr():
     # ESTABLISH
     bob_text = "Bob"
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     charunit_atomunit = atomunit_shop(charunit_text, atom_insert())
     assert charunit_atomunit.optional_args == {}
 
@@ -76,7 +76,7 @@ def test_AtomUnit_set_optional_arg_CorrectlySetsAttr():
 def test_AtomUnit_get_value_ReturnsCorrectObj():
     # ESTABLISH
     bob_text = "Bob"
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     charunit_atomunit = atomunit_shop(charunit_text, atom_insert())
     char_id_text = "char_id"
     charunit_atomunit.set_required_arg(x_key=char_id_text, x_value=bob_text)
@@ -87,7 +87,7 @@ def test_AtomUnit_get_value_ReturnsCorrectObj():
 
 def test_AtomUnit_is_optional_args_valid_ReturnsCorrectBoolean():
     # WHEN
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     bob_insert_atomunit = atomunit_shop(charunit_text, crud_text=atom_insert())
     assert bob_insert_atomunit.is_optional_args_valid()
 
@@ -115,7 +115,7 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_CharUnit_INSERT():
     bob_credor_weight = 55
     bob_debtor_weight = 66
     bob_charunit = charunit_shop(bob_text, bob_credor_weight, bob_debtor_weight)
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
 
     # WHEN
     bob_insert_atomunit = atomunit_shop(charunit_text, crud_text=atom_insert())
@@ -175,7 +175,7 @@ def test_AtomUnit_get_value_ReturnsObj():
     bob_credor_weight = 55
     bob_debtor_weight = 66
     bob_charunit = charunit_shop(bob_text, bob_credor_weight, bob_debtor_weight)
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     bob_insert_atomunit = atomunit_shop(charunit_text, atom_insert())
     char_id_text = "char_id"
     cw_text = "credor_weight"
@@ -195,7 +195,7 @@ def test_AtomUnit_get_value_ReturnsObj():
 
 def test_AtomUnit_is_valid_ReturnsCorrectBoolean_CharUnit_DELETE():
     bob_text = "Bob"
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     delete_text = atom_delete()
 
     # WHEN
@@ -218,7 +218,7 @@ def test_AtomUnit_set_atom_order_SetCorrectAttr():
     bob_text = "Bob"
     bob_credor_weight = 55
     bob_debtor_weight = 66
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     bob_insert_atomunit = atomunit_shop(charunit_text, atom_insert())
     char_id_text = "char_id"
     cw_text = "credor_weight"
@@ -238,7 +238,7 @@ def test_AtomUnit_set_arg_SetsAny_required_arg_optional_arg():
     bob_text = "Bob"
     bob_credor_weight = 55
     bob_debtor_weight = 66
-    charunit_text = "world_charunit"
+    charunit_text = "bud_charunit"
     bob_insert_atomunit = atomunit_shop(charunit_text, atom_insert())
     char_id_text = "char_id"
     cw_text = "credor_weight"

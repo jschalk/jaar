@@ -1,11 +1,11 @@
 from src._road.jaar_config import voice_str, action_str
 from src._road.finance import default_money_magnitude
-from src._world.world import WorldUnit
-from src._world.graphic import display_ideatree
+from src.bud.bud import BudUnit
+from src.bud.graphic import display_ideatree
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
-def add_world_rect(fig: plotly_Figure, x0, y0, x1, y1, display_text, x_color=None):
+def add_bud_rect(fig: plotly_Figure, x0, y0, x1, y1, display_text, x_color=None):
     if x_color is None:
         x_color = "LightSeaGreen"
     line_dict = dict(color=x_color, width=4)
@@ -83,11 +83,11 @@ def get_listen_structures0_fig() -> plotly_Figure:
 
     green_text = "Green"
     med_purple = "MediumPurple"
-    add_world_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
     add_direc_rect(fig, 0.7, 6.7, 6.3, 8.3, dir_voice_text)
-    add_world_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_action_text, green_text)
-    add_world_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_action_text)
-    add_world_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_action_text)
+    add_bud_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_action_text, green_text)
+    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_action_text)
+    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_action_text)
     add_direc_rect(fig, 0.7, 0.7, 6.3, 2.3, dir_action_text)
     add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 5,4 5.5,2", color=med_purple)
     add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3,4 3.5,2", color=med_purple)
@@ -100,8 +100,8 @@ def get_listen_structures0_fig() -> plotly_Figure:
             x=[4.0, 4.0],
             y=[9.0, 8.75],
             text=[
-                "Reality World Listening Structures",
-                "The voice world listens to other's action worlds and builds a new world from itself and others",
+                "Reality Bud Listening Structures",
+                "The voice bud listens to other's action buds and builds a new bud from itself and others",
             ],
             mode="text",
         )
@@ -119,7 +119,7 @@ def get_listen_structures1_fig() -> plotly_Figure:
 
     green_text = "Green"
     blue_text = "blue"
-    add_world_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
     add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
     add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_text)
     add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 5.4,5.2 5.5,5", color=blue_text)
@@ -141,16 +141,16 @@ def get_listen_structures1_fig() -> plotly_Figure:
     d_sue2_p3 = "Project = project3"
     d_sue2_p4 = f"Money={default_money_magnitude()} "
 
-    add_world_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
-    add_world_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
+    add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
+    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
     add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
     add_econ__rect(fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    add_world_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
-    add_world_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
+    add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
+    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
     add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_text)
     add_econ__rect(fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4)
-    add_world_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
-    add_world_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
+    add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
+    add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
     add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_text)
     add_econ__rect(fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4)
 
@@ -159,7 +159,7 @@ def get_listen_structures1_fig() -> plotly_Figure:
         plotly_Scatter(
             x=[2.0],
             y=[13],
-            text=["World Listening Structures"],
+            text=["Bud Listening Structures"],
             mode="text",
         )
     )
@@ -179,9 +179,9 @@ def get_listen_structures2_fig() -> plotly_Figure:
 
     green_text = "Green"
     blue_text = "blue"
-    add_world_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
     add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
-    add_world_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
+    add_bud_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
     add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_action_text)
 
     add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_text)
@@ -208,16 +208,16 @@ def get_listen_structures2_fig() -> plotly_Figure:
     d_sue2_p3 = "Project = project3"
     d_sue2_p4 = f"Money={default_money_magnitude()} "
 
-    add_world_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
-    add_world_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
+    add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
+    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
     add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
     add_econ__rect(fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    add_world_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
-    add_world_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
+    add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
+    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
     add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_text)
     add_econ__rect(fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4)
-    add_world_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
-    add_world_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
+    add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
+    add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
     add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_text)
     add_econ__rect(fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4)
 
@@ -227,8 +227,8 @@ def get_listen_structures2_fig() -> plotly_Figure:
             x=[5, 5, 5],
             y=[9, 8.5, 8.0],
             text=[
-                "World Listening Structures",
-                "Flow of Worlds to Econs",
+                "Bud Listening Structures",
+                "Flow of Buds to Econs",
                 "(Requires justification by problem and with unique name)",
             ],
             mode="text",
@@ -252,9 +252,9 @@ def get_listen_structures3_fig() -> plotly_Figure:
     green_text = "Green"
     blue_text = "blue"
     blue_text = "blue"
-    add_world_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
     add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
-    add_world_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
+    add_bud_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
     add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_action_text)
 
     add_rect_arrow(fig, 3.85, 3.8, 4, 3.6, blue_text)
@@ -276,12 +276,12 @@ def get_listen_structures3_fig() -> plotly_Figure:
     d_sue1_p3 = "Econ = project1"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
 
-    add_world_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
-    add_world_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
+    add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
+    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
     add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
     add_econ__rect(fig, 2.7, 0.7, 8.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    add_world_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_job_text)
-    add_world_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_job_text)
+    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_job_text)
+    add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_job_text)
 
     green_text = "Green"
     fig.add_trace(
@@ -289,8 +289,8 @@ def get_listen_structures3_fig() -> plotly_Figure:
             x=[5, 5, 5],
             y=[9, 8.5, 8.0],
             text=[
-                "World Listening Structures",
-                "Flow of Worlds to Econs",
+                "Bud Listening Structures",
+                "Flow of Buds to Econs",
                 "(Requires justification by problem and with unique name)",
             ],
             mode="text",
@@ -300,8 +300,8 @@ def get_listen_structures3_fig() -> plotly_Figure:
     return fig
 
 
-def fund_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
-    fig = display_ideatree(x_world, mode)
+def fund_explanation0(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
+    fig = display_ideatree(x_bud, mode)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5, 3])
 
@@ -313,20 +313,20 @@ def fund_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
     doerunit_text = "      Awardlinks"
-    add_world_rect(fig, 2, -0.3, 3, 0.3, doerunit_text)
+    add_bud_rect(fig, 2, -0.3, 3, 0.3, doerunit_text)
     add_rect_arrow(fig, 2, 0.1, 1.2, 0.1, green_text)
     add_rect_arrow(fig, 2, -0.1, 1.2, -0.1, blue_text)
-    add_world_rect(fig, 4, -1.2, 5, -0.8, doerunit_text)
+    add_bud_rect(fig, 4, -1.2, 5, -0.8, doerunit_text)
     add_rect_arrow(fig, 4, -0.9, 3.1, -0.9, green_text)
     add_rect_arrow(fig, 4, -1.1, 3.1, -1.1, blue_text)
-    add_world_rect(fig, 4, -3.2, 5, -2.8, doerunit_text)
+    add_bud_rect(fig, 4, -3.2, 5, -2.8, doerunit_text)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_text)
     add_econ__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
     lobbybox_text = "LobbyBox"
     orange_text = "orange"
-    add_world_rect(fig, 5.5, -0.2, 6.25, 0.4, lobbybox_text, orange_text)
-    add_world_rect(fig, 5.5, -0.8, 6.25, -0.2, lobbybox_text, orange_text)
-    add_world_rect(fig, 5.5, -1.4, 6.25, -0.8, lobbybox_text, orange_text)
+    add_bud_rect(fig, 5.5, -0.2, 6.25, 0.4, lobbybox_text, orange_text)
+    add_bud_rect(fig, 5.5, -0.8, 6.25, -0.2, lobbybox_text, orange_text)
+    add_bud_rect(fig, 5.5, -1.4, 6.25, -0.8, lobbybox_text, orange_text)
     add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_text)
     add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_text)
     add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_text)
@@ -337,27 +337,27 @@ def fund_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     add_rect_arrow(fig, 5.5, -1.3, 5, -2.9, green_text)
     lobbyship_text = "lobbyship"
     darkred_text = "DarkRed"
-    add_world_rect(fig, 7, 0.4, 7.75, 1, lobbyship_text, darkred_text)
-    add_world_rect(fig, 7, -0.2, 7.75, 0.4, lobbyship_text, darkred_text)
-    add_world_rect(fig, 7, -0.8, 7.75, -0.2, lobbyship_text, darkred_text)
-    add_world_rect(fig, 7, -1.4, 7.75, -0.8, lobbyship_text, darkred_text)
+    add_bud_rect(fig, 7, 0.4, 7.75, 1, lobbyship_text, darkred_text)
+    add_bud_rect(fig, 7, -0.2, 7.75, 0.4, lobbyship_text, darkred_text)
+    add_bud_rect(fig, 7, -0.8, 7.75, -0.2, lobbyship_text, darkred_text)
+    add_bud_rect(fig, 7, -1.4, 7.75, -0.8, lobbyship_text, darkred_text)
     add_rect_arrow(fig, 7, -0.4, 6.25, -0.4, blue_text)
     add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_text)
     add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_text)
     add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_text)
     charunit_text = "charunit"
     purple_text = "purple"
-    add_world_rect(fig, 9, -0.4, 9.75, 0.2, charunit_text, purple_text)
-    add_world_rect(fig, 9, -1.0, 9.75, -0.4, charunit_text, purple_text)
-    add_world_rect(fig, 9, -1.6, 9.75, -1.0, charunit_text, purple_text)
-    add_world_rect(fig, 9, -2.2, 9.75, -1.6, charunit_text, purple_text)
-    add_world_rect(fig, 9, -4.0, 9.75, -2.2, charunit_text, purple_text)
+    add_bud_rect(fig, 9, -0.4, 9.75, 0.2, charunit_text, purple_text)
+    add_bud_rect(fig, 9, -1.0, 9.75, -0.4, charunit_text, purple_text)
+    add_bud_rect(fig, 9, -1.6, 9.75, -1.0, charunit_text, purple_text)
+    add_bud_rect(fig, 9, -2.2, 9.75, -1.6, charunit_text, purple_text)
+    add_bud_rect(fig, 9, -4.0, 9.75, -2.2, charunit_text, purple_text)
 
     # fig.add_trace(
     #     plotly_Scatter(
     #         x=[1.0],
     #         y=[3.75],
-    #         text=["What Jaar Worlds Are Made of Explanation 0"],
+    #         text=["What Jaar Buds Are Made of Explanation 0"],
     #         mode="text",
     #     )
     # )

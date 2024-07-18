@@ -1,6 +1,6 @@
 from src._road.road import RoadUnit, create_road, get_default_real_id_roadnode
-from src._world.idea import ideaunit_shop
-from src._world.world import worldunit_shop, WorldUnit
+from src.bud.idea import ideaunit_shop
+from src.bud.bud import budunit_shop, BudUnit
 
 
 def casa_text() -> str:
@@ -59,9 +59,9 @@ def run_road() -> RoadUnit:
     return create_road(casa_road(), run_text())
 
 
-def get_example_zia_speaker() -> WorldUnit:
+def get_example_zia_speaker() -> BudUnit:
     zia_text = "Zia"
-    zia_speaker = worldunit_shop(zia_text)
+    zia_speaker = budunit_shop(zia_text)
     zia_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     zia_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
@@ -77,9 +77,9 @@ def get_example_zia_speaker() -> WorldUnit:
     return zia_speaker
 
 
-def get_example_bob_speaker() -> WorldUnit:
+def get_example_bob_speaker() -> BudUnit:
     bob_text = "Bob"
-    bob_speaker = worldunit_shop(bob_text)
+    bob_speaker = budunit_shop(bob_text)
     bob_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     bob_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     bob_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
@@ -95,11 +95,11 @@ def get_example_bob_speaker() -> WorldUnit:
     return bob_speaker
 
 
-def get_example_yao_speaker() -> WorldUnit:
+def get_example_yao_speaker() -> BudUnit:
     yao_text = "Yao"
     zia_text = "Zia"
     bob_text = "Bob"
-    yao_speaker = worldunit_shop(yao_text)
+    yao_speaker = budunit_shop(yao_text)
     yao_speaker.add_charunit(yao_text, debtor_weight=12)
     yao_speaker.add_charunit(zia_text, debtor_weight=36)
     yao_speaker.add_charunit(bob_text, debtor_weight=48)

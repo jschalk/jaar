@@ -1,5 +1,5 @@
 from src._instrument.python import get_nested_value
-from src._world.world import WorldUnit
+from src.bud.bud import BudUnit
 from src.gift.atom import atom_delete, atom_insert, atom_update, AtomUnit
 from src.gift.change import ChangeUnit
 
@@ -8,184 +8,176 @@ def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_nested_value(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
+def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_change.atomunits
-    worldunit_atom = get_leg_obj(atoms_dict, [atom_update(), "worldunit"])
+    budunit_atom = get_leg_obj(atoms_dict, [atom_update(), "budunit"])
 
-    charunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "world_charunit"])
-    charunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "world_charunit"])
-    charunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "world_charunit"])
+    charunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "bud_charunit"])
+    charunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_charunit"])
+    charunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_charunit"])
 
-    x_list = [atom_insert(), "world_char_lobbyship"]
+    x_list = [atom_insert(), "bud_char_lobbyship"]
     char_lobbyship_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_char_lobbyship"]
+    x_list = [atom_update(), "bud_char_lobbyship"]
     char_lobbyship_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_char_lobbyship"]
+    x_list = [atom_delete(), "bud_char_lobbyship"]
     char_lobbyship_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_ideaunit"]
-    world_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_ideaunit"]
-    world_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_ideaunit"]
-    world_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_ideaunit"]
+    bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_ideaunit"]
+    bud_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_ideaunit"]
+    bud_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_awardlink"]
-    world_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_awardlink"]
-    world_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_awardlink"]
-    world_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_awardlink"]
+    bud_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_awardlink"]
+    bud_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_awardlink"]
+    bud_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_reasonunit"]
-    world_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_reasonunit"]
-    world_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_reasonunit"]
-    world_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_reasonunit"]
+    bud_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_reasonunit"]
+    bud_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_reasonunit"]
+    bud_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_reason_premiseunit"]
-    world_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_reason_premiseunit"]
-    world_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_reason_premiseunit"]
-    world_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_reason_premiseunit"]
+    bud_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_reason_premiseunit"]
+    bud_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_reason_premiseunit"]
+    bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_lobbyhold"]
-    world_idea_lobbyhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_lobbyhold"]
-    world_idea_lobbyhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_lobbyhold"]
+    bud_idea_lobbyhold_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_lobbyhold"]
+    bud_idea_lobbyhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_healerhold"]
-    world_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_healerhold"]
-    world_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_healerhold"]
+    bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_healerhold"]
+    bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_factunit"]
-    world_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_factunit"]
-    world_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_factunit"]
-    world_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_factunit"]
+    bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_factunit"]
+    bud_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_factunit"]
+    bud_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
-    if worldunit_atom != None:
-        add_worldunit_legible_list(leg_list, worldunit_atom, x_world)
+    if budunit_atom != None:
+        add_budunit_legible_list(leg_list, budunit_atom, x_bud)
     if charunit_insert_dict != None:
-        add_world_charunit_insert_to_legible_list(
-            leg_list, charunit_insert_dict, x_world
-        )
+        add_bud_charunit_insert_to_legible_list(leg_list, charunit_insert_dict, x_bud)
     if charunit_update_dict != None:
-        add_world_charunit_update_to_legible_list(
-            leg_list, charunit_update_dict, x_world
-        )
+        add_bud_charunit_update_to_legible_list(leg_list, charunit_update_dict, x_bud)
     if charunit_delete_dict != None:
-        add_world_charunit_delete_to_legible_list(
-            leg_list, charunit_delete_dict, x_world
-        )
+        add_bud_charunit_delete_to_legible_list(leg_list, charunit_delete_dict, x_bud)
 
     if char_lobbyship_insert_dict != None:
-        add_world_char_lobbyship_insert_to_legible_list(
-            leg_list, char_lobbyship_insert_dict, x_world
+        add_bud_char_lobbyship_insert_to_legible_list(
+            leg_list, char_lobbyship_insert_dict, x_bud
         )
     if char_lobbyship_update_dict != None:
-        add_world_char_lobbyship_update_to_legible_list(
-            leg_list, char_lobbyship_update_dict, x_world
+        add_bud_char_lobbyship_update_to_legible_list(
+            leg_list, char_lobbyship_update_dict, x_bud
         )
     if char_lobbyship_delete_dict != None:
-        add_world_char_lobbyship_delete_to_legible_list(
-            leg_list, char_lobbyship_delete_dict, x_world
+        add_bud_char_lobbyship_delete_to_legible_list(
+            leg_list, char_lobbyship_delete_dict, x_bud
         )
 
-    if world_ideaunit_insert_dict != None:
-        add_world_ideaunit_insert_to_legible_list(
-            leg_list, world_ideaunit_insert_dict, x_world
+    if bud_ideaunit_insert_dict != None:
+        add_bud_ideaunit_insert_to_legible_list(
+            leg_list, bud_ideaunit_insert_dict, x_bud
         )
-    if world_ideaunit_update_dict != None:
-        add_world_ideaunit_update_to_legible_list(
-            leg_list, world_ideaunit_update_dict, x_world
+    if bud_ideaunit_update_dict != None:
+        add_bud_ideaunit_update_to_legible_list(
+            leg_list, bud_ideaunit_update_dict, x_bud
         )
-    if world_ideaunit_delete_dict != None:
-        add_world_ideaunit_delete_to_legible_list(
-            leg_list, world_ideaunit_delete_dict, x_world
-        )
-
-    if world_idea_awardlink_insert_dict != None:
-        add_world_idea_awardlink_insert_to_legible_list(
-            leg_list, world_idea_awardlink_insert_dict, x_world
-        )
-    if world_idea_awardlink_update_dict != None:
-        add_world_idea_awardlink_update_to_legible_list(
-            leg_list, world_idea_awardlink_update_dict, x_world
-        )
-    if world_idea_awardlink_delete_dict != None:
-        add_world_idea_awardlink_delete_to_legible_list(
-            leg_list, world_idea_awardlink_delete_dict, x_world
+    if bud_ideaunit_delete_dict != None:
+        add_bud_ideaunit_delete_to_legible_list(
+            leg_list, bud_ideaunit_delete_dict, x_bud
         )
 
-    if world_idea_reasonunit_insert_dict != None:
-        add_world_idea_reasonunit_insert_to_legible_list(
-            leg_list, world_idea_reasonunit_insert_dict, x_world
+    if bud_idea_awardlink_insert_dict != None:
+        add_bud_idea_awardlink_insert_to_legible_list(
+            leg_list, bud_idea_awardlink_insert_dict, x_bud
         )
-    if world_idea_reasonunit_update_dict != None:
-        add_world_idea_reasonunit_update_to_legible_list(
-            leg_list, world_idea_reasonunit_update_dict, x_world
+    if bud_idea_awardlink_update_dict != None:
+        add_bud_idea_awardlink_update_to_legible_list(
+            leg_list, bud_idea_awardlink_update_dict, x_bud
         )
-    if world_idea_reasonunit_delete_dict != None:
-        add_world_idea_reasonunit_delete_to_legible_list(
-            leg_list, world_idea_reasonunit_delete_dict, x_world
-        )
-
-    if world_idea_reason_premiseunit_insert_dict != None:
-        add_world_reason_premiseunit_insert_to_legible_list(
-            leg_list, world_idea_reason_premiseunit_insert_dict, x_world
-        )
-    if world_idea_reason_premiseunit_update_dict != None:
-        add_world_reason_premiseunit_update_to_legible_list(
-            leg_list, world_idea_reason_premiseunit_update_dict, x_world
-        )
-    if world_idea_reason_premiseunit_delete_dict != None:
-        add_world_reason_premiseunit_delete_to_legible_list(
-            leg_list, world_idea_reason_premiseunit_delete_dict, x_world
+    if bud_idea_awardlink_delete_dict != None:
+        add_bud_idea_awardlink_delete_to_legible_list(
+            leg_list, bud_idea_awardlink_delete_dict, x_bud
         )
 
-    if world_idea_lobbyhold_insert_dict != None:
-        add_world_idea_lobbyhold_insert_to_legible_list(
-            leg_list, world_idea_lobbyhold_insert_dict, x_world
+    if bud_idea_reasonunit_insert_dict != None:
+        add_bud_idea_reasonunit_insert_to_legible_list(
+            leg_list, bud_idea_reasonunit_insert_dict, x_bud
         )
-    if world_idea_lobbyhold_delete_dict != None:
-        add_world_idea_lobbyhold_delete_to_legible_list(
-            leg_list, world_idea_lobbyhold_delete_dict, x_world
+    if bud_idea_reasonunit_update_dict != None:
+        add_bud_idea_reasonunit_update_to_legible_list(
+            leg_list, bud_idea_reasonunit_update_dict, x_bud
         )
-
-    if world_idea_healerhold_insert_dict != None:
-        add_world_idea_healerhold_insert_to_legible_list(
-            leg_list, world_idea_healerhold_insert_dict, x_world
-        )
-    if world_idea_healerhold_delete_dict != None:
-        add_world_idea_healerhold_delete_to_legible_list(
-            leg_list, world_idea_healerhold_delete_dict, x_world
+    if bud_idea_reasonunit_delete_dict != None:
+        add_bud_idea_reasonunit_delete_to_legible_list(
+            leg_list, bud_idea_reasonunit_delete_dict, x_bud
         )
 
-    if world_idea_factunit_insert_dict != None:
-        add_world_idea_factunit_insert_to_legible_list(
-            leg_list, world_idea_factunit_insert_dict, x_world
+    if bud_idea_reason_premiseunit_insert_dict != None:
+        add_bud_reason_premiseunit_insert_to_legible_list(
+            leg_list, bud_idea_reason_premiseunit_insert_dict, x_bud
         )
-    if world_idea_factunit_update_dict != None:
-        add_world_idea_factunit_update_to_legible_list(
-            leg_list, world_idea_factunit_update_dict, x_world
+    if bud_idea_reason_premiseunit_update_dict != None:
+        add_bud_reason_premiseunit_update_to_legible_list(
+            leg_list, bud_idea_reason_premiseunit_update_dict, x_bud
         )
-    if world_idea_factunit_delete_dict != None:
-        add_world_idea_factunit_delete_to_legible_list(
-            leg_list, world_idea_factunit_delete_dict, x_world
+    if bud_idea_reason_premiseunit_delete_dict != None:
+        add_bud_reason_premiseunit_delete_to_legible_list(
+            leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
+        )
+
+    if bud_idea_lobbyhold_insert_dict != None:
+        add_bud_idea_lobbyhold_insert_to_legible_list(
+            leg_list, bud_idea_lobbyhold_insert_dict, x_bud
+        )
+    if bud_idea_lobbyhold_delete_dict != None:
+        add_bud_idea_lobbyhold_delete_to_legible_list(
+            leg_list, bud_idea_lobbyhold_delete_dict, x_bud
+        )
+
+    if bud_idea_healerhold_insert_dict != None:
+        add_bud_idea_healerhold_insert_to_legible_list(
+            leg_list, bud_idea_healerhold_insert_dict, x_bud
+        )
+    if bud_idea_healerhold_delete_dict != None:
+        add_bud_idea_healerhold_delete_to_legible_list(
+            leg_list, bud_idea_healerhold_delete_dict, x_bud
+        )
+
+    if bud_idea_factunit_insert_dict != None:
+        add_bud_idea_factunit_insert_to_legible_list(
+            leg_list, bud_idea_factunit_insert_dict, x_bud
+        )
+    if bud_idea_factunit_update_dict != None:
+        add_bud_idea_factunit_update_to_legible_list(
+            leg_list, bud_idea_factunit_update_dict, x_bud
+        )
+    if bud_idea_factunit_delete_dict != None:
+        add_bud_idea_factunit_delete_to_legible_list(
+            leg_list, bud_idea_factunit_delete_dict, x_bud
         )
 
     return leg_list
 
 
-def add_worldunit_legible_list(
-    legible_list: list[str], x_atom: AtomUnit, x_world: WorldUnit
-):
+def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: BudUnit):
     optional_args = x_atom.optional_args
     _weight_text = "_weight"
     _max_tree_traverse_text = "_max_tree_traverse"
@@ -199,17 +191,17 @@ def add_worldunit_legible_list(
     _debtor_respect_value = optional_args.get(_debtor_respect_text)
     _weight_value = optional_args.get(_weight_text)
 
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     if x_monetary_desc is None:
-        x_monetary_desc = f"{x_world._owner_id}'s monetary_desc"
+        x_monetary_desc = f"{x_bud._owner_id}'s monetary_desc"
 
     if _max_tree_traverse_value != None:
         legible_list.append(
-            f"{x_world._owner_id}'s maximum number of World output evaluations transited to {_max_tree_traverse_value}"
+            f"{x_bud._owner_id}'s maximum number of Bud output evaluations transited to {_max_tree_traverse_value}"
         )
     if _monetary_desc_value != None:
         legible_list.append(
-            f"{x_world._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
+            f"{x_bud._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
         )
     if (
         _credor_respect_value != None
@@ -229,14 +221,14 @@ def add_worldunit_legible_list(
         )
     if _weight_value != None:
         legible_list.append(
-            f"{x_world._owner_id}'s world weight was transited to {_weight_value}"
+            f"{x_bud._owner_id}'s bud weight was transited to {_weight_value}"
         )
 
 
-def add_world_charunit_insert_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
+def add_bud_charunit_insert_to_legible_list(
+    legible_list: list[str], charunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
     for charunit_atom in charunit_dict.values():
@@ -247,10 +239,10 @@ def add_world_charunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_world_charunit_update_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
+def add_bud_charunit_update_to_legible_list(
+    legible_list: list[str], charunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
     for charunit_atom in charunit_dict.values():
@@ -266,10 +258,10 @@ def add_world_charunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_world_charunit_delete_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
+def add_bud_charunit_delete_to_legible_list(
+    legible_list: list[str], charunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
     for charunit_atom in charunit_dict.values():
         char_id = charunit_atom.get_value("char_id")
@@ -277,8 +269,8 @@ def add_world_charunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_world_char_lobbyship_insert_to_legible_list(
-    legible_list: list[str], char_lobbyship_insert_dict: dict, x_world: WorldUnit
+def add_bud_char_lobbyship_insert_to_legible_list(
+    legible_list: list[str], char_lobbyship_insert_dict: dict, x_bud: BudUnit
 ):
     for char_lobbyship_dict in char_lobbyship_insert_dict.values():
         for char_lobbyship_atom in char_lobbyship_dict.values():
@@ -290,8 +282,8 @@ def add_world_char_lobbyship_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_char_lobbyship_update_to_legible_list(
-    legible_list: list[str], char_lobbyship_update_dict: dict, x_world: WorldUnit
+def add_bud_char_lobbyship_update_to_legible_list(
+    legible_list: list[str], char_lobbyship_update_dict: dict, x_bud: BudUnit
 ):
     for char_lobbyship_dict in char_lobbyship_update_dict.values():
         for char_lobbyship_atom in char_lobbyship_dict.values():
@@ -308,8 +300,8 @@ def add_world_char_lobbyship_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_char_lobbyship_delete_to_legible_list(
-    legible_list: list[str], char_lobbyship_delete_dict: dict, x_world: WorldUnit
+def add_bud_char_lobbyship_delete_to_legible_list(
+    legible_list: list[str], char_lobbyship_delete_dict: dict, x_bud: BudUnit
 ):
     for char_lobbyship_dict in char_lobbyship_delete_dict.values():
         for char_lobbyship_atom in char_lobbyship_dict.values():
@@ -319,8 +311,8 @@ def add_world_char_lobbyship_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_ideaunit_insert_to_legible_list(
-    legible_list: list[str], ideaunit_insert_dict: dict, x_world: WorldUnit
+def add_bud_ideaunit_insert_to_legible_list(
+    legible_list: list[str], ideaunit_insert_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
     parent_road_text = "parent_road"
@@ -379,8 +371,8 @@ def add_world_ideaunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_ideaunit_update_to_legible_list(
-    legible_list: list[str], ideaunit_update_dict: dict, x_world: WorldUnit
+def add_bud_ideaunit_update_to_legible_list(
+    legible_list: list[str], ideaunit_update_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
     parent_road_text = "parent_road"
@@ -437,8 +429,8 @@ def add_world_ideaunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_ideaunit_delete_to_legible_list(
-    legible_list: list[str], ideaunit_delete_dict: dict, x_world: WorldUnit
+def add_bud_ideaunit_delete_to_legible_list(
+    legible_list: list[str], ideaunit_delete_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
     parent_road_text = "parent_road"
@@ -450,8 +442,8 @@ def add_world_ideaunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_awardlink_insert_to_legible_list(
-    legible_list: list[str], idea_awardlink_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_awardlink_insert_to_legible_list(
+    legible_list: list[str], idea_awardlink_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_awardlink_insert_dict.values():
         for idea_awardlink_atom in road_dict.values():
@@ -463,8 +455,8 @@ def add_world_idea_awardlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_awardlink_update_to_legible_list(
-    legible_list: list[str], idea_awardlink_update_dict: dict, x_world: WorldUnit
+def add_bud_idea_awardlink_update_to_legible_list(
+    legible_list: list[str], idea_awardlink_update_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_awardlink_update_dict.values():
         for idea_awardlink_atom in road_dict.values():
@@ -481,8 +473,8 @@ def add_world_idea_awardlink_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_awardlink_delete_to_legible_list(
-    legible_list: list[str], idea_awardlink_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_awardlink_delete_to_legible_list(
+    legible_list: list[str], idea_awardlink_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_awardlink_delete_dict.values():
         for idea_awardlink_atom in road_dict.values():
@@ -492,8 +484,8 @@ def add_world_idea_awardlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_reasonunit_insert_to_legible_list(
-    legible_list: list[str], idea_reasonunit_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_reasonunit_insert_to_legible_list(
+    legible_list: list[str], idea_reasonunit_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_reasonunit_insert_dict.values():
         for idea_reasonunit_atom in road_dict.values():
@@ -512,8 +504,8 @@ def add_world_idea_reasonunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_reasonunit_update_to_legible_list(
-    legible_list: list[str], idea_reasonunit_update_dict: dict, x_world: WorldUnit
+def add_bud_idea_reasonunit_update_to_legible_list(
+    legible_list: list[str], idea_reasonunit_update_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_reasonunit_update_dict.values():
         for idea_reasonunit_atom in road_dict.values():
@@ -529,8 +521,8 @@ def add_world_idea_reasonunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_reasonunit_delete_to_legible_list(
-    legible_list: list[str], idea_reasonunit_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_reasonunit_delete_to_legible_list(
+    legible_list: list[str], idea_reasonunit_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_reasonunit_delete_dict.values():
         for idea_reasonunit_atom in road_dict.values():
@@ -540,10 +532,10 @@ def add_world_idea_reasonunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_reason_premiseunit_insert_to_legible_list(
+def add_bud_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
     idea_reason_premiseunit_insert_dict: dict,
-    x_world: WorldUnit,
+    x_bud: BudUnit,
 ):
     road_text = "road"
     base_text = "base"
@@ -570,10 +562,10 @@ def add_world_reason_premiseunit_insert_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_world_reason_premiseunit_update_to_legible_list(
+def add_bud_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
     idea_reason_premiseunit_update_dict: dict,
-    x_world: WorldUnit,
+    x_bud: BudUnit,
 ):
     road_text = "road"
     base_text = "base"
@@ -600,10 +592,10 @@ def add_world_reason_premiseunit_update_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_world_reason_premiseunit_delete_to_legible_list(
+def add_bud_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
     idea_reason_premiseunit_delete_dict: dict,
-    x_world: WorldUnit,
+    x_bud: BudUnit,
 ):
     road_text = "road"
     base_text = "base"
@@ -618,8 +610,8 @@ def add_world_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_world_idea_lobbyhold_insert_to_legible_list(
-    legible_list: list[str], idea_lobbyhold_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_lobbyhold_insert_to_legible_list(
+    legible_list: list[str], idea_lobbyhold_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_lobbyhold_insert_dict.values():
         for idea_lobbyhold_atom in road_dict.values():
@@ -629,8 +621,8 @@ def add_world_idea_lobbyhold_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_lobbyhold_delete_to_legible_list(
-    legible_list: list[str], idea_lobbyhold_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_lobbyhold_delete_to_legible_list(
+    legible_list: list[str], idea_lobbyhold_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_lobbyhold_delete_dict.values():
         for idea_lobbyhold_atom in road_dict.values():
@@ -640,8 +632,8 @@ def add_world_idea_lobbyhold_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_healerhold_insert_to_legible_list(
-    legible_list: list[str], idea_healerhold_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_healerhold_insert_to_legible_list(
+    legible_list: list[str], idea_healerhold_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_healerhold_insert_dict.values():
         for idea_healerhold_atom in road_dict.values():
@@ -651,8 +643,8 @@ def add_world_idea_healerhold_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_healerhold_delete_to_legible_list(
-    legible_list: list[str], idea_healerhold_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_healerhold_delete_to_legible_list(
+    legible_list: list[str], idea_healerhold_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_healerhold_delete_dict.values():
         for idea_healerhold_atom in road_dict.values():
@@ -662,8 +654,8 @@ def add_world_idea_healerhold_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_factunit_insert_to_legible_list(
-    legible_list: list[str], idea_factunit_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_factunit_insert_to_legible_list(
+    legible_list: list[str], idea_factunit_insert_dict: dict, x_bud: BudUnit
 ):
     road_text = "road"
     base_text = "base"
@@ -685,8 +677,8 @@ def add_world_idea_factunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_factunit_update_to_legible_list(
-    legible_list: list[str], idea_factunit_update_dict: dict, x_world: WorldUnit
+def add_bud_idea_factunit_update_to_legible_list(
+    legible_list: list[str], idea_factunit_update_dict: dict, x_bud: BudUnit
 ):
     road_text = "road"
     base_text = "base"
@@ -708,8 +700,8 @@ def add_world_idea_factunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_factunit_delete_to_legible_list(
-    legible_list: list[str], idea_factunit_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_factunit_delete_to_legible_list(
+    legible_list: list[str], idea_factunit_delete_dict: dict, x_bud: BudUnit
 ):
     road_text = "road"
     base_text = "base"

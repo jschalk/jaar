@@ -1,13 +1,13 @@
 from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 
 
 def test_create_legible_list_ReturnsObj_charunit_INSERT():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_ideaunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_ideaunit"
     label_text = "label"
     parent_road_text = "parent_road"
     _addin_text = "_addin"
@@ -22,15 +22,15 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
     _weight_text = "_weight"
     pledge_text = "pledge"
     label_value = "clean fridge"
-    parent_road_value = sue_world.make_l1_road("casa")
+    parent_road_value = sue_bud.make_l1_road("casa")
     _addin_value = 7
     _begin_value = 13
     _close_value = 17
     _denom_value = 23
-    _numeric_road_value = sue_world.make_l1_road("sports")
+    _numeric_road_value = sue_bud.make_l1_road("sports")
     _numor_value = 29
     _problem_bool_value = False
-    _range_source_road_value = sue_world.make_l1_road("greenways")
+    _range_source_road_value = sue_bud.make_l1_road("greenways")
     _reest_value = 37
     _weight_value = 43
     pledge_value = False
@@ -53,7 +53,7 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
     x_changeunit.set_atomunit(clean_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"Created Idea '{label_value}' with parent_road {parent_road_value}. _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numeric_road={_numeric_road_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._range_source_road={_range_source_road_value}._reest={_reest_value}._weight={_weight_value}.pledge={pledge_value}."
@@ -63,8 +63,8 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
 
 def test_create_legible_list_ReturnsObj_charunit_UPDATE():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_ideaunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_ideaunit"
     label_text = "label"
     parent_road_text = "parent_road"
     _addin_text = "_addin"
@@ -79,15 +79,15 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE():
     _weight_text = "_weight"
     pledge_text = "pledge"
     label_value = "clean fridge"
-    parent_road_value = sue_world.make_l1_road("casa")
+    parent_road_value = sue_bud.make_l1_road("casa")
     _addin_value = 7
     _begin_value = 13
     _close_value = 17
     _denom_value = 23
-    _numeric_road_value = sue_world.make_l1_road("sports")
+    _numeric_road_value = sue_bud.make_l1_road("sports")
     _numor_value = 29
     _problem_bool_value = False
-    _range_source_road_value = sue_world.make_l1_road("greenways")
+    _range_source_road_value = sue_bud.make_l1_road("greenways")
     _reest_value = 37
     _weight_value = 43
     pledge_value = False
@@ -110,7 +110,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE():
     x_changeunit.set_atomunit(clean_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numeric_road={_numeric_road_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._range_source_road={_range_source_road_value}._reest={_reest_value}._weight={_weight_value}.pledge={pledge_value}."
@@ -120,12 +120,12 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE():
 
 def test_create_legible_list_ReturnsObj_charunit_DELETE():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_ideaunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_ideaunit"
     label_text = "label"
     parent_road_text = "parent_road"
     label_value = "clean fridge"
-    parent_road_value = sue_world.make_l1_road("casa")
+    parent_road_value = sue_bud.make_l1_road("casa")
     clean_atomunit = atomunit_shop(category, atom_delete())
     clean_atomunit.set_arg(label_text, label_value)
     clean_atomunit.set_arg(parent_road_text, parent_road_value)
@@ -134,7 +134,7 @@ def test_create_legible_list_ReturnsObj_charunit_DELETE():
     x_changeunit.set_atomunit(clean_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"Idea '{label_value}' with parent_road {parent_road_value} was deleted."

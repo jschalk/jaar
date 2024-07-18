@@ -1,8 +1,8 @@
 from src._instrument.file import delete_dir, save_file, open_file
 from src._instrument.db_tool import check_connection
-from src._world.healer import healerhold_shop
-from src._world.idea import ideaunit_shop
-from src._world.graphic import display_ideatree
+from src.bud.healer import healerhold_shop
+from src.bud.idea import ideaunit_shop
+from src.bud.graphic import display_ideatree
 from src.listen.hubunit import hubunit_shop, treasury_file_name
 from src.listen.examples.listen_env import (
     env_dir_setup_cleanup,
@@ -20,27 +20,27 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    sue_voice_world = sue_hubunit.get_voice_world()
-    sue_voice_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_voice_bud = sue_hubunit.get_voice_bud()
+    sue_voice_bud.add_charunit(sue_text)
     texas_text = "Texas"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
     dallas_text = "dallas"
-    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
-    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    sue_voice_world.add_idea(ideaunit_shop(dallas_text), texas_road)
-    sue_voice_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.edit_idea_attr(dallas_road, healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.settle_world()
-    assert sue_voice_world._econs_justified is False
-    sue_hubunit.save_voice_world(sue_voice_world)
+    dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
+    sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.add_idea(ideaunit_shop(dallas_text), texas_road)
+    sue_voice_bud.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_bud.edit_idea_attr(dallas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_bud.settle_bud()
+    assert sue_voice_bud._econs_justified is False
+    sue_hubunit.save_voice_bud(sue_voice_bud)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_econ_roads()
     assert (
         str(excinfo.value)
-        == f"Cannot get_econ_roads from '{sue_text}' voice world because 'WorldUnit._econs_justified' is False."
+        == f"Cannot get_econ_roads from '{sue_text}' voice bud because 'BudUnit._econs_justified' is False."
     )
 
 
@@ -50,24 +50,24 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    sue_voice_world = sue_hubunit.get_voice_world()
-    sue_voice_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_voice_bud = sue_hubunit.get_voice_bud()
+    sue_voice_bud.add_charunit(sue_text)
     texas_text = "Tex/as"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
-    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    sue_voice_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.settle_world()
-    assert sue_voice_world._econs_justified
-    assert sue_voice_world._econs_buildable is False
-    sue_hubunit.save_voice_world(sue_voice_world)
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
+    sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_bud.settle_bud()
+    assert sue_voice_bud._econs_justified
+    assert sue_voice_bud._econs_buildable is False
+    sue_hubunit.save_voice_bud(sue_voice_bud)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_econ_roads()
     assert (
         str(excinfo.value)
-        == f"Cannot get_econ_roads from '{sue_text}' voice world because 'WorldUnit._econs_buildable' is False."
+        == f"Cannot get_econ_roads from '{sue_text}' voice bud because 'BudUnit._econs_buildable' is False."
     )
 
 
@@ -75,23 +75,23 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    sue_voice_world = sue_hubunit.get_voice_world()
-    sue_voice_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_voice_bud = sue_hubunit.get_voice_bud()
+    sue_voice_bud.add_charunit(sue_text)
     texas_text = "Texas"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
-    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
+    sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     elpaso_text = "el paso"
-    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
-    elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
+    dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
+    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
     dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.add_idea(dallas_idea, texas_road)
-    sue_voice_world.add_idea(elpaso_idea, texas_road)
-    sue_voice_world.settle_world()
-    # display_ideatree(sue_voice_world, mode="Econ").show()
-    sue_hubunit.save_voice_world(sue_voice_world)
+    sue_voice_bud.add_idea(dallas_idea, texas_road)
+    sue_voice_bud.add_idea(elpaso_idea, texas_road)
+    sue_voice_bud.settle_bud()
+    # display_ideatree(sue_voice_bud, mode="Econ").show()
+    sue_hubunit.save_voice_bud(sue_voice_bud)
 
     # WHEN
     sue_econ_roads = sue_hubunit.get_econ_roads()
@@ -108,25 +108,25 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    sue_voice_world = sue_hubunit.get_voice_world()
-    sue_voice_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_voice_bud = sue_hubunit.get_voice_bud()
+    sue_voice_bud.add_charunit(sue_text)
     bob_text = "Bob"
-    sue_voice_world.add_charunit(bob_text)
+    sue_voice_bud.add_charunit(bob_text)
     texas_text = "Texas"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
-    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
+    sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
-    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
+    dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.add_idea(dallas_idea, texas_road)
+    sue_voice_bud.add_idea(dallas_idea, texas_road)
     elpaso_text = "el paso"
-    elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
+    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.add_idea(elpaso_idea, texas_road)
-    # sue_voice_world.settle_world()
-    # display_ideatree(sue_voice_world, mode="Econ").show()
-    sue_hubunit.save_voice_world(sue_voice_world)
+    sue_voice_bud.add_idea(elpaso_idea, texas_road)
+    # sue_voice_bud.settle_bud()
+    # display_ideatree(sue_voice_bud, mode="Econ").show()
+    sue_hubunit.save_voice_bud(sue_voice_bud)
     sue_dallas_hubunit = hubunit_shop(env_dir(), None, sue_text, dallas_road)
     sue_elpaso_hubunit = hubunit_shop(env_dir(), None, sue_text, elpaso_road)
     assert os_path_exists(sue_dallas_hubunit.duty_path(sue_text)) is False
@@ -148,10 +148,10 @@ def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_voice_bud = sue_hubunit.get_voice_bud()
     texas_text = "Texas"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_hubunit.econ_road = texas_road
     assert os_path_exists(sue_hubunit.treasury_db_path()) is False
 
@@ -194,10 +194,10 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    sue_voice_world = sue_hubunit.get_voice_world()
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_voice_bud = sue_hubunit.get_voice_bud()
     texas_text = "Texas"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_hubunit.econ_road = texas_road
     assert sue_hubunit.treasury_db_file_exists() is False
 
@@ -247,23 +247,23 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(env_dir_setup_c
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
-    sue_hubunit.save_voice_world(sue_hubunit.default_voice_world())
-    sue_voice_world = sue_hubunit.get_voice_world()
-    sue_voice_world.add_charunit(sue_text)
+    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_voice_bud = sue_hubunit.get_voice_bud()
+    sue_voice_bud.add_charunit(sue_text)
     texas_text = "Texas"
-    texas_road = sue_voice_world.make_l1_road(texas_text)
-    sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    texas_road = sue_voice_bud.make_l1_road(texas_text)
+    sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     elpaso_text = "el paso"
-    dallas_road = sue_voice_world.make_road(texas_road, dallas_text)
-    elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
+    dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
+    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
     dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.add_idea(dallas_idea, texas_road)
-    sue_voice_world.add_idea(elpaso_idea, texas_road)
-    sue_voice_world.settle_world()
-    # display_ideatree(sue_voice_world, mode="Econ").show()
-    sue_hubunit.save_voice_world(sue_voice_world)
+    sue_voice_bud.add_idea(dallas_idea, texas_road)
+    sue_voice_bud.add_idea(elpaso_idea, texas_road)
+    sue_voice_bud.settle_bud()
+    # display_ideatree(sue_voice_bud, mode="Econ").show()
+    sue_hubunit.save_voice_bud(sue_voice_bud)
 
     dallas_hubunit = hubunit_shop(env_dir(), None, sue_text, dallas_road)
     elpaso_hubunit = hubunit_shop(env_dir(), None, sue_text, elpaso_road)

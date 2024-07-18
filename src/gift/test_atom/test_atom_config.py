@@ -8,80 +8,80 @@ from src.gift.atom_config import (
     get_atom_order as q_order,
     set_mog,
     get_flattened_atom_table_build,
-    get_normalized_world_table_build,
+    get_normalized_bud_table_build,
     required_args_text,
     optional_args_text,
     normal_table_name_text,
     normal_specs_text,
     sqlite_datatype_text,
     python_type_text,
-    worldunit_text,
-    world_charunit_text,
-    world_char_lobbyship_text,
-    world_ideaunit_text,
-    world_idea_awardlink_text,
-    world_idea_reasonunit_text,
-    world_idea_reason_premiseunit_text,
-    world_idea_lobbyhold_text,
-    world_idea_healerhold_text,
-    world_idea_factunit_text,
+    budunit_text,
+    bud_charunit_text,
+    bud_char_lobbyship_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_lobbyhold_text,
+    bud_idea_healerhold_text,
+    bud_idea_factunit_text,
 )
 
 
-def test_worldunit_text_ReturnsObj():
-    assert worldunit_text() == "worldunit"
+def test_budunit_text_ReturnsObj():
+    assert budunit_text() == "budunit"
 
 
-def test_world_charunit_text_ReturnsObj():
-    assert world_charunit_text() == "world_charunit"
+def test_bud_charunit_text_ReturnsObj():
+    assert bud_charunit_text() == "bud_charunit"
 
 
-def test_world_char_lobbyship_text_ReturnsObj():
-    assert world_char_lobbyship_text() == "world_char_lobbyship"
+def test_bud_char_lobbyship_text_ReturnsObj():
+    assert bud_char_lobbyship_text() == "bud_char_lobbyship"
 
 
-def test_world_ideaunit_text_ReturnsObj():
-    assert world_ideaunit_text() == "world_ideaunit"
+def test_bud_ideaunit_text_ReturnsObj():
+    assert bud_ideaunit_text() == "bud_ideaunit"
 
 
-def test_world_idea_awardlink_text_ReturnsObj():
-    assert world_idea_awardlink_text() == "world_idea_awardlink"
+def test_bud_idea_awardlink_text_ReturnsObj():
+    assert bud_idea_awardlink_text() == "bud_idea_awardlink"
 
 
-def test_world_idea_reasonunit_text_ReturnsObj():
-    assert world_idea_reasonunit_text() == "world_idea_reasonunit"
+def test_bud_idea_reasonunit_text_ReturnsObj():
+    assert bud_idea_reasonunit_text() == "bud_idea_reasonunit"
 
 
-def test_world_idea_reason_premiseunit_text_ReturnsObj():
-    assert world_idea_reason_premiseunit_text() == "world_idea_reason_premiseunit"
+def test_bud_idea_reason_premiseunit_text_ReturnsObj():
+    assert bud_idea_reason_premiseunit_text() == "bud_idea_reason_premiseunit"
 
 
-def test_world_idea_lobbyhold_text_ReturnsObj():
-    assert world_idea_lobbyhold_text() == "world_idea_lobbyhold"
+def test_bud_idea_lobbyhold_text_ReturnsObj():
+    assert bud_idea_lobbyhold_text() == "bud_idea_lobbyhold"
 
 
-def test_world_idea_healerhold_text_ReturnsObj():
-    assert world_idea_healerhold_text() == "world_idea_healerhold"
+def test_bud_idea_healerhold_text_ReturnsObj():
+    assert bud_idea_healerhold_text() == "bud_idea_healerhold"
 
 
-def test_world_idea_factunit_text_ReturnsObj():
-    assert world_idea_factunit_text() == "world_idea_factunit"
+def test_bud_idea_factunit_text_ReturnsObj():
+    assert bud_idea_factunit_text() == "bud_idea_factunit"
 
 
 def test_atom_config_HasCorrect_category():
     assert category_ref() == {
-        worldunit_text(),
-        world_charunit_text(),
-        world_char_lobbyship_text(),
-        world_ideaunit_text(),
-        world_idea_awardlink_text(),
-        world_idea_reasonunit_text(),
-        world_idea_reason_premiseunit_text(),
-        world_idea_lobbyhold_text(),
-        world_idea_healerhold_text(),
-        world_idea_factunit_text(),
+        budunit_text(),
+        bud_charunit_text(),
+        bud_char_lobbyship_text(),
+        bud_ideaunit_text(),
+        bud_idea_awardlink_text(),
+        bud_idea_reasonunit_text(),
+        bud_idea_reason_premiseunit_text(),
+        bud_idea_lobbyhold_text(),
+        bud_idea_healerhold_text(),
+        bud_idea_factunit_text(),
     }
-    assert world_charunit_text() in category_ref()
+    assert bud_charunit_text() in category_ref()
     assert is_category_ref("idearoot") is False
 
 
@@ -146,59 +146,59 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderLobby():
     # WHEN / THEN
     assert check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_text)
     # # Simple script for editing atom_config.json
-    # set_mog(atom_insert(), "world_charunit", 0)
-    # set_mog(atom_insert(), "world_char_lobbyship", 1)
-    # set_mog(atom_insert(), "world_ideaunit", 2)
-    # set_mog(atom_insert(), "world_idea_awardlink", 3)
-    # set_mog(atom_insert(), "world_idea_lobbyhold", 4)
-    # set_mog(atom_insert(), "world_idea_healerhold", 5)
-    # set_mog(atom_insert(), "world_idea_factunit", 6)
-    # set_mog(atom_insert(), "world_idea_reasonunit", 7)
-    # set_mog(atom_insert(), "world_idea_reason_premiseunit", 8)
-    # set_mog(atom_update(), "world_charunit", 9)
-    # set_mog(atom_update(), "world_char_lobbyship", 10)
-    # set_mog(atom_update(), "world_ideaunit", 11)
-    # set_mog(atom_update(), "world_idea_awardlink", 12)
-    # set_mog(atom_update(), "world_idea_factunit", 13)
-    # set_mog(atom_update(), "world_idea_reason_premiseunit", 14)
-    # set_mog(atom_update(), "world_idea_reasonunit", 15)
-    # set_mog(atom_delete(), "world_idea_reason_premiseunit", 16)
-    # set_mog(atom_delete(), "world_idea_reasonunit", 17)
-    # set_mog(atom_delete(), "world_idea_factunit", 18)
-    # set_mog(atom_delete(), "world_idea_lobbyhold", 19)
-    # set_mog(atom_delete(), "world_idea_healerhold", 20)
-    # set_mog(atom_delete(), "world_idea_awardlink", 21)
-    # set_mog(atom_delete(), "world_ideaunit", 22)
-    # set_mog(atom_delete(), "world_char_lobbyship", 23)
-    # set_mog(atom_delete(), "world_charunit", 24)
-    # set_mog(atom_update(), "worldunit", 25)
+    # set_mog(atom_insert(), "bud_charunit", 0)
+    # set_mog(atom_insert(), "bud_char_lobbyship", 1)
+    # set_mog(atom_insert(), "bud_ideaunit", 2)
+    # set_mog(atom_insert(), "bud_idea_awardlink", 3)
+    # set_mog(atom_insert(), "bud_idea_lobbyhold", 4)
+    # set_mog(atom_insert(), "bud_idea_healerhold", 5)
+    # set_mog(atom_insert(), "bud_idea_factunit", 6)
+    # set_mog(atom_insert(), "bud_idea_reasonunit", 7)
+    # set_mog(atom_insert(), "bud_idea_reason_premiseunit", 8)
+    # set_mog(atom_update(), "bud_charunit", 9)
+    # set_mog(atom_update(), "bud_char_lobbyship", 10)
+    # set_mog(atom_update(), "bud_ideaunit", 11)
+    # set_mog(atom_update(), "bud_idea_awardlink", 12)
+    # set_mog(atom_update(), "bud_idea_factunit", 13)
+    # set_mog(atom_update(), "bud_idea_reason_premiseunit", 14)
+    # set_mog(atom_update(), "bud_idea_reasonunit", 15)
+    # set_mog(atom_delete(), "bud_idea_reason_premiseunit", 16)
+    # set_mog(atom_delete(), "bud_idea_reasonunit", 17)
+    # set_mog(atom_delete(), "bud_idea_factunit", 18)
+    # set_mog(atom_delete(), "bud_idea_lobbyhold", 19)
+    # set_mog(atom_delete(), "bud_idea_healerhold", 20)
+    # set_mog(atom_delete(), "bud_idea_awardlink", 21)
+    # set_mog(atom_delete(), "bud_ideaunit", 22)
+    # set_mog(atom_delete(), "bud_char_lobbyship", 23)
+    # set_mog(atom_delete(), "bud_charunit", 24)
+    # set_mog(atom_update(), "budunit", 25)
 
-    assert 0 == q_order(atom_insert(), "world_charunit")
-    assert 1 == q_order(atom_insert(), "world_char_lobbyship")
-    assert 2 == q_order(atom_insert(), "world_ideaunit")
-    assert 3 == q_order(atom_insert(), "world_idea_awardlink")
-    assert 4 == q_order(atom_insert(), "world_idea_lobbyhold")
-    assert 5 == q_order(atom_insert(), "world_idea_healerhold")
-    assert 6 == q_order(atom_insert(), "world_idea_factunit")
-    assert 7 == q_order(atom_insert(), "world_idea_reasonunit")
-    assert 8 == q_order(atom_insert(), "world_idea_reason_premiseunit")
-    assert 9 == q_order(atom_update(), "world_charunit")
-    assert 10 == q_order(atom_update(), "world_char_lobbyship")
-    assert 11 == q_order(atom_update(), "world_ideaunit")
-    assert 12 == q_order(atom_update(), "world_idea_awardlink")
-    assert 13 == q_order(atom_update(), "world_idea_factunit")
-    assert 14 == q_order(atom_update(), "world_idea_reason_premiseunit")
-    assert 15 == q_order(atom_update(), "world_idea_reasonunit")
-    assert 16 == q_order(atom_delete(), "world_idea_reason_premiseunit")
-    assert 17 == q_order(atom_delete(), "world_idea_reasonunit")
-    assert 18 == q_order(atom_delete(), "world_idea_factunit")
-    assert 19 == q_order(atom_delete(), "world_idea_lobbyhold")
-    assert 20 == q_order(atom_delete(), "world_idea_healerhold")
-    assert 21 == q_order(atom_delete(), "world_idea_awardlink")
-    assert 22 == q_order(atom_delete(), "world_ideaunit")
-    assert 23 == q_order(atom_delete(), "world_char_lobbyship")
-    assert 24 == q_order(atom_delete(), "world_charunit")
-    assert 25 == q_order(atom_update(), "worldunit")
+    assert 0 == q_order(atom_insert(), "bud_charunit")
+    assert 1 == q_order(atom_insert(), "bud_char_lobbyship")
+    assert 2 == q_order(atom_insert(), "bud_ideaunit")
+    assert 3 == q_order(atom_insert(), "bud_idea_awardlink")
+    assert 4 == q_order(atom_insert(), "bud_idea_lobbyhold")
+    assert 5 == q_order(atom_insert(), "bud_idea_healerhold")
+    assert 6 == q_order(atom_insert(), "bud_idea_factunit")
+    assert 7 == q_order(atom_insert(), "bud_idea_reasonunit")
+    assert 8 == q_order(atom_insert(), "bud_idea_reason_premiseunit")
+    assert 9 == q_order(atom_update(), "bud_charunit")
+    assert 10 == q_order(atom_update(), "bud_char_lobbyship")
+    assert 11 == q_order(atom_update(), "bud_ideaunit")
+    assert 12 == q_order(atom_update(), "bud_idea_awardlink")
+    assert 13 == q_order(atom_update(), "bud_idea_factunit")
+    assert 14 == q_order(atom_update(), "bud_idea_reason_premiseunit")
+    assert 15 == q_order(atom_update(), "bud_idea_reasonunit")
+    assert 16 == q_order(atom_delete(), "bud_idea_reason_premiseunit")
+    assert 17 == q_order(atom_delete(), "bud_idea_reasonunit")
+    assert 18 == q_order(atom_delete(), "bud_idea_factunit")
+    assert 19 == q_order(atom_delete(), "bud_idea_lobbyhold")
+    assert 20 == q_order(atom_delete(), "bud_idea_healerhold")
+    assert 21 == q_order(atom_delete(), "bud_idea_awardlink")
+    assert 22 == q_order(atom_delete(), "bud_ideaunit")
+    assert 23 == q_order(atom_delete(), "bud_char_lobbyship")
+    assert 24 == q_order(atom_delete(), "bud_charunit")
+    assert 25 == q_order(atom_update(), "budunit")
 
 
 def _every_category_dict_has_arg_elements(category_dict: dict) -> bool:
@@ -238,29 +238,29 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
 
     # THEN
     assert len(atom_columns) == 107
-    assert atom_columns.get("worldunit_UPDATE__credor_respect") == "INTEGER"
+    assert atom_columns.get("budunit_UPDATE__credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
 
-def test_get_normalized_world_table_build_ReturnsCorrectObj():
+def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     # ESTABLISH / WHEN
-    normalized_world_table_build = get_normalized_world_table_build()
-    nx = normalized_world_table_build
+    normalized_bud_table_build = get_normalized_bud_table_build()
+    nx = normalized_bud_table_build
 
     # THEN
     assert len(nx) == 10
-    cat_worldunit = nx.get(worldunit_text())
-    cat_charunit = nx.get(world_charunit_text())
-    cat_lobbyship = nx.get(world_char_lobbyship_text())
-    cat_idea = nx.get(world_ideaunit_text())
-    cat_awardlink = nx.get(world_idea_awardlink_text())
-    cat_reason = nx.get(world_idea_reasonunit_text())
-    cat_premise = nx.get(world_idea_reason_premiseunit_text())
-    cat_lobbyhold = nx.get(world_idea_lobbyhold_text())
-    cat_healerhold = nx.get(world_idea_healerhold_text())
-    cat_fact = nx.get(world_idea_factunit_text())
+    cat_budunit = nx.get(budunit_text())
+    cat_charunit = nx.get(bud_charunit_text())
+    cat_lobbyship = nx.get(bud_char_lobbyship_text())
+    cat_idea = nx.get(bud_ideaunit_text())
+    cat_awardlink = nx.get(bud_idea_awardlink_text())
+    cat_reason = nx.get(bud_idea_reasonunit_text())
+    cat_premise = nx.get(bud_idea_reason_premiseunit_text())
+    cat_lobbyhold = nx.get(bud_idea_lobbyhold_text())
+    cat_healerhold = nx.get(bud_idea_healerhold_text())
+    cat_fact = nx.get(bud_idea_factunit_text())
 
-    assert cat_worldunit != None
+    assert cat_budunit != None
     assert cat_charunit != None
     assert cat_lobbyship != None
     assert cat_idea != None
@@ -271,7 +271,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert cat_healerhold != None
     assert cat_fact != None
 
-    normal_specs_worldunit = cat_worldunit.get(normal_specs_text())
+    normal_specs_budunit = cat_budunit.get(normal_specs_text())
     normal_specs_charunit = cat_charunit.get(normal_specs_text())
     normal_specs_lobbyship = cat_lobbyship.get(normal_specs_text())
     normal_specs_idea = cat_idea.get(normal_specs_text())
@@ -283,9 +283,9 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     normal_specs_fact = cat_fact.get(normal_specs_text())
 
     columns_text = "columns"
-    print(f"{cat_worldunit.keys()=}")
+    print(f"{cat_budunit.keys()=}")
     print(f"{normal_specs_text()=}")
-    assert normal_specs_worldunit != None
+    assert normal_specs_budunit != None
     assert normal_specs_charunit != None
     assert normal_specs_lobbyship != None
     assert normal_specs_idea != None
@@ -296,7 +296,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert normal_specs_healerhold != None
     assert normal_specs_fact != None
 
-    table_name_worldunit = normal_specs_worldunit.get(normal_table_name_text())
+    table_name_budunit = normal_specs_budunit.get(normal_table_name_text())
     table_name_charunit = normal_specs_charunit.get(normal_table_name_text())
     table_name_lobbyship = normal_specs_lobbyship.get(normal_table_name_text())
     table_name_idea = normal_specs_idea.get(normal_table_name_text())
@@ -307,7 +307,7 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     table_name_healerhold = normal_specs_healerhold.get(normal_table_name_text())
     table_name_fact = normal_specs_fact.get(normal_table_name_text())
 
-    assert table_name_worldunit == "world"
+    assert table_name_budunit == "bud"
     assert table_name_charunit == "charunit"
     assert table_name_lobbyship == "lobbyship"
     assert table_name_idea == "idea"
@@ -318,21 +318,21 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert table_name_healerhold == "healerhold"
     assert table_name_fact == "fact"
 
-    assert len(cat_worldunit) == 2
-    assert cat_worldunit.get(columns_text) != None
+    assert len(cat_budunit) == 2
+    assert cat_budunit.get(columns_text) != None
 
-    worldunit_columns = cat_worldunit.get(columns_text)
-    assert len(worldunit_columns) == 10
-    assert worldunit_columns.get("uid") != None
-    assert worldunit_columns.get("_max_tree_traverse") != None
-    assert worldunit_columns.get("_monetary_desc") != None
-    assert worldunit_columns.get("_credor_respect") != None
-    assert worldunit_columns.get("_debtor_respect") != None
-    assert worldunit_columns.get("_fund_pool") != None
-    assert worldunit_columns.get("_fund_coin") != None
-    assert worldunit_columns.get("_bit") != None
-    assert worldunit_columns.get("_penny") != None
-    assert worldunit_columns.get("_weight") != None
+    budunit_columns = cat_budunit.get(columns_text)
+    assert len(budunit_columns) == 10
+    assert budunit_columns.get("uid") != None
+    assert budunit_columns.get("_max_tree_traverse") != None
+    assert budunit_columns.get("_monetary_desc") != None
+    assert budunit_columns.get("_credor_respect") != None
+    assert budunit_columns.get("_debtor_respect") != None
+    assert budunit_columns.get("_fund_pool") != None
+    assert budunit_columns.get("_fund_coin") != None
+    assert budunit_columns.get("_bit") != None
+    assert budunit_columns.get("_penny") != None
+    assert budunit_columns.get("_weight") != None
 
     assert len(cat_charunit) == 2
     charunit_columns = cat_charunit.get(columns_text)
