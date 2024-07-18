@@ -112,17 +112,17 @@ def get_cross_filenames() -> set[str]:
     }
 
 
-def get_cross_format_dict(cross_name: str) -> dict[str,]:
+def get_cross_format_dict(cross_name: str) -> dict[str, any]:
     cross_filename = get_json_filename(cross_name)
     cross_json = open_file(get_cross_formats_dir(), cross_filename)
     return get_dict_from_json(cross_json)
 
 
-def get_cross_atom_category(cross_name: str) -> dict[str,]:
+def get_cross_atom_category(cross_name: str) -> dict[str, any]:
     return get_cross_format_dict(cross_name).get("atom_category")
 
 
-def get_cross_attribute_dict(cross_name: str) -> dict[str,]:
+def get_cross_attribute_dict(cross_name: str) -> dict[str, any]:
     return get_cross_format_dict(cross_name).get("attributes")
 
 

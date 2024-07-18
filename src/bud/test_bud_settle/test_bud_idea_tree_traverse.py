@@ -48,7 +48,7 @@ def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
     sue_bud._econ_dict = {"run": "run"}
     sue_bud._healers_dict = {"run": "run"}
     assert sue_bud._econs_justified == x_econ_justifed
-    assert get_False_if_None(sue_bud._econs_buildable)
+    assert sue_bud._econs_buildable
     assert sue_bud._sum_healerhold_share == x_sum_healerhold_share
     assert sue_bud._econ_dict != {}
     assert sue_bud._healers_dict != {}

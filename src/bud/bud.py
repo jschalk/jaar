@@ -1961,7 +1961,7 @@ def set_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
 
 
 def obj_from_bud_dict(
-    x_dict: dict[str,], dict_key: str, _road_delimiter: str = None
+    x_dict: dict[str, dict], dict_key: str, _road_delimiter: str = None
 ) -> any:
     if dict_key == "_originunit":
         return (

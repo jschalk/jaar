@@ -30,7 +30,7 @@ from src.gift.cross import (
 )
 
 
-def test_str_functions_ReturnCorrectObjs():
+def test_config_str_functions_ReturnObjs():
     # ESTABLISH / WHEN / THEN
     assert real_id_str() == "real_id"
     assert owner_id_str() == "owner_id"
@@ -89,6 +89,7 @@ def test_create_cross_dataframe_ReturnsCorrectObj():
 
 
 def for_all_crosss_create_cross_dataframe():
+    # TODO Catching broad exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
     empty_d2 = []
     for x_filename in get_cross_filenames():
         try:

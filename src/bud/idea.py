@@ -1069,7 +1069,7 @@ class Idea_root_LabelNotEmptyException(Exception):
     pass
 
 
-def get_obj_from_idea_dict(x_dict: dict[str,], dict_key: str) -> any:
+def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
     if dict_key == "_reasonunits":
         return (
             reasons_get_from_dict(x_dict[dict_key])

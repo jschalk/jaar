@@ -106,22 +106,22 @@ class HubUnit:
     penny: float = None
     econ_money_magnitude: float = None
 
-    def real_dir(self):
+    def real_dir(self) -> str:
         return f"{self.reals_dir}/{self.real_id}"
 
-    def owners_dir(self):
+    def owners_dir(self) -> str:
         return f"{self.real_dir()}/owners"
 
-    def owner_dir(self):
+    def owner_dir(self) -> str:
         return f"{self.owners_dir()}/{self.owner_id}"
 
-    def econs_dir(self):
+    def econs_dir(self) -> str:
         return f"{self.owner_dir()}/econs"
 
-    def atoms_dir(self):
+    def atoms_dir(self) -> str:
         return f"{self.owner_dir()}/atoms"
 
-    def gifts_dir(self):
+    def gifts_dir(self) -> str:
         return f"{self.owner_dir()}/{get_gifts_folder()}"
 
     def voice_dir(self) -> str:
@@ -130,16 +130,16 @@ class HubUnit:
     def action_dir(self) -> str:
         return f"{self.owner_dir()}/action"
 
-    def voice_file_name(self):
+    def voice_file_name(self) -> str:
         return get_json_filename(self.owner_id)
 
-    def voice_file_path(self):
+    def voice_file_path(self) -> str:
         return f"{self.voice_dir()}/{self.voice_file_name()}"
 
-    def action_file_name(self):
+    def action_file_name(self) -> str:
         return get_json_filename(self.owner_id)
 
-    def action_path(self):
+    def action_path(self) -> str:
         return f"{self.action_dir()}/{self.action_file_name()}"
 
     def save_file_voice(self, file_text: str, replace: bool):
@@ -164,7 +164,7 @@ class HubUnit:
     def action_file_exists(self) -> bool:
         return os_path_exists(self.action_path())
 
-    def open_file_voice(self):
+    def open_file_voice(self) -> str:
         return open_file(self.voice_dir(), self.voice_file_name())
 
     def save_voice_bud(self, x_bud: BudUnit):
@@ -196,7 +196,7 @@ class HubUnit:
     def delete_voice_file(self):
         delete_dir(self.voice_file_path())
 
-    def open_file_action(self):
+    def open_file_action(self) -> str:
         return open_file(self.action_dir(), self.action_file_name())
 
     def get_max_atom_file_number(self) -> int:
@@ -432,7 +432,7 @@ class HubUnit:
     def grades_dir(self) -> str:
         return get_econ_grades_dir(self.econ_dir())
 
-    def get_jobs_dir_file_names_list(self):
+    def get_jobs_dir_file_names_list(self) -> list[str]:
         try:
             return list(dir_files(self.jobs_dir(), True).keys())
         except Exception:
@@ -525,7 +525,7 @@ class HubUnit:
         speaker_job = self.rj_speaker_bud(healer_id, speaker_id)
         return self.get_perspective_bud(speaker_job)
 
-    def get_econ_roads(self):
+    def get_econ_roads(self) -> set[RoadUnit]:
         x_voice_bud = self.get_voice_bud()
         x_voice_bud.settle_bud()
         if x_voice_bud._econs_justified is False:

@@ -119,7 +119,7 @@ def add_to_atom_table_columns(x_dict, atom_category, crud, arg_key, arg_value):
     x_dict[f"{atom_category}_{crud}_{arg_key}"] = arg_value.get("sqlite_datatype")
 
 
-def get_flattened_atom_table_build() -> dict[str,]:
+def get_flattened_atom_table_build() -> dict[str, any]:
     atom_table_columns = {}
     atom_config = get_atom_config_dict()
     for atom_category, category_dict in atom_config.items():
@@ -177,7 +177,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
     return atom_table_columns
 
 
-def get_normalized_bud_table_build() -> dict[str : dict[str,]]:
+def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
     normal_tables_dict = {}
     atom_config = get_atom_config_dict()
     for x_category, category_dict in atom_config.items():
