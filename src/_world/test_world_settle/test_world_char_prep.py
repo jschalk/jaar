@@ -163,15 +163,15 @@ def test_WorldUnit_calc_charunit_metrics_ResetCharUnitsAttrs():
     sue_worldunit.add_charunit(zia_text, 55, 55)
     yao_charunit = sue_worldunit.get_char(yao_text)
     zia_charunit = sue_worldunit.get_char(zia_text)
-    yao_charunit.add_bud_give_take(0.5, 0.6, 0.1, 0.22)
-    zia_charunit.add_bud_give_take(0.2, 0.1, 0.1, 0.22)
+    yao_charunit.add_fund_give_take(0.5, 0.6, 0.1, 0.22)
+    zia_charunit.add_fund_give_take(0.2, 0.1, 0.1, 0.22)
     zia_1 = 0.8
     zia_2 = 0.5
     zia_3 = 200
     zia_4 = 140
-    zia_charunit.set_bud_agenda_ratio_give_take(
-        bud_agenda_ratio_give_sum=zia_1,
-        bud_agenda_ratio_take_sum=zia_2,
+    zia_charunit.set_fund_agenda_ratio_give_take(
+        fund_agenda_ratio_give_sum=zia_1,
+        fund_agenda_ratio_take_sum=zia_2,
         world_charunit_total_credor_weight=zia_3,
         world_charunit_total_debtor_weight=zia_4,
     )
@@ -179,22 +179,22 @@ def test_WorldUnit_calc_charunit_metrics_ResetCharUnitsAttrs():
     yao_2 = 0.5
     yao_3 = 204
     yao_4 = 144
-    yao_charunit.set_bud_agenda_ratio_give_take(
-        bud_agenda_ratio_give_sum=yao_1,
-        bud_agenda_ratio_take_sum=yao_2,
+    yao_charunit.set_fund_agenda_ratio_give_take(
+        fund_agenda_ratio_give_sum=yao_1,
+        fund_agenda_ratio_take_sum=yao_2,
         world_charunit_total_credor_weight=yao_3,
         world_charunit_total_debtor_weight=yao_4,
     )
-    assert zia_charunit._bud_agenda_ratio_give == 0.125
-    assert zia_charunit._bud_agenda_ratio_take == 0.44
-    assert yao_charunit._bud_agenda_ratio_give == 0.5
-    assert yao_charunit._bud_agenda_ratio_take == 0.44
+    assert zia_charunit._fund_agenda_ratio_give == 0.125
+    assert zia_charunit._fund_agenda_ratio_take == 0.44
+    assert yao_charunit._fund_agenda_ratio_give == 0.5
+    assert yao_charunit._fund_agenda_ratio_take == 0.44
 
     # WHEN
     sue_worldunit._calc_charunit_metrics()
 
     # THEN
-    assert zia_charunit._bud_agenda_ratio_give == 0
-    assert zia_charunit._bud_agenda_ratio_take == 0
-    assert yao_charunit._bud_agenda_ratio_give == 0
-    assert yao_charunit._bud_agenda_ratio_take == 0
+    assert zia_charunit._fund_agenda_ratio_give == 0
+    assert zia_charunit._fund_agenda_ratio_take == 0
+    assert yao_charunit._fund_agenda_ratio_give == 0
+    assert yao_charunit._fund_agenda_ratio_take == 0

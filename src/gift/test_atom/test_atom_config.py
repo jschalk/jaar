@@ -328,8 +328,8 @@ def test_get_normalized_world_table_build_ReturnsCorrectObj():
     assert worldunit_columns.get("_monetary_desc") != None
     assert worldunit_columns.get("_credor_respect") != None
     assert worldunit_columns.get("_debtor_respect") != None
-    assert worldunit_columns.get("_bud_pool") != None
-    assert worldunit_columns.get("_bud_coin") != None
+    assert worldunit_columns.get("_fund_pool") != None
+    assert worldunit_columns.get("_fund_coin") != None
     assert worldunit_columns.get("_bit") != None
     assert worldunit_columns.get("_penny") != None
     assert worldunit_columns.get("_weight") != None

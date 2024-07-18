@@ -13,7 +13,7 @@ def test_HubUnit_default_voice_world_ReturnsCorrectObj():
     # ESTABLISH
     sue_text = "Sue"
     slash_text = "/"
-    x_bud_pool = 9000000
+    x_fund_pool = 9000000
     point_nine_float = 0.9
     point_five_float = 0.5
     point_four_float = 0.4
@@ -23,8 +23,8 @@ def test_HubUnit_default_voice_world_ReturnsCorrectObj():
         sue_text,
         econ_road=None,
         road_delimiter=slash_text,
-        bud_pool=x_bud_pool,
-        bud_coin=point_five_float,
+        fund_pool=x_fund_pool,
+        fund_coin=point_five_float,
         bit=point_five_float,
         penny=point_four_float,
     )
@@ -36,8 +36,8 @@ def test_HubUnit_default_voice_world_ReturnsCorrectObj():
     assert sue_default_voice._real_id == sue_hubunit.real_id
     assert sue_default_voice._owner_id == sue_hubunit.owner_id
     assert sue_default_voice._road_delimiter == sue_hubunit.road_delimiter
-    assert sue_default_voice._bud_pool == sue_hubunit.bud_pool
-    assert sue_default_voice._bud_coin == sue_hubunit.bud_coin
+    assert sue_default_voice._fund_pool == sue_hubunit.fund_pool
+    assert sue_default_voice._fund_coin == sue_hubunit.fund_coin
     assert sue_default_voice._bit == sue_hubunit.bit
     assert sue_default_voice._penny == sue_hubunit.penny
 

@@ -1,8 +1,8 @@
 from src._road.finance import (
     default_bit_if_none,
     default_penny_if_none,
-    default_bud_coin_if_none,
-    validate_bud_pool,
+    default_fund_coin_if_none,
+    validate_fund_pool,
     validate_respect_num,
 )
 from src._world.world import worldunit_shop, WorldUnit
@@ -28,8 +28,8 @@ def test_WorldUnit_Exists():
     assert x_world._idearoot is None
     assert x_world._max_tree_traverse is None
     assert x_world._road_delimiter is None
-    assert x_world._bud_pool is None
-    assert x_world._bud_coin is None
+    assert x_world._fund_pool is None
+    assert x_world._fund_coin is None
     assert x_world._bit is None
     assert x_world._penny is None
     assert x_world._monetary_desc is None
@@ -54,8 +54,8 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     sue_text = "Sue"
     iowa_real_id = "Iowa"
     slash_road_delimiter = "/"
-    x_bud_pool = 555
-    x_bud_coin = 7
+    x_fund_pool = 555
+    x_fund_coin = 7
     x_bit = 5
     x_penny = 1
 
@@ -64,8 +64,8 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _owner_id=sue_text,
         _real_id=iowa_real_id,
         _road_delimiter=slash_road_delimiter,
-        _bud_pool=x_bud_pool,
-        _bud_coin=x_bud_coin,
+        _fund_pool=x_fund_pool,
+        _fund_coin=x_fund_coin,
         _bit=x_bit,
         _penny=x_penny,
     )
@@ -77,8 +77,8 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_world._idearoot != None
     assert x_world._max_tree_traverse == 3
     assert x_world._road_delimiter == slash_road_delimiter
-    assert x_world._bud_pool == x_bud_pool
-    assert x_world._bud_coin == x_bud_coin
+    assert x_world._fund_pool == x_fund_pool
+    assert x_world._fund_coin == x_fund_coin
     assert x_world._bit == x_bit
     assert x_world._penny == x_penny
     assert x_world._monetary_desc is None
@@ -106,11 +106,11 @@ def test_WorldUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_world._owner_id == ""
     assert x_world._real_id == root_label()
     assert x_world._road_delimiter == default_road_delimiter_if_none()
-    assert x_world._bud_pool == validate_bud_pool()
-    assert x_world._bud_coin == default_bud_coin_if_none()
+    assert x_world._fund_pool == validate_fund_pool()
+    assert x_world._fund_coin == default_fund_coin_if_none()
     assert x_world._bit == default_bit_if_none()
     assert x_world._penny == default_penny_if_none()
-    assert x_world._idearoot._bud_coin == x_world._bud_coin
+    assert x_world._idearoot._fund_coin == x_world._fund_coin
     assert x_world._idearoot._road_delimiter == x_world._road_delimiter
 
 
@@ -281,14 +281,14 @@ def test_WorldUnit_del_last_gift_id_SetsAttrCorrectly():
     assert sue_world._last_gift_id is None
 
 
-def test_WorldUnit_set_bud_pool_CorrectlySetsAttr():
+def test_WorldUnit_set_fund_pool_CorrectlySetsAttr():
     # ESTABLISH
     sue_world = worldunit_shop("Sue", "Texas")
-    sue_bud_pool = 99000
-    assert sue_world._bud_pool == validate_bud_pool()
+    sue_fund_pool = 99000
+    assert sue_world._fund_pool == validate_fund_pool()
 
     # WHEN
-    sue_world.set_bud_pool(sue_bud_pool)
+    sue_world.set_fund_pool(sue_fund_pool)
 
     # THEN
-    assert sue_world._bud_pool == 99000
+    assert sue_world._fund_pool == 99000

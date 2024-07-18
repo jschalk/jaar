@@ -65,12 +65,12 @@ def test_WorldUnit_get_agenda_dict_WithLargeWorldImportance():
     # THEN
     assert agenda_dict
     assert len(agenda_dict) == 2
-    assert agenda_dict.get(x_world.make_l1_road("cat have dinner"))._bud_ratio
+    assert agenda_dict.get(x_world.make_l1_road("cat have dinner"))._fund_ratio
 
     casa_text = "casa"
     print(f"{agenda_dict.keys()=} {x_world.make_l1_road(casa_text)=}")
     print(f"{agenda_dict.get(x_world.make_l1_road(casa_text))._label=}")
-    assert agenda_dict.get(x_world.make_l1_road(casa_text))._bud_ratio
+    assert agenda_dict.get(x_world.make_l1_road(casa_text))._fund_ratio
 
 
 def test_WorldUnit_get_agenda_WithNo7amItemExample():
@@ -937,7 +937,7 @@ def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
     assert mail_idea._task is False
 
 
-def test_WorldUnit_settle_world_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario0():
+def test_WorldUnit_settle_world_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0():
     sue_world = worldunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_world.make_l1_road(casa_text)
@@ -958,25 +958,25 @@ def test_WorldUnit_settle_world_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenari
     sue_world.add_idea(ideaunit_shop(non_text), status_road)
     sue_world.add_idea(ideaunit_shop(yes_text, _weight=2), status_road)
 
-    assert sue_world.get_idea_obj(casa_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(floor_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(status_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(non_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(yes_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(casa_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(floor_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(status_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(non_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(yes_road)._fund_ratio is None
 
     # WHEN
     sue_world.settle_world()
 
     # THEN
-    print(f"{sue_world._bud_pool=}")
-    assert sue_world.get_idea_obj(casa_road)._bud_ratio == 0.5
-    assert sue_world.get_idea_obj(floor_road)._bud_ratio == 0.5
-    assert sue_world.get_idea_obj(status_road)._bud_ratio == 0.0
-    assert sue_world.get_idea_obj(non_road)._bud_ratio == 0.0
-    assert sue_world.get_idea_obj(yes_road)._bud_ratio == 0.0
+    print(f"{sue_world._fund_pool=}")
+    assert sue_world.get_idea_obj(casa_road)._fund_ratio == 0.5
+    assert sue_world.get_idea_obj(floor_road)._fund_ratio == 0.5
+    assert sue_world.get_idea_obj(status_road)._fund_ratio == 0.0
+    assert sue_world.get_idea_obj(non_road)._fund_ratio == 0.0
+    assert sue_world.get_idea_obj(yes_road)._fund_ratio == 0.0
 
 
-def test_WorldUnit_settle_world_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario1():
+def test_WorldUnit_settle_world_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1():
     sue_world = worldunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_world.make_l1_road(casa_text)
@@ -1008,23 +1008,23 @@ def test_WorldUnit_settle_world_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenari
     very_road = sue_world.make_road(clean_road, very_text)
     mod_road = sue_world.make_road(clean_road, mod_text)
     dirty_road = sue_world.make_road(clean_road, dirty_text)
-    assert sue_world.get_idea_obj(casa_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(floor_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(status_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(clean_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(very_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(mod_road)._bud_ratio is None
-    assert sue_world.get_idea_obj(dirty_road)._bud_ratio is None
+    assert sue_world.get_idea_obj(casa_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(floor_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(status_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(clean_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(very_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(mod_road)._fund_ratio is None
+    assert sue_world.get_idea_obj(dirty_road)._fund_ratio is None
 
     # WHEN
     sue_world.settle_world()
 
     # THEN
-    print(f"{sue_world._bud_pool=}")
-    assert sue_world.get_idea_obj(casa_road)._bud_ratio == 0.5
-    assert sue_world.get_idea_obj(floor_road)._bud_ratio == 0.25
-    assert sue_world.get_idea_obj(status_road)._bud_ratio == 0.25
-    assert sue_world.get_idea_obj(clean_road)._bud_ratio == 0
-    assert sue_world.get_idea_obj(very_road)._bud_ratio == 0
-    assert sue_world.get_idea_obj(mod_road)._bud_ratio == 0
-    assert sue_world.get_idea_obj(dirty_road)._bud_ratio == 0
+    print(f"{sue_world._fund_pool=}")
+    assert sue_world.get_idea_obj(casa_road)._fund_ratio == 0.5
+    assert sue_world.get_idea_obj(floor_road)._fund_ratio == 0.25
+    assert sue_world.get_idea_obj(status_road)._fund_ratio == 0.25
+    assert sue_world.get_idea_obj(clean_road)._fund_ratio == 0
+    assert sue_world.get_idea_obj(very_road)._fund_ratio == 0
+    assert sue_world.get_idea_obj(mod_road)._fund_ratio == 0
+    assert sue_world.get_idea_obj(dirty_road)._fund_ratio == 0

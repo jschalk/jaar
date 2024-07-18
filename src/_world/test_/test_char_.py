@@ -24,10 +24,10 @@ def test_CharUnit_exists():
     assert bob_charunit._lobbyships is None
     assert bob_charunit._irrational_debtor_weight is None
     assert bob_charunit._inallocable_debtor_weight is None
-    assert bob_charunit._bud_give is None
-    assert bob_charunit._bud_take is None
-    assert bob_charunit._bud_agenda_give is None
-    assert bob_charunit._bud_agenda_take is None
+    assert bob_charunit._fund_give is None
+    assert bob_charunit._fund_take is None
+    assert bob_charunit._fund_agenda_give is None
+    assert bob_charunit._fund_agenda_take is None
     assert bob_charunit._road_delimiter is None
     assert bob_charunit._bit is None
 
@@ -75,12 +75,12 @@ def test_charunit_shop_CorrectlySetsAttributes():
     assert yao_charunit._lobbyships == {}
     assert yao_charunit._irrational_debtor_weight == 0
     assert yao_charunit._inallocable_debtor_weight == 0
-    assert yao_charunit._bud_give == 0
-    assert yao_charunit._bud_take == 0
-    assert yao_charunit._bud_agenda_give == 0
-    assert yao_charunit._bud_agenda_take == 0
-    assert yao_charunit._bud_agenda_ratio_give == 0
-    assert yao_charunit._bud_agenda_ratio_take == 0
+    assert yao_charunit._fund_give == 0
+    assert yao_charunit._fund_take == 0
+    assert yao_charunit._fund_agenda_give == 0
+    assert yao_charunit._fund_agenda_take == 0
+    assert yao_charunit._fund_agenda_ratio_give == 0
+    assert yao_charunit._fund_agenda_ratio_take == 0
     assert yao_charunit._road_delimiter == default_road_delimiter_if_none()
     assert yao_charunit._bit == default_bit_if_none()
 
@@ -238,91 +238,91 @@ def test_CharUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
     assert bob_charunit._inallocable_debtor_weight == 0
 
 
-def test_CharUnit_reset_bud_give_take_SetsAttrCorrectly():
+def test_CharUnit_reset_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_charunit = charunit_shop("Bob")
-    bob_charunit._bud_give = 0.27
-    bob_charunit._bud_take = 0.37
-    bob_charunit._bud_agenda_give = 0.41
-    bob_charunit._bud_agenda_take = 0.51
-    bob_charunit._bud_agenda_ratio_give = 0.433
-    bob_charunit._bud_agenda_ratio_take = 0.533
-    assert bob_charunit._bud_give == 0.27
-    assert bob_charunit._bud_take == 0.37
-    assert bob_charunit._bud_agenda_give == 0.41
-    assert bob_charunit._bud_agenda_take == 0.51
-    assert bob_charunit._bud_agenda_ratio_give == 0.433
-    assert bob_charunit._bud_agenda_ratio_take == 0.533
+    bob_charunit._fund_give = 0.27
+    bob_charunit._fund_take = 0.37
+    bob_charunit._fund_agenda_give = 0.41
+    bob_charunit._fund_agenda_take = 0.51
+    bob_charunit._fund_agenda_ratio_give = 0.433
+    bob_charunit._fund_agenda_ratio_take = 0.533
+    assert bob_charunit._fund_give == 0.27
+    assert bob_charunit._fund_take == 0.37
+    assert bob_charunit._fund_agenda_give == 0.41
+    assert bob_charunit._fund_agenda_take == 0.51
+    assert bob_charunit._fund_agenda_ratio_give == 0.433
+    assert bob_charunit._fund_agenda_ratio_take == 0.533
 
     # WHEN
-    bob_charunit.reset_bud_give_take()
+    bob_charunit.reset_fund_give_take()
 
     # THEN
-    assert bob_charunit._bud_give == 0
-    assert bob_charunit._bud_take == 0
-    assert bob_charunit._bud_agenda_give == 0
-    assert bob_charunit._bud_agenda_take == 0
-    assert bob_charunit._bud_agenda_ratio_give == 0
-    assert bob_charunit._bud_agenda_ratio_take == 0
+    assert bob_charunit._fund_give == 0
+    assert bob_charunit._fund_take == 0
+    assert bob_charunit._fund_agenda_give == 0
+    assert bob_charunit._fund_agenda_take == 0
+    assert bob_charunit._fund_agenda_ratio_give == 0
+    assert bob_charunit._fund_agenda_ratio_take == 0
 
 
-def test_CharUnit_add_bud_give_take_SetsAttrCorrectly():
+def test_CharUnit_add_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_charunit = charunit_shop("Bob")
-    bob_charunit._bud_give = 0.4106
-    bob_charunit._bud_take = 0.1106
-    bob_charunit._bud_agenda_give = 0.41
-    bob_charunit._bud_agenda_take = 0.51
-    assert bob_charunit._bud_agenda_give == 0.41
-    assert bob_charunit._bud_agenda_take == 0.51
+    bob_charunit._fund_give = 0.4106
+    bob_charunit._fund_take = 0.1106
+    bob_charunit._fund_agenda_give = 0.41
+    bob_charunit._fund_agenda_take = 0.51
+    assert bob_charunit._fund_agenda_give == 0.41
+    assert bob_charunit._fund_agenda_take == 0.51
 
     # WHEN
-    bob_charunit.add_bud_give_take(
-        bud_give=0.33,
-        bud_take=0.055,
+    bob_charunit.add_fund_give_take(
+        fund_give=0.33,
+        fund_take=0.055,
         world_agenda_cred=0.3,
         world_agenda_debt=0.05,
     )
 
     # THEN
-    assert bob_charunit._bud_give == 0.7406
-    assert bob_charunit._bud_take == 0.1656
-    assert bob_charunit._bud_agenda_give == 0.71
-    assert bob_charunit._bud_agenda_take == 0.56
+    assert bob_charunit._fund_give == 0.7406
+    assert bob_charunit._fund_take == 0.1656
+    assert bob_charunit._fund_agenda_give == 0.71
+    assert bob_charunit._fund_agenda_take == 0.56
 
 
-def test_CharUnit_set_bud_agenda_ratio_give_take_SetsAttrCorrectly():
+def test_CharUnit_set_fund_agenda_ratio_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_charunit = charunit_shop("Bob", credor_weight=15, debtor_weight=7)
-    bob_charunit._bud_give = 0.4106
-    bob_charunit._bud_take = 0.1106
-    bob_charunit._bud_agenda_give = 0.041
-    bob_charunit._bud_agenda_take = 0.051
-    bob_charunit._bud_agenda_ratio_give = 0
-    bob_charunit._bud_agenda_ratio_take = 0
-    assert bob_charunit._bud_agenda_ratio_give == 0
-    assert bob_charunit._bud_agenda_ratio_take == 0
+    bob_charunit._fund_give = 0.4106
+    bob_charunit._fund_take = 0.1106
+    bob_charunit._fund_agenda_give = 0.041
+    bob_charunit._fund_agenda_take = 0.051
+    bob_charunit._fund_agenda_ratio_give = 0
+    bob_charunit._fund_agenda_ratio_take = 0
+    assert bob_charunit._fund_agenda_ratio_give == 0
+    assert bob_charunit._fund_agenda_ratio_take == 0
 
     # WHEN
-    bob_charunit.set_bud_agenda_ratio_give_take(
-        bud_agenda_ratio_give_sum=0.2,
-        bud_agenda_ratio_take_sum=0.5,
+    bob_charunit.set_fund_agenda_ratio_give_take(
+        fund_agenda_ratio_give_sum=0.2,
+        fund_agenda_ratio_take_sum=0.5,
         world_charunit_total_credor_weight=20,
         world_charunit_total_debtor_weight=14,
     )
 
     # THEN
-    assert bob_charunit._bud_agenda_ratio_give == 0.205
-    assert bob_charunit._bud_agenda_ratio_take == 0.102
+    assert bob_charunit._fund_agenda_ratio_give == 0.205
+    assert bob_charunit._fund_agenda_ratio_take == 0.102
 
     # WHEN
-    bob_charunit.set_bud_agenda_ratio_give_take(
-        bud_agenda_ratio_give_sum=0,
-        bud_agenda_ratio_take_sum=0,
+    bob_charunit.set_fund_agenda_ratio_give_take(
+        fund_agenda_ratio_give_sum=0,
+        fund_agenda_ratio_take_sum=0,
         world_charunit_total_credor_weight=20,
         world_charunit_total_debtor_weight=14,
     )
 
     # THEN
-    assert bob_charunit._bud_agenda_ratio_give == 0.75
-    assert bob_charunit._bud_agenda_ratio_take == 0.5
+    assert bob_charunit._fund_agenda_ratio_give == 0.75
+    assert bob_charunit._fund_agenda_ratio_take == 0.5

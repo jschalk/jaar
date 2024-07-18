@@ -51,9 +51,9 @@ def get_speaker_perspective(speaker: WorldUnit, listener_owner_id: OwnerID):
 
 
 def _get_bit_scaled_weight(
-    x_bud_share: float, debtor_amount: float, bit: float
+    x_fund_share: float, debtor_amount: float, bit: float
 ) -> float:
-    x_ingest_weight = x_bud_share * debtor_amount
+    x_ingest_weight = x_fund_share * debtor_amount
     return int(x_ingest_weight / bit) * bit
 
 
@@ -74,7 +74,7 @@ def create_ingest_idea(
     x_ideaunit: IdeaUnit, debtor_amount: float, bit: float
 ) -> IdeaUnit:
     x_ideaunit._weight = _get_bit_scaled_weight(
-        x_bud_share=x_ideaunit._bud_ratio,
+        x_fund_share=x_ideaunit._fund_ratio,
         debtor_amount=debtor_amount,
         bit=bit,
     )

@@ -35,10 +35,10 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     x_world.set_fact(base=time_minute, pick=time_minute, open=0, nigh=1440)
     yao_text = "Yao"
     x_world._originunit.set_originhold(yao_text, 1)
-    yao_bud_pool = 23000
-    x_world._bud_pool = yao_bud_pool
-    yao_bud_coin = 23
-    x_world._bud_coin = yao_bud_coin
+    yao_fund_pool = 23000
+    x_world._fund_pool = yao_fund_pool
+    yao_fund_coin = 23
+    x_world._fund_coin = yao_fund_coin
     world_weight = 23
     x_world._weight = world_weight
     x_credor_respect = 22
@@ -59,8 +59,8 @@ def test_WorldUnit_get_dict_ReturnsDictObject():
     assert world_dict["_real_id"] == x_world._real_id
     assert world_dict["_weight"] == x_world._weight
     assert world_dict["_weight"] == world_weight
-    assert world_dict["_bud_pool"] == yao_bud_pool
-    assert world_dict["_bud_coin"] == yao_bud_coin
+    assert world_dict["_fund_pool"] == yao_fund_pool
+    assert world_dict["_fund_coin"] == yao_fund_coin
     assert world_dict["_max_tree_traverse"] == x_world._max_tree_traverse
     assert world_dict["_road_delimiter"] == x_world._road_delimiter
     assert world_dict["_credor_respect"] == x_world._credor_respect
@@ -183,10 +183,10 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     zia_world = example_worlds_get_world_x1_3levels_1reason_1facts()
     tiger_real_id = "tiger"
     zia_world.set_real_id(tiger_real_id)
-    x_bud_pool = 66000
-    zia_world._bud_pool = x_bud_pool
-    x_bud_coin = 66
-    zia_world._bud_coin = x_bud_coin
+    x_fund_pool = 66000
+    zia_world._fund_pool = x_fund_pool
+    x_fund_coin = 66
+    zia_world._fund_coin = x_fund_coin
     x_bit = 7
     zia_world._bit = x_bit
     x_penny = 0.3
@@ -214,8 +214,8 @@ def test_WorldUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert world_dict["_owner_id"] == zia_world._owner_id
     assert world_dict["_real_id"] == zia_world._real_id
     assert world_dict["_weight"] == zia_world._weight
-    assert world_dict["_bud_pool"] == zia_world._bud_pool
-    assert world_dict["_bud_coin"] == zia_world._bud_coin
+    assert world_dict["_fund_pool"] == zia_world._fund_pool
+    assert world_dict["_fund_coin"] == zia_world._fund_coin
     assert world_dict["_bit"] == zia_world._bit
     assert world_dict["_penny"] == zia_world._penny
     assert world_dict["_credor_respect"] == zia_world._credor_respect
@@ -308,10 +308,10 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_world.set_max_tree_traverse(23)
     tiger_real_id = "tiger"
     zia_world.set_real_id(tiger_real_id)
-    zia_bud_pool = 80000
-    zia_world._bud_pool = zia_bud_pool
-    zia_bud_coin = 8
-    zia_world._bud_coin = zia_bud_coin
+    zia_fund_pool = 80000
+    zia_world._fund_pool = zia_fund_pool
+    zia_fund_coin = 8
+    zia_world._fund_coin = zia_fund_coin
     zia_bit = 5
     zia_world._bit = zia_bit
     zia_penny = 2
@@ -367,10 +367,10 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_world._owner_id != None
     assert json_world._owner_id == zia_world._owner_id
     assert json_world._real_id == zia_world._real_id
-    assert json_world._bud_pool == zia_bud_pool
-    assert json_world._bud_pool == zia_world._bud_pool
-    assert json_world._bud_coin == zia_bud_coin
-    assert json_world._bud_coin == zia_world._bud_coin
+    assert json_world._fund_pool == zia_fund_pool
+    assert json_world._fund_pool == zia_world._fund_pool
+    assert json_world._fund_coin == zia_fund_coin
+    assert json_world._fund_coin == zia_world._fund_coin
     assert json_world._bit == zia_bit
     assert json_world._bit == zia_world._bit
     assert json_world._penny == zia_penny
@@ -392,8 +392,8 @@ def test_worldunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._reasonunits == {}
     assert json_idearoot._doerunit == zia_world._idearoot._doerunit
     assert json_idearoot._doerunit == run_doerunit
-    assert json_idearoot._bud_coin == 8
-    assert json_idearoot._bud_coin == zia_bud_coin
+    assert json_idearoot._fund_coin == 8
+    assert json_idearoot._fund_coin == zia_fund_coin
     assert len(json_idearoot._factunits) == 1
     assert len(json_idearoot._awardlinks) == 1
 
@@ -523,7 +523,7 @@ def test_get_dict_of_world_from_dict_ReturnsDictOfWorldUnits():
     ccn2_world = ccn_dict_of_obj.get(x2_world._owner_id)
     assert ccn2_world._idearoot._label == x2_world._idearoot._label
     assert ccn2_world._idearoot._parent_road == x2_world._idearoot._parent_road
-    assert ccn2_world._idearoot._bud_coin == x2_world._idearoot._bud_coin
+    assert ccn2_world._idearoot._fund_coin == x2_world._idearoot._fund_coin
     shave_road = ccn2_world.make_l1_road("shave")
     week_road = ccn2_world.make_l1_road("weekdays")
     # assert ccn2_world.get_idea_obj(shave_road) == x2_world.get_idea_obj(shave_road)

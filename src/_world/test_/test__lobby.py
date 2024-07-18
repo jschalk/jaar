@@ -51,12 +51,12 @@ def test_LobbyShip_exists():
     assert swim_lobbyship.debtor_weight == 1.0
     assert swim_lobbyship._credor_pool is None
     assert swim_lobbyship._debtor_pool is None
-    assert swim_lobbyship._bud_give is None
-    assert swim_lobbyship._bud_take is None
-    assert swim_lobbyship._bud_agenda_give is None
-    assert swim_lobbyship._bud_agenda_take is None
-    assert swim_lobbyship._bud_agenda_ratio_give is None
-    assert swim_lobbyship._bud_agenda_ratio_take is None
+    assert swim_lobbyship._fund_give is None
+    assert swim_lobbyship._fund_take is None
+    assert swim_lobbyship._fund_agenda_give is None
+    assert swim_lobbyship._fund_agenda_take is None
+    assert swim_lobbyship._fund_agenda_ratio_give is None
+    assert swim_lobbyship._fund_agenda_ratio_take is None
     assert swim_lobbyship._char_id is None
 
 
@@ -78,12 +78,12 @@ def test_lobbyship_shop_ReturnsCorrectObj():
     assert swim_lobbyship.debtor_weight == swim_debtor_weight
     assert swim_lobbyship._credor_pool == 0
     assert swim_lobbyship._debtor_pool == 0
-    assert swim_lobbyship._bud_give is None
-    assert swim_lobbyship._bud_take is None
-    assert swim_lobbyship._bud_agenda_give is None
-    assert swim_lobbyship._bud_agenda_take is None
-    assert swim_lobbyship._bud_agenda_ratio_give is None
-    assert swim_lobbyship._bud_agenda_ratio_take is None
+    assert swim_lobbyship._fund_give is None
+    assert swim_lobbyship._fund_take is None
+    assert swim_lobbyship._fund_agenda_give is None
+    assert swim_lobbyship._fund_agenda_take is None
+    assert swim_lobbyship._fund_agenda_ratio_give is None
+    assert swim_lobbyship._fund_agenda_ratio_take is None
     assert swim_lobbyship._char_id is None
 
 
@@ -258,71 +258,71 @@ def test_lobbyships_get_from_dict_ReturnsObj():
     assert after_swim_lobbyships_objs.get(swim_text) == before_swim_lobbyship
 
 
-def test_LobbyShip_reset_bud_give_take_SetsAttrCorrectly():
+def test_LobbyShip_reset_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_lobbyship = lobbyship_shop("Bob")
-    bob_lobbyship._bud_give = 0.27
-    bob_lobbyship._bud_take = 0.37
-    bob_lobbyship._bud_agenda_give = 0.41
-    bob_lobbyship._bud_agenda_take = 0.51
-    bob_lobbyship._bud_agenda_ratio_give = 0.433
-    bob_lobbyship._bud_agenda_ratio_take = 0.533
-    assert bob_lobbyship._bud_give == 0.27
-    assert bob_lobbyship._bud_take == 0.37
-    assert bob_lobbyship._bud_agenda_give == 0.41
-    assert bob_lobbyship._bud_agenda_take == 0.51
-    assert bob_lobbyship._bud_agenda_ratio_give == 0.433
-    assert bob_lobbyship._bud_agenda_ratio_take == 0.533
+    bob_lobbyship._fund_give = 0.27
+    bob_lobbyship._fund_take = 0.37
+    bob_lobbyship._fund_agenda_give = 0.41
+    bob_lobbyship._fund_agenda_take = 0.51
+    bob_lobbyship._fund_agenda_ratio_give = 0.433
+    bob_lobbyship._fund_agenda_ratio_take = 0.533
+    assert bob_lobbyship._fund_give == 0.27
+    assert bob_lobbyship._fund_take == 0.37
+    assert bob_lobbyship._fund_agenda_give == 0.41
+    assert bob_lobbyship._fund_agenda_take == 0.51
+    assert bob_lobbyship._fund_agenda_ratio_give == 0.433
+    assert bob_lobbyship._fund_agenda_ratio_take == 0.533
 
     # WHEN
-    bob_lobbyship.reset_bud_give_take()
+    bob_lobbyship.reset_fund_give_take()
 
     # THEN
-    assert bob_lobbyship._bud_give == 0
-    assert bob_lobbyship._bud_take == 0
-    assert bob_lobbyship._bud_agenda_give == 0
-    assert bob_lobbyship._bud_agenda_take == 0
-    assert bob_lobbyship._bud_agenda_ratio_give == 0
-    assert bob_lobbyship._bud_agenda_ratio_take == 0
+    assert bob_lobbyship._fund_give == 0
+    assert bob_lobbyship._fund_take == 0
+    assert bob_lobbyship._fund_agenda_give == 0
+    assert bob_lobbyship._fund_agenda_take == 0
+    assert bob_lobbyship._fund_agenda_ratio_give == 0
+    assert bob_lobbyship._fund_agenda_ratio_take == 0
 
 
-def test_LobbyShip_set_bud_give_take_SetsAttrCorrectly():
+def test_LobbyShip_set_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     yao_text = "Yao"
     ohio_text = ",Ohio"
     ohio_credor_weight = 3.0
     lobbyships_sum_credor_weight = 60
-    lobby_bud_give = 0.5
-    lobby_bud_agenda_give = 0.98
+    lobby_fund_give = 0.5
+    lobby_fund_agenda_give = 0.98
 
     ohio_debtor_weight = 13.0
     lobbyships_sum_debtor_weight = 26.0
-    lobby_bud_take = 0.9
-    lobby_bud_agenda_take = 0.5151
+    lobby_fund_take = 0.9
+    lobby_fund_agenda_take = 0.5151
 
     ohio_yao_lobbyship = lobbyship_shop(
         ohio_text, ohio_credor_weight, ohio_debtor_weight
     )
-    assert ohio_yao_lobbyship._bud_give is None
-    assert ohio_yao_lobbyship._bud_take is None
-    assert ohio_yao_lobbyship._bud_agenda_give is None
-    assert ohio_yao_lobbyship._bud_agenda_take is None
+    assert ohio_yao_lobbyship._fund_give is None
+    assert ohio_yao_lobbyship._fund_take is None
+    assert ohio_yao_lobbyship._fund_agenda_give is None
+    assert ohio_yao_lobbyship._fund_agenda_take is None
 
     # WHEN
-    ohio_yao_lobbyship.set_bud_give_take(
+    ohio_yao_lobbyship.set_fund_give_take(
         lobbyships_credor_weight_sum=lobbyships_sum_credor_weight,
         lobbyships_debtor_weight_sum=lobbyships_sum_debtor_weight,
-        lobby_bud_give=lobby_bud_give,
-        lobby_bud_take=lobby_bud_take,
-        lobby_bud_agenda_give=lobby_bud_agenda_give,
-        lobby_bud_agenda_take=lobby_bud_agenda_take,
+        lobby_fund_give=lobby_fund_give,
+        lobby_fund_take=lobby_fund_take,
+        lobby_fund_agenda_give=lobby_fund_agenda_give,
+        lobby_fund_agenda_take=lobby_fund_agenda_take,
     )
 
     # THEN
-    assert ohio_yao_lobbyship._bud_give == 0.025
-    assert ohio_yao_lobbyship._bud_take == 0.45
-    assert ohio_yao_lobbyship._bud_agenda_give == 0.049
-    assert ohio_yao_lobbyship._bud_agenda_take == 0.25755
+    assert ohio_yao_lobbyship._fund_give == 0.025
+    assert ohio_yao_lobbyship._fund_take == 0.45
+    assert ohio_yao_lobbyship._fund_agenda_give == 0.049
+    assert ohio_yao_lobbyship._fund_agenda_take == 0.25755
 
 
 def test_AwardLink_exists():
@@ -356,14 +356,14 @@ def test_awardlink_shop_ReturnsCorrectObj():
     assert bikers_awardlink.take_weight == bikers_take_weight
 
 
-def test_AwardHeir_set_bud_attr_CorrectlySetsAttr():
+def test_AwardHeir_set_fund_attr_CorrectlySetsAttr():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_give_weight = 3.0
     bikers_debt_weight = 6.0
     awardlinks_sum_give_weight = 60
     awardlinks_sum_take_weight = 60
-    idea_bud_share = 1
+    idea_fund_share = 1
     lobby_heir_x = awardheir_shop(
         lobby_id=bikers_text,
         give_weight=bikers_give_weight,
@@ -371,15 +371,15 @@ def test_AwardHeir_set_bud_attr_CorrectlySetsAttr():
     )
 
     # WHEN
-    lobby_heir_x.set_bud_give_take(
-        idea_bud_share=idea_bud_share,
+    lobby_heir_x.set_fund_give_take(
+        idea_fund_share=idea_fund_share,
         awardheirs_give_weight_sum=awardlinks_sum_give_weight,
         awardheirs_take_weight_sum=awardlinks_sum_take_weight,
     )
 
     # THEN
-    assert lobby_heir_x._bud_give == 0.05
-    assert lobby_heir_x._bud_take == 0.1
+    assert lobby_heir_x._fund_give == 0.05
+    assert lobby_heir_x._fund_take == 0.1
 
 
 def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
@@ -434,58 +434,58 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
 def test_AwardLine_exists():
     # ESTABLISH
     bikers_text = "bikers"
-    bikers_bud_give = 0.33
-    bikers_bud_take = 0.55
+    bikers_fund_give = 0.33
+    bikers_fund_take = 0.55
 
     # WHEN
     bikers_awardline = AwardLine(
         lobby_id=bikers_text,
-        _bud_give=bikers_bud_give,
-        _bud_take=bikers_bud_take,
+        _fund_give=bikers_fund_give,
+        _fund_take=bikers_fund_take,
     )
 
     # THEN
     assert bikers_awardline.lobby_id == bikers_text
-    assert bikers_awardline._bud_give == bikers_bud_give
-    assert bikers_awardline._bud_take == bikers_bud_take
+    assert bikers_awardline._fund_give == bikers_fund_give
+    assert bikers_awardline._fund_take == bikers_fund_take
 
 
 def test_awardline_shop_ReturnsCorrectObj_exists():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_text = bikers_text
-    bikers_bud_give = 0.33
-    bikers_bud_take = 0.55
+    bikers_fund_give = 0.33
+    bikers_fund_take = 0.55
 
     # WHEN
     biker_awardline = awardline_shop(
         lobby_id=bikers_text,
-        _bud_give=bikers_bud_give,
-        _bud_take=bikers_bud_take,
+        _fund_give=bikers_fund_give,
+        _fund_take=bikers_fund_take,
     )
 
     assert biker_awardline != None
     assert biker_awardline.lobby_id == bikers_text
-    assert biker_awardline._bud_give == bikers_bud_give
-    assert biker_awardline._bud_take == bikers_bud_take
+    assert biker_awardline._fund_give == bikers_fund_give
+    assert biker_awardline._fund_take == bikers_fund_take
 
 
-def test_AwardLine_add_bud_give_take_CorrectlyModifiesAttr():
+def test_AwardLine_add_fund_give_take_CorrectlyModifiesAttr():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_awardline = awardline_shop(
-        lobby_id=bikers_text, _bud_give=0.33, _bud_take=0.55
+        lobby_id=bikers_text, _fund_give=0.33, _fund_take=0.55
     )
     assert bikers_awardline.lobby_id == bikers_text
-    assert bikers_awardline._bud_give == 0.33
-    assert bikers_awardline._bud_take == 0.55
+    assert bikers_awardline._fund_give == 0.33
+    assert bikers_awardline._fund_take == 0.55
 
     # WHEN
-    bikers_awardline.add_bud_give_take(bud_give=0.11, bud_take=0.2)
+    bikers_awardline.add_fund_give_take(fund_give=0.11, fund_take=0.2)
 
     # THEN
-    assert bikers_awardline._bud_give == 0.44
-    assert bikers_awardline._bud_take == 0.75
+    assert bikers_awardline._fund_give == 0.44
+    assert bikers_awardline._fund_take == 0.75
 
 
 def test_LobbyBox_exists():
@@ -497,10 +497,10 @@ def test_LobbyBox_exists():
     assert swim_lobbybox != None
     assert swim_lobbybox.lobby_id == swim_text
     assert swim_lobbybox._lobbyships is None
-    assert swim_lobbybox._bud_give is None
-    assert swim_lobbybox._bud_take is None
-    assert swim_lobbybox._bud_agenda_give is None
-    assert swim_lobbybox._bud_agenda_take is None
+    assert swim_lobbybox._fund_give is None
+    assert swim_lobbybox._fund_take is None
+    assert swim_lobbybox._fund_agenda_give is None
+    assert swim_lobbybox._fund_agenda_take is None
     assert swim_lobbybox._credor_pool is None
     assert swim_lobbybox._debtor_pool is None
     assert swim_lobbybox._road_delimiter is None
@@ -521,10 +521,10 @@ def test_lobbybox_shop_ReturnsCorrectObj():
     assert swim_lobbybox.lobby_id != None
     assert swim_lobbybox.lobby_id == swim_text
     assert swim_lobbybox._lobbyships == {}
-    assert swim_lobbybox._bud_give == 0
-    assert swim_lobbybox._bud_take == 0
-    assert swim_lobbybox._bud_agenda_give == 0
-    assert swim_lobbybox._bud_agenda_take == 0
+    assert swim_lobbybox._fund_give == 0
+    assert swim_lobbybox._fund_take == 0
+    assert swim_lobbybox._fund_agenda_give == 0
+    assert swim_lobbybox._fund_agenda_take == 0
     assert swim_lobbybox._credor_pool == 0
     assert swim_lobbybox._debtor_pool == 0
     assert swim_lobbybox._road_delimiter == default_road_delimiter_if_none()

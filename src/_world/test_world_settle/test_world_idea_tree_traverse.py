@@ -1,5 +1,5 @@
 from src._instrument.python import get_False_if_None
-from src._road.finance import default_bud_pool
+from src._road.finance import default_fund_pool
 from src._road.road import get_default_real_id_roadnode as root_label
 from src._world.examples.example_worlds import (
     get_world_with_4_levels as example_worlds_get_world_with_4_levels,
@@ -277,8 +277,8 @@ def test_WorldUnit_settle_world_TreeTraverseSetsAwardLineestorFromRootCorrectly(
     assert x_world._idearoot._awardlines != {}
     root_idea = x_world.get_idea_obj(road=x_world._idearoot._label)
     sue_awardline = x_world._idearoot._awardlines.get(sue_text)
-    print(f"{sue_awardline._bud_give=} {root_idea._bud_ratio=} ")
-    print(f"  {sue_awardline._bud_take=} {root_idea._bud_ratio=} ")
+    print(f"{sue_awardline._fund_give=} {root_idea._fund_ratio=} ")
+    print(f"  {sue_awardline._fund_take=} {root_idea._fund_ratio=} ")
     sum_x = 0
     cat_road = x_world.make_l1_road("cat have dinner")
     cat_idea = x_world.get_idea_obj(cat_road)
@@ -289,26 +289,26 @@ def test_WorldUnit_settle_world_TreeTraverseSetsAwardLineestorFromRootCorrectly(
     casa_idea = x_world.get_idea_obj(casa_road)
     nation_road = x_world.make_l1_road(nation_text)
     nation_idea = x_world.get_idea_obj(nation_road)
-    sum_x = cat_idea._bud_ratio
-    print(f"{cat_idea._bud_ratio=} {sum_x} ")
-    sum_x += week_idea._bud_ratio
-    print(f"{week_idea._bud_ratio=} {sum_x} ")
-    sum_x += casa_idea._bud_ratio
-    print(f"{casa_idea._bud_ratio=} {sum_x} ")
-    sum_x += nation_idea._bud_ratio
-    print(f"{nation_idea._bud_ratio=} {sum_x} ")
+    sum_x = cat_idea._fund_ratio
+    print(f"{cat_idea._fund_ratio=} {sum_x} ")
+    sum_x += week_idea._fund_ratio
+    print(f"{week_idea._fund_ratio=} {sum_x} ")
+    sum_x += casa_idea._fund_ratio
+    print(f"{casa_idea._fund_ratio=} {sum_x} ")
+    sum_x += nation_idea._fund_ratio
+    print(f"{nation_idea._fund_ratio=} {sum_x} ")
     assert sum_x >= 1.0
     assert sum_x < 1.00000000001
 
     # for kid_idea in root_idea._kids.values():
-    #     sum_x += kid_idea._bud_ratio
-    #     print(f"  {kid_idea._bud_ratio=} {sum_x=} {kid_idea.get_road()=}")
-    assert round(sue_awardline._bud_give, 15) == 1 * default_bud_pool()
-    assert round(sue_awardline._bud_take, 15) == 1 * default_bud_pool()
+    #     sum_x += kid_idea._fund_ratio
+    #     print(f"  {kid_idea._fund_ratio=} {sum_x=} {kid_idea.get_road()=}")
+    assert round(sue_awardline._fund_give, 15) == 1 * default_fund_pool()
+    assert round(sue_awardline._fund_take, 15) == 1 * default_fund_pool()
     x_awardline = awardline_shop(
         lobby_id=sue_text,
-        _bud_give=default_bud_pool(),
-        _bud_take=default_bud_pool(),
+        _fund_give=default_fund_pool(),
+        _fund_take=default_fund_pool(),
     )
     assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
 
@@ -335,8 +335,8 @@ def test_WorldUnit_settle_world_TreeTraverseSetsAwardLineestorFromNonRootCorrect
     print(f"{x_world._idearoot._awardlines=}")
     x_awardline = awardline_shop(
         lobby_id=sue_text,
-        _bud_give=0.230769231 * default_bud_pool(),
-        _bud_take=0.230769231 * default_bud_pool(),
+        _fund_give=0.230769231 * default_fund_pool(),
+        _fund_take=0.230769231 * default_fund_pool(),
     )
     assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
     assert x_world._idearoot._kids[casa_text]._awardlines != {}

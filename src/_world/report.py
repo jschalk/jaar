@@ -10,12 +10,12 @@ def get_world_charunits_dataframe(x_world: WorldUnit) -> DataFrame:
                 "char_id",
                 "credor_weight",
                 "debtor_weight",
-                "_bud_give",
-                "_bud_take",
-                "_bud_agenda_give",
-                "_bud_agenda_take",
-                "_bud_agenda_ratio_give",
-                "_bud_agenda_ratio_take",
+                "_fund_give",
+                "_fund_take",
+                "_fund_agenda_give",
+                "_fund_agenda_take",
+                "_fund_agenda_ratio_give",
+                "_fund_agenda_ratio_take",
             ]
         )
     x_charunits_list = list(x_world.get_charunits_dict(all_attrs=True).values())
@@ -28,7 +28,7 @@ def get_world_agenda_dataframe(x_world: WorldUnit, base: RoadUnit = None) -> Dat
         return DataFrame(
             columns=[
                 "owner_id",
-                "bud_ratio",
+                "fund_ratio",
                 "_label",
                 "_parent_road",
                 "_begin",
@@ -43,7 +43,7 @@ def get_world_agenda_dataframe(x_world: WorldUnit, base: RoadUnit = None) -> Dat
     for x_idea in agenda_dict.values():
         idea_dict = {
             "owner_id": x_world._owner_id,
-            "bud_ratio": x_idea._bud_ratio,
+            "fund_ratio": x_idea._fund_ratio,
             "_label": x_idea._label,
             "_parent_road": x_idea._parent_road,
             "_begin": x_idea._begin,

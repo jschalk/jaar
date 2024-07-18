@@ -157,10 +157,10 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_debtor_respect", after_world._debtor_respect)
         if before_world._weight != after_world._weight:
             x_atomunit.set_optional_arg("_weight", after_world._weight)
-        if before_world._bud_pool != after_world._bud_pool:
-            x_atomunit.set_optional_arg("_bud_pool", after_world._bud_pool)
-        if before_world._bud_coin != after_world._bud_coin:
-            x_atomunit.set_optional_arg("_bud_coin", after_world._bud_coin)
+        if before_world._fund_pool != after_world._fund_pool:
+            x_atomunit.set_optional_arg("_fund_pool", after_world._fund_pool)
+        if before_world._fund_coin != after_world._fund_coin:
+            x_atomunit.set_optional_arg("_fund_coin", after_world._fund_coin)
         if before_world._bit != after_world._bit:
             x_atomunit.set_optional_arg("_bit", after_world._bit)
         self.set_atomunit(x_atomunit)

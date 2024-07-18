@@ -30,12 +30,12 @@ def test_get_real_voices_chars_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup
         "credor_weight",
         "debtor_weight",
         "_lobbyships",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
-        "_bud_agenda_ratio_give",
-        "_bud_agenda_ratio_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -75,12 +75,12 @@ def test_get_real_actions_chars_dataframe_ReturnsCorrectObj(
         "credor_weight",
         "debtor_weight",
         "_lobbyships",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
-        "_bud_agenda_ratio_give",
-        "_bud_agenda_ratio_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
         "_inallocable_debtor_weight",
     }
     print(f"{set(x_df.columns)=}")
@@ -117,7 +117,7 @@ def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanu
     # THEN
     agenda_colums = {
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -158,7 +158,7 @@ def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_clean
     # THEN
     agenda_colums = {
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",

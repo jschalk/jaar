@@ -1,4 +1,4 @@
-from src._road.finance import default_bud_pool
+from src._road.finance import default_fund_pool
 from src._world.lobby import awardlink_shop
 from src._world.examples.example_worlds import (
     get_world_1Task_1CE0MinutesReason_1Fact,
@@ -36,18 +36,18 @@ def test_WorldUnit_settle_world_CorrectlyCalculates1LevelWorldLobbyWorldImportan
     yao_lobbybox = x_world.get_lobbybox(yao_text)
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
-    assert yao_lobbybox._bud_give == 0.5 * default_bud_pool()
-    assert yao_lobbybox._bud_take == 0.75 * default_bud_pool()
-    assert zia_lobbybox._bud_give == 0.25 * default_bud_pool()
-    assert zia_lobbybox._bud_take == 0.125 * default_bud_pool()
-    assert xio_lobbybox._bud_give == 0.25 * default_bud_pool()
-    assert xio_lobbybox._bud_take == 0.125 * default_bud_pool()
-    cred_sum1 = yao_lobbybox._bud_give
-    cred_sum1 += zia_lobbybox._bud_give + xio_lobbybox._bud_give
-    assert cred_sum1 == 1 * default_bud_pool()
-    debt_sum1 = yao_lobbybox._bud_take
-    debt_sum1 += zia_lobbybox._bud_take + xio_lobbybox._bud_take
-    assert debt_sum1 == 1 * default_bud_pool()
+    assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
+    assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
+    assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
+    assert zia_lobbybox._fund_take == 0.125 * default_fund_pool()
+    assert xio_lobbybox._fund_give == 0.25 * default_fund_pool()
+    assert xio_lobbybox._fund_take == 0.125 * default_fund_pool()
+    cred_sum1 = yao_lobbybox._fund_give
+    cred_sum1 += zia_lobbybox._fund_give + xio_lobbybox._fund_give
+    assert cred_sum1 == 1 * default_fund_pool()
+    debt_sum1 = yao_lobbybox._fund_take
+    debt_sum1 += zia_lobbybox._fund_take + xio_lobbybox._fund_take
+    assert debt_sum1 == 1 * default_fund_pool()
 
     # ESTABLISH
     x_world.set_charunit(charunit_shop(sue_text))
@@ -64,20 +64,20 @@ def test_WorldUnit_settle_world_CorrectlyCalculates1LevelWorldLobbyWorldImportan
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
     sue_lobbybox = x_world.get_lobbybox(sue_text)
-    assert yao_lobbybox._bud_give != 0.5 * default_bud_pool()
-    assert yao_lobbybox._bud_take != 0.75 * default_bud_pool()
-    assert zia_lobbybox._bud_give != 0.25 * default_bud_pool()
-    assert zia_lobbybox._bud_take != 0.125 * default_bud_pool()
-    assert xio_lobbybox._bud_give != 0.25 * default_bud_pool()
-    assert xio_lobbybox._bud_take != 0.125 * default_bud_pool()
-    assert sue_lobbybox._bud_give != None
-    assert sue_lobbybox._bud_take != None
-    cred_sum1 = yao_lobbybox._bud_give + zia_lobbybox._bud_give
-    cred_sum1 += xio_lobbybox._bud_give + sue_lobbybox._bud_give
-    assert cred_sum1 == 1 * default_bud_pool()
-    debt_sum1 = yao_lobbybox._bud_take + zia_lobbybox._bud_take
-    debt_sum1 += xio_lobbybox._bud_take + sue_lobbybox._bud_take
-    assert round(debt_sum1) == 1 * default_bud_pool()
+    assert yao_lobbybox._fund_give != 0.5 * default_fund_pool()
+    assert yao_lobbybox._fund_take != 0.75 * default_fund_pool()
+    assert zia_lobbybox._fund_give != 0.25 * default_fund_pool()
+    assert zia_lobbybox._fund_take != 0.125 * default_fund_pool()
+    assert xio_lobbybox._fund_give != 0.25 * default_fund_pool()
+    assert xio_lobbybox._fund_take != 0.125 * default_fund_pool()
+    assert sue_lobbybox._fund_give != None
+    assert sue_lobbybox._fund_take != None
+    cred_sum1 = yao_lobbybox._fund_give + zia_lobbybox._fund_give
+    cred_sum1 += xio_lobbybox._fund_give + sue_lobbybox._fund_give
+    assert cred_sum1 == 1 * default_fund_pool()
+    debt_sum1 = yao_lobbybox._fund_take + zia_lobbybox._fund_take
+    debt_sum1 += xio_lobbybox._fund_take + sue_lobbybox._fund_take
+    assert round(debt_sum1) == 1 * default_fund_pool()
 
 
 def test_WorldUnit_settle_world_CorrectlyCalculates3levelWorldLobbyWorldImportance():
@@ -110,19 +110,19 @@ def test_WorldUnit_settle_world_CorrectlyCalculates3levelWorldLobbyWorldImportan
     yao_lobbybox = x_world.get_lobbybox(yao_text)
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
-    assert yao_lobbybox._bud_give == 0.5 * default_bud_pool()
-    assert yao_lobbybox._bud_take == 0.75 * default_bud_pool()
-    assert zia_lobbybox._bud_give == 0.25 * default_bud_pool()
-    assert zia_lobbybox._bud_take == 0.125 * default_bud_pool()
-    assert xio_lobbybox._bud_give == 0.25 * default_bud_pool()
-    assert xio_lobbybox._bud_take == 0.125 * default_bud_pool()
+    assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
+    assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
+    assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
+    assert zia_lobbybox._fund_take == 0.125 * default_fund_pool()
+    assert xio_lobbybox._fund_give == 0.25 * default_fund_pool()
+    assert xio_lobbybox._fund_take == 0.125 * default_fund_pool()
     assert (
-        yao_lobbybox._bud_give + zia_lobbybox._bud_give + xio_lobbybox._bud_give
-        == 1 * default_bud_pool()
+        yao_lobbybox._fund_give + zia_lobbybox._fund_give + xio_lobbybox._fund_give
+        == 1 * default_fund_pool()
     )
     assert (
-        yao_lobbybox._bud_take + zia_lobbybox._bud_take + xio_lobbybox._bud_take
-        == 1 * default_bud_pool()
+        yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
+        == 1 * default_fund_pool()
     )
 
 
@@ -179,19 +179,19 @@ def test_WorldUnit_settle_world_CorrectlyCalculatesLobbyWorldImportanceLWwithLob
     yao_lobbybox = x_world.get_lobbybox(yao_text)
     zia_lobbybox = x_world.get_lobbybox(zia_text)
     xio_lobbybox = x_world.get_lobbybox(xio_text)
-    assert yao_lobbybox._bud_give == 0.125 * default_bud_pool()
-    assert yao_lobbybox._bud_take == 0.1875 * default_bud_pool()
-    assert zia_lobbybox._bud_give == 0.0625 * default_bud_pool()
-    assert zia_lobbybox._bud_take == 0.03125 * default_bud_pool()
-    assert xio_lobbybox._bud_give == 0.0625 * default_bud_pool()
-    assert xio_lobbybox._bud_take == 0.03125 * default_bud_pool()
+    assert yao_lobbybox._fund_give == 0.125 * default_fund_pool()
+    assert yao_lobbybox._fund_take == 0.1875 * default_fund_pool()
+    assert zia_lobbybox._fund_give == 0.0625 * default_fund_pool()
+    assert zia_lobbybox._fund_take == 0.03125 * default_fund_pool()
+    assert xio_lobbybox._fund_give == 0.0625 * default_fund_pool()
+    assert xio_lobbybox._fund_take == 0.03125 * default_fund_pool()
     assert (
-        yao_lobbybox._bud_give + zia_lobbybox._bud_give + xio_lobbybox._bud_give
-        == 0.25 * default_bud_pool()
+        yao_lobbybox._fund_give + zia_lobbybox._fund_give + xio_lobbybox._fund_give
+        == 0.25 * default_fund_pool()
     )
     assert (
-        yao_lobbybox._bud_take + zia_lobbybox._bud_take + xio_lobbybox._bud_take
-        == 0.25 * default_bud_pool()
+        yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
+        == 0.25 * default_fund_pool()
     )
 
 
@@ -213,7 +213,7 @@ def test_WorldUnit_IsAbleToEditFactUnitAnyAncestor_Idea_1():
     assert mail_idea._task == True
 
 
-from src._road.finance import default_bud_pool
+from src._road.finance import default_fund_pool
 from src._road.road import RoadUnit
 from src._world.char import charunit_shop
 from src._world.lobby import awardlink_shop
@@ -255,34 +255,34 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     bheir_yao = idea_prom._awardheirs.get(yao_text)
     bheir_zia = idea_prom._awardheirs.get(zia_text)
     bheir_Xio = idea_prom._awardheirs.get(Xio_text)
-    assert bheir_yao._bud_give == 0.5 * default_bud_pool()
-    assert bheir_yao._bud_take == 0.75 * default_bud_pool()
-    assert bheir_zia._bud_give == 0.25 * default_bud_pool()
-    assert bheir_zia._bud_take == 0.125 * default_bud_pool()
-    assert bheir_Xio._bud_give == 0.25 * default_bud_pool()
-    assert bheir_Xio._bud_take == 0.125 * default_bud_pool()
+    assert bheir_yao._fund_give == 0.5 * default_fund_pool()
+    assert bheir_yao._fund_take == 0.75 * default_fund_pool()
+    assert bheir_zia._fund_give == 0.25 * default_fund_pool()
+    assert bheir_zia._fund_take == 0.125 * default_fund_pool()
+    assert bheir_Xio._fund_give == 0.25 * default_fund_pool()
+    assert bheir_Xio._fund_take == 0.125 * default_fund_pool()
     assert (
-        bheir_yao._bud_give + bheir_zia._bud_give + bheir_Xio._bud_give
-        == 1 * default_bud_pool()
+        bheir_yao._fund_give + bheir_zia._fund_give + bheir_Xio._fund_give
+        == 1 * default_fund_pool()
     )
     assert (
-        bheir_yao._bud_take + bheir_zia._bud_take + bheir_Xio._bud_take
-        == 1 * default_bud_pool()
+        bheir_yao._fund_take + bheir_zia._fund_take + bheir_Xio._fund_take
+        == 1 * default_fund_pool()
     )
 
-    # bud_give_sum = 0
-    # bud_take_sum = 0
+    # fund_give_sum = 0
+    # fund_take_sum = 0
     # for lobby in x_world._idearoot._awardheirs.values():
     #     print(f"{lobby=}")
-    #     assert lobby._bud_give != None
-    #     assert lobby._bud_give in [0.25, 0.5]
-    #     assert lobby._bud_take != None
-    #     assert lobby._bud_take in [0.75, 0.125]
-    #     bud_give_sum += lobby._bud_give
-    #     bud_take_sum += lobby._bud_take
+    #     assert lobby._fund_give != None
+    #     assert lobby._fund_give in [0.25, 0.5]
+    #     assert lobby._fund_take != None
+    #     assert lobby._fund_take in [0.75, 0.125]
+    #     fund_give_sum += lobby._fund_give
+    #     fund_take_sum += lobby._fund_take
 
-    # assert bud_give_sum == 1
-    # assert bud_take_sum == 1
+    # assert fund_give_sum == 1
+    # assert fund_take_sum == 1
 
 
 def test_WorldUnit_settle_world_CorrectlySetsLobbyLinkWorldCredAndDebt():
@@ -307,36 +307,36 @@ def test_WorldUnit_settle_world_CorrectlySetsLobbyLinkWorldCredAndDebt():
     sue_sue_lobbyship = sue_charunit.get_lobbyship(sue_text)
     bob_bob_lobbyship = bob_charunit.get_lobbyship(bob_text)
     zia_zia_lobbyship = zia_charunit.get_lobbyship(zia_text)
-    assert sue_sue_lobbyship._bud_give is None
-    assert sue_sue_lobbyship._bud_take is None
-    assert bob_bob_lobbyship._bud_give is None
-    assert bob_bob_lobbyship._bud_take is None
-    assert zia_zia_lobbyship._bud_give is None
-    assert zia_zia_lobbyship._bud_take is None
+    assert sue_sue_lobbyship._fund_give is None
+    assert sue_sue_lobbyship._fund_take is None
+    assert bob_bob_lobbyship._fund_give is None
+    assert bob_bob_lobbyship._fund_take is None
+    assert zia_zia_lobbyship._fund_give is None
+    assert zia_zia_lobbyship._fund_take is None
 
     # WHEN
     yao_world.settle_world()
 
     # THEN
-    assert sue_sue_lobbyship._bud_give == 0.5 * default_bud_pool()
-    assert sue_sue_lobbyship._bud_take == 0.8 * default_bud_pool()
-    assert bob_bob_lobbyship._bud_give == 0.25 * default_bud_pool()
-    assert bob_bob_lobbyship._bud_take == 0.1 * default_bud_pool()
-    assert zia_zia_lobbyship._bud_give == 0.25 * default_bud_pool()
-    assert zia_zia_lobbyship._bud_take == 0.1 * default_bud_pool()
+    assert sue_sue_lobbyship._fund_give == 0.5 * default_fund_pool()
+    assert sue_sue_lobbyship._fund_take == 0.8 * default_fund_pool()
+    assert bob_bob_lobbyship._fund_give == 0.25 * default_fund_pool()
+    assert bob_bob_lobbyship._fund_take == 0.1 * default_fund_pool()
+    assert zia_zia_lobbyship._fund_give == 0.25 * default_fund_pool()
+    assert zia_zia_lobbyship._fund_take == 0.1 * default_fund_pool()
 
     lobbyship_cred_sum = (
-        sue_sue_lobbyship._bud_give
-        + bob_bob_lobbyship._bud_give
-        + zia_zia_lobbyship._bud_give
+        sue_sue_lobbyship._fund_give
+        + bob_bob_lobbyship._fund_give
+        + zia_zia_lobbyship._fund_give
     )
-    assert lobbyship_cred_sum == 1.0 * default_bud_pool()
+    assert lobbyship_cred_sum == 1.0 * default_fund_pool()
     lobbyship_debt_sum = (
-        sue_sue_lobbyship._bud_take
-        + bob_bob_lobbyship._bud_take
-        + zia_zia_lobbyship._bud_take
+        sue_sue_lobbyship._fund_take
+        + bob_bob_lobbyship._fund_take
+        + zia_zia_lobbyship._fund_take
     )
-    assert lobbyship_debt_sum == 1.0 * default_bud_pool()
+    assert lobbyship_debt_sum == 1.0 * default_fund_pool()
 
     # ESTABLISH anothher pledge, check metrics are as expected
     xio_text = "Xio"
@@ -355,30 +355,30 @@ def test_WorldUnit_settle_world_CorrectlySetsLobbyLinkWorldCredAndDebt():
     sue_sue_lobbyship = sue_charunit.get_lobbyship(sue_text)
     bob_bob_lobbyship = bob_charunit.get_lobbyship(bob_text)
     zia_zia_lobbyship = zia_charunit.get_lobbyship(zia_text)
-    assert sue_sue_lobbyship._bud_give != 0.25 * default_bud_pool()
-    assert sue_sue_lobbyship._bud_take != 0.8 * default_bud_pool()
-    assert bob_bob_lobbyship._bud_give != 0.25 * default_bud_pool()
-    assert bob_bob_lobbyship._bud_take != 0.1 * default_bud_pool()
-    assert zia_zia_lobbyship._bud_give != 0.5 * default_bud_pool()
-    assert zia_zia_lobbyship._bud_take != 0.1 * default_bud_pool()
-    assert xio_xio_lobbyship._bud_give != None
-    assert xio_xio_lobbyship._bud_take != None
+    assert sue_sue_lobbyship._fund_give != 0.25 * default_fund_pool()
+    assert sue_sue_lobbyship._fund_take != 0.8 * default_fund_pool()
+    assert bob_bob_lobbyship._fund_give != 0.25 * default_fund_pool()
+    assert bob_bob_lobbyship._fund_take != 0.1 * default_fund_pool()
+    assert zia_zia_lobbyship._fund_give != 0.5 * default_fund_pool()
+    assert zia_zia_lobbyship._fund_take != 0.1 * default_fund_pool()
+    assert xio_xio_lobbyship._fund_give != None
+    assert xio_xio_lobbyship._fund_take != None
 
-    x_bud_give_sum = (
-        sue_sue_lobbyship._bud_give
-        + bob_bob_lobbyship._bud_give
-        + zia_zia_lobbyship._bud_give
-        + xio_xio_lobbyship._bud_give
+    x_fund_give_sum = (
+        sue_sue_lobbyship._fund_give
+        + bob_bob_lobbyship._fund_give
+        + zia_zia_lobbyship._fund_give
+        + xio_xio_lobbyship._fund_give
     )
-    print(f"{x_bud_give_sum=}")
-    assert x_bud_give_sum == 1.0 * default_bud_pool()
-    x_bud_take_sum = (
-        sue_sue_lobbyship._bud_take
-        + bob_bob_lobbyship._bud_take
-        + zia_zia_lobbyship._bud_take
-        + xio_xio_lobbyship._bud_take
+    print(f"{x_fund_give_sum=}")
+    assert x_fund_give_sum == 1.0 * default_fund_pool()
+    x_fund_take_sum = (
+        sue_sue_lobbyship._fund_take
+        + bob_bob_lobbyship._fund_take
+        + zia_zia_lobbyship._fund_take
+        + xio_xio_lobbyship._fund_take
     )
-    assert x_bud_take_sum == 1.0 * default_bud_pool()
+    assert x_fund_take_sum == 1.0 * default_fund_pool()
 
 
 def test_WorldUnit_settle_world_CorrectlySetsCharUnitWorldImportance():
@@ -404,31 +404,31 @@ def test_WorldUnit_settle_world_CorrectlySetsCharUnitWorldImportance():
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
 
-    assert sue_charunit._bud_give == 0
-    assert sue_charunit._bud_take == 0
-    assert bob_charunit._bud_give == 0
-    assert bob_charunit._bud_take == 0
-    assert zia_charunit._bud_give == 0
-    assert zia_charunit._bud_take == 0
+    assert sue_charunit._fund_give == 0
+    assert sue_charunit._fund_take == 0
+    assert bob_charunit._fund_give == 0
+    assert bob_charunit._fund_take == 0
+    assert zia_charunit._fund_give == 0
+    assert zia_charunit._fund_take == 0
 
     # WHEN
     yao_world.settle_world()
 
     # THEN
-    assert sue_charunit._bud_give == 0.5 * default_bud_pool()
-    assert sue_charunit._bud_take == 0.8 * default_bud_pool()
-    assert bob_charunit._bud_give == 0.25 * default_bud_pool()
-    assert bob_charunit._bud_take == 0.1 * default_bud_pool()
-    assert zia_charunit._bud_give == 0.25 * default_bud_pool()
-    assert zia_charunit._bud_take == 0.1 * default_bud_pool()
+    assert sue_charunit._fund_give == 0.5 * default_fund_pool()
+    assert sue_charunit._fund_take == 0.8 * default_fund_pool()
+    assert bob_charunit._fund_give == 0.25 * default_fund_pool()
+    assert bob_charunit._fund_take == 0.1 * default_fund_pool()
+    assert zia_charunit._fund_give == 0.25 * default_fund_pool()
+    assert zia_charunit._fund_take == 0.1 * default_fund_pool()
 
     assert (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
-        == 1.0 * default_bud_pool()
+        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
+        == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
-        == 1.0 * default_bud_pool()
+        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        == 1.0 * default_fund_pool()
     )
 
     # WHEN anothher pledge, check metrics are as expected
@@ -440,36 +440,36 @@ def test_WorldUnit_settle_world_CorrectlySetsCharUnitWorldImportance():
     # THEN
     xio_charunit = yao_world.get_char(xio_text)
 
-    assert sue_charunit._bud_give != 0.5 * default_bud_pool()
-    assert sue_charunit._bud_take != 0.8 * default_bud_pool()
-    assert bob_charunit._bud_give != 0.25 * default_bud_pool()
-    assert bob_charunit._bud_take != 0.1 * default_bud_pool()
-    assert zia_charunit._bud_give != 0.25 * default_bud_pool()
-    assert zia_charunit._bud_take != 0.1 * default_bud_pool()
-    assert xio_charunit._bud_give != None
-    assert xio_charunit._bud_take != None
+    assert sue_charunit._fund_give != 0.5 * default_fund_pool()
+    assert sue_charunit._fund_take != 0.8 * default_fund_pool()
+    assert bob_charunit._fund_give != 0.25 * default_fund_pool()
+    assert bob_charunit._fund_take != 0.1 * default_fund_pool()
+    assert zia_charunit._fund_give != 0.25 * default_fund_pool()
+    assert zia_charunit._fund_take != 0.1 * default_fund_pool()
+    assert xio_charunit._fund_give != None
+    assert xio_charunit._fund_take != None
 
-    sum_charunit_bud_give = (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
+    sum_charunit_fund_give = (
+        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
     )
-    assert sum_charunit_bud_give < 1.0 * default_bud_pool()
+    assert sum_charunit_fund_give < 1.0 * default_fund_pool()
     assert (
-        sue_charunit._bud_give
-        + bob_charunit._bud_give
-        + zia_charunit._bud_give
-        + xio_charunit._bud_give
-        == 1.0 * default_bud_pool()
-    )
-    assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
-        < 1.0 * default_bud_pool()
+        sue_charunit._fund_give
+        + bob_charunit._fund_give
+        + zia_charunit._fund_give
+        + xio_charunit._fund_give
+        == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._bud_take
-        + bob_charunit._bud_take
-        + zia_charunit._bud_take
-        + xio_charunit._bud_take
-        == 1.0 * default_bud_pool()
+        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        < 1.0 * default_fund_pool()
+    )
+    assert (
+        sue_charunit._fund_take
+        + bob_charunit._fund_take
+        + zia_charunit._fund_take
+        + xio_charunit._fund_take
+        == 1.0 * default_fund_pool()
     )
 
 
@@ -504,39 +504,39 @@ def test_WorldUnit_settle_world_CorrectlySetsPartLobbyedLWCharUnitWorldImportanc
     sue_lobbybox = yao_world.get_lobbybox(sue_text)
     bob_lobbybox = yao_world.get_lobbybox(bob_text)
     zia_lobbybox = yao_world.get_lobbybox(zia_text)
-    assert sue_lobbybox._bud_give != 0.5 * default_bud_pool()
-    assert sue_lobbybox._bud_take != 0.8 * default_bud_pool()
-    assert bob_lobbybox._bud_give != 0.25 * default_bud_pool()
-    assert bob_lobbybox._bud_take != 0.1 * default_bud_pool()
-    assert zia_lobbybox._bud_give != 0.25 * default_bud_pool()
-    assert zia_lobbybox._bud_take != 0.1 * default_bud_pool()
+    assert sue_lobbybox._fund_give != 0.5 * default_fund_pool()
+    assert sue_lobbybox._fund_take != 0.8 * default_fund_pool()
+    assert bob_lobbybox._fund_give != 0.25 * default_fund_pool()
+    assert bob_lobbybox._fund_take != 0.1 * default_fund_pool()
+    assert zia_lobbybox._fund_give != 0.25 * default_fund_pool()
+    assert zia_lobbybox._fund_take != 0.1 * default_fund_pool()
     assert (
-        sue_lobbybox._bud_give + bob_lobbybox._bud_give + zia_lobbybox._bud_give
-        == 0.25 * default_bud_pool()
+        sue_lobbybox._fund_give + bob_lobbybox._fund_give + zia_lobbybox._fund_give
+        == 0.25 * default_fund_pool()
     )
     assert (
-        sue_lobbybox._bud_take + bob_lobbybox._bud_take + zia_lobbybox._bud_take
-        == 0.25 * default_bud_pool()
+        sue_lobbybox._fund_take + bob_lobbybox._fund_take + zia_lobbybox._fund_take
+        == 0.25 * default_fund_pool()
     )
 
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
 
-    assert sue_charunit._bud_give == 0.375 * default_bud_pool()
-    assert sue_charunit._bud_take == 0.45 * default_bud_pool()
-    assert bob_charunit._bud_give == 0.3125 * default_bud_pool()
-    assert bob_charunit._bud_take == 0.275 * default_bud_pool()
-    assert zia_charunit._bud_give == 0.3125 * default_bud_pool()
-    assert zia_charunit._bud_take == 0.275 * default_bud_pool()
+    assert sue_charunit._fund_give == 0.375 * default_fund_pool()
+    assert sue_charunit._fund_take == 0.45 * default_fund_pool()
+    assert bob_charunit._fund_give == 0.3125 * default_fund_pool()
+    assert bob_charunit._fund_take == 0.275 * default_fund_pool()
+    assert zia_charunit._fund_give == 0.3125 * default_fund_pool()
+    assert zia_charunit._fund_take == 0.275 * default_fund_pool()
 
     assert (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
-        == 1.0 * default_bud_pool()
+        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
+        == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
-        == 1.0 * default_bud_pool()
+        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        == 1.0 * default_fund_pool()
     )
 
 
@@ -553,24 +553,24 @@ def test_WorldUnit_settle_world_CorrectlySetsCharAttrs():
     sue_charunit = yao_world.get_char(sue_text)
     bob_charunit = yao_world.get_char(bob_text)
     zia_charunit = yao_world.get_char(zia_text)
-    assert sue_charunit._bud_give == 0
-    assert sue_charunit._bud_take == 0
-    assert bob_charunit._bud_give == 0
-    assert bob_charunit._bud_take == 0
-    assert zia_charunit._bud_give == 0
-    assert zia_charunit._bud_take == 0
+    assert sue_charunit._fund_give == 0
+    assert sue_charunit._fund_take == 0
+    assert bob_charunit._fund_give == 0
+    assert bob_charunit._fund_take == 0
+    assert zia_charunit._fund_give == 0
+    assert zia_charunit._fund_take == 0
 
     # WHEN
     yao_world.settle_world()
 
     # THEN
     assert (
-        sue_charunit._bud_give + bob_charunit._bud_give + zia_charunit._bud_give
-        == 1.0 * default_bud_pool()
+        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
+        == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._bud_take + bob_charunit._bud_take + zia_charunit._bud_take
-        == 1.0 * default_bud_pool()
+        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        == 1.0 * default_fund_pool()
     )
 
 
@@ -606,16 +606,16 @@ def test_WorldUnit_settle_world_CorrectlySetsCharAttrs():
 #     yao_world.settle_world()
 
 
-def clear_all_charunits_lobbyboxs_bud_agenda_give_take(x_world: WorldUnit):
+def clear_all_charunits_lobbyboxs_fund_agenda_give_take(x_world: WorldUnit):
     # DELETE world_agenda_debt and world_agenda_cred
     for lobbybox_x in x_world._lobbyboxs.values():
-        lobbybox_x.reset_bud_give_take()
+        lobbybox_x.reset_fund_give_take()
         # for lobbyship_x in lobbybox_x._chars.values():
-        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._bud_give:.6f} {lobbyship_x.debtor_weight=} {lobbyship__bud_take:t:.6f} {lobbyship_x.} ")
+        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._fund_give:.6f} {lobbyship_x.debtor_weight=} {lobbyship__fund_take:t:.6f} {lobbyship_x.} ")
 
     # DELETE world_agenda_debt and world_agenda_cred
     for x_charunit in x_world._chars.values():
-        x_charunit.reset_bud_give_take()
+        x_charunit.reset_fund_give_take()
 
 
 @dataclass
@@ -628,11 +628,11 @@ class LobbyAgendaMetrics:
 
     def set_sums(self, x_world: WorldUnit):
         for x_lobbybox in x_world._lobbyboxs.values():
-            self.sum_lobbybox_cred += x_lobbybox._bud_agenda_give
-            self.sum_lobbybox_debt += x_lobbybox._bud_agenda_take
+            self.sum_lobbybox_cred += x_lobbybox._fund_agenda_give
+            self.sum_lobbybox_debt += x_lobbybox._fund_agenda_take
             for lobbyship_x in x_lobbybox._lobbyships.values():
-                self.sum_lobbyship_cred += lobbyship_x._bud_agenda_give
-                self.sum_lobbyship_debt += lobbyship_x._bud_agenda_take
+                self.sum_lobbyship_cred += lobbyship_x._fund_agenda_give
+                self.sum_lobbyship_debt += lobbyship_x._fund_agenda_take
                 self.lobbyship_count += 1
 
 
@@ -645,10 +645,10 @@ class CharAgendaMetrics:
 
     def set_sums(self, x_world: WorldUnit):
         for charunit in x_world._chars.values():
-            self.sum_agenda_cred += charunit._bud_agenda_give
-            self.sum_agenda_debt += charunit._bud_agenda_take
-            self.sum_agenda_ratio_cred += charunit._bud_agenda_ratio_give
-            self.sum_agenda_ratio_debt += charunit._bud_agenda_ratio_take
+            self.sum_agenda_cred += charunit._fund_agenda_give
+            self.sum_agenda_debt += charunit._fund_agenda_take
+            self.sum_agenda_ratio_cred += charunit._fund_agenda_ratio_give
+            self.sum_agenda_ratio_debt += charunit._fund_agenda_ratio_take
 
 
 @dataclass
@@ -661,19 +661,19 @@ class AwardAgendaMetrics:
 
     def set_sums(self, agenda_dict: dict[RoadUnit, IdeaUnit]):
         for agenda_item in agenda_dict.values():
-            self.sum_world_agenda_share += agenda_item.get_bud_share()
+            self.sum_world_agenda_share += agenda_item.get_fund_share()
             if agenda_item._awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_world_i_sum += agenda_item.get_bud_share()
+                self.agenda_no_world_i_sum += agenda_item.get_fund_share()
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_world_i_sum += agenda_item.get_bud_share()
+                self.agenda_yes_world_i_sum += agenda_item.get_fund_share()
 
 
 def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # ESTABLISH
     x_world = examples_world_v001_with_large_agenda()
-    clear_all_charunits_lobbyboxs_bud_agenda_give_take(x_world=x_world)
+    clear_all_charunits_lobbyboxs_fund_agenda_give_take(x_world=x_world)
 
     # TEST world_agenda_debt and world_agenda_cred are empty
     x_lobbyagendametrics = LobbyAgendaMetrics()
@@ -702,10 +702,10 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
     assert (
-        x_awardagendametrics.agenda_no_world_i_sum == 0.003747268 * default_bud_pool()
+        x_awardagendametrics.agenda_no_world_i_sum == 0.003747268 * default_fund_pool()
     )
     assert (
-        x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505 * default_bud_pool()
+        x_awardagendametrics.agenda_yes_world_i_sum == 0.002796505 * default_fund_pool()
     )
     assert are_equal(
         x_awardagendametrics.agenda_no_world_i_sum
@@ -713,7 +713,7 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
         x_awardagendametrics.sum_world_agenda_share,
     )
     assert (
-        x_awardagendametrics.sum_world_agenda_share == 0.006543773 * default_bud_pool()
+        x_awardagendametrics.sum_world_agenda_share == 0.006543773 * default_fund_pool()
     )
 
     x_lobbyagendametrics = LobbyAgendaMetrics()
@@ -745,21 +745,21 @@ def test_WorldUnit_agenda_cred_debt_IsCorrectlySet():
     assert are_equal(x_charagendametrics.sum_agenda_ratio_cred, 1)
     assert are_equal(x_charagendametrics.sum_agenda_ratio_debt, 1)
 
-    # charunit_bud_give_sum = 0.0
-    # charunit_bud_take_sum = 0.0
+    # charunit_fund_give_sum = 0.0
+    # charunit_fund_take_sum = 0.0
 
-    # assert charunit_bud_give_sum == 1.0
-    # assert charunit_bud_take_sum > 0.9999999
-    # assert charunit_bud_take_sum < 1.00000001
+    # assert charunit_fund_give_sum == 1.0
+    # assert charunit_fund_take_sum > 0.9999999
+    # assert charunit_fund_take_sum < 1.00000001
 
 
 def all_charunits_have_legitimate_values(x_world: WorldUnit):
     return not any(
         (
-            charunit._bud_give is None
-            or charunit._bud_give in [0.25, 0.5]
-            or charunit._bud_take is None
-            or charunit._bud_take in [0.8, 0.1]
+            charunit._fund_give is None
+            or charunit._fund_give in [0.25, 0.5]
+            or charunit._fund_take is None
+            or charunit._fund_take in [0.8, 0.1]
         )
         for charunit in x_world._chars.values()
     )
@@ -786,35 +786,35 @@ def test_WorldUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenWorldIsEmpty():
     yao_world_bob_char = yao_world.get_char(bob_text)
     yao_world_zia_char = yao_world.get_char(zia_text)
 
-    assert yao_world_sue_char._bud_agenda_give in [0, None]
-    assert yao_world_sue_char._bud_agenda_take in [0, None]
-    assert yao_world_bob_char._bud_agenda_give in [0, None]
-    assert yao_world_bob_char._bud_agenda_take in [0, None]
-    assert yao_world_zia_char._bud_agenda_give in [0, None]
-    assert yao_world_zia_char._bud_agenda_take in [0, None]
-    assert yao_world_sue_char._bud_agenda_ratio_give != 0.05
-    assert yao_world_sue_char._bud_agenda_ratio_take != 0.2
-    assert yao_world_bob_char._bud_agenda_ratio_give != 0.15
-    assert yao_world_bob_char._bud_agenda_ratio_take != 0.3
-    assert yao_world_zia_char._bud_agenda_ratio_give != 0.8
-    assert yao_world_zia_char._bud_agenda_ratio_take != 0.5
+    assert yao_world_sue_char._fund_agenda_give in [0, None]
+    assert yao_world_sue_char._fund_agenda_take in [0, None]
+    assert yao_world_bob_char._fund_agenda_give in [0, None]
+    assert yao_world_bob_char._fund_agenda_take in [0, None]
+    assert yao_world_zia_char._fund_agenda_give in [0, None]
+    assert yao_world_zia_char._fund_agenda_take in [0, None]
+    assert yao_world_sue_char._fund_agenda_ratio_give != 0.05
+    assert yao_world_sue_char._fund_agenda_ratio_take != 0.2
+    assert yao_world_bob_char._fund_agenda_ratio_give != 0.15
+    assert yao_world_bob_char._fund_agenda_ratio_take != 0.3
+    assert yao_world_zia_char._fund_agenda_ratio_give != 0.8
+    assert yao_world_zia_char._fund_agenda_ratio_take != 0.5
 
     # WHEN
     yao_world.settle_world()
 
     # THEN
-    assert yao_world_sue_char._bud_agenda_give == 0
-    assert yao_world_sue_char._bud_agenda_take == 0
-    assert yao_world_bob_char._bud_agenda_give == 0
-    assert yao_world_bob_char._bud_agenda_take == 0
-    assert yao_world_zia_char._bud_agenda_give == 0
-    assert yao_world_zia_char._bud_agenda_take == 0
-    assert yao_world_sue_char._bud_agenda_ratio_give == 0.05
-    assert yao_world_sue_char._bud_agenda_ratio_take == 0.2
-    assert yao_world_bob_char._bud_agenda_ratio_give == 0.15
-    assert yao_world_bob_char._bud_agenda_ratio_take == 0.3
-    assert yao_world_zia_char._bud_agenda_ratio_give == 0.8
-    assert yao_world_zia_char._bud_agenda_ratio_take == 0.5
+    assert yao_world_sue_char._fund_agenda_give == 0
+    assert yao_world_sue_char._fund_agenda_take == 0
+    assert yao_world_bob_char._fund_agenda_give == 0
+    assert yao_world_bob_char._fund_agenda_take == 0
+    assert yao_world_zia_char._fund_agenda_give == 0
+    assert yao_world_zia_char._fund_agenda_take == 0
+    assert yao_world_sue_char._fund_agenda_ratio_give == 0.05
+    assert yao_world_sue_char._fund_agenda_ratio_take == 0.2
+    assert yao_world_bob_char._fund_agenda_ratio_give == 0.15
+    assert yao_world_bob_char._fund_agenda_ratio_take == 0.3
+    assert yao_world_zia_char._fund_agenda_ratio_give == 0.8
+    assert yao_world_zia_char._fund_agenda_ratio_take == 0.5
 
 
 def test_examples_world_v001_has_chars():

@@ -1,4 +1,4 @@
-from src._road.finance import default_bud_pool
+from src._road.finance import default_fund_pool
 from src._world.graphic import display_ideatree
 from src._world.char import charunit_shop
 from src._world.lobby import awardlink_shop
@@ -302,45 +302,45 @@ def test_WorldUnit_settle_world_CorrectlySets_idea_dict():
 #     return bool_x
 
 
-def test_WorldUnit_settle_world_CorrectlyClears_bud_onset_bud_cease():
+def test_WorldUnit_settle_world_CorrectlyClears_fund_onset_fund_cease():
     # ESTABLISH
     x_worldunit = get_world_with7amCleanTableReason()
     casa_road = x_worldunit.make_l1_road("casa")
     catt_road = x_worldunit.make_l1_road("cat have dinner")
     week_road = x_worldunit.make_l1_road("weekdays")
-    x_worldunit._idearoot._bud_onset = 13
-    x_worldunit._idearoot._bud_cease = 13
-    x_worldunit.get_idea_obj(casa_road)._bud_onset = 13
-    x_worldunit.get_idea_obj(casa_road)._bud_cease = 13
-    x_worldunit.get_idea_obj(catt_road)._bud_onset = 13
-    x_worldunit.get_idea_obj(catt_road)._bud_cease = 13
-    x_worldunit.get_idea_obj(week_road)._bud_onset = 13
-    x_worldunit.get_idea_obj(week_road)._bud_cease = 13
+    x_worldunit._idearoot._fund_onset = 13
+    x_worldunit._idearoot._fund_cease = 13
+    x_worldunit.get_idea_obj(casa_road)._fund_onset = 13
+    x_worldunit.get_idea_obj(casa_road)._fund_cease = 13
+    x_worldunit.get_idea_obj(catt_road)._fund_onset = 13
+    x_worldunit.get_idea_obj(catt_road)._fund_cease = 13
+    x_worldunit.get_idea_obj(week_road)._fund_onset = 13
+    x_worldunit.get_idea_obj(week_road)._fund_cease = 13
 
-    assert x_worldunit._idearoot._bud_onset == 13
-    assert x_worldunit._idearoot._bud_cease == 13
-    assert x_worldunit.get_idea_obj(casa_road)._bud_onset == 13
-    assert x_worldunit.get_idea_obj(casa_road)._bud_cease == 13
-    assert x_worldunit.get_idea_obj(catt_road)._bud_onset == 13
-    assert x_worldunit.get_idea_obj(catt_road)._bud_cease == 13
-    assert x_worldunit.get_idea_obj(week_road)._bud_onset == 13
-    assert x_worldunit.get_idea_obj(week_road)._bud_cease == 13
+    assert x_worldunit._idearoot._fund_onset == 13
+    assert x_worldunit._idearoot._fund_cease == 13
+    assert x_worldunit.get_idea_obj(casa_road)._fund_onset == 13
+    assert x_worldunit.get_idea_obj(casa_road)._fund_cease == 13
+    assert x_worldunit.get_idea_obj(catt_road)._fund_onset == 13
+    assert x_worldunit.get_idea_obj(catt_road)._fund_cease == 13
+    assert x_worldunit.get_idea_obj(week_road)._fund_onset == 13
+    assert x_worldunit.get_idea_obj(week_road)._fund_cease == 13
 
     # WHEN
     x_worldunit.settle_world()
 
     # THEN
-    assert x_worldunit._idearoot._bud_onset != 13
-    assert x_worldunit._idearoot._bud_cease != 13
-    assert x_worldunit.get_idea_obj(casa_road)._bud_onset != 13
-    assert x_worldunit.get_idea_obj(casa_road)._bud_cease != 13
-    assert x_worldunit.get_idea_obj(catt_road)._bud_onset != 13
-    assert x_worldunit.get_idea_obj(catt_road)._bud_cease != 13
-    assert x_worldunit.get_idea_obj(week_road)._bud_onset != 13
-    assert x_worldunit.get_idea_obj(week_road)._bud_cease != 13
+    assert x_worldunit._idearoot._fund_onset != 13
+    assert x_worldunit._idearoot._fund_cease != 13
+    assert x_worldunit.get_idea_obj(casa_road)._fund_onset != 13
+    assert x_worldunit.get_idea_obj(casa_road)._fund_cease != 13
+    assert x_worldunit.get_idea_obj(catt_road)._fund_onset != 13
+    assert x_worldunit.get_idea_obj(catt_road)._fund_cease != 13
+    assert x_worldunit.get_idea_obj(week_road)._fund_onset != 13
+    assert x_worldunit.get_idea_obj(week_road)._fund_cease != 13
 
 
-def test_WorldUnit_settle_world_CorrectlyCalculatesIdeaAttr_bud_onset_bud_cease():
+def test_WorldUnit_settle_world_CorrectlyCalculatesIdeaAttr_fund_onset_fund_cease():
     # ESTABLISH
     yao_worldunit = worldunit_shop("Yao", _weight=10)
 
@@ -367,40 +367,50 @@ def test_WorldUnit_settle_world_CorrectlyCalculatesIdeaAttr_bud_onset_bud_cease(
     coal_idea = ideaunit_shop(coal_text, _weight=30)
     yao_worldunit.add_l1_idea(coal_idea)
 
-    assert yao_worldunit._idearoot._bud_onset is None
-    assert yao_worldunit._idearoot._bud_cease is None
-    assert yao_worldunit.get_idea_obj(auto_road)._bud_onset is None
-    assert yao_worldunit.get_idea_obj(auto_road)._bud_cease is None
-    assert yao_worldunit.get_idea_obj(barn_road)._bud_onset is None
-    assert yao_worldunit.get_idea_obj(barn_road)._bud_cease is None
-    assert yao_worldunit.get_idea_obj(coal_road)._bud_onset is None
-    assert yao_worldunit.get_idea_obj(coal_road)._bud_cease is None
+    assert yao_worldunit._idearoot._fund_onset is None
+    assert yao_worldunit._idearoot._fund_cease is None
+    assert yao_worldunit.get_idea_obj(auto_road)._fund_onset is None
+    assert yao_worldunit.get_idea_obj(auto_road)._fund_cease is None
+    assert yao_worldunit.get_idea_obj(barn_road)._fund_onset is None
+    assert yao_worldunit.get_idea_obj(barn_road)._fund_cease is None
+    assert yao_worldunit.get_idea_obj(coal_road)._fund_onset is None
+    assert yao_worldunit.get_idea_obj(coal_road)._fund_cease is None
     lamb_before = yao_worldunit.get_idea_obj(road=lamb_road)
-    assert lamb_before._bud_onset is None
-    assert lamb_before._bud_cease is None
+    assert lamb_before._fund_onset is None
+    assert lamb_before._fund_cease is None
     duck_before = yao_worldunit.get_idea_obj(road=duck_road)
-    assert duck_before._bud_onset is None
-    assert duck_before._bud_cease is None
+    assert duck_before._fund_onset is None
+    assert duck_before._fund_cease is None
 
     # WHEN
     yao_worldunit.settle_world()
 
     # THEN
-    assert yao_worldunit._idearoot._bud_onset == 0.0
-    assert yao_worldunit._idearoot._bud_cease == default_bud_pool()
-    assert yao_worldunit.get_idea_obj(auto_road)._bud_onset == 0.0
-    assert yao_worldunit.get_idea_obj(auto_road)._bud_cease == default_bud_pool() * 0.1
-    assert yao_worldunit.get_idea_obj(barn_road)._bud_onset == default_bud_pool() * 0.1
-    assert yao_worldunit.get_idea_obj(barn_road)._bud_cease == default_bud_pool() * 0.7
-    assert yao_worldunit.get_idea_obj(coal_road)._bud_onset == default_bud_pool() * 0.7
-    assert yao_worldunit.get_idea_obj(coal_road)._bud_cease == default_bud_pool() * 1.0
+    assert yao_worldunit._idearoot._fund_onset == 0.0
+    assert yao_worldunit._idearoot._fund_cease == default_fund_pool()
+    assert yao_worldunit.get_idea_obj(auto_road)._fund_onset == 0.0
+    assert (
+        yao_worldunit.get_idea_obj(auto_road)._fund_cease == default_fund_pool() * 0.1
+    )
+    assert (
+        yao_worldunit.get_idea_obj(barn_road)._fund_onset == default_fund_pool() * 0.1
+    )
+    assert (
+        yao_worldunit.get_idea_obj(barn_road)._fund_cease == default_fund_pool() * 0.7
+    )
+    assert (
+        yao_worldunit.get_idea_obj(coal_road)._fund_onset == default_fund_pool() * 0.7
+    )
+    assert (
+        yao_worldunit.get_idea_obj(coal_road)._fund_cease == default_fund_pool() * 1.0
+    )
 
     duck_after = yao_worldunit.get_idea_obj(road=duck_road)
-    assert duck_after._bud_onset == default_bud_pool() * 0.1
-    assert duck_after._bud_cease == default_bud_pool() * 0.5
+    assert duck_after._fund_onset == default_fund_pool() * 0.1
+    assert duck_after._fund_cease == default_fund_pool() * 0.5
     lamb_after = yao_worldunit.get_idea_obj(road=lamb_road)
-    assert lamb_after._bud_onset == default_bud_pool() * 0.5
-    assert lamb_after._bud_cease == default_bud_pool() * 0.7
+    assert lamb_after._fund_onset == default_fund_pool() * 0.5
+    assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
 def test_WorldUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():
@@ -848,14 +858,14 @@ def test_WorldUnit_settle_world_CorrectlySets_sum_healerhold_share():
         oregon_road, problem_bool=True, healerhold=sue_healerhold
     )
     oregon_idea = sue_worldunit.get_idea_obj(oregon_road)
-    print(f"{oregon_idea._bud_ratio=}")
+    print(f"{oregon_idea._fund_ratio=}")
     assert sue_worldunit._sum_healerhold_share == 0
     assert oregon_idea._healerhold_ratio == 0
 
     # WHEN
     sue_worldunit.settle_world()
     # THEN
-    assert sue_worldunit._sum_healerhold_share == 0.038461539 * default_bud_pool()
+    assert sue_worldunit._sum_healerhold_share == 0.038461539 * default_fund_pool()
     assert oregon_idea._healerhold_ratio == 1
 
     # WHEN
@@ -864,11 +874,11 @@ def test_WorldUnit_settle_world_CorrectlySets_sum_healerhold_share():
     mon_road = sue_worldunit.make_road(week_road, "Monday")
     sue_worldunit.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     mon_idea = sue_worldunit.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_ratio=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._fund_ratio=}")
     sue_worldunit.settle_world()
     # THEN
-    assert sue_worldunit._sum_healerhold_share != 0.038461539 * default_bud_pool()
-    assert sue_worldunit._sum_healerhold_share == 0.06923077 * default_bud_pool()
+    assert sue_worldunit._sum_healerhold_share != 0.038461539 * default_fund_pool()
+    assert sue_worldunit._sum_healerhold_share == 0.06923077 * default_fund_pool()
     assert oregon_idea._healerhold_ratio == 0.5555555571604938
     assert mon_idea._healerhold_ratio == 0.4444444428395062
 
@@ -876,17 +886,17 @@ def test_WorldUnit_settle_world_CorrectlySets_sum_healerhold_share():
     tue_road = sue_worldunit.make_road(week_road, "Tuesday")
     sue_worldunit.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     tue_idea = sue_worldunit.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_ratio=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._fund_ratio=}")
     # sat_road = sue_worldunit.make_road(week_road, "Saturday")
     # sat_idea = sue_worldunit.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_ratio=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._fund_ratio=}")
     sue_worldunit.settle_world()
 
     # THEN
     assert (
-        sue_worldunit._sum_healerhold_share != 0.06923076923076923 * default_bud_pool()
+        sue_worldunit._sum_healerhold_share != 0.06923076923076923 * default_fund_pool()
     )
-    assert sue_worldunit._sum_healerhold_share == 0.100000001 * default_bud_pool()
+    assert sue_worldunit._sum_healerhold_share == 0.100000001 * default_fund_pool()
     assert oregon_idea._healerhold_ratio == 0.38461538615384616
     assert mon_idea._healerhold_ratio == 0.3076923069230769
     assert tue_idea._healerhold_ratio == 0.3076923069230769
@@ -894,7 +904,7 @@ def test_WorldUnit_settle_world_CorrectlySets_sum_healerhold_share():
     # WHEN
     sue_worldunit.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_worldunit.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_ratio=}")
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
     sue_worldunit.settle_world()
     # THEN
     # display_ideatree(sue_world, "Econ").show()
@@ -931,7 +941,7 @@ def test_WorldUnit_settle_world_CorrectlySets_econ_dict_v1():
     mon_road = sue_worldunit.make_road(week_road, "Monday")
     sue_worldunit.edit_idea_attr(mon_road, healerhold=sue_healerhold)
     # mon_idea = sue_worldunit.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._bud_ratio=}")
+    # print(f"{mon_idea._problem_bool=} {mon_idea._fund_ratio=}")
     sue_worldunit.settle_world()
     # THEN
     assert len(sue_worldunit._econ_dict) == 2
@@ -942,10 +952,10 @@ def test_WorldUnit_settle_world_CorrectlySets_econ_dict_v1():
     tue_road = sue_worldunit.make_road(week_road, "Tuesday")
     sue_worldunit.edit_idea_attr(tue_road, healerhold=sue_healerhold)
     # tue_idea = sue_worldunit.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._bud_ratio=}")
+    # print(f"{tue_idea._problem_bool=} {tue_idea._fund_ratio=}")
     # sat_road = sue_worldunit.make_road(week_road, "Saturday")
     # sat_idea = sue_worldunit.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._bud_ratio=}")
+    # print(f"{sat_idea._problem_bool=} {sat_idea._fund_ratio=}")
     sue_worldunit.settle_world()
 
     # THEN
@@ -957,7 +967,7 @@ def test_WorldUnit_settle_world_CorrectlySets_econ_dict_v1():
     # WHEN
     sue_worldunit.edit_idea_attr(week_road, healerhold=sue_healerhold)
     week_idea = sue_worldunit.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._bud_ratio=}")
+    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
     sue_worldunit.settle_world()
     # THEN
     # display_ideatree(sue_world, "Econ").show()

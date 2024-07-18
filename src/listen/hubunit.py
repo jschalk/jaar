@@ -23,8 +23,8 @@ from src._road.jaar_config import (
     init_gift_id,
 )
 from src._road.finance import (
-    default_bud_coin_if_none,
-    validate_bud_pool,
+    default_fund_coin_if_none,
+    validate_fund_pool,
     default_bit_if_none,
     default_penny_if_none,
     default_money_magnitude_if_none,
@@ -100,8 +100,8 @@ class HubUnit:
     real_id: str = None
     econ_road: RoadUnit = None
     road_delimiter: str = None
-    bud_pool: float = None
-    bud_coin: float = None
+    fund_pool: float = None
+    fund_coin: float = None
     bit: float = None
     penny: float = None
     econ_money_magnitude: float = None
@@ -185,8 +185,8 @@ class HubUnit:
             _owner_id=self.owner_id,
             _real_id=self.real_id,
             _road_delimiter=self.road_delimiter,
-            _bud_pool=self.bud_pool,
-            _bud_coin=self.bud_coin,
+            _fund_pool=self.fund_pool,
+            _fund_coin=self.fund_coin,
             _bit=self.bit,
             _penny=self.penny,
         )
@@ -579,8 +579,8 @@ def hubunit_shop(
     owner_id: OwnerID = None,
     econ_road: RoadUnit = None,
     road_delimiter: str = None,
-    bud_pool: float = None,
-    bud_coin: float = None,
+    fund_pool: float = None,
+    fund_coin: float = None,
     bit: float = None,
     penny: float = None,
     econ_money_magnitude: float = None,
@@ -594,8 +594,8 @@ def hubunit_shop(
         owner_id=validate_roadnode(owner_id, road_delimiter),
         econ_road=econ_road,
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
-        bud_pool=validate_bud_pool(bud_pool),
-        bud_coin=default_bud_coin_if_none(bud_coin),
+        fund_pool=validate_fund_pool(fund_pool),
+        fund_coin=default_fund_coin_if_none(fund_coin),
         bit=default_bit_if_none(bit),
         penny=default_penny_if_none(penny),
         econ_money_magnitude=default_money_magnitude_if_none(econ_money_magnitude),

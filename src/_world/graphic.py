@@ -62,7 +62,7 @@ def _add_individual_trace(
         plotly_Scatter(
             x=[kid_idea._level - 1, kid_idea._level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_idea._bud_ratio),
+            marker_size=_get_dot_diameter(kid_idea._fund_ratio),
             name=kid_idea._label,
             marker_color=_get_color_for_ideaunit_trace(kid_idea, mode=mode),
         )
@@ -70,7 +70,7 @@ def _add_individual_trace(
     anno_list.append(
         dict(
             x=kid_idea._level,
-            y=source_y + (_get_dot_diameter(kid_idea._bud_ratio) / 150) + 0.002,
+            y=source_y + (_get_dot_diameter(kid_idea._fund_ratio) / 150) + 0.002,
             text=kid_idea._label,
             showarrow=False,
         )
@@ -146,10 +146,10 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         "credor_weight",
         "_debtor_respect",
         "debtor_weight",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
     ]
     df = get_world_charunits_dataframe(x_world)
     df.insert(1, "_credor_respect", x_world._credor_respect)
@@ -166,10 +166,10 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
                 df.credor_weight,
                 df._debtor_respect,
                 df.debtor_weight,
-                df._bud_give,
-                df._bud_take,
-                df._bud_agenda_give,
-                df._bud_agenda_take,
+                df._fund_give,
+                df._fund_take,
+                df._fund_agenda_give,
+                df._fund_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -188,7 +188,7 @@ def get_world_chars_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
 def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
     ]
@@ -201,7 +201,7 @@ def get_world_agenda_plotly_fig(x_world: WorldUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.bud_ratio,
+                df.fund_ratio,
                 df._label,
                 df._parent_road,
             ],

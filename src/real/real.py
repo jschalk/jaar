@@ -35,7 +35,7 @@ class RealUnit:
     _journal_db: str = None
     _gifts_dir: str = None
     _road_delimiter: str = None
-    _bud_coin: float = None
+    _fund_coin: float = None
     _bit: float = None
     _penny: float = None
 
@@ -207,7 +207,7 @@ def realunit_shop(
     reals_dir: str,
     in_memory_journal: bool = None,
     _road_delimiter: str = None,
-    _bud_coin: float = None,
+    _fund_coin: float = None,
     _bit: float = None,
     _penny: float = None,
 ) -> RealUnit:
@@ -215,7 +215,7 @@ def realunit_shop(
         real_id=real_id,
         reals_dir=reals_dir,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _bud_coin=default_bit_if_none(_bud_coin),
+        _fund_coin=default_bit_if_none(_fund_coin),
         _bit=default_bit_if_none(_bit),
         _penny=default_penny_if_none(_penny),
     )

@@ -51,10 +51,10 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     new4_arg = "_debtor_respect"
     x_atomunit.set_optional_arg(new4_arg, new4_value)
     new9_value = 55550000
-    new9_arg = "_bud_pool"
+    new9_arg = "_fund_pool"
     x_atomunit.set_optional_arg(new9_arg, new9_value)
     new8_value = 0.5555
-    new8_arg = "_bud_coin"
+    new8_arg = "_fund_coin"
     x_atomunit.set_optional_arg(new8_arg, new8_value)
     sue_changeunit.set_atomunit(x_atomunit)
     new6_value = 0.5
@@ -76,10 +76,10 @@ def test_ChangeUnit_get_edited_world_ReturnsCorrectObj_WorldUnitSimpleAttrs():
     assert after_sue_worldunit._debtor_respect == new4_value
     assert after_sue_worldunit._weight == new1_value
     assert after_sue_worldunit._weight != before_sue_worldunit._weight
-    assert after_sue_worldunit._bud_pool == new9_value
-    assert after_sue_worldunit._bud_pool != before_sue_worldunit._bud_pool
-    assert after_sue_worldunit._bud_coin == new8_value
-    assert after_sue_worldunit._bud_coin != before_sue_worldunit._bud_coin
+    assert after_sue_worldunit._fund_pool == new9_value
+    assert after_sue_worldunit._fund_pool != before_sue_worldunit._fund_pool
+    assert after_sue_worldunit._fund_coin == new8_value
+    assert after_sue_worldunit._fund_coin != before_sue_worldunit._fund_coin
     assert after_sue_worldunit._bit == new6_value
     assert after_sue_worldunit._bit != before_sue_worldunit._bit
     assert after_sue_worldunit._penny == new7_value

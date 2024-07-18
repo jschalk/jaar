@@ -70,15 +70,15 @@ def test_WorldUnit_set_char_respect_CorrectlySetsAttrs():
     zia_text = "Zia"
     old_credor_respect = 77
     old_debtor_respect = 88
-    old_bud_pool = 99
+    old_fund_pool = 99
     zia_text = "Zia"
     zia_world = worldunit_shop(zia_text)
     zia_world.set_credor_respect(old_credor_respect)
     zia_world.set_debtor_resepect(old_debtor_respect)
-    zia_world.set_bud_pool(old_bud_pool)
+    zia_world.set_fund_pool(old_fund_pool)
     assert zia_world._credor_respect == old_credor_respect
     assert zia_world._debtor_respect == old_debtor_respect
-    assert zia_world._bud_pool == old_bud_pool
+    assert zia_world._fund_pool == old_fund_pool
 
     # WHEN
     new_char_pool = 200
@@ -87,4 +87,4 @@ def test_WorldUnit_set_char_respect_CorrectlySetsAttrs():
     # THEN
     assert zia_world._credor_respect == new_char_pool
     assert zia_world._debtor_respect == new_char_pool
-    assert zia_world._bud_pool == new_char_pool
+    assert zia_world._fund_pool == new_char_pool

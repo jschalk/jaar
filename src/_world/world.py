@@ -10,12 +10,12 @@ from src._road.finance import (
     valid_finance_ratio,
     default_bit_if_none,
     default_penny_if_none,
-    default_bud_coin_if_none,
-    validate_bud_pool,
+    default_fund_coin_if_none,
+    validate_fund_pool,
     BitNum,
     PennyNum,
-    BudCoin,
-    BudNum,
+    FundCoin,
+    FundNum,
     allot_scale,
     validate_respect_num,
 )
@@ -123,8 +123,8 @@ class WorldUnit:
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
-    _bud_pool: BudNum = None
-    _bud_coin: BudCoin = None
+    _fund_pool: FundNum = None
+    _fund_coin: FundCoin = None
     _bit: BitNum = None
     _penny: PennyNum = None
     _monetary_desc: str = None
@@ -156,13 +156,13 @@ class WorldUnit:
     def set_monetary_desc(self, x_monetary_desc: str):
         self._monetary_desc = x_monetary_desc
 
-    def set_bud_pool(self, x_bud_pool):
-        self._bud_pool = validate_bud_pool(x_bud_pool)
+    def set_fund_pool(self, x_fund_pool):
+        self._fund_pool = validate_fund_pool(x_fund_pool)
 
     def set_char_respect(self, x_char_pool: int):
         self.set_credor_respect(x_char_pool)
         self.set_debtor_resepect(x_char_pool)
-        self.set_bud_pool(x_char_pool)
+        self.set_fund_pool(x_char_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self._bit) is False:
@@ -463,41 +463,41 @@ class WorldUnit:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
-    def add_to_lobbybox_bud_give_take(
+    def add_to_lobbybox_fund_give_take(
         self,
         lobby_id: LobbyID,
-        awardheir_bud_give: float,
-        awardheir_bud_take: float,
+        awardheir_fund_give: float,
+        awardheir_fund_take: float,
     ):
         x_lobbybox = self.get_lobbybox(lobby_id)
         if x_lobbybox != None:
-            x_lobbybox._bud_give += awardheir_bud_give
-            x_lobbybox._bud_take += awardheir_bud_take
+            x_lobbybox._fund_give += awardheir_fund_give
+            x_lobbybox._fund_take += awardheir_fund_take
 
-    def add_to_lobbybox_bud_agenda_give_take(
+    def add_to_lobbybox_fund_agenda_give_take(
         self,
         lobby_id: LobbyID,
-        awardline_bud_give: float,
-        awardline_bud_take: float,
+        awardline_fund_give: float,
+        awardline_fund_take: float,
     ):
         x_lobbybox = self.get_lobbybox(lobby_id)
-        if awardline_bud_give != None and awardline_bud_take != None:
-            x_lobbybox._bud_agenda_give += awardline_bud_give
-            x_lobbybox._bud_agenda_take += awardline_bud_take
+        if awardline_fund_give != None and awardline_fund_take != None:
+            x_lobbybox._fund_agenda_give += awardline_fund_give
+            x_lobbybox._fund_agenda_take += awardline_fund_take
 
-    def add_to_charunit_bud_give_take(
+    def add_to_charunit_fund_give_take(
         self,
         charunit_char_id: CharID,
-        bud_give,
-        bud_take: float,
+        fund_give,
+        fund_take: float,
         world_agenda_cred: float,
         world_agenda_debt: float,
     ):
         for charunit in self._chars.values():
             if charunit.char_id == charunit_char_id:
-                charunit.add_bud_give_take(
-                    bud_give=bud_give,
-                    bud_take=bud_take,
+                charunit.add_fund_give_take(
+                    fund_give=fund_give,
+                    fund_take=fund_take,
                     world_agenda_cred=world_agenda_cred,
                     world_agenda_debt=world_agenda_debt,
                 )
@@ -843,8 +843,8 @@ class WorldUnit:
         idea_kid._road_delimiter = self._road_delimiter
         if idea_kid._world_real_id != self._real_id:
             idea_kid._world_real_id = self._real_id
-        if idea_kid._bud_coin != self._bud_coin:
-            idea_kid._bud_coin = self._bud_coin
+        if idea_kid._fund_coin != self._fund_coin:
+            idea_kid._fund_coin = self._fund_coin
         if not filter_out_missing_awardlinks_lobby_ids:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
@@ -1239,44 +1239,44 @@ class WorldUnit:
     def get_charunits_debtor_weight_sum(self) -> float:
         return sum(charunit.get_debtor_weight() for charunit in self._chars.values())
 
-    def _add_to_charunits_bud_give_take(self, idea_bud_share: float):
+    def _add_to_charunits_fund_give_take(self, idea_fund_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
-            au_bud_give = (
-                idea_bud_share * x_charunit.get_credor_weight()
+            au_fund_give = (
+                idea_fund_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
-            au_bud_take = (
-                idea_bud_share * x_charunit.get_debtor_weight()
+            au_fund_take = (
+                idea_fund_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
-            x_charunit.add_bud_give_take(
-                bud_give=au_bud_give,
-                bud_take=au_bud_take,
+            x_charunit.add_fund_give_take(
+                fund_give=au_fund_give,
+                fund_take=au_fund_take,
                 world_agenda_cred=0,
                 world_agenda_debt=0,
             )
 
-    def _add_to_charunits_bud_agenda_give_take(self, idea_bud_share: float):
+    def _add_to_charunits_fund_agenda_give_take(self, idea_fund_share: float):
         sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
-            au_bud_agenda_give = (
-                idea_bud_share * x_charunit.get_credor_weight()
+            au_fund_agenda_give = (
+                idea_fund_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
-            au_bud_agenda_take = (
-                idea_bud_share * x_charunit.get_debtor_weight()
+            au_fund_agenda_take = (
+                idea_fund_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
-            x_charunit.add_bud_give_take(
-                bud_give=0,
-                bud_take=0,
-                world_agenda_cred=au_bud_agenda_give,
-                world_agenda_debt=au_bud_agenda_take,
+            x_charunit.add_fund_give_take(
+                fund_give=0,
+                fund_take=0,
+                world_agenda_cred=au_fund_agenda_give,
+                world_agenda_debt=au_fund_agenda_take,
             )
 
     def _set_charunits_world_agenda_share(self, world_agenda_share: float):
@@ -1284,79 +1284,79 @@ class WorldUnit:
         sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
 
         for x_charunit in self._chars.values():
-            au_bud_agenda_give = (
+            au_fund_agenda_give = (
                 world_agenda_share * x_charunit.get_credor_weight()
             ) / sum_charunit_credor_weight
 
-            au_bud_agenda_take = (
+            au_fund_agenda_take = (
                 world_agenda_share * x_charunit.get_debtor_weight()
             ) / sum_charunit_debtor_weight
 
-            x_charunit.add_bud_agenda_give_take(
-                world_agenda_cred=au_bud_agenda_give,
-                world_agenda_debt=au_bud_agenda_take,
+            x_charunit.add_fund_agenda_give_take(
+                world_agenda_cred=au_fund_agenda_give,
+                world_agenda_debt=au_fund_agenda_take,
             )
 
-    def _reset_lobbyboxs_bud_give_take(self):
+    def _reset_lobbyboxs_fund_give_take(self):
         for lobbybox_obj in self._lobbyboxs.values():
-            lobbybox_obj.reset_bud_give_take()
+            lobbybox_obj.reset_fund_give_take()
 
-    def _set_lobbyboxs_bud_share(self, awardheirs: dict[LobbyID, AwardLink]):
+    def _set_lobbyboxs_fund_share(self, awardheirs: dict[LobbyID, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            self.add_to_lobbybox_bud_give_take(
+            self.add_to_lobbybox_fund_give_take(
                 lobby_id=awardlink_obj.lobby_id,
-                awardheir_bud_give=awardlink_obj._bud_give,
-                awardheir_bud_take=awardlink_obj._bud_take,
+                awardheir_fund_give=awardlink_obj._fund_give,
+                awardheir_fund_take=awardlink_obj._fund_take,
             )
 
     def _allot_world_agenda_share(self):
         for idea in self._idea_dict.values():
             # If there are no awardlines associated with idea
-            # allot bud_share via general charunit
+            # allot fund_share via general charunit
             # cred ratio and debt ratio
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_bud_agenda_give_take(idea.get_bud_share())
+                    self._add_to_charunits_fund_agenda_give_take(idea.get_fund_share())
                 else:
                     for x_awardline in idea._awardlines.values():
-                        self.add_to_lobbybox_bud_agenda_give_take(
+                        self.add_to_lobbybox_fund_agenda_give_take(
                             lobby_id=x_awardline.lobby_id,
-                            awardline_bud_give=x_awardline._bud_give,
-                            awardline_bud_take=x_awardline._bud_take,
+                            awardline_fund_give=x_awardline._fund_give,
+                            awardline_fund_take=x_awardline._fund_take,
                         )
 
-    def _allot_lobbyboxs_bud_share(self):
+    def _allot_lobbyboxs_fund_share(self):
         for x_lobbybox in self._lobbyboxs.values():
-            x_lobbybox._set_lobbyship_bud_give_take()
+            x_lobbybox._set_lobbyship_fund_give_take()
             for x_lobbyship in x_lobbybox._lobbyships.values():
-                self.add_to_charunit_bud_give_take(
+                self.add_to_charunit_fund_give_take(
                     charunit_char_id=x_lobbyship._char_id,
-                    bud_give=x_lobbyship._bud_give,
-                    bud_take=x_lobbyship._bud_take,
-                    world_agenda_cred=x_lobbyship._bud_agenda_give,
-                    world_agenda_debt=x_lobbyship._bud_agenda_take,
+                    fund_give=x_lobbyship._fund_give,
+                    fund_take=x_lobbyship._fund_take,
+                    world_agenda_cred=x_lobbyship._fund_agenda_give,
+                    world_agenda_debt=x_lobbyship._fund_agenda_take,
                 )
 
-    def _set_bud_agenda_ratio_give_take(self):
-        bud_agenda_ratio_give_sum = 0
-        bud_agenda_ratio_take_sum = 0
+    def _set_fund_agenda_ratio_give_take(self):
+        fund_agenda_ratio_give_sum = 0
+        fund_agenda_ratio_take_sum = 0
 
         for x_charunit in self._chars.values():
-            bud_agenda_ratio_give_sum += x_charunit._bud_agenda_give
-            bud_agenda_ratio_take_sum += x_charunit._bud_agenda_take
+            fund_agenda_ratio_give_sum += x_charunit._fund_agenda_give
+            fund_agenda_ratio_take_sum += x_charunit._fund_agenda_take
 
         for x_charunit in self._chars.values():
-            x_charunit.set_bud_agenda_ratio_give_take(
-                bud_agenda_ratio_give_sum=bud_agenda_ratio_give_sum,
-                bud_agenda_ratio_take_sum=bud_agenda_ratio_take_sum,
+            x_charunit.set_fund_agenda_ratio_give_take(
+                fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
+                fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
                 world_charunit_total_credor_weight=self.get_charunits_credor_weight_sum(),
                 world_charunit_total_debtor_weight=self.get_charunits_debtor_weight_sum(),
             )
 
-    def _reset_charunit_bud_give_take(self):
+    def _reset_charunit_fund_give_take(self):
         for charunit in self._chars.values():
-            charunit.reset_bud_give_take()
+            charunit.reset_fund_give_take()
 
     def idea_exists(self, road: RoadUnit) -> bool:
         if road is None:
@@ -1452,7 +1452,7 @@ class WorldUnit:
             if x_idea_obj._healerhold.any_lobby_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
-                self._sum_healerhold_share += x_idea_obj.get_bud_share()
+                self._sum_healerhold_share += x_idea_obj.get_fund_share()
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True
 
@@ -1474,21 +1474,21 @@ class WorldUnit:
         self._idearoot._weight = 1
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
-        self._idearoot.set_bud_attr(0, self._bud_pool, self._bud_pool)
-        self._idearoot.set_awardheirs_bud_give_bud_take()
+        self._idearoot.set_fund_attr(0, self._fund_pool, self._fund_pool)
+        self._idearoot.set_awardheirs_fund_give_fund_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
         self._idearoot.clear_all_char_cred_debt()
         self._idearoot.pledge = False
         if self._idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
-            self._allot_bud_share(idea=self._idearoot)
+            self._allot_fund_share(idea=self._idearoot)
 
     def _set_kids_attributes(
         self,
         idea_kid: IdeaUnit,
-        bud_onset: float,
-        bud_cease: float,
+        fund_onset: float,
+        fund_cease: float,
         parent_idea: IdeaUnit,
         econ_exceptions: bool,
     ):
@@ -1501,7 +1501,7 @@ class WorldUnit:
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
         idea_kid.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
-        idea_kid.set_bud_attr(bud_onset, bud_cease, self._bud_pool)
+        idea_kid.set_fund_attr(fund_onset, fund_cease, self._fund_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
@@ -1510,21 +1510,21 @@ class WorldUnit:
         if idea_kid.is_kidless():
             # set idea's ancestor metrics using world root as common source
             self._set_ancestors_metrics(idea_kid.get_road(), econ_exceptions)
-            self._allot_bud_share(idea=idea_kid)
+            self._allot_fund_share(idea=idea_kid)
 
-    def _allot_bud_share(self, idea: IdeaUnit):
+    def _allot_fund_share(self, idea: IdeaUnit):
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
         if idea.is_awardheirless() is False:
-            self._set_lobbyboxs_bud_share(idea._awardheirs)
+            self._set_lobbyboxs_fund_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_bud_give_take(idea.get_bud_share())
+            self._add_to_charunits_fund_give_take(idea.get_fund_share())
 
-    def get_bud_share(
-        self, parent_bud_share: float, weight: int, sibling_total_weight: int
+    def get_fund_share(
+        self, parent_fund_share: float, weight: int, sibling_total_weight: int
     ) -> float:
         sibling_ratio = weight / sibling_total_weight
-        return parent_bud_share * sibling_ratio
+        return parent_fund_share * sibling_ratio
 
     def _create_lobbyboxs_metrics(self):
         self._lobbyboxs = {}
@@ -1548,7 +1548,7 @@ class WorldUnit:
         for x_char_id, char_debtor_pool in debtor_allot.items():
             self.get_char(x_char_id).set_debtor_pool(char_debtor_pool)
         self._create_lobbyboxs_metrics()
-        self._reset_charunit_bud_give_take()
+        self._reset_charunit_fund_give_take()
 
     def _set_tree_traverse_starting_point(self):
         self._rational = False
@@ -1581,24 +1581,26 @@ class WorldUnit:
 
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid._weight for x_road, kid in x_idearoot_kids_items}
-        root_bud = self._idearoot._bud_cease - self._idearoot._bud_onset
-        alloted_bud = allot_scale(kids_ledger, root_bud, self._bud_coin)
-        x_idearoot_kid_bud_onset = None
-        x_idearoot_kid_bud_cease = None
+        root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
+        alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self._fund_coin)
+        x_idearoot_kid_fund_onset = None
+        x_idearoot_kid_fund_cease = None
 
         cache_idea_list = []
         for kid_label, idea_kid in self._idearoot._kids.items():
-            idearoot_kid_bud = alloted_bud.get(kid_label)
-            if x_idearoot_kid_bud_onset is None:
-                x_idearoot_kid_bud_onset = self._idearoot._bud_onset
-                x_idearoot_kid_bud_cease = self._idearoot._bud_onset + idearoot_kid_bud
+            idearoot_kid_fund_num = alloted_fund_num.get(kid_label)
+            if x_idearoot_kid_fund_onset is None:
+                x_idearoot_kid_fund_onset = self._idearoot._fund_onset
+                x_idearoot_kid_fund_cease = (
+                    self._idearoot._fund_onset + idearoot_kid_fund_num
+                )
             else:
-                x_idearoot_kid_bud_onset = x_idearoot_kid_bud_cease
-                x_idearoot_kid_bud_cease += idearoot_kid_bud
+                x_idearoot_kid_fund_onset = x_idearoot_kid_fund_cease
+                x_idearoot_kid_fund_cease += idearoot_kid_fund_num
             self._set_kids_attributes(
                 idea_kid=idea_kid,
-                bud_onset=x_idearoot_kid_bud_onset,
-                bud_cease=x_idearoot_kid_bud_cease,
+                fund_onset=x_idearoot_kid_fund_onset,
+                fund_cease=x_idearoot_kid_fund_cease,
                 parent_idea=self._idearoot,
                 econ_exceptions=econ_exceptions,
             )
@@ -1613,23 +1615,23 @@ class WorldUnit:
 
             kids_items = parent_idea._kids.items()
             x_ledger = {x_road: idea_kid._weight for x_road, idea_kid in kids_items}
-            parent_bud = parent_idea._bud_cease - parent_idea._bud_onset
-            alloted_bud = allot_scale(x_ledger, parent_bud, self._bud_coin)
+            parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
+            alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self._fund_coin)
 
             if parent_idea._kids != None:
-                bud_onset = None
-                bud_cease = None
+                fund_onset = None
+                fund_cease = None
                 for idea_kid in parent_idea._kids.values():
-                    if bud_onset is None:
-                        bud_onset = parent_idea._bud_onset
-                        bud_cease = bud_onset + alloted_bud.get(idea_kid._label)
+                    if fund_onset is None:
+                        fund_onset = parent_idea._fund_onset
+                        fund_cease = fund_onset + alloted_fund_num.get(idea_kid._label)
                     else:
-                        bud_onset = bud_cease
-                        bud_cease += alloted_bud.get(idea_kid._label)
+                        fund_onset = fund_cease
+                        fund_cease += alloted_fund_num.get(idea_kid._label)
                     self._set_kids_attributes(
                         idea_kid=idea_kid,
-                        bud_onset=bud_onset,
-                        bud_cease=bud_cease,
+                        fund_onset=fund_onset,
+                        fund_cease=fund_cease,
                         parent_idea=parent_idea,
                         econ_exceptions=econ_exceptions,
                     )
@@ -1646,8 +1648,8 @@ class WorldUnit:
 
     def _after_all_tree_traverses_set_cred_debt(self):
         self._allot_world_agenda_share()
-        self._allot_lobbyboxs_bud_share()
-        self._set_bud_agenda_ratio_give_take()
+        self._allot_lobbyboxs_fund_share()
+        self._set_fund_agenda_ratio_give_take()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
         self._set_econ_dict()
@@ -1662,7 +1664,7 @@ class WorldUnit:
                 x_idea._healerhold_ratio = 0
             else:
                 x_sum = self._sum_healerhold_share
-                x_idea._healerhold_ratio = x_idea.get_bud_share() / x_sum
+                x_idea._healerhold_ratio = x_idea.get_fund_share() / x_sum
             if self._econs_justified and x_idea._healerhold.any_lobby_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
@@ -1686,8 +1688,8 @@ class WorldUnit:
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
-        self._reset_lobbyboxs_bud_give_take()
-        self._reset_charunit_bud_give_take()
+        self._reset_lobbyboxs_fund_give_take()
+        self._reset_charunit_fund_give_take()
 
     def get_heir_road_list(self, x_road: RoadUnit) -> list[RoadUnit]:
         road_list = self.get_idea_tree_ordered_road_list()
@@ -1740,8 +1742,8 @@ class WorldUnit:
             "_chars": self.get_charunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
-            "_bud_pool": self._bud_pool,
-            "_bud_coin": self._bud_coin,
+            "_fund_pool": self._fund_pool,
+            "_fund_coin": self._fund_coin,
             "_bit": self._bit,
             "_penny": self._penny,
             "_owner_id": self._owner_id,
@@ -1823,8 +1825,8 @@ def worldunit_shop(
     _owner_id: OwnerID = None,
     _real_id: RealID = None,
     _road_delimiter: str = None,
-    _bud_pool: BudNum = None,
-    _bud_coin: BudCoin = None,
+    _fund_pool: FundNum = None,
+    _fund_coin: FundCoin = None,
     _bit: BitNum = None,
     _penny: PennyNum = None,
     _weight: float = None,
@@ -1843,8 +1845,8 @@ def worldunit_shop(
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _credor_respect=validate_respect_num(),
         _debtor_respect=validate_respect_num(),
-        _bud_pool=validate_bud_pool(_bud_pool),
-        _bud_coin=default_bud_coin_if_none(_bud_coin),
+        _fund_pool=validate_fund_pool(_fund_pool),
+        _fund_coin=default_fund_coin_if_none(_fund_coin),
         _bit=default_bit_if_none(_bit),
         _penny=default_penny_if_none(_penny),
         _econs_justified=get_False_if_None(),
@@ -1857,7 +1859,7 @@ def worldunit_shop(
         _level=0,
         _world_real_id=x_world._real_id,
         _road_delimiter=x_world._road_delimiter,
-        _bud_coin=x_world._bud_coin,
+        _fund_coin=x_world._fund_coin,
     )
     x_world.set_max_tree_traverse(3)
     x_world._rational = False
@@ -1877,9 +1879,11 @@ def get_from_dict(world_dict: dict) -> WorldUnit:
     x_world.set_real_id(obj_from_world_dict(world_dict, "_real_id"))
     world_road_delimiter = obj_from_world_dict(world_dict, "_road_delimiter")
     x_world._road_delimiter = default_road_delimiter_if_none(world_road_delimiter)
-    x_world._bud_pool = validate_bud_pool(obj_from_world_dict(world_dict, "_bud_pool"))
-    x_world._bud_coin = default_bud_coin_if_none(
-        obj_from_world_dict(world_dict, "_bud_coin")
+    x_world._fund_pool = validate_fund_pool(
+        obj_from_world_dict(world_dict, "_fund_pool")
+    )
+    x_world._fund_coin = default_fund_coin_if_none(
+        obj_from_world_dict(world_dict, "_fund_coin")
     )
     x_world._bit = default_bit_if_none(obj_from_world_dict(world_dict, "_bit"))
     x_world._penny = default_penny_if_none(obj_from_world_dict(world_dict, "_penny"))
@@ -1919,7 +1923,7 @@ def set_idearoot_from_world_dict(x_world: WorldUnit, world_dict: dict):
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
         _world_real_id=x_world._real_id,
-        _bud_coin=default_bud_coin_if_none(x_world._bud_coin),
+        _fund_coin=default_fund_coin_if_none(x_world._fund_coin),
     )
     set_idearoot_kids_from_dict(x_world, idearoot_dict)
 

@@ -65,7 +65,7 @@ def get_world_with_4_levels() -> WorldUnit:
     return sue_world
 
 
-def get_bud_explanation_world() -> WorldUnit:
+def get_fund_explanation_world() -> WorldUnit:
     sue_world = worldunit_shop(_owner_id="Sue")
 
     casa_text = "casa"

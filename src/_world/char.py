@@ -50,12 +50,12 @@ class CharUnit(CharCore):
     _irrational_debtor_weight: int = None  # set by listening process
     _inallocable_debtor_weight: int = None  # set by listening process
     # set by World.settle_world()
-    _bud_give: float = None
-    _bud_take: float = None
-    _bud_agenda_give: float = None
-    _bud_agenda_take: float = None
-    _bud_agenda_ratio_give: float = None
-    _bud_agenda_ratio_take: float = None
+    _fund_give: float = None
+    _fund_take: float = None
+    _fund_agenda_give: float = None
+    _fund_agenda_take: float = None
+    _fund_agenda_ratio_give: float = None
+    _fund_agenda_ratio_take: float = None
 
     def set_bit(self, x_bit: float):
         self._bit = x_bit
@@ -82,13 +82,13 @@ class CharUnit(CharCore):
     def get_debtor_weight(self):
         return get_1_if_None(self.debtor_weight)
 
-    def reset_bud_give_take(self):
-        self._bud_give = 0
-        self._bud_take = 0
-        self._bud_agenda_give = 0
-        self._bud_agenda_take = 0
-        self._bud_agenda_ratio_give = 0
-        self._bud_agenda_ratio_take = 0
+    def reset_fund_give_take(self):
+        self._fund_give = 0
+        self._fund_take = 0
+        self._fund_agenda_give = 0
+        self._fund_agenda_take = 0
+        self._fund_agenda_ratio_give = 0
+        self._fund_agenda_ratio_take = 0
 
     def add_irrational_debtor_weight(self, x_irrational_debtor_weight: float):
         self._irrational_debtor_weight += x_irrational_debtor_weight
@@ -100,41 +100,41 @@ class CharUnit(CharCore):
         self._irrational_debtor_weight = 0
         self._inallocable_debtor_weight = 0
 
-    def add_bud_give_take(
+    def add_fund_give_take(
         self,
-        bud_give: float,
-        bud_take,
+        fund_give: float,
+        fund_take,
         world_agenda_cred: float,
         world_agenda_debt,
     ):
-        self._bud_give += bud_give
-        self._bud_take += bud_take
-        self._bud_agenda_give += world_agenda_cred
-        self._bud_agenda_take += world_agenda_debt
+        self._fund_give += fund_give
+        self._fund_take += fund_take
+        self._fund_agenda_give += world_agenda_cred
+        self._fund_agenda_take += world_agenda_debt
 
-    def set_bud_agenda_ratio_give_take(
+    def set_fund_agenda_ratio_give_take(
         self,
-        bud_agenda_ratio_give_sum: float,
-        bud_agenda_ratio_take_sum: float,
+        fund_agenda_ratio_give_sum: float,
+        fund_agenda_ratio_take_sum: float,
         world_charunit_total_credor_weight: float,
         world_charunit_total_debtor_weight: float,
     ):
-        if bud_agenda_ratio_give_sum == 0:
-            self._bud_agenda_ratio_give = (
+        if fund_agenda_ratio_give_sum == 0:
+            self._fund_agenda_ratio_give = (
                 self.get_credor_weight() / world_charunit_total_credor_weight
             )
         else:
-            self._bud_agenda_ratio_give = (
-                self._bud_agenda_give / bud_agenda_ratio_give_sum
+            self._fund_agenda_ratio_give = (
+                self._fund_agenda_give / fund_agenda_ratio_give_sum
             )
 
-        if bud_agenda_ratio_take_sum == 0:
-            self._bud_agenda_ratio_take = (
+        if fund_agenda_ratio_take_sum == 0:
+            self._fund_agenda_ratio_take = (
                 self.get_debtor_weight() / world_charunit_total_debtor_weight
             )
         else:
-            self._bud_agenda_ratio_take = (
-                self._bud_agenda_take / bud_agenda_ratio_take_sum
+            self._fund_agenda_ratio_take = (
+                self._fund_agenda_take / fund_agenda_ratio_take_sum
             )
 
     def add_lobbyship(
@@ -219,12 +219,12 @@ class CharUnit(CharCore):
         return x_dict
 
     def _all_attrs_necessary_in_dict(self, x_dict):
-        x_dict["_bud_give"] = self._bud_give
-        x_dict["_bud_take"] = self._bud_take
-        x_dict["_bud_agenda_give"] = self._bud_agenda_give
-        x_dict["_bud_agenda_take"] = self._bud_agenda_take
-        x_dict["_bud_agenda_ratio_give"] = self._bud_agenda_ratio_give
-        x_dict["_bud_agenda_ratio_take"] = self._bud_agenda_ratio_take
+        x_dict["_fund_give"] = self._fund_give
+        x_dict["_fund_take"] = self._fund_take
+        x_dict["_fund_agenda_give"] = self._fund_agenda_give
+        x_dict["_fund_agenda_take"] = self._fund_agenda_take
+        x_dict["_fund_agenda_ratio_give"] = self._fund_agenda_ratio_give
+        x_dict["_fund_agenda_ratio_take"] = self._fund_agenda_ratio_take
 
 
 # class CharUnitsshop:
@@ -275,12 +275,12 @@ def charunit_shop(
         _debtor_pool=0,
         _irrational_debtor_weight=0,
         _inallocable_debtor_weight=0,
-        _bud_give=0,
-        _bud_take=0,
-        _bud_agenda_give=0,
-        _bud_agenda_take=0,
-        _bud_agenda_ratio_give=0,
-        _bud_agenda_ratio_take=0,
+        _fund_give=0,
+        _fund_take=0,
+        _fund_agenda_give=0,
+        _fund_agenda_take=0,
+        _fund_agenda_ratio_give=0,
+        _fund_agenda_ratio_take=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _bit=default_bit_if_none(_bit),
     )

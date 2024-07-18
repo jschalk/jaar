@@ -146,16 +146,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     before_sue_world = worldunit_shop(sue_text)
     after_sue_world = copy_deepcopy(before_sue_world)
     x_worldUnit_weight = 55
-    x_bud_pool = 8000000
-    x_bud_coin = 8
+    x_fund_pool = 8000000
+    x_fund_coin = 8
     x_bit = 5
     x_max_tree_traverse = 66
     x_monetary_desc = "dragon dollars"
     x_credor_respect = 770
     x_debtor_respect = 880
     after_sue_world._weight = x_worldUnit_weight
-    after_sue_world._bud_pool = x_bud_pool
-    after_sue_world._bud_coin = x_bud_coin
+    after_sue_world._fund_pool = x_fund_pool
+    after_sue_world._fund_coin = x_fund_coin
     after_sue_world._bit = x_bit
     after_sue_world.set_max_tree_traverse(x_max_tree_traverse)
     after_sue_world.set_monetary_desc(x_monetary_desc)
@@ -174,8 +174,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_WorldUnit_simpl
     assert xio_atomunit.get_value("_credor_respect") == x_credor_respect
     assert xio_atomunit.get_value("_debtor_respect") == x_debtor_respect
     assert xio_atomunit.get_value("_weight") == x_worldUnit_weight
-    assert xio_atomunit.get_value("_bud_pool") == x_bud_pool
-    assert xio_atomunit.get_value("_bud_coin") == x_bud_coin
+    assert xio_atomunit.get_value("_fund_pool") == x_fund_pool
+    assert xio_atomunit.get_value("_fund_coin") == x_fund_coin
     assert xio_atomunit.get_value("_bit") == x_bit
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")

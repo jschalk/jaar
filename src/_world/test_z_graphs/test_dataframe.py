@@ -29,12 +29,12 @@ def test_get_world_charunits_dataframe_ReturnsCorrectDataFrame():
         "credor_weight",
         "debtor_weight",
         "_lobbyships",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
-        "_bud_agenda_ratio_give",
-        "_bud_agenda_ratio_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
 
@@ -54,12 +54,12 @@ def test_get_world_charunits_dataframe_ReturnsCorrectEmptyDataFrame():
         "char_id",
         "credor_weight",
         "debtor_weight",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
-        "_bud_agenda_ratio_give",
-        "_bud_agenda_ratio_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
 
@@ -81,7 +81,7 @@ def test_get_world_agenda_dataframe_ReturnsCorrectDataFrame():
     # THEN
     charunit_colums = {
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -109,7 +109,7 @@ def test_get_world_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
     # THEN
     charunit_colums = {
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",

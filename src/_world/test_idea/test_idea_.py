@@ -53,10 +53,10 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._all_char_debt is None
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx is None
-    assert x_ideaunit._bud_ratio is None
-    assert x_ideaunit._bud_coin is None
-    assert x_ideaunit._bud_onset is None
-    assert x_ideaunit._bud_cease is None
+    assert x_ideaunit._fund_ratio is None
+    assert x_ideaunit._fund_coin is None
+    assert x_ideaunit._fund_onset is None
+    assert x_ideaunit._fund_cease is None
     assert x_ideaunit._root is None
     assert x_ideaunit._world_real_id is None
     assert x_ideaunit._healerhold_ratio is None
@@ -94,10 +94,10 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._healerhold == healerhold_shop()
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
-    assert x_ideaunit._bud_ratio is None
-    assert x_ideaunit._bud_coin is None
-    assert x_ideaunit._bud_onset is None
-    assert x_ideaunit._bud_cease is None
+    assert x_ideaunit._fund_ratio is None
+    assert x_ideaunit._fund_coin is None
+    assert x_ideaunit._fund_onset is None
+    assert x_ideaunit._fund_cease is None
     assert x_ideaunit._reasonunits == {}
     assert x_ideaunit._reasonheirs == {}
     assert x_ideaunit._doerunit == doerunit_shop()
@@ -132,17 +132,17 @@ def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
     # ESTABLISH
     x_healerhold = healerhold_shop({"Sue", "Yao"})
     x_problem_bool = True
-    x_bud_coin = 88
+    x_fund_coin = 88
 
     # WHEN
     x_ideaunit = ideaunit_shop(
-        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _bud_coin=x_bud_coin
+        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _fund_coin=x_fund_coin
     )
 
     # THEN
     assert x_ideaunit._healerhold == x_healerhold
     assert x_ideaunit._problem_bool == x_problem_bool
-    assert x_ideaunit._bud_coin == x_bud_coin
+    assert x_ideaunit._fund_coin == x_fund_coin
 
 
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():
@@ -265,24 +265,24 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     assert len(sport_idea._awardheirs) == 2
 
     swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._bud_give is None
-    assert swimmer_awardheir._bud_take is None
+    assert swimmer_awardheir._fund_give is None
+    assert swimmer_awardheir._fund_take is None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._bud_give is None
-    assert biker_awardheir._bud_take is None
+    assert biker_awardheir._fund_give is None
+    assert biker_awardheir._fund_take is None
 
     # WHEN
-    sport_idea._bud_ratio = 0.25
-    sport_idea.set_awardheirs_bud_give_bud_take()
+    sport_idea._fund_ratio = 0.25
+    sport_idea.set_awardheirs_fund_give_fund_take()
 
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
     swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._bud_give != None
-    assert swimmer_awardheir._bud_take != None
+    assert swimmer_awardheir._fund_give != None
+    assert swimmer_awardheir._fund_take != None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._bud_give != None
-    assert biker_awardheir._bud_take != None
+    assert biker_awardheir._fund_give != None
+    assert biker_awardheir._fund_take != None
 
 
 def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
@@ -294,7 +294,7 @@ def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
 
     # WHEN / THEN
     # does not crash with empty set
-    sport_idea.set_awardheirs_bud_give_bud_take()
+    sport_idea.set_awardheirs_fund_give_fund_take()
 
 
 def test_IdeaUnit_set_reasonheirsCorrectlySourcesFromOutside():
@@ -1024,16 +1024,16 @@ def test_IdeaUnit_del_kid_CorrectModifiesAttr():
     assert len(nation_idea._kids) == 1
 
 
-def test_IdeaUnit_get_bud_share_ReturnsObj():
+def test_IdeaUnit_get_fund_share_ReturnsObj():
     # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
 
     # WHEN / THEN
-    assert nation_idea.get_bud_share() == 0
+    assert nation_idea.get_fund_share() == 0
 
     # WHEN / THEN
-    nation_idea._bud_onset = 3
-    nation_idea._bud_cease = 14
-    assert nation_idea.get_bud_share() == 11
+    nation_idea._fund_onset = 3
+    nation_idea._fund_cease = 14
+    assert nation_idea.get_fund_share() == 11

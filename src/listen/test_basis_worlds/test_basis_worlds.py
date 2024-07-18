@@ -41,8 +41,8 @@ def test_create_empty_world_ReturnsCorrectObj():
     assert yao_empty_job._last_gift_id is None
     assert yao_empty_job.get_charunits_dict() == {}
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
-    assert yao_empty_job._bud_pool == yao_voice._bud_pool
-    assert yao_empty_job._bud_coin == yao_voice._bud_coin
+    assert yao_empty_job._fund_pool == yao_voice._fund_pool
+    assert yao_empty_job._fund_coin == yao_voice._fund_coin
     assert yao_empty_job._bit == yao_voice._bit
     assert yao_empty_job._penny == yao_voice._penny
     assert yao_empty_job._monetary_desc is None
@@ -85,8 +85,8 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
     assert yao_basis_job.get_charunits_dict() == yao_duty.get_charunits_dict()
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
-    assert yao_basis_job._bud_pool == yao_duty._bud_pool
-    assert yao_basis_job._bud_coin == yao_duty._bud_coin
+    assert yao_basis_job._fund_pool == yao_duty._fund_pool
+    assert yao_basis_job._fund_coin == yao_duty._fund_coin
     assert yao_basis_job._bit == yao_duty._bit
     assert yao_basis_job._monetary_desc == yao_duty._monetary_desc
     assert yao_basis_job._credor_respect == yao_duty._credor_respect
@@ -108,8 +108,8 @@ def test_get_default_action_world_ReturnsCorrectObj():
     sue_text = "Sue"
     blue_text = "blue"
     slash_text = "/"
-    x_bud_pool = 99000
-    x_bud_coin = 80
+    x_fund_pool = 99000
+    x_fund_coin = 80
     x_bit = 5
     sue_char_pool = 800
     casa_text = "casa"
@@ -117,7 +117,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     last_gift_id = 7
     sue_max_tree_traverse = 9
     sue_worldunit = worldunit_shop(
-        sue_text, blue_text, slash_text, x_bud_pool, x_bud_coin, x_bit
+        sue_text, blue_text, slash_text, x_fund_pool, x_fund_coin, x_bit
     )
     sue_worldunit.set_last_gift_id(last_gift_id)
     sue_worldunit.add_charunit(bob_text, 3, 4)
@@ -137,8 +137,8 @@ def test_get_default_action_world_ReturnsCorrectObj():
     assert default_action_world._real_id == sue_worldunit._real_id
     assert default_action_world._real_id == blue_text
     assert default_action_world._road_delimiter == slash_text
-    assert default_action_world._bud_pool == sue_char_pool
-    assert default_action_world._bud_coin == x_bud_coin
+    assert default_action_world._fund_pool == sue_char_pool
+    assert default_action_world._fund_coin == x_fund_coin
     assert default_action_world._bit == x_bit
     assert default_action_world._credor_respect == default_respect_num()
     assert default_action_world._debtor_respect == default_respect_num()

@@ -27,10 +27,10 @@ def get_real_voices_chars_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "char_id",
         "credor_weight",
         "debtor_weight",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
     ]
     df = get_real_voices_chars_dataframe(x_real)
     header_dict = dict(
@@ -44,10 +44,10 @@ def get_real_voices_chars_plotly_fig(x_real: RealUnit) -> plotly_Figure:
                 df.char_id,
                 df.credor_weight,
                 df.debtor_weight,
-                df._bud_give,
-                df._bud_take,
-                df._bud_agenda_give,
-                df._bud_agenda_take,
+                df._fund_give,
+                df._fund_take,
+                df._fund_agenda_give,
+                df._fund_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -83,10 +83,10 @@ def get_real_actions_chars_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "char_id",
         "credor_weight",
         "debtor_weight",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
     ]
     df = get_real_actions_chars_dataframe(x_real)
     header_dict = dict(
@@ -100,10 +100,10 @@ def get_real_actions_chars_plotly_fig(x_real: RealUnit) -> plotly_Figure:
                 df.char_id,
                 df.credor_weight,
                 df.debtor_weight,
-                df._bud_give,
-                df._bud_take,
-                df._bud_agenda_give,
-                df._bud_agenda_take,
+                df._fund_give,
+                df._fund_take,
+                df._fund_agenda_give,
+                df._fund_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -135,7 +135,7 @@ def get_real_voices_agenda_dataframe(x_real: RealUnit) -> DataFrame:
 def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -154,7 +154,7 @@ def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.bud_ratio,
+                df.fund_ratio,
                 df._label,
                 df._parent_road,
                 df._begin,
@@ -194,7 +194,7 @@ def get_real_actions_agenda_dataframe(x_real: RealUnit) -> DataFrame:
 def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -213,7 +213,7 @@ def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.owner_id,
-                df.bud_ratio,
+                df.fund_ratio,
                 df._label,
                 df._parent_road,
                 df._begin,

@@ -23,12 +23,12 @@ class LobbyShip(LobbyCore):
     # calculated fields
     _credor_pool: float = None
     _debtor_pool: float = None
-    _bud_give: float = None
-    _bud_take: float = None
-    _bud_agenda_give: float = None
-    _bud_agenda_take: float = None
-    _bud_agenda_ratio_give: float = None
-    _bud_agenda_ratio_take: float = None
+    _fund_give: float = None
+    _fund_take: float = None
+    _fund_agenda_give: float = None
+    _fund_agenda_take: float = None
+    _fund_agenda_ratio_give: float = None
+    _fund_agenda_ratio_take: float = None
     _char_id: CharID = None
 
     def set_credor_weight(self, x_credor_weight: float):
@@ -46,32 +46,32 @@ class LobbyShip(LobbyCore):
             "debtor_weight": self.debtor_weight,
         }
 
-    def reset_bud_give_take(self):
-        self._bud_give = 0
-        self._bud_take = 0
-        self._bud_agenda_give = 0
-        self._bud_agenda_take = 0
-        self._bud_agenda_ratio_give = 0
-        self._bud_agenda_ratio_take = 0
+    def reset_fund_give_take(self):
+        self._fund_give = 0
+        self._fund_take = 0
+        self._fund_agenda_give = 0
+        self._fund_agenda_take = 0
+        self._fund_agenda_ratio_give = 0
+        self._fund_agenda_ratio_take = 0
 
-    def set_bud_give_take(
+    def set_fund_give_take(
         self,
         lobbyships_credor_weight_sum: float,
         lobbyships_debtor_weight_sum: float,
-        lobby_bud_give: float,
-        lobby_bud_take: float,
-        lobby_bud_agenda_give: float,
-        lobby_bud_agenda_take: float,
+        lobby_fund_give: float,
+        lobby_fund_take: float,
+        lobby_fund_agenda_give: float,
+        lobby_fund_agenda_take: float,
     ):
-        lobby_bud_give = get_1_if_None(lobby_bud_give)
-        lobby_bud_take = get_1_if_None(lobby_bud_take)
+        lobby_fund_give = get_1_if_None(lobby_fund_give)
+        lobby_fund_take = get_1_if_None(lobby_fund_take)
         credor_ratio = self.credor_weight / lobbyships_credor_weight_sum
         debtor_ratio = self.debtor_weight / lobbyships_debtor_weight_sum
 
-        self._bud_give = lobby_bud_give * credor_ratio
-        self._bud_take = lobby_bud_take * debtor_ratio
-        self._bud_agenda_give = lobby_bud_agenda_give * credor_ratio
-        self._bud_agenda_take = lobby_bud_agenda_take * debtor_ratio
+        self._fund_give = lobby_fund_give * credor_ratio
+        self._fund_take = lobby_fund_take * debtor_ratio
+        self._fund_agenda_give = lobby_fund_agenda_give * credor_ratio
+        self._fund_agenda_take = lobby_fund_agenda_take * debtor_ratio
 
 
 def lobbyship_shop(
@@ -151,52 +151,52 @@ def awardlink_shop(
 class AwardHeir(LobbyCore):
     give_weight: float = 1.0
     take_weight: float = 1.0
-    _bud_give: float = None
-    _bud_take: float = None
+    _fund_give: float = None
+    _fund_take: float = None
 
-    def set_bud_give_take(
+    def set_fund_give_take(
         self,
-        idea_bud_share,
+        idea_fund_share,
         awardheirs_give_weight_sum: float,
         awardheirs_take_weight_sum: float,
     ):
         credor_share_ratio = self.give_weight / awardheirs_give_weight_sum
-        self._bud_give = idea_bud_share * credor_share_ratio
+        self._fund_give = idea_fund_share * credor_share_ratio
         debtor_share_ratio = self.take_weight / awardheirs_take_weight_sum
-        self._bud_take = idea_bud_share * debtor_share_ratio
+        self._fund_take = idea_fund_share * debtor_share_ratio
 
 
 def awardheir_shop(
     lobby_id: LobbyID,
     give_weight: float = None,
     take_weight: float = None,
-    _bud_give: float = None,
-    _bud_take: float = None,
+    _fund_give: float = None,
+    _fund_take: float = None,
 ) -> AwardHeir:
     give_weight = get_1_if_None(give_weight)
     take_weight = get_1_if_None(take_weight)
-    return AwardHeir(lobby_id, give_weight, take_weight, _bud_give, _bud_take)
+    return AwardHeir(lobby_id, give_weight, take_weight, _fund_give, _fund_take)
 
 
 @dataclass
 class AwardLine(LobbyCore):
-    _bud_give: float = None
-    _bud_take: float = None
+    _fund_give: float = None
+    _fund_take: float = None
 
-    def add_bud_give_take(self, bud_give: float, bud_take: float):
-        self.set_bud_give_take_zero_if_none()
-        self._bud_give += bud_give
-        self._bud_take += bud_take
+    def add_fund_give_take(self, fund_give: float, fund_take: float):
+        self.set_fund_give_take_zero_if_none()
+        self._fund_give += fund_give
+        self._fund_take += fund_take
 
-    def set_bud_give_take_zero_if_none(self):
-        if self._bud_give is None:
-            self._bud_give = 0
-        if self._bud_take is None:
-            self._bud_take = 0
+    def set_fund_give_take_zero_if_none(self):
+        if self._fund_give is None:
+            self._fund_give = 0
+        if self._fund_take is None:
+            self._fund_take = 0
 
 
-def awardline_shop(lobby_id: LobbyID, _bud_give: float, _bud_take: float):
-    return AwardLine(lobby_id, _bud_give=_bud_give, _bud_take=_bud_take)
+def awardline_shop(lobby_id: LobbyID, _fund_give: float, _fund_take: float):
+    return AwardLine(lobby_id, _fund_give=_fund_give, _fund_take=_fund_take)
 
 
 @dataclass
@@ -204,10 +204,10 @@ class LobbyBox(LobbyCore):
     _lobbyships: dict[CharID, LobbyShip] = None  # set by WorldUnit.set_charunit()
     _road_delimiter: str = None  # calculated by WorldUnit
     # calculated by WorldUnit.settle_world()
-    _bud_give: float = None
-    _bud_take: float = None
-    _bud_agenda_give: float = None
-    _bud_agenda_take: float = None
+    _fund_give: float = None
+    _fund_take: float = None
+    _fund_agenda_give: float = None
+    _fund_agenda_take: float = None
     _credor_pool: float = None
     _debtor_pool: float = None
 
@@ -240,15 +240,15 @@ class LobbyBox(LobbyCore):
     def del_lobbyship(self, char_id):
         self._lobbyships.pop(char_id)
 
-    def reset_bud_give_take(self):
-        self._bud_give = 0
-        self._bud_take = 0
-        self._bud_agenda_give = 0
-        self._bud_agenda_take = 0
+    def reset_fund_give_take(self):
+        self._fund_give = 0
+        self._fund_take = 0
+        self._fund_agenda_give = 0
+        self._fund_agenda_take = 0
         for lobbyship in self._lobbyships.values():
-            lobbyship.reset_bud_give_take()
+            lobbyship.reset_fund_give_take()
 
-    def _set_lobbyship_bud_give_take(self):
+    def _set_lobbyship_fund_give_take(self):
         lobbyships_credor_weight_sum = sum(
             lobbyship.credor_weight for lobbyship in self._lobbyships.values()
         )
@@ -257,13 +257,13 @@ class LobbyBox(LobbyCore):
         )
 
         for lobbyship in self._lobbyships.values():
-            lobbyship.set_bud_give_take(
+            lobbyship.set_fund_give_take(
                 lobbyships_credor_weight_sum=lobbyships_credor_weight_sum,
                 lobbyships_debtor_weight_sum=lobbyships_debtor_weight_sum,
-                lobby_bud_give=self._bud_give,
-                lobby_bud_take=self._bud_take,
-                lobby_bud_agenda_give=self._bud_agenda_give,
-                lobby_bud_agenda_take=self._bud_agenda_take,
+                lobby_fund_give=self._fund_give,
+                lobby_fund_take=self._fund_take,
+                lobby_fund_agenda_give=self._fund_agenda_give,
+                lobby_fund_agenda_take=self._fund_agenda_take,
             )
 
 
@@ -271,10 +271,10 @@ def lobbybox_shop(lobby_id: LobbyID, _road_delimiter: str = None) -> LobbyBox:
     return LobbyBox(
         lobby_id=lobby_id,
         _lobbyships={},
-        _bud_give=0,
-        _bud_take=0,
-        _bud_agenda_give=0,
-        _bud_agenda_take=0,
+        _fund_give=0,
+        _fund_take=0,
+        _fund_agenda_give=0,
+        _fund_agenda_take=0,
         _credor_pool=0,
         _debtor_pool=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),

@@ -349,11 +349,11 @@
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_bud_coin": {
+            "_fund_coin": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_bud_pool": {
+            "_fund_pool": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },

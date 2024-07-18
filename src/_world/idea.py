@@ -4,7 +4,7 @@ from src._instrument.python import (
     get_False_if_None,
     get_positive_int,
 )
-from src._road.finance import BudCoin, BudNum
+from src._road.finance import FundCoin, FundNum
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -251,10 +251,10 @@ class IdeaUnit:
     _problem_bool: bool = None
     # Calculated fields
     _level: int = None
-    _bud_ratio: float = None
-    _bud_coin: BudCoin = None
-    _bud_onset: BudNum = None
-    _bud_cease: BudNum = None
+    _fund_ratio: float = None
+    _fund_coin: FundCoin = None
+    _fund_onset: FundNum = None
+    _fund_cease: FundNum = None
     _task: bool = None
     _active: bool = None
     _ancestor_pledge_count: int = None
@@ -351,22 +351,22 @@ class IdeaUnit:
                 if lemma_fact.base == missing_fact:
                     self.set_factunit(lemma_fact)
 
-    def set_bud_attr(
+    def set_fund_attr(
         self,
-        x_bud_onset: BudNum,
-        x_bud_cease: BudNum,
-        total_bud_pool: BudNum,
+        x_fund_onset: FundNum,
+        x_fund_cease: FundNum,
+        total_fund_pool: FundNum,
     ):
-        self._bud_onset = x_bud_onset
-        self._bud_cease = x_bud_cease
-        self._bud_ratio = (self._bud_cease - self._bud_onset) / total_bud_pool
-        self.set_awardheirs_bud_give_bud_take()
+        self._fund_onset = x_fund_onset
+        self._fund_cease = x_fund_cease
+        self._fund_ratio = (self._fund_cease - self._fund_onset) / total_fund_pool
+        self.set_awardheirs_fund_give_fund_take()
 
-    def get_bud_share(self) -> float:
-        if self._bud_onset is None or self._bud_cease is None:
+    def get_fund_share(self) -> float:
+        if self._fund_onset is None or self._fund_cease is None:
             return 0
         else:
-            return self._bud_cease - self._bud_onset
+            return self._fund_cease - self._fund_onset
 
     def get_kids_in_range(self, begin: float, close: float) -> list:
         return [
@@ -462,8 +462,8 @@ class IdeaUnit:
         for bh in self._awardheirs.values():
             x_awardline = awardline_shop(
                 lobby_id=bh.lobby_id,
-                _bud_give=bh._bud_give,
-                _bud_take=bh._bud_take,
+                _fund_give=bh._fund_give,
+                _fund_take=bh._fund_take,
             )
             self._awardlines[x_awardline.lobby_id] = x_awardline
 
@@ -476,12 +476,12 @@ class IdeaUnit:
             if self._awardlines.get(bl.lobby_id) is None:
                 self._awardlines[bl.lobby_id] = awardline_shop(
                     lobby_id=bl.lobby_id,
-                    _bud_give=0,
-                    _bud_take=0,
+                    _fund_give=0,
+                    _fund_take=0,
                 )
 
-            self._awardlines[bl.lobby_id].add_bud_give_take(
-                bud_give=bl._bud_give, bud_take=bl._bud_take
+            self._awardlines[bl.lobby_id].add_fund_give_take(
+                fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
     def get_awardheirs_give_weight_sum(self) -> float:
@@ -490,12 +490,12 @@ class IdeaUnit:
     def get_awardheirs_take_weight_sum(self) -> float:
         return sum(awardlink.take_weight for awardlink in self._awardheirs.values())
 
-    def set_awardheirs_bud_give_bud_take(self):
+    def set_awardheirs_fund_give_fund_take(self):
         awardheirs_give_weight_sum = self.get_awardheirs_give_weight_sum()
         awardheirs_take_weight_sum = self.get_awardheirs_take_weight_sum()
         for awardheir_x in self._awardheirs.values():
-            awardheir_x.set_bud_give_take(
-                idea_bud_share=self.get_bud_share(),
+            awardheir_x.set_fund_give_take(
+                idea_fund_share=self.get_fund_share(),
                 awardheirs_give_weight_sum=awardheirs_give_weight_sum,
                 awardheirs_take_weight_sum=awardheirs_take_weight_sum,
             )
@@ -989,10 +989,10 @@ def ideaunit_shop(
     _problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
-    _bud_ratio: float = None,
-    _bud_coin: BudCoin = None,
-    _bud_onset: BudNum = None,
-    _bud_cease: BudNum = None,
+    _fund_ratio: float = None,
+    _fund_coin: FundCoin = None,
+    _fund_onset: FundNum = None,
+    _fund_cease: FundNum = None,
     _task: bool = None,
     _active: bool = None,
     _ancestor_pledge_count: int = None,
@@ -1038,10 +1038,10 @@ def ideaunit_shop(
         _world_real_id=_world_real_id,
         # Calculated fields
         _level=_level,
-        _bud_ratio=_bud_ratio,
-        _bud_coin=_bud_coin,
-        _bud_onset=_bud_onset,
-        _bud_cease=_bud_cease,
+        _fund_ratio=_fund_ratio,
+        _fund_coin=_fund_coin,
+        _fund_onset=_fund_onset,
+        _fund_cease=_fund_cease,
         _task=_task,
         _active=_active,
         _ancestor_pledge_count=_ancestor_pledge_count,

@@ -300,7 +300,7 @@ def get_listen_structures3_fig() -> plotly_Figure:
     return fig
 
 
-def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
+def fund_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     fig = display_ideatree(x_world, mode)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5, 3])
@@ -308,9 +308,9 @@ def bud_explanation0(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     green_text = "Green"
     blue_text = "blue"
     blue_text = "blue"
-    d_sue1_p1 = "How budget is distributed."
-    d_sue1_p2 = "Regular Budget: Green arrows, all bud_coins end up at CharUnits"
-    d_sue1_p3 = "Agenda Budget: Blue arrows, bud_coins from active tasks"
+    d_sue1_p1 = "How fund is distributed."
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at CharUnits"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
     doerunit_text = "      Awardlinks"
     add_world_rect(fig, 2, -0.3, 3, 0.3, doerunit_text)

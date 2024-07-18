@@ -121,23 +121,23 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     # ESTABLISH
     sue_text = "Sue"
     sue_real_dir = f"{env_dir()}/{root_label()}"
-    sue_bud_pool = 50000
-    sue_bud_coin = 5
+    sue_fund_pool = 50000
+    sue_fund_coin = 5
     sue_bit = 25
     sue_hubunit = hubunit_shop(
         env_dir(),
         root_label(),
         sue_text,
         None,
-        bud_pool=sue_bud_pool,
-        bud_coin=sue_bud_coin,
+        fund_pool=sue_fund_pool,
+        fund_coin=sue_fund_coin,
         bit=sue_bit,
     )
     sue_world = worldunit_shop(
         sue_text,
         root_label(),
-        _bud_pool=sue_bud_pool,
-        _bud_coin=sue_bud_coin,
+        _fund_pool=sue_fund_pool,
+        _fund_coin=sue_fund_coin,
         _bit=sue_bit,
     )
     sue_hubunit.initialize_action_file(sue_world)
@@ -165,8 +165,8 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     action_world = worldunit_get_from_json(action_file_text)
     assert action_world._real_id == root_label()
     assert action_world._owner_id == sue_text
-    assert action_world._bud_pool == sue_bud_pool
-    assert action_world._bud_coin == sue_bud_coin
+    assert action_world._fund_pool == sue_fund_pool
+    assert action_world._fund_coin == sue_fund_coin
     assert action_world._bit == sue_bit
 
 

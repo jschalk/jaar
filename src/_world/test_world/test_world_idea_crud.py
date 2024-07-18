@@ -264,11 +264,11 @@ def test_WorldUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     assert sue_world.get_level_count(level=3) == 4
 
 
-def test_WorldUnit_add_idea_CorrectlySets_world_real_id_AND_bud_coin():
+def test_WorldUnit_add_idea_CorrectlySets_world_real_id_AND_fund_coin():
     # ESTABLISH'
-    x_bud_coin = 500
+    x_fund_coin = 500
     sue_world = get_world_with_4_levels()
-    sue_world._bud_coin = x_bud_coin
+    sue_world._fund_coin = x_fund_coin
     world_real_id = "Texas"
     sue_world.set_real_id(world_real_id)
     assert sue_world._real_id == world_real_id
@@ -284,7 +284,7 @@ def test_WorldUnit_add_idea_CorrectlySets_world_real_id_AND_bud_coin():
     # THEN
     cookery_idea = sue_world.get_idea_obj(cookery_road)
     assert cookery_idea._world_real_id == world_real_id
-    assert cookery_idea._bud_coin == x_bud_coin
+    assert cookery_idea._fund_coin == x_fund_coin
 
 
 def test_WorldUnit_del_idea_obj_Level0CannotBeDeleted():
