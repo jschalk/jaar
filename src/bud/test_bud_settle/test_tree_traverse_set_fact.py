@@ -264,7 +264,7 @@ def test_BudUnit_get_idea_list_FactHeirCorrectlyDeletesFactUnit():
     assert swim_idea._factunits == {}
 
 
-def test_get_ranged_facts():
+def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     # ESTABLISH a single ranged fact
     sue_bud = budunit_shop("Sue")
     time_text = "time"
@@ -309,7 +309,7 @@ def test_get_ranged_facts():
     assert len(sue_bud._get_rangeroot_factunits()) == 2
 
 
-def test_get_roots_ranged_facts():
+def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     # ESTABLISH a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
     sue_bud = budunit_shop("Sue")
     time_text = "time"
@@ -345,7 +345,7 @@ def test_get_roots_ranged_facts():
     assert sue_bud._get_rangeroot_factunits()[0].base == time_road
 
 
-def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1():
+def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1():
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
@@ -405,7 +405,7 @@ def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1():
     assert age7th_lemma.nigh is None
 
 
-def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2():
+def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2():
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
@@ -464,7 +464,7 @@ def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2():
     assert age7th_lemma.nigh is None
 
 
-def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3():
+def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3():
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
@@ -554,7 +554,7 @@ def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3():
     assert a3e4th_lemma.nigh is None
 
 
-def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario4():
+def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario4():
     sue_bud = budunit_shop("Sue")
     arsub1 = "descending_subsecction1"
     arsub1_idea = ideaunit_shop(arsub1, _begin=0, _close=140)
@@ -595,7 +595,7 @@ def test_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario4():
     assert as2_lemma.nigh is None
 
 
-def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario4_1():
+def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario4_1():
     sue_bud = budunit_shop("Sue")
     sue_bud.set_time_hreg_ideas(c400_count=7)
     time_road = sue_bud.make_l1_road("time")
@@ -622,7 +622,7 @@ def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario4_1():
     assert int(lhu[sue_bud.make_road(timetech_road, "week")].nigh) == 1500
 
 
-def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario5():
+def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario5():
     sue_bud = budunit_shop("Sue")
     sue_bud.set_time_hreg_ideas(c400_count=7)
     time_road = sue_bud.make_l1_road("time")
@@ -651,7 +651,7 @@ def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario5():
     assert int(lemma_timetech_week.nigh) == 10080  # 1063953183 / 1440
 
 
-def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario6():
+def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario6():
     sue_bud = budunit_shop("Sue")
     sue_bud.set_time_hreg_ideas(c400_count=7)
     time_road = sue_bud.make_l1_road("time")
@@ -673,7 +673,7 @@ def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario6():
     assert int(lemma_day.nigh) == 1362  # 1063953183 / 1440
 
 
-def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario7():
+def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario7():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     sue_bud.set_time_hreg_ideas(c400_count=7)
@@ -714,7 +714,7 @@ def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario7():
     print(lhu[sue_bud.make_road(techweek_road, "Wednesday")])
 
 
-def test_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario8():
+def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario8():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     sue_bud.set_time_hreg_ideas(c400_count=7)

@@ -3,41 +3,6 @@ from datetime import datetime
 from random import randint
 
 
-def test_time_get_time_min_from_dt_ReturnsCorrectObj():
-    kia_bud = budunit_shop(_owner_id="Kia")
-    kia_bud.set_time_hreg_ideas(c400_count=6)
-    assert kia_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    assert kia_bud.get_time_min_from_dt(dt=datetime(1, 1, 1, 0, 0)) == 527040
-    assert kia_bud.get_time_min_from_dt(dt=datetime(1, 1, 2, 0, 0)) == 527040 + 1440
-    assert kia_bud.get_time_min_from_dt(dt=datetime(400, 1, 1, 0, 0)) == 210379680
-    assert kia_bud.get_time_min_from_dt(dt=datetime(800, 1, 1, 0, 0)) == 420759360
-    assert kia_bud.get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
-
-
-def test_get_time_400Yearsegment_from_min_ReturnsCorrectObj():
-    kia_bud = budunit_shop("Kia")
-    kia_bud.set_time_hreg_ideas(c400_count=6)
-    assert kia_bud.get_time_c400_from_min(min=0)[0] == 0
-    assert kia_bud.get_time_c400_from_min(min=210379680)[0] == 1
-    assert kia_bud.get_time_c400_from_min(min=210379681)[0] == 1
-    assert kia_bud.get_time_c400_from_min(min=841518720)[0] == 4
-
-
-def test_get_time_c400year_from_min_ReturnsCorrectObj():
-    kia_bud = budunit_shop("Kia")
-    kia_bud.set_time_hreg_ideas(c400_count=6)
-    assert kia_bud.get_time_c400yr_from_min(min=0)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=1)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=1)[2] == 1
-    assert kia_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=210379681)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=841518720)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=576000)[0] == 1
-    assert kia_bud.get_time_c400yr_from_min(min=4608000)[0] == 8
-    assert kia_bud.get_time_c400yr_from_min(min=157785120)[0] == 300
-
-
 def _check_time_conversion_with_random_inputs(x_bud: BudUnit):
     py_dt = datetime(
         year=randint(1, 2800),
@@ -50,9 +15,64 @@ def _check_time_conversion_with_random_inputs(x_bud: BudUnit):
     assert py_dt == x_bud.get_time_dt_from_min(x_bud.get_time_min_from_dt(py_dt))
 
 
-def test_get_time_dt_from_min_ReturnsCorrectObj():
+def test_BudUnit_get_time_min_from_dt_ReturnsCorrectObj():
+    # ESTABLISH
     kia_bud = budunit_shop(_owner_id="Kia")
+
+    # WHEN
     kia_bud.set_time_hreg_ideas(c400_count=6)
+
+    # THEN
+    assert kia_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    assert kia_bud.get_time_min_from_dt(dt=datetime(1, 1, 1, 0, 0)) == 527040
+    assert kia_bud.get_time_min_from_dt(dt=datetime(1, 1, 2, 0, 0)) == 527040 + 1440
+    assert kia_bud.get_time_min_from_dt(dt=datetime(400, 1, 1, 0, 0)) == 210379680
+    assert kia_bud.get_time_min_from_dt(dt=datetime(800, 1, 1, 0, 0)) == 420759360
+    assert kia_bud.get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
+
+
+def test_BudUnit_get_time_400Yearsegment_from_min_ReturnsCorrectObj():
+    # ESTABLISH
+    kia_bud = budunit_shop("Kia")
+
+    # WHEN
+    kia_bud.set_time_hreg_ideas(c400_count=6)
+
+    # THEN
+    assert kia_bud.get_time_c400_from_min(min=0)[0] == 0
+    assert kia_bud.get_time_c400_from_min(min=210379680)[0] == 1
+    assert kia_bud.get_time_c400_from_min(min=210379681)[0] == 1
+    assert kia_bud.get_time_c400_from_min(min=841518720)[0] == 4
+
+
+def test_BudUnit_get_time_c400year_from_min_ReturnsCorrectObj():
+    # ESTABLISH
+    kia_bud = budunit_shop("Kia")
+
+    # WHEN
+    kia_bud.set_time_hreg_ideas(c400_count=6)
+
+    # THEN
+    assert kia_bud.get_time_c400yr_from_min(min=0)[0] == 0
+    assert kia_bud.get_time_c400yr_from_min(min=1)[0] == 0
+    assert kia_bud.get_time_c400yr_from_min(min=1)[2] == 1
+    assert kia_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
+    assert kia_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
+    assert kia_bud.get_time_c400yr_from_min(min=210379681)[0] == 0
+    assert kia_bud.get_time_c400yr_from_min(min=841518720)[0] == 0
+    assert kia_bud.get_time_c400yr_from_min(min=576000)[0] == 1
+    assert kia_bud.get_time_c400yr_from_min(min=4608000)[0] == 8
+    assert kia_bud.get_time_c400yr_from_min(min=157785120)[0] == 300
+
+
+def test_BudUnit_get_time_dt_from_min_ReturnsCorrectObj():
+    # ESTABLISH
+    kia_bud = budunit_shop(_owner_id="Kia")
+
+    # WHEN
+    kia_bud.set_time_hreg_ideas(c400_count=6)
+
+    # THEN
     assert kia_bud.get_time_dt_from_min(min=5000000)
     # assert kia_bud.get_time_dt_from_min(
     #     min=kia_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
