@@ -30,7 +30,7 @@ def test_world_idearoot_doerunit_CorrectlySets_idea_doerheir():
     assert tim_world._idearoot._doerheir is None
 
     # WHEN
-    tim_world.calc_world_metrics()
+    tim_world.settle_world()
 
     # THEN
     x_doerheir = doerheir_shop()
@@ -56,7 +56,7 @@ def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     assert run_idea._doerheir is None
 
     # WHEN
-    bob_world.calc_world_metrics()
+    bob_world.settle_world()
 
     # THEN
     assert run_idea._doerheir != None
@@ -89,7 +89,7 @@ def test_world_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     assert run_idea._doerheir is None
 
     # WHEN
-    bob_world.calc_world_metrics()
+    bob_world.settle_world()
 
     # THEN
     assert run_idea._doerheir != None
@@ -135,7 +135,7 @@ def test_world_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     assert four_idea._doerheir is None
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     x_doerheir = doerheir_shop()

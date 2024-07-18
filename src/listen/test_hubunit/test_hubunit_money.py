@@ -31,7 +31,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
     sue_voice_world.add_idea(ideaunit_shop(dallas_text), texas_road)
     sue_voice_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
     sue_voice_world.edit_idea_attr(dallas_road, healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.calc_world_metrics()
+    sue_voice_world.settle_world()
     assert sue_voice_world._econs_justified is False
     sue_hubunit.save_voice_world(sue_voice_world)
 
@@ -57,7 +57,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     texas_road = sue_voice_world.make_l1_road(texas_text)
     sue_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     sue_voice_world.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
-    sue_voice_world.calc_world_metrics()
+    sue_voice_world.settle_world()
     assert sue_voice_world._econs_justified
     assert sue_voice_world._econs_buildable is False
     sue_hubunit.save_voice_world(sue_voice_world)
@@ -89,7 +89,7 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
     sue_voice_world.add_idea(dallas_idea, texas_road)
     sue_voice_world.add_idea(elpaso_idea, texas_road)
-    sue_voice_world.calc_world_metrics()
+    sue_voice_world.settle_world()
     # display_ideatree(sue_voice_world, mode="Econ").show()
     sue_hubunit.save_voice_world(sue_voice_world)
 
@@ -124,7 +124,7 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     elpaso_road = sue_voice_world.make_road(texas_road, elpaso_text)
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
     sue_voice_world.add_idea(elpaso_idea, texas_road)
-    # sue_voice_world.calc_world_metrics()
+    # sue_voice_world.settle_world()
     # display_ideatree(sue_voice_world, mode="Econ").show()
     sue_hubunit.save_voice_world(sue_voice_world)
     sue_dallas_hubunit = hubunit_shop(env_dir(), None, sue_text, dallas_road)
@@ -261,7 +261,7 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(env_dir_setup_c
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
     sue_voice_world.add_idea(dallas_idea, texas_road)
     sue_voice_world.add_idea(elpaso_idea, texas_road)
-    sue_voice_world.calc_world_metrics()
+    sue_voice_world.settle_world()
     # display_ideatree(sue_voice_world, mode="Econ").show()
     sue_hubunit.save_voice_world(sue_voice_world)
 

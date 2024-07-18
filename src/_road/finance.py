@@ -55,7 +55,7 @@ def validate_bud_pool(x_bud_pool: int = None) -> int:
     return max(get_1_if_None(x_bud_pool), default_bud_coin_if_none())
 
 
-def valid_fiscal_ratio(big_number: float, small_number: float) -> bool:
+def valid_finance_ratio(big_number: float, small_number: float) -> bool:
     """Checks that big_number is wholly divisible by small_number"""
     return (big_number % small_number) == 0
 
@@ -97,14 +97,6 @@ def default_money_magnitude() -> MoneyUnit:
 
 def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
     return default_money_magnitude() if money_magnitude is None else money_magnitude
-
-
-@dataclass
-class FiscalUnit:
-    _bud_pool: BudNum = None
-    _bud_coin: BudCoin = None
-    _bit: BitNum = None
-    _penny: PennyNum = None
 
 
 def _get_missing_scale_list(

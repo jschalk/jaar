@@ -70,7 +70,7 @@ def test_WorldUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkWorldImpor
     # assert bud_take_sum == 1
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbyLinkWorldCredAndDebt():
+def test_WorldUnit_settle_world_CorrectlySetsLobbyLinkWorldCredAndDebt():
     # ESTABLISH
     yao_world = worldunit_shop("Yao")
     sue_text = "Sue"
@@ -100,7 +100,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbyLinkWorldCredAndDebt():
     assert zia_zia_lobbyship._bud_take is None
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
 
     # THEN
     assert sue_sue_lobbyship._bud_give == 0.5 * default_bud_pool()
@@ -129,7 +129,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbyLinkWorldCredAndDebt():
     yao_world._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=13))
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
 
     # THEN
     xio_lobbybox = yao_world.get_lobbybox(xio_text)
@@ -166,7 +166,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsLobbyLinkWorldCredAndDebt():
     assert x_bud_take_sum == 1.0 * default_bud_pool()
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
+def test_WorldUnit_settle_world_CorrectlySetsCharUnitWorldImportance():
     # ESTABLISH
     yao_world = worldunit_shop("Yao")
     swim_text = "swim"
@@ -197,7 +197,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     assert zia_charunit._bud_take == 0
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
 
     # THEN
     assert sue_charunit._bud_give == 0.5 * default_bud_pool()
@@ -220,7 +220,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     xio_text = "Xio"
     yao_world.set_charunit(charunit_shop(xio_text))
     yao_world._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=10))
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
 
     # THEN
     xio_charunit = yao_world.get_char(xio_text)
@@ -258,7 +258,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharUnitWorldImportance():
     )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImportance():
+def test_WorldUnit_settle_world_CorrectlySetsPartLobbyedLWCharUnitWorldImportance():
     # ESTABLISH
     yao_world = worldunit_shop("Yao")
     swim_text = "swim"
@@ -283,7 +283,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImp
     yao_world.add_l1_idea(ideaunit_shop(hunt_text, _weight=3))
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
 
     # THEN
     sue_lobbybox = yao_world.get_lobbybox(sue_text)
@@ -325,7 +325,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsPartLobbyedLWCharUnitWorldImp
     )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
+def test_WorldUnit_settle_world_CorrectlySetsCharAttrs():
     # ESTABLISH
     yao_world = worldunit_shop("Yao")
     yao_world.add_l1_idea(ideaunit_shop("swim"))
@@ -346,7 +346,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
     assert zia_charunit._bud_take == 0
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
 
     # THEN
     assert (
@@ -359,12 +359,12 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
     )
 
 
-# def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_credor_respectWhenCharSumIsZero():
+# def test_WorldUnit_settle_world_DoesNotRaiseError_credor_respectWhenCharSumIsZero():
 #     # ESTABLISH
 #     yao_world = worldunit_shop("Yao")
 #     assert yao_world._credor_respect is None
 #     assert yao_world.is_charunits_credor_weight_sum_correct()
-#     assert yao_world.calc_world_metrics() is None
+#     assert yao_world.settle_world() is None
 
 #     # WHEN
 #     x_int = 13
@@ -372,15 +372,15 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
 
 #     # THEN
 #     assert yao_world.is_charunits_credor_weight_sum_correct()
-#     yao_world.calc_world_metrics()
+#     yao_world.settle_world()
 
 
-# def test_WorldUnit_calc_world_metrics_DoesNotRaiseError_debtor_respectWhenCharSumIsZero():
+# def test_WorldUnit_settle_world_DoesNotRaiseError_debtor_respectWhenCharSumIsZero():
 #     # ESTABLISH
 #     yao_world = worldunit_shop("Yao")
 #     assert yao_world._credor_respect is None
 #     assert yao_world.is_charunits_debtor_weight_sum_correct()
-#     assert yao_world.calc_world_metrics() is None
+#     assert yao_world.settle_world() is None
 
 #     # WHEN
 #     x_int = 13
@@ -388,7 +388,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySetsCharAttrs():
 
 #     # THEN
 #     assert yao_world.is_charunits_debtor_weight_sum_correct()
-#     yao_world.calc_world_metrics()
+#     yao_world.settle_world()
 
 
 def clear_all_charunits_lobbyboxs_bud_agenda_give_take(x_world: WorldUnit):
@@ -585,7 +585,7 @@ def test_WorldUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenWorldIsEmpty():
     assert yao_world_zia_char._bud_agenda_ratio_take != 0.5
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
 
     # THEN
     assert yao_world_sue_char._bud_agenda_give == 0
@@ -614,7 +614,7 @@ def test_examples_world_v001_has_chars():
 def test_examples_world_v001_HasLobbys():
     # ESTABLISH / WHEN
     x_world = examples_world_v001()
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert x_world._lobbyboxs != None
@@ -625,7 +625,7 @@ def test_examples_world_v001_HasLobbys():
     assert everyone_chars_len == 22
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
     idea_dict = x_world._idea_dict
 
     # THEN

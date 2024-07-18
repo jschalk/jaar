@@ -153,7 +153,7 @@ def test_WorldUnit_calc_charunit_metrics_SetsAttr_scenario2():
     assert len(ohio_lobbybox._lobbyships) == 1
 
 
-def test_WorldUnit_reset_charunit_bud_give_take_SetsAttr():
+def test_WorldUnit_calc_charunit_metrics_ResetCharUnitsAttrs():
     # ESTABLISH
     sue_text = "Sue"
     sue_worldunit = worldunit_shop(sue_text)

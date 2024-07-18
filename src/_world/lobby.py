@@ -203,7 +203,7 @@ def awardline_shop(lobby_id: LobbyID, _bud_give: float, _bud_take: float):
 class LobbyBox(LobbyCore):
     _lobbyships: dict[CharID, LobbyShip] = None  # set by WorldUnit.set_charunit()
     _road_delimiter: str = None  # calculated by WorldUnit
-    # calculated by WorldUnit.calc_world_metrics()
+    # calculated by WorldUnit.settle_world()
     _bud_give: float = None
     _bud_take: float = None
     _bud_agenda_give: float = None

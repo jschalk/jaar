@@ -66,7 +66,7 @@ def test_WorldUnit_clear_world_base_metrics_CorrectlySetsAttrs():
     assert not sue_world._healers_dict
 
 
-def test_WorldUnit_calc_world_metrics_ClearsDescendantAttributes():
+def test_WorldUnit_settle_world_ClearsDescendantAttributes():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     # test root status:
@@ -105,7 +105,7 @@ def test_WorldUnit_calc_world_metrics_ClearsDescendantAttributes():
     assert yrx._kids[week_text]._kids[mon_text]._all_char_debt == -2
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert yrx._descendant_pledge_count == 2
@@ -120,46 +120,7 @@ def test_WorldUnit_calc_world_metrics_ClearsDescendantAttributes():
     assert yrx._all_char_debt == True
 
 
-def test_WorldUnit_get_idea_obj_ReturnsIdea():
-    # ESTABLISH
-    x_world = example_worlds_get_world_with_4_levels()
-    nation_text = "nation-state"
-    nation_road = x_world.make_l1_road(nation_text)
-    brazil_text = "Brazil"
-    brazil_road = x_world.make_road(nation_road, brazil_text)
-
-    # WHEN
-    brazil_idea = x_world.get_idea_obj(road=brazil_road)
-
-    # THEN
-    assert brazil_idea != None
-    assert brazil_idea._label == brazil_text
-
-    # WHEN
-    week_text = "weekdays"
-    week_road = x_world.make_l1_road(week_text)
-    week_idea = x_world.get_idea_obj(road=week_road)
-
-    # THEN
-    assert week_idea != None
-    assert week_idea._label == week_text
-
-    # WHEN
-    root_idea = x_world.get_idea_obj(road=x_world._real_id)
-
-    # THEN
-    assert root_idea != None
-    assert root_idea._label == x_world._real_id
-
-    # WHEN / THEN
-    bobdylan_text = "bobdylan"
-    wrong_road = x_world.make_l1_road(bobdylan_text)
-    with pytest_raises(Exception) as excinfo:
-        x_world.get_idea_obj(road=wrong_road)
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{wrong_road}'"
-
-
-def test_WorldUnit_calc_world_metrics_RootOnlyCorrectlySetsDescendantAttributes():
+def test_WorldUnit_settle_world_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
     tim_world = worldunit_shop(_owner_id="Tim")
     assert tim_world._idearoot._descendant_pledge_count is None
@@ -167,7 +128,7 @@ def test_WorldUnit_calc_world_metrics_RootOnlyCorrectlySetsDescendantAttributes(
     assert tim_world._idearoot._all_char_debt is None
 
     # WHEN
-    tim_world.calc_world_metrics()
+    tim_world.settle_world()
 
     # THEN
     assert tim_world._idearoot._descendant_pledge_count == 0
@@ -175,7 +136,7 @@ def test_WorldUnit_calc_world_metrics_RootOnlyCorrectlySetsDescendantAttributes(
     assert tim_world._idearoot._all_char_debt == True
 
 
-def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_1():
+def test_WorldUnit_settle_world_NLevelCorrectlySetsDescendantAttributes_1():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     casa_text = "casa"
@@ -200,7 +161,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_1(
     assert x_idearoot._kids[week_text]._kids[mon_text]._all_char_debt is None
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert x_idearoot._descendant_pledge_count == 3
@@ -215,7 +176,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_1(
     assert x_idearoot._kids[week_text]._kids[mon_text]._all_char_debt == True
 
 
-def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2():
+def test_WorldUnit_settle_world_NLevelCorrectlySetsDescendantAttributes_2():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
     email_text = "email"
@@ -242,7 +203,7 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
     # print(x_world._kids[casa_text]._kids[email_text]._awardlink)
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
     # print(x_world._kids[casa_text]._kids[email_text])
     # print(x_world._kids[casa_text]._kids[email_text]._awardlink)
 
@@ -265,17 +226,17 @@ def test_WorldUnit_calc_world_metrics_NLevelCorrectlySetsDescendantAttributes_2(
     assert week_idea._kids[tue_text]._all_char_debt == True
 
 
-def test_WorldUnit_TreeTraverseSetsClearsAwardLineestorsCorrectly():
+def test_WorldUnit_settle_world_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
-    x_world.calc_world_metrics()
+    x_world.settle_world()
     # idea tree has no awardlinks
     assert x_world._idearoot._awardlines == {}
     x_world._idearoot._awardlines = {1: "testtest"}
     assert x_world._idearoot._awardlines != {}
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert not x_world._idearoot._awardlines
@@ -286,16 +247,16 @@ def test_WorldUnit_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     casa_idea = x_world._idearoot._kids[casa_text]
     casa_idea._awardlines = {1: "testtest"}
     assert casa_idea._awardlines != {}
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert not x_world._idearoot._kids[casa_text]._awardlines
 
 
-def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorrectly():
+def test_WorldUnit_settle_world_TreeTraverseSetsAwardLineestorFromRootCorrectly():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
-    x_world.calc_world_metrics()
+    x_world.settle_world()
     # idea tree has no awardlinks
     assert x_world._idearoot._awardlines == {}
     sue_text = "Sue"
@@ -308,7 +269,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     assert x_world._idearoot._awardheirs.get(sue_text) is None
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert x_world._idearoot._awardheirs.get(sue_text) != None
@@ -352,10 +313,10 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromRootCorr
     assert x_world._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
 
 
-def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootCorrectly():
+def test_WorldUnit_settle_world_TreeTraverseSetsAwardLineestorFromNonRootCorrectly():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
-    x_world.calc_world_metrics()
+    x_world.settle_world()
     # idea tree has no awardlinks
     sue_text = "Sue"
     assert x_world._idearoot._awardlines == {}
@@ -367,7 +328,7 @@ def test_WorldUnit_calc_world_metrics_TreeTraverseSetsAwardLineestorFromNonRootC
 
     # WHEN
     # idea tree has awardlinks
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert x_world._idearoot._awardlines != {}
@@ -450,97 +411,63 @@ def test_WorldUnit_get_heir_road_list_returnsCorrectList():
     assert heir_nodes_road_list[4] == x_world.make_road(weekdays, sun_text)
 
 
-def test_WorldUnit_idea_exists_ReturnsCorrectBool():
+def test_WorldUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
     # ESTABLISH
-    sue_world = example_worlds_get_world_with_4_levels()
-    sue_world.calc_world_metrics()
-    cat_road = sue_world.make_l1_road("cat have dinner")
-    week_road = sue_world.make_l1_road("weekdays")
-    casa_road = sue_world.make_l1_road("casa")
-    nation_road = sue_world.make_l1_road("nation-state")
-    sun_road = sue_world.make_road(week_road, "Sunday")
-    mon_road = sue_world.make_road(week_road, "Monday")
-    tue_road = sue_world.make_road(week_road, "Tuesday")
-    wed_road = sue_world.make_road(week_road, "Wednesday")
-    thu_road = sue_world.make_road(week_road, "Thursday")
-    fri_road = sue_world.make_road(week_road, "Friday")
-    sat_road = sue_world.make_road(week_road, "Saturday")
-    france_road = sue_world.make_road(nation_road, "France")
-    brazil_road = sue_world.make_road(nation_road, "Brazil")
-    usa_road = sue_world.make_road(nation_road, "USA")
-    texas_road = sue_world.make_road(usa_road, "Texas")
-    oregon_road = sue_world.make_road(usa_road, "Oregon")
-    # do not exist in world
-    sports_road = sue_world.make_l1_road("sports")
-    swim_road = sue_world.make_road(sports_road, "swimming")
-    idaho_road = sue_world.make_road(usa_road, "Idaho")
-    japan_road = sue_world.make_road(nation_road, "Japan")
+    sue_world = worldunit_shop("Sue")
+    texas_text = "Texas"
+    sue_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    casa_text = "casa"
+    sue_world.add_l1_idea(ideaunit_shop(casa_text))
 
-    # WHEN/THEN
-    assert sue_world.idea_exists("") is False
-    assert sue_world.idea_exists(None) is False
-    assert sue_world.idea_exists(root_label())
-    assert sue_world.idea_exists(cat_road)
-    assert sue_world.idea_exists(week_road)
-    assert sue_world.idea_exists(casa_road)
-    assert sue_world.idea_exists(nation_road)
-    assert sue_world.idea_exists(sun_road)
-    assert sue_world.idea_exists(mon_road)
-    assert sue_world.idea_exists(tue_road)
-    assert sue_world.idea_exists(wed_road)
-    assert sue_world.idea_exists(thu_road)
-    assert sue_world.idea_exists(fri_road)
-    assert sue_world.idea_exists(sat_road)
-    assert sue_world.idea_exists(usa_road)
-    assert sue_world.idea_exists(france_road)
-    assert sue_world.idea_exists(brazil_road)
-    assert sue_world.idea_exists(texas_road)
-    assert sue_world.idea_exists(oregon_road)
-    assert sue_world.idea_exists("B") is False
-    assert sue_world.idea_exists(sports_road) is False
-    assert sue_world.idea_exists(swim_road) is False
-    assert sue_world.idea_exists(idaho_road) is False
-    assert sue_world.idea_exists(japan_road) is False
+    # WHEN
+    problems_dict = sue_world.get_idea_dict(problem=True)
+
+    # THEN
+    assert sue_world._econs_justified
+    texas_road = sue_world.make_l1_road(texas_text)
+    texas_idea = sue_world.get_idea_obj(texas_road)
+    assert len(problems_dict) == 1
+    assert problems_dict == {texas_road: texas_idea}
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenWorldUnitEmpty():
+def test_WorldUnit_settle_world_CorrectlySets_econs_justified_WhenWorldUnitEmpty():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
     assert sue_world._econs_justified is False
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._econs_justified
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenThereAreNotAny():
+def test_WorldUnit_settle_world_CorrectlySets_econs_justified_WhenThereAreNotAny():
     # ESTABLISH
     sue_world = example_worlds_get_world_with_4_levels()
     assert sue_world._econs_justified is False
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._econs_justified
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_lobby_id_exists_IsTrue():
+def test_WorldUnit_settle_world_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_lobby_id_exists_IsTrue():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
     sue_world.add_l1_idea(ideaunit_shop("Texas", _healerhold=healerhold_shop({"Yao"})))
     assert sue_world._econs_justified is False
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._econs_justified is False
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSingleProblemAndEcon():
+def test_WorldUnit_settle_world_CorrectlySets_econs_justified_WhenSingleProblemAndEcon():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
@@ -552,13 +479,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenSinglePr
     assert sue_world._econs_justified is False
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._econs_justified
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLevelAboveProblem():
+def test_WorldUnit_settle_world_CorrectlySets_econs_justified_WhenEconIsLevelAboveProblem():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_text = "Yao"
@@ -573,13 +500,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLe
     assert sue_world._econs_justified is False
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._econs_justified
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLevelBelowProblem():
+def test_WorldUnit_settle_world_CorrectlySets_econs_justified_WhenEconIsLevelBelowProblem():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
     texas_text = "Texas"
@@ -590,13 +517,13 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenEconIsLe
     assert sue_world._econs_justified is False
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._econs_justified is False
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyRaisesErrorWhenEconIsLevelBelowProblem():
+def test_WorldUnit_settle_world_CorrectlyRaisesErrorWhenEconIsLevelBelowProblem():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
     texas_text = "Texas"
@@ -610,14 +537,14 @@ def test_WorldUnit_calc_world_metrics_CorrectlyRaisesErrorWhenEconIsLevelBelowPr
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        sue_world.calc_world_metrics(econ_exceptions=True)
+        sue_world.settle_world(econ_exceptions=True)
     assert (
         str(excinfo.value)
         == f"IdeaUnit '{elpaso_idea.get_road()}' cannot sponsor ancestor econs."
     )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenTwoEconsAreOneTheEqualLine():
+def test_WorldUnit_settle_world_CorrectlySets_econs_justified_WhenTwoEconsAreOneTheEqualLine():
     # ESTABLISH
     sue_world = worldunit_shop("Sue")
     yao_healerhold = healerhold_shop({"Yao"})
@@ -634,7 +561,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlySets_econs_justified_WhenTwoEcons
     assert sue_world._econs_justified is False
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._econs_justified is False
@@ -654,7 +581,7 @@ def test_WorldUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
         "El Paso", _healerhold=yao_healerhold, _problem_bool=True
     )
     sue_world.add_idea(elpaso_idea, texas_road)
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
     assert sue_world._econs_justified is False
 
     # WHEN / THEN
@@ -664,22 +591,3 @@ def test_WorldUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
         str(excinfo.value)
         == f"Cannot return problem set because _econs_justified={sue_world._econs_justified}."
     )
-
-
-def test_WorldUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
-    # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    texas_text = "Texas"
-    sue_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    casa_text = "casa"
-    sue_world.add_l1_idea(ideaunit_shop(casa_text))
-
-    # WHEN
-    problems_dict = sue_world.get_idea_dict(problem=True)
-
-    # THEN
-    assert sue_world._econs_justified
-    texas_road = sue_world.make_l1_road(texas_text)
-    texas_idea = sue_world.get_idea_obj(texas_road)
-    assert len(problems_dict) == 1
-    assert problems_dict == {texas_road: texas_idea}

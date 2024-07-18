@@ -20,7 +20,7 @@ def create_example_real1() -> RealUnit:
     yao_voice_world.set_debtor_resepect(1000)
 
     yao_voice_world.add_charunit(yao_text, 34, 600)
-    yao_voice_world.calc_world_metrics()
+    yao_voice_world.settle_world()
     texas_text = "Texas"
     texas_road = yao_voice_world.make_l1_road(texas_text)
     yao_voice_world.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
@@ -35,7 +35,7 @@ def create_example_real1() -> RealUnit:
 
     yao_voice_world.add_idea(dallas_idea, texas_road)
     yao_voice_world.add_idea(elpaso_idea, texas_road)
-    # display_world(yao_voice_world.calc_world_metrics(), mode="Econ").show()
+    # display_world(yao_voice_world.settle_world(), mode="Econ").show()
     x_hubunit = hubunit_shop(
         reals_dir=yao_hubunit.reals_dir,
         real_id=yao_hubunit.real_id,
@@ -105,7 +105,7 @@ def create_example_real2() -> RealUnit:
     wei_voice_world.add_idea(elpaso_idea, texas_road)
     zia_voice_world.add_idea(dallas_idea, texas_road)
     zia_voice_world.add_idea(elpaso_idea, texas_road)
-    # display_world(yao_voice_world.calc_world_metrics(), mode="Econ").show()
+    # display_world(yao_voice_world.settle_world(), mode="Econ").show()
     yao_hubunit.save_voice_world(yao_voice_world)
     wei_hubunit.save_voice_world(wei_voice_world)
     zia_hubunit.save_voice_world(zia_voice_world)
@@ -149,7 +149,7 @@ def create_example_real3() -> RealUnit:
     yao_voice_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
     yao_voice_world.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
     yao_voice_world.add_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
-    # yao_voice_world.calc_world_metrics()
+    # yao_voice_world.settle_world()
     # display_ideatree(yao_voice_world, mode="Econ").show()
 
     wei_voice_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
@@ -197,7 +197,7 @@ def create_example_real4() -> RealUnit:
     yao_voice_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
     yao_voice_world.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
     yao_voice_world.add_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
-    # yao_voice_world.calc_world_metrics()
+    # yao_voice_world.settle_world()
     # display_ideatree(yao_voice_world, mode="Econ").show()
 
     wei_voice_world.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
@@ -244,7 +244,7 @@ def create_example_real4() -> RealUnit:
     wei_voice_world.add_idea(elpaso_idea, texas_road)
     zia_voice_world.add_idea(dallas_idea, texas_road)
     zia_voice_world.add_idea(elpaso_idea, texas_road)
-    # display_world(yao_voice_world.calc_world_metrics(), mode="Econ").show()
+    # display_world(yao_voice_world.settle_world(), mode="Econ").show()
     yao_hubunit.save_voice_world(yao_voice_world)
     wei_hubunit.save_voice_world(wei_voice_world)
     zia_hubunit.save_voice_world(zia_voice_world)

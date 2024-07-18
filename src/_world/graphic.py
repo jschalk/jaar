@@ -117,7 +117,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_world: WorldUnit):
 def display_ideatree(x_world: WorldUnit, mode: str = None) -> plotly_Figure:
     """Mode can be None, Task, Econ"""
 
-    x_world.calc_world_metrics()
+    x_world.settle_world()
     x_fig = plotly_Figure()
     source_y = 0
     trace_list = []

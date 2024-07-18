@@ -15,8 +15,7 @@ from src._road.finance import (
     trim_bud_coin_excess,
     trim_bit_excess,
     trim_penny_excess,
-    FiscalUnit,
-    valid_fiscal_ratio,
+    valid_finance_ratio,
 )
 from inspect import getdoc as inspect_getdoc
 
@@ -154,17 +153,6 @@ def test_trim_bud_coin_excess_ReturnsCorrectedFloat():
     assert trim_bud_coin_excess(num=0.56, bud_coin=0.133) == 0.532
 
 
-def test_FiscalUnit_Exists():
-    # ESTABLISH / WHEN
-    x_fiscal = FiscalUnit()
-
-    # THEN
-    assert x_fiscal._bud_pool is None
-    assert x_fiscal._bud_coin is None
-    assert x_fiscal._bit is None
-    assert x_fiscal._penny is None
-
-
 def test_default_respect_num_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert default_respect_num() == default_bud_pool()
@@ -184,11 +172,11 @@ def test_validate_respect_num_ReturnsObj():
     assert validate_respect_num(25) == 25
 
 
-def test_valid_fiscal_ratio_ReturnsObj():
+def test_valid_finance_ratio_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert valid_fiscal_ratio(10, 1)
-    assert valid_fiscal_ratio(10, 3) is False
-    assert valid_fiscal_ratio(10.1, 1) is False
-    assert valid_fiscal_ratio(10.1, 0.1) is False
+    assert valid_finance_ratio(10, 1)
+    assert valid_finance_ratio(10, 3) is False
+    assert valid_finance_ratio(10.1, 1) is False
+    assert valid_finance_ratio(10.1, 0.1) is False
     inspect_str = """Checks that big_number is wholly divisible by small_number"""
-    assert inspect_getdoc(valid_fiscal_ratio) == inspect_str
+    assert inspect_getdoc(valid_finance_ratio) == inspect_str

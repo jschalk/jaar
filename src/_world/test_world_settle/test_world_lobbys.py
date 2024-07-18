@@ -9,7 +9,7 @@ from src._world.world import worldunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldImportance():
+def test_WorldUnit_settle_world_CorrectlyCalculates1LevelWorldLobbyWorldImportance():
     # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -30,7 +30,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldIm
     assert len(x_world.get_lobby_ids_dict()) == 3
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     yao_lobbybox = x_world.get_lobbybox(yao_text)
@@ -57,7 +57,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldIm
     assert len(x_world.get_lobby_ids_dict()) == 4
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     yao_lobbybox = x_world.get_lobbybox(yao_text)
@@ -80,7 +80,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates1LevelWorldLobbyWorldIm
     assert round(debt_sum1) == 1 * default_bud_pool()
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldImportance():
+def test_WorldUnit_settle_world_CorrectlyCalculates3levelWorldLobbyWorldImportance():
     # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -104,7 +104,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldIm
     assert len(x_world.get_lobby_ids_dict()) == 3
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     yao_lobbybox = x_world.get_lobbybox(yao_text)
@@ -126,7 +126,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculates3levelWorldLobbyWorldIm
     )
 
 
-def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesLobbyWorldImportanceLWwithLobbyEmptyAncestors():
+def test_WorldUnit_settle_world_CorrectlyCalculatesLobbyWorldImportanceLWwithLobbyEmptyAncestors():
     # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -152,7 +152,7 @@ def test_WorldUnit_calc_world_metrics_CorrectlyCalculatesLobbyWorldImportanceLWw
     x_world.add_l1_idea(ideaunit_shop("hunt", _weight=3))
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     x_idearoot = x_world.get_idea_obj(x_world._real_id)

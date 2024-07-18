@@ -44,7 +44,7 @@
 #     # a_world = get_7nodeJRoot_world()
 #     # a_world = world_v001()
 #     a_world = get_world_with_4_levels()
-#     a_world.calc_world_metrics()
+#     a_world.settle_world()
 #     print(f"World {a_world._real_id}: Nodes ({len(a_world._idea_dict)})")
 
 #     # THEN
@@ -57,7 +57,7 @@
 #     # b_world = get_7nodeJRoot_world()
 #     b_world = get_world_laundry_example1()
 #     # b_world = world_v001()
-#     b_world.calc_world_metrics()
+#     b_world.settle_world()
 #     print(f"World {b_world._real_id}: Nodes ({len(b_world._idea_dict)})")
 
 #     # THEN

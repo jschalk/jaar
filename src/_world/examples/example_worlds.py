@@ -294,7 +294,7 @@ def get_world_irrational_example() -> WorldUnit:
     # Step 2: if chicken._active is False, egg._active is set to True
     # Step 3: if egg._active == True, chicken._active is set to True
     # Step 4: back to step 0.
-    # after hatter_world.calc_world_metrics these should be true:
+    # after hatter_world.settle_world these should be true:
     # 1. hatter_world._irrational == True
     # 2. hatter_world._tree_traverse_count = hatter_world._max_tree_traverse
 
@@ -440,7 +440,7 @@ def get_world_with_tuesday_cleaning_task() -> WorldUnit:
     # )
     # laundry_premise = laundry_reasonunit.get_premise(jajatime_road)
     # # print(f"{laundry_reasonunit.base=} {laundry_premise=}")
-    # bob_world.calc_world_metrics()
+    # bob_world.settle_world()
     # for x_ideaunit in bob_world._idea_dict.values():
     #     if x_ideaunit._label in [laundry_text]:
     # print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")

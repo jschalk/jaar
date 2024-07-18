@@ -7,7 +7,7 @@ from src._instrument.python import (
     get_empty_dict_if_none,
 )
 from src._road.finance import (
-    valid_fiscal_ratio,
+    valid_finance_ratio,
     default_bit_if_none,
     default_penny_if_none,
     default_bud_coin_if_none,
@@ -131,7 +131,7 @@ class WorldUnit:
     _credor_respect: int = None
     _debtor_respect: int = None
     _originunit: OriginUnit = None  # In job worlds this shows source
-    # calc_world_metrics Calculated field begin
+    # settle_world Calculated field begin
     _idea_dict: dict[RoadUnit, IdeaUnit] = None
     _econ_dict: dict[RoadUnit, IdeaUnit] = None
     _healers_dict: dict[HealerID, dict[RoadUnit, IdeaUnit]] = None
@@ -141,7 +141,7 @@ class WorldUnit:
     _econs_buildable: bool = None
     _sum_healerhold_share: bool = None
     _lobbyboxs: dict[LobbyID, LobbyBox] = None
-    # calc_world_metrics Calculated field end
+    # settle_world Calculated field end
 
     def del_last_gift_id(self):
         self._last_gift_id = None
@@ -165,14 +165,14 @@ class WorldUnit:
         self.set_bud_pool(x_char_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
-        if valid_fiscal_ratio(new_credor_respect, self._bit) is False:
+        if valid_finance_ratio(new_credor_respect, self._bit) is False:
             raise _bit_RatioException(
                 f"World '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
             )
         self._credor_respect = new_credor_respect
 
     def set_debtor_resepect(self, new_debtor_respect: int):
-        if valid_fiscal_ratio(new_debtor_respect, self._bit) is False:
+        if valid_finance_ratio(new_debtor_respect, self._bit) is False:
             raise _bit_RatioException(
                 f"World '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
             )
@@ -208,7 +208,7 @@ class WorldUnit:
         return self.make_road(self._real_id, l1_node)
 
     def set_road_delimiter(self, new_road_delimiter: str):
-        self.calc_world_metrics()
+        self.settle_world()
         if self._road_delimiter != new_road_delimiter:
             for x_idea_road in self._idea_dict.keys():
                 if is_string_in_road(new_road_delimiter, x_idea_road):
@@ -232,12 +232,12 @@ class WorldUnit:
         old_real_id = copy_deepcopy(self._real_id)
         self._real_id = real_id
 
-        self.calc_world_metrics()
+        self.settle_world()
         for idea_obj in self._idea_dict.values():
             idea_obj._world_real_id = self._real_id
 
         self.edit_idea_label(old_road=old_real_id, new_label=self._real_id)
-        self.calc_world_metrics()
+        self.settle_world()
 
     def set_max_tree_traverse(self, x_int: int):
         if x_int < 2 or not float(x_int).is_integer():
@@ -700,7 +700,7 @@ class WorldUnit:
                 lemmas_dict, missing_facts
             )
 
-        self.calc_world_metrics()
+        self.settle_world()
 
     def get_fact(self, base: RoadUnit) -> FactUnit:
         return self._idearoot._factunits.get(base)
@@ -709,7 +709,7 @@ class WorldUnit:
         self._idearoot.del_factunit(base)
 
     def get_idea_dict(self, problem: bool = None) -> dict[RoadUnit, IdeaUnit]:
-        self.calc_world_metrics()
+        self.settle_world()
         if not problem:
             return self._idea_dict
         if self._econs_justified is False:
@@ -724,7 +724,7 @@ class WorldUnit:
         }
 
     def get_tree_metrics(self) -> TreeMetrics:
-        self.calc_world_metrics()
+        self.settle_world()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_node(
             level=self._idearoot._level,
@@ -899,7 +899,7 @@ class WorldUnit:
         return x_idea
 
     def _create_missing_ideas(self, road):
-        self.calc_world_metrics()
+        self.settle_world()
         posted_idea = self.get_idea_obj(road)
 
         for reason_x in posted_idea._reasonunits.values():
@@ -927,7 +927,7 @@ class WorldUnit:
                 self._shift_idea_kids(x_road=road)
             parent_idea = self.get_idea_obj(parent_road)
             parent_idea.del_kid(get_terminus_node(road, self._road_delimiter))
-        self.calc_world_metrics()
+        self.settle_world()
 
     def _shift_idea_kids(self, x_road: RoadUnit):
         parent_road = get_parent_road(x_road)
@@ -1211,12 +1211,12 @@ class WorldUnit:
 
         # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
         # if awardlink_del != None or awardlink != None:
-        #     self.calc_world_metrics()
+        #     self.settle_world()
 
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
     ) -> dict[RoadUnit, IdeaUnit]:
-        self.calc_world_metrics()
+        self.settle_world()
         all_ideas = self._idea_dict.values()
         return {
             x_idea.get_road(): x_idea
@@ -1225,7 +1225,7 @@ class WorldUnit:
         }
 
     def get_all_pledges(self) -> dict[RoadUnit, IdeaUnit]:
-        self.calc_world_metrics()
+        self.settle_world()
         all_ideas = self._idea_dict.values()
         return {x_idea.get_road(): x_idea for x_idea in all_ideas if x_idea.pledge}
 
@@ -1562,7 +1562,7 @@ class WorldUnit:
         self._econ_dict = {}
         self._healers_dict = {}
 
-    def calc_world_metrics(self, econ_exceptions: bool = False):
+    def settle_world(self, econ_exceptions: bool = False):
         self._calc_charunit_metrics()
         self._set_tree_traverse_starting_point()
         max_count = self._max_tree_traverse
@@ -1801,7 +1801,7 @@ class WorldUnit:
                     numor=yb.mn,
                 )
 
-        self.calc_world_metrics()
+        self.settle_world()
 
     def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
         idea_kid.pledge = True
@@ -1813,7 +1813,7 @@ class WorldUnit:
         )
 
     def get_idea_list_without_idearoot(self) -> list[IdeaUnit]:
-        self.calc_world_metrics()
+        self.settle_world()
         x_list = list(self._idea_dict.values())
         x_list.pop(0)
         return x_list

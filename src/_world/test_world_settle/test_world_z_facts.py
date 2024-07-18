@@ -259,7 +259,7 @@ def test_WorldUnit_get_idea_list_FactHeirCorrectlyDeletesFactUnit():
 
     earth_curb = factunit_shop(base=earth_road, pick=earth_road, open=3.0, nigh=4.0)
     swim_idea.set_factunit(factunit=earth_curb)
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
     assert swim_idea._factheirs == first_earthdict
     assert swim_idea._factunits == {}
 
@@ -808,7 +808,7 @@ def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
     ced_min_label = "CE0_minutes"
     ced_road = x_world.make_l1_road(ced_min_label)
     x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert mail_idea.pledge == True

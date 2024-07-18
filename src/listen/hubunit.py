@@ -504,7 +504,7 @@ class HubUnit:
         # get copy of world without any metrics
         perspective_world = worldunit_get_from_json(speaker.get_json())
         perspective_world.set_owner_id(self.owner_id)
-        perspective_world.calc_world_metrics()
+        perspective_world.settle_world()
         return perspective_world
 
     def get_dw_perspective_world(self, speaker_id: OwnerID) -> WorldUnit:
@@ -529,7 +529,7 @@ class HubUnit:
 
     def get_econ_roads(self):
         x_voice_world = self.get_voice_world()
-        x_voice_world.calc_world_metrics()
+        x_voice_world.settle_world()
         if x_voice_world._econs_justified is False:
             x_str = f"Cannot get_econ_roads from '{self.owner_id}' voice world because 'WorldUnit._econs_justified' is False."
             raise get_econ_roadsException(x_str)

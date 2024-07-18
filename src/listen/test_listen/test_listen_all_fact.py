@@ -16,7 +16,7 @@ def test_get_debtors_roll_ReturnsObj():
     zia_credor_weight = 47
     zia_debtor_weight = 41
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.calc_world_metrics()
+    yao_duty.settle_world()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
@@ -38,7 +38,7 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
     wei_debtor_weight = 0
     yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.add_charunit(wei_text, wei_credor_weight, wei_debtor_weight)
-    yao_duty.calc_world_metrics()
+    yao_duty.settle_world()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)

@@ -105,7 +105,7 @@ def test_get_time_():
     kia_world = worldunit_shop(_owner_id="Kia")
     kia_world.set_time_hreg_ideas(c400_count=6)
 
-    kia_world.calc_world_metrics()
+    kia_world.settle_world()
     # for idea_x in idea_list:
     #     if idea_x._label in ["min2010", "years"]:
     #         print(

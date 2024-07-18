@@ -276,7 +276,7 @@ def get_example_yao_voice_with_3_healers():
 #     yao_voice0.add_idea(ideaunit_shop(get_on_land_text()), get_location_road())
 #     yao_voice0.add_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
 #     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
-#     yao_voice0.calc_world_metrics()
+#     yao_voice0.settle_world()
 #     assert yao_voice0._econ_dict.get(get_iowa_road())
 #     assert yao_voice0._econ_dict.get(get_ohio_road())
 #     assert yao_voice0._econ_dict.get(get_utah_road())
@@ -311,7 +311,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_iowa_hubunit.action_file_exists()
 
 #     yao_action = yao_iowa_hubunit.get_action_world()
-#     yao_action.calc_world_metrics()
+#     yao_action.settle_world()
 #     assert yao_action._chars.keys() == yao_voice0._chars.keys()
 #     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
 #     yao_action_chars = yao_action.get_dict().get("_chars")
@@ -355,7 +355,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_voice0._econ_dict.get(get_iowa_road())
     assert yao_voice0._econ_dict.get(get_ohio_road())
     assert yao_voice0._econ_dict.get(get_utah_road())
-    yao_voice0.calc_world_metrics()
+    yao_voice0.settle_world()
     assert len(yao_voice0._econ_dict) == 3
     # print(f"{yao_voice0._idea_dict.keys()=}")
 
@@ -388,7 +388,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_iowa_hubunit.action_file_exists()
 
     yao_action = yao_iowa_hubunit.get_action_world()
-    yao_action.calc_world_metrics()
+    yao_action.settle_world()
     assert yao_action._chars.keys() == yao_voice0._chars.keys()
     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
     yao_action_chars = yao_action.get_dict().get("_chars")

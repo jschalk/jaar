@@ -50,7 +50,7 @@ def test_create_empty_world_ReturnsCorrectObj():
     assert yao_empty_job._credor_respect == validate_respect_num()
     assert yao_empty_job._debtor_respect != yao_voice._debtor_respect
     assert yao_empty_job._debtor_respect == validate_respect_num()
-    yao_empty_job.calc_world_metrics()
+    yao_empty_job.settle_world()
     assert yao_empty_job._chars == {}
 
 
@@ -91,7 +91,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._monetary_desc == yao_duty._monetary_desc
     assert yao_basis_job._credor_respect == yao_duty._credor_respect
     assert yao_basis_job._debtor_respect == yao_duty._debtor_respect
-    yao_basis_job.calc_world_metrics()
+    yao_basis_job.settle_world()
     assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
     assert len(yao_basis_job._idea_dict) == 1
     job_zia_charunit = yao_basis_job.get_char(zia_text)
@@ -131,7 +131,7 @@ def test_get_default_action_world_ReturnsCorrectObj():
     default_action_world = get_default_action_world(sue_worldunit)
 
     # THEN
-    default_action_world.calc_world_metrics()
+    default_action_world.settle_world()
     assert default_action_world._owner_id == sue_worldunit._owner_id
     assert default_action_world._owner_id == sue_text
     assert default_action_world._real_id == sue_worldunit._real_id

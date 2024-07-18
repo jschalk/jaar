@@ -49,7 +49,7 @@ class CharUnit(CharCore):
     _debtor_pool: RespectNum = None
     _irrational_debtor_weight: int = None  # set by listening process
     _inallocable_debtor_weight: int = None  # set by listening process
-    # set by World.calc_world_metrics()
+    # set by World.settle_world()
     _bud_give: float = None
     _bud_take: float = None
     _bud_agenda_give: float = None

@@ -10,7 +10,7 @@ from src._world.examples.example_worlds import (
 def test_WorldUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # WHEN
     relevant_roads = x_world._get_relevant_roads({})
@@ -24,7 +24,7 @@ def test_WorldUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
 def test_WorldUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # WHEN
     root_dict = {x_world._real_id: -1}
@@ -39,7 +39,7 @@ def test_WorldUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
 def test_WorldUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     # ESTABLISH
     x_world = example_worlds_get_world_with_4_levels()
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # WHEN
     week_text = "weekdays"
@@ -79,7 +79,7 @@ def test_WorldUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     sue_world.edit_idea_attr(road=floor_road, reason=floor_reason)
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
     floor_dict = {floor_road}
     relevant_roads = sue_world._get_relevant_roads(floor_dict)
 
@@ -122,7 +122,7 @@ def test_WorldUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     dirty_road = x_world.make_road(status_road, dirty_text)
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
     floor_dict = {floor_road}
     relevant_roads = x_world._get_relevant_roads(floor_dict)
 
@@ -163,7 +163,7 @@ def test_WorldUnit_get_relevant_roads_numeric_road_ReturnSimple():
     print(f"{casa_idea._label=} {casa_idea._begin=} {casa_idea._close=}")
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
     roads_dict = {casa_road}
     relevant_roads = yao_world._get_relevant_roads(roads_dict)
 
@@ -199,7 +199,7 @@ def test_WorldUnit_get_relevant_roads_range_source_road_ReturnSimple():
     yao_world.add_idea(min_days_idea, parent_road=min_range_road)
 
     # WHEN
-    yao_world.calc_world_metrics()
+    yao_world.settle_world()
     print(f"{yao_world._idea_dict.keys()}")
     roads_dict = {min_days_road}
     relevant_roads = yao_world._get_relevant_roads(roads_dict)

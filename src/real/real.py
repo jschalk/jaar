@@ -125,7 +125,7 @@ class RealUnit:
 
     def _set_all_healer_dutys(self, owner_id: OwnerID):
         x_voice = self.get_owner_voice_from_file(owner_id)
-        x_voice.calc_world_metrics()
+        x_voice.settle_world()
         for healer_id, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.reals_dir,
@@ -153,7 +153,7 @@ class RealUnit:
     def generate_action_world(self, owner_id: OwnerID) -> WorldUnit:
         listener_hubunit = self._get_hubunit(owner_id)
         x_voice = listener_hubunit.get_voice_world()
-        x_voice.calc_world_metrics()
+        x_voice.settle_world()
         x_action = get_default_action_world(x_voice)
         for healer_id, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
@@ -182,12 +182,12 @@ class RealUnit:
                 listen_to_speaker_agenda(x_action, x_job)
 
         # if nothing has come from voice->duty->job->action pipeline use voice->action pipeline
-        x_action.calc_world_metrics()
+        x_action.settle_world()
         if len(x_action._idea_dict) == 1:
             # pipeline_voice_action_text()
             listen_to_debtors_roll_voice_action(listener_hubunit)
             listener_hubunit.open_file_action()
-            x_action.calc_world_metrics()
+            x_action.settle_world()
         if len(x_action._idea_dict) == 1:
             x_action = x_voice
         listener_hubunit.save_action_world(x_action)

@@ -21,7 +21,7 @@ def test_display_ideatree_Scenario0():
     # a_world = get_7nodeJRoot_world()
     a_world = get_world_with_4_levels()
     # a_world = world_v001()
-    a_world.calc_world_metrics()
+    a_world.settle_world()
     print(f"World {a_world._real_id}: Nodes ({len(a_world._idea_dict)})")
 
     # WHEN
@@ -39,7 +39,7 @@ def test_display_ideatree_Scenario1_shows_Tasks():
     # a_world = get_7nodeJRoot_world()
     a_world = get_world_laundry_example1()
     # a_world = world_v001()
-    a_world.calc_world_metrics()
+    a_world.settle_world()
     print(f"World {a_world._real_id}: Nodes ({len(a_world._idea_dict)})")
 
     # WHEN

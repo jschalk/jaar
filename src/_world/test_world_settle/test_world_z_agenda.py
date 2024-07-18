@@ -553,7 +553,7 @@ def test_WorldUnit_create_agenda_item_CorrectlyCreatesAllWorldAttributes():
     # ESTABLISH
     zia_world = worldunit_shop("Zia")
 
-    zia_world.calc_world_metrics()
+    zia_world.settle_world()
     assert len(zia_world._chars) == 0
     assert len(zia_world.get_lobby_ids_dict()) == 0
     assert len(zia_world._idearoot._kids) == 0
@@ -868,7 +868,7 @@ def test_WorldUnit_get_all_pledges_ReturnsCorrectObj():
     assert all_pledges_dict.get(couch_road) is None
 
 
-def test_WorldUnit_calc_world_metrics_Sets_deletes_awardheirs():
+def test_WorldUnit_settle_world_Sets_deletes_awardheirs():
     # ESTABLISH
     prom_text = "prom"
     x_world = worldunit_shop(prom_text)
@@ -896,7 +896,7 @@ def test_WorldUnit_calc_world_metrics_Sets_deletes_awardheirs():
     assert len(swim_idea._awardheirs) == 0
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert len(swim_idea._awardlinks) == 3
@@ -906,7 +906,7 @@ def test_WorldUnit_calc_world_metrics_Sets_deletes_awardheirs():
     assert len(swim_idea._awardheirs) == 3
 
     # WHEN
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert len(swim_idea._awardlinks) == 2
@@ -930,14 +930,14 @@ def test_WorldUnit_set_fact_IsAbleToSetTaskAsComplete():
     ced_min_label = "CE0_minutes"
     ced_road = x_world.make_l1_road(ced_min_label)
     x_world.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
-    x_world.calc_world_metrics()
+    x_world.settle_world()
 
     # THEN
     assert mail_idea.pledge == True
     assert mail_idea._task is False
 
 
-def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario0():
+def test_WorldUnit_settle_world_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario0():
     sue_world = worldunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_world.make_l1_road(casa_text)
@@ -965,7 +965,7 @@ def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weightS
     assert sue_world.get_idea_obj(yes_road)._bud_ratio is None
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     print(f"{sue_world._bud_pool=}")
@@ -976,7 +976,7 @@ def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weightS
     assert sue_world.get_idea_obj(yes_road)._bud_ratio == 0.0
 
 
-def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario1():
+def test_WorldUnit_settle_world_Sets_bud_ratio_WithSomeIdeasOfZero_weightScenario1():
     sue_world = worldunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_world.make_l1_road(casa_text)
@@ -1017,7 +1017,7 @@ def test_WorldUnit_calc_world_metrics_Sets_bud_ratio_WithSomeIdeasOfZero_weightS
     assert sue_world.get_idea_obj(dirty_road)._bud_ratio is None
 
     # WHEN
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     print(f"{sue_world._bud_pool=}")

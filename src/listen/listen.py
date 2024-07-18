@@ -284,8 +284,8 @@ def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
     voice = listener_hubunit.get_voice_world()
     new_action = create_listen_basis(voice)
     pre_action_dict = new_action.get_dict()
-    voice.calc_world_metrics()
-    new_action.calc_world_metrics()
+    voice.settle_world()
+    new_action.settle_world()
 
     for x_healer_id, econ_dict in voice._healers_dict.items():
         listener_id = listener_hubunit.owner_id
@@ -331,7 +331,7 @@ def listen_to_job_agenda(listener: WorldUnit, job: WorldUnit):
             listener.add_idea(x_idea, x_idea._parent_road)
     for x_fact_road, x_fact_unit in job._idearoot._factunits.items():
         listener._idearoot.set_factunit(x_fact_unit)
-    listener.calc_world_metrics()
+    listener.settle_world()
 
 
 def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_id: OwnerID):

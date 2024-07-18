@@ -79,7 +79,7 @@ def test_WorldUnit_add_l1_idea_CorrectlySetsAttr():
 def test_WorldUnit_IdeaUnit_kids_CanHaveKids():
     # ESTABLISH / WHEN
     sue_world = get_world_with_4_levels()
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     assert sue_world._weight == 10
@@ -100,7 +100,7 @@ def test_WorldUnit_IdeaUnit_kids_CanHaveKids():
 def test_WorldUnit_add_idea_CanAddKidTo_idearoot():
     # ESTABLISH
     sue_world = get_world_with_4_levels()
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     assert sue_world.get_idea_count() == 17
     assert sue_world.get_level_count(level=1) == 4
@@ -109,7 +109,7 @@ def test_WorldUnit_add_idea_CanAddKidTo_idearoot():
 
     # WHEN
     sue_world.add_idea(ideaunit_shop("new_idea"), parent_road=new_idea_parent_road)
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     print(f"{(sue_world._owner_id == new_idea_parent_road[0])=}")
@@ -121,14 +121,14 @@ def test_WorldUnit_add_idea_CanAddKidTo_idearoot():
 def test_WorldUnit_add_idea_CanAddKidToKidIdea():
     # ESTABLISH
     sue_world = get_world_with_4_levels()
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
     assert sue_world.get_idea_count() == 17
     assert sue_world.get_level_count(level=2) == 10
 
     # WHEN
     new_idea_parent_road = sue_world.make_l1_road("casa")
     sue_world.add_idea(ideaunit_shop("new_york"), parent_road=new_idea_parent_road)
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     # print(f"{(sue_world._owner_id == new_idea_parent_road[0])=}")
@@ -147,7 +147,7 @@ def test_WorldUnit_add_idea_CanAddKidToKidIdea():
 def test_WorldUnit_add_idea_CanAddKidToGrandkidIdea():
     # ESTABLISH
     sue_world = get_world_with_4_levels()
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     assert sue_world.get_idea_count() == 17
     assert sue_world.get_level_count(level=3) == 2
@@ -156,7 +156,7 @@ def test_WorldUnit_add_idea_CanAddKidToGrandkidIdea():
 
     # WHEN
     sue_world.add_idea(ideaunit_shop("new_idea"), parent_road=new_idea_parent_road)
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     print(f"{(sue_world._owner_id == new_idea_parent_road[0])=}")
@@ -199,7 +199,7 @@ def test_WorldUnit_add_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
 def test_WorldUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
     # ESTABLISH
     sue_world = get_world_with_4_levels()
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     assert sue_world.get_idea_count() == 17
     assert sue_world.get_level_count(level=3) == 2
@@ -210,7 +210,7 @@ def test_WorldUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
 
     # WHEN
     sue_world.add_idea(new_idea, parent_road=new_idea_parent_road)
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     print(sue_world._idearoot._kids["ww2"])
@@ -224,7 +224,7 @@ def test_WorldUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
 def test_WorldUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     # ESTABLISH
     sue_world = get_world_with_4_levels()
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     assert sue_world.get_idea_count() == 17
     assert sue_world.get_level_count(level=3) == 2
@@ -251,7 +251,7 @@ def test_WorldUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
         parent_road=new_idea_parent_road,
         create_missing_ideas=True,
     )
-    sue_world.calc_world_metrics()
+    sue_world.settle_world()
 
     # THEN
     print(f"{(len(new_idea_parent_road) == 1)=}")
@@ -1000,3 +1000,95 @@ def test_WorldUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     x_world_swim_idea = x_world.get_idea_obj(swim_road)
     assert len(x_world_swim_idea._awardlinks) == 1
     assert list(x_world_swim_idea._awardlinks.keys()) == [xia_text]
+
+
+def test_WorldUnit_get_idea_obj_ReturnsIdea():
+    # ESTABLISH
+    x_world = get_world_with_4_levels()
+    nation_text = "nation-state"
+    nation_road = x_world.make_l1_road(nation_text)
+    brazil_text = "Brazil"
+    brazil_road = x_world.make_road(nation_road, brazil_text)
+
+    # WHEN
+    brazil_idea = x_world.get_idea_obj(road=brazil_road)
+
+    # THEN
+    assert brazil_idea != None
+    assert brazil_idea._label == brazil_text
+
+    # WHEN
+    week_text = "weekdays"
+    week_road = x_world.make_l1_road(week_text)
+    week_idea = x_world.get_idea_obj(road=week_road)
+
+    # THEN
+    assert week_idea != None
+    assert week_idea._label == week_text
+
+    # WHEN
+    root_idea = x_world.get_idea_obj(road=x_world._real_id)
+
+    # THEN
+    assert root_idea != None
+    assert root_idea._label == x_world._real_id
+
+    # WHEN / THEN
+    bobdylan_text = "bobdylan"
+    wrong_road = x_world.make_l1_road(bobdylan_text)
+    with pytest_raises(Exception) as excinfo:
+        x_world.get_idea_obj(road=wrong_road)
+    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{wrong_road}'"
+
+
+def test_WorldUnit_idea_exists_ReturnsCorrectBool():
+    # ESTABLISH
+    sue_world = get_world_with_4_levels()
+    sue_world.settle_world()
+    cat_road = sue_world.make_l1_road("cat have dinner")
+    week_road = sue_world.make_l1_road("weekdays")
+    casa_road = sue_world.make_l1_road("casa")
+    nation_road = sue_world.make_l1_road("nation-state")
+    sun_road = sue_world.make_road(week_road, "Sunday")
+    mon_road = sue_world.make_road(week_road, "Monday")
+    tue_road = sue_world.make_road(week_road, "Tuesday")
+    wed_road = sue_world.make_road(week_road, "Wednesday")
+    thu_road = sue_world.make_road(week_road, "Thursday")
+    fri_road = sue_world.make_road(week_road, "Friday")
+    sat_road = sue_world.make_road(week_road, "Saturday")
+    france_road = sue_world.make_road(nation_road, "France")
+    brazil_road = sue_world.make_road(nation_road, "Brazil")
+    usa_road = sue_world.make_road(nation_road, "USA")
+    texas_road = sue_world.make_road(usa_road, "Texas")
+    oregon_road = sue_world.make_road(usa_road, "Oregon")
+    # do not exist in world
+    sports_road = sue_world.make_l1_road("sports")
+    swim_road = sue_world.make_road(sports_road, "swimming")
+    idaho_road = sue_world.make_road(usa_road, "Idaho")
+    japan_road = sue_world.make_road(nation_road, "Japan")
+
+    # WHEN/THEN
+    assert sue_world.idea_exists("") is False
+    assert sue_world.idea_exists(None) is False
+    assert sue_world.idea_exists(sue_world._real_id)
+    assert sue_world.idea_exists(cat_road)
+    assert sue_world.idea_exists(week_road)
+    assert sue_world.idea_exists(casa_road)
+    assert sue_world.idea_exists(nation_road)
+    assert sue_world.idea_exists(sun_road)
+    assert sue_world.idea_exists(mon_road)
+    assert sue_world.idea_exists(tue_road)
+    assert sue_world.idea_exists(wed_road)
+    assert sue_world.idea_exists(thu_road)
+    assert sue_world.idea_exists(fri_road)
+    assert sue_world.idea_exists(sat_road)
+    assert sue_world.idea_exists(usa_road)
+    assert sue_world.idea_exists(france_road)
+    assert sue_world.idea_exists(brazil_road)
+    assert sue_world.idea_exists(texas_road)
+    assert sue_world.idea_exists(oregon_road)
+    assert sue_world.idea_exists("B") is False
+    assert sue_world.idea_exists(sports_road) is False
+    assert sue_world.idea_exists(swim_road) is False
+    assert sue_world.idea_exists(idaho_road) is False
+    assert sue_world.idea_exists(japan_road) is False

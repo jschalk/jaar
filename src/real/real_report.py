@@ -14,7 +14,7 @@ def get_real_voices_chars_dataframe(x_real: RealUnit) -> DataFrame:
     voice_dfs = []
     for x_hubunit in owner_hubunits.values():
         voice_world = x_hubunit.get_voice_world()
-        voice_world.calc_world_metrics()
+        voice_world.settle_world()
         df = get_world_charunits_dataframe(voice_world)
         df.insert(0, "owner_id", voice_world._owner_id)
         voice_dfs.append(df)
@@ -70,7 +70,7 @@ def get_real_actions_chars_dataframe(x_real: RealUnit) -> DataFrame:
     action_dfs = []
     for x_hubunit in owner_hubunits.values():
         action_world = x_hubunit.get_action_world()
-        action_world.calc_world_metrics()
+        action_world.settle_world()
         action_df = get_world_charunits_dataframe(action_world)
         action_df.insert(0, "owner_id", action_world._owner_id)
         action_dfs.append(action_df)
@@ -126,7 +126,7 @@ def get_real_voices_agenda_dataframe(x_real: RealUnit) -> DataFrame:
     voice_dfs = []
     for x_hubunit in owner_hubunits.values():
         voice_world = x_hubunit.get_voice_world()
-        voice_world.calc_world_metrics()
+        voice_world.settle_world()
         df = get_world_agenda_dataframe(voice_world)
         voice_dfs.append(df)
     return pandas_concat(voice_dfs, ignore_index=True)
@@ -185,7 +185,7 @@ def get_real_actions_agenda_dataframe(x_real: RealUnit) -> DataFrame:
     action_dfs = []
     for x_hubunit in owner_hubunits.values():
         action_world = x_hubunit.get_action_world()
-        action_world.calc_world_metrics()
+        action_world.settle_world()
         action_df = get_world_agenda_dataframe(action_world)
         action_dfs.append(action_df)
     return pandas_concat(action_dfs, ignore_index=True)

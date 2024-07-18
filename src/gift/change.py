@@ -133,8 +133,8 @@ class ChangeUnit:
     def add_all_different_atomunits(
         self, before_world: WorldUnit, after_world: WorldUnit
     ):
-        before_world.calc_world_metrics()
-        after_world.calc_world_metrics()
+        before_world.settle_world()
+        after_world.settle_world()
         self.add_atomunits_worldunit_simple_attrs(before_world, after_world)
         self.add_atomunits_chars(before_world, after_world)
         self.add_atomunits_ideas(before_world, after_world)
@@ -836,7 +836,7 @@ def world_built_from_change_is_valid(
     x_world = x_change.get_edited_world(x_world)
 
     try:
-        x_world.calc_world_metrics()
+        x_world.settle_world()
     except Exception:
         return False
 

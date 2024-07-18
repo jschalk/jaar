@@ -265,7 +265,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalWorld():
         reason_base=egg_road,
         reason_base_idea_active_requisite=False,
     )
-    sue_worldunit.calc_world_metrics()
+    sue_worldunit.settle_world()
     assert sue_worldunit._rational is False
     assert len(sue_worldunit.get_agenda_dict()) == 3
 
@@ -275,7 +275,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalWorld():
     yao_job.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_job.set_char_respect(yao_pool)
     yao_job = listen_to_speaker_agenda(yao_job, sue_worldunit)
-    yao_job.calc_world_metrics()
+    yao_job.settle_world()
 
     # THEN irrational world is ignored
     assert len(yao_job.get_agenda_dict()) != 3
