@@ -1,8 +1,8 @@
 from src.bud.reason_idea import factunit_shop, factunit_shop, factheir_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.examples.example_buds import (
-    get_bud_with_4_levels as examples_get_bud_with_4_levels,
-    get_bud_1Task_1CE0MinutesReason_1Fact as example_buds_get_bud_1Task_1CE0MinutesReason_1Fact,
+    get_budunit_with_4_levels,
+    get_budunit_1Task_1CE0MinutesReason_1Fact,
 )
 from src.bud.bud import budunit_shop
 from pytest import raises as pytest_raises
@@ -10,7 +10,7 @@ from pytest import raises as pytest_raises
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
-    x_bud = examples_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     weekday_road = x_bud.make_l1_road("weekdays")
     sunday_road = x_bud.make_road(weekday_road, "Sunday")
     sunday_bud_fact = factunit_shop(base=weekday_road, pick=sunday_road)
@@ -47,7 +47,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
     # ESTABLISH
-    x_bud = examples_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     weekday_road = x_bud.make_l1_road("weekdays")
     sunday_road = x_bud.make_road(weekday_road, "Sunday")
 
@@ -62,7 +62,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_pick_IsNone():
     # ESTABLISH
-    x_bud = examples_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     weekday_road = x_bud.make_l1_road("weekdays")
 
     # WHEN
@@ -76,7 +76,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_pick_IsNone():
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
     # ESTABLISH
-    x_bud = examples_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     weekday_road = x_bud.make_l1_road("weekdays")
     x_bud.set_fact(base=weekday_road, open=5, nigh=7)
     x_idearoot = x_bud._idearoot
@@ -121,7 +121,7 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIs
 
 def test_BudUnit_del_fact_CorrectlyModifiesAttr():
     # ESTABLISH
-    x_bud = examples_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     weekday_road = x_bud.make_l1_road("weekdays")
     sunday_road = x_bud.make_road(weekday_road, "Sunday")
     x_bud.set_fact(base=weekday_road, pick=sunday_road)
@@ -789,7 +789,7 @@ def test_BudUnit_get_fact_ReturnsFactUnit():
 
 def test_BudUnit_set_fact_IsAbleToSetTaskAsComplete():
     # ESTABLISH
-    x_bud = example_buds_get_bud_1Task_1CE0MinutesReason_1Fact()
+    x_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
     mail_text = "obtain mail"
     assert x_bud is not None
     assert len(x_bud._idearoot._kids[mail_text]._reasonunits) == 1

@@ -53,7 +53,7 @@ def budunit_v002() -> BudUnit:
     return bob_bud
 
 
-def get_bud_with_4_levels() -> BudUnit:
+def get_budunit_with_4_levels() -> BudUnit:
     sue_bud = budunit_shop(_owner_id="Sue", _weight=10)
 
     casa_text = "casa"
@@ -116,8 +116,8 @@ def get_bud_with_4_levels() -> BudUnit:
     return sue_bud
 
 
-def get_bud_with_4_levels_and_2reasons() -> BudUnit:
-    sue_bud = get_bud_with_4_levels()
+def get_budunit_with_4_levels_and_2reasons() -> BudUnit:
+    sue_bud = get_budunit_with_4_levels()
     week_text = "weekdays"
     week_road = sue_bud.make_l1_road(week_text)
     wed_text = "Wednesday"
@@ -139,8 +139,8 @@ def get_bud_with_4_levels_and_2reasons() -> BudUnit:
     return sue_bud
 
 
-def get_bud_with_4_levels_and_2reasons_2facts() -> BudUnit:
-    sue_bud = get_bud_with_4_levels_and_2reasons()
+def get_budunit_with_4_levels_and_2reasons_2facts() -> BudUnit:
+    sue_bud = get_budunit_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = sue_bud.make_l1_road(week_text)
     wed_text = "Wednesday"
@@ -154,8 +154,8 @@ def get_bud_with_4_levels_and_2reasons_2facts() -> BudUnit:
     return sue_bud
 
 
-def get_bud_with7amCleanTableReason() -> BudUnit:
-    sue_bud = get_bud_with_4_levels_and_2reasons_2facts()
+def get_budunit_with7amCleanTableReason() -> BudUnit:
+    sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
 
     time_text = "timetech"
     time_road = sue_bud.make_l1_road(time_text)
@@ -223,7 +223,7 @@ def get_bud_with7amCleanTableReason() -> BudUnit:
     return sue_bud
 
 
-def get_bud_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
+def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     bob_bud = budunit_shop(_owner_id="Bob", _weight=10)
     ced_min_label = "CE0_minutes"
     ced_minutes = ideaunit_shop(ced_min_label)
@@ -247,7 +247,7 @@ def get_bud_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     return bob_bud
 
 
-def get_bud_x1_3levels_1reason_1facts() -> BudUnit:
+def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     zia_bud = budunit_shop(_owner_id="Zia", _weight=10)
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
@@ -279,13 +279,13 @@ def get_bud_x1_3levels_1reason_1facts() -> BudUnit:
     return zia_bud
 
 
-def get_bud_base_time_example() -> BudUnit:
+def get_budunit_base_time_example() -> BudUnit:
     sue_bud = budunit_shop(_owner_id="Sue")
     sue_bud.add_l1_idea(ideaunit_shop("casa"))
     return sue_bud
 
 
-def get_bud_irrational_example() -> BudUnit:
+def get_budunit_irrational_example() -> BudUnit:
     # this bud has no conclusive agenda because 2 pledge ideas are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
@@ -328,7 +328,7 @@ def get_bud_irrational_example() -> BudUnit:
     return hatter_bud
 
 
-def get_bud_mop_example1():
+def get_budunit_mop_example1():
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
@@ -355,7 +355,7 @@ def get_bud_mop_example1():
     return sue_bud
 
 
-def get_bud_laundry_example1() -> BudUnit:
+def get_budunit_laundry_example1() -> BudUnit:
     amos_text = "Amos"
     amos_bud = budunit_shop(_owner_id=amos_text)
     cali_text = "Cali"
@@ -402,7 +402,7 @@ def get_bud_laundry_example1() -> BudUnit:
     return amos_bud
 
 
-def get_bud_with_tuesday_cleaning_task() -> BudUnit:
+def get_budunit_with_tuesday_cleaning_task() -> BudUnit:
     bob_bud = budunit_shop("Bob")
     bob_bud.set_time_hreg_ideas(7)
 

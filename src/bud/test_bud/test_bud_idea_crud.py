@@ -1,5 +1,5 @@
 from src.bud.healer import healerhold_shop
-from src.bud.examples.example_buds import get_bud_with_4_levels
+from src.bud.examples.example_buds import get_budunit_with_4_levels
 from src.bud.idea import ideaunit_shop
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
 from src.bud.bud import budunit_shop
@@ -78,7 +78,7 @@ def test_BudUnit_add_l1_idea_CorrectlySetsAttr():
 
 def test_BudUnit_IdeaUnit_kids_CanHaveKids():
     # ESTABLISH / WHEN
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
     # THEN
@@ -99,7 +99,7 @@ def test_BudUnit_IdeaUnit_kids_CanHaveKids():
 
 def test_BudUnit_add_idea_CanAddKidTo_idearoot():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
     assert sue_bud.get_idea_count() == 17
@@ -120,7 +120,7 @@ def test_BudUnit_add_idea_CanAddKidTo_idearoot():
 
 def test_BudUnit_add_idea_CanAddKidToKidIdea():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
     assert sue_bud.get_idea_count() == 17
     assert sue_bud.get_level_count(level=2) == 10
@@ -146,7 +146,7 @@ def test_BudUnit_add_idea_CanAddKidToKidIdea():
 
 def test_BudUnit_add_idea_CanAddKidToGrandkidIdea():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
     assert sue_bud.get_idea_count() == 17
@@ -198,7 +198,7 @@ def test_BudUnit_add_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
 
 def test_BudUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
     assert sue_bud.get_idea_count() == 17
@@ -223,7 +223,7 @@ def test_BudUnit_add_idea_CanCreateRoadUnitToGrandkidIdea():
 
 def test_BudUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
     assert sue_bud.get_idea_count() == 17
@@ -267,7 +267,7 @@ def test_BudUnit_add_idea_CreatesIdeaUnitsUsedBy_reasonunits():
 def test_BudUnit_add_idea_CorrectlySets_bud_real_id_AND_fund_coin():
     # ESTABLISH'
     x_fund_coin = 500
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud._fund_coin = x_fund_coin
     bud_real_id = "Texas"
     sue_bud.set_real_id(bud_real_id)
@@ -289,7 +289,7 @@ def test_BudUnit_add_idea_CorrectlySets_bud_real_id_AND_fund_coin():
 
 def test_BudUnit_del_idea_obj_Level0CannotBeDeleted():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     root_road = sue_bud._real_id
 
     # WHEN / THEN
@@ -300,7 +300,7 @@ def test_BudUnit_del_idea_obj_Level0CannotBeDeleted():
 
 def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenDeleted():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     week_text = "weekdays"
     week_road = sue_bud.make_l1_road(week_text)
     sun_text = "Sunday"
@@ -323,7 +323,7 @@ def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenDeleted():
 
 def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     week_text = "weekdays"
     week_road = sue_bud.make_l1_road(week_text)
     sun_text = "Sunday"
@@ -345,7 +345,7 @@ def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
 
 def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenInherited():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     states_text = "nation-state"
     states_road = sue_bud.make_l1_road(states_text)
     usa_text = "USA"
@@ -375,7 +375,7 @@ def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenInherited():
 
 def test_BudUnit_del_idea_obj_Level2CanBeDeleted_ChildrenDeleted():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     wkday_road = sue_bud.make_l1_road("weekdays")
     monday_road = sue_bud.make_road(wkday_road, "Monday")
     assert sue_bud.get_idea_obj(monday_road)
@@ -391,7 +391,7 @@ def test_BudUnit_del_idea_obj_Level2CanBeDeleted_ChildrenDeleted():
 
 def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenDeleted():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     states_text = "nation-state"
     states_road = sue_bud.make_l1_road(states_text)
     usa_text = "USA"
@@ -410,7 +410,7 @@ def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenDeleted():
 
 
 def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
     print(f"{casa_road=}")
@@ -1004,7 +1004,7 @@ def test_BudUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
 
 def test_BudUnit_get_idea_obj_ReturnsIdea():
     # ESTABLISH
-    x_bud = get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     nation_text = "nation-state"
     nation_road = x_bud.make_l1_road(nation_text)
     brazil_text = "Brazil"
@@ -1043,7 +1043,7 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
 
 def test_BudUnit_idea_exists_ReturnsCorrectBool():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
     cat_road = sue_bud.make_l1_road("cat have dinner")
     week_road = sue_bud.make_l1_road("weekdays")

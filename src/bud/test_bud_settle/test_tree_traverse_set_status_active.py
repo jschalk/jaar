@@ -5,8 +5,8 @@ from src.bud.lobby import awardlink_shop
 from src.bud.bud import budunit_shop
 from src.bud.healer import healerhold_shop
 from src.bud.examples.example_buds import (
-    get_bud_with_4_levels_and_2reasons,
-    get_bud_with7amCleanTableReason,
+    get_budunit_with_4_levels_and_2reasons,
+    get_budunit_with7amCleanTableReason,
     budunit_v001,
     from_list_get_active,
 )
@@ -15,20 +15,9 @@ from src.bud.reason_idea import premiseunit_shop, reasonunit_shop, reasonheir_sh
 from src.bud.bud import budunit_shop
 
 
-def test_BudUnit_settle_bud_CreatesFullyPopulated_idea_dict():
-    # ESTABLISH
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
-
-    # WHEN
-    sue_budunit.settle_bud()
-
-    # THEN
-    assert len(sue_budunit._idea_dict) == 17
-
-
 def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = sue_budunit.make_l1_road(week_text)
     sun_text = "Sunday"
@@ -55,7 +44,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
 
 def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = sue_budunit.make_l1_road(week_text)
     sun_text = "Wednesday"
@@ -99,7 +88,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
 
 def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = sue_budunit.make_l1_road(week_text)
     wed_text = "Wednesday"
@@ -231,7 +220,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
 
 def test_BudUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():
     # ESTABLISH
-    x_budunit = get_bud_with7amCleanTableReason()
+    x_budunit = get_budunit_with7amCleanTableReason()
 
     # WHEN
     idea_list_without_idearoot = x_budunit.get_idea_list_without_idearoot()
@@ -250,7 +239,7 @@ def test_BudUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():
 
 def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     # ESTABLISH
-    sue_budunit = get_bud_with7amCleanTableReason()
+    sue_budunit = get_budunit_with7amCleanTableReason()
     sue_budunit.settle_bud()
     house_text = "housemanagement"
     house_road = sue_budunit.make_l1_road(house_text)
@@ -296,7 +285,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
 
 def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
 
     # WHEN
     pledge_items = sue_budunit.get_agenda_dict()
@@ -667,7 +656,7 @@ def test_BudUnit_settle_bud_CorrectlySetsEmpty_sum_healerhold_share():
 
 def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share():
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_charunit("Sue")
     sue_budunit.settle_bud()
     nation_road = sue_budunit.make_l1_road("nation-state")
@@ -736,7 +725,7 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share():
 
 def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_charunit("Sue")
     sue_budunit.settle_bud()
     nation_road = sue_budunit.make_l1_road("nation-state")
@@ -799,7 +788,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
 #     # ESTABLISH
 #     sue_text = "Sue"
 #     bob_text = "Bob"
-#     sue_budunit = get_bud_with_4_levels_and_2reasons()
+#     sue_budunit = get_budunit_with_4_levels_and_2reasons()
 #     sue_budunit.add_charunit(sue_text)
 #     sue_budunit.add_charunit(bob_text)
 #     assert sue_budunit._healers_dict == {}
@@ -836,7 +825,7 @@ def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     # ESTABLISH
     sue_text = "Sue"
     bob_text = "Bob"
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_charunit(sue_text)
     sue_budunit.add_charunit(bob_text)
     assert sue_budunit._healers_dict == {}
@@ -875,7 +864,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
     # ESTABLISH
     sue_text = "Sue"
     bob_text = "Bob"
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_charunit(sue_text)
     sue_budunit.add_charunit(bob_text)
     assert sue_budunit._econs_buildable is False
@@ -908,7 +897,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
     # ESTABLISH
     sue_text = "Sue"
     bob_text = "Bob"
-    sue_budunit = get_bud_with_4_levels_and_2reasons()
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_charunit(sue_text)
     sue_budunit.add_charunit(bob_text)
     assert sue_budunit._econs_buildable is False

@@ -2,14 +2,14 @@ from src.bud.bud import budunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.reason_idea import reasonunit_shop
 from src.bud.examples.example_buds import (
-    get_bud_with_4_levels as example_buds_get_bud_with_4_levels,
-    get_bud_mop_example1 as example_bud_get_bud_mop_example1,
+    get_budunit_with_4_levels,
+    get_budunit_mop_example1,
 )
 
 
 def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     x_bud.settle_bud()
 
     # WHEN
@@ -23,7 +23,7 @@ def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
 
 def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     x_bud.settle_bud()
 
     # WHEN
@@ -38,7 +38,7 @@ def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
 
 def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     x_bud.settle_bud()
 
     # WHEN
@@ -97,7 +97,7 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
 
 def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     # ESTABLISH
-    x_bud = example_bud_get_bud_mop_example1()
+    x_bud = get_budunit_mop_example1()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
     floor_text = "mop floor"

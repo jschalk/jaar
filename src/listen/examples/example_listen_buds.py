@@ -2,7 +2,7 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import BudUnit, budunit_shop
 
 
-def get_bud_with_4_levels() -> BudUnit:
+def get_budunit_with_4_levels() -> BudUnit:
     sue_bud = budunit_shop(_owner_id="Sue", _weight=10)
 
     casa = "casa"

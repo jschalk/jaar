@@ -6,11 +6,11 @@ from src.bud.reason_idea import reasonunit_shop
 from src.bud.lobby import awardlink_shop
 from src.bud.reason_doer import doerunit_shop
 from src.bud.examples.example_buds import (
-    get_bud_1Task_1CE0MinutesReason_1Fact,
-    get_bud_with_4_levels as example_buds_get_bud_with_4_levels,
-    get_bud_with_4_levels_and_2reasons as example_buds_get_bud_with_4_levels_and_2reasons,
-    get_bud_with7amCleanTableReason as example_buds_get_bud_with7amCleanTableReason,
-    get_bud_with_4_levels_and_2reasons_2facts as example_buds_get_bud_with_4_levels_and_2reasons_2facts,
+    get_budunit_1Task_1CE0MinutesReason_1Fact,
+    get_budunit_with_4_levels,
+    get_budunit_with_4_levels_and_2reasons,
+    get_budunit_with7amCleanTableReason,
+    get_budunit_with_4_levels_and_2reasons_2facts,
     budunit_v001,
     budunit_v001_with_large_agenda as budunit_v001_with_large_agenda,
     budunit_v002,
@@ -23,7 +23,7 @@ def get_tasks_count(agenda_dict: dict[RoadUnit, IdeaUnit]) -> int:
 
 def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
     # ESTABLISH
-    yao_bud = example_buds_get_bud_with_4_levels()
+    yao_bud = get_budunit_with_4_levels()
 
     # WHEN
     agenda_dict = yao_bud.get_agenda_dict()
@@ -38,7 +38,7 @@ def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
 
 def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels_and_2reasons()
+    x_bud = get_budunit_with_4_levels_and_2reasons()
     week_text = "weekdays"
     week_road = x_bud.make_l1_road(week_text)
     sun_text = "Sunday"
@@ -61,7 +61,7 @@ def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
 
 def test_BudUnit_get_agenda_dict_WithLargeBudImportance():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels_and_2reasons_2facts()
+    x_bud = get_budunit_with_4_levels_and_2reasons_2facts()
 
     # WHEN
     agenda_dict = x_bud.get_agenda_dict()
@@ -79,7 +79,7 @@ def test_BudUnit_get_agenda_dict_WithLargeBudImportance():
 
 def test_BudUnit_get_agenda_dict_WithNo7amItemExample():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with7amCleanTableReason()
+    x_bud = get_budunit_with7amCleanTableReason()
 
     # WHEN
     agenda_dict = x_bud.get_agenda_dict()
@@ -100,7 +100,7 @@ def test_BudUnit_get_agenda_dict_WithNo7amItemExample():
 def test_BudUnit_get_agenda_dict_With7amItemExample():
     # ESTABLISH
     # set facts as midnight to 8am
-    x_bud = example_buds_get_bud_with7amCleanTableReason()
+    x_bud = get_budunit_with7amCleanTableReason()
     print(f"{len(x_bud.get_agenda_dict())=}")
     assert len(x_bud.get_agenda_dict()) == 1
     timetech_road = x_bud.make_l1_road("timetech")
@@ -873,7 +873,7 @@ def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
 
 def test_BudUnit_set_fact_IsAbleToSetTaskAsComplete():
     # ESTABLISH
-    x_bud = get_bud_1Task_1CE0MinutesReason_1Fact()
+    x_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
     mail_text = "obtain mail"
     assert x_bud is not None
     assert len(x_bud._idearoot._kids[mail_text]._reasonunits) == 1

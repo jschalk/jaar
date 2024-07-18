@@ -1,9 +1,9 @@
 from src.bud.examples.example_buds import (
     budunit_v001_with_large_agenda,
-    get_bud_with_4_levels,
-    get_bud_laundry_example1,
-    get_bud_with_4_levels_and_2reasons,
-    get_bud_x1_3levels_1reason_1facts,
+    get_budunit_with_4_levels,
+    get_budunit_laundry_example1,
+    get_budunit_with_4_levels_and_2reasons,
+    get_budunit_x1_3levels_1reason_1facts,
 )
 from src.bud.bud import budunit_shop
 from src.bud.graphic import (
@@ -19,7 +19,7 @@ def test_display_ideatree_Scenario0():
     # a_bud = get_3node_bud()
     # a_bud = get_5nodeHG_bud()
     # a_bud = get_7nodeJRoot_bud()
-    a_bud = get_bud_with_4_levels()
+    a_bud = get_budunit_with_4_levels()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
     print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
@@ -37,7 +37,7 @@ def test_display_ideatree_Scenario1_shows_Tasks():
     # a_bud = get_3node_bud()
     # a_bud = get_5nodeHG_bud()
     # a_bud = get_7nodeJRoot_bud()
-    a_bud = get_bud_laundry_example1()
+    a_bud = get_budunit_laundry_example1()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
     print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")

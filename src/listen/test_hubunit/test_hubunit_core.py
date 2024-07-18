@@ -18,7 +18,7 @@ from src._road.jaar_config import (
 )
 from src.bud.bud import budunit_shop
 from src.listen.hubunit import HubUnit, hubunit_shop, get_econ_path
-from src.listen.examples.example_listen_buds import get_bud_with_4_levels
+from src.listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.listen.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,
     env_dir_setup_cleanup,
@@ -282,7 +282,7 @@ def test_HubUnit_open_file_action_OpensFile(env_dir_setup_cleanup):
 
 def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels()
+    sue_budunit = get_budunit_with_4_levels()
     sue_text = sue_budunit._owner_id
     real_id = root_label()
     sue_hubunit = hubunit_shop(env_dir(), real_id, sue_text, None)
@@ -318,7 +318,7 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_action_id_IsWrong(
 
 def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels()
+    sue_budunit = get_budunit_with_4_levels()
     sue_text = sue_budunit._owner_id
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -335,7 +335,7 @@ def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
 
 def test_HubUnit_save_action_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels()
+    sue_budunit = get_budunit_with_4_levels()
     sue_text = sue_budunit._owner_id
 
     real_id = root_label()
@@ -353,7 +353,7 @@ def test_HubUnit_save_action_bud_CorrectlySavesFile(env_dir_setup_cleanup):
 
 def test_HubUnit_get_action_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels()
+    sue_budunit = get_budunit_with_4_levels()
     sue_text = sue_budunit._owner_id
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -370,7 +370,7 @@ def test_HubUnit_get_action_bud_OpensFile(env_dir_setup_cleanup):
 
 def test_HubUnit_get_action_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
-    sue_budunit = get_bud_with_4_levels()
+    sue_budunit = get_budunit_with_4_levels()
     sue_text = sue_budunit._owner_id
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text)
 

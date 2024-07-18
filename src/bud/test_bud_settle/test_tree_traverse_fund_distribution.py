@@ -5,7 +5,7 @@ from src.bud.lobby import awardlink_shop
 from src.bud.examples.example_buds import (
     budunit_v001,
     budunit_v001_with_large_agenda as budunit_v001_with_large_agenda,
-    get_bud_1Task_1CE0MinutesReason_1Fact,
+    get_budunit_1Task_1CE0MinutesReason_1Fact,
 )
 from src.bud.bud import BudUnit, budunit_shop
 from src.bud.idea import ideaunit_shop, IdeaUnit
@@ -200,7 +200,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesLobbyBudImportanceLWwithLobbyEmpt
 
 
 def test_BudUnit_IsAbleToEditFactUnitAnyAncestor_Idea_1():
-    x_bud = get_bud_1Task_1CE0MinutesReason_1Fact()
+    x_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
     ced_min_label = "CE0_minutes"
     ced_road = x_bud.make_l1_road(ced_min_label)
     x_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)

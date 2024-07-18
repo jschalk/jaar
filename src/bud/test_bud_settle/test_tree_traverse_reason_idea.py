@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.bud.examples.example_buds import (
-    get_bud_with_4_levels as example_buds_get_bud_with_4_levels,
-    get_bud_irrational_example as example_buds_get_bud_irrational_example,
+    get_budunit_with_4_levels,
+    get_budunit_irrational_example,
     from_list_get_active,
 )
 from src.bud.idea import ideaunit_shop
@@ -15,7 +15,7 @@ from src.bud.bud import budunit_shop
 
 def test_BudUnit_ReasonUnits_create():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
     weekday_text = "weekdays"
@@ -41,7 +41,7 @@ def test_BudUnit_ReasonUnits_create():
 
 def test_BudUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_road = x_bud.make_l1_road("casa")
     week_road = x_bud.make_l1_road("weekdays")
     wed_road = x_bud.make_road(week_road, "Wednesday")
@@ -94,7 +94,7 @@ def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
 
 def test_BudUnit_set_reasonunits_status():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
     weekday_text = "weekdays"
@@ -122,7 +122,7 @@ def test_BudUnit_set_reasonunits_status():
 
 def test_agenda_returned_WhenNoReasonsExist():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
 
     # WHEN
     x_bud.settle_bud()
@@ -136,7 +136,7 @@ def test_agenda_returned_WhenNoReasonsExist():
 
 def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     print(f"{x_bud._real_id=}")
     print(f"{x_bud._idearoot._label=}")
     casa_text = "casa"
@@ -193,7 +193,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
 
 def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     # ESTABLISH
-    a4_bud = example_buds_get_bud_with_4_levels()
+    a4_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = a4_bud.make_l1_road(casa_text)
     week_text = "weekdays"
@@ -261,7 +261,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
 
 
 def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
-    a4_bud = example_buds_get_bud_with_4_levels()
+    a4_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = a4_bud.make_l1_road(casa_text)
     week_label = "weekdays"
@@ -335,7 +335,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
 
 def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
     week_text = "weekdays"
@@ -407,7 +407,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
 
 def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
     time_text = "time"
@@ -437,7 +437,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
 
 def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa = "casa"
     casa_road = x_bud.make_l1_road(casa)
     time = "time"
@@ -467,7 +467,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh()
 
 def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_PremiseUnits():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_road = x_bud.make_l1_road("casa")
     weekday_road = x_bud.make_l1_road("weekdays")
     wed_road = x_bud.make_road(weekday_road, "Wednesday")
@@ -510,7 +510,7 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
 
 def test_BudUnit_ReasonUnits_del_reason_premise_UncoupledMethod2():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_road = x_bud.make_l1_road("casa")
     weekdays_road = x_bud.make_l1_road("weekdays")
     casa_idea1 = x_bud.get_idea_obj(casa_road)
@@ -526,7 +526,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
     # _base_idea_active_requisite: str = None
     # must be 1 of 3: bool: True, bool: False, str="Set to Ignore"
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
 
@@ -585,7 +585,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     # 1. idea(...,weekdays) exists
     # 2. idea(...,weekdays,wednesday) exists
     # 3. idea(...,weekdays,thursday) exists
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
     weekdays_text = "weekdays"
@@ -642,7 +642,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
 
 def test_BudUnit_settle_bud_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     assert x_bud._rational is False
     # x_bud.settle_bud()
     x_bud._rational = True
@@ -659,7 +659,7 @@ def test_BudUnit_settle_bud_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
 
 def test_BudUnit_tree_traverses_StopWhenEqualStatusIsDetected():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     assert x_bud._max_tree_traverse != 2
 
     # WHEN
@@ -673,7 +673,7 @@ def test_BudUnit_tree_traverses_StopWhenEqualStatusIsDetected():
 
 def test_BudUnit_tree_traverse_count_CorrectlyCountsTreeTraversesForIrrationalBuds():
     # ESTABLISH irrational bud
-    x_bud = example_buds_get_bud_irrational_example()
+    x_bud = get_budunit_irrational_example()
     x_bud.settle_bud()
     assert x_bud._tree_traverse_count == 3
 

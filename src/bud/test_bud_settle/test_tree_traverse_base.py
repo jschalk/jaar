@@ -1,16 +1,13 @@
-from src._instrument.python import get_False_if_None
 from src._road.finance import default_fund_pool
 from src.bud.examples.example_buds import (
-    get_bud_with_4_levels as example_buds_get_bud_with_4_levels,
-    get_bud_with7amCleanTableReason,
+    get_budunit_with_4_levels,
+    get_budunit_with7amCleanTableReason,
+    get_budunit_with_4_levels_and_2reasons,
 )
-from src.bud.healer import healerhold_shop
-from src.bud.char import CharID
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.lobby import awardline_shop, awardlink_shop
 from src.bud.graphic import display_ideatree
-from pytest import raises as pytest_raises
 
 
 def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
@@ -68,7 +65,7 @@ def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
 
 def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     # test root status:
     casa_text = "casa"
     week_text = "weekdays"
@@ -138,7 +135,7 @@ def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = x_bud.make_l1_road(casa_text)
     week_text = "weekdays"
@@ -178,7 +175,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     email_text = "email"
     casa_text = "casa"
     week_text = "weekdays"
@@ -228,7 +225,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
 
 def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
     # ESTABLISH
-    x_budunit = get_bud_with7amCleanTableReason()
+    x_budunit = get_budunit_with7amCleanTableReason()
     casa_road = x_budunit.make_l1_road("casa")
     catt_road = x_budunit.make_l1_road("cat have dinner")
     week_road = x_budunit.make_l1_road("weekdays")
@@ -422,7 +419,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
 
 def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     x_bud.settle_bud()
     # idea tree has no awardlinks
     assert x_bud._idearoot._awardlines == {}
@@ -447,9 +444,9 @@ def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     assert not x_bud._idearoot._kids[casa_text]._awardlines
 
 
-def test_BudUnit_settle_bud_TreeTraverseSetsAwardLineestorFromRootCorrectly():
+def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     x_bud.settle_bud()
     # idea tree has no awardlinks
     assert x_bud._idearoot._awardlines == {}
@@ -507,9 +504,9 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLineestorFromRootCorrectly():
     assert x_bud._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
 
 
-def test_BudUnit_settle_bud_TreeTraverseSetsAwardLineestorFromNonRootCorrectly():
+def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromNonRootCorrectly():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     x_bud.settle_bud()
     # idea tree has no awardlinks
     sue_text = "Sue"
@@ -539,7 +536,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLineestorFromNonRootCorrectly()
     }
 
 
-def test_BudUnit_settle_bud_Sets_deletes_awardheirs():
+def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     # ESTABLISH
     prom_text = "prom"
     x_bud = budunit_shop(prom_text)
@@ -586,7 +583,7 @@ def test_BudUnit_settle_bud_Sets_deletes_awardheirs():
 
 def test_BudUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():
     # ESTABLISH
-    x_bud = example_buds_get_bud_with_4_levels()
+    x_bud = get_budunit_with_4_levels()
     week_text = "weekdays"
     assert x_bud.get_idea_tree_ordered_road_list()
 
@@ -643,164 +640,12 @@ def test_BudUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
     assert problems_dict == {texas_road: texas_idea}
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenBudUnitEmpty():
+def test_BudUnit_settle_bud_CreatesFullyPopulated_idea_dict():
     # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    assert sue_bud._econs_justified is False
+    sue_budunit = get_budunit_with_4_levels_and_2reasons()
 
     # WHEN
-    sue_bud.settle_bud()
+    sue_budunit.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified
-
-
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenThereAreNotAny():
-    # ESTABLISH
-    sue_bud = example_buds_get_bud_with_4_levels()
-    assert sue_bud._econs_justified is False
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    assert sue_bud._econs_justified
-
-
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_lobby_id_exists_IsTrue():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    sue_bud.add_l1_idea(ideaunit_shop("Texas", _healerhold=healerhold_shop({"Yao"})))
-    assert sue_bud._econs_justified is False
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    assert sue_bud._econs_justified is False
-
-
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleProblemAndEcon():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    yao_text = "Yao"
-    sue_bud.add_charunit(yao_text)
-    yao_healerhold = healerhold_shop({yao_text})
-    sue_bud.add_l1_idea(
-        ideaunit_shop("Texas", _healerhold=yao_healerhold, _problem_bool=True)
-    )
-    assert sue_bud._econs_justified is False
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    assert sue_bud._econs_justified
-
-
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelAboveProblem():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    yao_text = "Yao"
-    sue_bud.add_charunit(yao_text)
-    yao_healerhold = healerhold_shop({yao_text})
-
-    texas_text = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_text)
-    sue_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    ep_text = "El Paso"
-    sue_bud.add_idea(ideaunit_shop(ep_text, _healerhold=yao_healerhold), texas_road)
-    assert sue_bud._econs_justified is False
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    assert sue_bud._econs_justified
-
-
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelBelowProblem():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    texas_text = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_text)
-    yao_healerhold = healerhold_shop({"Yao"})
-    sue_bud.add_l1_idea(ideaunit_shop(texas_text, _healerhold=yao_healerhold))
-    sue_bud.add_idea(ideaunit_shop("El Paso", _problem_bool=True), texas_road)
-    assert sue_bud._econs_justified is False
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    assert sue_bud._econs_justified is False
-
-
-def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenEconIsLevelBelowProblem():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    texas_text = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_text)
-    yao_healerhold = healerhold_shop({"Yao"})
-    texas_idea = ideaunit_shop(texas_text, _healerhold=yao_healerhold)
-    sue_bud.add_l1_idea(texas_idea)
-    elpaso_idea = ideaunit_shop("El Paso", _problem_bool=True)
-    sue_bud.add_idea(elpaso_idea, texas_road)
-    assert sue_bud._econs_justified is False
-
-    # WHEN
-    with pytest_raises(Exception) as excinfo:
-        sue_bud.settle_bud(econ_exceptions=True)
-    assert (
-        str(excinfo.value)
-        == f"IdeaUnit '{elpaso_idea.get_road()}' cannot sponsor ancestor econs."
-    )
-
-
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenTwoEconsAreOneTheEqualLine():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    yao_healerhold = healerhold_shop({"Yao"})
-    texas_text = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_text)
-    texas_idea = ideaunit_shop(
-        texas_text, _healerhold=yao_healerhold, _problem_bool=True
-    )
-    sue_bud.add_l1_idea(texas_idea)
-    elpaso_idea = ideaunit_shop(
-        "El Paso", _healerhold=yao_healerhold, _problem_bool=True
-    )
-    sue_bud.add_idea(elpaso_idea, texas_road)
-    assert sue_bud._econs_justified is False
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    assert sue_bud._econs_justified is False
-
-
-def test_BudUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    yao_healerhold = healerhold_shop({"Yao"})
-    texas_text = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_text)
-    texas_idea = ideaunit_shop(
-        texas_text, _healerhold=yao_healerhold, _problem_bool=True
-    )
-    sue_bud.add_l1_idea(texas_idea)
-    elpaso_idea = ideaunit_shop(
-        "El Paso", _healerhold=yao_healerhold, _problem_bool=True
-    )
-    sue_bud.add_idea(elpaso_idea, texas_road)
-    sue_bud.settle_bud()
-    assert sue_bud._econs_justified is False
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        sue_bud.get_idea_dict(problem=True)
-    assert (
-        str(excinfo.value)
-        == f"Cannot return problem set because _econs_justified={sue_bud._econs_justified}."
-    )
+    assert len(sue_budunit._idea_dict) == 17

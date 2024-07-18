@@ -158,7 +158,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 
 # def test_time_hreg_set_creates_idea():
-#     x_bud = examples.get_bud_base_time_example()
+#     x_bud = examples.get_budunit_base_time_example()
 
 #     hreg_label = "hreg"
 #     with pytest.raises(KeyError) as excinfo:
@@ -173,7 +173,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 
 # def test_time_hreg_set_CorrectlyCreatesWeekdayIdea():
-#     x_bud = examples.get_bud_base_time_example()
+#     x_bud = examples.get_budunit_base_time_example()
 #     x_bud.set_time_hreg_ideas(c400_count=6)
 #     weekday_label = "weekday"
 #     weekday = x_bud.get_idea_obj(x_bud.make_l1_road("hreg,{weekday_label}")
@@ -190,7 +190,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 
 # def test_time_hreg_set_CorrectlyCreates400YearsegmentCount():
-#     x_bud = examples.get_bud_base_time_example()
+#     x_bud = examples.get_budunit_base_time_example()
 #     c400_count = 6
 #     x_bud.set_time_hreg_ideas(c400_count=c400_count)
 
@@ -204,7 +204,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 
 # def test_time_hreg_set_CorrectlyCreates400YearsegmentYears():
-#     h_x_bud = examples.get_bud_base_time_example()
+#     h_x_bud = examples.get_budunit_base_time_example()
 #     c400_count = 6
 #     h_x_bud.set_time_hreg_ideas(c400_count=c400_count)
 
@@ -282,7 +282,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 
 # def test_time_hreg_set_CorrectlyCreates400YearsegmentYears():
-#     h_x_bud = examples.get_bud_base_time_example()
+#     h_x_bud = examples.get_budunit_base_time_example()
 #     c400_count = 6
 #     h_x_bud.set_time_hreg_ideas(c400_count=c400_count)
 
@@ -297,7 +297,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 
 # def test_time_hreg_set_CorrectlyCreatesDayRange():
-#     x_bud = examples.get_bud_base_time_example()
+#     x_bud = examples.get_budunit_base_time_example()
 #     x_bud.set_time_hreg_ideas(c400_count=6)
 #     timetech = x_bud.get_idea_obj(x_bud.make_l1_road("hreg,day_range")
 #     assert timetech is not None

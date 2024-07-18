@@ -1,7 +1,7 @@
 from src.bud.bud import budunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.examples.example_buds import (
-    get_bud_with_4_levels_and_2reasons_2facts,
+    get_budunit_with_4_levels_and_2reasons_2facts,
 )
 from pytest import raises as pytest_raises
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
@@ -284,7 +284,7 @@ def test_bud_edit_idea_label_ModifiesIdeaUnitN_range_source_road():
 
 def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels_and_2reasons_2facts()
+    sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     old_weekday_text = "weekdays"
     old_weekday_road = sue_bud.make_l1_road(old_weekday_text)
     wednesday_text = "Wednesday"
@@ -329,7 +329,7 @@ def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
 
 def test_bud_set_owner_id_CorrectlyModifiesBoth():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels_and_2reasons_2facts()
+    sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud._owner_id == "Sue"
     assert sue_bud._idearoot._label == sue_bud._real_id
     # mid_label1 = "Yao"
@@ -348,7 +348,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
 
 def test_bud_edit_idea_label_RaisesErrorIfdelimiterIsInLabel():
     # ESTABLISH
-    sue_bud = get_bud_with_4_levels_and_2reasons_2facts()
+    sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     old_weekday_text = "weekdays"
     old_weekday_road = sue_bud.make_l1_road(old_weekday_text)
 

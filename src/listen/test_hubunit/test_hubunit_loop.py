@@ -1,7 +1,7 @@
 from src._road.jaar_config import get_test_real_id as real_id
 from src._road.road import create_road
 from src.listen.hubunit import hubunit_shop
-from src.listen.examples.example_listen_buds import get_bud_with_4_levels
+from src.listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.listen.examples.listen_env import (
     env_dir_setup_cleanup,
     get_listen_temp_env_dir as env_dir,
@@ -11,7 +11,7 @@ from src.listen.examples.listen_env import (
 def test_HubUnit_get_perspective_bud_ReturnsBudWith_owner_idSetToHubUnit_owner_id():
     # ESTABLISH
     bob_text = "Bob"
-    bob_budunit = get_bud_with_4_levels()
+    bob_budunit = get_budunit_with_4_levels()
     bob_budunit.set_owner_id(bob_text)
 
     sue_text = "Sue"
@@ -32,7 +32,7 @@ def test_HubUnit_get_dw_perspective_bud_ReturnsBudWith_owner_idSetToHubUnit_owne
 ):
     # ESTABLISH
     bob_text = "Bob"
-    bob_budunit = get_bud_with_4_levels()
+    bob_budunit = get_budunit_with_4_levels()
     bob_budunit.set_owner_id(bob_text)
     bob_hubunit = hubunit_shop(env_dir(), real_id(), bob_text)
     bob_hubunit.save_action_bud(bob_budunit)
@@ -60,7 +60,7 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_idSetToHubUnit_owner_id
 
     bob_text = "Bob"
     yao_text = "Yao"
-    yao_budunit = get_bud_with_4_levels()
+    yao_budunit = get_budunit_with_4_levels()
     yao_budunit.set_owner_id(yao_text)
 
     bob_iowa_hubunit = hubunit_shop(env_dir(), real_id(), bob_text, iowa_road)
