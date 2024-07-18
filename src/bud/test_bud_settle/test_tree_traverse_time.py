@@ -98,7 +98,7 @@ def test_get_time_dt_from_min_ReturnsCorrectObj():
     #             ) == datetime(year, month, day, 0, 0)
 
 
-def test_get_time_():
+def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
     # ESTABLISH
     kia_bud = budunit_shop(_owner_id="Kia")
     kia_bud.set_time_hreg_ideas(c400_count=6)
@@ -111,9 +111,9 @@ def test_get_time_():
     #         )
 
     # WHEN
-    kia_bud.set_time_facts(
-        open=datetime(2000, 1, 1, 0, 0), nigh=datetime(2003, 11, 15, 4, 0)
-    )
+    x_open = datetime(2000, 1, 1, 0, 0)
+    x_nigh = datetime(2003, 11, 15, 4, 0)
+    kia_bud.set_time_facts(open=x_open, nigh=x_nigh)
 
     # THEN
     time_text = "time"
@@ -301,7 +301,7 @@ def test_get_time_():
 # x_bud = examples.get_bud_gregorian_years()
 
 
-def test_get_jajatime_repeating_legible_text_correctlyText():
+def test_BudUnit_get_jajatime_repeating_legible_text_correctlyText():
     # ESTABLISH
     yao_bud = budunit_shop(_owner_id="Yao")
     yao_bud.set_time_hreg_ideas(c400_count=7)

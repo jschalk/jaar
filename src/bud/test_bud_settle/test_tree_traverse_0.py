@@ -2,6 +2,7 @@ from src._instrument.python import get_False_if_None
 from src._road.finance import default_fund_pool
 from src.bud.examples.example_buds import (
     get_bud_with_4_levels as example_buds_get_bud_with_4_levels,
+    get_bud_with7amCleanTableReason,
 )
 from src.bud.healer import healerhold_shop
 from src.bud.char import CharID
@@ -223,6 +224,107 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     assert week_idea._kids[mon_text]._all_char_debt == True
     assert week_idea._kids[tue_text]._all_char_cred == True
     assert week_idea._kids[tue_text]._all_char_debt == True
+
+
+def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
+    # ESTABLISH
+    x_budunit = get_bud_with7amCleanTableReason()
+    casa_road = x_budunit.make_l1_road("casa")
+    catt_road = x_budunit.make_l1_road("cat have dinner")
+    week_road = x_budunit.make_l1_road("weekdays")
+    x_budunit._idearoot._fund_onset = 13
+    x_budunit._idearoot._fund_cease = 13
+    x_budunit.get_idea_obj(casa_road)._fund_onset = 13
+    x_budunit.get_idea_obj(casa_road)._fund_cease = 13
+    x_budunit.get_idea_obj(catt_road)._fund_onset = 13
+    x_budunit.get_idea_obj(catt_road)._fund_cease = 13
+    x_budunit.get_idea_obj(week_road)._fund_onset = 13
+    x_budunit.get_idea_obj(week_road)._fund_cease = 13
+
+    assert x_budunit._idearoot._fund_onset == 13
+    assert x_budunit._idearoot._fund_cease == 13
+    assert x_budunit.get_idea_obj(casa_road)._fund_onset == 13
+    assert x_budunit.get_idea_obj(casa_road)._fund_cease == 13
+    assert x_budunit.get_idea_obj(catt_road)._fund_onset == 13
+    assert x_budunit.get_idea_obj(catt_road)._fund_cease == 13
+    assert x_budunit.get_idea_obj(week_road)._fund_onset == 13
+    assert x_budunit.get_idea_obj(week_road)._fund_cease == 13
+
+    # WHEN
+    x_budunit.settle_bud()
+
+    # THEN
+    assert x_budunit._idearoot._fund_onset != 13
+    assert x_budunit._idearoot._fund_cease != 13
+    assert x_budunit.get_idea_obj(casa_road)._fund_onset != 13
+    assert x_budunit.get_idea_obj(casa_road)._fund_cease != 13
+    assert x_budunit.get_idea_obj(catt_road)._fund_onset != 13
+    assert x_budunit.get_idea_obj(catt_road)._fund_cease != 13
+    assert x_budunit.get_idea_obj(week_road)._fund_onset != 13
+    assert x_budunit.get_idea_obj(week_road)._fund_cease != 13
+
+
+def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
+    # ESTABLISH
+    yao_budunit = budunit_shop("Yao", _weight=10)
+
+    auto_text = "auto"
+    auto_road = yao_budunit.make_l1_road(auto_text)
+    auto_idea = ideaunit_shop(auto_text, _weight=10)
+    yao_budunit.add_l1_idea(auto_idea)
+
+    barn_text = "barn"
+    barn_road = yao_budunit.make_l1_road(barn_text)
+    barn_idea = ideaunit_shop(barn_text, _weight=60)
+    yao_budunit.add_l1_idea(barn_idea)
+    lamb_text = "lambs"
+    lamb_road = yao_budunit.make_road(barn_road, lamb_text)
+    lamb_idea = ideaunit_shop(lamb_text, _weight=1)
+    yao_budunit.add_idea(lamb_idea, parent_road=barn_road)
+    duck_text = "ducks"
+    duck_road = yao_budunit.make_road(barn_road, duck_text)
+    duck_idea = ideaunit_shop(duck_text, _weight=2)
+    yao_budunit.add_idea(duck_idea, parent_road=barn_road)
+
+    coal_text = "coal"
+    coal_road = yao_budunit.make_l1_road(coal_text)
+    coal_idea = ideaunit_shop(coal_text, _weight=30)
+    yao_budunit.add_l1_idea(coal_idea)
+
+    assert yao_budunit._idearoot._fund_onset is None
+    assert yao_budunit._idearoot._fund_cease is None
+    assert yao_budunit.get_idea_obj(auto_road)._fund_onset is None
+    assert yao_budunit.get_idea_obj(auto_road)._fund_cease is None
+    assert yao_budunit.get_idea_obj(barn_road)._fund_onset is None
+    assert yao_budunit.get_idea_obj(barn_road)._fund_cease is None
+    assert yao_budunit.get_idea_obj(coal_road)._fund_onset is None
+    assert yao_budunit.get_idea_obj(coal_road)._fund_cease is None
+    lamb_before = yao_budunit.get_idea_obj(road=lamb_road)
+    assert lamb_before._fund_onset is None
+    assert lamb_before._fund_cease is None
+    duck_before = yao_budunit.get_idea_obj(road=duck_road)
+    assert duck_before._fund_onset is None
+    assert duck_before._fund_cease is None
+
+    # WHEN
+    yao_budunit.settle_bud()
+
+    # THEN
+    assert yao_budunit._idearoot._fund_onset == 0.0
+    assert yao_budunit._idearoot._fund_cease == default_fund_pool()
+    assert yao_budunit.get_idea_obj(auto_road)._fund_onset == 0.0
+    assert yao_budunit.get_idea_obj(auto_road)._fund_cease == default_fund_pool() * 0.1
+    assert yao_budunit.get_idea_obj(barn_road)._fund_onset == default_fund_pool() * 0.1
+    assert yao_budunit.get_idea_obj(barn_road)._fund_cease == default_fund_pool() * 0.7
+    assert yao_budunit.get_idea_obj(coal_road)._fund_onset == default_fund_pool() * 0.7
+    assert yao_budunit.get_idea_obj(coal_road)._fund_cease == default_fund_pool() * 1.0
+
+    duck_after = yao_budunit.get_idea_obj(road=duck_road)
+    assert duck_after._fund_onset == default_fund_pool() * 0.1
+    assert duck_after._fund_cease == default_fund_pool() * 0.5
+    lamb_after = yao_budunit.get_idea_obj(road=lamb_road)
+    assert lamb_after._fund_onset == default_fund_pool() * 0.5
+    assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
 def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0():

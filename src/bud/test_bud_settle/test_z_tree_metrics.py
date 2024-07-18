@@ -1,4 +1,6 @@
 from src.bud.examples.example_buds import bud_v001
+from src.bud.lobby import awardlink_shop
+from src.bud.char import charunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.idea import ideaunit_shop
 from src._road.road import create_road_from_nodes
@@ -106,3 +108,76 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaRoadUnit():
         ]
     )
     assert yao_tree_metrics.last_evaluated_pledge_idea_road == train_road
+
+
+def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
+    # ESTABLISH
+    yao_budunit = bud_v001()
+
+    # WHEN
+    yao_bud_metrics = yao_budunit.get_tree_metrics()
+
+    # THEN
+    print(f"{yao_bud_metrics.level_count=}")
+    print(f"{yao_bud_metrics.reason_bases=}")
+    assert yao_bud_metrics is not None
+    reason_bases_x = yao_bud_metrics.reason_bases
+    assert reason_bases_x is not None
+    assert len(reason_bases_x) > 0
+
+
+def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
+    # ESTABLISH
+    yao_budunit = bud_v001()
+    missing_bases = yao_budunit.get_missing_fact_bases()
+    assert missing_bases is not None
+    print(f"{missing_bases=}")
+    print(f"{len(missing_bases)=}")
+    assert len(missing_bases) == 11
+
+    yao_budunit.set_fact(
+        base=yao_budunit.make_l1_road("day_minute"),
+        pick=yao_budunit.make_l1_road("day_minute"),
+        open=0,
+        nigh=1439,
+    )
+
+    # WHEN
+    missing_bases = yao_budunit.get_missing_fact_bases()
+
+    # THEN
+    assert len(missing_bases) == 11
+
+
+def test_BudUnit_3AdvocatesNoideaunit_shop():
+    # ESTABLISH
+    yao_text = "Yao"
+    sue_text = "Sue"
+    zia_text = "Zia"
+
+    zia_budunit = budunit_shop("Zia")
+    yao_charunit = charunit_shop(char_id=yao_text)
+    sue_charunit = charunit_shop(char_id=sue_text)
+    zia_charunit = charunit_shop(char_id=zia_text)
+    # print(f"{yao=}")
+    zia_budunit.set_charunit(yao_charunit)
+    zia_budunit.set_charunit(sue_charunit)
+    zia_budunit.set_charunit(zia_charunit)
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_weight=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_weight=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_weight=10))
+
+    # WHEN
+    assert zia_budunit.get_awardlinks_metrics() is not None
+    chars_metrics = zia_budunit.get_awardlinks_metrics()
+
+    # THEN
+    awardlink_yao = chars_metrics[yao_text]
+    awardlink_sue = chars_metrics[sue_text]
+    awardlink_zia = chars_metrics[zia_text]
+    assert awardlink_yao.lobby_id is not None
+    assert awardlink_sue.lobby_id is not None
+    assert awardlink_zia.lobby_id is not None
+    assert awardlink_yao.lobby_id == yao_text
+    assert awardlink_sue.lobby_id == sue_text
+    assert awardlink_zia.lobby_id == zia_text
