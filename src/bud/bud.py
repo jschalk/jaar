@@ -1684,10 +1684,6 @@ class BudUnit:
         self._reset_lobbyboxs_fund_give_take()
         self._reset_charunit_fund_give_take()
 
-    def get_heir_road_list(self, x_road: RoadUnit) -> list[RoadUnit]:
-        road_list = self.get_idea_tree_ordered_road_list()
-        return [idea_road for idea_road in road_list if is_sub_road(idea_road, x_road)]
-
     def get_idea_tree_ordered_road_list(
         self, no_range_descendants: bool = False
     ) -> list[RoadUnit]:
