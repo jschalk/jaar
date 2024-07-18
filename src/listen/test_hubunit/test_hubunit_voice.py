@@ -14,9 +14,9 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     sue_text = "Sue"
     slash_text = "/"
     x_fund_pool = 9000000
-    point_nine_float = 0.9
-    point_five_float = 0.5
-    point_four_float = 0.4
+    pnine_float = 0.9
+    pfive_float = 0.5
+    pfour_float = 0.4
     sue_hubunit = hubunit_shop(
         env_dir(),
         real_id(),
@@ -24,9 +24,9 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
         econ_road=None,
         road_delimiter=slash_text,
         fund_pool=x_fund_pool,
-        fund_coin=point_five_float,
-        bit=point_five_float,
-        penny=point_four_float,
+        fund_coin=pfive_float,
+        bit=pfive_float,
+        penny=pfour_float,
     )
 
     # WHEN

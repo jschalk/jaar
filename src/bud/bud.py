@@ -216,16 +216,9 @@ class BudUnit:
                         f"Cannot modify delimiter to '{new_road_delimiter}' because it already exists an idea label '{x_idea_road}'"
                     )
 
-            # Grab pointers to every idea
-            idea_pointers = {
-                x_idea_road: self.get_idea_obj(x_idea_road)
-                for x_idea_road in self._idea_dict.keys()
-            }
-
-            # modify all road attributes in idea
-            # old_road_delimiter = copy_deepcopy(self._road_delimiter)
+            # modify all road attributes in ideaunits
             self._road_delimiter = default_road_delimiter_if_none(new_road_delimiter)
-            for x_idea in idea_pointers.values():
+            for x_idea in self._idea_dict.values():
                 x_idea.set_road_delimiter(self._road_delimiter)
 
     def set_real_id(self, real_id: str):
@@ -1550,7 +1543,7 @@ class BudUnit:
         self._create_lobbyboxs_metrics()
         self._reset_charunit_fund_give_take()
 
-    def _set_tree_traverse_starting_point(self):
+    def _set_tree_traverse_stage(self):
         self._rational = False
         self._tree_traverse_count = 0
         self._idea_dict = {self._idearoot.get_road(): self._idearoot}
@@ -1564,7 +1557,7 @@ class BudUnit:
 
     def settle_bud(self, econ_exceptions: bool = False):
         self._calc_charunit_metrics()
-        self._set_tree_traverse_starting_point()
+        self._set_tree_traverse_stage()
         max_count = self._max_tree_traverse
 
         while not self._rational and self._tree_traverse_count < max_count:

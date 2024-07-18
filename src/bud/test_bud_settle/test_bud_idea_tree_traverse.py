@@ -1,6 +1,5 @@
 from src._instrument.python import get_False_if_None
 from src._road.finance import default_fund_pool
-from src._road.road import get_default_real_id_roadnode as root_label
 from src.bud.examples.example_buds import (
     get_bud_with_4_levels as example_buds_get_bud_with_4_levels,
 )
@@ -13,7 +12,7 @@ from src.bud.graphic import display_ideatree
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_set_tree_traverse_starting_point_CorrectlySetsAttrs():
+def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     x_rational = True
@@ -27,7 +26,7 @@ def test_BudUnit_set_tree_traverse_starting_point_CorrectlySetsAttrs():
     assert sue_bud._idea_dict == x_idea_dict
 
     # WHEN
-    sue_bud._set_tree_traverse_starting_point()
+    sue_bud._set_tree_traverse_stage()
 
     # THEN
     assert sue_bud._rational != x_rational
