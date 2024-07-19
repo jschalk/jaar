@@ -356,6 +356,48 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     x_budunit.add_idea(ideaunit_shop(morph_str()), yr2028_road)
     x_budunit.add_idea(ideaunit_shop(morph_str()), yr2029_road)
     x_budunit.add_idea(ideaunit_shop(morph_str()), yr2030_road)
+    yr2010mor_road = x_budunit.make_road(yr2010_road, morph_str())
+    yr2011mor_road = x_budunit.make_road(yr2011_road, morph_str())
+    yr2012mor_road = x_budunit.make_road(yr2012_road, morph_str())
+    yr2013mor_road = x_budunit.make_road(yr2013_road, morph_str())
+    yr2014mor_road = x_budunit.make_road(yr2014_road, morph_str())
+    yr2015mor_road = x_budunit.make_road(yr2015_road, morph_str())
+    yr2016mor_road = x_budunit.make_road(yr2016_road, morph_str())
+    yr2017mor_road = x_budunit.make_road(yr2017_road, morph_str())
+    yr2018mor_road = x_budunit.make_road(yr2018_road, morph_str())
+    yr2019mor_road = x_budunit.make_road(yr2019_road, morph_str())
+    yr2020mor_road = x_budunit.make_road(yr2020_road, morph_str())
+    yr2021mor_road = x_budunit.make_road(yr2021_road, morph_str())
+    yr2022mor_road = x_budunit.make_road(yr2022_road, morph_str())
+    yr2023mor_road = x_budunit.make_road(yr2023_road, morph_str())
+    yr2024mor_road = x_budunit.make_road(yr2024_road, morph_str())
+    yr2025mor_road = x_budunit.make_road(yr2025_road, morph_str())
+    yr2026mor_road = x_budunit.make_road(yr2026_road, morph_str())
+    yr2027mor_road = x_budunit.make_road(yr2027_road, morph_str())
+    yr2028mor_road = x_budunit.make_road(yr2028_road, morph_str())
+    yr2029mor_road = x_budunit.make_road(yr2029_road, morph_str())
+    yr2030mor_road = x_budunit.make_road(yr2030_road, morph_str())
+    x_budunit.add_idea(ideaunit_shop(yr2010yr_str()), yr2010mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2011yr_str()), yr2011mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2012yr_str()), yr2012mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2013yr_str()), yr2013mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2014yr_str()), yr2014mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2015yr_str()), yr2015mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2016yr_str()), yr2016mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2017yr_str()), yr2017mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2018yr_str()), yr2018mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2019yr_str()), yr2019mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2020yr_str()), yr2020mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2021yr_str()), yr2021mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2022yr_str()), yr2022mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2023yr_str()), yr2023mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2024yr_str()), yr2024mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2025yr_str()), yr2025mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2026yr_str()), yr2026mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2027yr_str()), yr2027mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2028yr_str()), yr2028mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2029yr_str()), yr2029mor_road)
+    x_budunit.add_idea(ideaunit_shop(yr2030yr_str()), yr2030mor_road)
 
     jaja_c400_idea = ideaunit_shop(c400_str())
     x_budunit.add_idea(jaja_c400_idea, jaja_road)
@@ -684,85 +726,85 @@ def morph_str() -> str:
     return "morph"
 
 
-def yr2010min_str() -> str:
-    return "2010 by minute"
+def yr2010yr_str() -> str:
+    return "2010 as year"
 
 
-def yr2011min_str() -> str:
-    return "2011 by minute"
+def yr2011yr_str() -> str:
+    return "2011 as year"
 
 
-def yr2012min_str() -> str:
-    return "2012 by minute"
+def yr2012yr_str() -> str:
+    return "2012 as year"
 
 
-def yr2013min_str() -> str:
-    return "2013 by minute"
+def yr2013yr_str() -> str:
+    return "2013 as year"
 
 
-def yr2014min_str() -> str:
-    return "2014 by minute"
+def yr2014yr_str() -> str:
+    return "2014 as year"
 
 
-def yr2015min_str() -> str:
-    return "2015 by minute"
+def yr2015yr_str() -> str:
+    return "2015 as year"
 
 
-def yr2016min_str() -> str:
-    return "2016 by minute"
+def yr2016yr_str() -> str:
+    return "2016 as year"
 
 
-def yr2017min_str() -> str:
-    return "2017 by minute"
+def yr2017yr_str() -> str:
+    return "2017 as year"
 
 
-def yr2018min_str() -> str:
-    return "2018 by minute"
+def yr2018yr_str() -> str:
+    return "2018 as year"
 
 
-def yr2019min_str() -> str:
-    return "2019 by minute"
+def yr2019yr_str() -> str:
+    return "2019 as year"
 
 
-def yr2020min_str() -> str:
-    return "2020 by minute"
+def yr2020yr_str() -> str:
+    return "2020 as year"
 
 
-def yr2021min_str() -> str:
-    return "2021 by minute"
+def yr2021yr_str() -> str:
+    return "2021 as year"
 
 
-def yr2022min_str() -> str:
-    return "2022 by minute"
+def yr2022yr_str() -> str:
+    return "2022 as year"
 
 
-def yr2023min_str() -> str:
-    return "2023 by minute"
+def yr2023yr_str() -> str:
+    return "2023 as year"
 
 
-def yr2024min_str() -> str:
-    return "2024 by minute"
+def yr2024yr_str() -> str:
+    return "2024 as year"
 
 
-def yr2025min_str() -> str:
-    return "2025 by minute"
+def yr2025yr_str() -> str:
+    return "2025 as year"
 
 
-def yr2026min_str() -> str:
-    return "2026 by minute"
+def yr2026yr_str() -> str:
+    return "2026 as year"
 
 
-def yr2027min_str() -> str:
-    return "2027 by minute"
+def yr2027yr_str() -> str:
+    return "2027 as year"
 
 
-def yr2028min_str() -> str:
-    return "2028 by minute"
+def yr2028yr_str() -> str:
+    return "2028 as year"
 
 
-def yr2029min_str() -> str:
-    return "2029 by minute"
+def yr2029yr_str() -> str:
+    return "2029 as year"
 
 
-def yr2030min_str() -> str:
-    return "2030 by minute"
+def yr2030yr_str() -> str:
+    return "2030 as year"
