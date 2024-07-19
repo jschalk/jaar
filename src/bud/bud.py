@@ -1754,45 +1754,6 @@ class BudUnit:
         x_dict = self.get_dict()
         return get_json_from_dict(dict_x=x_dict)
 
-    def set_time_hreg_ideas(self, c400_count: int):
-        x_hregidea = HregIdea(self._road_delimiter)
-        ideabase_list = x_hregidea._get_time_hreg_src_idea(c400_count=c400_count)
-        while len(ideabase_list) != 0:
-            yb = ideabase_list.pop(0)
-            range_source_road_x = None
-            if yb.sr is not None:
-                range_source_road_x = self.make_l1_road(yb.sr)
-
-            x_idea = ideaunit_shop(
-                _label=yb.n,
-                _begin=yb.b,
-                _close=yb.c,
-                _weight=yb.weight,
-                _is_expanded=False,
-                _addin=yb.a,
-                _numor=yb.mn,
-                _denom=yb.md,
-                _reest=yb.mr,
-                _range_source_road=range_source_road_x,
-            )
-            road_x = self.make_l1_road(yb.rr)
-            self.add_idea(x_idea, parent_road=road_x)
-
-            numeric_road_x = None
-            if yb.nr is not None:
-                numeric_road_x = self.make_l1_road(yb.nr)
-                self.edit_idea_attr(
-                    road=self.make_road(road_x, yb.n), numeric_road=numeric_road_x
-                )
-            if yb.a is not None:
-                self.edit_idea_attr(
-                    road=self.make_road(road_x, yb.n),
-                    addin=yb.a,
-                    denom=yb.md,
-                    numor=yb.mn,
-                )
-        self.settle_bud()
-
     def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
         idea_kid.pledge = True
         self.add_idea(
