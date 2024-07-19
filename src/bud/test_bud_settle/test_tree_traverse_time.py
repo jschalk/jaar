@@ -1,4 +1,5 @@
-from src.bud.bud import BudUnit, budunit_shop
+from src.bud.bud import BudUnit
+from src.bud.examples.example_time import get_budunit_sue_TimeExample
 from datetime import datetime
 from random import randint
 
@@ -16,80 +17,64 @@ def _check_time_conversion_with_random_inputs(x_bud: BudUnit):
 
 
 def test_BudUnit_get_time_min_from_dt_ReturnsCorrectObj():
-    # ESTABLISH
-    kia_bud = budunit_shop(_owner_id="Kia")
-
-    # WHEN
-    kia_bud.set_time_hreg_ideas(c400_count=6)
-
+    # ESTABLISH / WHEN
+    sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert kia_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    assert kia_bud.get_time_min_from_dt(dt=datetime(1, 1, 1, 0, 0)) == 527040
-    assert kia_bud.get_time_min_from_dt(dt=datetime(1, 1, 2, 0, 0)) == 527040 + 1440
-    assert kia_bud.get_time_min_from_dt(dt=datetime(400, 1, 1, 0, 0)) == 210379680
-    assert kia_bud.get_time_min_from_dt(dt=datetime(800, 1, 1, 0, 0)) == 420759360
-    assert kia_bud.get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
+    assert sue_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    assert sue_bud.get_time_min_from_dt(dt=datetime(1, 1, 1, 0, 0)) == 527040
+    assert sue_bud.get_time_min_from_dt(dt=datetime(1, 1, 2, 0, 0)) == 527040 + 1440
+    assert sue_bud.get_time_min_from_dt(dt=datetime(400, 1, 1, 0, 0)) == 210379680
+    assert sue_bud.get_time_min_from_dt(dt=datetime(800, 1, 1, 0, 0)) == 420759360
+    assert sue_bud.get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
 
 
 def test_BudUnit_get_time_400Yearsegment_from_min_ReturnsCorrectObj():
-    # ESTABLISH
-    kia_bud = budunit_shop("Kia")
-
-    # WHEN
-    kia_bud.set_time_hreg_ideas(c400_count=6)
-
+    # ESTABLISH / WHEN
+    sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert kia_bud.get_time_c400_from_min(min=0)[0] == 0
-    assert kia_bud.get_time_c400_from_min(min=210379680)[0] == 1
-    assert kia_bud.get_time_c400_from_min(min=210379681)[0] == 1
-    assert kia_bud.get_time_c400_from_min(min=841518720)[0] == 4
+    assert sue_bud.get_time_c400_from_min(min=0)[0] == 0
+    assert sue_bud.get_time_c400_from_min(min=210379680)[0] == 1
+    assert sue_bud.get_time_c400_from_min(min=210379681)[0] == 1
+    assert sue_bud.get_time_c400_from_min(min=841518720)[0] == 4
 
 
 def test_BudUnit_get_time_c400year_from_min_ReturnsCorrectObj():
-    # ESTABLISH
-    kia_bud = budunit_shop("Kia")
-
-    # WHEN
-    kia_bud.set_time_hreg_ideas(c400_count=6)
-
+    # ESTABLISH / WHEN
+    sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert kia_bud.get_time_c400yr_from_min(min=0)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=1)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=1)[2] == 1
-    assert kia_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=210379681)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=841518720)[0] == 0
-    assert kia_bud.get_time_c400yr_from_min(min=576000)[0] == 1
-    assert kia_bud.get_time_c400yr_from_min(min=4608000)[0] == 8
-    assert kia_bud.get_time_c400yr_from_min(min=157785120)[0] == 300
+    assert sue_bud.get_time_c400yr_from_min(min=0)[0] == 0
+    assert sue_bud.get_time_c400yr_from_min(min=1)[0] == 0
+    assert sue_bud.get_time_c400yr_from_min(min=1)[2] == 1
+    assert sue_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
+    assert sue_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
+    assert sue_bud.get_time_c400yr_from_min(min=210379681)[0] == 0
+    assert sue_bud.get_time_c400yr_from_min(min=841518720)[0] == 0
+    assert sue_bud.get_time_c400yr_from_min(min=576000)[0] == 1
+    assert sue_bud.get_time_c400yr_from_min(min=4608000)[0] == 8
+    assert sue_bud.get_time_c400yr_from_min(min=157785120)[0] == 300
 
 
 def test_BudUnit_get_time_dt_from_min_ReturnsCorrectObj():
-    # ESTABLISH
-    kia_bud = budunit_shop(_owner_id="Kia")
-
-    # WHEN
-    kia_bud.set_time_hreg_ideas(c400_count=6)
-
+    # ESTABLISH / WHEN
+    sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert kia_bud.get_time_dt_from_min(min=5000000)
-    # assert kia_bud.get_time_dt_from_min(
-    #     min=kia_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    assert sue_bud.get_time_dt_from_min(min=5000000)
+    # assert sue_bud.get_time_dt_from_min(
+    #     min=sue_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
     # ) == datetime(2000, 1, 1, 0, 0)
-    assert kia_bud.get_time_dt_from_min(min=420759360) == datetime(800, 1, 1, 0, 0)
-    assert kia_bud.get_time_dt_from_min(min=631139040) == datetime(1200, 1, 1, 0, 0)
-    assert kia_bud.get_time_dt_from_min(min=631751040) == datetime(1201, 3, 1, 0, 0)
-    assert kia_bud.get_time_dt_from_min(min=631751060) == datetime(1201, 3, 1, 0, 20)
+    assert sue_bud.get_time_dt_from_min(min=420759360) == datetime(800, 1, 1, 0, 0)
+    assert sue_bud.get_time_dt_from_min(min=631139040) == datetime(1200, 1, 1, 0, 0)
+    assert sue_bud.get_time_dt_from_min(min=631751040) == datetime(1201, 3, 1, 0, 0)
+    assert sue_bud.get_time_dt_from_min(min=631751060) == datetime(1201, 3, 1, 0, 20)
 
     x_minutes = 1063903680
-    assert kia_bud.get_time_dt_from_min(min=x_minutes) == datetime(2022, 10, 29, 0, 0)
+    assert sue_bud.get_time_dt_from_min(min=x_minutes) == datetime(2022, 10, 29, 0, 0)
     x_next_day = x_minutes + 1440
-    assert kia_bud.get_time_dt_from_min(min=x_next_day) == datetime(2022, 10, 30, 0, 0)
+    assert sue_bud.get_time_dt_from_min(min=x_next_day) == datetime(2022, 10, 30, 0, 0)
 
-    _check_time_conversion_with_random_inputs(kia_bud)
-    _check_time_conversion_with_random_inputs(kia_bud)
-    _check_time_conversion_with_random_inputs(kia_bud)
+    _check_time_conversion_with_random_inputs(sue_bud)
+    _check_time_conversion_with_random_inputs(sue_bud)
+    _check_time_conversion_with_random_inputs(sue_bud)
 
     # for year, month, day, hr, min in .product(
     #     range(479, 480), range(1, 3), range(20, 28), range(12, 14), range(1430, 1440)
@@ -120,10 +105,9 @@ def test_BudUnit_get_time_dt_from_min_ReturnsCorrectObj():
 
 def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
     # ESTABLISH
-    kia_bud = budunit_shop(_owner_id="Kia")
-    kia_bud.set_time_hreg_ideas(c400_count=6)
+    sue_bud = get_budunit_sue_TimeExample()
 
-    kia_bud.settle_bud()
+    sue_bud.settle_bud()
     # for idea_x in idea_list:
     #     if idea_x._label in ["min2010", "years"]:
     #         print(
@@ -133,21 +117,21 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
     # WHEN
     x_open = datetime(2000, 1, 1, 0, 0)
     x_nigh = datetime(2003, 11, 15, 4, 0)
-    kia_bud.set_time_facts(open=x_open, nigh=x_nigh)
+    sue_bud.set_time_facts(open=x_open, nigh=x_nigh)
 
     # THEN
     time_text = "time"
-    time_road = kia_bud.make_l1_road(time_text)
+    time_road = sue_bud.make_l1_road(time_text)
     jaja_text = "jajatime"
-    jaja_road = kia_bud.make_road(time_road, jaja_text)
-    assert kia_bud._idearoot._factunits[jaja_road]
-    assert kia_bud._idearoot._factunits[jaja_road].open == 1051898400  # - 1440
-    assert kia_bud._idearoot._factunits[jaja_road].nigh == 1053934800  # - 1440
+    jaja_road = sue_bud.make_road(time_road, jaja_text)
+    assert sue_bud._idearoot._factunits[jaja_road]
+    assert sue_bud._idearoot._factunits[jaja_road].open == 1051898400  # - 1440
+    assert sue_bud._idearoot._factunits[jaja_road].nigh == 1053934800  # - 1440
 
 
 # def test_time_hreg_set_exists():
 #     x_bud = budunit_shop(_owner_id=bob_text)
-#     x_bud.set_time_hreg_ideas(c400_count=6)
+#
 #     idea_x = x_bud.get_idea_obj(x_bud.make_l1_road("hreg")
 #     assert idea_x is not None
 #     assert x_bud.get_kid("hreg"]
@@ -165,7 +149,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 #         x_bud.get_kid(hreg_label]
 #     assert str(excinfo.value) == f"'{hreg_label}'"
 #     print(f"added {hreg_label}")
-#     x_bud.set_time_hreg_ideas(c400_count=6)
+#
 #     hreg_idea = x_bud.get_kid(hreg_label]
 #     assert hreg_idea is not None
 #     assert hreg_idea._begin == 0
@@ -174,7 +158,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 # def test_time_hreg_set_CorrectlyCreatesWeekdayIdea():
 #     x_bud = examples.get_budunit_base_time_example()
-#     x_bud.set_time_hreg_ideas(c400_count=6)
+#
 #     weekday_label = "weekday"
 #     weekday = x_bud.get_idea_obj(x_bud.make_l1_road("hreg,{weekday_label}")
 #     assert weekday is not None
@@ -192,7 +176,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 # def test_time_hreg_set_CorrectlyCreates400YearsegmentCount():
 #     x_bud = examples.get_budunit_base_time_example()
 #     c400_count = 6
-#     x_bud.set_time_hreg_ideas(c400_count=c400_count)
+#
 
 #     timetech_label = "400 year segment"
 #     timetech_road = x_bud.make_l1_road("hreg,{timetech_label}"
@@ -206,7 +190,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 # def test_time_hreg_set_CorrectlyCreates400YearsegmentYears():
 #     h_x_bud = examples.get_budunit_base_time_example()
 #     c400_count = 6
-#     h_x_bud.set_time_hreg_ideas(c400_count=c400_count)
+#
 
 #     hy400_label = "segment400year_years"
 #     hy400_road = x_bud.make_l1_road("hreg,{hy400_label}"
@@ -284,7 +268,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 # def test_time_hreg_set_CorrectlyCreates400YearsegmentYears():
 #     h_x_bud = examples.get_budunit_base_time_example()
 #     c400_count = 6
-#     h_x_bud.set_time_hreg_ideas(c400_count=c400_count)
+#
 
 #     hy400_label = "segment400year_days"
 #     hy400_road = x_bud.make_l1_road("hreg,{hy400_label}"
@@ -298,7 +282,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 # def test_time_hreg_set_CorrectlyCreatesDayRange():
 #     x_bud = examples.get_budunit_base_time_example()
-#     x_bud.set_time_hreg_ideas(c400_count=6)
+#
 #     timetech = x_bud.get_idea_obj(x_bud.make_l1_road("hreg,day_range")
 #     assert timetech is not None
 #     assert timetech._begin == 0
@@ -323,59 +307,58 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 
 def test_BudUnit_get_jajatime_repeating_legible_text_correctlyText():
     # ESTABLISH
-    yao_bud = budunit_shop(_owner_id="Yao")
-    yao_bud.set_time_hreg_ideas(c400_count=7)
+    sue_bud = get_budunit_sue_TimeExample()
 
     # WHEN / THEN
-    every_day_8am_text = yao_bud.get_jajatime_repeating_legible_text(
+    every_day_8am_text = sue_bud.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=1440
     )
     print(f"ReturnsDailyText {every_day_8am_text=}")
     assert every_day_8am_text == "every day at 8am"
 
-    every_2nd_day_8_10am_text = yao_bud.get_jajatime_repeating_legible_text(
+    every_2nd_day_8_10am_text = sue_bud.get_jajatime_repeating_legible_text(
         open=490, nigh=490, divisor=2880
     )
     print(f"ReturnsEvery2DaysText: {every_2nd_day_8_10am_text=}")
     assert every_2nd_day_8_10am_text == "every 2nd day at 8:10am"
 
-    ReturnsEvery6DaysText = yao_bud.get_jajatime_repeating_legible_text(
+    ReturnsEvery6DaysText = sue_bud.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=8640
     )
     print(f"ReturnsEvery6DaysText: {ReturnsEvery6DaysText=}")
     assert ReturnsEvery6DaysText == "every 6th day at 8am"
 
-    every_saturday_8am_text = yao_bud.get_jajatime_repeating_legible_text(
+    every_saturday_8am_text = sue_bud.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=10080
     )
     print(f"ReturnsWeeklyText: {every_saturday_8am_text=}")
     assert every_saturday_8am_text == "every Saturday at 8am"
 
-    sat_2nd_8am_text = yao_bud.get_jajatime_repeating_legible_text(
+    sat_2nd_8am_text = sue_bud.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=20160
     )
     print(f"ReturnsEvery2WeeksText: {sat_2nd_8am_text=}")
     assert sat_2nd_8am_text == "every 2nd Saturday at 8am"
 
-    sat_6th_8am_text = yao_bud.get_jajatime_repeating_legible_text(
+    sat_6th_8am_text = sue_bud.get_jajatime_repeating_legible_text(
         open=480, nigh=480, divisor=60480
     )
     print(f"ReturnsEvery6WeeksText: {sat_6th_8am_text=}")
     assert sat_6th_8am_text == "every 6th Saturday at 8am"
 
-    feb_1st_9am_text = yao_bud.get_jajatime_repeating_legible_text(
+    feb_1st_9am_text = sue_bud.get_jajatime_repeating_legible_text(
         open=1064041020.0, nigh=1064041020.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
     assert feb_1st_9am_text == "Wed Feb 1st, 2023 at 9am"
 
-    feb_1st_7pm_text = yao_bud.get_jajatime_repeating_legible_text(
+    feb_1st_7pm_text = sue_bud.get_jajatime_repeating_legible_text(
         open=1064041620.0, nigh=1064041620.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
     assert feb_1st_7pm_text == "Wed Feb 1st, 2023 at 7pm"
 
-    feb_2nd_12am_text = yao_bud.get_jajatime_repeating_legible_text(
+    feb_2nd_12am_text = sue_bud.get_jajatime_repeating_legible_text(
         open=1064041920.0, nigh=1064041920.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMidnight {feb_2nd_12am_text=}")

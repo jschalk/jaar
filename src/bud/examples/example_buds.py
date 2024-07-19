@@ -402,58 +402,6 @@ def get_budunit_laundry_example1() -> BudUnit:
     return amos_bud
 
 
-def get_budunit_with_tuesday_cleaning_task() -> BudUnit:
-    bob_bud = budunit_shop("Bob")
-    bob_bud.set_time_hreg_ideas(7)
-
-    casa_text = "casa"
-    casa_road = bob_bud.make_l1_road(casa_text)
-    laundry_text = "do_laundry"
-    laundry_road = bob_bud.make_road(casa_road, laundry_text)
-    chill_text = "chill"
-    chill_road = bob_bud.make_road(casa_road, chill_text)
-    bob_bud.add_l1_idea(ideaunit_shop(casa_text))
-    jajatime_road = bob_bud.make_road(bob_bud.make_l1_road("time"), "jajatime")
-    bob_bud.set_fact(jajatime_road, jajatime_road, 1064131200, 1064136133)
-
-    bob_bud.add_idea(ideaunit_shop(laundry_text, pledge=True), casa_road)
-    bob_bud.edit_idea_attr(
-        road=laundry_road,
-        reason_base=jajatime_road,
-        reason_premise=jajatime_road,
-        reason_premise_open=5760.0,
-        reason_premise_nigh=5760.0,
-        reason_premise_divisor=10080.0,
-    )
-    bob_bud.add_idea(ideaunit_shop(chill_text, pledge=True), casa_road)
-    bob_bud.edit_idea_attr(
-        road=chill_road,
-        reason_base=jajatime_road,
-        reason_premise=jajatime_road,
-        reason_premise_open=5760.0,
-        reason_premise_nigh=7160.0,
-        reason_premise_divisor=10080.0,
-    )
-    # # print(f"{bob_bud._idearoot._factunits.values()=}")
-    # laundry_reasonunit = bob_bud.get_idea_obj(laundry_road).get_reasonunit(
-    #     jajatime_road
-    # )
-    # laundry_premise = laundry_reasonunit.get_premise(jajatime_road)
-    # # print(f"{laundry_reasonunit.base=} {laundry_premise=}")
-    # bob_bud.settle_bud()
-    # for x_ideaunit in bob_bud._idea_dict.values():
-    #     if x_ideaunit._label in [laundry_text]:
-    # print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")
-    # print(f"{x_ideaunit._kids.keys()=}")
-    # jaja_factheir = x_ideaunit._factheirs.get(jajatime_road)
-    # print(f"{jaja_factheir.open % 10080=}")
-    # print(f"{jaja_factheir.nigh % 10080=}")
-
-    # print(f"{bob_bud.get_agenda_dict().keys()=}")
-
-    return bob_bud
-
-
 # class YR:
 def from_list_get_active(
     road: RoadUnit, idea_dict: dict, asse_bool: bool = None
