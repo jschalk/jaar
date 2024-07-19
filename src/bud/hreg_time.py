@@ -451,62 +451,23 @@ class HregTimeIdeaSource:
         hreg_list.append(YB(b=56 * m, c=57 * m, rr=rt, n="56-:56"))
         hreg_list.append(YB(b=57 * m, c=58 * m, rr=rt, n="57-:57"))
         hreg_list.append(YB(b=58 * m, c=59 * m, rr=rt, n="58-:58"))
-        hreg_list.append(YB(b=59 * m, c=60 * m, rr=rt, n="59-59"))
+        hreg_list.append(YB(b=59 * m, c=60 * m, rr=rt, n="59-:59"))
         return hreg_list
 
     def get_jajatime_legible_from_dt(self, dt: datetime) -> str:
         weekday_text = dt.strftime("%A")
         monthdescription_text = dt.strftime("%B")
-        monthday_text = self.get_number_with_letter_ending(int(dt.strftime("%d")))
+        monthday_text = get_number_with_letter_ending(int(dt.strftime("%d")))
         year_text = dt.strftime("%Y")
         hour_int = int(dt.strftime("%H"))
         min_int = int(dt.strftime("%M"))
         min1440 = (hour_int * 60) + min_int
-        return f"{weekday_text[:3]} {monthdescription_text[:3]} {monthday_text}, {year_text} at {self.readable_1440_time(min1440)}"
-
-    def readable_1440_time(self, min1440: int) -> str:
-        min60 = min1440 % 60
-        x_open_minutes = f"0{min60:.0f}" if min60 < 10 else f"{min60:.0f}"
-        open_24hr = int(f"{min1440 // 60:.0f}")
-        open_12hr = ""
-        am_pm = ""
-        if min1440 < 720:
-            am_pm = "am"
-            open_12hr = open_24hr
-        else:
-            am_pm = "pm"
-            open_12hr = open_24hr - 12
-
-        if open_24hr == 0:
-            open_12hr = 12
-
-        if x_open_minutes == "00":
-            return f"{open_12hr}{am_pm}"
-        else:
-            return f"{open_12hr}:{x_open_minutes}{am_pm}"
+        return f"{weekday_text[:3]} {monthdescription_text[:3]} {monthday_text}, {year_text} at {readable_1440_time(min1440)}"
 
     def get_time_min_from_dt(self, dt: datetime) -> float:
         ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
         min_time_difference = dt - ce_src
         return round(min_time_difference.total_seconds() / 60) + 527040
-
-    def get_24hr(self):
-        return [""] + [str(x) for x in range(24)]
-
-    def get_60min(self):
-        return [""] + [str(x) for x in range(60)]
-
-    def get_number_with_letter_ending(self, num: int) -> str:
-        tens_digit = num % 100
-        singles_digit = num % 10
-        if tens_digit in [11, 12, 13] or singles_digit not in [1, 2, 3]:
-            return f"{num}th"
-        elif singles_digit == 1:
-            return f"{num}st"
-        elif singles_digit == 2:
-            return f"{num}nd"
-        else:
-            return f"{num}rd"
 
     def get_tech_road(self, local_root) -> RoadUnit:
         return self.roxd(local_root, "tech")
@@ -702,6 +663,41 @@ class PremiseUnitHregTime:
     @property
     def jajatime_nigh(self):
         return self.get_jajatime_open() + self._event_minutes
+
+
+def readable_1440_time(min1440: int) -> str:
+    min60 = min1440 % 60
+    x_open_minutes = f"0{min60:.0f}" if min60 < 10 else f"{min60:.0f}"
+    open_24hr = int(f"{min1440 // 60:.0f}")
+    open_12hr = ""
+    am_pm = ""
+    if min1440 < 720:
+        am_pm = "am"
+        open_12hr = open_24hr
+    else:
+        am_pm = "pm"
+        open_12hr = open_24hr - 12
+
+    if open_24hr == 0:
+        open_12hr = 12
+
+    if x_open_minutes == "00":
+        return f"{open_12hr}{am_pm}"
+    else:
+        return f"{open_12hr}:{x_open_minutes}{am_pm}"
+
+
+def get_number_with_letter_ending(num: int) -> str:
+    tens_digit = num % 100
+    singles_digit = num % 10
+    if tens_digit in [11, 12, 13] or singles_digit not in [1, 2, 3]:
+        return f"{num}th"
+    elif singles_digit == 1:
+        return f"{num}st"
+    elif singles_digit == 2:
+        return f"{num}nd"
+    else:
+        return f"{num}rd"
 
 
 def get_jajatime_text():

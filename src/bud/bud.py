@@ -62,7 +62,11 @@ from src.bud.reason_idea import (
 )
 from src.bud.reason_doer import DoerUnit
 from src.bud.tree_metrics import TreeMetrics, treemetrics_shop
-from src.bud.hreg_time import HregTimeIdeaSource as HregIdea
+from src.bud.hreg_time import (
+    HregTimeIdeaSource as HregIdea,
+    get_number_with_letter_ending,
+    readable_1440_time,
+)
 from src.bud.lemma import lemmas_shop, Lemmas
 from src.bud.origin import originunit_get_from_dict, originunit_shop, OriginUnit
 from src.bud.idea import (
@@ -421,13 +425,11 @@ class BudUnit:
             str_x = self._get_jajatime_week_legible_text(open, divisor)
         elif divisor is not None and divisor % 1440 == 0:
             if divisor == 1440:
-                str_x = f"every day at {x_hregidea.readable_1440_time(min1440=open)}"
+                str_x = f"every day at {readable_1440_time(min1440=open)}"
             else:
                 num_days = int(divisor / 1440)
-                num_with_letter_ending = x_hregidea.get_number_with_letter_ending(
-                    num=num_days
-                )
-                str_x = f"every {num_with_letter_ending} day at {x_hregidea.readable_1440_time(min1440=open)}"
+                num_with_letter_ending = get_number_with_letter_ending(num=num_days)
+                str_x = f"every {num_with_letter_ending} day at {readable_1440_time(min1440=open)}"
         else:
             str_x = "unknown"
         return str_x
@@ -446,11 +448,9 @@ class BudUnit:
             weekday_idea_node = idea
 
         if divisor == 10080:
-            return f"every {weekday_idea_node._label} at {x_hregidea.readable_1440_time(min1440=open % 1440)}"
-        num_with_letter_ending = x_hregidea.get_number_with_letter_ending(
-            num=divisor // 10080
-        )
-        return f"every {num_with_letter_ending} {weekday_idea_node._label} at {x_hregidea.readable_1440_time(min1440=open % 1440)}"
+            return f"every {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
+        num_with_letter_ending = get_number_with_letter_ending(num=divisor // 10080)
+        return f"every {num_with_letter_ending} {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
 
     def get_awardlinks_metrics(self) -> dict[LobbyID, AwardLink]:
         tree_metrics = self.get_tree_metrics()
@@ -1791,7 +1791,6 @@ class BudUnit:
                     denom=yb.md,
                     numor=yb.mn,
                 )
-
         self.settle_bud()
 
     def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):

@@ -486,12 +486,6 @@ class X7TimeIdeaSource:
         min_time_difference = dt - ce_src
         return round(min_time_difference.total_seconds() / 60) + 527040
 
-    def get_24hr(self):
-        return [""] + [str(x) for x in range(24)]
-
-    def get_60min(self):
-        return [""] + [str(x) for x in range(60)]
-
     def get_number_with_letter_ending(self, num: int) -> str:
         tens_digit = num % 100
         singles_digit = num % 10
