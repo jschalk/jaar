@@ -4,25 +4,25 @@ from src._instrument.python import (
     get_json_from_dict,
 )
 from src._road.finance import allot_scale
-from src._road.road import CharID, OwnerID
+from src._road.road import AcctID, OwnerID
 from src.bud.bud import BudUnit
 from src.listen.hubunit import HubUnit
 from dataclasses import dataclass
 
 
-def get_credorledger(x_bud: BudUnit) -> dict[CharID, float]:
+def get_credorledger(x_bud: BudUnit) -> dict[AcctID, float]:
     return {
-        charunit.char_id: charunit.credor_weight
-        for charunit in x_bud._chars.values()
-        if charunit.credor_weight > 0
+        acctunit.acct_id: acctunit.credor_weight
+        for acctunit in x_bud._accts.values()
+        if acctunit.credor_weight > 0
     }
 
 
-def get_debtorledger(x_bud: BudUnit) -> dict[CharID, float]:
+def get_debtorledger(x_bud: BudUnit) -> dict[AcctID, float]:
     return {
-        charunit.char_id: charunit.debtor_weight
-        for charunit in x_bud._chars.values()
-        if charunit.debtor_weight > 0
+        acctunit.acct_id: acctunit.debtor_weight
+        for acctunit in x_bud._accts.values()
+        if acctunit.debtor_weight > 0
     }
 
 
@@ -30,7 +30,7 @@ def get_debtorledger(x_bud: BudUnit) -> dict[CharID, float]:
 class RiverBook:
     hubunit: HubUnit = None
     owner_id: OwnerID = None
-    _rivergrants: dict[CharID, float] = None
+    _rivergrants: dict[AcctID, float] = None
 
 
 def riverbook_shop(hubunit: HubUnit, owner_id: OwnerID):
@@ -58,24 +58,24 @@ def create_riverbook(
 class RiverCycle:
     hubunit: HubUnit = None
     number: int = None
-    econ_credorledgers: dict[OwnerID : dict[CharID, float]] = None
-    riverbooks: dict[CharID, RiverBook] = None
+    econ_credorledgers: dict[OwnerID : dict[AcctID, float]] = None
+    riverbooks: dict[AcctID, RiverBook] = None
 
     def _set_complete_riverbook(self, x_riverbook: RiverBook):
         self.riverbooks[x_riverbook.owner_id] = x_riverbook
 
-    def set_riverbook(self, book_char_id: CharID, book_money_amount: float):
-        owner_credorledger = self.econ_credorledgers.get(book_char_id)
+    def set_riverbook(self, book_acct_id: AcctID, book_money_amount: float):
+        owner_credorledger = self.econ_credorledgers.get(book_acct_id)
         if owner_credorledger is not None:
             x_riverbook = create_riverbook(
                 hubunit=self.hubunit,
-                owner_id=book_char_id,
+                owner_id=book_acct_id,
                 econ_credorledger=owner_credorledger,
                 book_money_amount=book_money_amount,
             )
             self._set_complete_riverbook(x_riverbook)
 
-    def create_cylceledger(self) -> dict[CharID, float]:
+    def create_cylceledger(self) -> dict[AcctID, float]:
         x_dict = {}
         for x_riverbook in self.riverbooks.values():
             for payee, pay_amount in x_riverbook._rivergrants.items():
@@ -89,7 +89,7 @@ class RiverCycle:
 def rivercycle_shop(
     hubunit: HubUnit,
     number: int,
-    econ_credorledgers: dict[OwnerID : dict[CharID, float]] = None,
+    econ_credorledgers: dict[OwnerID : dict[AcctID, float]] = None,
 ):
     return RiverCycle(
         hubunit=hubunit,
@@ -101,7 +101,7 @@ def rivercycle_shop(
 
 def create_init_rivercycle(
     healer_hubunit: HubUnit,
-    econ_credorledgers: dict[OwnerID : dict[CharID, float]],
+    econ_credorledgers: dict[OwnerID : dict[AcctID, float]],
 ) -> RiverCycle:
     x_rivercycle = rivercycle_shop(healer_hubunit, 0, econ_credorledgers)
     init_amount = healer_hubunit.econ_money_magnitude
@@ -110,7 +110,7 @@ def create_init_rivercycle(
 
 
 def create_next_rivercycle(
-    prev_rivercycle: RiverCycle, prev_cycle_cycleledger_post_tax: dict[CharID, float]
+    prev_rivercycle: RiverCycle, prev_cycle_cycleledger_post_tax: dict[AcctID, float]
 ) -> RiverCycle:
     next_rivercycle = rivercycle_shop(
         hubunit=prev_rivercycle.hubunit,
@@ -125,7 +125,7 @@ def create_next_rivercycle(
 @dataclass
 class RiverGrade:
     hubunit: HubUnit = None
-    char_id: CharID = None
+    acct_id: AcctID = None
     number: int = None
     tax_bill_amount: float = None
     grant_amount: float = None
@@ -183,14 +183,14 @@ class RiverGrade:
 
 def rivergrade_shop(
     hubunit: HubUnit,
-    char_id: CharID,
+    acct_id: AcctID,
     number: float = None,
     debtor_count: int = None,
     credor_count: int = None,
 ):
     return RiverGrade(
         hubunit=hubunit,
-        char_id=char_id,
+        acct_id=acct_id,
         number=get_0_if_None(number),
         debtor_count=debtor_count,
         credor_count=credor_count,

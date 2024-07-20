@@ -4,7 +4,7 @@ from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObj_charunit_INSERT():
+def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_ideaunit"
@@ -61,7 +61,7 @@ def test_create_legible_list_ReturnsObj_charunit_INSERT():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_charunit_UPDATE():
+def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_ideaunit"
@@ -118,7 +118,7 @@ def test_create_legible_list_ReturnsObj_charunit_UPDATE():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_charunit_DELETE():
+def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_ideaunit"

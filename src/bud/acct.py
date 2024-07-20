@@ -1,6 +1,6 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json, get_0_if_None
 from src._road.road import (
-    CharID,
+    AcctID,
     default_road_delimiter_if_none,
     validate_roadnode,
     is_roadnode,
@@ -15,35 +15,35 @@ from src.bud.lobby import (
 from dataclasses import dataclass
 
 
-class InvalidCharException(Exception):
+class InvalidAcctException(Exception):
     pass
 
 
-class Bad_char_idLobbyShipException(Exception):
+class Bad_acct_idLobbyShipException(Exception):
     pass
 
 
 @dataclass
-class CharCore:
-    char_id: CharID = None
+class AcctCore:
+    acct_id: AcctID = None
     _road_delimiter: str = None
     _bit: float = None
 
-    def set_char_id(self, x_char_id: CharID):
-        self.char_id = validate_roadnode(x_char_id, self._road_delimiter)
+    def set_acct_id(self, x_acct_id: AcctID):
+        self.acct_id = validate_roadnode(x_acct_id, self._road_delimiter)
 
 
 @dataclass
-class CharUnit(CharCore):
-    """This represents the BudUnit._owner_id's opinion of the CharUnit.char_id
-    CharUnit.credor_weight represents how much credor_weight the _owner_id projects to the char_id
-    CharUnit.debtor_weight represents how much debtor_weight the _owner_id projects to the char_id
+class AcctUnit(AcctCore):
+    """This represents the BudUnit._owner_id's opinion of the AcctUnit.acct_id
+    AcctUnit.credor_weight represents how much credor_weight the _owner_id projects to the acct_id
+    AcctUnit.debtor_weight represents how much debtor_weight the _owner_id projects to the acct_id
     """
 
     credor_weight: int = None
     debtor_weight: int = None
     # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
-    _lobbyships: dict[CharID, LobbyShip] = None
+    _lobbyships: dict[AcctID, LobbyShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
@@ -116,12 +116,12 @@ class CharUnit(CharCore):
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        bud_charunit_total_credor_weight: float,
-        bud_charunit_total_debtor_weight: float,
+        bud_acctunit_total_credor_weight: float,
+        bud_acctunit_total_debtor_weight: float,
     ):
         if fund_agenda_ratio_give_sum == 0:
             self._fund_agenda_ratio_give = (
-                self.get_credor_weight() / bud_charunit_total_credor_weight
+                self.get_credor_weight() / bud_acctunit_total_credor_weight
             )
         else:
             self._fund_agenda_ratio_give = (
@@ -130,7 +130,7 @@ class CharUnit(CharCore):
 
         if fund_agenda_ratio_take_sum == 0:
             self._fund_agenda_ratio_take = (
-                self.get_debtor_weight() / bud_charunit_total_debtor_weight
+                self.get_debtor_weight() / bud_acctunit_total_debtor_weight
             )
         else:
             self._fund_agenda_ratio_take = (
@@ -148,13 +148,13 @@ class CharUnit(CharCore):
 
     def set_lobbyship(self, x_lobbyship: LobbyShip):
         x_lobby_id = x_lobbyship.lobby_id
-        lobby_id_is_char_id = is_roadnode(x_lobby_id, self._road_delimiter)
-        if lobby_id_is_char_id and self.char_id != x_lobby_id:
-            raise Bad_char_idLobbyShipException(
-                f"CharUnit with char_id='{self.char_id}' cannot have link to '{x_lobby_id}'."
+        lobby_id_is_acct_id = is_roadnode(x_lobby_id, self._road_delimiter)
+        if lobby_id_is_acct_id and self.acct_id != x_lobby_id:
+            raise Bad_acct_idLobbyShipException(
+                f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_lobby_id}'."
             )
 
-        x_lobbyship._char_id = self.char_id
+        x_lobbyship._acct_id = self.acct_id
         self._lobbyships[x_lobbyship.lobby_id] = x_lobbyship
 
     def get_lobbyship(self, lobby_id: LobbyID) -> LobbyShip:
@@ -204,7 +204,7 @@ class CharUnit(CharCore):
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
-            "char_id": self.char_id,
+            "acct_id": self.acct_id,
             "credor_weight": self.credor_weight,
             "debtor_weight": self.debtor_weight,
             "_lobbyships": self.get_lobbyships_dict(),
@@ -227,47 +227,47 @@ class CharUnit(CharCore):
         x_dict["_fund_agenda_ratio_take"] = self._fund_agenda_ratio_take
 
 
-# class CharUnitsshop:
-def charunits_get_from_json(charunits_json: str) -> dict[str, CharUnit]:
-    charunits_dict = get_dict_from_json(json_x=charunits_json)
-    return charunits_get_from_dict(x_dict=charunits_dict)
+# class AcctUnitsshop:
+def acctunits_get_from_json(acctunits_json: str) -> dict[str, AcctUnit]:
+    acctunits_dict = get_dict_from_json(json_x=acctunits_json)
+    return acctunits_get_from_dict(x_dict=acctunits_dict)
 
 
-def charunits_get_from_dict(
+def acctunits_get_from_dict(
     x_dict: dict, _road_delimiter: str = None
-) -> dict[str, CharUnit]:
-    charunits = {}
-    for charunit_dict in x_dict.values():
-        x_charunit = charunit_get_from_dict(charunit_dict, _road_delimiter)
-        charunits[x_charunit.char_id] = x_charunit
-    return charunits
+) -> dict[str, AcctUnit]:
+    acctunits = {}
+    for acctunit_dict in x_dict.values():
+        x_acctunit = acctunit_get_from_dict(acctunit_dict, _road_delimiter)
+        acctunits[x_acctunit.acct_id] = x_acctunit
+    return acctunits
 
 
-def charunit_get_from_dict(charunit_dict: dict, _road_delimiter: str) -> CharUnit:
-    x_char_id = charunit_dict["char_id"]
-    x_credor_weight = charunit_dict["credor_weight"]
-    x_debtor_weight = charunit_dict["debtor_weight"]
-    x_lobbyships_dict = charunit_dict["_lobbyships"]
-    x_charunit = charunit_shop(
-        x_char_id, x_credor_weight, x_debtor_weight, _road_delimiter
+def acctunit_get_from_dict(acctunit_dict: dict, _road_delimiter: str) -> AcctUnit:
+    x_acct_id = acctunit_dict["acct_id"]
+    x_credor_weight = acctunit_dict["credor_weight"]
+    x_debtor_weight = acctunit_dict["debtor_weight"]
+    x_lobbyships_dict = acctunit_dict["_lobbyships"]
+    x_acctunit = acctunit_shop(
+        x_acct_id, x_credor_weight, x_debtor_weight, _road_delimiter
     )
-    x_charunit._lobbyships = lobbyships_get_from_dict(x_lobbyships_dict, x_char_id)
-    _irrational_debtor_weight = charunit_dict.get("_irrational_debtor_weight", 0)
-    _inallocable_debtor_weight = charunit_dict.get("_inallocable_debtor_weight", 0)
-    x_charunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
-    x_charunit.add_inallocable_debtor_weight(get_0_if_None(_inallocable_debtor_weight))
+    x_acctunit._lobbyships = lobbyships_get_from_dict(x_lobbyships_dict, x_acct_id)
+    _irrational_debtor_weight = acctunit_dict.get("_irrational_debtor_weight", 0)
+    _inallocable_debtor_weight = acctunit_dict.get("_inallocable_debtor_weight", 0)
+    x_acctunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
+    x_acctunit.add_inallocable_debtor_weight(get_0_if_None(_inallocable_debtor_weight))
 
-    return x_charunit
+    return x_acctunit
 
 
-def charunit_shop(
-    char_id: CharID,
+def acctunit_shop(
+    acct_id: AcctID,
     credor_weight: int = None,
     debtor_weight: int = None,
     _road_delimiter: str = None,
     _bit: float = None,
-) -> CharUnit:
-    x_charunit = CharUnit(
+) -> AcctUnit:
+    x_acctunit = AcctUnit(
         credor_weight=get_1_if_None(credor_weight),
         debtor_weight=get_1_if_None(debtor_weight),
         _lobbyships={},
@@ -284,5 +284,5 @@ def charunit_shop(
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _bit=default_bit_if_none(_bit),
     )
-    x_charunit.set_char_id(x_char_id=char_id)
-    return x_charunit
+    x_acctunit.set_acct_id(x_acct_id=acct_id)
+    return x_acctunit

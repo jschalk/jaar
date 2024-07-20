@@ -35,8 +35,8 @@ class OwnerID(HealerID):
     pass
 
 
-class CharID(OwnerID):  # Created to help track the concept
-    """Every CharID object is OwnerID, must follow OwnerID format."""
+class AcctID(OwnerID):  # Created to help track the concept
+    """Every AcctID object is OwnerID, must follow OwnerID format."""
 
     pass
 

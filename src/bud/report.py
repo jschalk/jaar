@@ -3,11 +3,11 @@ from src.bud.bud import BudUnit
 from pandas import DataFrame
 
 
-def get_bud_charunits_dataframe(x_bud: BudUnit) -> DataFrame:
-    if x_bud._chars == {}:
+def get_bud_acctunits_dataframe(x_bud: BudUnit) -> DataFrame:
+    if x_bud._accts == {}:
         return DataFrame(
             columns=[
-                "char_id",
+                "acct_id",
                 "credor_weight",
                 "debtor_weight",
                 "_fund_give",
@@ -18,8 +18,8 @@ def get_bud_charunits_dataframe(x_bud: BudUnit) -> DataFrame:
                 "_fund_agenda_ratio_take",
             ]
         )
-    x_charunits_list = list(x_bud.get_charunits_dict(all_attrs=True).values())
-    return DataFrame(x_charunits_list)
+    x_acctunits_list = list(x_bud.get_acctunits_dict(all_attrs=True).values())
+    return DataFrame(x_acctunits_list)
 
 
 def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame:

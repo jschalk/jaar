@@ -21,11 +21,11 @@ class BudTable(Base):
     _weight = Column(Integer)
 
 
-class CharUnitTable(Base):
-    __tablename__ = "charunit"
+class AcctUnitTable(Base):
+    __tablename__ = "acctunit"
 
     uid = Column(Integer, primary_key=True)
-    char_id = Column(String)
+    acct_id = Column(String)
     credor_weight = Column(Integer)
     debtor_weight = Column(Integer)
 
@@ -41,7 +41,7 @@ class LobbyShipTable(Base):
     __tablename__ = "lobbyship"
     uid = Column(Integer, primary_key=True)
     lobby_id = Column(String)
-    char_id = Column(String)
+    acct_id = Column(String)
     credor_weight = Column(Integer)
     debtor_weight = Column(Integer)
 

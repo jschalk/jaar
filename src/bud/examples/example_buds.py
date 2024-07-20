@@ -359,8 +359,8 @@ def get_budunit_laundry_example1() -> BudUnit:
     amos_text = "Amos"
     amos_bud = budunit_shop(_owner_id=amos_text)
     cali_text = "Cali"
-    amos_bud.add_charunit(amos_text)
-    amos_bud.add_charunit(cali_text)
+    amos_bud.add_acctunit(amos_text)
+    amos_bud.add_acctunit(cali_text)
 
     casa_text = "casa"
     basket_text = "laundry basket status"

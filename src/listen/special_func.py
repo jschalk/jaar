@@ -15,8 +15,8 @@ def create_pledge(
         x_idea.pledge = True
         x_idea._doerunit.set_lobbyhold(x_lobbyhold)
 
-        if x_lobbyhold is not None and x_bud.char_exists(x_lobbyhold) is False:
-            x_bud.add_charunit(x_lobbyhold)
+        if x_lobbyhold is not None and x_bud.acct_exists(x_lobbyhold) is False:
+            x_bud.add_acctunit(x_lobbyhold)
 
         if reason_premise is not None:
             if x_bud.idea_exists(reason_premise) is False:

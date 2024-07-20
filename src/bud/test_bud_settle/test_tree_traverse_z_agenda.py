@@ -432,7 +432,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
 
     # ESTABLISH
     sue_bud = get_budunit_sue_TimeExample()
-    assert len(sue_bud._chars) == 0
+    assert len(sue_bud._accts) == 0
     assert len(sue_bud.get_lobby_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
 
@@ -470,7 +470,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     awardlink_z = awardlink_shop(lobby_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink_z)
 
-    assert len(sue_bud._chars) == 0
+    assert len(sue_bud._accts) == 0
     assert len(sue_bud.get_lobby_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
     assert sue_bud.get_idea_obj(daytime_road)._begin == 0
@@ -561,7 +561,7 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     assert get_tasks_count(pledge_idea_list) == 64
 
 
-def test_BudUnit_agenda_IsSetByDoerUnit_1CharLobby():
+def test_BudUnit_agenda_IsSetByDoerUnit_1AcctLobby():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
@@ -571,7 +571,7 @@ def test_BudUnit_agenda_IsSetByDoerUnit_1CharLobby():
     assert len(yao_bud.get_agenda_dict()) == 1
 
     sue_text = "Sue"
-    yao_bud.add_charunit(sue_text)
+    yao_bud.add_acctunit(sue_text)
     doerunit_sue = doerunit_shop()
     doerunit_sue.set_lobbyhold(lobby_id=sue_text)
     assert len(yao_bud.get_agenda_dict()) == 1
@@ -583,7 +583,7 @@ def test_BudUnit_agenda_IsSetByDoerUnit_1CharLobby():
     assert len(yao_bud.get_agenda_dict()) == 0
 
     # WHEN
-    yao_bud.add_charunit(yao_text)
+    yao_bud.add_acctunit(yao_text)
     doerunit_yao = doerunit_shop()
     doerunit_yao.set_lobbyhold(lobby_id=yao_text)
 
@@ -597,20 +597,20 @@ def test_BudUnit_agenda_IsSetByDoerUnit_1CharLobby():
     # print(f"{agenda_dict[0]._label=}")
 
 
-def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2CharLobby():
+def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctLobby():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_charunit(yao_text)
+    yao_bud.add_acctunit(yao_text)
     casa_text = "casa"
     casa_road = yao_bud.make_road(yao_text, casa_text)
     yao_bud.add_l1_idea(ideaunit_shop(casa_text, pledge=True))
 
     sue_text = "Sue"
-    yao_bud.add_charunit(sue_text)
+    yao_bud.add_acctunit(sue_text)
     run_text = ",runners"
-    sue_charunit = yao_bud.get_char(sue_text)
-    sue_charunit.add_lobbyship(run_text)
+    sue_acctunit = yao_bud.get_acct(sue_text)
+    sue_acctunit.add_lobbyship(run_text)
 
     run_doerunit = doerunit_shop()
     run_doerunit.set_lobbyhold(lobby_id=run_text)
@@ -623,8 +623,8 @@ def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2CharLobby():
     assert len(yao_bud.get_agenda_dict()) == 0
 
     # WHEN
-    yao_charunit = yao_bud.get_char(yao_text)
-    yao_charunit.add_lobbyship(run_text)
+    yao_acctunit = yao_bud.get_acct(yao_text)
+    yao_acctunit.add_lobbyship(run_text)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1
@@ -719,7 +719,7 @@ def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
     zia_bud.add_idea(ideaunit_shop(sweep_text, pledge=True), clean_road)
     sweep_idea = zia_bud.get_idea_obj(sweep_road)
     yao_text = "Yao"
-    zia_bud.add_charunit(yao_text)
+    zia_bud.add_acctunit(yao_text)
     sweep_idea._doerunit.set_lobbyhold(yao_text)
     print(f"{sweep_idea}")
     agenda_dict = zia_bud.get_agenda_dict()

@@ -7,7 +7,7 @@ from src.gift.atom_config import (
 )
 from src.normal_db.normal_models import (
     BudTable,
-    CharUnitTable,
+    AcctUnitTable,
     LobbyShipTable,
     IdeaTable,
     AwardLinkTable,
@@ -72,16 +72,16 @@ def test_normalized_table_BudTable_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_CharUnitTable_Exists():
+def test_normalized_table_AcctUnitTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_charunit")
-    mapper = inspect(CharUnitTable)
+    config_category = get_normalized_bud_table_build().get("bud_acctunit")
+    mapper = inspect(AcctUnitTable)
     # print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "charunit"
-    assert config_table_name == CharUnitTable.__tablename__
+    assert config_table_name == "acctunit"
+    assert config_table_name == AcctUnitTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 
@@ -100,7 +100,7 @@ def test_normalized_table_CharUnitTable_Exists():
 
 def test_normalized_table_LobbyShipTable_lobbyship_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_char_lobbyship")
+    config_category = get_normalized_bud_table_build().get("bud_acct_lobbyship")
     mapper = inspect(LobbyShipTable)
     print_out_expected_class_attribute_declarations(config_category)
 

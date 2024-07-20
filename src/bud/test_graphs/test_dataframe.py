@@ -1,12 +1,12 @@
 from src.bud.examples.example_buds import budunit_v001_with_large_agenda
 from src.bud.bud import budunit_shop
 from src.bud.report import (
-    get_bud_charunits_dataframe,
+    get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )
 
 
-def test_get_bud_charunits_dataframe_ReturnsCorrectDataFrame():
+def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
     # ESTABLISH
     luca_bud = budunit_shop()
     luca_bud.set_credor_respect(500)
@@ -14,18 +14,18 @@ def test_get_bud_charunits_dataframe_ReturnsCorrectDataFrame():
     yao_text = "Yao"
     yao_credor_weight = 66
     yao_debtor_weight = 77
-    luca_bud.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
+    luca_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
     sue_text = "Sue"
     sue_credor_weight = 434
     sue_debtor_weight = 323
-    luca_bud.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    luca_bud.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
 
     # WHEN
-    x_df = get_bud_charunits_dataframe(luca_bud)
+    x_df = get_bud_acctunits_dataframe(luca_bud)
 
     # THEN
-    charunit_colums = {
-        "char_id",
+    acctunit_colums = {
+        "acct_id",
         "credor_weight",
         "debtor_weight",
         "_lobbyships",
@@ -38,20 +38,20 @@ def test_get_bud_charunits_dataframe_ReturnsCorrectDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == charunit_colums
+    assert set(x_df.columns) == acctunit_colums
     assert x_df.shape[0] == 2
 
 
-def test_get_bud_charunits_dataframe_ReturnsCorrectEmptyDataFrame():
+def test_get_bud_acctunits_dataframe_ReturnsCorrectEmptyDataFrame():
     # ESTABLISH
     luca_bud = budunit_shop()
 
     # WHEN
-    x_df = get_bud_charunits_dataframe(luca_bud)
+    x_df = get_bud_acctunits_dataframe(luca_bud)
 
     # THEN
-    charunit_colums = {
-        "char_id",
+    acctunit_colums = {
+        "acct_id",
         "credor_weight",
         "debtor_weight",
         "_fund_give",
@@ -63,7 +63,7 @@ def test_get_bud_charunits_dataframe_ReturnsCorrectEmptyDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == charunit_colums
+    assert set(x_df.columns) == acctunit_colums
     assert x_df.shape[0] == 0
 
 
@@ -79,7 +79,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
     print(x_df)
 
     # THEN
-    charunit_colums = {
+    acctunit_colums = {
         "owner_id",
         "fund_ratio",
         "_label",
@@ -93,7 +93,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == charunit_colums
+    assert set(x_df.columns) == acctunit_colums
     assert x_df.shape[0] == 63
 
 
@@ -107,7 +107,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
     print(x_df)
 
     # THEN
-    charunit_colums = {
+    acctunit_colums = {
         "owner_id",
         "fund_ratio",
         "_label",
@@ -121,4 +121,4 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == charunit_colums
+    assert set(x_df.columns) == acctunit_colums

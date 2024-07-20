@@ -8,7 +8,7 @@ from src.bud.examples.example_buds import (
 from src.bud.bud import budunit_shop
 from src.bud.graphic import (
     display_ideatree,
-    get_bud_chars_plotly_fig,
+    get_bud_accts_plotly_fig,
     get_bud_agenda_plotly_fig,
 )
 
@@ -49,7 +49,7 @@ def test_display_ideatree_Scenario1_shows_Tasks():
     # x_fig.show()
 
 
-def test_get_bud_chars_plotly_fig_DisplaysCorrectInfo():
+def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo():
     # ESTABLISH
     luca_bud = budunit_shop()
     luca_bud.set_credor_respect(500)
@@ -57,14 +57,14 @@ def test_get_bud_chars_plotly_fig_DisplaysCorrectInfo():
     yao_text = "Yao"
     yao_credor_weight = 66
     yao_debtor_weight = 77
-    luca_bud.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
+    luca_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
     sue_text = "Sue"
     sue_credor_weight = 434
     sue_debtor_weight = 323
-    luca_bud.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    luca_bud.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
 
     # WHEN
-    x_fig = get_bud_chars_plotly_fig(luca_bud)
+    x_fig = get_bud_accts_plotly_fig(luca_bud)
 
     # # THEN
     # x_fig.show()

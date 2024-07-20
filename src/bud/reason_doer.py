@@ -1,6 +1,6 @@
 from src._instrument.python import get_empty_set_if_none
 from src.bud.lobby import LobbyBox, LobbyID
-from src.bud.char import CharID
+from src.bud.acct import AcctID
 from dataclasses import dataclass
 
 
@@ -44,7 +44,7 @@ class DoerHeir:
     _lobbyholds: set[LobbyID]
     _owner_id_doer: bool
 
-    def _get_all_chars(
+    def _get_all_accts(
         self,
         bud_lobbyboxs: dict[LobbyID, LobbyBox],
         lobby_id_set: set[LobbyID],
@@ -58,20 +58,20 @@ class DoerHeir:
         return self._lobbyholds == set()
 
     def set_owner_id_doer(
-        self, bud_lobbyboxs: dict[LobbyID, LobbyBox], bud_owner_id: CharID
+        self, bud_lobbyboxs: dict[LobbyID, LobbyBox], bud_owner_id: AcctID
     ):
         self._owner_id_doer = self.get_owner_id_doer_bool(bud_lobbyboxs, bud_owner_id)
 
     def get_owner_id_doer_bool(
-        self, bud_lobbyboxs: dict[LobbyID, LobbyBox], bud_owner_id: CharID
+        self, bud_lobbyboxs: dict[LobbyID, LobbyBox], bud_owner_id: AcctID
     ) -> bool:
         if self._lobbyholds == set():
             return True
 
         for x_lobby_id, x_lobbybox in bud_lobbyboxs.items():
             if x_lobby_id in self._lobbyholds:
-                for x_char_id in x_lobbybox._lobbyships.keys():
-                    if x_char_id == bud_owner_id:
+                for x_acct_id in x_lobbybox._lobbyships.keys():
+                    if x_acct_id == bud_owner_id:
                         return True
         return False
 
@@ -91,20 +91,20 @@ class DoerHeir:
             for lobbyhold in parent_doerheir._lobbyholds:
                 x_lobbyholds.add(lobbyhold)
         else:
-            # get all_chars of parent doerheir lobbyboxs
-            all_parent_doerheir_chars = self._get_all_chars(
+            # get all_accts of parent doerheir lobbyboxs
+            all_parent_doerheir_accts = self._get_all_accts(
                 bud_lobbyboxs=bud_lobbyboxs,
                 lobby_id_set=parent_doerheir._lobbyholds,
             )
-            # get all_chars of doerunit lobbyboxs
-            all_doerunit_chars = self._get_all_chars(
+            # get all_accts of doerunit lobbyboxs
+            all_doerunit_accts = self._get_all_accts(
                 bud_lobbyboxs=bud_lobbyboxs,
                 lobby_id_set=doerunit._lobbyholds,
             )
-            if not set(all_doerunit_chars).issubset(set(all_parent_doerheir_chars)):
+            if not set(all_doerunit_accts).issubset(set(all_parent_doerheir_accts)):
                 # else raise error
                 raise InvalidDoerHeirPopulateException(
-                    f"parent_doerheir does not contain all chars of the idea's doerunit\n{set(all_parent_doerheir_chars)=}\n\n{set(all_doerunit_chars)=}"
+                    f"parent_doerheir does not contain all accts of the idea's doerunit\n{set(all_parent_doerheir_accts)=}\n\n{set(all_doerunit_accts)=}"
                 )
 
             # set dict_x = to doerunit lobbyboxs

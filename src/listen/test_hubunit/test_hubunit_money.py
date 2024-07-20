@@ -22,7 +22,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     sue_voice_bud = sue_hubunit.get_voice_bud()
-    sue_voice_bud.add_charunit(sue_text)
+    sue_voice_bud.add_acctunit(sue_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     dallas_text = "dallas"
@@ -52,7 +52,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     sue_voice_bud = sue_hubunit.get_voice_bud()
-    sue_voice_bud.add_charunit(sue_text)
+    sue_voice_bud.add_acctunit(sue_text)
     texas_text = "Tex/as"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
@@ -77,7 +77,7 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     sue_voice_bud = sue_hubunit.get_voice_bud()
-    sue_voice_bud.add_charunit(sue_text)
+    sue_voice_bud.add_acctunit(sue_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
@@ -110,9 +110,9 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     sue_voice_bud = sue_hubunit.get_voice_bud()
-    sue_voice_bud.add_charunit(sue_text)
+    sue_voice_bud.add_acctunit(sue_text)
     bob_text = "Bob"
-    sue_voice_bud.add_charunit(bob_text)
+    sue_voice_bud.add_acctunit(bob_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
@@ -249,7 +249,7 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(env_dir_setup_c
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     sue_voice_bud = sue_hubunit.get_voice_bud()
-    sue_voice_bud.add_charunit(sue_text)
+    sue_voice_bud.add_acctunit(sue_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))

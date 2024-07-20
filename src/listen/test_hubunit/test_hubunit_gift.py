@@ -450,7 +450,7 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     before_bud = sue_hubunit.default_voice_bud()
     bob_text = "Bob"
     after_bud = copy_deepcopy(before_bud)
-    after_bud.add_charunit(bob_text)
+    after_bud.add_acctunit(bob_text)
     sue_hubunit.create_save_gift_file(before_bud, after_bud)
 
     # THEN

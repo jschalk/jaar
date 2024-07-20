@@ -38,13 +38,13 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_BudWhenNo_lobbyholdIsSe
     zia_credor_weight = 47
     zia_debtor_weight = 41
     zia_pool = 87
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_respect(zia_pool)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.set_acct_respect(zia_pool)
 
     zia_job = budunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_job.add_charunit(yao_text, debtor_weight=12)
+    zia_job.add_acctunit(yao_text, debtor_weight=12)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_job_bud(zia_job)
     new_yao_job = create_listen_basis(yao_duty)
@@ -66,13 +66,13 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_Bud(env_dir_setup_clean
     zia_credor_weight = 47
     zia_debtor_weight = 41
     zia_pool = 87
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_respect(zia_pool)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.set_acct_respect(zia_pool)
 
     zia_job = budunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_job.add_charunit(yao_text, debtor_weight=12)
+    zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
@@ -126,16 +126,16 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobBudWithDetailsDecidedBy_
     # THEN
     assert new_yao_action1.idea_exists(cook_road())
     new_cook_idea = new_yao_action1.get_idea_obj(cook_road())
-    zia_charunit = new_yao_action1.get_char(zia_text)
-    bob_charunit = new_yao_action1.get_char(bob_text)
-    assert zia_charunit.debtor_weight < bob_charunit.debtor_weight
+    zia_acctunit = new_yao_action1.get_acct(zia_text)
+    bob_acctunit = new_yao_action1.get_acct(bob_text)
+    assert zia_acctunit.debtor_weight < bob_acctunit.debtor_weight
     assert new_cook_idea.get_reasonunit(eat_road()) is None
 
     yao_zia_debtor_weight = 15
     yao_bob_debtor_weight = 5
-    yao_duty.add_charunit(zia_text, None, yao_zia_debtor_weight)
-    yao_duty.add_charunit(bob_text, None, yao_bob_debtor_weight)
-    yao_duty.set_char_respect(100)
+    yao_duty.add_acctunit(zia_text, None, yao_zia_debtor_weight)
+    yao_duty.add_acctunit(bob_text, None, yao_bob_debtor_weight)
+    yao_duty.set_acct_respect(100)
     new_yao_action2 = create_listen_basis(yao_duty)
     assert new_yao_action2.idea_exists(cook_road()) is False
 
@@ -145,9 +145,9 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobBudWithDetailsDecidedBy_
     # THEN
     assert new_yao_action2.idea_exists(cook_road())
     new_cook_idea = new_yao_action2.get_idea_obj(cook_road())
-    zia_charunit = new_yao_action2.get_char(zia_text)
-    bob_charunit = new_yao_action2.get_char(bob_text)
-    assert zia_charunit.debtor_weight > bob_charunit.debtor_weight
+    zia_acctunit = new_yao_action2.get_acct(zia_text)
+    bob_acctunit = new_yao_action2.get_acct(bob_text)
+    assert zia_acctunit.debtor_weight > bob_acctunit.debtor_weight
     zia_eat_reasonunit = zia_cook_ideaunit.get_reasonunit(eat_road())
     assert new_cook_idea.get_reasonunit(eat_road()) == zia_eat_reasonunit
 
@@ -164,10 +164,10 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalBud(
     sue_text = "Sue"
     sue_credor_weight = 57
     sue_debtor_weight = 51
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_respect(yao_pool)
+    yao_duty.set_acct_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_bud(yao_duty)
 
@@ -175,7 +175,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalBud(
     zia_job = budunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_job.add_charunit(yao_text, debtor_weight=12)
+    zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
@@ -184,7 +184,7 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalBud(
 
     sue_job = budunit_shop(sue_text)
     sue_job.set_max_tree_traverse(5)
-    zia_job.add_charunit(yao_text, debtor_weight=12)
+    zia_job.add_acctunit(yao_text, debtor_weight=12)
     vacuum_text = "vacuum"
     vacuum_road = sue_job.make_l1_road(vacuum_text)
     sue_job.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
@@ -220,12 +220,12 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalBud(
     # THEN irrational bud is ignored
     assert len(new_yao_job.get_agenda_dict()) != 3
     assert len(new_yao_job.get_agenda_dict()) == 2
-    zia_charunit = new_yao_job.get_char(zia_text)
-    sue_charunit = new_yao_job.get_char(sue_text)
-    print(f"{sue_charunit.debtor_weight=}")
-    print(f"{sue_charunit._irrational_debtor_weight=}")
-    assert zia_charunit._irrational_debtor_weight == 0
-    assert sue_charunit._irrational_debtor_weight == 51
+    zia_acctunit = new_yao_job.get_acct(zia_text)
+    sue_acctunit = new_yao_job.get_acct(sue_text)
+    print(f"{sue_acctunit.debtor_weight=}")
+    print(f"{sue_acctunit._irrational_debtor_weight=}")
+    assert zia_acctunit._irrational_debtor_weight == 0
+    assert sue_acctunit._irrational_debtor_weight == 51
 
 
 def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobBud(
@@ -240,17 +240,17 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobBud(
     sue_credor_weight = 57
     zia_debtor_weight = 41
     sue_debtor_weight = 51
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_duty.set_char_respect(yao_pool)
+    yao_duty.set_acct_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_bud(yao_duty)
 
     zia_job = budunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_job.add_charunit(yao_text, debtor_weight=12)
+    zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
@@ -265,12 +265,12 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobBud(
     # THEN irrational bud is ignored
     assert len(new_yao_job.get_agenda_dict()) != 3
     assert len(new_yao_job.get_agenda_dict()) == 2
-    zia_charunit = new_yao_job.get_char(zia_text)
-    sue_charunit = new_yao_job.get_char(sue_text)
-    print(f"{sue_charunit.debtor_weight=}")
-    print(f"{sue_charunit._inallocable_debtor_weight=}")
-    assert zia_charunit._inallocable_debtor_weight == 0
-    assert sue_charunit._inallocable_debtor_weight == 51
+    zia_acctunit = new_yao_job.get_acct(zia_text)
+    sue_acctunit = new_yao_job.get_acct(sue_text)
+    print(f"{sue_acctunit.debtor_weight=}")
+    print(f"{sue_acctunit._inallocable_debtor_weight=}")
+    assert zia_acctunit._inallocable_debtor_weight == 0
+    assert sue_acctunit._inallocable_debtor_weight == 51
 
 
 def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
@@ -282,13 +282,13 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     yao_text = "Yao"
     yao_credor_weight = 57
     yao_debtor_weight = 51
-    yao_duty.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
+    yao_duty.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_pool = 87
-    yao_duty.set_char_respect(yao_pool)
+    yao_duty.set_acct_respect(yao_pool)
     # save yao without task to dutys
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_duty_bud(yao_duty)
@@ -298,7 +298,7 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     zia_job = budunit_shop(zia_text)
     zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_job.add_charunit(yao_text, debtor_weight=12)
+    zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)

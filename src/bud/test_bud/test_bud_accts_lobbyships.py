@@ -7,16 +7,16 @@ def test_BudUnit_get_lobby_ids_dict_ReturnsObj():
     sue_text = "Sue"
     zia_text = "Zia"
     bob_bud = budunit_shop("Bob")
-    bob_bud.add_charunit(yao_text)
-    bob_bud.add_charunit(sue_text)
-    bob_bud.add_charunit(zia_text)
-    sue_charunit = bob_bud.get_char(sue_text)
-    zia_charunit = bob_bud.get_char(zia_text)
+    bob_bud.add_acctunit(yao_text)
+    bob_bud.add_acctunit(sue_text)
+    bob_bud.add_acctunit(zia_text)
+    sue_acctunit = bob_bud.get_acct(sue_text)
+    zia_acctunit = bob_bud.get_acct(zia_text)
     run_text = ",Run"
     swim_text = ",Swim"
-    sue_charunit.add_lobbyship(run_text)
-    zia_charunit.add_lobbyship(run_text)
-    zia_charunit.add_lobbyship(swim_text)
+    sue_acctunit.add_lobbyship(run_text)
+    zia_acctunit.add_lobbyship(run_text)
+    zia_acctunit.add_lobbyship(swim_text)
 
     # WHEN
     lobby_ids_dict = bob_bud.get_lobby_ids_dict()

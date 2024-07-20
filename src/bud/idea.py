@@ -14,7 +14,7 @@ from src._road.road import (
     default_road_delimiter_if_none,
     replace_road_delimiter,
     RealID,
-    CharID,
+    AcctID,
     LobbyID,
     RoadUnit,
     rebuild_road,
@@ -92,8 +92,8 @@ class IdeaAttrFilter:
     pledge: bool = None
     factunit: FactUnit = None
     descendant_pledge_count: int = None
-    all_char_cred: bool = None
-    all_char_debt: bool = None
+    all_acct_cred: bool = None
+    all_acct_debt: bool = None
     awardlink: AwardLink = None
     awardlink_del: LobbyID = None
     is_expanded: bool = None
@@ -178,8 +178,8 @@ def ideaattrfilter_shop(
     pledge: bool = None,
     factunit: FactUnit = None,
     descendant_pledge_count: int = None,
-    all_char_cred: bool = None,
-    all_char_debt: bool = None,
+    all_acct_cred: bool = None,
+    all_acct_debt: bool = None,
     awardlink: AwardLink = None,
     awardlink_del: LobbyID = None,
     is_expanded: bool = None,
@@ -210,8 +210,8 @@ def ideaattrfilter_shop(
         pledge=pledge,
         factunit=factunit,
         descendant_pledge_count=descendant_pledge_count,
-        all_char_cred=all_char_cred,
-        all_char_debt=all_char_debt,
+        all_acct_cred=all_acct_cred,
+        all_acct_debt=all_acct_debt,
         awardlink=awardlink,
         awardlink_del=awardlink_del,
         is_expanded=is_expanded,
@@ -262,8 +262,8 @@ class IdeaUnit:
     _active: bool = None
     _ancestor_pledge_count: int = None
     _descendant_pledge_count: int = None
-    _all_char_cred: bool = None
-    _all_char_debt: bool = None
+    _all_acct_cred: bool = None
+    _all_acct_debt: bool = None
     _is_expanded: bool = None
     _active_hx: dict[int, bool] = None
     _road_delimiter: str = None
@@ -422,9 +422,9 @@ class IdeaUnit:
 
         return descendant_roads
 
-    def clear_all_char_cred_debt(self):
-        self._all_char_cred = None
-        self._all_char_debt = None
+    def clear_all_acct_cred_debt(self):
+        self._all_acct_cred = None
+        self._all_acct_debt = None
 
     def set_ancestor_pledge_count(
         self, parent_ancestor_pledge_count: int, parent_pledge: bool
@@ -629,10 +629,10 @@ class IdeaUnit:
             self._range_source_road = idea_attr.range_source_road
         if idea_attr.descendant_pledge_count is not None:
             self._descendant_pledge_count = idea_attr.descendant_pledge_count
-        if idea_attr.all_char_cred is not None:
-            self._all_char_cred = idea_attr.all_char_cred
-        if idea_attr.all_char_debt is not None:
-            self._all_char_debt = idea_attr.all_char_debt
+        if idea_attr.all_acct_cred is not None:
+            self._all_acct_cred = idea_attr.all_acct_cred
+        if idea_attr.all_acct_debt is not None:
+            self._all_acct_debt = idea_attr.all_acct_debt
         if idea_attr.awardlink is not None:
             self.set_awardlink(awardlink=idea_attr.awardlink)
         if idea_attr.awardlink_del is not None:
@@ -765,7 +765,7 @@ class IdeaUnit:
         self,
         tree_traverse_count: int,
         bud_lobbyboxs: dict[LobbyID, LobbyBox] = None,
-        bud_owner_id: CharID = None,
+        bud_owner_id: AcctID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
         self._active = self._create_active(bud_lobbyboxs, bud_owner_id)
@@ -788,7 +788,7 @@ class IdeaUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active(
-        self, bud_lobbyboxs: dict[LobbyID, LobbyBox], bud_owner_id: CharID
+        self, bud_lobbyboxs: dict[LobbyID, LobbyBox], bud_owner_id: AcctID
     ) -> bool:
         self.set_reasonheirs_status()
         x_bool = self._are_all_reasonheir_active_true()
@@ -1000,8 +1000,8 @@ def ideaunit_shop(
     _active: bool = None,
     _ancestor_pledge_count: int = None,
     _descendant_pledge_count: int = None,
-    _all_char_cred: bool = None,
-    _all_char_debt: bool = None,
+    _all_acct_cred: bool = None,
+    _all_acct_debt: bool = None,
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
     _road_delimiter: str = None,
@@ -1049,8 +1049,8 @@ def ideaunit_shop(
         _active=_active,
         _ancestor_pledge_count=_ancestor_pledge_count,
         _descendant_pledge_count=_descendant_pledge_count,
-        _all_char_cred=_all_char_cred,
-        _all_char_debt=_all_char_debt,
+        _all_acct_cred=_all_acct_cred,
+        _all_acct_debt=_all_acct_debt,
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_none(_active_hx),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),

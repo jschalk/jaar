@@ -38,13 +38,13 @@ from src._road.road import (
     RoadUnit,
     is_string_in_road,
     OwnerID,
-    CharID,
+    AcctID,
     HealerID,
     RealID,
     roadunit_valid_dir_path,
 )
 
-from src.bud.char import CharUnit, charunits_get_from_dict, charunit_shop
+from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.bud.lobby import AwardLink, LobbyID, LobbyBox, lobbybox_shop
 from src.bud.healer import HealerHold
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
@@ -75,11 +75,11 @@ class NewDelimiterException(Exception):
     pass
 
 
-class CharUnitsCredorDebtorSumException(Exception):
+class AcctUnitsCredorDebtorSumException(Exception):
     pass
 
 
-class CharMissingException(Exception):
+class AcctMissingException(Exception):
     pass
 
 
@@ -105,7 +105,7 @@ class BudUnit:
     _owner_id: OwnerID = None
     _last_gift_id: int = None
     _weight: float = None
-    _chars: dict[CharID, CharUnit] = None
+    _accts: dict[AcctID, AcctUnit] = None
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
     _road_delimiter: str = None
@@ -145,10 +145,10 @@ class BudUnit:
     def set_fund_pool(self, x_fund_pool):
         self._fund_pool = validate_fund_pool(x_fund_pool)
 
-    def set_char_respect(self, x_char_pool: int):
-        self.set_credor_respect(x_char_pool)
-        self.set_debtor_resepect(x_char_pool)
-        self.set_fund_pool(x_char_pool)
+    def set_acct_respect(self, x_acct_pool: int):
+        self.set_credor_respect(x_acct_pool)
+        self.set_debtor_resepect(x_acct_pool)
+        self.set_fund_pool(x_acct_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self._bit) is False:
@@ -165,18 +165,18 @@ class BudUnit:
         self._debtor_respect = new_debtor_respect
 
     def _correct_any_debtor_bit_issues(self):
-        if self.get_charunits_debtor_weight_sum() != self._debtor_respect:
+        if self.get_acctunits_debtor_weight_sum() != self._debtor_respect:
             missing_debtor_weight = (
-                self._debtor_respect - self.get_charunits_debtor_weight_sum()
+                self._debtor_respect - self.get_acctunits_debtor_weight_sum()
             )
-            if len(self._chars) > 0:
-                charunits = list(self._chars.values())
-                # chars_count = len(self._chars)
+            if len(self._accts) > 0:
+                acctunits = list(self._accts.values())
+                # accts_count = len(self._accts)
                 # bit_count = missing_debtor_weight / self._bit
-                # if bit_count <= chars_count:
+                # if bit_count <= accts_count:
                 for _ in range(0, missing_debtor_weight, self._bit):
-                    x_charunit = charunits.pop()
-                    x_charunit.set_debtor_weight(x_charunit.debtor_weight + self._bit)
+                    x_acctunit = acctunits.pop()
+                    x_acctunit.set_debtor_weight(x_acctunit.debtor_weight + self._bit)
 
     def make_road(
         self,
@@ -330,82 +330,82 @@ class BudUnit:
             x_lobbybox._fund_agenda_give += awardline_fund_give
             x_lobbybox._fund_agenda_take += awardline_fund_take
 
-    def add_to_charunit_fund_give_take(
+    def add_to_acctunit_fund_give_take(
         self,
-        charunit_char_id: CharID,
+        acctunit_acct_id: AcctID,
         fund_give,
         fund_take: float,
         bud_agenda_cred: float,
         bud_agenda_debt: float,
     ):
-        for charunit in self._chars.values():
-            if charunit.char_id == charunit_char_id:
-                charunit.add_fund_give_take(
+        for acctunit in self._accts.values():
+            if acctunit.acct_id == acctunit_acct_id:
+                acctunit.add_fund_give_take(
                     fund_give=fund_give,
                     fund_take=fund_take,
                     bud_agenda_cred=bud_agenda_cred,
                     bud_agenda_debt=bud_agenda_debt,
                 )
 
-    def del_charunit(self, char_id: str):
-        self._chars.pop(char_id)
+    def del_acctunit(self, acct_id: str):
+        self._accts.pop(acct_id)
 
-    def add_charunit(
-        self, char_id: CharID, credor_weight: int = None, debtor_weight: int = None
+    def add_acctunit(
+        self, acct_id: AcctID, credor_weight: int = None, debtor_weight: int = None
     ):
-        charunit = charunit_shop(
-            char_id=char_id,
+        acctunit = acctunit_shop(
+            acct_id=acct_id,
             credor_weight=credor_weight,
             debtor_weight=debtor_weight,
             _road_delimiter=self._road_delimiter,
         )
-        self.set_charunit(charunit)
+        self.set_acctunit(acctunit)
 
-    def set_charunit(self, x_charunit: CharUnit, auto_set_lobbyship: bool = True):
-        if x_charunit._road_delimiter != self._road_delimiter:
-            x_charunit._road_delimiter = self._road_delimiter
-        if x_charunit._bit != self._bit:
-            x_charunit._bit = self._bit
-        if auto_set_lobbyship and x_charunit.lobbyships_exist() is False:
-            x_charunit.add_lobbyship(x_charunit.char_id)
-        self._chars[x_charunit.char_id] = x_charunit
+    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_lobbyship: bool = True):
+        if x_acctunit._road_delimiter != self._road_delimiter:
+            x_acctunit._road_delimiter = self._road_delimiter
+        if x_acctunit._bit != self._bit:
+            x_acctunit._bit = self._bit
+        if auto_set_lobbyship and x_acctunit.lobbyships_exist() is False:
+            x_acctunit.add_lobbyship(x_acctunit.acct_id)
+        self._accts[x_acctunit.acct_id] = x_acctunit
 
-    def char_exists(self, char_id: CharID) -> bool:
-        return self.get_char(char_id) is not None
+    def acct_exists(self, acct_id: AcctID) -> bool:
+        return self.get_acct(acct_id) is not None
 
-    def edit_charunit(
-        self, char_id: CharID, credor_weight: int = None, debtor_weight: int = None
+    def edit_acctunit(
+        self, acct_id: AcctID, credor_weight: int = None, debtor_weight: int = None
     ):
-        if self._chars.get(char_id) is None:
-            raise CharMissingException(f"CharUnit '{char_id}' does not exist.")
-        x_charunit = self.get_char(char_id)
+        if self._accts.get(acct_id) is None:
+            raise AcctMissingException(f"AcctUnit '{acct_id}' does not exist.")
+        x_acctunit = self.get_acct(acct_id)
         if credor_weight is not None:
-            x_charunit.set_credor_weight(credor_weight)
+            x_acctunit.set_credor_weight(credor_weight)
         if debtor_weight is not None:
-            x_charunit.set_debtor_weight(debtor_weight)
-        self.set_charunit(x_charunit)
+            x_acctunit.set_debtor_weight(debtor_weight)
+        self.set_acctunit(x_acctunit)
 
-    def get_char(self, char_id: CharID) -> CharUnit:
-        return self._chars.get(char_id)
+    def get_acct(self, acct_id: AcctID) -> AcctUnit:
+        return self._accts.get(acct_id)
 
-    def get_lobby_ids_dict(self) -> dict[LobbyID, set[CharID]]:
+    def get_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
         x_dict = {}
-        for x_charunit in self._chars.values():
-            for x_lobby_id in x_charunit._lobbyships.keys():
-                char_id_set = x_dict.get(x_lobby_id)
-                if char_id_set is None:
-                    x_dict[x_lobby_id] = {x_charunit.char_id}
+        for x_acctunit in self._accts.values():
+            for x_lobby_id in x_acctunit._lobbyships.keys():
+                acct_id_set = x_dict.get(x_lobby_id)
+                if acct_id_set is None:
+                    x_dict[x_lobby_id] = {x_acctunit.acct_id}
                 else:
-                    char_id_set.add(x_charunit.char_id)
-                    x_dict[x_lobby_id] = char_id_set
+                    acct_id_set.add(x_acctunit.acct_id)
+                    x_dict[x_lobby_id] = acct_id_set
         return x_dict
 
     def get_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
         return self._lobbyboxs.get(x_lobby_id)
 
-    def clear_charunits_lobbyships(self):
-        for x_charunit in self._chars.values():
-            x_charunit.clear_lobbyships()
+    def clear_acctunits_lobbyships(self):
+        for x_acctunit in self._accts.values():
+            x_acctunit.clear_lobbyships()
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
         if self._real_id == idea_road:
@@ -989,8 +989,8 @@ class BudUnit:
         pledge: bool = None,
         factunit: FactUnit = None,
         descendant_pledge_count: int = None,
-        all_char_cred: bool = None,
-        all_char_debt: bool = None,
+        all_acct_cred: bool = None,
+        all_acct_debt: bool = None,
         awardlink: AwardLink = None,
         awardlink_del: LobbyID = None,
         is_expanded: bool = None,
@@ -1026,8 +1026,8 @@ class BudUnit:
             numeric_road=numeric_road,
             range_source_road=range_source_road,
             descendant_pledge_count=descendant_pledge_count,
-            all_char_cred=all_char_cred,
-            all_char_debt=all_char_debt,
+            all_acct_cred=all_acct_cred,
+            all_acct_debt=all_acct_debt,
             awardlink=awardlink,
             awardlink_del=awardlink_del,
             is_expanded=is_expanded,
@@ -1066,66 +1066,66 @@ class BudUnit:
         pledge_item = self.get_idea_obj(task_road)
         pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
 
-    def get_charunits_credor_weight_sum(self) -> float:
-        return sum(charunit.get_credor_weight() for charunit in self._chars.values())
+    def get_acctunits_credor_weight_sum(self) -> float:
+        return sum(acctunit.get_credor_weight() for acctunit in self._accts.values())
 
-    def get_charunits_debtor_weight_sum(self) -> float:
-        return sum(charunit.get_debtor_weight() for charunit in self._chars.values())
+    def get_acctunits_debtor_weight_sum(self) -> float:
+        return sum(acctunit.get_debtor_weight() for acctunit in self._accts.values())
 
-    def _add_to_charunits_fund_give_take(self, idea_fund_share: float):
-        sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
-        sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
+    def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
+        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
+        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
 
-        for x_charunit in self._chars.values():
+        for x_acctunit in self._accts.values():
             au_fund_give = (
-                idea_fund_share * x_charunit.get_credor_weight()
-            ) / sum_charunit_credor_weight
+                idea_fund_share * x_acctunit.get_credor_weight()
+            ) / sum_acctunit_credor_weight
 
             au_fund_take = (
-                idea_fund_share * x_charunit.get_debtor_weight()
-            ) / sum_charunit_debtor_weight
+                idea_fund_share * x_acctunit.get_debtor_weight()
+            ) / sum_acctunit_debtor_weight
 
-            x_charunit.add_fund_give_take(
+            x_acctunit.add_fund_give_take(
                 fund_give=au_fund_give,
                 fund_take=au_fund_take,
                 bud_agenda_cred=0,
                 bud_agenda_debt=0,
             )
 
-    def _add_to_charunits_fund_agenda_give_take(self, idea_fund_share: float):
-        sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
-        sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
+    def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
+        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
+        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
 
-        for x_charunit in self._chars.values():
+        for x_acctunit in self._accts.values():
             au_fund_agenda_give = (
-                idea_fund_share * x_charunit.get_credor_weight()
-            ) / sum_charunit_credor_weight
+                idea_fund_share * x_acctunit.get_credor_weight()
+            ) / sum_acctunit_credor_weight
 
             au_fund_agenda_take = (
-                idea_fund_share * x_charunit.get_debtor_weight()
-            ) / sum_charunit_debtor_weight
+                idea_fund_share * x_acctunit.get_debtor_weight()
+            ) / sum_acctunit_debtor_weight
 
-            x_charunit.add_fund_give_take(
+            x_acctunit.add_fund_give_take(
                 fund_give=0,
                 fund_take=0,
                 bud_agenda_cred=au_fund_agenda_give,
                 bud_agenda_debt=au_fund_agenda_take,
             )
 
-    def _set_charunits_bud_agenda_share(self, bud_agenda_share: float):
-        sum_charunit_credor_weight = self.get_charunits_credor_weight_sum()
-        sum_charunit_debtor_weight = self.get_charunits_debtor_weight_sum()
+    def _set_acctunits_bud_agenda_share(self, bud_agenda_share: float):
+        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
+        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
 
-        for x_charunit in self._chars.values():
+        for x_acctunit in self._accts.values():
             au_fund_agenda_give = (
-                bud_agenda_share * x_charunit.get_credor_weight()
-            ) / sum_charunit_credor_weight
+                bud_agenda_share * x_acctunit.get_credor_weight()
+            ) / sum_acctunit_credor_weight
 
             au_fund_agenda_take = (
-                bud_agenda_share * x_charunit.get_debtor_weight()
-            ) / sum_charunit_debtor_weight
+                bud_agenda_share * x_acctunit.get_debtor_weight()
+            ) / sum_acctunit_debtor_weight
 
-            x_charunit.add_fund_agenda_give_take(
+            x_acctunit.add_fund_agenda_give_take(
                 bud_agenda_cred=au_fund_agenda_give,
                 bud_agenda_debt=au_fund_agenda_take,
             )
@@ -1145,12 +1145,12 @@ class BudUnit:
     def _allot_bud_agenda_share(self):
         for idea in self._idea_dict.values():
             # If there are no awardlines associated with idea
-            # allot fund_share via general charunit
+            # allot fund_share via general acctunit
             # cred ratio and debt ratio
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
                 if idea._awardlines == {}:
-                    self._add_to_charunits_fund_agenda_give_take(idea.get_fund_share())
+                    self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
                 else:
                     for x_awardline in idea._awardlines.values():
                         self.add_to_lobbybox_fund_agenda_give_take(
@@ -1163,8 +1163,8 @@ class BudUnit:
         for x_lobbybox in self._lobbyboxs.values():
             x_lobbybox._set_lobbyship_fund_give_take()
             for x_lobbyship in x_lobbybox._lobbyships.values():
-                self.add_to_charunit_fund_give_take(
-                    charunit_char_id=x_lobbyship._char_id,
+                self.add_to_acctunit_fund_give_take(
+                    acctunit_acct_id=x_lobbyship._acct_id,
                     fund_give=x_lobbyship._fund_give,
                     fund_take=x_lobbyship._fund_take,
                     bud_agenda_cred=x_lobbyship._fund_agenda_give,
@@ -1175,21 +1175,21 @@ class BudUnit:
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
 
-        for x_charunit in self._chars.values():
-            fund_agenda_ratio_give_sum += x_charunit._fund_agenda_give
-            fund_agenda_ratio_take_sum += x_charunit._fund_agenda_take
+        for x_acctunit in self._accts.values():
+            fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
+            fund_agenda_ratio_take_sum += x_acctunit._fund_agenda_take
 
-        for x_charunit in self._chars.values():
-            x_charunit.set_fund_agenda_ratio_give_take(
+        for x_acctunit in self._accts.values():
+            x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_charunit_total_credor_weight=self.get_charunits_credor_weight_sum(),
-                bud_charunit_total_debtor_weight=self.get_charunits_debtor_weight_sum(),
+                bud_acctunit_total_credor_weight=self.get_acctunits_credor_weight_sum(),
+                bud_acctunit_total_debtor_weight=self.get_acctunits_debtor_weight_sum(),
             )
 
-    def _reset_charunit_fund_give_take(self):
-        for charunit in self._chars.values():
-            charunit.reset_fund_give_take()
+    def _reset_acctunit_fund_give_take(self):
+        for acctunit in self._accts.values():
+            acctunit.reset_fund_give_take()
 
     def idea_exists(self, road: RoadUnit) -> bool:
         if road is None:
@@ -1268,19 +1268,19 @@ class BudUnit:
 
             if (
                 lobby_everyone != False
-                and x_idea_obj._all_char_cred != False
-                and x_idea_obj._all_char_debt != False
+                and x_idea_obj._all_acct_cred != False
+                and x_idea_obj._all_acct_debt != False
                 and x_idea_obj._awardheirs != {}
             ) or (
                 lobby_everyone != False
-                and x_idea_obj._all_char_cred is False
-                and x_idea_obj._all_char_debt is False
+                and x_idea_obj._all_acct_cred is False
+                and x_idea_obj._all_acct_debt is False
             ):
                 lobby_everyone = False
             elif lobby_everyone != False:
                 lobby_everyone = True
-            x_idea_obj._all_char_cred = lobby_everyone
-            x_idea_obj._all_char_debt = lobby_everyone
+            x_idea_obj._all_acct_cred = lobby_everyone
+            x_idea_obj._all_acct_debt = lobby_everyone
 
             if x_idea_obj._healerhold.any_lobby_id_exists():
                 econ_justified_by_problem = False
@@ -1311,7 +1311,7 @@ class BudUnit:
         self._idearoot.set_awardheirs_fund_give_fund_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
-        self._idearoot.clear_all_char_cred_debt()
+        self._idearoot.clear_all_acct_cred_debt()
         self._idearoot.pledge = False
         if self._idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
@@ -1338,7 +1338,7 @@ class BudUnit:
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
-        idea_kid.clear_all_char_cred_debt()
+        idea_kid.clear_all_acct_cred_debt()
 
         if idea_kid.is_kidless():
             # set idea's ancestor metrics using bud root as common source
@@ -1351,7 +1351,7 @@ class BudUnit:
         if idea.is_awardheirless() is False:
             self._set_lobbyboxs_fund_share(idea._awardheirs)
         elif idea.is_awardheirless():
-            self._add_to_charunits_fund_give_take(idea.get_fund_share())
+            self._add_to_acctunits_fund_give_take(idea.get_fund_share())
 
     def get_fund_share(
         self, parent_fund_share: float, weight: int, sibling_total_weight: int
@@ -1361,27 +1361,27 @@ class BudUnit:
 
     def _create_lobbyboxs_metrics(self):
         self._lobbyboxs = {}
-        for lobby_id, char_id_set in self.get_lobby_ids_dict().items():
+        for lobby_id, acct_id_set in self.get_lobby_ids_dict().items():
             x_lobbybox = lobbybox_shop(lobby_id, _road_delimiter=self._road_delimiter)
-            for x_char_id in char_id_set:
-                x_lobbyship = self.get_char(x_char_id).get_lobbyship(lobby_id)
+            for x_acct_id in acct_id_set:
+                x_lobbyship = self.get_acct(x_acct_id).get_lobbyship(lobby_id)
                 x_lobbybox.set_lobbyship(x_lobbyship)
                 self._lobbyboxs[lobby_id] = x_lobbybox
 
-    def _calc_charunit_metrics(self):
+    def _calc_acctunit_metrics(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
-        x_charunits = self._chars.values()
-        credor_ledger = {x_char.char_id: x_char.credor_weight for x_char in x_charunits}
-        debtor_ledger = {x_char.char_id: x_char.debtor_weight for x_char in x_charunits}
+        x_acctunits = self._accts.values()
+        credor_ledger = {x_acct.acct_id: x_acct.credor_weight for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtor_weight for x_acct in x_acctunits}
         credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
         debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
-        for x_char_id, char_credor_pool in credor_allot.items():
-            self.get_char(x_char_id).set_credor_pool(char_credor_pool)
-        for x_char_id, char_debtor_pool in debtor_allot.items():
-            self.get_char(x_char_id).set_debtor_pool(char_debtor_pool)
+        for x_acct_id, acct_credor_pool in credor_allot.items():
+            self.get_acct(x_acct_id).set_credor_pool(acct_credor_pool)
+        for x_acct_id, acct_debtor_pool in debtor_allot.items():
+            self.get_acct(x_acct_id).set_debtor_pool(acct_debtor_pool)
         self._create_lobbyboxs_metrics()
-        self._reset_charunit_fund_give_take()
+        self._reset_acctunit_fund_give_take()
 
     def _set_tree_traverse_stage(self):
         self._rational = False
@@ -1396,7 +1396,7 @@ class BudUnit:
         self._healers_dict = {}
 
     def settle_bud(self, econ_exceptions: bool = False):
-        self._calc_charunit_metrics()
+        self._calc_acctunit_metrics()
         self._set_tree_traverse_stage()
         max_count = self._max_tree_traverse
 
@@ -1506,11 +1506,11 @@ class BudUnit:
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_lobby_id in x_econ_idea._healerhold._lobby_ids:
                 x_lobbybox = self.get_lobbybox(x_lobby_id)
-                for x_char_id in x_lobbybox._lobbyships.keys():
-                    if _healers_dict.get(x_char_id) is None:
-                        _healers_dict[x_char_id] = {x_econ_road: x_econ_idea}
+                for x_acct_id in x_lobbybox._lobbyships.keys():
+                    if _healers_dict.get(x_acct_id) is None:
+                        _healers_dict[x_acct_id] = {x_econ_road: x_econ_idea}
                     else:
-                        healer_dict = _healers_dict.get(x_char_id)
+                        healer_dict = _healers_dict.get(x_acct_id)
                         healer_dict[x_econ_road] = x_econ_idea
         return _healers_dict
 
@@ -1522,7 +1522,7 @@ class BudUnit:
 
     def _pre_tree_traverse_cred_debt_reset(self):
         self._reset_lobbyboxs_fund_give_take()
-        self._reset_charunit_fund_give_take()
+        self._reset_acctunit_fund_give_take()
 
     def get_idea_tree_ordered_road_list(
         self, no_range_descendants: bool = False
@@ -1559,16 +1559,16 @@ class BudUnit:
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
-    def get_charunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
+    def get_acctunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
-        if self._chars is not None:
-            for char_id, char_obj in self._chars.items():
-                x_dict[char_id] = char_obj.get_dict(all_attrs)
+        if self._accts is not None:
+            for acct_id, acct_obj in self._accts.items():
+                x_dict[acct_id] = acct_obj.get_dict(all_attrs)
         return x_dict
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {
-            "_chars": self.get_charunits_dict(),
+            "_accts": self.get_acctunits_dict(),
             "_originunit": self._originunit.get_dict(),
             "_weight": self._weight,
             "_fund_pool": self._fund_pool,
@@ -1626,7 +1626,7 @@ def budunit_shop(
         _owner_id=_owner_id,
         _weight=get_1_if_None(_weight),
         _real_id=_real_id,
-        _chars=get_empty_dict_if_none(None),
+        _accts=get_empty_dict_if_none(None),
         _lobbyboxs={},
         _idea_dict=get_empty_dict_if_none(None),
         _econ_dict=get_empty_dict_if_none(None),
@@ -1678,9 +1678,9 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud._debtor_respect = obj_from_bud_dict(bud_dict, "_debtor_respect")
     x_bud._last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
     x_road_delimiter = x_bud._road_delimiter
-    x_chars = obj_from_bud_dict(bud_dict, "_chars", x_road_delimiter).values()
-    for x_charunit in x_chars:
-        x_bud.set_charunit(x_charunit)
+    x_accts = obj_from_bud_dict(bud_dict, "_accts", x_road_delimiter).values()
+    for x_acctunit in x_accts:
+        x_bud.set_acctunit(x_acctunit)
     x_bud._originunit = obj_from_bud_dict(bud_dict, "_originunit")
     set_idearoot_from_bud_dict(x_bud, bud_dict)
     return x_bud
@@ -1765,8 +1765,8 @@ def obj_from_bud_dict(
             if x_dict.get(dict_key) is not None
             else originunit_shop()
         )
-    elif dict_key == "_chars":
-        return charunits_get_from_dict(x_dict[dict_key], _road_delimiter)
+    elif dict_key == "_accts":
+        return acctunits_get_from_dict(x_dict[dict_key], _road_delimiter)
     elif dict_key == "_max_tree_traverse":
         return (
             x_dict[dict_key]

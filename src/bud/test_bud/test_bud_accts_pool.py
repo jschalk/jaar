@@ -65,7 +65,7 @@ def test_BudUnit_set_debtor_resepect_RaisesErrorWhenArgIsNotMultiple():
     )
 
 
-def test_BudUnit_set_char_respect_CorrectlySetsAttrs():
+def test_BudUnit_set_acct_respect_CorrectlySetsAttrs():
     # ESTABLISH
     zia_text = "Zia"
     old_credor_respect = 77
@@ -81,10 +81,10 @@ def test_BudUnit_set_char_respect_CorrectlySetsAttrs():
     assert zia_bud._fund_pool == old_fund_pool
 
     # WHEN
-    new_char_pool = 200
-    zia_bud.set_char_respect(new_char_pool)
+    new_acct_pool = 200
+    zia_bud.set_acct_respect(new_acct_pool)
 
     # THEN
-    assert zia_bud._credor_respect == new_char_pool
-    assert zia_bud._debtor_respect == new_char_pool
-    assert zia_bud._fund_pool == new_char_pool
+    assert zia_bud._credor_respect == new_acct_pool
+    assert zia_bud._debtor_respect == new_acct_pool
+    assert zia_bud._fund_pool == new_acct_pool

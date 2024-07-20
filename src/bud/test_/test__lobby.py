@@ -57,7 +57,7 @@ def test_LobbyShip_exists():
     assert swim_lobbyship._fund_agenda_take is None
     assert swim_lobbyship._fund_agenda_ratio_give is None
     assert swim_lobbyship._fund_agenda_ratio_take is None
-    assert swim_lobbyship._char_id is None
+    assert swim_lobbyship._acct_id is None
 
 
 def test_lobbyship_shop_ReturnsCorrectObj():
@@ -84,22 +84,22 @@ def test_lobbyship_shop_ReturnsCorrectObj():
     assert swim_lobbyship._fund_agenda_take is None
     assert swim_lobbyship._fund_agenda_ratio_give is None
     assert swim_lobbyship._fund_agenda_ratio_take is None
-    assert swim_lobbyship._char_id is None
+    assert swim_lobbyship._acct_id is None
 
 
-def test_lobbyship_shop_ReturnsCorrectObjAttr_char_id():
+def test_lobbyship_shop_ReturnsCorrectObjAttr_acct_id():
     # ESTABLISH
     swim_text = ",swim"
     yao_text = "Yao"
 
     # WHEN
-    swim_lobbyship = lobbyship_shop(swim_text, _char_id=yao_text)
+    swim_lobbyship = lobbyship_shop(swim_text, _acct_id=yao_text)
 
     # THEN
-    assert swim_lobbyship._char_id == yao_text
+    assert swim_lobbyship._acct_id == yao_text
 
 
-# def test_LobbyShip_set_lobby_id_RaisesErrorIf_lobby_id_IsNotCharIDAndIsRoadNode():
+# def test_LobbyShip_set_lobby_id_RaisesErrorIf_lobby_id_IsNotAcctIDAndIsRoadNode():
 #     # ESTABLISH
 #     slash_text = "/"
 #     # bob_text = f"Bob{slash_text}Texas"
@@ -109,7 +109,7 @@ def test_lobbyship_shop_ReturnsCorrectObjAttr_char_id():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         lobbyship_shop(swim_text, _char_id=bob_text, _road_delimiter=slash_text)
+#         lobbyship_shop(swim_text, _acct_id=bob_text, _road_delimiter=slash_text)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{swim_text}' needs to not be a RoadNode. Must contain delimiter: '{slash_text}'"
@@ -221,7 +221,7 @@ def test_lobbyship_get_from_dict_ReturnsObj():
         lobby_id=swim_text,
         credor_weight=swim_credor_weight,
         debtor_weight=swim_debtor_weight,
-        _char_id=yao_text,
+        _acct_id=yao_text,
     )
     swim_lobbyship_dict = before_swim_lobbyship.get_dict()
 
@@ -243,7 +243,7 @@ def test_lobbyships_get_from_dict_ReturnsObj():
         lobby_id=swim_text,
         credor_weight=swim_credor_weight,
         debtor_weight=swim_debtor_weight,
-        _char_id=yao_text,
+        _acct_id=yao_text,
     )
     before_swim_lobbyships_objs = {swim_text: before_swim_lobbyship}
     swim_lobbyships_dict = {swim_text: before_swim_lobbyship.get_dict()}
@@ -542,14 +542,14 @@ def test_lobbybox_shop_ReturnsCorrectObj_road_delimiter():
     assert swim_lobbybox._road_delimiter == slash_text
 
 
-# def test_LobbyBox_set_lobby_id_RaisesErrorIfParameterContains_road_delimiter_And_char_mirror_True():
+# def test_LobbyBox_set_lobby_id_RaisesErrorIfParameterContains_road_delimiter_And_acct_mirror_True():
 #     # ESTABLISH
 #     slash_text = "/"
 #     bob_text = f"Bob{slash_text}Texas"
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         lobbybox_shop(bob_text, _char_mirror=True, _road_delimiter=slash_text)
+#         lobbybox_shop(bob_text, _acct_mirror=True, _road_delimiter=slash_text)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{bob_text}' needs to be a RoadNode. Cannot contain delimiter: '{slash_text}'"

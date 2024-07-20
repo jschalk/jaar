@@ -164,8 +164,8 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_
     sue_text = "Sue"
     yao_lobbybox = lobbybox_shop(yao_text)
     sue_lobbybox = lobbybox_shop(sue_text)
-    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _char_id=yao_text))
-    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _char_id=sue_text))
+    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _acct_id=yao_text))
+    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _acct_id=sue_text))
     x_lobbyboxs = {yao_text: yao_lobbybox, sue_text: sue_lobbybox}
     bud_owner_id = yao_text
 
@@ -186,8 +186,8 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_
     sue_text = "Sue"
     yao_lobbybox = lobbybox_shop(yao_text)
     sue_lobbybox = lobbybox_shop(sue_text)
-    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _char_id=yao_text))
-    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _char_id=sue_text))
+    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _acct_id=yao_text))
+    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _acct_id=sue_text))
     x_lobbyboxs = {yao_text: yao_lobbybox, sue_text: sue_lobbybox}
     x_lobbyholds = {sue_text}
     x_doerheir = doerheir_shop(_lobbyholds=x_lobbyholds)
@@ -209,13 +209,13 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_lobbyholds_
     yao_lobbybox = lobbybox_shop(yao_text)
     sue_lobbybox = lobbybox_shop(sue_text)
     bob_lobbybox = lobbybox_shop(bob_text)
-    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _char_id=yao_text))
-    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _char_id=sue_text))
+    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _acct_id=yao_text))
+    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _acct_id=sue_text))
 
     swim_text = ",swim"
     swim_lobbybox = lobbybox_shop(lobby_id=swim_text)
-    swim_lobbybox.set_lobbyship(lobbyship_shop(swim_text, _char_id=yao_text))
-    swim_lobbybox.set_lobbyship(lobbyship_shop(swim_text, _char_id=sue_text))
+    swim_lobbybox.set_lobbyship(lobbyship_shop(swim_text, _acct_id=yao_text))
+    swim_lobbybox.set_lobbyship(lobbyship_shop(swim_text, _acct_id=sue_text))
     x_lobbyboxs = {
         yao_text: yao_lobbybox,
         sue_text: sue_lobbybox,
@@ -350,19 +350,19 @@ def test_DoerHeir_set_lobbyhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
     sue_lobbybox = lobbybox_shop(sue_text)
     bob_lobbybox = lobbybox_shop(bob_text)
     bob_lobbybox = lobbybox_shop(zia_text)
-    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _char_id=yao_text))
-    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _char_id=sue_text))
+    yao_lobbybox.set_lobbyship(lobbyship_shop(yao_text, _acct_id=yao_text))
+    sue_lobbybox.set_lobbyship(lobbyship_shop(sue_text, _acct_id=sue_text))
 
     swim2_text = ",swim2"
     swim2_lobbybox = lobbybox_shop(lobby_id=swim2_text)
-    swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _char_id=yao_text))
-    swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _char_id=sue_text))
+    swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _acct_id=yao_text))
+    swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _acct_id=sue_text))
 
     swim3_text = ",swim3"
     swim3_lobbybox = lobbybox_shop(lobby_id=swim3_text)
-    swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _char_id=yao_text))
-    swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _char_id=sue_text))
-    swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _char_id=zia_text))
+    swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _acct_id=yao_text))
+    swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _acct_id=sue_text))
+    swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _acct_id=zia_text))
 
     x_lobbyboxs = {
         yao_text: yao_lobbybox,
@@ -407,14 +407,14 @@ def test_DoerHeir_set_lobbyhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
 
 #     swim2_text = ",swim2"
 #     swim2_lobbybox = lobbybox_shop(swim2_text)
-#     swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _char_id=yao_text))
-#     swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _char_id=sue_text))
+#     swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _acct_id=yao_text))
+#     swim2_lobbybox.set_lobbyship(lobbyship_shop(swim2_text, _acct_id=sue_text))
 
 #     swim3_text = ",swim3"
 #     swim3_lobbybox = lobbybox_shop(lobby_id=swim3_text)
-#     swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _char_id=yao_text))
-#     swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _char_id=sue_text))
-#     swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _char_id=zia_text))
+#     swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _acct_id=yao_text))
+#     swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _acct_id=sue_text))
+#     swim3_lobbybox.set_lobbyship(lobbyship_shop(swim3_text, _acct_id=zia_text))
 
 #     x_lobbyboxs = {
 #         yao_text: yao_lobbybox,
@@ -434,13 +434,13 @@ def test_DoerHeir_set_lobbyhold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
 
 #     # WHEN / THEN
 #     x_doerheir = doerheir_shop()
-#     all_parent_doerheir_chars = {yao_text, sue_text}
-#     all_doerunit_chars = {yao_text, sue_text, zia_text}
+#     all_parent_doerheir_accts = {yao_text, sue_text}
+#     all_doerunit_accts = {yao_text, sue_text, zia_text}
 #     with pytest_raises(Exception) as excinfo:
 #         x_doerheir.set_lobbyholds(parent_doerheir, doerunit_swim3, x_lobbyboxs)
 #     assert (
 #         str(excinfo.value)
-#         == f"parent_doerheir does not contain all chars of the idea's doerunit\n{set(all_parent_doerheir_chars)=}\n\n{set(all_doerunit_chars)=}"
+#         == f"parent_doerheir does not contain all accts of the idea's doerunit\n{set(all_parent_doerheir_accts)=}\n\n{set(all_doerunit_accts)=}"
 #     )
 
 

@@ -1,5 +1,5 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json
-from src._road.road import LobbyID, CharID, default_road_delimiter_if_none
+from src._road.road import LobbyID, AcctID, default_road_delimiter_if_none
 from dataclasses import dataclass
 
 
@@ -29,7 +29,7 @@ class LobbyShip(LobbyCore):
     _fund_agenda_take: float = None
     _fund_agenda_ratio_give: float = None
     _fund_agenda_ratio_take: float = None
-    _char_id: CharID = None
+    _acct_id: AcctID = None
 
     def set_credor_weight(self, x_credor_weight: float):
         if x_credor_weight is not None:
@@ -78,7 +78,7 @@ def lobbyship_shop(
     lobby_id: LobbyID,
     credor_weight: float = None,
     debtor_weight: float = None,
-    _char_id: CharID = None,
+    _acct_id: AcctID = None,
 ) -> LobbyShip:
     return LobbyShip(
         lobby_id=lobby_id,
@@ -86,24 +86,24 @@ def lobbyship_shop(
         debtor_weight=get_1_if_None(debtor_weight),
         _credor_pool=0,
         _debtor_pool=0,
-        _char_id=_char_id,
+        _acct_id=_acct_id,
     )
 
 
-def lobbyship_get_from_dict(x_dict: dict, x_char_id: CharID) -> LobbyShip:
+def lobbyship_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> LobbyShip:
     return lobbyship_shop(
         lobby_id=x_dict.get("lobby_id"),
         credor_weight=x_dict.get("credor_weight"),
         debtor_weight=x_dict.get("debtor_weight"),
-        _char_id=x_char_id,
+        _acct_id=x_acct_id,
     )
 
 
 def lobbyships_get_from_dict(
-    x_dict: dict, x_char_id: CharID
+    x_dict: dict, x_acct_id: AcctID
 ) -> dict[LobbyID, LobbyShip]:
     return {
-        x_lobby_id: lobbyship_get_from_dict(x_lobbyship_dict, x_char_id)
+        x_lobby_id: lobbyship_get_from_dict(x_lobbyship_dict, x_acct_id)
         for x_lobby_id, x_lobbyship_dict in x_dict.items()
     }
 
@@ -201,7 +201,7 @@ def awardline_shop(lobby_id: LobbyID, _fund_give: float, _fund_take: float):
 
 @dataclass
 class LobbyBox(LobbyCore):
-    _lobbyships: dict[CharID, LobbyShip] = None  # set by BudUnit.set_charunit()
+    _lobbyships: dict[AcctID, LobbyShip] = None  # set by BudUnit.set_acctunit()
     _road_delimiter: str = None  # calculated by BudUnit
     # calculated by BudUnit.settle_bud()
     _fund_give: float = None
@@ -216,12 +216,12 @@ class LobbyBox(LobbyCore):
             raise lobbyship_lobby_id_Exception(
                 f"LobbyBox.lobby_id={self.lobby_id} cannot set lobbyship.lobby_id={x_lobbyship.lobby_id}"
             )
-        if x_lobbyship._char_id is None:
+        if x_lobbyship._acct_id is None:
             raise lobbyship_lobby_id_Exception(
-                f"lobbyship lobby_id={x_lobbyship.lobby_id} cannot be set when _char_id is None."
+                f"lobbyship lobby_id={x_lobbyship.lobby_id} cannot be set when _acct_id is None."
             )
 
-        self._lobbyships[x_lobbyship._char_id] = x_lobbyship
+        self._lobbyships[x_lobbyship._acct_id] = x_lobbyship
         self._add_credor_pool(x_lobbyship._credor_pool)
         self._add_debtor_pool(x_lobbyship._debtor_pool)
 
@@ -231,14 +231,14 @@ class LobbyBox(LobbyCore):
     def _add_debtor_pool(self, x_debtor_pool: float):
         self._debtor_pool += x_debtor_pool
 
-    def get_lobbyship(self, x_char_id: CharID) -> LobbyShip:
-        return self._lobbyships.get(x_char_id)
+    def get_lobbyship(self, x_acct_id: AcctID) -> LobbyShip:
+        return self._lobbyships.get(x_acct_id)
 
-    def lobbyship_exists(self, x_char_id: CharID) -> bool:
-        return self.get_lobbyship(x_char_id) is not None
+    def lobbyship_exists(self, x_acct_id: AcctID) -> bool:
+        return self.get_lobbyship(x_acct_id) is not None
 
-    def del_lobbyship(self, char_id):
-        self._lobbyships.pop(char_id)
+    def del_lobbyship(self, acct_id):
+        self._lobbyships.pop(acct_id)
 
     def reset_fund_give_take(self):
         self._fund_give = 0

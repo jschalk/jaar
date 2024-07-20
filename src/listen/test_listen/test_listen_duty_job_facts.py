@@ -33,8 +33,8 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     zia_credor_weight = 47
     zia_debtor_weight = 41
     zia_pool = 87
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.set_char_respect(zia_pool)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.set_acct_respect(zia_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
@@ -64,8 +64,8 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     yao_debtor_weight = 41
     yao_pool = 87
     zia_text = "Zia"
-    yao_duty.add_charunit(zia_text, yao_credor_weight, yao_debtor_weight)
-    yao_duty.set_char_respect(yao_pool)
+    yao_duty.add_acctunit(zia_text, yao_credor_weight, yao_debtor_weight)
+    yao_duty.set_acct_respect(yao_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
@@ -220,9 +220,9 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 
     # THEN
     assert yao_duty.get_fact(eat_road()) is None
-    zia_charunit = new_yao_job1.get_char(zia_text)
-    bob_charunit = new_yao_job1.get_char(bob_text)
-    assert zia_charunit.debtor_weight < bob_charunit.debtor_weight
+    zia_acctunit = new_yao_job1.get_acct(zia_text)
+    bob_acctunit = new_yao_job1.get_acct(bob_text)
+    assert zia_acctunit.debtor_weight < bob_acctunit.debtor_weight
     assert bob_job.get_fact(eat_road()).pick == hungry_road()
     assert zia_job.get_fact(eat_road()).pick == eat_road()
     assert new_yao_job1.get_fact(eat_road()).pick == hungry_road()
@@ -230,17 +230,17 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
     # WHEN
     yao_zia_debtor_weight = 15
     yao_bob_debtor_weight = 5
-    yao_duty.add_charunit(zia_text, None, yao_zia_debtor_weight)
-    yao_duty.add_charunit(bob_text, None, yao_bob_debtor_weight)
-    yao_duty.set_char_respect(100)
+    yao_duty.add_acctunit(zia_text, None, yao_zia_debtor_weight)
+    yao_duty.add_acctunit(bob_text, None, yao_bob_debtor_weight)
+    yao_duty.set_acct_respect(100)
     new_yao_job2 = create_listen_basis(yao_duty)
     listen_to_agendas_duty_job(new_yao_job2, sue_texas_hubunit)
     listen_to_facts_duty_job(new_yao_job2, sue_texas_hubunit)
 
     # THEN
-    zia_charunit = new_yao_job2.get_char(zia_text)
-    bob_charunit = new_yao_job2.get_char(bob_text)
-    assert zia_charunit.debtor_weight > bob_charunit.debtor_weight
+    zia_acctunit = new_yao_job2.get_acct(zia_text)
+    bob_acctunit = new_yao_job2.get_acct(bob_text)
+    assert zia_acctunit.debtor_weight > bob_acctunit.debtor_weight
     assert bob_job.get_fact(eat_road()).pick == hungry_road()
     assert zia_job.get_fact(eat_road()).pick == eat_road()
     assert new_yao_job2.get_fact(eat_road()).pick == eat_road()
@@ -262,8 +262,8 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     sweep_text = "sweep"
 #     sweep_road = sue_speaker.make_road(casa_road, sweep_text)
 
-#     sue_speaker.add_charunit(yao_text)
-#     sue_speaker.set_char_respect(20)
+#     sue_speaker.add_acctunit(yao_text)
+#     sue_speaker.set_acct_respect(20)
 #     sue_speaker.add_idea(ideaunit_shop(clean_text), status_road)
 #     sue_speaker.add_idea(ideaunit_shop(dirty_text), status_road)
 #     sue_speaker.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
@@ -276,8 +276,8 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_job_bud(sue_text, sue_speaker.get_json(), True)
 #     yao_duty = budunit_shop(yao_text)
-#     yao_duty.add_charunit(yao_text)
-#     yao_duty.add_charunit(sue_text)
+#     yao_duty.add_acctunit(yao_text)
+#     yao_duty.add_acctunit(sue_text)
 #     new_yao_job = create_listen_basis(yao_duty)
 #     print(f"{new_yao_job.get_idea_dict().keys()=}")
 #     # assert new_yao_job.get_missing_fact_bases().get(status_road) is None
@@ -300,8 +300,8 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     # ESTABLISH
 #     yao_text = "Yao"
 #     yao_duty = budunit_shop(yao_text)
-#     yao_duty.add_charunit(yao_text)
-#     yao_duty.set_char_respect(20)
+#     yao_duty.add_acctunit(yao_text)
+#     yao_duty.set_acct_respect(20)
 #     casa_text = "casa"
 #     casa_road = yao_duty.make_l1_road(casa_text)
 #     status_text = "status"

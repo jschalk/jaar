@@ -13,23 +13,23 @@ def test_allocate_irrational_debtor_weight_CorrectlySetsBudAttr():
     zia_credor_weight = 47
     zia_debtor_weight = 41
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    zia_charunit = yao_bud.get_char(zia_text)
-    assert zia_charunit._irrational_debtor_weight == 0
+    yao_bud.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    zia_acctunit = yao_bud.get_acct(zia_text)
+    assert zia_acctunit._irrational_debtor_weight == 0
 
     # WHEN
     _allocate_irrational_debtor_weight(yao_bud, zia_text)
 
     # THEN
-    assert zia_charunit._irrational_debtor_weight == zia_debtor_weight
+    assert zia_acctunit._irrational_debtor_weight == zia_debtor_weight
 
 
 def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
     # ESTABLISH
     yao_text = "Yao"
     yao_speaker = budunit_shop(yao_text)
-    yao_speaker.add_charunit(yao_text)
-    yao_speaker.set_char_respect(20)
+    yao_speaker.add_acctunit(yao_text)
+    yao_speaker.set_acct_respect(20)
     casa_text = "casa"
     casa_road = yao_speaker.make_l1_road(casa_text)
     status_text = "status"

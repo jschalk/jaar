@@ -1,11 +1,11 @@
 {
-    "atom_category": "bud_charunit",
+    "atom_category": "bud_acctunit",
     "attributes": {
-        "char_id": {
+        "acct_id": {
             "column_order": 3,
             "sort_order": 3
         },
-        "char_pool": {
+        "acct_pool": {
             "column_order": 2
         },
         "credor_weight": {

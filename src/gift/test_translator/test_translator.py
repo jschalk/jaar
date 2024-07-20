@@ -16,7 +16,7 @@ def test_Translator_Exists():
 
     # THEN
     assert x_translator.in_real_id is None
-    assert x_translator.in_char_ids is None
+    assert x_translator.in_acct_ids is None
     assert x_translator.in_road_delimiter is None
 
 
@@ -26,7 +26,7 @@ def test_translator_shop_WithOutParametersReturnsObj():
 
     # THEN
     assert music_translator.in_real_id == get_test_real_id()
-    assert music_translator.in_char_ids == {}
+    assert music_translator.in_acct_ids == {}
     assert music_translator.in_road_delimiter == default_road_delimiter_if_none()
 
 
@@ -37,101 +37,101 @@ def test_translator_shop_WithParametersReturnsObj():
     # WHEN
     music_translator = translator_shop(music_text)
     assert music_translator.in_real_id == music_text
-    assert music_translator.in_char_ids == {}
+    assert music_translator.in_acct_ids == {}
 
 
-def test_Translator_set_char_id_SetsAttr():
+def test_Translator_set_acct_id_SetsAttr():
     # ESTABLISH
     sue_text = "Sue"
     susan_text = "Susan"
     music_translator = translator_shop()
-    assert music_translator.in_char_ids == {}
+    assert music_translator.in_acct_ids == {}
 
     # WHEN
-    music_translator.set_char_id(sue_text, susan_text)
+    music_translator.set_acct_id(sue_text, susan_text)
 
     # THEN
-    assert music_translator.in_char_ids == {susan_text: sue_text}
+    assert music_translator.in_acct_ids == {susan_text: sue_text}
 
 
-def test_Translator_out_char_id_exists_ReturnsObj():
+def test_Translator_out_acct_id_exists_ReturnsObj():
     # ESTABLISH
     sue_text = "Sue"
     susan_text = "Susan"
     music_translator = translator_shop()
-    assert music_translator.out_char_id_exists(susan_text) == False
+    assert music_translator.out_acct_id_exists(susan_text) == False
 
     # WHEN
-    music_translator.set_char_id(sue_text, susan_text)
+    music_translator.set_acct_id(sue_text, susan_text)
 
     # THEN
-    assert music_translator.out_char_id_exists(susan_text)
+    assert music_translator.out_acct_id_exists(susan_text)
 
 
-def test_Translator_get_in_char_id_ReturnsObj_Equal():
+def test_Translator_get_in_acct_id_ReturnsObj_Equal():
     # ESTABLISH
     music_translator = translator_shop()
     yao_text = "Yao"
 
     # WHEN / THEN
-    assert yao_text == music_translator.get_in_char_id(yao_text)
+    assert yao_text == music_translator.get_in_acct_id(yao_text)
 
 
-def test_Translator_get_in_char_id_ReturnsObj_NotEqual():
+def test_Translator_get_in_acct_id_ReturnsObj_NotEqual():
     # ESTABLISH
     sue_text = "Sue"
     susan_text = "Susan"
     music_translator = translator_shop()
-    music_translator.set_char_id(sue_text, susan_text)
+    music_translator.set_acct_id(sue_text, susan_text)
 
     # WHEN / THEN
-    assert sue_text == music_translator.get_in_char_id(susan_text)
+    assert sue_text == music_translator.get_in_acct_id(susan_text)
 
 
-def test_Translator_translate_char_id_ReturnsObjWithNoChanges():
+def test_Translator_translate_acct_id_ReturnsObjWithNoChanges():
     # ESTABLISH
     yao_text = "Yao"
-    x_category = "bud_charunit"
-    char_id_text = "char_id"
+    x_category = "bud_acctunit"
+    acct_id_text = "acct_id"
     credor_weight_text = "credor_weight"
-    charunit_atom = atomunit_shop(x_category, atom_insert())
-    charunit_atom.set_required_arg(char_id_text, yao_text)
-    charunit_atom.set_optional_arg(credor_weight_text, 51)
+    acctunit_atom = atomunit_shop(x_category, atom_insert())
+    acctunit_atom.set_required_arg(acct_id_text, yao_text)
+    acctunit_atom.set_optional_arg(credor_weight_text, 51)
 
-    old_atomunit = copy_deepcopy(charunit_atom)
+    old_atomunit = copy_deepcopy(acctunit_atom)
     music_translator = translator_shop()
-    assert charunit_atom.get_value(char_id_text) == yao_text
-    assert charunit_atom.get_value(credor_weight_text) == 51
+    assert acctunit_atom.get_value(acct_id_text) == yao_text
+    assert acctunit_atom.get_value(credor_weight_text) == 51
 
     # WHEN
-    translated_atom = music_translator.translate_char_id(charunit_atom)
+    translated_atom = music_translator.translate_acct_id(acctunit_atom)
 
     # THEN
-    assert charunit_atom.get_value(char_id_text) == yao_text
-    assert charunit_atom.get_value(credor_weight_text) == 51
+    assert acctunit_atom.get_value(acct_id_text) == yao_text
+    assert acctunit_atom.get_value(credor_weight_text) == 51
     assert translated_atom == old_atomunit
 
 
-def test_Translator_translate_char_id_ReturnsObjWithChange_char_id():
+def test_Translator_translate_acct_id_ReturnsObjWithChange_acct_id():
     # ESTABLISH
     susan_text = "Susan"
-    x_category = "bud_charunit"
-    char_id_text = "char_id"
+    x_category = "bud_acctunit"
+    acct_id_text = "acct_id"
     credor_weight_text = "credor_weight"
-    charunit_atom = atomunit_shop(x_category, atom_insert())
-    charunit_atom.set_required_arg(char_id_text, susan_text)
-    charunit_atom.set_optional_arg(credor_weight_text, 51)
+    acctunit_atom = atomunit_shop(x_category, atom_insert())
+    acctunit_atom.set_required_arg(acct_id_text, susan_text)
+    acctunit_atom.set_optional_arg(credor_weight_text, 51)
 
     sue_text = "Sue"
     music_translator = translator_shop()
-    music_translator.set_char_id(sue_text, susan_text)
-    assert charunit_atom.get_value(char_id_text) == susan_text
-    assert charunit_atom.get_value(credor_weight_text) == 51
+    music_translator.set_acct_id(sue_text, susan_text)
+    assert acctunit_atom.get_value(acct_id_text) == susan_text
+    assert acctunit_atom.get_value(credor_weight_text) == 51
 
     # WHEN
-    translated_atom = music_translator.translate_char_id(charunit_atom)
+    translated_atom = music_translator.translate_acct_id(acctunit_atom)
 
     # THEN
-    assert translated_atom.get_value(char_id_text) != susan_text
-    assert translated_atom.get_value(char_id_text) == sue_text
+    assert translated_atom.get_value(acct_id_text) != susan_text
+    assert translated_atom.get_value(acct_id_text) == sue_text
     assert translated_atom.get_value(credor_weight_text) == 51

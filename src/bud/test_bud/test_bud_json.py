@@ -24,7 +24,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     day_hour_text = "day_hour"
     day_hour_road = x_bud.make_l1_road(day_hour_text)
     day_hour_idea = x_bud.get_idea_obj(day_hour_road)
-    day_hour_idea._originunit.set_originhold(char_id="Bob", weight=2)
+    day_hour_idea._originunit.set_originhold(acct_id="Bob", weight=2)
     x_bud.set_fact(
         base=day_hour_road,
         pick=day_hour_road,
@@ -66,8 +66,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["_credor_respect"] == x_bud._credor_respect
     assert bud_dict["_debtor_respect"] == x_bud._debtor_respect
     assert bud_dict["_last_gift_id"] == x_bud._last_gift_id
-    assert len(bud_dict["_chars"]) == len(x_bud._chars)
-    assert len(bud_dict["_chars"]) != 12
+    assert len(bud_dict["_accts"]) == len(x_bud._accts)
+    assert len(bud_dict["_accts"]) != 12
     assert bud_dict.get("_lobbys") is None
 
     x_idearoot = x_bud._idearoot
@@ -108,7 +108,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_bud_originhold = bud_dict[originunit_text][originholds_text][yao_text]
     print(f"{x_bud_originhold=}")
     assert x_bud_originhold
-    assert x_bud_originhold["char_id"] == yao_text
+    assert x_bud_originhold["acct_id"] == yao_text
     assert x_bud_originhold["weight"] == 1
 
 
@@ -133,10 +133,10 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
-    sue_bud.add_charunit(yao_text)
+    sue_bud.add_acctunit(yao_text)
     run_text = ",runners"
-    yao_charunit = sue_bud.get_char(yao_text)
-    yao_charunit.add_lobbyship(run_text)
+    yao_acctunit = sue_bud.get_acct(yao_text)
+    yao_acctunit.add_lobbyship(run_text)
     run_healerhold = healerhold_shop()
     run_healerhold.set_lobby_id(x_lobby_id=run_text)
     sue_bud.edit_idea_attr(road=sue_bud._real_id, healerhold=run_healerhold)
@@ -153,10 +153,10 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
-    sue_bud.add_charunit(yao_text)
+    sue_bud.add_acctunit(yao_text)
     run_text = ",runners"
-    yao_charunit = sue_bud.get_char(yao_text)
-    yao_charunit.add_lobbyship(run_text)
+    yao_acctunit = sue_bud.get_acct(yao_text)
+    yao_acctunit.add_lobbyship(run_text)
 
     morn_text = "morning"
     morn_road = sue_bud.make_l1_road(morn_text)
@@ -194,9 +194,9 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     override_text = "override"
     yao_text = "Yao"
     run_text = ",runners"
-    zia_bud.add_charunit(yao_text)
-    yao_charunit = zia_bud.get_char(yao_text)
-    yao_charunit.add_lobbyship(run_text)
+    zia_bud.add_acctunit(yao_text)
+    yao_acctunit = zia_bud.get_acct(yao_text)
+    yao_acctunit.add_lobbyship(run_text)
     run_healerhold = healerhold_shop({run_text})
     zia_bud.edit_idea_attr(road=zia_bud._real_id, healerhold=run_healerhold)
     zia_bud.edit_idea_attr(road=zia_bud._real_id, problem_bool=True)
@@ -326,20 +326,20 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
     shave_idea_y1 = zia_bud.get_idea_obj(shave_road)
-    shave_idea_y1._originunit.set_originhold(char_id="Sue", weight=4.3)
+    shave_idea_y1._originunit.set_originhold(acct_id="Sue", weight=4.3)
     shave_idea_y1._problem_bool = True
     # print(f"{shave_road=}")
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")
 
     sue_text = "Sue"
-    zia_bud.add_charunit(char_id=sue_text, credor_weight=199, debtor_weight=199)
+    zia_bud.add_acctunit(acct_id=sue_text, credor_weight=199, debtor_weight=199)
     tim_text = "Tim"
-    zia_bud.add_charunit(char_id=tim_text)
+    zia_bud.add_acctunit(acct_id=tim_text)
     run_text = ",runners"
-    sue_charunit = zia_bud.get_char(sue_text)
-    tim_charunit = zia_bud.get_char(tim_text)
-    sue_charunit.add_lobbyship(run_text)
-    tim_charunit.add_lobbyship(run_text)
+    sue_acctunit = zia_bud.get_acct(sue_text)
+    tim_acctunit = zia_bud.get_acct(tim_text)
+    sue_acctunit.add_lobbyship(run_text)
+    tim_acctunit.add_lobbyship(run_text)
     run_doerunit = doerunit_shop()
     run_doerunit.set_lobbyhold(lobby_id=run_text)
     zia_bud.edit_idea_attr(zia_bud._real_id, doerunit=run_doerunit)
@@ -442,21 +442,21 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_Example():
     assert after_bob_bud._road_delimiter == before_bob_bud._road_delimiter
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_CharExample():
+def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_AcctExample():
     # ESTABLISH
     slash_delimiter = "/"
     before_bob_bud = budunit_shop("Bob", _road_delimiter=slash_delimiter)
     bob_text = ",Bob"
-    before_bob_bud.add_charunit(bob_text)
-    assert before_bob_bud.char_exists(bob_text)
+    before_bob_bud.add_acctunit(bob_text)
+    assert before_bob_bud.acct_exists(bob_text)
 
     # WHEN
     bob_json = before_bob_bud.get_json()
     after_bob_bud = budunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_charunit = after_bob_bud.get_char(bob_text)
-    assert after_bob_charunit._road_delimiter == slash_delimiter
+    after_bob_acctunit = after_bob_bud.get_acct(bob_text)
+    assert after_bob_acctunit._road_delimiter == slash_delimiter
 
 
 def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
@@ -465,17 +465,17 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
     before_bob_bud = budunit_shop("Bob", _road_delimiter=slash_delimiter)
     yao_text = "Yao"
     swim_text = f"{slash_delimiter}Swimmers"
-    before_bob_bud.add_charunit(yao_text)
-    yao_charunit = before_bob_bud.get_char(yao_text)
-    yao_charunit.add_lobbyship(swim_text)
+    before_bob_bud.add_acctunit(yao_text)
+    yao_acctunit = before_bob_bud.get_acct(yao_text)
+    yao_acctunit.add_lobbyship(swim_text)
 
     # WHEN
     bob_json = before_bob_bud.get_json()
     after_bob_bud = budunit_get_from_json(bob_json)
 
     # THEN
-    after_yao_charunit = after_bob_bud.get_char(yao_text)
-    assert after_yao_charunit._road_delimiter == slash_delimiter
+    after_yao_acctunit = after_bob_bud.get_acct(yao_text)
+    assert after_yao_acctunit._road_delimiter == slash_delimiter
 
 
 def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_weight():
@@ -539,9 +539,9 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     ccn_bud1 = ccn_dict_of_obj.get(x1_bud._owner_id)
     assert ccn_bud1._idea_dict == x1_bud._idea_dict
     philipa_text = "Philipa"
-    ccn_philipa_charunit = ccn_bud1.get_char(philipa_text)
-    x1_philipa_charunit = x1_bud.get_char(philipa_text)
-    assert ccn_philipa_charunit._lobbyships == x1_philipa_charunit._lobbyships
+    ccn_philipa_acctunit = ccn_bud1.get_acct(philipa_text)
+    x1_philipa_acctunit = x1_bud.get_acct(philipa_text)
+    assert ccn_philipa_acctunit._lobbyships == x1_philipa_acctunit._lobbyships
     assert ccn_bud1 == x1_bud
     assert ccn_dict_of_obj.get(x1_bud._owner_id) == x1_bud
 
@@ -551,5 +551,5 @@ def test_budunit_get_from_json_CheckExampleHasCorrectAttrs_budunit_v001():
     yao_bud = budunit_v001()
 
     # THEN
-    assert yao_bud._chars is not None
-    assert len(yao_bud._chars) == 22
+    assert yao_bud._accts is not None
+    assert len(yao_bud._accts) == 22

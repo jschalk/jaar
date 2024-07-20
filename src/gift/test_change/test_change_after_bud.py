@@ -86,7 +86,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     assert after_sue_budunit._penny != before_sue_budunit._penny
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_char():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
@@ -94,12 +94,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_char():
     before_sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
     zia_text = "Zia"
-    before_sue_budunit.add_charunit(yao_text)
-    before_sue_budunit.add_charunit(zia_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_sue_budunit.add_acctunit(zia_text)
 
-    category = "bud_charunit"
+    category = "bud_acctunit"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("char_id", zia_text)
+    x_atomunit.set_required_arg("acct_id", zia_text)
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN
@@ -108,11 +108,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_char():
     # THEN
     print(f"{sue_changeunit.atomunits=}")
     assert after_sue_budunit != before_sue_budunit
-    assert after_sue_budunit.char_exists(yao_text)
-    assert after_sue_budunit.char_exists(zia_text) is False
+    assert after_sue_budunit.acct_exists(yao_text)
+    assert after_sue_budunit.acct_exists(zia_text) is False
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_char():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
@@ -120,14 +120,14 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_char():
     before_sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
     zia_text = "Zia"
-    before_sue_budunit.add_charunit(yao_text)
-    assert before_sue_budunit.char_exists(yao_text)
-    assert before_sue_budunit.char_exists(zia_text) is False
+    before_sue_budunit.add_acctunit(yao_text)
+    assert before_sue_budunit.acct_exists(yao_text)
+    assert before_sue_budunit.acct_exists(zia_text) is False
 
     # WHEN
-    category = "bud_charunit"
+    category = "bud_acctunit"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_required_arg("char_id", zia_text)
+    x_atomunit.set_required_arg("acct_id", zia_text)
     x_credor_weight = 55
     x_debtor_weight = 66
     x_atomunit.set_optional_arg("credor_weight", x_credor_weight)
@@ -137,28 +137,28 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_char():
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    yao_charunit = after_sue_budunit.get_char(yao_text)
-    zia_charunit = after_sue_budunit.get_char(zia_text)
-    assert yao_charunit is not None
-    assert zia_charunit is not None
-    assert zia_charunit.credor_weight == x_credor_weight
-    assert zia_charunit.debtor_weight == x_debtor_weight
+    yao_acctunit = after_sue_budunit.get_acct(yao_text)
+    zia_acctunit = after_sue_budunit.get_acct(zia_text)
+    assert yao_acctunit is not None
+    assert zia_acctunit is not None
+    assert zia_acctunit.credor_weight == x_credor_weight
+    assert zia_acctunit.debtor_weight == x_debtor_weight
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_char():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
 
     before_sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
-    before_sue_budunit.add_charunit(yao_text)
-    assert before_sue_budunit.get_char(yao_text).credor_weight == 1
+    before_sue_budunit.add_acctunit(yao_text)
+    assert before_sue_budunit.get_acct(yao_text).credor_weight == 1
 
     # WHEN
-    category = "bud_charunit"
+    category = "bud_acctunit"
     x_atomunit = atomunit_shop(category, atom_update())
-    x_atomunit.set_required_arg("char_id", yao_text)
+    x_atomunit.set_required_arg("acct_id", yao_text)
     yao_credor_weight = 55
     x_atomunit.set_optional_arg("credor_weight", yao_credor_weight)
     sue_changeunit.set_atomunit(x_atomunit)
@@ -166,8 +166,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_char():
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    yao_char = after_sue_budunit.get_char(yao_text)
-    assert yao_char.credor_weight == yao_credor_weight
+    yao_acct = after_sue_budunit.get_acct(yao_text)
+    assert yao_acct.credor_weight == yao_credor_weight
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_lobbyship():
@@ -177,31 +177,31 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_lobbyship():
     yao_text = "Yao"
     zia_text = "Zia"
     bob_text = "Bob"
-    before_sue_budunit.add_charunit(yao_text)
-    before_sue_budunit.add_charunit(zia_text)
-    before_sue_budunit.add_charunit(bob_text)
-    yao_charunit = before_sue_budunit.get_char(yao_text)
-    zia_charunit = before_sue_budunit.get_char(zia_text)
-    bob_charunit = before_sue_budunit.get_char(bob_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_sue_budunit.add_acctunit(zia_text)
+    before_sue_budunit.add_acctunit(bob_text)
+    yao_acctunit = before_sue_budunit.get_acct(yao_text)
+    zia_acctunit = before_sue_budunit.get_acct(zia_text)
+    bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_charunit.add_lobbyship(run_text)
-    zia_charunit.add_lobbyship(run_text)
+    yao_acctunit.add_lobbyship(run_text)
+    zia_acctunit.add_lobbyship(run_text)
     fly_text = ",flyers"
-    yao_charunit.add_lobbyship(fly_text)
-    zia_charunit.add_lobbyship(fly_text)
-    bob_charunit.add_lobbyship(fly_text)
+    yao_acctunit.add_lobbyship(fly_text)
+    zia_acctunit.add_lobbyship(fly_text)
+    bob_acctunit.add_lobbyship(fly_text)
     before_lobby_ids_dict = before_sue_budunit.get_lobby_ids_dict()
     assert len(before_lobby_ids_dict.get(run_text)) == 2
     assert len(before_lobby_ids_dict.get(fly_text)) == 3
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_char_lobbyship", atom_delete())
+    yao_atomunit = atomunit_shop("bud_acct_lobbyship", atom_delete())
     yao_atomunit.set_required_arg("lobby_id", run_text)
-    yao_atomunit.set_required_arg("char_id", yao_text)
+    yao_atomunit.set_required_arg("acct_id", yao_text)
     # print(f"{yao_atomunit=}")
-    zia_atomunit = atomunit_shop("bud_char_lobbyship", atom_delete())
+    zia_atomunit = atomunit_shop("bud_acct_lobbyship", atom_delete())
     zia_atomunit.set_required_arg("lobby_id", fly_text)
-    zia_atomunit.set_required_arg("char_id", zia_text)
+    zia_atomunit.set_required_arg("acct_id", zia_text)
     # print(f"{zia_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
@@ -221,19 +221,19 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_lobbyship():
     yao_text = "Yao"
     zia_text = "Zia"
     bob_text = "Bob"
-    before_sue_budunit.add_charunit(yao_text)
-    before_sue_budunit.add_charunit(zia_text)
-    before_sue_budunit.add_charunit(bob_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_sue_budunit.add_acctunit(zia_text)
+    before_sue_budunit.add_acctunit(bob_text)
     run_text = ",runners"
-    zia_charunit = before_sue_budunit.get_char(zia_text)
-    zia_charunit.add_lobbyship(run_text)
+    zia_acctunit = before_sue_budunit.get_acct(zia_text)
+    zia_acctunit.add_lobbyship(run_text)
     before_lobby_ids = before_sue_budunit.get_lobby_ids_dict()
     assert len(before_lobby_ids.get(run_text)) == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_char_lobbyship", atom_insert())
+    yao_atomunit = atomunit_shop("bud_acct_lobbyship", atom_insert())
     yao_atomunit.set_required_arg("lobby_id", run_text)
-    yao_atomunit.set_required_arg("char_id", yao_text)
+    yao_atomunit.set_required_arg("acct_id", yao_text)
     yao_run_credor_weight = 17
     yao_atomunit.set_optional_arg("credor_weight", yao_run_credor_weight)
     print(f"{yao_atomunit=}")
@@ -244,8 +244,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_lobbyship():
     # THEN
     after_lobby_ids = after_sue_budunit.get_lobby_ids_dict()
     assert len(after_lobby_ids.get(run_text)) == 2
-    after_yao_charunit = after_sue_budunit.get_char(yao_text)
-    after_yao_run_lobbyship = after_yao_charunit.get_lobbyship(run_text)
+    after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
+    after_yao_run_lobbyship = after_yao_acctunit.get_lobbyship(run_text)
     assert after_yao_run_lobbyship is not None
     assert after_yao_run_lobbyship.credor_weight == yao_run_credor_weight
 
@@ -255,19 +255,19 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_lobbyship():
     sue_text = "Sue"
     before_sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
-    before_sue_budunit.add_charunit(yao_text)
-    before_yao_charunit = before_sue_budunit.get_char(yao_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_yao_acctunit = before_sue_budunit.get_acct(yao_text)
     run_text = ",runners"
     old_yao_run_credor_weight = 3
-    before_yao_charunit.add_lobbyship(run_text, old_yao_run_credor_weight)
-    yao_run_lobbyship = before_yao_charunit.get_lobbyship(run_text)
+    before_yao_acctunit.add_lobbyship(run_text, old_yao_run_credor_weight)
+    yao_run_lobbyship = before_yao_acctunit.get_lobbyship(run_text)
     assert yao_run_lobbyship.credor_weight == old_yao_run_credor_weight
     assert yao_run_lobbyship.debtor_weight == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_char_lobbyship", atom_update())
+    yao_atomunit = atomunit_shop("bud_acct_lobbyship", atom_update())
     yao_atomunit.set_required_arg("lobby_id", run_text)
-    yao_atomunit.set_required_arg("char_id", yao_text)
+    yao_atomunit.set_required_arg("acct_id", yao_text)
     new_yao_run_credor_weight = 7
     new_yao_run_debtor_weight = 11
     yao_atomunit.set_optional_arg("credor_weight", new_yao_run_credor_weight)
@@ -277,8 +277,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_lobbyship():
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_yao_charunit = after_sue_budunit.get_char(yao_text)
-    after_yao_run_lobbyship = after_yao_charunit.get_lobbyship(run_text)
+    after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
+    after_yao_run_lobbyship = after_yao_acctunit.get_lobbyship(run_text)
     assert after_yao_run_lobbyship.credor_weight == new_yao_run_credor_weight
     assert after_yao_run_lobbyship.debtor_weight == new_yao_run_debtor_weight
 
@@ -409,19 +409,19 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     yao_text = "Yao"
     zia_text = "Zia"
     bob_text = "Bob"
-    before_sue_budunit.add_charunit(yao_text)
-    before_sue_budunit.add_charunit(zia_text)
-    before_sue_budunit.add_charunit(bob_text)
-    yao_charunit = before_sue_budunit.get_char(yao_text)
-    zia_charunit = before_sue_budunit.get_char(zia_text)
-    bob_charunit = before_sue_budunit.get_char(bob_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_sue_budunit.add_acctunit(zia_text)
+    before_sue_budunit.add_acctunit(bob_text)
+    yao_acctunit = before_sue_budunit.get_acct(yao_text)
+    zia_acctunit = before_sue_budunit.get_acct(zia_text)
+    bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_charunit.add_lobbyship(run_text)
-    zia_charunit.add_lobbyship(run_text)
+    yao_acctunit.add_lobbyship(run_text)
+    zia_acctunit.add_lobbyship(run_text)
     fly_text = ",flyers"
-    yao_charunit.add_lobbyship(fly_text)
-    zia_charunit.add_lobbyship(fly_text)
-    bob_charunit.add_lobbyship(fly_text)
+    yao_acctunit.add_lobbyship(fly_text)
+    zia_acctunit.add_lobbyship(fly_text)
+    bob_acctunit.add_lobbyship(fly_text)
 
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
@@ -458,11 +458,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     before_sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
     zia_text = "Zia"
-    before_sue_budunit.add_charunit(yao_text)
-    before_sue_budunit.add_charunit(zia_text)
-    yao_charunit = before_sue_budunit.get_char(yao_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_sue_budunit.add_acctunit(zia_text)
+    yao_acctunit = before_sue_budunit.get_acct(yao_text)
     run_text = ",runners"
-    yao_charunit.add_lobbyship(run_text)
+    yao_acctunit.add_lobbyship(run_text)
 
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
@@ -500,11 +500,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     before_sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
     zia_text = "Zia"
-    before_sue_budunit.add_charunit(yao_text)
-    before_sue_budunit.add_charunit(zia_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_sue_budunit.add_acctunit(zia_text)
     run_text = ",runners"
-    yao_charunit = before_sue_budunit.get_char(yao_text)
-    yao_charunit.add_lobbyship(run_text)
+    yao_acctunit = before_sue_budunit.get_acct(yao_text)
+    yao_acctunit.add_lobbyship(run_text)
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -946,7 +946,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_lobbyho
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
     yao_text = "Yao"
-    before_sue_au.add_charunit(yao_text)
+    before_sue_au.add_acctunit(yao_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -974,7 +974,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_lobbyho
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
     yao_text = "Yao"
-    before_sue_au.add_charunit(yao_text)
+    before_sue_au.add_acctunit(yao_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -1006,26 +1006,26 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     yao_text = "Yao"
     zia_text = "Zia"
     bob_text = "Bob"
-    before_sue_budunit.add_charunit(yao_text)
-    before_sue_budunit.add_charunit(zia_text)
-    before_sue_budunit.add_charunit(bob_text)
-    yao_charunit = before_sue_budunit.get_char(yao_text)
-    zia_charunit = before_sue_budunit.get_char(zia_text)
-    bob_charunit = before_sue_budunit.get_char(bob_text)
+    before_sue_budunit.add_acctunit(yao_text)
+    before_sue_budunit.add_acctunit(zia_text)
+    before_sue_budunit.add_acctunit(bob_text)
+    yao_acctunit = before_sue_budunit.get_acct(yao_text)
+    zia_acctunit = before_sue_budunit.get_acct(zia_text)
+    bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_charunit.add_lobbyship(run_text)
-    zia_charunit.add_lobbyship(run_text)
+    yao_acctunit.add_lobbyship(run_text)
+    zia_acctunit.add_lobbyship(run_text)
     fly_text = ",flyers"
-    yao_charunit.add_lobbyship(fly_text)
-    bob_charunit.add_lobbyship(fly_text)
+    yao_acctunit.add_lobbyship(fly_text)
+    bob_acctunit.add_lobbyship(fly_text)
     assert before_sue_budunit._weight != 55
     assert before_sue_budunit._max_tree_traverse != 66
     assert before_sue_budunit._credor_respect != 77
     assert before_sue_budunit._debtor_respect != 88
-    assert before_sue_budunit.char_exists(yao_text)
-    assert before_sue_budunit.char_exists(zia_text)
-    assert yao_charunit.get_lobbyship(fly_text) is not None
-    assert bob_charunit.get_lobbyship(fly_text) is not None
+    assert before_sue_budunit.acct_exists(yao_text)
+    assert before_sue_budunit.acct_exists(zia_text)
+    assert yao_acctunit.get_lobbyship(fly_text) is not None
+    assert bob_acctunit.get_lobbyship(fly_text) is not None
 
     # WHEN
     ex1_changeunit = get_changeunit_example1()
@@ -1036,5 +1036,5 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     assert after_sue_budunit._max_tree_traverse == 66
     assert after_sue_budunit._credor_respect == 77
     assert after_sue_budunit._debtor_respect == 88
-    assert after_sue_budunit.char_exists(yao_text)
-    assert after_sue_budunit.char_exists(zia_text) is False
+    assert after_sue_budunit.acct_exists(yao_text)
+    assert after_sue_budunit.acct_exists(zia_text) is False

@@ -38,7 +38,7 @@ def test_HubUnit_save_action_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # WHEN
     sue_bud = budunit_shop(sue_text)
     bob_text = "Bob"
-    sue_bud.add_charunit(bob_text)
+    sue_bud.add_acctunit(bob_text)
     sue_hubunit.save_action_bud(sue_bud)
 
     # THEN
@@ -49,12 +49,12 @@ def test_HubUnit_save_action_file_CorrectlySavesFile(env_dir_setup_cleanup):
     )
     print(f"{action_file_text=}")
     action_bud = budunit_get_from_json(action_file_text)
-    assert action_bud.char_exists(bob_text)
+    assert action_bud.acct_exists(bob_text)
 
     # # WHEN
     sue2_bud = budunit_shop(sue_text)
     zia_text = "Zia"
-    sue2_bud.add_charunit(zia_text)
+    sue2_bud.add_acctunit(zia_text)
     sue_hubunit.save_action_bud(sue2_bud)
 
     # THEN
@@ -63,7 +63,7 @@ def test_HubUnit_save_action_file_CorrectlySavesFile(env_dir_setup_cleanup):
     )
     print(f"{action_file_text=}")
     action_bud = budunit_get_from_json(action_file_text)
-    assert action_bud.char_exists(zia_text)
+    assert action_bud.acct_exists(zia_text)
 
 
 def test_HubUnit_save_action_file_RaisesErrorWhenBud_action_id_IsWrong(
@@ -98,21 +98,21 @@ def test_HubUnit_initialize_action_file_CorrectlySavesFile(env_dir_setup_cleanup
     assert action_bud._real_id == root_label()
     assert action_bud._owner_id == sue_text
     bob_text = "Bob"
-    assert action_bud.char_exists(bob_text) is False
+    assert action_bud.acct_exists(bob_text) is False
 
     # ESTABLISH
     sue_bud = budunit_shop(sue_text)
-    sue_bud.add_charunit(bob_text)
+    sue_bud.add_acctunit(bob_text)
     sue_hubunit.save_action_bud(sue_bud)
     action_bud = sue_hubunit.get_action_bud()
-    assert action_bud.get_char(bob_text)
+    assert action_bud.get_acct(bob_text)
 
     # WHEN
     sue_hubunit.initialize_action_file(sue_bud)
 
     # THEN
     action_bud = sue_hubunit.get_action_bud()
-    assert action_bud.get_char(bob_text)
+    assert action_bud.get_acct(bob_text)
 
 
 def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
@@ -147,7 +147,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
 
     # WHEN
     bob_text = "Bob"
-    sue_bud.add_charunit(bob_text)
+    sue_bud.add_acctunit(bob_text)
     sue_hubunit.initialize_action_file(sue_bud)
 
     # THEN

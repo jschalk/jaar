@@ -38,8 +38,8 @@ def test_create_riverbook_ReturnsCorrectObj():
     yao_text = "Yao"
     sue_text = "Sue"
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_charunit(yao_text)
-    yao_bud.add_charunit(sue_text)
+    yao_bud.add_acctunit(yao_text)
+    yao_bud.add_acctunit(sue_text)
     yao_hubunit = hubunit_shop(None, None, yao_text)
     yao_book_money_amount = 500
 

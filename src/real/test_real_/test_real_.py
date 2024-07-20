@@ -156,7 +156,7 @@ def test_RealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_clea
     sue_hubunit = hubunit_shop(None, music_text, sue_text, None)
     bob_text = "Bob"
     sue_voice = sue_hubunit.get_voice_bud()
-    sue_voice.add_charunit(bob_text)
+    sue_voice.add_acctunit(bob_text)
     sue_hubunit.save_voice_bud(sue_voice)
 
     # WHEN
@@ -164,7 +164,7 @@ def test_RealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_clea
 
     # THEN
     assert gen_sue_voice is not None
-    assert gen_sue_voice.char_exists(bob_text)
+    assert gen_sue_voice.acct_exists(bob_text)
 
 
 def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
@@ -182,10 +182,10 @@ def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     sue_voice_bud = sue_hubunit.get_voice_bud()
     yao_voice_bud = yao_hubunit.get_voice_bud()
 
-    sue_voice_bud.add_charunit(sue_text)
-    sue_voice_bud.add_charunit(yao_text)
-    yao_voice_bud.add_charunit(sue_text)
-    yao_voice_bud.add_charunit(yao_text)
+    sue_voice_bud.add_acctunit(sue_text)
+    sue_voice_bud.add_acctunit(yao_text)
+    yao_voice_bud.add_acctunit(sue_text)
+    yao_voice_bud.add_acctunit(yao_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))

@@ -468,21 +468,21 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     ]._descendant_pledge_count
     assert _descendant_pledge_count_new == 67
 
-    # _all_char_cred: bool = None,
-    sue_bud._idearoot._kids[casa_text]._all_char_cred = 74
-    x_all_char_cred = sue_bud._idearoot._kids[casa_text]._all_char_cred
-    assert x_all_char_cred == 74
-    sue_bud.edit_idea_attr(road=casa_road, all_char_cred=59)
-    _all_char_cred_new = sue_bud._idearoot._kids[casa_text]._all_char_cred
-    assert _all_char_cred_new == 59
+    # _all_acct_cred: bool = None,
+    sue_bud._idearoot._kids[casa_text]._all_acct_cred = 74
+    x_all_acct_cred = sue_bud._idearoot._kids[casa_text]._all_acct_cred
+    assert x_all_acct_cred == 74
+    sue_bud.edit_idea_attr(road=casa_road, all_acct_cred=59)
+    _all_acct_cred_new = sue_bud._idearoot._kids[casa_text]._all_acct_cred
+    assert _all_acct_cred_new == 59
 
-    # _all_char_debt: bool = None,
-    sue_bud._idearoot._kids[casa_text]._all_char_debt = 74
-    x_all_char_debt = sue_bud._idearoot._kids[casa_text]._all_char_debt
-    assert x_all_char_debt == 74
-    sue_bud.edit_idea_attr(road=casa_road, all_char_debt=59)
-    _all_char_debt_new = sue_bud._idearoot._kids[casa_text]._all_char_debt
-    assert _all_char_debt_new == 59
+    # _all_acct_debt: bool = None,
+    sue_bud._idearoot._kids[casa_text]._all_acct_debt = 74
+    x_all_acct_debt = sue_bud._idearoot._kids[casa_text]._all_acct_debt
+    assert x_all_acct_debt == 74
+    sue_bud.edit_idea_attr(road=casa_road, all_acct_debt=59)
+    _all_acct_debt_new = sue_bud._idearoot._kids[casa_text]._all_acct_debt
+    assert _all_acct_debt_new == 59
 
     # _awardlink: dict = None,
     sue_bud._idearoot._kids[casa_text]._awardlinks = {
@@ -529,8 +529,8 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     sue_text = "Sue"
     yao_text = "Yao"
     x_healerhold = healerhold_shop({sue_text, yao_text})
-    sue_bud.add_charunit(sue_text)
-    sue_bud.add_charunit(yao_text)
+    sue_bud.add_acctunit(sue_text)
+    sue_bud.add_acctunit(yao_text)
     sue_bud.edit_idea_attr(road=casa_road, healerhold=x_healerhold)
     assert sue_bud._idearoot._kids[casa_text]._healerhold == x_healerhold
 
@@ -861,11 +861,11 @@ def test_BudUnit_set_awardlink_correctly_sets_awardlinks():
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    sue_bud.add_charunit(yao_text)
-    sue_bud.add_charunit(zia_text)
-    sue_bud.add_charunit(Xio_text)
+    sue_bud.add_acctunit(yao_text)
+    sue_bud.add_acctunit(zia_text)
+    sue_bud.add_acctunit(Xio_text)
 
-    assert len(sue_bud._chars) == 3
+    assert len(sue_bud._accts) == 3
     assert len(sue_bud.get_lobby_ids_dict()) == 3
     swim_text = "swim"
     sue_bud.add_l1_idea(ideaunit_shop(swim_text))
@@ -909,9 +909,9 @@ def test_BudUnit_set_awardlink_correctly_deletes_awardlinks():
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    x_bud.add_charunit(yao_text)
-    x_bud.add_charunit(zia_text)
-    x_bud.add_charunit(Xio_text)
+    x_bud.add_acctunit(yao_text)
+    x_bud.add_acctunit(zia_text)
+    x_bud.add_acctunit(Xio_text)
 
     swim_text = "swim"
     swim_road = x_bud.make_road(prom_text, swim_text)
@@ -947,8 +947,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks()
     x1_bud = budunit_shop(bob_text)
     xia_text = "Xia"
     zoa_text = "Zoa"
-    x1_bud.add_charunit(xia_text)
-    x1_bud.add_charunit(zoa_text)
+    x1_bud.add_acctunit(xia_text)
+    x1_bud.add_acctunit(zoa_text)
 
     casa_text = "casa"
     casa_road = x1_bud.make_l1_road(casa_text)
@@ -961,7 +961,7 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks()
     x1_bud_swim_idea = x1_bud.get_idea_obj(swim_road)
     assert len(x1_bud_swim_idea._awardlinks) == 2
     x_bud = budunit_shop(bob_text)
-    x_bud.add_charunit(xia_text)
+    x_bud.add_acctunit(xia_text)
 
     # WHEN
     filtered_idea = x_bud._get_filtered_awardlinks_idea(x1_bud_swim_idea)
@@ -977,8 +977,8 @@ def test_BudUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     x1_bud = budunit_shop(bob_text)
     xia_text = "Xia"
     zoa_text = "Zoa"
-    x1_bud.add_charunit(xia_text)
-    x1_bud.add_charunit(zoa_text)
+    x1_bud.add_acctunit(xia_text)
+    x1_bud.add_acctunit(zoa_text)
 
     casa_text = "casa"
     casa_road = x1_bud.make_l1_road(casa_text)
@@ -993,7 +993,7 @@ def test_BudUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
 
     # WHEN
     x_bud = budunit_shop(bob_text)
-    x_bud.add_charunit(xia_text)
+    x_bud.add_acctunit(xia_text)
     x_bud.add_l1_idea(x1_bud_swim_idea, create_missing_ideas=False)
 
     # THEN

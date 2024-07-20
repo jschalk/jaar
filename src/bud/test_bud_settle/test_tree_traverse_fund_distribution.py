@@ -1,6 +1,6 @@
 from src._road.finance import default_fund_pool
 from src._road.road import RoadUnit
-from src.bud.char import charunit_shop
+from src.bud.acct import acctunit_shop
 from src.bud.lobby import awardlink_shop
 from src.bud.examples.example_buds import (
     budunit_v001,
@@ -21,9 +21,9 @@ def test_BudUnit_settle_bud_CorrectlyCalculates1LevelBudLobbyBudImportance():
     zia_text = "Zia"
     xio_text = "Xio"
     sue_text = "Sue"
-    x_bud.set_charunit(charunit_shop(yao_text))
-    x_bud.set_charunit(charunit_shop(zia_text))
-    x_bud.set_charunit(charunit_shop(xio_text))
+    x_bud.set_acctunit(acctunit_shop(yao_text))
+    x_bud.set_acctunit(acctunit_shop(zia_text))
+    x_bud.set_acctunit(acctunit_shop(xio_text))
     yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
     zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
     xio_awardlink = awardlink_shop(xio_text, give_weight=10)
@@ -54,7 +54,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculates1LevelBudLobbyBudImportance():
     assert debt_sum1 == 1 * default_fund_pool()
 
     # ESTABLISH
-    x_bud.set_charunit(charunit_shop(sue_text))
+    x_bud.set_acctunit(acctunit_shop(sue_text))
     sue_awardlink = awardlink_shop(sue_text, give_weight=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
@@ -95,9 +95,9 @@ def test_BudUnit_settle_bud_CorrectlyCalculates3levelBudLobbyBudImportance():
     yao_text = "Yao"
     zia_text = "Zia"
     xio_text = "Xio"
-    x_bud.set_charunit(charunit_shop(yao_text))
-    x_bud.set_charunit(charunit_shop(zia_text))
-    x_bud.set_charunit(charunit_shop(xio_text))
+    x_bud.set_acctunit(acctunit_shop(yao_text))
+    x_bud.set_acctunit(acctunit_shop(zia_text))
+    x_bud.set_acctunit(acctunit_shop(xio_text))
     yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
     zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
     parm_awardlink = awardlink_shop(xio_text, give_weight=10)
@@ -141,9 +141,9 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesLobbyBudImportanceLWwithLobbyEmpt
     yao_text = "Yao"
     zia_text = "Zia"
     xio_text = "Xio"
-    x_bud.set_charunit(charunit_shop(yao_text))
-    x_bud.set_charunit(charunit_shop(zia_text))
-    x_bud.set_charunit(charunit_shop(xio_text))
+    x_bud.set_acctunit(acctunit_shop(yao_text))
+    x_bud.set_acctunit(acctunit_shop(zia_text))
+    x_bud.set_acctunit(acctunit_shop(xio_text))
     yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
     zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
     parm_awardlink = awardlink_shop(xio_text, give_weight=10)
@@ -224,9 +224,9 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudImportanc
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    sue_bud.set_charunit(charunit_shop(yao_text))
-    sue_bud.set_charunit(charunit_shop(zia_text))
-    sue_bud.set_charunit(charunit_shop(Xio_text))
+    sue_bud.set_acctunit(acctunit_shop(yao_text))
+    sue_bud.set_acctunit(acctunit_shop(zia_text))
+    sue_bud.set_acctunit(acctunit_shop(Xio_text))
     yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
     zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
     Xio_awardlink = awardlink_shop(Xio_text, give_weight=10)
@@ -282,9 +282,9 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_bud.set_charunit(charunit_shop(sue_text))
-    yao_bud.set_charunit(charunit_shop(bob_text))
-    yao_bud.set_charunit(charunit_shop(zia_text))
+    yao_bud.set_acctunit(acctunit_shop(sue_text))
+    yao_bud.set_acctunit(acctunit_shop(bob_text))
+    yao_bud.set_acctunit(acctunit_shop(zia_text))
     sue_awardlink = awardlink_shop(sue_text, 20, take_weight=40)
     bob_awardlink = awardlink_shop(bob_text, 10, take_weight=5)
     zia_awardlink = awardlink_shop(zia_text, 10, take_weight=5)
@@ -292,12 +292,12 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=bob_awardlink)
     yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=zia_awardlink)
 
-    sue_charunit = yao_bud.get_char(sue_text)
-    bob_charunit = yao_bud.get_char(bob_text)
-    zia_charunit = yao_bud.get_char(zia_text)
-    sue_sue_lobbyship = sue_charunit.get_lobbyship(sue_text)
-    bob_bob_lobbyship = bob_charunit.get_lobbyship(bob_text)
-    zia_zia_lobbyship = zia_charunit.get_lobbyship(zia_text)
+    sue_acctunit = yao_bud.get_acct(sue_text)
+    bob_acctunit = yao_bud.get_acct(bob_text)
+    zia_acctunit = yao_bud.get_acct(zia_text)
+    sue_sue_lobbyship = sue_acctunit.get_lobbyship(sue_text)
+    bob_bob_lobbyship = bob_acctunit.get_lobbyship(bob_text)
+    zia_zia_lobbyship = zia_acctunit.get_lobbyship(zia_text)
     assert sue_sue_lobbyship._fund_give is None
     assert sue_sue_lobbyship._fund_take is None
     assert bob_bob_lobbyship._fund_give is None
@@ -331,7 +331,7 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
 
     # ESTABLISH anothher pledge, check metrics are as expected
     xio_text = "Xio"
-    yao_bud.set_charunit(charunit_shop(xio_text))
+    yao_bud.set_acctunit(acctunit_shop(xio_text))
     yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=13))
 
     # WHEN
@@ -340,12 +340,12 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     # THEN
     xio_lobbybox = yao_bud.get_lobbybox(xio_text)
     xio_xio_lobbyship = xio_lobbybox.get_lobbyship(xio_text)
-    sue_charunit = yao_bud.get_char(sue_text)
-    bob_charunit = yao_bud.get_char(bob_text)
-    zia_charunit = yao_bud.get_char(zia_text)
-    sue_sue_lobbyship = sue_charunit.get_lobbyship(sue_text)
-    bob_bob_lobbyship = bob_charunit.get_lobbyship(bob_text)
-    zia_zia_lobbyship = zia_charunit.get_lobbyship(zia_text)
+    sue_acctunit = yao_bud.get_acct(sue_text)
+    bob_acctunit = yao_bud.get_acct(bob_text)
+    zia_acctunit = yao_bud.get_acct(zia_text)
+    sue_sue_lobbyship = sue_acctunit.get_lobbyship(sue_text)
+    bob_bob_lobbyship = bob_acctunit.get_lobbyship(bob_text)
+    zia_zia_lobbyship = zia_acctunit.get_lobbyship(zia_text)
     assert sue_sue_lobbyship._fund_give != 0.25 * default_fund_pool()
     assert sue_sue_lobbyship._fund_take != 0.8 * default_fund_pool()
     assert bob_bob_lobbyship._fund_give != 0.25 * default_fund_pool()
@@ -372,7 +372,7 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_CorrectlySetsCharUnitBudImportance():
+def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     swim_text = "swim"
@@ -381,9 +381,9 @@ def test_BudUnit_settle_bud_CorrectlySetsCharUnitBudImportance():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_bud.set_charunit(charunit_shop(sue_text))
-    yao_bud.set_charunit(charunit_shop(bob_text))
-    yao_bud.set_charunit(charunit_shop(zia_text))
+    yao_bud.set_acctunit(acctunit_shop(sue_text))
+    yao_bud.set_acctunit(acctunit_shop(bob_text))
+    yao_bud.set_acctunit(acctunit_shop(zia_text))
     bl_sue = awardlink_shop(sue_text, 20, take_weight=40)
     bl_bob = awardlink_shop(bob_text, 10, take_weight=5)
     bl_zia = awardlink_shop(zia_text, 10, take_weight=5)
@@ -391,80 +391,80 @@ def test_BudUnit_settle_bud_CorrectlySetsCharUnitBudImportance():
     yao_bud.get_idea_obj(swim_road).set_awardlink(bl_bob)
     yao_bud.get_idea_obj(swim_road).set_awardlink(bl_zia)
 
-    sue_charunit = yao_bud.get_char(sue_text)
-    bob_charunit = yao_bud.get_char(bob_text)
-    zia_charunit = yao_bud.get_char(zia_text)
+    sue_acctunit = yao_bud.get_acct(sue_text)
+    bob_acctunit = yao_bud.get_acct(bob_text)
+    zia_acctunit = yao_bud.get_acct(zia_text)
 
-    assert sue_charunit._fund_give == 0
-    assert sue_charunit._fund_take == 0
-    assert bob_charunit._fund_give == 0
-    assert bob_charunit._fund_take == 0
-    assert zia_charunit._fund_give == 0
-    assert zia_charunit._fund_take == 0
+    assert sue_acctunit._fund_give == 0
+    assert sue_acctunit._fund_take == 0
+    assert bob_acctunit._fund_give == 0
+    assert bob_acctunit._fund_take == 0
+    assert zia_acctunit._fund_give == 0
+    assert zia_acctunit._fund_take == 0
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert sue_charunit._fund_give == 0.5 * default_fund_pool()
-    assert sue_charunit._fund_take == 0.8 * default_fund_pool()
-    assert bob_charunit._fund_give == 0.25 * default_fund_pool()
-    assert bob_charunit._fund_take == 0.1 * default_fund_pool()
-    assert zia_charunit._fund_give == 0.25 * default_fund_pool()
-    assert zia_charunit._fund_take == 0.1 * default_fund_pool()
+    assert sue_acctunit._fund_give == 0.5 * default_fund_pool()
+    assert sue_acctunit._fund_take == 0.8 * default_fund_pool()
+    assert bob_acctunit._fund_give == 0.25 * default_fund_pool()
+    assert bob_acctunit._fund_take == 0.1 * default_fund_pool()
+    assert zia_acctunit._fund_give == 0.25 * default_fund_pool()
+    assert zia_acctunit._fund_take == 0.1 * default_fund_pool()
 
     assert (
-        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
+        sue_acctunit._fund_give + bob_acctunit._fund_give + zia_acctunit._fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        sue_acctunit._fund_take + bob_acctunit._fund_take + zia_acctunit._fund_take
         == 1.0 * default_fund_pool()
     )
 
     # WHEN anothher pledge, check metrics are as expected
     xio_text = "Xio"
-    yao_bud.set_charunit(charunit_shop(xio_text))
+    yao_bud.set_acctunit(acctunit_shop(xio_text))
     yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=10))
     yao_bud.settle_bud()
 
     # THEN
-    xio_charunit = yao_bud.get_char(xio_text)
+    xio_acctunit = yao_bud.get_acct(xio_text)
 
-    assert sue_charunit._fund_give != 0.5 * default_fund_pool()
-    assert sue_charunit._fund_take != 0.8 * default_fund_pool()
-    assert bob_charunit._fund_give != 0.25 * default_fund_pool()
-    assert bob_charunit._fund_take != 0.1 * default_fund_pool()
-    assert zia_charunit._fund_give != 0.25 * default_fund_pool()
-    assert zia_charunit._fund_take != 0.1 * default_fund_pool()
-    assert xio_charunit._fund_give is not None
-    assert xio_charunit._fund_take is not None
+    assert sue_acctunit._fund_give != 0.5 * default_fund_pool()
+    assert sue_acctunit._fund_take != 0.8 * default_fund_pool()
+    assert bob_acctunit._fund_give != 0.25 * default_fund_pool()
+    assert bob_acctunit._fund_take != 0.1 * default_fund_pool()
+    assert zia_acctunit._fund_give != 0.25 * default_fund_pool()
+    assert zia_acctunit._fund_take != 0.1 * default_fund_pool()
+    assert xio_acctunit._fund_give is not None
+    assert xio_acctunit._fund_take is not None
 
-    sum_charunit_fund_give = (
-        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
+    sum_acctunit_fund_give = (
+        sue_acctunit._fund_give + bob_acctunit._fund_give + zia_acctunit._fund_give
     )
-    assert sum_charunit_fund_give < 1.0 * default_fund_pool()
+    assert sum_acctunit_fund_give < 1.0 * default_fund_pool()
     assert (
-        sue_charunit._fund_give
-        + bob_charunit._fund_give
-        + zia_charunit._fund_give
-        + xio_charunit._fund_give
+        sue_acctunit._fund_give
+        + bob_acctunit._fund_give
+        + zia_acctunit._fund_give
+        + xio_acctunit._fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        sue_acctunit._fund_take + bob_acctunit._fund_take + zia_acctunit._fund_take
         < 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._fund_take
-        + bob_charunit._fund_take
-        + zia_charunit._fund_take
-        + xio_charunit._fund_take
+        sue_acctunit._fund_take
+        + bob_acctunit._fund_take
+        + zia_acctunit._fund_take
+        + xio_acctunit._fund_take
         == 1.0 * default_fund_pool()
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWCharUnitBudImportance():
+def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBudImportance():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     swim_text = "swim"
@@ -473,9 +473,9 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWCharUnitBudImportance():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_bud.set_charunit(charunit_shop(sue_text))
-    yao_bud.set_charunit(charunit_shop(bob_text))
-    yao_bud.set_charunit(charunit_shop(zia_text))
+    yao_bud.set_acctunit(acctunit_shop(sue_text))
+    yao_bud.set_acctunit(acctunit_shop(bob_text))
+    yao_bud.set_acctunit(acctunit_shop(zia_text))
     sue_awardlink = awardlink_shop(sue_text, 20, take_weight=40)
     bob_awardlink = awardlink_shop(bob_text, 10, take_weight=5)
     zia_awardlink = awardlink_shop(zia_text, 10, take_weight=5)
@@ -510,71 +510,71 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWCharUnitBudImportance():
         == 0.25 * default_fund_pool()
     )
 
-    sue_charunit = yao_bud.get_char(sue_text)
-    bob_charunit = yao_bud.get_char(bob_text)
-    zia_charunit = yao_bud.get_char(zia_text)
+    sue_acctunit = yao_bud.get_acct(sue_text)
+    bob_acctunit = yao_bud.get_acct(bob_text)
+    zia_acctunit = yao_bud.get_acct(zia_text)
 
-    assert sue_charunit._fund_give == 0.375 * default_fund_pool()
-    assert sue_charunit._fund_take == 0.45 * default_fund_pool()
-    assert bob_charunit._fund_give == 0.3125 * default_fund_pool()
-    assert bob_charunit._fund_take == 0.275 * default_fund_pool()
-    assert zia_charunit._fund_give == 0.3125 * default_fund_pool()
-    assert zia_charunit._fund_take == 0.275 * default_fund_pool()
+    assert sue_acctunit._fund_give == 0.375 * default_fund_pool()
+    assert sue_acctunit._fund_take == 0.45 * default_fund_pool()
+    assert bob_acctunit._fund_give == 0.3125 * default_fund_pool()
+    assert bob_acctunit._fund_take == 0.275 * default_fund_pool()
+    assert zia_acctunit._fund_give == 0.3125 * default_fund_pool()
+    assert zia_acctunit._fund_take == 0.275 * default_fund_pool()
 
     assert (
-        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
+        sue_acctunit._fund_give + bob_acctunit._fund_give + zia_acctunit._fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        sue_acctunit._fund_take + bob_acctunit._fund_take + zia_acctunit._fund_take
         == 1.0 * default_fund_pool()
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySetsCharAttrs():
+def test_BudUnit_settle_bud_CorrectlySetsAcctAttrs():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     yao_bud.add_l1_idea(ideaunit_shop("swim"))
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_bud.set_charunit(charunit_shop(sue_text, 8))
-    yao_bud.set_charunit(charunit_shop(bob_text))
-    yao_bud.set_charunit(charunit_shop(zia_text))
-    sue_charunit = yao_bud.get_char(sue_text)
-    bob_charunit = yao_bud.get_char(bob_text)
-    zia_charunit = yao_bud.get_char(zia_text)
-    assert sue_charunit._fund_give == 0
-    assert sue_charunit._fund_take == 0
-    assert bob_charunit._fund_give == 0
-    assert bob_charunit._fund_take == 0
-    assert zia_charunit._fund_give == 0
-    assert zia_charunit._fund_take == 0
+    yao_bud.set_acctunit(acctunit_shop(sue_text, 8))
+    yao_bud.set_acctunit(acctunit_shop(bob_text))
+    yao_bud.set_acctunit(acctunit_shop(zia_text))
+    sue_acctunit = yao_bud.get_acct(sue_text)
+    bob_acctunit = yao_bud.get_acct(bob_text)
+    zia_acctunit = yao_bud.get_acct(zia_text)
+    assert sue_acctunit._fund_give == 0
+    assert sue_acctunit._fund_take == 0
+    assert bob_acctunit._fund_give == 0
+    assert bob_acctunit._fund_take == 0
+    assert zia_acctunit._fund_give == 0
+    assert zia_acctunit._fund_take == 0
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
     assert (
-        sue_charunit._fund_give + bob_charunit._fund_give + zia_charunit._fund_give
+        sue_acctunit._fund_give + bob_acctunit._fund_give + zia_acctunit._fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_charunit._fund_take + bob_charunit._fund_take + zia_charunit._fund_take
+        sue_acctunit._fund_take + bob_acctunit._fund_take + zia_acctunit._fund_take
         == 1.0 * default_fund_pool()
     )
 
 
-def clear_all_charunits_lobbyboxs_fund_agenda_give_take(x_bud: BudUnit):
+def clear_all_acctunits_lobbyboxs_fund_agenda_give_take(x_bud: BudUnit):
     # DELETE bud_agenda_debt and bud_agenda_cred
     for lobbybox_x in x_bud._lobbyboxs.values():
         lobbybox_x.reset_fund_give_take()
-        # for lobbyship_x in lobbybox_x._chars.values():
+        # for lobbyship_x in lobbybox_x._accts.values():
         #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._fund_give:.6f} {lobbyship_x.debtor_weight=} {lobbyship__fund_take:t:.6f} {lobbyship_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
-    for x_charunit in x_bud._chars.values():
-        x_charunit.reset_fund_give_take()
+    for x_acctunit in x_bud._accts.values():
+        x_acctunit.reset_fund_give_take()
 
 
 @dataclass
@@ -596,18 +596,18 @@ class LobbyAgendaMetrics:
 
 
 @dataclass
-class CharAgendaMetrics:
+class AcctAgendaMetrics:
     sum_agenda_cred: float = 0
     sum_agenda_debt: float = 0
     sum_agenda_ratio_cred: float = 0
     sum_agenda_ratio_debt: float = 0
 
     def set_sums(self, x_bud: BudUnit):
-        for charunit in x_bud._chars.values():
-            self.sum_agenda_cred += charunit._fund_agenda_give
-            self.sum_agenda_debt += charunit._fund_agenda_take
-            self.sum_agenda_ratio_cred += charunit._fund_agenda_ratio_give
-            self.sum_agenda_ratio_debt += charunit._fund_agenda_ratio_take
+        for acctunit in x_bud._accts.values():
+            self.sum_agenda_cred += acctunit._fund_agenda_give
+            self.sum_agenda_debt += acctunit._fund_agenda_take
+            self.sum_agenda_ratio_cred += acctunit._fund_agenda_ratio_give
+            self.sum_agenda_ratio_debt += acctunit._fund_agenda_ratio_take
 
 
 @dataclass
@@ -632,7 +632,7 @@ class AwardAgendaMetrics:
 def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # ESTABLISH
     x_bud = budunit_v001_with_large_agenda()
-    clear_all_charunits_lobbyboxs_fund_agenda_give_take(x_bud=x_bud)
+    clear_all_acctunits_lobbyboxs_fund_agenda_give_take(x_bud=x_bud)
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_lobbyagendametrics = LobbyAgendaMetrics()
@@ -643,12 +643,12 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     assert x_lobbyagendametrics.sum_lobbyship_debt == 0
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
-    x_charagendametrics = CharAgendaMetrics()
-    x_charagendametrics.set_sums(x_bud=x_bud)
-    assert x_charagendametrics.sum_agenda_cred == 0
-    assert x_charagendametrics.sum_agenda_debt == 0
-    assert x_charagendametrics.sum_agenda_ratio_cred == 0
-    assert x_charagendametrics.sum_agenda_ratio_debt == 0
+    x_acctagendametrics = AcctAgendaMetrics()
+    x_acctagendametrics.set_sums(x_bud=x_bud)
+    assert x_acctagendametrics.sum_agenda_cred == 0
+    assert x_acctagendametrics.sum_agenda_debt == 0
+    assert x_acctagendametrics.sum_agenda_ratio_cred == 0
+    assert x_acctagendametrics.sum_agenda_ratio_debt == 0
 
     # WHEN
     agenda_dict = x_bud.get_agenda_dict()
@@ -687,38 +687,38 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
         x_lobbyagendametrics.sum_lobbybox_cred,
     )
 
-    assert all_charunits_have_legitimate_values(x_bud)
+    assert all_acctunits_have_legitimate_values(x_bud)
 
-    x_charagendametrics = CharAgendaMetrics()
-    x_charagendametrics.set_sums(x_bud=x_bud)
+    x_acctagendametrics = AcctAgendaMetrics()
+    x_acctagendametrics.set_sums(x_bud=x_bud)
     assert are_equal(
-        x_charagendametrics.sum_agenda_cred,
+        x_acctagendametrics.sum_agenda_cred,
         x_awardagendametrics.sum_bud_agenda_share,
     )
     assert are_equal(
-        x_charagendametrics.sum_agenda_debt,
+        x_acctagendametrics.sum_agenda_debt,
         x_awardagendametrics.sum_bud_agenda_share,
     )
-    assert are_equal(x_charagendametrics.sum_agenda_ratio_cred, 1)
-    assert are_equal(x_charagendametrics.sum_agenda_ratio_debt, 1)
+    assert are_equal(x_acctagendametrics.sum_agenda_ratio_cred, 1)
+    assert are_equal(x_acctagendametrics.sum_agenda_ratio_debt, 1)
 
-    # charunit_fund_give_sum = 0.0
-    # charunit_fund_take_sum = 0.0
+    # acctunit_fund_give_sum = 0.0
+    # acctunit_fund_take_sum = 0.0
 
-    # assert charunit_fund_give_sum == 1.0
-    # assert charunit_fund_take_sum > 0.9999999
-    # assert charunit_fund_take_sum < 1.00000001
+    # assert acctunit_fund_give_sum == 1.0
+    # assert acctunit_fund_take_sum > 0.9999999
+    # assert acctunit_fund_take_sum < 1.00000001
 
 
-def all_charunits_have_legitimate_values(x_bud: BudUnit):
+def all_acctunits_have_legitimate_values(x_bud: BudUnit):
     return not any(
         (
-            charunit._fund_give is None
-            or charunit._fund_give in [0.25, 0.5]
-            or charunit._fund_take is None
-            or charunit._fund_take in [0.8, 0.1]
+            acctunit._fund_give is None
+            or acctunit._fund_give in [0.25, 0.5]
+            or acctunit._fund_take is None
+            or acctunit._fund_take in [0.8, 0.1]
         )
-        for charunit in x_bud._chars.values()
+        for acctunit in x_bud._accts.values()
     )
 
 
@@ -733,45 +733,45 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    sue_charunit = charunit_shop(sue_text, 0.5, debtor_weight=2)
-    bob_charunit = charunit_shop(bob_text, 1.5, debtor_weight=3)
-    zia_charunit = charunit_shop(zia_text, 8, debtor_weight=5)
-    yao_bud.set_charunit(sue_charunit)
-    yao_bud.set_charunit(bob_charunit)
-    yao_bud.set_charunit(zia_charunit)
-    yao_bud_sue_char = yao_bud.get_char(sue_text)
-    yao_bud_bob_char = yao_bud.get_char(bob_text)
-    yao_bud_zia_char = yao_bud.get_char(zia_text)
+    sue_acctunit = acctunit_shop(sue_text, 0.5, debtor_weight=2)
+    bob_acctunit = acctunit_shop(bob_text, 1.5, debtor_weight=3)
+    zia_acctunit = acctunit_shop(zia_text, 8, debtor_weight=5)
+    yao_bud.set_acctunit(sue_acctunit)
+    yao_bud.set_acctunit(bob_acctunit)
+    yao_bud.set_acctunit(zia_acctunit)
+    yao_bud_sue_acct = yao_bud.get_acct(sue_text)
+    yao_bud_bob_acct = yao_bud.get_acct(bob_text)
+    yao_bud_zia_acct = yao_bud.get_acct(zia_text)
 
-    assert yao_bud_sue_char._fund_agenda_give in [0, None]
-    assert yao_bud_sue_char._fund_agenda_take in [0, None]
-    assert yao_bud_bob_char._fund_agenda_give in [0, None]
-    assert yao_bud_bob_char._fund_agenda_take in [0, None]
-    assert yao_bud_zia_char._fund_agenda_give in [0, None]
-    assert yao_bud_zia_char._fund_agenda_take in [0, None]
-    assert yao_bud_sue_char._fund_agenda_ratio_give != 0.05
-    assert yao_bud_sue_char._fund_agenda_ratio_take != 0.2
-    assert yao_bud_bob_char._fund_agenda_ratio_give != 0.15
-    assert yao_bud_bob_char._fund_agenda_ratio_take != 0.3
-    assert yao_bud_zia_char._fund_agenda_ratio_give != 0.8
-    assert yao_bud_zia_char._fund_agenda_ratio_take != 0.5
+    assert yao_bud_sue_acct._fund_agenda_give in [0, None]
+    assert yao_bud_sue_acct._fund_agenda_take in [0, None]
+    assert yao_bud_bob_acct._fund_agenda_give in [0, None]
+    assert yao_bud_bob_acct._fund_agenda_take in [0, None]
+    assert yao_bud_zia_acct._fund_agenda_give in [0, None]
+    assert yao_bud_zia_acct._fund_agenda_take in [0, None]
+    assert yao_bud_sue_acct._fund_agenda_ratio_give != 0.05
+    assert yao_bud_sue_acct._fund_agenda_ratio_take != 0.2
+    assert yao_bud_bob_acct._fund_agenda_ratio_give != 0.15
+    assert yao_bud_bob_acct._fund_agenda_ratio_take != 0.3
+    assert yao_bud_zia_acct._fund_agenda_ratio_give != 0.8
+    assert yao_bud_zia_acct._fund_agenda_ratio_take != 0.5
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud_sue_char._fund_agenda_give == 0
-    assert yao_bud_sue_char._fund_agenda_take == 0
-    assert yao_bud_bob_char._fund_agenda_give == 0
-    assert yao_bud_bob_char._fund_agenda_take == 0
-    assert yao_bud_zia_char._fund_agenda_give == 0
-    assert yao_bud_zia_char._fund_agenda_take == 0
-    assert yao_bud_sue_char._fund_agenda_ratio_give == 0.05
-    assert yao_bud_sue_char._fund_agenda_ratio_take == 0.2
-    assert yao_bud_bob_char._fund_agenda_ratio_give == 0.15
-    assert yao_bud_bob_char._fund_agenda_ratio_take == 0.3
-    assert yao_bud_zia_char._fund_agenda_ratio_give == 0.8
-    assert yao_bud_zia_char._fund_agenda_ratio_take == 0.5
+    assert yao_bud_sue_acct._fund_agenda_give == 0
+    assert yao_bud_sue_acct._fund_agenda_take == 0
+    assert yao_bud_bob_acct._fund_agenda_give == 0
+    assert yao_bud_bob_acct._fund_agenda_take == 0
+    assert yao_bud_zia_acct._fund_agenda_give == 0
+    assert yao_bud_zia_acct._fund_agenda_take == 0
+    assert yao_bud_sue_acct._fund_agenda_ratio_give == 0.05
+    assert yao_bud_sue_acct._fund_agenda_ratio_take == 0.2
+    assert yao_bud_bob_acct._fund_agenda_ratio_give == 0.15
+    assert yao_bud_bob_acct._fund_agenda_ratio_take == 0.3
+    assert yao_bud_zia_acct._fund_agenda_ratio_give == 0.8
+    assert yao_bud_zia_acct._fund_agenda_ratio_take == 0.5
 
 
 def test_BudUnit_settle_bud_CreatesLobbyBoxWith_budunit_v001():
@@ -782,10 +782,10 @@ def test_BudUnit_settle_bud_CreatesLobbyBoxWith_budunit_v001():
     # THEN
     assert x_bud._lobbyboxs is not None
     assert len(x_bud._lobbyboxs) == 34
-    everyone_chars_len = None
+    everyone_accts_len = None
     everyone_lobby = x_bud.get_lobbybox(",Everyone")
-    everyone_chars_len = len(everyone_lobby._lobbyships)
-    assert everyone_chars_len == 22
+    everyone_accts_len = len(everyone_lobby._lobbyships)
+    assert everyone_accts_len == 22
 
     # WHEN
     x_bud.settle_bud()

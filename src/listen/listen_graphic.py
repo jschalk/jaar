@@ -309,7 +309,7 @@ def fund_explanation0(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
     blue_text = "blue"
     blue_text = "blue"
     d_sue1_p1 = "How fund is distributed."
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at CharUnits"
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at AcctUnits"
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
     doerunit_text = "      Awardlinks"
@@ -345,13 +345,13 @@ def fund_explanation0(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
     add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_text)
     add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_text)
     add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_text)
-    charunit_text = "charunit"
+    acctunit_text = "acctunit"
     purple_text = "purple"
-    add_bud_rect(fig, 9, -0.4, 9.75, 0.2, charunit_text, purple_text)
-    add_bud_rect(fig, 9, -1.0, 9.75, -0.4, charunit_text, purple_text)
-    add_bud_rect(fig, 9, -1.6, 9.75, -1.0, charunit_text, purple_text)
-    add_bud_rect(fig, 9, -2.2, 9.75, -1.6, charunit_text, purple_text)
-    add_bud_rect(fig, 9, -4.0, 9.75, -2.2, charunit_text, purple_text)
+    add_bud_rect(fig, 9, -0.4, 9.75, 0.2, acctunit_text, purple_text)
+    add_bud_rect(fig, 9, -1.0, 9.75, -0.4, acctunit_text, purple_text)
+    add_bud_rect(fig, 9, -1.6, 9.75, -1.0, acctunit_text, purple_text)
+    add_bud_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_text, purple_text)
+    add_bud_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_text, purple_text)
 
     # fig.add_trace(
     #     plotly_Scatter(

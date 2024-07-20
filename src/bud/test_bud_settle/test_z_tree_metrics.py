@@ -1,6 +1,6 @@
 from src.bud.examples.example_buds import budunit_v001
 from src.bud.lobby import awardlink_shop
-from src.bud.char import charunit_shop
+from src.bud.acct import acctunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.idea import ideaunit_shop
 from src._road.road import create_road_from_nodes
@@ -156,25 +156,25 @@ def test_BudUnit_3AdvocatesNoideaunit_shop():
     zia_text = "Zia"
 
     zia_budunit = budunit_shop("Zia")
-    yao_charunit = charunit_shop(char_id=yao_text)
-    sue_charunit = charunit_shop(char_id=sue_text)
-    zia_charunit = charunit_shop(char_id=zia_text)
+    yao_acctunit = acctunit_shop(acct_id=yao_text)
+    sue_acctunit = acctunit_shop(acct_id=sue_text)
+    zia_acctunit = acctunit_shop(acct_id=zia_text)
     # print(f"{yao=}")
-    zia_budunit.set_charunit(yao_charunit)
-    zia_budunit.set_charunit(sue_charunit)
-    zia_budunit.set_charunit(zia_charunit)
+    zia_budunit.set_acctunit(yao_acctunit)
+    zia_budunit.set_acctunit(sue_acctunit)
+    zia_budunit.set_acctunit(zia_acctunit)
     zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_weight=10))
     zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_weight=10))
     zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_weight=10))
 
     # WHEN
     assert zia_budunit.get_awardlinks_metrics() is not None
-    chars_metrics = zia_budunit.get_awardlinks_metrics()
+    accts_metrics = zia_budunit.get_awardlinks_metrics()
 
     # THEN
-    awardlink_yao = chars_metrics[yao_text]
-    awardlink_sue = chars_metrics[sue_text]
-    awardlink_zia = chars_metrics[zia_text]
+    awardlink_yao = accts_metrics[yao_text]
+    awardlink_sue = accts_metrics[sue_text]
+    awardlink_zia = accts_metrics[zia_text]
     assert awardlink_yao.lobby_id is not None
     assert awardlink_sue.lobby_id is not None
     assert awardlink_zia.lobby_id is not None

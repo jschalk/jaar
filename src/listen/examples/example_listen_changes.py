@@ -31,10 +31,10 @@ def get_changeunit_sue_example() -> ChangeUnit:
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
 
-    category = "bud_charunit"
+    category = "bud_acctunit"
     sue_text = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
-    sue_atomunit.set_required_arg("char_id", sue_text)
+    sue_atomunit.set_required_arg("acct_id", sue_text)
     sue_changeunit.set_atomunit(sue_atomunit)
     return sue_changeunit
 
@@ -54,10 +54,10 @@ def get_changeunit_example1() -> ChangeUnit:
     x_atomunit.set_optional_arg(x_attribute, 88)
     sue_changeunit.set_atomunit(x_atomunit)
 
-    category = "bud_charunit"
+    category = "bud_acctunit"
     sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("char_id", sue_text)
+    x_atomunit.set_required_arg("acct_id", sue_text)
     sue_changeunit.set_atomunit(x_atomunit)
     return sue_changeunit
 
@@ -70,9 +70,9 @@ def get_changeunit_example2() -> ChangeUnit:
     x_attribute = "_credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 77)
 
-    category = "bud_charunit"
+    category = "bud_acctunit"
     sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("char_id", sue_text)
+    x_atomunit.set_required_arg("acct_id", sue_text)
     sue_changeunit.set_atomunit(x_atomunit)
     return sue_changeunit

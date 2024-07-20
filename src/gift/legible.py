@@ -12,16 +12,16 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_change.atomunits
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), "budunit"])
 
-    charunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "bud_charunit"])
-    charunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_charunit"])
-    charunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_charunit"])
+    acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "bud_acctunit"])
+    acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_acctunit"])
+    acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_acctunit"])
 
-    x_list = [atom_insert(), "bud_char_lobbyship"]
-    char_lobbyship_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_char_lobbyship"]
-    char_lobbyship_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_char_lobbyship"]
-    char_lobbyship_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_acct_lobbyship"]
+    acct_lobbyship_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_acct_lobbyship"]
+    acct_lobbyship_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_acct_lobbyship"]
+    acct_lobbyship_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "bud_ideaunit"]
     bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -71,24 +71,24 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     leg_list = []
     if budunit_atom is not None:
         add_budunit_legible_list(leg_list, budunit_atom, x_bud)
-    if charunit_insert_dict is not None:
-        add_bud_charunit_insert_to_legible_list(leg_list, charunit_insert_dict, x_bud)
-    if charunit_update_dict is not None:
-        add_bud_charunit_update_to_legible_list(leg_list, charunit_update_dict, x_bud)
-    if charunit_delete_dict is not None:
-        add_bud_charunit_delete_to_legible_list(leg_list, charunit_delete_dict, x_bud)
+    if acctunit_insert_dict is not None:
+        add_bud_acctunit_insert_to_legible_list(leg_list, acctunit_insert_dict, x_bud)
+    if acctunit_update_dict is not None:
+        add_bud_acctunit_update_to_legible_list(leg_list, acctunit_update_dict, x_bud)
+    if acctunit_delete_dict is not None:
+        add_bud_acctunit_delete_to_legible_list(leg_list, acctunit_delete_dict, x_bud)
 
-    if char_lobbyship_insert_dict is not None:
-        add_bud_char_lobbyship_insert_to_legible_list(
-            leg_list, char_lobbyship_insert_dict, x_bud
+    if acct_lobbyship_insert_dict is not None:
+        add_bud_acct_lobbyship_insert_to_legible_list(
+            leg_list, acct_lobbyship_insert_dict, x_bud
         )
-    if char_lobbyship_update_dict is not None:
-        add_bud_char_lobbyship_update_to_legible_list(
-            leg_list, char_lobbyship_update_dict, x_bud
+    if acct_lobbyship_update_dict is not None:
+        add_bud_acct_lobbyship_update_to_legible_list(
+            leg_list, acct_lobbyship_update_dict, x_bud
         )
-    if char_lobbyship_delete_dict is not None:
-        add_bud_char_lobbyship_delete_to_legible_list(
-            leg_list, char_lobbyship_delete_dict, x_bud
+    if acct_lobbyship_delete_dict is not None:
+        add_bud_acct_lobbyship_delete_to_legible_list(
+            leg_list, acct_lobbyship_delete_dict, x_bud
         )
 
     if bud_ideaunit_insert_dict is not None:
@@ -225,89 +225,89 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         )
 
 
-def add_bud_charunit_insert_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_bud: BudUnit
+def add_bud_acctunit_insert_to_legible_list(
+    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
     x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
-    for charunit_atom in charunit_dict.values():
-        char_id = charunit_atom.get_value("char_id")
-        credor_weight_value = charunit_atom.get_value("credor_weight")
-        debtor_weight_value = charunit_atom.get_value("debtor_weight")
-        x_str = f"{char_id} was added with {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt"
+    for acctunit_atom in acctunit_dict.values():
+        acct_id = acctunit_atom.get_value("acct_id")
+        credor_weight_value = acctunit_atom.get_value("credor_weight")
+        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
+        x_str = f"{acct_id} was added with {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt"
         legible_list.append(x_str)
 
 
-def add_bud_charunit_update_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_bud: BudUnit
+def add_bud_acctunit_update_to_legible_list(
+    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
     x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
-    for charunit_atom in charunit_dict.values():
-        char_id = charunit_atom.get_value("char_id")
-        credor_weight_value = charunit_atom.get_value("credor_weight")
-        debtor_weight_value = charunit_atom.get_value("debtor_weight")
+    for acctunit_atom in acctunit_dict.values():
+        acct_id = acctunit_atom.get_value("acct_id")
+        credor_weight_value = acctunit_atom.get_value("credor_weight")
+        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
         if credor_weight_value is not None and debtor_weight_value is not None:
-            x_str = f"{char_id} now has {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt."
+            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt."
         elif credor_weight_value is not None and debtor_weight_value is None:
-            x_str = f"{char_id} now has {credor_weight_value} {x_monetary_desc} cred."
+            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred."
         elif credor_weight_value is None and debtor_weight_value is not None:
-            x_str = f"{char_id} now has {debtor_weight_value} {x_monetary_desc} debt."
+            x_str = f"{acct_id} now has {debtor_weight_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
 
-def add_bud_charunit_delete_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_bud: BudUnit
+def add_bud_acctunit_delete_to_legible_list(
+    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
     x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
-    for charunit_atom in charunit_dict.values():
-        char_id = charunit_atom.get_value("char_id")
-        x_str = f"{char_id} was removed from {x_monetary_desc} chars."
+    for acctunit_atom in acctunit_dict.values():
+        acct_id = acctunit_atom.get_value("acct_id")
+        x_str = f"{acct_id} was removed from {x_monetary_desc} accts."
         legible_list.append(x_str)
 
 
-def add_bud_char_lobbyship_insert_to_legible_list(
-    legible_list: list[str], char_lobbyship_insert_dict: dict, x_bud: BudUnit
+def add_bud_acct_lobbyship_insert_to_legible_list(
+    legible_list: list[str], acct_lobbyship_insert_dict: dict, x_bud: BudUnit
 ):
-    for char_lobbyship_dict in char_lobbyship_insert_dict.values():
-        for char_lobbyship_atom in char_lobbyship_dict.values():
-            lobby_id = char_lobbyship_atom.get_value("lobby_id")
-            char_id = char_lobbyship_atom.get_value("char_id")
-            credor_weight_value = char_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = char_lobbyship_atom.get_value("debtor_weight")
-            x_str = f"Lobby '{lobby_id}' has new member {char_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+    for acct_lobbyship_dict in acct_lobbyship_insert_dict.values():
+        for acct_lobbyship_atom in acct_lobbyship_dict.values():
+            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
+            acct_id = acct_lobbyship_atom.get_value("acct_id")
+            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
+            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
+            x_str = f"Lobby '{lobby_id}' has new member {acct_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_bud_char_lobbyship_update_to_legible_list(
-    legible_list: list[str], char_lobbyship_update_dict: dict, x_bud: BudUnit
+def add_bud_acct_lobbyship_update_to_legible_list(
+    legible_list: list[str], acct_lobbyship_update_dict: dict, x_bud: BudUnit
 ):
-    for char_lobbyship_dict in char_lobbyship_update_dict.values():
-        for char_lobbyship_atom in char_lobbyship_dict.values():
-            lobby_id = char_lobbyship_atom.get_value("lobby_id")
-            char_id = char_lobbyship_atom.get_value("char_id")
-            credor_weight_value = char_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = char_lobbyship_atom.get_value("debtor_weight")
+    for acct_lobbyship_dict in acct_lobbyship_update_dict.values():
+        for acct_lobbyship_atom in acct_lobbyship_dict.values():
+            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
+            acct_id = acct_lobbyship_atom.get_value("acct_id")
+            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
+            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
             if credor_weight_value is not None and debtor_weight_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
             elif credor_weight_value is not None and debtor_weight_value is None:
-                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value}."
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value}."
             elif credor_weight_value is None and debtor_weight_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_debt={debtor_weight_value}."
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_bud_char_lobbyship_delete_to_legible_list(
-    legible_list: list[str], char_lobbyship_delete_dict: dict, x_bud: BudUnit
+def add_bud_acct_lobbyship_delete_to_legible_list(
+    legible_list: list[str], acct_lobbyship_delete_dict: dict, x_bud: BudUnit
 ):
-    for char_lobbyship_dict in char_lobbyship_delete_dict.values():
-        for char_lobbyship_atom in char_lobbyship_dict.values():
-            lobby_id = char_lobbyship_atom.get_value("lobby_id")
-            char_id = char_lobbyship_atom.get_value("char_id")
-            x_str = f"Lobby '{lobby_id}' no longer has member {char_id}."
+    for acct_lobbyship_dict in acct_lobbyship_delete_dict.values():
+        for acct_lobbyship_atom in acct_lobbyship_dict.values():
+            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
+            acct_id = acct_lobbyship_atom.get_value("acct_id")
+            x_str = f"Lobby '{lobby_id}' no longer has member {acct_id}."
             legible_list.append(x_str)
 
 

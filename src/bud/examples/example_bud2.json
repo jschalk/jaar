@@ -1,6 +1,6 @@
 {
     "_bit": 1,
-    "_chars": {
+    "_accts": {
         "A a ron Jones": {
             "_lobbyships": {
                 ",Everyone": {
@@ -19,7 +19,7 @@
                     "lobby_id": "A a ron Jones"
                 }
             },
-            "char_id": "A a ron Jones",
+            "acct_id": "A a ron Jones",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -46,7 +46,7 @@
                     "lobby_id": "America"
                 }
             },
-            "char_id": "America",
+            "acct_id": "America",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -68,7 +68,7 @@
                     "lobby_id": "Anna"
                 }
             },
-            "char_id": "Anna",
+            "acct_id": "Anna",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -95,7 +95,7 @@
                     "lobby_id": "Benjamin Stoddert"
                 }
             },
-            "char_id": "Benjamin Stoddert",
+            "acct_id": "Benjamin Stoddert",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -122,7 +122,7 @@
                     "lobby_id": "Bob302"
                 }
             },
-            "char_id": "Bob302",
+            "acct_id": "Bob302",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -149,7 +149,7 @@
                     "lobby_id": "Chuck Lee"
                 }
             },
-            "char_id": "Chuck Lee",
+            "acct_id": "Chuck Lee",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -171,7 +171,7 @@
                     "lobby_id": "Ernesto Chavez"
                 }
             },
-            "char_id": "Ernesto Chavez",
+            "acct_id": "Ernesto Chavez",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -193,7 +193,7 @@
                     "lobby_id": "Jacque Chirac"
                 }
             },
-            "char_id": "Jacque Chirac",
+            "acct_id": "Jacque Chirac",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -215,7 +215,7 @@
                     "lobby_id": "Jane Randolph"
                 }
             },
-            "char_id": "Jane Randolph",
+            "acct_id": "Jane Randolph",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -237,7 +237,7 @@
                     "lobby_id": "Maria Reynolds"
                 }
             },
-            "char_id": "Maria Reynolds",
+            "acct_id": "Maria Reynolds",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -264,7 +264,7 @@
                     "lobby_id": "Martha Doubs"
                 }
             },
-            "char_id": "Martha Doubs",
+            "acct_id": "Martha Doubs",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -291,7 +291,7 @@
                     "lobby_id": "Mikayla"
                 }
             },
-            "char_id": "Mikayla",
+            "acct_id": "Mikayla",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -313,7 +313,7 @@
                     "lobby_id": "Norberto"
                 }
             },
-            "char_id": "Norberto",
+            "acct_id": "Norberto",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -340,7 +340,7 @@
                     "lobby_id": "Perrison"
                 }
             },
-            "char_id": "Perrison",
+            "acct_id": "Perrison",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -367,7 +367,7 @@
                     "lobby_id": "Philipa"
                 }
             },
-            "char_id": "Philipa",
+            "acct_id": "Philipa",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -389,7 +389,7 @@
                     "lobby_id": "Prashant"
                 }
             },
-            "char_id": "Prashant",
+            "acct_id": "Prashant",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -441,7 +441,7 @@
                     "lobby_id": "Renee Elise Goldsberry"
                 }
             },
-            "char_id": "Renee Elise Goldsberry",
+            "acct_id": "Renee Elise Goldsberry",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -468,7 +468,7 @@
                     "lobby_id": "Sam zamora"
                 }
             },
-            "char_id": "Sam zamora",
+            "acct_id": "Sam zamora",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -490,7 +490,7 @@
                     "lobby_id": "Shadwell Harris"
                 }
             },
-            "char_id": "Shadwell Harris",
+            "acct_id": "Shadwell Harris",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -512,7 +512,7 @@
                     "lobby_id": "Thomas OSU"
                 }
             },
-            "char_id": "Thomas OSU",
+            "acct_id": "Thomas OSU",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -534,7 +534,7 @@
                     "lobby_id": "Travis Fox"
                 }
             },
-            "char_id": "Travis Fox",
+            "acct_id": "Travis Fox",
             "credor_weight": 1,
             "debtor_weight": 1
         },
@@ -556,7 +556,7 @@
                     "lobby_id": "WIlliam Wallace"
                 }
             },
-            "char_id": "WIlliam Wallace",
+            "acct_id": "WIlliam Wallace",
             "credor_weight": 1,
             "debtor_weight": 1
         }

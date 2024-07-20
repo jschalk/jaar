@@ -2,7 +2,7 @@ from src._road.road import get_parent_road, RoadUnit, is_sub_road
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit
 from src.bud.report import (
-    get_bud_charunits_dataframe,
+    get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )
 from plotly.graph_objects import (
@@ -139,9 +139,9 @@ def display_ideatree(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
     return x_fig
 
 
-def get_bud_chars_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
+def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     column_header_list = [
-        "char_id",
+        "acct_id",
         "_credor_respect",
         "credor_weight",
         "_debtor_respect",
@@ -151,7 +151,7 @@ def get_bud_chars_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
         "_fund_agenda_give",
         "_fund_agenda_take",
     ]
-    df = get_bud_charunits_dataframe(x_bud)
+    df = get_bud_acctunits_dataframe(x_bud)
     df.insert(1, "_credor_respect", x_bud._credor_respect)
     df.insert(4, "_debtor_respect", x_bud._debtor_respect)
     header_dict = dict(
@@ -161,7 +161,7 @@ def get_bud_chars_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.char_id,
+                df.acct_id,
                 df._credor_respect,
                 df.credor_weight,
                 df._debtor_respect,
@@ -177,7 +177,7 @@ def get_bud_chars_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"OwnerID '{x_bud._owner_id}' bud chars metrics"
+    fig_title = f"OwnerID '{x_bud._owner_id}' bud accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -379,10 +379,10 @@ def budunit_explanation1() -> plotly_Figure:
     add_lobby_rect(fig, base_w, base_h, 2, 0.2, 0.4, "lobby2")
     add_lobby_rect(fig, base_w, base_h, 2, 0.4, 0.6, "lobby3")
     add_lobby_rect(fig, base_w, base_h, 2, 0.6, 1, "lobby4")
-    add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "char0")
-    add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "char1")
-    add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "char2")
-    add_people_rect(fig, base_w, base_h, 0, 0.7, 1, "char3")
+    add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "acct0")
+    add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "acct1")
+    add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "acct2")
+    add_people_rect(fig, base_w, base_h, 0, 0.7, 1, "acct3")
 
     fig.add_trace(
         plotly_Scatter(

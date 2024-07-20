@@ -20,14 +20,14 @@ def test_create_empty_bud_ReturnsCorrectObj():
     zia_debtor_weight = 41
     zia_credor_pool = 87
     zia_debtor_pool = 81
-    yao_voice.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_voice.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
     zia_irrational_debtor_weight = 11
     zia_inallocable_debtor_weight = 22
-    duty_zia_charunit = yao_voice.get_char(zia_text)
-    duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
-    duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
-    zia_charunit = yao_voice.get_char(zia_text)
-    zia_charunit.add_lobbyship(f"{slash_text}swimmers")
+    duty_zia_acctunit = yao_voice.get_acct(zia_text)
+    duty_zia_acctunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
+    duty_zia_acctunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
+    zia_acctunit = yao_voice.get_acct(zia_text)
+    zia_acctunit.add_lobbyship(f"{slash_text}swimmers")
     yao_voice.set_credor_respect(zia_credor_pool)
     yao_voice.set_debtor_resepect(zia_debtor_pool)
 
@@ -39,7 +39,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job._owner_id == zia_text
     assert yao_empty_job._real_id == yao_voice._real_id
     assert yao_empty_job._last_gift_id is None
-    assert yao_empty_job.get_charunits_dict() == {}
+    assert yao_empty_job.get_acctunits_dict() == {}
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
     assert yao_empty_job._fund_pool == yao_voice._fund_pool
     assert yao_empty_job._fund_coin == yao_voice._fund_coin
@@ -51,7 +51,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job._debtor_respect != yao_voice._debtor_respect
     assert yao_empty_job._debtor_respect == validate_respect_num()
     yao_empty_job.settle_bud()
-    assert yao_empty_job._chars == {}
+    assert yao_empty_job._accts == {}
 
 
 def test_create_listen_basis_ReturnsCorrectObj():
@@ -65,14 +65,14 @@ def test_create_listen_basis_ReturnsCorrectObj():
     zia_debtor_weight = 41
     zia_credor_pool = 8700
     zia_debtor_pool = 8100
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
     zia_irrational_debtor_weight = 11
     zia_inallocable_debtor_weight = 22
-    duty_zia_charunit = yao_duty.get_char(zia_text)
-    duty_zia_charunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
-    duty_zia_charunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
-    zia_charunit = yao_duty.get_char(zia_text)
-    zia_charunit.add_lobbyship(f"{slash_text}swimmers")
+    duty_zia_acctunit = yao_duty.get_acct(zia_text)
+    duty_zia_acctunit.add_irrational_debtor_weight(zia_irrational_debtor_weight)
+    duty_zia_acctunit.add_inallocable_debtor_weight(zia_inallocable_debtor_weight)
+    zia_acctunit = yao_duty.get_acct(zia_text)
+    zia_acctunit.add_lobbyship(f"{slash_text}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
     yao_duty.set_debtor_resepect(zia_debtor_pool)
 
@@ -83,7 +83,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._owner_id == yao_duty._owner_id
     assert yao_basis_job._real_id == yao_duty._real_id
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
-    assert yao_basis_job.get_charunits_dict() == yao_duty.get_charunits_dict()
+    assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
     assert yao_basis_job._fund_pool == yao_duty._fund_pool
     assert yao_basis_job._fund_coin == yao_duty._fund_coin
@@ -94,13 +94,13 @@ def test_create_listen_basis_ReturnsCorrectObj():
     yao_basis_job.settle_bud()
     assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
     assert len(yao_basis_job._idea_dict) == 1
-    job_zia_charunit = yao_basis_job.get_char(zia_text)
+    job_zia_acctunit = yao_basis_job.get_acct(zia_text)
     assert (
-        yao_basis_job.get_charunits_dict().keys()
-        == yao_duty.get_charunits_dict().keys()
+        yao_basis_job.get_acctunits_dict().keys()
+        == yao_duty.get_acctunits_dict().keys()
     )
-    assert job_zia_charunit._irrational_debtor_weight == 0
-    assert job_zia_charunit._inallocable_debtor_weight == 0
+    assert job_zia_acctunit._irrational_debtor_weight == 0
+    assert job_zia_acctunit._inallocable_debtor_weight == 0
 
 
 def test_get_default_action_bud_ReturnsCorrectObj():
@@ -111,7 +111,7 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     x_fund_pool = 99000
     x_fund_coin = 80
     x_bit = 5
-    sue_char_pool = 800
+    sue_acct_pool = 800
     casa_text = "casa"
     bob_text = "Bob"
     last_gift_id = 7
@@ -120,10 +120,10 @@ def test_get_default_action_bud_ReturnsCorrectObj():
         sue_text, blue_text, slash_text, x_fund_pool, x_fund_coin, x_bit
     )
     sue_budunit.set_last_gift_id(last_gift_id)
-    sue_budunit.add_charunit(bob_text, 3, 4)
-    bob_charunit = sue_budunit.get_char(bob_text)
-    bob_charunit.add_lobbyship(f"{slash_text}swimmers")
-    sue_budunit.set_char_respect(sue_char_pool)
+    sue_budunit.add_acctunit(bob_text, 3, 4)
+    bob_acctunit = sue_budunit.get_acct(bob_text)
+    bob_acctunit.add_lobbyship(f"{slash_text}swimmers")
+    sue_budunit.set_acct_respect(sue_acct_pool)
     sue_budunit.add_l1_idea(ideaunit_shop(casa_text))
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
@@ -137,11 +137,11 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     assert default_action_bud._real_id == sue_budunit._real_id
     assert default_action_bud._real_id == blue_text
     assert default_action_bud._road_delimiter == slash_text
-    assert default_action_bud._fund_pool == sue_char_pool
+    assert default_action_bud._fund_pool == sue_acct_pool
     assert default_action_bud._fund_coin == x_fund_coin
     assert default_action_bud._bit == x_bit
     assert default_action_bud._credor_respect == default_respect_num()
     assert default_action_bud._debtor_respect == default_respect_num()
     assert default_action_bud._max_tree_traverse == sue_max_tree_traverse
-    assert len(default_action_bud.get_charunits_dict()) == 1
+    assert len(default_action_bud.get_acctunits_dict()) == 1
     assert len(default_action_bud._idea_dict) == 1

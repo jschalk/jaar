@@ -15,7 +15,7 @@
 #     budunit_explanation4,
 #     fund_explanation0,
 #     display_ideatree,
-#     get_bud_chars_plotly_fig,
+#     get_bud_accts_plotly_fig,
 #     get_bud_agenda_plotly_fig,
 # )
 # from src.gift.atom_graphic import atomunit_periodic_table0
@@ -70,14 +70,14 @@
 #     yao_text = "Yao"
 #     yao_credor_weight = 66
 #     yao_debtor_weight = 77
-#     luca_bud.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
+#     luca_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
 #     sue_text = "Sue"
 #     sue_credor_weight = 434
 #     sue_debtor_weight = 323
-#     luca_bud.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+#     luca_bud.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
 
 #     # WHEN
-#     get_bud_chars_plotly_fig(luca_bud).show()
+#     get_bud_accts_plotly_fig(luca_bud).show()
 
 #     yao_bud = budunit_v001_with_large_agenda()
 #     week_text = "weekdays"

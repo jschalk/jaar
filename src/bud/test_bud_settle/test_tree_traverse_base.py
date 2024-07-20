@@ -72,34 +72,34 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     mon_text = "Monday"
     yrx = x_bud._idearoot
     assert yrx._descendant_pledge_count is None
-    assert yrx._all_char_cred is None
-    assert yrx._all_char_debt is None
+    assert yrx._all_acct_cred is None
+    assert yrx._all_acct_debt is None
     assert yrx._kids[casa_text]._descendant_pledge_count is None
-    assert yrx._kids[casa_text]._all_char_cred is None
-    assert yrx._kids[casa_text]._all_char_debt is None
+    assert yrx._kids[casa_text]._all_acct_cred is None
+    assert yrx._kids[casa_text]._all_acct_debt is None
     assert yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count is None
-    assert yrx._kids[week_text]._kids[mon_text]._all_char_cred is None
-    assert yrx._kids[week_text]._kids[mon_text]._all_char_debt is None
+    assert yrx._kids[week_text]._kids[mon_text]._all_acct_cred is None
+    assert yrx._kids[week_text]._kids[mon_text]._all_acct_debt is None
 
     yrx._descendant_pledge_count = -2
-    yrx._all_char_cred = -2
-    yrx._all_char_debt = -2
+    yrx._all_acct_cred = -2
+    yrx._all_acct_debt = -2
     yrx._kids[casa_text]._descendant_pledge_count = -2
-    yrx._kids[casa_text]._all_char_cred = -2
-    yrx._kids[casa_text]._all_char_debt = -2
+    yrx._kids[casa_text]._all_acct_cred = -2
+    yrx._kids[casa_text]._all_acct_debt = -2
     yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count = -2
-    yrx._kids[week_text]._kids[mon_text]._all_char_cred = -2
-    yrx._kids[week_text]._kids[mon_text]._all_char_debt = -2
+    yrx._kids[week_text]._kids[mon_text]._all_acct_cred = -2
+    yrx._kids[week_text]._kids[mon_text]._all_acct_debt = -2
 
     assert yrx._descendant_pledge_count == -2
-    assert yrx._all_char_cred == -2
-    assert yrx._all_char_debt == -2
+    assert yrx._all_acct_cred == -2
+    assert yrx._all_acct_debt == -2
     assert yrx._kids[casa_text]._descendant_pledge_count == -2
-    assert yrx._kids[casa_text]._all_char_cred == -2
-    assert yrx._kids[casa_text]._all_char_debt == -2
+    assert yrx._kids[casa_text]._all_acct_cred == -2
+    assert yrx._kids[casa_text]._all_acct_debt == -2
     assert yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count == -2
-    assert yrx._kids[week_text]._kids[mon_text]._all_char_cred == -2
-    assert yrx._kids[week_text]._kids[mon_text]._all_char_debt == -2
+    assert yrx._kids[week_text]._kids[mon_text]._all_acct_cred == -2
+    assert yrx._kids[week_text]._kids[mon_text]._all_acct_debt == -2
 
     # WHEN
     x_bud.settle_bud()
@@ -109,28 +109,28 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     assert yrx._kids[casa_text]._descendant_pledge_count == 0
     assert yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count == 0
 
-    assert yrx._kids[week_text]._kids[mon_text]._all_char_cred == True
-    assert yrx._kids[week_text]._kids[mon_text]._all_char_debt == True
-    assert yrx._kids[casa_text]._all_char_cred == True
-    assert yrx._kids[casa_text]._all_char_debt == True
-    assert yrx._all_char_cred == True
-    assert yrx._all_char_debt == True
+    assert yrx._kids[week_text]._kids[mon_text]._all_acct_cred == True
+    assert yrx._kids[week_text]._kids[mon_text]._all_acct_debt == True
+    assert yrx._kids[casa_text]._all_acct_cred == True
+    assert yrx._kids[casa_text]._all_acct_debt == True
+    assert yrx._all_acct_cred == True
+    assert yrx._all_acct_debt == True
 
 
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
     tim_bud = budunit_shop(_owner_id="Tim")
     assert tim_bud._idearoot._descendant_pledge_count is None
-    assert tim_bud._idearoot._all_char_cred is None
-    assert tim_bud._idearoot._all_char_debt is None
+    assert tim_bud._idearoot._all_acct_cred is None
+    assert tim_bud._idearoot._all_acct_debt is None
 
     # WHEN
     tim_bud.settle_bud()
 
     # THEN
     assert tim_bud._idearoot._descendant_pledge_count == 0
-    assert tim_bud._idearoot._all_char_cred == True
-    assert tim_bud._idearoot._all_char_debt == True
+    assert tim_bud._idearoot._all_acct_cred == True
+    assert tim_bud._idearoot._all_acct_debt == True
 
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
@@ -148,14 +148,14 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     # test root status:
     x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
     assert x_idearoot._descendant_pledge_count is None
-    assert x_idearoot._all_char_cred is None
-    assert x_idearoot._all_char_debt is None
+    assert x_idearoot._all_acct_cred is None
+    assert x_idearoot._all_acct_debt is None
     assert x_idearoot._kids[casa_text]._descendant_pledge_count is None
-    assert x_idearoot._kids[casa_text]._all_char_cred is None
-    assert x_idearoot._kids[casa_text]._all_char_debt is None
+    assert x_idearoot._kids[casa_text]._all_acct_cred is None
+    assert x_idearoot._kids[casa_text]._all_acct_debt is None
     assert x_idearoot._kids[week_text]._kids[mon_text]._descendant_pledge_count is None
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_char_cred is None
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_char_debt is None
+    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_cred is None
+    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_debt is None
 
     # WHEN
     x_bud.settle_bud()
@@ -165,12 +165,12 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     assert x_idearoot._kids[casa_text]._descendant_pledge_count == 1
     assert x_idearoot._kids[casa_text]._kids[email_text]._descendant_pledge_count == 0
     assert x_idearoot._kids[week_text]._kids[mon_text]._descendant_pledge_count == 0
-    assert x_idearoot._all_char_cred == True
-    assert x_idearoot._all_char_debt == True
-    assert x_idearoot._kids[casa_text]._all_char_cred == True
-    assert x_idearoot._kids[casa_text]._all_char_debt == True
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_char_cred == True
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_char_debt == True
+    assert x_idearoot._all_acct_cred == True
+    assert x_idearoot._all_acct_debt == True
+    assert x_idearoot._kids[casa_text]._all_acct_cred == True
+    assert x_idearoot._kids[casa_text]._all_acct_debt == True
+    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_cred == True
+    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_debt == True
 
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
@@ -190,7 +190,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
     x_bud.add_idea(vacuum_idea, parent_road=casa_road)
 
-    x_bud.add_charunit(char_id=sue_text)
+    x_bud.add_acctunit(acct_id=sue_text)
     x_awardlink = awardlink_shop(lobby_id=sue_text)
 
     x_bud._idearoot._kids[casa_text]._kids[email_text].set_awardlink(
@@ -205,22 +205,22 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     # print(x_bud._kids[casa_text]._kids[email_text]._awardlink)
 
     # THEN
-    assert x_bud._idearoot._all_char_cred is False
-    assert x_bud._idearoot._all_char_debt is False
+    assert x_bud._idearoot._all_acct_cred is False
+    assert x_bud._idearoot._all_acct_debt is False
     casa_idea = x_bud._idearoot._kids[casa_text]
-    assert casa_idea._all_char_cred is False
-    assert casa_idea._all_char_debt is False
-    assert casa_idea._kids[email_text]._all_char_cred is False
-    assert casa_idea._kids[email_text]._all_char_debt is False
-    assert casa_idea._kids[vacuum_text]._all_char_cred == True
-    assert casa_idea._kids[vacuum_text]._all_char_debt == True
+    assert casa_idea._all_acct_cred is False
+    assert casa_idea._all_acct_debt is False
+    assert casa_idea._kids[email_text]._all_acct_cred is False
+    assert casa_idea._kids[email_text]._all_acct_debt is False
+    assert casa_idea._kids[vacuum_text]._all_acct_cred == True
+    assert casa_idea._kids[vacuum_text]._all_acct_debt == True
     week_idea = x_bud._idearoot._kids[week_text]
-    assert week_idea._all_char_cred == True
-    assert week_idea._all_char_debt == True
-    assert week_idea._kids[mon_text]._all_char_cred == True
-    assert week_idea._kids[mon_text]._all_char_debt == True
-    assert week_idea._kids[tue_text]._all_char_cred == True
-    assert week_idea._kids[tue_text]._all_char_debt == True
+    assert week_idea._all_acct_cred == True
+    assert week_idea._all_acct_debt == True
+    assert week_idea._kids[mon_text]._all_acct_cred == True
+    assert week_idea._kids[mon_text]._all_acct_debt == True
+    assert week_idea._kids[tue_text]._all_acct_cred == True
+    assert week_idea._kids[tue_text]._all_acct_debt == True
 
 
 def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
@@ -454,7 +454,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     week_text = "weekdays"
     nation_text = "nation-state"
     sue_awardlink = awardlink_shop(lobby_id=sue_text)
-    x_bud.add_charunit(char_id=sue_text)
+    x_bud.add_acctunit(acct_id=sue_text)
     x_bud._idearoot.set_awardlink(awardlink=sue_awardlink)
     # idea tree has awardlines
     assert x_bud._idearoot._awardheirs.get(sue_text) is None
@@ -511,7 +511,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromNonRootCorrectly()
     # idea tree has no awardlinks
     sue_text = "Sue"
     assert x_bud._idearoot._awardlines == {}
-    x_bud.add_charunit(char_id=sue_text)
+    x_bud.add_acctunit(acct_id=sue_text)
     x_awardlink = awardlink_shop(lobby_id=sue_text)
     casa_text = "casa"
     email_text = "email"
@@ -543,9 +543,9 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    x_bud.add_charunit(yao_text)
-    x_bud.add_charunit(zia_text)
-    x_bud.add_charunit(Xio_text)
+    x_bud.add_acctunit(yao_text)
+    x_bud.add_acctunit(zia_text)
+    x_bud.add_acctunit(Xio_text)
 
     swim_text = "swim"
     swim_road = x_bud.make_road(prom_text, swim_text)

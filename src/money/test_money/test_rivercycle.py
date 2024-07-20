@@ -122,12 +122,12 @@ def test_RiverCylce_create_cylceledger_ReturnsCorrectObjTwoRiverBooks():
     assert one_cylceledger == {yao_text: yao_money, bob_text: bob_money}
 
 
-def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
+def test_create_init_rivercycle_ReturnsObjScenarioOne_acctunit():
     # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_text)
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_charunit(yao_text)
+    yao_bud.add_acctunit(yao_text)
     yao_credorledger = get_credorledger(yao_bud)
     econ_credorledgers = {yao_text: yao_credorledger}
 
@@ -140,7 +140,7 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
     assert yao_init_rivercycle.riverbooks.get(yao_text) is not None
 
 
-def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
+def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
@@ -150,9 +150,9 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
     zia_credor_weight = 10
     yao_hubunit = hubunit_shop(None, None, yao_text)
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_charunit(yao_text, yao_credor_weight)
-    yao_bud.add_charunit(bob_text, bob_credor_weight)
-    yao_bud.add_charunit(zia_text, zia_credor_weight)
+    yao_bud.add_acctunit(yao_text, yao_credor_weight)
+    yao_bud.add_acctunit(bob_text, bob_credor_weight)
+    yao_bud.add_acctunit(zia_text, zia_credor_weight)
     yao_credorledger = get_credorledger(yao_bud)
     econ_credorledgers = {yao_text: yao_credorledger}
     print(f"{econ_credorledgers=}")
@@ -171,7 +171,7 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
     assert yao_riverbook._rivergrants.get(zia_text) == 500000000
 
 
-def test_create_next_rivercycle_ReturnsObjScenarioThree_charunit():
+def test_create_next_rivercycle_ReturnsObjScenarioThree_acctunit():
     # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"

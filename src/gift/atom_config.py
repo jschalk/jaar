@@ -67,12 +67,12 @@ def budunit_text() -> str:
     return "budunit"
 
 
-def bud_charunit_text() -> str:
-    return "bud_charunit"
+def bud_acctunit_text() -> str:
+    return "bud_acctunit"
 
 
-def bud_char_lobbyship_text() -> str:
-    return "bud_char_lobbyship"
+def bud_acct_lobbyship_text() -> str:
+    return "bud_acct_lobbyship"
 
 
 def bud_ideaunit_text() -> str:

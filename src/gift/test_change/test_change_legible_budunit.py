@@ -54,14 +54,14 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_monetary_desc():
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     # ESTABLISH
     category = "budunit"
-    char_credor_pool_text = "_credor_respect"
-    char_credor_pool_int = 71
-    char_credor_pool_atomunit = atomunit_shop(category, atom_update())
-    char_credor_pool_atomunit.set_arg(char_credor_pool_text, char_credor_pool_int)
+    acct_credor_pool_text = "_credor_respect"
+    acct_credor_pool_int = 71
+    acct_credor_pool_atomunit = atomunit_shop(category, atom_update())
+    acct_credor_pool_atomunit.set_arg(acct_credor_pool_text, acct_credor_pool_int)
 
-    print(f"{char_credor_pool_atomunit=}")
+    print(f"{acct_credor_pool_atomunit=}")
     x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(char_credor_pool_atomunit)
+    x_changeunit.set_atomunit(acct_credor_pool_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_monetary_desc = "dragon dollars"
     sue_bud.set_monetary_desc(sue_monetary_desc)
@@ -70,21 +70,21 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_monetary_desc} credor pool is now {char_credor_pool_int}"
+    x_str = f"{sue_monetary_desc} credor pool is now {acct_credor_pool_int}"
     assert legible_list[0] == x_str
 
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_With_monetary_desc_None():
     # ESTABLISH
     category = "budunit"
-    char_credor_pool_text = "_credor_respect"
-    char_credor_pool_int = 71
-    char_credor_pool_atomunit = atomunit_shop(category, atom_update())
-    char_credor_pool_atomunit.set_arg(char_credor_pool_text, char_credor_pool_int)
+    acct_credor_pool_text = "_credor_respect"
+    acct_credor_pool_int = 71
+    acct_credor_pool_atomunit = atomunit_shop(category, atom_update())
+    acct_credor_pool_atomunit.set_arg(acct_credor_pool_text, acct_credor_pool_int)
 
-    print(f"{char_credor_pool_atomunit=}")
+    print(f"{acct_credor_pool_atomunit=}")
     x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(char_credor_pool_atomunit)
+    x_changeunit.set_atomunit(acct_credor_pool_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
@@ -92,7 +92,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Wit
 
     # THEN
     x_str = (
-        f"{sue_bud._owner_id}'s monetary_desc credor pool is now {char_credor_pool_int}"
+        f"{sue_bud._owner_id}'s monetary_desc credor pool is now {acct_credor_pool_int}"
     )
     assert legible_list[0] == x_str
 
@@ -100,14 +100,14 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Wit
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     # ESTABLISH
     category = "budunit"
-    char_debtor_pool_text = "_debtor_respect"
-    char_debtor_pool_int = 78
-    char_debtor_pool_atomunit = atomunit_shop(category, atom_update())
-    char_debtor_pool_atomunit.set_arg(char_debtor_pool_text, char_debtor_pool_int)
+    acct_debtor_pool_text = "_debtor_respect"
+    acct_debtor_pool_int = 78
+    acct_debtor_pool_atomunit = atomunit_shop(category, atom_update())
+    acct_debtor_pool_atomunit.set_arg(acct_debtor_pool_text, acct_debtor_pool_int)
 
-    print(f"{char_debtor_pool_atomunit=}")
+    print(f"{acct_debtor_pool_atomunit=}")
     x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(char_debtor_pool_atomunit)
+    x_changeunit.set_atomunit(acct_debtor_pool_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_monetary_desc = "dragon dollars"
     sue_bud.set_monetary_desc(sue_monetary_desc)
@@ -116,7 +116,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_monetary_desc} debtor pool is now {char_debtor_pool_int}"
+    x_str = f"{sue_monetary_desc} debtor pool is now {acct_debtor_pool_int}"
     assert legible_list[0] == x_str
 
 
@@ -124,12 +124,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
     # ESTABLISH
     x_changeunit = changeunit_shop()
     category = "budunit"
-    char_credor_pool_text = "_credor_respect"
-    char_debtor_pool_text = "_debtor_respect"
-    char_pool_int = 83
+    acct_credor_pool_text = "_credor_respect"
+    acct_debtor_pool_text = "_debtor_respect"
+    acct_pool_int = 83
     budunit_atomunit = atomunit_shop(category, atom_update())
-    budunit_atomunit.set_arg(char_credor_pool_text, char_pool_int)
-    budunit_atomunit.set_arg(char_debtor_pool_text, char_pool_int)
+    budunit_atomunit.set_arg(acct_credor_pool_text, acct_pool_int)
+    budunit_atomunit.set_arg(acct_debtor_pool_text, acct_pool_int)
     x_changeunit.set_atomunit(budunit_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_monetary_desc = "dragon dollars"
@@ -139,7 +139,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_monetary_desc} total pool is now {char_pool_int}"
+    x_str = f"{sue_monetary_desc} total pool is now {acct_pool_int}"
     assert len(legible_list) == 1
     assert legible_list[0] == x_str
 

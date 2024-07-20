@@ -15,15 +15,15 @@ def test_get_debtors_roll_ReturnsObj():
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
     yao_duty.settle_bud()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
 
     # THEN
-    zia_charunit = yao_duty.get_char(zia_text)
-    assert yao_roll == [zia_charunit]
+    zia_acctunit = yao_duty.get_acct(zia_text)
+    assert yao_roll == [zia_acctunit]
 
 
 def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
@@ -36,16 +36,16 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_debtor_weight():
     wei_text = "Wei"
     wei_credor_weight = 67
     wei_debtor_weight = 0
-    yao_duty.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_duty.add_charunit(wei_text, wei_credor_weight, wei_debtor_weight)
+    yao_duty.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_duty.add_acctunit(wei_text, wei_credor_weight, wei_debtor_weight)
     yao_duty.settle_bud()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
 
     # THEN
-    zia_charunit = yao_duty.get_char(zia_text)
-    assert yao_roll == [zia_charunit]
+    zia_acctunit = yao_duty.get_acct(zia_text)
+    assert yao_roll == [zia_acctunit]
 
 
 def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
@@ -58,32 +58,32 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     sue_text = "Sue"
     sue_credor_weight = 57
     sue_debtor_weight = 51
-    yao_bud.add_charunit(zia_text, zia_credor_weight, zia_debtor_weight)
-    yao_bud.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    yao_bud.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_bud.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
     yao_pool = 92
-    yao_bud.set_char_respect(yao_pool)
+    yao_bud.set_acct_respect(yao_pool)
 
     # WHEN
-    ordered_chars1 = get_ordered_debtors_roll(yao_bud)
+    ordered_accts1 = get_ordered_debtors_roll(yao_bud)
 
     # THEN
-    zia_char = yao_bud.get_char(zia_text)
-    sue_char = yao_bud.get_char(sue_text)
-    assert ordered_chars1[0].get_dict() == sue_char.get_dict()
-    assert ordered_chars1 == [sue_char, zia_char]
+    zia_acct = yao_bud.get_acct(zia_text)
+    sue_acct = yao_bud.get_acct(sue_text)
+    assert ordered_accts1[0].get_dict() == sue_acct.get_dict()
+    assert ordered_accts1 == [sue_acct, zia_acct]
 
     # ESTABLISH
     bob_text = "Bob"
     bob_debtor_weight = 75
-    yao_bud.add_charunit(bob_text, 0, bob_debtor_weight)
-    bob_char = yao_bud.get_char(bob_text)
+    yao_bud.add_acctunit(bob_text, 0, bob_debtor_weight)
+    bob_acct = yao_bud.get_acct(bob_text)
 
     # WHEN
-    ordered_chars2 = get_ordered_debtors_roll(yao_bud)
+    ordered_accts2 = get_ordered_debtors_roll(yao_bud)
 
     # THEN
-    assert ordered_chars2[0].get_dict() == bob_char.get_dict()
-    assert ordered_chars2 == [bob_char, sue_char, zia_char]
+    assert ordered_accts2[0].get_dict() == bob_acct.get_dict()
+    assert ordered_accts2 == [bob_acct, sue_acct, zia_acct]
 
 
 def test_get_ordered_debtors_roll_DoesNotReturnZero_debtor_weight():
@@ -95,26 +95,26 @@ def test_get_ordered_debtors_roll_DoesNotReturnZero_debtor_weight():
     sue_text = "Sue"
     sue_debtor_weight = 51
     yao_pool = 92
-    yao_bud.set_char_respect(yao_pool)
+    yao_bud.set_acct_respect(yao_pool)
     bob_text = "Bob"
     bob_debtor_weight = 75
     xio_text = "Xio"
-    yao_bud.add_charunit(zia_text, 0, zia_debtor_weight)
-    yao_bud.add_charunit(sue_text, 0, sue_debtor_weight)
-    yao_bud.add_charunit(bob_text, 0, bob_debtor_weight)
-    yao_bud.add_charunit(yao_text, 0, 0)
-    yao_bud.add_charunit(xio_text, 0, 0)
+    yao_bud.add_acctunit(zia_text, 0, zia_debtor_weight)
+    yao_bud.add_acctunit(sue_text, 0, sue_debtor_weight)
+    yao_bud.add_acctunit(bob_text, 0, bob_debtor_weight)
+    yao_bud.add_acctunit(yao_text, 0, 0)
+    yao_bud.add_acctunit(xio_text, 0, 0)
 
     # WHEN
-    ordered_chars2 = get_ordered_debtors_roll(yao_bud)
+    ordered_accts2 = get_ordered_debtors_roll(yao_bud)
 
     # THEN
-    assert len(ordered_chars2) == 3
-    zia_char = yao_bud.get_char(zia_text)
-    sue_char = yao_bud.get_char(sue_text)
-    bob_char = yao_bud.get_char(bob_text)
-    assert ordered_chars2[0].get_dict() == bob_char.get_dict()
-    assert ordered_chars2 == [bob_char, sue_char, zia_char]
+    assert len(ordered_accts2) == 3
+    zia_acct = yao_bud.get_acct(zia_text)
+    sue_acct = yao_bud.get_acct(sue_text)
+    bob_acct = yao_bud.get_acct(bob_text)
+    assert ordered_accts2[0].get_dict() == bob_acct.get_dict()
+    assert ordered_accts2 == [bob_acct, sue_acct, zia_acct]
 
 
 def test_set_listen_to_speaker_fact_SetsFact():
@@ -132,8 +132,8 @@ def test_set_listen_to_speaker_fact_SetsFact():
     sweep_text = "sweep"
     sweep_road = yao_listener.make_road(casa_road, sweep_text)
 
-    yao_listener.add_charunit(yao_text)
-    yao_listener.set_char_respect(20)
+    yao_listener.add_acctunit(yao_text)
+    yao_listener.set_acct_respect(20)
     yao_listener.add_idea(ideaunit_shop(clean_text), status_road)
     yao_listener.add_idea(ideaunit_shop(dirty_text), status_road)
     yao_listener.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
@@ -157,8 +157,8 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     # ESTABLISH
     yao_text = "Yao"
     yao_listener = budunit_shop(yao_text)
-    yao_listener.add_charunit(yao_text)
-    yao_listener.set_char_respect(20)
+    yao_listener.add_acctunit(yao_text)
+    yao_listener.set_acct_respect(20)
     casa_text = "casa"
     casa_road = yao_listener.make_l1_road(casa_text)
     status_text = "status"
@@ -225,8 +225,8 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     snow_text = "snow"
     snow_road = yao_src.make_road(weather_road, snow_text)
 
-    yao_src.add_charunit(yao_text)
-    yao_src.set_char_respect(20)
+    yao_src.add_acctunit(yao_text)
+    yao_src.set_acct_respect(20)
     yao_src.add_idea(ideaunit_shop(clean_text), status_road)
     yao_src.add_idea(ideaunit_shop(dirty_text), status_road)
     yao_src.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)

@@ -113,7 +113,7 @@ def test_RiverRun_set_econ_credorledger_SetsAttr():
 
     # WHEN
     x_riverrun.set_econ_credorledger(
-        owner_id=yao_text, char_id=yao_text, char_credor_weight=yao_credor_weight
+        owner_id=yao_text, acct_id=yao_text, acct_credor_weight=yao_credor_weight
     )
 
     # THEN
@@ -142,7 +142,7 @@ def test_RiverRun_delete_econ_credorledgers_owner_SetsAttr():
     assert x_riverrun.econ_credorledgers == {yao_text: {yao_text: 1}}
 
 
-def test_RiverRun_get_all_econ_credorledger_char_ids_ReturnsCorrectObj():
+def test_RiverRun_get_all_econ_credorledger_acct_ids_ReturnsCorrectObj():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
@@ -153,25 +153,25 @@ def test_RiverRun_get_all_econ_credorledger_char_ids_ReturnsCorrectObj():
     x_riverrun = riverrun_shop(yao_hubunit)
 
     # WHEN
-    all_chars_ids = x_riverrun.get_all_econ_credorledger_char_ids()
+    all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     # THEN
-    assert all_chars_ids == set()
+    assert all_accts_ids == set()
 
     # WHEN
     x_riverrun.set_econ_credorledger(yao_text, yao_text, 1)
     x_riverrun.set_econ_credorledger(yao_text, bob_text, 1)
-    all_chars_ids = x_riverrun.get_all_econ_credorledger_char_ids()
+    all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     # THEN
-    assert all_chars_ids == {yao_text, bob_text}
+    assert all_accts_ids == {yao_text, bob_text}
 
     # WHEN
     x_riverrun.set_econ_credorledger(zia_text, bob_text, 1)
-    all_chars_ids = x_riverrun.get_all_econ_credorledger_char_ids()
+    all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     # THEN
-    assert all_chars_ids == {yao_text, bob_text, zia_text}
+    assert all_accts_ids == {yao_text, bob_text, zia_text}
 
     # WHEN
     x_riverrun.set_econ_credorledger(xio_text, sue_text, 1)
-    all_chars_ids = x_riverrun.get_all_econ_credorledger_char_ids()
+    all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     # THEN
-    assert all_chars_ids == {yao_text, bob_text, zia_text, xio_text, sue_text}
+    assert all_accts_ids == {yao_text, bob_text, zia_text, xio_text, sue_text}

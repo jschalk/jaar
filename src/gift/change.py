@@ -8,7 +8,7 @@ from src._instrument.python import (
 )
 from src._road.road import RoadUnit, get_terminus_node, get_parent_road
 from src.bud.reason_idea import FactUnit, ReasonUnit
-from src.bud.char import LobbyShip, CharID, CharUnit
+from src.bud.acct import LobbyShip, AcctID, AcctUnit
 from src.bud.lobby import LobbyShip, LobbyID
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit, budunit_shop
@@ -134,7 +134,7 @@ class ChangeUnit:
         before_bud.settle_bud()
         after_bud.settle_bud()
         self.add_atomunits_budunit_simple_attrs(before_bud, after_bud)
-        self.add_atomunits_chars(before_bud, after_bud)
+        self.add_atomunits_accts(before_bud, after_bud)
         self.add_atomunits_ideas(before_bud, after_bud)
 
     def add_atomunits_budunit_simple_attrs(
@@ -163,128 +163,128 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_bit", after_bud._bit)
         self.set_atomunit(x_atomunit)
 
-    def add_atomunits_chars(self, before_bud: BudUnit, after_bud: BudUnit):
-        before_char_ids = set(before_bud._chars.keys())
-        after_char_ids = set(after_bud._chars.keys())
+    def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):
+        before_acct_ids = set(before_bud._accts.keys())
+        after_acct_ids = set(after_bud._accts.keys())
 
-        self.add_atomunit_charunit_inserts(
+        self.add_atomunit_acctunit_inserts(
             after_bud=after_bud,
-            insert_char_ids=after_char_ids.difference(before_char_ids),
+            insert_acct_ids=after_acct_ids.difference(before_acct_ids),
         )
-        self.add_atomunit_charunit_deletes(
+        self.add_atomunit_acctunit_deletes(
             before_bud=before_bud,
-            delete_char_ids=before_char_ids.difference(after_char_ids),
+            delete_acct_ids=before_acct_ids.difference(after_acct_ids),
         )
-        self.add_atomunit_charunit_updates(
+        self.add_atomunit_acctunit_updates(
             before_bud=before_bud,
             after_bud=after_bud,
-            update_char_ids=before_char_ids.intersection(after_char_ids),
+            update_acct_ids=before_acct_ids.intersection(after_acct_ids),
         )
 
-    def add_atomunit_charunit_inserts(self, after_bud: BudUnit, insert_char_ids: set):
-        for insert_char_id in insert_char_ids:
-            insert_charunit = after_bud.get_char(insert_char_id)
-            x_atomunit = atomunit_shop("bud_charunit", atom_insert())
-            x_atomunit.set_required_arg("char_id", insert_charunit.char_id)
-            if insert_charunit.credor_weight is not None:
+    def add_atomunit_acctunit_inserts(self, after_bud: BudUnit, insert_acct_ids: set):
+        for insert_acct_id in insert_acct_ids:
+            insert_acctunit = after_bud.get_acct(insert_acct_id)
+            x_atomunit = atomunit_shop("bud_acctunit", atom_insert())
+            x_atomunit.set_required_arg("acct_id", insert_acctunit.acct_id)
+            if insert_acctunit.credor_weight is not None:
                 x_atomunit.set_optional_arg(
-                    "credor_weight", insert_charunit.credor_weight
+                    "credor_weight", insert_acctunit.credor_weight
                 )
-            if insert_charunit.debtor_weight is not None:
+            if insert_acctunit.debtor_weight is not None:
                 x_atomunit.set_optional_arg(
-                    "debtor_weight", insert_charunit.debtor_weight
+                    "debtor_weight", insert_acctunit.debtor_weight
                 )
             self.set_atomunit(x_atomunit)
-            all_lobby_ids = set(insert_charunit._lobbyships.keys())
+            all_lobby_ids = set(insert_acctunit._lobbyships.keys())
             self.add_atomunit_lobbyships_inserts(
-                after_charunit=insert_charunit,
+                after_acctunit=insert_acctunit,
                 insert_lobbyship_lobby_ids=all_lobby_ids,
             )
 
-    def add_atomunit_charunit_updates(
-        self, before_bud: BudUnit, after_bud: BudUnit, update_char_ids: set
+    def add_atomunit_acctunit_updates(
+        self, before_bud: BudUnit, after_bud: BudUnit, update_acct_ids: set
     ):
-        for char_id in update_char_ids:
-            after_charunit = after_bud.get_char(char_id)
-            before_charunit = before_bud.get_char(char_id)
-            if optional_args_different("bud_charunit", after_charunit, before_charunit):
-                x_atomunit = atomunit_shop("bud_charunit", atom_update())
-                x_atomunit.set_required_arg("char_id", after_charunit.char_id)
-                if before_charunit.credor_weight != after_charunit.credor_weight:
+        for acct_id in update_acct_ids:
+            after_acctunit = after_bud.get_acct(acct_id)
+            before_acctunit = before_bud.get_acct(acct_id)
+            if optional_args_different("bud_acctunit", after_acctunit, before_acctunit):
+                x_atomunit = atomunit_shop("bud_acctunit", atom_update())
+                x_atomunit.set_required_arg("acct_id", after_acctunit.acct_id)
+                if before_acctunit.credor_weight != after_acctunit.credor_weight:
                     x_atomunit.set_optional_arg(
-                        "credor_weight", after_charunit.credor_weight
+                        "credor_weight", after_acctunit.credor_weight
                     )
-                if before_charunit.debtor_weight != after_charunit.debtor_weight:
+                if before_acctunit.debtor_weight != after_acctunit.debtor_weight:
                     x_atomunit.set_optional_arg(
-                        "debtor_weight", after_charunit.debtor_weight
+                        "debtor_weight", after_acctunit.debtor_weight
                     )
                 self.set_atomunit(x_atomunit)
-            self.add_atomunit_charunit_update_lobbyships(
-                after_charunit=after_charunit, before_charunit=before_charunit
+            self.add_atomunit_acctunit_update_lobbyships(
+                after_acctunit=after_acctunit, before_acctunit=before_acctunit
             )
 
-    def add_atomunit_charunit_deletes(self, before_bud: BudUnit, delete_char_ids: set):
-        for delete_char_id in delete_char_ids:
-            x_atomunit = atomunit_shop("bud_charunit", atom_delete())
-            x_atomunit.set_required_arg("char_id", delete_char_id)
+    def add_atomunit_acctunit_deletes(self, before_bud: BudUnit, delete_acct_ids: set):
+        for delete_acct_id in delete_acct_ids:
+            x_atomunit = atomunit_shop("bud_acctunit", atom_delete())
+            x_atomunit.set_required_arg("acct_id", delete_acct_id)
             self.set_atomunit(x_atomunit)
-            delete_charunit = before_bud.get_char(delete_char_id)
+            delete_acctunit = before_bud.get_acct(delete_acct_id)
             non_mirror_lobby_ids = {
                 x_lobby_id
-                for x_lobby_id in delete_charunit._lobbyships.keys()
-                if x_lobby_id != delete_char_id
+                for x_lobby_id in delete_acctunit._lobbyships.keys()
+                if x_lobby_id != delete_acct_id
             }
-            self.add_atomunit_lobbyships_delete(delete_char_id, non_mirror_lobby_ids)
+            self.add_atomunit_lobbyships_delete(delete_acct_id, non_mirror_lobby_ids)
 
-    def add_atomunit_charunit_update_lobbyships(
-        self, after_charunit: CharUnit, before_charunit: CharUnit
+    def add_atomunit_acctunit_update_lobbyships(
+        self, after_acctunit: AcctUnit, before_acctunit: AcctUnit
     ):
         # before_non_mirror_lobby_ids
         before_lobby_ids = {
             x_lobby_id
-            for x_lobby_id in before_charunit._lobbyships.keys()
-            if x_lobby_id != before_charunit.char_id
+            for x_lobby_id in before_acctunit._lobbyships.keys()
+            if x_lobby_id != before_acctunit.acct_id
         }
         # after_non_mirror_lobby_ids
         after_lobby_ids = {
             x_lobby_id
-            for x_lobby_id in after_charunit._lobbyships.keys()
-            if x_lobby_id != after_charunit.char_id
+            for x_lobby_id in after_acctunit._lobbyships.keys()
+            if x_lobby_id != after_acctunit.acct_id
         }
 
         self.add_atomunit_lobbyships_inserts(
-            after_charunit=after_charunit,
+            after_acctunit=after_acctunit,
             insert_lobbyship_lobby_ids=after_lobby_ids.difference(before_lobby_ids),
         )
 
         self.add_atomunit_lobbyships_delete(
-            before_char_id=after_charunit.char_id,
+            before_acct_id=after_acctunit.acct_id,
             before_lobby_ids=before_lobby_ids.difference(after_lobby_ids),
         )
 
         update_lobby_ids = before_lobby_ids.intersection(after_lobby_ids)
-        for update_char_id in update_lobby_ids:
-            before_lobbyship = before_charunit.get_lobbyship(update_char_id)
-            after_lobbyship = after_charunit.get_lobbyship(update_char_id)
+        for update_acct_id in update_lobby_ids:
+            before_lobbyship = before_acctunit.get_lobbyship(update_acct_id)
+            after_lobbyship = after_acctunit.get_lobbyship(update_acct_id)
             if optional_args_different(
-                "bud_char_lobbyship", before_lobbyship, after_lobbyship
+                "bud_acct_lobbyship", before_lobbyship, after_lobbyship
             ):
                 self.add_atomunit_lobbyship_update(
-                    char_id=after_charunit.char_id,
+                    acct_id=after_acctunit.acct_id,
                     before_lobbyship=before_lobbyship,
                     after_lobbyship=after_lobbyship,
                 )
 
     def add_atomunit_lobbyships_inserts(
         self,
-        after_charunit: CharUnit,
+        after_acctunit: AcctUnit,
         insert_lobbyship_lobby_ids: list[LobbyID],
     ):
-        after_char_id = after_charunit.char_id
+        after_acct_id = after_acctunit.acct_id
         for insert_lobby_id in insert_lobbyship_lobby_ids:
-            after_lobbyship = after_charunit.get_lobbyship(insert_lobby_id)
-            x_atomunit = atomunit_shop("bud_char_lobbyship", atom_insert())
-            x_atomunit.set_required_arg("char_id", after_char_id)
+            after_lobbyship = after_acctunit.get_lobbyship(insert_lobby_id)
+            x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_insert())
+            x_atomunit.set_required_arg("acct_id", after_acct_id)
             x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
             if after_lobbyship.credor_weight is not None:
                 x_atomunit.set_optional_arg(
@@ -298,12 +298,12 @@ class ChangeUnit:
 
     def add_atomunit_lobbyship_update(
         self,
-        char_id: CharID,
+        acct_id: AcctID,
         before_lobbyship: LobbyShip,
         after_lobbyship: LobbyShip,
     ):
-        x_atomunit = atomunit_shop("bud_char_lobbyship", atom_update())
-        x_atomunit.set_required_arg("char_id", char_id)
+        x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_update())
+        x_atomunit.set_required_arg("acct_id", acct_id)
         x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
         if after_lobbyship.credor_weight != before_lobbyship.credor_weight:
             x_atomunit.set_optional_arg("credor_weight", after_lobbyship.credor_weight)
@@ -312,11 +312,11 @@ class ChangeUnit:
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_lobbyships_delete(
-        self, before_char_id: CharID, before_lobby_ids: LobbyID
+        self, before_acct_id: AcctID, before_lobby_ids: LobbyID
     ):
         for delete_lobby_id in before_lobby_ids:
-            x_atomunit = atomunit_shop("bud_char_lobbyship", atom_delete())
-            x_atomunit.set_required_arg("char_id", before_char_id)
+            x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_delete())
+            x_atomunit.set_required_arg("acct_id", before_acct_id)
             x_atomunit.set_required_arg("lobby_id", delete_lobby_id)
             self.set_atomunit(x_atomunit)
 

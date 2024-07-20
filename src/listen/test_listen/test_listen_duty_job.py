@@ -96,10 +96,10 @@ def get_example_yao_bud() -> BudUnit:
     bob_text = "Bob"
     yao_speaker = budunit_shop(yao_text, get_default_real_id_roadnode())
     yao_speaker.add_idea(ideaunit_shop(run_text()), casa_road())
-    yao_speaker.add_charunit(yao_text, debtor_weight=10)
-    yao_speaker.add_charunit(zia_text, debtor_weight=30)
-    yao_speaker.add_charunit(bob_text, debtor_weight=40)
-    yao_speaker.set_char_respect(80)
+    yao_speaker.add_acctunit(yao_text, debtor_weight=10)
+    yao_speaker.add_acctunit(zia_text, debtor_weight=30)
+    yao_speaker.add_acctunit(bob_text, debtor_weight=40)
+    yao_speaker.set_acct_respect(80)
     return yao_speaker
 
 
@@ -107,7 +107,7 @@ def get_example_yao_job1_speaker() -> BudUnit:
     yao_text = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_respect(40)
+    yao_speaker.set_acct_respect(40)
     yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
@@ -122,7 +122,7 @@ def get_example_yao_job2_speaker() -> BudUnit:
     yao_text = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_respect(30)
+    yao_speaker.set_acct_respect(30)
     yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
@@ -142,7 +142,7 @@ def get_example_yao_job2_speaker() -> BudUnit:
 def get_example_yao_job3_speaker() -> BudUnit:
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_idea_obj(run_road())
-    yao_speaker.set_char_respect(10)
+    yao_speaker.set_acct_respect(10)
     yao_speaker.add_idea(ideaunit_shop(sweep_text(), pledge=True), casa_road())
     yao_speaker.add_idea(ideaunit_shop(dirty_text()), sanitation_road())
     yao_speaker.add_idea(ideaunit_shop(clean_text()), sanitation_road())
@@ -246,9 +246,9 @@ def get_zia_utah_hubunit() -> HubUnit:
 
 def get_example_yao_voice_with_3_healers():
     yao_voice = get_example_yao_bud()
-    yao_text = yao_voice.get_char("Yao").char_id
-    bob_text = yao_voice.get_char("Bob").char_id
-    zia_text = yao_voice.get_char("Zia").char_id
+    yao_text = yao_voice.get_acct("Yao").acct_id
+    bob_text = yao_voice.get_acct("Bob").acct_id
+    zia_text = yao_voice.get_acct("Zia").acct_id
     iowa_idea = ideaunit_shop(get_iowa_text(), _problem_bool=True)
     ohio_idea = ideaunit_shop(get_ohio_text(), _problem_bool=True)
     utah_idea = ideaunit_shop(get_utah_text(), _problem_bool=True)
@@ -312,18 +312,18 @@ def get_example_yao_voice_with_3_healers():
 
 #     yao_action = yao_iowa_hubunit.get_action_bud()
 #     yao_action.settle_bud()
-#     assert yao_action._chars.keys() == yao_voice0._chars.keys()
-#     assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
-#     yao_action_chars = yao_action.get_dict().get("_chars")
-#     yao_voice0_chars = yao_voice0.get_dict().get("_chars")
-#     yao_action_bob = yao_action_chars.get("Bob")
-#     yao_voice0_bob = yao_voice0_chars.get("Bob")
+#     assert yao_action._accts.keys() == yao_voice0._accts.keys()
+#     assert yao_action.get_acct(yao_text)._irrational_debtor_weight == 0
+#     yao_action_accts = yao_action.get_dict().get("_accts")
+#     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
+#     yao_action_bob = yao_action_accts.get("Bob")
+#     yao_voice0_bob = yao_voice0_accts.get("Bob")
 #     print(f"{yao_action_bob=}")
 #     print(f"{yao_voice0_bob=}")
 #     assert yao_action_bob == yao_voice0_bob
-#     assert yao_action_chars.keys() == yao_voice0_chars.keys()
-#     assert yao_action_chars == yao_voice0_chars
-#     assert len(yao_action.get_dict().get("_chars")) == 3
+#     assert yao_action_accts.keys() == yao_voice0_accts.keys()
+#     assert yao_action_accts == yao_voice0_accts
+#     assert len(yao_action.get_dict().get("_accts")) == 3
 #     assert len(yao_action._idea_dict) == 10
 #     print(f"{yao_action._idea_dict.keys()=}")
 #     print(f"{yao_action.get_factunits_dict().keys()=}")
@@ -389,18 +389,18 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
 
     yao_action = yao_iowa_hubunit.get_action_bud()
     yao_action.settle_bud()
-    assert yao_action._chars.keys() == yao_voice0._chars.keys()
-    assert yao_action.get_char(yao_text)._irrational_debtor_weight == 0
-    yao_action_chars = yao_action.get_dict().get("_chars")
-    yao_voice0_chars = yao_voice0.get_dict().get("_chars")
-    yao_action_bob = yao_action_chars.get("Bob")
-    yao_voice0_bob = yao_voice0_chars.get("Bob")
+    assert yao_action._accts.keys() == yao_voice0._accts.keys()
+    assert yao_action.get_acct(yao_text)._irrational_debtor_weight == 0
+    yao_action_accts = yao_action.get_dict().get("_accts")
+    yao_voice0_accts = yao_voice0.get_dict().get("_accts")
+    yao_action_bob = yao_action_accts.get("Bob")
+    yao_voice0_bob = yao_voice0_accts.get("Bob")
     print(f"{yao_action_bob=}")
     print(f"{yao_voice0_bob=}")
     assert yao_action_bob == yao_voice0_bob
-    assert yao_action_chars.keys() == yao_voice0_chars.keys()
-    assert yao_action_chars == yao_voice0_chars
-    assert len(yao_action.get_dict().get("_chars")) == 3
+    assert yao_action_accts.keys() == yao_voice0_accts.keys()
+    assert yao_action_accts == yao_voice0_accts
+    assert len(yao_action.get_dict().get("_accts")) == 3
     assert len(yao_action._idea_dict) == 4
     print(f"{yao_action._idea_dict.keys()=}")
     print(f"{yao_action.get_factunits_dict().keys()=}")

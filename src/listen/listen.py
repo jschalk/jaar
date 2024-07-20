@@ -5,7 +5,7 @@ from src._road.road import (
     OwnerID,
 )
 from src.bud.idea import IdeaUnit
-from src.bud.bud import BudUnit, CharUnit
+from src.bud.bud import BudUnit, AcctUnit
 from src.listen.basis_buds import create_empty_bud, create_listen_basis
 from src.listen.hubunit import HubUnit, hubunit_shop
 from copy import deepcopy as copy_deepcopy
@@ -31,15 +31,15 @@ def _ingest_perspective_agenda(listener: BudUnit, agenda: list[IdeaUnit]) -> Bud
 
 
 def _allocate_irrational_debtor_weight(listener: BudUnit, speaker_owner_id: OwnerID):
-    speaker_charunit = listener.get_char(speaker_owner_id)
-    speaker_debtor_weight = speaker_charunit.debtor_weight
-    speaker_charunit.add_irrational_debtor_weight(speaker_debtor_weight)
+    speaker_acctunit = listener.get_acct(speaker_owner_id)
+    speaker_debtor_weight = speaker_acctunit.debtor_weight
+    speaker_acctunit.add_irrational_debtor_weight(speaker_debtor_weight)
     return listener
 
 
 def _allocate_inallocable_debtor_weight(listener: BudUnit, speaker_owner_id: OwnerID):
-    speaker_charunit = listener.get_char(speaker_owner_id)
-    speaker_charunit.add_inallocable_debtor_weight(speaker_charunit.debtor_weight)
+    speaker_acctunit = listener.get_acct(speaker_owner_id)
+    speaker_acctunit.add_inallocable_debtor_weight(speaker_acctunit.debtor_weight)
     return listener
 
 
@@ -140,18 +140,18 @@ def _add_and_replace_ideaunit_weights(
         x_ideaunit._weight += x_weight
 
 
-def get_debtors_roll(x_duty: BudUnit) -> list[CharUnit]:
+def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:
     return [
-        x_charunit
-        for x_charunit in x_duty._chars.values()
-        if x_charunit.debtor_weight != 0
+        x_acctunit
+        for x_acctunit in x_duty._accts.values()
+        if x_acctunit.debtor_weight != 0
     ]
 
 
-def get_ordered_debtors_roll(x_bud: BudUnit) -> list[CharUnit]:
-    chars_ordered_list = get_debtors_roll(x_bud)
-    chars_ordered_list.sort(key=lambda x: (x.debtor_weight, x.char_id), reverse=True)
-    return chars_ordered_list
+def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
+    accts_ordered_list = get_debtors_roll(x_bud)
+    accts_ordered_list.sort(key=lambda x: (x.debtor_weight, x.acct_id), reverse=True)
+    return accts_ordered_list
 
 
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
@@ -187,9 +187,9 @@ def listen_to_speaker_fact(
 
 
 def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
-    if listener.char_exists(speaker._owner_id) is False:
+    if listener.acct_exists(speaker._owner_id) is False:
         raise Missing_debtor_respectException(
-            f"listener '{listener._owner_id}' bud is assumed to have {speaker._owner_id} charunit."
+            f"listener '{listener._owner_id}' bud is assumed to have {speaker._owner_id} acctunit."
         )
     perspective_bud = get_speaker_perspective(speaker, listener._owner_id)
     if perspective_bud._rational is False:
@@ -206,11 +206,11 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
 
 
 def listen_to_agendas_voice_action(listener_action: BudUnit, listener_hubunit: HubUnit):
-    for x_charunit in get_ordered_debtors_roll(listener_action):
-        if x_charunit.char_id == listener_action._owner_id:
+    for x_acctunit in get_ordered_debtors_roll(listener_action):
+        if x_acctunit.acct_id == listener_action._owner_id:
             listen_to_speaker_agenda(listener_action, listener_hubunit.get_voice_bud())
         else:
-            speaker_id = x_charunit.char_id
+            speaker_id = x_acctunit.acct_id
             speaker_action = listener_hubunit.dw_speaker_bud(speaker_id)
             if speaker_action is None:
                 speaker_action = create_empty_bud(listener_action, speaker_id)
@@ -219,12 +219,12 @@ def listen_to_agendas_voice_action(listener_action: BudUnit, listener_hubunit: H
 
 def listen_to_agendas_duty_job(listener_job: BudUnit, healer_hubunit: HubUnit):
     listener_id = listener_job._owner_id
-    for x_charunit in get_ordered_debtors_roll(listener_job):
-        if x_charunit.char_id == listener_id:
+    for x_acctunit in get_ordered_debtors_roll(listener_job):
+        if x_acctunit.acct_id == listener_id:
             listener_duty = healer_hubunit.get_duty_bud(listener_id)
             listen_to_speaker_agenda(listener_job, listener_duty)
         else:
-            speaker_id = x_charunit.char_id
+            speaker_id = x_acctunit.acct_id
             healer_id = healer_hubunit.owner_id
             speaker_job = healer_hubunit.rj_speaker_bud(healer_id, speaker_id)
             if speaker_job is None:
@@ -235,17 +235,17 @@ def listen_to_agendas_duty_job(listener_job: BudUnit, healer_hubunit: HubUnit):
 def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
     duty = healer_hubunit.get_duty_bud(new_job._owner_id)
     migrate_all_facts(duty, new_job)
-    for x_charunit in get_ordered_debtors_roll(new_job):
-        if x_charunit.char_id != new_job._owner_id:
-            speaker_job = healer_hubunit.get_job_bud(x_charunit.char_id)
+    for x_acctunit in get_ordered_debtors_roll(new_job):
+        if x_acctunit.acct_id != new_job._owner_id:
+            speaker_job = healer_hubunit.get_job_bud(x_acctunit.acct_id)
             if speaker_job is not None:
                 listen_to_speaker_fact(new_job, speaker_job)
 
 
 def listen_to_facts_voice_action(new_action: BudUnit, listener_hubunit: HubUnit):
     migrate_all_facts(listener_hubunit.get_voice_bud(), new_action)
-    for x_charunit in get_ordered_debtors_roll(new_action):
-        speaker_id = x_charunit.char_id
+    for x_acctunit in get_ordered_debtors_roll(new_action):
+        speaker_id = x_acctunit.acct_id
         if speaker_id != new_action._owner_id:
             speaker_action = listener_hubunit.dw_speaker_bud(speaker_id)
             if speaker_action is not None:

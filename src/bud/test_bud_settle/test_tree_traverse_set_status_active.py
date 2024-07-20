@@ -1,6 +1,6 @@
 from src._road.finance import default_fund_pool
 from src.bud.graphic import display_ideatree
-from src.bud.char import charunit_shop
+from src.bud.acct import acctunit_shop
 from src.bud.lobby import awardlink_shop
 from src.bud.bud import budunit_shop
 from src.bud.healer import healerhold_shop
@@ -657,7 +657,7 @@ def test_BudUnit_settle_bud_CorrectlySetsEmpty_sum_healerhold_share():
 def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share():
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_charunit("Sue")
+    sue_budunit.add_acctunit("Sue")
     sue_budunit.settle_bud()
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
@@ -726,7 +726,7 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share():
 def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_charunit("Sue")
+    sue_budunit.add_acctunit("Sue")
     sue_budunit.settle_bud()
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
@@ -789,8 +789,8 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
 #     sue_text = "Sue"
 #     bob_text = "Bob"
 #     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-#     sue_budunit.add_charunit(sue_text)
-#     sue_budunit.add_charunit(bob_text)
+#     sue_budunit.add_acctunit(sue_text)
+#     sue_budunit.add_acctunit(bob_text)
 #     assert sue_budunit._healers_dict == {}
 
 #     # WHEN
@@ -826,8 +826,8 @@ def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     sue_text = "Sue"
     bob_text = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_charunit(sue_text)
-    sue_budunit.add_charunit(bob_text)
+    sue_budunit.add_acctunit(sue_text)
+    sue_budunit.add_acctunit(bob_text)
     assert sue_budunit._healers_dict == {}
 
     # WHEN
@@ -865,8 +865,8 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
     sue_text = "Sue"
     bob_text = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_charunit(sue_text)
-    sue_budunit.add_charunit(bob_text)
+    sue_budunit.add_acctunit(sue_text)
+    sue_budunit.add_acctunit(bob_text)
     assert sue_budunit._econs_buildable is False
 
     # WHEN
@@ -898,8 +898,8 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
     sue_text = "Sue"
     bob_text = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_charunit(sue_text)
-    sue_budunit.add_charunit(bob_text)
+    sue_budunit.add_acctunit(sue_text)
+    sue_budunit.add_acctunit(bob_text)
     assert sue_budunit._econs_buildable is False
 
     # WHEN

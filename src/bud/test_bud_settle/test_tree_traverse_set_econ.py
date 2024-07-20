@@ -5,7 +5,7 @@ from src.bud.examples.example_buds import (
     get_budunit_with7amCleanTableReason,
 )
 from src.bud.healer import healerhold_shop
-from src.bud.char import CharID
+from src.bud.acct import AcctID
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.lobby import awardline_shop, awardlink_shop
@@ -54,7 +54,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleProblemAndEc
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
-    sue_bud.add_charunit(yao_text)
+    sue_bud.add_acctunit(yao_text)
     yao_healerhold = healerhold_shop({yao_text})
     sue_bud.add_l1_idea(
         ideaunit_shop("Texas", _healerhold=yao_healerhold, _problem_bool=True)
@@ -72,7 +72,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelAbovePr
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
-    sue_bud.add_charunit(yao_text)
+    sue_bud.add_acctunit(yao_text)
     yao_healerhold = healerhold_shop({yao_text})
 
     texas_text = "Texas"

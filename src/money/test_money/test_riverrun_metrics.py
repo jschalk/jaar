@@ -9,13 +9,13 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
     yao_credor_weight = 500
     x_riverrun = riverrun_shop(yao_hubunit)
     x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
     assert x_riverrun._cycle_count == 1
     assert x_riverrun._debtor_count == 0
     assert x_riverrun._credor_count == 1
@@ -49,16 +49,16 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     x_riverrun = riverrun_shop(yao_hubunit)
     x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
     x_riverrun.set_tax_dues({bob_text: bob_debtor_weight})
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
     econ_money_amount = x_riverrun.hubunit.econ_money_magnitude
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount
     assert x_riverrun._cycle_count == 1
     assert x_riverrun._debtor_count == 1
     assert x_riverrun._credor_count == 1
@@ -96,18 +96,18 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
     debtorledger = {bob_text: bob_debtor_weight, sue_text: sue_debtor_weight}
     x_riverrun.set_tax_dues(debtorledger)
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
     econ_money_amount = x_riverrun.hubunit.econ_money_magnitude
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount * 0.25
-    assert x_riverrun.get_char_tax_due(sue_text) == econ_money_amount * 0.75
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount * 0.25
+    assert x_riverrun.get_acct_tax_due(sue_text) == econ_money_amount * 0.75
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount * 0.25
-    assert x_riverrun.get_char_tax_due(sue_text) == econ_money_amount * 0.75
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount * 0.25
+    assert x_riverrun.get_acct_tax_due(sue_text) == econ_money_amount * 0.75
     assert x_riverrun._cycle_count == 1
     assert x_riverrun._debtor_count == 2
     assert x_riverrun._credor_count == 1
@@ -147,19 +147,19 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     x_riverrun.set_econ_credorledger(yao_text, sue_text, yao_sue_credor_weight)
     debtorledger = {bob_text: bob_debtor_weight, sue_text: sue_debtor_weight}
     x_riverrun.set_tax_dues(debtorledger)
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
     econ_money_amount = x_riverrun.hubunit.econ_money_magnitude
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount * 0.25
-    assert x_riverrun.get_char_tax_due(sue_text) == econ_money_amount * 0.75
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount * 0.25
+    assert x_riverrun.get_acct_tax_due(sue_text) == econ_money_amount * 0.75
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount * 0.25
-    assert x_riverrun.get_char_tax_due(sue_text) == 0
-    assert x_riverrun.get_char_tax_yield(sue_text) == econ_money_amount * 0.75
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount * 0.25
+    assert x_riverrun.get_acct_tax_due(sue_text) == 0
+    assert x_riverrun.get_acct_tax_yield(sue_text) == econ_money_amount * 0.75
     assert x_riverrun._cycle_count == 2
     assert x_riverrun._debtor_count == 2
     assert x_riverrun._credor_count == 2
@@ -192,15 +192,15 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
     x_riverrun.set_tax_dues({yao_text: 1})
     econ_money_amount = yao_hubunit.econ_money_magnitude
-    assert x_riverrun.get_char_tax_due(yao_text) == econ_money_amount
-    assert x_riverrun.get_char_tax_yield(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_yield(yao_text) == 0
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_yield(yao_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_yield(yao_text) == econ_money_amount
     assert x_riverrun._cycle_count == 2
     assert x_riverrun._debtor_count == 1
     assert x_riverrun._credor_count == 1
@@ -224,15 +224,15 @@ def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
     x_riverrun.set_tax_dues({yao_text: 1})
     econ_money_amount = yao_hubunit.econ_money_magnitude
     x_riverrun.calc_metrics()
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_yield(yao_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_yield(yao_text) == econ_money_amount
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_yield(yao_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_yield(yao_text) == econ_money_amount
 
 
 def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
@@ -243,8 +243,8 @@ def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
     x_riverrun.set_econ_credorledger(yao_text, yao_text, 1)
     x_riverrun.set_tax_dues({bob_text: 1})
     econ_money_amount = x_riverrun.hubunit.econ_money_magnitude
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount
     assert x_riverrun._cycle_count == 0
     assert x_riverrun._cycle_payees_prev == set()
     assert x_riverrun._cycle_payees_curr == set()
@@ -255,6 +255,6 @@ def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
     # THEN
     assert x_riverrun._cycle_payees_prev == {yao_text}
     assert x_riverrun._cycle_payees_curr == {yao_text}
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_due(bob_text) == econ_money_amount
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount
     assert x_riverrun._cycle_count == 1

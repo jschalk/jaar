@@ -48,7 +48,7 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     bob_bud = budunit_shop(bob_text)
     run_text = "run"
     run_road = bob_bud.make_l1_road(run_text)
-    bob_bud.add_charunit(bob_text)
+    bob_bud.add_acctunit(bob_text)
     bob_bud.add_l1_idea(ideaunit_shop(run_text))
     bob_bud.edit_idea_attr(run_road, doerunit=x_doerunit)
     run_idea = bob_bud.get_idea_obj(run_road)
@@ -81,7 +81,7 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     bob_bud = budunit_shop(bob_text)
     run_text = "run"
     run_road = bob_bud.make_l1_road(run_text)
-    bob_bud.add_charunit(bob_text)
+    bob_bud.add_acctunit(bob_text)
     bob_bud.add_l1_idea(ideaunit_shop(run_text))
     bob_bud.edit_idea_attr(run_road, doerunit=x_doerunit)
     run_idea = bob_bud.get_idea_obj(run_road)
@@ -121,9 +121,9 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     x_doerunit.set_lobbyhold(lobby_id=swimmers_text)
 
     yao_text = "Yao"
-    sue_bud.add_charunit(yao_text)
-    yao_charunit = sue_bud.get_char(yao_text)
-    yao_charunit.add_lobbyship(swimmers_text)
+    sue_bud.add_acctunit(yao_text)
+    yao_acctunit = sue_bud.get_acct(yao_text)
+    yao_acctunit.add_lobbyship(swimmers_text)
 
     sue_bud.add_l1_idea(ideaunit_shop(swim_text))
     sue_bud.add_idea(ideaunit_shop(morn_text), parent_road=swim_road)
@@ -154,8 +154,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit():
     sue1_bud = budunit_shop(sue_text)
     xia_text = "Xia"
     zoa_text = "Zoa"
-    sue1_bud.add_charunit(xia_text)
-    sue1_bud.add_charunit(zoa_text)
+    sue1_bud.add_acctunit(xia_text)
+    sue1_bud.add_acctunit(zoa_text)
 
     casa_text = "casa"
     casa_road = sue1_bud.make_l1_road(casa_text)
@@ -173,7 +173,7 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit():
 
     # WHEN
     sue2_bud = budunit_shop(sue_text)
-    sue2_bud.add_charunit(xia_text)
+    sue2_bud.add_acctunit(xia_text)
     filtered_idea = sue2_bud._get_filtered_awardlinks_idea(sue1_bud_swim_idea)
 
     # THEN
@@ -187,8 +187,8 @@ def test_BudUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     sue1_bud = budunit_shop("Sue")
     xia_text = "Xia"
     zoa_text = "Zoa"
-    sue1_bud.add_charunit(xia_text)
-    sue1_bud.add_charunit(zoa_text)
+    sue1_bud.add_acctunit(xia_text)
+    sue1_bud.add_acctunit(zoa_text)
 
     casa_text = "casa"
     casa_road = sue1_bud.make_l1_road(casa_text)
@@ -206,7 +206,7 @@ def test_BudUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
 
     # WHEN
     sue2_bud = budunit_shop("Sue")
-    sue2_bud.add_charunit(xia_text)
+    sue2_bud.add_acctunit(xia_text)
     sue2_bud.add_l1_idea(
         sue1_bud_swim_idea, filter_out_missing_awardlinks_lobby_ids=False
     )

@@ -5,8 +5,8 @@ from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.atom_config import (
     budunit_text,
-    bud_charunit_text,
-    bud_char_lobbyship_text,
+    bud_acctunit_text,
+    bud_acct_lobbyship_text,
     bud_ideaunit_text,
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
@@ -28,16 +28,16 @@ def owner_id_str() -> str:
     return "owner_id"
 
 
-def char_id_str() -> str:
-    return "char_id"
+def acct_id_str() -> str:
+    return "acct_id"
 
 
 def lobby_id_str() -> str:
     return "lobby_id"
 
 
-def char_pool_str() -> str:
-    return "char_pool"
+def acct_pool_str() -> str:
+    return "acct_pool"
 
 
 def debtor_weight_str() -> str:
@@ -92,8 +92,8 @@ def get_cross_formats_dir() -> str:
     return f"{config_file_dir()}/cross_formats"
 
 
-def jaar_format_0001_char_v0_0_0() -> str:
-    return "jaar_format_0001_char_v0_0_0"
+def jaar_format_0001_acct_v0_0_0() -> str:
+    return "jaar_format_0001_acct_v0_0_0"
 
 
 def jaar_format_0002_lobbyship_v0_0_0() -> str:
@@ -106,7 +106,7 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
 
 def get_cross_filenames() -> set[str]:
     return {
-        jaar_format_0001_char_v0_0_0(),
+        jaar_format_0001_acct_v0_0_0(),
         jaar_format_0002_lobbyship_v0_0_0(),
         jaar_format_0003_ideaunit_v0_0_0(),
     }
@@ -167,10 +167,10 @@ def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
     d2_list = []
     ordered_columns = get_column_ordered_cross_attributes(cross_name)
 
-    if cross_name == jaar_format_0001_char_v0_0_0():
+    if cross_name == jaar_format_0001_acct_v0_0_0():
         d2_list = [
             [
-                x_atomunit.get_value(char_id_str()),
+                x_atomunit.get_value(acct_id_str()),
                 x_budunit._debtor_respect,
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
@@ -183,7 +183,7 @@ def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
     elif cross_name == jaar_format_0002_lobbyship_v0_0_0():
         d2_list = [
             [
-                x_atomunit.get_value(char_id_str()),
+                x_atomunit.get_value(acct_id_str()),
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
                 x_atomunit.get_value(lobby_id_str()),

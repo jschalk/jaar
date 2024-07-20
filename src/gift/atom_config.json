@@ -1,5 +1,5 @@
 {
-    "bud_char_lobbyship": {
+    "bud_acct_lobbyship": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
@@ -21,8 +21,8 @@
             }
         },
         "required_args": {
-            "char_id": {
-                "python_type": "CharID",
+            "acct_id": {
+                "python_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             },
             "lobby_id": {
@@ -35,7 +35,7 @@
             "atom_order": 10
         }
     },
-    "bud_charunit": {
+    "bud_acctunit": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 24
@@ -44,7 +44,7 @@
             "atom_order": 0
         },
         "normal_specs": {
-            "normal_table_name": "charunit"
+            "normal_table_name": "acctunit"
         },
         "optional_args": {
             "credor_weight": {
@@ -57,8 +57,8 @@
             }
         },
         "required_args": {
-            "char_id": {
-                "python_type": "CharID",
+            "acct_id": {
+                "python_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             }
         },
