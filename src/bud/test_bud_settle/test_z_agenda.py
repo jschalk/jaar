@@ -433,7 +433,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     # ESTABLISH
     sue_bud = get_budunit_sue_TimeExample()
     assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_lobby_ids_dict()) == 0
+    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
 
     clean_things_text = "cleaning things"
@@ -471,7 +471,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     clean_cookery_idea.set_awardlink(awardlink_z)
 
     assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_lobby_ids_dict()) == 0
+    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
     assert sue_bud.get_idea_obj(daytime_road)._begin == 0
     assert sue_bud.get_idea_obj(daytime_road)._close == 1440
@@ -494,8 +494,8 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
     assert sue_bud.get_idea_obj(daytime_road)._begin == 0
     assert sue_bud.get_idea_obj(daytime_road)._close == 1440
-    assert len(sue_bud.get_lobby_ids_dict()) == 0
-    assert sue_bud.get_lobby_ids_dict().get(family_text) is None
+    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 0
+    assert sue_bud.get_charunit_lobby_ids_dict().get(family_text) is None
 
     assert len(sue_bud._idearoot._kids) == 3
 

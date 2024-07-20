@@ -45,7 +45,7 @@ from src._road.road import (
 )
 
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
-from src.bud.lobby import AwardLink, LobbyID, LobbyBox, lobbybox_shop
+from src.bud.lobby import AwardLink, LobbyID, LobbyBox, lobbybox_shop, lobbyship_shop
 from src.bud.healer import HealerHold
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
 from src.bud.reason_doer import DoerUnit
@@ -390,7 +390,7 @@ class BudUnit:
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
         return self._accts.get(acct_id)
 
-    def get_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
+    def get_charunit_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
             for x_lobby_id in x_acctunit._lobbyships.keys():
@@ -402,8 +402,31 @@ class BudUnit:
                     x_dict[x_lobby_id] = acct_id_set
         return x_dict
 
+    def set_lobbybox(self, x_lobbybox: LobbyBox):
+        self._lobbyboxs[x_lobbybox.lobby_id] = x_lobbybox
+
+    def lobbybox_exists(self, lobby_id: LobbyID) -> bool:
+        return self._lobbyboxs.get(lobby_id) != None
+
     def get_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
         return self._lobbyboxs.get(x_lobby_id)
+
+    def create_symmetry_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
+        x_lobbybox = lobbybox_shop(x_lobby_id)
+        for x_acctunit in self._accts.values():
+            x_lobbyship = lobbyship_shop(
+                lobby_id=x_lobby_id,
+                credor_weight=x_acctunit.credor_weight,
+                debtor_weight=x_acctunit.debtor_weight,
+                _acct_id=x_acctunit.acct_id,
+            )
+            x_lobbybox.set_lobbyship(x_lobbyship)
+        return x_lobbybox
+
+    def get_tree_traverse_generated_lobbyboxs(self) -> set[LobbyID]:
+        x_acctunit_lobby_ids = set(self.get_charunit_lobby_ids_dict().keys())
+        all_lobby_ids = set(self._lobbyboxs.keys())
+        return all_lobby_ids.difference(x_acctunit_lobby_ids)
 
     def clear_acctunits_lobbyships(self):
         for x_acctunit in self._accts.values():
@@ -718,7 +741,7 @@ class BudUnit:
         _awardlinks_to_delete = [
             _awardlink_lobby_id
             for _awardlink_lobby_id in x_idea._awardlinks.keys()
-            if self.get_lobby_ids_dict().get(_awardlink_lobby_id) is None
+            if self.get_charunit_lobby_ids_dict().get(_awardlink_lobby_id) is None
         ]
         for _awardlink_lobby_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_lobby_id)
@@ -727,7 +750,7 @@ class BudUnit:
             _lobbyholds_to_delete = [
                 _lobbyhold_lobby_id
                 for _lobbyhold_lobby_id in x_idea._doerunit._lobbyholds
-                if self.get_lobby_ids_dict().get(_lobbyhold_lobby_id) is None
+                if self.get_charunit_lobby_ids_dict().get(_lobbyhold_lobby_id) is None
             ]
             for _lobbyhold_lobby_id in _lobbyholds_to_delete:
                 x_idea._doerunit.del_lobbyhold(_lobbyhold_lobby_id)
@@ -915,7 +938,7 @@ class BudUnit:
         numeric_range: float,
         numeric_begin: float,
         numeric_close: float,
-    ):
+    ):  # sourcery skip: remove-redundant-if
         if not reest and parent_has_range and numor is not None:
             begin = parent_begin * numor / denom
             close = parent_close * numor / denom
@@ -1000,7 +1023,7 @@ class BudUnit:
     ):
         if healerhold is not None:
             for x_lobby_id in healerhold._lobby_ids:
-                if self.get_lobby_ids_dict().get(x_lobby_id) is None:
+                if self.get_charunit_lobby_ids_dict().get(x_lobby_id) is None:
                     raise healerhold_lobby_id_Exception(
                         f"Idea cannot edit healerhold because lobby_id '{x_lobby_id}' does not exist as lobby in Bud"
                     )
@@ -1153,6 +1176,9 @@ class BudUnit:
 
     def _set_lobbyboxs_fund_share(self, awardheirs: dict[LobbyID, AwardLink]):
         for awardlink_obj in awardheirs.values():
+            x_lobby_id = awardlink_obj.lobby_id
+            if not self.lobbybox_exists(x_lobby_id):
+                self.set_lobbybox(self.create_symmetry_lobbybox(x_lobby_id))
             self.add_to_lobbybox_fund_give_take(
                 lobby_id=awardlink_obj.lobby_id,
                 awardheir_fund_give=awardlink_obj._fund_give,
@@ -1372,18 +1398,18 @@ class BudUnit:
             self._allot_fund_share(idea=idea_kid)
         if (
             self._tree_traverse_count == 1
+            and idea_kid._weight != 0
             and not idea_kid.is_kidless()
             and idea_kid.get_kids_weight_sum() == 0
-            and idea_kid._weight != 0
         ):
             self._offtrack_kids_weight_set.add(idea_kid.get_road())
 
     def _allot_fund_share(self, idea: IdeaUnit):
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
         # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
-        if idea.is_awardheirless() is False:
+        if idea.awardheir_exists() is False:
             self._set_lobbyboxs_fund_share(idea._awardheirs)
-        elif idea.is_awardheirless():
+        elif idea.awardheir_exists():
             self._add_to_acctunits_fund_give_take(idea.get_fund_share())
 
     def get_fund_share(
@@ -1394,12 +1420,12 @@ class BudUnit:
 
     def _create_lobbyboxs_metrics(self):
         self._lobbyboxs = {}
-        for lobby_id, acct_id_set in self.get_lobby_ids_dict().items():
+        for lobby_id, acct_id_set in self.get_charunit_lobby_ids_dict().items():
             x_lobbybox = lobbybox_shop(lobby_id, _road_delimiter=self._road_delimiter)
             for x_acct_id in acct_id_set:
                 x_lobbyship = self.get_acct(x_acct_id).get_lobbyship(lobby_id)
                 x_lobbybox.set_lobbyship(x_lobbyship)
-                self._lobbyboxs[lobby_id] = x_lobbybox
+                self.set_lobbybox(x_lobbybox)
 
     def _calc_acctunit_metrics(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
