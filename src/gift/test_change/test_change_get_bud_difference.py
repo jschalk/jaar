@@ -199,7 +199,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     zia_run_credor_w = 77
     zia_run_debtor_w = 88
     after_zia_acctunit.add_lobbyship(run_text, zia_run_credor_w, zia_run_debtor_w)
-    print(f"{after_sue_bud.get_charunit_lobby_ids_dict()=}")
+    print(f"{after_sue_bud.get_acctunit_lobby_ids_dict()=}")
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -297,7 +297,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     before_xio_acctunit.add_lobbyship(fly_text)
     before_zia_acctunit.add_lobbyship(fly_text)
     before_bob_acctunit.add_lobbyship(fly_text)
-    before_lobby_ids_dict = before_sue_bud.get_charunit_lobby_ids_dict()
+    before_lobby_ids_dict = before_sue_bud.get_acctunit_lobby_ids_dict()
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_xio_acctunit = after_sue_bud.get_acct(xio_text)
@@ -306,7 +306,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     after_xio_acctunit.delete_lobbyship(run_text)
     after_zia_acctunit.delete_lobbyship(run_text)
     after_bob_acctunit.delete_lobbyship(fly_text)
-    after_lobby_ids_dict = after_sue_bud.get_charunit_lobby_ids_dict()
+    after_lobby_ids_dict = after_sue_bud.get_acctunit_lobby_ids_dict()
     assert len(before_lobby_ids_dict.get(fly_text)) == 3
     assert len(before_lobby_ids_dict.get(run_text)) == 2
     assert len(after_lobby_ids_dict.get(fly_text)) == 2

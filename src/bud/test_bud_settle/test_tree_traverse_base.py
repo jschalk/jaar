@@ -457,7 +457,7 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
     x_idearoot.set_awardlink(awardlink_shop(zia_text))
     xio_text = "Xio"
     x_idearoot.set_awardlink(awardlink_shop(xio_text))
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
     assert not yao_bud.lobbybox_exists(yao_text)
     assert not yao_bud.lobbybox_exists(zia_text)
     assert not yao_bud.lobbybox_exists(xio_text)
@@ -469,8 +469,8 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
     assert yao_bud.lobbybox_exists(yao_text)
     assert yao_bud.lobbybox_exists(zia_text)
     assert yao_bud.lobbybox_exists(xio_text)
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
     assert len(yao_bud._lobbyboxs) == 3
     xio_lobbybox = yao_bud.get_lobbybox(xio_text)
     xio_symmerty_lobbybox = yao_bud.create_symmetry_lobbybox(xio_text)
@@ -501,7 +501,7 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():
     swim_idea.set_awardlink(awardlink_shop(zia_text))
     xio_text = "Xio"
     swim_idea.set_awardlink(awardlink_shop(xio_text))
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
     assert not yao_bud.lobbybox_exists(yao_text)
     assert not yao_bud.lobbybox_exists(zia_text)
     assert not yao_bud.lobbybox_exists(xio_text)
@@ -513,8 +513,8 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():
     assert yao_bud.lobbybox_exists(yao_text)
     assert yao_bud.lobbybox_exists(zia_text)
     assert yao_bud.lobbybox_exists(xio_text)
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
     assert len(yao_bud._lobbyboxs) == 3
     xio_lobbybox = yao_bud.get_lobbybox(xio_text)
     xio_symmerty_lobbybox = yao_bud.create_symmetry_lobbybox(xio_text)
@@ -543,8 +543,8 @@ def test_BudUnit_get_tree_traverse_generated_lobbyboxs_ReturnsObj():
     assert yao_bud.lobbybox_exists(yao_text)
     assert yao_bud.lobbybox_exists(zia_text)
     assert yao_bud.lobbybox_exists(xio_text)
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
-    assert len(yao_bud.get_charunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
 
     # WHEN
     symmerty_lobby_ids = yao_bud.get_tree_traverse_generated_lobbyboxs()

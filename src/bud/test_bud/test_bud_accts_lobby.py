@@ -3,7 +3,7 @@ from src.bud.bud import budunit_shop
 from copy import deepcopy as copy_deepcopy
 
 
-def test_BudUnit_get_charunit_lobby_ids_dict_ReturnsObj():
+def test_BudUnit_get_acctunit_lobby_ids_dict_ReturnsObj():
     # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
@@ -21,7 +21,7 @@ def test_BudUnit_get_charunit_lobby_ids_dict_ReturnsObj():
     zia_acctunit.add_lobbyship(swim_text)
 
     # WHEN
-    lobby_ids_dict = bob_bud.get_charunit_lobby_ids_dict()
+    lobby_ids_dict = bob_bud.get_acctunit_lobby_ids_dict()
 
     # THEN
     print(f"{lobby_ids_dict=}")
