@@ -3,54 +3,54 @@ from src.bud.origin import OriginHold, originhold_shop, OriginUnit, originunit_s
 
 def test_OriginHold_exists():
     # ESTABLISH
-    roy_text = "Roy"
-    roy_weight = 4
+    bob_text = "Bob"
+    bob_weight = 4
 
     # WHEN
-    originhold_x = OriginHold(char_id=roy_text, weight=roy_weight)
+    originhold_x = OriginHold(char_id=bob_text, weight=bob_weight)
 
     # THEN
-    assert originhold_x.char_id == roy_text
-    assert originhold_x.weight == roy_weight
+    assert originhold_x.char_id == bob_text
+    assert originhold_x.weight == bob_weight
 
 
 def test_originhold_shop_ReturnsCorrectObj():
     # ESTABLISH
-    roy_text = "Roy"
-    roy_weight = 4
+    bob_text = "Bob"
+    bob_weight = 4
 
     # WHEN
-    originhold_x = originhold_shop(char_id=roy_text, weight=roy_weight)
+    originhold_x = originhold_shop(char_id=bob_text, weight=bob_weight)
 
     # THEN
-    assert originhold_x.char_id == roy_text
-    assert originhold_x.weight == roy_weight
+    assert originhold_x.char_id == bob_text
+    assert originhold_x.weight == bob_weight
 
 
 def test_originhold_shop_WeightIsNot_Reason():
     # ESTABLISH
-    roy_text = "Roy"
+    bob_text = "Bob"
 
     # WHEN
-    originhold_x = originhold_shop(char_id=roy_text)
+    originhold_x = originhold_shop(char_id=bob_text)
 
     # THEN
-    assert originhold_x.char_id == roy_text
+    assert originhold_x.char_id == bob_text
     assert originhold_x.weight == 1
 
 
 def test_OriginHold_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
-    roy_text = "Roy"
-    roy_originhold = originhold_shop(char_id=roy_text)
+    bob_text = "Bob"
+    bob_originhold = originhold_shop(char_id=bob_text)
 
     # WHEN
-    x_dict = roy_originhold.get_dict()
+    x_dict = bob_originhold.get_dict()
 
     # THEN
     print(f"{x_dict=}")
     assert x_dict is not None
-    assert x_dict == {"char_id": roy_text, "weight": 1}
+    assert x_dict == {"char_id": bob_text, "weight": 1}
 
 
 def test_OriginUnit_exists():
@@ -103,16 +103,16 @@ def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
 
 def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
-    roy_text = "Roy"
-    roy_originhold = originhold_shop(char_id=roy_text)
-    roy_ol_dict = roy_originhold.get_dict()
+    bob_text = "Bob"
+    bob_originhold = originhold_shop(char_id=bob_text)
+    bob_ol_dict = bob_originhold.get_dict()
     sue_text = "Sue"
     sue_weight = 4
     sue_originhold = originhold_shop(char_id=sue_text, weight=sue_weight)
     sue_ol_dict = sue_originhold.get_dict()
 
     originunit_x = originunit_shop()
-    originunit_x.set_originhold(char_id=roy_text, weight=None)
+    originunit_x.set_originhold(char_id=bob_text, weight=None)
     originunit_x.set_originhold(char_id=sue_text, weight=sue_weight)
 
     # WHEN
@@ -121,4 +121,4 @@ def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     print(f"{x_dict=}")
     assert x_dict is not None
-    assert x_dict == {"_originholds": {roy_text: roy_ol_dict, sue_text: sue_ol_dict}}
+    assert x_dict == {"_originholds": {bob_text: bob_ol_dict, sue_text: sue_ol_dict}}

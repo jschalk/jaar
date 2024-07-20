@@ -10,7 +10,6 @@ from src._road.road import (
     create_road,
     find_replace_road_key_dict,
 )
-from pytest import raises as pytest_raises
 
 
 def test_PremiseUnit_Exists():
