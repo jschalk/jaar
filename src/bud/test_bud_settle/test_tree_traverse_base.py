@@ -17,9 +17,11 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     sue_bud._rational = x_rational
     sue_bud._tree_traverse_count = x_tree_traverse_count
     sue_bud._idea_dict = x_idea_dict
+    sue_bud._offtrack_kids_weight_set = "example"
     assert sue_bud._rational == x_rational
     assert sue_bud._tree_traverse_count == x_tree_traverse_count
     assert sue_bud._idea_dict == x_idea_dict
+    assert sue_bud._offtrack_kids_weight_set != set()
 
     # WHEN
     sue_bud._set_tree_traverse_stage()
@@ -31,6 +33,7 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     assert sue_bud._tree_traverse_count == 0
     assert sue_bud._idea_dict != x_idea_dict
     assert sue_bud._idea_dict == {sue_bud._idearoot.get_road(): sue_bud._idearoot}
+    assert sue_bud._offtrack_kids_weight_set == set()
 
 
 def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
@@ -361,3 +364,79 @@ def test_BudUnit_settle_bud_CreatesFullyPopulated_idea_dict():
 
     # THEN
     assert len(sue_budunit._idea_dict) == 17
+
+
+def test_BudUnit_settle_bud_Resets_offtrack_kids_weight_set():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    sue_budunit._offtrack_kids_weight_set = set("ZZ")
+    x_set = set()
+
+    assert sue_budunit._offtrack_kids_weight_set != x_set
+
+    # WHEN
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == x_set
+
+
+def test_BudUnit_settle_bud_WhenIdeaRootHas_weightButAll_kidsHaveZero_weightAddTo_offtrack_kids_weight_set_Scenario0():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_idea = ideaunit_shop(casa_text, _weight=0)
+    sue_budunit.add_l1_idea(casa_idea)
+    assert sue_budunit._offtrack_kids_weight_set == set()
+
+    # WHEN
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == {sue_budunit._real_id}
+
+    # WHEN
+    sue_budunit.edit_idea_attr(casa_road, weight=2)
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == set()
+
+
+def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddTo_offtrack_kids_weight_set():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_idea = ideaunit_shop(casa_text, _weight=1)
+
+    swim_text = "swimming"
+    swim_road = sue_budunit.make_road(casa_road, swim_text)
+    swim_idea = ideaunit_shop(swim_text, _weight=8)
+
+    clean_text = "cleaning"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    clean_idea = ideaunit_shop(clean_text, _weight=2)
+    sue_budunit.add_idea(ideaunit_shop(clean_text), casa_road)
+
+    sweep_text = "sweep"
+    sweep_road = sue_budunit.make_road(clean_road, sweep_text)
+    sweep_idea = ideaunit_shop(sweep_text, _weight=0)
+    vaccum_text = "vaccum"
+    vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
+    vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
+
+    sue_budunit.add_l1_idea(casa_idea)
+    sue_budunit.add_idea(swim_idea, casa_road)
+    sue_budunit.add_idea(clean_idea, casa_road)
+    sue_budunit.add_idea(sweep_idea, clean_road)  # _weight=0
+    sue_budunit.add_idea(vaccum_idea, clean_road)  # _weight=0
+
+    assert sue_budunit._offtrack_kids_weight_set == set()
+
+    # WHEN
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == {clean_road}

@@ -127,6 +127,8 @@ class BudUnit:
     _econs_buildable: bool = None
     _sum_healerhold_share: bool = None
     _lobbyboxs: dict[LobbyID, LobbyBox] = None
+    _offtrack_kids_weight_set: set[RoadUnit] = None
+    _offtrack_fund: float = None
     # settle_bud Calculated field end
 
     def del_last_gift_id(self):
@@ -1066,6 +1068,21 @@ class BudUnit:
         pledge_item = self.get_idea_obj(task_road)
         pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
 
+    def _allot_offtrack_fund(self):
+        x_acctunits = self._accts.values()
+        credor_ledger = {x_acct.acct_id: x_acct.credor_weight for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtor_weight for x_acct in x_acctunits}
+        fund_give_allot = allot_scale(
+            credor_ledger, self._offtrack_fund, self._fund_coin
+        )
+        fund_take_allot = allot_scale(
+            debtor_ledger, self._offtrack_fund, self._fund_coin
+        )
+        for x_acct_id, acct_fund_give in fund_give_allot.items():
+            self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
+        for x_acct_id, acct_fund_take in fund_take_allot.items():
+            self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
+
     def get_acctunits_credor_weight_sum(self) -> float:
         return sum(acctunit.get_credor_weight() for acctunit in self._accts.values())
 
@@ -1142,7 +1159,7 @@ class BudUnit:
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
 
-    def _allot_bud_agenda_share(self):
+    def _allot_fund_bud_agenda(self):
         for idea in self._idea_dict.values():
             # If there are no awardlines associated with idea
             # allot fund_share via general acctunit
@@ -1159,7 +1176,7 @@ class BudUnit:
                             awardline_fund_take=x_awardline._fund_take,
                         )
 
-    def _allot_lobbyboxs_fund_share(self):
+    def _allot_lobbyboxs_fund(self):
         for x_lobbybox in self._lobbyboxs.values():
             x_lobbybox._set_lobbyship_fund_give_take()
             for x_lobbyship in x_lobbybox._lobbyships.values():
@@ -1171,9 +1188,11 @@ class BudUnit:
                     bud_agenda_debt=x_lobbyship._fund_agenda_take,
                 )
 
-    def _set_fund_agenda_ratio_give_take(self):
+    def _set_acctunits_fund_ratios(self):
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
+        x_acctunit_credor_weight_sum = self.get_acctunits_credor_weight_sum()
+        x_acctunit_debtor_weight_sum = self.get_acctunits_debtor_weight_sum()
 
         for x_acctunit in self._accts.values():
             fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
@@ -1183,8 +1202,8 @@ class BudUnit:
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_acctunit_total_credor_weight=self.get_acctunits_credor_weight_sum(),
-                bud_acctunit_total_debtor_weight=self.get_acctunits_debtor_weight_sum(),
+                bud_acctunit_total_credor_weight=x_acctunit_credor_weight_sum,
+                bud_acctunit_total_debtor_weight=x_acctunit_debtor_weight_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):
@@ -1316,6 +1335,13 @@ class BudUnit:
         if self._idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
             self._allot_fund_share(idea=self._idearoot)
+        if (
+            self._tree_traverse_count == 1
+            and not self._idearoot.is_kidless()
+            and self._idearoot.get_kids_weight_sum() == 0
+            and self._idearoot._weight != 0
+        ):
+            self._offtrack_kids_weight_set.add(self._idearoot.get_road())
 
     def _set_kids_attributes(
         self,
@@ -1344,6 +1370,13 @@ class BudUnit:
             # set idea's ancestor metrics using bud root as common source
             self._set_ancestors_metrics(idea_kid.get_road(), econ_exceptions)
             self._allot_fund_share(idea=idea_kid)
+        if (
+            self._tree_traverse_count == 1
+            and not idea_kid.is_kidless()
+            and idea_kid.get_kids_weight_sum() == 0
+            and idea_kid._weight != 0
+        ):
+            self._offtrack_kids_weight_set.add(idea_kid.get_road())
 
     def _allot_fund_share(self, idea: IdeaUnit):
         # TODO manage situations where awardheir.credor_weight is None for all awardheirs
@@ -1387,6 +1420,7 @@ class BudUnit:
         self._rational = False
         self._tree_traverse_count = 0
         self._idea_dict = {self._idearoot.get_road(): self._idearoot}
+        self._offtrack_kids_weight_set = set()
 
     def _clear_bud_base_metrics(self):
         self._econs_justified = True
@@ -1480,9 +1514,11 @@ class BudUnit:
             self._rational = True
 
     def _after_all_tree_traverses_set_cred_debt(self):
-        self._allot_bud_agenda_share()
-        self._allot_lobbyboxs_fund_share()
-        self._set_fund_agenda_ratio_give_take()
+        self.set_offtrack_fund()
+        self._allot_offtrack_fund()
+        self._allot_fund_bud_agenda()
+        self._allot_lobbyboxs_fund()
+        self._set_acctunits_fund_ratios()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
         self._set_econ_dict()
@@ -1609,6 +1645,12 @@ class BudUnit:
         x_list.pop(0)
         return x_list
 
+    def set_offtrack_fund(self) -> float:
+        self._offtrack_fund = sum(
+            self.get_idea_obj(x_roadunit).get_fund_share()
+            for x_roadunit in self._offtrack_kids_weight_set
+        )
+
 
 def budunit_shop(
     _owner_id: OwnerID = None,
@@ -1641,6 +1683,7 @@ def budunit_shop(
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
         _sum_healerhold_share=get_0_if_None(),
+        _offtrack_kids_weight_set=set(),
     )
     x_bud._idearoot = ideaunit_shop(
         _root=True,

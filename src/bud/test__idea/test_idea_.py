@@ -71,9 +71,8 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._kids == {}
     assert x_ideaunit._weight == 1
     assert x_ideaunit._label is None
+    assert x_ideaunit._bud_real_id == root_label()
     assert x_ideaunit._uid is None
-    assert x_ideaunit._all_acct_cred is None
-    assert x_ideaunit._all_acct_debt is None
     assert x_ideaunit._begin is None
     assert x_ideaunit._close is None
     assert x_ideaunit._addin is None
@@ -105,7 +104,8 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._originunit == originunit_shop()
     assert x_ideaunit._road_delimiter == default_road_delimiter_if_none()
     assert x_ideaunit._root is False
-    assert x_ideaunit._bud_real_id == root_label()
+    assert x_ideaunit._all_acct_cred is None
+    assert x_ideaunit._all_acct_debt is None
     assert x_ideaunit._healerhold_ratio == 0
 
 
@@ -226,7 +226,7 @@ def test_IdeaUnit_awardlinks_exist():
     assert sport_idea._awardlinks == x_lobbyships
 
 
-def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValues():
+def test_IdeaUnit_get_awardheirs_give_weight_sum_SetsAttrCorrectly_WithValues():
     # ESTABLISH
     biker_give_weight = 12
     biker_take_weight = 15
@@ -285,7 +285,7 @@ def test_IdeaUnit_get_inherited_awardheirs_weight_sum_SetsAttrCorrectly_WithValu
     assert biker_awardheir._fund_take is not None
 
 
-def test_IdeaUnit_get_awardlinks_weight_sum_ReturnsCorrectObj_NoValues():
+def test_IdeaUnit_get_awardheirs_give_weight_sum_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(_label=sport_text)
@@ -1022,6 +1022,46 @@ def test_IdeaUnit_del_kid_CorrectModifiesAttr():
 
     # THEN
     assert len(nation_idea._kids) == 1
+
+
+def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario0():
+    # ESTABLISH
+    nation_text = "nation-state"
+    nation_road = create_road(root_label(), nation_text)
+    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
+    usa_text = "USA"
+    usa_idea = ideaunit_shop(usa_text, _parent_road=nation_road)
+    nation_idea.add_kid(usa_idea)
+    france_text = "France"
+    france_idea = ideaunit_shop(france_text, _parent_road=nation_road)
+    nation_idea.add_kid(france_idea)
+
+    # WHEN / THEN
+    assert nation_idea.get_kids_weight_sum() == 2
+
+
+def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario1():
+    # ESTABLISH
+    nation_text = "nation-state"
+    nation_road = create_road(root_label(), nation_text)
+    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
+    usa_text = "USA"
+    usa_idea = ideaunit_shop(usa_text, _weight=0, _parent_road=nation_road)
+    nation_idea.add_kid(usa_idea)
+    france_text = "France"
+    france_idea = ideaunit_shop(france_text, _weight=0, _parent_road=nation_road)
+    nation_idea.add_kid(france_idea)
+
+    # WHEN / THEN
+    assert nation_idea.get_kids_weight_sum() == 0
+
+    # WHEN
+    france_text = "France"
+    france_idea = ideaunit_shop(france_text, _weight=3, _parent_road=nation_road)
+    nation_idea.add_kid(france_idea)
+
+    # WHEN / THEN
+    assert nation_idea.get_kids_weight_sum() == 3
 
 
 def test_IdeaUnit_get_fund_share_ReturnsObj():

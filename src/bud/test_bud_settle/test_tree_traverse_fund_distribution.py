@@ -245,6 +245,8 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoWeightDistributeFu
     assert sue_budunit.get_idea_obj(sweep_road)._fund_ratio is None
     assert sue_budunit.get_idea_obj(vaccum_road)._fund_ratio is None
     assert sue_budunit.get_lobbybox(yao_text) is None
+
+    assert not sue_budunit._offtrack_fund
     assert sue_budunit.get_acct(yao_text)._fund_give == 0
     assert sue_budunit.get_acct(yao_text)._fund_take == 0
 
@@ -253,17 +255,18 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoWeightDistributeFu
 
     # THEN
     print(f"{sue_budunit._fund_pool=}")
+    clean_fund_ratio = 0.2
     assert sue_budunit.get_idea_obj(casa_road)._fund_ratio == 1
     assert sue_budunit.get_idea_obj(swim_road)._fund_ratio == 0.8
-    assert sue_budunit.get_idea_obj(clean_road)._fund_ratio == 0.2
+    assert sue_budunit.get_idea_obj(clean_road)._fund_ratio == clean_fund_ratio
     assert sue_budunit.get_idea_obj(sweep_road)._fund_ratio == 0
     assert sue_budunit.get_idea_obj(vaccum_road)._fund_ratio == 0
     assert sue_budunit.get_lobbybox(yao_text)._fund_give == 0
     assert sue_budunit.get_lobbybox(yao_text)._fund_take == 0
+
+    assert sue_budunit._offtrack_fund == clean_fund_ratio * default_fund_pool()
     assert sue_budunit.get_acct(yao_text)._fund_give == default_fund_pool()
     assert sue_budunit.get_acct(yao_text)._fund_take == default_fund_pool()
-
-    assert 1 == 2
 
 
 def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
