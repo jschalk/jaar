@@ -1,5 +1,12 @@
 from src.bud.bud import BudUnit
 from src.bud.examples.example_time import get_budunit_sue_TimeExample
+from src.bud.hreg_time import get_time_min_from_dt
+from src.bud.bud_time import (
+    get_jajatime_repeating_legible_text,
+    get_time_c400_from_min,
+    get_time_dt_from_min,
+    get_time_c400yr_from_min,
+)
 from datetime import datetime
 from random import randint
 
@@ -13,64 +20,61 @@ def _check_time_conversion_with_random_inputs(x_bud: BudUnit):
         minute=randint(0, 59),
     )
     print(f"Attempt {py_dt=}")
-    assert py_dt == x_bud.get_time_dt_from_min(x_bud.get_time_min_from_dt(py_dt))
+    assert py_dt == get_time_dt_from_min(x_bud, get_time_min_from_dt(py_dt))
 
 
 def test_BudUnit_get_time_min_from_dt_ReturnsCorrectObj():
     # ESTABLISH / WHEN
     sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert sue_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    assert sue_bud.get_time_min_from_dt(dt=datetime(1, 1, 1, 0, 0)) == 527040
-    assert sue_bud.get_time_min_from_dt(dt=datetime(1, 1, 2, 0, 0)) == 527040 + 1440
-    assert sue_bud.get_time_min_from_dt(dt=datetime(400, 1, 1, 0, 0)) == 210379680
-    assert sue_bud.get_time_min_from_dt(dt=datetime(800, 1, 1, 0, 0)) == 420759360
-    assert sue_bud.get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
+    assert get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    assert get_time_min_from_dt(dt=datetime(1, 1, 1, 0, 0)) == 527040
+    assert get_time_min_from_dt(dt=datetime(1, 1, 2, 0, 0)) == 527040 + 1440
+    assert get_time_min_from_dt(dt=datetime(400, 1, 1, 0, 0)) == 210379680
+    assert get_time_min_from_dt(dt=datetime(800, 1, 1, 0, 0)) == 420759360
+    assert get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
 
 
 def test_BudUnit_get_time_400Yearsegment_from_min_ReturnsCorrectObj():
     # ESTABLISH / WHEN
     sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert sue_bud.get_time_c400_from_min(min=0)[0] == 0
-    assert sue_bud.get_time_c400_from_min(min=210379680)[0] == 1
-    assert sue_bud.get_time_c400_from_min(min=210379681)[0] == 1
-    assert sue_bud.get_time_c400_from_min(min=841518720)[0] == 4
+    assert get_time_c400_from_min(sue_bud, min=0)[0] == 0
+    assert get_time_c400_from_min(sue_bud, min=210379680)[0] == 1
+    assert get_time_c400_from_min(sue_bud, min=210379681)[0] == 1
+    assert get_time_c400_from_min(sue_bud, min=841518720)[0] == 4
 
 
 def test_BudUnit_get_time_c400year_from_min_ReturnsCorrectObj():
     # ESTABLISH / WHEN
     sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert sue_bud.get_time_c400yr_from_min(min=0)[0] == 0
-    assert sue_bud.get_time_c400yr_from_min(min=1)[0] == 0
-    assert sue_bud.get_time_c400yr_from_min(min=1)[2] == 1
-    assert sue_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
-    assert sue_bud.get_time_c400yr_from_min(min=210379680)[0] == 0
-    assert sue_bud.get_time_c400yr_from_min(min=210379681)[0] == 0
-    assert sue_bud.get_time_c400yr_from_min(min=841518720)[0] == 0
-    assert sue_bud.get_time_c400yr_from_min(min=576000)[0] == 1
-    assert sue_bud.get_time_c400yr_from_min(min=4608000)[0] == 8
-    assert sue_bud.get_time_c400yr_from_min(min=157785120)[0] == 300
+    assert get_time_c400yr_from_min(sue_bud, min=0)[0] == 0
+    assert get_time_c400yr_from_min(sue_bud, min=1)[0] == 0
+    assert get_time_c400yr_from_min(sue_bud, min=1)[2] == 1
+    assert get_time_c400yr_from_min(sue_bud, min=210379680)[0] == 0
+    assert get_time_c400yr_from_min(sue_bud, min=210379680)[0] == 0
+    assert get_time_c400yr_from_min(sue_bud, min=210379681)[0] == 0
+    assert get_time_c400yr_from_min(sue_bud, min=841518720)[0] == 0
+    assert get_time_c400yr_from_min(sue_bud, min=576000)[0] == 1
+    assert get_time_c400yr_from_min(sue_bud, min=4608000)[0] == 8
+    assert get_time_c400yr_from_min(sue_bud, min=157785120)[0] == 300
 
 
 def test_BudUnit_get_time_dt_from_min_ReturnsCorrectObj():
     # ESTABLISH / WHEN
     sue_bud = get_budunit_sue_TimeExample()
     # THEN
-    assert sue_bud.get_time_dt_from_min(min=5000000)
-    # assert sue_bud.get_time_dt_from_min(
-    #     min=sue_bud.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    # ) == datetime(2000, 1, 1, 0, 0)
-    assert sue_bud.get_time_dt_from_min(min=420759360) == datetime(800, 1, 1, 0, 0)
-    assert sue_bud.get_time_dt_from_min(min=631139040) == datetime(1200, 1, 1, 0, 0)
-    assert sue_bud.get_time_dt_from_min(min=631751040) == datetime(1201, 3, 1, 0, 0)
-    assert sue_bud.get_time_dt_from_min(min=631751060) == datetime(1201, 3, 1, 0, 20)
+    assert get_time_dt_from_min(sue_bud, min=5000000)
+    assert get_time_dt_from_min(sue_bud, min=420759360) == datetime(800, 1, 1, 0, 0)
+    assert get_time_dt_from_min(sue_bud, min=631139040) == datetime(1200, 1, 1, 0, 0)
+    assert get_time_dt_from_min(sue_bud, min=631751040) == datetime(1201, 3, 1, 0, 0)
+    assert get_time_dt_from_min(sue_bud, min=631751060) == datetime(1201, 3, 1, 0, 20)
 
     x_minutes = 1063903680
-    assert sue_bud.get_time_dt_from_min(min=x_minutes) == datetime(2022, 10, 29, 0, 0)
+    assert get_time_dt_from_min(sue_bud, x_minutes) == datetime(2022, 10, 29, 0, 0)
     x_next_day = x_minutes + 1440
-    assert sue_bud.get_time_dt_from_min(min=x_next_day) == datetime(2022, 10, 30, 0, 0)
+    assert get_time_dt_from_min(sue_bud, x_next_day) == datetime(2022, 10, 30, 0, 0)
 
     _check_time_conversion_with_random_inputs(sue_bud)
     _check_time_conversion_with_random_inputs(sue_bud)
@@ -305,61 +309,61 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 # x_bud = examples.get_bud_gregorian_years()
 
 
-def test_BudUnit_get_jajatime_repeating_legible_text_correctlyText():
+def test_get_jajatime_repeating_legible_text_correctlyText():
     # ESTABLISH
     sue_bud = get_budunit_sue_TimeExample()
 
     # WHEN / THEN
-    every_day_8am_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=480, nigh=480, divisor=1440
+    every_day_8am_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=480, nigh=480, divisor=1440
     )
     print(f"ReturnsDailyText {every_day_8am_text=}")
     assert every_day_8am_text == "every day at 8am"
 
-    every_2nd_day_8_10am_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=490, nigh=490, divisor=2880
+    every_2nd_day_8_10am_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=490, nigh=490, divisor=2880
     )
     print(f"ReturnsEvery2DaysText: {every_2nd_day_8_10am_text=}")
     assert every_2nd_day_8_10am_text == "every 2nd day at 8:10am"
 
-    ReturnsEvery6DaysText = sue_bud.get_jajatime_repeating_legible_text(
-        open=480, nigh=480, divisor=8640
+    ReturnsEvery6DaysText = get_jajatime_repeating_legible_text(
+        sue_bud, open=480, nigh=480, divisor=8640
     )
     print(f"ReturnsEvery6DaysText: {ReturnsEvery6DaysText=}")
     assert ReturnsEvery6DaysText == "every 6th day at 8am"
 
-    every_saturday_8am_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=480, nigh=480, divisor=10080
+    every_saturday_8am_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=480, nigh=480, divisor=10080
     )
     print(f"ReturnsWeeklyText: {every_saturday_8am_text=}")
     assert every_saturday_8am_text == "every Saturday at 8am"
 
-    sat_2nd_8am_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=480, nigh=480, divisor=20160
+    sat_2nd_8am_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=480, nigh=480, divisor=20160
     )
     print(f"ReturnsEvery2WeeksText: {sat_2nd_8am_text=}")
     assert sat_2nd_8am_text == "every 2nd Saturday at 8am"
 
-    sat_6th_8am_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=480, nigh=480, divisor=60480
+    sat_6th_8am_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=480, nigh=480, divisor=60480
     )
     print(f"ReturnsEvery6WeeksText: {sat_6th_8am_text=}")
     assert sat_6th_8am_text == "every 6th Saturday at 8am"
 
-    feb_1st_9am_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=1064041020.0, nigh=1064041020.0
+    feb_1st_9am_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=1064041020.0, nigh=1064041020.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
     assert feb_1st_9am_text == "Wed Feb 1st, 2023 at 9am"
 
-    feb_1st_7pm_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=1064041620.0, nigh=1064041620.0
+    feb_1st_7pm_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=1064041620.0, nigh=1064041620.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
     assert feb_1st_7pm_text == "Wed Feb 1st, 2023 at 7pm"
 
-    feb_2nd_12am_text = sue_bud.get_jajatime_repeating_legible_text(
-        open=1064041920.0, nigh=1064041920.0
+    feb_2nd_12am_text = get_jajatime_repeating_legible_text(
+        sue_bud, open=1064041920.0, nigh=1064041920.0
     )
     print(f"ReturnsOneTimeEventCorrectlyMidnight {feb_2nd_12am_text=}")
     assert feb_2nd_12am_text == "Thu Feb 2nd, 2023 at 12am"

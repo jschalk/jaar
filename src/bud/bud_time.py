@@ -1,6 +1,7 @@
-from src.bud.hreg_time import HregTimeIdeaSource
+from src.bud.hreg_time import readable_1440_time, get_number_with_letter_ending
 from src.bud.idea import ideaunit_shop as i_shop
 from src.bud.bud import BudUnit
+from datetime import datetime
 
 
 def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
@@ -706,6 +707,178 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     return x_budunit
 
 
+def _get_jajatime_week_legible_text(x_budunit: BudUnit, open: int, divisor: int) -> str:
+    open_in_week = open % divisor
+    time_road = x_budunit.make_l1_road("time")
+    tech_road = x_budunit.make_road(time_road, "tech")
+    week_road = x_budunit.make_road(tech_road, "week")
+    weekday_ideas_dict = x_budunit.get_idea_ranged_kids(week_road, begin=open_in_week)
+    weekday_idea_node = None
+    for idea in weekday_ideas_dict.values():
+        weekday_idea_node = idea
+
+    if divisor == 10080:
+        return f"every {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
+    num_with_letter_ending = get_number_with_letter_ending(num=divisor // 10080)
+    return f"every {num_with_letter_ending} {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
+
+
+def get_jajatime_legible_from_dt(dt: datetime) -> str:
+    weekday_text = dt.strftime("%A")
+    monthdescription_text = dt.strftime("%B")
+    monthday_text = get_number_with_letter_ending(int(dt.strftime("%d")))
+    year_text = dt.strftime("%Y")
+    hour_int = int(dt.strftime("%H"))
+    min_int = int(dt.strftime("%M"))
+    min1440 = (hour_int * 60) + min_int
+    return f"{weekday_text[:3]} {monthdescription_text[:3]} {monthday_text}, {year_text} at {readable_1440_time(min1440)}"
+
+
+def get_jajatime_legible_one_time_event(x_budunit: BudUnit, jajatime_min: int) -> str:
+    dt_x = get_time_dt_from_min(x_budunit, min=jajatime_min)
+    return get_jajatime_legible_from_dt(dt=dt_x)
+
+
+def get_jajatime_repeating_legible_text(
+    x_budunit: BudUnit, open: float = None, nigh: float = None, divisor: float = None
+) -> str:
+    str_x = "test3"
+    if divisor is None:
+        str_x = get_jajatime_legible_one_time_event(x_budunit, open)
+    elif divisor is not None and divisor % 10080 == 0:
+        str_x = _get_jajatime_week_legible_text(x_budunit, open, divisor)
+    elif divisor is not None and divisor % 1440 == 0:
+        if divisor == 1440:
+            str_x = f"every day at {readable_1440_time(min1440=open)}"
+        else:
+            num_days = int(divisor / 1440)
+            num_with_letter_ending = get_number_with_letter_ending(num=num_days)
+            str_x = f"every {num_with_letter_ending} day at {readable_1440_time(min1440=open)}"
+    else:
+        str_x = "unknown"
+    return str_x
+
+
+def get_time_c400yr_from_min(x_budunit: BudUnit, min: int):
+    # ESTABLISH int minutes within 400 year range return year and remainder minutes
+    c400_count, c400_idea, c400yr_min = get_time_c400_from_min(x_budunit, min)
+    c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
+    cXXXyr_min = c400yr_min - c100_4_96y._begin
+
+    time_road = x_budunit.make_l1_road("time")
+    tech_road = x_budunit.make_road(time_road, "tech")
+
+    # identify which range the time is in
+    if c100_4_96y._close - c100_4_96y._begin in (
+        50492160,
+        52596000,
+    ):  # 96 year and 100 year ideas
+        yr4_1461_road = x_budunit.make_road(tech_road, "4year with leap")
+        yr4_1461_idea = x_budunit.get_idea_obj(yr4_1461_road)
+        yr4_segments = int(cXXXyr_min / yr4_1461_idea._close)
+        cXyr_min = cXXXyr_min % yr4_1461_idea._close
+        yr1_idea = yr4_1461_idea.get_kids_in_range(begin=cXyr_min, close=cXyr_min)[0]
+    elif c100_4_96y._close - c100_4_96y._begin == 2102400:
+        yr4_1460_road = x_budunit.make_road(tech_road, "4year wo leap")
+        yr4_1460_idea = x_budunit.get_idea_obj(yr4_1460_road)
+        yr4_segments = 0
+        yr1_idea = yr4_1460_idea.get_kids_in_range(cXXXyr_min, cXXXyr_min)[0]
+        cXyr_min = cXXXyr_min % yr4_1460_idea._close
+
+    yr1_rem_min = cXyr_min - yr1_idea._begin
+    yr1_idea_begin = int(yr1_idea._label.split("-")[0]) - 1
+
+    c100_4_96y_begin = int(c100_4_96y._label.split("-")[0])
+    year_num = c100_4_96y_begin + (4 * yr4_segments) + yr1_idea_begin
+    return year_num, yr1_idea, yr1_rem_min
+
+
+def get_time_month_from_min(x_budunit: BudUnit, min: int):
+    time_road = x_budunit.make_l1_road("time")
+    tech_road = x_budunit.make_road(time_road, "tech")
+
+    year_num, yr1_idea, yr1_idea_rem_min = get_time_c400yr_from_min(x_budunit, min)
+    yrx = None
+    if yr1_idea._close - yr1_idea._begin == 525600:
+        yr365_road = x_budunit.make_road(tech_road, "365 year")
+        yrx = x_budunit.get_idea_obj(yr365_road)
+    elif yr1_idea._close - yr1_idea._begin == 527040:
+        yr366_road = x_budunit.make_road(tech_road, "366 year")
+        yrx = x_budunit.get_idea_obj(yr366_road)
+    mon_x = yrx.get_kids_in_range(begin=yr1_idea_rem_min, close=yr1_idea_rem_min)[0]
+    month_rem_min = yr1_idea_rem_min - mon_x._begin
+    month_num = int(mon_x._label.split("-")[0])
+    day_road = x_budunit.make_road(tech_road, "day")
+    day_x = x_budunit.get_idea_obj(day_road)
+    day_num = int(month_rem_min / day_x._close)
+    day_rem_min = month_rem_min % day_x._close
+    return month_num, day_num, day_rem_min, day_x
+
+
+def get_time_dt_from_min(x_budunit: BudUnit, min: int) -> datetime:
+    year_x = (
+        400 * get_time_c400_from_min(x_budunit, min=min)[0]
+    ) + get_time_c400yr_from_min(x_budunit, min=min)[0]
+    month_num = get_time_month_from_min(x_budunit, min=min)[0]
+    day_num = get_time_month_from_min(x_budunit, min)[1] + 1
+    hr_num, min60, hr_x = get_time_hour_from_min(x_budunit, min)
+    return datetime(
+        year=year_x, month=month_num, day=day_num, hour=hr_num, minute=min60
+    )
+
+
+def get_time_c400_from_min(x_budunit: BudUnit, min: int) -> int:
+    time_road = x_budunit.make_l1_road("time")
+    tech_road = x_budunit.make_road(time_road, "tech")
+    c400_road = x_budunit.make_road(tech_road, "400 year segment")
+    c400_idea = x_budunit.get_idea_obj(c400_road)
+    c400_min = c400_idea._close
+    return int(min / c400_min), c400_idea, min % c400_min
+
+
+def get_time_c400yr_from_min(x_budunit: BudUnit, min: int):
+    # ESTABLISH int minutes within 400 year range return year and remainder minutes
+    c400_count, c400_idea, c400yr_min = get_time_c400_from_min(x_budunit, min)
+    c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
+    cXXXyr_min = c400yr_min - c100_4_96y._begin
+
+    time_road = x_budunit.make_l1_road("time")
+    tech_road = x_budunit.make_road(time_road, "tech")
+
+    # identify which range the time is in
+    if c100_4_96y._close - c100_4_96y._begin in (
+        50492160,
+        52596000,
+    ):  # 96 year and 100 year ideas
+        yr4_1461_road = x_budunit.make_road(tech_road, "4year with leap")
+        yr4_1461_idea = x_budunit.get_idea_obj(yr4_1461_road)
+        yr4_segments = int(cXXXyr_min / yr4_1461_idea._close)
+        cXyr_min = cXXXyr_min % yr4_1461_idea._close
+        yr1_idea = yr4_1461_idea.get_kids_in_range(begin=cXyr_min, close=cXyr_min)[0]
+    elif c100_4_96y._close - c100_4_96y._begin == 2102400:
+        yr4_1460_road = x_budunit.make_road(tech_road, "4year wo leap")
+        yr4_1460_idea = x_budunit.get_idea_obj(yr4_1460_road)
+        yr4_segments = 0
+        yr1_idea = yr4_1460_idea.get_kids_in_range(cXXXyr_min, cXXXyr_min)[0]
+        cXyr_min = cXXXyr_min % yr4_1460_idea._close
+
+    yr1_rem_min = cXyr_min - yr1_idea._begin
+    yr1_idea_begin = int(yr1_idea._label.split("-")[0]) - 1
+
+    c100_4_96y_begin = int(c100_4_96y._label.split("-")[0])
+    year_num = c100_4_96y_begin + (4 * yr4_segments) + yr1_idea_begin
+    return year_num, yr1_idea, yr1_rem_min
+
+
+def get_time_hour_from_min(x_budunit: BudUnit, min: int) -> set[int, int, list[int]]:
+    month_num, day_num, day_rem_min, day_x = get_time_month_from_min(x_budunit, min=min)
+    hr_x = day_x.get_kids_in_range(begin=day_rem_min, close=day_rem_min)[0]
+    hr_rem_min = day_rem_min - hr_x._begin
+    hr_num = int(hr_x._label.split("-")[0])
+    min60 = int(hr_rem_min % (hr_x._close - hr_x._begin))
+    return hr_num, min60, hr_x
+
+
 def years_str() -> str:
     return "years"
 
@@ -880,25 +1053,6 @@ def year3_str() -> str:
 
 def year4_str() -> str:
     return "4-year"
-
-
-def _get_jajatime_week_legible_text(x_budunit: BudUnit, open: int, divisor: int) -> str:
-    x_hregidea = HregTimeIdeaSource(x_budunit._road_delimiter)
-    open_in_week = open % divisor
-    time_road = x_budunit.make_l1_road("time")
-    tech_road = x_budunit.make_road(time_road, "tech")
-    week_road = x_budunit.make_road(tech_road, "week")
-    weekday_ideas_dict = x_budunit.get_idea_ranged_kids(week_road, open_in_week)
-    weekday_idea_node = None
-    # for idea in weekday_ideas_dict.values():
-    #     weekday_idea_node = idea
-
-    # if divisor == 10080:
-    #     return f"every {weekday_idea_node._label} at {x_hregidea.readable_1440_time(min1440=open % 1440)}"
-    # num_with_letter_ending = x_hregidea.get_number_with_letter_ending(
-    #     num=divisor // 10080
-    # )
-    # return f"every {num_with_letter_ending} {weekday_idea_node._label} at {x_hregidea.readable_1440_time(min1440=open % 1440)}"
 
 
 def node_0_100_str() -> str:

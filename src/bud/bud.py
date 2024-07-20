@@ -66,6 +66,7 @@ from src.bud.hreg_time import (
     HregTimeIdeaSource as HregIdea,
     get_number_with_letter_ending,
     readable_1440_time,
+    get_time_min_from_dt,
 )
 from src.bud.lemma import lemmas_shop, Lemmas
 from src.bud.origin import originunit_get_from_dict, originunit_shop, OriginUnit
@@ -322,136 +323,6 @@ class BudUnit:
         all_ideas_set = set(self.get_idea_tree_ordered_road_list())
         return all_ideas_set == all_ideas_set.intersection(pledge_idea_assoc_set)
 
-    def get_time_min_from_dt(self, dt: datetime) -> float:
-        x_hregidea = HregIdea(self._road_delimiter)
-        return x_hregidea.get_time_min_from_dt(dt=dt)
-
-    def get_time_c400_from_min(self, min: int) -> int:
-        time_road = self.make_l1_road("time")
-        tech_road = self.make_road(time_road, "tech")
-        c400_road = self.make_road(tech_road, "400 year segment")
-        c400_idea = self.get_idea_obj(c400_road)
-        c400_min = c400_idea._close
-        return int(min / c400_min), c400_idea, min % c400_min
-
-    def get_time_c400yr_from_min(self, min: int):
-        # ESTABLISH int minutes within 400 year range return year and remainder minutes
-        c400_count, c400_idea, c400yr_min = self.get_time_c400_from_min(min=min)
-        c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
-        cXXXyr_min = c400yr_min - c100_4_96y._begin
-
-        time_road = self.make_l1_road("time")
-        tech_road = self.make_road(time_road, "tech")
-
-        # identify which range the time is in
-        if c100_4_96y._close - c100_4_96y._begin in (
-            50492160,
-            52596000,
-        ):  # 96 year and 100 year ideas
-            yr4_1461_road = self.make_road(tech_road, "4year with leap")
-            yr4_1461_idea = self.get_idea_obj(yr4_1461_road)
-            yr4_segments = int(cXXXyr_min / yr4_1461_idea._close)
-            cXyr_min = cXXXyr_min % yr4_1461_idea._close
-            yr1_idea = yr4_1461_idea.get_kids_in_range(begin=cXyr_min, close=cXyr_min)[
-                0
-            ]
-        elif c100_4_96y._close - c100_4_96y._begin == 2102400:
-            yr4_1460_road = self.make_road(tech_road, "4year wo leap")
-            yr4_1460_idea = self.get_idea_obj(yr4_1460_road)
-            yr4_segments = 0
-            yr1_idea = yr4_1460_idea.get_kids_in_range(cXXXyr_min, cXXXyr_min)[0]
-            cXyr_min = cXXXyr_min % yr4_1460_idea._close
-
-        yr1_rem_min = cXyr_min - yr1_idea._begin
-        yr1_idea_begin = int(yr1_idea._label.split("-")[0]) - 1
-
-        c100_4_96y_begin = int(c100_4_96y._label.split("-")[0])
-        year_num = c100_4_96y_begin + (4 * yr4_segments) + yr1_idea_begin
-        return year_num, yr1_idea, yr1_rem_min
-
-    def get_time_month_from_min(self, min: int):
-        time_road = self.make_l1_road("time")
-        tech_road = self.make_road(time_road, "tech")
-
-        year_num, yr1_idea, yr1_idea_rem_min = self.get_time_c400yr_from_min(min=min)
-        yrx = None
-        if yr1_idea._close - yr1_idea._begin == 525600:
-            yr365_road = self.make_road(tech_road, "365 year")
-            yrx = self.get_idea_obj(yr365_road)
-        elif yr1_idea._close - yr1_idea._begin == 527040:
-            yr366_road = self.make_road(tech_road, "366 year")
-            yrx = self.get_idea_obj(yr366_road)
-        mon_x = yrx.get_kids_in_range(begin=yr1_idea_rem_min, close=yr1_idea_rem_min)[0]
-        month_rem_min = yr1_idea_rem_min - mon_x._begin
-        month_num = int(mon_x._label.split("-")[0])
-        day_road = self.make_road(tech_road, "day")
-        day_x = self.get_idea_obj(day_road)
-        day_num = int(month_rem_min / day_x._close)
-        day_rem_min = month_rem_min % day_x._close
-        return month_num, day_num, day_rem_min, day_x
-
-    def get_time_hour_from_min(self, min: int) -> set[int, int, list[int]]:
-        month_num, day_num, day_rem_min, day_x = self.get_time_month_from_min(min=min)
-        hr_x = day_x.get_kids_in_range(begin=day_rem_min, close=day_rem_min)[0]
-        hr_rem_min = day_rem_min - hr_x._begin
-        hr_num = int(hr_x._label.split("-")[0])
-        min60 = int(hr_rem_min % (hr_x._close - hr_x._begin))
-        return hr_num, min60, hr_x
-
-    def get_time_dt_from_min(self, min: int) -> datetime:
-        year_x = (
-            400 * self.get_time_c400_from_min(min=min)[0]
-        ) + self.get_time_c400yr_from_min(min=min)[0]
-        month_num = self.get_time_month_from_min(min=min)[0]
-        day_num = self.get_time_month_from_min(min=min)[1] + 1
-        hr_num, min60, hr_x = self.get_time_hour_from_min(min=min)
-        return datetime(
-            year=year_x, month=month_num, day=day_num, hour=hr_num, minute=min60
-        )
-
-    def get_jajatime_legible_one_time_event(self, jajatime_min: int) -> str:
-        dt_x = self.get_time_dt_from_min(min=jajatime_min)
-        x_hregidea = HregIdea(self._road_delimiter)
-        return x_hregidea.get_jajatime_legible_from_dt(dt=dt_x)
-
-    def get_jajatime_repeating_legible_text(
-        self, open: float = None, nigh: float = None, divisor: float = None
-    ) -> str:
-        x_hregidea = HregIdea(self._road_delimiter)
-        str_x = "test3"
-        if divisor is None:
-            str_x = self.get_jajatime_legible_one_time_event(jajatime_min=open)
-        elif divisor is not None and divisor % 10080 == 0:
-            str_x = self._get_jajatime_week_legible_text(open, divisor)
-        elif divisor is not None and divisor % 1440 == 0:
-            if divisor == 1440:
-                str_x = f"every day at {readable_1440_time(min1440=open)}"
-            else:
-                num_days = int(divisor / 1440)
-                num_with_letter_ending = get_number_with_letter_ending(num=num_days)
-                str_x = f"every {num_with_letter_ending} day at {readable_1440_time(min1440=open)}"
-        else:
-            str_x = "unknown"
-        return str_x
-
-    def _get_jajatime_week_legible_text(self, open: int, divisor: int) -> str:
-        x_hregidea = HregIdea(self._road_delimiter)
-        open_in_week = open % divisor
-        time_road = self.make_l1_road("time")
-        tech_road = self.make_road(time_road, "tech")
-        week_road = self.make_road(tech_road, "week")
-        weekday_ideas_dict = self.get_idea_ranged_kids(
-            idea_road=week_road, begin=open_in_week
-        )
-        weekday_idea_node = None
-        for idea in weekday_ideas_dict.values():
-            weekday_idea_node = idea
-
-        if divisor == 10080:
-            return f"every {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
-        num_with_letter_ending = get_number_with_letter_ending(num=divisor // 10080)
-        return f"every {num_with_letter_ending} {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
-
     def get_awardlinks_metrics(self) -> dict[LobbyID, AwardLink]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
@@ -556,8 +427,8 @@ class BudUnit:
             x_charunit.clear_lobbyships()
 
     def set_time_facts(self, open: datetime = None, nigh: datetime = None) -> None:
-        open_minutes = self.get_time_min_from_dt(dt=open) if open is not None else None
-        nigh_minutes = self.get_time_min_from_dt(dt=nigh) if nigh is not None else None
+        open_minutes = get_time_min_from_dt(dt=open) if open is not None else None
+        nigh_minutes = get_time_min_from_dt(dt=nigh) if nigh is not None else None
         time_road = self.make_l1_road("time")
         minutes_fact = self.make_road(time_road, "jajatime")
         self.set_fact(

@@ -1,5 +1,4 @@
 from src._road.road import RoadUnit, is_string_in_road
-from src.bud.hreg_time import HregTimeIdeaSource
 from src.bud.idea import IdeaUnit
 from src.bud.bud import budunit_shop, BudUnit
 from src.bud.bud_time import (
@@ -57,17 +56,6 @@ from src.bud.bud_time import (
 )
 from src.bud.examples.example_time import get_budunit_sue_TimeExample
 from copy import deepcopy as copy_deepcopy
-
-
-def test_HregTimeIdeaSource_Exists():
-    # ESTABLISH
-    slash_text = "/"
-
-    # WHEN
-    x_hregtimeideasource = HregTimeIdeaSource(slash_text)
-
-    # THEN
-    assert x_hregtimeideasource.delimiter == slash_text
 
 
 # def test_get_jajatime_week_legible_text_ReturnsObj():

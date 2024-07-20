@@ -2,6 +2,7 @@ from datetime import datetime
 from src._road.road import RoadUnit
 from src.bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.bud.idea import IdeaUnit, ideaunit_shop
+from src.bud.hreg_time import get_time_min_from_dt
 from src.bud.reason_idea import reasonunit_shop
 from src.bud.lobby import awardlink_shop
 from src.bud.reason_doer import doerunit_shop
@@ -493,13 +494,13 @@ def test_BudUnit_set_fact_WeekdayBudItemsCorrectlyReturned():
     fri_dt = datetime(2000, 1, 7)
     sat_dt = datetime(2000, 1, 1)
     sun_dt = datetime(2000, 1, 2)
-    mon_min = sue_bud.get_time_min_from_dt(dt=mon_dt)
-    tue_min = sue_bud.get_time_min_from_dt(dt=tue_dt)
-    wed_min = sue_bud.get_time_min_from_dt(dt=wed_dt)
-    thu_min = sue_bud.get_time_min_from_dt(dt=thu_dt)
-    fri_min = sue_bud.get_time_min_from_dt(dt=fri_dt)
-    sat_min = sue_bud.get_time_min_from_dt(dt=sat_dt)
-    sun_min = sue_bud.get_time_min_from_dt(dt=sun_dt)
+    mon_min = get_time_min_from_dt(dt=mon_dt)
+    tue_min = get_time_min_from_dt(dt=tue_dt)
+    wed_min = get_time_min_from_dt(dt=wed_dt)
+    thu_min = get_time_min_from_dt(dt=thu_dt)
+    fri_min = get_time_min_from_dt(dt=fri_dt)
+    sat_min = get_time_min_from_dt(dt=sat_dt)
+    sun_min = get_time_min_from_dt(dt=sun_dt)
     assert sue_bud._idearoot._factunits.get(jaja_road) is None
 
     # WHEN
@@ -548,8 +549,8 @@ def test_BudUnit_set_fact_WeekdayBudItemsCorrectlyReturned():
     # print("\nset facts for 10 day stretch")
     # dayzero_dt = datetime(2010, 1, 3)
     # dayten_dt = datetime(2010, 1, 13)
-    # dayzero_min = sue_bud.get_time_min_from_dt(dt=dayzero_dt)
-    # dayten_min = sue_bud.get_time_min_from_dt(dt=dayten_dt)
+    # dayzero_min = get_time_min_from_dt(dt=dayzero_dt)
+    # dayten_min = get_time_min_from_dt(dt=dayten_dt)
     # sue_bud.set_fact(jaja_road, jaja_road, open=dayzero_min, nigh=dayten_min)
     # for fact in sue_bud._idearoot._factunits.values():
     #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
@@ -656,8 +657,6 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     print(f"\nIdea = '{night_text}' and reason '{jajatime_road}'")
     factheir_jajatime = night_idea._factheirs.get(jajatime_road)
     print(f"\n{factheir_jajatime=}")
-    print(f"      {yao_bud.get_jajatime_repeating_legible_text(open=1063998720)}")
-    print(f"      {yao_bud.get_jajatime_repeating_legible_text(open=1064130373)}")
 
     # for reasonheir in agenda_item._reasonheirs.values():
     #     print(f"{reasonheir.base=} {reasonheir._status=} {reasonheir._task=}")

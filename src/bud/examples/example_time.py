@@ -481,11 +481,6 @@ class X7TimeIdeaSource:
         else:
             return f"{open_12hr}:{x_open_minutes}{am_pm}"
 
-    def get_time_min_from_dt(self, dt: datetime) -> float:
-        ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
-        min_time_difference = dt - ce_src
-        return round(min_time_difference.total_seconds() / 60) + 527040
-
     def get_number_with_letter_ending(self, num: int) -> str:
         tens_digit = num % 100
         singles_digit = num % 10

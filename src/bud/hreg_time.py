@@ -209,9 +209,9 @@ class HregTimeIdeaSource:
         c400_road = self.roxd(tech_root, get_c400())
         node_0_100_road = self.roxd(c400_road, node_0_100)
         nr_yr4wl = self.roxd(node_0_100_road, tech)
-        hreg_list = [YB(n=tech, rr=self.get_tech_road(local_root), nr=nr_yr4wl)]
+        hreg_list = [YB(n=tech, rr=self.get_tech_road(local_root))]
 
-        hreg_list = [YB(n=tech, rr=self.get_tech_road(local_root), nr=nr_yr4wl)]
+        hreg_list = [YB(n=tech, rr=self.get_tech_road(local_root))]
         rt = self.get_tech_type_road(local_root, tech)
         y365 = self.roxd(tech_root, "365 year")
         y366 = self.roxd(tech_root, "366 year")
@@ -453,21 +453,6 @@ class HregTimeIdeaSource:
         hreg_list.append(YB(b=58 * m, c=59 * m, rr=rt, n="58-:58"))
         hreg_list.append(YB(b=59 * m, c=60 * m, rr=rt, n="59-:59"))
         return hreg_list
-
-    def get_jajatime_legible_from_dt(self, dt: datetime) -> str:
-        weekday_text = dt.strftime("%A")
-        monthdescription_text = dt.strftime("%B")
-        monthday_text = get_number_with_letter_ending(int(dt.strftime("%d")))
-        year_text = dt.strftime("%Y")
-        hour_int = int(dt.strftime("%H"))
-        min_int = int(dt.strftime("%M"))
-        min1440 = (hour_int * 60) + min_int
-        return f"{weekday_text[:3]} {monthdescription_text[:3]} {monthday_text}, {year_text} at {readable_1440_time(min1440)}"
-
-    def get_time_min_from_dt(self, dt: datetime) -> float:
-        ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
-        min_time_difference = dt - ce_src
-        return round(min_time_difference.total_seconds() / 60) + 527040
 
     def get_tech_road(self, local_root) -> RoadUnit:
         return self.roxd(local_root, "tech")
@@ -806,3 +791,11 @@ def Nov():
 
 def Dec():
     return "Dec"
+
+
+def get_time_min_from_dt(dt: datetime) -> int:
+    ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
+    min_time_difference = dt - ce_src
+    return round(min_time_difference.total_seconds() / 60) + 527040
+
+
