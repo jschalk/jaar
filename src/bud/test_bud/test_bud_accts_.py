@@ -82,7 +82,7 @@ def test_BudUnit_set_acct_CorrectlySets_accts_lobbyships():
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
     assert len(yao_bud._accts) == 0
-    assert len(yao_bud.get_lobby_ids_dict()) == 0
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 0
 
     # WHEN
     zia_text = "Zia"
@@ -95,7 +95,7 @@ def test_BudUnit_set_acct_CorrectlySets_accts_lobbyships():
     # THEN
     assert yao_bud._accts.get(zia_text)._bit == x_bit
     assert len(yao_bud._accts) == 3
-    assert len(yao_bud.get_lobby_ids_dict()) == 3
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 3
 
     # WHEN
     zia_lobby = zia_text
@@ -122,7 +122,7 @@ def test_BudUnit_add_acctunit_CorrectlySets_accts():
 
     # THEN
     assert len(yao_bud._accts) == 3
-    assert len(yao_bud.get_lobby_ids_dict()) == 3
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 3
     assert yao_bud._accts.get(xio_text).credor_weight == 17
     assert yao_bud._accts.get(sue_text).debtor_weight == 5
     assert yao_bud._accts.get(xio_text)._bit == x_bit

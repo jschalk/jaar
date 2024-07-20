@@ -867,7 +867,7 @@ def test_BudUnit_set_awardlink_correctly_sets_awardlinks():
     sue_bud.add_acctunit(Xio_text)
 
     assert len(sue_bud._accts) == 3
-    assert len(sue_bud.get_lobby_ids_dict()) == 3
+    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 3
     swim_text = "swim"
     sue_bud.add_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, give_weight=10)

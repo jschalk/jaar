@@ -390,7 +390,7 @@ class BudUnit:
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
         return self._accts.get(acct_id)
 
-    def get_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
+    def get_charunit_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
             for x_lobby_id in x_acctunit._lobbyships.keys():
@@ -718,7 +718,7 @@ class BudUnit:
         _awardlinks_to_delete = [
             _awardlink_lobby_id
             for _awardlink_lobby_id in x_idea._awardlinks.keys()
-            if self.get_lobby_ids_dict().get(_awardlink_lobby_id) is None
+            if self.get_charunit_lobby_ids_dict().get(_awardlink_lobby_id) is None
         ]
         for _awardlink_lobby_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_lobby_id)
@@ -727,7 +727,7 @@ class BudUnit:
             _lobbyholds_to_delete = [
                 _lobbyhold_lobby_id
                 for _lobbyhold_lobby_id in x_idea._doerunit._lobbyholds
-                if self.get_lobby_ids_dict().get(_lobbyhold_lobby_id) is None
+                if self.get_charunit_lobby_ids_dict().get(_lobbyhold_lobby_id) is None
             ]
             for _lobbyhold_lobby_id in _lobbyholds_to_delete:
                 x_idea._doerunit.del_lobbyhold(_lobbyhold_lobby_id)
@@ -1000,7 +1000,7 @@ class BudUnit:
     ):
         if healerhold is not None:
             for x_lobby_id in healerhold._lobby_ids:
-                if self.get_lobby_ids_dict().get(x_lobby_id) is None:
+                if self.get_charunit_lobby_ids_dict().get(x_lobby_id) is None:
                     raise healerhold_lobby_id_Exception(
                         f"Idea cannot edit healerhold because lobby_id '{x_lobby_id}' does not exist as lobby in Bud"
                     )
@@ -1394,7 +1394,7 @@ class BudUnit:
 
     def _create_lobbyboxs_metrics(self):
         self._lobbyboxs = {}
-        for lobby_id, acct_id_set in self.get_lobby_ids_dict().items():
+        for lobby_id, acct_id_set in self.get_charunit_lobby_ids_dict().items():
             x_lobbybox = lobbybox_shop(lobby_id, _road_delimiter=self._road_delimiter)
             for x_acct_id in acct_id_set:
                 x_lobbyship = self.get_acct(x_acct_id).get_lobbyship(lobby_id)

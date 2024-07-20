@@ -369,7 +369,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
-    assert len(sue_bud.get_lobby_ids_dict()) == 3
+    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 3
 
     # WHEN
     sue_bud.settle_bud()
@@ -396,7 +396,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
     sue_awardlink = awardlink_shop(sue_text, give_weight=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
-    assert len(sue_bud.get_lobby_ids_dict()) == 4
+    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 4
 
     # WHEN
     sue_bud.settle_bud()
@@ -443,7 +443,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsLobbyBox_fund_give_fund_take(
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(parm_awardlink)
-    assert len(x_bud.get_lobby_ids_dict()) == 3
+    assert len(x_bud.get_charunit_lobby_ids_dict()) == 3
 
     # WHEN
     x_bud.settle_bud()
@@ -458,14 +458,65 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsLobbyBox_fund_give_fund_take(
     assert zia_lobbybox._fund_take == 0.125 * default_fund_pool()
     assert xio_lobbybox._fund_give == 0.25 * default_fund_pool()
     assert xio_lobbybox._fund_take == 0.125 * default_fund_pool()
-    assert (
+    lobbybox_fund_give_sum = (
         yao_lobbybox._fund_give + zia_lobbybox._fund_give + xio_lobbybox._fund_give
-        == 1 * default_fund_pool()
     )
-    assert (
+    lobbybox_fund_take_sum = (
         yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
-        == 1 * default_fund_pool()
     )
+    assert lobbybox_fund_give_sum == 1 * default_fund_pool()
+    assert lobbybox_fund_take_sum == 1 * default_fund_pool()
+
+
+def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
+    # ESTABLISH
+    prom_text = "prom"
+    x_bud = budunit_shop(prom_text)
+    swim_text = "swim"
+    swim_road = x_bud.make_l1_road(swim_text)
+    x_bud.add_l1_idea(ideaunit_shop(swim_text))
+
+    yao_text = "Yao"
+    zia_text = "Zia"
+    xio_text = "Xio"
+    x_bud.set_acctunit(acctunit_shop(yao_text))
+    x_bud.set_acctunit(acctunit_shop(zia_text))
+    # x_bud.set_acctunit(acctunit_shop(xio_text))
+    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
+    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
+    parm_awardlink = awardlink_shop(xio_text, give_weight=10)
+    swim_idea = x_bud.get_idea_obj(swim_road)
+    swim_idea.set_awardlink(yao_awardlink)
+    swim_idea.set_awardlink(zia_awardlink)
+    swim_idea.set_awardlink(parm_awardlink)
+    assert len(x_bud.get_charunit_lobby_ids_dict()) == 2
+
+    # WHEN
+    x_bud.settle_bud()
+
+    # THEN
+    yao_lobbybox = x_bud.get_lobbybox(yao_text)
+    zia_lobbybox = x_bud.get_lobbybox(zia_text)
+    xio_lobbybox = x_bud.get_lobbybox(xio_text)
+    assert len(x_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(x_bud.get_charunit_lobby_ids_dict()) != len(x_bud._lobbyboxs)
+    assert len(x_bud._lobbyboxs) == 3
+    assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
+    assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
+    assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
+    assert zia_lobbybox._fund_take == 0.125 * default_fund_pool()
+    assert xio_lobbybox._fund_give == 0.25 * default_fund_pool()
+    assert xio_lobbybox._fund_take == 0.125 * default_fund_pool()
+    lobbybox_fund_give_sum = (
+        yao_lobbybox._fund_give + zia_lobbybox._fund_give + xio_lobbybox._fund_give
+    )
+    lobbybox_fund_take_sum = (
+        yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
+    )
+    assert lobbybox_fund_give_sum == 1 * default_fund_pool()
+    assert lobbybox_fund_take_sum == 1 * default_fund_pool()
+
+    assert 1 == 2
 
 
 def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fund_give_fund_take():
