@@ -1,4 +1,4 @@
-from src.bud.hreg_time import PremiseUnitHregTime
+from src.bud.bud_time import PremiseUnitHregTime
 from pytest import raises as pytest_raises
 
 

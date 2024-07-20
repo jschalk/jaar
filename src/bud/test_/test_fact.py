@@ -3,11 +3,9 @@ from src.bud.reason_idea import (
     factunit_shop,
     factheir_shop,
     FactCore,
-    factunit_shop as c_factunit,
     factunits_get_from_dict,
 )
 from src._road.road import get_default_real_id_roadnode as root_label, create_road
-from pytest import raises as pytest_raises
 
 
 def test_FactUnit_exists():
