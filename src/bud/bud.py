@@ -423,6 +423,11 @@ class BudUnit:
             x_lobbybox.set_lobbyship(x_lobbyship)
         return x_lobbybox
 
+    def get_tree_traverse_generated_lobbyboxs(self) -> set[LobbyID]:
+        x_acctunit_lobby_ids = set(self.get_charunit_lobby_ids_dict().keys())
+        all_lobby_ids = set(self._lobbyboxs.keys())
+        return all_lobby_ids.difference(x_acctunit_lobby_ids)
+
     def clear_acctunits_lobbyships(self):
         for x_acctunit in self._accts.values():
             x_acctunit.clear_lobbyships()

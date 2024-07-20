@@ -522,3 +522,47 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():
     assert xio_lobbybox.lobbyship_exists(yao_text)
     assert xio_lobbybox.lobbyship_exists(zia_text)
     assert not xio_lobbybox.lobbyship_exists(xio_text)
+
+
+def test_BudUnit_get_tree_traverse_generated_lobbyboxs_ReturnsObj():
+    # ESTABLISH
+    yao_text = "yao"
+    yao_bud = budunit_shop(yao_text)
+    swim_text = "swim"
+    swim_road = yao_bud.make_l1_road(swim_text)
+    yao_bud.add_l1_idea(ideaunit_shop(swim_text))
+    zia_text = "Zia"
+    yao_bud.add_acctunit(yao_text)
+    yao_bud.add_acctunit(zia_text)
+    swim_idea = yao_bud.get_idea_obj(swim_road)
+    swim_idea.set_awardlink(awardlink_shop(yao_text))
+    swim_idea.set_awardlink(awardlink_shop(zia_text))
+    xio_text = "Xio"
+    swim_idea.set_awardlink(awardlink_shop(xio_text))
+    yao_bud.settle_bud()
+    assert yao_bud.lobbybox_exists(yao_text)
+    assert yao_bud.lobbybox_exists(zia_text)
+    assert yao_bud.lobbybox_exists(xio_text)
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
+
+    # WHEN
+    symmerty_lobby_ids = yao_bud.get_tree_traverse_generated_lobbyboxs()
+
+    # THEN
+    assert len(symmerty_lobby_ids) == 1
+    assert symmerty_lobby_ids == {xio_text}
+
+    # ESTABLISH
+    run_text = ",Run"
+    swim_idea.set_awardlink(awardlink_shop(run_text))
+    assert not yao_bud.lobbybox_exists(run_text)
+    yao_bud.settle_bud()
+    assert yao_bud.lobbybox_exists(run_text)
+
+    # WHEN
+    symmerty_lobby_ids = yao_bud.get_tree_traverse_generated_lobbyboxs()
+
+    # THEN
+    assert len(symmerty_lobby_ids) == 2
+    assert symmerty_lobby_ids == {xio_text, run_text}
