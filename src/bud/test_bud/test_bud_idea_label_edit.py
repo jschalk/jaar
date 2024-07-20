@@ -508,7 +508,7 @@ def test_bud_set_road_delimiter_CorrectlyModifies_numeric_roadAND_range_source_r
     comma_taste_road = zia_bud.make_l1_road(taste_text)
     zia_bud.edit_idea_attr(comma_cook_road, numeric_road=comma_taste_road)
 
-    # range_source
+    # range_source_road
     heat_text = "heat numbers"
     zia_bud.add_l1_idea(ideaunit_shop(heat_text, _begin=0, _close=6))
     comma_heat_road = zia_bud.make_l1_road(heat_text)
