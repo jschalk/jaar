@@ -503,6 +503,9 @@ class IdeaUnit:
                 awardheirs_take_weight_sum=awardheirs_take_weight_sum,
             )
 
+    def awardheirs_exist(self) -> bool:
+        return self._awardheirs != {}
+
     def clear_awardlines(self):
         self._awardlines = {}
 
@@ -872,7 +875,7 @@ class IdeaUnit:
     def is_arithmetic(self):
         return self._begin is not None and self._close is not None
 
-    def is_awardheirless(self):
+    def awardheir_exists(self):
         x_bool = None
         if self._awardheirs in [{}, None]:
             x_bool = True
