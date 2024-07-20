@@ -13,33 +13,32 @@ from pytest import raises as pytest_raises
 from dataclasses import dataclass
 
 
-def test_BudUnit_settle_bud_CorrectlyCalculates1LevelBudLobbyBudImportance():
+def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_take():
     # ESTABLISH
-    prom_text = "prom"
-    x_bud = budunit_shop(prom_text)
+    sue_text = "Sue"
+    sue_bud = budunit_shop(sue_text)
     yao_text = "Yao"
     zia_text = "Zia"
     xio_text = "Xio"
-    sue_text = "Sue"
-    x_bud.set_acctunit(acctunit_shop(yao_text))
-    x_bud.set_acctunit(acctunit_shop(zia_text))
-    x_bud.set_acctunit(acctunit_shop(xio_text))
+    sue_bud.set_acctunit(acctunit_shop(yao_text))
+    sue_bud.set_acctunit(acctunit_shop(zia_text))
+    sue_bud.set_acctunit(acctunit_shop(xio_text))
     yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
     zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
     xio_awardlink = awardlink_shop(xio_text, give_weight=10)
-    x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
+    x_idearoot = sue_bud.get_idea_obj(sue_bud._real_id)
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
-    assert len(x_bud.get_lobby_ids_dict()) == 3
+    assert len(sue_bud.get_lobby_ids_dict()) == 3
 
     # WHEN
-    x_bud.settle_bud()
+    sue_bud.settle_bud()
 
     # THEN
-    yao_lobbybox = x_bud.get_lobbybox(yao_text)
-    zia_lobbybox = x_bud.get_lobbybox(zia_text)
-    xio_lobbybox = x_bud.get_lobbybox(xio_text)
+    yao_lobbybox = sue_bud.get_lobbybox(yao_text)
+    zia_lobbybox = sue_bud.get_lobbybox(zia_text)
+    xio_lobbybox = sue_bud.get_lobbybox(xio_text)
     assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
     assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
     assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
@@ -54,20 +53,20 @@ def test_BudUnit_settle_bud_CorrectlyCalculates1LevelBudLobbyBudImportance():
     assert debt_sum1 == 1 * default_fund_pool()
 
     # ESTABLISH
-    x_bud.set_acctunit(acctunit_shop(sue_text))
+    sue_bud.set_acctunit(acctunit_shop(sue_text))
     sue_awardlink = awardlink_shop(sue_text, give_weight=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
-    assert len(x_bud.get_lobby_ids_dict()) == 4
+    assert len(sue_bud.get_lobby_ids_dict()) == 4
 
     # WHEN
-    x_bud.settle_bud()
+    sue_bud.settle_bud()
 
     # THEN
-    yao_lobbybox = x_bud.get_lobbybox(yao_text)
-    zia_lobbybox = x_bud.get_lobbybox(zia_text)
-    xio_lobbybox = x_bud.get_lobbybox(xio_text)
-    sue_lobbybox = x_bud.get_lobbybox(sue_text)
+    yao_lobbybox = sue_bud.get_lobbybox(yao_text)
+    zia_lobbybox = sue_bud.get_lobbybox(zia_text)
+    xio_lobbybox = sue_bud.get_lobbybox(xio_text)
+    sue_lobbybox = sue_bud.get_lobbybox(sue_text)
     assert yao_lobbybox._fund_give != 0.5 * default_fund_pool()
     assert yao_lobbybox._fund_take != 0.75 * default_fund_pool()
     assert zia_lobbybox._fund_give != 0.25 * default_fund_pool()
@@ -84,7 +83,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculates1LevelBudLobbyBudImportance():
     assert round(debt_sum1) == 1 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_CorrectlyCalculates3levelBudLobbyBudImportance():
+def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsLobbyBox_fund_give_fund_take():
     # ESTABLISH
     prom_text = "prom"
     x_bud = budunit_shop(prom_text)
@@ -130,7 +129,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculates3levelBudLobbyBudImportance():
     )
 
 
-def test_BudUnit_settle_bud_CorrectlyCalculatesLobbyBudImportanceLWwithLobbyEmptyAncestors():
+def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fund_give_fund_take():
     # ESTABLISH
     prom_text = "prom"
     x_bud = budunit_shop(prom_text)
@@ -197,24 +196,6 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesLobbyBudImportanceLWwithLobbyEmpt
         yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
         == 0.25 * default_fund_pool()
     )
-
-
-def test_BudUnit_IsAbleToEditFactUnitAnyAncestor_Idea_1():
-    x_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
-    ced_min_label = "CE0_minutes"
-    ced_road = x_bud.make_l1_road(ced_min_label)
-    x_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
-    mail_road = x_bud.make_l1_road("obtain mail")
-    idea_dict = x_bud.get_idea_dict()
-    mail_idea = idea_dict.get(mail_road)
-    assert mail_idea.pledge == True
-    assert mail_idea._task is False
-
-    x_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=95)
-    idea_dict = x_bud.get_idea_dict()
-    mail_idea = idea_dict.get(mail_road)
-    assert mail_idea.pledge == True
-    assert mail_idea._task == True
 
 
 def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudImportance():
@@ -531,7 +512,7 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBudImportance():
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySetsAcctAttrs():
+def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     yao_bud.add_l1_idea(ideaunit_shop("swim"))

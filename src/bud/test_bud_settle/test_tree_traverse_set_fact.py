@@ -9,6 +9,32 @@ from src.bud.bud import budunit_shop
 from pytest import raises as pytest_raises
 
 
+def test_BudUnit_set_fact_IsAbleToEditFactUnitAnyAncestor_Idea_1():
+    # ESTABLISH
+    x_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
+    ced_min_label = "CE0_minutes"
+    ced_road = x_bud.make_l1_road(ced_min_label)
+
+    # WHEN
+    x_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
+
+    # THEN
+    mail_road = x_bud.make_l1_road("obtain mail")
+    idea_dict = x_bud.get_idea_dict()
+    mail_idea = idea_dict.get(mail_road)
+    assert mail_idea.pledge == True
+    assert mail_idea._task is False
+
+    # WHEN
+    x_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=95)
+
+    # THEN
+    idea_dict = x_bud.get_idea_dict()
+    mail_idea = idea_dict.get(mail_road)
+    assert mail_idea.pledge == True
+    assert mail_idea._task == True
+
+
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
     x_bud = get_budunit_with_4_levels()
