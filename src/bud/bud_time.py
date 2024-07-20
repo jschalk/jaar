@@ -1,4 +1,8 @@
-from src.bud.hreg_time import readable_1440_time, get_number_with_letter_ending
+from src.bud.hreg_time import (
+    readable_1440_time,
+    get_number_with_letter_ending,
+    get_time_min_from_dt,
+)
 from src.bud.idea import ideaunit_shop as i_shop
 from src.bud.bud import BudUnit
 from datetime import datetime
@@ -877,6 +881,21 @@ def get_time_hour_from_min(x_budunit: BudUnit, min: int) -> set[int, int, list[i
     hr_num = int(hr_x._label.split("-")[0])
     min60 = int(hr_rem_min % (hr_x._close - hr_x._begin))
     return hr_num, min60, hr_x
+
+
+def set_time_facts(
+    x_budunit: BudUnit, open: datetime = None, nigh: datetime = None
+) -> None:
+    open_minutes = get_time_min_from_dt(dt=open) if open is not None else None
+    nigh_minutes = get_time_min_from_dt(dt=nigh) if nigh is not None else None
+    time_road = x_budunit.make_l1_road("time")
+    minutes_fact = x_budunit.make_road(time_road, "jajatime")
+    x_budunit.set_fact(
+        base=minutes_fact,
+        pick=minutes_fact,
+        open=open_minutes,
+        nigh=nigh_minutes,
+    )
 
 
 def years_str() -> str:

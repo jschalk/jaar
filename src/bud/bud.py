@@ -62,12 +62,7 @@ from src.bud.reason_idea import (
 )
 from src.bud.reason_doer import DoerUnit
 from src.bud.tree_metrics import TreeMetrics, treemetrics_shop
-from src.bud.hreg_time import (
-    HregTimeIdeaSource as HregIdea,
-    get_number_with_letter_ending,
-    readable_1440_time,
-    get_time_min_from_dt,
-)
+from src.bud.hreg_time import get_time_min_from_dt
 from src.bud.lemma import lemmas_shop, Lemmas
 from src.bud.origin import originunit_get_from_dict, originunit_shop, OriginUnit
 from src.bud.idea import (
@@ -425,18 +420,6 @@ class BudUnit:
     def clear_charunits_lobbyships(self):
         for x_charunit in self._chars.values():
             x_charunit.clear_lobbyships()
-
-    def set_time_facts(self, open: datetime = None, nigh: datetime = None) -> None:
-        open_minutes = get_time_min_from_dt(dt=open) if open is not None else None
-        nigh_minutes = get_time_min_from_dt(dt=nigh) if nigh is not None else None
-        time_road = self.make_l1_road("time")
-        minutes_fact = self.make_road(time_road, "jajatime")
-        self.set_fact(
-            base=minutes_fact,
-            pick=minutes_fact,
-            open=open_minutes,
-            nigh=nigh_minutes,
-        )
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
         if self._real_id == idea_road:

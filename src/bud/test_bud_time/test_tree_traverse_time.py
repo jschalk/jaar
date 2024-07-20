@@ -6,6 +6,7 @@ from src.bud.bud_time import (
     get_time_c400_from_min,
     get_time_dt_from_min,
     get_time_c400yr_from_min,
+    set_time_facts,
 )
 from datetime import datetime
 from random import randint
@@ -121,7 +122,7 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
     # WHEN
     x_open = datetime(2000, 1, 1, 0, 0)
     x_nigh = datetime(2003, 11, 15, 4, 0)
-    sue_bud.set_time_facts(open=x_open, nigh=x_nigh)
+    set_time_facts(sue_bud, open=x_open, nigh=x_nigh)
 
     # THEN
     time_text = "time"
