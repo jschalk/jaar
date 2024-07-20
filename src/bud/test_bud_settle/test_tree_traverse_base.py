@@ -253,9 +253,8 @@ def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
 
 def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     # ESTABLISH
-    prom_text = "prom"
-    x_bud = budunit_shop(prom_text)
     yao_text = "Yao"
+    x_bud = budunit_shop(yao_text)
     zia_text = "Zia"
     Xio_text = "Xio"
     x_bud.add_acctunit(yao_text)
@@ -263,7 +262,7 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     x_bud.add_acctunit(Xio_text)
 
     swim_text = "swim"
-    swim_road = x_bud.make_road(prom_text, swim_text)
+    swim_road = x_bud.make_l1_road(swim_text)
 
     x_bud.add_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, give_weight=10)
@@ -440,3 +439,86 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddT
 
     # THEN
     assert sue_budunit._offtrack_kids_weight_set == {clean_road}
+
+
+def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
+    # ESTABLISH
+    yao_text = "Yao"
+    yao_bud = budunit_shop(yao_text)
+    zia_text = "Zia"
+    yao_credor_weight = 3
+    yao_debtor_weight = 2
+    zia_credor_weight = 4
+    zia_debtor_weight = 5
+    yao_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
+    yao_bud.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    x_idearoot = yao_bud.get_idea_obj(yao_bud._real_id)
+    x_idearoot.set_awardlink(awardlink_shop(yao_text))
+    x_idearoot.set_awardlink(awardlink_shop(zia_text))
+    xio_text = "Xio"
+    x_idearoot.set_awardlink(awardlink_shop(xio_text))
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
+    assert not yao_bud.lobbybox_exists(yao_text)
+    assert not yao_bud.lobbybox_exists(zia_text)
+    assert not yao_bud.lobbybox_exists(xio_text)
+
+    # WHEN
+    yao_bud.settle_bud()
+
+    # THEN
+    assert yao_bud.lobbybox_exists(yao_text)
+    assert yao_bud.lobbybox_exists(zia_text)
+    assert yao_bud.lobbybox_exists(xio_text)
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
+    assert len(yao_bud._lobbyboxs) == 3
+    xio_lobbybox = yao_bud.get_lobbybox(xio_text)
+    xio_symmerty_lobbybox = yao_bud.create_symmetry_lobbybox(xio_text)
+    assert xio_lobbybox._lobbyships.keys() == xio_symmerty_lobbybox._lobbyships.keys()
+    assert xio_lobbybox.lobbyship_exists(yao_text)
+    assert xio_lobbybox.lobbyship_exists(zia_text)
+    assert not xio_lobbybox.lobbyship_exists(xio_text)
+    yao_lobbyship = xio_lobbybox.get_lobbyship(yao_text)
+    zia_lobbyship = xio_lobbybox.get_lobbyship(zia_text)
+    assert yao_lobbyship.credor_weight == yao_credor_weight
+    assert zia_lobbyship.credor_weight == zia_credor_weight
+    assert yao_lobbyship.debtor_weight == yao_debtor_weight
+    assert zia_lobbyship.debtor_weight == zia_debtor_weight
+
+
+def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():
+    # ESTABLISH
+    yao_text = "yao"
+    yao_bud = budunit_shop(yao_text)
+    swim_text = "swim"
+    swim_road = yao_bud.make_l1_road(swim_text)
+    yao_bud.add_l1_idea(ideaunit_shop(swim_text))
+    zia_text = "Zia"
+    yao_bud.add_acctunit(yao_text)
+    yao_bud.add_acctunit(zia_text)
+    swim_idea = yao_bud.get_idea_obj(swim_road)
+    swim_idea.set_awardlink(awardlink_shop(yao_text))
+    swim_idea.set_awardlink(awardlink_shop(zia_text))
+    xio_text = "Xio"
+    swim_idea.set_awardlink(awardlink_shop(xio_text))
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
+    assert not yao_bud.lobbybox_exists(yao_text)
+    assert not yao_bud.lobbybox_exists(zia_text)
+    assert not yao_bud.lobbybox_exists(xio_text)
+
+    # WHEN
+    yao_bud.settle_bud()
+
+    # THEN
+    assert yao_bud.lobbybox_exists(yao_text)
+    assert yao_bud.lobbybox_exists(zia_text)
+    assert yao_bud.lobbybox_exists(xio_text)
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(yao_bud.get_charunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
+    assert len(yao_bud._lobbyboxs) == 3
+    xio_lobbybox = yao_bud.get_lobbybox(xio_text)
+    xio_symmerty_lobbybox = yao_bud.create_symmetry_lobbybox(xio_text)
+    assert xio_lobbybox._lobbyships.keys() == xio_symmerty_lobbybox._lobbyships.keys()
+    assert xio_lobbybox.lobbyship_exists(yao_text)
+    assert xio_lobbybox.lobbyship_exists(zia_text)
+    assert not xio_lobbybox.lobbyship_exists(xio_text)
