@@ -1,10 +1,8 @@
-from src.bud.hreg_time import (
-    readable_1440_time,
-    get_number_with_letter_ending,
-    get_time_min_from_dt,
-)
+from src.bud.hreg_time import get_time_min_from_dt
 from src.bud.idea import ideaunit_shop as i_shop
 from src.bud.bud import BudUnit
+
+# from src.bud.bud_time import
 from datetime import datetime
 
 
@@ -709,6 +707,41 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     x_budunit.add_idea(year_x_withleap_idea, node_3_96_road)
 
     return x_budunit
+
+
+def readable_1440_time(min1440: int) -> str:
+    min60 = min1440 % 60
+    x_open_minutes = f"0{min60:.0f}" if min60 < 10 else f"{min60:.0f}"
+    open_24hr = int(f"{min1440 // 60:.0f}")
+    open_12hr = ""
+    am_pm = ""
+    if min1440 < 720:
+        am_pm = "am"
+        open_12hr = open_24hr
+    else:
+        am_pm = "pm"
+        open_12hr = open_24hr - 12
+
+    if open_24hr == 0:
+        open_12hr = 12
+
+    if x_open_minutes == "00":
+        return f"{open_12hr}{am_pm}"
+    else:
+        return f"{open_12hr}:{x_open_minutes}{am_pm}"
+
+
+def get_number_with_letter_ending(num: int) -> str:
+    tens_digit = num % 100
+    singles_digit = num % 10
+    if tens_digit in [11, 12, 13] or singles_digit not in [1, 2, 3]:
+        return f"{num}th"
+    elif singles_digit == 1:
+        return f"{num}st"
+    elif singles_digit == 2:
+        return f"{num}nd"
+    else:
+        return f"{num}rd"
 
 
 def _get_jajatime_week_legible_text(x_budunit: BudUnit, open: int, divisor: int) -> str:
