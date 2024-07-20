@@ -1,4 +1,3 @@
-from src._road.road import LobbyID
 from src.bud.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
 
 

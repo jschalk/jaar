@@ -24,21 +24,21 @@ def test_bud_idearoot_doerunit_CorrectlySets_idea_doerheir():
     # ESTABLISH
     x_doerunit = doerunit_shop()
 
-    tim_bud = budunit_shop("Tim")
-    tim_bud.edit_idea_attr(doerunit=x_doerunit, road=tim_bud._real_id)
-    assert tim_bud._idearoot._doerunit == x_doerunit
-    assert tim_bud._idearoot._doerheir is None
+    yao_bud = budunit_shop("Yao")
+    yao_bud.edit_idea_attr(doerunit=x_doerunit, road=yao_bud._real_id)
+    assert yao_bud._idearoot._doerunit == x_doerunit
+    assert yao_bud._idearoot._doerheir is None
 
     # WHEN
-    tim_bud.settle_bud()
+    yao_bud.settle_bud()
 
     # THEN
     x_doerheir = doerheir_shop()
     x_doerheir.set_lobbyholds(
         parent_doerheir=None, doerunit=x_doerunit, bud_lobbyboxs=None
     )
-    assert tim_bud._idearoot._doerheir is not None
-    assert tim_bud._idearoot._doerheir == x_doerheir
+    assert yao_bud._idearoot._doerheir is not None
+    assert yao_bud._idearoot._doerheir == x_doerheir
 
 
 def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():

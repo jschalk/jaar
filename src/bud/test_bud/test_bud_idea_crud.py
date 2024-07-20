@@ -1,3 +1,4 @@
+from src._road.finance import default_fund_pool
 from src.bud.healer import healerhold_shop
 from src.bud.examples.example_buds import get_budunit_with_4_levels
 from src.bud.idea import ideaunit_shop
@@ -1092,3 +1093,110 @@ def test_BudUnit_idea_exists_ReturnsCorrectBool():
     assert sue_bud.idea_exists(swim_road) is False
     assert sue_bud.idea_exists(idaho_road) is False
     assert sue_bud.idea_exists(japan_road) is False
+
+
+def test_BudUnit_set_offtrack_fund_ReturnsObj():
+    # ESTABLISH
+    bob_budunit = budunit_shop("Bob")
+    assert not bob_budunit._offtrack_fund
+
+    # WHEN
+    bob_budunit.set_offtrack_fund() == 0
+
+    # THEN
+    assert bob_budunit._offtrack_fund == 0
+
+    # ESTABLISH
+    casa_text = "casa"
+    week_text = "week"
+    wed_text = "Wednesday"
+    casa_road = bob_budunit.make_l1_road(casa_text)
+    week_road = bob_budunit.make_l1_road(week_text)
+    wed_road = bob_budunit.make_road(week_road, wed_text)
+    casa_idea = ideaunit_shop(casa_text, _fund_onset=70, _fund_cease=170)
+    week_idea = ideaunit_shop(week_text, _fund_onset=70, _fund_cease=75)
+    wed_idea = ideaunit_shop(wed_text, _fund_onset=72, _fund_cease=75)
+    casa_idea._parent_road = bob_budunit._real_id
+    week_idea._parent_road = bob_budunit._real_id
+    wed_idea._parent_road = week_road
+    bob_budunit.add_l1_idea(casa_idea)
+    bob_budunit.add_l1_idea(week_idea)
+    bob_budunit.add_idea(wed_idea, week_road)
+    bob_budunit._offtrack_kids_weight_set.add(casa_road)
+    bob_budunit._offtrack_kids_weight_set.add(week_road)
+    assert bob_budunit._offtrack_fund == 0
+
+    # WHEN
+    bob_budunit.set_offtrack_fund()
+
+    # THEN
+    assert bob_budunit._offtrack_fund == 105
+
+    # WHEN
+    bob_budunit._offtrack_kids_weight_set.add(wed_road)
+    bob_budunit.set_offtrack_fund()
+
+    # THEN
+    assert bob_budunit._offtrack_fund == 108
+
+
+def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
+    # ESTABLISH
+    bob_text = "Bob"
+    yao_text = "Yao"
+    sue_text = "Sue"
+    bob_budunit = budunit_shop(bob_text)
+    bob_budunit.add_acctunit(bob_text)
+    bob_budunit.add_acctunit(yao_text, credor_weight=2)
+    bob_budunit.add_acctunit(sue_text, debtor_weight=2)
+    bob_budunit.set_offtrack_fund()
+    assert bob_budunit._offtrack_fund == 0
+
+    # WHEN
+    bob_budunit._allot_offtrack_fund()
+
+    # THEN
+    assert bob_budunit.get_acct(bob_text)._fund_give == 0
+    assert bob_budunit.get_acct(bob_text)._fund_take == 0
+    assert bob_budunit.get_acct(yao_text)._fund_give == 0
+    assert bob_budunit.get_acct(yao_text)._fund_take == 0
+    assert bob_budunit.get_acct(sue_text)._fund_give == 0
+    assert bob_budunit.get_acct(sue_text)._fund_take == 0
+
+    # WHEN
+    casa_text = "casa"
+    week_text = "week"
+    wed_text = "Wednesday"
+    casa_road = bob_budunit.make_l1_road(casa_text)
+    week_road = bob_budunit.make_l1_road(week_text)
+    wed_road = bob_budunit.make_road(week_road, wed_text)
+    casa_idea = ideaunit_shop(casa_text, _fund_onset=70, _fund_cease=170)
+    week_idea = ideaunit_shop(week_text, _fund_onset=70, _fund_cease=75)
+    wed_idea = ideaunit_shop(wed_text, _fund_onset=72, _fund_cease=75)
+    casa_idea._parent_road = bob_budunit._real_id
+    week_idea._parent_road = bob_budunit._real_id
+    wed_idea._parent_road = week_road
+    bob_budunit.add_l1_idea(casa_idea)
+    bob_budunit.add_l1_idea(week_idea)
+    bob_budunit.add_idea(wed_idea, week_road)
+    bob_budunit._offtrack_kids_weight_set.add(casa_road)
+    bob_budunit._offtrack_kids_weight_set.add(week_road)
+    bob_budunit.set_offtrack_fund()
+    assert bob_budunit._offtrack_fund == 105
+
+    # WHEN
+    bob_budunit._allot_offtrack_fund()
+
+    # THEN
+    assert bob_budunit.get_acct(bob_text)._fund_give == 26
+    assert bob_budunit.get_acct(bob_text)._fund_take == 26
+    assert bob_budunit.get_acct(yao_text)._fund_give == 53
+    assert bob_budunit.get_acct(yao_text)._fund_take == 26
+    assert bob_budunit.get_acct(sue_text)._fund_give == 26
+    assert bob_budunit.get_acct(sue_text)._fund_take == 53
+
+    bob_budunit._offtrack_kids_weight_set.add(wed_road)
+    bob_budunit.set_offtrack_fund()
+
+    # THEN
+    assert bob_budunit._offtrack_fund == 108

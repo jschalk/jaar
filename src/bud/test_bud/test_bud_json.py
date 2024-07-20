@@ -333,20 +333,20 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
     sue_text = "Sue"
     zia_bud.add_acctunit(acct_id=sue_text, credor_weight=199, debtor_weight=199)
-    tim_text = "Tim"
-    zia_bud.add_acctunit(acct_id=tim_text)
+    xio_text = "Xio"
+    zia_bud.add_acctunit(acct_id=xio_text)
     run_text = ",runners"
     sue_acctunit = zia_bud.get_acct(sue_text)
-    tim_acctunit = zia_bud.get_acct(tim_text)
+    xio_acctunit = zia_bud.get_acct(xio_text)
     sue_acctunit.add_lobbyship(run_text)
-    tim_acctunit.add_lobbyship(run_text)
+    xio_acctunit.add_lobbyship(run_text)
     run_doerunit = doerunit_shop()
     run_doerunit.set_lobbyhold(lobby_id=run_text)
     zia_bud.edit_idea_attr(zia_bud._real_id, doerunit=run_doerunit)
-    tim_doerunit = doerunit_shop()
-    tim_doerunit.set_lobbyhold(lobby_id=tim_text)
-    zia_bud.edit_idea_attr(shave_road, doerunit=tim_doerunit)
-    zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(tim_text))
+    xio_doerunit = doerunit_shop()
+    xio_doerunit.set_lobbyhold(lobby_id=xio_text)
+    zia_bud.edit_idea_attr(shave_road, doerunit=xio_doerunit)
+    zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(xio_text))
     zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
     zia_bud.edit_idea_attr(zia_bud._real_id, awardlink=awardlink_shop(sue_text))
     # add healerhold to shave ideaunit
@@ -413,7 +413,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_shave_idea = zia_bud.get_idea_obj(shave_road)
     assert len(json_shave_idea._reasonunits) == 1
     assert json_shave_idea._doerunit == zia_shave_idea._doerunit
-    assert json_shave_idea._doerunit == tim_doerunit
+    assert json_shave_idea._doerunit == xio_doerunit
     assert json_shave_idea._originunit == zia_shave_idea._originunit
     print(f"{json_shave_idea._healerhold=}")
     assert json_shave_idea._healerhold == zia_shave_idea._healerhold

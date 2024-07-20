@@ -100,6 +100,12 @@ class AcctUnit(AcctCore):
         self._irrational_debtor_weight = 0
         self._inallocable_debtor_weight = 0
 
+    def add_fund_give(self, fund_give: float):
+        self._fund_give += fund_give
+
+    def add_fund_take(self, fund_take: float):
+        self._fund_take += fund_take
+
     def add_fund_give_take(
         self,
         fund_give: float,
@@ -107,8 +113,8 @@ class AcctUnit(AcctCore):
         bud_agenda_cred: float,
         bud_agenda_debt,
     ):
-        self._fund_give += fund_give
-        self._fund_take += fund_take
+        self.add_fund_give(fund_give)
+        self.add_fund_take(fund_take)
         self._fund_agenda_give += bud_agenda_cred
         self._fund_agenda_take += bud_agenda_debt
 

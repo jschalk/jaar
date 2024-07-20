@@ -46,6 +46,8 @@ def test_BudUnit_Exists():
     assert x_bud._econs_justified is None
     assert x_bud._econs_buildable is None
     assert x_bud._sum_healerhold_share is None
+    assert x_bud._offtrack_kids_weight_set is None
+    assert x_bud._offtrack_fund is None
     assert str(type(x_bud._idearoot)).find("None") == 8
 
 
@@ -95,6 +97,8 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._econs_justified is False
     assert x_bud._econs_buildable is False
     assert x_bud._sum_healerhold_share == 0
+    assert x_bud._offtrack_kids_weight_set == set()
+    assert x_bud._offtrack_fund is None
     print(f"{type(x_bud._idearoot)=}") == 0
     assert str(type(x_bud._idearoot)).find(".idea.IdeaUnit'>") > 0
 

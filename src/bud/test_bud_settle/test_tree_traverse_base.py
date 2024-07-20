@@ -1,12 +1,10 @@
-from src._road.finance import default_fund_pool
 from src.bud.examples.example_buds import (
     get_budunit_with_4_levels,
-    get_budunit_with7amCleanTableReason,
     get_budunit_with_4_levels_and_2reasons,
 )
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.lobby import awardline_shop, awardlink_shop
+from src.bud.lobby import awardlink_shop
 from src.bud.graphic import display_ideatree
 
 
@@ -19,9 +17,11 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     sue_bud._rational = x_rational
     sue_bud._tree_traverse_count = x_tree_traverse_count
     sue_bud._idea_dict = x_idea_dict
+    sue_bud._offtrack_kids_weight_set = "example"
     assert sue_bud._rational == x_rational
     assert sue_bud._tree_traverse_count == x_tree_traverse_count
     assert sue_bud._idea_dict == x_idea_dict
+    assert sue_bud._offtrack_kids_weight_set != set()
 
     # WHEN
     sue_bud._set_tree_traverse_stage()
@@ -33,6 +33,7 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     assert sue_bud._tree_traverse_count == 0
     assert sue_bud._idea_dict != x_idea_dict
     assert sue_bud._idea_dict == {sue_bud._idearoot.get_road(): sue_bud._idearoot}
+    assert sue_bud._offtrack_kids_weight_set == set()
 
 
 def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
@@ -119,18 +120,18 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
 
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
-    tim_bud = budunit_shop(_owner_id="Tim")
-    assert tim_bud._idearoot._descendant_pledge_count is None
-    assert tim_bud._idearoot._all_acct_cred is None
-    assert tim_bud._idearoot._all_acct_debt is None
+    yao_bud = budunit_shop(_owner_id="Yao")
+    assert yao_bud._idearoot._descendant_pledge_count is None
+    assert yao_bud._idearoot._all_acct_cred is None
+    assert yao_bud._idearoot._all_acct_debt is None
 
     # WHEN
-    tim_bud.settle_bud()
+    yao_bud.settle_bud()
 
     # THEN
-    assert tim_bud._idearoot._descendant_pledge_count == 0
-    assert tim_bud._idearoot._all_acct_cred == True
-    assert tim_bud._idearoot._all_acct_debt == True
+    assert yao_bud._idearoot._descendant_pledge_count == 0
+    assert yao_bud._idearoot._all_acct_cred == True
+    assert yao_bud._idearoot._all_acct_debt == True
 
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
@@ -223,200 +224,6 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     assert week_idea._kids[tue_text]._all_acct_debt == True
 
 
-def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
-    # ESTABLISH
-    x_budunit = get_budunit_with7amCleanTableReason()
-    casa_road = x_budunit.make_l1_road("casa")
-    catt_road = x_budunit.make_l1_road("cat have dinner")
-    week_road = x_budunit.make_l1_road("weekdays")
-    x_budunit._idearoot._fund_onset = 13
-    x_budunit._idearoot._fund_cease = 13
-    x_budunit.get_idea_obj(casa_road)._fund_onset = 13
-    x_budunit.get_idea_obj(casa_road)._fund_cease = 13
-    x_budunit.get_idea_obj(catt_road)._fund_onset = 13
-    x_budunit.get_idea_obj(catt_road)._fund_cease = 13
-    x_budunit.get_idea_obj(week_road)._fund_onset = 13
-    x_budunit.get_idea_obj(week_road)._fund_cease = 13
-
-    assert x_budunit._idearoot._fund_onset == 13
-    assert x_budunit._idearoot._fund_cease == 13
-    assert x_budunit.get_idea_obj(casa_road)._fund_onset == 13
-    assert x_budunit.get_idea_obj(casa_road)._fund_cease == 13
-    assert x_budunit.get_idea_obj(catt_road)._fund_onset == 13
-    assert x_budunit.get_idea_obj(catt_road)._fund_cease == 13
-    assert x_budunit.get_idea_obj(week_road)._fund_onset == 13
-    assert x_budunit.get_idea_obj(week_road)._fund_cease == 13
-
-    # WHEN
-    x_budunit.settle_bud()
-
-    # THEN
-    assert x_budunit._idearoot._fund_onset != 13
-    assert x_budunit._idearoot._fund_cease != 13
-    assert x_budunit.get_idea_obj(casa_road)._fund_onset != 13
-    assert x_budunit.get_idea_obj(casa_road)._fund_cease != 13
-    assert x_budunit.get_idea_obj(catt_road)._fund_onset != 13
-    assert x_budunit.get_idea_obj(catt_road)._fund_cease != 13
-    assert x_budunit.get_idea_obj(week_road)._fund_onset != 13
-    assert x_budunit.get_idea_obj(week_road)._fund_cease != 13
-
-
-def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
-    # ESTABLISH
-    yao_budunit = budunit_shop("Yao", _weight=10)
-
-    auto_text = "auto"
-    auto_road = yao_budunit.make_l1_road(auto_text)
-    auto_idea = ideaunit_shop(auto_text, _weight=10)
-    yao_budunit.add_l1_idea(auto_idea)
-
-    barn_text = "barn"
-    barn_road = yao_budunit.make_l1_road(barn_text)
-    barn_idea = ideaunit_shop(barn_text, _weight=60)
-    yao_budunit.add_l1_idea(barn_idea)
-    lamb_text = "lambs"
-    lamb_road = yao_budunit.make_road(barn_road, lamb_text)
-    lamb_idea = ideaunit_shop(lamb_text, _weight=1)
-    yao_budunit.add_idea(lamb_idea, parent_road=barn_road)
-    duck_text = "ducks"
-    duck_road = yao_budunit.make_road(barn_road, duck_text)
-    duck_idea = ideaunit_shop(duck_text, _weight=2)
-    yao_budunit.add_idea(duck_idea, parent_road=barn_road)
-
-    coal_text = "coal"
-    coal_road = yao_budunit.make_l1_road(coal_text)
-    coal_idea = ideaunit_shop(coal_text, _weight=30)
-    yao_budunit.add_l1_idea(coal_idea)
-
-    assert yao_budunit._idearoot._fund_onset is None
-    assert yao_budunit._idearoot._fund_cease is None
-    assert yao_budunit.get_idea_obj(auto_road)._fund_onset is None
-    assert yao_budunit.get_idea_obj(auto_road)._fund_cease is None
-    assert yao_budunit.get_idea_obj(barn_road)._fund_onset is None
-    assert yao_budunit.get_idea_obj(barn_road)._fund_cease is None
-    assert yao_budunit.get_idea_obj(coal_road)._fund_onset is None
-    assert yao_budunit.get_idea_obj(coal_road)._fund_cease is None
-    lamb_before = yao_budunit.get_idea_obj(road=lamb_road)
-    assert lamb_before._fund_onset is None
-    assert lamb_before._fund_cease is None
-    duck_before = yao_budunit.get_idea_obj(road=duck_road)
-    assert duck_before._fund_onset is None
-    assert duck_before._fund_cease is None
-
-    # WHEN
-    yao_budunit.settle_bud()
-
-    # THEN
-    assert yao_budunit._idearoot._fund_onset == 0.0
-    assert yao_budunit._idearoot._fund_cease == default_fund_pool()
-    assert yao_budunit.get_idea_obj(auto_road)._fund_onset == 0.0
-    assert yao_budunit.get_idea_obj(auto_road)._fund_cease == default_fund_pool() * 0.1
-    assert yao_budunit.get_idea_obj(barn_road)._fund_onset == default_fund_pool() * 0.1
-    assert yao_budunit.get_idea_obj(barn_road)._fund_cease == default_fund_pool() * 0.7
-    assert yao_budunit.get_idea_obj(coal_road)._fund_onset == default_fund_pool() * 0.7
-    assert yao_budunit.get_idea_obj(coal_road)._fund_cease == default_fund_pool() * 1.0
-
-    duck_after = yao_budunit.get_idea_obj(road=duck_road)
-    assert duck_after._fund_onset == default_fund_pool() * 0.1
-    assert duck_after._fund_cease == default_fund_pool() * 0.5
-    lamb_after = yao_budunit.get_idea_obj(road=lamb_road)
-    assert lamb_after._fund_onset == default_fund_pool() * 0.5
-    assert lamb_after._fund_cease == default_fund_pool() * 0.7
-
-
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0():
-    sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    floor_text = "mop floor"
-    floor_road = sue_bud.make_road(casa_road, floor_text)
-    floor_idea = ideaunit_shop(floor_text, pledge=True)
-    sue_bud.add_idea(floor_idea, casa_road)
-    sue_bud.add_l1_idea(ideaunit_shop("unimportant"))
-
-    status_text = "cleaniness status"
-    status_road = sue_bud.make_road(casa_road, status_text)
-    sue_bud.add_idea(ideaunit_shop(status_text, _weight=0), casa_road)
-
-    non_text = "not clean"
-    yes_text = "yes clean"
-    non_road = sue_bud.make_road(status_road, non_text)
-    yes_road = sue_bud.make_road(status_road, yes_text)
-    sue_bud.add_idea(ideaunit_shop(non_text), status_road)
-    sue_bud.add_idea(ideaunit_shop(yes_text, _weight=2), status_road)
-
-    assert sue_bud.get_idea_obj(casa_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(floor_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(status_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(non_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(yes_road)._fund_ratio is None
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    print(f"{sue_bud._fund_pool=}")
-    assert sue_bud.get_idea_obj(casa_road)._fund_ratio == 0.5
-    assert sue_bud.get_idea_obj(floor_road)._fund_ratio == 0.5
-    assert sue_bud.get_idea_obj(status_road)._fund_ratio == 0.0
-    assert sue_bud.get_idea_obj(non_road)._fund_ratio == 0.0
-    assert sue_bud.get_idea_obj(yes_road)._fund_ratio == 0.0
-
-
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1():
-    sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    floor_text = "mop floor"
-    floor_road = sue_bud.make_road(casa_road, floor_text)
-    floor_idea = ideaunit_shop(floor_text, pledge=True)
-    sue_bud.add_idea(floor_idea, casa_road)
-    sue_bud.add_l1_idea(ideaunit_shop("unimportant"))
-
-    status_text = "cleaniness status"
-    status_road = sue_bud.make_road(casa_road, status_text)
-    sue_bud.add_idea(ideaunit_shop(status_text), casa_road)
-
-    status_idea = sue_bud.get_idea_obj(status_road)
-    print(f"{status_idea._weight=}")
-    print("This should raise error: 'Ideaunit._'")
-
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(status_road, clean_text)
-    very_text = "very_much"
-    mod_text = "moderately"
-    dirty_text = "dirty"
-
-    sue_bud.add_idea(ideaunit_shop(clean_text, _weight=0), status_road)
-    sue_bud.add_idea(ideaunit_shop(very_text), clean_road)
-    sue_bud.add_idea(ideaunit_shop(mod_text, _weight=2), clean_road)
-    sue_bud.add_idea(ideaunit_shop(dirty_text), clean_road)
-
-    very_road = sue_bud.make_road(clean_road, very_text)
-    mod_road = sue_bud.make_road(clean_road, mod_text)
-    dirty_road = sue_bud.make_road(clean_road, dirty_text)
-    assert sue_bud.get_idea_obj(casa_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(floor_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(status_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(clean_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(very_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(mod_road)._fund_ratio is None
-    assert sue_bud.get_idea_obj(dirty_road)._fund_ratio is None
-
-    # WHEN
-    sue_bud.settle_bud()
-
-    # THEN
-    print(f"{sue_bud._fund_pool=}")
-    assert sue_bud.get_idea_obj(casa_road)._fund_ratio == 0.5
-    assert sue_bud.get_idea_obj(floor_road)._fund_ratio == 0.25
-    assert sue_bud.get_idea_obj(status_road)._fund_ratio == 0.25
-    assert sue_bud.get_idea_obj(clean_road)._fund_ratio == 0
-    assert sue_bud.get_idea_obj(very_road)._fund_ratio == 0
-    assert sue_bud.get_idea_obj(mod_road)._fund_ratio == 0
-    assert sue_bud.get_idea_obj(dirty_road)._fund_ratio == 0
-
-
 def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     # ESTABLISH
     x_bud = get_budunit_with_4_levels()
@@ -442,98 +249,6 @@ def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
 
     # THEN
     assert not x_bud._idearoot._kids[casa_text]._awardlines
-
-
-def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
-    # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
-    # idea tree has no awardlinks
-    assert x_bud._idearoot._awardlines == {}
-    sue_text = "Sue"
-    week_text = "weekdays"
-    nation_text = "nation-state"
-    sue_awardlink = awardlink_shop(lobby_id=sue_text)
-    x_bud.add_acctunit(acct_id=sue_text)
-    x_bud._idearoot.set_awardlink(awardlink=sue_awardlink)
-    # idea tree has awardlines
-    assert x_bud._idearoot._awardheirs.get(sue_text) is None
-
-    # WHEN
-    x_bud.settle_bud()
-
-    # THEN
-    assert x_bud._idearoot._awardheirs.get(sue_text) is not None
-    assert x_bud._idearoot._awardheirs.get(sue_text).lobby_id == sue_text
-    assert x_bud._idearoot._awardlines != {}
-    root_idea = x_bud.get_idea_obj(road=x_bud._idearoot._label)
-    sue_awardline = x_bud._idearoot._awardlines.get(sue_text)
-    print(f"{sue_awardline._fund_give=} {root_idea._fund_ratio=} ")
-    print(f"  {sue_awardline._fund_take=} {root_idea._fund_ratio=} ")
-    sum_x = 0
-    cat_road = x_bud.make_l1_road("cat have dinner")
-    cat_idea = x_bud.get_idea_obj(cat_road)
-    week_road = x_bud.make_l1_road(week_text)
-    week_idea = x_bud.get_idea_obj(week_road)
-    casa_text = "casa"
-    casa_road = x_bud.make_l1_road(casa_text)
-    casa_idea = x_bud.get_idea_obj(casa_road)
-    nation_road = x_bud.make_l1_road(nation_text)
-    nation_idea = x_bud.get_idea_obj(nation_road)
-    sum_x = cat_idea._fund_ratio
-    print(f"{cat_idea._fund_ratio=} {sum_x} ")
-    sum_x += week_idea._fund_ratio
-    print(f"{week_idea._fund_ratio=} {sum_x} ")
-    sum_x += casa_idea._fund_ratio
-    print(f"{casa_idea._fund_ratio=} {sum_x} ")
-    sum_x += nation_idea._fund_ratio
-    print(f"{nation_idea._fund_ratio=} {sum_x} ")
-    assert sum_x >= 1.0
-    assert sum_x < 1.00000000001
-
-    # for kid_idea in root_idea._kids.values():
-    #     sum_x += kid_idea._fund_ratio
-    #     print(f"  {kid_idea._fund_ratio=} {sum_x=} {kid_idea.get_road()=}")
-    assert round(sue_awardline._fund_give, 15) == default_fund_pool()
-    assert round(sue_awardline._fund_take, 15) == default_fund_pool()
-    x_awardline = awardline_shop(
-        lobby_id=sue_text,
-        _fund_give=default_fund_pool(),
-        _fund_take=default_fund_pool(),
-    )
-    assert x_bud._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
-
-
-def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromNonRootCorrectly():
-    # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
-    # idea tree has no awardlinks
-    sue_text = "Sue"
-    assert x_bud._idearoot._awardlines == {}
-    x_bud.add_acctunit(acct_id=sue_text)
-    x_awardlink = awardlink_shop(lobby_id=sue_text)
-    casa_text = "casa"
-    email_text = "email"
-    x_bud._idearoot._kids[casa_text].set_awardlink(awardlink=x_awardlink)
-
-    # WHEN
-    # idea tree has awardlinks
-    x_bud.settle_bud()
-
-    # THEN
-    assert x_bud._idearoot._awardlines != {}
-    print(f"{x_bud._idearoot._awardlines=}")
-    x_awardline = awardline_shop(
-        lobby_id=sue_text,
-        _fund_give=0.230769231 * default_fund_pool(),
-        _fund_take=0.230769231 * default_fund_pool(),
-    )
-    assert x_bud._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
-    assert x_bud._idearoot._kids[casa_text]._awardlines != {}
-    assert x_bud._idearoot._kids[casa_text]._awardlines == {
-        x_awardline.lobby_id: x_awardline
-    }
 
 
 def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
@@ -607,18 +322,18 @@ def test_BudUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():
 
 def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadUnits():
     # ESTABLISH
-    tim_bud = budunit_shop("Tim")
+    yao_bud = budunit_shop("Yao")
 
     # WHEN
     time = "timeline"
-    tim_bud.add_l1_idea(ideaunit_shop(_label=time, _begin=0, _close=700))
-    t_road = tim_bud.make_l1_road(time)
+    yao_bud.add_l1_idea(ideaunit_shop(_label=time, _begin=0, _close=700))
+    t_road = yao_bud.make_l1_road(time)
     week = "weeks"
-    tim_bud.add_idea(ideaunit_shop(_label=week, _denom=7), parent_road=t_road)
+    yao_bud.add_idea(ideaunit_shop(_label=week, _denom=7), parent_road=t_road)
 
     # THEN
-    assert len(tim_bud.get_idea_tree_ordered_road_list()) == 3
-    assert len(tim_bud.get_idea_tree_ordered_road_list(no_range_descendants=True)) == 2
+    assert len(yao_bud.get_idea_tree_ordered_road_list()) == 3
+    assert len(yao_bud.get_idea_tree_ordered_road_list(no_range_descendants=True)) == 2
 
 
 def test_BudUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
@@ -649,3 +364,79 @@ def test_BudUnit_settle_bud_CreatesFullyPopulated_idea_dict():
 
     # THEN
     assert len(sue_budunit._idea_dict) == 17
+
+
+def test_BudUnit_settle_bud_Resets_offtrack_kids_weight_set():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    sue_budunit._offtrack_kids_weight_set = set("ZZ")
+    x_set = set()
+
+    assert sue_budunit._offtrack_kids_weight_set != x_set
+
+    # WHEN
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == x_set
+
+
+def test_BudUnit_settle_bud_WhenIdeaRootHas_weightButAll_kidsHaveZero_weightAddTo_offtrack_kids_weight_set_Scenario0():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_idea = ideaunit_shop(casa_text, _weight=0)
+    sue_budunit.add_l1_idea(casa_idea)
+    assert sue_budunit._offtrack_kids_weight_set == set()
+
+    # WHEN
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == {sue_budunit._real_id}
+
+    # WHEN
+    sue_budunit.edit_idea_attr(casa_road, weight=2)
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == set()
+
+
+def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddTo_offtrack_kids_weight_set():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_idea = ideaunit_shop(casa_text, _weight=1)
+
+    swim_text = "swimming"
+    swim_road = sue_budunit.make_road(casa_road, swim_text)
+    swim_idea = ideaunit_shop(swim_text, _weight=8)
+
+    clean_text = "cleaning"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    clean_idea = ideaunit_shop(clean_text, _weight=2)
+    sue_budunit.add_idea(ideaunit_shop(clean_text), casa_road)
+
+    sweep_text = "sweep"
+    sweep_road = sue_budunit.make_road(clean_road, sweep_text)
+    sweep_idea = ideaunit_shop(sweep_text, _weight=0)
+    vaccum_text = "vaccum"
+    vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
+    vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
+
+    sue_budunit.add_l1_idea(casa_idea)
+    sue_budunit.add_idea(swim_idea, casa_road)
+    sue_budunit.add_idea(clean_idea, casa_road)
+    sue_budunit.add_idea(sweep_idea, clean_road)  # _weight=0
+    sue_budunit.add_idea(vaccum_idea, clean_road)  # _weight=0
+
+    assert sue_budunit._offtrack_kids_weight_set == set()
+
+    # WHEN
+    sue_budunit.settle_bud()
+
+    # THEN
+    assert sue_budunit._offtrack_kids_weight_set == {clean_road}

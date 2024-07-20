@@ -740,6 +740,9 @@ class IdeaUnit:
     def clear_kids(self):
         self._kids = {}
 
+    def get_kids_weight_sum(self) -> float:
+        return sum(x_kid._weight for x_kid in self._kids.values())
+
     def set_awardlink(self, awardlink: AwardLink):
         self._awardlinks[awardlink.lobby_id] = awardlink
 

@@ -12,7 +12,7 @@ from src.bud.examples.example_buds import (
     get_budunit_with7amCleanTableReason,
     get_budunit_with_4_levels_and_2reasons_2facts,
     budunit_v001,
-    budunit_v001_with_large_agenda as budunit_v001_with_large_agenda,
+    budunit_v001_with_large_agenda,
     budunit_v002,
 )
 from src.bud.examples.example_time import get_budunit_sue_TimeExample
@@ -734,27 +734,3 @@ def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
     assert all_pledges_dict.get(sweep_road) == zia_bud.get_idea_obj(sweep_road)
     assert all_pledges_dict.get(clean_road) == zia_bud.get_idea_obj(clean_road)
     assert all_pledges_dict.get(couch_road) is None
-
-
-def test_BudUnit_set_fact_IsAbleToSetTaskAsComplete():
-    # ESTABLISH
-    x_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
-    mail_text = "obtain mail"
-    assert x_bud is not None
-    assert len(x_bud._idearoot._kids[mail_text]._reasonunits) == 1
-    idea_dict = x_bud.get_idea_dict()
-    # for idea in idea_dict:
-    #     print(idea._label)
-    mail_idea = idea_dict.get(x_bud.make_l1_road(mail_text))
-    assert mail_idea.pledge == True
-    assert mail_idea._task == True
-
-    # WHEN
-    ced_min_label = "CE0_minutes"
-    ced_road = x_bud.make_l1_road(ced_min_label)
-    x_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
-    x_bud.settle_bud()
-
-    # THEN
-    assert mail_idea.pledge == True
-    assert mail_idea._task is False
