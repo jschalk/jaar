@@ -183,9 +183,9 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_text)
-    min_range_text = "a_minute_range"
-    min_range_road = yao_bud.make_l1_road(min_range_text)
-    min_range_idea = ideaunit_shop(min_range_text, _begin=0, _close=2880)
+    min_range_x_text = "a_minute_range"
+    min_range_x_road = yao_bud.make_l1_road(min_range_x_text)
+    min_range_idea = ideaunit_shop(min_range_x_text, _begin=0, _close=2880)
     yao_bud.add_l1_idea(min_range_idea)
 
     day_len_text = "day_length"
@@ -194,9 +194,9 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     yao_bud.add_l1_idea(day_len_idea)
 
     min_days_text = "days in minute_range"
-    min_days_road = yao_bud.make_road(min_range_road, min_days_text)
+    min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
     min_days_idea = ideaunit_shop(min_days_text, _range_source_road=day_len_road)
-    yao_bud.add_idea(min_days_idea, parent_road=min_range_road)
+    yao_bud.add_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
     yao_bud.settle_bud()
@@ -207,7 +207,7 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 4
-    assert relevant_roads.get(min_range_road) is not None
+    assert relevant_roads.get(min_range_x_road) is not None
     assert relevant_roads.get(day_len_road) is not None
     assert relevant_roads.get(min_days_road) is not None
     assert relevant_roads.get(yao_bud._real_id) is not None

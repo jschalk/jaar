@@ -447,7 +447,7 @@ class X7TimeIdeaSource:
         x7_list.append(YB(b=56 * m, c=57 * m, rr=rt, n="56-:56"))
         x7_list.append(YB(b=57 * m, c=58 * m, rr=rt, n="57-:57"))
         x7_list.append(YB(b=58 * m, c=59 * m, rr=rt, n="58-:58"))
-        x7_list.append(YB(b=59 * m, c=60 * m, rr=rt, n="59-59"))
+        x7_list.append(YB(b=59 * m, c=60 * m, rr=rt, n="59-:59"))
         return x7_list
 
     def get_jajatime_legible_from_dt(self, dt: datetime) -> str:
@@ -841,4 +841,13 @@ def get_budunit_sue_TimeExample():
                 denom=yb.md,
                 numor=yb.mn,
             )
+    idea_list = [sue_budunit._idearoot]
+    while idea_list != []:
+        focus_idea = idea_list.pop(0)
+        for x_kid in focus_idea._kids.values():
+            x_kid._parent_road = focus_idea.get_road()
+            idea_list.append(x_kid)
+        sue_budunit._idea_dict[focus_idea.get_road()] = focus_idea
+        # print(f"{focus_idea.get_road()=} {len(sue_budunit._idea_dict)=}")
+
     return sue_budunit
