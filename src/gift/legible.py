@@ -1,5 +1,5 @@
 from src._instrument.python import get_nested_value
-from src._world.world import WorldUnit
+from src.bud.bud import BudUnit
 from src.gift.atom import atom_delete, atom_insert, atom_update, AtomUnit
 from src.gift.change import ChangeUnit
 
@@ -8,184 +8,176 @@ def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_nested_value(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_change: ChangeUnit, x_world: WorldUnit) -> list[str]:
+def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_change.atomunits
-    worldunit_atom = get_leg_obj(atoms_dict, [atom_update(), "worldunit"])
+    budunit_atom = get_leg_obj(atoms_dict, [atom_update(), "budunit"])
 
-    charunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "world_charunit"])
-    charunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "world_charunit"])
-    charunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "world_charunit"])
+    acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "bud_acctunit"])
+    acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_acctunit"])
+    acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_acctunit"])
 
-    x_list = [atom_insert(), "world_char_lobbyship"]
-    char_lobbyship_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_char_lobbyship"]
-    char_lobbyship_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_char_lobbyship"]
-    char_lobbyship_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_acct_lobbyship"]
+    acct_lobbyship_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_acct_lobbyship"]
+    acct_lobbyship_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_acct_lobbyship"]
+    acct_lobbyship_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_ideaunit"]
-    world_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_ideaunit"]
-    world_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_ideaunit"]
-    world_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_ideaunit"]
+    bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_ideaunit"]
+    bud_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_ideaunit"]
+    bud_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_awardlink"]
-    world_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_awardlink"]
-    world_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_awardlink"]
-    world_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_awardlink"]
+    bud_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_awardlink"]
+    bud_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_awardlink"]
+    bud_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_reasonunit"]
-    world_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_reasonunit"]
-    world_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_reasonunit"]
-    world_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_reasonunit"]
+    bud_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_reasonunit"]
+    bud_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_reasonunit"]
+    bud_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_reason_premiseunit"]
-    world_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_reason_premiseunit"]
-    world_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_reason_premiseunit"]
-    world_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_reason_premiseunit"]
+    bud_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_reason_premiseunit"]
+    bud_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_reason_premiseunit"]
+    bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_lobbyhold"]
-    world_idea_lobbyhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_lobbyhold"]
-    world_idea_lobbyhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_lobbyhold"]
+    bud_idea_lobbyhold_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_lobbyhold"]
+    bud_idea_lobbyhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_healerhold"]
-    world_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_healerhold"]
-    world_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_healerhold"]
+    bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_healerhold"]
+    bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "world_idea_factunit"]
-    world_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "world_idea_factunit"]
-    world_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "world_idea_factunit"]
-    world_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_factunit"]
+    bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_idea_factunit"]
+    bud_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_factunit"]
+    bud_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
-    if worldunit_atom != None:
-        add_worldunit_legible_list(leg_list, worldunit_atom, x_world)
-    if charunit_insert_dict != None:
-        add_world_charunit_insert_to_legible_list(
-            leg_list, charunit_insert_dict, x_world
+    if budunit_atom is not None:
+        add_budunit_legible_list(leg_list, budunit_atom, x_bud)
+    if acctunit_insert_dict is not None:
+        add_bud_acctunit_insert_to_legible_list(leg_list, acctunit_insert_dict, x_bud)
+    if acctunit_update_dict is not None:
+        add_bud_acctunit_update_to_legible_list(leg_list, acctunit_update_dict, x_bud)
+    if acctunit_delete_dict is not None:
+        add_bud_acctunit_delete_to_legible_list(leg_list, acctunit_delete_dict, x_bud)
+
+    if acct_lobbyship_insert_dict is not None:
+        add_bud_acct_lobbyship_insert_to_legible_list(
+            leg_list, acct_lobbyship_insert_dict, x_bud
         )
-    if charunit_update_dict != None:
-        add_world_charunit_update_to_legible_list(
-            leg_list, charunit_update_dict, x_world
+    if acct_lobbyship_update_dict is not None:
+        add_bud_acct_lobbyship_update_to_legible_list(
+            leg_list, acct_lobbyship_update_dict, x_bud
         )
-    if charunit_delete_dict != None:
-        add_world_charunit_delete_to_legible_list(
-            leg_list, charunit_delete_dict, x_world
+    if acct_lobbyship_delete_dict is not None:
+        add_bud_acct_lobbyship_delete_to_legible_list(
+            leg_list, acct_lobbyship_delete_dict, x_bud
         )
 
-    if char_lobbyship_insert_dict != None:
-        add_world_char_lobbyship_insert_to_legible_list(
-            leg_list, char_lobbyship_insert_dict, x_world
+    if bud_ideaunit_insert_dict is not None:
+        add_bud_ideaunit_insert_to_legible_list(
+            leg_list, bud_ideaunit_insert_dict, x_bud
         )
-    if char_lobbyship_update_dict != None:
-        add_world_char_lobbyship_update_to_legible_list(
-            leg_list, char_lobbyship_update_dict, x_world
+    if bud_ideaunit_update_dict is not None:
+        add_bud_ideaunit_update_to_legible_list(
+            leg_list, bud_ideaunit_update_dict, x_bud
         )
-    if char_lobbyship_delete_dict != None:
-        add_world_char_lobbyship_delete_to_legible_list(
-            leg_list, char_lobbyship_delete_dict, x_world
-        )
-
-    if world_ideaunit_insert_dict != None:
-        add_world_ideaunit_insert_to_legible_list(
-            leg_list, world_ideaunit_insert_dict, x_world
-        )
-    if world_ideaunit_update_dict != None:
-        add_world_ideaunit_update_to_legible_list(
-            leg_list, world_ideaunit_update_dict, x_world
-        )
-    if world_ideaunit_delete_dict != None:
-        add_world_ideaunit_delete_to_legible_list(
-            leg_list, world_ideaunit_delete_dict, x_world
+    if bud_ideaunit_delete_dict is not None:
+        add_bud_ideaunit_delete_to_legible_list(
+            leg_list, bud_ideaunit_delete_dict, x_bud
         )
 
-    if world_idea_awardlink_insert_dict != None:
-        add_world_idea_awardlink_insert_to_legible_list(
-            leg_list, world_idea_awardlink_insert_dict, x_world
+    if bud_idea_awardlink_insert_dict is not None:
+        add_bud_idea_awardlink_insert_to_legible_list(
+            leg_list, bud_idea_awardlink_insert_dict, x_bud
         )
-    if world_idea_awardlink_update_dict != None:
-        add_world_idea_awardlink_update_to_legible_list(
-            leg_list, world_idea_awardlink_update_dict, x_world
+    if bud_idea_awardlink_update_dict is not None:
+        add_bud_idea_awardlink_update_to_legible_list(
+            leg_list, bud_idea_awardlink_update_dict, x_bud
         )
-    if world_idea_awardlink_delete_dict != None:
-        add_world_idea_awardlink_delete_to_legible_list(
-            leg_list, world_idea_awardlink_delete_dict, x_world
-        )
-
-    if world_idea_reasonunit_insert_dict != None:
-        add_world_idea_reasonunit_insert_to_legible_list(
-            leg_list, world_idea_reasonunit_insert_dict, x_world
-        )
-    if world_idea_reasonunit_update_dict != None:
-        add_world_idea_reasonunit_update_to_legible_list(
-            leg_list, world_idea_reasonunit_update_dict, x_world
-        )
-    if world_idea_reasonunit_delete_dict != None:
-        add_world_idea_reasonunit_delete_to_legible_list(
-            leg_list, world_idea_reasonunit_delete_dict, x_world
+    if bud_idea_awardlink_delete_dict is not None:
+        add_bud_idea_awardlink_delete_to_legible_list(
+            leg_list, bud_idea_awardlink_delete_dict, x_bud
         )
 
-    if world_idea_reason_premiseunit_insert_dict != None:
-        add_world_reason_premiseunit_insert_to_legible_list(
-            leg_list, world_idea_reason_premiseunit_insert_dict, x_world
+    if bud_idea_reasonunit_insert_dict is not None:
+        add_bud_idea_reasonunit_insert_to_legible_list(
+            leg_list, bud_idea_reasonunit_insert_dict, x_bud
         )
-    if world_idea_reason_premiseunit_update_dict != None:
-        add_world_reason_premiseunit_update_to_legible_list(
-            leg_list, world_idea_reason_premiseunit_update_dict, x_world
+    if bud_idea_reasonunit_update_dict is not None:
+        add_bud_idea_reasonunit_update_to_legible_list(
+            leg_list, bud_idea_reasonunit_update_dict, x_bud
         )
-    if world_idea_reason_premiseunit_delete_dict != None:
-        add_world_reason_premiseunit_delete_to_legible_list(
-            leg_list, world_idea_reason_premiseunit_delete_dict, x_world
-        )
-
-    if world_idea_lobbyhold_insert_dict != None:
-        add_world_idea_lobbyhold_insert_to_legible_list(
-            leg_list, world_idea_lobbyhold_insert_dict, x_world
-        )
-    if world_idea_lobbyhold_delete_dict != None:
-        add_world_idea_lobbyhold_delete_to_legible_list(
-            leg_list, world_idea_lobbyhold_delete_dict, x_world
+    if bud_idea_reasonunit_delete_dict is not None:
+        add_bud_idea_reasonunit_delete_to_legible_list(
+            leg_list, bud_idea_reasonunit_delete_dict, x_bud
         )
 
-    if world_idea_healerhold_insert_dict != None:
-        add_world_idea_healerhold_insert_to_legible_list(
-            leg_list, world_idea_healerhold_insert_dict, x_world
+    if bud_idea_reason_premiseunit_insert_dict is not None:
+        add_bud_reason_premiseunit_insert_to_legible_list(
+            leg_list, bud_idea_reason_premiseunit_insert_dict, x_bud
         )
-    if world_idea_healerhold_delete_dict != None:
-        add_world_idea_healerhold_delete_to_legible_list(
-            leg_list, world_idea_healerhold_delete_dict, x_world
+    if bud_idea_reason_premiseunit_update_dict is not None:
+        add_bud_reason_premiseunit_update_to_legible_list(
+            leg_list, bud_idea_reason_premiseunit_update_dict, x_bud
+        )
+    if bud_idea_reason_premiseunit_delete_dict is not None:
+        add_bud_reason_premiseunit_delete_to_legible_list(
+            leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
         )
 
-    if world_idea_factunit_insert_dict != None:
-        add_world_idea_factunit_insert_to_legible_list(
-            leg_list, world_idea_factunit_insert_dict, x_world
+    if bud_idea_lobbyhold_insert_dict is not None:
+        add_bud_idea_lobbyhold_insert_to_legible_list(
+            leg_list, bud_idea_lobbyhold_insert_dict, x_bud
         )
-    if world_idea_factunit_update_dict != None:
-        add_world_idea_factunit_update_to_legible_list(
-            leg_list, world_idea_factunit_update_dict, x_world
+    if bud_idea_lobbyhold_delete_dict is not None:
+        add_bud_idea_lobbyhold_delete_to_legible_list(
+            leg_list, bud_idea_lobbyhold_delete_dict, x_bud
         )
-    if world_idea_factunit_delete_dict != None:
-        add_world_idea_factunit_delete_to_legible_list(
-            leg_list, world_idea_factunit_delete_dict, x_world
+
+    if bud_idea_healerhold_insert_dict is not None:
+        add_bud_idea_healerhold_insert_to_legible_list(
+            leg_list, bud_idea_healerhold_insert_dict, x_bud
+        )
+    if bud_idea_healerhold_delete_dict is not None:
+        add_bud_idea_healerhold_delete_to_legible_list(
+            leg_list, bud_idea_healerhold_delete_dict, x_bud
+        )
+
+    if bud_idea_factunit_insert_dict is not None:
+        add_bud_idea_factunit_insert_to_legible_list(
+            leg_list, bud_idea_factunit_insert_dict, x_bud
+        )
+    if bud_idea_factunit_update_dict is not None:
+        add_bud_idea_factunit_update_to_legible_list(
+            leg_list, bud_idea_factunit_update_dict, x_bud
+        )
+    if bud_idea_factunit_delete_dict is not None:
+        add_bud_idea_factunit_delete_to_legible_list(
+            leg_list, bud_idea_factunit_delete_dict, x_bud
         )
 
     return leg_list
 
 
-def add_worldunit_legible_list(
-    legible_list: list[str], x_atom: AtomUnit, x_world: WorldUnit
-):
+def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: BudUnit):
     optional_args = x_atom.optional_args
     _weight_text = "_weight"
     _max_tree_traverse_text = "_max_tree_traverse"
@@ -199,128 +191,128 @@ def add_worldunit_legible_list(
     _debtor_respect_value = optional_args.get(_debtor_respect_text)
     _weight_value = optional_args.get(_weight_text)
 
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     if x_monetary_desc is None:
-        x_monetary_desc = f"{x_world._owner_id}'s monetary_desc"
+        x_monetary_desc = f"{x_bud._owner_id}'s monetary_desc"
 
-    if _max_tree_traverse_value != None:
+    if _max_tree_traverse_value is not None:
         legible_list.append(
-            f"{x_world._owner_id}'s maximum number of World output evaluations transited to {_max_tree_traverse_value}"
+            f"{x_bud._owner_id}'s maximum number of Bud output evaluations transited to {_max_tree_traverse_value}"
         )
-    if _monetary_desc_value != None:
+    if _monetary_desc_value is not None:
         legible_list.append(
-            f"{x_world._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
+            f"{x_bud._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
         )
     if (
-        _credor_respect_value != None
-        and _debtor_respect_value != None
+        _credor_respect_value is not None
+        and _debtor_respect_value is not None
         and _credor_respect_value == _debtor_respect_value
     ):
         legible_list.append(
             f"{x_monetary_desc} total pool is now {_credor_respect_value}"
         )
-    elif _credor_respect_value != None:
+    elif _credor_respect_value is not None:
         legible_list.append(
             f"{x_monetary_desc} credor pool is now {_credor_respect_value}"
         )
-    elif _debtor_respect_value != None:
+    elif _debtor_respect_value is not None:
         legible_list.append(
             f"{x_monetary_desc} debtor pool is now {_debtor_respect_value}"
         )
-    if _weight_value != None:
+    if _weight_value is not None:
         legible_list.append(
-            f"{x_world._owner_id}'s world weight was transited to {_weight_value}"
+            f"{x_bud._owner_id}'s bud weight was transited to {_weight_value}"
         )
 
 
-def add_world_charunit_insert_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
+def add_bud_acctunit_insert_to_legible_list(
+    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
-    for charunit_atom in charunit_dict.values():
-        char_id = charunit_atom.get_value("char_id")
-        credor_weight_value = charunit_atom.get_value("credor_weight")
-        debtor_weight_value = charunit_atom.get_value("debtor_weight")
-        x_str = f"{char_id} was added with {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt"
+    for acctunit_atom in acctunit_dict.values():
+        acct_id = acctunit_atom.get_value("acct_id")
+        credor_weight_value = acctunit_atom.get_value("credor_weight")
+        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
+        x_str = f"{acct_id} was added with {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt"
         legible_list.append(x_str)
 
 
-def add_world_charunit_update_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
+def add_bud_acctunit_update_to_legible_list(
+    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
-    for charunit_atom in charunit_dict.values():
-        char_id = charunit_atom.get_value("char_id")
-        credor_weight_value = charunit_atom.get_value("credor_weight")
-        debtor_weight_value = charunit_atom.get_value("debtor_weight")
-        if credor_weight_value != None and debtor_weight_value != None:
-            x_str = f"{char_id} now has {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt."
-        elif credor_weight_value != None and debtor_weight_value is None:
-            x_str = f"{char_id} now has {credor_weight_value} {x_monetary_desc} cred."
-        elif credor_weight_value is None and debtor_weight_value != None:
-            x_str = f"{char_id} now has {debtor_weight_value} {x_monetary_desc} debt."
+    for acctunit_atom in acctunit_dict.values():
+        acct_id = acctunit_atom.get_value("acct_id")
+        credor_weight_value = acctunit_atom.get_value("credor_weight")
+        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
+        if credor_weight_value is not None and debtor_weight_value is not None:
+            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt."
+        elif credor_weight_value is not None and debtor_weight_value is None:
+            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred."
+        elif credor_weight_value is None and debtor_weight_value is not None:
+            x_str = f"{acct_id} now has {debtor_weight_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
 
-def add_world_charunit_delete_to_legible_list(
-    legible_list: list[str], charunit_dict: AtomUnit, x_world: WorldUnit
+def add_bud_acctunit_delete_to_legible_list(
+    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_world._monetary_desc
+    x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
-    for charunit_atom in charunit_dict.values():
-        char_id = charunit_atom.get_value("char_id")
-        x_str = f"{char_id} was removed from {x_monetary_desc} chars."
+    for acctunit_atom in acctunit_dict.values():
+        acct_id = acctunit_atom.get_value("acct_id")
+        x_str = f"{acct_id} was removed from {x_monetary_desc} accts."
         legible_list.append(x_str)
 
 
-def add_world_char_lobbyship_insert_to_legible_list(
-    legible_list: list[str], char_lobbyship_insert_dict: dict, x_world: WorldUnit
+def add_bud_acct_lobbyship_insert_to_legible_list(
+    legible_list: list[str], acct_lobbyship_insert_dict: dict, x_bud: BudUnit
 ):
-    for char_lobbyship_dict in char_lobbyship_insert_dict.values():
-        for char_lobbyship_atom in char_lobbyship_dict.values():
-            lobby_id = char_lobbyship_atom.get_value("lobby_id")
-            char_id = char_lobbyship_atom.get_value("char_id")
-            credor_weight_value = char_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = char_lobbyship_atom.get_value("debtor_weight")
-            x_str = f"Lobby '{lobby_id}' has new member {char_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+    for acct_lobbyship_dict in acct_lobbyship_insert_dict.values():
+        for acct_lobbyship_atom in acct_lobbyship_dict.values():
+            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
+            acct_id = acct_lobbyship_atom.get_value("acct_id")
+            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
+            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
+            x_str = f"Lobby '{lobby_id}' has new member {acct_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_char_lobbyship_update_to_legible_list(
-    legible_list: list[str], char_lobbyship_update_dict: dict, x_world: WorldUnit
+def add_bud_acct_lobbyship_update_to_legible_list(
+    legible_list: list[str], acct_lobbyship_update_dict: dict, x_bud: BudUnit
 ):
-    for char_lobbyship_dict in char_lobbyship_update_dict.values():
-        for char_lobbyship_atom in char_lobbyship_dict.values():
-            lobby_id = char_lobbyship_atom.get_value("lobby_id")
-            char_id = char_lobbyship_atom.get_value("char_id")
-            credor_weight_value = char_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = char_lobbyship_atom.get_value("debtor_weight")
-            if credor_weight_value != None and debtor_weight_value != None:
-                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
-            elif credor_weight_value != None and debtor_weight_value is None:
-                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_cred={credor_weight_value}."
-            elif credor_weight_value is None and debtor_weight_value != None:
-                x_str = f"Lobby '{lobby_id}' member {char_id} has new lobby_debt={debtor_weight_value}."
+    for acct_lobbyship_dict in acct_lobbyship_update_dict.values():
+        for acct_lobbyship_atom in acct_lobbyship_dict.values():
+            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
+            acct_id = acct_lobbyship_atom.get_value("acct_id")
+            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
+            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
+            if credor_weight_value is not None and debtor_weight_value is not None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+            elif credor_weight_value is not None and debtor_weight_value is None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value}."
+            elif credor_weight_value is None and debtor_weight_value is not None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_debt={debtor_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_char_lobbyship_delete_to_legible_list(
-    legible_list: list[str], char_lobbyship_delete_dict: dict, x_world: WorldUnit
+def add_bud_acct_lobbyship_delete_to_legible_list(
+    legible_list: list[str], acct_lobbyship_delete_dict: dict, x_bud: BudUnit
 ):
-    for char_lobbyship_dict in char_lobbyship_delete_dict.values():
-        for char_lobbyship_atom in char_lobbyship_dict.values():
-            lobby_id = char_lobbyship_atom.get_value("lobby_id")
-            char_id = char_lobbyship_atom.get_value("char_id")
-            x_str = f"Lobby '{lobby_id}' no longer has member {char_id}."
+    for acct_lobbyship_dict in acct_lobbyship_delete_dict.values():
+        for acct_lobbyship_atom in acct_lobbyship_dict.values():
+            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
+            acct_id = acct_lobbyship_atom.get_value("acct_id")
+            x_str = f"Lobby '{lobby_id}' no longer has member {acct_id}."
             legible_list.append(x_str)
 
 
-def add_world_ideaunit_insert_to_legible_list(
-    legible_list: list[str], ideaunit_insert_dict: dict, x_world: WorldUnit
+def add_bud_ideaunit_insert_to_legible_list(
+    legible_list: list[str], ideaunit_insert_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
     parent_road_text = "parent_road"
@@ -353,34 +345,34 @@ def add_world_ideaunit_insert_to_legible_list(
             x_str = (
                 f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
             )
-            if _addin_value != None:
+            if _addin_value is not None:
                 x_str += f"_addin={_addin_value}."
-            if _begin_value != None:
+            if _begin_value is not None:
                 x_str += f"_begin={_begin_value}."
-            if _close_value != None:
+            if _close_value is not None:
                 x_str += f"_close={_close_value}."
-            if _denom_value != None:
+            if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value != None:
+            if _numeric_road_value is not None:
                 x_str += f"_numeric_road={_numeric_road_value}."
-            if _numor_value != None:
+            if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
-            if _problem_bool_value != None:
+            if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _range_source_road_value != None:
+            if _range_source_road_value is not None:
                 x_str += f"_range_source_road={_range_source_road_value}."
-            if _reest_value != None:
+            if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value != None:
+            if _weight_value is not None:
                 x_str += f"_weight={_weight_value}."
-            if pledge_value != None:
+            if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
             legible_list.append(x_str)
 
 
-def add_world_ideaunit_update_to_legible_list(
-    legible_list: list[str], ideaunit_update_dict: dict, x_world: WorldUnit
+def add_bud_ideaunit_update_to_legible_list(
+    legible_list: list[str], ideaunit_update_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
     parent_road_text = "parent_road"
@@ -411,34 +403,34 @@ def add_world_ideaunit_update_to_legible_list(
             _weight_value = ideaunit_atom.get_value(_weight_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
-            if _addin_value != None:
+            if _addin_value is not None:
                 x_str += f"_addin={_addin_value}."
-            if _begin_value != None:
+            if _begin_value is not None:
                 x_str += f"_begin={_begin_value}."
-            if _close_value != None:
+            if _close_value is not None:
                 x_str += f"_close={_close_value}."
-            if _denom_value != None:
+            if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value != None:
+            if _numeric_road_value is not None:
                 x_str += f"_numeric_road={_numeric_road_value}."
-            if _numor_value != None:
+            if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
-            if _problem_bool_value != None:
+            if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _range_source_road_value != None:
+            if _range_source_road_value is not None:
                 x_str += f"_range_source_road={_range_source_road_value}."
-            if _reest_value != None:
+            if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value != None:
+            if _weight_value is not None:
                 x_str += f"_weight={_weight_value}."
-            if pledge_value != None:
+            if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
             legible_list.append(x_str)
 
 
-def add_world_ideaunit_delete_to_legible_list(
-    legible_list: list[str], ideaunit_delete_dict: dict, x_world: WorldUnit
+def add_bud_ideaunit_delete_to_legible_list(
+    legible_list: list[str], ideaunit_delete_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
     parent_road_text = "parent_road"
@@ -450,8 +442,8 @@ def add_world_ideaunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_awardlink_insert_to_legible_list(
-    legible_list: list[str], idea_awardlink_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_awardlink_insert_to_legible_list(
+    legible_list: list[str], idea_awardlink_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_awardlink_insert_dict.values():
         for idea_awardlink_atom in road_dict.values():
@@ -463,8 +455,8 @@ def add_world_idea_awardlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_awardlink_update_to_legible_list(
-    legible_list: list[str], idea_awardlink_update_dict: dict, x_world: WorldUnit
+def add_bud_idea_awardlink_update_to_legible_list(
+    legible_list: list[str], idea_awardlink_update_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_awardlink_update_dict.values():
         for idea_awardlink_atom in road_dict.values():
@@ -472,17 +464,17 @@ def add_world_idea_awardlink_update_to_legible_list(
             road_value = idea_awardlink_atom.get_value("road")
             give_weight_value = idea_awardlink_atom.get_value("give_weight")
             take_weight_value = idea_awardlink_atom.get_value("take_weight")
-            if give_weight_value != None and take_weight_value != None:
+            if give_weight_value is not None and take_weight_value is not None:
                 x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value} and take_weight={take_weight_value}."
-            elif give_weight_value != None and take_weight_value is None:
+            elif give_weight_value is not None and take_weight_value is None:
                 x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value}."
-            elif give_weight_value is None and take_weight_value != None:
+            elif give_weight_value is None and take_weight_value is not None:
                 x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_weight={take_weight_value}."
             legible_list.append(x_str)
 
 
-def add_world_idea_awardlink_delete_to_legible_list(
-    legible_list: list[str], idea_awardlink_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_awardlink_delete_to_legible_list(
+    legible_list: list[str], idea_awardlink_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_awardlink_delete_dict.values():
         for idea_awardlink_atom in road_dict.values():
@@ -492,8 +484,8 @@ def add_world_idea_awardlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_reasonunit_insert_to_legible_list(
-    legible_list: list[str], idea_reasonunit_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_reasonunit_insert_to_legible_list(
+    legible_list: list[str], idea_reasonunit_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_reasonunit_insert_dict.values():
         for idea_reasonunit_atom in road_dict.values():
@@ -505,15 +497,15 @@ def add_world_idea_reasonunit_insert_to_legible_list(
             x_str = (
                 f"ReasonUnit created for idea '{road_value}' with base '{base_value}'."
             )
-            if base_idea_active_requisite_value != None:
+            if base_idea_active_requisite_value is not None:
                 x_str += (
                     f" base_idea_active_requisite={base_idea_active_requisite_value}."
                 )
             legible_list.append(x_str)
 
 
-def add_world_idea_reasonunit_update_to_legible_list(
-    legible_list: list[str], idea_reasonunit_update_dict: dict, x_world: WorldUnit
+def add_bud_idea_reasonunit_update_to_legible_list(
+    legible_list: list[str], idea_reasonunit_update_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_reasonunit_update_dict.values():
         for idea_reasonunit_atom in road_dict.values():
@@ -522,15 +514,15 @@ def add_world_idea_reasonunit_update_to_legible_list(
             base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
                 "base_idea_active_requisite"
             )
-            if base_idea_active_requisite_value != None:
+            if base_idea_active_requisite_value is not None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
             elif base_idea_active_requisite_value is None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' and no longer checks base active mode."
             legible_list.append(x_str)
 
 
-def add_world_idea_reasonunit_delete_to_legible_list(
-    legible_list: list[str], idea_reasonunit_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_reasonunit_delete_to_legible_list(
+    legible_list: list[str], idea_reasonunit_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_reasonunit_delete_dict.values():
         for idea_reasonunit_atom in road_dict.values():
@@ -540,10 +532,10 @@ def add_world_idea_reasonunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_reason_premiseunit_insert_to_legible_list(
+def add_bud_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
     idea_reason_premiseunit_insert_dict: dict,
-    x_world: WorldUnit,
+    x_bud: BudUnit,
 ):
     road_text = "road"
     base_text = "base"
@@ -561,19 +553,19 @@ def add_world_reason_premiseunit_insert_to_legible_list(
                 nigh_value = idea_reason_premiseunit_atom.get_value(nigh_text)
                 open_value = idea_reason_premiseunit_atom.get_value(open_text)
                 x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for idea '{road_value}'."
-                if open_value != None:
+                if open_value is not None:
                     x_str += f" Open={open_value}."
-                if nigh_value != None:
+                if nigh_value is not None:
                     x_str += f" Nigh={nigh_value}."
-                if divisor_value != None:
+                if divisor_value is not None:
                     x_str += f" Divisor={divisor_value}."
                 legible_list.append(x_str)
 
 
-def add_world_reason_premiseunit_update_to_legible_list(
+def add_bud_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
     idea_reason_premiseunit_update_dict: dict,
-    x_world: WorldUnit,
+    x_bud: BudUnit,
 ):
     road_text = "road"
     base_text = "base"
@@ -591,19 +583,19 @@ def add_world_reason_premiseunit_update_to_legible_list(
                 nigh_value = idea_reason_premiseunit_atom.get_value(nigh_text)
                 open_value = idea_reason_premiseunit_atom.get_value(open_text)
                 x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for idea '{road_value}'."
-                if open_value != None:
+                if open_value is not None:
                     x_str += f" Open={open_value}."
-                if nigh_value != None:
+                if nigh_value is not None:
                     x_str += f" Nigh={nigh_value}."
-                if divisor_value != None:
+                if divisor_value is not None:
                     x_str += f" Divisor={divisor_value}."
                 legible_list.append(x_str)
 
 
-def add_world_reason_premiseunit_delete_to_legible_list(
+def add_bud_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
     idea_reason_premiseunit_delete_dict: dict,
-    x_world: WorldUnit,
+    x_bud: BudUnit,
 ):
     road_text = "road"
     base_text = "base"
@@ -618,8 +610,8 @@ def add_world_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_world_idea_lobbyhold_insert_to_legible_list(
-    legible_list: list[str], idea_lobbyhold_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_lobbyhold_insert_to_legible_list(
+    legible_list: list[str], idea_lobbyhold_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_lobbyhold_insert_dict.values():
         for idea_lobbyhold_atom in road_dict.values():
@@ -629,8 +621,8 @@ def add_world_idea_lobbyhold_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_lobbyhold_delete_to_legible_list(
-    legible_list: list[str], idea_lobbyhold_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_lobbyhold_delete_to_legible_list(
+    legible_list: list[str], idea_lobbyhold_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_lobbyhold_delete_dict.values():
         for idea_lobbyhold_atom in road_dict.values():
@@ -640,8 +632,8 @@ def add_world_idea_lobbyhold_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_healerhold_insert_to_legible_list(
-    legible_list: list[str], idea_healerhold_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_healerhold_insert_to_legible_list(
+    legible_list: list[str], idea_healerhold_insert_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_healerhold_insert_dict.values():
         for idea_healerhold_atom in road_dict.values():
@@ -651,8 +643,8 @@ def add_world_idea_healerhold_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_healerhold_delete_to_legible_list(
-    legible_list: list[str], idea_healerhold_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_healerhold_delete_to_legible_list(
+    legible_list: list[str], idea_healerhold_delete_dict: dict, x_bud: BudUnit
 ):
     for road_dict in idea_healerhold_delete_dict.values():
         for idea_healerhold_atom in road_dict.values():
@@ -662,8 +654,8 @@ def add_world_idea_healerhold_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_world_idea_factunit_insert_to_legible_list(
-    legible_list: list[str], idea_factunit_insert_dict: dict, x_world: WorldUnit
+def add_bud_idea_factunit_insert_to_legible_list(
+    legible_list: list[str], idea_factunit_insert_dict: dict, x_bud: BudUnit
 ):
     road_text = "road"
     base_text = "base"
@@ -678,15 +670,15 @@ def add_world_idea_factunit_insert_to_legible_list(
             nigh_value = idea_factunit_atom.get_value(nigh_text)
             open_value = idea_factunit_atom.get_value(open_text)
             x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for idea '{road_value}'."
-            if open_value != None:
+            if open_value is not None:
                 x_str += f" Open={open_value}."
-            if nigh_value != None:
+            if nigh_value is not None:
                 x_str += f" Nigh={nigh_value}."
             legible_list.append(x_str)
 
 
-def add_world_idea_factunit_update_to_legible_list(
-    legible_list: list[str], idea_factunit_update_dict: dict, x_world: WorldUnit
+def add_bud_idea_factunit_update_to_legible_list(
+    legible_list: list[str], idea_factunit_update_dict: dict, x_bud: BudUnit
 ):
     road_text = "road"
     base_text = "base"
@@ -701,15 +693,15 @@ def add_world_idea_factunit_update_to_legible_list(
             nigh_value = idea_factunit_atom.get_value(nigh_text)
             open_value = idea_factunit_atom.get_value(open_text)
             x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for idea '{road_value}'."
-            if open_value != None:
+            if open_value is not None:
                 x_str += f" Open={open_value}."
-            if nigh_value != None:
+            if nigh_value is not None:
                 x_str += f" Nigh={nigh_value}."
             legible_list.append(x_str)
 
 
-def add_world_idea_factunit_delete_to_legible_list(
-    legible_list: list[str], idea_factunit_delete_dict: dict, x_world: WorldUnit
+def add_bud_idea_factunit_delete_to_legible_list(
+    legible_list: list[str], idea_factunit_delete_dict: dict, x_bud: BudUnit
 ):
     road_text = "road"
     base_text = "base"

@@ -89,7 +89,9 @@ def rowdata_shop(
 ):
     if str(type(row_dict)) != "<class 'dict'>":
         raise row_dict_Exception("row_dict is not dictionary")
-    x_dict = {x_key: x_value for x_key, x_value in row_dict.items() if x_value != None}
+    x_dict = {
+        x_key: x_value for x_key, x_value in row_dict.items() if x_value is not None
+    }
     return RowData(tablename, x_dict)
 
 

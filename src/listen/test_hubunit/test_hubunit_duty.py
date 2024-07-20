@@ -3,7 +3,7 @@ from src._road.road import (
     get_default_real_id_roadnode as root_label,
 )
 from src.listen.hubunit import hubunit_shop
-from src.listen.examples.example_listen_worlds import get_world_with_4_levels
+from src.listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.listen.examples.listen_env import (
     get_texas_hubunit,
     get_listen_temp_env_dir as env_dir,
@@ -31,7 +31,7 @@ def test_HubUnit_create_econ_dir_if_missing_CreatesDirectory(env_dir_setup_clean
     assert os_path_exists(sue_hubunit.econ_dir())
 
 
-def test_HubUnit_save_duty_world_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_duty_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
@@ -42,12 +42,12 @@ def test_HubUnit_save_duty_world_CorrectlySavesFile(env_dir_setup_cleanup):
     texas_road = create_road(usa_road, texas_text)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, texas_road)
     bob_text = "Bob"
-    bob_world = get_world_with_4_levels()
-    bob_world.set_owner_id(bob_text)
+    bob_bud = get_budunit_with_4_levels()
+    bob_bud.set_owner_id(bob_text)
     assert sue_hubunit.duty_file_exists(bob_text) is False
 
     # WHEN
-    sue_hubunit.save_duty_world(bob_world)
+    sue_hubunit.save_duty_bud(bob_bud)
 
     # THEN
     assert sue_hubunit.duty_file_exists(bob_text)
@@ -64,18 +64,18 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     texas_road = create_road(usa_road, texas_text)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, texas_road)
     bob_text = "Bob"
-    bob_world = get_world_with_4_levels()
-    bob_world.set_owner_id(bob_text)
+    bob_bud = get_budunit_with_4_levels()
+    bob_bud.set_owner_id(bob_text)
     assert sue_hubunit.duty_file_exists(bob_text) is False
 
     # WHEN
-    sue_hubunit.save_duty_world(bob_world)
+    sue_hubunit.save_duty_bud(bob_bud)
 
     # THEN
     assert sue_hubunit.duty_file_exists(bob_text)
 
 
-def test_HubUnit_get_duty_world_OpensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_duty_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
@@ -86,20 +86,20 @@ def test_HubUnit_get_duty_world_OpensFile(env_dir_setup_cleanup):
     texas_road = create_road(usa_road, texas_text)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, texas_road)
     bob_text = "Bob"
-    bob_world = get_world_with_4_levels()
-    bob_world.set_owner_id(bob_text)
-    sue_hubunit.save_duty_world(bob_world)
+    bob_bud = get_budunit_with_4_levels()
+    bob_bud.set_owner_id(bob_text)
+    sue_hubunit.save_duty_bud(bob_bud)
 
     # WHEN / THEN
-    assert sue_hubunit.get_duty_world(bob_text).get_dict() == bob_world.get_dict()
+    assert sue_hubunit.get_duty_bud(bob_text).get_dict() == bob_bud.get_dict()
 
 
-def test_HubUnit_delete_duty_file_DeletesWorldFile(env_dir_setup_cleanup):
+def test_HubUnit_delete_duty_file_DeletesBudFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
-    sue_world = get_world_with_4_levels()
-    sue_text = sue_world._owner_id
-    texas_hubunit.save_duty_world(sue_world)
+    sue_bud = get_budunit_with_4_levels()
+    sue_text = sue_bud._owner_id
+    texas_hubunit.save_duty_bud(sue_bud)
     print(f"{texas_hubunit.duty_path(sue_text)=}")
     duty_path = texas_hubunit.duty_path(sue_text)
     assert texas_hubunit.duty_file_exists(sue_text)
@@ -111,7 +111,7 @@ def test_HubUnit_delete_duty_file_DeletesWorldFile(env_dir_setup_cleanup):
     assert texas_hubunit.duty_file_exists(sue_text) is False
 
 
-def test_HubUnit_save_job_world_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_job_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
@@ -122,12 +122,12 @@ def test_HubUnit_save_job_world_CorrectlySavesFile(env_dir_setup_cleanup):
     texas_road = create_road(usa_road, texas_text)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, texas_road)
     bob_text = "Bob"
-    bob_world = get_world_with_4_levels()
-    bob_world.set_owner_id(bob_text)
+    bob_bud = get_budunit_with_4_levels()
+    bob_bud.set_owner_id(bob_text)
     assert sue_hubunit.job_file_exists(bob_text) is False
 
     # WHEN
-    sue_hubunit.save_job_world(bob_world)
+    sue_hubunit.save_job_bud(bob_bud)
 
     # THEN
     assert sue_hubunit.job_file_exists(bob_text)
@@ -144,18 +144,18 @@ def test_HubUnit_job_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     texas_road = create_road(usa_road, texas_text)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, texas_road)
     bob_text = "Bob"
-    bob_world = get_world_with_4_levels()
-    bob_world.set_owner_id(bob_text)
+    bob_bud = get_budunit_with_4_levels()
+    bob_bud.set_owner_id(bob_text)
     assert sue_hubunit.job_file_exists(bob_text) is False
 
     # WHEN
-    sue_hubunit.save_job_world(bob_world)
+    sue_hubunit.save_job_bud(bob_bud)
 
     # THEN
     assert sue_hubunit.job_file_exists(bob_text)
 
 
-def test_HubUnit_get_job_world_OpensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_job_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
@@ -166,15 +166,15 @@ def test_HubUnit_get_job_world_OpensFile(env_dir_setup_cleanup):
     texas_road = create_road(usa_road, texas_text)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, texas_road)
     bob_text = "Bob"
-    bob_world = get_world_with_4_levels()
-    bob_world.set_owner_id(bob_text)
-    sue_hubunit.save_job_world(bob_world)
+    bob_bud = get_budunit_with_4_levels()
+    bob_bud.set_owner_id(bob_text)
+    sue_hubunit.save_job_bud(bob_bud)
 
     # WHEN / THEN
-    assert sue_hubunit.get_job_world(bob_text).get_dict() == bob_world.get_dict()
+    assert sue_hubunit.get_job_bud(bob_text).get_dict() == bob_bud.get_dict()
 
 
-def test_HubUnit_get_job_world_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
+def test_HubUnit_get_job_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     nation_text = "nation-state"
@@ -187,15 +187,15 @@ def test_HubUnit_get_job_world_ReturnsNoneIfFileDoesNotExist(env_dir_setup_clean
     bob_text = "Bob"
 
     # WHEN / THEN
-    assert sue_hubunit.get_job_world(bob_text) is None
+    assert sue_hubunit.get_job_bud(bob_text) is None
 
 
-def test_HubUnit_delete_job_file_DeletesWorldFile(env_dir_setup_cleanup):
+def test_HubUnit_delete_job_file_DeletesBudFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
-    sue_world = get_world_with_4_levels()
-    sue_text = sue_world._owner_id
-    texas_hubunit.save_job_world(sue_world)
+    sue_bud = get_budunit_with_4_levels()
+    sue_text = sue_bud._owner_id
+    texas_hubunit.save_job_bud(sue_bud)
     print(f"{texas_hubunit.job_path(sue_text)=}")
     assert texas_hubunit.job_file_exists(sue_text)
 

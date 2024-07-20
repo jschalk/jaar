@@ -3,13 +3,13 @@ from src.gift.atom_config import config_file_dir
 from src.gift.cross import (
     real_id_str,
     owner_id_str,
-    char_id_str,
+    acct_id_str,
     lobby_id_str,
     parent_road_str,
     label_str,
     weight_str,
     pledge_str,
-    char_pool_str,
+    acct_pool_str,
     debtor_weight_str,
     credor_weight_str,
     column_order_str,
@@ -22,7 +22,7 @@ from src.gift.cross import (
     get_cross_filenames,
     get_cross_attribute_dict,
     get_column_ordered_cross_attributes,
-    jaar_format_0001_char_v0_0_0,
+    jaar_format_0001_acct_v0_0_0,
     jaar_format_0002_lobbyship_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
@@ -30,15 +30,15 @@ from src.gift.cross import (
 )
 
 
-def test_str_functions_ReturnCorrectObjs():
+def test_config_str_functions_ReturnObjs():
     # ESTABLISH / WHEN / THEN
     assert real_id_str() == "real_id"
     assert owner_id_str() == "owner_id"
-    assert char_id_str() == "char_id"
-    assert char_pool_str() == "char_pool"
+    assert acct_id_str() == "acct_id"
+    assert acct_pool_str() == "acct_pool"
     assert debtor_weight_str() == "debtor_weight"
     assert credor_weight_str() == "credor_weight"
-    assert jaar_format_0001_char_v0_0_0() == "jaar_format_0001_char_v0_0_0"
+    assert jaar_format_0001_acct_v0_0_0() == "jaar_format_0001_acct_v0_0_0"
     x0002_cross = "jaar_format_0002_lobbyship_v0_0_0"
     assert jaar_format_0002_lobbyship_v0_0_0() == x0002_cross
     x0003_cross = "jaar_format_0003_ideaunit_v0_0_0"
@@ -58,20 +58,20 @@ def test_get_cross_filenames_ReturnsCorrectObj():
     x_filenames = get_cross_filenames()
     # THEN
     print(f"{x_filenames=}")
-    assert jaar_format_0001_char_v0_0_0() in x_filenames
+    assert jaar_format_0001_acct_v0_0_0() in x_filenames
     assert jaar_format_0002_lobbyship_v0_0_0() in x_filenames
     assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
 
 
 def test_get_headers_list_ReturnsObj():
     # ESTABLISH / WHEN
-    format_0001_headers = _get_headers_list(jaar_format_0001_char_v0_0_0())
+    format_0001_headers = _get_headers_list(jaar_format_0001_acct_v0_0_0())
 
     # THEN
     # print(f"{format_0001_headers=}")
     assert format_0001_headers == [
-        "char_id",
-        "char_pool",
+        "acct_id",
+        "acct_pool",
         "credor_weight",
         "debtor_weight",
         "owner_id",
@@ -83,12 +83,13 @@ def test_create_cross_dataframe_ReturnsCorrectObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
-    x_df = create_cross_dataframe(empty_d2, jaar_format_0001_char_v0_0_0())
+    x_df = create_cross_dataframe(empty_d2, jaar_format_0001_acct_v0_0_0())
     # THEN
-    assert list(x_df.columns) == _get_headers_list(jaar_format_0001_char_v0_0_0())
+    assert list(x_df.columns) == _get_headers_list(jaar_format_0001_acct_v0_0_0())
 
 
 def for_all_crosss_create_cross_dataframe():
+    # TODO Catching broad exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
     empty_d2 = []
     for x_filename in get_cross_filenames():
         try:
@@ -117,9 +118,9 @@ def test_cross_FilesExist():
     assert len(cross_filenames) == len(get_cross_filenames())
 
 
-def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0():
+def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_acct_v0_0_0():
     # ESTABLISH
-    cross_name = jaar_format_0001_char_v0_0_0()
+    cross_name = jaar_format_0001_acct_v0_0_0()
 
     # WHEN
     cross_dict = get_cross_attribute_dict(cross_name)
@@ -127,28 +128,28 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_char_v0_0_0()
     # THEN
     real_id_dict = cross_dict.get(real_id_str())
     owner_id_dict = cross_dict.get(owner_id_str())
-    char_id_dict = cross_dict.get(char_id_str())
-    char_pool_dict = cross_dict.get(char_pool_str())
+    acct_id_dict = cross_dict.get(acct_id_str())
+    acct_pool_dict = cross_dict.get(acct_pool_str())
     debtor_weight_dict = cross_dict.get(debtor_weight_str())
     credor_weight_dict = cross_dict.get(credor_weight_str())
-    assert real_id_dict != None
-    assert owner_id_dict != None
-    assert char_id_dict != None
-    assert char_pool_dict != None
-    assert debtor_weight_dict != None
-    assert credor_weight_dict != None
+    assert real_id_dict is not None
+    assert owner_id_dict is not None
+    assert acct_id_dict is not None
+    assert acct_pool_dict is not None
+    assert debtor_weight_dict is not None
+    assert credor_weight_dict is not None
     assert len(cross_dict) == 6
 
     real_id_column_order = real_id_dict.get(column_order_str())
     owner_id_column_order = owner_id_dict.get(column_order_str())
-    char_id_column_order = char_id_dict.get(column_order_str())
-    char_pool_column_order = char_pool_dict.get(column_order_str())
+    acct_id_column_order = acct_id_dict.get(column_order_str())
+    acct_pool_column_order = acct_pool_dict.get(column_order_str())
     debtor_weight_column_order = debtor_weight_dict.get(column_order_str())
     credor_weight_column_order = credor_weight_dict.get(column_order_str())
     assert real_id_column_order == 0
     assert owner_id_column_order == 1
-    assert char_pool_column_order == 2
-    assert char_id_column_order == 3
+    assert acct_pool_column_order == 2
+    assert acct_id_column_order == 3
     assert debtor_weight_column_order == 5
     assert credor_weight_column_order == 4
 
@@ -163,21 +164,21 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_
     # THEN
     real_id_dict = cross_dict.get(real_id_str())
     owner_id_dict = cross_dict.get(owner_id_str())
-    char_id_dict = cross_dict.get(char_id_str())
+    acct_id_dict = cross_dict.get(acct_id_str())
     lobby_id_dict = cross_dict.get(lobby_id_str())
     debtor_weight_dict = cross_dict.get(debtor_weight_str())
     credor_weight_dict = cross_dict.get(credor_weight_str())
-    assert real_id_dict != None
-    assert owner_id_dict != None
-    assert char_id_dict != None
-    assert lobby_id_dict != None
-    assert debtor_weight_dict != None
-    assert credor_weight_dict != None
+    assert real_id_dict is not None
+    assert owner_id_dict is not None
+    assert acct_id_dict is not None
+    assert lobby_id_dict is not None
+    assert debtor_weight_dict is not None
+    assert credor_weight_dict is not None
     assert len(cross_dict) == 6
 
     assert real_id_dict.get(column_order_str()) == 0
     assert owner_id_dict.get(column_order_str()) == 1
-    assert char_id_dict.get(column_order_str()) == 2
+    assert acct_id_dict.get(column_order_str()) == 2
     assert lobby_id_dict.get(column_order_str()) == 3
     assert debtor_weight_dict.get(column_order_str()) == 5
     assert credor_weight_dict.get(column_order_str()) == 4
@@ -197,12 +198,12 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0
     label_dict = cross_dict.get(label_str())
     weight_dict = cross_dict.get(weight_str())
     pledge_dict = cross_dict.get(pledge_str())
-    assert real_id_dict != None
-    assert owner_id_dict != None
-    assert parent_road_dict != None
-    assert label_dict != None
-    assert weight_dict != None
-    assert pledge_dict != None
+    assert real_id_dict is not None
+    assert owner_id_dict is not None
+    assert parent_road_dict is not None
+    assert label_dict is not None
+    assert weight_dict is not None
+    assert pledge_dict is not None
     assert len(cross_dict) == 6
 
     assert real_id_dict.get(column_order_str()) == 0
@@ -215,7 +216,7 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0
 
 def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
     # ESTABLISH
-    cross_name = jaar_format_0001_char_v0_0_0()
+    cross_name = jaar_format_0001_acct_v0_0_0()
     # WHEN
     sorted_cross_attributes = get_column_ordered_cross_attributes(cross_name)
 
@@ -223,8 +224,8 @@ def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
     assert sorted_cross_attributes == [
         real_id_str(),
         owner_id_str(),
-        char_pool_str(),
-        char_id_str(),
+        acct_pool_str(),
+        acct_id_str(),
         credor_weight_str(),
         debtor_weight_str(),
     ]

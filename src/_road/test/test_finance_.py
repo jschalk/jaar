@@ -1,22 +1,21 @@
 from src._road.finance import (
-    BudCoin,
-    BudNum,
+    FundCoin,
+    FundNum,
     BitNum,
     PennyNum,
     MoneyUnit,
     RespectNum,
-    default_bud_pool,
-    validate_bud_pool,
+    default_fund_pool,
+    validate_fund_pool,
     default_respect_num,
     validate_respect_num,
-    default_bud_coin_if_none,
+    default_fund_coin_if_none,
     default_bit_if_none,
     default_penny_if_none,
-    trim_bud_coin_excess,
+    trim_fund_coin_excess,
     trim_bit_excess,
     trim_penny_excess,
-    FiscalUnit,
-    valid_fiscal_ratio,
+    valid_finance_ratio,
 )
 from inspect import getdoc as inspect_getdoc
 
@@ -97,77 +96,66 @@ def test_MoneyUnit_exists():
     assert inspect_getdoc(y_moneyunit) == "MoneyUnit inherits from float class"
 
 
-def test_BudNum_exists():
+def test_FundNum_exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_budnum = BudNum(x_float)
+    y_fund_num = FundNum(x_float)
     # THEN
-    assert y_budnum == x_float
-    inspect_str = "BudNum inherits from float class"
-    assert inspect_getdoc(y_budnum) == inspect_str
+    assert y_fund_num == x_float
+    inspect_str = "FundNum inherits from float class"
+    assert inspect_getdoc(y_fund_num) == inspect_str
 
 
-def test_default_bud_pool_ReturnsObj():
+def test_default_fund_pool_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_bud_pool() == 1000000000
+    assert default_fund_pool() == 1000000000
 
 
-def test_validate_bud_pool_ReturnsObj():
+def test_validate_fund_pool_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert validate_bud_pool() == default_bud_pool()
-    assert validate_bud_pool(None) == default_bud_pool()
-    assert validate_bud_pool(0.5) == default_bud_coin_if_none()
+    assert validate_fund_pool() == default_fund_pool()
+    assert validate_fund_pool(None) == default_fund_pool()
+    assert validate_fund_pool(0.5) == default_fund_coin_if_none()
     assert (
-        validate_bud_pool(default_bud_coin_if_none() - 0.01)
-        == default_bud_coin_if_none()
+        validate_fund_pool(default_fund_coin_if_none() - 0.01)
+        == default_fund_coin_if_none()
     )
-    assert validate_bud_pool(1) == 1
-    assert validate_bud_pool(25) == 25
+    assert validate_fund_pool(1) == 1
+    assert validate_fund_pool(25) == 25
 
 
-def test_BudCoin_exists():
+def test_FundCoin_exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_bud_coinnum = BudCoin(x_float)
+    y_fund_coinnum = FundCoin(x_float)
     # THEN
-    assert y_bud_coinnum == x_float
-    inspect_str = "Smallest Unit of bud"
-    assert inspect_getdoc(y_bud_coinnum) == inspect_str
+    assert y_fund_coinnum == x_float
+    inspect_str = "Smallest Unit of fund_num"
+    assert inspect_getdoc(y_fund_coinnum) == inspect_str
 
 
-def test_default_bud_coin_if_none_ReturnsCorrectObj():
+def test_default_fund_coin_if_none_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert default_bud_coin_if_none() == 1
-    assert default_bud_coin_if_none(5) == 5
-    assert default_bud_coin_if_none(0.03) == 0.03
+    assert default_fund_coin_if_none() == 1
+    assert default_fund_coin_if_none(5) == 5
+    assert default_fund_coin_if_none(0.03) == 0.03
 
 
-def test_trim_bud_coin_excess_ReturnsCorrectedFloat():
+def test_trim_fund_coin_excess_ReturnsCorrectedFloat():
     # ESTABLISH / WHEN / THEN
-    assert trim_bud_coin_excess(num=5.5, bud_coin=1) == 5
-    assert trim_bud_coin_excess(num=0.5, bud_coin=1) == 0
-    assert trim_bud_coin_excess(num=5.5, bud_coin=0.1) == 5.5
-    assert trim_bud_coin_excess(num=0.5, bud_coin=0.01) == 0.5
-    assert trim_bud_coin_excess(num=0.56, bud_coin=0.1) == 0.5
-    assert trim_bud_coin_excess(num=0.56, bud_coin=0.133) == 0.532
-
-
-def test_FiscalUnit_Exists():
-    # ESTABLISH / WHEN
-    x_fiscal = FiscalUnit()
-
-    # THEN
-    assert x_fiscal._bud_pool is None
-    assert x_fiscal._bud_coin is None
-    assert x_fiscal._bit is None
-    assert x_fiscal._penny is None
+    assert trim_fund_coin_excess(num=5.5, fund_coin=1) == 5
+    assert trim_fund_coin_excess(num=0.5, fund_coin=1) == 0
+    assert trim_fund_coin_excess(num=5.5, fund_coin=0.1) == 5.5
+    assert trim_fund_coin_excess(num=0.5, fund_coin=0.01) == 0.5
+    assert trim_fund_coin_excess(num=0.56, fund_coin=0.1) == 0.5
+    assert trim_fund_coin_excess(num=0.56, fund_coin=0.133) == 0.532
 
 
 def test_default_respect_num_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_respect_num() == default_bud_pool()
+    assert default_respect_num() == default_fund_pool()
 
 
 def test_validate_respect_num_ReturnsObj():
@@ -177,18 +165,18 @@ def test_validate_respect_num_ReturnsObj():
     assert validate_respect_num(0.5) == default_bit_if_none()
     assert validate_respect_num(0.5) == 1
     assert (
-        validate_respect_num(default_bud_coin_if_none() - 0.01)
-        == default_bud_coin_if_none()
+        validate_respect_num(default_fund_coin_if_none() - 0.01)
+        == default_fund_coin_if_none()
     )
     assert validate_respect_num(1) == 1
     assert validate_respect_num(25) == 25
 
 
-def test_valid_fiscal_ratio_ReturnsObj():
+def test_valid_finance_ratio_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert valid_fiscal_ratio(10, 1)
-    assert valid_fiscal_ratio(10, 3) is False
-    assert valid_fiscal_ratio(10.1, 1) is False
-    assert valid_fiscal_ratio(10.1, 0.1) is False
+    assert valid_finance_ratio(10, 1)
+    assert valid_finance_ratio(10, 3) is False
+    assert valid_finance_ratio(10.1, 1) is False
+    assert valid_finance_ratio(10.1, 0.1) is False
     inspect_str = """Checks that big_number is wholly divisible by small_number"""
-    assert inspect_getdoc(valid_fiscal_ratio) == inspect_str
+    assert inspect_getdoc(valid_finance_ratio) == inspect_str

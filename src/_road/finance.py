@@ -26,44 +26,44 @@ class BitNum(float):
     pass
 
 
-class BudCoin(float):
-    """Smallest Unit of bud"""
+class FundCoin(float):
+    """Smallest Unit of fund_num"""
 
     pass
 
 
-class BudNum(float):
-    """BudNum inherits from float class"""
+class FundNum(float):
+    """FundNum inherits from float class"""
 
     pass
 
 
-def default_bud_coin_if_none(bud_coin: BudCoin = None) -> BudCoin:
-    return get_1_if_None(bud_coin)
+def default_fund_coin_if_none(fund_coin: FundCoin = None) -> FundCoin:
+    return get_1_if_None(fund_coin)
 
 
-def trim_bud_coin_excess(num: float, bud_coin: BudCoin) -> float:
-    return bud_coin * int(num / bud_coin)
+def trim_fund_coin_excess(num: float, fund_coin: FundCoin) -> float:
+    return fund_coin * int(num / fund_coin)
 
 
-def default_bud_pool() -> BudNum:
-    return BudNum(default_money_magnitude())
+def default_fund_pool() -> FundNum:
+    return FundNum(default_money_magnitude())
 
 
-def validate_bud_pool(x_bud_pool: int = None) -> int:
-    x_bud_pool = default_bud_pool() if x_bud_pool is None else x_bud_pool
-    return max(get_1_if_None(x_bud_pool), default_bud_coin_if_none())
+def validate_fund_pool(x_fund_pool: int = None) -> int:
+    x_fund_pool = default_fund_pool() if x_fund_pool is None else x_fund_pool
+    return max(get_1_if_None(x_fund_pool), default_fund_coin_if_none())
 
 
-def valid_fiscal_ratio(big_number: float, small_number: float) -> bool:
+def valid_finance_ratio(big_number: float, small_number: float) -> bool:
     """Checks that big_number is wholly divisible by small_number"""
     return (big_number % small_number) == 0
 
 
-# def validate_bud_pool(x_bud_pool: BudNum = None, x_bud_coin: BudCoin = None) -> int:
-#     x_bud_coin = default_bud_coin_if_none() if x_bud_coin is None else x_bud_coin
-#     x_bud_pool = default_bud_pool() if x_bud_pool is None else x_bud_pool
-#     return max(get_1_if_None(x_bud_pool), default_bud_coin_if_none())
+# def validate_fund_pool(x_fund_pool: FundNum = None, x_fund_coin: FundCoin = None) -> int:
+#     x_fund_coin = default_fund_coin_if_none() if x_fund_coin is None else x_fund_coin
+#     x_fund_pool = default_fund_pool() if x_fund_pool is None else x_fund_pool
+#     return max(get_1_if_None(x_fund_pool), default_fund_coin_if_none())
 
 
 def default_bit_if_none(bit: BitNum = None) -> BitNum:
@@ -75,7 +75,7 @@ def trim_bit_excess(num: float, bit: BitNum) -> float:
 
 
 def default_respect_num() -> RespectNum:
-    return RespectNum(default_bud_pool())
+    return RespectNum(default_fund_pool())
 
 
 def validate_respect_num(x_respect_num: RespectNum = None) -> RespectNum:
@@ -97,14 +97,6 @@ def default_money_magnitude() -> MoneyUnit:
 
 def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
     return default_money_magnitude() if money_magnitude is None else money_magnitude
-
-
-@dataclass
-class FiscalUnit:
-    _bud_pool: BudNum = None
-    _bud_coin: BudCoin = None
-    _bit: BitNum = None
-    _penny: PennyNum = None
 
 
 def _get_missing_scale_list(

@@ -1,18 +1,18 @@
 from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_With_base_idea_active_requisite():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_idea_reasonunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_idea_reasonunit"
     road_text = "road"
-    casa_road = sue_world.make_l1_road("casa")
-    road_value = sue_world.make_road(casa_road, "clean fridge")
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_text = "base"
-    base_value = f"{sue_world._road_delimiter}Swimmers"
+    base_value = f"{sue_bud._road_delimiter}Swimmers"
     base_idea_active_requisite_text = "base_idea_active_requisite"
     base_idea_active_requisite_value = True
     swim_atomunit = atomunit_shop(category, atom_insert())
@@ -26,7 +26,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_With_base_idea_ac
     x_changeunit.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit created for idea '{road_value}' with base '{base_value}'. base_idea_active_requisite={base_idea_active_requisite_value}."
@@ -36,13 +36,13 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_With_base_idea_ac
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_Without_base_idea_active_requisite():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_idea_reasonunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_idea_reasonunit"
     road_text = "road"
-    casa_road = sue_world.make_l1_road("casa")
-    road_value = sue_world.make_road(casa_road, "clean fridge")
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_text = "base"
-    base_value = f"{sue_world._road_delimiter}Swimmers"
+    base_value = f"{sue_bud._road_delimiter}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_insert())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(base_text, base_value)
@@ -51,7 +51,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_Without_base_idea
     x_changeunit.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit created for idea '{road_value}' with base '{base_value}'."
@@ -61,13 +61,13 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_INSERT_Without_base_idea
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_requisite_IsTrue():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_idea_reasonunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_idea_reasonunit"
     base_text = "base"
-    base_value = f"{sue_world._road_delimiter}Swimmers"
+    base_value = f"{sue_bud._road_delimiter}Swimmers"
     road_text = "road"
-    casa_road = sue_world.make_l1_road("casa")
-    road_value = sue_world.make_road(casa_road, "clean fridge")
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_idea_active_requisite_text = "base_idea_active_requisite"
     base_idea_active_requisite_value = True
     swim_atomunit = atomunit_shop(category, atom_update())
@@ -81,7 +81,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_
     x_changeunit.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
@@ -91,13 +91,13 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_requisite_IsNone():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_idea_reasonunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_idea_reasonunit"
     base_text = "base"
-    base_value = f"{sue_world._road_delimiter}Swimmers"
+    base_value = f"{sue_bud._road_delimiter}Swimmers"
     road_text = "road"
-    casa_road = sue_world.make_l1_road("casa")
-    road_value = sue_world.make_road(casa_road, "clean fridge")
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
     swim_atomunit = atomunit_shop(category, atom_update())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(base_text, base_value)
@@ -106,7 +106,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_
     x_changeunit.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' and no longer checks base active mode."
@@ -116,13 +116,13 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_
 
 def test_create_legible_list_ReturnsObj_idea_reasonunit_DELETE():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_idea_reasonunit"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_idea_reasonunit"
     road_text = "road"
-    casa_road = sue_world.make_l1_road("casa")
-    road_value = sue_world.make_road(casa_road, "clean fridge")
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_text = "base"
-    base_value = f"{sue_world._road_delimiter}Swimmers"
+    base_value = f"{sue_bud._road_delimiter}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_delete())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(base_text, base_value)
@@ -131,7 +131,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_DELETE():
     x_changeunit.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' has been deleted."

@@ -23,7 +23,7 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
         yao_hubunit, bob_text, yao_number, x_debtor_count, x_credor_count
     )
     bob_rivergrade.grant_amount = 0
-    assert yao_riverrun._rivergrades.get(bob_text) != None
+    assert yao_riverrun._rivergrades.get(bob_text) is not None
     gen_rivergrade = yao_riverrun._rivergrades.get(bob_text)
     assert gen_rivergrade.debtor_count == x_debtor_count
     assert gen_rivergrade.credor_count == x_credor_count
@@ -78,8 +78,8 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
     x_riverrun.set_econ_credorledger(yao_text, bob_text, 1)
     x_riverrun.set_econ_credorledger(zia_text, bob_text, 1)
     x_riverrun.set_econ_credorledger(xio_text, sue_text, 1)
-    all_chars_ids = x_riverrun.get_all_econ_credorledger_char_ids()
-    assert all_chars_ids == {yao_text, bob_text, zia_text, xio_text, sue_text}
+    all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
+    assert all_accts_ids == {yao_text, bob_text, zia_text, xio_text, sue_text}
     assert x_riverrun._rivergrades_is_empty()
     assert x_riverrun.rivergrade_exists(yao_text) == False
     assert x_riverrun.rivergrade_exists(bob_text) == False

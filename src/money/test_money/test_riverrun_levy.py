@@ -8,18 +8,18 @@ def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario01():
     yao_text = "Yao"
     yao_tax_due = 222
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_char_tax_due(yao_text, yao_tax_due)
+    x_riverrun.set_acct_tax_due(yao_text, yao_tax_due)
 
     yao_paid = 500
     x_cycleledger = {yao_text: yao_paid}
-    assert x_riverrun.get_char_tax_due(yao_text) == yao_tax_due
+    assert x_riverrun.get_acct_tax_due(yao_text) == yao_tax_due
     assert x_cycleledger.get(yao_text) == yao_paid
 
     # WHEN
     y_cycleledger, tax_got = x_riverrun.levy_tax_dues(x_cycleledger)
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
     assert tax_got == 222
     assert y_cycleledger.get(yao_text) == yao_paid - yao_tax_due
 
@@ -32,14 +32,14 @@ def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario02():
     yao_tax_due = 222
     bob_tax_due = 127
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_char_tax_due(yao_text, yao_tax_due)
-    x_riverrun.set_char_tax_due(bob_text, bob_tax_due)
+    x_riverrun.set_acct_tax_due(yao_text, yao_tax_due)
+    x_riverrun.set_acct_tax_due(bob_text, bob_tax_due)
 
     yao_paid = 500
     bob_paid = 100
     x_cycleledger = {yao_text: yao_paid, bob_text: bob_paid}
-    assert x_riverrun.get_char_tax_due(yao_text) == yao_tax_due
-    assert x_riverrun.get_char_tax_due(bob_text) == bob_tax_due
+    assert x_riverrun.get_acct_tax_due(yao_text) == yao_tax_due
+    assert x_riverrun.get_acct_tax_due(bob_text) == bob_tax_due
     assert x_cycleledger.get(yao_text) == yao_paid
     assert x_cycleledger.get(bob_text) == bob_paid
 
@@ -47,8 +47,8 @@ def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario02():
     y_cycleledger, tax_got = x_riverrun.levy_tax_dues(x_cycleledger)
 
     # THEN
-    assert x_riverrun.get_char_tax_due(yao_text) == 0
-    assert x_riverrun.get_char_tax_due(bob_text) == 27
+    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(bob_text) == 27
     assert y_cycleledger.get(yao_text) == yao_paid - yao_tax_due
     assert y_cycleledger.get(bob_text) is None
     assert tax_got == 322

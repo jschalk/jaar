@@ -63,44 +63,44 @@ def optional_args_text() -> str:
     return "optional_args"
 
 
-def worldunit_text() -> str:
-    return "worldunit"
+def budunit_text() -> str:
+    return "budunit"
 
 
-def world_charunit_text() -> str:
-    return "world_charunit"
+def bud_acctunit_text() -> str:
+    return "bud_acctunit"
 
 
-def world_char_lobbyship_text() -> str:
-    return "world_char_lobbyship"
+def bud_acct_lobbyship_text() -> str:
+    return "bud_acct_lobbyship"
 
 
-def world_ideaunit_text() -> str:
-    return "world_ideaunit"
+def bud_ideaunit_text() -> str:
+    return "bud_ideaunit"
 
 
-def world_idea_awardlink_text() -> str:
-    return "world_idea_awardlink"
+def bud_idea_awardlink_text() -> str:
+    return "bud_idea_awardlink"
 
 
-def world_idea_reasonunit_text() -> str:
-    return "world_idea_reasonunit"
+def bud_idea_reasonunit_text() -> str:
+    return "bud_idea_reasonunit"
 
 
-def world_idea_reason_premiseunit_text() -> str:
-    return "world_idea_reason_premiseunit"
+def bud_idea_reason_premiseunit_text() -> str:
+    return "bud_idea_reason_premiseunit"
 
 
-def world_idea_lobbyhold_text() -> str:
-    return "world_idea_lobbyhold"
+def bud_idea_lobbyhold_text() -> str:
+    return "bud_idea_lobbyhold"
 
 
-def world_idea_healerhold_text() -> str:
-    return "world_idea_healerhold"
+def bud_idea_healerhold_text() -> str:
+    return "bud_idea_healerhold"
 
 
-def world_idea_factunit_text() -> str:
-    return "world_idea_factunit"
+def bud_idea_factunit_text() -> str:
+    return "bud_idea_factunit"
 
 
 def get_atom_config_file_name() -> str:
@@ -119,14 +119,14 @@ def add_to_atom_table_columns(x_dict, atom_category, crud, arg_key, arg_value):
     x_dict[f"{atom_category}_{crud}_{arg_key}"] = arg_value.get("sqlite_datatype")
 
 
-def get_flattened_atom_table_build() -> dict[str,]:
+def get_flattened_atom_table_build() -> dict[str, any]:
     atom_table_columns = {}
     atom_config = get_atom_config_dict()
     for atom_category, category_dict in atom_config.items():
         catergory_insert = category_dict.get(atom_insert())
         catergory_update = category_dict.get(atom_update())
         catergory_delete = category_dict.get(atom_delete())
-        if catergory_insert != None:
+        if catergory_insert is not None:
             required_args = category_dict.get(required_args_text())
             optional_args = category_dict.get(optional_args_text())
             for required_arg, x_value in required_args.items():
@@ -145,7 +145,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
                     optional_arg,
                     x_value,
                 )
-        if catergory_update != None:
+        if catergory_update is not None:
             required_args = category_dict.get(required_args_text())
             optional_args = category_dict.get(optional_args_text())
             for required_arg, x_value in required_args.items():
@@ -164,7 +164,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
                     optional_arg,
                     x_value,
                 )
-        if catergory_delete != None:
+        if catergory_delete is not None:
             required_args = category_dict.get(required_args_text())
             for required_arg, x_value in required_args.items():
                 add_to_atom_table_columns(
@@ -177,7 +177,7 @@ def get_flattened_atom_table_build() -> dict[str,]:
     return atom_table_columns
 
 
-def get_normalized_world_table_build() -> dict[str : dict[str,]]:
+def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
     normal_tables_dict = {}
     atom_config = get_atom_config_dict()
     for x_category, category_dict in atom_config.items():
@@ -193,14 +193,14 @@ def get_normalized_world_table_build() -> dict[str : dict[str,]]:
         }
         required_args = category_dict.get(required_args_text())
         optional_args = category_dict.get(optional_args_text())
-        if required_args != None:
+        if required_args is not None:
             for required_arg, x_value in required_args.items():
                 normal_columns_dict[required_arg] = {
                     sqlite_datatype_text(): x_value.get(sqlite_datatype_text()),
                     nullable_text(): False,
                 }
 
-        if optional_args != None:
+        if optional_args is not None:
             for optional_arg, x_value in optional_args.items():
                 normal_columns_dict[optional_arg] = {
                     sqlite_datatype_text(): x_value.get(sqlite_datatype_text()),

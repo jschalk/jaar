@@ -1,4 +1,4 @@
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.money.examples.example_credorledgers import (
     example_yao_credorledger,
@@ -122,13 +122,13 @@ def test_RiverCylce_create_cylceledger_ReturnsCorrectObjTwoRiverBooks():
     assert one_cylceledger == {yao_text: yao_money, bob_text: bob_money}
 
 
-def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
+def test_create_init_rivercycle_ReturnsObjScenarioOne_acctunit():
     # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_text)
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(yao_text)
-    yao_credorledger = get_credorledger(yao_world)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_acctunit(yao_text)
+    yao_credorledger = get_credorledger(yao_bud)
     econ_credorledgers = {yao_text: yao_credorledger}
 
     # WHEN
@@ -137,10 +137,10 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_charunit():
     # THEN
     assert yao_init_rivercycle.number == 0
     assert len(yao_init_rivercycle.riverbooks) == 1
-    assert yao_init_rivercycle.riverbooks.get(yao_text) != None
+    assert yao_init_rivercycle.riverbooks.get(yao_text) is not None
 
 
-def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
+def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
@@ -149,11 +149,11 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
     bob_credor_weight = 3
     zia_credor_weight = 10
     yao_hubunit = hubunit_shop(None, None, yao_text)
-    yao_world = worldunit_shop(yao_text)
-    yao_world.add_charunit(yao_text, yao_credor_weight)
-    yao_world.add_charunit(bob_text, bob_credor_weight)
-    yao_world.add_charunit(zia_text, zia_credor_weight)
-    yao_credorledger = get_credorledger(yao_world)
+    yao_bud = budunit_shop(yao_text)
+    yao_bud.add_acctunit(yao_text, yao_credor_weight)
+    yao_bud.add_acctunit(bob_text, bob_credor_weight)
+    yao_bud.add_acctunit(zia_text, zia_credor_weight)
+    yao_credorledger = get_credorledger(yao_bud)
     econ_credorledgers = {yao_text: yao_credorledger}
     print(f"{econ_credorledgers=}")
 
@@ -164,14 +164,14 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_charunit():
     assert yao_init_rivercycle.number == 0
     assert len(yao_init_rivercycle.riverbooks) == 1
     yao_riverbook = yao_init_rivercycle.riverbooks.get(yao_text)
-    assert yao_riverbook != None
+    assert yao_riverbook is not None
     assert len(yao_riverbook._rivergrants) == 3
     assert yao_riverbook._rivergrants.get(yao_text) == 350000000
     assert yao_riverbook._rivergrants.get(bob_text) == 150000000
     assert yao_riverbook._rivergrants.get(zia_text) == 500000000
 
 
-def test_create_next_rivercycle_ReturnsObjScenarioThree_charunit():
+def test_create_next_rivercycle_ReturnsObjScenarioThree_acctunit():
     # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
@@ -199,9 +199,9 @@ def test_create_next_rivercycle_ReturnsObjScenarioThree_charunit():
     yao_riverbook = next_rivercycle.riverbooks.get(yao_text)
     bob_riverbook = next_rivercycle.riverbooks.get(bob_text)
     zia_riverbook = next_rivercycle.riverbooks.get(zia_text)
-    assert yao_riverbook != None
-    assert bob_riverbook != None
-    assert zia_riverbook != None
+    assert yao_riverbook is not None
+    assert bob_riverbook is not None
+    assert zia_riverbook is not None
     assert len(yao_riverbook._rivergrants) == 3
     assert yao_riverbook._rivergrants.get(yao_text) == 122500000
     assert yao_riverbook._rivergrants.get(bob_text) == 52500000
@@ -247,9 +247,9 @@ def test_create_next_rivercycle_ReturnsObjDoesNotReference_cycleledger_From_prev
     yao_riverbook = next_rivercycle.riverbooks.get(yao_text)
     bob_riverbook = next_rivercycle.riverbooks.get(bob_text)
     zia_riverbook = next_rivercycle.riverbooks.get(zia_text)
-    assert yao_riverbook != None
-    assert bob_riverbook != None
-    assert zia_riverbook != None
+    assert yao_riverbook is not None
+    assert bob_riverbook is not None
+    assert zia_riverbook is not None
     assert len(yao_riverbook._rivergrants) == 3
     assert yao_riverbook._rivergrants.get(yao_text) == 122500000
     assert yao_riverbook._rivergrants.get(bob_text) == 52500000

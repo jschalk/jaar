@@ -1,7 +1,7 @@
 {
-    "atom_category": "world_char_lobbyship",
+    "atom_category": "bud_acct_lobbyship",
     "attributes": {
-        "char_id": {
+        "acct_id": {
             "column_order": 2,
             "sort_order": 0
         },

@@ -1,13 +1,13 @@
 from src.gift.atom_config import (
-    get_normalized_world_table_build,
+    get_normalized_bud_table_build,
     normal_table_name_text,
     normal_specs_text,
     columns_text,
     sqlite_datatype_text,
 )
 from src.normal_db.normal_models import (
-    WorldTable,
-    CharUnitTable,
+    BudTable,
+    AcctUnitTable,
     LobbyShipTable,
     IdeaTable,
     AwardLinkTable,
@@ -60,34 +60,34 @@ def print_out_expected_class_attribute_declarations(config_category):
         print(f"    {config_column} = Column({declare_type})")
 
 
-def test_normalized_table_WorldTable_Exists():
+def test_normalized_table_BudTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("worldunit")
-    mapper = inspect(WorldTable)
+    config_category = get_normalized_bud_table_build().get("budunit")
+    mapper = inspect(BudTable)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "world"
-    assert config_table_name == WorldTable.__tablename__
+    assert config_table_name == "bud"
+    assert config_table_name == BudTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_CharUnitTable_Exists():
+def test_normalized_table_AcctUnitTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_charunit")
-    mapper = inspect(CharUnitTable)
+    config_category = get_normalized_bud_table_build().get("bud_acctunit")
+    mapper = inspect(AcctUnitTable)
     # print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "charunit"
-    assert config_table_name == CharUnitTable.__tablename__
+    assert config_table_name == "acctunit"
+    assert config_table_name == AcctUnitTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 
 # def test_normalized_table_LobbyTable_Exists():
 #     # ESTABLISH
-#     config_category = get_normalized_world_table_build().get("world_lobbybox")
+#     config_category = get_normalized_bud_table_build().get("bud_lobbybox")
 #     mapper = inspect(LobbyTable)
 #     print_out_expected_class_attribute_declarations(config_category)
 
@@ -100,7 +100,7 @@ def test_normalized_table_CharUnitTable_Exists():
 
 def test_normalized_table_LobbyShipTable_lobbyship_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_char_lobbyship")
+    config_category = get_normalized_bud_table_build().get("bud_acct_lobbyship")
     mapper = inspect(LobbyShipTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -113,7 +113,7 @@ def test_normalized_table_LobbyShipTable_lobbyship_Exists():
 
 def test_normalized_table_IdeaTable_idea_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_ideaunit")
+    config_category = get_normalized_bud_table_build().get("bud_ideaunit")
     mapper = inspect(IdeaTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -126,7 +126,7 @@ def test_normalized_table_IdeaTable_idea_Exists():
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_idea_awardlink")
+    config_category = get_normalized_bud_table_build().get("bud_idea_awardlink")
     mapper = inspect(AwardLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -139,7 +139,7 @@ def test_normalized_table_AwardLinkTable_awardlink_Exists():
 
 def test_normalized_table_ReasonTable_reason_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_idea_reasonunit")
+    config_category = get_normalized_bud_table_build().get("bud_idea_reasonunit")
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -152,8 +152,8 @@ def test_normalized_table_ReasonTable_reason_Exists():
 
 def test_normalized_table_PremiseTable_premise_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get(
-        "world_idea_reason_premiseunit"
+    config_category = get_normalized_bud_table_build().get(
+        "bud_idea_reason_premiseunit"
     )
     mapper = inspect(PremiseTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -167,7 +167,7 @@ def test_normalized_table_PremiseTable_premise_Exists():
 
 def test_normalized_table_lobbyholdTable_lobbyhold_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_idea_lobbyhold")
+    config_category = get_normalized_bud_table_build().get("bud_idea_lobbyhold")
     mapper = inspect(lobbyholdTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -180,7 +180,7 @@ def test_normalized_table_lobbyholdTable_lobbyhold_Exists():
 
 def test_normalized_table_HealerHoldTable_healerhold_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_idea_healerhold")
+    config_category = get_normalized_bud_table_build().get("bud_idea_healerhold")
     mapper = inspect(HealerHoldTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -193,7 +193,7 @@ def test_normalized_table_HealerHoldTable_healerhold_Exists():
 
 def test_normalized_table_FactTable_fact_Exists():
     # ESTABLISH
-    config_category = get_normalized_world_table_build().get("world_idea_factunit")
+    config_category = get_normalized_bud_table_build().get("bud_idea_factunit")
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_category)
 

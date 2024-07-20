@@ -214,19 +214,19 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
 
     # THEN
     real_id_text = "real_id"
-    assert x_dict.get(real_id_text) != None
+    assert x_dict.get(real_id_text) is not None
     assert x_dict.get(real_id_text) == music_text
 
     owner_id_text = "owner_id"
-    assert x_dict.get(owner_id_text) != None
+    assert x_dict.get(owner_id_text) is not None
     assert x_dict.get(owner_id_text) == bob_text
 
     face_id_text = "face_id"
-    assert x_dict.get(face_id_text) != None
+    assert x_dict.get(face_id_text) is not None
     assert x_dict.get(face_id_text) == sue_text
 
     change_text = "change"
-    assert x_dict.get(change_text) != None
+    assert x_dict.get(change_text) is not None
     assert x_dict.get(change_text) == changeunit_shop().get_ordered_atomunits()
     assert x_dict.get(change_text) == {}
 
@@ -242,15 +242,15 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithChangePopulated():
 
     # THEN
     change_text = "change"
-    assert x_dict.get(change_text) != None
+    assert x_dict.get(change_text) is not None
     assert x_dict.get(change_text) == sue_changeunit.get_ordered_atomunits()
     sue_atomunits_dict = x_dict.get(change_text)
     print(f"{len(sue_changeunit.get_sorted_atomunits())=}")
     print(f"{sue_atomunits_dict.keys()=}")
     # print(f"{sue_atomunits_dict.get(0)=}")
     assert sue_atomunits_dict.get(2) is None
-    assert sue_atomunits_dict.get(0) != None
-    assert sue_atomunits_dict.get(1) != None
+    assert sue_atomunits_dict.get(0) is not None
+    assert sue_atomunits_dict.get(1) is not None
 
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
@@ -267,7 +267,7 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
 
     # THEN
     change_text = "change"
-    assert x_dict.get(change_text) != None
+    assert x_dict.get(change_text) is not None
     assert x_dict.get(change_text) == sue_changeunit.get_ordered_atomunits(
         farm_change_start
     )
@@ -276,8 +276,8 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
     print(f"{sue_atomunits_dict.keys()=}")
     # print(f"{sue_atomunits_dict.get(0)=}")
     assert sue_atomunits_dict.get(farm_change_start + 2) is None
-    assert sue_atomunits_dict.get(farm_change_start + 0) != None
-    assert sue_atomunits_dict.get(farm_change_start + 1) != None
+    assert sue_atomunits_dict.get(farm_change_start + 0) is not None
+    assert sue_atomunits_dict.get(farm_change_start + 1) is not None
 
 
 def test_GiftUnit_get_change_atom_numbers_ReturnsCorrectObj():
@@ -314,15 +314,15 @@ def test_GiftUnit_get_changemetric_dict_ReturnsCorrectObj():
 
     # THEN
     owner_id_text = "owner_id"
-    assert x_dict.get(owner_id_text) != None
+    assert x_dict.get(owner_id_text) is not None
     assert x_dict.get(owner_id_text) == bob_text
 
     face_id_text = "face_id"
-    assert x_dict.get(face_id_text) != None
+    assert x_dict.get(face_id_text) is not None
     assert x_dict.get(face_id_text) == yao_text
 
     change_atom_numbers_text = "change_atom_numbers"
-    assert x_dict.get(change_atom_numbers_text) != None
+    assert x_dict.get(change_atom_numbers_text) is not None
     assert x_dict.get(change_atom_numbers_text) == [7, 8]
 
     change_min_text = "change_min"

@@ -1,28 +1,28 @@
 from src._road.jaar_refer import sue_str, bob_str, yao_str
-from src._world.char import charunit_shop
-from src._world.idea import ideaunit_shop
-from src._world.world import worldunit_shop
+from src.bud.acct import acctunit_shop
+from src.bud.idea import ideaunit_shop
+from src.bud.bud import budunit_shop
 from src.gift.cross import (
-    jaar_format_0001_char_v0_0_0,
+    jaar_format_0001_acct_v0_0_0,
     jaar_format_0002_lobbyship_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     get_cross_attribute_dict,
     create_cross,
     real_id_str,
     owner_id_str,
-    char_id_str,
+    acct_id_str,
     lobby_id_str,
     parent_road_str,
     label_str,
     weight_str,
     pledge_str,
-    char_pool_str,
+    acct_pool_str,
     debtor_weight_str,
     credor_weight_str,
 )
 
 
-def test_create_cross_Arg_jaar_format_0001_char_v0_0_0():
+def test_create_cross_Arg_jaar_format_0001_acct_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -35,42 +35,42 @@ def test_create_cross_Arg_jaar_format_0001_char_v0_0_0():
     bob_debtor_weight = 29
     yao_debtor_weight = music_pool - sue_debtor_weight - bob_debtor_weight
     music_real_id = "music56"
-    sue_worldunit = worldunit_shop(sue_text, music_real_id)
-    sue_worldunit.add_charunit(sue_text, sue_credor_weight, sue_debtor_weight)
-    sue_worldunit.add_charunit(bob_text, bob_credor_weight, bob_debtor_weight)
-    sue_worldunit.add_charunit(yao_text, yao_credor_weight, yao_debtor_weight)
-    sue_worldunit.set_char_respect(music_pool)
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    sue_budunit.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    sue_budunit.add_acctunit(bob_text, bob_credor_weight, bob_debtor_weight)
+    sue_budunit.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
+    sue_budunit.set_acct_respect(music_pool)
 
     # WHEN
-    x_cross = jaar_format_0001_char_v0_0_0()
-    char_dataframe = create_cross(sue_worldunit, x_cross)
+    x_cross = jaar_format_0001_acct_v0_0_0()
+    acct_dataframe = create_cross(sue_budunit, x_cross)
 
     # THEN
-    array_headers = list(char_dataframe.columns)
+    array_headers = list(acct_dataframe.columns)
     cross_dict = get_cross_attribute_dict(x_cross)
     assert array_headers == list(cross_dict.keys())
-    assert char_dataframe.loc[0, real_id_str()] == music_real_id
-    assert char_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
-    assert char_dataframe.loc[0, char_pool_str()] == music_pool
-    assert char_dataframe.loc[0, char_id_str()] == bob_text
-    assert char_dataframe.loc[0, credor_weight_str()] == bob_credor_weight
-    assert char_dataframe.loc[0, debtor_weight_str()] == bob_debtor_weight
+    assert acct_dataframe.loc[0, real_id_str()] == music_real_id
+    assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
+    assert acct_dataframe.loc[0, acct_pool_str()] == music_pool
+    assert acct_dataframe.loc[0, acct_id_str()] == bob_text
+    assert acct_dataframe.loc[0, credor_weight_str()] == bob_credor_weight
+    assert acct_dataframe.loc[0, debtor_weight_str()] == bob_debtor_weight
 
-    assert char_dataframe.loc[1, real_id_str()] == music_real_id
-    assert char_dataframe.loc[1, owner_id_str()] == sue_worldunit._owner_id
-    assert char_dataframe.loc[1, char_pool_str()] == music_pool
-    assert char_dataframe.loc[1, char_id_str()] == sue_text
-    assert char_dataframe.loc[1, credor_weight_str()] == sue_credor_weight
-    assert char_dataframe.loc[1, debtor_weight_str()] == sue_debtor_weight
+    assert acct_dataframe.loc[1, real_id_str()] == music_real_id
+    assert acct_dataframe.loc[1, owner_id_str()] == sue_budunit._owner_id
+    assert acct_dataframe.loc[1, acct_pool_str()] == music_pool
+    assert acct_dataframe.loc[1, acct_id_str()] == sue_text
+    assert acct_dataframe.loc[1, credor_weight_str()] == sue_credor_weight
+    assert acct_dataframe.loc[1, debtor_weight_str()] == sue_debtor_weight
 
-    assert char_dataframe.loc[2, real_id_str()] == music_real_id
-    assert char_dataframe.loc[2, owner_id_str()] == sue_worldunit._owner_id
-    assert char_dataframe.loc[2, char_pool_str()] == music_pool
-    assert char_dataframe.loc[2, char_id_str()] == yao_text
-    assert char_dataframe.loc[2, credor_weight_str()] == yao_credor_weight
-    assert char_dataframe.loc[2, debtor_weight_str()] == yao_debtor_weight
+    assert acct_dataframe.loc[2, real_id_str()] == music_real_id
+    assert acct_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
+    assert acct_dataframe.loc[2, acct_pool_str()] == music_pool
+    assert acct_dataframe.loc[2, acct_id_str()] == yao_text
+    assert acct_dataframe.loc[2, credor_weight_str()] == yao_credor_weight
+    assert acct_dataframe.loc[2, debtor_weight_str()] == yao_debtor_weight
 
-    assert len(char_dataframe) == 3
+    assert len(acct_dataframe) == 3
 
 
 def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
@@ -79,10 +79,10 @@ def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
     bob_text = bob_str()
     yao_text = yao_str()
     music_real_id = "music56"
-    sue_worldunit = worldunit_shop(sue_text, music_real_id)
-    sue_worldunit.add_charunit(sue_text)
-    sue_worldunit.add_charunit(bob_text)
-    sue_worldunit.add_charunit(yao_text)
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    sue_budunit.add_acctunit(sue_text)
+    sue_budunit.add_acctunit(bob_text)
+    sue_budunit.add_acctunit(yao_text)
     iowa_text = ",Iowa"
     sue_iowa_credor_w = 37
     bob_iowa_credor_w = 43
@@ -93,17 +93,17 @@ def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
     ohio_text = ",Ohio"
     yao_ohio_credor_w = 73
     yao_ohio_debtor_w = 67
-    sue_charunit = sue_worldunit.get_char(sue_text)
-    bob_charunit = sue_worldunit.get_char(bob_text)
-    yao_charunit = sue_worldunit.get_char(yao_text)
-    sue_charunit.add_lobbyship(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
-    bob_charunit.add_lobbyship(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
-    yao_charunit.add_lobbyship(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
-    yao_charunit.add_lobbyship(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
+    sue_acctunit = sue_budunit.get_acct(sue_text)
+    bob_acctunit = sue_budunit.get_acct(bob_text)
+    yao_acctunit = sue_budunit.get_acct(yao_text)
+    sue_acctunit.add_lobbyship(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
+    bob_acctunit.add_lobbyship(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
+    yao_acctunit.add_lobbyship(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
+    yao_acctunit.add_lobbyship(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
 
     # WHEN
     x_cross = jaar_format_0002_lobbyship_v0_0_0()
-    lobbyship_dataframe = create_cross(sue_worldunit, x_cross)
+    lobbyship_dataframe = create_cross(sue_budunit, x_cross)
 
     # THEN
     array_headers = list(lobbyship_dataframe.columns)
@@ -111,29 +111,29 @@ def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
     print(f"{len(lobbyship_dataframe)=}")
     assert array_headers == list(cross_dict.keys())
     assert lobbyship_dataframe.loc[0, real_id_str()] == music_real_id
-    assert lobbyship_dataframe.loc[0, owner_id_str()] == sue_worldunit._owner_id
-    assert lobbyship_dataframe.loc[0, char_id_str()] == bob_text
+    assert lobbyship_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
+    assert lobbyship_dataframe.loc[0, acct_id_str()] == bob_text
     assert lobbyship_dataframe.loc[0, lobby_id_str()] == iowa_text
     assert lobbyship_dataframe.loc[0, credor_weight_str()] == bob_iowa_credor_w
     assert lobbyship_dataframe.loc[0, debtor_weight_str()] == bob_iowa_debtor_w
 
     assert lobbyship_dataframe.loc[2, real_id_str()] == music_real_id
-    assert lobbyship_dataframe.loc[2, owner_id_str()] == sue_worldunit._owner_id
-    assert lobbyship_dataframe.loc[2, char_id_str()] == sue_text
+    assert lobbyship_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
+    assert lobbyship_dataframe.loc[2, acct_id_str()] == sue_text
     assert lobbyship_dataframe.loc[2, lobby_id_str()] == iowa_text
     assert lobbyship_dataframe.loc[2, credor_weight_str()] == sue_iowa_credor_w
     assert lobbyship_dataframe.loc[2, debtor_weight_str()] == sue_iowa_debtor_w
 
     assert lobbyship_dataframe.loc[4, real_id_str()] == music_real_id
-    assert lobbyship_dataframe.loc[4, owner_id_str()] == sue_worldunit._owner_id
-    assert lobbyship_dataframe.loc[4, char_id_str()] == yao_text
+    assert lobbyship_dataframe.loc[4, owner_id_str()] == sue_budunit._owner_id
+    assert lobbyship_dataframe.loc[4, acct_id_str()] == yao_text
     assert lobbyship_dataframe.loc[4, lobby_id_str()] == iowa_text
     assert lobbyship_dataframe.loc[4, credor_weight_str()] == yao_iowa_credor_w
     assert lobbyship_dataframe.loc[4, debtor_weight_str()] == yao_iowa_debtor_w
 
     assert lobbyship_dataframe.loc[5, real_id_str()] == music_real_id
-    assert lobbyship_dataframe.loc[5, owner_id_str()] == sue_worldunit._owner_id
-    assert lobbyship_dataframe.loc[5, char_id_str()] == yao_text
+    assert lobbyship_dataframe.loc[5, owner_id_str()] == sue_budunit._owner_id
+    assert lobbyship_dataframe.loc[5, acct_id_str()] == yao_text
     assert lobbyship_dataframe.loc[5, lobby_id_str()] == ohio_text
     assert lobbyship_dataframe.loc[5, credor_weight_str()] == yao_ohio_credor_w
     assert lobbyship_dataframe.loc[5, debtor_weight_str()] == yao_ohio_debtor_w
@@ -145,31 +145,31 @@ def test_create_cross_Arg_jaar_format_0003_ideaunit_v0_0_0():
     sue_text = sue_str()
     bob_text = bob_str()
     music_real_id = "music56"
-    sue_worldunit = worldunit_shop(sue_text, music_real_id)
+    sue_budunit = budunit_shop(sue_text, music_real_id)
     casa_text = "casa"
-    casa_road = sue_worldunit.make_l1_road(casa_text)
+    casa_road = sue_budunit.make_l1_road(casa_text)
     casa_weight = 31
-    sue_worldunit.add_l1_idea(ideaunit_shop(casa_text, _weight=casa_weight))
+    sue_budunit.add_l1_idea(ideaunit_shop(casa_text, _weight=casa_weight))
     clean_text = "clean"
-    clean_road = sue_worldunit.make_road(casa_road, clean_text)
-    sue_worldunit.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    sue_budunit.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
     x_cross = jaar_format_0003_ideaunit_v0_0_0()
-    ideaunit_format = create_cross(sue_worldunit, x_cross)
+    ideaunit_format = create_cross(sue_budunit, x_cross)
 
     # THEN
     array_headers = list(ideaunit_format.columns)
     assert array_headers == list(get_cross_attribute_dict(x_cross).keys())
 
-    assert ideaunit_format.loc[0, owner_id_str()] == sue_worldunit._owner_id
+    assert ideaunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert ideaunit_format.loc[0, pledge_str()] == ""
     assert ideaunit_format.loc[0, real_id_str()] == music_real_id
     assert ideaunit_format.loc[0, parent_road_str()] == music_real_id
     assert ideaunit_format.loc[0, label_str()] == casa_text
     assert ideaunit_format.loc[0, weight_str()] == casa_weight
 
-    assert ideaunit_format.loc[1, owner_id_str()] == sue_worldunit._owner_id
+    assert ideaunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
     assert ideaunit_format.loc[1, pledge_str()] == "Yes"
     assert ideaunit_format.loc[1, real_id_str()] == music_real_id
     assert ideaunit_format.loc[1, parent_road_str()] == casa_road

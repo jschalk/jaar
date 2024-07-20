@@ -1,19 +1,19 @@
 from src._instrument.file import open_file
 from src._instrument.python import get_dict_from_json
 from src._road.jaar_config import get_json_filename
-from src._world.world import WorldUnit
+from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.atom_config import (
-    worldunit_text,
-    world_charunit_text,
-    world_char_lobbyship_text,
-    world_ideaunit_text,
-    world_idea_awardlink_text,
-    world_idea_reasonunit_text,
-    world_idea_reason_premiseunit_text,
-    world_idea_lobbyhold_text,
-    world_idea_healerhold_text,
-    world_idea_factunit_text,
+    budunit_text,
+    bud_acctunit_text,
+    bud_acct_lobbyship_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_lobbyhold_text,
+    bud_idea_healerhold_text,
+    bud_idea_factunit_text,
 )
 from src.gift.atom_config import config_file_dir
 from src.gift.change import changeunit_shop, get_filtered_changeunit
@@ -28,16 +28,16 @@ def owner_id_str() -> str:
     return "owner_id"
 
 
-def char_id_str() -> str:
-    return "char_id"
+def acct_id_str() -> str:
+    return "acct_id"
 
 
 def lobby_id_str() -> str:
     return "lobby_id"
 
 
-def char_pool_str() -> str:
-    return "char_pool"
+def acct_pool_str() -> str:
+    return "acct_pool"
 
 
 def debtor_weight_str() -> str:
@@ -92,8 +92,8 @@ def get_cross_formats_dir() -> str:
     return f"{config_file_dir()}/cross_formats"
 
 
-def jaar_format_0001_char_v0_0_0() -> str:
-    return "jaar_format_0001_char_v0_0_0"
+def jaar_format_0001_acct_v0_0_0() -> str:
+    return "jaar_format_0001_acct_v0_0_0"
 
 
 def jaar_format_0002_lobbyship_v0_0_0() -> str:
@@ -106,23 +106,23 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
 
 def get_cross_filenames() -> set[str]:
     return {
-        jaar_format_0001_char_v0_0_0(),
+        jaar_format_0001_acct_v0_0_0(),
         jaar_format_0002_lobbyship_v0_0_0(),
         jaar_format_0003_ideaunit_v0_0_0(),
     }
 
 
-def get_cross_format_dict(cross_name: str) -> dict[str,]:
+def get_cross_format_dict(cross_name: str) -> dict[str, any]:
     cross_filename = get_json_filename(cross_name)
     cross_json = open_file(get_cross_formats_dir(), cross_filename)
     return get_dict_from_json(cross_json)
 
 
-def get_cross_atom_category(cross_name: str) -> dict[str,]:
+def get_cross_atom_category(cross_name: str) -> dict[str, any]:
     return get_cross_format_dict(cross_name).get("atom_category")
 
 
-def get_cross_attribute_dict(cross_name: str) -> dict[str,]:
+def get_cross_attribute_dict(cross_name: str) -> dict[str, any]:
     return get_cross_format_dict(cross_name).get("attributes")
 
 
@@ -131,7 +131,7 @@ def get_sorting_attributes(cross_name: str) -> list[str]:
     x_list = []
     for x_attribute_name, x_attribute_dict in cross_format_dict.items():
         sort_order = x_attribute_dict.get("sort_order")
-        if sort_order != None:
+        if sort_order is not None:
             x_list.append(x_attribute_name)
     return x_list
 
@@ -157,9 +157,9 @@ def create_cross_dataframe(d2_list: list[list[str]], cross_name: str) -> DataFra
     return DataFrame(d2_list, columns=_get_headers_list(cross_name))
 
 
-def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
+def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
-    x_changeunit.add_all_atomunits(x_worldunit)
+    x_changeunit.add_all_atomunits(x_budunit)
     category_set = {get_cross_atom_category(cross_name)}
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
@@ -167,15 +167,15 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
     d2_list = []
     ordered_columns = get_column_ordered_cross_attributes(cross_name)
 
-    if cross_name == jaar_format_0001_char_v0_0_0():
+    if cross_name == jaar_format_0001_acct_v0_0_0():
         d2_list = [
             [
-                x_atomunit.get_value(char_id_str()),
-                x_worldunit._debtor_respect,
+                x_atomunit.get_value(acct_id_str()),
+                x_budunit._debtor_respect,
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
-                x_worldunit._owner_id,
-                x_worldunit._real_id,
+                x_budunit._owner_id,
+                x_budunit._real_id,
             ]
             for x_atomunit in sorted_atomunits
         ]
@@ -183,12 +183,12 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
     elif cross_name == jaar_format_0002_lobbyship_v0_0_0():
         d2_list = [
             [
-                x_atomunit.get_value(char_id_str()),
+                x_atomunit.get_value(acct_id_str()),
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
                 x_atomunit.get_value(lobby_id_str()),
-                x_worldunit._owner_id,
-                x_worldunit._real_id,
+                x_budunit._owner_id,
+                x_budunit._real_id,
             ]
             for x_atomunit in sorted_atomunits
         ]
@@ -201,10 +201,10 @@ def create_cross(x_worldunit: WorldUnit, cross_name: str) -> DataFrame:
             d2_list.append(
                 [
                     x_atomunit.get_value("label"),
-                    x_worldunit._owner_id,
+                    x_budunit._owner_id,
                     x_atomunit.get_value("parent_road"),
                     pledge_yes_str,
-                    x_worldunit._real_id,
+                    x_budunit._real_id,
                     x_atomunit.get_value("_weight"),
                 ]
             )

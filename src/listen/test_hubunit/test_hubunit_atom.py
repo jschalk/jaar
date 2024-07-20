@@ -148,7 +148,7 @@ def test_HubUnit_save_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
     assert atom_num2 == 12
 
 
-def test_HubUnit_get_world_from_atom_files_ReturnsFileWithZeroAtoms(
+def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -156,18 +156,18 @@ def test_HubUnit_get_world_from_atom_files_ReturnsFileWithZeroAtoms(
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
 
     # WHEN
-    yao_world = yao_hubunit._get_world_from_atom_files()
+    yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_world._owner_id == yao_text
-    assert yao_world._real_id == yao_hubunit.real_id
-    assert yao_world._road_delimiter == yao_hubunit.road_delimiter
-    assert yao_world._bud_pool == yao_hubunit.bud_pool
-    assert yao_world._bud_coin == yao_hubunit.bud_coin
-    assert yao_world._bit == yao_hubunit.bit
+    assert yao_bud._owner_id == yao_text
+    assert yao_bud._real_id == yao_hubunit.real_id
+    assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
+    assert yao_bud._fund_pool == yao_hubunit.fund_pool
+    assert yao_bud._fund_coin == yao_hubunit.fund_coin
+    assert yao_bud._bit == yao_hubunit.bit
 
 
-def test_HubUnit_get_world_from_atom_files_ReturnsCorrectFile_SimpleIdea(
+def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -179,19 +179,19 @@ def test_HubUnit_get_world_from_atom_files_ReturnsCorrectFile_SimpleIdea(
     yao_hubunit.save_atom_file(sports_atom)
 
     # WHEN
-    yao_world = yao_hubunit._get_world_from_atom_files()
+    yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_world._owner_id == yao_text
-    assert yao_world._real_id == yao_hubunit.real_id
-    assert yao_world._road_delimiter == yao_hubunit.road_delimiter
+    assert yao_bud._owner_id == yao_text
+    assert yao_bud._real_id == yao_hubunit.real_id
+    assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
     sports_text = "sports"
-    sports_road = yao_world.make_l1_road(sports_text)
+    sports_road = yao_bud.make_l1_road(sports_text)
 
-    assert yao_world.idea_exists(sports_road)
+    assert yao_bud.idea_exists(sports_road)
 
 
-def test_HubUnit_get_world_from_atom_files_ReturnsCorrectFile_WithFactUnit(
+def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -207,13 +207,13 @@ def test_HubUnit_get_world_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     print(f"{file_dir_files(yao_hubunit.atoms_dir()).keys()=}")
 
     # WHEN
-    yao_world = yao_hubunit._get_world_from_atom_files()
+    yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_world._owner_id == yao_text
-    assert yao_world._real_id == yao_hubunit.real_id
-    assert yao_world._road_delimiter == yao_hubunit.road_delimiter
+    assert yao_bud._owner_id == yao_text
+    assert yao_bud._real_id == yao_hubunit.real_id
+    assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
     sports_text = "sports"
-    sports_road = yao_world.make_l1_road(sports_text)
+    sports_road = yao_bud.make_l1_road(sports_text)
 
-    assert yao_world.idea_exists(sports_road)
+    assert yao_bud.idea_exists(sports_road)

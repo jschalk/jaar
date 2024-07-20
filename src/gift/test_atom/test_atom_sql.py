@@ -20,7 +20,7 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     knee_road = create_road("a", knee_text)
 
     # WHEN
-    x_category = "world_idea_factunit"
+    x_category = "bud_idea_factunit"
     update_disc_atomunit = atomunit_shop(x_category, atom_update())
     update_disc_atomunit.set_required_arg("base", knee_road)
 
@@ -33,10 +33,10 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     )
 
 
-def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_WorldUnitSimpleAttrs():
+def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_BudUnitSimpleAttrs():
     # WHEN
     new2_value = 66
-    category = "worldunit"
+    category = "budunit"
     opt_arg2 = "_max_tree_traverse"
     x_atomunit = atomunit_shop(category, atom_update())
     x_atomunit.set_optional_arg(opt_arg2, new2_value)
@@ -62,7 +62,7 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
     knee_open = 7
-    x_category = "world_idea_factunit"
+    x_category = "bud_idea_factunit"
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -99,7 +99,7 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
     knee_open = 7
-    x_category = "world_idea_factunit"
+    x_category = "bud_idea_factunit"
     road_text = "road"
     base_text = "base"
     open_text = "open"

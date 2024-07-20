@@ -30,13 +30,13 @@ class HealerID(OwnerID):
 
 
 class OwnerID(HealerID):
-    """A RoadNode used to identify a WorldUnit's owner_id"""
+    """A RoadNode used to identify a BudUnit's owner_id"""
 
     pass
 
 
-class CharID(OwnerID):  # Created to help track the concept
-    """Every CharID object is OwnerID, must follow OwnerID format."""
+class AcctID(OwnerID):  # Created to help track the concept
+    """Every AcctID object is OwnerID, must follow OwnerID format."""
 
     pass
 
@@ -52,7 +52,7 @@ class LobbyID(str):  # Created to help track the concept
 
 
 def default_road_delimiter_if_none(delimiter: str = None) -> str:
-    return delimiter if delimiter != None else ","
+    return delimiter if delimiter is not None else ","
 
 
 def rebuild_road(

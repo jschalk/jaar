@@ -24,7 +24,7 @@ positions are aggregated by a listener into a coherant agenda that can include p
 to do and pledges of states of existence. Listening and acting on it.
 
 A agents's agenda in the community is built by the the weighted intreprtation of
-1. Char agents agendas 
+1. Acct agents agendas 
 2. Their own independent agenda
 
 Each agenda is saved as a JSON file. 
@@ -64,31 +64,31 @@ screenshots and elucidatory text.
 <!-- TODO: Add elucidations -->
 base attributes vs reason attributess
 
-WorldUnit objects
+BudUnit objects
 
-WorldUnit CharUnit objects
+BudUnit AcctUnit objects
 
-WorldUnit LobbyBox objects
+BudUnit LobbyBox objects
 
-WorldUnit IdeaUnit objects
+BudUnit IdeaUnit objects
 
-WorldUnit IdeaUnit hierarchical structure
+BudUnit IdeaUnit hierarchical structure
 
-WorldUnit IdeaUnit AwardLink objects
+BudUnit IdeaUnit AwardLink objects
 
-WorldUnit IdeaUnit AwardLine objects
+BudUnit IdeaUnit AwardLine objects
 
-WorldUnit IdeaUnit AwardHeir objects
+BudUnit IdeaUnit AwardHeir objects
 
-WorldUnit IdeaUnit AwardHeir objects
+BudUnit IdeaUnit AwardHeir objects
 
-WorldUnit IdeaUnit Reason PremiseUnit objects
+BudUnit IdeaUnit Reason PremiseUnit objects
 
-WorldUnit IdeaUnit Reason PremiseHeir objects
+BudUnit IdeaUnit Reason PremiseHeir objects
 
-WorldUnit IdeaUnit FactUnit objects
+BudUnit IdeaUnit FactUnit objects
 
-WorldUnit IdeaUnit FactHeir objects
+BudUnit IdeaUnit FactHeir objects
 
 
 ## 1.3 Test-Driven-Development

@@ -7,25 +7,25 @@ class Base(DeclarativeBase):
     pass
 
 
-class WorldTable(Base):
-    __tablename__ = "world"
+class BudTable(Base):
+    __tablename__ = "bud"
     uid = Column(Integer, primary_key=True)
     _max_tree_traverse = Column(Integer)
     _monetary_desc = Column(String)
     _credor_respect = Column(Integer)
     _debtor_respect = Column(Integer)
-    _bud_pool = Column(Float)
-    _bud_coin = Column(Float)
+    _fund_pool = Column(Float)
+    _fund_coin = Column(Float)
     _bit = Column(Float)
     _penny = Column(Float)
     _weight = Column(Integer)
 
 
-class CharUnitTable(Base):
-    __tablename__ = "charunit"
+class AcctUnitTable(Base):
+    __tablename__ = "acctunit"
 
     uid = Column(Integer, primary_key=True)
-    char_id = Column(String)
+    acct_id = Column(String)
     credor_weight = Column(Integer)
     debtor_weight = Column(Integer)
 
@@ -41,7 +41,7 @@ class LobbyShipTable(Base):
     __tablename__ = "lobbyship"
     uid = Column(Integer, primary_key=True)
     lobby_id = Column(String)
-    char_id = Column(String)
+    acct_id = Column(String)
     credor_weight = Column(Integer)
     debtor_weight = Column(Integer)
 

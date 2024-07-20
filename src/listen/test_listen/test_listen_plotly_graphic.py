@@ -1,10 +1,10 @@
-from src.listen.examples.example_listen_worlds import get_bud_explanation_world
+from src.listen.examples.example_listen_buds import get_fund_explanation_bud
 from src.listen.listen_graphic import (
     get_listen_structures0_fig,
     get_listen_structures1_fig,
     get_listen_structures2_fig,
     get_listen_structures3_fig,
-    bud_explanation0,
+    fund_explanation0,
 )
 
 
@@ -24,10 +24,10 @@ def test_listen_structures0_ShowsExplanation0Graph():
     #     # listen_structures3_fig.show()
 
 
-def test_bud_explanation_Graph():
+def test_fund_explanation_Graph():
     # ESTABLISH / WHEN
-    x_worldunit = get_bud_explanation_world()
-    bud_explanation0_fig = bud_explanation0(x_worldunit, "Task")
+    x_budunit = get_fund_explanation_bud()
+    fund_explanation0_fig = fund_explanation0(x_budunit, "Task")
 
     # THEN
-    # bud_explanation0_fig.show()
+    # fund_explanation0_fig.show()

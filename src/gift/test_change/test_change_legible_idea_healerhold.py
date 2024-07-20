@@ -1,18 +1,18 @@
 from src.gift.atom import atomunit_shop, atom_insert, atom_delete
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
-from src._world.world import worldunit_shop
+from src.bud.bud import budunit_shop
 
 
 def test_create_legible_list_ReturnsObj_idea_healerhold_INSERT():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_idea_healerhold"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_idea_healerhold"
     road_text = "road"
-    casa_road = sue_world.make_l1_road("casa")
-    road_value = sue_world.make_road(casa_road, "clean fridge")
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
     lobby_id_text = "lobby_id"
-    lobby_id_value = f"{sue_world._road_delimiter}Swimmers"
+    lobby_id_value = f"{sue_bud._road_delimiter}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_insert())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(lobby_id_text, lobby_id_value)
@@ -21,7 +21,7 @@ def test_create_legible_list_ReturnsObj_idea_healerhold_INSERT():
     x_changeunit.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"Healerhold '{lobby_id_value}' created for idea '{road_value}'."
@@ -31,13 +31,13 @@ def test_create_legible_list_ReturnsObj_idea_healerhold_INSERT():
 
 def test_create_legible_list_ReturnsObj_idea_healerhold_DELETE():
     # ESTABLISH
-    sue_world = worldunit_shop("Sue")
-    category = "world_idea_healerhold"
+    sue_bud = budunit_shop("Sue")
+    category = "bud_idea_healerhold"
     road_text = "road"
-    casa_road = sue_world.make_l1_road("casa")
-    road_value = sue_world.make_road(casa_road, "clean fridge")
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
     lobby_id_text = "lobby_id"
-    lobby_id_value = f"{sue_world._road_delimiter}Swimmers"
+    lobby_id_value = f"{sue_bud._road_delimiter}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_delete())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(lobby_id_text, lobby_id_value)
@@ -46,7 +46,7 @@ def test_create_legible_list_ReturnsObj_idea_healerhold_DELETE():
     x_changeunit.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_changeunit, sue_world)
+    legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
     x_str = f"Healerhold '{lobby_id_value}' deleted for idea '{road_value}'."

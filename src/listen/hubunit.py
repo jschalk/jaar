@@ -23,8 +23,8 @@ from src._road.jaar_config import (
     init_gift_id,
 )
 from src._road.finance import (
-    default_bud_coin_if_none,
-    validate_bud_pool,
+    default_fund_coin_if_none,
+    validate_fund_pool,
     default_bit_if_none,
     default_penny_if_none,
     default_money_magnitude_if_none,
@@ -39,17 +39,17 @@ from src._road.road import (
     validate_roadnode,
     default_road_delimiter_if_none,
 )
-from src._world.world import (
-    WorldUnit,
-    get_from_json as worldunit_get_from_json,
-    worldunit_shop,
+from src.bud.bud import (
+    BudUnit,
+    get_from_json as budunit_get_from_json,
+    budunit_shop,
 )
 from src.gift.atom import (
     AtomUnit,
     get_from_json as atomunit_get_from_json,
-    modify_world_with_atomunit,
+    modify_bud_with_atomunit,
 )
-from src.listen.basis_worlds import get_default_action_world
+from src.listen.basis_buds import get_default_action_bud
 from src.gift.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
@@ -100,28 +100,28 @@ class HubUnit:
     real_id: str = None
     econ_road: RoadUnit = None
     road_delimiter: str = None
-    bud_pool: float = None
-    bud_coin: float = None
+    fund_pool: float = None
+    fund_coin: float = None
     bit: float = None
     penny: float = None
     econ_money_magnitude: float = None
 
-    def real_dir(self):
+    def real_dir(self) -> str:
         return f"{self.reals_dir}/{self.real_id}"
 
-    def owners_dir(self):
+    def owners_dir(self) -> str:
         return f"{self.real_dir()}/owners"
 
-    def owner_dir(self):
+    def owner_dir(self) -> str:
         return f"{self.owners_dir()}/{self.owner_id}"
 
-    def econs_dir(self):
+    def econs_dir(self) -> str:
         return f"{self.owner_dir()}/econs"
 
-    def atoms_dir(self):
+    def atoms_dir(self) -> str:
         return f"{self.owner_dir()}/atoms"
 
-    def gifts_dir(self):
+    def gifts_dir(self) -> str:
         return f"{self.owner_dir()}/{get_gifts_folder()}"
 
     def voice_dir(self) -> str:
@@ -130,16 +130,16 @@ class HubUnit:
     def action_dir(self) -> str:
         return f"{self.owner_dir()}/action"
 
-    def voice_file_name(self):
+    def voice_file_name(self) -> str:
         return get_json_filename(self.owner_id)
 
-    def voice_file_path(self):
+    def voice_file_path(self) -> str:
         return f"{self.voice_dir()}/{self.voice_file_name()}"
 
-    def action_file_name(self):
+    def action_file_name(self) -> str:
         return get_json_filename(self.owner_id)
 
-    def action_path(self):
+    def action_path(self) -> str:
         return f"{self.action_dir()}/{self.action_file_name()}"
 
     def save_file_voice(self, file_text: str, replace: bool):
@@ -164,39 +164,39 @@ class HubUnit:
     def action_file_exists(self) -> bool:
         return os_path_exists(self.action_path())
 
-    def open_file_voice(self):
+    def open_file_voice(self) -> str:
         return open_file(self.voice_dir(), self.voice_file_name())
 
-    def save_voice_world(self, x_world: WorldUnit):
-        if x_world._owner_id != self.owner_id:
+    def save_voice_bud(self, x_bud: BudUnit):
+        if x_bud._owner_id != self.owner_id:
             raise Invalid_voice_Exception(
-                f"WorldUnit with owner_id '{x_world._owner_id}' cannot be saved as owner_id '{self.owner_id}''s voice world."
+                f"BudUnit with owner_id '{x_bud._owner_id}' cannot be saved as owner_id '{self.owner_id}''s voice bud."
             )
-        self.save_file_voice(x_world.get_json(), True)
+        self.save_file_voice(x_bud.get_json(), True)
 
-    def get_voice_world(self) -> WorldUnit:
+    def get_voice_bud(self) -> BudUnit:
         if self.voice_file_exists() is False:
             return None
         file_content = self.open_file_voice()
-        return worldunit_get_from_json(file_content)
+        return budunit_get_from_json(file_content)
 
-    def default_voice_world(self) -> WorldUnit:
-        x_worldunit = worldunit_shop(
+    def default_voice_bud(self) -> BudUnit:
+        x_budunit = budunit_shop(
             _owner_id=self.owner_id,
             _real_id=self.real_id,
             _road_delimiter=self.road_delimiter,
-            _bud_pool=self.bud_pool,
-            _bud_coin=self.bud_coin,
+            _fund_pool=self.fund_pool,
+            _fund_coin=self.fund_coin,
             _bit=self.bit,
             _penny=self.penny,
         )
-        x_worldunit._last_gift_id = init_gift_id()
-        return x_worldunit
+        x_budunit._last_gift_id = init_gift_id()
+        return x_budunit
 
     def delete_voice_file(self):
         delete_dir(self.voice_file_path())
 
-    def open_file_action(self):
+    def open_file_action(self) -> str:
         return open_file(self.action_dir(), self.action_file_name())
 
     def get_max_atom_file_number(self) -> int:
@@ -236,8 +236,8 @@ class HubUnit:
     def delete_atom_file(self, atom_number: int):
         delete_dir(self.atom_file_path(atom_number))
 
-    def _get_world_from_atom_files(self) -> WorldUnit:
-        x_world = worldunit_shop(self.owner_id, self.real_id)
+    def _get_bud_from_atom_files(self) -> BudUnit:
+        x_bud = budunit_shop(self.owner_id, self.real_id)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = dir_files(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -245,8 +245,8 @@ class HubUnit:
             for x_atom_filename in sorted_atom_filenames:
                 x_file_text = x_atom_files.get(x_atom_filename)
                 x_atom = atomunit_get_from_json(x_file_text)
-                modify_world_with_atomunit(x_world, x_atom)
-        return x_world
+                modify_bud_with_atomunit(x_bud, x_atom)
+        return x_bud
 
     def get_max_gift_file_number(self) -> int:
         if not os_path_exists(self.gifts_dir()):
@@ -324,10 +324,10 @@ class HubUnit:
             _gifts_dir=self.gifts_dir(),
         )
 
-    def create_save_gift_file(self, before_world: WorldUnit, after_world: WorldUnit):
+    def create_save_gift_file(self, before_bud: BudUnit, after_bud: BudUnit):
         new_giftunit = self._default_giftunit()
         new_changeunit = new_giftunit._changeunit
-        new_changeunit.add_all_different_atomunits(before_world, after_world)
+        new_changeunit.add_all_different_atomunits(before_bud, after_bud)
         self.save_gift_file(new_giftunit)
 
     def get_giftunit(self, gift_id: int) -> GiftUnit:
@@ -339,16 +339,16 @@ class HubUnit:
         x_atoms_dir = self.atoms_dir()
         return create_giftunit_from_files(x_gifts_dir, gift_id, x_atoms_dir)
 
-    def _merge_any_gifts(self, x_world: WorldUnit) -> WorldUnit:
+    def _merge_any_gifts(self, x_bud: BudUnit) -> BudUnit:
         gifts_dir = self.gifts_dir()
-        gift_ints = get_integer_filenames(gifts_dir, x_world._last_gift_id)
+        gift_ints = get_integer_filenames(gifts_dir, x_bud._last_gift_id)
         if len(gift_ints) == 0:
-            return copy_deepcopy(x_world)
+            return copy_deepcopy(x_bud)
 
         for gift_int in gift_ints:
             x_gift = self.get_giftunit(gift_int)
-            new_world = x_gift._changeunit.get_edited_world(x_world)
-        return new_world
+            new_bud = x_gift._changeunit.get_edited_bud(x_bud)
+        return new_bud
 
     def _create_initial_gift_files_from_default(self):
         x_giftunit = giftunit_shop(
@@ -358,14 +358,14 @@ class HubUnit:
             _atoms_dir=self.atoms_dir(),
         )
         x_giftunit._changeunit.add_all_different_atomunits(
-            before_world=self.default_voice_world(),
-            after_world=self.default_voice_world(),
+            before_bud=self.default_voice_bud(),
+            after_bud=self.default_voice_bud(),
         )
         x_giftunit.save_files()
 
     def _create_voice_from_gifts(self):
-        x_world = self._merge_any_gifts(self.default_voice_world())
-        self.save_voice_world(x_world)
+        x_bud = self._merge_any_gifts(self.default_voice_bud())
+        self.save_voice_bud(x_bud)
 
     def _create_initial_gift_and_voice_files(self):
         self._create_initial_gift_files_from_default()
@@ -374,8 +374,8 @@ class HubUnit:
     def _create_initial_gift_files_from_voice(self):
         x_giftunit = self._default_giftunit()
         x_giftunit._changeunit.add_all_different_atomunits(
-            before_world=self.default_voice_world(),
-            after_world=self.get_voice_world(),
+            before_bud=self.default_voice_bud(),
+            after_bud=self.get_voice_bud(),
         )
         x_giftunit.save_files()
 
@@ -390,10 +390,10 @@ class HubUnit:
             self._create_initial_gift_files_from_voice()
 
     def append_gifts_to_voice_file(self):
-        voice_world = self.get_voice_world()
-        voice_world = self._merge_any_gifts(voice_world)
-        self.save_voice_world(voice_world)
-        return self.get_voice_world()
+        voice_bud = self.get_voice_bud()
+        voice_bud = self._merge_any_gifts(voice_bud)
+        self.save_voice_bud(voice_bud)
+        return self.get_voice_bud()
 
     def econ_dir(self) -> str:
         if self.econ_road is None:
@@ -432,30 +432,30 @@ class HubUnit:
     def grades_dir(self) -> str:
         return get_econ_grades_dir(self.econ_dir())
 
-    def get_jobs_dir_file_names_list(self):
+    def get_jobs_dir_file_names_list(self) -> list[str]:
         try:
             return list(dir_files(self.jobs_dir(), True).keys())
         except Exception:
             return []
 
-    def save_duty_world(self, x_world: WorldUnit):
-        x_file_name = self.owner_file_name(x_world._owner_id)
-        save_file(self.dutys_dir(), x_file_name, x_world.get_json())
+    def save_duty_bud(self, x_bud: BudUnit):
+        x_file_name = self.owner_file_name(x_bud._owner_id)
+        save_file(self.dutys_dir(), x_file_name, x_bud.get_json())
 
-    def save_job_world(self, x_world: WorldUnit):
-        x_file_name = self.owner_file_name(x_world._owner_id)
-        save_file(self.jobs_dir(), x_file_name, x_world.get_json())
+    def save_job_bud(self, x_bud: BudUnit):
+        x_file_name = self.owner_file_name(x_bud._owner_id)
+        save_file(self.jobs_dir(), x_file_name, x_bud.get_json())
 
-    def save_action_world(self, x_world: WorldUnit):
-        if x_world._owner_id != self.owner_id:
+    def save_action_bud(self, x_bud: BudUnit):
+        if x_bud._owner_id != self.owner_id:
             raise Invalid_action_Exception(
-                f"WorldUnit with owner_id '{x_world._owner_id}' cannot be saved as owner_id '{self.owner_id}''s action world."
+                f"BudUnit with owner_id '{x_bud._owner_id}' cannot be saved as owner_id '{self.owner_id}''s action bud."
             )
-        self.save_file_action(x_world.get_json(), True)
+        self.save_file_action(x_bud.get_json(), True)
 
-    def initialize_action_file(self, voice: WorldUnit):
+    def initialize_action_file(self, voice: BudUnit):
         if self.action_file_exists() is False:
-            self.save_action_world(get_default_action_world(voice))
+            self.save_action_bud(get_default_action_bud(voice))
 
     def duty_file_exists(self, owner_id: OwnerID) -> bool:
         return os_path_exists(self.duty_path(owner_id))
@@ -463,23 +463,23 @@ class HubUnit:
     def job_file_exists(self, owner_id: OwnerID) -> bool:
         return os_path_exists(self.job_path(owner_id))
 
-    def get_duty_world(self, owner_id: OwnerID) -> WorldUnit:
+    def get_duty_bud(self, owner_id: OwnerID) -> BudUnit:
         if self.duty_file_exists(owner_id) is False:
             return None
         file_content = open_file(self.dutys_dir(), self.owner_file_name(owner_id))
-        return worldunit_get_from_json(file_content)
+        return budunit_get_from_json(file_content)
 
-    def get_job_world(self, owner_id: OwnerID) -> WorldUnit:
+    def get_job_bud(self, owner_id: OwnerID) -> BudUnit:
         if self.job_file_exists(owner_id) is False:
             return None
         file_content = open_file(self.jobs_dir(), self.owner_file_name(owner_id))
-        return worldunit_get_from_json(file_content)
+        return budunit_get_from_json(file_content)
 
-    def get_action_world(self) -> WorldUnit:
+    def get_action_bud(self) -> BudUnit:
         if self.action_file_exists() is False:
             return None
         file_content = self.open_file_action()
-        return worldunit_get_from_json(file_content)
+        return budunit_get_from_json(file_content)
 
     def delete_duty_file(self, owner_id: OwnerID):
         delete_dir(self.duty_path(owner_id))
@@ -490,7 +490,7 @@ class HubUnit:
     def delete_treasury_db_file(self):
         delete_dir(self.treasury_db_path())
 
-    def dw_speaker_world(self, speaker_id: OwnerID) -> WorldUnit:
+    def dw_speaker_bud(self, speaker_id: OwnerID) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             reals_dir=self.reals_dir,
             real_id=self.real_id,
@@ -498,19 +498,19 @@ class HubUnit:
             road_delimiter=self.road_delimiter,
             bit=self.bit,
         )
-        return speaker_hubunit.get_action_world()
+        return speaker_hubunit.get_action_bud()
 
-    def get_perspective_world(self, speaker: WorldUnit) -> WorldUnit:
-        # get copy of world without any metrics
-        perspective_world = worldunit_get_from_json(speaker.get_json())
-        perspective_world.set_owner_id(self.owner_id)
-        perspective_world.calc_world_metrics()
-        return perspective_world
+    def get_perspective_bud(self, speaker: BudUnit) -> BudUnit:
+        # get copy of bud without any metrics
+        perspective_bud = budunit_get_from_json(speaker.get_json())
+        perspective_bud.set_owner_id(self.owner_id)
+        perspective_bud.settle_bud()
+        return perspective_bud
 
-    def get_dw_perspective_world(self, speaker_id: OwnerID) -> WorldUnit:
-        return self.get_perspective_world(self.dw_speaker_world(speaker_id))
+    def get_dw_perspective_bud(self, speaker_id: OwnerID) -> BudUnit:
+        return self.get_perspective_bud(self.dw_speaker_bud(speaker_id))
 
-    def rj_speaker_world(self, healer_id: OwnerID, speaker_id: OwnerID) -> WorldUnit:
+    def rj_speaker_bud(self, healer_id: OwnerID, speaker_id: OwnerID) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             reals_dir=self.reals_dir,
             real_id=self.real_id,
@@ -519,34 +519,32 @@ class HubUnit:
             road_delimiter=self.road_delimiter,
             bit=self.bit,
         )
-        return speaker_hubunit.get_job_world(speaker_id)
+        return speaker_hubunit.get_job_bud(speaker_id)
 
-    def rj_perspective_world(
-        self, healer_id: OwnerID, speaker_id: OwnerID
-    ) -> WorldUnit:
-        speaker_job = self.rj_speaker_world(healer_id, speaker_id)
-        return self.get_perspective_world(speaker_job)
+    def rj_perspective_bud(self, healer_id: OwnerID, speaker_id: OwnerID) -> BudUnit:
+        speaker_job = self.rj_speaker_bud(healer_id, speaker_id)
+        return self.get_perspective_bud(speaker_job)
 
-    def get_econ_roads(self):
-        x_voice_world = self.get_voice_world()
-        x_voice_world.calc_world_metrics()
-        if x_voice_world._econs_justified is False:
-            x_str = f"Cannot get_econ_roads from '{self.owner_id}' voice world because 'WorldUnit._econs_justified' is False."
+    def get_econ_roads(self) -> set[RoadUnit]:
+        x_voice_bud = self.get_voice_bud()
+        x_voice_bud.settle_bud()
+        if x_voice_bud._econs_justified is False:
+            x_str = f"Cannot get_econ_roads from '{self.owner_id}' voice bud because 'BudUnit._econs_justified' is False."
             raise get_econ_roadsException(x_str)
-        if x_voice_world._econs_buildable is False:
-            x_str = f"Cannot get_econ_roads from '{self.owner_id}' voice world because 'WorldUnit._econs_buildable' is False."
+        if x_voice_bud._econs_buildable is False:
+            x_str = f"Cannot get_econ_roads from '{self.owner_id}' voice bud because 'BudUnit._econs_buildable' is False."
             raise get_econ_roadsException(x_str)
-        owner_healer_dict = x_voice_world._healers_dict.get(self.owner_id)
+        owner_healer_dict = x_voice_bud._healers_dict.get(self.owner_id)
         if owner_healer_dict is None:
             return get_empty_set_if_none(None)
-        econ_roads = x_voice_world._healers_dict.get(self.owner_id).keys()
+        econ_roads = x_voice_bud._healers_dict.get(self.owner_id).keys()
         return get_empty_set_if_none(econ_roads)
 
     def save_all_voice_dutys(self):
-        voice = self.get_voice_world()
+        voice = self.get_voice_bud()
         for x_econ_road in self.get_econ_roads():
             self.econ_road = x_econ_road
-            self.save_duty_world(voice)
+            self.save_duty_bud(voice)
         self.econ_road = None
 
     def create_treasury_db_file(self):
@@ -579,8 +577,8 @@ def hubunit_shop(
     owner_id: OwnerID = None,
     econ_road: RoadUnit = None,
     road_delimiter: str = None,
-    bud_pool: float = None,
-    bud_coin: float = None,
+    fund_pool: float = None,
+    fund_coin: float = None,
     bit: float = None,
     penny: float = None,
     econ_money_magnitude: float = None,
@@ -594,8 +592,8 @@ def hubunit_shop(
         owner_id=validate_roadnode(owner_id, road_delimiter),
         econ_road=econ_road,
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
-        bud_pool=validate_bud_pool(bud_pool),
-        bud_coin=default_bud_coin_if_none(bud_coin),
+        fund_pool=validate_fund_pool(fund_pool),
+        fund_coin=default_fund_coin_if_none(fund_coin),
         bit=default_bit_if_none(bit),
         penny=default_penny_if_none(penny),
         econ_money_magnitude=default_money_magnitude_if_none(econ_money_magnitude),

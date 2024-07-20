@@ -1,8 +1,8 @@
 from src.real.real_report import (
-    get_real_voices_chars_dataframe,
-    get_real_voices_chars_plotly_fig,
-    get_real_actions_chars_dataframe,
-    get_real_actions_chars_plotly_fig,
+    get_real_voices_accts_dataframe,
+    get_real_voices_accts_plotly_fig,
+    get_real_actions_accts_dataframe,
+    get_real_actions_accts_plotly_fig,
     get_real_voices_agenda_dataframe,
     get_real_voices_agenda_plotly_fig,
     get_real_actions_agenda_dataframe,
@@ -16,40 +16,40 @@ from src.real.examples.example_reals import (
 from src.real.examples.real_env import env_dir_setup_cleanup
 
 
-def test_get_real_voices_chars_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_get_real_voices_accts_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     music_real = create_example_real2()
 
     # WHEN
-    x_df = get_real_voices_chars_dataframe(music_real)
+    x_df = get_real_voices_accts_dataframe(music_real)
 
     # THEN
-    charunit_colums = {
+    acctunit_colums = {
         "owner_id",
-        "char_id",
+        "acct_id",
         "credor_weight",
         "debtor_weight",
         "_lobbyships",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
-        "_bud_agenda_ratio_give",
-        "_bud_agenda_ratio_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
 
-    assert set(x_df.columns) == charunit_colums
+    assert set(x_df.columns) == acctunit_colums
     assert x_df.shape[0] == 8
 
 
-def test_get_real_voices_chars_plotly_fig_DisplaysCorrectInfo(env_dir_setup_cleanup):
+def test_get_real_voices_accts_plotly_fig_DisplaysCorrectInfo(env_dir_setup_cleanup):
     # ESTABLISH
     music_real = create_example_real2()
 
     # WHEN
-    x_fig = get_real_voices_chars_plotly_fig(music_real)
+    x_fig = get_real_voices_accts_plotly_fig(music_real)
 
     # # THEN
     # show_figure = True
@@ -58,47 +58,47 @@ def test_get_real_voices_chars_plotly_fig_DisplaysCorrectInfo(env_dir_setup_clea
     # assert 1 == 2
 
 
-def test_get_real_actions_chars_dataframe_ReturnsCorrectObj(
+def test_get_real_actions_accts_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     music_real = create_example_real2()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
-    x_df = get_real_actions_chars_dataframe(music_real)
+    x_df = get_real_actions_accts_dataframe(music_real)
 
     # THEN
-    charunit_colums = {
+    acctunit_colums = {
         "owner_id",
-        "char_id",
+        "acct_id",
         "credor_weight",
         "debtor_weight",
         "_lobbyships",
-        "_bud_give",
-        "_bud_take",
-        "_bud_agenda_give",
-        "_bud_agenda_take",
-        "_bud_agenda_ratio_give",
-        "_bud_agenda_ratio_take",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
         "_inallocable_debtor_weight",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
 
     assert x_df.shape[0] == 8
-    assert set(x_df.columns) == charunit_colums
+    assert set(x_df.columns) == acctunit_colums
 
 
-def test_get_real_actions_chars_plotly_fig_DisplaysCorrectInfo(
+def test_get_real_actions_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     music_real = create_example_real2()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
-    x_fig = get_real_actions_chars_plotly_fig(music_real)
+    x_fig = get_real_actions_accts_plotly_fig(music_real)
 
     # # THEN
     # show_figure = True
@@ -117,7 +117,7 @@ def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanu
     # THEN
     agenda_colums = {
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -150,7 +150,7 @@ def test_get_real_voices_agenda_plotly_fig_DisplaysCorrectInfo(env_dir_setup_cle
 def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     music_real = create_example_real4()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
     x_df = get_real_actions_agenda_dataframe(music_real)
@@ -158,7 +158,7 @@ def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_clean
     # THEN
     agenda_colums = {
         "owner_id",
-        "bud_ratio",
+        "fund_ratio",
         "_label",
         "_parent_road",
         "_begin",
@@ -180,7 +180,7 @@ def test_get_real_actions_agenda_plotly_fig_DisplaysCorrectInfo(
 ):
     # ESTABLISH
     music_real = create_example_real4()
-    music_real.generate_all_action_worlds()
+    music_real.generate_all_action_buds()
 
     # WHEN
     x_fig = get_real_actions_agenda_plotly_fig(music_real)
