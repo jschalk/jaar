@@ -12,7 +12,6 @@ from src._road.road import (
     create_road,
     default_road_delimiter_if_none,
 )
-from pytest import raises as pytest_raises
 
 
 def test_ReasonCore_attributesExist():
