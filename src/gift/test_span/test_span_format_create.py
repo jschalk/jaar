@@ -2,12 +2,12 @@ from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.acct import acctunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.gift.cross import (
+from src.gift.span import (
     jaar_format_0001_acct_v0_0_0,
     jaar_format_0002_lobbyship_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
-    get_cross_attribute_dict,
-    create_cross,
+    get_span_attribute_dict,
+    create_span,
     real_id_str,
     owner_id_str,
     acct_id_str,
@@ -22,7 +22,7 @@ from src.gift.cross import (
 )
 
 
-def test_create_cross_Arg_jaar_format_0001_acct_v0_0_0():
+def test_create_span_Arg_jaar_format_0001_acct_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -40,13 +40,13 @@ def test_create_cross_Arg_jaar_format_0001_acct_v0_0_0():
     sue_budunit.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
 
     # WHEN
-    x_cross = jaar_format_0001_acct_v0_0_0()
-    acct_dataframe = create_cross(sue_budunit, x_cross)
+    x_span = jaar_format_0001_acct_v0_0_0()
+    acct_dataframe = create_span(sue_budunit, x_span)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
-    cross_dict = get_cross_attribute_dict(x_cross)
-    assert array_headers == list(cross_dict.keys())
+    span_dict = get_span_attribute_dict(x_span)
+    assert array_headers == list(span_dict.keys())
     assert acct_dataframe.loc[0, real_id_str()] == music_real_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_text
@@ -68,7 +68,7 @@ def test_create_cross_Arg_jaar_format_0001_acct_v0_0_0():
     assert len(acct_dataframe) == 3
 
 
-def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
+def test_create_span_Arg_jaar_format_0002_lobbyship_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -97,14 +97,14 @@ def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
     yao_acctunit.add_lobbyship(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
 
     # WHEN
-    x_cross = jaar_format_0002_lobbyship_v0_0_0()
-    lobbyship_dataframe = create_cross(sue_budunit, x_cross)
+    x_span = jaar_format_0002_lobbyship_v0_0_0()
+    lobbyship_dataframe = create_span(sue_budunit, x_span)
 
     # THEN
     array_headers = list(lobbyship_dataframe.columns)
-    cross_dict = get_cross_attribute_dict(x_cross)
+    span_dict = get_span_attribute_dict(x_span)
     print(f"{len(lobbyship_dataframe)=}")
-    assert array_headers == list(cross_dict.keys())
+    assert array_headers == list(span_dict.keys())
     assert lobbyship_dataframe.loc[0, real_id_str()] == music_real_id
     assert lobbyship_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert lobbyship_dataframe.loc[0, acct_id_str()] == bob_text
@@ -135,7 +135,7 @@ def test_create_cross_Arg_jaar_format_0002_lobbyship_v0_0_0():
     assert len(lobbyship_dataframe) == 7
 
 
-def test_create_cross_Arg_jaar_format_0003_ideaunit_v0_0_0():
+def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -150,12 +150,12 @@ def test_create_cross_Arg_jaar_format_0003_ideaunit_v0_0_0():
     sue_budunit.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
-    x_cross = jaar_format_0003_ideaunit_v0_0_0()
-    ideaunit_format = create_cross(sue_budunit, x_cross)
+    x_span = jaar_format_0003_ideaunit_v0_0_0()
+    ideaunit_format = create_span(sue_budunit, x_span)
 
     # THEN
     array_headers = list(ideaunit_format.columns)
-    assert array_headers == list(get_cross_attribute_dict(x_cross).keys())
+    assert array_headers == list(get_span_attribute_dict(x_span).keys())
 
     assert ideaunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert ideaunit_format.loc[0, pledge_str()] == ""

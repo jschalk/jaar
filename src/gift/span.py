@@ -88,8 +88,8 @@ def must_be_bool_str() -> str:
     return "must_be_bool"
 
 
-def get_cross_formats_dir() -> str:
-    return f"{config_file_dir()}/cross_formats"
+def get_span_formats_dir() -> str:
+    return f"{config_file_dir()}/span_formats"
 
 
 def jaar_format_0001_acct_v0_0_0() -> str:
@@ -104,7 +104,7 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
     return "jaar_format_0003_ideaunit_v0_0_0"
 
 
-def get_cross_filenames() -> set[str]:
+def get_span_filenames() -> set[str]:
     return {
         jaar_format_0001_acct_v0_0_0(),
         jaar_format_0002_lobbyship_v0_0_0(),
@@ -112,24 +112,24 @@ def get_cross_filenames() -> set[str]:
     }
 
 
-def get_cross_format_dict(cross_name: str) -> dict[str, any]:
-    cross_filename = get_json_filename(cross_name)
-    cross_json = open_file(get_cross_formats_dir(), cross_filename)
-    return get_dict_from_json(cross_json)
+def get_span_format_dict(span_name: str) -> dict[str, any]:
+    span_filename = get_json_filename(span_name)
+    span_json = open_file(get_span_formats_dir(), span_filename)
+    return get_dict_from_json(span_json)
 
 
-def get_cross_atom_category(cross_name: str) -> dict[str, any]:
-    return get_cross_format_dict(cross_name).get("atom_category")
+def get_span_atom_category(span_name: str) -> dict[str, any]:
+    return get_span_format_dict(span_name).get("atom_category")
 
 
-def get_cross_attribute_dict(cross_name: str) -> dict[str, any]:
-    return get_cross_format_dict(cross_name).get("attributes")
+def get_span_attribute_dict(span_name: str) -> dict[str, any]:
+    return get_span_format_dict(span_name).get("attributes")
 
 
-def get_sorting_attributes(cross_name: str) -> list[str]:
-    cross_format_dict = get_cross_attribute_dict(cross_name)
+def get_sorting_attributes(span_name: str) -> list[str]:
+    span_format_dict = get_span_attribute_dict(span_name)
     x_list = []
-    for x_attribute_name, x_attribute_dict in cross_format_dict.items():
+    for x_attribute_name, x_attribute_dict in span_format_dict.items():
         sort_order = x_attribute_dict.get("sort_order")
         if sort_order is not None:
             x_list.append(x_attribute_name)
@@ -140,34 +140,34 @@ def get_ascending_bools(sorting_attributes: list[str]) -> list[bool]:
     return [True for _ in sorting_attributes]
 
 
-def get_column_ordered_cross_attributes(cross_name: str) -> list[str]:
-    cross_attribute_dict = get_cross_attribute_dict(cross_name)
+def get_column_ordered_span_attributes(span_name: str) -> list[str]:
+    span_attribute_dict = get_span_attribute_dict(span_name)
     column_order_dict = {
-        cross_attribute: a_dict.get("column_order")
-        for cross_attribute, a_dict in cross_attribute_dict.items()
+        span_attribute: a_dict.get("column_order")
+        for span_attribute, a_dict in span_attribute_dict.items()
     }
     return sorted(column_order_dict, key=column_order_dict.get)
 
 
-def _get_headers_list(cross_name: str) -> list[str]:
-    return list(get_cross_attribute_dict(cross_name).keys())
+def _get_headers_list(span_name: str) -> list[str]:
+    return list(get_span_attribute_dict(span_name).keys())
 
 
-def create_cross_dataframe(d2_list: list[list[str]], cross_name: str) -> DataFrame:
-    return DataFrame(d2_list, columns=_get_headers_list(cross_name))
+def create_span_dataframe(d2_list: list[list[str]], span_name: str) -> DataFrame:
+    return DataFrame(d2_list, columns=_get_headers_list(span_name))
 
 
-def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
+def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_budunit)
-    category_set = {get_cross_atom_category(cross_name)}
+    category_set = {get_span_atom_category(span_name)}
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
     d2_list = []
-    ordered_columns = get_column_ordered_cross_attributes(cross_name)
+    ordered_columns = get_column_ordered_span_attributes(span_name)
 
-    if cross_name == jaar_format_0001_acct_v0_0_0():
+    if span_name == jaar_format_0001_acct_v0_0_0():
         d2_list = [
             [
                 x_atomunit.get_value(acct_id_str()),
@@ -179,7 +179,7 @@ def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
             for x_atomunit in sorted_atomunits
         ]
 
-    elif cross_name == jaar_format_0002_lobbyship_v0_0_0():
+    elif span_name == jaar_format_0002_lobbyship_v0_0_0():
         d2_list = [
             [
                 x_atomunit.get_value(acct_id_str()),
@@ -191,7 +191,7 @@ def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-    elif cross_name == jaar_format_0003_ideaunit_v0_0_0():
+    elif span_name == jaar_format_0003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
             pledge_bool = x_atomunit.get_value("pledge")
             pledge_yes_str = ""
@@ -208,11 +208,11 @@ def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
                 ]
             )
 
-    x_cross = create_cross_dataframe(d2_list, cross_name)
-    sorting_columns = get_sorting_attributes(cross_name)
+    x_span = create_span_dataframe(d2_list, span_name)
+    sorting_columns = get_sorting_attributes(span_name)
     ascending_bools = get_ascending_bools(sorting_columns)
-    x_cross.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
-    x_cross.reset_index(inplace=True)
-    x_cross.drop(columns=["index"], inplace=True)
+    x_span.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
+    x_span.reset_index(inplace=True)
+    x_span.drop(columns=["index"], inplace=True)
 
-    return x_cross
+    return x_span
