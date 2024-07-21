@@ -497,8 +497,8 @@ class BudUnit:
     ):
         pick = base if pick is None else pick
         if create_missing_ideas:
-            self._set_ideakid_if_empty(road=base)
-            self._set_ideakid_if_empty(road=pick)
+            self._create_ideakid_if_empty(road=base)
+            self._create_ideakid_if_empty(road=pick)
 
         self._execute_tree_traverse()
         fact_base_idea = self.get_idea_obj(base)
@@ -747,15 +747,15 @@ class BudUnit:
         posted_idea = self.get_idea_obj(road)
 
         for reason_x in posted_idea._reasonunits.values():
-            self._set_ideakid_if_empty(road=reason_x.base)
+            self._create_ideakid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
-                self._set_ideakid_if_empty(road=premise_x.need)
+                self._create_ideakid_if_empty(road=premise_x.need)
         if posted_idea._range_source_road is not None:
-            self._set_ideakid_if_empty(road=posted_idea._range_source_road)
+            self._create_ideakid_if_empty(road=posted_idea._range_source_road)
         if posted_idea._numeric_road is not None:
-            self._set_ideakid_if_empty(road=posted_idea._numeric_road)
+            self._create_ideakid_if_empty(road=posted_idea._numeric_road)
 
-    def _set_ideakid_if_empty(self, road: RoadUnit):
+    def _create_ideakid_if_empty(self, road: RoadUnit):
         if self.idea_exists(road) is False:
             self.add_idea(
                 ideaunit_shop(get_terminus_node(road, self._road_delimiter)),
@@ -1051,7 +1051,7 @@ class BudUnit:
         if x_ideaattrfilter.has_reason_premise():
             self._set_ideaattrfilter_premise_ranges(x_ideaattrfilter)
         x_idea = self.get_idea_obj(road)
-        x_idea._set_idea_attr(idea_attr=x_ideaattrfilter)
+        x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrfilter)
 
         # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
         # if awardlink_del is not None or awardlink is not None:
@@ -1767,10 +1767,10 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _bud_real_id=x_bud._real_id,
         _fund_coin=default_fund_coin_if_none(x_bud._fund_coin),
     )
-    set_idearoot_kids_from_dict(x_bud, idearoot_dict)
+    create_idearoot_kids_from_dict(x_bud, idearoot_dict)
 
 
-def set_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
+def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
     to_evaluate_idea_dicts = []
     parent_road_text = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list

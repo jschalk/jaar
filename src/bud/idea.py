@@ -584,7 +584,7 @@ class IdeaUnit:
     def get_originunit_dict(self) -> dict[str, str]:
         return self._originunit.get_dict()
 
-    def _set_idea_attr(self, idea_attr: IdeaAttrFilter):
+    def _set_attrs_to_ideaunit(self, idea_attr: IdeaAttrFilter):
         if idea_attr.weight is not None:
             self._weight = idea_attr.weight
         if idea_attr.uid is not None:
