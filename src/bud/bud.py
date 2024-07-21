@@ -643,7 +643,7 @@ class BudUnit:
 
         return missing_bases
 
-    def add_l1_idea(
+    def set_l1_idea(
         self,
         idea_kid: IdeaUnit,
         create_missing_ideas: bool = None,

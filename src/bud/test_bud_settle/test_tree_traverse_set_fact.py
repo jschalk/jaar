@@ -125,7 +125,7 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIs
     bob_bud = budunit_shop("Bob")
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
-    bob_bud.add_l1_idea(time_idea)
+    bob_bud.set_l1_idea(time_idea)
     time_road = bob_bud.make_l1_road(time_text)
     a1st = "age1st"
     a1st_road = bob_bud.make_road(time_road, a1st)
@@ -168,7 +168,7 @@ def test_BudUnit_get_idea_list_FactHeirsCorrectlyInherited():
     bob_bud = budunit_shop("Bob")
     swim_text = "swim"
     swim_road = bob_bud.make_l1_road(swim_text)
-    bob_bud.add_l1_idea(ideaunit_shop(swim_text))
+    bob_bud.set_l1_idea(ideaunit_shop(swim_text))
     fast_text = "fast"
     slow_text = "slow"
     fast_road = bob_bud.make_road(swim_road, fast_text)
@@ -178,7 +178,7 @@ def test_BudUnit_get_idea_list_FactHeirsCorrectlyInherited():
 
     earth_text = "earth"
     earth_road = bob_bud.make_l1_road(earth_text)
-    bob_bud.add_l1_idea(ideaunit_shop(earth_text))
+    bob_bud.set_l1_idea(ideaunit_shop(earth_text))
 
     swim_idea = bob_bud.get_idea_obj(swim_road)
     fast_idea = bob_bud.get_idea_obj(fast_road)
@@ -224,7 +224,7 @@ def test_BudUnit_get_idea_list_FactUnitCorrectlyTransformsfactheir_shop():
     bob_bud = budunit_shop("Bob")
     swim_text = "swim"
     swim_road = bob_bud.make_l1_road(swim_text)
-    bob_bud.add_l1_idea(ideaunit_shop(swim_text))
+    bob_bud.set_l1_idea(ideaunit_shop(swim_text))
     swim_idea = bob_bud.get_idea_obj(swim_road)
 
     fast_text = "fast"
@@ -234,7 +234,7 @@ def test_BudUnit_get_idea_list_FactUnitCorrectlyTransformsfactheir_shop():
 
     earth_text = "earth"
     earth_road = bob_bud.make_l1_road(earth_text)
-    bob_bud.add_l1_idea(ideaunit_shop(earth_text))
+    bob_bud.set_l1_idea(ideaunit_shop(earth_text))
 
     assert swim_idea._factheirs == {}
 
@@ -262,14 +262,14 @@ def test_BudUnit_get_idea_list_FactHeirCorrectlyDeletesFactUnit():
     sue_bud = budunit_shop("Sue")
     swim_text = "swim"
     swim_road = sue_bud.make_l1_road(swim_text)
-    sue_bud.add_l1_idea(ideaunit_shop(swim_text))
+    sue_bud.set_l1_idea(ideaunit_shop(swim_text))
     fast_text = "fast"
     slow_text = "slow"
     sue_bud.set_idea(ideaunit_shop(fast_text), parent_road=swim_road)
     sue_bud.set_idea(ideaunit_shop(slow_text), parent_road=swim_road)
     earth_text = "earth"
     earth_road = sue_bud.make_l1_road(earth_text)
-    sue_bud.add_l1_idea(ideaunit_shop(earth_text))
+    sue_bud.set_l1_idea(ideaunit_shop(earth_text))
 
     swim_idea = sue_bud.get_idea_obj(swim_road)
 
@@ -296,11 +296,11 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_bud = budunit_shop("Sue")
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
-    sue_bud.add_l1_idea(time_idea)
+    sue_bud.set_l1_idea(time_idea)
 
     clean_text = "clean"
     clean_idea = ideaunit_shop(clean_text, pledge=True)
-    sue_bud.add_l1_idea(clean_idea)
+    sue_bud.set_l1_idea(clean_idea)
     c_road = sue_bud.make_l1_road(clean_text)
     time_road = sue_bud.make_l1_road(time_text)
     # sue_bud.edit_idea_attr(road=c_road, reason_base=time_road, reason_premise=time_road, reason_premise_open=5, reason_premise_nigh=10)
@@ -315,7 +315,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     # WHEN one ranged fact added
     place_text = "place_x"
     place_idea = ideaunit_shop(place_text, _begin=600, _close=800)
-    sue_bud.add_l1_idea(place_idea)
+    sue_bud.set_l1_idea(place_idea)
     place_road = sue_bud.make_l1_road(place_text)
     sue_bud.set_fact(base=place_road, pick=place_road, open=5, nigh=10)
     print(f"When one ranged fact added {sue_bud._idearoot._factunits=}")
@@ -326,7 +326,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
 
     # WHEN one non-ranged_fact added
     mood = "mood_x"
-    sue_bud.add_l1_idea(ideaunit_shop(mood))
+    sue_bud.set_l1_idea(ideaunit_shop(mood))
     m_road = sue_bud.make_l1_road(mood)
     sue_bud.set_fact(base=m_road, pick=m_road)
     print(f"When one non-ranged_fact added {sue_bud._idearoot._factunits=}")
@@ -340,10 +340,10 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     # ESTABLISH a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
     sue_bud = budunit_shop("Sue")
     time_text = "time"
-    sue_bud.add_l1_idea(ideaunit_shop(time_text, _begin=0, _close=140))
+    sue_bud.set_l1_idea(ideaunit_shop(time_text, _begin=0, _close=140))
     time_road = sue_bud.make_l1_road(time_text)
     mood_x = "mood_x"
-    sue_bud.add_l1_idea(ideaunit_shop(mood_x))
+    sue_bud.set_l1_idea(ideaunit_shop(mood_x))
     m_x_road = sue_bud.make_l1_road(mood_x)
     happy = "happy"
     sad = "Sad"
@@ -362,7 +362,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
 
     # a fact who's idea range is defined by numeric_root is not "rangeroot"
     mirror_x = "mirror_x"
-    sue_bud.add_l1_idea(ideaunit_shop(mirror_x, _numeric_road=time_text))
+    sue_bud.set_l1_idea(ideaunit_shop(mirror_x, _numeric_road=time_text))
     m_x_road = sue_bud.make_l1_road(mirror_x)
     sue_bud.set_fact(base=m_x_road, pick=time_road, open=5, nigh=10)
     assert len(sue_bud._idearoot._factunits) == 3
@@ -379,7 +379,7 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1(
     # sue_bud.set_idea(ideaunit_shop(clean, pledge=True))
 
     time_text = "time"
-    sue_bud.add_l1_idea(ideaunit_shop(time_text, _begin=0, _close=140))
+    sue_bud.set_l1_idea(ideaunit_shop(time_text, _begin=0, _close=140))
     time_road = sue_bud.make_l1_road(time_text)
     age1st_text = "age1st"
     age2nd_text = "age2nd"
@@ -441,7 +441,7 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2(
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
     time_road = sue_bud.make_l1_road(time_text)
-    sue_bud.add_l1_idea(time_idea)
+    sue_bud.set_l1_idea(time_idea)
     age1st_text = "age1st"
     age2nd_text = "age2nd"
     age3rd_text = "age3rd"
@@ -500,7 +500,7 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
     time_road = sue_bud.make_l1_road(time_text)
-    sue_bud.add_l1_idea(time_idea)
+    sue_bud.set_l1_idea(time_idea)
     age1st_text = "age1st"
     age2nd_text = "age2nd"
     age3rd_text = "age3rd"
@@ -586,18 +586,18 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario4(
     arsub1 = "descending_subsecction1"
     arsub1_idea = ideaunit_shop(arsub1, _begin=0, _close=140)
     as1_road = sue_bud.make_l1_road(arsub1)
-    sue_bud.add_l1_idea(arsub1_idea)
+    sue_bud.set_l1_idea(arsub1_idea)
     # range-root idea has range_source_road
     time_text = "time"
     time_idea = ideaunit_shop(
         time_text, _begin=0, _close=140, _range_source_road=as1_road
     )
-    sue_bud.add_l1_idea(time_idea)
+    sue_bud.set_l1_idea(time_idea)
 
     arsub2 = "descending_subsecction2"
     arsub2_idea = ideaunit_shop(arsub2, _begin=0, _close=20)
     as2_road = sue_bud.make_l1_road(arsub2)
-    sue_bud.add_l1_idea(arsub2_idea)
+    sue_bud.set_l1_idea(arsub2_idea)
 
     # non-range-root child idea has range_source_road
     time_road = sue_bud.make_l1_road(time_text)

@@ -544,7 +544,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_factuni
     knee_road = before_sue_au.make_l1_road(knee_text)
     broken_text = "broke cartilage"
     broken_road = before_sue_au.make_road(knee_road, broken_text)
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(broken_text), knee_road)
     before_ball_idea = before_sue_au.get_idea_obj(ball_road)
     assert before_ball_idea._factunits == {}
@@ -586,7 +586,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_factuni
     knee_road = before_sue_au.make_l1_road(knee_text)
     broken_text = "broke cartilage"
     broken_road = before_sue_au.make_road(knee_road, broken_text)
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(broken_text), knee_road)
     before_sue_au.edit_idea_attr(
         road=ball_road, factunit=factunit_shop(base=knee_road, pick=broken_road)
@@ -624,7 +624,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_factuni
     broken_road = before_sue_au.make_road(knee_road, broken_text)
     medical_text = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_text)
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(broken_text), knee_road)
     before_sue_au.set_idea(ideaunit_shop(medical_text), knee_road)
     before_knee_factunit = factunit_shop(knee_road, broken_road)
@@ -672,7 +672,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_reason_
     knee_road = before_sue_au.make_l1_road(knee_text)
     broken_text = "broke cartilage"
     broken_road = before_sue_au.make_road(knee_road, broken_text)
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(broken_text), knee_road)
     before_sue_au.edit_idea_attr(
         ball_road, reason_base=knee_road, reason_premise=broken_road
@@ -729,7 +729,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_reason_
     broken_road = before_sue_au.make_road(knee_road, broken_text)
     medical_text = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_text)
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(broken_text), knee_road)
     before_sue_au.set_idea(ideaunit_shop(medical_text), knee_road)
     before_sue_au.edit_idea_attr(
@@ -782,7 +782,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_reason_
     broken_road = before_sue_au.make_road(knee_road, broken_text)
     medical_text = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_text)
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(broken_text), knee_road)
     before_sue_au.set_idea(ideaunit_shop(medical_text), knee_road)
     before_sue_au.edit_idea_attr(
@@ -825,7 +825,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_reasonu
     knee_road = before_sue_au.make_l1_road(knee_text)
     medical_text = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_text)
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(medical_text), knee_road)
     before_ball_idea = before_sue_au.get_idea_obj(ball_road)
     assert before_ball_idea.get_reasonunit(knee_road) is None
@@ -868,7 +868,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_reasonu
     medical_text = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_text)
     before_medical_base_idea_active_requisite = False
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(medical_text), knee_road)
     before_sue_au.edit_idea_attr(
         road=ball_road,
@@ -919,7 +919,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_reasonu
     knee_text = "knee"
     knee_road = before_sue_au.make_l1_road(knee_text)
     medical_base_idea_active_requisite = False
-    before_sue_au.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.edit_idea_attr(
         road=ball_road,
         reason_base=knee_road,

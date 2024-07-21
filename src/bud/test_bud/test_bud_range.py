@@ -7,7 +7,7 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
     yao_bud = budunit_shop("Yao", _weight=10)
 
     l1 = "level1"
-    yao_bud.add_l1_idea(ideaunit_shop(l1, _weight=30))
+    yao_bud.set_l1_idea(ideaunit_shop(l1, _weight=30))
     l1_road = yao_bud.make_l1_road(l1)
 
     rx1 = "range_root_example"
@@ -40,7 +40,7 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario2():
     yao_budunit = budunit_shop(_owner_id="Yao", _weight=10)
 
     l1 = "level1"
-    yao_budunit.add_l1_idea(ideaunit_shop(l1, _weight=30))
+    yao_budunit.set_l1_idea(ideaunit_shop(l1, _weight=30))
     l1_road = yao_budunit.make_l1_road(l1)
 
     rx1 = "range_root_example"

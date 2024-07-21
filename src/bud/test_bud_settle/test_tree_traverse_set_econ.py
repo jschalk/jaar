@@ -40,7 +40,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenThereAreNotAny():
 def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_lobby_id_exists_IsTrue():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud.add_l1_idea(ideaunit_shop("Texas", _healerhold=healerhold_shop({"Yao"})))
+    sue_bud.set_l1_idea(ideaunit_shop("Texas", _healerhold=healerhold_shop({"Yao"})))
     assert sue_bud._econs_justified is False
 
     # WHEN
@@ -56,7 +56,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleProblemAndEc
     yao_text = "Yao"
     sue_bud.add_acctunit(yao_text)
     yao_healerhold = healerhold_shop({yao_text})
-    sue_bud.add_l1_idea(
+    sue_bud.set_l1_idea(
         ideaunit_shop("Texas", _healerhold=yao_healerhold, _problem_bool=True)
     )
     assert sue_bud._econs_justified is False
@@ -77,7 +77,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelAbovePr
 
     texas_text = "Texas"
     texas_road = sue_bud.make_l1_road(texas_text)
-    sue_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     ep_text = "El Paso"
     sue_bud.set_idea(ideaunit_shop(ep_text, _healerhold=yao_healerhold), texas_road)
     assert sue_bud._econs_justified is False
@@ -95,7 +95,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelBelowPr
     texas_text = "Texas"
     texas_road = sue_bud.make_l1_road(texas_text)
     yao_healerhold = healerhold_shop({"Yao"})
-    sue_bud.add_l1_idea(ideaunit_shop(texas_text, _healerhold=yao_healerhold))
+    sue_bud.set_l1_idea(ideaunit_shop(texas_text, _healerhold=yao_healerhold))
     sue_bud.set_idea(ideaunit_shop("El Paso", _problem_bool=True), texas_road)
     assert sue_bud._econs_justified is False
 
@@ -113,7 +113,7 @@ def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenEconIsLevelBelowProblem():
     texas_road = sue_bud.make_l1_road(texas_text)
     yao_healerhold = healerhold_shop({"Yao"})
     texas_idea = ideaunit_shop(texas_text, _healerhold=yao_healerhold)
-    sue_bud.add_l1_idea(texas_idea)
+    sue_bud.set_l1_idea(texas_idea)
     elpaso_idea = ideaunit_shop("El Paso", _problem_bool=True)
     sue_bud.set_idea(elpaso_idea, texas_road)
     assert sue_bud._econs_justified is False
@@ -136,7 +136,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenTwoEconsAreOneTheE
     texas_idea = ideaunit_shop(
         texas_text, _healerhold=yao_healerhold, _problem_bool=True
     )
-    sue_bud.add_l1_idea(texas_idea)
+    sue_bud.set_l1_idea(texas_idea)
     elpaso_idea = ideaunit_shop(
         "El Paso", _healerhold=yao_healerhold, _problem_bool=True
     )
@@ -159,7 +159,7 @@ def test_BudUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
     texas_idea = ideaunit_shop(
         texas_text, _healerhold=yao_healerhold, _problem_bool=True
     )
-    sue_bud.add_l1_idea(texas_idea)
+    sue_bud.set_l1_idea(texas_idea)
     elpaso_idea = ideaunit_shop(
         "El Paso", _healerhold=yao_healerhold, _problem_bool=True
     )

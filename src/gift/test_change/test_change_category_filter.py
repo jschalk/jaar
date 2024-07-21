@@ -16,7 +16,7 @@ def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_acctunit_insert
     bob_credor_weight = 33
     bob_debtor_weight = 44
     after_sue_bud.add_acctunit(bob_text, bob_credor_weight, bob_debtor_weight)
-    after_sue_bud.add_l1_idea(ideaunit_shop("casa"))
+    after_sue_bud.set_l1_idea(ideaunit_shop("casa"))
     old_changeunit = changeunit_shop()
     old_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 

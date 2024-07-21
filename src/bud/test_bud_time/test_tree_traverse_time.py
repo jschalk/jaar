@@ -376,7 +376,7 @@ def test_BudUnit_set_fact_WeekdayBudItemsCorrectlyReturned():
     sue_bud = get_budunit_sue_TimeExample()
 
     things_text = "things to do"
-    sue_bud.add_l1_idea(ideaunit_shop(things_text))
+    sue_bud.set_l1_idea(ideaunit_shop(things_text))
     t_road = sue_bud.make_l1_road(things_text)
     clean = "clean"
     run = "run"

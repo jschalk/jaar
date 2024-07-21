@@ -13,7 +13,7 @@ def get_time_min_from_dt(dt: datetime) -> int:
 def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     time_road = x_budunit.make_l1_road(time_str())
     time_idea = i_shop(time_str())
-    x_budunit.add_l1_idea(time_idea)
+    x_budunit.set_l1_idea(time_idea)
 
     # roads that need to be defined at the beginning:
     tech_road = x_budunit.make_road(time_road, tech_str())

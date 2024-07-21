@@ -71,8 +71,8 @@ def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
     casa_road = bob_bud.make_l1_road(casa_text)
     week_road = bob_bud.make_l1_road(week_text)
     wed_road = bob_bud.make_road(week_road, wed_text)
-    bob_bud.add_l1_idea(ideaunit_shop(casa_text))
-    bob_bud.add_l1_idea(ideaunit_shop(week_text))
+    bob_bud.set_l1_idea(ideaunit_shop(casa_text))
+    bob_bud.set_l1_idea(ideaunit_shop(week_text))
     bob_bud.set_idea(ideaunit_shop(wed_text), week_road)
     print(f"{bob_bud._idearoot._kids.keys()=}")
     wed_idea = bob_bud.get_idea_obj(wed_road)
@@ -414,7 +414,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
     time_road = x_bud.make_l1_road(time_text)
     week_text = "week"
     week_road = x_bud.make_road(time_road, week_text)
-    x_bud.add_l1_idea(ideaunit_shop(time_text, _begin=100, _close=2000))
+    x_bud.set_l1_idea(ideaunit_shop(time_text, _begin=100, _close=2000))
     x_bud.set_idea(ideaunit_shop(week_text, _denom=7), parent_road=time_road)
 
     # WHEN

@@ -6,15 +6,15 @@ def get_budunit_with_4_levels() -> BudUnit:
     sue_bud = budunit_shop(_owner_id="Sue", _weight=10)
 
     casa = "casa"
-    sue_bud.add_l1_idea(ideaunit_shop(casa, _weight=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(casa, _weight=30, pledge=True))
 
     cat = "cat have dinner"
-    sue_bud.add_l1_idea(ideaunit_shop(cat, _weight=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(cat, _weight=30, pledge=True))
 
     week_text = "weekdays"
     week_road = sue_bud.make_l1_road(week_text)
     idea_kid_weekdays = ideaunit_shop(week_text, _weight=40)
-    sue_bud.add_l1_idea(idea_kid_weekdays)
+    sue_bud.set_l1_idea(idea_kid_weekdays)
 
     sun_text = "Sunday"
     mon_text = "Monday"
@@ -43,7 +43,7 @@ def get_budunit_with_4_levels() -> BudUnit:
     states_text = "nation-state"
     states_road = sue_bud.make_l1_road(states_text)
     idea_kid_states = ideaunit_shop(states_text, _weight=30)
-    sue_bud.add_l1_idea(idea_kid_states)
+    sue_bud.set_l1_idea(idea_kid_states)
 
     usa_text = "USA"
     usa_road = sue_bud.make_road(states_road, usa_text)
@@ -78,7 +78,7 @@ def get_fund_explanation_bud() -> BudUnit:
     clean_road = sue_bud.make_road(casa_road, clean_text)
     sweep_text = "sweep floor"
     dish_text = "clean dishes"
-    sue_bud.add_l1_idea(ideaunit_shop(casa_text, _weight=30))
+    sue_bud.set_l1_idea(ideaunit_shop(casa_text, _weight=30))
     sue_bud.set_idea(ideaunit_shop(cat_text, _weight=30), casa_road)
     sue_bud.set_idea(ideaunit_shop(hun_n_text, _weight=30), cat_road)
     sue_bud.set_idea(ideaunit_shop(hun_y_text, _weight=30), cat_road)
@@ -87,12 +87,12 @@ def get_fund_explanation_bud() -> BudUnit:
     sue_bud.set_idea(ideaunit_shop(dish_text, _weight=30, pledge=True), clean_road)
 
     cat_text = "cat have dinner"
-    sue_bud.add_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
 
     # week_text = "weekdays"
     # week_road = sue_bud.make_l1_road(week_text)
     # idea_kid_weekdays = ideaunit_shop(week_text, _weight=25)
-    # sue_bud.add_l1_idea(idea_kid_weekdays)
+    # sue_bud.set_l1_idea(idea_kid_weekdays)
 
     # sun_text = "Sunday"
     # mon_text = "Monday"
@@ -119,7 +119,7 @@ def get_fund_explanation_bud() -> BudUnit:
     # states_text = "nation-state"
     # states_road = sue_bud.make_l1_road(states_text)
     # idea_kid_states = ideaunit_shop(states_text, _weight=30)
-    # sue_bud.add_l1_idea(idea_kid_states)
+    # sue_bud.set_l1_idea(idea_kid_states)
 
     # usa_text = "USA"
     # usa_road = sue_bud.make_road(states_road, usa_text)

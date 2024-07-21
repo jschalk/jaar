@@ -57,15 +57,15 @@ def get_budunit_with_4_levels() -> BudUnit:
     sue_bud = budunit_shop(_owner_id="Sue", _weight=10)
 
     casa_text = "casa"
-    sue_bud.add_l1_idea(ideaunit_shop(casa_text, _weight=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(casa_text, _weight=30, pledge=True))
 
     cat_text = "cat have dinner"
-    sue_bud.add_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
 
     week_text = "weekdays"
     week_road = sue_bud.make_l1_road(week_text)
     idea_kid_weekdays = ideaunit_shop(week_text, _weight=40)
-    sue_bud.add_l1_idea(idea_kid_weekdays)
+    sue_bud.set_l1_idea(idea_kid_weekdays)
 
     sun_text = "Sunday"
     mon_text = "Monday"
@@ -94,7 +94,7 @@ def get_budunit_with_4_levels() -> BudUnit:
     states_text = "nation-state"
     states_road = sue_bud.make_l1_road(states_text)
     idea_kid_states = ideaunit_shop(states_text, _weight=30)
-    sue_bud.add_l1_idea(idea_kid_states)
+    sue_bud.set_l1_idea(idea_kid_states)
 
     usa_text = "USA"
     usa_road = sue_bud.make_road(states_road, usa_text)
@@ -177,7 +177,7 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     n2_idea = ideaunit_shop(n2_text, _begin=2, _close=3)
     n3_idea = ideaunit_shop(n3_text, _begin=3, _close=4)
 
-    sue_bud.add_l1_idea(time_idea)
+    sue_bud.set_l1_idea(time_idea)
     sue_bud.set_idea(day24hr_idea, time_road)
     sue_bud.set_idea(am_idea, day24hr_road)
     sue_bud.set_idea(pm_idea, day24hr_road)
@@ -200,7 +200,7 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     soap_idea = ideaunit_shop(soap_text, pledge=True)
     grab_idea = ideaunit_shop(grab_text, pledge=True)
 
-    sue_bud.add_l1_idea(house_idea)
+    sue_bud.set_l1_idea(house_idea)
     sue_bud.set_idea(clean_idea, house_road)
     sue_bud.set_idea(dish_idea, clean_road)
     sue_bud.set_idea(soap_idea, clean_road)
@@ -228,10 +228,10 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     ced_min_label = "CE0_minutes"
     ced_minutes = ideaunit_shop(ced_min_label)
     ced_road = bob_bud.make_l1_road(ced_min_label)
-    bob_bud.add_l1_idea(ced_minutes)
+    bob_bud.set_l1_idea(ced_minutes)
     mail_label = "obtain mail"
     mail_task = ideaunit_shop(mail_label, pledge=True)
-    bob_bud.add_l1_idea(mail_task)
+    bob_bud.set_l1_idea(mail_task)
 
     premise_x = premiseunit_shop(need=ced_road, open=80, nigh=90)
     x_task_reason = reasonunit_shop(premise_x.need, {premise_x.need: premise_x})
@@ -252,11 +252,11 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
     idea_kid_shave = ideaunit_shop(shave_text, _weight=30, pledge=True)
-    zia_bud.add_l1_idea(idea_kid_shave)
+    zia_bud.set_l1_idea(idea_kid_shave)
     week_text = "weekdays"
     week_road = zia_bud.make_l1_road(week_text)
     week_idea = ideaunit_shop(week_text, _weight=40)
-    zia_bud.add_l1_idea(week_idea)
+    zia_bud.set_l1_idea(week_idea)
 
     sun_text = "Sunday"
     sun_road = zia_bud.make_road(week_road, sun_text)
@@ -281,7 +281,7 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
 
 def get_budunit_base_time_example() -> BudUnit:
     sue_bud = budunit_shop(_owner_id="Sue")
-    sue_bud.add_l1_idea(ideaunit_shop("casa"))
+    sue_bud.set_l1_idea(ideaunit_shop("casa"))
     return sue_bud
 
 
@@ -303,11 +303,11 @@ def get_budunit_irrational_example() -> BudUnit:
 
     egg_text = "egg first"
     egg_road = hatter_bud.make_l1_road(egg_text)
-    hatter_bud.add_l1_idea(ideaunit_shop(egg_text))
+    hatter_bud.set_l1_idea(ideaunit_shop(egg_text))
 
     chicken_text = "chicken first"
     chicken_road = hatter_bud.make_l1_road(chicken_text)
-    hatter_bud.add_l1_idea(ideaunit_shop(chicken_text))
+    hatter_bud.set_l1_idea(ideaunit_shop(chicken_text))
 
     # set egg pledge is True when chicken first is False
     hatter_bud.edit_idea_attr(
@@ -336,7 +336,7 @@ def get_budunit_mop_example1():
     floor_road = sue_bud.make_road(casa_road, floor_text)
     floor_idea = ideaunit_shop(floor_text, pledge=True)
     sue_bud.set_idea(floor_idea, casa_road)
-    sue_bud.add_l1_idea(ideaunit_shop("unimportant"))
+    sue_bud.set_l1_idea(ideaunit_shop("unimportant"))
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
@@ -375,7 +375,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     b_full_road = amos_bud.make_road(basket_road, b_full_text)
     b_smel_road = amos_bud.make_road(basket_road, b_smel_text)
     laundry_task_road = amos_bud.make_road(casa_road, do_laundry_text)
-    amos_bud.add_l1_idea(ideaunit_shop(casa_text))
+    amos_bud.set_l1_idea(ideaunit_shop(casa_text))
     amos_bud.set_idea(ideaunit_shop(basket_text), casa_road)
     amos_bud.set_idea(ideaunit_shop(b_full_text), basket_road)
     amos_bud.set_idea(ideaunit_shop(b_smel_text), basket_road)

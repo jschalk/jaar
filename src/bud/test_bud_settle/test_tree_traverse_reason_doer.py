@@ -8,7 +8,7 @@ def test_bud_edit_idea_attr_CorrectlySetsDoerUnit():
     xio_bud = budunit_shop("Xio")
     run_text = "run"
     run_road = xio_bud.make_l1_road(run_text)
-    xio_bud.add_l1_idea(ideaunit_shop(run_text))
+    xio_bud.set_l1_idea(ideaunit_shop(run_text))
     run_idea = xio_bud.get_idea_obj(run_road)
     assert run_idea._doerunit == doerunit_shop()
 
@@ -49,7 +49,7 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     run_text = "run"
     run_road = bob_bud.make_l1_road(run_text)
     bob_bud.add_acctunit(bob_text)
-    bob_bud.add_l1_idea(ideaunit_shop(run_text))
+    bob_bud.set_l1_idea(ideaunit_shop(run_text))
     bob_bud.edit_idea_attr(run_road, doerunit=x_doerunit)
     run_idea = bob_bud.get_idea_obj(run_road)
     assert run_idea._doerunit == x_doerunit
@@ -82,7 +82,7 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     run_text = "run"
     run_road = bob_bud.make_l1_road(run_text)
     bob_bud.add_acctunit(bob_text)
-    bob_bud.add_l1_idea(ideaunit_shop(run_text))
+    bob_bud.set_l1_idea(ideaunit_shop(run_text))
     bob_bud.edit_idea_attr(run_road, doerunit=x_doerunit)
     run_idea = bob_bud.get_idea_obj(run_road)
     assert run_idea._doerunit == x_doerunit
@@ -125,7 +125,7 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     yao_acctunit = sue_bud.get_acct(yao_text)
     yao_acctunit.add_lobbyship(swimmers_text)
 
-    sue_bud.add_l1_idea(ideaunit_shop(swim_text))
+    sue_bud.set_l1_idea(ideaunit_shop(swim_text))
     sue_bud.set_idea(ideaunit_shop(morn_text), parent_road=swim_road)
     sue_bud.set_idea(ideaunit_shop(four_text), parent_road=morn_road)
     sue_bud.edit_idea_attr(swim_road, doerunit=x_doerunit)
@@ -207,7 +207,7 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     # WHEN
     sue2_bud = budunit_shop("Sue")
     sue2_bud.add_acctunit(xia_text)
-    sue2_bud.add_l1_idea(
+    sue2_bud.set_l1_idea(
         sue1_bud_swim_idea, filter_out_missing_awardlinks_lobby_ids=False
     )
 

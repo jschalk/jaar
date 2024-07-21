@@ -271,10 +271,10 @@ def get_example_yao_voice_with_3_healers():
 
 #     yao_voice0 = get_example_yao_voice_with_3_healers()
 #     yao_voice0.del_idea_obj(run_road())
-#     yao_voice0.add_l1_idea(ideaunit_shop(get_location_text()))
+#     yao_voice0.set_l1_idea(ideaunit_shop(get_location_text()))
 #     yao_voice0.set_idea(ideaunit_shop(get_in_ocean_text()), get_location_road())
 #     yao_voice0.set_idea(ideaunit_shop(get_on_land_text()), get_location_road())
-#     yao_voice0.add_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
+#     yao_voice0.set_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
 #     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
 #     yao_voice0.settle_bud()
 #     assert yao_voice0._econ_dict.get(get_iowa_road())
@@ -344,10 +344,10 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     # yao_job3 with 1 new task, fact stays with it
 
     yao_voice0 = get_example_yao_voice_with_3_healers()
-    yao_voice0.add_l1_idea(ideaunit_shop(get_location_text()))
+    yao_voice0.set_l1_idea(ideaunit_shop(get_location_text()))
     yao_voice0.set_idea(ideaunit_shop(get_in_ocean_text()), get_location_road())
     yao_voice0.set_idea(ideaunit_shop(get_on_land_text()), get_location_road())
-    yao_voice0.add_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
+    yao_voice0.set_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
     yao_voice0.set_fact(get_location_road(), get_in_ocean_road())
     print(f"{yao_voice0.get_fact(get_location_road())=}")

@@ -187,16 +187,16 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalBud(
     zia_job.add_acctunit(yao_text, debtor_weight=12)
     vacuum_text = "vacuum"
     vacuum_road = sue_job.make_l1_road(vacuum_text)
-    sue_job.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+    sue_job.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_job.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_job.make_l1_road(egg_text)
-    sue_job.add_l1_idea(ideaunit_shop(egg_text))
+    sue_job.set_l1_idea(ideaunit_shop(egg_text))
     chicken_text = "chicken first"
     chicken_road = sue_job.make_l1_road(chicken_text)
-    sue_job.add_l1_idea(ideaunit_shop(chicken_text))
+    sue_job.set_l1_idea(ideaunit_shop(chicken_text))
     # set egg pledge is True when chicken first is False
     sue_job.edit_idea_attr(
         road=egg_road,
@@ -309,7 +309,7 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     yao_old_job = budunit_shop(yao_text)
     vacuum_text = "vacuum"
     vacuum_road = yao_old_job.make_l1_road(vacuum_text)
-    yao_old_job.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+    yao_old_job.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = yao_old_job.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
     yao_dakota_hubunit.save_job_bud(yao_old_job)

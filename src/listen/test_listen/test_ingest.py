@@ -61,7 +61,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     zia_text = "Zia"
     zia_budunit = budunit_shop(zia_text)
     clean_text = "clean"
-    zia_budunit.add_l1_idea(ideaunit_shop(clean_text, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
     zia_debtor_pool = 78
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 1
@@ -87,8 +87,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     zia_budunit = budunit_shop(zia_text)
     clean_text = "clean"
     cook_text = "cook"
-    zia_budunit.add_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    zia_budunit.add_l1_idea(ideaunit_shop(cook_text, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, pledge=True))
     zia_debtor_pool = 32
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -118,8 +118,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     zia_budunit = budunit_shop(zia_text)
     clean_text = "clean"
     cook_text = "cook"
-    zia_budunit.add_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    zia_budunit.add_l1_idea(ideaunit_shop(cook_text, _weight=3, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, _weight=3, pledge=True))
     zia_debtor_pool = 32
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -147,8 +147,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     zia_budunit = budunit_shop(zia_text)
     clean_text = "clean"
     cook_text = "cook"
-    zia_budunit.add_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    zia_budunit.add_l1_idea(ideaunit_shop(cook_text, _weight=2, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, _weight=2, pledge=True))
     zia_debtor_pool = 32
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2

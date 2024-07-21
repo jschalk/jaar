@@ -160,7 +160,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
 
     morn_text = "morning"
     morn_road = sue_bud.make_l1_road(morn_text)
-    sue_bud.add_l1_idea(ideaunit_shop(morn_text))
+    sue_bud.set_l1_idea(ideaunit_shop(morn_text))
     x_doerunit = doerunit_shop()
     x_doerunit.set_lobbyhold(lobby_id=run_text)
     sue_bud.edit_idea_attr(doerunit=x_doerunit, road=morn_road)

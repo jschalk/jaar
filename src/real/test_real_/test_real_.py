@@ -188,8 +188,8 @@ def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_voice_bud.add_acctunit(yao_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
-    sue_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    yao_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    yao_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerhold = healerhold_shop({sue_text, yao_text})

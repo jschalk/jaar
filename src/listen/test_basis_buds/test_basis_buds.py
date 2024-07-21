@@ -14,7 +14,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     slash_text = "/"
     penny_float = 0.7
     yao_voice = budunit_shop(yao_text, _road_delimiter=slash_text, _penny=penny_float)
-    yao_voice.add_l1_idea(ideaunit_shop("Iowa"))
+    yao_voice.set_l1_idea(ideaunit_shop("Iowa"))
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
@@ -59,7 +59,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     yao_text = "Yao"
     slash_text = "/"
     yao_duty = budunit_shop(yao_text, _road_delimiter=slash_text)
-    yao_duty.add_l1_idea(ideaunit_shop("Iowa"))
+    yao_duty.set_l1_idea(ideaunit_shop("Iowa"))
     zia_text = "Zia"
     zia_credor_weight = 47
     zia_debtor_weight = 41
@@ -124,7 +124,7 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     bob_acctunit = sue_budunit.get_acct(bob_text)
     bob_acctunit.add_lobbyship(f"{slash_text}swimmers")
     sue_budunit.set_acct_respect(sue_acct_pool)
-    sue_budunit.add_l1_idea(ideaunit_shop(casa_text))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN

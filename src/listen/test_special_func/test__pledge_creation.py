@@ -54,7 +54,7 @@ def test_create_pledge_CorrectlyModifiesBudNonpledgeIdeaTopledgeIdea():
     floor_road = sue_bud.make_road(clean_road, floor_text)
     floor_idea = ideaunit_shop(floor_text, pledge=True)
 
-    sue_bud.add_l1_idea(clean_idea)
+    sue_bud.set_l1_idea(clean_idea)
     sue_bud.set_idea(floor_idea, clean_road)
     old_clean_idea = sue_bud.get_idea_obj(clean_road)
     old_floor_idea = sue_bud.get_idea_obj(floor_road)

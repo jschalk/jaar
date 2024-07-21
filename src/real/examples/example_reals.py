@@ -23,7 +23,7 @@ def create_example_real1() -> RealUnit:
     yao_voice_bud.settle_bud()
     texas_text = "Texas"
     texas_road = yao_voice_bud.make_l1_road(texas_text)
-    yao_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    yao_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerhold = healerhold_shop({yao_text})
@@ -87,9 +87,9 @@ def create_example_real2() -> RealUnit:
     zia_voice_bud.add_acctunit(zia_text, 38, 400)
     texas_text = "Texas"
     texas_road = yao_voice_bud.make_l1_road(texas_text)
-    yao_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    wei_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    zia_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    yao_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    wei_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    zia_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerhold = healerhold_shop({yao_text, zia_text})
@@ -138,9 +138,9 @@ def create_example_real3() -> RealUnit:
 
     casa_text = "casa"
     casa_road = yao_voice_bud.make_l1_road(casa_text)
-    yao_voice_bud.add_l1_idea(ideaunit_shop(casa_text))
-    wei_voice_bud.add_l1_idea(ideaunit_shop(casa_text))
-    zia_voice_bud.add_l1_idea(ideaunit_shop(casa_text))
+    yao_voice_bud.set_l1_idea(ideaunit_shop(casa_text))
+    wei_voice_bud.set_l1_idea(ideaunit_shop(casa_text))
+    zia_voice_bud.set_l1_idea(ideaunit_shop(casa_text))
     clean_text = "clean"
     clean_road = yao_voice_bud.make_road(casa_road, clean_text)
     bath_text = "clean bathroom"
@@ -186,9 +186,9 @@ def create_example_real4() -> RealUnit:
 
     casa_text = "casa"
     casa_road = yao_voice_bud.make_l1_road(casa_text)
-    yao_voice_bud.add_l1_idea(ideaunit_shop(casa_text))
-    wei_voice_bud.add_l1_idea(ideaunit_shop(casa_text))
-    zia_voice_bud.add_l1_idea(ideaunit_shop(casa_text))
+    yao_voice_bud.set_l1_idea(ideaunit_shop(casa_text))
+    wei_voice_bud.set_l1_idea(ideaunit_shop(casa_text))
+    zia_voice_bud.set_l1_idea(ideaunit_shop(casa_text))
     clean_text = "clean"
     clean_road = yao_voice_bud.make_road(casa_road, clean_text)
     bath_text = "clean bathroom"
@@ -226,9 +226,9 @@ def create_example_real4() -> RealUnit:
 
     texas_text = "Texas"
     texas_road = yao_voice_bud.make_l1_road(texas_text)
-    yao_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    wei_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    zia_voice_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    yao_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    wei_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    zia_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerhold = healerhold_shop({yao_text, zia_text})

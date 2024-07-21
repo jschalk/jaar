@@ -50,7 +50,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     zia_clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     zia_budunit = budunit_shop(zia_text)
     zia_budunit.add_acctunit(yao_text)
-    zia_budunit.add_l1_idea(zia_clean_ideaunit)
+    zia_budunit.set_l1_idea(zia_clean_ideaunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
     zia_yao_budunit.set_owner_id(yao_text)
@@ -132,7 +132,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBud():
     fly_road = zia_budunit.make_l1_road(fly_text)
     zia_budunit.set_idea(yao_clean_ideaunit, casa_road)
     zia_budunit.set_idea(yao_cook_ideaunit, casa_road)
-    zia_budunit.add_l1_idea(yao_fly_ideaunit)
+    zia_budunit.set_l1_idea(yao_fly_ideaunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
     zia_yao_budunit.set_owner_id(yao_text)
@@ -192,7 +192,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUni
     before_yao_budunit.edit_idea_attr(dish_road, weight=1000)
     zia_budunit.set_idea(yao_dish_ideaunit, casa_road)
     zia_budunit.set_idea(yao_cook_ideaunit, casa_road)
-    zia_budunit.add_l1_idea(yao_fly_ideaunit)
+    zia_budunit.set_l1_idea(yao_fly_ideaunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
     zia_yao_budunit.set_owner_id(yao_text)
@@ -241,16 +241,16 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     sue_budunit.set_max_tree_traverse(6)
     vacuum_text = "vacuum"
     vacuum_road = sue_budunit.make_l1_road(vacuum_text)
-    sue_budunit.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+    sue_budunit.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_budunit.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_budunit.make_l1_road(egg_text)
-    sue_budunit.add_l1_idea(ideaunit_shop(egg_text))
+    sue_budunit.set_l1_idea(ideaunit_shop(egg_text))
     chicken_text = "chicken first"
     chicken_road = sue_budunit.make_l1_road(chicken_text)
-    sue_budunit.add_l1_idea(ideaunit_shop(chicken_text))
+    sue_budunit.set_l1_idea(ideaunit_shop(chicken_text))
     # set egg pledge is True when chicken first is False
     sue_budunit.edit_idea_attr(
         road=egg_road,

@@ -63,7 +63,7 @@ def test_BudUnit_set_idea_RaisesErrorWhen_label_IsNotNode():
     )
 
 
-def test_BudUnit_add_l1_idea_CorrectlySetsAttr():
+def test_BudUnit_set_l1_idea_CorrectlySetsAttr():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     casa_text = "casa"
@@ -71,7 +71,7 @@ def test_BudUnit_add_l1_idea_CorrectlySetsAttr():
     assert zia_bud.idea_exists(casa_road) is False
 
     # WHEN
-    zia_bud.add_l1_idea(ideaunit_shop(casa_text))
+    zia_bud.set_l1_idea(ideaunit_shop(casa_text))
 
     # THEN
     assert zia_bud.idea_exists(casa_road)
@@ -178,8 +178,8 @@ def test_BudUnit_set_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
     casa_road = bob_bud.make_l1_road(casa_text)
     week_road = bob_bud.make_l1_road(week_text)
     wed_road = bob_bud.make_road(week_road, wed_text)
-    bob_bud.add_l1_idea(ideaunit_shop(casa_text))
-    bob_bud.add_l1_idea(ideaunit_shop(week_text))
+    bob_bud.set_l1_idea(ideaunit_shop(casa_text))
+    bob_bud.set_l1_idea(ideaunit_shop(week_text))
     bob_bud.set_idea(ideaunit_shop(wed_text), week_road)
     print(f"{bob_bud._idearoot._kids.keys()=}")
     assert len(bob_bud._idearoot._kids) == 2
@@ -556,7 +556,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsE
     casa_text = "casa"
     casa_road = yao_bud.make_l1_road(casa_text)
     casa_idea = ideaunit_shop(casa_text)
-    yao_bud.add_l1_idea(casa_idea)
+    yao_bud.set_l1_idea(casa_idea)
     clean_text = "clean"
     clean_idea = ideaunit_shop(clean_text)
     clean_road = yao_bud.make_road(casa_road, clean_text)
@@ -584,7 +584,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaInvaildDenomThrowsErr
     casa = "casa"
     w_road = yao_bud.make_l1_road(casa)
     casa_idea = ideaunit_shop(casa, _begin=8, _close=14)
-    yao_bud.add_l1_idea(casa_idea)
+    yao_bud.set_l1_idea(casa_idea)
 
     clean = "clean"
     clean_idea = ideaunit_shop(clean, _denom=1)
@@ -596,7 +596,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaInvaildDenomThrowsErr
     day = "day_range"
     day_idea = ideaunit_shop(day, _begin=44, _close=110)
     day_road = yao_bud.make_l1_road(day)
-    yao_bud.add_l1_idea(day_idea)
+    yao_bud.set_l1_idea(day_idea)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -614,11 +614,11 @@ def test_BudUnit_edit_idea_attr_budWhenParentAndNumeric_roadBothHaveRangeThrowEr
     yao_bud = budunit_shop("Yao")
     casa_text = "casa"
     casa_road = yao_bud.make_l1_road(casa_text)
-    yao_bud.add_l1_idea(ideaunit_shop(casa_text))
+    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
     day_text = "day_range"
     day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
     day_road = yao_bud.make_l1_road(day_text)
-    yao_bud.add_l1_idea(day_idea)
+    yao_bud.set_l1_idea(day_idea)
 
     casa_idea = yao_bud.get_idea_obj(casa_road)
     assert casa_idea._begin is None
@@ -657,11 +657,11 @@ def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_lobby_ids_DoNotExist(
     yao_bud = budunit_shop("Yao")
     casa_text = "casa"
     casa_road = yao_bud.make_l1_road(casa_text)
-    yao_bud.add_l1_idea(ideaunit_shop(casa_text))
+    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
     day_text = "day_range"
     day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
     day_road = yao_bud.make_l1_road(day_text)
-    yao_bud.add_l1_idea(day_idea)
+    yao_bud.set_l1_idea(day_idea)
 
     casa_idea = yao_bud.get_idea_obj(casa_road)
     assert casa_idea._begin is None
@@ -682,9 +682,9 @@ def test_BudUnit_set_idea_MustReorderKidsDictToBeAlphabetical():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     casa_text = "casa"
-    bob_bud.add_l1_idea(ideaunit_shop(casa_text))
+    bob_bud.set_l1_idea(ideaunit_shop(casa_text))
     swim_text = "swim"
-    bob_bud.add_l1_idea(ideaunit_shop(swim_text))
+    bob_bud.set_l1_idea(ideaunit_shop(swim_text))
 
     # WHEN
     idea_list = list(bob_bud._idearoot._kids.values())
@@ -697,7 +697,7 @@ def test_BudUnit_set_idea_adoptee_RaisesErrorIfAdopteeIdeaDoesNotHaveCorrectPare
     bob_bud = budunit_shop("Bob")
     sports_text = "sports"
     sports_road = bob_bud.make_l1_road(sports_text)
-    bob_bud.add_l1_idea(ideaunit_shop(sports_text))
+    bob_bud.set_l1_idea(ideaunit_shop(sports_text))
     swim_text = "swim"
     bob_bud.set_idea(ideaunit_shop(swim_text), parent_road=sports_road)
 
@@ -718,7 +718,7 @@ def test_BudUnit_set_idea_adoptee_CorrectlyAddsAdoptee():
     bob_bud = budunit_shop("Bob")
     sports_text = "sports"
     sports_road = bob_bud.make_l1_road(sports_text)
-    bob_bud.add_l1_idea(ideaunit_shop(sports_text))
+    bob_bud.set_l1_idea(ideaunit_shop(sports_text))
     swim_text = "swim"
     bob_bud.set_idea(ideaunit_shop(swim_text), parent_road=sports_road)
     hike_text = "hike"
@@ -755,7 +755,7 @@ def test_BudUnit_set_idea_bundling_SetsNewParentWithWeightEqualToSumOfAdoptedIde
     bob_bud = budunit_shop("Bob")
     sports_text = "sports"
     sports_road = bob_bud.make_l1_road(sports_text)
-    bob_bud.add_l1_idea(ideaunit_shop(sports_text, _weight=2))
+    bob_bud.set_l1_idea(ideaunit_shop(sports_text, _weight=2))
     swim_text = "swim"
     swim_weight = 3
     bob_bud.set_idea(ideaunit_shop(swim_text, _weight=swim_weight), sports_road)
@@ -803,7 +803,7 @@ def test_BudUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState():
     bob_bud = budunit_shop("Bob")
     sports_text = "sports"
     sports_road = bob_bud.make_l1_road(sports_text)
-    bob_bud.add_l1_idea(ideaunit_shop(sports_text, _weight=2))
+    bob_bud.set_l1_idea(ideaunit_shop(sports_text, _weight=2))
     swim_text = "swim"
     swim_weight = 3
     bob_bud.set_idea(ideaunit_shop(swim_text, _weight=swim_weight), sports_road)
@@ -869,7 +869,7 @@ def test_BudUnit_set_awardlink_correctly_sets_awardlinks():
     assert len(sue_bud._accts) == 3
     assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 3
     swim_text = "swim"
-    sue_bud.add_l1_idea(ideaunit_shop(swim_text))
+    sue_bud.set_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, give_weight=10)
     awardlink_zia = awardlink_shop(zia_text, give_weight=10)
     awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
@@ -917,7 +917,7 @@ def test_BudUnit_set_awardlink_correctly_deletes_awardlinks():
     swim_text = "swim"
     swim_road = x_bud.make_road(prom_text, swim_text)
 
-    x_bud.add_l1_idea(ideaunit_shop(swim_text))
+    x_bud.set_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, give_weight=10)
     awardlink_zia = awardlink_shop(zia_text, give_weight=10)
     awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
@@ -955,8 +955,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks()
     casa_road = x1_bud.make_l1_road(casa_text)
     swim_text = "swim"
     swim_road = x1_bud.make_l1_road(swim_text)
-    x1_bud.add_l1_idea(ideaunit_shop(casa_text))
-    x1_bud.add_l1_idea(ideaunit_shop(swim_text))
+    x1_bud.set_l1_idea(ideaunit_shop(casa_text))
+    x1_bud.set_l1_idea(ideaunit_shop(swim_text))
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(xia_text))
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
     x1_bud_swim_idea = x1_bud.get_idea_obj(swim_road)
@@ -985,8 +985,8 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     casa_road = x1_bud.make_l1_road(casa_text)
     swim_text = "swim"
     swim_road = x1_bud.make_l1_road(swim_text)
-    x1_bud.add_l1_idea(ideaunit_shop(casa_text))
-    x1_bud.add_l1_idea(ideaunit_shop(swim_text))
+    x1_bud.set_l1_idea(ideaunit_shop(casa_text))
+    x1_bud.set_l1_idea(ideaunit_shop(swim_text))
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(xia_text))
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
     x1_bud_swim_idea = x1_bud.get_idea_obj(swim_road)
@@ -995,7 +995,7 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     # WHEN
     x_bud = budunit_shop(bob_text)
     x_bud.add_acctunit(xia_text)
-    x_bud.add_l1_idea(x1_bud_swim_idea, create_missing_ideas=False)
+    x_bud.set_l1_idea(x1_bud_swim_idea, create_missing_ideas=False)
 
     # THEN
     x_bud_swim_idea = x_bud.get_idea_obj(swim_road)
@@ -1119,8 +1119,8 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_idea._parent_road = bob_budunit._real_id
     week_idea._parent_road = bob_budunit._real_id
     wed_idea._parent_road = week_road
-    bob_budunit.add_l1_idea(casa_idea)
-    bob_budunit.add_l1_idea(week_idea)
+    bob_budunit.set_l1_idea(casa_idea)
+    bob_budunit.set_l1_idea(week_idea)
     bob_budunit.set_idea(wed_idea, week_road)
     bob_budunit._offtrack_kids_weight_set.add(casa_road)
     bob_budunit._offtrack_kids_weight_set.add(week_road)
@@ -1176,8 +1176,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_idea._parent_road = bob_budunit._real_id
     week_idea._parent_road = bob_budunit._real_id
     wed_idea._parent_road = week_road
-    bob_budunit.add_l1_idea(casa_idea)
-    bob_budunit.add_l1_idea(week_idea)
+    bob_budunit.set_l1_idea(casa_idea)
+    bob_budunit.set_l1_idea(week_idea)
     bob_budunit.set_idea(wed_idea, week_road)
     bob_budunit._offtrack_kids_weight_set.add(casa_road)
     bob_budunit._offtrack_kids_weight_set.add(week_road)

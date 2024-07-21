@@ -191,16 +191,16 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
     zia_action.add_acctunit(yao_text, debtor_weight=12)
     vacuum_text = "vacuum"
     vacuum_road = sue_action.make_l1_road(vacuum_text)
-    sue_action.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+    sue_action.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_action.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_action.make_l1_road(egg_text)
-    sue_action.add_l1_idea(ideaunit_shop(egg_text))
+    sue_action.set_l1_idea(ideaunit_shop(egg_text))
     chicken_text = "chicken first"
     chicken_road = sue_action.make_l1_road(chicken_text)
-    sue_action.add_l1_idea(ideaunit_shop(chicken_text))
+    sue_action.set_l1_idea(ideaunit_shop(chicken_text))
     # set egg pledge is True when chicken first is False
     sue_action.edit_idea_attr(
         road=egg_road,
@@ -317,7 +317,7 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     yao_old_action = budunit_shop(yao_text)
     vacuum_text = "vacuum"
     vacuum_road = yao_old_action.make_l1_road(vacuum_text)
-    yao_old_action.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+    yao_old_action.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = yao_old_action.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
     yao_hubunit.save_action_bud(yao_old_action)
