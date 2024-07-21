@@ -285,19 +285,19 @@ def test_IdeaUnit_get_awardheirs_give_weight_sum_SetsAttrCorrectly_WithValues():
     assert biker_awardheir._fund_take is not None
 
 
-def test_IdeaUnit_awardheirs_exist_ReturnsObj():
+def test_IdeaUnit_awardheir_exists_ReturnsObj():
     # ESTABLISH
     biker_text = "bikers2"
     biker_awardheir = awardheir_shop(biker_text)
     sport_text = "sport"
     sport_ideaunit = ideaunit_shop(sport_text)
-    assert not sport_ideaunit.awardheirs_exist()
+    assert sport_ideaunit.awardheir_exists()
 
     # WHEN
     sport_ideaunit._awardheirs[biker_text] = biker_awardheir
 
     # THEN
-    assert sport_ideaunit.awardheirs_exist()
+    assert not sport_ideaunit.awardheir_exists()
 
 
 def test_IdeaUnit_get_awardheirs_give_weight_sum_ReturnsCorrectObj_NoValues():
