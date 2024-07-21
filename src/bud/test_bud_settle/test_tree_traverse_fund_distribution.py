@@ -696,7 +696,7 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     )
     assert lobbyship_debt_sum == 1.0 * default_fund_pool()
 
-    # ESTABLISH anothher pledge, check metrics are as expected
+    # ESTABLISH another pledge, check metrics are as expected
     xio_text = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_text))
     yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=13))
@@ -789,7 +789,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
         == 1.0 * default_fund_pool()
     )
 
-    # WHEN anothher pledge, check metrics are as expected
+    # WHEN another pledge, check metrics are as expected
     xio_text = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_text))
     yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=10))

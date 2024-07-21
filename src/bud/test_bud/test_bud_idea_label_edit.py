@@ -56,7 +56,7 @@ def test_BudUnit_edit_idea_label_RaisesErrorForLevel0IdeaWhen_real_id_isNone():
     #     yao_bud.edit_idea_label(old_road=yao_bud._real_id, new_label=moon_text)
     # assert (
     #     str(excinfo.value)
-    #     == f"Cannot set idearoot to string othher than '{yao_bud._real_id}'"
+    #     == f"Cannot set idearoot to string other than '{yao_bud._real_id}'"
     # )
 
     assert yao_bud._idearoot._label != moon_text

@@ -57,4 +57,4 @@ jobs:
       #TODO:
         #clip portion of test results with failure messages [DONE]
         #open new issue [DONE]
-        #dump failure text into issue, add some othher details
+        #dump failure text into issue, add some other details

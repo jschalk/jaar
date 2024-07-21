@@ -166,20 +166,6 @@ class BudUnit:
             )
         self._debtor_respect = new_debtor_respect
 
-    def _correct_any_debtor_bit_issues(self):
-        if self.get_acctunits_debtor_weight_sum() != self._debtor_respect:
-            missing_debtor_weight = (
-                self._debtor_respect - self.get_acctunits_debtor_weight_sum()
-            )
-            if len(self._accts) > 0:
-                acctunits = list(self._accts.values())
-                # accts_count = len(self._accts)
-                # bit_count = missing_debtor_weight / self._bit
-                # if bit_count <= accts_count:
-                for _ in range(0, missing_debtor_weight, self._bit):
-                    x_acctunit = acctunits.pop()
-                    x_acctunit.set_debtor_weight(x_acctunit.debtor_weight + self._bit)
-
     def make_road(
         self,
         parent_road: RoadUnit = None,
@@ -544,7 +530,7 @@ class BudUnit:
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
             # there exists a reason base "timeline,weeks" with premise.need = "timeline,weeks"
-            # and (1,2) divisor=2 (every othher week)
+            # and (1,2) divisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
             # "timeline,weeks" should be set automatica_lly since there exists a reason
