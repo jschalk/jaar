@@ -172,29 +172,6 @@ def get_spanref(span_name: str) -> SpanRef:
     return x_spanref
 
 
-def get_spancolumn_dict(span_name: str) -> dict[str:SpanColumn]:
-    attr_dict = get_spanref(span_name)
-    span_dict = {}
-    for x_attr_key, x_attr_dict in attr_dict.items():
-        x_spancolumn = SpanColumn(
-            attribute_key=x_attr_key,
-            column_order=x_attr_dict.get(column_order_str()),
-            sort_order=x_attr_dict.get(sort_order_str()),
-        )
-        span_dict[x_attr_key] = x_spancolumn
-    return span_dict
-
-
-def get_sorting_attributes(span_name: str) -> list[str]:
-    span_format_dict = get_spancolumn_dict(span_name)
-    x_list = []
-    for x_attribute_name, x_attribute_dict in span_format_dict.items():
-        sort_order = x_attribute_dict.get("sort_order")
-        if sort_order is not None:
-            x_list.append(x_attribute_name)
-    return x_list
-
-
 def get_ascending_bools(sorting_attributes: list[str]) -> list[bool]:
     return [True for _ in sorting_attributes]
 
