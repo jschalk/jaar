@@ -1,15 +1,14 @@
 from src._instrument.python import get_1_if_None
-from dataclasses import dataclass
-
-
-class PennyNum(float):
-    """Smallest Unit of Money"""
-
-    pass
 
 
 class MoneyUnit(float):
     """MoneyUnit inherits from float class"""
+
+    pass
+
+
+class PennyNum(float):
+    """Smallest Unit of Money"""
 
     pass
 
@@ -21,7 +20,13 @@ class RespectNum(float):
 
 
 class BitNum(float):
-    """Smallest Unit of credor_weight or debtor_weight ala 'the slightest bit of respect!'"""
+    """Smallest Unit of credor_weight or debtor_weight (RespectNum) ala 'the slightest bit of respect!'"""
+
+    pass
+
+
+class FundNum(float):
+    """FundNum inherits from float class"""
 
     pass
 
@@ -32,9 +37,7 @@ class FundCoin(float):
     pass
 
 
-class FundNum(float):
-    """FundNum inherits from float class"""
-
+class missing_base_residual_Exception(Exception):
     pass
 
 
@@ -50,7 +53,7 @@ def default_fund_pool() -> FundNum:
     return FundNum(default_money_magnitude())
 
 
-def validate_fund_pool(x_fund_pool: int = None) -> int:
+def validate_fund_pool(x_fund_pool: FundNum = None) -> FundNum:
     x_fund_pool = default_fund_pool() if x_fund_pool is None else x_fund_pool
     return max(get_1_if_None(x_fund_pool), default_fund_coin_if_none())
 
@@ -116,11 +119,21 @@ def _get_missing_scale_list(
             missing_scale_list[x_count] += grain_unit
             missing_base_residual -= grain_unit
             x_count += 1
+
+            if missing_base_residual < 0:
+                raise missing_base_residual_Exception(
+                    f"missing_base_residual calculation failed probably due to missing_scale not being a multiple of grain_unit. missing_scale={missing_scale} grain_unit={grain_unit}."
+                )
     else:
         while missing_base_residual < 0:
             missing_scale_list[x_count] -= grain_unit
             missing_base_residual += grain_unit
             x_count += 1
+
+            if missing_base_residual > 0:
+                raise missing_base_residual_Exception(
+                    f"missing_base_residual calculation failed probably due to missing_scale not being a multiple of grain_unit. missing_scale={missing_scale} grain_unit={grain_unit}."
+                )
 
     return missing_scale_list
 

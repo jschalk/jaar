@@ -37,7 +37,7 @@ def delete_dir(dir: str):
         if os_path_isdir(dir):
             shutil_rmtree(path=dir)
         elif os_path_isfile(dir):
-            os_remove(path=dir)
+            os_remove(dir)
 
 
 class InvalidFileCopyException(Exception):
@@ -196,7 +196,7 @@ def is_path_valid(path: str) -> bool:
 def can_active_usser_edit_paths(path: str = None) -> bool:
     """
     `True` if the active usser has sufficient permissions to create the passed
-    path; `False` othherwise.
+    path; `False` otherwise.
     """
     # Parent directory of the passed path. If empty, we substitute the active
     # workinng directory (CWD) instead.
@@ -208,7 +208,7 @@ def can_active_usser_edit_paths(path: str = None) -> bool:
 def is_path_existent_or_creatable(path: str) -> bool:
     """
     `True` if the passed path is a valid path for the active OS _and_
-    either actively exists or is hypotheticallly creatable; `False` othherwise.
+    either actively exists or is hypotheticallly creatable; `False` otherwise.
     This function is guaranteed to _never_ raise exceptions.
     """
     try:
@@ -219,7 +219,7 @@ def is_path_existent_or_creatable(path: str) -> bool:
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
     # timeouts, permissions issues) implying this path to be inaccessible. All
-    # othher exceptions are unrelated fatal issues and should not be caught here.
+    # other exceptions are unrelated fatal issues and should not be caught here.
     except OSError:
         return False
 
@@ -228,7 +228,7 @@ def is_path_probably_creatable(path: str = None) -> bool:
     """
     `True` if the active usser has sufficient permissions to create **siblings**
     (i.e., arbiitrary files in the parent directory) of the passed path;
-    `False` othherwise.
+    `False` otherwise.
     """
     # Parent directory of the passed path. If empty, we substitute the active
     # workinng directory (CWD) instead.
@@ -250,7 +250,7 @@ def is_path_existent_or_probably_creatable(path: str) -> bool:
     """
     `True` if the passed path is a valid path on the active OS _and_
     either actively exists or is hypotheticallly creatable in a crooss-platform
-    manner optimized for POSIX-unfriendly filesystems; `False` othherwise.
+    manner optimized for POSIX-unfriendly filesystems; `False` otherwise.
     This function is guaranteed to _never_ raise exceptions.
     """
     try:
@@ -261,7 +261,7 @@ def is_path_existent_or_probably_creatable(path: str) -> bool:
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
     # timeouts, permissions issues) implying this path to be inaccessible. All
-    # othher exceptions are unrelated fatal issues and should not be caught here.
+    # other exceptions are unrelated fatal issues and should not be caught here.
     except OSError:
         return False
 

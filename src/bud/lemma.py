@@ -148,7 +148,7 @@ class Lemmas:
 
     def _create_new_fact(
         self, x_idea: IdeaUnit, src_fact: FactUnit, src_idea: IdeaUnit
-    ) -> FactUnit:
+    ) -> FactUnit:  # sourcery skip: remove-redundant-if
         if x_idea._begin is None or x_idea._close is None:
             raise InvalidLemmaException(f"Idea {x_idea.get_road()} does not have range")
 
@@ -199,7 +199,7 @@ class Lemmas:
                 src_open=src_open,
                 src_nigh=src_nigh,
             )
-        elif idea_numor is not None and idea_denom is not None and idea_reest == True:
+        elif idea_numor is not None and idea_denom is not None and idea_reest:
             fact_open, fact_nigh = self._get_remainder_calc_fact_attr(
                 idea_begin=idea_begin,
                 idea_close=idea_close,

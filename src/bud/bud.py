@@ -125,7 +125,7 @@ class BudUnit:
     _rational: bool = None
     _econs_justified: bool = None
     _econs_buildable: bool = None
-    _sum_healerhold_share: bool = None
+    _sum_healerhold_share: float = None
     _lobbyboxs: dict[LobbyID, LobbyBox] = None
     _offtrack_kids_weight_set: set[RoadUnit] = None
     _offtrack_fund: float = None
@@ -149,7 +149,7 @@ class BudUnit:
 
     def set_acct_respect(self, x_acct_pool: int):
         self.set_credor_respect(x_acct_pool)
-        self.set_debtor_resepect(x_acct_pool)
+        self.set_debtor_respect(x_acct_pool)
         self.set_fund_pool(x_acct_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
@@ -159,26 +159,12 @@ class BudUnit:
             )
         self._credor_respect = new_credor_respect
 
-    def set_debtor_resepect(self, new_debtor_respect: int):
+    def set_debtor_respect(self, new_debtor_respect: int):
         if valid_finance_ratio(new_debtor_respect, self._bit) is False:
             raise _bit_RatioException(
                 f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
             )
         self._debtor_respect = new_debtor_respect
-
-    def _correct_any_debtor_bit_issues(self):
-        if self.get_acctunits_debtor_weight_sum() != self._debtor_respect:
-            missing_debtor_weight = (
-                self._debtor_respect - self.get_acctunits_debtor_weight_sum()
-            )
-            if len(self._accts) > 0:
-                acctunits = list(self._accts.values())
-                # accts_count = len(self._accts)
-                # bit_count = missing_debtor_weight / self._bit
-                # if bit_count <= accts_count:
-                for _ in range(0, missing_debtor_weight, self._bit):
-                    x_acctunit = acctunits.pop()
-                    x_acctunit.set_debtor_weight(x_acctunit.debtor_weight + self._bit)
 
     def make_road(
         self,
@@ -390,7 +376,7 @@ class BudUnit:
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
         return self._accts.get(acct_id)
 
-    def get_charunit_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
+    def get_acctunit_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
             for x_lobby_id in x_acctunit._lobbyships.keys():
@@ -406,7 +392,7 @@ class BudUnit:
         self._lobbyboxs[x_lobbybox.lobby_id] = x_lobbybox
 
     def lobbybox_exists(self, lobby_id: LobbyID) -> bool:
-        return self._lobbyboxs.get(lobby_id) != None
+        return self._lobbyboxs.get(lobby_id) is not None
 
     def get_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
         return self._lobbyboxs.get(x_lobby_id)
@@ -424,7 +410,7 @@ class BudUnit:
         return x_lobbybox
 
     def get_tree_traverse_generated_lobbyboxs(self) -> set[LobbyID]:
-        x_acctunit_lobby_ids = set(self.get_charunit_lobby_ids_dict().keys())
+        x_acctunit_lobby_ids = set(self.get_acctunit_lobby_ids_dict().keys())
         all_lobby_ids = set(self._lobbyboxs.keys())
         return all_lobby_ids.difference(x_acctunit_lobby_ids)
 
@@ -544,7 +530,7 @@ class BudUnit:
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
             # there exists a reason base "timeline,weeks" with premise.need = "timeline,weeks"
-            # and (1,2) divisor=2 (every othher week)
+            # and (1,2) divisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
             # "timeline,weeks" should be set automatica_lly since there exists a reason
@@ -741,7 +727,7 @@ class BudUnit:
         _awardlinks_to_delete = [
             _awardlink_lobby_id
             for _awardlink_lobby_id in x_idea._awardlinks.keys()
-            if self.get_charunit_lobby_ids_dict().get(_awardlink_lobby_id) is None
+            if self.get_acctunit_lobby_ids_dict().get(_awardlink_lobby_id) is None
         ]
         for _awardlink_lobby_id in _awardlinks_to_delete:
             x_idea._awardlinks.pop(_awardlink_lobby_id)
@@ -750,7 +736,7 @@ class BudUnit:
             _lobbyholds_to_delete = [
                 _lobbyhold_lobby_id
                 for _lobbyhold_lobby_id in x_idea._doerunit._lobbyholds
-                if self.get_charunit_lobby_ids_dict().get(_lobbyhold_lobby_id) is None
+                if self.get_acctunit_lobby_ids_dict().get(_lobbyhold_lobby_id) is None
             ]
             for _lobbyhold_lobby_id in _lobbyholds_to_delete:
                 x_idea._doerunit.del_lobbyhold(_lobbyhold_lobby_id)
@@ -1023,7 +1009,7 @@ class BudUnit:
     ):
         if healerhold is not None:
             for x_lobby_id in healerhold._lobby_ids:
-                if self.get_charunit_lobby_ids_dict().get(x_lobby_id) is None:
+                if self.get_acctunit_lobby_ids_dict().get(x_lobby_id) is None:
                     raise healerhold_lobby_id_Exception(
                         f"Idea cannot edit healerhold because lobby_id '{x_lobby_id}' does not exist as lobby in Bud"
                     )
@@ -1420,7 +1406,7 @@ class BudUnit:
 
     def _create_lobbyboxs_metrics(self):
         self._lobbyboxs = {}
-        for lobby_id, acct_id_set in self.get_charunit_lobby_ids_dict().items():
+        for lobby_id, acct_id_set in self.get_acctunit_lobby_ids_dict().items():
             x_lobbybox = lobbybox_shop(lobby_id, _road_delimiter=self._road_delimiter)
             for x_acct_id in acct_id_set:
                 x_lobbyship = self.get_acct(x_acct_id).get_lobbyship(lobby_id)

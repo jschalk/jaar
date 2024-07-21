@@ -326,7 +326,7 @@ class PremiseUnit:
         # status might be true if premise is in lineage of fact
         if factheir is None:
             x_status = False
-        elif self.is_in_lineage(fact_pick=factheir.pick) == True:
+        elif self.is_in_lineage(fact_pick=factheir.pick):
             if self._is_range_or_segregate() is False:
                 x_status = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
@@ -591,9 +591,9 @@ class ReasonHeir(ReasonCore):
         any_premise_true = False
         any_task_true = False
         for x_premiseunit in self.premises.values():
-            if x_premiseunit._status == True:
+            if x_premiseunit._status:
                 any_premise_true = True
-                if x_premiseunit._task == True:
+                if x_premiseunit._task:
                     any_task_true = True
         return any_premise_true, any_task_true
 

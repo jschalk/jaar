@@ -43,7 +43,7 @@ def test_RiverRun_rivergrades_is_empty_ReturnsObj():
     yao_riverrun.set_initial_rivergrade(bob_text)
 
     # THEN
-    assert yao_riverrun._rivergrades_is_empty() == False
+    assert yao_riverrun._rivergrades_is_empty() is False
 
 
 def test_RiverRun_rivergrade_exists_ReturnsObj():
@@ -54,15 +54,15 @@ def test_RiverRun_rivergrade_exists_ReturnsObj():
     yao_riverrun.set_initial_rivergrade("Yao")
 
     bob_text = "Bob"
-    assert yao_riverrun.rivergrade_exists(bob_text) == False
-    assert yao_riverrun._rivergrades_is_empty() == False
+    assert yao_riverrun.rivergrade_exists(bob_text) is False
+    assert yao_riverrun._rivergrades_is_empty() is False
 
     # WHEN
     yao_riverrun.set_initial_rivergrade(bob_text)
 
     # THEN
     assert yao_riverrun.rivergrade_exists(bob_text)
-    assert yao_riverrun._rivergrades_is_empty() == False
+    assert yao_riverrun._rivergrades_is_empty() is False
 
 
 def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
@@ -81,15 +81,15 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
     all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     assert all_accts_ids == {yao_text, bob_text, zia_text, xio_text, sue_text}
     assert x_riverrun._rivergrades_is_empty()
-    assert x_riverrun.rivergrade_exists(yao_text) == False
-    assert x_riverrun.rivergrade_exists(bob_text) == False
-    assert x_riverrun.rivergrade_exists(zia_text) == False
+    assert x_riverrun.rivergrade_exists(yao_text) is False
+    assert x_riverrun.rivergrade_exists(bob_text) is False
+    assert x_riverrun.rivergrade_exists(zia_text) is False
 
     # WHEN
     x_riverrun.set_all_initial_rivergrades()
 
     # THEN
-    assert x_riverrun._rivergrades_is_empty() == False
+    assert x_riverrun._rivergrades_is_empty() is False
     assert x_riverrun.rivergrade_exists(yao_text)
     assert x_riverrun.rivergrade_exists(bob_text)
     assert x_riverrun.rivergrade_exists(zia_text)
@@ -123,5 +123,5 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlyOverWritesPrevious():
     assert x_riverrun.rivergrade_exists(yao_text)
     assert x_riverrun.rivergrade_exists(bob_text)
     assert x_riverrun.rivergrade_exists(zia_text)
-    assert x_riverrun.rivergrade_exists(xio_text) == False
-    assert x_riverrun.rivergrade_exists(sue_text) == False
+    assert x_riverrun.rivergrade_exists(xio_text) is False
+    assert x_riverrun.rivergrade_exists(sue_text) is False

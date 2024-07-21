@@ -26,7 +26,7 @@ class InvalidPremiseUnitException(Exception):
 
 
 @dataclass
-class X7TimeIdeaSource:
+class X7TimeIdeaAttrs:
     delimiter: str
 
     def _get_time_x7_src_idea(self, c400_count: int):
@@ -800,7 +800,7 @@ def Dec():
 def get_budunit_sue_TimeExample():
     sue_text = "Sue"
     sue_budunit = budunit_shop(sue_text)
-    x_x7idea = X7TimeIdeaSource(sue_budunit._road_delimiter)
+    x_x7idea = X7TimeIdeaAttrs(sue_budunit._road_delimiter)
     ideabase_list = x_x7idea._get_time_x7_src_idea(c400_count=7)
     while len(ideabase_list) != 0:
         yb = ideabase_list.pop(0)

@@ -117,7 +117,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     x_riverrun = riverrun_shop(yao_hubunit)
-    assert x_riverrun.tax_dues_unpaid() == False
+    assert x_riverrun.tax_dues_unpaid() is False
 
     # WHEN
     yao_text = "Yao"
@@ -129,7 +129,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # WHEN
     x_riverrun.delete_tax_due(yao_text)
     # THEN
-    assert x_riverrun.tax_dues_unpaid() == False
+    assert x_riverrun.tax_dues_unpaid() is False
 
     # WHEN
     bob_text = "Yao"
@@ -142,7 +142,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # WHEN
     x_riverrun.delete_tax_due(yao_text)
     # THEN
-    assert x_riverrun.tax_dues_unpaid() == False
+    assert x_riverrun.tax_dues_unpaid() is False
 
 
 def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
@@ -164,7 +164,7 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
     bob_bud.add_acctunit(sue_text, 2, sue_debtor_weight)
     bob_bud.add_acctunit(yao_text, 2, yao_debtor_weight)
     bob_debtorledger = get_debtorledger(bob_bud)
-    assert bob_riverrun.tax_dues_unpaid() == False
+    assert bob_riverrun.tax_dues_unpaid() is False
 
     # WHEN
     bob_riverrun.set_tax_dues(bob_debtorledger)
@@ -197,10 +197,10 @@ def test_RiverRun_acct_has_tax_due_ReturnsCorrectBool():
     bob_bud.add_acctunit(sue_text, 2, sue_debtor_weight)
     bob_bud.add_acctunit(yao_text, 2, yao_debtor_weight)
     bob_debtorledger = get_debtorledger(bob_bud)
-    assert bob_riverrun.acct_has_tax_due(bob_text) == False
-    assert bob_riverrun.acct_has_tax_due(sue_text) == False
-    assert bob_riverrun.acct_has_tax_due(yao_text) == False
-    assert bob_riverrun.acct_has_tax_due(zia_text) == False
+    assert bob_riverrun.acct_has_tax_due(bob_text) is False
+    assert bob_riverrun.acct_has_tax_due(sue_text) is False
+    assert bob_riverrun.acct_has_tax_due(yao_text) is False
+    assert bob_riverrun.acct_has_tax_due(zia_text) is False
 
     # WHEN
     bob_riverrun.set_tax_dues(bob_debtorledger)
@@ -209,7 +209,7 @@ def test_RiverRun_acct_has_tax_due_ReturnsCorrectBool():
     assert bob_riverrun.acct_has_tax_due(bob_text)
     assert bob_riverrun.acct_has_tax_due(sue_text)
     assert bob_riverrun.acct_has_tax_due(yao_text)
-    assert bob_riverrun.acct_has_tax_due(zia_text) == False
+    assert bob_riverrun.acct_has_tax_due(zia_text) is False
 
 
 def test_RiverRun_delete_tax_due_SetsAttr():
@@ -229,7 +229,7 @@ def test_RiverRun_delete_tax_due_SetsAttr():
     bob_riverrun.delete_tax_due(yao_text)
 
     # THEN
-    assert bob_riverrun.acct_has_tax_due(yao_text) == False
+    assert bob_riverrun.acct_has_tax_due(yao_text) is False
 
 
 def test_RiverRun_get_acct_tax_due_ReturnsCorrectObj():
@@ -252,9 +252,9 @@ def test_RiverRun_get_acct_tax_due_ReturnsCorrectObj():
     bob_bud.add_acctunit(sue_text, 2, sue_debtor_weight)
     bob_bud.add_acctunit(yao_text, 2, yao_debtor_weight)
     bob_debtorledger = get_debtorledger(bob_bud)
-    assert bob_riverrun.acct_has_tax_due(bob_text) == False
+    assert bob_riverrun.acct_has_tax_due(bob_text) is False
     assert bob_riverrun.get_acct_tax_due(bob_text) == 0
-    assert bob_riverrun.acct_has_tax_due(zia_text) == False
+    assert bob_riverrun.acct_has_tax_due(zia_text) is False
     assert bob_riverrun.get_acct_tax_due(zia_text) == 0
 
     # WHEN
@@ -263,7 +263,7 @@ def test_RiverRun_get_acct_tax_due_ReturnsCorrectObj():
     # THEN
     assert bob_riverrun.acct_has_tax_due(bob_text)
     assert bob_riverrun.get_acct_tax_due(bob_text) == 380
-    assert bob_riverrun.acct_has_tax_due(zia_text) == False
+    assert bob_riverrun.acct_has_tax_due(zia_text) is False
     assert bob_riverrun.get_acct_tax_due(zia_text) == 0
 
 
@@ -300,7 +300,7 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert excess_payer_money == 0
     assert tax_got == 375
     assert bob_riverrun.get_acct_tax_due(bob_text) == 0
-    assert bob_riverrun.acct_has_tax_due(bob_text) == False
+    assert bob_riverrun.acct_has_tax_due(bob_text) is False
 
     # WHEN / THEN
     assert bob_riverrun.get_acct_tax_due(sue_text) == 560

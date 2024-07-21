@@ -95,6 +95,27 @@ def test_create_missing_distribution_list_ReturnsObjScenario05():
     assert missing_scale_list == [-10, -10, -10, -5]
 
 
+def test_allot_missing_scale_DistributesTheMissingScale_scenario00():
+    # ESTABLISH
+    before_ledger = {}
+    x_missing_scale = 10
+    x_grain = 5
+    full_before_allot = 0
+    full_scale = full_before_allot + x_missing_scale
+
+    # WHEN
+    gen_ledger = _allot_missing_scale(
+        ledger=before_ledger,
+        scale_number=full_scale,
+        grain_unit=x_grain,
+        missing_scale=x_missing_scale,
+    )
+
+    # THEN
+    after_ledger = {}
+    assert gen_ledger == after_ledger
+
+
 def test_allot_missing_scale_DistributesTheMissingScale_scenario01():
     # ESTABLISH
     bob_text = "Bob"
@@ -242,7 +263,7 @@ def test_allot_scale_v01():
 
 
 def test_allot_scale_v02():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 1.0,
         "obj2": 2.0,
@@ -253,7 +274,6 @@ def test_allot_scale_v02():
     grain_unit = 0.3
 
     # WHEN / THEN
-    swim_text = "swim"
     with pytest_raises(Exception) as excinfo:
         allot_scale(accts, scale_number, grain_unit)
     assert (
@@ -263,7 +283,7 @@ def test_allot_scale_v02():
 
 
 def test_allot_scale_v03():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 1.0,
         "obj2": 2.0,
@@ -273,7 +293,10 @@ def test_allot_scale_v03():
     scale_number = 100.5
     grain_unit = 0.5
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 17
     assert alloted_accts.get("obj2") == 33.5
@@ -282,7 +305,7 @@ def test_allot_scale_v03():
 
 
 def test_allot_scale_v04():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 1.0,
         "obj2": 2.0,
@@ -292,7 +315,10 @@ def test_allot_scale_v04():
     scale_number = 101
     grain_unit = 0.5
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 17
     assert alloted_accts.get("obj2") == 33.5
@@ -301,7 +327,7 @@ def test_allot_scale_v04():
 
 
 def test_allot_scale_v05():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 1.0,
         "obj2": 2.0,
@@ -315,7 +341,10 @@ def test_allot_scale_v05():
     scale_number = 101
     grain_unit = 0.5
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 0.5
     assert alloted_accts.get("obj2") == 1
@@ -328,7 +357,7 @@ def test_allot_scale_v05():
 
 
 def test_allot_scale_v06():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 1.0,
         "obj2": 2.0,
@@ -342,7 +371,10 @@ def test_allot_scale_v06():
     scale_number = 101
     grain_unit = 0.5
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 0
     assert alloted_accts.get("obj2") == 0
@@ -355,7 +387,7 @@ def test_allot_scale_v06():
 
 
 def test_allot_scale_v07():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 1.0,
         "obj2": 2.0,
@@ -369,7 +401,10 @@ def test_allot_scale_v07():
     scale_number = 1
     grain_unit = 0.5
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 0
     assert alloted_accts.get("obj2") == 0
@@ -382,7 +417,7 @@ def test_allot_scale_v07():
 
 
 def test_allot_scale_v08():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 0,
         "obj2": 0,
@@ -402,7 +437,11 @@ def test_allot_scale_v08():
     #     str(excinfo.value)
     #     == f"If the summation of ledger values is zero the scale_number '{scale_number}' needs to be zero."
     # )
+
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 0
     assert alloted_accts.get("obj2") == 0
@@ -415,7 +454,7 @@ def test_allot_scale_v08():
 
 
 def test_allot_scale_v09():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 0,
         "obj2": 0,
@@ -428,7 +467,10 @@ def test_allot_scale_v09():
     scale_number = 0
     grain_unit = 0.5
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 0
     assert alloted_accts.get("obj2") == 0
@@ -440,7 +482,7 @@ def test_allot_scale_v09():
 
 
 def test_allot_scale_v10():
-    # Example usage:
+    # ESTABLISH
     accts = {
         "obj1": 0,
         "obj2": 0,
@@ -454,7 +496,10 @@ def test_allot_scale_v10():
     scale_number = 6
     grain_unit = 3
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 0
     assert alloted_accts.get("obj2") == 0
@@ -466,20 +511,23 @@ def test_allot_scale_v10():
     assert sum(alloted_accts.values()) == scale_number
 
 
-def test_allot_scale_v10():
-    # Example usage:
+def test_allot_scale_v11():
+    # ESTABLISH
     accts = {}
     print(f"{accts=}")
     scale_number = 6
     grain_unit = 3
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts == {}
 
 
-def test_allot_scale_v11():
-    # Example usage:
+def test_allot_scale_v12():
+    # ESTABLISH
     accts = {
         "obj1": 1,
         "obj2": 0,
@@ -493,7 +541,10 @@ def test_allot_scale_v11():
     scale_number = 6
     grain_unit = 3
 
+    # WHEN
     alloted_accts = allot_scale(accts, scale_number, grain_unit)
+
+    # THEN
     print(alloted_accts)
     assert alloted_accts.get("obj1") == 0
     assert alloted_accts.get("obj2") == 0
@@ -503,6 +554,36 @@ def test_allot_scale_v11():
     assert alloted_accts.get("obj6") == 3
     assert alloted_accts.get("obj7") == 3
     assert sum(alloted_accts.values()) == scale_number
+
+
+def test_get_missing_scale_list_RaisesErrorIfWhileLoopFails_Scenario0():
+    # ESTABLISH
+    x_missing_scale = 10
+    x_grain_unit = 7
+    x_list_length = 3
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        _get_missing_scale_list(x_missing_scale, x_grain_unit, x_list_length)
+    assert (
+        str(excinfo.value)
+        == f"missing_base_residual calculation failed probably due to missing_scale not being a multiple of grain_unit. missing_scale={x_missing_scale} grain_unit={x_grain_unit}."
+    )
+
+
+def test_get_missing_scale_list_RaisesErrorIfWhileLoopFails_Scenario1():
+    # ESTABLISH
+    x_missing_scale = -10
+    x_grain_unit = 7
+    x_list_length = 3
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        _get_missing_scale_list(x_missing_scale, x_grain_unit, x_list_length)
+    assert (
+        str(excinfo.value)
+        == f"missing_base_residual calculation failed probably due to missing_scale not being a multiple of grain_unit. missing_scale={x_missing_scale} grain_unit={x_grain_unit}."
+    )
 
 
 def test__create_allot_dict_SummationFailsInConsistentWay():

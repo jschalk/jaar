@@ -163,7 +163,7 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
         x_bud.set_credor_respect(x_atom.get_value(x_arg))
     x_arg = "_debtor_respect"
     if x_atom.get_value(x_arg) is not None:
-        x_bud.set_debtor_resepect(x_atom.get_value(x_arg))
+        x_bud.set_debtor_respect(x_atom.get_value(x_arg))
     x_arg = "_fund_pool"
     if x_atom.get_value(x_arg) is not None:
         x_bud._fund_pool = x_atom.get_value(x_arg)

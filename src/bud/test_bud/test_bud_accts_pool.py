@@ -33,7 +33,7 @@ def test_BudUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
     )
 
 
-def test_BudUnit_set_debtor_resepect_CorrectlySetsInt():
+def test_BudUnit_set_debtor_respect_CorrectlySetsInt():
     # ESTABLISH
     zia_text = "Zia"
     zia_bud = budunit_shop(_owner_id=zia_text)
@@ -41,24 +41,24 @@ def test_BudUnit_set_debtor_resepect_CorrectlySetsInt():
     assert zia_bud._debtor_respect != zia_debtor_respect
 
     # WHEN
-    zia_bud.set_debtor_resepect(zia_debtor_respect)
+    zia_bud.set_debtor_respect(zia_debtor_respect)
     # THEN
     assert zia_bud._debtor_respect == zia_debtor_respect
 
 
-def test_BudUnit_set_debtor_resepect_RaisesErrorWhenArgIsNotMultiple():
+def test_BudUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     # ESTABLISH
     zia_text = "Zia"
     zia_bud = budunit_shop(zia_text)
     x_debtor_respect = 23
-    zia_bud.set_debtor_resepect(x_debtor_respect)
+    zia_bud.set_debtor_respect(x_debtor_respect)
     assert zia_bud._bit == 1
     assert zia_bud._debtor_respect == x_debtor_respect
 
     # WHEN
     new_debtor_respect = 13.5
     with pytest_raises(Exception) as excinfo:
-        zia_bud.set_debtor_resepect(new_debtor_respect)
+        zia_bud.set_debtor_respect(new_debtor_respect)
     assert (
         str(excinfo.value)
         == f"Bud '{zia_text}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{zia_bud._bit}'"
@@ -74,7 +74,7 @@ def test_BudUnit_set_acct_respect_CorrectlySetsAttrs():
     zia_text = "Zia"
     zia_bud = budunit_shop(zia_text)
     zia_bud.set_credor_respect(old_credor_respect)
-    zia_bud.set_debtor_resepect(old_debtor_respect)
+    zia_bud.set_debtor_respect(old_debtor_respect)
     zia_bud.set_fund_pool(old_fund_pool)
     assert zia_bud._credor_respect == old_credor_respect
     assert zia_bud._debtor_respect == old_debtor_respect

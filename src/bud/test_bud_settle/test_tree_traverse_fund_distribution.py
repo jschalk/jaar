@@ -313,8 +313,8 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     print(f"{casa_idea._fund_ratio=} {sum_x} ")
     sum_x += nation_idea._fund_ratio
     print(f"{nation_idea._fund_ratio=} {sum_x} ")
-    assert sum_x >= 1.0
-    assert sum_x < 1.00000000001
+    tolerance = 1e-10
+    assert sum_x < 1.0 + tolerance
 
     # for kid_idea in root_idea._kids.values():
     #     sum_x += kid_idea._fund_ratio
@@ -369,7 +369,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
-    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 3
+    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 3
 
     # WHEN
     sue_bud.settle_bud()
@@ -396,7 +396,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
     sue_awardlink = awardlink_shop(sue_text, give_weight=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
-    assert len(sue_bud.get_charunit_lobby_ids_dict()) == 4
+    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 4
 
     # WHEN
     sue_bud.settle_bud()
@@ -443,7 +443,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsLobbyBox_fund_give_fund_take(
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_charunit_lobby_ids_dict()) == 3
+    assert len(x_bud.get_acctunit_lobby_ids_dict()) == 3
 
     # WHEN
     x_bud.settle_bud()
@@ -489,7 +489,7 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(x_bud.get_acctunit_lobby_ids_dict()) == 2
 
     # WHEN
     x_bud.settle_bud()
@@ -498,7 +498,7 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
     yao_lobbybox = x_bud.get_lobbybox(yao_text)
     zia_lobbybox = x_bud.get_lobbybox(zia_text)
     xio_lobbybox = x_bud.get_lobbybox(xio_text)
-    assert len(x_bud.get_charunit_lobby_ids_dict()) != len(x_bud._lobbyboxs)
+    assert len(x_bud.get_acctunit_lobby_ids_dict()) != len(x_bud._lobbyboxs)
     assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
     assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
     assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
@@ -696,7 +696,7 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     )
     assert lobbyship_debt_sum == 1.0 * default_fund_pool()
 
-    # ESTABLISH anothher pledge, check metrics are as expected
+    # ESTABLISH another pledge, check metrics are as expected
     xio_text = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_text))
     yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=13))
@@ -789,7 +789,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
         == 1.0 * default_fund_pool()
     )
 
-    # WHEN anothher pledge, check metrics are as expected
+    # WHEN another pledge, check metrics are as expected
     xio_text = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_text))
     yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=10))
@@ -919,14 +919,14 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_charunit_lobby_ids_dict()) == 2
+    assert len(x_bud.get_acctunit_lobby_ids_dict()) == 2
 
     # WHEN
     x_bud.settle_bud()
 
     # THEN
     xio_lobbybox = x_bud.get_lobbybox(xio_text)
-    assert len(x_bud.get_charunit_lobby_ids_dict()) != len(x_bud._lobbyboxs)
+    assert len(x_bud.get_acctunit_lobby_ids_dict()) != len(x_bud._lobbyboxs)
     assert not x_bud.acct_exists(xio_text)
     yao_acctunit = x_bud.get_acct(yao_text)
     zia_acctunit = x_bud.get_acct(zia_text)

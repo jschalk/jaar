@@ -44,7 +44,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_credor_respect = 22
     x_debtor_respect = 44
     x_bud.set_credor_respect(x_credor_respect)
-    x_bud.set_debtor_resepect(x_debtor_respect)
+    x_bud.set_debtor_respect(x_debtor_respect)
     override_text = "override"
     x_last_gift_id = 77
     x_bud.set_last_gift_id(x_last_gift_id)
@@ -319,7 +319,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_credor_respect = 200
     zia_debtor_respect = 200
     zia_bud.set_credor_respect(zia_credor_respect)
-    zia_bud.set_debtor_resepect(zia_debtor_respect)
+    zia_bud.set_debtor_respect(zia_debtor_respect)
     zia_last_gift_id = 73
     zia_bud.set_last_gift_id(zia_last_gift_id)
 

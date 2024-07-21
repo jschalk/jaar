@@ -99,7 +99,7 @@ class RiverRun:
         self.tax_dues.pop(x_acct_id)
 
     def levy_tax_due(self, x_acct_id: AcctID, payer_money: float) -> float:
-        if self.acct_has_tax_due(x_acct_id) == False:
+        if self.acct_has_tax_due(x_acct_id) is False:
             return payer_money, 0
         x_tax_due = self.get_acct_tax_due(x_acct_id)
         if x_tax_due > payer_money:

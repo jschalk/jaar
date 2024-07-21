@@ -190,7 +190,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_lobbyship():
     yao_acctunit.add_lobbyship(fly_text)
     zia_acctunit.add_lobbyship(fly_text)
     bob_acctunit.add_lobbyship(fly_text)
-    before_lobby_ids_dict = before_sue_budunit.get_charunit_lobby_ids_dict()
+    before_lobby_ids_dict = before_sue_budunit.get_acctunit_lobby_ids_dict()
     assert len(before_lobby_ids_dict.get(run_text)) == 2
     assert len(before_lobby_ids_dict.get(fly_text)) == 3
 
@@ -209,7 +209,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_lobbyship():
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_lobby_ids_dict = after_sue_budunit.get_charunit_lobby_ids_dict()
+    after_lobby_ids_dict = after_sue_budunit.get_acctunit_lobby_ids_dict()
     assert len(after_lobby_ids_dict.get(run_text)) == 1
     assert len(after_lobby_ids_dict.get(fly_text)) == 2
 
@@ -227,7 +227,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_lobbyship():
     run_text = ",runners"
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     zia_acctunit.add_lobbyship(run_text)
-    before_lobby_ids = before_sue_budunit.get_charunit_lobby_ids_dict()
+    before_lobby_ids = before_sue_budunit.get_acctunit_lobby_ids_dict()
     assert len(before_lobby_ids.get(run_text)) == 1
 
     # WHEN
@@ -242,7 +242,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_lobbyship():
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_lobby_ids = after_sue_budunit.get_charunit_lobby_ids_dict()
+    after_lobby_ids = after_sue_budunit.get_acctunit_lobby_ids_dict()
     assert len(after_lobby_ids.get(run_text)) == 2
     after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
     after_yao_run_lobbyship = after_yao_acctunit.get_lobbyship(run_text)

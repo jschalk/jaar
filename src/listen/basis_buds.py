@@ -33,7 +33,7 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
     if x_duty._credor_respect is not None:
         x_listen.set_credor_respect(x_duty._credor_respect)
     if x_duty._debtor_respect is not None:
-        x_listen.set_debtor_resepect(x_duty._debtor_respect)
+        x_listen.set_debtor_respect(x_duty._debtor_respect)
     for x_acctunit in x_listen._accts.values():
         x_acctunit.reset_listen_calculated_attrs()
     return x_listen
