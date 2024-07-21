@@ -802,7 +802,7 @@ class BudUnit:
         )
         if old_road != new_road:
             if parent_road == "":
-                self._idearoot.set_idea_label(new_label)
+                self._idearoot.set_label(new_label)
             else:
                 self._non_root_idea_label_edit(old_road, new_label, parent_road)
             self._idearoot_find_replace_road(old_road=old_road, new_road=new_road)
@@ -816,7 +816,7 @@ class BudUnit:
         self, old_road: RoadUnit, new_label: RoadNode, parent_road: RoadUnit
     ):
         x_idea = self.get_idea_obj(old_road)
-        x_idea.set_idea_label(new_label)
+        x_idea.set_label(new_label)
         x_idea._parent_road = parent_road
         idea_parent = self.get_idea_obj(get_parent_road(old_road))
         idea_parent._kids.pop(get_terminus_node(old_road, self._road_delimiter))
@@ -1737,11 +1737,11 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)
     x_bud._originunit = obj_from_bud_dict(bud_dict, "_originunit")
-    set_idearoot_from_bud_dict(x_bud, bud_dict)
+    create_idearoot_from_bud_dict(x_bud, bud_dict)
     return x_bud
 
 
-def set_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
+def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     idearoot_dict = bud_dict.get("_idearoot")
     x_bud._idearoot = ideaunit_shop(
         _root=True,
