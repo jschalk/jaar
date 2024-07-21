@@ -408,9 +408,9 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     #     if str(type(idea)).find(".idea.IdeaUnit'>") > 0:
     #         assert idea._active in (True, False)
     #     assert idea.pledge in (True, False)
-    #     # if idea._active == True:
+    #     # if idea._active:
     #     #     print(idea._label)
-    #     if idea.pledge == True:
+    #     if idea.pledge:
     #         pledge_true_count += 1
     #         # if idea.pledge is False:
     #         #     print(f"pledge is false {idea._label}")

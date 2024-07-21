@@ -199,7 +199,7 @@ class Lemmas:
                 src_open=src_open,
                 src_nigh=src_nigh,
             )
-        elif idea_numor is not None and idea_denom is not None and idea_reest == True:
+        elif idea_numor is not None and idea_denom is not None and idea_reest:
             fact_open, fact_nigh = self._get_remainder_calc_fact_attr(
                 idea_begin=idea_begin,
                 idea_close=idea_close,
