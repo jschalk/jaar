@@ -32,7 +32,7 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
     yao_tax_yield = 500
     x_riverrun.set_acct_tax_yield(yao_text, yao_tax_yield)
     # THEN
-    assert x_riverrun.tax_yields_is_empty() == False
+    assert x_riverrun.tax_yields_is_empty() is False
 
     # WHEN
     x_riverrun.delete_tax_yield(yao_text)
@@ -45,7 +45,7 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
     x_riverrun.set_acct_tax_yield(bob_text, bob_tax_yield)
     x_riverrun.set_acct_tax_yield(yao_text, yao_tax_yield)
     # THEN
-    assert x_riverrun.tax_yields_is_empty() == False
+    assert x_riverrun.tax_yields_is_empty() is False
 
     # WHEN
     x_riverrun.delete_tax_yield(yao_text)
@@ -70,7 +70,7 @@ def test_RiverRun_reset_tax_yields_CorrectlySetsAttr():
     bob_riverrun.set_acct_tax_yield(bob_text, bob_tax_yield)
     bob_riverrun.set_acct_tax_yield(sue_text, sue_tax_yield)
     bob_riverrun.set_acct_tax_yield(yao_text, yao_tax_yield)
-    assert bob_riverrun.tax_yields_is_empty() == False
+    assert bob_riverrun.tax_yields_is_empty() is False
 
     # WHEN
     bob_riverrun.reset_tax_yields()
@@ -100,16 +100,16 @@ def test_RiverRun_acct_has_tax_yield_ReturnsCorrectBool():
     assert bob_riverrun.acct_has_tax_yield(bob_text)
     assert bob_riverrun.acct_has_tax_yield(sue_text)
     assert bob_riverrun.acct_has_tax_yield(yao_text)
-    assert bob_riverrun.acct_has_tax_yield(zia_text) == False
+    assert bob_riverrun.acct_has_tax_yield(zia_text) is False
 
     # WHEN
     bob_riverrun.reset_tax_yields()
 
     # THEN
-    assert bob_riverrun.acct_has_tax_yield(bob_text) == False
-    assert bob_riverrun.acct_has_tax_yield(sue_text) == False
-    assert bob_riverrun.acct_has_tax_yield(yao_text) == False
-    assert bob_riverrun.acct_has_tax_yield(zia_text) == False
+    assert bob_riverrun.acct_has_tax_yield(bob_text) is False
+    assert bob_riverrun.acct_has_tax_yield(sue_text) is False
+    assert bob_riverrun.acct_has_tax_yield(yao_text) is False
+    assert bob_riverrun.acct_has_tax_yield(zia_text) is False
 
 
 def test_RiverRun_delete_tax_yield_SetsAttr():
@@ -129,7 +129,7 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
     bob_riverrun.delete_tax_yield(yao_text)
 
     # THEN
-    assert bob_riverrun.acct_has_tax_yield(yao_text) == False
+    assert bob_riverrun.acct_has_tax_yield(yao_text) is False
 
 
 def test_RiverRun_get_acct_tax_yield_ReturnsCorrectObj():
@@ -152,16 +152,16 @@ def test_RiverRun_get_acct_tax_yield_ReturnsCorrectObj():
     bob_riverrun.set_acct_tax_yield(yao_text, yao_tax_yield)
     assert bob_riverrun.acct_has_tax_yield(bob_text)
     assert bob_riverrun.get_acct_tax_yield(bob_text) == bob_tax_yield
-    assert bob_riverrun.acct_has_tax_yield(zia_text) == False
+    assert bob_riverrun.acct_has_tax_yield(zia_text) is False
     assert bob_riverrun.get_acct_tax_yield(zia_text) == 0
 
     # WHEN
     bob_riverrun.reset_tax_yields()
 
     # THEN
-    assert bob_riverrun.acct_has_tax_yield(bob_text) == False
+    assert bob_riverrun.acct_has_tax_yield(bob_text) is False
     assert bob_riverrun.get_acct_tax_yield(bob_text) == 0
-    assert bob_riverrun.acct_has_tax_yield(zia_text) == False
+    assert bob_riverrun.acct_has_tax_yield(zia_text) is False
     assert bob_riverrun.get_acct_tax_yield(zia_text) == 0
 
 
@@ -294,7 +294,7 @@ def test_RiverRun_tax_gotten_ReturnsObj():
     x_riverrun = riverrun_shop(example_yao_hubunit())
     assert x_riverrun._tax_got_prev == 0
     assert x_riverrun._tax_got_curr == 0
-    assert x_riverrun._tax_gotten() == False
+    assert x_riverrun._tax_gotten() is False
 
     # WHEN
     x_riverrun._set_tax_got_attrs(six_tax_got)
@@ -322,4 +322,4 @@ def test_RiverRun_tax_gotten_ReturnsObj():
     # THEN
     assert x_riverrun._tax_got_prev == 0
     assert x_riverrun._tax_got_curr == 0
-    assert x_riverrun._tax_gotten() == False
+    assert x_riverrun._tax_gotten() is False

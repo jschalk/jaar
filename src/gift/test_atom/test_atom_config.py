@@ -345,7 +345,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     acct_id_dict = acctunit_columns.get("acct_id")
     assert len(acct_id_dict) == 2
     assert acct_id_dict.get(sqlite_datatype_text()) == "TEXT"
-    assert acct_id_dict.get("nullable") == False
+    assert acct_id_dict.get("nullable") is False
     debtor_weight_dict = acctunit_columns.get("debtor_weight")
     assert len(acct_id_dict) == 2
     assert debtor_weight_dict.get(sqlite_datatype_text()) == "INTEGER"

@@ -59,7 +59,7 @@ def test_Translator_out_acct_id_exists_ReturnsObj():
     sue_text = "Sue"
     susan_text = "Susan"
     music_translator = translator_shop()
-    assert music_translator.out_acct_id_exists(susan_text) == False
+    assert music_translator.out_acct_id_exists(susan_text) is False
 
     # WHEN
     music_translator.set_acct_id(sue_text, susan_text)
