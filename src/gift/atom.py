@@ -238,7 +238,7 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
-    x_bud.add_idea(
+    x_bud.set_idea(
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value("label"),
             _addin=x_atom.get_value("_addin"),

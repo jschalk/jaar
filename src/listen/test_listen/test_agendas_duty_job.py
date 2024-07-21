@@ -42,8 +42,8 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_BudWhenNo_lobbyholdIsSe
     yao_duty.set_acct_respect(zia_pool)
 
     zia_job = budunit_shop(zia_text)
-    zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_job.add_acctunit(yao_text, debtor_weight=12)
     yao_dakota_hubunit = hubunit_shop(env_dir(), None, yao_text, get_dakota_road())
     yao_dakota_hubunit.save_job_bud(zia_job)
@@ -70,8 +70,8 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_Bud(env_dir_setup_clean
     yao_duty.set_acct_respect(zia_pool)
 
     zia_job = budunit_shop(zia_text)
-    zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
@@ -173,8 +173,8 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalBud(
 
     zia_text = "Zia"
     zia_job = budunit_shop(zia_text)
-    zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
@@ -187,16 +187,16 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesIrrationalBud(
     zia_job.add_acctunit(yao_text, debtor_weight=12)
     vacuum_text = "vacuum"
     vacuum_road = sue_job.make_l1_road(vacuum_text)
-    sue_job.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+    sue_job.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_job.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_job.make_l1_road(egg_text)
-    sue_job.add_l1_idea(ideaunit_shop(egg_text))
+    sue_job.set_l1_idea(ideaunit_shop(egg_text))
     chicken_text = "chicken first"
     chicken_road = sue_job.make_l1_road(chicken_text)
-    sue_job.add_l1_idea(ideaunit_shop(chicken_text))
+    sue_job.set_l1_idea(ideaunit_shop(chicken_text))
     # set egg pledge is True when chicken first is False
     sue_job.edit_idea_attr(
         road=egg_road,
@@ -248,8 +248,8 @@ def test_listen_to_agenda_duty_job_agenda_ProcessesMissingDebtorJobBud(
     yao_dakota_hubunit.save_duty_bud(yao_duty)
 
     zia_job = budunit_shop(zia_text)
-    zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
@@ -296,8 +296,8 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     # Save Zia to jobs
     zia_text = "Zia"
     zia_job = budunit_shop(zia_text)
-    zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_job.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_job.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     cook_ideaunit = zia_job.get_idea_obj(cook_road())
@@ -309,7 +309,7 @@ def test_listen_to_agenda_duty_job_agenda_ListensToOwner_duty_AndNotOwner_job(
     yao_old_job = budunit_shop(yao_text)
     vacuum_text = "vacuum"
     vacuum_road = yao_old_job.make_l1_road(vacuum_text)
-    yao_old_job.add_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
+    yao_old_job.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = yao_old_job.get_idea_obj(vacuum_road)
     vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
     yao_dakota_hubunit.save_job_bud(yao_old_job)
@@ -333,14 +333,14 @@ def test_listen_to_agenda_duty_job_agenda_GetsAgendaFromSrcBudNotSpeakerSelf(
     yao_duty = get_example_yao_speaker()
     assert yao_duty.idea_exists(run_road()) is False
     assert yao_duty.idea_exists(clean_road()) is False
-    yao_duty.add_idea(ideaunit_shop(run_text(), pledge=True), casa_road())
+    yao_duty.set_idea(ideaunit_shop(run_text(), pledge=True), casa_road())
     sue_dakota_hubunit = get_dakota_hubunit()
     sue_dakota_hubunit.save_duty_bud(yao_duty)
 
     yao_old_job = get_example_yao_speaker()
     assert yao_old_job.idea_exists(run_road()) is False
     assert yao_old_job.idea_exists(clean_road()) is False
-    yao_old_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    yao_old_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     sue_dakota_hubunit.save_job_bud(yao_old_job)
 
     yao_new_job = create_listen_basis(yao_duty)

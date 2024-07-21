@@ -68,8 +68,8 @@ def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
     zia_bud = budunit_shop(_owner_id=zia_text)
     swim_text = "swim"
     sports_text = "sports"
-    zia_bud.add_l1_idea(ideaunit_shop(swim_text, _uid=None))
-    zia_bud.add_l1_idea(ideaunit_shop(sports_text, _uid=2))
+    zia_bud.set_l1_idea(ideaunit_shop(swim_text, _uid=None))
+    zia_bud.set_l1_idea(ideaunit_shop(sports_text, _uid=2))
     swim_road = zia_bud.make_l1_road(swim_text)
     assert zia_bud.get_idea_obj(swim_road)._uid is None
 
@@ -85,7 +85,7 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
     nia_text = "Nia"
     nia_bud = budunit_shop(nia_text, _weight=10)
     weekdays = "weekdays"
-    nia_bud.add_l1_idea(ideaunit_shop(weekdays, _weight=40))
+    nia_bud.set_l1_idea(ideaunit_shop(weekdays, _weight=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
 
     # WHEN/THEN

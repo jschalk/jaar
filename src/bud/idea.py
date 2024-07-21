@@ -506,7 +506,7 @@ class IdeaUnit:
     def clear_awardlines(self):
         self._awardlines = {}
 
-    def set_idea_label(self, _label: str):
+    def set_label(self, _label: str):
         if (
             self._root
             and _label is not None
@@ -584,7 +584,7 @@ class IdeaUnit:
     def get_originunit_dict(self) -> dict[str, str]:
         return self._originunit.get_dict()
 
-    def _set_idea_attr(self, idea_attr: IdeaAttrFilter):
+    def _set_attrs_to_ideaunit(self, idea_attr: IdeaAttrFilter):
         if idea_attr.weight is not None:
             self._weight = idea_attr.weight
         if idea_attr.uid is not None:
@@ -1055,9 +1055,9 @@ def ideaunit_shop(
         _healerhold_ratio=get_0_if_None(_healerhold_ratio),
     )
     if x_ideakid._root:
-        x_ideakid.set_idea_label(_label=_bud_real_id)
+        x_ideakid.set_label(_label=_bud_real_id)
     else:
-        x_ideakid.set_idea_label(_label=_label)
+        x_ideakid.set_label(_label=_label)
     x_ideakid.set_doerunit_empty_if_none()
     x_ideakid.set_originunit_empty_if_none()
     return x_ideakid

@@ -1,12 +1,10 @@
 from src._road.jaar_refer import sue_str, bob_str, yao_str
-from src.bud.acct import acctunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.gift.span import (
     jaar_format_0001_acct_v0_0_0,
     jaar_format_0002_lobbyship_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
-    get_spancolumn_dict,
     create_span,
     real_id_str,
     owner_id_str,
@@ -16,7 +14,6 @@ from src.gift.span import (
     label_str,
     weight_str,
     pledge_str,
-    acct_pool_str,
     debtor_weight_str,
     credor_weight_str,
     get_spanref,
@@ -145,10 +142,10 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_weight = 31
-    sue_budunit.add_l1_idea(ideaunit_shop(casa_text, _weight=casa_weight))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _weight=casa_weight))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
     x_span_name = jaar_format_0003_ideaunit_v0_0_0()

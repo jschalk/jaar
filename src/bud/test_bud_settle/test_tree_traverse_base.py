@@ -144,7 +144,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
 
     email_text = "email"
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
-    x_bud.add_idea(email_idea, parent_road=casa_road)
+    x_bud.set_idea(email_idea, parent_road=casa_road)
 
     # test root status:
     x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
@@ -187,9 +187,9 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
 
     casa_road = x_bud.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
-    x_bud.add_idea(email_idea, parent_road=casa_road)
+    x_bud.set_idea(email_idea, parent_road=casa_road)
     vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
-    x_bud.add_idea(vacuum_idea, parent_road=casa_road)
+    x_bud.set_idea(vacuum_idea, parent_road=casa_road)
 
     x_bud.add_acctunit(acct_id=sue_text)
     x_awardlink = awardlink_shop(lobby_id=sue_text)
@@ -264,7 +264,7 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     swim_text = "swim"
     swim_road = x_bud.make_l1_road(swim_text)
 
-    x_bud.add_l1_idea(ideaunit_shop(swim_text))
+    x_bud.set_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, give_weight=10)
     awardlink_zia = awardlink_shop(zia_text, give_weight=10)
     awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
@@ -325,10 +325,10 @@ def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadU
 
     # WHEN
     time = "timeline"
-    yao_bud.add_l1_idea(ideaunit_shop(_label=time, _begin=0, _close=700))
+    yao_bud.set_l1_idea(ideaunit_shop(_label=time, _begin=0, _close=700))
     t_road = yao_bud.make_l1_road(time)
     week = "weeks"
-    yao_bud.add_idea(ideaunit_shop(_label=week, _denom=7), parent_road=t_road)
+    yao_bud.set_idea(ideaunit_shop(_label=week, _denom=7), parent_road=t_road)
 
     # THEN
     assert len(yao_bud.get_idea_tree_ordered_road_list()) == 3
@@ -339,9 +339,9 @@ def test_BudUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_text = "Texas"
-    sue_bud.add_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     casa_text = "casa"
-    sue_bud.add_l1_idea(ideaunit_shop(casa_text))
+    sue_bud.set_l1_idea(ideaunit_shop(casa_text))
 
     # WHEN
     problems_dict = sue_bud.get_idea_dict(problem=True)
@@ -386,7 +386,7 @@ def test_BudUnit_settle_bud_WhenIdeaRootHas_weightButAll_kidsHaveZero_weightAddT
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_idea = ideaunit_shop(casa_text, _weight=0)
-    sue_budunit.add_l1_idea(casa_idea)
+    sue_budunit.set_l1_idea(casa_idea)
     assert sue_budunit._offtrack_kids_weight_set == set()
 
     # WHEN
@@ -417,7 +417,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddT
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     clean_idea = ideaunit_shop(clean_text, _weight=2)
-    sue_budunit.add_idea(ideaunit_shop(clean_text), casa_road)
+    sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
@@ -426,11 +426,11 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddT
     vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
     vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
 
-    sue_budunit.add_l1_idea(casa_idea)
-    sue_budunit.add_idea(swim_idea, casa_road)
-    sue_budunit.add_idea(clean_idea, casa_road)
-    sue_budunit.add_idea(sweep_idea, clean_road)  # _weight=0
-    sue_budunit.add_idea(vaccum_idea, clean_road)  # _weight=0
+    sue_budunit.set_l1_idea(casa_idea)
+    sue_budunit.set_idea(swim_idea, casa_road)
+    sue_budunit.set_idea(clean_idea, casa_road)
+    sue_budunit.set_idea(sweep_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(vaccum_idea, clean_road)  # _weight=0
 
     assert sue_budunit._offtrack_kids_weight_set == set()
 
@@ -492,7 +492,7 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():
     yao_bud = budunit_shop(yao_text)
     swim_text = "swim"
     swim_road = yao_bud.make_l1_road(swim_text)
-    yao_bud.add_l1_idea(ideaunit_shop(swim_text))
+    yao_bud.set_l1_idea(ideaunit_shop(swim_text))
     zia_text = "Zia"
     yao_bud.add_acctunit(yao_text)
     yao_bud.add_acctunit(zia_text)
@@ -530,7 +530,7 @@ def test_BudUnit_get_tree_traverse_generated_lobbyboxs_ReturnsObj():
     yao_bud = budunit_shop(yao_text)
     swim_text = "swim"
     swim_road = yao_bud.make_l1_road(swim_text)
-    yao_bud.add_l1_idea(ideaunit_shop(swim_text))
+    yao_bud.set_l1_idea(ideaunit_shop(swim_text))
     zia_text = "Zia"
     yao_bud.add_acctunit(yao_text)
     yao_bud.add_acctunit(zia_text)

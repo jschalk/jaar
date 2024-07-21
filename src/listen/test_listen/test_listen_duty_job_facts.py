@@ -70,7 +70,7 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
     zia_job = get_example_zia_speaker()
-    zia_job.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
     clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     sue_texas_hubunit.save_job_bud(zia_job)
@@ -264,9 +264,9 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 
 #     sue_speaker.add_acctunit(yao_text)
 #     sue_speaker.set_acct_respect(20)
-#     sue_speaker.add_idea(ideaunit_shop(clean_text), status_road)
-#     sue_speaker.add_idea(ideaunit_shop(dirty_text), status_road)
-#     sue_speaker.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
+#     sue_speaker.set_idea(ideaunit_shop(clean_text), status_road)
+#     sue_speaker.set_idea(ideaunit_shop(dirty_text), status_road)
+#     sue_speaker.set_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
 #     sue_speaker.edit_idea_attr(
 #         sweep_road, reason_base=status_road, reason_premise=dirty_road
 #     )
@@ -317,10 +317,10 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     running_text = "running"
 #     running_road = yao_duty.make_road(fridge_road, running_text)
 
-#     yao_duty.add_idea(ideaunit_shop(running_text), fridge_road)
-#     yao_duty.add_idea(ideaunit_shop(clean_text), status_road)
-#     yao_duty.add_idea(ideaunit_shop(dirty_text), status_road)
-#     yao_duty.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
+#     yao_duty.set_idea(ideaunit_shop(running_text), fridge_road)
+#     yao_duty.set_idea(ideaunit_shop(clean_text), status_road)
+#     yao_duty.set_idea(ideaunit_shop(dirty_text), status_road)
+#     yao_duty.set_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
 #     yao_duty.edit_idea_attr(
 #         sweep_road, reason_base=status_road, reason_premise=dirty_road
 #     )

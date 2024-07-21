@@ -338,15 +338,15 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     street_text = "street ball"
     street_road = before_sue_bud.make_road(ball_road, street_text)
-    before_sue_bud.add_idea(ideaunit_shop(street_text), ball_road)
+    before_sue_bud.set_idea(ideaunit_shop(street_text), ball_road)
     disc_text = "Ultimate Disc"
     disc_road = before_sue_bud.make_road(sports_road, disc_text)
     music_text = "music"
-    before_sue_bud.add_l1_idea(ideaunit_shop(music_text))
-    before_sue_bud.add_idea(ideaunit_shop(disc_text), sports_road)
+    before_sue_bud.set_l1_idea(ideaunit_shop(music_text))
+    before_sue_bud.set_idea(ideaunit_shop(disc_text), sports_road)
     # create after without ball_idea and street_idea
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.del_idea_obj(ball_road)
@@ -381,22 +381,22 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     street_text = "street ball"
     street_road = before_sue_bud.make_road(ball_road, street_text)
-    before_sue_bud.add_idea(ideaunit_shop(street_text), ball_road)
+    before_sue_bud.set_idea(ideaunit_shop(street_text), ball_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     disc_text = "Ultimate Disc"
     disc_road = after_sue_bud.make_road(sports_road, disc_text)
-    after_sue_bud.add_idea(ideaunit_shop(disc_text), sports_road)
+    after_sue_bud.set_idea(ideaunit_shop(disc_text), sports_road)
     music_text = "music"
     music_begin = 34
     music_close = 78
     music_weight = 55
     music_pledge = True
     music_road = after_sue_bud.make_l1_road(music_text)
-    after_sue_bud.add_l1_idea(
+    after_sue_bud.set_l1_idea(
         ideaunit_shop(
             music_text,
             _begin=music_begin,
@@ -447,7 +447,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     before_music_weight = 55
     before_music_pledge = True
     music_road = before_sue_bud.make_l1_road(music_text)
-    before_sue_bud.add_l1_idea(
+    before_sue_bud.set_l1_idea(
         ideaunit_shop(
             music_text,
             _begin=before_music_begin,
@@ -520,8 +520,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     disc_text = "Ultimate Disc"
     disc_road = before_sue_au.make_road(sports_road, disc_text)
-    before_sue_au.add_idea(ideaunit_shop(ball_text), sports_road)
-    before_sue_au.add_idea(ideaunit_shop(disc_text), sports_road)
+    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_au.set_idea(ideaunit_shop(disc_text), sports_road)
     before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
     before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_text))
     before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(run_text))
@@ -571,8 +571,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     disc_text = "Ultimate Disc"
     disc_road = before_sue_au.make_road(sports_road, disc_text)
-    before_sue_au.add_idea(ideaunit_shop(ball_text), sports_road)
-    before_sue_au.add_idea(ideaunit_shop(disc_text), sports_road)
+    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_au.set_idea(ideaunit_shop(disc_text), sports_road)
     before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
     before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_text))
     after_sue_au = copy_deepcopy(before_sue_au)
@@ -616,7 +616,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_au.make_road(sports_road, ball_text)
-    before_sue_au.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
     run_awardlink = before_sue_au.get_idea_obj(ball_road)._awardlinks.get(run_text)
 
@@ -655,16 +655,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_u
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
     bend_text = "bendable"
     bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.add_idea(ideaunit_shop(bend_text), knee_road)
+    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
     broken_text = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.add_idea(ideaunit_shop(broken_text), knee_road)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
     before_broken_open = 11
     before_broken_nigh = 22
     before_sue_bud.edit_idea_attr(
@@ -709,13 +709,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_i
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
     broken_text = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.add_idea(ideaunit_shop(broken_text), knee_road)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_broken_open = 55
@@ -754,13 +754,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_d
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
     broken_text = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.add_idea(ideaunit_shop(broken_text), knee_road)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     before_broken_open = 55
@@ -798,16 +798,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
     broken_text = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.add_idea(ideaunit_shop(broken_text), knee_road)
+    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
     bend_text = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.add_idea(ideaunit_shop(bend_text), knee_road)
+    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
     before_sue_bud.edit_idea_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
@@ -856,16 +856,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
     broken_text = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.add_idea(ideaunit_shop(broken_text), knee_road)
+    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
     bend_text = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.add_idea(ideaunit_shop(bend_text), knee_road)
+    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
     before_sue_bud.edit_idea_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
@@ -915,16 +915,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
     broken_text = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.add_idea(ideaunit_shop(broken_text), knee_road)
+    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
     bend_text = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.add_idea(ideaunit_shop(bend_text), knee_road)
+    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
     before_sue_bud.edit_idea_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
@@ -984,13 +984,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
     medical_text = "get medical attention"
     medical_road = before_sue_bud.make_road(knee_road, medical_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.add_idea(ideaunit_shop(medical_text), knee_road)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_idea(ideaunit_shop(medical_text), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_medical_base_idea_active_requisite = False
@@ -1029,13 +1029,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
     medical_text = "get medical attention"
     medical_road = before_sue_bud.make_road(knee_road, medical_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.add_idea(ideaunit_shop(medical_text), knee_road)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_idea(ideaunit_shop(medical_text), knee_road)
     before_medical_base_idea_active_requisite = True
     before_sue_bud.edit_idea_attr(
         road=ball_road,
@@ -1081,13 +1081,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     knee_text = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_text)
     medical_text = "get medical attention"
     medical_road = before_sue_bud.make_road(knee_road, medical_text)
-    before_sue_bud.add_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.add_idea(ideaunit_shop(medical_text), knee_road)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
+    before_sue_bud.set_idea(ideaunit_shop(medical_text), knee_road)
     before_medical_base_idea_active_requisite = True
     before_sue_bud.edit_idea_attr(
         road=ball_road,
@@ -1127,7 +1127,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
@@ -1161,7 +1161,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
     sports_road = before_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
     before_ball_ideaunit._doerunit.set_lobbyhold(xio_text)
 
@@ -1199,7 +1199,7 @@ def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     sports_road = after_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = after_sue_bud.make_road(sports_road, ball_text)
-    after_sue_bud.add_idea(ideaunit_shop(ball_text), sports_road)
+    after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
     after_ball_ideaunit._doerunit.set_lobbyhold(xio_text)
 

@@ -109,9 +109,9 @@ def get_terminus_node(road: RoadUnit, delimiter: str = None) -> RoadNode:
 def get_parent_road(
     road: RoadUnit, delimiter: str = None
 ) -> RoadUnit:  # road without terminus node
-    return create_road_from_nodes(
-        get_all_road_nodes(road=road, delimiter=delimiter)[:-1]
-    )
+    parent_nodes = get_all_road_nodes(road=road, delimiter=delimiter)[:-1]
+    print(f"{delimiter=} {parent_nodes=}")
+    return create_road_from_nodes(parent_nodes, delimiter=delimiter)
 
 
 def create_road_without_root_node(

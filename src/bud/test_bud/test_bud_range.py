@@ -7,11 +7,11 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
     yao_bud = budunit_shop("Yao", _weight=10)
 
     l1 = "level1"
-    yao_bud.add_l1_idea(ideaunit_shop(l1, _weight=30))
+    yao_bud.set_l1_idea(ideaunit_shop(l1, _weight=30))
     l1_road = yao_bud.make_l1_road(l1)
 
     rx1 = "range_root_example"
-    yao_bud.add_idea(ideaunit_shop(rx1, _weight=30), parent_road=l1_road)
+    yao_bud.set_idea(ideaunit_shop(rx1, _weight=30), parent_road=l1_road)
     rx1_road = yao_bud.make_road(l1_road, rx1)
     yao_bud.edit_idea_attr(road=rx1_road, begin=10, close=25)
 
@@ -19,7 +19,7 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
     print(f"Add example child idea to road='{rx1_road}'")
 
     rcA = "range_child_example"
-    yao_bud.add_idea(ideaunit_shop(rcA, _weight=30, _begin=10, _close=25), rx1_road)
+    yao_bud.set_idea(ideaunit_shop(rcA, _weight=30, _begin=10, _close=25), rx1_road)
 
     rcA_road = yao_bud.make_road(rx1_road, rcA)
     x_idea = yao_bud.get_idea_obj(rcA_road)
@@ -40,11 +40,11 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario2():
     yao_budunit = budunit_shop(_owner_id="Yao", _weight=10)
 
     l1 = "level1"
-    yao_budunit.add_l1_idea(ideaunit_shop(l1, _weight=30))
+    yao_budunit.set_l1_idea(ideaunit_shop(l1, _weight=30))
     l1_road = yao_budunit.make_l1_road(l1)
 
     rx1 = "range_root_example"
-    yao_budunit.add_idea(ideaunit_shop(rx1, _weight=30), parent_road=l1_road)
+    yao_budunit.set_idea(ideaunit_shop(rx1, _weight=30), parent_road=l1_road)
     rx1_road = yao_budunit.make_road(l1_road, rx1)
     yao_budunit.edit_idea_attr(road=rx1_road, begin=10, close=25)
 
@@ -52,7 +52,7 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario2():
     print(f"Add example child idea to road='{rx1_road}'")
 
     rcA = "range_child_example"
-    yao_budunit.add_idea(ideaunit_shop(rcA, _weight=30, _begin=10, _close=25), rx1_road)
+    yao_budunit.set_idea(ideaunit_shop(rcA, _weight=30, _begin=10, _close=25), rx1_road)
 
     rcA_road = yao_budunit.make_road(rx1_road, rcA)
     x_idea = yao_budunit.get_idea_obj(rcA_road)
@@ -79,7 +79,7 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsAllChildren():
     week_text = "week"
     week_road = yao_budunit.make_road(tech_road, week_text)
     week_idea = ideaunit_shop(week_text, _begin=0, _close=10800)
-    yao_budunit.add_idea(week_idea, tech_road)
+    yao_budunit.set_idea(week_idea, tech_road)
     mon_text = "Monday"
     tue_text = "Tuesday"
     wed_text = "Wednesday"
@@ -94,13 +94,13 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsAllChildren():
     fri_idea = ideaunit_shop(fri_text, _begin=1440 * 4, _close=1440 * 5)
     sat_idea = ideaunit_shop(sat_text, _begin=1440 * 5, _close=1440 * 6)
     sun_idea = ideaunit_shop(sun_text, _begin=1440 * 6, _close=1440 * 7)
-    yao_budunit.add_idea(mon_idea, week_road)
-    yao_budunit.add_idea(tue_idea, week_road)
-    yao_budunit.add_idea(wed_idea, week_road)
-    yao_budunit.add_idea(thu_idea, week_road)
-    yao_budunit.add_idea(fri_idea, week_road)
-    yao_budunit.add_idea(sat_idea, week_road)
-    yao_budunit.add_idea(sun_idea, week_road)
+    yao_budunit.set_idea(mon_idea, week_road)
+    yao_budunit.set_idea(tue_idea, week_road)
+    yao_budunit.set_idea(wed_idea, week_road)
+    yao_budunit.set_idea(thu_idea, week_road)
+    yao_budunit.set_idea(fri_idea, week_road)
+    yao_budunit.set_idea(sat_idea, week_road)
+    yao_budunit.set_idea(sun_idea, week_road)
 
     # WHEN
     ranged_ideas = yao_budunit.get_idea_ranged_kids(idea_road=week_road)
@@ -117,7 +117,7 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario1():
     week_text = "week"
     week_road = yao_budunit.make_road(tech_road, week_text)
     week_idea = ideaunit_shop(week_text, _begin=0, _close=10800)
-    yao_budunit.add_idea(week_idea, tech_road)
+    yao_budunit.set_idea(week_idea, tech_road)
     mon_text = "Monday"
     tue_text = "Tuesday"
     wed_text = "Wednesday"
@@ -132,13 +132,13 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario1():
     fri_idea = ideaunit_shop(fri_text, _begin=1440 * 4, _close=1440 * 5)
     sat_idea = ideaunit_shop(sat_text, _begin=1440 * 5, _close=1440 * 6)
     sun_idea = ideaunit_shop(sun_text, _begin=1440 * 6, _close=1440 * 7)
-    yao_budunit.add_idea(mon_idea, week_road)
-    yao_budunit.add_idea(tue_idea, week_road)
-    yao_budunit.add_idea(wed_idea, week_road)
-    yao_budunit.add_idea(thu_idea, week_road)
-    yao_budunit.add_idea(fri_idea, week_road)
-    yao_budunit.add_idea(sat_idea, week_road)
-    yao_budunit.add_idea(sun_idea, week_road)
+    yao_budunit.set_idea(mon_idea, week_road)
+    yao_budunit.set_idea(tue_idea, week_road)
+    yao_budunit.set_idea(wed_idea, week_road)
+    yao_budunit.set_idea(thu_idea, week_road)
+    yao_budunit.set_idea(fri_idea, week_road)
+    yao_budunit.set_idea(sat_idea, week_road)
+    yao_budunit.set_idea(sun_idea, week_road)
 
     # WHEN
     begin_x = 1440
@@ -161,7 +161,7 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
     week_text = "week"
     week_road = yao_budunit.make_road(tech_road, week_text)
     week_idea = ideaunit_shop(week_text, _begin=0, _close=10800)
-    yao_budunit.add_idea(week_idea, tech_road)
+    yao_budunit.set_idea(week_idea, tech_road)
     mon_text = "Monday"
     tue_text = "Tuesday"
     wed_text = "Wednesday"
@@ -176,13 +176,13 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
     fri_idea = ideaunit_shop(fri_text, _begin=1440 * 4, _close=1440 * 5)
     sat_idea = ideaunit_shop(sat_text, _begin=1440 * 5, _close=1440 * 6)
     sun_idea = ideaunit_shop(sun_text, _begin=1440 * 6, _close=1440 * 7)
-    yao_budunit.add_idea(mon_idea, week_road)
-    yao_budunit.add_idea(tue_idea, week_road)
-    yao_budunit.add_idea(wed_idea, week_road)
-    yao_budunit.add_idea(thu_idea, week_road)
-    yao_budunit.add_idea(fri_idea, week_road)
-    yao_budunit.add_idea(sat_idea, week_road)
-    yao_budunit.add_idea(sun_idea, week_road)
+    yao_budunit.set_idea(mon_idea, week_road)
+    yao_budunit.set_idea(tue_idea, week_road)
+    yao_budunit.set_idea(wed_idea, week_road)
+    yao_budunit.set_idea(thu_idea, week_road)
+    yao_budunit.set_idea(fri_idea, week_road)
+    yao_budunit.set_idea(sat_idea, week_road)
+    yao_budunit.set_idea(sun_idea, week_road)
 
     # WHEN / THEN
     assert len(yao_budunit.get_idea_ranged_kids(week_road, begin=0, close=1440)) == 1
@@ -198,7 +198,7 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario3():
     week_text = "week"
     week_road = yao_budunit.make_road(tech_road, week_text)
     week_idea = ideaunit_shop(week_text, _begin=0, _close=10800)
-    yao_budunit.add_idea(week_idea, tech_road)
+    yao_budunit.set_idea(week_idea, tech_road)
     mon_text = "Monday"
     tue_text = "Tuesday"
     wed_text = "Wednesday"
@@ -213,13 +213,13 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario3():
     fri_idea = ideaunit_shop(fri_text, _begin=1440 * 4, _close=1440 * 5)
     sat_idea = ideaunit_shop(sat_text, _begin=1440 * 5, _close=1440 * 6)
     sun_idea = ideaunit_shop(sun_text, _begin=1440 * 6, _close=1440 * 7)
-    yao_budunit.add_idea(mon_idea, week_road)
-    yao_budunit.add_idea(tue_idea, week_road)
-    yao_budunit.add_idea(wed_idea, week_road)
-    yao_budunit.add_idea(thu_idea, week_road)
-    yao_budunit.add_idea(fri_idea, week_road)
-    yao_budunit.add_idea(sat_idea, week_road)
-    yao_budunit.add_idea(sun_idea, week_road)
+    yao_budunit.set_idea(mon_idea, week_road)
+    yao_budunit.set_idea(tue_idea, week_road)
+    yao_budunit.set_idea(wed_idea, week_road)
+    yao_budunit.set_idea(thu_idea, week_road)
+    yao_budunit.set_idea(fri_idea, week_road)
+    yao_budunit.set_idea(sat_idea, week_road)
+    yao_budunit.set_idea(sun_idea, week_road)
 
     # WHEN / THEN
     assert len(yao_budunit.get_idea_ranged_kids(idea_road=week_road, begin=0)) == 1

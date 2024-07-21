@@ -134,9 +134,9 @@ def test_set_listen_to_speaker_fact_SetsFact():
 
     yao_listener.add_acctunit(yao_text)
     yao_listener.set_acct_respect(20)
-    yao_listener.add_idea(ideaunit_shop(clean_text), status_road)
-    yao_listener.add_idea(ideaunit_shop(dirty_text), status_road)
-    yao_listener.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
+    yao_listener.set_idea(ideaunit_shop(clean_text), status_road)
+    yao_listener.set_idea(ideaunit_shop(dirty_text), status_road)
+    yao_listener.set_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
     yao_listener.edit_idea_attr(
         sweep_road, reason_base=status_road, reason_premise=dirty_road
     )
@@ -174,10 +174,10 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     running_text = "running"
     running_road = yao_listener.make_road(fridge_road, running_text)
 
-    yao_listener.add_idea(ideaunit_shop(running_text), fridge_road)
-    yao_listener.add_idea(ideaunit_shop(clean_text), status_road)
-    yao_listener.add_idea(ideaunit_shop(dirty_text), status_road)
-    yao_listener.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
+    yao_listener.set_idea(ideaunit_shop(running_text), fridge_road)
+    yao_listener.set_idea(ideaunit_shop(clean_text), status_road)
+    yao_listener.set_idea(ideaunit_shop(dirty_text), status_road)
+    yao_listener.set_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
     yao_listener.edit_idea_attr(
         sweep_road, reason_base=status_road, reason_premise=dirty_road
     )
@@ -227,13 +227,13 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
 
     yao_src.add_acctunit(yao_text)
     yao_src.set_acct_respect(20)
-    yao_src.add_idea(ideaunit_shop(clean_text), status_road)
-    yao_src.add_idea(ideaunit_shop(dirty_text), status_road)
-    yao_src.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
+    yao_src.set_idea(ideaunit_shop(clean_text), status_road)
+    yao_src.set_idea(ideaunit_shop(dirty_text), status_road)
+    yao_src.set_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
     yao_src.edit_reason(sweep_road, status_road, dirty_road)
     # missing_fact_bases = list(yao_src.get_missing_fact_bases().keys())
-    yao_src.add_idea(ideaunit_shop(rain_text), weather_road)
-    yao_src.add_idea(ideaunit_shop(snow_text), weather_road)
+    yao_src.set_idea(ideaunit_shop(rain_text), weather_road)
+    yao_src.set_idea(ideaunit_shop(snow_text), weather_road)
     yao_src.set_fact(weather_road, rain_road)
     yao_src.set_fact(status_road, clean_road)
 

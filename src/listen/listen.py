@@ -96,7 +96,7 @@ def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):
 
     if listener.idea_exists(ingest_ideaunit.get_road()) is False:
         x_parent_road = ingest_ideaunit._parent_road
-        listener.add_idea(ingest_ideaunit, x_parent_road, create_missing_ideas=True)
+        listener.set_idea(ingest_ideaunit, x_parent_road, create_missing_ideas=True)
 
     _add_and_replace_ideaunit_weights(
         listener=listener,
@@ -160,10 +160,10 @@ def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
         pick_road = x_factunit.pick
         if dst_listener.idea_exists(base_road) is False:
             base_idea = src_listener.get_idea_obj(base_road)
-            dst_listener.add_idea(base_idea, base_idea._parent_road)
+            dst_listener.set_idea(base_idea, base_idea._parent_road)
         if dst_listener.idea_exists(pick_road) is False:
             pick_idea = src_listener.get_idea_obj(pick_road)
-            dst_listener.add_idea(pick_idea, pick_idea._parent_road)
+            dst_listener.set_idea(pick_idea, pick_idea._parent_road)
         dst_listener.set_fact(base_road, pick_road)
 
 
@@ -320,9 +320,9 @@ def pick_econ_job_and_listen(
 def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
     for x_idea in job._idea_dict.values():
         if listener.idea_exists(x_idea.get_road()) is False:
-            listener.add_idea(x_idea, x_idea._parent_road)
+            listener.set_idea(x_idea, x_idea._parent_road)
         if listener.get_fact(x_idea.get_road()) is False:
-            listener.add_idea(x_idea, x_idea._parent_road)
+            listener.set_idea(x_idea, x_idea._parent_road)
     for x_fact_road, x_fact_unit in job._idearoot._factunits.items():
         listener._idearoot.set_factunit(x_fact_unit)
     listener.settle_bud()

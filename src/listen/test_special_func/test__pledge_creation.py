@@ -54,8 +54,8 @@ def test_create_pledge_CorrectlyModifiesBudNonpledgeIdeaTopledgeIdea():
     floor_road = sue_bud.make_road(clean_road, floor_text)
     floor_idea = ideaunit_shop(floor_text, pledge=True)
 
-    sue_bud.add_l1_idea(clean_idea)
-    sue_bud.add_idea(floor_idea, clean_road)
+    sue_bud.set_l1_idea(clean_idea)
+    sue_bud.set_idea(floor_idea, clean_road)
     old_clean_idea = sue_bud.get_idea_obj(clean_road)
     old_floor_idea = sue_bud.get_idea_obj(floor_road)
     assert old_clean_idea.pledge is False
@@ -84,7 +84,7 @@ def test_create_pledge_CorrectlySets_lobbyhold():
     bob_text = "Bob"
     floor_idea = ideaunit_shop(floor_text, pledge=True)
     floor_idea._doerunit.set_lobbyhold(bob_text)
-    sue_bud.add_idea(floor_idea, clean_road)
+    sue_bud.set_idea(floor_idea, clean_road)
     floor_idea = sue_bud.get_idea_obj(floor_road)
     assert floor_idea._doerunit.lobbyhold_exists(bob_text) is False
 

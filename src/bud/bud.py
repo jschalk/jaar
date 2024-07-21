@@ -497,8 +497,8 @@ class BudUnit:
     ):
         pick = base if pick is None else pick
         if create_missing_ideas:
-            self._set_ideakid_if_empty(road=base)
-            self._set_ideakid_if_empty(road=pick)
+            self._create_ideakid_if_empty(road=base)
+            self._create_ideakid_if_empty(road=pick)
 
         self._execute_tree_traverse()
         fact_base_idea = self.get_idea_obj(base)
@@ -643,7 +643,18 @@ class BudUnit:
 
         return missing_bases
 
-    def add_l1_idea(
+    def add_idea(
+        self, idea_road: RoadUnit, weight: float = None, pledge: bool = None
+    ) -> IdeaUnit:
+        x_label = get_terminus_node(idea_road, self._road_delimiter)
+        x_parent_road = get_parent_road(idea_road, self._road_delimiter)
+        x_ideaunit = ideaunit_shop(x_label, _weight=weight)
+        if pledge:
+            x_ideaunit.pledge = True
+        self.set_idea(x_ideaunit, x_parent_road)
+        return x_ideaunit
+
+    def set_l1_idea(
         self,
         idea_kid: IdeaUnit,
         create_missing_ideas: bool = None,
@@ -652,7 +663,7 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        self.add_idea(
+        self.set_idea(
             idea_kid=idea_kid,
             parent_road=self._real_id,
             create_missing_ideas=create_missing_ideas,
@@ -662,7 +673,7 @@ class BudUnit:
             create_missing_ancestors=create_missing_ancestors,
         )
 
-    def add_idea(
+    def set_idea(
         self,
         idea_kid: IdeaUnit,
         parent_road: RoadUnit,
@@ -674,14 +685,14 @@ class BudUnit:
     ):
         if RoadNode(idea_kid._label).is_node(self._road_delimiter) is False:
             raise InvalidBudException(
-                f"add_idea failed because '{idea_kid._label}' is not a RoadNode."
+                f"set_idea failed because '{idea_kid._label}' is not a RoadNode."
             )
 
         if self._idearoot._label != get_root_node_from_road(
             parent_road, self._road_delimiter
         ):
             raise InvalidBudException(
-                f"add_idea failed because parent_road '{parent_road}' has an invalid root node"
+                f"set_idea failed because parent_road '{parent_road}' has an invalid root node"
             )
 
         idea_kid._road_delimiter = self._road_delimiter
@@ -696,7 +707,7 @@ class BudUnit:
         # create any missing ideas
         if not create_missing_ancestors and self.idea_exists(parent_road) is False:
             raise InvalidBudException(
-                f"add_idea failed because '{parent_road}' idea does not exist."
+                f"set_idea failed because '{parent_road}' idea does not exist."
             )
         parent_road_idea = self.get_idea_obj(parent_road, create_missing_ancestors)
         if parent_road_idea._root is False:
@@ -711,7 +722,7 @@ class BudUnit:
                 adoptee_idea = self.get_idea_obj(adoptee_road)
                 weight_sum += adoptee_idea._weight
                 new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
-                self.add_idea(adoptee_idea, new_adoptee_parent_road)
+                self.set_idea(adoptee_idea, new_adoptee_parent_road)
                 self.edit_idea_attr(
                     new_adoptee_parent_road, weight=adoptee_idea._weight
                 )
@@ -747,20 +758,17 @@ class BudUnit:
         posted_idea = self.get_idea_obj(road)
 
         for reason_x in posted_idea._reasonunits.values():
-            self._set_ideakid_if_empty(road=reason_x.base)
+            self._create_ideakid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
-                self._set_ideakid_if_empty(road=premise_x.need)
+                self._create_ideakid_if_empty(road=premise_x.need)
         if posted_idea._range_source_road is not None:
-            self._set_ideakid_if_empty(road=posted_idea._range_source_road)
+            self._create_ideakid_if_empty(road=posted_idea._range_source_road)
         if posted_idea._numeric_road is not None:
-            self._set_ideakid_if_empty(road=posted_idea._numeric_road)
+            self._create_ideakid_if_empty(road=posted_idea._numeric_road)
 
-    def _set_ideakid_if_empty(self, road: RoadUnit):
+    def _create_ideakid_if_empty(self, road: RoadUnit):
         if self.idea_exists(road) is False:
-            self.add_idea(
-                ideaunit_shop(get_terminus_node(road, self._road_delimiter)),
-                parent_road=get_parent_road(road),
-            )
+            self.add_idea(road)
 
     def del_idea_obj(self, road: RoadUnit, del_children: bool = True):
         if road == self._idearoot.get_road():
@@ -777,7 +785,7 @@ class BudUnit:
         parent_road = get_parent_road(x_road)
         d_temp_idea = self.get_idea_obj(x_road)
         for kid in d_temp_idea._kids.values():
-            self.add_idea(kid, parent_road=parent_road)
+            self.set_idea(kid, parent_road=parent_road)
 
     def set_owner_id(self, new_owner_id):
         self._owner_id = new_owner_id
@@ -802,7 +810,7 @@ class BudUnit:
         )
         if old_road != new_road:
             if parent_road == "":
-                self._idearoot.set_idea_label(new_label)
+                self._idearoot.set_label(new_label)
             else:
                 self._non_root_idea_label_edit(old_road, new_label, parent_road)
             self._idearoot_find_replace_road(old_road=old_road, new_road=new_road)
@@ -816,7 +824,7 @@ class BudUnit:
         self, old_road: RoadUnit, new_label: RoadNode, parent_road: RoadUnit
     ):
         x_idea = self.get_idea_obj(old_road)
-        x_idea.set_idea_label(new_label)
+        x_idea.set_label(new_label)
         x_idea._parent_road = parent_road
         idea_parent = self.get_idea_obj(get_parent_road(old_road))
         idea_parent._kids.pop(get_terminus_node(old_road, self._road_delimiter))
@@ -1051,7 +1059,7 @@ class BudUnit:
         if x_ideaattrfilter.has_reason_premise():
             self._set_ideaattrfilter_premise_ranges(x_ideaattrfilter)
         x_idea = self.get_idea_obj(road)
-        x_idea._set_idea_attr(idea_attr=x_ideaattrfilter)
+        x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrfilter)
 
         # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
         # if awardlink_del is not None or awardlink is not None:
@@ -1644,7 +1652,7 @@ class BudUnit:
 
     def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
         idea_kid.pledge = True
-        self.add_idea(
+        self.set_idea(
             idea_kid=idea_kid,
             parent_road=self.make_road(idea_kid._parent_road),
             filter_out_missing_awardlinks_lobby_ids=True,
@@ -1737,11 +1745,11 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)
     x_bud._originunit = obj_from_bud_dict(bud_dict, "_originunit")
-    set_idearoot_from_bud_dict(x_bud, bud_dict)
+    create_idearoot_from_bud_dict(x_bud, bud_dict)
     return x_bud
 
 
-def set_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
+def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     idearoot_dict = bud_dict.get("_idearoot")
     x_bud._idearoot = ideaunit_shop(
         _root=True,
@@ -1767,10 +1775,10 @@ def set_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _bud_real_id=x_bud._real_id,
         _fund_coin=default_fund_coin_if_none(x_bud._fund_coin),
     )
-    set_idearoot_kids_from_dict(x_bud, idearoot_dict)
+    create_idearoot_kids_from_dict(x_bud, idearoot_dict)
 
 
-def set_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
+def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
     to_evaluate_idea_dicts = []
     parent_road_text = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
@@ -1808,7 +1816,7 @@ def set_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
             # _bud_real_id=x_bud._real_id,
         )
-        x_bud.add_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
+        x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 
 
 def obj_from_bud_dict(

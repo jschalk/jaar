@@ -63,17 +63,17 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     floor_text = "mop floor"
     floor_road = sue_bud.make_road(casa_road, floor_text)
     floor_idea = ideaunit_shop(floor_text)
-    sue_bud.add_idea(floor_idea, parent_road=casa_road)
+    sue_bud.set_idea(floor_idea, parent_road=casa_road)
 
     unim_text = "unimportant"
     unim_road = sue_bud.make_l1_road(unim_text)
     unim_idea = ideaunit_shop(unim_text)
-    sue_bud.add_idea(unim_idea, parent_road=sue_bud._real_id)
+    sue_bud.set_idea(unim_idea, parent_road=sue_bud._real_id)
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
     status_idea = ideaunit_shop(status_text)
-    sue_bud.add_idea(status_idea, parent_road=casa_road)
+    sue_bud.set_idea(status_idea, parent_road=casa_road)
     floor_reason = reasonunit_shop(base=status_road)
     floor_reason.set_premise(premise=status_road)
     sue_bud.edit_idea_attr(road=floor_road, reason=floor_reason)
@@ -152,12 +152,12 @@ def test_BudUnit_get_relevant_roads_numeric_road_ReturnSimple():
     yao_bud = budunit_shop(_owner_id=yao_text)
     casa_text = "casa"
     casa_road = yao_bud.make_l1_road(casa_text)
-    yao_bud.add_l1_idea(ideaunit_shop(casa_text))
+    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
     casa_idea = yao_bud.get_idea_obj(casa_road)
     day_text = "day_range"
     day_road = yao_bud.make_l1_road(day_text)
     day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
-    yao_bud.add_l1_idea(day_idea)
+    yao_bud.set_l1_idea(day_idea)
     yao_bud.edit_idea_attr(road=casa_road, denom=11, numeric_road=day_road)
     assert casa_idea._begin == 4
     print(f"{casa_idea._label=} {casa_idea._begin=} {casa_idea._close=}")
@@ -186,17 +186,17 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     min_range_x_text = "a_minute_range"
     min_range_x_road = yao_bud.make_l1_road(min_range_x_text)
     min_range_idea = ideaunit_shop(min_range_x_text, _begin=0, _close=2880)
-    yao_bud.add_l1_idea(min_range_idea)
+    yao_bud.set_l1_idea(min_range_idea)
 
     day_len_text = "day_length"
     day_len_road = yao_bud.make_l1_road(day_len_text)
     day_len_idea = ideaunit_shop(day_len_text, _begin=0, _close=1440)
-    yao_bud.add_l1_idea(day_len_idea)
+    yao_bud.set_l1_idea(day_len_idea)
 
     min_days_text = "days in minute_range"
     min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
     min_days_idea = ideaunit_shop(min_days_text, _range_source_road=day_len_road)
-    yao_bud.add_idea(min_days_idea, parent_road=min_range_x_road)
+    yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
     yao_bud.settle_bud()
