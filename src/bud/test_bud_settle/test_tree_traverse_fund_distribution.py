@@ -68,11 +68,11 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     lamb_text = "lambs"
     lamb_road = yao_budunit.make_road(barn_road, lamb_text)
     lamb_idea = ideaunit_shop(lamb_text, _weight=1)
-    yao_budunit.add_idea(lamb_idea, parent_road=barn_road)
+    yao_budunit.set_idea(lamb_idea, parent_road=barn_road)
     duck_text = "ducks"
     duck_road = yao_budunit.make_road(barn_road, duck_text)
     duck_idea = ideaunit_shop(duck_text, _weight=2)
-    yao_budunit.add_idea(duck_idea, parent_road=barn_road)
+    yao_budunit.set_idea(duck_idea, parent_road=barn_road)
 
     coal_text = "coal"
     coal_road = yao_budunit.make_l1_road(coal_text)
@@ -123,19 +123,19 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0(
     floor_text = "mop floor"
     floor_road = sue_bud.make_road(casa_road, floor_text)
     floor_idea = ideaunit_shop(floor_text, pledge=True)
-    sue_bud.add_idea(floor_idea, casa_road)
+    sue_bud.set_idea(floor_idea, casa_road)
     sue_bud.add_l1_idea(ideaunit_shop("unimportant"))
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
-    sue_bud.add_idea(ideaunit_shop(status_text, _weight=0), casa_road)
+    sue_bud.set_idea(ideaunit_shop(status_text, _weight=0), casa_road)
 
     non_text = "not clean"
     yes_text = "yes clean"
     non_road = sue_bud.make_road(status_road, non_text)
     yes_road = sue_bud.make_road(status_road, yes_text)
-    sue_bud.add_idea(ideaunit_shop(non_text), status_road)
-    sue_bud.add_idea(ideaunit_shop(yes_text, _weight=2), status_road)
+    sue_bud.set_idea(ideaunit_shop(non_text), status_road)
+    sue_bud.set_idea(ideaunit_shop(yes_text, _weight=2), status_road)
 
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio is None
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio is None
@@ -162,12 +162,12 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     floor_text = "mop floor"
     floor_road = sue_bud.make_road(casa_road, floor_text)
     floor_idea = ideaunit_shop(floor_text, pledge=True)
-    sue_bud.add_idea(floor_idea, casa_road)
+    sue_bud.set_idea(floor_idea, casa_road)
     sue_bud.add_l1_idea(ideaunit_shop("unimportant"))
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
-    sue_bud.add_idea(ideaunit_shop(status_text), casa_road)
+    sue_bud.set_idea(ideaunit_shop(status_text), casa_road)
 
     status_idea = sue_bud.get_idea_obj(status_road)
     print(f"{status_idea._weight=}")
@@ -179,10 +179,10 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     mod_text = "moderately"
     dirty_text = "dirty"
 
-    sue_bud.add_idea(ideaunit_shop(clean_text, _weight=0), status_road)
-    sue_bud.add_idea(ideaunit_shop(very_text), clean_road)
-    sue_bud.add_idea(ideaunit_shop(mod_text, _weight=2), clean_road)
-    sue_bud.add_idea(ideaunit_shop(dirty_text), clean_road)
+    sue_bud.set_idea(ideaunit_shop(clean_text, _weight=0), status_road)
+    sue_bud.set_idea(ideaunit_shop(very_text), clean_road)
+    sue_bud.set_idea(ideaunit_shop(mod_text, _weight=2), clean_road)
+    sue_bud.set_idea(ideaunit_shop(dirty_text), clean_road)
 
     very_road = sue_bud.make_road(clean_road, very_text)
     mod_road = sue_bud.make_road(clean_road, mod_text)
@@ -224,7 +224,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoWeightDistributeFu
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     clean_idea = ideaunit_shop(clean_text, _weight=2)
-    sue_budunit.add_idea(ideaunit_shop(clean_text), casa_road)
+    sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
@@ -234,10 +234,10 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoWeightDistributeFu
     vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
 
     sue_budunit.add_l1_idea(casa_idea)
-    sue_budunit.add_idea(swim_idea, casa_road)
-    sue_budunit.add_idea(clean_idea, casa_road)
-    sue_budunit.add_idea(sweep_idea, clean_road)  # _weight=0
-    sue_budunit.add_idea(vaccum_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(swim_idea, casa_road)
+    sue_budunit.set_idea(clean_idea, casa_road)
+    sue_budunit.set_idea(sweep_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(vaccum_idea, clean_road)  # _weight=0
 
     assert sue_budunit.get_idea_obj(casa_road)._fund_ratio is None
     assert sue_budunit.get_idea_obj(swim_road)._fund_ratio is None

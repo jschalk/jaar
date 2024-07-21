@@ -84,7 +84,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     zia_clean_ideaunit = ideaunit_shop(clean_text, pledge=True)
     zia_clean_ideaunit._doerunit.set_lobbyhold(yao_text)
     casa_road = zia_budunit.make_l1_road("casa")
-    zia_budunit.add_idea(zia_clean_ideaunit, casa_road)
+    zia_budunit.set_idea(zia_clean_ideaunit, casa_road)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
     zia_yao_budunit.set_owner_id(yao_text)
@@ -130,8 +130,8 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBud():
     yao_fly_ideaunit._doerunit.set_lobbyhold(yao_text)
     casa_road = zia_budunit.make_l1_road("casa")
     fly_road = zia_budunit.make_l1_road(fly_text)
-    zia_budunit.add_idea(yao_clean_ideaunit, casa_road)
-    zia_budunit.add_idea(yao_cook_ideaunit, casa_road)
+    zia_budunit.set_idea(yao_clean_ideaunit, casa_road)
+    zia_budunit.set_idea(yao_cook_ideaunit, casa_road)
     zia_budunit.add_l1_idea(yao_fly_ideaunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
@@ -188,10 +188,10 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUni
     fly_road = zia_budunit.make_l1_road(fly_text)
     before_yao_dish_ideaunit = ideaunit_shop(dish_text, pledge=True)
     before_yao_dish_ideaunit._doerunit.set_lobbyhold(yao_text)
-    before_yao_budunit.add_idea(before_yao_dish_ideaunit, casa_road)
+    before_yao_budunit.set_idea(before_yao_dish_ideaunit, casa_road)
     before_yao_budunit.edit_idea_attr(dish_road, weight=1000)
-    zia_budunit.add_idea(yao_dish_ideaunit, casa_road)
-    zia_budunit.add_idea(yao_cook_ideaunit, casa_road)
+    zia_budunit.set_idea(yao_dish_ideaunit, casa_road)
+    zia_budunit.set_idea(yao_cook_ideaunit, casa_road)
     zia_budunit.add_l1_idea(yao_fly_ideaunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)

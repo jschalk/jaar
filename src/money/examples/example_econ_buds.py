@@ -25,7 +25,7 @@ def get_2node_bud(real_id: RealID = None) -> BudUnit:
     x_bud = budunit_shop(_owner_id=a_text)
     x_bud.set_real_id(real_id)
     idea_b = ideaunit_shop(b_text)
-    x_bud.add_idea(idea_b, parent_road=temp_real_id())
+    x_bud.set_idea(idea_b, parent_road=temp_real_id())
     x_bud.settle_bud()
     return x_bud
 
@@ -56,9 +56,9 @@ def get_6node_bud() -> BudUnit:
     x_bud.add_l1_idea(ideaunit_shop("B"))
     x_bud.add_l1_idea(ideaunit_shop("C"))
     c_road = x_bud.make_l1_road("C")
-    x_bud.add_idea(ideaunit_shop("D"), c_road)
-    x_bud.add_idea(ideaunit_shop("E"), c_road)
-    x_bud.add_idea(ideaunit_shop("F"), c_road)
+    x_bud.set_idea(ideaunit_shop("D"), c_road)
+    x_bud.set_idea(ideaunit_shop("E"), c_road)
+    x_bud.set_idea(ideaunit_shop("F"), c_road)
     x_bud.settle_bud()
     return x_bud
 
@@ -69,10 +69,10 @@ def get_7nodeInsertH_bud() -> BudUnit:
     x_bud.add_l1_idea(ideaunit_shop("B"))
     x_bud.add_l1_idea(ideaunit_shop("C"))
     c_road = x_bud.make_l1_road("C")
-    x_bud.add_idea(ideaunit_shop("H"), c_road)
-    x_bud.add_idea(ideaunit_shop("D"), c_road)
-    x_bud.add_idea(ideaunit_shop("E"), c_road)
-    x_bud.add_idea(ideaunit_shop("F"), x_bud.make_road(c_road, "H"))
+    x_bud.set_idea(ideaunit_shop("H"), c_road)
+    x_bud.set_idea(ideaunit_shop("D"), c_road)
+    x_bud.set_idea(ideaunit_shop("E"), c_road)
+    x_bud.set_idea(ideaunit_shop("F"), x_bud.make_road(c_road, "H"))
     x_bud.settle_bud()
     return x_bud
 
@@ -83,8 +83,8 @@ def get_5nodeHG_bud() -> BudUnit:
     x_bud.add_l1_idea(ideaunit_shop("B"))
     x_bud.add_l1_idea(ideaunit_shop("C"))
     c_road = x_bud.make_l1_road("C")
-    x_bud.add_idea(ideaunit_shop("H"), c_road)
-    x_bud.add_idea(ideaunit_shop("G"), c_road)
+    x_bud.set_idea(ideaunit_shop("H"), c_road)
+    x_bud.set_idea(ideaunit_shop("G"), c_road)
     x_bud.settle_bud()
     return x_bud
 
@@ -95,11 +95,11 @@ def get_7nodeJRoot_bud() -> BudUnit:
     x_bud.add_l1_idea(ideaunit_shop("A"))
 
     a_road = x_bud.make_l1_road("A")
-    x_bud.add_idea(ideaunit_shop("B"), a_road)
-    x_bud.add_idea(ideaunit_shop("C"), a_road)
+    x_bud.set_idea(ideaunit_shop("B"), a_road)
+    x_bud.set_idea(ideaunit_shop("C"), a_road)
     c_road = x_bud.make_l1_road("C")
-    x_bud.add_idea(ideaunit_shop("D"), c_road)
-    x_bud.add_idea(ideaunit_shop("E"), c_road)
-    x_bud.add_idea(ideaunit_shop("F"), c_road)
+    x_bud.set_idea(ideaunit_shop("D"), c_road)
+    x_bud.set_idea(ideaunit_shop("E"), c_road)
+    x_bud.set_idea(ideaunit_shop("F"), c_road)
     x_bud.settle_bud()
     return x_bud

@@ -33,8 +33,8 @@ def create_example_real1() -> RealUnit:
     elpaso_healerhold = healerhold_shop({yao_text})
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
 
-    yao_voice_bud.add_idea(dallas_idea, texas_road)
-    yao_voice_bud.add_idea(elpaso_idea, texas_road)
+    yao_voice_bud.set_idea(dallas_idea, texas_road)
+    yao_voice_bud.set_idea(elpaso_idea, texas_road)
     # display_bud(yao_voice_bud.settle_bud(), mode="Econ").show()
     x_hubunit = hubunit_shop(
         reals_dir=yao_hubunit.reals_dir,
@@ -99,12 +99,12 @@ def create_example_real2() -> RealUnit:
     elpaso_healerhold = healerhold_shop({yao_text})
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
 
-    yao_voice_bud.add_idea(dallas_idea, texas_road)
-    yao_voice_bud.add_idea(elpaso_idea, texas_road)
-    wei_voice_bud.add_idea(dallas_idea, texas_road)
-    wei_voice_bud.add_idea(elpaso_idea, texas_road)
-    zia_voice_bud.add_idea(dallas_idea, texas_road)
-    zia_voice_bud.add_idea(elpaso_idea, texas_road)
+    yao_voice_bud.set_idea(dallas_idea, texas_road)
+    yao_voice_bud.set_idea(elpaso_idea, texas_road)
+    wei_voice_bud.set_idea(dallas_idea, texas_road)
+    wei_voice_bud.set_idea(elpaso_idea, texas_road)
+    zia_voice_bud.set_idea(dallas_idea, texas_road)
+    zia_voice_bud.set_idea(elpaso_idea, texas_road)
     # display_bud(yao_voice_bud.settle_bud(), mode="Econ").show()
     yao_hubunit.save_voice_bud(yao_voice_bud)
     wei_hubunit.save_voice_bud(wei_voice_bud)
@@ -146,18 +146,18 @@ def create_example_real3() -> RealUnit:
     bath_text = "clean bathroom"
     hall_text = "clean hall"
 
-    yao_voice_bud.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    yao_voice_bud.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
-    yao_voice_bud.add_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
+    yao_voice_bud.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    yao_voice_bud.set_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
+    yao_voice_bud.set_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
     # yao_voice_bud.settle_bud()
     # display_ideatree(yao_voice_bud, mode="Econ").show()
 
-    wei_voice_bud.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    wei_voice_bud.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
+    wei_voice_bud.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    wei_voice_bud.set_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
 
-    zia_voice_bud.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    zia_voice_bud.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
-    zia_voice_bud.add_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
+    zia_voice_bud.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    zia_voice_bud.set_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
+    zia_voice_bud.set_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
 
     # display_ideatree(yao_voice_bud, mode="Econ").show()
     yao_hubunit.save_voice_bud(yao_voice_bud)
@@ -194,18 +194,18 @@ def create_example_real4() -> RealUnit:
     bath_text = "clean bathroom"
     hall_text = "clean hall"
 
-    yao_voice_bud.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    yao_voice_bud.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
-    yao_voice_bud.add_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
+    yao_voice_bud.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    yao_voice_bud.set_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
+    yao_voice_bud.set_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
     # yao_voice_bud.settle_bud()
     # display_ideatree(yao_voice_bud, mode="Econ").show()
 
-    wei_voice_bud.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    wei_voice_bud.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
+    wei_voice_bud.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    wei_voice_bud.set_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
 
-    zia_voice_bud.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    zia_voice_bud.add_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
-    zia_voice_bud.add_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
+    zia_voice_bud.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    zia_voice_bud.set_idea(ideaunit_shop(bath_text, pledge=True), clean_road)
+    zia_voice_bud.set_idea(ideaunit_shop(hall_text, pledge=True), clean_road)
 
     # display_ideatree(yao_voice_bud, mode="Econ").show()
     yao_voice_bud.set_credor_respect(101)
@@ -238,12 +238,12 @@ def create_example_real4() -> RealUnit:
     elpaso_healerhold = healerhold_shop({yao_text})
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
 
-    yao_voice_bud.add_idea(dallas_idea, texas_road)
-    yao_voice_bud.add_idea(elpaso_idea, texas_road)
-    wei_voice_bud.add_idea(dallas_idea, texas_road)
-    wei_voice_bud.add_idea(elpaso_idea, texas_road)
-    zia_voice_bud.add_idea(dallas_idea, texas_road)
-    zia_voice_bud.add_idea(elpaso_idea, texas_road)
+    yao_voice_bud.set_idea(dallas_idea, texas_road)
+    yao_voice_bud.set_idea(elpaso_idea, texas_road)
+    wei_voice_bud.set_idea(dallas_idea, texas_road)
+    wei_voice_bud.set_idea(elpaso_idea, texas_road)
+    zia_voice_bud.set_idea(dallas_idea, texas_road)
+    zia_voice_bud.set_idea(elpaso_idea, texas_road)
     # display_bud(yao_voice_bud.settle_bud(), mode="Econ").show()
     yao_hubunit.save_voice_bud(yao_voice_bud)
     wei_hubunit.save_voice_bud(wei_voice_bud)

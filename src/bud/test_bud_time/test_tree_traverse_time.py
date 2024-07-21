@@ -384,12 +384,12 @@ def test_BudUnit_set_fact_WeekdayBudItemsCorrectlyReturned():
     jog = "jog"
     veg = "veg"
     lift = "lift"
-    sue_bud.add_idea(ideaunit_shop(clean, pledge=True), parent_road=t_road)
-    sue_bud.add_idea(ideaunit_shop(run, pledge=True), parent_road=t_road)
-    sue_bud.add_idea(ideaunit_shop(swim, pledge=True), parent_road=t_road)
-    sue_bud.add_idea(ideaunit_shop(jog, pledge=True), parent_road=t_road)
-    sue_bud.add_idea(ideaunit_shop(veg, pledge=True), parent_road=t_road)
-    sue_bud.add_idea(ideaunit_shop(lift, pledge=True), parent_road=t_road)
+    sue_bud.set_idea(ideaunit_shop(clean, pledge=True), parent_road=t_road)
+    sue_bud.set_idea(ideaunit_shop(run, pledge=True), parent_road=t_road)
+    sue_bud.set_idea(ideaunit_shop(swim, pledge=True), parent_road=t_road)
+    sue_bud.set_idea(ideaunit_shop(jog, pledge=True), parent_road=t_road)
+    sue_bud.set_idea(ideaunit_shop(veg, pledge=True), parent_road=t_road)
+    sue_bud.set_idea(ideaunit_shop(lift, pledge=True), parent_road=t_road)
     time_text = "time"
     time_road = sue_bud.make_l1_road(time_text)
     jaja_text = "jajatime"

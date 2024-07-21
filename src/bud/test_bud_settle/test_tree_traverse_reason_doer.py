@@ -126,8 +126,8 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     yao_acctunit.add_lobbyship(swimmers_text)
 
     sue_bud.add_l1_idea(ideaunit_shop(swim_text))
-    sue_bud.add_idea(ideaunit_shop(morn_text), parent_road=swim_road)
-    sue_bud.add_idea(ideaunit_shop(four_text), parent_road=morn_road)
+    sue_bud.set_idea(ideaunit_shop(morn_text), parent_road=swim_road)
+    sue_bud.set_idea(ideaunit_shop(four_text), parent_road=morn_road)
     sue_bud.edit_idea_attr(swim_road, doerunit=x_doerunit)
     # print(sue_bud.make_road(four_road=}\n{morn_road=))
     four_idea = sue_bud.get_idea_obj(four_road)
@@ -161,8 +161,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit():
     casa_road = sue1_bud.make_l1_road(casa_text)
     swim_text = "swim"
     swim_road = sue1_bud.make_l1_road(swim_text)
-    sue1_bud.add_idea(ideaunit_shop(casa_text), parent_road=sue1_bud._real_id)
-    sue1_bud.add_idea(ideaunit_shop(swim_text), parent_road=sue1_bud._real_id)
+    sue1_bud.set_idea(ideaunit_shop(casa_text), parent_road=sue1_bud._real_id)
+    sue1_bud.set_idea(ideaunit_shop(swim_text), parent_road=sue1_bud._real_id)
     swim_doerunit = doerunit_shop()
     swim_doerunit.set_lobbyhold(lobby_id=xia_text)
     swim_doerunit.set_lobbyhold(lobby_id=zoa_text)
@@ -182,7 +182,7 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit():
     assert list(filtered_swim_lobbyholds) == [xia_text]
 
 
-def test_BudUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
+def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     # ESTABLISH
     sue1_bud = budunit_shop("Sue")
     xia_text = "Xia"
@@ -194,8 +194,8 @@ def test_BudUnit_add_idea_CorrectlyFiltersIdea_awardlinks():
     casa_road = sue1_bud.make_l1_road(casa_text)
     swim_text = "swim"
     swim_road = sue1_bud.make_l1_road(swim_text)
-    sue1_bud.add_idea(ideaunit_shop(casa_text), parent_road=sue1_bud._real_id)
-    sue1_bud.add_idea(ideaunit_shop(swim_text), parent_road=sue1_bud._real_id)
+    sue1_bud.set_idea(ideaunit_shop(casa_text), parent_road=sue1_bud._real_id)
+    sue1_bud.set_idea(ideaunit_shop(swim_text), parent_road=sue1_bud._real_id)
     swim_doerunit = doerunit_shop()
     swim_doerunit.set_lobbyhold(lobby_id=xia_text)
     swim_doerunit.set_lobbyhold(lobby_id=zoa_text)

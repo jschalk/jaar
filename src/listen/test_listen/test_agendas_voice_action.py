@@ -43,8 +43,8 @@ def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_lobbyholdIsSet(
     yao_hubunit.save_voice_bud(yao_voice)
 
     zia_action = budunit_shop(zia_text)
-    zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_acctunit(yao_text, debtor_weight=12)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_bud(zia_action)
@@ -74,8 +74,8 @@ def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
     yao_hubunit.save_voice_bud(yao_voice)
 
     zia_action = budunit_shop(zia_text)
-    zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
@@ -176,8 +176,8 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
 
     zia_text = "Zia"
     zia_action = budunit_shop(zia_text)
-    zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
@@ -255,8 +255,8 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
     yao_hubunit.save_voice_bud(yao_voice)
 
     zia_action = budunit_shop(zia_text)
-    zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
@@ -303,8 +303,8 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     # Save Zia to action
     zia_text = "Zia"
     zia_action = budunit_shop(zia_text)
-    zia_action.add_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
-    zia_action.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
+    zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     zia_action.add_acctunit(yao_text, debtor_weight=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())

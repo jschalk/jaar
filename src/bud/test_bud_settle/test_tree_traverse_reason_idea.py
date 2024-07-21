@@ -73,7 +73,7 @@ def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
     wed_road = bob_bud.make_road(week_road, wed_text)
     bob_bud.add_l1_idea(ideaunit_shop(casa_text))
     bob_bud.add_l1_idea(ideaunit_shop(week_text))
-    bob_bud.add_idea(ideaunit_shop(wed_text), week_road)
+    bob_bud.set_idea(ideaunit_shop(wed_text), week_road)
     print(f"{bob_bud._idearoot._kids.keys()=}")
     wed_idea = bob_bud.get_idea_obj(wed_road)
     assert wed_idea._road_delimiter == slash_text
@@ -218,10 +218,10 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     # WHEN
     rla_text = "hp"
     rla_road = a4_bud.make_road(casa_road, rla_text)
-    a4_bud.add_idea(ideaunit_shop(rla_text), parent_road=rla_road)
+    a4_bud.set_idea(ideaunit_shop(rla_text), parent_road=rla_road)
     cost_text = "cost_quantification"
     cost_road = a4_bud.make_road(rla_road, cost_text)
-    a4_bud.add_idea(ideaunit_shop(cost_text), parent_road=cost_road)
+    a4_bud.set_idea(ideaunit_shop(cost_text), parent_road=cost_road)
     a4_bud.settle_bud()
 
     # THEN
@@ -283,10 +283,10 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_bud.edit_idea_attr(road=casa_road, reason=casa_wk_build_reasonunit)
     rla_text = "hp"
     rla_road = a4_bud.make_road(casa_road, rla_text)
-    a4_bud.add_idea(ideaunit_shop(rla_text), parent_road=rla_road)
+    a4_bud.set_idea(ideaunit_shop(rla_text), parent_road=rla_road)
     cost_text = "cost_quantification"
     cost_road = a4_bud.make_road(rla_road, cost_text)
-    a4_bud.add_idea(ideaunit_shop(cost_text), parent_road=cost_road)
+    a4_bud.set_idea(ideaunit_shop(cost_text), parent_road=cost_road)
 
     casa_idea = a4_bud._idearoot.get_kid(casa_text)
     rla_idea = casa_idea.get_kid(rla_text)
@@ -415,7 +415,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
     week_text = "week"
     week_road = x_bud.make_road(time_road, week_text)
     x_bud.add_l1_idea(ideaunit_shop(time_text, _begin=100, _close=2000))
-    x_bud.add_idea(ideaunit_shop(week_text, _denom=7), parent_road=time_road)
+    x_bud.set_idea(ideaunit_shop(week_text, _denom=7), parent_road=time_road)
 
     # WHEN
     x_bud.edit_idea_attr(
@@ -444,8 +444,8 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh()
     time_road = x_bud.make_l1_road(time)
     rus_war = "rus_war"
     rus_war_road = x_bud.make_road(time_road, rus_war)
-    x_bud.add_idea(ideaunit_shop(time, _begin=100, _close=2000), x_bud._real_id)
-    x_bud.add_idea(ideaunit_shop(rus_war, _begin=22, _close=34), time_road)
+    x_bud.set_idea(ideaunit_shop(time, _begin=100, _close=2000), x_bud._real_id)
+    x_bud.set_idea(ideaunit_shop(rus_war, _begin=22, _close=34), time_road)
 
     # WHEN
     x_bud.edit_idea_attr(
@@ -532,7 +532,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
 
     commute_text = "commute to casa"
     commute_road = x_bud.make_l1_road(commute_text)
-    x_bud.add_idea(ideaunit_shop(commute_text), x_bud._real_id)
+    x_bud.set_idea(ideaunit_shop(commute_text), x_bud._real_id)
     x_bud.settle_bud()  # set tree metrics
     commute_idea = x_bud.get_idea_obj(commute_road)
     assert len(commute_idea._reasonunits) == 0
@@ -612,7 +612,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     # 5.2. idea(...,casa).active = False
     commute_text = "commute to casa"
     commute_road = x_bud.make_l1_road(commute_text)
-    x_bud.add_idea(ideaunit_shop(commute_text), x_bud._real_id)
+    x_bud.set_idea(ideaunit_shop(commute_text), x_bud._real_id)
     x_bud.edit_idea_attr(
         road=commute_road,
         reason_base=casa_road,

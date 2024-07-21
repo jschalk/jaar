@@ -40,9 +40,9 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
     dirty_road = yao_speaker.make_road(status_road, dirty_text)
     sweep_text = "sweep"
     sweep_road = yao_speaker.make_road(casa_road, sweep_text)
-    yao_speaker.add_idea(ideaunit_shop(clean_text), status_road)
-    yao_speaker.add_idea(ideaunit_shop(dirty_text), status_road)
-    yao_speaker.add_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
+    yao_speaker.set_idea(ideaunit_shop(clean_text), status_road)
+    yao_speaker.set_idea(ideaunit_shop(dirty_text), status_road)
+    yao_speaker.set_idea(ideaunit_shop(sweep_text, pledge=True), casa_road)
     yao_speaker.edit_idea_attr(
         sweep_road, reason_base=status_road, reason_premise=dirty_road
     )

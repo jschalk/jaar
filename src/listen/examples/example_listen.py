@@ -62,9 +62,9 @@ def run_road() -> RoadUnit:
 def get_example_zia_speaker() -> BudUnit:
     zia_text = "Zia"
     zia_speaker = budunit_shop(zia_text)
-    zia_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
-    zia_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
+    zia_speaker.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    zia_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
+    zia_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     yao_text = "Yao"
     zia_speaker.add_acctunit(yao_text, debtor_weight=12)
     cook_ideaunit = zia_speaker.get_idea_obj(cook_road())
@@ -80,9 +80,9 @@ def get_example_zia_speaker() -> BudUnit:
 def get_example_bob_speaker() -> BudUnit:
     bob_text = "Bob"
     bob_speaker = budunit_shop(bob_text)
-    bob_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    bob_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
-    bob_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
+    bob_speaker.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    bob_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
+    bob_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     yao_text = "Yao"
     bob_speaker.add_acctunit(yao_text, debtor_weight=12)
     cook_ideaunit = bob_speaker.get_idea_obj(cook_road())
@@ -104,9 +104,9 @@ def get_example_yao_speaker() -> BudUnit:
     yao_speaker.add_acctunit(zia_text, debtor_weight=36)
     yao_speaker.add_acctunit(bob_text, debtor_weight=48)
     yao_speaker.set_acct_respect(100)
-    yao_speaker.add_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    yao_speaker.add_idea(ideaunit_shop(hungry_text()), eat_road())
-    yao_speaker.add_idea(ideaunit_shop(full_text()), eat_road())
+    yao_speaker.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
+    yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
+    yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
     cook_ideaunit._doerunit.set_lobbyhold(yao_text)
     yao_speaker.edit_idea_attr(

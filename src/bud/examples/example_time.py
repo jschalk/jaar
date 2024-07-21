@@ -821,7 +821,7 @@ def get_budunit_sue_TimeExample():
             _range_source_road=range_source_road_x,
         )
         road_x = sue_budunit.make_l1_road(yb.rr)
-        sue_budunit.add_idea(x_idea, parent_road=road_x)
+        sue_budunit.set_idea(x_idea, parent_road=road_x)
 
         numeric_road_x = None
         if yb.nr is not None:

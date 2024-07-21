@@ -19,7 +19,7 @@ def test_BudUnit_edit_idea_label_FailsWhenIdeaDoesNotExist():
     casa_road = yao_bud.make_l1_road(casa_text)
     swim_text = "swim"
     yao_bud.add_l1_idea(ideaunit_shop(casa_text))
-    yao_bud.add_idea(ideaunit_shop(swim_text), parent_road=casa_road)
+    yao_bud.set_idea(ideaunit_shop(swim_text), parent_road=casa_road)
 
     # WHEN / THEN
     no_idea_road = yao_bud.make_l1_road("bees")
@@ -38,7 +38,7 @@ def test_BudUnit_edit_idea_label_RaisesErrorForLevel0IdeaWhen_real_id_isNone():
     swim_text = "swim"
     swim_road = yao_bud.make_road(casa_road, swim_text)
     yao_bud.add_l1_idea(ideaunit_shop(casa_text))
-    yao_bud.add_idea(ideaunit_shop(swim_text), parent_road=casa_road)
+    yao_bud.set_idea(ideaunit_shop(swim_text), parent_road=casa_road)
     assert yao_bud._owner_id == yao_text
     assert yao_bud._idearoot._label == yao_bud._real_id
     casa_idea = yao_bud.get_idea_obj(casa_road)
@@ -72,7 +72,7 @@ def test_BudUnit_edit_idea_label_RaisesErrorForLevel0When_real_id_IsDifferent():
     swim_text = "swim"
     swim_road = yao_bud.make_road(casa_road, swim_text)
     yao_bud.add_l1_idea(ideaunit_shop(casa_text))
-    yao_bud.add_idea(ideaunit_shop(swim_text), parent_road=casa_road)
+    yao_bud.set_idea(ideaunit_shop(swim_text), parent_road=casa_road)
     sun_text = "sun"
     yao_bud._real_id = sun_text
     yao_bud._idearoot._bud_real_id = sun_text
@@ -105,7 +105,7 @@ def test_bud_set_real_id_CorrectlySetsAttr():
     swim_text = "swim"
     old_swim_road = yao_bud.make_road(old_casa_road, swim_text)
     yao_bud.add_l1_idea(ideaunit_shop(casa_text))
-    yao_bud.add_idea(ideaunit_shop(swim_text), parent_road=old_casa_road)
+    yao_bud.set_idea(ideaunit_shop(swim_text), parent_road=old_casa_road)
     assert yao_bud._owner_id == yao_text
     assert yao_bud._idearoot._label == yao_bud._real_id
     casa_idea = yao_bud.get_idea_obj(old_casa_road)
@@ -145,9 +145,9 @@ def test_BudUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     old_red_road = yao_bud.make_road(old_roses_road, red_text)
 
     yao_bud.add_l1_idea(ideaunit_shop(old_casa_text))
-    yao_bud.add_idea(ideaunit_shop(bloomers_text), parent_road=old_casa_road)
-    yao_bud.add_idea(ideaunit_shop(roses_text), parent_road=old_bloomers_road)
-    yao_bud.add_idea(ideaunit_shop(red_text), parent_road=old_roses_road)
+    yao_bud.set_idea(ideaunit_shop(bloomers_text), parent_road=old_casa_road)
+    yao_bud.set_idea(ideaunit_shop(roses_text), parent_road=old_bloomers_road)
+    yao_bud.set_idea(ideaunit_shop(red_text), parent_road=old_roses_road)
     r_idea_roses = yao_bud.get_idea_obj(old_roses_road)
     r_idea_bloomers = yao_bud.get_idea_obj(old_bloomers_road)
 
@@ -195,8 +195,8 @@ def test_bud_edit_idea_label_Modifies_factunits():
     old_rain_road = yao_bud.make_road(old_water_road, rain_text)
 
     yao_bud.add_l1_idea(ideaunit_shop(casa_text))
-    yao_bud.add_idea(ideaunit_shop(roses_text), parent_road=bloomers_road)
-    yao_bud.add_idea(ideaunit_shop(rain_text), parent_road=old_water_road)
+    yao_bud.set_idea(ideaunit_shop(roses_text), parent_road=bloomers_road)
+    yao_bud.set_idea(ideaunit_shop(rain_text), parent_road=old_water_road)
     yao_bud.set_fact(base=old_water_road, pick=old_rain_road)
 
     idea_x = yao_bud.get_idea_obj(roses_road)
@@ -257,8 +257,8 @@ def test_bud_edit_idea_label_ModifiesIdeaUnitN_range_source_road():
     mood_text = "mood"
     mood_road = bob_bud.make_l1_road(mood_text)
     bob_bud.add_l1_idea(ideaunit_shop(casa_text))
-    bob_bud.add_idea(ideaunit_shop(old_water_text), parent_road=casa_road)
-    bob_bud.add_idea(ideaunit_shop(rain_text), parent_road=old_water_road)
+    bob_bud.set_idea(ideaunit_shop(old_water_text), parent_road=casa_road)
+    bob_bud.set_idea(ideaunit_shop(rain_text), parent_road=old_water_road)
     bob_bud.add_l1_idea(ideaunit_shop(mood_text))
 
     bob_bud.edit_idea_attr(road=mood_road, range_source_road=old_rain_road)
@@ -371,7 +371,7 @@ def test_bud_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnIdea_label():
     zia_bud.add_l1_idea(ideaunit_shop(casa_text))
     slash_text = "/"
     casa_text = f"casa cook{slash_text}clean"
-    zia_bud.add_idea(ideaunit_shop(casa_text), parent_road=casa_road)
+    zia_bud.set_idea(ideaunit_shop(casa_text), parent_road=casa_road)
 
     # WHEN / THEN
     casa_road = zia_bud.make_road(casa_road, casa_text)
@@ -391,7 +391,7 @@ def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
     zia_bud.add_l1_idea(ideaunit_shop(casa_text))
     comma_casa_road = zia_bud.make_l1_road(casa_text)
     cook_text = "cook"
-    zia_bud.add_idea(ideaunit_shop(cook_text), parent_road=comma_casa_road)
+    zia_bud.set_idea(ideaunit_shop(cook_text), parent_road=comma_casa_road)
     comma_cook_road = zia_bud.make_road(comma_casa_road, cook_text)
     cook_idea = zia_bud.get_idea_obj(comma_cook_road)
     comma_text = ","
@@ -499,7 +499,7 @@ def test_bud_set_road_delimiter_CorrectlyModifies_numeric_roadAND_range_source_r
     zia_bud.add_l1_idea(ideaunit_shop(casa_text))
     comma_casa_road = zia_bud.make_l1_road(casa_text)
     cook_text = "cook"
-    zia_bud.add_idea(ideaunit_shop(cook_text), parent_road=comma_casa_road)
+    zia_bud.set_idea(ideaunit_shop(cook_text), parent_road=comma_casa_road)
     comma_cook_road = zia_bud.make_road(comma_casa_road, cook_text)
 
     # numeric_road

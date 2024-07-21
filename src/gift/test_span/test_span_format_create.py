@@ -145,7 +145,7 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     sue_budunit.add_l1_idea(ideaunit_shop(casa_text, _weight=casa_weight))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
     x_span_name = jaar_format_0003_ideaunit_v0_0_0()

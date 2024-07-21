@@ -63,17 +63,17 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     floor_text = "mop floor"
     floor_road = sue_bud.make_road(casa_road, floor_text)
     floor_idea = ideaunit_shop(floor_text)
-    sue_bud.add_idea(floor_idea, parent_road=casa_road)
+    sue_bud.set_idea(floor_idea, parent_road=casa_road)
 
     unim_text = "unimportant"
     unim_road = sue_bud.make_l1_road(unim_text)
     unim_idea = ideaunit_shop(unim_text)
-    sue_bud.add_idea(unim_idea, parent_road=sue_bud._real_id)
+    sue_bud.set_idea(unim_idea, parent_road=sue_bud._real_id)
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
     status_idea = ideaunit_shop(status_text)
-    sue_bud.add_idea(status_idea, parent_road=casa_road)
+    sue_bud.set_idea(status_idea, parent_road=casa_road)
     floor_reason = reasonunit_shop(base=status_road)
     floor_reason.set_premise(premise=status_road)
     sue_bud.edit_idea_attr(road=floor_road, reason=floor_reason)
@@ -196,7 +196,7 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     min_days_text = "days in minute_range"
     min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
     min_days_idea = ideaunit_shop(min_days_text, _range_source_road=day_len_road)
-    yao_bud.add_idea(min_days_idea, parent_road=min_range_x_road)
+    yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
     yao_bud.settle_bud()

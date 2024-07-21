@@ -652,7 +652,7 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        self.add_idea(
+        self.set_idea(
             idea_kid=idea_kid,
             parent_road=self._real_id,
             create_missing_ideas=create_missing_ideas,
@@ -662,7 +662,7 @@ class BudUnit:
             create_missing_ancestors=create_missing_ancestors,
         )
 
-    def add_idea(
+    def set_idea(
         self,
         idea_kid: IdeaUnit,
         parent_road: RoadUnit,
@@ -674,14 +674,14 @@ class BudUnit:
     ):
         if RoadNode(idea_kid._label).is_node(self._road_delimiter) is False:
             raise InvalidBudException(
-                f"add_idea failed because '{idea_kid._label}' is not a RoadNode."
+                f"set_idea failed because '{idea_kid._label}' is not a RoadNode."
             )
 
         if self._idearoot._label != get_root_node_from_road(
             parent_road, self._road_delimiter
         ):
             raise InvalidBudException(
-                f"add_idea failed because parent_road '{parent_road}' has an invalid root node"
+                f"set_idea failed because parent_road '{parent_road}' has an invalid root node"
             )
 
         idea_kid._road_delimiter = self._road_delimiter
@@ -696,7 +696,7 @@ class BudUnit:
         # create any missing ideas
         if not create_missing_ancestors and self.idea_exists(parent_road) is False:
             raise InvalidBudException(
-                f"add_idea failed because '{parent_road}' idea does not exist."
+                f"set_idea failed because '{parent_road}' idea does not exist."
             )
         parent_road_idea = self.get_idea_obj(parent_road, create_missing_ancestors)
         if parent_road_idea._root is False:
@@ -711,7 +711,7 @@ class BudUnit:
                 adoptee_idea = self.get_idea_obj(adoptee_road)
                 weight_sum += adoptee_idea._weight
                 new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
-                self.add_idea(adoptee_idea, new_adoptee_parent_road)
+                self.set_idea(adoptee_idea, new_adoptee_parent_road)
                 self.edit_idea_attr(
                     new_adoptee_parent_road, weight=adoptee_idea._weight
                 )
@@ -757,7 +757,7 @@ class BudUnit:
 
     def _create_ideakid_if_empty(self, road: RoadUnit):
         if self.idea_exists(road) is False:
-            self.add_idea(
+            self.set_idea(
                 ideaunit_shop(get_terminus_node(road, self._road_delimiter)),
                 parent_road=get_parent_road(road),
             )
@@ -777,7 +777,7 @@ class BudUnit:
         parent_road = get_parent_road(x_road)
         d_temp_idea = self.get_idea_obj(x_road)
         for kid in d_temp_idea._kids.values():
-            self.add_idea(kid, parent_road=parent_road)
+            self.set_idea(kid, parent_road=parent_road)
 
     def set_owner_id(self, new_owner_id):
         self._owner_id = new_owner_id
@@ -1644,7 +1644,7 @@ class BudUnit:
 
     def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
         idea_kid.pledge = True
-        self.add_idea(
+        self.set_idea(
             idea_kid=idea_kid,
             parent_road=self.make_road(idea_kid._parent_road),
             filter_out_missing_awardlinks_lobby_ids=True,
@@ -1808,7 +1808,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
             # _bud_real_id=x_bud._real_id,
         )
-        x_bud.add_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
+        x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 
 
 def obj_from_bud_dict(

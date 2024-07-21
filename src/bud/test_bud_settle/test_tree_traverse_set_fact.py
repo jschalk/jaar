@@ -130,10 +130,10 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIs
     a1st = "age1st"
     a1st_road = bob_bud.make_road(time_road, a1st)
     a1st_idea = ideaunit_shop(a1st, _begin=0, _close=20)
-    bob_bud.add_idea(a1st_idea, parent_road=time_road)
+    bob_bud.set_idea(a1st_idea, parent_road=time_road)
     a1e1st_text = "a1_era1st"
     a1e1st_idea = ideaunit_shop(a1e1st_text, _begin=20, _close=30)
-    bob_bud.add_idea(a1e1st_idea, parent_road=a1st_road)
+    bob_bud.set_idea(a1e1st_idea, parent_road=a1st_road)
     a1e1_road = bob_bud.make_road(a1st_road, a1e1st_text)
     assert bob_bud._idearoot._factunits in (None, {})
 
@@ -173,8 +173,8 @@ def test_BudUnit_get_idea_list_FactHeirsCorrectlyInherited():
     slow_text = "slow"
     fast_road = bob_bud.make_road(swim_road, fast_text)
     slow_road = bob_bud.make_road(swim_road, slow_text)
-    bob_bud.add_idea(ideaunit_shop(fast_text), parent_road=swim_road)
-    bob_bud.add_idea(ideaunit_shop(slow_text), parent_road=swim_road)
+    bob_bud.set_idea(ideaunit_shop(fast_text), parent_road=swim_road)
+    bob_bud.set_idea(ideaunit_shop(slow_text), parent_road=swim_road)
 
     earth_text = "earth"
     earth_road = bob_bud.make_l1_road(earth_text)
@@ -229,8 +229,8 @@ def test_BudUnit_get_idea_list_FactUnitCorrectlyTransformsfactheir_shop():
 
     fast_text = "fast"
     slow_text = "slow"
-    bob_bud.add_idea(ideaunit_shop(fast_text), parent_road=swim_road)
-    bob_bud.add_idea(ideaunit_shop(slow_text), parent_road=swim_road)
+    bob_bud.set_idea(ideaunit_shop(fast_text), parent_road=swim_road)
+    bob_bud.set_idea(ideaunit_shop(slow_text), parent_road=swim_road)
 
     earth_text = "earth"
     earth_road = bob_bud.make_l1_road(earth_text)
@@ -265,8 +265,8 @@ def test_BudUnit_get_idea_list_FactHeirCorrectlyDeletesFactUnit():
     sue_bud.add_l1_idea(ideaunit_shop(swim_text))
     fast_text = "fast"
     slow_text = "slow"
-    sue_bud.add_idea(ideaunit_shop(fast_text), parent_road=swim_road)
-    sue_bud.add_idea(ideaunit_shop(slow_text), parent_road=swim_road)
+    sue_bud.set_idea(ideaunit_shop(fast_text), parent_road=swim_road)
+    sue_bud.set_idea(ideaunit_shop(slow_text), parent_road=swim_road)
     earth_text = "earth"
     earth_road = sue_bud.make_l1_road(earth_text)
     sue_bud.add_l1_idea(ideaunit_shop(earth_text))
@@ -347,8 +347,8 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     m_x_road = sue_bud.make_l1_road(mood_x)
     happy = "happy"
     sad = "Sad"
-    sue_bud.add_idea(ideaunit_shop(happy), parent_road=m_x_road)
-    sue_bud.add_idea(ideaunit_shop(sad), parent_road=m_x_road)
+    sue_bud.set_idea(ideaunit_shop(happy), parent_road=m_x_road)
+    sue_bud.set_idea(ideaunit_shop(sad), parent_road=m_x_road)
     sue_bud.set_fact(base=time_road, pick=time_road, open=5, nigh=10)
     sue_bud.set_fact(base=m_x_road, pick=sue_bud.make_road(m_x_road, happy))
     print(
@@ -376,7 +376,7 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1(
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
-    # sue_bud.add_idea(ideaunit_shop(clean, pledge=True))
+    # sue_bud.set_idea(ideaunit_shop(clean, pledge=True))
 
     time_text = "time"
     sue_bud.add_l1_idea(ideaunit_shop(time_text, _begin=0, _close=140))
@@ -395,13 +395,13 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1(
     age5th_idea = ideaunit_shop(age5th_text, _begin=80, _close=100)
     age6th_idea = ideaunit_shop(age6th_text, _begin=100, _close=120)
     age7th_idea = ideaunit_shop(age7th_text, _begin=120, _close=140)
-    sue_bud.add_idea(age1st_idea, parent_road=time_road)
-    sue_bud.add_idea(age2nd_idea, parent_road=time_road)
-    sue_bud.add_idea(age3rd_idea, parent_road=time_road)
-    sue_bud.add_idea(age4th_idea, parent_road=time_road)
-    sue_bud.add_idea(age5th_idea, parent_road=time_road)
-    sue_bud.add_idea(age6th_idea, parent_road=time_road)
-    sue_bud.add_idea(age7th_idea, parent_road=time_road)
+    sue_bud.set_idea(age1st_idea, parent_road=time_road)
+    sue_bud.set_idea(age2nd_idea, parent_road=time_road)
+    sue_bud.set_idea(age3rd_idea, parent_road=time_road)
+    sue_bud.set_idea(age4th_idea, parent_road=time_road)
+    sue_bud.set_idea(age5th_idea, parent_road=time_road)
+    sue_bud.set_idea(age6th_idea, parent_road=time_road)
+    sue_bud.set_idea(age7th_idea, parent_road=time_road)
 
     # set for instant moment in 3rd age
     sue_bud.set_fact(base=time_road, pick=time_road, open=45, nigh=45)
@@ -436,7 +436,7 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2(
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
-    # sue_bud.add_idea(ideaunit_shop(clean, pledge=True))
+    # sue_bud.set_idea(ideaunit_shop(clean, pledge=True))
 
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
@@ -456,13 +456,13 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2(
     age5th_idea = ideaunit_shop(age5th_text, _begin=80, _close=100)
     age6th_idea = ideaunit_shop(age6th_text, _begin=100, _close=120)
     age7th_idea = ideaunit_shop(age7th_text, _begin=120, _close=140)
-    sue_bud.add_idea(age1st_idea, parent_road=time_road)
-    sue_bud.add_idea(age2nd_idea, parent_road=time_road)
-    sue_bud.add_idea(age3rd_idea, parent_road=time_road)
-    sue_bud.add_idea(age4th_idea, parent_road=time_road)
-    sue_bud.add_idea(age5th_idea, parent_road=time_road)
-    sue_bud.add_idea(age6th_idea, parent_road=time_road)
-    sue_bud.add_idea(age7th_idea, parent_road=time_road)
+    sue_bud.set_idea(age1st_idea, parent_road=time_road)
+    sue_bud.set_idea(age2nd_idea, parent_road=time_road)
+    sue_bud.set_idea(age3rd_idea, parent_road=time_road)
+    sue_bud.set_idea(age4th_idea, parent_road=time_road)
+    sue_bud.set_idea(age5th_idea, parent_road=time_road)
+    sue_bud.set_idea(age6th_idea, parent_road=time_road)
+    sue_bud.set_idea(age7th_idea, parent_road=time_road)
 
     # set for instant moment in 3rd age
     sue_bud.set_fact(base=time_road, pick=time_road, open=35, nigh=65)
@@ -495,7 +495,7 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
-    # sue_bud.add_idea(ideaunit_shop(clean, pledge=True))
+    # sue_bud.set_idea(ideaunit_shop(clean, pledge=True))
 
     time_text = "time"
     time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
@@ -515,13 +515,13 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     age5th_idea = ideaunit_shop(age5th_text, _begin=80, _close=100)
     age6th_idea = ideaunit_shop(age6th_text, _begin=100, _close=120)
     age7th_idea = ideaunit_shop(age7th_text, _begin=120, _close=140)
-    sue_bud.add_idea(age1st_idea, parent_road=time_road)
-    sue_bud.add_idea(age2nd_idea, parent_road=time_road)
-    sue_bud.add_idea(age3rd_idea, parent_road=time_road)
-    sue_bud.add_idea(age4th_idea, parent_road=time_road)
-    sue_bud.add_idea(age5th_idea, parent_road=time_road)
-    sue_bud.add_idea(age6th_idea, parent_road=time_road)
-    sue_bud.add_idea(age7th_idea, parent_road=time_road)
+    sue_bud.set_idea(age1st_idea, parent_road=time_road)
+    sue_bud.set_idea(age2nd_idea, parent_road=time_road)
+    sue_bud.set_idea(age3rd_idea, parent_road=time_road)
+    sue_bud.set_idea(age4th_idea, parent_road=time_road)
+    sue_bud.set_idea(age5th_idea, parent_road=time_road)
+    sue_bud.set_idea(age6th_idea, parent_road=time_road)
+    sue_bud.set_idea(age7th_idea, parent_road=time_road)
 
     a2_road = sue_bud.make_road(time_road, age2nd_text)
     a2e1st_text = "a1_era1st"
@@ -532,10 +532,10 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     a2e2nd_idea = ideaunit_shop(a2e2nd_text, _begin=30, _close=34)
     a2e3rd_idea = ideaunit_shop(a2e3rd_text, _begin=34, _close=38)
     a2e4th_idea = ideaunit_shop(a2e4th_text, _begin=38, _close=40)
-    sue_bud.add_idea(a2e1st_idea, parent_road=a2_road)
-    sue_bud.add_idea(a2e2nd_idea, parent_road=a2_road)
-    sue_bud.add_idea(a2e3rd_idea, parent_road=a2_road)
-    sue_bud.add_idea(a2e4th_idea, parent_road=a2_road)
+    sue_bud.set_idea(a2e1st_idea, parent_road=a2_road)
+    sue_bud.set_idea(a2e2nd_idea, parent_road=a2_road)
+    sue_bud.set_idea(a2e3rd_idea, parent_road=a2_road)
+    sue_bud.set_idea(a2e4th_idea, parent_road=a2_road)
 
     a3_road = sue_bud.make_road(time_road, age3rd_text)
     a3e1st_text = "a3_era1st"
@@ -546,10 +546,10 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     a3e2nd_idea = ideaunit_shop(a3e2nd_text, _begin=45, _close=50)
     a3e3rd_idea = ideaunit_shop(a3e3rd_text, _begin=55, _close=58)
     a3e4th_idea = ideaunit_shop(a3e4th_text, _begin=58, _close=60)
-    sue_bud.add_idea(a3e1st_idea, parent_road=a3_road)
-    sue_bud.add_idea(a3e2nd_idea, parent_road=a3_road)
-    sue_bud.add_idea(a3e3rd_idea, parent_road=a3_road)
-    sue_bud.add_idea(a3e4th_idea, parent_road=a3_road)
+    sue_bud.set_idea(a3e1st_idea, parent_road=a3_road)
+    sue_bud.set_idea(a3e2nd_idea, parent_road=a3_road)
+    sue_bud.set_idea(a3e3rd_idea, parent_road=a3_road)
+    sue_bud.set_idea(a3e4th_idea, parent_road=a3_road)
 
     # set for instant moment in 3rd age
     sue_bud.set_fact(base=time_road, pick=time_road, open=35, nigh=55)
@@ -605,7 +605,7 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario4(
     age1st_idea = ideaunit_shop(
         age1st, _begin=0, _close=20, _range_source_road=as2_road
     )
-    sue_bud.add_idea(age1st_idea, parent_road=time_road)
+    sue_bud.set_idea(age1st_idea, parent_road=time_road)
 
     # set for instant moment in 3rd age
     sue_bud.set_fact(base=time_road, pick=time_road, open=35, nigh=55)

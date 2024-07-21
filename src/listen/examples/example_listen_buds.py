@@ -32,13 +32,13 @@ def get_budunit_with_4_levels() -> BudUnit:
     idea_grandkidF = ideaunit_shop(fri_text, _weight=40)
     idea_grandkidA = ideaunit_shop(sat_text, _weight=50)
 
-    sue_bud.add_idea(idea_grandkidU, week_road)
-    sue_bud.add_idea(idea_grandkidM, week_road)
-    sue_bud.add_idea(idea_grandkidT, week_road)
-    sue_bud.add_idea(idea_grandkidW, week_road)
-    sue_bud.add_idea(idea_grandkidR, week_road)
-    sue_bud.add_idea(idea_grandkidF, week_road)
-    sue_bud.add_idea(idea_grandkidA, week_road)
+    sue_bud.set_idea(idea_grandkidU, week_road)
+    sue_bud.set_idea(idea_grandkidM, week_road)
+    sue_bud.set_idea(idea_grandkidT, week_road)
+    sue_bud.set_idea(idea_grandkidW, week_road)
+    sue_bud.set_idea(idea_grandkidR, week_road)
+    sue_bud.set_idea(idea_grandkidF, week_road)
+    sue_bud.set_idea(idea_grandkidA, week_road)
 
     states_text = "nation-state"
     states_road = sue_bud.make_l1_road(states_text)
@@ -52,16 +52,16 @@ def get_budunit_with_4_levels() -> BudUnit:
     idea_grandkid_usa = ideaunit_shop(usa_text, _weight=50)
     idea_grandkid_france = ideaunit_shop(france_text, _weight=50)
     idea_grandkid_brazil = ideaunit_shop(brazil_text, _weight=50)
-    sue_bud.add_idea(idea_grandkid_france, states_road)
-    sue_bud.add_idea(idea_grandkid_brazil, states_road)
-    sue_bud.add_idea(idea_grandkid_usa, states_road)
+    sue_bud.set_idea(idea_grandkid_france, states_road)
+    sue_bud.set_idea(idea_grandkid_brazil, states_road)
+    sue_bud.set_idea(idea_grandkid_usa, states_road)
 
     texas_text = "Texas"
     oregon_text = "Oregon"
     idea_grandgrandkid_usa_texas = ideaunit_shop(texas_text, _weight=50)
     idea_grandgrandkid_usa_oregon = ideaunit_shop(oregon_text, _weight=50)
-    sue_bud.add_idea(idea_grandgrandkid_usa_texas, usa_road)
-    sue_bud.add_idea(idea_grandgrandkid_usa_oregon, usa_road)
+    sue_bud.set_idea(idea_grandgrandkid_usa_texas, usa_road)
+    sue_bud.set_idea(idea_grandgrandkid_usa_oregon, usa_road)
     return sue_bud
 
 
@@ -79,12 +79,12 @@ def get_fund_explanation_bud() -> BudUnit:
     sweep_text = "sweep floor"
     dish_text = "clean dishes"
     sue_bud.add_l1_idea(ideaunit_shop(casa_text, _weight=30))
-    sue_bud.add_idea(ideaunit_shop(cat_text, _weight=30), casa_road)
-    sue_bud.add_idea(ideaunit_shop(hun_n_text, _weight=30), cat_road)
-    sue_bud.add_idea(ideaunit_shop(hun_y_text, _weight=30), cat_road)
-    sue_bud.add_idea(ideaunit_shop(clean_text, _weight=30), casa_road)
-    sue_bud.add_idea(ideaunit_shop(sweep_text, _weight=30, pledge=True), clean_road)
-    sue_bud.add_idea(ideaunit_shop(dish_text, _weight=30, pledge=True), clean_road)
+    sue_bud.set_idea(ideaunit_shop(cat_text, _weight=30), casa_road)
+    sue_bud.set_idea(ideaunit_shop(hun_n_text, _weight=30), cat_road)
+    sue_bud.set_idea(ideaunit_shop(hun_y_text, _weight=30), cat_road)
+    sue_bud.set_idea(ideaunit_shop(clean_text, _weight=30), casa_road)
+    sue_bud.set_idea(ideaunit_shop(sweep_text, _weight=30, pledge=True), clean_road)
+    sue_bud.set_idea(ideaunit_shop(dish_text, _weight=30, pledge=True), clean_road)
 
     cat_text = "cat have dinner"
     sue_bud.add_l1_idea(ideaunit_shop(cat_text, _weight=30, pledge=True))
@@ -108,13 +108,13 @@ def get_fund_explanation_bud() -> BudUnit:
     # idea_grandkidR = ideaunit_shop(thu_text, _weight=30)
     # idea_grandkidF = ideaunit_shop(fri_text, _weight=40)
     # idea_grandkidA = ideaunit_shop(sat_text, _weight=50)
-    # sue_bud.add_idea(idea_grandkidU, week_road)
-    # sue_bud.add_idea(idea_grandkidM, week_road)
-    # sue_bud.add_idea(idea_grandkidT, week_road)
-    # sue_bud.add_idea(idea_grandkidW, week_road)
-    # sue_bud.add_idea(idea_grandkidR, week_road)
-    # sue_bud.add_idea(idea_grandkidF, week_road)
-    # sue_bud.add_idea(idea_grandkidA, week_road)
+    # sue_bud.set_idea(idea_grandkidU, week_road)
+    # sue_bud.set_idea(idea_grandkidM, week_road)
+    # sue_bud.set_idea(idea_grandkidT, week_road)
+    # sue_bud.set_idea(idea_grandkidW, week_road)
+    # sue_bud.set_idea(idea_grandkidR, week_road)
+    # sue_bud.set_idea(idea_grandkidF, week_road)
+    # sue_bud.set_idea(idea_grandkidA, week_road)
 
     # states_text = "nation-state"
     # states_road = sue_bud.make_l1_road(states_text)
@@ -128,14 +128,14 @@ def get_fund_explanation_bud() -> BudUnit:
     # idea_grandkid_usa = ideaunit_shop(usa_text, _weight=50)
     # idea_grandkid_france = ideaunit_shop(france_text, _weight=50)
     # idea_grandkid_brazil = ideaunit_shop(brazil_text, _weight=50)
-    # sue_bud.add_idea(idea_grandkid_france, states_road)
-    # sue_bud.add_idea(idea_grandkid_brazil, states_road)
-    # sue_bud.add_idea(idea_grandkid_usa, states_road)
+    # sue_bud.set_idea(idea_grandkid_france, states_road)
+    # sue_bud.set_idea(idea_grandkid_brazil, states_road)
+    # sue_bud.set_idea(idea_grandkid_usa, states_road)
 
     # texas_text = "Texas"
     # oregon_text = "Oregon"
     # idea_grandgrandkid_usa_texas = ideaunit_shop(texas_text, _weight=50)
     # idea_grandgrandkid_usa_oregon = ideaunit_shop(oregon_text, _weight=50)
-    # sue_bud.add_idea(idea_grandgrandkid_usa_texas, usa_road)
-    # sue_bud.add_idea(idea_grandgrandkid_usa_oregon, usa_road)
+    # sue_bud.set_idea(idea_grandgrandkid_usa_texas, usa_road)
+    # sue_bud.set_idea(idea_grandgrandkid_usa_oregon, usa_road)
     return sue_bud

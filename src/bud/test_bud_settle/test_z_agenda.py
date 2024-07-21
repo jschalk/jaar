@@ -309,7 +309,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     day_road = zia_bud.make_road(time_road, day_text)
 
     zia_bud.add_l1_idea(ideaunit_shop(run_text, pledge=True))
-    zia_bud.add_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
+    zia_bud.set_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
     zia_bud.edit_idea_attr(
         road=run_road,
         reason_base=day_road,
@@ -350,7 +350,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     day_road = zia_bud.make_road(time_road, day_text)
 
     zia_bud.add_l1_idea(ideaunit_shop(run_text, pledge=True))
-    zia_bud.add_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
+    zia_bud.set_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
     zia_bud.edit_idea_attr(
         road=run_road,
         reason_base=day_road,
@@ -639,7 +639,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     laundry_text = "do_laundry"
     laundry_road = sue_bud.make_road(casa_road, laundry_text)
     sue_bud.add_l1_idea(ideaunit_shop(casa_text))
-    sue_bud.add_idea(ideaunit_shop(laundry_text, pledge=True), casa_road)
+    sue_bud.set_idea(ideaunit_shop(laundry_text, pledge=True), casa_road)
     time_road = sue_bud.make_l1_road("time")
     jajatime_road = sue_bud.make_road(time_road, "jajatime")
     sue_bud.edit_idea_attr(
@@ -714,9 +714,9 @@ def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
     sweep_road = zia_bud.make_road(clean_road, sweep_text)
     couch_text = "couch"
     couch_road = zia_bud.make_road(casa_road, couch_text)
-    zia_bud.add_idea(ideaunit_shop(couch_text), casa_road)
-    zia_bud.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    zia_bud.add_idea(ideaunit_shop(sweep_text, pledge=True), clean_road)
+    zia_bud.set_idea(ideaunit_shop(couch_text), casa_road)
+    zia_bud.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    zia_bud.set_idea(ideaunit_shop(sweep_text, pledge=True), clean_road)
     sweep_idea = zia_bud.get_idea_obj(sweep_road)
     yao_text = "Yao"
     zia_bud.add_acctunit(yao_text)

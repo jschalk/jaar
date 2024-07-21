@@ -144,7 +144,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
 
     email_text = "email"
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
-    x_bud.add_idea(email_idea, parent_road=casa_road)
+    x_bud.set_idea(email_idea, parent_road=casa_road)
 
     # test root status:
     x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
@@ -187,9 +187,9 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
 
     casa_road = x_bud.make_l1_road(casa_text)
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
-    x_bud.add_idea(email_idea, parent_road=casa_road)
+    x_bud.set_idea(email_idea, parent_road=casa_road)
     vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
-    x_bud.add_idea(vacuum_idea, parent_road=casa_road)
+    x_bud.set_idea(vacuum_idea, parent_road=casa_road)
 
     x_bud.add_acctunit(acct_id=sue_text)
     x_awardlink = awardlink_shop(lobby_id=sue_text)
@@ -328,7 +328,7 @@ def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadU
     yao_bud.add_l1_idea(ideaunit_shop(_label=time, _begin=0, _close=700))
     t_road = yao_bud.make_l1_road(time)
     week = "weeks"
-    yao_bud.add_idea(ideaunit_shop(_label=week, _denom=7), parent_road=t_road)
+    yao_bud.set_idea(ideaunit_shop(_label=week, _denom=7), parent_road=t_road)
 
     # THEN
     assert len(yao_bud.get_idea_tree_ordered_road_list()) == 3
@@ -417,7 +417,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddT
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     clean_idea = ideaunit_shop(clean_text, _weight=2)
-    sue_budunit.add_idea(ideaunit_shop(clean_text), casa_road)
+    sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
@@ -427,10 +427,10 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddT
     vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
 
     sue_budunit.add_l1_idea(casa_idea)
-    sue_budunit.add_idea(swim_idea, casa_road)
-    sue_budunit.add_idea(clean_idea, casa_road)
-    sue_budunit.add_idea(sweep_idea, clean_road)  # _weight=0
-    sue_budunit.add_idea(vaccum_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(swim_idea, casa_road)
+    sue_budunit.set_idea(clean_idea, casa_road)
+    sue_budunit.set_idea(sweep_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(vaccum_idea, clean_road)  # _weight=0
 
     assert sue_budunit._offtrack_kids_weight_set == set()
 

@@ -913,7 +913,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
     bend_text = "Be/nd"
     bend_road = sue_budunit.make_road(oregon_road, bend_text)
-    sue_budunit.add_idea(ideaunit_shop(bend_text), oregon_road)
+    sue_budunit.set_idea(ideaunit_shop(bend_text), oregon_road)
     sue_healerhold = healerhold_shop({sue_text})
     sue_budunit.edit_idea_attr(bend_road, problem_bool=True, healerhold=sue_healerhold)
     assert sue_budunit._econs_buildable
