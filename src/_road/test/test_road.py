@@ -209,7 +209,7 @@ def test_road_get_root_node_from_road_ReturnsRoadNode():
     assert get_root_node_from_road(roses_road) == casa_text
 
 
-def test_road_get_parent_road_ReturnsCorrectObj():
+def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
     casa_text = "casa"
@@ -220,10 +220,27 @@ def test_road_get_parent_road_ReturnsCorrectObj():
     roses_road = f"{bloomers_road}{x_s}{roses_text}"
 
     # WHEN/THENs
-    assert get_parent_road(road=root_label()) == ""
-    assert get_parent_road(road=casa_road) == root_label()
-    assert get_parent_road(road=bloomers_road) == casa_road
-    assert get_parent_road(road=roses_road) == bloomers_road
+    assert get_parent_road(root_label(), x_s) == ""
+    assert get_parent_road(casa_road, x_s) == root_label()
+    assert get_parent_road(bloomers_road, x_s) == casa_road
+    assert get_parent_road(roses_road, x_s) == bloomers_road
+
+
+def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
+    # ESTABLISH
+    x_s = "/"
+    casa_text = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_text}"
+    bloomers_text = "bloomers"
+    bloomers_road = f"{casa_road}{x_s}{bloomers_text}"
+    roses_text = "roses"
+    roses_road = f"{bloomers_road}{x_s}{roses_text}"
+
+    # WHEN/THENs
+    assert get_parent_road(root_label(), x_s) == ""
+    assert get_parent_road(casa_road, x_s) == root_label()
+    assert get_parent_road(bloomers_road, x_s) == casa_road
+    assert get_parent_road(roses_road, x_s) == bloomers_road
 
 
 def test_road_create_road_without_root_node_ReturnsCorrectObj():

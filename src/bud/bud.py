@@ -643,6 +643,17 @@ class BudUnit:
 
         return missing_bases
 
+    def add_idea(
+        self, idea_road: RoadUnit, weight: float = None, pledge: bool = None
+    ) -> IdeaUnit:
+        x_label = get_terminus_node(idea_road, self._road_delimiter)
+        x_parent_road = get_parent_road(idea_road, self._road_delimiter)
+        x_ideaunit = ideaunit_shop(x_label, _weight=weight)
+        if pledge:
+            x_ideaunit.pledge = True
+        self.set_idea(x_ideaunit, x_parent_road)
+        return x_ideaunit
+
     def set_l1_idea(
         self,
         idea_kid: IdeaUnit,
@@ -757,10 +768,7 @@ class BudUnit:
 
     def _create_ideakid_if_empty(self, road: RoadUnit):
         if self.idea_exists(road) is False:
-            self.set_idea(
-                ideaunit_shop(get_terminus_node(road, self._road_delimiter)),
-                parent_road=get_parent_road(road),
-            )
+            self.add_idea(road)
 
     def del_idea_obj(self, road: RoadUnit, del_children: bool = True):
         if road == self._idearoot.get_road():

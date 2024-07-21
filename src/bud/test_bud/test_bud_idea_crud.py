@@ -77,6 +77,56 @@ def test_BudUnit_set_l1_idea_CorrectlySetsAttr():
     assert zia_bud.idea_exists(casa_road)
 
 
+def test_BudUnit_add_idea_SetsAttr_Scenario0():
+    # ESTABLISH
+    bob_text = "Bob"
+    slash_text = "/"
+    bob_budunit = budunit_shop(bob_text, _road_delimiter=slash_text)
+    casa_road = bob_budunit.make_l1_road("casa")
+    assert not bob_budunit.idea_exists(casa_road)
+
+    # WHEN
+    bob_budunit.add_idea(casa_road)
+
+    # THEN
+    assert bob_budunit.idea_exists(casa_road)
+    casa_ideaunit = bob_budunit.get_idea_obj(casa_road)
+    assert casa_ideaunit._road_delimiter == bob_budunit._road_delimiter
+    assert not casa_ideaunit.pledge
+
+
+def test_BudUnit_add_idea_SetsAttr_Scenario1():
+    # ESTABLISH
+    bob_text = "Bob"
+    bob_budunit = budunit_shop(bob_text)
+    casa_road = bob_budunit.make_l1_road("casa")
+    casa_weight = 13
+    casa_pledge = True
+
+    # WHEN
+    bob_budunit.add_idea(casa_road, weight=casa_weight, pledge=casa_pledge)
+
+    # THEN
+    casa_ideaunit = bob_budunit.get_idea_obj(casa_road)
+    assert casa_ideaunit._weight == casa_weight
+    assert casa_ideaunit.pledge
+
+
+def test_BudUnit_add_idea_ReturnsObj():
+    # ESTABLISH
+    bob_text = "Bob"
+    bob_budunit = budunit_shop(bob_text)
+    casa_road = bob_budunit.make_l1_road("casa")
+    casa_weight = 13
+
+    # WHEN
+    casa_ideaunit = bob_budunit.add_idea(casa_road, weight=casa_weight)
+
+    # THEN
+    assert casa_ideaunit._label == "casa"
+    assert casa_ideaunit._weight == casa_weight
+
+
 def test_BudUnit_IdeaUnit_kids_CanHaveKids():
     # ESTABLISH / WHEN
     sue_bud = get_budunit_with_4_levels()
