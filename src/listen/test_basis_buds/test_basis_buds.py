@@ -29,7 +29,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     zia_acctunit = yao_voice.get_acct(zia_text)
     zia_acctunit.add_lobbyship(f"{slash_text}swimmers")
     yao_voice.set_credor_respect(zia_credor_pool)
-    yao_voice.set_debtor_resepect(zia_debtor_pool)
+    yao_voice.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
     yao_empty_job = create_empty_bud(yao_voice, x_owner_id=zia_text)
@@ -74,7 +74,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     zia_acctunit = yao_duty.get_acct(zia_text)
     zia_acctunit.add_lobbyship(f"{slash_text}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
-    yao_duty.set_debtor_resepect(zia_debtor_pool)
+    yao_duty.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
     yao_basis_job = create_listen_basis(yao_duty)

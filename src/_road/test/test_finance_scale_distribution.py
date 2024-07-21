@@ -95,6 +95,27 @@ def test_create_missing_distribution_list_ReturnsObjScenario05():
     assert missing_scale_list == [-10, -10, -10, -5]
 
 
+def test_allot_missing_scale_DistributesTheMissingScale_scenario00():
+    # ESTABLISH
+    before_ledger = {}
+    x_missing_scale = 10
+    x_grain = 5
+    full_before_allot = 0
+    full_scale = full_before_allot + x_missing_scale
+
+    # WHEN
+    gen_ledger = _allot_missing_scale(
+        ledger=before_ledger,
+        scale_number=full_scale,
+        grain_unit=x_grain,
+        missing_scale=x_missing_scale,
+    )
+
+    # THEN
+    after_ledger = {}
+    assert gen_ledger == after_ledger
+
+
 def test_allot_missing_scale_DistributesTheMissingScale_scenario01():
     # ESTABLISH
     bob_text = "Bob"

@@ -149,7 +149,7 @@ class BudUnit:
 
     def set_acct_respect(self, x_acct_pool: int):
         self.set_credor_respect(x_acct_pool)
-        self.set_debtor_resepect(x_acct_pool)
+        self.set_debtor_respect(x_acct_pool)
         self.set_fund_pool(x_acct_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
@@ -159,7 +159,7 @@ class BudUnit:
             )
         self._credor_respect = new_credor_respect
 
-    def set_debtor_resepect(self, new_debtor_respect: int):
+    def set_debtor_respect(self, new_debtor_respect: int):
         if valid_finance_ratio(new_debtor_respect, self._bit) is False:
             raise _bit_RatioException(
                 f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"

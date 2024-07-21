@@ -17,7 +17,7 @@ def create_example_real1() -> RealUnit:
     yao_voice_bud = yao_hubunit.get_voice_bud()
 
     yao_voice_bud.set_credor_respect(101)
-    yao_voice_bud.set_debtor_resepect(1000)
+    yao_voice_bud.set_debtor_respect(1000)
 
     yao_voice_bud.add_acctunit(yao_text, 34, 600)
     yao_voice_bud.settle_bud()
@@ -73,9 +73,9 @@ def create_example_real2() -> RealUnit:
     yao_voice_bud.set_credor_respect(101)
     wei_voice_bud.set_credor_respect(75)
     zia_voice_bud.set_credor_respect(52)
-    yao_voice_bud.set_debtor_resepect(1000)
-    wei_voice_bud.set_debtor_resepect(750)
-    zia_voice_bud.set_debtor_resepect(500)
+    yao_voice_bud.set_debtor_respect(1000)
+    wei_voice_bud.set_debtor_respect(750)
+    zia_voice_bud.set_debtor_respect(500)
 
     yao_voice_bud.add_acctunit(yao_text, 34, 600)
     yao_voice_bud.add_acctunit(zia_text, 57, 300)
@@ -211,9 +211,9 @@ def create_example_real4() -> RealUnit:
     yao_voice_bud.set_credor_respect(101)
     wei_voice_bud.set_credor_respect(75)
     zia_voice_bud.set_credor_respect(52)
-    yao_voice_bud.set_debtor_resepect(1000)
-    wei_voice_bud.set_debtor_resepect(750)
-    zia_voice_bud.set_debtor_resepect(500)
+    yao_voice_bud.set_debtor_respect(1000)
+    wei_voice_bud.set_debtor_respect(750)
+    zia_voice_bud.set_debtor_respect(500)
 
     yao_voice_bud.add_acctunit(yao_text, 34, 600)
     yao_voice_bud.add_acctunit(zia_text, 57, 300)

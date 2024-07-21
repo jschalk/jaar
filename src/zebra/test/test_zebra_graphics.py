@@ -66,7 +66,7 @@
 #     # ESTABLISH
 #     luca_bud = budunit_shop()
 #     luca_bud.set_credor_respect(500)
-#     luca_bud.set_debtor_resepect(400)
+#     luca_bud.set_debtor_respect(400)
 #     yao_text = "Yao"
 #     yao_credor_weight = 66
 #     yao_debtor_weight = 77
