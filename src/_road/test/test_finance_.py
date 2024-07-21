@@ -27,7 +27,7 @@ def test_BitNum_exists():
     y_BitNum = BitNum(x_float)
     # THEN
     assert y_BitNum == x_float
-    inspect_str = "Smallest Unit of credor_weight or debtor_weight ala 'the slightest bit of respect!'"
+    inspect_str = "Smallest Unit of credor_weight or debtor_weight (RespectNum) ala 'the slightest bit of respect!'"
     assert inspect_getdoc(y_BitNum) == inspect_str
 
 

@@ -37,7 +37,7 @@ def delete_dir(dir: str):
         if os_path_isdir(dir):
             shutil_rmtree(path=dir)
         elif os_path_isfile(dir):
-            os_remove(path=dir)
+            os_remove(dir)
 
 
 class InvalidFileCopyException(Exception):

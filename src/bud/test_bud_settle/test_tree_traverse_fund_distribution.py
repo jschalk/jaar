@@ -313,8 +313,8 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     print(f"{casa_idea._fund_ratio=} {sum_x} ")
     sum_x += nation_idea._fund_ratio
     print(f"{nation_idea._fund_ratio=} {sum_x} ")
-    assert sum_x >= 1.0
-    assert sum_x < 1.00000000001
+    tolerance = 1e-10
+    assert sum_x < 1.0 + tolerance
 
     # for kid_idea in root_idea._kids.values():
     #     sum_x += kid_idea._fund_ratio

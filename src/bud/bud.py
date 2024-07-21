@@ -125,7 +125,7 @@ class BudUnit:
     _rational: bool = None
     _econs_justified: bool = None
     _econs_buildable: bool = None
-    _sum_healerhold_share: bool = None
+    _sum_healerhold_share: float = None
     _lobbyboxs: dict[LobbyID, LobbyBox] = None
     _offtrack_kids_weight_set: set[RoadUnit] = None
     _offtrack_fund: float = None
@@ -406,7 +406,7 @@ class BudUnit:
         self._lobbyboxs[x_lobbybox.lobby_id] = x_lobbybox
 
     def lobbybox_exists(self, lobby_id: LobbyID) -> bool:
-        return self._lobbyboxs.get(lobby_id) != None
+        return self._lobbyboxs.get(lobby_id) is not None
 
     def get_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
         return self._lobbyboxs.get(x_lobby_id)
