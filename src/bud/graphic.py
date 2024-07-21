@@ -77,7 +77,7 @@ def _add_individual_trace(
     )
 
 
-def _add_ideaunit_traces(
+def _create_ideaunit_traces(
     trace_list, anno_list, x_bud: BudUnit, source_y: float, mode: str
 ):
     ideas = [x_bud._idearoot]
@@ -122,7 +122,7 @@ def display_ideatree(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
     source_y = 0
     trace_list = []
     anno_list = []
-    _add_ideaunit_traces(trace_list, anno_list, x_bud, source_y, mode=mode)
+    _create_ideaunit_traces(trace_list, anno_list, x_bud, source_y, mode=mode)
     _update_layout_fig(x_fig, mode, x_bud=x_bud)
     while trace_list:
         x_trace = trace_list.pop(-1)
@@ -230,7 +230,7 @@ def add_rect_text(fig, x, y, text):
     )
 
 
-def add_idea_rect(
+def create_idea_rect(
     fig: plotly_Figure,
     base_width,
     base_h,
@@ -406,7 +406,7 @@ def budunit_explanation2() -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    add_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
+    create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
     add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -432,12 +432,12 @@ def budunit_explanation3() -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    add_idea_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Sub Idea")
-    add_idea_rect(fig, base_w, base_h, 2, 0.3, 0.4, "Sub Idea")
-    add_idea_rect(fig, base_w, base_h, 1, 0, 0.3, "Sub Idea")
-    add_idea_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Idea")
-    add_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Idea")
-    add_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
+    create_idea_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Sub Idea")
+    create_idea_rect(fig, base_w, base_h, 2, 0.3, 0.4, "Sub Idea")
+    create_idea_rect(fig, base_w, base_h, 1, 0, 0.3, "Sub Idea")
+    create_idea_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Idea")
+    create_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Idea")
+    create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
     add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -463,12 +463,12 @@ def budunit_explanation4() -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    add_idea_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Pledge")
-    add_idea_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Pledge")
-    add_idea_rect(fig, base_w, base_h, 1, 0, 0.1, "Idea")
-    add_idea_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
-    add_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
-    add_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
+    create_idea_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Pledge")
+    create_idea_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Pledge")
+    create_idea_rect(fig, base_w, base_h, 1, 0, 0.1, "Idea")
+    create_idea_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
+    create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
+    create_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
     add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
