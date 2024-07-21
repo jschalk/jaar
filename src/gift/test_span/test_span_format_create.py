@@ -6,7 +6,7 @@ from src.gift.span import (
     jaar_format_0001_acct_v0_0_0,
     jaar_format_0002_lobbyship_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
-    get_span_attribute_dict,
+    get_spancolumn_dict,
     create_span,
     real_id_str,
     owner_id_str,
@@ -19,6 +19,7 @@ from src.gift.span import (
     acct_pool_str,
     debtor_weight_str,
     credor_weight_str,
+    get_spanref,
 )
 
 
@@ -40,13 +41,13 @@ def test_create_span_Arg_jaar_format_0001_acct_v0_0_0():
     sue_budunit.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
 
     # WHEN
-    x_span = jaar_format_0001_acct_v0_0_0()
-    acct_dataframe = create_span(sue_budunit, x_span)
+    x_span_name = jaar_format_0001_acct_v0_0_0()
+    acct_dataframe = create_span(sue_budunit, x_span_name)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
-    span_dict = get_span_attribute_dict(x_span)
-    assert array_headers == list(span_dict.keys())
+    acct_spanref = get_spanref(x_span_name)
+    assert array_headers == acct_spanref.get_headers_list()
     assert acct_dataframe.loc[0, real_id_str()] == music_real_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_text
@@ -97,14 +98,14 @@ def test_create_span_Arg_jaar_format_0002_lobbyship_v0_0_0():
     yao_acctunit.add_lobbyship(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
 
     # WHEN
-    x_span = jaar_format_0002_lobbyship_v0_0_0()
-    lobbyship_dataframe = create_span(sue_budunit, x_span)
+    x_span_name = jaar_format_0002_lobbyship_v0_0_0()
+    lobbyship_dataframe = create_span(sue_budunit, x_span_name)
 
     # THEN
     array_headers = list(lobbyship_dataframe.columns)
-    span_dict = get_span_attribute_dict(x_span)
+    acct_spanref = get_spanref(x_span_name)
     print(f"{len(lobbyship_dataframe)=}")
-    assert array_headers == list(span_dict.keys())
+    assert array_headers == acct_spanref.get_headers_list()
     assert lobbyship_dataframe.loc[0, real_id_str()] == music_real_id
     assert lobbyship_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert lobbyship_dataframe.loc[0, acct_id_str()] == bob_text
@@ -150,19 +151,19 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     sue_budunit.add_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
-    x_span = jaar_format_0003_ideaunit_v0_0_0()
-    ideaunit_format = create_span(sue_budunit, x_span)
+    x_span_name = jaar_format_0003_ideaunit_v0_0_0()
+    ideaunit_format = create_span(sue_budunit, x_span_name)
 
     # THEN
     array_headers = list(ideaunit_format.columns)
-    assert array_headers == list(get_span_attribute_dict(x_span).keys())
+    assert array_headers == get_spanref(x_span_name).get_headers_list()
 
     assert ideaunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert ideaunit_format.loc[0, pledge_str()] == ""
     assert ideaunit_format.loc[0, real_id_str()] == music_real_id
-    assert ideaunit_format.loc[0, parent_road_str()] == music_real_id
     assert ideaunit_format.loc[0, label_str()] == casa_text
     assert ideaunit_format.loc[0, weight_str()] == casa_weight
+    assert ideaunit_format.loc[0, parent_road_str()] == music_real_id
 
     assert ideaunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
     assert ideaunit_format.loc[1, pledge_str()] == "Yes"
