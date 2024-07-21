@@ -27,19 +27,17 @@ def test_create_cross_Arg_jaar_format_0001_acct_v0_0_0():
     sue_text = sue_str()
     bob_text = bob_str()
     yao_text = yao_str()
-    music_pool = 100
     sue_credor_weight = 11
     bob_credor_weight = 13
-    yao_credor_weight = music_pool - sue_credor_weight - bob_credor_weight
+    yao_credor_weight = 41
     sue_debtor_weight = 23
     bob_debtor_weight = 29
-    yao_debtor_weight = music_pool - sue_debtor_weight - bob_debtor_weight
+    yao_debtor_weight = 37
     music_real_id = "music56"
     sue_budunit = budunit_shop(sue_text, music_real_id)
     sue_budunit.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
     sue_budunit.add_acctunit(bob_text, bob_credor_weight, bob_debtor_weight)
     sue_budunit.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
-    sue_budunit.set_acct_respect(music_pool)
 
     # WHEN
     x_cross = jaar_format_0001_acct_v0_0_0()
@@ -51,21 +49,18 @@ def test_create_cross_Arg_jaar_format_0001_acct_v0_0_0():
     assert array_headers == list(cross_dict.keys())
     assert acct_dataframe.loc[0, real_id_str()] == music_real_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
-    assert acct_dataframe.loc[0, acct_pool_str()] == music_pool
     assert acct_dataframe.loc[0, acct_id_str()] == bob_text
     assert acct_dataframe.loc[0, credor_weight_str()] == bob_credor_weight
     assert acct_dataframe.loc[0, debtor_weight_str()] == bob_debtor_weight
 
     assert acct_dataframe.loc[1, real_id_str()] == music_real_id
     assert acct_dataframe.loc[1, owner_id_str()] == sue_budunit._owner_id
-    assert acct_dataframe.loc[1, acct_pool_str()] == music_pool
     assert acct_dataframe.loc[1, acct_id_str()] == sue_text
     assert acct_dataframe.loc[1, credor_weight_str()] == sue_credor_weight
     assert acct_dataframe.loc[1, debtor_weight_str()] == sue_debtor_weight
 
     assert acct_dataframe.loc[2, real_id_str()] == music_real_id
     assert acct_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
-    assert acct_dataframe.loc[2, acct_pool_str()] == music_pool
     assert acct_dataframe.loc[2, acct_id_str()] == yao_text
     assert acct_dataframe.loc[2, credor_weight_str()] == yao_credor_weight
     assert acct_dataframe.loc[2, debtor_weight_str()] == yao_debtor_weight

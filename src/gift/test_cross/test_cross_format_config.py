@@ -71,7 +71,6 @@ def test_get_headers_list_ReturnsObj():
     # print(f"{format_0001_headers=}")
     assert format_0001_headers == [
         "acct_id",
-        "acct_pool",
         "credor_weight",
         "debtor_weight",
         "owner_id",
@@ -129,29 +128,25 @@ def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0001_acct_v0_0_0()
     real_id_dict = cross_dict.get(real_id_str())
     owner_id_dict = cross_dict.get(owner_id_str())
     acct_id_dict = cross_dict.get(acct_id_str())
-    acct_pool_dict = cross_dict.get(acct_pool_str())
-    debtor_weight_dict = cross_dict.get(debtor_weight_str())
     credor_weight_dict = cross_dict.get(credor_weight_str())
+    debtor_weight_dict = cross_dict.get(debtor_weight_str())
     assert real_id_dict is not None
     assert owner_id_dict is not None
     assert acct_id_dict is not None
-    assert acct_pool_dict is not None
-    assert debtor_weight_dict is not None
     assert credor_weight_dict is not None
-    assert len(cross_dict) == 6
+    assert debtor_weight_dict is not None
+    assert len(cross_dict) == 5
 
     real_id_column_order = real_id_dict.get(column_order_str())
     owner_id_column_order = owner_id_dict.get(column_order_str())
     acct_id_column_order = acct_id_dict.get(column_order_str())
-    acct_pool_column_order = acct_pool_dict.get(column_order_str())
-    debtor_weight_column_order = debtor_weight_dict.get(column_order_str())
     credor_weight_column_order = credor_weight_dict.get(column_order_str())
+    debtor_weight_column_order = debtor_weight_dict.get(column_order_str())
     assert real_id_column_order == 0
     assert owner_id_column_order == 1
-    assert acct_pool_column_order == 2
-    assert acct_id_column_order == 3
-    assert debtor_weight_column_order == 5
-    assert credor_weight_column_order == 4
+    assert acct_id_column_order == 2
+    assert credor_weight_column_order == 3
+    assert debtor_weight_column_order == 4
 
 
 def test_get_cross_attribute_dict_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_0_0():
@@ -224,7 +219,6 @@ def test_get_column_ordered_cross_attributes_ReturnsCorrectObj_scenario1():
     assert sorted_cross_attributes == [
         real_id_str(),
         owner_id_str(),
-        acct_pool_str(),
         acct_id_str(),
         credor_weight_str(),
         debtor_weight_str(),

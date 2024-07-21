@@ -171,7 +171,6 @@ def create_cross(x_budunit: BudUnit, cross_name: str) -> DataFrame:
         d2_list = [
             [
                 x_atomunit.get_value(acct_id_str()),
-                x_budunit._debtor_respect,
                 x_atomunit.get_value(credor_weight_str()),
                 x_atomunit.get_value(debtor_weight_str()),
                 x_budunit._owner_id,
