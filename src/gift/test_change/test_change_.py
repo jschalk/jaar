@@ -41,17 +41,17 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     opt1_arg = "_tally"
     optional_args = {opt1_arg: attribute_value}
     required_args = {}
-    bud_weight_atomunit = atomunit_shop(
+    bud_mass_atomunit = atomunit_shop(
         category,
         atom_update(),
         required_args=required_args,
         optional_args=optional_args,
     )
     assert ex1_changeunit.atomunits == {}
-    assert bud_weight_atomunit.atom_order is None
+    assert bud_mass_atomunit.atom_order is None
 
     # WHEN
-    ex1_changeunit.set_atomunit(bud_weight_atomunit)
+    ex1_changeunit.set_atomunit(bud_mass_atomunit)
 
     # THEN
     assert len(ex1_changeunit.atomunits) == 1
@@ -59,19 +59,19 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # print(f"{x_update_dict=}")
     x_category_atomunit = x_update_dict.get(category)
     print(f"{x_category_atomunit=}")
-    assert x_category_atomunit == bud_weight_atomunit
-    assert bud_weight_atomunit.atom_order is not None
+    assert x_category_atomunit == bud_mass_atomunit
+    assert bud_mass_atomunit.atom_order is not None
 
 
 def test_ChangeUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
     x_category = "bud_acctunit"
-    bud_weight_atomunit = atomunit_shop(x_category, atom_update())
+    bud_mass_atomunit = atomunit_shop(x_category, atom_update())
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        ex1_changeunit.set_atomunit(bud_weight_atomunit)
+        ex1_changeunit.set_atomunit(bud_mass_atomunit)
     assert (
         str(excinfo.value)
         == f"""'{x_category}' UPDATE AtomUnit is invalid
@@ -222,16 +222,16 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 #     # WHEN
 #     opt2_value = 55
 #     category = "budunit"
-#     opt2_arg = "_weight"
-#     weight_atomunit = atomunit_shop(category, atom_update())
-#     weight_atomunit.set_optional_arg(opt2_arg, opt2_value)
-#     ex1_changeunit.set_atomunit(weight_atomunit)
+#     opt2_arg = "_mass"
+#     mass_atomunit = atomunit_shop(category, atom_update())
+#     mass_atomunit.set_optional_arg(opt2_arg, opt2_value)
+#     ex1_changeunit.set_atomunit(mass_atomunit)
 #     # THEN
 #     assert len(ex1_changeunit.atomunits.get(atom_update()).keys()) == 1
 #     sue_budunit_dict = ex1_changeunit.atomunits.get(atom_update())
-#     sue_weight_atomunit = sue_budunit_dict.get(category)
-#     print(f"{sue_weight_atomunit=}")
-#     assert weight_atomunit == sue_weight_atomunit
+#     sue_mass_atomunit = sue_budunit_dict.get(category)
+#     print(f"{sue_mass_atomunit=}")
+#     assert mass_atomunit == sue_mass_atomunit
 
 #     # WHEN
 #     new2_value = 66

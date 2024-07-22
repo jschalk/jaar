@@ -315,7 +315,7 @@
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
-            "_weight": {
+            "_mass": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

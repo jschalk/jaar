@@ -12,7 +12,7 @@ from src.gift.span import (
     lobby_id_str,
     parent_road_str,
     label_str,
-    weight_str,
+    mass_str,
     pledge_str,
     debtit_score_str,
     credit_score_str,
@@ -141,8 +141,8 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     sue_budunit = budunit_shop(sue_text, music_real_id)
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_weight = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _weight=casa_weight))
+    casa_mass = 31
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
@@ -159,7 +159,7 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     assert ideaunit_format.loc[0, pledge_str()] == ""
     assert ideaunit_format.loc[0, real_id_str()] == music_real_id
     assert ideaunit_format.loc[0, label_str()] == casa_text
-    assert ideaunit_format.loc[0, weight_str()] == casa_weight
+    assert ideaunit_format.loc[0, mass_str()] == casa_mass
     assert ideaunit_format.loc[0, parent_road_str()] == music_real_id
 
     assert ideaunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
@@ -167,6 +167,6 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     assert ideaunit_format.loc[1, real_id_str()] == music_real_id
     assert ideaunit_format.loc[1, parent_road_str()] == casa_road
     assert ideaunit_format.loc[1, label_str()] == clean_text
-    assert ideaunit_format.loc[1, weight_str()] == 1
+    assert ideaunit_format.loc[1, mass_str()] == 1
 
     assert len(ideaunit_format) == 2

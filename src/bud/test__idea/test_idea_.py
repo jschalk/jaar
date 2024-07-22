@@ -21,7 +21,7 @@ def test_IdeaUnit_exists():
     x_ideaunit = IdeaUnit()
     assert x_ideaunit
     assert x_ideaunit._kids is None
-    assert x_ideaunit._weight is None
+    assert x_ideaunit._mass is None
     assert x_ideaunit._label is None
     assert x_ideaunit._uid is None
     assert x_ideaunit._reasonunits is None
@@ -69,7 +69,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     # THEN
     assert x_ideaunit
     assert x_ideaunit._kids == {}
-    assert x_ideaunit._weight == 1
+    assert x_ideaunit._mass == 1
     assert x_ideaunit._label is None
     assert x_ideaunit._bud_real_id == root_label()
     assert x_ideaunit._uid is None
@@ -109,23 +109,23 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._healerhold_ratio == 0
 
 
-def test_ideaunit_shop_Allows_weightToBeZero():
+def test_ideaunit_shop_Allows_massToBeZero():
     # ESTABLISH
     zero_int = 0
     # WHEN
-    x_ideaunit = ideaunit_shop("run", _weight=zero_int)
+    x_ideaunit = ideaunit_shop("run", _mass=zero_int)
     # THEN
-    assert x_ideaunit._weight == zero_int
+    assert x_ideaunit._mass == zero_int
 
 
-def test_ideaunit_shop_Allows_doesNotAllow_weightToBeNegative():
+def test_ideaunit_shop_Allows_doesNotAllow_massToBeNegative():
     # ESTABLISH
     negative_int = -4
     # WHEN
-    x_ideaunit = ideaunit_shop("run", _weight=negative_int)
+    x_ideaunit = ideaunit_shop("run", _mass=negative_int)
     # THEN
     zero_int = 0
-    assert x_ideaunit._weight == zero_int
+    assert x_ideaunit._mass == zero_int
 
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
@@ -541,7 +541,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _parent_road=casa_road,
         _kids=None,
         _awardlinks=biker_and_flyer_awardlinks,
-        _weight=30,
+        _mass=30,
         _label=casa_text,
         _level=1,
         _reasonunits=x1_reasonunits,
@@ -585,7 +585,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_doerunit"] == sue_doerunit.get_dict()
     assert casa_dict["_healerhold"] == yao_healerhold.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
-    assert casa_dict["_weight"] == casa_idea._weight
+    assert casa_dict["_mass"] == casa_idea._mass
     assert casa_dict["_label"] == casa_idea._label
     assert casa_dict["_uid"] == casa_idea._uid
     assert casa_dict["_begin"] == casa_idea._begin
@@ -611,7 +611,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {"_weight": 1}
+    assert casa_dict == {"_mass": 1}
 
 
 def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
@@ -1037,7 +1037,7 @@ def test_IdeaUnit_del_kid_CorrectModifiesAttr():
     assert len(nation_idea._kids) == 1
 
 
-def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario0():
+def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -1050,31 +1050,31 @@ def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario0():
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN
-    assert nation_idea.get_kids_weight_sum() == 2
+    assert nation_idea.get_kids_mass_sum() == 2
 
 
-def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario1():
+def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
     usa_text = "USA"
-    usa_idea = ideaunit_shop(usa_text, _weight=0, _parent_road=nation_road)
+    usa_idea = ideaunit_shop(usa_text, _mass=0, _parent_road=nation_road)
     nation_idea.add_kid(usa_idea)
     france_text = "France"
-    france_idea = ideaunit_shop(france_text, _weight=0, _parent_road=nation_road)
+    france_idea = ideaunit_shop(france_text, _mass=0, _parent_road=nation_road)
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN
-    assert nation_idea.get_kids_weight_sum() == 0
+    assert nation_idea.get_kids_mass_sum() == 0
 
     # WHEN
     france_text = "France"
-    france_idea = ideaunit_shop(france_text, _weight=3, _parent_road=nation_road)
+    france_idea = ideaunit_shop(france_text, _mass=3, _parent_road=nation_road)
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN
-    assert nation_idea.get_kids_weight_sum() == 3
+    assert nation_idea.get_kids_mass_sum() == 3
 
 
 def test_IdeaUnit_get_fund_share_ReturnsObj():

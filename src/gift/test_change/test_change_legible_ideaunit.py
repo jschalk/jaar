@@ -19,7 +19,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
     _reest_text = "_reest"
-    _weight_text = "_weight"
+    _mass_text = "_mass"
     pledge_text = "pledge"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
@@ -32,7 +32,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     _problem_bool_value = False
     _range_source_road_value = sue_bud.make_l1_road("greenways")
     _reest_value = 37
-    _weight_value = 43
+    _mass_value = 43
     pledge_value = False
     clean_atomunit = atomunit_shop(category, atom_insert())
     clean_atomunit.set_arg(label_text, label_value)
@@ -46,7 +46,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     clean_atomunit.set_arg(_problem_bool_text, _problem_bool_value)
     clean_atomunit.set_arg(_range_source_road_text, _range_source_road_value)
     clean_atomunit.set_arg(_reest_text, _reest_value)
-    clean_atomunit.set_arg(_weight_text, _weight_value)
+    clean_atomunit.set_arg(_mass_text, _mass_value)
     clean_atomunit.set_arg(pledge_text, pledge_value)
 
     x_changeunit = changeunit_shop()
@@ -56,7 +56,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Created Idea '{label_value}' with parent_road {parent_road_value}. _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numeric_road={_numeric_road_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._range_source_road={_range_source_road_value}._reest={_reest_value}._weight={_weight_value}.pledge={pledge_value}."
+    x_str = f"Created Idea '{label_value}' with parent_road {parent_road_value}. _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numeric_road={_numeric_road_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._range_source_road={_range_source_road_value}._reest={_reest_value}._mass={_mass_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -76,7 +76,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
     _reest_text = "_reest"
-    _weight_text = "_weight"
+    _mass_text = "_mass"
     pledge_text = "pledge"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
@@ -89,7 +89,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     _problem_bool_value = False
     _range_source_road_value = sue_bud.make_l1_road("greenways")
     _reest_value = 37
-    _weight_value = 43
+    _mass_value = 43
     pledge_value = False
     clean_atomunit = atomunit_shop(category, atom_update())
     clean_atomunit.set_arg(label_text, label_value)
@@ -103,7 +103,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     clean_atomunit.set_arg(_problem_bool_text, _problem_bool_value)
     clean_atomunit.set_arg(_range_source_road_text, _range_source_road_value)
     clean_atomunit.set_arg(_reest_text, _reest_value)
-    clean_atomunit.set_arg(_weight_text, _weight_value)
+    clean_atomunit.set_arg(_mass_text, _mass_value)
     clean_atomunit.set_arg(pledge_text, pledge_value)
 
     x_changeunit = changeunit_shop()
@@ -113,7 +113,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numeric_road={_numeric_road_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._range_source_road={_range_source_road_value}._reest={_reest_value}._weight={_weight_value}.pledge={pledge_value}."
+    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numeric_road={_numeric_road_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._range_source_road={_range_source_road_value}._reest={_reest_value}._mass={_mass_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

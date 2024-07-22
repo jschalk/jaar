@@ -58,25 +58,25 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
 
     auto_text = "auto"
     auto_road = yao_budunit.make_l1_road(auto_text)
-    auto_idea = ideaunit_shop(auto_text, _weight=10)
+    auto_idea = ideaunit_shop(auto_text, _mass=10)
     yao_budunit.set_l1_idea(auto_idea)
 
     barn_text = "barn"
     barn_road = yao_budunit.make_l1_road(barn_text)
-    barn_idea = ideaunit_shop(barn_text, _weight=60)
+    barn_idea = ideaunit_shop(barn_text, _mass=60)
     yao_budunit.set_l1_idea(barn_idea)
     lamb_text = "lambs"
     lamb_road = yao_budunit.make_road(barn_road, lamb_text)
-    lamb_idea = ideaunit_shop(lamb_text, _weight=1)
+    lamb_idea = ideaunit_shop(lamb_text, _mass=1)
     yao_budunit.set_idea(lamb_idea, parent_road=barn_road)
     duck_text = "ducks"
     duck_road = yao_budunit.make_road(barn_road, duck_text)
-    duck_idea = ideaunit_shop(duck_text, _weight=2)
+    duck_idea = ideaunit_shop(duck_text, _mass=2)
     yao_budunit.set_idea(duck_idea, parent_road=barn_road)
 
     coal_text = "coal"
     coal_road = yao_budunit.make_l1_road(coal_text)
-    coal_idea = ideaunit_shop(coal_text, _weight=30)
+    coal_idea = ideaunit_shop(coal_text, _mass=30)
     yao_budunit.set_l1_idea(coal_idea)
 
     assert yao_budunit._idearoot._fund_onset is None
@@ -115,7 +115,7 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0():
+def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario0():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
@@ -128,14 +128,14 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0(
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
-    sue_bud.set_idea(ideaunit_shop(status_text, _weight=0), casa_road)
+    sue_bud.set_idea(ideaunit_shop(status_text, _mass=0), casa_road)
 
     non_text = "not clean"
     yes_text = "yes clean"
     non_road = sue_bud.make_road(status_road, non_text)
     yes_road = sue_bud.make_road(status_road, yes_text)
     sue_bud.set_idea(ideaunit_shop(non_text), status_road)
-    sue_bud.set_idea(ideaunit_shop(yes_text, _weight=2), status_road)
+    sue_bud.set_idea(ideaunit_shop(yes_text, _mass=2), status_road)
 
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio is None
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio is None
@@ -155,7 +155,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0(
     assert sue_bud.get_idea_obj(yes_road)._fund_ratio == 0.0
 
 
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1():
+def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario1():
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
@@ -170,7 +170,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     sue_bud.set_idea(ideaunit_shop(status_text), casa_road)
 
     status_idea = sue_bud.get_idea_obj(status_road)
-    print(f"{status_idea._weight=}")
+    print(f"{status_idea._mass=}")
     print("This should raise error: 'Ideaunit._'")
 
     clean_text = "clean"
@@ -179,9 +179,9 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     mod_text = "moderately"
     dirty_text = "dirty"
 
-    sue_bud.set_idea(ideaunit_shop(clean_text, _weight=0), status_road)
+    sue_bud.set_idea(ideaunit_shop(clean_text, _mass=0), status_road)
     sue_bud.set_idea(ideaunit_shop(very_text), clean_road)
-    sue_bud.set_idea(ideaunit_shop(mod_text, _weight=2), clean_road)
+    sue_bud.set_idea(ideaunit_shop(mod_text, _mass=2), clean_road)
     sue_bud.set_idea(ideaunit_shop(dirty_text), clean_road)
 
     very_road = sue_bud.make_road(clean_road, very_text)
@@ -209,35 +209,35 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     assert sue_bud.get_idea_obj(dirty_road)._fund_ratio == 0
 
 
-def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoWeightDistributeFundsToAcctUnits_scenario0():
+def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFundsToAcctUnits_scenario0():
     sue_budunit = budunit_shop("Sue")
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _weight=1)
+    casa_idea = ideaunit_shop(casa_text, _mass=1)
 
     swim_text = "swimming"
     swim_road = sue_budunit.make_road(casa_road, swim_text)
-    swim_idea = ideaunit_shop(swim_text, _weight=8)
+    swim_idea = ideaunit_shop(swim_text, _mass=8)
 
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    clean_idea = ideaunit_shop(clean_text, _weight=2)
+    clean_idea = ideaunit_shop(clean_text, _mass=2)
     sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _weight=0)
+    sweep_idea = ideaunit_shop(sweep_text, _mass=0)
     vaccum_text = "vaccum"
     vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
-    vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
+    vaccum_idea = ideaunit_shop(vaccum_text, _mass=0)
 
     sue_budunit.set_l1_idea(casa_idea)
     sue_budunit.set_idea(swim_idea, casa_road)
     sue_budunit.set_idea(clean_idea, casa_road)
-    sue_budunit.set_idea(sweep_idea, clean_road)  # _weight=0
-    sue_budunit.set_idea(vaccum_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(sweep_idea, clean_road)  # _mass=0
+    sue_budunit.set_idea(vaccum_idea, clean_road)  # _mass=0
 
     assert sue_budunit.get_idea_obj(casa_road)._fund_ratio is None
     assert sue_budunit.get_idea_obj(swim_road)._fund_ratio is None
@@ -538,7 +538,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fun
     swim_idea.set_awardlink(xio_awardlink)
 
     # no awardlinks attached to this one
-    x_bud.set_l1_idea(ideaunit_shop("hunt", _weight=3))
+    x_bud.set_l1_idea(ideaunit_shop("hunt", _mass=3))
 
     # WHEN
     x_bud.settle_bud()
@@ -853,7 +853,7 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBud_fund():
 
     # no awardlinks attached to this one
     hunt_text = "hunt"
-    yao_bud.set_l1_idea(ideaunit_shop(hunt_text, _weight=3))
+    yao_bud.set_l1_idea(ideaunit_shop(hunt_text, _mass=3))
 
     # WHEN
     yao_bud.settle_bud()
@@ -1067,7 +1067,7 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     assert x_awardagendametrics.agenda_yes_count == 49
     assert x_awardagendametrics.agenda_no_bud_i_sum == 0.003747268 * default_fund_pool()
     assert (
-        x_awardagendametrics.agenda_yes_bud_i_sum == 0.002796505 * default_fund_pool()
+        x_awardagendametrics.agenda_yes_bud_i_sum == 0.002796504 * default_fund_pool()
     )
     assert are_equal(
         x_awardagendametrics.agenda_no_bud_i_sum
@@ -1075,13 +1075,13 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
         x_awardagendametrics.sum_bud_agenda_share,
     )
     assert (
-        x_awardagendametrics.sum_bud_agenda_share == 0.006543773 * default_fund_pool()
+        x_awardagendametrics.sum_bud_agenda_share == 0.006543772 * default_fund_pool()
     )
 
     x_lobbyagendametrics = LobbyAgendaMetrics()
     x_lobbyagendametrics.set_sums(x_bud=x_bud)
     assert x_lobbyagendametrics.lobbyship_count == 81
-    x_sum = 2796504.9999999995
+    x_sum = 2796503.9999999995
     print(f"{x_lobbyagendametrics.sum_lobbybox_cred=}")
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_cred, x_sum)
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_debt, x_sum)

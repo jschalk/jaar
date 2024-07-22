@@ -48,11 +48,11 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_id: OwnerID):
     return listener_hubunit.get_perspective_bud(speaker)
 
 
-def _get_bit_scaled_weight(
+def _get_bit_scaled_mass(
     x_fund_share: float, debtor_amount: float, bit: float
 ) -> float:
-    x_ingest_weight = x_fund_share * debtor_amount
-    return int(x_ingest_weight / bit) * bit
+    x_ingest_mass = x_fund_share * debtor_amount
+    return int(x_ingest_mass / bit) * bit
 
 
 def _allot_ingest(x_list: list[IdeaUnit], nonallocated_ingest: float, bit: float):
@@ -61,7 +61,7 @@ def _allot_ingest(x_list: list[IdeaUnit], nonallocated_ingest: float, bit: float
         x_count = 0
         while nonallocated_ingest > 0:
             x_ideaunit = x_list[x_count]
-            x_ideaunit._weight += bit
+            x_ideaunit._mass += bit
             nonallocated_ingest -= bit
             x_count += 1
             if x_count == len(x_list):
@@ -71,7 +71,7 @@ def _allot_ingest(x_list: list[IdeaUnit], nonallocated_ingest: float, bit: float
 def create_ingest_idea(
     x_ideaunit: IdeaUnit, debtor_amount: float, bit: float
 ) -> IdeaUnit:
-    x_ideaunit._weight = _get_bit_scaled_weight(
+    x_ideaunit._mass = _get_bit_scaled_mass(
         x_fund_share=x_ideaunit._fund_ratio,
         debtor_amount=debtor_amount,
         bit=bit,
@@ -85,59 +85,59 @@ def generate_ingest_list(
     x_list = [
         create_ingest_idea(x_ideaunit, debtor_amount, bit) for x_ideaunit in item_list
     ]
-    sum_scaled_ingest = sum(x_ideaunit._weight for x_ideaunit in item_list)
+    sum_scaled_ingest = sum(x_ideaunit._mass for x_ideaunit in item_list)
     nonallocated_ingest = debtor_amount - sum_scaled_ingest
     _allot_ingest(x_list, nonallocated_ingest, bit)
     return x_list
 
 
 def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):
-    weight_data = _create_weight_data(listener, ingest_ideaunit.get_road())
+    mass_data = _create_mass_data(listener, ingest_ideaunit.get_road())
 
     if listener.idea_exists(ingest_ideaunit.get_road()) is False:
         x_parent_road = ingest_ideaunit._parent_road
         listener.set_idea(ingest_ideaunit, x_parent_road, create_missing_ideas=True)
 
-    _add_and_replace_ideaunit_weights(
+    _add_and_replace_ideaunit_masss(
         listener=listener,
-        replace_weight_list=weight_data.replace_weight_list,
-        add_to_weight_list=weight_data.add_to_weight_list,
-        x_weight=ingest_ideaunit._weight,
+        replace_mass_list=mass_data.replace_mass_list,
+        add_to_mass_list=mass_data.add_to_mass_list,
+        x_mass=ingest_ideaunit._mass,
     )
 
 
 @dataclass
-class WeightReplaceOrAddData:
-    add_to_weight_list: list = None
-    replace_weight_list: list = None
+class MassReplaceOrAddData:
+    add_to_mass_list: list = None
+    replace_mass_list: list = None
 
 
-def _create_weight_data(listener: BudUnit, x_road: RoadUnit) -> list:
-    weight_data = WeightReplaceOrAddData()
-    weight_data.add_to_weight_list = []
-    weight_data.replace_weight_list = []
+def _create_mass_data(listener: BudUnit, x_road: RoadUnit) -> list:
+    mass_data = MassReplaceOrAddData()
+    mass_data.add_to_mass_list = []
+    mass_data.replace_mass_list = []
     ancestor_roads = get_ancestor_roads(x_road)
     root_road = get_root_node_from_road(x_road)
     for ancestor_road in ancestor_roads:
         if ancestor_road != root_road:
             if listener.idea_exists(ancestor_road):
-                weight_data.add_to_weight_list.append(ancestor_road)
+                mass_data.add_to_mass_list.append(ancestor_road)
             else:
-                weight_data.replace_weight_list.append(ancestor_road)
-    return weight_data
+                mass_data.replace_mass_list.append(ancestor_road)
+    return mass_data
 
 
-def _add_and_replace_ideaunit_weights(
+def _add_and_replace_ideaunit_masss(
     listener: BudUnit,
-    replace_weight_list: list[RoadUnit],
-    add_to_weight_list: list[RoadUnit],
-    x_weight: float,
+    replace_mass_list: list[RoadUnit],
+    add_to_mass_list: list[RoadUnit],
+    x_mass: float,
 ):
-    for idea_road in replace_weight_list:
-        listener.edit_idea_attr(idea_road, weight=x_weight)
-    for idea_road in add_to_weight_list:
+    for idea_road in replace_mass_list:
+        listener.edit_idea_attr(idea_road, mass=x_mass)
+    for idea_road in add_to_mass_list:
         x_ideaunit = listener.get_idea_obj(idea_road)
-        x_ideaunit._weight += x_weight
+        x_ideaunit._mass += x_mass
 
 
 def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:

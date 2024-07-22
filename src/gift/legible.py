@@ -325,7 +325,7 @@ def add_bud_ideaunit_insert_to_legible_list(
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
     _reest_text = "_reest"
-    _weight_text = "_weight"
+    _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_insert_dict.values():
         for ideaunit_atom in parent_road_dict.values():
@@ -340,7 +340,7 @@ def add_bud_ideaunit_insert_to_legible_list(
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
             _reest_value = ideaunit_atom.get_value(_reest_text)
-            _weight_value = ideaunit_atom.get_value(_weight_text)
+            _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = (
                 f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
@@ -363,8 +363,8 @@ def add_bud_ideaunit_insert_to_legible_list(
                 x_str += f"_range_source_road={_range_source_road_value}."
             if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value is not None:
-                x_str += f"_weight={_weight_value}."
+            if _mass_value is not None:
+                x_str += f"_mass={_mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
@@ -385,7 +385,7 @@ def add_bud_ideaunit_update_to_legible_list(
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
     _reest_text = "_reest"
-    _weight_text = "_weight"
+    _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_update_dict.values():
         for ideaunit_atom in parent_road_dict.values():
@@ -400,7 +400,7 @@ def add_bud_ideaunit_update_to_legible_list(
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
             _reest_value = ideaunit_atom.get_value(_reest_text)
-            _weight_value = ideaunit_atom.get_value(_weight_text)
+            _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
             if _addin_value is not None:
@@ -421,8 +421,8 @@ def add_bud_ideaunit_update_to_legible_list(
                 x_str += f"_range_source_road={_range_source_road_value}."
             if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value is not None:
-                x_str += f"_weight={_weight_value}."
+            if _mass_value is not None:
+                x_str += f"_mass={_mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 

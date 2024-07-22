@@ -13,7 +13,7 @@ def test_create_legible_list_ReturnsObjEstablishWithEmptyChange():
     assert create_legible_list(x_changeunit, sue_bud) == []
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_weight():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
     # ESTABLISH
     category = "budunit"
     tally_text = "_tally"

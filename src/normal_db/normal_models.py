@@ -60,7 +60,7 @@ class IdeaTable(Base):
     _problem_bool = Column(Integer)
     _range_source_road = Column(String)
     _reest = Column(Integer)
-    _weight = Column(Integer)
+    _mass = Column(Integer)
     pledge = Column(Integer)
 
 

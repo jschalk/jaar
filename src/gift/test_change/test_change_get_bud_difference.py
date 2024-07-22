@@ -393,7 +393,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     music_text = "music"
     music_begin = 34
     music_close = 78
-    music_weight = 55
+    music_mass = 55
     music_pledge = True
     music_road = after_sue_bud.make_l1_road(music_text)
     after_sue_bud.set_l1_idea(
@@ -401,7 +401,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
             music_text,
             _begin=music_begin,
             _close=music_close,
-            _weight=music_weight,
+            _mass=music_mass,
             pledge=music_pledge,
         )
     )
@@ -429,7 +429,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     assert ball_atomunit.get_value("parent_road") == after_sue_bud._real_id
     assert ball_atomunit.get_value("_begin") == music_begin
     assert ball_atomunit.get_value("_close") == music_close
-    assert ball_atomunit.get_value("_weight") == music_weight
+    assert ball_atomunit.get_value("_mass") == music_mass
     assert ball_atomunit.get_value("pledge") == music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 2
@@ -444,7 +444,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     music_text = "music"
     before_music_begin = 34
     before_music_close = 78
-    before_music_weight = 55
+    before_music_mass = 55
     before_music_pledge = True
     music_road = before_sue_bud.make_l1_road(music_text)
     before_sue_bud.set_l1_idea(
@@ -452,7 +452,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
             music_text,
             _begin=before_music_begin,
             _close=before_music_close,
-            _weight=before_music_weight,
+            _mass=before_music_mass,
             pledge=before_music_pledge,
         )
     )
@@ -460,13 +460,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_music_begin = 99
     after_music_close = 111
-    after_music_weight = 22
+    after_music_mass = 22
     after_music_pledge = False
     after_sue_bud.edit_idea_attr(
         music_road,
         begin=after_music_begin,
         close=after_music_close,
-        weight=after_music_weight,
+        mass=after_music_mass,
         pledge=after_music_pledge,
     )
 
@@ -488,7 +488,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     assert ball_atomunit.get_value("label") == music_text
     assert ball_atomunit.get_value("_begin") == after_music_begin
     assert ball_atomunit.get_value("_close") == after_music_close
-    assert ball_atomunit.get_value("_weight") == after_music_weight
+    assert ball_atomunit.get_value("_mass") == after_music_mass
     assert ball_atomunit.get_value("pledge") == after_music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 1

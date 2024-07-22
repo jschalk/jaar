@@ -77,7 +77,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     _numeric_road = "_numeric_road"
     assert x_idearoot._label == x_bud._real_id
     assert idearoot_dict["_label"] == x_idearoot._label
-    assert idearoot_dict["_weight"] == x_idearoot._weight
+    assert idearoot_dict["_mass"] == x_idearoot._mass
     assert len(idearoot_dict[_kids]) == len(x_idearoot._kids)
 
     # check an ideakid._range_source_road attribute
@@ -406,7 +406,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     sunday_text = "Sunday"
     sunday_road = json_bud.make_road(weekday_road, sunday_text)
     sunday_idea = json_bud.get_idea_obj(sunday_road)
-    assert sunday_idea._weight == 20
+    assert sunday_idea._mass == 20
 
     json_shave_idea = json_bud.get_idea_obj(shave_road)
     zia_shave_idea = zia_bud.get_idea_obj(shave_road)
@@ -477,13 +477,13 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
     assert after_yao_acctunit._road_delimiter == slash_delimiter
 
 
-def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_weight():
+def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_mass():
     # ESTABLISH
     x1_bud = budunit_v001()
     x1_bud._tally = 15
     assert x1_bud._tally == 15
-    assert x1_bud._idearoot._weight != x1_bud._tally
-    assert x1_bud._idearoot._weight == 1
+    assert x1_bud._idearoot._mass != x1_bud._tally
+    assert x1_bud._idearoot._mass == 1
 
     # WHEN
     x2_bud = budunit_get_from_json(x1_bud.get_json())
@@ -491,8 +491,8 @@ def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_weight():
     # THEN
     assert x1_bud._tally == 15
     assert x1_bud._tally == x2_bud._tally
-    assert x1_bud._idearoot._weight == 1
-    assert x1_bud._idearoot._weight == x2_bud._idearoot._weight
+    assert x1_bud._idearoot._mass == 1
+    assert x1_bud._idearoot._mass == x2_bud._idearoot._mass
     assert x1_bud._idearoot._kids == x2_bud._idearoot._kids
 
 

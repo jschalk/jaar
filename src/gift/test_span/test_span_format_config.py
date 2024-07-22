@@ -7,7 +7,7 @@ from src.gift.span import (
     lobby_id_str,
     parent_road_str,
     label_str,
-    weight_str,
+    mass_str,
     pledge_str,
     acct_pool_str,
     debtit_score_str,
@@ -188,7 +188,7 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     owner_id_spancolumn = format_0003_spanref.get_spancolumn(owner_id_str())
     parent_road_spancolumn = format_0003_spanref.get_spancolumn(parent_road_str())
     label_spancolumn = format_0003_spanref.get_spancolumn(label_str())
-    weight_spancolumn = format_0003_spanref.get_spancolumn(weight_str())
+    mass_spancolumn = format_0003_spanref.get_spancolumn(mass_str())
     pledge_spancolumn = format_0003_spanref.get_spancolumn(pledge_str())
     assert len(format_0003_spanref._spancolumns) == 6
 
@@ -196,5 +196,5 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     assert owner_id_spancolumn.column_order == 1
     assert parent_road_spancolumn.column_order == 3
     assert label_spancolumn.column_order == 5
-    assert weight_spancolumn.column_order == 4
+    assert mass_spancolumn.column_order == 4
     assert pledge_spancolumn.column_order == 2

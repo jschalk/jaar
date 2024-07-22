@@ -354,7 +354,7 @@ class ChangeUnit:
                 "_range_source_road", insert_ideaunit._range_source_road
             )
             x_atomunit.set_optional_arg("_reest", insert_ideaunit._reest)
-            x_atomunit.set_optional_arg("_weight", insert_ideaunit._weight)
+            x_atomunit.set_optional_arg("_mass", insert_ideaunit._mass)
             x_atomunit.set_optional_arg("pledge", insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
 
@@ -408,8 +408,8 @@ class ChangeUnit:
                     )
                 if before_ideaunit._reest != after_ideaunit._reest:
                     x_atomunit.set_optional_arg("_reest", after_ideaunit._reest)
-                if before_ideaunit._weight != after_ideaunit._weight:
-                    x_atomunit.set_optional_arg("_weight", after_ideaunit._weight)
+                if before_ideaunit._mass != after_ideaunit._mass:
+                    x_atomunit.set_optional_arg("_mass", after_ideaunit._mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:
                     x_atomunit.set_optional_arg("pledge", after_ideaunit.pledge)
                 self.set_atomunit(x_atomunit)
