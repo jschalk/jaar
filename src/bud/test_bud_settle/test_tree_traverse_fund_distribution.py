@@ -584,7 +584,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fun
     )
 
 
-def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudImportance():
+def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
     # ESTABLISH
     sue_text = "Sue"
     sue_bud = budunit_shop(sue_text)
@@ -739,7 +739,7 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
+def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBud_fund():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     swim_text = "swim"
@@ -831,7 +831,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBudImportance():
+def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBud_fund():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     swim_text = "swim"

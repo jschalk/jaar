@@ -557,8 +557,8 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     )
     factunit_x = factunit_shop(base=week_road, pick=week_road, open=5, nigh=59)
     casa_idea.set_factunit(factunit=factunit_x)
-    casa_idea._originunit.set_originhold(acct_id="Ray", weight=None)
-    casa_idea._originunit.set_originhold(acct_id="Lei", weight=4)
+    casa_idea._originunit.set_originhold(acct_id="Ray", importance=None)
+    casa_idea._originunit.set_originhold(acct_id="Lei", importance=4)
     x_begin = 11
     x_close = 12
     x_addin = 13

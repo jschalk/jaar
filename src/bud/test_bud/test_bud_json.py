@@ -24,7 +24,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     day_hour_text = "day_hour"
     day_hour_road = x_bud.make_l1_road(day_hour_text)
     day_hour_idea = x_bud.get_idea_obj(day_hour_road)
-    day_hour_idea._originunit.set_originhold(acct_id="Bob", weight=2)
+    day_hour_idea._originunit.set_originhold(acct_id="Bob", importance=2)
     x_bud.set_fact(
         base=day_hour_road,
         pick=day_hour_road,
@@ -108,7 +108,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     print(f"{x_bud_originhold=}")
     assert x_bud_originhold
     assert x_bud_originhold["acct_id"] == yao_text
-    assert x_bud_originhold["weight"] == 1
+    assert x_bud_originhold["importance"] == 1
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
@@ -325,7 +325,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
     shave_idea_y1 = zia_bud.get_idea_obj(shave_road)
-    shave_idea_y1._originunit.set_originhold(acct_id="Sue", weight=4.3)
+    shave_idea_y1._originunit.set_originhold(acct_id="Sue", importance=4.3)
     shave_idea_y1._problem_bool = True
     # print(f"{shave_road=}")
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")

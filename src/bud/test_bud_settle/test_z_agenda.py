@@ -60,7 +60,7 @@ def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
     assert x_bud.make_l1_road("cat have dinner") in agenda_dict.keys()
 
 
-def test_BudUnit_get_agenda_dict_WithLargeBudImportance():
+def test_BudUnit_get_agenda_dict_WithLargeBud_fund():
     # ESTABLISH
     x_bud = get_budunit_with_4_levels_and_2reasons_2facts()
 
