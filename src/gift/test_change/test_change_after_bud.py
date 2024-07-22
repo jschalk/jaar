@@ -471,17 +471,17 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     before_sue_budunit.set_idea(ideaunit_shop(ball_text), sports_road)
     before_sue_budunit.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
     run_awardlink = before_sue_budunit.get_idea_obj(ball_road)._awardlinks.get(run_text)
-    assert run_awardlink.give_weight == 1
-    assert run_awardlink.take_weight == 1
+    assert run_awardlink.give_force == 1
+    assert run_awardlink.take_force == 1
 
     # WHEN
-    x_give_weight = 55
-    x_take_weight = 66
+    x_give_force = 55
+    x_take_force = 66
     update_disc_atomunit = atomunit_shop("bud_idea_awardlink", atom_update())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("lobby_id", run_text)
-    update_disc_atomunit.set_optional_arg("give_weight", x_give_weight)
-    update_disc_atomunit.set_optional_arg("take_weight", x_take_weight)
+    update_disc_atomunit.set_optional_arg("give_force", x_give_force)
+    update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
@@ -489,9 +489,9 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
 
     # THEN
     run_awardlink = after_sue_au.get_idea_obj(ball_road)._awardlinks.get(run_text)
-    print(f"{run_awardlink.give_weight=}")
-    assert run_awardlink.give_weight == x_give_weight
-    assert run_awardlink.take_weight == x_take_weight
+    print(f"{run_awardlink.give_force=}")
+    assert run_awardlink.give_force == x_give_force
+    assert run_awardlink.take_force == x_take_force
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardlink():
@@ -514,13 +514,13 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     assert before_ball_idea._awardlinks.get(run_text) is None
 
     # WHEN
-    x_give_weight = 55
-    x_take_weight = 66
+    x_give_force = 55
+    x_take_force = 66
     update_disc_atomunit = atomunit_shop("bud_idea_awardlink", atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("lobby_id", run_text)
-    update_disc_atomunit.set_optional_arg("give_weight", x_give_weight)
-    update_disc_atomunit.set_optional_arg("take_weight", x_take_weight)
+    update_disc_atomunit.set_optional_arg("give_force", x_give_force)
+    update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)

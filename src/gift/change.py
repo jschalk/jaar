@@ -703,8 +703,8 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_idea_awardlink", atom_insert())
             x_atomunit.set_required_arg("road", after_ideaunit.get_road())
             x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
-            x_atomunit.set_optional_arg("give_weight", after_awardlink.give_weight)
-            x_atomunit.set_optional_arg("take_weight", after_awardlink.take_weight)
+            x_atomunit.set_optional_arg("give_force", after_awardlink.give_force)
+            x_atomunit.set_optional_arg("take_force", after_awardlink.take_force)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_updates(
@@ -724,13 +724,13 @@ class ChangeUnit:
                 x_atomunit = atomunit_shop("bud_idea_awardlink", atom_update())
                 x_atomunit.set_required_arg("road", before_ideaunit.get_road())
                 x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
-                if before_awardlink.give_weight != after_awardlink.give_weight:
+                if before_awardlink.give_force != after_awardlink.give_force:
                     x_atomunit.set_optional_arg(
-                        "give_weight", after_awardlink.give_weight
+                        "give_force", after_awardlink.give_force
                     )
-                if before_awardlink.take_weight != after_awardlink.take_weight:
+                if before_awardlink.take_force != after_awardlink.take_force:
                     x_atomunit.set_optional_arg(
-                        "take_weight", after_awardlink.take_weight
+                        "take_force", after_awardlink.take_force
                     )
                 self.set_atomunit(x_atomunit)
 

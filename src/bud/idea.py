@@ -447,16 +447,16 @@ class IdeaUnit:
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
                 lobby_id=ib.lobby_id,
-                give_weight=ib.give_weight,
-                take_weight=ib.take_weight,
+                give_force=ib.give_force,
+                take_force=ib.take_force,
             )
             self._awardheirs[awardheir.lobby_id] = awardheir
 
         for ib in self._awardlinks.values():
             awardheir = awardheir_shop(
                 lobby_id=ib.lobby_id,
-                give_weight=ib.give_weight,
-                take_weight=ib.take_weight,
+                give_force=ib.give_force,
+                take_force=ib.take_force,
             )
             self._awardheirs[awardheir.lobby_id] = awardheir
 
@@ -487,20 +487,20 @@ class IdeaUnit:
                 fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
-    def get_awardheirs_give_weight_sum(self) -> float:
-        return sum(awardlink.give_weight for awardlink in self._awardheirs.values())
+    def get_awardheirs_give_force_sum(self) -> float:
+        return sum(awardlink.give_force for awardlink in self._awardheirs.values())
 
-    def get_awardheirs_take_weight_sum(self) -> float:
-        return sum(awardlink.take_weight for awardlink in self._awardheirs.values())
+    def get_awardheirs_take_force_sum(self) -> float:
+        return sum(awardlink.take_force for awardlink in self._awardheirs.values())
 
     def set_awardheirs_fund_give_fund_take(self):
-        awardheirs_give_weight_sum = self.get_awardheirs_give_weight_sum()
-        awardheirs_take_weight_sum = self.get_awardheirs_take_weight_sum()
+        awardheirs_give_force_sum = self.get_awardheirs_give_force_sum()
+        awardheirs_take_force_sum = self.get_awardheirs_take_force_sum()
         for awardheir_x in self._awardheirs.values():
             awardheir_x.set_fund_give_take(
                 idea_fund_share=self.get_fund_share(),
-                awardheirs_give_weight_sum=awardheirs_give_weight_sum,
-                awardheirs_take_weight_sum=awardheirs_take_weight_sum,
+                awardheirs_give_force_sum=awardheirs_give_force_sum,
+                awardheirs_take_force_sum=awardheirs_take_force_sum,
             )
 
     def clear_awardlines(self):

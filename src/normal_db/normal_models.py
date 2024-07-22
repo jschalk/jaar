@@ -69,8 +69,8 @@ class AwardLinkTable(Base):
     uid = Column(Integer, primary_key=True)
     lobby_id = Column(String)
     road = Column(String)
-    give_weight = Column(Float)
-    take_weight = Column(Float)
+    give_force = Column(Float)
+    take_force = Column(Float)
 
 
 class ReasonTable(Base):

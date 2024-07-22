@@ -1554,9 +1554,9 @@
                     "call high school friend": {
                         "_awardlinks": {
                             "Perrison": {
-                                "give_weight": 1.0,
+                                "give_force": 1.0,
                                 "lobby_id": "Perrison",
-                                "take_weight": 1.0
+                                "take_force": 1.0
                             }
                         },
                         "_label": "call high school friend",
@@ -1608,9 +1608,9 @@
                             "check cat water": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "check cat water",
@@ -1675,9 +1675,9 @@
                             "clean baby seats": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clean baby seats",
@@ -1719,9 +1719,9 @@
                             "clean bathroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clean bathroom",
@@ -1752,9 +1752,9 @@
                             "clean cat poo": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clean cat poo",
@@ -1793,9 +1793,9 @@
                             "clean humidifiers": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clean humidifiers",
@@ -1834,9 +1834,9 @@
                             "clean sheets couch blankets": {
                                 "_awardlinks": {
                                     "Perrison": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": "Perrison",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clean sheets couch blankets",
@@ -1886,9 +1886,9 @@
                             "clean table": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clean table",
@@ -1927,9 +1927,9 @@
                             "deep clean play mat": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "deep clean play mat",
@@ -1979,9 +1979,9 @@
                             "empty roomba": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "empty roomba",
@@ -2020,9 +2020,9 @@
                             "empty roomba Friday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "empty roomba Friday",
@@ -2061,9 +2061,9 @@
                             "laundry monday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "laundry monday",
@@ -2102,9 +2102,9 @@
                             "laundry saturday": {
                                 "_awardlinks": {
                                     "Travis Fox": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": "Travis Fox",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "laundry saturday",
@@ -2143,9 +2143,9 @@
                             "laundry wednesday": {
                                 "_awardlinks": {
                                     "America": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": "America",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "laundry wednesday",
@@ -2209,9 +2209,9 @@
                             "prepare_bed clean bedroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "prepare_bed clean bedroom",
@@ -2242,9 +2242,9 @@
                             "roomba bedroom": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "roomba bedroom",
@@ -2283,9 +2283,9 @@
                             "roomba bedroom Friday": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "roomba bedroom Friday",
@@ -2324,9 +2324,9 @@
                             "roomba living area": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "roomba living area",
@@ -2365,9 +2365,9 @@
                             "roomba living area thur": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "roomba living area thur",
@@ -2406,9 +2406,9 @@
                             "roomba maintenance": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "roomba maintenance",
@@ -2447,9 +2447,9 @@
                             "wipe down play mat2": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "wipe down play mat2",
@@ -2505,9 +2505,9 @@
                             "5 push-ups": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "5 push-ups",
@@ -2530,9 +2530,9 @@
                             "check protein for week is adequate": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "check protein for week is adequate",
@@ -2555,9 +2555,9 @@
                             "clip nails": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clip nails",
@@ -2588,9 +2588,9 @@
                             "cook veggies every morning": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "cook veggies every morning",
@@ -2613,9 +2613,9 @@
                             "daily exercise 20min": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_is_expanded": false,
@@ -2658,9 +2658,9 @@
                             "morning multivitamin": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "morning multivitamin",
@@ -2700,9 +2700,9 @@
                             "noce hair removal": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "noce hair removal",
@@ -2736,9 +2736,9 @@
                             "pull ear hair": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "pull ear hair",
@@ -2772,9 +2772,9 @@
                             "shampoo hair": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "shampoo hair",
@@ -2805,9 +2805,9 @@
                             "straight back for 45 secs": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "straight back for 45 secs",
@@ -2830,9 +2830,9 @@
                             "trim beard": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "trim beard",
@@ -2865,9 +2865,9 @@
                                     "bike or something": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": ",Family",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_label": "bike or something",
@@ -2898,9 +2898,9 @@
                                     "chest and arms (mon)": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": ",Family",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_is_expanded": false,
@@ -2971,9 +2971,9 @@
                                     "core lower back": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": ",Family",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_label": "core lower back",
@@ -3004,9 +3004,9 @@
                                     "rest": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": ",Family",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_is_expanded": false,
@@ -3027,9 +3027,9 @@
                                     "shoulders and upper back": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": ",Family",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_is_expanded": false,
@@ -3075,9 +3075,9 @@
                                     "squats hamstrings and calves": {
                                         "_awardlinks": {
                                             ",Family": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": ",Family",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_label": "squats hamstrings and calves",
@@ -3121,9 +3121,9 @@
                             "be reponsible for rent": {
                                 "_awardlinks": {
                                     "Perrison": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": "Perrison",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "be reponsible for rent",
@@ -3154,9 +3154,9 @@
                             "be responsible for expenses card": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "be responsible for expenses card",
@@ -3187,9 +3187,9 @@
                             "be responsible for utilities": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "be responsible for utilities",
@@ -3220,9 +3220,9 @@
                             "set resturant bucks for the week": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "set resturant bucks for the week",
@@ -3258,9 +3258,9 @@
                     "Housing": {
                         "_awardlinks": {
                             ",OceanVista Apt": {
-                                "give_weight": 1.0,
+                                "give_force": 1.0,
                                 "lobby_id": ",OceanVista Apt",
-                                "take_weight": 1.0
+                                "take_force": 1.0
                             }
                         },
                         "_is_expanded": false,
@@ -3306,9 +3306,9 @@
                                                     "heater maintenance": {
                                                         "_awardlinks": {
                                                             "Norberto": {
-                                                                "give_weight": 1.0,
+                                                                "give_force": 1.0,
                                                                 "lobby_id": "Norberto",
-                                                                "take_weight": 1.0
+                                                                "take_force": 1.0
                                                             }
                                                         },
                                                         "_label": "heater maintenance",
@@ -3397,9 +3397,9 @@
                             "clip fingernails": {
                                 "_awardlinks": {
                                     "America": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": "America",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "clip fingernails",
@@ -3449,9 +3449,9 @@
                             "get rid of toy get new toy": {
                                 "_awardlinks": {
                                     ",Family": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Family",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "get rid of toy get new toy",
@@ -3534,9 +3534,9 @@
                     "say hi to birds": {
                         "_awardlinks": {
                             ",Family": {
-                                "give_weight": 1.0,
+                                "give_force": 1.0,
                                 "lobby_id": ",Family",
-                                "take_weight": 1.0
+                                "take_force": 1.0
                             }
                         },
                         "_label": "say hi to birds",
@@ -3590,19 +3590,19 @@
             "D&B": {
                 "_awardlinks": {
                     ",Climate Death": {
-                        "give_weight": 1.0,
+                        "give_force": 1.0,
                         "lobby_id": ",Climate Death",
-                        "take_weight": 1.0
+                        "take_force": 1.0
                     },
                     ",Family": {
-                        "give_weight": 1.0,
+                        "give_force": 1.0,
                         "lobby_id": ",Family",
-                        "take_weight": 1.0
+                        "take_force": 1.0
                     },
                     "America": {
-                        "give_weight": 1.0,
+                        "give_force": 1.0,
                         "lobby_id": "America",
-                        "take_weight": 1.0
+                        "take_force": 1.0
                     }
                 },
                 "_is_expanded": false,
@@ -3610,9 +3610,9 @@
                     "Aarons friends are desperate for of housing support": {
                         "_awardlinks": {
                             "Renee Elise Goldsberry": {
-                                "give_weight": 1.0,
+                                "give_force": 1.0,
                                 "lobby_id": "Renee Elise Goldsberry",
-                                "take_weight": 1.0
+                                "take_force": 1.0
                             }
                         },
                         "_is_expanded": false,
@@ -3620,9 +3620,9 @@
                             "Ask Chuck monthly what I can do": {
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": "Renee Elise Goldsberry",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "Ask Chuck monthly what I can do",
@@ -3657,9 +3657,9 @@
                     "develop D&B software": {
                         "_awardlinks": {
                             ",hurt by us dollar": {
-                                "give_weight": 1.0,
+                                "give_force": 1.0,
                                 "lobby_id": ",hurt by us dollar",
-                                "take_weight": 1.0
+                                "take_force": 1.0
                             }
                         },
                         "_kids": {
@@ -3718,9 +3718,9 @@
                             "donate to influential people that are pro-Climate Death": {
                                 "_awardlinks": {
                                     ",Climate Death": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Climate Death",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "donate to influential people that are pro-Climate Death",
@@ -3804,18 +3804,18 @@
                             "sympathetic receptive to David": {
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": "Renee Elise Goldsberry",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_kids": {
                                     "be available for phone call": {
                                         "_awardlinks": {
                                             "Renee Elise Goldsberry": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": "Renee Elise Goldsberry",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_label": "be available for phone call",
@@ -3846,14 +3846,14 @@
                                     "call David and discuss methodology": {
                                         "_awardlinks": {
                                             ",Climate Death": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": ",Climate Death",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             },
                                             "Renee Elise Goldsberry": {
-                                                "give_weight": 1.0,
+                                                "give_force": 1.0,
                                                 "lobby_id": "Renee Elise Goldsberry",
-                                                "take_weight": 1.0
+                                                "take_force": 1.0
                                             }
                                         },
                                         "_label": "call David and discuss methodology",
@@ -3928,9 +3928,9 @@
                             "write letters about Climate Death to congressman": {
                                 "_awardlinks": {
                                     ",Climate Death": {
-                                        "give_weight": 1.0,
+                                        "give_force": 1.0,
                                         "lobby_id": ",Climate Death",
-                                        "take_weight": 1.0
+                                        "take_force": 1.0
                                     }
                                 },
                                 "_label": "write letters about Climate Death to congressman",

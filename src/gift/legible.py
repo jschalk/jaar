@@ -449,9 +449,9 @@ def add_bud_idea_awardlink_insert_to_legible_list(
         for idea_awardlink_atom in road_dict.values():
             lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            give_weight_value = idea_awardlink_atom.get_value("give_weight")
-            take_weight_value = idea_awardlink_atom.get_value("take_weight")
-            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with give_weight={give_weight_value} and take_weight={take_weight_value}."
+            give_force_value = idea_awardlink_atom.get_value("give_force")
+            take_force_value = idea_awardlink_atom.get_value("take_force")
+            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -462,14 +462,14 @@ def add_bud_idea_awardlink_update_to_legible_list(
         for idea_awardlink_atom in road_dict.values():
             lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            give_weight_value = idea_awardlink_atom.get_value("give_weight")
-            take_weight_value = idea_awardlink_atom.get_value("take_weight")
-            if give_weight_value is not None and take_weight_value is not None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value} and take_weight={take_weight_value}."
-            elif give_weight_value is not None and take_weight_value is None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value}."
-            elif give_weight_value is None and take_weight_value is not None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_weight={take_weight_value}."
+            give_force_value = idea_awardlink_atom.get_value("give_force")
+            take_force_value = idea_awardlink_atom.get_value("take_force")
+            if give_force_value is not None and take_force_value is not None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+            elif give_force_value is not None and take_force_value is None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
+            elif give_force_value is None and take_force_value is not None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 

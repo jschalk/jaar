@@ -266,20 +266,20 @@ def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_awardlink = x_idea._awardlinks.get(x_atom.get_value("lobby_id"))
-    x_give_weight = x_atom.get_value("give_weight")
-    if x_give_weight is not None and x_awardlink.give_weight != x_give_weight:
-        x_awardlink.give_weight = x_give_weight
-    x_take_weight = x_atom.get_value("take_weight")
-    if x_take_weight is not None and x_awardlink.take_weight != x_take_weight:
-        x_awardlink.take_weight = x_take_weight
+    x_give_force = x_atom.get_value("give_force")
+    if x_give_force is not None and x_awardlink.give_force != x_give_force:
+        x_awardlink.give_force = x_give_force
+    x_take_force = x_atom.get_value("take_force")
+    if x_take_force is not None and x_awardlink.take_force != x_take_force:
+        x_awardlink.take_force = x_take_force
     x_bud.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
 def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
         lobby_id=x_atom.get_value("lobby_id"),
-        give_weight=x_atom.get_value("give_weight"),
-        take_weight=x_atom.get_value("take_weight"),
+        give_force=x_atom.get_value("give_force"),
+        take_force=x_atom.get_value("take_force"),
     )
     x_bud.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
@@ -511,8 +511,8 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             x_obj.debtor_weight != y_obj.debtor_weight
         )
     elif category in {"bud_idea_awardlink"}:
-        return (x_obj.give_weight != y_obj.give_weight) or (
-            x_obj.take_weight != y_obj.take_weight
+        return (x_obj.give_force != y_obj.give_force) or (
+            x_obj.take_force != y_obj.take_force
         )
     elif category == "bud_ideaunit":
         return (

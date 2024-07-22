@@ -163,9 +163,9 @@ def test_BudUnit_3AdvocatesNoideaunit_shop():
     zia_budunit.set_acctunit(yao_acctunit)
     zia_budunit.set_acctunit(sue_acctunit)
     zia_budunit.set_acctunit(zia_acctunit)
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_weight=10))
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_weight=10))
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_weight=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_force=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_force=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_force=10))
 
     # WHEN
     assert zia_budunit.get_awardlinks_metrics() is not None

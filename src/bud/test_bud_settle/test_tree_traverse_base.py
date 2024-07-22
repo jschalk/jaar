@@ -265,9 +265,9 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     swim_road = x_bud.make_l1_road(swim_text)
 
     x_bud.set_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(yao_text, give_weight=10)
-    awardlink_zia = awardlink_shop(zia_text, give_weight=10)
-    awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
+    awardlink_yao = awardlink_shop(yao_text, give_force=10)
+    awardlink_zia = awardlink_shop(zia_text, give_force=10)
+    awardlink_Xio = awardlink_shop(Xio_text, give_force=10)
 
     swim_idea = x_bud.get_idea_obj(swim_road)
     x_bud.edit_idea_attr(swim_road, awardlink=awardlink_yao)

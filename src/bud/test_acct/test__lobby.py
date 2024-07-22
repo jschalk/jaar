@@ -334,47 +334,47 @@ def test_AwardLink_exists():
 
     # THEN
     assert bikers_awardlink.lobby_id == bikers_text
-    assert bikers_awardlink.give_weight == 1.0
-    assert bikers_awardlink.take_weight == 1.0
+    assert bikers_awardlink.give_force == 1.0
+    assert bikers_awardlink.take_force == 1.0
 
 
 def test_awardlink_shop_ReturnsCorrectObj():
     # ESTABLISH
     bikers_text = "bikers"
-    bikers_give_weight = 3.0
-    bikers_take_weight = 5.0
+    bikers_give_force = 3.0
+    bikers_take_force = 5.0
 
     # WHEN
     bikers_awardlink = awardlink_shop(
         lobby_id=bikers_text,
-        give_weight=bikers_give_weight,
-        take_weight=bikers_take_weight,
+        give_force=bikers_give_force,
+        take_force=bikers_take_force,
     )
 
     # THEN
-    assert bikers_awardlink.give_weight == bikers_give_weight
-    assert bikers_awardlink.take_weight == bikers_take_weight
+    assert bikers_awardlink.give_force == bikers_give_force
+    assert bikers_awardlink.take_force == bikers_take_force
 
 
 def test_AwardHeir_set_fund_attr_CorrectlySetsAttr():
     # ESTABLISH
     bikers_text = "bikers"
-    bikers_give_weight = 3.0
-    bikers_take_weight = 6.0
-    awardlinks_sum_give_weight = 60
-    awardlinks_sum_take_weight = 60
+    bikers_give_force = 3.0
+    bikers_take_force = 6.0
+    awardlinks_sum_give_force = 60
+    awardlinks_sum_take_force = 60
     idea_fund_share = 1
     lobby_heir_x = awardheir_shop(
         lobby_id=bikers_text,
-        give_weight=bikers_give_weight,
-        take_weight=bikers_take_weight,
+        give_force=bikers_give_force,
+        take_force=bikers_take_force,
     )
 
     # WHEN
     lobby_heir_x.set_fund_give_take(
         idea_fund_share=idea_fund_share,
-        awardheirs_give_weight_sum=awardlinks_sum_give_weight,
-        awardheirs_take_weight_sum=awardlinks_sum_take_weight,
+        awardheirs_give_force_sum=awardlinks_sum_give_force,
+        awardheirs_take_force_sum=awardlinks_sum_take_force,
     )
 
     # THEN
@@ -385,12 +385,12 @@ def test_AwardHeir_set_fund_attr_CorrectlySetsAttr():
 def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     bikers_text = "bikers"
-    bikers_give_weight = 3.0
-    bikers_take_weight = 5.0
+    bikers_give_force = 3.0
+    bikers_take_force = 5.0
     bikers_awardlink = awardlink_shop(
         lobby_id=bikers_text,
-        give_weight=bikers_give_weight,
-        take_weight=bikers_take_weight,
+        give_force=bikers_give_force,
+        take_force=bikers_take_force,
     )
 
     print(f"{bikers_awardlink}")
@@ -402,8 +402,8 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     assert biker_dict is not None
     assert biker_dict == {
         "lobby_id": bikers_awardlink.lobby_id,
-        "give_weight": bikers_awardlink.give_weight,
-        "take_weight": bikers_awardlink.take_weight,
+        "give_force": bikers_awardlink.give_force,
+        "take_force": bikers_awardlink.take_force,
     }
 
 
@@ -411,7 +411,7 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
     # ESTABLISH
     teacher_text = "teachers"
     teacher_awardlink = awardlink_shop(
-        lobby_id=teacher_text, give_weight=103, take_weight=155
+        lobby_id=teacher_text, give_force=103, take_force=155
     )
     teacher_dict = teacher_awardlink.get_dict()
     awardlinks_dict = {teacher_awardlink.lobby_id: teacher_dict}

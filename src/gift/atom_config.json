@@ -79,11 +79,11 @@
             "normal_table_name": "awardlink"
         },
         "optional_args": {
-            "give_weight": {
+            "give_force": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "take_weight": {
+            "take_force": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             }

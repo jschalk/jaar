@@ -110,14 +110,14 @@ def lobbyships_get_from_dict(
 
 @dataclass
 class AwardLink(LobbyCore):
-    give_weight: float = 1.0
-    take_weight: float = 1.0
+    give_force: float = 1.0
+    take_force: float = 1.0
 
     def get_dict(self) -> dict[str, str]:
         return {
             "lobby_id": self.lobby_id,
-            "give_weight": self.give_weight,
-            "take_weight": self.take_weight,
+            "give_force": self.give_force,
+            "take_force": self.take_force,
         }
 
 
@@ -132,50 +132,50 @@ def awardlinks_get_from_dict(x_dict: dict) -> dict[LobbyID, AwardLink]:
     for awardlinks_dict in x_dict.values():
         x_lobby = awardlink_shop(
             lobby_id=awardlinks_dict["lobby_id"],
-            give_weight=awardlinks_dict["give_weight"],
-            take_weight=awardlinks_dict["take_weight"],
+            give_force=awardlinks_dict["give_force"],
+            take_force=awardlinks_dict["take_force"],
         )
         awardlinks[x_lobby.lobby_id] = x_lobby
     return awardlinks
 
 
 def awardlink_shop(
-    lobby_id: LobbyID, give_weight: float = None, take_weight: float = None
+    lobby_id: LobbyID, give_force: float = None, take_force: float = None
 ) -> AwardLink:
-    give_weight = get_1_if_None(give_weight)
-    take_weight = get_1_if_None(take_weight)
-    return AwardLink(lobby_id, give_weight, take_weight=take_weight)
+    give_force = get_1_if_None(give_force)
+    take_force = get_1_if_None(take_force)
+    return AwardLink(lobby_id, give_force, take_force=take_force)
 
 
 @dataclass
 class AwardHeir(LobbyCore):
-    give_weight: float = 1.0
-    take_weight: float = 1.0
+    give_force: float = 1.0
+    take_force: float = 1.0
     _fund_give: float = None
     _fund_take: float = None
 
     def set_fund_give_take(
         self,
         idea_fund_share,
-        awardheirs_give_weight_sum: float,
-        awardheirs_take_weight_sum: float,
+        awardheirs_give_force_sum: float,
+        awardheirs_take_force_sum: float,
     ):
-        credor_share_ratio = self.give_weight / awardheirs_give_weight_sum
+        credor_share_ratio = self.give_force / awardheirs_give_force_sum
         self._fund_give = idea_fund_share * credor_share_ratio
-        debtor_share_ratio = self.take_weight / awardheirs_take_weight_sum
+        debtor_share_ratio = self.take_force / awardheirs_take_force_sum
         self._fund_take = idea_fund_share * debtor_share_ratio
 
 
 def awardheir_shop(
     lobby_id: LobbyID,
-    give_weight: float = None,
-    take_weight: float = None,
+    give_force: float = None,
+    take_force: float = None,
     _fund_give: float = None,
     _fund_take: float = None,
 ) -> AwardHeir:
-    give_weight = get_1_if_None(give_weight)
-    take_weight = get_1_if_None(take_weight)
-    return AwardHeir(lobby_id, give_weight, take_weight, _fund_give, _fund_take)
+    give_force = get_1_if_None(give_force)
+    take_force = get_1_if_None(take_force)
+    return AwardHeir(lobby_id, give_force, take_force, _fund_give, _fund_take)
 
 
 @dataclass

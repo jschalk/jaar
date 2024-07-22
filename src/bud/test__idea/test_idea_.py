@@ -196,21 +196,21 @@ def test_IdeaUnit_set_parent_road_ReturnsCorrectObj():
 
 def test_IdeaUnit_awardlinks_exist():
     # ESTABLISH
-    biker_give_weight = 12
-    biker_take_weight = 15
+    biker_give_force = 12
+    biker_take_force = 15
     biker_awardlink = awardlink_shop(
         lobby_id="bikers2",
-        give_weight=biker_give_weight,
-        take_weight=biker_take_weight,
+        give_force=biker_give_force,
+        take_force=biker_take_force,
     )
 
     swimmer_lobby_id = "swimmers"
-    swimmer_give_weight = 29
-    swimmer_take_weight = 32
+    swimmer_give_force = 29
+    swimmer_take_force = 32
     swimmer_awardlink = awardlink_shop(
         lobby_id=swimmer_lobby_id,
-        give_weight=swimmer_give_weight,
-        take_weight=swimmer_take_weight,
+        give_force=swimmer_give_force,
+        take_force=swimmer_take_force,
     )
 
     x_lobbyships = {
@@ -226,25 +226,25 @@ def test_IdeaUnit_awardlinks_exist():
     assert sport_idea._awardlinks == x_lobbyships
 
 
-def test_IdeaUnit_get_awardheirs_give_weight_sum_SetsAttrCorrectly_WithValues():
+def test_IdeaUnit_get_awardheirs_give_force_sum_SetsAttrCorrectly_WithValues():
     # ESTABLISH
-    biker_give_weight = 12
-    biker_take_weight = 15
+    biker_give_force = 12
+    biker_take_force = 15
     biker_text = "bikers2"
     biker_awardlink = awardheir_shop(
         lobby_id=biker_text,
-        give_weight=biker_give_weight,
-        take_weight=biker_take_weight,
+        give_force=biker_give_force,
+        take_force=biker_take_force,
     )
 
     swimmer_text = "swimmers"
     swimmer_lobby_id = swimmer_text
-    swimmer_give_weight = 29
-    swimmer_take_weight = 32
+    swimmer_give_force = 29
+    swimmer_take_force = 32
     swimmer_awardlink = awardheir_shop(
         lobby_id=swimmer_lobby_id,
-        give_weight=swimmer_give_weight,
-        take_weight=swimmer_take_weight,
+        give_force=swimmer_give_force,
+        take_force=swimmer_take_force,
     )
 
     x_lobbyships = {
@@ -257,10 +257,10 @@ def test_IdeaUnit_get_awardheirs_give_weight_sum_SetsAttrCorrectly_WithValues():
     sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbyships)
 
     # THEN
-    assert sport_idea.get_awardheirs_give_weight_sum() is not None
-    assert sport_idea.get_awardheirs_give_weight_sum() == 41
-    assert sport_idea.get_awardheirs_take_weight_sum() is not None
-    assert sport_idea.get_awardheirs_take_weight_sum() == 47
+    assert sport_idea.get_awardheirs_give_force_sum() is not None
+    assert sport_idea.get_awardheirs_give_force_sum() == 41
+    assert sport_idea.get_awardheirs_take_force_sum() is not None
+    assert sport_idea.get_awardheirs_take_force_sum() == 47
 
     assert len(sport_idea._awardheirs) == 2
 
@@ -300,12 +300,12 @@ def test_IdeaUnit_awardheir_exists_ReturnsObj():
     assert not sport_ideaunit.awardheir_exists()
 
 
-def test_IdeaUnit_get_awardheirs_give_weight_sum_ReturnsCorrectObj_NoValues():
+def test_IdeaUnit_get_awardheirs_give_force_sum_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(_label=sport_text)
-    assert sport_idea.get_awardheirs_give_weight_sum() is not None
-    assert sport_idea.get_awardheirs_take_weight_sum() is not None
+    assert sport_idea.get_awardheirs_give_force_sum() is not None
+    assert sport_idea.get_awardheirs_take_force_sum() is not None
 
     # WHEN / THEN
     # does not crash with empty set
@@ -504,18 +504,16 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         ),
     }
     biker_lobby_id = "bikers"
-    biker_give_weight = 3.0
-    biker_take_weight = 7.0
-    biker_awardlink = awardlink_shop(
-        biker_lobby_id, biker_give_weight, biker_take_weight
-    )
+    biker_give_force = 3.0
+    biker_take_force = 7.0
+    biker_awardlink = awardlink_shop(biker_lobby_id, biker_give_force, biker_take_force)
     flyer_lobby_id = "flyers"
-    flyer_give_weight = 6.0
-    flyer_take_weight = 9.0
+    flyer_give_force = 6.0
+    flyer_take_force = 9.0
     flyer_awardlink = awardlink_shop(
         lobby_id=flyer_lobby_id,
-        give_weight=flyer_give_weight,
-        take_weight=flyer_take_weight,
+        give_force=flyer_give_force,
+        take_force=flyer_take_force,
     )
     biker_and_flyer_awardlinks = {
         biker_awardlink.lobby_id: biker_awardlink,
@@ -523,13 +521,13 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     }
     biker_get_dict = {
         "lobby_id": biker_awardlink.lobby_id,
-        "give_weight": biker_awardlink.give_weight,
-        "take_weight": biker_awardlink.take_weight,
+        "give_force": biker_awardlink.give_force,
+        "take_force": biker_awardlink.take_force,
     }
     flyer_get_dict = {
         "lobby_id": flyer_awardlink.lobby_id,
-        "give_weight": flyer_awardlink.give_weight,
-        "take_weight": flyer_awardlink.take_weight,
+        "give_force": flyer_awardlink.give_force,
+        "take_force": flyer_awardlink.take_force,
     }
     x1_awardlinks = {biker_lobby_id: biker_get_dict, flyer_lobby_id: flyer_get_dict}
     sue_text = "Sue"

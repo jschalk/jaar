@@ -577,9 +577,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_text))
     after_sue_au = copy_deepcopy(before_sue_au)
     after_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_text))
-    after_run_give_weight = 44
-    after_run_take_weight = 66
-    x_awardlink = awardlink_shop(run_text, after_run_give_weight, after_run_take_weight)
+    after_run_give_force = 44
+    after_run_take_force = 66
+    x_awardlink = awardlink_shop(run_text, after_run_give_force, after_run_take_force)
     after_sue_au.edit_idea_attr(disc_road, awardlink=x_awardlink)
 
     # WHEN
@@ -595,8 +595,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     assert run_atomunit.get_value("lobby_id") == run_text
     assert run_atomunit.get_value("road") == disc_road
     assert run_atomunit.get_value("lobby_id") == run_text
-    assert run_atomunit.get_value("give_weight") == after_run_give_weight
-    assert run_atomunit.get_value("take_weight") == after_run_take_weight
+    assert run_atomunit.get_value("give_force") == after_run_give_force
+    assert run_atomunit.get_value("take_force") == after_run_take_force
 
     assert get_atomunit_total_count(sue_changeunit) == 2
 
@@ -621,14 +621,14 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     run_awardlink = before_sue_au.get_idea_obj(ball_road)._awardlinks.get(run_text)
 
     after_sue_bud = copy_deepcopy(before_sue_au)
-    after_give_weight = 55
-    after_take_weight = 66
+    after_give_force = 55
+    after_take_force = 66
     after_sue_bud.edit_idea_attr(
         ball_road,
         awardlink=awardlink_shop(
             lobby_id=run_text,
-            give_weight=after_give_weight,
-            take_weight=after_take_weight,
+            give_force=after_give_force,
+            take_force=after_take_force,
         ),
     )
     # WHEN
@@ -642,8 +642,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("lobby_id") == run_text
-    assert ball_atomunit.get_value("give_weight") == after_give_weight
-    assert ball_atomunit.get_value("take_weight") == after_take_weight
+    assert ball_atomunit.get_value("give_force") == after_give_force
+    assert ball_atomunit.get_value("take_force") == after_take_force
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
