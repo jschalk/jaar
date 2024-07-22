@@ -268,7 +268,7 @@ class LobbyBox(LobbyCore):
                 lobby_fund_agenda_take=self._fund_agenda_take,
             )
 
-        # TODO retire upper process and use allot scale
+        # # TODO retire upper process and use allot scale
         # credit_ledger = {}
         # debtit_ledger = {}
         # for x_acct_id, x_lobbyship in self._lobbyships.items():

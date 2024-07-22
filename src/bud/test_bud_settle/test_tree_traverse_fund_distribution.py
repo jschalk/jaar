@@ -1081,7 +1081,7 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     x_lobbyagendametrics = LobbyAgendaMetrics()
     x_lobbyagendametrics.set_sums(x_bud=x_bud)
     assert x_lobbyagendametrics.lobbyship_count == 81
-    x_sum = 2796503.9999999995
+    x_sum = 2796504
     print(f"{x_lobbyagendametrics.sum_lobbybox_cred=}")
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_cred, x_sum)
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_debt, x_sum)

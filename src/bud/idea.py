@@ -4,7 +4,7 @@ from src._instrument.python import (
     get_False_if_None,
     get_positive_int,
 )
-from src._road.finance import FundCoin, FundNum
+from src._road.finance import FundCoin, FundNum, allot_scale, default_fund_coin_if_none
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -485,21 +485,19 @@ class IdeaUnit:
                 fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
-    def get_awardheirs_give_force_sum(self) -> float:
-        return sum(awardlink.give_force for awardlink in self._awardheirs.values())
-
-    def get_awardheirs_take_force_sum(self) -> float:
-        return sum(awardlink.take_force for awardlink in self._awardheirs.values())
-
     def set_awardheirs_fund_give_fund_take(self):
-        awardheirs_give_force_sum = self.get_awardheirs_give_force_sum()
-        awardheirs_take_force_sum = self.get_awardheirs_take_force_sum()
-        for awardheir_x in self._awardheirs.values():
-            awardheir_x.set_fund_give_take(
-                idea_fund_share=self.get_fund_share(),
-                awardheirs_give_force_sum=awardheirs_give_force_sum,
-                awardheirs_take_force_sum=awardheirs_take_force_sum,
-            )
+        # TODO retire upper process and use allot scale
+        credit_ledger = {}
+        debtit_ledger = {}
+        for x_lobby_id, x_awardheir in self._awardheirs.items():
+            credit_ledger[x_lobby_id] = x_awardheir.give_force
+            debtit_ledger[x_lobby_id] = x_awardheir.take_force
+        x_fund_share = self.get_fund_share()
+        credit_allot = allot_scale(credit_ledger, x_fund_share, self._fund_coin)
+        debtit_allot = allot_scale(debtit_ledger, x_fund_share, self._fund_coin)
+        for x_lobby_id, x_awardheir in self._awardheirs.items():
+            x_awardheir._fund_give = credit_allot.get(x_lobby_id)
+            x_awardheir._fund_take = debtit_allot.get(x_lobby_id)
 
     def clear_awardlines(self):
         self._awardlines = {}
@@ -1038,7 +1036,7 @@ def ideaunit_shop(
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
-        _fund_coin=_fund_coin,
+        _fund_coin=default_fund_coin_if_none(_fund_coin),
         _fund_onset=_fund_onset,
         _fund_cease=_fund_cease,
         _task=_task,

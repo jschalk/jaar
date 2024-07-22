@@ -1,3 +1,4 @@
+from src._road.finance import default_fund_coin_if_none
 from src._road.road import (
     get_default_real_id_roadnode as root_label,
     create_road,
@@ -94,7 +95,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._fund_ratio is None
-    assert x_ideaunit._fund_coin is None
+    assert x_ideaunit._fund_coin == default_fund_coin_if_none()
     assert x_ideaunit._fund_onset is None
     assert x_ideaunit._fund_cease is None
     assert x_ideaunit._reasonunits == {}
@@ -226,63 +227,45 @@ def test_IdeaUnit_awardlinks_exist():
     assert sport_idea._awardlinks == x_lobbyships
 
 
-def test_IdeaUnit_get_awardheirs_give_force_sum_SetsAttrCorrectly_WithValues():
+def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
     # ESTABLISH
     biker_give_force = 12
     biker_take_force = 15
     biker_text = "bikers2"
-    biker_awardlink = awardheir_shop(
-        lobby_id=biker_text,
-        give_force=biker_give_force,
-        take_force=biker_take_force,
-    )
-
-    swimmer_text = "swimmers"
-    swimmer_lobby_id = swimmer_text
-    swimmer_give_force = 29
-    swimmer_take_force = 32
-    swimmer_awardlink = awardheir_shop(
-        lobby_id=swimmer_lobby_id,
-        give_force=swimmer_give_force,
-        take_force=swimmer_take_force,
-    )
-
+    biker_awardlink = awardheir_shop(biker_text, biker_give_force, biker_take_force)
+    swim_text = "swimmers"
+    swim_lobby_id = swim_text
+    swim_give_force = 29
+    swim_take_force = 32
+    swim_awardlink = awardheir_shop(swim_lobby_id, swim_give_force, swim_take_force)
     x_lobbyships = {
-        swimmer_awardlink.lobby_id: swimmer_awardlink,
+        swim_awardlink.lobby_id: swim_awardlink,
         biker_awardlink.lobby_id: biker_awardlink,
     }
-
-    # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbyships)
-
-    # THEN
-    assert sport_idea.get_awardheirs_give_force_sum() is not None
-    assert sport_idea.get_awardheirs_give_force_sum() == 41
-    assert sport_idea.get_awardheirs_take_force_sum() is not None
-    assert sport_idea.get_awardheirs_take_force_sum() == 47
-
+    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_lobbyships)
+    assert sport_idea._fund_coin == 1
     assert len(sport_idea._awardheirs) == 2
-
-    swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._fund_give is None
-    assert swimmer_awardheir._fund_take is None
+    swim_awardheir = sport_idea._awardheirs.get(swim_text)
+    assert swim_awardheir._fund_give is None
+    assert swim_awardheir._fund_take is None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
     assert biker_awardheir._fund_give is None
     assert biker_awardheir._fund_take is None
 
     # WHEN
-    sport_idea._fund_ratio = 0.25
+    sport_idea._fund_onset = 91
+    sport_idea._fund_cease = 820
     sport_idea.set_awardheirs_fund_give_fund_take()
 
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
-    swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._fund_give is not None
-    assert swimmer_awardheir._fund_take is not None
+    swim_awardheir = sport_idea._awardheirs.get(swim_text)
+    assert swim_awardheir._fund_give == 516
+    assert swim_awardheir._fund_take == 496
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._fund_give is not None
-    assert biker_awardheir._fund_take is not None
+    assert biker_awardheir._fund_give == 213
+    assert biker_awardheir._fund_take == 233
 
 
 def test_IdeaUnit_awardheir_exists_ReturnsObj():
@@ -300,12 +283,10 @@ def test_IdeaUnit_awardheir_exists_ReturnsObj():
     assert not sport_ideaunit.awardheir_exists()
 
 
-def test_IdeaUnit_get_awardheirs_give_force_sum_ReturnsCorrectObj_NoValues():
+def test_IdeaUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(_label=sport_text)
-    assert sport_idea.get_awardheirs_give_force_sum() is not None
-    assert sport_idea.get_awardheirs_take_force_sum() is not None
 
     # WHEN / THEN
     # does not crash with empty set
