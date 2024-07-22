@@ -1106,6 +1106,7 @@ class BudUnit:
         return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
+        # TODO replace this process with allot_scale
         sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
         sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
@@ -1126,6 +1127,7 @@ class BudUnit:
             )
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
+        # TODO replace this process with allot_scale
         sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
         sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
@@ -1146,6 +1148,7 @@ class BudUnit:
             )
 
     def _set_acctunits_bud_agenda_share(self, bud_agenda_share: float):
+        # TODO replace this process with allot_scale
         sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
         sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
@@ -1404,12 +1407,6 @@ class BudUnit:
             self._set_lobbyboxs_fund_share(idea._awardheirs)
         elif idea.awardheir_exists():
             self._add_to_acctunits_fund_give_take(idea.get_fund_share())
-
-    def get_fund_share(
-        self, parent_fund_share: float, mass: int, sibling_total_mass: int
-    ) -> float:
-        sibling_ratio = mass / sibling_total_mass
-        return parent_fund_share * sibling_ratio
 
     def _create_lobbyboxs_metrics(self):
         self._lobbyboxs = {}

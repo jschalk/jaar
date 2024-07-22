@@ -16,6 +16,7 @@ from src.bud.lobby import (
     AwardLink,
     awardlink_shop,
     awardlinks_get_from_json,
+    AwardHeir,
     awardheir_shop,
     LobbyBox,
     lobbybox_shop,
@@ -287,43 +288,6 @@ def test_LobbyShip_clear_fund_give_take_SetsAttrCorrectly():
     assert bob_lobbyship._fund_agenda_ratio_take == 0
 
 
-def test_LobbyShip_set_fund_give_take_SetsAttrCorrectly():
-    # ESTABLISH
-    yao_text = "Yao"
-    ohio_text = ",Ohio"
-    ohio_credit_score = 3.0
-    lobbyships_sum_credit_score = 60
-    lobby_fund_give = 0.5
-    lobby_fund_agenda_give = 0.98
-
-    ohio_debtit_score = 13.0
-    lobbyships_sum_debtit_score = 26.0
-    lobby_fund_take = 0.9
-    lobby_fund_agenda_take = 0.5151
-
-    ohio_yao_lobbyship = lobbyship_shop(ohio_text, ohio_credit_score, ohio_debtit_score)
-    assert ohio_yao_lobbyship._fund_give is None
-    assert ohio_yao_lobbyship._fund_take is None
-    assert ohio_yao_lobbyship._fund_agenda_give is None
-    assert ohio_yao_lobbyship._fund_agenda_take is None
-
-    # WHEN
-    ohio_yao_lobbyship.set_fund_give_take(
-        lobbyships_credit_score_sum=lobbyships_sum_credit_score,
-        lobbyships_debtit_score_sum=lobbyships_sum_debtit_score,
-        lobby_fund_give=lobby_fund_give,
-        lobby_fund_take=lobby_fund_take,
-        lobby_fund_agenda_give=lobby_fund_agenda_give,
-        lobby_fund_agenda_take=lobby_fund_agenda_take,
-    )
-
-    # THEN
-    # assert ohio_yao_lobbyship._fund_give == 0.025
-    # assert ohio_yao_lobbyship._fund_take == 0.45
-    assert ohio_yao_lobbyship._fund_agenda_give == 0.049
-    assert ohio_yao_lobbyship._fund_agenda_take == 0.25755
-
-
 def test_AwardLink_exists():
     # ESTABLISH
     bikers_text = "bikers"
@@ -355,30 +319,35 @@ def test_awardlink_shop_ReturnsCorrectObj():
     assert bikers_awardlink.take_force == bikers_take_force
 
 
-def test_AwardHeir_set_fund_attr_CorrectlySetsAttr():
+def test_AwardHeir_exists():
+    # ESTABLISH / WHEN
+    x_awardheir = AwardHeir()
+
+    # THEN
+    assert not x_awardheir.lobby_id
+    assert x_awardheir.give_force == 1.0
+    assert x_awardheir.take_force == 1.0
+    assert not x_awardheir._fund_give
+    assert not x_awardheir._fund_take
+
+
+def test_awardheir_shop_ReturnsObj():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_give_force = 3.0
     bikers_take_force = 6.0
-    awardlinks_sum_give_force = 60
-    awardlinks_sum_take_force = 60
-    idea_fund_share = 1
-    lobby_heir_x = awardheir_shop(
+
+    # WHEN
+    x_awardheir = awardheir_shop(
         lobby_id=bikers_text,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
 
     # WHEN
-    lobby_heir_x.set_fund_give_take(
-        idea_fund_share=idea_fund_share,
-        awardheirs_give_force_sum=awardlinks_sum_give_force,
-        awardheirs_take_force_sum=awardlinks_sum_take_force,
-    )
-
-    # THEN
-    assert lobby_heir_x._fund_give == 0.05
-    assert lobby_heir_x._fund_take == 0.1
+    assert x_awardheir.lobby_id == bikers_text
+    assert x_awardheir.give_force == bikers_give_force
+    assert x_awardheir.take_force == bikers_take_force
 
 
 def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():

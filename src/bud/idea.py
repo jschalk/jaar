@@ -358,11 +358,11 @@ class IdeaUnit:
         self,
         x_fund_onset: FundNum,
         x_fund_cease: FundNum,
-        total_fund_pool: FundNum,
+        _fund_pool: FundNum,
     ):
         self._fund_onset = x_fund_onset
         self._fund_cease = x_fund_cease
-        self._fund_ratio = (self._fund_cease - self._fund_onset) / total_fund_pool
+        self._fund_ratio = self.get_fund_share() / _fund_pool
         self.set_awardheirs_fund_give_fund_take()
 
     def get_fund_share(self) -> float:

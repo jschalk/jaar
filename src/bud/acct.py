@@ -125,6 +125,7 @@ class AcctUnit(AcctCore):
         bud_acctunit_total_credit_score: float,
         bud_acctunit_total_debtit_score: float,
     ):
+        # TODO replace with allot_scale
         if fund_agenda_ratio_give_sum == 0:
             self._fund_agenda_ratio_give = (
                 self.get_credit_score() / bud_acctunit_total_credit_score

@@ -55,25 +55,6 @@ class LobbyShip(LobbyCore):
         self._fund_agenda_ratio_give = 0
         self._fund_agenda_ratio_take = 0
 
-    def set_fund_give_take(
-        self,
-        lobbyships_credit_score_sum: float,
-        lobbyships_debtit_score_sum: float,
-        lobby_fund_give: float,
-        lobby_fund_take: float,
-        lobby_fund_agenda_give: float,
-        lobby_fund_agenda_take: float,
-    ):
-        lobby_fund_give = get_1_if_None(lobby_fund_give)
-        lobby_fund_take = get_1_if_None(lobby_fund_take)
-        credor_ratio = self.credit_score / lobbyships_credit_score_sum
-        debtor_ratio = self.debtit_score / lobbyships_debtit_score_sum
-
-        # self._fund_give = lobby_fund_give * credor_ratio
-        # self._fund_take = lobby_fund_take * debtor_ratio
-        self._fund_agenda_give = lobby_fund_agenda_give * credor_ratio
-        self._fund_agenda_take = lobby_fund_agenda_take * debtor_ratio
-
 
 def lobbyship_shop(
     lobby_id: LobbyID,
@@ -155,17 +136,6 @@ class AwardHeir(LobbyCore):
     _fund_give: float = None
     _fund_take: float = None
 
-    def set_fund_give_take(
-        self,
-        idea_fund_share,
-        awardheirs_give_force_sum: float,
-        awardheirs_take_force_sum: float,
-    ):
-        credor_share_ratio = self.give_force / awardheirs_give_force_sum
-        self._fund_give = idea_fund_share * credor_share_ratio
-        debtor_share_ratio = self.take_force / awardheirs_take_force_sum
-        self._fund_take = idea_fund_share * debtor_share_ratio
-
 
 def awardheir_shop(
     lobby_id: LobbyID,
@@ -185,11 +155,11 @@ class AwardLine(LobbyCore):
     _fund_take: float = None
 
     def add_fund_give_take(self, fund_give: float, fund_take: float):
-        self.set_fund_give_take_zero_if_none()
+        self.validate_fund_give_fund_take()
         self._fund_give += fund_give
         self._fund_take += fund_take
 
-    def set_fund_give_take_zero_if_none(self):
+    def validate_fund_give_fund_take(self):
         if self._fund_give is None:
             self._fund_give = 0
         if self._fund_take is None:
