@@ -1,6 +1,5 @@
 from src.bud.lobby import lobbybox_shop
 from src.bud.bud import budunit_shop
-from copy import deepcopy as copy_deepcopy
 
 
 def test_BudUnit_get_acctunit_lobby_ids_dict_ReturnsObj():

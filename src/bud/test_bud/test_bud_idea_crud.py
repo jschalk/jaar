@@ -1,4 +1,3 @@
-from src._road.finance import default_fund_pool
 from src.bud.healer import healerhold_shop
 from src.bud.examples.example_buds import get_budunit_with_4_levels
 from src.bud.idea import ideaunit_shop

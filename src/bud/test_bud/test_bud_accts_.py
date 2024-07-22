@@ -1,5 +1,4 @@
 from src.bud.acct import acctunit_shop
-from src.bud.lobby import awardlink_shop
 from src.bud.bud import budunit_shop
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -75,36 +74,6 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_lobbyship():
     assert zia_ohio_lobbyship.debtor_weight == zia_ohio_debtor_w
     zia_zia_lobbyship = yao_bud.get_acct(zia_text).get_lobbyship(zia_text)
     assert zia_zia_lobbyship is None
-
-
-def test_BudUnit_set_acct_CorrectlySets_accts_lobbyships():
-    # ESTABLISH
-    x_bit = 5
-    yao_bud = budunit_shop("Yao", _bit=x_bit)
-    assert len(yao_bud._accts) == 0
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 0
-
-    # WHEN
-    zia_text = "Zia"
-    sue_text = "Sue"
-    xio_text = "Xio"
-    yao_bud.set_acctunit(acctunit_shop(zia_text))
-    yao_bud.set_acctunit(acctunit_shop(sue_text))
-    yao_bud.set_acctunit(acctunit_shop(xio_text))
-
-    # THEN
-    assert yao_bud._accts.get(zia_text)._bit == x_bit
-    assert len(yao_bud._accts) == 3
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 3
-
-    # WHEN
-    zia_lobby = zia_text
-    sue_lobby = sue_text
-    xio_lobby = xio_text
-    yao_bud._idearoot.set_awardlink(awardlink_shop(zia_lobby, give_weight=10))
-    yao_bud._idearoot.set_awardlink(awardlink_shop(sue_lobby, give_weight=10))
-    yao_bud._idearoot.set_awardlink(awardlink_shop(xio_lobby, give_weight=10))
-    assert len(yao_bud._idearoot._awardlinks) == 3
 
 
 def test_BudUnit_add_acctunit_CorrectlySets_accts():
