@@ -1,80 +1,80 @@
 from src.bud.bud import budunit_shop
 
 
-def test_create_lobbyboxs_metrics_SetsAttrScenario0():
+def test_create_groupboxs_metrics_SetsAttrScenario0():
     # ESTABLISH
     sue_text = "Sue"
     sue_budunit = budunit_shop(sue_text)
-    sue_budunit._lobbyboxs = None
-    assert sue_budunit._lobbyboxs is None
+    sue_budunit._groupboxs = None
+    assert sue_budunit._groupboxs is None
 
     # WHEN
-    sue_budunit._create_lobbyboxs_metrics()
+    sue_budunit._create_groupboxs_metrics()
 
     # THEN
-    assert sue_budunit._lobbyboxs == {}
+    assert sue_budunit._groupboxs == {}
 
 
-def test_create_lobbyboxs_metrics_SetsAttrScenario1():
+def test_create_groupboxs_metrics_SetsAttrScenario1():
     # ESTABLISH
     sue_text = "Sue"
     sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(yao_text)
+    yao_acctunit.add_groupship(yao_text)
     ohio_text = ",Ohio"
-    yao_acctunit.add_lobbyship(ohio_text)
-    yao_yao_lobbyship = yao_acctunit.get_lobbyship(yao_text)
-    yao_ohio_lobbyship = yao_acctunit.get_lobbyship(ohio_text)
-    yao_yao_lobbyship._credor_pool = 66
-    yao_yao_lobbyship._debtor_pool = 44
-    yao_ohio_lobbyship._credor_pool = 77
-    yao_ohio_lobbyship._debtor_pool = 88
-    # assert sue_budunit._lobbyboxs == {}
+    yao_acctunit.add_groupship(ohio_text)
+    yao_yao_groupship = yao_acctunit.get_groupship(yao_text)
+    yao_ohio_groupship = yao_acctunit.get_groupship(ohio_text)
+    yao_yao_groupship._credor_pool = 66
+    yao_yao_groupship._debtor_pool = 44
+    yao_ohio_groupship._credor_pool = 77
+    yao_ohio_groupship._debtor_pool = 88
+    # assert sue_budunit._groupboxs == {}
 
     # WHEN
-    sue_budunit._create_lobbyboxs_metrics()
+    sue_budunit._create_groupboxs_metrics()
 
     # THEN
-    assert len(sue_budunit._lobbyboxs) == 2
-    assert set(sue_budunit._lobbyboxs.keys()) == {yao_text, ohio_text}
-    ohio_lobbybox = sue_budunit.get_lobbybox(ohio_text)
-    assert ohio_lobbybox._credor_pool == 77
-    assert ohio_lobbybox._debtor_pool == 88
-    yao_lobbybox = sue_budunit.get_lobbybox(yao_text)
-    assert yao_lobbybox._credor_pool == 66
-    assert yao_lobbybox._debtor_pool == 44
+    assert len(sue_budunit._groupboxs) == 2
+    assert set(sue_budunit._groupboxs.keys()) == {yao_text, ohio_text}
+    ohio_groupbox = sue_budunit.get_groupbox(ohio_text)
+    assert ohio_groupbox._credor_pool == 77
+    assert ohio_groupbox._debtor_pool == 88
+    yao_groupbox = sue_budunit.get_groupbox(yao_text)
+    assert yao_groupbox._credor_pool == 66
+    assert yao_groupbox._debtor_pool == 44
 
 
 def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario0():
     # ESTABLISH
     sue_text = "Sue"
     sue_budunit = budunit_shop(sue_text)
-    assert sue_budunit._lobbyboxs == {}
+    assert sue_budunit._groupboxs == {}
 
     # WHEN
     sue_budunit._calc_acctunit_metrics()
 
     # THEN
-    assert sue_budunit._lobbyboxs == {}
+    assert sue_budunit._groupboxs == {}
 
 
-def test_BudUnit_calc_acctunit_metrics_Clears_lobbys():
+def test_BudUnit_calc_acctunit_metrics_Clears_groups():
     # ESTABLISH
     sue_text = "Sue"
     sue_budunit = budunit_shop(sue_text)
-    sue_budunit._lobbys = "yeah"
-    sue_budunit._lobbyboxs = "ohio"
-    assert sue_budunit._lobbys != {}
-    assert sue_budunit._lobbyboxs != {}
+    sue_budunit._groups = "yeah"
+    sue_budunit._groupboxs = "ohio"
+    assert sue_budunit._groups != {}
+    assert sue_budunit._groupboxs != {}
 
     # WHEN
     sue_budunit._calc_acctunit_metrics()
 
     # THEN
-    assert sue_budunit._lobbys != {}
-    assert sue_budunit._lobbyboxs == {}
+    assert sue_budunit._groups != {}
+    assert sue_budunit._groupboxs == {}
 
 
 def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario1():
@@ -84,12 +84,12 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario1():
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(yao_text)
+    yao_acctunit.add_groupship(yao_text)
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
-    assert yao_acctunit.get_lobbyship(yao_text)._credor_pool == 0
-    assert yao_acctunit.get_lobbyship(yao_text)._debtor_pool == 0
-    # assert sue_budunit._lobbyboxs == {}
+    assert yao_acctunit.get_groupship(yao_text)._credor_pool == 0
+    assert yao_acctunit.get_groupship(yao_text)._debtor_pool == 0
+    # assert sue_budunit._groupboxs == {}
 
     # WHEN
     sue_budunit._calc_acctunit_metrics()
@@ -99,16 +99,16 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario1():
     assert yao_acctunit._debtor_pool != 0
     assert yao_acctunit._credor_pool == sue_budunit._credor_respect
     assert yao_acctunit._debtor_pool == sue_budunit._debtor_respect
-    yao_lobbyship = yao_acctunit.get_lobbyship(yao_text)
-    assert yao_lobbyship._credor_pool != 0
-    assert yao_lobbyship._debtor_pool != 0
-    assert yao_lobbyship._credor_pool == sue_budunit._credor_respect
-    assert yao_lobbyship._debtor_pool == sue_budunit._debtor_respect
-    assert yao_lobbyship._credor_pool == 1000000000
-    assert yao_lobbyship._debtor_pool == 1000000000
-    yao_lobbybox = sue_budunit.get_lobbybox(yao_text)
-    lobbybox_yao_lobbyship = yao_lobbybox.get_lobbyship(yao_text)
-    assert yao_lobbyship == lobbybox_yao_lobbyship
+    yao_groupship = yao_acctunit.get_groupship(yao_text)
+    assert yao_groupship._credor_pool != 0
+    assert yao_groupship._debtor_pool != 0
+    assert yao_groupship._credor_pool == sue_budunit._credor_respect
+    assert yao_groupship._debtor_pool == sue_budunit._debtor_respect
+    assert yao_groupship._credor_pool == 1000000000
+    assert yao_groupship._debtor_pool == 1000000000
+    yao_groupbox = sue_budunit.get_groupbox(yao_text)
+    groupbox_yao_groupship = yao_groupbox.get_groupship(yao_text)
+    assert yao_groupship == groupbox_yao_groupship
 
 
 def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario2():
@@ -118,13 +118,13 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario2():
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(yao_text, 1, 4)
+    yao_acctunit.add_groupship(yao_text, 1, 4)
     ohio_text = ",Ohio"
-    yao_acctunit.add_lobbyship(ohio_text, 3, 1)
+    yao_acctunit.add_groupship(ohio_text, 3, 1)
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
-    assert yao_acctunit.get_lobbyship(yao_text)._credor_pool == 0
-    assert yao_acctunit.get_lobbyship(yao_text)._debtor_pool == 0
+    assert yao_acctunit.get_groupship(yao_text)._credor_pool == 0
+    assert yao_acctunit.get_groupship(yao_text)._debtor_pool == 0
 
     # WHEN
     sue_budunit._calc_acctunit_metrics()
@@ -132,25 +132,25 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario2():
     # THEN
     assert sue_budunit.get_acct(yao_text)._credor_pool != 0
     assert sue_budunit.get_acct(yao_text)._debtor_pool != 0
-    assert yao_acctunit.get_lobbyship(yao_text)._credor_pool != 0
-    assert yao_acctunit.get_lobbyship(yao_text)._debtor_pool != 0
-    yao_yao_lobbyship = yao_acctunit.get_lobbyship(yao_text)
-    assert yao_yao_lobbyship._credor_pool != 0
-    assert yao_yao_lobbyship._debtor_pool != 0
-    assert yao_yao_lobbyship._credor_pool == sue_budunit._credor_respect * 0.25
-    assert yao_yao_lobbyship._debtor_pool == sue_budunit._debtor_respect * 0.8
-    assert yao_yao_lobbyship._credor_pool == 250000000
-    assert yao_yao_lobbyship._debtor_pool == 800000000
-    yao_ohio_lobbyship = yao_acctunit.get_lobbyship(ohio_text)
-    assert yao_ohio_lobbyship._credor_pool != 0
-    assert yao_ohio_lobbyship._debtor_pool != 0
-    assert yao_ohio_lobbyship._credor_pool == sue_budunit._credor_respect * 0.75
-    assert yao_ohio_lobbyship._debtor_pool == sue_budunit._debtor_respect * 0.2
-    assert yao_ohio_lobbyship._credor_pool == 750000000
-    assert yao_ohio_lobbyship._debtor_pool == 200000000
-    assert len(sue_budunit._lobbyboxs) == 2
-    ohio_lobbybox = sue_budunit.get_lobbybox(ohio_text)
-    assert len(ohio_lobbybox._lobbyships) == 1
+    assert yao_acctunit.get_groupship(yao_text)._credor_pool != 0
+    assert yao_acctunit.get_groupship(yao_text)._debtor_pool != 0
+    yao_yao_groupship = yao_acctunit.get_groupship(yao_text)
+    assert yao_yao_groupship._credor_pool != 0
+    assert yao_yao_groupship._debtor_pool != 0
+    assert yao_yao_groupship._credor_pool == sue_budunit._credor_respect * 0.25
+    assert yao_yao_groupship._debtor_pool == sue_budunit._debtor_respect * 0.8
+    assert yao_yao_groupship._credor_pool == 250000000
+    assert yao_yao_groupship._debtor_pool == 800000000
+    yao_ohio_groupship = yao_acctunit.get_groupship(ohio_text)
+    assert yao_ohio_groupship._credor_pool != 0
+    assert yao_ohio_groupship._debtor_pool != 0
+    assert yao_ohio_groupship._credor_pool == sue_budunit._credor_respect * 0.75
+    assert yao_ohio_groupship._debtor_pool == sue_budunit._debtor_respect * 0.2
+    assert yao_ohio_groupship._credor_pool == 750000000
+    assert yao_ohio_groupship._debtor_pool == 200000000
+    assert len(sue_budunit._groupboxs) == 2
+    ohio_groupbox = sue_budunit.get_groupbox(ohio_text)
+    assert len(ohio_groupbox._groupships) == 1
 
 
 def test_BudUnit_calc_acctunit_metrics_ResetAcctUnitsAttrs():

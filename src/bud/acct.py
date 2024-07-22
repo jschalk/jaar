@@ -6,11 +6,11 @@ from src._road.road import (
     is_roadnode,
 )
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
-from src.bud.lobby import (
-    LobbyID,
-    LobbyShip,
-    lobbyships_get_from_dict,
-    lobbyship_shop,
+from src.bud.group import (
+    GroupID,
+    GroupShip,
+    groupships_get_from_dict,
+    groupship_shop,
 )
 from dataclasses import dataclass
 
@@ -19,7 +19,7 @@ class InvalidAcctException(Exception):
     pass
 
 
-class Bad_acct_idLobbyShipException(Exception):
+class Bad_acct_idGroupShipException(Exception):
     pass
 
 
@@ -43,7 +43,7 @@ class AcctUnit(AcctCore):
     credit_score: int = None
     debtit_score: int = None
     # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
-    _lobbyships: dict[AcctID, LobbyShip] = None
+    _groupships: dict[AcctID, GroupShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
@@ -140,69 +140,69 @@ class AcctUnit(AcctCore):
         else:
             self._fund_agenda_ratio_take = self._fund_agenda_take / ratio_take_sum
 
-    def add_lobbyship(
+    def add_groupship(
         self,
-        lobby_id: LobbyID,
+        group_id: GroupID,
         credit_score: float = None,
         debtit_score: float = None,
     ):
-        x_lobbyship = lobbyship_shop(lobby_id, credit_score, debtit_score)
-        self.set_lobbyship(x_lobbyship)
+        x_groupship = groupship_shop(group_id, credit_score, debtit_score)
+        self.set_groupship(x_groupship)
 
-    def set_lobbyship(self, x_lobbyship: LobbyShip):
-        x_lobby_id = x_lobbyship.lobby_id
-        lobby_id_is_acct_id = is_roadnode(x_lobby_id, self._road_delimiter)
-        if lobby_id_is_acct_id and self.acct_id != x_lobby_id:
-            raise Bad_acct_idLobbyShipException(
-                f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_lobby_id}'."
+    def set_groupship(self, x_groupship: GroupShip):
+        x_group_id = x_groupship.group_id
+        group_id_is_acct_id = is_roadnode(x_group_id, self._road_delimiter)
+        if group_id_is_acct_id and self.acct_id != x_group_id:
+            raise Bad_acct_idGroupShipException(
+                f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_group_id}'."
             )
 
-        x_lobbyship._acct_id = self.acct_id
-        self._lobbyships[x_lobbyship.lobby_id] = x_lobbyship
+        x_groupship._acct_id = self.acct_id
+        self._groupships[x_groupship.group_id] = x_groupship
 
-    def get_lobbyship(self, lobby_id: LobbyID) -> LobbyShip:
-        return self._lobbyships.get(lobby_id)
+    def get_groupship(self, group_id: GroupID) -> GroupShip:
+        return self._groupships.get(group_id)
 
-    def lobbyship_exists(self, lobby_id: LobbyID) -> bool:
-        return self._lobbyships.get(lobby_id) is not None
+    def groupship_exists(self, group_id: GroupID) -> bool:
+        return self._groupships.get(group_id) is not None
 
-    def delete_lobbyship(self, lobby_id: LobbyID):
-        return self._lobbyships.pop(lobby_id)
+    def delete_groupship(self, group_id: GroupID):
+        return self._groupships.pop(group_id)
 
-    def lobbyships_exist(self):
-        return len(self._lobbyships) != 0
+    def groupships_exist(self):
+        return len(self._groupships) != 0
 
-    def clear_lobbyships(self):
-        self._lobbyships = {}
+    def clear_groupships(self):
+        self._groupships = {}
 
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_lobbyship.lobby_id: x_lobbyship.credit_score
-            for x_lobbyship in self._lobbyships.values()
+            x_groupship.group_id: x_groupship.credit_score
+            for x_groupship in self._groupships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
-        for x_lobby_id, lobby_credor_pool in allot_dict.items():
-            self.get_lobbyship(x_lobby_id)._credor_pool = lobby_credor_pool
+        for x_group_id, group_credor_pool in allot_dict.items():
+            self.get_groupship(x_group_id)._credor_pool = group_credor_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_lobbyship.lobby_id: x_lobbyship.debtit_score
-            for x_lobbyship in self._lobbyships.values()
+            x_groupship.group_id: x_groupship.debtit_score
+            for x_groupship in self._groupships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
-        for x_lobby_id, lobby_debtor_pool in allot_dict.items():
-            self.get_lobbyship(x_lobby_id)._debtor_pool = lobby_debtor_pool
+        for x_group_id, group_debtor_pool in allot_dict.items():
+            self.get_groupship(x_group_id)._debtor_pool = group_debtor_pool
 
-    def get_lobbyships_dict(self) -> dict:
+    def get_groupships_dict(self) -> dict:
         return {
-            x_lobbyship.lobby_id: {
-                "lobby_id": x_lobbyship.lobby_id,
-                "credit_score": x_lobbyship.credit_score,
-                "debtit_score": x_lobbyship.debtit_score,
+            x_groupship.group_id: {
+                "group_id": x_groupship.group_id,
+                "credit_score": x_groupship.credit_score,
+                "debtit_score": x_groupship.debtit_score,
             }
-            for x_lobbyship in self._lobbyships.values()
+            for x_groupship in self._groupships.values()
         }
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
@@ -210,7 +210,7 @@ class AcctUnit(AcctCore):
             "acct_id": self.acct_id,
             "credit_score": self.credit_score,
             "debtit_score": self.debtit_score,
-            "_lobbyships": self.get_lobbyships_dict(),
+            "_groupships": self.get_groupships_dict(),
         }
         if self._irrational_debtit_score not in [None, 0]:
             x_dict["_irrational_debtit_score"] = self._irrational_debtit_score
@@ -250,11 +250,11 @@ def acctunit_get_from_dict(acctunit_dict: dict, _road_delimiter: str) -> AcctUni
     x_acct_id = acctunit_dict["acct_id"]
     x_credit_score = acctunit_dict["credit_score"]
     x_debtit_score = acctunit_dict["debtit_score"]
-    x_lobbyships_dict = acctunit_dict["_lobbyships"]
+    x_groupships_dict = acctunit_dict["_groupships"]
     x_acctunit = acctunit_shop(
         x_acct_id, x_credit_score, x_debtit_score, _road_delimiter
     )
-    x_acctunit._lobbyships = lobbyships_get_from_dict(x_lobbyships_dict, x_acct_id)
+    x_acctunit._groupships = groupships_get_from_dict(x_groupships_dict, x_acct_id)
     _irrational_debtit_score = acctunit_dict.get("_irrational_debtit_score", 0)
     _inallocable_debtit_score = acctunit_dict.get("_inallocable_debtit_score", 0)
     x_acctunit.add_irrational_debtit_score(get_0_if_None(_irrational_debtit_score))
@@ -273,7 +273,7 @@ def acctunit_shop(
     x_acctunit = AcctUnit(
         credit_score=get_1_if_None(credit_score),
         debtit_score=get_1_if_None(debtit_score),
-        _lobbyships={},
+        _groupships={},
         _credor_pool=0,
         _debtor_pool=0,
         _irrational_debtit_score=0,

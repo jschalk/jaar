@@ -8,7 +8,7 @@ from src.bud.healer import healerhold_shop
 from src.bud.acct import AcctID
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.lobby import awardline_shop, awardlink_shop
+from src.bud.group import awardline_shop, awardlink_shop
 from src.bud.graphic import display_ideatree
 from pytest import raises as pytest_raises
 
@@ -37,7 +37,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenThereAreNotAny():
     assert sue_bud._econs_justified
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_lobby_id_exists_IsTrue():
+def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerhold_any_group_id_exists_IsTrue():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     sue_bud.set_l1_idea(ideaunit_shop("Texas", _healerhold=healerhold_shop({"Yao"})))

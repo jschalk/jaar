@@ -1,5 +1,5 @@
 from src.bud.acct import acctunit_shop
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.reason_idea import factunit_shop
 from src.bud.bud import budunit_shop
@@ -68,7 +68,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     xio_credit_score = 33
     xio_debtit_score = 44
     xio_acctunit = acctunit_shop(xio_text, xio_credit_score, xio_debtit_score)
-    after_sue_bud.set_acctunit(xio_acctunit, auto_set_lobbyship=False)
+    after_sue_bud.set_acctunit(xio_acctunit, auto_set_groupship=False)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -182,7 +182,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_insert():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_groupship_insert():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -191,23 +191,23 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     zia_text = "Zia"
     temp_yao_acctunit = acctunit_shop(yao_text)
     temp_zia_acctunit = acctunit_shop(zia_text)
-    after_sue_bud.set_acctunit(temp_yao_acctunit, auto_set_lobbyship=False)
-    after_sue_bud.set_acctunit(temp_zia_acctunit, auto_set_lobbyship=False)
+    after_sue_bud.set_acctunit(temp_yao_acctunit, auto_set_groupship=False)
+    after_sue_bud.set_acctunit(temp_zia_acctunit, auto_set_groupship=False)
     after_yao_acctunit = after_sue_bud.get_acct(yao_text)
     after_zia_acctunit = after_sue_bud.get_acct(zia_text)
     run_text = ",runners"
     zia_run_credor_w = 77
     zia_run_debtor_w = 88
-    after_zia_acctunit.add_lobbyship(run_text, zia_run_credor_w, zia_run_debtor_w)
-    print(f"{after_sue_bud.get_acctunit_lobby_ids_dict()=}")
+    after_zia_acctunit.add_groupship(run_text, zia_run_credor_w, zia_run_debtor_w)
+    print(f"{after_sue_bud.get_acctunit_group_ids_dict()=}")
 
     # WHEN
     sue_changeunit = changeunit_shop()
-    print(f"{after_sue_bud.get_acct(zia_text)._lobbyships=}")
+    print(f"{after_sue_bud.get_acct(zia_text)._groupships=}")
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
     # print(f"{sue_changeunit.atomunits.get(atom_insert()).keys()=}")
     # print(
-    #     sue_changeunit.atomunits.get(atom_insert()).get("bud_acct_lobbyship").keys()
+    #     sue_changeunit.atomunits.get(atom_insert()).get("bud_acct_groupship").keys()
     # )
 
     # THEN
@@ -221,10 +221,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{zia_atomunit=}")
 
-    x_keylist = [atom_insert(), "bud_acct_lobbyship", zia_text, run_text]
+    x_keylist = [atom_insert(), "bud_acct_groupship", zia_text, run_text]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("acct_id") == zia_text
-    assert run_atomunit.get_value("lobby_id") == run_text
+    assert run_atomunit.get_value("group_id") == run_text
     assert run_atomunit.get_value("credit_score") == zia_run_credor_w
     assert run_atomunit.get_value("debtit_score") == zia_run_debtor_w
 
@@ -236,7 +236,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     assert get_atomunit_total_count(sue_changeunit) == 3
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_update():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_groupship_update():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -248,12 +248,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     before_xio_credor_w = 77
     before_xio_debtor_w = 88
     before_xio_acct = before_sue_bud.get_acct(xio_text)
-    before_xio_acct.add_lobbyship(run_text, before_xio_credor_w, before_xio_debtor_w)
+    before_xio_acct.add_groupship(run_text, before_xio_credor_w, before_xio_debtor_w)
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_xio_acctunit = after_sue_bud.get_acct(xio_text)
     after_xio_credor_w = 55
     after_xio_debtor_w = 66
-    after_xio_acctunit.add_lobbyship(run_text, after_xio_credor_w, after_xio_debtor_w)
+    after_xio_acctunit.add_groupship(run_text, after_xio_credor_w, after_xio_debtor_w)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -266,10 +266,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     # print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{xio_atomunit=}")
 
-    x_keylist = [atom_update(), "bud_acct_lobbyship", xio_text, run_text]
+    x_keylist = [atom_update(), "bud_acct_groupship", xio_text, run_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("acct_id") == xio_text
-    assert xio_atomunit.get_value("lobby_id") == run_text
+    assert xio_atomunit.get_value("group_id") == run_text
     assert xio_atomunit.get_value("credit_score") == after_xio_credor_w
     assert xio_atomunit.get_value("debtit_score") == after_xio_debtor_w
 
@@ -277,7 +277,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_delete():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_groupship_delete():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -291,36 +291,36 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     before_zia_acctunit = before_sue_bud.get_acct(zia_text)
     before_bob_acctunit = before_sue_bud.get_acct(bob_text)
     run_text = ",runners"
-    before_xio_acctunit.add_lobbyship(run_text)
-    before_zia_acctunit.add_lobbyship(run_text)
+    before_xio_acctunit.add_groupship(run_text)
+    before_zia_acctunit.add_groupship(run_text)
     fly_text = ",flyers"
-    before_xio_acctunit.add_lobbyship(fly_text)
-    before_zia_acctunit.add_lobbyship(fly_text)
-    before_bob_acctunit.add_lobbyship(fly_text)
-    before_lobby_ids_dict = before_sue_bud.get_acctunit_lobby_ids_dict()
+    before_xio_acctunit.add_groupship(fly_text)
+    before_zia_acctunit.add_groupship(fly_text)
+    before_bob_acctunit.add_groupship(fly_text)
+    before_group_ids_dict = before_sue_bud.get_acctunit_group_ids_dict()
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_xio_acctunit = after_sue_bud.get_acct(xio_text)
     after_zia_acctunit = after_sue_bud.get_acct(zia_text)
     after_bob_acctunit = after_sue_bud.get_acct(bob_text)
-    after_xio_acctunit.delete_lobbyship(run_text)
-    after_zia_acctunit.delete_lobbyship(run_text)
-    after_bob_acctunit.delete_lobbyship(fly_text)
-    after_lobby_ids_dict = after_sue_bud.get_acctunit_lobby_ids_dict()
-    assert len(before_lobby_ids_dict.get(fly_text)) == 3
-    assert len(before_lobby_ids_dict.get(run_text)) == 2
-    assert len(after_lobby_ids_dict.get(fly_text)) == 2
-    assert after_lobby_ids_dict.get(run_text) is None
+    after_xio_acctunit.delete_groupship(run_text)
+    after_zia_acctunit.delete_groupship(run_text)
+    after_bob_acctunit.delete_groupship(fly_text)
+    after_group_ids_dict = after_sue_bud.get_acctunit_group_ids_dict()
+    assert len(before_group_ids_dict.get(fly_text)) == 3
+    assert len(before_group_ids_dict.get(run_text)) == 2
+    assert len(after_group_ids_dict.get(fly_text)) == 2
+    assert after_group_ids_dict.get(run_text) is None
 
     # WHEN
     sue_changeunit = changeunit_shop()
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_delete(), "bud_acct_lobbyship", bob_text, fly_text]
+    x_keylist = [atom_delete(), "bud_acct_groupship", bob_text, fly_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("acct_id") == bob_text
-    assert xio_atomunit.get_value("lobby_id") == fly_text
+    assert xio_atomunit.get_value("group_id") == fly_text
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     print_atomunit_keys(sue_changeunit)
@@ -508,12 +508,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     zia_acctunit = before_sue_au.get_acct(zia_text)
     bob_acctunit = before_sue_au.get_acct(bob_text)
     run_text = ",runners"
-    xio_acctunit.add_lobbyship(run_text)
-    zia_acctunit.add_lobbyship(run_text)
+    xio_acctunit.add_groupship(run_text)
+    zia_acctunit.add_groupship(run_text)
     fly_text = ",flyers"
-    xio_acctunit.add_lobbyship(fly_text)
-    zia_acctunit.add_lobbyship(fly_text)
-    bob_acctunit.add_lobbyship(fly_text)
+    xio_acctunit.add_groupship(fly_text)
+    zia_acctunit.add_groupship(fly_text)
+    bob_acctunit.add_groupship(fly_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -540,7 +540,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     x_keylist = [atom_delete(), "bud_idea_awardlink", disc_road, run_text]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value("lobby_id") == run_text
+    assert run_atomunit.get_value("group_id") == run_text
 
     assert get_atomunit_total_count(sue_changeunit) == 1
 
@@ -559,12 +559,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     zia_acctunit = before_sue_au.get_acct(zia_text)
     bob_acctunit = before_sue_au.get_acct(bob_text)
     run_text = ",runners"
-    xio_acctunit.add_lobbyship(run_text)
-    zia_acctunit.add_lobbyship(run_text)
+    xio_acctunit.add_groupship(run_text)
+    zia_acctunit.add_groupship(run_text)
     fly_text = ",flyers"
-    xio_acctunit.add_lobbyship(fly_text)
-    zia_acctunit.add_lobbyship(fly_text)
-    bob_acctunit.add_lobbyship(fly_text)
+    xio_acctunit.add_groupship(fly_text)
+    zia_acctunit.add_groupship(fly_text)
+    bob_acctunit.add_groupship(fly_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -592,9 +592,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     x_keylist = [atom_insert(), "bud_idea_awardlink", disc_road, run_text]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value("lobby_id") == run_text
+    assert run_atomunit.get_value("group_id") == run_text
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value("lobby_id") == run_text
+    assert run_atomunit.get_value("group_id") == run_text
     assert run_atomunit.get_value("give_force") == after_run_give_force
     assert run_atomunit.get_value("take_force") == after_run_take_force
 
@@ -611,7 +611,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.add_acctunit(zia_text)
     xio_acctunit = before_sue_au.get_acct(xio_text)
     run_text = ",runners"
-    xio_acctunit.add_lobbyship(run_text)
+    xio_acctunit.add_groupship(run_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -626,7 +626,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     after_sue_bud.edit_idea_attr(
         ball_road,
         awardlink=awardlink_shop(
-            lobby_id=run_text,
+            group_id=run_text,
             give_force=after_give_force,
             take_force=after_take_force,
         ),
@@ -641,7 +641,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     x_keylist = [atom_update(), "bud_idea_awardlink", ball_road, run_text]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("lobby_id") == run_text
+    assert ball_atomunit.get_value("group_id") == run_text
     assert ball_atomunit.get_value("give_force") == after_give_force
     assert ball_atomunit.get_value("take_force") == after_take_force
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -1117,7 +1117,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_insert():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_insert():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1131,7 +1131,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._doerunit.set_lobbyhold(xio_text)
+    after_ball_ideaunit._doerunit.set_grouphold(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1141,17 +1141,17 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        "bud_idea_lobbyhold",
+        "bud_idea_grouphold",
         ball_road,
         xio_text,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("lobby_id") == xio_text
+    assert ball_atomunit.get_value("group_id") == xio_text
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_delete():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_delete():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1163,11 +1163,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit._doerunit.set_lobbyhold(xio_text)
+    before_ball_ideaunit._doerunit.set_grouphold(xio_text)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._doerunit.del_lobbyhold(xio_text)
+    after_ball_ideaunit._doerunit.del_grouphold(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1177,13 +1177,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_lobbyhold_
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        "bud_idea_lobbyhold",
+        "bud_idea_grouphold",
         ball_road,
         xio_text,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("lobby_id") == xio_text
+    assert ball_atomunit.get_value("group_id") == xio_text
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
@@ -1194,14 +1194,14 @@ def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     after_sue_bud = budunit_shop(sue_text)
     xio_text = "Xio"
     temp_xio_acctunit = acctunit_shop(xio_text)
-    after_sue_bud.set_acctunit(temp_xio_acctunit, auto_set_lobbyship=False)
+    after_sue_bud.set_acctunit(temp_xio_acctunit, auto_set_groupship=False)
     sports_text = "sports"
     sports_road = after_sue_bud.make_l1_road(sports_text)
     ball_text = "basketball"
     ball_road = after_sue_bud.make_road(sports_road, ball_text)
     after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._doerunit.set_lobbyhold(xio_text)
+    after_ball_ideaunit._doerunit.set_grouphold(xio_text)
 
     before_sue_bud = budunit_shop(sue_text)
     sue1_changeunit = changeunit_shop()

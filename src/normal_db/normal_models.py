@@ -30,17 +30,17 @@ class AcctUnitTable(Base):
     debtit_score = Column(Integer)
 
 
-# class LobbyTable(Base):
-#     __tablename__ = "lobbybox"
+# class GroupTable(Base):
+#     __tablename__ = "groupbox"
 
 #     uid = Column(Integer, primary_key=True)
-#     lobby_id = Column(String)
+#     group_id = Column(String)
 
 
-class LobbyShipTable(Base):
-    __tablename__ = "lobbyship"
+class GroupShipTable(Base):
+    __tablename__ = "groupship"
     uid = Column(Integer, primary_key=True)
-    lobby_id = Column(String)
+    group_id = Column(String)
     acct_id = Column(String)
     credit_score = Column(Integer)
     debtit_score = Column(Integer)
@@ -67,7 +67,7 @@ class IdeaTable(Base):
 class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
-    lobby_id = Column(String)
+    group_id = Column(String)
     road = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)
@@ -92,17 +92,17 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class lobbyholdTable(Base):
-    __tablename__ = "lobbyhold"
+class groupholdTable(Base):
+    __tablename__ = "grouphold"
     uid = Column(Integer, primary_key=True)
-    lobby_id = Column(String)
+    group_id = Column(String)
     road = Column(String)
 
 
 class HealerHoldTable(Base):
     __tablename__ = "healerhold"
     uid = Column(Integer, primary_key=True)
-    lobby_id = Column(String)
+    group_id = Column(String)
     road = Column(String)
 
 

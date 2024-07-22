@@ -21,7 +21,7 @@ def test_AcctUnit_exists():
     # calculated fields
     assert bob_acctunit._credor_pool is None
     assert bob_acctunit._debtor_pool is None
-    assert bob_acctunit._lobbyships is None
+    assert bob_acctunit._groupships is None
     assert bob_acctunit._irrational_debtit_score is None
     assert bob_acctunit._inallocable_debtit_score is None
     assert bob_acctunit._fund_give is None
@@ -72,7 +72,7 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     # calculated fields
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
-    assert yao_acctunit._lobbyships == {}
+    assert yao_acctunit._groupships == {}
     assert yao_acctunit._irrational_debtit_score == 0
     assert yao_acctunit._inallocable_debtit_score == 0
     assert yao_acctunit._fund_give == 0

@@ -1,6 +1,6 @@
 from src._instrument.python import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from src.bud.healer import healerhold_shop
 from src.bud.reason_doer import doerunit_shop
 from src.bud.reason_idea import factunit_shop
@@ -68,7 +68,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["_last_gift_id"] == x_bud._last_gift_id
     assert len(bud_dict["_accts"]) == len(x_bud._accts)
     assert len(bud_dict["_accts"]) != 12
-    assert bud_dict.get("_lobbys") is None
+    assert bud_dict.get("_groups") is None
 
     x_idearoot = x_bud._idearoot
     idearoot_dict = bud_dict["_idearoot"]
@@ -116,7 +116,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
     run_text = "runners"
     sue_bud = budunit_shop("Sue")
     x_doerunit = doerunit_shop()
-    x_doerunit.set_lobbyhold(lobby_id=run_text)
+    x_doerunit.set_grouphold(group_id=run_text)
     sue_bud.edit_idea_attr(doerunit=x_doerunit, road=sue_bud._real_id)
 
     # WHEN
@@ -125,7 +125,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
 
     # THEN
     assert idearoot_dict["_doerunit"] == x_doerunit.get_dict()
-    assert idearoot_dict["_doerunit"] == {"_lobbyholds": [run_text]}
+    assert idearoot_dict["_doerunit"] == {"_groupholds": [run_text]}
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
@@ -135,9 +135,9 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     sue_bud.add_acctunit(yao_text)
     run_text = ",runners"
     yao_acctunit = sue_bud.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
     run_healerhold = healerhold_shop()
-    run_healerhold.set_lobby_id(x_lobby_id=run_text)
+    run_healerhold.set_group_id(x_group_id=run_text)
     sue_bud.edit_idea_attr(road=sue_bud._real_id, healerhold=run_healerhold)
 
     # WHEN
@@ -155,13 +155,13 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     sue_bud.add_acctunit(yao_text)
     run_text = ",runners"
     yao_acctunit = sue_bud.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
 
     morn_text = "morning"
     morn_road = sue_bud.make_l1_road(morn_text)
     sue_bud.set_l1_idea(ideaunit_shop(morn_text))
     x_doerunit = doerunit_shop()
-    x_doerunit.set_lobbyhold(lobby_id=run_text)
+    x_doerunit.set_grouphold(group_id=run_text)
     sue_bud.edit_idea_attr(doerunit=x_doerunit, road=morn_road)
 
     # WHEN
@@ -174,7 +174,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
 
     doer_dict_x = idearoot_dict[_kids][morn_text][_doerunit]
     assert doer_dict_x == x_doerunit.get_dict()
-    assert doer_dict_x == {"_lobbyholds": [run_text]}
+    assert doer_dict_x == {"_groupholds": [run_text]}
 
 
 def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
@@ -195,7 +195,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     run_text = ",runners"
     zia_bud.add_acctunit(yao_text)
     yao_acctunit = zia_bud.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
     run_healerhold = healerhold_shop({run_text})
     zia_bud.edit_idea_attr(road=zia_bud._real_id, healerhold=run_healerhold)
     zia_bud.edit_idea_attr(road=zia_bud._real_id, problem_bool=True)
@@ -242,7 +242,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     idearoot_healerhold = idearoot_dict["_healerhold"]
     print(f"{idearoot_healerhold=}")
     assert len(idearoot_healerhold) == 1
-    assert x_idearoot._healerhold.any_lobby_id_exists()
+    assert x_idearoot._healerhold.any_group_id_exists()
     assert x_idearoot._problem_bool
 
 
@@ -337,13 +337,13 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     run_text = ",runners"
     sue_acctunit = zia_bud.get_acct(sue_text)
     xio_acctunit = zia_bud.get_acct(xio_text)
-    sue_acctunit.add_lobbyship(run_text)
-    xio_acctunit.add_lobbyship(run_text)
+    sue_acctunit.add_groupship(run_text)
+    xio_acctunit.add_groupship(run_text)
     run_doerunit = doerunit_shop()
-    run_doerunit.set_lobbyhold(lobby_id=run_text)
+    run_doerunit.set_grouphold(group_id=run_text)
     zia_bud.edit_idea_attr(zia_bud._real_id, doerunit=run_doerunit)
     xio_doerunit = doerunit_shop()
-    xio_doerunit.set_lobbyhold(lobby_id=xio_text)
+    xio_doerunit.set_grouphold(group_id=xio_text)
     zia_bud.edit_idea_attr(shave_road, doerunit=xio_doerunit)
     zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(xio_text))
     zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
@@ -383,7 +383,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_bud._debtor_respect == zia_debtor_respect
     assert json_bud._last_gift_id == zia_bud._last_gift_id
     assert json_bud._last_gift_id == zia_last_gift_id
-    # assert json_bud._lobbys == zia_bud._lobbys
+    # assert json_bud._groups == zia_bud._groups
 
     json_idearoot = json_bud._idearoot
     assert json_idearoot._parent_road == ""
@@ -458,7 +458,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_AcctExample():
     assert after_bob_acctunit._road_delimiter == slash_delimiter
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
+def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_GroupExample():
     # ESTABLISH
     slash_delimiter = "/"
     before_bob_bud = budunit_shop("Bob", _road_delimiter=slash_delimiter)
@@ -466,7 +466,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
     swim_text = f"{slash_delimiter}Swimmers"
     before_bob_bud.add_acctunit(yao_text)
     yao_acctunit = before_bob_bud.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(swim_text)
+    yao_acctunit.add_groupship(swim_text)
 
     # WHEN
     bob_json = before_bob_bud.get_json()
@@ -540,7 +540,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     philipa_text = "Philipa"
     ccn_philipa_acctunit = ccn_bud1.get_acct(philipa_text)
     x1_philipa_acctunit = x1_bud.get_acct(philipa_text)
-    assert ccn_philipa_acctunit._lobbyships == x1_philipa_acctunit._lobbyships
+    assert ccn_philipa_acctunit._groupships == x1_philipa_acctunit._groupships
     assert ccn_bud1 == x1_bud
     assert ccn_dict_of_obj.get(x1_bud._owner_id) == x1_bud
 

@@ -4,7 +4,7 @@ from src.bud.examples.example_buds import (
 )
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from src.bud.graphic import display_ideatree
 
 
@@ -192,7 +192,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     x_bud.set_idea(vacuum_idea, parent_road=casa_road)
 
     x_bud.add_acctunit(acct_id=sue_text)
-    x_awardlink = awardlink_shop(lobby_id=sue_text)
+    x_awardlink = awardlink_shop(group_id=sue_text)
 
     x_bud._idearoot._kids[casa_text]._kids[email_text].set_awardlink(
         awardlink=x_awardlink
@@ -441,7 +441,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_massButAll_kidsHaveZero_massAddTo_of
     assert sue_budunit._offtrack_kids_mass_set == {clean_road}
 
 
-def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
+def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
@@ -457,36 +457,36 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
     x_idearoot.set_awardlink(awardlink_shop(zia_text))
     xio_text = "Xio"
     x_idearoot.set_awardlink(awardlink_shop(xio_text))
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
-    assert not yao_bud.lobbybox_exists(yao_text)
-    assert not yao_bud.lobbybox_exists(zia_text)
-    assert not yao_bud.lobbybox_exists(xio_text)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
+    assert not yao_bud.groupbox_exists(yao_text)
+    assert not yao_bud.groupbox_exists(zia_text)
+    assert not yao_bud.groupbox_exists(xio_text)
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud.lobbybox_exists(yao_text)
-    assert yao_bud.lobbybox_exists(zia_text)
-    assert yao_bud.lobbybox_exists(xio_text)
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
-    assert len(yao_bud._lobbyboxs) == 3
-    xio_lobbybox = yao_bud.get_lobbybox(xio_text)
-    xio_symmerty_lobbybox = yao_bud.create_symmetry_lobbybox(xio_text)
-    assert xio_lobbybox._lobbyships.keys() == xio_symmerty_lobbybox._lobbyships.keys()
-    assert xio_lobbybox.lobbyship_exists(yao_text)
-    assert xio_lobbybox.lobbyship_exists(zia_text)
-    assert not xio_lobbybox.lobbyship_exists(xio_text)
-    yao_lobbyship = xio_lobbybox.get_lobbyship(yao_text)
-    zia_lobbyship = xio_lobbybox.get_lobbyship(zia_text)
-    assert yao_lobbyship.credit_score == yao_credit_score
-    assert zia_lobbyship.credit_score == zia_credit_score
-    assert yao_lobbyship.debtit_score == yao_debtit_score
-    assert zia_lobbyship.debtit_score == zia_debtit_score
+    assert yao_bud.groupbox_exists(yao_text)
+    assert yao_bud.groupbox_exists(zia_text)
+    assert yao_bud.groupbox_exists(xio_text)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupboxs)
+    assert len(yao_bud._groupboxs) == 3
+    xio_groupbox = yao_bud.get_groupbox(xio_text)
+    xio_symmerty_groupbox = yao_bud.create_symmetry_groupbox(xio_text)
+    assert xio_groupbox._groupships.keys() == xio_symmerty_groupbox._groupships.keys()
+    assert xio_groupbox.groupship_exists(yao_text)
+    assert xio_groupbox.groupship_exists(zia_text)
+    assert not xio_groupbox.groupship_exists(xio_text)
+    yao_groupship = xio_groupbox.get_groupship(yao_text)
+    zia_groupship = xio_groupbox.get_groupship(zia_text)
+    assert yao_groupship.credit_score == yao_credit_score
+    assert zia_groupship.credit_score == zia_credit_score
+    assert yao_groupship.debtit_score == yao_debtit_score
+    assert zia_groupship.debtit_score == zia_debtit_score
 
 
-def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():
+def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():
     # ESTABLISH
     yao_text = "yao"
     yao_bud = budunit_shop(yao_text)
@@ -501,30 +501,30 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():
     swim_idea.set_awardlink(awardlink_shop(zia_text))
     xio_text = "Xio"
     swim_idea.set_awardlink(awardlink_shop(xio_text))
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
-    assert not yao_bud.lobbybox_exists(yao_text)
-    assert not yao_bud.lobbybox_exists(zia_text)
-    assert not yao_bud.lobbybox_exists(xio_text)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
+    assert not yao_bud.groupbox_exists(yao_text)
+    assert not yao_bud.groupbox_exists(zia_text)
+    assert not yao_bud.groupbox_exists(xio_text)
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud.lobbybox_exists(yao_text)
-    assert yao_bud.lobbybox_exists(zia_text)
-    assert yao_bud.lobbybox_exists(xio_text)
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
-    assert len(yao_bud._lobbyboxs) == 3
-    xio_lobbybox = yao_bud.get_lobbybox(xio_text)
-    xio_symmerty_lobbybox = yao_bud.create_symmetry_lobbybox(xio_text)
-    assert xio_lobbybox._lobbyships.keys() == xio_symmerty_lobbybox._lobbyships.keys()
-    assert xio_lobbybox.lobbyship_exists(yao_text)
-    assert xio_lobbybox.lobbyship_exists(zia_text)
-    assert not xio_lobbybox.lobbyship_exists(xio_text)
+    assert yao_bud.groupbox_exists(yao_text)
+    assert yao_bud.groupbox_exists(zia_text)
+    assert yao_bud.groupbox_exists(xio_text)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupboxs)
+    assert len(yao_bud._groupboxs) == 3
+    xio_groupbox = yao_bud.get_groupbox(xio_text)
+    xio_symmerty_groupbox = yao_bud.create_symmetry_groupbox(xio_text)
+    assert xio_groupbox._groupships.keys() == xio_symmerty_groupbox._groupships.keys()
+    assert xio_groupbox.groupship_exists(yao_text)
+    assert xio_groupbox.groupship_exists(zia_text)
+    assert not xio_groupbox.groupship_exists(xio_text)
 
 
-def test_BudUnit_get_tree_traverse_generated_lobbyboxs_ReturnsObj():
+def test_BudUnit_get_tree_traverse_generated_groupboxs_ReturnsObj():
     # ESTABLISH
     yao_text = "yao"
     yao_bud = budunit_shop(yao_text)
@@ -540,29 +540,29 @@ def test_BudUnit_get_tree_traverse_generated_lobbyboxs_ReturnsObj():
     xio_text = "Xio"
     swim_idea.set_awardlink(awardlink_shop(xio_text))
     yao_bud.settle_bud()
-    assert yao_bud.lobbybox_exists(yao_text)
-    assert yao_bud.lobbybox_exists(zia_text)
-    assert yao_bud.lobbybox_exists(xio_text)
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 2
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) != len(yao_bud._lobbyboxs)
+    assert yao_bud.groupbox_exists(yao_text)
+    assert yao_bud.groupbox_exists(zia_text)
+    assert yao_bud.groupbox_exists(xio_text)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupboxs)
 
     # WHEN
-    symmerty_lobby_ids = yao_bud.get_tree_traverse_generated_lobbyboxs()
+    symmerty_group_ids = yao_bud.get_tree_traverse_generated_groupboxs()
 
     # THEN
-    assert len(symmerty_lobby_ids) == 1
-    assert symmerty_lobby_ids == {xio_text}
+    assert len(symmerty_group_ids) == 1
+    assert symmerty_group_ids == {xio_text}
 
     # ESTABLISH
     run_text = ",Run"
     swim_idea.set_awardlink(awardlink_shop(run_text))
-    assert not yao_bud.lobbybox_exists(run_text)
+    assert not yao_bud.groupbox_exists(run_text)
     yao_bud.settle_bud()
-    assert yao_bud.lobbybox_exists(run_text)
+    assert yao_bud.groupbox_exists(run_text)
 
     # WHEN
-    symmerty_lobby_ids = yao_bud.get_tree_traverse_generated_lobbyboxs()
+    symmerty_group_ids = yao_bud.get_tree_traverse_generated_groupboxs()
 
     # THEN
-    assert len(symmerty_lobby_ids) == 2
-    assert symmerty_lobby_ids == {xio_text, run_text}
+    assert len(symmerty_group_ids) == 2
+    assert symmerty_group_ids == {xio_text, run_text}

@@ -34,8 +34,8 @@ def test_bud_idearoot_doerunit_CorrectlySets_idea_doerheir():
 
     # THEN
     x_doerheir = doerheir_shop()
-    x_doerheir.set_lobbyholds(
-        parent_doerheir=None, doerunit=x_doerunit, bud_lobbyboxs=None
+    x_doerheir.set_groupholds(
+        parent_doerheir=None, doerunit=x_doerunit, bud_groupboxs=None
     )
     assert yao_bud._idearoot._doerheir is not None
     assert yao_bud._idearoot._doerheir == x_doerheir
@@ -63,12 +63,12 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     assert run_idea._doerheir._owner_id_doer
 
     x_doerheir = doerheir_shop()
-    x_doerheir.set_lobbyholds(
+    x_doerheir.set_groupholds(
         parent_doerheir=None,
         doerunit=x_doerunit,
-        bud_lobbyboxs=bob_bud._lobbyboxs,
+        bud_groupboxs=bob_bud._groupboxs,
     )
-    x_doerheir.set_owner_id_doer(bob_bud._lobbyboxs, bob_bud._owner_id)
+    x_doerheir.set_owner_id_doer(bob_bud._groupboxs, bob_bud._owner_id)
     print(f"{x_doerheir._owner_id_doer=}")
     assert run_idea._doerheir._owner_id_doer == x_doerheir._owner_id_doer
     assert run_idea._doerheir == x_doerheir
@@ -96,12 +96,12 @@ def test_bud_ideakid_doerunit_EmptyCorrectlySets_idea_doerheir():
     assert run_idea._doerheir._owner_id_doer
 
     x_doerheir = doerheir_shop()
-    x_doerheir.set_lobbyholds(
+    x_doerheir.set_groupholds(
         parent_doerheir=None,
         doerunit=x_doerunit,
-        bud_lobbyboxs=bob_bud._lobbyboxs,
+        bud_groupboxs=bob_bud._groupboxs,
     )
-    x_doerheir.set_owner_id_doer(bob_bud._lobbyboxs, bob_bud._owner_id)
+    x_doerheir.set_owner_id_doer(bob_bud._groupboxs, bob_bud._owner_id)
     print(f"{x_doerheir._owner_id_doer=}")
     assert run_idea._doerheir._owner_id_doer == x_doerheir._owner_id_doer
     assert run_idea._doerheir == x_doerheir
@@ -118,12 +118,12 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     four_road = sue_bud.make_road(morn_road, four_text)
     x_doerunit = doerunit_shop()
     swimmers_text = ",swimmers"
-    x_doerunit.set_lobbyhold(lobby_id=swimmers_text)
+    x_doerunit.set_grouphold(group_id=swimmers_text)
 
     yao_text = "Yao"
     sue_bud.add_acctunit(yao_text)
     yao_acctunit = sue_bud.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(swimmers_text)
+    yao_acctunit.add_groupship(swimmers_text)
 
     sue_bud.set_l1_idea(ideaunit_shop(swim_text))
     sue_bud.set_idea(ideaunit_shop(morn_text), parent_road=swim_road)
@@ -139,10 +139,10 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
 
     # THEN
     x_doerheir = doerheir_shop()
-    x_doerheir.set_lobbyholds(
+    x_doerheir.set_groupholds(
         parent_doerheir=None,
         doerunit=x_doerunit,
-        bud_lobbyboxs=sue_bud._lobbyboxs,
+        bud_groupboxs=sue_bud._groupboxs,
     )
     assert four_idea._doerheir is not None
     assert four_idea._doerheir == x_doerheir
@@ -164,12 +164,12 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit():
     sue1_bud.set_idea(ideaunit_shop(casa_text), parent_road=sue1_bud._real_id)
     sue1_bud.set_idea(ideaunit_shop(swim_text), parent_road=sue1_bud._real_id)
     swim_doerunit = doerunit_shop()
-    swim_doerunit.set_lobbyhold(lobby_id=xia_text)
-    swim_doerunit.set_lobbyhold(lobby_id=zoa_text)
+    swim_doerunit.set_grouphold(group_id=xia_text)
+    swim_doerunit.set_grouphold(group_id=zoa_text)
     sue1_bud.edit_idea_attr(swim_road, doerunit=swim_doerunit)
     sue1_bud_swim_idea = sue1_bud.get_idea_obj(swim_road)
-    sue1_bud_swim_lobbyholds = sue1_bud_swim_idea._doerunit._lobbyholds
-    assert len(sue1_bud_swim_lobbyholds) == 2
+    sue1_bud_swim_groupholds = sue1_bud_swim_idea._doerunit._groupholds
+    assert len(sue1_bud_swim_groupholds) == 2
 
     # WHEN
     sue2_bud = budunit_shop(sue_text)
@@ -177,9 +177,9 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Doerunit():
     filtered_idea = sue2_bud._get_filtered_awardlinks_idea(sue1_bud_swim_idea)
 
     # THEN
-    filtered_swim_lobbyholds = filtered_idea._doerunit._lobbyholds
-    assert len(filtered_swim_lobbyholds) == 1
-    assert list(filtered_swim_lobbyholds) == [xia_text]
+    filtered_swim_groupholds = filtered_idea._doerunit._groupholds
+    assert len(filtered_swim_groupholds) == 1
+    assert list(filtered_swim_groupholds) == [xia_text]
 
 
 def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
@@ -197,22 +197,22 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     sue1_bud.set_idea(ideaunit_shop(casa_text), parent_road=sue1_bud._real_id)
     sue1_bud.set_idea(ideaunit_shop(swim_text), parent_road=sue1_bud._real_id)
     swim_doerunit = doerunit_shop()
-    swim_doerunit.set_lobbyhold(lobby_id=xia_text)
-    swim_doerunit.set_lobbyhold(lobby_id=zoa_text)
+    swim_doerunit.set_grouphold(group_id=xia_text)
+    swim_doerunit.set_grouphold(group_id=zoa_text)
     sue1_bud.edit_idea_attr(swim_road, doerunit=swim_doerunit)
     sue1_bud_swim_idea = sue1_bud.get_idea_obj(swim_road)
-    sue1_bud_swim_lobbyholds = sue1_bud_swim_idea._doerunit._lobbyholds
-    assert len(sue1_bud_swim_lobbyholds) == 2
+    sue1_bud_swim_groupholds = sue1_bud_swim_idea._doerunit._groupholds
+    assert len(sue1_bud_swim_groupholds) == 2
 
     # WHEN
     sue2_bud = budunit_shop("Sue")
     sue2_bud.add_acctunit(xia_text)
     sue2_bud.set_l1_idea(
-        sue1_bud_swim_idea, filter_out_missing_awardlinks_lobby_ids=False
+        sue1_bud_swim_idea, filter_out_missing_awardlinks_group_ids=False
     )
 
     # THEN
     sue2_bud_swim_idea = sue2_bud.get_idea_obj(swim_road)
-    sue2_bud_swim_lobbyholds = sue2_bud_swim_idea._doerunit._lobbyholds
-    assert len(sue2_bud_swim_lobbyholds) == 1
-    assert list(sue2_bud_swim_lobbyholds) == [xia_text]
+    sue2_bud_swim_groupholds = sue2_bud_swim_idea._doerunit._groupholds
+    assert len(sue2_bud_swim_groupholds) == 1
+    assert list(sue2_bud_swim_groupholds) == [xia_text]

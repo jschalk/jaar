@@ -17,12 +17,12 @@ from src.gift.atom_config import (
     python_type_text,
     budunit_text,
     bud_acctunit_text,
-    bud_acct_lobbyship_text,
+    bud_acct_groupship_text,
     bud_ideaunit_text,
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_lobbyhold_text,
+    bud_idea_grouphold_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
 )
@@ -36,8 +36,8 @@ def test_bud_acctunit_text_ReturnsObj():
     assert bud_acctunit_text() == "bud_acctunit"
 
 
-def test_bud_acct_lobbyship_text_ReturnsObj():
-    assert bud_acct_lobbyship_text() == "bud_acct_lobbyship"
+def test_bud_acct_groupship_text_ReturnsObj():
+    assert bud_acct_groupship_text() == "bud_acct_groupship"
 
 
 def test_bud_ideaunit_text_ReturnsObj():
@@ -56,8 +56,8 @@ def test_bud_idea_reason_premiseunit_text_ReturnsObj():
     assert bud_idea_reason_premiseunit_text() == "bud_idea_reason_premiseunit"
 
 
-def test_bud_idea_lobbyhold_text_ReturnsObj():
-    assert bud_idea_lobbyhold_text() == "bud_idea_lobbyhold"
+def test_bud_idea_grouphold_text_ReturnsObj():
+    assert bud_idea_grouphold_text() == "bud_idea_grouphold"
 
 
 def test_bud_idea_healerhold_text_ReturnsObj():
@@ -72,12 +72,12 @@ def test_atom_config_HasCorrect_category():
     assert category_ref() == {
         budunit_text(),
         bud_acctunit_text(),
-        bud_acct_lobbyship_text(),
+        bud_acct_groupship_text(),
         bud_ideaunit_text(),
         bud_idea_awardlink_text(),
         bud_idea_reasonunit_text(),
         bud_idea_reason_premiseunit_text(),
-        bud_idea_lobbyhold_text(),
+        bud_idea_grouphold_text(),
         bud_idea_healerhold_text(),
         bud_idea_factunit_text(),
     }
@@ -138,7 +138,7 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
     return True
 
 
-def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderLobby():
+def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     # ESTABLISH
     atom_order_text = "atom_order"
     mog = atom_order_text
@@ -147,16 +147,16 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderLobby():
     assert check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_text)
     # # Simple script for editing atom_config.json
     # set_mog(atom_insert(), "bud_acctunit", 0)
-    # set_mog(atom_insert(), "bud_acct_lobbyship", 1)
+    # set_mog(atom_insert(), "bud_acct_groupship", 1)
     # set_mog(atom_insert(), "bud_ideaunit", 2)
     # set_mog(atom_insert(), "bud_idea_awardlink", 3)
-    # set_mog(atom_insert(), "bud_idea_lobbyhold", 4)
+    # set_mog(atom_insert(), "bud_idea_grouphold", 4)
     # set_mog(atom_insert(), "bud_idea_healerhold", 5)
     # set_mog(atom_insert(), "bud_idea_factunit", 6)
     # set_mog(atom_insert(), "bud_idea_reasonunit", 7)
     # set_mog(atom_insert(), "bud_idea_reason_premiseunit", 8)
     # set_mog(atom_update(), "bud_acctunit", 9)
-    # set_mog(atom_update(), "bud_acct_lobbyship", 10)
+    # set_mog(atom_update(), "bud_acct_groupship", 10)
     # set_mog(atom_update(), "bud_ideaunit", 11)
     # set_mog(atom_update(), "bud_idea_awardlink", 12)
     # set_mog(atom_update(), "bud_idea_factunit", 13)
@@ -165,25 +165,25 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderLobby():
     # set_mog(atom_delete(), "bud_idea_reason_premiseunit", 16)
     # set_mog(atom_delete(), "bud_idea_reasonunit", 17)
     # set_mog(atom_delete(), "bud_idea_factunit", 18)
-    # set_mog(atom_delete(), "bud_idea_lobbyhold", 19)
+    # set_mog(atom_delete(), "bud_idea_grouphold", 19)
     # set_mog(atom_delete(), "bud_idea_healerhold", 20)
     # set_mog(atom_delete(), "bud_idea_awardlink", 21)
     # set_mog(atom_delete(), "bud_ideaunit", 22)
-    # set_mog(atom_delete(), "bud_acct_lobbyship", 23)
+    # set_mog(atom_delete(), "bud_acct_groupship", 23)
     # set_mog(atom_delete(), "bud_acctunit", 24)
     # set_mog(atom_update(), "budunit", 25)
 
     assert 0 == q_order(atom_insert(), "bud_acctunit")
-    assert 1 == q_order(atom_insert(), "bud_acct_lobbyship")
+    assert 1 == q_order(atom_insert(), "bud_acct_groupship")
     assert 2 == q_order(atom_insert(), "bud_ideaunit")
     assert 3 == q_order(atom_insert(), "bud_idea_awardlink")
-    assert 4 == q_order(atom_insert(), "bud_idea_lobbyhold")
+    assert 4 == q_order(atom_insert(), "bud_idea_grouphold")
     assert 5 == q_order(atom_insert(), "bud_idea_healerhold")
     assert 6 == q_order(atom_insert(), "bud_idea_factunit")
     assert 7 == q_order(atom_insert(), "bud_idea_reasonunit")
     assert 8 == q_order(atom_insert(), "bud_idea_reason_premiseunit")
     assert 9 == q_order(atom_update(), "bud_acctunit")
-    assert 10 == q_order(atom_update(), "bud_acct_lobbyship")
+    assert 10 == q_order(atom_update(), "bud_acct_groupship")
     assert 11 == q_order(atom_update(), "bud_ideaunit")
     assert 12 == q_order(atom_update(), "bud_idea_awardlink")
     assert 13 == q_order(atom_update(), "bud_idea_factunit")
@@ -192,11 +192,11 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderLobby():
     assert 16 == q_order(atom_delete(), "bud_idea_reason_premiseunit")
     assert 17 == q_order(atom_delete(), "bud_idea_reasonunit")
     assert 18 == q_order(atom_delete(), "bud_idea_factunit")
-    assert 19 == q_order(atom_delete(), "bud_idea_lobbyhold")
+    assert 19 == q_order(atom_delete(), "bud_idea_grouphold")
     assert 20 == q_order(atom_delete(), "bud_idea_healerhold")
     assert 21 == q_order(atom_delete(), "bud_idea_awardlink")
     assert 22 == q_order(atom_delete(), "bud_ideaunit")
-    assert 23 == q_order(atom_delete(), "bud_acct_lobbyship")
+    assert 23 == q_order(atom_delete(), "bud_acct_groupship")
     assert 24 == q_order(atom_delete(), "bud_acctunit")
     assert 25 == q_order(atom_update(), "budunit")
 
@@ -251,34 +251,34 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert len(nx) == 10
     cat_budunit = nx.get(budunit_text())
     cat_acctunit = nx.get(bud_acctunit_text())
-    cat_lobbyship = nx.get(bud_acct_lobbyship_text())
+    cat_groupship = nx.get(bud_acct_groupship_text())
     cat_idea = nx.get(bud_ideaunit_text())
     cat_awardlink = nx.get(bud_idea_awardlink_text())
     cat_reason = nx.get(bud_idea_reasonunit_text())
     cat_premise = nx.get(bud_idea_reason_premiseunit_text())
-    cat_lobbyhold = nx.get(bud_idea_lobbyhold_text())
+    cat_grouphold = nx.get(bud_idea_grouphold_text())
     cat_healerhold = nx.get(bud_idea_healerhold_text())
     cat_fact = nx.get(bud_idea_factunit_text())
 
     assert cat_budunit is not None
     assert cat_acctunit is not None
-    assert cat_lobbyship is not None
+    assert cat_groupship is not None
     assert cat_idea is not None
     assert cat_awardlink is not None
     assert cat_reason is not None
     assert cat_premise is not None
-    assert cat_lobbyhold is not None
+    assert cat_grouphold is not None
     assert cat_healerhold is not None
     assert cat_fact is not None
 
     normal_specs_budunit = cat_budunit.get(normal_specs_text())
     normal_specs_acctunit = cat_acctunit.get(normal_specs_text())
-    normal_specs_lobbyship = cat_lobbyship.get(normal_specs_text())
+    normal_specs_groupship = cat_groupship.get(normal_specs_text())
     normal_specs_idea = cat_idea.get(normal_specs_text())
     normal_specs_awardlink = cat_awardlink.get(normal_specs_text())
     normal_specs_reason = cat_reason.get(normal_specs_text())
     normal_specs_premise = cat_premise.get(normal_specs_text())
-    normal_specs_lobbyhold = cat_lobbyhold.get(normal_specs_text())
+    normal_specs_grouphold = cat_grouphold.get(normal_specs_text())
     normal_specs_healerhold = cat_healerhold.get(normal_specs_text())
     normal_specs_fact = cat_fact.get(normal_specs_text())
 
@@ -287,34 +287,34 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     print(f"{normal_specs_text()=}")
     assert normal_specs_budunit is not None
     assert normal_specs_acctunit is not None
-    assert normal_specs_lobbyship is not None
+    assert normal_specs_groupship is not None
     assert normal_specs_idea is not None
     assert normal_specs_awardlink is not None
     assert normal_specs_reason is not None
     assert normal_specs_premise is not None
-    assert normal_specs_lobbyhold is not None
+    assert normal_specs_grouphold is not None
     assert normal_specs_healerhold is not None
     assert normal_specs_fact is not None
 
     table_name_budunit = normal_specs_budunit.get(normal_table_name_text())
     table_name_acctunit = normal_specs_acctunit.get(normal_table_name_text())
-    table_name_lobbyship = normal_specs_lobbyship.get(normal_table_name_text())
+    table_name_groupship = normal_specs_groupship.get(normal_table_name_text())
     table_name_idea = normal_specs_idea.get(normal_table_name_text())
     table_name_awardlink = normal_specs_awardlink.get(normal_table_name_text())
     table_name_reason = normal_specs_reason.get(normal_table_name_text())
     table_name_premise = normal_specs_premise.get(normal_table_name_text())
-    table_name_lobbyhold = normal_specs_lobbyhold.get(normal_table_name_text())
+    table_name_grouphold = normal_specs_grouphold.get(normal_table_name_text())
     table_name_healerhold = normal_specs_healerhold.get(normal_table_name_text())
     table_name_fact = normal_specs_fact.get(normal_table_name_text())
 
     assert table_name_budunit == "bud"
     assert table_name_acctunit == "acctunit"
-    assert table_name_lobbyship == "lobbyship"
+    assert table_name_groupship == "groupship"
     assert table_name_idea == "idea"
     assert table_name_awardlink == "awardlink"
     assert table_name_reason == "reason"
     assert table_name_premise == "premise"
-    assert table_name_lobbyhold == "lobbyhold"
+    assert table_name_grouphold == "grouphold"
     assert table_name_healerhold == "healerhold"
     assert table_name_fact == "fact"
 

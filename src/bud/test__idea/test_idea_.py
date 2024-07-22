@@ -5,7 +5,7 @@ from src._road.road import (
     default_road_delimiter_if_none,
 )
 from src.bud.healer import healerhold_shop
-from src.bud.lobby import awardlink_shop, awardheir_shop
+from src.bud.group import awardlink_shop, awardheir_shop
 from src.bud.reason_idea import (
     reasonunit_shop,
     reasonheir_shop,
@@ -200,31 +200,31 @@ def test_IdeaUnit_awardlinks_exist():
     biker_give_force = 12
     biker_take_force = 15
     biker_awardlink = awardlink_shop(
-        lobby_id="bikers2",
+        group_id="bikers2",
         give_force=biker_give_force,
         take_force=biker_take_force,
     )
 
-    swimmer_lobby_id = "swimmers"
+    swimmer_group_id = "swimmers"
     swimmer_give_force = 29
     swimmer_take_force = 32
     swimmer_awardlink = awardlink_shop(
-        lobby_id=swimmer_lobby_id,
+        group_id=swimmer_group_id,
         give_force=swimmer_give_force,
         take_force=swimmer_take_force,
     )
 
-    x_lobbyships = {
-        swimmer_awardlink.lobby_id: swimmer_awardlink,
-        biker_awardlink.lobby_id: biker_awardlink,
+    x_groupships = {
+        swimmer_awardlink.group_id: swimmer_awardlink,
+        biker_awardlink.group_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_lobbyships)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_groupships)
 
     # THEN
-    assert sport_idea._awardlinks == x_lobbyships
+    assert sport_idea._awardlinks == x_groupships
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -234,16 +234,16 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     biker_text = "bikers2"
     biker_awardlink = awardheir_shop(biker_text, biker_give_force, biker_take_force)
     swim_text = "swimmers"
-    swim_lobby_id = swim_text
+    swim_group_id = swim_text
     swim_give_force = 29
     swim_take_force = 32
-    swim_awardlink = awardheir_shop(swim_lobby_id, swim_give_force, swim_take_force)
-    x_lobbyships = {
-        swim_awardlink.lobby_id: swim_awardlink,
-        biker_awardlink.lobby_id: biker_awardlink,
+    swim_awardlink = awardheir_shop(swim_group_id, swim_give_force, swim_take_force)
+    x_groupships = {
+        swim_awardlink.group_id: swim_awardlink,
+        biker_awardlink.group_id: biker_awardlink,
     }
     sport_text = "sport"
-    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_lobbyships)
+    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_groupships)
     assert sport_idea._fund_coin == 1
     assert len(sport_idea._awardheirs) == 2
     swim_awardheir = sport_idea._awardheirs.get(swim_text)
@@ -441,13 +441,13 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
     # WHEN
     sue_text = "Sue"
     zia_text = "Zia"
-    healerhold_dict = {"healerhold_lobby_ids": [sue_text, zia_text]}
+    healerhold_dict = {"healerhold_group_ids": [sue_text, zia_text]}
     ideaunit_dict = {healerhold_key: healerhold_dict}
 
     # THEN
     static_healerhold = healerhold_shop()
-    static_healerhold.set_lobby_id(x_lobby_id=sue_text)
-    static_healerhold.set_lobby_id(x_lobby_id=zia_text)
+    static_healerhold.set_group_id(x_group_id=sue_text)
+    static_healerhold.set_group_id(x_group_id=zia_text)
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) is not None
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
 
@@ -484,33 +484,33 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
             base=states_road, premises={usa_premise.need: usa_premise}, _status=False
         ),
     }
-    biker_lobby_id = "bikers"
+    biker_group_id = "bikers"
     biker_give_force = 3.0
     biker_take_force = 7.0
-    biker_awardlink = awardlink_shop(biker_lobby_id, biker_give_force, biker_take_force)
-    flyer_lobby_id = "flyers"
+    biker_awardlink = awardlink_shop(biker_group_id, biker_give_force, biker_take_force)
+    flyer_group_id = "flyers"
     flyer_give_force = 6.0
     flyer_take_force = 9.0
     flyer_awardlink = awardlink_shop(
-        lobby_id=flyer_lobby_id,
+        group_id=flyer_group_id,
         give_force=flyer_give_force,
         take_force=flyer_take_force,
     )
     biker_and_flyer_awardlinks = {
-        biker_awardlink.lobby_id: biker_awardlink,
-        flyer_awardlink.lobby_id: flyer_awardlink,
+        biker_awardlink.group_id: biker_awardlink,
+        flyer_awardlink.group_id: flyer_awardlink,
     }
     biker_get_dict = {
-        "lobby_id": biker_awardlink.lobby_id,
+        "group_id": biker_awardlink.group_id,
         "give_force": biker_awardlink.give_force,
         "take_force": biker_awardlink.take_force,
     }
     flyer_get_dict = {
-        "lobby_id": flyer_awardlink.lobby_id,
+        "group_id": flyer_awardlink.group_id,
         "give_force": flyer_awardlink.give_force,
         "take_force": flyer_awardlink.take_force,
     }
-    x1_awardlinks = {biker_lobby_id: biker_get_dict, flyer_lobby_id: flyer_get_dict}
+    x1_awardlinks = {biker_group_id: biker_get_dict, flyer_group_id: flyer_get_dict}
     sue_text = "Sue"
     yao_text = "Yao"
     sue_doerunit = doerunit_shop({sue_text: -1, yao_text: -1})
@@ -610,7 +610,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_idea.set_awardlink(awardlink_shop(yao_text))
 
     x_doerunit = casa_idea._doerunit
-    x_doerunit.set_lobbyhold(lobby_id=yao_text)
+    x_doerunit.set_grouphold(group_id=yao_text)
 
     x_originunit = casa_idea._originunit
     x_originunit.set_originhold(yao_text, 1)
@@ -881,19 +881,19 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     swim_text = "swimmers"
     sport_text = "sports"
     sport_idea = ideaunit_shop(_label=sport_text)
-    sport_idea._doerunit.set_lobbyhold(lobby_id=swim_text)
+    sport_idea._doerunit.set_grouphold(group_id=swim_text)
     # assert sport_idea._doerheir is None
 
     # WHEN
-    sport_idea.set_doerheir(parent_doerheir=None, bud_lobbyboxs=None)
+    sport_idea.set_doerheir(parent_doerheir=None, bud_groupboxs=None)
 
     # THEN
     assert sport_idea._doerheir is not None
     swim_doerunit = doerunit_shop()
-    swim_doerunit.set_lobbyhold(lobby_id=swim_text)
+    swim_doerunit.set_grouphold(group_id=swim_text)
     swim_doerheir = doerheir_shop()
-    swim_doerheir.set_lobbyholds(
-        doerunit=swim_doerunit, parent_doerheir=None, bud_lobbyboxs=None
+    swim_doerheir.set_groupholds(
+        doerunit=swim_doerunit, parent_doerheir=None, bud_groupboxs=None
     )
     assert sport_idea._doerheir == swim_doerheir
 

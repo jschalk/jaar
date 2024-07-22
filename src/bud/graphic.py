@@ -40,9 +40,9 @@ def _get_color_for_ideaunit_trace(x_ideaunit: IdeaUnit, mode: str) -> str:
     elif mode == "Task":
         return "Red" if x_ideaunit.pledge else "Pink"
     elif mode == "Econ":
-        if x_ideaunit._problem_bool and x_ideaunit._healerhold.any_lobby_id_exists():
+        if x_ideaunit._problem_bool and x_ideaunit._healerhold.any_group_id_exists():
             return "Purple"
-        elif x_ideaunit._healerhold.any_lobby_id_exists():
+        elif x_ideaunit._healerhold.any_group_id_exists():
             return "Blue"
         elif x_ideaunit._problem_bool:
             return "Red"
@@ -268,7 +268,7 @@ def create_idea_rect(
     add_rect_text(fig, x=text_x, y=text_y, text=display_text)
 
 
-def add_lobby_rect(
+def add_group_rect(
     fig: plotly_Figure,
     base_width,
     base_h,
@@ -356,7 +356,7 @@ def budunit_explanation0() -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
+    add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
     fig.add_trace(
         plotly_Scatter(
@@ -375,10 +375,10 @@ def budunit_explanation1() -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    add_lobby_rect(fig, base_w, base_h, 2, 0, 0.2, "lobby1")
-    add_lobby_rect(fig, base_w, base_h, 2, 0.2, 0.4, "lobby2")
-    add_lobby_rect(fig, base_w, base_h, 2, 0.4, 0.6, "lobby3")
-    add_lobby_rect(fig, base_w, base_h, 2, 0.6, 1, "lobby4")
+    add_group_rect(fig, base_w, base_h, 2, 0, 0.2, "group1")
+    add_group_rect(fig, base_w, base_h, 2, 0.2, 0.4, "group2")
+    add_group_rect(fig, base_w, base_h, 2, 0.4, 0.6, "group3")
+    add_group_rect(fig, base_w, base_h, 2, 0.6, 1, "group4")
     add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "acct0")
     add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "acct1")
     add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "acct2")
@@ -391,7 +391,7 @@ def budunit_explanation1() -> plotly_Figure:
             text=[
                 "What Jaar Buds Are Made of Explanation 1",
                 "People are in blue",
-                "Lobbys are in green",
+                "Groups are in green",
             ],
             mode="text",
         )
@@ -407,7 +407,7 @@ def budunit_explanation2() -> plotly_Figure:
     base_w = 0.1
     base_h = 0.125
     create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
-    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
+    add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
     fig.add_trace(
@@ -438,7 +438,7 @@ def budunit_explanation3() -> plotly_Figure:
     create_idea_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Idea")
     create_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Idea")
     create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
-    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
+    add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
     fig.add_trace(
@@ -469,7 +469,7 @@ def budunit_explanation4() -> plotly_Figure:
     create_idea_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
     create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
     create_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
-    add_lobby_rect(fig, base_w, base_h, 1, 0, 1, "lobbys")
+    add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
     fig.add_trace(

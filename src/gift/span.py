@@ -6,12 +6,12 @@ from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.atom_config import (
     budunit_text,
     bud_acctunit_text,
-    bud_acct_lobbyship_text,
+    bud_acct_groupship_text,
     bud_ideaunit_text,
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_lobbyhold_text,
+    bud_idea_grouphold_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
 )
@@ -33,8 +33,8 @@ def acct_id_str() -> str:
     return "acct_id"
 
 
-def lobby_id_str() -> str:
-    return "lobby_id"
+def group_id_str() -> str:
+    return "group_id"
 
 
 def acct_pool_str() -> str:
@@ -109,8 +109,8 @@ def jaar_format_0001_acct_v0_0_0() -> str:
     return "jaar_format_0001_acct_v0_0_0"
 
 
-def jaar_format_0002_lobbyship_v0_0_0() -> str:
-    return "jaar_format_0002_lobbyship_v0_0_0"
+def jaar_format_0002_groupship_v0_0_0() -> str:
+    return "jaar_format_0002_groupship_v0_0_0"
 
 
 def jaar_format_0003_ideaunit_v0_0_0() -> str:
@@ -120,7 +120,7 @@ def jaar_format_0003_ideaunit_v0_0_0() -> str:
 def get_span_filenames() -> set[str]:
     return {
         jaar_format_0001_acct_v0_0_0(),
-        jaar_format_0002_lobbyship_v0_0_0(),
+        jaar_format_0002_groupship_v0_0_0(),
         jaar_format_0003_ideaunit_v0_0_0(),
     }
 
@@ -207,13 +207,13 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
             for x_atomunit in sorted_atomunits
         ]
 
-    elif span_name == jaar_format_0002_lobbyship_v0_0_0():
+    elif span_name == jaar_format_0002_groupship_v0_0_0():
         d2_list = [
             [
                 x_budunit._real_id,
                 x_budunit._owner_id,
                 x_atomunit.get_value(acct_id_str()),
-                x_atomunit.get_value(lobby_id_str()),
+                x_atomunit.get_value(group_id_str()),
                 x_atomunit.get_value(credit_score_str()),
                 x_atomunit.get_value(debtit_score_str()),
             ]

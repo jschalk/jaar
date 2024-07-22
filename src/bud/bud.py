@@ -45,7 +45,7 @@ from src._road.road import (
 )
 
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
-from src.bud.lobby import AwardLink, LobbyID, LobbyBox, lobbybox_shop, lobbyship_shop
+from src.bud.group import AwardLink, GroupID, GroupBox, groupbox_shop, groupship_shop
 from src.bud.healer import HealerHold
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
 from src.bud.reason_doer import DoerUnit
@@ -95,7 +95,7 @@ class _last_gift_idException(Exception):
     pass
 
 
-class healerhold_lobby_id_Exception(Exception):
+class healerhold_group_id_Exception(Exception):
     pass
 
 
@@ -126,7 +126,7 @@ class BudUnit:
     _econs_justified: bool = None
     _econs_buildable: bool = None
     _sum_healerhold_share: float = None
-    _lobbyboxs: dict[LobbyID, LobbyBox] = None
+    _groupboxs: dict[GroupID, GroupBox] = None
     _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
     # settle_bud Calculated field end
@@ -292,31 +292,31 @@ class BudUnit:
         all_ideas_set = set(self.get_idea_tree_ordered_road_list())
         return all_ideas_set == all_ideas_set.intersection(pledge_idea_assoc_set)
 
-    def get_awardlinks_metrics(self) -> dict[LobbyID, AwardLink]:
+    def get_awardlinks_metrics(self) -> dict[GroupID, AwardLink]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
-    def add_to_lobbybox_fund_give_take(
+    def add_to_groupbox_fund_give_take(
         self,
-        lobby_id: LobbyID,
+        group_id: GroupID,
         awardheir_fund_give: float,
         awardheir_fund_take: float,
     ):
-        x_lobbybox = self.get_lobbybox(lobby_id)
-        if x_lobbybox is not None:
-            x_lobbybox._fund_give += awardheir_fund_give
-            x_lobbybox._fund_take += awardheir_fund_take
+        x_groupbox = self.get_groupbox(group_id)
+        if x_groupbox is not None:
+            x_groupbox._fund_give += awardheir_fund_give
+            x_groupbox._fund_take += awardheir_fund_take
 
-    def add_to_lobbybox_fund_agenda_give_take(
+    def add_to_groupbox_fund_agenda_give_take(
         self,
-        lobby_id: LobbyID,
+        group_id: GroupID,
         awardline_fund_give: float,
         awardline_fund_take: float,
     ):
-        x_lobbybox = self.get_lobbybox(lobby_id)
+        x_groupbox = self.get_groupbox(group_id)
         if awardline_fund_give is not None and awardline_fund_take is not None:
-            x_lobbybox._fund_agenda_give += awardline_fund_give
-            x_lobbybox._fund_agenda_take += awardline_fund_take
+            x_groupbox._fund_agenda_give += awardline_fund_give
+            x_groupbox._fund_agenda_take += awardline_fund_take
 
     def add_to_acctunit_fund_give_take(
         self,
@@ -349,13 +349,13 @@ class BudUnit:
         )
         self.set_acctunit(acctunit)
 
-    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_lobbyship: bool = True):
+    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_groupship: bool = True):
         if x_acctunit._road_delimiter != self._road_delimiter:
             x_acctunit._road_delimiter = self._road_delimiter
         if x_acctunit._bit != self._bit:
             x_acctunit._bit = self._bit
-        if auto_set_lobbyship and x_acctunit.lobbyships_exist() is False:
-            x_acctunit.add_lobbyship(x_acctunit.acct_id)
+        if auto_set_groupship and x_acctunit.groupships_exist() is False:
+            x_acctunit.add_groupship(x_acctunit.acct_id)
         self._accts[x_acctunit.acct_id] = x_acctunit
 
     def acct_exists(self, acct_id: AcctID) -> bool:
@@ -376,48 +376,48 @@ class BudUnit:
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
         return self._accts.get(acct_id)
 
-    def get_acctunit_lobby_ids_dict(self) -> dict[LobbyID, set[AcctID]]:
+    def get_acctunit_group_ids_dict(self) -> dict[GroupID, set[AcctID]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
-            for x_lobby_id in x_acctunit._lobbyships.keys():
-                acct_id_set = x_dict.get(x_lobby_id)
+            for x_group_id in x_acctunit._groupships.keys():
+                acct_id_set = x_dict.get(x_group_id)
                 if acct_id_set is None:
-                    x_dict[x_lobby_id] = {x_acctunit.acct_id}
+                    x_dict[x_group_id] = {x_acctunit.acct_id}
                 else:
                     acct_id_set.add(x_acctunit.acct_id)
-                    x_dict[x_lobby_id] = acct_id_set
+                    x_dict[x_group_id] = acct_id_set
         return x_dict
 
-    def set_lobbybox(self, x_lobbybox: LobbyBox):
-        x_lobbybox._fund_coin = self._fund_coin
-        self._lobbyboxs[x_lobbybox.lobby_id] = x_lobbybox
+    def set_groupbox(self, x_groupbox: GroupBox):
+        x_groupbox._fund_coin = self._fund_coin
+        self._groupboxs[x_groupbox.group_id] = x_groupbox
 
-    def lobbybox_exists(self, lobby_id: LobbyID) -> bool:
-        return self._lobbyboxs.get(lobby_id) is not None
+    def groupbox_exists(self, group_id: GroupID) -> bool:
+        return self._groupboxs.get(group_id) is not None
 
-    def get_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
-        return self._lobbyboxs.get(x_lobby_id)
+    def get_groupbox(self, x_group_id: GroupID) -> GroupBox:
+        return self._groupboxs.get(x_group_id)
 
-    def create_symmetry_lobbybox(self, x_lobby_id: LobbyID) -> LobbyBox:
-        x_lobbybox = lobbybox_shop(x_lobby_id)
+    def create_symmetry_groupbox(self, x_group_id: GroupID) -> GroupBox:
+        x_groupbox = groupbox_shop(x_group_id)
         for x_acctunit in self._accts.values():
-            x_lobbyship = lobbyship_shop(
-                lobby_id=x_lobby_id,
+            x_groupship = groupship_shop(
+                group_id=x_group_id,
                 credit_score=x_acctunit.credit_score,
                 debtit_score=x_acctunit.debtit_score,
                 _acct_id=x_acctunit.acct_id,
             )
-            x_lobbybox.set_lobbyship(x_lobbyship)
-        return x_lobbybox
+            x_groupbox.set_groupship(x_groupship)
+        return x_groupbox
 
-    def get_tree_traverse_generated_lobbyboxs(self) -> set[LobbyID]:
-        x_acctunit_lobby_ids = set(self.get_acctunit_lobby_ids_dict().keys())
-        all_lobby_ids = set(self._lobbyboxs.keys())
-        return all_lobby_ids.difference(x_acctunit_lobby_ids)
+    def get_tree_traverse_generated_groupboxs(self) -> set[GroupID]:
+        x_acctunit_group_ids = set(self.get_acctunit_group_ids_dict().keys())
+        all_group_ids = set(self._groupboxs.keys())
+        return all_group_ids.difference(x_acctunit_group_ids)
 
-    def clear_acctunits_lobbyships(self):
+    def clear_acctunits_groupships(self):
         for x_acctunit in self._accts.values():
-            x_acctunit.clear_lobbyships()
+            x_acctunit.clear_groupships()
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
         if self._real_id == idea_road:
@@ -659,7 +659,7 @@ class BudUnit:
         self,
         idea_kid: IdeaUnit,
         create_missing_ideas: bool = None,
-        filter_out_missing_awardlinks_lobby_ids: bool = None,
+        filter_out_missing_awardlinks_group_ids: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -668,7 +668,7 @@ class BudUnit:
             idea_kid=idea_kid,
             parent_road=self._real_id,
             create_missing_ideas=create_missing_ideas,
-            filter_out_missing_awardlinks_lobby_ids=filter_out_missing_awardlinks_lobby_ids,
+            filter_out_missing_awardlinks_group_ids=filter_out_missing_awardlinks_group_ids,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -678,7 +678,7 @@ class BudUnit:
         self,
         idea_kid: IdeaUnit,
         parent_road: RoadUnit,
-        filter_out_missing_awardlinks_lobby_ids: bool = None,
+        filter_out_missing_awardlinks_group_ids: bool = None,
         create_missing_ideas: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -701,7 +701,7 @@ class BudUnit:
             idea_kid._bud_real_id = self._real_id
         if idea_kid._fund_coin != self._fund_coin:
             idea_kid._fund_coin = self._fund_coin
-        if not filter_out_missing_awardlinks_lobby_ids:
+        if not filter_out_missing_awardlinks_group_ids:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
 
@@ -735,21 +735,21 @@ class BudUnit:
 
     def _get_filtered_awardlinks_idea(self, x_idea: IdeaUnit) -> IdeaUnit:
         _awardlinks_to_delete = [
-            _awardlink_lobby_id
-            for _awardlink_lobby_id in x_idea._awardlinks.keys()
-            if self.get_acctunit_lobby_ids_dict().get(_awardlink_lobby_id) is None
+            _awardlink_group_id
+            for _awardlink_group_id in x_idea._awardlinks.keys()
+            if self.get_acctunit_group_ids_dict().get(_awardlink_group_id) is None
         ]
-        for _awardlink_lobby_id in _awardlinks_to_delete:
-            x_idea._awardlinks.pop(_awardlink_lobby_id)
+        for _awardlink_group_id in _awardlinks_to_delete:
+            x_idea._awardlinks.pop(_awardlink_group_id)
 
         if x_idea._doerunit is not None:
-            _lobbyholds_to_delete = [
-                _lobbyhold_lobby_id
-                for _lobbyhold_lobby_id in x_idea._doerunit._lobbyholds
-                if self.get_acctunit_lobby_ids_dict().get(_lobbyhold_lobby_id) is None
+            _groupholds_to_delete = [
+                _grouphold_group_id
+                for _grouphold_group_id in x_idea._doerunit._groupholds
+                if self.get_acctunit_group_ids_dict().get(_grouphold_group_id) is None
             ]
-            for _lobbyhold_lobby_id in _lobbyholds_to_delete:
-                x_idea._doerunit.del_lobbyhold(_lobbyhold_lobby_id)
+            for _grouphold_group_id in _groupholds_to_delete:
+                x_idea._doerunit.del_grouphold(_grouphold_group_id)
         return x_idea
 
     def _create_missing_ideas(self, road):
@@ -1010,15 +1010,15 @@ class BudUnit:
         all_acct_cred: bool = None,
         all_acct_debt: bool = None,
         awardlink: AwardLink = None,
-        awardlink_del: LobbyID = None,
+        awardlink_del: GroupID = None,
         is_expanded: bool = None,
         problem_bool: bool = None,
     ):
         if healerhold is not None:
-            for x_lobby_id in healerhold._lobby_ids:
-                if self.get_acctunit_lobby_ids_dict().get(x_lobby_id) is None:
-                    raise healerhold_lobby_id_Exception(
-                        f"Idea cannot edit healerhold because lobby_id '{x_lobby_id}' does not exist as lobby in Bud"
+            for x_group_id in healerhold._group_ids:
+                if self.get_acctunit_group_ids_dict().get(x_group_id) is None:
+                    raise healerhold_group_id_Exception(
+                        f"Idea cannot edit healerhold because group_id '{x_group_id}' does not exist as group in Bud"
                     )
 
         x_ideaattrfilter = ideaattrfilter_shop(
@@ -1166,17 +1166,17 @@ class BudUnit:
                 bud_agenda_debt=au_fund_agenda_take,
             )
 
-    def _reset_lobbyboxs_fund_give_take(self):
-        for lobbybox_obj in self._lobbyboxs.values():
-            lobbybox_obj.clear_fund_give_take()
+    def _reset_groupboxs_fund_give_take(self):
+        for groupbox_obj in self._groupboxs.values():
+            groupbox_obj.clear_fund_give_take()
 
-    def _set_lobbyboxs_fund_share(self, awardheirs: dict[LobbyID, AwardLink]):
+    def _set_groupboxs_fund_share(self, awardheirs: dict[GroupID, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            x_lobby_id = awardlink_obj.lobby_id
-            if not self.lobbybox_exists(x_lobby_id):
-                self.set_lobbybox(self.create_symmetry_lobbybox(x_lobby_id))
-            self.add_to_lobbybox_fund_give_take(
-                lobby_id=awardlink_obj.lobby_id,
+            x_group_id = awardlink_obj.group_id
+            if not self.groupbox_exists(x_group_id):
+                self.set_groupbox(self.create_symmetry_groupbox(x_group_id))
+            self.add_to_groupbox_fund_give_take(
+                group_id=awardlink_obj.group_id,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
@@ -1192,22 +1192,22 @@ class BudUnit:
                     self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
                 else:
                     for x_awardline in idea._awardlines.values():
-                        self.add_to_lobbybox_fund_agenda_give_take(
-                            lobby_id=x_awardline.lobby_id,
+                        self.add_to_groupbox_fund_agenda_give_take(
+                            group_id=x_awardline.group_id,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
 
-    def _allot_lobbyboxs_fund(self):
-        for x_lobbybox in self._lobbyboxs.values():
-            x_lobbybox._set_lobbyship_fund_give_fund_take()
-            for x_lobbyship in x_lobbybox._lobbyships.values():
+    def _allot_groupboxs_fund(self):
+        for x_groupbox in self._groupboxs.values():
+            x_groupbox._set_groupship_fund_give_fund_take()
+            for x_groupship in x_groupbox._groupships.values():
                 self.add_to_acctunit_fund_give_take(
-                    acctunit_acct_id=x_lobbyship._acct_id,
-                    fund_give=x_lobbyship._fund_give,
-                    fund_take=x_lobbyship._fund_take,
-                    bud_agenda_cred=x_lobbyship._fund_agenda_give,
-                    bud_agenda_debt=x_lobbyship._fund_agenda_take,
+                    acctunit_acct_id=x_groupship._acct_id,
+                    fund_give=x_groupship._fund_give,
+                    fund_take=x_groupship._fund_take,
+                    bud_agenda_cred=x_groupship._fund_agenda_give,
+                    bud_agenda_debt=x_groupship._fund_agenda_take,
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
@@ -1308,14 +1308,14 @@ class BudUnit:
     def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
         task_count = 0
         child_awardlines = None
-        lobby_everyone = None
+        group_everyone = None
         ancestor_roads = get_ancestor_roads(road=road)
         econ_justified_by_problem = True
         healerhold_count = 0
 
         while ancestor_roads != []:
             youngest_road = ancestor_roads.pop(0)
-            # _set_non_root_ancestor_metrics(youngest_road, task_count, lobby_everyone)
+            # _set_non_root_ancestor_metrics(youngest_road, task_count, group_everyone)
             x_idea_obj = self.get_idea_obj(road=youngest_road)
             x_idea_obj.add_to_descendant_pledge_count(task_count)
             if x_idea_obj.is_kidless():
@@ -1328,22 +1328,22 @@ class BudUnit:
                 task_count += 1
 
             if (
-                lobby_everyone != False
+                group_everyone != False
                 and x_idea_obj._all_acct_cred != False
                 and x_idea_obj._all_acct_debt != False
                 and x_idea_obj._awardheirs != {}
             ) or (
-                lobby_everyone != False
+                group_everyone != False
                 and x_idea_obj._all_acct_cred is False
                 and x_idea_obj._all_acct_debt is False
             ):
-                lobby_everyone = False
-            elif lobby_everyone != False:
-                lobby_everyone = True
-            x_idea_obj._all_acct_cred = lobby_everyone
-            x_idea_obj._all_acct_debt = lobby_everyone
+                group_everyone = False
+            elif group_everyone != False:
+                group_everyone = True
+            x_idea_obj._all_acct_cred = group_everyone
+            x_idea_obj._all_acct_debt = group_everyone
 
-            if x_idea_obj._healerhold.any_lobby_id_exists():
+            if x_idea_obj._healerhold.any_group_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
                 self._sum_healerhold_share += x_idea_obj.get_fund_share()
@@ -1361,13 +1361,13 @@ class BudUnit:
         self._idearoot._level = 0
         self._idearoot.set_parent_road("")
         self._idearoot.set_idearoot_inherit_reasonheirs()
-        self._idearoot.set_doerheir(None, self._lobbyboxs)
+        self._idearoot.set_doerheir(None, self._groupboxs)
         self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
         self._idearoot._mass = 1
         tree_traverse_count = self._tree_traverse_count
-        self._idearoot.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
+        self._idearoot.set_active(tree_traverse_count, self._groupboxs, self._owner_id)
         self._idearoot.set_fund_attr(0, self._fund_pool, self._fund_pool)
         self._idearoot.set_awardheirs_fund_give_fund_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
@@ -1397,11 +1397,11 @@ class BudUnit:
         idea_kid.set_parent_road(parent_idea.get_road())
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
-        idea_kid.set_doerheir(parent_idea._doerheir, self._lobbyboxs)
+        idea_kid.set_doerheir(parent_idea._doerheir, self._groupboxs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
-        idea_kid.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
+        idea_kid.set_active(tree_traverse_count, self._groupboxs, self._owner_id)
         idea_kid.set_fund_attr(fund_onset, fund_cease, self._fund_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
@@ -1424,18 +1424,18 @@ class BudUnit:
         # TODO manage situations where awardheir.credit_score is None for all awardheirs
         # TODO manage situations where awardheir.debtit_score is None for all awardheirs
         if idea.awardheir_exists() is False:
-            self._set_lobbyboxs_fund_share(idea._awardheirs)
+            self._set_groupboxs_fund_share(idea._awardheirs)
         elif idea.awardheir_exists():
             self._add_to_acctunits_fund_give_take(idea.get_fund_share())
 
-    def _create_lobbyboxs_metrics(self):
-        self._lobbyboxs = {}
-        for lobby_id, acct_id_set in self.get_acctunit_lobby_ids_dict().items():
-            x_lobbybox = lobbybox_shop(lobby_id, _road_delimiter=self._road_delimiter)
+    def _create_groupboxs_metrics(self):
+        self._groupboxs = {}
+        for group_id, acct_id_set in self.get_acctunit_group_ids_dict().items():
+            x_groupbox = groupbox_shop(group_id, _road_delimiter=self._road_delimiter)
             for x_acct_id in acct_id_set:
-                x_lobbyship = self.get_acct(x_acct_id).get_lobbyship(lobby_id)
-                x_lobbybox.set_lobbyship(x_lobbyship)
-                self.set_lobbybox(x_lobbybox)
+                x_groupship = self.get_acct(x_acct_id).get_groupship(group_id)
+                x_groupbox.set_groupship(x_groupship)
+                self.set_groupbox(x_groupbox)
 
     def _calc_acctunit_metrics(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
@@ -1449,7 +1449,7 @@ class BudUnit:
             self.get_acct(x_acct_id).set_credor_pool(acct_credor_pool)
         for x_acct_id, acct_debtor_pool in debtor_allot.items():
             self.get_acct(x_acct_id).set_debtor_pool(acct_debtor_pool)
-        self._create_lobbyboxs_metrics()
+        self._create_groupboxs_metrics()
         self._reset_acctunit_fund_give_take()
 
     def _set_tree_traverse_stage(self):
@@ -1553,7 +1553,7 @@ class BudUnit:
         self.set_offtrack_fund()
         self._allot_offtrack_fund()
         self._allot_fund_bud_agenda()
-        self._allot_lobbyboxs_fund()
+        self._allot_groupboxs_fund()
         self._set_acctunits_fund_agenda_ratios()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
@@ -1570,15 +1570,15 @@ class BudUnit:
             else:
                 x_sum = self._sum_healerhold_share
                 x_idea._healerhold_ratio = x_idea.get_fund_share() / x_sum
-            if self._econs_justified and x_idea._healerhold.any_lobby_id_exists():
+            if self._econs_justified and x_idea._healerhold.any_group_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
     def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
-            for x_lobby_id in x_econ_idea._healerhold._lobby_ids:
-                x_lobbybox = self.get_lobbybox(x_lobby_id)
-                for x_acct_id in x_lobbybox._lobbyships.keys():
+            for x_group_id in x_econ_idea._healerhold._group_ids:
+                x_groupbox = self.get_groupbox(x_group_id)
+                for x_acct_id in x_groupbox._groupships.keys():
                     if _healers_dict.get(x_acct_id) is None:
                         _healers_dict[x_acct_id] = {x_econ_road: x_econ_idea}
                     else:
@@ -1593,7 +1593,7 @@ class BudUnit:
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
-        self._reset_lobbyboxs_fund_give_take()
+        self._reset_groupboxs_fund_give_take()
         self._reset_acctunit_fund_give_take()
 
     def get_idea_tree_ordered_road_list(
@@ -1671,7 +1671,7 @@ class BudUnit:
         self.set_idea(
             idea_kid=idea_kid,
             parent_road=self.make_road(idea_kid._parent_road),
-            filter_out_missing_awardlinks_lobby_ids=True,
+            filter_out_missing_awardlinks_group_ids=True,
             create_missing_ideas=True,
         )
 
@@ -1705,7 +1705,7 @@ def budunit_shop(
         _tally=get_1_if_None(_tally),
         _real_id=_real_id,
         _accts=get_empty_dict_if_none(None),
-        _lobbyboxs={},
+        _groupboxs={},
         _idea_dict=get_empty_dict_if_none(None),
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),

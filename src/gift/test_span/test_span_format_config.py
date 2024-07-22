@@ -4,7 +4,7 @@ from src.gift.span import (
     real_id_str,
     owner_id_str,
     acct_id_str,
-    lobby_id_str,
+    group_id_str,
     parent_road_str,
     label_str,
     mass_str,
@@ -21,7 +21,7 @@ from src.gift.span import (
     get_span_formats_dir,
     get_span_filenames,
     jaar_format_0001_acct_v0_0_0,
-    jaar_format_0002_lobbyship_v0_0_0,
+    jaar_format_0002_groupship_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
     create_span_dataframe,
@@ -38,8 +38,8 @@ def test_config_str_functions_ReturnObjs():
     assert debtit_score_str() == "debtit_score"
     assert credit_score_str() == "credit_score"
     assert jaar_format_0001_acct_v0_0_0() == "jaar_format_0001_acct_v0_0_0"
-    x0002_span = "jaar_format_0002_lobbyship_v0_0_0"
-    assert jaar_format_0002_lobbyship_v0_0_0() == x0002_span
+    x0002_span = "jaar_format_0002_groupship_v0_0_0"
+    assert jaar_format_0002_groupship_v0_0_0() == x0002_span
     x0003_span = "jaar_format_0003_ideaunit_v0_0_0"
     assert jaar_format_0003_ideaunit_v0_0_0() == x0003_span
 
@@ -58,7 +58,7 @@ def test_get_span_filenames_ReturnsCorrectObj():
     # THEN
     print(f"{x_filenames=}")
     assert jaar_format_0001_acct_v0_0_0() in x_filenames
-    assert jaar_format_0002_lobbyship_v0_0_0() in x_filenames
+    assert jaar_format_0002_groupship_v0_0_0() in x_filenames
     assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
 
 
@@ -152,9 +152,9 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0001_acct_v0_0_0():
     assert debtit_score_spancolumn.column_order == 4
 
 
-def test_get_spanref_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_0_0():
+def test_get_spanref_HasCorrectAttrs_jaar_format_0002_groupship_v0_0_0():
     # ESTABLISH
-    span_name = jaar_format_0002_lobbyship_v0_0_0()
+    span_name = jaar_format_0002_groupship_v0_0_0()
 
     # WHEN
     format_0002_spanref = get_spanref(span_name)
@@ -163,7 +163,7 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_0_0():
     real_id_spancolumn = format_0002_spanref.get_spancolumn(real_id_str())
     owner_id_spancolumn = format_0002_spanref.get_spancolumn(owner_id_str())
     acct_id_spancolumn = format_0002_spanref.get_spancolumn(acct_id_str())
-    lobby_id_spancolumn = format_0002_spanref.get_spancolumn(lobby_id_str())
+    group_id_spancolumn = format_0002_spanref.get_spancolumn(group_id_str())
     credit_score_spancolumn = format_0002_spanref.get_spancolumn(credit_score_str())
     debtit_score_spancolumn = format_0002_spanref.get_spancolumn(debtit_score_str())
     assert len(format_0002_spanref._spancolumns) == 6
@@ -171,7 +171,7 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_0_0():
     assert real_id_spancolumn.column_order == 0
     assert owner_id_spancolumn.column_order == 1
     assert acct_id_spancolumn.column_order == 2
-    assert lobby_id_spancolumn.column_order == 3
+    assert group_id_spancolumn.column_order == 3
     assert debtit_score_spancolumn.column_order == 5
     assert credit_score_spancolumn.column_order == 4
 

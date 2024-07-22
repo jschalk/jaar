@@ -8,12 +8,12 @@ from src.gift.atom_config import (
 from src.normal_db.normal_models import (
     BudTable,
     AcctUnitTable,
-    LobbyShipTable,
+    GroupShipTable,
     IdeaTable,
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
-    lobbyholdTable,
+    groupholdTable,
     HealerHoldTable,
     FactTable,
 )
@@ -85,29 +85,29 @@ def test_normalized_table_AcctUnitTable_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-# def test_normalized_table_LobbyTable_Exists():
+# def test_normalized_table_GroupTable_Exists():
 #     # ESTABLISH
-#     config_category = get_normalized_bud_table_build().get("bud_lobbybox")
-#     mapper = inspect(LobbyTable)
+#     config_category = get_normalized_bud_table_build().get("bud_groupbox")
+#     mapper = inspect(GroupTable)
 #     print_out_expected_class_attribute_declarations(config_category)
 
 #     # WHEN / THEN
 #     config_table_name = get_config_table_name(config_category)
-#     assert config_table_name == "lobbybox"
-#     assert config_table_name == LobbyTable.__tablename__
+#     assert config_table_name == "groupbox"
+#     assert config_table_name == GroupTable.__tablename__
 #     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_LobbyShipTable_lobbyship_Exists():
+def test_normalized_table_GroupShipTable_groupship_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_acct_lobbyship")
-    mapper = inspect(LobbyShipTable)
+    config_category = get_normalized_bud_table_build().get("bud_acct_groupship")
+    mapper = inspect(GroupShipTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "lobbyship"
-    assert config_table_name == LobbyShipTable.__tablename__
+    assert config_table_name == "groupship"
+    assert config_table_name == GroupShipTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 
@@ -165,16 +165,16 @@ def test_normalized_table_PremiseTable_premise_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_lobbyholdTable_lobbyhold_Exists():
+def test_normalized_table_groupholdTable_grouphold_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_idea_lobbyhold")
-    mapper = inspect(lobbyholdTable)
+    config_category = get_normalized_bud_table_build().get("bud_idea_grouphold")
+    mapper = inspect(groupholdTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "lobbyhold"
-    assert config_table_name == lobbyholdTable.__tablename__
+    assert config_table_name == "grouphold"
+    assert config_table_name == groupholdTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 

@@ -1,5 +1,5 @@
 from src.bud.examples.example_buds import budunit_v001
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from src.bud.acct import acctunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.idea import ideaunit_shop
@@ -175,9 +175,9 @@ def test_BudUnit_3AdvocatesNoideaunit_shop():
     awardlink_yao = accts_metrics[yao_text]
     awardlink_sue = accts_metrics[sue_text]
     awardlink_zia = accts_metrics[zia_text]
-    assert awardlink_yao.lobby_id is not None
-    assert awardlink_sue.lobby_id is not None
-    assert awardlink_zia.lobby_id is not None
-    assert awardlink_yao.lobby_id == yao_text
-    assert awardlink_sue.lobby_id == sue_text
-    assert awardlink_zia.lobby_id == zia_text
+    assert awardlink_yao.group_id is not None
+    assert awardlink_sue.group_id is not None
+    assert awardlink_zia.group_id is not None
+    assert awardlink_yao.group_id == yao_text
+    assert awardlink_sue.group_id == sue_text
+    assert awardlink_zia.group_id == zia_text

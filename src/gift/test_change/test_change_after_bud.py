@@ -1,5 +1,5 @@
 from src._road.road import get_terminus_node, get_parent_road
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from src.bud.reason_idea import factunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
@@ -170,7 +170,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     assert yao_acct.credit_score == yao_credit_score
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_lobbyship():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_groupship():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_budunit = budunit_shop(sue_text)
@@ -184,23 +184,23 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_lobbyship():
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_acctunit.add_lobbyship(run_text)
-    zia_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
+    zia_acctunit.add_groupship(run_text)
     fly_text = ",flyers"
-    yao_acctunit.add_lobbyship(fly_text)
-    zia_acctunit.add_lobbyship(fly_text)
-    bob_acctunit.add_lobbyship(fly_text)
-    before_lobby_ids_dict = before_sue_budunit.get_acctunit_lobby_ids_dict()
-    assert len(before_lobby_ids_dict.get(run_text)) == 2
-    assert len(before_lobby_ids_dict.get(fly_text)) == 3
+    yao_acctunit.add_groupship(fly_text)
+    zia_acctunit.add_groupship(fly_text)
+    bob_acctunit.add_groupship(fly_text)
+    before_group_ids_dict = before_sue_budunit.get_acctunit_group_ids_dict()
+    assert len(before_group_ids_dict.get(run_text)) == 2
+    assert len(before_group_ids_dict.get(fly_text)) == 3
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_acct_lobbyship", atom_delete())
-    yao_atomunit.set_required_arg("lobby_id", run_text)
+    yao_atomunit = atomunit_shop("bud_acct_groupship", atom_delete())
+    yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
     # print(f"{yao_atomunit=}")
-    zia_atomunit = atomunit_shop("bud_acct_lobbyship", atom_delete())
-    zia_atomunit.set_required_arg("lobby_id", fly_text)
+    zia_atomunit = atomunit_shop("bud_acct_groupship", atom_delete())
+    zia_atomunit.set_required_arg("group_id", fly_text)
     zia_atomunit.set_required_arg("acct_id", zia_text)
     # print(f"{zia_atomunit=}")
     sue_changeunit = changeunit_shop()
@@ -209,12 +209,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_lobbyship():
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_lobby_ids_dict = after_sue_budunit.get_acctunit_lobby_ids_dict()
-    assert len(after_lobby_ids_dict.get(run_text)) == 1
-    assert len(after_lobby_ids_dict.get(fly_text)) == 2
+    after_group_ids_dict = after_sue_budunit.get_acctunit_group_ids_dict()
+    assert len(after_group_ids_dict.get(run_text)) == 1
+    assert len(after_group_ids_dict.get(fly_text)) == 2
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_lobbyship():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_groupship():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_budunit = budunit_shop(sue_text)
@@ -226,13 +226,13 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_lobbyship():
     before_sue_budunit.add_acctunit(bob_text)
     run_text = ",runners"
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
-    zia_acctunit.add_lobbyship(run_text)
-    before_lobby_ids = before_sue_budunit.get_acctunit_lobby_ids_dict()
-    assert len(before_lobby_ids.get(run_text)) == 1
+    zia_acctunit.add_groupship(run_text)
+    before_group_ids = before_sue_budunit.get_acctunit_group_ids_dict()
+    assert len(before_group_ids.get(run_text)) == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_acct_lobbyship", atom_insert())
-    yao_atomunit.set_required_arg("lobby_id", run_text)
+    yao_atomunit = atomunit_shop("bud_acct_groupship", atom_insert())
+    yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
     yao_run_credit_score = 17
     yao_atomunit.set_optional_arg("credit_score", yao_run_credit_score)
@@ -242,15 +242,15 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_lobbyship():
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_lobby_ids = after_sue_budunit.get_acctunit_lobby_ids_dict()
-    assert len(after_lobby_ids.get(run_text)) == 2
+    after_group_ids = after_sue_budunit.get_acctunit_group_ids_dict()
+    assert len(after_group_ids.get(run_text)) == 2
     after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
-    after_yao_run_lobbyship = after_yao_acctunit.get_lobbyship(run_text)
-    assert after_yao_run_lobbyship is not None
-    assert after_yao_run_lobbyship.credit_score == yao_run_credit_score
+    after_yao_run_groupship = after_yao_acctunit.get_groupship(run_text)
+    assert after_yao_run_groupship is not None
+    assert after_yao_run_groupship.credit_score == yao_run_credit_score
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_lobbyship():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_groupship():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_budunit = budunit_shop(sue_text)
@@ -259,14 +259,14 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_lobbyship():
     before_yao_acctunit = before_sue_budunit.get_acct(yao_text)
     run_text = ",runners"
     old_yao_run_credit_score = 3
-    before_yao_acctunit.add_lobbyship(run_text, old_yao_run_credit_score)
-    yao_run_lobbyship = before_yao_acctunit.get_lobbyship(run_text)
-    assert yao_run_lobbyship.credit_score == old_yao_run_credit_score
-    assert yao_run_lobbyship.debtit_score == 1
+    before_yao_acctunit.add_groupship(run_text, old_yao_run_credit_score)
+    yao_run_groupship = before_yao_acctunit.get_groupship(run_text)
+    assert yao_run_groupship.credit_score == old_yao_run_credit_score
+    assert yao_run_groupship.debtit_score == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_acct_lobbyship", atom_update())
-    yao_atomunit.set_required_arg("lobby_id", run_text)
+    yao_atomunit = atomunit_shop("bud_acct_groupship", atom_update())
+    yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
     new_yao_run_credit_score = 7
     new_yao_run_debtit_score = 11
@@ -278,9 +278,9 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_lobbyship():
 
     # THEN
     after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
-    after_yao_run_lobbyship = after_yao_acctunit.get_lobbyship(run_text)
-    assert after_yao_run_lobbyship.credit_score == new_yao_run_credit_score
-    assert after_yao_run_lobbyship.debtit_score == new_yao_run_debtit_score
+    after_yao_run_groupship = after_yao_acctunit.get_groupship(run_text)
+    assert after_yao_run_groupship.credit_score == new_yao_run_credit_score
+    assert after_yao_run_groupship.debtit_score == new_yao_run_debtit_score
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_ideaunit():
@@ -416,12 +416,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_acctunit.add_lobbyship(run_text)
-    zia_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
+    zia_acctunit.add_groupship(run_text)
     fly_text = ",flyers"
-    yao_acctunit.add_lobbyship(fly_text)
-    zia_acctunit.add_lobbyship(fly_text)
-    bob_acctunit.add_lobbyship(fly_text)
+    yao_acctunit.add_groupship(fly_text)
+    zia_acctunit.add_groupship(fly_text)
+    bob_acctunit.add_groupship(fly_text)
 
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
@@ -441,7 +441,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     # WHEN
     delete_disc_atomunit = atomunit_shop("bud_idea_awardlink", atom_delete())
     delete_disc_atomunit.set_required_arg("road", disc_road)
-    delete_disc_atomunit.set_required_arg("lobby_id", fly_text)
+    delete_disc_atomunit.set_required_arg("group_id", fly_text)
     print(f"{delete_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(delete_disc_atomunit)
@@ -462,7 +462,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     before_sue_budunit.add_acctunit(zia_text)
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
     run_text = ",runners"
-    yao_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
 
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
@@ -479,7 +479,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     x_take_force = 66
     update_disc_atomunit = atomunit_shop("bud_idea_awardlink", atom_update())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("lobby_id", run_text)
+    update_disc_atomunit.set_required_arg("group_id", run_text)
     update_disc_atomunit.set_optional_arg("give_force", x_give_force)
     update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -504,7 +504,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     before_sue_budunit.add_acctunit(zia_text)
     run_text = ",runners"
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -518,7 +518,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     x_take_force = 66
     update_disc_atomunit = atomunit_shop("bud_idea_awardlink", atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("lobby_id", run_text)
+    update_disc_atomunit.set_required_arg("group_id", run_text)
     update_disc_atomunit.set_optional_arg("give_force", x_give_force)
     update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -941,7 +941,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_reasonu
     assert after_ball_idea.get_reasonunit(knee_road) is None
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_lobbyhold():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_grouphold():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
@@ -953,23 +953,23 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_lobbyho
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_ideaunit._doerunit._lobbyholds == set()
+    assert before_ball_ideaunit._doerunit._groupholds == set()
 
     # WHEN
-    update_disc_atomunit = atomunit_shop("bud_idea_lobbyhold", atom_insert())
+    update_disc_atomunit = atomunit_shop("bud_idea_grouphold", atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("lobby_id", yao_text)
+    update_disc_atomunit.set_required_arg("group_id", yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._doerunit._lobbyholds != {}
-    assert after_ball_ideaunit._doerunit.get_lobbyhold(yao_text) is not None
+    assert after_ball_ideaunit._doerunit._groupholds != {}
+    assert after_ball_ideaunit._doerunit.get_grouphold(yao_text) is not None
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_lobbyhold():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_grouphold():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
@@ -981,14 +981,14 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_lobbyho
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    before_ball_ideaunit._doerunit.set_lobbyhold(yao_text)
-    assert before_ball_ideaunit._doerunit._lobbyholds != {}
-    assert before_ball_ideaunit._doerunit.get_lobbyhold(yao_text) is not None
+    before_ball_ideaunit._doerunit.set_grouphold(yao_text)
+    assert before_ball_ideaunit._doerunit._groupholds != {}
+    assert before_ball_ideaunit._doerunit.get_grouphold(yao_text) is not None
 
     # WHEN
-    update_disc_atomunit = atomunit_shop("bud_idea_lobbyhold", atom_delete())
+    update_disc_atomunit = atomunit_shop("bud_idea_grouphold", atom_delete())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("lobby_id", yao_text)
+    update_disc_atomunit.set_required_arg("group_id", yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
     print(f"{before_sue_au.get_idea_obj(ball_road)._doerunit=}")
@@ -996,7 +996,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_lobbyho
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._doerunit._lobbyholds == set()
+    assert after_ball_ideaunit._doerunit._groupholds == set()
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
@@ -1013,19 +1013,19 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_acctunit.add_lobbyship(run_text)
-    zia_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
+    zia_acctunit.add_groupship(run_text)
     fly_text = ",flyers"
-    yao_acctunit.add_lobbyship(fly_text)
-    bob_acctunit.add_lobbyship(fly_text)
+    yao_acctunit.add_groupship(fly_text)
+    bob_acctunit.add_groupship(fly_text)
     assert before_sue_budunit._tally != 55
     assert before_sue_budunit._max_tree_traverse != 66
     assert before_sue_budunit._credor_respect != 77
     assert before_sue_budunit._debtor_respect != 88
     assert before_sue_budunit.acct_exists(yao_text)
     assert before_sue_budunit.acct_exists(zia_text)
-    assert yao_acctunit.get_lobbyship(fly_text) is not None
-    assert bob_acctunit.get_lobbyship(fly_text) is not None
+    assert yao_acctunit.get_groupship(fly_text) is not None
+    assert bob_acctunit.get_groupship(fly_text) is not None
 
     # WHEN
     ex1_changeunit = get_changeunit_example1()
