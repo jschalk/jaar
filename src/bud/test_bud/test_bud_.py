@@ -23,7 +23,7 @@ def test_BudUnit_Exists():
     assert x_bud
     assert x_bud._real_id is None
     assert x_bud._owner_id is None
-    assert x_bud._weight is None
+    assert x_bud._tally is None
     assert x_bud._accts is None
     assert x_bud._idearoot is None
     assert x_bud._max_tree_traverse is None
@@ -46,7 +46,7 @@ def test_BudUnit_Exists():
     assert x_bud._econs_justified is None
     assert x_bud._econs_buildable is None
     assert x_bud._sum_healerhold_share is None
-    assert x_bud._offtrack_kids_weight_set is None
+    assert x_bud._offtrack_kids_mass_set is None
     assert x_bud._offtrack_fund is None
     assert str(type(x_bud._idearoot)).find("None") == 8
 
@@ -74,7 +74,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud
     assert x_bud._owner_id == sue_text
     assert x_bud._real_id == iowa_real_id
-    assert x_bud._weight == 1
+    assert x_bud._tally == 1
     assert x_bud._accts == {}
     assert x_bud._idearoot is not None
     assert x_bud._max_tree_traverse == 3
@@ -97,7 +97,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._econs_justified is False
     assert x_bud._econs_buildable is False
     assert x_bud._sum_healerhold_share == 0
-    assert x_bud._offtrack_kids_weight_set == set()
+    assert x_bud._offtrack_kids_mass_set == set()
     assert x_bud._offtrack_fund is None
     print(f"{type(x_bud._idearoot)=}") == 0
     assert str(type(x_bud._idearoot)).find(".idea.IdeaUnit'>") > 0

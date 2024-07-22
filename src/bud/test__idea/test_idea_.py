@@ -1,3 +1,4 @@
+from src._road.finance import default_fund_coin_if_none
 from src._road.road import (
     get_default_real_id_roadnode as root_label,
     create_road,
@@ -21,7 +22,7 @@ def test_IdeaUnit_exists():
     x_ideaunit = IdeaUnit()
     assert x_ideaunit
     assert x_ideaunit._kids is None
-    assert x_ideaunit._weight is None
+    assert x_ideaunit._mass is None
     assert x_ideaunit._label is None
     assert x_ideaunit._uid is None
     assert x_ideaunit._reasonunits is None
@@ -69,7 +70,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     # THEN
     assert x_ideaunit
     assert x_ideaunit._kids == {}
-    assert x_ideaunit._weight == 1
+    assert x_ideaunit._mass == 1
     assert x_ideaunit._label is None
     assert x_ideaunit._bud_real_id == root_label()
     assert x_ideaunit._uid is None
@@ -94,7 +95,7 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._fund_ratio is None
-    assert x_ideaunit._fund_coin is None
+    assert x_ideaunit._fund_coin == default_fund_coin_if_none()
     assert x_ideaunit._fund_onset is None
     assert x_ideaunit._fund_cease is None
     assert x_ideaunit._reasonunits == {}
@@ -109,23 +110,23 @@ def test_ideaunit_shop_NoParametersReturnsCorrectObj():
     assert x_ideaunit._healerhold_ratio == 0
 
 
-def test_ideaunit_shop_Allows_weightToBeZero():
+def test_ideaunit_shop_Allows_massToBeZero():
     # ESTABLISH
     zero_int = 0
     # WHEN
-    x_ideaunit = ideaunit_shop("run", _weight=zero_int)
+    x_ideaunit = ideaunit_shop("run", _mass=zero_int)
     # THEN
-    assert x_ideaunit._weight == zero_int
+    assert x_ideaunit._mass == zero_int
 
 
-def test_ideaunit_shop_Allows_doesNotAllow_weightToBeNegative():
+def test_ideaunit_shop_Allows_doesNotAllow_massToBeNegative():
     # ESTABLISH
     negative_int = -4
     # WHEN
-    x_ideaunit = ideaunit_shop("run", _weight=negative_int)
+    x_ideaunit = ideaunit_shop("run", _mass=negative_int)
     # THEN
     zero_int = 0
-    assert x_ideaunit._weight == zero_int
+    assert x_ideaunit._mass == zero_int
 
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
@@ -196,21 +197,21 @@ def test_IdeaUnit_set_parent_road_ReturnsCorrectObj():
 
 def test_IdeaUnit_awardlinks_exist():
     # ESTABLISH
-    biker_give_weight = 12
-    biker_take_weight = 15
+    biker_give_force = 12
+    biker_take_force = 15
     biker_awardlink = awardlink_shop(
         lobby_id="bikers2",
-        give_weight=biker_give_weight,
-        take_weight=biker_take_weight,
+        give_force=biker_give_force,
+        take_force=biker_take_force,
     )
 
     swimmer_lobby_id = "swimmers"
-    swimmer_give_weight = 29
-    swimmer_take_weight = 32
+    swimmer_give_force = 29
+    swimmer_take_force = 32
     swimmer_awardlink = awardlink_shop(
         lobby_id=swimmer_lobby_id,
-        give_weight=swimmer_give_weight,
-        take_weight=swimmer_take_weight,
+        give_force=swimmer_give_force,
+        take_force=swimmer_take_force,
     )
 
     x_lobbyships = {
@@ -226,63 +227,45 @@ def test_IdeaUnit_awardlinks_exist():
     assert sport_idea._awardlinks == x_lobbyships
 
 
-def test_IdeaUnit_get_awardheirs_give_weight_sum_SetsAttrCorrectly_WithValues():
+def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
     # ESTABLISH
-    biker_give_weight = 12
-    biker_take_weight = 15
+    biker_give_force = 12
+    biker_take_force = 15
     biker_text = "bikers2"
-    biker_awardlink = awardheir_shop(
-        lobby_id=biker_text,
-        give_weight=biker_give_weight,
-        take_weight=biker_take_weight,
-    )
-
-    swimmer_text = "swimmers"
-    swimmer_lobby_id = swimmer_text
-    swimmer_give_weight = 29
-    swimmer_take_weight = 32
-    swimmer_awardlink = awardheir_shop(
-        lobby_id=swimmer_lobby_id,
-        give_weight=swimmer_give_weight,
-        take_weight=swimmer_take_weight,
-    )
-
+    biker_awardlink = awardheir_shop(biker_text, biker_give_force, biker_take_force)
+    swim_text = "swimmers"
+    swim_lobby_id = swim_text
+    swim_give_force = 29
+    swim_take_force = 32
+    swim_awardlink = awardheir_shop(swim_lobby_id, swim_give_force, swim_take_force)
     x_lobbyships = {
-        swimmer_awardlink.lobby_id: swimmer_awardlink,
+        swim_awardlink.lobby_id: swim_awardlink,
         biker_awardlink.lobby_id: biker_awardlink,
     }
-
-    # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardheirs=x_lobbyships)
-
-    # THEN
-    assert sport_idea.get_awardheirs_give_weight_sum() is not None
-    assert sport_idea.get_awardheirs_give_weight_sum() == 41
-    assert sport_idea.get_awardheirs_take_weight_sum() is not None
-    assert sport_idea.get_awardheirs_take_weight_sum() == 47
-
+    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_lobbyships)
+    assert sport_idea._fund_coin == 1
     assert len(sport_idea._awardheirs) == 2
-
-    swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._fund_give is None
-    assert swimmer_awardheir._fund_take is None
+    swim_awardheir = sport_idea._awardheirs.get(swim_text)
+    assert swim_awardheir._fund_give is None
+    assert swim_awardheir._fund_take is None
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
     assert biker_awardheir._fund_give is None
     assert biker_awardheir._fund_take is None
 
     # WHEN
-    sport_idea._fund_ratio = 0.25
+    sport_idea._fund_onset = 91
+    sport_idea._fund_cease = 820
     sport_idea.set_awardheirs_fund_give_fund_take()
 
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
-    swimmer_awardheir = sport_idea._awardheirs.get(swimmer_text)
-    assert swimmer_awardheir._fund_give is not None
-    assert swimmer_awardheir._fund_take is not None
+    swim_awardheir = sport_idea._awardheirs.get(swim_text)
+    assert swim_awardheir._fund_give == 516
+    assert swim_awardheir._fund_take == 496
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._fund_give is not None
-    assert biker_awardheir._fund_take is not None
+    assert biker_awardheir._fund_give == 213
+    assert biker_awardheir._fund_take == 233
 
 
 def test_IdeaUnit_awardheir_exists_ReturnsObj():
@@ -300,12 +283,10 @@ def test_IdeaUnit_awardheir_exists_ReturnsObj():
     assert not sport_ideaunit.awardheir_exists()
 
 
-def test_IdeaUnit_get_awardheirs_give_weight_sum_ReturnsCorrectObj_NoValues():
+def test_IdeaUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(_label=sport_text)
-    assert sport_idea.get_awardheirs_give_weight_sum() is not None
-    assert sport_idea.get_awardheirs_take_weight_sum() is not None
 
     # WHEN / THEN
     # does not crash with empty set
@@ -504,18 +485,16 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         ),
     }
     biker_lobby_id = "bikers"
-    biker_give_weight = 3.0
-    biker_take_weight = 7.0
-    biker_awardlink = awardlink_shop(
-        biker_lobby_id, biker_give_weight, biker_take_weight
-    )
+    biker_give_force = 3.0
+    biker_take_force = 7.0
+    biker_awardlink = awardlink_shop(biker_lobby_id, biker_give_force, biker_take_force)
     flyer_lobby_id = "flyers"
-    flyer_give_weight = 6.0
-    flyer_take_weight = 9.0
+    flyer_give_force = 6.0
+    flyer_take_force = 9.0
     flyer_awardlink = awardlink_shop(
         lobby_id=flyer_lobby_id,
-        give_weight=flyer_give_weight,
-        take_weight=flyer_take_weight,
+        give_force=flyer_give_force,
+        take_force=flyer_take_force,
     )
     biker_and_flyer_awardlinks = {
         biker_awardlink.lobby_id: biker_awardlink,
@@ -523,13 +502,13 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     }
     biker_get_dict = {
         "lobby_id": biker_awardlink.lobby_id,
-        "give_weight": biker_awardlink.give_weight,
-        "take_weight": biker_awardlink.take_weight,
+        "give_force": biker_awardlink.give_force,
+        "take_force": biker_awardlink.take_force,
     }
     flyer_get_dict = {
         "lobby_id": flyer_awardlink.lobby_id,
-        "give_weight": flyer_awardlink.give_weight,
-        "take_weight": flyer_awardlink.take_weight,
+        "give_force": flyer_awardlink.give_force,
+        "take_force": flyer_awardlink.take_force,
     }
     x1_awardlinks = {biker_lobby_id: biker_get_dict, flyer_lobby_id: flyer_get_dict}
     sue_text = "Sue"
@@ -543,7 +522,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _parent_road=casa_road,
         _kids=None,
         _awardlinks=biker_and_flyer_awardlinks,
-        _weight=30,
+        _mass=30,
         _label=casa_text,
         _level=1,
         _reasonunits=x1_reasonunits,
@@ -557,8 +536,8 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     )
     factunit_x = factunit_shop(base=week_road, pick=week_road, open=5, nigh=59)
     casa_idea.set_factunit(factunit=factunit_x)
-    casa_idea._originunit.set_originhold(acct_id="Ray", weight=None)
-    casa_idea._originunit.set_originhold(acct_id="Lei", weight=4)
+    casa_idea._originunit.set_originhold(acct_id="Ray", importance=None)
+    casa_idea._originunit.set_originhold(acct_id="Lei", importance=4)
     x_begin = 11
     x_close = 12
     x_addin = 13
@@ -587,7 +566,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_doerunit"] == sue_doerunit.get_dict()
     assert casa_dict["_healerhold"] == yao_healerhold.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
-    assert casa_dict["_weight"] == casa_idea._weight
+    assert casa_dict["_mass"] == casa_idea._mass
     assert casa_dict["_label"] == casa_idea._label
     assert casa_dict["_uid"] == casa_idea._uid
     assert casa_dict["_begin"] == casa_idea._begin
@@ -613,7 +592,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {"_weight": 1}
+    assert casa_dict == {"_mass": 1}
 
 
 def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
@@ -1039,7 +1018,7 @@ def test_IdeaUnit_del_kid_CorrectModifiesAttr():
     assert len(nation_idea._kids) == 1
 
 
-def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario0():
+def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
@@ -1052,31 +1031,31 @@ def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario0():
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN
-    assert nation_idea.get_kids_weight_sum() == 2
+    assert nation_idea.get_kids_mass_sum() == 2
 
 
-def test_IdeaUnit_get_kids_weight_sum_ReturnsObj_Scenario1():
+def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     # ESTABLISH
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
     usa_text = "USA"
-    usa_idea = ideaunit_shop(usa_text, _weight=0, _parent_road=nation_road)
+    usa_idea = ideaunit_shop(usa_text, _mass=0, _parent_road=nation_road)
     nation_idea.add_kid(usa_idea)
     france_text = "France"
-    france_idea = ideaunit_shop(france_text, _weight=0, _parent_road=nation_road)
+    france_idea = ideaunit_shop(france_text, _mass=0, _parent_road=nation_road)
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN
-    assert nation_idea.get_kids_weight_sum() == 0
+    assert nation_idea.get_kids_mass_sum() == 0
 
     # WHEN
     france_text = "France"
-    france_idea = ideaunit_shop(france_text, _weight=3, _parent_road=nation_road)
+    france_idea = ideaunit_shop(france_text, _mass=3, _parent_road=nation_road)
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN
-    assert nation_idea.get_kids_weight_sum() == 3
+    assert nation_idea.get_kids_mass_sum() == 3
 
 
 def test_IdeaUnit_get_fund_share_ReturnsObj():

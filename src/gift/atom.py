@@ -170,9 +170,9 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     x_arg = "_fund_coin"
     if x_atom.get_value(x_arg) is not None:
         x_bud._fund_coin = x_atom.get_value(x_arg)
-    x_arg = "_weight"
+    x_arg = "_tally"
     if x_atom.get_value(x_arg) is not None:
-        x_bud._weight = x_atom.get_value(x_arg)
+        x_bud._tally = x_atom.get_value(x_arg)
     x_arg = "_bit"
     if x_atom.get_value(x_arg) is not None:
         x_bud._bit = x_atom.get_value(x_arg)
@@ -192,19 +192,19 @@ def _modify_bud_acct_lobbyship_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_lobby_id = x_atom.get_value("lobby_id")
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_lobbyship = x_acctunit.get_lobbyship(x_lobby_id)
-    x_credor_weight = x_atom.get_value("credor_weight")
-    x_debtor_weight = x_atom.get_value("debtor_weight")
-    x_lobbyship.set_credor_weight(x_credor_weight)
-    x_lobbyship.set_debtor_weight(x_debtor_weight)
+    x_credit_score = x_atom.get_value("credit_score")
+    x_debtit_score = x_atom.get_value("debtit_score")
+    x_lobbyship.set_credit_score(x_credit_score)
+    x_lobbyship.set_debtit_score(x_debtit_score)
 
 
 def _modify_bud_acct_lobbyship_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
     x_lobby_id = x_atom.get_value("lobby_id")
-    x_credor_weight = x_atom.get_value("credor_weight")
-    x_debtor_weight = x_atom.get_value("debtor_weight")
+    x_credit_score = x_atom.get_value("credit_score")
+    x_debtit_score = x_atom.get_value("debtit_score")
     x_acctunit = x_bud.get_acct(x_acct_id)
-    x_acctunit.add_lobbyship(x_lobby_id, x_credor_weight, x_debtor_weight)
+    x_acctunit.add_lobbyship(x_lobby_id, x_credit_score, x_debtit_score)
 
 
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -232,7 +232,7 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
         numor=x_atom.get_value("_numor"),
         range_source_road=x_atom.get_value("_range_source_road"),
         reest=x_atom.get_value("_reest"),
-        weight=x_atom.get_value("_weight"),
+        mass=x_atom.get_value("_mass"),
         pledge=x_atom.get_value("pledge"),
     )
 
@@ -266,20 +266,20 @@ def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
     x_awardlink = x_idea._awardlinks.get(x_atom.get_value("lobby_id"))
-    x_give_weight = x_atom.get_value("give_weight")
-    if x_give_weight is not None and x_awardlink.give_weight != x_give_weight:
-        x_awardlink.give_weight = x_give_weight
-    x_take_weight = x_atom.get_value("take_weight")
-    if x_take_weight is not None and x_awardlink.take_weight != x_take_weight:
-        x_awardlink.take_weight = x_take_weight
+    x_give_force = x_atom.get_value("give_force")
+    if x_give_force is not None and x_awardlink.give_force != x_give_force:
+        x_awardlink.give_force = x_give_force
+    x_take_force = x_atom.get_value("take_force")
+    if x_take_force is not None and x_awardlink.take_force != x_take_force:
+        x_awardlink.take_force = x_take_force
     x_bud.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
 
 def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
         lobby_id=x_atom.get_value("lobby_id"),
-        give_weight=x_atom.get_value("give_weight"),
-        take_weight=x_atom.get_value("take_weight"),
+        give_force=x_atom.get_value("give_force"),
+        take_force=x_atom.get_value("take_force"),
     )
     x_bud.edit_idea_attr(x_atom.get_value("road"), awardlink=x_awardlink)
 
@@ -384,8 +384,8 @@ def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
         acct_id=x_atom.get_value("acct_id"),
-        credor_weight=x_atom.get_value("credor_weight"),
-        debtor_weight=x_atom.get_value("debtor_weight"),
+        credit_score=x_atom.get_value("credit_score"),
+        debtit_score=x_atom.get_value("debtit_score"),
     )
 
 
@@ -393,8 +393,8 @@ def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
             acct_id=x_atom.get_value("acct_id"),
-            credor_weight=x_atom.get_value("credor_weight"),
-            debtor_weight=x_atom.get_value("debtor_weight"),
+            credit_score=x_atom.get_value("credit_score"),
+            debtit_score=x_atom.get_value("debtit_score"),
         )
     )
 
@@ -498,7 +498,7 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
 def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
     if category == "budunit":
         return (
-            x_obj._weight != y_obj._weight
+            x_obj._tally != y_obj._tally
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
             or x_obj._credor_respect != y_obj._credor_respect
             or x_obj._debtor_respect != y_obj._debtor_respect
@@ -507,12 +507,12 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._fund_coin != y_obj._fund_coin
         )
     elif category in {"bud_acct_lobbyship"}:
-        return (x_obj.credor_weight != y_obj.credor_weight) or (
-            x_obj.debtor_weight != y_obj.debtor_weight
+        return (x_obj.credit_score != y_obj.credit_score) or (
+            x_obj.debtit_score != y_obj.debtit_score
         )
     elif category in {"bud_idea_awardlink"}:
-        return (x_obj.give_weight != y_obj.give_weight) or (
-            x_obj.take_weight != y_obj.take_weight
+        return (x_obj.give_force != y_obj.give_force) or (
+            x_obj.take_force != y_obj.take_force
         )
     elif category == "bud_ideaunit":
         return (
@@ -524,7 +524,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._numor != y_obj._numor
             or x_obj._range_source_road != y_obj._range_source_road
             or x_obj._reest != y_obj._reest
-            or x_obj._weight != y_obj._weight
+            or x_obj._mass != y_obj._mass
             or x_obj.pledge != y_obj.pledge
         )
     elif category == "bud_idea_factunit":
@@ -542,8 +542,8 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.divisor != y_obj.divisor
         )
     elif category == "bud_acctunit":
-        return (x_obj.credor_weight != y_obj.credor_weight) or (
-            x_obj.debtor_weight != y_obj.debtor_weight
+        return (x_obj.credit_score != y_obj.credit_score) or (
+            x_obj.debtit_score != y_obj.debtit_score
         )
 
 

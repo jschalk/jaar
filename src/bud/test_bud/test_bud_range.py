@@ -4,14 +4,14 @@ from src.bud.bud import budunit_shop
 
 def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
     # ESTABLISH
-    yao_bud = budunit_shop("Yao", _weight=10)
+    yao_bud = budunit_shop("Yao", _tally=10)
 
     l1 = "level1"
-    yao_bud.set_l1_idea(ideaunit_shop(l1, _weight=30))
+    yao_bud.set_l1_idea(ideaunit_shop(l1, _mass=30))
     l1_road = yao_bud.make_l1_road(l1)
 
     rx1 = "range_root_example"
-    yao_bud.set_idea(ideaunit_shop(rx1, _weight=30), parent_road=l1_road)
+    yao_bud.set_idea(ideaunit_shop(rx1, _mass=30), parent_road=l1_road)
     rx1_road = yao_bud.make_road(l1_road, rx1)
     yao_bud.edit_idea_attr(road=rx1_road, begin=10, close=25)
 
@@ -19,7 +19,7 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
     print(f"Add example child idea to road='{rx1_road}'")
 
     rcA = "range_child_example"
-    yao_bud.set_idea(ideaunit_shop(rcA, _weight=30, _begin=10, _close=25), rx1_road)
+    yao_bud.set_idea(ideaunit_shop(rcA, _mass=30, _begin=10, _close=25), rx1_road)
 
     rcA_road = yao_bud.make_road(rx1_road, rcA)
     x_idea = yao_bud.get_idea_obj(rcA_road)
@@ -37,14 +37,14 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
 
 def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario2():
     # ESTABLISH
-    yao_budunit = budunit_shop(_owner_id="Yao", _weight=10)
+    yao_budunit = budunit_shop(_owner_id="Yao", _tally=10)
 
     l1 = "level1"
-    yao_budunit.set_l1_idea(ideaunit_shop(l1, _weight=30))
+    yao_budunit.set_l1_idea(ideaunit_shop(l1, _mass=30))
     l1_road = yao_budunit.make_l1_road(l1)
 
     rx1 = "range_root_example"
-    yao_budunit.set_idea(ideaunit_shop(rx1, _weight=30), parent_road=l1_road)
+    yao_budunit.set_idea(ideaunit_shop(rx1, _mass=30), parent_road=l1_road)
     rx1_road = yao_budunit.make_road(l1_road, rx1)
     yao_budunit.edit_idea_attr(road=rx1_road, begin=10, close=25)
 
@@ -52,7 +52,7 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario2():
     print(f"Add example child idea to road='{rx1_road}'")
 
     rcA = "range_child_example"
-    yao_budunit.set_idea(ideaunit_shop(rcA, _weight=30, _begin=10, _close=25), rx1_road)
+    yao_budunit.set_idea(ideaunit_shop(rcA, _mass=30, _begin=10, _close=25), rx1_road)
 
     rcA_road = yao_budunit.make_road(rx1_road, rcA)
     x_idea = yao_budunit.get_idea_obj(rcA_road)

@@ -41,12 +41,12 @@ def acct_pool_str() -> str:
     return "acct_pool"
 
 
-def debtor_weight_str() -> str:
-    return "debtor_weight"
+def debtit_score_str() -> str:
+    return "debtit_score"
 
 
-def credor_weight_str() -> str:
-    return "credor_weight"
+def credit_score_str() -> str:
+    return "credit_score"
 
 
 def parent_road_str() -> str:
@@ -57,8 +57,8 @@ def label_str() -> str:
     return "label"
 
 
-def weight_str() -> str:
-    return "weight"
+def mass_str() -> str:
+    return "mass"
 
 
 def pledge_str() -> str:
@@ -201,8 +201,8 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
                 x_budunit._real_id,
                 x_budunit._owner_id,
                 x_atomunit.get_value(acct_id_str()),
-                x_atomunit.get_value(credor_weight_str()),
-                x_atomunit.get_value(debtor_weight_str()),
+                x_atomunit.get_value(credit_score_str()),
+                x_atomunit.get_value(debtit_score_str()),
             ]
             for x_atomunit in sorted_atomunits
         ]
@@ -214,8 +214,8 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
                 x_budunit._owner_id,
                 x_atomunit.get_value(acct_id_str()),
                 x_atomunit.get_value(lobby_id_str()),
-                x_atomunit.get_value(credor_weight_str()),
-                x_atomunit.get_value(debtor_weight_str()),
+                x_atomunit.get_value(credit_score_str()),
+                x_atomunit.get_value(debtit_score_str()),
             ]
             for x_atomunit in sorted_atomunits
         ]
@@ -231,7 +231,7 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
                     x_budunit._owner_id,
                     pledge_yes_str,
                     x_atomunit.get_value("parent_road"),
-                    x_atomunit.get_value("_weight"),
+                    x_atomunit.get_value("_mass"),
                     x_atomunit.get_value("label"),
                 ]
             )

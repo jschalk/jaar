@@ -17,11 +17,11 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     sue_bud._rational = x_rational
     sue_bud._tree_traverse_count = x_tree_traverse_count
     sue_bud._idea_dict = x_idea_dict
-    sue_bud._offtrack_kids_weight_set = "example"
+    sue_bud._offtrack_kids_mass_set = "example"
     assert sue_bud._rational == x_rational
     assert sue_bud._tree_traverse_count == x_tree_traverse_count
     assert sue_bud._idea_dict == x_idea_dict
-    assert sue_bud._offtrack_kids_weight_set != set()
+    assert sue_bud._offtrack_kids_mass_set != set()
 
     # WHEN
     sue_bud._set_tree_traverse_stage()
@@ -33,7 +33,7 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     assert sue_bud._tree_traverse_count == 0
     assert sue_bud._idea_dict != x_idea_dict
     assert sue_bud._idea_dict == {sue_bud._idearoot.get_road(): sue_bud._idearoot}
-    assert sue_bud._offtrack_kids_weight_set == set()
+    assert sue_bud._offtrack_kids_mass_set == set()
 
 
 def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
@@ -265,9 +265,9 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     swim_road = x_bud.make_l1_road(swim_text)
 
     x_bud.set_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(yao_text, give_weight=10)
-    awardlink_zia = awardlink_shop(zia_text, give_weight=10)
-    awardlink_Xio = awardlink_shop(Xio_text, give_weight=10)
+    awardlink_yao = awardlink_shop(yao_text, give_force=10)
+    awardlink_zia = awardlink_shop(zia_text, give_force=10)
+    awardlink_Xio = awardlink_shop(Xio_text, give_force=10)
 
     swim_idea = x_bud.get_idea_obj(swim_road)
     x_bud.edit_idea_attr(swim_road, awardlink=awardlink_yao)
@@ -365,80 +365,80 @@ def test_BudUnit_settle_bud_CreatesFullyPopulated_idea_dict():
     assert len(sue_budunit._idea_dict) == 17
 
 
-def test_BudUnit_settle_bud_Resets_offtrack_kids_weight_set():
+def test_BudUnit_settle_bud_Resets_offtrack_kids_mass_set():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    sue_budunit._offtrack_kids_weight_set = set("ZZ")
+    sue_budunit._offtrack_kids_mass_set = set("ZZ")
     x_set = set()
 
-    assert sue_budunit._offtrack_kids_weight_set != x_set
+    assert sue_budunit._offtrack_kids_mass_set != x_set
 
     # WHEN
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_weight_set == x_set
+    assert sue_budunit._offtrack_kids_mass_set == x_set
 
 
-def test_BudUnit_settle_bud_WhenIdeaRootHas_weightButAll_kidsHaveZero_weightAddTo_offtrack_kids_weight_set_Scenario0():
+def test_BudUnit_settle_bud_WhenIdeaRootHas_massButAll_kidsHaveZero_massAddTo_offtrack_kids_mass_set_Scenario0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _weight=0)
+    casa_idea = ideaunit_shop(casa_text, _mass=0)
     sue_budunit.set_l1_idea(casa_idea)
-    assert sue_budunit._offtrack_kids_weight_set == set()
+    assert sue_budunit._offtrack_kids_mass_set == set()
 
     # WHEN
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_weight_set == {sue_budunit._real_id}
+    assert sue_budunit._offtrack_kids_mass_set == {sue_budunit._real_id}
 
     # WHEN
-    sue_budunit.edit_idea_attr(casa_road, weight=2)
+    sue_budunit.edit_idea_attr(casa_road, mass=2)
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_weight_set == set()
+    assert sue_budunit._offtrack_kids_mass_set == set()
 
 
-def test_BudUnit_settle_bud_WhenIdeaUnitHas_weightButAll_kidsHaveZero_weightAddTo_offtrack_kids_weight_set():
+def test_BudUnit_settle_bud_WhenIdeaUnitHas_massButAll_kidsHaveZero_massAddTo_offtrack_kids_mass_set():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _weight=1)
+    casa_idea = ideaunit_shop(casa_text, _mass=1)
 
     swim_text = "swimming"
     swim_road = sue_budunit.make_road(casa_road, swim_text)
-    swim_idea = ideaunit_shop(swim_text, _weight=8)
+    swim_idea = ideaunit_shop(swim_text, _mass=8)
 
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    clean_idea = ideaunit_shop(clean_text, _weight=2)
+    clean_idea = ideaunit_shop(clean_text, _mass=2)
     sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _weight=0)
+    sweep_idea = ideaunit_shop(sweep_text, _mass=0)
     vaccum_text = "vaccum"
     vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
-    vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
+    vaccum_idea = ideaunit_shop(vaccum_text, _mass=0)
 
     sue_budunit.set_l1_idea(casa_idea)
     sue_budunit.set_idea(swim_idea, casa_road)
     sue_budunit.set_idea(clean_idea, casa_road)
-    sue_budunit.set_idea(sweep_idea, clean_road)  # _weight=0
-    sue_budunit.set_idea(vaccum_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(sweep_idea, clean_road)  # _mass=0
+    sue_budunit.set_idea(vaccum_idea, clean_road)  # _mass=0
 
-    assert sue_budunit._offtrack_kids_weight_set == set()
+    assert sue_budunit._offtrack_kids_mass_set == set()
 
     # WHEN
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_weight_set == {clean_road}
+    assert sue_budunit._offtrack_kids_mass_set == {clean_road}
 
 
 def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
@@ -446,12 +446,12 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    yao_credor_weight = 3
-    yao_debtor_weight = 2
-    zia_credor_weight = 4
-    zia_debtor_weight = 5
-    yao_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
-    yao_bud.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_credit_score = 3
+    yao_debtit_score = 2
+    zia_credit_score = 4
+    zia_debtit_score = 5
+    yao_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
     x_idearoot = yao_bud.get_idea_obj(yao_bud._real_id)
     x_idearoot.set_awardlink(awardlink_shop(yao_text))
     x_idearoot.set_awardlink(awardlink_shop(zia_text))
@@ -480,10 +480,10 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
     assert not xio_lobbybox.lobbyship_exists(xio_text)
     yao_lobbyship = xio_lobbybox.get_lobbyship(yao_text)
     zia_lobbyship = xio_lobbybox.get_lobbyship(zia_text)
-    assert yao_lobbyship.credor_weight == yao_credor_weight
-    assert zia_lobbyship.credor_weight == zia_credor_weight
-    assert yao_lobbyship.debtor_weight == yao_debtor_weight
-    assert zia_lobbyship.debtor_weight == zia_debtor_weight
+    assert yao_lobbyship.credit_score == yao_credit_score
+    assert zia_lobbyship.credit_score == zia_credit_score
+    assert yao_lobbyship.debtit_score == yao_debtit_score
+    assert zia_lobbyship.debtit_score == zia_debtit_score
 
 
 def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():

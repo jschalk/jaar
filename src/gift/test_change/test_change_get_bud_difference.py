@@ -65,9 +65,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     before_sue_bud = budunit_shop(sue_text)
     after_sue_bud = copy_deepcopy(before_sue_bud)
     xio_text = "Xio"
-    xio_credor_weight = 33
-    xio_debtor_weight = 44
-    xio_acctunit = acctunit_shop(xio_text, xio_credor_weight, xio_debtor_weight)
+    xio_credit_score = 33
+    xio_debtit_score = 44
+    xio_acctunit = acctunit_shop(xio_text, xio_credit_score, xio_debtit_score)
     after_sue_bud.set_acctunit(xio_acctunit, auto_set_lobbyship=False)
 
     # WHEN
@@ -80,8 +80,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     sue_acctunit_dict = sue_insert_dict.get("bud_acctunit")
     xio_atomunit = sue_acctunit_dict.get(xio_text)
     assert xio_atomunit.get_value("acct_id") == xio_text
-    assert xio_atomunit.get_value("credor_weight") == xio_credor_weight
-    assert xio_atomunit.get_value("debtor_weight") == xio_debtor_weight
+    assert xio_atomunit.get_value("credit_score") == xio_credit_score
+    assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -121,9 +121,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
     after_sue_bud = copy_deepcopy(before_sue_bud)
     xio_text = "Xio"
     before_sue_bud.add_acctunit(xio_text)
-    xio_credor_weight = 33
-    xio_debtor_weight = 44
-    after_sue_bud.add_acctunit(xio_text, xio_credor_weight, xio_debtor_weight)
+    xio_credit_score = 33
+    xio_debtit_score = 44
+    after_sue_bud.add_acctunit(xio_text, xio_credit_score, xio_debtit_score)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -133,8 +133,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
     x_keylist = [atom_update(), "bud_acctunit", xio_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("acct_id") == xio_text
-    assert xio_atomunit.get_value("credor_weight") == xio_credor_weight
-    assert xio_atomunit.get_value("debtor_weight") == xio_debtor_weight
+    assert xio_atomunit.get_value("credit_score") == xio_credit_score
+    assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -145,7 +145,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    x_budUnit_weight = 55
+    x_budunit_tally = 55
     x_fund_pool = 8000000
     x_fund_coin = 8
     x_bit = 5
@@ -153,7 +153,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     x_monetary_desc = "dragon dollars"
     x_credor_respect = 770
     x_debtor_respect = 880
-    after_sue_bud._weight = x_budUnit_weight
+    after_sue_bud._tally = x_budunit_tally
     after_sue_bud._fund_pool = x_fund_pool
     after_sue_bud._fund_coin = x_fund_coin
     after_sue_bud._bit = x_bit
@@ -173,7 +173,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     assert xio_atomunit.get_value("_monetary_desc") == x_monetary_desc
     assert xio_atomunit.get_value("_credor_respect") == x_credor_respect
     assert xio_atomunit.get_value("_debtor_respect") == x_debtor_respect
-    assert xio_atomunit.get_value("_weight") == x_budUnit_weight
+    assert xio_atomunit.get_value("_tally") == x_budunit_tally
     assert xio_atomunit.get_value("_fund_pool") == x_fund_pool
     assert xio_atomunit.get_value("_fund_coin") == x_fund_coin
     assert xio_atomunit.get_value("_bit") == x_bit
@@ -225,8 +225,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("acct_id") == zia_text
     assert run_atomunit.get_value("lobby_id") == run_text
-    assert run_atomunit.get_value("credor_weight") == zia_run_credor_w
-    assert run_atomunit.get_value("debtor_weight") == zia_run_debtor_w
+    assert run_atomunit.get_value("credit_score") == zia_run_credor_w
+    assert run_atomunit.get_value("debtit_score") == zia_run_debtor_w
 
     print_atomunit_keys(sue_changeunit)
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
@@ -270,8 +270,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("acct_id") == xio_text
     assert xio_atomunit.get_value("lobby_id") == run_text
-    assert xio_atomunit.get_value("credor_weight") == after_xio_credor_w
-    assert xio_atomunit.get_value("debtor_weight") == after_xio_debtor_w
+    assert xio_atomunit.get_value("credit_score") == after_xio_credor_w
+    assert xio_atomunit.get_value("debtit_score") == after_xio_debtor_w
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -393,7 +393,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     music_text = "music"
     music_begin = 34
     music_close = 78
-    music_weight = 55
+    music_mass = 55
     music_pledge = True
     music_road = after_sue_bud.make_l1_road(music_text)
     after_sue_bud.set_l1_idea(
@@ -401,7 +401,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
             music_text,
             _begin=music_begin,
             _close=music_close,
-            _weight=music_weight,
+            _mass=music_mass,
             pledge=music_pledge,
         )
     )
@@ -429,7 +429,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     assert ball_atomunit.get_value("parent_road") == after_sue_bud._real_id
     assert ball_atomunit.get_value("_begin") == music_begin
     assert ball_atomunit.get_value("_close") == music_close
-    assert ball_atomunit.get_value("_weight") == music_weight
+    assert ball_atomunit.get_value("_mass") == music_mass
     assert ball_atomunit.get_value("pledge") == music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 2
@@ -444,7 +444,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     music_text = "music"
     before_music_begin = 34
     before_music_close = 78
-    before_music_weight = 55
+    before_music_mass = 55
     before_music_pledge = True
     music_road = before_sue_bud.make_l1_road(music_text)
     before_sue_bud.set_l1_idea(
@@ -452,7 +452,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
             music_text,
             _begin=before_music_begin,
             _close=before_music_close,
-            _weight=before_music_weight,
+            _mass=before_music_mass,
             pledge=before_music_pledge,
         )
     )
@@ -460,13 +460,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_music_begin = 99
     after_music_close = 111
-    after_music_weight = 22
+    after_music_mass = 22
     after_music_pledge = False
     after_sue_bud.edit_idea_attr(
         music_road,
         begin=after_music_begin,
         close=after_music_close,
-        weight=after_music_weight,
+        mass=after_music_mass,
         pledge=after_music_pledge,
     )
 
@@ -488,7 +488,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     assert ball_atomunit.get_value("label") == music_text
     assert ball_atomunit.get_value("_begin") == after_music_begin
     assert ball_atomunit.get_value("_close") == after_music_close
-    assert ball_atomunit.get_value("_weight") == after_music_weight
+    assert ball_atomunit.get_value("_mass") == after_music_mass
     assert ball_atomunit.get_value("pledge") == after_music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -577,9 +577,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_text))
     after_sue_au = copy_deepcopy(before_sue_au)
     after_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_text))
-    after_run_give_weight = 44
-    after_run_take_weight = 66
-    x_awardlink = awardlink_shop(run_text, after_run_give_weight, after_run_take_weight)
+    after_run_give_force = 44
+    after_run_take_force = 66
+    x_awardlink = awardlink_shop(run_text, after_run_give_force, after_run_take_force)
     after_sue_au.edit_idea_attr(disc_road, awardlink=x_awardlink)
 
     # WHEN
@@ -595,8 +595,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     assert run_atomunit.get_value("lobby_id") == run_text
     assert run_atomunit.get_value("road") == disc_road
     assert run_atomunit.get_value("lobby_id") == run_text
-    assert run_atomunit.get_value("give_weight") == after_run_give_weight
-    assert run_atomunit.get_value("take_weight") == after_run_take_weight
+    assert run_atomunit.get_value("give_force") == after_run_give_force
+    assert run_atomunit.get_value("take_force") == after_run_take_force
 
     assert get_atomunit_total_count(sue_changeunit) == 2
 
@@ -621,14 +621,14 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     run_awardlink = before_sue_au.get_idea_obj(ball_road)._awardlinks.get(run_text)
 
     after_sue_bud = copy_deepcopy(before_sue_au)
-    after_give_weight = 55
-    after_take_weight = 66
+    after_give_force = 55
+    after_take_force = 66
     after_sue_bud.edit_idea_attr(
         ball_road,
         awardlink=awardlink_shop(
             lobby_id=run_text,
-            give_weight=after_give_weight,
-            take_weight=after_take_weight,
+            give_force=after_give_force,
+            take_force=after_take_force,
         ),
     )
     # WHEN
@@ -642,8 +642,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("lobby_id") == run_text
-    assert ball_atomunit.get_value("give_weight") == after_give_weight
-    assert ball_atomunit.get_value("take_weight") == after_take_weight
+    assert ball_atomunit.get_value("give_force") == after_give_force
+    assert ball_atomunit.get_value("take_force") == after_take_force
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 

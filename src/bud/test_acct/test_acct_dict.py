@@ -12,13 +12,13 @@ from pytest import raises as pytest_raises
 def test_AcctUnit_get_lobbyships_dict_ReturnObj():
     # ESTABLISH
     sue_text = "Sue"
-    sue_credor_weight = 11
-    sue_debtor_weight = 13
+    sue_credit_score = 11
+    sue_debtit_score = 13
     run_text = ",Run"
-    run_credor_weight = 17
-    run_debtor_weight = 23
-    sue_lobbyship = lobbyship_shop(sue_text, sue_credor_weight, sue_debtor_weight)
-    run_lobbyship = lobbyship_shop(run_text, run_credor_weight, run_debtor_weight)
+    run_credit_score = 17
+    run_debtit_score = 23
+    sue_lobbyship = lobbyship_shop(sue_text, sue_credit_score, sue_debtit_score)
+    run_lobbyship = lobbyship_shop(run_text, run_credit_score, run_debtit_score)
     sue_acctunit = acctunit_shop(sue_text)
     sue_acctunit.set_lobbyship(sue_lobbyship)
     sue_acctunit.set_lobbyship(run_lobbyship)
@@ -33,13 +33,13 @@ def test_AcctUnit_get_lobbyships_dict_ReturnObj():
     run_lobbyship_dict = sue_lobbyships_dict.get(run_text)
     assert sue_lobbyship_dict == {
         "lobby_id": sue_text,
-        "credor_weight": sue_credor_weight,
-        "debtor_weight": sue_debtor_weight,
+        "credit_score": sue_credit_score,
+        "debtit_score": sue_debtit_score,
     }
     assert run_lobbyship_dict == {
         "lobby_id": run_text,
-        "credor_weight": run_credor_weight,
-        "debtor_weight": run_debtor_weight,
+        "credit_score": run_credit_score,
+        "debtit_score": run_debtit_score,
     }
 
 
@@ -48,10 +48,10 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
 
-    bob_credor_weight = 13
-    bob_debtor_weight = 17
-    bob_acctunit.set_credor_weight(bob_credor_weight)
-    bob_acctunit.set_debtor_weight(bob_debtor_weight)
+    bob_credit_score = 13
+    bob_debtit_score = 17
+    bob_acctunit.set_credit_score(bob_credit_score)
+    bob_acctunit.set_debtit_score(bob_debtit_score)
 
     print(f"{bob_text}")
 
@@ -68,11 +68,11 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "acct_id": bob_text,
-        "credor_weight": bob_credor_weight,
-        "debtor_weight": bob_debtor_weight,
+        "credit_score": bob_credit_score,
+        "debtit_score": bob_debtit_score,
         "_lobbyships": {
-            bob_text: {"lobby_id": bob_text, "credor_weight": 1, "debtor_weight": 1},
-            run_text: {"lobby_id": run_text, "credor_weight": 1, "debtor_weight": 1},
+            bob_text: {"lobby_id": bob_text, "credit_score": 1, "debtit_score": 1},
+            run_text: {"lobby_id": run_text, "credit_score": 1, "debtit_score": 1},
         },
     }
 
@@ -82,14 +82,14 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
 
-    bob_credor_weight = 13
-    bob_debtor_weight = 17
-    bob_acctunit.set_credor_weight(bob_credor_weight)
-    bob_acctunit.set_debtor_weight(bob_debtor_weight)
-    bob_irrational_debtor_weight = 87
-    bob_inallocable_debtor_weight = 97
-    bob_acctunit.add_irrational_debtor_weight(bob_irrational_debtor_weight)
-    bob_acctunit.add_inallocable_debtor_weight(bob_inallocable_debtor_weight)
+    bob_credit_score = 13
+    bob_debtit_score = 17
+    bob_acctunit.set_credit_score(bob_credit_score)
+    bob_acctunit.set_debtit_score(bob_debtit_score)
+    bob_irrational_debtit_score = 87
+    bob_inallocable_debtit_score = 97
+    bob_acctunit.add_irrational_debtit_score(bob_irrational_debtit_score)
+    bob_acctunit.add_inallocable_debtit_score(bob_inallocable_debtit_score)
 
     bob_fund_give = 55
     bob_fund_take = 47
@@ -119,11 +119,11 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "acct_id": bob_text,
-        "credor_weight": bob_credor_weight,
-        "debtor_weight": bob_debtor_weight,
+        "credit_score": bob_credit_score,
+        "debtit_score": bob_debtit_score,
         "_lobbyships": bob_acctunit.get_lobbyships_dict(),
-        "_irrational_debtor_weight": bob_irrational_debtor_weight,
-        "_inallocable_debtor_weight": bob_inallocable_debtor_weight,
+        "_irrational_debtit_score": bob_irrational_debtit_score,
+        "_inallocable_debtit_score": bob_inallocable_debtit_score,
         "_fund_give": bob_fund_give,
         "_fund_take": bob_fund_take,
         "_fund_agenda_give": bob_fund_agenda_give,
@@ -137,17 +137,17 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsZerp()
     # ESTABLISH
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
-    assert bob_acctunit._irrational_debtor_weight == 0
-    assert bob_acctunit._inallocable_debtor_weight == 0
+    assert bob_acctunit._irrational_debtit_score == 0
+    assert bob_acctunit._inallocable_debtit_score == 0
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debtor_weight = "_irrational_debtor_weight"
-    x_inallocable_debtor_weight = "_inallocable_debtor_weight"
-    assert x_dict.get(x_irrational_debtor_weight) is None
-    assert x_dict.get(x_inallocable_debtor_weight) is None
+    x_irrational_debtit_score = "_irrational_debtit_score"
+    x_inallocable_debtit_score = "_inallocable_debtit_score"
+    assert x_dict.get(x_irrational_debtit_score) is None
+    assert x_dict.get(x_inallocable_debtit_score) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -155,19 +155,19 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNumber
     # ESTABLISH
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
-    bob_irrational_debtor_weight = 87
-    bob_inallocable_debtor_weight = 97
-    bob_acctunit.add_irrational_debtor_weight(bob_irrational_debtor_weight)
-    bob_acctunit.add_inallocable_debtor_weight(bob_inallocable_debtor_weight)
+    bob_irrational_debtit_score = 87
+    bob_inallocable_debtit_score = 97
+    bob_acctunit.add_irrational_debtit_score(bob_irrational_debtit_score)
+    bob_acctunit.add_inallocable_debtit_score(bob_inallocable_debtit_score)
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debtor_weight = "_irrational_debtor_weight"
-    x_inallocable_debtor_weight = "_inallocable_debtor_weight"
-    assert x_dict.get(x_irrational_debtor_weight) == bob_irrational_debtor_weight
-    assert x_dict.get(x_inallocable_debtor_weight) == bob_inallocable_debtor_weight
+    x_irrational_debtit_score = "_irrational_debtit_score"
+    x_inallocable_debtit_score = "_inallocable_debtit_score"
+    assert x_dict.get(x_irrational_debtit_score) == bob_irrational_debtit_score
+    assert x_dict.get(x_inallocable_debtit_score) == bob_inallocable_debtit_score
     assert len(x_dict.keys()) == 12
 
 
@@ -175,17 +175,17 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNone()
     # ESTABLISH
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
-    bob_acctunit._irrational_debtor_weight = None
-    bob_acctunit._inallocable_debtor_weight = None
+    bob_acctunit._irrational_debtit_score = None
+    bob_acctunit._inallocable_debtit_score = None
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debtor_weight = "_irrational_debtor_weight"
-    x_inallocable_debtor_weight = "_inallocable_debtor_weight"
-    assert x_dict.get(x_irrational_debtor_weight) is None
-    assert x_dict.get(x_inallocable_debtor_weight) is None
+    x_irrational_debtit_score = "_irrational_debtit_score"
+    x_inallocable_debtit_score = "_inallocable_debtit_score"
+    assert x_dict.get(x_irrational_debtit_score) is None
+    assert x_dict.get(x_inallocable_debtit_score) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -243,18 +243,18 @@ def test_acctunits_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
 def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteData():
     # ESTABLISH
     yao_text = "Yao"
-    yao_credor_weight = 13
-    yao_debtor_weight = 17
-    yao_irrational_debtor_weight = 87
-    yao_inallocable_debtor_weight = 97
+    yao_credit_score = 13
+    yao_debtit_score = 17
+    yao_irrational_debtit_score = 87
+    yao_inallocable_debtit_score = 97
     yao_json_dict = {
         yao_text: {
             "acct_id": yao_text,
-            "credor_weight": yao_credor_weight,
-            "debtor_weight": yao_debtor_weight,
+            "credit_score": yao_credit_score,
+            "debtit_score": yao_debtit_score,
             "_lobbyships": {},
-            "_irrational_debtor_weight": yao_irrational_debtor_weight,
-            "_inallocable_debtor_weight": yao_inallocable_debtor_weight,
+            "_irrational_debtit_score": yao_irrational_debtit_score,
+            "_inallocable_debtit_score": yao_inallocable_debtit_score,
         }
     }
     yao_json_text = get_json_from_dict(dict_x=yao_json_dict)
@@ -268,7 +268,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
     yao_acctunit = yao_obj_dict[yao_text]
 
     assert yao_acctunit.acct_id == yao_text
-    assert yao_acctunit.credor_weight == yao_credor_weight
-    assert yao_acctunit.debtor_weight == yao_debtor_weight
-    assert yao_acctunit._irrational_debtor_weight == yao_irrational_debtor_weight
-    assert yao_acctunit._inallocable_debtor_weight == yao_inallocable_debtor_weight
+    assert yao_acctunit.credit_score == yao_credit_score
+    assert yao_acctunit.debtit_score == yao_debtit_score
+    assert yao_acctunit._irrational_debtit_score == yao_irrational_debtit_score
+    assert yao_acctunit._inallocable_debtit_score == yao_inallocable_debtit_score

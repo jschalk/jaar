@@ -104,7 +104,7 @@ class BudUnit:
     _real_id: RealID = None
     _owner_id: OwnerID = None
     _last_gift_id: int = None
-    _weight: float = None
+    _tally: float = None
     _accts: dict[AcctID, AcctUnit] = None
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
@@ -127,7 +127,7 @@ class BudUnit:
     _econs_buildable: bool = None
     _sum_healerhold_share: float = None
     _lobbyboxs: dict[LobbyID, LobbyBox] = None
-    _offtrack_kids_weight_set: set[RoadUnit] = None
+    _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
     # settle_bud Calculated field end
 
@@ -339,12 +339,12 @@ class BudUnit:
         self._accts.pop(acct_id)
 
     def add_acctunit(
-        self, acct_id: AcctID, credor_weight: int = None, debtor_weight: int = None
+        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
     ):
         acctunit = acctunit_shop(
             acct_id=acct_id,
-            credor_weight=credor_weight,
-            debtor_weight=debtor_weight,
+            credit_score=credit_score,
+            debtit_score=debtit_score,
             _road_delimiter=self._road_delimiter,
         )
         self.set_acctunit(acctunit)
@@ -362,15 +362,15 @@ class BudUnit:
         return self.get_acct(acct_id) is not None
 
     def edit_acctunit(
-        self, acct_id: AcctID, credor_weight: int = None, debtor_weight: int = None
+        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
     ):
         if self._accts.get(acct_id) is None:
             raise AcctMissingException(f"AcctUnit '{acct_id}' does not exist.")
         x_acctunit = self.get_acct(acct_id)
-        if credor_weight is not None:
-            x_acctunit.set_credor_weight(credor_weight)
-        if debtor_weight is not None:
-            x_acctunit.set_debtor_weight(debtor_weight)
+        if credit_score is not None:
+            x_acctunit.set_credit_score(credit_score)
+        if debtit_score is not None:
+            x_acctunit.set_debtit_score(debtit_score)
         self.set_acctunit(x_acctunit)
 
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
@@ -389,6 +389,7 @@ class BudUnit:
         return x_dict
 
     def set_lobbybox(self, x_lobbybox: LobbyBox):
+        x_lobbybox._fund_coin = self._fund_coin
         self._lobbyboxs[x_lobbybox.lobby_id] = x_lobbybox
 
     def lobbybox_exists(self, lobby_id: LobbyID) -> bool:
@@ -402,8 +403,8 @@ class BudUnit:
         for x_acctunit in self._accts.values():
             x_lobbyship = lobbyship_shop(
                 lobby_id=x_lobby_id,
-                credor_weight=x_acctunit.credor_weight,
-                debtor_weight=x_acctunit.debtor_weight,
+                credit_score=x_acctunit.credit_score,
+                debtit_score=x_acctunit.debtit_score,
                 _acct_id=x_acctunit.acct_id,
             )
             x_lobbybox.set_lobbyship(x_lobbyship)
@@ -644,11 +645,11 @@ class BudUnit:
         return missing_bases
 
     def add_idea(
-        self, idea_road: RoadUnit, weight: float = None, pledge: bool = None
+        self, idea_road: RoadUnit, mass: float = None, pledge: bool = None
     ) -> IdeaUnit:
         x_label = get_terminus_node(idea_road, self._road_delimiter)
         x_parent_road = get_parent_road(idea_road, self._road_delimiter)
-        x_ideaunit = ideaunit_shop(x_label, _weight=weight)
+        x_ideaunit = ideaunit_shop(x_label, _mass=mass)
         if pledge:
             x_ideaunit.pledge = True
         self.set_idea(x_ideaunit, x_parent_road)
@@ -716,20 +717,18 @@ class BudUnit:
 
         kid_road = self.make_road(parent_road, idea_kid._label)
         if adoptees is not None:
-            weight_sum = 0
+            mass_sum = 0
             for adoptee_label in adoptees:
                 adoptee_road = self.make_road(parent_road, adoptee_label)
                 adoptee_idea = self.get_idea_obj(adoptee_road)
-                weight_sum += adoptee_idea._weight
+                mass_sum += adoptee_idea._mass
                 new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
                 self.set_idea(adoptee_idea, new_adoptee_parent_road)
-                self.edit_idea_attr(
-                    new_adoptee_parent_road, weight=adoptee_idea._weight
-                )
+                self.edit_idea_attr(new_adoptee_parent_road, mass=adoptee_idea._mass)
                 self.del_idea_obj(adoptee_road)
 
             if bundling:
-                self.edit_idea_attr(road=kid_road, weight=weight_sum)
+                self.edit_idea_attr(road=kid_road, mass=mass_sum)
 
         if create_missing_ideas:
             self._create_missing_ideas(road=kid_road)
@@ -984,7 +983,7 @@ class BudUnit:
     def edit_idea_attr(
         self,
         road: RoadUnit,
-        weight: int = None,
+        mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
         reason_base: RoadUnit = None,
@@ -1023,7 +1022,7 @@ class BudUnit:
                     )
 
         x_ideaattrfilter = ideaattrfilter_shop(
-            weight=weight,
+            mass=mass,
             uid=uid,
             reason=reason,
             reason_base=reason_base,
@@ -1087,8 +1086,8 @@ class BudUnit:
 
     def _allot_offtrack_fund(self):
         x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credor_weight for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtor_weight for x_acct in x_acctunits}
+        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
         fund_give_allot = allot_scale(
             credor_ledger, self._offtrack_fund, self._fund_coin
         )
@@ -1100,24 +1099,25 @@ class BudUnit:
         for x_acct_id, acct_fund_take in fund_take_allot.items():
             self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
 
-    def get_acctunits_credor_weight_sum(self) -> float:
-        return sum(acctunit.get_credor_weight() for acctunit in self._accts.values())
+    def get_acctunits_credit_score_sum(self) -> float:
+        return sum(acctunit.get_credit_score() for acctunit in self._accts.values())
 
-    def get_acctunits_debtor_weight_sum(self) -> float:
-        return sum(acctunit.get_debtor_weight() for acctunit in self._accts.values())
+    def get_acctunits_debtit_score_sum(self) -> float:
+        return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
-        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
-        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
+        # TODO replace this process with allot_scale
+        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
+        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             au_fund_give = (
-                idea_fund_share * x_acctunit.get_credor_weight()
-            ) / sum_acctunit_credor_weight
+                idea_fund_share * x_acctunit.get_credit_score()
+            ) / sum_acctunit_credit_score
 
             au_fund_take = (
-                idea_fund_share * x_acctunit.get_debtor_weight()
-            ) / sum_acctunit_debtor_weight
+                idea_fund_share * x_acctunit.get_debtit_score()
+            ) / sum_acctunit_debtit_score
 
             x_acctunit.add_fund_give_take(
                 fund_give=au_fund_give,
@@ -1127,17 +1127,18 @@ class BudUnit:
             )
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
-        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
-        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
+        # TODO replace this process with allot_scale
+        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
+        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             au_fund_agenda_give = (
-                idea_fund_share * x_acctunit.get_credor_weight()
-            ) / sum_acctunit_credor_weight
+                idea_fund_share * x_acctunit.get_credit_score()
+            ) / sum_acctunit_credit_score
 
             au_fund_agenda_take = (
-                idea_fund_share * x_acctunit.get_debtor_weight()
-            ) / sum_acctunit_debtor_weight
+                idea_fund_share * x_acctunit.get_debtit_score()
+            ) / sum_acctunit_debtit_score
 
             x_acctunit.add_fund_give_take(
                 fund_give=0,
@@ -1147,17 +1148,18 @@ class BudUnit:
             )
 
     def _set_acctunits_bud_agenda_share(self, bud_agenda_share: float):
-        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
-        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
+        # TODO replace this process with allot_scale
+        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
+        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             au_fund_agenda_give = (
-                bud_agenda_share * x_acctunit.get_credor_weight()
-            ) / sum_acctunit_credor_weight
+                bud_agenda_share * x_acctunit.get_credit_score()
+            ) / sum_acctunit_credit_score
 
             au_fund_agenda_take = (
-                bud_agenda_share * x_acctunit.get_debtor_weight()
-            ) / sum_acctunit_debtor_weight
+                bud_agenda_share * x_acctunit.get_debtit_score()
+            ) / sum_acctunit_debtit_score
 
             x_acctunit.add_fund_agenda_give_take(
                 bud_agenda_cred=au_fund_agenda_give,
@@ -1166,7 +1168,7 @@ class BudUnit:
 
     def _reset_lobbyboxs_fund_give_take(self):
         for lobbybox_obj in self._lobbyboxs.values():
-            lobbybox_obj.reset_fund_give_take()
+            lobbybox_obj.clear_fund_give_take()
 
     def _set_lobbyboxs_fund_share(self, awardheirs: dict[LobbyID, AwardLink]):
         for awardlink_obj in awardheirs.values():
@@ -1198,7 +1200,7 @@ class BudUnit:
 
     def _allot_lobbyboxs_fund(self):
         for x_lobbybox in self._lobbyboxs.values():
-            x_lobbybox._set_lobbyship_fund_give_take()
+            x_lobbybox._set_lobbyship_fund_give_fund_take()
             for x_lobbyship in x_lobbybox._lobbyships.values():
                 self.add_to_acctunit_fund_give_take(
                     acctunit_acct_id=x_lobbyship._acct_id,
@@ -1208,11 +1210,31 @@ class BudUnit:
                     bud_agenda_debt=x_lobbyship._fund_agenda_take,
                 )
 
-    def _set_acctunits_fund_ratios(self):
+    def _set_acctunits_fund_agenda_ratios(self):
+        # TODO replace with allot_scale and delete set_fund_agenda_ratio_give_take
+        # fund_agenda_give_sum = sum(
+        #     x_acctunit._fund_agenda_give for x_acctunit in self._accts.values()
+        # )
+        # fund_agenda_take_sum = sum(
+        #     x_acctunit._fund_agenda_take for x_acctunit in self._accts.values()
+        # )
+        # x_acctunits = self._accts.values()
+        # give_ledger = {
+        #     x_acct.acct_id: x_acct._fund_agenda_give for x_acct in x_acctunits
+        # }
+        # take_ledger = {
+        #     x_acct.acct_id: x_acct._fund_agenda_take for x_acct in x_acctunits
+        # }
+        # give_allot = allot_scale(give_ledger, fund_agenda_give_sum, self._fund_coin)
+        # take_allot = allot_scale(take_ledger, fund_agenda_take_sum, self._fund_coin)
+        # for x_acct_id, x_acctunit in self._accts.items():
+        #     x_acctunit._fund_agenda_ratio_give = give_allot.get(x_acct_id)
+        #     x_acctunit._fund_agenda_ratio_take = take_allot.get(x_acct_id)
+
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
-        x_acctunit_credor_weight_sum = self.get_acctunits_credor_weight_sum()
-        x_acctunit_debtor_weight_sum = self.get_acctunits_debtor_weight_sum()
+        x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
+        x_acctunit_debtit_score_sum = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
@@ -1222,13 +1244,13 @@ class BudUnit:
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_acctunit_total_credor_weight=x_acctunit_credor_weight_sum,
-                bud_acctunit_total_debtor_weight=x_acctunit_debtor_weight_sum,
+                bud_acctunit_total_credit_score=x_acctunit_credit_score_sum,
+                bud_acctunit_total_debtit_score=x_acctunit_debtit_score_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):
         for acctunit in self._accts.values():
-            acctunit.reset_fund_give_take()
+            acctunit.clear_fund_give_take()
 
     def idea_exists(self, road: RoadUnit) -> bool:
         if road is None:
@@ -1343,7 +1365,7 @@ class BudUnit:
         self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
-        self._idearoot._weight = 1
+        self._idearoot._mass = 1
         tree_traverse_count = self._tree_traverse_count
         self._idearoot.set_active(tree_traverse_count, self._lobbyboxs, self._owner_id)
         self._idearoot.set_fund_attr(0, self._fund_pool, self._fund_pool)
@@ -1358,10 +1380,10 @@ class BudUnit:
         if (
             self._tree_traverse_count == 1
             and not self._idearoot.is_kidless()
-            and self._idearoot.get_kids_weight_sum() == 0
-            and self._idearoot._weight != 0
+            and self._idearoot.get_kids_mass_sum() == 0
+            and self._idearoot._mass != 0
         ):
-            self._offtrack_kids_weight_set.add(self._idearoot.get_road())
+            self._offtrack_kids_mass_set.add(self._idearoot.get_road())
 
     def _set_kids_attributes(
         self,
@@ -1392,25 +1414,19 @@ class BudUnit:
             self._allot_fund_share(idea=idea_kid)
         if (
             self._tree_traverse_count == 1
-            and idea_kid._weight != 0
+            and idea_kid._mass != 0
             and not idea_kid.is_kidless()
-            and idea_kid.get_kids_weight_sum() == 0
+            and idea_kid.get_kids_mass_sum() == 0
         ):
-            self._offtrack_kids_weight_set.add(idea_kid.get_road())
+            self._offtrack_kids_mass_set.add(idea_kid.get_road())
 
     def _allot_fund_share(self, idea: IdeaUnit):
-        # TODO manage situations where awardheir.credor_weight is None for all awardheirs
-        # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
+        # TODO manage situations where awardheir.credit_score is None for all awardheirs
+        # TODO manage situations where awardheir.debtit_score is None for all awardheirs
         if idea.awardheir_exists() is False:
             self._set_lobbyboxs_fund_share(idea._awardheirs)
         elif idea.awardheir_exists():
             self._add_to_acctunits_fund_give_take(idea.get_fund_share())
-
-    def get_fund_share(
-        self, parent_fund_share: float, weight: int, sibling_total_weight: int
-    ) -> float:
-        sibling_ratio = weight / sibling_total_weight
-        return parent_fund_share * sibling_ratio
 
     def _create_lobbyboxs_metrics(self):
         self._lobbyboxs = {}
@@ -1425,8 +1441,8 @@ class BudUnit:
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
         x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credor_weight for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtor_weight for x_acct in x_acctunits}
+        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
         credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
         debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
         for x_acct_id, acct_credor_pool in credor_allot.items():
@@ -1440,7 +1456,7 @@ class BudUnit:
         self._rational = False
         self._tree_traverse_count = 0
         self._idea_dict = {self._idearoot.get_road(): self._idearoot}
-        self._offtrack_kids_weight_set = set()
+        self._offtrack_kids_mass_set = set()
 
     def _clear_bud_base_metrics(self):
         self._econs_justified = True
@@ -1467,7 +1483,7 @@ class BudUnit:
         self._set_root_attributes(econ_exceptions)
 
         x_idearoot_kids_items = self._idearoot._kids.items()
-        kids_ledger = {x_road: kid._weight for x_road, kid in x_idearoot_kids_items}
+        kids_ledger = {x_road: kid._mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
         alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self._fund_coin)
         x_idearoot_kid_fund_onset = None
@@ -1501,7 +1517,7 @@ class BudUnit:
                 self._idea_dict[parent_idea.get_road()] = parent_idea
 
             kids_items = parent_idea._kids.items()
-            x_ledger = {x_road: idea_kid._weight for x_road, idea_kid in kids_items}
+            x_ledger = {x_road: idea_kid._mass for x_road, idea_kid in kids_items}
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self._fund_coin)
 
@@ -1538,7 +1554,7 @@ class BudUnit:
         self._allot_offtrack_fund()
         self._allot_fund_bud_agenda()
         self._allot_lobbyboxs_fund()
-        self._set_acctunits_fund_ratios()
+        self._set_acctunits_fund_agenda_ratios()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
         self._set_econ_dict()
@@ -1626,7 +1642,7 @@ class BudUnit:
         x_dict = {
             "_accts": self.get_acctunits_dict(),
             "_originunit": self._originunit.get_dict(),
-            "_weight": self._weight,
+            "_tally": self._tally,
             "_fund_pool": self._fund_pool,
             "_fund_coin": self._fund_coin,
             "_bit": self._bit,
@@ -1668,7 +1684,7 @@ class BudUnit:
     def set_offtrack_fund(self) -> float:
         self._offtrack_fund = sum(
             self.get_idea_obj(x_roadunit).get_fund_share()
-            for x_roadunit in self._offtrack_kids_weight_set
+            for x_roadunit in self._offtrack_kids_mass_set
         )
 
 
@@ -1680,13 +1696,13 @@ def budunit_shop(
     _fund_coin: FundCoin = None,
     _bit: BitNum = None,
     _penny: PennyNum = None,
-    _weight: float = None,
+    _tally: float = None,
 ) -> BudUnit:
     _owner_id = "" if _owner_id is None else _owner_id
     _real_id = get_default_real_id_roadnode() if _real_id is None else _real_id
     x_bud = BudUnit(
         _owner_id=_owner_id,
-        _weight=get_1_if_None(_weight),
+        _tally=get_1_if_None(_tally),
         _real_id=_real_id,
         _accts=get_empty_dict_if_none(None),
         _lobbyboxs={},
@@ -1703,7 +1719,7 @@ def budunit_shop(
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
         _sum_healerhold_share=get_0_if_None(),
-        _offtrack_kids_weight_set=set(),
+        _offtrack_kids_mass_set=set(),
     )
     x_bud._idearoot = ideaunit_shop(
         _root=True,
@@ -1726,7 +1742,7 @@ def get_from_json(x_bud_json: str) -> BudUnit:
 def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud = budunit_shop()
     x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
-    x_bud._weight = obj_from_bud_dict(bud_dict, "_weight")
+    x_bud._tally = obj_from_bud_dict(bud_dict, "_tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "_max_tree_traverse"))
     x_bud.set_real_id(obj_from_bud_dict(bud_dict, "_real_id"))
     bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")
@@ -1756,7 +1772,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _label=x_bud._real_id,
         _parent_road="",
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
-        _weight=get_obj_from_idea_dict(idearoot_dict, "_weight"),
+        _mass=get_obj_from_idea_dict(idearoot_dict, "_mass"),
         _begin=get_obj_from_idea_dict(idearoot_dict, "_begin"),
         _close=get_obj_from_idea_dict(idearoot_dict, "_close"),
         _numor=get_obj_from_idea_dict(idearoot_dict, "_numor"),
@@ -1796,7 +1812,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             to_evaluate_idea_dicts.append(kid_dict)
         x_ideakid = ideaunit_shop(
             _label=get_obj_from_idea_dict(idea_dict, "_label"),
-            _weight=get_obj_from_idea_dict(idea_dict, "_weight"),
+            _mass=get_obj_from_idea_dict(idea_dict, "_mass"),
             _uid=get_obj_from_idea_dict(idea_dict, "_uid"),
             _begin=get_obj_from_idea_dict(idea_dict, "_begin"),
             _close=get_obj_from_idea_dict(idea_dict, "_close"),

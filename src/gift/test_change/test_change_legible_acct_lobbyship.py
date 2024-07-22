@@ -10,17 +10,17 @@ def test_create_legible_list_ReturnsObj_acct_lobbyship_INSERT():
     category = "bud_acct_lobbyship"
     lobby_id_text = "lobby_id"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
-    debtor_weight_text = "debtor_weight"
+    credit_score_text = "credit_score"
+    debtit_score_text = "debtit_score"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    credor_weight_value = 81
-    debtor_weight_value = 43
+    credit_score_value = 81
+    debtit_score_value = 43
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(lobby_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credor_weight_text, credor_weight_value)
-    yao_atomunit.set_arg(debtor_weight_text, debtor_weight_value)
+    yao_atomunit.set_arg(credit_score_text, credit_score_value)
+    yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -29,28 +29,28 @@ def test_create_legible_list_ReturnsObj_acct_lobbyship_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Lobby '{swim_text}' has new member {yao_text} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+    x_str = f"Lobby '{swim_text}' has new member {yao_text} with lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_credor_weight_debtor_weight():
+def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_credit_score_debtit_score():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_acct_lobbyship"
     lobby_id_text = "lobby_id"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
-    debtor_weight_text = "debtor_weight"
+    credit_score_text = "credit_score"
+    debtit_score_text = "debtit_score"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    credor_weight_value = 81
-    debtor_weight_value = 43
+    credit_score_value = 81
+    debtit_score_value = 43
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(lobby_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credor_weight_text, credor_weight_value)
-    yao_atomunit.set_arg(debtor_weight_text, debtor_weight_value)
+    yao_atomunit.set_arg(credit_score_text, credit_score_value)
+    yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -59,25 +59,25 @@ def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_credor_weight_debt
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Lobby '{swim_text}' member {yao_text} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+    x_str = f"Lobby '{swim_text}' member {yao_text} has new lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_credor_weight():
+def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_credit_score():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_acct_lobbyship"
     lobby_id_text = "lobby_id"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
+    credit_score_text = "credit_score"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    credor_weight_value = 81
+    credit_score_value = 81
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(lobby_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credor_weight_text, credor_weight_value)
+    yao_atomunit.set_arg(credit_score_text, credit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -86,25 +86,25 @@ def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_credor_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Lobby '{swim_text}' member {yao_text} has new lobby_cred={credor_weight_value}."
+    x_str = f"Lobby '{swim_text}' member {yao_text} has new lobby_cred={credit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_debtor_weight():
+def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_debtit_score():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_acct_lobbyship"
     lobby_id_text = "lobby_id"
     acct_id_text = "acct_id"
-    debtor_weight_text = "debtor_weight"
+    debtit_score_text = "debtit_score"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    debtor_weight_value = 43
+    debtit_score_value = 43
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(lobby_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(debtor_weight_text, debtor_weight_value)
+    yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -113,7 +113,7 @@ def test_create_legible_list_ReturnsObj_acct_lobbyship_UPDATE_debtor_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Lobby '{swim_text}' member {yao_text} has new lobby_debt={debtor_weight_value}."
+    x_str = f"Lobby '{swim_text}' member {yao_text} has new lobby_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

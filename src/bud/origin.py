@@ -7,26 +7,28 @@ from dataclasses import dataclass
 @dataclass
 class OriginHold:
     acct_id: AcctID
-    weight: float
+    importance: float
 
     def get_dict(self) -> dict[str, str]:
         return {
             "acct_id": self.acct_id,
-            "weight": self.weight,
+            "importance": self.importance,
         }
 
 
-def originhold_shop(acct_id: AcctID, weight: float = None) -> OriginHold:
-    weight = 1 if weight is None else weight
-    return OriginHold(acct_id=acct_id, weight=weight)
+def originhold_shop(acct_id: AcctID, importance: float = None) -> OriginHold:
+    importance = 1 if importance is None else importance
+    return OriginHold(acct_id=acct_id, importance=importance)
 
 
 @dataclass
 class OriginUnit:
     _originholds: dict[AcctID, OriginHold] = None
 
-    def set_originhold(self, acct_id: AcctID, weight: float):
-        self._originholds[acct_id] = originhold_shop(acct_id=acct_id, weight=weight)
+    def set_originhold(self, acct_id: AcctID, importance: float):
+        self._originholds[acct_id] = originhold_shop(
+            acct_id=acct_id, importance=importance
+        )
 
     def del_originhold(self, acct_id: AcctID):
         self._originholds.pop(acct_id)
@@ -52,6 +54,7 @@ def originunit_get_from_dict(x_dict: dict) -> OriginUnit:
         originholds_dict = x_dict["_originholds"]
         for originhold_dict in originholds_dict.values():
             originunit_x.set_originhold(
-                acct_id=originhold_dict["acct_id"], weight=originhold_dict["weight"]
+                acct_id=originhold_dict["acct_id"],
+                importance=originhold_dict["importance"],
             )
     return originunit_x

@@ -1,4 +1,5 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json
+from src._road.finance import allot_scale, FundCoin, default_fund_coin_if_none
 from src._road.road import LobbyID, AcctID, default_road_delimiter_if_none
 from dataclasses import dataclass
 
@@ -18,8 +19,8 @@ class LobbyCore:
 
 @dataclass
 class LobbyShip(LobbyCore):
-    credor_weight: float = 1.0
-    debtor_weight: float = 1.0
+    credit_score: float = 1.0
+    debtit_score: float = 1.0
     # calculated fields
     _credor_pool: float = None
     _debtor_pool: float = None
@@ -31,22 +32,22 @@ class LobbyShip(LobbyCore):
     _fund_agenda_ratio_take: float = None
     _acct_id: AcctID = None
 
-    def set_credor_weight(self, x_credor_weight: float):
-        if x_credor_weight is not None:
-            self.credor_weight = x_credor_weight
+    def set_credit_score(self, x_credit_score: float):
+        if x_credit_score is not None:
+            self.credit_score = x_credit_score
 
-    def set_debtor_weight(self, x_debtor_weight: float):
-        if x_debtor_weight is not None:
-            self.debtor_weight = x_debtor_weight
+    def set_debtit_score(self, x_debtit_score: float):
+        if x_debtit_score is not None:
+            self.debtit_score = x_debtit_score
 
     def get_dict(self) -> dict[str, str]:
         return {
             "lobby_id": self.lobby_id,
-            "credor_weight": self.credor_weight,
-            "debtor_weight": self.debtor_weight,
+            "credit_score": self.credit_score,
+            "debtit_score": self.debtit_score,
         }
 
-    def reset_fund_give_take(self):
+    def clear_fund_give_take(self):
         self._fund_give = 0
         self._fund_take = 0
         self._fund_agenda_give = 0
@@ -54,36 +55,17 @@ class LobbyShip(LobbyCore):
         self._fund_agenda_ratio_give = 0
         self._fund_agenda_ratio_take = 0
 
-    def set_fund_give_take(
-        self,
-        lobbyships_credor_weight_sum: float,
-        lobbyships_debtor_weight_sum: float,
-        lobby_fund_give: float,
-        lobby_fund_take: float,
-        lobby_fund_agenda_give: float,
-        lobby_fund_agenda_take: float,
-    ):
-        lobby_fund_give = get_1_if_None(lobby_fund_give)
-        lobby_fund_take = get_1_if_None(lobby_fund_take)
-        credor_ratio = self.credor_weight / lobbyships_credor_weight_sum
-        debtor_ratio = self.debtor_weight / lobbyships_debtor_weight_sum
-
-        self._fund_give = lobby_fund_give * credor_ratio
-        self._fund_take = lobby_fund_take * debtor_ratio
-        self._fund_agenda_give = lobby_fund_agenda_give * credor_ratio
-        self._fund_agenda_take = lobby_fund_agenda_take * debtor_ratio
-
 
 def lobbyship_shop(
     lobby_id: LobbyID,
-    credor_weight: float = None,
-    debtor_weight: float = None,
+    credit_score: float = None,
+    debtit_score: float = None,
     _acct_id: AcctID = None,
 ) -> LobbyShip:
     return LobbyShip(
         lobby_id=lobby_id,
-        credor_weight=get_1_if_None(credor_weight),
-        debtor_weight=get_1_if_None(debtor_weight),
+        credit_score=get_1_if_None(credit_score),
+        debtit_score=get_1_if_None(debtit_score),
         _credor_pool=0,
         _debtor_pool=0,
         _acct_id=_acct_id,
@@ -93,8 +75,8 @@ def lobbyship_shop(
 def lobbyship_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> LobbyShip:
     return lobbyship_shop(
         lobby_id=x_dict.get("lobby_id"),
-        credor_weight=x_dict.get("credor_weight"),
-        debtor_weight=x_dict.get("debtor_weight"),
+        credit_score=x_dict.get("credit_score"),
+        debtit_score=x_dict.get("debtit_score"),
         _acct_id=x_acct_id,
     )
 
@@ -110,14 +92,14 @@ def lobbyships_get_from_dict(
 
 @dataclass
 class AwardLink(LobbyCore):
-    give_weight: float = 1.0
-    take_weight: float = 1.0
+    give_force: float = 1.0
+    take_force: float = 1.0
 
     def get_dict(self) -> dict[str, str]:
         return {
             "lobby_id": self.lobby_id,
-            "give_weight": self.give_weight,
-            "take_weight": self.take_weight,
+            "give_force": self.give_force,
+            "take_force": self.take_force,
         }
 
 
@@ -132,50 +114,39 @@ def awardlinks_get_from_dict(x_dict: dict) -> dict[LobbyID, AwardLink]:
     for awardlinks_dict in x_dict.values():
         x_lobby = awardlink_shop(
             lobby_id=awardlinks_dict["lobby_id"],
-            give_weight=awardlinks_dict["give_weight"],
-            take_weight=awardlinks_dict["take_weight"],
+            give_force=awardlinks_dict["give_force"],
+            take_force=awardlinks_dict["take_force"],
         )
         awardlinks[x_lobby.lobby_id] = x_lobby
     return awardlinks
 
 
 def awardlink_shop(
-    lobby_id: LobbyID, give_weight: float = None, take_weight: float = None
+    lobby_id: LobbyID, give_force: float = None, take_force: float = None
 ) -> AwardLink:
-    give_weight = get_1_if_None(give_weight)
-    take_weight = get_1_if_None(take_weight)
-    return AwardLink(lobby_id, give_weight, take_weight=take_weight)
+    give_force = get_1_if_None(give_force)
+    take_force = get_1_if_None(take_force)
+    return AwardLink(lobby_id, give_force, take_force=take_force)
 
 
 @dataclass
 class AwardHeir(LobbyCore):
-    give_weight: float = 1.0
-    take_weight: float = 1.0
+    give_force: float = 1.0
+    take_force: float = 1.0
     _fund_give: float = None
     _fund_take: float = None
-
-    def set_fund_give_take(
-        self,
-        idea_fund_share,
-        awardheirs_give_weight_sum: float,
-        awardheirs_take_weight_sum: float,
-    ):
-        credor_share_ratio = self.give_weight / awardheirs_give_weight_sum
-        self._fund_give = idea_fund_share * credor_share_ratio
-        debtor_share_ratio = self.take_weight / awardheirs_take_weight_sum
-        self._fund_take = idea_fund_share * debtor_share_ratio
 
 
 def awardheir_shop(
     lobby_id: LobbyID,
-    give_weight: float = None,
-    take_weight: float = None,
+    give_force: float = None,
+    take_force: float = None,
     _fund_give: float = None,
     _fund_take: float = None,
 ) -> AwardHeir:
-    give_weight = get_1_if_None(give_weight)
-    take_weight = get_1_if_None(take_weight)
-    return AwardHeir(lobby_id, give_weight, take_weight, _fund_give, _fund_take)
+    give_force = get_1_if_None(give_force)
+    take_force = get_1_if_None(take_force)
+    return AwardHeir(lobby_id, give_force, take_force, _fund_give, _fund_take)
 
 
 @dataclass
@@ -184,11 +155,11 @@ class AwardLine(LobbyCore):
     _fund_take: float = None
 
     def add_fund_give_take(self, fund_give: float, fund_take: float):
-        self.set_fund_give_take_zero_if_none()
+        self.validate_fund_give_fund_take()
         self._fund_give += fund_give
         self._fund_take += fund_take
 
-    def set_fund_give_take_zero_if_none(self):
+    def validate_fund_give_fund_take(self):
         if self._fund_give is None:
             self._fund_give = 0
         if self._fund_take is None:
@@ -210,6 +181,7 @@ class LobbyBox(LobbyCore):
     _fund_agenda_take: float = None
     _credor_pool: float = None
     _debtor_pool: float = None
+    _fund_coin: FundCoin = None
 
     def set_lobbyship(self, x_lobbyship: LobbyShip):
         if x_lobbyship.lobby_id != self.lobby_id:
@@ -240,34 +212,37 @@ class LobbyBox(LobbyCore):
     def del_lobbyship(self, acct_id):
         self._lobbyships.pop(acct_id)
 
-    def reset_fund_give_take(self):
+    def clear_fund_give_take(self):
         self._fund_give = 0
         self._fund_take = 0
         self._fund_agenda_give = 0
         self._fund_agenda_take = 0
         for lobbyship in self._lobbyships.values():
-            lobbyship.reset_fund_give_take()
+            lobbyship.clear_fund_give_take()
 
-    def _set_lobbyship_fund_give_take(self):
-        lobbyships_credor_weight_sum = sum(
-            lobbyship.credor_weight for lobbyship in self._lobbyships.values()
-        )
-        lobbyships_debtor_weight_sum = sum(
-            lobbyship.debtor_weight for lobbyship in self._lobbyships.values()
-        )
+    def _set_lobbyship_fund_give_fund_take(self):
+        credit_ledger = {}
+        debtit_ledger = {}
+        for x_acct_id, x_lobbyship in self._lobbyships.items():
+            credit_ledger[x_acct_id] = x_lobbyship.credit_score
+            debtit_ledger[x_acct_id] = x_lobbyship.debtit_score
+        fund_give_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
+        fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self._fund_coin)
+        for acct_id, x_lobbyship in self._lobbyships.items():
+            x_lobbyship._fund_give = fund_give_allot.get(acct_id)
+            x_lobbyship._fund_take = fund_take_allot.get(acct_id)
+        x_a_give = self._fund_agenda_give
+        x_a_take = self._fund_agenda_take
+        fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self._fund_coin)
+        fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self._fund_coin)
+        for acct_id, x_lobbyship in self._lobbyships.items():
+            x_lobbyship._fund_agenda_give = fund_agenda_give_allot.get(acct_id)
+            x_lobbyship._fund_agenda_take = fund_agenda_take_allot.get(acct_id)
 
-        for lobbyship in self._lobbyships.values():
-            lobbyship.set_fund_give_take(
-                lobbyships_credor_weight_sum=lobbyships_credor_weight_sum,
-                lobbyships_debtor_weight_sum=lobbyships_debtor_weight_sum,
-                lobby_fund_give=self._fund_give,
-                lobby_fund_take=self._fund_take,
-                lobby_fund_agenda_give=self._fund_agenda_give,
-                lobby_fund_agenda_take=self._fund_agenda_take,
-            )
 
-
-def lobbybox_shop(lobby_id: LobbyID, _road_delimiter: str = None) -> LobbyBox:
+def lobbybox_shop(
+    lobby_id: LobbyID, _road_delimiter: str = None, _fund_coin: FundCoin = None
+) -> LobbyBox:
     return LobbyBox(
         lobby_id=lobby_id,
         _lobbyships={},
@@ -278,6 +253,7 @@ def lobbybox_shop(lobby_id: LobbyID, _road_delimiter: str = None) -> LobbyBox:
         _credor_pool=0,
         _debtor_pool=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _fund_coin=default_fund_coin_if_none(_fund_coin),
     )
     # x_lobbybox.set_lobby_id(lobby_id=lobby_id)
     # return x_lobbybox

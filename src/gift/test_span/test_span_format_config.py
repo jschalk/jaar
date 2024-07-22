@@ -7,11 +7,11 @@ from src.gift.span import (
     lobby_id_str,
     parent_road_str,
     label_str,
-    weight_str,
+    mass_str,
     pledge_str,
     acct_pool_str,
-    debtor_weight_str,
-    credor_weight_str,
+    debtit_score_str,
+    credit_score_str,
     column_order_str,
     # must_be_str,
     # must_be_roadnode_str,
@@ -35,8 +35,8 @@ def test_config_str_functions_ReturnObjs():
     assert owner_id_str() == "owner_id"
     assert acct_id_str() == "acct_id"
     assert acct_pool_str() == "acct_pool"
-    assert debtor_weight_str() == "debtor_weight"
-    assert credor_weight_str() == "credor_weight"
+    assert debtit_score_str() == "debtit_score"
+    assert credit_score_str() == "credit_score"
     assert jaar_format_0001_acct_v0_0_0() == "jaar_format_0001_acct_v0_0_0"
     x0002_span = "jaar_format_0002_lobbyship_v0_0_0"
     assert jaar_format_0002_lobbyship_v0_0_0() == x0002_span
@@ -86,8 +86,8 @@ def test_get_headers_list_ReturnsObj():
         "real_id",
         "owner_id",
         "acct_id",
-        "credor_weight",
-        "debtor_weight",
+        "credit_score",
+        "debtit_score",
     ]
 
 
@@ -141,15 +141,15 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0001_acct_v0_0_0():
     real_id_spancolumn = format_0001_spanref.get_spancolumn(real_id_str())
     owner_id_spancolumn = format_0001_spanref.get_spancolumn(owner_id_str())
     acct_id_spancolumn = format_0001_spanref.get_spancolumn(acct_id_str())
-    credor_weight_spancolumn = format_0001_spanref.get_spancolumn(credor_weight_str())
-    debtor_weight_spancolumn = format_0001_spanref.get_spancolumn(debtor_weight_str())
+    credit_score_spancolumn = format_0001_spanref.get_spancolumn(credit_score_str())
+    debtit_score_spancolumn = format_0001_spanref.get_spancolumn(debtit_score_str())
     assert len(format_0001_spanref._spancolumns) == 5
 
     assert real_id_spancolumn.column_order == 0
     assert owner_id_spancolumn.column_order == 1
     assert acct_id_spancolumn.column_order == 2
-    assert credor_weight_spancolumn.column_order == 3
-    assert debtor_weight_spancolumn.column_order == 4
+    assert credit_score_spancolumn.column_order == 3
+    assert debtit_score_spancolumn.column_order == 4
 
 
 def test_get_spanref_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_0_0():
@@ -164,16 +164,16 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0002_lobbyship_v0_0_0():
     owner_id_spancolumn = format_0002_spanref.get_spancolumn(owner_id_str())
     acct_id_spancolumn = format_0002_spanref.get_spancolumn(acct_id_str())
     lobby_id_spancolumn = format_0002_spanref.get_spancolumn(lobby_id_str())
-    credor_weight_spancolumn = format_0002_spanref.get_spancolumn(credor_weight_str())
-    debtor_weight_spancolumn = format_0002_spanref.get_spancolumn(debtor_weight_str())
+    credit_score_spancolumn = format_0002_spanref.get_spancolumn(credit_score_str())
+    debtit_score_spancolumn = format_0002_spanref.get_spancolumn(debtit_score_str())
     assert len(format_0002_spanref._spancolumns) == 6
 
     assert real_id_spancolumn.column_order == 0
     assert owner_id_spancolumn.column_order == 1
     assert acct_id_spancolumn.column_order == 2
     assert lobby_id_spancolumn.column_order == 3
-    assert debtor_weight_spancolumn.column_order == 5
-    assert credor_weight_spancolumn.column_order == 4
+    assert debtit_score_spancolumn.column_order == 5
+    assert credit_score_spancolumn.column_order == 4
 
 
 def test_get_spanref_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
@@ -188,7 +188,7 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     owner_id_spancolumn = format_0003_spanref.get_spancolumn(owner_id_str())
     parent_road_spancolumn = format_0003_spanref.get_spancolumn(parent_road_str())
     label_spancolumn = format_0003_spanref.get_spancolumn(label_str())
-    weight_spancolumn = format_0003_spanref.get_spancolumn(weight_str())
+    mass_spancolumn = format_0003_spanref.get_spancolumn(mass_str())
     pledge_spancolumn = format_0003_spanref.get_spancolumn(pledge_str())
     assert len(format_0003_spanref._spancolumns) == 6
 
@@ -196,5 +196,5 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     assert owner_id_spancolumn.column_order == 1
     assert parent_road_spancolumn.column_order == 3
     assert label_spancolumn.column_order == 5
-    assert weight_spancolumn.column_order == 4
+    assert mass_spancolumn.column_order == 4
     assert pledge_spancolumn.column_order == 2

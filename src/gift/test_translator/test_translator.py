@@ -93,22 +93,22 @@ def test_Translator_translate_acct_id_ReturnsObjWithNoChanges():
     yao_text = "Yao"
     x_category = "bud_acctunit"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
+    credit_score_text = "credit_score"
     acctunit_atom = atomunit_shop(x_category, atom_insert())
     acctunit_atom.set_required_arg(acct_id_text, yao_text)
-    acctunit_atom.set_optional_arg(credor_weight_text, 51)
+    acctunit_atom.set_optional_arg(credit_score_text, 51)
 
     old_atomunit = copy_deepcopy(acctunit_atom)
     music_translator = translator_shop()
     assert acctunit_atom.get_value(acct_id_text) == yao_text
-    assert acctunit_atom.get_value(credor_weight_text) == 51
+    assert acctunit_atom.get_value(credit_score_text) == 51
 
     # WHEN
     translated_atom = music_translator.translate_acct_id(acctunit_atom)
 
     # THEN
     assert acctunit_atom.get_value(acct_id_text) == yao_text
-    assert acctunit_atom.get_value(credor_weight_text) == 51
+    assert acctunit_atom.get_value(credit_score_text) == 51
     assert translated_atom == old_atomunit
 
 
@@ -117,16 +117,16 @@ def test_Translator_translate_acct_id_ReturnsObjWithChange_acct_id():
     susan_text = "Susan"
     x_category = "bud_acctunit"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
+    credit_score_text = "credit_score"
     acctunit_atom = atomunit_shop(x_category, atom_insert())
     acctunit_atom.set_required_arg(acct_id_text, susan_text)
-    acctunit_atom.set_optional_arg(credor_weight_text, 51)
+    acctunit_atom.set_optional_arg(credit_score_text, 51)
 
     sue_text = "Sue"
     music_translator = translator_shop()
     music_translator.set_acct_id(sue_text, susan_text)
     assert acctunit_atom.get_value(acct_id_text) == susan_text
-    assert acctunit_atom.get_value(credor_weight_text) == 51
+    assert acctunit_atom.get_value(credit_score_text) == 51
 
     # WHEN
     translated_atom = music_translator.translate_acct_id(acctunit_atom)
@@ -134,4 +134,4 @@ def test_Translator_translate_acct_id_ReturnsObjWithChange_acct_id():
     # THEN
     assert translated_atom.get_value(acct_id_text) != susan_text
     assert translated_atom.get_value(acct_id_text) == sue_text
-    assert translated_atom.get_value(credor_weight_text) == 51
+    assert translated_atom.get_value(credit_score_text) == 51

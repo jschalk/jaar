@@ -27,8 +27,8 @@ def test_get_real_voices_accts_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup
     acctunit_colums = {
         "owner_id",
         "acct_id",
-        "credor_weight",
-        "debtor_weight",
+        "credit_score",
+        "debtit_score",
         "_lobbyships",
         "_fund_give",
         "_fund_take",
@@ -72,8 +72,8 @@ def test_get_real_actions_accts_dataframe_ReturnsCorrectObj(
     acctunit_colums = {
         "owner_id",
         "acct_id",
-        "credor_weight",
-        "debtor_weight",
+        "credit_score",
+        "debtit_score",
         "_lobbyships",
         "_fund_give",
         "_fund_take",
@@ -81,7 +81,7 @@ def test_get_real_actions_accts_dataframe_ReturnsCorrectObj(
         "_fund_agenda_take",
         "_fund_agenda_ratio_give",
         "_fund_agenda_ratio_take",
-        "_inallocable_debtor_weight",
+        "_inallocable_debtit_score",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

@@ -54,29 +54,29 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
 
 def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     # ESTABLISH
-    yao_budunit = budunit_shop("Yao", _weight=10)
+    yao_budunit = budunit_shop("Yao", _tally=10)
 
     auto_text = "auto"
     auto_road = yao_budunit.make_l1_road(auto_text)
-    auto_idea = ideaunit_shop(auto_text, _weight=10)
+    auto_idea = ideaunit_shop(auto_text, _mass=10)
     yao_budunit.set_l1_idea(auto_idea)
 
     barn_text = "barn"
     barn_road = yao_budunit.make_l1_road(barn_text)
-    barn_idea = ideaunit_shop(barn_text, _weight=60)
+    barn_idea = ideaunit_shop(barn_text, _mass=60)
     yao_budunit.set_l1_idea(barn_idea)
     lamb_text = "lambs"
     lamb_road = yao_budunit.make_road(barn_road, lamb_text)
-    lamb_idea = ideaunit_shop(lamb_text, _weight=1)
+    lamb_idea = ideaunit_shop(lamb_text, _mass=1)
     yao_budunit.set_idea(lamb_idea, parent_road=barn_road)
     duck_text = "ducks"
     duck_road = yao_budunit.make_road(barn_road, duck_text)
-    duck_idea = ideaunit_shop(duck_text, _weight=2)
+    duck_idea = ideaunit_shop(duck_text, _mass=2)
     yao_budunit.set_idea(duck_idea, parent_road=barn_road)
 
     coal_text = "coal"
     coal_road = yao_budunit.make_l1_road(coal_text)
-    coal_idea = ideaunit_shop(coal_text, _weight=30)
+    coal_idea = ideaunit_shop(coal_text, _mass=30)
     yao_budunit.set_l1_idea(coal_idea)
 
     assert yao_budunit._idearoot._fund_onset is None
@@ -115,7 +115,7 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0():
+def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario0():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
@@ -128,14 +128,14 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0(
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
-    sue_bud.set_idea(ideaunit_shop(status_text, _weight=0), casa_road)
+    sue_bud.set_idea(ideaunit_shop(status_text, _mass=0), casa_road)
 
     non_text = "not clean"
     yes_text = "yes clean"
     non_road = sue_bud.make_road(status_road, non_text)
     yes_road = sue_bud.make_road(status_road, yes_text)
     sue_bud.set_idea(ideaunit_shop(non_text), status_road)
-    sue_bud.set_idea(ideaunit_shop(yes_text, _weight=2), status_road)
+    sue_bud.set_idea(ideaunit_shop(yes_text, _mass=2), status_road)
 
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio is None
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio is None
@@ -155,7 +155,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario0(
     assert sue_bud.get_idea_obj(yes_road)._fund_ratio == 0.0
 
 
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1():
+def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario1():
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
@@ -170,7 +170,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     sue_bud.set_idea(ideaunit_shop(status_text), casa_road)
 
     status_idea = sue_bud.get_idea_obj(status_road)
-    print(f"{status_idea._weight=}")
+    print(f"{status_idea._mass=}")
     print("This should raise error: 'Ideaunit._'")
 
     clean_text = "clean"
@@ -179,9 +179,9 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     mod_text = "moderately"
     dirty_text = "dirty"
 
-    sue_bud.set_idea(ideaunit_shop(clean_text, _weight=0), status_road)
+    sue_bud.set_idea(ideaunit_shop(clean_text, _mass=0), status_road)
     sue_bud.set_idea(ideaunit_shop(very_text), clean_road)
-    sue_bud.set_idea(ideaunit_shop(mod_text, _weight=2), clean_road)
+    sue_bud.set_idea(ideaunit_shop(mod_text, _mass=2), clean_road)
     sue_bud.set_idea(ideaunit_shop(dirty_text), clean_road)
 
     very_road = sue_bud.make_road(clean_road, very_text)
@@ -209,35 +209,35 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_weightScenario1(
     assert sue_bud.get_idea_obj(dirty_road)._fund_ratio == 0
 
 
-def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoWeightDistributeFundsToAcctUnits_scenario0():
+def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFundsToAcctUnits_scenario0():
     sue_budunit = budunit_shop("Sue")
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _weight=1)
+    casa_idea = ideaunit_shop(casa_text, _mass=1)
 
     swim_text = "swimming"
     swim_road = sue_budunit.make_road(casa_road, swim_text)
-    swim_idea = ideaunit_shop(swim_text, _weight=8)
+    swim_idea = ideaunit_shop(swim_text, _mass=8)
 
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    clean_idea = ideaunit_shop(clean_text, _weight=2)
+    clean_idea = ideaunit_shop(clean_text, _mass=2)
     sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _weight=0)
+    sweep_idea = ideaunit_shop(sweep_text, _mass=0)
     vaccum_text = "vaccum"
     vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
-    vaccum_idea = ideaunit_shop(vaccum_text, _weight=0)
+    vaccum_idea = ideaunit_shop(vaccum_text, _mass=0)
 
     sue_budunit.set_l1_idea(casa_idea)
     sue_budunit.set_idea(swim_idea, casa_road)
     sue_budunit.set_idea(clean_idea, casa_road)
-    sue_budunit.set_idea(sweep_idea, clean_road)  # _weight=0
-    sue_budunit.set_idea(vaccum_idea, clean_road)  # _weight=0
+    sue_budunit.set_idea(sweep_idea, clean_road)  # _mass=0
+    sue_budunit.set_idea(vaccum_idea, clean_road)  # _mass=0
 
     assert sue_budunit.get_idea_obj(casa_road)._fund_ratio is None
     assert sue_budunit.get_idea_obj(swim_road)._fund_ratio is None
@@ -362,9 +362,9 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
     sue_bud.set_acctunit(acctunit_shop(yao_text))
     sue_bud.set_acctunit(acctunit_shop(zia_text))
     sue_bud.set_acctunit(acctunit_shop(xio_text))
-    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
-    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
-    xio_awardlink = awardlink_shop(xio_text, give_weight=10)
+    yao_awardlink = awardlink_shop(yao_text, give_force=20, take_force=6)
+    zia_awardlink = awardlink_shop(zia_text, give_force=10, take_force=1)
+    xio_awardlink = awardlink_shop(xio_text, give_force=10)
     x_idearoot = sue_bud.get_idea_obj(sue_bud._real_id)
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
@@ -393,7 +393,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
 
     # ESTABLISH
     sue_bud.set_acctunit(acctunit_shop(sue_text))
-    sue_awardlink = awardlink_shop(sue_text, give_weight=37)
+    sue_awardlink = awardlink_shop(sue_text, give_force=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
     assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 4
@@ -436,9 +436,9 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsLobbyBox_fund_give_fund_take(
     x_bud.set_acctunit(acctunit_shop(yao_text))
     x_bud.set_acctunit(acctunit_shop(zia_text))
     x_bud.set_acctunit(acctunit_shop(xio_text))
-    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
-    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
-    xio_awardlink = awardlink_shop(xio_text, give_weight=10)
+    yao_awardlink = awardlink_shop(yao_text, give_force=20, take_force=6)
+    zia_awardlink = awardlink_shop(zia_text, give_force=10, take_force=1)
+    xio_awardlink = awardlink_shop(xio_text, give_force=10)
     swim_idea = x_bud.get_idea_obj(swim_road)
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
@@ -482,9 +482,9 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
     x_bud.set_acctunit(acctunit_shop(yao_text))
     x_bud.set_acctunit(acctunit_shop(zia_text))
     # x_bud.set_acctunit(acctunit_shop(xio_text))
-    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
-    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
-    xio_awardlink = awardlink_shop(xio_text, give_weight=10)
+    yao_awardlink = awardlink_shop(yao_text, give_force=20, take_force=6)
+    zia_awardlink = awardlink_shop(zia_text, give_force=10, take_force=1)
+    xio_awardlink = awardlink_shop(xio_text, give_force=10)
     swim_idea = x_bud.get_idea_obj(swim_road)
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
@@ -529,16 +529,16 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fun
     x_bud.set_acctunit(acctunit_shop(yao_text))
     x_bud.set_acctunit(acctunit_shop(zia_text))
     x_bud.set_acctunit(acctunit_shop(xio_text))
-    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
-    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
-    xio_awardlink = awardlink_shop(xio_text, give_weight=10)
+    yao_awardlink = awardlink_shop(yao_text, give_force=20, take_force=6)
+    zia_awardlink = awardlink_shop(zia_text, give_force=10, take_force=1)
+    xio_awardlink = awardlink_shop(xio_text, give_force=10)
     swim_idea = x_bud.get_idea_obj(swim_road)
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
 
     # no awardlinks attached to this one
-    x_bud.set_l1_idea(ideaunit_shop("hunt", _weight=3))
+    x_bud.set_l1_idea(ideaunit_shop("hunt", _mass=3))
 
     # WHEN
     x_bud.settle_bud()
@@ -584,7 +584,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fun
     )
 
 
-def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudImportance():
+def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
     # ESTABLISH
     sue_text = "Sue"
     sue_bud = budunit_shop(sue_text)
@@ -594,9 +594,9 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudImportanc
     sue_bud.set_acctunit(acctunit_shop(yao_text))
     sue_bud.set_acctunit(acctunit_shop(zia_text))
     sue_bud.set_acctunit(acctunit_shop(Xio_text))
-    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
-    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
-    Xio_awardlink = awardlink_shop(Xio_text, give_weight=10)
+    yao_awardlink = awardlink_shop(yao_text, give_force=20, take_force=6)
+    zia_awardlink = awardlink_shop(zia_text, give_force=10, take_force=1)
+    Xio_awardlink = awardlink_shop(Xio_text, give_force=10)
     sue_bud._idearoot.set_awardlink(yao_awardlink)
     sue_bud._idearoot.set_awardlink(zia_awardlink)
     sue_bud._idearoot.set_awardlink(Xio_awardlink)
@@ -652,9 +652,9 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     yao_bud.set_acctunit(acctunit_shop(sue_text))
     yao_bud.set_acctunit(acctunit_shop(bob_text))
     yao_bud.set_acctunit(acctunit_shop(zia_text))
-    sue_awardlink = awardlink_shop(sue_text, 20, take_weight=40)
-    bob_awardlink = awardlink_shop(bob_text, 10, take_weight=5)
-    zia_awardlink = awardlink_shop(zia_text, 10, take_weight=5)
+    sue_awardlink = awardlink_shop(sue_text, 20, take_force=40)
+    bob_awardlink = awardlink_shop(bob_text, 10, take_force=5)
+    zia_awardlink = awardlink_shop(zia_text, 10, take_force=5)
     yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=sue_awardlink)
     yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=bob_awardlink)
     yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=zia_awardlink)
@@ -699,7 +699,7 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     # ESTABLISH another pledge, check metrics are as expected
     xio_text = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_text))
-    yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=13))
+    yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_force=13))
 
     # WHEN
     yao_bud.settle_bud()
@@ -739,7 +739,7 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
+def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBud_fund():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     swim_text = "swim"
@@ -751,9 +751,9 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
     yao_bud.set_acctunit(acctunit_shop(sue_text))
     yao_bud.set_acctunit(acctunit_shop(bob_text))
     yao_bud.set_acctunit(acctunit_shop(zia_text))
-    bl_sue = awardlink_shop(sue_text, 20, take_weight=40)
-    bl_bob = awardlink_shop(bob_text, 10, take_weight=5)
-    bl_zia = awardlink_shop(zia_text, 10, take_weight=5)
+    bl_sue = awardlink_shop(sue_text, 20, take_force=40)
+    bl_bob = awardlink_shop(bob_text, 10, take_force=5)
+    bl_zia = awardlink_shop(zia_text, 10, take_force=5)
     yao_bud.get_idea_obj(swim_road).set_awardlink(bl_sue)
     yao_bud.get_idea_obj(swim_road).set_awardlink(bl_bob)
     yao_bud.get_idea_obj(swim_road).set_awardlink(bl_zia)
@@ -792,7 +792,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
     # WHEN another pledge, check metrics are as expected
     xio_text = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_text))
-    yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_weight=10))
+    yao_bud._idearoot.set_awardlink(awardlink_shop(xio_text, 20, take_force=10))
     yao_bud.settle_bud()
 
     # THEN
@@ -831,7 +831,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBudImportance():
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBudImportance():
+def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBud_fund():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     swim_text = "swim"
@@ -843,9 +843,9 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBudImportance():
     yao_bud.set_acctunit(acctunit_shop(sue_text))
     yao_bud.set_acctunit(acctunit_shop(bob_text))
     yao_bud.set_acctunit(acctunit_shop(zia_text))
-    sue_awardlink = awardlink_shop(sue_text, 20, take_weight=40)
-    bob_awardlink = awardlink_shop(bob_text, 10, take_weight=5)
-    zia_awardlink = awardlink_shop(zia_text, 10, take_weight=5)
+    sue_awardlink = awardlink_shop(sue_text, 20, take_force=40)
+    bob_awardlink = awardlink_shop(bob_text, 10, take_force=5)
+    zia_awardlink = awardlink_shop(zia_text, 10, take_force=5)
     swim_idea = yao_bud.get_idea_obj(swim_road)
     swim_idea.set_awardlink(sue_awardlink)
     swim_idea.set_awardlink(bob_awardlink)
@@ -853,7 +853,7 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBudImportance():
 
     # no awardlinks attached to this one
     hunt_text = "hunt"
-    yao_bud.set_l1_idea(ideaunit_shop(hunt_text, _weight=3))
+    yao_bud.set_l1_idea(ideaunit_shop(hunt_text, _mass=3))
 
     # WHEN
     yao_bud.settle_bud()
@@ -912,9 +912,9 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
     x_bud.set_acctunit(acctunit_shop(yao_text))
     x_bud.set_acctunit(acctunit_shop(zia_text))
     # x_bud.set_acctunit(acctunit_shop(xio_text))
-    yao_awardlink = awardlink_shop(yao_text, give_weight=20, take_weight=6)
-    zia_awardlink = awardlink_shop(zia_text, give_weight=10, take_weight=1)
-    xio_awardlink = awardlink_shop(xio_text, give_weight=10)
+    yao_awardlink = awardlink_shop(yao_text, give_force=20, take_force=6)
+    zia_awardlink = awardlink_shop(zia_text, give_force=10, take_force=1)
+    xio_awardlink = awardlink_shop(xio_text, give_force=10)
     swim_idea = x_bud.get_idea_obj(swim_road)
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
@@ -973,13 +973,13 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
 def clear_all_acctunits_lobbyboxs_fund_agenda_give_take(x_bud: BudUnit):
     # DELETE bud_agenda_debt and bud_agenda_cred
     for lobbybox_x in x_bud._lobbyboxs.values():
-        lobbybox_x.reset_fund_give_take()
+        lobbybox_x.clear_fund_give_take()
         # for lobbyship_x in lobbybox_x._accts.values():
-        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._fund_give:.6f} {lobbyship_x.debtor_weight=} {lobbyship__fund_take:t:.6f} {lobbyship_x.} ")
+        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._fund_give:.6f} {lobbyship_x.debtit_score=} {lobbyship__fund_take:t:.6f} {lobbyship_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud._accts.values():
-        x_acctunit.reset_fund_give_take()
+        x_acctunit.clear_fund_give_take()
 
 
 @dataclass
@@ -1067,7 +1067,7 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     assert x_awardagendametrics.agenda_yes_count == 49
     assert x_awardagendametrics.agenda_no_bud_i_sum == 0.003747268 * default_fund_pool()
     assert (
-        x_awardagendametrics.agenda_yes_bud_i_sum == 0.002796505 * default_fund_pool()
+        x_awardagendametrics.agenda_yes_bud_i_sum == 0.002796504 * default_fund_pool()
     )
     assert are_equal(
         x_awardagendametrics.agenda_no_bud_i_sum
@@ -1075,13 +1075,13 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
         x_awardagendametrics.sum_bud_agenda_share,
     )
     assert (
-        x_awardagendametrics.sum_bud_agenda_share == 0.006543773 * default_fund_pool()
+        x_awardagendametrics.sum_bud_agenda_share == 0.006543772 * default_fund_pool()
     )
 
     x_lobbyagendametrics = LobbyAgendaMetrics()
     x_lobbyagendametrics.set_sums(x_bud=x_bud)
     assert x_lobbyagendametrics.lobbyship_count == 81
-    x_sum = 2796504.9999999995
+    x_sum = 2796504
     print(f"{x_lobbyagendametrics.sum_lobbybox_cred=}")
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_cred, x_sum)
     assert are_equal(x_lobbyagendametrics.sum_lobbybox_debt, x_sum)
@@ -1138,9 +1138,9 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    sue_acctunit = acctunit_shop(sue_text, 0.5, debtor_weight=2)
-    bob_acctunit = acctunit_shop(bob_text, 1.5, debtor_weight=3)
-    zia_acctunit = acctunit_shop(zia_text, 8, debtor_weight=5)
+    sue_acctunit = acctunit_shop(sue_text, 0.5, debtit_score=2)
+    bob_acctunit = acctunit_shop(bob_text, 1.5, debtit_score=3)
+    zia_acctunit = acctunit_shop(zia_text, 8, debtit_score=5)
     yao_bud.set_acctunit(sue_acctunit)
     yao_bud.set_acctunit(bob_acctunit)
     yao_bud.set_acctunit(zia_acctunit)

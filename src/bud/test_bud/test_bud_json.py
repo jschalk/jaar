@@ -24,7 +24,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     day_hour_text = "day_hour"
     day_hour_road = x_bud.make_l1_road(day_hour_text)
     day_hour_idea = x_bud.get_idea_obj(day_hour_road)
-    day_hour_idea._originunit.set_originhold(acct_id="Bob", weight=2)
+    day_hour_idea._originunit.set_originhold(acct_id="Bob", importance=2)
     x_bud.set_fact(
         base=day_hour_road,
         pick=day_hour_road,
@@ -39,8 +39,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_bud._fund_pool = yao_fund_pool
     yao_fund_coin = 23
     x_bud._fund_coin = yao_fund_coin
-    bud_weight = 23
-    x_bud._weight = bud_weight
+    bud_tally = 23
+    x_bud._tally = bud_tally
     x_credor_respect = 22
     x_debtor_respect = 44
     x_bud.set_credor_respect(x_credor_respect)
@@ -57,8 +57,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["_owner_id"] == x_bud._owner_id
     assert bud_dict["_real_id"] == x_bud._real_id
-    assert bud_dict["_weight"] == x_bud._weight
-    assert bud_dict["_weight"] == bud_weight
+    assert bud_dict["_tally"] == x_bud._tally
+    assert bud_dict["_tally"] == bud_tally
     assert bud_dict["_fund_pool"] == yao_fund_pool
     assert bud_dict["_fund_coin"] == yao_fund_coin
     assert bud_dict["_max_tree_traverse"] == x_bud._max_tree_traverse
@@ -77,8 +77,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     _numeric_road = "_numeric_road"
     assert x_idearoot._label == x_bud._real_id
     assert idearoot_dict["_label"] == x_idearoot._label
-    assert idearoot_dict["_weight"] != bud_weight
-    assert idearoot_dict["_weight"] == x_idearoot._weight
+    assert idearoot_dict["_mass"] == x_idearoot._mass
     assert len(idearoot_dict[_kids]) == len(x_idearoot._kids)
 
     # check an ideakid._range_source_road attribute
@@ -109,7 +108,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     print(f"{x_bud_originhold=}")
     assert x_bud_originhold
     assert x_bud_originhold["acct_id"] == yao_text
-    assert x_bud_originhold["weight"] == 1
+    assert x_bud_originhold["importance"] == 1
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
@@ -213,7 +212,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 
     assert bud_dict["_owner_id"] == zia_bud._owner_id
     assert bud_dict["_real_id"] == zia_bud._real_id
-    assert bud_dict["_weight"] == zia_bud._weight
+    assert bud_dict["_tally"] == zia_bud._tally
     assert bud_dict["_fund_pool"] == zia_bud._fund_pool
     assert bud_dict["_fund_coin"] == zia_bud._fund_coin
     assert bud_dict["_bit"] == zia_bud._bit
@@ -269,7 +268,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     _kids = "_kids"
     assert bud_dict["_owner_id"] == yao_bud._owner_id
     assert bud_dict["_real_id"] == yao_bud._real_id
-    assert bud_dict["_weight"] == yao_bud._weight
+    assert bud_dict["_tally"] == yao_bud._tally
     assert bud_dict["_max_tree_traverse"] == 2
     assert bud_dict["_max_tree_traverse"] == yao_bud._max_tree_traverse
     assert bud_dict["_road_delimiter"] == yao_bud._road_delimiter
@@ -326,13 +325,13 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
     shave_idea_y1 = zia_bud.get_idea_obj(shave_road)
-    shave_idea_y1._originunit.set_originhold(acct_id="Sue", weight=4.3)
+    shave_idea_y1._originunit.set_originhold(acct_id="Sue", importance=4.3)
     shave_idea_y1._problem_bool = True
     # print(f"{shave_road=}")
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")
 
     sue_text = "Sue"
-    zia_bud.add_acctunit(acct_id=sue_text, credor_weight=199, debtor_weight=199)
+    zia_bud.add_acctunit(acct_id=sue_text, credit_score=199, debtit_score=199)
     xio_text = "Xio"
     zia_bud.add_acctunit(acct_id=xio_text)
     run_text = ",runners"
@@ -407,7 +406,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     sunday_text = "Sunday"
     sunday_road = json_bud.make_road(weekday_road, sunday_text)
     sunday_idea = json_bud.get_idea_obj(sunday_road)
-    assert sunday_idea._weight == 20
+    assert sunday_idea._mass == 20
 
     json_shave_idea = json_bud.get_idea_obj(shave_road)
     zia_shave_idea = zia_bud.get_idea_obj(shave_road)
@@ -478,22 +477,22 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
     assert after_yao_acctunit._road_delimiter == slash_delimiter
 
 
-def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_weight():
+def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_mass():
     # ESTABLISH
     x1_bud = budunit_v001()
-    x1_bud._weight = 15
-    assert 15 == x1_bud._weight
-    assert x1_bud._idearoot._weight != x1_bud._weight
-    assert x1_bud._idearoot._weight == 1
+    x1_bud._tally = 15
+    assert x1_bud._tally == 15
+    assert x1_bud._idearoot._mass != x1_bud._tally
+    assert x1_bud._idearoot._mass == 1
 
     # WHEN
     x2_bud = budunit_get_from_json(x1_bud.get_json())
 
     # THEN
-    assert x1_bud._weight == 15
-    assert x1_bud._weight == x2_bud._weight
-    assert x1_bud._idearoot._weight == 1
-    assert x1_bud._idearoot._weight == x2_bud._idearoot._weight
+    assert x1_bud._tally == 15
+    assert x1_bud._tally == x2_bud._tally
+    assert x1_bud._idearoot._mass == 1
+    assert x1_bud._idearoot._mass == x2_bud._idearoot._mass
     assert x1_bud._idearoot._kids == x2_bud._idearoot._kids
 
 

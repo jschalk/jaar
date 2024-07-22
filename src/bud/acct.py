@@ -36,19 +36,19 @@ class AcctCore:
 @dataclass
 class AcctUnit(AcctCore):
     """This represents the BudUnit._owner_id's opinion of the AcctUnit.acct_id
-    AcctUnit.credor_weight represents how much credor_weight the _owner_id projects to the acct_id
-    AcctUnit.debtor_weight represents how much debtor_weight the _owner_id projects to the acct_id
+    AcctUnit.credit_score represents how much credit_score the _owner_id projects to the acct_id
+    AcctUnit.debtit_score represents how much debtit_score the _owner_id projects to the acct_id
     """
 
-    credor_weight: int = None
-    debtor_weight: int = None
+    credit_score: int = None
+    debtit_score: int = None
     # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
     _lobbyships: dict[AcctID, LobbyShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
-    _irrational_debtor_weight: int = None  # set by listening process
-    _inallocable_debtor_weight: int = None  # set by listening process
+    _irrational_debtit_score: int = None  # set by listening process
+    _inallocable_debtit_score: int = None  # set by listening process
     # set by Bud.settle_bud()
     _fund_give: float = None
     _fund_take: float = None
@@ -60,29 +60,29 @@ class AcctUnit(AcctCore):
     def set_bit(self, x_bit: float):
         self._bit = x_bit
 
-    def set_credor_debtor_weight(
+    def set_credor_debtit_score(
         self,
-        credor_weight: float = None,
-        debtor_weight: float = None,
+        credit_score: float = None,
+        debtit_score: float = None,
     ):
-        if credor_weight is not None:
-            self.set_credor_weight(credor_weight)
-        if debtor_weight is not None:
-            self.set_debtor_weight(debtor_weight)
+        if credit_score is not None:
+            self.set_credit_score(credit_score)
+        if debtit_score is not None:
+            self.set_debtit_score(debtit_score)
 
-    def set_credor_weight(self, credor_weight: int):
-        self.credor_weight = credor_weight
+    def set_credit_score(self, credit_score: int):
+        self.credit_score = credit_score
 
-    def set_debtor_weight(self, debtor_weight: int):
-        self.debtor_weight = debtor_weight
+    def set_debtit_score(self, debtit_score: int):
+        self.debtit_score = debtit_score
 
-    def get_credor_weight(self):
-        return get_1_if_None(self.credor_weight)
+    def get_credit_score(self):
+        return get_1_if_None(self.credit_score)
 
-    def get_debtor_weight(self):
-        return get_1_if_None(self.debtor_weight)
+    def get_debtit_score(self):
+        return get_1_if_None(self.debtit_score)
 
-    def reset_fund_give_take(self):
+    def clear_fund_give_take(self):
         self._fund_give = 0
         self._fund_take = 0
         self._fund_agenda_give = 0
@@ -90,15 +90,15 @@ class AcctUnit(AcctCore):
         self._fund_agenda_ratio_give = 0
         self._fund_agenda_ratio_take = 0
 
-    def add_irrational_debtor_weight(self, x_irrational_debtor_weight: float):
-        self._irrational_debtor_weight += x_irrational_debtor_weight
+    def add_irrational_debtit_score(self, x_irrational_debtit_score: float):
+        self._irrational_debtit_score += x_irrational_debtit_score
 
-    def add_inallocable_debtor_weight(self, x_inallocable_debtor_weight: float):
-        self._inallocable_debtor_weight += x_inallocable_debtor_weight
+    def add_inallocable_debtit_score(self, x_inallocable_debtit_score: float):
+        self._inallocable_debtit_score += x_inallocable_debtit_score
 
     def reset_listen_calculated_attrs(self):
-        self._irrational_debtor_weight = 0
-        self._inallocable_debtor_weight = 0
+        self._irrational_debtit_score = 0
+        self._inallocable_debtit_score = 0
 
     def add_fund_give(self, fund_give: float):
         self._fund_give += fund_give
@@ -122,34 +122,31 @@ class AcctUnit(AcctCore):
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        bud_acctunit_total_credor_weight: float,
-        bud_acctunit_total_debtor_weight: float,
+        bud_acctunit_total_credit_score: float,
+        bud_acctunit_total_debtit_score: float,
     ):
+        # TODO replace with allot_scale
+        total_credit_score = bud_acctunit_total_credit_score
+        total_debtit_score = bud_acctunit_total_debtit_score
+        ratio_give_sum = fund_agenda_ratio_give_sum
+        ratio_take_sum = fund_agenda_ratio_take_sum
         if fund_agenda_ratio_give_sum == 0:
-            self._fund_agenda_ratio_give = (
-                self.get_credor_weight() / bud_acctunit_total_credor_weight
-            )
+            self._fund_agenda_ratio_give = self.get_credit_score() / total_credit_score
         else:
-            self._fund_agenda_ratio_give = (
-                self._fund_agenda_give / fund_agenda_ratio_give_sum
-            )
+            self._fund_agenda_ratio_give = self._fund_agenda_give / ratio_give_sum
 
         if fund_agenda_ratio_take_sum == 0:
-            self._fund_agenda_ratio_take = (
-                self.get_debtor_weight() / bud_acctunit_total_debtor_weight
-            )
+            self._fund_agenda_ratio_take = self.get_debtit_score() / total_debtit_score
         else:
-            self._fund_agenda_ratio_take = (
-                self._fund_agenda_take / fund_agenda_ratio_take_sum
-            )
+            self._fund_agenda_ratio_take = self._fund_agenda_take / ratio_take_sum
 
     def add_lobbyship(
         self,
         lobby_id: LobbyID,
-        credor_weight: float = None,
-        debtor_weight: float = None,
+        credit_score: float = None,
+        debtit_score: float = None,
     ):
-        x_lobbyship = lobbyship_shop(lobby_id, credor_weight, debtor_weight)
+        x_lobbyship = lobbyship_shop(lobby_id, credit_score, debtit_score)
         self.set_lobbyship(x_lobbyship)
 
     def set_lobbyship(self, x_lobbyship: LobbyShip):
@@ -181,7 +178,7 @@ class AcctUnit(AcctCore):
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_lobbyship.lobby_id: x_lobbyship.credor_weight
+            x_lobbyship.lobby_id: x_lobbyship.credit_score
             for x_lobbyship in self._lobbyships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
@@ -191,7 +188,7 @@ class AcctUnit(AcctCore):
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_lobbyship.lobby_id: x_lobbyship.debtor_weight
+            x_lobbyship.lobby_id: x_lobbyship.debtit_score
             for x_lobbyship in self._lobbyships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
@@ -202,8 +199,8 @@ class AcctUnit(AcctCore):
         return {
             x_lobbyship.lobby_id: {
                 "lobby_id": x_lobbyship.lobby_id,
-                "credor_weight": x_lobbyship.credor_weight,
-                "debtor_weight": x_lobbyship.debtor_weight,
+                "credit_score": x_lobbyship.credit_score,
+                "debtit_score": x_lobbyship.debtit_score,
             }
             for x_lobbyship in self._lobbyships.values()
         }
@@ -211,14 +208,14 @@ class AcctUnit(AcctCore):
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
             "acct_id": self.acct_id,
-            "credor_weight": self.credor_weight,
-            "debtor_weight": self.debtor_weight,
+            "credit_score": self.credit_score,
+            "debtit_score": self.debtit_score,
             "_lobbyships": self.get_lobbyships_dict(),
         }
-        if self._irrational_debtor_weight not in [None, 0]:
-            x_dict["_irrational_debtor_weight"] = self._irrational_debtor_weight
-        if self._inallocable_debtor_weight not in [None, 0]:
-            x_dict["_inallocable_debtor_weight"] = self._inallocable_debtor_weight
+        if self._irrational_debtit_score not in [None, 0]:
+            x_dict["_irrational_debtit_score"] = self._irrational_debtit_score
+        if self._inallocable_debtit_score not in [None, 0]:
+            x_dict["_inallocable_debtit_score"] = self._inallocable_debtit_score
 
         if all_attrs:
             self._all_attrs_necessary_in_dict(x_dict)
@@ -251,36 +248,36 @@ def acctunits_get_from_dict(
 
 def acctunit_get_from_dict(acctunit_dict: dict, _road_delimiter: str) -> AcctUnit:
     x_acct_id = acctunit_dict["acct_id"]
-    x_credor_weight = acctunit_dict["credor_weight"]
-    x_debtor_weight = acctunit_dict["debtor_weight"]
+    x_credit_score = acctunit_dict["credit_score"]
+    x_debtit_score = acctunit_dict["debtit_score"]
     x_lobbyships_dict = acctunit_dict["_lobbyships"]
     x_acctunit = acctunit_shop(
-        x_acct_id, x_credor_weight, x_debtor_weight, _road_delimiter
+        x_acct_id, x_credit_score, x_debtit_score, _road_delimiter
     )
     x_acctunit._lobbyships = lobbyships_get_from_dict(x_lobbyships_dict, x_acct_id)
-    _irrational_debtor_weight = acctunit_dict.get("_irrational_debtor_weight", 0)
-    _inallocable_debtor_weight = acctunit_dict.get("_inallocable_debtor_weight", 0)
-    x_acctunit.add_irrational_debtor_weight(get_0_if_None(_irrational_debtor_weight))
-    x_acctunit.add_inallocable_debtor_weight(get_0_if_None(_inallocable_debtor_weight))
+    _irrational_debtit_score = acctunit_dict.get("_irrational_debtit_score", 0)
+    _inallocable_debtit_score = acctunit_dict.get("_inallocable_debtit_score", 0)
+    x_acctunit.add_irrational_debtit_score(get_0_if_None(_irrational_debtit_score))
+    x_acctunit.add_inallocable_debtit_score(get_0_if_None(_inallocable_debtit_score))
 
     return x_acctunit
 
 
 def acctunit_shop(
     acct_id: AcctID,
-    credor_weight: int = None,
-    debtor_weight: int = None,
+    credit_score: int = None,
+    debtit_score: int = None,
     _road_delimiter: str = None,
     _bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
-        credor_weight=get_1_if_None(credor_weight),
-        debtor_weight=get_1_if_None(debtor_weight),
+        credit_score=get_1_if_None(credit_score),
+        debtit_score=get_1_if_None(debtit_score),
         _lobbyships={},
         _credor_pool=0,
         _debtor_pool=0,
-        _irrational_debtor_weight=0,
-        _inallocable_debtor_weight=0,
+        _irrational_debtit_score=0,
+        _inallocable_debtit_score=0,
         _fund_give=0,
         _fund_take=0,
         _fund_agenda_give=0,

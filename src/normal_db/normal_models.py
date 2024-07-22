@@ -18,7 +18,7 @@ class BudTable(Base):
     _fund_coin = Column(Float)
     _bit = Column(Float)
     _penny = Column(Float)
-    _weight = Column(Integer)
+    _tally = Column(Integer)
 
 
 class AcctUnitTable(Base):
@@ -26,8 +26,8 @@ class AcctUnitTable(Base):
 
     uid = Column(Integer, primary_key=True)
     acct_id = Column(String)
-    credor_weight = Column(Integer)
-    debtor_weight = Column(Integer)
+    credit_score = Column(Integer)
+    debtit_score = Column(Integer)
 
 
 # class LobbyTable(Base):
@@ -42,8 +42,8 @@ class LobbyShipTable(Base):
     uid = Column(Integer, primary_key=True)
     lobby_id = Column(String)
     acct_id = Column(String)
-    credor_weight = Column(Integer)
-    debtor_weight = Column(Integer)
+    credit_score = Column(Integer)
+    debtit_score = Column(Integer)
 
 
 class IdeaTable(Base):
@@ -60,7 +60,7 @@ class IdeaTable(Base):
     _problem_bool = Column(Integer)
     _range_source_road = Column(String)
     _reest = Column(Integer)
-    _weight = Column(Integer)
+    _mass = Column(Integer)
     pledge = Column(Integer)
 
 
@@ -69,8 +69,8 @@ class AwardLinkTable(Base):
     uid = Column(Integer, primary_key=True)
     lobby_id = Column(String)
     road = Column(String)
-    give_weight = Column(Float)
-    take_weight = Column(Float)
+    give_force = Column(Float)
+    take_force = Column(Float)
 
 
 class ReasonTable(Base):

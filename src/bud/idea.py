@@ -4,7 +4,7 @@ from src._instrument.python import (
     get_False_if_None,
     get_positive_int,
 )
-from src._road.finance import FundCoin, FundNum
+from src._road.finance import FundCoin, FundNum, allot_scale, default_fund_coin_if_none
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -68,7 +68,7 @@ class IdeaGetDescendantsException(Exception):
 
 @dataclass
 class IdeaAttrFilter:
-    weight: int = None
+    mass: int = None
     uid: int = None
     reason: ReasonUnit = None
     reason_base: RoadUnit = None
@@ -154,7 +154,7 @@ class IdeaAttrFilter:
 
 
 def ideaattrfilter_shop(
-    weight: int = None,
+    mass: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
     reason_base: RoadUnit = None,
@@ -186,7 +186,7 @@ def ideaattrfilter_shop(
     problem_bool: bool = None,
 ) -> IdeaAttrFilter:
     x_ideaattrfilter = IdeaAttrFilter(
-        weight=weight,
+        mass=mass,
         uid=uid,
         reason=reason,
         reason_base=reason_base,
@@ -225,7 +225,7 @@ def ideaattrfilter_shop(
 @dataclass
 class IdeaUnit:
     _label: RoadNode = None
-    _weight: int = None
+    _mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
@@ -358,11 +358,11 @@ class IdeaUnit:
         self,
         x_fund_onset: FundNum,
         x_fund_cease: FundNum,
-        total_fund_pool: FundNum,
+        _fund_pool: FundNum,
     ):
         self._fund_onset = x_fund_onset
         self._fund_cease = x_fund_cease
-        self._fund_ratio = (self._fund_cease - self._fund_onset) / total_fund_pool
+        self._fund_ratio = self.get_fund_share() / _fund_pool
         self.set_awardheirs_fund_give_fund_take()
 
     def get_fund_share(self) -> float:
@@ -440,23 +440,21 @@ class IdeaUnit:
         self._parent_road = parent_road
 
     def inherit_awardheirs(self, parent_awardheirs: dict[LobbyID, AwardHeir] = None):
-        if parent_awardheirs is None:
-            parent_awardheirs = {}
-
+        parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
         self._awardheirs = {}
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
                 lobby_id=ib.lobby_id,
-                give_weight=ib.give_weight,
-                take_weight=ib.take_weight,
+                give_force=ib.give_force,
+                take_force=ib.take_force,
             )
             self._awardheirs[awardheir.lobby_id] = awardheir
 
         for ib in self._awardlinks.values():
             awardheir = awardheir_shop(
                 lobby_id=ib.lobby_id,
-                give_weight=ib.give_weight,
-                take_weight=ib.take_weight,
+                give_force=ib.give_force,
+                take_force=ib.take_force,
             )
             self._awardheirs[awardheir.lobby_id] = awardheir
 
@@ -487,21 +485,19 @@ class IdeaUnit:
                 fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
-    def get_awardheirs_give_weight_sum(self) -> float:
-        return sum(awardlink.give_weight for awardlink in self._awardheirs.values())
-
-    def get_awardheirs_take_weight_sum(self) -> float:
-        return sum(awardlink.take_weight for awardlink in self._awardheirs.values())
-
     def set_awardheirs_fund_give_fund_take(self):
-        awardheirs_give_weight_sum = self.get_awardheirs_give_weight_sum()
-        awardheirs_take_weight_sum = self.get_awardheirs_take_weight_sum()
-        for awardheir_x in self._awardheirs.values():
-            awardheir_x.set_fund_give_take(
-                idea_fund_share=self.get_fund_share(),
-                awardheirs_give_weight_sum=awardheirs_give_weight_sum,
-                awardheirs_take_weight_sum=awardheirs_take_weight_sum,
-            )
+        # TODO retire upper process and use allot scale
+        credit_ledger = {}
+        debtit_ledger = {}
+        for x_lobby_id, x_awardheir in self._awardheirs.items():
+            credit_ledger[x_lobby_id] = x_awardheir.give_force
+            debtit_ledger[x_lobby_id] = x_awardheir.take_force
+        x_fund_share = self.get_fund_share()
+        credit_allot = allot_scale(credit_ledger, x_fund_share, self._fund_coin)
+        debtit_allot = allot_scale(debtit_ledger, x_fund_share, self._fund_coin)
+        for x_lobby_id, x_awardheir in self._awardheirs.items():
+            x_awardheir._fund_give = credit_allot.get(x_lobby_id)
+            x_awardheir._fund_take = debtit_allot.get(x_lobby_id)
 
     def clear_awardlines(self):
         self._awardlines = {}
@@ -585,8 +581,8 @@ class IdeaUnit:
         return self._originunit.get_dict()
 
     def _set_attrs_to_ideaunit(self, idea_attr: IdeaAttrFilter):
-        if idea_attr.weight is not None:
-            self._weight = idea_attr.weight
+        if idea_attr.mass is not None:
+            self._mass = idea_attr.mass
         if idea_attr.uid is not None:
             self._uid = idea_attr.uid
         if idea_attr.reason is not None:
@@ -740,8 +736,8 @@ class IdeaUnit:
     def clear_kids(self):
         self._kids = {}
 
-    def get_kids_weight_sum(self) -> float:
-        return sum(x_kid._weight for x_kid in self._kids.values())
+    def get_kids_mass_sum(self) -> float:
+        return sum(x_kid._mass for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
         self._awardlinks[awardlink.lobby_id] = awardlink
@@ -876,7 +872,7 @@ class IdeaUnit:
         return self._awardheirs == {}
 
     def get_dict(self) -> dict[str, str]:
-        x_dict = {"_weight": self._weight}
+        x_dict = {"_mass": self._mass}
 
         if self._label is not None:
             x_dict["_label"] = self._label
@@ -964,7 +960,7 @@ def ideaunit_shop(
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,
-    _weight: int = 1,
+    _mass: int = 1,
     _awardlinks: dict[LobbyID, AwardLink] = None,
     _awardheirs: dict[LobbyID, AwardHeir] = None,  # Calculated field
     _awardlines: dict[LobbyID, AwardLink] = None,  # Calculated field
@@ -1013,7 +1009,7 @@ def ideaunit_shop(
         _uid=_uid,
         _parent_road=_parent_road,
         _kids=get_empty_dict_if_none(_kids),
-        _weight=get_positive_int(_weight),
+        _mass=get_positive_int(_mass),
         _awardlinks=get_empty_dict_if_none(_awardlinks),
         _awardheirs=get_empty_dict_if_none(_awardheirs),
         _awardlines=get_empty_dict_if_none(_awardlines),
@@ -1040,7 +1036,7 @@ def ideaunit_shop(
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
-        _fund_coin=_fund_coin,
+        _fund_coin=default_fund_coin_if_none(_fund_coin),
         _fund_onset=_fund_onset,
         _fund_cease=_fund_cease,
         _task=_task,

@@ -9,7 +9,7 @@ from datetime import datetime
 @dataclass
 class YB:
     n: str = None
-    weight: int = 1
+    mass: int = 1
     b: float = None  # begin
     c: float = None  # close  # where
     a: float = None  # addin
@@ -812,7 +812,7 @@ def get_budunit_sue_TimeExample():
             _label=yb.n,
             _begin=yb.b,
             _close=yb.c,
-            _weight=yb.weight,
+            _mass=yb.mass,
             _is_expanded=False,
             _addin=yb.a,
             _numor=yb.mn,

@@ -13,22 +13,22 @@ def test_create_legible_list_ReturnsObjEstablishWithEmptyChange():
     assert create_legible_list(x_changeunit, sue_bud) == []
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_weight():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
     # ESTABLISH
     category = "budunit"
-    weight_text = "_weight"
-    weight_int = 55
-    weight_atomunit = atomunit_shop(category, atom_update())
-    weight_atomunit.set_arg(weight_text, weight_int)
+    tally_text = "_tally"
+    tally_int = 55
+    tally_atomunit = atomunit_shop(category, atom_update())
+    tally_atomunit.set_arg(tally_text, tally_int)
     x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(weight_atomunit)
+    x_changeunit.set_atomunit(tally_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s bud weight was transited to {weight_int}"
+    x_str = f"{sue_bud._owner_id}'s bud tally was transited to {tally_int}"
     assert legible_list[0] == x_str
 
 

@@ -6,9 +6,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
-    yao_credor_weight = 500
+    yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
+    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credit_score)
     assert x_riverrun.get_acct_tax_due(yao_text) == 0
 
     # WHEN
@@ -43,12 +43,12 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
-    yao_credor_weight = 500
+    yao_credit_score = 500
     bob_text = "Bob"
-    bob_debtor_weight = 350
+    bob_debtit_score = 350
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
-    x_riverrun.set_tax_dues({bob_text: bob_debtor_weight})
+    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credit_score)
+    x_riverrun.set_tax_dues({bob_text: bob_debtit_score})
     assert x_riverrun.get_acct_tax_due(yao_text) == 0
     econ_money_amount = x_riverrun.hubunit.econ_money_magnitude
     assert x_riverrun.get_acct_tax_due(bob_text) == econ_money_amount
@@ -87,14 +87,14 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
-    yao_credor_weight = 500
+    yao_credit_score = 500
     bob_text = "Bob"
-    bob_debtor_weight = 25
+    bob_debtit_score = 25
     sue_text = "Sue"
-    sue_debtor_weight = 75
+    sue_debtit_score = 75
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
-    debtorledger = {bob_text: bob_debtor_weight, sue_text: sue_debtor_weight}
+    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credit_score)
+    debtorledger = {bob_text: bob_debtit_score, sue_text: sue_debtit_score}
     x_riverrun.set_tax_dues(debtorledger)
     assert x_riverrun.get_acct_tax_due(yao_text) == 0
     econ_money_amount = x_riverrun.hubunit.econ_money_magnitude
@@ -136,16 +136,16 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
-    yao_yao_credor_weight = 500
-    yao_sue_credor_weight = 2000
+    yao_yao_credit_score = 500
+    yao_sue_credit_score = 2000
     bob_text = "Bob"
-    bob_debtor_weight = 25
+    bob_debtit_score = 25
     sue_text = "Sue"
-    sue_debtor_weight = 75
+    sue_debtit_score = 75
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_yao_credor_weight)
-    x_riverrun.set_econ_credorledger(yao_text, sue_text, yao_sue_credor_weight)
-    debtorledger = {bob_text: bob_debtor_weight, sue_text: sue_debtor_weight}
+    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_yao_credit_score)
+    x_riverrun.set_econ_credorledger(yao_text, sue_text, yao_sue_credit_score)
+    debtorledger = {bob_text: bob_debtit_score, sue_text: sue_debtit_score}
     x_riverrun.set_tax_dues(debtorledger)
     assert x_riverrun.get_acct_tax_due(yao_text) == 0
     econ_money_amount = x_riverrun.hubunit.econ_money_magnitude
@@ -187,9 +187,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
-    yao_credor_weight = 500
+    yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
+    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credit_score)
     x_riverrun.set_tax_dues({yao_text: 1})
     econ_money_amount = yao_hubunit.econ_money_magnitude
     assert x_riverrun.get_acct_tax_due(yao_text) == econ_money_amount
@@ -218,9 +218,9 @@ def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_text = "Yao"
-    yao_credor_weight = 500
+    yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credor_weight)
+    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credit_score)
     x_riverrun.set_tax_dues({yao_text: 1})
     econ_money_amount = yao_hubunit.econ_money_magnitude
     x_riverrun.calc_metrics()

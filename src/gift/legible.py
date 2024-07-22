@@ -179,7 +179,7 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
 
 def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: BudUnit):
     optional_args = x_atom.optional_args
-    _weight_text = "_weight"
+    _tally_text = "_tally"
     _max_tree_traverse_text = "_max_tree_traverse"
     _monetary_desc_text = "_monetary_desc"
     _credor_respect_text = "_credor_respect"
@@ -189,7 +189,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     _monetary_desc_value = optional_args.get(_monetary_desc_text)
     _credor_respect_value = optional_args.get(_credor_respect_text)
     _debtor_respect_value = optional_args.get(_debtor_respect_text)
-    _weight_value = optional_args.get(_weight_text)
+    _tally_value = optional_args.get(_tally_text)
 
     x_monetary_desc = x_bud._monetary_desc
     if x_monetary_desc is None:
@@ -219,9 +219,9 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         legible_list.append(
             f"{x_monetary_desc} debtor pool is now {_debtor_respect_value}"
         )
-    if _weight_value is not None:
+    if _tally_value is not None:
         legible_list.append(
-            f"{x_bud._owner_id}'s bud weight was transited to {_weight_value}"
+            f"{x_bud._owner_id}'s bud tally was transited to {_tally_value}"
         )
 
 
@@ -233,9 +233,9 @@ def add_bud_acctunit_insert_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value("acct_id")
-        credor_weight_value = acctunit_atom.get_value("credor_weight")
-        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
-        x_str = f"{acct_id} was added with {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt"
+        credit_score_value = acctunit_atom.get_value("credit_score")
+        debtit_score_value = acctunit_atom.get_value("debtit_score")
+        x_str = f"{acct_id} was added with {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt"
         legible_list.append(x_str)
 
 
@@ -247,14 +247,14 @@ def add_bud_acctunit_update_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value("acct_id")
-        credor_weight_value = acctunit_atom.get_value("credor_weight")
-        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
-        if credor_weight_value is not None and debtor_weight_value is not None:
-            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt."
-        elif credor_weight_value is not None and debtor_weight_value is None:
-            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred."
-        elif credor_weight_value is None and debtor_weight_value is not None:
-            x_str = f"{acct_id} now has {debtor_weight_value} {x_monetary_desc} debt."
+        credit_score_value = acctunit_atom.get_value("credit_score")
+        debtit_score_value = acctunit_atom.get_value("debtit_score")
+        if credit_score_value is not None and debtit_score_value is not None:
+            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt."
+        elif credit_score_value is not None and debtit_score_value is None:
+            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred."
+        elif credit_score_value is None and debtit_score_value is not None:
+            x_str = f"{acct_id} now has {debtit_score_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
 
@@ -276,9 +276,9 @@ def add_bud_acct_lobbyship_insert_to_legible_list(
         for acct_lobbyship_atom in acct_lobbyship_dict.values():
             lobby_id = acct_lobbyship_atom.get_value("lobby_id")
             acct_id = acct_lobbyship_atom.get_value("acct_id")
-            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
-            x_str = f"Lobby '{lobby_id}' has new member {acct_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+            credit_score_value = acct_lobbyship_atom.get_value("credit_score")
+            debtit_score_value = acct_lobbyship_atom.get_value("debtit_score")
+            x_str = f"Lobby '{lobby_id}' has new member {acct_id} with lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 
@@ -289,14 +289,14 @@ def add_bud_acct_lobbyship_update_to_legible_list(
         for acct_lobbyship_atom in acct_lobbyship_dict.values():
             lobby_id = acct_lobbyship_atom.get_value("lobby_id")
             acct_id = acct_lobbyship_atom.get_value("acct_id")
-            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
-            if credor_weight_value is not None and debtor_weight_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
-            elif credor_weight_value is not None and debtor_weight_value is None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value}."
-            elif credor_weight_value is None and debtor_weight_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_debt={debtor_weight_value}."
+            credit_score_value = acct_lobbyship_atom.get_value("credit_score")
+            debtit_score_value = acct_lobbyship_atom.get_value("debtit_score")
+            if credit_score_value is not None and debtit_score_value is not None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
+            elif credit_score_value is not None and debtit_score_value is None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credit_score_value}."
+            elif credit_score_value is None and debtit_score_value is not None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 
@@ -325,7 +325,7 @@ def add_bud_ideaunit_insert_to_legible_list(
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
     _reest_text = "_reest"
-    _weight_text = "_weight"
+    _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_insert_dict.values():
         for ideaunit_atom in parent_road_dict.values():
@@ -340,7 +340,7 @@ def add_bud_ideaunit_insert_to_legible_list(
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
             _reest_value = ideaunit_atom.get_value(_reest_text)
-            _weight_value = ideaunit_atom.get_value(_weight_text)
+            _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = (
                 f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
@@ -363,8 +363,8 @@ def add_bud_ideaunit_insert_to_legible_list(
                 x_str += f"_range_source_road={_range_source_road_value}."
             if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value is not None:
-                x_str += f"_weight={_weight_value}."
+            if _mass_value is not None:
+                x_str += f"_mass={_mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
@@ -385,7 +385,7 @@ def add_bud_ideaunit_update_to_legible_list(
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
     _reest_text = "_reest"
-    _weight_text = "_weight"
+    _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_update_dict.values():
         for ideaunit_atom in parent_road_dict.values():
@@ -400,7 +400,7 @@ def add_bud_ideaunit_update_to_legible_list(
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
             _reest_value = ideaunit_atom.get_value(_reest_text)
-            _weight_value = ideaunit_atom.get_value(_weight_text)
+            _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
             if _addin_value is not None:
@@ -421,8 +421,8 @@ def add_bud_ideaunit_update_to_legible_list(
                 x_str += f"_range_source_road={_range_source_road_value}."
             if _reest_value is not None:
                 x_str += f"_reest={_reest_value}."
-            if _weight_value is not None:
-                x_str += f"_weight={_weight_value}."
+            if _mass_value is not None:
+                x_str += f"_mass={_mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
@@ -449,9 +449,9 @@ def add_bud_idea_awardlink_insert_to_legible_list(
         for idea_awardlink_atom in road_dict.values():
             lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            give_weight_value = idea_awardlink_atom.get_value("give_weight")
-            take_weight_value = idea_awardlink_atom.get_value("take_weight")
-            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with give_weight={give_weight_value} and take_weight={take_weight_value}."
+            give_force_value = idea_awardlink_atom.get_value("give_force")
+            take_force_value = idea_awardlink_atom.get_value("take_force")
+            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -462,14 +462,14 @@ def add_bud_idea_awardlink_update_to_legible_list(
         for idea_awardlink_atom in road_dict.values():
             lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
             road_value = idea_awardlink_atom.get_value("road")
-            give_weight_value = idea_awardlink_atom.get_value("give_weight")
-            take_weight_value = idea_awardlink_atom.get_value("take_weight")
-            if give_weight_value is not None and take_weight_value is not None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value} and take_weight={take_weight_value}."
-            elif give_weight_value is not None and take_weight_value is None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_weight={give_weight_value}."
-            elif give_weight_value is None and take_weight_value is not None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_weight={take_weight_value}."
+            give_force_value = idea_awardlink_atom.get_value("give_force")
+            take_force_value = idea_awardlink_atom.get_value("take_force")
+            if give_force_value is not None and take_force_value is not None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+            elif give_force_value is not None and take_force_value is None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
+            elif give_force_value is None and take_force_value is not None:
+                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 

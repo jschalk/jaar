@@ -4,7 +4,7 @@ from src.bud.idea import IdeaAttrFilter, ideaattrfilter_shop
 
 def test_IdeaAttrFilter_Exists():
     new_obj = IdeaAttrFilter()
-    assert new_obj.weight is None
+    assert new_obj.mass is None
     assert new_obj.uid is None
     assert new_obj.reason is None
     assert new_obj.reason_base is None

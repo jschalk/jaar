@@ -12,13 +12,13 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
     luca_bud.set_credor_respect(500)
     luca_bud.set_debtor_respect(400)
     yao_text = "Yao"
-    yao_credor_weight = 66
-    yao_debtor_weight = 77
-    luca_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
+    yao_credit_score = 66
+    yao_debtit_score = 77
+    luca_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
     sue_text = "Sue"
-    sue_credor_weight = 434
-    sue_debtor_weight = 323
-    luca_bud.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    sue_credit_score = 434
+    sue_debtit_score = 323
+    luca_bud.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
 
     # WHEN
     x_df = get_bud_acctunits_dataframe(luca_bud)
@@ -26,8 +26,8 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
     # THEN
     acctunit_colums = {
         "acct_id",
-        "credor_weight",
-        "debtor_weight",
+        "credit_score",
+        "debtit_score",
         "_lobbyships",
         "_fund_give",
         "_fund_take",
@@ -52,8 +52,8 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectEmptyDataFrame():
     # THEN
     acctunit_colums = {
         "acct_id",
-        "credor_weight",
-        "debtor_weight",
+        "credit_score",
+        "debtit_score",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",

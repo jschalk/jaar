@@ -38,20 +38,20 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     ex1_changeunit = changeunit_shop()
     attribute_value = 55
     category = "budunit"
-    opt1_arg = "_weight"
+    opt1_arg = "_tally"
     optional_args = {opt1_arg: attribute_value}
     required_args = {}
-    bud_weight_atomunit = atomunit_shop(
+    bud_mass_atomunit = atomunit_shop(
         category,
         atom_update(),
         required_args=required_args,
         optional_args=optional_args,
     )
     assert ex1_changeunit.atomunits == {}
-    assert bud_weight_atomunit.atom_order is None
+    assert bud_mass_atomunit.atom_order is None
 
     # WHEN
-    ex1_changeunit.set_atomunit(bud_weight_atomunit)
+    ex1_changeunit.set_atomunit(bud_mass_atomunit)
 
     # THEN
     assert len(ex1_changeunit.atomunits) == 1
@@ -59,19 +59,19 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # print(f"{x_update_dict=}")
     x_category_atomunit = x_update_dict.get(category)
     print(f"{x_category_atomunit=}")
-    assert x_category_atomunit == bud_weight_atomunit
-    assert bud_weight_atomunit.atom_order is not None
+    assert x_category_atomunit == bud_mass_atomunit
+    assert bud_mass_atomunit.atom_order is not None
 
 
 def test_ChangeUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
     x_category = "bud_acctunit"
-    bud_weight_atomunit = atomunit_shop(x_category, atom_update())
+    bud_mass_atomunit = atomunit_shop(x_category, atom_update())
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        ex1_changeunit.set_atomunit(bud_weight_atomunit)
+        ex1_changeunit.set_atomunit(bud_mass_atomunit)
     assert (
         str(excinfo.value)
         == f"""'{x_category}' UPDATE AtomUnit is invalid
@@ -84,7 +84,7 @@ def test_ChangeUnit_get_atom_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
     budunit_text = "budunit"
-    opt_arg1 = "_weight"
+    opt_arg1 = "_tally"
     opt_value = 55
     budunit_atomunit = atomunit_shop(budunit_text, atom_update())
     budunit_atomunit.set_optional_arg(x_key=opt_arg1, x_value=opt_value)
@@ -105,7 +105,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     assert ex1_changeunit.atomunits == {}
 
     # WHEN
-    op2_arg = "_weight"
+    op2_arg = "_tally"
     op2_value = 55
     budunit_text = "budunit"
     required_args = {}
@@ -133,12 +133,12 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     # WHEN
     acct_id_text = "acct_id"
     bob_text = "Bob"
-    bob_credor_weight = 55
-    bob_debtor_weight = 66
-    bob_acctunit = acctunit_shop(bob_text, bob_credor_weight, bob_debtor_weight)
+    bob_credit_score = 55
+    bob_debtit_score = 66
+    bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
     acct_id_text = "acct_id"
-    cw_text = "credor_weight"
-    dw_text = "debtor_weight"
+    cw_text = "credit_score"
+    dw_text = "debtit_score"
     print(f"{bob_acctunit.get_dict()=}")
     bob_required_dict = {acct_id_text: bob_acctunit.get_dict().get(acct_id_text)}
     bob_optional_dict = {cw_text: bob_acctunit.get_dict().get(cw_text)}
@@ -222,16 +222,16 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 #     # WHEN
 #     opt2_value = 55
 #     category = "budunit"
-#     opt2_arg = "_weight"
-#     weight_atomunit = atomunit_shop(category, atom_update())
-#     weight_atomunit.set_optional_arg(opt2_arg, opt2_value)
-#     ex1_changeunit.set_atomunit(weight_atomunit)
+#     opt2_arg = "_mass"
+#     mass_atomunit = atomunit_shop(category, atom_update())
+#     mass_atomunit.set_optional_arg(opt2_arg, opt2_value)
+#     ex1_changeunit.set_atomunit(mass_atomunit)
 #     # THEN
 #     assert len(ex1_changeunit.atomunits.get(atom_update()).keys()) == 1
 #     sue_budunit_dict = ex1_changeunit.atomunits.get(atom_update())
-#     sue_weight_atomunit = sue_budunit_dict.get(category)
-#     print(f"{sue_weight_atomunit=}")
-#     assert weight_atomunit == sue_weight_atomunit
+#     sue_mass_atomunit = sue_budunit_dict.get(category)
+#     print(f"{sue_mass_atomunit=}")
+#     assert mass_atomunit == sue_mass_atomunit
 
 #     # WHEN
 #     new2_value = 66
@@ -384,7 +384,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     zia_text = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg("acct_id", zia_text)
-    x_atomunit.set_arg("credor_weight", "70 is the number")
+    x_atomunit.set_arg("credit_score", "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN/THEN
@@ -398,7 +398,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     yao_text = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg("acct_id", yao_text)
-    x_atomunit.set_arg("credor_weight", 30)
+    x_atomunit.set_arg("credit_score", 30)
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
@@ -408,7 +408,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     bob_text = "Bob"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg("acct_id", bob_text)
-    x_atomunit.set_arg("credor_weight", "70 is the number")
+    x_atomunit.set_arg("credit_score", "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
@@ -427,14 +427,14 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStart
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credor_weight", 70)
+    zia_atomunit.set_arg("credit_score", 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credor_weight", 30)
+    yao_atomunit.set_arg("credit_score", 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -467,14 +467,14 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartin
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credor_weight", 70)
+    zia_atomunit.set_arg("credit_score", 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credor_weight", 30)
+    yao_atomunit.set_arg("credit_score", 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -507,14 +507,14 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumb
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credor_weight", 70)
+    zia_atomunit.set_arg("credit_score", 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credor_weight", 30)
+    yao_atomunit.set_arg("credit_score", 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -547,12 +547,12 @@ def test_ChangeUnit_get_json_ReturnsCorrectObj():
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credor_weight", 70)
+    zia_atomunit.set_arg("credit_score", 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credor_weight", 30)
+    yao_atomunit.set_arg("credit_score", 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     # WHEN
@@ -572,7 +572,7 @@ def test_ChangeUnit_atomunit_exists_ReturnsCorrectObj():
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credor_weight", 70)
+    zia_atomunit.set_arg("credit_score", 70)
     assert farm_changeunit.atomunit_exists(zia_atomunit) is False
 
     # WHEN

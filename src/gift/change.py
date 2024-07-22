@@ -153,8 +153,8 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_credor_respect", after_bud._credor_respect)
         if before_bud._debtor_respect != after_bud._debtor_respect:
             x_atomunit.set_optional_arg("_debtor_respect", after_bud._debtor_respect)
-        if before_bud._weight != after_bud._weight:
-            x_atomunit.set_optional_arg("_weight", after_bud._weight)
+        if before_bud._tally != after_bud._tally:
+            x_atomunit.set_optional_arg("_tally", after_bud._tally)
         if before_bud._fund_pool != after_bud._fund_pool:
             x_atomunit.set_optional_arg("_fund_pool", after_bud._fund_pool)
         if before_bud._fund_coin != after_bud._fund_coin:
@@ -186,13 +186,13 @@ class ChangeUnit:
             insert_acctunit = after_bud.get_acct(insert_acct_id)
             x_atomunit = atomunit_shop("bud_acctunit", atom_insert())
             x_atomunit.set_required_arg("acct_id", insert_acctunit.acct_id)
-            if insert_acctunit.credor_weight is not None:
+            if insert_acctunit.credit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "credor_weight", insert_acctunit.credor_weight
+                    "credit_score", insert_acctunit.credit_score
                 )
-            if insert_acctunit.debtor_weight is not None:
+            if insert_acctunit.debtit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "debtor_weight", insert_acctunit.debtor_weight
+                    "debtit_score", insert_acctunit.debtit_score
                 )
             self.set_atomunit(x_atomunit)
             all_lobby_ids = set(insert_acctunit._lobbyships.keys())
@@ -210,13 +210,13 @@ class ChangeUnit:
             if optional_args_different("bud_acctunit", after_acctunit, before_acctunit):
                 x_atomunit = atomunit_shop("bud_acctunit", atom_update())
                 x_atomunit.set_required_arg("acct_id", after_acctunit.acct_id)
-                if before_acctunit.credor_weight != after_acctunit.credor_weight:
+                if before_acctunit.credit_score != after_acctunit.credit_score:
                     x_atomunit.set_optional_arg(
-                        "credor_weight", after_acctunit.credor_weight
+                        "credit_score", after_acctunit.credit_score
                     )
-                if before_acctunit.debtor_weight != after_acctunit.debtor_weight:
+                if before_acctunit.debtit_score != after_acctunit.debtit_score:
                     x_atomunit.set_optional_arg(
-                        "debtor_weight", after_acctunit.debtor_weight
+                        "debtit_score", after_acctunit.debtit_score
                     )
                 self.set_atomunit(x_atomunit)
             self.add_atomunit_acctunit_update_lobbyships(
@@ -286,13 +286,13 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_insert())
             x_atomunit.set_required_arg("acct_id", after_acct_id)
             x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
-            if after_lobbyship.credor_weight is not None:
+            if after_lobbyship.credit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "credor_weight", after_lobbyship.credor_weight
+                    "credit_score", after_lobbyship.credit_score
                 )
-            if after_lobbyship.debtor_weight is not None:
+            if after_lobbyship.debtit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "debtor_weight", after_lobbyship.debtor_weight
+                    "debtit_score", after_lobbyship.debtit_score
                 )
             self.set_atomunit(x_atomunit)
 
@@ -305,10 +305,10 @@ class ChangeUnit:
         x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_update())
         x_atomunit.set_required_arg("acct_id", acct_id)
         x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
-        if after_lobbyship.credor_weight != before_lobbyship.credor_weight:
-            x_atomunit.set_optional_arg("credor_weight", after_lobbyship.credor_weight)
-        if after_lobbyship.debtor_weight != before_lobbyship.debtor_weight:
-            x_atomunit.set_optional_arg("debtor_weight", after_lobbyship.debtor_weight)
+        if after_lobbyship.credit_score != before_lobbyship.credit_score:
+            x_atomunit.set_optional_arg("credit_score", after_lobbyship.credit_score)
+        if after_lobbyship.debtit_score != before_lobbyship.debtit_score:
+            x_atomunit.set_optional_arg("debtit_score", after_lobbyship.debtit_score)
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_lobbyships_delete(
@@ -354,7 +354,7 @@ class ChangeUnit:
                 "_range_source_road", insert_ideaunit._range_source_road
             )
             x_atomunit.set_optional_arg("_reest", insert_ideaunit._reest)
-            x_atomunit.set_optional_arg("_weight", insert_ideaunit._weight)
+            x_atomunit.set_optional_arg("_mass", insert_ideaunit._mass)
             x_atomunit.set_optional_arg("pledge", insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
 
@@ -408,8 +408,8 @@ class ChangeUnit:
                     )
                 if before_ideaunit._reest != after_ideaunit._reest:
                     x_atomunit.set_optional_arg("_reest", after_ideaunit._reest)
-                if before_ideaunit._weight != after_ideaunit._weight:
-                    x_atomunit.set_optional_arg("_weight", after_ideaunit._weight)
+                if before_ideaunit._mass != after_ideaunit._mass:
+                    x_atomunit.set_optional_arg("_mass", after_ideaunit._mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:
                     x_atomunit.set_optional_arg("pledge", after_ideaunit.pledge)
                 self.set_atomunit(x_atomunit)
@@ -703,8 +703,8 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_idea_awardlink", atom_insert())
             x_atomunit.set_required_arg("road", after_ideaunit.get_road())
             x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
-            x_atomunit.set_optional_arg("give_weight", after_awardlink.give_weight)
-            x_atomunit.set_optional_arg("take_weight", after_awardlink.take_weight)
+            x_atomunit.set_optional_arg("give_force", after_awardlink.give_force)
+            x_atomunit.set_optional_arg("take_force", after_awardlink.take_force)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_updates(
@@ -724,13 +724,13 @@ class ChangeUnit:
                 x_atomunit = atomunit_shop("bud_idea_awardlink", atom_update())
                 x_atomunit.set_required_arg("road", before_ideaunit.get_road())
                 x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
-                if before_awardlink.give_weight != after_awardlink.give_weight:
+                if before_awardlink.give_force != after_awardlink.give_force:
                     x_atomunit.set_optional_arg(
-                        "give_weight", after_awardlink.give_weight
+                        "give_force", after_awardlink.give_force
                     )
-                if before_awardlink.take_weight != after_awardlink.take_weight:
+                if before_awardlink.take_force != after_awardlink.take_force:
                     x_atomunit.set_optional_arg(
-                        "take_weight", after_awardlink.take_weight
+                        "take_force", after_awardlink.take_force
                     )
                 self.set_atomunit(x_atomunit)
 

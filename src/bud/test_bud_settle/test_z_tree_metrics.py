@@ -83,9 +83,9 @@ def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
 def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
     # ESTABLISH
     nia_text = "Nia"
-    nia_bud = budunit_shop(nia_text, _weight=10)
+    nia_bud = budunit_shop(nia_text, _tally=10)
     weekdays = "weekdays"
-    nia_bud.set_l1_idea(ideaunit_shop(weekdays, _weight=40))
+    nia_bud.set_l1_idea(ideaunit_shop(weekdays, _mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
 
     # WHEN/THEN
@@ -163,9 +163,9 @@ def test_BudUnit_3AdvocatesNoideaunit_shop():
     zia_budunit.set_acctunit(yao_acctunit)
     zia_budunit.set_acctunit(sue_acctunit)
     zia_budunit.set_acctunit(zia_acctunit)
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_weight=10))
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_weight=10))
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_weight=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_force=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_force=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_force=10))
 
     # WHEN
     assert zia_budunit.get_awardlinks_metrics() is not None
