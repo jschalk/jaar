@@ -360,14 +360,14 @@ def test_AwardHeir_set_fund_attr_CorrectlySetsAttr():
     # ESTABLISH
     bikers_text = "bikers"
     bikers_give_weight = 3.0
-    bikers_debt_weight = 6.0
+    bikers_take_weight = 6.0
     awardlinks_sum_give_weight = 60
     awardlinks_sum_take_weight = 60
     idea_fund_share = 1
     lobby_heir_x = awardheir_shop(
         lobby_id=bikers_text,
         give_weight=bikers_give_weight,
-        take_weight=bikers_debt_weight,
+        take_weight=bikers_take_weight,
     )
 
     # WHEN
