@@ -136,7 +136,7 @@ def test_LobbyShip_set_credit_score_SetsAttr():
     assert swim_lobbyship.debtit_score == swim_debtit_score
 
 
-def test_LobbyShip_set_credit_score_SetsAttr():
+def test_LobbyShip_set_credit_score_HandlesNoneParameter():
     # ESTABLISH
     swim_text = ",swim"
     old_credit_score = 3.0
