@@ -251,13 +251,6 @@ class LobbyBox(LobbyCore):
             lobbyship.clear_fund_give_take()
 
     def _set_lobbyship_fund_give_take(self):
-        credit_ledger = {}
-        debtit_ledger = {}
-        for x_acct_id, x_lobbyship in self._lobbyships.items():
-            credit_ledger[x_acct_id] = x_lobbyship.credit_score
-            debtit_ledger[x_acct_id] = x_lobbyship.debtit_score
-        # credit_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
-
         lobbyships_credit_score_sum = sum(
             lobbyship.credit_score for lobbyship in self._lobbyships.values()
         )
@@ -274,6 +267,18 @@ class LobbyBox(LobbyCore):
                 lobby_fund_agenda_give=self._fund_agenda_give,
                 lobby_fund_agenda_take=self._fund_agenda_take,
             )
+
+        # TODO retire upper process and use allot scale
+        # credit_ledger = {}
+        # debtit_ledger = {}
+        # for x_acct_id, x_lobbyship in self._lobbyships.items():
+        #     credit_ledger[x_acct_id] = x_lobbyship.credit_score
+        #     debtit_ledger[x_acct_id] = x_lobbyship.debtit_score
+        # credit_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
+        # debtit_allot = allot_scale(debtit_ledger, self._fund_take, self._fund_coin)
+        # for acct_id, x_lobbyship in self._lobbyships.items():
+        #     x_lobbyship._fund_give = credit_allot.get(acct_id)
+        #     x_lobbyship._fund_take = debtit_allot.get(acct_id)
 
 
 def lobbybox_shop(
