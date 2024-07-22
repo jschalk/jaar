@@ -8,15 +8,15 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     # ESTABLISH
     category = "bud_acctunit"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
-    debtor_weight_text = "debtor_weight"
-    credor_weight_value = 81
-    debtor_weight_value = 43
+    credit_score_text = "credit_score"
+    debtit_score_text = "debtit_score"
+    credit_score_value = 81
+    debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credor_weight_text, credor_weight_value)
-    yao_atomunit.set_arg(debtor_weight_text, debtor_weight_value)
+    yao_atomunit.set_arg(credit_score_text, credit_score_value)
+    yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -28,7 +28,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_text} was added with {credor_weight_value} {sue_bud._monetary_desc} cred and {debtor_weight_value} {sue_bud._monetary_desc} debt"
+    x_str = f"{yao_text} was added with {credit_score_value} {sue_bud._monetary_desc} cred and {debtit_score_value} {sue_bud._monetary_desc} debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -37,15 +37,15 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_monetary_desc_IsNone():
     # ESTABLISH
     category = "bud_acctunit"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
-    debtor_weight_text = "debtor_weight"
-    credor_weight_value = 81
-    debtor_weight_value = 43
+    credit_score_text = "credit_score"
+    debtit_score_text = "debtit_score"
+    credit_score_value = 81
+    debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credor_weight_text, credor_weight_value)
-    yao_atomunit.set_arg(debtor_weight_text, debtor_weight_value)
+    yao_atomunit.set_arg(credit_score_text, credit_score_value)
+    yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -55,24 +55,24 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_monetary_desc_IsNone():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_text} was added with {credor_weight_value} monetary_desc cred and {debtor_weight_value} monetary_desc debt"
+    x_str = f"{yao_text} was added with {credit_score_value} monetary_desc cred and {debtit_score_value} monetary_desc debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credor_weight_debtor_weight():
+def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debtit_score():
     # ESTABLISH
     category = "bud_acctunit"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
-    debtor_weight_text = "debtor_weight"
-    credor_weight_value = 81
-    debtor_weight_value = 43
+    credit_score_text = "credit_score"
+    debtit_score_text = "debtit_score"
+    credit_score_value = 81
+    debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credor_weight_text, credor_weight_value)
-    yao_atomunit.set_arg(debtor_weight_text, debtor_weight_value)
+    yao_atomunit.set_arg(credit_score_text, credit_score_value)
+    yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -84,21 +84,21 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credor_weight_debtor_wei
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_text} now has {credor_weight_value} {sue_bud._monetary_desc} cred and {debtor_weight_value} {sue_bud._monetary_desc} debt."
+    x_str = f"{yao_text} now has {credit_score_value} {sue_bud._monetary_desc} cred and {debtit_score_value} {sue_bud._monetary_desc} debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credor_weight():
+def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score():
     # ESTABLISH
     category = "bud_acctunit"
     acct_id_text = "acct_id"
-    credor_weight_text = "credor_weight"
-    credor_weight_value = 81
+    credit_score_text = "credit_score"
+    credit_score_value = 81
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credor_weight_text, credor_weight_value)
+    yao_atomunit.set_arg(credit_score_text, credit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -110,21 +110,21 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credor_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_text} now has {credor_weight_value} {sue_bud._monetary_desc} cred."
+    x_str = f"{yao_text} now has {credit_score_value} {sue_bud._monetary_desc} cred."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtor_weight():
+def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_score():
     # ESTABLISH
     category = "bud_acctunit"
     acct_id_text = "acct_id"
-    debtor_weight_text = "debtor_weight"
-    debtor_weight_value = 43
+    debtit_score_text = "debtit_score"
+    debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(debtor_weight_text, debtor_weight_value)
+    yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -136,7 +136,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtor_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_text} now has {debtor_weight_value} {sue_bud._monetary_desc} debt."
+    x_str = f"{yao_text} now has {debtit_score_value} {sue_bud._monetary_desc} debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

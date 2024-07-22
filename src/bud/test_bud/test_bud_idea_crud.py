@@ -1195,8 +1195,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     sue_text = "Sue"
     bob_budunit = budunit_shop(bob_text)
     bob_budunit.add_acctunit(bob_text)
-    bob_budunit.add_acctunit(yao_text, credor_weight=2)
-    bob_budunit.add_acctunit(sue_text, debtor_weight=2)
+    bob_budunit.add_acctunit(yao_text, credit_score=2)
+    bob_budunit.add_acctunit(sue_text, debtit_score=2)
     bob_budunit.set_offtrack_fund()
     assert bob_budunit._offtrack_fund == 0
 

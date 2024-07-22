@@ -55,13 +55,13 @@ def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo():
     luca_bud.set_credor_respect(500)
     luca_bud.set_debtor_respect(400)
     yao_text = "Yao"
-    yao_credor_weight = 66
-    yao_debtor_weight = 77
-    luca_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
+    yao_credit_score = 66
+    yao_debtit_score = 77
+    luca_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
     sue_text = "Sue"
-    sue_credor_weight = 434
-    sue_debtor_weight = 323
-    luca_bud.add_acctunit(sue_text, sue_credor_weight, sue_debtor_weight)
+    sue_credit_score = 434
+    sue_debtit_score = 323
+    luca_bud.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
 
     # WHEN
     x_fig = get_bud_accts_plotly_fig(luca_bud)

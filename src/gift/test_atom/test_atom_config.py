@@ -339,14 +339,14 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
     assert acctunit_columns.get("acct_id") is not None
-    assert acctunit_columns.get("credor_weight") is not None
-    assert acctunit_columns.get("debtor_weight") is not None
+    assert acctunit_columns.get("credit_score") is not None
+    assert acctunit_columns.get("debtit_score") is not None
 
     acct_id_dict = acctunit_columns.get("acct_id")
     assert len(acct_id_dict) == 2
     assert acct_id_dict.get(sqlite_datatype_text()) == "TEXT"
     assert acct_id_dict.get("nullable") is False
-    debtor_weight_dict = acctunit_columns.get("debtor_weight")
+    debtit_score_dict = acctunit_columns.get("debtit_score")
     assert len(acct_id_dict) == 2
-    assert debtor_weight_dict.get(sqlite_datatype_text()) == "INTEGER"
-    assert debtor_weight_dict.get("nullable") == True
+    assert debtit_score_dict.get(sqlite_datatype_text()) == "INTEGER"
+    assert debtit_score_dict.get("nullable") == True

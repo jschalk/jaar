@@ -18,8 +18,8 @@ class LobbyCore:
 
 @dataclass
 class LobbyShip(LobbyCore):
-    credor_weight: float = 1.0
-    debtor_weight: float = 1.0
+    credit_score: float = 1.0
+    debtit_score: float = 1.0
     # calculated fields
     _credor_pool: float = None
     _debtor_pool: float = None
@@ -31,22 +31,22 @@ class LobbyShip(LobbyCore):
     _fund_agenda_ratio_take: float = None
     _acct_id: AcctID = None
 
-    def set_credor_weight(self, x_credor_weight: float):
-        if x_credor_weight is not None:
-            self.credor_weight = x_credor_weight
+    def set_credit_score(self, x_credit_score: float):
+        if x_credit_score is not None:
+            self.credit_score = x_credit_score
 
-    def set_debtor_weight(self, x_debtor_weight: float):
-        if x_debtor_weight is not None:
-            self.debtor_weight = x_debtor_weight
+    def set_debtit_score(self, x_debtit_score: float):
+        if x_debtit_score is not None:
+            self.debtit_score = x_debtit_score
 
     def get_dict(self) -> dict[str, str]:
         return {
             "lobby_id": self.lobby_id,
-            "credor_weight": self.credor_weight,
-            "debtor_weight": self.debtor_weight,
+            "credit_score": self.credit_score,
+            "debtit_score": self.debtit_score,
         }
 
-    def reset_fund_give_take(self):
+    def clear_fund_give_take(self):
         self._fund_give = 0
         self._fund_take = 0
         self._fund_agenda_give = 0
@@ -56,8 +56,8 @@ class LobbyShip(LobbyCore):
 
     def set_fund_give_take(
         self,
-        lobbyships_credor_weight_sum: float,
-        lobbyships_debtor_weight_sum: float,
+        lobbyships_credit_score_sum: float,
+        lobbyships_debtit_score_sum: float,
         lobby_fund_give: float,
         lobby_fund_take: float,
         lobby_fund_agenda_give: float,
@@ -65,8 +65,8 @@ class LobbyShip(LobbyCore):
     ):
         lobby_fund_give = get_1_if_None(lobby_fund_give)
         lobby_fund_take = get_1_if_None(lobby_fund_take)
-        credor_ratio = self.credor_weight / lobbyships_credor_weight_sum
-        debtor_ratio = self.debtor_weight / lobbyships_debtor_weight_sum
+        credor_ratio = self.credit_score / lobbyships_credit_score_sum
+        debtor_ratio = self.debtit_score / lobbyships_debtit_score_sum
 
         self._fund_give = lobby_fund_give * credor_ratio
         self._fund_take = lobby_fund_take * debtor_ratio
@@ -76,14 +76,14 @@ class LobbyShip(LobbyCore):
 
 def lobbyship_shop(
     lobby_id: LobbyID,
-    credor_weight: float = None,
-    debtor_weight: float = None,
+    credit_score: float = None,
+    debtit_score: float = None,
     _acct_id: AcctID = None,
 ) -> LobbyShip:
     return LobbyShip(
         lobby_id=lobby_id,
-        credor_weight=get_1_if_None(credor_weight),
-        debtor_weight=get_1_if_None(debtor_weight),
+        credit_score=get_1_if_None(credit_score),
+        debtit_score=get_1_if_None(debtit_score),
         _credor_pool=0,
         _debtor_pool=0,
         _acct_id=_acct_id,
@@ -93,8 +93,8 @@ def lobbyship_shop(
 def lobbyship_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> LobbyShip:
     return lobbyship_shop(
         lobby_id=x_dict.get("lobby_id"),
-        credor_weight=x_dict.get("credor_weight"),
-        debtor_weight=x_dict.get("debtor_weight"),
+        credit_score=x_dict.get("credit_score"),
+        debtit_score=x_dict.get("debtit_score"),
         _acct_id=x_acct_id,
     )
 
@@ -240,26 +240,26 @@ class LobbyBox(LobbyCore):
     def del_lobbyship(self, acct_id):
         self._lobbyships.pop(acct_id)
 
-    def reset_fund_give_take(self):
+    def clear_fund_give_take(self):
         self._fund_give = 0
         self._fund_take = 0
         self._fund_agenda_give = 0
         self._fund_agenda_take = 0
         for lobbyship in self._lobbyships.values():
-            lobbyship.reset_fund_give_take()
+            lobbyship.clear_fund_give_take()
 
     def _set_lobbyship_fund_give_take(self):
-        lobbyships_credor_weight_sum = sum(
-            lobbyship.credor_weight for lobbyship in self._lobbyships.values()
+        lobbyships_credit_score_sum = sum(
+            lobbyship.credit_score for lobbyship in self._lobbyships.values()
         )
-        lobbyships_debtor_weight_sum = sum(
-            lobbyship.debtor_weight for lobbyship in self._lobbyships.values()
+        lobbyships_debtit_score_sum = sum(
+            lobbyship.debtit_score for lobbyship in self._lobbyships.values()
         )
 
         for lobbyship in self._lobbyships.values():
             lobbyship.set_fund_give_take(
-                lobbyships_credor_weight_sum=lobbyships_credor_weight_sum,
-                lobbyships_debtor_weight_sum=lobbyships_debtor_weight_sum,
+                lobbyships_credit_score_sum=lobbyships_credit_score_sum,
+                lobbyships_debtit_score_sum=lobbyships_debtit_score_sum,
                 lobby_fund_give=self._fund_give,
                 lobby_fund_take=self._fund_take,
                 lobby_fund_agenda_give=self._fund_agenda_give,

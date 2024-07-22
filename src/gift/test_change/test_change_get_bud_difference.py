@@ -65,9 +65,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     before_sue_bud = budunit_shop(sue_text)
     after_sue_bud = copy_deepcopy(before_sue_bud)
     xio_text = "Xio"
-    xio_credor_weight = 33
-    xio_debtor_weight = 44
-    xio_acctunit = acctunit_shop(xio_text, xio_credor_weight, xio_debtor_weight)
+    xio_credit_score = 33
+    xio_debtit_score = 44
+    xio_acctunit = acctunit_shop(xio_text, xio_credit_score, xio_debtit_score)
     after_sue_bud.set_acctunit(xio_acctunit, auto_set_lobbyship=False)
 
     # WHEN
@@ -80,8 +80,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     sue_acctunit_dict = sue_insert_dict.get("bud_acctunit")
     xio_atomunit = sue_acctunit_dict.get(xio_text)
     assert xio_atomunit.get_value("acct_id") == xio_text
-    assert xio_atomunit.get_value("credor_weight") == xio_credor_weight
-    assert xio_atomunit.get_value("debtor_weight") == xio_debtor_weight
+    assert xio_atomunit.get_value("credit_score") == xio_credit_score
+    assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -121,9 +121,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
     after_sue_bud = copy_deepcopy(before_sue_bud)
     xio_text = "Xio"
     before_sue_bud.add_acctunit(xio_text)
-    xio_credor_weight = 33
-    xio_debtor_weight = 44
-    after_sue_bud.add_acctunit(xio_text, xio_credor_weight, xio_debtor_weight)
+    xio_credit_score = 33
+    xio_debtit_score = 44
+    after_sue_bud.add_acctunit(xio_text, xio_credit_score, xio_debtit_score)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -133,8 +133,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
     x_keylist = [atom_update(), "bud_acctunit", xio_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("acct_id") == xio_text
-    assert xio_atomunit.get_value("credor_weight") == xio_credor_weight
-    assert xio_atomunit.get_value("debtor_weight") == xio_debtor_weight
+    assert xio_atomunit.get_value("credit_score") == xio_credit_score
+    assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -225,8 +225,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("acct_id") == zia_text
     assert run_atomunit.get_value("lobby_id") == run_text
-    assert run_atomunit.get_value("credor_weight") == zia_run_credor_w
-    assert run_atomunit.get_value("debtor_weight") == zia_run_debtor_w
+    assert run_atomunit.get_value("credit_score") == zia_run_credor_w
+    assert run_atomunit.get_value("debtit_score") == zia_run_debtor_w
 
     print_atomunit_keys(sue_changeunit)
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
@@ -270,8 +270,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_lobbyship_
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("acct_id") == xio_text
     assert xio_atomunit.get_value("lobby_id") == run_text
-    assert xio_atomunit.get_value("credor_weight") == after_xio_credor_w
-    assert xio_atomunit.get_value("debtor_weight") == after_xio_debtor_w
+    assert xio_atomunit.get_value("credit_score") == after_xio_credor_w
+    assert xio_atomunit.get_value("debtit_score") == after_xio_debtor_w
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1

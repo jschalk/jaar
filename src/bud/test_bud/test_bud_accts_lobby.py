@@ -77,12 +77,12 @@ def test_BudUnit_create_symmetry_lobbybox_ReturnsObj():
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    yao_credor_weight = 3
-    yao_debtor_weight = 2
-    zia_credor_weight = 4
-    zia_debtor_weight = 5
-    yao_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
-    yao_bud.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_credit_score = 3
+    yao_debtit_score = 2
+    zia_credit_score = 4
+    zia_debtit_score = 5
+    yao_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
 
     # WHEN
     xio_text = "Xio"
@@ -95,7 +95,7 @@ def test_BudUnit_create_symmetry_lobbybox_ReturnsObj():
     assert len(xio_lobbybox._lobbyships) == 2
     yao_lobbybox = xio_lobbybox.get_lobbyship(yao_text)
     zia_lobbybox = xio_lobbybox.get_lobbyship(zia_text)
-    assert yao_lobbybox.credor_weight == yao_credor_weight
-    assert zia_lobbybox.credor_weight == zia_credor_weight
-    assert yao_lobbybox.debtor_weight == yao_debtor_weight
-    assert zia_lobbybox.debtor_weight == zia_debtor_weight
+    assert yao_lobbybox.credit_score == yao_credit_score
+    assert zia_lobbybox.credit_score == zia_credit_score
+    assert yao_lobbybox.debtit_score == yao_debtit_score
+    assert zia_lobbybox.debtit_score == zia_debtit_score

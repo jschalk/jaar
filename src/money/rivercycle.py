@@ -12,17 +12,17 @@ from dataclasses import dataclass
 
 def get_credorledger(x_bud: BudUnit) -> dict[AcctID, float]:
     return {
-        acctunit.acct_id: acctunit.credor_weight
+        acctunit.acct_id: acctunit.credit_score
         for acctunit in x_bud._accts.values()
-        if acctunit.credor_weight > 0
+        if acctunit.credit_score > 0
     }
 
 
 def get_debtorledger(x_bud: BudUnit) -> dict[AcctID, float]:
     return {
-        acctunit.acct_id: acctunit.debtor_weight
+        acctunit.acct_id: acctunit.debtit_score
         for acctunit in x_bud._accts.values()
-        if acctunit.debtor_weight > 0
+        if acctunit.debtit_score > 0
     }
 
 

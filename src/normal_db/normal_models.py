@@ -26,8 +26,8 @@ class AcctUnitTable(Base):
 
     uid = Column(Integer, primary_key=True)
     acct_id = Column(String)
-    credor_weight = Column(Integer)
-    debtor_weight = Column(Integer)
+    credit_score = Column(Integer)
+    debtit_score = Column(Integer)
 
 
 # class LobbyTable(Base):
@@ -42,8 +42,8 @@ class LobbyShipTable(Base):
     uid = Column(Integer, primary_key=True)
     lobby_id = Column(String)
     acct_id = Column(String)
-    credor_weight = Column(Integer)
-    debtor_weight = Column(Integer)
+    credit_score = Column(Integer)
+    debtit_score = Column(Integer)
 
 
 class IdeaTable(Base):

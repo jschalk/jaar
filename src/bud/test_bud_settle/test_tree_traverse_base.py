@@ -446,12 +446,12 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    yao_credor_weight = 3
-    yao_debtor_weight = 2
-    zia_credor_weight = 4
-    zia_debtor_weight = 5
-    yao_bud.add_acctunit(yao_text, yao_credor_weight, yao_debtor_weight)
-    yao_bud.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_credit_score = 3
+    yao_debtit_score = 2
+    zia_credit_score = 4
+    zia_debtit_score = 5
+    yao_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
     x_idearoot = yao_bud.get_idea_obj(yao_bud._real_id)
     x_idearoot.set_awardlink(awardlink_shop(yao_text))
     x_idearoot.set_awardlink(awardlink_shop(zia_text))
@@ -480,10 +480,10 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario0():
     assert not xio_lobbybox.lobbyship_exists(xio_text)
     yao_lobbyship = xio_lobbybox.get_lobbyship(yao_text)
     zia_lobbyship = xio_lobbybox.get_lobbyship(zia_text)
-    assert yao_lobbyship.credor_weight == yao_credor_weight
-    assert zia_lobbyship.credor_weight == zia_credor_weight
-    assert yao_lobbyship.debtor_weight == yao_debtor_weight
-    assert zia_lobbyship.debtor_weight == zia_debtor_weight
+    assert yao_lobbyship.credit_score == yao_credit_score
+    assert zia_lobbyship.credit_score == zia_credit_score
+    assert yao_lobbyship.debtit_score == yao_debtit_score
+    assert zia_lobbyship.debtit_score == zia_debtit_score
 
 
 def test_BudUnit_settle_bud_CreatesNewLobbyBoxsWhenNeeded_Scenario1():

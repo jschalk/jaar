@@ -973,13 +973,13 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
 def clear_all_acctunits_lobbyboxs_fund_agenda_give_take(x_bud: BudUnit):
     # DELETE bud_agenda_debt and bud_agenda_cred
     for lobbybox_x in x_bud._lobbyboxs.values():
-        lobbybox_x.reset_fund_give_take()
+        lobbybox_x.clear_fund_give_take()
         # for lobbyship_x in lobbybox_x._accts.values():
-        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._fund_give:.6f} {lobbyship_x.debtor_weight=} {lobbyship__fund_take:t:.6f} {lobbyship_x.} ")
+        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._fund_give:.6f} {lobbyship_x.debtit_score=} {lobbyship__fund_take:t:.6f} {lobbyship_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud._accts.values():
-        x_acctunit.reset_fund_give_take()
+        x_acctunit.clear_fund_give_take()
 
 
 @dataclass
@@ -1138,9 +1138,9 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    sue_acctunit = acctunit_shop(sue_text, 0.5, debtor_weight=2)
-    bob_acctunit = acctunit_shop(bob_text, 1.5, debtor_weight=3)
-    zia_acctunit = acctunit_shop(zia_text, 8, debtor_weight=5)
+    sue_acctunit = acctunit_shop(sue_text, 0.5, debtit_score=2)
+    bob_acctunit = acctunit_shop(bob_text, 1.5, debtit_score=3)
+    zia_acctunit = acctunit_shop(zia_text, 8, debtit_score=5)
     yao_bud.set_acctunit(sue_acctunit)
     yao_bud.set_acctunit(bob_acctunit)
     yao_bud.set_acctunit(zia_acctunit)

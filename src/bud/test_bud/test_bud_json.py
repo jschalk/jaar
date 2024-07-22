@@ -331,7 +331,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")
 
     sue_text = "Sue"
-    zia_bud.add_acctunit(acct_id=sue_text, credor_weight=199, debtor_weight=199)
+    zia_bud.add_acctunit(acct_id=sue_text, credit_score=199, debtit_score=199)
     xio_text = "Xio"
     zia_bud.add_acctunit(acct_id=xio_text)
     run_text = ",runners"

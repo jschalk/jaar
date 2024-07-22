@@ -186,13 +186,13 @@ class ChangeUnit:
             insert_acctunit = after_bud.get_acct(insert_acct_id)
             x_atomunit = atomunit_shop("bud_acctunit", atom_insert())
             x_atomunit.set_required_arg("acct_id", insert_acctunit.acct_id)
-            if insert_acctunit.credor_weight is not None:
+            if insert_acctunit.credit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "credor_weight", insert_acctunit.credor_weight
+                    "credit_score", insert_acctunit.credit_score
                 )
-            if insert_acctunit.debtor_weight is not None:
+            if insert_acctunit.debtit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "debtor_weight", insert_acctunit.debtor_weight
+                    "debtit_score", insert_acctunit.debtit_score
                 )
             self.set_atomunit(x_atomunit)
             all_lobby_ids = set(insert_acctunit._lobbyships.keys())
@@ -210,13 +210,13 @@ class ChangeUnit:
             if optional_args_different("bud_acctunit", after_acctunit, before_acctunit):
                 x_atomunit = atomunit_shop("bud_acctunit", atom_update())
                 x_atomunit.set_required_arg("acct_id", after_acctunit.acct_id)
-                if before_acctunit.credor_weight != after_acctunit.credor_weight:
+                if before_acctunit.credit_score != after_acctunit.credit_score:
                     x_atomunit.set_optional_arg(
-                        "credor_weight", after_acctunit.credor_weight
+                        "credit_score", after_acctunit.credit_score
                     )
-                if before_acctunit.debtor_weight != after_acctunit.debtor_weight:
+                if before_acctunit.debtit_score != after_acctunit.debtit_score:
                     x_atomunit.set_optional_arg(
-                        "debtor_weight", after_acctunit.debtor_weight
+                        "debtit_score", after_acctunit.debtit_score
                     )
                 self.set_atomunit(x_atomunit)
             self.add_atomunit_acctunit_update_lobbyships(
@@ -286,13 +286,13 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_insert())
             x_atomunit.set_required_arg("acct_id", after_acct_id)
             x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
-            if after_lobbyship.credor_weight is not None:
+            if after_lobbyship.credit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "credor_weight", after_lobbyship.credor_weight
+                    "credit_score", after_lobbyship.credit_score
                 )
-            if after_lobbyship.debtor_weight is not None:
+            if after_lobbyship.debtit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "debtor_weight", after_lobbyship.debtor_weight
+                    "debtit_score", after_lobbyship.debtit_score
                 )
             self.set_atomunit(x_atomunit)
 
@@ -305,10 +305,10 @@ class ChangeUnit:
         x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_update())
         x_atomunit.set_required_arg("acct_id", acct_id)
         x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
-        if after_lobbyship.credor_weight != before_lobbyship.credor_weight:
-            x_atomunit.set_optional_arg("credor_weight", after_lobbyship.credor_weight)
-        if after_lobbyship.debtor_weight != before_lobbyship.debtor_weight:
-            x_atomunit.set_optional_arg("debtor_weight", after_lobbyship.debtor_weight)
+        if after_lobbyship.credit_score != before_lobbyship.credit_score:
+            x_atomunit.set_optional_arg("credit_score", after_lobbyship.credit_score)
+        if after_lobbyship.debtit_score != before_lobbyship.debtit_score:
+            x_atomunit.set_optional_arg("debtit_score", after_lobbyship.debtit_score)
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_lobbyships_delete(

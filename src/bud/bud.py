@@ -339,12 +339,12 @@ class BudUnit:
         self._accts.pop(acct_id)
 
     def add_acctunit(
-        self, acct_id: AcctID, credor_weight: int = None, debtor_weight: int = None
+        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
     ):
         acctunit = acctunit_shop(
             acct_id=acct_id,
-            credor_weight=credor_weight,
-            debtor_weight=debtor_weight,
+            credit_score=credit_score,
+            debtit_score=debtit_score,
             _road_delimiter=self._road_delimiter,
         )
         self.set_acctunit(acctunit)
@@ -362,15 +362,15 @@ class BudUnit:
         return self.get_acct(acct_id) is not None
 
     def edit_acctunit(
-        self, acct_id: AcctID, credor_weight: int = None, debtor_weight: int = None
+        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
     ):
         if self._accts.get(acct_id) is None:
             raise AcctMissingException(f"AcctUnit '{acct_id}' does not exist.")
         x_acctunit = self.get_acct(acct_id)
-        if credor_weight is not None:
-            x_acctunit.set_credor_weight(credor_weight)
-        if debtor_weight is not None:
-            x_acctunit.set_debtor_weight(debtor_weight)
+        if credit_score is not None:
+            x_acctunit.set_credit_score(credit_score)
+        if debtit_score is not None:
+            x_acctunit.set_debtit_score(debtit_score)
         self.set_acctunit(x_acctunit)
 
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
@@ -402,8 +402,8 @@ class BudUnit:
         for x_acctunit in self._accts.values():
             x_lobbyship = lobbyship_shop(
                 lobby_id=x_lobby_id,
-                credor_weight=x_acctunit.credor_weight,
-                debtor_weight=x_acctunit.debtor_weight,
+                credit_score=x_acctunit.credit_score,
+                debtit_score=x_acctunit.debtit_score,
                 _acct_id=x_acctunit.acct_id,
             )
             x_lobbybox.set_lobbyship(x_lobbyship)
@@ -1087,8 +1087,8 @@ class BudUnit:
 
     def _allot_offtrack_fund(self):
         x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credor_weight for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtor_weight for x_acct in x_acctunits}
+        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
         fund_give_allot = allot_scale(
             credor_ledger, self._offtrack_fund, self._fund_coin
         )
@@ -1100,24 +1100,24 @@ class BudUnit:
         for x_acct_id, acct_fund_take in fund_take_allot.items():
             self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
 
-    def get_acctunits_credor_weight_sum(self) -> float:
-        return sum(acctunit.get_credor_weight() for acctunit in self._accts.values())
+    def get_acctunits_credit_score_sum(self) -> float:
+        return sum(acctunit.get_credit_score() for acctunit in self._accts.values())
 
-    def get_acctunits_debtor_weight_sum(self) -> float:
-        return sum(acctunit.get_debtor_weight() for acctunit in self._accts.values())
+    def get_acctunits_debtit_score_sum(self) -> float:
+        return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
-        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
-        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
+        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
+        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             au_fund_give = (
-                idea_fund_share * x_acctunit.get_credor_weight()
-            ) / sum_acctunit_credor_weight
+                idea_fund_share * x_acctunit.get_credit_score()
+            ) / sum_acctunit_credit_score
 
             au_fund_take = (
-                idea_fund_share * x_acctunit.get_debtor_weight()
-            ) / sum_acctunit_debtor_weight
+                idea_fund_share * x_acctunit.get_debtit_score()
+            ) / sum_acctunit_debtit_score
 
             x_acctunit.add_fund_give_take(
                 fund_give=au_fund_give,
@@ -1127,17 +1127,17 @@ class BudUnit:
             )
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
-        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
-        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
+        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
+        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             au_fund_agenda_give = (
-                idea_fund_share * x_acctunit.get_credor_weight()
-            ) / sum_acctunit_credor_weight
+                idea_fund_share * x_acctunit.get_credit_score()
+            ) / sum_acctunit_credit_score
 
             au_fund_agenda_take = (
-                idea_fund_share * x_acctunit.get_debtor_weight()
-            ) / sum_acctunit_debtor_weight
+                idea_fund_share * x_acctunit.get_debtit_score()
+            ) / sum_acctunit_debtit_score
 
             x_acctunit.add_fund_give_take(
                 fund_give=0,
@@ -1147,17 +1147,17 @@ class BudUnit:
             )
 
     def _set_acctunits_bud_agenda_share(self, bud_agenda_share: float):
-        sum_acctunit_credor_weight = self.get_acctunits_credor_weight_sum()
-        sum_acctunit_debtor_weight = self.get_acctunits_debtor_weight_sum()
+        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
+        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             au_fund_agenda_give = (
-                bud_agenda_share * x_acctunit.get_credor_weight()
-            ) / sum_acctunit_credor_weight
+                bud_agenda_share * x_acctunit.get_credit_score()
+            ) / sum_acctunit_credit_score
 
             au_fund_agenda_take = (
-                bud_agenda_share * x_acctunit.get_debtor_weight()
-            ) / sum_acctunit_debtor_weight
+                bud_agenda_share * x_acctunit.get_debtit_score()
+            ) / sum_acctunit_debtit_score
 
             x_acctunit.add_fund_agenda_give_take(
                 bud_agenda_cred=au_fund_agenda_give,
@@ -1166,7 +1166,7 @@ class BudUnit:
 
     def _reset_lobbyboxs_fund_give_take(self):
         for lobbybox_obj in self._lobbyboxs.values():
-            lobbybox_obj.reset_fund_give_take()
+            lobbybox_obj.clear_fund_give_take()
 
     def _set_lobbyboxs_fund_share(self, awardheirs: dict[LobbyID, AwardLink]):
         for awardlink_obj in awardheirs.values():
@@ -1211,8 +1211,8 @@ class BudUnit:
     def _set_acctunits_fund_ratios(self):
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
-        x_acctunit_credor_weight_sum = self.get_acctunits_credor_weight_sum()
-        x_acctunit_debtor_weight_sum = self.get_acctunits_debtor_weight_sum()
+        x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
+        x_acctunit_debtit_score_sum = self.get_acctunits_debtit_score_sum()
 
         for x_acctunit in self._accts.values():
             fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
@@ -1222,13 +1222,13 @@ class BudUnit:
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_acctunit_total_credor_weight=x_acctunit_credor_weight_sum,
-                bud_acctunit_total_debtor_weight=x_acctunit_debtor_weight_sum,
+                bud_acctunit_total_credit_score=x_acctunit_credit_score_sum,
+                bud_acctunit_total_debtit_score=x_acctunit_debtit_score_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):
         for acctunit in self._accts.values():
-            acctunit.reset_fund_give_take()
+            acctunit.clear_fund_give_take()
 
     def idea_exists(self, road: RoadUnit) -> bool:
         if road is None:
@@ -1399,8 +1399,8 @@ class BudUnit:
             self._offtrack_kids_weight_set.add(idea_kid.get_road())
 
     def _allot_fund_share(self, idea: IdeaUnit):
-        # TODO manage situations where awardheir.credor_weight is None for all awardheirs
-        # TODO manage situations where awardheir.debtor_weight is None for all awardheirs
+        # TODO manage situations where awardheir.credit_score is None for all awardheirs
+        # TODO manage situations where awardheir.debtit_score is None for all awardheirs
         if idea.awardheir_exists() is False:
             self._set_lobbyboxs_fund_share(idea._awardheirs)
         elif idea.awardheir_exists():
@@ -1425,8 +1425,8 @@ class BudUnit:
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
         x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credor_weight for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtor_weight for x_acct in x_acctunits}
+        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
         credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
         debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
         for x_acct_id, acct_credor_pool in credor_allot.items():

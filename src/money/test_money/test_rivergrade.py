@@ -7,13 +7,13 @@ def test_RiverGrade_Exists():
     x_rivergrade = RiverGrade()
 
     # THEN
-    #: Healer voice get_acct._debtor_weight (SELECT tax_due_amount FROM acct WHERE acct_id = bob_text)
+    #: Healer voice get_acct._debtit_score (SELECT tax_due_amount FROM acct WHERE acct_id = bob_text)
     assert x_rivergrade.hubunit is None
     assert x_rivergrade.acct_id is None
     assert x_rivergrade.number is None
-    #: Healer voice get_acct._debtor_weight (SELECT tax_due_amount FROM acct WHERE acct_id = bob_text)
+    #: Healer voice get_acct._debtit_score (SELECT tax_due_amount FROM acct WHERE acct_id = bob_text)
     assert x_rivergrade.tax_bill_amount is None
-    #: Healer voice get_acct._credor_weight (SELECT grant_amount FROM acct WHERE acct_id = bob_text)
+    #: Healer voice get_acct._credit_score (SELECT grant_amount FROM acct WHERE acct_id = bob_text)
     assert x_rivergrade.grant_amount is None
     #: SELECT COUNT(*) FROM acct WHERE tax_due_amount > (SELECT tax_due_amount FROM acct WHERE acct_id = bob_text)
     assert x_rivergrade.debtor_rank_num is None

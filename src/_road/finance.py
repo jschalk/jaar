@@ -20,7 +20,7 @@ class RespectNum(float):
 
 
 class BitNum(float):
-    """Smallest Unit of credor_weight or debtor_weight (RespectNum) ala 'the slightest bit of respect!'"""
+    """Smallest Unit of credit_score or debtit_score (RespectNum) ala 'the slightest bit of respect!'"""
 
     pass
 
@@ -167,11 +167,11 @@ def _allot_missing_scale(
     return ledger
 
 
-def _calc_allot_value(obj, total_credor_weight, scale_number, grain_unit):
-    if total_credor_weight == 0:
+def _calc_allot_value(obj, total_credit_score, scale_number, grain_unit):
+    if total_credit_score == 0:
         return 0
-    # Determine the allot based on credor_weight
-    allot_amt = (obj / total_credor_weight) * scale_number
+    # Determine the allot based on credit_score
+    allot_amt = (obj / total_credit_score) * scale_number
     # Adjust to the nearest grain unit
     return round(allot_amt / grain_unit) * grain_unit
 
@@ -179,19 +179,19 @@ def _calc_allot_value(obj, total_credor_weight, scale_number, grain_unit):
 def _create_allot_dict(
     ledger: dict[str, float], scale_number: float, grain_unit: float
 ) -> dict[str, float]:
-    # Calculate the total credor_weight
-    total_credor_weight = sum(ledger.values())
+    # Calculate the total credit_score
+    total_credit_score = sum(ledger.values())
     return {
-        x_key: _calc_allot_value(x_obj, total_credor_weight, scale_number, grain_unit)
+        x_key: _calc_allot_value(x_obj, total_credit_score, scale_number, grain_unit)
         for x_key, x_obj in ledger.items()
     }
 
 
 def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float):
     """
-    allots the scale_number among credorledgers with credor_weighted attributes with a resolution of the grain unit.
+    allots the scale_number among credorledgers with credit_scoreed attributes with a resolution of the grain unit.
 
-    :param credorledgers: Dictionary of credorledgers with 'credor_weight' attribute.
+    :param credorledgers: Dictionary of credorledgers with 'credit_score' attribute.
     :param scale_number: The total number to allot.
     :param grain_unit: The smallest unit of distribution.
     :raises ValueError: If the scale number is not a multiple of the grain unit.

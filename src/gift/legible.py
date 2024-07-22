@@ -233,9 +233,9 @@ def add_bud_acctunit_insert_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value("acct_id")
-        credor_weight_value = acctunit_atom.get_value("credor_weight")
-        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
-        x_str = f"{acct_id} was added with {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt"
+        credit_score_value = acctunit_atom.get_value("credit_score")
+        debtit_score_value = acctunit_atom.get_value("debtit_score")
+        x_str = f"{acct_id} was added with {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt"
         legible_list.append(x_str)
 
 
@@ -247,14 +247,14 @@ def add_bud_acctunit_update_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value("acct_id")
-        credor_weight_value = acctunit_atom.get_value("credor_weight")
-        debtor_weight_value = acctunit_atom.get_value("debtor_weight")
-        if credor_weight_value is not None and debtor_weight_value is not None:
-            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred and {debtor_weight_value} {x_monetary_desc} debt."
-        elif credor_weight_value is not None and debtor_weight_value is None:
-            x_str = f"{acct_id} now has {credor_weight_value} {x_monetary_desc} cred."
-        elif credor_weight_value is None and debtor_weight_value is not None:
-            x_str = f"{acct_id} now has {debtor_weight_value} {x_monetary_desc} debt."
+        credit_score_value = acctunit_atom.get_value("credit_score")
+        debtit_score_value = acctunit_atom.get_value("debtit_score")
+        if credit_score_value is not None and debtit_score_value is not None:
+            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt."
+        elif credit_score_value is not None and debtit_score_value is None:
+            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred."
+        elif credit_score_value is None and debtit_score_value is not None:
+            x_str = f"{acct_id} now has {debtit_score_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
 
@@ -276,9 +276,9 @@ def add_bud_acct_lobbyship_insert_to_legible_list(
         for acct_lobbyship_atom in acct_lobbyship_dict.values():
             lobby_id = acct_lobbyship_atom.get_value("lobby_id")
             acct_id = acct_lobbyship_atom.get_value("acct_id")
-            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
-            x_str = f"Lobby '{lobby_id}' has new member {acct_id} with lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
+            credit_score_value = acct_lobbyship_atom.get_value("credit_score")
+            debtit_score_value = acct_lobbyship_atom.get_value("debtit_score")
+            x_str = f"Lobby '{lobby_id}' has new member {acct_id} with lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 
@@ -289,14 +289,14 @@ def add_bud_acct_lobbyship_update_to_legible_list(
         for acct_lobbyship_atom in acct_lobbyship_dict.values():
             lobby_id = acct_lobbyship_atom.get_value("lobby_id")
             acct_id = acct_lobbyship_atom.get_value("acct_id")
-            credor_weight_value = acct_lobbyship_atom.get_value("credor_weight")
-            debtor_weight_value = acct_lobbyship_atom.get_value("debtor_weight")
-            if credor_weight_value is not None and debtor_weight_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value} and lobby_debt={debtor_weight_value}."
-            elif credor_weight_value is not None and debtor_weight_value is None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credor_weight_value}."
-            elif credor_weight_value is None and debtor_weight_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_debt={debtor_weight_value}."
+            credit_score_value = acct_lobbyship_atom.get_value("credit_score")
+            debtit_score_value = acct_lobbyship_atom.get_value("debtit_score")
+            if credit_score_value is not None and debtit_score_value is not None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
+            elif credit_score_value is not None and debtit_score_value is None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credit_score_value}."
+            elif credit_score_value is None and debtit_score_value is not None:
+                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 

@@ -49,8 +49,8 @@ def test_BudUnit_set_acct_DoesSet_acct_id_lobbyship():
     # THEN
     zia_zia_lobbyship = yao_bud.get_acct(zia_text).get_lobbyship(zia_text)
     assert zia_zia_lobbyship is not None
-    assert zia_zia_lobbyship.credor_weight == 1
-    assert zia_zia_lobbyship.debtor_weight == 1
+    assert zia_zia_lobbyship.credit_score == 1
+    assert zia_zia_lobbyship.debtit_score == 1
 
 
 def test_BudUnit_set_acct_DoesNotOverRide_acct_id_lobbyship():
@@ -70,8 +70,8 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_lobbyship():
     # THEN
     zia_ohio_lobbyship = yao_bud.get_acct(zia_text).get_lobbyship(ohio_text)
     assert zia_ohio_lobbyship is not None
-    assert zia_ohio_lobbyship.credor_weight == zia_ohio_credor_w
-    assert zia_ohio_lobbyship.debtor_weight == zia_ohio_debtor_w
+    assert zia_ohio_lobbyship.credit_score == zia_ohio_credor_w
+    assert zia_ohio_lobbyship.debtit_score == zia_ohio_debtor_w
     zia_zia_lobbyship = yao_bud.get_acct(zia_text).get_lobbyship(zia_text)
     assert zia_zia_lobbyship is None
 
@@ -85,15 +85,15 @@ def test_BudUnit_add_acctunit_CorrectlySets_accts():
     xio_text = "Xio"
 
     # WHEN
-    yao_bud.add_acctunit(zia_text, credor_weight=13, debtor_weight=8)
-    yao_bud.add_acctunit(sue_text, debtor_weight=5)
-    yao_bud.add_acctunit(xio_text, credor_weight=17)
+    yao_bud.add_acctunit(zia_text, credit_score=13, debtit_score=8)
+    yao_bud.add_acctunit(sue_text, debtit_score=5)
+    yao_bud.add_acctunit(xio_text, credit_score=17)
 
     # THEN
     assert len(yao_bud._accts) == 3
     assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 3
-    assert yao_bud._accts.get(xio_text).credor_weight == 17
-    assert yao_bud._accts.get(sue_text).debtor_weight == 5
+    assert yao_bud._accts.get(xio_text).credit_score == 17
+    assert yao_bud._accts.get(sue_text).debtit_score == 5
     assert yao_bud._accts.get(xio_text)._bit == x_bit
 
 
@@ -121,10 +121,10 @@ def test_BudUnit_set_acct_Creates_lobbyship():
     yao_bud.add_acctunit(zia_text, before_zia_credor, before_zia_debtor)
     zia_acctunit = yao_bud.get_acct(zia_text)
     zia_lobbyship = zia_acctunit.get_lobbyship(zia_text)
-    assert zia_lobbyship.credor_weight != before_zia_credor
-    assert zia_lobbyship.debtor_weight != before_zia_debtor
-    assert zia_lobbyship.credor_weight == 1
-    assert zia_lobbyship.debtor_weight == 1
+    assert zia_lobbyship.credit_score != before_zia_credor
+    assert zia_lobbyship.debtit_score != before_zia_debtor
+    assert zia_lobbyship.credit_score == 1
+    assert zia_lobbyship.debtit_score == 1
 
     # WHEN
     after_zia_credor = 11
@@ -132,21 +132,21 @@ def test_BudUnit_set_acct_Creates_lobbyship():
     yao_bud.set_acctunit(acctunit_shop(zia_text, after_zia_credor, after_zia_debtor))
 
     # THEN
-    assert zia_lobbyship.credor_weight != after_zia_credor
-    assert zia_lobbyship.debtor_weight != after_zia_debtor
-    assert zia_lobbyship.credor_weight == 1
-    assert zia_lobbyship.debtor_weight == 1
+    assert zia_lobbyship.credit_score != after_zia_credor
+    assert zia_lobbyship.debtit_score != after_zia_debtor
+    assert zia_lobbyship.credit_score == 1
+    assert zia_lobbyship.debtit_score == 1
 
 
 def test_BudUnit_edit_acct_RaiseExceptionWhenAcctDoesNotExist():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     zia_text = "Zia"
-    zia_credor_weight = 55
+    zia_credit_score = 55
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_acctunit(zia_text, credor_weight=zia_credor_weight)
+        yao_bud.edit_acctunit(zia_text, credit_score=zia_credit_score)
     assert str(excinfo.value) == f"AcctUnit '{zia_text}' does not exist."
 
 
@@ -154,31 +154,31 @@ def test_BudUnit_edit_acct_CorrectlyUpdatesObj():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     zia_text = "Zia"
-    old_zia_credor_weight = 55
-    old_zia_debtor_weight = 66
+    old_zia_credit_score = 55
+    old_zia_debtit_score = 66
     yao_bud.set_acctunit(
         acctunit_shop(
             zia_text,
-            old_zia_credor_weight,
-            old_zia_debtor_weight,
+            old_zia_credit_score,
+            old_zia_debtit_score,
         )
     )
     zia_acctunit = yao_bud.get_acct(zia_text)
-    assert zia_acctunit.credor_weight == old_zia_credor_weight
-    assert zia_acctunit.debtor_weight == old_zia_debtor_weight
+    assert zia_acctunit.credit_score == old_zia_credit_score
+    assert zia_acctunit.debtit_score == old_zia_debtit_score
 
     # WHEN
-    new_zia_credor_weight = 22
-    new_zia_debtor_weight = 33
+    new_zia_credit_score = 22
+    new_zia_debtit_score = 33
     yao_bud.edit_acctunit(
         acct_id=zia_text,
-        credor_weight=new_zia_credor_weight,
-        debtor_weight=new_zia_debtor_weight,
+        credit_score=new_zia_credit_score,
+        debtit_score=new_zia_debtit_score,
     )
 
     # THEN
-    assert zia_acctunit.credor_weight == new_zia_credor_weight
-    assert zia_acctunit.debtor_weight == new_zia_debtor_weight
+    assert zia_acctunit.credit_score == new_zia_credit_score
+    assert zia_acctunit.debtit_score == new_zia_debtit_score
 
 
 def test_BudUnit_get_acct_ReturnsCorrectObj():

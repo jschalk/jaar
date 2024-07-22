@@ -5,10 +5,10 @@
             "column_order": 2,
             "sort_order": 0
         },
-        "credor_weight": {
+        "credit_score": {
             "column_order": 4
         },
-        "debtor_weight": {
+        "debtit_score": {
             "column_order": 5
         },
         "lobby_id": {

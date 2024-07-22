@@ -47,8 +47,8 @@ def test_LobbyShip_exists():
 
     # THEN
     assert swim_lobbyship.lobby_id == swim_text
-    assert swim_lobbyship.credor_weight == 1.0
-    assert swim_lobbyship.debtor_weight == 1.0
+    assert swim_lobbyship.credit_score == 1.0
+    assert swim_lobbyship.debtit_score == 1.0
     assert swim_lobbyship._credor_pool is None
     assert swim_lobbyship._debtor_pool is None
     assert swim_lobbyship._fund_give is None
@@ -63,19 +63,19 @@ def test_LobbyShip_exists():
 def test_lobbyship_shop_ReturnsCorrectObj():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credor_weight = 3.0
-    swim_debtor_weight = 5.0
+    swim_credit_score = 3.0
+    swim_debtit_score = 5.0
 
     # WHEN
     swim_lobbyship = lobbyship_shop(
         lobby_id=swim_text,
-        credor_weight=swim_credor_weight,
-        debtor_weight=swim_debtor_weight,
+        credit_score=swim_credit_score,
+        debtit_score=swim_debtit_score,
     )
 
     # THEN
-    assert swim_lobbyship.credor_weight == swim_credor_weight
-    assert swim_lobbyship.debtor_weight == swim_debtor_weight
+    assert swim_lobbyship.credit_score == swim_credit_score
+    assert swim_lobbyship.debtit_score == swim_debtit_score
     assert swim_lobbyship._credor_pool == 0
     assert swim_lobbyship._debtor_pool == 0
     assert swim_lobbyship._fund_give is None
@@ -116,85 +116,85 @@ def test_lobbyship_shop_ReturnsCorrectObjAttr_acct_id():
 #     )
 
 
-def test_LobbyShip_set_credor_weight_SetsAttr():
+def test_LobbyShip_set_credit_score_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
-    old_credor_weight = 3.0
-    swim_debtor_weight = 5.0
-    swim_lobbyship = lobbyship_shop(swim_text, old_credor_weight, swim_debtor_weight)
-    assert swim_lobbyship.credor_weight == old_credor_weight
-    assert swim_lobbyship.debtor_weight == swim_debtor_weight
+    old_credit_score = 3.0
+    swim_debtit_score = 5.0
+    swim_lobbyship = lobbyship_shop(swim_text, old_credit_score, swim_debtit_score)
+    assert swim_lobbyship.credit_score == old_credit_score
+    assert swim_lobbyship.debtit_score == swim_debtit_score
 
     # WHEN
-    new_swim_credor_weight = 44
-    swim_lobbyship.set_credor_weight(new_swim_credor_weight)
+    new_swim_credit_score = 44
+    swim_lobbyship.set_credit_score(new_swim_credit_score)
 
     # THEN
-    assert swim_lobbyship.credor_weight == new_swim_credor_weight
-    assert swim_lobbyship.debtor_weight == swim_debtor_weight
+    assert swim_lobbyship.credit_score == new_swim_credit_score
+    assert swim_lobbyship.debtit_score == swim_debtit_score
 
 
-def test_LobbyShip_set_credor_weight_SetsAttr():
+def test_LobbyShip_set_credit_score_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
-    old_credor_weight = 3.0
-    swim_debtor_weight = 5.0
-    swim_lobbyship = lobbyship_shop(swim_text, old_credor_weight, swim_debtor_weight)
-    assert swim_lobbyship.credor_weight == old_credor_weight
-    assert swim_lobbyship.debtor_weight == swim_debtor_weight
+    old_credit_score = 3.0
+    swim_debtit_score = 5.0
+    swim_lobbyship = lobbyship_shop(swim_text, old_credit_score, swim_debtit_score)
+    assert swim_lobbyship.credit_score == old_credit_score
+    assert swim_lobbyship.debtit_score == swim_debtit_score
 
     # WHEN
-    swim_lobbyship.set_credor_weight(None)
+    swim_lobbyship.set_credit_score(None)
 
     # THEN
-    assert swim_lobbyship.credor_weight == old_credor_weight
-    assert swim_lobbyship.debtor_weight == swim_debtor_weight
+    assert swim_lobbyship.credit_score == old_credit_score
+    assert swim_lobbyship.debtit_score == swim_debtit_score
 
 
-def test_LobbyShip_set_debtor_weight_SetsAttr():
+def test_LobbyShip_set_debtit_score_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credor_weight = 3.0
-    old_debtor_weight = 5.0
-    swim_lobbyship = lobbyship_shop(swim_text, swim_credor_weight, old_debtor_weight)
-    assert swim_lobbyship.credor_weight == swim_credor_weight
-    assert swim_lobbyship.debtor_weight == old_debtor_weight
+    swim_credit_score = 3.0
+    old_debtit_score = 5.0
+    swim_lobbyship = lobbyship_shop(swim_text, swim_credit_score, old_debtit_score)
+    assert swim_lobbyship.credit_score == swim_credit_score
+    assert swim_lobbyship.debtit_score == old_debtit_score
 
     # WHEN
-    new_debtor_weight = 55
-    swim_lobbyship.set_debtor_weight(new_debtor_weight)
+    new_debtit_score = 55
+    swim_lobbyship.set_debtit_score(new_debtit_score)
 
     # THEN
-    assert swim_lobbyship.credor_weight == swim_credor_weight
-    assert swim_lobbyship.debtor_weight == new_debtor_weight
+    assert swim_lobbyship.credit_score == swim_credit_score
+    assert swim_lobbyship.debtit_score == new_debtit_score
 
 
-def test_LobbyShip_set_debtor_weight_SetsAttr():
+def test_LobbyShip_set_debtit_score_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credor_weight = 3.0
-    old_debtor_weight = 5.0
-    swim_lobbyship = lobbyship_shop(swim_text, swim_credor_weight, old_debtor_weight)
-    assert swim_lobbyship.credor_weight == swim_credor_weight
-    assert swim_lobbyship.debtor_weight == old_debtor_weight
+    swim_credit_score = 3.0
+    old_debtit_score = 5.0
+    swim_lobbyship = lobbyship_shop(swim_text, swim_credit_score, old_debtit_score)
+    assert swim_lobbyship.credit_score == swim_credit_score
+    assert swim_lobbyship.debtit_score == old_debtit_score
 
     # WHEN
-    swim_lobbyship.set_debtor_weight(None)
+    swim_lobbyship.set_debtit_score(None)
 
     # THEN
-    assert swim_lobbyship.credor_weight == swim_credor_weight
-    assert swim_lobbyship.debtor_weight == old_debtor_weight
+    assert swim_lobbyship.credit_score == swim_credit_score
+    assert swim_lobbyship.debtit_score == old_debtit_score
 
 
 def test_LobbyShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credor_weight = 3.0
-    swim_debtor_weight = 5.0
+    swim_credit_score = 3.0
+    swim_debtit_score = 5.0
     swim_lobbyship = lobbyship_shop(
         lobby_id=swim_text,
-        credor_weight=swim_credor_weight,
-        debtor_weight=swim_debtor_weight,
+        credit_score=swim_credit_score,
+        debtit_score=swim_debtit_score,
     )
 
     print(f"{swim_lobbyship}")
@@ -206,21 +206,21 @@ def test_LobbyShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     assert swim_dict is not None
     assert swim_dict == {
         "lobby_id": swim_lobbyship.lobby_id,
-        "credor_weight": swim_lobbyship.credor_weight,
-        "debtor_weight": swim_lobbyship.debtor_weight,
+        "credit_score": swim_lobbyship.credit_score,
+        "debtit_score": swim_lobbyship.debtit_score,
     }
 
 
 def test_lobbyship_get_from_dict_ReturnsObj():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credor_weight = 3.0
-    swim_debtor_weight = 5.0
+    swim_credit_score = 3.0
+    swim_debtit_score = 5.0
     yao_text = "Yao"
     before_swim_lobbyship = lobbyship_shop(
         lobby_id=swim_text,
-        credor_weight=swim_credor_weight,
-        debtor_weight=swim_debtor_weight,
+        credit_score=swim_credit_score,
+        debtit_score=swim_debtit_score,
         _acct_id=yao_text,
     )
     swim_lobbyship_dict = before_swim_lobbyship.get_dict()
@@ -236,13 +236,13 @@ def test_lobbyship_get_from_dict_ReturnsObj():
 def test_lobbyships_get_from_dict_ReturnsObj():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credor_weight = 3.0
-    swim_debtor_weight = 5.0
+    swim_credit_score = 3.0
+    swim_debtit_score = 5.0
     yao_text = "Yao"
     before_swim_lobbyship = lobbyship_shop(
         lobby_id=swim_text,
-        credor_weight=swim_credor_weight,
-        debtor_weight=swim_debtor_weight,
+        credit_score=swim_credit_score,
+        debtit_score=swim_debtit_score,
         _acct_id=yao_text,
     )
     before_swim_lobbyships_objs = {swim_text: before_swim_lobbyship}
@@ -258,7 +258,7 @@ def test_lobbyships_get_from_dict_ReturnsObj():
     assert after_swim_lobbyships_objs.get(swim_text) == before_swim_lobbyship
 
 
-def test_LobbyShip_reset_fund_give_take_SetsAttrCorrectly():
+def test_LobbyShip_clear_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_lobbyship = lobbyship_shop("Bob")
     bob_lobbyship._fund_give = 0.27
@@ -275,7 +275,7 @@ def test_LobbyShip_reset_fund_give_take_SetsAttrCorrectly():
     assert bob_lobbyship._fund_agenda_ratio_take == 0.533
 
     # WHEN
-    bob_lobbyship.reset_fund_give_take()
+    bob_lobbyship.clear_fund_give_take()
 
     # THEN
     assert bob_lobbyship._fund_give == 0
@@ -290,19 +290,17 @@ def test_LobbyShip_set_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     yao_text = "Yao"
     ohio_text = ",Ohio"
-    ohio_credor_weight = 3.0
-    lobbyships_sum_credor_weight = 60
+    ohio_credit_score = 3.0
+    lobbyships_sum_credit_score = 60
     lobby_fund_give = 0.5
     lobby_fund_agenda_give = 0.98
 
-    ohio_debtor_weight = 13.0
-    lobbyships_sum_debtor_weight = 26.0
+    ohio_debtit_score = 13.0
+    lobbyships_sum_debtit_score = 26.0
     lobby_fund_take = 0.9
     lobby_fund_agenda_take = 0.5151
 
-    ohio_yao_lobbyship = lobbyship_shop(
-        ohio_text, ohio_credor_weight, ohio_debtor_weight
-    )
+    ohio_yao_lobbyship = lobbyship_shop(ohio_text, ohio_credit_score, ohio_debtit_score)
     assert ohio_yao_lobbyship._fund_give is None
     assert ohio_yao_lobbyship._fund_take is None
     assert ohio_yao_lobbyship._fund_agenda_give is None
@@ -310,8 +308,8 @@ def test_LobbyShip_set_fund_give_take_SetsAttrCorrectly():
 
     # WHEN
     ohio_yao_lobbyship.set_fund_give_take(
-        lobbyships_credor_weight_sum=lobbyships_sum_credor_weight,
-        lobbyships_debtor_weight_sum=lobbyships_sum_debtor_weight,
+        lobbyships_credit_score_sum=lobbyships_sum_credit_score,
+        lobbyships_debtit_score_sum=lobbyships_sum_debtit_score,
         lobby_fund_give=lobby_fund_give,
         lobby_fund_take=lobby_fund_take,
         lobby_fund_agenda_give=lobby_fund_agenda_give,

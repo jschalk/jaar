@@ -4,561 +4,561 @@
         "A a ron Jones": {
             "_lobbyships": {
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",OceanVista Apt"
                 },
                 "A a ron Jones": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "A a ron Jones"
                 }
             },
             "acct_id": "A a ron Jones",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "America": {
             "_lobbyships": {
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Family": {
-                    "credor_weight": 6.45,
-                    "debtor_weight": 1,
+                    "credit_score": 6.45,
+                    "debtit_score": 1,
                     "lobby_id": ",Family"
                 },
                 ",Friends": {
-                    "credor_weight": 6.1,
-                    "debtor_weight": 1,
+                    "credit_score": 6.1,
+                    "debtit_score": 1,
                     "lobby_id": ",Friends"
                 },
                 "America": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "America"
                 }
             },
             "acct_id": "America",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Anna": {
             "_lobbyships": {
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Family": {
-                    "credor_weight": 6.2,
-                    "debtor_weight": 1,
+                    "credit_score": 6.2,
+                    "debtit_score": 1,
                     "lobby_id": ",Family"
                 },
                 "Anna": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Anna"
                 }
             },
             "acct_id": "Anna",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Benjamin Stoddert": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Benjamin Stoddert": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Benjamin Stoddert"
                 }
             },
             "acct_id": "Benjamin Stoddert",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Bob302": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 6.25,
-                    "debtor_weight": 1,
+                    "credit_score": 6.25,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",appreciates US DOLLAR": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Bob302": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Bob302"
                 }
             },
             "acct_id": "Bob302",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Chuck Lee": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Chuck Lee": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Chuck Lee"
                 }
             },
             "acct_id": "Chuck Lee",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Ernesto Chavez": {
             "_lobbyships": {
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "credor_weight": 6.5,
-                    "debtor_weight": 1,
+                    "credit_score": 6.5,
+                    "debtit_score": 1,
                     "lobby_id": ",Philosophy"
                 },
                 "Ernesto Chavez": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Ernesto Chavez"
                 }
             },
             "acct_id": "Ernesto Chavez",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Jacque Chirac": {
             "_lobbyships": {
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",OceanVista Apt"
                 },
                 "Jacque Chirac": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Jacque Chirac"
                 }
             },
             "acct_id": "Jacque Chirac",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Jane Randolph": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Jane Randolph": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Jane Randolph"
                 }
             },
             "acct_id": "Jane Randolph",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Maria Reynolds": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 6.75,
-                    "debtor_weight": 1,
+                    "credit_score": 6.75,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Maria Reynolds": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Maria Reynolds"
                 }
             },
             "acct_id": "Maria Reynolds",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Martha Doubs": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Martha Doubs": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Martha Doubs"
                 }
             },
             "acct_id": "Martha Doubs",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Mikayla": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 10,
-                    "debtor_weight": 1,
+                    "credit_score": 10,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Philosophy"
                 },
                 "Mikayla": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Mikayla"
                 }
             },
             "acct_id": "Mikayla",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Norberto": {
             "_lobbyships": {
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",OceanVista Apt"
                 },
                 "Norberto": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Norberto"
                 }
             },
             "acct_id": "Norberto",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Perrison": {
             "_lobbyships": {
                 ",appreciates US DOLLAR": {
-                    "credor_weight": 5,
-                    "debtor_weight": 1,
+                    "credit_score": 5,
+                    "debtit_score": 1,
                     "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Friends": {
-                    "credor_weight": 6.4,
-                    "debtor_weight": 1,
+                    "credit_score": 6.4,
+                    "debtit_score": 1,
                     "lobby_id": ",Friends"
                 },
                 "Perrison": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Perrison"
                 }
             },
             "acct_id": "Perrison",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Philipa": {
             "_lobbyships": {
                 ",Climate Death": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "credor_weight": 52,
-                    "debtor_weight": 1,
+                    "credit_score": 52,
+                    "debtit_score": 1,
                     "lobby_id": ",Philosophy"
                 },
                 "Philipa": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Philipa"
                 }
             },
             "acct_id": "Philipa",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Prashant": {
             "_lobbyships": {
                 ",appreciates US DOLLAR": {
-                    "credor_weight": 2,
-                    "debtor_weight": 1,
+                    "credit_score": 2,
+                    "debtit_score": 1,
                     "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Prashant": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Prashant"
                 }
             },
             "acct_id": "Prashant",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Renee Elise Goldsberry": {
             "_lobbyships": {
                 ",appreciates US DOLLAR": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",appreciates US DOLLAR"
                 },
                 ",Climate Death": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Friends": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Friends"
                 },
                 ",hurt by us dollar": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",hurt by us dollar"
                 },
                 ",People who identify by UTEP": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",People who identify by UTEP"
                 },
                 ",Philosophy": {
-                    "credor_weight": 3,
-                    "debtor_weight": 1,
+                    "credit_score": 3,
+                    "debtit_score": 1,
                     "lobby_id": ",Philosophy"
                 },
                 ",SHOW ME2": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",SHOW ME2"
                 },
                 "Renee Elise Goldsberry": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Renee Elise Goldsberry"
                 }
             },
             "acct_id": "Renee Elise Goldsberry",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Sam zamora": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Sam zamora": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Sam zamora"
                 }
             },
             "acct_id": "Sam zamora",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Shadwell Harris": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Shadwell Harris": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Shadwell Harris"
                 }
             },
             "acct_id": "Shadwell Harris",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Thomas OSU": {
             "_lobbyships": {
                 ",Climate Death": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "Thomas OSU": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Thomas OSU"
                 }
             },
             "acct_id": "Thomas OSU",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "Travis Fox": {
             "_lobbyships": {
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 ",Family": {
-                    "credor_weight": 6.35,
-                    "debtor_weight": 1,
+                    "credit_score": 6.35,
+                    "debtit_score": 1,
                     "lobby_id": ",Family"
                 },
                 "Travis Fox": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "Travis Fox"
                 }
             },
             "acct_id": "Travis Fox",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         },
         "WIlliam Wallace": {
             "_lobbyships": {
                 ",ACME DevOps": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": ",Everyone"
                 },
                 "WIlliam Wallace": {
-                    "credor_weight": 1,
-                    "debtor_weight": 1,
+                    "credit_score": 1,
+                    "debtit_score": 1,
                     "lobby_id": "WIlliam Wallace"
                 }
             },
             "acct_id": "WIlliam Wallace",
-            "credor_weight": 1,
-            "debtor_weight": 1
+            "credit_score": 1,
+            "debtit_score": 1
         }
     },
     "_idearoot": {

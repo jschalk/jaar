@@ -11,11 +11,11 @@
             "normal_table_name": "lobbyship"
         },
         "optional_args": {
-            "credor_weight": {
+            "credit_score": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "debtor_weight": {
+            "debtit_score": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
@@ -47,11 +47,11 @@
             "normal_table_name": "acctunit"
         },
         "optional_args": {
-            "credor_weight": {
+            "credit_score": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "debtor_weight": {
+            "debtit_score": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }

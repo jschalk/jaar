@@ -2,26 +2,26 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.listen.listen import (
     generate_ingest_list,
-    _allocate_irrational_debtor_weight,
+    _allocate_irrational_debtit_score,
     generate_perspective_agenda,
 )
 
 
-def test_allocate_irrational_debtor_weight_CorrectlySetsBudAttr():
+def test_allocate_irrational_debtit_score_CorrectlySetsBudAttr():
     yao_text = "Yao"
     zia_text = "Zia"
-    zia_credor_weight = 47
-    zia_debtor_weight = 41
+    zia_credit_score = 47
+    zia_debtit_score = 41
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_acctunit(zia_text, zia_credor_weight, zia_debtor_weight)
+    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    assert zia_acctunit._irrational_debtor_weight == 0
+    assert zia_acctunit._irrational_debtit_score == 0
 
     # WHEN
-    _allocate_irrational_debtor_weight(yao_bud, zia_text)
+    _allocate_irrational_debtit_score(yao_bud, zia_text)
 
     # THEN
-    assert zia_acctunit._irrational_debtor_weight == zia_debtor_weight
+    assert zia_acctunit._irrational_debtit_score == zia_debtit_score
 
 
 def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():

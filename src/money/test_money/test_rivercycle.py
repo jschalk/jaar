@@ -145,14 +145,14 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     yao_text = "Yao"
     bob_text = "Bob"
     zia_text = "Zia"
-    yao_credor_weight = 7
-    bob_credor_weight = 3
-    zia_credor_weight = 10
+    yao_credit_score = 7
+    bob_credit_score = 3
+    zia_credit_score = 10
     yao_hubunit = hubunit_shop(None, None, yao_text)
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_acctunit(yao_text, yao_credor_weight)
-    yao_bud.add_acctunit(bob_text, bob_credor_weight)
-    yao_bud.add_acctunit(zia_text, zia_credor_weight)
+    yao_bud.add_acctunit(yao_text, yao_credit_score)
+    yao_bud.add_acctunit(bob_text, bob_credit_score)
+    yao_bud.add_acctunit(zia_text, zia_credit_score)
     yao_credorledger = get_credorledger(yao_bud)
     econ_credorledgers = {yao_text: yao_credorledger}
     print(f"{econ_credorledgers=}")

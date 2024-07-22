@@ -41,12 +41,12 @@ class RiverRun:
         self.cycle_max = get_positive_int(x_cycle_max)
 
     def set_econ_credorledger(
-        self, owner_id: OwnerID, acct_id: AcctID, acct_credor_weight: float
+        self, owner_id: OwnerID, acct_id: AcctID, acct_credit_score: float
     ):
         place_obj_in_dict(
             x_dict=self.econ_credorledgers,
             x_keylist=[owner_id, acct_id],
-            x_obj=acct_credor_weight,
+            x_obj=acct_credit_score,
         )
 
     def delete_econ_credorledgers_owner(self, owner_id: OwnerID):

@@ -7,22 +7,22 @@ def test_AcctUnit_set_lobbyship_SetsAttr_lobbyships():
     # ESTABLISH
     run_text = ",run"
     yao_text = "Yao"
-    run_credor_weight = 66
-    run_debtor_weight = 85
+    run_credit_score = 66
+    run_debtit_score = 85
     yao_acctunit = acctunit_shop(yao_text)
     assert yao_acctunit._lobbyships == {}
 
     # WHEN
     yao_acctunit.set_lobbyship(
-        lobbyship_shop(run_text, run_credor_weight, run_debtor_weight)
+        lobbyship_shop(run_text, run_credit_score, run_debtit_score)
     )
 
     # THEN
     assert len(yao_acctunit._lobbyships) == 1
     run_lobbyship = yao_acctunit._lobbyships.get(run_text)
     assert run_lobbyship.lobby_id == run_text
-    assert run_lobbyship.credor_weight == run_credor_weight
-    assert run_lobbyship.debtor_weight == run_debtor_weight
+    assert run_lobbyship.credit_score == run_credit_score
+    assert run_lobbyship.debtit_score == run_debtit_score
     assert run_lobbyship._acct_id == yao_text
 
 
@@ -30,8 +30,8 @@ def test_AcctUnit_set_lobbyship_SetsMultipleAttr():
     # ESTABLISH
     run_text = ",run"
     fly_text = ",fly"
-    run_lobbyship = lobbyship_shop(run_text, credor_weight=13, debtor_weight=7)
-    fly_lobbyship = lobbyship_shop(fly_text, credor_weight=23, debtor_weight=5)
+    run_lobbyship = lobbyship_shop(run_text, credit_score=13, debtit_score=7)
+    fly_lobbyship = lobbyship_shop(fly_text, credit_score=23, debtit_score=5)
     yao_acctunit = acctunit_shop("Yao")
     assert yao_acctunit._lobbyships == {}
 
@@ -171,19 +171,19 @@ def test_AcctUnit_clear_lobbyships_SetsAttrCorrectly():
 def test_AcctUnit_add_lobbyship_SetsAttrCorrectly():
     # ESTABLISH
     run_text = ",run"
-    run_credor_weight = 78
-    run_debtor_weight = 99
+    run_credit_score = 78
+    run_debtit_score = 99
     yao_acctunit = acctunit_shop("Yao")
     assert yao_acctunit.get_lobbyship(run_text) is None
 
     # WHEN
-    yao_acctunit.add_lobbyship(run_text, run_credor_weight, run_debtor_weight)
+    yao_acctunit.add_lobbyship(run_text, run_credit_score, run_debtit_score)
 
     # THEN
     assert yao_acctunit.get_lobbyship(run_text) is not None
     run_lobbyship = yao_acctunit.get_lobbyship(run_text)
-    assert run_lobbyship.credor_weight == run_credor_weight
-    assert run_lobbyship.debtor_weight == run_debtor_weight
+    assert run_lobbyship.credit_score == run_credit_score
+    assert run_lobbyship.debtit_score == run_debtit_score
 
 
 def test_AcctUnit_set_credor_pool_SetAttr():
@@ -216,11 +216,11 @@ def test_AcctUnit_set_credor_pool_Sets_lobbyships():
     # ESTABLISH
     ohio_text = ",Ohio"
     iowa_text = ",Iowa"
-    sue_credor_weight = 1
-    yao_credor_weight = 4
+    sue_credit_score = 1
+    yao_credit_score = 4
     bob_acctunit = acctunit_shop("Bob")
-    bob_acctunit.add_lobbyship(ohio_text, sue_credor_weight)
-    bob_acctunit.add_lobbyship(iowa_text, yao_credor_weight)
+    bob_acctunit.add_lobbyship(ohio_text, sue_credit_score)
+    bob_acctunit.add_lobbyship(iowa_text, yao_credit_score)
     assert bob_acctunit._credor_pool == 0
     sue_lobbyship = bob_acctunit.get_lobbyship(ohio_text)
     yao_lobbyship = bob_acctunit.get_lobbyship(iowa_text)
@@ -241,11 +241,11 @@ def test_AcctUnit_set_debtor_pool_Sets_lobbyships():
     # ESTABLISH
     ohio_text = ",Ohio"
     iowa_text = ",Iowa"
-    sue_debtor_weight = 1
-    yao_debtor_weight = 4
+    sue_debtit_score = 1
+    yao_debtit_score = 4
     bob_acctunit = acctunit_shop("Bob")
-    bob_acctunit.add_lobbyship(ohio_text, 2, sue_debtor_weight)
-    bob_acctunit.add_lobbyship(iowa_text, 2, yao_debtor_weight)
+    bob_acctunit.add_lobbyship(ohio_text, 2, sue_debtit_score)
+    bob_acctunit.add_lobbyship(iowa_text, 2, yao_debtit_score)
     assert bob_acctunit._debtor_pool == 0
     sue_lobbyship = bob_acctunit.get_lobbyship(ohio_text)
     yao_lobbyship = bob_acctunit.get_lobbyship(iowa_text)
