@@ -403,8 +403,8 @@ class BudUnit:
         for x_acctunit in self._accts.values():
             x_membership = membership_shop(
                 group_id=x_group_id,
-                credit_score=x_acctunit.credit_score,
-                debtit_score=x_acctunit.debtit_score,
+                credit_weight=x_acctunit.credit_score,
+                debtit_weight=x_acctunit.debtit_score,
                 _acct_id=x_acctunit.acct_id,
             )
             x_groupbox.set_membership(x_membership)

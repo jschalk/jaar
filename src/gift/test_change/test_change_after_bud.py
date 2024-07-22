@@ -234,8 +234,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership()
     yao_atomunit = atomunit_shop("bud_acct_membership", atom_insert())
     yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
-    yao_run_credit_score = 17
-    yao_atomunit.set_optional_arg("credit_score", yao_run_credit_score)
+    yao_run_credit_weight = 17
+    yao_atomunit.set_optional_arg("credit_weight", yao_run_credit_weight)
     print(f"{yao_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
@@ -247,7 +247,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership()
     after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
     after_yao_run_membership = after_yao_acctunit.get_membership(run_text)
     assert after_yao_run_membership is not None
-    assert after_yao_run_membership.credit_score == yao_run_credit_score
+    assert after_yao_run_membership.credit_weight == yao_run_credit_weight
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership():
@@ -258,20 +258,20 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership()
     before_sue_budunit.add_acctunit(yao_text)
     before_yao_acctunit = before_sue_budunit.get_acct(yao_text)
     run_text = ",runners"
-    old_yao_run_credit_score = 3
-    before_yao_acctunit.add_membership(run_text, old_yao_run_credit_score)
+    old_yao_run_credit_weight = 3
+    before_yao_acctunit.add_membership(run_text, old_yao_run_credit_weight)
     yao_run_membership = before_yao_acctunit.get_membership(run_text)
-    assert yao_run_membership.credit_score == old_yao_run_credit_score
-    assert yao_run_membership.debtit_score == 1
+    assert yao_run_membership.credit_weight == old_yao_run_credit_weight
+    assert yao_run_membership.debtit_weight == 1
 
     # WHEN
     yao_atomunit = atomunit_shop("bud_acct_membership", atom_update())
     yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
-    new_yao_run_credit_score = 7
-    new_yao_run_debtit_score = 11
-    yao_atomunit.set_optional_arg("credit_score", new_yao_run_credit_score)
-    yao_atomunit.set_optional_arg("debtit_score", new_yao_run_debtit_score)
+    new_yao_run_credit_weight = 7
+    new_yao_run_debtit_weight = 11
+    yao_atomunit.set_optional_arg("credit_weight", new_yao_run_credit_weight)
+    yao_atomunit.set_optional_arg("debtit_weight", new_yao_run_debtit_weight)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
@@ -279,8 +279,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership()
     # THEN
     after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
     after_yao_run_membership = after_yao_acctunit.get_membership(run_text)
-    assert after_yao_run_membership.credit_score == new_yao_run_credit_score
-    assert after_yao_run_membership.debtit_score == new_yao_run_debtit_score
+    assert after_yao_run_membership.credit_weight == new_yao_run_credit_weight
+    assert after_yao_run_membership.debtit_weight == new_yao_run_debtit_weight
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_ideaunit():

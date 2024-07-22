@@ -49,6 +49,14 @@ def credit_score_str() -> str:
     return "credit_score"
 
 
+def debtit_weight_str() -> str:
+    return "debtit_weight"
+
+
+def credit_weight_str() -> str:
+    return "credit_weight"
+
+
 def parent_road_str() -> str:
     return "parent_road"
 
@@ -214,8 +222,8 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
                 x_budunit._owner_id,
                 x_atomunit.get_value(acct_id_str()),
                 x_atomunit.get_value(group_id_str()),
-                x_atomunit.get_value(credit_score_str()),
-                x_atomunit.get_value(debtit_score_str()),
+                x_atomunit.get_value(credit_weight_str()),
+                x_atomunit.get_value(debtit_weight_str()),
             ]
             for x_atomunit in sorted_atomunits
         ]

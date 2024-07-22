@@ -5,10 +5,10 @@
             "column_order": 2,
             "sort_order": 0
         },
-        "credit_score": {
+        "credit_weight": {
             "column_order": 4
         },
-        "debtit_score": {
+        "debtit_weight": {
             "column_order": 5
         },
         "group_id": {

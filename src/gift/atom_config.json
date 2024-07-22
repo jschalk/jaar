@@ -11,11 +11,11 @@
             "normal_table_name": "membership"
         },
         "optional_args": {
-            "credit_score": {
+            "credit_weight": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "debtit_score": {
+            "debtit_weight": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
@@ -143,16 +143,16 @@
             "atom_order": 13
         }
     },
-    "bud_idea_healerhold": {
+    "bud_idea_grouphold": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 20
+            "atom_order": 19
         },
         "INSERT": {
-            "atom_order": 5
+            "atom_order": 4
         },
         "normal_specs": {
-            "normal_table_name": "healerhold"
+            "normal_table_name": "grouphold"
         },
         "optional_args": {},
         "required_args": {
@@ -167,16 +167,16 @@
         },
         "treasury_only": false
     },
-    "bud_idea_grouphold": {
+    "bud_idea_healerhold": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 19
+            "atom_order": 20
         },
         "INSERT": {
-            "atom_order": 4
+            "atom_order": 5
         },
         "normal_specs": {
-            "normal_table_name": "grouphold"
+            "normal_table_name": "healerhold"
         },
         "optional_args": {},
         "required_args": {
@@ -295,6 +295,10 @@
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
+            "_mass": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
             "_numeric_road": {
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -313,10 +317,6 @@
             },
             "_reest": {
                 "python_type": "bool",
-                "sqlite_datatype": "INTEGER"
-            },
-            "_mass": {
-                "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
@@ -349,14 +349,6 @@
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_coin": {
-                "python_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_fund_pool": {
-                "python_type": "float",
-                "sqlite_datatype": "REAL"
-            },
             "_credor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
@@ -364,6 +356,14 @@
             "_debtor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
+            },
+            "_fund_coin": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_pool": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "_max_tree_traverse": {
                 "python_type": "int",

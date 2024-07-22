@@ -49,8 +49,8 @@ def test_BudUnit_set_acct_DoesSet_acct_id_membership():
     # THEN
     zia_zia_membership = yao_bud.get_acct(zia_text).get_membership(zia_text)
     assert zia_zia_membership is not None
-    assert zia_zia_membership.credit_score == 1
-    assert zia_zia_membership.debtit_score == 1
+    assert zia_zia_membership.credit_weight == 1
+    assert zia_zia_membership.debtit_weight == 1
 
 
 def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
@@ -70,8 +70,8 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
     # THEN
     zia_ohio_membership = yao_bud.get_acct(zia_text).get_membership(ohio_text)
     assert zia_ohio_membership is not None
-    assert zia_ohio_membership.credit_score == zia_ohio_credor_w
-    assert zia_ohio_membership.debtit_score == zia_ohio_debtor_w
+    assert zia_ohio_membership.credit_weight == zia_ohio_credor_w
+    assert zia_ohio_membership.debtit_weight == zia_ohio_debtor_w
     zia_zia_membership = yao_bud.get_acct(zia_text).get_membership(zia_text)
     assert zia_zia_membership is None
 
@@ -121,10 +121,10 @@ def test_BudUnit_set_acct_Creates_membership():
     yao_bud.add_acctunit(zia_text, before_zia_credor, before_zia_debtor)
     zia_acctunit = yao_bud.get_acct(zia_text)
     zia_membership = zia_acctunit.get_membership(zia_text)
-    assert zia_membership.credit_score != before_zia_credor
-    assert zia_membership.debtit_score != before_zia_debtor
-    assert zia_membership.credit_score == 1
-    assert zia_membership.debtit_score == 1
+    assert zia_membership.credit_weight != before_zia_credor
+    assert zia_membership.debtit_weight != before_zia_debtor
+    assert zia_membership.credit_weight == 1
+    assert zia_membership.debtit_weight == 1
 
     # WHEN
     after_zia_credor = 11
@@ -132,10 +132,10 @@ def test_BudUnit_set_acct_Creates_membership():
     yao_bud.set_acctunit(acctunit_shop(zia_text, after_zia_credor, after_zia_debtor))
 
     # THEN
-    assert zia_membership.credit_score != after_zia_credor
-    assert zia_membership.debtit_score != after_zia_debtor
-    assert zia_membership.credit_score == 1
-    assert zia_membership.debtit_score == 1
+    assert zia_membership.credit_weight != after_zia_credor
+    assert zia_membership.debtit_weight != after_zia_debtor
+    assert zia_membership.credit_weight == 1
+    assert zia_membership.debtit_weight == 1
 
 
 def test_BudUnit_edit_acct_RaiseExceptionWhenAcctDoesNotExist():

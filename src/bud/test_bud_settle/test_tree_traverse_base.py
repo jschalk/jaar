@@ -480,10 +480,10 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     assert not xio_groupbox.membership_exists(xio_text)
     yao_membership = xio_groupbox.get_membership(yao_text)
     zia_membership = xio_groupbox.get_membership(zia_text)
-    assert yao_membership.credit_score == yao_credit_score
-    assert zia_membership.credit_score == zia_credit_score
-    assert yao_membership.debtit_score == yao_debtit_score
-    assert zia_membership.debtit_score == zia_debtit_score
+    assert yao_membership.credit_weight == yao_credit_score
+    assert zia_membership.credit_weight == zia_credit_score
+    assert yao_membership.debtit_weight == yao_debtit_score
+    assert zia_membership.debtit_weight == zia_debtit_score
 
 
 def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():

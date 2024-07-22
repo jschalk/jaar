@@ -286,13 +286,13 @@ class ChangeUnit:
             x_atomunit = atomunit_shop("bud_acct_membership", atom_insert())
             x_atomunit.set_required_arg("acct_id", after_acct_id)
             x_atomunit.set_required_arg("group_id", after_membership.group_id)
-            if after_membership.credit_score is not None:
+            if after_membership.credit_weight is not None:
                 x_atomunit.set_optional_arg(
-                    "credit_score", after_membership.credit_score
+                    "credit_weight", after_membership.credit_weight
                 )
-            if after_membership.debtit_score is not None:
+            if after_membership.debtit_weight is not None:
                 x_atomunit.set_optional_arg(
-                    "debtit_score", after_membership.debtit_score
+                    "debtit_weight", after_membership.debtit_weight
                 )
             self.set_atomunit(x_atomunit)
 
@@ -305,10 +305,10 @@ class ChangeUnit:
         x_atomunit = atomunit_shop("bud_acct_membership", atom_update())
         x_atomunit.set_required_arg("acct_id", acct_id)
         x_atomunit.set_required_arg("group_id", after_membership.group_id)
-        if after_membership.credit_score != before_membership.credit_score:
-            x_atomunit.set_optional_arg("credit_score", after_membership.credit_score)
-        if after_membership.debtit_score != before_membership.debtit_score:
-            x_atomunit.set_optional_arg("debtit_score", after_membership.debtit_score)
+        if after_membership.credit_weight != before_membership.credit_weight:
+            x_atomunit.set_optional_arg("credit_weight", after_membership.credit_weight)
+        if after_membership.debtit_weight != before_membership.debtit_weight:
+            x_atomunit.set_optional_arg("debtit_weight", after_membership.debtit_weight)
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_memberships_delete(

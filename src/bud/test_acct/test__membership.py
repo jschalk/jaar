@@ -41,8 +41,8 @@ def test_MemberShip_exists():
 
     # THEN
     assert swim_membership.group_id == swim_text
-    assert swim_membership.credit_score == 1.0
-    assert swim_membership.debtit_score == 1.0
+    assert swim_membership.credit_weight == 1.0
+    assert swim_membership.debtit_weight == 1.0
     assert swim_membership._credor_pool is None
     assert swim_membership._debtor_pool is None
     assert swim_membership._fund_give is None
@@ -57,19 +57,19 @@ def test_MemberShip_exists():
 def test_membership_shop_ReturnsCorrectObj():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credit_score = 3.0
-    swim_debtit_score = 5.0
+    swim_credit_weight = 3.0
+    swim_debtit_weight = 5.0
 
     # WHEN
     swim_membership = membership_shop(
         group_id=swim_text,
-        credit_score=swim_credit_score,
-        debtit_score=swim_debtit_score,
+        credit_weight=swim_credit_weight,
+        debtit_weight=swim_debtit_weight,
     )
 
     # THEN
-    assert swim_membership.credit_score == swim_credit_score
-    assert swim_membership.debtit_score == swim_debtit_score
+    assert swim_membership.credit_weight == swim_credit_weight
+    assert swim_membership.debtit_weight == swim_debtit_weight
     assert swim_membership._credor_pool == 0
     assert swim_membership._debtor_pool == 0
     assert swim_membership._fund_give is None
@@ -110,85 +110,85 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
 #     )
 
 
-def test_MemberShip_set_credit_score_SetsAttr():
+def test_MemberShip_set_credit_weight_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
-    old_credit_score = 3.0
-    swim_debtit_score = 5.0
-    swim_membership = membership_shop(swim_text, old_credit_score, swim_debtit_score)
-    assert swim_membership.credit_score == old_credit_score
-    assert swim_membership.debtit_score == swim_debtit_score
+    old_credit_weight = 3.0
+    swim_debtit_weight = 5.0
+    swim_membership = membership_shop(swim_text, old_credit_weight, swim_debtit_weight)
+    assert swim_membership.credit_weight == old_credit_weight
+    assert swim_membership.debtit_weight == swim_debtit_weight
 
     # WHEN
-    new_swim_credit_score = 44
-    swim_membership.set_credit_score(new_swim_credit_score)
+    new_swim_credit_weight = 44
+    swim_membership.set_credit_weight(new_swim_credit_weight)
 
     # THEN
-    assert swim_membership.credit_score == new_swim_credit_score
-    assert swim_membership.debtit_score == swim_debtit_score
+    assert swim_membership.credit_weight == new_swim_credit_weight
+    assert swim_membership.debtit_weight == swim_debtit_weight
 
 
-def test_MemberShip_set_credit_score_HandlesNoneParameter():
+def test_MemberShip_set_credit_weight_HandlesNoneParameter():
     # ESTABLISH
     swim_text = ",swim"
-    old_credit_score = 3.0
-    swim_debtit_score = 5.0
-    swim_membership = membership_shop(swim_text, old_credit_score, swim_debtit_score)
-    assert swim_membership.credit_score == old_credit_score
-    assert swim_membership.debtit_score == swim_debtit_score
+    old_credit_weight = 3.0
+    swim_debtit_weight = 5.0
+    swim_membership = membership_shop(swim_text, old_credit_weight, swim_debtit_weight)
+    assert swim_membership.credit_weight == old_credit_weight
+    assert swim_membership.debtit_weight == swim_debtit_weight
 
     # WHEN
-    swim_membership.set_credit_score(None)
+    swim_membership.set_credit_weight(None)
 
     # THEN
-    assert swim_membership.credit_score == old_credit_score
-    assert swim_membership.debtit_score == swim_debtit_score
+    assert swim_membership.credit_weight == old_credit_weight
+    assert swim_membership.debtit_weight == swim_debtit_weight
 
 
-def test_MemberShip_set_debtit_score_SetsAttr():
+def test_MemberShip_set_debtit_weight_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credit_score = 3.0
-    old_debtit_score = 5.0
-    swim_membership = membership_shop(swim_text, swim_credit_score, old_debtit_score)
-    assert swim_membership.credit_score == swim_credit_score
-    assert swim_membership.debtit_score == old_debtit_score
+    swim_credit_weight = 3.0
+    old_debtit_weight = 5.0
+    swim_membership = membership_shop(swim_text, swim_credit_weight, old_debtit_weight)
+    assert swim_membership.credit_weight == swim_credit_weight
+    assert swim_membership.debtit_weight == old_debtit_weight
 
     # WHEN
-    new_debtit_score = 55
-    swim_membership.set_debtit_score(new_debtit_score)
+    new_debtit_weight = 55
+    swim_membership.set_debtit_weight(new_debtit_weight)
 
     # THEN
-    assert swim_membership.credit_score == swim_credit_score
-    assert swim_membership.debtit_score == new_debtit_score
+    assert swim_membership.credit_weight == swim_credit_weight
+    assert swim_membership.debtit_weight == new_debtit_weight
 
 
-def test_MemberShip_set_debtit_score_SetsAttr():
+def test_MemberShip_set_debtit_weight_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credit_score = 3.0
-    old_debtit_score = 5.0
-    swim_membership = membership_shop(swim_text, swim_credit_score, old_debtit_score)
-    assert swim_membership.credit_score == swim_credit_score
-    assert swim_membership.debtit_score == old_debtit_score
+    swim_credit_weight = 3.0
+    old_debtit_weight = 5.0
+    swim_membership = membership_shop(swim_text, swim_credit_weight, old_debtit_weight)
+    assert swim_membership.credit_weight == swim_credit_weight
+    assert swim_membership.debtit_weight == old_debtit_weight
 
     # WHEN
-    swim_membership.set_debtit_score(None)
+    swim_membership.set_debtit_weight(None)
 
     # THEN
-    assert swim_membership.credit_score == swim_credit_score
-    assert swim_membership.debtit_score == old_debtit_score
+    assert swim_membership.credit_weight == swim_credit_weight
+    assert swim_membership.debtit_weight == old_debtit_weight
 
 
 def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credit_score = 3.0
-    swim_debtit_score = 5.0
+    swim_credit_weight = 3.0
+    swim_debtit_weight = 5.0
     swim_membership = membership_shop(
         group_id=swim_text,
-        credit_score=swim_credit_score,
-        debtit_score=swim_debtit_score,
+        credit_weight=swim_credit_weight,
+        debtit_weight=swim_debtit_weight,
     )
 
     print(f"{swim_membership}")
@@ -200,21 +200,21 @@ def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     assert swim_dict is not None
     assert swim_dict == {
         "group_id": swim_membership.group_id,
-        "credit_score": swim_membership.credit_score,
-        "debtit_score": swim_membership.debtit_score,
+        "credit_weight": swim_membership.credit_weight,
+        "debtit_weight": swim_membership.debtit_weight,
     }
 
 
 def test_membership_get_from_dict_ReturnsObj():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credit_score = 3.0
-    swim_debtit_score = 5.0
+    swim_credit_weight = 3.0
+    swim_debtit_weight = 5.0
     yao_text = "Yao"
     before_swim_membership = membership_shop(
         group_id=swim_text,
-        credit_score=swim_credit_score,
-        debtit_score=swim_debtit_score,
+        credit_weight=swim_credit_weight,
+        debtit_weight=swim_debtit_weight,
         _acct_id=yao_text,
     )
     swim_membership_dict = before_swim_membership.get_dict()
@@ -230,13 +230,13 @@ def test_membership_get_from_dict_ReturnsObj():
 def test_memberships_get_from_dict_ReturnsObj():
     # ESTABLISH
     swim_text = ",swim"
-    swim_credit_score = 3.0
-    swim_debtit_score = 5.0
+    swim_credit_weight = 3.0
+    swim_debtit_weight = 5.0
     yao_text = "Yao"
     before_swim_membership = membership_shop(
         group_id=swim_text,
-        credit_score=swim_credit_score,
-        debtit_score=swim_debtit_score,
+        credit_weight=swim_credit_weight,
+        debtit_weight=swim_debtit_weight,
         _acct_id=yao_text,
     )
     before_swim_memberships_objs = {swim_text: before_swim_membership}
