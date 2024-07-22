@@ -19,12 +19,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_SimplestScenario():
 
     # WHEN
     sue_text = "Sue"
-    sue_score = 55
-    before_sue_budunit = budunit_shop(sue_text, _score=sue_score)
+    sue_tally = 55
+    before_sue_budunit = budunit_shop(sue_text, _tally=sue_tally)
     after_sue_budunit = ex1_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    assert after_sue_budunit._score == sue_score
+    assert after_sue_budunit._tally == sue_tally
     assert after_sue_budunit == before_sue_budunit
 
 
@@ -33,13 +33,13 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     sue_changeunit = changeunit_shop()
     sue_text = "Sue"
 
-    sue_score = 44
-    before_sue_budunit = budunit_shop(sue_text, _score=sue_score)
+    sue_tally = 44
+    before_sue_budunit = budunit_shop(sue_text, _tally=sue_tally)
 
     category = "budunit"
     x_atomunit = atomunit_shop(category, atom_update())
     new1_value = 55
-    new1_arg = "_score"
+    new1_arg = "_tally"
     x_atomunit.set_optional_arg(new1_arg, new1_value)
     new2_value = 66
     new2_arg = "_max_tree_traverse"
@@ -74,8 +74,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     assert after_sue_budunit._max_tree_traverse == new2_value
     assert after_sue_budunit._credor_respect == new3_value
     assert after_sue_budunit._debtor_respect == new4_value
-    assert after_sue_budunit._score == new1_value
-    assert after_sue_budunit._score != before_sue_budunit._score
+    assert after_sue_budunit._tally == new1_value
+    assert after_sue_budunit._tally != before_sue_budunit._tally
     assert after_sue_budunit._fund_pool == new9_value
     assert after_sue_budunit._fund_pool != before_sue_budunit._fund_pool
     assert after_sue_budunit._fund_coin == new8_value
@@ -1018,7 +1018,7 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     fly_text = ",flyers"
     yao_acctunit.add_lobbyship(fly_text)
     bob_acctunit.add_lobbyship(fly_text)
-    assert before_sue_budunit._score != 55
+    assert before_sue_budunit._tally != 55
     assert before_sue_budunit._max_tree_traverse != 66
     assert before_sue_budunit._credor_respect != 77
     assert before_sue_budunit._debtor_respect != 88
@@ -1032,7 +1032,7 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     after_sue_budunit = ex1_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    assert after_sue_budunit._score == 55
+    assert after_sue_budunit._tally == 55
     assert after_sue_budunit._max_tree_traverse == 66
     assert after_sue_budunit._credor_respect == 77
     assert after_sue_budunit._debtor_respect == 88

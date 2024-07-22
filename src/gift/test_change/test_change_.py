@@ -38,7 +38,7 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     ex1_changeunit = changeunit_shop()
     attribute_value = 55
     category = "budunit"
-    opt1_arg = "_score"
+    opt1_arg = "_tally"
     optional_args = {opt1_arg: attribute_value}
     required_args = {}
     bud_weight_atomunit = atomunit_shop(
@@ -84,7 +84,7 @@ def test_ChangeUnit_get_atom_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
     budunit_text = "budunit"
-    opt_arg1 = "_score"
+    opt_arg1 = "_tally"
     opt_value = 55
     budunit_atomunit = atomunit_shop(budunit_text, atom_update())
     budunit_atomunit.set_optional_arg(x_key=opt_arg1, x_value=opt_value)
@@ -105,7 +105,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     assert ex1_changeunit.atomunits == {}
 
     # WHEN
-    op2_arg = "_score"
+    op2_arg = "_tally"
     op2_value = 55
     budunit_text = "budunit"
     required_args = {}

@@ -377,7 +377,7 @@
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_score": {
+            "_tally": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }

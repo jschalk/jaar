@@ -54,7 +54,7 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
 
 def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     # ESTABLISH
-    yao_budunit = budunit_shop("Yao", _score=10)
+    yao_budunit = budunit_shop("Yao", _tally=10)
 
     auto_text = "auto"
     auto_road = yao_budunit.make_l1_road(auto_text)

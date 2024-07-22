@@ -153,8 +153,8 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_credor_respect", after_bud._credor_respect)
         if before_bud._debtor_respect != after_bud._debtor_respect:
             x_atomunit.set_optional_arg("_debtor_respect", after_bud._debtor_respect)
-        if before_bud._score != after_bud._score:
-            x_atomunit.set_optional_arg("_score", after_bud._score)
+        if before_bud._tally != after_bud._tally:
+            x_atomunit.set_optional_arg("_tally", after_bud._tally)
         if before_bud._fund_pool != after_bud._fund_pool:
             x_atomunit.set_optional_arg("_fund_pool", after_bud._fund_pool)
         if before_bud._fund_coin != after_bud._fund_coin:

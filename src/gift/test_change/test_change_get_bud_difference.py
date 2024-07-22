@@ -145,7 +145,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    x_budunit_score = 55
+    x_budunit_tally = 55
     x_fund_pool = 8000000
     x_fund_coin = 8
     x_bit = 5
@@ -153,7 +153,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     x_monetary_desc = "dragon dollars"
     x_credor_respect = 770
     x_debtor_respect = 880
-    after_sue_bud._score = x_budunit_score
+    after_sue_bud._tally = x_budunit_tally
     after_sue_bud._fund_pool = x_fund_pool
     after_sue_bud._fund_coin = x_fund_coin
     after_sue_bud._bit = x_bit
@@ -173,7 +173,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     assert xio_atomunit.get_value("_monetary_desc") == x_monetary_desc
     assert xio_atomunit.get_value("_credor_respect") == x_credor_respect
     assert xio_atomunit.get_value("_debtor_respect") == x_debtor_respect
-    assert xio_atomunit.get_value("_score") == x_budunit_score
+    assert xio_atomunit.get_value("_tally") == x_budunit_tally
     assert xio_atomunit.get_value("_fund_pool") == x_fund_pool
     assert xio_atomunit.get_value("_fund_coin") == x_fund_coin
     assert xio_atomunit.get_value("_bit") == x_bit

@@ -4,7 +4,7 @@ from src.bud.bud import budunit_shop
 
 def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
     # ESTABLISH
-    yao_bud = budunit_shop("Yao", _score=10)
+    yao_bud = budunit_shop("Yao", _tally=10)
 
     l1 = "level1"
     yao_bud.set_l1_idea(ideaunit_shop(l1, _weight=30))
@@ -37,7 +37,7 @@ def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
 
 def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario2():
     # ESTABLISH
-    yao_budunit = budunit_shop(_owner_id="Yao", _score=10)
+    yao_budunit = budunit_shop(_owner_id="Yao", _tally=10)
 
     l1 = "level1"
     yao_budunit.set_l1_idea(ideaunit_shop(l1, _weight=30))

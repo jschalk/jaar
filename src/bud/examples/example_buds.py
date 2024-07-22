@@ -54,7 +54,7 @@ def budunit_v002() -> BudUnit:
 
 
 def get_budunit_with_4_levels() -> BudUnit:
-    sue_bud = budunit_shop(_owner_id="Sue", _score=10)
+    sue_bud = budunit_shop(_owner_id="Sue", _tally=10)
 
     casa_text = "casa"
     sue_bud.set_l1_idea(ideaunit_shop(casa_text, _weight=30, pledge=True))
@@ -224,7 +224,7 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
 
 
 def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
-    bob_bud = budunit_shop(_owner_id="Bob", _score=10)
+    bob_bud = budunit_shop(_owner_id="Bob", _tally=10)
     ced_min_label = "CE0_minutes"
     ced_minutes = ideaunit_shop(ced_min_label)
     ced_road = bob_bud.make_l1_road(ced_min_label)
@@ -248,7 +248,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
 
 
 def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
-    zia_bud = budunit_shop(_owner_id="Zia", _score=10)
+    zia_bud = budunit_shop(_owner_id="Zia", _tally=10)
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
     idea_kid_shave = ideaunit_shop(shave_text, _weight=30, pledge=True)
@@ -298,7 +298,7 @@ def get_budunit_irrational_example() -> BudUnit:
     # 1. hatter_bud._irrational == True
     # 2. hatter_bud._tree_traverse_count = hatter_bud._max_tree_traverse
 
-    hatter_bud = budunit_shop(_owner_id="Mad Hatter", _score=10)
+    hatter_bud = budunit_shop(_owner_id="Mad Hatter", _tally=10)
     hatter_bud.set_max_tree_traverse(3)
 
     egg_text = "egg first"
