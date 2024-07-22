@@ -68,7 +68,7 @@ BudUnit objects
 
 BudUnit AcctUnit objects
 
-BudUnit LobbyBox objects
+BudUnit GroupBox objects
 
 BudUnit IdeaUnit objects
 

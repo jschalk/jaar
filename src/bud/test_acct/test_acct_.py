@@ -21,7 +21,7 @@ def test_AcctUnit_exists():
     # calculated fields
     assert bob_acctunit._credor_pool is None
     assert bob_acctunit._debtor_pool is None
-    assert bob_acctunit._lobbyships is None
+    assert bob_acctunit._groupships is None
     assert bob_acctunit._irrational_debtit_score is None
     assert bob_acctunit._inallocable_debtit_score is None
     assert bob_acctunit._fund_give is None
@@ -72,7 +72,7 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     # calculated fields
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
-    assert yao_acctunit._lobbyships == {}
+    assert yao_acctunit._groupships == {}
     assert yao_acctunit._irrational_debtit_score == 0
     assert yao_acctunit._inallocable_debtit_score == 0
     assert yao_acctunit._fund_give == 0
@@ -144,9 +144,11 @@ def test_AcctUnit_set_debtit_score_CorrectlySetsAttribute():
     assert bob_acctunit.debtit_score == x_debtit_score
 
 
-def test_AcctUnit_set_credor_debtit_score_CorrectlySetsAttributeNoNulls():
+def test_AcctUnit_set_credor_debtit_score_SetsAttr_Scenario0():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
+    assert bob_acctunit.credit_score == 1
+    assert bob_acctunit.debtit_score == 1
 
     # WHEN
     bob_acctunit.set_credor_debtit_score(credit_score=23, debtit_score=34)
@@ -156,9 +158,11 @@ def test_AcctUnit_set_credor_debtit_score_CorrectlySetsAttributeNoNulls():
     assert bob_acctunit.debtit_score == 34
 
 
-def test_AcctUnit_set_credor_debtit_score_CorrectlySetsAttributeWithNullsAndStartingValues():
+def test_AcctUnit_set_credor_debtit_score_IgnoresNoneArgs_Scenario0():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob", credit_score=45, debtit_score=56)
+    assert bob_acctunit.credit_score == 45
+    assert bob_acctunit.debtit_score == 56
 
     # WHEN
     bob_acctunit.set_credor_debtit_score(credit_score=None, debtit_score=None)
@@ -168,9 +172,11 @@ def test_AcctUnit_set_credor_debtit_score_CorrectlySetsAttributeWithNullsAndStar
     assert bob_acctunit.debtit_score == 56
 
 
-def test_AcctUnit_set_credor_debtit_score_CorrectlySetsAttributeWithNullsAndNoStartingValues():
+def test_AcctUnit_set_credor_debtit_score_IgnoresNoneArgs_Scenario1():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
+    assert bob_acctunit.credit_score == 1
+    assert bob_acctunit.debtit_score == 1
 
     # WHEN
     bob_acctunit.set_credor_debtit_score(credit_score=None, debtit_score=None)

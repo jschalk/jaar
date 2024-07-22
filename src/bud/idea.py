@@ -15,7 +15,7 @@ from src._road.road import (
     replace_road_delimiter,
     RealID,
     AcctID,
-    LobbyID,
+    GroupID,
     RoadUnit,
     rebuild_road,
     find_replace_road_key_dict,
@@ -43,14 +43,14 @@ from src.bud.reason_idea import (
     reasons_get_from_dict,
     factunits_get_from_dict,
 )
-from src.bud.lobby import (
+from src.bud.group import (
     AwardHeir,
     AwardLink,
     awardlinks_get_from_dict,
     AwardLine,
     awardline_shop,
     awardheir_shop,
-    LobbyBox,
+    GroupBox,
 )
 from src.bud.origin import OriginUnit, originunit_get_from_dict
 from src.bud.origin import originunit_shop
@@ -95,7 +95,7 @@ class IdeaAttrFilter:
     all_acct_cred: bool = None
     all_acct_debt: bool = None
     awardlink: AwardLink = None
-    awardlink_del: LobbyID = None
+    awardlink_del: GroupID = None
     is_expanded: bool = None
     problem_bool: bool = None
 
@@ -181,7 +181,7 @@ def ideaattrfilter_shop(
     all_acct_cred: bool = None,
     all_acct_debt: bool = None,
     awardlink: AwardLink = None,
-    awardlink_del: LobbyID = None,
+    awardlink_del: GroupID = None,
     is_expanded: bool = None,
     problem_bool: bool = None,
 ) -> IdeaAttrFilter:
@@ -231,9 +231,9 @@ class IdeaUnit:
     _kids: dict[RoadUnit,] = None
     _bud_real_id: RealID = None
     _uid: int = None  # Calculated field?
-    _awardlinks: dict[LobbyID, AwardLink] = None
-    _awardheirs: dict[LobbyID, AwardHeir] = None  # Calculated field
-    _awardlines: dict[LobbyID, AwardLine] = None  # Calculated field
+    _awardlinks: dict[GroupID, AwardLink] = None
+    _awardheirs: dict[GroupID, AwardHeir] = None  # Calculated field
+    _awardlines: dict[GroupID, AwardLine] = None  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None  # Calculated field
     _doerunit: DoerUnit = None
@@ -439,49 +439,49 @@ class IdeaUnit:
     def set_parent_road(self, parent_road):
         self._parent_road = parent_road
 
-    def inherit_awardheirs(self, parent_awardheirs: dict[LobbyID, AwardHeir] = None):
+    def inherit_awardheirs(self, parent_awardheirs: dict[GroupID, AwardHeir] = None):
         parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
         self._awardheirs = {}
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
-                lobby_id=ib.lobby_id,
+                group_id=ib.group_id,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.lobby_id] = awardheir
+            self._awardheirs[awardheir.group_id] = awardheir
 
         for ib in self._awardlinks.values():
             awardheir = awardheir_shop(
-                lobby_id=ib.lobby_id,
+                group_id=ib.group_id,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.lobby_id] = awardheir
+            self._awardheirs[awardheir.group_id] = awardheir
 
     def set_kidless_awardlines(self):
         # get awardlines from self
         for bh in self._awardheirs.values():
             x_awardline = awardline_shop(
-                lobby_id=bh.lobby_id,
+                group_id=bh.group_id,
                 _fund_give=bh._fund_give,
                 _fund_take=bh._fund_take,
             )
-            self._awardlines[x_awardline.lobby_id] = x_awardline
+            self._awardlines[x_awardline.group_id] = x_awardline
 
-    def set_awardlines(self, child_awardlines: dict[LobbyID, AwardLine] = None):
+    def set_awardlines(self, child_awardlines: dict[GroupID, AwardLine] = None):
         if child_awardlines is None:
             child_awardlines = {}
 
         # get awardlines from child
         for bl in child_awardlines.values():
-            if self._awardlines.get(bl.lobby_id) is None:
-                self._awardlines[bl.lobby_id] = awardline_shop(
-                    lobby_id=bl.lobby_id,
+            if self._awardlines.get(bl.group_id) is None:
+                self._awardlines[bl.group_id] = awardline_shop(
+                    group_id=bl.group_id,
                     _fund_give=0,
                     _fund_take=0,
                 )
 
-            self._awardlines[bl.lobby_id].add_fund_give_take(
+            self._awardlines[bl.group_id].add_fund_give_take(
                 fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
@@ -489,15 +489,15 @@ class IdeaUnit:
         # TODO retire upper process and use allot scale
         credit_ledger = {}
         debtit_ledger = {}
-        for x_lobby_id, x_awardheir in self._awardheirs.items():
-            credit_ledger[x_lobby_id] = x_awardheir.give_force
-            debtit_ledger[x_lobby_id] = x_awardheir.take_force
+        for x_group_id, x_awardheir in self._awardheirs.items():
+            credit_ledger[x_group_id] = x_awardheir.give_force
+            debtit_ledger[x_group_id] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
         credit_allot = allot_scale(credit_ledger, x_fund_share, self._fund_coin)
         debtit_allot = allot_scale(debtit_ledger, x_fund_share, self._fund_coin)
-        for x_lobby_id, x_awardheir in self._awardheirs.items():
-            x_awardheir._fund_give = credit_allot.get(x_lobby_id)
-            x_awardheir._fund_take = debtit_allot.get(x_lobby_id)
+        for x_group_id, x_awardheir in self._awardheirs.items():
+            x_awardheir._fund_give = credit_allot.get(x_group_id)
+            x_awardheir._fund_take = debtit_allot.get(x_group_id)
 
     def clear_awardlines(self):
         self._awardlines = {}
@@ -632,7 +632,7 @@ class IdeaUnit:
         if idea_attr.awardlink is not None:
             self.set_awardlink(awardlink=idea_attr.awardlink)
         if idea_attr.awardlink_del is not None:
-            self.del_awardlink(lobby_id=idea_attr.awardlink_del)
+            self.del_awardlink(group_id=idea_attr.awardlink_del)
         if idea_attr.is_expanded is not None:
             self._is_expanded = idea_attr.is_expanded
         if idea_attr.pledge is not None:
@@ -740,13 +740,13 @@ class IdeaUnit:
         return sum(x_kid._mass for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
-        self._awardlinks[awardlink.lobby_id] = awardlink
+        self._awardlinks[awardlink.group_id] = awardlink
 
-    def del_awardlink(self, lobby_id: LobbyID):
+    def del_awardlink(self, group_id: GroupID):
         try:
-            self._awardlinks.pop(lobby_id)
+            self._awardlinks.pop(group_id)
         except KeyError as e:
-            raise (f"Cannot delete awardlink '{lobby_id}'.") from e
+            raise (f"Cannot delete awardlink '{group_id}'.") from e
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.delimiter = self._road_delimiter
@@ -763,11 +763,11 @@ class IdeaUnit:
     def set_active(
         self,
         tree_traverse_count: int,
-        bud_lobbyboxs: dict[LobbyID, LobbyBox] = None,
+        bud_groupboxs: dict[GroupID, GroupBox] = None,
         bud_owner_id: AcctID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active(bud_lobbyboxs, bud_owner_id)
+        self._active = self._create_active(bud_groupboxs, bud_owner_id)
         self._set_idea_task()
         self.record_active_hx(
             tree_traverse_count=tree_traverse_count,
@@ -787,17 +787,17 @@ class IdeaUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active(
-        self, bud_lobbyboxs: dict[LobbyID, LobbyBox], bud_owner_id: AcctID
+        self, bud_groupboxs: dict[GroupID, GroupBox], bud_owner_id: AcctID
     ) -> bool:
         self.set_reasonheirs_status()
         x_bool = self._are_all_reasonheir_active_true()
         if (
             x_bool
-            and bud_lobbyboxs != {}
+            and bud_groupboxs != {}
             and bud_owner_id is not None
-            and self._doerheir._lobbyholds != {}
+            and self._doerheir._groupholds != {}
         ):
-            self._doerheir.set_owner_id_doer(bud_lobbyboxs, bud_owner_id)
+            self._doerheir.set_owner_id_doer(bud_groupboxs, bud_owner_id)
             if self._doerheir._owner_id_doer is False:
                 x_bool = False
         return x_bool
@@ -858,8 +858,8 @@ class IdeaUnit:
 
     def get_awardlinks_dict(self):
         return {
-            x_lobby_id: awardlink.get_dict()
-            for x_lobby_id, awardlink in self._awardlinks.items()
+            x_group_id: awardlink.get_dict()
+            for x_group_id, awardlink in self._awardlinks.items()
         }
 
     def is_kidless(self):
@@ -942,13 +942,13 @@ class IdeaUnit:
     def set_doerheir(
         self,
         parent_doerheir: DoerHeir,
-        bud_lobbyboxs: dict[LobbyID, LobbyBox],
+        bud_groupboxs: dict[GroupID, GroupBox],
     ):
         self._doerheir = doerheir_shop()
-        self._doerheir.set_lobbyholds(
+        self._doerheir.set_groupholds(
             parent_doerheir=parent_doerheir,
             doerunit=self._doerunit,
-            bud_lobbyboxs=bud_lobbyboxs,
+            bud_groupboxs=bud_groupboxs,
         )
 
     def get_doerunit_dict(self):
@@ -961,9 +961,9 @@ def ideaunit_shop(
     _parent_road: RoadUnit = None,
     _kids: dict = None,
     _mass: int = 1,
-    _awardlinks: dict[LobbyID, AwardLink] = None,
-    _awardheirs: dict[LobbyID, AwardHeir] = None,  # Calculated field
-    _awardlines: dict[LobbyID, AwardLink] = None,  # Calculated field
+    _awardlinks: dict[GroupID, AwardLink] = None,
+    _awardheirs: dict[GroupID, AwardHeir] = None,  # Calculated field
+    _awardlines: dict[GroupID, AwardLink] = None,  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None,
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None,  # Calculated field
     _doerunit: DoerUnit = None,

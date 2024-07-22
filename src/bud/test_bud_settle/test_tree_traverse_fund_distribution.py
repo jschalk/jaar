@@ -1,7 +1,7 @@
 from src._road.finance import default_fund_pool
 from src._road.road import RoadUnit
 from src.bud.acct import acctunit_shop
-from src.bud.lobby import awardlink_shop, awardline_shop
+from src.bud.group import awardlink_shop, awardline_shop
 from src.bud.examples.example_buds import (
     budunit_v001,
     budunit_v001_with_large_agenda,
@@ -244,7 +244,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFund
     assert sue_budunit.get_idea_obj(clean_road)._fund_ratio is None
     assert sue_budunit.get_idea_obj(sweep_road)._fund_ratio is None
     assert sue_budunit.get_idea_obj(vaccum_road)._fund_ratio is None
-    assert sue_budunit.get_lobbybox(yao_text) is None
+    assert sue_budunit.get_groupbox(yao_text) is None
 
     assert not sue_budunit._offtrack_fund
     assert sue_budunit.get_acct(yao_text)._fund_give == 0
@@ -261,8 +261,8 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFund
     assert sue_budunit.get_idea_obj(clean_road)._fund_ratio == clean_fund_ratio
     assert sue_budunit.get_idea_obj(sweep_road)._fund_ratio == 0
     assert sue_budunit.get_idea_obj(vaccum_road)._fund_ratio == 0
-    assert sue_budunit.get_lobbybox(yao_text)._fund_give == 0
-    assert sue_budunit.get_lobbybox(yao_text)._fund_take == 0
+    assert sue_budunit.get_groupbox(yao_text)._fund_give == 0
+    assert sue_budunit.get_groupbox(yao_text)._fund_take == 0
 
     assert sue_budunit._offtrack_fund == clean_fund_ratio * default_fund_pool()
     assert sue_budunit.get_acct(yao_text)._fund_give == default_fund_pool()
@@ -278,7 +278,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     sue_text = "Sue"
     week_text = "weekdays"
     nation_text = "nation-state"
-    sue_awardlink = awardlink_shop(lobby_id=sue_text)
+    sue_awardlink = awardlink_shop(group_id=sue_text)
     x_bud.add_acctunit(acct_id=sue_text)
     x_bud._idearoot.set_awardlink(awardlink=sue_awardlink)
     # idea tree has awardlines
@@ -289,7 +289,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
 
     # THEN
     assert x_bud._idearoot._awardheirs.get(sue_text) is not None
-    assert x_bud._idearoot._awardheirs.get(sue_text).lobby_id == sue_text
+    assert x_bud._idearoot._awardheirs.get(sue_text).group_id == sue_text
     assert x_bud._idearoot._awardlines != {}
     root_idea = x_bud.get_idea_obj(road=x_bud._idearoot._label)
     sue_awardline = x_bud._idearoot._awardlines.get(sue_text)
@@ -322,7 +322,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_text, default_fund_pool(), default_fund_pool())
-    assert x_bud._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
+    assert x_bud._idearoot._awardlines == {x_awardline.group_id: x_awardline}
 
 
 def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRootIdeaUnit():
@@ -332,7 +332,7 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRoo
     sue_text = "Sue"
     x_bud.add_acctunit(sue_text)
     casa_road = x_bud.make_l1_road("casa")
-    x_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(lobby_id=sue_text))
+    x_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(group_id=sue_text))
     assert x_bud._idearoot._awardlines == {}
 
     # WHEN
@@ -342,17 +342,17 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRoo
     assert x_bud._idearoot._awardlines != {}
     print(f"{x_bud._idearoot._awardlines=}")
     x_awardline = awardline_shop(
-        lobby_id=sue_text,
+        group_id=sue_text,
         _fund_give=0.230769231 * default_fund_pool(),
         _fund_take=0.230769231 * default_fund_pool(),
     )
-    assert x_bud._idearoot._awardlines == {x_awardline.lobby_id: x_awardline}
+    assert x_bud._idearoot._awardlines == {x_awardline.group_id: x_awardline}
     casa_ideaunit = x_bud.get_idea_obj(casa_road)
     assert casa_ideaunit._awardlines != {}
-    assert casa_ideaunit._awardlines == {x_awardline.lobby_id: x_awardline}
+    assert casa_ideaunit._awardlines == {x_awardline.group_id: x_awardline}
 
 
-def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_take():
+def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_take():
     # ESTABLISH
     sue_text = "Sue"
     sue_bud = budunit_shop(sue_text)
@@ -369,26 +369,26 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
-    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 3
+    assert len(sue_bud.get_acctunit_group_ids_dict()) == 3
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    yao_lobbybox = sue_bud.get_lobbybox(yao_text)
-    zia_lobbybox = sue_bud.get_lobbybox(zia_text)
-    xio_lobbybox = sue_bud.get_lobbybox(xio_text)
-    assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
-    assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
-    assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
-    assert zia_lobbybox._fund_take == 0.125 * default_fund_pool()
-    assert xio_lobbybox._fund_give == 0.25 * default_fund_pool()
-    assert xio_lobbybox._fund_take == 0.125 * default_fund_pool()
-    cred_sum1 = yao_lobbybox._fund_give
-    cred_sum1 += zia_lobbybox._fund_give + xio_lobbybox._fund_give
+    yao_groupbox = sue_bud.get_groupbox(yao_text)
+    zia_groupbox = sue_bud.get_groupbox(zia_text)
+    xio_groupbox = sue_bud.get_groupbox(xio_text)
+    assert yao_groupbox._fund_give == 0.5 * default_fund_pool()
+    assert yao_groupbox._fund_take == 0.75 * default_fund_pool()
+    assert zia_groupbox._fund_give == 0.25 * default_fund_pool()
+    assert zia_groupbox._fund_take == 0.125 * default_fund_pool()
+    assert xio_groupbox._fund_give == 0.25 * default_fund_pool()
+    assert xio_groupbox._fund_take == 0.125 * default_fund_pool()
+    cred_sum1 = yao_groupbox._fund_give
+    cred_sum1 += zia_groupbox._fund_give + xio_groupbox._fund_give
     assert cred_sum1 == 1 * default_fund_pool()
-    debt_sum1 = yao_lobbybox._fund_take
-    debt_sum1 += zia_lobbybox._fund_take + xio_lobbybox._fund_take
+    debt_sum1 = yao_groupbox._fund_take
+    debt_sum1 += zia_groupbox._fund_take + xio_groupbox._fund_take
     assert debt_sum1 == 1 * default_fund_pool()
 
     # ESTABLISH
@@ -396,33 +396,33 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsLobbyBox_fund_give_fund_ta
     sue_awardlink = awardlink_shop(sue_text, give_force=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot._awardlinks) == 4
-    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 4
+    assert len(sue_bud.get_acctunit_group_ids_dict()) == 4
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    yao_lobbybox = sue_bud.get_lobbybox(yao_text)
-    zia_lobbybox = sue_bud.get_lobbybox(zia_text)
-    xio_lobbybox = sue_bud.get_lobbybox(xio_text)
-    sue_lobbybox = sue_bud.get_lobbybox(sue_text)
-    assert yao_lobbybox._fund_give != 0.5 * default_fund_pool()
-    assert yao_lobbybox._fund_take != 0.75 * default_fund_pool()
-    assert zia_lobbybox._fund_give != 0.25 * default_fund_pool()
-    assert zia_lobbybox._fund_take != 0.125 * default_fund_pool()
-    assert xio_lobbybox._fund_give != 0.25 * default_fund_pool()
-    assert xio_lobbybox._fund_take != 0.125 * default_fund_pool()
-    assert sue_lobbybox._fund_give is not None
-    assert sue_lobbybox._fund_take is not None
-    cred_sum1 = yao_lobbybox._fund_give + zia_lobbybox._fund_give
-    cred_sum1 += xio_lobbybox._fund_give + sue_lobbybox._fund_give
+    yao_groupbox = sue_bud.get_groupbox(yao_text)
+    zia_groupbox = sue_bud.get_groupbox(zia_text)
+    xio_groupbox = sue_bud.get_groupbox(xio_text)
+    sue_groupbox = sue_bud.get_groupbox(sue_text)
+    assert yao_groupbox._fund_give != 0.5 * default_fund_pool()
+    assert yao_groupbox._fund_take != 0.75 * default_fund_pool()
+    assert zia_groupbox._fund_give != 0.25 * default_fund_pool()
+    assert zia_groupbox._fund_take != 0.125 * default_fund_pool()
+    assert xio_groupbox._fund_give != 0.25 * default_fund_pool()
+    assert xio_groupbox._fund_take != 0.125 * default_fund_pool()
+    assert sue_groupbox._fund_give is not None
+    assert sue_groupbox._fund_take is not None
+    cred_sum1 = yao_groupbox._fund_give + zia_groupbox._fund_give
+    cred_sum1 += xio_groupbox._fund_give + sue_groupbox._fund_give
     assert cred_sum1 == 1 * default_fund_pool()
-    debt_sum1 = yao_lobbybox._fund_take + zia_lobbybox._fund_take
-    debt_sum1 += xio_lobbybox._fund_take + sue_lobbybox._fund_take
+    debt_sum1 = yao_groupbox._fund_take + zia_groupbox._fund_take
+    debt_sum1 += xio_groupbox._fund_take + sue_groupbox._fund_take
     assert round(debt_sum1) == 1 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsLobbyBox_fund_give_fund_take():
+def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupBox_fund_give_fund_take():
     # ESTABLISH
     prom_text = "prom"
     x_bud = budunit_shop(prom_text)
@@ -443,32 +443,32 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsLobbyBox_fund_give_fund_take(
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_lobby_ids_dict()) == 3
+    assert len(x_bud.get_acctunit_group_ids_dict()) == 3
 
     # WHEN
     x_bud.settle_bud()
 
     # THEN
-    yao_lobbybox = x_bud.get_lobbybox(yao_text)
-    zia_lobbybox = x_bud.get_lobbybox(zia_text)
-    xio_lobbybox = x_bud.get_lobbybox(xio_text)
-    assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
-    assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
-    assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
-    assert zia_lobbybox._fund_take == 0.125 * default_fund_pool()
-    assert xio_lobbybox._fund_give == 0.25 * default_fund_pool()
-    assert xio_lobbybox._fund_take == 0.125 * default_fund_pool()
-    lobbybox_fund_give_sum = (
-        yao_lobbybox._fund_give + zia_lobbybox._fund_give + xio_lobbybox._fund_give
+    yao_groupbox = x_bud.get_groupbox(yao_text)
+    zia_groupbox = x_bud.get_groupbox(zia_text)
+    xio_groupbox = x_bud.get_groupbox(xio_text)
+    assert yao_groupbox._fund_give == 0.5 * default_fund_pool()
+    assert yao_groupbox._fund_take == 0.75 * default_fund_pool()
+    assert zia_groupbox._fund_give == 0.25 * default_fund_pool()
+    assert zia_groupbox._fund_take == 0.125 * default_fund_pool()
+    assert xio_groupbox._fund_give == 0.25 * default_fund_pool()
+    assert xio_groupbox._fund_take == 0.125 * default_fund_pool()
+    groupbox_fund_give_sum = (
+        yao_groupbox._fund_give + zia_groupbox._fund_give + xio_groupbox._fund_give
     )
-    lobbybox_fund_take_sum = (
-        yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
+    groupbox_fund_take_sum = (
+        yao_groupbox._fund_take + zia_groupbox._fund_take + xio_groupbox._fund_take
     )
-    assert lobbybox_fund_give_sum == 1 * default_fund_pool()
-    assert lobbybox_fund_take_sum == 1 * default_fund_pool()
+    assert groupbox_fund_give_sum == 1 * default_fund_pool()
+    assert groupbox_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
+def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
     # ESTABLISH
     prom_text = "prom"
     x_bud = budunit_shop(prom_text)
@@ -489,33 +489,33 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_lobby_ids_dict()) == 2
+    assert len(x_bud.get_acctunit_group_ids_dict()) == 2
 
     # WHEN
     x_bud.settle_bud()
 
     # THEN
-    yao_lobbybox = x_bud.get_lobbybox(yao_text)
-    zia_lobbybox = x_bud.get_lobbybox(zia_text)
-    xio_lobbybox = x_bud.get_lobbybox(xio_text)
-    assert len(x_bud.get_acctunit_lobby_ids_dict()) != len(x_bud._lobbyboxs)
-    assert yao_lobbybox._fund_give == 0.5 * default_fund_pool()
-    assert yao_lobbybox._fund_take == 0.75 * default_fund_pool()
-    assert zia_lobbybox._fund_give == 0.25 * default_fund_pool()
-    assert zia_lobbybox._fund_take == 0.125 * default_fund_pool()
-    assert xio_lobbybox._fund_give == 0.25 * default_fund_pool()
-    assert xio_lobbybox._fund_take == 0.125 * default_fund_pool()
-    lobbybox_fund_give_sum = (
-        yao_lobbybox._fund_give + zia_lobbybox._fund_give + xio_lobbybox._fund_give
+    yao_groupbox = x_bud.get_groupbox(yao_text)
+    zia_groupbox = x_bud.get_groupbox(zia_text)
+    xio_groupbox = x_bud.get_groupbox(xio_text)
+    assert len(x_bud.get_acctunit_group_ids_dict()) != len(x_bud._groupboxs)
+    assert yao_groupbox._fund_give == 0.5 * default_fund_pool()
+    assert yao_groupbox._fund_take == 0.75 * default_fund_pool()
+    assert zia_groupbox._fund_give == 0.25 * default_fund_pool()
+    assert zia_groupbox._fund_take == 0.125 * default_fund_pool()
+    assert xio_groupbox._fund_give == 0.25 * default_fund_pool()
+    assert xio_groupbox._fund_take == 0.125 * default_fund_pool()
+    groupbox_fund_give_sum = (
+        yao_groupbox._fund_give + zia_groupbox._fund_give + xio_groupbox._fund_give
     )
-    lobbybox_fund_take_sum = (
-        yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
+    groupbox_fund_take_sum = (
+        yao_groupbox._fund_take + zia_groupbox._fund_take + xio_groupbox._fund_take
     )
-    assert lobbybox_fund_give_sum == 1 * default_fund_pool()
-    assert lobbybox_fund_take_sum == 1 * default_fund_pool()
+    assert groupbox_fund_give_sum == 1 * default_fund_pool()
+    assert groupbox_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fund_give_fund_take():
+def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fund_give_fund_take():
     # ESTABLISH
     prom_text = "prom"
     x_bud = budunit_shop(prom_text)
@@ -565,21 +565,21 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsLobbyBox_fun
     assert str(excinfo.value) == f"'{xio_text}'"
 
     # THEN
-    yao_lobbybox = x_bud.get_lobbybox(yao_text)
-    zia_lobbybox = x_bud.get_lobbybox(zia_text)
-    xio_lobbybox = x_bud.get_lobbybox(xio_text)
-    assert yao_lobbybox._fund_give == 0.125 * default_fund_pool()
-    assert yao_lobbybox._fund_take == 0.1875 * default_fund_pool()
-    assert zia_lobbybox._fund_give == 0.0625 * default_fund_pool()
-    assert zia_lobbybox._fund_take == 0.03125 * default_fund_pool()
-    assert xio_lobbybox._fund_give == 0.0625 * default_fund_pool()
-    assert xio_lobbybox._fund_take == 0.03125 * default_fund_pool()
+    yao_groupbox = x_bud.get_groupbox(yao_text)
+    zia_groupbox = x_bud.get_groupbox(zia_text)
+    xio_groupbox = x_bud.get_groupbox(xio_text)
+    assert yao_groupbox._fund_give == 0.125 * default_fund_pool()
+    assert yao_groupbox._fund_take == 0.1875 * default_fund_pool()
+    assert zia_groupbox._fund_give == 0.0625 * default_fund_pool()
+    assert zia_groupbox._fund_take == 0.03125 * default_fund_pool()
+    assert xio_groupbox._fund_give == 0.0625 * default_fund_pool()
+    assert xio_groupbox._fund_take == 0.03125 * default_fund_pool()
     assert (
-        yao_lobbybox._fund_give + zia_lobbybox._fund_give + xio_lobbybox._fund_give
+        yao_groupbox._fund_give + zia_groupbox._fund_give + xio_groupbox._fund_give
         == 0.25 * default_fund_pool()
     )
     assert (
-        yao_lobbybox._fund_take + zia_lobbybox._fund_take + xio_lobbybox._fund_take
+        yao_groupbox._fund_take + zia_groupbox._fund_take + xio_groupbox._fund_take
         == 0.25 * default_fund_pool()
     )
 
@@ -630,20 +630,20 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # fund_give_sum = 0
     # fund_take_sum = 0
-    # for lobby in x_bud._idearoot._awardheirs.values():
-    #     print(f"{lobby=}")
-    #     assert lobby._fund_give is not None
-    #     assert lobby._fund_give in [0.25, 0.5]
-    #     assert lobby._fund_take is not None
-    #     assert lobby._fund_take in [0.75, 0.125]
-    #     fund_give_sum += lobby._fund_give
-    #     fund_take_sum += lobby._fund_take
+    # for group in x_bud._idearoot._awardheirs.values():
+    #     print(f"{group=}")
+    #     assert group._fund_give is not None
+    #     assert group._fund_give in [0.25, 0.5]
+    #     assert group._fund_take is not None
+    #     assert group._fund_take in [0.75, 0.125]
+    #     fund_give_sum += group._fund_give
+    #     fund_take_sum += group._fund_take
 
     # assert fund_give_sum == 1
     # assert fund_take_sum == 1
 
 
-def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
+def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     sue_text = "Sue"
@@ -662,39 +662,39 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     sue_acctunit = yao_bud.get_acct(sue_text)
     bob_acctunit = yao_bud.get_acct(bob_text)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    sue_sue_lobbyship = sue_acctunit.get_lobbyship(sue_text)
-    bob_bob_lobbyship = bob_acctunit.get_lobbyship(bob_text)
-    zia_zia_lobbyship = zia_acctunit.get_lobbyship(zia_text)
-    assert sue_sue_lobbyship._fund_give is None
-    assert sue_sue_lobbyship._fund_take is None
-    assert bob_bob_lobbyship._fund_give is None
-    assert bob_bob_lobbyship._fund_take is None
-    assert zia_zia_lobbyship._fund_give is None
-    assert zia_zia_lobbyship._fund_take is None
+    sue_sue_groupship = sue_acctunit.get_groupship(sue_text)
+    bob_bob_groupship = bob_acctunit.get_groupship(bob_text)
+    zia_zia_groupship = zia_acctunit.get_groupship(zia_text)
+    assert sue_sue_groupship._fund_give is None
+    assert sue_sue_groupship._fund_take is None
+    assert bob_bob_groupship._fund_give is None
+    assert bob_bob_groupship._fund_take is None
+    assert zia_zia_groupship._fund_give is None
+    assert zia_zia_groupship._fund_take is None
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert sue_sue_lobbyship._fund_give == 0.5 * default_fund_pool()
-    assert sue_sue_lobbyship._fund_take == 0.8 * default_fund_pool()
-    assert bob_bob_lobbyship._fund_give == 0.25 * default_fund_pool()
-    assert bob_bob_lobbyship._fund_take == 0.1 * default_fund_pool()
-    assert zia_zia_lobbyship._fund_give == 0.25 * default_fund_pool()
-    assert zia_zia_lobbyship._fund_take == 0.1 * default_fund_pool()
+    assert sue_sue_groupship._fund_give == 0.5 * default_fund_pool()
+    assert sue_sue_groupship._fund_take == 0.8 * default_fund_pool()
+    assert bob_bob_groupship._fund_give == 0.25 * default_fund_pool()
+    assert bob_bob_groupship._fund_take == 0.1 * default_fund_pool()
+    assert zia_zia_groupship._fund_give == 0.25 * default_fund_pool()
+    assert zia_zia_groupship._fund_take == 0.1 * default_fund_pool()
 
-    lobbyship_cred_sum = (
-        sue_sue_lobbyship._fund_give
-        + bob_bob_lobbyship._fund_give
-        + zia_zia_lobbyship._fund_give
+    groupship_cred_sum = (
+        sue_sue_groupship._fund_give
+        + bob_bob_groupship._fund_give
+        + zia_zia_groupship._fund_give
     )
-    assert lobbyship_cred_sum == 1.0 * default_fund_pool()
-    lobbyship_debt_sum = (
-        sue_sue_lobbyship._fund_take
-        + bob_bob_lobbyship._fund_take
-        + zia_zia_lobbyship._fund_take
+    assert groupship_cred_sum == 1.0 * default_fund_pool()
+    groupship_debt_sum = (
+        sue_sue_groupship._fund_take
+        + bob_bob_groupship._fund_take
+        + zia_zia_groupship._fund_take
     )
-    assert lobbyship_debt_sum == 1.0 * default_fund_pool()
+    assert groupship_debt_sum == 1.0 * default_fund_pool()
 
     # ESTABLISH another pledge, check metrics are as expected
     xio_text = "Xio"
@@ -705,36 +705,36 @@ def test_BudUnit_settle_bud_CorrectlySetsLobbyLinkBudCredAndDebt():
     yao_bud.settle_bud()
 
     # THEN
-    xio_lobbybox = yao_bud.get_lobbybox(xio_text)
-    xio_xio_lobbyship = xio_lobbybox.get_lobbyship(xio_text)
+    xio_groupbox = yao_bud.get_groupbox(xio_text)
+    xio_xio_groupship = xio_groupbox.get_groupship(xio_text)
     sue_acctunit = yao_bud.get_acct(sue_text)
     bob_acctunit = yao_bud.get_acct(bob_text)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    sue_sue_lobbyship = sue_acctunit.get_lobbyship(sue_text)
-    bob_bob_lobbyship = bob_acctunit.get_lobbyship(bob_text)
-    zia_zia_lobbyship = zia_acctunit.get_lobbyship(zia_text)
-    assert sue_sue_lobbyship._fund_give != 0.25 * default_fund_pool()
-    assert sue_sue_lobbyship._fund_take != 0.8 * default_fund_pool()
-    assert bob_bob_lobbyship._fund_give != 0.25 * default_fund_pool()
-    assert bob_bob_lobbyship._fund_take != 0.1 * default_fund_pool()
-    assert zia_zia_lobbyship._fund_give != 0.5 * default_fund_pool()
-    assert zia_zia_lobbyship._fund_take != 0.1 * default_fund_pool()
-    assert xio_xio_lobbyship._fund_give is not None
-    assert xio_xio_lobbyship._fund_take is not None
+    sue_sue_groupship = sue_acctunit.get_groupship(sue_text)
+    bob_bob_groupship = bob_acctunit.get_groupship(bob_text)
+    zia_zia_groupship = zia_acctunit.get_groupship(zia_text)
+    assert sue_sue_groupship._fund_give != 0.25 * default_fund_pool()
+    assert sue_sue_groupship._fund_take != 0.8 * default_fund_pool()
+    assert bob_bob_groupship._fund_give != 0.25 * default_fund_pool()
+    assert bob_bob_groupship._fund_take != 0.1 * default_fund_pool()
+    assert zia_zia_groupship._fund_give != 0.5 * default_fund_pool()
+    assert zia_zia_groupship._fund_take != 0.1 * default_fund_pool()
+    assert xio_xio_groupship._fund_give is not None
+    assert xio_xio_groupship._fund_take is not None
 
     x_fund_give_sum = (
-        sue_sue_lobbyship._fund_give
-        + bob_bob_lobbyship._fund_give
-        + zia_zia_lobbyship._fund_give
-        + xio_xio_lobbyship._fund_give
+        sue_sue_groupship._fund_give
+        + bob_bob_groupship._fund_give
+        + zia_zia_groupship._fund_give
+        + xio_xio_groupship._fund_give
     )
     print(f"{x_fund_give_sum=}")
     assert x_fund_give_sum == 1.0 * default_fund_pool()
     x_fund_take_sum = (
-        sue_sue_lobbyship._fund_take
-        + bob_bob_lobbyship._fund_take
-        + zia_zia_lobbyship._fund_take
-        + xio_xio_lobbyship._fund_take
+        sue_sue_groupship._fund_take
+        + bob_bob_groupship._fund_take
+        + zia_zia_groupship._fund_take
+        + xio_xio_groupship._fund_take
     )
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
@@ -831,7 +831,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBud_fund():
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBud_fund():
+def test_BudUnit_settle_bud_CorrectlySetsPartGroupedLWAcctUnitBud_fund():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     swim_text = "swim"
@@ -859,21 +859,21 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBud_fund():
     yao_bud.settle_bud()
 
     # THEN
-    sue_lobbybox = yao_bud.get_lobbybox(sue_text)
-    bob_lobbybox = yao_bud.get_lobbybox(bob_text)
-    zia_lobbybox = yao_bud.get_lobbybox(zia_text)
-    assert sue_lobbybox._fund_give != 0.5 * default_fund_pool()
-    assert sue_lobbybox._fund_take != 0.8 * default_fund_pool()
-    assert bob_lobbybox._fund_give != 0.25 * default_fund_pool()
-    assert bob_lobbybox._fund_take != 0.1 * default_fund_pool()
-    assert zia_lobbybox._fund_give != 0.25 * default_fund_pool()
-    assert zia_lobbybox._fund_take != 0.1 * default_fund_pool()
+    sue_groupbox = yao_bud.get_groupbox(sue_text)
+    bob_groupbox = yao_bud.get_groupbox(bob_text)
+    zia_groupbox = yao_bud.get_groupbox(zia_text)
+    assert sue_groupbox._fund_give != 0.5 * default_fund_pool()
+    assert sue_groupbox._fund_take != 0.8 * default_fund_pool()
+    assert bob_groupbox._fund_give != 0.25 * default_fund_pool()
+    assert bob_groupbox._fund_take != 0.1 * default_fund_pool()
+    assert zia_groupbox._fund_give != 0.25 * default_fund_pool()
+    assert zia_groupbox._fund_take != 0.1 * default_fund_pool()
     assert (
-        sue_lobbybox._fund_give + bob_lobbybox._fund_give + zia_lobbybox._fund_give
+        sue_groupbox._fund_give + bob_groupbox._fund_give + zia_groupbox._fund_give
         == 0.25 * default_fund_pool()
     )
     assert (
-        sue_lobbybox._fund_take + bob_lobbybox._fund_take + zia_lobbybox._fund_take
+        sue_groupbox._fund_take + bob_groupbox._fund_take + zia_groupbox._fund_take
         == 0.25 * default_fund_pool()
     )
 
@@ -898,7 +898,7 @@ def test_BudUnit_settle_bud_CorrectlySetsPartLobbyedLWAcctUnitBud_fund():
     )
 
 
-def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
+def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
     # ESTABLISH
     prom_text = "prom"
     x_bud = budunit_shop(prom_text)
@@ -919,14 +919,14 @@ def test_BudUnit_settle_bud_CreatesNewLobbyBoxAndSets_fund_give_fund_take():
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_lobby_ids_dict()) == 2
+    assert len(x_bud.get_acctunit_group_ids_dict()) == 2
 
     # WHEN
     x_bud.settle_bud()
 
     # THEN
-    xio_lobbybox = x_bud.get_lobbybox(xio_text)
-    assert len(x_bud.get_acctunit_lobby_ids_dict()) != len(x_bud._lobbyboxs)
+    xio_groupbox = x_bud.get_groupbox(xio_text)
+    assert len(x_bud.get_acctunit_group_ids_dict()) != len(x_bud._groupboxs)
     assert not x_bud.acct_exists(xio_text)
     yao_acctunit = x_bud.get_acct(yao_text)
     zia_acctunit = x_bud.get_acct(zia_text)
@@ -970,12 +970,12 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
     )
 
 
-def clear_all_acctunits_lobbyboxs_fund_agenda_give_take(x_bud: BudUnit):
+def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
     # DELETE bud_agenda_debt and bud_agenda_cred
-    for lobbybox_x in x_bud._lobbyboxs.values():
-        lobbybox_x.clear_fund_give_take()
-        # for lobbyship_x in lobbybox_x._accts.values():
-        #     print(f"{lobbybox_x.} {lobbyship_x.}  {lobbyship_x._fund_give:.6f} {lobbyship_x.debtit_score=} {lobbyship__fund_take:t:.6f} {lobbyship_x.} ")
+    for groupbox_x in x_bud._groupboxs.values():
+        groupbox_x.clear_fund_give_take()
+        # for groupship_x in groupbox_x._accts.values():
+        #     print(f"{groupbox_x.} {groupship_x.}  {groupship_x._fund_give:.6f} {groupship_x.debtit_score=} {groupship__fund_take:t:.6f} {groupship_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud._accts.values():
@@ -983,21 +983,21 @@ def clear_all_acctunits_lobbyboxs_fund_agenda_give_take(x_bud: BudUnit):
 
 
 @dataclass
-class LobbyAgendaMetrics:
-    sum_lobbybox_cred: float = 0
-    sum_lobbybox_debt: float = 0
-    sum_lobbyship_cred: float = 0
-    sum_lobbyship_debt: float = 0
-    lobbyship_count: int = 0
+class GroupAgendaMetrics:
+    sum_groupbox_cred: float = 0
+    sum_groupbox_debt: float = 0
+    sum_groupship_cred: float = 0
+    sum_groupship_debt: float = 0
+    groupship_count: int = 0
 
     def set_sums(self, x_bud: BudUnit):
-        for x_lobbybox in x_bud._lobbyboxs.values():
-            self.sum_lobbybox_cred += x_lobbybox._fund_agenda_give
-            self.sum_lobbybox_debt += x_lobbybox._fund_agenda_take
-            for lobbyship_x in x_lobbybox._lobbyships.values():
-                self.sum_lobbyship_cred += lobbyship_x._fund_agenda_give
-                self.sum_lobbyship_debt += lobbyship_x._fund_agenda_take
-                self.lobbyship_count += 1
+        for x_groupbox in x_bud._groupboxs.values():
+            self.sum_groupbox_cred += x_groupbox._fund_agenda_give
+            self.sum_groupbox_debt += x_groupbox._fund_agenda_take
+            for groupship_x in x_groupbox._groupships.values():
+                self.sum_groupship_cred += groupship_x._fund_agenda_give
+                self.sum_groupship_debt += groupship_x._fund_agenda_take
+                self.groupship_count += 1
 
 
 @dataclass
@@ -1037,15 +1037,15 @@ class AwardAgendaMetrics:
 def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # ESTABLISH
     x_bud = budunit_v001_with_large_agenda()
-    clear_all_acctunits_lobbyboxs_fund_agenda_give_take(x_bud=x_bud)
+    clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud=x_bud)
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
-    x_lobbyagendametrics = LobbyAgendaMetrics()
-    x_lobbyagendametrics.set_sums(x_bud=x_bud)
-    assert x_lobbyagendametrics.sum_lobbybox_cred == 0
-    assert x_lobbyagendametrics.sum_lobbybox_debt == 0
-    assert x_lobbyagendametrics.sum_lobbyship_cred == 0
-    assert x_lobbyagendametrics.sum_lobbyship_debt == 0
+    x_groupagendametrics = GroupAgendaMetrics()
+    x_groupagendametrics.set_sums(x_bud=x_bud)
+    assert x_groupagendametrics.sum_groupbox_cred == 0
+    assert x_groupagendametrics.sum_groupbox_debt == 0
+    assert x_groupagendametrics.sum_groupship_cred == 0
+    assert x_groupagendametrics.sum_groupship_debt == 0
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_acctagendametrics = AcctAgendaMetrics()
@@ -1078,18 +1078,18 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
         x_awardagendametrics.sum_bud_agenda_share == 0.006543772 * default_fund_pool()
     )
 
-    x_lobbyagendametrics = LobbyAgendaMetrics()
-    x_lobbyagendametrics.set_sums(x_bud=x_bud)
-    assert x_lobbyagendametrics.lobbyship_count == 81
+    x_groupagendametrics = GroupAgendaMetrics()
+    x_groupagendametrics.set_sums(x_bud=x_bud)
+    assert x_groupagendametrics.groupship_count == 81
     x_sum = 2796504
-    print(f"{x_lobbyagendametrics.sum_lobbybox_cred=}")
-    assert are_equal(x_lobbyagendametrics.sum_lobbybox_cred, x_sum)
-    assert are_equal(x_lobbyagendametrics.sum_lobbybox_debt, x_sum)
-    assert are_equal(x_lobbyagendametrics.sum_lobbyship_cred, x_sum)
-    assert are_equal(x_lobbyagendametrics.sum_lobbyship_debt, x_sum)
+    print(f"{x_groupagendametrics.sum_groupbox_cred=}")
+    assert are_equal(x_groupagendametrics.sum_groupbox_cred, x_sum)
+    assert are_equal(x_groupagendametrics.sum_groupbox_debt, x_sum)
+    assert are_equal(x_groupagendametrics.sum_groupship_cred, x_sum)
+    assert are_equal(x_groupagendametrics.sum_groupship_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_bud_i_sum,
-        x_lobbyagendametrics.sum_lobbybox_cred,
+        x_groupagendametrics.sum_groupbox_cred,
     )
 
     assert all_acctunits_have_legitimate_values(x_bud)
@@ -1179,17 +1179,17 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     assert yao_bud_zia_acct._fund_agenda_ratio_take == 0.5
 
 
-def test_BudUnit_settle_bud_CreatesLobbyBoxWith_budunit_v001():
+def test_BudUnit_settle_bud_CreatesGroupBoxWith_budunit_v001():
     # ESTABLISH / WHEN
     x_bud = budunit_v001()
     x_bud.settle_bud()
 
     # THEN
-    assert x_bud._lobbyboxs is not None
-    assert len(x_bud._lobbyboxs) == 34
+    assert x_bud._groupboxs is not None
+    assert len(x_bud._groupboxs) == 34
     everyone_accts_len = None
-    everyone_lobby = x_bud.get_lobbybox(",Everyone")
-    everyone_accts_len = len(everyone_lobby._lobbyships)
+    everyone_group = x_bud.get_groupbox(",Everyone")
+    everyone_accts_len = len(everyone_group._groupships)
     assert everyone_accts_len == 22
 
     # WHEN

@@ -7,7 +7,7 @@ from src._instrument.db_tool import create_insert_sqlstr, RowData
 from src._road.road import create_road
 from src.bud.reason_idea import factunit_shop
 from src.bud.acct import acctunit_shop
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import BudUnit
 from src.gift.atom_config import (
@@ -181,30 +181,30 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
         x_bud._penny = x_atom.get_value(x_arg)
 
 
-def _modify_bud_acct_lobbyship_delete(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_groupship_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
-    x_lobby_id = x_atom.get_value("lobby_id")
-    x_bud.get_acct(x_acct_id).delete_lobbyship(x_lobby_id)
+    x_group_id = x_atom.get_value("group_id")
+    x_bud.get_acct(x_acct_id).delete_groupship(x_group_id)
 
 
-def _modify_bud_acct_lobbyship_update(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_groupship_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
-    x_lobby_id = x_atom.get_value("lobby_id")
+    x_group_id = x_atom.get_value("group_id")
     x_acctunit = x_bud.get_acct(x_acct_id)
-    x_lobbyship = x_acctunit.get_lobbyship(x_lobby_id)
+    x_groupship = x_acctunit.get_groupship(x_group_id)
     x_credit_score = x_atom.get_value("credit_score")
     x_debtit_score = x_atom.get_value("debtit_score")
-    x_lobbyship.set_credit_score(x_credit_score)
-    x_lobbyship.set_debtit_score(x_debtit_score)
+    x_groupship.set_credit_score(x_credit_score)
+    x_groupship.set_debtit_score(x_debtit_score)
 
 
-def _modify_bud_acct_lobbyship_insert(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_groupship_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
-    x_lobby_id = x_atom.get_value("lobby_id")
+    x_group_id = x_atom.get_value("group_id")
     x_credit_score = x_atom.get_value("credit_score")
     x_debtit_score = x_atom.get_value("debtit_score")
     x_acctunit = x_bud.get_acct(x_acct_id)
-    x_acctunit.add_lobbyship(x_lobby_id, x_credit_score, x_debtit_score)
+    x_acctunit.add_groupship(x_group_id, x_credit_score, x_debtit_score)
 
 
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -251,7 +251,7 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value("parent_road"),
         create_missing_ideas=False,
-        filter_out_missing_awardlinks_lobby_ids=False,
+        filter_out_missing_awardlinks_group_ids=False,
         create_missing_ancestors=False,
     )
 
@@ -259,13 +259,13 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value("lobby_id"),
+        awardlink_del=x_atom.get_value("group_id"),
     )
 
 
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_awardlink = x_idea._awardlinks.get(x_atom.get_value("lobby_id"))
+    x_awardlink = x_idea._awardlinks.get(x_atom.get_value("group_id"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -277,7 +277,7 @@ def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        lobby_id=x_atom.get_value("lobby_id"),
+        group_id=x_atom.get_value("group_id"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -367,14 +367,14 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
     )
 
 
-def _modify_bud_idea_lobbyhold_delete(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_idea_grouphold_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.del_lobbyhold(lobby_id=x_atom.get_value("lobby_id"))
+    x_ideaunit._doerunit.del_grouphold(group_id=x_atom.get_value("group_id"))
 
 
-def _modify_bud_idea_lobbyhold_insert(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_idea_grouphold_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.set_lobbyhold(lobby_id=x_atom.get_value("lobby_id"))
+    x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value("group_id"))
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -404,13 +404,13 @@ def _modify_bud_budunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_update_budunit(x_bud, x_atom)
 
 
-def _modify_bud_acct_lobbyship(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_groupship(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_bud_acct_lobbyship_delete(x_bud, x_atom)
+        _modify_bud_acct_groupship_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_bud_acct_lobbyship_update(x_bud, x_atom)
+        _modify_bud_acct_groupship_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_bud_acct_lobbyship_insert(x_bud, x_atom)
+        _modify_bud_acct_groupship_insert(x_bud, x_atom)
 
 
 def _modify_bud_ideaunit(x_bud: BudUnit, x_atom: AtomUnit):
@@ -458,11 +458,11 @@ def _modify_bud_idea_reason_premiseunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reason_premiseunit_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_lobbyhold(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_idea_grouphold(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_bud_idea_lobbyhold_delete(x_bud, x_atom)
+        _modify_bud_idea_grouphold_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_bud_idea_lobbyhold_insert(x_bud, x_atom)
+        _modify_bud_idea_grouphold_insert(x_bud, x_atom)
 
 
 def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
@@ -477,8 +477,8 @@ def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
 def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.category == "budunit":
         _modify_bud_budunit(x_bud, x_atom)
-    elif x_atom.category == "bud_acct_lobbyship":
-        _modify_bud_acct_lobbyship(x_bud, x_atom)
+    elif x_atom.category == "bud_acct_groupship":
+        _modify_bud_acct_groupship(x_bud, x_atom)
     elif x_atom.category == "bud_ideaunit":
         _modify_bud_ideaunit(x_bud, x_atom)
     elif x_atom.category == "bud_idea_awardlink":
@@ -489,8 +489,8 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reasonunit(x_bud, x_atom)
     elif x_atom.category == "bud_idea_reason_premiseunit":
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
-    elif x_atom.category == "bud_idea_lobbyhold":
-        _modify_bud_idea_lobbyhold(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_grouphold":
+        _modify_bud_idea_grouphold(x_bud, x_atom)
     elif x_atom.category == "bud_acctunit":
         _modify_bud_acctunit(x_bud, x_atom)
 
@@ -506,7 +506,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._fund_pool != y_obj._fund_pool
             or x_obj._fund_coin != y_obj._fund_coin
         )
-    elif category in {"bud_acct_lobbyship"}:
+    elif category in {"bud_acct_groupship"}:
         return (x_obj.credit_score != y_obj.credit_score) or (
             x_obj.debtit_score != y_obj.debtit_score
         )

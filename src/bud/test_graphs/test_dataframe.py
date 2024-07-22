@@ -28,7 +28,7 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
         "acct_id",
         "credit_score",
         "debtit_score",
-        "_lobbyships",
+        "_groupships",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",

@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_acct_lobbyship",
+    "atom_category": "bud_acct_groupship",
     "attributes": {
         "acct_id": {
             "column_order": 2,
@@ -11,7 +11,7 @@
         "debtit_score": {
             "column_order": 5
         },
-        "lobby_id": {
+        "group_id": {
             "column_order": 3,
             "sort_order": 1
         },

@@ -47,7 +47,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     before_yao_budunit.set_acct_respect(yao_acct_debtit_score)
     clean_text = "clean"
     zia_clean_ideaunit = ideaunit_shop(clean_text, pledge=True)
-    zia_clean_ideaunit._doerunit.set_lobbyhold(yao_text)
+    zia_clean_ideaunit._doerunit.set_grouphold(yao_text)
     zia_budunit = budunit_shop(zia_text)
     zia_budunit.add_acctunit(yao_text)
     zia_budunit.set_l1_idea(zia_clean_ideaunit)
@@ -82,7 +82,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     zia_budunit.add_acctunit(yao_text)
     clean_text = "clean"
     zia_clean_ideaunit = ideaunit_shop(clean_text, pledge=True)
-    zia_clean_ideaunit._doerunit.set_lobbyhold(yao_text)
+    zia_clean_ideaunit._doerunit.set_grouphold(yao_text)
     casa_road = zia_budunit.make_l1_road("casa")
     zia_budunit.set_idea(zia_clean_ideaunit, casa_road)
     assert len(zia_budunit.get_agenda_dict()) == 0
@@ -123,11 +123,11 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBud():
     cook_text = "cook"
     fly_text = "fly"
     yao_clean_ideaunit = ideaunit_shop(clean_text, pledge=True)
-    yao_clean_ideaunit._doerunit.set_lobbyhold(yao_text)
+    yao_clean_ideaunit._doerunit.set_grouphold(yao_text)
     yao_cook_ideaunit = ideaunit_shop(cook_text, pledge=True)
-    yao_cook_ideaunit._doerunit.set_lobbyhold(yao_text)
+    yao_cook_ideaunit._doerunit.set_grouphold(yao_text)
     yao_fly_ideaunit = ideaunit_shop(fly_text, pledge=True)
-    yao_fly_ideaunit._doerunit.set_lobbyhold(yao_text)
+    yao_fly_ideaunit._doerunit.set_grouphold(yao_text)
     casa_road = zia_budunit.make_l1_road("casa")
     fly_road = zia_budunit.make_l1_road(fly_text)
     zia_budunit.set_idea(yao_clean_ideaunit, casa_road)
@@ -178,16 +178,16 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUni
     cook_text = "cook"
     fly_text = "fly"
     yao_dish_ideaunit = ideaunit_shop(dish_text, pledge=True)
-    yao_dish_ideaunit._doerunit.set_lobbyhold(yao_text)
+    yao_dish_ideaunit._doerunit.set_grouphold(yao_text)
     yao_cook_ideaunit = ideaunit_shop(cook_text, pledge=True)
-    yao_cook_ideaunit._doerunit.set_lobbyhold(yao_text)
+    yao_cook_ideaunit._doerunit.set_grouphold(yao_text)
     yao_fly_ideaunit = ideaunit_shop(fly_text, pledge=True)
-    yao_fly_ideaunit._doerunit.set_lobbyhold(yao_text)
+    yao_fly_ideaunit._doerunit.set_grouphold(yao_text)
     casa_road = zia_budunit.make_l1_road("casa")
     dish_road = zia_budunit.make_road(casa_road, dish_text)
     fly_road = zia_budunit.make_l1_road(fly_text)
     before_yao_dish_ideaunit = ideaunit_shop(dish_text, pledge=True)
-    before_yao_dish_ideaunit._doerunit.set_lobbyhold(yao_text)
+    before_yao_dish_ideaunit._doerunit.set_grouphold(yao_text)
     before_yao_budunit.set_idea(before_yao_dish_ideaunit, casa_road)
     before_yao_budunit.edit_idea_attr(dish_road, mass=1000)
     zia_budunit.set_idea(yao_dish_ideaunit, casa_road)
@@ -243,7 +243,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     vacuum_road = sue_budunit.make_l1_road(vacuum_text)
     sue_budunit.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_budunit.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._doerunit.set_lobbyhold(yao_text)
+    vacuum_ideaunit._doerunit.set_grouphold(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_budunit.make_l1_road(egg_text)

@@ -73,7 +73,7 @@ def test_create_pledge_CorrectlyModifiesBudNonpledgeIdeaTopledgeIdea():
     assert new_floor_idea.pledge
 
 
-def test_create_pledge_CorrectlySets_lobbyhold():
+def test_create_pledge_CorrectlySets_grouphold():
     # ESTABLISH
     sue_text = "Sue"
     sue_bud = budunit_shop(sue_text)
@@ -83,23 +83,23 @@ def test_create_pledge_CorrectlySets_lobbyhold():
     floor_road = sue_bud.make_road(clean_road, floor_text)
     bob_text = "Bob"
     floor_idea = ideaunit_shop(floor_text, pledge=True)
-    floor_idea._doerunit.set_lobbyhold(bob_text)
+    floor_idea._doerunit.set_grouphold(bob_text)
     sue_bud.set_idea(floor_idea, clean_road)
     floor_idea = sue_bud.get_idea_obj(floor_road)
-    assert floor_idea._doerunit.lobbyhold_exists(bob_text) is False
+    assert floor_idea._doerunit.grouphold_exists(bob_text) is False
 
     # WHEN
     create_pledge(sue_bud, floor_road, bob_text)
 
     # THEN
-    assert floor_idea._doerunit.lobbyhold_exists(bob_text)
+    assert floor_idea._doerunit.grouphold_exists(bob_text)
     yao_text = "Yao"
     assert sue_bud.acct_exists(yao_text) is False
-    assert floor_idea._doerunit.lobbyhold_exists(yao_text) is False
+    assert floor_idea._doerunit.grouphold_exists(yao_text) is False
 
     # WHEN
     create_pledge(sue_bud, floor_road, yao_text)
 
     # THEN
     assert sue_bud.acct_exists(yao_text)
-    assert floor_idea._doerunit.lobbyhold_exists(yao_text)
+    assert floor_idea._doerunit.grouphold_exists(yao_text)

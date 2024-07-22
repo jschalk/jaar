@@ -8,8 +8,8 @@ from src._instrument.python import (
 )
 from src._road.road import RoadUnit, get_terminus_node, get_parent_road
 from src.bud.reason_idea import FactUnit, ReasonUnit
-from src.bud.acct import LobbyShip, AcctID, AcctUnit
-from src.bud.lobby import LobbyShip, LobbyID
+from src.bud.acct import GroupShip, AcctID, AcctUnit
+from src.bud.group import GroupShip, GroupID
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit, budunit_shop
 from src.gift.atom_config import CRUD_command
@@ -195,10 +195,10 @@ class ChangeUnit:
                     "debtit_score", insert_acctunit.debtit_score
                 )
             self.set_atomunit(x_atomunit)
-            all_lobby_ids = set(insert_acctunit._lobbyships.keys())
-            self.add_atomunit_lobbyships_inserts(
+            all_group_ids = set(insert_acctunit._groupships.keys())
+            self.add_atomunit_groupships_inserts(
                 after_acctunit=insert_acctunit,
-                insert_lobbyship_lobby_ids=all_lobby_ids,
+                insert_groupship_group_ids=all_group_ids,
             )
 
     def add_atomunit_acctunit_updates(
@@ -219,7 +219,7 @@ class ChangeUnit:
                         "debtit_score", after_acctunit.debtit_score
                     )
                 self.set_atomunit(x_atomunit)
-            self.add_atomunit_acctunit_update_lobbyships(
+            self.add_atomunit_acctunit_update_groupships(
                 after_acctunit=after_acctunit, before_acctunit=before_acctunit
             )
 
@@ -229,95 +229,95 @@ class ChangeUnit:
             x_atomunit.set_required_arg("acct_id", delete_acct_id)
             self.set_atomunit(x_atomunit)
             delete_acctunit = before_bud.get_acct(delete_acct_id)
-            non_mirror_lobby_ids = {
-                x_lobby_id
-                for x_lobby_id in delete_acctunit._lobbyships.keys()
-                if x_lobby_id != delete_acct_id
+            non_mirror_group_ids = {
+                x_group_id
+                for x_group_id in delete_acctunit._groupships.keys()
+                if x_group_id != delete_acct_id
             }
-            self.add_atomunit_lobbyships_delete(delete_acct_id, non_mirror_lobby_ids)
+            self.add_atomunit_groupships_delete(delete_acct_id, non_mirror_group_ids)
 
-    def add_atomunit_acctunit_update_lobbyships(
+    def add_atomunit_acctunit_update_groupships(
         self, after_acctunit: AcctUnit, before_acctunit: AcctUnit
     ):
-        # before_non_mirror_lobby_ids
-        before_lobby_ids = {
-            x_lobby_id
-            for x_lobby_id in before_acctunit._lobbyships.keys()
-            if x_lobby_id != before_acctunit.acct_id
+        # before_non_mirror_group_ids
+        before_group_ids = {
+            x_group_id
+            for x_group_id in before_acctunit._groupships.keys()
+            if x_group_id != before_acctunit.acct_id
         }
-        # after_non_mirror_lobby_ids
-        after_lobby_ids = {
-            x_lobby_id
-            for x_lobby_id in after_acctunit._lobbyships.keys()
-            if x_lobby_id != after_acctunit.acct_id
+        # after_non_mirror_group_ids
+        after_group_ids = {
+            x_group_id
+            for x_group_id in after_acctunit._groupships.keys()
+            if x_group_id != after_acctunit.acct_id
         }
 
-        self.add_atomunit_lobbyships_inserts(
+        self.add_atomunit_groupships_inserts(
             after_acctunit=after_acctunit,
-            insert_lobbyship_lobby_ids=after_lobby_ids.difference(before_lobby_ids),
+            insert_groupship_group_ids=after_group_ids.difference(before_group_ids),
         )
 
-        self.add_atomunit_lobbyships_delete(
+        self.add_atomunit_groupships_delete(
             before_acct_id=after_acctunit.acct_id,
-            before_lobby_ids=before_lobby_ids.difference(after_lobby_ids),
+            before_group_ids=before_group_ids.difference(after_group_ids),
         )
 
-        update_lobby_ids = before_lobby_ids.intersection(after_lobby_ids)
-        for update_acct_id in update_lobby_ids:
-            before_lobbyship = before_acctunit.get_lobbyship(update_acct_id)
-            after_lobbyship = after_acctunit.get_lobbyship(update_acct_id)
+        update_group_ids = before_group_ids.intersection(after_group_ids)
+        for update_acct_id in update_group_ids:
+            before_groupship = before_acctunit.get_groupship(update_acct_id)
+            after_groupship = after_acctunit.get_groupship(update_acct_id)
             if optional_args_different(
-                "bud_acct_lobbyship", before_lobbyship, after_lobbyship
+                "bud_acct_groupship", before_groupship, after_groupship
             ):
-                self.add_atomunit_lobbyship_update(
+                self.add_atomunit_groupship_update(
                     acct_id=after_acctunit.acct_id,
-                    before_lobbyship=before_lobbyship,
-                    after_lobbyship=after_lobbyship,
+                    before_groupship=before_groupship,
+                    after_groupship=after_groupship,
                 )
 
-    def add_atomunit_lobbyships_inserts(
+    def add_atomunit_groupships_inserts(
         self,
         after_acctunit: AcctUnit,
-        insert_lobbyship_lobby_ids: list[LobbyID],
+        insert_groupship_group_ids: list[GroupID],
     ):
         after_acct_id = after_acctunit.acct_id
-        for insert_lobby_id in insert_lobbyship_lobby_ids:
-            after_lobbyship = after_acctunit.get_lobbyship(insert_lobby_id)
-            x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_insert())
+        for insert_group_id in insert_groupship_group_ids:
+            after_groupship = after_acctunit.get_groupship(insert_group_id)
+            x_atomunit = atomunit_shop("bud_acct_groupship", atom_insert())
             x_atomunit.set_required_arg("acct_id", after_acct_id)
-            x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
-            if after_lobbyship.credit_score is not None:
+            x_atomunit.set_required_arg("group_id", after_groupship.group_id)
+            if after_groupship.credit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "credit_score", after_lobbyship.credit_score
+                    "credit_score", after_groupship.credit_score
                 )
-            if after_lobbyship.debtit_score is not None:
+            if after_groupship.debtit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "debtit_score", after_lobbyship.debtit_score
+                    "debtit_score", after_groupship.debtit_score
                 )
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_lobbyship_update(
+    def add_atomunit_groupship_update(
         self,
         acct_id: AcctID,
-        before_lobbyship: LobbyShip,
-        after_lobbyship: LobbyShip,
+        before_groupship: GroupShip,
+        after_groupship: GroupShip,
     ):
-        x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_update())
+        x_atomunit = atomunit_shop("bud_acct_groupship", atom_update())
         x_atomunit.set_required_arg("acct_id", acct_id)
-        x_atomunit.set_required_arg("lobby_id", after_lobbyship.lobby_id)
-        if after_lobbyship.credit_score != before_lobbyship.credit_score:
-            x_atomunit.set_optional_arg("credit_score", after_lobbyship.credit_score)
-        if after_lobbyship.debtit_score != before_lobbyship.debtit_score:
-            x_atomunit.set_optional_arg("debtit_score", after_lobbyship.debtit_score)
+        x_atomunit.set_required_arg("group_id", after_groupship.group_id)
+        if after_groupship.credit_score != before_groupship.credit_score:
+            x_atomunit.set_optional_arg("credit_score", after_groupship.credit_score)
+        if after_groupship.debtit_score != before_groupship.debtit_score:
+            x_atomunit.set_optional_arg("debtit_score", after_groupship.debtit_score)
         self.set_atomunit(x_atomunit)
 
-    def add_atomunit_lobbyships_delete(
-        self, before_acct_id: AcctID, before_lobby_ids: LobbyID
+    def add_atomunit_groupships_delete(
+        self, before_acct_id: AcctID, before_group_ids: GroupID
     ):
-        for delete_lobby_id in before_lobby_ids:
-            x_atomunit = atomunit_shop("bud_acct_lobbyship", atom_delete())
+        for delete_group_id in before_group_ids:
+            x_atomunit = atomunit_shop("bud_acct_groupship", atom_delete())
             x_atomunit.set_required_arg("acct_id", before_acct_id)
-            x_atomunit.set_required_arg("lobby_id", delete_lobby_id)
+            x_atomunit.set_required_arg("group_id", delete_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunits_ideas(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -364,15 +364,15 @@ class ChangeUnit:
             )
             self.add_atomunit_idea_awardlink_inserts(
                 after_ideaunit=insert_ideaunit,
-                insert_awardlink_lobby_ids=set(insert_ideaunit._awardlinks.keys()),
+                insert_awardlink_group_ids=set(insert_ideaunit._awardlinks.keys()),
             )
             self.add_atomunit_idea_reasonunit_inserts(
                 after_ideaunit=insert_ideaunit,
                 insert_reasonunit_bases=set(insert_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_lobbyhold_insert(
+            self.add_atomunit_idea_grouphold_insert(
                 idea_road=insert_idea_road,
-                insert_lobbyhold_lobby_ids=insert_ideaunit._doerunit._lobbyholds,
+                insert_grouphold_group_ids=insert_ideaunit._doerunit._groupholds,
             )
 
     def add_atomunit_idea_updates(
@@ -438,25 +438,25 @@ class ChangeUnit:
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_lobby_ids = set(before_ideaunit._awardlinks.keys())
-            after_awardlinks_lobby_ids = set(after_ideaunit._awardlinks.keys())
+            before_awardlinks_group_ids = set(before_ideaunit._awardlinks.keys())
+            after_awardlinks_group_ids = set(after_ideaunit._awardlinks.keys())
             self.add_atomunit_idea_awardlink_inserts(
                 after_ideaunit=after_ideaunit,
-                insert_awardlink_lobby_ids=after_awardlinks_lobby_ids.difference(
-                    before_awardlinks_lobby_ids
+                insert_awardlink_group_ids=after_awardlinks_group_ids.difference(
+                    before_awardlinks_group_ids
                 ),
             )
             self.add_atomunit_idea_awardlink_updates(
                 before_ideaunit=before_ideaunit,
                 after_ideaunit=after_ideaunit,
-                update_awardlink_lobby_ids=before_awardlinks_lobby_ids.intersection(
-                    after_awardlinks_lobby_ids
+                update_awardlink_group_ids=before_awardlinks_group_ids.intersection(
+                    after_awardlinks_group_ids
                 ),
             )
             self.add_atomunit_idea_awardlink_deletes(
                 idea_road=idea_road,
-                delete_awardlink_lobby_ids=before_awardlinks_lobby_ids.difference(
-                    after_awardlinks_lobby_ids
+                delete_awardlink_group_ids=before_awardlinks_group_ids.difference(
+                    after_awardlinks_group_ids
                 ),
             )
 
@@ -487,19 +487,19 @@ class ChangeUnit:
             # update reasonunits_permises update_premise
             # update reasonunits_permises delete_premise
 
-            # insert / update / delete lobbyholds
-            before_lobbyholds_lobby_ids = set(before_ideaunit._doerunit._lobbyholds)
-            after_lobbyholds_lobby_ids = set(after_ideaunit._doerunit._lobbyholds)
-            self.add_atomunit_idea_lobbyhold_insert(
+            # insert / update / delete groupholds
+            before_groupholds_group_ids = set(before_ideaunit._doerunit._groupholds)
+            after_groupholds_group_ids = set(after_ideaunit._doerunit._groupholds)
+            self.add_atomunit_idea_grouphold_insert(
                 idea_road=idea_road,
-                insert_lobbyhold_lobby_ids=after_lobbyholds_lobby_ids.difference(
-                    before_lobbyholds_lobby_ids
+                insert_grouphold_group_ids=after_groupholds_group_ids.difference(
+                    before_groupholds_group_ids
                 ),
             )
-            self.add_atomunit_idea_lobbyhold_deletes(
+            self.add_atomunit_idea_grouphold_deletes(
                 idea_road=idea_road,
-                delete_lobbyhold_lobby_ids=before_lobbyholds_lobby_ids.difference(
-                    after_lobbyholds_lobby_ids
+                delete_grouphold_group_ids=before_groupholds_group_ids.difference(
+                    after_groupholds_group_ids
                 ),
             )
 
@@ -521,15 +521,15 @@ class ChangeUnit:
             )
             self.add_atomunit_idea_awardlink_deletes(
                 idea_road=delete_idea_road,
-                delete_awardlink_lobby_ids=set(delete_ideaunit._awardlinks.keys()),
+                delete_awardlink_group_ids=set(delete_ideaunit._awardlinks.keys()),
             )
             self.add_atomunit_idea_reasonunit_deletes(
                 before_ideaunit=delete_ideaunit,
                 delete_reasonunit_bases=set(delete_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_lobbyhold_deletes(
+            self.add_atomunit_idea_grouphold_deletes(
                 idea_road=delete_idea_road,
-                delete_lobbyhold_lobby_ids=set(delete_ideaunit._doerunit._lobbyholds),
+                delete_grouphold_group_ids=set(delete_ideaunit._doerunit._groupholds),
             )
 
     def add_atomunit_idea_reasonunit_inserts(
@@ -677,32 +677,32 @@ class ChangeUnit:
             x_atomunit.set_required_arg("need", delete_premise_need)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_lobbyhold_insert(
-        self, idea_road: RoadUnit, insert_lobbyhold_lobby_ids: set
+    def add_atomunit_idea_grouphold_insert(
+        self, idea_road: RoadUnit, insert_grouphold_group_ids: set
     ):
-        for insert_lobbyhold_lobby_id in insert_lobbyhold_lobby_ids:
-            x_atomunit = atomunit_shop("bud_idea_lobbyhold", atom_insert())
+        for insert_grouphold_group_id in insert_grouphold_group_ids:
+            x_atomunit = atomunit_shop("bud_idea_grouphold", atom_insert())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("lobby_id", insert_lobbyhold_lobby_id)
+            x_atomunit.set_required_arg("group_id", insert_grouphold_group_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_lobbyhold_deletes(
-        self, idea_road: RoadUnit, delete_lobbyhold_lobby_ids: set
+    def add_atomunit_idea_grouphold_deletes(
+        self, idea_road: RoadUnit, delete_grouphold_group_ids: set
     ):
-        for delete_lobbyhold_lobby_id in delete_lobbyhold_lobby_ids:
-            x_atomunit = atomunit_shop("bud_idea_lobbyhold", atom_delete())
+        for delete_grouphold_group_id in delete_grouphold_group_ids:
+            x_atomunit = atomunit_shop("bud_idea_grouphold", atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("lobby_id", delete_lobbyhold_lobby_id)
+            x_atomunit.set_required_arg("group_id", delete_grouphold_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_inserts(
-        self, after_ideaunit: IdeaUnit, insert_awardlink_lobby_ids: set
+        self, after_ideaunit: IdeaUnit, insert_awardlink_group_ids: set
     ):
-        for after_awardlink_lobby_id in insert_awardlink_lobby_ids:
-            after_awardlink = after_ideaunit._awardlinks.get(after_awardlink_lobby_id)
+        for after_awardlink_group_id in insert_awardlink_group_ids:
+            after_awardlink = after_ideaunit._awardlinks.get(after_awardlink_group_id)
             x_atomunit = atomunit_shop("bud_idea_awardlink", atom_insert())
             x_atomunit.set_required_arg("road", after_ideaunit.get_road())
-            x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
+            x_atomunit.set_required_arg("group_id", after_awardlink.group_id)
             x_atomunit.set_optional_arg("give_force", after_awardlink.give_force)
             x_atomunit.set_optional_arg("take_force", after_awardlink.take_force)
             self.set_atomunit(x_atomunit)
@@ -711,19 +711,19 @@ class ChangeUnit:
         self,
         before_ideaunit: IdeaUnit,
         after_ideaunit: IdeaUnit,
-        update_awardlink_lobby_ids: set,
+        update_awardlink_group_ids: set,
     ):
-        for update_awardlink_lobby_id in update_awardlink_lobby_ids:
+        for update_awardlink_group_id in update_awardlink_group_ids:
             before_awardlink = before_ideaunit._awardlinks.get(
-                update_awardlink_lobby_id
+                update_awardlink_group_id
             )
-            after_awardlink = after_ideaunit._awardlinks.get(update_awardlink_lobby_id)
+            after_awardlink = after_ideaunit._awardlinks.get(update_awardlink_group_id)
             if optional_args_different(
                 "bud_idea_awardlink", before_awardlink, after_awardlink
             ):
                 x_atomunit = atomunit_shop("bud_idea_awardlink", atom_update())
                 x_atomunit.set_required_arg("road", before_ideaunit.get_road())
-                x_atomunit.set_required_arg("lobby_id", after_awardlink.lobby_id)
+                x_atomunit.set_required_arg("group_id", after_awardlink.group_id)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_atomunit.set_optional_arg(
                         "give_force", after_awardlink.give_force
@@ -735,12 +735,12 @@ class ChangeUnit:
                 self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_deletes(
-        self, idea_road: RoadUnit, delete_awardlink_lobby_ids: set
+        self, idea_road: RoadUnit, delete_awardlink_group_ids: set
     ):
-        for delete_awardlink_lobby_id in delete_awardlink_lobby_ids:
+        for delete_awardlink_group_id in delete_awardlink_group_ids:
             x_atomunit = atomunit_shop("bud_idea_awardlink", atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("lobby_id", delete_awardlink_lobby_id)
+            x_atomunit.set_required_arg("group_id", delete_awardlink_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_factunit_inserts(

@@ -101,7 +101,7 @@ def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
     add_rect_text(fig, x=text_x, y=text_y, text=atomplotyshape.display_text)
 
 
-def add_lobbyboxs_circle(fig: plotly_Figure):
+def add_groupboxs_circle(fig: plotly_Figure):
     home_form_x0 = 0.2
     home_form_x1 = 1 - 0.2
     home_width = home_form_x1 - home_form_x0
@@ -126,7 +126,7 @@ def add_lobbyboxs_circle(fig: plotly_Figure):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text="LobbyBoxs")
+    add_rect_text(fig, x=text_x, y=text_y, text="GroupBoxs")
 
 
 def add_different_ideas_circle(fig: plotly_Figure):
@@ -169,16 +169,16 @@ def atomunit_periodic_table0() -> plotly_Figure:
 
     premise_text = "bud_idea_reason_premiseunit"
     bud_acctunit_insert = get_insert_rect("bud_acctunit")
-    bud_acct_lobbyship_insert = get_insert_rect("bud_acct_lobbyship")
+    bud_acct_groupship_insert = get_insert_rect("bud_acct_groupship")
     bud_ideaunit_insert = get_insert_rect("bud_ideaunit")
     bud_idea_awardlink_insert = get_insert_rect("bud_idea_awardlink")
-    bud_idea_lobbyhold_insert = get_insert_rect("bud_idea_lobbyhold")
+    bud_idea_grouphold_insert = get_insert_rect("bud_idea_grouphold")
     bud_idea_healerhold_insert = get_insert_rect("bud_idea_healerhold")
     bud_idea_factunit_insert = get_insert_rect("bud_idea_factunit")
     bud_idea_reasonunit_insert = get_insert_rect("bud_idea_reasonunit")
     bud_idea_reason_premiseunit_insert = get_insert_rect(premise_text)
     bud_acctunit_update = get_update_rect("bud_acctunit")
-    bud_acct_lobbyship_update = get_update_rect("bud_acct_lobbyship")
+    bud_acct_groupship_update = get_update_rect("bud_acct_groupship")
     bud_ideaunit_update = get_update_rect("bud_ideaunit")
     bud_idea_awardlink_update = get_update_rect("bud_idea_awardlink")
     bud_idea_factunit_update = get_update_rect("bud_idea_factunit")
@@ -187,11 +187,11 @@ def atomunit_periodic_table0() -> plotly_Figure:
     bud_idea_reason_premiseunit_delete = get_delete_rect(premise_text)
     bud_idea_reasonunit_delete = get_delete_rect("bud_idea_reasonunit")
     bud_idea_factunit_delete = get_delete_rect("bud_idea_factunit")
-    bud_idea_lobbyhold_delete = get_delete_rect("bud_idea_lobbyhold")
+    bud_idea_grouphold_delete = get_delete_rect("bud_idea_grouphold")
     bud_idea_healerhold_delete = get_delete_rect("bud_idea_healerhold")
     bud_idea_awardlink_delete = get_delete_rect("bud_idea_awardlink")
     bud_ideaunit_delete = get_delete_rect("bud_ideaunit")
-    bud_acct_lobbyship_delete = get_delete_rect("bud_acct_lobbyship")
+    bud_acct_groupship_delete = get_delete_rect("bud_acct_groupship")
     bud_acctunit_delete = get_delete_rect("bud_acctunit")
     budunit_update = get_update_rect("budunit")
 
@@ -199,13 +199,13 @@ def atomunit_periodic_table0() -> plotly_Figure:
     bud_acctunit_insert.set_level(0, 0, 0.25, green_text)
     bud_acctunit_update.set_level(0, 0.25, 0.75, green_text)
     bud_acctunit_delete.set_level(0, 0.75, 1, green_text)
-    bud_acct_lobbyship_insert.set_level(1, 0, 0.3, green_text)
-    bud_acct_lobbyship_update.set_level(1, 0.3, 0.7, green_text)
-    bud_acct_lobbyship_delete.set_level(1, 0.7, 1, green_text)
+    bud_acct_groupship_insert.set_level(1, 0, 0.3, green_text)
+    bud_acct_groupship_update.set_level(1, 0.3, 0.7, green_text)
+    bud_acct_groupship_delete.set_level(1, 0.7, 1, green_text)
     bud_idea_healerhold_insert.set_level(3, 0.2, 0.4)
     bud_idea_healerhold_delete.set_level(3, 0.6, 0.8)
-    bud_idea_lobbyhold_insert.set_level(4, 0.2, 0.4)
-    bud_idea_lobbyhold_delete.set_level(4, 0.6, 0.8)
+    bud_idea_grouphold_insert.set_level(4, 0.2, 0.4)
+    bud_idea_grouphold_delete.set_level(4, 0.6, 0.8)
     bud_idea_awardlink_insert.set_level(5, 0.2, 0.4, green_text)
     bud_idea_awardlink_update.set_level(5, 0.4, 0.6, green_text)
     bud_idea_awardlink_delete.set_level(5, 0.6, 0.8, green_text)
@@ -225,7 +225,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
 
     # bud_ideaunit_insert = get_insert_rect("bud_ideaunit")
     # bud_idea_awardlink_insert = get_insert_rect("bud_idea_awardlink")
-    # bud_idea_lobbyhold_insert = get_insert_rect("bud_idea_lobbyhold")
+    # bud_idea_grouphold_insert = get_insert_rect("bud_idea_grouphold")
     # bud_idea_healerhold_insert = get_insert_rect("bud_idea_healerhold")
     # bud_idea_factunit_insert = get_insert_rect("bud_idea_factunit")
     # bud_idea_reasonunit_insert = get_insert_rect("bud_idea_reasonunit")
@@ -238,7 +238,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
     # bud_idea_reason_premiseunit_delete = get_delete_rect(premise_text)
     # bud_idea_reasonunit_delete = get_delete_rect("bud_idea_reasonunit")
     # bud_idea_factunit_delete = get_delete_rect("bud_idea_factunit")
-    # bud_idea_lobbyhold_delete = get_delete_rect("bud_idea_lobbyhold")
+    # bud_idea_grouphold_delete = get_delete_rect("bud_idea_grouphold")
     # bud_idea_healerhold_delete = get_delete_rect("bud_idea_healerhold")
     # bud_idea_awardlink_delete = get_delete_rect("bud_idea_awardlink")
     # bud_ideaunit_delete = get_delete_rect("bud_ideaunit")
@@ -248,21 +248,21 @@ def atomunit_periodic_table0() -> plotly_Figure:
 
     # Add shapes
     add_atom_rect(fig, bud_acctunit_insert)
-    add_atom_rect(fig, bud_acct_lobbyship_insert)
-    add_atom_rect(fig, bud_idea_lobbyhold_insert)
+    add_atom_rect(fig, bud_acct_groupship_insert)
+    add_atom_rect(fig, bud_idea_grouphold_insert)
     add_atom_rect(fig, bud_idea_healerhold_insert)
     add_atom_rect(fig, bud_idea_factunit_insert)
     add_atom_rect(fig, bud_idea_reasonunit_insert)
     add_atom_rect(fig, bud_idea_reason_premiseunit_insert)
     add_atom_rect(fig, bud_acctunit_update)
-    add_atom_rect(fig, bud_acct_lobbyship_update)
+    add_atom_rect(fig, bud_acct_groupship_update)
     add_atom_rect(fig, bud_idea_factunit_update)
     add_atom_rect(fig, bud_idea_reason_premiseunit_update)
     add_atom_rect(fig, bud_idea_reasonunit_update)
     add_atom_rect(fig, bud_idea_reason_premiseunit_delete)
     add_atom_rect(fig, bud_idea_reasonunit_delete)
     add_atom_rect(fig, bud_idea_factunit_delete)
-    add_atom_rect(fig, bud_idea_lobbyhold_delete)
+    add_atom_rect(fig, bud_idea_grouphold_delete)
     add_atom_rect(fig, bud_idea_healerhold_delete)
     add_atom_rect(fig, bud_idea_awardlink_insert)
     add_atom_rect(fig, bud_idea_awardlink_update)
@@ -270,10 +270,10 @@ def atomunit_periodic_table0() -> plotly_Figure:
     add_atom_rect(fig, bud_ideaunit_insert)
     add_atom_rect(fig, bud_ideaunit_update)
     add_atom_rect(fig, bud_ideaunit_delete)
-    add_atom_rect(fig, bud_acct_lobbyship_delete)
+    add_atom_rect(fig, bud_acct_groupship_delete)
     add_atom_rect(fig, bud_acctunit_delete)
     add_atom_rect(fig, budunit_update)
-    add_lobbyboxs_circle(fig)
+    add_groupboxs_circle(fig)
     add_different_ideas_circle(fig)
 
     fig.add_trace(

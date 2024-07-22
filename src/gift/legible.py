@@ -16,12 +16,12 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_acctunit"])
     acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_acctunit"])
 
-    x_list = [atom_insert(), "bud_acct_lobbyship"]
-    acct_lobbyship_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_acct_lobbyship"]
-    acct_lobbyship_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_acct_lobbyship"]
-    acct_lobbyship_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_acct_groupship"]
+    acct_groupship_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_acct_groupship"]
+    acct_groupship_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_acct_groupship"]
+    acct_groupship_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "bud_ideaunit"]
     bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -51,10 +51,10 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), "bud_idea_reason_premiseunit"]
     bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_lobbyhold"]
-    bud_idea_lobbyhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_lobbyhold"]
-    bud_idea_lobbyhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_idea_grouphold"]
+    bud_idea_grouphold_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_grouphold"]
+    bud_idea_grouphold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "bud_idea_healerhold"]
     bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -78,17 +78,17 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     if acctunit_delete_dict is not None:
         add_bud_acctunit_delete_to_legible_list(leg_list, acctunit_delete_dict, x_bud)
 
-    if acct_lobbyship_insert_dict is not None:
-        add_bud_acct_lobbyship_insert_to_legible_list(
-            leg_list, acct_lobbyship_insert_dict, x_bud
+    if acct_groupship_insert_dict is not None:
+        add_bud_acct_groupship_insert_to_legible_list(
+            leg_list, acct_groupship_insert_dict, x_bud
         )
-    if acct_lobbyship_update_dict is not None:
-        add_bud_acct_lobbyship_update_to_legible_list(
-            leg_list, acct_lobbyship_update_dict, x_bud
+    if acct_groupship_update_dict is not None:
+        add_bud_acct_groupship_update_to_legible_list(
+            leg_list, acct_groupship_update_dict, x_bud
         )
-    if acct_lobbyship_delete_dict is not None:
-        add_bud_acct_lobbyship_delete_to_legible_list(
-            leg_list, acct_lobbyship_delete_dict, x_bud
+    if acct_groupship_delete_dict is not None:
+        add_bud_acct_groupship_delete_to_legible_list(
+            leg_list, acct_groupship_delete_dict, x_bud
         )
 
     if bud_ideaunit_insert_dict is not None:
@@ -143,13 +143,13 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
             leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
         )
 
-    if bud_idea_lobbyhold_insert_dict is not None:
-        add_bud_idea_lobbyhold_insert_to_legible_list(
-            leg_list, bud_idea_lobbyhold_insert_dict, x_bud
+    if bud_idea_grouphold_insert_dict is not None:
+        add_bud_idea_grouphold_insert_to_legible_list(
+            leg_list, bud_idea_grouphold_insert_dict, x_bud
         )
-    if bud_idea_lobbyhold_delete_dict is not None:
-        add_bud_idea_lobbyhold_delete_to_legible_list(
-            leg_list, bud_idea_lobbyhold_delete_dict, x_bud
+    if bud_idea_grouphold_delete_dict is not None:
+        add_bud_idea_grouphold_delete_to_legible_list(
+            leg_list, bud_idea_grouphold_delete_dict, x_bud
         )
 
     if bud_idea_healerhold_insert_dict is not None:
@@ -269,45 +269,45 @@ def add_bud_acctunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_acct_lobbyship_insert_to_legible_list(
-    legible_list: list[str], acct_lobbyship_insert_dict: dict, x_bud: BudUnit
+def add_bud_acct_groupship_insert_to_legible_list(
+    legible_list: list[str], acct_groupship_insert_dict: dict, x_bud: BudUnit
 ):
-    for acct_lobbyship_dict in acct_lobbyship_insert_dict.values():
-        for acct_lobbyship_atom in acct_lobbyship_dict.values():
-            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
-            acct_id = acct_lobbyship_atom.get_value("acct_id")
-            credit_score_value = acct_lobbyship_atom.get_value("credit_score")
-            debtit_score_value = acct_lobbyship_atom.get_value("debtit_score")
-            x_str = f"Lobby '{lobby_id}' has new member {acct_id} with lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
+    for acct_groupship_dict in acct_groupship_insert_dict.values():
+        for acct_groupship_atom in acct_groupship_dict.values():
+            group_id = acct_groupship_atom.get_value("group_id")
+            acct_id = acct_groupship_atom.get_value("acct_id")
+            credit_score_value = acct_groupship_atom.get_value("credit_score")
+            debtit_score_value = acct_groupship_atom.get_value("debtit_score")
+            x_str = f"Group '{group_id}' has new member {acct_id} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 
-def add_bud_acct_lobbyship_update_to_legible_list(
-    legible_list: list[str], acct_lobbyship_update_dict: dict, x_bud: BudUnit
+def add_bud_acct_groupship_update_to_legible_list(
+    legible_list: list[str], acct_groupship_update_dict: dict, x_bud: BudUnit
 ):
-    for acct_lobbyship_dict in acct_lobbyship_update_dict.values():
-        for acct_lobbyship_atom in acct_lobbyship_dict.values():
-            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
-            acct_id = acct_lobbyship_atom.get_value("acct_id")
-            credit_score_value = acct_lobbyship_atom.get_value("credit_score")
-            debtit_score_value = acct_lobbyship_atom.get_value("debtit_score")
+    for acct_groupship_dict in acct_groupship_update_dict.values():
+        for acct_groupship_atom in acct_groupship_dict.values():
+            group_id = acct_groupship_atom.get_value("group_id")
+            acct_id = acct_groupship_atom.get_value("acct_id")
+            credit_score_value = acct_groupship_atom.get_value("credit_score")
+            debtit_score_value = acct_groupship_atom.get_value("debtit_score")
             if credit_score_value is not None and debtit_score_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credit_score_value} and lobby_debt={debtit_score_value}."
+                x_str = f"Group '{group_id}' member {acct_id} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
             elif credit_score_value is not None and debtit_score_value is None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_cred={credit_score_value}."
+                x_str = f"Group '{group_id}' member {acct_id} has new group_cred={credit_score_value}."
             elif credit_score_value is None and debtit_score_value is not None:
-                x_str = f"Lobby '{lobby_id}' member {acct_id} has new lobby_debt={debtit_score_value}."
+                x_str = f"Group '{group_id}' member {acct_id} has new group_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 
-def add_bud_acct_lobbyship_delete_to_legible_list(
-    legible_list: list[str], acct_lobbyship_delete_dict: dict, x_bud: BudUnit
+def add_bud_acct_groupship_delete_to_legible_list(
+    legible_list: list[str], acct_groupship_delete_dict: dict, x_bud: BudUnit
 ):
-    for acct_lobbyship_dict in acct_lobbyship_delete_dict.values():
-        for acct_lobbyship_atom in acct_lobbyship_dict.values():
-            lobby_id = acct_lobbyship_atom.get_value("lobby_id")
-            acct_id = acct_lobbyship_atom.get_value("acct_id")
-            x_str = f"Lobby '{lobby_id}' no longer has member {acct_id}."
+    for acct_groupship_dict in acct_groupship_delete_dict.values():
+        for acct_groupship_atom in acct_groupship_dict.values():
+            group_id = acct_groupship_atom.get_value("group_id")
+            acct_id = acct_groupship_atom.get_value("acct_id")
+            x_str = f"Group '{group_id}' no longer has member {acct_id}."
             legible_list.append(x_str)
 
 
@@ -447,11 +447,11 @@ def add_bud_idea_awardlink_insert_to_legible_list(
 ):
     for road_dict in idea_awardlink_insert_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
+            group_id_value = idea_awardlink_atom.get_value("group_id")
             road_value = idea_awardlink_atom.get_value("road")
             give_force_value = idea_awardlink_atom.get_value("give_force")
             take_force_value = idea_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for lobby {lobby_id_value} for idea '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
+            x_str = f"Awardlink created for group {group_id_value} for idea '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -460,16 +460,16 @@ def add_bud_idea_awardlink_update_to_legible_list(
 ):
     for road_dict in idea_awardlink_update_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
+            group_id_value = idea_awardlink_atom.get_value("group_id")
             road_value = idea_awardlink_atom.get_value("road")
             give_force_value = idea_awardlink_atom.get_value("give_force")
             take_force_value = idea_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None and take_force_value is None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
             elif give_force_value is None and take_force_value is not None:
-                x_str = f"Awardlink has been transited for lobby {lobby_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -478,9 +478,9 @@ def add_bud_idea_awardlink_delete_to_legible_list(
 ):
     for road_dict in idea_awardlink_delete_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            lobby_id_value = idea_awardlink_atom.get_value("lobby_id")
+            group_id_value = idea_awardlink_atom.get_value("group_id")
             road_value = idea_awardlink_atom.get_value("road")
-            x_str = f"Awardlink for lobby {lobby_id_value}, idea '{road_value}' has been deleted."
+            x_str = f"Awardlink for group {group_id_value}, idea '{road_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -610,25 +610,25 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_bud_idea_lobbyhold_insert_to_legible_list(
-    legible_list: list[str], idea_lobbyhold_insert_dict: dict, x_bud: BudUnit
+def add_bud_idea_grouphold_insert_to_legible_list(
+    legible_list: list[str], idea_grouphold_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_lobbyhold_insert_dict.values():
-        for idea_lobbyhold_atom in road_dict.values():
-            lobby_id_value = idea_lobbyhold_atom.get_value("lobby_id")
-            road_value = idea_lobbyhold_atom.get_value("road")
-            x_str = f"lobbyhold '{lobby_id_value}' created for idea '{road_value}'."
+    for road_dict in idea_grouphold_insert_dict.values():
+        for idea_grouphold_atom in road_dict.values():
+            group_id_value = idea_grouphold_atom.get_value("group_id")
+            road_value = idea_grouphold_atom.get_value("road")
+            x_str = f"grouphold '{group_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_lobbyhold_delete_to_legible_list(
-    legible_list: list[str], idea_lobbyhold_delete_dict: dict, x_bud: BudUnit
+def add_bud_idea_grouphold_delete_to_legible_list(
+    legible_list: list[str], idea_grouphold_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_lobbyhold_delete_dict.values():
-        for idea_lobbyhold_atom in road_dict.values():
-            lobby_id_value = idea_lobbyhold_atom.get_value("lobby_id")
-            road_value = idea_lobbyhold_atom.get_value("road")
-            x_str = f"lobbyhold '{lobby_id_value}' deleted for idea '{road_value}'."
+    for road_dict in idea_grouphold_delete_dict.values():
+        for idea_grouphold_atom in road_dict.values():
+            group_id_value = idea_grouphold_atom.get_value("group_id")
+            road_value = idea_grouphold_atom.get_value("road")
+            x_str = f"grouphold '{group_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -637,9 +637,9 @@ def add_bud_idea_healerhold_insert_to_legible_list(
 ):
     for road_dict in idea_healerhold_insert_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            lobby_id_value = idea_healerhold_atom.get_value("lobby_id")
+            group_id_value = idea_healerhold_atom.get_value("group_id")
             road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{lobby_id_value}' created for idea '{road_value}'."
+            x_str = f"Healerhold '{group_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -648,9 +648,9 @@ def add_bud_idea_healerhold_delete_to_legible_list(
 ):
     for road_dict in idea_healerhold_delete_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            lobby_id_value = idea_healerhold_atom.get_value("lobby_id")
+            group_id_value = idea_healerhold_atom.get_value("group_id")
             road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{lobby_id_value}' deleted for idea '{road_value}'."
+            x_str = f"Healerhold '{group_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 

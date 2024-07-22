@@ -8,7 +8,7 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     # ESTABLISH
     yao_text = "Yao"
     yao_acctunit = acctunit_shop(yao_text)
-    yao_acctunit.add_lobbyship(yao_text)
+    yao_acctunit.add_groupship(yao_text)
     deepcopy_yao_acctunit = copy_deepcopy(yao_acctunit)
     slash_text = "/"
     bob_bud = budunit_shop("Bob", _road_delimiter=slash_text)
@@ -24,20 +24,20 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     assert bob_bud._accts == x_accts
 
 
-def test_BudUnit_set_acct_DoesNotSet_acct_id_lobbyship():
+def test_BudUnit_set_acct_DoesNotSet_acct_id_groupship():
     # ESTABLISH
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
 
     # WHEN
-    yao_bud.set_acctunit(acctunit_shop(zia_text), auto_set_lobbyship=False)
+    yao_bud.set_acctunit(acctunit_shop(zia_text), auto_set_groupship=False)
 
     # THEN
-    assert yao_bud.get_acct(zia_text).get_lobbyship(zia_text) is None
+    assert yao_bud.get_acct(zia_text).get_groupship(zia_text) is None
 
 
-def test_BudUnit_set_acct_DoesSet_acct_id_lobbyship():
+def test_BudUnit_set_acct_DoesSet_acct_id_groupship():
     # ESTABLISH
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
@@ -47,13 +47,13 @@ def test_BudUnit_set_acct_DoesSet_acct_id_lobbyship():
     yao_bud.set_acctunit(acctunit_shop(zia_text))
 
     # THEN
-    zia_zia_lobbyship = yao_bud.get_acct(zia_text).get_lobbyship(zia_text)
-    assert zia_zia_lobbyship is not None
-    assert zia_zia_lobbyship.credit_score == 1
-    assert zia_zia_lobbyship.debtit_score == 1
+    zia_zia_groupship = yao_bud.get_acct(zia_text).get_groupship(zia_text)
+    assert zia_zia_groupship is not None
+    assert zia_zia_groupship.credit_score == 1
+    assert zia_zia_groupship.debtit_score == 1
 
 
-def test_BudUnit_set_acct_DoesNotOverRide_acct_id_lobbyship():
+def test_BudUnit_set_acct_DoesNotOverRide_acct_id_groupship():
     # ESTABLISH
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
@@ -62,18 +62,18 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_lobbyship():
     zia_ohio_credor_w = 33
     zia_ohio_debtor_w = 44
     zia_acctunit = acctunit_shop(zia_text)
-    zia_acctunit.add_lobbyship(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
+    zia_acctunit.add_groupship(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
 
     # WHEN
     yao_bud.set_acctunit(zia_acctunit)
 
     # THEN
-    zia_ohio_lobbyship = yao_bud.get_acct(zia_text).get_lobbyship(ohio_text)
-    assert zia_ohio_lobbyship is not None
-    assert zia_ohio_lobbyship.credit_score == zia_ohio_credor_w
-    assert zia_ohio_lobbyship.debtit_score == zia_ohio_debtor_w
-    zia_zia_lobbyship = yao_bud.get_acct(zia_text).get_lobbyship(zia_text)
-    assert zia_zia_lobbyship is None
+    zia_ohio_groupship = yao_bud.get_acct(zia_text).get_groupship(ohio_text)
+    assert zia_ohio_groupship is not None
+    assert zia_ohio_groupship.credit_score == zia_ohio_credor_w
+    assert zia_ohio_groupship.debtit_score == zia_ohio_debtor_w
+    zia_zia_groupship = yao_bud.get_acct(zia_text).get_groupship(zia_text)
+    assert zia_zia_groupship is None
 
 
 def test_BudUnit_add_acctunit_CorrectlySets_accts():
@@ -91,7 +91,7 @@ def test_BudUnit_add_acctunit_CorrectlySets_accts():
 
     # THEN
     assert len(yao_bud._accts) == 3
-    assert len(yao_bud.get_acctunit_lobby_ids_dict()) == 3
+    assert len(yao_bud.get_acctunit_group_ids_dict()) == 3
     assert yao_bud._accts.get(xio_text).credit_score == 17
     assert yao_bud._accts.get(sue_text).debtit_score == 5
     assert yao_bud._accts.get(xio_text)._bit == x_bit
@@ -112,7 +112,7 @@ def test_BudUnit_acct_exists_ReturnsObj():
     assert bob_bud.acct_exists(yao_text)
 
 
-def test_BudUnit_set_acct_Creates_lobbyship():
+def test_BudUnit_set_acct_Creates_groupship():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     zia_text = "Zia"
@@ -120,11 +120,11 @@ def test_BudUnit_set_acct_Creates_lobbyship():
     before_zia_debtor = 17
     yao_bud.add_acctunit(zia_text, before_zia_credor, before_zia_debtor)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    zia_lobbyship = zia_acctunit.get_lobbyship(zia_text)
-    assert zia_lobbyship.credit_score != before_zia_credor
-    assert zia_lobbyship.debtit_score != before_zia_debtor
-    assert zia_lobbyship.credit_score == 1
-    assert zia_lobbyship.debtit_score == 1
+    zia_groupship = zia_acctunit.get_groupship(zia_text)
+    assert zia_groupship.credit_score != before_zia_credor
+    assert zia_groupship.debtit_score != before_zia_debtor
+    assert zia_groupship.credit_score == 1
+    assert zia_groupship.debtit_score == 1
 
     # WHEN
     after_zia_credor = 11
@@ -132,10 +132,10 @@ def test_BudUnit_set_acct_Creates_lobbyship():
     yao_bud.set_acctunit(acctunit_shop(zia_text, after_zia_credor, after_zia_debtor))
 
     # THEN
-    assert zia_lobbyship.credit_score != after_zia_credor
-    assert zia_lobbyship.debtit_score != after_zia_debtor
-    assert zia_lobbyship.credit_score == 1
-    assert zia_lobbyship.debtit_score == 1
+    assert zia_groupship.credit_score != after_zia_credor
+    assert zia_groupship.debtit_score != after_zia_debtor
+    assert zia_groupship.credit_score == 1
+    assert zia_groupship.debtit_score == 1
 
 
 def test_BudUnit_edit_acct_RaiseExceptionWhenAcctDoesNotExist():

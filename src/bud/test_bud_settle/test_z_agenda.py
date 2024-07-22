@@ -3,7 +3,7 @@ from src._road.road import RoadUnit
 from src.bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.bud.idea import IdeaUnit, ideaunit_shop
 from src.bud.reason_idea import reasonunit_shop
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from src.bud.reason_doer import doerunit_shop
 from src.bud.examples.example_buds import (
     get_budunit_1Task_1CE0MinutesReason_1Fact,
@@ -433,7 +433,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     # ESTABLISH
     sue_bud = get_budunit_sue_TimeExample()
     assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 0
+    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
 
     clean_things_text = "cleaning things"
@@ -467,11 +467,11 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     clean_cookery_idea.set_reasonunit(reason=daytime_reason)
 
     family_text = ",family"
-    awardlink_z = awardlink_shop(lobby_id=family_text)
+    awardlink_z = awardlink_shop(group_id=family_text)
     clean_cookery_idea.set_awardlink(awardlink_z)
 
     assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 0
+    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
     assert sue_bud.get_idea_obj(daytime_road)._begin == 0
     assert sue_bud.get_idea_obj(daytime_road)._close == 1440
@@ -494,8 +494,8 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
     assert sue_bud.get_idea_obj(daytime_road)._begin == 0
     assert sue_bud.get_idea_obj(daytime_road)._close == 1440
-    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 0
-    assert sue_bud.get_acctunit_lobby_ids_dict().get(family_text) is None
+    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
+    assert sue_bud.get_acctunit_group_ids_dict().get(family_text) is None
 
     assert len(sue_bud._idearoot._kids) == 3
 
@@ -561,7 +561,7 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     assert get_tasks_count(pledge_idea_list) == 64
 
 
-def test_BudUnit_agenda_IsSetByDoerUnit_1AcctLobby():
+def test_BudUnit_agenda_IsSetByDoerUnit_1AcctGroup():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
@@ -573,7 +573,7 @@ def test_BudUnit_agenda_IsSetByDoerUnit_1AcctLobby():
     sue_text = "Sue"
     yao_bud.add_acctunit(sue_text)
     doerunit_sue = doerunit_shop()
-    doerunit_sue.set_lobbyhold(lobby_id=sue_text)
+    doerunit_sue.set_grouphold(group_id=sue_text)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
@@ -585,7 +585,7 @@ def test_BudUnit_agenda_IsSetByDoerUnit_1AcctLobby():
     # WHEN
     yao_bud.add_acctunit(yao_text)
     doerunit_yao = doerunit_shop()
-    doerunit_yao.set_lobbyhold(lobby_id=yao_text)
+    doerunit_yao.set_grouphold(group_id=yao_text)
 
     # WHEN
     yao_bud.edit_idea_attr(road=casa_road, doerunit=doerunit_yao)
@@ -597,7 +597,7 @@ def test_BudUnit_agenda_IsSetByDoerUnit_1AcctLobby():
     # print(f"{agenda_dict[0]._label=}")
 
 
-def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctLobby():
+def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctGroup():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
@@ -610,10 +610,10 @@ def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctLobby():
     yao_bud.add_acctunit(sue_text)
     run_text = ",runners"
     sue_acctunit = yao_bud.get_acct(sue_text)
-    sue_acctunit.add_lobbyship(run_text)
+    sue_acctunit.add_groupship(run_text)
 
     run_doerunit = doerunit_shop()
-    run_doerunit.set_lobbyhold(lobby_id=run_text)
+    run_doerunit.set_grouphold(group_id=run_text)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
@@ -624,7 +624,7 @@ def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctLobby():
 
     # WHEN
     yao_acctunit = yao_bud.get_acct(yao_text)
-    yao_acctunit.add_lobbyship(run_text)
+    yao_acctunit.add_groupship(run_text)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1
@@ -720,7 +720,7 @@ def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
     sweep_idea = zia_bud.get_idea_obj(sweep_road)
     yao_text = "Yao"
     zia_bud.add_acctunit(yao_text)
-    sweep_idea._doerunit.set_lobbyhold(yao_text)
+    sweep_idea._doerunit.set_grouphold(yao_text)
     print(f"{sweep_idea}")
     agenda_dict = zia_bud.get_agenda_dict()
     assert agenda_dict.get(clean_road) is not None

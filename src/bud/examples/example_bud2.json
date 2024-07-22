@@ -2,21 +2,21 @@
     "_bit": 1,
     "_accts": {
         "A a ron Jones": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",OceanVista Apt"
+                    "group_id": ",OceanVista Apt"
                 },
                 "A a ron Jones": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "A a ron Jones"
+                    "group_id": "A a ron Jones"
                 }
             },
             "acct_id": "A a ron Jones",
@@ -24,26 +24,26 @@
             "debtit_score": 1
         },
         "America": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Family": {
                     "credit_score": 6.45,
                     "debtit_score": 1,
-                    "lobby_id": ",Family"
+                    "group_id": ",Family"
                 },
                 ",Friends": {
                     "credit_score": 6.1,
                     "debtit_score": 1,
-                    "lobby_id": ",Friends"
+                    "group_id": ",Friends"
                 },
                 "America": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "America"
+                    "group_id": "America"
                 }
             },
             "acct_id": "America",
@@ -51,21 +51,21 @@
             "debtit_score": 1
         },
         "Anna": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Family": {
                     "credit_score": 6.2,
                     "debtit_score": 1,
-                    "lobby_id": ",Family"
+                    "group_id": ",Family"
                 },
                 "Anna": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Anna"
+                    "group_id": "Anna"
                 }
             },
             "acct_id": "Anna",
@@ -73,26 +73,26 @@
             "debtit_score": 1
         },
         "Benjamin Stoddert": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME General"
+                    "group_id": ",ACME General"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Benjamin Stoddert": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Benjamin Stoddert"
+                    "group_id": "Benjamin Stoddert"
                 }
             },
             "acct_id": "Benjamin Stoddert",
@@ -100,26 +100,26 @@
             "debtit_score": 1
         },
         "Bob302": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 6.25,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",appreciates US DOLLAR": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",appreciates US DOLLAR"
+                    "group_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Bob302": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Bob302"
+                    "group_id": "Bob302"
                 }
             },
             "acct_id": "Bob302",
@@ -127,26 +127,26 @@
             "debtit_score": 1
         },
         "Chuck Lee": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME General"
+                    "group_id": ",ACME General"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Chuck Lee": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Chuck Lee"
+                    "group_id": "Chuck Lee"
                 }
             },
             "acct_id": "Chuck Lee",
@@ -154,21 +154,21 @@
             "debtit_score": 1
         },
         "Ernesto Chavez": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Philosophy": {
                     "credit_score": 6.5,
                     "debtit_score": 1,
-                    "lobby_id": ",Philosophy"
+                    "group_id": ",Philosophy"
                 },
                 "Ernesto Chavez": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Ernesto Chavez"
+                    "group_id": "Ernesto Chavez"
                 }
             },
             "acct_id": "Ernesto Chavez",
@@ -176,21 +176,21 @@
             "debtit_score": 1
         },
         "Jacque Chirac": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",OceanVista Apt"
+                    "group_id": ",OceanVista Apt"
                 },
                 "Jacque Chirac": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Jacque Chirac"
+                    "group_id": "Jacque Chirac"
                 }
             },
             "acct_id": "Jacque Chirac",
@@ -198,21 +198,21 @@
             "debtit_score": 1
         },
         "Jane Randolph": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Jane Randolph": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Jane Randolph"
+                    "group_id": "Jane Randolph"
                 }
             },
             "acct_id": "Jane Randolph",
@@ -220,21 +220,21 @@
             "debtit_score": 1
         },
         "Maria Reynolds": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 6.75,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Maria Reynolds": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Maria Reynolds"
+                    "group_id": "Maria Reynolds"
                 }
             },
             "acct_id": "Maria Reynolds",
@@ -242,26 +242,26 @@
             "debtit_score": 1
         },
         "Martha Doubs": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME General"
+                    "group_id": ",ACME General"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Martha Doubs": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Martha Doubs"
+                    "group_id": "Martha Doubs"
                 }
             },
             "acct_id": "Martha Doubs",
@@ -269,26 +269,26 @@
             "debtit_score": 1
         },
         "Mikayla": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 10,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Philosophy": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Philosophy"
+                    "group_id": ",Philosophy"
                 },
                 "Mikayla": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Mikayla"
+                    "group_id": "Mikayla"
                 }
             },
             "acct_id": "Mikayla",
@@ -296,21 +296,21 @@
             "debtit_score": 1
         },
         "Norberto": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",OceanVista Apt"
+                    "group_id": ",OceanVista Apt"
                 },
                 "Norberto": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Norberto"
+                    "group_id": "Norberto"
                 }
             },
             "acct_id": "Norberto",
@@ -318,26 +318,26 @@
             "debtit_score": 1
         },
         "Perrison": {
-            "_lobbyships": {
+            "_groupships": {
                 ",appreciates US DOLLAR": {
                     "credit_score": 5,
                     "debtit_score": 1,
-                    "lobby_id": ",appreciates US DOLLAR"
+                    "group_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Friends": {
                     "credit_score": 6.4,
                     "debtit_score": 1,
-                    "lobby_id": ",Friends"
+                    "group_id": ",Friends"
                 },
                 "Perrison": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Perrison"
+                    "group_id": "Perrison"
                 }
             },
             "acct_id": "Perrison",
@@ -345,26 +345,26 @@
             "debtit_score": 1
         },
         "Philipa": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Climate Death": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Climate Death"
+                    "group_id": ",Climate Death"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Philosophy": {
                     "credit_score": 52,
                     "debtit_score": 1,
-                    "lobby_id": ",Philosophy"
+                    "group_id": ",Philosophy"
                 },
                 "Philipa": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Philipa"
+                    "group_id": "Philipa"
                 }
             },
             "acct_id": "Philipa",
@@ -372,21 +372,21 @@
             "debtit_score": 1
         },
         "Prashant": {
-            "_lobbyships": {
+            "_groupships": {
                 ",appreciates US DOLLAR": {
                     "credit_score": 2,
                     "debtit_score": 1,
-                    "lobby_id": ",appreciates US DOLLAR"
+                    "group_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Prashant": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Prashant"
+                    "group_id": "Prashant"
                 }
             },
             "acct_id": "Prashant",
@@ -394,51 +394,51 @@
             "debtit_score": 1
         },
         "Renee Elise Goldsberry": {
-            "_lobbyships": {
+            "_groupships": {
                 ",appreciates US DOLLAR": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",appreciates US DOLLAR"
+                    "group_id": ",appreciates US DOLLAR"
                 },
                 ",Climate Death": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Climate Death"
+                    "group_id": ",Climate Death"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Friends": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Friends"
+                    "group_id": ",Friends"
                 },
                 ",hurt by us dollar": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",hurt by us dollar"
+                    "group_id": ",hurt by us dollar"
                 },
                 ",People who identify by UTEP": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",People who identify by UTEP"
+                    "group_id": ",People who identify by UTEP"
                 },
                 ",Philosophy": {
                     "credit_score": 3,
                     "debtit_score": 1,
-                    "lobby_id": ",Philosophy"
+                    "group_id": ",Philosophy"
                 },
                 ",SHOW ME2": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",SHOW ME2"
+                    "group_id": ",SHOW ME2"
                 },
                 "Renee Elise Goldsberry": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Renee Elise Goldsberry"
+                    "group_id": "Renee Elise Goldsberry"
                 }
             },
             "acct_id": "Renee Elise Goldsberry",
@@ -446,26 +446,26 @@
             "debtit_score": 1
         },
         "Sam zamora": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME General"
+                    "group_id": ",ACME General"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Sam zamora": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Sam zamora"
+                    "group_id": "Sam zamora"
                 }
             },
             "acct_id": "Sam zamora",
@@ -473,21 +473,21 @@
             "debtit_score": 1
         },
         "Shadwell Harris": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Shadwell Harris": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Shadwell Harris"
+                    "group_id": "Shadwell Harris"
                 }
             },
             "acct_id": "Shadwell Harris",
@@ -495,21 +495,21 @@
             "debtit_score": 1
         },
         "Thomas OSU": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Climate Death": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Climate Death"
+                    "group_id": ",Climate Death"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "Thomas OSU": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Thomas OSU"
+                    "group_id": "Thomas OSU"
                 }
             },
             "acct_id": "Thomas OSU",
@@ -517,21 +517,21 @@
             "debtit_score": 1
         },
         "Travis Fox": {
-            "_lobbyships": {
+            "_groupships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 ",Family": {
                     "credit_score": 6.35,
                     "debtit_score": 1,
-                    "lobby_id": ",Family"
+                    "group_id": ",Family"
                 },
                 "Travis Fox": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "Travis Fox"
+                    "group_id": "Travis Fox"
                 }
             },
             "acct_id": "Travis Fox",
@@ -539,21 +539,21 @@
             "debtit_score": 1
         },
         "WIlliam Wallace": {
-            "_lobbyships": {
+            "_groupships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",ACME DevOps"
+                    "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": ",Everyone"
+                    "group_id": ",Everyone"
                 },
                 "WIlliam Wallace": {
                     "credit_score": 1,
                     "debtit_score": 1,
-                    "lobby_id": "WIlliam Wallace"
+                    "group_id": "WIlliam Wallace"
                 }
             },
             "acct_id": "WIlliam Wallace",
@@ -1516,7 +1516,7 @@
                         "_awardlinks": {
                             "Perrison": {
                                 "give_force": 1.0,
-                                "lobby_id": "Perrison",
+                                "group_id": "Perrison",
                                 "take_force": 1
                             }
                         },
@@ -1560,7 +1560,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1605,7 +1605,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1631,7 +1631,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1657,7 +1657,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1684,7 +1684,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1710,7 +1710,7 @@
                                 "_awardlinks": {
                                     "Perrison": {
                                         "give_force": 1.0,
-                                        "lobby_id": "Perrison",
+                                        "group_id": "Perrison",
                                         "take_force": 1
                                     }
                                 },
@@ -1736,7 +1736,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1762,7 +1762,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1788,7 +1788,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1814,7 +1814,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1863,7 +1863,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -1897,7 +1897,7 @@
                                 "_awardlinks": {
                                     "Travis Fox": {
                                         "give_force": 1.0,
-                                        "lobby_id": "Travis Fox",
+                                        "group_id": "Travis Fox",
                                         "take_force": 1
                                     }
                                 },
@@ -1960,7 +1960,7 @@
                                 "_awardlinks": {
                                     "America": {
                                         "give_force": 1.0,
-                                        "lobby_id": "America",
+                                        "group_id": "America",
                                         "take_force": 1
                                     }
                                 },
@@ -2012,7 +2012,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2038,7 +2038,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2064,7 +2064,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2090,7 +2090,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2116,7 +2116,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2142,7 +2142,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2168,7 +2168,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2212,7 +2212,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2238,7 +2238,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2264,7 +2264,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2290,7 +2290,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2316,7 +2316,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2360,7 +2360,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2386,7 +2386,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2412,7 +2412,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2438,7 +2438,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2538,7 +2538,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2566,7 +2566,7 @@
                                         "_awardlinks": {
                                             ",Family": {
                                                 "give_force": 1.0,
-                                                "lobby_id": ",Family",
+                                                "group_id": ",Family",
                                                 "take_force": 1
                                             }
                                         },
@@ -2592,7 +2592,7 @@
                                         "_awardlinks": {
                                             ",Family": {
                                                 "give_force": 1.0,
-                                                "lobby_id": ",Family",
+                                                "group_id": ",Family",
                                                 "take_force": 1
                                             }
                                         },
@@ -2648,7 +2648,7 @@
                                         "_awardlinks": {
                                             ",Family": {
                                                 "give_force": 1.0,
-                                                "lobby_id": ",Family",
+                                                "group_id": ",Family",
                                                 "take_force": 1
                                             }
                                         },
@@ -2674,7 +2674,7 @@
                                         "_awardlinks": {
                                             ",Family": {
                                                 "give_force": 1.0,
-                                                "lobby_id": ",Family",
+                                                "group_id": ",Family",
                                                 "take_force": 1
                                             }
                                         },
@@ -2699,7 +2699,7 @@
                                         "_awardlinks": {
                                             ",Family": {
                                                 "give_force": 1.0,
-                                                "lobby_id": ",Family",
+                                                "group_id": ",Family",
                                                 "take_force": 1
                                             }
                                         },
@@ -2741,7 +2741,7 @@
                                         "_awardlinks": {
                                             ",Family": {
                                                 "give_force": 1.0,
-                                                "lobby_id": ",Family",
+                                                "group_id": ",Family",
                                                 "take_force": 1
                                             }
                                         },
@@ -2780,7 +2780,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2805,7 +2805,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2830,7 +2830,7 @@
                                 "_awardlinks": {
                                     "Perrison": {
                                         "give_force": 1.0,
-                                        "lobby_id": "Perrison",
+                                        "group_id": "Perrison",
                                         "take_force": 1
                                     }
                                 },
@@ -2855,7 +2855,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -2885,7 +2885,7 @@
                         "_awardlinks": {
                             ",OceanVista Apt": {
                                 "give_force": 1.0,
-                                "lobby_id": ",OceanVista Apt",
+                                "group_id": ",OceanVista Apt",
                                 "take_force": 1
                             }
                         },
@@ -2933,7 +2933,7 @@
                                                         "_awardlinks": {
                                                             "Norberto": {
                                                                 "give_force": 1.0,
-                                                                "lobby_id": "Norberto",
+                                                                "group_id": "Norberto",
                                                                 "take_force": 1
                                                             }
                                                         },
@@ -3023,7 +3023,7 @@
                                 "_awardlinks": {
                                     "America": {
                                         "give_force": 1.0,
-                                        "lobby_id": "America",
+                                        "group_id": "America",
                                         "take_force": 1
                                     }
                                 },
@@ -3057,7 +3057,7 @@
                                 "_awardlinks": {
                                     ",Family": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Family",
+                                        "group_id": ",Family",
                                         "take_force": 1
                                     }
                                 },
@@ -3125,7 +3125,7 @@
                         "_awardlinks": {
                             ",Family": {
                                 "give_force": 1.0,
-                                "lobby_id": ",Family",
+                                "group_id": ",Family",
                                 "take_force": 1
                             }
                         },
@@ -3157,17 +3157,17 @@
                 "_awardlinks": {
                     ",Climate Death": {
                         "give_force": 1.0,
-                        "lobby_id": ",Climate Death",
+                        "group_id": ",Climate Death",
                         "take_force": 1
                     },
                     ",Family": {
                         "give_force": 1.0,
-                        "lobby_id": ",Family",
+                        "group_id": ",Family",
                         "take_force": 1
                     },
                     "America": {
                         "give_force": 1.0,
-                        "lobby_id": "America",
+                        "group_id": "America",
                         "take_force": 1
                     }
                 },
@@ -3177,7 +3177,7 @@
                         "_awardlinks": {
                             "Renee Elise Goldsberry": {
                                 "give_force": 1.0,
-                                "lobby_id": "Renee Elise Goldsberry",
+                                "group_id": "Renee Elise Goldsberry",
                                 "take_force": 1
                             }
                         },
@@ -3186,7 +3186,7 @@
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
                                         "give_force": 1.0,
-                                        "lobby_id": "Renee Elise Goldsberry",
+                                        "group_id": "Renee Elise Goldsberry",
                                         "take_force": 1
                                     }
                                 },
@@ -3223,7 +3223,7 @@
                         "_awardlinks": {
                             ",hurt by us dollar": {
                                 "give_force": 1.0,
-                                "lobby_id": ",hurt by us dollar",
+                                "group_id": ",hurt by us dollar",
                                 "take_force": 1
                             }
                         },
@@ -3276,7 +3276,7 @@
                                 "_awardlinks": {
                                     ",Climate Death": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Climate Death",
+                                        "group_id": ",Climate Death",
                                         "take_force": 1
                                     }
                                 },
@@ -3389,7 +3389,7 @@
                                 "_awardlinks": {
                                     "Renee Elise Goldsberry": {
                                         "give_force": 1.0,
-                                        "lobby_id": "Renee Elise Goldsberry",
+                                        "group_id": "Renee Elise Goldsberry",
                                         "take_force": 1
                                     }
                                 },
@@ -3398,7 +3398,7 @@
                                         "_awardlinks": {
                                             "Renee Elise Goldsberry": {
                                                 "give_force": 1.0,
-                                                "lobby_id": "Renee Elise Goldsberry",
+                                                "group_id": "Renee Elise Goldsberry",
                                                 "take_force": 1
                                             }
                                         },
@@ -3432,12 +3432,12 @@
                                         "_awardlinks": {
                                             ",Climate Death": {
                                                 "give_force": 1.0,
-                                                "lobby_id": ",Climate Death",
+                                                "group_id": ",Climate Death",
                                                 "take_force": 1
                                             },
                                             "Renee Elise Goldsberry": {
                                                 "give_force": 1.0,
-                                                "lobby_id": "Renee Elise Goldsberry",
+                                                "group_id": "Renee Elise Goldsberry",
                                                 "take_force": 1
                                             }
                                         },
@@ -3503,7 +3503,7 @@
                                 "_awardlinks": {
                                     ",Climate Death": {
                                         "give_force": 1.0,
-                                        "lobby_id": ",Climate Death",
+                                        "group_id": ",Climate Death",
                                         "take_force": 1
                                     }
                                 },

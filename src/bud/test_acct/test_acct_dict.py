@@ -1,4 +1,4 @@
-from src.bud.lobby import lobbyship_shop
+from src.bud.group import groupship_shop
 from src.bud.acct import (
     acctunit_shop,
     acctunits_get_from_json,
@@ -9,7 +9,7 @@ from src._instrument.python import x_is_json, get_json_from_dict
 from pytest import raises as pytest_raises
 
 
-def test_AcctUnit_get_lobbyships_dict_ReturnObj():
+def test_AcctUnit_get_groupships_dict_ReturnObj():
     # ESTABLISH
     sue_text = "Sue"
     sue_credit_score = 11
@@ -17,27 +17,27 @@ def test_AcctUnit_get_lobbyships_dict_ReturnObj():
     run_text = ",Run"
     run_credit_score = 17
     run_debtit_score = 23
-    sue_lobbyship = lobbyship_shop(sue_text, sue_credit_score, sue_debtit_score)
-    run_lobbyship = lobbyship_shop(run_text, run_credit_score, run_debtit_score)
+    sue_groupship = groupship_shop(sue_text, sue_credit_score, sue_debtit_score)
+    run_groupship = groupship_shop(run_text, run_credit_score, run_debtit_score)
     sue_acctunit = acctunit_shop(sue_text)
-    sue_acctunit.set_lobbyship(sue_lobbyship)
-    sue_acctunit.set_lobbyship(run_lobbyship)
+    sue_acctunit.set_groupship(sue_groupship)
+    sue_acctunit.set_groupship(run_groupship)
 
     # WHEN
-    sue_lobbyships_dict = sue_acctunit.get_lobbyships_dict()
+    sue_groupships_dict = sue_acctunit.get_groupships_dict()
 
     # THEN
-    assert sue_lobbyships_dict.get(sue_text) is not None
-    assert sue_lobbyships_dict.get(run_text) is not None
-    sue_lobbyship_dict = sue_lobbyships_dict.get(sue_text)
-    run_lobbyship_dict = sue_lobbyships_dict.get(run_text)
-    assert sue_lobbyship_dict == {
-        "lobby_id": sue_text,
+    assert sue_groupships_dict.get(sue_text) is not None
+    assert sue_groupships_dict.get(run_text) is not None
+    sue_groupship_dict = sue_groupships_dict.get(sue_text)
+    run_groupship_dict = sue_groupships_dict.get(run_text)
+    assert sue_groupship_dict == {
+        "group_id": sue_text,
         "credit_score": sue_credit_score,
         "debtit_score": sue_debtit_score,
     }
-    assert run_lobbyship_dict == {
-        "lobby_id": run_text,
+    assert run_groupship_dict == {
+        "group_id": run_text,
         "credit_score": run_credit_score,
         "debtit_score": run_debtit_score,
     }
@@ -55,24 +55,24 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
     print(f"{bob_text}")
 
-    bob_acctunit.set_lobbyship(lobbyship_shop(bob_text))
+    bob_acctunit.set_groupship(groupship_shop(bob_text))
     run_text = ",Run"
-    bob_acctunit.set_lobbyship(lobbyship_shop(run_text))
+    bob_acctunit.set_groupship(groupship_shop(run_text))
 
     # WHEN
     x_dict = bob_acctunit.get_dict()
 
     # THEN
-    bl_dict = x_dict.get("_lobbyships")
+    bl_dict = x_dict.get("_groupships")
     print(f"{bl_dict=}")
     assert x_dict is not None
     assert x_dict == {
         "acct_id": bob_text,
         "credit_score": bob_credit_score,
         "debtit_score": bob_debtit_score,
-        "_lobbyships": {
-            bob_text: {"lobby_id": bob_text, "credit_score": 1, "debtit_score": 1},
-            run_text: {"lobby_id": run_text, "credit_score": 1, "debtit_score": 1},
+        "_groupships": {
+            bob_text: {"group_id": bob_text, "credit_score": 1, "debtit_score": 1},
+            run_text: {"group_id": run_text, "credit_score": 1, "debtit_score": 1},
         },
     }
 
@@ -105,9 +105,9 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_acctunit._fund_agenda_ratio_give = bob_fund_agenda_ratio_give
     bob_acctunit._fund_agenda_ratio_take = bob_fund_agenda_ratio_take
 
-    bob_acctunit.set_lobbyship(lobbyship_shop(bob_text))
+    bob_acctunit.set_groupship(groupship_shop(bob_text))
     run_text = ",Run"
-    bob_acctunit.set_lobbyship(lobbyship_shop(run_text))
+    bob_acctunit.set_groupship(groupship_shop(run_text))
 
     print(f"{bob_text}")
 
@@ -121,7 +121,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
         "acct_id": bob_text,
         "credit_score": bob_credit_score,
         "debtit_score": bob_debtit_score,
-        "_lobbyships": bob_acctunit.get_lobbyships_dict(),
+        "_groupships": bob_acctunit.get_groupships_dict(),
         "_irrational_debtit_score": bob_irrational_debtit_score,
         "_inallocable_debtit_score": bob_inallocable_debtit_score,
         "_fund_give": bob_fund_give,
@@ -204,22 +204,22 @@ def test_acctunit_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
     assert after_yao_acctunit._road_delimiter == slash_text
 
 
-def test_acctunit_get_from_dict_Returns_lobbyships():
+def test_acctunit_get_from_dict_Returns_groupships():
     # ESTABLISH
     yao_text = ",Yao"
     slash_text = "/"
     before_yao_acctunit = acctunit_shop(yao_text, _road_delimiter=slash_text)
     ohio_text = f"{slash_text}ohio"
     iowa_text = f"{slash_text}iowa"
-    before_yao_acctunit.set_lobbyship(lobbyship_shop(ohio_text))
-    before_yao_acctunit.set_lobbyship(lobbyship_shop(iowa_text))
+    before_yao_acctunit.set_groupship(groupship_shop(ohio_text))
+    before_yao_acctunit.set_groupship(groupship_shop(iowa_text))
     yao_dict = before_yao_acctunit.get_dict()
 
     # WHEN
     after_yao_acctunit = acctunit_get_from_dict(yao_dict, slash_text)
 
     # THEN
-    assert before_yao_acctunit._lobbyships == after_yao_acctunit._lobbyships
+    assert before_yao_acctunit._groupships == after_yao_acctunit._groupships
     assert before_yao_acctunit == after_yao_acctunit
     assert after_yao_acctunit._road_delimiter == slash_text
 
@@ -252,7 +252,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
             "acct_id": yao_text,
             "credit_score": yao_credit_score,
             "debtit_score": yao_debtit_score,
-            "_lobbyships": {},
+            "_groupships": {},
             "_irrational_debtit_score": yao_irrational_debtit_score,
             "_inallocable_debtit_score": yao_inallocable_debtit_score,
         }

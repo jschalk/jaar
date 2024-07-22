@@ -68,7 +68,7 @@ def get_example_zia_speaker() -> BudUnit:
     yao_text = "Yao"
     zia_speaker.add_acctunit(yao_text, debtit_score=12)
     cook_ideaunit = zia_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._doerunit.set_lobbyhold(yao_text)
+    cook_ideaunit._doerunit.set_grouphold(yao_text)
     zia_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
@@ -86,7 +86,7 @@ def get_example_bob_speaker() -> BudUnit:
     yao_text = "Yao"
     bob_speaker.add_acctunit(yao_text, debtit_score=12)
     cook_ideaunit = bob_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._doerunit.set_lobbyhold(yao_text)
+    cook_ideaunit._doerunit.set_grouphold(yao_text)
     bob_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
@@ -108,7 +108,7 @@ def get_example_yao_speaker() -> BudUnit:
     yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._doerunit.set_lobbyhold(yao_text)
+    cook_ideaunit._doerunit.set_grouphold(yao_text)
     yao_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )

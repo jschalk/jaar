@@ -3,7 +3,7 @@ from src.bud.examples.example_buds import get_budunit_with_4_levels
 from src.bud.idea import ideaunit_shop
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.lobby import awardlink_shop
+from src.bud.group import awardlink_shop
 from pytest import raises as pytest_raises
 from src._road.road import default_road_delimiter_if_none
 
@@ -535,18 +535,18 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 
     # _awardlink: dict = None,
     sue_bud._idearoot._kids[casa_text]._awardlinks = {
-        "fun": awardlink_shop(lobby_id="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(group_id="fun", give_force=1, take_force=7)
     }
     _awardlinks = sue_bud._idearoot._kids[casa_text]._awardlinks
     assert _awardlinks == {
-        "fun": awardlink_shop(lobby_id="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(group_id="fun", give_force=1, take_force=7)
     }
     sue_bud.edit_idea_attr(
         road=casa_road,
-        awardlink=awardlink_shop(lobby_id="fun", give_force=4, take_force=8),
+        awardlink=awardlink_shop(group_id="fun", give_force=4, take_force=8),
     )
     assert sue_bud._idearoot._kids[casa_text]._awardlinks == {
-        "fun": awardlink_shop(lobby_id="fun", give_force=4, take_force=8)
+        "fun": awardlink_shop(group_id="fun", give_force=4, take_force=8)
     }
 
     # _is_expanded: dict = None,
@@ -700,7 +700,7 @@ def test_BudUnit_edit_idea_attr_budWhenParentAndNumeric_roadBothHaveRangeThrowEr
     assert casa_idea3._addin == 0
 
 
-def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_lobby_ids_DoNotExist():
+def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_group_ids_DoNotExist():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     casa_text = "casa"
@@ -722,7 +722,7 @@ def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_lobby_ids_DoNotExist(
         yao_bud.edit_idea_attr(road=casa_road, healerhold=x_healerhold)
     assert (
         str(excinfo.value)
-        == f"Idea cannot edit healerhold because lobby_id '{sue_text}' does not exist as lobby in Bud"
+        == f"Idea cannot edit healerhold because group_id '{sue_text}' does not exist as group in Bud"
     )
 
 
@@ -915,7 +915,7 @@ def test_BudUnit_set_awardlink_correctly_sets_awardlinks():
     sue_bud.add_acctunit(Xio_text)
 
     assert len(sue_bud._accts) == 3
-    assert len(sue_bud.get_acctunit_lobby_ids_dict()) == 3
+    assert len(sue_bud.get_acctunit_group_ids_dict()) == 3
     swim_text = "swim"
     sue_bud.set_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, give_force=10)
