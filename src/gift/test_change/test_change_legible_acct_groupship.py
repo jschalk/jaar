@@ -29,7 +29,7 @@ def test_create_legible_list_ReturnsObj_acct_groupship_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' has new member {yao_text} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
+    x_str = f"Group '{swim_text}' has new groupship {yao_text} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -59,7 +59,7 @@ def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_credit_score_debti
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' member {yao_text} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
+    x_str = f"Group '{swim_text}' groupship {yao_text} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -86,7 +86,7 @@ def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_credit_score():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' member {yao_text} has new group_cred={credit_score_value}."
+    x_str = f"Group '{swim_text}' groupship {yao_text} has new group_cred={credit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -113,7 +113,7 @@ def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_debtit_score():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' member {yao_text} has new group_debt={debtit_score_value}."
+    x_str = f"Group '{swim_text}' groupship {yao_text} has new group_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -137,6 +137,6 @@ def test_create_legible_list_ReturnsObj_acct_groupship_DELETE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' no longer has member {yao_text}."
+    x_str = f"Group '{swim_text}' no longer has groupship {yao_text}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

@@ -278,7 +278,7 @@ def add_bud_acct_groupship_insert_to_legible_list(
             acct_id = acct_groupship_atom.get_value("acct_id")
             credit_score_value = acct_groupship_atom.get_value("credit_score")
             debtit_score_value = acct_groupship_atom.get_value("debtit_score")
-            x_str = f"Group '{group_id}' has new member {acct_id} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
+            x_str = f"Group '{group_id}' has new groupship {acct_id} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 
@@ -292,11 +292,11 @@ def add_bud_acct_groupship_update_to_legible_list(
             credit_score_value = acct_groupship_atom.get_value("credit_score")
             debtit_score_value = acct_groupship_atom.get_value("debtit_score")
             if credit_score_value is not None and debtit_score_value is not None:
-                x_str = f"Group '{group_id}' member {acct_id} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
+                x_str = f"Group '{group_id}' groupship {acct_id} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
             elif credit_score_value is not None and debtit_score_value is None:
-                x_str = f"Group '{group_id}' member {acct_id} has new group_cred={credit_score_value}."
+                x_str = f"Group '{group_id}' groupship {acct_id} has new group_cred={credit_score_value}."
             elif credit_score_value is None and debtit_score_value is not None:
-                x_str = f"Group '{group_id}' member {acct_id} has new group_debt={debtit_score_value}."
+                x_str = f"Group '{group_id}' groupship {acct_id} has new group_debt={debtit_score_value}."
             legible_list.append(x_str)
 
 
@@ -307,7 +307,7 @@ def add_bud_acct_groupship_delete_to_legible_list(
         for acct_groupship_atom in acct_groupship_dict.values():
             group_id = acct_groupship_atom.get_value("group_id")
             acct_id = acct_groupship_atom.get_value("acct_id")
-            x_str = f"Group '{group_id}' no longer has member {acct_id}."
+            x_str = f"Group '{group_id}' no longer has groupship {acct_id}."
             legible_list.append(x_str)
 
 
