@@ -1,4 +1,4 @@
-from src._road.finance import trim_bit_excess
+from src._road.finance import trim_bit_excess, allot_scale
 from src._road.road import (
     get_ancestor_roads,
     RoadUnit,
@@ -83,6 +83,7 @@ def create_ingest_idea(
 def generate_ingest_list(
     item_list: list[IdeaUnit], debtor_amount: float, bit: float
 ) -> list[IdeaUnit]:
+    # TODO replace with allot_scale process
     x_list = [
         create_ingest_idea(x_ideaunit, debtor_amount, bit) for x_ideaunit in item_list
     ]

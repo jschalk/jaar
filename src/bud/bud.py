@@ -1210,7 +1210,27 @@ class BudUnit:
                     bud_agenda_debt=x_lobbyship._fund_agenda_take,
                 )
 
-    def _set_acctunits_fund_ratios(self):
+    def _set_acctunits_fund_agenda_ratios(self):
+        # TODO replace with allot_scale and delete set_fund_agenda_ratio_give_take
+        # fund_agenda_give_sum = sum(
+        #     x_acctunit._fund_agenda_give for x_acctunit in self._accts.values()
+        # )
+        # fund_agenda_take_sum = sum(
+        #     x_acctunit._fund_agenda_take for x_acctunit in self._accts.values()
+        # )
+        # x_acctunits = self._accts.values()
+        # give_ledger = {
+        #     x_acct.acct_id: x_acct._fund_agenda_give for x_acct in x_acctunits
+        # }
+        # take_ledger = {
+        #     x_acct.acct_id: x_acct._fund_agenda_take for x_acct in x_acctunits
+        # }
+        # give_allot = allot_scale(give_ledger, fund_agenda_give_sum, self._fund_coin)
+        # take_allot = allot_scale(take_ledger, fund_agenda_take_sum, self._fund_coin)
+        # for x_acct_id, x_acctunit in self._accts.items():
+        #     x_acctunit._fund_agenda_ratio_give = give_allot.get(x_acct_id)
+        #     x_acctunit._fund_agenda_ratio_take = take_allot.get(x_acct_id)
+
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
         x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
@@ -1534,7 +1554,7 @@ class BudUnit:
         self._allot_offtrack_fund()
         self._allot_fund_bud_agenda()
         self._allot_lobbyboxs_fund()
-        self._set_acctunits_fund_ratios()
+        self._set_acctunits_fund_agenda_ratios()
 
     def _after_all_tree_traverses_set_healerhold_share(self):
         self._set_econ_dict()

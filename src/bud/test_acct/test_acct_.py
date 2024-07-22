@@ -291,7 +291,7 @@ def test_AcctUnit_add_fund_give_take_SetsAttrCorrectly():
     assert bob_acctunit._fund_agenda_take == 0.56
 
 
-def test_AcctUnit_set_acctunits_fund_ratios_SetsAttrCorrectly():
+def test_AcctUnit_set_acctunits_fund_agenda_ratios_SetsAttrCorrectly():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob", credit_score=15, debtit_score=7)
     bob_acctunit._fund_give = 0.4106

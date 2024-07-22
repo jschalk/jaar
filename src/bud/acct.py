@@ -126,23 +126,19 @@ class AcctUnit(AcctCore):
         bud_acctunit_total_debtit_score: float,
     ):
         # TODO replace with allot_scale
+        total_credit_score = bud_acctunit_total_credit_score
+        total_debtit_score = bud_acctunit_total_debtit_score
+        ratio_give_sum = fund_agenda_ratio_give_sum
+        ratio_take_sum = fund_agenda_ratio_take_sum
         if fund_agenda_ratio_give_sum == 0:
-            self._fund_agenda_ratio_give = (
-                self.get_credit_score() / bud_acctunit_total_credit_score
-            )
+            self._fund_agenda_ratio_give = self.get_credit_score() / total_credit_score
         else:
-            self._fund_agenda_ratio_give = (
-                self._fund_agenda_give / fund_agenda_ratio_give_sum
-            )
+            self._fund_agenda_ratio_give = self._fund_agenda_give / ratio_give_sum
 
         if fund_agenda_ratio_take_sum == 0:
-            self._fund_agenda_ratio_take = (
-                self.get_debtit_score() / bud_acctunit_total_debtit_score
-            )
+            self._fund_agenda_ratio_take = self.get_debtit_score() / total_debtit_score
         else:
-            self._fund_agenda_ratio_take = (
-                self._fund_agenda_take / fund_agenda_ratio_take_sum
-            )
+            self._fund_agenda_ratio_take = self._fund_agenda_take / ratio_take_sum
 
     def add_lobbyship(
         self,
