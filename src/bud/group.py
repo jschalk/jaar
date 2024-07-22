@@ -18,7 +18,7 @@ class GroupCore:
 
 
 @dataclass
-class GroupShip(GroupCore):
+class MemberShip(GroupCore):
     credit_score: float = 1.0
     debtit_score: float = 1.0
     # calculated fields
@@ -61,8 +61,8 @@ def membership_shop(
     credit_score: float = None,
     debtit_score: float = None,
     _acct_id: AcctID = None,
-) -> GroupShip:
-    return GroupShip(
+) -> MemberShip:
+    return MemberShip(
         group_id=group_id,
         credit_score=get_1_if_None(credit_score),
         debtit_score=get_1_if_None(debtit_score),
@@ -72,7 +72,7 @@ def membership_shop(
     )
 
 
-def membership_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> GroupShip:
+def membership_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> MemberShip:
     return membership_shop(
         group_id=x_dict.get("group_id"),
         credit_score=x_dict.get("credit_score"),
@@ -83,7 +83,7 @@ def membership_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> GroupShip:
 
 def memberships_get_from_dict(
     x_dict: dict, x_acct_id: AcctID
-) -> dict[GroupID, GroupShip]:
+) -> dict[GroupID, MemberShip]:
     return {
         x_group_id: membership_get_from_dict(x_membership_dict, x_acct_id)
         for x_group_id, x_membership_dict in x_dict.items()
@@ -172,7 +172,7 @@ def awardline_shop(group_id: GroupID, _fund_give: float, _fund_take: float):
 
 @dataclass
 class GroupBox(GroupCore):
-    _memberships: dict[AcctID, GroupShip] = None  # set by BudUnit.set_acctunit()
+    _memberships: dict[AcctID, MemberShip] = None  # set by BudUnit.set_acctunit()
     _road_delimiter: str = None  # calculated by BudUnit
     # calculated by BudUnit.settle_bud()
     _fund_give: float = None
@@ -183,7 +183,7 @@ class GroupBox(GroupCore):
     _debtor_pool: float = None
     _fund_coin: FundCoin = None
 
-    def set_membership(self, x_membership: GroupShip):
+    def set_membership(self, x_membership: MemberShip):
         if x_membership.group_id != self.group_id:
             raise membership_group_id_Exception(
                 f"GroupBox.group_id={self.group_id} cannot set membership.group_id={x_membership.group_id}"
@@ -203,7 +203,7 @@ class GroupBox(GroupCore):
     def _add_debtor_pool(self, x_debtor_pool: float):
         self._debtor_pool += x_debtor_pool
 
-    def get_membership(self, x_acct_id: AcctID) -> GroupShip:
+    def get_membership(self, x_acct_id: AcctID) -> MemberShip:
         return self._memberships.get(x_acct_id)
 
     def membership_exists(self, x_acct_id: AcctID) -> bool:

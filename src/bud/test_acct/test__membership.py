@@ -2,7 +2,7 @@ from src.bud.group import (
     GroupCore,
     GroupID,
     membership_shop,
-    GroupShip,
+    MemberShip,
     membership_get_from_dict,
     memberships_get_from_dict,
     AwardLine,
@@ -32,12 +32,12 @@ def test_GroupCore_exists():
     assert swim_groupcore.group_id == swim_text
 
 
-def test_GroupShip_exists():
+def test_MemberShip_exists():
     # ESTABLISH
     swim_text = ",swim"
 
     # WHEN
-    swim_membership = GroupShip(group_id=swim_text)
+    swim_membership = MemberShip(group_id=swim_text)
 
     # THEN
     assert swim_membership.group_id == swim_text
@@ -93,7 +93,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
     assert swim_membership._acct_id == yao_text
 
 
-# def test_GroupShip_set_group_id_RaisesErrorIf_group_id_IsNotAcctIDAndIsRoadNode():
+# def test_MemberShip_set_group_id_RaisesErrorIf_group_id_IsNotAcctIDAndIsRoadNode():
 #     # ESTABLISH
 #     slash_text = "/"
 #     # bob_text = f"Bob{slash_text}Texas"
@@ -110,7 +110,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
 #     )
 
 
-def test_GroupShip_set_credit_score_SetsAttr():
+def test_MemberShip_set_credit_score_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
     old_credit_score = 3.0
@@ -128,7 +128,7 @@ def test_GroupShip_set_credit_score_SetsAttr():
     assert swim_membership.debtit_score == swim_debtit_score
 
 
-def test_GroupShip_set_credit_score_HandlesNoneParameter():
+def test_MemberShip_set_credit_score_HandlesNoneParameter():
     # ESTABLISH
     swim_text = ",swim"
     old_credit_score = 3.0
@@ -145,7 +145,7 @@ def test_GroupShip_set_credit_score_HandlesNoneParameter():
     assert swim_membership.debtit_score == swim_debtit_score
 
 
-def test_GroupShip_set_debtit_score_SetsAttr():
+def test_MemberShip_set_debtit_score_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
     swim_credit_score = 3.0
@@ -163,7 +163,7 @@ def test_GroupShip_set_debtit_score_SetsAttr():
     assert swim_membership.debtit_score == new_debtit_score
 
 
-def test_GroupShip_set_debtit_score_SetsAttr():
+def test_MemberShip_set_debtit_score_SetsAttr():
     # ESTABLISH
     swim_text = ",swim"
     swim_credit_score = 3.0
@@ -180,7 +180,7 @@ def test_GroupShip_set_debtit_score_SetsAttr():
     assert swim_membership.debtit_score == old_debtit_score
 
 
-def test_GroupShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
+def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     swim_text = ",swim"
     swim_credit_score = 3.0
@@ -252,7 +252,7 @@ def test_memberships_get_from_dict_ReturnsObj():
     assert after_swim_memberships_objs.get(swim_text) == before_swim_membership
 
 
-def test_GroupShip_clear_fund_give_take_SetsAttrCorrectly():
+def test_MemberShip_clear_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_membership = membership_shop("Bob")
     bob_membership._fund_give = 0.27

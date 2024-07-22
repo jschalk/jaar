@@ -8,7 +8,7 @@ from src._road.road import (
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
 from src.bud.group import (
     GroupID,
-    GroupShip,
+    MemberShip,
     memberships_get_from_dict,
     membership_shop,
 )
@@ -19,7 +19,7 @@ class InvalidAcctException(Exception):
     pass
 
 
-class Bad_acct_idGroupShipException(Exception):
+class Bad_acct_idMemberShipException(Exception):
     pass
 
 
@@ -43,7 +43,7 @@ class AcctUnit(AcctCore):
     credit_score: int = None
     debtit_score: int = None
     # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
-    _memberships: dict[AcctID, GroupShip] = None
+    _memberships: dict[AcctID, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
@@ -149,18 +149,18 @@ class AcctUnit(AcctCore):
         x_membership = membership_shop(group_id, credit_score, debtit_score)
         self.set_membership(x_membership)
 
-    def set_membership(self, x_membership: GroupShip):
+    def set_membership(self, x_membership: MemberShip):
         x_group_id = x_membership.group_id
         group_id_is_acct_id = is_roadnode(x_group_id, self._road_delimiter)
         if group_id_is_acct_id and self.acct_id != x_group_id:
-            raise Bad_acct_idGroupShipException(
+            raise Bad_acct_idMemberShipException(
                 f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_group_id}'."
             )
 
         x_membership._acct_id = self.acct_id
         self._memberships[x_membership.group_id] = x_membership
 
-    def get_membership(self, group_id: GroupID) -> GroupShip:
+    def get_membership(self, group_id: GroupID) -> MemberShip:
         return self._memberships.get(group_id)
 
     def membership_exists(self, group_id: GroupID) -> bool:

@@ -8,8 +8,8 @@ from src._instrument.python import (
 )
 from src._road.road import RoadUnit, get_terminus_node, get_parent_road
 from src.bud.reason_idea import FactUnit, ReasonUnit
-from src.bud.acct import GroupShip, AcctID, AcctUnit
-from src.bud.group import GroupShip, GroupID
+from src.bud.acct import MemberShip, AcctID, AcctUnit
+from src.bud.group import MemberShip, GroupID
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit, budunit_shop
 from src.gift.atom_config import CRUD_command
@@ -299,8 +299,8 @@ class ChangeUnit:
     def add_atomunit_membership_update(
         self,
         acct_id: AcctID,
-        before_membership: GroupShip,
-        after_membership: GroupShip,
+        before_membership: MemberShip,
+        after_membership: MemberShip,
     ):
         x_atomunit = atomunit_shop("bud_acct_membership", atom_update())
         x_atomunit.set_required_arg("acct_id", acct_id)
