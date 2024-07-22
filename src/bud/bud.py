@@ -104,7 +104,7 @@ class BudUnit:
     _real_id: RealID = None
     _owner_id: OwnerID = None
     _last_gift_id: int = None
-    _weight: float = None
+    _score: float = None
     _accts: dict[AcctID, AcctUnit] = None
     _idearoot: IdeaUnit = None
     _max_tree_traverse: int = None
@@ -1626,7 +1626,7 @@ class BudUnit:
         x_dict = {
             "_accts": self.get_acctunits_dict(),
             "_originunit": self._originunit.get_dict(),
-            "_weight": self._weight,
+            "_score": self._score,
             "_fund_pool": self._fund_pool,
             "_fund_coin": self._fund_coin,
             "_bit": self._bit,
@@ -1680,13 +1680,13 @@ def budunit_shop(
     _fund_coin: FundCoin = None,
     _bit: BitNum = None,
     _penny: PennyNum = None,
-    _weight: float = None,
+    _score: float = None,
 ) -> BudUnit:
     _owner_id = "" if _owner_id is None else _owner_id
     _real_id = get_default_real_id_roadnode() if _real_id is None else _real_id
     x_bud = BudUnit(
         _owner_id=_owner_id,
-        _weight=get_1_if_None(_weight),
+        _score=get_1_if_None(_score),
         _real_id=_real_id,
         _accts=get_empty_dict_if_none(None),
         _lobbyboxs={},
@@ -1726,7 +1726,7 @@ def get_from_json(x_bud_json: str) -> BudUnit:
 def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud = budunit_shop()
     x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
-    x_bud._weight = obj_from_bud_dict(bud_dict, "_weight")
+    x_bud._score = obj_from_bud_dict(bud_dict, "_score")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "_max_tree_traverse"))
     x_bud.set_real_id(obj_from_bud_dict(bud_dict, "_real_id"))
     bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")

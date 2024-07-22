@@ -3,7 +3,7 @@ from src.bud.bud import BudUnit, budunit_shop
 
 
 def get_budunit_with_4_levels() -> BudUnit:
-    sue_bud = budunit_shop(_owner_id="Sue", _weight=10)
+    sue_bud = budunit_shop(_owner_id="Sue", _score=10)
 
     casa = "casa"
     sue_bud.set_l1_idea(ideaunit_shop(casa, _weight=30, pledge=True))

@@ -16,19 +16,19 @@ def test_create_legible_list_ReturnsObjEstablishWithEmptyChange():
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_weight():
     # ESTABLISH
     category = "budunit"
-    weight_text = "_weight"
-    weight_int = 55
-    weight_atomunit = atomunit_shop(category, atom_update())
-    weight_atomunit.set_arg(weight_text, weight_int)
+    score_text = "_score"
+    score_int = 55
+    score_atomunit = atomunit_shop(category, atom_update())
+    score_atomunit.set_arg(score_text, score_int)
     x_changeunit = changeunit_shop()
-    x_changeunit.set_atomunit(weight_atomunit)
+    x_changeunit.set_atomunit(score_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s bud weight was transited to {weight_int}"
+    x_str = f"{sue_bud._owner_id}'s bud score was transited to {score_int}"
     assert legible_list[0] == x_str
 
 

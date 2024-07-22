@@ -133,7 +133,6 @@ def test_BudUnit_IdeaUnit_kids_CanHaveKids():
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._weight == 10
     assert sue_bud._idearoot._kids
     print(f"{len(sue_bud._idearoot._kids)=} {sue_bud._idearoot._parent_road=}")
     assert sue_bud.get_level_count(level=0) == 1

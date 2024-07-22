@@ -23,9 +23,9 @@ def get_changeunit_example1() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
     budunit_text = "budunit"
-    weight_name = "_weight"
+    score_name = "_score"
     x_atomunit = atomunit_shop(budunit_text, atom_update())
-    x_atomunit.set_optional_arg(weight_name, 55)
+    x_atomunit.set_optional_arg(score_name, 55)
     x_attribute = "_max_tree_traverse"
     x_atomunit.set_optional_arg(x_attribute, 66)
     x_attribute = "_credor_respect"

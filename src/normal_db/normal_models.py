@@ -18,7 +18,7 @@ class BudTable(Base):
     _fund_coin = Column(Float)
     _bit = Column(Float)
     _penny = Column(Float)
-    _weight = Column(Integer)
+    _score = Column(Integer)
 
 
 class AcctUnitTable(Base):

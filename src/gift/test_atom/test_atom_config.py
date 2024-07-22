@@ -332,7 +332,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert budunit_columns.get("_fund_coin") is not None
     assert budunit_columns.get("_bit") is not None
     assert budunit_columns.get("_penny") is not None
-    assert budunit_columns.get("_weight") is not None
+    assert budunit_columns.get("_score") is not None
 
     assert len(cat_acctunit) == 2
     acctunit_columns = cat_acctunit.get(columns_text)

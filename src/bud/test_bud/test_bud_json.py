@@ -39,8 +39,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_bud._fund_pool = yao_fund_pool
     yao_fund_coin = 23
     x_bud._fund_coin = yao_fund_coin
-    bud_weight = 23
-    x_bud._weight = bud_weight
+    bud_score = 23
+    x_bud._score = bud_score
     x_credor_respect = 22
     x_debtor_respect = 44
     x_bud.set_credor_respect(x_credor_respect)
@@ -57,8 +57,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["_owner_id"] == x_bud._owner_id
     assert bud_dict["_real_id"] == x_bud._real_id
-    assert bud_dict["_weight"] == x_bud._weight
-    assert bud_dict["_weight"] == bud_weight
+    assert bud_dict["_score"] == x_bud._score
+    assert bud_dict["_score"] == bud_score
     assert bud_dict["_fund_pool"] == yao_fund_pool
     assert bud_dict["_fund_coin"] == yao_fund_coin
     assert bud_dict["_max_tree_traverse"] == x_bud._max_tree_traverse
@@ -77,7 +77,6 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     _numeric_road = "_numeric_road"
     assert x_idearoot._label == x_bud._real_id
     assert idearoot_dict["_label"] == x_idearoot._label
-    assert idearoot_dict["_weight"] != bud_weight
     assert idearoot_dict["_weight"] == x_idearoot._weight
     assert len(idearoot_dict[_kids]) == len(x_idearoot._kids)
 
@@ -213,7 +212,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 
     assert bud_dict["_owner_id"] == zia_bud._owner_id
     assert bud_dict["_real_id"] == zia_bud._real_id
-    assert bud_dict["_weight"] == zia_bud._weight
+    assert bud_dict["_score"] == zia_bud._score
     assert bud_dict["_fund_pool"] == zia_bud._fund_pool
     assert bud_dict["_fund_coin"] == zia_bud._fund_coin
     assert bud_dict["_bit"] == zia_bud._bit
@@ -269,7 +268,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     _kids = "_kids"
     assert bud_dict["_owner_id"] == yao_bud._owner_id
     assert bud_dict["_real_id"] == yao_bud._real_id
-    assert bud_dict["_weight"] == yao_bud._weight
+    assert bud_dict["_score"] == yao_bud._score
     assert bud_dict["_max_tree_traverse"] == 2
     assert bud_dict["_max_tree_traverse"] == yao_bud._max_tree_traverse
     assert bud_dict["_road_delimiter"] == yao_bud._road_delimiter
@@ -481,17 +480,17 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_LobbyExample():
 def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_weight():
     # ESTABLISH
     x1_bud = budunit_v001()
-    x1_bud._weight = 15
-    assert 15 == x1_bud._weight
-    assert x1_bud._idearoot._weight != x1_bud._weight
+    x1_bud._score = 15
+    assert x1_bud._score == 15
+    assert x1_bud._idearoot._weight != x1_bud._score
     assert x1_bud._idearoot._weight == 1
 
     # WHEN
     x2_bud = budunit_get_from_json(x1_bud.get_json())
 
     # THEN
-    assert x1_bud._weight == 15
-    assert x1_bud._weight == x2_bud._weight
+    assert x1_bud._score == 15
+    assert x1_bud._score == x2_bud._score
     assert x1_bud._idearoot._weight == 1
     assert x1_bud._idearoot._weight == x2_bud._idearoot._weight
     assert x1_bud._idearoot._kids == x2_bud._idearoot._kids

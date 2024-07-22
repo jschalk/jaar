@@ -23,7 +23,7 @@ def test_BudUnit_Exists():
     assert x_bud
     assert x_bud._real_id is None
     assert x_bud._owner_id is None
-    assert x_bud._weight is None
+    assert x_bud._score is None
     assert x_bud._accts is None
     assert x_bud._idearoot is None
     assert x_bud._max_tree_traverse is None
@@ -74,7 +74,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud
     assert x_bud._owner_id == sue_text
     assert x_bud._real_id == iowa_real_id
-    assert x_bud._weight == 1
+    assert x_bud._score == 1
     assert x_bud._accts == {}
     assert x_bud._idearoot is not None
     assert x_bud._max_tree_traverse == 3

@@ -179,7 +179,7 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
 
 def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: BudUnit):
     optional_args = x_atom.optional_args
-    _weight_text = "_weight"
+    _score_text = "_score"
     _max_tree_traverse_text = "_max_tree_traverse"
     _monetary_desc_text = "_monetary_desc"
     _credor_respect_text = "_credor_respect"
@@ -189,7 +189,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     _monetary_desc_value = optional_args.get(_monetary_desc_text)
     _credor_respect_value = optional_args.get(_credor_respect_text)
     _debtor_respect_value = optional_args.get(_debtor_respect_text)
-    _weight_value = optional_args.get(_weight_text)
+    _score_value = optional_args.get(_score_text)
 
     x_monetary_desc = x_bud._monetary_desc
     if x_monetary_desc is None:
@@ -219,9 +219,9 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         legible_list.append(
             f"{x_monetary_desc} debtor pool is now {_debtor_respect_value}"
         )
-    if _weight_value is not None:
+    if _score_value is not None:
         legible_list.append(
-            f"{x_bud._owner_id}'s bud weight was transited to {_weight_value}"
+            f"{x_bud._owner_id}'s bud score was transited to {_score_value}"
         )
 
 

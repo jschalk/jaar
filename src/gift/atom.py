@@ -170,9 +170,9 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     x_arg = "_fund_coin"
     if x_atom.get_value(x_arg) is not None:
         x_bud._fund_coin = x_atom.get_value(x_arg)
-    x_arg = "_weight"
+    x_arg = "_score"
     if x_atom.get_value(x_arg) is not None:
-        x_bud._weight = x_atom.get_value(x_arg)
+        x_bud._score = x_atom.get_value(x_arg)
     x_arg = "_bit"
     if x_atom.get_value(x_arg) is not None:
         x_bud._bit = x_atom.get_value(x_arg)
@@ -498,7 +498,7 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
 def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
     if category == "budunit":
         return (
-            x_obj._weight != y_obj._weight
+            x_obj._score != y_obj._score
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
             or x_obj._credor_respect != y_obj._credor_respect
             or x_obj._debtor_respect != y_obj._debtor_respect
