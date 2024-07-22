@@ -2,7 +2,7 @@
     "_bit": 1,
     "_accts": {
         "A a ron Jones": {
-            "_groupships": {
+            "_memberships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -24,7 +24,7 @@
             "debtit_score": 1
         },
         "America": {
-            "_groupships": {
+            "_memberships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -51,7 +51,7 @@
             "debtit_score": 1
         },
         "Anna": {
-            "_groupships": {
+            "_memberships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -73,7 +73,7 @@
             "debtit_score": 1
         },
         "Benjamin Stoddert": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -100,7 +100,7 @@
             "debtit_score": 1
         },
         "Bob302": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 6.25,
                     "debtit_score": 1,
@@ -127,7 +127,7 @@
             "debtit_score": 1
         },
         "Chuck Lee": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -154,7 +154,7 @@
             "debtit_score": 1
         },
         "Ernesto Chavez": {
-            "_groupships": {
+            "_memberships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -176,7 +176,7 @@
             "debtit_score": 1
         },
         "Jacque Chirac": {
-            "_groupships": {
+            "_memberships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -198,7 +198,7 @@
             "debtit_score": 1
         },
         "Jane Randolph": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -220,7 +220,7 @@
             "debtit_score": 1
         },
         "Maria Reynolds": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 6.75,
                     "debtit_score": 1,
@@ -242,7 +242,7 @@
             "debtit_score": 1
         },
         "Martha Doubs": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -269,7 +269,7 @@
             "debtit_score": 1
         },
         "Mikayla": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 10,
                     "debtit_score": 1,
@@ -296,7 +296,7 @@
             "debtit_score": 1
         },
         "Norberto": {
-            "_groupships": {
+            "_memberships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -318,7 +318,7 @@
             "debtit_score": 1
         },
         "Perrison": {
-            "_groupships": {
+            "_memberships": {
                 ",appreciates US DOLLAR": {
                     "credit_score": 5,
                     "debtit_score": 1,
@@ -345,7 +345,7 @@
             "debtit_score": 1
         },
         "Philipa": {
-            "_groupships": {
+            "_memberships": {
                 ",Climate Death": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -372,7 +372,7 @@
             "debtit_score": 1
         },
         "Prashant": {
-            "_groupships": {
+            "_memberships": {
                 ",appreciates US DOLLAR": {
                     "credit_score": 2,
                     "debtit_score": 1,
@@ -394,7 +394,7 @@
             "debtit_score": 1
         },
         "Renee Elise Goldsberry": {
-            "_groupships": {
+            "_memberships": {
                 ",appreciates US DOLLAR": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -446,7 +446,7 @@
             "debtit_score": 1
         },
         "Sam zamora": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -473,7 +473,7 @@
             "debtit_score": 1
         },
         "Shadwell Harris": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -495,7 +495,7 @@
             "debtit_score": 1
         },
         "Thomas OSU": {
-            "_groupships": {
+            "_memberships": {
                 ",Climate Death": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -517,7 +517,7 @@
             "debtit_score": 1
         },
         "Travis Fox": {
-            "_groupships": {
+            "_memberships": {
                 ",Everyone": {
                     "credit_score": 1,
                     "debtit_score": 1,
@@ -539,7 +539,7 @@
             "debtit_score": 1
         },
         "WIlliam Wallace": {
-            "_groupships": {
+            "_memberships": {
                 ",ACME DevOps": {
                     "credit_score": 1,
                     "debtit_score": 1,

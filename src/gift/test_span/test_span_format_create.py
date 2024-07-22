@@ -3,7 +3,7 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.gift.span import (
     jaar_format_0001_acct_v0_0_0,
-    jaar_format_0002_groupship_v0_0_0,
+    jaar_format_0002_membership_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     create_span,
     real_id_str,
@@ -66,7 +66,7 @@ def test_create_span_Arg_jaar_format_0001_acct_v0_0_0():
     assert len(acct_dataframe) == 3
 
 
-def test_create_span_Arg_jaar_format_0002_groupship_v0_0_0():
+def test_create_span_Arg_jaar_format_0002_membership_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -89,48 +89,48 @@ def test_create_span_Arg_jaar_format_0002_groupship_v0_0_0():
     sue_acctunit = sue_budunit.get_acct(sue_text)
     bob_acctunit = sue_budunit.get_acct(bob_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    sue_acctunit.add_groupship(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
-    bob_acctunit.add_groupship(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
-    yao_acctunit.add_groupship(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
-    yao_acctunit.add_groupship(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
+    sue_acctunit.add_membership(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
+    bob_acctunit.add_membership(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
+    yao_acctunit.add_membership(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
+    yao_acctunit.add_membership(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
 
     # WHEN
-    x_span_name = jaar_format_0002_groupship_v0_0_0()
-    groupship_dataframe = create_span(sue_budunit, x_span_name)
+    x_span_name = jaar_format_0002_membership_v0_0_0()
+    membership_dataframe = create_span(sue_budunit, x_span_name)
 
     # THEN
-    array_headers = list(groupship_dataframe.columns)
+    array_headers = list(membership_dataframe.columns)
     acct_spanref = get_spanref(x_span_name)
-    print(f"{len(groupship_dataframe)=}")
+    print(f"{len(membership_dataframe)=}")
     assert array_headers == acct_spanref.get_headers_list()
-    assert groupship_dataframe.loc[0, real_id_str()] == music_real_id
-    assert groupship_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
-    assert groupship_dataframe.loc[0, acct_id_str()] == bob_text
-    assert groupship_dataframe.loc[0, group_id_str()] == iowa_text
-    assert groupship_dataframe.loc[0, credit_score_str()] == bob_iowa_credor_w
-    assert groupship_dataframe.loc[0, debtit_score_str()] == bob_iowa_debtor_w
+    assert membership_dataframe.loc[0, real_id_str()] == music_real_id
+    assert membership_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
+    assert membership_dataframe.loc[0, acct_id_str()] == bob_text
+    assert membership_dataframe.loc[0, group_id_str()] == iowa_text
+    assert membership_dataframe.loc[0, credit_score_str()] == bob_iowa_credor_w
+    assert membership_dataframe.loc[0, debtit_score_str()] == bob_iowa_debtor_w
 
-    assert groupship_dataframe.loc[2, real_id_str()] == music_real_id
-    assert groupship_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
-    assert groupship_dataframe.loc[2, acct_id_str()] == sue_text
-    assert groupship_dataframe.loc[2, group_id_str()] == iowa_text
-    assert groupship_dataframe.loc[2, credit_score_str()] == sue_iowa_credor_w
-    assert groupship_dataframe.loc[2, debtit_score_str()] == sue_iowa_debtor_w
+    assert membership_dataframe.loc[2, real_id_str()] == music_real_id
+    assert membership_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
+    assert membership_dataframe.loc[2, acct_id_str()] == sue_text
+    assert membership_dataframe.loc[2, group_id_str()] == iowa_text
+    assert membership_dataframe.loc[2, credit_score_str()] == sue_iowa_credor_w
+    assert membership_dataframe.loc[2, debtit_score_str()] == sue_iowa_debtor_w
 
-    assert groupship_dataframe.loc[4, real_id_str()] == music_real_id
-    assert groupship_dataframe.loc[4, owner_id_str()] == sue_budunit._owner_id
-    assert groupship_dataframe.loc[4, acct_id_str()] == yao_text
-    assert groupship_dataframe.loc[4, group_id_str()] == iowa_text
-    assert groupship_dataframe.loc[4, credit_score_str()] == yao_iowa_credor_w
-    assert groupship_dataframe.loc[4, debtit_score_str()] == yao_iowa_debtor_w
+    assert membership_dataframe.loc[4, real_id_str()] == music_real_id
+    assert membership_dataframe.loc[4, owner_id_str()] == sue_budunit._owner_id
+    assert membership_dataframe.loc[4, acct_id_str()] == yao_text
+    assert membership_dataframe.loc[4, group_id_str()] == iowa_text
+    assert membership_dataframe.loc[4, credit_score_str()] == yao_iowa_credor_w
+    assert membership_dataframe.loc[4, debtit_score_str()] == yao_iowa_debtor_w
 
-    assert groupship_dataframe.loc[5, real_id_str()] == music_real_id
-    assert groupship_dataframe.loc[5, owner_id_str()] == sue_budunit._owner_id
-    assert groupship_dataframe.loc[5, acct_id_str()] == yao_text
-    assert groupship_dataframe.loc[5, group_id_str()] == ohio_text
-    assert groupship_dataframe.loc[5, credit_score_str()] == yao_ohio_credor_w
-    assert groupship_dataframe.loc[5, debtit_score_str()] == yao_ohio_debtor_w
-    assert len(groupship_dataframe) == 7
+    assert membership_dataframe.loc[5, real_id_str()] == music_real_id
+    assert membership_dataframe.loc[5, owner_id_str()] == sue_budunit._owner_id
+    assert membership_dataframe.loc[5, acct_id_str()] == yao_text
+    assert membership_dataframe.loc[5, group_id_str()] == ohio_text
+    assert membership_dataframe.loc[5, credit_score_str()] == yao_ohio_credor_w
+    assert membership_dataframe.loc[5, debtit_score_str()] == yao_ohio_debtor_w
+    assert len(membership_dataframe) == 7
 
 
 def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():

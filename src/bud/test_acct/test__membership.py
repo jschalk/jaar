@@ -1,10 +1,10 @@
 from src.bud.group import (
     GroupCore,
     GroupID,
-    groupship_shop,
+    membership_shop,
     GroupShip,
-    groupship_get_from_dict,
-    groupships_get_from_dict,
+    membership_get_from_dict,
+    memberships_get_from_dict,
     AwardLine,
     awardline_shop,
     AwardLink,
@@ -37,60 +37,60 @@ def test_GroupShip_exists():
     swim_text = ",swim"
 
     # WHEN
-    swim_groupship = GroupShip(group_id=swim_text)
+    swim_membership = GroupShip(group_id=swim_text)
 
     # THEN
-    assert swim_groupship.group_id == swim_text
-    assert swim_groupship.credit_score == 1.0
-    assert swim_groupship.debtit_score == 1.0
-    assert swim_groupship._credor_pool is None
-    assert swim_groupship._debtor_pool is None
-    assert swim_groupship._fund_give is None
-    assert swim_groupship._fund_take is None
-    assert swim_groupship._fund_agenda_give is None
-    assert swim_groupship._fund_agenda_take is None
-    assert swim_groupship._fund_agenda_ratio_give is None
-    assert swim_groupship._fund_agenda_ratio_take is None
-    assert swim_groupship._acct_id is None
+    assert swim_membership.group_id == swim_text
+    assert swim_membership.credit_score == 1.0
+    assert swim_membership.debtit_score == 1.0
+    assert swim_membership._credor_pool is None
+    assert swim_membership._debtor_pool is None
+    assert swim_membership._fund_give is None
+    assert swim_membership._fund_take is None
+    assert swim_membership._fund_agenda_give is None
+    assert swim_membership._fund_agenda_take is None
+    assert swim_membership._fund_agenda_ratio_give is None
+    assert swim_membership._fund_agenda_ratio_take is None
+    assert swim_membership._acct_id is None
 
 
-def test_groupship_shop_ReturnsCorrectObj():
+def test_membership_shop_ReturnsCorrectObj():
     # ESTABLISH
     swim_text = ",swim"
     swim_credit_score = 3.0
     swim_debtit_score = 5.0
 
     # WHEN
-    swim_groupship = groupship_shop(
+    swim_membership = membership_shop(
         group_id=swim_text,
         credit_score=swim_credit_score,
         debtit_score=swim_debtit_score,
     )
 
     # THEN
-    assert swim_groupship.credit_score == swim_credit_score
-    assert swim_groupship.debtit_score == swim_debtit_score
-    assert swim_groupship._credor_pool == 0
-    assert swim_groupship._debtor_pool == 0
-    assert swim_groupship._fund_give is None
-    assert swim_groupship._fund_take is None
-    assert swim_groupship._fund_agenda_give is None
-    assert swim_groupship._fund_agenda_take is None
-    assert swim_groupship._fund_agenda_ratio_give is None
-    assert swim_groupship._fund_agenda_ratio_take is None
-    assert swim_groupship._acct_id is None
+    assert swim_membership.credit_score == swim_credit_score
+    assert swim_membership.debtit_score == swim_debtit_score
+    assert swim_membership._credor_pool == 0
+    assert swim_membership._debtor_pool == 0
+    assert swim_membership._fund_give is None
+    assert swim_membership._fund_take is None
+    assert swim_membership._fund_agenda_give is None
+    assert swim_membership._fund_agenda_take is None
+    assert swim_membership._fund_agenda_ratio_give is None
+    assert swim_membership._fund_agenda_ratio_take is None
+    assert swim_membership._acct_id is None
 
 
-def test_groupship_shop_ReturnsCorrectObjAttr_acct_id():
+def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
     # ESTABLISH
     swim_text = ",swim"
     yao_text = "Yao"
 
     # WHEN
-    swim_groupship = groupship_shop(swim_text, _acct_id=yao_text)
+    swim_membership = membership_shop(swim_text, _acct_id=yao_text)
 
     # THEN
-    assert swim_groupship._acct_id == yao_text
+    assert swim_membership._acct_id == yao_text
 
 
 # def test_GroupShip_set_group_id_RaisesErrorIf_group_id_IsNotAcctIDAndIsRoadNode():
@@ -103,7 +103,7 @@ def test_groupship_shop_ReturnsCorrectObjAttr_acct_id():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         groupship_shop(swim_text, _acct_id=bob_text, _road_delimiter=slash_text)
+#         membership_shop(swim_text, _acct_id=bob_text, _road_delimiter=slash_text)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{swim_text}' needs to not be a RoadNode. Must contain delimiter: '{slash_text}'"
@@ -115,17 +115,17 @@ def test_GroupShip_set_credit_score_SetsAttr():
     swim_text = ",swim"
     old_credit_score = 3.0
     swim_debtit_score = 5.0
-    swim_groupship = groupship_shop(swim_text, old_credit_score, swim_debtit_score)
-    assert swim_groupship.credit_score == old_credit_score
-    assert swim_groupship.debtit_score == swim_debtit_score
+    swim_membership = membership_shop(swim_text, old_credit_score, swim_debtit_score)
+    assert swim_membership.credit_score == old_credit_score
+    assert swim_membership.debtit_score == swim_debtit_score
 
     # WHEN
     new_swim_credit_score = 44
-    swim_groupship.set_credit_score(new_swim_credit_score)
+    swim_membership.set_credit_score(new_swim_credit_score)
 
     # THEN
-    assert swim_groupship.credit_score == new_swim_credit_score
-    assert swim_groupship.debtit_score == swim_debtit_score
+    assert swim_membership.credit_score == new_swim_credit_score
+    assert swim_membership.debtit_score == swim_debtit_score
 
 
 def test_GroupShip_set_credit_score_HandlesNoneParameter():
@@ -133,16 +133,16 @@ def test_GroupShip_set_credit_score_HandlesNoneParameter():
     swim_text = ",swim"
     old_credit_score = 3.0
     swim_debtit_score = 5.0
-    swim_groupship = groupship_shop(swim_text, old_credit_score, swim_debtit_score)
-    assert swim_groupship.credit_score == old_credit_score
-    assert swim_groupship.debtit_score == swim_debtit_score
+    swim_membership = membership_shop(swim_text, old_credit_score, swim_debtit_score)
+    assert swim_membership.credit_score == old_credit_score
+    assert swim_membership.debtit_score == swim_debtit_score
 
     # WHEN
-    swim_groupship.set_credit_score(None)
+    swim_membership.set_credit_score(None)
 
     # THEN
-    assert swim_groupship.credit_score == old_credit_score
-    assert swim_groupship.debtit_score == swim_debtit_score
+    assert swim_membership.credit_score == old_credit_score
+    assert swim_membership.debtit_score == swim_debtit_score
 
 
 def test_GroupShip_set_debtit_score_SetsAttr():
@@ -150,17 +150,17 @@ def test_GroupShip_set_debtit_score_SetsAttr():
     swim_text = ",swim"
     swim_credit_score = 3.0
     old_debtit_score = 5.0
-    swim_groupship = groupship_shop(swim_text, swim_credit_score, old_debtit_score)
-    assert swim_groupship.credit_score == swim_credit_score
-    assert swim_groupship.debtit_score == old_debtit_score
+    swim_membership = membership_shop(swim_text, swim_credit_score, old_debtit_score)
+    assert swim_membership.credit_score == swim_credit_score
+    assert swim_membership.debtit_score == old_debtit_score
 
     # WHEN
     new_debtit_score = 55
-    swim_groupship.set_debtit_score(new_debtit_score)
+    swim_membership.set_debtit_score(new_debtit_score)
 
     # THEN
-    assert swim_groupship.credit_score == swim_credit_score
-    assert swim_groupship.debtit_score == new_debtit_score
+    assert swim_membership.credit_score == swim_credit_score
+    assert swim_membership.debtit_score == new_debtit_score
 
 
 def test_GroupShip_set_debtit_score_SetsAttr():
@@ -168,16 +168,16 @@ def test_GroupShip_set_debtit_score_SetsAttr():
     swim_text = ",swim"
     swim_credit_score = 3.0
     old_debtit_score = 5.0
-    swim_groupship = groupship_shop(swim_text, swim_credit_score, old_debtit_score)
-    assert swim_groupship.credit_score == swim_credit_score
-    assert swim_groupship.debtit_score == old_debtit_score
+    swim_membership = membership_shop(swim_text, swim_credit_score, old_debtit_score)
+    assert swim_membership.credit_score == swim_credit_score
+    assert swim_membership.debtit_score == old_debtit_score
 
     # WHEN
-    swim_groupship.set_debtit_score(None)
+    swim_membership.set_debtit_score(None)
 
     # THEN
-    assert swim_groupship.credit_score == swim_credit_score
-    assert swim_groupship.debtit_score == old_debtit_score
+    assert swim_membership.credit_score == swim_credit_score
+    assert swim_membership.debtit_score == old_debtit_score
 
 
 def test_GroupShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
@@ -185,99 +185,99 @@ def test_GroupShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     swim_text = ",swim"
     swim_credit_score = 3.0
     swim_debtit_score = 5.0
-    swim_groupship = groupship_shop(
+    swim_membership = membership_shop(
         group_id=swim_text,
         credit_score=swim_credit_score,
         debtit_score=swim_debtit_score,
     )
 
-    print(f"{swim_groupship}")
+    print(f"{swim_membership}")
 
     # WHEN
-    swim_dict = swim_groupship.get_dict()
+    swim_dict = swim_membership.get_dict()
 
     # THEN
     assert swim_dict is not None
     assert swim_dict == {
-        "group_id": swim_groupship.group_id,
-        "credit_score": swim_groupship.credit_score,
-        "debtit_score": swim_groupship.debtit_score,
+        "group_id": swim_membership.group_id,
+        "credit_score": swim_membership.credit_score,
+        "debtit_score": swim_membership.debtit_score,
     }
 
 
-def test_groupship_get_from_dict_ReturnsObj():
+def test_membership_get_from_dict_ReturnsObj():
     # ESTABLISH
     swim_text = ",swim"
     swim_credit_score = 3.0
     swim_debtit_score = 5.0
     yao_text = "Yao"
-    before_swim_groupship = groupship_shop(
+    before_swim_membership = membership_shop(
         group_id=swim_text,
         credit_score=swim_credit_score,
         debtit_score=swim_debtit_score,
         _acct_id=yao_text,
     )
-    swim_groupship_dict = before_swim_groupship.get_dict()
+    swim_membership_dict = before_swim_membership.get_dict()
 
     # WHEN
-    after_swim_groupship = groupship_get_from_dict(swim_groupship_dict, yao_text)
+    after_swim_membership = membership_get_from_dict(swim_membership_dict, yao_text)
 
     # THEN
-    assert before_swim_groupship == after_swim_groupship
-    assert after_swim_groupship.group_id == swim_text
+    assert before_swim_membership == after_swim_membership
+    assert after_swim_membership.group_id == swim_text
 
 
-def test_groupships_get_from_dict_ReturnsObj():
+def test_memberships_get_from_dict_ReturnsObj():
     # ESTABLISH
     swim_text = ",swim"
     swim_credit_score = 3.0
     swim_debtit_score = 5.0
     yao_text = "Yao"
-    before_swim_groupship = groupship_shop(
+    before_swim_membership = membership_shop(
         group_id=swim_text,
         credit_score=swim_credit_score,
         debtit_score=swim_debtit_score,
         _acct_id=yao_text,
     )
-    before_swim_groupships_objs = {swim_text: before_swim_groupship}
-    swim_groupships_dict = {swim_text: before_swim_groupship.get_dict()}
+    before_swim_memberships_objs = {swim_text: before_swim_membership}
+    swim_memberships_dict = {swim_text: before_swim_membership.get_dict()}
 
     # WHEN
-    after_swim_groupships_objs = groupships_get_from_dict(
-        swim_groupships_dict, yao_text
+    after_swim_memberships_objs = memberships_get_from_dict(
+        swim_memberships_dict, yao_text
     )
 
     # THEN
-    assert before_swim_groupships_objs == after_swim_groupships_objs
-    assert after_swim_groupships_objs.get(swim_text) == before_swim_groupship
+    assert before_swim_memberships_objs == after_swim_memberships_objs
+    assert after_swim_memberships_objs.get(swim_text) == before_swim_membership
 
 
 def test_GroupShip_clear_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
-    bob_groupship = groupship_shop("Bob")
-    bob_groupship._fund_give = 0.27
-    bob_groupship._fund_take = 0.37
-    bob_groupship._fund_agenda_give = 0.41
-    bob_groupship._fund_agenda_take = 0.51
-    bob_groupship._fund_agenda_ratio_give = 0.433
-    bob_groupship._fund_agenda_ratio_take = 0.533
-    assert bob_groupship._fund_give == 0.27
-    assert bob_groupship._fund_take == 0.37
-    assert bob_groupship._fund_agenda_give == 0.41
-    assert bob_groupship._fund_agenda_take == 0.51
-    assert bob_groupship._fund_agenda_ratio_give == 0.433
-    assert bob_groupship._fund_agenda_ratio_take == 0.533
+    bob_membership = membership_shop("Bob")
+    bob_membership._fund_give = 0.27
+    bob_membership._fund_take = 0.37
+    bob_membership._fund_agenda_give = 0.41
+    bob_membership._fund_agenda_take = 0.51
+    bob_membership._fund_agenda_ratio_give = 0.433
+    bob_membership._fund_agenda_ratio_take = 0.533
+    assert bob_membership._fund_give == 0.27
+    assert bob_membership._fund_take == 0.37
+    assert bob_membership._fund_agenda_give == 0.41
+    assert bob_membership._fund_agenda_take == 0.51
+    assert bob_membership._fund_agenda_ratio_give == 0.433
+    assert bob_membership._fund_agenda_ratio_take == 0.533
 
     # WHEN
-    bob_groupship.clear_fund_give_take()
+    bob_membership.clear_fund_give_take()
 
     # THEN
-    assert bob_groupship._fund_give == 0
-    assert bob_groupship._fund_take == 0
-    assert bob_groupship._fund_agenda_give == 0
-    assert bob_groupship._fund_agenda_take == 0
-    assert bob_groupship._fund_agenda_ratio_give == 0
-    assert bob_groupship._fund_agenda_ratio_take == 0
+    assert bob_membership._fund_give == 0
+    assert bob_membership._fund_take == 0
+    assert bob_membership._fund_agenda_give == 0
+    assert bob_membership._fund_agenda_take == 0
+    assert bob_membership._fund_agenda_ratio_give == 0
+    assert bob_membership._fund_agenda_ratio_take == 0
 
 
 def test_AwardLink_exists():

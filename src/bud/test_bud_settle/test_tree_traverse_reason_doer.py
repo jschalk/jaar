@@ -123,7 +123,7 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     yao_text = "Yao"
     sue_bud.add_acctunit(yao_text)
     yao_acctunit = sue_bud.get_acct(yao_text)
-    yao_acctunit.add_groupship(swimmers_text)
+    yao_acctunit.add_membership(swimmers_text)
 
     sue_bud.set_l1_idea(ideaunit_shop(swim_text))
     sue_bud.set_idea(ideaunit_shop(morn_text), parent_road=swim_road)

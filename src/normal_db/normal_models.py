@@ -38,7 +38,7 @@ class AcctUnitTable(Base):
 
 
 class GroupShipTable(Base):
-    __tablename__ = "groupship"
+    __tablename__ = "membership"
     uid = Column(Integer, primary_key=True)
     group_id = Column(String)
     acct_id = Column(String)

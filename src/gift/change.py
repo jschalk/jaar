@@ -195,10 +195,10 @@ class ChangeUnit:
                     "debtit_score", insert_acctunit.debtit_score
                 )
             self.set_atomunit(x_atomunit)
-            all_group_ids = set(insert_acctunit._groupships.keys())
-            self.add_atomunit_groupships_inserts(
+            all_group_ids = set(insert_acctunit._memberships.keys())
+            self.add_atomunit_memberships_inserts(
                 after_acctunit=insert_acctunit,
-                insert_groupship_group_ids=all_group_ids,
+                insert_membership_group_ids=all_group_ids,
             )
 
     def add_atomunit_acctunit_updates(
@@ -219,7 +219,7 @@ class ChangeUnit:
                         "debtit_score", after_acctunit.debtit_score
                     )
                 self.set_atomunit(x_atomunit)
-            self.add_atomunit_acctunit_update_groupships(
+            self.add_atomunit_acctunit_update_memberships(
                 after_acctunit=after_acctunit, before_acctunit=before_acctunit
             )
 
@@ -231,91 +231,91 @@ class ChangeUnit:
             delete_acctunit = before_bud.get_acct(delete_acct_id)
             non_mirror_group_ids = {
                 x_group_id
-                for x_group_id in delete_acctunit._groupships.keys()
+                for x_group_id in delete_acctunit._memberships.keys()
                 if x_group_id != delete_acct_id
             }
-            self.add_atomunit_groupships_delete(delete_acct_id, non_mirror_group_ids)
+            self.add_atomunit_memberships_delete(delete_acct_id, non_mirror_group_ids)
 
-    def add_atomunit_acctunit_update_groupships(
+    def add_atomunit_acctunit_update_memberships(
         self, after_acctunit: AcctUnit, before_acctunit: AcctUnit
     ):
         # before_non_mirror_group_ids
         before_group_ids = {
             x_group_id
-            for x_group_id in before_acctunit._groupships.keys()
+            for x_group_id in before_acctunit._memberships.keys()
             if x_group_id != before_acctunit.acct_id
         }
         # after_non_mirror_group_ids
         after_group_ids = {
             x_group_id
-            for x_group_id in after_acctunit._groupships.keys()
+            for x_group_id in after_acctunit._memberships.keys()
             if x_group_id != after_acctunit.acct_id
         }
 
-        self.add_atomunit_groupships_inserts(
+        self.add_atomunit_memberships_inserts(
             after_acctunit=after_acctunit,
-            insert_groupship_group_ids=after_group_ids.difference(before_group_ids),
+            insert_membership_group_ids=after_group_ids.difference(before_group_ids),
         )
 
-        self.add_atomunit_groupships_delete(
+        self.add_atomunit_memberships_delete(
             before_acct_id=after_acctunit.acct_id,
             before_group_ids=before_group_ids.difference(after_group_ids),
         )
 
         update_group_ids = before_group_ids.intersection(after_group_ids)
         for update_acct_id in update_group_ids:
-            before_groupship = before_acctunit.get_groupship(update_acct_id)
-            after_groupship = after_acctunit.get_groupship(update_acct_id)
+            before_membership = before_acctunit.get_membership(update_acct_id)
+            after_membership = after_acctunit.get_membership(update_acct_id)
             if optional_args_different(
-                "bud_acct_groupship", before_groupship, after_groupship
+                "bud_acct_membership", before_membership, after_membership
             ):
-                self.add_atomunit_groupship_update(
+                self.add_atomunit_membership_update(
                     acct_id=after_acctunit.acct_id,
-                    before_groupship=before_groupship,
-                    after_groupship=after_groupship,
+                    before_membership=before_membership,
+                    after_membership=after_membership,
                 )
 
-    def add_atomunit_groupships_inserts(
+    def add_atomunit_memberships_inserts(
         self,
         after_acctunit: AcctUnit,
-        insert_groupship_group_ids: list[GroupID],
+        insert_membership_group_ids: list[GroupID],
     ):
         after_acct_id = after_acctunit.acct_id
-        for insert_group_id in insert_groupship_group_ids:
-            after_groupship = after_acctunit.get_groupship(insert_group_id)
-            x_atomunit = atomunit_shop("bud_acct_groupship", atom_insert())
+        for insert_group_id in insert_membership_group_ids:
+            after_membership = after_acctunit.get_membership(insert_group_id)
+            x_atomunit = atomunit_shop("bud_acct_membership", atom_insert())
             x_atomunit.set_required_arg("acct_id", after_acct_id)
-            x_atomunit.set_required_arg("group_id", after_groupship.group_id)
-            if after_groupship.credit_score is not None:
+            x_atomunit.set_required_arg("group_id", after_membership.group_id)
+            if after_membership.credit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "credit_score", after_groupship.credit_score
+                    "credit_score", after_membership.credit_score
                 )
-            if after_groupship.debtit_score is not None:
+            if after_membership.debtit_score is not None:
                 x_atomunit.set_optional_arg(
-                    "debtit_score", after_groupship.debtit_score
+                    "debtit_score", after_membership.debtit_score
                 )
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_groupship_update(
+    def add_atomunit_membership_update(
         self,
         acct_id: AcctID,
-        before_groupship: GroupShip,
-        after_groupship: GroupShip,
+        before_membership: GroupShip,
+        after_membership: GroupShip,
     ):
-        x_atomunit = atomunit_shop("bud_acct_groupship", atom_update())
+        x_atomunit = atomunit_shop("bud_acct_membership", atom_update())
         x_atomunit.set_required_arg("acct_id", acct_id)
-        x_atomunit.set_required_arg("group_id", after_groupship.group_id)
-        if after_groupship.credit_score != before_groupship.credit_score:
-            x_atomunit.set_optional_arg("credit_score", after_groupship.credit_score)
-        if after_groupship.debtit_score != before_groupship.debtit_score:
-            x_atomunit.set_optional_arg("debtit_score", after_groupship.debtit_score)
+        x_atomunit.set_required_arg("group_id", after_membership.group_id)
+        if after_membership.credit_score != before_membership.credit_score:
+            x_atomunit.set_optional_arg("credit_score", after_membership.credit_score)
+        if after_membership.debtit_score != before_membership.debtit_score:
+            x_atomunit.set_optional_arg("debtit_score", after_membership.debtit_score)
         self.set_atomunit(x_atomunit)
 
-    def add_atomunit_groupships_delete(
+    def add_atomunit_memberships_delete(
         self, before_acct_id: AcctID, before_group_ids: GroupID
     ):
         for delete_group_id in before_group_ids:
-            x_atomunit = atomunit_shop("bud_acct_groupship", atom_delete())
+            x_atomunit = atomunit_shop("bud_acct_membership", atom_delete())
             x_atomunit.set_required_arg("acct_id", before_acct_id)
             x_atomunit.set_required_arg("group_id", delete_group_id)
             self.set_atomunit(x_atomunit)

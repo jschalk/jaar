@@ -1,5 +1,5 @@
 {
-    "bud_acct_groupship": {
+    "bud_acct_membership": {
         "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
@@ -8,7 +8,7 @@
             "atom_order": 1
         },
         "normal_specs": {
-            "normal_table_name": "groupship"
+            "normal_table_name": "membership"
         },
         "optional_args": {
             "credit_score": {

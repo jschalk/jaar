@@ -135,7 +135,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     sue_bud.add_acctunit(yao_text)
     run_text = ",runners"
     yao_acctunit = sue_bud.get_acct(yao_text)
-    yao_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
     run_healerhold = healerhold_shop()
     run_healerhold.set_group_id(x_group_id=run_text)
     sue_bud.edit_idea_attr(road=sue_bud._real_id, healerhold=run_healerhold)
@@ -155,7 +155,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     sue_bud.add_acctunit(yao_text)
     run_text = ",runners"
     yao_acctunit = sue_bud.get_acct(yao_text)
-    yao_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
 
     morn_text = "morning"
     morn_road = sue_bud.make_l1_road(morn_text)
@@ -195,7 +195,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     run_text = ",runners"
     zia_bud.add_acctunit(yao_text)
     yao_acctunit = zia_bud.get_acct(yao_text)
-    yao_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
     run_healerhold = healerhold_shop({run_text})
     zia_bud.edit_idea_attr(road=zia_bud._real_id, healerhold=run_healerhold)
     zia_bud.edit_idea_attr(road=zia_bud._real_id, problem_bool=True)
@@ -337,8 +337,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     run_text = ",runners"
     sue_acctunit = zia_bud.get_acct(sue_text)
     xio_acctunit = zia_bud.get_acct(xio_text)
-    sue_acctunit.add_groupship(run_text)
-    xio_acctunit.add_groupship(run_text)
+    sue_acctunit.add_membership(run_text)
+    xio_acctunit.add_membership(run_text)
     run_doerunit = doerunit_shop()
     run_doerunit.set_grouphold(group_id=run_text)
     zia_bud.edit_idea_attr(zia_bud._real_id, doerunit=run_doerunit)
@@ -466,7 +466,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_GroupExample():
     swim_text = f"{slash_delimiter}Swimmers"
     before_bob_bud.add_acctunit(yao_text)
     yao_acctunit = before_bob_bud.get_acct(yao_text)
-    yao_acctunit.add_groupship(swim_text)
+    yao_acctunit.add_membership(swim_text)
 
     # WHEN
     bob_json = before_bob_bud.get_json()
@@ -540,7 +540,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     philipa_text = "Philipa"
     ccn_philipa_acctunit = ccn_bud1.get_acct(philipa_text)
     x1_philipa_acctunit = x1_bud.get_acct(philipa_text)
-    assert ccn_philipa_acctunit._groupships == x1_philipa_acctunit._groupships
+    assert ccn_philipa_acctunit._memberships == x1_philipa_acctunit._memberships
     assert ccn_bud1 == x1_bud
     assert ccn_dict_of_obj.get(x1_bud._owner_id) == x1_bud
 

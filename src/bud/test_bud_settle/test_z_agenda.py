@@ -610,7 +610,7 @@ def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctGroup():
     yao_bud.add_acctunit(sue_text)
     run_text = ",runners"
     sue_acctunit = yao_bud.get_acct(sue_text)
-    sue_acctunit.add_groupship(run_text)
+    sue_acctunit.add_membership(run_text)
 
     run_doerunit = doerunit_shop()
     run_doerunit.set_grouphold(group_id=run_text)
@@ -624,7 +624,7 @@ def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctGroup():
 
     # WHEN
     yao_acctunit = yao_bud.get_acct(yao_text)
-    yao_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1

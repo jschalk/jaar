@@ -474,16 +474,16 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     assert len(yao_bud._groupboxs) == 3
     xio_groupbox = yao_bud.get_groupbox(xio_text)
     xio_symmerty_groupbox = yao_bud.create_symmetry_groupbox(xio_text)
-    assert xio_groupbox._groupships.keys() == xio_symmerty_groupbox._groupships.keys()
-    assert xio_groupbox.groupship_exists(yao_text)
-    assert xio_groupbox.groupship_exists(zia_text)
-    assert not xio_groupbox.groupship_exists(xio_text)
-    yao_groupship = xio_groupbox.get_groupship(yao_text)
-    zia_groupship = xio_groupbox.get_groupship(zia_text)
-    assert yao_groupship.credit_score == yao_credit_score
-    assert zia_groupship.credit_score == zia_credit_score
-    assert yao_groupship.debtit_score == yao_debtit_score
-    assert zia_groupship.debtit_score == zia_debtit_score
+    assert xio_groupbox._memberships.keys() == xio_symmerty_groupbox._memberships.keys()
+    assert xio_groupbox.membership_exists(yao_text)
+    assert xio_groupbox.membership_exists(zia_text)
+    assert not xio_groupbox.membership_exists(xio_text)
+    yao_membership = xio_groupbox.get_membership(yao_text)
+    zia_membership = xio_groupbox.get_membership(zia_text)
+    assert yao_membership.credit_score == yao_credit_score
+    assert zia_membership.credit_score == zia_credit_score
+    assert yao_membership.debtit_score == yao_debtit_score
+    assert zia_membership.debtit_score == zia_debtit_score
 
 
 def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():
@@ -518,10 +518,10 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():
     assert len(yao_bud._groupboxs) == 3
     xio_groupbox = yao_bud.get_groupbox(xio_text)
     xio_symmerty_groupbox = yao_bud.create_symmetry_groupbox(xio_text)
-    assert xio_groupbox._groupships.keys() == xio_symmerty_groupbox._groupships.keys()
-    assert xio_groupbox.groupship_exists(yao_text)
-    assert xio_groupbox.groupship_exists(zia_text)
-    assert not xio_groupbox.groupship_exists(xio_text)
+    assert xio_groupbox._memberships.keys() == xio_symmerty_groupbox._memberships.keys()
+    assert xio_groupbox.membership_exists(yao_text)
+    assert xio_groupbox.membership_exists(zia_text)
+    assert not xio_groupbox.membership_exists(xio_text)
 
 
 def test_BudUnit_get_tree_traverse_generated_groupboxs_ReturnsObj():

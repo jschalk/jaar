@@ -45,7 +45,7 @@ from src._road.road import (
 )
 
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
-from src.bud.group import AwardLink, GroupID, GroupBox, groupbox_shop, groupship_shop
+from src.bud.group import AwardLink, GroupID, GroupBox, groupbox_shop, membership_shop
 from src.bud.healer import HealerHold
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
 from src.bud.reason_doer import DoerUnit
@@ -349,13 +349,13 @@ class BudUnit:
         )
         self.set_acctunit(acctunit)
 
-    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_groupship: bool = True):
+    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
         if x_acctunit._road_delimiter != self._road_delimiter:
             x_acctunit._road_delimiter = self._road_delimiter
         if x_acctunit._bit != self._bit:
             x_acctunit._bit = self._bit
-        if auto_set_groupship and x_acctunit.groupships_exist() is False:
-            x_acctunit.add_groupship(x_acctunit.acct_id)
+        if auto_set_membership and x_acctunit.memberships_exist() is False:
+            x_acctunit.add_membership(x_acctunit.acct_id)
         self._accts[x_acctunit.acct_id] = x_acctunit
 
     def acct_exists(self, acct_id: AcctID) -> bool:
@@ -379,7 +379,7 @@ class BudUnit:
     def get_acctunit_group_ids_dict(self) -> dict[GroupID, set[AcctID]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
-            for x_group_id in x_acctunit._groupships.keys():
+            for x_group_id in x_acctunit._memberships.keys():
                 acct_id_set = x_dict.get(x_group_id)
                 if acct_id_set is None:
                     x_dict[x_group_id] = {x_acctunit.acct_id}
@@ -401,13 +401,13 @@ class BudUnit:
     def create_symmetry_groupbox(self, x_group_id: GroupID) -> GroupBox:
         x_groupbox = groupbox_shop(x_group_id)
         for x_acctunit in self._accts.values():
-            x_groupship = groupship_shop(
+            x_membership = membership_shop(
                 group_id=x_group_id,
                 credit_score=x_acctunit.credit_score,
                 debtit_score=x_acctunit.debtit_score,
                 _acct_id=x_acctunit.acct_id,
             )
-            x_groupbox.set_groupship(x_groupship)
+            x_groupbox.set_membership(x_membership)
         return x_groupbox
 
     def get_tree_traverse_generated_groupboxs(self) -> set[GroupID]:
@@ -415,9 +415,9 @@ class BudUnit:
         all_group_ids = set(self._groupboxs.keys())
         return all_group_ids.difference(x_acctunit_group_ids)
 
-    def clear_acctunits_groupships(self):
+    def clear_acctunits_memberships(self):
         for x_acctunit in self._accts.values():
-            x_acctunit.clear_groupships()
+            x_acctunit.clear_memberships()
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
         if self._real_id == idea_road:
@@ -1200,14 +1200,14 @@ class BudUnit:
 
     def _allot_groupboxs_fund(self):
         for x_groupbox in self._groupboxs.values():
-            x_groupbox._set_groupship_fund_give_fund_take()
-            for x_groupship in x_groupbox._groupships.values():
+            x_groupbox._set_membership_fund_give_fund_take()
+            for x_membership in x_groupbox._memberships.values():
                 self.add_to_acctunit_fund_give_take(
-                    acctunit_acct_id=x_groupship._acct_id,
-                    fund_give=x_groupship._fund_give,
-                    fund_take=x_groupship._fund_take,
-                    bud_agenda_cred=x_groupship._fund_agenda_give,
-                    bud_agenda_debt=x_groupship._fund_agenda_take,
+                    acctunit_acct_id=x_membership._acct_id,
+                    fund_give=x_membership._fund_give,
+                    fund_take=x_membership._fund_take,
+                    bud_agenda_cred=x_membership._fund_agenda_give,
+                    bud_agenda_debt=x_membership._fund_agenda_take,
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
@@ -1433,8 +1433,8 @@ class BudUnit:
         for group_id, acct_id_set in self.get_acctunit_group_ids_dict().items():
             x_groupbox = groupbox_shop(group_id, _road_delimiter=self._road_delimiter)
             for x_acct_id in acct_id_set:
-                x_groupship = self.get_acct(x_acct_id).get_groupship(group_id)
-                x_groupbox.set_groupship(x_groupship)
+                x_membership = self.get_acct(x_acct_id).get_membership(group_id)
+                x_groupbox.set_membership(x_membership)
                 self.set_groupbox(x_groupbox)
 
     def _calc_acctunit_metrics(self):
@@ -1578,7 +1578,7 @@ class BudUnit:
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_group_id in x_econ_idea._healerhold._group_ids:
                 x_groupbox = self.get_groupbox(x_group_id)
-                for x_acct_id in x_groupbox._groupships.keys():
+                for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
                         _healers_dict[x_acct_id] = {x_econ_road: x_econ_idea}
                     else:

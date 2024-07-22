@@ -15,9 +15,9 @@ def test_BudUnit_get_acctunit_group_ids_dict_ReturnsObj():
     zia_acctunit = bob_bud.get_acct(zia_text)
     run_text = ",Run"
     swim_text = ",Swim"
-    sue_acctunit.add_groupship(run_text)
-    zia_acctunit.add_groupship(run_text)
-    zia_acctunit.add_groupship(swim_text)
+    sue_acctunit.add_membership(run_text)
+    zia_acctunit.add_membership(run_text)
+    zia_acctunit.add_membership(swim_text)
 
     # WHEN
     group_ids_dict = bob_bud.get_acctunit_group_ids_dict()
@@ -104,11 +104,11 @@ def test_BudUnit_create_symmetry_groupbox_ReturnsObj():
 
     # THEN
     assert xio_groupbox.group_id == xio_text
-    assert xio_groupbox.groupship_exists(yao_text)
-    assert xio_groupbox.groupship_exists(zia_text)
-    assert len(xio_groupbox._groupships) == 2
-    yao_groupbox = xio_groupbox.get_groupship(yao_text)
-    zia_groupbox = xio_groupbox.get_groupship(zia_text)
+    assert xio_groupbox.membership_exists(yao_text)
+    assert xio_groupbox.membership_exists(zia_text)
+    assert len(xio_groupbox._memberships) == 2
+    yao_groupbox = xio_groupbox.get_membership(yao_text)
+    zia_groupbox = xio_groupbox.get_membership(zia_text)
     assert yao_groupbox.credit_score == yao_credit_score
     assert zia_groupbox.credit_score == zia_credit_score
     assert yao_groupbox.debtit_score == yao_debtit_score

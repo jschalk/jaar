@@ -71,8 +71,8 @@ def bud_acctunit_text() -> str:
     return "bud_acctunit"
 
 
-def bud_acct_groupship_text() -> str:
-    return "bud_acct_groupship"
+def bud_acct_membership_text() -> str:
+    return "bud_acct_membership"
 
 
 def bud_ideaunit_text() -> str:

@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_acct_groupship",
+    "atom_category": "bud_acct_membership",
     "attributes": {
         "acct_id": {
             "column_order": 2,

@@ -98,15 +98,15 @@ def test_normalized_table_AcctUnitTable_Exists():
 #     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_GroupShipTable_groupship_Exists():
+def test_normalized_table_GroupShipTable_membership_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_acct_groupship")
+    config_category = get_normalized_bud_table_build().get("bud_acct_membership")
     mapper = inspect(GroupShipTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "groupship"
+    assert config_table_name == "membership"
     assert config_table_name == GroupShipTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 

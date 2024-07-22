@@ -4,10 +4,10 @@ from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObj_acct_groupship_INSERT():
+def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_groupship"
+    category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
@@ -29,15 +29,15 @@ def test_create_legible_list_ReturnsObj_acct_groupship_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' has new groupship {yao_text} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
+    x_str = f"Group '{swim_text}' has new membership {yao_text} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_credit_score_debtit_score():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_score_debtit_score():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_groupship"
+    category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
@@ -59,15 +59,15 @@ def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_credit_score_debti
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' groupship {yao_text} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_credit_score():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_score():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_groupship"
+    category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
@@ -86,15 +86,15 @@ def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_credit_score():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' groupship {yao_text} has new group_cred={credit_score_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new group_cred={credit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_debtit_score():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_score():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_groupship"
+    category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     debtit_score_text = "debtit_score"
@@ -113,15 +113,15 @@ def test_create_legible_list_ReturnsObj_acct_groupship_UPDATE_debtit_score():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' groupship {yao_text} has new group_debt={debtit_score_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new group_debt={debtit_score_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_groupship_DELETE():
+def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_groupship"
+    category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
@@ -137,6 +137,6 @@ def test_create_legible_list_ReturnsObj_acct_groupship_DELETE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' no longer has groupship {yao_text}."
+    x_str = f"Group '{swim_text}' no longer has membership {yao_text}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

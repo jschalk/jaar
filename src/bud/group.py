@@ -8,7 +8,7 @@ class InvalidGroupException(Exception):
     pass
 
 
-class groupship_group_id_Exception(Exception):
+class membership_group_id_Exception(Exception):
     pass
 
 
@@ -56,7 +56,7 @@ class GroupShip(GroupCore):
         self._fund_agenda_ratio_take = 0
 
 
-def groupship_shop(
+def membership_shop(
     group_id: GroupID,
     credit_score: float = None,
     debtit_score: float = None,
@@ -72,8 +72,8 @@ def groupship_shop(
     )
 
 
-def groupship_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> GroupShip:
-    return groupship_shop(
+def membership_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> GroupShip:
+    return membership_shop(
         group_id=x_dict.get("group_id"),
         credit_score=x_dict.get("credit_score"),
         debtit_score=x_dict.get("debtit_score"),
@@ -81,12 +81,12 @@ def groupship_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> GroupShip:
     )
 
 
-def groupships_get_from_dict(
+def memberships_get_from_dict(
     x_dict: dict, x_acct_id: AcctID
 ) -> dict[GroupID, GroupShip]:
     return {
-        x_group_id: groupship_get_from_dict(x_groupship_dict, x_acct_id)
-        for x_group_id, x_groupship_dict in x_dict.items()
+        x_group_id: membership_get_from_dict(x_membership_dict, x_acct_id)
+        for x_group_id, x_membership_dict in x_dict.items()
     }
 
 
@@ -172,7 +172,7 @@ def awardline_shop(group_id: GroupID, _fund_give: float, _fund_take: float):
 
 @dataclass
 class GroupBox(GroupCore):
-    _groupships: dict[AcctID, GroupShip] = None  # set by BudUnit.set_acctunit()
+    _memberships: dict[AcctID, GroupShip] = None  # set by BudUnit.set_acctunit()
     _road_delimiter: str = None  # calculated by BudUnit
     # calculated by BudUnit.settle_bud()
     _fund_give: float = None
@@ -183,19 +183,19 @@ class GroupBox(GroupCore):
     _debtor_pool: float = None
     _fund_coin: FundCoin = None
 
-    def set_groupship(self, x_groupship: GroupShip):
-        if x_groupship.group_id != self.group_id:
-            raise groupship_group_id_Exception(
-                f"GroupBox.group_id={self.group_id} cannot set groupship.group_id={x_groupship.group_id}"
+    def set_membership(self, x_membership: GroupShip):
+        if x_membership.group_id != self.group_id:
+            raise membership_group_id_Exception(
+                f"GroupBox.group_id={self.group_id} cannot set membership.group_id={x_membership.group_id}"
             )
-        if x_groupship._acct_id is None:
-            raise groupship_group_id_Exception(
-                f"groupship group_id={x_groupship.group_id} cannot be set when _acct_id is None."
+        if x_membership._acct_id is None:
+            raise membership_group_id_Exception(
+                f"membership group_id={x_membership.group_id} cannot be set when _acct_id is None."
             )
 
-        self._groupships[x_groupship._acct_id] = x_groupship
-        self._add_credor_pool(x_groupship._credor_pool)
-        self._add_debtor_pool(x_groupship._debtor_pool)
+        self._memberships[x_membership._acct_id] = x_membership
+        self._add_credor_pool(x_membership._credor_pool)
+        self._add_debtor_pool(x_membership._debtor_pool)
 
     def _add_credor_pool(self, x_credor_pool: float):
         self._credor_pool += x_credor_pool
@@ -203,41 +203,41 @@ class GroupBox(GroupCore):
     def _add_debtor_pool(self, x_debtor_pool: float):
         self._debtor_pool += x_debtor_pool
 
-    def get_groupship(self, x_acct_id: AcctID) -> GroupShip:
-        return self._groupships.get(x_acct_id)
+    def get_membership(self, x_acct_id: AcctID) -> GroupShip:
+        return self._memberships.get(x_acct_id)
 
-    def groupship_exists(self, x_acct_id: AcctID) -> bool:
-        return self.get_groupship(x_acct_id) is not None
+    def membership_exists(self, x_acct_id: AcctID) -> bool:
+        return self.get_membership(x_acct_id) is not None
 
-    def del_groupship(self, acct_id):
-        self._groupships.pop(acct_id)
+    def del_membership(self, acct_id):
+        self._memberships.pop(acct_id)
 
     def clear_fund_give_take(self):
         self._fund_give = 0
         self._fund_take = 0
         self._fund_agenda_give = 0
         self._fund_agenda_take = 0
-        for groupship in self._groupships.values():
-            groupship.clear_fund_give_take()
+        for membership in self._memberships.values():
+            membership.clear_fund_give_take()
 
-    def _set_groupship_fund_give_fund_take(self):
+    def _set_membership_fund_give_fund_take(self):
         credit_ledger = {}
         debtit_ledger = {}
-        for x_acct_id, x_groupship in self._groupships.items():
-            credit_ledger[x_acct_id] = x_groupship.credit_score
-            debtit_ledger[x_acct_id] = x_groupship.debtit_score
+        for x_acct_id, x_membership in self._memberships.items():
+            credit_ledger[x_acct_id] = x_membership.credit_score
+            debtit_ledger[x_acct_id] = x_membership.debtit_score
         fund_give_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
         fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self._fund_coin)
-        for acct_id, x_groupship in self._groupships.items():
-            x_groupship._fund_give = fund_give_allot.get(acct_id)
-            x_groupship._fund_take = fund_take_allot.get(acct_id)
+        for acct_id, x_membership in self._memberships.items():
+            x_membership._fund_give = fund_give_allot.get(acct_id)
+            x_membership._fund_take = fund_take_allot.get(acct_id)
         x_a_give = self._fund_agenda_give
         x_a_take = self._fund_agenda_take
         fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self._fund_coin)
         fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self._fund_coin)
-        for acct_id, x_groupship in self._groupships.items():
-            x_groupship._fund_agenda_give = fund_agenda_give_allot.get(acct_id)
-            x_groupship._fund_agenda_take = fund_agenda_take_allot.get(acct_id)
+        for acct_id, x_membership in self._memberships.items():
+            x_membership._fund_agenda_give = fund_agenda_give_allot.get(acct_id)
+            x_membership._fund_agenda_take = fund_agenda_take_allot.get(acct_id)
 
 
 def groupbox_shop(
@@ -245,7 +245,7 @@ def groupbox_shop(
 ) -> GroupBox:
     return GroupBox(
         group_id=group_id,
-        _groupships={},
+        _memberships={},
         _fund_give=0,
         _fund_take=0,
         _fund_agenda_give=0,

@@ -214,17 +214,17 @@ def test_IdeaUnit_awardlinks_exist():
         take_force=swimmer_take_force,
     )
 
-    x_groupships = {
+    x_memberships = {
         swimmer_awardlink.group_id: swimmer_awardlink,
         biker_awardlink.group_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_groupships)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_memberships)
 
     # THEN
-    assert sport_idea._awardlinks == x_groupships
+    assert sport_idea._awardlinks == x_memberships
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -238,12 +238,12 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     swim_give_force = 29
     swim_take_force = 32
     swim_awardlink = awardheir_shop(swim_group_id, swim_give_force, swim_take_force)
-    x_groupships = {
+    x_memberships = {
         swim_awardlink.group_id: swim_awardlink,
         biker_awardlink.group_id: biker_awardlink,
     }
     sport_text = "sport"
-    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_groupships)
+    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_memberships)
     assert sport_idea._fund_coin == 1
     assert len(sport_idea._awardheirs) == 2
     swim_awardheir = sport_idea._awardheirs.get(swim_text)

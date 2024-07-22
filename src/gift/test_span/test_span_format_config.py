@@ -21,7 +21,7 @@ from src.gift.span import (
     get_span_formats_dir,
     get_span_filenames,
     jaar_format_0001_acct_v0_0_0,
-    jaar_format_0002_groupship_v0_0_0,
+    jaar_format_0002_membership_v0_0_0,
     jaar_format_0003_ideaunit_v0_0_0,
     _get_headers_list,
     create_span_dataframe,
@@ -38,8 +38,8 @@ def test_config_str_functions_ReturnObjs():
     assert debtit_score_str() == "debtit_score"
     assert credit_score_str() == "credit_score"
     assert jaar_format_0001_acct_v0_0_0() == "jaar_format_0001_acct_v0_0_0"
-    x0002_span = "jaar_format_0002_groupship_v0_0_0"
-    assert jaar_format_0002_groupship_v0_0_0() == x0002_span
+    x0002_span = "jaar_format_0002_membership_v0_0_0"
+    assert jaar_format_0002_membership_v0_0_0() == x0002_span
     x0003_span = "jaar_format_0003_ideaunit_v0_0_0"
     assert jaar_format_0003_ideaunit_v0_0_0() == x0003_span
 
@@ -58,7 +58,7 @@ def test_get_span_filenames_ReturnsCorrectObj():
     # THEN
     print(f"{x_filenames=}")
     assert jaar_format_0001_acct_v0_0_0() in x_filenames
-    assert jaar_format_0002_groupship_v0_0_0() in x_filenames
+    assert jaar_format_0002_membership_v0_0_0() in x_filenames
     assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
 
 
@@ -152,9 +152,9 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0001_acct_v0_0_0():
     assert debtit_score_spancolumn.column_order == 4
 
 
-def test_get_spanref_HasCorrectAttrs_jaar_format_0002_groupship_v0_0_0():
+def test_get_spanref_HasCorrectAttrs_jaar_format_0002_membership_v0_0_0():
     # ESTABLISH
-    span_name = jaar_format_0002_groupship_v0_0_0()
+    span_name = jaar_format_0002_membership_v0_0_0()
 
     # WHEN
     format_0002_spanref = get_spanref(span_name)
