@@ -440,9 +440,7 @@ class IdeaUnit:
         self._parent_road = parent_road
 
     def inherit_awardheirs(self, parent_awardheirs: dict[LobbyID, AwardHeir] = None):
-        if parent_awardheirs is None:
-            parent_awardheirs = {}
-
+        parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
         self._awardheirs = {}
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
