@@ -1,4 +1,5 @@
 from src._instrument.python import get_1_if_None, get_dict_from_json
+from src._road.finance import allot_scale, FundCoin, default_fund_coin_if_none
 from src._road.road import LobbyID, AcctID, default_road_delimiter_if_none
 from dataclasses import dataclass
 
@@ -210,6 +211,7 @@ class LobbyBox(LobbyCore):
     _fund_agenda_take: float = None
     _credor_pool: float = None
     _debtor_pool: float = None
+    _fund_coin: FundCoin = None
 
     def set_lobbyship(self, x_lobbyship: LobbyShip):
         if x_lobbyship.lobby_id != self.lobby_id:
@@ -249,6 +251,13 @@ class LobbyBox(LobbyCore):
             lobbyship.clear_fund_give_take()
 
     def _set_lobbyship_fund_give_take(self):
+        credit_ledger = {}
+        debtit_ledger = {}
+        for x_acct_id, x_lobbyship in self._lobbyships.items():
+            credit_ledger[x_acct_id] = x_lobbyship.credit_score
+            debtit_ledger[x_acct_id] = x_lobbyship.debtit_score
+        # credit_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
+
         lobbyships_credit_score_sum = sum(
             lobbyship.credit_score for lobbyship in self._lobbyships.values()
         )
@@ -267,7 +276,9 @@ class LobbyBox(LobbyCore):
             )
 
 
-def lobbybox_shop(lobby_id: LobbyID, _road_delimiter: str = None) -> LobbyBox:
+def lobbybox_shop(
+    lobby_id: LobbyID, _road_delimiter: str = None, _fund_coin: FundCoin = None
+) -> LobbyBox:
     return LobbyBox(
         lobby_id=lobby_id,
         _lobbyships={},
@@ -278,6 +289,7 @@ def lobbybox_shop(lobby_id: LobbyID, _road_delimiter: str = None) -> LobbyBox:
         _credor_pool=0,
         _debtor_pool=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _fund_coin=default_fund_coin_if_none(_fund_coin),
     )
     # x_lobbybox.set_lobby_id(lobby_id=lobby_id)
     # return x_lobbybox

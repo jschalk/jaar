@@ -1,3 +1,9 @@
+from src._road.finance import default_fund_coin_if_none
+from src._road.road import (
+    get_default_real_id_roadnode as root_label,
+    create_road,
+    default_road_delimiter_if_none,
+)
 from src.bud.lobby import (
     LobbyCore,
     LobbyID,
@@ -13,11 +19,6 @@ from src.bud.lobby import (
     awardheir_shop,
     LobbyBox,
     lobbybox_shop,
-)
-from src._road.road import (
-    get_default_real_id_roadnode as root_label,
-    create_road,
-    default_road_delimiter_if_none,
 )
 from src._instrument.python import x_is_json, get_json_from_dict
 from pytest import raises as pytest_raises
@@ -502,6 +503,7 @@ def test_LobbyBox_exists():
     assert swim_lobbybox._credor_pool is None
     assert swim_lobbybox._debtor_pool is None
     assert swim_lobbybox._road_delimiter is None
+    assert swim_lobbybox._fund_coin is None
 
 
 def test_lobbybox_shop_ReturnsCorrectObj():
@@ -526,18 +528,23 @@ def test_lobbybox_shop_ReturnsCorrectObj():
     assert swim_lobbybox._credor_pool == 0
     assert swim_lobbybox._debtor_pool == 0
     assert swim_lobbybox._road_delimiter == default_road_delimiter_if_none()
+    assert swim_lobbybox._fund_coin == default_fund_coin_if_none()
 
 
 def test_lobbybox_shop_ReturnsCorrectObj_road_delimiter():
     # ESTABLISH
     swim_text = "/swimmers"
     slash_text = "/"
+    x_fund_coin = 7
 
     # WHEN
-    swim_lobbybox = lobbybox_shop(lobby_id=swim_text, _road_delimiter=slash_text)
+    swim_lobbybox = lobbybox_shop(
+        lobby_id=swim_text, _road_delimiter=slash_text, _fund_coin=x_fund_coin
+    )
 
     # THEN
     assert swim_lobbybox._road_delimiter == slash_text
+    assert swim_lobbybox._fund_coin == x_fund_coin
 
 
 # def test_LobbyBox_set_lobby_id_RaisesErrorIfParameterContains_road_delimiter_And_acct_mirror_True():

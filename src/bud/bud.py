@@ -389,6 +389,7 @@ class BudUnit:
         return x_dict
 
     def set_lobbybox(self, x_lobbybox: LobbyBox):
+        x_lobbybox._fund_coin = self._fund_coin
         self._lobbyboxs[x_lobbybox.lobby_id] = x_lobbybox
 
     def lobbybox_exists(self, lobby_id: LobbyID) -> bool:

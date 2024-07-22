@@ -34,7 +34,7 @@ def test_BudUnit_get_acctunit_lobby_ids_dict_ReturnsObj():
     assert lobby_ids_dict.get(zia_text) == {zia_text}
 
 
-def test_BudUnit_set_lobbybox_SetsAttr():
+def test_BudUnit_set_lobbybox_SetsAttr_Scenario0():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     run_text = ",Run"
@@ -45,6 +45,20 @@ def test_BudUnit_set_lobbybox_SetsAttr():
 
     # THEN
     assert bob_bud._lobbyboxs.get(run_text)
+
+
+def test_BudUnit_set_lobbybox_Sets_road_fund_coin():
+    # ESTABLISH
+    x_fund_coin = 5
+    bob_bud = budunit_shop("Bob", _fund_coin=x_fund_coin)
+    run_text = ",Run"
+    assert not bob_bud._lobbyboxs.get(run_text)
+
+    # WHEN
+    bob_bud.set_lobbybox(lobbybox_shop(run_text))
+
+    # THEN
+    assert bob_bud._lobbyboxs.get(run_text)._fund_coin == x_fund_coin
 
 
 def test_BudUnit_lobbybox_exists_ReturnsObj():
