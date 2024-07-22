@@ -1197,7 +1197,7 @@ class BudUnit:
 
     def _allot_lobbyboxs_fund(self):
         for x_lobbybox in self._lobbyboxs.values():
-            x_lobbybox._set_lobbyship_fund_give_take()
+            x_lobbybox._set_lobbyship_fund_give_fund_take()
             for x_lobbyship in x_lobbybox._lobbyships.values():
                 self.add_to_acctunit_fund_give_take(
                     acctunit_acct_id=x_lobbyship._acct_id,
