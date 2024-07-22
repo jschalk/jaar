@@ -74,7 +74,7 @@ def default_bit_if_none(bit: BitNum = None) -> BitNum:
 
 
 def trim_bit_excess(num: float, bit: BitNum) -> float:
-    return bit * int(num / bit)
+    return trim_fund_coin_excess(num, bit)
 
 
 def default_respect_num() -> RespectNum:
@@ -91,7 +91,7 @@ def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
 
 
 def trim_penny_excess(num: MoneyUnit, penny: PennyNum) -> MoneyUnit:
-    return penny * int(num / penny)
+    return trim_fund_coin_excess(num, penny)
 
 
 def default_money_magnitude() -> MoneyUnit:

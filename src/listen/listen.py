@@ -1,3 +1,4 @@
+from src._road.finance import trim_bit_excess
 from src._road.road import (
     get_ancestor_roads,
     RoadUnit,
@@ -52,7 +53,7 @@ def _get_bit_scaled_mass(
     x_fund_share: float, debtor_amount: float, bit: float
 ) -> float:
     x_ingest_mass = x_fund_share * debtor_amount
-    return int(x_ingest_mass / bit) * bit
+    return trim_bit_excess(x_ingest_mass, bit)
 
 
 def _allot_ingest(x_list: list[IdeaUnit], nonallocated_ingest: float, bit: float):
