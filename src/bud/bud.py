@@ -296,7 +296,7 @@ class BudUnit:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
-    def add_to_groupbox_fund_give_take(
+    def add_to_groupbox_fund_give_fund_take(
         self,
         group_id: GroupID,
         awardheir_fund_give: float,
@@ -1175,7 +1175,7 @@ class BudUnit:
             x_group_id = awardlink_obj.group_id
             if not self.groupbox_exists(x_group_id):
                 self.set_groupbox(self.create_symmetry_groupbox(x_group_id))
-            self.add_to_groupbox_fund_give_take(
+            self.add_to_groupbox_fund_give_fund_take(
                 group_id=awardlink_obj.group_id,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,

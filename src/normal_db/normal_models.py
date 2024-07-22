@@ -92,7 +92,7 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class groupholdTable(Base):
+class GroupHoldTable(Base):
     __tablename__ = "grouphold"
     uid = Column(Integer, primary_key=True)
     group_id = Column(String)

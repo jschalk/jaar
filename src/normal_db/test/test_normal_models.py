@@ -13,7 +13,7 @@ from src.normal_db.normal_models import (
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
-    groupholdTable,
+    GroupHoldTable,
     HealerHoldTable,
     FactTable,
 )
@@ -165,16 +165,16 @@ def test_normalized_table_PremiseTable_premise_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_groupholdTable_grouphold_Exists():
+def test_normalized_table_GroupHoldTable_grouphold_Exists():
     # ESTABLISH
     config_category = get_normalized_bud_table_build().get("bud_idea_grouphold")
-    mapper = inspect(groupholdTable)
+    mapper = inspect(GroupHoldTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
     assert config_table_name == "grouphold"
-    assert config_table_name == groupholdTable.__tablename__
+    assert config_table_name == GroupHoldTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 
