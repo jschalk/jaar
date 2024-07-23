@@ -192,7 +192,10 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
     owner_id_spancolumn = format_0003_spanref.get_spancolumn(owner_id_str())
     parent_road_spancolumn = format_0003_spanref.get_spancolumn(parent_road_str())
     label_spancolumn = format_0003_spanref.get_spancolumn(label_str())
-    mass_spancolumn = format_0003_spanref.get_spancolumn("_mass")
+    print(f"{format_0003_spanref._spancolumns.keys()=}")
+    print(f"{format_0003_spanref._spancolumns.get(mass_str())=}")
+    mass_spancolumn = format_0003_spanref.get_spancolumn(mass_str())
+    print(f"{mass_spancolumn=}")
     pledge_spancolumn = format_0003_spanref.get_spancolumn(pledge_str())
     assert len(format_0003_spanref._spancolumns) == 6
 

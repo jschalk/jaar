@@ -66,7 +66,7 @@ def label_str() -> str:
 
 
 def mass_str() -> str:
-    return "_mass"
+    return "mass"
 
 
 def pledge_str() -> str:
@@ -239,7 +239,7 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
                     x_budunit._owner_id,
                     pledge_yes_str,
                     x_atomunit.get_value(parent_road_str()),
-                    x_atomunit.get_value(mass_str()),
+                    x_atomunit.get_value(f"_{mass_str()}"),
                     x_atomunit.get_value(label_str()),
                 ]
             )
