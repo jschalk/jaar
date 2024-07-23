@@ -19,8 +19,8 @@ class GroupCore:
 
 @dataclass
 class MemberShip(GroupCore):
-    credit_weight: float = 1.0
-    debtit_weight: float = 1.0
+    credit_vote: float = 1.0
+    debtit_vote: float = 1.0
     # calculated fields
     _credor_pool: float = None
     _debtor_pool: float = None
@@ -32,19 +32,19 @@ class MemberShip(GroupCore):
     _fund_agenda_ratio_take: float = None
     _acct_id: AcctID = None
 
-    def set_credit_weight(self, x_credit_weight: float):
-        if x_credit_weight is not None:
-            self.credit_weight = x_credit_weight
+    def set_credit_vote(self, x_credit_vote: float):
+        if x_credit_vote is not None:
+            self.credit_vote = x_credit_vote
 
-    def set_debtit_weight(self, x_debtit_weight: float):
-        if x_debtit_weight is not None:
-            self.debtit_weight = x_debtit_weight
+    def set_debtit_vote(self, x_debtit_vote: float):
+        if x_debtit_vote is not None:
+            self.debtit_vote = x_debtit_vote
 
     def get_dict(self) -> dict[str, str]:
         return {
             "group_id": self.group_id,
-            "credit_weight": self.credit_weight,
-            "debtit_weight": self.debtit_weight,
+            "credit_vote": self.credit_vote,
+            "debtit_vote": self.debtit_vote,
         }
 
     def clear_fund_give_take(self):
@@ -58,14 +58,14 @@ class MemberShip(GroupCore):
 
 def membership_shop(
     group_id: GroupID,
-    credit_weight: float = None,
-    debtit_weight: float = None,
+    credit_vote: float = None,
+    debtit_vote: float = None,
     _acct_id: AcctID = None,
 ) -> MemberShip:
     return MemberShip(
         group_id=group_id,
-        credit_weight=get_1_if_None(credit_weight),
-        debtit_weight=get_1_if_None(debtit_weight),
+        credit_vote=get_1_if_None(credit_vote),
+        debtit_vote=get_1_if_None(debtit_vote),
         _credor_pool=0,
         _debtor_pool=0,
         _acct_id=_acct_id,
@@ -75,8 +75,8 @@ def membership_shop(
 def membership_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> MemberShip:
     return membership_shop(
         group_id=x_dict.get("group_id"),
-        credit_weight=x_dict.get("credit_weight"),
-        debtit_weight=x_dict.get("debtit_weight"),
+        credit_vote=x_dict.get("credit_vote"),
+        debtit_vote=x_dict.get("debtit_vote"),
         _acct_id=x_acct_id,
     )
 
@@ -224,8 +224,8 @@ class GroupBox(GroupCore):
         credit_ledger = {}
         debtit_ledger = {}
         for x_acct_id, x_membership in self._memberships.items():
-            credit_ledger[x_acct_id] = x_membership.credit_weight
-            debtit_ledger[x_acct_id] = x_membership.debtit_weight
+            credit_ledger[x_acct_id] = x_membership.credit_vote
+            debtit_ledger[x_acct_id] = x_membership.debtit_vote
         fund_give_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
         fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self._fund_coin)
         for acct_id, x_membership in self._memberships.items():

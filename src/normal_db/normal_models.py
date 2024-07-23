@@ -42,8 +42,8 @@ class MemberShipTable(Base):
     uid = Column(Integer, primary_key=True)
     group_id = Column(String)
     acct_id = Column(String)
-    credit_weight = Column(Integer)
-    debtit_weight = Column(Integer)
+    credit_vote = Column(Integer)
+    debtit_vote = Column(Integer)
 
 
 class IdeaTable(Base):

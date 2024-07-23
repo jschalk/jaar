@@ -91,12 +91,12 @@ def test_BudUnit_create_symmetry_groupbox_ReturnsObj():
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    yao_credit_weight = 3
-    yao_debtit_weight = 2
-    zia_credit_weight = 4
-    zia_debtit_weight = 5
-    yao_bud.add_acctunit(yao_text, yao_credit_weight, yao_debtit_weight)
-    yao_bud.add_acctunit(zia_text, zia_credit_weight, zia_debtit_weight)
+    yao_credit_vote = 3
+    yao_debtit_vote = 2
+    zia_credit_vote = 4
+    zia_debtit_vote = 5
+    yao_bud.add_acctunit(yao_text, yao_credit_vote, yao_debtit_vote)
+    yao_bud.add_acctunit(zia_text, zia_credit_vote, zia_debtit_vote)
 
     # WHEN
     xio_text = "Xio"
@@ -109,7 +109,7 @@ def test_BudUnit_create_symmetry_groupbox_ReturnsObj():
     assert len(xio_groupbox._memberships) == 2
     yao_groupbox = xio_groupbox.get_membership(yao_text)
     zia_groupbox = xio_groupbox.get_membership(zia_text)
-    assert yao_groupbox.credit_weight == yao_credit_weight
-    assert zia_groupbox.credit_weight == zia_credit_weight
-    assert yao_groupbox.debtit_weight == yao_debtit_weight
-    assert zia_groupbox.debtit_weight == zia_debtit_weight
+    assert yao_groupbox.credit_vote == yao_credit_vote
+    assert zia_groupbox.credit_vote == zia_credit_vote
+    assert yao_groupbox.debtit_vote == yao_debtit_vote
+    assert zia_groupbox.debtit_vote == zia_debtit_vote

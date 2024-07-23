@@ -192,19 +192,19 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_group_id = x_atom.get_value("group_id")
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_membership = x_acctunit.get_membership(x_group_id)
-    x_credit_weight = x_atom.get_value("credit_weight")
-    x_debtit_weight = x_atom.get_value("debtit_weight")
-    x_membership.set_credit_weight(x_credit_weight)
-    x_membership.set_debtit_weight(x_debtit_weight)
+    x_credit_vote = x_atom.get_value("credit_vote")
+    x_debtit_vote = x_atom.get_value("debtit_vote")
+    x_membership.set_credit_vote(x_credit_vote)
+    x_membership.set_debtit_vote(x_debtit_vote)
 
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
     x_group_id = x_atom.get_value("group_id")
-    x_credit_weight = x_atom.get_value("credit_weight")
-    x_debtit_weight = x_atom.get_value("debtit_weight")
+    x_credit_vote = x_atom.get_value("credit_vote")
+    x_debtit_vote = x_atom.get_value("debtit_vote")
     x_acctunit = x_bud.get_acct(x_acct_id)
-    x_acctunit.add_membership(x_group_id, x_credit_weight, x_debtit_weight)
+    x_acctunit.add_membership(x_group_id, x_credit_vote, x_debtit_vote)
 
 
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -507,8 +507,8 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._fund_coin != y_obj._fund_coin
         )
     elif category in {"bud_acct_membership"}:
-        return (x_obj.credit_weight != y_obj.credit_weight) or (
-            x_obj.debtit_weight != y_obj.debtit_weight
+        return (x_obj.credit_vote != y_obj.credit_vote) or (
+            x_obj.debtit_vote != y_obj.debtit_vote
         )
     elif category in {"bud_idea_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
