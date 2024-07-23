@@ -140,6 +140,28 @@ def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
     assert x_ideaunit._fund_coin == x_fund_coin
 
 
+def test_ideaunit_shop_ReturnsObjWith_awardlinks():
+    # ESTABLISH
+    biker_give_force = 12
+    biker_take_force = 15
+    biker_awardlink = awardlink_shop("bikers2", biker_give_force, biker_take_force)
+    swim_group_id = "swimmers"
+    swim_give_force = 29
+    swim_take_force = 32
+    swim_awardlink = awardlink_shop(swim_group_id, swim_give_force, swim_take_force)
+    x_awardlinks = {
+        swim_awardlink.group_id: swim_awardlink,
+        biker_awardlink.group_id: biker_awardlink,
+    }
+
+    # WHEN
+    sport_text = "sport"
+    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_awardlinks)
+
+    # THEN
+    assert sport_idea._awardlinks == x_awardlinks
+
+
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():
     # ESTABLISH
     round_text = "round_things"
@@ -187,28 +209,6 @@ def test_IdeaUnit_set_parent_road_SetsAttr():
 
     # THEN
     assert ball_idea._parent_road == sports_road
-
-
-def test_ideaunit_shop_ReturnsObjWith_awardlinks():
-    # ESTABLISH
-    biker_give_force = 12
-    biker_take_force = 15
-    biker_awardlink = awardlink_shop("bikers2", biker_give_force, biker_take_force)
-    swim_group_id = "swimmers"
-    swim_give_force = 29
-    swim_take_force = 32
-    swim_awardlink = awardlink_shop(swim_group_id, swim_give_force, swim_take_force)
-    x_awardlinks = {
-        swim_awardlink.group_id: swim_awardlink,
-        biker_awardlink.group_id: biker_awardlink,
-    }
-
-    # WHEN
-    sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_awardlinks)
-
-    # THEN
-    assert sport_idea._awardlinks == x_awardlinks
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -571,3 +571,22 @@ def test_IdeaUnit_get_fund_share_ReturnsObj():
     nation_idea._fund_onset = 3
     nation_idea._fund_cease = 14
     assert nation_idea.get_fund_share() == 11
+
+
+def test_IdeaUnit_is_arithmetic_ReturnsObj():
+    # ESTABLISH
+    swim_text = "swim"
+    swim_idea = ideaunit_shop(swim_text)
+    assert not swim_idea.is_arithmetic()
+    # WHEN
+    swim_idea._begin = 9
+    # THEN
+    assert not swim_idea.is_arithmetic()
+    # WHEN
+    swim_idea._close = 10
+    # THEN
+    assert swim_idea.is_arithmetic()
+    # WHEN
+    swim_idea._begin = None
+    # THEN
+    assert not swim_idea.is_arithmetic()

@@ -373,6 +373,10 @@ class BudUnit:
             x_acctunit.set_debtit_score(debtit_score)
         self.set_acctunit(x_acctunit)
 
+    def clear_acctunits_memberships(self):
+        for x_acctunit in self._accts.values():
+            x_acctunit.clear_memberships()
+
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
         return self._accts.get(acct_id)
 
@@ -414,10 +418,6 @@ class BudUnit:
         x_acctunit_group_ids = set(self.get_acctunit_group_ids_dict().keys())
         all_group_ids = set(self._groupboxs.keys())
         return all_group_ids.difference(x_acctunit_group_ids)
-
-    def clear_acctunits_memberships(self):
-        for x_acctunit in self._accts.values():
-            x_acctunit.clear_memberships()
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
         if self._real_id == idea_road:
@@ -615,9 +615,6 @@ class BudUnit:
                 new_idea_uid_max = idea_uid_max + 1
                 self.edit_idea_attr(road=x_idea.get_road(), uid=new_idea_uid_max)
                 idea_uid_max = new_idea_uid_max
-
-    def get_idea_count(self) -> int:
-        return len(self._idea_dict)
 
     def get_level_count(self, level) -> int:
         tree_metrics = self.get_tree_metrics()
