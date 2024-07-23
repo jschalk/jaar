@@ -869,7 +869,7 @@ class IdeaUnit:
         return self._begin is not None and self._close is not None
 
     def awardheir_exists(self) -> bool:
-        return self._awardheirs == {}
+        return self._awardheirs != {}
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {"_mass": self._mass}

@@ -1085,12 +1085,9 @@ class BudUnit:
         x_acctunits = self._accts.values()
         credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
         debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
-        fund_give_allot = allot_scale(
-            credor_ledger, self._offtrack_fund, self._fund_coin
-        )
-        fund_take_allot = allot_scale(
-            debtor_ledger, self._offtrack_fund, self._fund_coin
-        )
+        x_offtrack_fund = self._offtrack_fund
+        fund_give_allot = allot_scale(credor_ledger, x_offtrack_fund, self._fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, x_offtrack_fund, self._fund_coin)
         for x_acct_id, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
         for x_acct_id, acct_fund_take in fund_take_allot.items():
@@ -1124,6 +1121,7 @@ class BudUnit:
             )
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
+
         # TODO replace this process with allot_scale
         sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
         sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
@@ -1185,15 +1183,15 @@ class BudUnit:
             # cred ratio and debt ratio
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
-                if idea._awardlines == {}:
-                    self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
-                else:
+                if idea.awardheir_exists():
                     for x_awardline in idea._awardlines.values():
                         self.add_to_groupbox_fund_agenda_give_take(
                             group_id=x_awardline.group_id,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
+                else:
+                    self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
 
     def _allot_groupboxs_fund(self):
         for x_groupbox in self._groupboxs.values():
@@ -1420,9 +1418,9 @@ class BudUnit:
     def _allot_fund_share(self, idea: IdeaUnit):
         # TODO manage situations where awardheir.credit_score is None for all awardheirs
         # TODO manage situations where awardheir.debtit_score is None for all awardheirs
-        if idea.awardheir_exists() is False:
+        if idea.awardheir_exists():
             self._set_groupboxs_fund_share(idea._awardheirs)
-        elif idea.awardheir_exists():
+        elif idea.awardheir_exists() is False:
             self._add_to_acctunits_fund_give_take(idea.get_fund_share())
 
     def _create_groupboxs_metrics(self):

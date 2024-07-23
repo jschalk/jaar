@@ -258,13 +258,13 @@ def test_IdeaUnit_awardheir_exists_ReturnsObj():
     biker_awardheir = awardheir_shop(biker_text)
     sport_text = "sport"
     sport_ideaunit = ideaunit_shop(sport_text)
-    assert sport_ideaunit.awardheir_exists()
+    assert not sport_ideaunit.awardheir_exists()
 
     # WHEN
     sport_ideaunit._awardheirs[biker_text] = biker_awardheir
 
     # THEN
-    assert not sport_ideaunit.awardheir_exists()
+    assert sport_ideaunit.awardheir_exists()
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues():
