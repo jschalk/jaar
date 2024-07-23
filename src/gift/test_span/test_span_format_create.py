@@ -79,22 +79,22 @@ def test_create_span_Arg_jaar_format_0002_membership_v0_0_0():
     sue_budunit.add_acctunit(bob_text)
     sue_budunit.add_acctunit(yao_text)
     iowa_text = ",Iowa"
-    sue_iowa_credor_w = 37
-    bob_iowa_credor_w = 43
-    yao_iowa_credor_w = 51
-    sue_iowa_debtor_w = 57
-    bob_iowa_debtor_w = 61
-    yao_iowa_debtor_w = 67
+    sue_iowa_credit_w = 37
+    bob_iowa_credit_w = 43
+    yao_iowa_credit_w = 51
+    sue_iowa_debtit_w = 57
+    bob_iowa_debtit_w = 61
+    yao_iowa_debtit_w = 67
     ohio_text = ",Ohio"
-    yao_ohio_credor_w = 73
-    yao_ohio_debtor_w = 67
+    yao_ohio_credit_w = 73
+    yao_ohio_debtit_w = 67
     sue_acctunit = sue_budunit.get_acct(sue_text)
     bob_acctunit = sue_budunit.get_acct(bob_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    sue_acctunit.add_membership(iowa_text, sue_iowa_credor_w, sue_iowa_debtor_w)
-    bob_acctunit.add_membership(iowa_text, bob_iowa_credor_w, bob_iowa_debtor_w)
-    yao_acctunit.add_membership(iowa_text, yao_iowa_credor_w, yao_iowa_debtor_w)
-    yao_acctunit.add_membership(ohio_text, yao_ohio_credor_w, yao_ohio_debtor_w)
+    sue_acctunit.add_membership(iowa_text, sue_iowa_credit_w, sue_iowa_debtit_w)
+    bob_acctunit.add_membership(iowa_text, bob_iowa_credit_w, bob_iowa_debtit_w)
+    yao_acctunit.add_membership(iowa_text, yao_iowa_credit_w, yao_iowa_debtit_w)
+    yao_acctunit.add_membership(ohio_text, yao_ohio_credit_w, yao_ohio_debtit_w)
 
     # WHEN
     x_span_name = jaar_format_0002_membership_v0_0_0()
@@ -109,29 +109,29 @@ def test_create_span_Arg_jaar_format_0002_membership_v0_0_0():
     assert membership_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[0, acct_id_str()] == bob_text
     assert membership_dataframe.loc[0, group_id_str()] == iowa_text
-    assert membership_dataframe.loc[0, credit_weight_str()] == bob_iowa_credor_w
-    assert membership_dataframe.loc[0, debtit_weight_str()] == bob_iowa_debtor_w
+    assert membership_dataframe.loc[0, credit_weight_str()] == bob_iowa_credit_w
+    assert membership_dataframe.loc[0, debtit_weight_str()] == bob_iowa_debtit_w
 
     assert membership_dataframe.loc[2, real_id_str()] == music_real_id
     assert membership_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[2, acct_id_str()] == sue_text
     assert membership_dataframe.loc[2, group_id_str()] == iowa_text
-    assert membership_dataframe.loc[2, credit_weight_str()] == sue_iowa_credor_w
-    assert membership_dataframe.loc[2, debtit_weight_str()] == sue_iowa_debtor_w
+    assert membership_dataframe.loc[2, credit_weight_str()] == sue_iowa_credit_w
+    assert membership_dataframe.loc[2, debtit_weight_str()] == sue_iowa_debtit_w
 
     assert membership_dataframe.loc[4, real_id_str()] == music_real_id
     assert membership_dataframe.loc[4, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[4, acct_id_str()] == yao_text
     assert membership_dataframe.loc[4, group_id_str()] == iowa_text
-    assert membership_dataframe.loc[4, credit_weight_str()] == yao_iowa_credor_w
-    assert membership_dataframe.loc[4, debtit_weight_str()] == yao_iowa_debtor_w
+    assert membership_dataframe.loc[4, credit_weight_str()] == yao_iowa_credit_w
+    assert membership_dataframe.loc[4, debtit_weight_str()] == yao_iowa_debtit_w
 
     assert membership_dataframe.loc[5, real_id_str()] == music_real_id
     assert membership_dataframe.loc[5, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[5, acct_id_str()] == yao_text
     assert membership_dataframe.loc[5, group_id_str()] == ohio_text
-    assert membership_dataframe.loc[5, credit_weight_str()] == yao_ohio_credor_w
-    assert membership_dataframe.loc[5, debtit_weight_str()] == yao_ohio_debtor_w
+    assert membership_dataframe.loc[5, credit_weight_str()] == yao_ohio_credit_w
+    assert membership_dataframe.loc[5, debtit_weight_str()] == yao_ohio_debtit_w
     assert len(membership_dataframe) == 7
 
 

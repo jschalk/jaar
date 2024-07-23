@@ -59,10 +59,10 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
     yao_bud = budunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
     ohio_text = ",Ohio"
-    zia_ohio_credor_w = 33
-    zia_ohio_debtor_w = 44
+    zia_ohio_credit_w = 33
+    zia_ohio_debtit_w = 44
     zia_acctunit = acctunit_shop(zia_text)
-    zia_acctunit.add_membership(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
+    zia_acctunit.add_membership(ohio_text, zia_ohio_credit_w, zia_ohio_debtit_w)
 
     # WHEN
     yao_bud.set_acctunit(zia_acctunit)
@@ -70,8 +70,8 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
     # THEN
     zia_ohio_membership = yao_bud.get_acct(zia_text).get_membership(ohio_text)
     assert zia_ohio_membership is not None
-    assert zia_ohio_membership.credit_weight == zia_ohio_credor_w
-    assert zia_ohio_membership.debtit_weight == zia_ohio_debtor_w
+    assert zia_ohio_membership.credit_weight == zia_ohio_credit_w
+    assert zia_ohio_membership.debtit_weight == zia_ohio_debtit_w
     zia_zia_membership = yao_bud.get_acct(zia_text).get_membership(zia_text)
     assert zia_zia_membership is None
 
@@ -116,24 +116,24 @@ def test_BudUnit_set_acct_Creates_membership():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     zia_text = "Zia"
-    before_zia_credor = 7
-    before_zia_debtor = 17
-    yao_bud.add_acctunit(zia_text, before_zia_credor, before_zia_debtor)
+    before_zia_credit = 7
+    before_zia_debtit = 17
+    yao_bud.add_acctunit(zia_text, before_zia_credit, before_zia_debtit)
     zia_acctunit = yao_bud.get_acct(zia_text)
     zia_membership = zia_acctunit.get_membership(zia_text)
-    assert zia_membership.credit_weight != before_zia_credor
-    assert zia_membership.debtit_weight != before_zia_debtor
+    assert zia_membership.credit_weight != before_zia_credit
+    assert zia_membership.debtit_weight != before_zia_debtit
     assert zia_membership.credit_weight == 1
     assert zia_membership.debtit_weight == 1
 
     # WHEN
-    after_zia_credor = 11
-    after_zia_debtor = 13
-    yao_bud.set_acctunit(acctunit_shop(zia_text, after_zia_credor, after_zia_debtor))
+    after_zia_credit = 11
+    after_zia_debtit = 13
+    yao_bud.set_acctunit(acctunit_shop(zia_text, after_zia_credit, after_zia_debtit))
 
     # THEN
-    assert zia_membership.credit_weight != after_zia_credor
-    assert zia_membership.debtit_weight != after_zia_debtor
+    assert zia_membership.credit_weight != after_zia_credit
+    assert zia_membership.debtit_weight != after_zia_debtit
     assert zia_membership.credit_weight == 1
     assert zia_membership.debtit_weight == 1
 

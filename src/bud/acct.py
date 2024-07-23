@@ -148,10 +148,10 @@ class AcctUnit(AcctCore):
     def add_membership(
         self,
         group_id: GroupID,
-        credit_score: float = None,
-        debtit_score: float = None,
+        credit_weight: float = None,
+        debtit_weight: float = None,
     ):
-        x_membership = membership_shop(group_id, credit_score, debtit_score)
+        x_membership = membership_shop(group_id, credit_weight, debtit_weight)
         self.set_membership(x_membership)
 
     def set_membership(self, x_membership: MemberShip):

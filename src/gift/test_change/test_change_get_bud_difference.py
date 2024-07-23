@@ -196,9 +196,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     after_yao_acctunit = after_sue_bud.get_acct(yao_text)
     after_zia_acctunit = after_sue_bud.get_acct(zia_text)
     run_text = ",runners"
-    zia_run_credor_w = 77
-    zia_run_debtor_w = 88
-    after_zia_acctunit.add_membership(run_text, zia_run_credor_w, zia_run_debtor_w)
+    zia_run_credit_w = 77
+    zia_run_debtit_w = 88
+    after_zia_acctunit.add_membership(run_text, zia_run_credit_w, zia_run_debtit_w)
     print(f"{after_sue_bud.get_acctunit_group_ids_dict()=}")
 
     # WHEN
@@ -225,8 +225,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("acct_id") == zia_text
     assert run_atomunit.get_value("group_id") == run_text
-    assert run_atomunit.get_value("credit_weight") == zia_run_credor_w
-    assert run_atomunit.get_value("debtit_weight") == zia_run_debtor_w
+    assert run_atomunit.get_value("credit_weight") == zia_run_credit_w
+    assert run_atomunit.get_value("debtit_weight") == zia_run_debtit_w
 
     print_atomunit_keys(sue_changeunit)
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
@@ -245,15 +245,15 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     before_sue_bud.add_acctunit(xio_text)
     before_sue_bud.add_acctunit(zia_text)
     run_text = ",runners"
-    before_xio_credor_w = 77
-    before_xio_debtor_w = 88
+    before_xio_credit_w = 77
+    before_xio_debtit_w = 88
     before_xio_acct = before_sue_bud.get_acct(xio_text)
-    before_xio_acct.add_membership(run_text, before_xio_credor_w, before_xio_debtor_w)
+    before_xio_acct.add_membership(run_text, before_xio_credit_w, before_xio_debtit_w)
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_xio_acctunit = after_sue_bud.get_acct(xio_text)
-    after_xio_credor_w = 55
-    after_xio_debtor_w = 66
-    after_xio_acctunit.add_membership(run_text, after_xio_credor_w, after_xio_debtor_w)
+    after_xio_credit_w = 55
+    after_xio_debtit_w = 66
+    after_xio_acctunit.add_membership(run_text, after_xio_credit_w, after_xio_debtit_w)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -270,8 +270,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("acct_id") == xio_text
     assert xio_atomunit.get_value("group_id") == run_text
-    assert xio_atomunit.get_value("credit_weight") == after_xio_credor_w
-    assert xio_atomunit.get_value("debtit_weight") == after_xio_debtor_w
+    assert xio_atomunit.get_value("credit_weight") == after_xio_credit_w
+    assert xio_atomunit.get_value("debtit_weight") == after_xio_debtit_w
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
