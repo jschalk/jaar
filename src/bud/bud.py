@@ -323,17 +323,16 @@ class BudUnit:
         acctunit_acct_id: AcctID,
         fund_give,
         fund_take: float,
-        bud_agenda_cred: float,
-        bud_agenda_debt: float,
+        fund_agenda_give: float,
+        fund_agenda_take: float,
     ):
-        for acctunit in self._accts.values():
-            if acctunit.acct_id == acctunit_acct_id:
-                acctunit.add_fund_give_take(
-                    fund_give=fund_give,
-                    fund_take=fund_take,
-                    bud_agenda_cred=bud_agenda_cred,
-                    bud_agenda_debt=bud_agenda_debt,
-                )
+        x_acctunit = self.get_acct(acctunit_acct_id)
+        x_acctunit.add_fund_give_take(
+            fund_give=fund_give,
+            fund_take=fund_take,
+            fund_agenda_give=fund_agenda_give,
+            fund_agenda_take=fund_agenda_take,
+        )
 
     def del_acctunit(self, acct_id: str):
         self._accts.pop(acct_id)
@@ -1158,20 +1157,18 @@ class BudUnit:
                     acctunit_acct_id=x_membership._acct_id,
                     fund_give=x_membership._fund_give,
                     fund_take=x_membership._fund_take,
-                    bud_agenda_cred=x_membership._fund_agenda_give,
-                    bud_agenda_debt=x_membership._fund_agenda_take,
+                    fund_agenda_give=x_membership._fund_agenda_give,
+                    fund_agenda_take=x_membership._fund_agenda_take,
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
         x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
         x_acctunit_debtit_score_sum = self.get_acctunits_debtit_score_sum()
-
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
         for x_acctunit in self._accts.values():
             fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
             fund_agenda_ratio_take_sum += x_acctunit._fund_agenda_take
-
         for x_acctunit in self._accts.values():
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,

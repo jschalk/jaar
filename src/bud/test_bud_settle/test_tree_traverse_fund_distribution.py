@@ -984,16 +984,16 @@ def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
 
 @dataclass
 class GroupAgendaMetrics:
-    sum_groupbox_cred: float = 0
-    sum_groupbox_debt: float = 0
+    sum_groupbox_give: float = 0
+    sum_groupbox_take: float = 0
     sum_membership_cred: float = 0
     sum_membership_debt: float = 0
     membership_count: int = 0
 
     def set_sums(self, x_bud: BudUnit):
         for x_groupbox in x_bud._groupboxs.values():
-            self.sum_groupbox_cred += x_groupbox._fund_agenda_give
-            self.sum_groupbox_debt += x_groupbox._fund_agenda_take
+            self.sum_groupbox_give += x_groupbox._fund_agenda_give
+            self.sum_groupbox_take += x_groupbox._fund_agenda_take
             for membership_x in x_groupbox._memberships.values():
                 self.sum_membership_cred += membership_x._fund_agenda_give
                 self.sum_membership_debt += membership_x._fund_agenda_take
@@ -1042,8 +1042,8 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_groupagendametrics = GroupAgendaMetrics()
     x_groupagendametrics.set_sums(x_bud=x_bud)
-    assert x_groupagendametrics.sum_groupbox_cred == 0
-    assert x_groupagendametrics.sum_groupbox_debt == 0
+    assert x_groupagendametrics.sum_groupbox_give == 0
+    assert x_groupagendametrics.sum_groupbox_take == 0
     assert x_groupagendametrics.sum_membership_cred == 0
     assert x_groupagendametrics.sum_membership_debt == 0
 
@@ -1082,14 +1082,14 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     x_groupagendametrics.set_sums(x_bud=x_bud)
     assert x_groupagendametrics.membership_count == 81
     x_sum = 2796504
-    print(f"{x_groupagendametrics.sum_groupbox_cred=}")
-    assert are_equal(x_groupagendametrics.sum_groupbox_cred, x_sum)
-    assert are_equal(x_groupagendametrics.sum_groupbox_debt, x_sum)
+    print(f"{x_groupagendametrics.sum_groupbox_give=}")
+    assert are_equal(x_groupagendametrics.sum_groupbox_give, x_sum)
+    assert are_equal(x_groupagendametrics.sum_groupbox_take, x_sum)
     assert are_equal(x_groupagendametrics.sum_membership_cred, x_sum)
     assert are_equal(x_groupagendametrics.sum_membership_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_bud_i_sum,
-        x_groupagendametrics.sum_groupbox_cred,
+        x_groupagendametrics.sum_groupbox_give,
     )
 
     assert all_acctunits_have_legitimate_values(x_bud)

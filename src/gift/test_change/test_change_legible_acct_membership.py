@@ -29,7 +29,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' has new membership {yao_text} with group_cred={credit_weight_value} and group_debt={debtit_weight_value}."
+    x_str = f"Group '{swim_text}' has new membership {yao_text} with credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -59,7 +59,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_weight_deb
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' membership {yao_text} has new group_cred={credit_weight_value} and group_debt={debtit_weight_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -86,7 +86,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' membership {yao_text} has new group_cred={credit_weight_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new credit_weight_value{credit_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -113,7 +113,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' membership {yao_text} has new group_debt={debtit_weight_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new debtit_weight_value={debtit_weight_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

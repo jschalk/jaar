@@ -312,8 +312,8 @@ def test_AcctUnit_add_fund_give_take_SetsAttrCorrectly():
     bob_acctunit.add_fund_give_take(
         fund_give=0.33,
         fund_take=0.055,
-        bud_agenda_cred=0.3,
-        bud_agenda_debt=0.05,
+        fund_agenda_give=0.3,
+        fund_agenda_take=0.05,
     )
 
     # THEN

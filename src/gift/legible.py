@@ -278,7 +278,7 @@ def add_bud_acct_membership_insert_to_legible_list(
             acct_id = acct_membership_atom.get_value("acct_id")
             credit_weight_value = acct_membership_atom.get_value("credit_weight")
             debtit_weight_value = acct_membership_atom.get_value("debtit_weight")
-            x_str = f"Group '{group_id}' has new membership {acct_id} with group_cred={credit_weight_value} and group_debt={debtit_weight_value}."
+            x_str = f"Group '{group_id}' has new membership {acct_id} with credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
             legible_list.append(x_str)
 
 
@@ -292,11 +292,11 @@ def add_bud_acct_membership_update_to_legible_list(
             credit_weight_value = acct_membership_atom.get_value("credit_weight")
             debtit_weight_value = acct_membership_atom.get_value("debtit_weight")
             if credit_weight_value is not None and debtit_weight_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new group_cred={credit_weight_value} and group_debt={debtit_weight_value}."
+                x_str = f"Group '{group_id}' membership {acct_id} has new credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
             elif credit_weight_value is not None and debtit_weight_value is None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new group_cred={credit_weight_value}."
+                x_str = f"Group '{group_id}' membership {acct_id} has new credit_weight_value{credit_weight_value}."
             elif credit_weight_value is None and debtit_weight_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new group_debt={debtit_weight_value}."
+                x_str = f"Group '{group_id}' membership {acct_id} has new debtit_weight_value={debtit_weight_value}."
             legible_list.append(x_str)
 
 
