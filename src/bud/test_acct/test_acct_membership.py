@@ -97,7 +97,7 @@ def test_memberships_exist_ReturnsCorrectObj():
     run_text = ",run"
     fly_text = ",fly"
     yao_acctunit = acctunit_shop("Yao")
-    assert yao_acctunit.memberships_exist() is False
+    assert not yao_acctunit.memberships_exist()
 
     # WHEN
     yao_acctunit.set_membership(membership_shop(run_text))
@@ -117,7 +117,7 @@ def test_memberships_exist_ReturnsCorrectObj():
     # WHEN
     yao_acctunit.delete_membership(run_text)
     # THEN
-    assert yao_acctunit.memberships_exist() is False
+    assert not yao_acctunit.memberships_exist()
 
 
 def test_AcctUnit_del_membership_SetsAttrCorrectly():

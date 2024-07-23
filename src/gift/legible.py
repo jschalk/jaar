@@ -293,9 +293,9 @@ def add_bud_acct_membership_update_to_legible_list(
             debtit_vote_value = acct_membership_atom.get_value("debtit_vote")
             if credit_vote_value is not None and debtit_vote_value is not None:
                 x_str = f"Group '{group_id}' membership {acct_id} has new credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
-            elif credit_vote_value is not None and debtit_vote_value is None:
+            elif credit_vote_value is not None:
                 x_str = f"Group '{group_id}' membership {acct_id} has new credit_vote_value{credit_vote_value}."
-            elif credit_vote_value is None and debtit_vote_value is not None:
+            elif debtit_vote_value is not None:
                 x_str = f"Group '{group_id}' membership {acct_id} has new debtit_vote_value={debtit_vote_value}."
             legible_list.append(x_str)
 
