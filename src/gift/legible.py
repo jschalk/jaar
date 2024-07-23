@@ -16,12 +16,12 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_acctunit"])
     acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_acctunit"])
 
-    x_list = [atom_insert(), "bud_acct_groupship"]
-    acct_groupship_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_acct_groupship"]
-    acct_groupship_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_acct_groupship"]
-    acct_groupship_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), "bud_acct_membership"]
+    acct_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), "bud_acct_membership"]
+    acct_membership_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_acct_membership"]
+    acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), "bud_ideaunit"]
     bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -78,17 +78,17 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     if acctunit_delete_dict is not None:
         add_bud_acctunit_delete_to_legible_list(leg_list, acctunit_delete_dict, x_bud)
 
-    if acct_groupship_insert_dict is not None:
-        add_bud_acct_groupship_insert_to_legible_list(
-            leg_list, acct_groupship_insert_dict, x_bud
+    if acct_membership_insert_dict is not None:
+        add_bud_acct_membership_insert_to_legible_list(
+            leg_list, acct_membership_insert_dict, x_bud
         )
-    if acct_groupship_update_dict is not None:
-        add_bud_acct_groupship_update_to_legible_list(
-            leg_list, acct_groupship_update_dict, x_bud
+    if acct_membership_update_dict is not None:
+        add_bud_acct_membership_update_to_legible_list(
+            leg_list, acct_membership_update_dict, x_bud
         )
-    if acct_groupship_delete_dict is not None:
-        add_bud_acct_groupship_delete_to_legible_list(
-            leg_list, acct_groupship_delete_dict, x_bud
+    if acct_membership_delete_dict is not None:
+        add_bud_acct_membership_delete_to_legible_list(
+            leg_list, acct_membership_delete_dict, x_bud
         )
 
     if bud_ideaunit_insert_dict is not None:
@@ -269,45 +269,45 @@ def add_bud_acctunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_acct_groupship_insert_to_legible_list(
-    legible_list: list[str], acct_groupship_insert_dict: dict, x_bud: BudUnit
+def add_bud_acct_membership_insert_to_legible_list(
+    legible_list: list[str], acct_membership_insert_dict: dict, x_bud: BudUnit
 ):
-    for acct_groupship_dict in acct_groupship_insert_dict.values():
-        for acct_groupship_atom in acct_groupship_dict.values():
-            group_id = acct_groupship_atom.get_value("group_id")
-            acct_id = acct_groupship_atom.get_value("acct_id")
-            credit_score_value = acct_groupship_atom.get_value("credit_score")
-            debtit_score_value = acct_groupship_atom.get_value("debtit_score")
-            x_str = f"Group '{group_id}' has new member {acct_id} with group_cred={credit_score_value} and group_debt={debtit_score_value}."
+    for acct_membership_dict in acct_membership_insert_dict.values():
+        for acct_membership_atom in acct_membership_dict.values():
+            group_id = acct_membership_atom.get_value("group_id")
+            acct_id = acct_membership_atom.get_value("acct_id")
+            credit_weight_value = acct_membership_atom.get_value("credit_weight")
+            debtit_weight_value = acct_membership_atom.get_value("debtit_weight")
+            x_str = f"Group '{group_id}' has new membership {acct_id} with credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
             legible_list.append(x_str)
 
 
-def add_bud_acct_groupship_update_to_legible_list(
-    legible_list: list[str], acct_groupship_update_dict: dict, x_bud: BudUnit
+def add_bud_acct_membership_update_to_legible_list(
+    legible_list: list[str], acct_membership_update_dict: dict, x_bud: BudUnit
 ):
-    for acct_groupship_dict in acct_groupship_update_dict.values():
-        for acct_groupship_atom in acct_groupship_dict.values():
-            group_id = acct_groupship_atom.get_value("group_id")
-            acct_id = acct_groupship_atom.get_value("acct_id")
-            credit_score_value = acct_groupship_atom.get_value("credit_score")
-            debtit_score_value = acct_groupship_atom.get_value("debtit_score")
-            if credit_score_value is not None and debtit_score_value is not None:
-                x_str = f"Group '{group_id}' member {acct_id} has new group_cred={credit_score_value} and group_debt={debtit_score_value}."
-            elif credit_score_value is not None and debtit_score_value is None:
-                x_str = f"Group '{group_id}' member {acct_id} has new group_cred={credit_score_value}."
-            elif credit_score_value is None and debtit_score_value is not None:
-                x_str = f"Group '{group_id}' member {acct_id} has new group_debt={debtit_score_value}."
+    for acct_membership_dict in acct_membership_update_dict.values():
+        for acct_membership_atom in acct_membership_dict.values():
+            group_id = acct_membership_atom.get_value("group_id")
+            acct_id = acct_membership_atom.get_value("acct_id")
+            credit_weight_value = acct_membership_atom.get_value("credit_weight")
+            debtit_weight_value = acct_membership_atom.get_value("debtit_weight")
+            if credit_weight_value is not None and debtit_weight_value is not None:
+                x_str = f"Group '{group_id}' membership {acct_id} has new credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
+            elif credit_weight_value is not None and debtit_weight_value is None:
+                x_str = f"Group '{group_id}' membership {acct_id} has new credit_weight_value{credit_weight_value}."
+            elif credit_weight_value is None and debtit_weight_value is not None:
+                x_str = f"Group '{group_id}' membership {acct_id} has new debtit_weight_value={debtit_weight_value}."
             legible_list.append(x_str)
 
 
-def add_bud_acct_groupship_delete_to_legible_list(
-    legible_list: list[str], acct_groupship_delete_dict: dict, x_bud: BudUnit
+def add_bud_acct_membership_delete_to_legible_list(
+    legible_list: list[str], acct_membership_delete_dict: dict, x_bud: BudUnit
 ):
-    for acct_groupship_dict in acct_groupship_delete_dict.values():
-        for acct_groupship_atom in acct_groupship_dict.values():
-            group_id = acct_groupship_atom.get_value("group_id")
-            acct_id = acct_groupship_atom.get_value("acct_id")
-            x_str = f"Group '{group_id}' no longer has member {acct_id}."
+    for acct_membership_dict in acct_membership_delete_dict.values():
+        for acct_membership_atom in acct_membership_dict.values():
+            group_id = acct_membership_atom.get_value("group_id")
+            acct_id = acct_membership_atom.get_value("acct_id")
+            x_str = f"Group '{group_id}' no longer has membership {acct_id}."
             legible_list.append(x_str)
 
 

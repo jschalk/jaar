@@ -140,7 +140,7 @@ def test_BudUnit_IdeaUnit_kids_CanHaveKids():
     print(f"{weekdays_len=} {sue_bud._idearoot._parent_road=}")
     # for idea in weekdays_kids.values():
     #     print(f"{idea._label=}")
-    assert sue_bud.get_idea_count() == 17
+    assert len(sue_bud._idea_dict) == 17
     assert sue_bud.get_level_count(level=1) == 4
     assert sue_bud.get_level_count(level=2) == 10
     assert sue_bud.get_level_count(level=3) == 2
@@ -151,7 +151,7 @@ def test_BudUnit_set_idea_CanAddKidTo_idearoot():
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
-    assert sue_bud.get_idea_count() == 17
+    assert len(sue_bud._idea_dict) == 17
     assert sue_bud.get_level_count(level=1) == 4
 
     new_idea_parent_road = sue_bud._real_id
@@ -163,7 +163,7 @@ def test_BudUnit_set_idea_CanAddKidTo_idearoot():
     # THEN
     print(f"{(sue_bud._owner_id == new_idea_parent_road[0])=}")
     print(f"{(len(new_idea_parent_road) == 1)=}")
-    assert sue_bud.get_idea_count() == 18
+    assert len(sue_bud._idea_dict) == 18
     assert sue_bud.get_level_count(level=1) == 5
 
 
@@ -171,7 +171,7 @@ def test_BudUnit_set_idea_CanAddKidToKidIdea():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
-    assert sue_bud.get_idea_count() == 17
+    assert len(sue_bud._idea_dict) == 17
     assert sue_bud.get_level_count(level=2) == 10
 
     # WHEN
@@ -183,7 +183,7 @@ def test_BudUnit_set_idea_CanAddKidToKidIdea():
     # print(f"{(sue_bud._owner_id == new_idea_parent_road[0])=}")
     # print(sue_bud._idearoot._kids["casa"])
     # print(f"{(len(new_idea_parent_road) == 1)=}")
-    assert sue_bud.get_idea_count() == 18
+    assert len(sue_bud._idea_dict) == 18
     assert sue_bud.get_level_count(level=2) == 11
     new_york_idea = sue_bud._idearoot._kids["casa"]._kids["new_york"]
     assert new_york_idea._parent_road == sue_bud.make_l1_road("casa")
@@ -198,7 +198,7 @@ def test_BudUnit_set_idea_CanAddKidToGrandkidIdea():
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
-    assert sue_bud.get_idea_count() == 17
+    assert len(sue_bud._idea_dict) == 17
     assert sue_bud.get_level_count(level=3) == 2
     wkday_road = sue_bud.make_l1_road("weekdays")
     new_idea_parent_road = sue_bud.make_road(wkday_road, "Wednesday")
@@ -211,7 +211,7 @@ def test_BudUnit_set_idea_CanAddKidToGrandkidIdea():
     print(f"{(sue_bud._owner_id == new_idea_parent_road[0])=}")
     print(sue_bud._idearoot._kids["casa"])
     print(f"{(len(new_idea_parent_road) == 1)=}")
-    assert sue_bud.get_idea_count() == 18
+    assert len(sue_bud._idea_dict) == 18
     assert sue_bud.get_level_count(level=3) == 3
 
 
@@ -250,7 +250,7 @@ def test_BudUnit_set_idea_CanCreateRoadUnitToGrandkidIdea():
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
-    assert sue_bud.get_idea_count() == 17
+    assert len(sue_bud._idea_dict) == 17
     assert sue_bud.get_level_count(level=3) == 2
     ww2_road = sue_bud.make_l1_road("ww2")
     battles_road = sue_bud.make_road(ww2_road, "battles")
@@ -266,7 +266,7 @@ def test_BudUnit_set_idea_CanCreateRoadUnitToGrandkidIdea():
     print(f"{(len(new_idea_parent_road) == 1)=}")
     assert sue_bud._idearoot._kids["ww2"]._label == "ww2"
     assert sue_bud._idearoot._kids["ww2"]._kids["battles"]._label == "battles"
-    assert sue_bud.get_idea_count() == 21
+    assert len(sue_bud._idea_dict) == 21
     assert sue_bud.get_level_count(level=3) == 3
 
 
@@ -275,7 +275,7 @@ def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
 
-    assert sue_bud.get_idea_count() == 17
+    assert len(sue_bud._idea_dict) == 17
     assert sue_bud.get_level_count(level=3) == 2
     casa_road = sue_bud.make_l1_road("casa")
     new_idea_parent_road = sue_bud.make_road(casa_road, "cleaning")
@@ -309,7 +309,7 @@ def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     assert sue_bud._idearoot.get_kid(buildings_text) is not None
     assert sue_bud.get_idea_obj(buildings_road) is not None
     assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
-    assert sue_bud.get_idea_count() == 22
+    assert len(sue_bud._idea_dict) == 22
     assert sue_bud.get_level_count(level=3) == 4
 
 

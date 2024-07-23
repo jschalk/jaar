@@ -246,13 +246,13 @@ def test_allot_missing_scale_CorrectlyReturnsEmpty_ledger():
 
 def test_allot_scale_v01():
     # ESTABLISH
-    credorledger = {"obj1": 1.0, "obj2": 2.0, "obj3": 3.0}
-    print(f"{credorledger=}")
+    x_ledger = {"obj1": 1.0, "obj2": 2.0, "obj3": 3.0}
+    print(f"{x_ledger=}")
     scale_number = 100
     grain_unit = 0.5
 
     # WHEN
-    alloted_accts = allot_scale(credorledger, scale_number, grain_unit)
+    alloted_accts = allot_scale(x_ledger, scale_number, grain_unit)
 
     # THEN
     print(alloted_accts)

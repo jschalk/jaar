@@ -8,7 +8,7 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     # ESTABLISH
     yao_text = "Yao"
     yao_acctunit = acctunit_shop(yao_text)
-    yao_acctunit.add_groupship(yao_text)
+    yao_acctunit.add_membership(yao_text)
     deepcopy_yao_acctunit = copy_deepcopy(yao_acctunit)
     slash_text = "/"
     bob_bud = budunit_shop("Bob", _road_delimiter=slash_text)
@@ -24,20 +24,20 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     assert bob_bud._accts == x_accts
 
 
-def test_BudUnit_set_acct_DoesNotSet_acct_id_groupship():
+def test_BudUnit_set_acct_DoesNotSet_acct_id_membership():
     # ESTABLISH
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
 
     # WHEN
-    yao_bud.set_acctunit(acctunit_shop(zia_text), auto_set_groupship=False)
+    yao_bud.set_acctunit(acctunit_shop(zia_text), auto_set_membership=False)
 
     # THEN
-    assert yao_bud.get_acct(zia_text).get_groupship(zia_text) is None
+    assert yao_bud.get_acct(zia_text).get_membership(zia_text) is None
 
 
-def test_BudUnit_set_acct_DoesSet_acct_id_groupship():
+def test_BudUnit_set_acct_DoesSet_acct_id_membership():
     # ESTABLISH
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
@@ -47,33 +47,33 @@ def test_BudUnit_set_acct_DoesSet_acct_id_groupship():
     yao_bud.set_acctunit(acctunit_shop(zia_text))
 
     # THEN
-    zia_zia_groupship = yao_bud.get_acct(zia_text).get_groupship(zia_text)
-    assert zia_zia_groupship is not None
-    assert zia_zia_groupship.credit_score == 1
-    assert zia_zia_groupship.debtit_score == 1
+    zia_zia_membership = yao_bud.get_acct(zia_text).get_membership(zia_text)
+    assert zia_zia_membership is not None
+    assert zia_zia_membership.credit_weight == 1
+    assert zia_zia_membership.debtit_weight == 1
 
 
-def test_BudUnit_set_acct_DoesNotOverRide_acct_id_groupship():
+def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
     # ESTABLISH
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
     ohio_text = ",Ohio"
-    zia_ohio_credor_w = 33
-    zia_ohio_debtor_w = 44
+    zia_ohio_credit_w = 33
+    zia_ohio_debtit_w = 44
     zia_acctunit = acctunit_shop(zia_text)
-    zia_acctunit.add_groupship(ohio_text, zia_ohio_credor_w, zia_ohio_debtor_w)
+    zia_acctunit.add_membership(ohio_text, zia_ohio_credit_w, zia_ohio_debtit_w)
 
     # WHEN
     yao_bud.set_acctunit(zia_acctunit)
 
     # THEN
-    zia_ohio_groupship = yao_bud.get_acct(zia_text).get_groupship(ohio_text)
-    assert zia_ohio_groupship is not None
-    assert zia_ohio_groupship.credit_score == zia_ohio_credor_w
-    assert zia_ohio_groupship.debtit_score == zia_ohio_debtor_w
-    zia_zia_groupship = yao_bud.get_acct(zia_text).get_groupship(zia_text)
-    assert zia_zia_groupship is None
+    zia_ohio_membership = yao_bud.get_acct(zia_text).get_membership(ohio_text)
+    assert zia_ohio_membership is not None
+    assert zia_ohio_membership.credit_weight == zia_ohio_credit_w
+    assert zia_ohio_membership.debtit_weight == zia_ohio_debtit_w
+    zia_zia_membership = yao_bud.get_acct(zia_text).get_membership(zia_text)
+    assert zia_zia_membership is None
 
 
 def test_BudUnit_add_acctunit_CorrectlySets_accts():
@@ -112,30 +112,30 @@ def test_BudUnit_acct_exists_ReturnsObj():
     assert bob_bud.acct_exists(yao_text)
 
 
-def test_BudUnit_set_acct_Creates_groupship():
+def test_BudUnit_set_acct_Creates_membership():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     zia_text = "Zia"
-    before_zia_credor = 7
-    before_zia_debtor = 17
-    yao_bud.add_acctunit(zia_text, before_zia_credor, before_zia_debtor)
+    before_zia_credit = 7
+    before_zia_debtit = 17
+    yao_bud.add_acctunit(zia_text, before_zia_credit, before_zia_debtit)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    zia_groupship = zia_acctunit.get_groupship(zia_text)
-    assert zia_groupship.credit_score != before_zia_credor
-    assert zia_groupship.debtit_score != before_zia_debtor
-    assert zia_groupship.credit_score == 1
-    assert zia_groupship.debtit_score == 1
+    zia_membership = zia_acctunit.get_membership(zia_text)
+    assert zia_membership.credit_weight != before_zia_credit
+    assert zia_membership.debtit_weight != before_zia_debtit
+    assert zia_membership.credit_weight == 1
+    assert zia_membership.debtit_weight == 1
 
     # WHEN
-    after_zia_credor = 11
-    after_zia_debtor = 13
-    yao_bud.set_acctunit(acctunit_shop(zia_text, after_zia_credor, after_zia_debtor))
+    after_zia_credit = 11
+    after_zia_debtit = 13
+    yao_bud.set_acctunit(acctunit_shop(zia_text, after_zia_credit, after_zia_debtit))
 
     # THEN
-    assert zia_groupship.credit_score != after_zia_credor
-    assert zia_groupship.debtit_score != after_zia_debtor
-    assert zia_groupship.credit_score == 1
-    assert zia_groupship.debtit_score == 1
+    assert zia_membership.credit_weight != after_zia_credit
+    assert zia_membership.debtit_weight != after_zia_debtit
+    assert zia_membership.credit_weight == 1
+    assert zia_membership.debtit_weight == 1
 
 
 def test_BudUnit_edit_acct_RaiseExceptionWhenAcctDoesNotExist():

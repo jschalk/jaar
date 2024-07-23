@@ -189,9 +189,9 @@ def _create_allot_dict(
 
 def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float):
     """
-    allots the scale_number among credorledgers with credit_scoreed attributes with a resolution of the grain unit.
+    allots the scale_number among ledger with float values with a resolution of the grain unit.
 
-    :param credorledgers: Dictionary of credorledgers with 'credit_score' attribute.
+    :param ledger: Dictionary of str key with 'credit_score' attribute.
     :param scale_number: The total number to allot.
     :param grain_unit: The smallest unit of distribution.
     :raises ValueError: If the scale number is not a multiple of the grain unit.

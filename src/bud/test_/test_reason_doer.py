@@ -6,7 +6,7 @@ from src.bud.reason_doer import (
     doerheir_shop,
     create_doerunit,
 )
-from src.bud.group import groupship_shop
+from src.bud.group import membership_shop
 from src.bud.group import groupbox_shop
 from pytest import raises as pytest_raises
 
@@ -164,8 +164,8 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_groupholds_
     sue_text = "Sue"
     yao_groupbox = groupbox_shop(yao_text)
     sue_groupbox = groupbox_shop(sue_text)
-    yao_groupbox.set_groupship(groupship_shop(yao_text, _acct_id=yao_text))
-    sue_groupbox.set_groupship(groupship_shop(sue_text, _acct_id=sue_text))
+    yao_groupbox.set_membership(membership_shop(yao_text, _acct_id=yao_text))
+    sue_groupbox.set_membership(membership_shop(sue_text, _acct_id=sue_text))
     x_groupboxs = {yao_text: yao_groupbox, sue_text: sue_groupbox}
     bud_owner_id = yao_text
 
@@ -186,12 +186,12 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_groupholds_
     sue_text = "Sue"
     yao_groupbox = groupbox_shop(yao_text)
     sue_groupbox = groupbox_shop(sue_text)
-    yao_groupbox.set_groupship(groupship_shop(yao_text, _acct_id=yao_text))
-    sue_groupbox.set_groupship(groupship_shop(sue_text, _acct_id=sue_text))
+    yao_groupbox.set_membership(membership_shop(yao_text, _acct_id=yao_text))
+    sue_groupbox.set_membership(membership_shop(sue_text, _acct_id=sue_text))
     x_groupboxs = {yao_text: yao_groupbox, sue_text: sue_groupbox}
     x_groupholds = {sue_text}
     x_doerheir = doerheir_shop(_groupholds=x_groupholds)
-    assert yao_groupbox.get_groupship(yao_text) is not None
+    assert yao_groupbox.get_membership(yao_text) is not None
     assert x_doerheir._owner_id_doer is False
 
     # WHEN
@@ -209,13 +209,13 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_groupholds_
     yao_groupbox = groupbox_shop(yao_text)
     sue_groupbox = groupbox_shop(sue_text)
     bob_groupbox = groupbox_shop(bob_text)
-    yao_groupbox.set_groupship(groupship_shop(yao_text, _acct_id=yao_text))
-    sue_groupbox.set_groupship(groupship_shop(sue_text, _acct_id=sue_text))
+    yao_groupbox.set_membership(membership_shop(yao_text, _acct_id=yao_text))
+    sue_groupbox.set_membership(membership_shop(sue_text, _acct_id=sue_text))
 
     swim_text = ",swim"
     swim_groupbox = groupbox_shop(group_id=swim_text)
-    swim_groupbox.set_groupship(groupship_shop(swim_text, _acct_id=yao_text))
-    swim_groupbox.set_groupship(groupship_shop(swim_text, _acct_id=sue_text))
+    swim_groupbox.set_membership(membership_shop(swim_text, _acct_id=yao_text))
+    swim_groupbox.set_membership(membership_shop(swim_text, _acct_id=sue_text))
     x_groupboxs = {
         yao_text: yao_groupbox,
         sue_text: sue_groupbox,
@@ -230,7 +230,7 @@ def test_DoerHeir_set_owner_id_doer_CorrectlySetsAttribute_NonEmptyx_groupholds_
     assert x_doerheir._owner_id_doer
 
     # WHEN
-    swim_groupbox.del_groupship(yao_text)
+    swim_groupbox.del_membership(yao_text)
     x_doerheir.set_owner_id_doer(x_groupboxs, yao_text)
 
     # THEN
@@ -350,19 +350,19 @@ def test_DoerHeir_set_grouphold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
     sue_groupbox = groupbox_shop(sue_text)
     bob_groupbox = groupbox_shop(bob_text)
     bob_groupbox = groupbox_shop(zia_text)
-    yao_groupbox.set_groupship(groupship_shop(yao_text, _acct_id=yao_text))
-    sue_groupbox.set_groupship(groupship_shop(sue_text, _acct_id=sue_text))
+    yao_groupbox.set_membership(membership_shop(yao_text, _acct_id=yao_text))
+    sue_groupbox.set_membership(membership_shop(sue_text, _acct_id=sue_text))
 
     swim2_text = ",swim2"
     swim2_groupbox = groupbox_shop(group_id=swim2_text)
-    swim2_groupbox.set_groupship(groupship_shop(swim2_text, _acct_id=yao_text))
-    swim2_groupbox.set_groupship(groupship_shop(swim2_text, _acct_id=sue_text))
+    swim2_groupbox.set_membership(membership_shop(swim2_text, _acct_id=yao_text))
+    swim2_groupbox.set_membership(membership_shop(swim2_text, _acct_id=sue_text))
 
     swim3_text = ",swim3"
     swim3_groupbox = groupbox_shop(group_id=swim3_text)
-    swim3_groupbox.set_groupship(groupship_shop(swim3_text, _acct_id=yao_text))
-    swim3_groupbox.set_groupship(groupship_shop(swim3_text, _acct_id=sue_text))
-    swim3_groupbox.set_groupship(groupship_shop(swim3_text, _acct_id=zia_text))
+    swim3_groupbox.set_membership(membership_shop(swim3_text, _acct_id=yao_text))
+    swim3_groupbox.set_membership(membership_shop(swim3_text, _acct_id=sue_text))
+    swim3_groupbox.set_membership(membership_shop(swim3_text, _acct_id=zia_text))
 
     x_groupboxs = {
         yao_text: yao_groupbox,
@@ -402,19 +402,19 @@ def test_DoerHeir_set_grouphold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
 #     sue_groupbox = groupbox_shop(sue_text)
 #     bob_groupbox = groupbox_shop(bob_text)
 #     bob_groupbox = groupbox_shop(zia_text)
-#     yao_groupbox.set_groupship(groupship_shop(yao_text))
-#     sue_groupbox.set_groupship(groupship_shop(sue_text))
+#     yao_groupbox.set_membership(membership_shop(yao_text))
+#     sue_groupbox.set_membership(membership_shop(sue_text))
 
 #     swim2_text = ",swim2"
 #     swim2_groupbox = groupbox_shop(swim2_text)
-#     swim2_groupbox.set_groupship(groupship_shop(swim2_text, _acct_id=yao_text))
-#     swim2_groupbox.set_groupship(groupship_shop(swim2_text, _acct_id=sue_text))
+#     swim2_groupbox.set_membership(membership_shop(swim2_text, _acct_id=yao_text))
+#     swim2_groupbox.set_membership(membership_shop(swim2_text, _acct_id=sue_text))
 
 #     swim3_text = ",swim3"
 #     swim3_groupbox = groupbox_shop(group_id=swim3_text)
-#     swim3_groupbox.set_groupship(groupship_shop(swim3_text, _acct_id=yao_text))
-#     swim3_groupbox.set_groupship(groupship_shop(swim3_text, _acct_id=sue_text))
-#     swim3_groupbox.set_groupship(groupship_shop(swim3_text, _acct_id=zia_text))
+#     swim3_groupbox.set_membership(membership_shop(swim3_text, _acct_id=yao_text))
+#     swim3_groupbox.set_membership(membership_shop(swim3_text, _acct_id=sue_text))
+#     swim3_groupbox.set_membership(membership_shop(swim3_text, _acct_id=zia_text))
 
 #     x_groupboxs = {
 #         yao_text: yao_groupbox,

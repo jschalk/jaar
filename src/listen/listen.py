@@ -1,4 +1,4 @@
-from src._road.finance import trim_bit_excess, allot_scale
+from src._road.finance import allot_scale
 from src._road.road import (
     get_ancestor_roads,
     RoadUnit,
@@ -49,48 +49,14 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_id: OwnerID):
     return listener_hubunit.get_perspective_bud(speaker)
 
 
-def _get_bit_scaled_mass(
-    x_fund_share: float, debtor_amount: float, bit: float
-) -> float:
-    x_ingest_mass = x_fund_share * debtor_amount
-    return trim_bit_excess(x_ingest_mass, bit)
-
-
-def _allot_ingest(x_list: list[IdeaUnit], nonallocated_ingest: float, bit: float):
-    # TODO very slow needs to be optimized
-    if x_list:
-        x_count = 0
-        while nonallocated_ingest > 0:
-            x_ideaunit = x_list[x_count]
-            x_ideaunit._mass += bit
-            nonallocated_ingest -= bit
-            x_count += 1
-            if x_count == len(x_list):
-                x_count = 0
-
-
-def create_ingest_idea(
-    x_ideaunit: IdeaUnit, debtor_amount: float, bit: float
-) -> IdeaUnit:
-    x_ideaunit._mass = _get_bit_scaled_mass(
-        x_fund_share=x_ideaunit._fund_ratio,
-        debtor_amount=debtor_amount,
-        bit=bit,
-    )
-    return x_ideaunit
-
-
 def generate_ingest_list(
     item_list: list[IdeaUnit], debtor_amount: float, bit: float
 ) -> list[IdeaUnit]:
-    # TODO replace with allot_scale process
-    x_list = [
-        create_ingest_idea(x_ideaunit, debtor_amount, bit) for x_ideaunit in item_list
-    ]
-    sum_scaled_ingest = sum(x_ideaunit._mass for x_ideaunit in item_list)
-    nonallocated_ingest = debtor_amount - sum_scaled_ingest
-    _allot_ingest(x_list, nonallocated_ingest, bit)
-    return x_list
+    idea_ledger = {x_idea.get_road(): x_idea._mass for x_idea in item_list}
+    mass_allot = allot_scale(idea_ledger, debtor_amount, bit)
+    for x_ideaunit in item_list:
+        x_ideaunit._mass = mass_allot.get(x_ideaunit.get_road())
+    return item_list
 
 
 def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):

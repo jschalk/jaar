@@ -37,13 +37,13 @@ class AcctUnitTable(Base):
 #     group_id = Column(String)
 
 
-class GroupShipTable(Base):
-    __tablename__ = "groupship"
+class MemberShipTable(Base):
+    __tablename__ = "membership"
     uid = Column(Integer, primary_key=True)
     group_id = Column(String)
     acct_id = Column(String)
-    credit_score = Column(Integer)
-    debtit_score = Column(Integer)
+    credit_weight = Column(Integer)
+    debtit_weight = Column(Integer)
 
 
 class IdeaTable(Base):
@@ -92,7 +92,7 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class groupholdTable(Base):
+class GroupHoldTable(Base):
     __tablename__ = "grouphold"
     uid = Column(Integer, primary_key=True)
     group_id = Column(String)

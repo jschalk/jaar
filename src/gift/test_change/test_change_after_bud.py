@@ -170,7 +170,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     assert yao_acct.credit_score == yao_credit_score
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_groupship():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_budunit = budunit_shop(sue_text)
@@ -184,22 +184,22 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_groupship():
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_acctunit.add_groupship(run_text)
-    zia_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
+    zia_acctunit.add_membership(run_text)
     fly_text = ",flyers"
-    yao_acctunit.add_groupship(fly_text)
-    zia_acctunit.add_groupship(fly_text)
-    bob_acctunit.add_groupship(fly_text)
+    yao_acctunit.add_membership(fly_text)
+    zia_acctunit.add_membership(fly_text)
+    bob_acctunit.add_membership(fly_text)
     before_group_ids_dict = before_sue_budunit.get_acctunit_group_ids_dict()
     assert len(before_group_ids_dict.get(run_text)) == 2
     assert len(before_group_ids_dict.get(fly_text)) == 3
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_acct_groupship", atom_delete())
+    yao_atomunit = atomunit_shop("bud_acct_membership", atom_delete())
     yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
     # print(f"{yao_atomunit=}")
-    zia_atomunit = atomunit_shop("bud_acct_groupship", atom_delete())
+    zia_atomunit = atomunit_shop("bud_acct_membership", atom_delete())
     zia_atomunit.set_required_arg("group_id", fly_text)
     zia_atomunit.set_required_arg("acct_id", zia_text)
     # print(f"{zia_atomunit=}")
@@ -214,7 +214,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_groupship():
     assert len(after_group_ids_dict.get(fly_text)) == 2
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_groupship():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_budunit = budunit_shop(sue_text)
@@ -226,16 +226,16 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_groupship():
     before_sue_budunit.add_acctunit(bob_text)
     run_text = ",runners"
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
-    zia_acctunit.add_groupship(run_text)
+    zia_acctunit.add_membership(run_text)
     before_group_ids = before_sue_budunit.get_acctunit_group_ids_dict()
     assert len(before_group_ids.get(run_text)) == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_acct_groupship", atom_insert())
+    yao_atomunit = atomunit_shop("bud_acct_membership", atom_insert())
     yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
-    yao_run_credit_score = 17
-    yao_atomunit.set_optional_arg("credit_score", yao_run_credit_score)
+    yao_run_credit_weight = 17
+    yao_atomunit.set_optional_arg("credit_weight", yao_run_credit_weight)
     print(f"{yao_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
@@ -245,12 +245,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_groupship():
     after_group_ids = after_sue_budunit.get_acctunit_group_ids_dict()
     assert len(after_group_ids.get(run_text)) == 2
     after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
-    after_yao_run_groupship = after_yao_acctunit.get_groupship(run_text)
-    assert after_yao_run_groupship is not None
-    assert after_yao_run_groupship.credit_score == yao_run_credit_score
+    after_yao_run_membership = after_yao_acctunit.get_membership(run_text)
+    assert after_yao_run_membership is not None
+    assert after_yao_run_membership.credit_weight == yao_run_credit_weight
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_groupship():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_budunit = budunit_shop(sue_text)
@@ -258,29 +258,29 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_groupship():
     before_sue_budunit.add_acctunit(yao_text)
     before_yao_acctunit = before_sue_budunit.get_acct(yao_text)
     run_text = ",runners"
-    old_yao_run_credit_score = 3
-    before_yao_acctunit.add_groupship(run_text, old_yao_run_credit_score)
-    yao_run_groupship = before_yao_acctunit.get_groupship(run_text)
-    assert yao_run_groupship.credit_score == old_yao_run_credit_score
-    assert yao_run_groupship.debtit_score == 1
+    old_yao_run_credit_weight = 3
+    before_yao_acctunit.add_membership(run_text, old_yao_run_credit_weight)
+    yao_run_membership = before_yao_acctunit.get_membership(run_text)
+    assert yao_run_membership.credit_weight == old_yao_run_credit_weight
+    assert yao_run_membership.debtit_weight == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop("bud_acct_groupship", atom_update())
+    yao_atomunit = atomunit_shop("bud_acct_membership", atom_update())
     yao_atomunit.set_required_arg("group_id", run_text)
     yao_atomunit.set_required_arg("acct_id", yao_text)
-    new_yao_run_credit_score = 7
-    new_yao_run_debtit_score = 11
-    yao_atomunit.set_optional_arg("credit_score", new_yao_run_credit_score)
-    yao_atomunit.set_optional_arg("debtit_score", new_yao_run_debtit_score)
+    new_yao_run_credit_weight = 7
+    new_yao_run_debtit_weight = 11
+    yao_atomunit.set_optional_arg("credit_weight", new_yao_run_credit_weight)
+    yao_atomunit.set_optional_arg("debtit_weight", new_yao_run_debtit_weight)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
     after_yao_acctunit = after_sue_budunit.get_acct(yao_text)
-    after_yao_run_groupship = after_yao_acctunit.get_groupship(run_text)
-    assert after_yao_run_groupship.credit_score == new_yao_run_credit_score
-    assert after_yao_run_groupship.debtit_score == new_yao_run_debtit_score
+    after_yao_run_membership = after_yao_acctunit.get_membership(run_text)
+    assert after_yao_run_membership.credit_weight == new_yao_run_credit_weight
+    assert after_yao_run_membership.debtit_weight == new_yao_run_debtit_weight
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_ideaunit():
@@ -416,12 +416,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_acctunit.add_groupship(run_text)
-    zia_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
+    zia_acctunit.add_membership(run_text)
     fly_text = ",flyers"
-    yao_acctunit.add_groupship(fly_text)
-    zia_acctunit.add_groupship(fly_text)
-    bob_acctunit.add_groupship(fly_text)
+    yao_acctunit.add_membership(fly_text)
+    zia_acctunit.add_membership(fly_text)
+    bob_acctunit.add_membership(fly_text)
 
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
@@ -462,7 +462,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     before_sue_budunit.add_acctunit(zia_text)
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
     run_text = ",runners"
-    yao_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
 
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
@@ -504,7 +504,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     before_sue_budunit.add_acctunit(zia_text)
     run_text = ",runners"
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
     sports_text = "sports"
     sports_road = before_sue_budunit.make_l1_road(sports_text)
     ball_text = "basketball"
@@ -1013,19 +1013,19 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
     run_text = ",runners"
-    yao_acctunit.add_groupship(run_text)
-    zia_acctunit.add_groupship(run_text)
+    yao_acctunit.add_membership(run_text)
+    zia_acctunit.add_membership(run_text)
     fly_text = ",flyers"
-    yao_acctunit.add_groupship(fly_text)
-    bob_acctunit.add_groupship(fly_text)
+    yao_acctunit.add_membership(fly_text)
+    bob_acctunit.add_membership(fly_text)
     assert before_sue_budunit._tally != 55
     assert before_sue_budunit._max_tree_traverse != 66
     assert before_sue_budunit._credor_respect != 77
     assert before_sue_budunit._debtor_respect != 88
     assert before_sue_budunit.acct_exists(yao_text)
     assert before_sue_budunit.acct_exists(zia_text)
-    assert yao_acctunit.get_groupship(fly_text) is not None
-    assert bob_acctunit.get_groupship(fly_text) is not None
+    assert yao_acctunit.get_membership(fly_text) is not None
+    assert bob_acctunit.get_membership(fly_text) is not None
 
     # WHEN
     ex1_changeunit = get_changeunit_example1()

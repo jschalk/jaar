@@ -45,7 +45,7 @@ from src._road.road import (
 )
 
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
-from src.bud.group import AwardLink, GroupID, GroupBox, groupbox_shop, groupship_shop
+from src.bud.group import AwardLink, GroupID, GroupBox, groupbox_shop, membership_shop
 from src.bud.healer import HealerHold
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
 from src.bud.reason_doer import DoerUnit
@@ -296,7 +296,7 @@ class BudUnit:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
-    def add_to_groupbox_fund_give_take(
+    def add_to_groupbox_fund_give_fund_take(
         self,
         group_id: GroupID,
         awardheir_fund_give: float,
@@ -323,17 +323,16 @@ class BudUnit:
         acctunit_acct_id: AcctID,
         fund_give,
         fund_take: float,
-        bud_agenda_cred: float,
-        bud_agenda_debt: float,
+        fund_agenda_give: float,
+        fund_agenda_take: float,
     ):
-        for acctunit in self._accts.values():
-            if acctunit.acct_id == acctunit_acct_id:
-                acctunit.add_fund_give_take(
-                    fund_give=fund_give,
-                    fund_take=fund_take,
-                    bud_agenda_cred=bud_agenda_cred,
-                    bud_agenda_debt=bud_agenda_debt,
-                )
+        x_acctunit = self.get_acct(acctunit_acct_id)
+        x_acctunit.add_fund_give_take(
+            fund_give=fund_give,
+            fund_take=fund_take,
+            fund_agenda_give=fund_agenda_give,
+            fund_agenda_take=fund_agenda_take,
+        )
 
     def del_acctunit(self, acct_id: str):
         self._accts.pop(acct_id)
@@ -349,13 +348,13 @@ class BudUnit:
         )
         self.set_acctunit(acctunit)
 
-    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_groupship: bool = True):
+    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
         if x_acctunit._road_delimiter != self._road_delimiter:
             x_acctunit._road_delimiter = self._road_delimiter
         if x_acctunit._bit != self._bit:
             x_acctunit._bit = self._bit
-        if auto_set_groupship and x_acctunit.groupships_exist() is False:
-            x_acctunit.add_groupship(x_acctunit.acct_id)
+        if auto_set_membership and x_acctunit.memberships_exist() is False:
+            x_acctunit.add_membership(x_acctunit.acct_id)
         self._accts[x_acctunit.acct_id] = x_acctunit
 
     def acct_exists(self, acct_id: AcctID) -> bool:
@@ -373,13 +372,17 @@ class BudUnit:
             x_acctunit.set_debtit_score(debtit_score)
         self.set_acctunit(x_acctunit)
 
+    def clear_acctunits_memberships(self):
+        for x_acctunit in self._accts.values():
+            x_acctunit.clear_memberships()
+
     def get_acct(self, acct_id: AcctID) -> AcctUnit:
         return self._accts.get(acct_id)
 
     def get_acctunit_group_ids_dict(self) -> dict[GroupID, set[AcctID]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
-            for x_group_id in x_acctunit._groupships.keys():
+            for x_group_id in x_acctunit._memberships.keys():
                 acct_id_set = x_dict.get(x_group_id)
                 if acct_id_set is None:
                     x_dict[x_group_id] = {x_acctunit.acct_id}
@@ -401,23 +404,19 @@ class BudUnit:
     def create_symmetry_groupbox(self, x_group_id: GroupID) -> GroupBox:
         x_groupbox = groupbox_shop(x_group_id)
         for x_acctunit in self._accts.values():
-            x_groupship = groupship_shop(
+            x_membership = membership_shop(
                 group_id=x_group_id,
-                credit_score=x_acctunit.credit_score,
-                debtit_score=x_acctunit.debtit_score,
+                credit_weight=x_acctunit.credit_score,
+                debtit_weight=x_acctunit.debtit_score,
                 _acct_id=x_acctunit.acct_id,
             )
-            x_groupbox.set_groupship(x_groupship)
+            x_groupbox.set_membership(x_membership)
         return x_groupbox
 
     def get_tree_traverse_generated_groupboxs(self) -> set[GroupID]:
         x_acctunit_group_ids = set(self.get_acctunit_group_ids_dict().keys())
         all_group_ids = set(self._groupboxs.keys())
         return all_group_ids.difference(x_acctunit_group_ids)
-
-    def clear_acctunits_groupships(self):
-        for x_acctunit in self._accts.values():
-            x_acctunit.clear_groupships()
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
         if self._real_id == idea_road:
@@ -615,9 +614,6 @@ class BudUnit:
                 new_idea_uid_max = idea_uid_max + 1
                 self.edit_idea_attr(road=x_idea.get_road(), uid=new_idea_uid_max)
                 idea_uid_max = new_idea_uid_max
-
-    def get_idea_count(self) -> int:
-        return len(self._idea_dict)
 
     def get_level_count(self, level) -> int:
         tree_metrics = self.get_tree_metrics()
@@ -1084,20 +1080,18 @@ class BudUnit:
         pledge_item = self.get_idea_obj(task_road)
         pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
 
+    def get_credit_ledger_debtit_ledger(
+        self,
+    ) -> tuple[dict[str:float], dict[str:float]]:
+        credit_ledger = {}
+        debtit_ledger = {}
+        for x_acctunit in self._accts.values():
+            credit_ledger[x_acctunit.acct_id] = x_acctunit.credit_score
+            debtit_ledger[x_acctunit.acct_id] = x_acctunit.debtit_score
+        return credit_ledger, debtit_ledger
+
     def _allot_offtrack_fund(self):
-        x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
-        fund_give_allot = allot_scale(
-            credor_ledger, self._offtrack_fund, self._fund_coin
-        )
-        fund_take_allot = allot_scale(
-            debtor_ledger, self._offtrack_fund, self._fund_coin
-        )
-        for x_acct_id, acct_fund_give in fund_give_allot.items():
-            self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
-        for x_acct_id, acct_fund_take in fund_take_allot.items():
-            self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
+        self._add_to_acctunits_fund_give_take(self._offtrack_fund)
 
     def get_acctunits_credit_score_sum(self) -> float:
         return sum(acctunit.get_credit_score() for acctunit in self._accts.values())
@@ -1106,65 +1100,22 @@ class BudUnit:
         return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
-        # TODO replace this process with allot_scale
-        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
-        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
-
-        for x_acctunit in self._accts.values():
-            au_fund_give = (
-                idea_fund_share * x_acctunit.get_credit_score()
-            ) / sum_acctunit_credit_score
-
-            au_fund_take = (
-                idea_fund_share * x_acctunit.get_debtit_score()
-            ) / sum_acctunit_debtit_score
-
-            x_acctunit.add_fund_give_take(
-                fund_give=au_fund_give,
-                fund_take=au_fund_take,
-                bud_agenda_cred=0,
-                bud_agenda_debt=0,
-            )
+        credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
+        for x_acct_id, acct_fund_give in fund_give_allot.items():
+            self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
+        for x_acct_id, acct_fund_take in fund_take_allot.items():
+            self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
-        # TODO replace this process with allot_scale
-        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
-        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
-
-        for x_acctunit in self._accts.values():
-            au_fund_agenda_give = (
-                idea_fund_share * x_acctunit.get_credit_score()
-            ) / sum_acctunit_credit_score
-
-            au_fund_agenda_take = (
-                idea_fund_share * x_acctunit.get_debtit_score()
-            ) / sum_acctunit_debtit_score
-
-            x_acctunit.add_fund_give_take(
-                fund_give=0,
-                fund_take=0,
-                bud_agenda_cred=au_fund_agenda_give,
-                bud_agenda_debt=au_fund_agenda_take,
-            )
-
-    def _set_acctunits_bud_agenda_share(self, bud_agenda_share: float):
-        # TODO replace this process with allot_scale
-        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
-        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
-
-        for x_acctunit in self._accts.values():
-            au_fund_agenda_give = (
-                bud_agenda_share * x_acctunit.get_credit_score()
-            ) / sum_acctunit_credit_score
-
-            au_fund_agenda_take = (
-                bud_agenda_share * x_acctunit.get_debtit_score()
-            ) / sum_acctunit_debtit_score
-
-            x_acctunit.add_fund_agenda_give_take(
-                bud_agenda_cred=au_fund_agenda_give,
-                bud_agenda_debt=au_fund_agenda_take,
-            )
+        credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
+        for x_acct_id, acct_fund_give in fund_give_allot.items():
+            self.get_acct(x_acct_id).add_fund_agenda_give(acct_fund_give)
+        for x_acct_id, acct_fund_take in fund_take_allot.items():
+            self.get_acct(x_acct_id).add_fund_agenda_take(acct_fund_take)
 
     def _reset_groupboxs_fund_give_take(self):
         for groupbox_obj in self._groupboxs.values():
@@ -1175,7 +1126,7 @@ class BudUnit:
             x_group_id = awardlink_obj.group_id
             if not self.groupbox_exists(x_group_id):
                 self.set_groupbox(self.create_symmetry_groupbox(x_group_id))
-            self.add_to_groupbox_fund_give_take(
+            self.add_to_groupbox_fund_give_fund_take(
                 group_id=awardlink_obj.group_id,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
@@ -1188,58 +1139,36 @@ class BudUnit:
             # cred ratio and debt ratio
             # if idea.is_agenda_item() and idea._awardlines == {}:
             if idea.is_agenda_item():
-                if idea._awardlines == {}:
-                    self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
-                else:
+                if idea.awardheir_exists():
                     for x_awardline in idea._awardlines.values():
                         self.add_to_groupbox_fund_agenda_give_take(
                             group_id=x_awardline.group_id,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
+                else:
+                    self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
 
     def _allot_groupboxs_fund(self):
         for x_groupbox in self._groupboxs.values():
-            x_groupbox._set_groupship_fund_give_fund_take()
-            for x_groupship in x_groupbox._groupships.values():
+            x_groupbox._set_membership_fund_give_fund_take()
+            for x_membership in x_groupbox._memberships.values():
                 self.add_to_acctunit_fund_give_take(
-                    acctunit_acct_id=x_groupship._acct_id,
-                    fund_give=x_groupship._fund_give,
-                    fund_take=x_groupship._fund_take,
-                    bud_agenda_cred=x_groupship._fund_agenda_give,
-                    bud_agenda_debt=x_groupship._fund_agenda_take,
+                    acctunit_acct_id=x_membership._acct_id,
+                    fund_give=x_membership._fund_give,
+                    fund_take=x_membership._fund_take,
+                    fund_agenda_give=x_membership._fund_agenda_give,
+                    fund_agenda_take=x_membership._fund_agenda_take,
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
-        # TODO replace with allot_scale and delete set_fund_agenda_ratio_give_take
-        # fund_agenda_give_sum = sum(
-        #     x_acctunit._fund_agenda_give for x_acctunit in self._accts.values()
-        # )
-        # fund_agenda_take_sum = sum(
-        #     x_acctunit._fund_agenda_take for x_acctunit in self._accts.values()
-        # )
-        # x_acctunits = self._accts.values()
-        # give_ledger = {
-        #     x_acct.acct_id: x_acct._fund_agenda_give for x_acct in x_acctunits
-        # }
-        # take_ledger = {
-        #     x_acct.acct_id: x_acct._fund_agenda_take for x_acct in x_acctunits
-        # }
-        # give_allot = allot_scale(give_ledger, fund_agenda_give_sum, self._fund_coin)
-        # take_allot = allot_scale(take_ledger, fund_agenda_take_sum, self._fund_coin)
-        # for x_acct_id, x_acctunit in self._accts.items():
-        #     x_acctunit._fund_agenda_ratio_give = give_allot.get(x_acct_id)
-        #     x_acctunit._fund_agenda_ratio_take = take_allot.get(x_acct_id)
-
-        fund_agenda_ratio_give_sum = 0
-        fund_agenda_ratio_take_sum = 0
         x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
         x_acctunit_debtit_score_sum = self.get_acctunits_debtit_score_sum()
-
+        fund_agenda_ratio_give_sum = 0
+        fund_agenda_ratio_take_sum = 0
         for x_acctunit in self._accts.values():
             fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
             fund_agenda_ratio_take_sum += x_acctunit._fund_agenda_take
-
         for x_acctunit in self._accts.values():
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
@@ -1421,11 +1350,9 @@ class BudUnit:
             self._offtrack_kids_mass_set.add(idea_kid.get_road())
 
     def _allot_fund_share(self, idea: IdeaUnit):
-        # TODO manage situations where awardheir.credit_score is None for all awardheirs
-        # TODO manage situations where awardheir.debtit_score is None for all awardheirs
-        if idea.awardheir_exists() is False:
+        if idea.awardheir_exists():
             self._set_groupboxs_fund_share(idea._awardheirs)
-        elif idea.awardheir_exists():
+        elif idea.awardheir_exists() is False:
             self._add_to_acctunits_fund_give_take(idea.get_fund_share())
 
     def _create_groupboxs_metrics(self):
@@ -1433,16 +1360,14 @@ class BudUnit:
         for group_id, acct_id_set in self.get_acctunit_group_ids_dict().items():
             x_groupbox = groupbox_shop(group_id, _road_delimiter=self._road_delimiter)
             for x_acct_id in acct_id_set:
-                x_groupship = self.get_acct(x_acct_id).get_groupship(group_id)
-                x_groupbox.set_groupship(x_groupship)
+                x_membership = self.get_acct(x_acct_id).get_membership(group_id)
+                x_groupbox.set_membership(x_membership)
                 self.set_groupbox(x_groupbox)
 
     def _calc_acctunit_metrics(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
-        x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
+        credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
         credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
         debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
         for x_acct_id, acct_credor_pool in credor_allot.items():
@@ -1578,7 +1503,7 @@ class BudUnit:
         for x_econ_road, x_econ_idea in self._econ_dict.items():
             for x_group_id in x_econ_idea._healerhold._group_ids:
                 x_groupbox = self.get_groupbox(x_group_id)
-                for x_acct_id in x_groupbox._groupships.keys():
+                for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
                         _healers_dict[x_acct_id] = {x_econ_road: x_econ_idea}
                     else:

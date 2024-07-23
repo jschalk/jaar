@@ -22,15 +22,15 @@ def test_create_groupboxs_metrics_SetsAttrScenario1():
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_groupship(yao_text)
+    yao_acctunit.add_membership(yao_text)
     ohio_text = ",Ohio"
-    yao_acctunit.add_groupship(ohio_text)
-    yao_yao_groupship = yao_acctunit.get_groupship(yao_text)
-    yao_ohio_groupship = yao_acctunit.get_groupship(ohio_text)
-    yao_yao_groupship._credor_pool = 66
-    yao_yao_groupship._debtor_pool = 44
-    yao_ohio_groupship._credor_pool = 77
-    yao_ohio_groupship._debtor_pool = 88
+    yao_acctunit.add_membership(ohio_text)
+    yao_yao_membership = yao_acctunit.get_membership(yao_text)
+    yao_ohio_membership = yao_acctunit.get_membership(ohio_text)
+    yao_yao_membership._credor_pool = 66
+    yao_yao_membership._debtor_pool = 44
+    yao_ohio_membership._credor_pool = 77
+    yao_ohio_membership._debtor_pool = 88
     # assert sue_budunit._groupboxs == {}
 
     # WHEN
@@ -84,11 +84,11 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario1():
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_groupship(yao_text)
+    yao_acctunit.add_membership(yao_text)
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
-    assert yao_acctunit.get_groupship(yao_text)._credor_pool == 0
-    assert yao_acctunit.get_groupship(yao_text)._debtor_pool == 0
+    assert yao_acctunit.get_membership(yao_text)._credor_pool == 0
+    assert yao_acctunit.get_membership(yao_text)._debtor_pool == 0
     # assert sue_budunit._groupboxs == {}
 
     # WHEN
@@ -99,16 +99,16 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario1():
     assert yao_acctunit._debtor_pool != 0
     assert yao_acctunit._credor_pool == sue_budunit._credor_respect
     assert yao_acctunit._debtor_pool == sue_budunit._debtor_respect
-    yao_groupship = yao_acctunit.get_groupship(yao_text)
-    assert yao_groupship._credor_pool != 0
-    assert yao_groupship._debtor_pool != 0
-    assert yao_groupship._credor_pool == sue_budunit._credor_respect
-    assert yao_groupship._debtor_pool == sue_budunit._debtor_respect
-    assert yao_groupship._credor_pool == 1000000000
-    assert yao_groupship._debtor_pool == 1000000000
+    yao_membership = yao_acctunit.get_membership(yao_text)
+    assert yao_membership._credor_pool != 0
+    assert yao_membership._debtor_pool != 0
+    assert yao_membership._credor_pool == sue_budunit._credor_respect
+    assert yao_membership._debtor_pool == sue_budunit._debtor_respect
+    assert yao_membership._credor_pool == 1000000000
+    assert yao_membership._debtor_pool == 1000000000
     yao_groupbox = sue_budunit.get_groupbox(yao_text)
-    groupbox_yao_groupship = yao_groupbox.get_groupship(yao_text)
-    assert yao_groupship == groupbox_yao_groupship
+    groupbox_yao_membership = yao_groupbox.get_membership(yao_text)
+    assert yao_membership == groupbox_yao_membership
 
 
 def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario2():
@@ -118,13 +118,13 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario2():
     yao_text = "Yao"
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
-    yao_acctunit.add_groupship(yao_text, 1, 4)
+    yao_acctunit.add_membership(yao_text, 1, 4)
     ohio_text = ",Ohio"
-    yao_acctunit.add_groupship(ohio_text, 3, 1)
+    yao_acctunit.add_membership(ohio_text, 3, 1)
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
-    assert yao_acctunit.get_groupship(yao_text)._credor_pool == 0
-    assert yao_acctunit.get_groupship(yao_text)._debtor_pool == 0
+    assert yao_acctunit.get_membership(yao_text)._credor_pool == 0
+    assert yao_acctunit.get_membership(yao_text)._debtor_pool == 0
 
     # WHEN
     sue_budunit._calc_acctunit_metrics()
@@ -132,25 +132,25 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario2():
     # THEN
     assert sue_budunit.get_acct(yao_text)._credor_pool != 0
     assert sue_budunit.get_acct(yao_text)._debtor_pool != 0
-    assert yao_acctunit.get_groupship(yao_text)._credor_pool != 0
-    assert yao_acctunit.get_groupship(yao_text)._debtor_pool != 0
-    yao_yao_groupship = yao_acctunit.get_groupship(yao_text)
-    assert yao_yao_groupship._credor_pool != 0
-    assert yao_yao_groupship._debtor_pool != 0
-    assert yao_yao_groupship._credor_pool == sue_budunit._credor_respect * 0.25
-    assert yao_yao_groupship._debtor_pool == sue_budunit._debtor_respect * 0.8
-    assert yao_yao_groupship._credor_pool == 250000000
-    assert yao_yao_groupship._debtor_pool == 800000000
-    yao_ohio_groupship = yao_acctunit.get_groupship(ohio_text)
-    assert yao_ohio_groupship._credor_pool != 0
-    assert yao_ohio_groupship._debtor_pool != 0
-    assert yao_ohio_groupship._credor_pool == sue_budunit._credor_respect * 0.75
-    assert yao_ohio_groupship._debtor_pool == sue_budunit._debtor_respect * 0.2
-    assert yao_ohio_groupship._credor_pool == 750000000
-    assert yao_ohio_groupship._debtor_pool == 200000000
+    assert yao_acctunit.get_membership(yao_text)._credor_pool != 0
+    assert yao_acctunit.get_membership(yao_text)._debtor_pool != 0
+    yao_yao_membership = yao_acctunit.get_membership(yao_text)
+    assert yao_yao_membership._credor_pool != 0
+    assert yao_yao_membership._debtor_pool != 0
+    assert yao_yao_membership._credor_pool == sue_budunit._credor_respect * 0.25
+    assert yao_yao_membership._debtor_pool == sue_budunit._debtor_respect * 0.8
+    assert yao_yao_membership._credor_pool == 250000000
+    assert yao_yao_membership._debtor_pool == 800000000
+    yao_ohio_membership = yao_acctunit.get_membership(ohio_text)
+    assert yao_ohio_membership._credor_pool != 0
+    assert yao_ohio_membership._debtor_pool != 0
+    assert yao_ohio_membership._credor_pool == sue_budunit._credor_respect * 0.75
+    assert yao_ohio_membership._debtor_pool == sue_budunit._debtor_respect * 0.2
+    assert yao_ohio_membership._credor_pool == 750000000
+    assert yao_ohio_membership._debtor_pool == 200000000
     assert len(sue_budunit._groupboxs) == 2
     ohio_groupbox = sue_budunit.get_groupbox(ohio_text)
-    assert len(ohio_groupbox._groupships) == 1
+    assert len(ohio_groupbox._memberships) == 1
 
 
 def test_BudUnit_calc_acctunit_metrics_ResetAcctUnitsAttrs():

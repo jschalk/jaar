@@ -486,18 +486,17 @@ class IdeaUnit:
             )
 
     def set_awardheirs_fund_give_fund_take(self):
-        # TODO retire upper process and use allot scale
-        credit_ledger = {}
-        debtit_ledger = {}
+        give_ledger = {}
+        take_ledger = {}
         for x_group_id, x_awardheir in self._awardheirs.items():
-            credit_ledger[x_group_id] = x_awardheir.give_force
-            debtit_ledger[x_group_id] = x_awardheir.take_force
+            give_ledger[x_group_id] = x_awardheir.give_force
+            take_ledger[x_group_id] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
-        credit_allot = allot_scale(credit_ledger, x_fund_share, self._fund_coin)
-        debtit_allot = allot_scale(debtit_ledger, x_fund_share, self._fund_coin)
+        give_allot = allot_scale(give_ledger, x_fund_share, self._fund_coin)
+        take_allot = allot_scale(take_ledger, x_fund_share, self._fund_coin)
         for x_group_id, x_awardheir in self._awardheirs.items():
-            x_awardheir._fund_give = credit_allot.get(x_group_id)
-            x_awardheir._fund_take = debtit_allot.get(x_group_id)
+            x_awardheir._fund_give = give_allot.get(x_group_id)
+            x_awardheir._fund_take = take_allot.get(x_group_id)
 
     def clear_awardlines(self):
         self._awardlines = {}
@@ -869,7 +868,7 @@ class IdeaUnit:
         return self._begin is not None and self._close is not None
 
     def awardheir_exists(self) -> bool:
-        return self._awardheirs == {}
+        return self._awardheirs != {}
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {"_mass": self._mass}

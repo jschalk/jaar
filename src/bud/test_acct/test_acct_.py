@@ -21,7 +21,7 @@ def test_AcctUnit_exists():
     # calculated fields
     assert bob_acctunit._credor_pool is None
     assert bob_acctunit._debtor_pool is None
-    assert bob_acctunit._groupships is None
+    assert bob_acctunit._memberships is None
     assert bob_acctunit._irrational_debtit_score is None
     assert bob_acctunit._inallocable_debtit_score is None
     assert bob_acctunit._fund_give is None
@@ -72,7 +72,7 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     # calculated fields
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
-    assert yao_acctunit._groupships == {}
+    assert yao_acctunit._memberships == {}
     assert yao_acctunit._irrational_debtit_score == 0
     assert yao_acctunit._inallocable_debtit_score == 0
     assert yao_acctunit._fund_give == 0
@@ -272,6 +272,32 @@ def test_AcctUnit_clear_fund_give_take_SetsAttrCorrectly():
     assert bob_acctunit._fund_agenda_ratio_take == 0
 
 
+def test_AcctUnit_add_fund_agenda_give_SetsAttr():
+    # ESTABLISH
+    bob_acctunit = acctunit_shop("Bob")
+    bob_acctunit._fund_agenda_give = 0.41
+    assert bob_acctunit._fund_agenda_give == 0.41
+
+    # WHEN
+    bob_acctunit.add_fund_agenda_give(0.3)
+
+    # THEN
+    assert bob_acctunit._fund_agenda_give == 0.71
+
+
+def test_AcctUnit_add_fund_agenda_take_SetsAttr():
+    # ESTABLISH
+    bob_acctunit = acctunit_shop("Bob")
+    bob_acctunit._fund_agenda_take = 0.41
+    assert bob_acctunit._fund_agenda_take == 0.41
+
+    # WHEN
+    bob_acctunit.add_fund_agenda_take(0.3)
+
+    # THEN
+    assert bob_acctunit._fund_agenda_take == 0.71
+
+
 def test_AcctUnit_add_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
@@ -286,8 +312,8 @@ def test_AcctUnit_add_fund_give_take_SetsAttrCorrectly():
     bob_acctunit.add_fund_give_take(
         fund_give=0.33,
         fund_take=0.055,
-        bud_agenda_cred=0.3,
-        bud_agenda_debt=0.05,
+        fund_agenda_give=0.3,
+        fund_agenda_take=0.05,
     )
 
     # THEN

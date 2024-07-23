@@ -27,7 +27,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     duty_zia_acctunit.add_irrational_debtit_score(zia_irrational_debtit_score)
     duty_zia_acctunit.add_inallocable_debtit_score(zia_inallocable_debtit_score)
     zia_acctunit = yao_voice.get_acct(zia_text)
-    zia_acctunit.add_groupship(f"{slash_text}swimmers")
+    zia_acctunit.add_membership(f"{slash_text}swimmers")
     yao_voice.set_credor_respect(zia_credor_pool)
     yao_voice.set_debtor_respect(zia_debtor_pool)
 
@@ -72,7 +72,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     duty_zia_acctunit.add_irrational_debtit_score(zia_irrational_debtit_score)
     duty_zia_acctunit.add_inallocable_debtit_score(zia_inallocable_debtit_score)
     zia_acctunit = yao_duty.get_acct(zia_text)
-    zia_acctunit.add_groupship(f"{slash_text}swimmers")
+    zia_acctunit.add_membership(f"{slash_text}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
     yao_duty.set_debtor_respect(zia_debtor_pool)
 
@@ -122,7 +122,7 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     sue_budunit.set_last_gift_id(last_gift_id)
     sue_budunit.add_acctunit(bob_text, 3, 4)
     bob_acctunit = sue_budunit.get_acct(bob_text)
-    bob_acctunit.add_groupship(f"{slash_text}swimmers")
+    bob_acctunit.add_membership(f"{slash_text}swimmers")
     sue_budunit.set_acct_respect(sue_acct_pool)
     sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)

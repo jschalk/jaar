@@ -51,7 +51,7 @@ class DoerHeir:
     ) -> dict[GroupID, GroupBox]:
         dict_x = {}
         for group_id_x in group_id_set:
-            dict_x |= bud_groupboxs.get(group_id_x)._groupships
+            dict_x |= bud_groupboxs.get(group_id_x)._memberships
         return dict_x
 
     def is_empty(self) -> bool:
@@ -70,7 +70,7 @@ class DoerHeir:
 
         for x_group_id, x_groupbox in bud_groupboxs.items():
             if x_group_id in self._groupholds:
-                for x_acct_id in x_groupbox._groupships.keys():
+                for x_acct_id in x_groupbox._memberships.keys():
                     if x_acct_id == bud_owner_id:
                         return True
         return False

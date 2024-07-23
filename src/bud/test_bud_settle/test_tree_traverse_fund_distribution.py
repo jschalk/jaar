@@ -662,39 +662,39 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     sue_acctunit = yao_bud.get_acct(sue_text)
     bob_acctunit = yao_bud.get_acct(bob_text)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    sue_sue_groupship = sue_acctunit.get_groupship(sue_text)
-    bob_bob_groupship = bob_acctunit.get_groupship(bob_text)
-    zia_zia_groupship = zia_acctunit.get_groupship(zia_text)
-    assert sue_sue_groupship._fund_give is None
-    assert sue_sue_groupship._fund_take is None
-    assert bob_bob_groupship._fund_give is None
-    assert bob_bob_groupship._fund_take is None
-    assert zia_zia_groupship._fund_give is None
-    assert zia_zia_groupship._fund_take is None
+    sue_sue_membership = sue_acctunit.get_membership(sue_text)
+    bob_bob_membership = bob_acctunit.get_membership(bob_text)
+    zia_zia_membership = zia_acctunit.get_membership(zia_text)
+    assert sue_sue_membership._fund_give is None
+    assert sue_sue_membership._fund_take is None
+    assert bob_bob_membership._fund_give is None
+    assert bob_bob_membership._fund_take is None
+    assert zia_zia_membership._fund_give is None
+    assert zia_zia_membership._fund_take is None
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert sue_sue_groupship._fund_give == 0.5 * default_fund_pool()
-    assert sue_sue_groupship._fund_take == 0.8 * default_fund_pool()
-    assert bob_bob_groupship._fund_give == 0.25 * default_fund_pool()
-    assert bob_bob_groupship._fund_take == 0.1 * default_fund_pool()
-    assert zia_zia_groupship._fund_give == 0.25 * default_fund_pool()
-    assert zia_zia_groupship._fund_take == 0.1 * default_fund_pool()
+    assert sue_sue_membership._fund_give == 0.5 * default_fund_pool()
+    assert sue_sue_membership._fund_take == 0.8 * default_fund_pool()
+    assert bob_bob_membership._fund_give == 0.25 * default_fund_pool()
+    assert bob_bob_membership._fund_take == 0.1 * default_fund_pool()
+    assert zia_zia_membership._fund_give == 0.25 * default_fund_pool()
+    assert zia_zia_membership._fund_take == 0.1 * default_fund_pool()
 
-    groupship_cred_sum = (
-        sue_sue_groupship._fund_give
-        + bob_bob_groupship._fund_give
-        + zia_zia_groupship._fund_give
+    membership_cred_sum = (
+        sue_sue_membership._fund_give
+        + bob_bob_membership._fund_give
+        + zia_zia_membership._fund_give
     )
-    assert groupship_cred_sum == 1.0 * default_fund_pool()
-    groupship_debt_sum = (
-        sue_sue_groupship._fund_take
-        + bob_bob_groupship._fund_take
-        + zia_zia_groupship._fund_take
+    assert membership_cred_sum == 1.0 * default_fund_pool()
+    membership_debt_sum = (
+        sue_sue_membership._fund_take
+        + bob_bob_membership._fund_take
+        + zia_zia_membership._fund_take
     )
-    assert groupship_debt_sum == 1.0 * default_fund_pool()
+    assert membership_debt_sum == 1.0 * default_fund_pool()
 
     # ESTABLISH another pledge, check metrics are as expected
     xio_text = "Xio"
@@ -706,35 +706,35 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
 
     # THEN
     xio_groupbox = yao_bud.get_groupbox(xio_text)
-    xio_xio_groupship = xio_groupbox.get_groupship(xio_text)
+    xio_xio_membership = xio_groupbox.get_membership(xio_text)
     sue_acctunit = yao_bud.get_acct(sue_text)
     bob_acctunit = yao_bud.get_acct(bob_text)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    sue_sue_groupship = sue_acctunit.get_groupship(sue_text)
-    bob_bob_groupship = bob_acctunit.get_groupship(bob_text)
-    zia_zia_groupship = zia_acctunit.get_groupship(zia_text)
-    assert sue_sue_groupship._fund_give != 0.25 * default_fund_pool()
-    assert sue_sue_groupship._fund_take != 0.8 * default_fund_pool()
-    assert bob_bob_groupship._fund_give != 0.25 * default_fund_pool()
-    assert bob_bob_groupship._fund_take != 0.1 * default_fund_pool()
-    assert zia_zia_groupship._fund_give != 0.5 * default_fund_pool()
-    assert zia_zia_groupship._fund_take != 0.1 * default_fund_pool()
-    assert xio_xio_groupship._fund_give is not None
-    assert xio_xio_groupship._fund_take is not None
+    sue_sue_membership = sue_acctunit.get_membership(sue_text)
+    bob_bob_membership = bob_acctunit.get_membership(bob_text)
+    zia_zia_membership = zia_acctunit.get_membership(zia_text)
+    assert sue_sue_membership._fund_give != 0.25 * default_fund_pool()
+    assert sue_sue_membership._fund_take != 0.8 * default_fund_pool()
+    assert bob_bob_membership._fund_give != 0.25 * default_fund_pool()
+    assert bob_bob_membership._fund_take != 0.1 * default_fund_pool()
+    assert zia_zia_membership._fund_give != 0.5 * default_fund_pool()
+    assert zia_zia_membership._fund_take != 0.1 * default_fund_pool()
+    assert xio_xio_membership._fund_give is not None
+    assert xio_xio_membership._fund_take is not None
 
     x_fund_give_sum = (
-        sue_sue_groupship._fund_give
-        + bob_bob_groupship._fund_give
-        + zia_zia_groupship._fund_give
-        + xio_xio_groupship._fund_give
+        sue_sue_membership._fund_give
+        + bob_bob_membership._fund_give
+        + zia_zia_membership._fund_give
+        + xio_xio_membership._fund_give
     )
     print(f"{x_fund_give_sum=}")
     assert x_fund_give_sum == 1.0 * default_fund_pool()
     x_fund_take_sum = (
-        sue_sue_groupship._fund_take
-        + bob_bob_groupship._fund_take
-        + zia_zia_groupship._fund_take
-        + xio_xio_groupship._fund_take
+        sue_sue_membership._fund_take
+        + bob_bob_membership._fund_take
+        + zia_zia_membership._fund_take
+        + xio_xio_membership._fund_take
     )
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
@@ -974,8 +974,8 @@ def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
     # DELETE bud_agenda_debt and bud_agenda_cred
     for groupbox_x in x_bud._groupboxs.values():
         groupbox_x.clear_fund_give_take()
-        # for groupship_x in groupbox_x._accts.values():
-        #     print(f"{groupbox_x.} {groupship_x.}  {groupship_x._fund_give:.6f} {groupship_x.debtit_score=} {groupship__fund_take:t:.6f} {groupship_x.} ")
+        # for membership_x in groupbox_x._accts.values():
+        #     print(f"{groupbox_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_score=} {membership__fund_take:t:.6f} {membership_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud._accts.values():
@@ -984,20 +984,20 @@ def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
 
 @dataclass
 class GroupAgendaMetrics:
-    sum_groupbox_cred: float = 0
-    sum_groupbox_debt: float = 0
-    sum_groupship_cred: float = 0
-    sum_groupship_debt: float = 0
-    groupship_count: int = 0
+    sum_groupbox_give: float = 0
+    sum_groupbox_take: float = 0
+    sum_membership_cred: float = 0
+    sum_membership_debt: float = 0
+    membership_count: int = 0
 
     def set_sums(self, x_bud: BudUnit):
         for x_groupbox in x_bud._groupboxs.values():
-            self.sum_groupbox_cred += x_groupbox._fund_agenda_give
-            self.sum_groupbox_debt += x_groupbox._fund_agenda_take
-            for groupship_x in x_groupbox._groupships.values():
-                self.sum_groupship_cred += groupship_x._fund_agenda_give
-                self.sum_groupship_debt += groupship_x._fund_agenda_take
-                self.groupship_count += 1
+            self.sum_groupbox_give += x_groupbox._fund_agenda_give
+            self.sum_groupbox_take += x_groupbox._fund_agenda_take
+            for membership_x in x_groupbox._memberships.values():
+                self.sum_membership_cred += membership_x._fund_agenda_give
+                self.sum_membership_debt += membership_x._fund_agenda_take
+                self.membership_count += 1
 
 
 @dataclass
@@ -1042,10 +1042,10 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_groupagendametrics = GroupAgendaMetrics()
     x_groupagendametrics.set_sums(x_bud=x_bud)
-    assert x_groupagendametrics.sum_groupbox_cred == 0
-    assert x_groupagendametrics.sum_groupbox_debt == 0
-    assert x_groupagendametrics.sum_groupship_cred == 0
-    assert x_groupagendametrics.sum_groupship_debt == 0
+    assert x_groupagendametrics.sum_groupbox_give == 0
+    assert x_groupagendametrics.sum_groupbox_take == 0
+    assert x_groupagendametrics.sum_membership_cred == 0
+    assert x_groupagendametrics.sum_membership_debt == 0
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_acctagendametrics = AcctAgendaMetrics()
@@ -1080,16 +1080,16 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
 
     x_groupagendametrics = GroupAgendaMetrics()
     x_groupagendametrics.set_sums(x_bud=x_bud)
-    assert x_groupagendametrics.groupship_count == 81
+    assert x_groupagendametrics.membership_count == 81
     x_sum = 2796504
-    print(f"{x_groupagendametrics.sum_groupbox_cred=}")
-    assert are_equal(x_groupagendametrics.sum_groupbox_cred, x_sum)
-    assert are_equal(x_groupagendametrics.sum_groupbox_debt, x_sum)
-    assert are_equal(x_groupagendametrics.sum_groupship_cred, x_sum)
-    assert are_equal(x_groupagendametrics.sum_groupship_debt, x_sum)
+    print(f"{x_groupagendametrics.sum_groupbox_give=}")
+    assert are_equal(x_groupagendametrics.sum_groupbox_give, x_sum)
+    assert are_equal(x_groupagendametrics.sum_groupbox_take, x_sum)
+    assert are_equal(x_groupagendametrics.sum_membership_cred, x_sum)
+    assert are_equal(x_groupagendametrics.sum_membership_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_bud_i_sum,
-        x_groupagendametrics.sum_groupbox_cred,
+        x_groupagendametrics.sum_groupbox_give,
     )
 
     assert all_acctunits_have_legitimate_values(x_bud)
@@ -1189,7 +1189,7 @@ def test_BudUnit_settle_bud_CreatesGroupBoxWith_budunit_v001():
     assert len(x_bud._groupboxs) == 34
     everyone_accts_len = None
     everyone_group = x_bud.get_groupbox(",Everyone")
-    everyone_accts_len = len(everyone_group._groupships)
+    everyone_accts_len = len(everyone_group._memberships)
     assert everyone_accts_len == 22
 
     # WHEN

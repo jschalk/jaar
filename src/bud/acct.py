@@ -8,9 +8,9 @@ from src._road.road import (
 from src._road.finance import default_bit_if_none, RespectNum, allot_scale
 from src.bud.group import (
     GroupID,
-    GroupShip,
-    groupships_get_from_dict,
-    groupship_shop,
+    MemberShip,
+    memberships_get_from_dict,
+    membership_shop,
 )
 from dataclasses import dataclass
 
@@ -19,7 +19,7 @@ class InvalidAcctException(Exception):
     pass
 
 
-class Bad_acct_idGroupShipException(Exception):
+class Bad_acct_idMemberShipException(Exception):
     pass
 
 
@@ -43,7 +43,7 @@ class AcctUnit(AcctCore):
     credit_score: int = None
     debtit_score: int = None
     # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
-    _groupships: dict[AcctID, GroupShip] = None
+    _memberships: dict[AcctID, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
@@ -106,17 +106,23 @@ class AcctUnit(AcctCore):
     def add_fund_take(self, fund_take: float):
         self._fund_take += fund_take
 
+    def add_fund_agenda_give(self, fund_agenda_give: float):
+        self._fund_agenda_give += fund_agenda_give
+
+    def add_fund_agenda_take(self, fund_agenda_take: float):
+        self._fund_agenda_take += fund_agenda_take
+
     def add_fund_give_take(
         self,
         fund_give: float,
         fund_take,
-        bud_agenda_cred: float,
-        bud_agenda_debt,
+        fund_agenda_give: float,
+        fund_agenda_take,
     ):
         self.add_fund_give(fund_give)
         self.add_fund_take(fund_take)
-        self._fund_agenda_give += bud_agenda_cred
-        self._fund_agenda_take += bud_agenda_debt
+        self._fund_agenda_give += fund_agenda_give
+        self._fund_agenda_take += fund_agenda_take
 
     def set_fund_agenda_ratio_give_take(
         self,
@@ -125,84 +131,83 @@ class AcctUnit(AcctCore):
         bud_acctunit_total_credit_score: float,
         bud_acctunit_total_debtit_score: float,
     ):
-        # TODO replace with allot_scale
         total_credit_score = bud_acctunit_total_credit_score
-        total_debtit_score = bud_acctunit_total_debtit_score
         ratio_give_sum = fund_agenda_ratio_give_sum
-        ratio_take_sum = fund_agenda_ratio_take_sum
-        if fund_agenda_ratio_give_sum == 0:
-            self._fund_agenda_ratio_give = self.get_credit_score() / total_credit_score
-        else:
-            self._fund_agenda_ratio_give = self._fund_agenda_give / ratio_give_sum
-
+        self._fund_agenda_ratio_give = (
+            self.get_credit_score() / total_credit_score
+            if fund_agenda_ratio_give_sum == 0
+            else self._fund_agenda_give / ratio_give_sum
+        )
         if fund_agenda_ratio_take_sum == 0:
+            total_debtit_score = bud_acctunit_total_debtit_score
             self._fund_agenda_ratio_take = self.get_debtit_score() / total_debtit_score
         else:
+            ratio_take_sum = fund_agenda_ratio_take_sum
             self._fund_agenda_ratio_take = self._fund_agenda_take / ratio_take_sum
 
-    def add_groupship(
+    def add_membership(
         self,
         group_id: GroupID,
-        credit_score: float = None,
-        debtit_score: float = None,
+        credit_weight: float = None,
+        debtit_weight: float = None,
     ):
-        x_groupship = groupship_shop(group_id, credit_score, debtit_score)
-        self.set_groupship(x_groupship)
+        x_membership = membership_shop(group_id, credit_weight, debtit_weight)
+        self.set_membership(x_membership)
 
-    def set_groupship(self, x_groupship: GroupShip):
-        x_group_id = x_groupship.group_id
+    def set_membership(self, x_membership: MemberShip):
+        x_group_id = x_membership.group_id
         group_id_is_acct_id = is_roadnode(x_group_id, self._road_delimiter)
         if group_id_is_acct_id and self.acct_id != x_group_id:
-            raise Bad_acct_idGroupShipException(
+            raise Bad_acct_idMemberShipException(
                 f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_group_id}'."
             )
 
-        x_groupship._acct_id = self.acct_id
-        self._groupships[x_groupship.group_id] = x_groupship
+        x_membership._acct_id = self.acct_id
+        self._memberships[x_membership.group_id] = x_membership
 
-    def get_groupship(self, group_id: GroupID) -> GroupShip:
-        return self._groupships.get(group_id)
+    def get_membership(self, group_id: GroupID) -> MemberShip:
+        return self._memberships.get(group_id)
 
-    def groupship_exists(self, group_id: GroupID) -> bool:
-        return self._groupships.get(group_id) is not None
+    def membership_exists(self, group_id: GroupID) -> bool:
+        return self._memberships.get(group_id) is not None
 
-    def delete_groupship(self, group_id: GroupID):
-        return self._groupships.pop(group_id)
+    def delete_membership(self, group_id: GroupID):
+        return self._memberships.pop(group_id)
 
-    def groupships_exist(self):
-        return len(self._groupships) != 0
+    def memberships_exist(self):
+        return len(self._memberships) != 0
 
-    def clear_groupships(self):
-        self._groupships = {}
+    def clear_memberships(self):
+        self._memberships = {}
 
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_groupship.group_id: x_groupship.credit_score
-            for x_groupship in self._groupships.values()
+            x_membership.group_id: x_membership.credit_weight
+            for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
         for x_group_id, group_credor_pool in allot_dict.items():
-            self.get_groupship(x_group_id)._credor_pool = group_credor_pool
+            self.get_membership(x_group_id)._credor_pool = group_credor_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_groupship.group_id: x_groupship.debtit_score
-            for x_groupship in self._groupships.values()
+            x_membership.group_id: x_membership.debtit_weight
+            for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
         for x_group_id, group_debtor_pool in allot_dict.items():
-            self.get_groupship(x_group_id)._debtor_pool = group_debtor_pool
+            self.get_membership(x_group_id)._debtor_pool = group_debtor_pool
 
-    def get_groupships_dict(self) -> dict:
+    def get_memberships_dict(self) -> dict:
         return {
-            x_groupship.group_id: {
-                "group_id": x_groupship.group_id,
-                "credit_score": x_groupship.credit_score,
-                "debtit_score": x_groupship.debtit_score,
+            x_membership.group_id: {
+                "group_id": x_membership.group_id,
+                "credit_score": x_membership.credit_weight,
+                "debtit_score": x_membership.debtit_weight,
             }
-            for x_groupship in self._groupships.values()
+            for x_membership in self._memberships.values()
         }
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
@@ -210,7 +215,7 @@ class AcctUnit(AcctCore):
             "acct_id": self.acct_id,
             "credit_score": self.credit_score,
             "debtit_score": self.debtit_score,
-            "_groupships": self.get_groupships_dict(),
+            "_memberships": self.get_memberships_dict(),
         }
         if self._irrational_debtit_score not in [None, 0]:
             x_dict["_irrational_debtit_score"] = self._irrational_debtit_score
@@ -250,11 +255,11 @@ def acctunit_get_from_dict(acctunit_dict: dict, _road_delimiter: str) -> AcctUni
     x_acct_id = acctunit_dict["acct_id"]
     x_credit_score = acctunit_dict["credit_score"]
     x_debtit_score = acctunit_dict["debtit_score"]
-    x_groupships_dict = acctunit_dict["_groupships"]
+    x_memberships_dict = acctunit_dict["_memberships"]
     x_acctunit = acctunit_shop(
         x_acct_id, x_credit_score, x_debtit_score, _road_delimiter
     )
-    x_acctunit._groupships = groupships_get_from_dict(x_groupships_dict, x_acct_id)
+    x_acctunit._memberships = memberships_get_from_dict(x_memberships_dict, x_acct_id)
     _irrational_debtit_score = acctunit_dict.get("_irrational_debtit_score", 0)
     _inallocable_debtit_score = acctunit_dict.get("_inallocable_debtit_score", 0)
     x_acctunit.add_irrational_debtit_score(get_0_if_None(_irrational_debtit_score))
@@ -273,7 +278,7 @@ def acctunit_shop(
     x_acctunit = AcctUnit(
         credit_score=get_1_if_None(credit_score),
         debtit_score=get_1_if_None(debtit_score),
-        _groupships={},
+        _memberships={},
         _credor_pool=0,
         _debtor_pool=0,
         _irrational_debtit_score=0,

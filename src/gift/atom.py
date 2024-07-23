@@ -181,30 +181,30 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
         x_bud._penny = x_atom.get_value(x_arg)
 
 
-def _modify_bud_acct_groupship_delete(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
     x_group_id = x_atom.get_value("group_id")
-    x_bud.get_acct(x_acct_id).delete_groupship(x_group_id)
+    x_bud.get_acct(x_acct_id).delete_membership(x_group_id)
 
 
-def _modify_bud_acct_groupship_update(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
     x_group_id = x_atom.get_value("group_id")
     x_acctunit = x_bud.get_acct(x_acct_id)
-    x_groupship = x_acctunit.get_groupship(x_group_id)
-    x_credit_score = x_atom.get_value("credit_score")
-    x_debtit_score = x_atom.get_value("debtit_score")
-    x_groupship.set_credit_score(x_credit_score)
-    x_groupship.set_debtit_score(x_debtit_score)
+    x_membership = x_acctunit.get_membership(x_group_id)
+    x_credit_weight = x_atom.get_value("credit_weight")
+    x_debtit_weight = x_atom.get_value("debtit_weight")
+    x_membership.set_credit_weight(x_credit_weight)
+    x_membership.set_debtit_weight(x_debtit_weight)
 
 
-def _modify_bud_acct_groupship_insert(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value("acct_id")
     x_group_id = x_atom.get_value("group_id")
-    x_credit_score = x_atom.get_value("credit_score")
-    x_debtit_score = x_atom.get_value("debtit_score")
+    x_credit_weight = x_atom.get_value("credit_weight")
+    x_debtit_weight = x_atom.get_value("debtit_weight")
     x_acctunit = x_bud.get_acct(x_acct_id)
-    x_acctunit.add_groupship(x_group_id, x_credit_score, x_debtit_score)
+    x_acctunit.add_membership(x_group_id, x_credit_weight, x_debtit_weight)
 
 
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -404,13 +404,13 @@ def _modify_bud_budunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_update_budunit(x_bud, x_atom)
 
 
-def _modify_bud_acct_groupship(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_acct_membership(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_bud_acct_groupship_delete(x_bud, x_atom)
+        _modify_bud_acct_membership_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_update():
-        _modify_bud_acct_groupship_update(x_bud, x_atom)
+        _modify_bud_acct_membership_update(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_bud_acct_groupship_insert(x_bud, x_atom)
+        _modify_bud_acct_membership_insert(x_bud, x_atom)
 
 
 def _modify_bud_ideaunit(x_bud: BudUnit, x_atom: AtomUnit):
@@ -477,8 +477,8 @@ def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
 def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.category == "budunit":
         _modify_bud_budunit(x_bud, x_atom)
-    elif x_atom.category == "bud_acct_groupship":
-        _modify_bud_acct_groupship(x_bud, x_atom)
+    elif x_atom.category == "bud_acct_membership":
+        _modify_bud_acct_membership(x_bud, x_atom)
     elif x_atom.category == "bud_ideaunit":
         _modify_bud_ideaunit(x_bud, x_atom)
     elif x_atom.category == "bud_idea_awardlink":
@@ -506,9 +506,9 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._fund_pool != y_obj._fund_pool
             or x_obj._fund_coin != y_obj._fund_coin
         )
-    elif category in {"bud_acct_groupship"}:
-        return (x_obj.credit_score != y_obj.credit_score) or (
-            x_obj.debtit_score != y_obj.debtit_score
+    elif category in {"bud_acct_membership"}:
+        return (x_obj.credit_weight != y_obj.credit_weight) or (
+            x_obj.debtit_weight != y_obj.debtit_weight
         )
     elif category in {"bud_idea_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
