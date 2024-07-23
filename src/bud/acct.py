@@ -106,6 +106,12 @@ class AcctUnit(AcctCore):
     def add_fund_take(self, fund_take: float):
         self._fund_take += fund_take
 
+    def add_fund_agenda_give(self, fund_agenda_give: float):
+        self._fund_agenda_give += fund_agenda_give
+
+    def add_fund_agenda_take(self, fund_agenda_take: float):
+        self._fund_agenda_take += fund_agenda_take
+
     def add_fund_give_take(
         self,
         fund_give: float,

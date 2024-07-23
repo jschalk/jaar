@@ -272,6 +272,32 @@ def test_AcctUnit_clear_fund_give_take_SetsAttrCorrectly():
     assert bob_acctunit._fund_agenda_ratio_take == 0
 
 
+def test_AcctUnit_add_fund_agenda_give_SetsAttr():
+    # ESTABLISH
+    bob_acctunit = acctunit_shop("Bob")
+    bob_acctunit._fund_agenda_give = 0.41
+    assert bob_acctunit._fund_agenda_give == 0.41
+
+    # WHEN
+    bob_acctunit.add_fund_agenda_give(0.3)
+
+    # THEN
+    assert bob_acctunit._fund_agenda_give == 0.71
+
+
+def test_AcctUnit_add_fund_agenda_take_SetsAttr():
+    # ESTABLISH
+    bob_acctunit = acctunit_shop("Bob")
+    bob_acctunit._fund_agenda_take = 0.41
+    assert bob_acctunit._fund_agenda_take == 0.41
+
+    # WHEN
+    bob_acctunit.add_fund_agenda_take(0.3)
+
+    # THEN
+    assert bob_acctunit._fund_agenda_take == 0.71
+
+
 def test_AcctUnit_add_fund_give_take_SetsAttrCorrectly():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")

@@ -1100,66 +1100,26 @@ class BudUnit:
         return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
-        # TODO replace this process with allot_scale
-        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
-        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
-
-        for x_acctunit in self._accts.values():
-            au_fund_give = (
-                idea_fund_share * x_acctunit.get_credit_score()
-            ) / sum_acctunit_credit_score
-
-            au_fund_take = (
-                idea_fund_share * x_acctunit.get_debtit_score()
-            ) / sum_acctunit_debtit_score
-
-            x_acctunit.add_fund_give_take(
-                fund_give=au_fund_give,
-                fund_take=au_fund_take,
-                bud_agenda_cred=0,
-                bud_agenda_debt=0,
-            )
+        x_acctunits = self._accts.values()
+        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
+        for x_acct_id, acct_fund_give in fund_give_allot.items():
+            self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
+        for x_acct_id, acct_fund_take in fund_take_allot.items():
+            self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
-
-        # TODO replace this process with allot_scale
-        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
-        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
-
-        for x_acctunit in self._accts.values():
-            au_fund_agenda_give = (
-                idea_fund_share * x_acctunit.get_credit_score()
-            ) / sum_acctunit_credit_score
-
-            au_fund_agenda_take = (
-                idea_fund_share * x_acctunit.get_debtit_score()
-            ) / sum_acctunit_debtit_score
-
-            x_acctunit.add_fund_give_take(
-                fund_give=0,
-                fund_take=0,
-                bud_agenda_cred=au_fund_agenda_give,
-                bud_agenda_debt=au_fund_agenda_take,
-            )
-
-    def _set_acctunits_bud_agenda_share(self, bud_agenda_share: float):
-        # TODO replace this process with allot_scale
-        sum_acctunit_credit_score = self.get_acctunits_credit_score_sum()
-        sum_acctunit_debtit_score = self.get_acctunits_debtit_score_sum()
-
-        for x_acctunit in self._accts.values():
-            au_fund_agenda_give = (
-                bud_agenda_share * x_acctunit.get_credit_score()
-            ) / sum_acctunit_credit_score
-
-            au_fund_agenda_take = (
-                bud_agenda_share * x_acctunit.get_debtit_score()
-            ) / sum_acctunit_debtit_score
-
-            x_acctunit.add_fund_agenda_give_take(
-                bud_agenda_cred=au_fund_agenda_give,
-                bud_agenda_debt=au_fund_agenda_take,
-            )
+        x_acctunits = self._accts.values()
+        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
+        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
+        for x_acct_id, acct_fund_give in fund_give_allot.items():
+            self.get_acct(x_acct_id).add_fund_agenda_give(acct_fund_give)
+        for x_acct_id, acct_fund_take in fund_take_allot.items():
+            self.get_acct(x_acct_id).add_fund_agenda_take(acct_fund_take)
 
     def _reset_groupboxs_fund_give_take(self):
         for groupbox_obj in self._groupboxs.values():
