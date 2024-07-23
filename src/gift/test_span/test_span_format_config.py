@@ -105,7 +105,7 @@ def test_create_span_dataframe_ReturnsCorrectObj():
 
 
 def for_all_spans_create_span_dataframe():
-    # TODO Catching broad exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
+    # Catching broad exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
     empty_d2 = []
     for x_filename in get_span_filenames():
         try:

@@ -1166,31 +1166,11 @@ class BudUnit:
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
-        # TODO replace with allot_scale and delete set_fund_agenda_ratio_give_take
-        # fund_agenda_give_sum = sum(
-        #     x_acctunit._fund_agenda_give for x_acctunit in self._accts.values()
-        # )
-        # fund_agenda_take_sum = sum(
-        #     x_acctunit._fund_agenda_take for x_acctunit in self._accts.values()
-        # )
-        # x_acctunits = self._accts.values()
-        # give_ledger = {
-        #     x_acct.acct_id: x_acct._fund_agenda_give for x_acct in x_acctunits
-        # }
-        # take_ledger = {
-        #     x_acct.acct_id: x_acct._fund_agenda_take for x_acct in x_acctunits
-        # }
-        # give_allot = allot_scale(give_ledger, fund_agenda_give_sum, self._fund_coin)
-        # take_allot = allot_scale(take_ledger, fund_agenda_take_sum, self._fund_coin)
-        # for x_acct_id, x_acctunit in self._accts.items():
-        #     x_acctunit._fund_agenda_ratio_give = give_allot.get(x_acct_id)
-        #     x_acctunit._fund_agenda_ratio_take = take_allot.get(x_acct_id)
-
-        fund_agenda_ratio_give_sum = 0
-        fund_agenda_ratio_take_sum = 0
         x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
         x_acctunit_debtit_score_sum = self.get_acctunits_debtit_score_sum()
 
+        fund_agenda_ratio_give_sum = 0
+        fund_agenda_ratio_take_sum = 0
         for x_acctunit in self._accts.values():
             fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
             fund_agenda_ratio_take_sum += x_acctunit._fund_agenda_take
@@ -1376,8 +1356,6 @@ class BudUnit:
             self._offtrack_kids_mass_set.add(idea_kid.get_road())
 
     def _allot_fund_share(self, idea: IdeaUnit):
-        # TODO manage situations where awardheir.credit_score is None for all awardheirs
-        # TODO manage situations where awardheir.debtit_score is None for all awardheirs
         if idea.awardheir_exists():
             self._set_groupboxs_fund_share(idea._awardheirs)
         elif idea.awardheir_exists() is False:
