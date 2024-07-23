@@ -478,7 +478,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_GroupExample():
     assert after_yao_acctunit._road_delimiter == slash_delimiter
 
 
-def test_budunit_get_from_json_ExportCorrectyExportsBudUnit_mass():
+def test_budunit_get_from_json_ExportsBudUnit_mass():
     # ESTABLISH
     x1_bud = budunit_v001()
     x1_bud._tally = 15
