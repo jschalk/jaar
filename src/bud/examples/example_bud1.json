@@ -4,18 +4,18 @@
         "A a ron Jones": {
             "_memberships": {
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",OceanVista Apt"
                 },
                 "A a ron Jones": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "A a ron Jones"
                 }
             },
@@ -26,23 +26,23 @@
         "America": {
             "_memberships": {
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Family": {
-                    "credit_score": 6.45,
-                    "debtit_score": 1,
+                    "credit_vote": 6.45,
+                    "debtit_vote": 1,
                     "group_id": ",Family"
                 },
                 ",Friends": {
-                    "credit_score": 6.1,
-                    "debtit_score": 1,
+                    "credit_vote": 6.1,
+                    "debtit_vote": 1,
                     "group_id": ",Friends"
                 },
                 "America": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "America"
                 }
             },
@@ -53,18 +53,18 @@
         "Anna": {
             "_memberships": {
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Family": {
-                    "credit_score": 6.2,
-                    "debtit_score": 1,
+                    "credit_vote": 6.2,
+                    "debtit_vote": 1,
                     "group_id": ",Family"
                 },
                 "Anna": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Anna"
                 }
             },
@@ -75,23 +75,23 @@
         "Benjamin Stoddert": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Benjamin Stoddert": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Benjamin Stoddert"
                 }
             },
@@ -102,23 +102,23 @@
         "Bob302": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 6.25,
-                    "debtit_score": 1,
+                    "credit_vote": 6.25,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",appreciates US DOLLAR": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Bob302": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Bob302"
                 }
             },
@@ -129,23 +129,23 @@
         "Chuck Lee": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Chuck Lee": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Chuck Lee"
                 }
             },
@@ -156,18 +156,18 @@
         "Ernesto Chavez": {
             "_memberships": {
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "credit_score": 6.5,
-                    "debtit_score": 1,
+                    "credit_vote": 6.5,
+                    "debtit_vote": 1,
                     "group_id": ",Philosophy"
                 },
                 "Ernesto Chavez": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Ernesto Chavez"
                 }
             },
@@ -178,18 +178,18 @@
         "Jacque Chirac": {
             "_memberships": {
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",OceanVista Apt"
                 },
                 "Jacque Chirac": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Jacque Chirac"
                 }
             },
@@ -200,18 +200,18 @@
         "Jane Randolph": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Jane Randolph": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Jane Randolph"
                 }
             },
@@ -222,18 +222,18 @@
         "Maria Reynolds": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 6.75,
-                    "debtit_score": 1,
+                    "credit_vote": 6.75,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Maria Reynolds": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Maria Reynolds"
                 }
             },
@@ -244,23 +244,23 @@
         "Martha Doubs": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Martha Doubs": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Martha Doubs"
                 }
             },
@@ -271,23 +271,23 @@
         "Mikayla": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 10,
-                    "debtit_score": 1,
+                    "credit_vote": 10,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Philosophy"
                 },
                 "Mikayla": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Mikayla"
                 }
             },
@@ -298,18 +298,18 @@
         "Norberto": {
             "_memberships": {
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",OceanVista Apt": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",OceanVista Apt"
                 },
                 "Norberto": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Norberto"
                 }
             },
@@ -320,23 +320,23 @@
         "Perrison": {
             "_memberships": {
                 ",appreciates US DOLLAR": {
-                    "credit_score": 5,
-                    "debtit_score": 1,
+                    "credit_vote": 5,
+                    "debtit_vote": 1,
                     "group_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Friends": {
-                    "credit_score": 6.4,
-                    "debtit_score": 1,
+                    "credit_vote": 6.4,
+                    "debtit_vote": 1,
                     "group_id": ",Friends"
                 },
                 "Perrison": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Perrison"
                 }
             },
@@ -347,23 +347,23 @@
         "Philipa": {
             "_memberships": {
                 ",Climate Death": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Philosophy": {
-                    "credit_score": 52,
-                    "debtit_score": 1,
+                    "credit_vote": 52,
+                    "debtit_vote": 1,
                     "group_id": ",Philosophy"
                 },
                 "Philipa": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Philipa"
                 }
             },
@@ -374,18 +374,18 @@
         "Prashant": {
             "_memberships": {
                 ",appreciates US DOLLAR": {
-                    "credit_score": 2,
-                    "debtit_score": 1,
+                    "credit_vote": 2,
+                    "debtit_vote": 1,
                     "group_id": ",appreciates US DOLLAR"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Prashant": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Prashant"
                 }
             },
@@ -396,48 +396,48 @@
         "Renee Elise Goldsberry": {
             "_memberships": {
                 ",appreciates US DOLLAR": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",appreciates US DOLLAR"
                 },
                 ",Climate Death": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Friends": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Friends"
                 },
                 ",hurt by us dollar": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",hurt by us dollar"
                 },
                 ",People who identify by UTEP": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",People who identify by UTEP"
                 },
                 ",Philosophy": {
-                    "credit_score": 3,
-                    "debtit_score": 1,
+                    "credit_vote": 3,
+                    "debtit_vote": 1,
                     "group_id": ",Philosophy"
                 },
                 ",SHOW ME2": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",SHOW ME2"
                 },
                 "Renee Elise Goldsberry": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Renee Elise Goldsberry"
                 }
             },
@@ -448,23 +448,23 @@
         "Sam zamora": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",ACME General": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME General"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Sam zamora": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Sam zamora"
                 }
             },
@@ -475,18 +475,18 @@
         "Shadwell Harris": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Shadwell Harris": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Shadwell Harris"
                 }
             },
@@ -497,18 +497,18 @@
         "Thomas OSU": {
             "_memberships": {
                 ",Climate Death": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Climate Death"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "Thomas OSU": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Thomas OSU"
                 }
             },
@@ -519,18 +519,18 @@
         "Travis Fox": {
             "_memberships": {
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 ",Family": {
-                    "credit_score": 6.35,
-                    "debtit_score": 1,
+                    "credit_vote": 6.35,
+                    "debtit_vote": 1,
                     "group_id": ",Family"
                 },
                 "Travis Fox": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "Travis Fox"
                 }
             },
@@ -541,18 +541,18 @@
         "WIlliam Wallace": {
             "_memberships": {
                 ",ACME DevOps": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",ACME DevOps"
                 },
                 ",Everyone": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": ",Everyone"
                 },
                 "WIlliam Wallace": {
-                    "credit_score": 1,
-                    "debtit_score": 1,
+                    "credit_vote": 1,
+                    "debtit_vote": 1,
                     "group_id": "WIlliam Wallace"
                 }
             },
