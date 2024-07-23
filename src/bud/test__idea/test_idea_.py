@@ -6,19 +6,13 @@ from src._road.road import (
 )
 from src.bud.healer import healerhold_shop
 from src.bud.group import awardlink_shop, awardheir_shop
-from src.bud.reason_idea import (
-    reasonunit_shop,
-    reasonheir_shop,
-    factunit_shop,
-    premiseunit_shop,
-)
+from src.bud.reason_idea import reasonunit_shop, reasonheir_shop, premiseunit_shop
 from src.bud.reason_doer import doerunit_shop, doerheir_shop
 from src.bud.origin import originunit_shop
-from src.bud.idea import IdeaUnit, ideaunit_shop, get_obj_from_idea_dict
-from pytest import raises as pytest_raises
+from src.bud.idea import IdeaUnit, ideaunit_shop
 
 
-def test_IdeaUnit_exists():
+def test_IdeaUnit_Exists():
     x_ideaunit = IdeaUnit()
     assert x_ideaunit
     assert x_ideaunit._kids is None
@@ -63,7 +57,7 @@ def test_IdeaUnit_exists():
     assert x_ideaunit._healerhold_ratio is None
 
 
-def test_ideaunit_shop_NoParametersReturnsCorrectObj():
+def test_ideaunit_shop_WithNoParametersReturnsObj():
     # ESTABLISH / WHEN
     x_ideaunit = ideaunit_shop()
 
@@ -176,7 +170,7 @@ def test_IdeaUnit_get_road_ReturnsCorrectObj():
     assert ball_idea.get_road() == ball_road
 
 
-def test_IdeaUnit_set_parent_road_ReturnsCorrectObj():
+def test_IdeaUnit_set_parent_road_SetsAttr():
     # ESTABLISH
     round_text = "round_things"
     slash_text = "/"
@@ -195,36 +189,26 @@ def test_IdeaUnit_set_parent_road_ReturnsCorrectObj():
     assert ball_idea._parent_road == sports_road
 
 
-def test_IdeaUnit_awardlinks_exist():
+def test_ideaunit_shop_ReturnsObjWith_awardlinks():
     # ESTABLISH
     biker_give_force = 12
     biker_take_force = 15
-    biker_awardlink = awardlink_shop(
-        group_id="bikers2",
-        give_force=biker_give_force,
-        take_force=biker_take_force,
-    )
-
-    swimmer_group_id = "swimmers"
-    swimmer_give_force = 29
-    swimmer_take_force = 32
-    swimmer_awardlink = awardlink_shop(
-        group_id=swimmer_group_id,
-        give_force=swimmer_give_force,
-        take_force=swimmer_take_force,
-    )
-
-    x_memberships = {
-        swimmer_awardlink.group_id: swimmer_awardlink,
+    biker_awardlink = awardlink_shop("bikers2", biker_give_force, biker_take_force)
+    swim_group_id = "swimmers"
+    swim_give_force = 29
+    swim_take_force = 32
+    swim_awardlink = awardlink_shop(swim_group_id, swim_give_force, swim_take_force)
+    x_awardlinks = {
+        swim_awardlink.group_id: swim_awardlink,
         biker_awardlink.group_id: biker_awardlink,
     }
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_memberships)
+    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_awardlinks)
 
     # THEN
-    assert sport_idea._awardlinks == x_memberships
+    assert sport_idea._awardlinks == x_awardlinks
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -232,26 +216,26 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     biker_give_force = 12
     biker_take_force = 15
     biker_text = "bikers2"
-    biker_awardlink = awardheir_shop(biker_text, biker_give_force, biker_take_force)
+    biker_awardheir = awardheir_shop(biker_text, biker_give_force, biker_take_force)
     swim_text = "swimmers"
     swim_group_id = swim_text
     swim_give_force = 29
     swim_take_force = 32
-    swim_awardlink = awardheir_shop(swim_group_id, swim_give_force, swim_take_force)
-    x_memberships = {
-        swim_awardlink.group_id: swim_awardlink,
-        biker_awardlink.group_id: biker_awardlink,
+    swim_awardheir = awardheir_shop(swim_group_id, swim_give_force, swim_take_force)
+    x_awardheirs = {
+        swim_awardheir.group_id: swim_awardheir,
+        biker_awardheir.group_id: biker_awardheir,
     }
     sport_text = "sport"
-    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_memberships)
+    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_awardheirs)
     assert sport_idea._fund_coin == 1
     assert len(sport_idea._awardheirs) == 2
     swim_awardheir = sport_idea._awardheirs.get(swim_text)
-    assert swim_awardheir._fund_give is None
-    assert swim_awardheir._fund_take is None
+    assert not swim_awardheir._fund_give
+    assert not swim_awardheir._fund_take
     biker_awardheir = sport_idea._awardheirs.get(biker_text)
-    assert biker_awardheir._fund_give is None
-    assert biker_awardheir._fund_take is None
+    assert not biker_awardheir._fund_give
+    assert not biker_awardheir._fund_take
 
     # WHEN
     sport_idea._fund_onset = 91
@@ -382,330 +366,6 @@ def test_IdeaUnit_clear_all_acct_cred_debt_ClearsCorrectly():
     # THEN
     assert ball_idea._all_acct_cred is None
     assert ball_idea._all_acct_debt is None
-
-
-def test_get_kids_in_range_GetsCorrectIdeas():
-    # ESTABLISH
-    mon366_text = "366months"
-    mon366_idea = ideaunit_shop(_label=mon366_text, _begin=0, _close=366)
-    jan_text = "Jan"
-    feb29_text = "Feb29"
-    mar_text = "Mar"
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(_label=jan_text, _begin=0, _close=31))
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(_label=feb29_text, _begin=31, _close=60))
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(_label=mar_text, _begin=31, _close=91))
-
-    # WHEN / THEN
-    assert len(mon366_idea.get_kids_in_range(begin=100, close=120)) == 0
-    assert len(mon366_idea.get_kids_in_range(begin=0, close=31)) == 1
-    assert len(mon366_idea.get_kids_in_range(begin=5, close=5)) == 1
-    assert len(mon366_idea.get_kids_in_range(begin=0, close=61)) == 3
-    assert mon366_idea.get_kids_in_range(begin=31, close=31)[0]._label == feb29_text
-
-
-def test_get_obj_from_idea_dict_ReturnsCorrectObj():
-    # ESTABLISH
-    field_text = "_is_expanded"
-    # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: True}, field_text)
-    assert get_obj_from_idea_dict({}, field_text)
-    assert get_obj_from_idea_dict({field_text: False}, field_text) is False
-
-    # ESTABLISH
-    field_text = "pledge"
-    # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: True}, field_text)
-    assert get_obj_from_idea_dict({}, field_text) is False
-    assert get_obj_from_idea_dict({field_text: False}, field_text) is False
-
-    # ESTABLISH
-    field_text = "_problem_bool"
-    # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: True}, field_text)
-    assert get_obj_from_idea_dict({}, field_text) is False
-    assert get_obj_from_idea_dict({field_text: False}, field_text) is False
-
-    # ESTABLISH
-    field_text = "_kids"
-    # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: {}}, field_text) == {}
-    assert get_obj_from_idea_dict({}, field_text) == {}
-
-
-def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
-    # ESTABLISH
-    # WHEN / THEN
-    healerhold_key = "_healerhold"
-    assert get_obj_from_idea_dict({}, healerhold_key) == healerhold_shop()
-
-    # WHEN
-    sue_text = "Sue"
-    zia_text = "Zia"
-    healerhold_dict = {"healerhold_group_ids": [sue_text, zia_text]}
-    ideaunit_dict = {healerhold_key: healerhold_dict}
-
-    # THEN
-    static_healerhold = healerhold_shop()
-    static_healerhold.set_group_id(x_group_id=sue_text)
-    static_healerhold.set_group_id(x_group_id=zia_text)
-    assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) is not None
-    assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
-
-
-def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
-    # ESTABLISH
-    week_text = "weekdays"
-    week_road = create_road(root_label(), week_text)
-    wed_text = "Wednesday"
-    wed_road = create_road(week_road, wed_text)
-    states_text = "nation-state"
-    states_road = create_road(root_label(), states_text)
-    usa_text = "USA"
-    usa_road = create_road(states_road, usa_text)
-
-    wed_premise = premiseunit_shop(need=wed_road)
-    wed_premise._status = True
-    usa_premise = premiseunit_shop(need=usa_road)
-    usa_premise._status = False
-
-    x1_reasonunits = {
-        week_road: reasonunit_shop(
-            base=week_road, premises={wed_premise.need: wed_premise}
-        ),
-        states_road: reasonunit_shop(
-            base=states_road, premises={usa_premise.need: usa_premise}
-        ),
-    }
-    x1_reasonheirs = {
-        week_road: reasonheir_shop(
-            base=week_road, premises={wed_premise.need: wed_premise}, _status=True
-        ),
-        states_road: reasonheir_shop(
-            base=states_road, premises={usa_premise.need: usa_premise}, _status=False
-        ),
-    }
-    biker_group_id = "bikers"
-    biker_give_force = 3.0
-    biker_take_force = 7.0
-    biker_awardlink = awardlink_shop(biker_group_id, biker_give_force, biker_take_force)
-    flyer_group_id = "flyers"
-    flyer_give_force = 6.0
-    flyer_take_force = 9.0
-    flyer_awardlink = awardlink_shop(
-        group_id=flyer_group_id,
-        give_force=flyer_give_force,
-        take_force=flyer_take_force,
-    )
-    biker_and_flyer_awardlinks = {
-        biker_awardlink.group_id: biker_awardlink,
-        flyer_awardlink.group_id: flyer_awardlink,
-    }
-    biker_get_dict = {
-        "group_id": biker_awardlink.group_id,
-        "give_force": biker_awardlink.give_force,
-        "take_force": biker_awardlink.take_force,
-    }
-    flyer_get_dict = {
-        "group_id": flyer_awardlink.group_id,
-        "give_force": flyer_awardlink.give_force,
-        "take_force": flyer_awardlink.take_force,
-    }
-    x1_awardlinks = {biker_group_id: biker_get_dict, flyer_group_id: flyer_get_dict}
-    sue_text = "Sue"
-    yao_text = "Yao"
-    sue_doerunit = doerunit_shop({sue_text: -1, yao_text: -1})
-    yao_healerhold = healerhold_shop({yao_text})
-    casa_text = "casa"
-    casa_road = create_road(root_label(), casa_text)
-    x_problem_bool = True
-    casa_idea = ideaunit_shop(
-        _parent_road=casa_road,
-        _kids=None,
-        _awardlinks=biker_and_flyer_awardlinks,
-        _mass=30,
-        _label=casa_text,
-        _level=1,
-        _reasonunits=x1_reasonunits,
-        _reasonheirs=x1_reasonheirs,
-        _doerunit=sue_doerunit,
-        _healerhold=yao_healerhold,
-        _active=True,
-        _range_source_road="test123",
-        pledge=True,
-        _problem_bool=x_problem_bool,
-    )
-    factunit_x = factunit_shop(base=week_road, pick=week_road, open=5, nigh=59)
-    casa_idea.set_factunit(factunit=factunit_x)
-    casa_idea._originunit.set_originhold(acct_id="Ray", importance=None)
-    casa_idea._originunit.set_originhold(acct_id="Lei", importance=4)
-    x_begin = 11
-    x_close = 12
-    x_addin = 13
-    x_denom = 14
-    x_numor = 15
-    x_reest = 16
-    casa_idea._begin = x_begin
-    casa_idea._close = x_close
-    casa_idea._addin = x_addin
-    casa_idea._denom = x_denom
-    casa_idea._numor = x_numor
-    casa_idea._reest = x_reest
-    casa_idea._uid = 17
-    casa_idea.add_kid(ideaunit_shop("paper"))
-
-    # WHEN
-    casa_dict = casa_idea.get_dict()
-
-    # THEN
-    assert casa_dict is not None
-    assert len(casa_dict["_kids"]) == 1
-    assert casa_dict["_kids"] == casa_idea.get_kids_dict()
-    assert casa_dict["_reasonunits"] == casa_idea.get_reasonunits_dict()
-    assert casa_dict["_awardlinks"] == casa_idea.get_awardlinks_dict()
-    assert casa_dict["_awardlinks"] == x1_awardlinks
-    assert casa_dict["_doerunit"] == sue_doerunit.get_dict()
-    assert casa_dict["_healerhold"] == yao_healerhold.get_dict()
-    assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
-    assert casa_dict["_mass"] == casa_idea._mass
-    assert casa_dict["_label"] == casa_idea._label
-    assert casa_dict["_uid"] == casa_idea._uid
-    assert casa_dict["_begin"] == casa_idea._begin
-    assert casa_dict["_close"] == casa_idea._close
-    assert casa_dict["_numor"] == casa_idea._numor
-    assert casa_dict["_denom"] == casa_idea._denom
-    assert casa_dict["_reest"] == casa_idea._reest
-    assert casa_dict["_range_source_road"] == casa_idea._range_source_road
-    assert casa_dict["pledge"] == casa_idea.pledge
-    assert casa_dict["_problem_bool"] == casa_idea._problem_bool
-    assert casa_dict["_problem_bool"] == x_problem_bool
-    assert casa_idea._is_expanded
-    assert casa_dict.get("_is_expanded") is None
-    assert len(casa_dict["_factunits"]) == len(casa_idea.get_factunits_dict())
-
-
-def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
-    # ESTABLISH
-    casa_idea = ideaunit_shop()
-
-    # WHEN
-    casa_dict = casa_idea.get_dict()
-
-    # THEN
-    assert casa_dict is not None
-    assert casa_dict == {"_mass": 1}
-
-
-def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
-    # ESTABLISH
-    casa_idea = ideaunit_shop()
-    casa_idea._is_expanded = False
-    casa_idea.pledge = True
-    ignore_text = "ignore"
-
-    a_text = "a"
-    a_road = create_road(root_label(), a_text)
-    casa_idea.set_factunit(factunit_shop(a_road, a_road))
-
-    yao_text = "Yao"
-    casa_idea.set_awardlink(awardlink_shop(yao_text))
-
-    x_doerunit = casa_idea._doerunit
-    x_doerunit.set_grouphold(group_id=yao_text)
-
-    x_originunit = casa_idea._originunit
-    x_originunit.set_originhold(yao_text, 1)
-
-    clean_text = "clean"
-    casa_idea.add_kid(ideaunit_shop(clean_text))
-
-    assert not casa_idea._is_expanded
-    assert casa_idea.pledge
-    assert casa_idea._factunits is not None
-    assert casa_idea._awardlinks is not None
-    assert casa_idea._doerunit is not None
-    assert casa_idea._originunit is not None
-    assert casa_idea._kids != {}
-
-    # WHEN
-    casa_dict = casa_idea.get_dict()
-
-    # THEN
-    assert casa_dict.get("_is_expanded") is False
-    assert casa_dict.get("pledge")
-    assert casa_dict.get("_factunits") is not None
-    assert casa_dict.get("_awardlinks") is not None
-    assert casa_dict.get("_doerunit") is not None
-    assert casa_dict.get("_originunit") is not None
-    assert casa_dict.get("_kids") is not None
-
-
-def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
-    # ESTABLISH
-    casa_idea = ideaunit_shop()
-    assert casa_idea._is_expanded
-    assert casa_idea.pledge is False
-    assert casa_idea._factunits == {}
-    assert casa_idea._awardlinks == {}
-    assert casa_idea._doerunit == doerunit_shop()
-    assert casa_idea._healerhold == healerhold_shop()
-    assert casa_idea._originunit == originunit_shop()
-    assert casa_idea._kids == {}
-
-    # WHEN
-    casa_dict = casa_idea.get_dict()
-
-    # THEN
-    assert casa_dict.get("_is_expanded") is None
-    assert casa_dict.get("pledge") is None
-    assert casa_dict.get("_factunits") is None
-    assert casa_dict.get("_awardlinks") is None
-    assert casa_dict.get("_doerunit") is None
-    assert casa_dict.get("_healerhold") is None
-    assert casa_dict.get("_originunit") is None
-    assert casa_dict.get("_kids") is None
-
-
-def test_IdeaUnit_vaild_DenomCorrectInheritsBeginAndClose():
-    # ESTABLISH
-    casa_text = "casa"
-    clean_text = "clean"
-    # parent idea
-    casa_idea = ideaunit_shop(_label=casa_text, _begin=22.0, _close=66.0)
-    # kid idea
-    clean_idea = ideaunit_shop(_label=clean_text, _numor=1, _denom=11.0, _reest=False)
-
-    # WHEN
-    casa_idea.add_kid(idea_kid=clean_idea)
-
-    # THEN
-    assert casa_idea._kids[clean_text]._begin == 2
-    assert casa_idea._kids[clean_text]._close == 6
-    kid_idea_expected = ideaunit_shop(
-        clean_text, _numor=1, _denom=11.0, _reest=False, _begin=2, _close=6
-    )
-    assert casa_idea._kids[clean_text] == kid_idea_expected
-
-
-def test_IdeaUnit_invaild_DenomThrowsError():
-    # ESTABLISH
-    casa_text = "casa"
-    parent_idea = ideaunit_shop(_label=casa_text)
-    casa_text = "casa"
-    casa_road = create_road(root_label(), casa_text)
-    clean_text = "clean"
-    clean_road = create_road(casa_road, clean_text)
-    print(f"{clean_road=}")
-    kid_idea = ideaunit_shop(
-        clean_text, _parent_road=casa_road, _numor=1, _denom=11.0, _reest=False
-    )
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        parent_idea.add_kid(idea_kid=kid_idea)
-    print(f"{str(excinfo.value)=}")
-    assert (
-        str(excinfo.value)
-        == f"Idea {clean_road} cannot have numor,denom,reest if parent does not have begin/close range"
-    )
 
 
 def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
@@ -896,166 +556,6 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
         doerunit=swim_doerunit, parent_doerheir=None, bud_groupboxs=None
     )
     assert sport_idea._doerheir == swim_doerheir
-
-
-def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_idea = ideaunit_shop(_label=nation_text, _parent_road=root_label())
-
-    # WHEN
-    nation_descendants = nation_idea.get_descendant_roads_from_kids()
-
-    # THEN
-    assert nation_descendants == {}
-
-
-def test_IdeaUnit_get_descendants_Returns3DescendantsRoadUnits():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_road = create_road(root_label(), nation_text)
-    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-
-    usa_text = "USA"
-    usa_road = create_road(nation_road, usa_text)
-    usa_idea = ideaunit_shop(usa_text, _parent_road=nation_road)
-    nation_idea.add_kid(idea_kid=usa_idea)
-
-    texas_text = "Texas"
-    texas_road = create_road(usa_road, texas_text)
-    texas_idea = ideaunit_shop(texas_text, _parent_road=usa_road)
-    usa_idea.add_kid(idea_kid=texas_idea)
-
-    iowa_text = "Iowa"
-    iowa_road = create_road(usa_road, iowa_text)
-    iowa_idea = ideaunit_shop(iowa_text, _parent_road=usa_road)
-    usa_idea.add_kid(idea_kid=iowa_idea)
-
-    # WHEN
-    nation_descendants = nation_idea.get_descendant_roads_from_kids()
-
-    # THEN
-    assert len(nation_descendants) == 3
-    assert nation_descendants.get(usa_road) is not None
-    assert nation_descendants.get(texas_road) is not None
-    assert nation_descendants.get(iowa_road) is not None
-
-
-def test_IdeaUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_road = create_road(root_label(), nation_text)
-    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-    nation_idea.add_kid(idea_kid=nation_idea)
-    max_count = 1000
-
-    # WHEN/THEN
-    with pytest_raises(Exception) as excinfo:
-        nation_idea.get_descendant_roads_from_kids()
-    assert (
-        str(excinfo.value)
-        == f"Idea '{nation_idea.get_road()}' either has an infinite loop or more than {max_count} descendants."
-    )
-
-
-def test_IdeaUnit_clear_kids_CorrectlySetsAttr():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_road = create_road(root_label(), nation_text)
-    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-    nation_idea.add_kid(ideaunit_shop("USA", _parent_road=nation_road))
-    nation_idea.add_kid(ideaunit_shop("France", _parent_road=nation_road))
-    assert len(nation_idea._kids) == 2
-
-    # WHEN
-    nation_idea.clear_kids()
-
-    # THEN
-    assert len(nation_idea._kids) == 0
-
-
-def test_IdeaUnit_get_kid_ReturnsCorrectObj():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_road = create_road(root_label(), nation_text)
-    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-
-    usa_text = "USA"
-    usa_road = create_road(nation_road, usa_text)
-    nation_idea.add_kid(ideaunit_shop(usa_text, _parent_road=nation_road))
-
-    france_text = "France"
-    france_road = create_road(nation_road, france_text)
-    nation_idea.add_kid(ideaunit_shop(france_text, _parent_road=nation_road))
-    assert len(nation_idea._kids) == 2
-
-    # WHEN
-    france_idea = nation_idea.get_kid(france_text)
-
-    # THEN
-    assert france_idea._label == france_text
-
-
-def test_IdeaUnit_del_kid_CorrectModifiesAttr():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_road = create_road(root_label(), nation_text)
-    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-
-    usa_text = "USA"
-    usa_road = create_road(nation_road, usa_text)
-    nation_idea.add_kid(ideaunit_shop(usa_text, _parent_road=nation_road))
-
-    france_text = "France"
-    france_road = create_road(nation_road, france_text)
-    nation_idea.add_kid(ideaunit_shop(france_text, _parent_road=nation_road))
-    assert len(nation_idea._kids) == 2
-
-    # WHEN
-    nation_idea.del_kid(france_text)
-
-    # THEN
-    assert len(nation_idea._kids) == 1
-
-
-def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_road = create_road(root_label(), nation_text)
-    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-    usa_text = "USA"
-    usa_idea = ideaunit_shop(usa_text, _parent_road=nation_road)
-    nation_idea.add_kid(usa_idea)
-    france_text = "France"
-    france_idea = ideaunit_shop(france_text, _parent_road=nation_road)
-    nation_idea.add_kid(france_idea)
-
-    # WHEN / THEN
-    assert nation_idea.get_kids_mass_sum() == 2
-
-
-def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
-    # ESTABLISH
-    nation_text = "nation-state"
-    nation_road = create_road(root_label(), nation_text)
-    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-    usa_text = "USA"
-    usa_idea = ideaunit_shop(usa_text, _mass=0, _parent_road=nation_road)
-    nation_idea.add_kid(usa_idea)
-    france_text = "France"
-    france_idea = ideaunit_shop(france_text, _mass=0, _parent_road=nation_road)
-    nation_idea.add_kid(france_idea)
-
-    # WHEN / THEN
-    assert nation_idea.get_kids_mass_sum() == 0
-
-    # WHEN
-    france_text = "France"
-    france_idea = ideaunit_shop(france_text, _mass=3, _parent_road=nation_road)
-    nation_idea.add_kid(france_idea)
-
-    # WHEN / THEN
-    assert nation_idea.get_kids_mass_sum() == 3
 
 
 def test_IdeaUnit_get_fund_share_ReturnsObj():
