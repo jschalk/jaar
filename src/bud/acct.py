@@ -204,8 +204,8 @@ class AcctUnit(AcctCore):
         return {
             x_membership.group_id: {
                 "group_id": x_membership.group_id,
-                "credit_score": x_membership.credit_vote,
-                "debtit_score": x_membership.debtit_vote,
+                "credit_vote": x_membership.credit_vote,
+                "debtit_vote": x_membership.debtit_vote,
             }
             for x_membership in self._memberships.values()
         }

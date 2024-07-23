@@ -12,6 +12,7 @@ from src.bud.bud import (
 )
 from src.bud.examples.example_buds import (
     budunit_v001,
+    budunit_v002,
     get_budunit_x1_3levels_1reason_1facts,
     get_budunit_base_time_example,
 )
@@ -477,7 +478,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_GroupExample():
     assert after_yao_acctunit._road_delimiter == slash_delimiter
 
 
-def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_mass():
+def test_budunit_get_from_json_ExportCorrectyExportsBudUnit_mass():
     # ESTABLISH
     x1_bud = budunit_v001()
     x1_bud._tally = 15
@@ -494,6 +495,16 @@ def test_budunit_get_from_json_jsonExportCorrectyExportsBudUnit_mass():
     assert x1_bud._idearoot._mass == 1
     assert x1_bud._idearoot._mass == x2_bud._idearoot._mass
     assert x1_bud._idearoot._kids == x2_bud._idearoot._kids
+
+
+def test_budunit_get_from_json_CorrectlyLoads_membership_credit_vote():
+    # ESTABLISH / WHEN
+    x2_bud = budunit_v002()
+
+    # THEN
+    anna_text = "Anna"
+    anna_acctunit = x2_bud.get_acct(anna_text)
+    assert anna_acctunit.get_membership(",Family").credit_vote == 6.2
 
 
 def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():

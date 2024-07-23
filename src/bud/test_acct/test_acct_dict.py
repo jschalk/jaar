@@ -12,13 +12,13 @@ from pytest import raises as pytest_raises
 def test_AcctUnit_get_memberships_dict_ReturnObj():
     # ESTABLISH
     sue_text = "Sue"
-    sue_credit_score = 11
-    sue_debtit_score = 13
+    sue_credit_vote = 11
+    sue_debtit_vote = 13
     run_text = ",Run"
-    run_credit_score = 17
-    run_debtit_score = 23
-    sue_membership = membership_shop(sue_text, sue_credit_score, sue_debtit_score)
-    run_membership = membership_shop(run_text, run_credit_score, run_debtit_score)
+    run_credit_vote = 17
+    run_debtit_vote = 23
+    sue_membership = membership_shop(sue_text, sue_credit_vote, sue_debtit_vote)
+    run_membership = membership_shop(run_text, run_credit_vote, run_debtit_vote)
     sue_acctunit = acctunit_shop(sue_text)
     sue_acctunit.set_membership(sue_membership)
     sue_acctunit.set_membership(run_membership)
@@ -33,13 +33,13 @@ def test_AcctUnit_get_memberships_dict_ReturnObj():
     run_membership_dict = sue_memberships_dict.get(run_text)
     assert sue_membership_dict == {
         "group_id": sue_text,
-        "credit_score": sue_credit_score,
-        "debtit_score": sue_debtit_score,
+        "credit_vote": sue_credit_vote,
+        "debtit_vote": sue_debtit_vote,
     }
     assert run_membership_dict == {
         "group_id": run_text,
-        "credit_score": run_credit_score,
-        "debtit_score": run_debtit_score,
+        "credit_vote": run_credit_vote,
+        "debtit_vote": run_debtit_vote,
     }
 
 
@@ -71,8 +71,8 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
         "credit_score": bob_credit_score,
         "debtit_score": bob_debtit_score,
         "_memberships": {
-            bob_text: {"group_id": bob_text, "credit_score": 1, "debtit_score": 1},
-            run_text: {"group_id": run_text, "credit_score": 1, "debtit_score": 1},
+            bob_text: {"group_id": bob_text, "credit_vote": 1, "debtit_vote": 1},
+            run_text: {"group_id": run_text, "credit_vote": 1, "debtit_vote": 1},
         },
     }
 
@@ -211,8 +211,14 @@ def test_acctunit_get_from_dict_Returns_memberships():
     before_yao_acctunit = acctunit_shop(yao_text, _road_delimiter=slash_text)
     ohio_text = f"{slash_text}ohio"
     iowa_text = f"{slash_text}iowa"
-    before_yao_acctunit.set_membership(membership_shop(ohio_text))
-    before_yao_acctunit.set_membership(membership_shop(iowa_text))
+    ohio_credit_vote = 90
+    ohio_debtit_vote = 901
+    iowa_credit_vote = 902
+    iowa_debtit_vote = 903
+    ohio_membership = membership_shop(ohio_text, ohio_credit_vote, ohio_debtit_vote)
+    iowa_membership = membership_shop(iowa_text, iowa_credit_vote, iowa_debtit_vote)
+    before_yao_acctunit.set_membership(ohio_membership)
+    before_yao_acctunit.set_membership(iowa_membership)
     yao_dict = before_yao_acctunit.get_dict()
 
     # WHEN
