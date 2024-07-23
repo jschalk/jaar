@@ -1081,17 +1081,18 @@ class BudUnit:
         pledge_item = self.get_idea_obj(task_road)
         pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
 
+    def get_credit_ledger_debtit_ledger(
+        self,
+    ) -> tuple[dict[str:float], dict[str:float]]:
+        credit_ledger = {}
+        debtit_ledger = {}
+        for x_acctunit in self._accts.values():
+            credit_ledger[x_acctunit.acct_id] = x_acctunit.credit_score
+            debtit_ledger[x_acctunit.acct_id] = x_acctunit.debtit_score
+        return credit_ledger, debtit_ledger
+
     def _allot_offtrack_fund(self):
-        x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
-        x_offtrack_fund = self._offtrack_fund
-        fund_give_allot = allot_scale(credor_ledger, x_offtrack_fund, self._fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, x_offtrack_fund, self._fund_coin)
-        for x_acct_id, acct_fund_give in fund_give_allot.items():
-            self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
-        for x_acct_id, acct_fund_take in fund_take_allot.items():
-            self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
+        self._add_to_acctunits_fund_give_take(self._offtrack_fund)
 
     def get_acctunits_credit_score_sum(self) -> float:
         return sum(acctunit.get_credit_score() for acctunit in self._accts.values())
@@ -1100,9 +1101,7 @@ class BudUnit:
         return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
-        x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
+        credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
         fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
         fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
         for x_acct_id, acct_fund_give in fund_give_allot.items():
@@ -1111,9 +1110,7 @@ class BudUnit:
             self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
-        x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
+        credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
         fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
         fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
         for x_acct_id, acct_fund_give in fund_give_allot.items():
@@ -1373,9 +1370,7 @@ class BudUnit:
     def _calc_acctunit_metrics(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
-        x_acctunits = self._accts.values()
-        credor_ledger = {x_acct.acct_id: x_acct.credit_score for x_acct in x_acctunits}
-        debtor_ledger = {x_acct.acct_id: x_acct.debtit_score for x_acct in x_acctunits}
+        credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
         credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
         debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
         for x_acct_id, acct_credor_pool in credor_allot.items():
