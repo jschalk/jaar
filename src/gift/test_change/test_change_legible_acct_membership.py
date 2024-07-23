@@ -10,17 +10,17 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
-    credit_weight_text = "credit_weight"
-    debtit_weight_text = "debtit_weight"
+    credit_vote_text = "credit_vote"
+    debtit_vote_text = "debtit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    credit_weight_value = 81
-    debtit_weight_value = 43
+    credit_vote_value = 81
+    debtit_vote_value = 43
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(group_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credit_weight_text, credit_weight_value)
-    yao_atomunit.set_arg(debtit_weight_text, debtit_weight_value)
+    yao_atomunit.set_arg(credit_vote_text, credit_vote_value)
+    yao_atomunit.set_arg(debtit_vote_text, debtit_vote_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -29,28 +29,28 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' has new membership {yao_text} with credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
+    x_str = f"Group '{swim_text}' has new membership {yao_text} with credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_weight_debtit_weight():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debtit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
-    credit_weight_text = "credit_weight"
-    debtit_weight_text = "debtit_weight"
+    credit_vote_text = "credit_vote"
+    debtit_vote_text = "debtit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    credit_weight_value = 81
-    debtit_weight_value = 43
+    credit_vote_value = 81
+    debtit_vote_value = 43
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(group_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credit_weight_text, credit_weight_value)
-    yao_atomunit.set_arg(debtit_weight_text, debtit_weight_value)
+    yao_atomunit.set_arg(credit_vote_text, credit_vote_value)
+    yao_atomunit.set_arg(debtit_vote_text, debtit_vote_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -59,25 +59,25 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_weight_deb
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' membership {yao_text} has new credit_weight_value{credit_weight_value} and debtit_weight_value={debtit_weight_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_weight():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
-    credit_weight_text = "credit_weight"
+    credit_vote_text = "credit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    credit_weight_value = 81
+    credit_vote_value = 81
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(group_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(credit_weight_text, credit_weight_value)
+    yao_atomunit.set_arg(credit_vote_text, credit_vote_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -86,25 +86,25 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' membership {yao_text} has new credit_weight_value{credit_weight_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new credit_vote_value{credit_vote_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_weight():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_acct_membership"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
-    debtit_weight_text = "debtit_weight"
+    debtit_vote_text = "debtit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
-    debtit_weight_value = 43
+    debtit_vote_value = 43
     yao_atomunit = atomunit_shop(category, atom_update())
     yao_atomunit.set_arg(group_id_text, swim_text)
     yao_atomunit.set_arg(acct_id_text, yao_text)
-    yao_atomunit.set_arg(debtit_weight_text, debtit_weight_value)
+    yao_atomunit.set_arg(debtit_vote_text, debtit_vote_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)
@@ -113,7 +113,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_weight():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Group '{swim_text}' membership {yao_text} has new debtit_weight_value={debtit_weight_value}."
+    x_str = f"Group '{swim_text}' membership {yao_text} has new debtit_vote_value={debtit_vote_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

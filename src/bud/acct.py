@@ -148,10 +148,10 @@ class AcctUnit(AcctCore):
     def add_membership(
         self,
         group_id: GroupID,
-        credit_weight: float = None,
-        debtit_weight: float = None,
+        credit_vote: float = None,
+        debtit_vote: float = None,
     ):
-        x_membership = membership_shop(group_id, credit_weight, debtit_weight)
+        x_membership = membership_shop(group_id, credit_vote, debtit_vote)
         self.set_membership(x_membership)
 
     def set_membership(self, x_membership: MemberShip):
@@ -183,7 +183,7 @@ class AcctUnit(AcctCore):
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_membership.group_id: x_membership.credit_weight
+            x_membership.group_id: x_membership.credit_vote
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
@@ -193,7 +193,7 @@ class AcctUnit(AcctCore):
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_membership.group_id: x_membership.debtit_weight
+            x_membership.group_id: x_membership.debtit_vote
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
@@ -204,8 +204,8 @@ class AcctUnit(AcctCore):
         return {
             x_membership.group_id: {
                 "group_id": x_membership.group_id,
-                "credit_score": x_membership.credit_weight,
-                "debtit_score": x_membership.debtit_weight,
+                "credit_score": x_membership.credit_vote,
+                "debtit_score": x_membership.debtit_vote,
             }
             for x_membership in self._memberships.values()
         }

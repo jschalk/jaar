@@ -11,11 +11,11 @@
             "normal_table_name": "membership"
         },
         "optional_args": {
-            "credit_weight": {
+            "credit_vote": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "debtit_weight": {
+            "debtit_vote": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
