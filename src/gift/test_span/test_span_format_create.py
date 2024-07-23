@@ -2,9 +2,9 @@ from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.gift.span import (
-    jaar_format_0001_acct_v0_0_0,
-    jaar_format_0002_membership_v0_0_0,
-    jaar_format_0003_ideaunit_v0_0_0,
+    jaar_format_00001_acct_v0_0_0,
+    jaar_format_00002_membership_v0_0_0,
+    jaar_format_00003_ideaunit_v0_0_0,
     create_span,
     real_id_str,
     owner_id_str,
@@ -20,9 +20,10 @@ from src.gift.span import (
     credit_weight_str,
     get_spanref,
 )
+from src.bud.examples.example_buds import budunit_v001
 
 
-def test_create_span_Arg_jaar_format_0001_acct_v0_0_0():
+def test_create_span_Arg_jaar_format_00001_acct_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -40,7 +41,7 @@ def test_create_span_Arg_jaar_format_0001_acct_v0_0_0():
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
 
     # WHEN
-    x_span_name = jaar_format_0001_acct_v0_0_0()
+    x_span_name = jaar_format_00001_acct_v0_0_0()
     acct_dataframe = create_span(sue_budunit, x_span_name)
 
     # THEN
@@ -68,7 +69,7 @@ def test_create_span_Arg_jaar_format_0001_acct_v0_0_0():
     assert len(acct_dataframe) == 3
 
 
-def test_create_span_Arg_jaar_format_0002_membership_v0_0_0():
+def test_create_span_Arg_jaar_format_00002_membership_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -97,7 +98,7 @@ def test_create_span_Arg_jaar_format_0002_membership_v0_0_0():
     yao_acctunit.add_membership(ohio_text, yao_ohio_credit_w, yao_ohio_debtit_w)
 
     # WHEN
-    x_span_name = jaar_format_0002_membership_v0_0_0()
+    x_span_name = jaar_format_00002_membership_v0_0_0()
     membership_dataframe = create_span(sue_budunit, x_span_name)
 
     # THEN
@@ -135,7 +136,7 @@ def test_create_span_Arg_jaar_format_0002_membership_v0_0_0():
     assert len(membership_dataframe) == 7
 
 
-def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
+def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -150,7 +151,7 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
-    x_span_name = jaar_format_0003_ideaunit_v0_0_0()
+    x_span_name = jaar_format_00003_ideaunit_v0_0_0()
     ideaunit_format = create_span(sue_budunit, x_span_name)
 
     # THEN
@@ -170,5 +171,17 @@ def test_create_span_Arg_jaar_format_0003_ideaunit_v0_0_0():
     assert ideaunit_format.loc[1, parent_road_str()] == casa_road
     assert ideaunit_format.loc[1, label_str()] == clean_text
     assert ideaunit_format.loc[1, mass_str()] == 1
-
     assert len(ideaunit_format) == 2
+
+
+def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
+    # ESTABLISH / WHEN
+    x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+
+    # WHEN
+    ideaunit_format = create_span(budunit_v001(), x_span_name)
+
+    # THEN
+    array_headers = list(ideaunit_format.columns)
+    assert array_headers == get_spanref(x_span_name).get_headers_list()
+    assert len(ideaunit_format) == 252

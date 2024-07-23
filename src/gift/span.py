@@ -113,23 +113,23 @@ def get_span_formats_dir() -> str:
     return f"{config_file_dir()}/span_formats"
 
 
-def jaar_format_0001_acct_v0_0_0() -> str:
-    return "jaar_format_0001_acct_v0_0_0"
+def jaar_format_00001_acct_v0_0_0() -> str:
+    return "jaar_format_00001_acct_v0_0_0"
 
 
-def jaar_format_0002_membership_v0_0_0() -> str:
-    return "jaar_format_0002_membership_v0_0_0"
+def jaar_format_00002_membership_v0_0_0() -> str:
+    return "jaar_format_00002_membership_v0_0_0"
 
 
-def jaar_format_0003_ideaunit_v0_0_0() -> str:
-    return "jaar_format_0003_ideaunit_v0_0_0"
+def jaar_format_00003_ideaunit_v0_0_0() -> str:
+    return "jaar_format_00003_ideaunit_v0_0_0"
 
 
 def get_span_filenames() -> set[str]:
     return {
-        jaar_format_0001_acct_v0_0_0(),
-        jaar_format_0002_membership_v0_0_0(),
-        jaar_format_0003_ideaunit_v0_0_0(),
+        jaar_format_00001_acct_v0_0_0(),
+        jaar_format_00002_membership_v0_0_0(),
+        jaar_format_00003_ideaunit_v0_0_0(),
     }
 
 
@@ -203,7 +203,7 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
     sorting_columns = x_spanref.get_headers_list()
     d2_list = []
 
-    if span_name == jaar_format_0001_acct_v0_0_0():
+    if span_name == jaar_format_00001_acct_v0_0_0():
         d2_list = [
             [
                 x_budunit._real_id,
@@ -215,7 +215,7 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
             for x_atomunit in sorted_atomunits
         ]
 
-    elif span_name == jaar_format_0002_membership_v0_0_0():
+    elif span_name == jaar_format_00002_membership_v0_0_0():
         d2_list = [
             [
                 x_budunit._real_id,
@@ -227,7 +227,7 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-    elif span_name == jaar_format_0003_ideaunit_v0_0_0():
+    elif span_name == jaar_format_00003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
             pledge_bool = x_atomunit.get_value("pledge")
             pledge_yes_str = ""

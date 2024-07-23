@@ -22,9 +22,9 @@ from src.gift.span import (
     # must_be_bool_str,
     get_span_formats_dir,
     get_span_filenames,
-    jaar_format_0001_acct_v0_0_0,
-    jaar_format_0002_membership_v0_0_0,
-    jaar_format_0003_ideaunit_v0_0_0,
+    jaar_format_00001_acct_v0_0_0,
+    jaar_format_00002_membership_v0_0_0,
+    jaar_format_00003_ideaunit_v0_0_0,
     _get_headers_list,
     create_span_dataframe,
     get_spanref,
@@ -41,11 +41,11 @@ def test_config_str_functions_ReturnObjs():
     assert credit_score_str() == "credit_score"
     assert debtit_weight_str() == "debtit_weight"
     assert credit_weight_str() == "credit_weight"
-    assert jaar_format_0001_acct_v0_0_0() == "jaar_format_0001_acct_v0_0_0"
-    x0002_span = "jaar_format_0002_membership_v0_0_0"
-    assert jaar_format_0002_membership_v0_0_0() == x0002_span
-    x0003_span = "jaar_format_0003_ideaunit_v0_0_0"
-    assert jaar_format_0003_ideaunit_v0_0_0() == x0003_span
+    assert jaar_format_00001_acct_v0_0_0() == "jaar_format_00001_acct_v0_0_0"
+    x0002_span = "jaar_format_00002_membership_v0_0_0"
+    assert jaar_format_00002_membership_v0_0_0() == x0002_span
+    x0003_span = "jaar_format_00003_ideaunit_v0_0_0"
+    assert jaar_format_00003_ideaunit_v0_0_0() == x0003_span
 
 
 def test_get_span_formats_dir_ReturnsObj():
@@ -61,20 +61,20 @@ def test_get_span_filenames_ReturnsCorrectObj():
     x_filenames = get_span_filenames()
     # THEN
     print(f"{x_filenames=}")
-    assert jaar_format_0001_acct_v0_0_0() in x_filenames
-    assert jaar_format_0002_membership_v0_0_0() in x_filenames
-    assert jaar_format_0003_ideaunit_v0_0_0() in x_filenames
+    assert jaar_format_00001_acct_v0_0_0() in x_filenames
+    assert jaar_format_00002_membership_v0_0_0() in x_filenames
+    assert jaar_format_00003_ideaunit_v0_0_0() in x_filenames
 
 
 def test_get_spanref_ReturnsObj():
     # ESTABLISH
-    span_name_0001 = jaar_format_0001_acct_v0_0_0()
+    span_name_00001 = jaar_format_00001_acct_v0_0_0()
 
     # WHEN
-    x_spanref = get_spanref(span_name_0001)
+    x_spanref = get_spanref(span_name_00001)
 
     # THEN
-    assert x_spanref.span_name == span_name_0001
+    assert x_spanref.span_name == span_name_00001
     assert x_spanref.atom_category == bud_acctunit_text()
     assert x_spanref._spancolumns != {}
     assert len(x_spanref._spancolumns) == 5
@@ -82,11 +82,11 @@ def test_get_spanref_ReturnsObj():
 
 def test_get_headers_list_ReturnsObj():
     # ESTABLISH / WHEN
-    format_0001_headers = _get_headers_list(jaar_format_0001_acct_v0_0_0())
+    format_00001_headers = _get_headers_list(jaar_format_00001_acct_v0_0_0())
 
     # THEN
-    # print(f"{format_0001_headers=}")
-    assert format_0001_headers == [
+    # print(f"{format_00001_headers=}")
+    assert format_00001_headers == [
         "real_id",
         "owner_id",
         "acct_id",
@@ -99,9 +99,9 @@ def test_create_span_dataframe_ReturnsCorrectObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
-    x_df = create_span_dataframe(empty_d2, jaar_format_0001_acct_v0_0_0())
+    x_df = create_span_dataframe(empty_d2, jaar_format_00001_acct_v0_0_0())
     # THEN
-    assert list(x_df.columns) == _get_headers_list(jaar_format_0001_acct_v0_0_0())
+    assert list(x_df.columns) == _get_headers_list(jaar_format_00001_acct_v0_0_0())
 
 
 def for_all_spans_create_span_dataframe():
@@ -134,20 +134,20 @@ def test_span_FilesExist():
     assert len(span_filenames) == len(get_span_filenames())
 
 
-def test_get_spanref_HasCorrectAttrs_jaar_format_0001_acct_v0_0_0():
+def test_get_spanref_HasCorrectAttrs_jaar_format_00001_acct_v0_0_0():
     # ESTABLISH
-    span_name = jaar_format_0001_acct_v0_0_0()
+    span_name = jaar_format_00001_acct_v0_0_0()
 
     # WHEN
-    format_0001_spanref = get_spanref(span_name)
+    format_00001_spanref = get_spanref(span_name)
 
     # THEN
-    real_id_spancolumn = format_0001_spanref.get_spancolumn(real_id_str())
-    owner_id_spancolumn = format_0001_spanref.get_spancolumn(owner_id_str())
-    acct_id_spancolumn = format_0001_spanref.get_spancolumn(acct_id_str())
-    credit_score_spancolumn = format_0001_spanref.get_spancolumn(credit_score_str())
-    debtit_score_spancolumn = format_0001_spanref.get_spancolumn(debtit_score_str())
-    assert len(format_0001_spanref._spancolumns) == 5
+    real_id_spancolumn = format_00001_spanref.get_spancolumn(real_id_str())
+    owner_id_spancolumn = format_00001_spanref.get_spancolumn(owner_id_str())
+    acct_id_spancolumn = format_00001_spanref.get_spancolumn(acct_id_str())
+    credit_score_spancolumn = format_00001_spanref.get_spancolumn(credit_score_str())
+    debtit_score_spancolumn = format_00001_spanref.get_spancolumn(debtit_score_str())
+    assert len(format_00001_spanref._spancolumns) == 5
 
     assert real_id_spancolumn.column_order == 0
     assert owner_id_spancolumn.column_order == 1
@@ -156,21 +156,21 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0001_acct_v0_0_0():
     assert debtit_score_spancolumn.column_order == 4
 
 
-def test_get_spanref_HasCorrectAttrs_jaar_format_0002_membership_v0_0_0():
+def test_get_spanref_HasCorrectAttrs_jaar_format_00002_membership_v0_0_0():
     # ESTABLISH
-    span_name = jaar_format_0002_membership_v0_0_0()
+    span_name = jaar_format_00002_membership_v0_0_0()
 
     # WHEN
-    format_0002_spanref = get_spanref(span_name)
+    format_00002_spanref = get_spanref(span_name)
 
     # THEN
-    real_id_spancolumn = format_0002_spanref.get_spancolumn(real_id_str())
-    owner_id_spancolumn = format_0002_spanref.get_spancolumn(owner_id_str())
-    acct_id_spancolumn = format_0002_spanref.get_spancolumn(acct_id_str())
-    group_id_spancolumn = format_0002_spanref.get_spancolumn(group_id_str())
-    credit_weight_spancolumn = format_0002_spanref.get_spancolumn(credit_weight_str())
-    debtit_weight_spancolumn = format_0002_spanref.get_spancolumn(debtit_weight_str())
-    assert len(format_0002_spanref._spancolumns) == 6
+    real_id_spancolumn = format_00002_spanref.get_spancolumn(real_id_str())
+    owner_id_spancolumn = format_00002_spanref.get_spancolumn(owner_id_str())
+    acct_id_spancolumn = format_00002_spanref.get_spancolumn(acct_id_str())
+    group_id_spancolumn = format_00002_spanref.get_spancolumn(group_id_str())
+    credit_weight_spancolumn = format_00002_spanref.get_spancolumn(credit_weight_str())
+    debtit_weight_spancolumn = format_00002_spanref.get_spancolumn(debtit_weight_str())
+    assert len(format_00002_spanref._spancolumns) == 6
 
     assert real_id_spancolumn.column_order == 0
     assert owner_id_spancolumn.column_order == 1
@@ -180,24 +180,24 @@ def test_get_spanref_HasCorrectAttrs_jaar_format_0002_membership_v0_0_0():
     assert credit_weight_spancolumn.column_order == 4
 
 
-def test_get_spanref_HasCorrectAttrs_jaar_format_0003_ideaunit_v0_0_0():
+def test_get_spanref_HasCorrectAttrs_jaar_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
-    span_name = jaar_format_0003_ideaunit_v0_0_0()
+    span_name = jaar_format_00003_ideaunit_v0_0_0()
 
     # WHEN
-    format_0003_spanref = get_spanref(span_name)
+    format_00003_spanref = get_spanref(span_name)
 
     # THEN
-    real_id_spancolumn = format_0003_spanref.get_spancolumn(real_id_str())
-    owner_id_spancolumn = format_0003_spanref.get_spancolumn(owner_id_str())
-    parent_road_spancolumn = format_0003_spanref.get_spancolumn(parent_road_str())
-    label_spancolumn = format_0003_spanref.get_spancolumn(label_str())
-    print(f"{format_0003_spanref._spancolumns.keys()=}")
-    print(f"{format_0003_spanref._spancolumns.get(mass_str())=}")
-    mass_spancolumn = format_0003_spanref.get_spancolumn(mass_str())
+    real_id_spancolumn = format_00003_spanref.get_spancolumn(real_id_str())
+    owner_id_spancolumn = format_00003_spanref.get_spancolumn(owner_id_str())
+    parent_road_spancolumn = format_00003_spanref.get_spancolumn(parent_road_str())
+    label_spancolumn = format_00003_spanref.get_spancolumn(label_str())
+    print(f"{format_00003_spanref._spancolumns.keys()=}")
+    print(f"{format_00003_spanref._spancolumns.get(mass_str())=}")
+    mass_spancolumn = format_00003_spanref.get_spancolumn(mass_str())
     print(f"{mass_spancolumn=}")
-    pledge_spancolumn = format_0003_spanref.get_spancolumn(pledge_str())
-    assert len(format_0003_spanref._spancolumns) == 6
+    pledge_spancolumn = format_00003_spanref.get_spancolumn(pledge_str())
+    assert len(format_00003_spanref._spancolumns) == 6
 
     assert real_id_spancolumn.column_order == 0
     assert owner_id_spancolumn.column_order == 1
