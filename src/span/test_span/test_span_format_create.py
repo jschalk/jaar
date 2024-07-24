@@ -1,4 +1,4 @@
-from src._instrument.file import delete_dir, open_file
+from src._instrument.file import delete_dir, open_file, create_file_path
 from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
@@ -210,7 +210,7 @@ def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV():
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
     j1_spanname = jaar_format_00001_acct_v0_0_0()
     acct_filename = f"{sue_text}_acct_example_00.csv"
-    csv_example_path = f"{span_examples_dir()}/{acct_filename}"
+    csv_example_path = create_file_path(span_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
     delete_dir(csv_example_path)
     assert not os_path_exists(csv_example_path)

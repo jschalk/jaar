@@ -1,4 +1,4 @@
-from src._instrument.file import open_file
+from src._instrument.file import open_file, delete_dir, create_file_path
 from src._instrument.python import get_dict_from_json
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
@@ -17,8 +17,10 @@ from src.gift.atom_config import (
 )
 from src.gift.atom_config import config_file_dir
 from src.gift.change import changeunit_shop, get_filtered_changeunit
-from pandas import DataFrame, concat
+from src.listen.hubunit import hubunit_shop
+from pandas import DataFrame, read_csv
 from dataclasses import dataclass
+from os.path import exists as os_path_exists
 
 
 def real_id_str() -> str:
@@ -253,12 +255,22 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
     return x_span
 
 
-def save_span_csv(x_spanname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
+def save_span_csv(
+    x_spanname: str,
+    x_budunit: BudUnit,
+    x_dir: str,
+    x_filename: str,
+    x_replace: bool = True,
+):
     x_dataframe = create_span_df(x_budunit, x_spanname)
-    csv_path = f"{x_dir}/{x_filename}"
-    print(f"{csv_path=}")
+    csv_path = create_file_path(x_dir, x_filename)
     x_dataframe.to_csv(csv_path, index=False)
 
 
-def open_span_csv():
-    pass
+def open_span_csv(x_file_dir: str, x_filename: str) -> DataFrame:
+    return read_csv(create_file_path(x_file_dir, x_filename))
+
+
+def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: str):
+
+    x_hubunit = hubunit_shop(reals_dir=reals_dir, real_id="x")

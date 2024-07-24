@@ -1,4 +1,5 @@
 from src._instrument.file import (
+    create_file_path as f_path,
     get_directory_path,
     save_file,
     open_file,
@@ -82,15 +83,15 @@ class _econ_roadMissingException(Exception):
 
 
 def get_econ_dutys_dir(x_econ_dir: str) -> str:
-    return f"{x_econ_dir}/{dutys_str()}"
+    return f_path(x_econ_dir, dutys_str())
 
 
 def get_econ_jobs_dir(x_econ_dir: str) -> str:
-    return f"{x_econ_dir}/{jobs_str()}"
+    return f_path(x_econ_dir, jobs_str())
 
 
 def get_econ_grades_dir(x_econ_dir: str) -> str:
-    return f"{x_econ_dir}/{grades_folder()}"
+    return f_path(x_econ_dir, grades_folder())
 
 
 @dataclass
@@ -107,13 +108,13 @@ class HubUnit:
     econ_money_magnitude: float = None
 
     def real_dir(self) -> str:
-        return f"{self.reals_dir}/{self.real_id}"
+        return f_path(self.reals_dir, self.real_id)
 
     def owners_dir(self) -> str:
         return f"{self.real_dir()}/owners"
 
     def owner_dir(self) -> str:
-        return f"{self.owners_dir()}/{self.owner_id}"
+        return f_path(self.owners_dir(), self.owner_id)
 
     def econs_dir(self) -> str:
         return f"{self.owner_dir()}/econs"
@@ -122,7 +123,7 @@ class HubUnit:
         return f"{self.owner_dir()}/atoms"
 
     def gifts_dir(self) -> str:
-        return f"{self.owner_dir()}/{get_gifts_folder()}"
+        return f_path(self.owner_dir(), get_gifts_folder())
 
     def voice_dir(self) -> str:
         return f"{self.owner_dir()}/voice"
@@ -134,13 +135,13 @@ class HubUnit:
         return get_json_filename(self.owner_id)
 
     def voice_file_path(self) -> str:
-        return f"{self.voice_dir()}/{self.voice_file_name()}"
+        return f_path(self.voice_dir(), self.voice_file_name())
 
     def action_file_name(self) -> str:
         return get_json_filename(self.owner_id)
 
     def action_path(self) -> str:
-        return f"{self.action_dir()}/{self.action_file_name()}"
+        return f_path(self.action_dir(), self.action_file_name())
 
     def save_file_voice(self, file_text: str, replace: bool):
         save_file(
@@ -215,7 +216,7 @@ class HubUnit:
         return f"{atom_number}.json"
 
     def atom_file_path(self, atom_number: int) -> str:
-        return f"{self.atoms_dir()}/{self.atom_file_name(atom_number)}"
+        return f_path(self.atoms_dir(), self.atom_file_name(atom_number))
 
     def _save_valid_atom_file(self, x_atom: AtomUnit, file_number: int):
         save_file(
@@ -266,7 +267,7 @@ class HubUnit:
 
     def gift_file_path(self, gift_id: int) -> bool:
         gift_filename = self.gift_file_name(gift_id)
-        return f"{self.gifts_dir()}/{gift_filename}"
+        return f_path(self.gifts_dir(), gift_filename)
 
     def gift_file_exists(self, gift_id: int) -> bool:
         return os_path_exists(self.gift_file_path(gift_id))
@@ -412,10 +413,10 @@ class HubUnit:
         return treasury_file_name()
 
     def treasury_db_path(self) -> str:
-        return f"{self.econ_dir()}/{treasury_file_name()}"
+        return f_path(self.econ_dir(), treasury_file_name())
 
     def duty_path(self, owner_id: OwnerID) -> str:
-        return f"{self.dutys_dir()}/{self.owner_file_name(owner_id)}"
+        return f_path(self.dutys_dir(), self.owner_file_name(owner_id))
 
     def job_path(self, owner_id: OwnerID) -> str:
         return f"{self.jobs_dir()}/{self.owner_file_name(owner_id)}"
