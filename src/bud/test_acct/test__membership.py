@@ -163,7 +163,7 @@ def test_MemberShip_set_debtit_vote_SetsAttr():
     assert swim_membership.debtit_vote == new_debtit_vote
 
 
-def test_MemberShip_set_debtit_vote_SetsAttr():
+def test_MemberShip_set_debtit_vote_DoesNotSetsAttrNone():
     # ESTABLISH
     swim_text = ",swim"
     swim_credit_vote = 3.0

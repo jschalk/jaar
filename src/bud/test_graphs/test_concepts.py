@@ -13,7 +13,7 @@ from src.bud.graphic import (
 )
 
 
-def test_budunit_explanation_ShowsExplanation0BudConceptGraph():
+def test_budunit_explanation_ShowsExplanation0BudGraph():
     # ESTABLISH / WHEN
     ideatree1 = display_ideatree(get_budunit_with_4_levels())
     ideatree2 = display_ideatree(get_budunit_with_4_levels_and_2reasons(), "Task")

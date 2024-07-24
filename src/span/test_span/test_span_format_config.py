@@ -1,6 +1,6 @@
 from src._instrument.file import dir_files
 from src.gift.atom_config import config_file_dir, bud_acctunit_text
-from src.gift.span import (
+from src.span.span import (
     real_id_str,
     owner_id_str,
     acct_id_str,
@@ -26,7 +26,7 @@ from src.gift.span import (
     jaar_format_00002_membership_v0_0_0,
     jaar_format_00003_ideaunit_v0_0_0,
     _get_headers_list,
-    create_span_dataframe,
+    _generate_span_dataframe,
     get_spanref,
 )
 
@@ -95,30 +95,30 @@ def test_get_headers_list_ReturnsObj():
     ]
 
 
-def test_create_span_dataframe_ReturnsCorrectObj():
+def test__generate_span_dataframe_ReturnsCorrectObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
-    x_df = create_span_dataframe(empty_d2, jaar_format_00001_acct_v0_0_0())
+    x_df = _generate_span_dataframe(empty_d2, jaar_format_00001_acct_v0_0_0())
     # THEN
     assert list(x_df.columns) == _get_headers_list(jaar_format_00001_acct_v0_0_0())
 
 
-def for_all_spans_create_span_dataframe():
+def for_all_spans__generate_span_dataframe():
     # Catching broad exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
     empty_d2 = []
     for x_filename in get_span_filenames():
         try:
-            create_span_dataframe(empty_d2, x_filename)
+            _generate_span_dataframe(empty_d2, x_filename)
         except Exception:
-            print(f"create_span_dataframe failed for {x_filename=}")
+            print(f"_generate_span_dataframe failed for {x_filename=}")
             return False
     return True
 
 
-def test_create_span_dataframe_ReturnsCorrectObjForEvery_span():
+def test__generate_span_dataframe_ReturnsCorrectObjForEvery_span():
     # ESTABLISH / WHEN / THEN
-    assert for_all_spans_create_span_dataframe()
+    assert for_all_spans__generate_span_dataframe()
 
 
 def test_span_FilesExist():

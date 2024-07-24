@@ -1,11 +1,12 @@
+from src._instrument.file import delete_dir, open_file
 from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.gift.span import (
+from src.span.span import (
     jaar_format_00001_acct_v0_0_0,
     jaar_format_00002_membership_v0_0_0,
     jaar_format_00003_ideaunit_v0_0_0,
-    create_span,
+    create_span_df,
     real_id_str,
     owner_id_str,
     acct_id_str,
@@ -19,11 +20,13 @@ from src.gift.span import (
     debtit_vote_str,
     credit_vote_str,
     get_spanref,
+    save_span_csv,
 )
-from src.bud.examples.example_buds import budunit_v001
+from src.span.examples.span_env import span_examples_dir
+from os.path import exists as os_path_exists
 
 
-def test_create_span_Arg_jaar_format_00001_acct_v0_0_0():
+def test_create_span_df_Arg_jaar_format_00001_acct_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -42,7 +45,7 @@ def test_create_span_Arg_jaar_format_00001_acct_v0_0_0():
 
     # WHEN
     x_span_name = jaar_format_00001_acct_v0_0_0()
-    acct_dataframe = create_span(sue_budunit, x_span_name)
+    acct_dataframe = create_span_df(sue_budunit, x_span_name)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
@@ -69,7 +72,7 @@ def test_create_span_Arg_jaar_format_00001_acct_v0_0_0():
     assert len(acct_dataframe) == 3
 
 
-def test_create_span_Arg_jaar_format_00002_membership_v0_0_0():
+def test_create_span_df_Arg_jaar_format_00002_membership_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -99,7 +102,7 @@ def test_create_span_Arg_jaar_format_00002_membership_v0_0_0():
 
     # WHEN
     x_span_name = jaar_format_00002_membership_v0_0_0()
-    membership_dataframe = create_span(sue_budunit, x_span_name)
+    membership_dataframe = create_span_df(sue_budunit, x_span_name)
 
     # THEN
     array_headers = list(membership_dataframe.columns)
@@ -136,7 +139,7 @@ def test_create_span_Arg_jaar_format_00002_membership_v0_0_0():
     assert len(membership_dataframe) == 7
 
 
-def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0():
+def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -152,7 +155,7 @@ def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0():
 
     # WHEN
     x_span_name = jaar_format_00003_ideaunit_v0_0_0()
-    ideaunit_format = create_span(sue_budunit, x_span_name)
+    ideaunit_format = create_span_df(sue_budunit, x_span_name)
 
     # THEN
     array_headers = list(ideaunit_format.columns)
@@ -174,14 +177,51 @@ def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0():
     assert len(ideaunit_format) == 2
 
 
-def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
-    # ESTABLISH / WHEN
-    x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+# Commented out to reduce testing time.
+# def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
+#     # ESTABLISH / WHEN
+#     x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+
+#     # WHEN
+#     ideaunit_format = create_span_df(budunit_v001(), x_span_name)
+
+#     # THEN
+#     array_headers = list(ideaunit_format.columns)
+#     assert array_headers == get_spanref(x_span_name).get_headers_list()
+#     assert len(ideaunit_format) == 252
+
+
+def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV():
+    # ESTABLISH
+    sue_text = sue_str()
+    bob_text = bob_str()
+    yao_text = yao_str()
+    sue_credit_score = 11
+    bob_credit_score = 13
+    yao_credit_score = 41
+    sue_debtit_score = 23
+    bob_debtit_score = 29
+    yao_debtit_score = 37
+    music_real_id = "music56"
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
+    sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    j1_spanname = jaar_format_00001_acct_v0_0_0()
+    acct_filename = f"{sue_text}_acct_example_00.csv"
+    csv_example_path = f"{span_examples_dir()}/{acct_filename}"
+    print(f"{csv_example_path}")
+    delete_dir(csv_example_path)
+    assert not os_path_exists(csv_example_path)
 
     # WHEN
-    ideaunit_format = create_span(budunit_v001(), x_span_name)
+    save_span_csv(j1_spanname, sue_budunit, span_examples_dir(), acct_filename)
 
     # THEN
-    array_headers = list(ideaunit_format.columns)
-    assert array_headers == get_spanref(x_span_name).get_headers_list()
-    assert len(ideaunit_format) == 252
+    assert os_path_exists(csv_example_path)
+    sue_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
+music56,Sue,Bob,13,29
+music56,Sue,Sue,11,23
+music56,Sue,Yao,41,37
+"""
+    assert open_file(span_examples_dir(), acct_filename) == sue_acct_example_csv

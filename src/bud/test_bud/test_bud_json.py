@@ -12,7 +12,6 @@ from src.bud.bud import (
 )
 from src.bud.examples.example_buds import (
     budunit_v001,
-    budunit_v002,
     get_budunit_x1_3levels_1reason_1facts,
     get_budunit_base_time_example,
 )
@@ -301,6 +300,12 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     originholds_text = "_originholds"
     assert len(bud_dict[originunit_text][originholds_text])
 
+    anna_text = "Anna"
+    anna_acctunit = yao_bud.get_acct(anna_text)
+    assert anna_acctunit.get_membership(",Family").credit_vote == 6.2
+    assert yao_bud._accts is not None
+    assert len(yao_bud._accts) == 22
+
 
 def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     # ESTABLISH
@@ -478,7 +483,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_GroupExample():
     assert after_yao_acctunit._road_delimiter == slash_delimiter
 
 
-def test_budunit_get_from_json_ExportCorrectyExportsBudUnit_mass():
+def test_budunit_get_from_json_ExportsBudUnit_mass():
     # ESTABLISH
     x1_bud = budunit_v001()
     x1_bud._tally = 15
@@ -495,16 +500,6 @@ def test_budunit_get_from_json_ExportCorrectyExportsBudUnit_mass():
     assert x1_bud._idearoot._mass == 1
     assert x1_bud._idearoot._mass == x2_bud._idearoot._mass
     assert x1_bud._idearoot._kids == x2_bud._idearoot._kids
-
-
-def test_budunit_get_from_json_CorrectlyLoads_membership_credit_vote():
-    # ESTABLISH / WHEN
-    x2_bud = budunit_v002()
-
-    # THEN
-    anna_text = "Anna"
-    anna_acctunit = x2_bud.get_acct(anna_text)
-    assert anna_acctunit.get_membership(",Family").credit_vote == 6.2
 
 
 def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
@@ -554,12 +549,3 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_philipa_acctunit._memberships == x1_philipa_acctunit._memberships
     assert ccn_bud1 == x1_bud
     assert ccn_dict_of_obj.get(x1_bud._owner_id) == x1_bud
-
-
-def test_budunit_get_from_json_CheckExampleHasCorrectAttrs_budunit_v001():
-    # ESTABLISH / WHEN
-    yao_bud = budunit_v001()
-
-    # THEN
-    assert yao_bud._accts is not None
-    assert len(yao_bud._accts) == 22
