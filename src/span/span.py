@@ -188,11 +188,11 @@ def _get_headers_list(span_name: str) -> list[str]:
     return get_spanref(span_name).get_headers_list()
 
 
-def create_span_dataframe(d2_list: list[list[str]], span_name: str) -> DataFrame:
+def _generate_span_dataframe(d2_list: list[list[str]], span_name: str) -> DataFrame:
     return DataFrame(d2_list, columns=_get_headers_list(span_name))
 
 
-def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
+def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_budunit)
     x_spanref = get_spanref(span_name)
@@ -244,10 +244,21 @@ def create_span(x_budunit: BudUnit, span_name: str) -> DataFrame:
                 ]
             )
 
-    x_span = create_span_dataframe(d2_list, span_name)
+    x_span = _generate_span_dataframe(d2_list, span_name)
     ascending_bools = get_ascending_bools(sorting_columns)
     x_span.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
     x_span.reset_index(inplace=True)
     x_span.drop(columns=["index"], inplace=True)
 
     return x_span
+
+
+def save_span_csv(x_spanname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
+    x_dataframe = create_span_df(x_budunit, x_spanname)
+    csv_path = f"{x_dir}/{x_filename}"
+    print(f"{csv_path=}")
+    x_dataframe.to_csv(csv_path, index=False)
+
+
+def open_span_csv():
+    pass

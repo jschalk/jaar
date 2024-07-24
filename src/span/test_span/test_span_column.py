@@ -1,4 +1,4 @@
-from src.gift.span import SpanColumn, SpanRef, spanref_shop
+from src.span.span import SpanColumn, SpanRef, spanref_shop
 
 
 def test_SpanColumn_Exists():
