@@ -24,6 +24,7 @@ from src.span.span import (
 )
 from src.span.examples.span_env import span_examples_dir
 from os.path import exists as os_path_exists
+from pytest import raises as pytest_raises
 
 
 def test_create_span_df_Arg_jaar_format_00001_acct_v0_0_0():
@@ -215,13 +216,30 @@ def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV():
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_span_csv(j1_spanname, sue_budunit, span_examples_dir(), acct_filename)
+    save_span_csv(
+        j1_spanname, sue_budunit, span_examples_dir(), acct_filename, x_replace=False
+    )
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
+    sue1_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
 music56,Sue,Bob,13,29
 music56,Sue,Sue,11,23
 music56,Sue,Yao,41,37
 """
-    assert open_file(span_examples_dir(), acct_filename) == sue_acct_example_csv
+    assert open_file(span_examples_dir(), acct_filename) == sue1_acct_example_csv
+
+    # WHEN
+    zia_text = "Zia"
+    sue_budunit.add_acctunit(zia_text)
+    save_span_csv(j1_spanname, sue_budunit, span_examples_dir(), acct_filename)
+
+    # THEN
+    assert os_path_exists(csv_example_path)
+    sue2_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
+music56,Sue,Bob,13,29
+music56,Sue,Sue,11,23
+music56,Sue,Yao,41,37
+music56,Sue,Zia,1,1
+"""
+    assert open_file(span_examples_dir(), acct_filename) == sue2_acct_example_csv
