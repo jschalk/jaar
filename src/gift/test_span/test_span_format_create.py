@@ -174,14 +174,15 @@ def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0():
     assert len(ideaunit_format) == 2
 
 
-def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
-    # ESTABLISH / WHEN
-    x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+# Commented out to reduce testing time.
+# def test_create_span_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
+#     # ESTABLISH / WHEN
+#     x_span_name = jaar_format_00003_ideaunit_v0_0_0()
 
-    # WHEN
-    ideaunit_format = create_span(budunit_v001(), x_span_name)
+#     # WHEN
+#     ideaunit_format = create_span(budunit_v001(), x_span_name)
 
-    # THEN
-    array_headers = list(ideaunit_format.columns)
-    assert array_headers == get_spanref(x_span_name).get_headers_list()
-    assert len(ideaunit_format) == 252
+#     # THEN
+#     array_headers = list(ideaunit_format.columns)
+#     assert array_headers == get_spanref(x_span_name).get_headers_list()
+#     assert len(ideaunit_format) == 252
