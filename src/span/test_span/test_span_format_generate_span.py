@@ -55,18 +55,15 @@ def test_create_changeunit_Arg_jaar_format_00001_acct_v0_0_0():
 
     # THEN
     assert sue_acct_changeunit
-    sue_required_args = {acct_id_str(): sue_text}
-    sue_optional_args = {
-        credit_score_str(): sue_credit_score,
-        debtit_score_str(): sue_debtit_score,
-    }
-    sue_atomunit = atomunit_shop(
-        bud_acctunit_text(), atom_insert(), sue_required_args, sue_optional_args
-    )
+    sue_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
+    sue_atomunit.set_arg(acct_id_str(), sue_text)
+    sue_atomunit.set_arg(credit_score_str(), sue_credit_score)
+    sue_atomunit.set_arg(debtit_score_str(), sue_debtit_score)
     sue_atomunit.set_atom_order()
-    bob_atomunit = atomunit_shop(
-        bud_acctunit_text(), atom_insert(), sue_required_args, sue_optional_args
-    )
+    bob_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
+    bob_atomunit.set_arg(acct_id_str(), bob_text)
+    bob_atomunit.set_arg(credit_score_str(), bob_credit_score)
+    bob_atomunit.set_arg(debtit_score_str(), bob_debtit_score)
     bob_atomunit.set_atom_order()
     # print(f"{sue_acct_changeunit.get_ordered_dict()=}")
     # print(
