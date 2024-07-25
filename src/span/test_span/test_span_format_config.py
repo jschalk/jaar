@@ -29,6 +29,7 @@ from src.span.span import (
     _generate_span_dataframe,
     get_spanref,
 )
+from src.span.examples.span_env import src_span_dir
 
 
 def test_config_str_functions_ReturnObjs():
@@ -53,7 +54,7 @@ def test_get_span_formats_dir_ReturnsObj():
     span_dir = get_span_formats_dir()
     # THEN
     print(f"{span_dir=}")
-    assert span_dir == f"{config_file_dir()}/span_formats"
+    assert span_dir == f"{(src_span_dir())}/span_formats"
 
 
 def test_get_span_filenames_ReturnsCorrectObj():

@@ -2,7 +2,7 @@ from src._instrument.file import open_file, delete_dir, create_file_path
 from src._instrument.python import get_dict_from_json
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_insert, atom_update, atom_delete
+from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop
 from src.gift.atom_config import (
     budunit_text,
     bud_acctunit_text,
@@ -15,12 +15,14 @@ from src.gift.atom_config import (
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
 )
-from src.gift.atom_config import config_file_dir
-from src.gift.change import changeunit_shop, get_filtered_changeunit
+from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.listen.hubunit import hubunit_shop
+from src.span.examples.span_env import src_span_dir
 from pandas import DataFrame, read_csv
+import csv
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
+from copy import deepcopy as copy_deepcopy
 
 
 def real_id_str() -> str:
@@ -112,7 +114,7 @@ def must_be_bool_str() -> str:
 
 
 def get_span_formats_dir() -> str:
-    return f"{config_file_dir()}/span_formats"
+    return f"{src_span_dir()}/span_formats"
 
 
 def jaar_format_00001_acct_v0_0_0() -> str:
@@ -255,13 +257,7 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
     return x_span
 
 
-def save_span_csv(
-    x_spanname: str,
-    x_budunit: BudUnit,
-    x_dir: str,
-    x_filename: str,
-    x_replace: bool = True,
-):
+def save_span_csv(x_spanname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
     x_dataframe = create_span_df(x_budunit, x_spanname)
     csv_path = create_file_path(x_dir, x_filename)
     x_dataframe.to_csv(csv_path, index=False)
@@ -271,6 +267,26 @@ def open_span_csv(x_file_dir: str, x_filename: str) -> DataFrame:
     return read_csv(create_file_path(x_file_dir, x_filename))
 
 
-def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: str):
+def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
+    x_changeunit = changeunit_shop()
+    x_reader = csv.reader(x_csv.splitlines(), delimiter=",")
 
+    if x_spanname == jaar_format_00001_acct_v0_0_0():
+        x_count = 0
+        for row in x_reader:
+            if x_count == 0:
+                title_row = copy_deepcopy(row)
+            if x_count != 0:
+                x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
+                x_atomunit.set_arg(title_row[2], row[2])
+                x_atomunit.set_arg(title_row[3], float(row[3]))
+                x_atomunit.set_arg(title_row[4], float(row[4]))
+                x_changeunit.set_atomunit(x_atomunit)
+            x_count += 1
+    return x_changeunit
+
+
+def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: str):
+    span_dataframe = open_span_csv(x_file_dir, x_filename)
+    create_changeunit()
     x_hubunit = hubunit_shop(reals_dir=reals_dir, real_id="x")

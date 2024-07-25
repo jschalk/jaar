@@ -216,9 +216,7 @@ def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV():
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_span_csv(
-        j1_spanname, sue_budunit, span_examples_dir(), acct_filename, x_replace=False
-    )
+    save_span_csv(j1_spanname, sue_budunit, span_examples_dir(), acct_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
