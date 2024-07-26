@@ -19,6 +19,7 @@ from src.span.span import (
     owner_id_str,
     acct_id_str,
     group_id_str,
+    road_str,
     parent_road_str,
     label_str,
     mass_str,
@@ -136,10 +137,7 @@ def test_create_changeunit_Arg_jaar_format_00002_membership_v0_0_0():
     bob_iowa_atomunit.set_arg(debtit_vote_str(), bob_iowa_debtit_vote)
     yao_iowa_atomunit.set_arg(debtit_vote_str(), yao_iowa_debtit_vote)
     yao_ohio_atomunit.set_arg(debtit_vote_str(), yao_ohio_debtit_vote)
-    sue_iowa_atomunit.set_atom_order()
     bob_iowa_atomunit.set_atom_order()
-    yao_iowa_atomunit.set_atom_order()
-    yao_ohio_atomunit.set_atom_order()
     print(f"{membership_changunit.get_ordered_atomunits()[2]=}")
     print(f"{sue_iowa_atomunit=}")
     assert membership_changunit.get_ordered_atomunits()[0] == bob_iowa_atomunit
@@ -150,42 +148,41 @@ def test_create_changeunit_Arg_jaar_format_00002_membership_v0_0_0():
     assert len(membership_changunit.get_ordered_atomunits()) == 7
 
 
-# def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
-#     # ESTABLISH
-#     sue_text = sue_str()
-#     bob_text = bob_str()
-#     music_real_id = "music56"
-#     sue_budunit = budunit_shop(sue_text, music_real_id)
-#     casa_text = "casa"
-#     casa_road = sue_budunit.make_l1_road(casa_text)
-#     casa_mass = 31
-#     sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
-#     clean_text = "clean"
-#     clean_road = sue_budunit.make_road(casa_road, clean_text)
-#     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
+    # ESTABLISH
+    sue_text = sue_str()
+    bob_text = bob_str()
+    music_real_id = "music56"
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_mass = 31
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    clean_text = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+    ideaunit_dataframe = create_span_df(sue_budunit, x_span_name)
+    ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
 
-#     # WHEN
-#     x_span_name = jaar_format_00003_ideaunit_v0_0_0()
-#     ideaunit_format = create_span_df(sue_budunit, x_span_name)
+    # WHEN
+    ideaunit_changunit = create_changeunit(ideaunit_csv, x_span_name)
 
-#     # THEN
-#     array_headers = list(ideaunit_format.columns)
-#     assert array_headers == get_spanref(x_span_name).get_headers_list()
-
-#     assert ideaunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
-#     assert ideaunit_format.loc[0, pledge_str()] == ""
-#     assert ideaunit_format.loc[0, real_id_str()] == music_real_id
-#     assert ideaunit_format.loc[0, label_str()] == casa_text
-#     assert ideaunit_format.loc[0, mass_str()] == casa_mass
-#     assert ideaunit_format.loc[0, parent_road_str()] == music_real_id
-
-#     assert ideaunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
-#     assert ideaunit_format.loc[1, pledge_str()] == "Yes"
-#     assert ideaunit_format.loc[1, real_id_str()] == music_real_id
-#     assert ideaunit_format.loc[1, parent_road_str()] == casa_road
-#     assert ideaunit_format.loc[1, label_str()] == clean_text
-#     assert ideaunit_format.loc[1, mass_str()] == 1
-#     assert len(ideaunit_format) == 2
+    # THEN
+    casa_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    casa_atomunit.set_arg(parent_road_str(), sue_budunit._real_id)
+    casa_atomunit.set_arg(label_str(), casa_text)
+    casa_atomunit.set_arg(pledge_str(), False)
+    casa_atomunit.set_arg("_mass", casa_mass)
+    assert casa_atomunit.get_value("_mass") == casa_mass
+    clean_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    clean_atomunit.set_arg(parent_road_str(), casa_road)
+    clean_atomunit.set_arg(label_str(), clean_text)
+    clean_atomunit.set_arg(pledge_str(), True)
+    clean_atomunit.set_arg("_mass", 1)
+    assert ideaunit_changunit.atomunit_exists(casa_atomunit)
+    assert ideaunit_changunit.atomunit_exists(clean_atomunit)
+    assert len(ideaunit_changunit.get_ordered_atomunits()) == 2
 
 
 # # Commented out to reduce testing time.

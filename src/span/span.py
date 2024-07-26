@@ -16,6 +16,7 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
+from src.gift.gift import giftunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.span.examples.span_env import src_span_dir
 from pandas import DataFrame, read_csv
@@ -59,6 +60,10 @@ def debtit_vote_str() -> str:
 
 def credit_vote_str() -> str:
     return "credit_vote"
+
+
+def road_str() -> str:
+    return "road"
 
 
 def parent_road_str() -> str:
@@ -288,11 +293,28 @@ def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_atomunit.set_arg(title_row[5], float(row[5]))
             x_changeunit.set_atomunit(x_atomunit)
+        elif x_spanname == jaar_format_00003_ideaunit_v0_0_0() and x_count != 0:
+            x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+            # "real_id": "column_order": 0
+            # "owner_id": "column_order": 1
+            # "pledge": "column_order": 2
+            # "parent_road":  "column_order": 3,
+            # "mass":  "column_order": 4
+            # "label":  "column_order": 5,
+            pledge_bool = False
+            if row[2] == "Yes":
+                pledge_bool = True
+            x_atomunit.set_arg(title_row[2], pledge_bool)
+            x_atomunit.set_arg(title_row[3], row[3])
+            x_atomunit.set_arg("_mass", int(row[4]))
+            x_atomunit.set_arg(title_row[5], row[5])
+            x_changeunit.set_atomunit(x_atomunit)
         x_count += 1
     return x_changeunit
 
 
 def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: str):
     span_dataframe = open_span_csv(x_file_dir, x_filename)
-    create_changeunit()
+    # create_changeunit()
+    x_giftunit = giftunit_shop()
     x_hubunit = hubunit_shop(reals_dir=reals_dir, real_id="x")
