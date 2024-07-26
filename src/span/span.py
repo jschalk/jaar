@@ -271,18 +271,24 @@ def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
     x_changeunit = changeunit_shop()
     x_reader = csv.reader(x_csv.splitlines(), delimiter=",")
 
-    if x_spanname == jaar_format_00001_acct_v0_0_0():
-        x_count = 0
-        for row in x_reader:
-            if x_count == 0:
-                title_row = copy_deepcopy(row)
-            if x_count != 0:
-                x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
-                x_atomunit.set_arg(title_row[2], row[2])
-                x_atomunit.set_arg(title_row[3], float(row[3]))
-                x_atomunit.set_arg(title_row[4], float(row[4]))
-                x_changeunit.set_atomunit(x_atomunit)
-            x_count += 1
+    x_count = 0
+    for row in x_reader:
+        if x_count == 0:
+            title_row = copy_deepcopy(row)
+        if x_spanname == jaar_format_00001_acct_v0_0_0() and x_count != 0:
+            x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
+            x_atomunit.set_arg(title_row[2], row[2])
+            x_atomunit.set_arg(title_row[3], float(row[3]))
+            x_atomunit.set_arg(title_row[4], float(row[4]))
+            x_changeunit.set_atomunit(x_atomunit)
+        elif x_spanname == jaar_format_00002_membership_v0_0_0() and x_count != 0:
+            x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+            x_atomunit.set_arg(title_row[2], row[2])
+            x_atomunit.set_arg(title_row[3], row[3])
+            x_atomunit.set_arg(title_row[4], float(row[4]))
+            x_atomunit.set_arg(title_row[5], float(row[5]))
+            x_changeunit.set_atomunit(x_atomunit)
+        x_count += 1
     return x_changeunit
 
 

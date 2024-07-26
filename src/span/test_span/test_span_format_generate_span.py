@@ -2,7 +2,12 @@ from src._instrument.file import delete_dir, open_file, create_file_path
 from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.gift.atom_config import bud_acctunit_text, atom_insert
+from src.gift.atom_config import (
+    bud_acctunit_text,
+    bud_acct_membership_text,
+    bud_ideaunit_text,
+    atom_insert,
+)
 from src.gift.atom import atomunit_shop
 from src.span.span import (
     jaar_format_00001_acct_v0_0_0,
@@ -71,79 +76,78 @@ def test_create_changeunit_Arg_jaar_format_00001_acct_v0_0_0():
     # )
     assert sue_acct_changeunit.atomunit_exists(sue_atomunit)
     assert sue_acct_changeunit.atomunit_exists(bob_atomunit)
-    # sue_atomunit = sue_acct_changeunit.get_atomunit(atom_insert(), bud_acctunit_text(), [sue_text])
-    # bob_atomunit = sue_acct_changeunit.get_atomunit(atom_insert(), bud_acctunit_text(), [bob_text])
-    # yao_atomunit = sue_acct_changeunit.get_atomunit(atom_insert(), bud_acctunit_text(), [yao_text])
-
-    # assert sue_acct_changeunit.span_name == x_span_name
-    # assert sue_acct_changeunit.get_spancolumn(sue_text).
+    assert len(sue_acct_changeunit.get_ordered_atomunits()) == 3
 
 
-# def test_create_span_df_Arg_jaar_format_00002_membership_v0_0_0():
-#     # ESTABLISH
-#     sue_text = sue_str()
-#     bob_text = bob_str()
-#     yao_text = yao_str()
-#     music_real_id = "music56"
-#     sue_budunit = budunit_shop(sue_text, music_real_id)
-#     sue_budunit.add_acctunit(sue_text)
-#     sue_budunit.add_acctunit(bob_text)
-#     sue_budunit.add_acctunit(yao_text)
-#     iowa_text = ",Iowa"
-#     sue_iowa_credit_w = 37
-#     bob_iowa_credit_w = 43
-#     yao_iowa_credit_w = 51
-#     sue_iowa_debtit_w = 57
-#     bob_iowa_debtit_w = 61
-#     yao_iowa_debtit_w = 67
-#     ohio_text = ",Ohio"
-#     yao_ohio_credit_w = 73
-#     yao_ohio_debtit_w = 67
-#     sue_acctunit = sue_budunit.get_acct(sue_text)
-#     bob_acctunit = sue_budunit.get_acct(bob_text)
-#     yao_acctunit = sue_budunit.get_acct(yao_text)
-#     sue_acctunit.add_membership(iowa_text, sue_iowa_credit_w, sue_iowa_debtit_w)
-#     bob_acctunit.add_membership(iowa_text, bob_iowa_credit_w, bob_iowa_debtit_w)
-#     yao_acctunit.add_membership(iowa_text, yao_iowa_credit_w, yao_iowa_debtit_w)
-#     yao_acctunit.add_membership(ohio_text, yao_ohio_credit_w, yao_ohio_debtit_w)
+def test_create_changeunit_Arg_jaar_format_00002_membership_v0_0_0():
+    # ESTABLISH
+    sue_text = sue_str()
+    bob_text = bob_str()
+    yao_text = yao_str()
+    music_real_id = "music56"
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    sue_budunit.add_acctunit(sue_text)
+    sue_budunit.add_acctunit(bob_text)
+    sue_budunit.add_acctunit(yao_text)
+    iowa_text = ",Iowa"
+    sue_iowa_credit_vote = 37
+    bob_iowa_credit_vote = 43
+    yao_iowa_credit_vote = 51
+    sue_iowa_debtit_vote = 57
+    bob_iowa_debtit_vote = 61
+    yao_iowa_debtit_vote = 67
+    ohio_text = ",Ohio"
+    yao_ohio_credit_vote = 73
+    yao_ohio_debtit_vote = 67
+    sue_acctunit = sue_budunit.get_acct(sue_text)
+    bob_acctunit = sue_budunit.get_acct(bob_text)
+    yao_acctunit = sue_budunit.get_acct(yao_text)
+    sue_acctunit.add_membership(iowa_text, sue_iowa_credit_vote, sue_iowa_debtit_vote)
+    bob_acctunit.add_membership(iowa_text, bob_iowa_credit_vote, bob_iowa_debtit_vote)
+    yao_acctunit.add_membership(iowa_text, yao_iowa_credit_vote, yao_iowa_debtit_vote)
+    yao_acctunit.add_membership(ohio_text, yao_ohio_credit_vote, yao_ohio_debtit_vote)
+    x_span_name = jaar_format_00002_membership_v0_0_0()
+    membership_dataframe = create_span_df(sue_budunit, x_span_name)
+    assert len(membership_dataframe) == 7
+    membership_csv = membership_dataframe.to_csv(index=False)
 
-#     # WHEN
-#     x_span_name = jaar_format_00002_membership_v0_0_0()
-#     membership_dataframe = create_span_df(sue_budunit, x_span_name)
+    # WHEN
+    membership_changunit = create_changeunit(membership_csv, x_span_name)
 
-#     # THEN
-#     array_headers = list(membership_dataframe.columns)
-#     acct_spanref = get_spanref(x_span_name)
-#     print(f"{len(membership_dataframe)=}")
-#     assert array_headers == acct_spanref.get_headers_list()
-#     assert membership_dataframe.loc[0, real_id_str()] == music_real_id
-#     assert membership_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
-#     assert membership_dataframe.loc[0, acct_id_str()] == bob_text
-#     assert membership_dataframe.loc[0, group_id_str()] == iowa_text
-#     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
-#     assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
-
-#     assert membership_dataframe.loc[2, real_id_str()] == music_real_id
-#     assert membership_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
-#     assert membership_dataframe.loc[2, acct_id_str()] == sue_text
-#     assert membership_dataframe.loc[2, group_id_str()] == iowa_text
-#     assert membership_dataframe.loc[2, credit_vote_str()] == sue_iowa_credit_w
-#     assert membership_dataframe.loc[2, debtit_vote_str()] == sue_iowa_debtit_w
-
-#     assert membership_dataframe.loc[4, real_id_str()] == music_real_id
-#     assert membership_dataframe.loc[4, owner_id_str()] == sue_budunit._owner_id
-#     assert membership_dataframe.loc[4, acct_id_str()] == yao_text
-#     assert membership_dataframe.loc[4, group_id_str()] == iowa_text
-#     assert membership_dataframe.loc[4, credit_vote_str()] == yao_iowa_credit_w
-#     assert membership_dataframe.loc[4, debtit_vote_str()] == yao_iowa_debtit_w
-
-#     assert membership_dataframe.loc[5, real_id_str()] == music_real_id
-#     assert membership_dataframe.loc[5, owner_id_str()] == sue_budunit._owner_id
-#     assert membership_dataframe.loc[5, acct_id_str()] == yao_text
-#     assert membership_dataframe.loc[5, group_id_str()] == ohio_text
-#     assert membership_dataframe.loc[5, credit_vote_str()] == yao_ohio_credit_w
-#     assert membership_dataframe.loc[5, debtit_vote_str()] == yao_ohio_debtit_w
-#     assert len(membership_dataframe) == 7
+    # THEN
+    assert membership_changunit
+    sue_iowa_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+    bob_iowa_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+    yao_iowa_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+    yao_ohio_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+    sue_iowa_atomunit.set_arg(group_id_str(), iowa_text)
+    bob_iowa_atomunit.set_arg(group_id_str(), iowa_text)
+    yao_iowa_atomunit.set_arg(group_id_str(), iowa_text)
+    yao_ohio_atomunit.set_arg(group_id_str(), ohio_text)
+    sue_iowa_atomunit.set_arg(acct_id_str(), sue_text)
+    bob_iowa_atomunit.set_arg(acct_id_str(), bob_text)
+    yao_iowa_atomunit.set_arg(acct_id_str(), yao_text)
+    yao_ohio_atomunit.set_arg(acct_id_str(), yao_text)
+    sue_iowa_atomunit.set_arg(credit_vote_str(), sue_iowa_credit_vote)
+    bob_iowa_atomunit.set_arg(credit_vote_str(), bob_iowa_credit_vote)
+    yao_iowa_atomunit.set_arg(credit_vote_str(), yao_iowa_credit_vote)
+    yao_ohio_atomunit.set_arg(credit_vote_str(), yao_ohio_credit_vote)
+    sue_iowa_atomunit.set_arg(debtit_vote_str(), sue_iowa_debtit_vote)
+    bob_iowa_atomunit.set_arg(debtit_vote_str(), bob_iowa_debtit_vote)
+    yao_iowa_atomunit.set_arg(debtit_vote_str(), yao_iowa_debtit_vote)
+    yao_ohio_atomunit.set_arg(debtit_vote_str(), yao_ohio_debtit_vote)
+    sue_iowa_atomunit.set_atom_order()
+    bob_iowa_atomunit.set_atom_order()
+    yao_iowa_atomunit.set_atom_order()
+    yao_ohio_atomunit.set_atom_order()
+    print(f"{membership_changunit.get_ordered_atomunits()[2]=}")
+    print(f"{sue_iowa_atomunit=}")
+    assert membership_changunit.get_ordered_atomunits()[0] == bob_iowa_atomunit
+    assert membership_changunit.atomunit_exists(sue_iowa_atomunit)
+    assert membership_changunit.atomunit_exists(bob_iowa_atomunit)
+    assert membership_changunit.atomunit_exists(yao_iowa_atomunit)
+    assert membership_changunit.atomunit_exists(yao_ohio_atomunit)
+    assert len(membership_changunit.get_ordered_atomunits()) == 7
 
 
 # def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0():

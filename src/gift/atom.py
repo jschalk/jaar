@@ -19,6 +19,9 @@ from src.gift.atom_config import (
     get_atom_order,
     get_atom_config_dict,
     is_category_ref,
+    get_sorted_required_arg_keys,
+    nesting_order_str,
+    required_args_text,
 )
 from dataclasses import dataclass
 
@@ -43,18 +46,18 @@ class AtomUnit:
 
         x_columns = [
             f"{self.category}_{self.crud_text}_{required_arg}"
-            for required_arg in self.required_args.keys()
+            for required_arg in get_sorted_required_arg_keys(self.category)
         ]
         x_columns.extend(
             f"{self.category}_{self.crud_text}_{optional_arg}"
             for optional_arg in self.optional_args.keys()
         )
-        x_values = list(self.required_args.values())
+        x_values = self.get_nesting_order_args()
         x_values.extend(iter(self.optional_args.values()))
         return create_insert_sqlstr(atom_hx_table_name(), x_columns, x_values)
 
     def get_all_args_in_list(self):
-        x_list = list(self.required_args.values())
+        x_list = self.get_nesting_order_args()
         x_list.extend(list(self.optional_args.values()))
         return x_list
 
@@ -86,6 +89,16 @@ class AtomUnit:
 
     def _get_optional_args_dict(self) -> dict:
         return get_empty_dict_if_none(self._get_category_dict().get("optional_args"))
+
+    def get_nesting_order_args(self) -> list[str]:
+        # When ChangUnit places an AtomUnit in a nested dictionary ChangUnit.atomunits
+        # the order of required argments decides the location. The order must always be
+        # the same
+        sorted_required_arg_keys = get_sorted_required_arg_keys(self.category)
+        sorted_required_arg_values = []
+        for required_arg in sorted_required_arg_keys:
+            sorted_required_arg_values.append(self.required_args.get(required_arg))
+        return sorted_required_arg_values
 
     def is_required_args_valid(self) -> bool:
         if self.crud_text not in {atom_delete(), atom_insert(), atom_update()}:

@@ -55,6 +55,10 @@ def nullable_text() -> str:
     return "nullable"
 
 
+def nesting_order_str() -> str:
+    return "nesting_order"
+
+
 def required_args_text() -> str:
     return "required_args"
 
@@ -113,6 +117,22 @@ def config_file_dir() -> str:
 
 def get_atom_config_dict() -> dict:
     return get_dict_from_json(open_file(config_file_dir(), get_atom_config_file_name()))
+
+
+def get_sorted_required_arg_keys(atom_category: str) -> list[str]:
+    nesting_order_dict = {}
+    atom_config = get_atom_config_dict()
+    atom_category_config = atom_config.get(atom_category)
+    atom_required_args_config = atom_category_config.get(required_args_text())
+    if len(atom_required_args_config) == 1:
+        return list(atom_required_args_config.keys())
+    for required_key, required_dict in atom_required_args_config.items():
+        nesting_order_dict[required_key] = required_dict.get(nesting_order_str())
+    sorted_tuples = sorted(nesting_order_dict.items(), key=lambda x: x[1])
+    sorted_list = []
+    for x_tuple in sorted_tuples:
+        sorted_list.append(x_tuple[0])
+    return sorted_list
 
 
 def add_to_atom_table_columns(x_dict, atom_category, crud, arg_key, arg_value):

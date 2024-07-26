@@ -1,14 +1,14 @@
 from src._road.road import create_road, get_default_real_id_roadnode as root_label
 from src.bud.acct import acctunit_shop
-from src.gift.change import (
-    ChangeUnit,
-    changeunit_shop,
-    bud_built_from_change_is_valid,
-    atomunit_shop,
+from src.gift.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
+    bud_acctunit_text,
+    bud_acct_membership_text,
 )
+from src.gift.atom import atomunit_shop
+from src.gift.change import ChangeUnit, changeunit_shop, bud_built_from_change_is_valid
 from src.bud.bud import budunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
 from src._instrument.python import x_is_json
@@ -78,6 +78,38 @@ def test_ChangeUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
                 x_atomunit.is_required_args_valid()=False
                 x_atomunit.is_optional_args_valid()=True"""
     )
+
+
+def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acctunit_text():
+    # ESTABLISH
+    bob_text = "Bob"
+    farm_changeunit = changeunit_shop()
+    bob_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
+    bob_atomunit.set_arg("acct_id", bob_text)
+    assert not farm_changeunit.atomunit_exists(bob_atomunit)
+
+    # WHEN
+    farm_changeunit.set_atomunit(bob_atomunit)
+
+    # THEN
+    assert farm_changeunit.atomunit_exists(bob_atomunit)
+
+
+def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_text():
+    # ESTABLISH
+    bob_text = "Bob"
+    iowa_text = ",Iowa"
+    farm_changeunit = changeunit_shop()
+    bob_iowa_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+    bob_iowa_atomunit.set_arg("group_id", iowa_text)
+    bob_iowa_atomunit.set_arg("acct_id", bob_text)
+    assert not farm_changeunit.atomunit_exists(bob_iowa_atomunit)
+
+    # WHEN
+    farm_changeunit.set_atomunit(bob_iowa_atomunit)
+
+    # THEN
+    assert farm_changeunit.atomunit_exists(bob_iowa_atomunit)
 
 
 def test_ChangeUnit_get_atom_ReturnsCorrectObj():
