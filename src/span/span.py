@@ -1,5 +1,9 @@
 from src._instrument.file import open_file, delete_dir, create_file_path
-from src._instrument.python import get_dict_from_json
+from src._instrument.python import (
+    get_dict_from_json,
+    get_nested_value,
+    place_obj_in_dict,
+)
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop
@@ -314,7 +318,22 @@ def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
 
 
 def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: str):
-    span_dataframe = open_span_csv(x_file_dir, x_filename)
-    # create_changeunit()
-    x_giftunit = giftunit_shop()
-    x_hubunit = hubunit_shop(reals_dir=reals_dir, real_id="x")
+    x_csv = open_file(x_file_dir, x_filename)
+    x_reader = csv.reader(x_csv.splitlines(), delimiter=",")
+
+    x_count = 0
+    for row in x_reader:
+        if x_count == 0:
+            title_row = copy_deepcopy(row)
+        else:
+            x_real_id = row[0]
+            x_owner_id = row[1]
+        x_count += 1
+
+    x_hubunit = hubunit_shop(reals_dir, real_id=x_real_id, owner_id=x_owner_id)
+    x_hubunit.initialize_gift_voice_files()
+    x_changeunit = create_changeunit(x_csv, x_spanname)
+    x_giftunit = giftunit_shop(x_owner_id, x_real_id)
+    x_giftunit.set_changeunit(x_changeunit)
+    x_hubunit.save_gift_file(x_giftunit)
+    x_hubunit._create_voice_from_gifts()
