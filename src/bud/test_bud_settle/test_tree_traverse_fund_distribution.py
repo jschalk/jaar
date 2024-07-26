@@ -1057,6 +1057,11 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
 
     # WHEN
     agenda_dict = x_bud.get_agenda_dict()
+    # for idea_road in x_bud._idea_dict.keys():
+    #     print(f"{idea_road=}")
+    # for x_acct in x_bud._accts.values():
+    #     for x_membership in x_acct._memberships.values():
+    #         print(f"{x_membership.group_id=}")
 
     # THEN
     assert len(agenda_dict) == 63
@@ -1188,7 +1193,7 @@ def test_BudUnit_settle_bud_CreatesGroupBoxWith_budunit_v001():
     assert x_bud._groupboxs is not None
     assert len(x_bud._groupboxs) == 34
     everyone_accts_len = None
-    everyone_group = x_bud.get_groupbox(",Everyone")
+    everyone_group = x_bud.get_groupbox(";Everyone")
     everyone_accts_len = len(everyone_group._memberships)
     assert everyone_accts_len == 22
 
