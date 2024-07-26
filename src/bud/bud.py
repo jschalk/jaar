@@ -214,13 +214,13 @@ class BudUnit:
         else:
             self._max_tree_traverse = x_int
 
-    def _get_relevant_roads(self, roads: dict[RoadUnit,]) -> dict[RoadUnit, str]:
+    def _get_relevant_roads(self, roads: dict[RoadUnit,]) -> set[RoadUnit]:
         to_evaluate_list = []
         to_evaluate_hx_dict = {}
         for road_x in roads:
             to_evaluate_list.append(road_x)
             to_evaluate_hx_dict[road_x] = "to_evaluate"
-        evaluated_roads = {}
+        evaluated_roads = set()
 
         # tree_metrics = self.get_tree_metrics()
         # while roads_to_evaluate != [] and count_x <= tree_metrics.node_count:
@@ -263,7 +263,7 @@ class BudUnit:
                     road_type="forefather",
                 )
 
-            evaluated_roads[road_x] = -1
+            evaluated_roads.add(road_x)
         return evaluated_roads
 
     def _evaluate_relevancy(
