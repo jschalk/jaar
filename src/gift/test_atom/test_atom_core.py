@@ -279,7 +279,7 @@ def test_AtomUnit_get_nesting_order_args_ReturnsObj_bud_acctunit():
 def test_AtomUnit_get_nesting_order_args_ReturnsObj_bud_acct_membership():
     # ESTABLISH
     sue_text = "Sue"
-    iowa_text = ",Iowa"
+    iowa_text = ";Iowa"
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     sue_insert_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())

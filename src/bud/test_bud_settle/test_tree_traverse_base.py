@@ -554,7 +554,7 @@ def test_BudUnit_get_tree_traverse_generated_groupboxs_ReturnsObj():
     assert symmerty_group_ids == {xio_text}
 
     # ESTABLISH
-    run_text = ",Run"
+    run_text = ";Run"
     swim_idea.set_awardlink(awardlink_shop(run_text))
     assert not yao_bud.groupbox_exists(run_text)
     yao_bud.settle_bud()

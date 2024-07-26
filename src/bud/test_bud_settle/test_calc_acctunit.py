@@ -23,7 +23,7 @@ def test_create_groupboxs_metrics_SetsAttrScenario1():
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
     yao_acctunit.add_membership(yao_text)
-    ohio_text = ",Ohio"
+    ohio_text = ";Ohio"
     yao_acctunit.add_membership(ohio_text)
     yao_yao_membership = yao_acctunit.get_membership(yao_text)
     yao_ohio_membership = yao_acctunit.get_membership(ohio_text)
@@ -119,7 +119,7 @@ def test_BudUnit_calc_acctunit_metrics_SetsAttr_scenario2():
     sue_budunit.add_acctunit(yao_text)
     yao_acctunit = sue_budunit.get_acct(yao_text)
     yao_acctunit.add_membership(yao_text, 1, 4)
-    ohio_text = ",Ohio"
+    ohio_text = ";Ohio"
     yao_acctunit.add_membership(ohio_text, 3, 1)
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0

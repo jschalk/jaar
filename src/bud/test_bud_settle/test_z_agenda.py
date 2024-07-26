@@ -608,7 +608,7 @@ def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctGroup():
 
     sue_text = "Sue"
     yao_bud.add_acctunit(sue_text)
-    run_text = ",runners"
+    run_text = ";runners"
     sue_acctunit = yao_bud.get_acct(sue_text)
     sue_acctunit.add_membership(run_text)
 

@@ -164,10 +164,11 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     # print(casa_idea._reasonunits)
     assert casa_idea._reasonunits[week_road] is not None
     assert casa_idea._reasonunits[week_road] == casa_wk_build_reasonunit
+    weekdays_str = "weekdays"
     try:
         casa_idea._reasonheirs[week_road]
     except KeyError as e:
-        assert str(e) == f"'{x_bud._real_id},weekdays'"
+        assert str(e) == f"'{x_bud.make_l1_road(weekdays_str)}'"
 
     x_bud.settle_bud()
     # idea_dict = x_bud.get_idea_dict()

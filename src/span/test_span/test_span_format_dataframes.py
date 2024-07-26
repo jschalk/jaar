@@ -83,14 +83,14 @@ def test_create_span_df_Arg_jaar_format_00002_membership_v0_0_0():
     sue_budunit.add_acctunit(sue_text)
     sue_budunit.add_acctunit(bob_text)
     sue_budunit.add_acctunit(yao_text)
-    iowa_text = ",Iowa"
+    iowa_text = ";Iowa"
     sue_iowa_credit_w = 37
     bob_iowa_credit_w = 43
     yao_iowa_credit_w = 51
     sue_iowa_debtit_w = 57
     bob_iowa_debtit_w = 61
     yao_iowa_debtit_w = 67
-    ohio_text = ",Ohio"
+    ohio_text = ";Ohio"
     yao_ohio_credit_w = 73
     yao_ohio_debtit_w = 67
     sue_acctunit = sue_budunit.get_acct(sue_text)

@@ -14,7 +14,7 @@ def test_AcctUnit_get_memberships_dict_ReturnObj():
     sue_text = "Sue"
     sue_credit_vote = 11
     sue_debtit_vote = 13
-    run_text = ",Run"
+    run_text = ";Run"
     run_credit_vote = 17
     run_debtit_vote = 23
     sue_membership = membership_shop(sue_text, sue_credit_vote, sue_debtit_vote)
@@ -56,7 +56,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     print(f"{bob_text}")
 
     bob_acctunit.set_membership(membership_shop(bob_text))
-    run_text = ",Run"
+    run_text = ";Run"
     bob_acctunit.set_membership(membership_shop(run_text))
 
     # WHEN
@@ -106,7 +106,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_acctunit._fund_agenda_ratio_take = bob_fund_agenda_ratio_take
 
     bob_acctunit.set_membership(membership_shop(bob_text))
-    run_text = ",Run"
+    run_text = ";Run"
     bob_acctunit.set_membership(membership_shop(run_text))
 
     print(f"{bob_text}")

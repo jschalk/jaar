@@ -58,7 +58,7 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
     x_bit = 5
     yao_bud = budunit_shop("Yao", _bit=x_bit)
     zia_text = "Zia"
-    ohio_text = ",Ohio"
+    ohio_text = ";Ohio"
     zia_ohio_credit_w = 33
     zia_ohio_debtit_w = 44
     zia_acctunit = acctunit_shop(zia_text)

@@ -98,7 +98,7 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acctunit_text():
 def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_text():
     # ESTABLISH
     bob_text = "Bob"
-    iowa_text = ",Iowa"
+    iowa_text = ";Iowa"
     farm_changeunit = changeunit_shop()
     bob_iowa_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
     bob_iowa_atomunit.set_arg("group_id", iowa_text)

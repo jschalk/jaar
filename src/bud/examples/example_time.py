@@ -518,9 +518,9 @@ class X7TimeIdeaAttrs:
 class PremiseUnitX7Time:
     _weekday: str = None
     _every_x_days: int = None  # builds jajatime(minute)
-    _every_x_months: int = None  # builds mybud,time,months
-    _on_x_monthday: int = None  # " build mybud,time,month,monthday
-    _every_x_years: int = None  # builds mybud,time,years
+    _every_x_months: int = None  # builds mybud,time;months
+    _on_x_monthday: int = None  # " build mybud,time;month,monthday
+    _every_x_years: int = None  # builds mybud,time;years
     _every_x_weeks: int = None  # builds jajatime(minute)
     _x_week_remainder: int = None
     _between_hr_min_open: int = None  # clock and y o'clock" build jajatime(minutes)

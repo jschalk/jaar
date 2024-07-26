@@ -5,7 +5,7 @@ from pytest import raises as pytest_raises
 
 def test_AcctUnit_set_membership_SetsAttr_memberships():
     # ESTABLISH
-    run_text = ",run"
+    run_text = ";run"
     yao_text = "Yao"
     run_credit_vote = 66
     run_debtit_vote = 85
@@ -28,8 +28,8 @@ def test_AcctUnit_set_membership_SetsAttr_memberships():
 
 def test_AcctUnit_set_membership_SetsMultipleAttr():
     # ESTABLISH
-    run_text = ",run"
-    fly_text = ",fly"
+    run_text = ";run"
+    fly_text = ";fly"
     run_membership = membership_shop(run_text, credit_vote=13, debtit_vote=7)
     fly_membership = membership_shop(fly_text, credit_vote=23, debtit_vote=5)
     yao_acctunit = acctunit_shop("Yao")
@@ -64,8 +64,8 @@ def test_AcctUnit_set_membership_RaisesErrorIf_group_idIsAcctIDAndNotAcctUnit_ac
 
 def test_AcctUnit_get_membership_ReturnsCorrectObj():
     # ESTABLISH
-    run_text = ",run"
-    fly_text = ",fly"
+    run_text = ";run"
+    fly_text = ";fly"
     yao_acctunit = acctunit_shop("Yao")
     yao_acctunit.set_membership(membership_shop(run_text, 13, 7))
     yao_acctunit.set_membership(membership_shop(fly_text, 23, 5))
@@ -79,8 +79,8 @@ def test_AcctUnit_get_membership_ReturnsCorrectObj():
 
 def test_membership_exists_ReturnsCorrectObj():
     # ESTABLISH
-    run_text = ",run"
-    fly_text = ",fly"
+    run_text = ";run"
+    fly_text = ";fly"
     yao_acctunit = acctunit_shop("Yao")
     yao_acctunit.set_membership(membership_shop(run_text, 13, 7))
     yao_acctunit.set_membership(membership_shop(fly_text, 23, 5))
@@ -94,8 +94,8 @@ def test_membership_exists_ReturnsCorrectObj():
 
 def test_memberships_exist_ReturnsCorrectObj():
     # ESTABLISH
-    run_text = ",run"
-    fly_text = ",fly"
+    run_text = ";run"
+    fly_text = ";fly"
     yao_acctunit = acctunit_shop("Yao")
     assert not yao_acctunit.memberships_exist()
 
@@ -122,8 +122,8 @@ def test_memberships_exist_ReturnsCorrectObj():
 
 def test_AcctUnit_del_membership_SetsAttrCorrectly():
     # ESTABLISH
-    run_text = ",run"
-    fly_text = ",fly"
+    run_text = ";run"
+    fly_text = ";fly"
     run_membership = membership_shop(run_text)
     fly_membership = membership_shop(fly_text)
     yao_memberships = {
@@ -146,8 +146,8 @@ def test_AcctUnit_del_membership_SetsAttrCorrectly():
 
 def test_AcctUnit_clear_memberships_SetsAttrCorrectly():
     # ESTABLISH
-    run_text = ",run"
-    fly_text = ",fly"
+    run_text = ";run"
+    fly_text = ";fly"
     run_membership = membership_shop(run_text)
     fly_membership = membership_shop(fly_text)
     yao_memberships = {
@@ -170,7 +170,7 @@ def test_AcctUnit_clear_memberships_SetsAttrCorrectly():
 
 def test_AcctUnit_add_membership_SetsAttrCorrectly():
     # ESTABLISH
-    run_text = ",run"
+    run_text = ";run"
     run_credit_vote = 78
     run_debtit_vote = 99
     yao_acctunit = acctunit_shop("Yao")
@@ -214,8 +214,8 @@ def test_AcctUnit_set_debtor_pool_SetAttr():
 
 def test_AcctUnit_set_credor_pool_Sets_memberships():
     # ESTABLISH
-    ohio_text = ",Ohio"
-    iowa_text = ",Iowa"
+    ohio_text = ";Ohio"
+    iowa_text = ";Iowa"
     sue_credit_vote = 1
     yao_credit_vote = 4
     bob_acctunit = acctunit_shop("Bob")
@@ -239,8 +239,8 @@ def test_AcctUnit_set_credor_pool_Sets_memberships():
 
 def test_AcctUnit_set_debtor_pool_Sets_memberships():
     # ESTABLISH
-    ohio_text = ",Ohio"
-    iowa_text = ",Iowa"
+    ohio_text = ";Ohio"
+    iowa_text = ";Iowa"
     sue_debtit_vote = 1
     yao_debtit_vote = 4
     bob_acctunit = acctunit_shop("Bob")

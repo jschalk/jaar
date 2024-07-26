@@ -117,7 +117,7 @@ def test_bud_ideakid_doerunit_CorrectlySets_grandchild_idea_doerheir():
     four_text = "fourth"
     four_road = sue_bud.make_road(morn_road, four_text)
     x_doerunit = doerunit_shop()
-    swimmers_text = ",swimmers"
+    swimmers_text = ";swimmers"
     x_doerunit.set_grouphold(group_id=swimmers_text)
 
     yao_text = "Yao"
