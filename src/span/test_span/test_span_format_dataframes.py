@@ -241,3 +241,30 @@ music56,Sue,Yao,41,37
 music56,Sue,Zia,1,1
 """
     assert open_file(span_examples_dir(), acct_filename) == sue2_acct_example_csv
+
+
+def test_save_span_csv_Arg_jaar_format_00003_ideaunit_v0_0_0():
+    # ESTABLISH
+    sue_text = sue_str()
+    bob_text = bob_str()
+    music_real_id = "music56"
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_mass = 31
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    clean_text = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+    ideaunit_format = create_span_df(sue_budunit, x_span_name)
+    acct_filename = f"{sue_text}_ideaunit_example_00.csv"
+    csv_example_path = create_file_path(span_examples_dir(), acct_filename)
+    delete_dir(csv_example_path)
+    assert not os_path_exists(csv_example_path)
+
+    # WHEN
+    save_span_csv(x_span_name, sue_budunit, span_examples_dir(), acct_filename)
+
+    # THEN
+    assert os_path_exists(csv_example_path)

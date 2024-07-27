@@ -84,24 +84,45 @@ def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario1(span_env_setup_clean
     assert x_dict == {music_real_id: {yao_text: 1}}
 
 
-# def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario2(span_env_setup_cleanup):
-#     # ESTABLISH
-#     music_real_id = "music56"
-#     sue_text = "Sue"
-#     bob_text = "Sue"
-#     headerless_csv = f"""{music_real_id},{sue_text},Bob,13,29
-# {music_real_id},{sue_text},Sue,11,23
-# {music_real_id},{sue_text},Yao,41,37
-# {music_real_id},{sue_text},Zia,41,37
-# {music_real_id},{bob_text},Yao,41,37
-# """
+def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario2(span_env_setup_cleanup):
+    # ESTABLISH
+    music_real_id = "music56"
+    sue_text = "Sue"
+    bob_text = "Bob"
+    headerless_csv = f"""{music_real_id},{sue_text},Bob,13,29
+{music_real_id},{sue_text},Sue,11,23
+{music_real_id},{sue_text},Yao,41,37
+{music_real_id},{sue_text},Zia,41,37
+{music_real_id},{bob_text},Yao,41,37
+"""
 
-#     # WHEN
-#     u_dict = get_csv_real_id_owner_id_dict(headerless_csv=headerless_csv)
+    # WHEN
+    u_dict = get_csv_real_id_owner_id_dict(headerless_csv=headerless_csv)
 
-#     # THEN
-#     # print(f"{u_dict=}")
+    # THEN
+    # print(f"{u_dict=}")
 
-#     assert u_dict == {music_real_id: {sue_text: 4, bob_text: 1}}
-#     assert u_dict != {music_real_id: {bob_text: 1}}
-#     assert 1 == 2
+    assert u_dict != {music_real_id: {sue_text: 1}}
+    assert u_dict == {music_real_id: {sue_text: 4, bob_text: 1}}
+
+
+def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario2(span_env_setup_cleanup):
+    # ESTABLISH
+    music_real_id = "music56"
+    sue_text = "Sue"
+    bob_text = "Bob"
+    headerless_csv = f"""{music_real_id},{sue_text},Bob,13,29
+{music_real_id},{sue_text},Sue,11,23
+{music_real_id},{sue_text},Yao,41,37
+{music_real_id},{sue_text},Zia,41,37
+{music_real_id},{bob_text},Yao,41,37
+"""
+
+    # WHEN
+    u_dict = get_csv_real_id_owner_id_dict(headerless_csv=headerless_csv)
+
+    # THEN
+    # print(f"{u_dict=}")
+
+    assert u_dict != {music_real_id: {sue_text: 1}}
+    assert u_dict == {music_real_id: {sue_text: 4, bob_text: 1}}

@@ -33,7 +33,10 @@ def get_csv_real_id_owner_id_dict(
     y_dict = {}
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        x_ref_count = get_nested_value(y_dict, [row[0], row[1]], True)
-        if not x_ref_count:
-            place_obj_in_dict(y_dict, [row[0], row[1]], 1)
+        real_owner_count = get_nested_value(y_dict, [row[0], row[1]], True)
+        if not real_owner_count:
+            real_owner_count = 1
+        else:
+            real_owner_count += 1
+        place_obj_in_dict(y_dict, [row[0], row[1]], real_owner_count)
     return y_dict
