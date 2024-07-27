@@ -11,7 +11,7 @@ from pytest import raises as pytest_raises
 
 def test_GroupBox_exists():
     # ESTABLISH
-    swim_text = ",swimmers"
+    swim_text = ";swimmers"
     # WHEN
     swim_groupbox = GroupBox(group_id=swim_text)
     # THEN
@@ -30,7 +30,7 @@ def test_GroupBox_exists():
 
 def test_groupbox_shop_ReturnsCorrectObj():
     # ESTABLISH
-    swim_text = ",swimmers"
+    swim_text = ";swimmers"
     nation_road = create_road(root_label(), "nation-states")
     usa_road = create_road(nation_road, "USA")
 
@@ -87,7 +87,7 @@ def test_GroupBox_set_membership_CorrectlySetsAttr():
     # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
-    swim_text = ",swimmers"
+    swim_text = ";swimmers"
     yao_swim_membership = membership_shop(swim_text)
     sue_swim_membership = membership_shop(swim_text)
     yao_swim_membership._acct_id = yao_text
@@ -110,7 +110,7 @@ def test_GroupBox_set_membership_SetsAttr_credor_pool_debtor_pool():
     # ESTABLISH
     yao_text = "Yao"
     sue_text = "Sue"
-    ohio_text = ",Ohio"
+    ohio_text = ";Ohio"
     yao_ohio_membership = membership_shop(ohio_text)
     sue_ohio_membership = membership_shop(ohio_text)
     yao_ohio_membership._acct_id = yao_text
@@ -140,8 +140,8 @@ def test_GroupBox_set_membership_SetsAttr_credor_pool_debtor_pool():
 def test_GroupBox_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
     # ESTABLISH
     yao_text = "Yao"
-    ohio_text = ",Ohio"
-    iowa_text = ",Iowa"
+    ohio_text = ";Ohio"
+    iowa_text = ";Iowa"
     yao_ohio_membership = membership_shop(ohio_text)
     yao_ohio_membership._acct_id = yao_text
     yao_ohio_membership._acct_id = yao_text
@@ -160,7 +160,7 @@ def test_GroupBox_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
 
 def test_GroupBox_set_membership_RaisesErrorIf_acct_id_IsNone():
     # ESTABLISH
-    ohio_text = ",Ohio"
+    ohio_text = ";Ohio"
     ohio_groupbox = groupbox_shop(ohio_text)
     yao_ohio_membership = membership_shop(ohio_text)
     assert yao_ohio_membership._acct_id is None

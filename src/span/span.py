@@ -1,8 +1,12 @@
-from src._instrument.file import open_file
-from src._instrument.python import get_dict_from_json
+from src._instrument.file import open_file, delete_dir, create_file_path
+from src._instrument.python import (
+    get_dict_from_json,
+    get_nested_value,
+    place_obj_in_dict,
+)
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_insert, atom_update, atom_delete
+from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop
 from src.gift.atom_config import (
     budunit_text,
     bud_acctunit_text,
@@ -15,10 +19,16 @@ from src.gift.atom_config import (
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
 )
-from src.gift.atom_config import config_file_dir
-from src.gift.change import changeunit_shop, get_filtered_changeunit
-from pandas import DataFrame, concat
+from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
+from src.gift.gift import giftunit_shop
+from src.listen.hubunit import hubunit_shop
+from src.span.csv_tool import extract_csv_headers
+from src.span.examples.span_env import src_span_dir
+from pandas import DataFrame, read_csv
+import csv
 from dataclasses import dataclass
+from os.path import exists as os_path_exists
+from copy import deepcopy as copy_deepcopy
 
 
 def real_id_str() -> str:
@@ -55,6 +65,10 @@ def debtit_vote_str() -> str:
 
 def credit_vote_str() -> str:
     return "credit_vote"
+
+
+def road_str() -> str:
+    return "road"
 
 
 def parent_road_str() -> str:
@@ -110,7 +124,7 @@ def must_be_bool_str() -> str:
 
 
 def get_span_formats_dir() -> str:
-    return f"{config_file_dir()}/span_formats"
+    return f"{src_span_dir()}/span_formats"
 
 
 def jaar_format_00001_acct_v0_0_0() -> str:
@@ -255,10 +269,64 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
 
 def save_span_csv(x_spanname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
     x_dataframe = create_span_df(x_budunit, x_spanname)
-    csv_path = f"{x_dir}/{x_filename}"
-    print(f"{csv_path=}")
+    csv_path = create_file_path(x_dir, x_filename)
     x_dataframe.to_csv(csv_path, index=False)
 
 
-def open_span_csv():
-    pass
+def open_span_csv(x_file_dir: str, x_filename: str) -> DataFrame:
+    return read_csv(create_file_path(x_file_dir, x_filename))
+
+
+def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
+    x_changeunit = changeunit_shop()
+    title_row, headerless_csv = extract_csv_headers(x_csv)
+    x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
+    for row in x_reader:
+        if x_spanname == jaar_format_00001_acct_v0_0_0():
+            x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
+            x_atomunit.set_arg(title_row[2], row[2])
+            x_atomunit.set_arg(title_row[3], float(row[3]))
+            x_atomunit.set_arg(title_row[4], float(row[4]))
+            x_changeunit.set_atomunit(x_atomunit)
+        elif x_spanname == jaar_format_00002_membership_v0_0_0():
+            x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+            x_atomunit.set_arg(title_row[2], row[2])
+            x_atomunit.set_arg(title_row[3], row[3])
+            x_atomunit.set_arg(title_row[4], float(row[4]))
+            x_atomunit.set_arg(title_row[5], float(row[5]))
+            x_changeunit.set_atomunit(x_atomunit)
+        elif x_spanname == jaar_format_00003_ideaunit_v0_0_0():
+            x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+            # "real_id": "column_order": 0
+            # "owner_id": "column_order": 1
+            # "pledge": "column_order": 2
+            # "parent_road":  "column_order": 3,
+            # "mass":  "column_order": 4
+            # "label":  "column_order": 5,
+            pledge_bool = False
+            if row[2] == "Yes":
+                pledge_bool = True
+            x_atomunit.set_arg(title_row[2], pledge_bool)
+            x_atomunit.set_arg(title_row[3], row[3])
+            x_atomunit.set_arg("_mass", int(row[4]))
+            x_atomunit.set_arg(title_row[5], row[5])
+            x_changeunit.set_atomunit(x_atomunit)
+    return x_changeunit
+
+
+def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: str):
+    x_csv = open_file(x_file_dir, x_filename)
+    title_row, headerless_csv = extract_csv_headers(x_csv)
+    x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
+
+    for row in x_reader:
+        x_real_id = row[0]
+        x_owner_id = row[1]
+
+    x_hubunit = hubunit_shop(reals_dir, real_id=x_real_id, owner_id=x_owner_id)
+    x_hubunit.initialize_gift_voice_files()
+    x_changeunit = create_changeunit(x_csv, x_spanname)
+    x_giftunit = giftunit_shop(x_owner_id, x_real_id)
+    x_giftunit.set_changeunit(x_changeunit)
+    x_hubunit.save_gift_file(x_giftunit)
+    x_hubunit._create_voice_from_gifts()

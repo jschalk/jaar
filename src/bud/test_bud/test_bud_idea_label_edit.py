@@ -353,7 +353,7 @@ def test_bud_edit_idea_label_RaisesErrorIfdelimiterIsInLabel():
     old_weekday_road = sue_bud.make_l1_road(old_weekday_text)
 
     # WHEN / THEN
-    new_weekday_text = "days, of week"
+    new_weekday_text = "days; of week"
     with pytest_raises(Exception) as excinfo:
         sue_bud.edit_idea_label(old_road=old_weekday_road, new_label=new_weekday_text)
     assert (
@@ -389,26 +389,26 @@ def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
     zia_bud = budunit_shop("Zia", "Texas")
     casa_text = "casa"
     zia_bud.set_l1_idea(ideaunit_shop(casa_text))
-    comma_casa_road = zia_bud.make_l1_road(casa_text)
+    semicolon_casa_road = zia_bud.make_l1_road(casa_text)
     cook_text = "cook"
-    zia_bud.set_idea(ideaunit_shop(cook_text), parent_road=comma_casa_road)
-    comma_cook_road = zia_bud.make_road(comma_casa_road, cook_text)
-    cook_idea = zia_bud.get_idea_obj(comma_cook_road)
-    comma_text = ","
-    assert zia_bud._road_delimiter == comma_text
-    comma_cook_road = zia_bud.make_road(comma_casa_road, cook_text)
+    zia_bud.set_idea(ideaunit_shop(cook_text), semicolon_casa_road)
+    semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_text)
+    cook_idea = zia_bud.get_idea_obj(semicolon_cook_road)
+    semicolon_text = ";"
+    assert zia_bud._road_delimiter == semicolon_text
+    semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_text)
     # print(f"{zia_bud._real_id=} {zia_bud._idearoot._label=} {casa_road=}")
     # print(f"{cook_idea._parent_road=} {cook_idea._label=}")
-    # comma_casa_idea = zia_bud.get_idea_obj(comma_casa_road)
-    # print(f"{comma_casa_idea._parent_road=} {comma_casa_idea._label=}")
-    assert cook_idea.get_road() == comma_cook_road
+    # semicolon_casa_idea = zia_bud.get_idea_obj(semicolon_casa_road)
+    # print(f"{semicolon_casa_idea._parent_road=} {semicolon_casa_idea._label=}")
+    assert cook_idea.get_road() == semicolon_cook_road
 
     # WHEN
     slash_text = "/"
     zia_bud.set_road_delimiter(slash_text)
 
     # THEN
-    assert cook_idea.get_road() != comma_cook_road
+    assert cook_idea.get_road() != semicolon_cook_road
     zia_real_id = zia_bud._real_id
     slash_casa_road = create_road(zia_real_id, casa_text, delimiter=slash_text)
     slash_cook_road = create_road(slash_casa_road, cook_text, delimiter=slash_text)
@@ -421,19 +421,19 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
     casa_text = "casa"
     zia_bud.set_l1_idea(ideaunit_shop(casa_text))
     time_text = "time"
-    comma_time_road = zia_bud.make_l1_road(time_text)
+    semicolon_time_road = zia_bud.make_l1_road(time_text)
     _8am_text = "8am"
-    comma_8am_road = zia_bud.make_road(comma_time_road, _8am_text)
+    semicolon_8am_road = zia_bud.make_road(semicolon_time_road, _8am_text)
 
-    comma_time_reasonunit = reasonunit_shop(base=comma_time_road)
-    comma_time_reasonunit.set_premise(comma_8am_road)
+    semicolon_time_reasonunit = reasonunit_shop(base=semicolon_time_road)
+    semicolon_time_reasonunit.set_premise(semicolon_8am_road)
 
-    comma_casa_road = zia_bud.make_l1_road(casa_text)
-    zia_bud.edit_idea_attr(road=comma_casa_road, reason=comma_time_reasonunit)
-    casa_idea = zia_bud.get_idea_obj(comma_casa_road)
-    assert casa_idea._reasonunits.get(comma_time_road) is not None
-    gen_time_reasonunit = casa_idea._reasonunits.get(comma_time_road)
-    assert gen_time_reasonunit.premises.get(comma_8am_road) is not None
+    semicolon_casa_road = zia_bud.make_l1_road(casa_text)
+    zia_bud.edit_idea_attr(road=semicolon_casa_road, reason=semicolon_time_reasonunit)
+    casa_idea = zia_bud.get_idea_obj(semicolon_casa_road)
+    assert casa_idea._reasonunits.get(semicolon_time_road) is not None
+    gen_time_reasonunit = casa_idea._reasonunits.get(semicolon_time_road)
+    assert gen_time_reasonunit.premises.get(semicolon_8am_road) is not None
 
     # WHEN
     slash_text = "/"
@@ -450,8 +450,8 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
     gen_time_reasonunit = casa_idea._reasonunits.get(slash_time_road)
     assert gen_time_reasonunit.premises.get(slash_8am_road) is not None
 
-    assert casa_idea._reasonunits.get(comma_time_road) is None
-    assert gen_time_reasonunit.premises.get(comma_8am_road) is None
+    assert casa_idea._reasonunits.get(semicolon_time_road) is None
+    assert gen_time_reasonunit.premises.get(semicolon_8am_road) is None
 
 
 def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
@@ -460,17 +460,17 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     casa_text = "casa"
     zia_bud.set_l1_idea(ideaunit_shop(casa_text))
     time_text = "time"
-    comma_time_road = zia_bud.make_l1_road(time_text)
+    semicolon_time_road = zia_bud.make_l1_road(time_text)
     _8am_text = "8am"
-    comma_8am_road = zia_bud.make_road(comma_time_road, _8am_text)
-    comma_time_factunit = factunit_shop(comma_time_road, comma_8am_road)
+    semicolon_8am_road = zia_bud.make_road(semicolon_time_road, _8am_text)
+    semicolon_time_factunit = factunit_shop(semicolon_time_road, semicolon_8am_road)
 
-    comma_casa_road = zia_bud.make_l1_road(casa_text)
-    zia_bud.edit_idea_attr(comma_casa_road, factunit=comma_time_factunit)
-    casa_idea = zia_bud.get_idea_obj(comma_casa_road)
-    print(f"{casa_idea._factunits=} {comma_time_road=}")
-    assert casa_idea._factunits.get(comma_time_road) is not None
-    gen_time_factunit = casa_idea._factunits.get(comma_time_road)
+    semicolon_casa_road = zia_bud.make_l1_road(casa_text)
+    zia_bud.edit_idea_attr(semicolon_casa_road, factunit=semicolon_time_factunit)
+    casa_idea = zia_bud.get_idea_obj(semicolon_casa_road)
+    print(f"{casa_idea._factunits=} {semicolon_time_road=}")
+    assert casa_idea._factunits.get(semicolon_time_road) is not None
+    gen_time_factunit = casa_idea._factunits.get(semicolon_time_road)
 
     # WHEN
     slash_text = "/"
@@ -489,7 +489,7 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     assert gen_time_factunit.pick is not None
     assert gen_time_factunit.pick == slash_8am_road
 
-    assert casa_idea._factunits.get(comma_time_road) is None
+    assert casa_idea._factunits.get(semicolon_time_road) is None
 
 
 def test_bud_set_road_delimiter_CorrectlyModifies_numeric_roadAND_range_source_road():
@@ -497,26 +497,26 @@ def test_bud_set_road_delimiter_CorrectlyModifies_numeric_roadAND_range_source_r
     zia_bud = budunit_shop("Zia", "Texas")
     casa_text = "casa"
     zia_bud.set_l1_idea(ideaunit_shop(casa_text))
-    comma_casa_road = zia_bud.make_l1_road(casa_text)
+    semicolon_casa_road = zia_bud.make_l1_road(casa_text)
     cook_text = "cook"
-    zia_bud.set_idea(ideaunit_shop(cook_text), parent_road=comma_casa_road)
-    comma_cook_road = zia_bud.make_road(comma_casa_road, cook_text)
+    zia_bud.set_idea(ideaunit_shop(cook_text), parent_road=semicolon_casa_road)
+    semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_text)
 
     # numeric_road
     taste_text = "foot taste"
     zia_bud.set_l1_idea(ideaunit_shop(taste_text, _begin=0, _close=6))
-    comma_taste_road = zia_bud.make_l1_road(taste_text)
-    zia_bud.edit_idea_attr(comma_cook_road, numeric_road=comma_taste_road)
+    semicolon_taste_road = zia_bud.make_l1_road(taste_text)
+    zia_bud.edit_idea_attr(semicolon_cook_road, numeric_road=semicolon_taste_road)
 
     # range_source_road
     heat_text = "heat numbers"
     zia_bud.set_l1_idea(ideaunit_shop(heat_text, _begin=0, _close=6))
-    comma_heat_road = zia_bud.make_l1_road(heat_text)
-    zia_bud.edit_idea_attr(comma_cook_road, range_source_road=comma_heat_road)
+    semicolon_heat_road = zia_bud.make_l1_road(heat_text)
+    zia_bud.edit_idea_attr(semicolon_cook_road, range_source_road=semicolon_heat_road)
 
-    cook_idea = zia_bud.get_idea_obj(comma_cook_road)
-    assert cook_idea._numeric_road == comma_taste_road
-    assert cook_idea._range_source_road == comma_heat_road
+    cook_idea = zia_bud.get_idea_obj(semicolon_cook_road)
+    assert cook_idea._numeric_road == semicolon_taste_road
+    assert cook_idea._range_source_road == semicolon_heat_road
 
     # WHEN
     slash_text = "/"
@@ -524,8 +524,8 @@ def test_bud_set_road_delimiter_CorrectlyModifies_numeric_roadAND_range_source_r
 
     # THEN
     slash_taste_road = zia_bud.make_l1_road(taste_text)
-    assert cook_idea._numeric_road != comma_taste_road
+    assert cook_idea._numeric_road != semicolon_taste_road
     assert cook_idea._numeric_road == slash_taste_road
     slash_heat_road = zia_bud.make_l1_road(heat_text)
-    assert cook_idea._range_source_road != comma_heat_road
+    assert cook_idea._range_source_road != semicolon_heat_road
     assert cook_idea._range_source_road == slash_heat_road

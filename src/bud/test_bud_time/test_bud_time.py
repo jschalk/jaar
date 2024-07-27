@@ -97,13 +97,13 @@ def compare_kidless_ideas(src_budunit: BudUnit, x_budunit: BudUnit):
 
         # TODO Fix these failures to pass assert that are skipped.
         if not is_string_in_road(
-            "ZZ,time,jajatime,years,", src_road
+            "ZZ;time;jajatime;years;", src_road
         ) and src_road not in {
-            "ZZ,time,tech,400 year segment,0-100-25 leap years,4year with leap",
-            "ZZ,time,tech,400 year segment,100-104-0 leap years,4year wo leap",
-            "ZZ,time,tech,400 year segment,104-200-24 leap years,4year with leap",
-            "ZZ,time,tech,400 year segment,200-204-0 leap years,4year wo leap",
-            "ZZ,time,tech,400 year segment,204-300-24 leap years,4year with leap",
+            "ZZ;time;tech;400 year segment;0-100-25 leap years;4year with leap",
+            "ZZ;time;tech;400 year segment;100-104-0 leap years;4year wo leap",
+            "ZZ;time;tech;400 year segment;104-200-24 leap years;4year with leap",
+            "ZZ;time;tech;400 year segment;200-204-0 leap years;4year wo leap",
+            "ZZ;time;tech;400 year segment;204-300-24 leap years;4year with leap",
         }:
             if kidless(src_budunit, src_road) != kidless(x_budunit, src_road):
                 print(f"'{src_road}' failure")

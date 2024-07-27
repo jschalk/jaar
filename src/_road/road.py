@@ -52,7 +52,7 @@ class GroupID(str):  # Created to help track the concept
 
 
 def default_road_delimiter_if_none(delimiter: str = None) -> str:
-    return delimiter if delimiter is not None else ","
+    return delimiter if delimiter is not None else ";"
 
 
 def rebuild_road(

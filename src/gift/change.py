@@ -81,7 +81,7 @@ class ChangeUnit:
         x_keylist = [
             x_atomunit.crud_text,
             x_atomunit.category,
-            *list(x_atomunit.required_args.values()),
+            *x_atomunit.get_nesting_order_args(),
         ]
         place_obj_in_dict(self.atomunits, x_keylist, x_atomunit)
 
@@ -97,12 +97,9 @@ class ChangeUnit:
         x_keylist = [
             x_atomunit.crud_text,
             x_atomunit.category,
-            *list(x_atomunit.required_args.values()),
+            *list(x_atomunit.get_nesting_order_args()),
         ]
-        try:
-            nested_atomunit = get_nested_value(self.atomunits, x_keylist)
-        except Exception:
-            return False
+        nested_atomunit = get_nested_value(self.atomunits, x_keylist, True)
         return nested_atomunit == x_atomunit
 
     def add_atomunit(

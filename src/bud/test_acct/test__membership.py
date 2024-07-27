@@ -24,7 +24,7 @@ def test_GroupID_exists():
 
 def test_GroupCore_exists():
     # ESTABLISH
-    swim_text = ",swimmers"
+    swim_text = ";swimmers"
     # WHEN
     swim_groupcore = GroupCore(group_id=swim_text)
     # THEN

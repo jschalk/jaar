@@ -1,4 +1,5 @@
 from src._instrument.file import (
+    create_file_path,
     dir_files,
     save_file,
     open_file,
@@ -19,6 +20,20 @@ from src._instrument.examples.instrument_env import (
 from pytest import raises as pytest_raises
 from platform import system as platform_system
 from os.path import exists as os_path_exist
+
+
+def test_create_file_path_ReturnsObj():
+    # ESTABLISH
+    obj_filename = "obj.json"
+    x_dir = ("src/_instrument",)
+    x_file_name = "examples"
+
+    # WHEN / THEN
+    assert create_file_path(None, None) == ""
+    assert create_file_path(None, "") == ""
+    assert create_file_path(None, obj_filename) == f"/{obj_filename}"
+    assert create_file_path(x_dir, None) == x_dir
+    assert create_file_path(x_dir, x_file_name) == f"{x_dir}/{x_file_name}"
 
 
 def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):

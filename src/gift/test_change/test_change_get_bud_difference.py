@@ -195,7 +195,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     after_sue_bud.set_acctunit(temp_zia_acctunit, auto_set_membership=False)
     after_yao_acctunit = after_sue_bud.get_acct(yao_text)
     after_zia_acctunit = after_sue_bud.get_acct(zia_text)
-    run_text = ",runners"
+    run_text = ";runners"
     zia_run_credit_w = 77
     zia_run_debtit_w = 88
     after_zia_acctunit.add_membership(run_text, zia_run_credit_w, zia_run_debtit_w)
@@ -244,7 +244,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     zia_text = "Zia"
     before_sue_bud.add_acctunit(xio_text)
     before_sue_bud.add_acctunit(zia_text)
-    run_text = ",runners"
+    run_text = ";runners"
     before_xio_credit_w = 77
     before_xio_debtit_w = 88
     before_xio_acct = before_sue_bud.get_acct(xio_text)
@@ -290,10 +290,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     before_xio_acctunit = before_sue_bud.get_acct(xio_text)
     before_zia_acctunit = before_sue_bud.get_acct(zia_text)
     before_bob_acctunit = before_sue_bud.get_acct(bob_text)
-    run_text = ",runners"
+    run_text = ";runners"
     before_xio_acctunit.add_membership(run_text)
     before_zia_acctunit.add_membership(run_text)
-    fly_text = ",flyers"
+    fly_text = ";flyers"
     before_xio_acctunit.add_membership(fly_text)
     before_zia_acctunit.add_membership(fly_text)
     before_bob_acctunit.add_membership(fly_text)
@@ -507,10 +507,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     xio_acctunit = before_sue_au.get_acct(xio_text)
     zia_acctunit = before_sue_au.get_acct(zia_text)
     bob_acctunit = before_sue_au.get_acct(bob_text)
-    run_text = ",runners"
+    run_text = ";runners"
     xio_acctunit.add_membership(run_text)
     zia_acctunit.add_membership(run_text)
-    fly_text = ",flyers"
+    fly_text = ";flyers"
     xio_acctunit.add_membership(fly_text)
     zia_acctunit.add_membership(fly_text)
     bob_acctunit.add_membership(fly_text)
@@ -558,10 +558,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     xio_acctunit = before_sue_au.get_acct(xio_text)
     zia_acctunit = before_sue_au.get_acct(zia_text)
     bob_acctunit = before_sue_au.get_acct(bob_text)
-    run_text = ",runners"
+    run_text = ";runners"
     xio_acctunit.add_membership(run_text)
     zia_acctunit.add_membership(run_text)
-    fly_text = ",flyers"
+    fly_text = ";flyers"
     xio_acctunit.add_membership(fly_text)
     zia_acctunit.add_membership(fly_text)
     bob_acctunit.add_membership(fly_text)
@@ -610,7 +610,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     before_sue_au.add_acctunit(xio_text)
     before_sue_au.add_acctunit(zia_text)
     xio_acctunit = before_sue_au.get_acct(xio_text)
-    run_text = ",runners"
+    run_text = ";runners"
     xio_acctunit.add_membership(run_text)
     sports_text = "sports"
     sports_road = before_sue_au.make_l1_road(sports_text)

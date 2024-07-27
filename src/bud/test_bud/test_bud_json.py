@@ -133,7 +133,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
     sue_bud.add_acctunit(yao_text)
-    run_text = ",runners"
+    run_text = ";runners"
     yao_acctunit = sue_bud.get_acct(yao_text)
     yao_acctunit.add_membership(run_text)
     run_healerhold = healerhold_shop()
@@ -153,7 +153,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
     sue_bud.add_acctunit(yao_text)
-    run_text = ",runners"
+    run_text = ";runners"
     yao_acctunit = sue_bud.get_acct(yao_text)
     yao_acctunit.add_membership(run_text)
 
@@ -192,7 +192,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     zia_bud._penny = x_penny
     override_text = "override"
     yao_text = "Yao"
-    run_text = ",runners"
+    run_text = ";runners"
     zia_bud.add_acctunit(yao_text)
     yao_acctunit = zia_bud.get_acct(yao_text)
     yao_acctunit.add_membership(run_text)
@@ -302,7 +302,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
 
     anna_text = "Anna"
     anna_acctunit = yao_bud.get_acct(anna_text)
-    assert anna_acctunit.get_membership(",Family").credit_vote == 6.2
+    assert anna_acctunit.get_membership(";Family").credit_vote == 6.2
     assert yao_bud._accts is not None
     assert len(yao_bud._accts) == 22
 
@@ -340,7 +340,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_bud.add_acctunit(acct_id=sue_text, credit_score=199, debtit_score=199)
     xio_text = "Xio"
     zia_bud.add_acctunit(acct_id=xio_text)
-    run_text = ",runners"
+    run_text = ";runners"
     sue_acctunit = zia_bud.get_acct(sue_text)
     xio_acctunit = zia_bud.get_acct(xio_text)
     sue_acctunit.add_membership(run_text)

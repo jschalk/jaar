@@ -13,8 +13,8 @@ def test_BudUnit_get_acctunit_group_ids_dict_ReturnsObj():
     bob_bud.add_acctunit(zia_text)
     sue_acctunit = bob_bud.get_acct(sue_text)
     zia_acctunit = bob_bud.get_acct(zia_text)
-    run_text = ",Run"
-    swim_text = ",Swim"
+    run_text = ";Run"
+    swim_text = ";Swim"
     sue_acctunit.add_membership(run_text)
     zia_acctunit.add_membership(run_text)
     zia_acctunit.add_membership(swim_text)
@@ -37,7 +37,7 @@ def test_BudUnit_get_acctunit_group_ids_dict_ReturnsObj():
 def test_BudUnit_set_groupbox_SetsAttr_Scenario0():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
-    run_text = ",Run"
+    run_text = ";Run"
     assert not bob_bud._groupboxs.get(run_text)
 
     # WHEN
@@ -51,7 +51,7 @@ def test_BudUnit_set_groupbox_Sets_road_fund_coin():
     # ESTABLISH
     x_fund_coin = 5
     bob_bud = budunit_shop("Bob", _fund_coin=x_fund_coin)
-    run_text = ",Run"
+    run_text = ";Run"
     assert not bob_bud._groupboxs.get(run_text)
 
     # WHEN
@@ -64,7 +64,7 @@ def test_BudUnit_set_groupbox_Sets_road_fund_coin():
 def test_BudUnit_groupbox_exists_ReturnsObj():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
-    run_text = ",Run"
+    run_text = ";Run"
     assert not bob_bud.groupbox_exists(run_text)
 
     # WHEN
@@ -77,7 +77,7 @@ def test_BudUnit_groupbox_exists_ReturnsObj():
 def test_BudUnit_get_groupbox_ReturnsObj():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
-    run_text = ",Run"
+    run_text = ";Run"
     x_run_groupbox = groupbox_shop(run_text)
     bob_bud.set_groupbox(x_run_groupbox)
     assert bob_bud._groupboxs.get(run_text)

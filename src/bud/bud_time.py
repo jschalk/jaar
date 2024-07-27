@@ -635,7 +635,7 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
         year4_withleap_str(),
         _begin=0,
         _close=2103840,
-        _numeric_road="ZZ,time,tech,400 year segment,0-100-25 leap years,4year with leap",
+        _numeric_road="ZZ;time;tech;400 year segment;0-100-25 leap years;4year with leap",
     )
     x1_year1_ideaunit = i_shop(
         year1_str(), _begin=0, _close=527040, _range_source_road=year366_road
@@ -1319,9 +1319,9 @@ class InvalidPremiseUnitException(Exception):
 class PremiseUnitHregTime:
     _weekday: str = None
     _every_x_days: int = None  # builds jajatime(minute)
-    _every_x_months: int = None  # builds mybud,time,months
-    _on_x_monthday: int = None  # " build mybud,time,month,monthday
-    _every_x_years: int = None  # builds mybud,time,years
+    _every_x_months: int = None  # builds mybud,time;months
+    _on_x_monthday: int = None  # " build mybud,time;month,monthday
+    _every_x_years: int = None  # builds mybud,time;years
     _every_x_weeks: int = None  # builds jajatime(minute)
     _x_week_remainder: int = None
     _between_hr_min_open: int = None  # clock and y o'clock" build jajatime(minutes)

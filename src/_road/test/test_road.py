@@ -95,9 +95,9 @@ def test_road_road_validate_correctlyReturnsRoadUnit():
 def test_road_create_road_ReturnsCorrectRoadUnitWith_delimiter():
     # ESTABLISH
     rose_text = "rose"
-    comma_delimiter = ","
-    comma_delimiter_rose_road = f"{root_label()}{comma_delimiter}{rose_text}"
-    assert create_road(root_label(), rose_text) == comma_delimiter_rose_road
+    semicolon_delimiter = ";"
+    semicolon_delimiter_rose_road = f"{root_label()}{semicolon_delimiter}{rose_text}"
+    assert create_road(root_label(), rose_text) == semicolon_delimiter_rose_road
 
     # WHEN
     slash_delimiter = "/"
@@ -107,7 +107,7 @@ def test_road_create_road_ReturnsCorrectRoadUnitWith_delimiter():
     )
 
     # THEN
-    assert generated_rose_road != comma_delimiter_rose_road
+    assert generated_rose_road != semicolon_delimiter_rose_road
     assert generated_rose_road == slash_delimiter_rose_road
 
     # WHEN
@@ -468,15 +468,15 @@ def test_replace_road_delimiter_ReturnsNewObj():
     # ESTABLISH
     casa_text = "casa"
     gen_casa_road = create_road(root_label(), casa_text)
-    comma_delimiter = default_road_delimiter_if_none()
-    comma_delimiter_casa_road = f"{root_label()}{comma_delimiter}{casa_text}"
-    assert comma_delimiter == ","
-    assert gen_casa_road == comma_delimiter_casa_road
+    semicolon_delimiter = default_road_delimiter_if_none()
+    semicolon_delimiter_casa_road = f"{root_label()}{semicolon_delimiter}{casa_text}"
+    assert semicolon_delimiter == ";"
+    assert gen_casa_road == semicolon_delimiter_casa_road
 
     # WHEN
     slash_delimiter = "/"
     gen_casa_road = replace_road_delimiter(
-        gen_casa_road, old_delimiter=comma_delimiter, new_delimiter=slash_delimiter
+        gen_casa_road, old_delimiter=semicolon_delimiter, new_delimiter=slash_delimiter
     )
 
     # THEN
@@ -488,22 +488,24 @@ def test_replace_road_delimiter_CorrectlyRaisesError():
     # ESTABLISH
     cooker_text = "cooker/cleaner"
     gen_cooker_road = create_road(root_label(), cooker_text)
-    comma_delimiter = default_road_delimiter_if_none()
-    comma_delimiter_cooker_road = f"{root_label()}{comma_delimiter}{cooker_text}"
-    assert comma_delimiter == ","
-    assert gen_cooker_road == comma_delimiter_cooker_road
+    semicolon_delimiter = default_road_delimiter_if_none()
+    semicolon_delimiter_cooker_road = (
+        f"{root_label()}{semicolon_delimiter}{cooker_text}"
+    )
+    assert semicolon_delimiter == ";"
+    assert gen_cooker_road == semicolon_delimiter_cooker_road
 
     # WHEN / THEN
     slash_delimiter = "/"
     with pytest_raises(Exception) as excinfo:
         gen_cooker_road = replace_road_delimiter(
             gen_cooker_road,
-            old_delimiter=comma_delimiter,
+            old_delimiter=semicolon_delimiter,
             new_delimiter=slash_delimiter,
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_road_delimiter '{comma_delimiter}' with '{slash_delimiter}' because the new one already exists in road '{gen_cooker_road}'."
+        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one already exists in road '{gen_cooker_road}'."
     )
 
 
@@ -511,21 +513,23 @@ def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
     # ESTABLISH
     cooker_text = "/cooker"
     cleaner_text = "cleaner"
-    comma_delimiter = default_road_delimiter_if_none()
-    comma_delimiter_cooker_road = f"{cooker_text}{comma_delimiter}{cleaner_text}"
-    assert comma_delimiter == ","
+    semicolon_delimiter = default_road_delimiter_if_none()
+    semicolon_delimiter_cooker_road = (
+        f"{cooker_text}{semicolon_delimiter}{cleaner_text}"
+    )
+    assert semicolon_delimiter == ";"
 
     # WHEN / THEN
     slash_delimiter = "/"
     with pytest_raises(Exception) as excinfo:
-        comma_delimiter_cooker_road = replace_road_delimiter(
-            comma_delimiter_cooker_road,
-            old_delimiter=comma_delimiter,
+        semicolon_delimiter_cooker_road = replace_road_delimiter(
+            semicolon_delimiter_cooker_road,
+            old_delimiter=semicolon_delimiter,
             new_delimiter=slash_delimiter,
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_road_delimiter '{comma_delimiter}' with '{slash_delimiter}' because the new one already exists in road '{comma_delimiter_cooker_road}'."
+        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one already exists in road '{semicolon_delimiter_cooker_road}'."
     )
 
 

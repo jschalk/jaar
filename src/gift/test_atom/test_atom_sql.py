@@ -72,7 +72,7 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
     update_disc_atomunit.set_optional_arg(open_text, knee_open)
 
     # WHEN
-    gen_sqlstr = update_disc_atomunit.get_insert_sqlstr()
+    generated_sqlstr = update_disc_atomunit.get_insert_sqlstr()
 
     # THEN
     example_sqlstr = f"""
@@ -87,7 +87,8 @@ VALUES (
 , {knee_open}
 )
 ;"""
-    assert gen_sqlstr == example_sqlstr
+    print(f"{generated_sqlstr=}")
+    assert generated_sqlstr == example_sqlstr
 
 
 def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():

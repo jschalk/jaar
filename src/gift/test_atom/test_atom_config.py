@@ -15,6 +15,7 @@ from src.gift.atom_config import (
     normal_specs_text,
     sqlite_datatype_text,
     python_type_text,
+    nesting_order_str,
     budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -25,6 +26,7 @@ from src.gift.atom_config import (
     bud_idea_grouphold_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    get_sorted_required_arg_keys,
 )
 
 
@@ -227,9 +229,59 @@ def check_every_arg_dict_has_elements(atom_config_dict):
 
 
 def test_atom_config_AllArgsHave_python_type_sqlite_datatype():
-    # ESTABLISH
-    # WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert check_every_arg_dict_has_elements(get_atom_config_dict())
+
+
+def check_necessary_nesting_order_exists() -> bool:
+    atom_config = get_atom_config_dict()
+    multi_required_arg_dict = {}
+    for atom_key, atom_value in atom_config.items():
+        required_args = atom_value.get(required_args_text())
+        if len(required_args) > 1:
+            multi_required_arg_dict[atom_key] = required_args
+    # print(f"{multi_required_arg_dict.keys()=}")
+    for atom_key, required_args in multi_required_arg_dict.items():
+        for required_arg_key, required_args_dict in required_args.items():
+            required_arg_nesting_order = required_args_dict.get(nesting_order_str())
+            print(f"{atom_key=} {required_arg_key=} {required_arg_nesting_order=}")
+            if required_arg_nesting_order is None:
+                return False
+    return True
+
+
+def test_atom_config_NestingOrderExistsWhenNeeded():
+    # When ChangUnit places an AtomUnit in a nested dictionary ChangUnit.atomunits
+    # the order of required argments decides the location. The order must always be
+    # the same. All atom_config elements with two or more required args
+    # must assign to each of those args a nesting order
+
+    # ESTABLISH
+    # grab every atom_config with multiple required args
+
+    assert check_necessary_nesting_order_exists()
+
+
+def test_get_sorted_required_arg_keys_ReturnsObj_bud_acctunit():
+    # ESTABLISH
+    x_category = bud_acctunit_text()
+
+    # WHEN
+    x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
+
+    # THEN
+    assert x_sorted_required_arg_keys == ["acct_id"]
+
+
+def test_get_sorted_required_arg_keys_ReturnsObj_bud_idea_reason_premiseunit():
+    # ESTABLISH
+    x_category = bud_idea_reason_premiseunit_text()
+
+    # WHEN
+    x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
+
+    # THEN
+    assert x_sorted_required_arg_keys == ["road", "base", "need"]
 
 
 def test_get_flattened_atom_table_build_ReturnsCorrectObj():

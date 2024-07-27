@@ -1,5 +1,11 @@
 from src.bud.acct import acctunit_shop
-from src.gift.atom import AtomUnit, atomunit_shop, atom_insert, atom_delete
+from src.gift.atom_config import (
+    atom_insert,
+    atom_delete,
+    bud_acctunit_text,
+    bud_acct_membership_text,
+)
+from src.gift.atom import AtomUnit, atomunit_shop
 
 
 def test_AtomUnit_exists():
@@ -255,3 +261,32 @@ def test_AtomUnit_set_arg_SetsAny_required_arg_optional_arg():
     assert bob_insert_atomunit.get_value(dw_text) == bob_debtit_score
     assert bob_insert_atomunit.get_value(acct_id_text) == bob_text
     assert bob_insert_atomunit.is_valid()
+
+
+def test_AtomUnit_get_nesting_order_args_ReturnsObj_bud_acctunit():
+    # ESTABLISH
+    sue_text = "Sue"
+    acct_id_text = "acct_id"
+    sue_insert_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
+    sue_insert_atomunit.set_arg(acct_id_text, sue_text)
+    print(f"{sue_insert_atomunit.required_args=}")
+
+    # WHEN / THEN
+    ordered_required_args = [sue_text]
+    assert sue_insert_atomunit.get_nesting_order_args() == ordered_required_args
+
+
+def test_AtomUnit_get_nesting_order_args_ReturnsObj_bud_acct_membership():
+    # ESTABLISH
+    sue_text = "Sue"
+    iowa_text = ";Iowa"
+    group_id_text = "group_id"
+    acct_id_text = "acct_id"
+    sue_insert_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
+    sue_insert_atomunit.set_arg(group_id_text, iowa_text)
+    sue_insert_atomunit.set_arg(acct_id_text, sue_text)
+    print(f"{sue_insert_atomunit.required_args=}")
+
+    # WHEN / THEN
+    ordered_required_args = [sue_text, iowa_text]
+    assert sue_insert_atomunit.get_nesting_order_args() == ordered_required_args

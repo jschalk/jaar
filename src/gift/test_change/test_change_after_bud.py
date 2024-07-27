@@ -183,10 +183,10 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership()
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
-    run_text = ",runners"
+    run_text = ";runners"
     yao_acctunit.add_membership(run_text)
     zia_acctunit.add_membership(run_text)
-    fly_text = ",flyers"
+    fly_text = ";flyers"
     yao_acctunit.add_membership(fly_text)
     zia_acctunit.add_membership(fly_text)
     bob_acctunit.add_membership(fly_text)
@@ -224,7 +224,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership()
     before_sue_budunit.add_acctunit(yao_text)
     before_sue_budunit.add_acctunit(zia_text)
     before_sue_budunit.add_acctunit(bob_text)
-    run_text = ",runners"
+    run_text = ";runners"
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     zia_acctunit.add_membership(run_text)
     before_group_ids = before_sue_budunit.get_acctunit_group_ids_dict()
@@ -257,7 +257,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership()
     yao_text = "Yao"
     before_sue_budunit.add_acctunit(yao_text)
     before_yao_acctunit = before_sue_budunit.get_acct(yao_text)
-    run_text = ",runners"
+    run_text = ";runners"
     old_yao_run_credit_vote = 3
     before_yao_acctunit.add_membership(run_text, old_yao_run_credit_vote)
     yao_run_membership = before_yao_acctunit.get_membership(run_text)
@@ -415,10 +415,10 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
-    run_text = ",runners"
+    run_text = ";runners"
     yao_acctunit.add_membership(run_text)
     zia_acctunit.add_membership(run_text)
-    fly_text = ",flyers"
+    fly_text = ";flyers"
     yao_acctunit.add_membership(fly_text)
     zia_acctunit.add_membership(fly_text)
     bob_acctunit.add_membership(fly_text)
@@ -461,7 +461,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     before_sue_budunit.add_acctunit(yao_text)
     before_sue_budunit.add_acctunit(zia_text)
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
-    run_text = ",runners"
+    run_text = ";runners"
     yao_acctunit.add_membership(run_text)
 
     sports_text = "sports"
@@ -502,7 +502,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     zia_text = "Zia"
     before_sue_budunit.add_acctunit(yao_text)
     before_sue_budunit.add_acctunit(zia_text)
-    run_text = ",runners"
+    run_text = ";runners"
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
     yao_acctunit.add_membership(run_text)
     sports_text = "sports"
@@ -1012,10 +1012,10 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     yao_acctunit = before_sue_budunit.get_acct(yao_text)
     zia_acctunit = before_sue_budunit.get_acct(zia_text)
     bob_acctunit = before_sue_budunit.get_acct(bob_text)
-    run_text = ",runners"
+    run_text = ";runners"
     yao_acctunit.add_membership(run_text)
     zia_acctunit.add_membership(run_text)
-    fly_text = ",flyers"
+    fly_text = ";flyers"
     yao_acctunit.add_membership(fly_text)
     bob_acctunit.add_membership(fly_text)
     assert before_sue_budunit._tally != 55

@@ -3,7 +3,7 @@ from src.bud.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
 
 def test_HealerHold_exists():
     # ESTABLISH
-    run_text = ",runners"
+    run_text = ";runners"
     run_group_ids = {run_text}
 
     # WHEN
@@ -16,7 +16,7 @@ def test_HealerHold_exists():
 
 def test_healerhold_shop_ReturnsCorrectWithCorrectAttributes_v1():
     # ESTABLISH
-    run_text = ",runners"
+    run_text = ";runners"
     run_group_ids = {run_text}
 
     # WHEN

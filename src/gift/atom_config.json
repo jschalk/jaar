@@ -22,10 +22,12 @@
         },
         "required_args": {
             "acct_id": {
+                "nesting_order": 0,
                 "python_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             },
             "group_id": {
+                "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             }
@@ -90,10 +92,12 @@
         },
         "required_args": {
             "group_id": {
+                "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
@@ -130,10 +134,12 @@
         },
         "required_args": {
             "base": {
+                "nesting_order": 1,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
@@ -157,10 +163,12 @@
         "optional_args": {},
         "required_args": {
             "group_id": {
+                "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
@@ -181,10 +189,12 @@
         "optional_args": {},
         "required_args": {
             "group_id": {
+                "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
@@ -218,14 +228,17 @@
         },
         "required_args": {
             "base": {
+                "nesting_order": 1,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "need": {
+                "nesting_order": 2,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
@@ -254,10 +267,12 @@
         },
         "required_args": {
             "base": {
+                "nesting_order": 1,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
@@ -326,10 +341,12 @@
         },
         "required_args": {
             "label": {
+                "nesting_order": 1,
                 "python_type": "RoadNode",
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
+                "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }

@@ -448,8 +448,8 @@ def test_DoerUnit_get_grouphold_ReturnsCorrectObj():
     # ESTABLISH
     climb_text = ",climbers"
     walk_text = ",walkers"
-    swim_text = ",swimmers"
-    run_text = ",runners"
+    swim_text = ";swimmers"
+    run_text = ";runners"
 
     x_doerunit = doerunit_shop()
     x_doerunit.set_grouphold(climb_text)

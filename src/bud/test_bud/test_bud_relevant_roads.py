@@ -18,7 +18,7 @@ def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 0
-    assert relevant_roads == {}
+    assert relevant_roads == set()
 
 
 def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
@@ -33,7 +33,7 @@ def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 1
-    assert relevant_roads == {x_bud._real_id: -1}
+    assert relevant_roads == {x_bud._real_id}
 
 
 def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
@@ -52,7 +52,7 @@ def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 3
-    assert relevant_roads == {x_bud._real_id: -1, sun_road: -1, week_road: -1}
+    assert relevant_roads == {x_bud._real_id, sun_road, week_road}
 
 
 def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
@@ -86,13 +86,8 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 4
-    assert relevant_roads == {
-        sue_bud._real_id: -1,
-        casa_road: -1,
-        status_road: -1,
-        floor_road: -1,
-    }
-    assert relevant_roads.get(unim_road) is None
+    assert relevant_roads == {sue_bud._real_id, casa_road, status_road, floor_road}
+    assert unim_road not in relevant_roads
 
 
 def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
@@ -129,21 +124,21 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 8
-    assert relevant_roads.get(clean_road) is not None
-    assert relevant_roads.get(dirty_road) is not None
-    assert relevant_roads.get(moderately_road) is not None
-    assert relevant_roads.get(very_much_road) is not None
+    assert clean_road in relevant_roads
+    assert dirty_road in relevant_roads
+    assert moderately_road in relevant_roads
+    assert very_much_road in relevant_roads
     assert relevant_roads == {
-        x_bud._real_id: -1,
-        casa_road: -1,
-        status_road: -1,
-        floor_road: -1,
-        clean_road: -1,
-        dirty_road: -1,
-        very_much_road: -1,
-        moderately_road: -1,
+        x_bud._real_id,
+        casa_road,
+        status_road,
+        floor_road,
+        clean_road,
+        dirty_road,
+        very_much_road,
+        moderately_road,
     }
-    assert relevant_roads.get(unim_road) is None
+    assert unim_road not in relevant_roads
 
 
 def test_BudUnit_get_relevant_roads_numeric_road_ReturnSimple():
@@ -170,13 +165,9 @@ def test_BudUnit_get_relevant_roads_numeric_road_ReturnSimple():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 3
-    assert relevant_roads.get(casa_road) is not None
-    assert relevant_roads.get(day_road) is not None
-    assert relevant_roads == {
-        yao_bud._real_id: -1,
-        casa_road: -1,
-        day_road: -1,
-    }
+    assert casa_road in relevant_roads
+    assert day_road in relevant_roads
+    assert relevant_roads == {yao_bud._real_id, casa_road, day_road}
 
 
 def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
@@ -207,8 +198,8 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 4
-    assert relevant_roads.get(min_range_x_road) is not None
-    assert relevant_roads.get(day_len_road) is not None
-    assert relevant_roads.get(min_days_road) is not None
-    assert relevant_roads.get(yao_bud._real_id) is not None
+    assert min_range_x_road in relevant_roads
+    assert day_len_road in relevant_roads
+    assert min_days_road in relevant_roads
+    assert yao_bud._real_id in relevant_roads
     # min_days_idea = yao_bud.get_idea_obj(min_days_road)
