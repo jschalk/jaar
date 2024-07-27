@@ -50,7 +50,7 @@ def test_open_span_csv_ReturnsObj():
     sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
     j1_spanname = jaar_format_00001_acct_v0_0_0()
-    acct_filename = f"{sue_text}_acct_example_00.csv"
+    acct_filename = f"{sue_text}_acct_example_01.csv"
     save_span_csv(j1_spanname, sue_budunit, span_examples_dir(), acct_filename)
 
     # WHEN
@@ -100,7 +100,7 @@ def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV(
     sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
     j1_spanname = jaar_format_00001_acct_v0_0_0()
-    acct_filename = f"{sue_text}_acct_example_00.csv"
+    acct_filename = f"{sue_text}_acct_example_02.csv"
     csv_example_path = f_path(span_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
     delete_dir(csv_example_path)
