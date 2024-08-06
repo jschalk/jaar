@@ -99,6 +99,10 @@ class healerhold_group_id_Exception(Exception):
     pass
 
 
+class Multiple_range_push_Exception(Exception):
+    pass
+
+
 @dataclass
 class BudUnit:
     _real_id: RealID = None
@@ -1237,6 +1241,22 @@ class BudUnit:
 
         idea_list = parent_idea.get_kids_in_range(begin=begin, close=close)
         return {x_idea._label: x_idea for x_idea in idea_list}
+
+    def tree_range_push_traverse_check(self):
+        range_push_dict = {}
+        idea_list = [self.get_idea_obj(self._real_id)]
+        while idea_list != []:
+            x_idea = idea_list.pop()
+            idea_list.extend(iter(x_idea._kids.values()))
+            for x_range_push in x_idea._range_pushs:
+                if range_push_dict.get(x_range_push):
+                    raise Multiple_range_push_Exception(
+                        f"Multiple IdeaUnits including ('{x_idea.get_road()}', '{range_push_dict.get(x_range_push)}') have range_push '{x_range_push}'"
+                    )
+                range_push_dict[x_range_push] = x_idea.get_road()
+
+    def tree_range_push_traverse_calc(self):
+        pass
 
     def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
         task_count = 0
