@@ -248,6 +248,7 @@ class IdeaUnit:
     _numor: int = None
     _reest: bool = None
     _range_source_road: RoadUnit = None
+    _range_pushs: set[RoadUnit] = None
     _numeric_road: RoadUnit = None
     pledge: bool = None
     _originunit: OriginUnit = None
@@ -867,6 +868,15 @@ class IdeaUnit:
     def is_arithmetic(self):
         return self._begin is not None and self._close is not None
 
+    def set_range_push(self, range_push_road: RoadUnit):
+        self._range_pushs.add(range_push_road)
+
+    def range_push_exists(self, range_push_road: RoadUnit) -> bool:
+        return range_push_road in self._range_pushs
+
+    def del_range_push(self, range_push_road: RoadUnit):
+        self._range_pushs.discard(range_push_road)
+
     def awardheir_exists(self) -> bool:
         return self._awardheirs != {}
 
@@ -1026,6 +1036,7 @@ def ideaunit_shop(
         _numor=_numor,
         _reest=_reest,
         _range_source_road=_range_source_road,
+        _range_pushs=set(),
         _numeric_road=_numeric_road,
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
