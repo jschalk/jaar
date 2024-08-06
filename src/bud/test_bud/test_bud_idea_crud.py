@@ -726,6 +726,43 @@ def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_group_ids_DoNotExist(
     )
 
 
+def test_BudUnit_edit_idea_attr_SetsIdeaUnit_range_push():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    day_text = "day"
+    day_road = yao_bud.make_l1_road(day_text)
+    time_text = "time"
+    time_road = yao_bud.make_l1_road(time_text)
+    yao_bud.set_l1_idea(ideaunit_shop(time_text))
+    time_idea = yao_bud.get_idea_obj(time_road)
+    assert not time_idea.range_push_exists(day_road)
+
+    # WHEN
+    yao_bud.edit_idea_attr(time_road, range_push=day_road)
+
+    # THEN
+    assert time_idea.range_push_exists(day_road)
+
+
+def test_BudUnit_edit_idea_attr_DeletesIdeaUnit_range_push():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    day_text = "day"
+    day_road = yao_bud.make_l1_road(day_text)
+    time_text = "time"
+    time_road = yao_bud.make_l1_road(time_text)
+    yao_bud.set_l1_idea(ideaunit_shop(time_text))
+    time_idea = yao_bud.get_idea_obj(time_road)
+    yao_bud.edit_idea_attr(time_road, range_push=day_road)
+    assert time_idea.range_push_exists(day_road)
+
+    # WHEN
+    yao_bud.edit_idea_attr(time_road, del_range_push=day_road)
+
+    # THEN
+    assert not time_idea.range_push_exists(day_road)
+
+
 def test_BudUnit_set_idea_MustReorderKidsDictToBeAlphabetical():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")

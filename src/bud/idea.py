@@ -89,6 +89,8 @@ class IdeaAttrFilter:
     reest: bool = None
     numeric_road: RoadUnit = None
     range_source_road: float = None
+    range_push: RoadUnit = None
+    del_range_push: RoadUnit = None
     pledge: bool = None
     factunit: FactUnit = None
     descendant_pledge_count: int = None
@@ -175,6 +177,8 @@ def ideaattrfilter_shop(
     reest: bool = None,
     numeric_road: RoadUnit = None,
     range_source_road: float = None,
+    range_push: RoadUnit = None,
+    del_range_push: RoadUnit = None,
     pledge: bool = None,
     factunit: FactUnit = None,
     descendant_pledge_count: int = None,
@@ -207,6 +211,8 @@ def ideaattrfilter_shop(
         reest=reest,
         numeric_road=numeric_road,
         range_source_road=range_source_road,
+        range_push=range_push,
+        del_range_push=del_range_push,
         pledge=pledge,
         factunit=factunit,
         descendant_pledge_count=descendant_pledge_count,
@@ -623,6 +629,10 @@ class IdeaUnit:
             self._numeric_road = idea_attr.numeric_road
         if idea_attr.range_source_road is not None:
             self._range_source_road = idea_attr.range_source_road
+        if idea_attr.range_push is not None:
+            self.set_range_push(idea_attr.range_push)
+        if idea_attr.del_range_push is not None:
+            self.del_range_push(idea_attr.del_range_push)
         if idea_attr.descendant_pledge_count is not None:
             self._descendant_pledge_count = idea_attr.descendant_pledge_count
         if idea_attr.all_acct_cred is not None:
