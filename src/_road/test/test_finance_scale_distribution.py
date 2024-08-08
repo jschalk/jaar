@@ -612,7 +612,6 @@ def test__create_allot_dict_SummationFailsInConsistentWay():
         "day_minute": 40,
         "month_day": 40,
         "month_week": 40,
-        "numeric_road_test": 40,
         "weekdays": 40,
         "year_month": 40,
         "year_week": 40,
@@ -648,14 +647,13 @@ def test__create_allot_dict_SummationFailsInConsistentWay():
     #     "day_minute": 87719298,
     #     "month_day": 87719298,
     #     "month_week": 87719298,
-    #     "numeric_road_test": 87719298,
     #     "weekdays": 87719298,
     #     "year_month": 87719298,
     #     "year_week": 87719298,
     # }
     # assert gen_alloted_dict == wrongsum_allot_dict
     assert sum(gen_alloted_dict.values()) != scale_number
-    assert sum(gen_alloted_dict.values()) + 10 == scale_number
+    assert sum(gen_alloted_dict.values()) + 4 == scale_number
 
 
 def test_allot_scale_Summation():
@@ -684,7 +682,6 @@ def test_allot_scale_Summation():
         "day_minute": 40,
         "month_day": 40,
         "month_week": 40,
-        "numeric_road_test": 40,
         "weekdays": 40,
         "year_month": 40,
         "year_week": 40,
@@ -697,7 +694,7 @@ def test_allot_scale_Summation():
     top_function_alloted_dict = allot_scale(ledger, scale_number, grain_unit)
 
     # THEN
-    assert sum(sub_function_alloted_dict.values()) + 10 == scale_number
+    assert sum(sub_function_alloted_dict.values()) + 4 == scale_number
     assert sum(top_function_alloted_dict.values()) == scale_number
 
     # correct_sum_allot_dict = {
@@ -724,7 +721,6 @@ def test_allot_scale_Summation():
     #     "day_minute": 87719298,
     #     "month_day": 87719298,
     #     "month_week": 87719298,
-    #     "numeric_road_test": 87719298,
     #     "weekdays": 87719298,
     #     "year_month": 87719298,
     #     "year_week": 87719298,

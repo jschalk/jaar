@@ -228,24 +228,6 @@ def test_bud_edit_idea_label_Modifies_factunits():
     assert factunit_obj.pick == new_rain_road
 
 
-def test_bud_edit_idea_label_Modifies_idearoot_range_source_road():
-    # ESTABLISH this should never happen but best be thorough
-    yao_bud = budunit_shop("Yao")
-    old_casa_text = "casa"
-    old_casa_road = yao_bud.make_l1_road(old_casa_text)
-    yao_bud.set_l1_idea(ideaunit_shop(old_casa_text))
-    yao_bud.edit_idea_attr(yao_bud._real_id, range_source_road=old_casa_road)
-    assert yao_bud._idearoot._range_source_road == old_casa_road
-
-    # WHEN
-    new_casa_text = "casita"
-    yao_bud.edit_idea_label(old_road=old_casa_road, new_label=new_casa_text)
-
-    # THEN
-    new_casa_road = yao_bud.make_l1_road(new_casa_text)
-    assert yao_bud._idearoot._range_source_road == new_casa_road
-
-
 def test_bud_edit_idea_label_ModifiesIdeaUnitN_range_source_road():
     bob_bud = budunit_shop("Bob")
     casa_text = "casa"
@@ -261,9 +243,9 @@ def test_bud_edit_idea_label_ModifiesIdeaUnitN_range_source_road():
     bob_bud.set_idea(ideaunit_shop(rain_text), parent_road=old_water_road)
     bob_bud.set_l1_idea(ideaunit_shop(mood_text))
 
-    bob_bud.edit_idea_attr(road=mood_road, range_source_road=old_rain_road)
+    bob_bud.edit_idea_attr(road=mood_road, range_push=old_rain_road)
     mood_idea = bob_bud.get_idea_obj(mood_road)
-    assert mood_idea._range_source_road == old_rain_road
+    assert old_rain_road in mood_idea._range_pushs
 
     # WHEN
     new_water_text = "h2o"
@@ -279,7 +261,8 @@ def test_bud_edit_idea_label_ModifiesIdeaUnitN_range_source_road():
     #         for idea_z in idea_y._kids.values():
     #             print(f"{idea_z._parent_road=} {idea_z._label=}")
     assert old_rain_road != new_rain_road
-    assert mood_idea._range_source_road == new_rain_road
+    assert old_rain_road not in mood_idea._range_pushs
+    assert new_rain_road in mood_idea._range_pushs
 
 
 def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():

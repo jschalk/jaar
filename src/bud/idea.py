@@ -914,12 +914,14 @@ class IdeaUnit:
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         if is_sub_road(ref_road=self._parent_road, sub_road=old_road):
             self._parent_road = rebuild_road(self._parent_road, old_road, new_road)
-        if is_sub_road(ref_road=self._range_source_road, sub_road=old_road):
-            self._range_source_road = rebuild_road(
-                self._range_source_road, old_road, new_road
-            )
-        if is_sub_road(ref_road=self._numeric_road, sub_road=old_road):
-            self._numeric_road = rebuild_road(self._numeric_road, old_road, new_road)
+        new_range_pushs_dict = {}
+        for range_push in self._range_pushs:
+            if is_sub_road(range_push, old_road):
+                new_range_push = rebuild_road(range_push, old_road, new_road)
+                new_range_pushs_dict[range_push] = new_range_push
+        for old_range_push, dst_range_push in new_range_pushs_dict.items():
+            self._range_pushs.remove(old_range_push)
+            self._range_pushs.add(dst_range_push)
 
         self._reasonunits == find_replace_road_key_dict(
             dict_x=self._reasonunits, old_road=old_road, new_road=new_road
