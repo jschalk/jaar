@@ -99,6 +99,10 @@ def bud_idea_grouphold_text() -> str:
     return "bud_idea_grouphold"
 
 
+def bud_idea_range_push_text() -> str:
+    return "bud_idea_range_push"
+
+
 def bud_idea_healerhold_text() -> str:
     return "bud_idea_healerhold"
 

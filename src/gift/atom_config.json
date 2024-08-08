@@ -2,7 +2,7 @@
     "bud_acct_membership": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 23
+            "atom_order": 25
         },
         "INSERT": {
             "atom_order": 1
@@ -34,13 +34,13 @@
         },
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 10
+            "atom_order": 11
         }
     },
     "bud_acctunit": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 24
+            "atom_order": 26
         },
         "INSERT": {
             "atom_order": 0
@@ -66,13 +66,13 @@
         },
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 9
+            "atom_order": 10
         }
     },
     "bud_idea_awardlink": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 21
+            "atom_order": 23
         },
         "INSERT": {
             "atom_order": 3
@@ -104,16 +104,16 @@
         },
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 12
+            "atom_order": 13
         }
     },
     "bud_idea_factunit": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 18
+            "atom_order": 19
         },
         "INSERT": {
-            "atom_order": 6
+            "atom_order": 7
         },
         "normal_specs": {
             "normal_table_name": "fact"
@@ -146,13 +146,13 @@
         },
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 13
+            "atom_order": 14
         }
     },
     "bud_idea_grouphold": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 19
+            "atom_order": 21
         },
         "INSERT": {
             "atom_order": 4
@@ -178,7 +178,7 @@
     "bud_idea_healerhold": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 20
+            "atom_order": 22
         },
         "INSERT": {
             "atom_order": 5
@@ -201,13 +201,39 @@
         },
         "treasury_only": false
     },
+    "bud_idea_range_push": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 20
+        },
+        "INSERT": {
+            "atom_order": 6
+        },
+        "normal_specs": {
+            "normal_table_name": "range_push"
+        },
+        "optional_args": {},
+        "required_args": {
+            "range_push": {
+                "nesting_order": 1,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false
+    },
     "bud_idea_reason_premiseunit": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 16
+            "atom_order": 17
         },
         "INSERT": {
-            "atom_order": 8
+            "atom_order": 9
         },
         "normal_specs": {
             "normal_table_name": "premise"
@@ -245,16 +271,16 @@
         },
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 14
+            "atom_order": 15
         }
     },
     "bud_idea_reasonunit": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 17
+            "atom_order": 18
         },
         "INSERT": {
-            "atom_order": 7
+            "atom_order": 8
         },
         "normal_specs": {
             "normal_table_name": "reason"
@@ -279,13 +305,13 @@
         },
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 15
+            "atom_order": 16
         }
     },
     "bud_ideaunit": {
         "calculated_attrs": {},
         "DELETE": {
-            "atom_order": 22
+            "atom_order": 24
         },
         "INSERT": {
             "atom_order": 2
@@ -353,7 +379,7 @@
         },
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 11
+            "atom_order": 12
         }
     },
     "budunit": {
@@ -402,7 +428,7 @@
         "required_args": {},
         "treasury_only": false,
         "UPDATE": {
-            "atom_order": 25
+            "atom_order": 27
         }
     }
 }

@@ -24,6 +24,7 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_grouphold_text,
+    bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     get_sorted_required_arg_keys,
@@ -62,6 +63,10 @@ def test_bud_idea_grouphold_text_ReturnsObj():
     assert bud_idea_grouphold_text() == "bud_idea_grouphold"
 
 
+def test_bud_idea_grouphold_text_ReturnsObj():
+    assert bud_idea_range_push_text() == "bud_idea_range_push"
+
+
 def test_bud_idea_healerhold_text_ReturnsObj():
     assert bud_idea_healerhold_text() == "bud_idea_healerhold"
 
@@ -80,6 +85,7 @@ def test_atom_config_HasCorrect_category():
         bud_idea_reasonunit_text(),
         bud_idea_reason_premiseunit_text(),
         bud_idea_grouphold_text(),
+        bud_idea_range_push_text(),
         bud_idea_healerhold_text(),
         bud_idea_factunit_text(),
     }
@@ -148,59 +154,63 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     # WHEN / THEN
     assert check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_text)
     # # Simple script for editing atom_config.json
-    # set_mog(atom_insert(), "bud_acctunit", 0)
-    # set_mog(atom_insert(), "bud_acct_membership", 1)
-    # set_mog(atom_insert(), "bud_ideaunit", 2)
-    # set_mog(atom_insert(), "bud_idea_awardlink", 3)
-    # set_mog(atom_insert(), "bud_idea_grouphold", 4)
-    # set_mog(atom_insert(), "bud_idea_healerhold", 5)
-    # set_mog(atom_insert(), "bud_idea_factunit", 6)
-    # set_mog(atom_insert(), "bud_idea_reasonunit", 7)
-    # set_mog(atom_insert(), "bud_idea_reason_premiseunit", 8)
-    # set_mog(atom_update(), "bud_acctunit", 9)
-    # set_mog(atom_update(), "bud_acct_membership", 10)
-    # set_mog(atom_update(), "bud_ideaunit", 11)
-    # set_mog(atom_update(), "bud_idea_awardlink", 12)
-    # set_mog(atom_update(), "bud_idea_factunit", 13)
-    # set_mog(atom_update(), "bud_idea_reason_premiseunit", 14)
-    # set_mog(atom_update(), "bud_idea_reasonunit", 15)
-    # set_mog(atom_delete(), "bud_idea_reason_premiseunit", 16)
-    # set_mog(atom_delete(), "bud_idea_reasonunit", 17)
-    # set_mog(atom_delete(), "bud_idea_factunit", 18)
-    # set_mog(atom_delete(), "bud_idea_grouphold", 19)
-    # set_mog(atom_delete(), "bud_idea_healerhold", 20)
-    # set_mog(atom_delete(), "bud_idea_awardlink", 21)
-    # set_mog(atom_delete(), "bud_ideaunit", 22)
-    # set_mog(atom_delete(), "bud_acct_membership", 23)
-    # set_mog(atom_delete(), "bud_acctunit", 24)
-    # set_mog(atom_update(), "budunit", 25)
+    # set_mog(atom_insert(), bud_acctunit_text(), 0)
+    # set_mog(atom_insert(), bud_acct_membership_text(), 1)
+    # set_mog(atom_insert(), bud_ideaunit_text(), 2)
+    # set_mog(atom_insert(), bud_idea_awardlink_text(), 3)
+    # set_mog(atom_insert(), bud_idea_grouphold_text(), 4)
+    # set_mog(atom_insert(), bud_idea_healerhold_text(), 5)
+    # set_mog(atom_insert(), bud_idea_range_push_text(), 6)
+    # set_mog(atom_insert(), bud_idea_factunit_text(), 7)
+    # set_mog(atom_insert(), bud_idea_reasonunit_text(), 8)
+    # set_mog(atom_insert(), bud_idea_reason_premiseunit_text(), 9)
+    # set_mog(atom_update(), bud_acctunit_text(), 10)
+    # set_mog(atom_update(), bud_acct_membership_text(), 11)
+    # set_mog(atom_update(), bud_ideaunit_text(), 12)
+    # set_mog(atom_update(), bud_idea_awardlink_text(), 13)
+    # set_mog(atom_update(), bud_idea_factunit_text(), 14)
+    # set_mog(atom_update(), bud_idea_reason_premiseunit_text(), 15)
+    # set_mog(atom_update(), bud_idea_reasonunit_text(), 16)
+    # set_mog(atom_delete(), bud_idea_reason_premiseunit_text(), 17)
+    # set_mog(atom_delete(), bud_idea_reasonunit_text(), 18)
+    # set_mog(atom_delete(), bud_idea_factunit_text(), 19)
+    # set_mog(atom_delete(), bud_idea_range_push_text(), 20)
+    # set_mog(atom_delete(), bud_idea_grouphold_text(), 21)
+    # set_mog(atom_delete(), bud_idea_healerhold_text(), 22)
+    # set_mog(atom_delete(), bud_idea_awardlink_text(), 23)
+    # set_mog(atom_delete(), bud_ideaunit_text(), 24)
+    # set_mog(atom_delete(), bud_acct_membership_text(), 25)
+    # set_mog(atom_delete(), bud_acctunit_text(), 26)
+    # set_mog(atom_update(), budunit_text(), 27)
 
-    assert 0 == q_order(atom_insert(), "bud_acctunit")
-    assert 1 == q_order(atom_insert(), "bud_acct_membership")
-    assert 2 == q_order(atom_insert(), "bud_ideaunit")
-    assert 3 == q_order(atom_insert(), "bud_idea_awardlink")
-    assert 4 == q_order(atom_insert(), "bud_idea_grouphold")
-    assert 5 == q_order(atom_insert(), "bud_idea_healerhold")
-    assert 6 == q_order(atom_insert(), "bud_idea_factunit")
-    assert 7 == q_order(atom_insert(), "bud_idea_reasonunit")
-    assert 8 == q_order(atom_insert(), "bud_idea_reason_premiseunit")
-    assert 9 == q_order(atom_update(), "bud_acctunit")
-    assert 10 == q_order(atom_update(), "bud_acct_membership")
-    assert 11 == q_order(atom_update(), "bud_ideaunit")
-    assert 12 == q_order(atom_update(), "bud_idea_awardlink")
-    assert 13 == q_order(atom_update(), "bud_idea_factunit")
-    assert 14 == q_order(atom_update(), "bud_idea_reason_premiseunit")
-    assert 15 == q_order(atom_update(), "bud_idea_reasonunit")
-    assert 16 == q_order(atom_delete(), "bud_idea_reason_premiseunit")
-    assert 17 == q_order(atom_delete(), "bud_idea_reasonunit")
-    assert 18 == q_order(atom_delete(), "bud_idea_factunit")
-    assert 19 == q_order(atom_delete(), "bud_idea_grouphold")
-    assert 20 == q_order(atom_delete(), "bud_idea_healerhold")
-    assert 21 == q_order(atom_delete(), "bud_idea_awardlink")
-    assert 22 == q_order(atom_delete(), "bud_ideaunit")
-    assert 23 == q_order(atom_delete(), "bud_acct_membership")
-    assert 24 == q_order(atom_delete(), "bud_acctunit")
-    assert 25 == q_order(atom_update(), "budunit")
+    assert 0 == q_order(atom_insert(), bud_acctunit_text())
+    assert 1 == q_order(atom_insert(), bud_acct_membership_text())
+    assert 2 == q_order(atom_insert(), bud_ideaunit_text())
+    assert 3 == q_order(atom_insert(), bud_idea_awardlink_text())
+    assert 4 == q_order(atom_insert(), bud_idea_grouphold_text())
+    assert 5 == q_order(atom_insert(), bud_idea_healerhold_text())
+    assert 6 == q_order(atom_insert(), bud_idea_range_push_text())
+    assert 7 == q_order(atom_insert(), bud_idea_factunit_text())
+    assert 8 == q_order(atom_insert(), bud_idea_reasonunit_text())
+    assert 9 == q_order(atom_insert(), bud_idea_reason_premiseunit_text())
+    assert 10 == q_order(atom_update(), bud_acctunit_text())
+    assert 11 == q_order(atom_update(), bud_acct_membership_text())
+    assert 12 == q_order(atom_update(), bud_ideaunit_text())
+    assert 13 == q_order(atom_update(), bud_idea_awardlink_text())
+    assert 14 == q_order(atom_update(), bud_idea_factunit_text())
+    assert 15 == q_order(atom_update(), bud_idea_reason_premiseunit_text())
+    assert 16 == q_order(atom_update(), bud_idea_reasonunit_text())
+    assert 17 == q_order(atom_delete(), bud_idea_reason_premiseunit_text())
+    assert 18 == q_order(atom_delete(), bud_idea_reasonunit_text())
+    assert 19 == q_order(atom_delete(), bud_idea_factunit_text())
+    assert 20 == q_order(atom_delete(), bud_idea_range_push_text())
+    assert 21 == q_order(atom_delete(), bud_idea_grouphold_text())
+    assert 22 == q_order(atom_delete(), bud_idea_healerhold_text())
+    assert 23 == q_order(atom_delete(), bud_idea_awardlink_text())
+    assert 24 == q_order(atom_delete(), bud_ideaunit_text())
+    assert 25 == q_order(atom_delete(), bud_acct_membership_text())
+    assert 26 == q_order(atom_delete(), bud_acctunit_text())
+    assert 27 == q_order(atom_update(), budunit_text())
 
 
 def _every_category_dict_has_arg_elements(category_dict: dict) -> bool:
@@ -289,7 +299,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 107
+    assert len(atom_columns) == 111
     assert atom_columns.get("budunit_UPDATE__credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
@@ -300,7 +310,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     nx = normalized_bud_table_build
 
     # THEN
-    assert len(nx) == 10
+    assert len(nx) == 11
     cat_budunit = nx.get(budunit_text())
     cat_acctunit = nx.get(bud_acctunit_text())
     cat_membership = nx.get(bud_acct_membership_text())
@@ -311,6 +321,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     cat_grouphold = nx.get(bud_idea_grouphold_text())
     cat_healerhold = nx.get(bud_idea_healerhold_text())
     cat_fact = nx.get(bud_idea_factunit_text())
+    cat_range_push = nx.get(bud_idea_range_push_text())
 
     assert cat_budunit is not None
     assert cat_acctunit is not None
@@ -322,6 +333,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert cat_grouphold is not None
     assert cat_healerhold is not None
     assert cat_fact is not None
+    assert cat_range_push is not None
 
     normal_specs_budunit = cat_budunit.get(normal_specs_text())
     normal_specs_acctunit = cat_acctunit.get(normal_specs_text())
@@ -333,6 +345,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     normal_specs_grouphold = cat_grouphold.get(normal_specs_text())
     normal_specs_healerhold = cat_healerhold.get(normal_specs_text())
     normal_specs_fact = cat_fact.get(normal_specs_text())
+    normal_specs_range_push = cat_range_push.get(normal_specs_text())
 
     columns_text = "columns"
     print(f"{cat_budunit.keys()=}")
@@ -347,6 +360,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert normal_specs_grouphold is not None
     assert normal_specs_healerhold is not None
     assert normal_specs_fact is not None
+    assert normal_specs_range_push is not None
 
     table_name_budunit = normal_specs_budunit.get(normal_table_name_text())
     table_name_acctunit = normal_specs_acctunit.get(normal_table_name_text())
@@ -358,6 +372,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     table_name_grouphold = normal_specs_grouphold.get(normal_table_name_text())
     table_name_healerhold = normal_specs_healerhold.get(normal_table_name_text())
     table_name_fact = normal_specs_fact.get(normal_table_name_text())
+    table_name_range_push = normal_specs_range_push.get(normal_table_name_text())
 
     assert table_name_budunit == "bud"
     assert table_name_acctunit == "acctunit"
@@ -369,6 +384,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert table_name_grouphold == "grouphold"
     assert table_name_healerhold == "healerhold"
     assert table_name_fact == "fact"
+    assert table_name_range_push == "range_push"
 
     assert len(cat_budunit) == 2
     assert cat_budunit.get(columns_text) is not None
