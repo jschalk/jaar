@@ -61,6 +61,11 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), "bud_idea_healerhold"]
     bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
+    x_list = [atom_insert(), "bud_idea_range_push"]
+    bud_idea_range_push_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_range_push"]
+    bud_idea_range_push_delete_dict = get_leg_obj(atoms_dict, x_list)
+
     x_list = [atom_insert(), "bud_idea_factunit"]
     bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
     x_list = [atom_update(), "bud_idea_factunit"]
@@ -159,6 +164,15 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     if bud_idea_healerhold_delete_dict is not None:
         add_bud_idea_healerhold_delete_to_legible_list(
             leg_list, bud_idea_healerhold_delete_dict, x_bud
+        )
+
+    if bud_idea_range_push_insert_dict is not None:
+        add_bud_idea_range_push_insert_to_legible_list(
+            leg_list, bud_idea_range_push_insert_dict, x_bud
+        )
+    if bud_idea_range_push_delete_dict is not None:
+        add_bud_idea_range_push_delete_to_legible_list(
+            leg_list, bud_idea_range_push_delete_dict, x_bud
         )
 
     if bud_idea_factunit_insert_dict is not None:
@@ -651,6 +665,28 @@ def add_bud_idea_healerhold_delete_to_legible_list(
             group_id_value = idea_healerhold_atom.get_value("group_id")
             road_value = idea_healerhold_atom.get_value("road")
             x_str = f"Healerhold '{group_id_value}' deleted for idea '{road_value}'."
+            legible_list.append(x_str)
+
+
+def add_bud_idea_range_push_insert_to_legible_list(
+    legible_list: list[str], idea_range_push_insert_dict: dict, x_bud: BudUnit
+):
+    for road_dict in idea_range_push_insert_dict.values():
+        for idea_range_push_atom in road_dict.values():
+            range_push_value = idea_range_push_atom.get_value("range_push")
+            road_value = idea_range_push_atom.get_value("road")
+            x_str = f"range_push '{range_push_value}' created for idea '{road_value}'."
+            legible_list.append(x_str)
+
+
+def add_bud_idea_range_push_delete_to_legible_list(
+    legible_list: list[str], idea_range_push_delete_dict: dict, x_bud: BudUnit
+):
+    for road_dict in idea_range_push_delete_dict.values():
+        for idea_range_push_atom in road_dict.values():
+            range_push_value = idea_range_push_atom.get_value("range_push")
+            road_value = idea_range_push_atom.get_value("road")
+            x_str = f"range_push '{range_push_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 
