@@ -683,3 +683,49 @@ def test_IdeaUnit_clear_debut_arret_SetsAttr():
     # THEN
     assert not time_idea._debut
     assert not time_idea._arret
+
+
+def test_IdeaUnit_transform_debut_arret_SetsAttr_denom():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom)
+    init_debut = 21
+    init_arret = 42
+    time_idea._debut = init_debut
+    time_idea._arret = init_arret
+    time_idea._denom = time_denom
+    assert time_idea._debut
+    assert time_idea._arret
+
+    # WHEN
+    time_idea._transform_debut_arret()
+
+    # THEN
+    assert time_idea._debut == init_debut / time_denom
+    assert time_idea._arret == init_arret / time_denom
+    assert time_idea._debut == 3
+    assert time_idea._arret == 6
+
+
+def test_IdeaUnit_transform_debut_arret_SetsAttr_reest():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_debut = 21
+    init_arret = 45
+    time_idea._debut = init_debut
+    time_idea._arret = init_arret
+    time_idea._denom = time_denom
+    assert time_idea._debut
+    assert time_idea._arret
+
+    # WHEN
+    time_idea._transform_debut_arret()
+
+    # THEN
+    assert time_idea._debut == 0
+    assert time_idea._arret == (init_arret - init_debut) % time_denom
+    assert time_idea._debut == 0
+    assert time_idea._arret == 3

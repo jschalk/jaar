@@ -648,10 +648,16 @@ class IdeaUnit:
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
         r_idea_addin = get_0_if_None(self._addin)
-        self._debut = self._debut + r_idea_addin
-        self._arret = self._arret + r_idea_addin
-        self._debut = (self._debut * r_idea_numor) / r_idea_denom
-        self._arret = (self._arret * r_idea_numor) / r_idea_denom
+        if get_False_if_None(self._reest):
+            debut_arret_diff = self._arret - self._debut
+            debut_arret_remainder = debut_arret_diff % self._denom
+            self._debut = 0
+            self._arret = debut_arret_remainder
+        else:
+            self._debut = self._debut + r_idea_addin
+            self._arret = self._arret + r_idea_addin
+            self._debut = (self._debut * r_idea_numor) / r_idea_denom
+            self._arret = (self._arret * r_idea_numor) / r_idea_denom
 
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
         if base is not None and premise is not None:
