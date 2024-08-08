@@ -141,33 +141,33 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     assert unim_road not in relevant_roads
 
 
-def test_BudUnit_get_relevant_roads_numeric_road_ReturnSimple():
-    # ESTABLISH
-    yao_text = "Yao"
-    yao_bud = budunit_shop(_owner_id=yao_text)
-    casa_text = "casa"
-    casa_road = yao_bud.make_l1_road(casa_text)
-    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
-    casa_idea = yao_bud.get_idea_obj(casa_road)
-    day_text = "day_range"
-    day_road = yao_bud.make_l1_road(day_text)
-    day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
-    yao_bud.set_l1_idea(day_idea)
-    yao_bud.edit_idea_attr(road=casa_road, denom=11, numeric_road=day_road)
-    assert casa_idea._begin == 4
-    print(f"{casa_idea._label=} {casa_idea._begin=} {casa_idea._close=}")
+# def test_BudUnit_get_relevant_roads_numeric_road_ReturnSimple():
+#     # ESTABLISH
+#     yao_text = "Yao"
+#     yao_bud = budunit_shop(_owner_id=yao_text)
+#     casa_text = "casa"
+#     casa_road = yao_bud.make_l1_road(casa_text)
+#     yao_bud.set_l1_idea(ideaunit_shop(casa_text))
+#     casa_idea = yao_bud.get_idea_obj(casa_road)
+#     day_text = "day_range"
+#     day_road = yao_bud.make_l1_road(day_text)
+#     day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
+#     yao_bud.set_l1_idea(day_idea)
+#     yao_bud.edit_idea_attr(road=casa_road, denom=11, numeric_road=day_road)
+#     assert casa_idea._begin == 4
+#     print(f"{casa_idea._label=} {casa_idea._begin=} {casa_idea._close=}")
 
-    # WHEN
-    yao_bud.settle_bud()
-    roads_dict = {casa_road}
-    relevant_roads = yao_bud._get_relevant_roads(roads_dict)
+#     # WHEN
+#     yao_bud.settle_bud()
+#     roads_dict = {casa_road}
+#     relevant_roads = yao_bud._get_relevant_roads(roads_dict)
 
-    # THEN
-    print(f"{relevant_roads=}")
-    assert len(relevant_roads) == 3
-    assert casa_road in relevant_roads
-    assert day_road in relevant_roads
-    assert relevant_roads == {yao_bud._real_id, casa_road, day_road}
+#     # THEN
+#     print(f"{relevant_roads=}")
+#     assert len(relevant_roads) == 3
+#     assert casa_road in relevant_roads
+#     assert day_road in relevant_roads
+#     assert relevant_roads == {yao_bud._real_id, casa_road, day_road}
 
 
 def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():

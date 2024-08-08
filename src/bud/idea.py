@@ -125,33 +125,6 @@ class IdeaAttrFilter:
             # if self.reason_premise_reest is None:
             #     self.reason_premise_reest = premise_reest
 
-    def has_numeric_attrs(self):
-        return (
-            self.begin is not None
-            or self.close is not None
-            or self.numor is not None
-            or self.numeric_road is not None
-            or self.addin is not None
-        )
-
-    def has_ratio_attrs(self):
-        return (
-            self.denom is not None
-            or self.numor is not None
-            or self.reest
-            or self.addin is not None
-        )
-
-    def set_ratio_attr_defaults_if_none(self):
-        if self.addin is None:
-            self.addin = 0
-        if self.denom is None:
-            self.denom = 1
-        if self.numor is None:
-            self.numor = 1
-        if self.reest is None:
-            self.reest = False
-
     def has_reason_premise(self):
         return self.reason_premise is not None
 
@@ -190,7 +163,7 @@ def ideaattrfilter_shop(
     is_expanded: bool = None,
     problem_bool: bool = None,
 ) -> IdeaAttrFilter:
-    x_ideaattrfilter = IdeaAttrFilter(
+    return IdeaAttrFilter(
         mass=mass,
         uid=uid,
         reason=reason,
@@ -224,9 +197,6 @@ def ideaattrfilter_shop(
         is_expanded=is_expanded,
         problem_bool=problem_bool,
     )
-    if x_ideaattrfilter.has_ratio_attrs():
-        x_ideaattrfilter.set_ratio_attr_defaults_if_none()
-    return x_ideaattrfilter
 
 
 @dataclass

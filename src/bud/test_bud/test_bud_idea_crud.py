@@ -594,91 +594,91 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     print(f"{casa_road=} {end_road=}")
 
 
-def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsError():
-    yao_bud = budunit_shop("Yao")
-    # WHEN / THEN
+# def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsError():
+#     yao_bud = budunit_shop("Yao")
+#     # WHEN / THEN
 
-    casa_text = "casa"
-    casa_road = yao_bud.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text)
-    yao_bud.set_l1_idea(casa_idea)
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    clean_road = yao_bud.make_road(casa_road, clean_text)
-    yao_bud.set_idea(clean_idea, parent_road=casa_road)
+#     casa_text = "casa"
+#     casa_road = yao_bud.make_l1_road(casa_text)
+#     casa_idea = ideaunit_shop(casa_text)
+#     yao_bud.set_l1_idea(casa_idea)
+#     clean_text = "clean"
+#     clean_idea = ideaunit_shop(clean_text)
+#     clean_road = yao_bud.make_road(casa_road, clean_text)
+#     yao_bud.set_idea(clean_idea, parent_road=casa_road)
 
-    # ESTABLISH
-    yao_bud.edit_idea_attr(road=casa_road, begin=44, close=110)
-    yao_bud.edit_idea_attr(road=clean_road, denom=11)
-    clean_idea = yao_bud.get_idea_obj(clean_road)
-    assert clean_idea._begin == 4
-    assert clean_idea._close == 10
-
-
-def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaInvaildDenomThrowsError():
-    # ESTABLISH
-    yao_bud = budunit_shop("Yao")
-    casa = "casa"
-    w_road = yao_bud.make_l1_road(casa)
-    casa_idea = ideaunit_shop(casa, _begin=8, _close=14)
-    yao_bud.set_l1_idea(casa_idea)
-
-    clean = "clean"
-    clean_idea = ideaunit_shop(clean, _denom=1)
-    c_road = yao_bud.make_road(w_road, clean)
-    yao_bud.set_idea(clean_idea, parent_road=w_road)
-
-    clean_idea = yao_bud.get_idea_obj(c_road)
-
-    day = "day_range"
-    day_idea = ideaunit_shop(day, _begin=44, _close=110)
-    day_road = yao_bud.make_l1_road(day)
-    yao_bud.set_l1_idea(day_idea)
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_idea_attr(road=c_road, numeric_road=day_road)
-    assert (
-        str(excinfo.value)
-        == "Idea has begin-close range parent, cannot have numeric_road"
-    )
-
-    yao_bud.edit_idea_attr(road=w_road, numeric_road=day_road)
+#     # ESTABLISH
+#     yao_bud.edit_idea_attr(road=casa_road, begin=44, close=110)
+#     yao_bud.edit_idea_attr(road=clean_road, denom=11)
+#     clean_idea = yao_bud.get_idea_obj(clean_road)
+#     assert clean_idea._begin == 4
+#     assert clean_idea._close == 10
 
 
-def test_BudUnit_edit_idea_attr_budWhenParentAndNumeric_roadBothHaveRangeThrowError():
-    # ESTABLISH
-    yao_bud = budunit_shop("Yao")
-    casa_text = "casa"
-    casa_road = yao_bud.make_l1_road(casa_text)
-    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
-    day_text = "day_range"
-    day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
-    day_road = yao_bud.make_l1_road(day_text)
-    yao_bud.set_l1_idea(day_idea)
+# def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaInvaildDenomThrowsError():
+#     # ESTABLISH
+#     yao_bud = budunit_shop("Yao")
+#     casa = "casa"
+#     w_road = yao_bud.make_l1_road(casa)
+#     casa_idea = ideaunit_shop(casa, _begin=8, _close=14)
+#     yao_bud.set_l1_idea(casa_idea)
 
-    casa_idea = yao_bud.get_idea_obj(casa_road)
-    assert casa_idea._begin is None
-    assert casa_idea._close is None
+#     clean = "clean"
+#     clean_idea = ideaunit_shop(clean, _denom=1)
+#     c_road = yao_bud.make_road(w_road, clean)
+#     yao_bud.set_idea(clean_idea, parent_road=w_road)
 
-    # WHEN
-    yao_bud.edit_idea_attr(road=casa_road, numeric_road=day_road)
+#     clean_idea = yao_bud.get_idea_obj(c_road)
 
-    # THEN
-    casa_idea3 = yao_bud.get_idea_obj(casa_road)
-    assert casa_idea3._addin is None
-    assert casa_idea3._numor is None
-    assert casa_idea3._denom is None
-    assert casa_idea3._reest is None
-    assert casa_idea3._begin == 44
-    assert casa_idea3._close == 110
-    yao_bud.edit_idea_attr(road=casa_road, denom=11, numeric_road=day_road)
-    assert casa_idea3._begin == 4
-    assert casa_idea3._close == 10
-    assert casa_idea3._numor == 1
-    assert casa_idea3._denom == 11
-    assert casa_idea3._reest is False
-    assert casa_idea3._addin == 0
+#     day = "day_range"
+#     day_idea = ideaunit_shop(day, _begin=44, _close=110)
+#     day_road = yao_bud.make_l1_road(day)
+#     yao_bud.set_l1_idea(day_idea)
+
+#     # WHEN / THEN
+#     with pytest_raises(Exception) as excinfo:
+#         yao_bud.edit_idea_attr(road=c_road, numeric_road=day_road)
+#     assert (
+#         str(excinfo.value)
+#         == "Idea has begin-close range parent, cannot have numeric_road"
+#     )
+
+#     yao_bud.edit_idea_attr(road=w_road, numeric_road=day_road)
+
+
+# def test_BudUnit_edit_idea_attr_budWhenParentAndNumeric_roadBothHaveRangeThrowError():
+#     # ESTABLISH
+#     yao_bud = budunit_shop("Yao")
+#     casa_text = "casa"
+#     casa_road = yao_bud.make_l1_road(casa_text)
+#     yao_bud.set_l1_idea(ideaunit_shop(casa_text))
+#     day_text = "day_range"
+#     day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
+#     day_road = yao_bud.make_l1_road(day_text)
+#     yao_bud.set_l1_idea(day_idea)
+
+#     casa_idea = yao_bud.get_idea_obj(casa_road)
+#     assert casa_idea._begin is None
+#     assert casa_idea._close is None
+
+#     # WHEN
+#     yao_bud.edit_idea_attr(road=casa_road, numeric_road=day_road)
+
+#     # THEN
+#     casa_idea3 = yao_bud.get_idea_obj(casa_road)
+#     assert casa_idea3._addin is None
+#     assert casa_idea3._numor is None
+#     assert casa_idea3._denom is None
+#     assert casa_idea3._reest is None
+#     assert casa_idea3._begin == 44
+#     assert casa_idea3._close == 110
+#     yao_bud.edit_idea_attr(road=casa_road, denom=11, numeric_road=day_road)
+#     assert casa_idea3._begin == 4
+#     assert casa_idea3._close == 10
+#     assert casa_idea3._numor == 1
+#     assert casa_idea3._denom == 11
+#     assert casa_idea3._reest is False
+#     assert casa_idea3._addin == 0
 
 
 def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_group_ids_DoNotExist():

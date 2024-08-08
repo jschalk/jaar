@@ -864,97 +864,6 @@ class BudUnit:
             # anc_reest=premise_idea.anc_reest,
         )
 
-    def _set_ideaattrfilter_begin_close(
-        self, ideaattrfilter: IdeaAttrFilter, idea_road: RoadUnit
-    ) -> set[float, float]:
-        x_iaf = ideaattrfilter
-        anc_roads = get_ancestor_roads(road=idea_road)
-        parent_road = self._real_id if len(anc_roads) == 1 else anc_roads[1]
-
-        parent_has_range = None
-        parent_idea = self.get_idea_obj(parent_road)
-        parent_begin = parent_idea._begin
-        parent_close = parent_idea._close
-        parent_has_range = parent_begin is not None and parent_close is not None
-
-        numeric_begin = None
-        numeric_close = None
-        numeric_range = None
-        if x_iaf.numeric_road is not None:
-            numeric_idea = self.get_idea_obj(x_iaf.numeric_road)
-            numeric_begin = numeric_idea._begin
-            numeric_close = numeric_idea._close
-            numeric_range = numeric_begin is not None and numeric_close is not None
-
-        if parent_has_range and x_iaf.addin not in [None, 0]:
-            parent_begin = parent_begin + x_iaf.addin
-            parent_close = parent_close + x_iaf.addin
-
-        x_begin, x_close = self._transform_begin_close(
-            reest=x_iaf.reest,
-            begin=x_iaf.begin,
-            close=x_iaf.close,
-            numor=x_iaf.numor,
-            denom=x_iaf.denom,
-            parent_has_range=parent_has_range,
-            parent_begin=parent_begin,
-            parent_close=parent_close,
-            numeric_range=numeric_range,
-            numeric_begin=numeric_begin,
-            numeric_close=numeric_close,
-        )
-
-        if parent_has_range and numeric_range:
-            raise InvalidBudException(
-                "Idea has begin-close range parent, cannot have numeric_road"
-            )
-        ideaattrfilter.begin = x_begin
-        ideaattrfilter.close = x_close
-
-    def _transform_begin_close(
-        self,
-        reest,
-        begin: float,
-        close: float,
-        numor: float,
-        denom: float,
-        parent_has_range: float,
-        parent_begin: float,
-        parent_close: float,
-        numeric_range: float,
-        numeric_begin: float,
-        numeric_close: float,
-    ):  # sourcery skip: remove-redundant-if
-        if not reest and parent_has_range and numor is not None:
-            begin = parent_begin * numor / denom
-            close = parent_close * numor / denom
-        elif not reest and parent_has_range and numor is None:
-            begin = parent_begin
-            close = parent_close
-        elif not reest and numeric_range and numor is not None:
-            begin = numeric_begin * numor / denom
-            close = numeric_close * numor / denom
-        elif not reest and numeric_range and numor is None:
-            begin = numeric_begin
-            close = numeric_close
-        elif reest and parent_has_range and numor is not None:
-            begin = parent_begin * numor % denom
-            close = parent_close * numor % denom
-        elif reest and parent_has_range and numor is None:
-            begin = 0
-            close = parent_close - parent_begin
-        elif reest and numeric_range and numor is not None:
-            begin = numeric_begin * numor % denom
-            close = numeric_close * numor % denom
-        elif reest and numeric_range and numor is None:
-            begin = 0
-            close = parent_close - parent_begin
-        else:
-            begin = begin
-            close = close
-
-        return begin, close
-
     def edit_reason(
         self,
         road: RoadUnit,
@@ -1050,8 +959,6 @@ class BudUnit:
             factunit=factunit,
             problem_bool=problem_bool,
         )
-        if x_ideaattrfilter.has_numeric_attrs():
-            self._set_ideaattrfilter_begin_close(x_ideaattrfilter, road)
         if x_ideaattrfilter.has_reason_premise():
             self._set_ideaattrfilter_premise_ranges(x_ideaattrfilter)
         x_idea = self.get_idea_obj(road)
