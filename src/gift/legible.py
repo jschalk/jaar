@@ -265,9 +265,9 @@ def add_bud_acctunit_update_to_legible_list(
         debtit_score_value = acctunit_atom.get_value("debtit_score")
         if credit_score_value is not None and debtit_score_value is not None:
             x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt."
-        elif credit_score_value is not None and debtit_score_value is None:
+        elif credit_score_value is not None:
             x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred."
-        elif credit_score_value is None and debtit_score_value is not None:
+        elif debtit_score_value is not None:
             x_str = f"{acct_id} now has {debtit_score_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
@@ -480,9 +480,9 @@ def add_bud_idea_awardlink_update_to_legible_list(
             take_force_value = idea_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
                 x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
-            elif give_force_value is not None and take_force_value is None:
+            elif give_force_value is not None:
                 x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
-            elif give_force_value is None and take_force_value is not None:
+            elif take_force_value is not None:
                 x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
@@ -530,7 +530,7 @@ def add_bud_idea_reasonunit_update_to_legible_list(
             )
             if base_idea_active_requisite_value is not None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
-            elif base_idea_active_requisite_value is None:
+            else:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' and no longer checks base active mode."
             legible_list.append(x_str)
 
