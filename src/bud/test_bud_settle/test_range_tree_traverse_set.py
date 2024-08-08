@@ -229,60 +229,201 @@ def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_Si
     assert time1_idea._arret == time0_close
 
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom():
-#     # ESTABLISH
-#     yao_bud = budunit_shop("Yao")
-#     time0_text = "time0"
-#     time0_road = yao_bud.make_l1_road(time0_text)
-#     time0_begin = 7
-#     time0_close = 31
-#     time0_demon = 31
-#     time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
-#     yao_bud.set_l1_idea(time0_idea)
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 14
+    time0_close = 35
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
 
-#     time1_text = "time1"
-#     time1_road = yao_bud.make_road(time0_road, time1_text)
-#     yao_bud.set_idea(ideaunit_shop(time1_text), time0_road)
-#     time1_idea = yao_bud.get_idea_obj(time1_road)
-#     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-#     assert not root_idea._debut
-#     assert not root_idea._arret
-#     assert time0_idea._begin == time0_begin
-#     assert time0_idea._close == time0_close
-#     assert time1_idea._begin != time0_begin
-#     assert time1_idea._close != time0_close
-#     assert not time1_idea._debut
-#     assert not time1_idea._arret
+    time1_text = "time1"
+    time1_denom = 7
+    time1_road = yao_bud.make_road(time0_road, time1_text)
+    yao_bud.set_idea(ideaunit_shop(time1_text, _denom=time1_denom), time0_road)
+    time1_idea = yao_bud.get_idea_obj(time1_road)
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._debut
+    assert not root_idea._arret
+    assert time0_idea._begin == time0_begin
+    assert time0_idea._close == time0_close
+    assert time1_idea._begin != time0_begin
+    assert time1_idea._close != time0_close
+    assert not time1_idea._debut
+    assert not time1_idea._arret
 
-#     # WHEN
-#     yao_bud.tree_arithmetic_traverse_calc()
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
 
-#     # THEN
-#     assert time1_idea._begin != time0_begin
-#     assert time1_idea._close != time0_close
-#     assert not time1_idea._begin
-#     assert not time1_idea._close
-#     assert time1_idea._debut == time0_begin
-#     assert time1_idea._arret == time0_close
-
-
-# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom_numor():
-#     # ESTABLISH
-#     assert 5 == 6
+    # THEN
+    assert not time1_idea._begin
+    assert not time1_idea._close
+    assert time1_idea._debut == time0_begin / time1_denom
+    assert time1_idea._arret == time0_close / time1_denom
+    assert time1_idea._debut == 2
+    assert time1_idea._arret == 5
 
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_addin():
-#     # ESTABLISH
-#     assert 5 == 6
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom_numor():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 14
+    time0_close = 35
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
+
+    time1_text = "time1"
+    time1_denom = 7
+    time1_numor = 3
+    time1_road = yao_bud.make_road(time0_road, time1_text)
+    temp_idea = ideaunit_shop(time1_text, _numor=time1_numor, _denom=time1_denom)
+    yao_bud.set_idea(temp_idea, time0_road)
+    time1_idea = yao_bud.get_idea_obj(time1_road)
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._debut
+    assert not root_idea._arret
+    assert time0_idea._begin == time0_begin
+    assert time0_idea._close == time0_close
+    assert time1_idea._begin != time0_begin
+    assert time1_idea._close != time0_close
+    assert not time1_idea._debut
+    assert not time1_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert not time1_idea._begin
+    assert not time1_idea._close
+    assert time1_idea._debut == (time0_begin * time1_numor) / time1_denom
+    assert time1_idea._arret == (time0_close * time1_numor) / time1_denom
+    assert time1_idea._debut == 6
+    assert time1_idea._arret == 15
 
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom_addin():
-#     # ESTABLISH
-#     assert 5 == 6
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_addin():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 3
+    time0_close = 7
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_RaisesErrorIfDescendentHas_begin_close():
-#     # ESTABLISH
-#     assert 5 == 6
+    time1_text = "time1"
+    time1_addin = 5
+    time1_road = yao_bud.make_road(time0_road, time1_text)
+    temp_idea = ideaunit_shop(time1_text, _addin=time1_addin)
+    yao_bud.set_idea(temp_idea, time0_road)
+    time1_idea = yao_bud.get_idea_obj(time1_road)
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._debut
+    assert not root_idea._arret
+    assert time0_idea._begin == time0_begin
+    assert time0_idea._close == time0_close
+    assert time1_idea._begin != time0_begin
+    assert time1_idea._close != time0_close
+    assert time1_idea._addin == time1_addin
+    assert not time1_idea._debut
+    assert not time1_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert not time1_idea._begin
+    assert not time1_idea._close
+    assert time1_idea._debut == time0_idea._debut + time1_addin
+    assert time1_idea._arret == time0_idea._arret + time1_addin
+    assert time1_idea._debut == 8
+    assert time1_idea._arret == 12
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_Sets2LevelsDescendentIdea_debut_arret_NodeWith_addin():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 3
+    time0_close = 7
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
+
+    time1_text = "time1"
+    time1_road = yao_bud.make_road(time0_road, time1_text)
+    yao_bud.add_idea(time1_road)
+    time2_text = "time2"
+    time2_road = yao_bud.make_road(time1_road, time2_text)
+    time2_addin = 5
+    x_time2_idea = ideaunit_shop(time2_text, _addin=time2_addin)
+    yao_bud.set_idea(x_time2_idea, time1_road)
+    time2_idea = yao_bud.get_idea_obj(time2_road)
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._debut
+    assert not root_idea._arret
+    assert time0_idea._begin == time0_begin
+    assert time0_idea._close == time0_close
+    assert time2_idea._begin != time0_begin
+    assert time2_idea._close != time0_close
+    assert time2_idea._addin == time2_addin
+    assert not time2_idea._debut
+    assert not time2_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert not time2_idea._begin
+    assert not time2_idea._close
+    assert time2_idea._debut == time0_idea._debut + time2_addin
+    assert time2_idea._arret == time0_idea._arret + time2_addin
+    assert time2_idea._debut == 8
+    assert time2_idea._arret == 12
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom_addin():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 21
+    time0_close = 35
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
+
+    time1_text = "time1"
+    time1_addin = 70
+    time1_denom = 7
+    time1_road = yao_bud.make_road(time0_road, time1_text)
+    temp_idea = ideaunit_shop(time1_text, _denom=time1_denom, _addin=time1_addin)
+    yao_bud.set_idea(temp_idea, time0_road)
+    time1_idea = yao_bud.get_idea_obj(time1_road)
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._debut
+    assert not root_idea._arret
+    assert time0_idea._begin == time0_begin
+    assert time0_idea._close == time0_close
+    assert time1_idea._begin != time0_begin
+    assert time1_idea._close != time0_close
+    assert time1_idea._addin == time1_addin
+    assert not time1_idea._debut
+    assert not time1_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert not time1_idea._begin
+    assert not time1_idea._close
+    assert time1_idea._debut == (time0_idea._debut + time1_addin) / time1_denom
+    assert time1_idea._arret == (time0_idea._arret + time1_addin) / time1_denom
+    assert time1_idea._debut == 13
+    assert time1_idea._arret == 15
 
 
 def test_BudUnit_tree_arithmetic_traverse_calc_Sets_range_push_IdeaUnit_Simple0():
@@ -312,3 +453,8 @@ def test_BudUnit_tree_arithmetic_traverse_calc_Sets_range_push_IdeaUnit_Simple0(
     assert not day_idea._close
     assert day_idea._debut == time0_begin
     assert day_idea._arret == time0_close
+
+
+# def test_BudUnit_tree_arithmetic_traverse_calc_RaisesErrorIfDescendentHas_begin_close():
+#     # ESTABLISH
+#     assert 5 == 6

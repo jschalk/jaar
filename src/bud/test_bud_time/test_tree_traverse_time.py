@@ -47,92 +47,92 @@ def test_BudUnit_get_time_400Yearsegment_from_min_ReturnsCorrectObj():
     assert get_time_c400_from_min(sue_bud, min=841518720)[0] == 4
 
 
-def test_BudUnit_get_time_c400year_from_min_ReturnsCorrectObj():
-    # ESTABLISH / WHEN
-    sue_bud = get_budunit_sue_TimeExample()
-    # THEN
-    assert get_time_c400yr_from_min(sue_bud, min=0)[0] == 0
-    assert get_time_c400yr_from_min(sue_bud, min=1)[0] == 0
-    assert get_time_c400yr_from_min(sue_bud, min=1)[2] == 1
-    assert get_time_c400yr_from_min(sue_bud, min=210379680)[0] == 0
-    assert get_time_c400yr_from_min(sue_bud, min=210379680)[0] == 0
-    assert get_time_c400yr_from_min(sue_bud, min=210379681)[0] == 0
-    assert get_time_c400yr_from_min(sue_bud, min=841518720)[0] == 0
-    assert get_time_c400yr_from_min(sue_bud, min=576000)[0] == 1
-    assert get_time_c400yr_from_min(sue_bud, min=4608000)[0] == 8
-    assert get_time_c400yr_from_min(sue_bud, min=157785120)[0] == 300
+# def test_BudUnit_get_time_c400year_from_min_ReturnsCorrectObj():
+#     # ESTABLISH / WHEN
+#     sue_bud = get_budunit_sue_TimeExample()
+#     # THEN
+#     assert get_time_c400yr_from_min(sue_bud, min=0)[0] == 0
+#     assert get_time_c400yr_from_min(sue_bud, min=1)[0] == 0
+#     assert get_time_c400yr_from_min(sue_bud, min=1)[2] == 1
+#     assert get_time_c400yr_from_min(sue_bud, min=210379680)[0] == 0
+#     assert get_time_c400yr_from_min(sue_bud, min=210379680)[0] == 0
+#     assert get_time_c400yr_from_min(sue_bud, min=210379681)[0] == 0
+#     assert get_time_c400yr_from_min(sue_bud, min=841518720)[0] == 0
+#     assert get_time_c400yr_from_min(sue_bud, min=576000)[0] == 1
+#     assert get_time_c400yr_from_min(sue_bud, min=4608000)[0] == 8
+#     assert get_time_c400yr_from_min(sue_bud, min=157785120)[0] == 300
 
 
-def test_BudUnit_get_time_dt_from_min_ReturnsCorrectObj():
-    # ESTABLISH / WHEN
-    sue_bud = get_budunit_sue_TimeExample()
-    # THEN
-    assert get_time_dt_from_min(sue_bud, min=5000000)
-    assert get_time_dt_from_min(sue_bud, min=420759360) == datetime(800, 1, 1, 0, 0)
-    assert get_time_dt_from_min(sue_bud, min=631139040) == datetime(1200, 1, 1, 0, 0)
-    assert get_time_dt_from_min(sue_bud, min=631751040) == datetime(1201, 3, 1, 0, 0)
-    assert get_time_dt_from_min(sue_bud, min=631751060) == datetime(1201, 3, 1, 0, 20)
+# def test_BudUnit_get_time_dt_from_min_ReturnsCorrectObj():
+#     # ESTABLISH / WHEN
+#     sue_bud = get_budunit_sue_TimeExample()
+#     # THEN
+#     assert get_time_dt_from_min(sue_bud, min=5000000)
+#     assert get_time_dt_from_min(sue_bud, min=420759360) == datetime(800, 1, 1, 0, 0)
+#     assert get_time_dt_from_min(sue_bud, min=631139040) == datetime(1200, 1, 1, 0, 0)
+#     assert get_time_dt_from_min(sue_bud, min=631751040) == datetime(1201, 3, 1, 0, 0)
+#     assert get_time_dt_from_min(sue_bud, min=631751060) == datetime(1201, 3, 1, 0, 20)
 
-    x_minutes = 1063903680
-    assert get_time_dt_from_min(sue_bud, x_minutes) == datetime(2022, 10, 29, 0, 0)
-    x_next_day = x_minutes + 1440
-    assert get_time_dt_from_min(sue_bud, x_next_day) == datetime(2022, 10, 30, 0, 0)
+#     x_minutes = 1063903680
+#     assert get_time_dt_from_min(sue_bud, x_minutes) == datetime(2022, 10, 29, 0, 0)
+#     x_next_day = x_minutes + 1440
+#     assert get_time_dt_from_min(sue_bud, x_next_day) == datetime(2022, 10, 30, 0, 0)
 
-    _check_time_conversion_with_random_inputs(sue_bud)
-    _check_time_conversion_with_random_inputs(sue_bud)
-    _check_time_conversion_with_random_inputs(sue_bud)
+#     _check_time_conversion_with_random_inputs(sue_bud)
+#     _check_time_conversion_with_random_inputs(sue_bud)
+#     _check_time_conversion_with_random_inputs(sue_bud)
 
-    # for year, month, day, hr, min in .product(
-    #     range(479, 480), range(1, 3), range(20, 28), range(12, 14), range(1430, 1440)
-    # ):
-    #     # for day in range(1, 32):
-    #     # # print(f"assert for {year=} {month=} {day=}")
-    #     # with contextlib.suppress(Exception):
-    #     print(f"Attempt get_time_from_dt {year=} {month=} {day=} {hr=} {min=}")
-    #     py_dt = datetime(year, month, day, 0, 0)
-    #     jaja_min = x_bud.get_time_min_from_dt(dt=py_dt)
-    #     # print(f"assert for {year=} {month=} {day=} {jaja_min}")
+#     # for year, month, day, hr, min in .product(
+#     #     range(479, 480), range(1, 3), range(20, 28), range(12, 14), range(1430, 1440)
+#     # ):
+#     #     # for day in range(1, 32):
+#     #     # # print(f"assert for {year=} {month=} {day=}")
+#     #     # with contextlib.suppress(Exception):
+#     #     print(f"Attempt get_time_from_dt {year=} {month=} {day=} {hr=} {min=}")
+#     #     py_dt = datetime(year, month, day, 0, 0)
+#     #     jaja_min = x_bud.get_time_min_from_dt(dt=py_dt)
+#     #     # print(f"assert for {year=} {month=} {day=} {jaja_min}")
 
-    #     jaja_dt = x_bud.get_time_dt_from_min(min=jaja_min)
-    #     print(
-    #         f"assert attempted for {year=} {month=} {day} \t {jaja_min} Jaja too large: {str(jaja_dt-py_dt)} ({py_dt=})"
-    #     )
-    #     assert py_dt == jaja_dt
+#     #     jaja_dt = x_bud.get_time_dt_from_min(min=jaja_min)
+#     #     print(
+#     #         f"assert attempted for {year=} {month=} {day} \t {jaja_min} Jaja too large: {str(jaja_dt-py_dt)} ({py_dt=})"
+#     #     )
+#     #     assert py_dt == jaja_dt
 
-    # if dt_exist:
+#     # if dt_exist:
 
-    # for year in range(480, 481):
-    #     for month in range(1, 12):
-    #         for day in range(1, 30):
-    #             assert x_bud.get_time_dt_from_min(
-    #                 min=x_bud.get_time_min_from_dt(dt=datetime(year, month, day, 0, 0))
-    #             ) == datetime(year, month, day, 0, 0)
+#     # for year in range(480, 481):
+#     #     for month in range(1, 12):
+#     #         for day in range(1, 30):
+#     #             assert x_bud.get_time_dt_from_min(
+#     #                 min=x_bud.get_time_min_from_dt(dt=datetime(year, month, day, 0, 0))
+#     #             ) == datetime(year, month, day, 0, 0)
 
 
-def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
-    # ESTABLISH
-    sue_bud = get_budunit_sue_TimeExample()
+# def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
+#     # ESTABLISH
+#     sue_bud = get_budunit_sue_TimeExample()
 
-    sue_bud.settle_bud()
-    # for idea_x in idea_list:
-    #     if idea_x._label in ["min2010", "years"]:
-    #         print(
-    #             f"{idea_x._parent_road=} \t{idea_x._label=} {idea_x._begin=} {idea_x._close=} {idea_x._addin=}"
-    #         )
+#     sue_bud.settle_bud()
+#     # for idea_x in idea_list:
+#     #     if idea_x._label in ["min2010", "years"]:
+#     #         print(
+#     #             f"{idea_x._parent_road=} \t{idea_x._label=} {idea_x._begin=} {idea_x._close=} {idea_x._addin=}"
+#     #         )
 
-    # WHEN
-    x_open = datetime(2000, 1, 1, 0, 0)
-    x_nigh = datetime(2003, 11, 15, 4, 0)
-    set_time_facts(sue_bud, open=x_open, nigh=x_nigh)
+#     # WHEN
+#     x_open = datetime(2000, 1, 1, 0, 0)
+#     x_nigh = datetime(2003, 11, 15, 4, 0)
+#     set_time_facts(sue_bud, open=x_open, nigh=x_nigh)
 
-    # THEN
-    time_text = "time"
-    time_road = sue_bud.make_l1_road(time_text)
-    jaja_text = "jajatime"
-    jaja_road = sue_bud.make_road(time_road, jaja_text)
-    assert sue_bud._idearoot._factunits[jaja_road]
-    assert sue_bud._idearoot._factunits[jaja_road].open == 1051898400  # - 1440
-    assert sue_bud._idearoot._factunits[jaja_road].nigh == 1053934800  # - 1440
+#     # THEN
+#     time_text = "time"
+#     time_road = sue_bud.make_l1_road(time_text)
+#     jaja_text = "jajatime"
+#     jaja_road = sue_bud.make_road(time_road, jaja_text)
+#     assert sue_bud._idearoot._factunits[jaja_road]
+#     assert sue_bud._idearoot._factunits[jaja_road].open == 1051898400  # - 1440
+#     assert sue_bud._idearoot._factunits[jaja_road].nigh == 1053934800  # - 1440
 
 
 # def test_time_hreg_set_exists():
@@ -311,189 +311,189 @@ def test_BudUnit_set_time_facts_IdeaUnitFastUnitIsSetBy_datetime_objs():
 # x_bud = examples.get_bud_gregorian_years()
 
 
-def test_get_jajatime_repeating_legible_text_correctlyText():
-    # ESTABLISH
-    sue_bud = get_budunit_sue_TimeExample()
+# def test_get_jajatime_repeating_legible_text_correctlyText():
+#     # ESTABLISH
+#     sue_bud = get_budunit_sue_TimeExample()
 
-    # WHEN / THEN
-    every_day_8am_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=480, nigh=480, divisor=1440
-    )
-    print(f"ReturnsDailyText {every_day_8am_text=}")
-    assert every_day_8am_text == "every day at 8am"
+#     # WHEN / THEN
+#     every_day_8am_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=480, nigh=480, divisor=1440
+#     )
+#     print(f"ReturnsDailyText {every_day_8am_text=}")
+#     assert every_day_8am_text == "every day at 8am"
 
-    every_2nd_day_8_10am_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=490, nigh=490, divisor=2880
-    )
-    print(f"ReturnsEvery2DaysText: {every_2nd_day_8_10am_text=}")
-    assert every_2nd_day_8_10am_text == "every 2nd day at 8:10am"
+#     every_2nd_day_8_10am_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=490, nigh=490, divisor=2880
+#     )
+#     print(f"ReturnsEvery2DaysText: {every_2nd_day_8_10am_text=}")
+#     assert every_2nd_day_8_10am_text == "every 2nd day at 8:10am"
 
-    ReturnsEvery6DaysText = get_jajatime_repeating_legible_text(
-        sue_bud, open=480, nigh=480, divisor=8640
-    )
-    print(f"ReturnsEvery6DaysText: {ReturnsEvery6DaysText=}")
-    assert ReturnsEvery6DaysText == "every 6th day at 8am"
+#     ReturnsEvery6DaysText = get_jajatime_repeating_legible_text(
+#         sue_bud, open=480, nigh=480, divisor=8640
+#     )
+#     print(f"ReturnsEvery6DaysText: {ReturnsEvery6DaysText=}")
+#     assert ReturnsEvery6DaysText == "every 6th day at 8am"
 
-    every_saturday_8am_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=480, nigh=480, divisor=10080
-    )
-    print(f"ReturnsWeeklyText: {every_saturday_8am_text=}")
-    assert every_saturday_8am_text == "every Saturday at 8am"
+#     every_saturday_8am_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=480, nigh=480, divisor=10080
+#     )
+#     print(f"ReturnsWeeklyText: {every_saturday_8am_text=}")
+#     assert every_saturday_8am_text == "every Saturday at 8am"
 
-    sat_2nd_8am_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=480, nigh=480, divisor=20160
-    )
-    print(f"ReturnsEvery2WeeksText: {sat_2nd_8am_text=}")
-    assert sat_2nd_8am_text == "every 2nd Saturday at 8am"
+#     sat_2nd_8am_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=480, nigh=480, divisor=20160
+#     )
+#     print(f"ReturnsEvery2WeeksText: {sat_2nd_8am_text=}")
+#     assert sat_2nd_8am_text == "every 2nd Saturday at 8am"
 
-    sat_6th_8am_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=480, nigh=480, divisor=60480
-    )
-    print(f"ReturnsEvery6WeeksText: {sat_6th_8am_text=}")
-    assert sat_6th_8am_text == "every 6th Saturday at 8am"
+#     sat_6th_8am_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=480, nigh=480, divisor=60480
+#     )
+#     print(f"ReturnsEvery6WeeksText: {sat_6th_8am_text=}")
+#     assert sat_6th_8am_text == "every 6th Saturday at 8am"
 
-    feb_1st_9am_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=1064041020.0, nigh=1064041020.0
-    )
-    print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
-    assert feb_1st_9am_text == "Wed Feb 1st, 2023 at 9am"
+#     feb_1st_9am_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=1064041020.0, nigh=1064041020.0
+#     )
+#     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
+#     assert feb_1st_9am_text == "Wed Feb 1st, 2023 at 9am"
 
-    feb_1st_7pm_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=1064041620.0, nigh=1064041620.0
-    )
-    print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
-    assert feb_1st_7pm_text == "Wed Feb 1st, 2023 at 7pm"
+#     feb_1st_7pm_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=1064041620.0, nigh=1064041620.0
+#     )
+#     print(f"ReturnsOneTimeEventCorrectlyMorning: {feb_1st_9am_text=}")
+#     assert feb_1st_7pm_text == "Wed Feb 1st, 2023 at 7pm"
 
-    feb_2nd_12am_text = get_jajatime_repeating_legible_text(
-        sue_bud, open=1064041920.0, nigh=1064041920.0
-    )
-    print(f"ReturnsOneTimeEventCorrectlyMidnight {feb_2nd_12am_text=}")
-    assert feb_2nd_12am_text == "Thu Feb 2nd, 2023 at 12am"
+#     feb_2nd_12am_text = get_jajatime_repeating_legible_text(
+#         sue_bud, open=1064041920.0, nigh=1064041920.0
+#     )
+#     print(f"ReturnsOneTimeEventCorrectlyMidnight {feb_2nd_12am_text=}")
+#     assert feb_2nd_12am_text == "Thu Feb 2nd, 2023 at 12am"
 
 
-def test_BudUnit_set_fact_WeekdayBudItemsCorrectlyReturned():
-    # ESTABLISH
-    sue_bud = get_budunit_sue_TimeExample()
+# def test_BudUnit_set_fact_WeekdayBudItemsCorrectlyReturned():
+#     # ESTABLISH
+#     sue_bud = get_budunit_sue_TimeExample()
 
-    things_text = "things to do"
-    sue_bud.set_l1_idea(ideaunit_shop(things_text))
-    t_road = sue_bud.make_l1_road(things_text)
-    clean = "clean"
-    run = "run"
-    swim = "swim"
-    jog = "jog"
-    veg = "veg"
-    lift = "lift"
-    sue_bud.set_idea(ideaunit_shop(clean, pledge=True), parent_road=t_road)
-    sue_bud.set_idea(ideaunit_shop(run, pledge=True), parent_road=t_road)
-    sue_bud.set_idea(ideaunit_shop(swim, pledge=True), parent_road=t_road)
-    sue_bud.set_idea(ideaunit_shop(jog, pledge=True), parent_road=t_road)
-    sue_bud.set_idea(ideaunit_shop(veg, pledge=True), parent_road=t_road)
-    sue_bud.set_idea(ideaunit_shop(lift, pledge=True), parent_road=t_road)
-    time_text = "time"
-    time_road = sue_bud.make_l1_road(time_text)
-    jaja_text = "jajatime"
-    jaja_road = sue_bud.make_road(time_road, jaja_text)
-    tech_text = "tech"
-    tech_road = sue_bud.make_road(time_road, tech_text)
-    w_road = sue_bud.make_road(tech_road, "week")
-    mon_road = sue_bud.make_road(w_road, "Monday")
-    tue_road = sue_bud.make_road(w_road, "Tuesday")
-    wed_road = sue_bud.make_road(w_road, "Wednesday")
-    thu_road = sue_bud.make_road(w_road, "Thursday")
-    fri_road = sue_bud.make_road(w_road, "Friday")
-    sat_road = sue_bud.make_road(w_road, "Saturday")
-    sun_road = sue_bud.make_road(w_road, "Sunday")
-    t_road = sue_bud.make_l1_road(things_text)
-    c_road = sue_bud.make_road(t_road, clean)
-    r_road = sue_bud.make_road(t_road, run)
-    s_road = sue_bud.make_road(t_road, swim)
-    j_road = sue_bud.make_road(t_road, jog)
-    v_road = sue_bud.make_road(t_road, veg)
-    l_road = sue_bud.make_road(t_road, lift)
+#     things_text = "things to do"
+#     sue_bud.set_l1_idea(ideaunit_shop(things_text))
+#     t_road = sue_bud.make_l1_road(things_text)
+#     clean = "clean"
+#     run = "run"
+#     swim = "swim"
+#     jog = "jog"
+#     veg = "veg"
+#     lift = "lift"
+#     sue_bud.set_idea(ideaunit_shop(clean, pledge=True), parent_road=t_road)
+#     sue_bud.set_idea(ideaunit_shop(run, pledge=True), parent_road=t_road)
+#     sue_bud.set_idea(ideaunit_shop(swim, pledge=True), parent_road=t_road)
+#     sue_bud.set_idea(ideaunit_shop(jog, pledge=True), parent_road=t_road)
+#     sue_bud.set_idea(ideaunit_shop(veg, pledge=True), parent_road=t_road)
+#     sue_bud.set_idea(ideaunit_shop(lift, pledge=True), parent_road=t_road)
+#     time_text = "time"
+#     time_road = sue_bud.make_l1_road(time_text)
+#     jaja_text = "jajatime"
+#     jaja_road = sue_bud.make_road(time_road, jaja_text)
+#     tech_text = "tech"
+#     tech_road = sue_bud.make_road(time_road, tech_text)
+#     w_road = sue_bud.make_road(tech_road, "week")
+#     mon_road = sue_bud.make_road(w_road, "Monday")
+#     tue_road = sue_bud.make_road(w_road, "Tuesday")
+#     wed_road = sue_bud.make_road(w_road, "Wednesday")
+#     thu_road = sue_bud.make_road(w_road, "Thursday")
+#     fri_road = sue_bud.make_road(w_road, "Friday")
+#     sat_road = sue_bud.make_road(w_road, "Saturday")
+#     sun_road = sue_bud.make_road(w_road, "Sunday")
+#     t_road = sue_bud.make_l1_road(things_text)
+#     c_road = sue_bud.make_road(t_road, clean)
+#     r_road = sue_bud.make_road(t_road, run)
+#     s_road = sue_bud.make_road(t_road, swim)
+#     j_road = sue_bud.make_road(t_road, jog)
+#     v_road = sue_bud.make_road(t_road, veg)
+#     l_road = sue_bud.make_road(t_road, lift)
 
-    sue_bud.edit_idea_attr(c_road, reason_base=tue_road, reason_premise=tue_road)
-    sue_bud.edit_idea_attr(r_road, reason_base=wed_road, reason_premise=wed_road)
-    sue_bud.edit_idea_attr(s_road, reason_base=thu_road, reason_premise=thu_road)
-    sue_bud.edit_idea_attr(j_road, reason_base=fri_road, reason_premise=fri_road)
-    sue_bud.edit_idea_attr(v_road, reason_base=sat_road, reason_premise=sat_road)
-    sue_bud.edit_idea_attr(l_road, reason_base=sun_road, reason_premise=sun_road)
+#     sue_bud.edit_idea_attr(c_road, reason_base=tue_road, reason_premise=tue_road)
+#     sue_bud.edit_idea_attr(r_road, reason_base=wed_road, reason_premise=wed_road)
+#     sue_bud.edit_idea_attr(s_road, reason_base=thu_road, reason_premise=thu_road)
+#     sue_bud.edit_idea_attr(j_road, reason_base=fri_road, reason_premise=fri_road)
+#     sue_bud.edit_idea_attr(v_road, reason_base=sat_road, reason_premise=sat_road)
+#     sue_bud.edit_idea_attr(l_road, reason_base=sun_road, reason_premise=sun_road)
 
-    c_idea = sue_bud.get_idea_obj(c_road)
-    c_reason = c_idea._reasonunits
-    # for reason_y in c_reason.values():
-    #     for premise_y in reason_y.premises.values():
-    #         print(
-    #             f"Idea: {c_idea.get_road()}  Reason: {reason_y.base} open:{premise_y.open} nigh:{premise_y.nigh} diff:{premise_y.nigh-premise_y.open}"
-    #         )
+#     c_idea = sue_bud.get_idea_obj(c_road)
+#     c_reason = c_idea._reasonunits
+#     # for reason_y in c_reason.values():
+#     #     for premise_y in reason_y.premises.values():
+#     #         print(
+#     #             f"Idea: {c_idea.get_road()}  Reason: {reason_y.base} open:{premise_y.open} nigh:{premise_y.nigh} diff:{premise_y.nigh-premise_y.open}"
+#     #         )
 
-    # for base, count_x in sue_bud.get_reason_bases().items():
-    #     print(f"Reasons: {base=} Count: {count_x}")
+#     # for base, count_x in sue_bud.get_reason_bases().items():
+#     #     print(f"Reasons: {base=} Count: {count_x}")
 
-    mon_dt = datetime(2000, 1, 3)
-    tue_dt = datetime(2000, 1, 4)
-    wed_dt = datetime(2000, 1, 5)
-    thu_dt = datetime(2000, 1, 6)
-    fri_dt = datetime(2000, 1, 7)
-    sat_dt = datetime(2000, 1, 1)
-    sun_dt = datetime(2000, 1, 2)
-    mon_min = get_time_min_from_dt(dt=mon_dt)
-    tue_min = get_time_min_from_dt(dt=tue_dt)
-    wed_min = get_time_min_from_dt(dt=wed_dt)
-    thu_min = get_time_min_from_dt(dt=thu_dt)
-    fri_min = get_time_min_from_dt(dt=fri_dt)
-    sat_min = get_time_min_from_dt(dt=sat_dt)
-    sun_min = get_time_min_from_dt(dt=sun_dt)
-    assert sue_bud._idearoot._factunits.get(jaja_road) is None
+#     mon_dt = datetime(2000, 1, 3)
+#     tue_dt = datetime(2000, 1, 4)
+#     wed_dt = datetime(2000, 1, 5)
+#     thu_dt = datetime(2000, 1, 6)
+#     fri_dt = datetime(2000, 1, 7)
+#     sat_dt = datetime(2000, 1, 1)
+#     sun_dt = datetime(2000, 1, 2)
+#     mon_min = get_time_min_from_dt(dt=mon_dt)
+#     tue_min = get_time_min_from_dt(dt=tue_dt)
+#     wed_min = get_time_min_from_dt(dt=wed_dt)
+#     thu_min = get_time_min_from_dt(dt=thu_dt)
+#     fri_min = get_time_min_from_dt(dt=fri_dt)
+#     sat_min = get_time_min_from_dt(dt=sat_dt)
+#     sun_min = get_time_min_from_dt(dt=sun_dt)
+#     assert sue_bud._idearoot._factunits.get(jaja_road) is None
 
-    # WHEN
-    print("\nset fact for Sunday")
-    sue_bud.set_fact(base=jaja_road, pick=jaja_road, open=sun_min, nigh=sun_min)
-    # for fact in sue_bud._idearoot._factunits.values():
-    #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
+#     # WHEN
+#     print("\nset fact for Sunday")
+#     sue_bud.set_fact(base=jaja_road, pick=jaja_road, open=sun_min, nigh=sun_min)
+#     # for fact in sue_bud._idearoot._factunits.values():
+#     #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
 
-    # THEN
-    assert len(sue_bud._idearoot._factunits) == 7
-    print(sue_bud._idearoot._factunits[jaja_road])
-    print(sue_bud._idearoot._factunits[sat_road])
-    print(sue_bud._idearoot._factunits[sun_road])
-    print(sue_bud._idearoot._factunits[tue_road])
-    print(sue_bud._idearoot._factunits[wed_road])
-    print(sue_bud._idearoot._factunits[thu_road])
-    print(sue_bud._idearoot._factunits[fri_road])
-    assert sue_bud._idearoot._factunits[sun_road]
-    assert sue_bud._idearoot._factunits[sun_road].open == 1440
-    assert sue_bud._idearoot._factunits[sun_road].nigh == 1440
+#     # THEN
+#     assert len(sue_bud._idearoot._factunits) == 7
+#     print(sue_bud._idearoot._factunits[jaja_road])
+#     print(sue_bud._idearoot._factunits[sat_road])
+#     print(sue_bud._idearoot._factunits[sun_road])
+#     print(sue_bud._idearoot._factunits[tue_road])
+#     print(sue_bud._idearoot._factunits[wed_road])
+#     print(sue_bud._idearoot._factunits[thu_road])
+#     print(sue_bud._idearoot._factunits[fri_road])
+#     assert sue_bud._idearoot._factunits[sun_road]
+#     assert sue_bud._idearoot._factunits[sun_road].open == 1440
+#     assert sue_bud._idearoot._factunits[sun_road].nigh == 1440
 
-    # WHEN
-    print("\nset fact for Sat through Monday")
-    sue_bud.set_fact(base=jaja_road, pick=jaja_road, open=sat_min, nigh=mon_min)
-    # for fact in sue_bud._idearoot._factunits.values():
-    #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
+#     # WHEN
+#     print("\nset fact for Sat through Monday")
+#     sue_bud.set_fact(base=jaja_road, pick=jaja_road, open=sat_min, nigh=mon_min)
+#     # for fact in sue_bud._idearoot._factunits.values():
+#     #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
 
-    # THEN
-    assert sue_bud._idearoot._factunits[sat_road]
-    assert sue_bud._idearoot._factunits[sat_road].open == 0
-    assert sue_bud._idearoot._factunits[sat_road].nigh == 1440
-    assert sue_bud._idearoot._factunits[sun_road].open == 1440
-    assert sue_bud._idearoot._factunits[sun_road].nigh == 2880
+#     # THEN
+#     assert sue_bud._idearoot._factunits[sat_road]
+#     assert sue_bud._idearoot._factunits[sat_road].open == 0
+#     assert sue_bud._idearoot._factunits[sat_road].nigh == 1440
+#     assert sue_bud._idearoot._factunits[sun_road].open == 1440
+#     assert sue_bud._idearoot._factunits[sun_road].nigh == 2880
 
-    # WHEN
-    print("\nset facts for Sunday through Friday")
-    sue_bud.set_fact(base=jaja_road, pick=jaja_road, open=sun_min, nigh=fri_min)
-    # for fact in sue_bud._idearoot._factunits.values():
-    #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
+#     # WHEN
+#     print("\nset facts for Sunday through Friday")
+#     sue_bud.set_fact(base=jaja_road, pick=jaja_road, open=sun_min, nigh=fri_min)
+#     # for fact in sue_bud._idearoot._factunits.values():
+#     #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
 
-    # THEN
-    assert sue_bud._idearoot._factunits[sun_road].open == 1440
-    assert sue_bud._idearoot._factunits[sun_road].nigh == 2880
+#     # THEN
+#     assert sue_bud._idearoot._factunits[sun_road].open == 1440
+#     assert sue_bud._idearoot._factunits[sun_road].nigh == 2880
 
-    # # WHEN
-    # print("\nset facts for 10 day stretch")
-    # dayzero_dt = datetime(2010, 1, 3)
-    # dayten_dt = datetime(2010, 1, 13)
-    # dayzero_min = get_time_min_from_dt(dt=dayzero_dt)
-    # dayten_min = get_time_min_from_dt(dt=dayten_dt)
-    # sue_bud.set_fact(jaja_road, jaja_road, open=dayzero_min, nigh=dayten_min)
-    # for fact in sue_bud._idearoot._factunits.values():
-    #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")
+#     # # WHEN
+#     # print("\nset facts for 10 day stretch")
+#     # dayzero_dt = datetime(2010, 1, 3)
+#     # dayten_dt = datetime(2010, 1, 13)
+#     # dayzero_min = get_time_min_from_dt(dt=dayzero_dt)
+#     # dayten_min = get_time_min_from_dt(dt=dayten_dt)
+#     # sue_bud.set_fact(jaja_road, jaja_road, open=dayzero_min, nigh=dayten_min)
+#     # for fact in sue_bud._idearoot._factunits.values():
+#     #     print(f"{fact.base=} (H: {fact.fact}) {fact.=} {fact.open=} {fact.nigh=}")

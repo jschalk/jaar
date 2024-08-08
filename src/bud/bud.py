@@ -1244,38 +1244,46 @@ class BudUnit:
                     )
                 range_push_dict[x_range_push] = x_idea.get_road()
 
+    def _distribute_arithmetic_attrs(self, arithmetic_idea: IdeaUnit):
+        single_range_idea_list = [arithmetic_idea]
+        while single_range_idea_list != []:
+            r_idea = single_range_idea_list.pop()
+            if r_idea.is_arithmetic():
+                r_idea._debut = r_idea._begin
+                r_idea._arret = r_idea._close
+            else:
+                parent_road = get_parent_road(r_idea.get_road())
+                parent_idea = self.get_idea_obj(parent_road)
+                r_idea._debut = parent_idea._debut
+                r_idea._arret = parent_idea._arret
+            r_idea_numor = get_1_if_None(r_idea._numor)
+            r_idea_denom = get_1_if_None(r_idea._denom)
+            r_idea_addin = get_0_if_None(r_idea._addin)
+            r_idea._debut = r_idea._debut + r_idea_addin
+            r_idea._arret = r_idea._arret + r_idea_addin
+            r_idea._debut = (r_idea._debut * r_idea_numor) / r_idea_denom
+            r_idea._arret = (r_idea._arret * r_idea_numor) / r_idea_denom
+
+            for range_push_road in r_idea._range_pushs:
+                range_push_idea = self.get_idea_obj(range_push_road)
+                range_push_idea._debut = r_idea._debut
+                range_push_idea._arret = r_idea._arret
+                # range_push_numor = get_1_if_None(range_push_idea._numor)
+                # range_push_denom = get_1_if_None(range_push_idea._denom)
+                # r_numor = range_push_idea._numor
+                # r_denom = range_push_idea._denom
+                # range_push_idea._debut = (x_idea._debut * r_numor) / r_denom
+                # range_push_idea._arret = (x_idea._arret * r_numor) / r_denom
+            single_range_idea_list.extend(iter(r_idea._kids.values()))
+
     def tree_arithmetic_traverse_calc(self):
-        idea_list = [self.get_idea_obj(self._real_id)]
-        while idea_list != []:
-            x_idea = idea_list.pop()
-            idea_list.extend(iter(x_idea._kids.values()))
-            if x_idea.is_arithmetic():
-                x_idea_numor = get_1_if_None(x_idea._numor)
-                x_idea_denom = get_1_if_None(x_idea._denom)
-                x_idea_addin = get_0_if_None(x_idea._addin)
-                x_idea._debut = x_idea._begin + x_idea_addin
-                x_idea._arret = x_idea._close + x_idea_addin
-                x_idea._debut = (x_idea._debut * x_idea_numor) / x_idea_denom
-                x_idea._arret = (x_idea._arret * x_idea_numor) / x_idea_denom
-                for x_kid in x_idea._kids.values():
-                    # kid_numor = get_1_if_None(x_kid._numor)
-                    # kid_denom = get_1_if_None(x_kid._denom)
-                    # kid_numor = x_kid._numor
-                    # kid_denom = x_kid._denom
-                    # x_kid._debut = (x_idea._debut * kid_numor) / kid_denom
-                    # x_kid._arret = (x_idea._arret * kid_numor) / kid_denom
-                    x_kid._debut = x_idea._debut
-                    x_kid._arret = x_idea._arret
-                for range_push_road in x_idea._range_pushs:
-                    range_push_idea = self.get_idea_obj(range_push_road)
-                    # range_push_numor = get_1_if_None(range_push_idea._numor)
-                    # range_push_denom = get_1_if_None(range_push_idea._denom)
-                    # r_numor = range_push_idea._numor
-                    # r_denom = range_push_idea._denom
-                    # range_push_idea._debut = (x_idea._debut * r_numor) / r_denom
-                    # range_push_idea._arret = (x_idea._arret * r_numor) / r_denom
-                    range_push_idea._debut = x_idea._debut
-                    range_push_idea._arret = x_idea._arret
+        all_idea_list = [self.get_idea_obj(self._real_id)]
+        while all_idea_list != []:
+            y_idea = all_idea_list.pop(0)
+            all_idea_list.extend(iter(y_idea._kids.values()))
+            if y_idea.is_arithmetic():
+                self._distribute_arithmetic_attrs(y_idea)
+            all_idea_list.extend(iter(y_idea._kids.values()))
 
     def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
         task_count = 0

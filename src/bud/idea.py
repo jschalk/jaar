@@ -717,17 +717,6 @@ class IdeaUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, idea_kid):
-        if idea_kid._numor is not None:
-            # if idea_kid._denom is not None:
-            # if idea_kid._reest is not None:
-            if self._begin is None or self._close is None:
-                raise InvalidIdeaException(
-                    f"Idea {idea_kid.get_road()} cannot have numor,denom,reest if parent does not have begin/close range"
-                )
-
-            idea_kid._begin = self._begin * idea_kid._numor / idea_kid._denom
-            idea_kid._close = self._close * idea_kid._numor / idea_kid._denom
-
         self._kids[idea_kid._label] = idea_kid
         self._kids = dict(sorted(self._kids.items()))
 

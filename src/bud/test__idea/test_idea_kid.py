@@ -22,47 +22,47 @@ def test_get_kids_in_range_GetsCorrectIdeas():
     assert mon366_idea.get_kids_in_range(begin=31, close=31)[0]._label == feb29_text
 
 
-def test_IdeaUnit_vaild_DenomCorrectInheritsBeginAndClose():
-    # ESTABLISH
-    casa_text = "casa"
-    clean_text = "clean"
-    # parent idea
-    casa_idea = ideaunit_shop(_label=casa_text, _begin=22.0, _close=66.0)
-    # kid idea
-    clean_idea = ideaunit_shop(_label=clean_text, _numor=1, _denom=11.0, _reest=False)
+# def test_IdeaUnit_vaild_DenomCorrectInheritsBeginAndClose():
+#     # ESTABLISH
+#     casa_text = "casa"
+#     clean_text = "clean"
+#     # parent idea
+#     casa_idea = ideaunit_shop(_label=casa_text, _begin=22.0, _close=66.0)
+#     # kid idea
+#     clean_idea = ideaunit_shop(_label=clean_text, _numor=1, _denom=11.0, _reest=False)
 
-    # WHEN
-    casa_idea.add_kid(idea_kid=clean_idea)
+#     # WHEN
+#     casa_idea.add_kid(idea_kid=clean_idea)
 
-    # THEN
-    assert casa_idea._kids[clean_text]._begin == 2
-    assert casa_idea._kids[clean_text]._close == 6
-    kid_idea_expected = ideaunit_shop(
-        clean_text, _numor=1, _denom=11.0, _reest=False, _begin=2, _close=6
-    )
-    assert casa_idea._kids[clean_text] == kid_idea_expected
+#     # THEN
+#     assert casa_idea._kids[clean_text]._begin == 2
+#     assert casa_idea._kids[clean_text]._close == 6
+#     kid_idea_expected = ideaunit_shop(
+#         clean_text, _numor=1, _denom=11.0, _reest=False, _begin=2, _close=6
+#     )
+#     assert casa_idea._kids[clean_text] == kid_idea_expected
 
 
-def test_IdeaUnit_invaild_DenomThrowsError():
-    # ESTABLISH
-    casa_text = "casa"
-    parent_idea = ideaunit_shop(_label=casa_text)
-    casa_text = "casa"
-    casa_road = create_road(root_label(), casa_text)
-    clean_text = "clean"
-    clean_road = create_road(casa_road, clean_text)
-    print(f"{clean_road=}")
-    kid_idea = ideaunit_shop(
-        clean_text, _parent_road=casa_road, _numor=1, _denom=11.0, _reest=False
-    )
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        parent_idea.add_kid(idea_kid=kid_idea)
-    print(f"{str(excinfo.value)=}")
-    assert (
-        str(excinfo.value)
-        == f"Idea {clean_road} cannot have numor,denom,reest if parent does not have begin/close range"
-    )
+# def test_IdeaUnit_invaild_DenomThrowsError():
+#     # ESTABLISH
+#     casa_text = "casa"
+#     parent_idea = ideaunit_shop(_label=casa_text)
+#     casa_text = "casa"
+#     casa_road = create_road(root_label(), casa_text)
+#     clean_text = "clean"
+#     clean_road = create_road(casa_road, clean_text)
+#     print(f"{clean_road=}")
+#     kid_idea = ideaunit_shop(
+#         clean_text, _parent_road=casa_road, _numor=1, _denom=11.0, _reest=False
+#     )
+#     # WHEN / THEN
+#     with pytest_raises(Exception) as excinfo:
+#         parent_idea.add_kid(idea_kid=kid_idea)
+#     print(f"{str(excinfo.value)=}")
+#     assert (
+#         str(excinfo.value)
+#         == f"Idea {clean_road} cannot have numor,denom,reest if parent does not have begin/close range"
+#     )
 
 
 def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():
