@@ -666,3 +666,20 @@ def test_IdeaUnit_del_range_push_SetsAttr():
     # THEN
     assert not time_idea.range_push_exists(week_road)
     assert time_idea.range_push_exists(day_road)
+
+
+def test_IdeaUnit_clear_debut_arret_SetsAttr():
+    # ESTABLISH
+    time_text = "time"
+    time_idea = ideaunit_shop(time_text)
+    time_idea._debut = 3
+    time_idea._arret = 4
+    assert time_idea._debut
+    assert time_idea._arret
+
+    # WHEN
+    time_idea.clear_debut_arret()
+
+    # THEN
+    assert not time_idea._debut
+    assert not time_idea._arret

@@ -24,17 +24,17 @@ def get_tasks_count(agenda_dict: dict[RoadUnit, IdeaUnit]) -> int:
 
 def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
     # ESTABLISH
-    yao_bud = get_budunit_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
 
     # WHEN
-    agenda_dict = yao_bud.get_agenda_dict()
+    agenda_dict = sue_bud.get_agenda_dict()
 
     # THEN
     assert agenda_dict
     assert len(agenda_dict) == 2
     print(f"{agenda_dict.keys()=}")
-    assert yao_bud.make_l1_road("casa") in agenda_dict.keys()
-    assert yao_bud.make_l1_road("cat have dinner") in agenda_dict.keys()
+    assert sue_bud.make_l1_road("casa") in agenda_dict.keys()
+    assert sue_bud.make_l1_road("cat have dinner") in agenda_dict.keys()
 
 
 def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():

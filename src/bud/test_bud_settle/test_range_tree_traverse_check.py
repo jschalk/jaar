@@ -1,11 +1,6 @@
-from src.bud.examples.example_buds import (
-    get_budunit_with_4_levels,
-    get_budunit_with_4_levels_and_2reasons,
-)
+from src.bud.examples.example_buds import get_budunit_with_4_levels
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.group import awardlink_shop
-from src.bud.graphic import display_ideatree
 from pytest import raises as pytest_raises
 
 
@@ -99,3 +94,31 @@ def test_BudUnit_tree_range_push_traverse_check_RaisesError():
         str(excinfo.value)
         == f"Multiple IdeaUnits including ('{time0_road}', '{time1_road}') have range_push '{day_road}'"
     )
+
+
+def test_BudUnit_tree_range_push_traverse_check_Clears_debut_arret():
+    # ESTABLISH
+    sue_bud = get_budunit_with_4_levels()
+    root_idea = sue_bud.get_idea_obj(sue_bud._real_id)
+    states_text = "nation-state"
+    states_road = sue_bud.make_l1_road(states_text)
+    usa_text = "USA"
+    usa_road = sue_bud.make_road(states_road, usa_text)
+    texas_text = "Texas"
+    texas_road = sue_bud.make_road(usa_road, texas_text)
+    texas_idea = sue_bud.get_idea_obj(texas_road)
+    texas_idea._debut = 7
+    texas_idea._arret = 11
+    assert not root_idea._debut
+    assert not root_idea._arret
+    assert texas_idea._debut
+    assert texas_idea._arret
+
+    # WHEN
+    sue_bud.tree_range_push_traverse_check()
+
+    # THEN
+    assert not root_idea._begin
+    assert not root_idea._close
+    assert not texas_idea._debut
+    assert not texas_idea._arret

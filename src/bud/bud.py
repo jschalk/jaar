@@ -1236,6 +1236,7 @@ class BudUnit:
         idea_list = [self.get_idea_obj(self._real_id)]
         while idea_list != []:
             x_idea = idea_list.pop()
+            x_idea.clear_debut_arret()
             idea_list.extend(iter(x_idea._kids.values()))
             for x_range_push in x_idea._range_pushs:
                 if range_push_dict.get(x_range_push):

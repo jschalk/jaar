@@ -670,6 +670,10 @@ class IdeaUnit:
         ):
             self._addin = 0
 
+    def clear_debut_arret(self):
+        self._debut = None
+        self._arret = None
+
     def _transform_debut_arret(self):
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
