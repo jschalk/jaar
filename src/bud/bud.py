@@ -103,6 +103,10 @@ class Multiple_range_push_Exception(Exception):
     pass
 
 
+class _debut_arret_Exception(Exception):
+    pass
+
+
 @dataclass
 class BudUnit:
     _real_id: RealID = None
@@ -1245,10 +1249,17 @@ class BudUnit:
                     )
                 range_push_dict[x_range_push] = x_idea.get_road()
 
+    def _raise_debut_arret_exception(self, idea_road: RoadUnit):
+        raise _debut_arret_Exception(
+            f"Error has occurred, Idea '{idea_road}' is having _debut and _arret attributes set twice"
+        )
+
     def _distribute_arithmetic_attrs(self, arithmetic_idea: IdeaUnit):
         single_range_idea_list = [arithmetic_idea]
         while single_range_idea_list != []:
             r_idea = single_range_idea_list.pop()
+            if r_idea._debut or r_idea._arret:
+                self._raise_debut_arret_exception(r_idea.get_road())
             if r_idea.is_arithmetic():
                 r_idea._debut = r_idea._begin
                 r_idea._arret = r_idea._close
@@ -1261,6 +1272,8 @@ class BudUnit:
 
             for range_push_road in r_idea._range_pushs:
                 range_push_idea = self.get_idea_obj(range_push_road)
+                if range_push_idea._debut or range_push_idea._arret:
+                    self._raise_debut_arret_exception(range_push_road)
                 range_push_idea._debut = r_idea._debut
                 range_push_idea._arret = r_idea._arret
                 range_push_idea._transform_debut_arret()
@@ -1270,8 +1283,7 @@ class BudUnit:
     def tree_arithmetic_traverse_calc(self):
         all_idea_list = [self.get_idea_obj(self._real_id)]
         while all_idea_list != []:
-            y_idea = all_idea_list.pop(0)
-            all_idea_list.extend(iter(y_idea._kids.values()))
+            y_idea = all_idea_list.pop()
             if y_idea.is_arithmetic():
                 self._distribute_arithmetic_attrs(y_idea)
             all_idea_list.extend(iter(y_idea._kids.values()))
