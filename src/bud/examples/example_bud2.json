@@ -1841,22 +1841,16 @@
                                     "full": {
                                         "_label": "full",
                                         "_mass": 1.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reest": false
                                     },
                                     "not full": {
                                         "_label": "not full",
                                         "_mass": 1.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reest": false
                                     }
                                 },
                                 "_label": "laundry basket status",
                                 "_mass": 1.0,
-                                "_numeric_road": "",
-                                "_range_source_road": "",
                                 "_reest": false
                             },
                             "laundry monday": {
@@ -1930,8 +1924,6 @@
                             "laundry thursday": {
                                 "_label": "laundry thursday",
                                 "_mass": 1.0,
-                                "_numeric_road": "",
-                                "_range_source_road": "",
                                 "_reasonunits": {
                                     "A;casa;cleaning;laundry basket status": {
                                         "base": "A;casa;cleaning;laundry basket status",
@@ -2674,8 +2666,6 @@
                                     "back": {
                                         "_label": "back",
                                         "_mass": 30.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reasonunits": {
                                             "A;time;jajatime": {
                                                 "base": "A;time;jajatime",
@@ -2695,8 +2685,6 @@
                                     "legs": {
                                         "_label": "legs",
                                         "_mass": 30.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reasonunits": {
                                             "A;time;jajatime": {
                                                 "base": "A;time;jajatime",
@@ -2716,16 +2704,12 @@
                                     "waist": {
                                         "_label": "waist",
                                         "_mass": 30.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reest": false,
                                         "pledge": true
                                     }
                                 },
                                 "_label": "stretch",
                                 "_mass": 30.0,
-                                "_numeric_road": "",
-                                "_range_source_road": "",
                                 "_reasonunits": {
                                     "A;time;jajatime": {
                                         "base": "A;time;jajatime",
@@ -3355,8 +3339,6 @@
                                     "available for phone call": {
                                         "_label": "available for phone call",
                                         "_mass": 4.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reasonunits": {
                                             "A;time;jajatime": {
                                                 "base": "A;time;jajatime",
@@ -3376,8 +3358,6 @@
                                 },
                                 "_label": "Ernesto Chavez",
                                 "_mass": 4.0,
-                                "_numeric_road": "",
-                                "_range_source_road": "",
                                 "_reasonunits": {
                                     "A;time;jajatime": {
                                         "base": "A;time;jajatime"
@@ -3624,8 +3604,6 @@
                     "I need to waste time": {
                         "_label": "I need to waste time",
                         "_mass": 1.0,
-                        "_numeric_road": "",
-                        "_range_source_road": "",
                         "_reest": false
                     }
                 },
@@ -3765,8 +3743,6 @@
                             "never fly a private G5": {
                                 "_label": "never fly a private G5",
                                 "_mass": 1.0,
-                                "_numeric_road": "",
-                                "_range_source_road": "",
                                 "_reasonunits": {
                                     "A;time;jajatime": {
                                         "base": "A;time;jajatime",
@@ -3785,15 +3761,11 @@
                         },
                         "_label": "decrease carbon footprint",
                         "_mass": 1.0,
-                        "_numeric_road": "",
-                        "_range_source_road": "",
                         "_reest": false
                     }
                 },
                 "_label": "Things better Proposal",
                 "_mass": 1.0,
-                "_numeric_road": "",
-                "_range_source_road": "",
                 "_reest": false
             },
             "time": {
@@ -3880,15 +3852,11 @@
                                                 "_close": 1064041020.0,
                                                 "_label": "2023 Feb 9am",
                                                 "_mass": 1.0,
-                                                "_numeric_road": "",
-                                                "_range_source_road": "",
                                                 "_reest": false
                                             }
                                         },
                                         "_label": "monthly 1st business day",
                                         "_mass": 1.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reest": false
                                     },
                                     "Sept 4th 2023 9am": {
@@ -3896,15 +3864,11 @@
                                         "_close": 1064350680.0,
                                         "_label": "Sept 4th 2023 9am",
                                         "_mass": 1.0,
-                                        "_numeric_road": "",
-                                        "_range_source_road": "",
                                         "_reest": false
                                     }
                                 },
                                 "_label": "x2",
                                 "_mass": 1.0,
-                                "_numeric_road": "",
-                                "_range_source_road": "",
                                 "_reest": false
                             }
                         },
