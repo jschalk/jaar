@@ -455,6 +455,40 @@ def test_BudUnit_tree_arithmetic_traverse_calc_Sets_range_push_IdeaUnit_Simple0(
     assert day_idea._arret == time0_close
 
 
+def test_BudUnit_tree_arithmetic_traverse_calc_Sets_range_push_Decesdents():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    day_text = "day"
+    day_road = yao_bud.make_l1_road(day_text)
+    yao_bud.set_l1_idea(ideaunit_shop(day_text))
+    hour_text = "hour"
+    hour_road = yao_bud.make_road(day_road, hour_text)
+    hour_denom = 24
+    yao_bud.set_idea(ideaunit_shop(hour_text, _denom=hour_denom), day_road)
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 7
+    time0_close = 31
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
+    yao_bud.edit_idea_attr(time0_road, range_push=day_road)
+    day_idea = yao_bud.get_idea_obj(day_road)
+    hour_idea = yao_bud.get_idea_obj(hour_road)
+    assert not day_idea._debut
+    assert not day_idea._arret
+    assert not hour_idea._debut
+    assert not hour_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert day_idea._debut == time0_begin
+    assert day_idea._arret == time0_close
+    assert hour_idea._debut == day_idea._debut / hour_denom
+    assert hour_idea._arret == day_idea._arret / hour_denom
+
+
 # def test_BudUnit_tree_arithmetic_traverse_calc_RaisesErrorIfDescendentHas_begin_close():
 #     # ESTABLISH
 #     assert 5 == 6

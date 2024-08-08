@@ -1,6 +1,7 @@
 from src._instrument.python import (
     get_empty_dict_if_none,
     get_0_if_None,
+    get_1_if_None,
     get_False_if_None,
     get_positive_int,
 )
@@ -668,6 +669,15 @@ class IdeaUnit:
             and self._addin is None
         ):
             self._addin = 0
+
+    def _transform_debut_arret(self):
+        r_idea_numor = get_1_if_None(self._numor)
+        r_idea_denom = get_1_if_None(self._denom)
+        r_idea_addin = get_0_if_None(self._addin)
+        self._debut = self._debut + r_idea_addin
+        self._arret = self._arret + r_idea_addin
+        self._debut = (self._debut * r_idea_numor) / r_idea_denom
+        self._arret = (self._arret * r_idea_numor) / r_idea_denom
 
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
         if base is not None and premise is not None:
