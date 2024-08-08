@@ -43,6 +43,8 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._problem_bool is None
     assert x_ideaunit._healerhold is None
     # calculated_fields
+    assert x_ideaunit._debut is None
+    assert x_ideaunit._arret is None
     assert x_ideaunit._descendant_pledge_count is None
     assert x_ideaunit._is_expanded is None
     assert x_ideaunit._all_acct_cred is None
@@ -88,6 +90,8 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._factheirs == {}
     assert x_ideaunit._factunits == {}
     assert x_ideaunit._healerhold == healerhold_shop()
+    assert x_ideaunit._debut is None
+    assert x_ideaunit._arret is None
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._fund_ratio is None
@@ -596,69 +600,69 @@ def test_IdeaUnit_is_arithmetic_ReturnsObj():
 
 def test_IdeaUnit_set_range_push_SetsAttr():
     # ESTABLISH
-    timeline_text = "timeline"
-    timeline_idea = ideaunit_shop(timeline_text)
+    time_text = "time"
+    time_idea = ideaunit_shop(time_text)
     week_text = "week"
-    week_road = create_road(timeline_idea._bud_real_id, week_text)
-    assert timeline_idea._range_pushs == set()
+    week_road = create_road(time_idea._bud_real_id, week_text)
+    assert time_idea._range_pushs == set()
 
     # WHEN
-    timeline_idea.set_range_push(week_road)
+    time_idea.set_range_push(week_road)
 
     # THEN
-    assert timeline_idea._range_pushs == {week_road}
+    assert time_idea._range_pushs == {week_road}
 
     # WHEN
     day_text = "day"
-    day_road = create_road(timeline_idea._bud_real_id, day_text)
-    timeline_idea.set_range_push(day_road)
+    day_road = create_road(time_idea._bud_real_id, day_text)
+    time_idea.set_range_push(day_road)
 
     # THEN
-    assert timeline_idea._range_pushs == {week_road, day_road}
+    assert time_idea._range_pushs == {week_road, day_road}
 
 
 def test_IdeaUnit_range_push_exists_ReturnsObj():
     # ESTABLISH
-    timeline_text = "timeline"
-    timeline_idea = ideaunit_shop(timeline_text)
+    time_text = "time"
+    time_idea = ideaunit_shop(time_text)
     week_text = "week"
-    week_road = create_road(timeline_idea._bud_real_id, week_text)
+    week_road = create_road(time_idea._bud_real_id, week_text)
     day_text = "day"
-    day_road = create_road(timeline_idea._bud_real_id, day_text)
-    assert not timeline_idea.range_push_exists(week_road)
-    assert not timeline_idea.range_push_exists(day_road)
+    day_road = create_road(time_idea._bud_real_id, day_text)
+    assert not time_idea.range_push_exists(week_road)
+    assert not time_idea.range_push_exists(day_road)
 
     # WHEN
-    timeline_idea.set_range_push(week_road)
+    time_idea.set_range_push(week_road)
 
     # THEN
-    assert timeline_idea.range_push_exists(week_road)
-    assert not timeline_idea.range_push_exists(day_road)
+    assert time_idea.range_push_exists(week_road)
+    assert not time_idea.range_push_exists(day_road)
 
     # WHEN
-    timeline_idea.set_range_push(day_road)
+    time_idea.set_range_push(day_road)
 
     # THEN
-    assert timeline_idea.range_push_exists(week_road)
-    assert timeline_idea.range_push_exists(day_road)
+    assert time_idea.range_push_exists(week_road)
+    assert time_idea.range_push_exists(day_road)
 
 
 def test_IdeaUnit_del_range_push_SetsAttr():
     # ESTABLISH
-    timeline_text = "timeline"
-    timeline_idea = ideaunit_shop(timeline_text)
+    time_text = "time"
+    time_idea = ideaunit_shop(time_text)
     week_text = "week"
-    week_road = create_road(timeline_idea._bud_real_id, week_text)
+    week_road = create_road(time_idea._bud_real_id, week_text)
     day_text = "day"
-    day_road = create_road(timeline_idea._bud_real_id, day_text)
-    timeline_idea.set_range_push(week_road)
-    timeline_idea.set_range_push(day_road)
-    assert timeline_idea.range_push_exists(week_road)
-    assert timeline_idea.range_push_exists(day_road)
+    day_road = create_road(time_idea._bud_real_id, day_text)
+    time_idea.set_range_push(week_road)
+    time_idea.set_range_push(day_road)
+    assert time_idea.range_push_exists(week_road)
+    assert time_idea.range_push_exists(day_road)
 
     # WHEN
-    timeline_idea.del_range_push(week_road)
+    time_idea.del_range_push(week_road)
 
     # THEN
-    assert not timeline_idea.range_push_exists(week_road)
-    assert timeline_idea.range_push_exists(day_road)
+    assert not time_idea.range_push_exists(week_road)
+    assert time_idea.range_push_exists(day_road)

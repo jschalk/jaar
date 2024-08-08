@@ -597,9 +597,6 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsError():
     yao_bud = budunit_shop("Yao")
     # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_idea_attr(road="", denom=46)
-    assert str(excinfo.value) == "Root Idea cannot have numor denom reest."
 
     casa_text = "casa"
     casa_road = yao_bud.make_l1_road(casa_text)
@@ -609,14 +606,6 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsE
     clean_idea = ideaunit_shop(clean_text)
     clean_road = yao_bud.make_road(casa_road, clean_text)
     yao_bud.set_idea(clean_idea, parent_road=casa_road)
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_idea_attr(road=clean_road, denom=46)
-    assert (
-        str(excinfo.value)
-        == f"Idea cannot edit numor=1/denom/reest of '{clean_road}' if parent '{casa_road}' or ideaunit._numeric_road does not have begin/close range"
-    )
 
     # ESTABLISH
     yao_bud.edit_idea_attr(road=casa_road, begin=44, close=110)
@@ -671,14 +660,6 @@ def test_BudUnit_edit_idea_attr_budWhenParentAndNumeric_roadBothHaveRangeThrowEr
     casa_idea = yao_bud.get_idea_obj(casa_road)
     assert casa_idea._begin is None
     assert casa_idea._close is None
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_idea_attr(road=casa_road, denom=11)
-    assert (
-        str(excinfo.value)
-        == f"Idea cannot edit numor=1/denom/reest of '{casa_road}' if parent '{yao_bud._real_id}' or ideaunit._numeric_road does not have begin/close range"
-    )
 
     # WHEN
     yao_bud.edit_idea_attr(road=casa_road, numeric_road=day_road)

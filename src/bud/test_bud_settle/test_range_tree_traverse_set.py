@@ -1,0 +1,314 @@
+from src.bud.examples.example_buds import (
+    get_budunit_with_4_levels,
+    get_budunit_with_4_levels_and_2reasons,
+)
+from src.bud.idea import ideaunit_shop
+from src.bud.bud import budunit_shop
+from src.bud.group import awardlink_shop
+from src.bud.graphic import display_ideatree
+from pytest import raises as pytest_raises
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsInitialIdea_debut_arret_UnitDoesNotErrorWithEmptyBudUnit():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._begin
+    assert not root_idea._close
+    assert not root_idea._debut
+    assert not root_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert not root_idea._begin
+    assert not root_idea._close
+    assert not root_idea._debut
+    assert not root_idea._arret
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsInitialIdea_debut_arret_DoesNotErrorWhenNoArithmeticNodes():
+    # ESTABLISH
+    yao_bud = get_budunit_with_4_levels_and_2reasons()
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._debut
+
+    # WHEM
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert not root_idea._debut
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsInitialIdea_debut_arret_SimpleNode():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_begin = 7
+    time0_close = 31
+    yao_bud.edit_idea_attr(yao_bud._real_id, begin=time0_begin, close=time0_close)
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert not root_idea._debut
+    assert not root_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._debut == time0_begin
+    assert root_idea._arret == time0_close
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsInitialIdea_debut_arret_NodeWith_denom():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_begin = 6
+    time0_close = 21
+    time0_denom = 3
+    yao_bud.edit_idea_attr(
+        yao_bud._real_id,
+        begin=time0_begin,
+        close=time0_close,
+        denom=time0_denom,
+    )
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._denom == time0_denom
+    assert not root_idea._debut
+    assert not root_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._debut == time0_begin / time0_denom
+    assert root_idea._arret == time0_close / time0_denom
+    assert root_idea._debut == 2
+    assert root_idea._arret == 7
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsInitialIdea_debut_arret_NodeWith_denom_numor():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_begin = 6
+    time0_close = 18
+    time0_numor = 7
+    time0_denom = 3
+    yao_bud.edit_idea_attr(
+        yao_bud._real_id,
+        begin=time0_begin,
+        close=time0_close,
+        numor=time0_numor,
+        denom=time0_denom,
+    )
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._numor == time0_numor
+    assert root_idea._denom == time0_denom
+    assert not root_idea._debut
+    assert not root_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._debut == (time0_begin * time0_numor) / time0_denom
+    assert root_idea._arret == (time0_close * time0_numor) / time0_denom
+    assert root_idea._debut == 14
+    assert root_idea._arret == 42
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsInitialIdea_debut_arret_NodeWith_addin():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_begin = 6
+    time0_close = 18
+    time0_addin = 7
+    yao_bud.edit_idea_attr(
+        yao_bud._real_id,
+        begin=time0_begin,
+        close=time0_close,
+        addin=time0_addin,
+    )
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._addin == time0_addin
+    assert not root_idea._debut
+    assert not root_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._debut == time0_begin + time0_addin
+    assert root_idea._arret == time0_close + time0_addin
+    assert root_idea._debut == 13
+    assert root_idea._arret == 25
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsInitialIdea_debut_arret_NodeWith_denom_addin():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_begin = 6
+    time0_close = 18
+    time0_denom = 3
+    time0_addin = 60
+    yao_bud.edit_idea_attr(
+        yao_bud._real_id,
+        begin=time0_begin,
+        close=time0_close,
+        denom=time0_denom,
+        addin=time0_addin,
+    )
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._denom == time0_denom
+    assert root_idea._addin == time0_addin
+    assert not root_idea._debut
+    assert not root_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert root_idea._begin == time0_begin
+    assert root_idea._close == time0_close
+    assert root_idea._debut == (time0_begin + time0_addin) / time0_denom
+    assert root_idea._arret == (time0_close + time0_addin) / time0_denom
+    assert root_idea._debut == 22
+    assert root_idea._arret == 26
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_Simple0():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 7
+    time0_close = 31
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
+
+    time1_text = "time1"
+    time1_road = yao_bud.make_road(time0_road, time1_text)
+    yao_bud.set_idea(ideaunit_shop(time1_text), time0_road)
+    time1_idea = yao_bud.get_idea_obj(time1_road)
+    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    assert not root_idea._debut
+    assert not root_idea._arret
+    assert time0_idea._begin == time0_begin
+    assert time0_idea._close == time0_close
+    assert time1_idea._begin != time0_begin
+    assert time1_idea._close != time0_close
+    assert not time1_idea._debut
+    assert not time1_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert time1_idea._begin != time0_begin
+    assert time1_idea._close != time0_close
+    assert not time1_idea._begin
+    assert not time1_idea._close
+    assert time1_idea._debut == time0_begin
+    assert time1_idea._arret == time0_close
+
+
+# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom():
+#     # ESTABLISH
+#     yao_bud = budunit_shop("Yao")
+#     time0_text = "time0"
+#     time0_road = yao_bud.make_l1_road(time0_text)
+#     time0_begin = 7
+#     time0_close = 31
+#     time0_demon = 31
+#     time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+#     yao_bud.set_l1_idea(time0_idea)
+
+#     time1_text = "time1"
+#     time1_road = yao_bud.make_road(time0_road, time1_text)
+#     yao_bud.set_idea(ideaunit_shop(time1_text), time0_road)
+#     time1_idea = yao_bud.get_idea_obj(time1_road)
+#     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+#     assert not root_idea._debut
+#     assert not root_idea._arret
+#     assert time0_idea._begin == time0_begin
+#     assert time0_idea._close == time0_close
+#     assert time1_idea._begin != time0_begin
+#     assert time1_idea._close != time0_close
+#     assert not time1_idea._debut
+#     assert not time1_idea._arret
+
+#     # WHEN
+#     yao_bud.tree_arithmetic_traverse_calc()
+
+#     # THEN
+#     assert time1_idea._begin != time0_begin
+#     assert time1_idea._close != time0_close
+#     assert not time1_idea._begin
+#     assert not time1_idea._close
+#     assert time1_idea._debut == time0_begin
+#     assert time1_idea._arret == time0_close
+
+
+# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom_numor():
+#     # ESTABLISH
+#     assert 5 == 6
+
+
+# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_addin():
+#     # ESTABLISH
+#     assert 5 == 6
+
+
+# def test_BudUnit_tree_arithmetic_traverse_calc_SetsDescendentIdea_debut_arret_NodeWith_denom_addin():
+#     # ESTABLISH
+#     assert 5 == 6
+
+# def test_BudUnit_tree_arithmetic_traverse_calc_RaisesErrorIfDescendentHas_begin_close():
+#     # ESTABLISH
+#     assert 5 == 6
+
+
+def test_BudUnit_tree_arithmetic_traverse_calc_Sets_range_push_IdeaUnit_Simple0():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    day_text = "day"
+    day_road = yao_bud.make_l1_road(day_text)
+    yao_bud.set_l1_idea(ideaunit_shop(day_text))
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 7
+    time0_close = 31
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
+    yao_bud.edit_idea_attr(time0_road, range_push=day_road)
+    day_idea = yao_bud.get_idea_obj(day_road)
+    assert not day_idea._begin
+    assert not day_idea._close
+    assert not day_idea._debut
+    assert not day_idea._arret
+
+    # WHEN
+    yao_bud.tree_arithmetic_traverse_calc()
+
+    # THEN
+    assert not day_idea._begin
+    assert not day_idea._close
+    assert day_idea._debut == time0_begin
+    assert day_idea._arret == time0_close

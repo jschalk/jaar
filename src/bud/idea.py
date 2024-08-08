@@ -260,6 +260,8 @@ class IdeaUnit:
     _originunit: OriginUnit = None
     _problem_bool: bool = None
     # Calculated fields
+    _debut: float = None
+    _arret: float = None
     _level: int = None
     _fund_ratio: float = None
     _fund_coin: FundCoin = None

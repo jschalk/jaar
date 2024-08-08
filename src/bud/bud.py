@@ -865,13 +865,6 @@ class BudUnit:
     ) -> set[float, float]:
         x_iaf = ideaattrfilter
         anc_roads = get_ancestor_roads(road=idea_road)
-        if (
-            x_iaf.addin is not None
-            or x_iaf.numor is not None
-            or x_iaf.denom is not None
-            or x_iaf.reest is not None
-        ) and len(anc_roads) == 1:
-            raise InvalidBudException("Root Idea cannot have numor denom reest.")
         parent_road = self._real_id if len(anc_roads) == 1 else anc_roads[1]
 
         parent_has_range = None
@@ -910,10 +903,6 @@ class BudUnit:
         if parent_has_range and numeric_range:
             raise InvalidBudException(
                 "Idea has begin-close range parent, cannot have numeric_road"
-            )
-        elif not parent_has_range and not numeric_range and x_iaf.numor is not None:
-            raise InvalidBudException(
-                f"Idea cannot edit numor={x_iaf.numor}/denom/reest of '{idea_road}' if parent '{parent_road}' or ideaunit._numeric_road does not have begin/close range"
             )
         ideaattrfilter.begin = x_begin
         ideaattrfilter.close = x_close
@@ -1255,8 +1244,38 @@ class BudUnit:
                     )
                 range_push_dict[x_range_push] = x_idea.get_road()
 
-    def tree_range_push_traverse_calc(self):
-        pass
+    def tree_arithmetic_traverse_calc(self):
+        idea_list = [self.get_idea_obj(self._real_id)]
+        while idea_list != []:
+            x_idea = idea_list.pop()
+            idea_list.extend(iter(x_idea._kids.values()))
+            if x_idea.is_arithmetic():
+                x_idea_numor = get_1_if_None(x_idea._numor)
+                x_idea_denom = get_1_if_None(x_idea._denom)
+                x_idea_addin = get_0_if_None(x_idea._addin)
+                x_idea._debut = x_idea._begin + x_idea_addin
+                x_idea._arret = x_idea._close + x_idea_addin
+                x_idea._debut = (x_idea._debut * x_idea_numor) / x_idea_denom
+                x_idea._arret = (x_idea._arret * x_idea_numor) / x_idea_denom
+                for x_kid in x_idea._kids.values():
+                    # kid_numor = get_1_if_None(x_kid._numor)
+                    # kid_denom = get_1_if_None(x_kid._denom)
+                    # kid_numor = x_kid._numor
+                    # kid_denom = x_kid._denom
+                    # x_kid._debut = (x_idea._debut * kid_numor) / kid_denom
+                    # x_kid._arret = (x_idea._arret * kid_numor) / kid_denom
+                    x_kid._debut = x_idea._debut
+                    x_kid._arret = x_idea._arret
+                for range_push_road in x_idea._range_pushs:
+                    range_push_idea = self.get_idea_obj(range_push_road)
+                    # range_push_numor = get_1_if_None(range_push_idea._numor)
+                    # range_push_denom = get_1_if_None(range_push_idea._denom)
+                    # r_numor = range_push_idea._numor
+                    # r_denom = range_push_idea._denom
+                    # range_push_idea._debut = (x_idea._debut * r_numor) / r_denom
+                    # range_push_idea._arret = (x_idea._arret * r_numor) / r_denom
+                    range_push_idea._debut = x_idea._debut
+                    range_push_idea._arret = x_idea._arret
 
     def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
         task_count = 0
