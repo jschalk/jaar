@@ -9,6 +9,7 @@ from src.gift.atom import (
     atom_insert,
     atomunit_shop,
 )
+from src.gift.atom_config import bud_idea_range_push_text
 from src.gift.change import changeunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
 
@@ -965,7 +966,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_groupho
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._doerunit._groupholds != {}
+    assert after_ball_ideaunit._doerunit._groupholds != set()
     assert after_ball_ideaunit._doerunit.get_grouphold(yao_text) is not None
 
 
@@ -982,7 +983,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_groupho
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
     before_ball_ideaunit._doerunit.set_grouphold(yao_text)
-    assert before_ball_ideaunit._doerunit._groupholds != {}
+    assert before_ball_ideaunit._doerunit._groupholds != set()
     assert before_ball_ideaunit._doerunit.get_grouphold(yao_text) is not None
 
     # WHEN
@@ -997,6 +998,66 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_groupho
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
     assert after_ball_ideaunit._doerunit._groupholds == set()
+
+
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_range_push():
+    # ESTABLISH
+    sue_text = "Sue"
+    before_sue_au = budunit_shop(sue_text)
+    day_text = "day"
+    day_road = before_sue_au.make_l1_road(day_text)
+    before_sue_au.set_l1_idea(ideaunit_shop(day_text))
+    sports_text = "sports"
+    sports_road = before_sue_au.make_l1_road(sports_text)
+    ball_text = "basketball"
+    ball_road = before_sue_au.make_road(sports_road, ball_text)
+    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
+    before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
+    assert before_ball_ideaunit._range_pushs == set()
+
+    # WHEN
+    update_disc_atomunit = atomunit_shop(bud_idea_range_push_text(), atom_insert())
+    update_disc_atomunit.set_required_arg("road", ball_road)
+    update_disc_atomunit.set_required_arg("range_push", day_road)
+    sue_changeunit = changeunit_shop()
+    sue_changeunit.set_atomunit(update_disc_atomunit)
+    after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
+
+    # THEN
+    after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
+    assert after_ball_ideaunit._range_pushs != set()
+    assert day_road in after_ball_ideaunit._range_pushs
+
+
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_range_push():
+    # ESTABLISH
+    sue_text = "Sue"
+    before_sue_au = budunit_shop(sue_text)
+    day_text = "day"
+    day_road = before_sue_au.make_l1_road(day_text)
+    before_sue_au.set_l1_idea(ideaunit_shop(day_text))
+    sports_text = "sports"
+    sports_road = before_sue_au.make_l1_road(sports_text)
+    ball_text = "basketball"
+    ball_road = before_sue_au.make_road(sports_road, ball_text)
+    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
+    before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
+    before_ball_ideaunit.set_range_push(day_road)
+    assert before_ball_ideaunit._range_pushs != set()
+    assert day_road in before_ball_ideaunit._range_pushs
+
+    # WHEN
+    update_disc_atomunit = atomunit_shop(bud_idea_range_push_text(), atom_delete())
+    update_disc_atomunit.set_required_arg("road", ball_road)
+    update_disc_atomunit.set_required_arg("range_push", day_road)
+    sue_changeunit = changeunit_shop()
+    sue_changeunit.set_atomunit(update_disc_atomunit)
+    print(f"{before_sue_au.get_idea_obj(ball_road)._range_pushs=}")
+    after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
+
+    # THEN
+    after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
+    assert after_ball_ideaunit._range_pushs == set()
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():

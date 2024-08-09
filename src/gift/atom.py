@@ -390,6 +390,16 @@ def _modify_bud_idea_grouphold_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value("group_id"))
 
 
+def _modify_bud_idea_range_push_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
+    x_ideaunit.del_range_push(x_atom.get_value("range_push"))
+
+
+def _modify_bud_idea_range_push_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
+    x_ideaunit.set_range_push(x_atom.get_value("range_push"))
+
+
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.del_acctunit(x_atom.get_value("acct_id"))
 
@@ -478,6 +488,13 @@ def _modify_bud_idea_grouphold(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_grouphold_insert(x_bud, x_atom)
 
 
+def _modify_bud_idea_range_push(x_bud: BudUnit, x_atom: AtomUnit):
+    if x_atom.crud_text == atom_delete():
+        _modify_bud_idea_range_push_delete(x_bud, x_atom)
+    elif x_atom.crud_text == atom_insert():
+        _modify_bud_idea_range_push_insert(x_bud, x_atom)
+
+
 def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
         _modify_bud_acctunit_delete(x_bud, x_atom)
@@ -504,6 +521,8 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
     elif x_atom.category == "bud_idea_grouphold":
         _modify_bud_idea_grouphold(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_range_push":
+        _modify_bud_idea_range_push(x_bud, x_atom)
     elif x_atom.category == "bud_acctunit":
         _modify_bud_acctunit(x_bud, x_atom)
 
