@@ -95,10 +95,10 @@ class AtomUnit:
         # the order of required argments decides the location. The order must always be
         # the same
         sorted_required_arg_keys = get_sorted_required_arg_keys(self.category)
-        sorted_required_arg_values = []
-        for required_arg in sorted_required_arg_keys:
-            sorted_required_arg_values.append(self.required_args.get(required_arg))
-        return sorted_required_arg_values
+        return [
+            self.required_args.get(required_arg)
+            for required_arg in sorted_required_arg_keys
+        ]
 
     def is_required_args_valid(self) -> bool:
         if self.crud_text not in {atom_delete(), atom_insert(), atom_update()}:
