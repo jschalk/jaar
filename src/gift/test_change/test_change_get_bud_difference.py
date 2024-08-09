@@ -790,6 +790,62 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_d
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_range_push_insert():
+    # ESTABLISH
+    sue_text = "Sue"
+    before_sue_bud = budunit_shop(sue_text)
+    sports_text = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_text)
+    ball_text = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_text)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    knee_text = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_text)
+
+    after_sue_bud = copy_deepcopy(before_sue_bud)
+    after_sue_bud.edit_idea_attr(road=ball_road, range_push=knee_road)
+
+    # WHEN
+    sue_changeunit = changeunit_shop()
+    sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+
+    # THEN
+    print(f"{print_atomunit_keys(sue_changeunit)=}")
+    x_keylist = [atom_insert(), "bud_idea_range_push", ball_road, knee_road]
+    ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
+    assert ball_atomunit.get_value("road") == ball_road
+    assert ball_atomunit.get_value("range_push") == knee_road
+    assert get_atomunit_total_count(sue_changeunit) == 1
+
+
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_range_push_delete():
+    # ESTABLISH
+    sue_text = "Sue"
+    before_sue_bud = budunit_shop(sue_text)
+    sports_text = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_text)
+    ball_text = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_text)
+    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    knee_text = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_text)
+
+    after_sue_bud = copy_deepcopy(before_sue_bud)
+    before_sue_bud.edit_idea_attr(road=ball_road, range_push=knee_road)
+
+    # WHEN
+    sue_changeunit = changeunit_shop()
+    sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+
+    # THEN
+    print(f"{print_atomunit_keys(sue_changeunit)=}")
+    x_keylist = [atom_delete(), "bud_idea_range_push", ball_road, knee_road]
+    ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
+    assert ball_atomunit.get_value("road") == ball_road
+    assert ball_atomunit.get_value("range_push") == knee_road
+    assert get_atomunit_total_count(sue_changeunit) == 1
+
+
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_insert():
     # ESTABLISH
     sue_text = "Sue"
