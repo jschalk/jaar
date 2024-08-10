@@ -103,7 +103,7 @@ class Multiple_range_push_Exception(Exception):
     pass
 
 
-class _gogo_stop_Exception(Exception):
+class _gogo_calc_stop_calc_Exception(Exception):
     pass
 
 
@@ -1147,7 +1147,7 @@ class BudUnit:
         idea_list = [self.get_idea_obj(self._real_id)]
         while idea_list != []:
             x_idea = idea_list.pop()
-            x_idea.clear_gogo_stop()
+            x_idea.clear_gogo_calc_stop_calc()
             idea_list.extend(iter(x_idea._kids.values()))
             for x_range_push in x_idea._range_pushs:
                 if range_push_dict.get(x_range_push):
@@ -1156,34 +1156,34 @@ class BudUnit:
                     )
                 range_push_dict[x_range_push] = x_idea.get_road()
 
-    def _raise_gogo_stop_exception(self, idea_road: RoadUnit):
-        raise _gogo_stop_Exception(
-            f"Error has occurred, Idea '{idea_road}' is having _gogo and _stop attributes set twice"
+    def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
+        raise _gogo_calc_stop_calc_Exception(
+            f"Error has occurred, Idea '{idea_road}' is having _gogo_calc and _stop_calc attributes set twice"
         )
 
     def _distribute_arithmetic_attrs(self, arithmetic_idea: IdeaUnit):
         single_range_idea_list = [arithmetic_idea]
         while single_range_idea_list != []:
             r_idea = single_range_idea_list.pop()
-            if r_idea._gogo or r_idea._stop:
-                self._raise_gogo_stop_exception(r_idea.get_road())
+            if r_idea._gogo_calc or r_idea._stop_calc:
+                self._raise_gogo_calc_stop_calc_exception(r_idea.get_road())
             if r_idea.is_arithmetic():
-                r_idea._gogo = r_idea._begin
-                r_idea._stop = r_idea._close
+                r_idea._gogo_calc = r_idea._begin
+                r_idea._stop_calc = r_idea._close
             else:
                 parent_road = get_parent_road(r_idea.get_road())
                 parent_idea = self.get_idea_obj(parent_road)
-                r_idea._gogo = parent_idea._gogo
-                r_idea._stop = parent_idea._stop
-            r_idea._transform_gogo_stop()
+                r_idea._gogo_calc = parent_idea._gogo_calc
+                r_idea._stop_calc = parent_idea._stop_calc
+            r_idea._transform_gogo_calc_stop_calc()
 
             for range_push_road in r_idea._range_pushs:
                 range_push_idea = self.get_idea_obj(range_push_road)
-                if range_push_idea._gogo or range_push_idea._stop:
-                    self._raise_gogo_stop_exception(range_push_road)
-                range_push_idea._gogo = r_idea._gogo
-                range_push_idea._stop = r_idea._stop
-                range_push_idea._transform_gogo_stop()
+                if range_push_idea._gogo_calc or range_push_idea._stop_calc:
+                    self._raise_gogo_calc_stop_calc_exception(range_push_road)
+                range_push_idea._gogo_calc = r_idea._gogo_calc
+                range_push_idea._stop_calc = r_idea._stop_calc
+                range_push_idea._transform_gogo_calc_stop_calc()
                 single_range_idea_list.extend(iter(range_push_idea._kids.values()))
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 

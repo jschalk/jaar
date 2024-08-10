@@ -10,8 +10,8 @@ def test_BudUnit_tree_range_push_traverse_check_Scenario0():
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     assert not root_idea._begin
     assert not root_idea._close
-    assert not root_idea._gogo
-    assert not root_idea._stop
+    assert not root_idea._gogo_calc
+    assert not root_idea._stop_calc
 
     # WHEN
     yao_bud.tree_range_push_traverse_check()
@@ -19,8 +19,8 @@ def test_BudUnit_tree_range_push_traverse_check_Scenario0():
     # THEN
     assert not root_idea._begin
     assert not root_idea._close
-    assert not root_idea._gogo
-    assert not root_idea._stop
+    assert not root_idea._gogo_calc
+    assert not root_idea._stop_calc
 
 
 def test_BudUnit_tree_range_push_traverse_check_Scenario1():
@@ -32,8 +32,8 @@ def test_BudUnit_tree_range_push_traverse_check_Scenario1():
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     assert root_idea._begin == time0_begin
     assert root_idea._close == time0_close
-    assert not root_idea._gogo
-    assert not root_idea._stop
+    assert not root_idea._gogo_calc
+    assert not root_idea._stop_calc
 
     # WHEN
     yao_bud.tree_range_push_traverse_check()
@@ -41,8 +41,8 @@ def test_BudUnit_tree_range_push_traverse_check_Scenario1():
     # THEN
     assert root_idea._begin == time0_begin
     assert root_idea._close == time0_close
-    assert not root_idea._gogo
-    assert not root_idea._stop
+    assert not root_idea._gogo_calc
+    assert not root_idea._stop_calc
 
 
 def test_BudUnit_tree_range_push_traverse_check_Scenario2():
@@ -58,8 +58,8 @@ def test_BudUnit_tree_range_push_traverse_check_Scenario2():
     yao_bud.edit_idea_attr(time0_road, range_push=day_road)
     assert not day_idea._begin
     assert not day_idea._close
-    assert not day_idea._gogo
-    assert not day_idea._stop
+    assert not day_idea._gogo_calc
+    assert not day_idea._stop_calc
 
     # WHEN
     yao_bud.tree_range_push_traverse_check()
@@ -67,8 +67,8 @@ def test_BudUnit_tree_range_push_traverse_check_Scenario2():
     # THEN
     assert not day_idea._begin
     assert not day_idea._close
-    assert not day_idea._gogo
-    assert not day_idea._stop
+    assert not day_idea._gogo_calc
+    assert not day_idea._stop_calc
 
 
 def test_BudUnit_tree_range_push_traverse_check_RaisesError():
@@ -96,7 +96,7 @@ def test_BudUnit_tree_range_push_traverse_check_RaisesError():
     )
 
 
-def test_BudUnit_tree_range_push_traverse_check_Clears_gogo_stop():
+def test_BudUnit_tree_range_push_traverse_check_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     root_idea = sue_bud.get_idea_obj(sue_bud._real_id)
@@ -107,12 +107,12 @@ def test_BudUnit_tree_range_push_traverse_check_Clears_gogo_stop():
     texas_text = "Texas"
     texas_road = sue_bud.make_road(usa_road, texas_text)
     texas_idea = sue_bud.get_idea_obj(texas_road)
-    texas_idea._gogo = 7
-    texas_idea._stop = 11
-    assert not root_idea._gogo
-    assert not root_idea._stop
-    assert texas_idea._gogo
-    assert texas_idea._stop
+    texas_idea._gogo_calc = 7
+    texas_idea._stop_calc = 11
+    assert not root_idea._gogo_calc
+    assert not root_idea._stop_calc
+    assert texas_idea._gogo_calc
+    assert texas_idea._stop_calc
 
     # WHEN
     sue_bud.tree_range_push_traverse_check()
@@ -120,5 +120,5 @@ def test_BudUnit_tree_range_push_traverse_check_Clears_gogo_stop():
     # THEN
     assert not root_idea._begin
     assert not root_idea._close
-    assert not texas_idea._gogo
-    assert not texas_idea._stop
+    assert not texas_idea._gogo_calc
+    assert not texas_idea._stop_calc

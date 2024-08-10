@@ -36,6 +36,8 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._numor is None
     assert x_ideaunit._denom is None
     assert x_ideaunit._reest is None
+    assert x_ideaunit._gogo_want is None
+    assert x_ideaunit._stop_want is None
     assert x_ideaunit._numeric_road is None
     assert x_ideaunit._range_source_road is None
     assert x_ideaunit._range_pushs is None
@@ -43,8 +45,8 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._problem_bool is None
     assert x_ideaunit._healerhold is None
     # calculated_fields
-    assert x_ideaunit._gogo is None
-    assert x_ideaunit._stop is None
+    assert x_ideaunit._gogo_calc is None
+    assert x_ideaunit._stop_calc is None
     assert x_ideaunit._descendant_pledge_count is None
     assert x_ideaunit._is_expanded is None
     assert x_ideaunit._all_acct_cred is None
@@ -90,8 +92,8 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._factheirs == {}
     assert x_ideaunit._factunits == {}
     assert x_ideaunit._healerhold == healerhold_shop()
-    assert x_ideaunit._gogo is None
-    assert x_ideaunit._stop is None
+    assert x_ideaunit._gogo_calc is None
+    assert x_ideaunit._stop_calc is None
     assert x_ideaunit._level is None
     assert x_ideaunit._active_hx == {}
     assert x_ideaunit._fund_ratio is None
@@ -668,64 +670,95 @@ def test_IdeaUnit_del_range_push_SetsAttr():
     assert time_idea.range_push_exists(day_road)
 
 
-def test_IdeaUnit_clear_gogo_stop_SetsAttr():
+def test_IdeaUnit_clear_gogo_calc_stop_calc_SetsAttr():
     # ESTABLISH
     time_text = "time"
     time_idea = ideaunit_shop(time_text)
-    time_idea._gogo = 3
-    time_idea._stop = 4
-    assert time_idea._gogo
-    assert time_idea._stop
+    time_idea._gogo_calc = 3
+    time_idea._stop_calc = 4
+    assert time_idea._gogo_calc
+    assert time_idea._stop_calc
 
     # WHEN
-    time_idea.clear_gogo_stop()
+    time_idea.clear_gogo_calc_stop_calc()
 
     # THEN
-    assert not time_idea._gogo
-    assert not time_idea._stop
+    assert not time_idea._gogo_calc
+    assert not time_idea._stop_calc
 
 
-def test_IdeaUnit_transform_gogo_stop_SetsAttr_denom():
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_denom():
     # ESTABLISH
     time_text = "time"
     time_denom = 7
     time_idea = ideaunit_shop(time_text, _denom=time_denom)
-    init_gogo = 21
-    init_stop = 42
-    time_idea._gogo = init_gogo
-    time_idea._stop = init_stop
+    init_gogo_calc = 21
+    init_stop_calc = 42
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
     time_idea._denom = time_denom
-    assert time_idea._gogo
-    assert time_idea._stop
+    assert time_idea._gogo_calc
+    assert time_idea._stop_calc
 
     # WHEN
-    time_idea._transform_gogo_stop()
+    time_idea._transform_gogo_calc_stop_calc()
 
     # THEN
-    assert time_idea._gogo == init_gogo / time_denom
-    assert time_idea._stop == init_stop / time_denom
-    assert time_idea._gogo == 3
-    assert time_idea._stop == 6
+    assert time_idea._gogo_calc == init_gogo_calc / time_denom
+    assert time_idea._stop_calc == init_stop_calc / time_denom
+    assert time_idea._gogo_calc == 3
+    assert time_idea._stop_calc == 6
 
 
-def test_IdeaUnit_transform_gogo_stop_SetsAttr_reest():
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest():
     # ESTABLISH
     time_text = "time"
     time_denom = 7
     time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
-    init_gogo = 21
-    init_stop = 45
-    time_idea._gogo = init_gogo
-    time_idea._stop = init_stop
+    init_gogo_calc = 21
+    init_stop_calc = 45
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
     time_idea._denom = time_denom
-    assert time_idea._gogo
-    assert time_idea._stop
+    assert time_idea._gogo_calc
+    assert time_idea._stop_calc
 
     # WHEN
-    time_idea._transform_gogo_stop()
+    time_idea._transform_gogo_calc_stop_calc()
 
     # THEN
-    assert time_idea._gogo == 0
-    assert time_idea._stop == (init_stop - init_gogo) % time_denom
-    assert time_idea._gogo == 0
-    assert time_idea._stop == 3
+    assert time_idea._gogo_calc == 0
+    assert time_idea._stop_calc == (init_stop_calc - init_gogo_calc) % time_denom
+    assert time_idea._gogo_calc == 0
+    assert time_idea._stop_calc == 3
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario0_NoFilter():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 21
+    init_stop_calc = 45
+    gogo_want = 20
+    stop_want = 40
+    time_idea._gogo_want = gogo_want
+    time_idea._stop_want = stop_want
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_want == gogo_want
+    assert time_idea._stop_want == stop_want
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == init_stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert time_idea._gogo_want == gogo_want
+    assert time_idea._stop_want == stop_want
+    assert time_idea._gogo_calc == gogo_want
+    assert time_idea._stop_calc == stop_want
+    assert time_idea._gogo_calc == 20
+    assert time_idea._stop_calc == 40

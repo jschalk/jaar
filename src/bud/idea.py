@@ -224,6 +224,8 @@ class IdeaUnit:
     _denom: int = None
     _numor: int = None
     _reest: bool = None
+    _gogo_want: bool = None
+    _stop_want: bool = None
     _range_source_road: RoadUnit = None
     _range_pushs: set[RoadUnit] = None
     _numeric_road: RoadUnit = None
@@ -231,8 +233,8 @@ class IdeaUnit:
     _originunit: OriginUnit = None
     _problem_bool: bool = None
     # Calculated fields
-    _gogo: float = None
-    _stop: float = None
+    _gogo_calc: float = None
+    _stop_calc: float = None
     _level: int = None
     _fund_ratio: float = None
     _fund_coin: FundCoin = None
@@ -640,24 +642,27 @@ class IdeaUnit:
         ):
             self._addin = 0
 
-    def clear_gogo_stop(self):
-        self._gogo = None
-        self._stop = None
+    def clear_gogo_calc_stop_calc(self):
+        self._gogo_calc = None
+        self._stop_calc = None
 
-    def _transform_gogo_stop(self):
+    def _transform_gogo_calc_stop_calc(self):
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
         r_idea_addin = get_0_if_None(self._addin)
-        if get_False_if_None(self._reest):
-            gogo_stop_diff = self._stop - self._gogo
-            gogo_stop_remainder = gogo_stop_diff % self._denom
-            self._gogo = 0
-            self._stop = gogo_stop_remainder
+        if self._gogo_want and self._stop_want:
+            self._gogo_calc = self._gogo_want
+            self._stop_calc = self._stop_want
+        elif get_False_if_None(self._reest):
+            gogo_calc_stop_calc_diff = self._stop_calc - self._gogo_calc
+            gogo_calc_stop_calc_remainder = gogo_calc_stop_calc_diff % self._denom
+            self._gogo_calc = 0
+            self._stop_calc = gogo_calc_stop_calc_remainder
         else:
-            self._gogo = self._gogo + r_idea_addin
-            self._stop = self._stop + r_idea_addin
-            self._gogo = (self._gogo * r_idea_numor) / r_idea_denom
-            self._stop = (self._stop * r_idea_numor) / r_idea_denom
+            self._gogo_calc = self._gogo_calc + r_idea_addin
+            self._stop_calc = self._stop_calc + r_idea_addin
+            self._gogo_calc = (self._gogo_calc * r_idea_numor) / r_idea_denom
+            self._stop_calc = (self._stop_calc * r_idea_numor) / r_idea_denom
 
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
         if base is not None and premise is not None:

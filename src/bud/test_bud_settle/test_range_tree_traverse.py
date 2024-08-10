@@ -15,8 +15,8 @@
 #     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
 #     assert not root_idea._begin
 #     assert not root_idea._close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 
 #     # WHEN
 #     yao_bud.tree_range_push_traverse_check()
@@ -24,8 +24,8 @@
 #     # THEN
 #     assert not root_idea._begin
 #     assert not root_idea._close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 
 
 # def test_BudUnit_tree_range_push_traverse_check_Scenario1():
@@ -37,8 +37,8 @@
 #     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
 #     assert root_idea._begin == time0_begin
 #     assert root_idea._close == time0_close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 
 #     # WHEN
 #     yao_bud.tree_range_push_traverse_check()
@@ -46,8 +46,8 @@
 #     # THEN
 #     assert root_idea._begin == time0_begin
 #     assert root_idea._close == time0_close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 
 
 # def test_BudUnit_tree_range_push_traverse_check_Scenario2():
@@ -63,8 +63,8 @@
 #     yao_bud.edit_idea_attr(time0_road, range_push=day_road)
 #     assert not day_idea._begin
 #     assert not day_idea._close
-#     assert not day_idea._gogo
-#     assert not day_idea._stop
+#     assert not day_idea._gogo_calc
+#     assert not day_idea._stop_calc
 
 #     # WHEN
 #     yao_bud.tree_range_push_traverse_check()
@@ -72,8 +72,8 @@
 #     # THEN
 #     assert not day_idea._begin
 #     assert not day_idea._close
-#     assert not day_idea._gogo
-#     assert not day_idea._stop
+#     assert not day_idea._gogo_calc
+#     assert not day_idea._stop_calc
 
 
 # def test_BudUnit_tree_range_push_traverse_check_RaisesError():
@@ -107,8 +107,8 @@
 #     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
 #     assert not root_idea._begin
 #     assert not root_idea._close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 
 #     # WHEN
 #     yao_bud.tree_arithmetic_traverse_calc()
@@ -116,8 +116,8 @@
 #     # THEN
 #     assert not root_idea._begin
 #     assert not root_idea._close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 
 
 # def test_BudUnit_tree_arithmetic_traverse_calc_Scenario1():
@@ -129,8 +129,8 @@
 #     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
 #     assert root_idea._begin == time0_begin
 #     assert root_idea._close == time0_close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 
 #     # WHEN
 #     yao_bud.tree_arithmetic_traverse_calc()
@@ -138,8 +138,8 @@
 #     # THEN
 #     assert root_idea._begin == time0_begin
 #     assert root_idea._close == time0_close
-#     assert root_idea._gogo == time0_begin
-#     assert root_idea._stop == time0_close
+#     assert root_idea._gogo_calc == time0_begin
+#     assert root_idea._stop_calc == time0_close
 
 
 # def test_BudUnit_tree_arithmetic_traverse_calc_Scenario2():
@@ -159,8 +159,8 @@
 #     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
 #     assert root_idea._begin == time0_begin
 #     assert root_idea._close == time0_close
-#     assert not root_idea._gogo
-#     assert not root_idea._stop
+#     assert not root_idea._gogo_calc
+#     assert not root_idea._stop_calc
 #     assert time1_idea._begin != time0_begin
 #     assert time1_idea._close != time0_close
 
