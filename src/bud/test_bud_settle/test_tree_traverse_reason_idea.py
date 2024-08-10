@@ -658,7 +658,7 @@ def test_BudUnit_settle_bud_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
     assert not x_bud._rational
 
 
-def test_BudUnit_tree_traverses_StopWhenEqualStatusIsDetected():
+def test_BudUnit_tree_traverse_count_SetByTotalNumberOfTreeTraversesEndsStatusIsDetected():
     # ESTABLISH
     x_bud = get_budunit_with_4_levels()
     assert x_bud._max_tree_traverse != 2
