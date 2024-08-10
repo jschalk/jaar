@@ -231,8 +231,8 @@ class IdeaUnit:
     _originunit: OriginUnit = None
     _problem_bool: bool = None
     # Calculated fields
-    _debut: float = None
-    _arret: float = None
+    _gogo: float = None
+    _stop: float = None
     _level: int = None
     _fund_ratio: float = None
     _fund_coin: FundCoin = None
@@ -640,24 +640,24 @@ class IdeaUnit:
         ):
             self._addin = 0
 
-    def clear_debut_arret(self):
-        self._debut = None
-        self._arret = None
+    def clear_gogo_stop(self):
+        self._gogo = None
+        self._stop = None
 
-    def _transform_debut_arret(self):
+    def _transform_gogo_stop(self):
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
         r_idea_addin = get_0_if_None(self._addin)
         if get_False_if_None(self._reest):
-            debut_arret_diff = self._arret - self._debut
-            debut_arret_remainder = debut_arret_diff % self._denom
-            self._debut = 0
-            self._arret = debut_arret_remainder
+            gogo_stop_diff = self._stop - self._gogo
+            gogo_stop_remainder = gogo_stop_diff % self._denom
+            self._gogo = 0
+            self._stop = gogo_stop_remainder
         else:
-            self._debut = self._debut + r_idea_addin
-            self._arret = self._arret + r_idea_addin
-            self._debut = (self._debut * r_idea_numor) / r_idea_denom
-            self._arret = (self._arret * r_idea_numor) / r_idea_denom
+            self._gogo = self._gogo + r_idea_addin
+            self._stop = self._stop + r_idea_addin
+            self._gogo = (self._gogo * r_idea_numor) / r_idea_denom
+            self._stop = (self._stop * r_idea_numor) / r_idea_denom
 
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
         if base is not None and premise is not None:
