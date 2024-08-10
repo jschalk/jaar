@@ -37,19 +37,19 @@ def test_BudUnit_set_fact_IsAbleToEditFactUnitAnyAncestor_Idea_1():
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    weekday_road = x_bud.make_l1_road("weekdays")
-    sunday_road = x_bud.make_road(weekday_road, "Sunday")
+    sue_bud = get_budunit_with_4_levels()
+    weekday_road = sue_bud.make_l1_road("weekdays")
+    sunday_road = sue_bud.make_road(weekday_road, "Sunday")
     sunday_bud_fact = factunit_shop(base=weekday_road, pick=sunday_road)
     print(sunday_bud_fact)
-    x_idearoot = x_bud._idearoot
+    x_idearoot = sue_bud._idearoot
     x_idearoot._factunits = {sunday_bud_fact.base: sunday_bud_fact}
     assert x_idearoot._factunits is not None
     x_idearoot._factunits = {}
     assert not x_idearoot._factunits
 
     # ESTABLISH
-    x_bud.set_fact(base=weekday_road, pick=sunday_road)
+    sue_bud.set_fact(base=weekday_road, pick=sunday_road)
 
     # THEN
     assert x_idearoot._factunits == {sunday_bud_fact.base: sunday_bud_fact}
@@ -57,7 +57,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
     x_idearoot._factunits = {}
     assert not x_idearoot._factunits
-    usa_week_road = x_bud.make_l1_road("nation-state")
+    usa_week_road = sue_bud.make_l1_road("nation-state")
     usa_week_unit = factunit_shop(usa_week_road, usa_week_road, open=608, nigh=610)
     x_idearoot._factunits = {usa_week_unit.base: usa_week_unit}
 
@@ -65,7 +65,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     assert not x_idearoot._factunits
 
     # WHEN
-    x_bud.set_fact(base=usa_week_road, pick=usa_week_road, open=608, nigh=610)
+    sue_bud.set_fact(base=usa_week_road, pick=usa_week_road, open=608, nigh=610)
 
     # THEN
     assert x_idearoot._factunits is not None
@@ -74,45 +74,45 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    weekday_road = x_bud.make_l1_road("weekdays")
-    sunday_road = x_bud.make_road(weekday_road, "Sunday")
+    sue_bud = get_budunit_with_4_levels()
+    weekday_road = sue_bud.make_l1_road("weekdays")
+    sunday_road = sue_bud.make_road(weekday_road, "Sunday")
 
     # WHEN
-    x_bud.set_fact(base=weekday_road, pick=sunday_road)
+    sue_bud.set_fact(base=weekday_road, pick=sunday_road)
 
     # THEN
     sunday_bud_fact = factunit_shop(base=weekday_road, pick=sunday_road)
-    x_idearoot = x_bud._idearoot
+    x_idearoot = sue_bud._idearoot
     assert x_idearoot._factunits == {sunday_bud_fact.base: sunday_bud_fact}
 
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_pick_IsNone():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    weekday_road = x_bud.make_l1_road("weekdays")
+    sue_bud = get_budunit_with_4_levels()
+    weekday_road = sue_bud.make_l1_road("weekdays")
 
     # WHEN
-    x_bud.set_fact(base=weekday_road, open=5, nigh=7)
+    sue_bud.set_fact(base=weekday_road, open=5, nigh=7)
 
     # THEN
     sunday_bud_fact = factunit_shop(weekday_road, weekday_road, 5, 7)
-    x_idearoot = x_bud._idearoot
+    x_idearoot = sue_bud._idearoot
     assert x_idearoot._factunits == {sunday_bud_fact.base: sunday_bud_fact}
 
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    weekday_road = x_bud.make_l1_road("weekdays")
-    x_bud.set_fact(base=weekday_road, open=5, nigh=7)
-    x_idearoot = x_bud._idearoot
+    sue_bud = get_budunit_with_4_levels()
+    weekday_road = sue_bud.make_l1_road("weekdays")
+    sue_bud.set_fact(base=weekday_road, open=5, nigh=7)
+    x_idearoot = sue_bud._idearoot
     assert x_idearoot._factunits.get(weekday_road) == factunit_shop(
         weekday_road, weekday_road, 5, 7
     )
 
     # WHEN
-    x_bud.set_fact(base=weekday_road, nigh=10)
+    sue_bud.set_fact(base=weekday_road, nigh=10)
 
     # THEN
     assert x_idearoot._factunits.get(weekday_road) == factunit_shop(
@@ -148,16 +148,16 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIs
 
 def test_BudUnit_del_fact_CorrectlyModifiesAttr():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    weekday_road = x_bud.make_l1_road("weekdays")
-    sunday_road = x_bud.make_road(weekday_road, "Sunday")
-    x_bud.set_fact(base=weekday_road, pick=sunday_road)
+    sue_bud = get_budunit_with_4_levels()
+    weekday_road = sue_bud.make_l1_road("weekdays")
+    sunday_road = sue_bud.make_road(weekday_road, "Sunday")
+    sue_bud.set_fact(base=weekday_road, pick=sunday_road)
     sunday_bud_fact = factunit_shop(base=weekday_road, pick=sunday_road)
-    x_idearoot = x_bud._idearoot
+    x_idearoot = sue_bud._idearoot
     assert x_idearoot._factunits == {sunday_bud_fact.base: sunday_bud_fact}
 
     # WHEN
-    x_bud.del_fact(base=weekday_road)
+    sue_bud.del_fact(base=weekday_road)
 
     # THEN
     assert x_idearoot._factunits == {}

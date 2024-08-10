@@ -971,41 +971,41 @@ def test_BudUnit_set_awardlink_correctly_sets_awardlinks():
 
 def test_BudUnit_set_awardlink_correctly_deletes_awardlinks():
     # ESTABLISH
-    prom_text = "prom"
-    x_bud = budunit_shop(prom_text)
+    yao_text = "yao"
+    yao_bud = budunit_shop(yao_text)
     yao_text = "Yao"
     zia_text = "Zia"
     Xio_text = "Xio"
-    x_bud.add_acctunit(yao_text)
-    x_bud.add_acctunit(zia_text)
-    x_bud.add_acctunit(Xio_text)
+    yao_bud.add_acctunit(yao_text)
+    yao_bud.add_acctunit(zia_text)
+    yao_bud.add_acctunit(Xio_text)
 
     swim_text = "swim"
-    swim_road = x_bud.make_road(prom_text, swim_text)
+    swim_road = yao_bud.make_road(yao_text, swim_text)
 
-    x_bud.set_l1_idea(ideaunit_shop(swim_text))
+    yao_bud.set_l1_idea(ideaunit_shop(swim_text))
     awardlink_yao = awardlink_shop(yao_text, give_force=10)
     awardlink_zia = awardlink_shop(zia_text, give_force=10)
     awardlink_Xio = awardlink_shop(Xio_text, give_force=10)
 
-    swim_idea = x_bud.get_idea_obj(swim_road)
-    x_bud.edit_idea_attr(swim_road, awardlink=awardlink_yao)
-    x_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
-    x_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
+    swim_idea = yao_bud.get_idea_obj(swim_road)
+    yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_yao)
+    yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
+    yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
 
     assert len(swim_idea._awardlinks) == 3
-    assert len(x_bud._idearoot._kids[swim_text]._awardlinks) == 3
+    assert len(yao_bud._idearoot._kids[swim_text]._awardlinks) == 3
 
     # WHEN
-    x_bud.edit_idea_attr(swim_road, awardlink_del=yao_text)
+    yao_bud.edit_idea_attr(swim_road, awardlink_del=yao_text)
 
     # THEN
-    swim_idea = x_bud.get_idea_obj(swim_road)
+    swim_idea = yao_bud.get_idea_obj(swim_road)
     print(f"{swim_idea._label=}")
     print(f"{swim_idea._awardlinks=}")
     print(f"{swim_idea._awardheirs=}")
 
-    assert len(x_bud._idearoot._kids[swim_text]._awardlinks) == 2
+    assert len(yao_bud._idearoot._kids[swim_text]._awardlinks) == 2
 
 
 def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
@@ -1027,11 +1027,11 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks()
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
     x1_bud_swim_idea = x1_bud.get_idea_obj(swim_road)
     assert len(x1_bud_swim_idea._awardlinks) == 2
-    x_bud = budunit_shop(bob_text)
-    x_bud.add_acctunit(xia_text)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_acctunit(xia_text)
 
     # WHEN
-    filtered_idea = x_bud._get_filtered_awardlinks_idea(x1_bud_swim_idea)
+    filtered_idea = bob_bud._get_filtered_awardlinks_idea(x1_bud_swim_idea)
 
     # THEN
     assert len(filtered_idea._awardlinks) == 1
@@ -1059,26 +1059,26 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     assert len(x1_bud_swim_idea._awardlinks) == 2
 
     # WHEN
-    x_bud = budunit_shop(bob_text)
-    x_bud.add_acctunit(xia_text)
-    x_bud.set_l1_idea(x1_bud_swim_idea, create_missing_ideas=False)
+    bob_bud = budunit_shop(bob_text)
+    bob_bud.add_acctunit(xia_text)
+    bob_bud.set_l1_idea(x1_bud_swim_idea, create_missing_ideas=False)
 
     # THEN
-    x_bud_swim_idea = x_bud.get_idea_obj(swim_road)
-    assert len(x_bud_swim_idea._awardlinks) == 1
-    assert list(x_bud_swim_idea._awardlinks.keys()) == [xia_text]
+    bob_bud_swim_idea = bob_bud.get_idea_obj(swim_road)
+    assert len(bob_bud_swim_idea._awardlinks) == 1
+    assert list(bob_bud_swim_idea._awardlinks.keys()) == [xia_text]
 
 
 def test_BudUnit_get_idea_obj_ReturnsIdea():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
     nation_text = "nation-state"
-    nation_road = x_bud.make_l1_road(nation_text)
+    nation_road = sue_bud.make_l1_road(nation_text)
     brazil_text = "Brazil"
-    brazil_road = x_bud.make_road(nation_road, brazil_text)
+    brazil_road = sue_bud.make_road(nation_road, brazil_text)
 
     # WHEN
-    brazil_idea = x_bud.get_idea_obj(road=brazil_road)
+    brazil_idea = sue_bud.get_idea_obj(road=brazil_road)
 
     # THEN
     assert brazil_idea is not None
@@ -1086,25 +1086,25 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
 
     # WHEN
     week_text = "weekdays"
-    week_road = x_bud.make_l1_road(week_text)
-    week_idea = x_bud.get_idea_obj(road=week_road)
+    week_road = sue_bud.make_l1_road(week_text)
+    week_idea = sue_bud.get_idea_obj(road=week_road)
 
     # THEN
     assert week_idea is not None
     assert week_idea._label == week_text
 
     # WHEN
-    root_idea = x_bud.get_idea_obj(road=x_bud._real_id)
+    root_idea = sue_bud.get_idea_obj(road=sue_bud._real_id)
 
     # THEN
     assert root_idea is not None
-    assert root_idea._label == x_bud._real_id
+    assert root_idea._label == sue_bud._real_id
 
     # WHEN / THEN
     bobdylan_text = "bobdylan"
-    wrong_road = x_bud.make_l1_road(bobdylan_text)
+    wrong_road = sue_bud.make_l1_road(bobdylan_text)
     with pytest_raises(Exception) as excinfo:
-        x_bud.get_idea_obj(road=wrong_road)
+        sue_bud.get_idea_obj(road=wrong_road)
     assert str(excinfo.value) == f"get_idea_obj failed. no item at '{wrong_road}'"
 
 

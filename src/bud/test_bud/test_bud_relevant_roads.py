@@ -9,11 +9,11 @@ from src.bud.examples.example_buds import (
 
 def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
+    sue_bud.settle_bud()
 
     # WHEN
-    relevant_roads = x_bud._get_relevant_roads({})
+    relevant_roads = sue_bud._get_relevant_roads({})
 
     # THEN
     print(f"{relevant_roads=}")
@@ -23,36 +23,36 @@ def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
 
 def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
+    sue_bud.settle_bud()
 
     # WHEN
-    root_dict = {x_bud._real_id: -1}
-    relevant_roads = x_bud._get_relevant_roads(root_dict)
+    root_dict = {sue_bud._real_id: -1}
+    relevant_roads = sue_bud._get_relevant_roads(root_dict)
 
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 1
-    assert relevant_roads == {x_bud._real_id}
+    assert relevant_roads == {sue_bud._real_id}
 
 
 def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
+    sue_bud.settle_bud()
 
     # WHEN
     week_text = "weekdays"
-    week_road = x_bud.make_l1_road(week_text)
+    week_road = sue_bud.make_l1_road(week_text)
     sun_text = "Sunday"
-    sun_road = x_bud.make_road(week_road, sun_text)
+    sun_road = sue_bud.make_road(week_road, sun_text)
     sun_dict = {sun_road}
-    relevant_roads = x_bud._get_relevant_roads(sun_dict)
+    relevant_roads = sue_bud._get_relevant_roads(sun_dict)
 
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 3
-    assert relevant_roads == {x_bud._real_id, sun_road, week_road}
+    assert relevant_roads == {sue_bud._real_id, sun_road, week_road}
 
 
 def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():

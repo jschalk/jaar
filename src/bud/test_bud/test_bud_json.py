@@ -20,80 +20,80 @@ from pytest import raises as pytest_raises
 
 def test_BudUnit_get_dict_ReturnsDictObject():
     # ESTABLISH
-    x_bud = budunit_v001()
+    yao_bud = budunit_v001()
     day_hour_text = "day_hour"
-    day_hour_road = x_bud.make_l1_road(day_hour_text)
-    day_hour_idea = x_bud.get_idea_obj(day_hour_road)
+    day_hour_road = yao_bud.make_l1_road(day_hour_text)
+    day_hour_idea = yao_bud.get_idea_obj(day_hour_road)
     day_hour_idea._originunit.set_originhold(acct_id="Bob", importance=2)
-    x_bud.set_fact(
+    yao_bud.set_fact(
         base=day_hour_road,
         pick=day_hour_road,
         open=0,
         nigh=23,
     )
-    time_minute = x_bud.make_l1_road("day_minute")
-    x_bud.set_fact(base=time_minute, pick=time_minute, open=0, nigh=1440)
+    time_minute = yao_bud.make_l1_road("day_minute")
+    yao_bud.set_fact(base=time_minute, pick=time_minute, open=0, nigh=1440)
     yao_text = "Yao"
-    x_bud._originunit.set_originhold(yao_text, 1)
+    yao_bud._originunit.set_originhold(yao_text, 1)
     yao_fund_pool = 23000
-    x_bud._fund_pool = yao_fund_pool
+    yao_bud._fund_pool = yao_fund_pool
     yao_fund_coin = 23
-    x_bud._fund_coin = yao_fund_coin
+    yao_bud._fund_coin = yao_fund_coin
     bud_tally = 23
-    x_bud._tally = bud_tally
+    yao_bud._tally = bud_tally
     x_credor_respect = 22
     x_debtor_respect = 44
-    x_bud.set_credor_respect(x_credor_respect)
-    x_bud.set_debtor_respect(x_debtor_respect)
+    yao_bud.set_credor_respect(x_credor_respect)
+    yao_bud.set_debtor_respect(x_debtor_respect)
     override_text = "override"
     x_last_gift_id = 77
-    x_bud.set_last_gift_id(x_last_gift_id)
+    yao_bud.set_last_gift_id(x_last_gift_id)
 
     # WHEN
-    bud_dict = x_bud.get_dict()
+    bud_dict = yao_bud.get_dict()
 
     # THEN
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
-    assert bud_dict["_owner_id"] == x_bud._owner_id
-    assert bud_dict["_real_id"] == x_bud._real_id
-    assert bud_dict["_tally"] == x_bud._tally
+    assert bud_dict["_owner_id"] == yao_bud._owner_id
+    assert bud_dict["_real_id"] == yao_bud._real_id
+    assert bud_dict["_tally"] == yao_bud._tally
     assert bud_dict["_tally"] == bud_tally
     assert bud_dict["_fund_pool"] == yao_fund_pool
     assert bud_dict["_fund_coin"] == yao_fund_coin
-    assert bud_dict["_max_tree_traverse"] == x_bud._max_tree_traverse
-    assert bud_dict["_road_delimiter"] == x_bud._road_delimiter
-    assert bud_dict["_credor_respect"] == x_bud._credor_respect
-    assert bud_dict["_debtor_respect"] == x_bud._debtor_respect
-    assert bud_dict["_last_gift_id"] == x_bud._last_gift_id
-    assert len(bud_dict["_accts"]) == len(x_bud._accts)
+    assert bud_dict["_max_tree_traverse"] == yao_bud._max_tree_traverse
+    assert bud_dict["_road_delimiter"] == yao_bud._road_delimiter
+    assert bud_dict["_credor_respect"] == yao_bud._credor_respect
+    assert bud_dict["_debtor_respect"] == yao_bud._debtor_respect
+    assert bud_dict["_last_gift_id"] == yao_bud._last_gift_id
+    assert len(bud_dict["_accts"]) == len(yao_bud._accts)
     assert len(bud_dict["_accts"]) != 12
     assert bud_dict.get("_groups") is None
 
-    x_idearoot = x_bud._idearoot
+    x_idearoot = yao_bud._idearoot
     idearoot_dict = bud_dict["_idearoot"]
     _kids = "_kids"
     _range_source_road = "_range_source_road"
     _numeric_road = "_numeric_road"
-    assert x_idearoot._label == x_bud._real_id
+    assert x_idearoot._label == yao_bud._real_id
     assert idearoot_dict["_label"] == x_idearoot._label
     assert idearoot_dict["_mass"] == x_idearoot._mass
     assert len(idearoot_dict[_kids]) == len(x_idearoot._kids)
 
     # check an ideakid._range_source_road attribute
     month_week_text = "month_week"
-    month_week_road = x_bud.make_l1_road(month_week_text)
-    month_week_idea_x = x_bud.get_idea_obj(month_week_road)
+    month_week_road = yao_bud.make_l1_road(month_week_text)
+    month_week_idea_x = yao_bud.get_idea_obj(month_week_road)
     print("check real_id,month_week...range_source_road equal to...")
     month_week_special_dict = idearoot_dict[_kids][month_week_text][_range_source_road]
     assert month_week_special_dict is not None
-    assert month_week_special_dict == x_bud.make_l1_road("ced_week")
+    assert month_week_special_dict == yao_bud.make_l1_road("ced_week")
     assert month_week_special_dict == month_week_idea_x._range_source_road
 
     # check an ideakid._numeric_road attribute
     num1_text = "numeric_road_test"
-    num1_road = x_bud.make_l1_road(num1_text)
-    num1_idea_x = x_bud.get_idea_obj(num1_road)
+    num1_road = yao_bud.make_l1_road(num1_text)
+    num1_idea_x = yao_bud.get_idea_obj(num1_road)
     print(f"check {num1_road}...numeric_road equal to...")
     num1_dict_numeric_road = idearoot_dict[_kids][num1_text][_numeric_road]
     assert num1_dict_numeric_road is not None
@@ -104,11 +104,11 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     day_hour_originunit_dict = idearoot_dict[_kids][day_hour_text][originunit_text]
     assert day_hour_originunit_dict == day_hour_idea._originunit.get_dict()
     originholds_text = "_originholds"
-    x_bud_originhold = bud_dict[originunit_text][originholds_text][yao_text]
-    print(f"{x_bud_originhold=}")
-    assert x_bud_originhold
-    assert x_bud_originhold["acct_id"] == yao_text
-    assert x_bud_originhold["importance"] == 1
+    yao_bud_originhold = bud_dict[originunit_text][originholds_text][yao_text]
+    print(f"{yao_bud_originhold=}")
+    assert yao_bud_originhold
+    assert yao_bud_originhold["acct_id"] == yao_text
+    assert yao_bud_originhold["importance"] == 1
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():

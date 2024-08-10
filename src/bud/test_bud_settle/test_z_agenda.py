@@ -168,18 +168,18 @@ def test_BudUnit_get_agenda_dict_With7amItemExample():
 
 def test_budunit_v001_AgendaExists():
     # ESTABLISH
-    x_bud = budunit_v001()
+    yao_bud = budunit_v001()
     min_text = "day_minute"
-    min_road = x_bud.make_l1_road(min_text)
-    x_bud.set_fact(base=min_road, pick=min_road, open=0, nigh=1399)
-    assert x_bud
-    # for idea_kid in x_bud._idearoot._kids.values():
+    min_road = yao_bud.make_l1_road(min_text)
+    yao_bud.set_fact(base=min_road, pick=min_road, open=0, nigh=1399)
+    assert yao_bud
+    # for idea_kid in yao_bud._idearoot._kids.values():
     #     # print(idea_kid._label)
     #     assert str(type(idea_kid)) != "<class 'str'>"
     #     assert idea_kid.pledge is not None
 
     # WHEN
-    agenda_dict = x_bud.get_agenda_dict()
+    agenda_dict = yao_bud.get_agenda_dict()
 
     # THEN
     assert len(agenda_dict) > 0
@@ -192,71 +192,71 @@ def test_budunit_v001_AgendaExists():
 
 def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     # ESTABLISH
-    x_bud = budunit_v001()
+    yao_bud = budunit_v001()
 
     day_min_text = "day_minute"
-    day_min_road = x_bud.make_l1_road(day_min_text)
-    x_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
+    day_min_road = yao_bud.make_l1_road(day_min_text)
+    yao_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
     month_week_text = "month_week"
-    month_week_road = x_bud.make_l1_road(month_week_text)
+    month_week_road = yao_bud.make_l1_road(month_week_text)
     nations_text = "Nation-States"
-    nations_road = x_bud.make_l1_road(nations_text)
+    nations_road = yao_bud.make_l1_road(nations_text)
     mood_text = "Moods"
-    mood_road = x_bud.make_l1_road(mood_text)
+    mood_road = yao_bud.make_l1_road(mood_text)
     aaron_text = "Aaron Donald things effected by him"
-    aaron_road = x_bud.make_l1_road(aaron_text)
+    aaron_road = yao_bud.make_l1_road(aaron_text)
     # internet_text = "Internet"
-    # internet_road = x_bud.make_l1_road(internet_text)
+    # internet_road = yao_bud.make_l1_road(internet_text)
     year_month_text = "year_month"
-    year_month_road = x_bud.make_l1_road(year_month_text)
-    x_bud.set_fact(base=month_week_road, pick=month_week_road)
-    x_bud.set_fact(base=nations_road, pick=nations_road)
-    x_bud.set_fact(base=mood_road, pick=mood_road)
-    x_bud.set_fact(base=aaron_road, pick=aaron_road)
-    # x_bud.set_fact(base=internet_road, pick=internet_road)
-    x_bud.set_fact(base=year_month_road, pick=year_month_road)
+    year_month_road = yao_bud.make_l1_road(year_month_text)
+    yao_bud.set_fact(base=month_week_road, pick=month_week_road)
+    yao_bud.set_fact(base=nations_road, pick=nations_road)
+    yao_bud.set_fact(base=mood_road, pick=mood_road)
+    yao_bud.set_fact(base=aaron_road, pick=aaron_road)
+    # yao_bud.set_fact(base=internet_road, pick=internet_road)
+    yao_bud.set_fact(base=year_month_road, pick=year_month_road)
     # season_text = "Seasons"
-    # season_road = x_bud.make_l1_road(season_text)
-    # x_bud.set_fact(base=season_road, pick=season_road)
+    # season_road = yao_bud.make_l1_road(season_text)
+    # yao_bud.set_fact(base=season_road, pick=season_road)
     ced_week_text = "ced_week"
-    ced_week_road = x_bud.make_l1_road(ced_week_text)
-    x_bud.set_fact(base=ced_week_road, pick=ced_week_road)
+    ced_week_road = yao_bud.make_l1_road(ced_week_text)
+    yao_bud.set_fact(base=ced_week_road, pick=ced_week_road)
     # water_text = "WaterExistence"
-    # water_road = x_bud.make_l1_road(water_text)
-    # x_bud.set_fact(base=water_road, pick=water_road)
+    # water_road = yao_bud.make_l1_road(water_text)
+    # yao_bud.set_fact(base=water_road, pick=water_road)
     # movie_text = "No Movie playing"
-    # movie_road = x_bud.make_l1_road(movie_text)
-    # x_bud.set_fact(base=movie_road, pick=movie_text)
+    # movie_road = yao_bud.make_l1_road(movie_text)
+    # yao_bud.set_fact(base=movie_road, pick=movie_text)
 
     # WHEN
-    idea_pledge_list = x_bud.get_agenda_dict()
+    idea_pledge_list = yao_bud.get_agenda_dict()
 
     # THEN
     assert len(idea_pledge_list) == 27
 
-    week1_road = x_bud.make_road(month_week_road, "1st week")
-    x_bud.set_fact(month_week_road, week1_road)
-    idea_pledge_list = x_bud.get_agenda_dict()
+    week1_road = yao_bud.make_road(month_week_road, "1st week")
+    yao_bud.set_fact(month_week_road, week1_road)
+    idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 27
 
     weekday_text = "weekdays"
-    weekday_road = x_bud.make_l1_road(weekday_text)
+    weekday_road = yao_bud.make_l1_road(weekday_text)
     monday_text = "Monday"
-    monday_road = x_bud.make_road(weekday_road, monday_text)
+    monday_road = yao_bud.make_road(weekday_road, monday_text)
 
-    x_bud.set_fact(base=weekday_road, pick=monday_road)
-    idea_pledge_list = x_bud.get_agenda_dict()
+    yao_bud.set_fact(base=weekday_road, pick=monday_road)
+    idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 39
 
-    x_bud.set_fact(base=weekday_road, pick=weekday_road)
-    idea_pledge_list = x_bud.get_agenda_dict()
+    yao_bud.set_fact(base=weekday_road, pick=weekday_road)
+    idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 53
 
-    # x_bud.set_fact(base=nations_road, pick=nations_road)
-    # idea_pledge_list = x_bud.get_agenda_dict()
+    # yao_bud.set_fact(base=nations_road, pick=nations_road)
+    # idea_pledge_list = yao_bud.get_agenda_dict()
     # assert len(idea_pledge_list) == 53
 
-    # for base in x_bud.get_missing_fact_bases():
+    # for base in yao_bud.get_missing_fact_bases():
     #     print(f"{base=}")
 
     # for agenda_item in idea_pledge_list:
@@ -271,14 +271,14 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
 
 def test_BudUnit_get_agenda_dict_BudUnitCanFilterOnBase_budunit_v001_with_large_agenda():
     # ESTABLISH
-    x_bud = budunit_v001_with_large_agenda()
+    yao_bud = budunit_v001_with_large_agenda()
     week_text = "weekdays"
-    week_road = x_bud.make_l1_road(week_text)
-    print(f"{type(x_bud)=}")
-    # for base in x_bud.get_missing_fact_bases():
+    week_road = yao_bud.make_l1_road(week_text)
+    print(f"{type(yao_bud)=}")
+    # for base in yao_bud.get_missing_fact_bases():
     #     print(f"{base=}")
 
-    # for agenda_item in x_bud.get_agenda_dict():
+    # for agenda_item in yao_bud.get_agenda_dict():
     #     print(
     #         f"{agenda_item._parent_road=} {agenda_item._label} {len(agenda_item._reasonunits)=}"
     #     )
@@ -287,10 +287,10 @@ def test_BudUnit_get_agenda_dict_BudUnitCanFilterOnBase_budunit_v001_with_large_
     #             print(f"         {weekdays}")
 
     # this list went from 68 to 63 when the method of identifying activees was improved.
-    assert len(x_bud.get_agenda_dict()) == 63
+    assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN
-    pledge_list = x_bud.get_agenda_dict(necessary_base=week_road)
+    pledge_list = yao_bud.get_agenda_dict(necessary_base=week_road)
 
     # THEN
     assert len(pledge_list) != 63
@@ -384,25 +384,25 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
 
 def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     # ESTABLISH
-    x_bud_json = budunit_v001().get_json()
+    yao_bud_json = budunit_v001().get_json()
 
     # WHEN
-    x_bud = budunit_get_from_json(x_bud_json=x_bud_json)
+    yao_bud = budunit_get_from_json(x_bud_json=yao_bud_json)
 
     # THEN
-    assert len(x_bud.get_idea_dict()) == 253
-    print(f"{len(x_bud.get_idea_dict())=}")
+    assert len(yao_bud.get_idea_dict()) == 253
+    print(f"{len(yao_bud.get_idea_dict())=}")
     casa_text = "casa"
-    casa_road = x_bud.make_l1_road(casa_text)
+    casa_road = yao_bud.make_l1_road(casa_text)
     body_text = "exercise"
-    body_road = x_bud.make_road(casa_road, body_text)
+    body_road = yao_bud.make_road(casa_road, body_text)
     veg_text = "cook veggies every morning"
-    veg_road = x_bud.make_road(body_road, veg_text)
-    veg_idea = x_bud.get_idea_obj(veg_road)
+    veg_road = yao_bud.make_road(body_road, veg_text)
+    veg_idea = yao_bud.get_idea_obj(veg_road)
     assert not veg_idea._active
     assert veg_idea.pledge
 
-    # idea_list = x_bud.get_idea_dict()
+    # idea_list = yao_bud.get_idea_dict()
     # pledge_true_count = 0
     # for idea in idea_list:
     #     if str(type(idea)).find(".idea.IdeaUnit'>") > 0:
@@ -420,11 +420,11 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
 
     # WHEN
     day_min_text = "day_minute"
-    day_min_road = x_bud.make_l1_road(day_min_text)
-    x_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
+    day_min_road = yao_bud.make_l1_road(day_min_text)
+    yao_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
 
     # THEN
-    assert len(x_bud.get_agenda_dict()) > 0
+    assert len(yao_bud.get_agenda_dict()) > 0
 
 
 # def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
