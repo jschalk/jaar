@@ -69,53 +69,57 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     sue_bud = get_budunit_with_4_levels()
     # test root status:
     casa_text = "casa"
+    casa_road = sue_bud.make_l1_road(casa_text)
+    casa_idea = sue_bud.get_idea_obj(casa_road)
     week_text = "weekdays"
+    week_road = sue_bud.make_l1_road(week_text)
     mon_text = "Monday"
-    yrx = sue_bud._idearoot
-    assert yrx._descendant_pledge_count is None
-    assert yrx._all_acct_cred is None
-    assert yrx._all_acct_debt is None
-    assert yrx._kids[casa_text]._descendant_pledge_count is None
-    assert yrx._kids[casa_text]._all_acct_cred is None
-    assert yrx._kids[casa_text]._all_acct_debt is None
-    assert yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count is None
-    assert yrx._kids[week_text]._kids[mon_text]._all_acct_cred is None
-    assert yrx._kids[week_text]._kids[mon_text]._all_acct_debt is None
+    mon_road = sue_bud.make_road(week_road, mon_text)
+    mon_idea = sue_bud.get_idea_obj(mon_road)
+    assert sue_bud._idearoot._descendant_pledge_count is None
+    assert sue_bud._idearoot._all_acct_cred is None
+    assert sue_bud._idearoot._all_acct_debt is None
+    assert casa_idea._descendant_pledge_count is None
+    assert casa_idea._all_acct_cred is None
+    assert casa_idea._all_acct_debt is None
+    assert mon_idea._descendant_pledge_count is None
+    assert mon_idea._all_acct_cred is None
+    assert mon_idea._all_acct_debt is None
 
-    yrx._descendant_pledge_count = -2
-    yrx._all_acct_cred = -2
-    yrx._all_acct_debt = -2
-    yrx._kids[casa_text]._descendant_pledge_count = -2
-    yrx._kids[casa_text]._all_acct_cred = -2
-    yrx._kids[casa_text]._all_acct_debt = -2
-    yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count = -2
-    yrx._kids[week_text]._kids[mon_text]._all_acct_cred = -2
-    yrx._kids[week_text]._kids[mon_text]._all_acct_debt = -2
+    sue_bud._idearoot._descendant_pledge_count = -2
+    sue_bud._idearoot._all_acct_cred = -2
+    sue_bud._idearoot._all_acct_debt = -2
+    casa_idea._descendant_pledge_count = -2
+    casa_idea._all_acct_cred = -2
+    casa_idea._all_acct_debt = -2
+    mon_idea._descendant_pledge_count = -2
+    mon_idea._all_acct_cred = -2
+    mon_idea._all_acct_debt = -2
 
-    assert yrx._descendant_pledge_count == -2
-    assert yrx._all_acct_cred == -2
-    assert yrx._all_acct_debt == -2
-    assert yrx._kids[casa_text]._descendant_pledge_count == -2
-    assert yrx._kids[casa_text]._all_acct_cred == -2
-    assert yrx._kids[casa_text]._all_acct_debt == -2
-    assert yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count == -2
-    assert yrx._kids[week_text]._kids[mon_text]._all_acct_cred == -2
-    assert yrx._kids[week_text]._kids[mon_text]._all_acct_debt == -2
+    assert sue_bud._idearoot._descendant_pledge_count == -2
+    assert sue_bud._idearoot._all_acct_cred == -2
+    assert sue_bud._idearoot._all_acct_debt == -2
+    assert casa_idea._descendant_pledge_count == -2
+    assert casa_idea._all_acct_cred == -2
+    assert casa_idea._all_acct_debt == -2
+    assert mon_idea._descendant_pledge_count == -2
+    assert mon_idea._all_acct_cred == -2
+    assert mon_idea._all_acct_debt == -2
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert yrx._descendant_pledge_count == 2
-    assert yrx._kids[casa_text]._descendant_pledge_count == 0
-    assert yrx._kids[week_text]._kids[mon_text]._descendant_pledge_count == 0
+    assert sue_bud._idearoot._descendant_pledge_count == 2
+    assert casa_idea._descendant_pledge_count == 0
+    assert mon_idea._descendant_pledge_count == 0
 
-    assert yrx._kids[week_text]._kids[mon_text]._all_acct_cred == True
-    assert yrx._kids[week_text]._kids[mon_text]._all_acct_debt == True
-    assert yrx._kids[casa_text]._all_acct_cred == True
-    assert yrx._kids[casa_text]._all_acct_debt == True
-    assert yrx._all_acct_cred == True
-    assert yrx._all_acct_debt == True
+    assert mon_idea._all_acct_cred == True
+    assert mon_idea._all_acct_debt == True
+    assert casa_idea._all_acct_cred == True
+    assert casa_idea._all_acct_debt == True
+    assert sue_bud._idearoot._all_acct_cred == True
+    assert sue_bud._idearoot._all_acct_debt == True
 
 
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
@@ -139,8 +143,13 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     sue_bud = get_budunit_with_4_levels()
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
+    casa_idea = sue_bud.get_idea_obj(casa_road)
     week_text = "weekdays"
+    week_road = sue_bud.make_l1_road(week_text)
+    week_idea = sue_bud.get_idea_obj(week_road)
     mon_text = "Monday"
+    mon_road = sue_bud.make_road(week_road, mon_text)
+    mon_idea = sue_bud.get_idea_obj(mon_road)
 
     email_text = "email"
     email_idea = ideaunit_shop(_label=email_text, pledge=True)
@@ -151,27 +160,27 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     assert x_idearoot._descendant_pledge_count is None
     assert x_idearoot._all_acct_cred is None
     assert x_idearoot._all_acct_debt is None
-    assert x_idearoot._kids[casa_text]._descendant_pledge_count is None
-    assert x_idearoot._kids[casa_text]._all_acct_cred is None
-    assert x_idearoot._kids[casa_text]._all_acct_debt is None
-    assert x_idearoot._kids[week_text]._kids[mon_text]._descendant_pledge_count is None
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_cred is None
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_debt is None
+    assert casa_idea._descendant_pledge_count is None
+    assert casa_idea._all_acct_cred is None
+    assert casa_idea._all_acct_debt is None
+    assert mon_idea._descendant_pledge_count is None
+    assert mon_idea._all_acct_cred is None
+    assert mon_idea._all_acct_debt is None
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
     assert x_idearoot._descendant_pledge_count == 3
-    assert x_idearoot._kids[casa_text]._descendant_pledge_count == 1
-    assert x_idearoot._kids[casa_text]._kids[email_text]._descendant_pledge_count == 0
-    assert x_idearoot._kids[week_text]._kids[mon_text]._descendant_pledge_count == 0
+    assert casa_idea._descendant_pledge_count == 1
+    assert casa_idea._kids[email_text]._descendant_pledge_count == 0
+    assert mon_idea._descendant_pledge_count == 0
     assert x_idearoot._all_acct_cred == True
     assert x_idearoot._all_acct_debt == True
-    assert x_idearoot._kids[casa_text]._all_acct_cred == True
-    assert x_idearoot._kids[casa_text]._all_acct_debt == True
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_cred == True
-    assert x_idearoot._kids[week_text]._kids[mon_text]._all_acct_debt == True
+    assert casa_idea._all_acct_cred == True
+    assert casa_idea._all_acct_debt == True
+    assert mon_idea._all_acct_cred == True
+    assert mon_idea._all_acct_debt == True
 
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
