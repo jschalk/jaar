@@ -740,15 +740,13 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
     init_gogo_calc = 21
     init_stop_calc = 45
-    gogo_want = 20
+    gogo_want = 30
     stop_want = 40
     time_idea._gogo_want = gogo_want
     time_idea._stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
     time_idea._denom = time_denom
-    assert time_idea._gogo_want == gogo_want
-    assert time_idea._stop_want == stop_want
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 
@@ -756,9 +754,138 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     time_idea._transform_gogo_calc_stop_calc()
 
     # THEN
-    assert time_idea._gogo_want == gogo_want
-    assert time_idea._stop_want == stop_want
     assert time_idea._gogo_calc == gogo_want
     assert time_idea._stop_calc == stop_want
-    assert time_idea._gogo_calc == 20
+    assert time_idea._gogo_calc == 30
     assert time_idea._stop_calc == 40
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_FilterBoth():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 21
+    init_stop_calc = 45
+    gogo_want = 10
+    stop_want = 50
+    time_idea._gogo_want = gogo_want
+    time_idea._stop_want = stop_want
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == init_stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == init_stop_calc
+    assert time_idea._gogo_calc == 21
+    assert time_idea._stop_calc == 45
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_FilterLeft():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 21
+    init_stop_calc = 45
+    gogo_want = 10
+    stop_want = 40
+    time_idea._gogo_want = gogo_want
+    time_idea._stop_want = stop_want
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == init_stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == stop_want
+    assert time_idea._gogo_calc == 21
+    assert time_idea._stop_calc == 40
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario2_FilterRight():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 21
+    init_stop_calc = 45
+    gogo_want = 30
+    stop_want = 50
+    time_idea._gogo_want = gogo_want
+    time_idea._stop_want = stop_want
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == init_stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert time_idea._gogo_calc == gogo_want
+    assert time_idea._stop_calc == init_stop_calc
+    assert time_idea._gogo_calc == 30
+    assert time_idea._stop_calc == 45
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsLeft():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 21
+    init_stop_calc = 45
+    gogo_want = 10
+    stop_want = 15
+    time_idea._gogo_want = gogo_want
+    time_idea._stop_want = stop_want
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == init_stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert not time_idea._gogo_calc
+    assert not time_idea._stop_calc
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsRight():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 21
+    init_stop_calc = 45
+    gogo_want = 60
+    stop_want = 65
+    time_idea._gogo_want = gogo_want
+    time_idea._stop_want = stop_want
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_calc == init_gogo_calc
+    assert time_idea._stop_calc == init_stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert not time_idea._gogo_calc
+    assert not time_idea._stop_calc
