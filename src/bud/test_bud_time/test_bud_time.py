@@ -187,14 +187,14 @@ def compare_kidlists(src_budunit: BudUnit, x_budunit: BudUnit):
 #     time_road = sue_budunit.make_l1_road("time")
 #     tech_road = sue_budunit.make_road(time_road, "tech")
 #     week_road = sue_budunit.make_road(tech_road, "week")
-#     begin_x = 1440
-#     close_x = 4 * 1440
-#     ranged_ideas = sue_budunit.get_idea_ranged_kids(week_road, begin_x, close_x)
+#     x_begin = 1440
+#     x_close = 4 * 1440
+#     ranged_ideas = sue_budunit.get_idea_ranged_kids(week_road, x_begin, x_close)
 
 #     # THEN
 #     # for idea_x in ranged_ideas.values():
 #     #     print(
-#     #         f"{begin_x=} {close_x=} {idea_x._label=} {idea_x._begin=} {idea_x._close=} "
+#     #         f"{x_begin=} {x_close=} {idea_x._label=} {idea_x._begin=} {idea_x._close=} "
 #     #     )
 #     assert len(ranged_ideas) == 3
 

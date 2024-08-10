@@ -141,14 +141,14 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario1():
     yao_budunit.set_idea(sun_idea, week_road)
 
     # WHEN
-    begin_x = 1440
-    close_x = 4 * 1440
-    ranged_ideas = yao_budunit.get_idea_ranged_kids(week_road, begin_x, close_x)
+    x_begin = 1440
+    x_close = 4 * 1440
+    ranged_ideas = yao_budunit.get_idea_ranged_kids(week_road, x_begin, x_close)
 
     # THEN
     # for idea_x in ranged_ideas.values():
     #     print(
-    #         f"{begin_x=} {close_x=} {idea_x._label=} {idea_x._begin=} {idea_x._close=} "
+    #         f"{x_begin=} {x_close=} {idea_x._label=} {idea_x._begin=} {idea_x._close=} "
     #     )
     assert len(ranged_ideas) == 3
 
