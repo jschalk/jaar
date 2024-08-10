@@ -233,6 +233,7 @@ class IdeaUnit:
     _originunit: OriginUnit = None
     _problem_bool: bool = None
     # Calculated fields
+    _range_evaluated: bool = None
     _gogo_calc: float = None
     _stop_calc: float = None
     _level: int = None
@@ -643,6 +644,7 @@ class IdeaUnit:
             self._addin = 0
 
     def clear_gogo_calc_stop_calc(self):
+        self._range_evaluated = False
         self._gogo_calc = None
         self._stop_calc = None
 
@@ -650,16 +652,17 @@ class IdeaUnit:
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
         r_idea_addin = get_0_if_None(self._addin)
-        if self._gogo_want and self._stop_want:
-            if (self._stop_want < self._gogo_calc) or (
-                self._gogo_want > self._stop_calc
-            ):
+        if not self._gogo_calc or not self._stop_calc:
+            pass
+        elif self._gogo_want and self._stop_want:
+            stop_want_less_than_gogo_calc = self._stop_want < self._gogo_calc
+            gogo_want_greater_than_stop_calc = self._gogo_want > self._stop_calc
+            if stop_want_less_than_gogo_calc or gogo_want_greater_than_stop_calc:
                 self._gogo_calc = None
                 self._stop_calc = None
             else:
                 self._gogo_calc = max(self._gogo_calc, self._gogo_want)
                 self._stop_calc = min(self._stop_calc, self._stop_want)
-
         elif get_False_if_None(self._reest):
             gogo_calc_stop_calc_diff = self._stop_calc - self._gogo_calc
             gogo_calc_stop_calc_remainder = gogo_calc_stop_calc_diff % self._denom
@@ -670,6 +673,7 @@ class IdeaUnit:
             self._stop_calc = self._stop_calc + r_idea_addin
             self._gogo_calc = (self._gogo_calc * r_idea_numor) / r_idea_denom
             self._stop_calc = (self._stop_calc * r_idea_numor) / r_idea_denom
+        self._range_evaluated = True
 
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
         if base is not None and premise is not None:

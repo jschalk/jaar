@@ -1165,7 +1165,7 @@ class BudUnit:
         single_range_idea_list = [arithmetic_idea]
         while single_range_idea_list != []:
             r_idea = single_range_idea_list.pop()
-            if r_idea._gogo_calc or r_idea._stop_calc:
+            if r_idea._range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_idea.get_road())
             if r_idea.is_arithmetic():
                 r_idea._gogo_calc = r_idea._begin
@@ -1179,7 +1179,7 @@ class BudUnit:
 
             for range_push_road in r_idea._range_pushs:
                 range_push_idea = self.get_idea_obj(range_push_road)
-                if range_push_idea._gogo_calc or range_push_idea._stop_calc:
+                if range_push_idea._range_evaluated:
                     self._raise_gogo_calc_stop_calc_exception(range_push_road)
                 range_push_idea._gogo_calc = r_idea._gogo_calc
                 range_push_idea._stop_calc = r_idea._stop_calc

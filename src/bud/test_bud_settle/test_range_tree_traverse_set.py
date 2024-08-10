@@ -489,7 +489,7 @@ def test_BudUnit_tree_arithmetic_traverse_calc_Sets_range_push_Decesdents():
     assert hour_idea._stop_calc == day_idea._stop_calc / hour_denom
 
 
-def test_BudUnit_tree_arithmetic_traverse_calc_RaisesErrorIfDescendentHas_begin_close():
+def test_BudUnit_tree_arithmetic_traverse_calc_RaisesErrorIfDescendentHasBeenEvaluated():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     day_text = "day"

@@ -109,8 +109,10 @@ def test_BudUnit_tree_range_push_traverse_check_Clears_gogo_calc_stop_calc():
     texas_idea = sue_bud.get_idea_obj(texas_road)
     texas_idea._gogo_calc = 7
     texas_idea._stop_calc = 11
+    texas_idea._range_evaluated = True
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
+    assert texas_idea._range_evaluated
     assert texas_idea._gogo_calc
     assert texas_idea._stop_calc
 
@@ -120,5 +122,6 @@ def test_BudUnit_tree_range_push_traverse_check_Clears_gogo_calc_stop_calc():
     # THEN
     assert not root_idea._begin
     assert not root_idea._close
+    assert not texas_idea._range_evaluated
     assert not texas_idea._gogo_calc
     assert not texas_idea._stop_calc
