@@ -6,13 +6,13 @@ from pytest import raises as pytest_raises
 def test_get_kids_in_range_GetsCorrectIdeas():
     # ESTABLISH
     mon366_text = "366months"
-    mon366_idea = ideaunit_shop(_label=mon366_text, _begin=0, _close=366)
+    mon366_idea = ideaunit_shop(mon366_text, _begin=0, _close=366)
     jan_text = "Jan"
     feb29_text = "Feb29"
     mar_text = "Mar"
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(_label=jan_text, _begin=0, _close=31))
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(_label=feb29_text, _begin=31, _close=60))
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(_label=mar_text, _begin=31, _close=91))
+    mon366_idea.add_kid(idea_kid=ideaunit_shop(jan_text, _begin=0, _close=31))
+    mon366_idea.add_kid(idea_kid=ideaunit_shop(feb29_text, _begin=31, _close=60))
+    mon366_idea.add_kid(idea_kid=ideaunit_shop(mar_text, _begin=31, _close=91))
 
     # WHEN / THEN
     assert len(mon366_idea.get_kids_in_range(begin=100, close=120)) == 0
@@ -27,9 +27,9 @@ def test_get_kids_in_range_GetsCorrectIdeas():
 #     casa_text = "casa"
 #     clean_text = "clean"
 #     # parent idea
-#     casa_idea = ideaunit_shop(_label=casa_text, _begin=22.0, _close=66.0)
+#     casa_idea = ideaunit_shop(casa_text, _begin=22.0, _close=66.0)
 #     # kid idea
-#     clean_idea = ideaunit_shop(_label=clean_text, _numor=1, _denom=11.0, _reest=False)
+#     clean_idea = ideaunit_shop(clean_text, _numor=1, _denom=11.0, _reest=False)
 
 #     # WHEN
 #     casa_idea.add_kid(idea_kid=clean_idea)
@@ -46,7 +46,7 @@ def test_get_kids_in_range_GetsCorrectIdeas():
 # def test_IdeaUnit_invaild_DenomThrowsError():
 #     # ESTABLISH
 #     casa_text = "casa"
-#     parent_idea = ideaunit_shop(_label=casa_text)
+#     parent_idea = ideaunit_shop(casa_text)
 #     casa_text = "casa"
 #     casa_road = create_road(root_label(), casa_text)
 #     clean_text = "clean"
@@ -68,7 +68,7 @@ def test_get_kids_in_range_GetsCorrectIdeas():
 def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():
     # ESTABLISH
     nation_text = "nation-state"
-    nation_idea = ideaunit_shop(_label=nation_text, _parent_road=root_label())
+    nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
 
     # WHEN
     nation_descendants = nation_idea.get_descendant_roads_from_kids()

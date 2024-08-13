@@ -255,7 +255,7 @@ def test_BudUnit_set_idea_CanCreateRoadUnitToGrandkidIdea():
     ww2_road = sue_bud.make_l1_road("ww2")
     battles_road = sue_bud.make_road(ww2_road, "battles")
     new_idea_parent_road = sue_bud.make_road(battles_road, "coralsea")
-    new_idea = ideaunit_shop(_label="USS Saratoga")
+    new_idea = ideaunit_shop("USS Saratoga")
 
     # WHEN
     sue_bud.set_idea(new_idea, parent_road=new_idea_parent_road)

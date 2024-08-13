@@ -279,7 +279,7 @@ def test_IdeaUnit_awardheir_exists_ReturnsObj():
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text)
+    sport_idea = ideaunit_shop(sport_text)
 
     # WHEN / THEN
     # does not crash with empty set
@@ -292,7 +292,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsChanges():
     ball_road = create_road(ball_text)
     run_text = "run"
     run_road = create_road(ball_road, run_text)
-    ball_idea = ideaunit_shop(_label=ball_text)
+    ball_idea = ideaunit_shop(ball_text)
     run_premise = premiseunit_shop(need=run_road, open=0, nigh=7)
     run_premises = {run_premise.need: run_premise}
     reasonheir = reasonheir_shop(run_road, premises=run_premises)
@@ -317,7 +317,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesChanges():
     run_premises = {run_premise.need: run_premise}
     run_reasonunit = reasonunit_shop(base=run_road, premises=run_premises)
     run_reasonunits = {run_reasonunit.base: run_reasonunit}
-    ball_idea = ideaunit_shop(_label=ball_text, _reasonunits=run_reasonunits)
+    ball_idea = ideaunit_shop(ball_text, _reasonunits=run_reasonunits)
     assert ball_idea._reasonunits != {}
 
     # WHEN
@@ -332,7 +332,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesChanges():
 def test_IdeaUnit_clear_descendant_pledge_count_ClearsCorrectly():
     # ESTABLISH
     ball_text = "ball"
-    ball_idea = ideaunit_shop(_label=ball_text, _descendant_pledge_count=55)
+    ball_idea = ideaunit_shop(ball_text, _descendant_pledge_count=55)
     assert ball_idea._descendant_pledge_count == 55
 
     # WHEN
@@ -345,7 +345,7 @@ def test_IdeaUnit_clear_descendant_pledge_count_ClearsCorrectly():
 def test_IdeaUnit_add_to_descendant_pledge_count_CorrectlyAdds():
     # ESTABLISH
     ball_text = "ball"
-    ball_idea = ideaunit_shop(_label=ball_text, _descendant_pledge_count=55)
+    ball_idea = ideaunit_shop(ball_text, _descendant_pledge_count=55)
     ball_idea.clear_descendant_pledge_count()
     assert ball_idea._descendant_pledge_count is None
 
@@ -365,7 +365,7 @@ def test_IdeaUnit_add_to_descendant_pledge_count_CorrectlyAdds():
 def test_IdeaUnit_clear_all_acct_cred_debt_ClearsCorrectly():
     # ESTABLISH
     ball_text = "ball"
-    ball_idea = ideaunit_shop(_label=ball_text, _all_acct_cred=55, _all_acct_debt=33)
+    ball_idea = ideaunit_shop(ball_text, _all_acct_cred=55, _all_acct_debt=33)
     assert ball_idea._all_acct_cred == 55
     assert ball_idea._all_acct_debt == 33
 
@@ -380,7 +380,7 @@ def test_IdeaUnit_clear_all_acct_cred_debt_ClearsCorrectly():
 def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
     # ESTABLISH
     clean_text = "clean"
-    clean_idea = ideaunit_shop(_label=clean_text)
+    clean_idea = ideaunit_shop(clean_text)
     dirty_text = "dirty"
     clean_idea.set_reasonunit(reasonunit_shop(base=dirty_text))
 
@@ -395,7 +395,7 @@ def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
 def test_IdeaUnit_get_reasonheir_ReturnsCorrectObj():
     # ESTABLISH
     clean_text = "clean"
-    clean_idea = ideaunit_shop(_label=clean_text)
+    clean_idea = ideaunit_shop(clean_text)
     dirty_text = "dirty"
     reason_heir_x = reasonheir_shop(base=dirty_text)
     reason_heirs_x = {reason_heir_x.base: reason_heir_x}
@@ -412,7 +412,7 @@ def test_IdeaUnit_get_reasonheir_ReturnsCorrectObj():
 def test_IdeaUnit_get_reasonheir_ReturnsNone():
     # ESTABLISH
     clean_text = "clean"
-    clean_idea = ideaunit_shop(_label=clean_text)
+    clean_idea = ideaunit_shop(clean_text)
     dirty_text = "dirty"
     reason_heir_x = reasonheir_shop(dirty_text)
     reason_heirs_x = {reason_heir_x.base: reason_heir_x}
@@ -429,7 +429,7 @@ def test_IdeaUnit_get_reasonheir_ReturnsNone():
 def test_IdeaUnit_set_active_SetsNullactive_hxToNonEmpty():
     # ESTABLISH
     clean_text = "clean"
-    clean_idea = ideaunit_shop(_label=clean_text)
+    clean_idea = ideaunit_shop(clean_text)
     assert clean_idea._active_hx == {}
 
     # WHEN
@@ -441,7 +441,7 @@ def test_IdeaUnit_set_active_SetsNullactive_hxToNonEmpty():
 def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
     # ESTABLISH
     clean_text = "clean"
-    clean_idea = ideaunit_shop(_label=clean_text)
+    clean_idea = ideaunit_shop(clean_text)
     clean_idea._active_hx = {0: True, 4: False}
     assert clean_idea._active_hx != {0: True}
     # WHEN
@@ -453,7 +453,7 @@ def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
 # def test_IdeaUnit_set_active_IfFullactive_hxResetToFalse():
 #     # ESTABLISH
 # clean_text = "clean"
-# clean_idea = ideaunit_shop(_label=clean_text)
+# clean_idea = ideaunit_shop(clean_text)
 #     clean_idea.set_reason_premise(
 #         base="testing1,sec",
 #         premise="testing1,sec,next",
@@ -472,7 +472,7 @@ def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
 def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
     # ESTABLISH
     clean_text = "clean"
-    clean_idea = ideaunit_shop(_label=clean_text)
+    clean_idea = ideaunit_shop(clean_text)
     assert clean_idea._active_hx == {}
 
     # WHEN
@@ -533,7 +533,7 @@ def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
 def test_IdeaUnit_set_doerunit_empty_if_none():
     # ESTABLISH
     run_text = "run"
-    run_idea = ideaunit_shop(_label=run_text)
+    run_idea = ideaunit_shop(run_text)
     run_idea._doerunit = None
     assert run_idea._doerunit is None
 
@@ -549,7 +549,7 @@ def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
     # ESTABLISH
     swim_text = "swimmers"
     sport_text = "sports"
-    sport_idea = ideaunit_shop(_label=sport_text)
+    sport_idea = ideaunit_shop(sport_text)
     sport_idea._doerunit.set_grouphold(group_id=swim_text)
     # assert sport_idea._doerheir is None
 

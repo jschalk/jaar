@@ -877,40 +877,6 @@ def get_time_c400_from_min(x_budunit: BudUnit, min: int) -> int:
     return int(min / c400_min), c400_idea, min % c400_min
 
 
-def get_time_c400yr_from_min(x_budunit: BudUnit, min: int):
-    # ESTABLISH int minutes within 400 year range return year and remainder minutes
-    c400_count, c400_idea, c400yr_min = get_time_c400_from_min(x_budunit, min)
-    c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
-    cXXXyr_min = c400yr_min - c100_4_96y._begin
-
-    time_road = x_budunit.make_l1_road("time")
-    tech_road = x_budunit.make_road(time_road, "tech")
-
-    # identify which range the time is in
-    if c100_4_96y._close - c100_4_96y._begin in (
-        50492160,
-        52596000,
-    ):  # 96 year and 100 year ideas
-        yr4_1461_road = x_budunit.make_road(tech_road, "4year with leap")
-        yr4_1461_idea = x_budunit.get_idea_obj(yr4_1461_road)
-        yr4_segments = int(cXXXyr_min / yr4_1461_idea._close)
-        cXyr_min = cXXXyr_min % yr4_1461_idea._close
-        yr1_idea = yr4_1461_idea.get_kids_in_range(begin=cXyr_min, close=cXyr_min)[0]
-    elif c100_4_96y._close - c100_4_96y._begin == 2102400:
-        yr4_1460_road = x_budunit.make_road(tech_road, "4year wo leap")
-        yr4_1460_idea = x_budunit.get_idea_obj(yr4_1460_road)
-        yr4_segments = 0
-        yr1_idea = yr4_1460_idea.get_kids_in_range(cXXXyr_min, cXXXyr_min)[0]
-        cXyr_min = cXXXyr_min % yr4_1460_idea._close
-
-    yr1_rem_min = cXyr_min - yr1_idea._begin
-    yr1_idea_begin = int(yr1_idea._label.split("-")[0]) - 1
-
-    c100_4_96y_begin = int(c100_4_96y._label.split("-")[0])
-    year_num = c100_4_96y_begin + (4 * yr4_segments) + yr1_idea_begin
-    return year_num, yr1_idea, yr1_rem_min
-
-
 def get_time_hour_from_min(x_budunit: BudUnit, min: int) -> set[int, int, list[int]]:
     month_num, day_num, day_rem_min, day_x = get_time_month_from_min(x_budunit, min=min)
     hr_x = day_x.get_kids_in_range(begin=day_rem_min, close=day_rem_min)[0]

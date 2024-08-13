@@ -152,7 +152,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     mon_idea = sue_bud.get_idea_obj(mon_road)
 
     email_text = "email"
-    email_idea = ideaunit_shop(_label=email_text, pledge=True)
+    email_idea = ideaunit_shop(email_text, pledge=True)
     sue_bud.set_idea(email_idea, parent_road=casa_road)
 
     # test root status:
@@ -195,9 +195,9 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     sue_text = "Sue"
 
     casa_road = sue_bud.make_l1_road(casa_text)
-    email_idea = ideaunit_shop(_label=email_text, pledge=True)
+    email_idea = ideaunit_shop(email_text, pledge=True)
     sue_bud.set_idea(email_idea, parent_road=casa_road)
-    vacuum_idea = ideaunit_shop(_label=vacuum_text, pledge=True)
+    vacuum_idea = ideaunit_shop(vacuum_text, pledge=True)
     sue_bud.set_idea(vacuum_idea, parent_road=casa_road)
 
     sue_bud.add_acctunit(acct_id=sue_text)
@@ -334,10 +334,10 @@ def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadU
 
     # WHEN
     time = "timeline"
-    yao_bud.set_l1_idea(ideaunit_shop(_label=time, _begin=0, _close=700))
+    yao_bud.set_l1_idea(ideaunit_shop(time, _begin=0, _close=700))
     t_road = yao_bud.make_l1_road(time)
     week = "weeks"
-    yao_bud.set_idea(ideaunit_shop(_label=week, _denom=7), parent_road=t_road)
+    yao_bud.set_idea(ideaunit_shop(week, _denom=7), parent_road=t_road)
 
     # THEN
     assert len(yao_bud.get_idea_tree_ordered_road_list()) == 3
