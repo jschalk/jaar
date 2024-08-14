@@ -10,9 +10,9 @@ def test_get_kids_in_range_GetsCorrectIdeas():
     jan_text = "Jan"
     feb29_text = "Feb29"
     mar_text = "Mar"
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(jan_text, _begin=0, _close=31))
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(feb29_text, _begin=31, _close=60))
-    mon366_idea.add_kid(idea_kid=ideaunit_shop(mar_text, _begin=31, _close=91))
+    mon366_idea.add_kid(ideaunit_shop(jan_text, _begin=0, _close=31))
+    mon366_idea.add_kid(ideaunit_shop(feb29_text, _begin=31, _close=60))
+    mon366_idea.add_kid(ideaunit_shop(mar_text, _begin=31, _close=91))
 
     # WHEN / THEN
     assert len(mon366_idea.get_kids_in_range(begin=100, close=120)) == 0
@@ -32,7 +32,7 @@ def test_get_kids_in_range_GetsCorrectIdeas():
 #     clean_idea = ideaunit_shop(clean_text, _numor=1, _denom=11.0, _reest=False)
 
 #     # WHEN
-#     casa_idea.add_kid(idea_kid=clean_idea)
+#     casa_idea.add_kid(clean_idea)
 
 #     # THEN
 #     assert casa_idea._kids[clean_text]._begin == 2
@@ -57,7 +57,7 @@ def test_get_kids_in_range_GetsCorrectIdeas():
 #     )
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         parent_idea.add_kid(idea_kid=kid_idea)
+#         parent_idea.add_kid(kid_idea)
 #     print(f"{str(excinfo.value)=}")
 #     assert (
 #         str(excinfo.value)
@@ -86,17 +86,17 @@ def test_IdeaUnit_get_descendants_Returns3DescendantsRoadUnits():
     usa_text = "USA"
     usa_road = create_road(nation_road, usa_text)
     usa_idea = ideaunit_shop(usa_text, _parent_road=nation_road)
-    nation_idea.add_kid(idea_kid=usa_idea)
+    nation_idea.add_kid(usa_idea)
 
     texas_text = "Texas"
     texas_road = create_road(usa_road, texas_text)
     texas_idea = ideaunit_shop(texas_text, _parent_road=usa_road)
-    usa_idea.add_kid(idea_kid=texas_idea)
+    usa_idea.add_kid(texas_idea)
 
     iowa_text = "Iowa"
     iowa_road = create_road(usa_road, iowa_text)
     iowa_idea = ideaunit_shop(iowa_text, _parent_road=usa_road)
-    usa_idea.add_kid(idea_kid=iowa_idea)
+    usa_idea.add_kid(iowa_idea)
 
     # WHEN
     nation_descendants = nation_idea.get_descendant_roads_from_kids()
@@ -113,7 +113,7 @@ def test_IdeaUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     nation_text = "nation-state"
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
-    nation_idea.add_kid(idea_kid=nation_idea)
+    nation_idea.add_kid(nation_idea)
     max_count = 1000
 
     # WHEN/THEN
