@@ -131,6 +131,71 @@ def compare_kidlists(src_budunit: BudUnit, x_budunit: BudUnit):
         assert kidlist(src_budunit, src_road) == kidlist(x_budunit, src_road)
 
 
+def test_add_time_hreg_ideaunit_ReturnsObj():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    day_road = sue_budunit.make_road(jaja_road, day_str())
+    days_road = sue_budunit.make_road(jaja_road, days_str())
+    # week_road = sue_budunit.make_road(time_road, week_str())
+    # c400_road = sue_budunit.make_road(tech_road, c400_str())
+    # year4_noleap_road = sue_budunit.make_road(tech_road, year4_no__leap_str())
+    # year4_withleap_road = sue_budunit.make_road(tech_road, year4_withleap_str())
+    # year365_road = sue_budunit.make_road(tech_road, year365_str())
+    # year366_road = sue_budunit.make_road(tech_road, year366_str())
+    # month_road = sue_budunit.make_road(tech_road, month_str())
+    # hour_road = sue_budunit.make_road(tech_road, hour_str())
+    # weekday_idea_road = sue_budunit.make_road(tech_road, weekday_idea_str())
+
+    # ex1_budunit = get_budunit_sue_TimeExample()
+
+    print(f"{time_road=}")
+    print(f"{jaja_road=}")
+    print(f"{day_road=}")
+    assert not sue_budunit.idea_exists(time_road)
+    assert not sue_budunit.idea_exists(jaja_road)
+    assert not sue_budunit.idea_exists(day_road)
+    assert not sue_budunit.idea_exists(days_road)
+    # assert not sue_budunit.idea_exists(tech_road)
+    # assert not sue_budunit.idea_exists(week_road)
+
+    # WHEN
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+
+    # THEN
+    assert sue_budunit.idea_exists(time_road)
+    assert sue_budunit.idea_exists(jaja_road)
+    jaja_idea = sue_budunit.get_idea_obj(jaja_road)
+    assert jaja_idea._begin == 0
+    assert jaja_idea._close == 1472657760
+    assert sue_budunit.idea_exists(day_road)
+    day_idea = sue_budunit.get_idea_obj(day_road)
+    assert day_idea._denom == 1022679
+    assert sue_budunit.idea_exists(days_road)
+    days_idea = sue_budunit.get_idea_obj(days_road)
+    assert days_idea._denom == 1440
+
+    # assert sue_budunit is not None
+    # assert sue_budunit.idea_exists(time_road)
+    # assert sue_budunit.idea_exists(tech_road)
+    # assert sue_budunit.idea_exists(week_road)
+    # assert sue_budunit.idea_exists(jaja_road)
+    # assert kidlist(sue_budunit, time_road) == kidlist(ex1_budunit, time_road)
+    # assert kidlist(sue_budunit, tech_road) == kidlist(ex1_budunit, tech_road)
+    # assert kidlist(sue_budunit, year365_road) == kidlist(ex1_budunit, year365_road)
+    # assert kidlist(sue_budunit, year366_road) == kidlist(ex1_budunit, year366_road)
+    # assert kidlist(sue_budunit, day_road) == kidlist(ex1_budunit, day_road)
+    # assert kidlist(sue_budunit, hour_road) == kidlist(ex1_budunit, hour_road)
+    # assert kidlist(sue_budunit, month_road) == kidlist(ex1_budunit, month_road)
+    # assert kidlist(sue_budunit, week_road) == kidlist(ex1_budunit, week_road)
+    # assert kidlist(sue_budunit, jaja_road) == kidlist(ex1_budunit, jaja_road)
+    # compare_kidlists(ex1_budunit, sue_budunit)
+
+    # compare_kidless_ideas(ex1_budunit, sue_budunit)
+    # # assert sue_budunit == ex1_budunit
+
+
 # def test_add_time_hreg_ideaunit_ReturnsObj():
 #     # ESTABLISH
 #     sue_budunit = budunit_shop("Sue")

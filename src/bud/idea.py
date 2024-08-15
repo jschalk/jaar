@@ -652,8 +652,11 @@ class IdeaUnit:
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
         r_idea_addin = get_0_if_None(self._addin)
-        if not self._gogo_calc or not self._stop_calc:
+        print(f"huh {self._gogo_calc=} {self._stop_calc=}")
+
+        if self._gogo_calc is None or self._stop_calc is None:
             pass
+            print(f"huh4 {(self._gogo_calc)=}")
         elif self._gogo_want and self._stop_want:
             stop_want_less_than_gogo_calc = self._stop_want < self._gogo_calc
             gogo_want_greater_than_stop_calc = self._gogo_want > self._stop_calc
@@ -668,7 +671,9 @@ class IdeaUnit:
             gogo_calc_stop_calc_remainder = gogo_calc_stop_calc_diff % self._denom
             self._gogo_calc = 0
             self._stop_calc = gogo_calc_stop_calc_remainder
+            print(f"huh2")
         else:
+            print(f"huh")
             self._gogo_calc = self._gogo_calc + r_idea_addin
             self._stop_calc = self._stop_calc + r_idea_addin
             self._gogo_calc = (self._gogo_calc * r_idea_numor) / r_idea_denom
