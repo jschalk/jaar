@@ -4,7 +4,7 @@ from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithOutNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithOutNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_reason_premiseunit"
@@ -33,7 +33,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithOutNu
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_reason_premiseunit"
@@ -71,7 +71,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumer
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithOutNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithOutNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_reason_premiseunit"
@@ -100,7 +100,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithOutNu
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_reason_premiseunit"

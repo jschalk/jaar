@@ -4,7 +4,7 @@ from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_factunit"
@@ -33,7 +33,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumericArgs(
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_factunit"
@@ -68,7 +68,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumericArgs():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_factunit"
@@ -97,7 +97,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumericArgs(
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumericArgs():
+def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = "bud_idea_factunit"

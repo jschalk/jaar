@@ -626,7 +626,7 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 #     yao_bud.set_l1_idea(day_idea)
 
 
-# def test_BudUnit_edit_idea_attr_budWhenParentAndNumeric_roadBothHaveRangeThrowError():
+# def test_BudUnit_edit_idea_attr_budWhenParentAndBothHaveRangeThrowError():
 #     # ESTABLISH
 #     yao_bud = budunit_shop("Yao")
 #     casa_text = "casa"
