@@ -17,7 +17,6 @@
 #     mn: int = None  # numor
 #     md: int = None  # denom
 #     mr: bool = None  # reest
-#     sr: str = None  # range_source_road # not road since it doesn't know root _label
 
 
 # class InvalidPremiseUnitException(Exception):
@@ -803,9 +802,6 @@
 #     ideabase_list = x_x7idea._get_time_x7_src_idea(c400_count=7)
 #     while len(ideabase_list) != 0:
 #         yb = ideabase_list.pop(0)
-#         range_source_road_x = None
-#         if yb.sr is not None:
-#             range_source_road_x = sue_budunit.make_l1_road(yb.sr)
 
 #         x_idea = ideaunit_shop(
 #             _label=yb.n,
@@ -817,7 +813,6 @@
 #             _numor=yb.mn,
 #             _denom=yb.md,
 #             _reest=yb.mr,
-#             _range_source_road=range_source_road_x,
 #         )
 #         road_x = sue_budunit.make_l1_road(yb.rr)
 #         sue_budunit.set_idea(x_idea, parent_road=road_x)

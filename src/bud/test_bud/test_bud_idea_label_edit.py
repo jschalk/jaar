@@ -228,7 +228,7 @@ def test_bud_edit_idea_label_Modifies_factunits():
     assert factunit_obj.pick == new_rain_road
 
 
-def test_bud_edit_idea_label_ModifiesIdeaUnitN_range_source_road():
+def test_bud_edit_idea_label_ModifiesIdeaUnit_range_pushs():
     bob_bud = budunit_shop("Bob")
     casa_text = "casa"
     casa_road = bob_bud.make_l1_road(casa_text)
@@ -475,7 +475,7 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     assert casa_idea._factunits.get(semicolon_time_road) is None
 
 
-def test_bud_set_road_delimiter_CorrectlyModifies_range_source_road():
+def test_bud_set_road_delimiter_CorrectlyModifies_range_pushs():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_text = "casa"
@@ -485,14 +485,14 @@ def test_bud_set_road_delimiter_CorrectlyModifies_range_source_road():
     zia_bud.set_idea(ideaunit_shop(cook_text), parent_road=semicolon_casa_road)
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_text)
 
-    # range_source_road
+    # range_push
     heat_text = "heat numbers"
     zia_bud.set_l1_idea(ideaunit_shop(heat_text, _begin=0, _close=6))
     semicolon_heat_road = zia_bud.make_l1_road(heat_text)
-    zia_bud.edit_idea_attr(semicolon_cook_road, range_source_road=semicolon_heat_road)
+    zia_bud.edit_idea_attr(semicolon_cook_road, range_push=semicolon_heat_road)
 
     cook_idea = zia_bud.get_idea_obj(semicolon_cook_road)
-    assert cook_idea._range_source_road == semicolon_heat_road
+    assert semicolon_heat_road in cook_idea._range_pushs
 
     # WHEN
     slash_text = "/"
@@ -500,5 +500,5 @@ def test_bud_set_road_delimiter_CorrectlyModifies_range_source_road():
 
     # THEN
     slash_heat_road = zia_bud.make_l1_road(heat_text)
-    assert cook_idea._range_source_road != semicolon_heat_road
-    assert cook_idea._range_source_road == slash_heat_road
+    assert semicolon_heat_road not in cook_idea._range_pushs
+    assert slash_heat_road in cook_idea._range_pushs

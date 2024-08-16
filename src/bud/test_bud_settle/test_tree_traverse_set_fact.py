@@ -569,47 +569,6 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     assert a3e4th_lemma.nigh is None
 
 
-def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario4():
-    sue_bud = budunit_shop("Sue")
-    arsub1 = "descending_subsecction1"
-    arsub1_idea = ideaunit_shop(arsub1, _begin=0, _close=140)
-    as1_road = sue_bud.make_l1_road(arsub1)
-    sue_bud.set_l1_idea(arsub1_idea)
-    # range-root idea has range_source_road
-    time_text = "time"
-    time_idea = ideaunit_shop(
-        time_text, _begin=0, _close=140, _range_source_road=as1_road
-    )
-    sue_bud.set_l1_idea(time_idea)
-
-    arsub2 = "descending_subsecction2"
-    arsub2_idea = ideaunit_shop(arsub2, _begin=0, _close=20)
-    as2_road = sue_bud.make_l1_road(arsub2)
-    sue_bud.set_l1_idea(arsub2_idea)
-
-    # non-range-root child idea has range_source_road
-    time_road = sue_bud.make_l1_road(time_text)
-    age1st = "age1st"
-    age1st_idea = ideaunit_shop(
-        age1st, _begin=0, _close=20, _range_source_road=as2_road
-    )
-    sue_bud.set_idea(age1st_idea, parent_road=time_road)
-
-    # set for instant moment in 3rd age
-    sue_bud.set_fact(base=time_road, pick=time_road, open=35, nigh=55)
-    lemma_dict = sue_bud._get_lemma_factunits()
-    assert len(lemma_dict) == 3
-    a1_lemma = lemma_dict[sue_bud.make_road(time_road, age1st)]
-    as1_lemma = lemma_dict[as1_road]
-    as2_lemma = lemma_dict[as2_road]
-    assert a1_lemma.open is None
-    assert as1_lemma.open == 35
-    assert as2_lemma.open is None
-    assert a1_lemma.nigh is None
-    assert as1_lemma.nigh == 55
-    assert as2_lemma.nigh is None
-
-
 def test_BudUnit_set_fact_create_missing_ideas_CreatesBaseAndFact():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")

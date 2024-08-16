@@ -242,7 +242,6 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
         close=x_atom.get_value("_close"),
         denom=x_atom.get_value("_denom"),
         numor=x_atom.get_value("_numor"),
-        range_source_road=x_atom.get_value("_range_source_road"),
         reest=x_atom.get_value("_reest"),
         mass=x_atom.get_value("_mass"),
         pledge=x_atom.get_value("pledge"),
@@ -551,7 +550,6 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._close != y_obj._close
             or x_obj._denom != y_obj._denom
             or x_obj._numor != y_obj._numor
-            or x_obj._range_source_road != y_obj._range_source_road
             or x_obj._reest != y_obj._reest
             or x_obj._mass != y_obj._mass
             or x_obj.pledge != y_obj.pledge

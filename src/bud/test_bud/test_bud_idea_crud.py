@@ -563,14 +563,6 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     sue_bud.edit_idea_attr(road=casa_road, pledge=True)
     assert sue_bud._idearoot._kids[casa_text].pledge == True
 
-    # _range_source_road: dict = None,
-    sue_bud._idearoot._kids[casa_text]._range_source_road = "fun3rol"
-    range_source_road = sue_bud._idearoot._kids[casa_text]._range_source_road
-    assert range_source_road == "fun3rol"
-    end_road = sue_bud.make_road(casa_road, "end")
-    sue_bud.edit_idea_attr(road=casa_road, range_source_road=end_road)
-    assert sue_bud._idearoot._kids[casa_text]._range_source_road == end_road
-
     # _healerhold:
     sue_bud._idearoot._kids[casa_text]._healerhold = "fun3rol"
     src_healerhold = sue_bud._idearoot._kids[casa_text]._healerhold
@@ -590,8 +582,6 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     x_problem_bool = True
     sue_bud.edit_idea_attr(road=casa_road, problem_bool=x_problem_bool)
     assert sue_bud._idearoot._kids[casa_text]._problem_bool == x_problem_bool
-
-    print(f"{casa_road=} {end_road=}")
 
 
 # def test_BudUnit_edit_idea_attr_budIsAbleToEditDenomAnyIdeaIfInvaildDenomThrowsError():

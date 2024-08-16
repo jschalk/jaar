@@ -57,7 +57,6 @@ class IdeaTable(Base):
     _denom = Column(Integer)
     _numor = Column(Integer)
     _problem_bool = Column(Integer)
-    _range_source_road = Column(String)
     _reest = Column(Integer)
     _mass = Column(Integer)
     pledge = Column(Integer)

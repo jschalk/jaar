@@ -139,7 +139,6 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _doerunit=sue_doerunit,
         _healerhold=yao_healerhold,
         _active=True,
-        _range_source_road="test123",
         pledge=True,
         _problem_bool=x_problem_bool,
     )
@@ -183,7 +182,6 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_numor"] == casa_idea._numor
     assert casa_dict["_denom"] == casa_idea._denom
     assert casa_dict["_reest"] == casa_idea._reest
-    assert casa_dict["_range_source_road"] == casa_idea._range_source_road
     assert casa_dict["pledge"] == casa_idea.pledge
     assert casa_dict["_problem_bool"] == casa_idea._problem_bool
     assert casa_dict["_problem_bool"] == x_problem_bool

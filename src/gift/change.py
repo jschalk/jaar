@@ -356,9 +356,6 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_close", insert_ideaunit._close)
             x_atomunit.set_optional_arg("_denom", insert_ideaunit._denom)
             x_atomunit.set_optional_arg("_numor", insert_ideaunit._numor)
-            x_atomunit.set_optional_arg(
-                "_range_source_road", insert_ideaunit._range_source_road
-            )
             x_atomunit.set_optional_arg("_reest", insert_ideaunit._reest)
             x_atomunit.set_optional_arg("_mass", insert_ideaunit._mass)
             x_atomunit.set_optional_arg("pledge", insert_ideaunit.pledge)
@@ -405,13 +402,6 @@ class ChangeUnit:
                     x_atomunit.set_optional_arg("_denom", after_ideaunit._denom)
                 if before_ideaunit._numor != after_ideaunit._numor:
                     x_atomunit.set_optional_arg("_numor", after_ideaunit._numor)
-                if (
-                    before_ideaunit._range_source_road
-                    != after_ideaunit._range_source_road
-                ):
-                    x_atomunit.set_optional_arg(
-                        "_range_source_road", after_ideaunit._range_source_road
-                    )
                 if before_ideaunit._reest != after_ideaunit._reest:
                     x_atomunit.set_optional_arg("_reest", after_ideaunit._reest)
                 if before_ideaunit._mass != after_ideaunit._mass:

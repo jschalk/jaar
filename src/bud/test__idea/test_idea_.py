@@ -38,7 +38,6 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._reest is None
     assert x_ideaunit._gogo_want is None
     assert x_ideaunit._stop_want is None
-    assert x_ideaunit._range_source_road is None
     assert x_ideaunit._range_pushs is None
     assert x_ideaunit.pledge is None
     assert x_ideaunit._problem_bool is None
@@ -79,7 +78,6 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._numor is None
     assert x_ideaunit._denom is None
     assert x_ideaunit._reest is None
-    assert x_ideaunit._range_source_road is None
     assert x_ideaunit._range_pushs == set()
     assert x_ideaunit.pledge is False
     assert x_ideaunit._problem_bool is False

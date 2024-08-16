@@ -3783,7 +3783,6 @@
                                 "_label": "400 year segment",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_range_source_road": "A;time;tech;400 year segment",
                                 "_reest": true
                             },
                             "400 year segments": {
@@ -3794,7 +3793,6 @@
                                 "_label": "400 year segments",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_range_source_road": "A;time;tech;400 year segment",
                                 "_reest": false
                             },
                             "day": {
@@ -3805,7 +3803,6 @@
                                 "_label": "day",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_range_source_road": "A;time;tech;day",
                                 "_reest": true
                             },
                             "days": {
@@ -3826,7 +3823,6 @@
                                 "_label": "week",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_range_source_road": "A;time;tech;week",
                                 "_reest": true
                             },
                             "weeks": {
@@ -3887,96 +3883,84 @@
                                         "_close": 44640,
                                         "_is_expanded": false,
                                         "_label": "1-Jan",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Jan"
+                                        "_mass": 1
                                     },
                                     "10-Oct": {
                                         "_begin": 393120,
                                         "_close": 437760,
                                         "_is_expanded": false,
                                         "_label": "10-Oct",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Oct"
+                                        "_mass": 1
                                     },
                                     "11-Nov": {
                                         "_begin": 437760,
                                         "_close": 480960,
                                         "_is_expanded": false,
                                         "_label": "11-Nov",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Nov"
+                                        "_mass": 1
                                     },
                                     "12-Dec": {
                                         "_begin": 480960,
                                         "_close": 525600,
                                         "_is_expanded": false,
                                         "_label": "12-Dec",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Dec"
+                                        "_mass": 1
                                     },
                                     "2-Feb28": {
                                         "_begin": 44640,
                                         "_close": 84960,
                                         "_is_expanded": false,
                                         "_label": "2-Feb28",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Feb28"
+                                        "_mass": 1
                                     },
                                     "3-Mar": {
                                         "_begin": 84960,
                                         "_close": 129600,
                                         "_is_expanded": false,
                                         "_label": "3-Mar",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Mar"
+                                        "_mass": 1
                                     },
                                     "4-Apr": {
                                         "_begin": 129600,
                                         "_close": 172800,
                                         "_is_expanded": false,
                                         "_label": "4-Apr",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Apr"
+                                        "_mass": 1
                                     },
                                     "5-May": {
                                         "_begin": 172800,
                                         "_close": 217440,
                                         "_is_expanded": false,
                                         "_label": "5-May",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;May"
+                                        "_mass": 1
                                     },
                                     "6-Jun": {
                                         "_begin": 217440,
                                         "_close": 260640,
                                         "_is_expanded": false,
                                         "_label": "6-Jun",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Jun"
+                                        "_mass": 1
                                     },
                                     "7-Jul": {
                                         "_begin": 260640,
                                         "_close": 305280,
                                         "_is_expanded": false,
                                         "_label": "7-Jul",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Jul"
+                                        "_mass": 1
                                     },
                                     "8-Aug": {
                                         "_begin": 305280,
                                         "_close": 349920,
                                         "_is_expanded": false,
                                         "_label": "8-Aug",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Aug"
+                                        "_mass": 1
                                     },
                                     "9-Sep": {
                                         "_begin": 349920,
                                         "_close": 393120,
                                         "_is_expanded": false,
                                         "_label": "9-Sep",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Sep"
+                                        "_mass": 1
                                     }
                                 },
                                 "_label": "365 year",
@@ -3992,96 +3976,84 @@
                                         "_close": 44640,
                                         "_is_expanded": false,
                                         "_label": "1-Jan",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Jan"
+                                        "_mass": 1
                                     },
                                     "10-Oct": {
                                         "_begin": 394560,
                                         "_close": 439200,
                                         "_is_expanded": false,
                                         "_label": "10-Oct",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Oct"
+                                        "_mass": 1
                                     },
                                     "11-Nov": {
                                         "_begin": 439200,
                                         "_close": 482400,
                                         "_is_expanded": false,
                                         "_label": "11-Nov",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Nov"
+                                        "_mass": 1
                                     },
                                     "12-Dec": {
                                         "_begin": 482400,
                                         "_close": 527040,
                                         "_is_expanded": false,
                                         "_label": "12-Dec",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Dec"
+                                        "_mass": 1
                                     },
                                     "2-Feb29": {
                                         "_begin": 44640,
                                         "_close": 86400,
                                         "_is_expanded": false,
                                         "_label": "2-Feb29",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Feb29"
+                                        "_mass": 1
                                     },
                                     "3-Mar": {
                                         "_begin": 86400,
                                         "_close": 131040,
                                         "_is_expanded": false,
                                         "_label": "3-Mar",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Mar"
+                                        "_mass": 1
                                     },
                                     "4-Apr": {
                                         "_begin": 131040,
                                         "_close": 174240,
                                         "_is_expanded": false,
                                         "_label": "4-Apr",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Apr"
+                                        "_mass": 1
                                     },
                                     "5-May": {
                                         "_begin": 174240,
                                         "_close": 218880,
                                         "_is_expanded": false,
                                         "_label": "5-May",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;May"
+                                        "_mass": 1
                                     },
                                     "6-Jun": {
                                         "_begin": 218880,
                                         "_close": 262080,
                                         "_is_expanded": false,
                                         "_label": "6-Jun",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Jun"
+                                        "_mass": 1
                                     },
                                     "7-Jul": {
                                         "_begin": 262080,
                                         "_close": 306720,
                                         "_is_expanded": false,
                                         "_label": "7-Jul",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Jul"
+                                        "_mass": 1
                                     },
                                     "8-Aug": {
                                         "_begin": 306720,
                                         "_close": 351360,
                                         "_is_expanded": false,
                                         "_label": "8-Aug",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Aug"
+                                        "_mass": 1
                                     },
                                     "9-Sep": {
                                         "_begin": 351360,
                                         "_close": 394560,
                                         "_is_expanded": false,
                                         "_label": "9-Sep",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;month;Sep"
+                                        "_mass": 1
                                     }
                                 },
                                 "_label": "366 year",
@@ -4105,7 +4077,6 @@
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_range_source_road": "A;time;tech;4year with leap",
                                                 "_reest": true
                                             }
                                         },
@@ -4125,7 +4096,6 @@
                                                 "_label": "4year wo leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_range_source_road": "A;time;tech;4year wo leap",
                                                 "_reest": true
                                             }
                                         },
@@ -4145,7 +4115,6 @@
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_range_source_road": "A;time;tech;4year with leap",
                                                 "_reest": true
                                             }
                                         },
@@ -4165,7 +4134,6 @@
                                                 "_label": "4year wo leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_range_source_road": "A;time;tech;4year wo leap",
                                                 "_reest": true
                                             }
                                         },
@@ -4185,7 +4153,6 @@
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_range_source_road": "A;time;tech;4year with leap",
                                                 "_reest": true
                                             }
                                         },
@@ -4205,7 +4172,6 @@
                                                 "_label": "4year wo leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_range_source_road": "A;time;tech;4year wo leap",
                                                 "_reest": true
                                             }
                                         },
@@ -4225,7 +4191,6 @@
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_range_source_road": "A;time;tech;4year with leap",
                                                 "_reest": true
                                             }
                                         },
@@ -4246,32 +4211,28 @@
                                         "_close": 527040,
                                         "_is_expanded": false,
                                         "_label": "1-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;366 year"
+                                        "_mass": 1
                                     },
                                     "2-year": {
                                         "_begin": 527040,
                                         "_close": 1052640,
                                         "_is_expanded": false,
                                         "_label": "2-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;365 year"
+                                        "_mass": 1
                                     },
                                     "3-year": {
                                         "_begin": 1052640,
                                         "_close": 1578240,
                                         "_is_expanded": false,
                                         "_label": "3-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;365 year"
+                                        "_mass": 1
                                     },
                                     "4-year": {
                                         "_begin": 1578240,
                                         "_close": 2103840,
                                         "_is_expanded": false,
                                         "_label": "4-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;365 year"
+                                        "_mass": 1
                                     }
                                 },
                                 "_label": "4year with leap",
@@ -4287,32 +4248,28 @@
                                         "_close": 525600,
                                         "_is_expanded": false,
                                         "_label": "1-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;365 year"
+                                        "_mass": 1
                                     },
                                     "2-year": {
                                         "_begin": 525600,
                                         "_close": 1051200,
                                         "_is_expanded": false,
                                         "_label": "2-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;365 year"
+                                        "_mass": 1
                                     },
                                     "3-year": {
                                         "_begin": 1051200,
                                         "_close": 1576800,
                                         "_is_expanded": false,
                                         "_label": "3-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;365 year"
+                                        "_mass": 1
                                     },
                                     "4-year": {
                                         "_begin": 1576800,
                                         "_close": 2102400,
                                         "_is_expanded": false,
                                         "_label": "4-year",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;365 year"
+                                        "_mass": 1
                                     }
                                 },
                                 "_label": "4year wo leap",
@@ -4328,192 +4285,168 @@
                                         "_close": 60,
                                         "_is_expanded": false,
                                         "_label": "0-12am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "1-1am": {
                                         "_begin": 60,
                                         "_close": 120,
                                         "_is_expanded": false,
                                         "_label": "1-1am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "10-10am": {
                                         "_begin": 600,
                                         "_close": 660,
                                         "_is_expanded": false,
                                         "_label": "10-10am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "11-11am": {
                                         "_begin": 660,
                                         "_close": 720,
                                         "_is_expanded": false,
                                         "_label": "11-11am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "12-12pm": {
                                         "_begin": 720,
                                         "_close": 780,
                                         "_is_expanded": false,
                                         "_label": "12-12pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "13-1pm": {
                                         "_begin": 780,
                                         "_close": 840,
                                         "_is_expanded": false,
                                         "_label": "13-1pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "14-2pm": {
                                         "_begin": 840,
                                         "_close": 900,
                                         "_is_expanded": false,
                                         "_label": "14-2pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "15-3pm": {
                                         "_begin": 900,
                                         "_close": 960,
                                         "_is_expanded": false,
                                         "_label": "15-3pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "16-4pm": {
                                         "_begin": 960,
                                         "_close": 1020,
                                         "_is_expanded": false,
                                         "_label": "16-4pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "17-5pm": {
                                         "_begin": 1020,
                                         "_close": 1080,
                                         "_is_expanded": false,
                                         "_label": "17-5pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "18-6pm": {
                                         "_begin": 1080,
                                         "_close": 1140,
                                         "_is_expanded": false,
                                         "_label": "18-6pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "19-7pm": {
                                         "_begin": 1140,
                                         "_close": 1200,
                                         "_is_expanded": false,
                                         "_label": "19-7pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "2-2am": {
                                         "_begin": 120,
                                         "_close": 180,
                                         "_is_expanded": false,
                                         "_label": "2-2am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "20-8pm": {
                                         "_begin": 1200,
                                         "_close": 1260,
                                         "_is_expanded": false,
                                         "_label": "20-8pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "21-9pm": {
                                         "_begin": 1260,
                                         "_close": 1320,
                                         "_is_expanded": false,
                                         "_label": "21-9pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "22-10pm": {
                                         "_begin": 1320,
                                         "_close": 1380,
                                         "_is_expanded": false,
                                         "_label": "22-10pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "23-11pm": {
                                         "_begin": 1380,
                                         "_close": 1440,
                                         "_is_expanded": false,
                                         "_label": "23-11pm",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "3-3am": {
                                         "_begin": 180,
                                         "_close": 240,
                                         "_is_expanded": false,
                                         "_label": "3-3am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "4-4am": {
                                         "_begin": 240,
                                         "_close": 300,
                                         "_is_expanded": false,
                                         "_label": "4-4am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "5-5am": {
                                         "_begin": 300,
                                         "_close": 360,
                                         "_is_expanded": false,
                                         "_label": "5-5am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "6-6am": {
                                         "_begin": 360,
                                         "_close": 420,
                                         "_is_expanded": false,
                                         "_label": "6-6am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "7-7am": {
                                         "_begin": 420,
                                         "_close": 480,
                                         "_is_expanded": false,
                                         "_label": "7-7am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "8-8am": {
                                         "_begin": 480,
                                         "_close": 540,
                                         "_is_expanded": false,
                                         "_label": "8-8am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     },
                                     "9-9am": {
                                         "_begin": 540,
                                         "_close": 600,
                                         "_is_expanded": false,
                                         "_label": "9-9am",
-                                        "_mass": 1,
-                                        "_range_source_road": "A;time;tech;hour"
+                                        "_mass": 1
                                     }
                                 },
                                 "_label": "day",

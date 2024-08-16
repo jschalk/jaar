@@ -73,21 +73,10 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_idearoot = yao_bud._idearoot
     idearoot_dict = bud_dict["_idearoot"]
     _kids = "_kids"
-    _range_source_road = "_range_source_road"
     assert x_idearoot._label == yao_bud._real_id
     assert idearoot_dict["_label"] == x_idearoot._label
     assert idearoot_dict["_mass"] == x_idearoot._mass
     assert len(idearoot_dict[_kids]) == len(x_idearoot._kids)
-
-    # check an ideakid._range_source_road attribute
-    month_week_text = "month_week"
-    month_week_road = yao_bud.make_l1_road(month_week_text)
-    month_week_idea_x = yao_bud.get_idea_obj(month_week_road)
-    print("check real_id,month_week...range_source_road equal to...")
-    month_week_special_dict = idearoot_dict[_kids][month_week_text][_range_source_road]
-    assert month_week_special_dict is not None
-    assert month_week_special_dict == yao_bud.make_l1_road("ced_week")
-    assert month_week_special_dict == month_week_idea_x._range_source_road
 
     originunit_text = "_originunit"
     day_hour_originunit_dict = idearoot_dict[_kids][day_hour_text][originunit_text]

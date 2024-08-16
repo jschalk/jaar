@@ -299,7 +299,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 109
+    assert len(atom_columns) == 107
     assert atom_columns.get("budunit_UPDATE__credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 

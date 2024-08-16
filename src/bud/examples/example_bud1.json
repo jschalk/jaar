@@ -4129,8 +4129,7 @@
                     }
                 },
                 "_label": "month_week",
-                "_mass": 40,
-                "_range_source_road": "music;ced_week"
+                "_mass": 40
             },
             "Moods": {
                 "_kids": {

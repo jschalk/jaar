@@ -204,40 +204,40 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # x_budunit.set_idea(year365_idea, tech_road)
 
     # Jan_ideaunit = i_shop(
-    #     f"1-{Jan()}", _begin=0, _close=44640, _range_source_road=tech_Jan_road
+    #     f"1-{Jan()}", _begin=0, _close=44640
     # )
     # Feb28_ideaunit = i_shop(
-    #     f"2-{Feb28()}", _begin=44640, _close=84960, _range_source_road=tech_Feb28_road
+    #     f"2-{Feb28()}", _begin=44640, _close=84960
     # )
     # Mar_ideaunit = i_shop(
-    #     f"3-{Mar()}", _begin=84960, _close=129600, _range_source_road=tech_Mar_road
+    #     f"3-{Mar()}", _begin=84960, _close=129600, =tech_Mar_road
     # )
     # Apr_ideaunit = i_shop(
-    #     f"4-{Apr()}", _begin=129600, _close=172800, _range_source_road=tech_Apr_road
+    #     f"4-{Apr()}", _begin=129600, _close=172800, =tech_Apr_road
     # )
     # May_ideaunit = i_shop(
-    #     f"5-{May()}", _begin=172800, _close=217440, _range_source_road=tech_May_road
+    #     f"5-{May()}", _begin=172800, _close=217440, =tech_May_road
     # )
     # Jun_ideaunit = i_shop(
-    #     f"6-{Jun()}", _begin=217440, _close=260640, _range_source_road=tech_Jun_road
+    #     f"6-{Jun()}", _begin=217440, _close=260640, =tech_Jun_road
     # )
     # Jul_ideaunit = i_shop(
-    #     f"7-{Jul()}", _begin=260640, _close=305280, _range_source_road=tech_Jul_road
+    #     f"7-{Jul()}", _begin=260640, _close=305280, =tech_Jul_road
     # )
     # Aug_ideaunit = i_shop(
-    #     f"8-{Aug()}", _begin=305280, _close=349920, _range_source_road=tech_Aug_road
+    #     f"8-{Aug()}", _begin=305280, _close=349920, =tech_Aug_road
     # )
     # Sep_ideaunit = i_shop(
-    #     f"9-{Sep()}", _begin=349920, _close=393120, _range_source_road=tech_Sep_road
+    #     f"9-{Sep()}", _begin=349920, _close=393120, =tech_Sep_road
     # )
     # Oct_ideaunit = i_shop(
-    #     f"10-{Oct()}", _begin=393120, _close=437760, _range_source_road=tech_Oct_road
+    #     f"10-{Oct()}", _begin=393120, _close=437760, =tech_Oct_road
     # )
     # Nov_ideaunit = i_shop(
-    #     f"11-{Nov()}", _begin=437760, _close=480960, _range_source_road=tech_Nov_road
+    #     f"11-{Nov()}", _begin=437760, _close=480960, =tech_Nov_road
     # )
     # Dec_ideaunit = i_shop(
-    #     f"12-{Dec()}", _begin=480960, _close=525600, _range_source_road=tech_Dec_road
+    #     f"12-{Dec()}", _begin=480960, _close=525600, =tech_Dec_road
     # )
 
     # x_budunit.set_idea(Jan_ideaunit, year365_road)
@@ -258,40 +258,40 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # year366_idea = i_shop(year366_str(), _begin=0, _close=527040)
     # x_budunit.set_idea(year366_idea, tech_road)
     # y366_Jan_ideaunit = i_shop(
-    #     f"1-{Jan()}", _begin=0, _close=44640, _range_source_road=tech_Jan_road
+    #     f"1-{Jan()}", _begin=0, _close=44640, =tech_Jan_road
     # )
     # y366_Feb29_ideaunit = i_shop(
-    #     f"2-{Feb29()}", _begin=44640, _close=86400, _range_source_road=tech_Feb29_road
+    #     f"2-{Feb29()}", _begin=44640, _close=86400, =tech_Feb29_road
     # )
     # y366_Mar_ideaunit = i_shop(
-    #     f"3-{Mar()}", _begin=86400, _close=131040, _range_source_road=tech_Mar_road
+    #     f"3-{Mar()}", _begin=86400, _close=131040, =tech_Mar_road
     # )
     # y366_Apr_ideaunit = i_shop(
-    #     f"4-{Apr()}", _begin=131040, _close=174240, _range_source_road=tech_Apr_road
+    #     f"4-{Apr()}", _begin=131040, _close=174240, =tech_Apr_road
     # )
     # y366_May_ideaunit = i_shop(
-    #     f"5-{May()}", _begin=174240, _close=218880, _range_source_road=tech_May_road
+    #     f"5-{May()}", _begin=174240, _close=218880, =tech_May_road
     # )
     # y366_Jun_ideaunit = i_shop(
-    #     f"6-{Jun()}", _begin=218880, _close=262080, _range_source_road=tech_Jun_road
+    #     f"6-{Jun()}", _begin=218880, _close=262080, =tech_Jun_road
     # )
     # y366_Jul_ideaunit = i_shop(
-    #     f"7-{Jul()}", _begin=262080, _close=306720, _range_source_road=tech_Jul_road
+    #     f"7-{Jul()}", _begin=262080, _close=306720, =tech_Jul_road
     # )
     # y366_Aug_ideaunit = i_shop(
-    #     f"8-{Aug()}", _begin=306720, _close=351360, _range_source_road=tech_Aug_road
+    #     f"8-{Aug()}", _begin=306720, _close=351360, =tech_Aug_road
     # )
     # y366_Sep_ideaunit = i_shop(
-    #     f"9-{Sep()}", _begin=351360, _close=394560, _range_source_road=tech_Sep_road
+    #     f"9-{Sep()}", _begin=351360, _close=394560, =tech_Sep_road
     # )
     # y366_Oct_ideaunit = i_shop(
-    #     f"10-{Oct()}", _begin=394560, _close=439200, _range_source_road=tech_Oct_road
+    #     f"10-{Oct()}", _begin=394560, _close=439200, =tech_Oct_road
     # )
     # y366_Nov_ideaunit = i_shop(
-    #     f"11-{Nov()}", _begin=439200, _close=482400, _range_source_road=tech_Nov_road
+    #     f"11-{Nov()}", _begin=439200, _close=482400, =tech_Nov_road
     # )
     # y366_Dec_ideaunit = i_shop(
-    #     f"12-{Dec()}", _begin=482400, _close=527040, _range_source_road=tech_Dec_road
+    #     f"12-{Dec()}", _begin=482400, _close=527040, =tech_Dec_road
     # )
     # x_budunit.set_idea(y366_Jan_ideaunit, year366_road)
     # x_budunit.set_idea(y366_Feb29_ideaunit, year366_road)
@@ -372,57 +372,57 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # x_budunit.set_idea(i_shop("59-:59", _begin=59, _close=60), tech_hr_road)
 
     # # day_road
-    # hr_0_idea = i_shop("0-12am", _begin=0, _close=60, _range_source_road=tech_hr_road)
-    # hr_1_idea = i_shop("1-1am", _begin=60, _close=120, _range_source_road=tech_hr_road)
-    # hr_2_idea = i_shop("2-2am", _begin=120, _close=180, _range_source_road=tech_hr_road)
-    # hr_3_idea = i_shop("3-3am", _begin=180, _close=240, _range_source_road=tech_hr_road)
-    # hr_4_idea = i_shop("4-4am", _begin=240, _close=300, _range_source_road=tech_hr_road)
-    # hr_5_idea = i_shop("5-5am", _begin=300, _close=360, _range_source_road=tech_hr_road)
-    # hr_6_idea = i_shop("6-6am", _begin=360, _close=420, _range_source_road=tech_hr_road)
-    # hr_7_idea = i_shop("7-7am", _begin=420, _close=480, _range_source_road=tech_hr_road)
-    # hr_8_idea = i_shop("8-8am", _begin=480, _close=540, _range_source_road=tech_hr_road)
-    # hr_9_idea = i_shop("9-9am", _begin=540, _close=600, _range_source_road=tech_hr_road)
+    # hr_0_idea = i_shop("0-12am", _begin=0, _close=60, =tech_hr_road)
+    # hr_1_idea = i_shop("1-1am", _begin=60, _close=120, =tech_hr_road)
+    # hr_2_idea = i_shop("2-2am", _begin=120, _close=180, =tech_hr_road)
+    # hr_3_idea = i_shop("3-3am", _begin=180, _close=240, =tech_hr_road)
+    # hr_4_idea = i_shop("4-4am", _begin=240, _close=300, =tech_hr_road)
+    # hr_5_idea = i_shop("5-5am", _begin=300, _close=360, =tech_hr_road)
+    # hr_6_idea = i_shop("6-6am", _begin=360, _close=420, =tech_hr_road)
+    # hr_7_idea = i_shop("7-7am", _begin=420, _close=480, =tech_hr_road)
+    # hr_8_idea = i_shop("8-8am", _begin=480, _close=540, =tech_hr_road)
+    # hr_9_idea = i_shop("9-9am", _begin=540, _close=600, =tech_hr_road)
     # hr_10_idea = i_shop(
-    #     "10-10am", _begin=600, _close=660, _range_source_road=tech_hr_road
+    #     "10-10am", _begin=600, _close=660, =tech_hr_road
     # )
     # hr_11_idea = i_shop(
-    #     "11-11am", _begin=660, _close=720, _range_source_road=tech_hr_road
+    #     "11-11am", _begin=660, _close=720, =tech_hr_road
     # )
     # hr_12_idea = i_shop(
-    #     "12-12pm", _begin=720, _close=780, _range_source_road=tech_hr_road
+    #     "12-12pm", _begin=720, _close=780, =tech_hr_road
     # )
     # hr_13_idea = i_shop(
-    #     "13-1pm", _begin=780, _close=840, _range_source_road=tech_hr_road
+    #     "13-1pm", _begin=780, _close=840, =tech_hr_road
     # )
     # hr_14_idea = i_shop(
-    #     "14-2pm", _begin=840, _close=900, _range_source_road=tech_hr_road
+    #     "14-2pm", _begin=840, _close=900, =tech_hr_road
     # )
     # hr_15_idea = i_shop(
-    #     "15-3pm", _begin=900, _close=960, _range_source_road=tech_hr_road
+    #     "15-3pm", _begin=900, _close=960, =tech_hr_road
     # )
     # hr_16_idea = i_shop(
-    #     "16-4pm", _begin=960, _close=1020, _range_source_road=tech_hr_road
+    #     "16-4pm", _begin=960, _close=1020, =tech_hr_road
     # )
     # hr_17_idea = i_shop(
-    #     "17-5pm", _begin=1020, _close=1080, _range_source_road=tech_hr_road
+    #     "17-5pm", _begin=1020, _close=1080, =tech_hr_road
     # )
     # hr_18_idea = i_shop(
-    #     "18-6pm", _begin=1080, _close=1140, _range_source_road=tech_hr_road
+    #     "18-6pm", _begin=1080, _close=1140, =tech_hr_road
     # )
     # hr_19_idea = i_shop(
-    #     "19-7pm", _begin=1140, _close=1200, _range_source_road=tech_hr_road
+    #     "19-7pm", _begin=1140, _close=1200, =tech_hr_road
     # )
     # hr_20_idea = i_shop(
-    #     "20-8pm", _begin=1200, _close=1260, _range_source_road=tech_hr_road
+    #     "20-8pm", _begin=1200, _close=1260, =tech_hr_road
     # )
     # hr_21_idea = i_shop(
-    #     "21-9pm", _begin=1260, _close=1320, _range_source_road=tech_hr_road
+    #     "21-9pm", _begin=1260, _close=1320, =tech_hr_road
     # )
     # hr_22_idea = i_shop(
-    #     "22-10pm", _begin=1320, _close=1380, _range_source_road=tech_hr_road
+    #     "22-10pm", _begin=1320, _close=1380, =tech_hr_road
     # )
     # hr_23_idea = i_shop(
-    #     "23-11pm", _begin=1380, _close=1440, _range_source_road=tech_hr_road
+    #     "23-11pm", _begin=1380, _close=1440, =tech_hr_road
     # )
 
     # tech_day_idea = i_shop(day_str(), _begin=0, _close=1440)
@@ -483,16 +483,16 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # year4_noleap_idea = i_shop(year4_no__leap_str(), _begin=0, _close=2102400)
     # x_budunit.set_idea(year4_noleap_idea, tech_road)
     # x0_year1_ideaunit = i_shop(
-    #     year1_str(), _begin=0, _close=525600, _range_source_road=year365_road
+    #     year1_str(), _begin=0, _close=525600, =year365_road
     # )
     # x0_year2_ideaunit = i_shop(
-    #     year2_str(), _begin=525600, _close=1051200, _range_source_road=year365_road
+    #     year2_str(), _begin=525600, _close=1051200, =year365_road
     # )
     # x0_year3_ideaunit = i_shop(
-    #     year3_str(), _begin=1051200, _close=1576800, _range_source_road=year365_road
+    #     year3_str(), _begin=1051200, _close=1576800, =year365_road
     # )
     # x0_year4_ideaunit = i_shop(
-    #     year4_str(), _begin=1576800, _close=2102400, _range_source_road=year365_road
+    #     year4_str(), _begin=1576800, _close=2102400, =year365_road
     # )
     # x_budunit.set_idea(x0_year1_ideaunit, year4_noleap_road)
     # x_budunit.set_idea(x0_year2_ideaunit, year4_noleap_road)
@@ -507,16 +507,16 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     #     _close=2103840,
     # )
     # x1_year1_ideaunit = i_shop(
-    #     year1_str(), _begin=0, _close=527040, _range_source_road=year366_road
+    #     year1_str(), _begin=0, _close=527040, =year366_road
     # )
     # x1_year2_ideaunit = i_shop(
-    #     year2_str(), _begin=527040, _close=1052640, _range_source_road=year365_road
+    #     year2_str(), _begin=527040, _close=1052640, =year365_road
     # )
     # x1_year3_ideaunit = i_shop(
-    #     year3_str(), _begin=1052640, _close=1578240, _range_source_road=year365_road
+    #     year3_str(), _begin=1052640, _close=1578240, =year365_road
     # )
     # x1_year4_ideaunit = i_shop(
-    #     year4_str(), _begin=1578240, _close=2103840, _range_source_road=year365_road
+    #     year4_str(), _begin=1578240, _close=2103840, =year365_road
     # )
     # x_budunit.set_idea(year4_withleap_idea, tech_road)
     # x_budunit.set_idea(x1_year1_ideaunit, year4_withleap_road)
@@ -555,21 +555,21 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     #     _numor=1,
     #     _denom=25,
     #     _reest=True,
-    #     _range_source_road=year4_withleap_road,
+    #     =year4_withleap_road,
     # )
     # year_x4_no_leap_idea = i_shop(
     #     year4_no__leap_str(),
     #     _numor=1,
     #     _denom=1,
     #     _reest=True,
-    #     _range_source_road=year4_noleap_road,
+    #     =year4_noleap_road,
     # )
     # year_x_withleap_idea = i_shop(
     #     year4_withleap_str(),
     #     _numor=1,
     #     _denom=24,
     #     _reest=True,
-    #     _range_source_road=year4_withleap_road,
+    #     =year4_withleap_road,
     # )
     # x_budunit.set_idea(year_0_withleap_idea, node_0_100_road)
     # x_budunit.set_idea(year_x4_no_leap_idea, node_1_4_road)

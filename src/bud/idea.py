@@ -88,7 +88,6 @@ class IdeaAttrFilter:
     numor: float = None
     denom: float = None
     reest: bool = None
-    range_source_road: float = None
     range_push: RoadUnit = None
     del_range_push: RoadUnit = None
     pledge: bool = None
@@ -148,7 +147,6 @@ def ideaattrfilter_shop(
     numor: float = None,
     denom: float = None,
     reest: bool = None,
-    range_source_road: float = None,
     range_push: RoadUnit = None,
     del_range_push: RoadUnit = None,
     pledge: bool = None,
@@ -181,7 +179,6 @@ def ideaattrfilter_shop(
         numor=numor,
         denom=denom,
         reest=reest,
-        range_source_road=range_source_road,
         range_push=range_push,
         del_range_push=del_range_push,
         pledge=pledge,
@@ -223,7 +220,6 @@ class IdeaUnit:
     _reest: bool = None
     _gogo_want: bool = None
     _stop_want: bool = None
-    _range_source_road: RoadUnit = None
     _range_pushs: set[RoadUnit] = None
     pledge: bool = None
     _originunit: OriginUnit = None
@@ -317,21 +313,6 @@ class IdeaUnit:
 
     def del_factunit(self, base: RoadUnit):
         self._factunits.pop(base)
-
-    def _apply_any_range_source_road_connections(
-        self,
-        lemmas_dict: dict[RoadUnit, FactUnit],
-        missing_facts: list[FactUnit],
-    ):
-        for active_fact in self._factunits.values():
-            for lemma_fact in lemmas_dict.values():
-                if lemma_fact.base == active_fact.base:
-                    self.set_factunit(lemma_fact)
-
-        for missing_fact in missing_facts:
-            for lemma_fact in lemmas_dict.values():
-                if lemma_fact.base == missing_fact:
-                    self.set_factunit(lemma_fact)
 
     def set_fund_attr(
         self,
@@ -506,16 +487,15 @@ class IdeaUnit:
 
     def _find_replace_road_delimiter(self, old_delimiter):
         self._parent_road = replace_road_delimiter(
-            road=self._parent_road,
-            old_delimiter=old_delimiter,
-            new_delimiter=self._road_delimiter,
+            self._parent_road, old_delimiter, self._road_delimiter
         )
-        if self._range_source_road is not None:
-            self._range_source_road = replace_road_delimiter(
-                road=self._range_source_road,
-                old_delimiter=old_delimiter,
-                new_delimiter=self._road_delimiter,
+        new_range_pushs = set()
+        for old_range_push in self._range_pushs:
+            new_range_push = replace_road_delimiter(
+                old_range_push, old_delimiter, self._road_delimiter
             )
+            new_range_pushs.add(new_range_push)
+        self._range_pushs = new_range_pushs
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self._reasonunits.items():
@@ -591,8 +571,6 @@ class IdeaUnit:
             self._denom = idea_attr.denom
         if idea_attr.reest is not None:
             self._reest = idea_attr.reest
-        if idea_attr.range_source_road is not None:
-            self._range_source_road = idea_attr.range_source_road
         if idea_attr.range_push is not None:
             self.set_range_push(idea_attr.range_push)
         if idea_attr.del_range_push is not None:
@@ -907,8 +885,6 @@ class IdeaUnit:
             x_dict["_denom"] = self._denom
         if self._reest is not None:
             x_dict["_reest"] = self._reest
-        if self._range_source_road is not None:
-            x_dict["_range_source_road"] = self._range_source_road
         if self.pledge:
             x_dict["pledge"] = self.pledge
         if self._problem_bool:
@@ -984,7 +960,6 @@ def ideaunit_shop(
     _denom: int = None,
     _numor: int = None,
     _reest: bool = None,
-    _range_source_road: RoadUnit = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
@@ -1034,7 +1009,6 @@ def ideaunit_shop(
         _denom=_denom,
         _numor=_numor,
         _reest=_reest,
-        _range_source_road=_range_source_road,
         _range_pushs=set(),
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),

@@ -224,9 +224,9 @@ class BudUnit:
     def _get_relevant_roads(self, roads: dict[RoadUnit,]) -> set[RoadUnit]:
         to_evaluate_list = []
         to_evaluate_hx_dict = {}
-        for road_x in roads:
-            to_evaluate_list.append(road_x)
-            to_evaluate_hx_dict[road_x] = "to_evaluate"
+        for x_road in roads:
+            to_evaluate_list.append(x_road)
+            to_evaluate_hx_dict[x_road] = "to_evaluate"
         evaluated_roads = set()
 
         # tree_metrics = self.get_tree_metrics()
@@ -234,8 +234,8 @@ class BudUnit:
         # transited because count_x might be wrong thing to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
-            road_x = to_evaluate_list.pop()
-            x_idea = self.get_idea_obj(road_x)
+            x_road = to_evaluate_list.pop()
+            x_idea = self.get_idea_obj(x_road)
             for reasonunit_obj in x_idea._reasonunits.values():
                 reason_base = reasonunit_obj.base
                 self._evaluate_relevancy(
@@ -244,16 +244,10 @@ class BudUnit:
                     to_evaluate_road=reason_base,
                     road_type="reasonunit_base",
                 )
+            for x_range_push in x_idea._range_pushs:
+                to_evaluate_list.append(x_range_push)
 
-            if x_idea._range_source_road is not None:
-                self._evaluate_relevancy(
-                    to_evaluate_list=to_evaluate_list,
-                    to_evaluate_hx_dict=to_evaluate_hx_dict,
-                    to_evaluate_road=x_idea._range_source_road,
-                    road_type="range_source_road",
-                )
-
-            forefather_roads = get_forefather_roads(road_x)
+            forefather_roads = get_forefather_roads(x_road)
             for forefather_road in forefather_roads:
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -262,7 +256,7 @@ class BudUnit:
                     road_type="forefather",
                 )
 
-            evaluated_roads.add(road_x)
+            evaluated_roads.add(x_road)
         return evaluated_roads
 
     def _evaluate_relevancy(
@@ -444,22 +438,15 @@ class BudUnit:
             fact_idea = self.get_idea_obj(fact.base)
             for kid in fact_idea._kids.values():
                 x_lemmas.eval(x_idea=kid, src_fact=fact, src_idea=fact_idea)
-
-            if fact_idea._range_source_road is not None:
-                x_lemmas.eval(
-                    x_idea=self.get_idea_obj(fact_idea._range_source_road),
-                    src_fact=fact,
-                    src_idea=fact_idea,
-                )
         return x_lemmas
 
     def _get_lemma_factunits(self) -> dict[RoadUnit, FactUnit]:
-        # get all range-root first level kids and range_source_road
+        # get all range-root first level kids
         x_lemmas = self._get_rangeroot_1stlevel_associates(
             self._get_rangeroot_factunits()
         )
 
-        # Now get associates (all their descendants and range_source_roads)
+        # Now get associates (all their descendants)
         lemma_factunits = {}  # fact.base : factUnit
         count_x = 0
         while count_x < 10000 and x_lemmas.is_lemmas_evaluated() is False:
@@ -471,17 +458,11 @@ class BudUnit:
             lemma_idea = y_lemma.x_idea
             fact_x = y_lemma.calc_fact
 
-            road_x = self.make_road(lemma_idea._parent_road, lemma_idea._label)
-            lemma_factunits[road_x] = fact_x
+            x_road = self.make_road(lemma_idea._parent_road, lemma_idea._label)
+            lemma_factunits[x_road] = fact_x
 
             for kid2 in lemma_idea._kids.values():
                 x_lemmas.eval(x_idea=kid2, src_fact=fact_x, src_idea=lemma_idea)
-            if lemma_idea._range_source_road not in [None, ""]:
-                x_lemmas.eval(
-                    x_idea=self.get_idea_obj(lemma_idea._range_source_road),
-                    src_fact=fact_x,
-                    src_idea=lemma_idea,
-                )
 
         return lemma_factunits
 
@@ -534,13 +515,6 @@ class BudUnit:
             # "timeline,weeks" should be set automatica_lly since there exists a reason
             # that has that base.
             x_idearoot.set_factunit(x_factunit)
-
-            # Find all Fact descendants and any range_source_road connections "Lemmas"
-            lemmas_dict = self._get_lemma_factunits()
-            missing_facts = self.get_missing_fact_bases().keys()
-            x_idearoot._apply_any_range_source_road_connections(
-                lemmas_dict, missing_facts
-            )
 
         self.settle_bud()
 
@@ -754,8 +728,6 @@ class BudUnit:
             self._create_ideakid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
                 self._create_ideakid_if_empty(road=premise_x.need)
-        if posted_idea._range_source_road is not None:
-            self._create_ideakid_if_empty(road=posted_idea._range_source_road)
 
     def _create_ideakid_if_empty(self, road: RoadUnit):
         if self.idea_exists(road) is False:
@@ -892,7 +864,6 @@ class BudUnit:
         numor: float = None,
         denom: float = None,
         reest: bool = None,
-        range_source_road: float = None,
         range_push: RoadUnit = None,
         del_range_push: RoadUnit = None,
         pledge: bool = None,
@@ -932,7 +903,6 @@ class BudUnit:
             numor=numor,
             denom=denom,
             reest=reest,
-            range_source_road=range_source_road,
             range_push=range_push,
             del_range_push=del_range_push,
             descendant_pledge_count=descendant_pledge_count,
@@ -1651,7 +1621,6 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _denom=get_obj_from_idea_dict(idearoot_dict, "_denom"),
         _reest=get_obj_from_idea_dict(idearoot_dict, "_reest"),
         _problem_bool=get_obj_from_idea_dict(idearoot_dict, "_problem_bool"),
-        _range_source_road=get_obj_from_idea_dict(idearoot_dict, "_range_source_road"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
         _doerunit=get_obj_from_idea_dict(idearoot_dict, "_doerunit"),
         _healerhold=get_obj_from_idea_dict(idearoot_dict, "_healerhold"),
@@ -1699,7 +1668,6 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),
             _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
-            _range_source_road=get_obj_from_idea_dict(idea_dict, "_range_source_road"),
         )
         x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 

@@ -141,7 +141,7 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     assert unim_road not in relevant_roads
 
 
-def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
+def test_BudUnit_get_relevant_roads_ReturnSimple():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_text)
@@ -157,7 +157,8 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
 
     min_days_text = "days in minute_range"
     min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
-    min_days_idea = ideaunit_shop(min_days_text, _range_source_road=day_len_road)
+    min_days_idea = ideaunit_shop(min_days_text)
+    min_days_idea.set_range_push(day_len_road)
     yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN

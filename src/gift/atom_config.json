@@ -348,10 +348,6 @@
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
-            "_range_source_road": {
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            },
             "_reest": {
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
