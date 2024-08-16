@@ -16,8 +16,71 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     jaja_idea = i_shop(get_jajatime_text(), _begin=0, _close=1472657760)
     jaja_road = x_budunit.make_road(time_road, get_jajatime_text())
     x_budunit.set_idea(jaja_idea, time_road)
-    x_budunit.set_idea(i_shop(day_str(), _denom=1022679), jaja_road)
+    day_idea = i_shop(day_str(), _denom=1440, _reest=True)
+    day_idea._gogo_want = 0
+    day_idea._stop_want = 1440
+    x_budunit.set_idea(day_idea, jaja_road)
     x_budunit.set_idea(i_shop(days_str(), _denom=1440), jaja_road)
+    week_road = x_budunit.make_road(jaja_road, week_str())
+    week_idea = i_shop(week_str(), _denom=10080, _reest=True)
+    week_idea._gogo_want = 0
+    week_idea._stop_want = 10080
+    x_budunit.set_idea(week_idea, jaja_road)
+    sun_idea = i_shop(get_sun(), _gogo_want=1440, _stop_want=1440 + 1440)
+    mon_idea = i_shop(get_mon(), _gogo_want=2880, _stop_want=2880 + 1440)
+    tue_idea = i_shop(get_tue(), _gogo_want=4320, _stop_want=4320 + 1440)
+    wed_idea = i_shop(get_wed(), _gogo_want=5760, _stop_want=5760 + 1440)
+    thu_idea = i_shop(get_thu(), _gogo_want=7200, _stop_want=7200 + 1440)
+    fri_idea = i_shop(get_fri(), _gogo_want=8640, _stop_want=8640 + 1440)
+    sat_idea = i_shop(get_sat(), _gogo_want=0, _stop_want=1440)
+    x_budunit.set_idea(sun_idea, week_road)
+    x_budunit.set_idea(mon_idea, week_road)
+    x_budunit.set_idea(tue_idea, week_road)
+    x_budunit.set_idea(wed_idea, week_road)
+    x_budunit.set_idea(thu_idea, week_road)
+    x_budunit.set_idea(fri_idea, week_road)
+    x_budunit.set_idea(sat_idea, week_road)
+    x_budunit.set_idea(i_shop(weeks_str(), _denom=10080), jaja_road)
+    x_budunit.set_idea(week_idea, jaja_road)
+
+    year_road = x_budunit.make_road(jaja_road, year_str())
+    year_idea = i_shop(year_str(), _reest=True)
+    year_idea._gogo_want = 0
+    year_idea._stop_want = 525600
+    x_budunit.set_idea(year_idea, jaja_road)
+    jan_idea = i_shop(jan_str(), _gogo_want=0, _stop_want=44640)
+    feb_idea = i_shop(feb_str(), _gogo_want=44640, _stop_want=84960)
+    mar_idea = i_shop(mar_str(), _gogo_want=84960, _stop_want=129600)
+    apr_idea = i_shop(apr_str(), _gogo_want=129600, _stop_want=172800)
+    may_idea = i_shop(may_str(), _gogo_want=172800, _stop_want=217440)
+    jun_idea = i_shop(jun_str(), _gogo_want=217440, _stop_want=260640)
+    jul_idea = i_shop(jul_str(), _gogo_want=260640, _stop_want=305280)
+    aug_idea = i_shop(aug_str(), _gogo_want=305280, _stop_want=349920)
+    sep_idea = i_shop(sep_str(), _gogo_want=349920, _stop_want=393120)
+    oct_idea = i_shop(oct_str(), _gogo_want=393120, _stop_want=437760)
+    nov_idea = i_shop(nov_str(), _gogo_want=437760, _stop_want=480960)
+    dec_idea = i_shop(dec_str(), _gogo_want=480960, _stop_want=525600)
+    x_budunit.set_idea(jan_idea, year_road)
+    x_budunit.set_idea(feb_idea, year_road)
+    x_budunit.set_idea(mar_idea, year_road)
+    x_budunit.set_idea(apr_idea, year_road)
+    x_budunit.set_idea(may_idea, year_road)
+    x_budunit.set_idea(jun_idea, year_road)
+    x_budunit.set_idea(jul_idea, year_road)
+    x_budunit.set_idea(aug_idea, year_road)
+    x_budunit.set_idea(sep_idea, year_road)
+    x_budunit.set_idea(oct_idea, year_road)
+    x_budunit.set_idea(nov_idea, year_road)
+    x_budunit.set_idea(dec_idea, year_road)
+
+    years_idea = i_shop(years_str(), _gogo_want=0, _stop_want=2800)
+    x_budunit.set_idea(years_idea, jaja_road)
+
+    # jaja_week_road = x_budunit.make_road(jaja_road, week_str())
+    # jaja_week_idea = i_shop(week_str(), _denom=146097, _reest=True)
+    # jaja_weeks_idea = i_shop(weeks_str(), _denom=10080, _reest=False)
+    # x_budunit.set_idea(jaja_week_idea, jaja_road)
+    # x_budunit.set_idea(jaja_weeks_idea, jaja_road)
 
     # tech_day_road = x_budunit.make_road(tech_road, day_str())
     # tech_week_road = x_budunit.make_road(tech_road, week_str())
@@ -34,11 +97,6 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # x_budunit.set_idea(jaja_day_idea, jaja_road)
     # jaja_days_idea = i_shop(days_str(), _numor=1, _denom=1440, _reest=False)
     # x_budunit.set_idea(jaja_days_idea, jaja_road)
-    # jaja_week_road = x_budunit.make_road(jaja_road, week_str())
-    # jaja_week_idea = i_shop(week_str(), _numor=1, _denom=146097, _reest=True)
-    # jaja_weeks_idea = i_shop(weeks_str(), _numor=1, _denom=10080, _reest=False)
-    # x_budunit.set_idea(jaja_week_idea, jaja_road)
-    # x_budunit.set_idea(jaja_weeks_idea, jaja_road)
 
     # # tech_road branch
     # tech_idea = i_shop(tech_str())
@@ -398,20 +456,20 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # week_road = x_budunit.make_road(tech_road, week_str())
     # week_idea = i_shop(week_str(), _begin=0, _close=10080, _numeric_road=jaja_week_road)
     # x_budunit.set_idea(week_idea, tech_road)
-    # Sun_road = x_budunit.make_road(week_road, get_Sun())
-    # Mon_road = x_budunit.make_road(week_road, get_Mon())
-    # Tue_road = x_budunit.make_road(week_road, get_Tue())
-    # Wed_road = x_budunit.make_road(week_road, get_Wed())
-    # Thu_road = x_budunit.make_road(week_road, get_Thu())
-    # Fri_road = x_budunit.make_road(week_road, get_Fri())
-    # Sat_road = x_budunit.make_road(week_road, get_Sat())
-    # Sun_idea = i_shop(get_Sun(), _begin=1440, _close=1440 + 1440)
-    # Mon_idea = i_shop(get_Mon(), _begin=2880, _close=2880 + 1440)
-    # Tue_idea = i_shop(get_Tue(), _begin=4320, _close=4320 + 1440)
-    # Wed_idea = i_shop(get_Wed(), _begin=5760, _close=5760 + 1440)
-    # Thu_idea = i_shop(get_Thu(), _begin=7200, _close=7200 + 1440)
-    # Fri_idea = i_shop(get_Fri(), _begin=8640, _close=8640 + 1440)
-    # Sat_idea = i_shop(get_Sat(), _begin=0, _close=1440)
+    # Sun_road = x_budunit.make_road(week_road, get_sun())
+    # Mon_road = x_budunit.make_road(week_road, get_mon())
+    # Tue_road = x_budunit.make_road(week_road, get_tue())
+    # Wed_road = x_budunit.make_road(week_road, get_wed())
+    # Thu_road = x_budunit.make_road(week_road, get_thu())
+    # Fri_road = x_budunit.make_road(week_road, get_fri())
+    # Sat_road = x_budunit.make_road(week_road, get_sat())
+    # Sun_idea = i_shop(get_sun(), _begin=1440, _close=1440 + 1440)
+    # Mon_idea = i_shop(get_mon(), _begin=2880, _close=2880 + 1440)
+    # Tue_idea = i_shop(get_tue(), _begin=4320, _close=4320 + 1440)
+    # Wed_idea = i_shop(get_wed(), _begin=5760, _close=5760 + 1440)
+    # Thu_idea = i_shop(get_thu(), _begin=7200, _close=7200 + 1440)
+    # Fri_idea = i_shop(get_fri(), _begin=8640, _close=8640 + 1440)
+    # Sat_idea = i_shop(get_sat(), _begin=0, _close=1440)
     # x_budunit.set_idea(Sun_idea, week_road)
     # x_budunit.set_idea(Mon_idea, week_road)
     # x_budunit.set_idea(Tue_idea, week_road)
@@ -713,6 +771,10 @@ def set_time_facts(
     )
 
 
+def year_str() -> str:
+    return "year"
+
+
 def years_str() -> str:
     return "years"
 
@@ -765,31 +827,31 @@ def get_jajatime_text():
     return "jajatime"
 
 
-def get_Sun():
+def get_sun():
     return "Sunday"
 
 
-def get_Mon():
+def get_mon():
     return "Monday"
 
 
-def get_Tue():
+def get_tue():
     return "Tuesday"
 
 
-def get_Wed():
+def get_wed():
     return "Wednesday"
 
 
-def get_Thu():
+def get_thu():
     return "Thursday"
 
 
-def get_Fri():
+def get_fri():
     return "Friday"
 
 
-def get_Sat():
+def get_sat():
     return "Saturday"
 
 
@@ -817,60 +879,52 @@ def days_str():
     return f"{day_str()}s"
 
 
-def Jan():
-    return "Jan"
+def jan_str():
+    return "jan"
 
 
-def Feb28():
-    return "Feb28"
+def feb_str():
+    return "feb"
 
 
-def Feb29():
-    return "Feb29"
+def mar_str():
+    return "mar"
 
 
-def Mar():
-    return "Mar"
+def apr_str():
+    return "apr"
 
 
-def Apr():
-    return "Apr"
+def may_str():
+    return "may"
 
 
-def May():
-    return "May"
+def jun_str():
+    return "jun"
 
 
-def Jun():
-    return "Jun"
+def jul_str():
+    return "jul"
 
 
-def Jul():
-    return "Jul"
+def aug_str():
+    return "aug"
 
 
-def Aug():
-    return "Aug"
+def sep_str():
+    return "sep"
 
 
-def Sep():
-    return "Sep"
+def oct_str():
+    return "oct"
 
 
-def Oct():
-    return "Oct"
+def nov_str():
+    return "nov"
 
 
-def Nov():
-    return "Nov"
-
-
-def Dec():
-    return "Dec"
-
-
-def year_str() -> str:
-    return "years"
+def dec_str():
+    return "dec"
 
 
 def year1_str() -> str:
@@ -1202,13 +1256,13 @@ class PremiseUnitHregTime:
 
     def _set_weekday(self, weekday: str):
         if weekday in {
-            get_Sun(),
-            get_Mon(),
-            get_Tue(),
-            get_Wed(),
-            get_Thu(),
-            get_Fri(),
-            get_Sat(),
+            get_sun(),
+            get_mon(),
+            get_tue(),
+            get_wed(),
+            get_thu(),
+            get_fri(),
+            get_sat(),
         }:
             self._weekday = weekday
             self._set_open_weekday()
@@ -1216,19 +1270,19 @@ class PremiseUnitHregTime:
     def _set_open_weekday(self):
         b = None
         m = 1440
-        if self._weekday == get_Sun():
+        if self._weekday == get_sun():
             b = 1 * m
-        elif self._weekday == get_Mon():
+        elif self._weekday == get_mon():
             b = 2 * m
-        elif self._weekday == get_Tue():
+        elif self._weekday == get_tue():
             b = 3 * m
-        elif self._weekday == get_Wed():
+        elif self._weekday == get_wed():
             b = 4 * m
-        elif self._weekday == get_Thu():
+        elif self._weekday == get_thu():
             b = 5 * m
-        elif self._weekday == get_Fri():
+        elif self._weekday == get_fri():
             b = 6 * m
-        elif self._weekday == get_Sat():
+        elif self._weekday == get_sat():
             b = 0 * m
 
         self._between_weekday_open = b

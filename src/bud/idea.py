@@ -652,12 +652,10 @@ class IdeaUnit:
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
         r_idea_addin = get_0_if_None(self._addin)
-        print(f"huh {self._gogo_calc=} {self._stop_calc=}")
 
         if self._gogo_calc is None or self._stop_calc is None:
             pass
-            print(f"huh4 {(self._gogo_calc)=}")
-        elif self._gogo_want and self._stop_want:
+        elif self._gogo_want != None and self._stop_want != None:
             stop_want_less_than_gogo_calc = self._stop_want < self._gogo_calc
             gogo_want_greater_than_stop_calc = self._gogo_want > self._stop_calc
             if stop_want_less_than_gogo_calc or gogo_want_greater_than_stop_calc:
@@ -671,9 +669,7 @@ class IdeaUnit:
             gogo_calc_stop_calc_remainder = gogo_calc_stop_calc_diff % self._denom
             self._gogo_calc = 0
             self._stop_calc = gogo_calc_stop_calc_remainder
-            print(f"huh2")
         else:
-            print(f"huh")
             self._gogo_calc = self._gogo_calc + r_idea_addin
             self._stop_calc = self._stop_calc + r_idea_addin
             self._gogo_calc = (self._gogo_calc * r_idea_numor) / r_idea_denom
@@ -996,6 +992,8 @@ def ideaunit_shop(
     _healerhold: HealerHold = None,
     _begin: float = None,
     _close: float = None,
+    _gogo_want: float = None,
+    _stop_want: float = None,
     _addin: float = None,
     _denom: int = None,
     _numor: int = None,
@@ -1045,6 +1043,8 @@ def ideaunit_shop(
         _healerhold=_healerhold,
         _begin=_begin,
         _close=_close,
+        _gogo_want=_gogo_want,
+        _stop_want=_stop_want,
         _addin=_addin,
         _denom=_denom,
         _numor=_numor,

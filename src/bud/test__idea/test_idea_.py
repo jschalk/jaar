@@ -171,6 +171,22 @@ def test_ideaunit_shop_ReturnsObjWith_awardlinks():
     assert sport_idea._awardlinks == x_awardlinks
 
 
+def test_ideaunit_shop_ReturnsObjWithParameters():
+    # ESTABLISH
+    sport_gogo_want = 5
+    sport_stop_want = 13
+
+    # WHEN
+    sport_text = "sport"
+    sport_idea = ideaunit_shop(
+        sport_text, _gogo_want=sport_gogo_want, _stop_want=sport_stop_want
+    )
+
+    # THEN
+    assert sport_idea._gogo_want == sport_gogo_want
+    assert sport_idea._stop_want == sport_stop_want
+
+
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():
     # ESTABLISH
     round_text = "round_things"

@@ -1175,10 +1175,6 @@ class BudUnit:
                 r_idea._gogo_calc = parent_idea._gogo_calc
                 r_idea._stop_calc = parent_idea._stop_calc
             r_idea._transform_gogo_calc_stop_calc()
-            print(f"{r_idea.get_road()=}")
-            print(f"{r_idea._denom=}")
-            print(f"{r_idea._gogo_calc=}")
-            print(f"{r_idea._stop_calc=}")
 
             for range_push_road in r_idea._range_pushs:
                 range_push_idea = self.get_idea_obj(range_push_road)
