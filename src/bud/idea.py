@@ -839,7 +839,7 @@ class IdeaUnit:
     def is_kidless(self):
         return self._kids == {}
 
-    def is_arithmetic(self):
+    def is_math(self):
         return self._begin is not None and self._close is not None
 
     def set_range_push(self, range_push_road: RoadUnit):

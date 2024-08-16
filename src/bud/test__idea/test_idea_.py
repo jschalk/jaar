@@ -594,23 +594,23 @@ def test_IdeaUnit_get_fund_share_ReturnsObj():
     assert nation_idea.get_fund_share() == 11
 
 
-def test_IdeaUnit_is_arithmetic_ReturnsObj():
+def test_IdeaUnit_is_math_ReturnsObj():
     # ESTABLISH
     swim_text = "swim"
     swim_idea = ideaunit_shop(swim_text)
-    assert not swim_idea.is_arithmetic()
+    assert not swim_idea.is_math()
     # WHEN
     swim_idea._begin = 9
     # THEN
-    assert not swim_idea.is_arithmetic()
+    assert not swim_idea.is_math()
     # WHEN
     swim_idea._close = 10
     # THEN
-    assert swim_idea.is_arithmetic()
+    assert swim_idea.is_math()
     # WHEN
     swim_idea._begin = None
     # THEN
-    assert not swim_idea.is_arithmetic()
+    assert not swim_idea.is_math()
 
 
 def test_IdeaUnit_set_range_push_SetsAttr():

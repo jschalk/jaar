@@ -101,7 +101,7 @@
 #     )
 
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_Scenario0():
+# def test_BudUnit_tree_math_traverse_calc_Scenario0():
 #     # ESTABLISH
 #     yao_bud = budunit_shop("Yao")
 #     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
@@ -111,7 +111,7 @@
 #     assert not root_idea._stop_calc
 
 #     # WHEN
-#     yao_bud.tree_arithmetic_traverse_calc()
+#     yao_bud.tree_math_traverse_calc()
 
 #     # THEN
 #     assert not root_idea._begin
@@ -120,7 +120,7 @@
 #     assert not root_idea._stop_calc
 
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_Scenario1():
+# def test_BudUnit_tree_math_traverse_calc_Scenario1():
 #     # ESTABLISH
 #     yao_bud = budunit_shop("Yao")
 #     time0_begin = 7
@@ -133,7 +133,7 @@
 #     assert not root_idea._stop_calc
 
 #     # WHEN
-#     yao_bud.tree_arithmetic_traverse_calc()
+#     yao_bud.tree_math_traverse_calc()
 
 #     # THEN
 #     assert root_idea._begin == time0_begin
@@ -142,7 +142,7 @@
 #     assert root_idea._stop_calc == time0_close
 
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_Scenario2():
+# def test_BudUnit_tree_math_traverse_calc_Scenario2():
 #     # ESTABLISH
 #     yao_bud = budunit_shop("Yao")
 #     time0_text = "time0"
@@ -165,14 +165,14 @@
 #     assert time1_idea._close != time0_close
 
 #     # WHEN
-#     yao_bud.tree_arithmetic_traverse_calc()
+#     yao_bud.tree_math_traverse_calc()
 
 #     # THEN
 #     assert time1_idea._begin == time0_begin
 #     assert time1_idea._close == time0_close
 
 
-# def test_BudUnit_tree_arithmetic_traverse_calc_Scenario2():
+# def test_BudUnit_tree_math_traverse_calc_Scenario2():
 #     # ESTABLISH
 #     yao_bud = budunit_shop("Yao")
 #     day_text = "day"
@@ -190,7 +190,7 @@
 #     assert day_idea._close != time0_close
 
 #     # WHEN
-#     yao_bud.tree_arithmetic_traverse_calc()
+#     yao_bud.tree_math_traverse_calc()
 
 #     # THEN
 #     assert day_idea._begin == time0_begin

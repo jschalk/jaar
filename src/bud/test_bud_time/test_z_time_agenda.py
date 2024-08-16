@@ -63,7 +63,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit.tree_arithmetic_traverse_calc()
+    sue_budunit.tree_math_traverse_calc()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"
@@ -87,7 +87,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit.tree_arithmetic_traverse_calc()
+    sue_budunit.tree_math_traverse_calc()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"
@@ -121,7 +121,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario2():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit.tree_arithmetic_traverse_calc()
+    sue_budunit.tree_math_traverse_calc()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"
@@ -154,7 +154,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_idea_Scenario0():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # days_idea = sue_budunit.get_idea_obj(days_road)
-    sue_budunit.tree_arithmetic_traverse_calc()
+    sue_budunit.tree_math_traverse_calc()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"
@@ -187,7 +187,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
-    sue_budunit.tree_arithmetic_traverse_calc()
+    sue_budunit.tree_math_traverse_calc()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"
@@ -221,7 +221,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
-    sue_budunit.tree_arithmetic_traverse_calc()
+    sue_budunit.tree_math_traverse_calc()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"
@@ -254,7 +254,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # weeks_idea = sue_budunit.get_idea_obj(weeks_road)
-    sue_budunit.tree_arithmetic_traverse_calc()
+    sue_budunit.tree_math_traverse_calc()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"

@@ -418,7 +418,7 @@ class BudUnit:
             )
         parent_road = get_parent_road(idea_road)
         parent_idea = self.get_idea_obj(parent_road)
-        return not parent_idea.is_arithmetic()
+        return not parent_idea.is_math()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
@@ -494,16 +494,16 @@ class BudUnit:
             x_nigh = nigh
         x_factunit = factunit_shop(base=base, pick=pick, open=x_open, nigh=x_nigh)
 
-        if fact_base_idea.is_arithmetic() is False:
+        if fact_base_idea.is_math() is False:
             x_idearoot.set_factunit(x_factunit)
 
         # if fact's idea no range or is a "range-root" then allow fact to be set
-        elif fact_base_idea.is_arithmetic() and self._is_idea_rangeroot(base) is False:
+        elif fact_base_idea.is_math() and self._is_idea_rangeroot(base) is False:
             raise InvalidBudException(
                 f"Non range-root fact:{base} can only be set by range-root fact"
             )
 
-        elif fact_base_idea.is_arithmetic() and self._is_idea_rangeroot(base):
+        elif fact_base_idea.is_math() and self._is_idea_rangeroot(base):
             # WHEN idea is "range-root" identify any reason.bases that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
@@ -1117,13 +1117,13 @@ class BudUnit:
             f"Error has occurred, Idea '{idea_road}' is having _gogo_calc and _stop_calc attributes set twice"
         )
 
-    def _distribute_arithmetic_attrs(self, arithmetic_idea: IdeaUnit):
-        single_range_idea_list = [arithmetic_idea]
+    def _distribute_math_attrs(self, math_idea: IdeaUnit):
+        single_range_idea_list = [math_idea]
         while single_range_idea_list != []:
             r_idea = single_range_idea_list.pop()
             if r_idea._range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_idea.get_road())
-            if r_idea.is_arithmetic():
+            if r_idea.is_math():
                 r_idea._gogo_calc = r_idea._begin
                 r_idea._stop_calc = r_idea._close
             else:
@@ -1143,12 +1143,12 @@ class BudUnit:
                 single_range_idea_list.extend(iter(range_push_idea._kids.values()))
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
-    def tree_arithmetic_traverse_calc(self):
+    def tree_math_traverse_calc(self):
         all_idea_list = [self.get_idea_obj(self._real_id)]
         while all_idea_list != []:
             y_idea = all_idea_list.pop()
-            if y_idea.is_arithmetic():
-                self._distribute_arithmetic_attrs(y_idea)
+            if y_idea.is_math():
+                self._distribute_math_attrs(y_idea)
             all_idea_list.extend(iter(y_idea._kids.values()))
 
     def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
