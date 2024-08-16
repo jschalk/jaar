@@ -338,7 +338,6 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     # x_begin = 1000
     # x_close = 1700
     # x_denom = 17
-    x_numeric_road = None
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop("bud_ideaunit", atom_insert())
@@ -348,7 +347,6 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     # insert_disc_atomunit.set_optional_arg("_begin", x_begin)
     # insert_disc_atomunit.set_optional_arg("_close", x_close)
     # insert_disc_atomunit.set_optional_arg("_denom", x_denom)
-    insert_disc_atomunit.set_optional_arg("_numeric_road", x_numeric_road)
     # insert_disc_atomunit.set_optional_arg("_numor", x_numor)
     insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
 

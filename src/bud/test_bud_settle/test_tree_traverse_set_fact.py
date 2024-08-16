@@ -359,17 +359,6 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     assert len(sue_bud._get_rangeroot_factunits()) == 1
     assert sue_bud._get_rangeroot_factunits()[0].base == time_road
 
-    # a fact who's idea range is defined by numeric_root is not "rangeroot"
-    mirror_x = "mirror_x"
-    sue_bud.set_l1_idea(ideaunit_shop(mirror_x, _numeric_road=time_text))
-    m_x_road = sue_bud.make_l1_road(mirror_x)
-    sue_bud.set_fact(base=m_x_road, pick=time_road, open=5, nigh=10)
-    assert len(sue_bud._idearoot._factunits) == 3
-
-    # WHEN / THEN
-    assert len(sue_bud._get_rangeroot_factunits()) == 1
-    assert sue_bud._get_rangeroot_factunits()[0].base == time_road
-
 
 def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1():
     sue_bud = budunit_shop("Sue")

@@ -88,7 +88,6 @@ class IdeaAttrFilter:
     numor: float = None
     denom: float = None
     reest: bool = None
-    numeric_road: RoadUnit = None
     range_source_road: float = None
     range_push: RoadUnit = None
     del_range_push: RoadUnit = None
@@ -149,7 +148,6 @@ def ideaattrfilter_shop(
     numor: float = None,
     denom: float = None,
     reest: bool = None,
-    numeric_road: RoadUnit = None,
     range_source_road: float = None,
     range_push: RoadUnit = None,
     del_range_push: RoadUnit = None,
@@ -183,7 +181,6 @@ def ideaattrfilter_shop(
         numor=numor,
         denom=denom,
         reest=reest,
-        numeric_road=numeric_road,
         range_source_road=range_source_road,
         range_push=range_push,
         del_range_push=del_range_push,
@@ -228,7 +225,6 @@ class IdeaUnit:
     _stop_want: bool = None
     _range_source_road: RoadUnit = None
     _range_pushs: set[RoadUnit] = None
-    _numeric_road: RoadUnit = None
     pledge: bool = None
     _originunit: OriginUnit = None
     _problem_bool: bool = None
@@ -514,12 +510,6 @@ class IdeaUnit:
             old_delimiter=old_delimiter,
             new_delimiter=self._road_delimiter,
         )
-        if self._numeric_road is not None:
-            self._numeric_road = replace_road_delimiter(
-                road=self._numeric_road,
-                old_delimiter=old_delimiter,
-                new_delimiter=self._road_delimiter,
-            )
         if self._range_source_road is not None:
             self._range_source_road = replace_road_delimiter(
                 road=self._range_source_road,
@@ -601,8 +591,6 @@ class IdeaUnit:
             self._denom = idea_attr.denom
         if idea_attr.reest is not None:
             self._reest = idea_attr.reest
-        if idea_attr.numeric_road is not None:
-            self._numeric_road = idea_attr.numeric_road
         if idea_attr.range_source_road is not None:
             self._range_source_road = idea_attr.range_source_road
         if idea_attr.range_push is not None:
@@ -921,8 +909,6 @@ class IdeaUnit:
             x_dict["_reest"] = self._reest
         if self._range_source_road is not None:
             x_dict["_range_source_road"] = self._range_source_road
-        if self._numeric_road is not None:
-            x_dict["_numeric_road"] = self._numeric_road
         if self.pledge:
             x_dict["pledge"] = self.pledge
         if self._problem_bool:
@@ -999,7 +985,6 @@ def ideaunit_shop(
     _numor: int = None,
     _reest: bool = None,
     _range_source_road: RoadUnit = None,
-    _numeric_road: RoadUnit = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
@@ -1051,7 +1036,6 @@ def ideaunit_shop(
         _reest=_reest,
         _range_source_road=_range_source_road,
         _range_pushs=set(),
-        _numeric_road=_numeric_road,
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
         _originunit=_originunit,

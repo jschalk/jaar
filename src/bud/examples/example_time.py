@@ -18,7 +18,6 @@
 #     md: int = None  # denom
 #     mr: bool = None  # reest
 #     sr: str = None  # range_source_road # not road since it doesn't know root _label
-#     nr: str = None  # numeric_road # not road since it doesn't know root _label
 
 
 # class InvalidPremiseUnitException(Exception):
@@ -823,12 +822,7 @@
 #         road_x = sue_budunit.make_l1_road(yb.rr)
 #         sue_budunit.set_idea(x_idea, parent_road=road_x)
 
-#         numeric_road_x = None
-#         if yb.nr is not None:
-#             numeric_road_x = sue_budunit.make_l1_road(yb.nr)
-#             sue_budunit.edit_idea_attr(
-#                 road=sue_budunit.make_road(road_x, yb.n), numeric_road=numeric_road_x
-#             )
+
 #         if yb.a is not None:
 #             sue_budunit.edit_idea_attr(
 #                 road=sue_budunit.make_road(road_x, yb.n),

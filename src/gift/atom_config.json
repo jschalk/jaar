@@ -340,10 +340,6 @@
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_numeric_road": {
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            },
             "_numor": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"

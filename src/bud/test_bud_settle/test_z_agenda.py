@@ -350,7 +350,7 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     yao_bud = budunit_get_from_json(x_bud_json=yao_bud_json)
 
     # THEN
-    assert len(yao_bud.get_idea_dict()) == 253
+    assert len(yao_bud.get_idea_dict()) == 252
     print(f"{len(yao_bud.get_idea_dict())=}")
     casa_text = "casa"
     casa_road = yao_bud.make_l1_road(casa_text)

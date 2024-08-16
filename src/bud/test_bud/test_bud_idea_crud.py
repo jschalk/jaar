@@ -635,16 +635,6 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 #     day_road = yao_bud.make_l1_road(day)
 #     yao_bud.set_l1_idea(day_idea)
 
-#     # WHEN / THEN
-#     with pytest_raises(Exception) as excinfo:
-#         yao_bud.edit_idea_attr(road=c_road, numeric_road=day_road)
-#     assert (
-#         str(excinfo.value)
-#         == "Idea has begin-close range parent, cannot have numeric_road"
-#     )
-
-#     yao_bud.edit_idea_attr(road=w_road, numeric_road=day_road)
-
 
 # def test_BudUnit_edit_idea_attr_budWhenParentAndNumeric_roadBothHaveRangeThrowError():
 #     # ESTABLISH
@@ -662,7 +652,7 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 #     assert casa_idea._close is None
 
 #     # WHEN
-#     yao_bud.edit_idea_attr(road=casa_road, numeric_road=day_road)
+#     yao_bud.edit_idea_attr(road=casa_road)
 
 #     # THEN
 #     casa_idea3 = yao_bud.get_idea_obj(casa_road)
@@ -672,7 +662,7 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 #     assert casa_idea3._reest is None
 #     assert casa_idea3._begin == 44
 #     assert casa_idea3._close == 110
-#     yao_bud.edit_idea_attr(road=casa_road, denom=11, numeric_road=day_road)
+#     yao_bud.edit_idea_attr(road=casa_road, denom=11)
 #     assert casa_idea3._begin == 4
 #     assert casa_idea3._close == 10
 #     assert casa_idea3._numor == 1

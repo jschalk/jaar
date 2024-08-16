@@ -334,7 +334,6 @@ def add_bud_ideaunit_insert_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
@@ -349,7 +348,6 @@ def add_bud_ideaunit_insert_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
@@ -367,8 +365,6 @@ def add_bud_ideaunit_insert_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value is not None:
-                x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
             if _problem_bool_value is not None:
@@ -394,7 +390,6 @@ def add_bud_ideaunit_update_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
     _range_source_road_text = "_range_source_road"
@@ -409,7 +404,6 @@ def add_bud_ideaunit_update_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
@@ -425,8 +419,6 @@ def add_bud_ideaunit_update_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value is not None:
-                x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
             if _problem_bool_value is not None:

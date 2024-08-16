@@ -1070,23 +1070,22 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # print(f"{sum_bud_agenda_share=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    assert x_awardagendametrics.agenda_no_bud_i_sum == 0.003747268 * default_fund_pool()
-    assert (
-        x_awardagendametrics.agenda_yes_bud_i_sum == 0.002796504 * default_fund_pool()
-    )
+    predicted_agenda_no_bud_i_sum = int(0.004107582 * default_fund_pool())
+    assert x_awardagendametrics.agenda_no_bud_i_sum == predicted_agenda_no_bud_i_sum
+    predicted_agenda_yes_bud_i_sum = int(0.003065400 * default_fund_pool())
+    assert x_awardagendametrics.agenda_yes_bud_i_sum == predicted_agenda_yes_bud_i_sum
     assert are_equal(
         x_awardagendametrics.agenda_no_bud_i_sum
         + x_awardagendametrics.agenda_yes_bud_i_sum,
         x_awardagendametrics.sum_bud_agenda_share,
     )
-    assert (
-        x_awardagendametrics.sum_bud_agenda_share == 0.006543772 * default_fund_pool()
-    )
+    predicted_sum_bud_agenda_share = 0.007172982 * default_fund_pool()
+    assert x_awardagendametrics.sum_bud_agenda_share == predicted_sum_bud_agenda_share
 
     x_groupagendametrics = GroupAgendaMetrics()
     x_groupagendametrics.set_sums(yao_bud)
     assert x_groupagendametrics.membership_count == 81
-    x_sum = 2796504
+    x_sum = 3065400
     print(f"{x_groupagendametrics.sum_groupbox_give=}")
     assert are_equal(x_groupagendametrics.sum_groupbox_give, x_sum)
     assert are_equal(x_groupagendametrics.sum_groupbox_take, x_sum)

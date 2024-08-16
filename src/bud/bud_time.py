@@ -454,7 +454,7 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
 
     # # week_road
     # week_road = x_budunit.make_road(tech_road, week_str())
-    # week_idea = i_shop(week_str(), _begin=0, _close=10080, _numeric_road=jaja_week_road)
+    # week_idea = i_shop(week_str(), _begin=0, _close=10080, )
     # x_budunit.set_idea(week_idea, tech_road)
     # Sun_road = x_budunit.make_road(week_road, get_sun())
     # Mon_road = x_budunit.make_road(week_road, get_mon())
@@ -505,7 +505,6 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     #     year4_withleap_str(),
     #     _begin=0,
     #     _close=2103840,
-    #     _numeric_road="ZZ;time;tech;400 year segment;0-100-25 leap years;4year with leap",
     # )
     # x1_year1_ideaunit = i_shop(
     #     year1_str(), _begin=0, _close=527040, _range_source_road=year366_road
@@ -527,7 +526,7 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
 
     # # c400_road branch
     # c400_idea = i_shop(
-    #     c400_str(), _begin=0, _close=210379680, _numeric_road=jaja_c400_road
+    #     c400_str(), _begin=0, _close=210379680
     # )
     # x_budunit.set_idea(c400_idea, tech_road)
     # node_0_100_road = x_budunit.make_road(tech_c400_road, node_0_100_str())

@@ -245,14 +245,6 @@ class BudUnit:
                     road_type="reasonunit_base",
                 )
 
-            if x_idea._numeric_road is not None:
-                self._evaluate_relevancy(
-                    to_evaluate_list=to_evaluate_list,
-                    to_evaluate_hx_dict=to_evaluate_hx_dict,
-                    to_evaluate_road=x_idea._numeric_road,
-                    road_type="numeric_road",
-                )
-
             if x_idea._range_source_road is not None:
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -432,8 +424,7 @@ class BudUnit:
             )
         parent_road = get_parent_road(idea_road)
         parent_idea = self.get_idea_obj(parent_road)
-        x_idea = self.get_idea_obj(idea_road)
-        return x_idea._numeric_road is None and not parent_idea.is_arithmetic()
+        return not parent_idea.is_arithmetic()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
@@ -765,8 +756,6 @@ class BudUnit:
                 self._create_ideakid_if_empty(road=premise_x.need)
         if posted_idea._range_source_road is not None:
             self._create_ideakid_if_empty(road=posted_idea._range_source_road)
-        if posted_idea._numeric_road is not None:
-            self._create_ideakid_if_empty(road=posted_idea._numeric_road)
 
     def _create_ideakid_if_empty(self, road: RoadUnit):
         if self.idea_exists(road) is False:
@@ -903,7 +892,6 @@ class BudUnit:
         numor: float = None,
         denom: float = None,
         reest: bool = None,
-        numeric_road: RoadUnit = None,
         range_source_road: float = None,
         range_push: RoadUnit = None,
         del_range_push: RoadUnit = None,
@@ -944,7 +932,6 @@ class BudUnit:
             numor=numor,
             denom=denom,
             reest=reest,
-            numeric_road=numeric_road,
             range_source_road=range_source_road,
             range_push=range_push,
             del_range_push=del_range_push,
@@ -1665,7 +1652,6 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _reest=get_obj_from_idea_dict(idearoot_dict, "_reest"),
         _problem_bool=get_obj_from_idea_dict(idearoot_dict, "_problem_bool"),
         _range_source_road=get_obj_from_idea_dict(idearoot_dict, "_range_source_road"),
-        _numeric_road=get_obj_from_idea_dict(idearoot_dict, "_numeric_road"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
         _doerunit=get_obj_from_idea_dict(idearoot_dict, "_doerunit"),
         _healerhold=get_obj_from_idea_dict(idearoot_dict, "_healerhold"),
@@ -1714,8 +1700,6 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
             _range_source_road=get_obj_from_idea_dict(idea_dict, "_range_source_road"),
-            _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
-            # _bud_real_id=x_bud._real_id,
         )
         x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 

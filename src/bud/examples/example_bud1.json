@@ -4271,13 +4271,6 @@
                 "_mass": 1,
                 "_uid": 272
             },
-            "numeric_road_test": {
-                "_begin": 1,
-                "_close": 5,
-                "_label": "numeric_road_test",
-                "_mass": 40,
-                "_numeric_road": "music;month_week"
-            },
             "Seasons": {
                 "_kids": {
                     "Summer": {

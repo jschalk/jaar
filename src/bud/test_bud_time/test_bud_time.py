@@ -112,7 +112,6 @@ def compare_kidless_ideas(src_budunit: BudUnit, x_budunit: BudUnit):
                 print(f"{src_ideaunit._denom=} \t\t {x_ideaunit._denom=}")
                 print(f"{src_ideaunit._addin=} \t\t {x_ideaunit._addin=}")
                 print(f"{src_ideaunit._reest=} \t\t {x_ideaunit._reest=}")
-                print(f"{src_ideaunit._numeric_road=} \t\t {x_ideaunit._numeric_road=}")
                 print(
                     f"{src_ideaunit._range_source_road=} \t\t {x_ideaunit._range_source_road=}"
                 )
