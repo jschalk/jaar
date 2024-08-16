@@ -1143,7 +1143,7 @@ class BudUnit:
                 single_range_idea_list.extend(iter(range_push_idea._kids.values()))
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
-    def tree_math_traverse_calc(self):
+    def tree_range_traverse_calc(self):
         all_idea_list = [self.get_idea_obj(self._real_id)]
         while all_idea_list != []:
             y_idea = all_idea_list.pop()

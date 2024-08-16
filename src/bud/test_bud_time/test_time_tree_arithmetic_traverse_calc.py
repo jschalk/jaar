@@ -63,7 +63,7 @@ def test_BudUnit_get_time_min_from_dt_ReturnsCorrectObj():
     assert get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
 
 
-def test_BudUnit_tree_math_traverse_calc_Sets_day_idea_gogo_calc_stop_calc():
+def test_BudUnit_tree_range_traverse_calc_Sets_day_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -82,14 +82,14 @@ def test_BudUnit_tree_math_traverse_calc_Sets_day_idea_gogo_calc_stop_calc():
     assert not day_idea._stop_calc
 
     # WHEN
-    sue_budunit.tree_math_traverse_calc()
+    sue_budunit.tree_range_traverse_calc()
 
     # THEN
     assert day_idea._gogo_calc == 0
     assert day_idea._stop_calc == 1440
 
 
-def test_BudUnit_tree_math_traverse_calc_Sets_days_idea_gogo_calc_stop_calc():
+def test_BudUnit_tree_range_traverse_calc_Sets_days_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -103,7 +103,7 @@ def test_BudUnit_tree_math_traverse_calc_Sets_days_idea_gogo_calc_stop_calc():
     assert not days_idea._stop_calc
 
     # WHEN
-    sue_budunit.tree_math_traverse_calc()
+    sue_budunit.tree_range_traverse_calc()
 
     # THEN
     assert days_idea._denom == 1440
@@ -111,7 +111,7 @@ def test_BudUnit_tree_math_traverse_calc_Sets_days_idea_gogo_calc_stop_calc():
     assert days_idea._stop_calc == 1022679
 
 
-def test_BudUnit_tree_math_traverse_calc_Sets_weeks_idea_gogo_calc_stop_calc():
+def test_BudUnit_tree_range_traverse_calc_Sets_weeks_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -131,7 +131,7 @@ def test_BudUnit_tree_math_traverse_calc_Sets_weeks_idea_gogo_calc_stop_calc():
     assert not week_idea._stop_calc
 
     # WHEN
-    sue_budunit.tree_math_traverse_calc()
+    sue_budunit.tree_range_traverse_calc()
 
     # THEN
     assert weeks_idea._denom == 10080
@@ -141,7 +141,7 @@ def test_BudUnit_tree_math_traverse_calc_Sets_weeks_idea_gogo_calc_stop_calc():
     assert week_idea._stop_calc == 10080
 
 
-def test_BudUnit_tree_math_traverse_calc_Sets_years_idea_gogo_calc_stop_calc():
+def test_BudUnit_tree_range_traverse_calc_Sets_years_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -161,7 +161,7 @@ def test_BudUnit_tree_math_traverse_calc_Sets_years_idea_gogo_calc_stop_calc():
     assert not year_idea._stop_calc
 
     # WHEN
-    sue_budunit.tree_math_traverse_calc()
+    sue_budunit.tree_range_traverse_calc()
 
     # THEN
     assert not years_idea._denom
