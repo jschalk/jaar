@@ -47,6 +47,8 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     year_idea = ideaunit_shop(year_str(), _reest=True)
     year_idea._gogo_want = 0
     year_idea._stop_want = 525600
+    year_idea._denom = 525600
+    year_idea._reest = True
     x_budunit.set_idea(year_idea, jaja_road)
     jan_idea = ideaunit_shop(jan_str(), _gogo_want=0, _stop_want=44640)
     feb_idea = ideaunit_shop(feb_str(), _gogo_want=44640, _stop_want=84960)

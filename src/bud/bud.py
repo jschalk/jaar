@@ -1330,15 +1330,13 @@ class BudUnit:
 
         cache_idea_list = []
         for kid_label, idea_kid in self._idearoot._kids.items():
-            idearoot_kid_fund_num = alloted_fund_num.get(kid_label)
+            kid_fund_num = alloted_fund_num.get(kid_label)
             if x_idearoot_kid_fund_onset is None:
                 x_idearoot_kid_fund_onset = self._idearoot._fund_onset
-                x_idearoot_kid_fund_cease = (
-                    self._idearoot._fund_onset + idearoot_kid_fund_num
-                )
+                x_idearoot_kid_fund_cease = self._idearoot._fund_onset + kid_fund_num
             else:
                 x_idearoot_kid_fund_onset = x_idearoot_kid_fund_cease
-                x_idearoot_kid_fund_cease += idearoot_kid_fund_num
+                x_idearoot_kid_fund_cease += kid_fund_num
             self._set_kids_attributes(
                 idea_kid=idea_kid,
                 fund_onset=x_idearoot_kid_fund_onset,

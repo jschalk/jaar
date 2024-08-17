@@ -1,11 +1,6 @@
-from src.bud.examples.example_buds import (
-    get_budunit_with_4_levels,
-    get_budunit_with_4_levels_and_2reasons,
-)
+from src.bud.examples.example_buds import get_budunit_with_4_levels_and_2reasons
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.group import awardlink_shop
-from src.bud.graphic import display_ideatree
 from pytest import raises as pytest_raises
 
 

@@ -254,10 +254,7 @@ class IdeaUnit:
         )
 
     def record_active_hx(
-        self,
-        tree_traverse_count: int,
-        prev_active: bool,
-        now_active: bool,
+        self, tree_traverse_count: int, prev_active: bool, now_active: bool
     ):
         if tree_traverse_count == 0:
             self._active_hx = {0: now_active}
@@ -265,13 +262,17 @@ class IdeaUnit:
             self._active_hx[tree_traverse_count] = now_active
 
     def set_factheirs(self, facts: dict[RoadUnit, FactCore]):
-        facts = get_empty_dict_if_none(x_dict=facts)
+        facts_dict = get_empty_dict_if_none(facts)
         self._factheirs = {}
-        for h in facts.values():
-            x_fact = factheir_shop(base=h.base, pick=h.pick, open=h.open, nigh=h.nigh)
-            self.delete_factunit_if_past(factheir=x_fact)
-            x_fact = self.apply_factunit_transformations(factheir=x_fact)
-            self._factheirs[x_fact.base] = x_fact
+        for x_factcore in facts_dict.values():
+            self._set_factheir(x_factcore)
+            print(f"{self.get_road()=} {x_factcore=}")
+
+    def _set_factheir(self, x_fact: FactCore):
+        x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
+        self.delete_factunit_if_past(x_factheir)
+        x_factheir = self.apply_factunit_transformations(x_factheir)
+        self._factheirs[x_factheir.base] = x_factheir
 
     def apply_factunit_transformations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self._factunits.values():

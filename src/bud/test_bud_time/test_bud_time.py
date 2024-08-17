@@ -236,7 +236,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     year_idea = sue_budunit.get_idea_obj(year_road)
     assert year_idea._gogo_want == 0
     assert year_idea._stop_want == 525600
-    assert not year_idea._denom
+    assert year_idea._denom == 525600
     assert year_idea._reest
     assert sue_budunit.idea_exists(years_road)
     assert sue_budunit.idea_exists(jan_road)

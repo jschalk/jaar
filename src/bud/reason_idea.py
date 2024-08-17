@@ -99,15 +99,8 @@ def factunit_shop(
 @dataclass
 class FactHeir(FactCore):
     def transform(self, factunit: FactUnit):
-        if (
-            (
-                self.open is not None
-                and factunit.open is not None
-                and self.nigh is not None
-            )
-            and self.open <= factunit.open
-            and self.nigh >= factunit.open
-        ):
+        x_bool = self.open and factunit.open and self.nigh
+        if x_bool and self.open <= factunit.open and self.nigh >= factunit.open:
             self.open = factunit.open
 
     def is_range(self):

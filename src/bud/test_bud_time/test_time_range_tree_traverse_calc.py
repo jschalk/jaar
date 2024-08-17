@@ -183,7 +183,8 @@ def test_BudUnit_tree_range_traverse_calc_Sets_years_idea_gogo_calc_stop_calc():
     assert not years_idea._stop_calc
     assert sue_budunit.idea_exists(year_road)
     year_idea = sue_budunit.get_idea_obj(year_road)
-    assert not year_idea._denom
+    assert year_idea._denom == 525600
+    assert year_idea._reest
     assert not year_idea._gogo_calc
     assert not year_idea._stop_calc
 
@@ -194,7 +195,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets_years_idea_gogo_calc_stop_calc():
     assert not years_idea._denom
     assert years_idea._gogo_calc == 0
     assert years_idea._stop_calc == 2800
-    assert not year_idea._denom
+    assert year_idea._denom == 525600
     assert year_idea._gogo_calc == 0
     assert year_idea._stop_calc == 525600
     jan_road = sue_budunit.make_road(year_road, jan_str())
