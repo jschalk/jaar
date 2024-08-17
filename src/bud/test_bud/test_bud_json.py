@@ -90,7 +90,12 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
     sue_bud = budunit_shop("Sue")
     x_doerunit = doerunit_shop()
     x_doerunit.set_grouphold(group_id=run_text)
-    sue_bud.edit_idea_attr(doerunit=x_doerunit, road=sue_bud._real_id)
+    sue_bud.edit_idea_attr(sue_bud._real_id, doerunit=x_doerunit)
+    root_idea = sue_bud.get_idea_obj(sue_bud._real_id)
+    x_gogo_want = 5
+    x_stop_want = 11
+    root_idea._gogo_want = x_gogo_want
+    root_idea._stop_want = x_stop_want
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -99,6 +104,8 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
     # THEN
     assert idearoot_dict["_doerunit"] == x_doerunit.get_dict()
     assert idearoot_dict["_doerunit"] == {"_groupholds": [run_text]}
+    assert idearoot_dict.get("_gogo_want") == x_gogo_want
+    assert idearoot_dict.get("_stop_want") == x_stop_want
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
@@ -409,6 +416,28 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
     assert len(json_bud._originunit._originholds) == 1
     assert json_bud._originunit == zia_bud._originunit
+
+
+def test_budunit_get_from_json_ReturnsCorrectIdeaRoot():
+    # ESTABLISH
+    zia_bud = get_budunit_x1_3levels_1reason_1facts()
+    zia_bud.set_max_tree_traverse(23)
+    # root_idea = zia_bud.get_idea_obj(zia_bud.get_idea_obj(zia_bud._real_id))
+    root_idea = zia_bud._idearoot
+    zia_gogo_want = 75
+    zia_stop_want = 77
+    root_idea._gogo_want = zia_gogo_want
+    root_idea._stop_want = zia_stop_want
+
+    # WHEN
+    x_json = zia_bud.get_json()
+    assert x_is_json(x_json) == True
+    json_bud = budunit_get_from_json(x_bud_json=x_json)
+
+    # THEN
+    json_idearoot = json_bud.get_idea_obj(zia_bud._real_id)
+    assert json_idearoot._gogo_want == zia_gogo_want
+    assert json_idearoot._stop_want == zia_stop_want
 
 
 def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_Example():
