@@ -118,8 +118,22 @@ def test_BudUnit_tree_range_traverse_calc_Sets_weeks_idea_gogo_calc_stop_calc():
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
     weeks_road = sue_budunit.make_road(jaja_road, weeks_str())
     week_road = sue_budunit.make_road(jaja_road, week_str())
+    sun_road = sue_budunit.make_road(week_road, get_sun())
+    mon_road = sue_budunit.make_road(week_road, get_mon())
+    tue_road = sue_budunit.make_road(week_road, get_tue())
+    wed_road = sue_budunit.make_road(week_road, get_wed())
+    thu_road = sue_budunit.make_road(week_road, get_thu())
+    fri_road = sue_budunit.make_road(week_road, get_fri())
+    sat_road = sue_budunit.make_road(week_road, get_sat())
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     assert sue_budunit.idea_exists(weeks_road)
+    assert sue_budunit.idea_exists(sun_road)
+    assert sue_budunit.idea_exists(mon_road)
+    assert sue_budunit.idea_exists(tue_road)
+    assert sue_budunit.idea_exists(wed_road)
+    assert sue_budunit.idea_exists(thu_road)
+    assert sue_budunit.idea_exists(fri_road)
+    assert sue_budunit.idea_exists(sat_road)
     weeks_idea = sue_budunit.get_idea_obj(weeks_road)
     assert weeks_idea._denom == 10080
     assert not weeks_idea._gogo_calc
@@ -139,6 +153,20 @@ def test_BudUnit_tree_range_traverse_calc_Sets_weeks_idea_gogo_calc_stop_calc():
     assert weeks_idea._stop_calc == 146097
     assert week_idea._gogo_calc == 0
     assert week_idea._stop_calc == 10080
+    assert sue_budunit.get_idea_obj(sun_road)._gogo_calc == 1440
+    assert sue_budunit.get_idea_obj(mon_road)._gogo_calc == 2880
+    assert sue_budunit.get_idea_obj(tue_road)._gogo_calc == 4320
+    assert sue_budunit.get_idea_obj(wed_road)._gogo_calc == 5760
+    assert sue_budunit.get_idea_obj(thu_road)._gogo_calc == 7200
+    assert sue_budunit.get_idea_obj(fri_road)._gogo_calc == 8640
+    assert sue_budunit.get_idea_obj(sat_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(sun_road)._stop_calc == 2880
+    assert sue_budunit.get_idea_obj(mon_road)._stop_calc == 4320
+    assert sue_budunit.get_idea_obj(tue_road)._stop_calc == 5760
+    assert sue_budunit.get_idea_obj(wed_road)._stop_calc == 7200
+    assert sue_budunit.get_idea_obj(thu_road)._stop_calc == 8640
+    assert sue_budunit.get_idea_obj(fri_road)._stop_calc == 10080
+    assert sue_budunit.get_idea_obj(sat_road)._stop_calc == 1440
 
 
 def test_BudUnit_tree_range_traverse_calc_Sets_years_idea_gogo_calc_stop_calc():
