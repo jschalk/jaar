@@ -885,6 +885,10 @@ class IdeaUnit:
             x_dict["_denom"] = self._denom
         if self._reest is not None:
             x_dict["_reest"] = self._reest
+        if self._gogo_want is not None:
+            x_dict["_gogo_want"] = self._gogo_want
+        if self._stop_want is not None:
+            x_dict["_stop_want"] = self._stop_want
         if self.pledge:
             x_dict["pledge"] = self.pledge
         if self._problem_bool:

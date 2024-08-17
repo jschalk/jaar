@@ -152,12 +152,16 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     x_denom = 14
     x_numor = 15
     x_reest = 16
+    x_gogo_want = 81
+    x_stop_want = 87
     casa_idea._begin = x_begin
     casa_idea._close = x_close
     casa_idea._addin = x_addin
     casa_idea._denom = x_denom
     casa_idea._numor = x_numor
     casa_idea._reest = x_reest
+    casa_idea._gogo_want = x_gogo_want
+    casa_idea._stop_want = x_stop_want
     casa_idea._uid = 17
     casa_idea.add_kid(ideaunit_shop("paper"))
 
@@ -182,6 +186,8 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_numor"] == casa_idea._numor
     assert casa_dict["_denom"] == casa_idea._denom
     assert casa_dict["_reest"] == casa_idea._reest
+    assert casa_dict["_gogo_want"] == casa_idea._gogo_want
+    assert casa_dict["_stop_want"] == casa_idea._stop_want
     assert casa_dict["pledge"] == casa_idea.pledge
     assert casa_dict["_problem_bool"] == casa_idea._problem_bool
     assert casa_dict["_problem_bool"] == x_problem_bool

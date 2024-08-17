@@ -330,6 +330,11 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     # add healerhold to shave ideaunit
     run_healerhold = healerhold_shop({run_text})
     zia_bud.edit_idea_attr(shave_road, healerhold=run_healerhold)
+    shave_idea = zia_bud.get_idea_obj(shave_road)
+    zia_gogo_want = 75
+    zia_stop_want = 77
+    shave_idea._gogo_want = zia_gogo_want
+    shave_idea._stop_want = zia_stop_want
 
     yao_text = "Yao"
     zia_bud._originunit.set_originhold(yao_text, 1)
@@ -399,6 +404,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert len(json_shave_idea._factunits) == 1
     assert zia_shave_idea._problem_bool
     assert json_shave_idea._problem_bool == zia_shave_idea._problem_bool
+    assert json_shave_idea._gogo_want == zia_shave_idea._gogo_want
+    assert json_shave_idea._stop_want == zia_shave_idea._stop_want
 
     assert len(json_bud._originunit._originholds) == 1
     assert json_bud._originunit == zia_bud._originunit

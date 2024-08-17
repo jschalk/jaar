@@ -1667,6 +1667,8 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
         )
+        x_ideakid._gogo_want = get_obj_from_idea_dict(idea_dict, "_gogo_want")
+        x_ideakid._stop_want = get_obj_from_idea_dict(idea_dict, "_stop_want")
         x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 
 
