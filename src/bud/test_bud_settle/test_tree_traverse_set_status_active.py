@@ -456,11 +456,11 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     # print(f"{len(casa_idea._reasonheirs)=}")
     # print(f"{len(twee_idea._reasonheirs)=}")
 
-    # assert YR.get_active(road=bird_idea, idea_dict=idea_dict) == True
+    # assert YR.get_active(road=bird_idea, idea_dict=idea_dict) is True
 
     # yao_budunit.set_fact(base=f"{yao_budunit._real_id},weekdays", pick=f"{yao_budunit._real_id},weekdays,Tuesday")
     # idea_dict = yao_budunit.get_idea_dict()
-    # assert YR.get_active(road=bird_idea, idea_dict=idea_dict) == True
+    # assert YR.get_active(road=bird_idea, idea_dict=idea_dict) is True
 
     # yao_budunit.set_fact(base=f"{yao_budunit._real_id},weekdays", pick=f"{yao_budunit._real_id},weekdays,Wednesday")
     # idea_dict = yao_budunit.get_idea_dict()

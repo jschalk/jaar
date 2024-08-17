@@ -103,8 +103,8 @@ def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
     files_dict = dir_files(dir_path=env_dir, delete_extensions=True, include_dirs=True)
 
     # THEN
-    assert files_dict.get(x1_name) == True
-    assert files_dict.get(x2_name) == True
+    assert files_dict.get(x1_name) is True
+    assert files_dict.get(x2_name) is True
 
 
 def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
@@ -133,7 +133,7 @@ def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
     with pytest_raises(Exception) as excinfo:
         files_dict[x1_file_name]
     assert str(excinfo.value) == "'x1.txt'"
-    assert files_dict.get(x2_name) == True
+    assert files_dict.get(x2_name) is True
     assert len(files_dict) == 1
 
 

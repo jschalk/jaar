@@ -369,7 +369,7 @@ def test_lemmas_is_lemmas_incomplete_ReturnsCorrectBoolWhenPopulated():
     assert len(z_lemmas.lemmas) == 2
     print(f"2 transition: {tr1_src_fact.base=} {tr1_lemma.eval_status=}")
     print(f"2 transition: {tr2_src_fact.base=} {tr2_lemma.eval_status=}")
-    assert z_lemmas.is_lemmas_evaluated() == True
+    assert z_lemmas.is_lemmas_evaluated() is True
 
 
 def test_lemmas_is_lemmas_incomplete_ReturnsCorrectBoolWhenEmpty():
@@ -380,4 +380,4 @@ def test_lemmas_is_lemmas_incomplete_ReturnsCorrectBoolWhenEmpty():
 
     # WHEN / THEN
     assert not z_lemmas.lemmas
-    assert z_lemmas.is_lemmas_evaluated() == True
+    assert z_lemmas.is_lemmas_evaluated() is True

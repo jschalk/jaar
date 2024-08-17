@@ -417,4 +417,4 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     debtit_score_dict = acctunit_columns.get("debtit_score")
     assert len(acct_id_dict) == 2
     assert debtit_score_dict.get(sqlite_datatype_text()) == "INTEGER"
-    assert debtit_score_dict.get("nullable") == True
+    assert debtit_score_dict.get("nullable") is True

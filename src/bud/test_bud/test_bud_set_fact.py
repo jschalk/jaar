@@ -21,7 +21,7 @@ def test_BudUnit_set_fact_IsAbleToEditFactUnitAnyAncestor_Idea_1():
     mail_road = yao_bud.make_l1_road("obtain mail")
     idea_dict = yao_bud.get_idea_dict()
     mail_idea = idea_dict.get(mail_road)
-    assert mail_idea.pledge == True
+    assert mail_idea.pledge is True
     assert mail_idea._task is False
 
     # WHEN
@@ -30,8 +30,8 @@ def test_BudUnit_set_fact_IsAbleToEditFactUnitAnyAncestor_Idea_1():
     # THEN
     idea_dict = yao_bud.get_idea_dict()
     mail_idea = idea_dict.get(mail_road)
-    assert mail_idea.pledge == True
-    assert mail_idea._task == True
+    assert mail_idea.pledge
+    assert mail_idea._task
 
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():

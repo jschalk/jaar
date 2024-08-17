@@ -107,7 +107,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     wkday_facts = {wkday_fact.base: wkday_fact}
     wkday_reason.set_status(factheirs=wkday_facts)
     # THEN
-    assert wkday_reason._status == True
+    assert wkday_reason._status is True
 
     # ESTABLISH
     thu_premise = premiseunit_shop(need=thu_road)
@@ -119,7 +119,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     noon_facts = {noon_fact.base: noon_fact}
     two_reason.set_status(factheirs=noon_facts)
     # THEN
-    assert two_reason._status == True
+    assert two_reason._status is True
 
     # ESTABLISH
     two_reason.clear_status()
@@ -172,7 +172,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
     week_reason.set_status(factheirs=None)
 
     # THEN
-    assert week_reason._status == True
+    assert week_reason._status is True
 
 
 def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
@@ -187,7 +187,7 @@ def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
     wkday_reason.set_status(factheirs=None)
 
     # THEN
-    assert wkday_reason._status == True
+    assert wkday_reason._status is True
 
 
 def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
@@ -344,15 +344,15 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_5_to_8_facts = {range_5_to_8_fact.base: range_5_to_8_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_8_facts)
     # THEN
-    assert range_3_to_6_reason._status == True
-    assert range_3_to_6_reason._task == True
+    assert range_3_to_6_reason._status is True
+    assert range_3_to_6_reason._task is True
 
     # WHEN
     range_5_to_6_fact = factheir_shop(day_road, day_road, open=5, nigh=6)
     range_5_to_6_facts = {range_5_to_6_fact.base: range_5_to_6_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_6_facts)
     # THEN
-    assert range_3_to_6_reason._status == True
+    assert range_3_to_6_reason._status is True
     assert range_3_to_6_reason._task is False
 
     # WHEN

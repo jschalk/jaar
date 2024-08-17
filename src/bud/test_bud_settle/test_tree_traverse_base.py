@@ -148,12 +148,12 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     assert casa_idea._descendant_pledge_count == 0
     assert mon_idea._descendant_pledge_count == 0
 
-    assert mon_idea._all_acct_cred == True
-    assert mon_idea._all_acct_debt == True
-    assert casa_idea._all_acct_cred == True
-    assert casa_idea._all_acct_debt == True
-    assert sue_bud._idearoot._all_acct_cred == True
-    assert sue_bud._idearoot._all_acct_debt == True
+    assert mon_idea._all_acct_cred is True
+    assert mon_idea._all_acct_debt is True
+    assert casa_idea._all_acct_cred is True
+    assert casa_idea._all_acct_debt is True
+    assert sue_bud._idearoot._all_acct_cred is True
+    assert sue_bud._idearoot._all_acct_debt is True
 
 
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
@@ -168,8 +168,8 @@ def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
 
     # THEN
     assert yao_bud._idearoot._descendant_pledge_count == 0
-    assert yao_bud._idearoot._all_acct_cred == True
-    assert yao_bud._idearoot._all_acct_debt == True
+    assert yao_bud._idearoot._all_acct_cred is True
+    assert yao_bud._idearoot._all_acct_debt is True
 
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
@@ -209,12 +209,12 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     assert casa_idea._descendant_pledge_count == 1
     assert casa_idea._kids[email_text]._descendant_pledge_count == 0
     assert mon_idea._descendant_pledge_count == 0
-    assert x_idearoot._all_acct_cred == True
-    assert x_idearoot._all_acct_debt == True
-    assert casa_idea._all_acct_cred == True
-    assert casa_idea._all_acct_debt == True
-    assert mon_idea._all_acct_cred == True
-    assert mon_idea._all_acct_debt == True
+    assert x_idearoot._all_acct_cred is True
+    assert x_idearoot._all_acct_debt is True
+    assert casa_idea._all_acct_cred is True
+    assert casa_idea._all_acct_debt is True
+    assert mon_idea._all_acct_cred is True
+    assert mon_idea._all_acct_debt is True
 
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
@@ -256,15 +256,15 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     assert casa_idea._all_acct_debt is False
     assert casa_idea._kids[email_text]._all_acct_cred is False
     assert casa_idea._kids[email_text]._all_acct_debt is False
-    assert casa_idea._kids[vacuum_text]._all_acct_cred == True
-    assert casa_idea._kids[vacuum_text]._all_acct_debt == True
+    assert casa_idea._kids[vacuum_text]._all_acct_cred is True
+    assert casa_idea._kids[vacuum_text]._all_acct_debt is True
     week_idea = sue_bud._idearoot._kids[week_text]
-    assert week_idea._all_acct_cred == True
-    assert week_idea._all_acct_debt == True
-    assert week_idea._kids[mon_text]._all_acct_cred == True
-    assert week_idea._kids[mon_text]._all_acct_debt == True
-    assert week_idea._kids[tue_text]._all_acct_cred == True
-    assert week_idea._kids[tue_text]._all_acct_debt == True
+    assert week_idea._all_acct_cred is True
+    assert week_idea._all_acct_debt is True
+    assert week_idea._kids[mon_text]._all_acct_cred is True
+    assert week_idea._kids[mon_text]._all_acct_debt is True
+    assert week_idea._kids[tue_text]._all_acct_cred is True
+    assert week_idea._kids[tue_text]._all_acct_debt is True
 
 
 def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():

@@ -280,7 +280,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     assert len(zia_bud.get_idea_dict()) == 4
     assert len(zia_bud.get_agenda_dict()) == 1
     print(f"{zia_bud.get_agenda_dict().keys()=}")
-    assert zia_bud.get_agenda_dict().get(run_road)._task == True
+    assert zia_bud.get_agenda_dict().get(run_road)._task is True
 
     # WHEN
     zia_bud.set_agenda_task_complete(task_road=run_road, base=day_road)

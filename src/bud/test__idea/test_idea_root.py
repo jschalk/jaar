@@ -12,7 +12,7 @@ def test_ideaunit_shop_With_root_ReturnsCorrectObj():
     assert x_idearoot._root
     assert x_idearoot._label == root_label()
     assert x_idearoot._kids == {}
-    assert x_idearoot._root == True
+    assert x_idearoot._root is True
 
 
 def test_IdeaUnit_set_label_get_default_real_id_roadnode_DoesNotRaisesError():

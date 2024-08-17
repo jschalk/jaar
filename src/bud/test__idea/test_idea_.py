@@ -85,7 +85,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._awardlines == {}
     assert x_ideaunit._awardlinks == {}
     assert x_ideaunit._awardheirs == {}
-    assert x_ideaunit._is_expanded == True
+    assert x_ideaunit._is_expanded is True
     assert x_ideaunit._factheirs == {}
     assert x_ideaunit._factunits == {}
     assert x_ideaunit._healerhold == healerhold_shop()

@@ -554,14 +554,14 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     _is_expanded = sue_bud._idearoot._kids[casa_text]._is_expanded
     assert _is_expanded == "what"
     sue_bud.edit_idea_attr(road=casa_road, is_expanded=True)
-    assert sue_bud._idearoot._kids[casa_text]._is_expanded == True
+    assert sue_bud._idearoot._kids[casa_text]._is_expanded is True
 
     # pledge: dict = None,
     sue_bud._idearoot._kids[casa_text].pledge = "funfun3"
     pledge = sue_bud._idearoot._kids[casa_text].pledge
     assert pledge == "funfun3"
     sue_bud.edit_idea_attr(road=casa_road, pledge=True)
-    assert sue_bud._idearoot._kids[casa_text].pledge == True
+    assert sue_bud._idearoot._kids[casa_text].pledge is True
 
     # _healerhold:
     sue_bud._idearoot._kids[casa_text]._healerhold = "fun3rol"

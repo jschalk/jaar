@@ -223,7 +223,7 @@ class Lemmas:
         )
 
     def is_lemmas_evaluated(self) -> bool:
-        return sum(lemma.eval_status == True for lemma in self.lemmas.values()) == len(
+        return sum(lemma.eval_status is True for lemma in self.lemmas.values()) == len(
             self.lemmas
         )
 

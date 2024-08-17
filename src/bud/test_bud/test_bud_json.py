@@ -349,7 +349,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
     # WHEN
     x_json = zia_bud.get_json()
-    assert x_is_json(x_json) == True
+    assert x_is_json(x_json) is True
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN
@@ -431,7 +431,7 @@ def test_budunit_get_from_json_ReturnsCorrectIdeaRoot():
 
     # WHEN
     x_json = zia_bud.get_json()
-    assert x_is_json(x_json) == True
+    assert x_is_json(x_json) is True
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN

@@ -122,9 +122,9 @@ def test_agenda_returned_WhenNoReasonsExist():
 
     # THEN
     casa_road = sue_bud.make_l1_road("casa")
-    assert sue_bud.get_idea_obj(casa_road)._task == True
+    assert sue_bud.get_idea_obj(casa_road)._task is True
     cat_road = sue_bud.make_l1_road("cat have dinner")
-    assert sue_bud.get_idea_obj(cat_road)._task == True
+    assert sue_bud.get_idea_obj(cat_road)._task is True
 
 
 def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
@@ -544,7 +544,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
     reasonunit_casa = commute_idea._reasonunits.get(casa_road)
     assert reasonunit_casa.base == casa_road
     assert len(reasonunit_casa.premises) == 0
-    assert reasonunit_casa.base_idea_active_requisite == True
+    assert reasonunit_casa.base_idea_active_requisite is True
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -629,10 +629,10 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     sue_bud.set_fact(base=weekdays_road, pick=thu_road)
     print("after changing fact")
     sue_bud.settle_bud()
-    assert casa_idea._active == True
+    assert casa_idea._active is True
 
     # THEN
-    assert commute_idea._active == True
+    assert commute_idea._active is True
 
 
 def test_BudUnit_settle_bud_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
