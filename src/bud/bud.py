@@ -1311,6 +1311,8 @@ class BudUnit:
 
         while not self._rational and self._tree_traverse_count < max_count:
             self._clear_bud_base_metrics()
+            self._pre_tree_traverse_cred_debt_reset()
+            self._set_root_attributes(econ_exceptions)
             self._execute_tree_traverse(econ_exceptions)
             self._check_if_any_idea_active_status_has_altered()
             self._tree_traverse_count += 1
@@ -1318,9 +1320,6 @@ class BudUnit:
         self._after_all_tree_traverses_set_healerhold_share()
 
     def _execute_tree_traverse(self, econ_exceptions: bool = False):
-        self._pre_tree_traverse_cred_debt_reset()
-        self._set_root_attributes(econ_exceptions)
-
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid._mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset

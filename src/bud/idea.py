@@ -266,7 +266,6 @@ class IdeaUnit:
         self._factheirs = {}
         for x_factcore in facts_dict.values():
             self._set_factheir(x_factcore)
-            print(f"{self.get_road()=} {x_factcore=}")
 
     def _set_factheir(self, x_fact: FactCore):
         x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
@@ -744,11 +743,7 @@ class IdeaUnit:
         prev_to_now_active = deepcopy(self._active)
         self._active = self._create_active(bud_groupboxs, bud_owner_id)
         self._set_idea_task()
-        self.record_active_hx(
-            tree_traverse_count=tree_traverse_count,
-            prev_active=prev_to_now_active,
-            now_active=self._active,
-        )
+        self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
     def _set_idea_task(self):
         self._task = False
@@ -765,28 +760,29 @@ class IdeaUnit:
         self, bud_groupboxs: dict[GroupID, GroupBox], bud_owner_id: AcctID
     ) -> bool:
         self.set_reasonheirs_status()
-        x_bool = self._are_all_reasonheir_active_true()
+        active_bool = self._are_all_reasonheir_active_true()
         if (
-            x_bool
+            active_bool
             and bud_groupboxs != {}
             and bud_owner_id is not None
             and self._doerheir._groupholds != {}
         ):
             self._doerheir.set_owner_id_doer(bud_groupboxs, bud_owner_id)
             if self._doerheir._owner_id_doer is False:
-                x_bool = False
-        return x_bool
+                active_bool = False
+        return active_bool
 
     def _are_all_reasonheir_active_true(self) -> bool:
-        return all(
-            x_reasonheir._status != False for x_reasonheir in self._reasonheirs.values()
-        )
+        x_reasonheirs = self._reasonheirs.values()
+        return all(x_reasonheir._status != False for x_reasonheir in x_reasonheirs)
 
     def clear_reasonheirs_status(self):
         for reason in self._reasonheirs.values():
             reason.clear_status()
 
-    def _coalesce_with_reasonunits(self, reasonheirs: dict[RoadUnit, ReasonHeir]):
+    def _coalesce_with_reasonunits(
+        self, reasonheirs: dict[RoadUnit, ReasonHeir]
+    ) -> dict[RoadUnit, ReasonHeir]:
         reasonheirs_new = get_empty_dict_if_none(x_dict=deepcopy(reasonheirs))
         reasonheirs_new.update(self._reasonunits)
         return reasonheirs_new
@@ -796,23 +792,20 @@ class IdeaUnit:
         bud_idea_dict: dict[RoadUnit,],
         reasonheirs: dict[RoadUnit, ReasonCore] = None,
     ):
-        if reasonheirs is None:
+        if not reasonheirs:
             reasonheirs = self._reasonheirs
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
 
         self._reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
-            new_reasonheir = reasonheir_shop(
-                base=old_reasonheir.base,
-                base_idea_active_requisite=old_reasonheir.base_idea_active_requisite,
-            )
+            old_base = old_reasonheir.base
+            old_active_requisite = old_reasonheir.base_idea_active_requisite
+            new_reasonheir = reasonheir_shop(old_base, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            # if bud_idea_dict is not None:
             base_idea = bud_idea_dict.get(old_reasonheir.base)
             if base_idea is not None:
                 new_reasonheir.set_base_idea_active_value(base_idea._active)
-
             self._reasonheirs[new_reasonheir.base] = new_reasonheir
 
     def set_idearoot_inherit_reasonheirs(self):
@@ -828,19 +821,19 @@ class IdeaUnit:
     def get_reasonunits_dict(self):
         return {base: reason.get_dict() for base, reason in self._reasonunits.items()}
 
-    def get_kids_dict(self):
+    def get_kids_dict(self) -> dict[GroupID,]:
         return {c_road: kid.get_dict() for c_road, kid in self._kids.items()}
 
-    def get_awardlinks_dict(self):
+    def get_awardlinks_dict(self) -> dict[GroupID, dict]:
+        x_awardlinks = self._awardlinks.items()
         return {
-            x_group_id: awardlink.get_dict()
-            for x_group_id, awardlink in self._awardlinks.items()
+            x_group_id: awardlink.get_dict() for x_group_id, awardlink in x_awardlinks
         }
 
-    def is_kidless(self):
+    def is_kidless(self) -> bool:
         return self._kids == {}
 
-    def is_math(self):
+    def is_math(self) -> bool:
         return self._begin is not None and self._close is not None
 
     def set_range_push(self, range_push_road: RoadUnit):
@@ -937,7 +930,7 @@ class IdeaUnit:
             bud_groupboxs=bud_groupboxs,
         )
 
-    def get_doerunit_dict(self):
+    def get_doerunit_dict(self) -> dict:
         return self._doerunit.get_dict()
 
 
