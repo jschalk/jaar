@@ -23,33 +23,36 @@ class Lemmas:
 
     def _get_loop_range_calc_fact_attr(
         self,
-        idea_begin: float,
-        idea_close: float,
+        idea_gogo_want: float,
+        idea_stop_want: float,
         src_open: float,
         src_nigh: float,
-        src_idea_begin: float,
-        src_idea_close: float,
+        src_idea_gogo_want: float,
+        src_idea_stop_want: float,
     ) -> RoadUnit:
         fact_open = None
         fact_nigh = None
 
         # if src_idea and fact_idea have equal range return equal src fact range
-        if idea_begin == src_idea_begin and idea_close == src_idea_close:
+        if (
+            idea_gogo_want == src_idea_gogo_want
+            and idea_stop_want == src_idea_stop_want
+        ):
             fact_open = src_open
             fact_nigh = src_nigh
         else:
             # create both ranges and get calc ranges for both. Return the not null one
             r1_open, r1_nigh = self._get_range_calc_fact_attr(
-                idea_begin=idea_begin,
-                idea_close=idea_close,
-                src_open=src_idea_begin,
+                idea_gogo_want=idea_gogo_want,
+                idea_stop_want=idea_stop_want,
+                src_open=src_idea_gogo_want,
                 src_nigh=src_nigh,
             )
             r2_open, r2_nigh = self._get_range_calc_fact_attr(
-                idea_begin=idea_begin,
-                idea_close=idea_close,
+                idea_gogo_want=idea_gogo_want,
+                idea_stop_want=idea_stop_want,
                 src_open=src_open,
-                src_nigh=src_idea_close,
+                src_nigh=src_idea_stop_want,
             )
             # # if both are not null return r1_nigh as fact_open and r2_open as fact_nigh
             # if r1_open is not None and r1_nigh is not None and r2_open is not None and r2_nigh is not None:
@@ -66,101 +69,105 @@ class Lemmas:
 
     def _get_range_calc_fact_attr(
         self,
-        idea_begin,
-        idea_close,
+        idea_gogo_want,
+        idea_stop_want,
         src_open,
         src_nigh,
     ) -> set[float, float]:
         fact_open = None
         fact_nigh = None
-        if src_open <= idea_begin and src_nigh >= idea_close:
+        if src_open <= idea_gogo_want and src_nigh >= idea_stop_want:
             # if parent range contains all idea range
-            fact_open = idea_begin
-            fact_nigh = idea_close
-        elif src_open >= idea_begin and src_nigh < idea_close:
+            fact_open = idea_gogo_want
+            fact_nigh = idea_stop_want
+        elif src_open >= idea_gogo_want and src_nigh < idea_stop_want:
             # if parent range exists inside idea range
             fact_open = src_open
             fact_nigh = src_nigh
-        elif src_open >= idea_begin and src_open < idea_close and src_nigh > idea_close:
-            # if parent range begins inside idea range and ends outside idea range
+        elif (
+            src_open >= idea_gogo_want
+            and src_open < idea_stop_want
+            and src_nigh > idea_stop_want
+        ):
+            # if parent range gogo_wants inside idea range and ends outside idea range
             fact_open = src_open
-            fact_nigh = idea_close
-        elif src_open <= idea_begin and src_nigh > idea_begin:
-            fact_open = idea_begin
+            fact_nigh = idea_stop_want
+        elif src_open <= idea_gogo_want and src_nigh > idea_gogo_want:
+            fact_open = idea_gogo_want
             fact_nigh = src_nigh
-        # if src_open <= idea_begin and src_nigh >= idea_close:
+        # if src_open <= idea_gogo_want and src_nigh >= idea_stop_want:
         #     # if parent range contains all idea range
-        #     fact_open = idea_begin
-        #     fact_nigh = idea_close
-        # elif src_open >= idea_begin and src_nigh < idea_close:
+        #     fact_open = idea_gogo_want
+        #     fact_nigh = idea_stop_want
+        # elif src_open >= idea_gogo_want and src_nigh < idea_stop_want:
         #     # if parent range exists inside idea range
         #     fact_open = src_open
         #     fact_nigh = src_nigh
-        # elif src_open >= idea_begin and src_open < idea_close and src_nigh > idea_close:
-        #     # if parent range begins inside idea range and ends outside idea range
+        # elif src_open >= idea_gogo_want and src_open < idea_stop_want and src_nigh > idea_stop_want:
+        #     # if parent range gogo_wants inside idea range and ends outside idea range
         #     fact_open = src_open
-        #     fact_nigh = idea_close
+        #     fact_nigh = idea_stop_want
         # elif (
-        #     # if parent range begins outside idea range and ends inside idea range
-        #     src_open <= idea_begin
-        #     and src_nigh > idea_begin
-        #     and src_nigh < idea_close
+        #     # if parent range gogo_wants outside idea range and ends inside idea range
+        #     src_open <= idea_gogo_want
+        #     and src_nigh > idea_gogo_want
+        #     and src_nigh < idea_stop_want
         # ):
-        #     fact_open = idea_begin
+        #     fact_open = idea_gogo_want
         #     fact_nigh = src_nigh
 
         return fact_open, fact_nigh
 
     def _get_multipler_calc_fact_attr(
         self,
-        idea_begin,
-        idea_close,
+        idea_gogo_want,
+        idea_stop_want,
         idea_numor,
         idea_denom,
         src_open,
         src_nigh,
     ) -> set[float, float]:
         return self._get_range_calc_fact_attr(
-            idea_begin=idea_begin,
-            idea_close=idea_close,
+            idea_gogo_want=idea_gogo_want,
+            idea_stop_want=idea_stop_want,
             src_open=src_open * idea_numor / idea_denom,
             src_nigh=src_nigh * idea_numor / idea_denom,
         )
 
     def _get_remainder_calc_fact_attr(
         self,
-        idea_begin,
-        idea_close,
+        idea_gogo_want,
+        idea_stop_want,
         src_open,
         src_nigh,
     ):
         fact_open = None
         fact_nigh = None
 
-        if src_nigh - src_open >= idea_close:  # - idea_begin:
-            fact_open = idea_begin
-            fact_nigh = idea_close
+        if src_nigh - src_open >= idea_stop_want:  # - idea_gogo_want:
+            fact_open = idea_gogo_want
+            fact_nigh = idea_stop_want
         else:
-            fact_open = src_open % idea_close
-            fact_nigh = src_nigh % idea_close
+            fact_open = src_open % idea_stop_want
+            fact_nigh = src_nigh % idea_stop_want
 
         return fact_open, fact_nigh
 
     def _create_new_fact(
         self, x_idea: IdeaUnit, src_fact: FactUnit, src_idea: IdeaUnit
     ) -> FactUnit:  # sourcery skip: remove-redundant-if
-        if x_idea._begin is None or x_idea._close is None:
+        if x_idea._gogo_want is None or x_idea._stop_want is None:
             raise InvalidLemmaException(f"Idea {x_idea.get_road()} does not have range")
 
-        idea_begin = x_idea._begin
-        idea_close = x_idea._close
+        idea_gogo_want = x_idea._gogo_want
+        idea_stop_want = x_idea._stop_want
         idea_numor = x_idea._numor
         idea_denom = x_idea._denom
         idea_reest = x_idea._reest
         src_open = src_fact.open
         src_nigh = src_fact.nigh
-        src_idea_begin = src_idea._begin
-        src_idea_close = src_idea._close
+        src_idea_gogo_want = src_idea._gogo_want
+        src_idea_stop_want = src_idea._stop_want
         idea_road = x_idea.get_road()
 
         fact_open = None
@@ -171,18 +178,18 @@ class Lemmas:
             fact_nigh = None
         elif (idea_numor is None or idea_denom is None) and src_open > src_nigh:
             fact_open, fact_nigh = self._get_loop_range_calc_fact_attr(
-                idea_begin=idea_begin,
-                idea_close=idea_close,
+                idea_gogo_want=idea_gogo_want,
+                idea_stop_want=idea_stop_want,
                 src_open=src_open,
                 src_nigh=src_nigh,
-                src_idea_begin=src_idea_begin,
-                src_idea_close=src_idea_close,
+                src_idea_gogo_want=src_idea_gogo_want,
+                src_idea_stop_want=src_idea_stop_want,
             )
 
         elif idea_numor is None or idea_denom is None:
             fact_open, fact_nigh = self._get_range_calc_fact_attr(
-                idea_begin=idea_begin,
-                idea_close=idea_close,
+                idea_gogo_want=idea_gogo_want,
+                idea_stop_want=idea_stop_want,
                 src_open=src_open,
                 src_nigh=src_nigh,
             )
@@ -192,8 +199,8 @@ class Lemmas:
             and idea_reest in (False, None)
         ):
             fact_open, fact_nigh = self._get_multipler_calc_fact_attr(
-                idea_begin=idea_begin,
-                idea_close=idea_close,
+                idea_gogo_want=idea_gogo_want,
+                idea_stop_want=idea_stop_want,
                 idea_numor=idea_numor,
                 idea_denom=idea_denom,
                 src_open=src_open,
@@ -201,8 +208,8 @@ class Lemmas:
             )
         elif idea_numor is not None and idea_denom is not None and idea_reest:
             fact_open, fact_nigh = self._get_remainder_calc_fact_attr(
-                idea_begin=idea_begin,
-                idea_close=idea_close,
+                idea_gogo_want=idea_gogo_want,
+                idea_stop_want=idea_stop_want,
                 src_open=src_open,
                 src_nigh=src_nigh,
             )

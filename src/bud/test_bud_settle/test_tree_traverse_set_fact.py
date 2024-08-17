@@ -380,13 +380,13 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1(
     age5th_text = "age5th"
     age6th_text = "age6th"
     age7th_text = "age7th"
-    age1st_idea = ideaunit_shop(age1st_text, _begin=0, _close=20)
-    age2nd_idea = ideaunit_shop(age2nd_text, _begin=20, _close=40)
-    age3rd_idea = ideaunit_shop(age3rd_text, _begin=40, _close=60)
-    age4th_idea = ideaunit_shop(age4th_text, _begin=60, _close=80)
-    age5th_idea = ideaunit_shop(age5th_text, _begin=80, _close=100)
-    age6th_idea = ideaunit_shop(age6th_text, _begin=100, _close=120)
-    age7th_idea = ideaunit_shop(age7th_text, _begin=120, _close=140)
+    age1st_idea = ideaunit_shop(age1st_text, _gogo_want=0, _stop_want=20)
+    age2nd_idea = ideaunit_shop(age2nd_text, _gogo_want=20, _stop_want=40)
+    age3rd_idea = ideaunit_shop(age3rd_text, _gogo_want=40, _stop_want=60)
+    age4th_idea = ideaunit_shop(age4th_text, _gogo_want=60, _stop_want=80)
+    age5th_idea = ideaunit_shop(age5th_text, _gogo_want=80, _stop_want=100)
+    age6th_idea = ideaunit_shop(age6th_text, _gogo_want=100, _stop_want=120)
+    age7th_idea = ideaunit_shop(age7th_text, _gogo_want=120, _stop_want=140)
     sue_bud.set_idea(age1st_idea, parent_road=time_road)
     sue_bud.set_idea(age2nd_idea, parent_road=time_road)
     sue_bud.set_idea(age3rd_idea, parent_road=time_road)
@@ -441,13 +441,13 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2(
     age5th_text = "age5th"
     age6th_text = "age6th"
     age7th_text = "age7th"
-    age1st_idea = ideaunit_shop(age1st_text, _begin=0, _close=20)
-    age2nd_idea = ideaunit_shop(age2nd_text, _begin=20, _close=40)
-    age3rd_idea = ideaunit_shop(age3rd_text, _begin=40, _close=60)
-    age4th_idea = ideaunit_shop(age4th_text, _begin=60, _close=80)
-    age5th_idea = ideaunit_shop(age5th_text, _begin=80, _close=100)
-    age6th_idea = ideaunit_shop(age6th_text, _begin=100, _close=120)
-    age7th_idea = ideaunit_shop(age7th_text, _begin=120, _close=140)
+    age1st_idea = ideaunit_shop(age1st_text, _gogo_want=0, _stop_want=20)
+    age2nd_idea = ideaunit_shop(age2nd_text, _gogo_want=20, _stop_want=40)
+    age3rd_idea = ideaunit_shop(age3rd_text, _gogo_want=40, _stop_want=60)
+    age4th_idea = ideaunit_shop(age4th_text, _gogo_want=60, _stop_want=80)
+    age5th_idea = ideaunit_shop(age5th_text, _gogo_want=80, _stop_want=100)
+    age6th_idea = ideaunit_shop(age6th_text, _gogo_want=100, _stop_want=120)
+    age7th_idea = ideaunit_shop(age7th_text, _gogo_want=120, _stop_want=140)
     sue_bud.set_idea(age1st_idea, parent_road=time_road)
     sue_bud.set_idea(age2nd_idea, parent_road=time_road)
     sue_bud.set_idea(age3rd_idea, parent_road=time_road)
@@ -500,13 +500,13 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     age5th_text = "age5th"
     age6th_text = "age6th"
     age7th_text = "age7th"
-    age1st_idea = ideaunit_shop(age1st_text, _begin=0, _close=20)
-    age2nd_idea = ideaunit_shop(age2nd_text, _begin=20, _close=40)
-    age3rd_idea = ideaunit_shop(age3rd_text, _begin=40, _close=60)
-    age4th_idea = ideaunit_shop(age4th_text, _begin=60, _close=80)
-    age5th_idea = ideaunit_shop(age5th_text, _begin=80, _close=100)
-    age6th_idea = ideaunit_shop(age6th_text, _begin=100, _close=120)
-    age7th_idea = ideaunit_shop(age7th_text, _begin=120, _close=140)
+    age1st_idea = ideaunit_shop(age1st_text, _gogo_want=0, _stop_want=20)
+    age2nd_idea = ideaunit_shop(age2nd_text, _gogo_want=20, _stop_want=40)
+    age3rd_idea = ideaunit_shop(age3rd_text, _gogo_want=40, _stop_want=60)
+    age4th_idea = ideaunit_shop(age4th_text, _gogo_want=60, _stop_want=80)
+    age5th_idea = ideaunit_shop(age5th_text, _gogo_want=80, _stop_want=100)
+    age6th_idea = ideaunit_shop(age6th_text, _gogo_want=100, _stop_want=120)
+    age7th_idea = ideaunit_shop(age7th_text, _gogo_want=120, _stop_want=140)
     sue_bud.set_idea(age1st_idea, parent_road=time_road)
     sue_bud.set_idea(age2nd_idea, parent_road=time_road)
     sue_bud.set_idea(age3rd_idea, parent_road=time_road)
@@ -520,10 +520,10 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     a2e2nd_text = "a1_era2nd"
     a2e3rd_text = "a1_era3rd"
     a2e4th_text = "a1_era4th"
-    a2e1st_idea = ideaunit_shop(a2e1st_text, _begin=20, _close=30)
-    a2e2nd_idea = ideaunit_shop(a2e2nd_text, _begin=30, _close=34)
-    a2e3rd_idea = ideaunit_shop(a2e3rd_text, _begin=34, _close=38)
-    a2e4th_idea = ideaunit_shop(a2e4th_text, _begin=38, _close=40)
+    a2e1st_idea = ideaunit_shop(a2e1st_text, _gogo_want=20, _stop_want=30)
+    a2e2nd_idea = ideaunit_shop(a2e2nd_text, _gogo_want=30, _stop_want=34)
+    a2e3rd_idea = ideaunit_shop(a2e3rd_text, _gogo_want=34, _stop_want=38)
+    a2e4th_idea = ideaunit_shop(a2e4th_text, _gogo_want=38, _stop_want=40)
     sue_bud.set_idea(a2e1st_idea, parent_road=a2_road)
     sue_bud.set_idea(a2e2nd_idea, parent_road=a2_road)
     sue_bud.set_idea(a2e3rd_idea, parent_road=a2_road)
@@ -534,10 +534,10 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
     a3e2nd_text = "a3_era2nd"
     a3e3rd_text = "a3_era3rd"
     a3e4th_text = "a3_era4th"
-    a3e1st_idea = ideaunit_shop(a3e1st_text, _begin=40, _close=45)
-    a3e2nd_idea = ideaunit_shop(a3e2nd_text, _begin=45, _close=50)
-    a3e3rd_idea = ideaunit_shop(a3e3rd_text, _begin=55, _close=58)
-    a3e4th_idea = ideaunit_shop(a3e4th_text, _begin=58, _close=60)
+    a3e1st_idea = ideaunit_shop(a3e1st_text, _gogo_want=40, _stop_want=45)
+    a3e2nd_idea = ideaunit_shop(a3e2nd_text, _gogo_want=45, _stop_want=50)
+    a3e3rd_idea = ideaunit_shop(a3e3rd_text, _gogo_want=55, _stop_want=58)
+    a3e4th_idea = ideaunit_shop(a3e4th_text, _gogo_want=58, _stop_want=60)
     sue_bud.set_idea(a3e1st_idea, parent_road=a3_road)
     sue_bud.set_idea(a3e2nd_idea, parent_road=a3_road)
     sue_bud.set_idea(a3e3rd_idea, parent_road=a3_road)
