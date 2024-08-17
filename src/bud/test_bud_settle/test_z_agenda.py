@@ -50,10 +50,6 @@ def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
 
     # THEN
     assert agenda_dict
-    # for agenda_item in agenda_dict:
-    #     yr_elucidation(idea=agenda_item)
-    # yr_elucidation(idea=agenda_dict[0])
-
     assert len(agenda_dict) == 1
     print(f"{agenda_dict=}")
     assert x_bud.make_l1_road("cat have dinner") in agenda_dict.keys()

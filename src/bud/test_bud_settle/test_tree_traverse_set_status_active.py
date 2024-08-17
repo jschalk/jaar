@@ -1,7 +1,5 @@
 from src._road.finance import default_fund_pool
 from src.bud.graphic import display_ideatree
-from src.bud.acct import acctunit_shop
-from src.bud.group import awardlink_shop
 from src.bud.bud import budunit_shop
 from src.bud.healer import healerhold_shop
 from src.bud.examples.example_buds import (
@@ -448,7 +446,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     casa_road = yao_budunit.make_l1_road(casa_text)
     bird_text = "say hi to birds"
     bird_road = yao_budunit.make_road(casa_road, bird_text)
-    assert from_list_get_active(road=bird_road, idea_dict=idea_dict) is False
+    assert from_list_get_active(bird_road, idea_dict) is False
 
     # yao_budunit.set_fact(base=week_road, pick=mon_road)
     # idea_dict = yao_budunit.get_idea_dict()
@@ -623,7 +621,7 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
     clean_road = yao_budunit.make_road(casa_road, clean_text)
     mat_label = "deep clean play mat"
     mat_road = yao_budunit.make_road(clean_road, mat_label)
-    assert from_list_get_active(road=mat_road, idea_dict=idea_dict) is False
+    assert from_list_get_active(mat_road, idea_dict) is False
 
     year_month_base = yao_budunit.make_l1_road("year_month")
     print(f"{year_month_base=}, {year_month_base=}")
@@ -637,8 +635,7 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
     # THEN
     print(f"{len(idea_dict)=}")
     print(f"{len(yao_budunit._idearoot._factunits)=}")
-    # from_list_get_active(road=mat_road, idea_dict=idea_dict)
-    assert from_list_get_active(road=mat_road, idea_dict=yao_budunit._idea_dict)
+    assert from_list_get_active(mat_road, yao_budunit._idea_dict)
 
 
 def test_BudUnit_settle_bud_CorrectlySetsEmpty_sum_healerhold_share():

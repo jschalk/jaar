@@ -2,14 +2,9 @@ from pytest import raises as pytest_raises
 from src.bud.examples.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_irrational_example,
-    from_list_get_active,
 )
 from src.bud.idea import ideaunit_shop
-from src.bud.reason_idea import (
-    premiseunit_shop,
-    reasonunit_shop,
-    reasonheir_shop,
-)
+from src.bud.reason_idea import premiseunit_shop, reasonunit_shop, reasonheir_shop
 from src.bud.bud import budunit_shop
 
 
@@ -29,7 +24,7 @@ def test_BudUnit_ReasonUnits_create():
     print(f"{casa_wk_reason.base=}")
 
     # WHEN
-    sue_bud.edit_idea_attr(road=casa_road, reason=casa_wk_reason)
+    sue_bud.edit_idea_attr(casa_road, reason=casa_wk_reason)
 
     # THEN
     casa_idea = sue_bud.get_idea_obj(casa_road)
@@ -52,7 +47,7 @@ def test_BudUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
     assert before_week_reason.delimiter == slash_text
 
     # WHEN
-    sue_bud.edit_idea_attr(road=casa_road, reason=before_week_reason)
+    sue_bud.edit_idea_attr(casa_road, reason=before_week_reason)
 
     # THEN
     casa_idea = sue_bud.get_idea_obj(casa_road)
@@ -80,9 +75,7 @@ def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
     assert wed_idea._road_delimiter == bob_bud._road_delimiter
 
     # WHEN
-    bob_bud.edit_idea_attr(
-        road=casa_road, reason_base=week_road, reason_premise=wed_road
-    )
+    bob_bud.edit_idea_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
 
     # THEN
     casa_idea = bob_bud.get_idea_obj(casa_road)
@@ -110,7 +103,7 @@ def test_BudUnit_set_reasonunits_status():
     print(f"{casa_wk_reason.base=}")
 
     # WHEN
-    sue_bud.edit_idea_attr(road=casa_road, reason=casa_wk_reason)
+    sue_bud.edit_idea_attr(casa_road, reason=casa_wk_reason)
 
     # THEN
     casa_idea = sue_bud.get_idea_obj(casa_road)
@@ -158,7 +151,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
         _base_idea_active_value=True,
     )
     print(f"{casa_wk_build_reasonunit.base=}")
-    sue_bud.edit_idea_attr(road=casa_road, reason=casa_wk_build_reasonunit)
+    sue_bud.edit_idea_attr(casa_road, reason=casa_wk_build_reasonunit)
     casa_idea = sue_bud.get_idea_obj(casa_road)
     assert casa_idea._reasonunits != {}
     # print(casa_idea._reasonunits)
@@ -170,17 +163,16 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     except KeyError as e:
         assert str(e) == f"'{sue_bud.make_l1_road(weekdays_str)}'"
 
+    # WHEN
     sue_bud.settle_bud()
-    # idea_dict = sue_bud.get_idea_dict()
-    # from_list_get_active(road=casa_road, idea_dict=idea_dict)
 
+    # THEN
     casa_wk_cal_reasonheir = casa_idea._reasonheirs[week_road]
     print(f"{len(casa_wk_cal_reasonheir.premises)=}")
     assert len(casa_wk_cal_reasonheir.premises) == 1
     premise_wed = casa_wk_cal_reasonheir.premises.get(wed_road)
-    assert (
-        premise_wed._task == casa_wk_built_reasonheir.premises[premise_wed.need]._task
-    )
+    wed_task = casa_wk_built_reasonheir.premises.get(premise_wed.need)._task
+    assert premise_wed._task == wed_task
     assert premise_wed == casa_wk_built_reasonheir.premises[premise_wed.need]
     # for premise in casa_wk_cal_reasonheir.premises.values():
     #     # assert premise_task == casa_wk_built_reasonheir.premises[premise.need]._task
@@ -214,7 +206,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
         _status=False,
         _base_idea_active_value=True,
     )
-    a4_bud.edit_idea_attr(road=casa_road, reason=casa_wk_build_reasonunit)
+    a4_bud.edit_idea_attr(casa_road, reason=casa_wk_build_reasonunit)
 
     # WHEN
     rla_text = "hp"
@@ -281,7 +273,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
         _status=False,
         _base_idea_active_value=True,
     )
-    a4_bud.edit_idea_attr(road=casa_road, reason=casa_wk_build_reasonunit)
+    a4_bud.edit_idea_attr(casa_road, reason=casa_wk_build_reasonunit)
     rla_text = "hp"
     rla_road = a4_bud.make_road(casa_road, rla_text)
     a4_bud.set_idea(ideaunit_shop(rla_text), parent_road=rla_road)
