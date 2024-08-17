@@ -1,7 +1,6 @@
 from src.bud.bud import budunit_shop
 from src.bud.bud_time import (
     get_time_min_from_dt,
-    _get_jajatime_week_legible_text,
     add_time_hreg_ideaunit,
     time_str,  # "time"
     get_jajatime_text,  # "jajatime"

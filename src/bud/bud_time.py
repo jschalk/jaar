@@ -564,91 +564,91 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     return x_budunit
 
 
-def readable_1440_time(min1440: int) -> str:
-    min60 = min1440 % 60
-    x_open_minutes = f"0{min60:.0f}" if min60 < 10 else f"{min60:.0f}"
-    open_24hr = int(f"{min1440 // 60:.0f}")
-    open_12hr = ""
-    am_pm = ""
-    if min1440 < 720:
-        am_pm = "am"
-        open_12hr = open_24hr
-    else:
-        am_pm = "pm"
-        open_12hr = open_24hr - 12
+# def readable_1440_time(min1440: int) -> str:
+#     min60 = min1440 % 60
+#     x_open_minutes = f"0{min60:.0f}" if min60 < 10 else f"{min60:.0f}"
+#     open_24hr = int(f"{min1440 // 60:.0f}")
+#     open_12hr = ""
+#     am_pm = ""
+#     if min1440 < 720:
+#         am_pm = "am"
+#         open_12hr = open_24hr
+#     else:
+#         am_pm = "pm"
+#         open_12hr = open_24hr - 12
 
-    if open_24hr == 0:
-        open_12hr = 12
+#     if open_24hr == 0:
+#         open_12hr = 12
 
-    if x_open_minutes == "00":
-        return f"{open_12hr}{am_pm}"
-    else:
-        return f"{open_12hr}:{x_open_minutes}{am_pm}"
-
-
-def get_number_with_letter_ending(num: int) -> str:
-    tens_digit = num % 100
-    singles_digit = num % 10
-    if tens_digit in [11, 12, 13] or singles_digit not in [1, 2, 3]:
-        return f"{num}th"
-    elif singles_digit == 1:
-        return f"{num}st"
-    elif singles_digit == 2:
-        return f"{num}nd"
-    else:
-        return f"{num}rd"
+#     if x_open_minutes == "00":
+#         return f"{open_12hr}{am_pm}"
+#     else:
+#         return f"{open_12hr}:{x_open_minutes}{am_pm}"
 
 
-def _get_jajatime_week_legible_text(x_budunit: BudUnit, open: int, divisor: int) -> str:
-    open_in_week = open % divisor
-    time_road = x_budunit.make_l1_road("time")
-    tech_road = x_budunit.make_road(time_road, "tech")
-    week_road = x_budunit.make_road(tech_road, "week")
-    weekday_ideas_dict = x_budunit.get_idea_ranged_kids(week_road, begin=open_in_week)
-    weekday_idea_node = None
-    for idea in weekday_ideas_dict.values():
-        weekday_idea_node = idea
-
-    if divisor == 10080:
-        return f"every {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
-    num_with_letter_ending = get_number_with_letter_ending(num=divisor // 10080)
-    return f"every {num_with_letter_ending} {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
+# def get_number_with_letter_ending(num: int) -> str:
+#     tens_digit = num % 100
+#     singles_digit = num % 10
+#     if tens_digit in [11, 12, 13] or singles_digit not in [1, 2, 3]:
+#         return f"{num}th"
+#     elif singles_digit == 1:
+#         return f"{num}st"
+#     elif singles_digit == 2:
+#         return f"{num}nd"
+#     else:
+#         return f"{num}rd"
 
 
-def get_jajatime_legible_from_dt(dt: datetime) -> str:
-    weekday_text = dt.strftime("%A")
-    monthdescription_text = dt.strftime("%B")
-    monthday_text = get_number_with_letter_ending(int(dt.strftime("%d")))
-    year_text = dt.strftime("%Y")
-    hour_int = int(dt.strftime("%H"))
-    min_int = int(dt.strftime("%M"))
-    min1440 = (hour_int * 60) + min_int
-    return f"{weekday_text[:3]} {monthdescription_text[:3]} {monthday_text}, {year_text} at {readable_1440_time(min1440)}"
+# def _get_jajatime_week_legible_text(x_budunit: BudUnit, open: int, divisor: int) -> str:
+#     open_in_week = open % divisor
+#     time_road = x_budunit.make_l1_road("time")
+#     tech_road = x_budunit.make_road(time_road, "tech")
+#     week_road = x_budunit.make_road(tech_road, "week")
+#     weekday_ideas_dict = x_budunit.get_idea_ranged_kids(week_road, begin=open_in_week)
+#     weekday_idea_node = None
+#     for idea in weekday_ideas_dict.values():
+#         weekday_idea_node = idea
+
+#     if divisor == 10080:
+#         return f"every {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
+#     num_with_letter_ending = get_number_with_letter_ending(num=divisor // 10080)
+#     return f"every {num_with_letter_ending} {weekday_idea_node._label} at {readable_1440_time(min1440=open % 1440)}"
 
 
-def get_jajatime_legible_one_time_event(x_budunit: BudUnit, jajatime_min: int) -> str:
-    dt_x = get_time_dt_from_min(x_budunit, min=jajatime_min)
-    return get_jajatime_legible_from_dt(dt=dt_x)
+# def get_jajatime_legible_from_dt(dt: datetime) -> str:
+#     weekday_text = dt.strftime("%A")
+#     monthdescription_text = dt.strftime("%B")
+#     monthday_text = get_number_with_letter_ending(int(dt.strftime("%d")))
+#     year_text = dt.strftime("%Y")
+#     hour_int = int(dt.strftime("%H"))
+#     min_int = int(dt.strftime("%M"))
+#     min1440 = (hour_int * 60) + min_int
+#     return f"{weekday_text[:3]} {monthdescription_text[:3]} {monthday_text}, {year_text} at {readable_1440_time(min1440)}"
 
 
-def get_jajatime_repeating_legible_text(
-    x_budunit: BudUnit, open: float = None, nigh: float = None, divisor: float = None
-) -> str:
-    str_x = "test3"
-    if divisor is None:
-        str_x = get_jajatime_legible_one_time_event(x_budunit, open)
-    elif divisor is not None and divisor % 10080 == 0:
-        str_x = _get_jajatime_week_legible_text(x_budunit, open, divisor)
-    elif divisor is not None and divisor % 1440 == 0:
-        if divisor == 1440:
-            str_x = f"every day at {readable_1440_time(min1440=open)}"
-        else:
-            num_days = int(divisor / 1440)
-            num_with_letter_ending = get_number_with_letter_ending(num=num_days)
-            str_x = f"every {num_with_letter_ending} day at {readable_1440_time(min1440=open)}"
-    else:
-        str_x = "unknown"
-    return str_x
+# def get_jajatime_legible_one_time_event(x_budunit: BudUnit, jajatime_min: int) -> str:
+#     dt_x = get_time_dt_from_min(x_budunit, min=jajatime_min)
+#     return get_jajatime_legible_from_dt(dt=dt_x)
+
+
+# def get_jajatime_repeating_legible_text(
+#     x_budunit: BudUnit, open: float = None, nigh: float = None, divisor: float = None
+# ) -> str:
+#     str_x = "test3"
+#     if divisor is None:
+#         str_x = get_jajatime_legible_one_time_event(x_budunit, open)
+#     elif divisor is not None and divisor % 10080 == 0:
+#         str_x = _get_jajatime_week_legible_text(x_budunit, open, divisor)
+#     elif divisor is not None and divisor % 1440 == 0:
+#         if divisor == 1440:
+#             str_x = f"every day at {readable_1440_time(min1440=open)}"
+#         else:
+#             num_days = int(divisor / 1440)
+#             num_with_letter_ending = get_number_with_letter_ending(num=num_days)
+#             str_x = f"every {num_with_letter_ending} day at {readable_1440_time(min1440=open)}"
+#     else:
+#         str_x = "unknown"
+#     return str_x
 
 
 def get_time_c400yr_from_min(x_budunit: BudUnit, min: int):

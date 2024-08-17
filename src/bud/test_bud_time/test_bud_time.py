@@ -2,7 +2,6 @@ from src._road.road import RoadUnit, is_string_in_road
 from src.bud.idea import IdeaUnit, ideaunit_shop
 from src.bud.bud import budunit_shop, BudUnit
 from src.bud.bud_time import (
-    _get_jajatime_week_legible_text,
     add_time_hreg_ideaunit,
     time_str,  # "time"
     get_jajatime_text,  # "jajatime"
@@ -53,20 +52,6 @@ from src.bud.bud_time import (
 
 # from src.bud.examples.example_time import get_budunit_sue_TimeExample
 from copy import deepcopy as copy_deepcopy
-
-
-# def test_get_jajatime_week_legible_text_ReturnsObj():
-#     # ESTABLISH
-#     sue_text = "Sue"
-#     sue_budunit = budunit_shop(sue_text)
-#     x_open = 500000
-#     week_divisor = 10080
-
-#     # WHEN
-#     legible_text = _get_jajatime_week_legible_text(sue_budunit, x_open, week_divisor)
-
-#     # THEN
-#     assert 1 == 2
 
 
 def kidless(x_budunit: BudUnit, idea_road: RoadUnit) -> IdeaUnit:
