@@ -64,6 +64,40 @@ def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
     assert not sue_bud._healers_dict
 
 
+def test_BudUnit_settle_bud_Sets_range_push_Decesdents():
+    # ESTABLISH
+    yao_bud = budunit_shop("Yao")
+    day_text = "day"
+    day_road = yao_bud.make_l1_road(day_text)
+    yao_bud.set_l1_idea(ideaunit_shop(day_text))
+    hour_text = "hour"
+    hour_road = yao_bud.make_road(day_road, hour_text)
+    hour_denom = 24
+    yao_bud.set_idea(ideaunit_shop(hour_text, _denom=hour_denom), day_road)
+    time0_text = "time0"
+    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_begin = 7
+    time0_close = 31
+    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    yao_bud.set_l1_idea(time0_idea)
+    yao_bud.edit_idea_attr(time0_road, range_push=day_road)
+    day_idea = yao_bud.get_idea_obj(day_road)
+    hour_idea = yao_bud.get_idea_obj(hour_road)
+    assert not day_idea._gogo_calc
+    assert not day_idea._stop_calc
+    assert not hour_idea._gogo_calc
+    assert not hour_idea._stop_calc
+
+    # WHEN
+    yao_bud.settle_bud()
+
+    # THEN
+    assert day_idea._gogo_calc == time0_begin
+    assert day_idea._stop_calc == time0_close
+    assert hour_idea._gogo_calc == day_idea._gogo_calc / hour_denom
+    assert hour_idea._stop_calc == day_idea._stop_calc / hour_denom
+
+
 def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
@@ -333,11 +367,11 @@ def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadU
     yao_bud = budunit_shop("Yao")
 
     # WHEN
-    time = "timeline"
-    yao_bud.set_l1_idea(ideaunit_shop(time, _begin=0, _close=700))
-    t_road = yao_bud.make_l1_road(time)
-    week = "weeks"
-    yao_bud.set_idea(ideaunit_shop(week, _denom=7), parent_road=t_road)
+    time_text = "timeline"
+    time_road = yao_bud.make_l1_road(time_text)
+    yao_bud.set_l1_idea(ideaunit_shop(time_text, _begin=0, _close=700))
+    weeks_text = "weeks"
+    yao_bud.set_idea(ideaunit_shop(weeks_text, _denom=7), time_road)
 
     # THEN
     assert len(yao_bud.get_idea_tree_ordered_road_list()) == 3

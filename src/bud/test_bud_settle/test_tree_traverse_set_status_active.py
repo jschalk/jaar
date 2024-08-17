@@ -152,6 +152,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
 
     # WHEN
     sue_budunit.set_fact(base=state_road, pick=oregon_road)
+    sue_budunit.settle_bud()
 
     # THEN
     casa_idea = sue_budunit._idea_dict.get(casa_road)

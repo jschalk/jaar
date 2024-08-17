@@ -204,12 +204,10 @@ class BudUnit:
 
     def set_real_id(self, real_id: str):
         old_real_id = copy_deepcopy(self._real_id)
-        self._real_id = real_id
-
         self.settle_bud()
         for idea_obj in self._idea_dict.values():
-            idea_obj._bud_real_id = self._real_id
-
+            idea_obj._bud_real_id = real_id
+        self._real_id = real_id
         self.edit_idea_label(old_road=old_real_id, new_label=self._real_id)
         self.settle_bud()
 
@@ -479,7 +477,6 @@ class BudUnit:
             self._create_ideakid_if_empty(road=base)
             self._create_ideakid_if_empty(road=pick)
 
-        self._execute_tree_traverse()
         fact_base_idea = self.get_idea_obj(base)
         x_idearoot = self.get_idea_obj(self._real_id)
         x_open = None
@@ -515,8 +512,6 @@ class BudUnit:
             # "timeline,weeks" should be set automatica_lly since there exists a reason
             # that has that base.
             x_idearoot.set_factunit(x_factunit)
-
-        self.settle_bud()
 
     def get_fact(self, base: RoadUnit) -> FactUnit:
         return self._idearoot._factunits.get(base)
@@ -1308,6 +1303,8 @@ class BudUnit:
         self._healers_dict = {}
 
     def settle_bud(self, econ_exceptions: bool = False):
+        self.tree_range_push_traverse_check()
+        self.tree_range_traverse_calc()
         self._calc_acctunit_metrics()
         self._set_tree_traverse_stage()
         max_count = self._max_tree_traverse
@@ -1586,7 +1583,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
     x_bud._tally = obj_from_bud_dict(bud_dict, "_tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "_max_tree_traverse"))
-    x_bud.set_real_id(obj_from_bud_dict(bud_dict, "_real_id"))
+    x_bud._real_id = obj_from_bud_dict(bud_dict, "_real_id")
+    x_bud._idearoot._label = obj_from_bud_dict(bud_dict, "_real_id")
     bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")
     x_bud._road_delimiter = default_road_delimiter_if_none(bud_road_delimiter)
     x_bud._fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "_fund_pool"))

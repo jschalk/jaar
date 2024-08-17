@@ -178,51 +178,43 @@ def test_BudUnit_set_real_id_CorrectlySetsAttr():
     # ESTABLISH
     real_id_text = "Sun"
     sue_text = "Sue"
-    x_bud = budunit_shop(_owner_id=sue_text)
-    assert x_bud._real_id == root_label()
+    sue_bud = budunit_shop(sue_text)
+    assert sue_bud._real_id == root_label()
 
     # WHEN
-    x_bud.set_real_id(real_id=real_id_text)
+    sue_bud.set_real_id(real_id=real_id_text)
 
     # THEN
-    assert x_bud._real_id == real_id_text
+    assert sue_bud._real_id == real_id_text
 
 
 def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
     # ESTABLISH
     real_id_text = "Sun"
-    sue_text = "Sue"
     slash_road_delimiter = "/"
-    x_bud = budunit_shop(
-        _owner_id=sue_text,
-        _real_id=real_id_text,
-        _road_delimiter=slash_road_delimiter,
-    )
-    assert x_bud._road_delimiter == slash_road_delimiter
+    sue_text = "Sue"
+    sue_bud = budunit_shop(sue_text, real_id_text, _road_delimiter=slash_road_delimiter)
+    assert sue_bud._road_delimiter == slash_road_delimiter
 
     # WHEN
     at_node_delimiter = "@"
-    x_bud.set_road_delimiter(new_road_delimiter=at_node_delimiter)
+    sue_bud.set_road_delimiter(new_road_delimiter=at_node_delimiter)
 
     # THEN
-    assert x_bud._road_delimiter == at_node_delimiter
+    assert sue_bud._road_delimiter == at_node_delimiter
 
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
     real_id_text = "Sun"
-    sue_text = "Sue"
     slash_road_delimiter = "/"
-    x_bud = budunit_shop(
-        _owner_id=sue_text,
-        _real_id=real_id_text,
-        _road_delimiter=slash_road_delimiter,
-    )
+    sue_text = "Sue"
+    sue_bud = budunit_shop(sue_text, real_id_text, _road_delimiter=slash_road_delimiter)
     casa_text = "casa"
-    v1_casa_road = x_bud.make_l1_road(casa_text)
+    v1_casa_road = sue_bud.make_l1_road(casa_text)
 
     # WHEN
-    v2_casa_road = x_bud.make_l1_road(casa_text)
+    v2_casa_road = sue_bud.make_l1_road(casa_text)
 
     # THEN
     assert v1_casa_road == v2_casa_road

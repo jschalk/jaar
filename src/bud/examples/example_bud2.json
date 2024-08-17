@@ -3776,96 +3776,96 @@
                         "_close": 1472657760,
                         "_kids": {
                             "400 year segment": {
-                                "_begin": 0.0,
-                                "_close": 210379680.0,
                                 "_denom": 7,
+                                "_gogo_want": 0.0,
                                 "_is_expanded": false,
                                 "_label": "400 year segment",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_reest": true
+                                "_reest": true,
+                                "_stop_want": 210379680.0
                             },
                             "400 year segments": {
-                                "_begin": 0.0,
-                                "_close": 7.0,
                                 "_denom": 210379680,
+                                "_gogo_want": 0.0,
                                 "_is_expanded": false,
                                 "_label": "400 year segments",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_reest": false
+                                "_reest": false,
+                                "_stop_want": 7.0
                             },
                             "day": {
-                                "_begin": 0.0,
-                                "_close": 1440.0,
                                 "_denom": 1022679.0,
+                                "_gogo_want": 0.0,
                                 "_is_expanded": false,
                                 "_label": "day",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_reest": true
+                                "_reest": true,
+                                "_stop_want": 1440.0
                             },
                             "days": {
-                                "_begin": 0.0,
-                                "_close": 1022679.0,
                                 "_denom": 1440,
+                                "_gogo_want": 0.0,
                                 "_is_expanded": false,
                                 "_label": "days",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_reest": false
+                                "_reest": false,
+                                "_stop_want": 1022679.0
                             },
                             "week": {
-                                "_begin": 0.0,
-                                "_close": 10080.0,
                                 "_denom": 146097.0,
+                                "_gogo_want": 0.0,
                                 "_is_expanded": false,
                                 "_label": "week",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_reest": true
+                                "_reest": true,
+                                "_stop_want": 10080.0
                             },
                             "weeks": {
-                                "_begin": 0.0,
-                                "_close": 146097.0,
                                 "_denom": 10080,
+                                "_gogo_want": 0.0,
                                 "_is_expanded": false,
                                 "_label": "weeks",
                                 "_mass": 1,
                                 "_numor": 1,
-                                "_reest": false
+                                "_reest": false,
+                                "_stop_want": 146097.0
                             },
                             "x2": {
-                                "_begin": 0.0,
-                                "_close": 1472657760.0,
+                                "_gogo_want": 0.0,
                                 "_kids": {
                                     "monthly 1st business day": {
-                                        "_begin": 0.0,
-                                        "_close": 1472657760.0,
+                                        "_gogo_want": 0.0,
                                         "_kids": {
                                             "2023 Feb 9am": {
-                                                "_begin": 1064041020.0,
-                                                "_close": 1064041020.0,
+                                                "_gogo_want": 1064041020.0,
                                                 "_label": "2023 Feb 9am",
                                                 "_mass": 1.0,
-                                                "_reest": false
+                                                "_reest": false,
+                                                "_stop_want": 1064041020.0
                                             }
                                         },
                                         "_label": "monthly 1st business day",
                                         "_mass": 1.0,
-                                        "_reest": false
+                                        "_reest": false,
+                                        "_stop_want": 1472657760.0
                                     },
                                     "Sept 4th 2023 9am": {
-                                        "_begin": 1064350680.0,
-                                        "_close": 1064350680.0,
+                                        "_gogo_want": 1064350680.0,
                                         "_label": "Sept 4th 2023 9am",
                                         "_mass": 1.0,
-                                        "_reest": false
+                                        "_reest": false,
+                                        "_stop_want": 1064350680.0
                                     }
                                 },
                                 "_label": "x2",
                                 "_mass": 1.0,
-                                "_reest": false
+                                "_reest": false,
+                                "_stop_want": 1472657760.0
                             }
                         },
                         "_label": "jajatime",
@@ -3879,88 +3879,88 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "1-Jan": {
-                                        "_begin": 0,
-                                        "_close": 44640,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_label": "1-Jan",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 44640
                                     },
                                     "10-Oct": {
-                                        "_begin": 393120,
-                                        "_close": 437760,
+                                        "_gogo_want": 393120,
                                         "_is_expanded": false,
                                         "_label": "10-Oct",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 437760
                                     },
                                     "11-Nov": {
-                                        "_begin": 437760,
-                                        "_close": 480960,
+                                        "_gogo_want": 437760,
                                         "_is_expanded": false,
                                         "_label": "11-Nov",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 480960
                                     },
                                     "12-Dec": {
-                                        "_begin": 480960,
-                                        "_close": 525600,
+                                        "_gogo_want": 480960,
                                         "_is_expanded": false,
                                         "_label": "12-Dec",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 525600
                                     },
                                     "2-Feb28": {
-                                        "_begin": 44640,
-                                        "_close": 84960,
+                                        "_gogo_want": 44640,
                                         "_is_expanded": false,
                                         "_label": "2-Feb28",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 84960
                                     },
                                     "3-Mar": {
-                                        "_begin": 84960,
-                                        "_close": 129600,
+                                        "_gogo_want": 84960,
                                         "_is_expanded": false,
                                         "_label": "3-Mar",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 129600
                                     },
                                     "4-Apr": {
-                                        "_begin": 129600,
-                                        "_close": 172800,
+                                        "_gogo_want": 129600,
                                         "_is_expanded": false,
                                         "_label": "4-Apr",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 172800
                                     },
                                     "5-May": {
-                                        "_begin": 172800,
-                                        "_close": 217440,
+                                        "_gogo_want": 172800,
                                         "_is_expanded": false,
                                         "_label": "5-May",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 217440
                                     },
                                     "6-Jun": {
-                                        "_begin": 217440,
-                                        "_close": 260640,
+                                        "_gogo_want": 217440,
                                         "_is_expanded": false,
                                         "_label": "6-Jun",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 260640
                                     },
                                     "7-Jul": {
-                                        "_begin": 260640,
-                                        "_close": 305280,
+                                        "_gogo_want": 260640,
                                         "_is_expanded": false,
                                         "_label": "7-Jul",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 305280
                                     },
                                     "8-Aug": {
-                                        "_begin": 305280,
-                                        "_close": 349920,
+                                        "_gogo_want": 305280,
                                         "_is_expanded": false,
                                         "_label": "8-Aug",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 349920
                                     },
                                     "9-Sep": {
-                                        "_begin": 349920,
-                                        "_close": 393120,
+                                        "_gogo_want": 349920,
                                         "_is_expanded": false,
                                         "_label": "9-Sep",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 393120
                                     }
                                 },
                                 "_label": "365 year",
@@ -3972,88 +3972,88 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "1-Jan": {
-                                        "_begin": 0,
-                                        "_close": 44640,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_label": "1-Jan",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 44640
                                     },
                                     "10-Oct": {
-                                        "_begin": 394560,
-                                        "_close": 439200,
+                                        "_gogo_want": 394560,
                                         "_is_expanded": false,
                                         "_label": "10-Oct",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 439200
                                     },
                                     "11-Nov": {
-                                        "_begin": 439200,
-                                        "_close": 482400,
+                                        "_gogo_want": 439200,
                                         "_is_expanded": false,
                                         "_label": "11-Nov",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 482400
                                     },
                                     "12-Dec": {
-                                        "_begin": 482400,
-                                        "_close": 527040,
+                                        "_gogo_want": 482400,
                                         "_is_expanded": false,
                                         "_label": "12-Dec",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 527040
                                     },
                                     "2-Feb29": {
-                                        "_begin": 44640,
-                                        "_close": 86400,
+                                        "_gogo_want": 44640,
                                         "_is_expanded": false,
                                         "_label": "2-Feb29",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 86400
                                     },
                                     "3-Mar": {
-                                        "_begin": 86400,
-                                        "_close": 131040,
+                                        "_gogo_want": 86400,
                                         "_is_expanded": false,
                                         "_label": "3-Mar",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 131040
                                     },
                                     "4-Apr": {
-                                        "_begin": 131040,
-                                        "_close": 174240,
+                                        "_gogo_want": 131040,
                                         "_is_expanded": false,
                                         "_label": "4-Apr",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 174240
                                     },
                                     "5-May": {
-                                        "_begin": 174240,
-                                        "_close": 218880,
+                                        "_gogo_want": 174240,
                                         "_is_expanded": false,
                                         "_label": "5-May",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 218880
                                     },
                                     "6-Jun": {
-                                        "_begin": 218880,
-                                        "_close": 262080,
+                                        "_gogo_want": 218880,
                                         "_is_expanded": false,
                                         "_label": "6-Jun",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 262080
                                     },
                                     "7-Jul": {
-                                        "_begin": 262080,
-                                        "_close": 306720,
+                                        "_gogo_want": 262080,
                                         "_is_expanded": false,
                                         "_label": "7-Jul",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 306720
                                     },
                                     "8-Aug": {
-                                        "_begin": 306720,
-                                        "_close": 351360,
+                                        "_gogo_want": 306720,
                                         "_is_expanded": false,
                                         "_label": "8-Aug",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 351360
                                     },
                                     "9-Sep": {
-                                        "_begin": 351360,
-                                        "_close": 394560,
+                                        "_gogo_want": 351360,
                                         "_is_expanded": false,
                                         "_label": "9-Sep",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 394560
                                     }
                                 },
                                 "_label": "366 year",
@@ -4065,137 +4065,137 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "0-100-25 leap years": {
-                                        "_begin": 0,
-                                        "_close": 52596000,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_kids": {
                                             "4year with leap": {
-                                                "_begin": 0.0,
-                                                "_close": 2103840.0,
                                                 "_denom": 25,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 2103840.0
                                             }
                                         },
                                         "_label": "0-100-25 leap years",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 52596000
                                     },
                                     "100-104-0 leap years": {
-                                        "_begin": 52596000,
-                                        "_close": 54698400,
+                                        "_gogo_want": 52596000,
                                         "_is_expanded": false,
                                         "_kids": {
                                             "4year wo leap": {
-                                                "_begin": 52596000.0,
-                                                "_close": 54698400.0,
                                                 "_denom": 1,
+                                                "_gogo_want": 52596000.0,
                                                 "_is_expanded": false,
                                                 "_label": "4year wo leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 54698400.0
                                             }
                                         },
                                         "_label": "100-104-0 leap years",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 54698400
                                     },
                                     "104-200-24 leap years": {
-                                        "_begin": 54698400,
-                                        "_close": 105190560,
+                                        "_gogo_want": 54698400,
                                         "_is_expanded": false,
                                         "_kids": {
                                             "4year with leap": {
-                                                "_begin": 2279100.0,
-                                                "_close": 4382940.0,
                                                 "_denom": 24,
+                                                "_gogo_want": 2279100.0,
                                                 "_is_expanded": false,
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 4382940.0
                                             }
                                         },
                                         "_label": "104-200-24 leap years",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 105190560
                                     },
                                     "200-204-0 leap years": {
-                                        "_begin": 105190560,
-                                        "_close": 107292960,
+                                        "_gogo_want": 105190560,
                                         "_is_expanded": false,
                                         "_kids": {
                                             "4year wo leap": {
-                                                "_begin": 105190560.0,
-                                                "_close": 107292960.0,
                                                 "_denom": 1,
+                                                "_gogo_want": 105190560.0,
                                                 "_is_expanded": false,
                                                 "_label": "4year wo leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 107292960.0
                                             }
                                         },
                                         "_label": "200-204-0 leap years",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 107292960
                                     },
                                     "204-300-24 leap years": {
-                                        "_begin": 107292960,
-                                        "_close": 157785120,
+                                        "_gogo_want": 107292960,
                                         "_is_expanded": false,
                                         "_kids": {
                                             "4year with leap": {
-                                                "_begin": 4470540.0,
-                                                "_close": 6574380.0,
                                                 "_denom": 24,
+                                                "_gogo_want": 4470540.0,
                                                 "_is_expanded": false,
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 6574380.0
                                             }
                                         },
                                         "_label": "204-300-24 leap years",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 157785120
                                     },
                                     "300-304-0 leap years": {
-                                        "_begin": 157785120,
-                                        "_close": 159887520,
+                                        "_gogo_want": 157785120,
                                         "_is_expanded": false,
                                         "_kids": {
                                             "4year wo leap": {
-                                                "_begin": 157785120.0,
-                                                "_close": 159887520.0,
                                                 "_denom": 1,
+                                                "_gogo_want": 157785120.0,
                                                 "_is_expanded": false,
                                                 "_label": "4year wo leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 159887520.0
                                             }
                                         },
                                         "_label": "300-304-0 leap years",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 159887520
                                     },
                                     "304-400-24 leap years": {
-                                        "_begin": 159887520,
-                                        "_close": 210379680,
+                                        "_gogo_want": 159887520,
                                         "_is_expanded": false,
                                         "_kids": {
                                             "4year with leap": {
-                                                "_begin": 6661980.0,
-                                                "_close": 8765820.0,
                                                 "_denom": 24,
+                                                "_gogo_want": 6661980.0,
                                                 "_is_expanded": false,
                                                 "_label": "4year with leap",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 8765820.0
                                             }
                                         },
                                         "_label": "304-400-24 leap years",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 210379680
                                     }
                                 },
                                 "_label": "400 year segment",
@@ -4207,32 +4207,32 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "1-year": {
-                                        "_begin": 0,
-                                        "_close": 527040,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_label": "1-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 527040
                                     },
                                     "2-year": {
-                                        "_begin": 527040,
-                                        "_close": 1052640,
+                                        "_gogo_want": 527040,
                                         "_is_expanded": false,
                                         "_label": "2-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1052640
                                     },
                                     "3-year": {
-                                        "_begin": 1052640,
-                                        "_close": 1578240,
+                                        "_gogo_want": 1052640,
                                         "_is_expanded": false,
                                         "_label": "3-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1578240
                                     },
                                     "4-year": {
-                                        "_begin": 1578240,
-                                        "_close": 2103840,
+                                        "_gogo_want": 1578240,
                                         "_is_expanded": false,
                                         "_label": "4-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 2103840
                                     }
                                 },
                                 "_label": "4year with leap",
@@ -4244,32 +4244,32 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "1-year": {
-                                        "_begin": 0,
-                                        "_close": 525600,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_label": "1-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 525600
                                     },
                                     "2-year": {
-                                        "_begin": 525600,
-                                        "_close": 1051200,
+                                        "_gogo_want": 525600,
                                         "_is_expanded": false,
                                         "_label": "2-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1051200
                                     },
                                     "3-year": {
-                                        "_begin": 1051200,
-                                        "_close": 1576800,
+                                        "_gogo_want": 1051200,
                                         "_is_expanded": false,
                                         "_label": "3-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1576800
                                     },
                                     "4-year": {
-                                        "_begin": 1576800,
-                                        "_close": 2102400,
+                                        "_gogo_want": 1576800,
                                         "_is_expanded": false,
                                         "_label": "4-year",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 2102400
                                     }
                                 },
                                 "_label": "4year wo leap",
@@ -4281,172 +4281,172 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "0-12am": {
-                                        "_begin": 0,
-                                        "_close": 60,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_label": "0-12am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 60
                                     },
                                     "1-1am": {
-                                        "_begin": 60,
-                                        "_close": 120,
+                                        "_gogo_want": 60,
                                         "_is_expanded": false,
                                         "_label": "1-1am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 120
                                     },
                                     "10-10am": {
-                                        "_begin": 600,
-                                        "_close": 660,
+                                        "_gogo_want": 600,
                                         "_is_expanded": false,
                                         "_label": "10-10am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 660
                                     },
                                     "11-11am": {
-                                        "_begin": 660,
-                                        "_close": 720,
+                                        "_gogo_want": 660,
                                         "_is_expanded": false,
                                         "_label": "11-11am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 720
                                     },
                                     "12-12pm": {
-                                        "_begin": 720,
-                                        "_close": 780,
+                                        "_gogo_want": 720,
                                         "_is_expanded": false,
                                         "_label": "12-12pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 780
                                     },
                                     "13-1pm": {
-                                        "_begin": 780,
-                                        "_close": 840,
+                                        "_gogo_want": 780,
                                         "_is_expanded": false,
                                         "_label": "13-1pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 840
                                     },
                                     "14-2pm": {
-                                        "_begin": 840,
-                                        "_close": 900,
+                                        "_gogo_want": 840,
                                         "_is_expanded": false,
                                         "_label": "14-2pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 900
                                     },
                                     "15-3pm": {
-                                        "_begin": 900,
-                                        "_close": 960,
+                                        "_gogo_want": 900,
                                         "_is_expanded": false,
                                         "_label": "15-3pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 960
                                     },
                                     "16-4pm": {
-                                        "_begin": 960,
-                                        "_close": 1020,
+                                        "_gogo_want": 960,
                                         "_is_expanded": false,
                                         "_label": "16-4pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1020
                                     },
                                     "17-5pm": {
-                                        "_begin": 1020,
-                                        "_close": 1080,
+                                        "_gogo_want": 1020,
                                         "_is_expanded": false,
                                         "_label": "17-5pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1080
                                     },
                                     "18-6pm": {
-                                        "_begin": 1080,
-                                        "_close": 1140,
+                                        "_gogo_want": 1080,
                                         "_is_expanded": false,
                                         "_label": "18-6pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1140
                                     },
                                     "19-7pm": {
-                                        "_begin": 1140,
-                                        "_close": 1200,
+                                        "_gogo_want": 1140,
                                         "_is_expanded": false,
                                         "_label": "19-7pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1200
                                     },
                                     "2-2am": {
-                                        "_begin": 120,
-                                        "_close": 180,
+                                        "_gogo_want": 120,
                                         "_is_expanded": false,
                                         "_label": "2-2am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 180
                                     },
                                     "20-8pm": {
-                                        "_begin": 1200,
-                                        "_close": 1260,
+                                        "_gogo_want": 1200,
                                         "_is_expanded": false,
                                         "_label": "20-8pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1260
                                     },
                                     "21-9pm": {
-                                        "_begin": 1260,
-                                        "_close": 1320,
+                                        "_gogo_want": 1260,
                                         "_is_expanded": false,
                                         "_label": "21-9pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1320
                                     },
                                     "22-10pm": {
-                                        "_begin": 1320,
-                                        "_close": 1380,
+                                        "_gogo_want": 1320,
                                         "_is_expanded": false,
                                         "_label": "22-10pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1380
                                     },
                                     "23-11pm": {
-                                        "_begin": 1380,
-                                        "_close": 1440,
+                                        "_gogo_want": 1380,
                                         "_is_expanded": false,
                                         "_label": "23-11pm",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1440
                                     },
                                     "3-3am": {
-                                        "_begin": 180,
-                                        "_close": 240,
+                                        "_gogo_want": 180,
                                         "_is_expanded": false,
                                         "_label": "3-3am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 240
                                     },
                                     "4-4am": {
-                                        "_begin": 240,
-                                        "_close": 300,
+                                        "_gogo_want": 240,
                                         "_is_expanded": false,
                                         "_label": "4-4am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 300
                                     },
                                     "5-5am": {
-                                        "_begin": 300,
-                                        "_close": 360,
+                                        "_gogo_want": 300,
                                         "_is_expanded": false,
                                         "_label": "5-5am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 360
                                     },
                                     "6-6am": {
-                                        "_begin": 360,
-                                        "_close": 420,
+                                        "_gogo_want": 360,
                                         "_is_expanded": false,
                                         "_label": "6-6am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 420
                                     },
                                     "7-7am": {
-                                        "_begin": 420,
-                                        "_close": 480,
+                                        "_gogo_want": 420,
                                         "_is_expanded": false,
                                         "_label": "7-7am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 480
                                     },
                                     "8-8am": {
-                                        "_begin": 480,
-                                        "_close": 540,
+                                        "_gogo_want": 480,
                                         "_is_expanded": false,
                                         "_label": "8-8am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 540
                                     },
                                     "9-9am": {
-                                        "_begin": 540,
-                                        "_close": 600,
+                                        "_gogo_want": 540,
                                         "_is_expanded": false,
                                         "_label": "9-9am",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 600
                                     }
                                 },
                                 "_label": "day",
@@ -4458,424 +4458,424 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "0-:00": {
-                                        "_begin": 0,
-                                        "_close": 1,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_label": "0-:00",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1
                                     },
                                     "1-:01": {
-                                        "_begin": 1,
-                                        "_close": 2,
+                                        "_gogo_want": 1,
                                         "_is_expanded": false,
                                         "_label": "1-:01",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 2
                                     },
                                     "10-:10": {
-                                        "_begin": 10,
-                                        "_close": 11,
+                                        "_gogo_want": 10,
                                         "_is_expanded": false,
                                         "_label": "10-:10",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 11
                                     },
                                     "11-:11": {
-                                        "_begin": 11,
-                                        "_close": 12,
+                                        "_gogo_want": 11,
                                         "_is_expanded": false,
                                         "_label": "11-:11",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 12
                                     },
                                     "12-:12": {
-                                        "_begin": 12,
-                                        "_close": 13,
+                                        "_gogo_want": 12,
                                         "_is_expanded": false,
                                         "_label": "12-:12",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 13
                                     },
                                     "13-:13": {
-                                        "_begin": 13,
-                                        "_close": 14,
+                                        "_gogo_want": 13,
                                         "_is_expanded": false,
                                         "_label": "13-:13",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 14
                                     },
                                     "14-:14": {
-                                        "_begin": 14,
-                                        "_close": 15,
+                                        "_gogo_want": 14,
                                         "_is_expanded": false,
                                         "_label": "14-:14",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 15
                                     },
                                     "15-:15": {
-                                        "_begin": 15,
-                                        "_close": 16,
+                                        "_gogo_want": 15,
                                         "_is_expanded": false,
                                         "_label": "15-:15",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 16
                                     },
                                     "16-:16": {
-                                        "_begin": 16,
-                                        "_close": 17,
+                                        "_gogo_want": 16,
                                         "_is_expanded": false,
                                         "_label": "16-:16",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 17
                                     },
                                     "17-:17": {
-                                        "_begin": 17,
-                                        "_close": 18,
+                                        "_gogo_want": 17,
                                         "_is_expanded": false,
                                         "_label": "17-:17",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 18
                                     },
                                     "18-:18": {
-                                        "_begin": 18,
-                                        "_close": 19,
+                                        "_gogo_want": 18,
                                         "_is_expanded": false,
                                         "_label": "18-:18",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 19
                                     },
                                     "19-:19": {
-                                        "_begin": 19,
-                                        "_close": 20,
+                                        "_gogo_want": 19,
                                         "_is_expanded": false,
                                         "_label": "19-:19",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 20
                                     },
                                     "2-:02": {
-                                        "_begin": 2,
-                                        "_close": 3,
+                                        "_gogo_want": 2,
                                         "_is_expanded": false,
                                         "_label": "2-:02",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 3
                                     },
                                     "20-:20": {
-                                        "_begin": 20,
-                                        "_close": 21,
+                                        "_gogo_want": 20,
                                         "_is_expanded": false,
                                         "_label": "20-:20",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 21
                                     },
                                     "21-:21": {
-                                        "_begin": 21,
-                                        "_close": 22,
+                                        "_gogo_want": 21,
                                         "_is_expanded": false,
                                         "_label": "21-:21",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 22
                                     },
                                     "22-:22": {
-                                        "_begin": 22,
-                                        "_close": 23,
+                                        "_gogo_want": 22,
                                         "_is_expanded": false,
                                         "_label": "22-:22",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 23
                                     },
                                     "23-:23": {
-                                        "_begin": 23,
-                                        "_close": 24,
+                                        "_gogo_want": 23,
                                         "_is_expanded": false,
                                         "_label": "23-:23",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 24
                                     },
                                     "24-:24": {
-                                        "_begin": 24,
-                                        "_close": 25,
+                                        "_gogo_want": 24,
                                         "_is_expanded": false,
                                         "_label": "24-:24",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 25
                                     },
                                     "25-:25": {
-                                        "_begin": 25,
-                                        "_close": 26,
+                                        "_gogo_want": 25,
                                         "_is_expanded": false,
                                         "_label": "25-:25",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 26
                                     },
                                     "26-:26": {
-                                        "_begin": 26,
-                                        "_close": 27,
+                                        "_gogo_want": 26,
                                         "_is_expanded": false,
                                         "_label": "26-:26",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 27
                                     },
                                     "27-:27": {
-                                        "_begin": 27,
-                                        "_close": 28,
+                                        "_gogo_want": 27,
                                         "_is_expanded": false,
                                         "_label": "27-:27",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 28
                                     },
                                     "28-:28": {
-                                        "_begin": 28,
-                                        "_close": 29,
+                                        "_gogo_want": 28,
                                         "_is_expanded": false,
                                         "_label": "28-:28",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 29
                                     },
                                     "29-:29": {
-                                        "_begin": 29,
-                                        "_close": 30,
+                                        "_gogo_want": 29,
                                         "_is_expanded": false,
                                         "_label": "29-:29",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 30
                                     },
                                     "3-:03": {
-                                        "_begin": 3,
-                                        "_close": 4,
+                                        "_gogo_want": 3,
                                         "_is_expanded": false,
                                         "_label": "3-:03",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 4
                                     },
                                     "30-:30": {
-                                        "_begin": 30,
-                                        "_close": 31,
+                                        "_gogo_want": 30,
                                         "_is_expanded": false,
                                         "_label": "30-:30",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 31
                                     },
                                     "31-:31": {
-                                        "_begin": 31,
-                                        "_close": 32,
+                                        "_gogo_want": 31,
                                         "_is_expanded": false,
                                         "_label": "31-:31",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 32
                                     },
                                     "32-:32": {
-                                        "_begin": 32,
-                                        "_close": 33,
+                                        "_gogo_want": 32,
                                         "_is_expanded": false,
                                         "_label": "32-:32",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 33
                                     },
                                     "33-:33": {
-                                        "_begin": 33,
-                                        "_close": 34,
+                                        "_gogo_want": 33,
                                         "_is_expanded": false,
                                         "_label": "33-:33",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 34
                                     },
                                     "34-:34": {
-                                        "_begin": 34,
-                                        "_close": 35,
+                                        "_gogo_want": 34,
                                         "_is_expanded": false,
                                         "_label": "34-:34",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 35
                                     },
                                     "35-:35": {
-                                        "_begin": 35,
-                                        "_close": 36,
+                                        "_gogo_want": 35,
                                         "_is_expanded": false,
                                         "_label": "35-:35",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 36
                                     },
                                     "36-:36": {
-                                        "_begin": 36,
-                                        "_close": 37,
+                                        "_gogo_want": 36,
                                         "_is_expanded": false,
                                         "_label": "36-:36",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 37
                                     },
                                     "37-:37": {
-                                        "_begin": 37,
-                                        "_close": 38,
+                                        "_gogo_want": 37,
                                         "_is_expanded": false,
                                         "_label": "37-:37",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 38
                                     },
                                     "38-:38": {
-                                        "_begin": 38,
-                                        "_close": 39,
+                                        "_gogo_want": 38,
                                         "_is_expanded": false,
                                         "_label": "38-:38",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 39
                                     },
                                     "39-:39": {
-                                        "_begin": 39,
-                                        "_close": 40,
+                                        "_gogo_want": 39,
                                         "_is_expanded": false,
                                         "_label": "39-:39",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 40
                                     },
                                     "4-:04": {
-                                        "_begin": 4,
-                                        "_close": 5,
+                                        "_gogo_want": 4,
                                         "_is_expanded": false,
                                         "_label": "4-:04",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 5
                                     },
                                     "40-:40": {
-                                        "_begin": 40,
-                                        "_close": 41,
+                                        "_gogo_want": 40,
                                         "_is_expanded": false,
                                         "_label": "40-:40",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 41
                                     },
                                     "41-:41": {
-                                        "_begin": 41,
-                                        "_close": 42,
+                                        "_gogo_want": 41,
                                         "_is_expanded": false,
                                         "_label": "41-:41",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 42
                                     },
                                     "42-:42": {
-                                        "_begin": 42,
-                                        "_close": 43,
+                                        "_gogo_want": 42,
                                         "_is_expanded": false,
                                         "_label": "42-:42",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 43
                                     },
                                     "43-:43": {
-                                        "_begin": 43,
-                                        "_close": 44,
+                                        "_gogo_want": 43,
                                         "_is_expanded": false,
                                         "_label": "43-:43",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 44
                                     },
                                     "44-:44": {
-                                        "_begin": 44,
-                                        "_close": 45,
+                                        "_gogo_want": 44,
                                         "_is_expanded": false,
                                         "_label": "44-:44",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 45
                                     },
                                     "45-:45": {
-                                        "_begin": 45,
-                                        "_close": 46,
+                                        "_gogo_want": 45,
                                         "_is_expanded": false,
                                         "_label": "45-:45",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 46
                                     },
                                     "46-:46": {
-                                        "_begin": 46,
-                                        "_close": 47,
+                                        "_gogo_want": 46,
                                         "_is_expanded": false,
                                         "_label": "46-:46",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 47
                                     },
                                     "47-:47": {
-                                        "_begin": 47,
-                                        "_close": 48,
+                                        "_gogo_want": 47,
                                         "_is_expanded": false,
                                         "_label": "47-:47",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 48
                                     },
                                     "48-:48": {
-                                        "_begin": 48,
-                                        "_close": 49,
+                                        "_gogo_want": 48,
                                         "_is_expanded": false,
                                         "_label": "48-:48",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 49
                                     },
                                     "49-:49": {
-                                        "_begin": 49,
-                                        "_close": 50,
+                                        "_gogo_want": 49,
                                         "_is_expanded": false,
                                         "_label": "49-:49",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 50
                                     },
                                     "5-:05": {
-                                        "_begin": 5,
-                                        "_close": 6,
+                                        "_gogo_want": 5,
                                         "_is_expanded": false,
                                         "_label": "5-:05",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 6
                                     },
                                     "50-:50": {
-                                        "_begin": 50,
-                                        "_close": 51,
+                                        "_gogo_want": 50,
                                         "_is_expanded": false,
                                         "_label": "50-:50",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 51
                                     },
                                     "51-:51": {
-                                        "_begin": 51,
-                                        "_close": 52,
+                                        "_gogo_want": 51,
                                         "_is_expanded": false,
                                         "_label": "51-:51",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 52
                                     },
                                     "52-:52": {
-                                        "_begin": 52,
-                                        "_close": 53,
+                                        "_gogo_want": 52,
                                         "_is_expanded": false,
                                         "_label": "52-:52",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 53
                                     },
                                     "53-:53": {
-                                        "_begin": 53,
-                                        "_close": 54,
+                                        "_gogo_want": 53,
                                         "_is_expanded": false,
                                         "_label": "53-:53",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 54
                                     },
                                     "54-:54": {
-                                        "_begin": 54,
-                                        "_close": 55,
+                                        "_gogo_want": 54,
                                         "_is_expanded": false,
                                         "_label": "54-:54",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 55
                                     },
                                     "55-:55": {
-                                        "_begin": 55,
-                                        "_close": 56,
+                                        "_gogo_want": 55,
                                         "_is_expanded": false,
                                         "_label": "55-:55",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 56
                                     },
                                     "56-:56": {
-                                        "_begin": 56,
-                                        "_close": 57,
+                                        "_gogo_want": 56,
                                         "_is_expanded": false,
                                         "_label": "56-:56",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 57
                                     },
                                     "57-:57": {
-                                        "_begin": 57,
-                                        "_close": 58,
+                                        "_gogo_want": 57,
                                         "_is_expanded": false,
                                         "_label": "57-:57",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 58
                                     },
                                     "58-:58": {
-                                        "_begin": 58,
-                                        "_close": 59,
+                                        "_gogo_want": 58,
                                         "_is_expanded": false,
                                         "_label": "58-:58",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 59
                                     },
                                     "59-59": {
-                                        "_begin": 59,
-                                        "_close": 60,
+                                        "_gogo_want": 59,
                                         "_is_expanded": false,
                                         "_label": "59-59",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 60
                                     },
                                     "6-:06": {
-                                        "_begin": 6,
-                                        "_close": 7,
+                                        "_gogo_want": 6,
                                         "_is_expanded": false,
                                         "_label": "6-:06",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 7
                                     },
                                     "7-:07": {
-                                        "_begin": 7,
-                                        "_close": 8,
+                                        "_gogo_want": 7,
                                         "_is_expanded": false,
                                         "_label": "7-:07",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 8
                                     },
                                     "8-:08": {
-                                        "_begin": 8,
-                                        "_close": 9,
+                                        "_gogo_want": 8,
                                         "_is_expanded": false,
                                         "_label": "8-:08",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 9
                                     },
                                     "9-:09": {
-                                        "_begin": 9,
-                                        "_close": 10,
+                                        "_gogo_want": 9,
                                         "_is_expanded": false,
                                         "_label": "9-:09",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 10
                                     }
                                 },
                                 "_label": "hour",
@@ -4890,14 +4890,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 30.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 30.0
                                             }
                                         },
                                         "_label": "Apr",
@@ -4909,14 +4909,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 31.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 31.0
                                             }
                                         },
                                         "_label": "Aug",
@@ -4928,14 +4928,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 31.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 31.0
                                             }
                                         },
                                         "_label": "Dec",
@@ -4947,14 +4947,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 28.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 28.0
                                             }
                                         },
                                         "_label": "Feb28",
@@ -4966,14 +4966,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 29.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 29.0
                                             }
                                         },
                                         "_label": "Feb29",
@@ -4985,14 +4985,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 31.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 31.0
                                             }
                                         },
                                         "_label": "Jan",
@@ -5004,14 +5004,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 31.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 31.0
                                             }
                                         },
                                         "_label": "Jul",
@@ -5023,14 +5023,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 30.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 30.0
                                             }
                                         },
                                         "_label": "Jun",
@@ -5042,14 +5042,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 31.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 31.0
                                             }
                                         },
                                         "_label": "Mar",
@@ -5061,14 +5061,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 31.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 31.0
                                             }
                                         },
                                         "_label": "May",
@@ -5080,14 +5080,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 30.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 30.0
                                             }
                                         },
                                         "_label": "Nov",
@@ -5099,14 +5099,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 31.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 31.0
                                             }
                                         },
                                         "_label": "Oct",
@@ -5118,14 +5118,14 @@
                                         "_is_expanded": false,
                                         "_kids": {
                                             "days": {
-                                                "_begin": 0.0,
-                                                "_close": 30.0,
                                                 "_denom": 1440,
+                                                "_gogo_want": 0.0,
                                                 "_is_expanded": false,
                                                 "_label": "days",
                                                 "_mass": 1,
                                                 "_numor": 1,
-                                                "_reest": true
+                                                "_reest": true,
+                                                "_stop_want": 30.0
                                             }
                                         },
                                         "_label": "Sep",
@@ -5141,53 +5141,53 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "Friday": {
-                                        "_begin": 8640,
-                                        "_close": 10080,
+                                        "_gogo_want": 8640,
                                         "_is_expanded": false,
                                         "_label": "Friday",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 10080
                                     },
                                     "Monday": {
-                                        "_begin": 2880,
-                                        "_close": 4320,
+                                        "_gogo_want": 2880,
                                         "_is_expanded": false,
                                         "_label": "Monday",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 4320
                                     },
                                     "Saturday": {
-                                        "_begin": 0,
-                                        "_close": 1440,
+                                        "_gogo_want": 0,
                                         "_is_expanded": false,
                                         "_label": "Saturday",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 1440
                                     },
                                     "Sunday": {
-                                        "_begin": 1440,
-                                        "_close": 2880,
+                                        "_gogo_want": 1440,
                                         "_is_expanded": false,
                                         "_label": "Sunday",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 2880
                                     },
                                     "Thursday": {
-                                        "_begin": 7200,
-                                        "_close": 8640,
+                                        "_gogo_want": 7200,
                                         "_is_expanded": false,
                                         "_label": "Thursday",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 8640
                                     },
                                     "Tuesday": {
-                                        "_begin": 4320,
-                                        "_close": 5760,
+                                        "_gogo_want": 4320,
                                         "_is_expanded": false,
                                         "_label": "Tuesday",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 5760
                                     },
                                     "Wednesday": {
-                                        "_begin": 5760,
-                                        "_close": 7200,
+                                        "_gogo_want": 5760,
                                         "_is_expanded": false,
                                         "_label": "Wednesday",
-                                        "_mass": 1
+                                        "_mass": 1,
+                                        "_stop_want": 7200
                                     }
                                 },
                                 "_label": "week",

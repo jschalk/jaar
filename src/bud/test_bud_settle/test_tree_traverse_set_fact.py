@@ -193,6 +193,7 @@ def test_BudUnit_get_idea_list_FactHeirsCorrectlyInherited():
     factheirs_set_range = {factheir_set_range.base: factheir_set_range}
     fact_none_range = factheir_shop(earth_road, earth_road, None, None)
     facts_none_range = {fact_none_range.base: fact_none_range}
+    bob_bud.settle_bud()
 
     # THEN
     assert swim_idea._factheirs is not None
@@ -239,6 +240,7 @@ def test_BudUnit_get_idea_list_FactUnitCorrectlyTransformsfactheir_shop():
 
     # WHEN
     bob_bud.set_fact(base=earth_road, pick=earth_road, open=1.0, nigh=5.0)
+    bob_bud.settle_bud()
 
     # THEN
     first_earthheir = factheir_shop(earth_road, earth_road, open=1.0, nigh=5.0)
@@ -249,6 +251,7 @@ def test_BudUnit_get_idea_list_FactUnitCorrectlyTransformsfactheir_shop():
     # earth_curb = factunit_shop(base=earth_road, pick=earth_road, open=3.0, nigh=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
     bob_bud.set_fact(base=earth_road, pick=earth_road, open=3.0, nigh=5.0)
+    bob_bud.settle_bud()
 
     # THEN
     after_earthheir = factheir_shop(earth_road, earth_road, open=3.0, nigh=5.0)
@@ -279,6 +282,7 @@ def test_BudUnit_get_idea_list_FactHeirCorrectlyDeletesFactUnit():
 
     # WHEN
     sue_bud.set_fact(base=earth_road, pick=earth_road, open=200.0, nigh=500.0)
+    sue_bud.settle_bud()
 
     # THEN
     assert swim_idea._factheirs == first_earthdict

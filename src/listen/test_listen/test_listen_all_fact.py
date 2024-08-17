@@ -236,6 +236,7 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     yao_src.set_idea(ideaunit_shop(snow_text), weather_road)
     yao_src.set_fact(weather_road, rain_road)
     yao_src.set_fact(status_road, clean_road)
+    yao_src.settle_bud()
 
     yao_dst = budunit_shop(yao_text)
     assert yao_dst.idea_exists(clean_road) is False

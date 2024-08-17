@@ -32,18 +32,18 @@ def budunit_v001_with_large_agenda() -> BudUnit:
     ced_week_road = yao_bud.make_l1_road("ced_week")
     weekdays_road = yao_bud.make_l1_road("weekdays")
 
-    yao_bud.set_fact(base=aaron_road, pick=aaron_road)
-    yao_bud.set_fact(base=ced_week_road, pick=ced_week_road, open=0, nigh=53)
-    yao_bud.set_fact(base=day_minute_road, pick=day_minute_road, open=0, nigh=1399)
-    # yao_bud.set_fact(base=internet, pick=internet)
-    yao_bud.set_fact(base=month_week_road, pick=month_week_road, open=0, nigh=5)
-    yao_bud.set_fact(base=mood_road, pick=mood_road)
-    # yao_bud.set_fact(base=movie, pick=movie)
-    yao_bud.set_fact(base=nations_road, pick=nations_road)
-    yao_bud.set_fact(base=season_road, pick=season_road)
-    yao_bud.set_fact(base=year_month_road, pick=year_month_road, open=0, nigh=12)
-    # yao_bud.set_fact(base=water, pick=water)
-    yao_bud.set_fact(base=weekdays_road, pick=weekdays_road)
+    yao_bud.set_fact(aaron_road, aaron_road)
+    yao_bud.set_fact(ced_week_road, ced_week_road, open=0, nigh=53)
+    yao_bud.set_fact(day_minute_road, day_minute_road, open=0, nigh=1399)
+    # yao_bud.set_fact(internet, internet)
+    yao_bud.set_fact(month_week_road, month_week_road, open=0, nigh=5)
+    yao_bud.set_fact(mood_road, mood_road)
+    # yao_bud.set_fact(movie, movie)
+    yao_bud.set_fact(nations_road, nations_road)
+    yao_bud.set_fact(season_road, season_road)
+    yao_bud.set_fact(year_month_road, year_month_road, open=0, nigh=12)
+    # yao_bud.set_fact(water, water)
+    yao_bud.set_fact(weekdays_road, weekdays_road)
     return yao_bud
 
 
@@ -171,11 +171,11 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     n1_text = "1"
     n2_text = "2"
     n3_text = "3"
-    am_idea = ideaunit_shop(am_text, _begin=0, _close=12)
-    pm_idea = ideaunit_shop(pm_text, _begin=12, _close=24)
-    n1_idea = ideaunit_shop(n1_text, _begin=1, _close=2)
-    n2_idea = ideaunit_shop(n2_text, _begin=2, _close=3)
-    n3_idea = ideaunit_shop(n3_text, _begin=3, _close=4)
+    am_idea = ideaunit_shop(am_text, _gogo_want=0, _stop_want=12)
+    pm_idea = ideaunit_shop(pm_text, _gogo_want=12, _stop_want=24)
+    n1_idea = ideaunit_shop(n1_text, _gogo_want=1, _stop_want=2)
+    n2_idea = ideaunit_shop(n2_text, _gogo_want=2, _stop_want=3)
+    n3_idea = ideaunit_shop(n3_text, _gogo_want=3, _stop_want=4)
 
     sue_bud.set_l1_idea(time_idea)
     sue_bud.set_idea(day24hr_idea, time_road)
