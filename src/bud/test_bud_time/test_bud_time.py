@@ -407,7 +407,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     assert len(sue_budunit.get_idea_ranged_kids(idea_road=week_road, begin=1440)) == 1
 
 
-# def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario4_1():
+# def test_BudUnit_create_axiom_facts_CorrectlyCreatesNthLevelAxiomFact_Scenario4_1():
 #     # ESTABLISH
 #     sue_bud = get_budunit_sue_TimeExample()
 #     time_road = sue_bud.make_l1_road("time")
@@ -416,7 +416,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     sue_bud.set_fact(jajatime_road, jajatime_road, open=1500, nigh=1500)
 
 #     # WHEN
-#     x_lemma_factunits = sue_bud._get_lemma_factunits()
+#     x_axiom_factunits = sue_bud._get_axiom_factunits()
 
 #     # THEN
 #     yr400_road = sue_bud.make_road(jajatime_road, "400 year segment")
@@ -425,25 +425,25 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     day_road = sue_bud.make_road(jajatime_road, "day")
 #     week_road = sue_bud.make_road(jajatime_road, "week")
 
-#     assert x_lemma_factunits.get(yr400_road).open == 1500
-#     assert x_lemma_factunits.get(yr400_road).nigh == 1500
-#     assert x_lemma_factunits.get(yr400s_road).open > 0
-#     assert x_lemma_factunits.get(yr400s_road).open < 1
-#     assert x_lemma_factunits.get(yr400s_road).nigh > 0
-#     assert x_lemma_factunits.get(yr400s_road).nigh < 1
-#     assert x_lemma_factunits.get(days_road).open >= 1
-#     assert x_lemma_factunits.get(days_road).open <= 2
-#     assert x_lemma_factunits.get(days_road).nigh >= 1
-#     assert x_lemma_factunits.get(days_road).nigh <= 2
-#     assert x_lemma_factunits.get(day_road).open == 60
-#     assert x_lemma_factunits.get(day_road).nigh == 60
-#     assert x_lemma_factunits.get(week_road).open == 1500
-#     assert int(x_lemma_factunits.get(week_road).nigh) == 1500
-#     assert x_lemma_factunits.get(week_road).open == 1500
-#     assert int(x_lemma_factunits.get(week_road).nigh) == 1500
+#     assert x_axiom_factunits.get(yr400_road).open == 1500
+#     assert x_axiom_factunits.get(yr400_road).nigh == 1500
+#     assert x_axiom_factunits.get(yr400s_road).open > 0
+#     assert x_axiom_factunits.get(yr400s_road).open < 1
+#     assert x_axiom_factunits.get(yr400s_road).nigh > 0
+#     assert x_axiom_factunits.get(yr400s_road).nigh < 1
+#     assert x_axiom_factunits.get(days_road).open >= 1
+#     assert x_axiom_factunits.get(days_road).open <= 2
+#     assert x_axiom_factunits.get(days_road).nigh >= 1
+#     assert x_axiom_factunits.get(days_road).nigh <= 2
+#     assert x_axiom_factunits.get(day_road).open == 60
+#     assert x_axiom_factunits.get(day_road).nigh == 60
+#     assert x_axiom_factunits.get(week_road).open == 1500
+#     assert int(x_axiom_factunits.get(week_road).nigh) == 1500
+#     assert x_axiom_factunits.get(week_road).open == 1500
+#     assert int(x_axiom_factunits.get(week_road).nigh) == 1500
 
 
-# def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario5():
+# def test_BudUnit_create_axiom_facts_CorrectlyCreatesNthLevelAxiomFact_Scenario5():
 #     # ESTABLISH
 #     sue_bud = get_budunit_sue_TimeExample()
 #     time_road = sue_bud.make_l1_road("time")
@@ -452,7 +452,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     sue_bud.set_fact(jajatime_road, jajatime_road, 1500, nigh=1063954002)
 
 #     # WHEN
-#     lhu = sue_bud._get_lemma_factunits()
+#     lhu = sue_bud._get_axiom_factunits()
 
 #     # THEN
 #     yr400_road = sue_bud.make_road(jajatime_road, "400 year segment")
@@ -467,21 +467,21 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     assert lhu[yr400s_road].open < 1
 #     assert lhu[yr400s_road].nigh > 5
 #     assert lhu[yr400s_road].nigh < 6
-#     lemma_days = lhu.get(days_road)
-#     assert int(lemma_days.open) == 1  # 0 / 1440
-#     assert int(lemma_days.nigh) == 738856  # 1063953183 / 1440
-#     lemma_day = lhu.get(day_road)
-#     assert lemma_day.open == 0  # 0 / 1440
-#     assert lemma_day.nigh == 1440  # 1362  # 1063953183 / 1440
-#     lemma_jajatime_week = lhu.get(week_road)
-#     assert lemma_jajatime_week.open == 0  # 0 / 1440
-#     assert int(lemma_jajatime_week.nigh) == 10080  # 1063953183 / 1440
-#     lemma_timetech_week = lhu.get(week_road)
-#     assert lemma_timetech_week.open == 0  # 0 / 1440
-#     assert int(lemma_timetech_week.nigh) == 10080  # 1063953183 / 1440
+#     axiom_days = lhu.get(days_road)
+#     assert int(axiom_days.open) == 1  # 0 / 1440
+#     assert int(axiom_days.nigh) == 738856  # 1063953183 / 1440
+#     axiom_day = lhu.get(day_road)
+#     assert axiom_day.open == 0  # 0 / 1440
+#     assert axiom_day.nigh == 1440  # 1362  # 1063953183 / 1440
+#     axiom_jajatime_week = lhu.get(week_road)
+#     assert axiom_jajatime_week.open == 0  # 0 / 1440
+#     assert int(axiom_jajatime_week.nigh) == 10080  # 1063953183 / 1440
+#     axiom_timetech_week = lhu.get(week_road)
+#     assert axiom_timetech_week.open == 0  # 0 / 1440
+#     assert int(axiom_timetech_week.nigh) == 10080  # 1063953183 / 1440
 
 
-# def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario6():
+# def test_BudUnit_create_axiom_facts_CorrectlyCreatesNthLevelAxiomFact_Scenario6():
 #     # ESTABLISH
 #     sue_bud = get_budunit_sue_TimeExample()
 #     time_road = sue_bud.make_l1_road("time")
@@ -489,7 +489,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     sue_bud.set_fact(jajatime_road, jajatime_road, 1063954000, nigh=1063954002)
 
 #     # WHEN
-#     lhu = sue_bud._get_lemma_factunits()
+#     lhu = sue_bud._get_axiom_factunits()
 
 #     # THEN
 #     yr400_road = sue_bud.make_road(jajatime_road, "400 year segment")
@@ -503,15 +503,15 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     assert lhu.get(yr400s_road).open < 6
 #     assert lhu.get(yr400s_road).nigh > 5
 #     assert lhu.get(yr400s_road).nigh < 6
-#     lemma_days = lhu.get(days_road)
-#     assert int(lemma_days.open) == 738856  # 1063954000 / 1440
-#     assert int(lemma_days.nigh) == 738856  # 1063954000 / 1440
-#     lemma_day = lhu.get(day_road)
-#     assert lemma_day.open == 1360  # 0 / 1440
-#     assert int(lemma_day.nigh) == 1362  # 1063953183 / 1440
+#     axiom_days = lhu.get(days_road)
+#     assert int(axiom_days.open) == 738856  # 1063954000 / 1440
+#     assert int(axiom_days.nigh) == 738856  # 1063954000 / 1440
+#     axiom_day = lhu.get(day_road)
+#     assert axiom_day.open == 1360  # 0 / 1440
+#     assert int(axiom_day.nigh) == 1362  # 1063953183 / 1440
 
 
-# def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario7():
+# def test_BudUnit_create_axiom_facts_CorrectlyCreatesNthLevelAxiomFact_Scenario7():
 #     # ESTABLISH
 #     sue_bud = get_budunit_sue_TimeExample()
 #     time_road = sue_bud.make_l1_road("time")
@@ -521,7 +521,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 
 #     # WHEN minute range that should be Thursday to Monday midnight
 #     sue_bud.set_fact(jajatime_road, jajatime_road, 1063951200, nigh=1063956960)
-#     lhu = sue_bud._get_lemma_factunits()
+#     lhu = sue_bud._get_axiom_factunits()
 
 #     # THEN
 #     week_road = sue_bud.make_road(jajatime_road, "week")
@@ -552,7 +552,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     print(lhu[sue_bud.make_road(techweek_road, "Wednesday")])
 
 
-# def test_BudUnit_create_lemma_facts_CorrectlyCreatesNthLevelLemmaFact_Scenario8():
+# def test_BudUnit_create_axiom_facts_CorrectlyCreatesNthLevelAxiomFact_Scenario8():
 #     # ESTABLISH
 #     sue_bud = get_budunit_sue_TimeExample()
 #     time_road = sue_bud.make_l1_road("time")
@@ -562,7 +562,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 
 #     # WHEN minute range that should be Thursday to Monday midnight
 #     sue_bud.set_fact(jajatime_road, jajatime_road, 1063951200, nigh=1063951200)
-#     lhu = sue_bud._get_lemma_factunits()
+#     lhu = sue_bud._get_axiom_factunits()
 
 #     # THEN
 #     week_open = lhu[techweek_road].open

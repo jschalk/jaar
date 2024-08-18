@@ -4,12 +4,12 @@ from src.bud.idea import IdeaUnit
 from dataclasses import dataclass
 
 
-class InvalidLemmaException(Exception):
+class InvalidAxiomException(Exception):
     pass
 
 
 @dataclass
-class Lemma:
+class Axiom:
     src_fact: FactUnit
     calc_fact: FactUnit
     x_idea: IdeaUnit
@@ -18,8 +18,8 @@ class Lemma:
 
 
 @dataclass
-class Lemmas:
-    lemmas: dict[RoadUnit, Lemma] = None
+class Axioms:
+    axioms: dict[RoadUnit, Axiom] = None
 
     def _get_loop_range_calc_fact_attr(
         self,
@@ -157,7 +157,7 @@ class Lemmas:
         self, x_idea: IdeaUnit, src_fact: FactUnit, src_idea: IdeaUnit
     ) -> FactUnit:  # sourcery skip: remove-redundant-if
         if x_idea._gogo_want is None or x_idea._stop_want is None:
-            raise InvalidLemmaException(f"Idea {x_idea.get_road()} does not have range")
+            raise InvalidAxiomException(f"Idea {x_idea.get_road()} does not have range")
 
         idea_gogo_want = x_idea._gogo_want
         idea_stop_want = x_idea._stop_want
@@ -222,26 +222,26 @@ class Lemmas:
             nigh=fact_nigh,
         )
 
-    def is_lemmas_evaluated(self) -> bool:
-        return sum(lemma.eval_status is True for lemma in self.lemmas.values()) == len(
-            self.lemmas
+    def is_axioms_evaluated(self) -> bool:
+        return sum(axiom.eval_status is True for axiom in self.axioms.values()) == len(
+            self.axioms
         )
 
-    def get_unevaluated_lemma(self) -> Lemma:
-        for lemma in self.lemmas.values():
-            if lemma.eval_status is False:
+    def get_unevaluated_axiom(self) -> Axiom:
+        for axiom in self.axioms.values():
+            if axiom.eval_status is False:
                 # set to True
-                lemma.eval_status = True
-                return lemma
+                axiom.eval_status = True
+                return axiom
 
-    # def _add_lemma_idea(
+    # def _add_axiom_idea(
     def eval(self, x_idea: IdeaUnit, src_fact: FactUnit, src_idea: IdeaUnit):
         new_fact = self._create_new_fact(
             x_idea=x_idea, src_fact=src_fact, src_idea=src_idea
         )
         road_x = x_idea.get_road()
-        if self.lemmas.get(road_x) is None:
-            self.lemmas[road_x] = Lemma(
+        if self.axioms.get(road_x) is None:
+            self.axioms[road_x] = Axiom(
                 src_fact=src_fact,
                 calc_fact=new_fact,
                 x_idea=x_idea,
@@ -250,5 +250,5 @@ class Lemmas:
             )
 
 
-def lemmas_shop(lemmas: dict[RoadUnit, Lemma] = None, delimiter: str = None) -> Lemmas:
-    return Lemmas(lemmas=get_empty_dict_if_none(lemmas))
+def axioms_shop(axioms: dict[RoadUnit, Axiom] = None, delimiter: str = None) -> Axioms:
+    return Axioms(axioms=get_empty_dict_if_none(axioms))

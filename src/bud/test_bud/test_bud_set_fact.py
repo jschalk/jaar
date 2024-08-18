@@ -249,7 +249,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     assert sue_bud._get_rangeroot_factunits()[0].base == time_road
 
 
-def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1():
+def test_BudUnit_create_axiom_facts_CorrectlyCreates1stLevelAxiomFact_Scenario1():
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
@@ -282,34 +282,34 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario1(
 
     # set for instant moment in 3rd age
     sue_bud.set_fact(base=time_road, pick=time_road, open=45, nigh=45)
-    lemma_dict = sue_bud._get_lemma_factunits()
-    print(f"{len(lemma_dict)=}")
-    print(f"{lemma_dict=}")
-    assert len(lemma_dict) == 7
-    age1st_lemma = lemma_dict[sue_bud.make_road(time_road, age1st_text)]
-    age2nd_lemma = lemma_dict[sue_bud.make_road(time_road, age2nd_text)]
-    age3rd_lemma = lemma_dict[sue_bud.make_road(time_road, age3rd_text)]
-    age4th_lemma = lemma_dict[sue_bud.make_road(time_road, age4th_text)]
-    age5th_lemma = lemma_dict[sue_bud.make_road(time_road, age5th_text)]
-    age6th_lemma = lemma_dict[sue_bud.make_road(time_road, age6th_text)]
-    age7th_lemma = lemma_dict[sue_bud.make_road(time_road, age7th_text)]
-    assert age1st_lemma.open is None
-    assert age2nd_lemma.open is None
-    assert age3rd_lemma.open == 45
-    assert age4th_lemma.open is None
-    assert age5th_lemma.open is None
-    assert age6th_lemma.open is None
-    assert age7th_lemma.open is None
-    assert age1st_lemma.nigh is None
-    assert age2nd_lemma.nigh is None
-    assert age3rd_lemma.nigh == 45
-    assert age4th_lemma.nigh is None
-    assert age5th_lemma.nigh is None
-    assert age6th_lemma.nigh is None
-    assert age7th_lemma.nigh is None
+    axiom_dict = sue_bud._get_axiom_factunits()
+    print(f"{len(axiom_dict)=}")
+    print(f"{axiom_dict=}")
+    assert len(axiom_dict) == 7
+    age1st_axiom = axiom_dict[sue_bud.make_road(time_road, age1st_text)]
+    age2nd_axiom = axiom_dict[sue_bud.make_road(time_road, age2nd_text)]
+    age3rd_axiom = axiom_dict[sue_bud.make_road(time_road, age3rd_text)]
+    age4th_axiom = axiom_dict[sue_bud.make_road(time_road, age4th_text)]
+    age5th_axiom = axiom_dict[sue_bud.make_road(time_road, age5th_text)]
+    age6th_axiom = axiom_dict[sue_bud.make_road(time_road, age6th_text)]
+    age7th_axiom = axiom_dict[sue_bud.make_road(time_road, age7th_text)]
+    assert age1st_axiom.open is None
+    assert age2nd_axiom.open is None
+    assert age3rd_axiom.open == 45
+    assert age4th_axiom.open is None
+    assert age5th_axiom.open is None
+    assert age6th_axiom.open is None
+    assert age7th_axiom.open is None
+    assert age1st_axiom.nigh is None
+    assert age2nd_axiom.nigh is None
+    assert age3rd_axiom.nigh == 45
+    assert age4th_axiom.nigh is None
+    assert age5th_axiom.nigh is None
+    assert age6th_axiom.nigh is None
+    assert age7th_axiom.nigh is None
 
 
-def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2():
+def test_BudUnit_create_axiom_facts_CorrectlyCreates1stLevelAxiomFact_Scenario2():
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
@@ -343,32 +343,32 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario2(
 
     # set for instant moment in 3rd age
     sue_bud.set_fact(base=time_road, pick=time_road, open=35, nigh=65)
-    lemma_dict = sue_bud._get_lemma_factunits()
-    assert len(lemma_dict) == 7
-    age1st_lemma = lemma_dict[sue_bud.make_road(time_road, age1st_text)]
-    age2nd_lemma = lemma_dict[sue_bud.make_road(time_road, age2nd_text)]
-    age3rd_lemma = lemma_dict[sue_bud.make_road(time_road, age3rd_text)]
-    age4th_lemma = lemma_dict[sue_bud.make_road(time_road, age4th_text)]
-    age5th_lemma = lemma_dict[sue_bud.make_road(time_road, age5th_text)]
-    age6th_lemma = lemma_dict[sue_bud.make_road(time_road, age6th_text)]
-    age7th_lemma = lemma_dict[sue_bud.make_road(time_road, age7th_text)]
-    assert age1st_lemma.open is None
-    assert age2nd_lemma.open == 35
-    assert age3rd_lemma.open == 40
-    assert age4th_lemma.open == 60
-    assert age5th_lemma.open is None
-    assert age6th_lemma.open is None
-    assert age7th_lemma.open is None
-    assert age1st_lemma.nigh is None
-    assert age2nd_lemma.nigh == 40
-    assert age3rd_lemma.nigh == 60
-    assert age4th_lemma.nigh == 65
-    assert age5th_lemma.nigh is None
-    assert age6th_lemma.nigh is None
-    assert age7th_lemma.nigh is None
+    axiom_dict = sue_bud._get_axiom_factunits()
+    assert len(axiom_dict) == 7
+    age1st_axiom = axiom_dict[sue_bud.make_road(time_road, age1st_text)]
+    age2nd_axiom = axiom_dict[sue_bud.make_road(time_road, age2nd_text)]
+    age3rd_axiom = axiom_dict[sue_bud.make_road(time_road, age3rd_text)]
+    age4th_axiom = axiom_dict[sue_bud.make_road(time_road, age4th_text)]
+    age5th_axiom = axiom_dict[sue_bud.make_road(time_road, age5th_text)]
+    age6th_axiom = axiom_dict[sue_bud.make_road(time_road, age6th_text)]
+    age7th_axiom = axiom_dict[sue_bud.make_road(time_road, age7th_text)]
+    assert age1st_axiom.open is None
+    assert age2nd_axiom.open == 35
+    assert age3rd_axiom.open == 40
+    assert age4th_axiom.open == 60
+    assert age5th_axiom.open is None
+    assert age6th_axiom.open is None
+    assert age7th_axiom.open is None
+    assert age1st_axiom.nigh is None
+    assert age2nd_axiom.nigh == 40
+    assert age3rd_axiom.nigh == 60
+    assert age4th_axiom.nigh == 65
+    assert age5th_axiom.nigh is None
+    assert age6th_axiom.nigh is None
+    assert age7th_axiom.nigh is None
 
 
-def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3():
+def test_BudUnit_create_axiom_facts_CorrectlyCreates1stLevelAxiomFact_Scenario3():
     sue_bud = budunit_shop("Sue")
     # # the pledge
     # clean = "clean"
@@ -430,32 +430,32 @@ def test_BudUnit_create_lemma_facts_CorrectlyCreates1stLevelLemmaFact_Scenario3(
 
     # set for instant moment in 3rd age
     sue_bud.set_fact(base=time_road, pick=time_road, open=35, nigh=55)
-    lemma_dict = sue_bud._get_lemma_factunits()
-    assert len(lemma_dict) == 15
-    a2e1st_lemma = lemma_dict[sue_bud.make_road(a2_road, a2e1st_text)]
-    a2e2nd_lemma = lemma_dict[sue_bud.make_road(a2_road, a2e2nd_text)]
-    a2e3rd_lemma = lemma_dict[sue_bud.make_road(a2_road, a2e3rd_text)]
-    a2e4th_lemma = lemma_dict[sue_bud.make_road(a2_road, a2e4th_text)]
-    a3e1st_lemma = lemma_dict[sue_bud.make_road(a3_road, a3e1st_text)]
-    a3e2nd_lemma = lemma_dict[sue_bud.make_road(a3_road, a3e2nd_text)]
-    a3e3rd_lemma = lemma_dict[sue_bud.make_road(a3_road, a3e3rd_text)]
-    a3e4th_lemma = lemma_dict[sue_bud.make_road(a3_road, a3e4th_text)]
-    assert a2e1st_lemma.open is None
-    assert a2e2nd_lemma.open is None
-    assert a2e3rd_lemma.open == 35
-    assert a2e4th_lemma.open == 38
-    assert a3e1st_lemma.open == 40
-    assert a3e2nd_lemma.open == 45
-    assert a3e3rd_lemma.open is None
-    assert a3e4th_lemma.open is None
-    assert a2e1st_lemma.nigh is None
-    assert a2e2nd_lemma.nigh is None
-    assert a2e3rd_lemma.nigh == 38
-    assert a2e4th_lemma.nigh == 40
-    assert a3e1st_lemma.nigh == 45
-    assert a3e2nd_lemma.nigh == 50
-    assert a3e3rd_lemma.nigh is None
-    assert a3e4th_lemma.nigh is None
+    axiom_dict = sue_bud._get_axiom_factunits()
+    assert len(axiom_dict) == 15
+    a2e1st_axiom = axiom_dict[sue_bud.make_road(a2_road, a2e1st_text)]
+    a2e2nd_axiom = axiom_dict[sue_bud.make_road(a2_road, a2e2nd_text)]
+    a2e3rd_axiom = axiom_dict[sue_bud.make_road(a2_road, a2e3rd_text)]
+    a2e4th_axiom = axiom_dict[sue_bud.make_road(a2_road, a2e4th_text)]
+    a3e1st_axiom = axiom_dict[sue_bud.make_road(a3_road, a3e1st_text)]
+    a3e2nd_axiom = axiom_dict[sue_bud.make_road(a3_road, a3e2nd_text)]
+    a3e3rd_axiom = axiom_dict[sue_bud.make_road(a3_road, a3e3rd_text)]
+    a3e4th_axiom = axiom_dict[sue_bud.make_road(a3_road, a3e4th_text)]
+    assert a2e1st_axiom.open is None
+    assert a2e2nd_axiom.open is None
+    assert a2e3rd_axiom.open == 35
+    assert a2e4th_axiom.open == 38
+    assert a3e1st_axiom.open == 40
+    assert a3e2nd_axiom.open == 45
+    assert a3e3rd_axiom.open is None
+    assert a3e4th_axiom.open is None
+    assert a2e1st_axiom.nigh is None
+    assert a2e2nd_axiom.nigh is None
+    assert a2e3rd_axiom.nigh == 38
+    assert a2e4th_axiom.nigh == 40
+    assert a3e1st_axiom.nigh == 45
+    assert a3e2nd_axiom.nigh == 50
+    assert a3e3rd_axiom.nigh is None
+    assert a3e4th_axiom.nigh is None
 
 
 def test_BudUnit_set_fact_create_missing_ideas_CreatesBaseAndFact():
