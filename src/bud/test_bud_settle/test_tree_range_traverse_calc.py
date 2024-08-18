@@ -203,6 +203,7 @@ def test_BudUnit_tree_range_traverse_calc_SetsDescendentIdea_gogo_calc_stop_calc
     yao_bud.set_idea(ideaunit_shop(time1_text), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    yao_bud.tree_range_push_traverse_check()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -240,6 +241,7 @@ def test_BudUnit_tree_range_traverse_calc_SetsDescendentIdea_gogo_calc_stop_calc
     yao_bud.set_idea(ideaunit_shop(time1_text, _denom=time1_denom), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    yao_bud.tree_range_push_traverse_check()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -279,6 +281,7 @@ def test_BudUnit_tree_range_traverse_calc_SetsDescendentIdea_gogo_calc_stop_calc
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    yao_bud.tree_range_push_traverse_check()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -317,6 +320,7 @@ def test_BudUnit_tree_range_traverse_calc_SetsDescendentIdea_gogo_calc_stop_calc
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    yao_bud.tree_range_push_traverse_check()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -359,6 +363,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets2LevelsDescendentIdea_gogo_calc_st
     yao_bud.set_idea(x_time2_idea, time1_road)
     time2_idea = yao_bud.get_idea_obj(time2_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    yao_bud.tree_range_push_traverse_check()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -399,6 +404,7 @@ def test_BudUnit_tree_range_traverse_calc_SetsDescendentIdea_gogo_calc_stop_calc
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    yao_bud.tree_range_push_traverse_check()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -435,6 +441,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets_range_push_IdeaUnit_Simple0():
     time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
     yao_bud.edit_idea_attr(time0_road, range_push=day_road)
+    yao_bud.tree_range_push_traverse_check()
     assert not day_idea._begin
     assert not day_idea._close
     assert not day_idea._gogo_calc
@@ -469,6 +476,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets_range_push_Decesdents():
     yao_bud.edit_idea_attr(time0_road, range_push=day_road)
     day_idea = yao_bud.get_idea_obj(day_road)
     hour_idea = yao_bud.get_idea_obj(hour_road)
+    yao_bud.tree_range_push_traverse_check()
     assert not day_idea._gogo_calc
     assert not day_idea._stop_calc
     assert not hour_idea._gogo_calc
@@ -504,6 +512,7 @@ def test_BudUnit_tree_range_traverse_calc_RaisesErrorIfDescendentHasBeenEvaluate
     yao_bud.edit_idea_attr(time0_road, range_push=hour_road)
     day_idea = yao_bud.get_idea_obj(day_road)
     hour_idea = yao_bud.get_idea_obj(hour_road)
+    yao_bud.tree_range_push_traverse_check()
     assert not day_idea._gogo_calc
     assert not day_idea._stop_calc
     assert not hour_idea._gogo_calc

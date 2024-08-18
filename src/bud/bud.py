@@ -1098,11 +1098,11 @@ class BudUnit:
                     exception_text = f"Multiple IdeaUnits including ('{x_idea.get_road()}', '{range_push_dict.get(x_range_push)}') have range_push '{x_range_push}'"
                     raise Multiple_range_push_Exception(exception_text)
                 range_push_dict[x_range_push] = x_idea.get_road()
+            self._idea_dict[x_idea.get_road()] = x_idea
 
     def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
-        raise _gogo_calc_stop_calc_Exception(
-            f"Error has occurred, Idea '{idea_road}' is having _gogo_calc and _stop_calc attributes set twice"
-        )
+        exception_text = f"Error has occurred, Idea '{idea_road}' is having _gogo_calc and _stop_calc attributes set twice"
+        raise _gogo_calc_stop_calc_Exception(exception_text)
 
     def _distribute_math_attrs(self, math_idea: IdeaUnit):
         single_range_idea_list = [math_idea]
@@ -1131,12 +1131,12 @@ class BudUnit:
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
     def tree_range_traverse_calc(self):
-        all_idea_list = [self.get_idea_obj(self._real_id)]
-        while all_idea_list != []:
-            y_idea = all_idea_list.pop()
-            if y_idea.is_math():
-                self._distribute_math_attrs(y_idea)
-            all_idea_list.extend(iter(y_idea._kids.values()))
+        if self._idearoot.is_math():
+            self._distribute_math_attrs(self._idearoot)
+        print(f"{self._idea_dict.keys()=}")
+        for x_idea in self._idea_dict.values():
+            if x_idea.is_math():
+                self._distribute_math_attrs(x_idea)
 
     def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
         task_count = 0
@@ -1288,10 +1288,10 @@ class BudUnit:
         self._healers_dict = {}
 
     def settle_bud(self, econ_exceptions: bool = False):
+        self._set_tree_traverse_stage()
         self.tree_range_push_traverse_check()
         self.tree_range_traverse_calc()
         self._calc_acctunit_metrics()
-        self._set_tree_traverse_stage()
         max_count = self._max_tree_traverse
 
         while not self._rational and self._tree_traverse_count < max_count:
@@ -1333,10 +1333,6 @@ class BudUnit:
         # no function recursion, recursion by iterateing over list that can be added to by iterations
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
-
-            if self._tree_traverse_count == 0:
-                self._idea_dict[parent_idea.get_road()] = parent_idea
-
             kids_items = parent_idea._kids.items()
             x_ledger = {x_road: idea_kid._mass for x_road, idea_kid in kids_items}
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset

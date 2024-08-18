@@ -69,6 +69,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets_day_idea_gogo_calc_stop_calc():
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
     day_road = sue_budunit.make_road(jaja_road, day_str())
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit.tree_range_push_traverse_check()
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(jaja_road)
     jaja_idea = sue_budunit.get_idea_obj(jaja_road)
@@ -95,6 +96,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets_days_idea_gogo_calc_stop_calc():
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
     days_road = sue_budunit.make_road(jaja_road, days_str())
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit.tree_range_push_traverse_check()
     assert sue_budunit.idea_exists(days_road)
     days_idea = sue_budunit.get_idea_obj(days_road)
     assert days_idea._denom == 1440
@@ -125,6 +127,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets_weeks_idea_gogo_calc_stop_calc():
     fri_road = sue_budunit.make_road(week_road, get_fri())
     sat_road = sue_budunit.make_road(week_road, get_sat())
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit.tree_range_push_traverse_check()
     assert sue_budunit.idea_exists(weeks_road)
     assert sue_budunit.idea_exists(sun_road)
     assert sue_budunit.idea_exists(mon_road)
@@ -176,6 +179,7 @@ def test_BudUnit_tree_range_traverse_calc_Sets_years_idea_gogo_calc_stop_calc():
     years_road = sue_budunit.make_road(jaja_road, years_str())
     year_road = sue_budunit.make_road(jaja_road, year_str())
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit.tree_range_push_traverse_check()
     assert sue_budunit.idea_exists(years_road)
     years_idea = sue_budunit.get_idea_obj(years_road)
     assert not years_idea._denom
