@@ -23,11 +23,11 @@ from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
     get_parent_road,
     is_sub_road,
+    all_roadunits,
     road_validate,
     rebuild_road,
     get_terminus_node,
     get_root_node_from_road,
-    find_replace_road_key_dict,
     get_ancestor_roads,
     get_default_real_id_roadnode,
     get_all_road_nodes,
@@ -1053,6 +1053,16 @@ class BudUnit:
 
         idea_list = parent_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
         return {x_idea._label: x_idea for x_idea in idea_list}
+
+    def get_inheritor_idea_list(
+        self, math_road: RoadUnit, inheritor_road: RoadUnit
+    ) -> list[IdeaUnit]:
+        if is_sub_road(inheritor_road, math_road):
+            idea_roads = all_roadunits(math_road, inheritor_road)
+        x_list = []
+        for x_idea_road in idea_roads:
+            x_list.append(self.get_idea_obj(x_idea_road))
+        return x_list
 
     def _init_idea_tree_walk(self):
         range_push_dict = {}

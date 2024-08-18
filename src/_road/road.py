@@ -143,7 +143,7 @@ def road_validate(road: RoadUnit, delimiter: str, root_node: RoadNode) -> RoadUn
     )
 
 
-def get_ancestor_roads(road: RoadUnit) -> list[RoadUnit:None]:
+def get_ancestor_roads(road: RoadUnit) -> list[RoadUnit]:
     if road is None:
         return []
     nodes = get_all_road_nodes(road)
@@ -159,6 +159,16 @@ def get_ancestor_roads(road: RoadUnit) -> list[RoadUnit:None]:
     while temp_roads != []:
         x_roads.append(temp_roads.pop(len(temp_roads) - 1))
     return x_roads
+
+
+def all_roadunits(src_road, dst_road) -> list[RoadUnit]:
+    x_list = []
+    anc_roads = get_ancestor_roads(dst_road)
+    while anc_roads != []:
+        anc_road = anc_roads.pop()
+        if is_sub_road(anc_road, src_road):
+            x_list.append(anc_road)
+    return x_list
 
 
 class ForeFatherException(Exception):

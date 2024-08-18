@@ -175,3 +175,25 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     assert min_days_road in relevant_roads
     assert yao_bud._real_id in relevant_roads
     # min_days_idea = yao_bud.get_idea_obj(min_days_road)
+
+
+def test_BudUnit_get_inheritor_idea_list_ReturnsObj_Scenario0():
+    # ESTABLISH
+    yao_budunit = budunit_shop("Yao")
+    tech_road = yao_budunit.make_l1_road("tech")
+    week_text = "week"
+    week_road = yao_budunit.make_road(tech_road, week_text)
+    yao_budunit.set_idea(ideaunit_shop(week_text, _begin=0, _close=10800), tech_road)
+    mon_text = "Monday"
+    mon_road = yao_budunit.make_road(week_road, mon_text)
+    yao_budunit.set_idea(ideaunit_shop(mon_text), week_road)
+    yao_budunit.settle_bud()
+
+    # WHEN
+    x_inheritor_idea_list = yao_budunit.get_inheritor_idea_list(week_road, mon_road)
+
+    # # THEN
+    assert len(x_inheritor_idea_list) == 2
+    week_idea = yao_budunit.get_idea_obj(week_road)
+    mon_idea = yao_budunit.get_idea_obj(mon_road)
+    assert x_inheritor_idea_list == [week_idea, mon_idea]
