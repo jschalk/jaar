@@ -1,4 +1,4 @@
-from src.bud.reason_idea import factunit_shop, factunit_shop, factheir_shop
+from src.bud.reason_idea import factunit_shop, factunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.examples.example_buds import (
     get_budunit_with_4_levels,
@@ -28,8 +28,7 @@ def test_BudUnit_set_fact_IsAbleToEditFactUnitAnyAncestor_Idea_1():
     yao_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=95)
 
     # THEN
-    idea_dict = yao_bud.get_idea_dict()
-    mail_idea = idea_dict.get(mail_road)
+    mail_idea = yao_bud.get_idea_obj(mail_road)
     assert mail_idea.pledge
     assert mail_idea._task
 

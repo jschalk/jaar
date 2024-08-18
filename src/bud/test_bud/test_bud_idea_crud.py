@@ -815,55 +815,7 @@ def test_BudUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState():
     assert sports_bball_idea._mass == bball_mass
 
 
-def test_BudUnit_set_awardlink_correctly_sets_awardlinks():
-    # ESTABLISH
-    sue_text = "Sue"
-    sue_bud = budunit_shop(sue_text)
-    yao_text = "Yao"
-    zia_text = "Zia"
-    Xio_text = "Xio"
-    sue_bud.add_acctunit(yao_text)
-    sue_bud.add_acctunit(zia_text)
-    sue_bud.add_acctunit(Xio_text)
-
-    assert len(sue_bud._accts) == 3
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 3
-    swim_text = "swim"
-    sue_bud.set_l1_idea(ideaunit_shop(swim_text))
-    awardlink_yao = awardlink_shop(yao_text, give_force=10)
-    awardlink_zia = awardlink_shop(zia_text, give_force=10)
-    awardlink_Xio = awardlink_shop(Xio_text, give_force=10)
-    swim_road = sue_bud.make_l1_road(swim_text)
-    sue_bud.edit_idea_attr(swim_road, awardlink=awardlink_yao)
-    sue_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
-    sue_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
-
-    street_text = "streets"
-    sue_bud.set_idea(ideaunit_shop(street_text), parent_road=swim_road)
-    assert sue_bud._idearoot._awardlinks in (None, {})
-    assert len(sue_bud._idearoot._kids[swim_text]._awardlinks) == 3
-
-    # WHEN
-    idea_dict = sue_bud.get_idea_dict()
-
-    # THEN
-    print(f"{idea_dict.keys()=} ")
-    swim_idea = idea_dict.get(swim_road)
-    street_idea = idea_dict.get(sue_bud.make_road(swim_road, street_text))
-
-    assert len(swim_idea._awardlinks) == 3
-    assert len(swim_idea._awardheirs) == 3
-    assert street_idea._awardlinks in (None, {})
-    assert len(street_idea._awardheirs) == 3
-
-    print(f"{len(idea_dict)}")
-    print(f"{swim_idea._awardlinks}")
-    print(f"{swim_idea._awardheirs}")
-    print(f"{swim_idea._awardheirs}")
-    assert len(sue_bud._idearoot._kids["swim"]._awardheirs) == 3
-
-
-def test_BudUnit_set_awardlink_correctly_deletes_awardlinks():
+def test_BudUnit_edit_idea_attr_DeletesIdeaUnit_awardlinks():
     # ESTABLISH
     yao_text = "yao"
     yao_bud = budunit_shop(yao_text)

@@ -267,6 +267,54 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     assert week_idea._kids[tue_text]._all_acct_debt is True
 
 
+def test_BudUnit_settle_bud_SetsIdeaUnitAttr_awardlinks():
+    # ESTABLISH
+    sue_text = "Sue"
+    sue_bud = budunit_shop(sue_text)
+    yao_text = "Yao"
+    zia_text = "Zia"
+    Xio_text = "Xio"
+    sue_bud.add_acctunit(yao_text)
+    sue_bud.add_acctunit(zia_text)
+    sue_bud.add_acctunit(Xio_text)
+
+    assert len(sue_bud._accts) == 3
+    assert len(sue_bud.get_acctunit_group_ids_dict()) == 3
+    swim_text = "swim"
+    sue_bud.set_l1_idea(ideaunit_shop(swim_text))
+    awardlink_yao = awardlink_shop(yao_text, give_force=10)
+    awardlink_zia = awardlink_shop(zia_text, give_force=10)
+    awardlink_Xio = awardlink_shop(Xio_text, give_force=10)
+    swim_road = sue_bud.make_l1_road(swim_text)
+    sue_bud.edit_idea_attr(swim_road, awardlink=awardlink_yao)
+    sue_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
+    sue_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
+
+    street_text = "streets"
+    sue_bud.set_idea(ideaunit_shop(street_text), parent_road=swim_road)
+    assert sue_bud._idearoot._awardlinks in (None, {})
+    assert len(sue_bud._idearoot._kids[swim_text]._awardlinks) == 3
+
+    # WHEN
+    sue_bud.settle_bud()
+
+    # THEN
+    print(f"{sue_bud._idea_dict.keys()=} ")
+    swim_idea = sue_bud._idea_dict.get(swim_road)
+    street_idea = sue_bud._idea_dict.get(sue_bud.make_road(swim_road, street_text))
+
+    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea._awardheirs) == 3
+    assert street_idea._awardlinks in (None, {})
+    assert len(street_idea._awardheirs) == 3
+
+    print(f"{len(sue_bud._idea_dict)}")
+    print(f"{swim_idea._awardlinks}")
+    print(f"{swim_idea._awardheirs}")
+    print(f"{swim_idea._awardheirs}")
+    assert len(sue_bud._idearoot._kids["swim"]._awardheirs) == 3
+
+
 def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()

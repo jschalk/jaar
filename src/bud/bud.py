@@ -193,9 +193,8 @@ class BudUnit:
         if self._road_delimiter != new_road_delimiter:
             for x_idea_road in self._idea_dict.keys():
                 if is_string_in_road(new_road_delimiter, x_idea_road):
-                    raise NewDelimiterException(
-                        f"Cannot modify delimiter to '{new_road_delimiter}' because it already exists an idea label '{x_idea_road}'"
-                    )
+                    exception_text = f"Cannot modify delimiter to '{new_road_delimiter}' because it already exists an idea label '{x_idea_road}'"
+                    raise NewDelimiterException(exception_text)
 
             # modify all road attributes in ideaunits
             self._road_delimiter = default_road_delimiter_if_none(new_road_delimiter)
@@ -768,11 +767,6 @@ class BudUnit:
             else:
                 self._non_root_idea_label_edit(old_road, new_label, parent_road)
             self._idearoot_find_replace_road(old_road=old_road, new_road=new_road)
-            self._idearoot._factunits = find_replace_road_key_dict(
-                dict_x=self._idearoot._factunits,
-                old_road=old_road,
-                new_road=new_road,
-            )
 
     def _non_root_idea_label_edit(
         self, old_road: RoadUnit, new_label: RoadNode, parent_road: RoadUnit
