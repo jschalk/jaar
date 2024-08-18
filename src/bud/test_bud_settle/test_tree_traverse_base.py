@@ -18,10 +18,12 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     sue_bud._tree_traverse_count = x_tree_traverse_count
     sue_bud._idea_dict = x_idea_dict
     sue_bud._offtrack_kids_mass_set = "example"
+    sue_bud._reason_bases = {"example2"}
     assert sue_bud._rational == x_rational
     assert sue_bud._tree_traverse_count == x_tree_traverse_count
     assert sue_bud._idea_dict == x_idea_dict
     assert sue_bud._offtrack_kids_mass_set != set()
+    assert sue_bud._reason_bases != set()
 
     # WHEN
     sue_bud._set_tree_traverse_stage()
@@ -34,6 +36,7 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     assert sue_bud._idea_dict != x_idea_dict
     assert sue_bud._idea_dict == {sue_bud._idearoot.get_road(): sue_bud._idearoot}
     assert sue_bud._offtrack_kids_mass_set == set()
+    assert sue_bud._reason_bases == set()
 
 
 def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():

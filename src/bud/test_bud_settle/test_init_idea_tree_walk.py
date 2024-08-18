@@ -13,6 +13,7 @@ def test_BudUnit_init_idea_tree_walk_Scenario0():
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert yao_bud._idea_dict == {}
+    assert yao_bud._reason_bases == set()
 
     # WHEN
     yao_bud._init_idea_tree_walk()
@@ -23,6 +24,7 @@ def test_BudUnit_init_idea_tree_walk_Scenario0():
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert yao_bud._idea_dict == {root_idea.get_road(): root_idea}
+    assert yao_bud._reason_bases == set()
 
 
 def test_BudUnit_init_idea_tree_walk_Scenario1():
@@ -125,3 +127,26 @@ def test_BudUnit_init_idea_tree_walk_Clears_gogo_calc_stop_calc():
     assert not texas_idea._range_evaluated
     assert not texas_idea._gogo_calc
     assert not texas_idea._stop_calc
+
+
+def test_BudUnit_init_idea_tree_walk_Sets_reason_bases():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    states_text = "nation-state"
+    states_road = sue_bud.make_l1_road(states_text)
+    polis_text = "polis"
+    polis_road = sue_bud.make_l1_road(polis_text)
+    sue_bud.add_idea(polis_road)
+    sue_bud.add_idea(states_road)
+    sue_bud.edit_idea_attr(
+        states_road, reason_base=polis_road, reason_premise=polis_road
+    )
+    states_idea = sue_bud.get_idea_obj(states_road)
+    assert states_idea.base_reasonunit_exists(polis_road)
+    assert sue_bud._reason_bases == set()
+
+    # WHEN
+    sue_bud._init_idea_tree_walk()
+
+    # THEN
+    assert sue_bud._reason_bases == {polis_road}

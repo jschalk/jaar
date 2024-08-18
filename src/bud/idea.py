@@ -249,9 +249,9 @@ class IdeaUnit:
         return self.pledge and self._active and base_reasonunit_exists
 
     def base_reasonunit_exists(self, necessary_base: RoadUnit = None) -> bool:
-        return necessary_base is None or any(
-            reason.base == necessary_base for reason in self._reasonunits.values()
-        )
+        x_reasons = self._reasonunits.values()
+        x_base = necessary_base
+        return x_base is None or any(reason.base == x_base for reason in x_reasons)
 
     def record_active_hx(
         self, tree_traverse_count: int, prev_active: bool, now_active: bool

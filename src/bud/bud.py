@@ -136,6 +136,7 @@ class BudUnit:
     _groupboxs: dict[GroupID, GroupBox] = None
     _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
+    _reason_bases: set[RoadUnit] = None
     # settle_bud Calculated field end
 
     def del_last_gift_id(self):
@@ -1069,6 +1070,8 @@ class BudUnit:
                     raise Multiple_range_push_Exception(exception_text)
                 range_push_dict[x_range_push] = x_idea.get_road()
             self._idea_dict[x_idea.get_road()] = x_idea
+            for x_reason_base in x_idea._reasonunits.keys():
+                self._reason_bases.add(x_reason_base)
 
     def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
         exception_text = f"Error has occurred, Idea '{idea_road}' is having _gogo_calc and _stop_calc attributes set twice"
@@ -1246,6 +1249,7 @@ class BudUnit:
         self._tree_traverse_count = 0
         self._idea_dict = {self._idearoot.get_road(): self._idearoot}
         self._offtrack_kids_mass_set = set()
+        self._reason_bases = set()
 
     def _clear_bud_base_metrics(self):
         self._econs_justified = True
@@ -1498,6 +1502,7 @@ def budunit_shop(
         _econs_buildable=get_False_if_None(),
         _sum_healerhold_share=get_0_if_None(),
         _offtrack_kids_mass_set=set(),
+        _reason_bases=set(),
     )
     x_bud._idearoot = ideaunit_shop(
         _root=True,
