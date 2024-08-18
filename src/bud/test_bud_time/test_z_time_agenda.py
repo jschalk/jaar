@@ -91,7 +91,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit.set_ideaunits_range()
+    sue_budunit._set_ideaunits_range()
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     clean_text = "clean"
@@ -115,7 +115,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # day_idea = sue_budunit.get_idea_obj(day_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -149,7 +149,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # day_idea = sue_budunit.get_idea_obj(day_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -182,7 +182,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # days_idea = sue_budunit.get_idea_obj(days_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -215,7 +215,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # week_idea = sue_budunit.get_idea_obj(week_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -249,7 +249,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # week_idea = sue_budunit.get_idea_obj(week_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -282,7 +282,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # weeks_idea = sue_budunit.get_idea_obj(weeks_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -316,7 +316,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # year_idea = sue_budunit.get_idea_obj(year_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -350,7 +350,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # year_idea = sue_budunit.get_idea_obj(year_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"
@@ -388,7 +388,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
 #     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
 #     jaja_idea = sue_budunit.get_idea_obj(jaja_road)
 #     # year_idea = sue_budunit.get_idea_obj(year_road)
-#     sue_budunit.set_ideaunits_range()
+#     sue_budunit._set_ideaunits_range()
 #     casa_text = "casa"
 #     casa_road = sue_budunit.make_l1_road(casa_text)
 #     clean_text = "clean"

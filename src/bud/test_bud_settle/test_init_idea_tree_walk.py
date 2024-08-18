@@ -15,7 +15,7 @@ def test_BudUnit_init_idea_tree_walk_Scenario0():
     assert yao_bud._idea_dict == {}
 
     # WHEN
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
 
     # THEN
     assert not root_idea._begin
@@ -38,7 +38,7 @@ def test_BudUnit_init_idea_tree_walk_Scenario1():
     assert not root_idea._stop_calc
 
     # WHEN
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
 
     # THEN
     assert root_idea._begin == time0_begin
@@ -64,7 +64,7 @@ def test_BudUnit_init_idea_tree_walk_Scenario2():
     assert not day_idea._stop_calc
 
     # WHEN
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
 
     # THEN
     assert not day_idea._begin
@@ -82,7 +82,7 @@ def test_BudUnit_init_idea_tree_walk_RaisesError():
     time0_road = yao_bud.make_l1_road(time0_text)
     yao_bud.set_l1_idea(ideaunit_shop(time0_text))
     yao_bud.edit_idea_attr(time0_road, range_push=day_road)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
 
     time1_text = "time1"
     time1_road = yao_bud.make_l1_road(time1_text)
@@ -91,7 +91,7 @@ def test_BudUnit_init_idea_tree_walk_RaisesError():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        yao_bud.init_idea_tree_walk()
+        yao_bud._init_idea_tree_walk()
     exception_text = f"Multiple IdeaUnits including ('{time0_road}', '{time1_road}') have range_push '{day_road}'"
     assert str(excinfo.value) == exception_text
 
@@ -117,7 +117,7 @@ def test_BudUnit_init_idea_tree_walk_Clears_gogo_calc_stop_calc():
     assert texas_idea._stop_calc
 
     # WHEN
-    sue_bud.init_idea_tree_walk()
+    sue_bud._init_idea_tree_walk()
 
     # THEN
     assert not root_idea._begin

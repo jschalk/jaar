@@ -14,7 +14,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_UnitDoe
     assert not root_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not root_idea._begin
@@ -30,7 +30,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_DoesNot
     assert not root_idea._gogo_calc
 
     # WHEM
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not root_idea._gogo_calc
@@ -42,7 +42,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_SimpleN
     time0_begin = 7
     time0_close = 31
     yao_bud.edit_idea_attr(yao_bud._real_id, begin=time0_begin, close=time0_close)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     assert root_idea._begin == time0_begin
     assert root_idea._close == time0_close
@@ -50,7 +50,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_SimpleN
     assert not root_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert root_idea._begin == time0_begin
@@ -72,7 +72,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
         denom=time0_denom,
     )
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert root_idea._begin == time0_begin
     assert root_idea._close == time0_close
     assert root_idea._denom == time0_denom
@@ -80,7 +80,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     assert not root_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert root_idea._begin == time0_begin
@@ -106,7 +106,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
         denom=time0_denom,
     )
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert root_idea._begin == time0_begin
     assert root_idea._close == time0_close
     assert root_idea._numor == time0_numor
@@ -115,7 +115,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     assert not root_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert root_idea._begin == time0_begin
@@ -138,7 +138,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
         close=time0_close,
         addin=time0_addin,
     )
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     assert root_idea._begin == time0_begin
     assert root_idea._close == time0_close
@@ -147,7 +147,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     assert not root_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert root_idea._begin == time0_begin
@@ -172,7 +172,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
         denom=time0_denom,
         addin=time0_addin,
     )
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     assert root_idea._begin == time0_begin
     assert root_idea._close == time0_close
@@ -182,7 +182,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     assert not root_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert root_idea._begin == time0_begin
@@ -208,7 +208,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     yao_bud.set_idea(ideaunit_shop(time1_text), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -219,7 +219,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     assert not time1_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert time1_idea._begin != time0_begin
@@ -246,7 +246,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud.set_idea(ideaunit_shop(time1_text, _denom=time1_denom), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -257,7 +257,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     assert not time1_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not time1_idea._begin
@@ -286,7 +286,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -297,7 +297,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     assert not time1_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not time1_idea._begin
@@ -325,7 +325,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -337,7 +337,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     assert not time1_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not time1_idea._begin
@@ -368,7 +368,7 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     yao_bud.set_idea(x_time2_idea, time1_road)
     time2_idea = yao_bud.get_idea_obj(time2_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -380,7 +380,7 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     assert not time2_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not time2_idea._begin
@@ -409,7 +409,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert time0_idea._begin == time0_begin
@@ -421,7 +421,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     assert not time1_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not time1_idea._begin
@@ -446,14 +446,14 @@ def test_BudUnit_set_ideaunits_range_Sets_range_push_IdeaUnit_Simple0():
     time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
     yao_bud.edit_idea_attr(time0_road, range_push=day_road)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not day_idea._begin
     assert not day_idea._close
     assert not day_idea._gogo_calc
     assert not day_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert not day_idea._begin
@@ -481,14 +481,14 @@ def test_BudUnit_set_ideaunits_range_Sets_range_push_Decesdents():
     yao_bud.edit_idea_attr(time0_road, range_push=day_road)
     day_idea = yao_bud.get_idea_obj(day_road)
     hour_idea = yao_bud.get_idea_obj(hour_road)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not day_idea._gogo_calc
     assert not day_idea._stop_calc
     assert not hour_idea._gogo_calc
     assert not hour_idea._stop_calc
 
     # WHEN
-    yao_bud.set_ideaunits_range()
+    yao_bud._set_ideaunits_range()
 
     # THEN
     assert day_idea._gogo_calc == time0_begin
@@ -517,7 +517,7 @@ def test_BudUnit_set_ideaunits_range_RaisesErrorIfDescendentHasBeenEvaluated():
     yao_bud.edit_idea_attr(time0_road, range_push=hour_road)
     day_idea = yao_bud.get_idea_obj(day_road)
     hour_idea = yao_bud.get_idea_obj(hour_road)
-    yao_bud.init_idea_tree_walk()
+    yao_bud._init_idea_tree_walk()
     assert not day_idea._gogo_calc
     assert not day_idea._stop_calc
     assert not hour_idea._gogo_calc
@@ -526,5 +526,5 @@ def test_BudUnit_set_ideaunits_range_RaisesErrorIfDescendentHasBeenEvaluated():
     # WHEN/THEN
     exception_message = f"Error has occurred, Idea '{hour_road}' is having _gogo_calc and _stop_calc attributes set twice"
     with pytest_raises(Exception) as excinfo:
-        yao_bud.set_ideaunits_range()
+        yao_bud._set_ideaunits_range()
     assert str(excinfo.value) == exception_message

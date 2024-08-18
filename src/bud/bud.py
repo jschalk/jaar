@@ -1053,7 +1053,7 @@ class BudUnit:
         idea_list = parent_idea.get_kids_in_range(begin=begin, close=close)
         return {x_idea._label: x_idea for x_idea in idea_list}
 
-    def init_idea_tree_walk(self):
+    def _init_idea_tree_walk(self):
         range_push_dict = {}
         idea_list = [self.get_idea_obj(self._real_id)]
         while idea_list != []:
@@ -1100,7 +1100,7 @@ class BudUnit:
                 single_range_idea_list.extend(iter(range_push_idea._kids.values()))
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
-    def set_ideaunits_range(self):
+    def _set_ideaunits_range(self):
         for x_idea in self._idea_dict.values():
             if x_idea.is_math():
                 self._distribute_math_attrs(x_idea)
@@ -1256,8 +1256,8 @@ class BudUnit:
 
     def settle_bud(self, econ_exceptions: bool = False):
         self._set_tree_traverse_stage()
-        self.init_idea_tree_walk()
-        self.set_ideaunits_range()
+        self._init_idea_tree_walk()
+        self._set_ideaunits_range()
         self._calc_acctunit_metrics()
         max_count = self._max_tree_traverse
 
