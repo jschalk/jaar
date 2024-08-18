@@ -515,7 +515,6 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     # ESTABLISH
     x1_bud = budunit_v001()
     x2_bud = get_budunit_x1_3levels_1reason_1facts()
-    x2_bud.settle_bud()
     x3_bud = get_budunit_base_time_example()
     print(f"{x1_bud._owner_id}")
     print(f"{x2_bud._owner_id}")
@@ -536,7 +535,6 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_dict_of_obj.get(x3_bud._owner_id) is not None
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud._owner_id)
-    ccn2_bud.settle_bud()
     assert ccn2_bud._idearoot._label == x2_bud._idearoot._label
     assert ccn2_bud._idearoot._parent_road == x2_bud._idearoot._parent_road
     assert ccn2_bud._idearoot._fund_coin == x2_bud._idearoot._fund_coin

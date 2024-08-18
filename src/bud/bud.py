@@ -427,7 +427,7 @@ class BudUnit:
             and self._is_idea_rangeroot(idea_road=fact.base)
         ]
 
-    def _get_rangeroot_1stlevel_associates(
+    def _get_rangeroot_1stlevel_factunits(
         self, ranged_factunits: list[IdeaUnit]
     ) -> Axioms:
         x_axioms = axioms_shop()
@@ -440,7 +440,7 @@ class BudUnit:
 
     def _get_axiom_factunits(self) -> dict[RoadUnit, FactUnit]:
         # get all range-root first level kids
-        x_axioms = self._get_rangeroot_1stlevel_associates(
+        x_axioms = self._get_rangeroot_1stlevel_factunits(
             self._get_rangeroot_factunits()
         )
 
@@ -647,16 +647,13 @@ class BudUnit:
         create_missing_ancestors: bool = True,
     ):
         if RoadNode(idea_kid._label).is_node(self._road_delimiter) is False:
-            raise InvalidBudException(
-                f"set_idea failed because '{idea_kid._label}' is not a RoadNode."
-            )
+            x_text = f"set_idea failed because '{idea_kid._label}' is not a RoadNode."
+            raise InvalidBudException(x_text)
 
-        if self._idearoot._label != get_root_node_from_road(
-            parent_road, self._road_delimiter
-        ):
-            raise InvalidBudException(
-                f"set_idea failed because parent_road '{parent_road}' has an invalid root node"
-            )
+        x_root_node = get_root_node_from_road(parent_road, self._road_delimiter)
+        if self._idearoot._label != x_root_node:
+            exception_text = f"set_idea failed because parent_road '{parent_road}' has an invalid root node"
+            raise InvalidBudException(exception_text)
 
         idea_kid._road_delimiter = self._road_delimiter
         if idea_kid._bud_real_id != self._real_id:
@@ -666,12 +663,12 @@ class BudUnit:
         if not filter_out_missing_awardlinks_group_ids:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
+        # print(f"{idea_kid.get_road()=}")
 
         # create any missing ideas
         if not create_missing_ancestors and self.idea_exists(parent_road) is False:
-            raise InvalidBudException(
-                f"set_idea failed because '{parent_road}' idea does not exist."
-            )
+            x_text = f"set_idea failed because '{parent_road}' idea does not exist."
+            raise InvalidBudException(x_text)
         parent_road_idea = self.get_idea_obj(parent_road, create_missing_ancestors)
         if parent_road_idea._root is False:
             parent_road_idea
@@ -1562,6 +1559,7 @@ def budunit_shop(
         _bud_real_id=x_bud._real_id,
         _road_delimiter=x_bud._road_delimiter,
         _fund_coin=x_bud._fund_coin,
+        _parent_road="",
     )
     x_bud.set_max_tree_traverse(3)
     x_bud._rational = False

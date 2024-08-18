@@ -10,7 +10,6 @@ from src.bud.examples.example_buds import (
 def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    sue_bud.settle_bud()
 
     # WHEN
     relevant_roads = sue_bud._get_relevant_roads({})
@@ -24,7 +23,6 @@ def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
 def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    sue_bud.settle_bud()
 
     # WHEN
     root_dict = {sue_bud._real_id: -1}
@@ -39,7 +37,6 @@ def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
 def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    sue_bud.settle_bud()
 
     # WHEN
     week_text = "weekdays"
@@ -79,7 +76,6 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     sue_bud.edit_idea_attr(road=floor_road, reason=floor_reason)
 
     # WHEN
-    sue_bud.settle_bud()
     floor_dict = {floor_road}
     relevant_roads = sue_bud._get_relevant_roads(floor_dict)
 
@@ -117,7 +113,6 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     dirty_road = x_bud.make_road(status_road, dirty_text)
 
     # WHEN
-    x_bud.settle_bud()
     floor_dict = {floor_road}
     relevant_roads = x_bud._get_relevant_roads(floor_dict)
 
@@ -167,7 +162,6 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
-    yao_bud.settle_bud()
     print(f"{yao_bud._idea_dict.keys()}")
     roads_dict = {min_days_road}
     relevant_roads = yao_bud._get_relevant_roads(roads_dict)

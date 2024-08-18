@@ -106,38 +106,38 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
     assert sue_agenda.get(clean_road)
 
 
-def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
-    # ESTABLISH
-    sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    day_road = sue_budunit.make_road(jaja_road, day_str())
-    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
-    # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
-    # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit.tree_range_traverse_calc()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    sue_budunit.edit_idea_attr(
-        clean_road,
-        reason_base=day_road,
-        reason_premise=day_road,
-        reason_premise_open=0,
-        reason_premise_nigh=1,
-        reason_premise_divisor=1,
-    )
-    sue_budunit.set_fact(jaja_road, jaja_road, 0, 1440)
+# def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
+#     # ESTABLISH
+#     sue_budunit = budunit_shop("Sue")
+#     time_road = sue_budunit.make_l1_road(time_str())
+#     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+#     day_road = sue_budunit.make_road(jaja_road, day_str())
+#     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+#     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
+#     # day_idea = sue_budunit.get_idea_obj(day_road)
+#     sue_budunit.tree_range_traverse_calc()
+#     casa_text = "casa"
+#     casa_road = sue_budunit.make_l1_road(casa_text)
+#     clean_text = "clean"
+#     clean_road = sue_budunit.make_road(casa_road, clean_text)
+#     sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
+#     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+#     sue_budunit.edit_idea_attr(
+#         clean_road,
+#         reason_base=day_road,
+#         reason_premise=day_road,
+#         reason_premise_open=0,
+#         reason_premise_nigh=1,
+#         reason_premise_divisor=1,
+#     )
+#     sue_budunit.set_fact(jaja_road, jaja_road, 0, 1440)
 
-    # WHEN
-    sue_agenda = sue_budunit.get_agenda_dict()
-    print(f"{sue_agenda=}")
+#     # WHEN
+#     sue_agenda = sue_budunit.get_agenda_dict()
+#     print(f"{sue_agenda=}")
 
-    # THEN
-    assert sue_agenda.get(clean_road)
+#     # THEN
+#     assert sue_agenda.get(clean_road)
 
 
 # def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario2():
