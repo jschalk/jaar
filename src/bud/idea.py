@@ -744,14 +744,14 @@ class IdeaUnit:
         for x_reasonheir in self._reasonheirs.values():
             x_reasonheir.set_status(factheirs=self._factheirs)
 
-    def set_active(
+    def set_active_attrs(
         self,
         tree_traverse_count: int,
         bud_groupboxs: dict[GroupID, GroupBox] = None,
         bud_owner_id: AcctID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active(bud_groupboxs, bud_owner_id)
+        self._active = self._create_active_bool(bud_groupboxs, bud_owner_id)
         self._set_idea_task()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -766,7 +766,7 @@ class IdeaUnit:
     def _any_reasonheir_task_true(self) -> bool:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
-    def _create_active(
+    def _create_active_bool(
         self, bud_groupboxs: dict[GroupID, GroupBox], bud_owner_id: AcctID
     ) -> bool:
         self.set_reasonheirs_status()

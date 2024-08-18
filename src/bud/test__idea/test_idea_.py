@@ -438,31 +438,31 @@ def test_IdeaUnit_get_reasonheir_ReturnsNone():
     assert reason_heir_test6 is None
 
 
-def test_IdeaUnit_set_active_SetsNullactive_hxToNonEmpty():
+def test_IdeaUnit_set_active_attrs_SetsNullactive_hxToNonEmpty():
     # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(clean_text)
     assert clean_idea._active_hx == {}
 
     # WHEN
-    clean_idea.set_active(tree_traverse_count=3)
+    clean_idea.set_active_attrs(tree_traverse_count=3)
     # THEN
     assert clean_idea._active_hx == {3: True}
 
 
-def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
+def test_IdeaUnit_set_active_attrs_IfFullactive_hxResetToTrue():
     # ESTABLISH
     clean_text = "clean"
     clean_idea = ideaunit_shop(clean_text)
     clean_idea._active_hx = {0: True, 4: False}
     assert clean_idea._active_hx != {0: True}
     # WHEN
-    clean_idea.set_active(tree_traverse_count=0)
+    clean_idea.set_active_attrs(tree_traverse_count=0)
     # THEN
     assert clean_idea._active_hx == {0: True}
 
 
-# def test_IdeaUnit_set_active_IfFullactive_hxResetToFalse():
+# def test_IdeaUnit_set_active_attrs_IfFullactive_hxResetToFalse():
 #     # ESTABLISH
 # clean_text = "clean"
 # clean_idea = ideaunit_shop(clean_text)
@@ -476,7 +476,7 @@ def test_IdeaUnit_set_active_IfFullactive_hxResetToTrue():
 #     clean_idea._active_hx = {0: True, 4: False}
 #     assert clean_idea._active_hx != {0: False}
 #     # WHEN
-#     clean_idea.set_active(tree_traverse_count=0)
+#     clean_idea.set_active_attrs(tree_traverse_count=0)
 #     # THEN
 #     assert clean_idea._active_hx == {0: False}
 

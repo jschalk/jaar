@@ -1194,16 +1194,14 @@ class BudUnit:
             self._econs_justified = False
 
     def _set_root_attributes(self, econ_exceptions: bool):
-        self._idearoot._level = 0
         self._idearoot.set_parent_road("")
         self._idearoot.set_idearoot_inherit_reasonheirs()
         self._idearoot.set_doerheir(None, self._groupboxs)
         self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
-        self._idearoot._mass = 1
-        tree_traverse_count = self._tree_traverse_count
-        self._idearoot.set_active(tree_traverse_count, self._groupboxs, self._owner_id)
+        tt_count = self._tree_traverse_count
+        self._idearoot.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         self._idearoot.set_fund_attr(0, self._fund_pool, self._fund_pool)
         self._idearoot.set_awardheirs_fund_give_fund_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
@@ -1237,7 +1235,7 @@ class BudUnit:
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
         tree_traverse_count = self._tree_traverse_count
-        idea_kid.set_active(tree_traverse_count, self._groupboxs, self._owner_id)
+        idea_kid.set_active_attrs(tree_traverse_count, self._groupboxs, self._owner_id)
         idea_kid.set_fund_attr(fund_onset, fund_cease, self._fund_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
@@ -1604,6 +1602,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _root=True,
         _label=x_bud._real_id,
         _parent_road="",
+        _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
         _mass=get_obj_from_idea_dict(idearoot_dict, "_mass"),
         _begin=get_obj_from_idea_dict(idearoot_dict, "_begin"),
