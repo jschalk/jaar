@@ -268,6 +268,16 @@ class IdeaUnit:
             self._set_factheir(x_factcore)
 
     def _set_factheir(self, x_fact: FactCore):
+        if (
+            x_fact.base == self.get_road()
+            and self._gogo_calc is not None
+            and self._stop_calc is not None
+            and self._begin is None
+            and self._close is None
+        ):
+            raise Exception(
+                f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact idea must have _begin, _close attributes"
+            )
         x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_transformations(x_factheir)

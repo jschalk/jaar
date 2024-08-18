@@ -604,7 +604,6 @@ class BudUnit:
                 self._idearoot._factunits[base]
             except KeyError:
                 missing_bases[base] = base_count
-
         return missing_bases
 
     def add_idea(
@@ -1102,9 +1101,8 @@ class BudUnit:
             idea_list.extend(iter(x_idea._kids.values()))
             for x_range_push in x_idea._range_pushs:
                 if range_push_dict.get(x_range_push):
-                    raise Multiple_range_push_Exception(
-                        f"Multiple IdeaUnits including ('{x_idea.get_road()}', '{range_push_dict.get(x_range_push)}') have range_push '{x_range_push}'"
-                    )
+                    exception_text = f"Multiple IdeaUnits including ('{x_idea.get_road()}', '{range_push_dict.get(x_range_push)}') have range_push '{x_range_push}'"
+                    raise Multiple_range_push_Exception(exception_text)
                 range_push_dict[x_range_push] = x_idea.get_road()
 
     def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
