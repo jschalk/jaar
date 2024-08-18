@@ -92,10 +92,8 @@ def test_BudUnit_init_idea_tree_walk_RaisesError():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         yao_bud.init_idea_tree_walk()
-    assert (
-        str(excinfo.value)
-        == f"Multiple IdeaUnits including ('{time0_road}', '{time1_road}') have range_push '{day_road}'"
-    )
+    exception_text = f"Multiple IdeaUnits including ('{time0_road}', '{time1_road}') have range_push '{day_road}'"
+    assert str(excinfo.value) == exception_text
 
 
 def test_BudUnit_init_idea_tree_walk_Clears_gogo_calc_stop_calc():

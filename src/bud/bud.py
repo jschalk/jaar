@@ -143,9 +143,8 @@ class BudUnit:
 
     def set_last_gift_id(self, x_last_gift_id: int):
         if self._last_gift_id is not None and x_last_gift_id < self._last_gift_id:
-            raise _last_gift_idException(
-                f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
-            )
+            exception_text = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
+            raise _last_gift_idException(exception_text)
         self._last_gift_id = x_last_gift_id
 
     def set_monetary_desc(self, x_monetary_desc: str):
@@ -161,16 +160,14 @@ class BudUnit:
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self._bit) is False:
-            raise _bit_RatioException(
-                f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
-            )
+            exception_text = f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
+            raise _bit_RatioException(exception_text)
         self._credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
         if valid_finance_ratio(new_debtor_respect, self._bit) is False:
-            raise _bit_RatioException(
-                f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
-            )
+            exception_text = f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
+            raise _bit_RatioException(exception_text)
         self._debtor_respect = new_debtor_respect
 
     def make_road(
@@ -330,12 +327,8 @@ class BudUnit:
     def add_acctunit(
         self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
     ):
-        acctunit = acctunit_shop(
-            acct_id=acct_id,
-            credit_score=credit_score,
-            debtit_score=debtit_score,
-            _road_delimiter=self._road_delimiter,
-        )
+        x_road_delimiter = self._road_delimiter
+        acctunit = acctunit_shop(acct_id, credit_score, debtit_score, x_road_delimiter)
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
@@ -442,7 +435,6 @@ class BudUnit:
         x_axioms = self._get_rangeroot_1stlevel_factunits(
             self._get_rangeroot_factunits()
         )
-
         # Now get associates (all their descendants)
         axiom_factunits = {}  # fact.base : factUnit
         count_x = 0
@@ -460,7 +452,6 @@ class BudUnit:
 
             for kid2 in axiom_idea._kids.values():
                 x_axioms.eval(x_idea=kid2, src_fact=fact_x, src_idea=axiom_idea)
-
         return axiom_factunits
 
     def set_fact(
@@ -492,13 +483,11 @@ class BudUnit:
 
         if fact_base_idea.is_math() is False:
             x_idearoot.set_factunit(x_factunit)
-
         # if fact's idea no range or is a "range-root" then allow fact to be set
         elif fact_base_idea.is_math() and self._is_idea_rangeroot(base) is False:
             raise InvalidBudException(
                 f"Non range-root fact:{base} can only be set by range-root fact"
             )
-
         elif fact_base_idea.is_math() and self._is_idea_rangeroot(base):
             # WHEN idea is "range-root" identify any reason.bases that are descendants
             # calculate and set those descendant facts
@@ -523,15 +512,11 @@ class BudUnit:
         if not problem:
             return self._idea_dict
         if self._econs_justified is False:
-            raise Exception_econs_justified(
-                f"Cannot return problem set because _econs_justified={self._econs_justified}."
-            )
+            exception_text = f"Cannot return problem set because _econs_justified={self._econs_justified}."
+            raise Exception_econs_justified(exception_text)
 
-        return {
-            x_idea.get_road(): x_idea
-            for x_idea in self._idea_dict.values()
-            if x_idea._problem_bool
-        }
+        x_ideas = self._idea_dict.values()
+        return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea._problem_bool}
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
@@ -743,15 +728,10 @@ class BudUnit:
     def set_owner_id(self, new_owner_id):
         self._owner_id = new_owner_id
 
-    def edit_idea_label(
-        self,
-        old_road: RoadUnit,
-        new_label: RoadNode,
-    ):
+    def edit_idea_label(self, old_road: RoadUnit, new_label: RoadNode):
         if self._road_delimiter in new_label:
-            raise InvalidLabelException(
-                f"Cannot modify '{old_road}' because new_label {new_label} contains delimiter {self._road_delimiter}"
-            )
+            exception_text = f"Cannot modify '{old_road}' because new_label {new_label} contains delimiter {self._road_delimiter}"
+            raise InvalidLabelException(exception_text)
         if self.idea_exists(old_road) is False:
             raise InvalidBudException(f"Idea {old_road=} does not exist")
 
@@ -788,10 +768,7 @@ class BudUnit:
             if listed_idea._kids is not None:
                 for idea_kid in listed_idea._kids.values():
                     idea_iter_list.append(idea_kid)
-                    if is_sub_road(
-                        ref_road=idea_kid._parent_road,
-                        sub_road=old_road,
-                    ):
+                    if is_sub_road(idea_kid._parent_road, sub_road=old_road):
                         idea_kid._parent_road = rebuild_road(
                             subj_road=idea_kid._parent_road,
                             old_road=old_road,
@@ -804,9 +781,7 @@ class BudUnit:
         x_ideaattrfilter.set_premise_range_attributes_influenced_by_premise_idea(
             premise_open=premise_idea._begin,
             premise_nigh=premise_idea._close,
-            # premise_numor=premise_idea.anc_numor,
             premise_denom=premise_idea._denom,
-            # anc_reest=premise_idea.anc_reest,
         )
 
     def edit_reason(
@@ -864,9 +839,8 @@ class BudUnit:
         if healerhold is not None:
             for x_group_id in healerhold._group_ids:
                 if self.get_acctunit_group_ids_dict().get(x_group_id) is None:
-                    raise healerhold_group_id_Exception(
-                        f"Idea cannot edit healerhold because group_id '{x_group_id}' does not exist as group in Bud"
-                    )
+                    exception_text = f"Idea cannot edit healerhold because group_id '{x_group_id}' does not exist as group in Bud"
+                    raise healerhold_group_id_Exception(exception_text)
 
         x_ideaattrfilter = ideaattrfilter_shop(
             mass=mass,
@@ -904,10 +878,6 @@ class BudUnit:
             self._set_ideaattrfilter_premise_ranges(x_ideaattrfilter)
         x_idea = self.get_idea_obj(road)
         x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrfilter)
-
-        # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
-        # if awardlink_del is not None or awardlink is not None:
-        #     self.settle_bud()
 
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
@@ -1490,9 +1460,9 @@ class BudUnit:
         )
 
     def set_offtrack_fund(self) -> float:
+        mass_set = self._offtrack_kids_mass_set
         self._offtrack_fund = sum(
-            self.get_idea_obj(x_roadunit).get_fund_share()
-            for x_roadunit in self._offtrack_kids_mass_set
+            self.get_idea_obj(x_roadunit).get_fund_share() for x_roadunit in mass_set
         )
 
 
