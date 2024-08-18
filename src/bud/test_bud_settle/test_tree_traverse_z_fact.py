@@ -5,6 +5,32 @@ from src.bud.bud import budunit_shop
 from pytest import raises as pytest_raises
 
 
+def test_BudUnit_settle_bud_ChangesIdeaUnit_pledge_task():
+    # ESTABLISH
+    yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
+    ced_min_label = "CE0_minutes"
+    ced_road = yao_bud.make_l1_road(ced_min_label)
+
+    # WHEN
+    yao_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=85)
+
+    # THEN
+    mail_road = yao_bud.make_l1_road("obtain mail")
+    idea_dict = yao_bud.get_idea_dict()
+    mail_idea = idea_dict.get(mail_road)
+    yao_bud.set_fact(base=ced_road, pick=ced_road, open=82, nigh=95)
+    assert mail_idea.pledge is True
+    assert mail_idea._task is False
+
+    # WHEN
+    yao_bud.settle_bud()
+
+    # THEN
+    mail_idea = yao_bud.get_idea_obj(mail_road)
+    assert mail_idea.pledge
+    assert mail_idea._task
+
+
 def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")

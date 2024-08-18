@@ -167,20 +167,6 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     )
 
 
-def test_BudUnit_set_real_id_CorrectlySetsAttr():
-    # ESTABLISH
-    real_id_text = "Sun"
-    sue_text = "Sue"
-    sue_bud = budunit_shop(sue_text)
-    assert sue_bud._real_id == root_label()
-
-    # WHEN
-    sue_bud.set_real_id(real_id=real_id_text)
-
-    # THEN
-    assert sue_bud._real_id == real_id_text
-
-
 def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
     # ESTABLISH
     real_id_text = "Sun"

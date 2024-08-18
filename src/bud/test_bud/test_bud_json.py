@@ -160,8 +160,6 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
 def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
-    tiger_real_id = "tiger"
-    zia_bud.set_real_id(tiger_real_id)
     x_fund_pool = 66000
     zia_bud._fund_pool = x_fund_pool
     x_fund_coin = 66

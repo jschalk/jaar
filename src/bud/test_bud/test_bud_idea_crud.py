@@ -1,11 +1,11 @@
+from src._road.road import default_road_delimiter_if_none
 from src.bud.healer import healerhold_shop
 from src.bud.examples.example_buds import get_budunit_with_4_levels
+from src.bud.group import awardlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.group import awardlink_shop
 from pytest import raises as pytest_raises
-from src._road.road import default_road_delimiter_if_none
 
 
 def test_BudUnit_set_idea_RaisesErrorWhen_parent_road_IsInvalid():
@@ -225,29 +225,6 @@ def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
 
     # THEN
     assert sue_bud.idea_exists(buildings_road)
-
-
-def test_BudUnit_set_idea_CorrectlySets_bud_real_id_AND_fund_coin():
-    # ESTABLISH'
-    x_fund_coin = 500
-    sue_bud = get_budunit_with_4_levels()
-    sue_bud._fund_coin = x_fund_coin
-    bud_real_id = "Texas"
-    sue_bud.set_real_id(bud_real_id)
-    assert sue_bud._real_id == bud_real_id
-
-    casa_road = sue_bud.make_l1_road("casa")
-    clean_road = sue_bud.make_road(casa_road, "cleaning")
-    cookery_text = "cookery ready to use"
-    cookery_road = sue_bud.make_road(clean_road, cookery_text)
-
-    # WHEN
-    sue_bud.set_idea(ideaunit_shop(cookery_text), clean_road)
-
-    # THEN
-    cookery_idea = sue_bud.get_idea_obj(cookery_road)
-    assert cookery_idea._bud_real_id == bud_real_id
-    assert cookery_idea._fund_coin == x_fund_coin
 
 
 def test_BudUnit_del_idea_obj_Level0CannotBeDeleted():

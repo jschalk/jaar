@@ -1,8 +1,80 @@
+from src._road.road import create_road, get_default_real_id_roadnode as root_label
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
+from src.bud.examples.example_buds import get_budunit_with_4_levels
 from pytest import raises as pytest_raises
-from src._road.road import create_road
+
+
+def test_BudUnit_set_real_id_CorrectlySetsAttr():
+    # ESTABLISH
+    real_id_text = "Sun"
+    sue_text = "Sue"
+    sue_bud = budunit_shop(sue_text)
+    assert sue_bud._real_id == root_label()
+
+    # WHEN
+    sue_bud.set_real_id(real_id=real_id_text)
+
+    # THEN
+    assert sue_bud._real_id == real_id_text
+
+
+def test_BudUnit_set_idea_CorrectlySets_bud_real_id_AND_fund_coin():
+    # ESTABLISH'
+    x_fund_coin = 500
+    sue_bud = get_budunit_with_4_levels()
+    sue_bud._fund_coin = x_fund_coin
+    bud_real_id = "Texas"
+    sue_bud.set_real_id(bud_real_id)
+    assert sue_bud._real_id == bud_real_id
+
+    casa_road = sue_bud.make_l1_road("casa")
+    clean_road = sue_bud.make_road(casa_road, "cleaning")
+    cookery_text = "cookery ready to use"
+    cookery_road = sue_bud.make_road(clean_road, cookery_text)
+
+    # WHEN
+    sue_bud.set_idea(ideaunit_shop(cookery_text), clean_road)
+
+    # THEN
+    cookery_idea = sue_bud.get_idea_obj(cookery_road)
+    assert cookery_idea._bud_real_id == bud_real_id
+    assert cookery_idea._fund_coin == x_fund_coin
+
+
+def test_bud_set_real_id_CorrectlySetsAttr():
+    # ESTABLISH
+    yao_text = "Yao"
+    yao_bud = budunit_shop(_owner_id=yao_text)
+    casa_text = "casa"
+    old_casa_road = yao_bud.make_l1_road(casa_text)
+    swim_text = "swim"
+    old_swim_road = yao_bud.make_road(old_casa_road, swim_text)
+    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
+    yao_bud.set_idea(ideaunit_shop(swim_text), parent_road=old_casa_road)
+    assert yao_bud._owner_id == yao_text
+    assert yao_bud._idearoot._label == yao_bud._real_id
+    casa_idea = yao_bud.get_idea_obj(old_casa_road)
+    assert casa_idea._parent_road == yao_bud._real_id
+    swim_idea = yao_bud.get_idea_obj(old_swim_road)
+    assert swim_idea._parent_road == old_casa_road
+    assert yao_bud._real_id == yao_bud._real_id
+
+    # WHEN
+    real_id_text = "Sun"
+    yao_bud.set_real_id(real_id=real_id_text)
+
+    # THEN
+    new_casa_road = yao_bud.make_l1_road(casa_text)
+    swim_text = "swim"
+    new_swim_road = yao_bud.make_road(new_casa_road, swim_text)
+    assert yao_bud._real_id == real_id_text
+    assert yao_bud._idearoot._label == real_id_text
+    casa_idea = yao_bud.get_idea_obj(new_casa_road)
+    assert casa_idea._parent_road == real_id_text
+    swim_idea = yao_bud.get_idea_obj(new_swim_road)
+    assert swim_idea._parent_road == new_casa_road
 
 
 def test_bud_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnIdea_label():

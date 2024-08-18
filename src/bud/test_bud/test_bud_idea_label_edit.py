@@ -90,40 +90,6 @@ def test_BudUnit_edit_idea_label_RaisesErrorForLevel0When_real_id_IsDifferent():
     )
 
 
-def test_bud_set_real_id_CorrectlySetsAttr():
-    # ESTABLISH
-    yao_text = "Yao"
-    yao_bud = budunit_shop(_owner_id=yao_text)
-    casa_text = "casa"
-    old_casa_road = yao_bud.make_l1_road(casa_text)
-    swim_text = "swim"
-    old_swim_road = yao_bud.make_road(old_casa_road, swim_text)
-    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
-    yao_bud.set_idea(ideaunit_shop(swim_text), parent_road=old_casa_road)
-    assert yao_bud._owner_id == yao_text
-    assert yao_bud._idearoot._label == yao_bud._real_id
-    casa_idea = yao_bud.get_idea_obj(old_casa_road)
-    assert casa_idea._parent_road == yao_bud._real_id
-    swim_idea = yao_bud.get_idea_obj(old_swim_road)
-    assert swim_idea._parent_road == old_casa_road
-    assert yao_bud._real_id == yao_bud._real_id
-
-    # WHEN
-    real_id_text = "Sun"
-    yao_bud.set_real_id(real_id=real_id_text)
-
-    # THEN
-    new_casa_road = yao_bud.make_l1_road(casa_text)
-    swim_text = "swim"
-    new_swim_road = yao_bud.make_road(new_casa_road, swim_text)
-    assert yao_bud._real_id == real_id_text
-    assert yao_bud._idearoot._label == real_id_text
-    casa_idea = yao_bud.get_idea_obj(new_casa_road)
-    assert casa_idea._parent_road == real_id_text
-    swim_idea = yao_bud.get_idea_obj(new_swim_road)
-    assert swim_idea._parent_road == new_casa_road
-
-
 def test_BudUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     # ESTABLISH Idea with kids that will be different
     yao_text = "Yao"
