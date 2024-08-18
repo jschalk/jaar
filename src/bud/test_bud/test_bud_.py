@@ -47,6 +47,7 @@ def test_BudUnit_Exists():
     assert x_bud._offtrack_kids_mass_set is None
     assert x_bud._offtrack_fund is None
     assert x_bud._reason_bases is None
+    assert x_bud._range_inheritors is None
     assert str(type(x_bud._idearoot)).find("None") == 8
 
 
@@ -99,6 +100,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._offtrack_kids_mass_set == set()
     assert not x_bud._offtrack_fund
     assert x_bud._reason_bases == set()
+    assert x_bud._range_inheritors == {}
     print(f"{type(x_bud._idearoot)=}") == 0
     assert str(type(x_bud._idearoot)).find(".idea.IdeaUnit'>") > 0
 

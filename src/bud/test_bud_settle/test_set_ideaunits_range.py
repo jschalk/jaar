@@ -217,6 +217,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     assert time1_idea._close != time0_close
     assert not time1_idea._gogo_calc
     assert not time1_idea._stop_calc
+    assert yao_bud._range_inheritors == {}
 
     # WHEN
     yao_bud._set_ideaunits_range()
@@ -228,6 +229,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     assert not time1_idea._close
     assert time1_idea._gogo_calc == time0_begin
     assert time1_idea._stop_calc == time0_close
+    assert yao_bud._range_inheritors == {time1_road: time0_road}
 
 
 def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_NodeWith_denom():
@@ -378,6 +380,7 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     assert time2_idea._addin == time2_addin
     assert not time2_idea._gogo_calc
     assert not time2_idea._stop_calc
+    assert yao_bud._range_inheritors == {}
 
     # WHEN
     yao_bud._set_ideaunits_range()
@@ -389,6 +392,7 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     assert time2_idea._stop_calc == time0_idea._stop_calc + time2_addin
     assert time2_idea._gogo_calc == 8
     assert time2_idea._stop_calc == 12
+    assert yao_bud._range_inheritors == {time1_road: time0_road, time2_road: time0_road}
 
 
 def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_NodeWith_denom_addin():
@@ -451,6 +455,7 @@ def test_BudUnit_set_ideaunits_range_Sets_range_push_IdeaUnit_Simple0():
     assert not day_idea._close
     assert not day_idea._gogo_calc
     assert not day_idea._stop_calc
+    assert yao_bud._range_inheritors == {}
 
     # WHEN
     yao_bud._set_ideaunits_range()
@@ -460,6 +465,7 @@ def test_BudUnit_set_ideaunits_range_Sets_range_push_IdeaUnit_Simple0():
     assert not day_idea._close
     assert day_idea._gogo_calc == time0_begin
     assert day_idea._stop_calc == time0_close
+    assert yao_bud._range_inheritors == {day_road: time0_road}
 
 
 def test_BudUnit_set_ideaunits_range_Sets_range_push_Decesdents():
@@ -486,6 +492,7 @@ def test_BudUnit_set_ideaunits_range_Sets_range_push_Decesdents():
     assert not day_idea._stop_calc
     assert not hour_idea._gogo_calc
     assert not hour_idea._stop_calc
+    assert yao_bud._range_inheritors == {}
 
     # WHEN
     yao_bud._set_ideaunits_range()
@@ -495,6 +502,7 @@ def test_BudUnit_set_ideaunits_range_Sets_range_push_Decesdents():
     assert day_idea._stop_calc == time0_close
     assert hour_idea._gogo_calc == day_idea._gogo_calc / hour_denom
     assert hour_idea._stop_calc == day_idea._stop_calc / hour_denom
+    assert yao_bud._range_inheritors == {day_road: time0_road, hour_road: time0_road}
 
 
 def test_BudUnit_set_ideaunits_range_RaisesErrorIfDescendentHasBeenEvaluated():

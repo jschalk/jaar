@@ -137,6 +137,7 @@ class BudUnit:
     _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
     _reason_bases: set[RoadUnit] = None
+    _range_inheritors: dict[RoadUnit, RoadUnit] = None
     # settle_bud Calculated field end
 
     def del_last_gift_id(self):
@@ -648,7 +649,6 @@ class BudUnit:
         if not filter_out_missing_awardlinks_group_ids:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
-        # print(f"{idea_kid.get_road()=}")
 
         # create any missing ideas
         if not create_missing_ancestors and self.idea_exists(parent_road) is False:
@@ -1091,6 +1091,7 @@ class BudUnit:
                 parent_idea = self.get_idea_obj(parent_road)
                 r_idea._gogo_calc = parent_idea._gogo_calc
                 r_idea._stop_calc = parent_idea._stop_calc
+                self._range_inheritors[r_idea.get_road()] = math_idea.get_road()
             r_idea._transform_gogo_calc_stop_calc()
 
             for range_push_road in r_idea._range_pushs:
@@ -1101,6 +1102,8 @@ class BudUnit:
                 range_push_idea._stop_calc = r_idea._stop_calc
                 range_push_idea._transform_gogo_calc_stop_calc()
                 single_range_idea_list.extend(iter(range_push_idea._kids.values()))
+                math_idea_road = math_idea.get_road()
+                self._range_inheritors[range_push_idea.get_road()] = math_idea_road
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
     def _set_ideaunits_range(self):
@@ -1250,6 +1253,7 @@ class BudUnit:
         self._idea_dict = {self._idearoot.get_road(): self._idearoot}
         self._offtrack_kids_mass_set = set()
         self._reason_bases = set()
+        self._range_inheritors = {}
 
     def _clear_bud_base_metrics(self):
         self._econs_justified = True
@@ -1503,6 +1507,7 @@ def budunit_shop(
         _sum_healerhold_share=get_0_if_None(),
         _offtrack_kids_mass_set=set(),
         _reason_bases=set(),
+        _range_inheritors={},
     )
     x_bud._idearoot = ideaunit_shop(
         _root=True,
