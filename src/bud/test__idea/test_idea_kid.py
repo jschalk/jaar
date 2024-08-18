@@ -22,6 +22,21 @@ def test_get_kids_in_range_GetsCorrectIdeas():
     assert mon366_idea.get_kids_in_range(begin=31, close=31)[0]._label == feb29_text
 
 
+def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
+    # ESTABLISH
+    mon366_text = "366months"
+    mon366_idea = ideaunit_shop(mon366_text)
+    jan_text = "Jan"
+    feb29_text = "Feb29"
+    mar_text = "Mar"
+    mon366_idea.add_kid(ideaunit_shop(jan_text))
+    mon366_idea.add_kid(ideaunit_shop(feb29_text))
+    mon366_idea.add_kid(ideaunit_shop(mar_text))
+
+    # WHEN / THEN
+    assert len(mon366_idea.get_kids_in_range()) == 3
+
+
 # def test_IdeaUnit_vaild_DenomCorrectInheritsBeginAndClose():
 #     # ESTABLISH
 #     casa_text = "casa"
