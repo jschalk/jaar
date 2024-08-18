@@ -217,25 +217,6 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
 #     return bool_x
 
 
-def test_BudUnit_get_idea_list_without_root_CorrectlyCalculatesIdeaAttributes():
-    # ESTABLISH
-    x_budunit = get_budunit_with7amCleanTableReason()
-
-    # WHEN
-    idea_list_without_idearoot = x_budunit.get_idea_list_without_idearoot()
-    idea_dict_with_idearoot = x_budunit.get_idea_dict()
-
-    # THEN
-    assert len(idea_list_without_idearoot) == 28
-    assert len(idea_list_without_idearoot) + 1 == len(idea_dict_with_idearoot)
-
-    # for idea in x_budunit.get_idea_list_without_idearoot():
-    #     assert str(type(idea)).find(".idea.IdeaUnit'>") > 0
-
-    # for idea in x_budunit.get_idea_list_without_idearoot():
-    #     print(f"{idea._label=}")
-
-
 def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     # ESTABLISH
     sue_budunit = get_budunit_with7amCleanTableReason()

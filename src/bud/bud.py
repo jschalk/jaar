@@ -1083,7 +1083,7 @@ class BudUnit:
         idea_list = parent_idea.get_kids_in_range(begin=begin, close=close)
         return {x_idea._label: x_idea for x_idea in idea_list}
 
-    def tree_range_push_traverse_check(self):
+    def init_idea_tree_walk(self):
         range_push_dict = {}
         idea_list = [self.get_idea_obj(self._real_id)]
         while idea_list != []:
@@ -1130,10 +1130,7 @@ class BudUnit:
                 single_range_idea_list.extend(iter(range_push_idea._kids.values()))
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
-    def tree_range_traverse_calc(self):
-        if self._idearoot.is_math():
-            self._distribute_math_attrs(self._idearoot)
-        print(f"{self._idea_dict.keys()=}")
+    def set_ideaunits_range(self):
         for x_idea in self._idea_dict.values():
             if x_idea.is_math():
                 self._distribute_math_attrs(x_idea)
@@ -1289,8 +1286,8 @@ class BudUnit:
 
     def settle_bud(self, econ_exceptions: bool = False):
         self._set_tree_traverse_stage()
-        self.tree_range_push_traverse_check()
-        self.tree_range_traverse_calc()
+        self.init_idea_tree_walk()
+        self.set_ideaunits_range()
         self._calc_acctunit_metrics()
         max_count = self._max_tree_traverse
 
@@ -1491,12 +1488,6 @@ class BudUnit:
             filter_out_missing_awardlinks_group_ids=True,
             create_missing_ideas=True,
         )
-
-    def get_idea_list_without_idearoot(self) -> list[IdeaUnit]:
-        self.settle_bud()
-        x_list = list(self._idea_dict.values())
-        x_list.pop(0)
-        return x_list
 
     def set_offtrack_fund(self) -> float:
         self._offtrack_fund = sum(

@@ -447,17 +447,17 @@ def test_DoerHeir_set_grouphold_DoerUnit_NotEqual_ParentDoerHeir_NonEmpty():
 def test_DoerUnit_get_grouphold_ReturnsCorrectObj():
     # ESTABLISH
     climb_text = ",climbers"
-    walk_text = ",walkers"
+    hike_text = ",hikers"
     swim_text = ";swimmers"
     run_text = ";runners"
 
     x_doerunit = doerunit_shop()
     x_doerunit.set_grouphold(climb_text)
-    x_doerunit.set_grouphold(walk_text)
+    x_doerunit.set_grouphold(hike_text)
     x_doerunit.set_grouphold(swim_text)
 
     # WHEN / THEN
-    assert x_doerunit.get_grouphold(walk_text) is not None
+    assert x_doerunit.get_grouphold(hike_text) is not None
     assert x_doerunit.get_grouphold(swim_text) is not None
     assert x_doerunit.get_grouphold(run_text) is None
 
