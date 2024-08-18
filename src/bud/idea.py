@@ -341,19 +341,18 @@ class IdeaUnit:
         else:
             return self._fund_cease - self._fund_onset
 
-    def get_kids_in_range(self, begin: float = None, close: float = None) -> list:
-        if begin is None and close is None:
+    def get_kids_in_range(self, x_gogo: float = None, x_stop: float = None) -> list:
+        if x_gogo is None and x_stop is None:
             return self._kids.values()
-        else:
-            return [
-                x_idea
-                for x_idea in self._kids.values()
-                if (
-                    (begin >= x_idea._begin and begin < x_idea._close)
-                    or (close > x_idea._begin and close < x_idea._close)
-                    or (begin <= x_idea._begin and close >= x_idea._close)
-                )
-            ]
+        x_list = []
+        for x_idea in self._kids.values():
+            x_gogo_in_range = x_gogo >= x_idea._gogo_calc and x_gogo < x_idea._stop_calc
+            x_stop_in_range = x_stop > x_idea._gogo_calc and x_stop < x_idea._stop_calc
+            both_in_range = x_gogo <= x_idea._gogo_calc and x_stop >= x_idea._stop_calc
+
+            if x_gogo_in_range or x_stop_in_range or both_in_range:
+                x_list.append(x_idea)
+        return x_list
 
     def get_obj_key(self) -> RoadNode:
         return self._label

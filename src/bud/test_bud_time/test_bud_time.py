@@ -359,27 +359,6 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     # assert sue_budunit == ex1_budunit
 
 
-# def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario1():
-#     # ESTABLISH
-#     sue_budunit = budunit_shop("Sue")
-#     sue_budunit.set_time_hreg_ideas(c400_count=7)
-
-#     # WHEN
-#     time_road = sue_budunit.make_l1_road("time")
-#     tech_road = sue_budunit.make_road(time_road, "tech")
-#     week_road = sue_budunit.make_road(tech_road, "week")
-#     x_begin = 1440
-#     x_close = 4 * 1440
-#     ranged_ideas = sue_budunit.get_idea_ranged_kids(week_road, x_begin, x_close)
-
-#     # THEN
-#     # for idea_x in ranged_ideas.values():
-#     #     print(
-#     #         f"{x_begin=} {x_close=} {idea_x._label=} {idea_x._begin=} {idea_x._close=} "
-#     #     )
-#     assert len(ranged_ideas) == 3
-
-
 # def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
 #     # ESTABLISH
 #     sue_budunit = budunit_shop("Sue")

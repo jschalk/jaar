@@ -1042,16 +1042,16 @@ class BudUnit:
         return x_idea
 
     def get_idea_ranged_kids(
-        self, idea_road: str, begin: float = None, close: float = None
+        self, idea_road: str, x_gogo_calc: float = None, x_stop_calc: float = None
     ) -> dict[IdeaUnit]:
         parent_idea = self.get_idea_obj(idea_road)
-        if begin is None and close is None:
-            begin = parent_idea._begin
-            close = parent_idea._close
-        elif begin is not None and close is None:
-            close = begin
+        if x_gogo_calc is None and x_stop_calc is None:
+            x_gogo_calc = parent_idea._gogo_want
+            x_gogo_calc = parent_idea._stop_want
+        elif x_gogo_calc is not None and x_stop_calc is None:
+            x_stop_calc = x_gogo_calc
 
-        idea_list = parent_idea.get_kids_in_range(begin=begin, close=close)
+        idea_list = parent_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
         return {x_idea._label: x_idea for x_idea in idea_list}
 
     def _init_idea_tree_walk(self):

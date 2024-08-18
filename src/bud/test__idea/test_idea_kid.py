@@ -5,79 +5,46 @@ from pytest import raises as pytest_raises
 
 def test_get_kids_in_range_GetsCorrectIdeas():
     # ESTABLISH
-    mon366_text = "366months"
-    mon366_idea = ideaunit_shop(mon366_text, _begin=0, _close=366)
+    mon_text = "months"
+    mon_idea = ideaunit_shop(mon_text, _begin=0, _close=366)
     jan_text = "Jan"
-    feb29_text = "Feb29"
+    feb_text = "Feb"
     mar_text = "Mar"
-    mon366_idea.add_kid(ideaunit_shop(jan_text, _begin=0, _close=31))
-    mon366_idea.add_kid(ideaunit_shop(feb29_text, _begin=31, _close=60))
-    mon366_idea.add_kid(ideaunit_shop(mar_text, _begin=31, _close=91))
+    mon_idea.add_kid(ideaunit_shop(jan_text))
+    mon_idea.add_kid(ideaunit_shop(feb_text))
+    mon_idea.add_kid(ideaunit_shop(mar_text))
+    jan_idea = mon_idea._kids.get(jan_text)
+    feb_idea = mon_idea._kids.get(feb_text)
+    mar_idea = mon_idea._kids.get(mar_text)
+    jan_idea._gogo_calc = 0
+    jan_idea._stop_calc = 31
+    feb_idea._gogo_calc = 31
+    feb_idea._stop_calc = 60
+    mar_idea._gogo_calc = 60
+    mar_idea._stop_calc = 91
 
     # WHEN / THEN
-    assert len(mon366_idea.get_kids_in_range(begin=100, close=120)) == 0
-    assert len(mon366_idea.get_kids_in_range(begin=0, close=31)) == 1
-    assert len(mon366_idea.get_kids_in_range(begin=5, close=5)) == 1
-    assert len(mon366_idea.get_kids_in_range(begin=0, close=61)) == 3
-    assert mon366_idea.get_kids_in_range(begin=31, close=31)[0]._label == feb29_text
+    assert len(mon_idea.get_kids_in_range(x_gogo=100, x_stop=120)) == 0
+    assert len(mon_idea.get_kids_in_range(x_gogo=0, x_stop=31)) == 1
+    assert len(mon_idea.get_kids_in_range(x_gogo=5, x_stop=5)) == 1
+    assert len(mon_idea.get_kids_in_range(x_gogo=0, x_stop=61)) == 3
+    assert len(mon_idea.get_kids_in_range(x_gogo=31, x_stop=31)) == 1
+    assert mon_idea.get_kids_in_range(x_gogo=31, x_stop=31)[0]._label == feb_text
 
 
 def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
     # ESTABLISH
-    mon366_text = "366months"
-    mon366_idea = ideaunit_shop(mon366_text)
+    mon_text = "366months"
+    mon_idea = ideaunit_shop(mon_text)
     jan_text = "Jan"
     feb29_text = "Feb29"
     mar_text = "Mar"
-    mon366_idea.add_kid(ideaunit_shop(jan_text))
-    mon366_idea.add_kid(ideaunit_shop(feb29_text))
-    mon366_idea.add_kid(ideaunit_shop(mar_text))
+    mon_idea.add_kid(ideaunit_shop(jan_text))
+    mon_idea.add_kid(ideaunit_shop(feb29_text))
+    mon_idea.add_kid(ideaunit_shop(mar_text))
 
     # WHEN / THEN
-    assert len(mon366_idea.get_kids_in_range()) == 3
-
-
-# def test_IdeaUnit_vaild_DenomCorrectInheritsBeginAndClose():
-#     # ESTABLISH
-#     casa_text = "casa"
-#     clean_text = "clean"
-#     # parent idea
-#     casa_idea = ideaunit_shop(casa_text, _begin=22.0, _close=66.0)
-#     # kid idea
-#     clean_idea = ideaunit_shop(clean_text, _numor=1, _denom=11.0, _reest=False)
-
-#     # WHEN
-#     casa_idea.add_kid(clean_idea)
-
-#     # THEN
-#     assert casa_idea._kids[clean_text]._begin == 2
-#     assert casa_idea._kids[clean_text]._close == 6
-#     kid_idea_expected = ideaunit_shop(
-#         clean_text, _numor=1, _denom=11.0, _reest=False, _begin=2, _close=6
-#     )
-#     assert casa_idea._kids[clean_text] == kid_idea_expected
-
-
-# def test_IdeaUnit_invaild_DenomThrowsError():
-#     # ESTABLISH
-#     casa_text = "casa"
-#     parent_idea = ideaunit_shop(casa_text)
-#     casa_text = "casa"
-#     casa_road = create_road(root_label(), casa_text)
-#     clean_text = "clean"
-#     clean_road = create_road(casa_road, clean_text)
-#     print(f"{clean_road=}")
-#     kid_idea = ideaunit_shop(
-#         clean_text, _parent_road=casa_road, _numor=1, _denom=11.0, _reest=False
-#     )
-#     # WHEN / THEN
-#     with pytest_raises(Exception) as excinfo:
-#         parent_idea.add_kid(kid_idea)
-#     print(f"{str(excinfo.value)=}")
-#     assert (
-#         str(excinfo.value)
-#         == f"Idea {clean_road} cannot have numor,denom,reest if parent does not have begin/close range"
-#     )
+    assert len(mon_idea.get_kids_in_range()) == 3
 
 
 def test_IdeaUnit_get_descendants_ReturnsNoRoadUnits():
