@@ -1,15 +1,13 @@
-from src._road.finance import default_fund_coin_if_none
-from src._road.road import (
-    get_default_real_id_roadnode as root_label,
-    create_road,
-    default_road_delimiter_if_none,
+from src._road.road import get_default_real_id_roadnode as root_label, create_road
+from src.bud.group import awardheir_shop
+from src.bud.reason_idea import (
+    reasonunit_shop,
+    reasonheir_shop,
+    premiseunit_shop,
+    factheir_shop,
 )
-from src.bud.healer import healerhold_shop
-from src.bud.group import awardlink_shop, awardheir_shop
-from src.bud.reason_idea import reasonunit_shop, reasonheir_shop, premiseunit_shop
 from src.bud.reason_doer import doerunit_shop, doerheir_shop
-from src.bud.origin import originunit_shop
-from src.bud.idea import IdeaUnit, ideaunit_shop
+from src.bud.idea import ideaunit_shop
 
 
 def test_IdeaUnit_clear_all_acct_cred_debt_ClearsCorrectly():
@@ -148,6 +146,57 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesChanges():
     reasonheir = reasonheir_shop(run_road, premises=run_premises)
     reasonheirs = {reasonheir.base: reasonheir}
     assert ball_idea._reasonheirs == reasonheirs
+
+
+def test_IdeaUnit_set_range_factheirs_SetsAttrNoParameters():
+    # ESTABLISH
+    ball_idea = ideaunit_shop("ball")
+    assert ball_idea._factheirs == {}
+
+    # WHEN
+    ball_idea.set_range_factheirs(bud_idea_dict={}, range_inheritors={})
+
+    # THEN
+    assert ball_idea._factheirs == {}
+
+
+def test_IdeaUnit_set_range_factheirs_SetsAttrNoChange():
+    # ESTABLISH
+    week_text = "week"
+    week_road = create_road(root_label(), week_text)
+    week_open = 3
+    week_nigh = 7
+    week_addin = 10
+    week_idea = ideaunit_shop(week_text, _parent_road=root_label(), _addin=week_addin)
+    week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
+    tue_text = "Tue"
+    tue_road = create_road(week_road, tue_text)
+    tue_addin = 100
+    tue_idea = ideaunit_shop(tue_text, _parent_road=week_road, _addin=tue_addin)
+    ball_text = "ball"
+    ball_road = create_road(root_label(), ball_text)
+    ball_idea = ideaunit_shop(ball_text)
+    ball_idea._set_factheir(week_factheir)
+    tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
+    x_bud_idea_dict = {week_idea.get_road(): week_idea, tue_idea.get_road(): tue_idea}
+    ball_idea.set_reasonheirs(x_bud_idea_dict, tue_reasonheirs)
+
+    x_range_inheritors = {tue_road: week_road}
+    assert len(ball_idea._reasonheirs) == 1
+    assert ball_idea._factheirs == {week_road: week_factheir}
+    assert ball_idea._factheirs.get(week_road)
+    assert len(ball_idea._factheirs) == 1
+    assert ball_idea._factheirs.get(tue_road) is None
+
+    # WHEN
+    ball_idea.set_range_factheirs(x_bud_idea_dict, x_range_inheritors)
+
+    # THEN
+    tue_open = 113
+    tue_nigh = 117
+    tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
+    assert len(ball_idea._factheirs) == 2
+    assert ball_idea._factheirs == {tue_road: tue_factheir, week_road: week_factheir}
 
 
 def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():

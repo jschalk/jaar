@@ -26,7 +26,7 @@ from src._road.road import (
     replace_road_delimiter,
     validate_roadnode,
     roadunit_valid_dir_path,
-    all_roadunits,
+    all_roadunits_between,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -665,7 +665,7 @@ def test_GroupID_exists():
     assert str(type(bikers_group_id)).find("src._road.road.GroupID") > 0
 
 
-def test_all_roadunits_ReturnsObj():
+def test_all_roadunits_between_ReturnsObj():
     casa_text = "casa"
     sport_text = "sport"
     run_text = "run/swim"
@@ -674,6 +674,10 @@ def test_all_roadunits_ReturnsObj():
     run_road = create_road(sport_road, run_text)
     lap_road = create_road(run_road, lap_text)
 
-    assert all_roadunits(sport_road, sport_road) == [sport_road]
-    assert all_roadunits(sport_road, run_road) == [sport_road, run_road]
-    assert all_roadunits(sport_road, lap_road) == [sport_road, run_road, lap_road]
+    assert all_roadunits_between(sport_road, sport_road) == [sport_road]
+    assert all_roadunits_between(sport_road, run_road) == [sport_road, run_road]
+    assert all_roadunits_between(sport_road, lap_road) == [
+        sport_road,
+        run_road,
+        lap_road,
+    ]

@@ -11,6 +11,7 @@ from src._road.road import (
     RoadNode,
     is_sub_road,
     get_default_real_id_roadnode as root_label,
+    all_roadunits_between,
     create_road as road_create_road,
     default_road_delimiter_if_none,
     replace_road_delimiter,
@@ -783,6 +784,29 @@ class IdeaUnit:
             if self._doerheir._owner_id_doer is False:
                 active_bool = False
         return active_bool
+
+    def set_range_factheirs(
+        self, bud_idea_dict: dict[RoadUnit,], range_inheritors: dict[RoadUnit, RoadUnit]
+    ):
+        for reason_base in self._reasonheirs.keys():
+            range_root_road = range_inheritors.get(reason_base)
+            if range_root_road:
+                all_roads = all_roadunits_between(range_root_road, reason_base)
+                all_ideas = []
+                for x_road in all_roads:
+                    x_idea = bud_idea_dict.get(x_road)
+                    all_ideas.append(x_idea)
+                self._create_factheir(all_ideas, range_root_road, reason_base)
+
+    def _create_factheir(
+        self, all_ideas: list, range_root_road: RoadUnit, reason_base: RoadUnit
+    ):
+        range_root_factheir = self._factheirs.get(range_root_road)
+        new_factheir_open = ideas_calculated_float(all_ideas, range_root_factheir.open)
+        new_factheir_nigh = ideas_calculated_float(all_ideas, range_root_factheir.nigh)
+        new_factheir_obj = factheir_shop(reason_base, reason_base)
+        new_factheir_obj.set_attr(open=new_factheir_open, nigh=new_factheir_nigh)
+        self._set_factheir(new_factheir_obj)
 
     def _are_all_reasonheir_active_true(self) -> bool:
         x_reasonheirs = self._reasonheirs.values()

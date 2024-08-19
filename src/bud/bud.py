@@ -23,7 +23,7 @@ from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
     get_parent_road,
     is_sub_road,
-    all_roadunits,
+    all_roadunits_between,
     road_validate,
     rebuild_road,
     get_terminus_node,
@@ -1058,7 +1058,7 @@ class BudUnit:
         self, math_road: RoadUnit, inheritor_road: RoadUnit
     ) -> list[IdeaUnit]:
         if is_sub_road(inheritor_road, math_road):
-            idea_roads = all_roadunits(math_road, inheritor_road)
+            idea_roads = all_roadunits_between(math_road, inheritor_road)
         x_list = []
         for x_idea_road in idea_roads:
             x_list.append(self.get_idea_obj(x_idea_road))

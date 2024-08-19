@@ -161,7 +161,7 @@ def get_ancestor_roads(road: RoadUnit) -> list[RoadUnit]:
     return x_roads
 
 
-def all_roadunits(src_road, dst_road) -> list[RoadUnit]:
+def all_roadunits_between(src_road, dst_road) -> list[RoadUnit]:
     x_list = []
     anc_roads = get_ancestor_roads(dst_road)
     while anc_roads != []:
