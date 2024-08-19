@@ -206,18 +206,18 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
 
 def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     yao_bud = budunit_shop("Yao", _tally=10)
-    ced_min_text = "CE0_minutes"
-    ced_min_idea = ideaunit_shop(ced_min_text)
-    ced_road = yao_bud.make_l1_road(ced_min_text)
-    ced_reasonunit = reasonunit_shop(ced_road)
-    ced_reasonunit.set_premise(ced_road, open=80, nigh=90)
-    yao_bud.set_l1_idea(ced_min_idea)
-    yao_bud.set_fact(ced_road, ced_road, 85, 95)
+    hour_min_text = "hour"
+    hour_min_idea = ideaunit_shop(hour_min_text)
+    hour_road = yao_bud.make_l1_road(hour_min_text)
+    hour_reasonunit = reasonunit_shop(hour_road)
+    hour_reasonunit.set_premise(hour_road, open=80, nigh=90)
+    yao_bud.set_l1_idea(hour_min_idea)
+    yao_bud.set_fact(hour_road, hour_road, 85, 95)
     mail_text = "obtain mail"
     mail_road = yao_bud.make_l1_road(mail_text)
     mail_idea = ideaunit_shop(mail_text, pledge=True)
     yao_bud.set_l1_idea(mail_idea)
-    yao_bud.edit_idea_attr(mail_road, reason=ced_reasonunit)
+    yao_bud.edit_idea_attr(mail_road, reason=hour_reasonunit)
     return yao_bud
 
 
