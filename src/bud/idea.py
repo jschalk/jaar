@@ -1100,3 +1100,16 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True
     else:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else None
+
+
+def ideas_calculated_float(
+    idea_list: list[IdeaUnit], x_float: float
+) -> tuple[float, float]:
+    for x_idea in idea_list:
+        if x_idea._addin:
+            x_float += get_0_if_None(x_idea._addin)
+        if (x_idea._numor or x_idea._denom) and not x_idea._reest:
+            x_float *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
+        if x_idea._denom and x_idea._reest:
+            x_float = x_float % get_1_if_None(x_idea._denom)
+    return x_float
