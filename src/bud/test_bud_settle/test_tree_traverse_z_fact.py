@@ -226,8 +226,6 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     assert yao_bud is not None
     assert len(yao_bud._idearoot._kids[mail_text]._reasonunits) == 1
     idea_dict = yao_bud.get_idea_dict()
-    # for idea in idea_dict:
-    #     print(idea._label)
     mail_idea = idea_dict.get(yao_bud.make_l1_road(mail_text))
     hour_text = "hour"
     hour_road = yao_bud.make_l1_road(hour_text)

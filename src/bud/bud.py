@@ -1244,7 +1244,7 @@ class BudUnit:
                 x_groupbox.set_membership(x_membership)
                 self.set_groupbox(x_groupbox)
 
-    def _calc_acctunit_metrics(self):
+    def _set_respect_ledgers(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -1257,7 +1257,7 @@ class BudUnit:
         self._create_groupboxs_metrics()
         self._reset_acctunit_fund_give_take()
 
-    def _set_tree_traverse_stage(self):
+    def _clear_settle_attrs(self):
         self._rational = False
         self._tree_traverse_count = 0
         self._idea_dict = {self._idearoot.get_road(): self._idearoot}
@@ -1265,7 +1265,7 @@ class BudUnit:
         self._reason_bases = set()
         self._range_inheritors = {}
 
-    def _clear_bud_base_metrics(self):
+    def _pre_tree_traverse_attrs(self):
         self._econs_justified = True
         self._econs_buildable = False
         self._sum_healerhold_share = 0
@@ -1273,19 +1273,20 @@ class BudUnit:
         self._healers_dict = {}
 
     def settle_bud(self, econ_exceptions: bool = False):
-        self._set_tree_traverse_stage()
+        self._clear_settle_attrs()
         self._init_idea_tree_walk()
         self._set_ideaunits_range()
-        self._calc_acctunit_metrics()
-        max_count = self._max_tree_traverse
+        self._set_respect_ledgers()
 
+        max_count = self._max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._clear_bud_base_metrics()
+            self._pre_tree_traverse_attrs()
             self._pre_tree_traverse_cred_debt_reset()
             self._set_root_attributes(econ_exceptions)
             self._execute_tree_traverse(econ_exceptions)
             self._check_if_any_idea_active_status_has_altered()
             self._tree_traverse_count += 1
+
         self._after_all_tree_traverses_set_cred_debt()
         self._after_all_tree_traverses_set_healerhold_share()
 

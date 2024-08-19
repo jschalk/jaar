@@ -1,7 +1,7 @@
 from src._instrument.file import open_file
 from src._road.road import RoadUnit
 from src.bud.idea import ideaunit_shop
-from src.bud.reason_idea import factunit_shop, premiseunit_shop, reasonunit_shop
+from src.bud.reason_idea import factunit_shop, reasonunit_shop
 from src.bud.bud import (
     BudUnit,
     budunit_shop,
@@ -49,7 +49,7 @@ def budunit_v002() -> BudUnit:
 
 
 def get_budunit_with_4_levels() -> BudUnit:
-    sue_bud = budunit_shop("Sue", _tally=10)
+    sue_bud = budunit_shop("Sue")
     casa_text = "casa"
     sue_bud.set_l1_idea(ideaunit_shop(casa_text, _mass=30, pledge=True))
     cat_text = "cat have dinner"
@@ -205,7 +205,7 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
 
 
 def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
-    yao_bud = budunit_shop("Yao", _tally=10)
+    yao_bud = budunit_shop("Yao")
     hour_min_text = "hour"
     hour_min_idea = ideaunit_shop(hour_min_text)
     hour_road = yao_bud.make_l1_road(hour_min_text)
@@ -222,8 +222,8 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
 
 
 def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
-    tiger_real_id = "tiger"
-    zia_bud = budunit_shop("Zia", _tally=10, _real_id=tiger_real_id)
+    tiger_text = "tiger"
+    zia_bud = budunit_shop("Zia", _real_id=tiger_text)
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
     idea_kid_shave = ideaunit_shop(shave_text, _mass=30, pledge=True)
@@ -273,7 +273,7 @@ def get_budunit_irrational_example() -> BudUnit:
     # 1. hatter_bud._irrational is True
     # 2. hatter_bud._tree_traverse_count = hatter_bud._max_tree_traverse
 
-    hatter_bud = budunit_shop("Mad Hatter", _tally=10)
+    hatter_bud = budunit_shop("Mad Hatter")
     hatter_bud.set_max_tree_traverse(3)
 
     egg_text = "egg first"

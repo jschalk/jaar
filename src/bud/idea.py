@@ -795,19 +795,14 @@ class IdeaUnit:
     def _coalesce_with_reasonunits(
         self, reasonheirs: dict[RoadUnit, ReasonHeir]
     ) -> dict[RoadUnit, ReasonHeir]:
-        reasonheirs_new = get_empty_dict_if_none(x_dict=deepcopy(reasonheirs))
-        reasonheirs_new.update(self._reasonunits)
-        return reasonheirs_new
+        new_reasonheirs = deepcopy(reasonheirs)
+        new_reasonheirs.update(self._reasonunits)
+        return new_reasonheirs
 
     def set_reasonheirs(
-        self,
-        bud_idea_dict: dict[RoadUnit,],
-        reasonheirs: dict[RoadUnit, ReasonCore] = None,
+        self, bud_idea_dict: dict[RoadUnit,], reasonheirs: dict[RoadUnit, ReasonCore]
     ):
-        if not reasonheirs:
-            reasonheirs = self._reasonheirs
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
-
         self._reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
             old_base = old_reasonheir.base
@@ -816,7 +811,7 @@ class IdeaUnit:
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
             base_idea = bud_idea_dict.get(old_reasonheir.base)
-            if base_idea is not None:
+            if base_idea:
                 new_reasonheir.set_base_idea_active_value(base_idea._active)
             self._reasonheirs[new_reasonheir.base] = new_reasonheir
 

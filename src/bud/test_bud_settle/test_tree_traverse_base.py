@@ -8,7 +8,7 @@ from src.bud.group import awardlink_shop
 from src.bud.graphic import display_ideatree
 
 
-def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
+def test_BudUnit_clear_settle_attrs_CorrectlySetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     x_rational = True
@@ -28,7 +28,7 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     assert sue_bud._range_inheritors != {}
 
     # WHEN
-    sue_bud._set_tree_traverse_stage()
+    sue_bud._clear_settle_attrs()
 
     # THEN
     assert sue_bud._rational != x_rational
@@ -42,7 +42,7 @@ def test_BudUnit_set_tree_traverse_stage_CorrectlySetsAttrs():
     assert sue_bud._range_inheritors == {}
 
 
-def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
+def test_BudUnit_pre_tree_traverse_attrs_CorrectlySetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     x_econ_justifed = False
@@ -59,7 +59,7 @@ def test_BudUnit_clear_bud_base_metrics_CorrectlySetsAttrs():
     assert sue_bud._healers_dict != {}
 
     # WHEN
-    sue_bud._clear_bud_base_metrics()
+    sue_bud._pre_tree_traverse_attrs()
 
     # THEN
     assert sue_bud._econs_justified != x_econ_justifed

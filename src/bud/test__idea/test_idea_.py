@@ -333,7 +333,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesChanges():
     assert ball_idea._reasonunits != {}
 
     # WHEN
-    ball_idea.set_reasonheirs(reasonheirs=None, bud_idea_dict={})
+    ball_idea.set_reasonheirs(reasonheirs={}, bud_idea_dict={})
 
     # THEN
     reasonheir = reasonheir_shop(run_road, premises=run_premises)
