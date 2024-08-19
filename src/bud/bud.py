@@ -1206,6 +1206,7 @@ class BudUnit:
     ):
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
+        idea_kid.set_range_factheirs(self._idea_dict, self._range_inheritors)
         idea_kid.set_doerheir(parent_idea._doerheir, self._groupboxs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()

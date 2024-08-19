@@ -2,10 +2,12 @@ from src.bud.examples.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,
 )
+from src.bud.group import awardlink_shop
+from src.bud.reason_idea import factunit_shop, factheir_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.bud.group import awardlink_shop
 from src.bud.graphic import display_ideatree
+from pytest import raises as pytest_raises
 
 
 def test_BudUnit_clear_settle_attrs_CorrectlySetsAttrs():
@@ -663,3 +665,102 @@ def test_BudUnit_get_tree_traverse_generated_groupboxs_ReturnsObj():
     # THEN
     assert len(symmerty_group_ids) == 2
     assert symmerty_group_ids == {xio_text, run_text}
+
+
+def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
+    # ESTABLISH
+    yao_text = "yao"
+    yao_bud = budunit_shop(yao_text)
+    week_text = "week"
+    week_road = yao_bud.make_l1_road(week_text)
+    week_addin = 10
+    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, _addin=week_addin)
+    yao_bud.set_l1_idea(week_idea)
+    tue_text = "Tue"
+    tue_road = yao_bud.make_road(week_road, tue_text)
+    tue_addin = 100
+    yao_bud.set_idea(ideaunit_shop(tue_text, _addin=tue_addin), week_road)
+    x_real_id = yao_bud._real_id
+    yao_bud.edit_idea_attr(x_real_id, reason_base=tue_road, reason_premise=tue_road)
+
+    week_open = 3
+    week_nigh = 7
+    yao_bud.set_fact(week_road, week_road, week_open, week_nigh)
+
+    # assert len(ball_idea._reasonheirs) == 1
+    # assert ball_idea._factheirs == {week_road: week_factheir}
+    # assert ball_idea._factheirs.get(week_road)
+    # assert len(ball_idea._factheirs) == 1
+    # assert ball_idea._factheirs.get(tue_road) is None
+
+    # WHEN
+    with pytest_raises(Exception) as excinfo:
+        yao_bud.settle_bud()
+    exception_text = f"Cannot have fact for range inheritor '{tue_road}'. A ranged fact idea must have _begin, _close attributes"
+    assert str(excinfo.value) == exception_text
+
+    # THEN
+    # week_factunit = factunit_shop(week_road, week_road, week_open, week_nigh)
+    # tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
+    # x_bud_idea_dict = {week_idea.get_road(): week_idea, tue_idea.get_road(): tue_idea}
+    # ball_idea.set_reasonheirs(x_bud_idea_dict, tue_reasonheirs)
+    # x_range_inheritors = {tue_road: week_road}
+    # week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
+
+    # tue_open = 113
+    # tue_nigh = 117
+    # tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
+    # root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    # print(f"{week_road=} {root_idea._factheirs.keys()=}")
+    # assert root_idea._factheirs.get(week_road) == week_factheir
+    # assert len(root_idea._factheirs) == 2
+    # assert root_idea._factheirs == {tue_road: tue_factheir, week_road: week_factheir}
+
+
+def test_BudUnit_settle_bud_SetsIdeaUnit_factheir_With_range_factheirs():
+    # ESTABLISH
+    yao_text = "yao"
+    yao_bud = budunit_shop(yao_text)
+    week_text = "week"
+    week_road = yao_bud.make_l1_road(week_text)
+    week_addin = 10
+    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, _addin=week_addin)
+    yao_bud.set_l1_idea(week_idea)
+    tue_text = "Tue"
+    tue_road = yao_bud.make_road(week_road, tue_text)
+    tue_addin = 100
+    yao_bud.set_idea(ideaunit_shop(tue_text, _addin=tue_addin), week_road)
+    ball_text = "ball"
+    ball_road = yao_bud.make_l1_road(ball_text)
+    yao_bud.set_l1_idea(ideaunit_shop(ball_text))
+    yao_bud.edit_idea_attr(ball_road, reason_base=tue_road, reason_premise=tue_road)
+
+    week_open = 3
+    week_nigh = 7
+    yao_bud.set_fact(week_road, week_road, week_open, week_nigh)
+
+    # assert len(ball_idea._reasonheirs) == 1
+    # assert ball_idea._factheirs == {week_road: week_factheir}
+    # assert ball_idea._factheirs.get(week_road)
+    # assert len(ball_idea._factheirs) == 1
+    # assert ball_idea._factheirs.get(tue_road) is None
+
+    # WHEN
+    yao_bud.settle_bud()
+
+    # THEN
+    # week_factunit = factunit_shop(week_road, week_road, week_open, week_nigh)
+    # tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
+    # x_bud_idea_dict = {week_idea.get_road(): week_idea, tue_idea.get_road(): tue_idea}
+    # ball_idea.set_reasonheirs(x_bud_idea_dict, tue_reasonheirs)
+    x_range_inheritors = {tue_road: week_road}
+    week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
+
+    tue_open = 113
+    tue_nigh = 117
+    tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
+    ball_idea = yao_bud.get_idea_obj(ball_road)
+    print(f"{week_road=} {ball_idea._factheirs.keys()=}")
+    assert ball_idea._factheirs.get(week_road) == week_factheir
+    assert len(ball_idea._factheirs) == 2
+    assert ball_idea._factheirs == {tue_road: tue_factheir, week_road: week_factheir}

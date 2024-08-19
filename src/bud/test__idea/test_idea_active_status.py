@@ -160,7 +160,7 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNoParameters():
     assert ball_idea._factheirs == {}
 
 
-def test_IdeaUnit_set_range_factheirs_SetsAttrNoChange():
+def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     week_text = "week"
     week_road = create_road(root_label(), week_text)
