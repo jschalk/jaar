@@ -68,6 +68,10 @@ class IdeaGetDescendantsException(Exception):
     pass
 
 
+class Idea_root_LabelNotEmptyException(Exception):
+    pass
+
+
 @dataclass
 class IdeaAttrFilter:
     mass: int = None
@@ -1068,10 +1072,6 @@ def ideaunit_shop(
     x_ideakid.set_doerunit_empty_if_none()
     x_ideakid.set_originunit_empty_if_none()
     return x_ideakid
-
-
-class Idea_root_LabelNotEmptyException(Exception):
-    pass
 
 
 def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
