@@ -2,75 +2,6 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 
 
-# def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario1():
-#     # ESTABLISH
-#     yao_bud = budunit_shop("Yao", _tally=10)
-
-#     l1 = "level1"
-#     yao_bud.set_l1_idea(ideaunit_shop(l1, _mass=30))
-#     l1_road = yao_bud.make_l1_road(l1)
-
-#     rx1 = "range_root_example"
-#     yao_bud.set_idea(ideaunit_shop(rx1, _mass=30), parent_road=l1_road)
-#     rx1_road = yao_bud.make_road(l1_road, rx1)
-#     yao_bud.edit_idea_attr(road=rx1_road, begin=10, close=25)
-
-#     y_idea = yao_bud.get_idea_obj(rx1_road)
-#     print(f"Add example child idea to road='{rx1_road}'")
-
-#     rcA = "range_child_example"
-#     yao_bud.set_idea(ideaunit_shop(rcA, _mass=30, _begin=10, _close=25), rx1_road)
-
-#     rcA_road = yao_bud.make_road(rx1_road, rcA)
-#     x_idea = yao_bud.get_idea_obj(rcA_road)
-
-#     assert x_idea._begin == 10
-#     assert x_idea._close == 25
-
-#     # WHEN
-#     yao_bud.edit_idea_attr(road=rcA_road, addin=7)
-
-#     # THEN
-#     assert x_idea._begin == 17
-#     assert x_idea._close == 32
-
-
-# def test_budunit_AddingIdeaUnitWith_addin_TransformsRangeScenario2():
-#     # ESTABLISH
-#     yao_budunit = budunit_shop(_owner_id="Yao", _tally=10)
-
-#     l1 = "level1"
-#     yao_budunit.set_l1_idea(ideaunit_shop(l1, _mass=30))
-#     l1_road = yao_budunit.make_l1_road(l1)
-
-#     rx1 = "range_root_example"
-#     yao_budunit.set_idea(ideaunit_shop(rx1, _mass=30), parent_road=l1_road)
-#     rx1_road = yao_budunit.make_road(l1_road, rx1)
-#     yao_budunit.edit_idea_attr(road=rx1_road, begin=10, close=25)
-
-#     y_idea = yao_budunit.get_idea_obj(rx1_road)
-#     print(f"Add example child idea to road='{rx1_road}'")
-
-#     rcA = "range_child_example"
-#     yao_budunit.set_idea(ideaunit_shop(rcA, _mass=30, _begin=10, _close=25), rx1_road)
-
-#     rcA_road = yao_budunit.make_road(rx1_road, rcA)
-#     x_idea = yao_budunit.get_idea_obj(rcA_road)
-
-#     assert x_idea._begin == 10
-#     assert x_idea._close == 25
-#     assert x_idea._addin is None
-
-#     # WHEN
-#     yao_budunit.edit_idea_attr(road=rcA_road, addin=15, denom=5)
-
-#     # THEN
-#     assert x_idea._begin == 5
-#     assert x_idea._close == 8
-#     assert x_idea._addin == 15
-#     assert x_idea._denom == 5
-
-
 def test_BudUnit_get_idea_ranged_kids_ReturnsAllChildren():
     # ESTABLISH
     yao_budunit = budunit_shop("Yao")
@@ -149,11 +80,11 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario1():
     ranged_ideas = yao_budunit.get_idea_ranged_kids(week_road, x_begin, x_close)
 
     # THEN
-    for idea_x in week_idea._kids.values():
-        print(f"{idea_x._label=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
-    print("")
-    for idea_x in ranged_ideas.values():
-        print(f"{idea_x._label=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
+    # for idea_x in week_idea._kids.values():
+    #     print(f"{idea_x._label=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
+    # print("")
+    # for idea_x in ranged_ideas.values():
+    #     print(f"{idea_x._label=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
     assert len(ranged_ideas) == 3
 
 
