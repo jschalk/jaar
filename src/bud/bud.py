@@ -659,7 +659,7 @@ class BudUnit:
         return x_idea
 
     def _create_missing_ideas(self, road):
-        self.settle_bud()
+        self._init_idea_tree_walk()
         posted_idea = self.get_idea_obj(road)
 
         for reason_x in posted_idea._reasonunits.values():
@@ -846,10 +846,9 @@ class BudUnit:
         self, necessary_base: RoadUnit = None
     ) -> dict[RoadUnit, IdeaUnit]:
         self.settle_bud()
-        all_ideas = self._idea_dict.values()
         return {
             x_idea.get_road(): x_idea
-            for x_idea in all_ideas
+            for x_idea in self._idea_dict.values()
             if x_idea.is_agenda_item(necessary_base)
         }
 
