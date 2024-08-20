@@ -49,7 +49,6 @@ from src.bud.healer import HealerHold
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
 from src.bud.reason_doer import DoerUnit
 from src.bud.tree_metrics import TreeMetrics, treemetrics_shop
-from src.bud.axiom import axioms_shop, Axioms
 from src.bud.origin import originunit_get_from_dict, originunit_shop, OriginUnit
 from src.bud.idea import (
     IdeaUnit,
@@ -418,37 +417,6 @@ class BudUnit:
             and fact.nigh is not None
             and self._is_idea_rangeroot(idea_road=fact.base)
         ]
-
-    def _get_rangerootL1factunits(self, ranged_factunits: list[IdeaUnit]) -> Axioms:
-        x_axioms = axioms_shop()
-        # axiom_ideas = {}
-        for fact in ranged_factunits:
-            fact_idea = self.get_idea_obj(fact.base)
-            for kid in fact_idea._kids.values():
-                x_axioms.eval(x_idea=kid, src_fact=fact, src_idea=fact_idea)
-        return x_axioms
-
-    def _get_axiom_factunits(self) -> dict[RoadUnit, FactUnit]:
-        # get all range-root first level kids
-        x_axioms = self._get_rangerootL1factunits(self._get_rangeroot_factunits())
-        # Now get associates (all their descendants)
-        axiom_factunits = {}  # fact.base : factUnit
-        count_x = 0
-        while count_x < 10000 and x_axioms.is_axioms_evaluated() is False:
-            count_x += 1
-            if count_x == 9998:
-                raise InvalidBudException("axiom loop failed")
-
-            y_axiom = x_axioms.get_unevaluated_axiom()
-            axiom_idea = y_axiom.x_idea
-            fact_x = y_axiom.calc_fact
-
-            x_road = self.make_road(axiom_idea._parent_road, axiom_idea._label)
-            axiom_factunits[x_road] = fact_x
-
-            for kid2 in axiom_idea._kids.values():
-                x_axioms.eval(x_idea=kid2, src_fact=fact_x, src_idea=axiom_idea)
-        return axiom_factunits
 
     def set_fact(
         self,
