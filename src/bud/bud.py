@@ -419,9 +419,7 @@ class BudUnit:
             and self._is_idea_rangeroot(idea_road=fact.base)
         ]
 
-    def _get_rangeroot_1stlevel_factunits(
-        self, ranged_factunits: list[IdeaUnit]
-    ) -> Axioms:
+    def _get_rangerootL1factunits(self, ranged_factunits: list[IdeaUnit]) -> Axioms:
         x_axioms = axioms_shop()
         # axiom_ideas = {}
         for fact in ranged_factunits:
@@ -432,9 +430,7 @@ class BudUnit:
 
     def _get_axiom_factunits(self) -> dict[RoadUnit, FactUnit]:
         # get all range-root first level kids
-        x_axioms = self._get_rangeroot_1stlevel_factunits(
-            self._get_rangeroot_factunits()
-        )
+        x_axioms = self._get_rangerootL1factunits(self._get_rangeroot_factunits())
         # Now get associates (all their descendants)
         axiom_factunits = {}  # fact.base : factUnit
         count_x = 0
