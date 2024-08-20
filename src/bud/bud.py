@@ -240,9 +240,7 @@ class BudUnit:
                     to_evaluate_road=reason_base,
                     road_type="reasonunit_base",
                 )
-            for x_range_push in x_idea._range_pushs:
-                to_evaluate_list.append(x_range_push)
-
+            to_evaluate_list.extend(iter(x_idea._range_pushs))
             forefather_roads = get_forefather_roads(x_road)
             for forefather_road in forefather_roads:
                 self._evaluate_relevancy(
@@ -1059,10 +1057,7 @@ class BudUnit:
     ) -> list[IdeaUnit]:
         if is_sub_road(inheritor_road, math_road):
             idea_roads = all_roadunits_between(math_road, inheritor_road)
-        x_list = []
-        for x_idea_road in idea_roads:
-            x_list.append(self.get_idea_obj(x_idea_road))
-        return x_list
+        return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
 
     def _init_idea_tree_walk(self):
         range_push_dict = {}
@@ -1281,15 +1276,17 @@ class BudUnit:
 
         max_count = self._max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._pre_tree_traverse_attrs()
-            self._pre_tree_traverse_cred_debt_reset()
-            self._set_root_attributes(econ_exceptions)
-            self._execute_tree_traverse(econ_exceptions)
-            self._check_if_any_idea_active_status_has_altered()
-            self._tree_traverse_count += 1
-
+            self._set_all_ideaunits_active_status_distribute_funds(econ_exceptions)
         self._after_all_tree_traverses_set_cred_debt()
         self._after_all_tree_traverses_set_healerhold_share()
+
+    def _set_all_ideaunits_active_status_distribute_funds(self, econ_exceptions):
+        self._pre_tree_traverse_attrs()
+        self._pre_tree_traverse_cred_debt_reset()
+        self._set_root_attributes(econ_exceptions)
+        self._execute_tree_traverse(econ_exceptions)
+        self._check_if_any_idea_active_status_has_altered()
+        self._tree_traverse_count += 1
 
     def _execute_tree_traverse(self, econ_exceptions: bool = False):
         x_idearoot_kids_items = self._idearoot._kids.items()

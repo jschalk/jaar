@@ -72,6 +72,10 @@ class Idea_root_LabelNotEmptyException(Exception):
     pass
 
 
+class ranged_fact_idea_Exception(Exception):
+    pass
+
+
 @dataclass
 class IdeaAttrFilter:
     mass: int = None
@@ -280,7 +284,7 @@ class IdeaUnit:
             and self._begin is None
             and self._close is None
         ):
-            raise Exception(
+            raise ranged_fact_idea_Exception(
                 f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact idea must have _begin, _close attributes"
             )
         x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
@@ -793,8 +797,7 @@ class IdeaUnit:
         self, bud_idea_dict: dict[RoadUnit,], range_inheritors: dict[RoadUnit, RoadUnit]
     ):
         for reason_base in self._reasonheirs.keys():
-            range_root_road = range_inheritors.get(reason_base)
-            if range_root_road:
+            if range_root_road := range_inheritors.get(reason_base):
                 all_roads = all_roadunits_between(range_root_road, reason_base)
                 all_ideas = []
                 for x_road in all_roads:
@@ -824,7 +827,7 @@ class IdeaUnit:
         self, reasonheirs: dict[RoadUnit, ReasonHeir]
     ) -> dict[RoadUnit, ReasonHeir]:
         new_reasonheirs = deepcopy(reasonheirs)
-        new_reasonheirs.update(self._reasonunits)
+        new_reasonheirs |= self._reasonunits
         return new_reasonheirs
 
     def set_reasonheirs(
@@ -838,8 +841,7 @@ class IdeaUnit:
             new_reasonheir = reasonheir_shop(old_base, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            base_idea = bud_idea_dict.get(old_reasonheir.base)
-            if base_idea:
+            if base_idea := bud_idea_dict.get(old_reasonheir.base):
                 new_reasonheir.set_base_idea_active_value(base_idea._active)
             self._reasonheirs[new_reasonheir.base] = new_reasonheir
 
