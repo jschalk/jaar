@@ -255,30 +255,31 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     assert sue_budunit.idea_exists(oct_road)
     assert sue_budunit.idea_exists(nov_road)
     assert sue_budunit.idea_exists(dec_road)
-    assert sue_budunit.get_idea_obj(jan_road)._gogo_want == 0
-    assert sue_budunit.get_idea_obj(feb_road)._gogo_want == 44640
-    assert sue_budunit.get_idea_obj(mar_road)._gogo_want == 84960
-    assert sue_budunit.get_idea_obj(apr_road)._gogo_want == 129600
-    assert sue_budunit.get_idea_obj(may_road)._gogo_want == 172800
-    assert sue_budunit.get_idea_obj(jun_road)._gogo_want == 217440
-    assert sue_budunit.get_idea_obj(jul_road)._gogo_want == 260640
-    assert sue_budunit.get_idea_obj(aug_road)._gogo_want == 305280
-    assert sue_budunit.get_idea_obj(sep_road)._gogo_want == 349920
-    assert sue_budunit.get_idea_obj(oct_road)._gogo_want == 393120
-    assert sue_budunit.get_idea_obj(nov_road)._gogo_want == 437760
-    assert sue_budunit.get_idea_obj(dec_road)._gogo_want == 480960
-    assert sue_budunit.get_idea_obj(jan_road)._stop_want == 44640
-    assert sue_budunit.get_idea_obj(feb_road)._stop_want == 84960
-    assert sue_budunit.get_idea_obj(mar_road)._stop_want == 129600
-    assert sue_budunit.get_idea_obj(apr_road)._stop_want == 172800
-    assert sue_budunit.get_idea_obj(may_road)._stop_want == 217440
-    assert sue_budunit.get_idea_obj(jun_road)._stop_want == 260640
-    assert sue_budunit.get_idea_obj(jul_road)._stop_want == 305280
-    assert sue_budunit.get_idea_obj(aug_road)._stop_want == 349920
-    assert sue_budunit.get_idea_obj(sep_road)._stop_want == 393120
-    assert sue_budunit.get_idea_obj(oct_road)._stop_want == 437760
-    assert sue_budunit.get_idea_obj(nov_road)._stop_want == 480960
-    assert sue_budunit.get_idea_obj(dec_road)._stop_want == 525600
+    assert sue_budunit.get_idea_obj(jan_road)._gogo_want == 437760
+    assert sue_budunit.get_idea_obj(feb_road)._gogo_want == 480960
+    assert sue_budunit.get_idea_obj(mar_road)._gogo_want == 0
+    assert sue_budunit.get_idea_obj(apr_road)._gogo_want == 44640
+    assert sue_budunit.get_idea_obj(may_road)._gogo_want == 84960
+    assert sue_budunit.get_idea_obj(jun_road)._gogo_want == 129600
+    assert sue_budunit.get_idea_obj(jul_road)._gogo_want == 172800
+    assert sue_budunit.get_idea_obj(aug_road)._gogo_want == 217440
+    assert sue_budunit.get_idea_obj(sep_road)._gogo_want == 260640
+    assert sue_budunit.get_idea_obj(oct_road)._gogo_want == 305280
+    assert sue_budunit.get_idea_obj(nov_road)._gogo_want == 349920
+    assert sue_budunit.get_idea_obj(dec_road)._gogo_want == 393120
+
+    assert sue_budunit.get_idea_obj(jan_road)._stop_want == 480960
+    assert sue_budunit.get_idea_obj(feb_road)._stop_want == 525600
+    assert sue_budunit.get_idea_obj(mar_road)._stop_want == 44640
+    assert sue_budunit.get_idea_obj(apr_road)._stop_want == 84960
+    assert sue_budunit.get_idea_obj(may_road)._stop_want == 129600
+    assert sue_budunit.get_idea_obj(jun_road)._stop_want == 172800
+    assert sue_budunit.get_idea_obj(jul_road)._stop_want == 217440
+    assert sue_budunit.get_idea_obj(aug_road)._stop_want == 260640
+    assert sue_budunit.get_idea_obj(sep_road)._stop_want == 305280
+    assert sue_budunit.get_idea_obj(oct_road)._stop_want == 349920
+    assert sue_budunit.get_idea_obj(nov_road)._stop_want == 393120
+    assert sue_budunit.get_idea_obj(dec_road)._stop_want == 437760
 
     years_idea = sue_budunit.get_idea_obj(years_road)
     assert years_idea._gogo_want == 0
