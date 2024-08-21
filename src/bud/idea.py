@@ -653,9 +653,12 @@ class IdeaUnit:
                 self._stop_calc = min(self._stop_calc, self._stop_want)
         elif get_False_if_None(self._reest):
             gogo_calc_stop_calc_diff = self._stop_calc - self._gogo_calc
-            gogo_calc_stop_calc_remainder = gogo_calc_stop_calc_diff % self._denom
-            self._gogo_calc = 0
-            self._stop_calc = gogo_calc_stop_calc_remainder
+            if gogo_calc_stop_calc_diff >= self._denom:
+                self._gogo_calc = 0
+                self._stop_calc = self._denom
+            else:
+                self._gogo_calc = self._gogo_calc % self._denom
+                self._stop_calc = self._stop_calc % self._denom
         else:
             self._gogo_calc = self._gogo_calc + r_idea_addin
             self._stop_calc = self._stop_calc + r_idea_addin

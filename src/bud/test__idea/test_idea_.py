@@ -398,13 +398,36 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_denom():
     assert time_idea._stop_calc == 6
 
 
-def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest():
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario0_FullRangeCovered():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 22
+    init_stop_calc = 45
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_calc
+    assert time_idea._stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert time_idea._gogo_calc == 0
+    assert time_idea._stop_calc == time_denom
+    assert time_idea._gogo_calc == 0
+    assert time_idea._stop_calc == 7
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario0_PartialRangeCovered():
     # ESTABLISH
     time_text = "time"
     time_denom = 7
     time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
     init_gogo_calc = 21
-    init_stop_calc = 45
+    init_stop_calc = 24
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
     time_idea._denom = time_denom
@@ -419,6 +442,29 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest():
     assert time_idea._stop_calc == (init_stop_calc - init_gogo_calc) % time_denom
     assert time_idea._gogo_calc == 0
     assert time_idea._stop_calc == 3
+
+
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario1_PartialRangeCovered():
+    # ESTABLISH
+    time_text = "time"
+    time_denom = 7
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    init_gogo_calc = 22
+    init_stop_calc = 25
+    time_idea._gogo_calc = init_gogo_calc
+    time_idea._stop_calc = init_stop_calc
+    time_idea._denom = time_denom
+    assert time_idea._gogo_calc
+    assert time_idea._stop_calc
+
+    # WHEN
+    time_idea._transform_gogo_calc_stop_calc()
+
+    # THEN
+    assert time_idea._gogo_calc == init_gogo_calc % time_denom
+    assert time_idea._stop_calc == init_stop_calc % time_denom
+    assert time_idea._gogo_calc == 1
+    assert time_idea._stop_calc == 4
 
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario0_NoFilter():
