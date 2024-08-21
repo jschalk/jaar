@@ -6,6 +6,7 @@ from src._instrument.python import (
     get_positive_int,
 )
 from src._road.finance import FundCoin, FundNum, allot_scale, default_fund_coin_if_none
+from src._road.range_toolbox import get_morphed_rangeunit
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -652,13 +653,11 @@ class IdeaUnit:
                 self._gogo_calc = max(self._gogo_calc, self._gogo_want)
                 self._stop_calc = min(self._stop_calc, self._stop_want)
         elif get_False_if_None(self._morph):
-            gogo_calc_stop_calc_diff = self._stop_calc - self._gogo_calc
-            if gogo_calc_stop_calc_diff >= self._denom:
-                self._gogo_calc = 0
-                self._stop_calc = self._denom
-            else:
-                self._gogo_calc = self._gogo_calc % self._denom
-                self._stop_calc = self._stop_calc % self._denom
+            x_gogo = self._gogo_calc
+            x_stop = self._stop_calc
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, self._denom)
+            self._gogo_calc = x_rangeunit.gogo
+            self._stop_calc = x_rangeunit.stop
         else:
             self._gogo_calc = self._gogo_calc + r_idea_addin
             self._stop_calc = self._stop_calc + r_idea_addin
