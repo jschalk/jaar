@@ -6,7 +6,7 @@ from src._instrument.python import (
     get_positive_int,
 )
 from src._road.finance import FundCoin, FundNum, allot_scale, default_fund_coin_if_none
-from src._road.range_toolbox import get_morphed_rangeunit
+from src._road.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src._road.road import (
     RoadUnit,
     RoadNode,
@@ -811,8 +811,11 @@ class IdeaUnit:
         self, all_ideas: list, range_root_road: RoadUnit, reason_base: RoadUnit
     ):
         range_root_factheir = self._factheirs.get(range_root_road)
-        new_factheir_open = ideas_calculated_float(all_ideas, range_root_factheir.open)
-        new_factheir_nigh = ideas_calculated_float(all_ideas, range_root_factheir.nigh)
+        old_open = range_root_factheir.open
+        old_nigh = range_root_factheir.nigh
+        x_rangeunit = ideas_calculated_range(all_ideas, old_open, old_nigh)
+        new_factheir_open = x_rangeunit.gogo
+        new_factheir_nigh = x_rangeunit.stop
         new_factheir_obj = factheir_shop(reason_base)
         new_factheir_obj.set_attr(reason_base, new_factheir_open, new_factheir_nigh)
         self._set_factheir(new_factheir_obj)
@@ -1125,14 +1128,18 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else None
 
 
-def ideas_calculated_float(
-    idea_list: list[IdeaUnit], x_float: float
-) -> tuple[float, float]:
+def ideas_calculated_range(
+    idea_list: list[IdeaUnit], x_gogo: float, x_stop: float
+) -> RangeUnit:
     for x_idea in idea_list:
         if x_idea._addin:
-            x_float += get_0_if_None(x_idea._addin)
+            x_gogo += get_0_if_None(x_idea._addin)
+            x_stop += get_0_if_None(x_idea._addin)
         if (x_idea._numor or x_idea._denom) and not x_idea._morph:
-            x_float *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
+            x_gogo *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
+            x_stop *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
         if x_idea._denom and x_idea._morph:
-            x_float = x_float % get_1_if_None(x_idea._denom)
-    return x_float
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, x_idea._denom)
+            x_gogo = x_rangeunit.gogo
+            x_stop = x_rangeunit.stop
+    return RangeUnit(x_gogo, x_stop)
