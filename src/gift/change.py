@@ -356,7 +356,7 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("_close", insert_ideaunit._close)
             x_atomunit.set_optional_arg("_denom", insert_ideaunit._denom)
             x_atomunit.set_optional_arg("_numor", insert_ideaunit._numor)
-            x_atomunit.set_optional_arg("_reest", insert_ideaunit._reest)
+            x_atomunit.set_optional_arg("_morph", insert_ideaunit._morph)
             x_atomunit.set_optional_arg("_mass", insert_ideaunit._mass)
             x_atomunit.set_optional_arg("pledge", insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
@@ -402,8 +402,8 @@ class ChangeUnit:
                     x_atomunit.set_optional_arg("_denom", after_ideaunit._denom)
                 if before_ideaunit._numor != after_ideaunit._numor:
                     x_atomunit.set_optional_arg("_numor", after_ideaunit._numor)
-                if before_ideaunit._reest != after_ideaunit._reest:
-                    x_atomunit.set_optional_arg("_reest", after_ideaunit._reest)
+                if before_ideaunit._morph != after_ideaunit._morph:
+                    x_atomunit.set_optional_arg("_morph", after_ideaunit._morph)
                 if before_ideaunit._mass != after_ideaunit._mass:
                     x_atomunit.set_optional_arg("_mass", after_ideaunit._mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:

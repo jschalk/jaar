@@ -348,7 +348,7 @@
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
-            "_reest": {
+            "_morph": {
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },

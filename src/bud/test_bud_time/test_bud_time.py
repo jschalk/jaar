@@ -100,7 +100,7 @@ def compare_kidless_ideas(src_budunit: BudUnit, x_budunit: BudUnit):
                 print(f"{src_ideaunit._numor=} \t\t {x_ideaunit._numor=}")
                 print(f"{src_ideaunit._denom=} \t\t {x_ideaunit._denom=}")
                 print(f"{src_ideaunit._addin=} \t\t {x_ideaunit._addin=}")
-                print(f"{src_ideaunit._reest=} \t\t {x_ideaunit._reest=}")
+                print(f"{src_ideaunit._morph=} \t\t {x_ideaunit._morph=}")
                 # print(f"{src_ideaunit._parent_road=} \t\t {x_ideaunit._parent_road=}")
             assert kidless(src_budunit, src_road) == kidless(x_budunit, src_road)
 
@@ -142,11 +142,11 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_days():
     assert day_idea._gogo_want == 0
     assert day_idea._stop_want == 1440
     assert day_idea._denom == 1440
-    assert day_idea._reest
+    assert day_idea._morph
     assert sue_budunit.idea_exists(days_road)
     days_idea = sue_budunit.get_idea_obj(days_road)
     assert days_idea._denom == 1440
-    assert not days_idea._reest
+    assert not days_idea._morph
 
 
 def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
@@ -183,7 +183,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
     assert week_idea._gogo_want == 0
     assert week_idea._stop_want == 10080
     assert week_idea._denom == 10080
-    assert week_idea._reest
+    assert week_idea._morph
     assert sue_budunit.idea_exists(sun_road)
     assert sue_budunit.idea_exists(mon_road)
     assert sue_budunit.idea_exists(tue_road)
@@ -194,7 +194,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
     assert sue_budunit.idea_exists(weeks_road)
     weeks_idea = sue_budunit.get_idea_obj(weeks_road)
     assert weeks_idea._denom == 10080
-    assert not weeks_idea._reest
+    assert not weeks_idea._morph
 
 
 def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
@@ -241,7 +241,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     assert year_idea._gogo_want == 0
     assert year_idea._stop_want == 525600
     assert year_idea._denom == 525600
-    assert year_idea._reest
+    assert year_idea._morph
     assert sue_budunit.idea_exists(years_road)
     assert sue_budunit.idea_exists(jan_road)
     assert sue_budunit.idea_exists(feb_road)
@@ -283,7 +283,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     years_idea = sue_budunit.get_idea_obj(years_road)
     assert years_idea._gogo_want == 0
     assert years_idea._stop_want == 2800
-    assert not years_idea._reest
+    assert not years_idea._morph
 
 
 def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_():
@@ -315,11 +315,11 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_():
     assert day_idea._gogo_want == 0
     assert day_idea._stop_want == 1440
     assert day_idea._denom == 1440
-    assert day_idea._reest
+    assert day_idea._morph
     assert sue_budunit.idea_exists(days_road)
     days_idea = sue_budunit.get_idea_obj(days_road)
     assert days_idea._denom == 1440
-    assert not days_idea._reest
+    assert not days_idea._morph
 
     # assert sue_budunit is not None
     # assert sue_budunit.idea_exists(time_road)

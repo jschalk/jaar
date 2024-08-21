@@ -151,7 +151,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     x_addin = 13
     x_denom = 14
     x_numor = 15
-    x_reest = 16
+    x_morph = 16
     x_gogo_want = 81
     x_stop_want = 87
     casa_idea._begin = x_begin
@@ -159,7 +159,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     casa_idea._addin = x_addin
     casa_idea._denom = x_denom
     casa_idea._numor = x_numor
-    casa_idea._reest = x_reest
+    casa_idea._morph = x_morph
     casa_idea._gogo_want = x_gogo_want
     casa_idea._stop_want = x_stop_want
     casa_idea._uid = 17
@@ -185,7 +185,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_close"] == casa_idea._close
     assert casa_dict["_numor"] == casa_idea._numor
     assert casa_dict["_denom"] == casa_idea._denom
-    assert casa_dict["_reest"] == casa_idea._reest
+    assert casa_dict["_morph"] == casa_idea._morph
     assert casa_dict["_gogo_want"] == casa_idea._gogo_want
     assert casa_dict["_stop_want"] == casa_idea._stop_want
     assert casa_dict["pledge"] == casa_idea.pledge

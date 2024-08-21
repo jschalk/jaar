@@ -87,13 +87,13 @@ def test_ideas_calculated_float_ReturnsObj_2IdeaUnit_denom():
     assert x_calc_range == 3
 
 
-def test_ideas_calculated_float_ReturnsObj_2IdeaUnit_denom_reest():
+def test_ideas_calculated_float_ReturnsObj_2IdeaUnit_denom_morph():
     # ESTABLISH
     week_text = "week"
     week_denom = 50
-    week_idea = ideaunit_shop(week_text, _denom=week_denom, _reest=True)
+    week_idea = ideaunit_shop(week_text, _denom=week_denom, _morph=True)
     tue_denom = 20
-    tue_idea = ideaunit_shop("Tue", _denom=tue_denom, _reest=True)
+    tue_idea = ideaunit_shop("Tue", _denom=tue_denom, _morph=True)
     old_float = 175
     idea_list = [week_idea, tue_idea]
 

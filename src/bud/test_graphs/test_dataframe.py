@@ -89,7 +89,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
         "_addin",
         "_denom",
         "_numor",
-        "_reest",
+        "_morph",
     }
     print(f"{set(x_df.columns)=}")
 
@@ -117,7 +117,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
         "_addin",
         "_denom",
         "_numor",
-        "_reest",
+        "_morph",
     }
     print(f"{set(x_df.columns)=}")
 

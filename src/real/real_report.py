@@ -143,7 +143,7 @@ def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "_addin",
         "_denom",
         "_numor",
-        "_reest",
+        "_morph",
     ]
     df = get_real_voices_agenda_dataframe(x_real)
     header_dict = dict(
@@ -162,7 +162,7 @@ def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
                 df._addin,
                 df._denom,
                 df._numor,
-                df._reest,
+                df._morph,
             ],
             fill_color="lavender",
             align="left",
@@ -202,7 +202,7 @@ def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "_addin",
         "_denom",
         "_numor",
-        "_reest",
+        "_morph",
     ]
     df = get_real_actions_agenda_dataframe(x_real)
     header_dict = dict(
@@ -221,7 +221,7 @@ def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
                 df._addin,
                 df._denom,
                 df._numor,
-                df._reest,
+                df._morph,
             ],
             fill_color="lavender",
             align="left",

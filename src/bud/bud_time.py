@@ -16,13 +16,13 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     jaja_idea = ideaunit_shop(get_jajatime_text(), _begin=0, _close=1472657760)
     jaja_road = x_budunit.make_road(time_road, get_jajatime_text())
     x_budunit.set_idea(jaja_idea, time_road)
-    day_idea = ideaunit_shop(day_str(), _denom=1440, _reest=True)
+    day_idea = ideaunit_shop(day_str(), _denom=1440, _morph=True)
     day_idea._gogo_want = 0
     day_idea._stop_want = 1440
     x_budunit.set_idea(day_idea, jaja_road)
     x_budunit.set_idea(ideaunit_shop(days_str(), _denom=1440), jaja_road)
     week_road = x_budunit.make_road(jaja_road, week_str())
-    week_idea = ideaunit_shop(week_str(), _denom=10080, _reest=True)
+    week_idea = ideaunit_shop(week_str(), _denom=10080, _morph=True)
     week_idea._gogo_want = 0
     week_idea._stop_want = 10080
     x_budunit.set_idea(week_idea, jaja_road)
@@ -44,11 +44,11 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     x_budunit.set_idea(week_idea, jaja_road)
 
     year_road = x_budunit.make_road(jaja_road, year_str())
-    year_idea = ideaunit_shop(year_str(), _reest=True)
+    year_idea = ideaunit_shop(year_str(), _morph=True)
     year_idea._gogo_want = 0
     year_idea._stop_want = 525600
     year_idea._denom = 525600
-    year_idea._reest = True
+    year_idea._morph = True
     x_budunit.set_idea(year_idea, jaja_road)
     jan_idea = ideaunit_shop(jan_str(), _gogo_want=0, _stop_want=44640)
     feb_idea = ideaunit_shop(feb_str(), _gogo_want=44640, _stop_want=84960)
@@ -79,8 +79,8 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     x_budunit.set_idea(years_idea, jaja_road)
 
     # jaja_week_road = x_budunit.make_road(jaja_road, week_str())
-    # jaja_week_idea = ideaunit_shop(week_str(), _denom=146097, _reest=True)
-    # jaja_weeks_idea = ideaunit_shop(weeks_str(), _denom=10080, _reest=False)
+    # jaja_week_idea = ideaunit_shop(week_str(), _denom=146097, _morph=True)
+    # jaja_weeks_idea = ideaunit_shop(weeks_str(), _denom=10080, _morph=False)
     # x_budunit.set_idea(jaja_week_idea, jaja_road)
     # x_budunit.set_idea(jaja_weeks_idea, jaja_road)
 
@@ -92,12 +92,12 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # x_budunit.set_idea(jaja_idea, time_road)
 
     # jaja_c400_road = x_budunit.make_road(jaja_road, c400_str())
-    # jaja_c400_idea = ideaunit_shop(c400_str(), _numor=1, _denom=7, _reest=True)
+    # jaja_c400_idea = ideaunit_shop(c400_str(), _numor=1, _denom=7, _morph=True)
     # x_budunit.set_idea(jaja_c400_idea, jaja_road)
-    # jaja_c400s_idea = ideaunit_shop(c400s_str(), _numor=1, _denom=210379680, _reest=False)
+    # jaja_c400s_idea = ideaunit_shop(c400s_str(), _numor=1, _denom=210379680, _morph=False)
     # x_budunit.set_idea(jaja_c400s_idea, jaja_road)
     # x_budunit.set_idea(jaja_day_idea, jaja_road)
-    # jaja_days_idea = ideaunit_shop(days_str(), _numor=1, _denom=1440, _reest=False)
+    # jaja_days_idea = ideaunit_shop(days_str(), _numor=1, _denom=1440, _morph=False)
     # x_budunit.set_idea(jaja_days_idea, jaja_road)
 
     # # tech_road branch
@@ -148,43 +148,43 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # tech_Nov_road = x_budunit.make_road(month_road, Nov())
     # tech_Dec_road = x_budunit.make_road(month_road, Dec())
     # Jan_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Feb28_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=28, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=28, _numor=1, _denom=1440, _morph=True
     # )
     # Feb29_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=29, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=29, _numor=1, _denom=1440, _morph=True
     # )
     # Mar_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Apr_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # May_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Jun_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Jul_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Aug_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Sep_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Oct_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Nov_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # Dec_days_idea = ideaunit_shop(
-    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _reest=True
+    #     days_str(), _begin=0, _close=30, _numor=1, _denom=1440, _morph=True
     # )
     # x_budunit.set_idea(Jan_days_idea, tech_Jan_road)
     # x_budunit.set_idea(Feb28_days_idea, tech_Feb28_road)
@@ -552,9 +552,9 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     # x_budunit.set_idea(node_2_96_idea, tech_c400_road)
     # x_budunit.set_idea(node_3_4_idea, tech_c400_road)
     # x_budunit.set_idea(node_3_96_idea, tech_c400_road)
-    # year_0_withleap_idea = ideaunit_shop(year4_withleap_str(), _denom=25, _reest=True)
-    # year_x4_no_leap_idea = ideaunit_shop(year4_no__leap_str(), _denom=1, _reest=True)
-    # year_x_withleap_idea = ideaunit_shop(year4_withleap_str(), _denom=24, _reest=True)
+    # year_0_withleap_idea = ideaunit_shop(year4_withleap_str(), _denom=25, _morph=True)
+    # year_x4_no_leap_idea = ideaunit_shop(year4_no__leap_str(), _denom=1, _morph=True)
+    # year_x_withleap_idea = ideaunit_shop(year4_withleap_str(), _denom=24, _morph=True)
     # x_budunit.set_idea(year_0_withleap_idea, node_0_100_road)
     # x_budunit.set_idea(year_x4_no_leap_idea, node_1_4_road)
     # x_budunit.set_idea(year_x_withleap_idea, node_1_96_road)
@@ -1035,10 +1035,6 @@ def yr2029min_str() -> str:
 
 def yr2030min_str() -> str:
     return "2030 by minute"
-
-
-def morph_str() -> str:
-    return "morph"
 
 
 def yr2010yr_str() -> str:

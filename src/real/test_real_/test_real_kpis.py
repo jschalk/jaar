@@ -125,7 +125,7 @@ def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanu
         "_addin",
         "_denom",
         "_numor",
-        "_reest",
+        "_morph",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -166,7 +166,7 @@ def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_clean
         "_addin",
         "_denom",
         "_numor",
-        "_reest",
+        "_morph",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

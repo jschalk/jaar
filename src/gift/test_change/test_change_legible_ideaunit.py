@@ -16,7 +16,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     _denom_text = "_denom"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
-    _reest_text = "_reest"
+    _morph_text = "_morph"
     _mass_text = "_mass"
     pledge_text = "pledge"
     label_value = "clean fridge"
@@ -27,7 +27,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     _denom_value = 23
     _numor_value = 29
     _problem_bool_value = False
-    _reest_value = 37
+    _morph_value = 37
     _mass_value = 43
     pledge_value = False
     clean_atomunit = atomunit_shop(category, atom_insert())
@@ -39,7 +39,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     clean_atomunit.set_arg(_denom_text, _denom_value)
     clean_atomunit.set_arg(_numor_text, _numor_value)
     clean_atomunit.set_arg(_problem_bool_text, _problem_bool_value)
-    clean_atomunit.set_arg(_reest_text, _reest_value)
+    clean_atomunit.set_arg(_morph_text, _morph_value)
     clean_atomunit.set_arg(_mass_text, _mass_value)
     clean_atomunit.set_arg(pledge_text, pledge_value)
 
@@ -50,7 +50,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Created Idea '{label_value}' with parent_road {parent_road_value}. _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._reest={_reest_value}._mass={_mass_value}.pledge={pledge_value}."
+    x_str = f"Created Idea '{label_value}' with parent_road {parent_road_value}. _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._morph={_morph_value}._mass={_mass_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -67,7 +67,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     _denom_text = "_denom"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
-    _reest_text = "_reest"
+    _morph_text = "_morph"
     _mass_text = "_mass"
     pledge_text = "pledge"
     label_value = "clean fridge"
@@ -78,7 +78,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     _denom_value = 23
     _numor_value = 29
     _problem_bool_value = False
-    _reest_value = 37
+    _morph_value = 37
     _mass_value = 43
     pledge_value = False
     clean_atomunit = atomunit_shop(category, atom_update())
@@ -90,7 +90,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     clean_atomunit.set_arg(_denom_text, _denom_value)
     clean_atomunit.set_arg(_numor_text, _numor_value)
     clean_atomunit.set_arg(_problem_bool_text, _problem_bool_value)
-    clean_atomunit.set_arg(_reest_text, _reest_value)
+    clean_atomunit.set_arg(_morph_text, _morph_value)
     clean_atomunit.set_arg(_mass_text, _mass_value)
     clean_atomunit.set_arg(pledge_text, pledge_value)
 
@@ -101,7 +101,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._reest={_reest_value}._mass={_mass_value}.pledge={pledge_value}."
+    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._morph={_morph_value}._mass={_mass_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

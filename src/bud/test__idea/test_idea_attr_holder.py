@@ -22,7 +22,7 @@ def test_IdeaAttrFilter_Exists():
     assert new_obj.addin is None
     assert new_obj.numor is None
     assert new_obj.denom is None
-    assert new_obj.reest is None
+    assert new_obj.morph is None
     assert new_obj.pledge is None
     assert new_obj.factunit is None
     assert new_obj.descendant_pledge_count is None
@@ -40,7 +40,7 @@ def test_IdeaAttrFilter_CorrectlyCalculatesPremiseRanges():
     assert idea_attr.reason_premise_nigh is None
     # assert idea_attr.reason_premise_numor is None
     assert idea_attr.reason_premise_divisor is None
-    # assert idea_attr.reason_premise_reest is None
+    # assert idea_attr.reason_premise_morph is None
 
     # WHEN
     idea_attr.set_premise_range_attributes_influenced_by_premise_idea(
@@ -48,13 +48,13 @@ def test_IdeaAttrFilter_CorrectlyCalculatesPremiseRanges():
         premise_nigh=20.0,
         # premise_numor,
         premise_denom=4.0,
-        # premise_reest,
+        # premise_morph,
     )
     assert idea_attr.reason_premise_open == 5.0
     assert idea_attr.reason_premise_nigh == 20.0
     # assert idea_attr.reason_premise_numor is None
     assert idea_attr.reason_premise_divisor == 4.0
-    # assert idea_attr.reason_premise_reest is None
+    # assert idea_attr.reason_premise_morph is None
 
 
 def test_ideaattrfilter_shop_ReturnsCorrectObj():

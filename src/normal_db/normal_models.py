@@ -57,7 +57,7 @@ class IdeaTable(Base):
     _denom = Column(Integer)
     _numor = Column(Integer)
     _problem_bool = Column(Integer)
-    _reest = Column(Integer)
+    _morph = Column(Integer)
     _mass = Column(Integer)
     pledge = Column(Integer)
 

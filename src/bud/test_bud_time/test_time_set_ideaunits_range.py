@@ -188,7 +188,7 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     assert sue_budunit.idea_exists(year_road)
     year_idea = sue_budunit.get_idea_obj(year_road)
     assert year_idea._denom == 525600
-    assert year_idea._reest
+    assert year_idea._morph
     assert not year_idea._gogo_calc
     assert not year_idea._stop_calc
 

@@ -336,7 +336,7 @@ def add_bud_ideaunit_insert_to_legible_list(
     _denom_text = "_denom"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
-    _reest_text = "_reest"
+    _morph_text = "_morph"
     _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_insert_dict.values():
@@ -349,7 +349,7 @@ def add_bud_ideaunit_insert_to_legible_list(
             _denom_value = ideaunit_atom.get_value(_denom_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
-            _reest_value = ideaunit_atom.get_value(_reest_text)
+            _morph_value = ideaunit_atom.get_value(_morph_text)
             _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = (
@@ -367,8 +367,8 @@ def add_bud_ideaunit_insert_to_legible_list(
                 x_str += f"_numor={_numor_value}."
             if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _reest_value is not None:
-                x_str += f"_reest={_reest_value}."
+            if _morph_value is not None:
+                x_str += f"_morph={_morph_value}."
             if _mass_value is not None:
                 x_str += f"_mass={_mass_value}."
             if pledge_value is not None:
@@ -388,7 +388,7 @@ def add_bud_ideaunit_update_to_legible_list(
     _denom_text = "_denom"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
-    _reest_text = "_reest"
+    _morph_text = "_morph"
     _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_update_dict.values():
@@ -401,7 +401,7 @@ def add_bud_ideaunit_update_to_legible_list(
             _denom_value = ideaunit_atom.get_value(_denom_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
-            _reest_value = ideaunit_atom.get_value(_reest_text)
+            _morph_value = ideaunit_atom.get_value(_morph_text)
             _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
@@ -417,8 +417,8 @@ def add_bud_ideaunit_update_to_legible_list(
                 x_str += f"_numor={_numor_value}."
             if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _reest_value is not None:
-                x_str += f"_reest={_reest_value}."
+            if _morph_value is not None:
+                x_str += f"_morph={_morph_value}."
             if _mass_value is not None:
                 x_str += f"_mass={_mass_value}."
             if pledge_value is not None:

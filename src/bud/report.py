@@ -36,7 +36,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
                 "_addin",
                 "_denom",
                 "_numor",
-                "_reest",
+                "_morph",
             ]
         )
     x_idea_list = []
@@ -51,7 +51,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
             "_addin": x_idea._addin,
             "_denom": x_idea._denom,
             "_numor": x_idea._numor,
-            "_reest": x_idea._reest,
+            "_morph": x_idea._morph,
         }
         x_idea_list.append(idea_dict)
     return DataFrame(x_idea_list)

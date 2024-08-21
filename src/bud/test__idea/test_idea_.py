@@ -34,7 +34,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._addin is None
     assert x_ideaunit._numor is None
     assert x_ideaunit._denom is None
-    assert x_ideaunit._reest is None
+    assert x_ideaunit._morph is None
     assert x_ideaunit._gogo_want is None
     assert x_ideaunit._stop_want is None
     assert x_ideaunit._range_pushs is None
@@ -76,7 +76,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._addin is None
     assert x_ideaunit._numor is None
     assert x_ideaunit._denom is None
-    assert x_ideaunit._reest is None
+    assert x_ideaunit._morph is None
     assert x_ideaunit._range_pushs == set()
     assert x_ideaunit.pledge is False
     assert x_ideaunit._problem_bool is False
@@ -398,11 +398,11 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_denom():
     assert time_idea._stop_calc == 6
 
 
-def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario0_FullRangeCovered():
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_FullRangeCovered():
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 22
     init_stop_calc = 45
     time_idea._gogo_calc = init_gogo_calc
@@ -421,11 +421,11 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario0_FullRan
     assert time_idea._stop_calc == 7
 
 
-def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario0_PartialRangeCovered():
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_PartialRangeCovered():
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 21
     init_stop_calc = 24
     time_idea._gogo_calc = init_gogo_calc
@@ -444,11 +444,11 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario0_Partial
     assert time_idea._stop_calc == 3
 
 
-def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_reest_Scenario1_PartialRangeCovered():
+def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_PartialRangeCovered():
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 22
     init_stop_calc = 25
     time_idea._gogo_calc = init_gogo_calc
@@ -471,7 +471,7 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
@@ -498,7 +498,7 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
@@ -525,7 +525,7 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
@@ -552,7 +552,7 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
@@ -579,7 +579,7 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
@@ -604,7 +604,7 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 60
@@ -629,7 +629,7 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _reest=True)
+    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
     init_gogo_calc = None
     init_stop_calc = None
     gogo_want = 21

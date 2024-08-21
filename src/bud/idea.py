@@ -96,7 +96,7 @@ class IdeaAttrFilter:
     addin: float = None
     numor: float = None
     denom: float = None
-    reest: bool = None
+    morph: bool = None
     range_push: RoadUnit = None
     del_range_push: RoadUnit = None
     pledge: bool = None
@@ -118,7 +118,7 @@ class IdeaAttrFilter:
         premise_nigh,
         # premise_numor,
         premise_denom,
-        # premise_reest,
+        # premise_morph,
     ):
         if self.reason_premise is not None:
             if self.reason_premise_open is None:
@@ -129,8 +129,8 @@ class IdeaAttrFilter:
             #     numor_x = premise_numor
             if self.reason_premise_divisor is None:
                 self.reason_premise_divisor = premise_denom
-            # if self.reason_premise_reest is None:
-            #     self.reason_premise_reest = premise_reest
+            # if self.reason_premise_morph is None:
+            #     self.reason_premise_morph = premise_morph
 
     def has_reason_premise(self):
         return self.reason_premise is not None
@@ -155,7 +155,7 @@ def ideaattrfilter_shop(
     addin: float = None,
     numor: float = None,
     denom: float = None,
-    reest: bool = None,
+    morph: bool = None,
     range_push: RoadUnit = None,
     del_range_push: RoadUnit = None,
     pledge: bool = None,
@@ -187,7 +187,7 @@ def ideaattrfilter_shop(
         addin=addin,
         numor=numor,
         denom=denom,
-        reest=reest,
+        morph=morph,
         range_push=range_push,
         del_range_push=del_range_push,
         pledge=pledge,
@@ -226,7 +226,7 @@ class IdeaUnit:
     _addin: float = None
     _denom: int = None
     _numor: int = None
-    _reest: bool = None
+    _morph: bool = None
     _gogo_want: bool = None
     _stop_want: bool = None
     _range_pushs: set[RoadUnit] = None
@@ -590,8 +590,8 @@ class IdeaUnit:
             self._numor = idea_attr.numor
         if idea_attr.denom is not None:
             self._denom = idea_attr.denom
-        if idea_attr.reest is not None:
-            self._reest = idea_attr.reest
+        if idea_attr.morph is not None:
+            self._morph = idea_attr.morph
         if idea_attr.range_push is not None:
             self.set_range_push(idea_attr.range_push)
         if idea_attr.del_range_push is not None:
@@ -651,7 +651,7 @@ class IdeaUnit:
             else:
                 self._gogo_calc = max(self._gogo_calc, self._gogo_want)
                 self._stop_calc = min(self._stop_calc, self._stop_want)
-        elif get_False_if_None(self._reest):
+        elif get_False_if_None(self._morph):
             gogo_calc_stop_calc_diff = self._stop_calc - self._gogo_calc
             if gogo_calc_stop_calc_diff >= self._denom:
                 self._gogo_calc = 0
@@ -917,8 +917,8 @@ class IdeaUnit:
             x_dict["_numor"] = self._numor
         if self._denom is not None:
             x_dict["_denom"] = self._denom
-        if self._reest is not None:
-            x_dict["_reest"] = self._reest
+        if self._morph is not None:
+            x_dict["_morph"] = self._morph
         if self._gogo_want is not None:
             x_dict["_gogo_want"] = self._gogo_want
         if self._stop_want is not None:
@@ -997,7 +997,7 @@ def ideaunit_shop(
     _addin: float = None,
     _denom: int = None,
     _numor: int = None,
-    _reest: bool = None,
+    _morph: bool = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
@@ -1046,7 +1046,7 @@ def ideaunit_shop(
         _addin=_addin,
         _denom=_denom,
         _numor=_numor,
-        _reest=_reest,
+        _morph=_morph,
         _range_pushs=set(),
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
@@ -1132,8 +1132,8 @@ def ideas_calculated_float(
     for x_idea in idea_list:
         if x_idea._addin:
             x_float += get_0_if_None(x_idea._addin)
-        if (x_idea._numor or x_idea._denom) and not x_idea._reest:
+        if (x_idea._numor or x_idea._denom) and not x_idea._morph:
             x_float *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
-        if x_idea._denom and x_idea._reest:
+        if x_idea._denom and x_idea._morph:
             x_float = x_float % get_1_if_None(x_idea._denom)
     return x_float
