@@ -5,7 +5,7 @@ from src.bud.idea import IdeaUnit, ideaunit_shop
 from src.bud.bud import budunit_shop, BudUnit
 from src.bud.bud_time import (
     add_time_hreg_ideaunit,
-    # get_time_min_from_dt,
+    get_time_min_from_dt,
     # get_time_dt_from_min,
     time_str,  # "time"
     get_jajatime_text,  # "jajatime"
@@ -576,6 +576,26 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
     # THEN
     assert sue_agenda_dict == {}
+
+
+def test_get_time_min_from_dt_WorksCorrectly():
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_hreg_ideaunit(sue_bud)
+    assert get_time_min_from_dt(datetime(1938, 11, 10))
+    assert get_time_min_from_dt(datetime(1, 1, 1)) == 527040
+    assert get_time_min_from_dt(datetime(1938, 11, 10)) == 1019740320
+    # assert g_lw.get_time_dt_from_min(
+    #     min=g_lw.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    # ) == datetime(2000, 1, 1, 0, 0)
+    assert get_time_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420759360
+    assert get_time_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631139040
+    assert get_time_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631751040
+    assert get_time_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631751060
+
+    x_minutes = 1063903680
+    assert get_time_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
+    x_next_day = x_minutes + 1440
+    assert get_time_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
 
 
 # def test_get_time_dt_from_min_WorksCorrectly():
