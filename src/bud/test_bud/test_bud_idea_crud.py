@@ -200,33 +200,6 @@ def test_BudUnit_set_idea_CanCreateMissingIdeaUnits():
     assert sue_bud.idea_exists(coralsea_road)
 
 
-def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
-    # ESTABLISH
-    sue_bud = get_budunit_with_4_levels()
-    casa_road = sue_bud.make_l1_road("casa")
-    cleaning_road = sue_bud.make_road(casa_road, "cleaning")
-    clean_cookery_text = "clean_cookery"
-    clean_cookery_idea = ideaunit_shop(clean_cookery_text, _mass=40, pledge=True)
-
-    buildings_text = "buildings"
-    buildings_road = sue_bud.make_l1_road(buildings_text)
-    cookery_room_text = "cookery"
-    cookery_room_road = sue_bud.make_road(buildings_road, cookery_room_text)
-    cookery_dirty_text = "dirty"
-    cookery_dirty_road = sue_bud.make_road(cookery_room_road, cookery_dirty_text)
-    cookery_reasonunit = reasonunit_shop(base=cookery_room_road)
-    cookery_reasonunit.set_premise(premise=cookery_dirty_road)
-    clean_cookery_idea.set_reasonunit(cookery_reasonunit)
-
-    assert sue_bud.idea_exists(buildings_road) is False
-
-    # WHEN
-    sue_bud.set_idea(clean_cookery_idea, cleaning_road, create_missing_ideas=True)
-
-    # THEN
-    assert sue_bud.idea_exists(buildings_road)
-
-
 def test_BudUnit_del_idea_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()

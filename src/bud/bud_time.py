@@ -630,7 +630,6 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
 
 # def get_jajatime_legible_one_time_event(x_budunit: BudUnit, jajatime_min: int) -> str:
 #     dt_x = get_time_dt_from_min(x_budunit, min=jajatime_min)
-#     return get_jajatime_legible_from_dt(dt=dt_x)
 
 
 # def get_jajatime_repeating_legible_text(
@@ -653,90 +652,90 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
 #     return str_x
 
 
-def get_time_c400yr_from_min(x_budunit: BudUnit, min: int):
-    # ESTABLISH int minutes within 400 year range return year and remainder minutes
-    c400_count, c400_idea, c400yr_min = get_time_c400_from_min(x_budunit, min)
-    c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
-    cXXXyr_min = c400yr_min - c100_4_96y._begin
+# def get_time_c400yr_from_min(x_budunit: BudUnit, min: int):
+#     # ESTABLISH int minutes within 400 year range return year and remainder minutes
+#     c400_count, c400_idea, c400yr_min = get_time_c400_from_min(x_budunit, min)
+#     c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
+#     cXXXyr_min = c400yr_min - c100_4_96y._begin
 
-    time_road = x_budunit.make_l1_road("time")
-    tech_road = x_budunit.make_road(time_road, "tech")
+#     time_road = x_budunit.make_l1_road("time")
+#     tech_road = x_budunit.make_road(time_road, "tech")
 
-    # identify which range the time is in
-    if c100_4_96y._close - c100_4_96y._begin in (
-        50492160,
-        52596000,
-    ):  # 96 year and 100 year ideas
-        yr4_1461_road = x_budunit.make_road(tech_road, "4year with leap")
-        yr4_1461_idea = x_budunit.get_idea_obj(yr4_1461_road)
-        yr4_segments = int(cXXXyr_min / yr4_1461_idea._close)
-        cXyr_min = cXXXyr_min % yr4_1461_idea._close
-        yr1_idea = yr4_1461_idea.get_kids_in_range(begin=cXyr_min, close=cXyr_min)[0]
-    elif c100_4_96y._close - c100_4_96y._begin == 2102400:
-        yr4_1460_road = x_budunit.make_road(tech_road, "4year wo leap")
-        yr4_1460_idea = x_budunit.get_idea_obj(yr4_1460_road)
-        yr4_segments = 0
-        yr1_idea = yr4_1460_idea.get_kids_in_range(cXXXyr_min, cXXXyr_min)[0]
-        cXyr_min = cXXXyr_min % yr4_1460_idea._close
+#     # identify which range the time is in
+#     if c100_4_96y._close - c100_4_96y._begin in (
+#         50492160,
+#         52596000,
+#     ):  # 96 year and 100 year ideas
+#         yr4_1461_road = x_budunit.make_road(tech_road, "4year with leap")
+#         yr4_1461_idea = x_budunit.get_idea_obj(yr4_1461_road)
+#         yr4_segments = int(cXXXyr_min / yr4_1461_idea._close)
+#         cXyr_min = cXXXyr_min % yr4_1461_idea._close
+#         yr1_idea = yr4_1461_idea.get_kids_in_range(begin=cXyr_min, close=cXyr_min)[0]
+#     elif c100_4_96y._close - c100_4_96y._begin == 2102400:
+#         yr4_1460_road = x_budunit.make_road(tech_road, "4year wo leap")
+#         yr4_1460_idea = x_budunit.get_idea_obj(yr4_1460_road)
+#         yr4_segments = 0
+#         yr1_idea = yr4_1460_idea.get_kids_in_range(cXXXyr_min, cXXXyr_min)[0]
+#         cXyr_min = cXXXyr_min % yr4_1460_idea._close
 
-    yr1_rem_min = cXyr_min - yr1_idea._begin
-    yr1_idea_begin = int(yr1_idea._label.split("-")[0]) - 1
+#     yr1_rem_min = cXyr_min - yr1_idea._begin
+#     yr1_idea_begin = int(yr1_idea._label.split("-")[0]) - 1
 
-    c100_4_96y_begin = int(c100_4_96y._label.split("-")[0])
-    year_num = c100_4_96y_begin + (4 * yr4_segments) + yr1_idea_begin
-    return year_num, yr1_idea, yr1_rem_min
-
-
-def get_time_month_from_min(x_budunit: BudUnit, min: int):
-    time_road = x_budunit.make_l1_road("time")
-    tech_road = x_budunit.make_road(time_road, "tech")
-
-    year_num, yr1_idea, yr1_idea_rem_min = get_time_c400yr_from_min(x_budunit, min)
-    yrx = None
-    if yr1_idea._close - yr1_idea._begin == 525600:
-        yr365_road = x_budunit.make_road(tech_road, "365 year")
-        yrx = x_budunit.get_idea_obj(yr365_road)
-    elif yr1_idea._close - yr1_idea._begin == 527040:
-        yr366_road = x_budunit.make_road(tech_road, "366 year")
-        yrx = x_budunit.get_idea_obj(yr366_road)
-    mon_x = yrx.get_kids_in_range(begin=yr1_idea_rem_min, close=yr1_idea_rem_min)[0]
-    month_rem_min = yr1_idea_rem_min - mon_x._begin
-    month_num = int(mon_x._label.split("-")[0])
-    day_road = x_budunit.make_road(tech_road, "day")
-    day_x = x_budunit.get_idea_obj(day_road)
-    day_num = int(month_rem_min / day_x._close)
-    day_rem_min = month_rem_min % day_x._close
-    return month_num, day_num, day_rem_min, day_x
+#     c100_4_96y_begin = int(c100_4_96y._label.split("-")[0])
+#     year_num = c100_4_96y_begin + (4 * yr4_segments) + yr1_idea_begin
+#     return year_num, yr1_idea, yr1_rem_min
 
 
-def get_time_dt_from_min(x_budunit: BudUnit, min: int) -> datetime:
-    year_x = (
-        400 * get_time_c400_from_min(x_budunit, min=min)[0]
-    ) + get_time_c400yr_from_min(x_budunit, min=min)[0]
-    month_num = get_time_month_from_min(x_budunit, min=min)[0]
-    day_num = get_time_month_from_min(x_budunit, min)[1] + 1
-    hr_num, min60, hr_x = get_time_hour_from_min(x_budunit, min)
-    return datetime(
-        year=year_x, month=month_num, day=day_num, hour=hr_num, minute=min60
-    )
+# def get_time_month_from_min(x_budunit: BudUnit, min: int):
+#     time_road = x_budunit.make_l1_road("time")
+#     tech_road = x_budunit.make_road(time_road, "tech")
+
+#     year_num, yr1_idea, yr1_idea_rem_min = get_time_c400yr_from_min(x_budunit, min)
+#     yrx = None
+#     if yr1_idea._close - yr1_idea._begin == 525600:
+#         yr365_road = x_budunit.make_road(tech_road, "365 year")
+#         yrx = x_budunit.get_idea_obj(yr365_road)
+#     elif yr1_idea._close - yr1_idea._begin == 527040:
+#         yr366_road = x_budunit.make_road(tech_road, "366 year")
+#         yrx = x_budunit.get_idea_obj(yr366_road)
+#     mon_x = yrx.get_kids_in_range(begin=yr1_idea_rem_min, close=yr1_idea_rem_min)[0]
+#     month_rem_min = yr1_idea_rem_min - mon_x._begin
+#     month_num = int(mon_x._label.split("-")[0])
+#     day_road = x_budunit.make_road(tech_road, "day")
+#     day_x = x_budunit.get_idea_obj(day_road)
+#     day_num = int(month_rem_min / day_x._close)
+#     day_rem_min = month_rem_min % day_x._close
+#     return month_num, day_num, day_rem_min, day_x
 
 
-def get_time_c400_from_min(x_budunit: BudUnit, min: int) -> int:
-    time_road = x_budunit.make_l1_road("time")
-    tech_road = x_budunit.make_road(time_road, "tech")
-    c400_road = x_budunit.make_road(tech_road, "400 year segment")
-    c400_idea = x_budunit.get_idea_obj(c400_road)
-    c400_min = c400_idea._close
-    return int(min / c400_min), c400_idea, min % c400_min
+# def get_time_dt_from_min(x_budunit: BudUnit, min: int) -> datetime:
+#     year_x = (
+#         400 * get_time_c400_from_min(x_budunit, min=min)[0]
+#     ) + get_time_c400yr_from_min(x_budunit, min=min)[0]
+#     month_num = get_time_month_from_min(x_budunit, min=min)[0]
+#     day_num = get_time_month_from_min(x_budunit, min)[1] + 1
+#     hr_num, min60, hr_x = get_time_hour_from_min(x_budunit, min)
+#     return datetime(
+#         year=year_x, month=month_num, day=day_num, hour=hr_num, minute=min60
+#     )
 
 
-def get_time_hour_from_min(x_budunit: BudUnit, min: int) -> set[int, int, list[int]]:
-    month_num, day_num, day_rem_min, day_x = get_time_month_from_min(x_budunit, min=min)
-    hr_x = day_x.get_kids_in_range(begin=day_rem_min, close=day_rem_min)[0]
-    hr_rem_min = day_rem_min - hr_x._begin
-    hr_num = int(hr_x._label.split("-")[0])
-    min60 = int(hr_rem_min % (hr_x._close - hr_x._begin))
-    return hr_num, min60, hr_x
+# def get_time_c400_from_min(x_budunit: BudUnit, min: int) -> int:
+#     time_road = x_budunit.make_l1_road("time")
+#     tech_road = x_budunit.make_road(time_road, "tech")
+#     c400_road = x_budunit.make_road(tech_road, "400 year segment")
+#     c400_idea = x_budunit.get_idea_obj(c400_road)
+#     c400_min = c400_idea._close
+#     return int(min / c400_min), c400_idea, min % c400_min
+
+
+# def get_time_hour_from_min(x_budunit: BudUnit, min: int) -> set[int, int, list[int]]:
+#     month_num, day_num, day_rem_min, day_x = get_time_month_from_min(x_budunit, min=min)
+#     hr_x = day_x.get_kids_in_range(begin=day_rem_min, close=day_rem_min)[0]
+#     hr_rem_min = day_rem_min - hr_x._begin
+#     hr_num = int(hr_x._label.split("-")[0])
+#     min60 = int(hr_rem_min % (hr_x._close - hr_x._begin))
+#     return hr_num, min60, hr_x
 
 
 def set_time_facts(
@@ -1147,159 +1146,159 @@ class PremiseUnitHregTime:
     _start_minute: int = None
     _event_minutes: int = None
 
-    def set_weekly_event(
-        self,
-        every_x_weeks: int,
-        remainder_weeks: int,
-        weekday: str,
-        start_hr: int,
-        start_minute: int,
-        event_minutes: int,
-    ):
-        if every_x_weeks <= remainder_weeks:
-            raise InvalidPremiseUnitException(
-                "It is mandatory that remainder_weeks is at least 1 less than every_x_weeks"
-            )
+    # def set_weekly_event(
+    #     self,
+    #     every_x_weeks: int,
+    #     remainder_weeks: int,
+    #     weekday: str,
+    #     start_hr: int,
+    #     start_minute: int,
+    #     event_minutes: int,
+    # ):
+    #     if every_x_weeks <= remainder_weeks:
+    #         raise InvalidPremiseUnitException(
+    #             "It is mandatory that remainder_weeks is at least 1 less than every_x_weeks"
+    #         )
 
-        self._set_every_x_weeks(every_x_weeks)
-        self.set_x_remainder_weeks(remainder_weeks)
-        self._set_start_hr(start_hr)
-        self._set_start_minute(start_minute)
-        self._set_event_minutes(event_minutes)
-        self._set_weekday(weekday)
-        self._clear_every_x_days()
-        self._clear_every_x_months()
-        self._clear_every_x_years()
+    #     self._set_every_x_weeks(every_x_weeks)
+    #     self.set_x_remainder_weeks(remainder_weeks)
+    #     self._set_start_hr(start_hr)
+    #     self._set_start_minute(start_minute)
+    #     self._set_event_minutes(event_minutes)
+    #     self._set_weekday(weekday)
+    #     self._clear_every_x_days()
+    #     self._clear_every_x_months()
+    #     self._clear_every_x_years()
 
-    def set_days_event(
-        self,
-        every_x_days: int,
-        remainder_days: int,
-        start_hr: int,
-        start_minute: int,
-        event_minutes: int,
-    ):
-        if every_x_days <= remainder_days:
-            raise InvalidPremiseUnitException(
-                "It is mandatory that remainder_weeks is at least 1 less than every_x_weeks"
-            )
+    # def set_days_event(
+    #     self,
+    #     every_x_days: int,
+    #     remainder_days: int,
+    #     start_hr: int,
+    #     start_minute: int,
+    #     event_minutes: int,
+    # ):
+    #     if every_x_days <= remainder_days:
+    #         raise InvalidPremiseUnitException(
+    #             "It is mandatory that remainder_weeks is at least 1 less than every_x_weeks"
+    #         )
 
-        self._set_every_x_days(every_x_days)
-        self.set_x_remainder_days(remainder_days)
-        self._set_start_hr(start_hr)
-        self._set_start_minute(start_minute)
-        self._set_event_minutes(event_minutes)
-        self._clear_every_x_weeks()
-        self._clear_every_x_months()
-        self._clear_every_x_years()
+    #     self._set_every_x_days(every_x_days)
+    #     self.set_x_remainder_days(remainder_days)
+    #     self._set_start_hr(start_hr)
+    #     self._set_start_minute(start_minute)
+    #     self._set_event_minutes(event_minutes)
+    #     self._clear_every_x_weeks()
+    #     self._clear_every_x_months()
+    #     self._clear_every_x_years()
 
-    def set_x_remainder_weeks(self, remainder_weeks: int):
-        if remainder_weeks < 0:
-            raise InvalidPremiseUnitException(
-                "It is mandatory that remainder_weeks >= 0"
-            )
-        self._x_week_remainder = remainder_weeks
+    # def set_x_remainder_weeks(self, remainder_weeks: int):
+    #     if remainder_weeks < 0:
+    #         raise InvalidPremiseUnitException(
+    #             "It is mandatory that remainder_weeks >= 0"
+    #         )
+    #     self._x_week_remainder = remainder_weeks
 
-    def set_x_remainder_days(self, remainder_days: int):
-        if remainder_days < 0:
-            raise InvalidPremiseUnitException(
-                "It is mandatory that remainder_weeks >= 0"
-            )
-        self._x_days_remainder = remainder_days
+    # def set_x_remainder_days(self, remainder_days: int):
+    #     if remainder_days < 0:
+    #         raise InvalidPremiseUnitException(
+    #             "It is mandatory that remainder_weeks >= 0"
+    #         )
+    #     self._x_days_remainder = remainder_days
 
-    def _set_every_x_days(self, every_x_days: int):
-        self._every_x_days = every_x_days
+    # def _set_every_x_days(self, every_x_days: int):
+    #     self._every_x_days = every_x_days
 
-    def _set_every_x_weeks(
-        self,
-        every_x_weeks: int,
-    ):
-        self._every_x_weeks = every_x_weeks
+    # def _set_every_x_weeks(
+    #     self,
+    #     every_x_weeks: int,
+    # ):
+    #     self._every_x_weeks = every_x_weeks
 
-    def _clear_every_x_weeks(self):
-        self._every_x_weeks = None
+    # def _clear_every_x_weeks(self):
+    #     self._every_x_weeks = None
 
-    def _clear_every_x_days(self):
-        self._every_x_days = None
+    # def _clear_every_x_days(self):
+    #     self._every_x_days = None
 
-    def _clear_every_x_months(self):
-        self._every_x_months = None
+    # def _clear_every_x_months(self):
+    #     self._every_x_months = None
 
-    def _clear_every_x_years(self):
-        self._every_x_years = None
+    # def _clear_every_x_years(self):
+    #     self._every_x_years = None
 
-    def _set_start_hr(self, start_hr):
-        self._start_hr = start_hr
+    # def _set_start_hr(self, start_hr):
+    #     self._start_hr = start_hr
 
-    def _set_start_minute(self, start_minute):
-        self._start_minute = start_minute
+    # def _set_start_minute(self, start_minute):
+    #     self._start_minute = start_minute
 
-    def _set_event_minutes(self, event_minutes):
-        self._event_minutes = event_minutes
+    # def _set_event_minutes(self, event_minutes):
+    #     self._event_minutes = event_minutes
 
-    def _set_weekday(self, weekday: str):
-        if weekday in {
-            get_sun(),
-            get_mon(),
-            get_tue(),
-            get_wed(),
-            get_thu(),
-            get_fri(),
-            get_sat(),
-        }:
-            self._weekday = weekday
-            self._set_open_weekday()
+    # def _set_weekday(self, weekday: str):
+    #     if weekday in {
+    #         get_sun(),
+    #         get_mon(),
+    #         get_tue(),
+    #         get_wed(),
+    #         get_thu(),
+    #         get_fri(),
+    #         get_sat(),
+    #     }:
+    #         self._weekday = weekday
+    #         self._set_open_weekday()
 
-    def _set_open_weekday(self):
-        b = None
-        m = 1440
-        if self._weekday == get_sun():
-            b = 1 * m
-        elif self._weekday == get_mon():
-            b = 2 * m
-        elif self._weekday == get_tue():
-            b = 3 * m
-        elif self._weekday == get_wed():
-            b = 4 * m
-        elif self._weekday == get_thu():
-            b = 5 * m
-        elif self._weekday == get_fri():
-            b = 6 * m
-        elif self._weekday == get_sat():
-            b = 0 * m
+    # def _set_open_weekday(self):
+    #     b = None
+    #     m = 1440
+    #     if self._weekday == get_sun():
+    #         b = 1 * m
+    #     elif self._weekday == get_mon():
+    #         b = 2 * m
+    #     elif self._weekday == get_tue():
+    #         b = 3 * m
+    #     elif self._weekday == get_wed():
+    #         b = 4 * m
+    #     elif self._weekday == get_thu():
+    #         b = 5 * m
+    #     elif self._weekday == get_fri():
+    #         b = 6 * m
+    #     elif self._weekday == get_sat():
+    #         b = 0 * m
 
-        self._between_weekday_open = b
+    #     self._between_weekday_open = b
 
-    def get_jajatime_open(self):
-        x_open = None
-        if self._every_x_weeks is not None and self._x_week_remainder is not None:
-            x_open = (
-                (self._x_week_remainder * 10080)
-                + (self._start_hr * 60)
-                + (self._start_minute)
-            )
-            self._set_open_weekday()
-            x_open += self._between_weekday_open
-        elif self._every_x_days is not None and self._x_days_remainder is not None:
-            x_open = (
-                (self._x_days_remainder * 1440)
-                + (self._start_hr * 60)
-                + (self._start_minute)
-            )
+    # def get_jajatime_open(self):
+    #     x_open = None
+    #     if self._every_x_weeks is not None and self._x_week_remainder is not None:
+    #         x_open = (
+    #             (self._x_week_remainder * 10080)
+    #             + (self._start_hr * 60)
+    #             + (self._start_minute)
+    #         )
+    #         self._set_open_weekday()
+    #         x_open += self._between_weekday_open
+    #     elif self._every_x_days is not None and self._x_days_remainder is not None:
+    #         x_open = (
+    #             (self._x_days_remainder * 1440)
+    #             + (self._start_hr * 60)
+    #             + (self._start_minute)
+    #         )
 
-        return x_open
+    #     return x_open
 
-    @property
-    def jajatime_divisor(self):
-        if self._every_x_weeks is not None and self._x_week_remainder is not None:
-            return self._every_x_weeks * 10080
-        elif self._every_x_days is not None and self._x_days_remainder is not None:
-            return self._every_x_days * 1440
+    # @property
+    # def jajatime_divisor(self):
+    #     if self._every_x_weeks is not None and self._x_week_remainder is not None:
+    #         return self._every_x_weeks * 10080
+    #     elif self._every_x_days is not None and self._x_days_remainder is not None:
+    #         return self._every_x_days * 1440
 
-    @property
-    def jajatime_open(self):
-        return self.get_jajatime_open()
+    # @property
+    # def jajatime_open(self):
+    #     return self.get_jajatime_open()
 
-    @property
-    def jajatime_nigh(self):
-        return self.get_jajatime_open() + self._event_minutes
+    # @property
+    # def jajatime_nigh(self):
+    #     return self.get_jajatime_open() + self._event_minutes

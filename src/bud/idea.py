@@ -811,8 +811,8 @@ class IdeaUnit:
         range_root_factheir = self._factheirs.get(range_root_road)
         new_factheir_open = ideas_calculated_float(all_ideas, range_root_factheir.open)
         new_factheir_nigh = ideas_calculated_float(all_ideas, range_root_factheir.nigh)
-        new_factheir_obj = factheir_shop(reason_base, reason_base)
-        new_factheir_obj.set_attr(open=new_factheir_open, nigh=new_factheir_nigh)
+        new_factheir_obj = factheir_shop(reason_base)
+        new_factheir_obj.set_attr(reason_base, new_factheir_open, new_factheir_nigh)
         self._set_factheir(new_factheir_obj)
 
     def _are_all_reasonheir_active_true(self) -> bool:

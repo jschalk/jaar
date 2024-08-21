@@ -3,6 +3,8 @@ from src.bud.idea import IdeaUnit, ideaunit_shop
 from src.bud.bud import budunit_shop, BudUnit
 from src.bud.bud_time import (
     add_time_hreg_ideaunit,
+    # get_time_min_from_dt,
+    # get_time_dt_from_min,
     time_str,  # "time"
     get_jajatime_text,  # "jajatime"
     get_sun,  # "Sunday"
@@ -49,6 +51,8 @@ from src.bud.bud_time import (
     node_3_4_str,
     node_3_96_str,
 )
+from datetime import datetime
+from random import randint
 
 # from src.bud.examples.example_time import get_budunit_sue_TimeExample
 from copy import deepcopy as copy_deepcopy
@@ -301,64 +305,6 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     # # assert sue_budunit == ex1_budunit
 
 
-# def test_add_time_hreg_ideaunit_ReturnsObj():
-#     # ESTABLISH
-# c400_road = sue_budunit.make_road(tech_road, c400_str())
-# year4_noleap_road = sue_budunit.make_road(tech_road, year4_no__leap_str())
-# year4_withleap_road = sue_budunit.make_road(tech_road, year4_withleap_str())
-# year365_road = sue_budunit.make_road(tech_road, year365_str())
-# year366_road = sue_budunit.make_road(tech_road, year366_str())
-# month_road = sue_budunit.make_road(tech_road, month_str())
-# hour_road = sue_budunit.make_road(tech_road, hour_str())
-# weekday_idea_road = sue_budunit.make_road(tech_road, weekday_idea_str())
-
-# ex1_budunit = get_budunit_sue_TimeExample()
-
-#     sue_budunit = budunit_shop("Sue")
-#     time_road = sue_budunit.make_l1_road(time_str())
-#     tech_road = sue_budunit.make_road(time_road, tech_str())
-#     week_road = sue_budunit.make_road(tech_road, week_str())
-#     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-#     c400_road = sue_budunit.make_road(tech_road, c400_str())
-#     year4_noleap_road = sue_budunit.make_road(tech_road, year4_no__leap_str())
-#     year4_withleap_road = sue_budunit.make_road(tech_road, year4_withleap_str())
-#     year365_road = sue_budunit.make_road(tech_road, year365_str())
-#     year366_road = sue_budunit.make_road(tech_road, year366_str())
-#     month_road = sue_budunit.make_road(tech_road, month_str())
-#     day_road = sue_budunit.make_road(tech_road, day_str())
-#     hour_road = sue_budunit.make_road(tech_road, hour_str())
-#     weekday_idea_road = sue_budunit.make_road(tech_road, weekday_idea_str())
-
-#     ex1_budunit = get_budunit_sue_TimeExample()
-
-#     assert not sue_budunit.idea_exists(time_road)
-#     assert not sue_budunit.idea_exists(tech_road)
-#     assert not sue_budunit.idea_exists(week_road)
-
-#     # WHEN
-#     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
-
-#     # THEN
-#     assert sue_budunit is not None
-#     assert sue_budunit.idea_exists(time_road)
-#     assert sue_budunit.idea_exists(tech_road)
-#     assert sue_budunit.idea_exists(week_road)
-#     assert sue_budunit.idea_exists(jaja_road)
-#     assert kidlist(sue_budunit, time_road) == kidlist(ex1_budunit, time_road)
-#     assert kidlist(sue_budunit, tech_road) == kidlist(ex1_budunit, tech_road)
-#     assert kidlist(sue_budunit, year365_road) == kidlist(ex1_budunit, year365_road)
-#     assert kidlist(sue_budunit, year366_road) == kidlist(ex1_budunit, year366_road)
-#     assert kidlist(sue_budunit, day_road) == kidlist(ex1_budunit, day_road)
-#     assert kidlist(sue_budunit, hour_road) == kidlist(ex1_budunit, hour_road)
-#     assert kidlist(sue_budunit, month_road) == kidlist(ex1_budunit, month_road)
-#     assert kidlist(sue_budunit, week_road) == kidlist(ex1_budunit, week_road)
-#     assert kidlist(sue_budunit, jaja_road) == kidlist(ex1_budunit, jaja_road)
-#     compare_kidlists(ex1_budunit, sue_budunit)
-
-#     compare_kidless_ideas(ex1_budunit, sue_budunit)
-#     # assert sue_budunit == ex1_budunit
-
-
 # def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
 #     # ESTABLISH
 #     sue_budunit = budunit_shop("Sue")
@@ -386,43 +332,46 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 #     assert len(sue_budunit.get_idea_ranged_kids(idea_road=week_road, begin=1440)) == 1
 
 
-# def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
-#     # ESTABLISH
-#     sue_text = "Sue"
-#     sue_bud = get_budunit_sue_TimeExample()
-#     clean_text = "clean"
-#     clean_road = sue_bud.make_l1_road(clean_text)
-#     sue_bud.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
-#     time_road = sue_bud.make_l1_road("time")
-#     jajatime_road = sue_bud.make_road(time_road, "jajatime")
-#     jajaday = sue_bud.make_road(jajatime_road, "day")
+def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
+    # ESTABLISH
+    sue_text = "Sue"
+    sue_bud = add_time_hreg_ideaunit(budunit_shop(sue_text))
+    clean_text = "clean"
+    clean_road = sue_bud.make_l1_road(clean_text)
+    sue_bud.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
+    time_road = sue_bud.make_l1_road("time")
+    jajatime_road = sue_bud.make_road(time_road, "jajatime")
+    day_road = sue_bud.make_road(jajatime_road, "day")
 
-#     sue_bud.edit_idea_attr(
-#         road=clean_road,
-#         reason_base=jajatime_road,
-#         reason_premise=jajaday,
-#         begin=480,
-#         close=480,
-#     )
+    sue_bud.edit_idea_attr(
+        road=clean_road,
+        reason_base=day_road,
+        reason_premise=day_road,
+        reason_premise_open=320,
+        reason_premise_nigh=480,
+    )
 
-#     # WHEN
-#     open_x = 1063971180
-#     nigh_x1 = 2063971523
-#     sue_bud.set_fact(base=jajatime_road, pick=jajaday, open=open_x, nigh=nigh_x1)
+    # WHEN
+    open_x = 2063971110
+    nigh_x1 = 2063971523
+    sue_bud.set_fact(base=jajatime_road, pick=jajatime_road, open=open_x, nigh=nigh_x1)
 
-#     # THEN
-#     agenda_dict = sue_bud.get_agenda_dict()
-#     print(f"{agenda_dict.keys()=}")
-#     assert len(agenda_dict) == 1
-#     assert clean_road in agenda_dict.keys()
+    # THEN
+    agenda_dict = sue_bud.get_agenda_dict()
+    print(f"{agenda_dict.keys()=}")
+    assert len(agenda_dict) == 1
+    assert clean_road in agenda_dict.keys()
 
-#     # WHEN
-#     nigh_x2 = 1063971923
-#     sue_bud.set_fact(base=jajatime_road, pick=jajaday, open=open_x, nigh=nigh_x2)
+    # WHEN
+    # nigh_x2 = 1063971923
+    open_x2 = 0
+    nigh_x2 = 0
+    sue_bud.set_fact(base=jajatime_road, pick=jajatime_road, open=open_x2, nigh=nigh_x2)
+    print(f"YAYA {sue_bud._idearoot._factunits=}")
 
-#     # THEN
-#     agenda_dict = sue_bud.get_agenda_dict()
-#     assert len(agenda_dict) == 0
+    # THEN
+    agenda_dict = sue_bud.get_agenda_dict()
+    assert len(agenda_dict) == 0
 
 
 # def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
@@ -567,3 +516,39 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 
 #     # THEN
 #     assert sue_agenda_dict == {}
+
+
+# def test_get_time_dt_from_min_WorksCorrectly():
+#     sue_bud = budunit_shop("Sue")
+#     sue_bud = add_time_hreg_ideaunit(sue_bud)
+#     assert get_time_dt_from_min(5000000)
+#     # assert g_lw.get_time_dt_from_min(
+#     #     min=g_lw.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+#     # ) == datetime(2000, 1, 1, 0, 0)
+#     assert get_time_dt_from_min(420759360) == datetime(800, 1, 1, 0, 0)
+#     assert get_time_dt_from_min(631139040) == datetime(1200, 1, 1, 0, 0)
+#     assert get_time_dt_from_min(631751040) == datetime(1201, 3, 1, 0, 0)
+#     assert get_time_dt_from_min(631751060) == datetime(1201, 3, 1, 0, 20)
+
+#     x_minutes = 1063903680
+#     assert get_time_dt_from_min(min=x_minutes) == datetime(2022, 10, 29, 0, 0)
+#     x_next_day = x_minutes + 1440
+#     assert get_time_dt_from_min(min=x_next_day) == datetime(2022, 10, 30, 0, 0)
+
+
+# def _check_time_conversion_works_with_random_inputs():
+#     py_dt = datetime(
+#         year=randint(1, 2800),
+#         month=randint(1, 12),
+#         day=randint(1, 28),
+#         hour=randint(0, 23),
+#         minute=randint(0, 59),
+#     )
+#     print(f"Attempt {py_dt=}")
+#     assert py_dt == get_time_dt_from_min(min=get_time_min_from_dt(dt=py_dt))
+
+
+# def test_get_time_min_from_dt_WorksCorrectly():
+#     _check_time_conversion_works_with_random_inputs()
+#     _check_time_conversion_works_with_random_inputs()
+#     _check_time_conversion_works_with_random_inputs()
