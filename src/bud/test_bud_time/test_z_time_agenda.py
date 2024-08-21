@@ -33,8 +33,6 @@ from src.bud.bud_time import (
     dec_str,
     year4_no__leap_str,
     year4_withleap_str,
-    year365_str,
-    year366_str,
     month_str,
     hour_str,
     weekday_idea_str,
