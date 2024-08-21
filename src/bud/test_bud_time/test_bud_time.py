@@ -285,6 +285,42 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     assert years_idea._stop_want == 2800
     assert not years_idea._reest
 
+
+def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    day_road = sue_budunit.make_road(jaja_road, day_str())
+    days_road = sue_budunit.make_road(jaja_road, days_str())
+    print(f"{time_road=}")
+    print(f"{jaja_road=}")
+    print(f"{day_road=}")
+    assert not sue_budunit.idea_exists(time_road)
+    assert not sue_budunit.idea_exists(jaja_road)
+    assert not sue_budunit.idea_exists(day_road)
+    assert not sue_budunit.idea_exists(days_road)
+
+    # WHEN
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+
+    # THEN
+    assert sue_budunit.idea_exists(time_road)
+    assert sue_budunit.idea_exists(jaja_road)
+    jaja_idea = sue_budunit.get_idea_obj(jaja_road)
+    assert jaja_idea._begin == 0
+    assert jaja_idea._close == 1472657760
+    assert sue_budunit.idea_exists(day_road)
+    day_idea = sue_budunit.get_idea_obj(day_road)
+    assert day_idea._gogo_want == 0
+    assert day_idea._stop_want == 1440
+    assert day_idea._denom == 1440
+    assert day_idea._reest
+    assert sue_budunit.idea_exists(days_road)
+    days_idea = sue_budunit.get_idea_obj(days_road)
+    assert days_idea._denom == 1440
+    assert not days_idea._reest
+
     # assert sue_budunit is not None
     # assert sue_budunit.idea_exists(time_road)
     # assert sue_budunit.idea_exists(tech_road)

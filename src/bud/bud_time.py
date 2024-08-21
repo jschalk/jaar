@@ -653,7 +653,7 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
 
 
 # def get_time_c400yr_from_min(x_budunit: BudUnit, min: int):
-#     # ESTABLISH int minutes within 400 year range return year and remainder minutes
+#     # ESTABLISH int minutes within 400 year range return year and leftover minutes
 #     c400_count, c400_idea, c400yr_min = get_time_c400_from_min(x_budunit, min)
 #     c100_4_96y = c400_idea.get_kids_in_range(begin=c400yr_min, close=c400yr_min)[0]
 #     cXXXyr_min = c400yr_min - c100_4_96y._begin
@@ -1137,7 +1137,7 @@ class PremiseUnitHregTime:
     _on_x_monthday: int = None  # " build mybud,time;month,monthday
     _every_x_years: int = None  # builds mybud,time;years
     _every_x_weeks: int = None  # builds jajatime(minute)
-    _x_week_remainder: int = None
+    _x_week_leftover: int = None
     _between_hr_min_open: int = None  # clock and y o'clock" build jajatime(minutes)
     _between_hr_min_nigh: int = None  # clock and y o'clock" build jajatime(minutes)
     _between_weekday_open: int = None  # and y weekday" build jajatime(minutes)
@@ -1149,19 +1149,19 @@ class PremiseUnitHregTime:
     # def set_weekly_event(
     #     self,
     #     every_x_weeks: int,
-    #     remainder_weeks: int,
+    #     leftover_weeks: int,
     #     weekday: str,
     #     start_hr: int,
     #     start_minute: int,
     #     event_minutes: int,
     # ):
-    #     if every_x_weeks <= remainder_weeks:
+    #     if every_x_weeks <= leftover_weeks:
     #         raise InvalidPremiseUnitException(
-    #             "It is mandatory that remainder_weeks is at least 1 less than every_x_weeks"
+    #             "It is mandatory that leftover_weeks is at least 1 less than every_x_weeks"
     #         )
 
     #     self._set_every_x_weeks(every_x_weeks)
-    #     self.set_x_remainder_weeks(remainder_weeks)
+    #     self.set_x_leftover_weeks(leftover_weeks)
     #     self._set_start_hr(start_hr)
     #     self._set_start_minute(start_minute)
     #     self._set_event_minutes(event_minutes)
@@ -1173,18 +1173,18 @@ class PremiseUnitHregTime:
     # def set_days_event(
     #     self,
     #     every_x_days: int,
-    #     remainder_days: int,
+    #     leftover_days: int,
     #     start_hr: int,
     #     start_minute: int,
     #     event_minutes: int,
     # ):
-    #     if every_x_days <= remainder_days:
+    #     if every_x_days <= leftover_days:
     #         raise InvalidPremiseUnitException(
-    #             "It is mandatory that remainder_weeks is at least 1 less than every_x_weeks"
+    #             "It is mandatory that leftover_weeks is at least 1 less than every_x_weeks"
     #         )
 
     #     self._set_every_x_days(every_x_days)
-    #     self.set_x_remainder_days(remainder_days)
+    #     self.set_x_leftover_days(leftover_days)
     #     self._set_start_hr(start_hr)
     #     self._set_start_minute(start_minute)
     #     self._set_event_minutes(event_minutes)
@@ -1192,19 +1192,19 @@ class PremiseUnitHregTime:
     #     self._clear_every_x_months()
     #     self._clear_every_x_years()
 
-    # def set_x_remainder_weeks(self, remainder_weeks: int):
-    #     if remainder_weeks < 0:
+    # def set_x_leftover_weeks(self, leftover_weeks: int):
+    #     if leftover_weeks < 0:
     #         raise InvalidPremiseUnitException(
-    #             "It is mandatory that remainder_weeks >= 0"
+    #             "It is mandatory that leftover_weeks >= 0"
     #         )
-    #     self._x_week_remainder = remainder_weeks
+    #     self._x_week_leftover = leftover_weeks
 
-    # def set_x_remainder_days(self, remainder_days: int):
-    #     if remainder_days < 0:
+    # def set_x_leftover_days(self, leftover_days: int):
+    #     if leftover_days < 0:
     #         raise InvalidPremiseUnitException(
-    #             "It is mandatory that remainder_weeks >= 0"
+    #             "It is mandatory that leftover_weeks >= 0"
     #         )
-    #     self._x_days_remainder = remainder_days
+    #     self._x_days_leftover = leftover_days
 
     # def _set_every_x_days(self, every_x_days: int):
     #     self._every_x_days = every_x_days
@@ -1271,17 +1271,17 @@ class PremiseUnitHregTime:
 
     # def get_jajatime_open(self):
     #     x_open = None
-    #     if self._every_x_weeks is not None and self._x_week_remainder is not None:
+    #     if self._every_x_weeks is not None and self._x_week_leftover is not None:
     #         x_open = (
-    #             (self._x_week_remainder * 10080)
+    #             (self._x_week_leftover * 10080)
     #             + (self._start_hr * 60)
     #             + (self._start_minute)
     #         )
     #         self._set_open_weekday()
     #         x_open += self._between_weekday_open
-    #     elif self._every_x_days is not None and self._x_days_remainder is not None:
+    #     elif self._every_x_days is not None and self._x_days_leftover is not None:
     #         x_open = (
-    #             (self._x_days_remainder * 1440)
+    #             (self._x_days_leftover * 1440)
     #             + (self._start_hr * 60)
     #             + (self._start_minute)
     #         )
@@ -1290,9 +1290,9 @@ class PremiseUnitHregTime:
 
     # @property
     # def jajatime_divisor(self):
-    #     if self._every_x_weeks is not None and self._x_week_remainder is not None:
+    #     if self._every_x_weeks is not None and self._x_week_leftover is not None:
     #         return self._every_x_weeks * 10080
-    #     elif self._every_x_days is not None and self._x_days_remainder is not None:
+    #     elif self._every_x_days is not None and self._x_days_leftover is not None:
     #         return self._every_x_days * 1440
 
     # @property

@@ -198,7 +198,7 @@ def add_traces(
     sought_status_text: str = "",
     premise_divisor: float = 1,
 ) -> plotly_figure:
-    fact_text = "FactUnit Remainder range"
+    fact_text = "FactUnit Remaiinder range"
     premise_text = "Premise Range"
     blue_text = "Blue"
     pink_text = "Pink"

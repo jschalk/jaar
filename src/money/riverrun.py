@@ -166,9 +166,9 @@ class RiverRun:
 
     def _set_post_loop_rivergrade_attrs(self):
         for x_acct_id, acct_rivergrade in self._rivergrades.items():
-            tax_due_remaining = self.get_acct_tax_due(x_acct_id)
+            tax_due_leftover = self.get_acct_tax_due(x_acct_id)
             tax_due_paid = self.get_acct_tax_yield(x_acct_id)
-            acct_rivergrade.set_tax_bill_amount(tax_due_paid + tax_due_remaining)
+            acct_rivergrade.set_tax_bill_amount(tax_due_paid + tax_due_leftover)
             acct_rivergrade.set_tax_paid_amount(tax_due_paid)
 
     def calc_metrics(self):
