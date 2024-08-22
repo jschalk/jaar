@@ -8,7 +8,7 @@ from dataclasses import dataclass
 def get_time_min_from_dt(dt: datetime) -> int:
     ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
     min_time_difference = dt - ce_src
-    return round(min_time_difference.total_seconds() / 60) + (440640)
+    return round(min_time_difference.total_seconds() / 60) + 440640
 
 
 def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
@@ -205,13 +205,13 @@ def week_close():
 
 def jaja_week_dict() -> dict[dict, int]:
     return {
-        get_sun(): 1440,
-        get_mon(): 2880,
-        get_tue(): 4320,
-        get_wed(): 5760,
-        get_thu(): 7200,
-        get_fri(): 8640,
-        get_sat(): 0,
+        get_sun(): 5760,
+        get_mon(): 7200,
+        get_tue(): 8640,
+        get_wed(): 0,
+        get_thu(): 1440,
+        get_fri(): 2880,
+        get_sat(): 4320,
     }
 
 
