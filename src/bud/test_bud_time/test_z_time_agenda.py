@@ -1,6 +1,7 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.bud_time import (
+    get_year_road,
     get_time_min_from_dt,
     add_time_hreg_ideaunit,
     time_str,  # "time"
@@ -283,12 +284,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    year_road = get_year_road(sue_budunit, jaja_road)
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
@@ -330,12 +326,8 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    year_road = get_year_road(sue_budunit, jaja_road)
+
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
@@ -369,12 +361,8 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    year_road = get_year_road(sue_budunit, jaja_road)
+
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     jaja_idea = sue_budunit.get_idea_obj(jaja_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)

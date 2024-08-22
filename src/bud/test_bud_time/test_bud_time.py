@@ -16,8 +16,13 @@ from src.bud.bud_time import (
     c100_num,
     yr4_leap_num,
     yr4_clean_num,
+    year_str,
+    years_str,
+    get_year_road,
     year_num,
     day_num,
+    week_begin,
+    week_close,
     get_sun,  # "Sunday"
     get_mon,  # "Monday"
     get_tue,  # "Tuesday"
@@ -29,8 +34,6 @@ from src.bud.bud_time import (
     weeks_str,  # f"{get_week()}s"
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
-    year_str,
-    years_str,
     jan_str,
     feb_str,
     mar_str,
@@ -213,6 +216,8 @@ def test_jajatime_ReferenceFunctionsReturnObj():
     assert jajatime_begin() == 0
     assert jajatime_close() == 1472657760
     assert jajatime_close() == c400_leap_num() * 7
+    assert week_begin() == 0
+    assert week_close() == 10080
     assert jan_begin() == 437760
     assert feb_begin() == 480960
     assert mar_begin() == 0
@@ -337,6 +342,22 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
     assert not weeks_idea._morph
 
 
+def test_get_year_road_ReturnsObj():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+
+    # WHEN / THEN
+    assert year_road == get_year_road(sue_budunit, jaja_road)
+
+
 def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap_road():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
@@ -403,19 +424,9 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    year_road = get_year_road(sue_budunit, jaja_road)
 
     assert not sue_budunit.idea_exists(jaja_road)
-    assert not sue_budunit.idea_exists(c400_leap_road)
-    assert not sue_budunit.idea_exists(c400_clean_road)
-    assert not sue_budunit.idea_exists(c100_road)
-    assert not sue_budunit.idea_exists(yr4_leap_road)
-    assert not sue_budunit.idea_exists(yr4_clean_road)
     assert not sue_budunit.idea_exists(year_road)
 
     jan_road = sue_budunit.make_road(year_road, jan_str())
@@ -449,12 +460,6 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 
     # THEN
     assert sue_budunit.idea_exists(jaja_road)
-    print(f"     {year_road=}")
-    assert sue_budunit.idea_exists(c400_leap_road)
-    assert sue_budunit.idea_exists(c400_clean_road)
-    assert sue_budunit.idea_exists(c100_road)
-    assert sue_budunit.idea_exists(yr4_leap_road)
-    assert sue_budunit.idea_exists(yr4_clean_road)
     assert sue_budunit.idea_exists(year_road)
 
     year_idea = sue_budunit.get_idea_obj(year_road)

@@ -179,6 +179,14 @@ def dec_close():
     return 437760
 
 
+def week_begin():
+    return 0
+
+
+def week_close():
+    return 7 * day_num()
+
+
 # def sun_begin(): return 1440
 # def mon_begin(): return 2880
 # def tue_begin(): return 4320
@@ -224,36 +232,36 @@ def sat_begin():
 
 
 def sun_close():
-    return sun_begin() + 1440
+    return sun_begin() + day_num()
 
 
 def mon_close():
-    return mon_begin() + 1440
+    return mon_begin() + day_num()
 
 
 def tue_close():
-    return tue_begin() + 1440
+    return tue_begin() + day_num()
 
 
 def wed_close():
-    return wed_begin() + 1440
+    return wed_begin() + day_num()
 
 
 def thu_close():
-    return thu_begin() + 1440
+    return thu_begin() + day_num()
 
 
 def fri_close():
-    return fri_begin() + 1440
+    return fri_begin() + day_num()
 
 
 def sat_close():
-    return sat_begin() + 1440
+    return sat_begin() + day_num()
 
 
 def _add_jajatime_ideaunit(x_budunit: BudUnit, time_road: RoadUnit) -> RoadUnit:
     jaja_idea = ideaunit_shop(
-        get_jajatime_text(), _begin=jajatime_begin, _close=jajatime_close
+        get_jajatime_text(), _begin=jajatime_begin(), _close=jajatime_close()
     )
     jaja_road = x_budunit.make_road(time_road, get_jajatime_text())
     x_budunit.set_idea(jaja_idea, time_road)
@@ -487,6 +495,15 @@ def yr4_leap_str():
 
 def yr4_clean_str():
     return "yr4_clean"
+
+
+def get_year_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
+    c400_leap_road = x_budunit.make_road(time_range_root_road, c400_leap_str())
+    c400_clean_road = x_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_road = x_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
+    yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    return x_budunit.make_road(yr4_clean_road, year_str())
 
 
 def week_str():
