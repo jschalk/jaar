@@ -179,8 +179,82 @@ def dec_close():
     return 437760
 
 
+# def sun_begin(): return 1440
+# def mon_begin(): return 2880
+# def tue_begin(): return 4320
+# def wed_begin(): return 5760
+# def thu_begin(): return 7200
+# def fri_begin(): return 8640
+# def sat_begin(): return 0
+# def sun_close(): return sun_begin() + 1440
+# def mon_close(): return mon_begin() + 1440
+# def tue_close(): return tue_begin() + 1440
+# def wed_close(): return wed_begin() + 1440
+# def thu_close(): return thu_begin() + 1440
+# def fri_close(): return fri_begin() + 1440
+# def sat_close(): return sat_begin() + 1440
+
+
+def sun_begin():
+    return 1440
+
+
+def mon_begin():
+    return 2880
+
+
+def tue_begin():
+    return 4320
+
+
+def wed_begin():
+    return 5760
+
+
+def thu_begin():
+    return 7200
+
+
+def fri_begin():
+    return 8640
+
+
+def sat_begin():
+    return 0
+
+
+def sun_close():
+    return sun_begin() + 1440
+
+
+def mon_close():
+    return mon_begin() + 1440
+
+
+def tue_close():
+    return tue_begin() + 1440
+
+
+def wed_close():
+    return wed_begin() + 1440
+
+
+def thu_close():
+    return thu_begin() + 1440
+
+
+def fri_close():
+    return fri_begin() + 1440
+
+
+def sat_close():
+    return sat_begin() + 1440
+
+
 def _add_jajatime_ideaunit(x_budunit: BudUnit, time_road: RoadUnit) -> RoadUnit:
-    jaja_idea = ideaunit_shop(get_jajatime_text(), _begin=0, _close=1472657760)
+    jaja_idea = ideaunit_shop(
+        get_jajatime_text(), _begin=jajatime_begin, _close=jajatime_close
+    )
     jaja_road = x_budunit.make_road(time_road, get_jajatime_text())
     x_budunit.set_idea(jaja_idea, time_road)
     return jaja_road
@@ -260,13 +334,13 @@ def _add_week_ideaunits(x_budunit: BudUnit, jaja_road) -> RoadUnit:
     week_idea._gogo_want = 0
     week_idea._stop_want = 10080
     x_budunit.set_idea(week_idea, jaja_road)
-    sun_idea = ideaunit_shop(get_sun(), _gogo_want=1440, _stop_want=1440 + 1440)
-    mon_idea = ideaunit_shop(get_mon(), _gogo_want=2880, _stop_want=2880 + 1440)
-    tue_idea = ideaunit_shop(get_tue(), _gogo_want=4320, _stop_want=4320 + 1440)
-    wed_idea = ideaunit_shop(get_wed(), _gogo_want=5760, _stop_want=5760 + 1440)
-    thu_idea = ideaunit_shop(get_thu(), _gogo_want=7200, _stop_want=7200 + 1440)
-    fri_idea = ideaunit_shop(get_fri(), _gogo_want=8640, _stop_want=8640 + 1440)
-    sat_idea = ideaunit_shop(get_sat(), _gogo_want=0, _stop_want=1440)
+    sun_idea = ideaunit_shop(get_sun(), _gogo_want=sun_begin(), _stop_want=sun_close())
+    mon_idea = ideaunit_shop(get_mon(), _gogo_want=mon_begin(), _stop_want=mon_close())
+    tue_idea = ideaunit_shop(get_tue(), _gogo_want=tue_begin(), _stop_want=tue_close())
+    wed_idea = ideaunit_shop(get_wed(), _gogo_want=wed_begin(), _stop_want=wed_close())
+    thu_idea = ideaunit_shop(get_thu(), _gogo_want=thu_begin(), _stop_want=thu_close())
+    fri_idea = ideaunit_shop(get_fri(), _gogo_want=fri_begin(), _stop_want=fri_close())
+    sat_idea = ideaunit_shop(get_sat(), _gogo_want=sat_begin(), _stop_want=sat_close())
     x_budunit.set_idea(sun_idea, week_road)
     x_budunit.set_idea(mon_idea, week_road)
     x_budunit.set_idea(tue_idea, week_road)

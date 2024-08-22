@@ -98,6 +98,20 @@ from src.bud.bud_time import (
     oct_close,
     nov_close,
     dec_close,
+    sun_begin,
+    mon_begin,
+    tue_begin,
+    wed_begin,
+    thu_begin,
+    fri_begin,
+    sat_begin,
+    sun_close,
+    mon_close,
+    tue_close,
+    wed_close,
+    thu_close,
+    fri_close,
+    sat_close,
 )
 from datetime import datetime
 from random import randint
@@ -223,6 +237,20 @@ def test_jajatime_ReferenceFunctionsReturnObj():
     assert oct_close() == 349920
     assert nov_close() == 393120
     assert dec_close() == 437760
+    assert sun_begin() == 1440
+    assert mon_begin() == 2880
+    assert tue_begin() == 4320
+    assert wed_begin() == 5760
+    assert thu_begin() == 7200
+    assert fri_begin() == 8640
+    assert sat_begin() == 0
+    assert sun_close() == sun_begin() + day_num()
+    assert mon_close() == mon_begin() + day_num()
+    assert tue_close() == tue_begin() + day_num()
+    assert wed_close() == wed_begin() + day_num()
+    assert thu_close() == thu_begin() + day_num()
+    assert fri_close() == fri_begin() + day_num()
+    assert sat_close() == sat_begin() + day_num()
 
 
 def test_add_time_hreg_ideaunit_ReturnsObjWith_days():
