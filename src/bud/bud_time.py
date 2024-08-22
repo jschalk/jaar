@@ -8,7 +8,7 @@ from dataclasses import dataclass
 def get_time_min_from_dt(dt: datetime) -> int:
     ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
     min_time_difference = dt - ce_src
-    return round(min_time_difference.total_seconds() / 60) + 527040
+    return round(min_time_difference.total_seconds() / 60) + (440640)
 
 
 def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
@@ -44,29 +44,31 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     x_budunit.set_idea(ideaunit_shop(weeks_str(), _denom=10080), jaja_road)
     x_budunit.set_idea(week_idea, jaja_road)
 
-    beto_road = x_budunit.make_road(jaja_road, get_betotime_text())
-    c400_leap_road = x_budunit.make_road(beto_road, c400_leap_str())
-    c400_clean_road = x_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_clean_road = x_budunit.make_road(c400_clean_road, c100_clean_str())
-    yr4_leap_road = x_budunit.make_road(c100_clean_road, yr4_leap_str())
-    yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = x_budunit.make_road(yr4_clean_road, year_str())
-    x_budunit.set_idea(ideaunit_shop(get_betotime_text()), jaja_road)
-    x_budunit.set_idea(ideaunit_shop(c400_leap_str()), beto_road)
-    x_budunit.set_idea(ideaunit_shop(c400_clean_str()), c400_leap_road)
-    x_budunit.set_idea(ideaunit_shop(c100_clean_str()), c400_clean_road)
-    x_budunit.set_idea(ideaunit_shop(yr4_leap_str()), c100_clean_road)
-    x_budunit.set_idea(ideaunit_shop(yr4_clean_str()), yr4_leap_road)
-    # year_idea = ideaunit_shop(year_str(), _morph=True)
-    # year_idea._gogo_want = 0
-    # year_idea._stop_want = 525600
-    # year_idea._denom = 525600
-    # year_idea._morph = True
-    # x_budunit.set_idea(year_idea, jaja_road)
-    print(f"{yr4_clean_road=}")
-    x_budunit.set_idea(ideaunit_shop(year_str()), yr4_clean_road)
+    year_road = _add_c400_leap_idea(x_budunit, jaja_road)
     add_month_ideaunits(x_budunit, year_road)
     return x_budunit
+
+
+def _add_c400_leap_idea(x_budunit: BudUnit, time_range_root_road: RoadUnit):
+    c400_leap_road = x_budunit.make_road(time_range_root_road, c400_leap_str())
+    c400_clean_road = x_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_road = x_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
+    yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = x_budunit.make_road(yr4_clean_road, year_str())
+    c400_leap_idea = ideaunit_shop(c400_leap_str(), _denom=210379680, _morph=True)
+    c400_clean_idea = ideaunit_shop(c400_clean_str(), _denom=210378240, _morph=True)
+    c100_idea = ideaunit_shop(c100_str(), _denom=52594560, _morph=True)
+    yr4_leap_idea = ideaunit_shop(yr4_leap_str(), _denom=2103840, _morph=True)
+    yr4_clean_idea = ideaunit_shop(yr4_clean_str(), _denom=2102400, _morph=True)
+    year_idea = ideaunit_shop(year_str(), _denom=525600, _morph=True)
+    x_budunit.set_idea(c400_leap_idea, time_range_root_road)
+    x_budunit.set_idea(c400_clean_idea, c400_leap_road)
+    x_budunit.set_idea(c100_idea, c400_clean_road)
+    x_budunit.set_idea(yr4_leap_idea, c100_road)
+    x_budunit.set_idea(yr4_clean_idea, yr4_leap_road)
+    x_budunit.set_idea(year_idea, yr4_clean_road)
+    return year_road
 
 
 def add_month_ideaunits(x_budunit: BudUnit, year_road: RoadUnit):
@@ -819,10 +821,6 @@ def get_jajatime_text():
     return "jajatime"
 
 
-def get_betotime_text():
-    return "betotime"
-
-
 def get_sun():
     return "Sunday"
 
@@ -863,8 +861,8 @@ def c400_clean_str():
     return "c400_clean"
 
 
-def c100_clean_str():
-    return "c100_clean"
+def c100_str():
+    return "c100 years"
 
 
 def yr4_leap_str():

@@ -9,7 +9,6 @@ from src.bud.bud_time import (
     # get_time_dt_from_min,
     time_str,  # "time"
     get_jajatime_text,  # "jajatime"
-    get_betotime_text,  # "jajatime"
     get_sun,  # "Sunday"
     get_mon,  # "Monday"
     get_tue,  # "Tuesday"
@@ -39,7 +38,7 @@ from src.bud.bud_time import (
     year4_withleap_str,
     c400_leap_str,
     c400_clean_str,
-    c100_clean_str,
+    c100_str,
     yr4_leap_str,
     yr4_clean_str,
     year_str,
@@ -118,6 +117,28 @@ def compare_kidlists(src_budunit: BudUnit, x_budunit: BudUnit):
             print(f"   Kidlist failure at {src_road=}")
             print(f"{kidlist(src_budunit, src_road)=}")
         assert kidlist(src_budunit, src_road) == kidlist(x_budunit, src_road)
+
+
+def test_get_time_min_from_dt_WorksCorrectly():
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_hreg_ideaunit(sue_bud)
+
+    assert get_time_min_from_dt(datetime(1938, 11, 10))
+    assert get_time_min_from_dt(datetime(1, 1, 1)) == 440640
+    assert get_time_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440
+    assert get_time_min_from_dt(datetime(1938, 11, 10)) == 1019653920
+    # assert g_lw.get_time_dt_from_min(
+    #     min=g_lw.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    # ) == datetime(2000, 1, 1, 0, 0)
+    assert get_time_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
+    assert get_time_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
+    assert get_time_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
+    assert get_time_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+
+    x_minutes = 1063817280
+    assert get_time_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
+    x_next_day = x_minutes + 1440
+    assert get_time_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
 
 
 def test_add_time_hreg_ideaunit_ReturnsObjWith_days():
@@ -204,24 +225,83 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
     assert not weeks_idea._morph
 
 
+def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap_road():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+
+    assert not sue_budunit.idea_exists(c400_leap_road)
+
+    # WHEN
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+
+    # THEN
+    assert sue_budunit.idea_exists(c400_leap_road)
+    c400_leap_idea = sue_budunit.get_idea_obj(c400_leap_road)
+    assert not c400_leap_idea._gogo_want
+    assert not c400_leap_idea._stop_want
+    assert c400_leap_idea._denom == 210379680
+    assert c400_leap_idea._morph
+
+    assert sue_budunit.idea_exists(c400_clean_road)
+    c400_clean_idea = sue_budunit.get_idea_obj(c400_clean_road)
+    assert not c400_clean_idea._gogo_want
+    assert not c400_clean_idea._stop_want
+    assert c400_clean_idea._denom == 210378240
+    assert c400_clean_idea._morph
+
+    assert sue_budunit.idea_exists(c100_road)
+    c100_idea = sue_budunit.get_idea_obj(c100_road)
+    assert not c100_idea._gogo_want
+    assert not c100_idea._stop_want
+    assert c100_idea._denom == 52594560
+    assert c100_idea._morph
+
+    assert sue_budunit.idea_exists(yr4_leap_road)
+    yr4_leap_idea = sue_budunit.get_idea_obj(yr4_leap_road)
+    assert not yr4_leap_idea._gogo_want
+    assert not yr4_leap_idea._stop_want
+    assert yr4_leap_idea._denom == 2103840
+    assert yr4_leap_idea._morph
+
+    assert sue_budunit.idea_exists(yr4_clean_road)
+    yr4_clean_idea = sue_budunit.get_idea_obj(yr4_clean_road)
+    assert not yr4_clean_idea._gogo_want
+    assert not yr4_clean_idea._stop_want
+    assert yr4_clean_idea._denom == 2102400
+    assert yr4_clean_idea._morph
+
+    assert sue_budunit.idea_exists(year_road)
+    year_idea = sue_budunit.get_idea_obj(year_road)
+    assert not year_idea._gogo_want
+    assert not year_idea._stop_want
+    assert year_idea._denom == 525600
+    assert year_idea._morph
+
+
 def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    beto_road = sue_budunit.make_road(jaja_road, get_betotime_text())
-    c400_leap_road = sue_budunit.make_road(beto_road, c400_leap_str())
+    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
     c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_clean_str())
-    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
+    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
     year_road = sue_budunit.make_road(yr4_clean_road, year_str())
 
     assert not sue_budunit.idea_exists(jaja_road)
-    assert not sue_budunit.idea_exists(beto_road)
     assert not sue_budunit.idea_exists(c400_leap_road)
     assert not sue_budunit.idea_exists(c400_clean_road)
-    assert not sue_budunit.idea_exists(c100_clean_road)
+    assert not sue_budunit.idea_exists(c100_road)
     assert not sue_budunit.idea_exists(yr4_leap_road)
     assert not sue_budunit.idea_exists(yr4_clean_road)
     assert not sue_budunit.idea_exists(year_road)
@@ -257,11 +337,10 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
 
     # THEN
     assert sue_budunit.idea_exists(jaja_road)
-    assert sue_budunit.idea_exists(beto_road)
     print(f"     {year_road=}")
     assert sue_budunit.idea_exists(c400_leap_road)
     assert sue_budunit.idea_exists(c400_clean_road)
-    assert sue_budunit.idea_exists(c100_clean_road)
+    assert sue_budunit.idea_exists(c100_road)
     assert sue_budunit.idea_exists(yr4_leap_road)
     assert sue_budunit.idea_exists(yr4_clean_road)
     assert sue_budunit.idea_exists(year_road)
@@ -576,26 +655,6 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
     # THEN
     assert sue_agenda_dict == {}
-
-
-def test_get_time_min_from_dt_WorksCorrectly():
-    sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_hreg_ideaunit(sue_bud)
-    assert get_time_min_from_dt(datetime(1938, 11, 10))
-    assert get_time_min_from_dt(datetime(1, 1, 1)) == 527040
-    assert get_time_min_from_dt(datetime(1938, 11, 10)) == 1019740320
-    # assert g_lw.get_time_dt_from_min(
-    #     min=g_lw.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    # ) == datetime(2000, 1, 1, 0, 0)
-    assert get_time_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420759360
-    assert get_time_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631139040
-    assert get_time_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631751040
-    assert get_time_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631751060
-
-    x_minutes = 1063903680
-    assert get_time_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
-    x_next_day = x_minutes + 1440
-    assert get_time_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
 
 
 # def test_get_time_dt_from_min_WorksCorrectly():

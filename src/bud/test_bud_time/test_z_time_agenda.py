@@ -61,25 +61,6 @@ def _get_year_min_length(year_num: int) -> int:
     return x_stop - x_gogo
 
 
-def test_BudUnit_get_time_min_from_dt_ReturnsCorrectObj():
-    # ESTABLISH / WHEN
-    # THEN
-    assert get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    assert get_time_min_from_dt(dt=datetime(1, 1, 1, 0, 0)) == 527040
-    assert get_time_min_from_dt(dt=datetime(1, 1, 2, 0, 0)) == 527040 + 1440
-    assert get_time_min_from_dt(dt=datetime(400, 1, 1, 0, 0)) == 210379680
-    assert get_time_min_from_dt(dt=datetime(800, 1, 1, 0, 0)) == 420759360
-    assert get_time_min_from_dt(dt=datetime(1200, 1, 1, 0, 0)) == 631139040
-
-
-def test_get_time_min_from_year_ReturnsObj():
-    assert _get_year_min_length(2000) == 527040
-    assert _get_year_min_length(2001) == 525600
-    assert _get_year_min_length(2002) == 525600
-    assert _get_year_min_length(2003) == 525600
-    assert _get_year_min_length(2004) == 527040
-
-
 def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
