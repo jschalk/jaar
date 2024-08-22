@@ -55,6 +55,46 @@ from src.bud.bud_time import (
 from datetime import datetime
 
 
+def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    weeks_road = sue_budunit.make_road(jaja_road, weeks_str())
+    week_road = sue_budunit.make_road(jaja_road, week_str())
+    sun_road = sue_budunit.make_road(week_road, get_sun())
+    day_road = sue_budunit.make_road(jaja_road, day_str())
+    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    jan_road = sue_budunit.make_road(year_road, jan_str())
+
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    assert sue_budunit._range_inheritors == {}
+
+    # WHEN
+    sue_budunit._init_idea_tree_walk()
+    sue_budunit._set_ideaunits_range()
+
+    # THEN
+    print(f"{sue_budunit._range_inheritors=}")
+    assert sue_budunit._range_inheritors != {}
+    assert day_road in sue_budunit._range_inheritors
+    assert weeks_road in sue_budunit._range_inheritors
+    assert week_road in sue_budunit._range_inheritors
+    assert sun_road in sue_budunit._range_inheritors
+    assert c400_leap_road in sue_budunit._range_inheritors
+    assert c400_clean_road in sue_budunit._range_inheritors
+    assert c100_clean_road in sue_budunit._range_inheritors
+    assert yr4_leap_road in sue_budunit._range_inheritors
+    assert yr4_clean_road in sue_budunit._range_inheritors
+    assert year_road in sue_budunit._range_inheritors
+    assert jan_road in sue_budunit._range_inheritors
+
+
 def test_BudUnit_set_ideaunits_range_Sets_day_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
@@ -221,9 +261,25 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     sue_budunit._set_ideaunits_range()
 
     # THEN
-    # assert year_idea._denom == 525600
-    # assert year_idea._gogo_calc == 0
-    # assert year_idea._stop_calc == 525600
+    assert sue_budunit.get_idea_obj(jaja_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(c400_leap_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(c400_clean_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(c100_clean_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(yr4_leap_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(yr4_clean_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(year_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(jaja_road)._stop_calc == 1472657760
+    assert sue_budunit.get_idea_obj(c400_leap_road)._stop_calc == 210379680
+    assert sue_budunit.get_idea_obj(c400_clean_road)._stop_calc == 210378240
+    assert sue_budunit.get_idea_obj(c100_clean_road)._stop_calc == 52594560
+    assert sue_budunit.get_idea_obj(yr4_leap_road)._stop_calc == 2103840
+    assert sue_budunit.get_idea_obj(yr4_clean_road)._stop_calc == 2102400
+    assert sue_budunit.get_idea_obj(year_road)._stop_calc == 525600
+
+    assert year_idea._denom == 525600
+    assert year_idea._gogo_calc == 0
+    assert year_idea._stop_calc == 525600
+
     jan_road = sue_budunit.make_road(year_road, jan_str())
     feb_road = sue_budunit.make_road(year_road, feb_str())
     mar_road = sue_budunit.make_road(year_road, mar_str())

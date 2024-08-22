@@ -5,7 +5,12 @@ from src.bud.bud_time import (
     add_time_hreg_ideaunit,
     time_str,  # "time"
     week_str,  # "week"
-    get_jajatime_text,  # "jajatime"
+    get_jajatime_text,
+    c400_leap_str,
+    c400_clean_str,
+    c100_str,
+    yr4_leap_str,
+    yr4_clean_str,
     get_sun,  # "Sunday"
     get_mon,  # "Monday"
     get_tue,  # "Tuesday"
@@ -31,8 +36,6 @@ from src.bud.bud_time import (
     oct_str,
     nov_str,
     dec_str,
-    year4_no__leap_str,
-    year4_withleap_str,
     month_str,
     hour_str,
     weekday_idea_str,
@@ -289,107 +292,143 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
     assert sue_agenda.get(clean_road)
 
 
-# def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
-#     # ESTABLISH
-#     sue_budunit = budunit_shop("Sue")
-#     time_road = sue_budunit.make_l1_road(time_str())
-#     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-#     year_road = sue_budunit.make_road(jaja_road, year_str())
-#     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
-#     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
-#     # year_idea = sue_budunit.get_idea_obj(year_road)
-#     sue_budunit._set_ideaunits_range()
-#     casa_text = "casa"
-#     casa_road = sue_budunit.make_l1_road(casa_text)
-#     clean_text = "clean"
-#     clean_road = sue_budunit.make_road(casa_road, clean_text)
-#     sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-#     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-#     sue_budunit.edit_idea_attr(
-#         clean_road,
-#         reason_base=year_road,
-#         reason_premise=year_road,
-#         reason_premise_open=0,
-#         reason_premise_nigh=1440,
-#         reason_premise_divisor=525600,
-#     )
-#     sue_budunit.set_fact(jaja_road, jaja_road, 0, 1440)
+def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
+    # year_idea = sue_budunit.get_idea_obj(year_road)
+    sue_budunit._set_ideaunits_range()
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    sue_budunit.edit_idea_attr(
+        clean_road,
+        reason_base=year_road,
+        reason_premise=year_road,
+        reason_premise_open=0,
+        reason_premise_nigh=1440,
+        reason_premise_divisor=525600,
+    )
+    sue_budunit.set_fact(jaja_road, jaja_road, 0, 1440)
 
-#     # WHEN
-#     sue_agenda = sue_budunit.get_agenda_dict()
-#     print(f"{sue_agenda=}")
+    # WHEN
+    sue_agenda = sue_budunit.get_agenda_dict()
+    print(f"{sue_agenda=}")
 
-#     # THEN
-#     assert sue_agenda.get(clean_road)
+    # THEN
+    assert sue_agenda.get(clean_road)
 
+    # WHEN
+    sue_budunit.set_fact(jaja_road, jaja_road, 1444, 2880)
+    sue_agenda = sue_budunit.get_agenda_dict()
+    print(f"{sue_agenda=}")
 
-# def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
-#     # ESTABLISH
-#     sue_budunit = budunit_shop("Sue")
-#     time_road = sue_budunit.make_l1_road(time_str())
-#     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-#     year_road = sue_budunit.make_road(jaja_road, year_str())
-#     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
-#     # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
-#     # year_idea = sue_budunit.get_idea_obj(year_road)
-#     sue_budunit._set_ideaunits_range()
-#     casa_text = "casa"
-#     casa_road = sue_budunit.make_l1_road(casa_text)
-#     clean_text = "clean"
-#     clean_road = sue_budunit.make_road(casa_road, clean_text)
-#     sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-#     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-#     sue_budunit.edit_idea_attr(
-#         clean_road,
-#         reason_base=year_road,
-#         reason_premise=year_road,
-#         reason_premise_open=0,
-#         reason_premise_nigh=1440,
-#         reason_premise_divisor=525600,
-#     )
-#     sue_budunit.set_fact(jaja_road, jaja_road, 525600, 525600 + 1440)
-
-#     # WHEN
-#     sue_agenda = sue_budunit.get_agenda_dict()
-#     print(f"{sue_agenda=}")
-
-#     # THEN
-#     assert sue_agenda.get(clean_road)
+    # THEN
+    assert not sue_agenda.get(clean_road)
 
 
-# def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
-#     # ESTABLISH
-#     year4_gogo = get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-#     year4_stop = get_time_min_from_dt(dt=datetime(2000, 12, 31, 0, 0))
+def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    # jaja_idea = sue_budunit.get_idea_obj(jaja_road)
+    # year_idea = sue_budunit.get_idea_obj(year_road)
+    sue_budunit._set_ideaunits_range()
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    sue_budunit.edit_idea_attr(
+        clean_road,
+        reason_base=year_road,
+        reason_premise=year_road,
+        reason_premise_open=0,
+        reason_premise_nigh=1440,
+        reason_premise_divisor=525600,
+    )
+    sue_budunit.set_fact(jaja_road, jaja_road, 525600, 525600 + 1440)
 
-#     assert year4_stop - year4_gogo == 527040
-#     sue_budunit = budunit_shop("Sue")
-#     time_road = sue_budunit.make_l1_road(time_str())
-#     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-#     year_road = sue_budunit.make_road(jaja_road, year_str())
-#     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
-#     jaja_idea = sue_budunit.get_idea_obj(jaja_road)
-#     # year_idea = sue_budunit.get_idea_obj(year_road)
-#     sue_budunit._set_ideaunits_range()
-#     casa_text = "casa"
-#     casa_road = sue_budunit.make_l1_road(casa_text)
-#     clean_text = "clean"
-#     clean_road = sue_budunit.make_road(casa_road, clean_text)
-#     sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-#     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-#     sue_budunit.edit_idea_attr(
-#         clean_road,
-#         reason_base=year_road,
-#         reason_premise=year_road,
-#         reason_premise_open=0,
-#         reason_premise_nigh=1440,
-#         reason_premise_divisor=525600,
-#     )
-#     sue_budunit.set_fact(year_road, year_road, 525600, 525600 + 1440)
+    # WHEN
+    sue_agenda = sue_budunit.get_agenda_dict()
+    print(f"{sue_agenda=}")
 
-#     # WHEN
-#     sue_agenda = sue_budunit.get_agenda_dict()
-#     print(f"{sue_agenda=}")
+    # THEN
+    assert sue_agenda.get(clean_road)
 
-#     # THEN
-#     assert sue_agenda.get(clean_road)
+
+def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    jaja_idea = sue_budunit.get_idea_obj(jaja_road)
+    # year_idea = sue_budunit.get_idea_obj(year_road)
+    sue_budunit._set_ideaunits_range()
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    sue_budunit.edit_idea_attr(
+        clean_road,
+        reason_base=year_road,
+        reason_premise=year_road,
+        reason_premise_open=0,
+        reason_premise_nigh=1440,
+        reason_premise_divisor=525600,
+    )
+    sue_budunit.set_fact(jaja_road, jaja_road, 525600, 525600 + 1440)
+
+    # WHEN
+    sue_agenda = sue_budunit.get_agenda_dict()
+    print(f"{sue_agenda=}")
+
+    # THEN
+    assert sue_agenda.get(clean_road)
+
+    # WHEN / THEN
+    yr2000mar1 = get_time_min_from_dt(dt=datetime(2000, 3, 1, 0, 0))
+    yr2000mar2 = get_time_min_from_dt(dt=datetime(2000, 3, 2, 0, 0))
+    yr2000dec1 = get_time_min_from_dt(dt=datetime(2000, 12, 1, 0, 0))
+    yr2000dec2 = get_time_min_from_dt(dt=datetime(2000, 12, 2, 0, 0))
+    yr2004mar1 = get_time_min_from_dt(dt=datetime(2004, 3, 1, 0, 0))
+    yr2004mar2 = get_time_min_from_dt(dt=datetime(2004, 3, 2, 0, 0))
+
+    sue_budunit.set_fact(jaja_road, jaja_road, yr2000mar1, yr2000mar1 + 1440)
+    assert len(sue_budunit.get_agenda_dict()) == 1
+    sue_budunit.set_fact(jaja_road, jaja_road, yr2000mar2, yr2000mar2 + 1440)
+    assert len(sue_budunit.get_agenda_dict()) == 0
+    sue_budunit.set_fact(jaja_road, jaja_road, yr2004mar1, yr2004mar1 + 1440)
+    assert len(sue_budunit.get_agenda_dict()) == 1
+    sue_budunit.set_fact(jaja_road, jaja_road, yr2000mar2, yr2004mar2 + 1440)
+    assert len(sue_budunit.get_agenda_dict()) == 1
