@@ -36,20 +36,6 @@ from src.bud.bud_time import (
     oct_str,
     nov_str,
     dec_str,
-    month_str,
-    hour_str,
-    weekday_idea_str,
-    year1_str,
-    year2_str,
-    year3_str,
-    year4_str,
-    node_0_100_str,
-    node_1_4_str,
-    node_1_96_str,
-    node_2_4_str,
-    node_2_96_str,
-    node_3_4_str,
-    node_3_96_str,
 )
 from datetime import datetime
 

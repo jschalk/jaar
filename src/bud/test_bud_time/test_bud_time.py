@@ -34,28 +34,37 @@ from src.bud.bud_time import (
     oct_str,
     nov_str,
     dec_str,
-    year4_no__leap_str,
-    year4_withleap_str,
     c400_leap_str,
     c400_clean_str,
     c100_str,
     yr4_leap_str,
     yr4_clean_str,
     year_str,
-    month_str,
     hour_str,
-    weekday_idea_str,
-    year1_str,
-    year2_str,
-    year3_str,
-    year4_str,
-    node_0_100_str,
-    node_1_4_str,
-    node_1_96_str,
-    node_2_4_str,
-    node_2_96_str,
-    node_3_4_str,
-    node_3_96_str,
+    hr_00_str,
+    hr_01_str,
+    hr_02_str,
+    hr_03_str,
+    hr_04_str,
+    hr_05_str,
+    hr_06_str,
+    hr_07_str,
+    hr_08_str,
+    hr_09_str,
+    hr_10_str,
+    hr_11_str,
+    hr_12_str,
+    hr_13_str,
+    hr_14_str,
+    hr_15_str,
+    hr_16_str,
+    hr_17_str,
+    hr_18_str,
+    hr_19_str,
+    hr_20_str,
+    hr_21_str,
+    hr_22_str,
+    hr_23_str,
 )
 from datetime import datetime
 from random import randint
@@ -386,7 +395,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     assert sue_budunit.get_idea_obj(dec_road)._stop_want == 437760
 
 
-def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_():
+def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -421,24 +430,156 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_():
     assert days_idea._denom == 1440
     assert not days_idea._morph
 
-    # assert sue_budunit is not None
-    # assert sue_budunit.idea_exists(time_road)
-    # assert sue_budunit.idea_exists(tech_road)
-    # assert sue_budunit.idea_exists(week_road)
-    # assert sue_budunit.idea_exists(jaja_road)
-    # assert kidlist(sue_budunit, time_road) == kidlist(ex1_budunit, time_road)
-    # assert kidlist(sue_budunit, tech_road) == kidlist(ex1_budunit, tech_road)
-    # assert kidlist(sue_budunit, year365_road) == kidlist(ex1_budunit, year365_road)
-    # assert kidlist(sue_budunit, year366_road) == kidlist(ex1_budunit, year366_road)
-    # assert kidlist(sue_budunit, day_road) == kidlist(ex1_budunit, day_road)
-    # assert kidlist(sue_budunit, hour_road) == kidlist(ex1_budunit, hour_road)
-    # assert kidlist(sue_budunit, month_road) == kidlist(ex1_budunit, month_road)
-    # assert kidlist(sue_budunit, week_road) == kidlist(ex1_budunit, week_road)
-    # assert kidlist(sue_budunit, jaja_road) == kidlist(ex1_budunit, jaja_road)
-    # compare_kidlists(ex1_budunit, sue_budunit)
 
-    # compare_kidless_ideas(ex1_budunit, sue_budunit)
-    # # assert sue_budunit == ex1_budunit
+def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
+    # ESTABLISH
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
+    day_road = sue_budunit.make_road(jaja_road, day_str())
+    hour_road = sue_budunit.make_road(day_road, hour_str())
+    hr_00_road = sue_budunit.make_road(day_road, hr_00_str())
+    hr_01_road = sue_budunit.make_road(day_road, hr_01_str())
+    hr_02_road = sue_budunit.make_road(day_road, hr_02_str())
+    hr_03_road = sue_budunit.make_road(day_road, hr_03_str())
+    hr_04_road = sue_budunit.make_road(day_road, hr_04_str())
+    hr_05_road = sue_budunit.make_road(day_road, hr_05_str())
+    hr_06_road = sue_budunit.make_road(day_road, hr_06_str())
+    hr_07_road = sue_budunit.make_road(day_road, hr_07_str())
+    hr_08_road = sue_budunit.make_road(day_road, hr_08_str())
+    hr_09_road = sue_budunit.make_road(day_road, hr_09_str())
+    hr_10_road = sue_budunit.make_road(day_road, hr_10_str())
+    hr_11_road = sue_budunit.make_road(day_road, hr_11_str())
+    hr_12_road = sue_budunit.make_road(day_road, hr_12_str())
+    hr_13_road = sue_budunit.make_road(day_road, hr_13_str())
+    hr_14_road = sue_budunit.make_road(day_road, hr_14_str())
+    hr_15_road = sue_budunit.make_road(day_road, hr_15_str())
+    hr_16_road = sue_budunit.make_road(day_road, hr_16_str())
+    hr_17_road = sue_budunit.make_road(day_road, hr_17_str())
+    hr_18_road = sue_budunit.make_road(day_road, hr_18_str())
+    hr_19_road = sue_budunit.make_road(day_road, hr_19_str())
+    hr_20_road = sue_budunit.make_road(day_road, hr_20_str())
+    hr_21_road = sue_budunit.make_road(day_road, hr_21_str())
+    hr_22_road = sue_budunit.make_road(day_road, hr_22_str())
+    hr_23_road = sue_budunit.make_road(day_road, hr_23_str())
+
+    print(f"{day_road=}")
+    print(f"{hr_00_road=}")
+    assert not sue_budunit.idea_exists(time_road)
+    assert not sue_budunit.idea_exists(jaja_road)
+    assert not sue_budunit.idea_exists(day_road)
+    assert not sue_budunit.idea_exists(hour_road)
+    assert not sue_budunit.idea_exists(hr_00_road)
+    assert not sue_budunit.idea_exists(hr_01_road)
+    assert not sue_budunit.idea_exists(hr_02_road)
+    assert not sue_budunit.idea_exists(hr_03_road)
+    assert not sue_budunit.idea_exists(hr_04_road)
+    assert not sue_budunit.idea_exists(hr_05_road)
+    assert not sue_budunit.idea_exists(hr_06_road)
+    assert not sue_budunit.idea_exists(hr_07_road)
+    assert not sue_budunit.idea_exists(hr_08_road)
+    assert not sue_budunit.idea_exists(hr_09_road)
+    assert not sue_budunit.idea_exists(hr_10_road)
+    assert not sue_budunit.idea_exists(hr_11_road)
+    assert not sue_budunit.idea_exists(hr_12_road)
+    assert not sue_budunit.idea_exists(hr_13_road)
+    assert not sue_budunit.idea_exists(hr_14_road)
+    assert not sue_budunit.idea_exists(hr_15_road)
+    assert not sue_budunit.idea_exists(hr_16_road)
+    assert not sue_budunit.idea_exists(hr_17_road)
+    assert not sue_budunit.idea_exists(hr_18_road)
+    assert not sue_budunit.idea_exists(hr_19_road)
+    assert not sue_budunit.idea_exists(hr_20_road)
+    assert not sue_budunit.idea_exists(hr_21_road)
+    assert not sue_budunit.idea_exists(hr_22_road)
+    assert not sue_budunit.idea_exists(hr_23_road)
+
+    # WHEN
+    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+
+    # THEN
+    day_idea = sue_budunit.get_idea_obj(day_road)
+    print(f"{day_idea._kids.keys()=}")
+    assert sue_budunit.idea_exists(time_road)
+    assert sue_budunit.idea_exists(jaja_road)
+    assert sue_budunit.idea_exists(day_road)
+    assert sue_budunit.idea_exists(hour_road)
+    assert sue_budunit.get_idea_obj(hour_road)._denom == 60
+    assert sue_budunit.get_idea_obj(hour_road)._morph
+    assert not sue_budunit.get_idea_obj(hour_road)._gogo_want
+    assert not sue_budunit.get_idea_obj(hour_road)._stop_want
+    assert sue_budunit.idea_exists(hr_00_road)
+    assert sue_budunit.idea_exists(hr_01_road)
+    assert sue_budunit.idea_exists(hr_02_road)
+    assert sue_budunit.idea_exists(hr_03_road)
+    assert sue_budunit.idea_exists(hr_04_road)
+    assert sue_budunit.idea_exists(hr_05_road)
+    assert sue_budunit.idea_exists(hr_06_road)
+    assert sue_budunit.idea_exists(hr_07_road)
+    assert sue_budunit.idea_exists(hr_08_road)
+    assert sue_budunit.idea_exists(hr_09_road)
+    assert sue_budunit.idea_exists(hr_10_road)
+    assert sue_budunit.idea_exists(hr_11_road)
+    assert sue_budunit.idea_exists(hr_12_road)
+    assert sue_budunit.idea_exists(hr_13_road)
+    assert sue_budunit.idea_exists(hr_14_road)
+    assert sue_budunit.idea_exists(hr_15_road)
+    assert sue_budunit.idea_exists(hr_16_road)
+    assert sue_budunit.idea_exists(hr_17_road)
+    assert sue_budunit.idea_exists(hr_18_road)
+    assert sue_budunit.idea_exists(hr_19_road)
+    assert sue_budunit.idea_exists(hr_20_road)
+    assert sue_budunit.idea_exists(hr_21_road)
+    assert sue_budunit.idea_exists(hr_22_road)
+    assert sue_budunit.idea_exists(hr_23_road)
+    assert sue_budunit.get_idea_obj(hr_00_road)._gogo_want == 0
+    assert sue_budunit.get_idea_obj(hr_01_road)._gogo_want == 60
+    assert sue_budunit.get_idea_obj(hr_02_road)._gogo_want == 120
+    assert sue_budunit.get_idea_obj(hr_03_road)._gogo_want == 180
+    assert sue_budunit.get_idea_obj(hr_04_road)._gogo_want == 240
+    assert sue_budunit.get_idea_obj(hr_05_road)._gogo_want == 300
+    assert sue_budunit.get_idea_obj(hr_06_road)._gogo_want == 360
+    assert sue_budunit.get_idea_obj(hr_07_road)._gogo_want == 420
+    assert sue_budunit.get_idea_obj(hr_08_road)._gogo_want == 480
+    assert sue_budunit.get_idea_obj(hr_09_road)._gogo_want == 540
+    assert sue_budunit.get_idea_obj(hr_10_road)._gogo_want == 600
+    assert sue_budunit.get_idea_obj(hr_11_road)._gogo_want == 660
+    assert sue_budunit.get_idea_obj(hr_12_road)._gogo_want == 720
+    assert sue_budunit.get_idea_obj(hr_13_road)._gogo_want == 780
+    assert sue_budunit.get_idea_obj(hr_14_road)._gogo_want == 840
+    assert sue_budunit.get_idea_obj(hr_15_road)._gogo_want == 900
+    assert sue_budunit.get_idea_obj(hr_16_road)._gogo_want == 960
+    assert sue_budunit.get_idea_obj(hr_17_road)._gogo_want == 1020
+    assert sue_budunit.get_idea_obj(hr_18_road)._gogo_want == 1080
+    assert sue_budunit.get_idea_obj(hr_19_road)._gogo_want == 1140
+    assert sue_budunit.get_idea_obj(hr_20_road)._gogo_want == 1200
+    assert sue_budunit.get_idea_obj(hr_21_road)._gogo_want == 1260
+    assert sue_budunit.get_idea_obj(hr_22_road)._gogo_want == 1320
+    assert sue_budunit.get_idea_obj(hr_23_road)._gogo_want == 1380
+    assert sue_budunit.get_idea_obj(hr_00_road)._stop_want == 60
+    assert sue_budunit.get_idea_obj(hr_01_road)._stop_want == 120
+    assert sue_budunit.get_idea_obj(hr_02_road)._stop_want == 180
+    assert sue_budunit.get_idea_obj(hr_03_road)._stop_want == 240
+    assert sue_budunit.get_idea_obj(hr_04_road)._stop_want == 300
+    assert sue_budunit.get_idea_obj(hr_05_road)._stop_want == 360
+    assert sue_budunit.get_idea_obj(hr_06_road)._stop_want == 420
+    assert sue_budunit.get_idea_obj(hr_07_road)._stop_want == 480
+    assert sue_budunit.get_idea_obj(hr_08_road)._stop_want == 540
+    assert sue_budunit.get_idea_obj(hr_09_road)._stop_want == 600
+    assert sue_budunit.get_idea_obj(hr_10_road)._stop_want == 660
+    assert sue_budunit.get_idea_obj(hr_11_road)._stop_want == 720
+    assert sue_budunit.get_idea_obj(hr_12_road)._stop_want == 780
+    assert sue_budunit.get_idea_obj(hr_13_road)._stop_want == 840
+    assert sue_budunit.get_idea_obj(hr_14_road)._stop_want == 900
+    assert sue_budunit.get_idea_obj(hr_15_road)._stop_want == 960
+    assert sue_budunit.get_idea_obj(hr_16_road)._stop_want == 1020
+    assert sue_budunit.get_idea_obj(hr_17_road)._stop_want == 1080
+    assert sue_budunit.get_idea_obj(hr_18_road)._stop_want == 1140
+    assert sue_budunit.get_idea_obj(hr_19_road)._stop_want == 1200
+    assert sue_budunit.get_idea_obj(hr_20_road)._stop_want == 1260
+    assert sue_budunit.get_idea_obj(hr_21_road)._stop_want == 1320
+    assert sue_budunit.get_idea_obj(hr_22_road)._stop_want == 1380
+    assert sue_budunit.get_idea_obj(hr_23_road)._stop_want == 1440
 
 
 # def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
