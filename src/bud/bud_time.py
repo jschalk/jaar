@@ -23,6 +23,162 @@ def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     return x_budunit
 
 
+def c400_leap_num():
+    return 210379680
+
+
+def c400_clean_num():
+    return 210378240
+
+
+def c100_num():
+    return 52594560
+
+
+def yr4_leap_num():
+    return 2103840
+
+
+def yr4_clean_num():
+    return 2102400
+
+
+def year_num():
+    return 525600
+
+
+def day_num():
+    return 1440
+
+
+def jajatime_begin():
+    return 0
+
+
+def jajatime_close():
+    return c400_leap_num() * 7
+
+
+# def jan_begin(): return 437760
+# def feb_begin(): return 480960
+# def mar_begin(): return 0
+# def apr_begin(): return 44640
+# def may_begin(): return 84960
+# def jun_begin(): return 129600
+# def jul_begin(): return 172800
+# def aug_begin(): return 217440
+# def sep_begin(): return 260640
+# def oct_begin(): return 305280
+# def nov_begin(): return 349920
+# def dec_begin(): return 393120
+# def jan_close(): return 480960
+# def feb_close(): return 525600
+# def mar_close(): return 44640
+# def apr_close(): return 84960
+# def may_close(): return 129600
+# def jun_close(): return 172800
+# def jul_close(): return 217440
+# def aug_close(): return 260640
+# def sep_close(): return 305280
+# def oct_close(): return 349920
+# def nov_close(): return 393120
+# def dec_close(): return 437760
+def jan_begin():
+    return 437760
+
+
+def feb_begin():
+    return 480960
+
+
+def mar_begin():
+    return 0
+
+
+def apr_begin():
+    return 44640
+
+
+def may_begin():
+    return 84960
+
+
+def jun_begin():
+    return 129600
+
+
+def jul_begin():
+    return 172800
+
+
+def aug_begin():
+    return 217440
+
+
+def sep_begin():
+    return 260640
+
+
+def oct_begin():
+    return 305280
+
+
+def nov_begin():
+    return 349920
+
+
+def dec_begin():
+    return 393120
+
+
+def jan_close():
+    return 480960
+
+
+def feb_close():
+    return 525600
+
+
+def mar_close():
+    return 44640
+
+
+def apr_close():
+    return 84960
+
+
+def may_close():
+    return 129600
+
+
+def jun_close():
+    return 172800
+
+
+def jul_close():
+    return 217440
+
+
+def aug_close():
+    return 260640
+
+
+def sep_close():
+    return 305280
+
+
+def oct_close():
+    return 349920
+
+
+def nov_close():
+    return 393120
+
+
+def dec_close():
+    return 437760
+
+
 def _add_jajatime_ideaunit(x_budunit: BudUnit, time_road: RoadUnit) -> RoadUnit:
     jaja_idea = ideaunit_shop(get_jajatime_text(), _begin=0, _close=1472657760)
     jaja_road = x_budunit.make_road(time_road, get_jajatime_text())
@@ -31,12 +187,12 @@ def _add_jajatime_ideaunit(x_budunit: BudUnit, time_road: RoadUnit) -> RoadUnit:
 
 
 def _add_day_ideaunits(x_budunit: BudUnit, jaja_road: RoadUnit):
-    day_idea = ideaunit_shop(day_str(), _denom=1440, _morph=True)
+    day_idea = ideaunit_shop(day_str(), _denom=day_num(), _morph=True)
     day_road = x_budunit.make_road(jaja_road, day_str())
     day_idea._gogo_want = 0
-    day_idea._stop_want = 1440
+    day_idea._stop_want = day_num()
     x_budunit.set_idea(day_idea, jaja_road)
-    x_budunit.set_idea(ideaunit_shop(days_str(), _denom=1440), jaja_road)
+    x_budunit.set_idea(ideaunit_shop(days_str(), _denom=day_num()), jaja_road)
     return day_road
 
 
@@ -130,12 +286,14 @@ def _add_c400_leap_idea(x_budunit: BudUnit, time_range_root_road: RoadUnit):
     yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
     year_road = x_budunit.make_road(yr4_clean_road, year_str())
-    c400_leap_idea = ideaunit_shop(c400_leap_str(), _denom=210379680, _morph=True)
-    c400_clean_idea = ideaunit_shop(c400_clean_str(), _denom=210378240, _morph=True)
-    c100_idea = ideaunit_shop(c100_str(), _denom=52594560, _morph=True)
-    yr4_leap_idea = ideaunit_shop(yr4_leap_str(), _denom=2103840, _morph=True)
-    yr4_clean_idea = ideaunit_shop(yr4_clean_str(), _denom=2102400, _morph=True)
-    year_idea = ideaunit_shop(year_str(), _denom=525600, _morph=True)
+    c400_leap_idea = ideaunit_shop(c400_leap_str(), _denom=c400_leap_num(), _morph=True)
+    c400_clean_idea = ideaunit_shop(
+        c400_clean_str(), _denom=c400_clean_num(), _morph=True
+    )
+    c100_idea = ideaunit_shop(c100_str(), _denom=c100_num(), _morph=True)
+    yr4_leap_idea = ideaunit_shop(yr4_leap_str(), _denom=yr4_leap_num(), _morph=True)
+    yr4_clean_idea = ideaunit_shop(yr4_clean_str(), _denom=yr4_clean_num(), _morph=True)
+    year_idea = ideaunit_shop(year_str(), _denom=year_num(), _morph=True)
     x_budunit.set_idea(c400_leap_idea, time_range_root_road)
     x_budunit.set_idea(c400_clean_idea, c400_leap_road)
     x_budunit.set_idea(c100_idea, c400_clean_road)
@@ -146,18 +304,18 @@ def _add_c400_leap_idea(x_budunit: BudUnit, time_range_root_road: RoadUnit):
 
 
 def add_month_ideaunits(x_budunit: BudUnit, year_road: RoadUnit):
-    jan_idea = ideaunit_shop(jan_str(), _gogo_want=437760, _stop_want=480960)
-    feb_idea = ideaunit_shop(feb_str(), _gogo_want=480960, _stop_want=525600)
-    mar_idea = ideaunit_shop(mar_str(), _gogo_want=0, _stop_want=44640)
-    apr_idea = ideaunit_shop(apr_str(), _gogo_want=44640, _stop_want=84960)
-    may_idea = ideaunit_shop(may_str(), _gogo_want=84960, _stop_want=129600)
-    jun_idea = ideaunit_shop(jun_str(), _gogo_want=129600, _stop_want=172800)
-    jul_idea = ideaunit_shop(jul_str(), _gogo_want=172800, _stop_want=217440)
-    aug_idea = ideaunit_shop(aug_str(), _gogo_want=217440, _stop_want=260640)
-    sep_idea = ideaunit_shop(sep_str(), _gogo_want=260640, _stop_want=305280)
-    oct_idea = ideaunit_shop(oct_str(), _gogo_want=305280, _stop_want=349920)
-    nov_idea = ideaunit_shop(nov_str(), _gogo_want=349920, _stop_want=393120)
-    dec_idea = ideaunit_shop(dec_str(), _gogo_want=393120, _stop_want=437760)
+    jan_idea = ideaunit_shop(jan_str(), _gogo_want=jan_begin(), _stop_want=jan_close())
+    feb_idea = ideaunit_shop(feb_str(), _gogo_want=feb_begin(), _stop_want=feb_close())
+    mar_idea = ideaunit_shop(mar_str(), _gogo_want=mar_begin(), _stop_want=mar_close())
+    apr_idea = ideaunit_shop(apr_str(), _gogo_want=apr_begin(), _stop_want=apr_close())
+    may_idea = ideaunit_shop(may_str(), _gogo_want=may_begin(), _stop_want=may_close())
+    jun_idea = ideaunit_shop(jun_str(), _gogo_want=jun_begin(), _stop_want=jun_close())
+    jul_idea = ideaunit_shop(jul_str(), _gogo_want=jul_begin(), _stop_want=jul_close())
+    aug_idea = ideaunit_shop(aug_str(), _gogo_want=aug_begin(), _stop_want=aug_close())
+    sep_idea = ideaunit_shop(sep_str(), _gogo_want=sep_begin(), _stop_want=sep_close())
+    oct_idea = ideaunit_shop(oct_str(), _gogo_want=oct_begin(), _stop_want=oct_close())
+    nov_idea = ideaunit_shop(nov_str(), _gogo_want=nov_begin(), _stop_want=nov_close())
+    dec_idea = ideaunit_shop(dec_str(), _gogo_want=dec_begin(), _stop_want=dec_close())
 
     x_budunit.set_idea(jan_idea, year_road)
     x_budunit.set_idea(feb_idea, year_road)

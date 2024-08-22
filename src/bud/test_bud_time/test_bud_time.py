@@ -9,6 +9,15 @@ from src.bud.bud_time import (
     # get_time_dt_from_min,
     time_str,  # "time"
     get_jajatime_text,  # "jajatime"
+    jajatime_begin,
+    jajatime_close,
+    c400_leap_num,
+    c400_clean_num,
+    c100_num,
+    yr4_leap_num,
+    yr4_clean_num,
+    year_num,
+    day_num,
     get_sun,  # "Sunday"
     get_mon,  # "Monday"
     get_tue,  # "Tuesday"
@@ -65,6 +74,30 @@ from src.bud.bud_time import (
     hr_21_str,
     hr_22_str,
     hr_23_str,
+    jan_begin,
+    feb_begin,
+    mar_begin,
+    apr_begin,
+    may_begin,
+    jun_begin,
+    jul_begin,
+    aug_begin,
+    sep_begin,
+    oct_begin,
+    nov_begin,
+    dec_begin,
+    jan_close,
+    feb_close,
+    mar_close,
+    apr_close,
+    may_close,
+    jun_close,
+    jul_close,
+    aug_close,
+    sep_close,
+    oct_close,
+    nov_close,
+    dec_close,
 )
 from datetime import datetime
 from random import randint
@@ -148,6 +181,48 @@ def test_get_time_min_from_dt_WorksCorrectly():
     assert get_time_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
     x_next_day = x_minutes + 1440
     assert get_time_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+
+
+def test_timetech_builder_ReferencesFunctionsReturnObj():
+    # ESTABLISH / WHEN / THEN
+    assert c400_leap_num() == 210379680
+    assert c400_clean_num() == 210378240
+    assert c100_num() == 52594560
+    assert yr4_leap_num() == 2103840
+    assert yr4_clean_num() == 2102400
+    assert year_num() == 525600
+    assert day_num() == 1440
+
+
+def test_jajatime_ReferenceFunctionsReturnObj():
+    # ESTABLISH / WHEN / THEN
+    assert jajatime_begin() == 0
+    assert jajatime_close() == 1472657760
+    assert jajatime_close() == c400_leap_num() * 7
+    assert jan_begin() == 437760
+    assert feb_begin() == 480960
+    assert mar_begin() == 0
+    assert apr_begin() == 44640
+    assert may_begin() == 84960
+    assert jun_begin() == 129600
+    assert jul_begin() == 172800
+    assert aug_begin() == 217440
+    assert sep_begin() == 260640
+    assert oct_begin() == 305280
+    assert nov_begin() == 349920
+    assert dec_begin() == 393120
+    assert jan_close() == 480960
+    assert feb_close() == 525600
+    assert mar_close() == 44640
+    assert apr_close() == 84960
+    assert may_close() == 129600
+    assert jun_close() == 172800
+    assert jul_close() == 217440
+    assert aug_close() == 260640
+    assert sep_close() == 305280
+    assert oct_close() == 349920
+    assert nov_close() == 393120
+    assert dec_close() == 437760
 
 
 def test_add_time_hreg_ideaunit_ReturnsObjWith_days():
