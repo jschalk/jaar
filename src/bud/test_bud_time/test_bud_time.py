@@ -211,51 +211,51 @@ def test_timetech_builder_ReferencesFunctionsReturnObj():
     assert day_num() == 1440
 
 
-# def test_jajatime_ReferenceFunctionsReturnObj():
-#     # ESTABLISH / WHEN / THEN
-#     assert jajatime_begin() == 0
-#     assert jajatime_close() == 1472657760
-#     assert jajatime_close() == c400_leap_num() * 7
-#     assert week_begin() == 0
-#     assert week_close() == 10080
-#     assert jan_begin() == 437760
-#     assert feb_begin() == 480960
-#     assert mar_begin() == 0
-#     assert apr_begin() == 44640
-#     assert may_begin() == 84960
-#     assert jun_begin() == 129600
-#     assert jul_begin() == 172800
-#     assert aug_begin() == 217440
-#     assert sep_begin() == 260640
-#     assert oct_begin() == 305280
-#     assert nov_begin() == 349920
-#     assert dec_begin() == 393120
-#     assert jan_close() == 480960
-#     assert feb_close() == 525600
-#     assert mar_close() == 44640
-#     assert apr_close() == 84960
-#     assert may_close() == 129600
-#     assert jun_close() == 172800
-#     assert jul_close() == 217440
-#     assert aug_close() == 260640
-#     assert sep_close() == 305280
-#     assert oct_close() == 349920
-#     assert nov_close() == 393120
-#     assert dec_close() == 437760
-# assert sun_begin() == 1440
-# assert mon_begin() == 2880
-# assert tue_begin() == 4320
-# assert wed_begin() == 5760
-# assert thu_begin() == 7200
-# assert fri_begin() == 8640
-# assert sat_begin() == 0
-# assert sun_close() == sun_begin() + day_num()
-# assert mon_close() == mon_begin() + day_num()
-# assert tue_close() == tue_begin() + day_num()
-# assert wed_close() == wed_begin() + day_num()
-# assert thu_close() == thu_begin() + day_num()
-# assert fri_close() == fri_begin() + day_num()
-# assert sat_close() == sat_begin() + day_num()
+def test_jajatime_ReferenceFunctionsReturnObj():
+    # ESTABLISH / WHEN / THEN
+    assert jajatime_begin() == 0
+    assert jajatime_close() == 1472657760
+    assert jajatime_close() == c400_leap_num() * 7
+    assert week_begin() == 0
+    assert week_close() == 10080
+    assert jan_begin() == 437760
+    assert feb_begin() == 480960
+    assert mar_begin() == 0
+    assert apr_begin() == 44640
+    assert may_begin() == 84960
+    assert jun_begin() == 129600
+    assert jul_begin() == 172800
+    assert aug_begin() == 217440
+    assert sep_begin() == 260640
+    assert oct_begin() == 305280
+    assert nov_begin() == 349920
+    assert dec_begin() == 393120
+    assert jan_close() == 480960
+    assert feb_close() == 525600
+    assert mar_close() == 44640
+    assert apr_close() == 84960
+    assert may_close() == 129600
+    assert jun_close() == 172800
+    assert jul_close() == 217440
+    assert aug_close() == 260640
+    assert sep_close() == 305280
+    assert oct_close() == 349920
+    assert nov_close() == 393120
+    assert dec_close() == 437760
+    assert sun_begin() == 5760
+    assert mon_begin() == 7200
+    assert tue_begin() == 8640
+    assert wed_begin() == 0
+    assert thu_begin() == 1440
+    assert fri_begin() == 2880
+    assert sat_begin() == 4320
+    assert sun_close() == sun_begin() + day_num()
+    assert mon_close() == mon_begin() + day_num()
+    assert tue_close() == tue_begin() + day_num()
+    assert wed_close() == wed_begin() + day_num()
+    assert thu_close() == thu_begin() + day_num()
+    assert fri_close() == fri_begin() + day_num()
+    assert sat_close() == sat_begin() + day_num()
 
 
 def test_add_time_hreg_ideaunit_ReturnsObjWith_days():
