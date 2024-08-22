@@ -203,32 +203,44 @@ def week_close():
 # def sat_close(): return sat_begin() + 1440
 
 
+def jaja_week_dict() -> dict[dict, int]:
+    return {
+        get_sun(): 1440,
+        get_mon(): 2880,
+        get_tue(): 4320,
+        get_wed(): 5760,
+        get_thu(): 7200,
+        get_fri(): 8640,
+        get_sat(): 0,
+    }
+
+
 def sun_begin():
-    return 1440
+    return jaja_week_dict().get(get_sun())
 
 
 def mon_begin():
-    return 2880
+    return jaja_week_dict().get(get_mon())
 
 
 def tue_begin():
-    return 4320
+    return jaja_week_dict().get(get_tue())
 
 
 def wed_begin():
-    return 5760
+    return jaja_week_dict().get(get_wed())
 
 
 def thu_begin():
-    return 7200
+    return jaja_week_dict().get(get_thu())
 
 
 def fri_begin():
-    return 8640
+    return jaja_week_dict().get(get_fri())
 
 
 def sat_begin():
-    return 0
+    return jaja_week_dict().get(get_sat())
 
 
 def sun_close():
@@ -336,26 +348,14 @@ def _add_hour_ideaunits(x_budunit: BudUnit, day_road) -> RoadUnit:
     return hour_road
 
 
-def _add_week_ideaunits(x_budunit: BudUnit, jaja_road) -> RoadUnit:
+def _add_week_ideaunits(x_budunit: BudUnit, jaja_road: RoadUnit) -> RoadUnit:
     week_road = x_budunit.make_road(jaja_road, week_str())
     week_idea = ideaunit_shop(week_str(), _denom=10080, _morph=True)
-    week_idea._gogo_want = 0
-    week_idea._stop_want = 10080
     x_budunit.set_idea(week_idea, jaja_road)
-    sun_idea = ideaunit_shop(get_sun(), _gogo_want=sun_begin(), _stop_want=sun_close())
-    mon_idea = ideaunit_shop(get_mon(), _gogo_want=mon_begin(), _stop_want=mon_close())
-    tue_idea = ideaunit_shop(get_tue(), _gogo_want=tue_begin(), _stop_want=tue_close())
-    wed_idea = ideaunit_shop(get_wed(), _gogo_want=wed_begin(), _stop_want=wed_close())
-    thu_idea = ideaunit_shop(get_thu(), _gogo_want=thu_begin(), _stop_want=thu_close())
-    fri_idea = ideaunit_shop(get_fri(), _gogo_want=fri_begin(), _stop_want=fri_close())
-    sat_idea = ideaunit_shop(get_sat(), _gogo_want=sat_begin(), _stop_want=sat_close())
-    x_budunit.set_idea(sun_idea, week_road)
-    x_budunit.set_idea(mon_idea, week_road)
-    x_budunit.set_idea(tue_idea, week_road)
-    x_budunit.set_idea(wed_idea, week_road)
-    x_budunit.set_idea(thu_idea, week_road)
-    x_budunit.set_idea(fri_idea, week_road)
-    x_budunit.set_idea(sat_idea, week_road)
+    for x_key, x_value in jaja_week_dict().items():
+        stop_value = x_value + day_num()
+        x_idea = ideaunit_shop(x_key, _gogo_want=x_value, _stop_want=stop_value)
+        x_budunit.set_idea(x_idea, week_road)
     x_budunit.set_idea(ideaunit_shop(weeks_str(), _denom=10080), jaja_road)
     x_budunit.set_idea(week_idea, jaja_road)
     return x_budunit

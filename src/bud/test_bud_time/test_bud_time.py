@@ -325,8 +325,8 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
     # THEN
     assert sue_budunit.idea_exists(week_road)
     week_idea = sue_budunit.get_idea_obj(week_road)
-    assert week_idea._gogo_want == 0
-    assert week_idea._stop_want == 10080
+    assert not week_idea._gogo_want
+    assert not week_idea._stop_want
     assert week_idea._denom == 10080
     assert week_idea._morph
     assert sue_budunit.idea_exists(sun_road)

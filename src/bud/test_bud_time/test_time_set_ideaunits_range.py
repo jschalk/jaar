@@ -15,8 +15,6 @@ from src.bud.bud_time import (
     weeks_str,  # f"{get_week()}s"
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
-    year_str,
-    years_str,
     jan_str,
     feb_str,
     mar_str,
@@ -35,6 +33,7 @@ from src.bud.bud_time import (
     yr4_leap_str,
     yr4_clean_str,
     year_str,
+    get_year_road,
 )
 from datetime import datetime
 
@@ -301,36 +300,3 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     assert sue_budunit.get_idea_obj(oct_road)._stop_calc == 349920
     assert sue_budunit.get_idea_obj(nov_road)._stop_calc == 393120
     assert sue_budunit.get_idea_obj(dec_road)._stop_calc == 437760
-
-
-# def test_BudUnit_set_ideaunits_range_SyncsWeekDayAndYear():
-#     # ESTABLISH
-#     sue_budunit = budunit_shop("Sue")
-#     time_road = sue_budunit.make_l1_road(time_str())
-#     jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-#     c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
-#     # c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-#     # c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
-#     # yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
-#     # yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-#     # year_road = sue_budunit.make_road(yr4_clean_road, year_str())
-#     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
-#     sue_budunit._init_idea_tree_walk()
-#     print(f"    {c400_leap_road=}")
-#     assert sue_budunit.idea_exists(c400_leap_road)
-#     c400_leap_idea = sue_budunit.get_idea_obj(c400_leap_road)
-#     # assert year_idea._morph
-#     assert not c400_leap_idea._gogo_calc
-#     assert not c400_leap_idea._stop_calc
-
-#     # WHEN
-#     sue_budunit._set_ideaunits_range()
-
-#     # THEN
-#     # assert year_idea._denom == 525600
-#     # assert year_idea._gogo_calc == 0
-#     # assert year_idea._stop_calc == 525600
-#     difference_between_mar1_jan1 = 86400
-#     assert sue_budunit.get_idea_obj(c400_leap_road)._gogo_calc == 0
-#     assert sue_budunit.get_idea_obj(c400_leap_road)._stop_calc == 210379680
-#     assert 1472657760 % sue_budunit.get_idea_obj(c400_leap_road)._stop_calc == 0
