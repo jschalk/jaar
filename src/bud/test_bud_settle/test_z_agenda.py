@@ -386,10 +386,10 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
 
     assert len(yao_bud.get_agenda_dict()) == 44
     time_road = yao_bud.make_l1_road("time")
-    jajatime_road = yao_bud.make_road(time_road, "jajatime")
+    gregtime_road = yao_bud.make_road(time_road, "gregtime")
 
     # WHEN
-    yao_bud.set_fact(jajatime_road, jajatime_road, open=1063998720, nigh=1064130373)
+    yao_bud.set_fact(gregtime_road, gregtime_road, open=1063998720, nigh=1064130373)
     pledge_idea_list = yao_bud.get_agenda_dict()
 
     # THEN
@@ -405,19 +405,19 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     #         night_idea = idea_x
     #         print(f"{idea_x.get_road()=}")
 
-    print(f"\nIdea = '{night_text}' and reason '{jajatime_road}'")
-    factheir_jajatime = night_idea._factheirs.get(jajatime_road)
-    print(f"\n{factheir_jajatime=}")
+    print(f"\nIdea = '{night_text}' and reason '{gregtime_road}'")
+    factheir_gregtime = night_idea._factheirs.get(gregtime_road)
+    print(f"\n{factheir_gregtime=}")
 
     # for reasonheir in agenda_item._reasonheirs.values():
     #     print(f"{reasonheir.base=} {reasonheir._status=} {reasonheir._task=}")
-    reasonheir_jajatime = night_idea._reasonheirs.get(jajatime_road)
-    reasonheir_text = f"\nreasonheir_jajatime= '{reasonheir_jajatime.base}', status={reasonheir_jajatime._status}, task={reasonheir_jajatime._task}"
+    reasonheir_gregtime = night_idea._reasonheirs.get(gregtime_road)
+    reasonheir_text = f"\nreasonheir_gregtime= '{reasonheir_gregtime.base}', status={reasonheir_gregtime._status}, task={reasonheir_gregtime._task}"
     print(reasonheir_text)
 
-    premiseunit = reasonheir_jajatime.premises.get(jajatime_road)
+    premiseunit = reasonheir_gregtime.premises.get(gregtime_road)
     print(f"----\n {premiseunit=}")
-    print(f" {premiseunit._get_task_status(factheir=factheir_jajatime)=}")
+    print(f" {premiseunit._get_task_status(factheir=factheir_gregtime)=}")
     print(f" {premiseunit._status=} , {premiseunit._is_range()=} premiseunit fails")
     print(
         f" {premiseunit._status=} , {premiseunit._is_segregate()=} premiseunit passes"
@@ -426,8 +426,8 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     #     premise_open=premiseunit.open,
     #     premise_nigh=premiseunit.nigh,
     #     premise_divisor=premiseunit.divisor,
-    #     fact_open_full=factheir_jajatime.open,
-    #     fact_nigh_full=factheir_jajatime.nigh,
+    #     fact_open_full=factheir_gregtime.open,
+    #     fact_nigh_full=factheir_gregtime.nigh,
     # )
     # print(
     #     f"----\n  {segr_obj.premise_open=}  {segr_obj.premise_nigh=}  {segr_obj.premise_divisor=}"

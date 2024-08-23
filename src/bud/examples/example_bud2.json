@@ -591,11 +591,11 @@
                 "base": "A;Seasons",
                 "pick": "A;Seasons"
             },
-            "A;time;jajatime": {
-                "base": "A;time;jajatime",
+            "A;time;gregtime": {
+                "base": "A;time;gregtime",
                 "nigh": 1064130373,
                 "open": 1064128320,
-                "pick": "A;time;jajatime"
+                "pick": "A;time;gregtime"
             },
             "A;WaterExistence": {
                 "base": "A;WaterExistence",
@@ -633,11 +633,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -658,11 +658,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -682,11 +682,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -705,11 +705,11 @@
                                 "_label": "Know Employee Intruction manuel.",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;x2;Sept 4th 2023 9am": {
-                                                "need": "A;time;jajatime;x2;Sept 4th 2023 9am",
+                                            "A;time;gregtime;x2;Sept 4th 2023 9am": {
+                                                "need": "A;time;gregtime;x2;Sept 4th 2023 9am",
                                                 "nigh": 1064350680.0,
                                                 "open": 1064350680.0
                                             }
@@ -725,11 +725,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -750,11 +750,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -775,11 +775,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -799,11 +799,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -824,11 +824,11 @@
                                         "_label": "Accomplish Fall 2021 training",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;x;Sept 4th 2023 9am": {
-                                                        "need": "A;time;jajatime;x;Sept 4th 2023 9am",
+                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                        "need": "A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -858,12 +858,12 @@
                                                 "_label": "check emails",
                                                 "_mass": 1,
                                                 "_reasonunits": {
-                                                    "A;time;jajatime": {
-                                                        "base": "A;time;jajatime",
+                                                    "A;time;gregtime": {
+                                                        "base": "A;time;gregtime",
                                                         "premises": {
-                                                            "A;time;jajatime;day": {
+                                                            "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "need": "A;time;jajatime;day",
+                                                                "need": "A;time;gregtime;day",
                                                                 "nigh": 360,
                                                                 "open": 360
                                                             }
@@ -899,12 +899,12 @@
                                                 "_label": "check mechanisms",
                                                 "_mass": 1,
                                                 "_reasonunits": {
-                                                    "A;time;jajatime": {
-                                                        "base": "A;time;jajatime",
+                                                    "A;time;gregtime": {
+                                                        "base": "A;time;gregtime",
                                                         "premises": {
-                                                            "A;time;jajatime;day": {
+                                                            "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "need": "A;time;jajatime;day",
+                                                                "need": "A;time;gregtime;day",
                                                                 "nigh": 360,
                                                                 "open": 360
                                                             }
@@ -918,12 +918,12 @@
                                         "_label": "check ETLs ran correctly",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 360,
                                                         "open": 360
                                                     }
@@ -936,12 +936,12 @@
                                         "_label": "dress to slightly impress",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 450,
                                                         "open": 450
                                                     }
@@ -955,12 +955,12 @@
                                         "_label": "go to employment",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 525,
                                                         "open": 525
                                                     }
@@ -974,12 +974,12 @@
                                 "_label": "IT DEPT off-hours responsiblities",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;day": {
+                                            "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "need": "A;time;jajatime;day",
+                                                "need": "A;time;gregtime;day",
                                                 "nigh": 360,
                                                 "open": 360
                                             }
@@ -994,12 +994,12 @@
                                         "_label": "Add items to Azure DevOps",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -1013,12 +1013,12 @@
                                         "_label": "consider management perspective",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -1034,12 +1034,12 @@
                                                 "_label": "Datawarehouse Expertise acquisition",
                                                 "_mass": 1,
                                                 "_reasonunits": {
-                                                    "A;time;jajatime": {
-                                                        "base": "A;time;jajatime",
+                                                    "A;time;gregtime": {
+                                                        "base": "A;time;gregtime",
                                                         "premises": {
-                                                            "A;time;jajatime;day": {
+                                                            "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "need": "A;time;jajatime;day",
+                                                                "need": "A;time;gregtime;day",
                                                                 "nigh": 540,
                                                                 "open": 540
                                                             }
@@ -1075,12 +1075,12 @@
                                                 "_label": "dev quantification script \"T2R8\"",
                                                 "_mass": 1,
                                                 "_reasonunits": {
-                                                    "A;time;jajatime": {
-                                                        "base": "A;time;jajatime",
+                                                    "A;time;gregtime": {
+                                                        "base": "A;time;gregtime",
                                                         "premises": {
-                                                            "A;time;jajatime;day": {
+                                                            "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "need": "A;time;jajatime;day",
+                                                                "need": "A;time;gregtime;day",
                                                                 "nigh": 480,
                                                                 "open": 480
                                                             }
@@ -1094,12 +1094,12 @@
                                                 "_label": "go to daily stand-up ",
                                                 "_mass": 1,
                                                 "_reasonunits": {
-                                                    "A;time;jajatime": {
-                                                        "base": "A;time;jajatime",
+                                                    "A;time;gregtime": {
+                                                        "base": "A;time;gregtime",
                                                         "premises": {
-                                                            "A;time;jajatime;day": {
+                                                            "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "need": "A;time;jajatime;day",
+                                                                "need": "A;time;gregtime;day",
                                                                 "nigh": 540,
                                                                 "open": 540
                                                             }
@@ -1118,12 +1118,12 @@
                                         "_label": "IT DEPT general",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 1020,
                                                         "open": 1020
                                                     }
@@ -1136,12 +1136,12 @@
                                         "_label": "Keep track of Chatroom conversations",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -1157,12 +1157,12 @@
                                                 "_label": "check for access",
                                                 "_mass": 1,
                                                 "_reasonunits": {
-                                                    "A;time;jajatime": {
-                                                        "base": "A;time;jajatime",
+                                                    "A;time;gregtime": {
+                                                        "base": "A;time;gregtime",
                                                         "premises": {
-                                                            "A;time;jajatime;day": {
+                                                            "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "need": "A;time;jajatime;day",
+                                                                "need": "A;time;gregtime;day",
                                                                 "nigh": 540,
                                                                 "open": 540
                                                             }
@@ -1175,12 +1175,12 @@
                                         "_label": "SQLIte",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime;day": {
+                                                    "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "need": "A;time;jajatime;day",
+                                                        "need": "A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -1193,12 +1193,12 @@
                                 "_label": "IT DEPT regular hours responsiblities",
                                 "_mass": 1.0,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;day": {
+                                            "A;time;gregtime;day": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime;day",
+                                                "need": "A;time;gregtime;day",
                                                 "nigh": 1080.0,
                                                 "open": 540.0
                                             }
@@ -1213,12 +1213,12 @@
                         "_label": "IT DEPT",
                         "_mass": 1,
                         "_reasonunits": {
-                            "A;time;jajatime": {
-                                "base": "A;time;jajatime",
+                            "A;time;gregtime": {
+                                "base": "A;time;gregtime",
                                 "premises": {
-                                    "A;time;jajatime;day": {
+                                    "A;time;gregtime;day": {
                                         "divisor": 1440,
-                                        "need": "A;time;jajatime;day",
+                                        "need": "A;time;gregtime;day",
                                         "nigh": 360,
                                         "open": 360
                                     }
@@ -1523,12 +1523,12 @@
                         "_label": "call Crazy pete to say hi",
                         "_mass": 30.0,
                         "_reasonunits": {
-                            "A;time;jajatime": {
-                                "base": "A;time;jajatime",
+                            "A;time;gregtime": {
+                                "base": "A;time;gregtime",
                                 "premises": {
-                                    "A;time;jajatime": {
+                                    "A;time;gregtime": {
                                         "divisor": 10080.0,
-                                        "need": "A;time;jajatime",
+                                        "need": "A;time;gregtime",
                                         "nigh": 480.0,
                                         "open": 480.0
                                     }
@@ -1567,12 +1567,12 @@
                                 "_label": "check cat water",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3360.0,
                                                 "open": 3360.0
                                             }
@@ -1586,12 +1586,12 @@
                                 "_label": "check humidifer",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -1612,12 +1612,12 @@
                                 "_label": "clean baby seats",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 60480.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 660.0,
                                                 "open": 660.0
                                             }
@@ -1638,12 +1638,12 @@
                                 "_label": "clean bathroom",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 600.0,
                                                 "open": 600.0
                                             }
@@ -1664,12 +1664,12 @@
                                 "_label": "clean cat poo",
                                 "_mass": 1.0,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1691,12 +1691,12 @@
                                 "_label": "clean humidifiers",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1717,12 +1717,12 @@
                                 "_label": "clean sheets couch blankets",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 30240.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1743,12 +1743,12 @@
                                 "_label": "clean table",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 1200.0,
                                                 "open": 1200.0
                                             }
@@ -1769,12 +1769,12 @@
                                 "_label": "deep clean play mat",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 40320.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1795,12 +1795,12 @@
                                 "_label": "empty roomba",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 4800.0,
                                                 "open": 4800.0
                                             }
@@ -1821,12 +1821,12 @@
                                 "_label": "empty roomba Friday",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 9120.0,
                                                 "open": 9120.0
                                             }
@@ -1872,12 +1872,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1906,12 +1906,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -1933,12 +1933,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 7740.0,
                                                 "open": 7740.0
                                             }
@@ -1967,12 +1967,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 6300.0,
                                                 "open": 6300.0
                                             }
@@ -1986,12 +1986,12 @@
                                 "_label": "morning cookery clean-up",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 480.0,
                                                 "open": 480.0
                                             }
@@ -2011,12 +2011,12 @@
                                 "_label": "prepare_bed clean bedroom",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 480.0,
                                                 "open": 480.0
                                             }
@@ -2037,12 +2037,12 @@
                                 "_label": "roomba bedroom",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 4740.0,
                                                 "open": 4740.0
                                             }
@@ -2063,12 +2063,12 @@
                                 "_label": "roomba bedroom Friday",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 9060.0,
                                                 "open": 9060.0
                                             }
@@ -2089,12 +2089,12 @@
                                 "_label": "roomba living area",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2115,12 +2115,12 @@
                                 "_label": "roomba living area thur",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 7620.0,
                                                 "open": 7620.0
                                             }
@@ -2141,12 +2141,12 @@
                                 "_label": "roomba maintenance",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2167,12 +2167,12 @@
                                 "_label": "wipe down play mat2",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2211,12 +2211,12 @@
                                 "_label": "5 push-ups",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;day": {
+                                            "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "need": "A;time;jajatime;day",
+                                                "need": "A;time;gregtime;day",
                                                 "nigh": 420,
                                                 "open": 420
                                             }
@@ -2237,12 +2237,12 @@
                                 "_label": "check protein for week is adequate",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2263,12 +2263,12 @@
                                 "_label": "clip body nails",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2289,12 +2289,12 @@
                                 "_label": "cook veggies every morning",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2317,12 +2317,12 @@
                                         "_label": "bike or something",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 9600.0,
                                                         "open": 9600.0
                                                     }
@@ -2355,12 +2355,12 @@
                                         "_label": "chest and arms (mon)",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 3360.0,
                                                         "open": 3360.0
                                                     }
@@ -2374,12 +2374,12 @@
                                         "_label": "core and squats",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 6242.0,
                                                         "open": 6242.0
                                                     }
@@ -2399,12 +2399,12 @@
                                         "_label": "core lower back",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 3420.0,
                                                         "open": 3420.0
                                                     }
@@ -2425,12 +2425,12 @@
                                         "_label": "rest",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 7200.0,
                                                         "open": 7200.0
                                                     }
@@ -2466,12 +2466,12 @@
                                         "_label": "shoulders and upper back",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 4800.0,
                                                         "open": 4800.0
                                                     }
@@ -2492,12 +2492,12 @@
                                         "_label": "squats hamstrings and calves",
                                         "_mass": 1,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 6240.0,
                                                         "open": 6240.0
                                                     }
@@ -2523,12 +2523,12 @@
                                 "_label": "morning multivitamin",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2542,12 +2542,12 @@
                                 "_label": "night multivitamin",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 1080.0,
                                                 "open": 1080.0
                                             }
@@ -2567,12 +2567,12 @@
                                 "_label": "noce hair removal",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 80640.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2593,12 +2593,12 @@
                                 "_label": "pull ear hair",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 80640.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 4860.0,
                                                 "open": 4860.0
                                             }
@@ -2619,12 +2619,12 @@
                                 "_label": "shampoo hair",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2645,12 +2645,12 @@
                                 "_label": "straight back for 45 secs",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2667,12 +2667,12 @@
                                         "_label": "back",
                                         "_mass": 30.0,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 9180.0,
                                                         "open": 9180.0
                                                     }
@@ -2686,12 +2686,12 @@
                                         "_label": "legs",
                                         "_mass": 30.0,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 9180.0,
                                                         "open": 9180.0
                                                     }
@@ -2711,12 +2711,12 @@
                                 "_label": "stretch",
                                 "_mass": 30.0,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 9180.0,
                                                 "open": 9180.0
                                             }
@@ -2737,12 +2737,12 @@
                                 "_label": "trim beard",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2771,11 +2771,11 @@
                                 "_label": "be reponsible for rent",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "need": "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am",
+                                            "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                                                "need": "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -2796,11 +2796,11 @@
                                 "_label": "be responsible for expenses card",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "need": "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am",
+                                            "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                                                "need": "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -2821,11 +2821,11 @@
                                 "_label": "be responsible for utilities",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "need": "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am",
+                                            "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                                                "need": "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -2846,11 +2846,11 @@
                                 "_label": "set aside a little bucks for fun the week",
                                 "_mass": 1,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "need": "A;time;jajatime;x2;monthly 1st business day;2023 Feb 9am",
+                                            "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                                                "need": "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -3022,12 +3022,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 5340.0,
                                                 "open": 5340.0
                                             }
@@ -3056,12 +3056,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 60480.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 840.0,
                                                 "open": 840.0
                                             }
@@ -3090,12 +3090,12 @@
                         "_label": "say double hi to birds",
                         "_mass": 25.0,
                         "_reasonunits": {
-                            "A;time;jajatime": {
-                                "base": "A;time;jajatime",
+                            "A;time;gregtime": {
+                                "base": "A;time;gregtime",
                                 "premises": {
-                                    "A;time;jajatime;day": {
+                                    "A;time;gregtime;day": {
                                         "divisor": 1440.0,
-                                        "need": "A;time;jajatime;day",
+                                        "need": "A;time;gregtime;day",
                                         "nigh": 480.0,
                                         "open": 480.0
                                     }
@@ -3116,12 +3116,12 @@
                         "_label": "say hi to birds",
                         "_mass": 1.0,
                         "_reasonunits": {
-                            "A;time;jajatime": {
-                                "base": "A;time;jajatime",
+                            "A;time;gregtime": {
+                                "base": "A;time;gregtime",
                                 "premises": {
-                                    "A;time;jajatime": {
+                                    "A;time;gregtime": {
                                         "divisor": 1440.0,
-                                        "need": "A;time;jajatime",
+                                        "need": "A;time;gregtime",
                                         "nigh": 480.0,
                                         "open": 480.0
                                     }
@@ -3224,12 +3224,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime;day": {
+                                            "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "need": "A;time;jajatime;day",
+                                                "need": "A;time;gregtime;day",
                                                 "nigh": 660,
                                                 "open": 660
                                             }
@@ -3275,12 +3275,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 20160.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 4920.0,
                                                 "open": 4920.0
                                             }
@@ -3317,12 +3317,12 @@
                                     }
                                 }
                             },
-                            "A;time;jajatime": {
-                                "base": "A;time;jajatime",
+                            "A;time;gregtime": {
+                                "base": "A;time;gregtime",
                                 "premises": {
-                                    "A;time;jajatime": {
+                                    "A;time;gregtime": {
                                         "divisor": 1440.0,
-                                        "need": "A;time;jajatime",
+                                        "need": "A;time;gregtime",
                                         "nigh": 1305.0,
                                         "open": 1305.0
                                     }
@@ -3340,12 +3340,12 @@
                                         "_label": "available for phone call",
                                         "_mass": 4.0,
                                         "_reasonunits": {
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 6495.0,
                                                         "open": 6480.0
                                                     }
@@ -3359,8 +3359,8 @@
                                 "_label": "Ernesto Chavez",
                                 "_mass": 4.0,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime"
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime"
                                     }
                                 },
                                 "_morph": false
@@ -3393,12 +3393,12 @@
                                                     }
                                                 }
                                             },
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 6540.0,
                                                         "open": 6480.0
                                                     }
@@ -3432,12 +3432,12 @@
                                                     }
                                                 }
                                             },
-                                            "A;time;jajatime": {
-                                                "base": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "base": "A;time;gregtime",
                                                 "premises": {
-                                                    "A;time;jajatime": {
+                                                    "A;time;gregtime": {
                                                         "divisor": 20160.0,
-                                                        "need": "A;time;jajatime",
+                                                        "need": "A;time;gregtime",
                                                         "nigh": 600.0,
                                                         "open": 600.0
                                                     }
@@ -3498,12 +3498,12 @@
                                             }
                                         }
                                     },
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
+                                            "A;time;gregtime": {
                                                 "divisor": 20160.0,
-                                                "need": "A;time;jajatime",
+                                                "need": "A;time;gregtime",
                                                 "nigh": 600.0,
                                                 "open": 600.0
                                             }
@@ -3744,11 +3744,11 @@
                                 "_label": "never fly a private G5",
                                 "_mass": 1.0,
                                 "_reasonunits": {
-                                    "A;time;jajatime": {
-                                        "base": "A;time;jajatime",
+                                    "A;time;gregtime": {
+                                        "base": "A;time;gregtime",
                                         "premises": {
-                                            "A;time;jajatime": {
-                                                "need": "A;time;jajatime",
+                                            "A;time;gregtime": {
+                                                "need": "A;time;gregtime",
                                                 "nigh": 1472657760,
                                                 "open": 0
                                             }
@@ -3771,7 +3771,7 @@
             "time": {
                 "_is_expanded": false,
                 "_kids": {
-                    "jajatime": {
+                    "gregtime": {
                         "_begin": 0,
                         "_close": 1472657760,
                         "_kids": {
@@ -3868,7 +3868,7 @@
                                 "_stop_want": 1472657760.0
                             }
                         },
-                        "_label": "jajatime",
+                        "_label": "gregtime",
                         "_mass": 1
                     },
                     "tech": {
