@@ -10,45 +10,15 @@ from src.creg.timebuilder import (
     months_config_text,
     timeline_label_text,
     yr1_jan1_offset_text,
+    c400_config_text,
 )
 from datetime import datetime
-
-
-def cregtime_ideaunit() -> dict[str, IdeaUnit]:
-    return new_timeline_ideaunit(get_cregtime_text(), 7)
-
-
-def get_wed():
-    return creg_weekdays_list()[0]
-
-
-def get_thu():
-    return creg_weekdays_list()[1]
-
-
-def get_fri():
-    return creg_weekdays_list()[2]
-
-
-def get_sat():
-    return creg_weekdays_list()[3]
-
-
-def get_sun():
-    return creg_weekdays_list()[4]
-
-
-def get_mon():
-    return creg_weekdays_list()[5]
-
-
-def get_tue():
-    return creg_weekdays_list()[6]
 
 
 def get_creg_config() -> dict:
     return {
         timeline_label_text(): "creg",
+        c400_config_text(): 7,
         yr1_jan1_offset_text(): 440640,
         hours_config_text(): [
             ["0-12am", 1 * 60],
@@ -102,6 +72,39 @@ def get_creg_config() -> dict:
     }
 
 
+def cregtime_ideaunit() -> dict[str, IdeaUnit]:
+    c400_count = get_creg_config().get(c400_config_text())
+    return new_timeline_ideaunit(get_cregtime_text(), c400_count)
+
+
+def get_wed():
+    return creg_weekdays_list()[0]
+
+
+def get_thu():
+    return creg_weekdays_list()[1]
+
+
+def get_fri():
+    return creg_weekdays_list()[2]
+
+
+def get_sat():
+    return creg_weekdays_list()[3]
+
+
+def get_sun():
+    return creg_weekdays_list()[4]
+
+
+def get_mon():
+    return creg_weekdays_list()[5]
+
+
+def get_tue():
+    return creg_weekdays_list()[6]
+
+
 def creg_hours_list() -> list[list[str, int]]:
     return get_creg_config().get(hours_config_text())
 
@@ -127,20 +130,7 @@ def creg_hour_label(x_int: int) -> str:
 
 
 def add_time_creg_ideaunit(x_budunit: BudUnit) -> BudUnit:
-    timeline_text = get_cregtime_text()
-    creg_c400_count = 7
-    timeline_weekdays_list = creg_weekdays_list()
-    timeline_months_list = creg_months_list()
-    timeline_hours_list = creg_hours_list()
-    add_newtimeline_ideaunit(
-        x_budunit=x_budunit,
-        timeline_text=timeline_text,
-        timeline_c400_count=creg_c400_count,
-        timeline_hours_list=timeline_hours_list,
-        timeline_months_list=timeline_months_list,
-        timeline_weekdays_list=timeline_weekdays_list,
-    )
-    return x_budunit
+    return add_newtimeline_ideaunit(x_budunit, get_creg_config())
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:

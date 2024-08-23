@@ -123,14 +123,13 @@ def new_timeline_ideaunit(timeline_text: str, c400_count: int) -> dict[str, Idea
     return {x_text: ideaunit_shop(x_text, _begin=0, _close=210379680 * c400_count)}
 
 
-def add_newtimeline_ideaunit(
-    x_budunit: BudUnit,
-    timeline_text: str,
-    timeline_c400_count: int,
-    timeline_hours_list: list[list[str, int]],
-    timeline_months_list: list[list[str, int]],
-    timeline_weekdays_list: list[str],
-):
+def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
+    timeline_text = timeline_config.get(timeline_label_text())
+    timeline_c400_count = timeline_config.get(c400_config_text())
+    timeline_weekdays_list = timeline_config.get(weekdays_config_text())
+    timeline_months_list = timeline_config.get(months_config_text())
+    timeline_hours_list = timeline_config.get(hours_config_text())
+
     time_road = x_budunit.make_l1_road(time_str())
     new_road = x_budunit.make_road(time_road, timeline_text)
     c400_leap_road = x_budunit.make_road(new_road, c400_leap_str())
@@ -157,6 +156,7 @@ def add_newtimeline_ideaunit(
     add_x_ideaunits(x_budunit, yr4_leap_road, stan_yr4_clean_ideaunits())
     add_x_ideaunits(x_budunit, yr4_clean_road, stan_year_ideaunits())
     add_x_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
+    return x_budunit
 
 
 def time_str() -> str:
@@ -197,6 +197,10 @@ def months_config_text() -> str:
 
 def timeline_label_text() -> str:
     return "timeline_label"
+
+
+def c400_config_text() -> str:
+    return "c400_config"
 
 
 def yr1_jan1_offset_text() -> str:
