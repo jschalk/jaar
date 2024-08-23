@@ -101,10 +101,17 @@ def test_create_config_ReturnsObj():
     # ESTABLISH
     c400_count = 8
     hours_count = 6
-    months_count = 14
     months_length = 25
+    final_month_length = 15
     timeline_text = "cinqo"
     weekday_strs = ["Airday", "Bioday", "Ceoday", "Dogday", "Ellday"]
+    months_length = 25
+    final_month_length = 15
+    # months = ["B", "C", "E", "G", "H", "I", "K", "L", "N", "P", "Q", "R", "T", "U", "W"]
+    # c_mons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
+    c_mons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
+    calc_months_day_length = (14 * months_length) + final_month_length
+    print(f"{len(c_mons)=} {calc_months_day_length=}")
 
     # WHEN
 
@@ -114,23 +121,16 @@ def test_create_config_ReturnsObj():
         "c400_config": 7,
         "hours_config": [
             ["0-12am", 60],
-            ["22-10pm", 1380],
             ["23-11pm", 1440],
         ],
         "months_config": [
             ["mar", 31],
-            ["dec", 304],
             ["jan", 334],
             ["feb", 365],
         ],
         "timeline_label": "creg",
         "weekdays_config": [
             "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-            "Monday",
             "Tuesday",
         ],
         "yr1_jan1_offset": 440640,

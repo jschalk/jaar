@@ -19,7 +19,7 @@ from datetime import datetime
 
 def get_creg_config() -> dict:
     x_file_name = "creg_timeline_config.json"
-    x_file_dir = "C:/dev/jaar/src/chrono/examples"
+    x_file_dir = "src/chrono/examples"
     return get_dict_from_json(open_file(x_file_dir, x_file_name))
 
 
