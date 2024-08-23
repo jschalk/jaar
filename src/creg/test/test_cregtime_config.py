@@ -13,8 +13,7 @@ from src.creg.creg import (
     years_str,
     get_year_road,
     day_length,
-    week_begin,
-    week_close,
+    week_length,
     get_sun,  # "Sunday"
     get_mon,  # "Monday"
     get_tue,  # "Tuesday"
@@ -22,22 +21,10 @@ from src.creg.creg import (
     get_thu,  # "Thursday"
     get_fri,  # "Friday"
     get_sat,  # "Saturday"
-    week_str,  # "week"
+    creg_week_str,  # "week"
     weeks_str,  # f"{get_week()}s"
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
-    jan_str,
-    feb_str,
-    mar_str,
-    apr_str,
-    may_str,
-    jun_str,
-    jul_str,
-    aug_str,
-    sep_str,
-    oct_str,
-    nov_str,
-    dec_str,
     c400_leap_str,
     c400_clean_str,
     c100_str,
@@ -45,39 +32,16 @@ from src.creg.creg import (
     yr4_clean_str,
     year_str,
     hour_str,
-    creg_hour_str,
-    jan_gogo_want,
-    feb_gogo_want,
-    mar_gogo_want,
-    apr_gogo_want,
-    may_gogo_want,
-    jun_gogo_want,
-    jul_gogo_want,
-    aug_gogo_want,
-    sep_gogo_want,
-    oct_gogo_want,
-    nov_gogo_want,
-    dec_gogo_want,
-    jan_stop_want,
-    feb_stop_want,
-    mar_stop_want,
-    apr_stop_want,
-    may_stop_want,
-    jun_stop_want,
-    jul_stop_want,
-    aug_stop_want,
-    sep_stop_want,
-    oct_stop_want,
-    nov_stop_want,
-    dec_stop_want,
-    cregtime_config,
-    creg_weekday_config,
-    stan_c400_leap_config,
-    stan_c400_clean_config,
-    stan_c100_config,
-    stan_yr4_leap_config,
-    stan_yr4_clean_config,
-    stan_year_config,
+    get_hour_label,
+    cregtime_ideaunit,
+    creg_month_ideaunits,
+    creg_weekday_ideaunits,
+    stan_c400_leap_ideaunits,
+    stan_c400_clean_ideaunits,
+    stan_c100_ideaunits,
+    stan_yr4_leap_ideaunits,
+    stan_yr4_clean_ideaunits,
+    stan_year_ideaunits,
 )
 from datetime import datetime
 
@@ -120,8 +84,8 @@ def test_cregtime_ReferenceFunctionsReturnObj():
     assert cregtime_begin() == 0
     assert cregtime_close() == 1472657760
     assert cregtime_close() == c400_leap_num() * 7
-    assert week_begin() == 0
-    assert week_close() == 10080
+    assert day_length() == 1440
+    assert week_length() == 10080
     assert jan_gogo_want() == 437760
     assert feb_gogo_want() == 480960
     assert mar_gogo_want() == 0
@@ -201,7 +165,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
-    week_road = sue_budunit.make_road(creg_road, week_str())
+    week_road = sue_budunit.make_road(creg_road, creg_week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     mon_road = sue_budunit.make_road(week_road, get_mon())
     tue_road = sue_budunit.make_road(week_road, get_tue())
@@ -446,30 +410,30 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     day_road = sue_budunit.make_road(creg_road, day_str())
     hour_road = sue_budunit.make_road(day_road, hour_str())
-    hr_00_road = sue_budunit.make_road(day_road, creg_hour_str(0))
-    hr_01_road = sue_budunit.make_road(day_road, creg_hour_str(1))
-    hr_02_road = sue_budunit.make_road(day_road, creg_hour_str(2))
-    hr_03_road = sue_budunit.make_road(day_road, creg_hour_str(3))
-    hr_04_road = sue_budunit.make_road(day_road, creg_hour_str(4))
-    hr_05_road = sue_budunit.make_road(day_road, creg_hour_str(5))
-    hr_06_road = sue_budunit.make_road(day_road, creg_hour_str(6))
-    hr_07_road = sue_budunit.make_road(day_road, creg_hour_str(7))
-    hr_08_road = sue_budunit.make_road(day_road, creg_hour_str(8))
-    hr_09_road = sue_budunit.make_road(day_road, creg_hour_str(9))
-    hr_10_road = sue_budunit.make_road(day_road, creg_hour_str(10))
-    hr_11_road = sue_budunit.make_road(day_road, creg_hour_str(11))
-    hr_12_road = sue_budunit.make_road(day_road, creg_hour_str(12))
-    hr_13_road = sue_budunit.make_road(day_road, creg_hour_str(13))
-    hr_14_road = sue_budunit.make_road(day_road, creg_hour_str(14))
-    hr_15_road = sue_budunit.make_road(day_road, creg_hour_str(15))
-    hr_16_road = sue_budunit.make_road(day_road, creg_hour_str(16))
-    hr_17_road = sue_budunit.make_road(day_road, creg_hour_str(17))
-    hr_18_road = sue_budunit.make_road(day_road, creg_hour_str(18))
-    hr_19_road = sue_budunit.make_road(day_road, creg_hour_str(19))
-    hr_20_road = sue_budunit.make_road(day_road, creg_hour_str(20))
-    hr_21_road = sue_budunit.make_road(day_road, creg_hour_str(21))
-    hr_22_road = sue_budunit.make_road(day_road, creg_hour_str(22))
-    hr_23_road = sue_budunit.make_road(day_road, creg_hour_str(23))
+    hr_00_road = sue_budunit.make_road(day_road, get_hour_label(0))
+    hr_01_road = sue_budunit.make_road(day_road, get_hour_label(1))
+    hr_02_road = sue_budunit.make_road(day_road, get_hour_label(2))
+    hr_03_road = sue_budunit.make_road(day_road, get_hour_label(3))
+    hr_04_road = sue_budunit.make_road(day_road, get_hour_label(4))
+    hr_05_road = sue_budunit.make_road(day_road, get_hour_label(5))
+    hr_06_road = sue_budunit.make_road(day_road, get_hour_label(6))
+    hr_07_road = sue_budunit.make_road(day_road, get_hour_label(7))
+    hr_08_road = sue_budunit.make_road(day_road, get_hour_label(8))
+    hr_09_road = sue_budunit.make_road(day_road, get_hour_label(9))
+    hr_10_road = sue_budunit.make_road(day_road, get_hour_label(10))
+    hr_11_road = sue_budunit.make_road(day_road, get_hour_label(11))
+    hr_12_road = sue_budunit.make_road(day_road, get_hour_label(12))
+    hr_13_road = sue_budunit.make_road(day_road, get_hour_label(13))
+    hr_14_road = sue_budunit.make_road(day_road, get_hour_label(14))
+    hr_15_road = sue_budunit.make_road(day_road, get_hour_label(15))
+    hr_16_road = sue_budunit.make_road(day_road, get_hour_label(16))
+    hr_17_road = sue_budunit.make_road(day_road, get_hour_label(17))
+    hr_18_road = sue_budunit.make_road(day_road, get_hour_label(18))
+    hr_19_road = sue_budunit.make_road(day_road, get_hour_label(19))
+    hr_20_road = sue_budunit.make_road(day_road, get_hour_label(20))
+    hr_21_road = sue_budunit.make_road(day_road, get_hour_label(21))
+    hr_22_road = sue_budunit.make_road(day_road, get_hour_label(22))
+    hr_23_road = sue_budunit.make_road(day_road, get_hour_label(23))
 
     print(f"{day_road=}")
     print(f"{hr_00_road=}")
@@ -841,88 +805,258 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
 
 def cregtime_begin():
-    return cregtime_config().get(get_cregtime_text())._begin
+    return cregtime_ideaunit().get(get_cregtime_text())._begin
 
 
 def cregtime_close():
-    return cregtime_config().get(get_cregtime_text())._close
+    return cregtime_ideaunit().get(get_cregtime_text())._close
 
 
 def sun_gogo_want():
-    return creg_weekday_config().get(get_sun())._gogo_want
+    return creg_weekday_ideaunits().get(get_sun())._gogo_want
 
 
 def mon_gogo_want():
-    return creg_weekday_config().get(get_mon())._gogo_want
+    return creg_weekday_ideaunits().get(get_mon())._gogo_want
 
 
 def tue_gogo_want():
-    return creg_weekday_config().get(get_tue())._gogo_want
+    return creg_weekday_ideaunits().get(get_tue())._gogo_want
 
 
 def wed_gogo_want():
-    return creg_weekday_config().get(get_wed())._gogo_want
+    return creg_weekday_ideaunits().get(get_wed())._gogo_want
 
 
 def thu_gogo_want():
-    return creg_weekday_config().get(get_thu())._gogo_want
+    return creg_weekday_ideaunits().get(get_thu())._gogo_want
 
 
 def fri_gogo_want():
-    return creg_weekday_config().get(get_fri())._gogo_want
+    return creg_weekday_ideaunits().get(get_fri())._gogo_want
 
 
 def sat_gogo_want():
-    return creg_weekday_config().get(get_sat())._gogo_want
+    return creg_weekday_ideaunits().get(get_sat())._gogo_want
 
 
 def sun_stop_want():
-    return creg_weekday_config().get(get_sun())._stop_want
+    return creg_weekday_ideaunits().get(get_sun())._stop_want
 
 
 def mon_stop_want():
-    return creg_weekday_config().get(get_mon())._stop_want
+    return creg_weekday_ideaunits().get(get_mon())._stop_want
 
 
 def tue_stop_want():
-    return creg_weekday_config().get(get_tue())._stop_want
+    return creg_weekday_ideaunits().get(get_tue())._stop_want
 
 
 def wed_stop_want():
-    return creg_weekday_config().get(get_wed())._stop_want
+    return creg_weekday_ideaunits().get(get_wed())._stop_want
 
 
 def thu_stop_want():
-    return creg_weekday_config().get(get_thu())._stop_want
+    return creg_weekday_ideaunits().get(get_thu())._stop_want
 
 
 def fri_stop_want():
-    return creg_weekday_config().get(get_fri())._stop_want
+    return creg_weekday_ideaunits().get(get_fri())._stop_want
 
 
 def sat_stop_want():
-    return creg_weekday_config().get(get_sat())._stop_want
+    return creg_weekday_ideaunits().get(get_sat())._stop_want
 
 
 def c400_leap_num():
-    return stan_c400_leap_config().get(c400_leap_str())._denom
+    return stan_c400_leap_ideaunits().get(c400_leap_str())._denom
 
 
 def c400_clean_num():
-    return stan_c400_clean_config().get(c400_clean_str())._denom
+    return stan_c400_clean_ideaunits().get(c400_clean_str())._denom
 
 
 def c100_num():
-    return stan_c100_config().get(c100_str())._denom
+    return stan_c100_ideaunits().get(c100_str())._denom
 
 
 def yr4_leap_num():
-    return stan_yr4_leap_config().get(yr4_leap_str())._denom
+    return stan_yr4_leap_ideaunits().get(yr4_leap_str())._denom
 
 
 def yr4_clean_num():
-    return stan_yr4_clean_config().get(yr4_clean_str())._denom
+    return stan_yr4_clean_ideaunits().get(yr4_clean_str())._denom
 
 
 def year_num():
-    return stan_year_config().get(year_str())._denom
+    return stan_year_ideaunits().get(year_str())._denom
+
+
+# def jan_gogo_want():    return creg_month_ideaunits().get(jan_str())._gogo_want
+# def feb_gogo_want():    return creg_month_ideaunits().get(feb_str())._gogo_want
+# def mar_gogo_want():    return creg_month_ideaunits().get(mar_str())._gogo_want
+# def apr_gogo_want():    return creg_month_ideaunits().get(apr_str())._gogo_want
+# def may_gogo_want():    return creg_month_ideaunits().get(may_str())._gogo_want
+# def jun_gogo_want():    return creg_month_ideaunits().get(jun_str())._gogo_want
+# def jul_gogo_want():    return creg_month_ideaunits().get(jul_str())._gogo_want
+# def aug_gogo_want():    return creg_month_ideaunits().get(aug_str())._gogo_want
+# def sep_gogo_want():    return creg_month_ideaunits().get(sep_str())._gogo_want
+# def oct_gogo_want():    return creg_month_ideaunits().get(oct_str())._gogo_want
+# def nov_gogo_want():    return creg_month_ideaunits().get(nov_str())._gogo_want
+# def dec_gogo_want():    return creg_month_ideaunits().get(dec_str())._gogo_want
+# def jan_stop_want():    return creg_month_ideaunits().get(jan_str())._stop_want
+# def feb_stop_want():    return creg_month_ideaunits().get(feb_str())._stop_want
+# def mar_stop_want():    return creg_month_ideaunits().get(mar_str())._stop_want
+# def apr_stop_want():    return creg_month_ideaunits().get(apr_str())._stop_want
+# def may_stop_want():    return creg_month_ideaunits().get(may_str())._stop_want
+# def jun_stop_want():    return creg_month_ideaunits().get(jun_str())._stop_want
+# def jul_stop_want():    return creg_month_ideaunits().get(jul_str())._stop_want
+# def aug_stop_want():    return creg_month_ideaunits().get(aug_str())._stop_want
+# def sep_stop_want():    return creg_month_ideaunits().get(sep_str())._stop_want
+# def oct_stop_want():    return creg_month_ideaunits().get(oct_str())._stop_want
+# def nov_stop_want():    return creg_month_ideaunits().get(nov_str())._stop_want
+# def dec_stop_want():    return creg_month_ideaunits().get(dec_str())._stop_want
+
+
+def mar_str() -> str:
+    return "mar"
+
+
+def apr_str() -> str:
+    return "apr"
+
+
+def may_str() -> str:
+    return "may"
+
+
+def jun_str() -> str:
+    return "jun"
+
+
+def jul_str() -> str:
+    return "jul"
+
+
+def aug_str() -> str:
+    return "aug"
+
+
+def sep_str() -> str:
+    return "sep"
+
+
+def oct_str() -> str:
+    return "oct"
+
+
+def nov_str() -> str:
+    return "nov"
+
+
+def dec_str() -> str:
+    return "dec"
+
+
+def jan_str() -> str:
+    return "jan"
+
+
+def feb_str() -> str:
+    return "feb"
+
+
+def jan_gogo_want():
+    return creg_month_ideaunits().get(jan_str())._gogo_want
+
+
+def feb_gogo_want():
+    return creg_month_ideaunits().get(feb_str())._gogo_want
+
+
+def mar_gogo_want():
+    return creg_month_ideaunits().get(mar_str())._gogo_want
+
+
+def apr_gogo_want():
+    return creg_month_ideaunits().get(apr_str())._gogo_want
+
+
+def may_gogo_want():
+    return creg_month_ideaunits().get(may_str())._gogo_want
+
+
+def jun_gogo_want():
+    return creg_month_ideaunits().get(jun_str())._gogo_want
+
+
+def jul_gogo_want():
+    return creg_month_ideaunits().get(jul_str())._gogo_want
+
+
+def aug_gogo_want():
+    return creg_month_ideaunits().get(aug_str())._gogo_want
+
+
+def sep_gogo_want():
+    return creg_month_ideaunits().get(sep_str())._gogo_want
+
+
+def oct_gogo_want():
+    return creg_month_ideaunits().get(oct_str())._gogo_want
+
+
+def nov_gogo_want():
+    return creg_month_ideaunits().get(nov_str())._gogo_want
+
+
+def dec_gogo_want():
+    return creg_month_ideaunits().get(dec_str())._gogo_want
+
+
+def jan_stop_want():
+    return creg_month_ideaunits().get(jan_str())._stop_want
+
+
+def feb_stop_want():
+    return creg_month_ideaunits().get(feb_str())._stop_want
+
+
+def mar_stop_want():
+    return creg_month_ideaunits().get(mar_str())._stop_want
+
+
+def apr_stop_want():
+    return creg_month_ideaunits().get(apr_str())._stop_want
+
+
+def may_stop_want():
+    return creg_month_ideaunits().get(may_str())._stop_want
+
+
+def jun_stop_want():
+    return creg_month_ideaunits().get(jun_str())._stop_want
+
+
+def jul_stop_want():
+    return creg_month_ideaunits().get(jul_str())._stop_want
+
+
+def aug_stop_want():
+    return creg_month_ideaunits().get(aug_str())._stop_want
+
+
+def sep_stop_want():
+    return creg_month_ideaunits().get(sep_str())._stop_want
+
+
+def oct_stop_want():
+    return creg_month_ideaunits().get(oct_str())._stop_want
+
+
+def nov_stop_want():
+    return creg_month_ideaunits().get(nov_str())._stop_want
+
+
+def dec_stop_want():
+    return creg_month_ideaunits().get(dec_str())._stop_want

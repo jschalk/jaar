@@ -11,22 +11,10 @@ from src.creg.creg import (
     get_thu,  # "Thursday"
     get_fri,  # "Friday"
     get_sat,  # "Saturday"
-    week_str,  # "week"
+    creg_week_str,  # "week"
     weeks_str,  # f"{get_week()}s"
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
-    jan_str,
-    feb_str,
-    mar_str,
-    apr_str,
-    may_str,
-    jun_str,
-    jul_str,
-    aug_str,
-    sep_str,
-    oct_str,
-    nov_str,
-    dec_str,
     c400_leap_str,
     c400_clean_str,
     c100_str,
@@ -44,7 +32,7 @@ def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     weeks_road = sue_budunit.make_road(creg_road, weeks_str())
-    week_road = sue_budunit.make_road(creg_road, week_str())
+    week_road = sue_budunit.make_road(creg_road, creg_week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     day_road = sue_budunit.make_road(creg_road, day_str())
     c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
@@ -53,7 +41,7 @@ def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
     yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
     yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
     year_road = sue_budunit.make_road(yr4_clean_road, year_str())
-    jan_road = sue_budunit.make_road(year_road, jan_str())
+    jan_road = sue_budunit.make_road(year_road, "jan")
 
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     assert sue_budunit._range_inheritors == {}
@@ -134,7 +122,7 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     weeks_road = sue_budunit.make_road(creg_road, weeks_str())
-    week_road = sue_budunit.make_road(creg_road, week_str())
+    week_road = sue_budunit.make_road(creg_road, creg_week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     mon_road = sue_budunit.make_road(week_road, get_mon())
     tue_road = sue_budunit.make_road(week_road, get_tue())
@@ -263,18 +251,18 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     assert year_idea._gogo_calc == 0
     assert year_idea._stop_calc == 525600
 
-    jan_road = sue_budunit.make_road(year_road, jan_str())
-    feb_road = sue_budunit.make_road(year_road, feb_str())
-    mar_road = sue_budunit.make_road(year_road, mar_str())
-    apr_road = sue_budunit.make_road(year_road, apr_str())
-    may_road = sue_budunit.make_road(year_road, may_str())
-    jun_road = sue_budunit.make_road(year_road, jun_str())
-    jul_road = sue_budunit.make_road(year_road, jul_str())
-    aug_road = sue_budunit.make_road(year_road, aug_str())
-    sep_road = sue_budunit.make_road(year_road, sep_str())
-    oct_road = sue_budunit.make_road(year_road, oct_str())
-    nov_road = sue_budunit.make_road(year_road, nov_str())
-    dec_road = sue_budunit.make_road(year_road, dec_str())
+    jan_road = sue_budunit.make_road(year_road, "jan")
+    feb_road = sue_budunit.make_road(year_road, "feb")
+    mar_road = sue_budunit.make_road(year_road, "mar")
+    apr_road = sue_budunit.make_road(year_road, "apr")
+    may_road = sue_budunit.make_road(year_road, "may")
+    jun_road = sue_budunit.make_road(year_road, "jun")
+    jul_road = sue_budunit.make_road(year_road, "jul")
+    aug_road = sue_budunit.make_road(year_road, "aug")
+    sep_road = sue_budunit.make_road(year_road, "sep")
+    oct_road = sue_budunit.make_road(year_road, "oct")
+    nov_road = sue_budunit.make_road(year_road, "nov")
+    dec_road = sue_budunit.make_road(year_road, "dec")
     assert sue_budunit.get_idea_obj(jan_road)._gogo_calc == 437760
     assert sue_budunit.get_idea_obj(feb_road)._gogo_calc == 480960
     assert sue_budunit.get_idea_obj(mar_road)._gogo_calc == 0

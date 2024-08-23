@@ -5,7 +5,7 @@ from src.creg.creg import (
     get_time_min_from_dt,
     add_time_creg_ideaunit,
     time_str,  # "time"
-    week_str,  # "week"
+    creg_week_str,  # "week"
     get_cregtime_text,
     c400_leap_str,
     c400_clean_str,
@@ -19,13 +19,13 @@ from src.creg.creg import (
     get_thu,  # "Thursday"
     get_fri,  # "Friday"
     get_sat,  # "Saturday"
-    week_str,  # "week"
+    creg_week_str,  # "week"
     weeks_str,  # f"{get_week()}s"
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
     year_str,
     years_str,
-    creg_weekday_config,
+    creg_weekday_ideaunits,
 )
 from datetime import datetime
 
@@ -162,7 +162,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
-    week_road = sue_budunit.make_road(creg_road, week_str())
+    week_road = sue_budunit.make_road(creg_road, creg_week_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
@@ -196,7 +196,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
-    week_road = sue_budunit.make_road(creg_road, week_str())
+    week_road = sue_budunit.make_road(creg_road, creg_week_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
@@ -388,11 +388,11 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
 
 
 def wed_gogo_want():
-    return creg_weekday_config().get(get_wed())._gogo_want
+    return creg_weekday_ideaunits().get(get_wed())._gogo_want
 
 
 def thu_gogo_want():
-    return creg_weekday_config().get(get_thu())._gogo_want
+    return creg_weekday_ideaunits().get(get_thu())._gogo_want
 
 
 def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_2000():
@@ -401,7 +401,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     year_road = get_year_road(sue_budunit, creg_road)
-    week_road = sue_budunit.make_road(creg_road, week_str())
+    week_road = sue_budunit.make_road(creg_road, creg_week_str())
     # sun_road = sue_budunit.make_road(week_road, get_sun())
     # mon_road = sue_budunit.make_road(week_road, get_mon())
     # tue_road = sue_budunit.make_road(week_road, get_tue())
@@ -528,7 +528,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     year_road = get_year_road(sue_budunit, creg_road)
-    week_road = sue_budunit.make_road(creg_road, week_str())
+    week_road = sue_budunit.make_road(creg_road, creg_week_str())
     # sun_road = sue_budunit.make_road(week_road, get_sun())
     # mon_road = sue_budunit.make_road(week_road, get_mon())
     # tue_road = sue_budunit.make_road(week_road, get_tue())
