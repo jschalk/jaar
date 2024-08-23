@@ -17,39 +17,41 @@ def _load_time_ideaunit_idea(
     x_budunit.set_idea(x_time_ideaunit, parent_road)
 
 
-def standard_time_config() -> list[IdeaUnit]:
-    return [
-        ideaunit_shop("c400_leap", _denom=210379680, _morph=True),
-        ideaunit_shop("c400_clean", _denom=210378240, _morph=True),
-        ideaunit_shop("c100 years", _denom=52594560, _morph=True),
-        ideaunit_shop("yr4_leap", _denom=2103840, _morph=True),
-        ideaunit_shop("yr4_clean", _denom=2102400, _morph=True),
-        ideaunit_shop("year", _denom=525600, _morph=True),
-    ]
+def standard_time_config() -> dict[str, IdeaUnit]:
+    return {
+        c400_leap_str(): ideaunit_shop(c400_leap_str(), _denom=210379680, _morph=True),
+        c400_clean_str(): ideaunit_shop(
+            c400_clean_str(), _denom=210378240, _morph=True
+        ),
+        c100_str(): ideaunit_shop(c100_str(), _denom=52594560, _morph=True),
+        yr4_leap_str(): ideaunit_shop(yr4_leap_str(), _denom=2103840, _morph=True),
+        yr4_clean_str(): ideaunit_shop(yr4_clean_str(), _denom=2102400, _morph=True),
+        year_str(): ideaunit_shop(year_str(), _denom=525600, _morph=True),
+    }
 
 
 def c400_leap_str():
-    return standard_time_config()[0]._label
+    return "c400_leap_str"
 
 
 def c400_clean_str():
-    return standard_time_config()[1]._label
+    return "c400_clean_str"
 
 
 def c100_str():
-    return standard_time_config()[2]._label
+    return "c100_str"
 
 
 def yr4_leap_str():
-    return standard_time_config()[3]._label
+    return "yr4_leap_str"
 
 
 def yr4_clean_str():
-    return standard_time_config()[4]._label
+    return "yr4_clean_str"
 
 
-def year_str() -> str:
-    return standard_time_config()[5]._label
+def year_str():
+    return "year_str"
 
 
 def years_str() -> str:
@@ -57,27 +59,27 @@ def years_str() -> str:
 
 
 def c400_leap_num():
-    return standard_time_config()[0]._denom
+    return standard_time_config().get(c400_leap_str())._denom
 
 
 def c400_clean_num():
-    return standard_time_config()[1]._denom
+    return standard_time_config().get(c400_clean_str())._denom
 
 
 def c100_num():
-    return standard_time_config()[2]._denom
+    return standard_time_config().get(c100_str())._denom
 
 
 def yr4_leap_num():
-    return standard_time_config()[3]._denom
+    return standard_time_config().get(yr4_leap_str())._denom
 
 
 def yr4_clean_num():
-    return standard_time_config()[4]._denom
+    return standard_time_config().get(yr4_clean_str())._denom
 
 
 def year_num():
-    return standard_time_config()[5]._denom
+    return standard_time_config().get(year_str())._denom
 
 
 def day_num():
@@ -290,31 +292,31 @@ def dec_stop_want():
 
 
 def get_wed():
-    return creg_week_dict().get("Wednesday")._label
+    return creg_week_config().get("Wednesday")._label
 
 
 def get_thu():
-    return creg_week_dict().get("Thursday")._label
+    return creg_week_config().get("Thursday")._label
 
 
 def get_fri():
-    return creg_week_dict().get("Friday")._label
+    return creg_week_config().get("Friday")._label
 
 
 def get_sat():
-    return creg_week_dict().get("Saturday")._label
+    return creg_week_config().get("Saturday")._label
 
 
 def get_sun():
-    return creg_week_dict().get("Sunday")._label
+    return creg_week_config().get("Sunday")._label
 
 
 def get_mon():
-    return creg_week_dict().get("Monday")._label
+    return creg_week_config().get("Monday")._label
 
 
 def get_tue():
-    return creg_week_dict().get("Tuesday")._label
+    return creg_week_config().get("Tuesday")._label
 
 
 def creg_hour_config() -> dict[int, str]:
@@ -355,7 +357,7 @@ def week_close():
     return 7 * day_num()
 
 
-def creg_week_dict() -> dict[str, IdeaUnit]:
+def creg_week_config() -> dict[str, IdeaUnit]:
     x_wed = "Wednesday"
     x_thu = "Thursday"
     x_fri = "Friday"
@@ -375,59 +377,59 @@ def creg_week_dict() -> dict[str, IdeaUnit]:
 
 
 def sun_gogo_want():
-    return creg_week_dict().get(get_sun())._gogo_want
+    return creg_week_config().get(get_sun())._gogo_want
 
 
 def mon_gogo_want():
-    return creg_week_dict().get(get_mon())._gogo_want
+    return creg_week_config().get(get_mon())._gogo_want
 
 
 def tue_gogo_want():
-    return creg_week_dict().get(get_tue())._gogo_want
+    return creg_week_config().get(get_tue())._gogo_want
 
 
 def wed_gogo_want():
-    return creg_week_dict().get(get_wed())._gogo_want
+    return creg_week_config().get(get_wed())._gogo_want
 
 
 def thu_gogo_want():
-    return creg_week_dict().get(get_thu())._gogo_want
+    return creg_week_config().get(get_thu())._gogo_want
 
 
 def fri_gogo_want():
-    return creg_week_dict().get(get_fri())._gogo_want
+    return creg_week_config().get(get_fri())._gogo_want
 
 
 def sat_gogo_want():
-    return creg_week_dict().get(get_sat())._gogo_want
+    return creg_week_config().get(get_sat())._gogo_want
 
 
 def sun_stop_want():
-    return creg_week_dict().get(get_sun())._stop_want
+    return creg_week_config().get(get_sun())._stop_want
 
 
 def mon_stop_want():
-    return creg_week_dict().get(get_mon())._stop_want
+    return creg_week_config().get(get_mon())._stop_want
 
 
 def tue_stop_want():
-    return creg_week_dict().get(get_tue())._stop_want
+    return creg_week_config().get(get_tue())._stop_want
 
 
 def wed_stop_want():
-    return creg_week_dict().get(get_wed())._stop_want
+    return creg_week_config().get(get_wed())._stop_want
 
 
 def thu_stop_want():
-    return creg_week_dict().get(get_thu())._stop_want
+    return creg_week_config().get(get_thu())._stop_want
 
 
 def fri_stop_want():
-    return creg_week_dict().get(get_fri())._stop_want
+    return creg_week_config().get(get_fri())._stop_want
 
 
 def sat_stop_want():
-    return creg_week_dict().get(get_sat())._stop_want
+    return creg_week_config().get(get_sat())._stop_want
 
 
 def time_str() -> str:
@@ -444,7 +446,7 @@ def add_time_creg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     creg_road = _add_cregtime_ideaunit(x_budunit, time_road)
     day_road = _add_day_ideaunits(x_budunit, creg_road)
     _add_hour_ideaunits(x_budunit, day_road)
-    week_road = _add_week_ideaunits(x_budunit, creg_road)
+    _add_week_ideaunits(x_budunit, creg_road)
     year_road = _add_c400_leap_idea(x_budunit, creg_road)
     add_x_ideaunits(x_budunit, year_road, creg_month_dict())
     return x_budunit
@@ -488,31 +490,28 @@ def _add_hour_ideaunits(x_budunit: BudUnit, day_road) -> RoadUnit:
     add_x_ideaunits(x_budunit, day_road, creg_hour_config())
 
 
-def _add_week_ideaunits(x_budunit: BudUnit, parent_road: RoadUnit) -> RoadUnit:
+def _add_week_ideaunits(x_budunit: BudUnit, parent_road: RoadUnit):
     week_road = x_budunit.make_road(parent_road, week_str())
     week_idea = ideaunit_shop(week_str(), _denom=10080, _morph=True)
     x_budunit.set_idea(week_idea, parent_road)
     x_budunit.set_idea(ideaunit_shop(weeks_str(), _denom=10080), parent_road)
     x_budunit.set_idea(week_idea, parent_road)
-    for x_time_ideaunit in creg_week_dict().values():
-        _load_time_ideaunit_idea(x_budunit, x_time_ideaunit, week_road)
-    return x_budunit
+    add_x_ideaunits(x_budunit, week_road, creg_week_config())
 
 
-def _add_c400_leap_idea(x_budunit: BudUnit, time_range_root_road: RoadUnit):
+def _add_c400_leap_idea(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
     c400_leap_road = x_budunit.make_road(time_range_root_road, c400_leap_str())
     c400_clean_road = x_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_road = x_budunit.make_road(c400_clean_road, c100_str())
     yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = x_budunit.make_road(yr4_clean_road, year_str())
 
-    c400_leap_idea = ideaunit_shop(c400_leap_str(), _denom=c400_leap_num(), _morph=True)
-    c400_clean = ideaunit_shop(c400_clean_str(), _denom=c400_clean_num(), _morph=True)
-    c100_idea = ideaunit_shop(c100_str(), _denom=c100_num(), _morph=True)
-    yr4_leap_idea = ideaunit_shop(yr4_leap_str(), _denom=yr4_leap_num(), _morph=True)
-    yr4_clean_idea = ideaunit_shop(yr4_clean_str(), _denom=yr4_clean_num(), _morph=True)
-    year_idea = ideaunit_shop(year_str(), _denom=year_num(), _morph=True)
+    c400_leap_idea = standard_time_config().get(c400_leap_str())
+    c400_clean = standard_time_config().get(c400_clean_str())
+    c100_idea = standard_time_config().get(c100_str())
+    yr4_leap_idea = standard_time_config().get(yr4_leap_str())
+    yr4_clean_idea = standard_time_config().get(yr4_clean_str())
+    year_idea = standard_time_config().get(year_str())
 
     x_budunit.set_idea(c400_leap_idea, time_range_root_road)
     x_budunit.set_idea(c400_clean, c400_leap_road)
@@ -520,13 +519,14 @@ def _add_c400_leap_idea(x_budunit: BudUnit, time_range_root_road: RoadUnit):
     x_budunit.set_idea(yr4_leap_idea, c100_road)
     x_budunit.set_idea(yr4_clean_idea, yr4_leap_road)
     x_budunit.set_idea(year_idea, yr4_clean_road)
-    return year_road
+    return get_year_road(x_budunit, time_range_root_road)
 
 
 def add_x_ideaunits(
     x_budunit: BudUnit, parent_road: RoadUnit, config_dict: dict[str, IdeaUnit]
 ):
     for x_time_ideaunit in config_dict.values():
+        print(f"{x_time_ideaunit._label=} {parent_road=}")
         _load_time_ideaunit_idea(x_budunit, x_time_ideaunit, parent_road)
 
 
