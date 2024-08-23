@@ -53,30 +53,7 @@ from src.creg.creg import (
     yr4_clean_str,
     year_str,
     hour_str,
-    hr_00_str,
-    hr_01_str,
-    hr_02_str,
-    hr_03_str,
-    hr_04_str,
-    hr_05_str,
-    hr_06_str,
-    hr_07_str,
-    hr_08_str,
-    hr_09_str,
-    hr_10_str,
-    hr_11_str,
-    hr_12_str,
-    hr_13_str,
-    hr_14_str,
-    hr_15_str,
-    hr_16_str,
-    hr_17_str,
-    hr_18_str,
-    hr_19_str,
-    hr_20_str,
-    hr_21_str,
-    hr_22_str,
-    hr_23_str,
+    creg_hour_str,
     jan_begin,
     feb_begin,
     mar_begin,
@@ -117,65 +94,6 @@ from src.creg.creg import (
     sat_close,
 )
 from datetime import datetime
-from random import randint
-
-# from src.bud.examples.example_time import get_budunit_sue_TimeExample
-from copy import deepcopy as copy_deepcopy
-
-
-def kidless(x_budunit: BudUnit, idea_road: RoadUnit) -> IdeaUnit:
-    x_ideaunit = copy_deepcopy(x_budunit.get_idea_obj(idea_road))
-    x_ideaunit._kids = {}
-    x_ideaunit._fund_onset = None
-    x_ideaunit._fund_cease = None
-    x_ideaunit._fund_ratio = None
-    x_ideaunit._fund_coin = None
-    x_ideaunit._is_expanded = None
-    return x_ideaunit
-
-
-def kidlist(x_budunit: BudUnit, idea_road: RoadUnit) -> set[RoadUnit]:
-    x_ideaunit = x_budunit.get_idea_obj(idea_road)
-    return set(x_ideaunit._kids.keys())
-
-
-def compare_kidless_ideas(src_budunit: BudUnit, x_budunit: BudUnit):
-    # src_budunit.settle_bud()
-    # x_budunit.settle_bud()
-
-    for src_road in src_budunit._idea_dict.keys():
-        # print(f"'{src_road}'")
-
-        # TODO Fix these failures to pass assert that are skipped.
-        if not is_string_in_road(
-            "ZZ;time;cregtime;years;", src_road
-        ) and src_road not in {
-            "ZZ;time;tech;400 year segment;0-100-25 leap years;4year with leap",
-            "ZZ;time;tech;400 year segment;100-104-0 leap years;4year wo leap",
-            "ZZ;time;tech;400 year segment;104-200-24 leap years;4year with leap",
-            "ZZ;time;tech;400 year segment;200-204-0 leap years;4year wo leap",
-            "ZZ;time;tech;400 year segment;204-300-24 leap years;4year with leap",
-        }:
-            if kidless(src_budunit, src_road) != kidless(x_budunit, src_road):
-                print(f"'{src_road}' failure")
-                src_ideaunit = src_budunit.get_idea_obj(src_road)
-                x_ideaunit = x_budunit.get_idea_obj(src_road)
-                print(f"{src_ideaunit._begin=} \t\t {x_ideaunit._begin=}")
-                print(f"{src_ideaunit._close=} \t\t {x_ideaunit._close=}")
-                print(f"{src_ideaunit._numor=} \t\t {x_ideaunit._numor=}")
-                print(f"{src_ideaunit._denom=} \t\t {x_ideaunit._denom=}")
-                print(f"{src_ideaunit._addin=} \t\t {x_ideaunit._addin=}")
-                print(f"{src_ideaunit._morph=} \t\t {x_ideaunit._morph=}")
-                # print(f"{src_ideaunit._parent_road=} \t\t {x_ideaunit._parent_road=}")
-            assert kidless(src_budunit, src_road) == kidless(x_budunit, src_road)
-
-
-def compare_kidlists(src_budunit: BudUnit, x_budunit: BudUnit):
-    for src_road in src_budunit._idea_dict.keys():
-        if kidlist(src_budunit, src_road) != kidlist(x_budunit, src_road):
-            print(f"   Kidlist failure at {src_road=}")
-            print(f"{kidlist(src_budunit, src_road)=}")
-        assert kidlist(src_budunit, src_road) == kidlist(x_budunit, src_road)
 
 
 def test_get_time_min_from_dt_WorksCorrectly():
@@ -546,30 +464,30 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     day_road = sue_budunit.make_road(creg_road, day_str())
     hour_road = sue_budunit.make_road(day_road, hour_str())
-    hr_00_road = sue_budunit.make_road(day_road, hr_00_str())
-    hr_01_road = sue_budunit.make_road(day_road, hr_01_str())
-    hr_02_road = sue_budunit.make_road(day_road, hr_02_str())
-    hr_03_road = sue_budunit.make_road(day_road, hr_03_str())
-    hr_04_road = sue_budunit.make_road(day_road, hr_04_str())
-    hr_05_road = sue_budunit.make_road(day_road, hr_05_str())
-    hr_06_road = sue_budunit.make_road(day_road, hr_06_str())
-    hr_07_road = sue_budunit.make_road(day_road, hr_07_str())
-    hr_08_road = sue_budunit.make_road(day_road, hr_08_str())
-    hr_09_road = sue_budunit.make_road(day_road, hr_09_str())
-    hr_10_road = sue_budunit.make_road(day_road, hr_10_str())
-    hr_11_road = sue_budunit.make_road(day_road, hr_11_str())
-    hr_12_road = sue_budunit.make_road(day_road, hr_12_str())
-    hr_13_road = sue_budunit.make_road(day_road, hr_13_str())
-    hr_14_road = sue_budunit.make_road(day_road, hr_14_str())
-    hr_15_road = sue_budunit.make_road(day_road, hr_15_str())
-    hr_16_road = sue_budunit.make_road(day_road, hr_16_str())
-    hr_17_road = sue_budunit.make_road(day_road, hr_17_str())
-    hr_18_road = sue_budunit.make_road(day_road, hr_18_str())
-    hr_19_road = sue_budunit.make_road(day_road, hr_19_str())
-    hr_20_road = sue_budunit.make_road(day_road, hr_20_str())
-    hr_21_road = sue_budunit.make_road(day_road, hr_21_str())
-    hr_22_road = sue_budunit.make_road(day_road, hr_22_str())
-    hr_23_road = sue_budunit.make_road(day_road, hr_23_str())
+    hr_00_road = sue_budunit.make_road(day_road, creg_hour_str(0))
+    hr_01_road = sue_budunit.make_road(day_road, creg_hour_str(1))
+    hr_02_road = sue_budunit.make_road(day_road, creg_hour_str(2))
+    hr_03_road = sue_budunit.make_road(day_road, creg_hour_str(3))
+    hr_04_road = sue_budunit.make_road(day_road, creg_hour_str(4))
+    hr_05_road = sue_budunit.make_road(day_road, creg_hour_str(5))
+    hr_06_road = sue_budunit.make_road(day_road, creg_hour_str(6))
+    hr_07_road = sue_budunit.make_road(day_road, creg_hour_str(7))
+    hr_08_road = sue_budunit.make_road(day_road, creg_hour_str(8))
+    hr_09_road = sue_budunit.make_road(day_road, creg_hour_str(9))
+    hr_10_road = sue_budunit.make_road(day_road, creg_hour_str(10))
+    hr_11_road = sue_budunit.make_road(day_road, creg_hour_str(11))
+    hr_12_road = sue_budunit.make_road(day_road, creg_hour_str(12))
+    hr_13_road = sue_budunit.make_road(day_road, creg_hour_str(13))
+    hr_14_road = sue_budunit.make_road(day_road, creg_hour_str(14))
+    hr_15_road = sue_budunit.make_road(day_road, creg_hour_str(15))
+    hr_16_road = sue_budunit.make_road(day_road, creg_hour_str(16))
+    hr_17_road = sue_budunit.make_road(day_road, creg_hour_str(17))
+    hr_18_road = sue_budunit.make_road(day_road, creg_hour_str(18))
+    hr_19_road = sue_budunit.make_road(day_road, creg_hour_str(19))
+    hr_20_road = sue_budunit.make_road(day_road, creg_hour_str(20))
+    hr_21_road = sue_budunit.make_road(day_road, creg_hour_str(21))
+    hr_22_road = sue_budunit.make_road(day_road, creg_hour_str(22))
+    hr_23_road = sue_budunit.make_road(day_road, creg_hour_str(23))
 
     print(f"{day_road=}")
     print(f"{hr_00_road=}")
