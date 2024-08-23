@@ -2556,7 +2556,7 @@
                                 },
                                 "_uid": 230
                             },
-                            "noce hair removal": {
+                            "flossing teeth": {
                                 "_awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
@@ -2564,7 +2564,7 @@
                                         "take_force": 1
                                     }
                                 },
-                                "_label": "noce hair removal",
+                                "_label": "flossing teeth",
                                 "_mass": 1,
                                 "_reasonunits": {
                                     "A;time;gregtime": {
@@ -2582,7 +2582,7 @@
                                 "_uid": 47,
                                 "pledge": true
                             },
-                            "pull ear hair": {
+                            "clean ears": {
                                 "_awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
@@ -2590,7 +2590,7 @@
                                         "take_force": 1
                                     }
                                 },
-                                "_label": "pull ear hair",
+                                "_label": "clean ears",
                                 "_mass": 1,
                                 "_reasonunits": {
                                     "A;time;gregtime": {
@@ -2608,7 +2608,7 @@
                                 "_uid": 79,
                                 "pledge": true
                             },
-                            "shampoo hair": {
+                            "shampooing": {
                                 "_awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
@@ -2616,7 +2616,7 @@
                                         "take_force": 1
                                     }
                                 },
-                                "_label": "shampoo hair",
+                                "_label": "shampooing",
                                 "_mass": 1,
                                 "_reasonunits": {
                                     "A;time;gregtime": {
@@ -5314,7 +5314,7 @@
                 },
                 "_uid": 200
             },
-            "WaterAir Living": {
+            "Water Living": {
                 "_is_expanded": false,
                 "_kids": {
                     "Existance in Williamette watershed": {
@@ -5380,7 +5380,7 @@
                         "_uid": 225
                     }
                 },
-                "_label": "WaterAir Living",
+                "_label": "Water Living",
                 "_mass": 1,
                 "_uid": 223
             },

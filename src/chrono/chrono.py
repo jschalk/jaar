@@ -4,6 +4,29 @@ from src.bud.bud import BudUnit
 from datetime import datetime
 
 
+def validate_timeline_config(config_dict: dict) -> bool:
+    config_elements = [
+        hours_config_text(),
+        weekdays_config_text(),
+        months_config_text(),
+        timeline_label_text(),
+        c400_config_text(),
+        yr1_jan1_offset_text(),
+    ]
+    for config_key in config_elements:
+        config_element = config_dict.get(config_key)
+        len_elements = {
+            hours_config_text(),
+            weekdays_config_text(),
+            months_config_text(),
+        }
+        if config_element is None:
+            return False
+        elif config_key in len_elements and len(config_element) <= 0:
+            return False
+    return True
+
+
 def day_length() -> int:
     return 1440
 
@@ -68,6 +91,54 @@ def yr4_clean_str():
 
 def year_str():
     return "year_str"
+
+
+def time_str() -> str:
+    return "time"
+
+
+def day_str():
+    return "day"
+
+
+def days_str():
+    return f"{day_str()}s"
+
+
+def hour_str():
+    return "hour"
+
+
+def week_str():
+    return "week"
+
+
+def weeks_str():
+    return f"{week_str()}s"
+
+
+def hours_config_text() -> str:
+    return "hours_config"
+
+
+def weekdays_config_text() -> str:
+    return "weekdays_config"
+
+
+def months_config_text() -> str:
+    return "months_config"
+
+
+def timeline_label_text() -> str:
+    return "timeline_label"
+
+
+def c400_config_text() -> str:
+    return "c400_config"
+
+
+def yr1_jan1_offset_text() -> str:
+    return "yr1_jan1_offset"
 
 
 def create_weekday_ideaunits(x_weekdays: list[str]) -> dict[str, IdeaUnit]:
@@ -157,54 +228,6 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     add_x_ideaunits(x_budunit, yr4_clean_road, stan_year_ideaunits())
     add_x_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
     return x_budunit
-
-
-def time_str() -> str:
-    return "time"
-
-
-def day_str():
-    return "day"
-
-
-def days_str():
-    return f"{day_str()}s"
-
-
-def hour_str():
-    return "hour"
-
-
-def week_str():
-    return "week"
-
-
-def weeks_str():
-    return f"{week_str()}s"
-
-
-def hours_config_text() -> str:
-    return "hours_config"
-
-
-def weekdays_config_text() -> str:
-    return "weekdays_config"
-
-
-def months_config_text() -> str:
-    return "months_config"
-
-
-def timeline_label_text() -> str:
-    return "timeline_label"
-
-
-def c400_config_text() -> str:
-    return "c400_config"
-
-
-def yr1_jan1_offset_text() -> str:
-    return "yr1_jan1_offset"
 
 
 def add_x_ideaunits(
