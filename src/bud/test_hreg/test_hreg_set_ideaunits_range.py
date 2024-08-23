@@ -1,9 +1,9 @@
 from src.bud.bud import budunit_shop
-from src.bud.bud_time import (
+from src.bud.hreg import (
     get_time_min_from_dt,
     add_time_hreg_ideaunit,
     time_str,  # "time"
-    get_jajatime_text,  # "jajatime"
+    get_hregtime_text,  # "hregtime"
     get_sun,  # "Sunday"
     get_mon,  # "Monday"
     get_tue,  # "Tuesday"
@@ -42,12 +42,12 @@ def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    weeks_road = sue_budunit.make_road(jaja_road, weeks_str())
-    week_road = sue_budunit.make_road(jaja_road, week_str())
+    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
+    weeks_road = sue_budunit.make_road(hreg_road, weeks_str())
+    week_road = sue_budunit.make_road(hreg_road, week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
-    day_road = sue_budunit.make_road(jaja_road, day_str())
-    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    day_road = sue_budunit.make_road(hreg_road, day_str())
+    c400_leap_road = sue_budunit.make_road(hreg_road, c400_leap_str())
     c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
     yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
@@ -82,15 +82,15 @@ def test_BudUnit_set_ideaunits_range_Sets_day_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    day_road = sue_budunit.make_road(jaja_road, day_str())
+    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
+    day_road = sue_budunit.make_road(hreg_road, day_str())
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     sue_budunit._init_idea_tree_walk()
     assert sue_budunit.idea_exists(time_road)
-    assert sue_budunit.idea_exists(jaja_road)
-    jaja_idea = sue_budunit.get_idea_obj(jaja_road)
-    assert jaja_idea._begin == 0
-    assert jaja_idea._close == 1472657760
+    assert sue_budunit.idea_exists(hreg_road)
+    hreg_idea = sue_budunit.get_idea_obj(hreg_road)
+    assert hreg_idea._begin == 0
+    assert hreg_idea._close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
     assert day_idea._denom == 1440
@@ -109,8 +109,8 @@ def test_BudUnit_set_ideaunits_range_Sets_days_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    days_road = sue_budunit.make_road(jaja_road, days_str())
+    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
+    days_road = sue_budunit.make_road(hreg_road, days_str())
     sue_budunit = add_time_hreg_ideaunit(sue_budunit)
     sue_budunit._init_idea_tree_walk()
     assert sue_budunit.idea_exists(days_road)
@@ -132,9 +132,9 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    weeks_road = sue_budunit.make_road(jaja_road, weeks_str())
-    week_road = sue_budunit.make_road(jaja_road, week_str())
+    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
+    weeks_road = sue_budunit.make_road(hreg_road, weeks_str())
+    week_road = sue_budunit.make_road(hreg_road, week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     mon_road = sue_budunit.make_road(week_road, get_mon())
     tue_road = sue_budunit.make_road(week_road, get_tue())
@@ -191,8 +191,8 @@ def test_BudUnit_set_ideaunits_range_Sets_c400_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
+    c400_leap_road = sue_budunit.make_road(hreg_road, c400_leap_str())
     # c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
     # c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
     # yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
@@ -224,8 +224,8 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    jaja_road = sue_budunit.make_road(time_road, get_jajatime_text())
-    c400_leap_road = sue_budunit.make_road(jaja_road, c400_leap_str())
+    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
+    c400_leap_road = sue_budunit.make_road(hreg_road, c400_leap_str())
     c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
     yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
@@ -244,14 +244,14 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     sue_budunit._set_ideaunits_range()
 
     # THEN
-    assert sue_budunit.get_idea_obj(jaja_road)._gogo_calc == 0
+    assert sue_budunit.get_idea_obj(hreg_road)._gogo_calc == 0
     assert sue_budunit.get_idea_obj(c400_leap_road)._gogo_calc == 0
     assert sue_budunit.get_idea_obj(c400_clean_road)._gogo_calc == 0
     assert sue_budunit.get_idea_obj(c100_clean_road)._gogo_calc == 0
     assert sue_budunit.get_idea_obj(yr4_leap_road)._gogo_calc == 0
     assert sue_budunit.get_idea_obj(yr4_clean_road)._gogo_calc == 0
     assert sue_budunit.get_idea_obj(year_road)._gogo_calc == 0
-    assert sue_budunit.get_idea_obj(jaja_road)._stop_calc == 1472657760
+    assert sue_budunit.get_idea_obj(hreg_road)._stop_calc == 1472657760
     assert sue_budunit.get_idea_obj(c400_leap_road)._stop_calc == 210379680
     assert sue_budunit.get_idea_obj(c400_clean_road)._stop_calc == 210378240
     assert sue_budunit.get_idea_obj(c100_clean_road)._stop_calc == 52594560
