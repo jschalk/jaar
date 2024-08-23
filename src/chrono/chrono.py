@@ -217,10 +217,10 @@ def add_x_ideaunits(
 # def set_time_facts(
 #     x_budunit: BudUnit, open: datetime = None, nigh: datetime = None
 # ) -> None:
-#     open_minutes = get_creg_min_from_dt(dt=open) if open is not None else None
-#     nigh_minutes = get_creg_min_from_dt(dt=nigh) if nigh is not None else None
+#     open_minutes = get_time_min_from_dt(dt=open) if open is not None else None
+#     nigh_minutes = get_time_min_from_dt(dt=nigh) if nigh is not None else None
 #     time_road = x_budunit.make_l1_road("time")
-#     minutes_fact = x_budunit.make_road(time_road, "creg")
+#     minutes_fact = x_budunit.make_road(time_road, "something")
 #     x_budunit.set_fact(minutes_fact, minutes_fact, open_minutes, nigh_minutes)
 
 

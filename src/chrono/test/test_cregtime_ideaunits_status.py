@@ -8,7 +8,7 @@ from src.chrono.examples.chrono_examples import (
     get_thu,
     creg_weekday_ideaunits,
 )
-from src.chrono.timebuilder import (
+from src.chrono.chrono import (
     time_str,
     day_str,
     days_str,

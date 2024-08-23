@@ -10,7 +10,7 @@ from src.chrono.examples.chrono_examples import (
     get_fri,
     get_sat,
 )
-from src.chrono.timebuilder import (
+from src.chrono.chrono import (
     time_str,
     day_str,
     days_str,

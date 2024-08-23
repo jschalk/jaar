@@ -18,7 +18,7 @@ from src.chrono.examples.chrono_examples import (
     creg_months_list,
     creg_weekday_ideaunits,
 )
-from src.chrono.timebuilder import (
+from src.chrono.chrono import (
     day_length,
     week_length,
     time_str,

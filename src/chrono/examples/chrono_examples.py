@@ -2,7 +2,7 @@ from src._instrument.file import open_file
 from src._instrument.python import get_dict_from_json
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit
-from src.chrono.timebuilder import (
+from src.chrono.chrono import (
     create_weekday_ideaunits,
     add_newtimeline_ideaunit,
     new_timeline_ideaunit,
