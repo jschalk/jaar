@@ -61,6 +61,11 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), "bud_idea_healerhold"]
     bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
+    x_list = [atom_insert(), "bud_idea_range_push"]
+    bud_idea_range_push_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), "bud_idea_range_push"]
+    bud_idea_range_push_delete_dict = get_leg_obj(atoms_dict, x_list)
+
     x_list = [atom_insert(), "bud_idea_factunit"]
     bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
     x_list = [atom_update(), "bud_idea_factunit"]
@@ -161,6 +166,15 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
             leg_list, bud_idea_healerhold_delete_dict, x_bud
         )
 
+    if bud_idea_range_push_insert_dict is not None:
+        add_bud_idea_range_push_insert_to_legible_list(
+            leg_list, bud_idea_range_push_insert_dict, x_bud
+        )
+    if bud_idea_range_push_delete_dict is not None:
+        add_bud_idea_range_push_delete_to_legible_list(
+            leg_list, bud_idea_range_push_delete_dict, x_bud
+        )
+
     if bud_idea_factunit_insert_dict is not None:
         add_bud_idea_factunit_insert_to_legible_list(
             leg_list, bud_idea_factunit_insert_dict, x_bud
@@ -251,9 +265,9 @@ def add_bud_acctunit_update_to_legible_list(
         debtit_score_value = acctunit_atom.get_value("debtit_score")
         if credit_score_value is not None and debtit_score_value is not None:
             x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt."
-        elif credit_score_value is not None and debtit_score_value is None:
+        elif credit_score_value is not None:
             x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred."
-        elif credit_score_value is None and debtit_score_value is not None:
+        elif debtit_score_value is not None:
             x_str = f"{acct_id} now has {debtit_score_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
@@ -320,11 +334,9 @@ def add_bud_ideaunit_insert_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
-    _range_source_road_text = "_range_source_road"
-    _reest_text = "_reest"
+    _morph_text = "_morph"
     _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_insert_dict.values():
@@ -335,11 +347,9 @@ def add_bud_ideaunit_insert_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
-            _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
-            _reest_value = ideaunit_atom.get_value(_reest_text)
+            _morph_value = ideaunit_atom.get_value(_morph_text)
             _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = (
@@ -353,16 +363,12 @@ def add_bud_ideaunit_insert_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value is not None:
-                x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
             if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _range_source_road_value is not None:
-                x_str += f"_range_source_road={_range_source_road_value}."
-            if _reest_value is not None:
-                x_str += f"_reest={_reest_value}."
+            if _morph_value is not None:
+                x_str += f"_morph={_morph_value}."
             if _mass_value is not None:
                 x_str += f"_mass={_mass_value}."
             if pledge_value is not None:
@@ -380,11 +386,9 @@ def add_bud_ideaunit_update_to_legible_list(
     _begin_text = "_begin"
     _close_text = "_close"
     _denom_text = "_denom"
-    _numeric_road_text = "_numeric_road"
     _numor_text = "_numor"
     _problem_bool_text = "_problem_bool"
-    _range_source_road_text = "_range_source_road"
-    _reest_text = "_reest"
+    _morph_text = "_morph"
     _mass_text = "_mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_update_dict.values():
@@ -395,11 +399,9 @@ def add_bud_ideaunit_update_to_legible_list(
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
             _denom_value = ideaunit_atom.get_value(_denom_text)
-            _numeric_road_value = ideaunit_atom.get_value(_numeric_road_text)
             _numor_value = ideaunit_atom.get_value(_numor_text)
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
-            _range_source_road_value = ideaunit_atom.get_value(_range_source_road_text)
-            _reest_value = ideaunit_atom.get_value(_reest_text)
+            _morph_value = ideaunit_atom.get_value(_morph_text)
             _mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
@@ -411,16 +413,12 @@ def add_bud_ideaunit_update_to_legible_list(
                 x_str += f"_close={_close_value}."
             if _denom_value is not None:
                 x_str += f"_denom={_denom_value}."
-            if _numeric_road_value is not None:
-                x_str += f"_numeric_road={_numeric_road_value}."
             if _numor_value is not None:
                 x_str += f"_numor={_numor_value}."
             if _problem_bool_value is not None:
                 x_str += f"_problem_bool={_problem_bool_value}."
-            if _range_source_road_value is not None:
-                x_str += f"_range_source_road={_range_source_road_value}."
-            if _reest_value is not None:
-                x_str += f"_reest={_reest_value}."
+            if _morph_value is not None:
+                x_str += f"_morph={_morph_value}."
             if _mass_value is not None:
                 x_str += f"_mass={_mass_value}."
             if pledge_value is not None:
@@ -466,9 +464,9 @@ def add_bud_idea_awardlink_update_to_legible_list(
             take_force_value = idea_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
                 x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
-            elif give_force_value is not None and take_force_value is None:
+            elif give_force_value is not None:
                 x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
-            elif give_force_value is None and take_force_value is not None:
+            elif take_force_value is not None:
                 x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
@@ -516,7 +514,7 @@ def add_bud_idea_reasonunit_update_to_legible_list(
             )
             if base_idea_active_requisite_value is not None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
-            elif base_idea_active_requisite_value is None:
+            else:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' and no longer checks base active mode."
             legible_list.append(x_str)
 
@@ -651,6 +649,28 @@ def add_bud_idea_healerhold_delete_to_legible_list(
             group_id_value = idea_healerhold_atom.get_value("group_id")
             road_value = idea_healerhold_atom.get_value("road")
             x_str = f"Healerhold '{group_id_value}' deleted for idea '{road_value}'."
+            legible_list.append(x_str)
+
+
+def add_bud_idea_range_push_insert_to_legible_list(
+    legible_list: list[str], idea_range_push_insert_dict: dict, x_bud: BudUnit
+):
+    for road_dict in idea_range_push_insert_dict.values():
+        for idea_range_push_atom in road_dict.values():
+            range_push_value = idea_range_push_atom.get_value("range_push")
+            road_value = idea_range_push_atom.get_value("road")
+            x_str = f"range_push '{range_push_value}' created for idea '{road_value}'."
+            legible_list.append(x_str)
+
+
+def add_bud_idea_range_push_delete_to_legible_list(
+    legible_list: list[str], idea_range_push_delete_dict: dict, x_bud: BudUnit
+):
+    for road_dict in idea_range_push_delete_dict.values():
+        for idea_range_push_atom in road_dict.values():
+            range_push_value = idea_range_push_atom.get_value("range_push")
+            road_value = idea_range_push_atom.get_value("road")
+            x_str = f"range_push '{range_push_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 

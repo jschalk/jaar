@@ -58,8 +58,8 @@ def test_BudUnit_get_tree_set_all_idea_uids_unique():
     # for uid, uid_count in tree_metrics_after.uid_dict.items():
     #     # print(f"{uid=} {uid_count=} {len(yao_bud.get_idea_dict())=}")
     #     print(f"{uid=} {uid_count=} ")
-    assert len(tree_metrics_after.uid_dict) == 253
-    assert tree_metrics_after.all_idea_uids_are_unique == True
+    assert len(tree_metrics_after.uid_dict) == 252
+    assert tree_metrics_after.all_idea_uids_are_unique is True
 
 
 def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():

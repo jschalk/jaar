@@ -73,7 +73,7 @@ def test_PremiseUnit_is_range_CorrectlyIdentifiesRangeStatus():
     # WHEN
     casa_premise = premiseunit_shop(need=casa_road, open=1, nigh=3)
     # THEN
-    assert casa_premise._is_range() == True
+    assert casa_premise._is_range() is True
 
     # WHEN
     casa_premise = premiseunit_shop(need=casa_road)
@@ -104,7 +104,7 @@ def test_PremiseUnit_is_segregate_CorrectlyIdentifiesSegregateStatus():
     # WHEN
     casa_premise = premiseunit_shop(need=casa_road, divisor=5, open=3, nigh=3)
     # THEN
-    assert casa_premise._is_segregate() == True
+    assert casa_premise._is_segregate() is True
 
 
 def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
@@ -189,13 +189,13 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForRange
 
     # WHEN / THEN
     yr_fact = factheir_shop(base=yr_road, open=5, nigh=11, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
     yr_fact = factheir_shop(base=yr_road, open=1, nigh=11, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
     yr_fact = factheir_shop(base=yr_road, open=8, nigh=17, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
     yr_fact = factheir_shop(base=yr_road, open=0, nigh=2, pick=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
@@ -204,14 +204,14 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForRange
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, open=1, nigh=19, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
     # boundary tests
     yr_fact = factheir_shop(base=yr_road, open=13, nigh=19, pick=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, open=0, nigh=3, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
 
 def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregatePremise():
@@ -222,13 +222,13 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
 
     # WHEN / THEN
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, open=5, nigh=5)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, open=6, nigh=6)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, open=4, nigh=6)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, open=3, nigh=4)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
@@ -244,7 +244,7 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, open=1, nigh=4)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) == True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
 
 
 def test_PremiseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
@@ -257,10 +257,10 @@ def test_PremiseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
     assert wkday_premise._is_range_or_segregate() is False
 
     wkday_premise = premiseunit_shop(need=wkday_road, open=5, nigh=13)
-    assert wkday_premise._is_range_or_segregate() == True
+    assert wkday_premise._is_range_or_segregate() is True
 
     wkday_premise = premiseunit_shop(need=wkday_road, divisor=17, open=7, nigh=7)
-    assert wkday_premise._is_range_or_segregate() == True
+    assert wkday_premise._is_range_or_segregate() is True
 
 
 def test_PremiseUnitUnit_get_premise_status_ReturnsCorrect_active():
@@ -271,10 +271,10 @@ def test_PremiseUnitUnit_get_premise_status_ReturnsCorrect_active():
 
     # WHEN / THEN
     wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road)
-    assert wkday_premise._get_active(factheir=wkday_fact) == True
+    assert wkday_premise._get_active(factheir=wkday_fact) is True
     # if fact has range but premise does not reqquire range, fact's range does not matter
     wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road, open=0, nigh=2)
-    assert wkday_premise._get_active(factheir=wkday_fact) == True
+    assert wkday_premise._get_active(factheir=wkday_fact) is True
 
 
 def test_PremiseUnitUnit_get_active_returnsCorrectRanged_active():
@@ -321,7 +321,7 @@ def test_PremiseUnitUnit_set_status_CorrectlySetsStatusOfSimple():
     wed_premise.set_status(x_factheir=bud_fact)
 
     # THEN
-    assert wed_premise._status == True
+    assert wed_premise._status is True
 
 
 def test_PremiseUnit_set_status_CorrectlySetsStatus_2():
@@ -340,7 +340,7 @@ def test_PremiseUnit_set_status_CorrectlySetsStatus_2():
     wed_after_premise.set_status(x_factheir=wed_fact)
 
     # THEN
-    assert wed_after_premise._status == True
+    assert wed_after_premise._status is True
 
 
 def test_PremiseUnit_set_status_CorrectlySetsStatus_3():
@@ -359,7 +359,7 @@ def test_PremiseUnit_set_status_CorrectlySetsStatus_3():
     wed_premise.set_status(x_factheir=noon_fact)
 
     # THEN
-    assert wed_premise._status == True
+    assert wed_premise._status is True
 
 
 def test_PremiseUnit_set_status_CorrectlySetsStatus_4():
@@ -419,7 +419,7 @@ def test_PremiseUnit_set_status_CorrectlySetsTimeRangeStatusTrue():
     hr24_premise.set_status(x_factheir=range_0_to_8_fact)
 
     # THEN
-    assert hr24_premise._status == True
+    assert hr24_premise._status is True
 
 
 def test_PremiseUnit_set_task_CorrectlySetsTaskBool_01():
@@ -443,7 +443,7 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolRangeTrue():
 
     # WHEN / THEN
     range_7_to_41_fact = factheir_shop(hr24_road, hr24_road, open=7, nigh=41)
-    assert range_5_to_31_premise._get_task_status(range_7_to_41_fact) == True
+    assert range_5_to_31_premise._get_task_status(range_7_to_41_fact) is True
 
 
 def test_PremiseUnit_set_task_CorrectlySetsTaskBoolRangeFalse():
@@ -491,7 +491,7 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateTrue_01():
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_road, hr24_road, open=5, nigh=7)
-    assert o0_n0_d5_premise._get_task_status(range_5_to_7_fact) == True
+    assert o0_n0_d5_premise._get_task_status(range_5_to_7_fact) is True
 
 
 def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateTrue_02():
@@ -535,7 +535,7 @@ def test_PremiseUnit_set_status_CorrectlySetsTimeRangeTaskTrue_v1():
     range_2_to_7_premise.set_status(x_factheir=range_0_to_5_fact)
 
     # THEN
-    assert range_2_to_7_premise._status == True
+    assert range_2_to_7_premise._status is True
     assert range_2_to_7_premise._task is False
 
 
@@ -550,8 +550,8 @@ def test_PremiseUnit_set_status_CorrectlySetsTimeRangeTaskTrue_v2():
     # WHEN
     range_2_to_7_premise.set_status(x_factheir=range_0_to_8_fact)
     # THEN
-    assert range_2_to_7_premise._status == True
-    assert range_2_to_7_premise._task == True
+    assert range_2_to_7_premise._status is True
+    assert range_2_to_7_premise._task is True
 
     # ESTABLISH
     range_3_to_5_fact = factheir_shop(hr24_road, hr24_road, open=3, nigh=5)
@@ -617,7 +617,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     week_premise.set_status(x_factheir=bud_fact)
 
     # THEN
-    assert week_premise._status == True
+    assert week_premise._status is True
 
 
 def test_PremiseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndOpen_Nigh():

@@ -271,40 +271,40 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFund
 
 def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
+    sue_bud.settle_bud()
     # idea tree has no awardlinks
-    assert x_bud._idearoot._awardlines == {}
+    assert sue_bud._idearoot._awardlines == {}
     sue_text = "Sue"
     week_text = "weekdays"
     nation_text = "nation-state"
     sue_awardlink = awardlink_shop(group_id=sue_text)
-    x_bud.add_acctunit(acct_id=sue_text)
-    x_bud._idearoot.set_awardlink(awardlink=sue_awardlink)
+    sue_bud.add_acctunit(acct_id=sue_text)
+    sue_bud._idearoot.set_awardlink(awardlink=sue_awardlink)
     # idea tree has awardlines
-    assert x_bud._idearoot._awardheirs.get(sue_text) is None
+    assert sue_bud._idearoot._awardheirs.get(sue_text) is None
 
     # WHEN
-    x_bud.settle_bud()
+    sue_bud.settle_bud()
 
     # THEN
-    assert x_bud._idearoot._awardheirs.get(sue_text) is not None
-    assert x_bud._idearoot._awardheirs.get(sue_text).group_id == sue_text
-    assert x_bud._idearoot._awardlines != {}
-    root_idea = x_bud.get_idea_obj(road=x_bud._idearoot._label)
-    sue_awardline = x_bud._idearoot._awardlines.get(sue_text)
+    assert sue_bud._idearoot._awardheirs.get(sue_text) is not None
+    assert sue_bud._idearoot._awardheirs.get(sue_text).group_id == sue_text
+    assert sue_bud._idearoot._awardlines != {}
+    root_idea = sue_bud.get_idea_obj(road=sue_bud._idearoot._label)
+    sue_awardline = sue_bud._idearoot._awardlines.get(sue_text)
     print(f"{sue_awardline._fund_give=} {root_idea._fund_ratio=} ")
     print(f"  {sue_awardline._fund_take=} {root_idea._fund_ratio=} ")
     sum_x = 0
-    cat_road = x_bud.make_l1_road("cat have dinner")
-    cat_idea = x_bud.get_idea_obj(cat_road)
-    week_road = x_bud.make_l1_road(week_text)
-    week_idea = x_bud.get_idea_obj(week_road)
+    cat_road = sue_bud.make_l1_road("cat have dinner")
+    cat_idea = sue_bud.get_idea_obj(cat_road)
+    week_road = sue_bud.make_l1_road(week_text)
+    week_idea = sue_bud.get_idea_obj(week_road)
     casa_text = "casa"
-    casa_road = x_bud.make_l1_road(casa_text)
-    casa_idea = x_bud.get_idea_obj(casa_road)
-    nation_road = x_bud.make_l1_road(nation_text)
-    nation_idea = x_bud.get_idea_obj(nation_road)
+    casa_road = sue_bud.make_l1_road(casa_text)
+    casa_idea = sue_bud.get_idea_obj(casa_road)
+    nation_road = sue_bud.make_l1_road(nation_text)
+    nation_idea = sue_bud.get_idea_obj(nation_road)
     sum_x = cat_idea._fund_ratio
     print(f"{cat_idea._fund_ratio=} {sum_x} ")
     sum_x += week_idea._fund_ratio
@@ -322,32 +322,32 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_text, default_fund_pool(), default_fund_pool())
-    assert x_bud._idearoot._awardlines == {x_awardline.group_id: x_awardline}
+    assert sue_bud._idearoot._awardlines == {x_awardline.group_id: x_awardline}
 
 
 def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRootIdeaUnit():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
+    sue_bud.settle_bud()
     sue_text = "Sue"
-    x_bud.add_acctunit(sue_text)
-    casa_road = x_bud.make_l1_road("casa")
-    x_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(group_id=sue_text))
-    assert x_bud._idearoot._awardlines == {}
+    sue_bud.add_acctunit(sue_text)
+    casa_road = sue_bud.make_l1_road("casa")
+    sue_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(group_id=sue_text))
+    assert sue_bud._idearoot._awardlines == {}
 
     # WHEN
-    x_bud.settle_bud()
+    sue_bud.settle_bud()
 
     # THEN
-    assert x_bud._idearoot._awardlines != {}
-    print(f"{x_bud._idearoot._awardlines=}")
+    assert sue_bud._idearoot._awardlines != {}
+    print(f"{sue_bud._idearoot._awardlines=}")
     x_awardline = awardline_shop(
         group_id=sue_text,
         _fund_give=0.230769231 * default_fund_pool(),
         _fund_take=0.230769231 * default_fund_pool(),
     )
-    assert x_bud._idearoot._awardlines == {x_awardline.group_id: x_awardline}
-    casa_ideaunit = x_bud.get_idea_obj(casa_road)
+    assert sue_bud._idearoot._awardlines == {x_awardline.group_id: x_awardline}
+    casa_ideaunit = sue_bud.get_idea_obj(casa_road)
     assert casa_ideaunit._awardlines != {}
     assert casa_ideaunit._awardlines == {x_awardline.group_id: x_awardline}
 
@@ -424,8 +424,8 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_ta
 
 def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupBox_fund_give_fund_take():
     # ESTABLISH
-    prom_text = "prom"
-    x_bud = budunit_shop(prom_text)
+    bob_text = "bob"
+    x_bud = budunit_shop(bob_text)
     swim_text = "swim"
     swim_road = x_bud.make_l1_road(swim_text)
     x_bud.set_l1_idea(ideaunit_shop(swim_text))
@@ -470,8 +470,8 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupBox_fund_give_fund_take(
 
 def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
     # ESTABLISH
-    prom_text = "prom"
-    x_bud = budunit_shop(prom_text)
+    yao_text = "yao"
+    x_bud = budunit_shop(yao_text)
     swim_text = "swim"
     swim_road = x_bud.make_l1_road(swim_text)
     x_bud.set_l1_idea(ideaunit_shop(swim_text))
@@ -517,8 +517,8 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
 
 def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fund_give_fund_take():
     # ESTABLISH
-    prom_text = "prom"
-    x_bud = budunit_shop(prom_text)
+    yao_text = "yao"
+    x_bud = budunit_shop(yao_text)
     swim_text = "swim"
     swim_road = x_bud.make_l1_road(swim_text)
     x_bud.set_l1_idea(ideaunit_shop(swim_text))
@@ -607,12 +607,12 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # THEN
     print(f"{idea_dict.keys()=}")
-    idea_prom = idea_dict.get(sue_bud._real_id)
-    assert len(idea_prom._awardheirs) == 3
+    idea_bob = idea_dict.get(sue_bud._real_id)
+    assert len(idea_bob._awardheirs) == 3
 
-    bheir_yao = idea_prom._awardheirs.get(yao_text)
-    bheir_zia = idea_prom._awardheirs.get(zia_text)
-    bheir_Xio = idea_prom._awardheirs.get(Xio_text)
+    bheir_yao = idea_bob._awardheirs.get(yao_text)
+    bheir_zia = idea_bob._awardheirs.get(zia_text)
+    bheir_Xio = idea_bob._awardheirs.get(Xio_text)
     assert bheir_yao._fund_give == 0.5 * default_fund_pool()
     assert bheir_yao._fund_take == 0.75 * default_fund_pool()
     assert bheir_zia._fund_give == 0.25 * default_fund_pool()
@@ -900,36 +900,36 @@ def test_BudUnit_settle_bud_CorrectlySetsPartGroupedLWAcctUnitBud_fund():
 
 def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
     # ESTABLISH
-    prom_text = "prom"
-    x_bud = budunit_shop(prom_text)
+    bob_text = "bob"
+    bob_bud = budunit_shop(bob_text)
     swim_text = "swim"
-    swim_road = x_bud.make_l1_road(swim_text)
-    x_bud.set_l1_idea(ideaunit_shop(swim_text))
+    swim_road = bob_bud.make_l1_road(swim_text)
+    bob_bud.set_l1_idea(ideaunit_shop(swim_text))
 
     yao_text = "Yao"
     zia_text = "Zia"
     xio_text = "Xio"
-    x_bud.set_acctunit(acctunit_shop(yao_text))
-    x_bud.set_acctunit(acctunit_shop(zia_text))
-    # x_bud.set_acctunit(acctunit_shop(xio_text))
+    bob_bud.set_acctunit(acctunit_shop(yao_text))
+    bob_bud.set_acctunit(acctunit_shop(zia_text))
+    # bob_bud.set_acctunit(acctunit_shop(xio_text))
     yao_awardlink = awardlink_shop(yao_text, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_text, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_text, give_force=10)
-    swim_idea = x_bud.get_idea_obj(swim_road)
+    swim_idea = bob_bud.get_idea_obj(swim_road)
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_group_ids_dict()) == 2
+    assert len(bob_bud.get_acctunit_group_ids_dict()) == 2
 
     # WHEN
-    x_bud.settle_bud()
+    bob_bud.settle_bud()
 
     # THEN
-    xio_groupbox = x_bud.get_groupbox(xio_text)
-    assert len(x_bud.get_acctunit_group_ids_dict()) != len(x_bud._groupboxs)
-    assert not x_bud.acct_exists(xio_text)
-    yao_acctunit = x_bud.get_acct(yao_text)
-    zia_acctunit = x_bud.get_acct(zia_text)
+    xio_groupbox = bob_bud.get_groupbox(xio_text)
+    assert len(bob_bud.get_acctunit_group_ids_dict()) != len(bob_bud._groupboxs)
+    assert not bob_bud.acct_exists(xio_text)
+    yao_acctunit = bob_bud.get_acct(yao_text)
+    zia_acctunit = bob_bud.get_acct(zia_text)
     acctunit_fund_give_sum = yao_acctunit._fund_give + zia_acctunit._fund_give
     acctunit_fund_take_sum = yao_acctunit._fund_take + zia_acctunit._fund_take
     assert acctunit_fund_give_sum == default_fund_pool()
@@ -960,14 +960,14 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
     yao_bud.settle_bud()
 
     # THEN
-    assert (
+    fund_give_sum = (
         sue_acctunit._fund_give + bob_acctunit._fund_give + zia_acctunit._fund_give
-        == 1.0 * default_fund_pool()
     )
-    assert (
+    assert fund_give_sum == 1.0 * default_fund_pool()
+    fund_take_sum = (
         sue_acctunit._fund_take + bob_acctunit._fund_take + zia_acctunit._fund_take
-        == 1.0 * default_fund_pool()
     )
+    assert fund_take_sum == 1.0 * default_fund_pool()
 
 
 def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
@@ -1036,12 +1036,12 @@ class AwardAgendaMetrics:
 
 def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # ESTABLISH
-    x_bud = budunit_v001_with_large_agenda()
-    clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud=x_bud)
+    yao_bud = budunit_v001_with_large_agenda()
+    clear_all_acctunits_groupboxs_fund_agenda_give_take(yao_bud)
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_groupagendametrics = GroupAgendaMetrics()
-    x_groupagendametrics.set_sums(x_bud=x_bud)
+    x_groupagendametrics.set_sums(yao_bud)
     assert x_groupagendametrics.sum_groupbox_give == 0
     assert x_groupagendametrics.sum_groupbox_take == 0
     assert x_groupagendametrics.sum_membership_cred == 0
@@ -1049,17 +1049,17 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_acctagendametrics = AcctAgendaMetrics()
-    x_acctagendametrics.set_sums(x_bud=x_bud)
+    x_acctagendametrics.set_sums(yao_bud)
     assert x_acctagendametrics.sum_agenda_cred == 0
     assert x_acctagendametrics.sum_agenda_debt == 0
     assert x_acctagendametrics.sum_agenda_ratio_cred == 0
     assert x_acctagendametrics.sum_agenda_ratio_debt == 0
 
     # WHEN
-    agenda_dict = x_bud.get_agenda_dict()
-    # for idea_road in x_bud._idea_dict.keys():
+    agenda_dict = yao_bud.get_agenda_dict()
+    # for idea_road in yao_bud._idea_dict.keys():
     #     print(f"{idea_road=}")
-    # for x_acct in x_bud._accts.values():
+    # for x_acct in yao_bud._accts.values():
     #     for x_membership in x_acct._memberships.values():
     #         print(f"{x_membership.group_id=}")
 
@@ -1070,23 +1070,22 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # print(f"{sum_bud_agenda_share=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    assert x_awardagendametrics.agenda_no_bud_i_sum == 0.003747268 * default_fund_pool()
-    assert (
-        x_awardagendametrics.agenda_yes_bud_i_sum == 0.002796504 * default_fund_pool()
-    )
+    predicted_agenda_no_bud_i_sum = int(0.004107582 * default_fund_pool())
+    assert x_awardagendametrics.agenda_no_bud_i_sum == predicted_agenda_no_bud_i_sum
+    predicted_agenda_yes_bud_i_sum = int(0.003065400 * default_fund_pool())
+    assert x_awardagendametrics.agenda_yes_bud_i_sum == predicted_agenda_yes_bud_i_sum
     assert are_equal(
         x_awardagendametrics.agenda_no_bud_i_sum
         + x_awardagendametrics.agenda_yes_bud_i_sum,
         x_awardagendametrics.sum_bud_agenda_share,
     )
-    assert (
-        x_awardagendametrics.sum_bud_agenda_share == 0.006543772 * default_fund_pool()
-    )
+    predicted_sum_bud_agenda_share = 0.007172982 * default_fund_pool()
+    assert x_awardagendametrics.sum_bud_agenda_share == predicted_sum_bud_agenda_share
 
     x_groupagendametrics = GroupAgendaMetrics()
-    x_groupagendametrics.set_sums(x_bud=x_bud)
+    x_groupagendametrics.set_sums(yao_bud)
     assert x_groupagendametrics.membership_count == 81
-    x_sum = 2796504
+    x_sum = 3065400
     print(f"{x_groupagendametrics.sum_groupbox_give=}")
     assert are_equal(x_groupagendametrics.sum_groupbox_give, x_sum)
     assert are_equal(x_groupagendametrics.sum_groupbox_take, x_sum)
@@ -1097,10 +1096,10 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
         x_groupagendametrics.sum_groupbox_give,
     )
 
-    assert all_acctunits_have_legitimate_values(x_bud)
+    assert all_acctunits_have_legitimate_values(yao_bud)
 
     x_acctagendametrics = AcctAgendaMetrics()
-    x_acctagendametrics.set_sums(x_bud=x_bud)
+    x_acctagendametrics.set_sums(yao_bud)
     assert are_equal(
         x_acctagendametrics.sum_agenda_cred,
         x_awardagendametrics.sum_bud_agenda_share,
@@ -1186,24 +1185,24 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
 
 def test_BudUnit_settle_bud_CreatesGroupBoxWith_budunit_v001():
     # ESTABLISH / WHEN
-    x_bud = budunit_v001()
-    x_bud.settle_bud()
+    yao_bud = budunit_v001()
+    yao_bud.settle_bud()
 
     # THEN
-    assert x_bud._groupboxs is not None
-    assert len(x_bud._groupboxs) == 34
+    assert yao_bud._groupboxs is not None
+    assert len(yao_bud._groupboxs) == 34
     everyone_accts_len = None
-    everyone_group = x_bud.get_groupbox(";Everyone")
+    everyone_group = yao_bud.get_groupbox(";Everyone")
     everyone_accts_len = len(everyone_group._memberships)
     assert everyone_accts_len == 22
 
     # WHEN
-    x_bud.settle_bud()
-    idea_dict = x_bud._idea_dict
+    yao_bud.settle_bud()
+    idea_dict = yao_bud._idea_dict
 
     # THEN
     # print(f"{len(idea_dict)=}")
-    db_idea = idea_dict.get(x_bud.make_l1_road("D&B"))
+    db_idea = idea_dict.get(yao_bud.make_l1_road("D&B"))
     assert len(db_idea._awardlinks) == 3
     # for idea_key in idea_dict:
     #     print(f"{idea_key=}")

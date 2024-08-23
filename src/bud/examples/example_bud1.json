@@ -4098,39 +4098,38 @@
                 "_close": 5,
                 "_kids": {
                     "1st week": {
-                        "_begin": 1,
-                        "_close": 2,
+                        "_gogo_want": 1,
                         "_label": "1st week",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 2
                     },
                     "2nd week": {
-                        "_begin": 2,
-                        "_close": 3,
+                        "_gogo_want": 2,
                         "_label": "2nd week",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 3
                     },
                     "3rd week": {
-                        "_begin": 3,
-                        "_close": 4,
+                        "_gogo_want": 3,
                         "_label": "3rd week",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 4
                     },
                     "4th week": {
-                        "_begin": 4,
-                        "_close": 5,
+                        "_gogo_want": 4,
                         "_label": "4th week",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 5
                     },
                     "5th week": {
-                        "_begin": 5,
-                        "_close": 6,
+                        "_gogo_want": 5,
                         "_label": "5th week",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 6
                     }
                 },
                 "_label": "month_week",
-                "_mass": 40,
-                "_range_source_road": "music;ced_week"
+                "_mass": 40
             },
             "Moods": {
                 "_kids": {
@@ -4270,13 +4269,6 @@
                 "_label": "No Movie playing",
                 "_mass": 1,
                 "_uid": 272
-            },
-            "numeric_road_test": {
-                "_begin": 1,
-                "_close": 5,
-                "_label": "numeric_road_test",
-                "_mass": 40,
-                "_numeric_road": "music;month_week"
             },
             "Seasons": {
                 "_kids": {
@@ -4542,76 +4534,76 @@
                 "_close": 13,
                 "_kids": {
                     "April": {
-                        "_begin": 4,
-                        "_close": 5,
+                        "_gogo_want": 4,
                         "_label": "April",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 5
                     },
                     "August": {
-                        "_begin": 8,
-                        "_close": 9,
+                        "_gogo_want": 8,
                         "_label": "August",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 9
                     },
                     "December": {
-                        "_begin": 12,
-                        "_close": 13,
+                        "_gogo_want": 12,
                         "_label": "December",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 13
                     },
                     "February": {
-                        "_begin": 2,
-                        "_close": 3,
+                        "_gogo_want": 2,
                         "_label": "February",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 3
                     },
                     "January": {
-                        "_begin": 1,
-                        "_close": 2,
+                        "_gogo_want": 1,
                         "_label": "January",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 2
                     },
                     "July": {
-                        "_begin": 7,
-                        "_close": 8,
+                        "_gogo_want": 7,
                         "_label": "July",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 8
                     },
                     "June": {
-                        "_begin": 6,
-                        "_close": 7,
+                        "_gogo_want": 6,
                         "_label": "June",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 7
                     },
                     "March": {
-                        "_begin": 3,
-                        "_close": 4,
+                        "_gogo_want": 3,
                         "_label": "March",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 4
                     },
                     "May": {
-                        "_begin": 5,
-                        "_close": 6,
+                        "_gogo_want": 5,
                         "_label": "May",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 6
                     },
                     "November": {
-                        "_begin": 11,
-                        "_close": 12,
+                        "_gogo_want": 11,
                         "_label": "November",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 12
                     },
                     "October": {
-                        "_begin": 10,
-                        "_close": 11,
+                        "_gogo_want": 10,
                         "_label": "October",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 11
                     },
                     "September": {
-                        "_begin": 9,
-                        "_close": 10,
+                        "_gogo_want": 9,
                         "_label": "September",
-                        "_mass": 40
+                        "_mass": 40,
+                        "_stop_want": 10
                     }
                 },
                 "_label": "year_month",

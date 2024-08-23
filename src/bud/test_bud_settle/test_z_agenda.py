@@ -2,11 +2,8 @@ from datetime import datetime
 from src._road.road import RoadUnit
 from src.bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.bud.idea import IdeaUnit, ideaunit_shop
-from src.bud.reason_idea import reasonunit_shop
-from src.bud.group import awardlink_shop
 from src.bud.reason_doer import doerunit_shop
 from src.bud.examples.example_buds import (
-    get_budunit_1Task_1CE0MinutesReason_1Fact,
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_with7amCleanTableReason,
@@ -15,7 +12,6 @@ from src.bud.examples.example_buds import (
     budunit_v001_with_large_agenda,
     budunit_v002,
 )
-from src.bud.examples.example_time import get_budunit_sue_TimeExample
 
 
 def get_tasks_count(agenda_dict: dict[RoadUnit, IdeaUnit]) -> int:
@@ -24,17 +20,17 @@ def get_tasks_count(agenda_dict: dict[RoadUnit, IdeaUnit]) -> int:
 
 def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
     # ESTABLISH
-    yao_bud = get_budunit_with_4_levels()
+    sue_bud = get_budunit_with_4_levels()
 
     # WHEN
-    agenda_dict = yao_bud.get_agenda_dict()
+    agenda_dict = sue_bud.get_agenda_dict()
 
     # THEN
     assert agenda_dict
     assert len(agenda_dict) == 2
     print(f"{agenda_dict.keys()=}")
-    assert yao_bud.make_l1_road("casa") in agenda_dict.keys()
-    assert yao_bud.make_l1_road("cat have dinner") in agenda_dict.keys()
+    assert sue_bud.make_l1_road("casa") in agenda_dict.keys()
+    assert sue_bud.make_l1_road("cat have dinner") in agenda_dict.keys()
 
 
 def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
@@ -51,10 +47,6 @@ def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
 
     # THEN
     assert agenda_dict
-    # for agenda_item in agenda_dict:
-    #     yr_elucidation(idea=agenda_item)
-    # yr_elucidation(idea=agenda_dict[0])
-
     assert len(agenda_dict) == 1
     print(f"{agenda_dict=}")
     assert x_bud.make_l1_road("cat have dinner") in agenda_dict.keys()
@@ -127,59 +119,20 @@ def test_BudUnit_get_agenda_dict_With7amItemExample():
     assert clean_item._label == clean_text
 
 
-def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
-    # ESTABLISH
-    sue_text = "Sue"
-    sue_bud = get_budunit_sue_TimeExample()
-    clean_text = "clean"
-    clean_road = sue_bud.make_l1_road(clean_text)
-    sue_bud.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    time_road = sue_bud.make_l1_road("time")
-    jajatime_road = sue_bud.make_road(time_road, "jajatime")
-    jajaday = sue_bud.make_road(jajatime_road, "day")
-
-    sue_bud.edit_idea_attr(
-        road=clean_road,
-        reason_base=jajatime_road,
-        reason_premise=jajaday,
-        begin=480,
-        close=480,
-    )
-
-    # WHEN
-    open_x = 1063971180
-    nigh_x1 = 2063971523
-    sue_bud.set_fact(base=jajatime_road, pick=jajaday, open=open_x, nigh=nigh_x1)
-
-    # THEN
-    agenda_dict = sue_bud.get_agenda_dict()
-    print(f"{agenda_dict.keys()=}")
-    assert len(agenda_dict) == 1
-    assert clean_road in agenda_dict.keys()
-
-    # WHEN
-    nigh_x2 = 1063971923
-    sue_bud.set_fact(base=jajatime_road, pick=jajaday, open=open_x, nigh=nigh_x2)
-
-    # THEN
-    agenda_dict = sue_bud.get_agenda_dict()
-    assert len(agenda_dict) == 0
-
-
 def test_budunit_v001_AgendaExists():
     # ESTABLISH
-    x_bud = budunit_v001()
+    yao_bud = budunit_v001()
     min_text = "day_minute"
-    min_road = x_bud.make_l1_road(min_text)
-    x_bud.set_fact(base=min_road, pick=min_road, open=0, nigh=1399)
-    assert x_bud
-    # for idea_kid in x_bud._idearoot._kids.values():
+    min_road = yao_bud.make_l1_road(min_text)
+    yao_bud.set_fact(base=min_road, pick=min_road, open=0, nigh=1399)
+    assert yao_bud
+    # for idea_kid in yao_bud._idearoot._kids.values():
     #     # print(idea_kid._label)
     #     assert str(type(idea_kid)) != "<class 'str'>"
     #     assert idea_kid.pledge is not None
 
     # WHEN
-    agenda_dict = x_bud.get_agenda_dict()
+    agenda_dict = yao_bud.get_agenda_dict()
 
     # THEN
     assert len(agenda_dict) > 0
@@ -192,71 +145,71 @@ def test_budunit_v001_AgendaExists():
 
 def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     # ESTABLISH
-    x_bud = budunit_v001()
+    yao_bud = budunit_v001()
 
     day_min_text = "day_minute"
-    day_min_road = x_bud.make_l1_road(day_min_text)
-    x_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
+    day_min_road = yao_bud.make_l1_road(day_min_text)
+    yao_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
     month_week_text = "month_week"
-    month_week_road = x_bud.make_l1_road(month_week_text)
+    month_week_road = yao_bud.make_l1_road(month_week_text)
     nations_text = "Nation-States"
-    nations_road = x_bud.make_l1_road(nations_text)
+    nations_road = yao_bud.make_l1_road(nations_text)
     mood_text = "Moods"
-    mood_road = x_bud.make_l1_road(mood_text)
+    mood_road = yao_bud.make_l1_road(mood_text)
     aaron_text = "Aaron Donald things effected by him"
-    aaron_road = x_bud.make_l1_road(aaron_text)
+    aaron_road = yao_bud.make_l1_road(aaron_text)
     # internet_text = "Internet"
-    # internet_road = x_bud.make_l1_road(internet_text)
+    # internet_road = yao_bud.make_l1_road(internet_text)
     year_month_text = "year_month"
-    year_month_road = x_bud.make_l1_road(year_month_text)
-    x_bud.set_fact(base=month_week_road, pick=month_week_road)
-    x_bud.set_fact(base=nations_road, pick=nations_road)
-    x_bud.set_fact(base=mood_road, pick=mood_road)
-    x_bud.set_fact(base=aaron_road, pick=aaron_road)
-    # x_bud.set_fact(base=internet_road, pick=internet_road)
-    x_bud.set_fact(base=year_month_road, pick=year_month_road)
+    year_month_road = yao_bud.make_l1_road(year_month_text)
+    yao_bud.set_fact(base=month_week_road, pick=month_week_road)
+    yao_bud.set_fact(base=nations_road, pick=nations_road)
+    yao_bud.set_fact(base=mood_road, pick=mood_road)
+    yao_bud.set_fact(base=aaron_road, pick=aaron_road)
+    # yao_bud.set_fact(base=internet_road, pick=internet_road)
+    yao_bud.set_fact(base=year_month_road, pick=year_month_road)
     # season_text = "Seasons"
-    # season_road = x_bud.make_l1_road(season_text)
-    # x_bud.set_fact(base=season_road, pick=season_road)
+    # season_road = yao_bud.make_l1_road(season_text)
+    # yao_bud.set_fact(base=season_road, pick=season_road)
     ced_week_text = "ced_week"
-    ced_week_road = x_bud.make_l1_road(ced_week_text)
-    x_bud.set_fact(base=ced_week_road, pick=ced_week_road)
+    ced_week_road = yao_bud.make_l1_road(ced_week_text)
+    yao_bud.set_fact(base=ced_week_road, pick=ced_week_road)
     # water_text = "WaterExistence"
-    # water_road = x_bud.make_l1_road(water_text)
-    # x_bud.set_fact(base=water_road, pick=water_road)
+    # water_road = yao_bud.make_l1_road(water_text)
+    # yao_bud.set_fact(base=water_road, pick=water_road)
     # movie_text = "No Movie playing"
-    # movie_road = x_bud.make_l1_road(movie_text)
-    # x_bud.set_fact(base=movie_road, pick=movie_text)
+    # movie_road = yao_bud.make_l1_road(movie_text)
+    # yao_bud.set_fact(base=movie_road, pick=movie_text)
 
     # WHEN
-    idea_pledge_list = x_bud.get_agenda_dict()
+    idea_pledge_list = yao_bud.get_agenda_dict()
 
     # THEN
     assert len(idea_pledge_list) == 27
 
-    week1_road = x_bud.make_road(month_week_road, "1st week")
-    x_bud.set_fact(month_week_road, week1_road)
-    idea_pledge_list = x_bud.get_agenda_dict()
+    week1_road = yao_bud.make_road(month_week_road, "1st week")
+    yao_bud.set_fact(month_week_road, week1_road)
+    idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 27
 
     weekday_text = "weekdays"
-    weekday_road = x_bud.make_l1_road(weekday_text)
+    weekday_road = yao_bud.make_l1_road(weekday_text)
     monday_text = "Monday"
-    monday_road = x_bud.make_road(weekday_road, monday_text)
+    monday_road = yao_bud.make_road(weekday_road, monday_text)
 
-    x_bud.set_fact(base=weekday_road, pick=monday_road)
-    idea_pledge_list = x_bud.get_agenda_dict()
+    yao_bud.set_fact(base=weekday_road, pick=monday_road)
+    idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 39
 
-    x_bud.set_fact(base=weekday_road, pick=weekday_road)
-    idea_pledge_list = x_bud.get_agenda_dict()
+    yao_bud.set_fact(base=weekday_road, pick=weekday_road)
+    idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 53
 
-    # x_bud.set_fact(base=nations_road, pick=nations_road)
-    # idea_pledge_list = x_bud.get_agenda_dict()
+    # yao_bud.set_fact(base=nations_road, pick=nations_road)
+    # idea_pledge_list = yao_bud.get_agenda_dict()
     # assert len(idea_pledge_list) == 53
 
-    # for base in x_bud.get_missing_fact_bases():
+    # for base in yao_bud.get_missing_fact_bases():
     #     print(f"{base=}")
 
     # for agenda_item in idea_pledge_list:
@@ -271,14 +224,14 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
 
 def test_BudUnit_get_agenda_dict_BudUnitCanFilterOnBase_budunit_v001_with_large_agenda():
     # ESTABLISH
-    x_bud = budunit_v001_with_large_agenda()
+    yao_bud = budunit_v001_with_large_agenda()
     week_text = "weekdays"
-    week_road = x_bud.make_l1_road(week_text)
-    print(f"{type(x_bud)=}")
-    # for base in x_bud.get_missing_fact_bases():
+    week_road = yao_bud.make_l1_road(week_text)
+    print(f"{type(yao_bud)=}")
+    # for base in yao_bud.get_missing_fact_bases():
     #     print(f"{base=}")
 
-    # for agenda_item in x_bud.get_agenda_dict():
+    # for agenda_item in yao_bud.get_agenda_dict():
     #     print(
     #         f"{agenda_item._parent_road=} {agenda_item._label} {len(agenda_item._reasonunits)=}"
     #     )
@@ -287,10 +240,10 @@ def test_BudUnit_get_agenda_dict_BudUnitCanFilterOnBase_budunit_v001_with_large_
     #             print(f"         {weekdays}")
 
     # this list went from 68 to 63 when the method of identifying activees was improved.
-    assert len(x_bud.get_agenda_dict()) == 63
+    assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN
-    pledge_list = x_bud.get_agenda_dict(necessary_base=week_road)
+    pledge_list = yao_bud.get_agenda_dict(necessary_base=week_road)
 
     # THEN
     assert len(pledge_list) != 63
@@ -327,7 +280,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     assert len(zia_bud.get_idea_dict()) == 4
     assert len(zia_bud.get_agenda_dict()) == 1
     print(f"{zia_bud.get_agenda_dict().keys()=}")
-    assert zia_bud.get_agenda_dict().get(run_road)._task == True
+    assert zia_bud.get_agenda_dict().get(run_road)._task is True
 
     # WHEN
     zia_bud.set_agenda_task_complete(task_road=run_road, base=day_road)
@@ -384,25 +337,25 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
 
 def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     # ESTABLISH
-    x_bud_json = budunit_v001().get_json()
+    yao_bud_json = budunit_v001().get_json()
 
     # WHEN
-    x_bud = budunit_get_from_json(x_bud_json=x_bud_json)
+    yao_bud = budunit_get_from_json(x_bud_json=yao_bud_json)
 
     # THEN
-    assert len(x_bud.get_idea_dict()) == 253
-    print(f"{len(x_bud.get_idea_dict())=}")
+    assert len(yao_bud.get_idea_dict()) == 252
+    print(f"{len(yao_bud.get_idea_dict())=}")
     casa_text = "casa"
-    casa_road = x_bud.make_l1_road(casa_text)
+    casa_road = yao_bud.make_l1_road(casa_text)
     body_text = "exercise"
-    body_road = x_bud.make_road(casa_road, body_text)
+    body_road = yao_bud.make_road(casa_road, body_text)
     veg_text = "cook veggies every morning"
-    veg_road = x_bud.make_road(body_road, veg_text)
-    veg_idea = x_bud.get_idea_obj(veg_road)
+    veg_road = yao_bud.make_road(body_road, veg_text)
+    veg_idea = yao_bud.get_idea_obj(veg_road)
     assert not veg_idea._active
     assert veg_idea.pledge
 
-    # idea_list = x_bud.get_idea_dict()
+    # idea_list = yao_bud.get_idea_dict()
     # pledge_true_count = 0
     # for idea in idea_list:
     #     if str(type(idea)).find(".idea.IdeaUnit'>") > 0:
@@ -420,84 +373,11 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
 
     # WHEN
     day_min_text = "day_minute"
-    day_min_road = x_bud.make_l1_road(day_min_text)
-    x_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
+    day_min_road = yao_bud.make_l1_road(day_min_text)
+    yao_bud.set_fact(base=day_min_road, pick=day_min_road, open=0, nigh=1399)
 
     # THEN
-    assert len(x_bud.get_agenda_dict()) > 0
-
-
-def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
-    # WHEN "I am cleaning the cookery since I'm in the flat and it's 8am and it's dirty and it's for my family"
-
-    # ESTABLISH
-    sue_bud = get_budunit_sue_TimeExample()
-    assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
-    assert len(sue_bud._idearoot._kids) == 1
-
-    clean_things_text = "cleaning things"
-    clean_things_road = sue_bud.make_l1_road(clean_things_text)
-    clean_cookery_text = "clean cookery"
-    clean_cookery_road = sue_bud.make_road(clean_things_road, clean_cookery_text)
-    clean_cookery_idea = ideaunit_shop(
-        clean_cookery_text, _parent_road=clean_things_road
-    )
-    print(f"{clean_cookery_idea.get_road()=}")
-    house_text = "house"
-    house_road = sue_bud.make_l1_road(house_text)
-    cookery_room_text = "cookery room"
-    cookery_room_road = sue_bud.make_road(house_road, cookery_room_text)
-    cookery_dirty_text = "dirty"
-    cookery_dirty_road = sue_bud.make_road(cookery_room_road, cookery_dirty_text)
-
-    # create gregorian timeline
-    time_road = sue_bud.make_l1_road("time")
-    jajatime_road = sue_bud.make_road(time_road, "jajatime")
-    daytime_road = sue_bud.make_road(jajatime_road, "day")
-    open_8am = 480
-    nigh_8am = 480
-
-    dirty_cookery_reason = reasonunit_shop(cookery_room_road)
-    dirty_cookery_reason.set_premise(premise=cookery_dirty_road)
-    clean_cookery_idea.set_reasonunit(reason=dirty_cookery_reason)
-
-    daytime_reason = reasonunit_shop(daytime_road)
-    daytime_reason.set_premise(premise=daytime_road, open=open_8am, nigh=nigh_8am)
-    clean_cookery_idea.set_reasonunit(reason=daytime_reason)
-
-    family_text = ",family"
-    awardlink_z = awardlink_shop(group_id=family_text)
-    clean_cookery_idea.set_awardlink(awardlink_z)
-
-    assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
-    assert len(sue_bud._idearoot._kids) == 1
-    assert sue_bud.get_idea_obj(daytime_road)._begin == 0
-    assert sue_bud.get_idea_obj(daytime_road)._close == 1440
-    print(f"{clean_cookery_idea.get_road()=}")
-
-    # ESTABLISH
-    sue_bud.set_dominate_pledge_idea(idea_kid=clean_cookery_idea)
-
-    # THEN
-    # for idea_kid in sue_bud._idearoot._kids.keys():
-    #     print(f"  {idea_kid=}")
-
-    print(f"{clean_cookery_idea.get_road()=}")
-    assert sue_bud.get_idea_obj(clean_cookery_road) is not None
-    assert sue_bud.get_idea_obj(clean_cookery_road)._label == clean_cookery_text
-    assert sue_bud.get_idea_obj(clean_cookery_road).pledge
-    assert len(sue_bud.get_idea_obj(clean_cookery_road)._reasonunits) == 2
-    assert sue_bud.get_idea_obj(clean_things_road) is not None
-    assert sue_bud.get_idea_obj(cookery_room_road) is not None
-    assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
-    assert sue_bud.get_idea_obj(daytime_road)._begin == 0
-    assert sue_bud.get_idea_obj(daytime_road)._close == 1440
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
-    assert sue_bud.get_acctunit_group_ids_dict().get(family_text) is None
-
-    assert len(sue_bud._idearoot._kids) == 3
+    assert len(yao_bud.get_agenda_dict()) > 0
 
 
 def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
@@ -506,10 +386,10 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
 
     assert len(yao_bud.get_agenda_dict()) == 44
     time_road = yao_bud.make_l1_road("time")
-    jajatime_road = yao_bud.make_road(time_road, "jajatime")
+    gregtime_road = yao_bud.make_road(time_road, "gregtime")
 
     # WHEN
-    yao_bud.set_fact(jajatime_road, jajatime_road, open=1063998720, nigh=1064130373)
+    yao_bud.set_fact(gregtime_road, gregtime_road, open=1063998720, nigh=1064130373)
     pledge_idea_list = yao_bud.get_agenda_dict()
 
     # THEN
@@ -525,19 +405,19 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     #         night_idea = idea_x
     #         print(f"{idea_x.get_road()=}")
 
-    print(f"\nIdea = '{night_text}' and reason '{jajatime_road}'")
-    factheir_jajatime = night_idea._factheirs.get(jajatime_road)
-    print(f"\n{factheir_jajatime=}")
+    print(f"\nIdea = '{night_text}' and reason '{gregtime_road}'")
+    factheir_gregtime = night_idea._factheirs.get(gregtime_road)
+    print(f"\n{factheir_gregtime=}")
 
     # for reasonheir in agenda_item._reasonheirs.values():
     #     print(f"{reasonheir.base=} {reasonheir._status=} {reasonheir._task=}")
-    reasonheir_jajatime = night_idea._reasonheirs.get(jajatime_road)
-    reasonheir_text = f"\nreasonheir_jajatime= '{reasonheir_jajatime.base}', status={reasonheir_jajatime._status}, task={reasonheir_jajatime._task}"
+    reasonheir_gregtime = night_idea._reasonheirs.get(gregtime_road)
+    reasonheir_text = f"\nreasonheir_gregtime= '{reasonheir_gregtime.base}', status={reasonheir_gregtime._status}, task={reasonheir_gregtime._task}"
     print(reasonheir_text)
 
-    premiseunit = reasonheir_jajatime.premises.get(jajatime_road)
+    premiseunit = reasonheir_gregtime.premises.get(gregtime_road)
     print(f"----\n {premiseunit=}")
-    print(f" {premiseunit._get_task_status(factheir=factheir_jajatime)=}")
+    print(f" {premiseunit._get_task_status(factheir=factheir_gregtime)=}")
     print(f" {premiseunit._status=} , {premiseunit._is_range()=} premiseunit fails")
     print(
         f" {premiseunit._status=} , {premiseunit._is_segregate()=} premiseunit passes"
@@ -546,8 +426,8 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     #     premise_open=premiseunit.open,
     #     premise_nigh=premiseunit.nigh,
     #     premise_divisor=premiseunit.divisor,
-    #     fact_open_full=factheir_jajatime.open,
-    #     fact_nigh_full=factheir_jajatime.nigh,
+    #     fact_open_full=factheir_gregtime.open,
+    #     fact_nigh_full=factheir_gregtime.nigh,
     # )
     # print(
     #     f"----\n  {segr_obj.premise_open=}  {segr_obj.premise_nigh=}  {segr_obj.premise_divisor=}"
@@ -628,78 +508,6 @@ def test_BudUnit_get_agenda_dict_IsSetByDoerUnit_2AcctGroup():
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1
-
-
-def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/jaar/issues/69
-    # ESTABLISH
-    sue_bud = get_budunit_sue_TimeExample()
-
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    laundry_text = "do_laundry"
-    laundry_road = sue_bud.make_road(casa_road, laundry_text)
-    sue_bud.set_l1_idea(ideaunit_shop(casa_text))
-    sue_bud.set_idea(ideaunit_shop(laundry_text, pledge=True), casa_road)
-    time_road = sue_bud.make_l1_road("time")
-    jajatime_road = sue_bud.make_road(time_road, "jajatime")
-    sue_bud.edit_idea_attr(
-        road=laundry_road,
-        reason_base=jajatime_road,
-        reason_premise=jajatime_road,
-        reason_premise_open=3420.0,
-        reason_premise_nigh=3420.0,
-        reason_premise_divisor=10080.0,
-    )
-    print("set first fact")
-    sue_bud.set_fact(jajatime_road, jajatime_road, 1064131200, nigh=1064135133)
-    print("get 1st agenda dictionary")
-    sue_agenda_dict = sue_bud.get_agenda_dict()
-    print(f"{sue_agenda_dict.keys()=}")
-    assert sue_agenda_dict == {}
-
-    laundry_idea = sue_bud.get_idea_obj(laundry_road)
-    laundry_reasonheir = laundry_idea.get_reasonheir(jajatime_road)
-    laundry_premise = laundry_reasonheir.get_premise(jajatime_road)
-    laundry_factheir = laundry_idea._factheirs.get(jajatime_road)
-    # print(
-    #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.open % 10080=}"
-    # )
-    # print(
-    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.nigh % 10080=}"
-    # )
-    # print(f"{laundry_reasonheir.base=} {laundry_premise=}")
-    # for x_ideaunit in sue_bud._idea_dict.values():
-    #     if x_ideaunit._label in [laundry_text]:
-    #         print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")
-    #         print(f"{x_ideaunit._kids.keys()=}")
-
-    # WHEN
-    print("set 2nd fact")
-    sue_bud.set_fact(jajatime_road, jajatime_road, 1064131200, nigh=1064136133)
-    print("get 2nd agenda dictionary")
-    sue_agenda_dict = sue_bud.get_agenda_dict()
-    print(f"{sue_agenda_dict.keys()=}")
-
-    laundry_idea = sue_bud.get_idea_obj(laundry_road)
-    laundry_reasonheir = laundry_idea.get_reasonheir(jajatime_road)
-    laundry_premise = laundry_reasonheir.get_premise(jajatime_road)
-    laundry_factheir = laundry_idea._factheirs.get(jajatime_road)
-    # print(
-    #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.open % 10080=}"
-    # )
-    # print(
-    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.nigh % 10080=}"
-    # )
-    # for x_ideaunit in sue_bud._idea_dict.values():
-    #     if x_ideaunit._label in [laundry_text]:
-    #         print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")
-    #         print(f"{x_ideaunit._kids.keys()=}")
-    #         jaja_factheir = x_ideaunit._factheirs.get(jajatime_road)
-    #         print(f"{jaja_factheir.open % 10080=}")
-    #         print(f"{jaja_factheir.nigh % 10080=}")
-
-    # THEN
-    assert sue_agenda_dict == {}
 
 
 def test_BudUnit_get_all_pledges_ReturnsCorrectObj():

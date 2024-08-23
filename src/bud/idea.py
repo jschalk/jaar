@@ -1,15 +1,18 @@
 from src._instrument.python import (
     get_empty_dict_if_none,
     get_0_if_None,
+    get_1_if_None,
     get_False_if_None,
     get_positive_int,
 )
 from src._road.finance import FundCoin, FundNum, allot_scale, default_fund_coin_if_none
+from src._road.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src._road.road import (
     RoadUnit,
     RoadNode,
     is_sub_road,
     get_default_real_id_roadnode as root_label,
+    all_roadunits_between,
     create_road as road_create_road,
     default_road_delimiter_if_none,
     replace_road_delimiter,
@@ -66,6 +69,14 @@ class IdeaGetDescendantsException(Exception):
     pass
 
 
+class Idea_root_LabelNotEmptyException(Exception):
+    pass
+
+
+class ranged_fact_idea_Exception(Exception):
+    pass
+
+
 @dataclass
 class IdeaAttrFilter:
     mass: int = None
@@ -86,9 +97,9 @@ class IdeaAttrFilter:
     addin: float = None
     numor: float = None
     denom: float = None
-    reest: bool = None
-    numeric_road: RoadUnit = None
-    range_source_road: float = None
+    morph: bool = None
+    range_push: RoadUnit = None
+    del_range_push: RoadUnit = None
     pledge: bool = None
     factunit: FactUnit = None
     descendant_pledge_count: int = None
@@ -108,7 +119,7 @@ class IdeaAttrFilter:
         premise_nigh,
         # premise_numor,
         premise_denom,
-        # premise_reest,
+        # premise_morph,
     ):
         if self.reason_premise is not None:
             if self.reason_premise_open is None:
@@ -119,35 +130,8 @@ class IdeaAttrFilter:
             #     numor_x = premise_numor
             if self.reason_premise_divisor is None:
                 self.reason_premise_divisor = premise_denom
-            # if self.reason_premise_reest is None:
-            #     self.reason_premise_reest = premise_reest
-
-    def has_numeric_attrs(self):
-        return (
-            self.begin is not None
-            or self.close is not None
-            or self.numor is not None
-            or self.numeric_road is not None
-            or self.addin is not None
-        )
-
-    def has_ratio_attrs(self):
-        return (
-            self.denom is not None
-            or self.numor is not None
-            or self.reest
-            or self.addin is not None
-        )
-
-    def set_ratio_attr_defaults_if_none(self):
-        if self.addin is None:
-            self.addin = 0
-        if self.denom is None:
-            self.denom = 1
-        if self.numor is None:
-            self.numor = 1
-        if self.reest is None:
-            self.reest = False
+            # if self.reason_premise_morph is None:
+            #     self.reason_premise_morph = premise_morph
 
     def has_reason_premise(self):
         return self.reason_premise is not None
@@ -172,9 +156,9 @@ def ideaattrfilter_shop(
     addin: float = None,
     numor: float = None,
     denom: float = None,
-    reest: bool = None,
-    numeric_road: RoadUnit = None,
-    range_source_road: float = None,
+    morph: bool = None,
+    range_push: RoadUnit = None,
+    del_range_push: RoadUnit = None,
     pledge: bool = None,
     factunit: FactUnit = None,
     descendant_pledge_count: int = None,
@@ -185,7 +169,7 @@ def ideaattrfilter_shop(
     is_expanded: bool = None,
     problem_bool: bool = None,
 ) -> IdeaAttrFilter:
-    x_ideaattrfilter = IdeaAttrFilter(
+    return IdeaAttrFilter(
         mass=mass,
         uid=uid,
         reason=reason,
@@ -204,9 +188,9 @@ def ideaattrfilter_shop(
         addin=addin,
         numor=numor,
         denom=denom,
-        reest=reest,
-        numeric_road=numeric_road,
-        range_source_road=range_source_road,
+        morph=morph,
+        range_push=range_push,
+        del_range_push=del_range_push,
         pledge=pledge,
         factunit=factunit,
         descendant_pledge_count=descendant_pledge_count,
@@ -217,9 +201,6 @@ def ideaattrfilter_shop(
         is_expanded=is_expanded,
         problem_bool=problem_bool,
     )
-    if x_ideaattrfilter.has_ratio_attrs():
-        x_ideaattrfilter.set_ratio_attr_defaults_if_none()
-    return x_ideaattrfilter
 
 
 @dataclass
@@ -246,13 +227,17 @@ class IdeaUnit:
     _addin: float = None
     _denom: int = None
     _numor: int = None
-    _reest: bool = None
-    _range_source_road: RoadUnit = None
-    _numeric_road: RoadUnit = None
+    _morph: bool = None
+    _gogo_want: bool = None
+    _stop_want: bool = None
+    _range_pushs: set[RoadUnit] = None
     pledge: bool = None
     _originunit: OriginUnit = None
     _problem_bool: bool = None
     # Calculated fields
+    _range_evaluated: bool = None
+    _gogo_calc: float = None
+    _stop_calc: float = None
     _level: int = None
     _fund_ratio: float = None
     _fund_coin: FundCoin = None
@@ -274,15 +259,12 @@ class IdeaUnit:
         return self.pledge and self._active and base_reasonunit_exists
 
     def base_reasonunit_exists(self, necessary_base: RoadUnit = None) -> bool:
-        return necessary_base is None or any(
-            reason.base == necessary_base for reason in self._reasonunits.values()
-        )
+        x_reasons = self._reasonunits.values()
+        x_base = necessary_base
+        return x_base is None or any(reason.base == x_base for reason in x_reasons)
 
     def record_active_hx(
-        self,
-        tree_traverse_count: int,
-        prev_active: bool,
-        now_active: bool,
+        self, tree_traverse_count: int, prev_active: bool, now_active: bool
     ):
         if tree_traverse_count == 0:
             self._active_hx = {0: now_active}
@@ -290,13 +272,26 @@ class IdeaUnit:
             self._active_hx[tree_traverse_count] = now_active
 
     def set_factheirs(self, facts: dict[RoadUnit, FactCore]):
-        facts = get_empty_dict_if_none(x_dict=facts)
+        facts_dict = get_empty_dict_if_none(facts)
         self._factheirs = {}
-        for h in facts.values():
-            x_fact = factheir_shop(base=h.base, pick=h.pick, open=h.open, nigh=h.nigh)
-            self.delete_factunit_if_past(factheir=x_fact)
-            x_fact = self.apply_factunit_transformations(factheir=x_fact)
-            self._factheirs[x_fact.base] = x_fact
+        for x_factcore in facts_dict.values():
+            self._set_factheir(x_factcore)
+
+    def _set_factheir(self, x_fact: FactCore):
+        if (
+            x_fact.base == self.get_road()
+            and self._gogo_calc is not None
+            and self._stop_calc is not None
+            and self._begin is None
+            and self._close is None
+        ):
+            raise ranged_fact_idea_Exception(
+                f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact idea must have _begin, _close attributes"
+            )
+        x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
+        self.delete_factunit_if_past(x_factheir)
+        x_factheir = self.apply_factunit_transformations(x_factheir)
+        self._factheirs[x_factheir.base] = x_factheir
 
     def apply_factunit_transformations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self._factunits.values():
@@ -339,21 +334,6 @@ class IdeaUnit:
     def del_factunit(self, base: RoadUnit):
         self._factunits.pop(base)
 
-    def _apply_any_range_source_road_connections(
-        self,
-        lemmas_dict: dict[RoadUnit, FactUnit],
-        missing_facts: list[FactUnit],
-    ):
-        for active_fact in self._factunits.values():
-            for lemma_fact in lemmas_dict.values():
-                if lemma_fact.base == active_fact.base:
-                    self.set_factunit(lemma_fact)
-
-        for missing_fact in missing_facts:
-            for lemma_fact in lemmas_dict.values():
-                if lemma_fact.base == missing_fact:
-                    self.set_factunit(lemma_fact)
-
     def set_fund_attr(
         self,
         x_fund_onset: FundNum,
@@ -371,16 +351,18 @@ class IdeaUnit:
         else:
             return self._fund_cease - self._fund_onset
 
-    def get_kids_in_range(self, begin: float, close: float) -> list:
-        return [
-            x_idea
-            for x_idea in self._kids.values()
-            if (
-                (begin >= x_idea._begin and begin < x_idea._close)
-                or (close > x_idea._begin and close < x_idea._close)
-                or (begin <= x_idea._begin and close >= x_idea._close)
-            )
-        ]
+    def get_kids_in_range(self, x_gogo: float = None, x_stop: float = None) -> list:
+        if x_gogo is None and x_stop is None:
+            return self._kids.values()
+        x_list = []
+        for x_idea in self._kids.values():
+            x_gogo_in_range = x_gogo >= x_idea._gogo_calc and x_gogo < x_idea._stop_calc
+            x_stop_in_range = x_stop > x_idea._gogo_calc and x_stop < x_idea._stop_calc
+            both_in_range = x_gogo <= x_idea._gogo_calc and x_stop >= x_idea._stop_calc
+
+            if x_gogo_in_range or x_stop_in_range or both_in_range:
+                x_list.append(x_idea)
+        return x_list
 
     def get_obj_key(self) -> RoadNode:
         return self._label
@@ -527,22 +509,15 @@ class IdeaUnit:
 
     def _find_replace_road_delimiter(self, old_delimiter):
         self._parent_road = replace_road_delimiter(
-            road=self._parent_road,
-            old_delimiter=old_delimiter,
-            new_delimiter=self._road_delimiter,
+            self._parent_road, old_delimiter, self._road_delimiter
         )
-        if self._numeric_road is not None:
-            self._numeric_road = replace_road_delimiter(
-                road=self._numeric_road,
-                old_delimiter=old_delimiter,
-                new_delimiter=self._road_delimiter,
+        new_range_pushs = set()
+        for old_range_push in self._range_pushs:
+            new_range_push = replace_road_delimiter(
+                old_range_push, old_delimiter, self._road_delimiter
             )
-        if self._range_source_road is not None:
-            self._range_source_road = replace_road_delimiter(
-                road=self._range_source_road,
-                old_delimiter=old_delimiter,
-                new_delimiter=self._road_delimiter,
-            )
+            new_range_pushs.add(new_range_push)
+        self._range_pushs = new_range_pushs
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self._reasonunits.items():
@@ -616,12 +591,12 @@ class IdeaUnit:
             self._numor = idea_attr.numor
         if idea_attr.denom is not None:
             self._denom = idea_attr.denom
-        if idea_attr.reest is not None:
-            self._reest = idea_attr.reest
-        if idea_attr.numeric_road is not None:
-            self._numeric_road = idea_attr.numeric_road
-        if idea_attr.range_source_road is not None:
-            self._range_source_road = idea_attr.range_source_road
+        if idea_attr.morph is not None:
+            self._morph = idea_attr.morph
+        if idea_attr.range_push is not None:
+            self.set_range_push(idea_attr.range_push)
+        if idea_attr.del_range_push is not None:
+            self.del_range_push(idea_attr.del_range_push)
         if idea_attr.descendant_pledge_count is not None:
             self._descendant_pledge_count = idea_attr.descendant_pledge_count
         if idea_attr.all_acct_cred is not None:
@@ -655,6 +630,40 @@ class IdeaUnit:
             and self._addin is None
         ):
             self._addin = 0
+
+    def clear_gogo_calc_stop_calc(self):
+        self._range_evaluated = False
+        self._gogo_calc = None
+        self._stop_calc = None
+
+    def _transform_gogo_calc_stop_calc(self):
+        r_idea_numor = get_1_if_None(self._numor)
+        r_idea_denom = get_1_if_None(self._denom)
+        r_idea_addin = get_0_if_None(self._addin)
+
+        if self._gogo_calc is None or self._stop_calc is None:
+            pass
+        elif self._gogo_want != None and self._stop_want != None:
+            stop_want_less_than_gogo_calc = self._stop_want < self._gogo_calc
+            gogo_want_greater_than_stop_calc = self._gogo_want > self._stop_calc
+            if stop_want_less_than_gogo_calc or gogo_want_greater_than_stop_calc:
+                self._gogo_calc = None
+                self._stop_calc = None
+            else:
+                self._gogo_calc = max(self._gogo_calc, self._gogo_want)
+                self._stop_calc = min(self._stop_calc, self._stop_want)
+        elif get_False_if_None(self._morph):
+            x_gogo = self._gogo_calc
+            x_stop = self._stop_calc
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, self._denom)
+            self._gogo_calc = x_rangeunit.gogo
+            self._stop_calc = x_rangeunit.stop
+        else:
+            self._gogo_calc = self._gogo_calc + r_idea_addin
+            self._stop_calc = self._stop_calc + r_idea_addin
+            self._gogo_calc = (self._gogo_calc * r_idea_numor) / r_idea_denom
+            self._stop_calc = (self._stop_calc * r_idea_numor) / r_idea_denom
+        self._range_evaluated = True
 
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
         if base is not None and premise is not None:
@@ -704,17 +713,6 @@ class IdeaUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, idea_kid):
-        if idea_kid._numor is not None:
-            # if idea_kid._denom is not None:
-            # if idea_kid._reest is not None:
-            if self._begin is None or self._close is None:
-                raise InvalidIdeaException(
-                    f"Idea {idea_kid.get_road()} cannot have numor,denom,reest if parent does not have begin/close range"
-                )
-
-            idea_kid._begin = self._begin * idea_kid._numor / idea_kid._denom
-            idea_kid._close = self._close * idea_kid._numor / idea_kid._denom
-
         self._kids[idea_kid._label] = idea_kid
         self._kids = dict(sorted(self._kids.items()))
 
@@ -759,20 +757,16 @@ class IdeaUnit:
         for x_reasonheir in self._reasonheirs.values():
             x_reasonheir.set_status(factheirs=self._factheirs)
 
-    def set_active(
+    def set_active_attrs(
         self,
         tree_traverse_count: int,
         bud_groupboxs: dict[GroupID, GroupBox] = None,
         bud_owner_id: AcctID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active(bud_groupboxs, bud_owner_id)
+        self._active = self._create_active_bool(bud_groupboxs, bud_owner_id)
         self._set_idea_task()
-        self.record_active_hx(
-            tree_traverse_count=tree_traverse_count,
-            prev_active=prev_to_now_active,
-            now_active=self._active,
-        )
+        self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
     def _set_idea_task(self):
         self._task = False
@@ -785,58 +779,75 @@ class IdeaUnit:
     def _any_reasonheir_task_true(self) -> bool:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
-    def _create_active(
+    def _create_active_bool(
         self, bud_groupboxs: dict[GroupID, GroupBox], bud_owner_id: AcctID
     ) -> bool:
         self.set_reasonheirs_status()
-        x_bool = self._are_all_reasonheir_active_true()
+        active_bool = self._are_all_reasonheir_active_true()
         if (
-            x_bool
+            active_bool
             and bud_groupboxs != {}
             and bud_owner_id is not None
             and self._doerheir._groupholds != {}
         ):
             self._doerheir.set_owner_id_doer(bud_groupboxs, bud_owner_id)
             if self._doerheir._owner_id_doer is False:
-                x_bool = False
-        return x_bool
+                active_bool = False
+        return active_bool
+
+    def set_range_factheirs(
+        self, bud_idea_dict: dict[RoadUnit,], range_inheritors: dict[RoadUnit, RoadUnit]
+    ):
+        for reason_base in self._reasonheirs.keys():
+            if range_root_road := range_inheritors.get(reason_base):
+                all_roads = all_roadunits_between(range_root_road, reason_base)
+                all_ideas = []
+                for x_road in all_roads:
+                    x_idea = bud_idea_dict.get(x_road)
+                    all_ideas.append(x_idea)
+                self._create_factheir(all_ideas, range_root_road, reason_base)
+
+    def _create_factheir(
+        self, all_ideas: list, range_root_road: RoadUnit, reason_base: RoadUnit
+    ):
+        range_root_factheir = self._factheirs.get(range_root_road)
+        old_open = range_root_factheir.open
+        old_nigh = range_root_factheir.nigh
+        x_rangeunit = ideas_calculated_range(all_ideas, old_open, old_nigh)
+        new_factheir_open = x_rangeunit.gogo
+        new_factheir_nigh = x_rangeunit.stop
+        new_factheir_obj = factheir_shop(reason_base)
+        new_factheir_obj.set_attr(reason_base, new_factheir_open, new_factheir_nigh)
+        self._set_factheir(new_factheir_obj)
 
     def _are_all_reasonheir_active_true(self) -> bool:
-        return all(
-            x_reasonheir._status != False for x_reasonheir in self._reasonheirs.values()
-        )
+        x_reasonheirs = self._reasonheirs.values()
+        return all(x_reasonheir._status != False for x_reasonheir in x_reasonheirs)
 
     def clear_reasonheirs_status(self):
         for reason in self._reasonheirs.values():
             reason.clear_status()
 
-    def _coalesce_with_reasonunits(self, reasonheirs: dict[RoadUnit, ReasonHeir]):
-        reasonheirs_new = get_empty_dict_if_none(x_dict=deepcopy(reasonheirs))
-        reasonheirs_new.update(self._reasonunits)
-        return reasonheirs_new
+    def _coalesce_with_reasonunits(
+        self, reasonheirs: dict[RoadUnit, ReasonHeir]
+    ) -> dict[RoadUnit, ReasonHeir]:
+        new_reasonheirs = deepcopy(reasonheirs)
+        new_reasonheirs |= self._reasonunits
+        return new_reasonheirs
 
     def set_reasonheirs(
-        self,
-        bud_idea_dict: dict[RoadUnit,],
-        reasonheirs: dict[RoadUnit, ReasonCore] = None,
+        self, bud_idea_dict: dict[RoadUnit,], reasonheirs: dict[RoadUnit, ReasonCore]
     ):
-        if reasonheirs is None:
-            reasonheirs = self._reasonheirs
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
-
         self._reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
-            new_reasonheir = reasonheir_shop(
-                base=old_reasonheir.base,
-                base_idea_active_requisite=old_reasonheir.base_idea_active_requisite,
-            )
+            old_base = old_reasonheir.base
+            old_active_requisite = old_reasonheir.base_idea_active_requisite
+            new_reasonheir = reasonheir_shop(old_base, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            # if bud_idea_dict is not None:
-            base_idea = bud_idea_dict.get(old_reasonheir.base)
-            if base_idea is not None:
+            if base_idea := bud_idea_dict.get(old_reasonheir.base):
                 new_reasonheir.set_base_idea_active_value(base_idea._active)
-
             self._reasonheirs[new_reasonheir.base] = new_reasonheir
 
     def set_idearoot_inherit_reasonheirs(self):
@@ -852,20 +863,29 @@ class IdeaUnit:
     def get_reasonunits_dict(self):
         return {base: reason.get_dict() for base, reason in self._reasonunits.items()}
 
-    def get_kids_dict(self):
+    def get_kids_dict(self) -> dict[GroupID,]:
         return {c_road: kid.get_dict() for c_road, kid in self._kids.items()}
 
-    def get_awardlinks_dict(self):
+    def get_awardlinks_dict(self) -> dict[GroupID, dict]:
+        x_awardlinks = self._awardlinks.items()
         return {
-            x_group_id: awardlink.get_dict()
-            for x_group_id, awardlink in self._awardlinks.items()
+            x_group_id: awardlink.get_dict() for x_group_id, awardlink in x_awardlinks
         }
 
-    def is_kidless(self):
+    def is_kidless(self) -> bool:
         return self._kids == {}
 
-    def is_arithmetic(self):
+    def is_math(self) -> bool:
         return self._begin is not None and self._close is not None
+
+    def set_range_push(self, range_push_road: RoadUnit):
+        self._range_pushs.add(range_push_road)
+
+    def range_push_exists(self, range_push_road: RoadUnit) -> bool:
+        return range_push_road in self._range_pushs
+
+    def del_range_push(self, range_push_road: RoadUnit):
+        self._range_pushs.discard(range_push_road)
 
     def awardheir_exists(self) -> bool:
         return self._awardheirs != {}
@@ -899,12 +919,12 @@ class IdeaUnit:
             x_dict["_numor"] = self._numor
         if self._denom is not None:
             x_dict["_denom"] = self._denom
-        if self._reest is not None:
-            x_dict["_reest"] = self._reest
-        if self._range_source_road is not None:
-            x_dict["_range_source_road"] = self._range_source_road
-        if self._numeric_road is not None:
-            x_dict["_numeric_road"] = self._numeric_road
+        if self._morph is not None:
+            x_dict["_morph"] = self._morph
+        if self._gogo_want is not None:
+            x_dict["_gogo_want"] = self._gogo_want
+        if self._stop_want is not None:
+            x_dict["_stop_want"] = self._stop_want
         if self.pledge:
             x_dict["pledge"] = self.pledge
         if self._problem_bool:
@@ -919,12 +939,14 @@ class IdeaUnit:
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         if is_sub_road(ref_road=self._parent_road, sub_road=old_road):
             self._parent_road = rebuild_road(self._parent_road, old_road, new_road)
-        if is_sub_road(ref_road=self._range_source_road, sub_road=old_road):
-            self._range_source_road = rebuild_road(
-                self._range_source_road, old_road, new_road
-            )
-        if is_sub_road(ref_road=self._numeric_road, sub_road=old_road):
-            self._numeric_road = rebuild_road(self._numeric_road, old_road, new_road)
+        new_range_pushs_dict = {}
+        for range_push in self._range_pushs:
+            if is_sub_road(range_push, old_road):
+                new_range_push = rebuild_road(range_push, old_road, new_road)
+                new_range_pushs_dict[range_push] = new_range_push
+        for old_range_push, dst_range_push in new_range_pushs_dict.items():
+            self._range_pushs.remove(old_range_push)
+            self._range_pushs.add(dst_range_push)
 
         self._reasonunits == find_replace_road_key_dict(
             dict_x=self._reasonunits, old_road=old_road, new_road=new_road
@@ -950,7 +972,7 @@ class IdeaUnit:
             bud_groupboxs=bud_groupboxs,
         )
 
-    def get_doerunit_dict(self):
+    def get_doerunit_dict(self) -> dict:
         return self._doerunit.get_dict()
 
 
@@ -972,12 +994,12 @@ def ideaunit_shop(
     _healerhold: HealerHold = None,
     _begin: float = None,
     _close: float = None,
+    _gogo_want: float = None,
+    _stop_want: float = None,
     _addin: float = None,
     _denom: int = None,
     _numor: int = None,
-    _reest: bool = None,
-    _range_source_road: RoadUnit = None,
-    _numeric_road: RoadUnit = None,
+    _morph: bool = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
@@ -1021,12 +1043,13 @@ def ideaunit_shop(
         _healerhold=_healerhold,
         _begin=_begin,
         _close=_close,
+        _gogo_want=_gogo_want,
+        _stop_want=_stop_want,
         _addin=_addin,
         _denom=_denom,
         _numor=_numor,
-        _reest=_reest,
-        _range_source_road=_range_source_road,
-        _numeric_road=_numeric_road,
+        _morph=_morph,
+        _range_pushs=set(),
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
         _originunit=_originunit,
@@ -1056,10 +1079,6 @@ def ideaunit_shop(
     x_ideakid.set_doerunit_empty_if_none()
     x_ideakid.set_originunit_empty_if_none()
     return x_ideakid
-
-
-class Idea_root_LabelNotEmptyException(Exception):
-    pass
 
 
 def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
@@ -1107,3 +1126,20 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True
     else:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else None
+
+
+def ideas_calculated_range(
+    idea_list: list[IdeaUnit], x_gogo: float, x_stop: float
+) -> RangeUnit:
+    for x_idea in idea_list:
+        if x_idea._addin:
+            x_gogo += get_0_if_None(x_idea._addin)
+            x_stop += get_0_if_None(x_idea._addin)
+        if (x_idea._numor or x_idea._denom) and not x_idea._morph:
+            x_gogo *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
+            x_stop *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
+        if x_idea._denom and x_idea._morph:
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, x_idea._denom)
+            x_gogo = x_rangeunit.gogo
+            x_stop = x_rangeunit.stop
+    return RangeUnit(x_gogo, x_stop)

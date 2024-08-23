@@ -231,7 +231,7 @@ def test_FactHeir_is_range_ReturnsRangeStatus():
 
     # THEN
     x_factheir = factheir_shop(min_road, pick=min_road, open=10.0, nigh=30.0)
-    assert x_factheir.is_range() == True
+    assert x_factheir.is_range() is True
 
 
 def test_factheir_is_range_ReturnsRangeStatus():
@@ -249,7 +249,7 @@ def test_factheir_is_range_ReturnsRangeStatus():
     x_factheir = factheir_shop(min_road, pick=min_road, open=10.0, nigh=30.0)
 
     # THEN
-    assert x_factheir.is_range() == True
+    assert x_factheir.is_range() is True
 
 
 def test_FactCore_get_obj_key_SetsAttrCorrectly():

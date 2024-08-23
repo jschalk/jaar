@@ -1,12 +1,7 @@
 from src._instrument.file import open_file
 from src._road.road import RoadUnit
 from src.bud.idea import ideaunit_shop
-from src.bud.reason_idea import (
-    factunit_shop,
-    premiseunit_shop,
-    reasonunit_shop,
-    factunit_shop,
-)
+from src.bud.reason_idea import factunit_shop, reasonunit_shop
 from src.bud.bud import (
     BudUnit,
     budunit_shop,
@@ -32,18 +27,18 @@ def budunit_v001_with_large_agenda() -> BudUnit:
     ced_week_road = yao_bud.make_l1_road("ced_week")
     weekdays_road = yao_bud.make_l1_road("weekdays")
 
-    yao_bud.set_fact(base=aaron_road, pick=aaron_road)
-    yao_bud.set_fact(base=ced_week_road, pick=ced_week_road, open=0, nigh=53)
-    yao_bud.set_fact(base=day_minute_road, pick=day_minute_road, open=0, nigh=1399)
-    # yao_bud.set_fact(base=internet, pick=internet)
-    yao_bud.set_fact(base=month_week_road, pick=month_week_road, open=0, nigh=5)
-    yao_bud.set_fact(base=mood_road, pick=mood_road)
-    # yao_bud.set_fact(base=movie, pick=movie)
-    yao_bud.set_fact(base=nations_road, pick=nations_road)
-    yao_bud.set_fact(base=season_road, pick=season_road)
-    yao_bud.set_fact(base=year_month_road, pick=year_month_road, open=0, nigh=12)
-    # yao_bud.set_fact(base=water, pick=water)
-    yao_bud.set_fact(base=weekdays_road, pick=weekdays_road)
+    yao_bud.set_fact(aaron_road, aaron_road)
+    yao_bud.set_fact(ced_week_road, ced_week_road, open=0, nigh=53)
+    yao_bud.set_fact(day_minute_road, day_minute_road, open=0, nigh=1399)
+    # yao_bud.set_fact(internet, internet)
+    yao_bud.set_fact(month_week_road, month_week_road, open=0, nigh=5)
+    yao_bud.set_fact(mood_road, mood_road)
+    # yao_bud.set_fact(movie, movie)
+    yao_bud.set_fact(nations_road, nations_road)
+    yao_bud.set_fact(season_road, season_road)
+    yao_bud.set_fact(year_month_road, year_month_road, open=0, nigh=12)
+    # yao_bud.set_fact(water, water)
+    yao_bud.set_fact(weekdays_road, weekdays_road)
     return yao_bud
 
 
@@ -54,11 +49,9 @@ def budunit_v002() -> BudUnit:
 
 
 def get_budunit_with_4_levels() -> BudUnit:
-    sue_bud = budunit_shop(_owner_id="Sue", _tally=10)
-
+    sue_bud = budunit_shop("Sue")
     casa_text = "casa"
     sue_bud.set_l1_idea(ideaunit_shop(casa_text, _mass=30, pledge=True))
-
     cat_text = "cat have dinner"
     sue_bud.set_l1_idea(ideaunit_shop(cat_text, _mass=30, pledge=True))
 
@@ -66,7 +59,6 @@ def get_budunit_with_4_levels() -> BudUnit:
     week_road = sue_bud.make_l1_road(week_text)
     idea_kid_weekdays = ideaunit_shop(week_text, _mass=40)
     sue_bud.set_l1_idea(idea_kid_weekdays)
-
     sun_text = "Sunday"
     mon_text = "Monday"
     tue_text = "Tuesday"
@@ -74,28 +66,18 @@ def get_budunit_with_4_levels() -> BudUnit:
     thu_text = "Thursday"
     fri_text = "Friday"
     sat_text = "Saturday"
-
-    idea_grandkidU = ideaunit_shop(sun_text, _mass=20)
-    idea_grandkidM = ideaunit_shop(mon_text, _mass=20)
-    idea_grandkidT = ideaunit_shop(tue_text, _mass=20)
-    idea_grandkidW = ideaunit_shop(wed_text, _mass=20)
-    idea_grandkidR = ideaunit_shop(thu_text, _mass=30)
-    idea_grandkidF = ideaunit_shop(fri_text, _mass=40)
-    idea_grandkidA = ideaunit_shop(sat_text, _mass=50)
-
-    sue_bud.set_idea(idea_grandkidU, week_road)
-    sue_bud.set_idea(idea_grandkidM, week_road)
-    sue_bud.set_idea(idea_grandkidT, week_road)
-    sue_bud.set_idea(idea_grandkidW, week_road)
-    sue_bud.set_idea(idea_grandkidR, week_road)
-    sue_bud.set_idea(idea_grandkidF, week_road)
-    sue_bud.set_idea(idea_grandkidA, week_road)
+    sue_bud.set_idea(ideaunit_shop(sun_text, _mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(mon_text, _mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(tue_text, _mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(wed_text, _mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(thu_text, _mass=30), week_road)
+    sue_bud.set_idea(ideaunit_shop(fri_text, _mass=40), week_road)
+    sue_bud.set_idea(ideaunit_shop(sat_text, _mass=50), week_road)
 
     states_text = "nation-state"
     states_road = sue_bud.make_l1_road(states_text)
     idea_kid_states = ideaunit_shop(states_text, _mass=30)
     sue_bud.set_l1_idea(idea_kid_states)
-
     usa_text = "USA"
     usa_road = sue_bud.make_road(states_road, usa_text)
     france_text = "France"
@@ -106,7 +88,6 @@ def get_budunit_with_4_levels() -> BudUnit:
     sue_bud.set_idea(idea_grandkid_france, states_road)
     sue_bud.set_idea(idea_grandkid_brazil, states_road)
     sue_bud.set_idea(idea_grandkid_usa, states_road)
-
     texas_text = "Texas"
     oregon_text = "Oregon"
     idea_grandgrandkid_usa_texas = ideaunit_shop(texas_text, _mass=50)
@@ -171,11 +152,11 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     n1_text = "1"
     n2_text = "2"
     n3_text = "3"
-    am_idea = ideaunit_shop(am_text, _begin=0, _close=12)
-    pm_idea = ideaunit_shop(pm_text, _begin=12, _close=24)
-    n1_idea = ideaunit_shop(n1_text, _begin=1, _close=2)
-    n2_idea = ideaunit_shop(n2_text, _begin=2, _close=3)
-    n3_idea = ideaunit_shop(n3_text, _begin=3, _close=4)
+    am_idea = ideaunit_shop(am_text, _gogo_want=0, _stop_want=12)
+    pm_idea = ideaunit_shop(pm_text, _gogo_want=12, _stop_want=24)
+    n1_idea = ideaunit_shop(n1_text, _gogo_want=1, _stop_want=2)
+    n2_idea = ideaunit_shop(n2_text, _gogo_want=2, _stop_want=3)
+    n3_idea = ideaunit_shop(n3_text, _gogo_want=3, _stop_want=4)
 
     sue_bud.set_l1_idea(time_idea)
     sue_bud.set_idea(day24hr_idea, time_road)
@@ -216,39 +197,33 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
         open=clean_table_7am_premise_open,
         nigh=clean_table_7am_premise_nigh,
     )
-    sue_bud.edit_idea_attr(road=clean_road, reason=clean_table_7am_reason)
+    sue_bud.edit_idea_attr(clean_road, reason=clean_table_7am_reason)
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
-    sue_bud.edit_idea_attr(road=casa_road, reason=clean_table_7am_reason)
+    sue_bud.edit_idea_attr(casa_road, reason=clean_table_7am_reason)
     return sue_bud
 
 
 def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
-    bob_bud = budunit_shop(_owner_id="Bob", _tally=10)
-    ced_min_label = "CE0_minutes"
-    ced_minutes = ideaunit_shop(ced_min_label)
-    ced_road = bob_bud.make_l1_road(ced_min_label)
-    bob_bud.set_l1_idea(ced_minutes)
-    mail_label = "obtain mail"
-    mail_task = ideaunit_shop(mail_label, pledge=True)
-    bob_bud.set_l1_idea(mail_task)
-
-    premise_x = premiseunit_shop(need=ced_road, open=80, nigh=90)
-    x_task_reason = reasonunit_shop(premise_x.need, {premise_x.need: premise_x})
-    mail_road = bob_bud.make_l1_road(mail_label)
-    bob_bud.edit_idea_attr(road=mail_road, reason=x_task_reason)
-
-    x_fact = factunit_shop(base=ced_road, pick=ced_road, open=85, nigh=95)
-    # print(
-    #     f"1Task_1CE0MinutesReason_1Fact 2. {len(bob_bud._idearoot._kids)=} {x_fact.base=}"
-    # )
-    bob_bud.set_fact(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
-    # print(f"1Task_1CE0MinutesReason_1Fact 3. {len(bob_bud._idearoot._kids)=}")
-    return bob_bud
+    yao_bud = budunit_shop("Yao")
+    hour_min_text = "hour"
+    hour_min_idea = ideaunit_shop(hour_min_text)
+    hour_road = yao_bud.make_l1_road(hour_min_text)
+    hour_reasonunit = reasonunit_shop(hour_road)
+    hour_reasonunit.set_premise(hour_road, open=80, nigh=90)
+    yao_bud.set_l1_idea(hour_min_idea)
+    yao_bud.set_fact(hour_road, hour_road, 85, 95)
+    mail_text = "obtain mail"
+    mail_road = yao_bud.make_l1_road(mail_text)
+    mail_idea = ideaunit_shop(mail_text, pledge=True)
+    yao_bud.set_l1_idea(mail_idea)
+    yao_bud.edit_idea_attr(mail_road, reason=hour_reasonunit)
+    return yao_bud
 
 
 def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
-    zia_bud = budunit_shop(_owner_id="Zia", _tally=10)
+    tiger_text = "tiger"
+    zia_bud = budunit_shop("Zia", _real_id=tiger_text)
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
     idea_kid_shave = ideaunit_shop(shave_text, _mass=30, pledge=True)
@@ -280,7 +255,7 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
 
 
 def get_budunit_base_time_example() -> BudUnit:
-    sue_bud = budunit_shop(_owner_id="Sue")
+    sue_bud = budunit_shop("Sue")
     sue_bud.set_l1_idea(ideaunit_shop("casa"))
     return sue_bud
 
@@ -289,16 +264,16 @@ def get_budunit_irrational_example() -> BudUnit:
     # this bud has no conclusive agenda because 2 pledge ideas are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
-    # Step 0: if chicken._active == True, egg._active is set to False
+    # Step 0: if chicken._active is True, egg._active is set to False
     # Step 1: if egg._active is False, chicken._active is set to False
     # Step 2: if chicken._active is False, egg._active is set to True
-    # Step 3: if egg._active == True, chicken._active is set to True
+    # Step 3: if egg._active is True, chicken._active is set to True
     # Step 4: back to step 0.
     # after hatter_bud.settle_bud these should be true:
-    # 1. hatter_bud._irrational == True
+    # 1. hatter_bud._irrational is True
     # 2. hatter_bud._tree_traverse_count = hatter_bud._max_tree_traverse
 
-    hatter_bud = budunit_shop(_owner_id="Mad Hatter", _tally=10)
+    hatter_bud = budunit_shop("Mad Hatter")
     hatter_bud.set_max_tree_traverse(3)
 
     egg_text = "egg first"
@@ -357,7 +332,7 @@ def get_budunit_mop_example1():
 
 def get_budunit_laundry_example1() -> BudUnit:
     amos_text = "Amos"
-    amos_bud = budunit_shop(_owner_id=amos_text)
+    amos_bud = budunit_shop(amos_text)
     cali_text = "Cali"
     amos_bud.add_acctunit(amos_text)
     amos_bud.add_acctunit(cali_text)

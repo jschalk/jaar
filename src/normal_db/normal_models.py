@@ -55,11 +55,9 @@ class IdeaTable(Base):
     _begin = Column(Float)
     _close = Column(Float)
     _denom = Column(Integer)
-    _numeric_road = Column(String)
     _numor = Column(Integer)
     _problem_bool = Column(Integer)
-    _range_source_road = Column(String)
-    _reest = Column(Integer)
+    _morph = Column(Integer)
     _mass = Column(Integer)
     pledge = Column(Integer)
 

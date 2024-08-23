@@ -23,11 +23,11 @@ from src._road.jaar_config import max_tree_traverse_default
 from src._road.road import (
     get_parent_road,
     is_sub_road,
+    all_roadunits_between,
     road_validate,
     rebuild_road,
     get_terminus_node,
     get_root_node_from_road,
-    find_replace_road_key_dict,
     get_ancestor_roads,
     get_default_real_id_roadnode,
     get_all_road_nodes,
@@ -43,14 +43,12 @@ from src._road.road import (
     RealID,
     roadunit_valid_dir_path,
 )
-
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.bud.group import AwardLink, GroupID, GroupBox, groupbox_shop, membership_shop
 from src.bud.healer import HealerHold
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
 from src.bud.reason_doer import DoerUnit
 from src.bud.tree_metrics import TreeMetrics, treemetrics_shop
-from src.bud.lemma import lemmas_shop, Lemmas
 from src.bud.origin import originunit_get_from_dict, originunit_shop, OriginUnit
 from src.bud.idea import (
     IdeaUnit,
@@ -99,6 +97,14 @@ class healerhold_group_id_Exception(Exception):
     pass
 
 
+class Multiple_range_push_Exception(Exception):
+    pass
+
+
+class _gogo_calc_stop_calc_Exception(Exception):
+    pass
+
+
 @dataclass
 class BudUnit:
     _real_id: RealID = None
@@ -129,6 +135,8 @@ class BudUnit:
     _groupboxs: dict[GroupID, GroupBox] = None
     _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
+    _reason_bases: set[RoadUnit] = None
+    _range_inheritors: dict[RoadUnit, RoadUnit] = None
     # settle_bud Calculated field end
 
     def del_last_gift_id(self):
@@ -136,9 +144,8 @@ class BudUnit:
 
     def set_last_gift_id(self, x_last_gift_id: int):
         if self._last_gift_id is not None and x_last_gift_id < self._last_gift_id:
-            raise _last_gift_idException(
-                f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
-            )
+            exception_text = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
+            raise _last_gift_idException(exception_text)
         self._last_gift_id = x_last_gift_id
 
     def set_monetary_desc(self, x_monetary_desc: str):
@@ -154,16 +161,14 @@ class BudUnit:
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self._bit) is False:
-            raise _bit_RatioException(
-                f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
-            )
+            exception_text = f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
+            raise _bit_RatioException(exception_text)
         self._credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
         if valid_finance_ratio(new_debtor_respect, self._bit) is False:
-            raise _bit_RatioException(
-                f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
-            )
+            exception_text = f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
+            raise _bit_RatioException(exception_text)
         self._debtor_respect = new_debtor_respect
 
     def make_road(
@@ -186,9 +191,8 @@ class BudUnit:
         if self._road_delimiter != new_road_delimiter:
             for x_idea_road in self._idea_dict.keys():
                 if is_string_in_road(new_road_delimiter, x_idea_road):
-                    raise NewDelimiterException(
-                        f"Cannot modify delimiter to '{new_road_delimiter}' because it already exists an idea label '{x_idea_road}'"
-                    )
+                    exception_text = f"Cannot modify delimiter to '{new_road_delimiter}' because it already exists an idea label '{x_idea_road}'"
+                    raise NewDelimiterException(exception_text)
 
             # modify all road attributes in ideaunits
             self._road_delimiter = default_road_delimiter_if_none(new_road_delimiter)
@@ -197,12 +201,10 @@ class BudUnit:
 
     def set_real_id(self, real_id: str):
         old_real_id = copy_deepcopy(self._real_id)
-        self._real_id = real_id
-
         self.settle_bud()
         for idea_obj in self._idea_dict.values():
-            idea_obj._bud_real_id = self._real_id
-
+            idea_obj._bud_real_id = real_id
+        self._real_id = real_id
         self.edit_idea_label(old_road=old_real_id, new_label=self._real_id)
         self.settle_bud()
 
@@ -217,9 +219,9 @@ class BudUnit:
     def _get_relevant_roads(self, roads: dict[RoadUnit,]) -> set[RoadUnit]:
         to_evaluate_list = []
         to_evaluate_hx_dict = {}
-        for road_x in roads:
-            to_evaluate_list.append(road_x)
-            to_evaluate_hx_dict[road_x] = "to_evaluate"
+        for x_road in roads:
+            to_evaluate_list.append(x_road)
+            to_evaluate_hx_dict[x_road] = "to_evaluate"
         evaluated_roads = set()
 
         # tree_metrics = self.get_tree_metrics()
@@ -227,8 +229,8 @@ class BudUnit:
         # transited because count_x might be wrong thing to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
-            road_x = to_evaluate_list.pop()
-            x_idea = self.get_idea_obj(road_x)
+            x_road = to_evaluate_list.pop()
+            x_idea = self.get_idea_obj(x_road)
             for reasonunit_obj in x_idea._reasonunits.values():
                 reason_base = reasonunit_obj.base
                 self._evaluate_relevancy(
@@ -237,24 +239,8 @@ class BudUnit:
                     to_evaluate_road=reason_base,
                     road_type="reasonunit_base",
                 )
-
-            if x_idea._numeric_road is not None:
-                self._evaluate_relevancy(
-                    to_evaluate_list=to_evaluate_list,
-                    to_evaluate_hx_dict=to_evaluate_hx_dict,
-                    to_evaluate_road=x_idea._numeric_road,
-                    road_type="numeric_road",
-                )
-
-            if x_idea._range_source_road is not None:
-                self._evaluate_relevancy(
-                    to_evaluate_list=to_evaluate_list,
-                    to_evaluate_hx_dict=to_evaluate_hx_dict,
-                    to_evaluate_road=x_idea._range_source_road,
-                    road_type="range_source_road",
-                )
-
-            forefather_roads = get_forefather_roads(road_x)
+            to_evaluate_list.extend(iter(x_idea._range_pushs))
+            forefather_roads = get_forefather_roads(x_road)
             for forefather_road in forefather_roads:
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -263,7 +249,7 @@ class BudUnit:
                     road_type="forefather",
                 )
 
-            evaluated_roads.add(road_x)
+            evaluated_roads.add(x_road)
         return evaluated_roads
 
     def _evaluate_relevancy(
@@ -340,12 +326,8 @@ class BudUnit:
     def add_acctunit(
         self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
     ):
-        acctunit = acctunit_shop(
-            acct_id=acct_id,
-            credit_score=credit_score,
-            debtit_score=debtit_score,
-            _road_delimiter=self._road_delimiter,
-        )
+        x_road_delimiter = self._road_delimiter
+        acctunit = acctunit_shop(acct_id, credit_score, debtit_score, x_road_delimiter)
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
@@ -425,8 +407,7 @@ class BudUnit:
             )
         parent_road = get_parent_road(idea_road)
         parent_idea = self.get_idea_obj(parent_road)
-        x_idea = self.get_idea_obj(idea_road)
-        return x_idea._numeric_road is None and not parent_idea.is_arithmetic()
+        return not parent_idea.is_math()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
@@ -436,56 +417,6 @@ class BudUnit:
             and fact.nigh is not None
             and self._is_idea_rangeroot(idea_road=fact.base)
         ]
-
-    def _get_rangeroot_1stlevel_associates(
-        self, ranged_factunits: list[IdeaUnit]
-    ) -> Lemmas:
-        x_lemmas = lemmas_shop()
-        # lemma_ideas = {}
-        for fact in ranged_factunits:
-            fact_idea = self.get_idea_obj(fact.base)
-            for kid in fact_idea._kids.values():
-                x_lemmas.eval(x_idea=kid, src_fact=fact, src_idea=fact_idea)
-
-            if fact_idea._range_source_road is not None:
-                x_lemmas.eval(
-                    x_idea=self.get_idea_obj(fact_idea._range_source_road),
-                    src_fact=fact,
-                    src_idea=fact_idea,
-                )
-        return x_lemmas
-
-    def _get_lemma_factunits(self) -> dict[RoadUnit, FactUnit]:
-        # get all range-root first level kids and range_source_road
-        x_lemmas = self._get_rangeroot_1stlevel_associates(
-            self._get_rangeroot_factunits()
-        )
-
-        # Now get associates (all their descendants and range_source_roads)
-        lemma_factunits = {}  # fact.base : factUnit
-        count_x = 0
-        while count_x < 10000 and x_lemmas.is_lemmas_evaluated() is False:
-            count_x += 1
-            if count_x == 9998:
-                raise InvalidBudException("lemma loop failed")
-
-            y_lemma = x_lemmas.get_unevaluated_lemma()
-            lemma_idea = y_lemma.x_idea
-            fact_x = y_lemma.calc_fact
-
-            road_x = self.make_road(lemma_idea._parent_road, lemma_idea._label)
-            lemma_factunits[road_x] = fact_x
-
-            for kid2 in lemma_idea._kids.values():
-                x_lemmas.eval(x_idea=kid2, src_fact=fact_x, src_idea=lemma_idea)
-            if lemma_idea._range_source_road not in [None, ""]:
-                x_lemmas.eval(
-                    x_idea=self.get_idea_obj(lemma_idea._range_source_road),
-                    src_fact=fact_x,
-                    src_idea=lemma_idea,
-                )
-
-        return lemma_factunits
 
     def set_fact(
         self,
@@ -500,7 +431,6 @@ class BudUnit:
             self._create_ideakid_if_empty(road=base)
             self._create_ideakid_if_empty(road=pick)
 
-        self._execute_tree_traverse()
         fact_base_idea = self.get_idea_obj(base)
         x_idearoot = self.get_idea_obj(self._real_id)
         x_open = None
@@ -515,16 +445,14 @@ class BudUnit:
             x_nigh = nigh
         x_factunit = factunit_shop(base=base, pick=pick, open=x_open, nigh=x_nigh)
 
-        if fact_base_idea.is_arithmetic() is False:
+        if fact_base_idea.is_math() is False:
             x_idearoot.set_factunit(x_factunit)
-
         # if fact's idea no range or is a "range-root" then allow fact to be set
-        elif fact_base_idea.is_arithmetic() and self._is_idea_rangeroot(base) is False:
+        elif fact_base_idea.is_math() and self._is_idea_rangeroot(base) is False:
             raise InvalidBudException(
                 f"Non range-root fact:{base} can only be set by range-root fact"
             )
-
-        elif fact_base_idea.is_arithmetic() and self._is_idea_rangeroot(base):
+        elif fact_base_idea.is_math() and self._is_idea_rangeroot(base):
             # WHEN idea is "range-root" identify any reason.bases that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
@@ -537,15 +465,6 @@ class BudUnit:
             # that has that base.
             x_idearoot.set_factunit(x_factunit)
 
-            # Find all Fact descendants and any range_source_road connections "Lemmas"
-            lemmas_dict = self._get_lemma_factunits()
-            missing_facts = self.get_missing_fact_bases().keys()
-            x_idearoot._apply_any_range_source_road_connections(
-                lemmas_dict, missing_facts
-            )
-
-        self.settle_bud()
-
     def get_fact(self, base: RoadUnit) -> FactUnit:
         return self._idearoot._factunits.get(base)
 
@@ -557,15 +476,11 @@ class BudUnit:
         if not problem:
             return self._idea_dict
         if self._econs_justified is False:
-            raise Exception_econs_justified(
-                f"Cannot return problem set because _econs_justified={self._econs_justified}."
-            )
+            exception_text = f"Cannot return problem set because _econs_justified={self._econs_justified}."
+            raise Exception_econs_justified(exception_text)
 
-        return {
-            x_idea.get_road(): x_idea
-            for x_idea in self._idea_dict.values()
-            if x_idea._problem_bool
-        }
+        x_ideas = self._idea_dict.values()
+        return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea._problem_bool}
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
@@ -637,7 +552,6 @@ class BudUnit:
                 self._idearoot._factunits[base]
             except KeyError:
                 missing_bases[base] = base_count
-
         return missing_bases
 
     def add_idea(
@@ -681,16 +595,13 @@ class BudUnit:
         create_missing_ancestors: bool = True,
     ):
         if RoadNode(idea_kid._label).is_node(self._road_delimiter) is False:
-            raise InvalidBudException(
-                f"set_idea failed because '{idea_kid._label}' is not a RoadNode."
-            )
+            x_text = f"set_idea failed because '{idea_kid._label}' is not a RoadNode."
+            raise InvalidBudException(x_text)
 
-        if self._idearoot._label != get_root_node_from_road(
-            parent_road, self._road_delimiter
-        ):
-            raise InvalidBudException(
-                f"set_idea failed because parent_road '{parent_road}' has an invalid root node"
-            )
+        x_root_node = get_root_node_from_road(parent_road, self._road_delimiter)
+        if self._idearoot._label != x_root_node:
+            exception_text = f"set_idea failed because parent_road '{parent_road}' has an invalid root node"
+            raise InvalidBudException(exception_text)
 
         idea_kid._road_delimiter = self._road_delimiter
         if idea_kid._bud_real_id != self._real_id:
@@ -703,9 +614,8 @@ class BudUnit:
 
         # create any missing ideas
         if not create_missing_ancestors and self.idea_exists(parent_road) is False:
-            raise InvalidBudException(
-                f"set_idea failed because '{parent_road}' idea does not exist."
-            )
+            x_text = f"set_idea failed because '{parent_road}' idea does not exist."
+            raise InvalidBudException(x_text)
         parent_road_idea = self.get_idea_obj(parent_road, create_missing_ancestors)
         if parent_road_idea._root is False:
             parent_road_idea
@@ -749,17 +659,13 @@ class BudUnit:
         return x_idea
 
     def _create_missing_ideas(self, road):
-        self.settle_bud()
+        self._init_idea_tree_walk()
         posted_idea = self.get_idea_obj(road)
 
         for reason_x in posted_idea._reasonunits.values():
             self._create_ideakid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
                 self._create_ideakid_if_empty(road=premise_x.need)
-        if posted_idea._range_source_road is not None:
-            self._create_ideakid_if_empty(road=posted_idea._range_source_road)
-        if posted_idea._numeric_road is not None:
-            self._create_ideakid_if_empty(road=posted_idea._numeric_road)
 
     def _create_ideakid_if_empty(self, road: RoadUnit):
         if self.idea_exists(road) is False:
@@ -785,15 +691,10 @@ class BudUnit:
     def set_owner_id(self, new_owner_id):
         self._owner_id = new_owner_id
 
-    def edit_idea_label(
-        self,
-        old_road: RoadUnit,
-        new_label: RoadNode,
-    ):
+    def edit_idea_label(self, old_road: RoadUnit, new_label: RoadNode):
         if self._road_delimiter in new_label:
-            raise InvalidLabelException(
-                f"Cannot modify '{old_road}' because new_label {new_label} contains delimiter {self._road_delimiter}"
-            )
+            exception_text = f"Cannot modify '{old_road}' because new_label {new_label} contains delimiter {self._road_delimiter}"
+            raise InvalidLabelException(exception_text)
         if self.idea_exists(old_road) is False:
             raise InvalidBudException(f"Idea {old_road=} does not exist")
 
@@ -809,11 +710,6 @@ class BudUnit:
             else:
                 self._non_root_idea_label_edit(old_road, new_label, parent_road)
             self._idearoot_find_replace_road(old_road=old_road, new_road=new_road)
-            self._idearoot._factunits = find_replace_road_key_dict(
-                dict_x=self._idearoot._factunits,
-                old_road=old_road,
-                new_road=new_road,
-            )
 
     def _non_root_idea_label_edit(
         self, old_road: RoadUnit, new_label: RoadNode, parent_road: RoadUnit
@@ -835,10 +731,7 @@ class BudUnit:
             if listed_idea._kids is not None:
                 for idea_kid in listed_idea._kids.values():
                     idea_iter_list.append(idea_kid)
-                    if is_sub_road(
-                        ref_road=idea_kid._parent_road,
-                        sub_road=old_road,
-                    ):
+                    if is_sub_road(idea_kid._parent_road, sub_road=old_road):
                         idea_kid._parent_road = rebuild_road(
                             subj_road=idea_kid._parent_road,
                             old_road=old_road,
@@ -851,112 +744,8 @@ class BudUnit:
         x_ideaattrfilter.set_premise_range_attributes_influenced_by_premise_idea(
             premise_open=premise_idea._begin,
             premise_nigh=premise_idea._close,
-            # premise_numor=premise_idea.anc_numor,
             premise_denom=premise_idea._denom,
-            # anc_reest=premise_idea.anc_reest,
         )
-
-    def _set_ideaattrfilter_begin_close(
-        self, ideaattrfilter: IdeaAttrFilter, idea_road: RoadUnit
-    ) -> set[float, float]:
-        x_iaf = ideaattrfilter
-        anc_roads = get_ancestor_roads(road=idea_road)
-        if (
-            x_iaf.addin is not None
-            or x_iaf.numor is not None
-            or x_iaf.denom is not None
-            or x_iaf.reest is not None
-        ) and len(anc_roads) == 1:
-            raise InvalidBudException("Root Idea cannot have numor denom reest.")
-        parent_road = self._real_id if len(anc_roads) == 1 else anc_roads[1]
-
-        parent_has_range = None
-        parent_idea = self.get_idea_obj(parent_road)
-        parent_begin = parent_idea._begin
-        parent_close = parent_idea._close
-        parent_has_range = parent_begin is not None and parent_close is not None
-
-        numeric_begin = None
-        numeric_close = None
-        numeric_range = None
-        if x_iaf.numeric_road is not None:
-            numeric_idea = self.get_idea_obj(x_iaf.numeric_road)
-            numeric_begin = numeric_idea._begin
-            numeric_close = numeric_idea._close
-            numeric_range = numeric_begin is not None and numeric_close is not None
-
-        if parent_has_range and x_iaf.addin not in [None, 0]:
-            parent_begin = parent_begin + x_iaf.addin
-            parent_close = parent_close + x_iaf.addin
-
-        x_begin, x_close = self._transform_begin_close(
-            reest=x_iaf.reest,
-            begin=x_iaf.begin,
-            close=x_iaf.close,
-            numor=x_iaf.numor,
-            denom=x_iaf.denom,
-            parent_has_range=parent_has_range,
-            parent_begin=parent_begin,
-            parent_close=parent_close,
-            numeric_range=numeric_range,
-            numeric_begin=numeric_begin,
-            numeric_close=numeric_close,
-        )
-
-        if parent_has_range and numeric_range:
-            raise InvalidBudException(
-                "Idea has begin-close range parent, cannot have numeric_road"
-            )
-        elif not parent_has_range and not numeric_range and x_iaf.numor is not None:
-            raise InvalidBudException(
-                f"Idea cannot edit numor={x_iaf.numor}/denom/reest of '{idea_road}' if parent '{parent_road}' or ideaunit._numeric_road does not have begin/close range"
-            )
-        ideaattrfilter.begin = x_begin
-        ideaattrfilter.close = x_close
-
-    def _transform_begin_close(
-        self,
-        reest,
-        begin: float,
-        close: float,
-        numor: float,
-        denom: float,
-        parent_has_range: float,
-        parent_begin: float,
-        parent_close: float,
-        numeric_range: float,
-        numeric_begin: float,
-        numeric_close: float,
-    ):  # sourcery skip: remove-redundant-if
-        if not reest and parent_has_range and numor is not None:
-            begin = parent_begin * numor / denom
-            close = parent_close * numor / denom
-        elif not reest and parent_has_range and numor is None:
-            begin = parent_begin
-            close = parent_close
-        elif not reest and numeric_range and numor is not None:
-            begin = numeric_begin * numor / denom
-            close = numeric_close * numor / denom
-        elif not reest and numeric_range and numor is None:
-            begin = numeric_begin
-            close = numeric_close
-        elif reest and parent_has_range and numor is not None:
-            begin = parent_begin * numor % denom
-            close = parent_close * numor % denom
-        elif reest and parent_has_range and numor is None:
-            begin = 0
-            close = parent_close - parent_begin
-        elif reest and numeric_range and numor is not None:
-            begin = numeric_begin * numor % denom
-            close = numeric_close * numor % denom
-        elif reest and numeric_range and numor is None:
-            begin = 0
-            close = parent_close - parent_begin
-        else:
-            begin = begin
-            close = close
-
-        return begin, close
 
     def edit_reason(
         self,
@@ -997,9 +786,9 @@ class BudUnit:
         addin: float = None,
         numor: float = None,
         denom: float = None,
-        reest: bool = None,
-        numeric_road: RoadUnit = None,
-        range_source_road: float = None,
+        morph: bool = None,
+        range_push: RoadUnit = None,
+        del_range_push: RoadUnit = None,
         pledge: bool = None,
         factunit: FactUnit = None,
         descendant_pledge_count: int = None,
@@ -1013,9 +802,8 @@ class BudUnit:
         if healerhold is not None:
             for x_group_id in healerhold._group_ids:
                 if self.get_acctunit_group_ids_dict().get(x_group_id) is None:
-                    raise healerhold_group_id_Exception(
-                        f"Idea cannot edit healerhold because group_id '{x_group_id}' does not exist as group in Bud"
-                    )
+                    exception_text = f"Idea cannot edit healerhold because group_id '{x_group_id}' does not exist as group in Bud"
+                    raise healerhold_group_id_Exception(exception_text)
 
         x_ideaattrfilter = ideaattrfilter_shop(
             mass=mass,
@@ -1036,9 +824,9 @@ class BudUnit:
             addin=addin,
             numor=numor,
             denom=denom,
-            reest=reest,
-            numeric_road=numeric_road,
-            range_source_road=range_source_road,
+            morph=morph,
+            range_push=range_push,
+            del_range_push=del_range_push,
             descendant_pledge_count=descendant_pledge_count,
             all_acct_cred=all_acct_cred,
             all_acct_debt=all_acct_debt,
@@ -1049,25 +837,18 @@ class BudUnit:
             factunit=factunit,
             problem_bool=problem_bool,
         )
-        if x_ideaattrfilter.has_numeric_attrs():
-            self._set_ideaattrfilter_begin_close(x_ideaattrfilter, road)
         if x_ideaattrfilter.has_reason_premise():
             self._set_ideaattrfilter_premise_ranges(x_ideaattrfilter)
         x_idea = self.get_idea_obj(road)
         x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrfilter)
 
-        # # deleting or setting a awardlink reqquires a tree traverse to correctly set awardheirs and awardlines
-        # if awardlink_del is not None or awardlink is not None:
-        #     self.settle_bud()
-
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
     ) -> dict[RoadUnit, IdeaUnit]:
         self.settle_bud()
-        all_ideas = self._idea_dict.values()
         return {
             x_idea.get_road(): x_idea
-            for x_idea in all_ideas
+            for x_idea in self._idea_dict.values()
             if x_idea.is_agenda_item(necessary_base)
         }
 
@@ -1222,17 +1003,81 @@ class BudUnit:
         return x_idea
 
     def get_idea_ranged_kids(
-        self, idea_road: str, begin: float = None, close: float = None
+        self, idea_road: str, x_gogo_calc: float = None, x_stop_calc: float = None
     ) -> dict[IdeaUnit]:
         parent_idea = self.get_idea_obj(idea_road)
-        if begin is None and close is None:
-            begin = parent_idea._begin
-            close = parent_idea._close
-        elif begin is not None and close is None:
-            close = begin
+        if x_gogo_calc is None and x_stop_calc is None:
+            x_gogo_calc = parent_idea._gogo_want
+            x_gogo_calc = parent_idea._stop_want
+        elif x_gogo_calc is not None and x_stop_calc is None:
+            x_stop_calc = x_gogo_calc
 
-        idea_list = parent_idea.get_kids_in_range(begin=begin, close=close)
+        idea_list = parent_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
         return {x_idea._label: x_idea for x_idea in idea_list}
+
+    def get_inheritor_idea_list(
+        self, math_road: RoadUnit, inheritor_road: RoadUnit
+    ) -> list[IdeaUnit]:
+        if is_sub_road(inheritor_road, math_road):
+            idea_roads = all_roadunits_between(math_road, inheritor_road)
+        return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
+
+    def _init_idea_tree_walk(self):
+        range_push_dict = {}
+        idea_list = [self.get_idea_obj(self._real_id)]
+        while idea_list != []:
+            x_idea = idea_list.pop()
+            x_idea.clear_gogo_calc_stop_calc()
+            for idea_kid in x_idea.get_kids_in_range():
+                idea_kid.set_parent_road(x_idea.get_road())
+                idea_kid.set_level(x_idea._level)
+                idea_list.append(idea_kid)
+            for x_range_push in x_idea._range_pushs:
+                if range_push_dict.get(x_range_push):
+                    exception_text = f"Multiple IdeaUnits including ('{x_idea.get_road()}', '{range_push_dict.get(x_range_push)}') have range_push '{x_range_push}'"
+                    raise Multiple_range_push_Exception(exception_text)
+                range_push_dict[x_range_push] = x_idea.get_road()
+            self._idea_dict[x_idea.get_road()] = x_idea
+            for x_reason_base in x_idea._reasonunits.keys():
+                self._reason_bases.add(x_reason_base)
+
+    def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
+        exception_text = f"Error has occurred, Idea '{idea_road}' is having _gogo_calc and _stop_calc attributes set twice"
+        raise _gogo_calc_stop_calc_Exception(exception_text)
+
+    def _distribute_math_attrs(self, math_idea: IdeaUnit):
+        single_range_idea_list = [math_idea]
+        while single_range_idea_list != []:
+            r_idea = single_range_idea_list.pop()
+            if r_idea._range_evaluated:
+                self._raise_gogo_calc_stop_calc_exception(r_idea.get_road())
+            if r_idea.is_math():
+                r_idea._gogo_calc = r_idea._begin
+                r_idea._stop_calc = r_idea._close
+            else:
+                parent_road = get_parent_road(r_idea.get_road())
+                parent_idea = self.get_idea_obj(parent_road)
+                r_idea._gogo_calc = parent_idea._gogo_calc
+                r_idea._stop_calc = parent_idea._stop_calc
+                self._range_inheritors[r_idea.get_road()] = math_idea.get_road()
+            r_idea._transform_gogo_calc_stop_calc()
+
+            for range_push_road in r_idea._range_pushs:
+                range_push_idea = self.get_idea_obj(range_push_road)
+                if range_push_idea._range_evaluated:
+                    self._raise_gogo_calc_stop_calc_exception(range_push_road)
+                range_push_idea._gogo_calc = r_idea._gogo_calc
+                range_push_idea._stop_calc = r_idea._stop_calc
+                range_push_idea._transform_gogo_calc_stop_calc()
+                single_range_idea_list.extend(iter(range_push_idea._kids.values()))
+                math_idea_road = math_idea.get_road()
+                self._range_inheritors[range_push_idea.get_road()] = math_idea_road
+            single_range_idea_list.extend(iter(r_idea._kids.values()))
+
+    def _set_ideaunits_range(self):
+        for x_idea in self._idea_dict.values():
+            if x_idea.is_math():
+                self._distribute_math_attrs(x_idea)
 
     def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
         task_count = 0
@@ -1281,28 +1126,23 @@ class BudUnit:
 
         if econ_justified_by_problem is False or healerhold_count > 1:
             if econ_exceptions:
-                raise Exception_econs_justified(
-                    f"IdeaUnit '{road}' cannot sponsor ancestor econs."
-                )
+                exception_text = f"IdeaUnit '{road}' cannot sponsor ancestor econs."
+                raise Exception_econs_justified(exception_text)
             self._econs_justified = False
 
     def _set_root_attributes(self, econ_exceptions: bool):
-        self._idearoot._level = 0
-        self._idearoot.set_parent_road("")
+        self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.set_idearoot_inherit_reasonheirs()
         self._idearoot.set_doerheir(None, self._groupboxs)
-        self._idearoot.set_factheirs(self._idearoot._factunits)
         self._idearoot.inherit_awardheirs()
         self._idearoot.clear_awardlines()
-        self._idearoot._mass = 1
-        tree_traverse_count = self._tree_traverse_count
-        self._idearoot.set_active(tree_traverse_count, self._groupboxs, self._owner_id)
+        tt_count = self._tree_traverse_count
+        self._idearoot.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         self._idearoot.set_fund_attr(0, self._fund_pool, self._fund_pool)
         self._idearoot.set_awardheirs_fund_give_fund_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
         self._idearoot.clear_all_acct_cred_debt()
-        self._idearoot.pledge = False
         if self._idearoot.is_kidless():
             self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
             self._allot_fund_share(idea=self._idearoot)
@@ -1322,15 +1162,14 @@ class BudUnit:
         parent_idea: IdeaUnit,
         econ_exceptions: bool,
     ):
-        idea_kid.set_level(parent_idea._level)
-        idea_kid.set_parent_road(parent_idea.get_road())
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
+        idea_kid.set_range_factheirs(self._idea_dict, self._range_inheritors)
         idea_kid.set_doerheir(parent_idea._doerheir, self._groupboxs)
         idea_kid.inherit_awardheirs(parent_idea._awardheirs)
         idea_kid.clear_awardlines()
-        tree_traverse_count = self._tree_traverse_count
-        idea_kid.set_active(tree_traverse_count, self._groupboxs, self._owner_id)
+        tt_count = self._tree_traverse_count
+        idea_kid.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         idea_kid.set_fund_attr(fund_onset, fund_cease, self._fund_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
@@ -1344,7 +1183,7 @@ class BudUnit:
         if (
             self._tree_traverse_count == 1
             and idea_kid._mass != 0
-            and not idea_kid.is_kidless()
+            and idea_kid.is_kidless() is False
             and idea_kid.get_kids_mass_sum() == 0
         ):
             self._offtrack_kids_mass_set.add(idea_kid.get_road())
@@ -1364,7 +1203,7 @@ class BudUnit:
                 x_groupbox.set_membership(x_membership)
                 self.set_groupbox(x_groupbox)
 
-    def _calc_acctunit_metrics(self):
+    def _set_respect_ledgers(self):
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -1377,13 +1216,15 @@ class BudUnit:
         self._create_groupboxs_metrics()
         self._reset_acctunit_fund_give_take()
 
-    def _set_tree_traverse_stage(self):
+    def _clear_settle_attrs(self):
         self._rational = False
         self._tree_traverse_count = 0
         self._idea_dict = {self._idearoot.get_road(): self._idearoot}
         self._offtrack_kids_mass_set = set()
+        self._reason_bases = set()
+        self._range_inheritors = {}
 
-    def _clear_bud_base_metrics(self):
+    def _pre_tree_traverse_attrs(self):
         self._econs_justified = True
         self._econs_buildable = False
         self._sum_healerhold_share = 0
@@ -1391,22 +1232,26 @@ class BudUnit:
         self._healers_dict = {}
 
     def settle_bud(self, econ_exceptions: bool = False):
-        self._calc_acctunit_metrics()
-        self._set_tree_traverse_stage()
-        max_count = self._max_tree_traverse
+        self._clear_settle_attrs()
+        self._init_idea_tree_walk()
+        self._set_ideaunits_range()
+        self._set_respect_ledgers()
 
+        max_count = self._max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._clear_bud_base_metrics()
-            self._execute_tree_traverse(econ_exceptions)
-            self._check_if_any_idea_active_status_has_altered()
-            self._tree_traverse_count += 1
+            self._set_all_ideaunits_active_status_distribute_funds(econ_exceptions)
         self._after_all_tree_traverses_set_cred_debt()
         self._after_all_tree_traverses_set_healerhold_share()
 
-    def _execute_tree_traverse(self, econ_exceptions: bool = False):
+    def _set_all_ideaunits_active_status_distribute_funds(self, econ_exceptions):
+        self._pre_tree_traverse_attrs()
         self._pre_tree_traverse_cred_debt_reset()
         self._set_root_attributes(econ_exceptions)
+        self._execute_tree_traverse(econ_exceptions)
+        self._check_if_any_idea_active_status_has_altered()
+        self._tree_traverse_count += 1
 
+    def _execute_tree_traverse(self, econ_exceptions: bool = False):
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid._mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
@@ -1416,15 +1261,13 @@ class BudUnit:
 
         cache_idea_list = []
         for kid_label, idea_kid in self._idearoot._kids.items():
-            idearoot_kid_fund_num = alloted_fund_num.get(kid_label)
+            kid_fund_num = alloted_fund_num.get(kid_label)
             if x_idearoot_kid_fund_onset is None:
                 x_idearoot_kid_fund_onset = self._idearoot._fund_onset
-                x_idearoot_kid_fund_cease = (
-                    self._idearoot._fund_onset + idearoot_kid_fund_num
-                )
+                x_idearoot_kid_fund_cease = self._idearoot._fund_onset + kid_fund_num
             else:
                 x_idearoot_kid_fund_onset = x_idearoot_kid_fund_cease
-                x_idearoot_kid_fund_cease += idearoot_kid_fund_num
+                x_idearoot_kid_fund_cease += kid_fund_num
             self._set_kids_attributes(
                 idea_kid=idea_kid,
                 fund_onset=x_idearoot_kid_fund_onset,
@@ -1437,10 +1280,6 @@ class BudUnit:
         # no function recursion, recursion by iterateing over list that can be added to by iterations
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
-
-            if self._tree_traverse_count == 0:
-                self._idea_dict[parent_idea.get_road()] = parent_idea
-
             kids_items = parent_idea._kids.items()
             x_ledger = {x_road: idea_kid._mass for x_road, idea_kid in kids_items}
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
@@ -1600,16 +1439,10 @@ class BudUnit:
             create_missing_ideas=True,
         )
 
-    def get_idea_list_without_idearoot(self) -> list[IdeaUnit]:
-        self.settle_bud()
-        x_list = list(self._idea_dict.values())
-        x_list.pop(0)
-        return x_list
-
     def set_offtrack_fund(self) -> float:
+        mass_set = self._offtrack_kids_mass_set
         self._offtrack_fund = sum(
-            self.get_idea_obj(x_roadunit).get_fund_share()
-            for x_roadunit in self._offtrack_kids_mass_set
+            self.get_idea_obj(x_roadunit).get_fund_share() for x_roadunit in mass_set
         )
 
 
@@ -1645,6 +1478,8 @@ def budunit_shop(
         _econs_buildable=get_False_if_None(),
         _sum_healerhold_share=get_0_if_None(),
         _offtrack_kids_mass_set=set(),
+        _reason_bases=set(),
+        _range_inheritors={},
     )
     x_bud._idearoot = ideaunit_shop(
         _root=True,
@@ -1653,6 +1488,7 @@ def budunit_shop(
         _bud_real_id=x_bud._real_id,
         _road_delimiter=x_bud._road_delimiter,
         _fund_coin=x_bud._fund_coin,
+        _parent_road="",
     )
     x_bud.set_max_tree_traverse(3)
     x_bud._rational = False
@@ -1669,7 +1505,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
     x_bud._tally = obj_from_bud_dict(bud_dict, "_tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "_max_tree_traverse"))
-    x_bud.set_real_id(obj_from_bud_dict(bud_dict, "_real_id"))
+    x_bud._real_id = obj_from_bud_dict(bud_dict, "_real_id")
+    x_bud._idearoot._label = obj_from_bud_dict(bud_dict, "_real_id")
     bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")
     x_bud._road_delimiter = default_road_delimiter_if_none(bud_road_delimiter)
     x_bud._fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "_fund_pool"))
@@ -1696,16 +1533,17 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _root=True,
         _label=x_bud._real_id,
         _parent_road="",
+        _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
         _mass=get_obj_from_idea_dict(idearoot_dict, "_mass"),
         _begin=get_obj_from_idea_dict(idearoot_dict, "_begin"),
         _close=get_obj_from_idea_dict(idearoot_dict, "_close"),
         _numor=get_obj_from_idea_dict(idearoot_dict, "_numor"),
         _denom=get_obj_from_idea_dict(idearoot_dict, "_denom"),
-        _reest=get_obj_from_idea_dict(idearoot_dict, "_reest"),
+        _morph=get_obj_from_idea_dict(idearoot_dict, "_morph"),
+        _gogo_want=get_obj_from_idea_dict(idearoot_dict, "_gogo_want"),
+        _stop_want=get_obj_from_idea_dict(idearoot_dict, "_stop_want"),
         _problem_bool=get_obj_from_idea_dict(idearoot_dict, "_problem_bool"),
-        _range_source_road=get_obj_from_idea_dict(idearoot_dict, "_range_source_road"),
-        _numeric_road=get_obj_from_idea_dict(idearoot_dict, "_numeric_road"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
         _doerunit=get_obj_from_idea_dict(idearoot_dict, "_doerunit"),
         _healerhold=get_obj_from_idea_dict(idearoot_dict, "_healerhold"),
@@ -1743,7 +1581,9 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _close=get_obj_from_idea_dict(idea_dict, "_close"),
             _numor=get_obj_from_idea_dict(idea_dict, "_numor"),
             _denom=get_obj_from_idea_dict(idea_dict, "_denom"),
-            _reest=get_obj_from_idea_dict(idea_dict, "_reest"),
+            _morph=get_obj_from_idea_dict(idea_dict, "_morph"),
+            _gogo_want=get_obj_from_idea_dict(idea_dict, "_gogo_want"),
+            _stop_want=get_obj_from_idea_dict(idea_dict, "_stop_want"),
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
             _problem_bool=get_obj_from_idea_dict(idea_dict, "_problem_bool"),
             _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
@@ -1753,9 +1593,6 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),
             _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
-            _range_source_road=get_obj_from_idea_dict(idea_dict, "_range_source_road"),
-            _numeric_road=get_obj_from_idea_dict(idea_dict, "_numeric_road"),
-            # _bud_real_id=x_bud._real_id,
         )
         x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])
 

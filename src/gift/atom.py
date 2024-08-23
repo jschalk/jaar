@@ -95,10 +95,10 @@ class AtomUnit:
         # the order of required argments decides the location. The order must always be
         # the same
         sorted_required_arg_keys = get_sorted_required_arg_keys(self.category)
-        sorted_required_arg_values = []
-        for required_arg in sorted_required_arg_keys:
-            sorted_required_arg_values.append(self.required_args.get(required_arg))
-        return sorted_required_arg_values
+        return [
+            self.required_args.get(required_arg)
+            for required_arg in sorted_required_arg_keys
+        ]
 
     def is_required_args_valid(self) -> bool:
         if self.crud_text not in {atom_delete(), atom_insert(), atom_update()}:
@@ -241,10 +241,8 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
         begin=x_atom.get_value("_begin"),
         close=x_atom.get_value("_close"),
         denom=x_atom.get_value("_denom"),
-        numeric_road=x_atom.get_value("_numeric_road"),
         numor=x_atom.get_value("_numor"),
-        range_source_road=x_atom.get_value("_range_source_road"),
-        reest=x_atom.get_value("_reest"),
+        morph=x_atom.get_value("_morph"),
         mass=x_atom.get_value("_mass"),
         pledge=x_atom.get_value("pledge"),
     )
@@ -258,7 +256,6 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
             _begin=x_atom.get_value("_begin"),
             _close=x_atom.get_value("_close"),
             _denom=x_atom.get_value("_denom"),
-            _numeric_road=x_atom.get_value("_numeric_road"),
             _numor=x_atom.get_value("_numor"),
             pledge=x_atom.get_value("pledge"),
         ),
@@ -390,6 +387,16 @@ def _modify_bud_idea_grouphold_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value("group_id"))
 
 
+def _modify_bud_idea_range_push_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
+    x_ideaunit.del_range_push(x_atom.get_value("range_push"))
+
+
+def _modify_bud_idea_range_push_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
+    x_ideaunit.set_range_push(x_atom.get_value("range_push"))
+
+
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.del_acctunit(x_atom.get_value("acct_id"))
 
@@ -478,6 +485,13 @@ def _modify_bud_idea_grouphold(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_grouphold_insert(x_bud, x_atom)
 
 
+def _modify_bud_idea_range_push(x_bud: BudUnit, x_atom: AtomUnit):
+    if x_atom.crud_text == atom_delete():
+        _modify_bud_idea_range_push_delete(x_bud, x_atom)
+    elif x_atom.crud_text == atom_insert():
+        _modify_bud_idea_range_push_insert(x_bud, x_atom)
+
+
 def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
         _modify_bud_acctunit_delete(x_bud, x_atom)
@@ -504,6 +518,8 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
     elif x_atom.category == "bud_idea_grouphold":
         _modify_bud_idea_grouphold(x_bud, x_atom)
+    elif x_atom.category == "bud_idea_range_push":
+        _modify_bud_idea_range_push(x_bud, x_atom)
     elif x_atom.category == "bud_acctunit":
         _modify_bud_acctunit(x_bud, x_atom)
 
@@ -533,10 +549,8 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._begin != y_obj._begin
             or x_obj._close != y_obj._close
             or x_obj._denom != y_obj._denom
-            or x_obj._numeric_road != y_obj._numeric_road
             or x_obj._numor != y_obj._numor
-            or x_obj._range_source_road != y_obj._range_source_road
-            or x_obj._reest != y_obj._reest
+            or x_obj._morph != y_obj._morph
             or x_obj._mass != y_obj._mass
             or x_obj.pledge != y_obj.pledge
         )

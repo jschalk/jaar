@@ -11,7 +11,7 @@ from src._road.jaar_refer import (
     car_str,
     joc_str,
     luc_str,
-    mar_str,
+    ell_str,
     ric_str,
     sue_str,
     xio_str,
@@ -226,7 +226,7 @@ def taxs1_dict() -> dict:
     return {
         joc_str(): 100,
         luc_str(): 100,
-        mar_str(): 55,
+        ell_str(): 55,
         ric_str(): 60,
         sue_str(): 76,
         xio_str(): 130,
@@ -240,7 +240,7 @@ def rivercycle1_dict() -> dict:
         bob_str(): 60,
         joc_str(): 200,
         luc_str(): 55,
-        mar_str(): 66,
+        ell_str(): 66,
         sue_str(): 76,
         xio_str(): 130,
         yao_str(): 50,
@@ -252,7 +252,7 @@ def rivercycle2_dict() -> dict:
     return {
         bob_str(): 8,
         joc_str(): 13,
-        mar_str(): 1,
+        ell_str(): 1,
         sue_str(): 1,
     }
 

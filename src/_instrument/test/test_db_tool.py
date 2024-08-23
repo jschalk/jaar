@@ -28,7 +28,7 @@ def test_sqlite_text_ReturnsCorrectObj():
 
 
 def test_sqlite_null_ReturnsCorrectObj():
-    assert sqlite_null(True) == True
+    assert sqlite_null(True)
     assert sqlite_null("yea") == "yea"
     assert sqlite_null(None) == "NULL"
 

@@ -9,11 +9,10 @@ from src.bud.examples.example_buds import (
 
 def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
 
     # WHEN
-    relevant_roads = x_bud._get_relevant_roads({})
+    relevant_roads = sue_bud._get_relevant_roads({})
 
     # THEN
     print(f"{relevant_roads=}")
@@ -23,36 +22,34 @@ def test_BudUnit_get_relevant_roads_EmptyRoadUnitReturnsEmpty():
 
 def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
 
     # WHEN
-    root_dict = {x_bud._real_id: -1}
-    relevant_roads = x_bud._get_relevant_roads(root_dict)
+    root_dict = {sue_bud._real_id: -1}
+    relevant_roads = sue_bud._get_relevant_roads(root_dict)
 
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 1
-    assert relevant_roads == {x_bud._real_id}
+    assert relevant_roads == {sue_bud._real_id}
 
 
 def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     # ESTABLISH
-    x_bud = get_budunit_with_4_levels()
-    x_bud.settle_bud()
+    sue_bud = get_budunit_with_4_levels()
 
     # WHEN
     week_text = "weekdays"
-    week_road = x_bud.make_l1_road(week_text)
+    week_road = sue_bud.make_l1_road(week_text)
     sun_text = "Sunday"
-    sun_road = x_bud.make_road(week_road, sun_text)
+    sun_road = sue_bud.make_road(week_road, sun_text)
     sun_dict = {sun_road}
-    relevant_roads = x_bud._get_relevant_roads(sun_dict)
+    relevant_roads = sue_bud._get_relevant_roads(sun_dict)
 
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 3
-    assert relevant_roads == {x_bud._real_id, sun_road, week_road}
+    assert relevant_roads == {sue_bud._real_id, sun_road, week_road}
 
 
 def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
@@ -79,7 +76,6 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     sue_bud.edit_idea_attr(road=floor_road, reason=floor_reason)
 
     # WHEN
-    sue_bud.settle_bud()
     floor_dict = {floor_road}
     relevant_roads = sue_bud._get_relevant_roads(floor_dict)
 
@@ -117,7 +113,6 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     dirty_road = x_bud.make_road(status_road, dirty_text)
 
     # WHEN
-    x_bud.settle_bud()
     floor_dict = {floor_road}
     relevant_roads = x_bud._get_relevant_roads(floor_dict)
 
@@ -141,36 +136,7 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     assert unim_road not in relevant_roads
 
 
-def test_BudUnit_get_relevant_roads_numeric_road_ReturnSimple():
-    # ESTABLISH
-    yao_text = "Yao"
-    yao_bud = budunit_shop(_owner_id=yao_text)
-    casa_text = "casa"
-    casa_road = yao_bud.make_l1_road(casa_text)
-    yao_bud.set_l1_idea(ideaunit_shop(casa_text))
-    casa_idea = yao_bud.get_idea_obj(casa_road)
-    day_text = "day_range"
-    day_road = yao_bud.make_l1_road(day_text)
-    day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
-    yao_bud.set_l1_idea(day_idea)
-    yao_bud.edit_idea_attr(road=casa_road, denom=11, numeric_road=day_road)
-    assert casa_idea._begin == 4
-    print(f"{casa_idea._label=} {casa_idea._begin=} {casa_idea._close=}")
-
-    # WHEN
-    yao_bud.settle_bud()
-    roads_dict = {casa_road}
-    relevant_roads = yao_bud._get_relevant_roads(roads_dict)
-
-    # THEN
-    print(f"{relevant_roads=}")
-    assert len(relevant_roads) == 3
-    assert casa_road in relevant_roads
-    assert day_road in relevant_roads
-    assert relevant_roads == {yao_bud._real_id, casa_road, day_road}
-
-
-def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
+def test_BudUnit_get_relevant_roads_ReturnSimple():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_text)
@@ -179,18 +145,23 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     min_range_idea = ideaunit_shop(min_range_x_text, _begin=0, _close=2880)
     yao_bud.set_l1_idea(min_range_idea)
 
-    day_len_text = "day_length"
-    day_len_road = yao_bud.make_l1_road(day_len_text)
-    day_len_idea = ideaunit_shop(day_len_text, _begin=0, _close=1440)
-    yao_bud.set_l1_idea(day_len_idea)
+    day_distance_text = "day_1ce"
+    day_distance_road = yao_bud.make_l1_road(day_distance_text)
+    day_distance_idea = ideaunit_shop(day_distance_text, _begin=0, _close=1440)
+    yao_bud.set_l1_idea(day_distance_idea)
+
+    hour_distance_text = "hour_distance"
+    hour_distance_road = yao_bud.make_l1_road(hour_distance_text)
+    hour_distance_idea = ideaunit_shop(hour_distance_text)
+    yao_bud.set_l1_idea(hour_distance_idea)
 
     min_days_text = "days in minute_range"
     min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
-    min_days_idea = ideaunit_shop(min_days_text, _range_source_road=day_len_road)
+    min_days_idea = ideaunit_shop(min_days_text)
+    min_days_idea.set_range_push(hour_distance_road)
     yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
-    yao_bud.settle_bud()
     print(f"{yao_bud._idea_dict.keys()}")
     roads_dict = {min_days_road}
     relevant_roads = yao_bud._get_relevant_roads(roads_dict)
@@ -199,7 +170,30 @@ def test_BudUnit_get_relevant_roads_range_source_road_ReturnSimple():
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 4
     assert min_range_x_road in relevant_roads
-    assert day_len_road in relevant_roads
+    assert day_distance_road not in relevant_roads
+    assert hour_distance_road in relevant_roads
     assert min_days_road in relevant_roads
     assert yao_bud._real_id in relevant_roads
     # min_days_idea = yao_bud.get_idea_obj(min_days_road)
+
+
+def test_BudUnit_get_inheritor_idea_list_ReturnsObj_Scenario0():
+    # ESTABLISH
+    yao_budunit = budunit_shop("Yao")
+    tech_road = yao_budunit.make_l1_road("tech")
+    week_text = "week"
+    week_road = yao_budunit.make_road(tech_road, week_text)
+    yao_budunit.set_idea(ideaunit_shop(week_text, _begin=0, _close=10800), tech_road)
+    mon_text = "Monday"
+    mon_road = yao_budunit.make_road(week_road, mon_text)
+    yao_budunit.set_idea(ideaunit_shop(mon_text), week_road)
+    yao_budunit.settle_bud()
+
+    # WHEN
+    x_inheritor_idea_list = yao_budunit.get_inheritor_idea_list(week_road, mon_road)
+
+    # # THEN
+    assert len(x_inheritor_idea_list) == 2
+    week_idea = yao_budunit.get_idea_obj(week_road)
+    mon_idea = yao_budunit.get_idea_obj(mon_road)
+    assert x_inheritor_idea_list == [week_idea, mon_idea]

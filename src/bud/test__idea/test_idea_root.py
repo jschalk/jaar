@@ -3,7 +3,7 @@ from src._road.road import get_default_real_id_roadnode as root_label
 from pytest import raises as pytest_raises
 
 
-def test_ideaunit_shop_With_root_ReturnsCorrectObj():
+def test_ideaunit_shop_With_root_TrueReturnsObj():
     # ESTABLISH / WHEN
     x_idearoot = ideaunit_shop(_root=True)
 
@@ -12,7 +12,7 @@ def test_ideaunit_shop_With_root_ReturnsCorrectObj():
     assert x_idearoot._root
     assert x_idearoot._label == root_label()
     assert x_idearoot._kids == {}
-    assert x_idearoot._root == True
+    assert x_idearoot._root is True
 
 
 def test_IdeaUnit_set_label_get_default_real_id_roadnode_DoesNotRaisesError():
@@ -20,14 +20,13 @@ def test_IdeaUnit_set_label_get_default_real_id_roadnode_DoesNotRaisesError():
     x_idearoot = ideaunit_shop(_root=True)
 
     # WHEN
-
     x_idearoot.set_label(_label=root_label())
 
     # THEN
     assert x_idearoot._label == root_label()
 
 
-def test_IdeaUnit_set_label_CorrectlyDoesNotRaisesError():
+def test_IdeaUnit_set_label_DoesNotRaisesError():
     # ESTABLISH
     el_paso_text = "El Paso"
     x_idearoot = ideaunit_shop(_root=True, _bud_real_id=el_paso_text)
@@ -66,14 +65,3 @@ def test_IdeaUnit_set_label_RaisesErrorWhen_bud_real_id_IsNone():
         str(excinfo.value)
         == f"Cannot set idearoot to string different than '{root_label()}'"
     )
-
-
-def test_IdeaUnit_set_label_bud_real_id_EqualRootLabelDoesNotRaisesError():
-    # ESTABLISH
-    x_idearoot = ideaunit_shop(_root=True, _bud_real_id=root_label())
-
-    # WHEN
-    x_idearoot.set_label(_label=root_label())
-
-    # THEN
-    assert x_idearoot._label == root_label()

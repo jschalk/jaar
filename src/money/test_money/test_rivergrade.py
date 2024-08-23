@@ -128,7 +128,7 @@ def test_RiverGrade_set_tax_due_amount_SetsCorrectAttrs():
     x_rivergrade.set_tax_paid_amount(x_tax_due_amount)
     # THEN
     assert x_rivergrade.tax_bill_amount == x_rivergrade.tax_paid_amount
-    assert x_rivergrade.tax_paid_bool == True
+    assert x_rivergrade.tax_paid_bool is True
 
 
 def test_RiverGrade_get_dict_ReturnsCorrectObj():
