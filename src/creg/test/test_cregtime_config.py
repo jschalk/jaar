@@ -3,14 +3,14 @@ from src.bud.group import awardlink_shop
 from src.bud.reason_idea import reasonunit_shop
 from src.bud.idea import IdeaUnit, ideaunit_shop
 from src.bud.bud import budunit_shop, BudUnit
-from src.bud.hreg import (
-    add_time_hreg_ideaunit,
+from src.creg.creg import (
+    add_time_creg_ideaunit,
     get_time_min_from_dt,
     # get_time_dt_from_min,
     time_str,  # "time"
-    get_hregtime_text,  # "hregtime"
-    hregtime_begin,
-    hregtime_close,
+    get_cregtime_text,  # "cregtime"
+    cregtime_begin,
+    cregtime_close,
     c400_leap_num,
     c400_clean_num,
     c100_num,
@@ -148,7 +148,7 @@ def compare_kidless_ideas(src_budunit: BudUnit, x_budunit: BudUnit):
 
         # TODO Fix these failures to pass assert that are skipped.
         if not is_string_in_road(
-            "ZZ;time;hregtime;years;", src_road
+            "ZZ;time;cregtime;years;", src_road
         ) and src_road not in {
             "ZZ;time;tech;400 year segment;0-100-25 leap years;4year with leap",
             "ZZ;time;tech;400 year segment;100-104-0 leap years;4year wo leap",
@@ -180,7 +180,7 @@ def compare_kidlists(src_budunit: BudUnit, x_budunit: BudUnit):
 
 def test_get_time_min_from_dt_WorksCorrectly():
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_hreg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_ideaunit(sue_bud)
 
     assert get_time_min_from_dt(datetime(1938, 11, 10))
     assert get_time_min_from_dt(datetime(1, 1, 1)) == 440640
@@ -211,11 +211,11 @@ def test_timetech_builder_ReferencesFunctionsReturnObj():
     assert day_num() == 1440
 
 
-def test_hregtime_ReferenceFunctionsReturnObj():
+def test_cregtime_ReferenceFunctionsReturnObj():
     # ESTABLISH / WHEN / THEN
-    assert hregtime_begin() == 0
-    assert hregtime_close() == 1472657760
-    assert hregtime_close() == c400_leap_num() * 7
+    assert cregtime_begin() == 0
+    assert cregtime_close() == 1472657760
+    assert cregtime_close() == c400_leap_num() * 7
     assert week_begin() == 0
     assert week_close() == 10080
     assert jan_begin() == 437760
@@ -258,30 +258,30 @@ def test_hregtime_ReferenceFunctionsReturnObj():
     assert sat_close() == sat_begin() + day_num()
 
 
-def test_add_time_hreg_ideaunit_ReturnsObjWith_days():
+def test_add_time_creg_ideaunit_ReturnsObjWith_days():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
-    day_road = sue_budunit.make_road(hreg_road, day_str())
-    days_road = sue_budunit.make_road(hreg_road, days_str())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    day_road = sue_budunit.make_road(creg_road, day_str())
+    days_road = sue_budunit.make_road(creg_road, days_str())
     print(f"{time_road=}")
-    print(f"{hreg_road=}")
+    print(f"{creg_road=}")
     print(f"{day_road=}")
     assert not sue_budunit.idea_exists(time_road)
-    assert not sue_budunit.idea_exists(hreg_road)
+    assert not sue_budunit.idea_exists(creg_road)
     assert not sue_budunit.idea_exists(day_road)
     assert not sue_budunit.idea_exists(days_road)
 
     # WHEN
-    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
 
     # THEN
     assert sue_budunit.idea_exists(time_road)
-    assert sue_budunit.idea_exists(hreg_road)
-    hreg_idea = sue_budunit.get_idea_obj(hreg_road)
-    assert hreg_idea._begin == 0
-    assert hreg_idea._close == 1472657760
+    assert sue_budunit.idea_exists(creg_road)
+    creg_idea = sue_budunit.get_idea_obj(creg_road)
+    assert creg_idea._begin == 0
+    assert creg_idea._close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
     assert day_idea._gogo_want == 0
@@ -294,12 +294,12 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_days():
     assert not days_idea._morph
 
 
-def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
+def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
-    week_road = sue_budunit.make_road(hreg_road, week_str())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    week_road = sue_budunit.make_road(creg_road, week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     mon_road = sue_budunit.make_road(week_road, get_mon())
     tue_road = sue_budunit.make_road(week_road, get_tue())
@@ -307,7 +307,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
     thu_road = sue_budunit.make_road(week_road, get_thu())
     fri_road = sue_budunit.make_road(week_road, get_fri())
     sat_road = sue_budunit.make_road(week_road, get_sat())
-    weeks_road = sue_budunit.make_road(hreg_road, weeks_str())
+    weeks_road = sue_budunit.make_road(creg_road, weeks_str())
 
     assert not sue_budunit.idea_exists(week_road)
     assert not sue_budunit.idea_exists(sun_road)
@@ -320,7 +320,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_weeks():
     assert not sue_budunit.idea_exists(weeks_road)
 
     # WHEN
-    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
 
     # THEN
     assert sue_budunit.idea_exists(week_road)
@@ -346,8 +346,8 @@ def test_get_year_road_ReturnsObj():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
-    c400_leap_road = sue_budunit.make_road(hreg_road, c400_leap_str())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
     c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
     yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
@@ -355,15 +355,15 @@ def test_get_year_road_ReturnsObj():
     year_road = sue_budunit.make_road(yr4_clean_road, year_str())
 
     # WHEN / THEN
-    assert year_road == get_year_road(sue_budunit, hreg_road)
+    assert year_road == get_year_road(sue_budunit, creg_road)
 
 
-def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap_road():
+def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap_road():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
-    c400_leap_road = sue_budunit.make_road(hreg_road, c400_leap_str())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
     c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
     yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
@@ -373,7 +373,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap_road():
     assert not sue_budunit.idea_exists(c400_leap_road)
 
     # WHEN
-    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
 
     # THEN
     assert sue_budunit.idea_exists(c400_leap_road)
@@ -419,14 +419,14 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap_road():
     assert year_idea._morph
 
 
-def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
+def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
-    year_road = get_year_road(sue_budunit, hreg_road)
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    year_road = get_year_road(sue_budunit, creg_road)
 
-    assert not sue_budunit.idea_exists(hreg_road)
+    assert not sue_budunit.idea_exists(creg_road)
     assert not sue_budunit.idea_exists(year_road)
 
     jan_road = sue_budunit.make_road(year_road, jan_str())
@@ -456,10 +456,10 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     assert not sue_budunit.idea_exists(year_road)
 
     # WHEN
-    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
 
     # THEN
-    assert sue_budunit.idea_exists(hreg_road)
+    assert sue_budunit.idea_exists(creg_road)
     assert sue_budunit.idea_exists(year_road)
 
     year_idea = sue_budunit.get_idea_obj(year_road)
@@ -503,30 +503,30 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_years():
     assert sue_budunit.get_idea_obj(dec_road)._stop_want == 437760
 
 
-def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
+def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
-    day_road = sue_budunit.make_road(hreg_road, day_str())
-    days_road = sue_budunit.make_road(hreg_road, days_str())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    day_road = sue_budunit.make_road(creg_road, day_str())
+    days_road = sue_budunit.make_road(creg_road, days_str())
     print(f"{time_road=}")
-    print(f"{hreg_road=}")
+    print(f"{creg_road=}")
     print(f"{day_road=}")
     assert not sue_budunit.idea_exists(time_road)
-    assert not sue_budunit.idea_exists(hreg_road)
+    assert not sue_budunit.idea_exists(creg_road)
     assert not sue_budunit.idea_exists(day_road)
     assert not sue_budunit.idea_exists(days_road)
 
     # WHEN
-    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
 
     # THEN
     assert sue_budunit.idea_exists(time_road)
-    assert sue_budunit.idea_exists(hreg_road)
-    hreg_idea = sue_budunit.get_idea_obj(hreg_road)
-    assert hreg_idea._begin == 0
-    assert hreg_idea._close == 1472657760
+    assert sue_budunit.idea_exists(creg_road)
+    creg_idea = sue_budunit.get_idea_obj(creg_road)
+    assert creg_idea._begin == 0
+    assert creg_idea._close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
     assert day_idea._gogo_want == 0
@@ -539,12 +539,12 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
     assert not days_idea._morph
 
 
-def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
+def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    hreg_road = sue_budunit.make_road(time_road, get_hregtime_text())
-    day_road = sue_budunit.make_road(hreg_road, day_str())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    day_road = sue_budunit.make_road(creg_road, day_str())
     hour_road = sue_budunit.make_road(day_road, hour_str())
     hr_00_road = sue_budunit.make_road(day_road, hr_00_str())
     hr_01_road = sue_budunit.make_road(day_road, hr_01_str())
@@ -574,7 +574,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
     print(f"{day_road=}")
     print(f"{hr_00_road=}")
     assert not sue_budunit.idea_exists(time_road)
-    assert not sue_budunit.idea_exists(hreg_road)
+    assert not sue_budunit.idea_exists(creg_road)
     assert not sue_budunit.idea_exists(day_road)
     assert not sue_budunit.idea_exists(hour_road)
     assert not sue_budunit.idea_exists(hr_00_road)
@@ -603,13 +603,13 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
     assert not sue_budunit.idea_exists(hr_23_road)
 
     # WHEN
-    sue_budunit = add_time_hreg_ideaunit(sue_budunit)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
 
     # THEN
     day_idea = sue_budunit.get_idea_obj(day_road)
     print(f"{day_idea._kids.keys()=}")
     assert sue_budunit.idea_exists(time_road)
-    assert sue_budunit.idea_exists(hreg_road)
+    assert sue_budunit.idea_exists(creg_road)
     assert sue_budunit.idea_exists(day_road)
     assert sue_budunit.idea_exists(hour_road)
     assert sue_budunit.get_idea_obj(hour_road)._denom == 60
@@ -693,7 +693,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
 # def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
 #     # ESTABLISH
 #     sue_budunit = budunit_shop("Sue")
-#     sue_budunit.set_time_hreg_ideas(c400_count=7)
+#     sue_budunit.set_time_creg_ideas(c400_count=7)
 
 #     # WHEN THEN
 #     time_road = sue_budunit.make_l1_road("time")
@@ -707,7 +707,7 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
 # def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario3():
 #     # ESTABLISH
 #     sue_budunit = budunit_shop("Sue")
-#     sue_budunit.set_time_hreg_ideas(c400_count=7)
+#     sue_budunit.set_time_creg_ideas(c400_count=7)
 
 #     # WHEN THEN
 #     time_road = sue_budunit.make_l1_road("time")
@@ -720,13 +720,13 @@ def test_add_time_hreg_ideaunit_ReturnsObjWith_c400_leap():
 def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # ESTABLISH
     sue_text = "Sue"
-    sue_bud = add_time_hreg_ideaunit(budunit_shop(sue_text))
+    sue_bud = add_time_creg_ideaunit(budunit_shop(sue_text))
     clean_text = "clean"
     clean_road = sue_bud.make_l1_road(clean_text)
     sue_bud.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
     time_road = sue_bud.make_l1_road("time")
-    hregtime_road = sue_bud.make_road(time_road, "hregtime")
-    day_road = sue_bud.make_road(hregtime_road, "day")
+    cregtime_road = sue_bud.make_road(time_road, "cregtime")
+    day_road = sue_bud.make_road(cregtime_road, "day")
 
     sue_bud.edit_idea_attr(
         road=clean_road,
@@ -739,7 +739,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # WHEN
     open_x = 2063971110
     nigh_x1 = 2063971523
-    sue_bud.set_fact(base=hregtime_road, pick=hregtime_road, open=open_x, nigh=nigh_x1)
+    sue_bud.set_fact(base=cregtime_road, pick=cregtime_road, open=open_x, nigh=nigh_x1)
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()
@@ -751,7 +751,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # nigh_x2 = 1063971923
     open_x2 = 0
     nigh_x2 = 0
-    sue_bud.set_fact(base=hregtime_road, pick=hregtime_road, open=open_x2, nigh=nigh_x2)
+    sue_bud.set_fact(base=cregtime_road, pick=cregtime_road, open=open_x2, nigh=nigh_x2)
     print(f"YAYA {sue_bud._idearoot._factunits=}")
 
     # THEN
@@ -781,12 +781,12 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     cookery_dirty_road = sue_bud.make_road(cookery_room_road, cookery_dirty_text)
 
     # create gregorian timeline
-    add_time_hreg_ideaunit(sue_bud)
+    add_time_creg_ideaunit(sue_bud)
     time_road = sue_bud.make_l1_road("time")
-    hregtime_road = sue_bud.make_road(time_road, "hregtime")
-    hreg_idea = sue_bud.get_idea_obj(hregtime_road)
-    print(f"{hreg_idea._kids.keys()=}")
-    daytime_road = sue_bud.make_road(hregtime_road, "day")
+    cregtime_road = sue_bud.make_road(time_road, "cregtime")
+    creg_idea = sue_bud.get_idea_obj(cregtime_road)
+    print(f"{creg_idea._kids.keys()=}")
+    daytime_road = sue_bud.make_road(cregtime_road, "day")
     open_8am = 480
     nigh_8am = 480
 
@@ -835,7 +835,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
 def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/jaar/issues/69
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    add_time_hreg_ideaunit(sue_bud)
+    add_time_creg_ideaunit(sue_bud)
 
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
@@ -844,27 +844,27 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     sue_bud.set_l1_idea(ideaunit_shop(casa_text))
     sue_bud.set_idea(ideaunit_shop(laundry_text, pledge=True), casa_road)
     time_road = sue_bud.make_l1_road("time")
-    hregtime_road = sue_bud.make_road(time_road, "hregtime")
+    cregtime_road = sue_bud.make_road(time_road, "cregtime")
     sue_bud.edit_idea_attr(
         road=laundry_road,
-        reason_base=hregtime_road,
-        reason_premise=hregtime_road,
+        reason_base=cregtime_road,
+        reason_premise=cregtime_road,
         reason_premise_open=3420.0,
         reason_premise_nigh=3420.0,
         reason_premise_divisor=10080.0,
     )
     print("set first fact")
 
-    sue_bud.set_fact(hregtime_road, hregtime_road, 1064131200, nigh=1064135133)
+    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, nigh=1064135133)
     print("get 1st agenda dictionary")
     sue_agenda_dict = sue_bud.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")
     assert sue_agenda_dict == {}
 
     laundry_idea = sue_bud.get_idea_obj(laundry_road)
-    laundry_reasonheir = laundry_idea.get_reasonheir(hregtime_road)
-    laundry_premise = laundry_reasonheir.get_premise(hregtime_road)
-    laundry_factheir = laundry_idea._factheirs.get(hregtime_road)
+    laundry_reasonheir = laundry_idea.get_reasonheir(cregtime_road)
+    laundry_premise = laundry_reasonheir.get_premise(cregtime_road)
+    laundry_factheir = laundry_idea._factheirs.get(cregtime_road)
     # print(
     #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.open % 10080=}"
     # )
@@ -879,15 +879,15 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
     # WHEN
     print("set 2nd fact")
-    sue_bud.set_fact(hregtime_road, hregtime_road, 1064131200, nigh=1064136133)
+    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, nigh=1064136133)
     print("get 2nd agenda dictionary")
     sue_agenda_dict = sue_bud.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")
 
     laundry_idea = sue_bud.get_idea_obj(laundry_road)
-    laundry_reasonheir = laundry_idea.get_reasonheir(hregtime_road)
-    laundry_premise = laundry_reasonheir.get_premise(hregtime_road)
-    laundry_factheir = laundry_idea._factheirs.get(hregtime_road)
+    laundry_reasonheir = laundry_idea.get_reasonheir(cregtime_road)
+    laundry_premise = laundry_reasonheir.get_premise(cregtime_road)
+    laundry_factheir = laundry_idea._factheirs.get(cregtime_road)
     # print(
     #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.open % 10080=}"
     # )
@@ -898,9 +898,9 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     #     if x_ideaunit._label in [laundry_text]:
     #         print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
-    #         hreg_factheir = x_ideaunit._factheirs.get(hregtime_road)
-    #         print(f"{hreg_factheir.open % 10080=}")
-    #         print(f"{hreg_factheir.nigh % 10080=}")
+    #         creg_factheir = x_ideaunit._factheirs.get(cregtime_road)
+    #         print(f"{creg_factheir.open % 10080=}")
+    #         print(f"{creg_factheir.nigh % 10080=}")
 
     # THEN
     assert sue_agenda_dict == {}
@@ -908,7 +908,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
 # def test_get_time_dt_from_min_WorksCorrectly():
 #     sue_bud = budunit_shop("Sue")
-#     sue_bud = add_time_hreg_ideaunit(sue_bud)
+#     sue_bud = add_time_creg_ideaunit(sue_bud)
 #     assert get_time_dt_from_min(5000000)
 #     # assert g_lw.get_time_dt_from_min(
 #     #     min=g_lw.get_time_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))

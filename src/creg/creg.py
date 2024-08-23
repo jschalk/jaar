@@ -11,14 +11,14 @@ def get_time_min_from_dt(dt: datetime) -> int:
     return round(min_time_difference.total_seconds() / 60) + 440640
 
 
-def add_time_hreg_ideaunit(x_budunit: BudUnit) -> BudUnit:
+def add_time_creg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     time_road = x_budunit.make_l1_road(time_str())
     x_budunit.set_l1_idea(ideaunit_shop(time_str()))
-    hreg_road = _add_hregtime_ideaunit(x_budunit, time_road)
-    day_road = _add_day_ideaunits(x_budunit, hreg_road)
+    creg_road = _add_cregtime_ideaunit(x_budunit, time_road)
+    day_road = _add_day_ideaunits(x_budunit, creg_road)
     hour_road = _add_hour_ideaunits(x_budunit, day_road)
-    week_road = _add_week_ideaunits(x_budunit, hreg_road)
-    year_road = _add_c400_leap_idea(x_budunit, hreg_road)
+    week_road = _add_week_ideaunits(x_budunit, creg_road)
+    year_road = _add_c400_leap_idea(x_budunit, creg_road)
     add_month_ideaunits(x_budunit, year_road)
     return x_budunit
 
@@ -51,11 +51,11 @@ def day_num():
     return 1440
 
 
-def hregtime_begin():
+def cregtime_begin():
     return 0
 
 
-def hregtime_close():
+def cregtime_close():
     return c400_leap_num() * 7
 
 
@@ -203,7 +203,7 @@ def week_close():
 # def sat_close(): return sat_begin() + 1440
 
 
-def hreg_week_dict() -> dict[dict, int]:
+def creg_week_dict() -> dict[dict, int]:
     return {
         get_sun(): 5760,
         get_mon(): 7200,
@@ -216,31 +216,31 @@ def hreg_week_dict() -> dict[dict, int]:
 
 
 def sun_begin():
-    return hreg_week_dict().get(get_sun())
+    return creg_week_dict().get(get_sun())
 
 
 def mon_begin():
-    return hreg_week_dict().get(get_mon())
+    return creg_week_dict().get(get_mon())
 
 
 def tue_begin():
-    return hreg_week_dict().get(get_tue())
+    return creg_week_dict().get(get_tue())
 
 
 def wed_begin():
-    return hreg_week_dict().get(get_wed())
+    return creg_week_dict().get(get_wed())
 
 
 def thu_begin():
-    return hreg_week_dict().get(get_thu())
+    return creg_week_dict().get(get_thu())
 
 
 def fri_begin():
-    return hreg_week_dict().get(get_fri())
+    return creg_week_dict().get(get_fri())
 
 
 def sat_begin():
-    return hreg_week_dict().get(get_sat())
+    return creg_week_dict().get(get_sat())
 
 
 def sun_close():
@@ -271,22 +271,22 @@ def sat_close():
     return sat_begin() + day_num()
 
 
-def _add_hregtime_ideaunit(x_budunit: BudUnit, time_road: RoadUnit) -> RoadUnit:
-    hreg_idea = ideaunit_shop(
-        get_hregtime_text(), _begin=hregtime_begin(), _close=hregtime_close()
+def _add_cregtime_ideaunit(x_budunit: BudUnit, time_road: RoadUnit) -> RoadUnit:
+    creg_idea = ideaunit_shop(
+        get_cregtime_text(), _begin=cregtime_begin(), _close=cregtime_close()
     )
-    hreg_road = x_budunit.make_road(time_road, get_hregtime_text())
-    x_budunit.set_idea(hreg_idea, time_road)
-    return hreg_road
+    creg_road = x_budunit.make_road(time_road, get_cregtime_text())
+    x_budunit.set_idea(creg_idea, time_road)
+    return creg_road
 
 
-def _add_day_ideaunits(x_budunit: BudUnit, hreg_road: RoadUnit):
+def _add_day_ideaunits(x_budunit: BudUnit, creg_road: RoadUnit):
     day_idea = ideaunit_shop(day_str(), _denom=day_num(), _morph=True)
-    day_road = x_budunit.make_road(hreg_road, day_str())
+    day_road = x_budunit.make_road(creg_road, day_str())
     day_idea._gogo_want = 0
     day_idea._stop_want = day_num()
-    x_budunit.set_idea(day_idea, hreg_road)
-    x_budunit.set_idea(ideaunit_shop(days_str(), _denom=day_num()), hreg_road)
+    x_budunit.set_idea(day_idea, creg_road)
+    x_budunit.set_idea(ideaunit_shop(days_str(), _denom=day_num()), creg_road)
     return day_road
 
 
@@ -348,16 +348,16 @@ def _add_hour_ideaunits(x_budunit: BudUnit, day_road) -> RoadUnit:
     return hour_road
 
 
-def _add_week_ideaunits(x_budunit: BudUnit, hreg_road: RoadUnit) -> RoadUnit:
-    week_road = x_budunit.make_road(hreg_road, week_str())
+def _add_week_ideaunits(x_budunit: BudUnit, creg_road: RoadUnit) -> RoadUnit:
+    week_road = x_budunit.make_road(creg_road, week_str())
     week_idea = ideaunit_shop(week_str(), _denom=10080, _morph=True)
-    x_budunit.set_idea(week_idea, hreg_road)
-    for x_key, x_value in hreg_week_dict().items():
+    x_budunit.set_idea(week_idea, creg_road)
+    for x_key, x_value in creg_week_dict().items():
         stop_value = x_value + day_num()
         x_idea = ideaunit_shop(x_key, _gogo_want=x_value, _stop_want=stop_value)
         x_budunit.set_idea(x_idea, week_road)
-    x_budunit.set_idea(ideaunit_shop(weeks_str(), _denom=10080), hreg_road)
-    x_budunit.set_idea(week_idea, hreg_road)
+    x_budunit.set_idea(ideaunit_shop(weeks_str(), _denom=10080), creg_road)
+    x_budunit.set_idea(week_idea, creg_road)
     return x_budunit
 
 
@@ -420,7 +420,7 @@ def set_time_facts(
     open_minutes = get_time_min_from_dt(dt=open) if open is not None else None
     nigh_minutes = get_time_min_from_dt(dt=nigh) if nigh is not None else None
     time_road = x_budunit.make_l1_road("time")
-    minutes_fact = x_budunit.make_road(time_road, "hregtime")
+    minutes_fact = x_budunit.make_road(time_road, "cregtime")
     x_budunit.set_fact(
         base=minutes_fact,
         pick=minutes_fact,
@@ -445,8 +445,8 @@ def min_str() -> str:
     return "minutes"
 
 
-def get_hregtime_text():
-    return "hregtime"
+def get_cregtime_text():
+    return "cregtime"
 
 
 def get_sun():
