@@ -46,18 +46,6 @@ def stan_day_ideaunits() -> dict[str, IdeaUnit]:
     }
 
 
-def create_weekday_ideaunits(x_weekdays: list[str]) -> dict[str, IdeaUnit]:
-    x_dict = {}
-    for x_weekday_num in range(len(x_weekdays)):
-        x_idea = ideaunit_shop(
-            x_weekdays[x_weekday_num],
-            _gogo_want=x_weekday_num * day_length(),
-            _stop_want=(x_weekday_num + 1) * day_length(),
-        )
-        x_dict[x_weekdays[x_weekday_num]] = x_idea
-    return x_dict
-
-
 def c400_leap_str():
     return "c400_leap_str"
 
@@ -99,11 +87,22 @@ def creg_week_ideaunits() -> dict[str, IdeaUnit]:
     }
 
 
+def create_weekday_ideaunits(x_weekdays: list[str]) -> dict[str, IdeaUnit]:
+    x_dict = {}
+    for x_weekday_num in range(len(x_weekdays)):
+        x_idea = ideaunit_shop(
+            x_weekdays[x_weekday_num],
+            _gogo_want=x_weekday_num * day_length(),
+            _stop_want=(x_weekday_num + 1) * day_length(),
+        )
+        x_dict[x_weekdays[x_weekday_num]] = x_idea
+    return x_dict
+
+
 def create_month_ideaunits(x_months_list: list[list[str, int]]) -> dict[str, IdeaUnit]:
     x_dict = {}
     current_day = 0
-    for xmonths in x_months_list:
-        x_month_list = xmonths
+    for x_month_list in x_months_list:
         x_month_str = x_month_list[0]
         x_month_days = x_month_list[1]
         x_gogo = current_day * day_length()
@@ -111,6 +110,18 @@ def create_month_ideaunits(x_months_list: list[list[str, int]]) -> dict[str, Ide
         x_idea = ideaunit_shop(x_month_str, _gogo_want=x_gogo, _stop_want=x_stop)
         x_dict[x_month_str] = x_idea
         current_day = x_month_days
+    return x_dict
+
+
+def create_hour_ideaunits(x_hours_list: list[str]) -> dict[str, IdeaUnit]:
+    x_dict = {}
+    current_min = 0
+    for x_hour_list in x_hours_list:
+        x_hour_str = x_hour_list[0]
+        x_stop = x_hour_list[1]
+        x_idea = ideaunit_shop(x_hour_str, _gogo_want=current_min, _stop_want=x_stop)
+        x_dict[x_hour_str] = x_idea
+        current_min = x_stop
     return x_dict
 
 
@@ -142,34 +153,37 @@ def get_tue():
     return creg_weekday_ideaunits().get("Tuesday")._label
 
 
+def creg_hours_list() -> list[list[str, int]]:
+    return [
+        ["0-12am", 1 * 60],
+        ["1-1am", 2 * 60],
+        ["2-2am", 3 * 60],
+        ["3-3am", 4 * 60],
+        ["4-4am", 5 * 60],
+        ["5-5am", 6 * 60],
+        ["6-6am", 7 * 60],
+        ["7-7am", 8 * 60],
+        ["8-8am", 9 * 60],
+        ["9-9am", 10 * 60],
+        ["10-10am", 11 * 60],
+        ["11-11am", 12 * 60],
+        ["12-12pm", 13 * 60],
+        ["13-1pm", 14 * 60],
+        ["14-2pm", 15 * 60],
+        ["15-3pm", 16 * 60],
+        ["16-4pm", 17 * 60],
+        ["17-5pm", 18 * 60],
+        ["18-6pm", 19 * 60],
+        ["19-7pm", 20 * 60],
+        ["20-8pm", 21 * 60],
+        ["21-9pm", 22 * 60],
+        ["22-10pm", 23 * 60],
+        ["23-11pm", 24 * 60],
+    ]
+
+
 def creg_hour_ideaunits() -> dict[int, str]:
-    return {
-        0: ideaunit_shop("0-12am", _gogo_want=0 * 60, _stop_want=1 * 60),
-        1: ideaunit_shop("1-1am", _gogo_want=1 * 60, _stop_want=2 * 60),
-        2: ideaunit_shop("2-2am", _gogo_want=2 * 60, _stop_want=3 * 60),
-        3: ideaunit_shop("3-3am", _gogo_want=3 * 60, _stop_want=4 * 60),
-        4: ideaunit_shop("4-4am", _gogo_want=4 * 60, _stop_want=5 * 60),
-        5: ideaunit_shop("5-5am", _gogo_want=5 * 60, _stop_want=6 * 60),
-        6: ideaunit_shop("6-6am", _gogo_want=6 * 60, _stop_want=7 * 60),
-        7: ideaunit_shop("7-7am", _gogo_want=7 * 60, _stop_want=8 * 60),
-        8: ideaunit_shop("8-8am", _gogo_want=8 * 60, _stop_want=9 * 60),
-        9: ideaunit_shop("9-9am", _gogo_want=9 * 60, _stop_want=10 * 60),
-        10: ideaunit_shop("10-10am", _gogo_want=10 * 60, _stop_want=11 * 60),
-        11: ideaunit_shop("11-11am", _gogo_want=11 * 60, _stop_want=12 * 60),
-        12: ideaunit_shop("12-12pm", _gogo_want=12 * 60, _stop_want=13 * 60),
-        13: ideaunit_shop("13-1pm", _gogo_want=13 * 60, _stop_want=14 * 60),
-        14: ideaunit_shop("14-2pm", _gogo_want=14 * 60, _stop_want=15 * 60),
-        15: ideaunit_shop("15-3pm", _gogo_want=15 * 60, _stop_want=16 * 60),
-        16: ideaunit_shop("16-4pm", _gogo_want=16 * 60, _stop_want=17 * 60),
-        17: ideaunit_shop("17-5pm", _gogo_want=17 * 60, _stop_want=18 * 60),
-        18: ideaunit_shop("18-6pm", _gogo_want=18 * 60, _stop_want=19 * 60),
-        19: ideaunit_shop("19-7pm", _gogo_want=19 * 60, _stop_want=20 * 60),
-        20: ideaunit_shop("20-8pm", _gogo_want=20 * 60, _stop_want=21 * 60),
-        21: ideaunit_shop("21-9pm", _gogo_want=21 * 60, _stop_want=22 * 60),
-        22: ideaunit_shop("22-10pm", _gogo_want=22 * 60, _stop_want=23 * 60),
-        23: ideaunit_shop("23-11pm", _gogo_want=23 * 60, _stop_want=24 * 60),
-        hour_str(): ideaunit_shop(hour_str(), _denom=60, _morph=True),
-    }
+    return create_hour_ideaunits(creg_hours_list())
 
 
 def creg_weekday_ideaunits() -> dict[str, IdeaUnit]:
@@ -220,7 +234,7 @@ def days_str():
 
 
 def get_hour_label(x_int: int) -> str:
-    return creg_hour_ideaunits().get(x_int)._label
+    return creg_hours_list()[x_int][0]
 
 
 def hour_str():

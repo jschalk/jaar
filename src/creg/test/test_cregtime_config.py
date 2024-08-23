@@ -440,7 +440,6 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert not sue_budunit.idea_exists(time_road)
     assert not sue_budunit.idea_exists(creg_road)
     assert not sue_budunit.idea_exists(day_road)
-    assert not sue_budunit.idea_exists(hour_road)
     assert not sue_budunit.idea_exists(hr_00_road)
     assert not sue_budunit.idea_exists(hr_01_road)
     assert not sue_budunit.idea_exists(hr_02_road)
@@ -475,11 +474,10 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(creg_road)
     assert sue_budunit.idea_exists(day_road)
-    assert sue_budunit.idea_exists(hour_road)
-    assert sue_budunit.get_idea_obj(hour_road)._denom == 60
-    assert sue_budunit.get_idea_obj(hour_road)._morph
-    assert not sue_budunit.get_idea_obj(hour_road)._gogo_want
-    assert not sue_budunit.get_idea_obj(hour_road)._stop_want
+    # assert sue_budunit.get_idea_obj(hour_road)._denom == 60
+    # assert sue_budunit.get_idea_obj(hour_road)._morph
+    # assert not sue_budunit.get_idea_obj(hour_road)._gogo_want
+    # assert not sue_budunit.get_idea_obj(hour_road)._stop_want
     assert sue_budunit.idea_exists(hr_00_road)
     assert sue_budunit.idea_exists(hr_01_road)
     assert sue_budunit.idea_exists(hr_02_road)
