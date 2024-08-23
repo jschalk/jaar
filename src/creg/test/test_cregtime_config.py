@@ -6,13 +6,7 @@ from src.bud.bud import budunit_shop, BudUnit
 from src.creg.creg import (
     add_time_creg_ideaunit,
     get_time_min_from_dt,
-    # get_time_dt_from_min,
-    time_str,  # "time"
     get_cregtime_text,  # "cregtime"
-    year_str,
-    years_str,
-    get_year_road,
-    day_length,
     week_length,
     get_sun,  # "Sunday"
     get_mon,  # "Monday"
@@ -21,8 +15,24 @@ from src.creg.creg import (
     get_thu,  # "Thursday"
     get_fri,  # "Friday"
     get_sat,  # "Saturday"
-    creg_week_str,  # "week"
     weeks_str,  # f"{get_week()}s"
+    creg_week_str,  # "week"
+    creg_hour_label,
+    cregtime_ideaunit,
+    creg_month_ideaunits,
+    creg_weekday_ideaunits,
+)
+from src.creg.timebuilder import (
+    day_length,
+    time_str,
+    year_str,
+    get_year_road,
+    stan_c400_leap_ideaunits,
+    stan_c400_clean_ideaunits,
+    stan_c100_ideaunits,
+    stan_yr4_leap_ideaunits,
+    stan_yr4_clean_ideaunits,
+    stan_year_ideaunits,
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
     c400_leap_str,
@@ -32,16 +42,6 @@ from src.creg.creg import (
     yr4_clean_str,
     year_str,
     hour_str,
-    get_hour_label,
-    cregtime_ideaunit,
-    creg_month_ideaunits,
-    creg_weekday_ideaunits,
-    stan_c400_leap_ideaunits,
-    stan_c400_clean_ideaunits,
-    stan_c100_ideaunits,
-    stan_yr4_leap_ideaunits,
-    stan_yr4_clean_ideaunits,
-    stan_year_ideaunits,
 )
 from datetime import datetime
 
@@ -410,30 +410,30 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     day_road = sue_budunit.make_road(creg_road, day_str())
     hour_road = sue_budunit.make_road(day_road, hour_str())
-    hr_00_road = sue_budunit.make_road(day_road, get_hour_label(0))
-    hr_01_road = sue_budunit.make_road(day_road, get_hour_label(1))
-    hr_02_road = sue_budunit.make_road(day_road, get_hour_label(2))
-    hr_03_road = sue_budunit.make_road(day_road, get_hour_label(3))
-    hr_04_road = sue_budunit.make_road(day_road, get_hour_label(4))
-    hr_05_road = sue_budunit.make_road(day_road, get_hour_label(5))
-    hr_06_road = sue_budunit.make_road(day_road, get_hour_label(6))
-    hr_07_road = sue_budunit.make_road(day_road, get_hour_label(7))
-    hr_08_road = sue_budunit.make_road(day_road, get_hour_label(8))
-    hr_09_road = sue_budunit.make_road(day_road, get_hour_label(9))
-    hr_10_road = sue_budunit.make_road(day_road, get_hour_label(10))
-    hr_11_road = sue_budunit.make_road(day_road, get_hour_label(11))
-    hr_12_road = sue_budunit.make_road(day_road, get_hour_label(12))
-    hr_13_road = sue_budunit.make_road(day_road, get_hour_label(13))
-    hr_14_road = sue_budunit.make_road(day_road, get_hour_label(14))
-    hr_15_road = sue_budunit.make_road(day_road, get_hour_label(15))
-    hr_16_road = sue_budunit.make_road(day_road, get_hour_label(16))
-    hr_17_road = sue_budunit.make_road(day_road, get_hour_label(17))
-    hr_18_road = sue_budunit.make_road(day_road, get_hour_label(18))
-    hr_19_road = sue_budunit.make_road(day_road, get_hour_label(19))
-    hr_20_road = sue_budunit.make_road(day_road, get_hour_label(20))
-    hr_21_road = sue_budunit.make_road(day_road, get_hour_label(21))
-    hr_22_road = sue_budunit.make_road(day_road, get_hour_label(22))
-    hr_23_road = sue_budunit.make_road(day_road, get_hour_label(23))
+    hr_00_road = sue_budunit.make_road(day_road, creg_hour_label(0))
+    hr_01_road = sue_budunit.make_road(day_road, creg_hour_label(1))
+    hr_02_road = sue_budunit.make_road(day_road, creg_hour_label(2))
+    hr_03_road = sue_budunit.make_road(day_road, creg_hour_label(3))
+    hr_04_road = sue_budunit.make_road(day_road, creg_hour_label(4))
+    hr_05_road = sue_budunit.make_road(day_road, creg_hour_label(5))
+    hr_06_road = sue_budunit.make_road(day_road, creg_hour_label(6))
+    hr_07_road = sue_budunit.make_road(day_road, creg_hour_label(7))
+    hr_08_road = sue_budunit.make_road(day_road, creg_hour_label(8))
+    hr_09_road = sue_budunit.make_road(day_road, creg_hour_label(9))
+    hr_10_road = sue_budunit.make_road(day_road, creg_hour_label(10))
+    hr_11_road = sue_budunit.make_road(day_road, creg_hour_label(11))
+    hr_12_road = sue_budunit.make_road(day_road, creg_hour_label(12))
+    hr_13_road = sue_budunit.make_road(day_road, creg_hour_label(13))
+    hr_14_road = sue_budunit.make_road(day_road, creg_hour_label(14))
+    hr_15_road = sue_budunit.make_road(day_road, creg_hour_label(15))
+    hr_16_road = sue_budunit.make_road(day_road, creg_hour_label(16))
+    hr_17_road = sue_budunit.make_road(day_road, creg_hour_label(17))
+    hr_18_road = sue_budunit.make_road(day_road, creg_hour_label(18))
+    hr_19_road = sue_budunit.make_road(day_road, creg_hour_label(19))
+    hr_20_road = sue_budunit.make_road(day_road, creg_hour_label(20))
+    hr_21_road = sue_budunit.make_road(day_road, creg_hour_label(21))
+    hr_22_road = sue_budunit.make_road(day_road, creg_hour_label(22))
+    hr_23_road = sue_budunit.make_road(day_road, creg_hour_label(23))
 
     print(f"{day_road=}")
     print(f"{hr_00_road=}")

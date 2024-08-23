@@ -1,77 +1,29 @@
 from src._road.road import RoadUnit
 from src.bud.idea import ideaunit_shop, IdeaUnit
 from src.bud.bud import BudUnit
+from src.creg.timebuilder import (
+    week_length,
+    stan_c400_leap_ideaunits,
+    stan_c400_clean_ideaunits,
+    stan_c100_ideaunits,
+    stan_yr4_leap_ideaunits,
+    stan_yr4_clean_ideaunits,
+    stan_year_ideaunits,
+    stan_day_ideaunits,
+    c400_leap_str,
+    c400_clean_str,
+    c100_str,
+    yr4_leap_str,
+    yr4_clean_str,
+    year_str,
+    create_weekday_ideaunits,
+    create_month_ideaunits,
+    create_hour_ideaunits,
+    time_str,
+    day_str,
+    days_str,
+)
 from datetime import datetime
-
-
-def day_length():
-    return 1440
-
-
-def week_length():
-    return 10080
-
-
-def stan_c400_leap_ideaunits() -> dict[str, IdeaUnit]:
-    x_text = c400_leap_str()
-    return {x_text: ideaunit_shop(x_text, _denom=210379680, _morph=True)}
-
-
-def stan_c400_clean_ideaunits() -> dict[str, IdeaUnit]:
-    x_text = c400_clean_str()
-    return {x_text: ideaunit_shop(x_text, _denom=210378240, _morph=True)}
-
-
-def stan_c100_ideaunits() -> dict[str, IdeaUnit]:
-    return {c100_str(): ideaunit_shop(c100_str(), _denom=52594560, _morph=True)}
-
-
-def stan_yr4_leap_ideaunits() -> dict[str, IdeaUnit]:
-    return {yr4_leap_str(): ideaunit_shop(yr4_leap_str(), _denom=2103840, _morph=True)}
-
-
-def stan_yr4_clean_ideaunits() -> dict[str, IdeaUnit]:
-    x_text = yr4_clean_str()
-    return {x_text: ideaunit_shop(x_text, _denom=2102400, _morph=True)}
-
-
-def stan_year_ideaunits() -> dict[str, IdeaUnit]:
-    return {year_str(): ideaunit_shop(year_str(), _denom=525600, _morph=True)}
-
-
-def stan_day_ideaunits() -> dict[str, IdeaUnit]:
-    return {
-        day_str(): ideaunit_shop(day_str(), _denom=day_length(), _morph=True),
-        days_str(): ideaunit_shop(days_str(), _denom=day_length()),
-    }
-
-
-def c400_leap_str():
-    return "c400_leap_str"
-
-
-def c400_clean_str():
-    return "c400_clean_str"
-
-
-def c100_str():
-    return "c100_str"
-
-
-def yr4_leap_str():
-    return "yr4_leap_str"
-
-
-def yr4_clean_str():
-    return "yr4_clean_str"
-
-
-def year_str():
-    return "year_str"
-
-
-def years_str() -> str:
-    return f"{year_str()}"
 
 
 def cregtime_ideaunit() -> dict[str, IdeaUnit]:
@@ -85,44 +37,6 @@ def creg_week_ideaunits() -> dict[str, IdeaUnit]:
         x_text: ideaunit_shop(x_text, _denom=week_length(), _morph=True),
         weeks_str(): ideaunit_shop(weeks_str(), _denom=week_length()),
     }
-
-
-def create_weekday_ideaunits(x_weekdays: list[str]) -> dict[str, IdeaUnit]:
-    x_dict = {}
-    for x_weekday_num in range(len(x_weekdays)):
-        x_idea = ideaunit_shop(
-            x_weekdays[x_weekday_num],
-            _gogo_want=x_weekday_num * day_length(),
-            _stop_want=(x_weekday_num + 1) * day_length(),
-        )
-        x_dict[x_weekdays[x_weekday_num]] = x_idea
-    return x_dict
-
-
-def create_month_ideaunits(x_months_list: list[list[str, int]]) -> dict[str, IdeaUnit]:
-    x_dict = {}
-    current_day = 0
-    for x_month_list in x_months_list:
-        x_month_str = x_month_list[0]
-        x_month_days = x_month_list[1]
-        x_gogo = current_day * day_length()
-        x_stop = x_month_days * day_length()
-        x_idea = ideaunit_shop(x_month_str, _gogo_want=x_gogo, _stop_want=x_stop)
-        x_dict[x_month_str] = x_idea
-        current_day = x_month_days
-    return x_dict
-
-
-def create_hour_ideaunits(x_hours_list: list[str]) -> dict[str, IdeaUnit]:
-    x_dict = {}
-    current_min = 0
-    for x_hour_list in x_hours_list:
-        x_hour_str = x_hour_list[0]
-        x_stop = x_hour_list[1]
-        x_idea = ideaunit_shop(x_hour_str, _gogo_want=current_min, _stop_want=x_stop)
-        x_dict[x_hour_str] = x_idea
-        current_min = x_stop
-    return x_dict
 
 
 def get_wed():
@@ -217,23 +131,11 @@ def creg_month_ideaunits() -> dict[str, IdeaUnit]:
     return create_month_ideaunits(x_months_list)
 
 
-def time_str() -> str:
-    return "time"
-
-
 def get_cregtime_text():
     return "cregtime"
 
 
-def day_str():
-    return "day"
-
-
-def days_str():
-    return f"{day_str()}s"
-
-
-def get_hour_label(x_int: int) -> str:
+def creg_hour_label(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 

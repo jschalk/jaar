@@ -2,26 +2,27 @@ from src.bud.bud import budunit_shop
 from src.creg.creg import (
     get_time_min_from_dt,
     add_time_creg_ideaunit,
-    time_str,  # "time"
-    get_cregtime_text,  # "cregtime"
-    get_sun,  # "Sunday"
-    get_mon,  # "Monday"
-    get_tue,  # "Tuesday"
-    get_wed,  # "Wednesday"
-    get_thu,  # "Thursday"
-    get_fri,  # "Friday"
-    get_sat,  # "Saturday"
-    creg_week_str,  # "week"
-    weeks_str,  # f"{get_week()}s"
-    day_str,  # "day"
-    days_str,  # f"{get_day()}s"
+    get_cregtime_text,
+    get_sun,
+    get_mon,
+    get_tue,
+    get_wed,
+    get_thu,
+    get_fri,
+    get_sat,
+    creg_week_str,
+    weeks_str,
+)
+from src.creg.timebuilder import (
+    time_str,
+    day_str,
+    days_str,
     c400_leap_str,
     c400_clean_str,
     c100_str,
     yr4_leap_str,
     yr4_clean_str,
     year_str,
-    get_year_road,
 )
 from datetime import datetime
 
