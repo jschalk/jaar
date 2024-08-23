@@ -19,8 +19,8 @@ from src.creg.creg import (
     get_thu,  # "Thursday"
     get_fri,  # "Friday"
     get_sat,  # "Saturday"
-    wed_begin,
-    thu_begin,
+    wed_gogo_want,
+    thu_gogo_want,
     week_str,  # "week"
     weeks_str,  # f"{get_week()}s"
     day_str,  # "day"
@@ -428,8 +428,8 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
         clean_road,
         reason_base=wed_road,
         reason_premise=wed_road,
-        reason_premise_open=wed_begin(),
-        reason_premise_nigh=wed_begin() + 1440,
+        reason_premise_open=wed_gogo_want(),
+        reason_premise_nigh=wed_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_road,
@@ -447,8 +447,8 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     yr2000_mar6day = get_time_min_from_dt(datetime(2000, 3, 6, 0, 0))
     yr2000_mar7day = get_time_min_from_dt(datetime(2000, 3, 7, 0, 0))
     yr2000_mar8day = get_time_min_from_dt(datetime(2000, 3, 8, 0, 0))
-    print(f"{wed_begin()=}")
-    print(f"{wed_begin()+1440=}")
+    print(f"{wed_gogo_want()=}")
+    print(f"{wed_gogo_want()+1440=}")
     clean_idea = sue_budunit.get_idea_obj(clean_road)
     sue_budunit.set_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
     sue_budunit.settle_bud()
@@ -555,8 +555,8 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
         clean_road,
         reason_base=wed_road,
         reason_premise=wed_road,
-        reason_premise_open=thu_begin(),
-        reason_premise_nigh=thu_begin() + 1440,
+        reason_premise_open=thu_gogo_want(),
+        reason_premise_nigh=thu_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_road,
@@ -574,8 +574,8 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     yr2000_mar6day = get_time_min_from_dt(datetime(2000, 3, 6, 0, 0))
     yr2000_mar7day = get_time_min_from_dt(datetime(2000, 3, 7, 0, 0))
     yr2000_mar8day = get_time_min_from_dt(datetime(2000, 3, 8, 0, 0))
-    print(f"{wed_begin()=}")
-    print(f"{wed_begin()+1440=}")
+    print(f"{wed_gogo_want()=}")
+    print(f"{wed_gogo_want()+1440=}")
     clean_idea = sue_budunit.get_idea_obj(clean_road)
     sue_budunit.set_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
     sue_budunit.settle_bud()

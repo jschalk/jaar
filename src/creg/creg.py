@@ -97,69 +97,59 @@ def cregtime_close():
     return cregtime_config().get(get_cregtime_text())._close
 
 
-def creg_month_strs() -> list[str]:
-    return [
-        "mar",
-        "apr",
-        "may",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "oct",
-        "nov",
-        "dec",
-        "jan",
-        "feb",
-    ]
+def creg_day_config() -> dict[str, IdeaUnit]:
+    return {
+        day_str(): ideaunit_shop(day_str(), _denom=day_num(), _morph=True),
+        days_str(): ideaunit_shop(days_str(), _denom=day_num()),
+    }
 
 
 def mar_str() -> str:
-    return creg_month_strs()[0]
+    return "mar"
 
 
 def apr_str() -> str:
-    return creg_month_strs()[1]
+    return "apr"
 
 
 def may_str() -> str:
-    return creg_month_strs()[2]
+    return "may"
 
 
 def jun_str() -> str:
-    return creg_month_strs()[3]
+    return "jun"
 
 
 def jul_str() -> str:
-    return creg_month_strs()[4]
+    return "jul"
 
 
 def aug_str() -> str:
-    return creg_month_strs()[5]
+    return "aug"
 
 
 def sep_str() -> str:
-    return creg_month_strs()[6]
+    return "sep"
 
 
 def oct_str() -> str:
-    return creg_month_strs()[7]
+    return "oct"
 
 
 def nov_str() -> str:
-    return creg_month_strs()[8]
+    return "nov"
 
 
 def dec_str() -> str:
-    return creg_month_strs()[9]
+    return "dec"
 
 
 def jan_str() -> str:
-    return creg_month_strs()[10]
+    return "jan"
 
 
 def feb_str() -> str:
-    return creg_month_strs()[11]
+    return "feb"
 
 
 def creg_month_dict() -> dict[str, IdeaUnit]:
@@ -179,99 +169,123 @@ def creg_month_dict() -> dict[str, IdeaUnit]:
     }
 
 
-def jan_begin():
+# def jan_gogo_want():    return creg_month_dict().get(jan_str())._gogo_want
+# def feb_gogo_want():    return creg_month_dict().get(feb_str())._gogo_want
+# def mar_gogo_want():    return creg_month_dict().get(mar_str())._gogo_want
+# def apr_gogo_want():    return creg_month_dict().get(apr_str())._gogo_want
+# def may_gogo_want():    return creg_month_dict().get(may_str())._gogo_want
+# def jun_gogo_want():    return creg_month_dict().get(jun_str())._gogo_want
+# def jul_gogo_want():    return creg_month_dict().get(jul_str())._gogo_want
+# def aug_gogo_want():    return creg_month_dict().get(aug_str())._gogo_want
+# def sep_gogo_want():    return creg_month_dict().get(sep_str())._gogo_want
+# def oct_gogo_want():    return creg_month_dict().get(oct_str())._gogo_want
+# def nov_gogo_want():    return creg_month_dict().get(nov_str())._gogo_want
+# def dec_gogo_want():    return creg_month_dict().get(dec_str())._gogo_want
+# def jan_stop_want():    return creg_month_dict().get(jan_str())._stop_want
+# def feb_stop_want():    return creg_month_dict().get(feb_str())._stop_want
+# def mar_stop_want():    return creg_month_dict().get(mar_str())._stop_want
+# def apr_stop_want():    return creg_month_dict().get(apr_str())._stop_want
+# def may_stop_want():    return creg_month_dict().get(may_str())._stop_want
+# def jun_stop_want():    return creg_month_dict().get(jun_str())._stop_want
+# def jul_stop_want():    return creg_month_dict().get(jul_str())._stop_want
+# def aug_stop_want():    return creg_month_dict().get(aug_str())._stop_want
+# def sep_stop_want():    return creg_month_dict().get(sep_str())._stop_want
+# def oct_stop_want():    return creg_month_dict().get(oct_str())._stop_want
+# def nov_stop_want():    return creg_month_dict().get(nov_str())._stop_want
+# def dec_stop_want():    return creg_month_dict().get(dec_str())._stop_want
+def jan_gogo_want():
     return creg_month_dict().get(jan_str())._gogo_want
 
 
-def feb_begin():
+def feb_gogo_want():
     return creg_month_dict().get(feb_str())._gogo_want
 
 
-def mar_begin():
+def mar_gogo_want():
     return creg_month_dict().get(mar_str())._gogo_want
 
 
-def apr_begin():
+def apr_gogo_want():
     return creg_month_dict().get(apr_str())._gogo_want
 
 
-def may_begin():
+def may_gogo_want():
     return creg_month_dict().get(may_str())._gogo_want
 
 
-def jun_begin():
+def jun_gogo_want():
     return creg_month_dict().get(jun_str())._gogo_want
 
 
-def jul_begin():
+def jul_gogo_want():
     return creg_month_dict().get(jul_str())._gogo_want
 
 
-def aug_begin():
+def aug_gogo_want():
     return creg_month_dict().get(aug_str())._gogo_want
 
 
-def sep_begin():
+def sep_gogo_want():
     return creg_month_dict().get(sep_str())._gogo_want
 
 
-def oct_begin():
+def oct_gogo_want():
     return creg_month_dict().get(oct_str())._gogo_want
 
 
-def nov_begin():
+def nov_gogo_want():
     return creg_month_dict().get(nov_str())._gogo_want
 
 
-def dec_begin():
+def dec_gogo_want():
     return creg_month_dict().get(dec_str())._gogo_want
 
 
-def jan_close():
+def jan_stop_want():
     return creg_month_dict().get(jan_str())._stop_want
 
 
-def feb_close():
+def feb_stop_want():
     return creg_month_dict().get(feb_str())._stop_want
 
 
-def mar_close():
+def mar_stop_want():
     return creg_month_dict().get(mar_str())._stop_want
 
 
-def apr_close():
+def apr_stop_want():
     return creg_month_dict().get(apr_str())._stop_want
 
 
-def may_close():
+def may_stop_want():
     return creg_month_dict().get(may_str())._stop_want
 
 
-def jun_close():
+def jun_stop_want():
     return creg_month_dict().get(jun_str())._stop_want
 
 
-def jul_close():
+def jul_stop_want():
     return creg_month_dict().get(jul_str())._stop_want
 
 
-def aug_close():
+def aug_stop_want():
     return creg_month_dict().get(aug_str())._stop_want
 
 
-def sep_close():
+def sep_stop_want():
     return creg_month_dict().get(sep_str())._stop_want
 
 
-def oct_close():
+def oct_stop_want():
     return creg_month_dict().get(oct_str())._stop_want
 
 
-def nov_close():
+def nov_stop_want():
     return creg_month_dict().get(nov_str())._stop_want
 
 
-def dec_close():
+def dec_stop_want():
     return creg_month_dict().get(dec_str())._stop_want
 
 
@@ -303,6 +317,36 @@ def get_tue():
     return creg_week_dict().get("Tuesday")._label
 
 
+def creg_hour_config() -> dict[int, str]:
+    return {
+        0: ideaunit_shop("0-12am", _gogo_want=0 * 60, _stop_want=1 * 60),
+        1: ideaunit_shop("1-1am", _gogo_want=1 * 60, _stop_want=2 * 60),
+        2: ideaunit_shop("2-2am", _gogo_want=2 * 60, _stop_want=3 * 60),
+        3: ideaunit_shop("3-3am", _gogo_want=3 * 60, _stop_want=4 * 60),
+        4: ideaunit_shop("4-4am", _gogo_want=4 * 60, _stop_want=5 * 60),
+        5: ideaunit_shop("5-5am", _gogo_want=5 * 60, _stop_want=6 * 60),
+        6: ideaunit_shop("6-6am", _gogo_want=6 * 60, _stop_want=7 * 60),
+        7: ideaunit_shop("7-7am", _gogo_want=7 * 60, _stop_want=8 * 60),
+        8: ideaunit_shop("8-8am", _gogo_want=8 * 60, _stop_want=9 * 60),
+        9: ideaunit_shop("9-9am", _gogo_want=9 * 60, _stop_want=10 * 60),
+        10: ideaunit_shop("10-10am", _gogo_want=10 * 60, _stop_want=11 * 60),
+        11: ideaunit_shop("11-11am", _gogo_want=11 * 60, _stop_want=12 * 60),
+        12: ideaunit_shop("12-12pm", _gogo_want=12 * 60, _stop_want=13 * 60),
+        13: ideaunit_shop("13-1pm", _gogo_want=13 * 60, _stop_want=14 * 60),
+        14: ideaunit_shop("14-2pm", _gogo_want=14 * 60, _stop_want=15 * 60),
+        15: ideaunit_shop("15-3pm", _gogo_want=15 * 60, _stop_want=16 * 60),
+        16: ideaunit_shop("16-4pm", _gogo_want=16 * 60, _stop_want=17 * 60),
+        17: ideaunit_shop("17-5pm", _gogo_want=17 * 60, _stop_want=18 * 60),
+        18: ideaunit_shop("18-6pm", _gogo_want=18 * 60, _stop_want=19 * 60),
+        19: ideaunit_shop("19-7pm", _gogo_want=19 * 60, _stop_want=20 * 60),
+        20: ideaunit_shop("20-8pm", _gogo_want=20 * 60, _stop_want=21 * 60),
+        21: ideaunit_shop("21-9pm", _gogo_want=21 * 60, _stop_want=22 * 60),
+        22: ideaunit_shop("22-10pm", _gogo_want=22 * 60, _stop_want=23 * 60),
+        23: ideaunit_shop("23-11pm", _gogo_want=23 * 60, _stop_want=24 * 60),
+        hour_str(): ideaunit_shop(hour_str(), _denom=60, _morph=True),
+    }
+
+
 def week_begin():
     return 0
 
@@ -330,59 +374,59 @@ def creg_week_dict() -> dict[str, IdeaUnit]:
     }
 
 
-def sun_begin():
+def sun_gogo_want():
     return creg_week_dict().get(get_sun())._gogo_want
 
 
-def mon_begin():
+def mon_gogo_want():
     return creg_week_dict().get(get_mon())._gogo_want
 
 
-def tue_begin():
+def tue_gogo_want():
     return creg_week_dict().get(get_tue())._gogo_want
 
 
-def wed_begin():
+def wed_gogo_want():
     return creg_week_dict().get(get_wed())._gogo_want
 
 
-def thu_begin():
+def thu_gogo_want():
     return creg_week_dict().get(get_thu())._gogo_want
 
 
-def fri_begin():
+def fri_gogo_want():
     return creg_week_dict().get(get_fri())._gogo_want
 
 
-def sat_begin():
+def sat_gogo_want():
     return creg_week_dict().get(get_sat())._gogo_want
 
 
-def sun_close():
+def sun_stop_want():
     return creg_week_dict().get(get_sun())._stop_want
 
 
-def mon_close():
+def mon_stop_want():
     return creg_week_dict().get(get_mon())._stop_want
 
 
-def tue_close():
+def tue_stop_want():
     return creg_week_dict().get(get_tue())._stop_want
 
 
-def wed_close():
+def wed_stop_want():
     return creg_week_dict().get(get_wed())._stop_want
 
 
-def thu_close():
+def thu_stop_want():
     return creg_week_dict().get(get_thu())._stop_want
 
 
-def fri_close():
+def fri_stop_want():
     return creg_week_dict().get(get_fri())._stop_want
 
 
-def sat_close():
+def sat_stop_want():
     return creg_week_dict().get(get_sat())._stop_want
 
 
@@ -419,44 +463,9 @@ def days_str():
     return f"{day_str()}s"
 
 
-def _add_day_ideaunits(x_budunit: BudUnit, creg_road: RoadUnit):
-    day_idea = ideaunit_shop(day_str(), _denom=day_num(), _morph=True)
-    day_road = x_budunit.make_road(creg_road, day_str())
-    day_idea._gogo_want = 0
-    day_idea._stop_want = day_num()
-    x_budunit.set_idea(day_idea, creg_road)
-    x_budunit.set_idea(ideaunit_shop(days_str(), _denom=day_num()), creg_road)
-    return day_road
-
-
-def creg_hour_config() -> dict[int, str]:
-    return {
-        0: ideaunit_shop("0-12am", _gogo_want=0 * 60, _stop_want=1 * 60),
-        1: ideaunit_shop("1-1am", _gogo_want=1 * 60, _stop_want=2 * 60),
-        2: ideaunit_shop("2-2am", _gogo_want=2 * 60, _stop_want=3 * 60),
-        3: ideaunit_shop("3-3am", _gogo_want=3 * 60, _stop_want=4 * 60),
-        4: ideaunit_shop("4-4am", _gogo_want=4 * 60, _stop_want=5 * 60),
-        5: ideaunit_shop("5-5am", _gogo_want=5 * 60, _stop_want=6 * 60),
-        6: ideaunit_shop("6-6am", _gogo_want=6 * 60, _stop_want=7 * 60),
-        7: ideaunit_shop("7-7am", _gogo_want=7 * 60, _stop_want=8 * 60),
-        8: ideaunit_shop("8-8am", _gogo_want=8 * 60, _stop_want=9 * 60),
-        9: ideaunit_shop("9-9am", _gogo_want=9 * 60, _stop_want=10 * 60),
-        10: ideaunit_shop("10-10am", _gogo_want=10 * 60, _stop_want=11 * 60),
-        11: ideaunit_shop("11-11am", _gogo_want=11 * 60, _stop_want=12 * 60),
-        12: ideaunit_shop("12-12pm", _gogo_want=12 * 60, _stop_want=13 * 60),
-        13: ideaunit_shop("13-1pm", _gogo_want=13 * 60, _stop_want=14 * 60),
-        14: ideaunit_shop("14-2pm", _gogo_want=14 * 60, _stop_want=15 * 60),
-        15: ideaunit_shop("15-3pm", _gogo_want=15 * 60, _stop_want=16 * 60),
-        16: ideaunit_shop("16-4pm", _gogo_want=16 * 60, _stop_want=17 * 60),
-        17: ideaunit_shop("17-5pm", _gogo_want=17 * 60, _stop_want=18 * 60),
-        18: ideaunit_shop("18-6pm", _gogo_want=18 * 60, _stop_want=19 * 60),
-        19: ideaunit_shop("19-7pm", _gogo_want=19 * 60, _stop_want=20 * 60),
-        20: ideaunit_shop("20-8pm", _gogo_want=20 * 60, _stop_want=21 * 60),
-        21: ideaunit_shop("21-9pm", _gogo_want=21 * 60, _stop_want=22 * 60),
-        22: ideaunit_shop("22-10pm", _gogo_want=22 * 60, _stop_want=23 * 60),
-        23: ideaunit_shop("23-11pm", _gogo_want=23 * 60, _stop_want=24 * 60),
-        hour_str(): ideaunit_shop(hour_str(), _denom=60, _morph=True),
-    }
+def _add_day_ideaunits(x_budunit: BudUnit, parent_road: RoadUnit):
+    add_x_ideaunits(x_budunit, parent_road, creg_day_config())
+    return x_budunit.make_road(parent_road, day_str())
 
 
 def creg_hour_str(x_int: int) -> str:
@@ -521,14 +530,14 @@ def add_x_ideaunits(
         _load_time_ideaunit_idea(x_budunit, x_time_ideaunit, parent_road)
 
 
-def set_time_facts(
-    x_budunit: BudUnit, open: datetime = None, nigh: datetime = None
-) -> None:
-    open_minutes = get_time_min_from_dt(dt=open) if open is not None else None
-    nigh_minutes = get_time_min_from_dt(dt=nigh) if nigh is not None else None
-    time_road = x_budunit.make_l1_road("time")
-    minutes_fact = x_budunit.make_road(time_road, "cregtime")
-    x_budunit.set_fact(minutes_fact, minutes_fact, open_minutes, nigh_minutes)
+# def set_time_facts(
+#     x_budunit: BudUnit, open: datetime = None, nigh: datetime = None
+# ) -> None:
+#     open_minutes = get_time_min_from_dt(dt=open) if open is not None else None
+#     nigh_minutes = get_time_min_from_dt(dt=nigh) if nigh is not None else None
+#     time_road = x_budunit.make_l1_road("time")
+#     minutes_fact = x_budunit.make_road(time_road, "cregtime")
+#     x_budunit.set_fact(minutes_fact, minutes_fact, open_minutes, nigh_minutes)
 
 
 def get_year_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:

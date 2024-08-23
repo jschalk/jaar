@@ -54,44 +54,44 @@ from src.creg.creg import (
     year_str,
     hour_str,
     creg_hour_str,
-    jan_begin,
-    feb_begin,
-    mar_begin,
-    apr_begin,
-    may_begin,
-    jun_begin,
-    jul_begin,
-    aug_begin,
-    sep_begin,
-    oct_begin,
-    nov_begin,
-    dec_begin,
-    jan_close,
-    feb_close,
-    mar_close,
-    apr_close,
-    may_close,
-    jun_close,
-    jul_close,
-    aug_close,
-    sep_close,
-    oct_close,
-    nov_close,
-    dec_close,
-    sun_begin,
-    mon_begin,
-    tue_begin,
-    wed_begin,
-    thu_begin,
-    fri_begin,
-    sat_begin,
-    sun_close,
-    mon_close,
-    tue_close,
-    wed_close,
-    thu_close,
-    fri_close,
-    sat_close,
+    jan_gogo_want,
+    feb_gogo_want,
+    mar_gogo_want,
+    apr_gogo_want,
+    may_gogo_want,
+    jun_gogo_want,
+    jul_gogo_want,
+    aug_gogo_want,
+    sep_gogo_want,
+    oct_gogo_want,
+    nov_gogo_want,
+    dec_gogo_want,
+    jan_stop_want,
+    feb_stop_want,
+    mar_stop_want,
+    apr_stop_want,
+    may_stop_want,
+    jun_stop_want,
+    jul_stop_want,
+    aug_stop_want,
+    sep_stop_want,
+    oct_stop_want,
+    nov_stop_want,
+    dec_stop_want,
+    sun_gogo_want,
+    mon_gogo_want,
+    tue_gogo_want,
+    wed_gogo_want,
+    thu_gogo_want,
+    fri_gogo_want,
+    sat_gogo_want,
+    sun_stop_want,
+    mon_stop_want,
+    tue_stop_want,
+    wed_stop_want,
+    thu_stop_want,
+    fri_stop_want,
+    sat_stop_want,
 )
 from datetime import datetime
 
@@ -136,44 +136,44 @@ def test_cregtime_ReferenceFunctionsReturnObj():
     assert cregtime_close() == c400_leap_num() * 7
     assert week_begin() == 0
     assert week_close() == 10080
-    assert jan_begin() == 437760
-    assert feb_begin() == 480960
-    assert mar_begin() == 0
-    assert apr_begin() == 44640
-    assert may_begin() == 84960
-    assert jun_begin() == 129600
-    assert jul_begin() == 172800
-    assert aug_begin() == 217440
-    assert sep_begin() == 260640
-    assert oct_begin() == 305280
-    assert nov_begin() == 349920
-    assert dec_begin() == 393120
-    assert jan_close() == 480960
-    assert feb_close() == 525600
-    assert mar_close() == 44640
-    assert apr_close() == 84960
-    assert may_close() == 129600
-    assert jun_close() == 172800
-    assert jul_close() == 217440
-    assert aug_close() == 260640
-    assert sep_close() == 305280
-    assert oct_close() == 349920
-    assert nov_close() == 393120
-    assert dec_close() == 437760
-    assert sun_begin() == 5760
-    assert mon_begin() == 7200
-    assert tue_begin() == 8640
-    assert wed_begin() == 0
-    assert thu_begin() == 1440
-    assert fri_begin() == 2880
-    assert sat_begin() == 4320
-    assert sun_close() == sun_begin() + day_num()
-    assert mon_close() == mon_begin() + day_num()
-    assert tue_close() == tue_begin() + day_num()
-    assert wed_close() == wed_begin() + day_num()
-    assert thu_close() == thu_begin() + day_num()
-    assert fri_close() == fri_begin() + day_num()
-    assert sat_close() == sat_begin() + day_num()
+    assert jan_gogo_want() == 437760
+    assert feb_gogo_want() == 480960
+    assert mar_gogo_want() == 0
+    assert apr_gogo_want() == 44640
+    assert may_gogo_want() == 84960
+    assert jun_gogo_want() == 129600
+    assert jul_gogo_want() == 172800
+    assert aug_gogo_want() == 217440
+    assert sep_gogo_want() == 260640
+    assert oct_gogo_want() == 305280
+    assert nov_gogo_want() == 349920
+    assert dec_gogo_want() == 393120
+    assert jan_stop_want() == 480960
+    assert feb_stop_want() == 525600
+    assert mar_stop_want() == 44640
+    assert apr_stop_want() == 84960
+    assert may_stop_want() == 129600
+    assert jun_stop_want() == 172800
+    assert jul_stop_want() == 217440
+    assert aug_stop_want() == 260640
+    assert sep_stop_want() == 305280
+    assert oct_stop_want() == 349920
+    assert nov_stop_want() == 393120
+    assert dec_stop_want() == 437760
+    assert sun_gogo_want() == 5760
+    assert mon_gogo_want() == 7200
+    assert tue_gogo_want() == 8640
+    assert wed_gogo_want() == 0
+    assert thu_gogo_want() == 1440
+    assert fri_gogo_want() == 2880
+    assert sat_gogo_want() == 4320
+    assert sun_stop_want() == sun_gogo_want() + day_num()
+    assert mon_stop_want() == mon_gogo_want() + day_num()
+    assert tue_stop_want() == tue_gogo_want() + day_num()
+    assert wed_stop_want() == wed_gogo_want() + day_num()
+    assert thu_stop_want() == thu_gogo_want() + day_num()
+    assert fri_stop_want() == fri_gogo_want() + day_num()
+    assert sat_stop_want() == sat_gogo_want() + day_num()
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_days():
@@ -202,8 +202,6 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_days():
     assert creg_idea._close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
-    assert day_idea._gogo_want == 0
-    assert day_idea._stop_want == 1440
     assert day_idea._denom == 1440
     assert day_idea._morph
     assert sue_budunit.idea_exists(days_road)
@@ -447,8 +445,6 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert creg_idea._close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
-    assert day_idea._gogo_want == 0
-    assert day_idea._stop_want == 1440
     assert day_idea._denom == 1440
     assert day_idea._morph
     assert sue_budunit.idea_exists(days_road)
@@ -723,8 +719,8 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert len(sue_bud._accts) == 0
     assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
-    assert sue_bud.get_idea_obj(daytime_road)._gogo_want == 0
-    assert sue_bud.get_idea_obj(daytime_road)._stop_want == 1440
+    assert sue_bud.get_idea_obj(daytime_road)._denom == 1440
+    assert sue_bud.get_idea_obj(daytime_road)._morph
     print(f"{sweep_idea.get_road()=}")
 
     # ESTABLISH
@@ -742,8 +738,6 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert sue_bud.get_idea_obj(clean_things_road) is not None
     assert sue_bud.get_idea_obj(cookery_room_road) is not None
     assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
-    assert sue_bud.get_idea_obj(daytime_road)._gogo_want == 0
-    assert sue_bud.get_idea_obj(daytime_road)._stop_want == 1440
     assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
     assert sue_bud.get_acctunit_group_ids_dict().get(family_text) is None
 
