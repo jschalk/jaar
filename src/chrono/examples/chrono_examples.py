@@ -1,6 +1,8 @@
+from src._instrument.file import open_file
+from src._instrument.python import get_dict_from_json
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit
-from src.creg.timebuilder import (
+from src.chrono.timebuilder import (
     create_weekday_ideaunits,
     add_newtimeline_ideaunit,
     new_timeline_ideaunit,
@@ -16,60 +18,9 @@ from datetime import datetime
 
 
 def get_creg_config() -> dict:
-    return {
-        timeline_label_text(): "creg",
-        c400_config_text(): 7,
-        yr1_jan1_offset_text(): 440640,
-        hours_config_text(): [
-            ["0-12am", 1 * 60],
-            ["1-1am", 2 * 60],
-            ["2-2am", 3 * 60],
-            ["3-3am", 4 * 60],
-            ["4-4am", 5 * 60],
-            ["5-5am", 6 * 60],
-            ["6-6am", 7 * 60],
-            ["7-7am", 8 * 60],
-            ["8-8am", 9 * 60],
-            ["9-9am", 10 * 60],
-            ["10-10am", 11 * 60],
-            ["11-11am", 12 * 60],
-            ["12-12pm", 13 * 60],
-            ["13-1pm", 14 * 60],
-            ["14-2pm", 15 * 60],
-            ["15-3pm", 16 * 60],
-            ["16-4pm", 17 * 60],
-            ["17-5pm", 18 * 60],
-            ["18-6pm", 19 * 60],
-            ["19-7pm", 20 * 60],
-            ["20-8pm", 21 * 60],
-            ["21-9pm", 22 * 60],
-            ["22-10pm", 23 * 60],
-            ["23-11pm", 24 * 60],
-        ],
-        weekdays_config_text(): [
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-            "Monday",
-            "Tuesday",
-        ],
-        months_config_text(): [
-            ["mar", 31],
-            ["apr", 59],
-            ["may", 90],
-            ["jun", 120],
-            ["jul", 151],
-            ["aug", 181],
-            ["sep", 212],
-            ["oct", 243],
-            ["nov", 273],
-            ["dec", 304],
-            ["jan", 334],
-            ["feb", 365],
-        ],
-    }
+    x_file_name = "creg_timeline_config.json"
+    x_file_dir = "C:/dev/jaar/src/chrono/examples"
+    return get_dict_from_json(open_file(x_file_dir, x_file_name))
 
 
 def cregtime_ideaunit() -> dict[str, IdeaUnit]:

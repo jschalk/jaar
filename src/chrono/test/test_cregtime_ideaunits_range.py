@@ -1,6 +1,5 @@
 from src.bud.bud import budunit_shop
-from src.creg.creg import (
-    get_creg_min_from_dt,
+from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
     get_cregtime_text,
     get_sun,
@@ -11,7 +10,7 @@ from src.creg.creg import (
     get_fri,
     get_sat,
 )
-from src.creg.timebuilder import (
+from src.chrono.timebuilder import (
     time_str,
     day_str,
     days_str,
@@ -24,7 +23,6 @@ from src.creg.timebuilder import (
     week_str,
     weeks_str,
 )
-from datetime import datetime
 
 
 def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():

@@ -1,6 +1,6 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.creg.creg import (
+from src.chrono.examples.chrono_examples import (
     get_creg_min_from_dt,
     add_time_creg_ideaunit,
     get_cregtime_text,
@@ -8,7 +8,7 @@ from src.creg.creg import (
     get_thu,
     creg_weekday_ideaunits,
 )
-from src.creg.timebuilder import (
+from src.chrono.timebuilder import (
     time_str,
     day_str,
     days_str,
