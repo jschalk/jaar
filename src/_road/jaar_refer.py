@@ -46,8 +46,8 @@ def luc_str() -> str:
     return "Luca"
 
 
-def mar_str() -> str:
-    return "Martin"
+def ell_str() -> str:
+    return "Ellery"
 
 
 def ric_str() -> str:

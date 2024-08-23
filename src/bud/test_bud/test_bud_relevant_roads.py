@@ -145,20 +145,20 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     min_range_idea = ideaunit_shop(min_range_x_text, _begin=0, _close=2880)
     yao_bud.set_l1_idea(min_range_idea)
 
-    day_len_text = "day_length"
-    day_len_road = yao_bud.make_l1_road(day_len_text)
-    day_len_idea = ideaunit_shop(day_len_text, _begin=0, _close=1440)
-    yao_bud.set_l1_idea(day_len_idea)
+    day_distance_text = "day_1ce"
+    day_distance_road = yao_bud.make_l1_road(day_distance_text)
+    day_distance_idea = ideaunit_shop(day_distance_text, _begin=0, _close=1440)
+    yao_bud.set_l1_idea(day_distance_idea)
 
-    hour_len_text = "hour_length"
-    hour_len_road = yao_bud.make_l1_road(hour_len_text)
-    hour_len_idea = ideaunit_shop(hour_len_text)
-    yao_bud.set_l1_idea(hour_len_idea)
+    hour_distance_text = "hour_distance"
+    hour_distance_road = yao_bud.make_l1_road(hour_distance_text)
+    hour_distance_idea = ideaunit_shop(hour_distance_text)
+    yao_bud.set_l1_idea(hour_distance_idea)
 
     min_days_text = "days in minute_range"
     min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
     min_days_idea = ideaunit_shop(min_days_text)
-    min_days_idea.set_range_push(hour_len_road)
+    min_days_idea.set_range_push(hour_distance_road)
     yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
@@ -170,8 +170,8 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 4
     assert min_range_x_road in relevant_roads
-    assert day_len_road not in relevant_roads
-    assert hour_len_road in relevant_roads
+    assert day_distance_road not in relevant_roads
+    assert hour_distance_road in relevant_roads
     assert min_days_road in relevant_roads
     assert yao_bud._real_id in relevant_roads
     # min_days_idea = yao_bud.get_idea_obj(min_days_road)

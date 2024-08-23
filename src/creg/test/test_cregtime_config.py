@@ -9,18 +9,10 @@ from src.creg.creg import (
     # get_time_dt_from_min,
     time_str,  # "time"
     get_cregtime_text,  # "cregtime"
-    cregtime_begin,
-    cregtime_close,
-    c400_leap_num,
-    c400_clean_num,
-    c100_num,
-    yr4_leap_num,
-    yr4_clean_num,
     year_str,
     years_str,
     get_year_road,
-    year_num,
-    day_num,
+    day_length,
     week_begin,
     week_close,
     get_sun,  # "Sunday"
@@ -78,20 +70,14 @@ from src.creg.creg import (
     oct_stop_want,
     nov_stop_want,
     dec_stop_want,
-    sun_gogo_want,
-    mon_gogo_want,
-    tue_gogo_want,
-    wed_gogo_want,
-    thu_gogo_want,
-    fri_gogo_want,
-    sat_gogo_want,
-    sun_stop_want,
-    mon_stop_want,
-    tue_stop_want,
-    wed_stop_want,
-    thu_stop_want,
-    fri_stop_want,
-    sat_stop_want,
+    cregtime_config,
+    creg_weekday_config,
+    stan_c400_leap_config,
+    stan_c400_clean_config,
+    stan_c100_config,
+    stan_yr4_leap_config,
+    stan_yr4_clean_config,
+    stan_year_config,
 )
 from datetime import datetime
 
@@ -126,7 +112,7 @@ def test_timetech_builder_ReferencesFunctionsReturnObj():
     assert yr4_leap_num() == 2103840
     assert yr4_clean_num() == 2102400
     assert year_num() == 525600
-    assert day_num() == 1440
+    assert day_length() == 1440
 
 
 def test_cregtime_ReferenceFunctionsReturnObj():
@@ -167,13 +153,13 @@ def test_cregtime_ReferenceFunctionsReturnObj():
     assert thu_gogo_want() == 1440
     assert fri_gogo_want() == 2880
     assert sat_gogo_want() == 4320
-    assert sun_stop_want() == sun_gogo_want() + day_num()
-    assert mon_stop_want() == mon_gogo_want() + day_num()
-    assert tue_stop_want() == tue_gogo_want() + day_num()
-    assert wed_stop_want() == wed_gogo_want() + day_num()
-    assert thu_stop_want() == thu_gogo_want() + day_num()
-    assert fri_stop_want() == fri_gogo_want() + day_num()
-    assert sat_stop_want() == sat_gogo_want() + day_num()
+    assert sun_stop_want() == sun_gogo_want() + day_length()
+    assert mon_stop_want() == mon_gogo_want() + day_length()
+    assert tue_stop_want() == tue_gogo_want() + day_length()
+    assert wed_stop_want() == wed_gogo_want() + day_length()
+    assert thu_stop_want() == thu_gogo_want() + day_length()
+    assert fri_stop_want() == fri_gogo_want() + day_length()
+    assert sat_stop_want() == sat_gogo_want() + day_length()
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_days():
@@ -852,3 +838,91 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 #     _check_time_conversion_works_with_random_inputs()
 #     _check_time_conversion_works_with_random_inputs()
 #     _check_time_conversion_works_with_random_inputs()
+
+
+def cregtime_begin():
+    return cregtime_config().get(get_cregtime_text())._begin
+
+
+def cregtime_close():
+    return cregtime_config().get(get_cregtime_text())._close
+
+
+def sun_gogo_want():
+    return creg_weekday_config().get(get_sun())._gogo_want
+
+
+def mon_gogo_want():
+    return creg_weekday_config().get(get_mon())._gogo_want
+
+
+def tue_gogo_want():
+    return creg_weekday_config().get(get_tue())._gogo_want
+
+
+def wed_gogo_want():
+    return creg_weekday_config().get(get_wed())._gogo_want
+
+
+def thu_gogo_want():
+    return creg_weekday_config().get(get_thu())._gogo_want
+
+
+def fri_gogo_want():
+    return creg_weekday_config().get(get_fri())._gogo_want
+
+
+def sat_gogo_want():
+    return creg_weekday_config().get(get_sat())._gogo_want
+
+
+def sun_stop_want():
+    return creg_weekday_config().get(get_sun())._stop_want
+
+
+def mon_stop_want():
+    return creg_weekday_config().get(get_mon())._stop_want
+
+
+def tue_stop_want():
+    return creg_weekday_config().get(get_tue())._stop_want
+
+
+def wed_stop_want():
+    return creg_weekday_config().get(get_wed())._stop_want
+
+
+def thu_stop_want():
+    return creg_weekday_config().get(get_thu())._stop_want
+
+
+def fri_stop_want():
+    return creg_weekday_config().get(get_fri())._stop_want
+
+
+def sat_stop_want():
+    return creg_weekday_config().get(get_sat())._stop_want
+
+
+def c400_leap_num():
+    return stan_c400_leap_config().get(c400_leap_str())._denom
+
+
+def c400_clean_num():
+    return stan_c400_clean_config().get(c400_clean_str())._denom
+
+
+def c100_num():
+    return stan_c100_config().get(c100_str())._denom
+
+
+def yr4_leap_num():
+    return stan_yr4_leap_config().get(yr4_leap_str())._denom
+
+
+def yr4_clean_num():
+    return stan_yr4_clean_config().get(yr4_clean_str())._denom
+
+
+def year_num():
+    return stan_year_config().get(year_str())._denom

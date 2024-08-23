@@ -19,26 +19,13 @@ from src.creg.creg import (
     get_thu,  # "Thursday"
     get_fri,  # "Friday"
     get_sat,  # "Saturday"
-    wed_gogo_want,
-    thu_gogo_want,
     week_str,  # "week"
     weeks_str,  # f"{get_week()}s"
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
     year_str,
     years_str,
-    jan_str,
-    feb_str,
-    mar_str,
-    apr_str,
-    may_str,
-    jun_str,
-    jul_str,
-    aug_str,
-    sep_str,
-    oct_str,
-    nov_str,
-    dec_str,
+    creg_weekday_config,
 )
 from datetime import datetime
 
@@ -398,6 +385,14 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
     assert len(sue_budunit.get_agenda_dict()) == 1
     sue_budunit.set_fact(creg_road, creg_road, yr2000mar2, yr2004mar2 + 1440)
     assert len(sue_budunit.get_agenda_dict()) == 1
+
+
+def wed_gogo_want():
+    return creg_weekday_config().get(get_wed())._gogo_want
+
+
+def thu_gogo_want():
+    return creg_weekday_config().get(get_thu())._gogo_want
 
 
 def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_2000():
