@@ -1,6 +1,6 @@
 from src.bud.bud import budunit_shop
 from src.creg.creg import (
-    get_time_min_from_dt,
+    get_creg_min_from_dt,
     add_time_creg_ideaunit,
     get_cregtime_text,
     get_sun,
@@ -10,8 +10,6 @@ from src.creg.creg import (
     get_thu,
     get_fri,
     get_sat,
-    creg_week_str,
-    weeks_str,
 )
 from src.creg.timebuilder import (
     time_str,
@@ -23,6 +21,8 @@ from src.creg.timebuilder import (
     yr4_leap_str,
     yr4_clean_str,
     year_str,
+    week_str,
+    weeks_str,
 )
 from datetime import datetime
 
@@ -33,7 +33,7 @@ def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     weeks_road = sue_budunit.make_road(creg_road, weeks_str())
-    week_road = sue_budunit.make_road(creg_road, creg_week_str())
+    week_road = sue_budunit.make_road(creg_road, week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     day_road = sue_budunit.make_road(creg_road, day_str())
     c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
@@ -123,7 +123,7 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     weeks_road = sue_budunit.make_road(creg_road, weeks_str())
-    week_road = sue_budunit.make_road(creg_road, creg_week_str())
+    week_road = sue_budunit.make_road(creg_road, week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     mon_road = sue_budunit.make_road(week_road, get_mon())
     tue_road = sue_budunit.make_road(week_road, get_tue())

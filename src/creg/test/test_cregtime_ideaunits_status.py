@@ -1,17 +1,21 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.creg.creg import (
-    get_time_min_from_dt,
+    get_creg_min_from_dt,
     add_time_creg_ideaunit,
-    creg_week_str,
     get_cregtime_text,
     get_wed,
     get_thu,
-    creg_week_str,
-    weeks_str,
     creg_weekday_ideaunits,
 )
-from src.creg.timebuilder import time_str, day_str, days_str, get_year_road
+from src.creg.timebuilder import (
+    time_str,
+    day_str,
+    days_str,
+    get_year_road,
+    weeks_str,
+    week_str,
+)
 from datetime import datetime
 
 
@@ -147,7 +151,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
-    week_road = sue_budunit.make_road(creg_road, creg_week_str())
+    week_road = sue_budunit.make_road(creg_road, week_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
@@ -181,7 +185,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
-    week_road = sue_budunit.make_road(creg_road, creg_week_str())
+    week_road = sue_budunit.make_road(creg_road, week_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
@@ -355,12 +359,12 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
     assert sue_agenda.get(clean_road)
 
     # WHEN / THEN
-    yr2000mar1 = get_time_min_from_dt(dt=datetime(2000, 3, 1, 0, 0))
-    yr2000mar2 = get_time_min_from_dt(dt=datetime(2000, 3, 2, 0, 0))
-    yr2000dec1 = get_time_min_from_dt(dt=datetime(2000, 12, 1, 0, 0))
-    yr2000dec2 = get_time_min_from_dt(dt=datetime(2000, 12, 2, 0, 0))
-    yr2004mar1 = get_time_min_from_dt(dt=datetime(2004, 3, 1, 0, 0))
-    yr2004mar2 = get_time_min_from_dt(dt=datetime(2004, 3, 2, 0, 0))
+    yr2000mar1 = get_creg_min_from_dt(dt=datetime(2000, 3, 1, 0, 0))
+    yr2000mar2 = get_creg_min_from_dt(dt=datetime(2000, 3, 2, 0, 0))
+    yr2000dec1 = get_creg_min_from_dt(dt=datetime(2000, 12, 1, 0, 0))
+    yr2000dec2 = get_creg_min_from_dt(dt=datetime(2000, 12, 2, 0, 0))
+    yr2004mar1 = get_creg_min_from_dt(dt=datetime(2004, 3, 1, 0, 0))
+    yr2004mar2 = get_creg_min_from_dt(dt=datetime(2004, 3, 2, 0, 0))
 
     sue_budunit.set_fact(creg_road, creg_road, yr2000mar1, yr2000mar1 + 1440)
     assert len(sue_budunit.get_agenda_dict()) == 1
@@ -386,7 +390,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     year_road = get_year_road(sue_budunit, creg_road)
-    week_road = sue_budunit.make_road(creg_road, creg_week_str())
+    week_road = sue_budunit.make_road(creg_road, week_str())
     # sun_road = sue_budunit.make_road(week_road, get_sun())
     # mon_road = sue_budunit.make_road(week_road, get_mon())
     # tue_road = sue_budunit.make_road(week_road, get_tue())
@@ -419,14 +423,14 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
         reason_premise_nigh=1400,
     )
 
-    yr2000_mar1day = get_time_min_from_dt(datetime(2000, 3, 1, 0, 0))
-    yr2000_mar2day = get_time_min_from_dt(datetime(2000, 3, 2, 0, 0))
-    yr2000_mar3day = get_time_min_from_dt(datetime(2000, 3, 3, 0, 0))
-    yr2000_mar4day = get_time_min_from_dt(datetime(2000, 3, 4, 0, 0))
-    yr2000_mar5day = get_time_min_from_dt(datetime(2000, 3, 5, 0, 0))
-    yr2000_mar6day = get_time_min_from_dt(datetime(2000, 3, 6, 0, 0))
-    yr2000_mar7day = get_time_min_from_dt(datetime(2000, 3, 7, 0, 0))
-    yr2000_mar8day = get_time_min_from_dt(datetime(2000, 3, 8, 0, 0))
+    yr2000_mar1day = get_creg_min_from_dt(datetime(2000, 3, 1, 0, 0))
+    yr2000_mar2day = get_creg_min_from_dt(datetime(2000, 3, 2, 0, 0))
+    yr2000_mar3day = get_creg_min_from_dt(datetime(2000, 3, 3, 0, 0))
+    yr2000_mar4day = get_creg_min_from_dt(datetime(2000, 3, 4, 0, 0))
+    yr2000_mar5day = get_creg_min_from_dt(datetime(2000, 3, 5, 0, 0))
+    yr2000_mar6day = get_creg_min_from_dt(datetime(2000, 3, 6, 0, 0))
+    yr2000_mar7day = get_creg_min_from_dt(datetime(2000, 3, 7, 0, 0))
+    yr2000_mar8day = get_creg_min_from_dt(datetime(2000, 3, 8, 0, 0))
     print(f"{wed_gogo_want()=}")
     print(f"{wed_gogo_want()+1440=}")
     clean_idea = sue_budunit.get_idea_obj(clean_road)
@@ -513,7 +517,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
     year_road = get_year_road(sue_budunit, creg_road)
-    week_road = sue_budunit.make_road(creg_road, creg_week_str())
+    week_road = sue_budunit.make_road(creg_road, week_str())
     # sun_road = sue_budunit.make_road(week_road, get_sun())
     # mon_road = sue_budunit.make_road(week_road, get_mon())
     # tue_road = sue_budunit.make_road(week_road, get_tue())
@@ -546,14 +550,14 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
         reason_premise_nigh=2800,
     )
 
-    yr2000_mar1day = get_time_min_from_dt(datetime(2000, 3, 1, 0, 0))
-    yr2000_mar2day = get_time_min_from_dt(datetime(2000, 3, 2, 0, 0))
-    yr2000_mar3day = get_time_min_from_dt(datetime(2000, 3, 3, 0, 0))
-    yr2000_mar4day = get_time_min_from_dt(datetime(2000, 3, 4, 0, 0))
-    yr2000_mar5day = get_time_min_from_dt(datetime(2000, 3, 5, 0, 0))
-    yr2000_mar6day = get_time_min_from_dt(datetime(2000, 3, 6, 0, 0))
-    yr2000_mar7day = get_time_min_from_dt(datetime(2000, 3, 7, 0, 0))
-    yr2000_mar8day = get_time_min_from_dt(datetime(2000, 3, 8, 0, 0))
+    yr2000_mar1day = get_creg_min_from_dt(datetime(2000, 3, 1, 0, 0))
+    yr2000_mar2day = get_creg_min_from_dt(datetime(2000, 3, 2, 0, 0))
+    yr2000_mar3day = get_creg_min_from_dt(datetime(2000, 3, 3, 0, 0))
+    yr2000_mar4day = get_creg_min_from_dt(datetime(2000, 3, 4, 0, 0))
+    yr2000_mar5day = get_creg_min_from_dt(datetime(2000, 3, 5, 0, 0))
+    yr2000_mar6day = get_creg_min_from_dt(datetime(2000, 3, 6, 0, 0))
+    yr2000_mar7day = get_creg_min_from_dt(datetime(2000, 3, 7, 0, 0))
+    yr2000_mar8day = get_creg_min_from_dt(datetime(2000, 3, 8, 0, 0))
     print(f"{wed_gogo_want()=}")
     print(f"{wed_gogo_want()+1440=}")
     clean_idea = sue_budunit.get_idea_obj(clean_road)
