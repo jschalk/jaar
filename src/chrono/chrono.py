@@ -1,144 +1,102 @@
-from src._instrument.python import get_0_if_None
+from src._instrument.python import get_0_if_None, get_dict_from_json
+from src._instrument.file import open_file
 from src._road.road import RoadUnit
 from src.bud.idea import ideaunit_shop, IdeaUnit
 from src.bud.bud import BudUnit
 from datetime import datetime
+from dataclasses import dataclass
 
 
-def validate_timeline_config(config_dict: dict) -> bool:
-    config_elements = [
-        hours_config_text(),
-        weekdays_config_text(),
-        months_config_text(),
-        timeline_label_text(),
-        c400_config_text(),
-        yr1_jan1_offset_text(),
-    ]
-    for config_key in config_elements:
-        config_element = config_dict.get(config_key)
-        len_elements = {
-            hours_config_text(),
-            weekdays_config_text(),
-            months_config_text(),
-        }
-        if config_element is None:
-            return False
-        elif config_key in len_elements and len(config_element) == 0:
-            return False
-        elif config_key in {weekdays_config_text()}:
-            if _duplicate_exists(config_element):
-                return False
-        elif config_key in {months_config_text(), hours_config_text()}:
-            str_list = [x_config[0] for x_config in config_element]
-            if _duplicate_exists(str_list):
-                return False
-    return True
+def c400_leap_str():
+    return "c400_leap"
 
 
-def _duplicate_exists(config_element: list) -> bool:
-    return len(config_element) != len(set(config_element))
+def c400_clean_str():
+    return "c400_clean"
 
 
-def create_timeline_config(
-    timeline_label: str,
-    c400_count: int,
-    hour_length: int,
-    month_length: int,
-    weekday_list: list[str],
-    months_list: list[str],
-    yr1_jan1_offset: int = None,
-) -> dict:
-    months_range = range(len(months_list))
-    month_config = [_month_config(x, months_list, month_length) for x in months_range]
-    hours_count = round(1440 / hour_length)
-    hours_range = range(hours_count)
-    hour_config = [_hour_config(x, hours_count, hour_length) for x in hours_range]
-    return {
-        hours_config_text(): hour_config,
-        weekdays_config_text(): weekday_list,
-        months_config_text(): month_config,
-        timeline_label_text(): timeline_label,
-        c400_config_text(): c400_count,
-        yr1_jan1_offset_text(): get_0_if_None(yr1_jan1_offset),
-    }
+def c100_str():
+    return "c100"
 
 
-def _month_config(month_num, months_list, month_length) -> list[str, int]:
-    stop_minute = (month_num + 1) * month_length
-    is_last_month = month_num == len(months_list) - 1
-    return [months_list[month_num], (365 if is_last_month else stop_minute)]
+def yr4_leap_str():
+    return "yr4_leap"
 
 
-def _hour_config(hour_num, hours_count, hour_length) -> list[str, int]:
-    hour_str = f"{hour_num}hr"
-    hour_stop = 1440 if hour_num == hours_count - 1 else (hour_num + 1) * hour_length
-    return [hour_str, hour_stop]
+def yr4_clean_str():
+    return "yr4_clean"
+
+
+def year_str():
+    return "year"
+
+
+@dataclass
+class C400Standard:
+    day_length: int
+    c400_leap_length: int
+    c400_clean_length: int
+    c100_length: int
+    yr4_leap_length: int
+    yr4_clean_length: int
+    year_length: int
+
+
+def get_c400_standard() -> C400Standard:
+    c400_dict = get_dict_from_json(open_file("src/chrono/", "c400_standard.json"))
+    return C400Standard(
+        day_length=c400_dict.get(f"{day_str()}_length"),
+        c400_leap_length=c400_dict.get(f"{c400_leap_str()}_length"),
+        c400_clean_length=c400_dict.get(f"{c400_clean_str()}_length"),
+        c100_length=c400_dict.get(f"{c100_str()}_length"),
+        yr4_leap_length=c400_dict.get(f"{yr4_leap_str()}_length"),
+        yr4_clean_length=c400_dict.get(f"{yr4_clean_str()}_length"),
+        year_length=c400_dict.get(f"{year_str()}_length"),
+    )
 
 
 def day_length() -> int:
     return 1440
 
 
-def week_length(x_int: int) -> int:
-    return day_length() * x_int
-
-
 def stan_c400_leap_ideaunits() -> dict[str, IdeaUnit]:
-    x_text = c400_leap_str()
-    return {x_text: ideaunit_shop(x_text, _denom=210379680, _morph=True)}
+    return _special_morph(c400_leap_str(), get_c400_standard().c400_leap_length)
 
 
 def stan_c400_clean_ideaunits() -> dict[str, IdeaUnit]:
-    x_text = c400_clean_str()
-    return {x_text: ideaunit_shop(x_text, _denom=210378240, _morph=True)}
+    return _special_morph(c400_clean_str(), get_c400_standard().c400_clean_length)
 
 
 def stan_c100_ideaunits() -> dict[str, IdeaUnit]:
-    return {c100_str(): ideaunit_shop(c100_str(), _denom=52594560, _morph=True)}
+    return _special_morph(c100_str(), get_c400_standard().c100_length)
 
 
 def stan_yr4_leap_ideaunits() -> dict[str, IdeaUnit]:
-    return {yr4_leap_str(): ideaunit_shop(yr4_leap_str(), _denom=2103840, _morph=True)}
+    return _special_morph(yr4_leap_str(), get_c400_standard().yr4_leap_length)
 
 
 def stan_yr4_clean_ideaunits() -> dict[str, IdeaUnit]:
-    x_text = yr4_clean_str()
-    return {x_text: ideaunit_shop(x_text, _denom=2102400, _morph=True)}
+    return _special_morph(yr4_clean_str(), get_c400_standard().yr4_clean_length)
 
 
 def stan_year_ideaunits() -> dict[str, IdeaUnit]:
-    return {year_str(): ideaunit_shop(year_str(), _denom=525600, _morph=True)}
+    return _special_morph(year_str(), get_c400_standard().year_length)
+
+
+def _special_morph(x_text: str, x_denom: int) -> dict[str, IdeaUnit]:
+    return {x_text: ideaunit_shop(x_text, _denom=x_denom, _morph=True)}
 
 
 def stan_day_ideaunits() -> dict[str, IdeaUnit]:
+    x_denom = get_c400_standard().day_length
     return {
-        day_str(): ideaunit_shop(day_str(), _denom=day_length(), _morph=True),
-        days_str(): ideaunit_shop(days_str(), _denom=day_length()),
+        day_str(): ideaunit_shop(day_str(), _denom=x_denom, _morph=True),
+        days_str(): ideaunit_shop(days_str(), _denom=x_denom),
     }
 
 
-def c400_leap_str():
-    return "c400_leap_str"
-
-
-def c400_clean_str():
-    return "c400_clean_str"
-
-
-def c100_str():
-    return "c100_str"
-
-
-def yr4_leap_str():
-    return "yr4_leap_str"
-
-
-def yr4_clean_str():
-    return "yr4_clean_str"
-
-
-def year_str():
-    return "year_str"
+def week_length(x_int: int) -> int:
+    return day_length() * x_int
 
 
 def time_str() -> str:
@@ -163,30 +121,6 @@ def week_str():
 
 def weeks_str():
     return f"{week_str()}s"
-
-
-def hours_config_text() -> str:
-    return "hours_config"
-
-
-def weekdays_config_text() -> str:
-    return "weekdays_config"
-
-
-def months_config_text() -> str:
-    return "months_config"
-
-
-def timeline_label_text() -> str:
-    return "timeline_label"
-
-
-def c400_config_text() -> str:
-    return "c400_config"
-
-
-def yr1_jan1_offset_text() -> str:
-    return "yr1_jan1_offset"
 
 
 def create_weekday_ideaunits(x_weekdays: list[str]) -> dict[str, IdeaUnit]:
@@ -302,6 +236,100 @@ def get_year_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUni
     yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
     return x_budunit.make_road(yr4_clean_road, year_str())
+
+
+def hours_config_text() -> str:
+    return "hours_config"
+
+
+def weekdays_config_text() -> str:
+    return "weekdays_config"
+
+
+def months_config_text() -> str:
+    return "months_config"
+
+
+def timeline_label_text() -> str:
+    return "timeline_label"
+
+
+def c400_config_text() -> str:
+    return "c400_config"
+
+
+def yr1_jan1_offset_text() -> str:
+    return "yr1_jan1_offset"
+
+
+def validate_timeline_config(config_dict: dict) -> bool:
+    config_elements = [
+        hours_config_text(),
+        weekdays_config_text(),
+        months_config_text(),
+        timeline_label_text(),
+        c400_config_text(),
+        yr1_jan1_offset_text(),
+    ]
+    for config_key in config_elements:
+        config_element = config_dict.get(config_key)
+        len_elements = {
+            hours_config_text(),
+            weekdays_config_text(),
+            months_config_text(),
+        }
+        if config_element is None:
+            return False
+        elif config_key in len_elements and len(config_element) == 0:
+            return False
+        elif config_key in {weekdays_config_text()}:
+            if _duplicate_exists(config_element):
+                return False
+        elif config_key in {months_config_text(), hours_config_text()}:
+            str_list = [x_config[0] for x_config in config_element]
+            if _duplicate_exists(str_list):
+                return False
+    return True
+
+
+def _duplicate_exists(config_element: list) -> bool:
+    return len(config_element) != len(set(config_element))
+
+
+def create_timeline_config(
+    timeline_label: str,
+    c400_count: int,
+    hour_length: int,
+    month_length: int,
+    weekday_list: list[str],
+    months_list: list[str],
+    yr1_jan1_offset: int = None,
+) -> dict:
+    months_range = range(len(months_list))
+    month_config = [_month_config(x, months_list, month_length) for x in months_range]
+    hours_count = round(1440 / hour_length)
+    hours_range = range(hours_count)
+    hour_config = [_hour_config(x, hours_count, hour_length) for x in hours_range]
+    return {
+        hours_config_text(): hour_config,
+        weekdays_config_text(): weekday_list,
+        months_config_text(): month_config,
+        timeline_label_text(): timeline_label,
+        c400_config_text(): c400_count,
+        yr1_jan1_offset_text(): get_0_if_None(yr1_jan1_offset),
+    }
+
+
+def _month_config(month_num, months_list, month_length) -> list[str, int]:
+    stop_minute = (month_num + 1) * month_length
+    is_last_month = month_num == len(months_list) - 1
+    return [months_list[month_num], (365 if is_last_month else stop_minute)]
+
+
+def _hour_config(hour_num, hours_count, hour_length) -> list[str, int]:
+    hour_str = f"{hour_num}hr"
+    hour_stop = 1440 if hour_num == hours_count - 1 else (hour_num + 1) * hour_length
+    return [hour_str, hour_stop]
 
 
 def get_time_min_from_dt(dt: datetime, yr1_jan1_offset: int) -> int:

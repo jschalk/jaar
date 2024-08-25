@@ -7,6 +7,9 @@ from src.chrono.examples.chrono_examples import (
     get_example_timeline_config,
 )
 from src.chrono.chrono import (
+    C400Standard,
+    get_c400_standard,
+    day_length,
     hours_config_text,
     weekdays_config_text,
     months_config_text,
@@ -17,6 +20,39 @@ from src.chrono.chrono import (
     create_timeline_config,
 )
 from copy import deepcopy as copy_deepcopy
+
+
+def test_C400Standard_Exists():
+    # ESTABLISH / WHEN
+    x_c400_standard = C400Standard("x1", "x2", "x3", "x4", "x5", "x6", "x7")
+
+    # THEN
+    assert x_c400_standard.day_length == "x1"
+    assert x_c400_standard.c400_leap_length == "x2"
+    assert x_c400_standard.c400_clean_length == "x3"
+    assert x_c400_standard.c100_length == "x4"
+    assert x_c400_standard.yr4_leap_length == "x5"
+    assert x_c400_standard.yr4_clean_length == "x6"
+    assert x_c400_standard.year_length == "x7"
+
+
+def test_get_c400_standards_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_c400_standard = get_c400_standard()
+
+    assert x_c400_standard.day_length == 1440
+    assert x_c400_standard.c400_leap_length == 210379680
+    assert x_c400_standard.c400_clean_length == 210378240
+    assert x_c400_standard.c100_length == 52594560
+    assert x_c400_standard.yr4_leap_length == 2103840
+    assert x_c400_standard.yr4_clean_length == 2102400
+    assert x_c400_standard.year_length == 525600
+
+
+def test_day_length_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert day_length() == get_c400_standard().day_length
+    assert day_length() == 1440
 
 
 def test_is_timeline_config_valid_ReturnsObj_CheckElementsExist():
@@ -117,23 +153,23 @@ def test_create_timeline_config_ReturnsObj():
     cinco_yr1_jan1_offset = 2103796800  # 4000 years
     cinco_hour_length = 120
     cinco_month_length = 25
-    cinco_weekday_list = ["Airday", "Bioday", "Ceoday", "Danceday", "Ellday"]
+    cinco_weekday_list = ["Airday", "Bioday", "Chiday", "Danceday", "Ellday"]
     # months = ["B", "C", "E", "G", "H", "I", "K", "L", "N", "P", "Q", "R", "T", "U", "W"]
     # c_mons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
     cinco_months_list = [
         "Annita",
         "Bailey",
         "Cimon",
-        "Derrida",
+        "Dragon",
         "Elon",
-        "Flyover",
+        "Fresh",
         "Giraffe",
         "Holocene",
         "Iguana",
         "Journey",
         "Kayla",
         "Lebron",
-        "MacCarthy",
+        "Mikayla",
         "Ninon",
         "Obama",
     ]
