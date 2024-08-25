@@ -34,7 +34,7 @@ def get_example_timeline_config(timeline_label: str) -> dict:
     return get_dict_from_json(open_file(chrono_examples_dir(), x_file_name))
 
 
-def cregtime_ideaunit() -> dict[str, IdeaUnit]:
+def cregtime_ideaunit() -> IdeaUnit:
     c400_count = get_creg_config().get(c400_config_text())
     return new_timeline_ideaunit(get_cregtime_text(), c400_count)
 

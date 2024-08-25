@@ -59,40 +59,48 @@ def day_length() -> int:
     return 1440
 
 
-def stan_c400_leap_ideaunits() -> dict[str, IdeaUnit]:
-    return _special_morph(c400_leap_str(), get_c400_standard().c400_leap_length)
+def stan_c400_leap_ideaunit() -> IdeaUnit:
+    x_denom = get_c400_standard().c400_leap_length
+    return ideaunit_shop(c400_leap_str(), _denom=x_denom, _morph=True)
 
 
-def stan_c400_clean_ideaunits() -> dict[str, IdeaUnit]:
-    return _special_morph(c400_clean_str(), get_c400_standard().c400_clean_length)
+def stan_c400_clean_ideaunit() -> IdeaUnit:
+    x_denom = get_c400_standard().c400_clean_length
+    return ideaunit_shop(c400_clean_str(), _denom=x_denom, _morph=True)
 
 
-def stan_c100_ideaunits() -> dict[str, IdeaUnit]:
-    return _special_morph(c100_str(), get_c400_standard().c100_length)
+def stan_c100_ideaunit() -> IdeaUnit:
+    x_denom = get_c400_standard().c100_length
+    return ideaunit_shop(c100_str(), _denom=x_denom, _morph=True)
 
 
-def stan_yr4_leap_ideaunits() -> dict[str, IdeaUnit]:
-    return _special_morph(yr4_leap_str(), get_c400_standard().yr4_leap_length)
+def stan_yr4_leap_ideaunit() -> IdeaUnit:
+    x_denom = get_c400_standard().yr4_leap_length
+    return ideaunit_shop(yr4_leap_str(), _denom=x_denom, _morph=True)
 
 
-def stan_yr4_clean_ideaunits() -> dict[str, IdeaUnit]:
-    return _special_morph(yr4_clean_str(), get_c400_standard().yr4_clean_length)
+def stan_yr4_clean_ideaunit() -> IdeaUnit:
+    x_denom = get_c400_standard().yr4_clean_length
+    return ideaunit_shop(yr4_clean_str(), _denom=x_denom, _morph=True)
 
 
-def stan_year_ideaunits() -> dict[str, IdeaUnit]:
-    return _special_morph(year_str(), get_c400_standard().year_length)
+def stan_year_ideaunit() -> IdeaUnit:
+    x_denom = get_c400_standard().year_length
+    return ideaunit_shop(year_str(), _denom=x_denom, _morph=True)
 
 
-def _special_morph(x_text: str, x_denom: int) -> dict[str, IdeaUnit]:
-    return {x_text: ideaunit_shop(x_text, _denom=x_denom, _morph=True)}
-
-
-def stan_day_ideaunits() -> dict[str, IdeaUnit]:
+def stan_day_ideaunit() -> IdeaUnit:
     x_denom = get_c400_standard().day_length
-    return {
-        day_str(): ideaunit_shop(day_str(), _denom=x_denom, _morph=True),
-        days_str(): ideaunit_shop(days_str(), _denom=x_denom),
-    }
+    return ideaunit_shop(day_str(), _denom=x_denom, _morph=True)
+
+
+def stan_days_ideaunit() -> IdeaUnit:
+    x_denom = get_c400_standard().day_length
+    return ideaunit_shop(days_str(), _denom=x_denom)
+
+
+def _get_morph_idea(x_text: str, x_denom: int) -> IdeaUnit:
+    return ideaunit_shop(x_text, _denom=x_denom, _morph=True)
 
 
 def week_length(x_int: int) -> int:
@@ -171,18 +179,46 @@ def create_week_ideaunits(x_weekdays_list) -> dict[str, IdeaUnit]:
     }
 
 
-def new_timeline_ideaunit(timeline_text: str, c400_count: int) -> dict[str, IdeaUnit]:
+def new_timeline_ideaunit(timeline_text: str, c400_count: int) -> IdeaUnit:
     x_text = timeline_text
-    return {x_text: ideaunit_shop(x_text, _begin=0, _close=210379680 * c400_count)}
+    timeline_length = c400_count * get_c400_standard().c400_leap_length
+    return ideaunit_shop(x_text, _begin=0, _close=timeline_length)
 
 
 def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     timeline_text = timeline_config.get(timeline_label_text())
     timeline_c400_count = timeline_config.get(c400_config_text())
-    timeline_weekdays_list = timeline_config.get(weekdays_config_text())
     timeline_months_list = timeline_config.get(months_config_text())
     timeline_hours_list = timeline_config.get(hours_config_text())
+    timeline_wkdays_list = timeline_config.get(weekdays_config_text())
 
+    time_road = x_budunit.make_l1_road(time_str())
+    new_road = x_budunit.make_road(time_road, timeline_text)
+    day_road = x_budunit.make_road(new_road, day_str())
+    week_road = x_budunit.make_road(new_road, week_str())
+    year_road = get_year_road(x_budunit, new_road)
+
+    add_stan_ideaunits(x_budunit, time_road, timeline_text, timeline_c400_count)
+    add_ideaunits(x_budunit, day_road, create_hour_ideaunits(timeline_hours_list))
+    add_ideaunits(x_budunit, new_road, create_week_ideaunits(timeline_wkdays_list))
+    add_ideaunits(x_budunit, week_road, create_weekday_ideaunits(timeline_wkdays_list))
+    add_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
+    return x_budunit
+
+
+def add_ideaunits(
+    x_budunit: BudUnit, parent_road: RoadUnit, config_dict: dict[str, IdeaUnit]
+):
+    for x_time_ideaunit in config_dict.values():
+        x_budunit.set_idea(x_time_ideaunit, parent_road)
+
+
+def add_stan_ideaunits(
+    x_budunit: BudUnit,
+    time_road: RoadUnit,
+    timeline_text: str,
+    timeline_c400_count: int,
+):
     time_road = x_budunit.make_l1_road(time_str())
     new_road = x_budunit.make_road(time_road, timeline_text)
     c400_leap_road = x_budunit.make_road(new_road, c400_leap_str())
@@ -190,33 +226,18 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     c100_road = x_budunit.make_road(c400_clean_road, c100_str())
     yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = x_budunit.make_road(yr4_clean_road, year_str())
-    day_road = x_budunit.make_road(new_road, day_str())
-    week_road = x_budunit.make_road(new_road, week_str())
 
-    x_weekdays_list = timeline_weekdays_list
     x_budunit.set_l1_idea(ideaunit_shop(time_str()))
     timeline_ideaunit = new_timeline_ideaunit(timeline_text, timeline_c400_count)
-    add_x_ideaunits(x_budunit, time_road, timeline_ideaunit)
-    add_x_ideaunits(x_budunit, new_road, stan_day_ideaunits())
-    add_x_ideaunits(x_budunit, day_road, create_hour_ideaunits(timeline_hours_list))
-    add_x_ideaunits(x_budunit, new_road, create_week_ideaunits(timeline_weekdays_list))
-    add_x_ideaunits(x_budunit, week_road, create_weekday_ideaunits(x_weekdays_list))
-    add_x_ideaunits(x_budunit, new_road, stan_c400_leap_ideaunits())
-    add_x_ideaunits(x_budunit, c400_leap_road, stan_c400_clean_ideaunits())
-    add_x_ideaunits(x_budunit, c400_clean_road, stan_c100_ideaunits())
-    add_x_ideaunits(x_budunit, c100_road, stan_yr4_leap_ideaunits())
-    add_x_ideaunits(x_budunit, yr4_leap_road, stan_yr4_clean_ideaunits())
-    add_x_ideaunits(x_budunit, yr4_clean_road, stan_year_ideaunits())
-    add_x_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
-    return x_budunit
-
-
-def add_x_ideaunits(
-    x_budunit: BudUnit, parent_road: RoadUnit, config_dict: dict[str, IdeaUnit]
-):
-    for x_time_ideaunit in config_dict.values():
-        x_budunit.set_idea(x_time_ideaunit, parent_road)
+    x_budunit.set_idea(timeline_ideaunit, time_road)
+    x_budunit.set_idea(stan_c400_leap_ideaunit(), new_road)
+    x_budunit.set_idea(stan_c400_clean_ideaunit(), c400_leap_road)
+    x_budunit.set_idea(stan_c100_ideaunit(), c400_clean_road)
+    x_budunit.set_idea(stan_yr4_leap_ideaunit(), c100_road)
+    x_budunit.set_idea(stan_yr4_clean_ideaunit(), yr4_leap_road)
+    x_budunit.set_idea(stan_year_ideaunit(), yr4_clean_road)
+    x_budunit.set_idea(stan_day_ideaunit(), new_road)
+    x_budunit.set_idea(stan_days_ideaunit(), new_road)
 
 
 # def set_time_facts(
