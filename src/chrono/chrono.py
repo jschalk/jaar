@@ -1,3 +1,4 @@
+from src._instrument.python import get_0_if_None
 from src._road.road import RoadUnit
 from src.bud.idea import ideaunit_shop, IdeaUnit
 from src.bud.bud import BudUnit
@@ -22,9 +23,56 @@ def validate_timeline_config(config_dict: dict) -> bool:
         }
         if config_element is None:
             return False
-        elif config_key in len_elements and len(config_element) <= 0:
+        elif config_key in len_elements and len(config_element) == 0:
             return False
+        elif config_key in {weekdays_config_text()}:
+            if _duplicate_exists(config_element):
+                return False
+        elif config_key in {months_config_text(), hours_config_text()}:
+            str_list = [x_config[0] for x_config in config_element]
+            if _duplicate_exists(str_list):
+                return False
     return True
+
+
+def _duplicate_exists(config_element: list) -> bool:
+    return len(config_element) != len(set(config_element))
+
+
+def create_timeline_config(
+    timeline_label: str,
+    c400_count: int,
+    hour_length: int,
+    month_length: int,
+    weekday_list: list[str],
+    months_list: list[str],
+    yr1_jan1_offset: int = None,
+) -> dict:
+    months_range = range(len(months_list))
+    month_config = [_month_config(x, months_list, month_length) for x in months_range]
+    hours_count = round(1440 / hour_length)
+    hours_range = range(hours_count)
+    hour_config = [_hour_config(x, hours_count, hour_length) for x in hours_range]
+    return {
+        hours_config_text(): hour_config,
+        weekdays_config_text(): weekday_list,
+        months_config_text(): month_config,
+        timeline_label_text(): timeline_label,
+        c400_config_text(): c400_count,
+        yr1_jan1_offset_text(): get_0_if_None(yr1_jan1_offset),
+    }
+
+
+def _month_config(month_num, months_list, month_length) -> list[str, int]:
+    stop_minute = (month_num + 1) * month_length
+    is_last_month = month_num == len(months_list) - 1
+    return [months_list[month_num], (365 if is_last_month else stop_minute)]
+
+
+def _hour_config(hour_num, hours_count, hour_length) -> list[str, int]:
+    hour_str = f"{hour_num}hr"
+    hour_stop = 1440 if hour_num == hours_count - 1 else (hour_num + 1) * hour_length
+    return [hour_str, hour_stop]
 
 
 def day_length() -> int:

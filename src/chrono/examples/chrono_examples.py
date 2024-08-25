@@ -17,10 +17,21 @@ from src.chrono.chrono import (
 from datetime import datetime
 
 
+def chrono_examples_dir() -> str:
+    return "src/chrono/examples"
+
+
 def get_creg_config() -> dict:
-    x_file_name = "creg_timeline_config.json"
-    x_file_dir = "src/chrono/examples"
-    return get_dict_from_json(open_file(x_file_dir, x_file_name))
+    return get_example_timeline_config("creg")
+
+
+def get_squirt_config() -> dict:
+    return get_example_timeline_config("squirt")
+
+
+def get_example_timeline_config(timeline_label: str) -> dict:
+    x_file_name = f"timeline_config_{timeline_label}.json"
+    return get_dict_from_json(open_file(chrono_examples_dir(), x_file_name))
 
 
 def cregtime_ideaunit() -> dict[str, IdeaUnit]:
