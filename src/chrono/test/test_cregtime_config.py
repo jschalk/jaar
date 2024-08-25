@@ -24,12 +24,12 @@ from src.chrono.chrono import (
     time_str,
     year_str,
     get_year_road,
-    stan_c400_leap_ideaunits,
-    stan_c400_clean_ideaunits,
-    stan_c100_ideaunits,
-    stan_yr4_leap_ideaunits,
-    stan_yr4_clean_ideaunits,
-    stan_year_ideaunits,
+    stan_c400_leap_ideaunit,
+    stan_c400_clean_ideaunit,
+    stan_c100_ideaunit,
+    stan_yr4_leap_ideaunit,
+    stan_yr4_clean_ideaunit,
+    stan_year_ideaunit,
     day_str,  # "day"
     days_str,  # f"{get_day()}s"
     c400_leap_str,
@@ -802,11 +802,11 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
 
 def cregtime_begin():
-    return cregtime_ideaunit().get(get_cregtime_text())._begin
+    return cregtime_ideaunit()._begin
 
 
 def cregtime_close():
-    return cregtime_ideaunit().get(get_cregtime_text())._close
+    return cregtime_ideaunit()._close
 
 
 def sun_gogo_want():
@@ -866,27 +866,27 @@ def sat_stop_want():
 
 
 def c400_leap_num():
-    return stan_c400_leap_ideaunits().get(c400_leap_str())._denom
+    return stan_c400_leap_ideaunit()._denom
 
 
 def c400_clean_num():
-    return stan_c400_clean_ideaunits().get(c400_clean_str())._denom
+    return stan_c400_clean_ideaunit()._denom
 
 
 def c100_num():
-    return stan_c100_ideaunits().get(c100_str())._denom
+    return stan_c100_ideaunit()._denom
 
 
 def yr4_leap_num():
-    return stan_yr4_leap_ideaunits().get(yr4_leap_str())._denom
+    return stan_yr4_leap_ideaunit()._denom
 
 
 def yr4_clean_num():
-    return stan_yr4_clean_ideaunits().get(yr4_clean_str())._denom
+    return stan_yr4_clean_ideaunit()._denom
 
 
 def year_num():
-    return stan_year_ideaunits().get(year_str())._denom
+    return stan_year_ideaunit()._denom
 
 
 def mar_str() -> str:
