@@ -109,5 +109,5 @@ def get_json_from_dict(dict_x: dict) -> str:
     return json_dumps(obj=dict_x)
 
 
-def get_dict_from_json(x_json: str) -> dict[str, str]:
+def get_dict_from_json(x_json: str) -> dict[str,]:
     return json_loads(x_json)
