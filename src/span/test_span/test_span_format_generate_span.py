@@ -148,7 +148,7 @@ def test_create_changeunit_Arg_jaar_format_00002_membership_v0_0_0():
     assert len(membership_changunit.get_ordered_atomunits()) == 7
 
 
-def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
+def test_create_changeunit_Arg_jaar_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
