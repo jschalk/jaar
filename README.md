@@ -1,6 +1,9 @@
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+repo: https://github.com/jschalk/jaar
+
 ![jaar logo](https://github.com/jschalk/jaar/tree/main/logo/jaar_64.png) jaar
+
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 
 JAAR Version 0.0.0
 
