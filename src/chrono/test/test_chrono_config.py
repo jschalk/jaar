@@ -150,7 +150,7 @@ def test_create_timeline_config_ReturnsObj():
     # ESTABLISH
     cinco_text = "cinco"
     cinco_c400_count = 25
-    cinco_yr1_jan1_offset = 2103796800  # 4000 years
+    cinco_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
     cinco_hour_length = 120
     cinco_month_length = 25
     cinco_weekday_list = ["Airday", "Bioday", "Chiday", "Danceday", "Ellday"]
