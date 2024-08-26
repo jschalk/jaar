@@ -6,6 +6,9 @@
 #     get_budunit_laundry_example1,
 # )
 
+# TODO delete all these tests and make it so that if a certain variable is passed when the pytest
+# command is given all the graphics display.
+
 # from src.bud.bud import budunit_shop
 # from src.bud.graphic import (
 #     budunit_explanation0,

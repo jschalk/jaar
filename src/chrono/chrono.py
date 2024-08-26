@@ -32,7 +32,7 @@ def year_str():
 
 
 @dataclass
-class C400Standard:
+class C400Constants:
     day_length: int
     c400_leap_length: int
     c400_clean_length: int
@@ -42,9 +42,9 @@ class C400Standard:
     year_length: int
 
 
-def get_c400_standard() -> C400Standard:
-    c400_dict = get_dict_from_json(open_file("src/chrono/", "c400_standard.json"))
-    return C400Standard(
+def get_c400_constants() -> C400Constants:
+    c400_dict = get_dict_from_json(open_file("src/chrono/", "c400_constants.json"))
+    return C400Constants(
         day_length=c400_dict.get(f"{day_str()}_length"),
         c400_leap_length=c400_dict.get(f"{c400_leap_str()}_length"),
         c400_clean_length=c400_dict.get(f"{c400_clean_str()}_length"),
@@ -60,42 +60,42 @@ def day_length() -> int:
 
 
 def stan_c400_leap_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().c400_leap_length
+    x_denom = get_c400_constants().c400_leap_length
     return ideaunit_shop(c400_leap_str(), _denom=x_denom, _morph=True)
 
 
 def stan_c400_clean_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().c400_clean_length
+    x_denom = get_c400_constants().c400_clean_length
     return ideaunit_shop(c400_clean_str(), _denom=x_denom, _morph=True)
 
 
 def stan_c100_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().c100_length
+    x_denom = get_c400_constants().c100_length
     return ideaunit_shop(c100_str(), _denom=x_denom, _morph=True)
 
 
 def stan_yr4_leap_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().yr4_leap_length
+    x_denom = get_c400_constants().yr4_leap_length
     return ideaunit_shop(yr4_leap_str(), _denom=x_denom, _morph=True)
 
 
 def stan_yr4_clean_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().yr4_clean_length
+    x_denom = get_c400_constants().yr4_clean_length
     return ideaunit_shop(yr4_clean_str(), _denom=x_denom, _morph=True)
 
 
 def stan_year_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().year_length
+    x_denom = get_c400_constants().year_length
     return ideaunit_shop(year_str(), _denom=x_denom, _morph=True)
 
 
 def stan_day_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().day_length
+    x_denom = get_c400_constants().day_length
     return ideaunit_shop(day_str(), _denom=x_denom, _morph=True)
 
 
 def stan_days_ideaunit() -> IdeaUnit:
-    x_denom = get_c400_standard().day_length
+    x_denom = get_c400_constants().day_length
     return ideaunit_shop(days_str(), _denom=x_denom)
 
 
@@ -181,7 +181,7 @@ def create_week_ideaunits(x_weekdays_list) -> dict[str, IdeaUnit]:
 
 def new_timeline_ideaunit(timeline_text: str, c400_count: int) -> IdeaUnit:
     x_text = timeline_text
-    timeline_length = c400_count * get_c400_standard().c400_leap_length
+    timeline_length = c400_count * get_c400_constants().c400_leap_length
     return ideaunit_shop(x_text, _begin=0, _close=timeline_length)
 
 

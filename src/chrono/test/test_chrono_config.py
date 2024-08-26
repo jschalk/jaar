@@ -7,8 +7,8 @@ from src.chrono.examples.chrono_examples import (
     get_example_timeline_config,
 )
 from src.chrono.chrono import (
-    C400Standard,
-    get_c400_standard,
+    C400Constants,
+    get_c400_constants,
     day_length,
     hours_config_text,
     weekdays_config_text,
@@ -22,36 +22,36 @@ from src.chrono.chrono import (
 from copy import deepcopy as copy_deepcopy
 
 
-def test_C400Standard_Exists():
+def test_C400Constants_Exists():
     # ESTABLISH / WHEN
-    x_c400_standard = C400Standard("x1", "x2", "x3", "x4", "x5", "x6", "x7")
+    x_c400_constants = C400Constants("x1", "x2", "x3", "x4", "x5", "x6", "x7")
 
     # THEN
-    assert x_c400_standard.day_length == "x1"
-    assert x_c400_standard.c400_leap_length == "x2"
-    assert x_c400_standard.c400_clean_length == "x3"
-    assert x_c400_standard.c100_length == "x4"
-    assert x_c400_standard.yr4_leap_length == "x5"
-    assert x_c400_standard.yr4_clean_length == "x6"
-    assert x_c400_standard.year_length == "x7"
+    assert x_c400_constants.day_length == "x1"
+    assert x_c400_constants.c400_leap_length == "x2"
+    assert x_c400_constants.c400_clean_length == "x3"
+    assert x_c400_constants.c100_length == "x4"
+    assert x_c400_constants.yr4_leap_length == "x5"
+    assert x_c400_constants.yr4_clean_length == "x6"
+    assert x_c400_constants.year_length == "x7"
 
 
-def test_get_c400_standards_ReturnsObj():
+def test_get_c400_constantss_ReturnsObj():
     # ESTABLISH / WHEN
-    x_c400_standard = get_c400_standard()
+    x_c400_constants = get_c400_constants()
 
-    assert x_c400_standard.day_length == 1440
-    assert x_c400_standard.c400_leap_length == 210379680
-    assert x_c400_standard.c400_clean_length == 210378240
-    assert x_c400_standard.c100_length == 52594560
-    assert x_c400_standard.yr4_leap_length == 2103840
-    assert x_c400_standard.yr4_clean_length == 2102400
-    assert x_c400_standard.year_length == 525600
+    assert x_c400_constants.day_length == 1440
+    assert x_c400_constants.c400_leap_length == 210379680
+    assert x_c400_constants.c400_clean_length == 210378240
+    assert x_c400_constants.c100_length == 52594560
+    assert x_c400_constants.yr4_leap_length == 2103840
+    assert x_c400_constants.yr4_clean_length == 2102400
+    assert x_c400_constants.year_length == 525600
 
 
 def test_day_length_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert day_length() == get_c400_standard().day_length
+    assert day_length() == get_c400_constants().day_length
     assert day_length() == 1440
 
 
@@ -211,8 +211,8 @@ def test_create_timeline_config_ReturnsObj():
     assert x_hours_config[4] == ["4hr", 600]
     assert cinco_dict.get(yr1_jan1_offset_text()) == cinco_yr1_jan1_offset
 
-    cinco_file_name = f"timeline_config_{cinco_text}.json"
-    cinco_file_text = get_json_from_dict(cinco_dict)
-    save_file(chrono_examples_dir(), cinco_file_name, cinco_file_text)
+    # cinco_file_name = f"timeline_config_{cinco_text}.json"
+    # cinco_file_text = get_json_from_dict(cinco_dict)
+    # save_file(chrono_examples_dir(), cinco_file_name, cinco_file_text)
     x_cinco_config = get_example_timeline_config(cinco_text)
     assert validate_timeline_config(x_cinco_config)
