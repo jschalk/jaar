@@ -240,7 +240,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_bud._originunit.set_originhold(yao_text, 1)
 
     # WHEN
-    bud_dict = get_dict_from_json(json_x=yao_bud.get_json())
+    bud_dict = get_dict_from_json(yao_bud.get_json())
 
     # THEN
     _kids = "_kids"

@@ -12,10 +12,16 @@ from src._instrument.db_tool import (
 from pytest import raises as pytest_raises
 
 
+def test_sqlite_null_ReturnsCorrectObj():
+    assert sqlite_null(True)
+    assert sqlite_null("yea") == "yea"
+    assert sqlite_null(None) == "NULL"
+
+
 def test_sqlite_bool_ReturnsCorrectObj():
-    assert sqlite_bool(int_x=0) is False
-    assert sqlite_bool(int_x=1)
-    assert sqlite_bool(int_x=None) == "NULL"
+    assert sqlite_bool(x_int=0) is False
+    assert sqlite_bool(x_int=1)
+    assert sqlite_bool(x_int=None) == "NULL"
 
 
 def test_sqlite_text_ReturnsCorrectObj():
@@ -25,12 +31,6 @@ def test_sqlite_text_ReturnsCorrectObj():
     with pytest_raises(Exception) as excinfo:
         sqlite_text("Bob")
     assert str(excinfo.value) == "function requires boolean"
-
-
-def test_sqlite_null_ReturnsCorrectObj():
-    assert sqlite_null(True)
-    assert sqlite_null("yea") == "yea"
-    assert sqlite_null(None) == "NULL"
 
 
 def test_sqlite_create_insert_sqlstr_ReturnsCorrectObj():
