@@ -36,6 +36,125 @@ def test_create_file_path_ReturnsObj():
     assert create_file_path(x_dir, x_file_name) == f"{x_dir}/{x_file_name}"
 
 
+def test_save_file_SetsFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x_name = "fizz_buzz"
+    x_file_ext = "txt"
+    x_file_name = f"{x_name}.{x_file_ext}"
+    x_file_text = "trying this"
+    print(f"{env_dir=} {x_file_name=}")
+    assert not os_path_exist(create_file_path(env_dir, x_file_name))
+
+    # WHEN
+    save_file(dest_dir=env_dir, file_name=x_file_name, file_text=x_file_text)
+
+    # THEN
+    assert os_path_exist(create_file_path(env_dir, x_file_name))
+
+
+def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_file_name(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_name = "x1"
+    x2_name = "x2"
+    x1_file_ext = "txt"
+    x2_file_ext = "json"
+    x1_file_name = f"{x1_name}.{x1_file_ext}"
+    x2_file_name = f"{x2_name}.{x2_file_ext}"
+    x1_file_text = "trying this"
+    x2_file_text = "look there"
+    print(f"{env_dir=} {x1_file_name=}")
+    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
+    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
+
+    # WHEN / THEN
+    assert open_file(dest_dir=env_dir, file_name=x1_file_name) == x1_file_text
+    assert open_file(dest_dir=env_dir, file_name=x2_file_name) == x2_file_text
+
+
+def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_name = "x1"
+    x2_name = "x2"
+    x1_file_ext = "txt"
+    x2_file_ext = "json"
+    x1_file_name = f"{x1_name}.{x1_file_ext}"
+    x2_file_name = f"{x2_name}.{x2_file_ext}"
+    x1_file_text = "trying this"
+    x2_file_text = "look there"
+    x1_file_path = f"{env_dir}/{x1_file_name}"
+    x2_file_path = f"{env_dir}/{x2_file_name}"
+
+    print(f"{env_dir=} {x1_file_name=}")
+    print(f"{env_dir=} {x1_file_name=}")
+    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
+    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
+
+    # WHEN / THEN
+    assert open_file(dest_dir=x1_file_path, file_name=None) == x1_file_text
+    assert open_file(dest_dir=x2_file_path, file_name=None) == x2_file_text
+
+
+def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x_old_name = "x_old"
+    # x_new_name = "x_new"
+    x_old_file_ext = "txt"
+    # x_new_file_ext = "json"
+    x_old_file_name = f"{x_old_name}.{x_old_file_ext}"
+    # x_new_file_name = f"{x_new_name}.{x_new_file_ext}"
+    x_old_file_text = "trying this"
+    x_new_file_text = "look there"
+    print(f"{env_dir=} {x_old_file_name=}")
+    save_file(dest_dir=env_dir, file_name=x_old_file_name, file_text=x_old_file_text)
+    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
+
+    # WHEN
+    save_file(
+        dest_dir=env_dir,
+        file_name=x_old_file_name,
+        file_text=x_new_file_text,
+        replace=None,
+    )
+
+    # THEN
+    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_new_file_text
+
+
+def test_save_file_DoesNotreplaceFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x_old_name = "x_old"
+    # x_new_name = "x_new"
+    x_old_file_ext = "txt"
+    # x_new_file_ext = "json"
+    x_old_file_name = f"{x_old_name}.{x_old_file_ext}"
+    # x_new_file_name = f"{x_new_name}.{x_new_file_ext}"
+    x_old_file_text = "trying this"
+    x_new_file_text = "look there"
+    print(f"{env_dir=} {x_old_file_name=}")
+    save_file(dest_dir=env_dir, file_name=x_old_file_name, file_text=x_old_file_text)
+    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
+
+    # WHEN
+    save_file(
+        dest_dir=env_dir,
+        file_name=x_old_file_name,
+        file_text=x_new_file_text,
+        replace=False,
+    )
+
+    # THEN
+    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
+
+
 def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
@@ -221,108 +340,6 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThan_min_integer
     # WHEN
     assert get_integer_filenames(env_dir, 2) == {2, 3}
     assert get_integer_filenames(env_dir, 0, "txt") == {1, 3}
-
-
-def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_file_name(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
-    x1_name = "x1"
-    x2_name = "x2"
-    x1_file_ext = "txt"
-    x2_file_ext = "json"
-    x1_file_name = f"{x1_name}.{x1_file_ext}"
-    x2_file_name = f"{x2_name}.{x2_file_ext}"
-    x1_file_text = "trying this"
-    x2_file_text = "look there"
-    print(f"{env_dir=} {x1_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
-    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
-
-    # WHEN / THEN
-    assert open_file(dest_dir=env_dir, file_name=x1_file_name) == x1_file_text
-    assert open_file(dest_dir=env_dir, file_name=x2_file_name) == x2_file_text
-
-
-def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
-    x1_name = "x1"
-    x2_name = "x2"
-    x1_file_ext = "txt"
-    x2_file_ext = "json"
-    x1_file_name = f"{x1_name}.{x1_file_ext}"
-    x2_file_name = f"{x2_name}.{x2_file_ext}"
-    x1_file_text = "trying this"
-    x2_file_text = "look there"
-    x1_file_path = f"{env_dir}/{x1_file_name}"
-    x2_file_path = f"{env_dir}/{x2_file_name}"
-
-    print(f"{env_dir=} {x1_file_name=}")
-    print(f"{env_dir=} {x1_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
-    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
-
-    # WHEN / THEN
-    assert open_file(dest_dir=x1_file_path, file_name=None) == x1_file_text
-    assert open_file(dest_dir=x2_file_path, file_name=None) == x2_file_text
-
-
-def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
-    # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
-    x_old_name = "x_old"
-    # x_new_name = "x_new"
-    x_old_file_ext = "txt"
-    # x_new_file_ext = "json"
-    x_old_file_name = f"{x_old_name}.{x_old_file_ext}"
-    # x_new_file_name = f"{x_new_name}.{x_new_file_ext}"
-    x_old_file_text = "trying this"
-    x_new_file_text = "look there"
-    print(f"{env_dir=} {x_old_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x_old_file_name, file_text=x_old_file_text)
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
-
-    # WHEN
-    save_file(
-        dest_dir=env_dir,
-        file_name=x_old_file_name,
-        file_text=x_new_file_text,
-        replace=None,
-    )
-
-    # THEN
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_new_file_text
-
-
-def test_save_file_DoesNotreplaceFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
-    x_old_name = "x_old"
-    # x_new_name = "x_new"
-    x_old_file_ext = "txt"
-    # x_new_file_ext = "json"
-    x_old_file_name = f"{x_old_name}.{x_old_file_ext}"
-    # x_new_file_name = f"{x_new_name}.{x_new_file_ext}"
-    x_old_file_text = "trying this"
-    x_new_file_text = "look there"
-    print(f"{env_dir=} {x_old_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x_old_file_name, file_text=x_old_file_text)
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
-
-    # WHEN
-    save_file(
-        dest_dir=env_dir,
-        file_name=x_old_file_name,
-        file_text=x_new_file_text,
-        replace=False,
-    )
-
-    # THEN
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
 
 
 def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(

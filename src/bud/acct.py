@@ -237,7 +237,7 @@ class AcctUnit(AcctCore):
 
 # class AcctUnitsshop:
 def acctunits_get_from_json(acctunits_json: str) -> dict[str, AcctUnit]:
-    acctunits_dict = get_dict_from_json(json_x=acctunits_json)
+    acctunits_dict = get_dict_from_json(acctunits_json)
     return acctunits_get_from_dict(x_dict=acctunits_dict)
 
 

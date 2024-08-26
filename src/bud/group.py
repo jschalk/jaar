@@ -105,8 +105,8 @@ class AwardLink(GroupCore):
 
 # class AwardLinksshop:
 def awardlinks_get_from_json(awardlinks_json: str) -> dict[GroupID, AwardLink]:
-    awardlinks_dict = get_dict_from_json(json_x=awardlinks_json)
-    return awardlinks_get_from_dict(x_dict=awardlinks_dict)
+    awardlinks_dict = get_dict_from_json(awardlinks_json)
+    return awardlinks_get_from_dict(awardlinks_dict)
 
 
 def awardlinks_get_from_dict(x_dict: dict) -> dict[GroupID, AwardLink]:

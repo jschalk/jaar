@@ -264,7 +264,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
         }
     }
     yao_json_text = get_json_from_dict(dict_x=yao_json_dict)
-    assert x_is_json(json_x=yao_json_text)
+    assert x_is_json(yao_json_text)
 
     # WHEN
     yao_obj_dict = acctunits_get_from_json(acctunits_json=yao_json_text)

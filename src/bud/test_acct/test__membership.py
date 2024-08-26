@@ -378,7 +378,7 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
 
     teachers_json = get_json_from_dict(dict_x=awardlinks_dict)
     assert teachers_json is not None
-    assert x_is_json(json_x=teachers_json)
+    assert x_is_json(teachers_json)
 
     # WHEN
     awardlinks_obj_dict = awardlinks_get_from_json(awardlinks_json=teachers_json)

@@ -3,20 +3,20 @@ from dataclasses import dataclass
 from contextlib import contextmanager
 
 
-def sqlite_null(obj_x):
-    return "NULL" if obj_x is None else obj_x
+def sqlite_null(x_obj: any):
+    return "NULL" if x_obj is None else x_obj
 
 
-def sqlite_bool(int_x) -> bool:
+def sqlite_bool(x_int: int) -> bool:
     """sqlite_true_to_python_true"""
-    return "NULL" if int_x is None else int_x == 1
+    return "NULL" if x_int is None else x_int == 1
 
 
-def sqlite_text(bool_x) -> str:
+def sqlite_text(x_bool: any) -> str:
     """python_bool_to_SQLITE_bool"""
-    if bool_x is True:
+    if x_bool is True:
         x_text = "TRUE"
-    elif not bool_x:
+    elif not x_bool:
         x_text = "FALSE"
     else:
         raise TypeError("function requires boolean")
