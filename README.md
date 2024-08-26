@@ -1,17 +1,6 @@
-
-# ![jaar logo](https://github.com/jschalk/jaar/tree/main/logo/jaar_64.png) jaar
-
-
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-<!-- TODO: Find out how to autopopulate the below modeled after the borb library
-[![Corpus Coverage : 100.0%](https://img.shields.io/badge/corpus%20coverage-100.0%25-green)]()
-[![Public Method Documentation : 100%](https://img.shields.io/badge/public%20method%20documentation-100%25-green)]()
-[![Number of Tests : 615](https://img.shields.io/badge/number%20of%20tests-615-green)]()
-[![Python : 3.8 | 3.9 | 3.10 ](https://img.shields.io/badge/python-3.8%20&#124;%203.9%20&#124;%203.10-green)]() 
-
-[![Downloads](https://pepy.tech/badge/borb)](https://pepy.tech/projeect/borb)
-[![Downloads](https://pepy.tech/badge/borb/month)](https://pepy.tech/projeect/borb)
--->
+![jaar logo](https://github.com/jschalk/jaar/tree/main/logo/jaar_64.png) jaar
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 JAAR Version 0.0.0
 
@@ -118,3 +107,12 @@ screenshots and elucidatory text.)
 
 
 
+<!-- TODO: Find out how to autopopulate the below modeled after the borb library
+[![Corpus Coverage : 100.0%](https://img.shields.io/badge/corpus%20coverage-100.0%25-green)]()
+[![Public Method Documentation : 100%](https://img.shields.io/badge/public%20method%20documentation-100%25-green)]()
+[![Number of Tests : 615](https://img.shields.io/badge/number%20of%20tests-615-green)]()
+[![Python : 3.8 | 3.9 | 3.10 ](https://img.shields.io/badge/python-3.8%20&#124;%203.9%20&#124;%203.10-green)]() 
+
+[![Downloads](https://pepy.tech/badge/borb)](https://pepy.tech/projeect/borb)
+[![Downloads](https://pepy.tech/badge/borb/month)](https://pepy.tech/projeect/borb)
+-->
