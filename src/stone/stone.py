@@ -18,8 +18,8 @@ from src.gift.atom_config import (
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
 from src.listen.hubunit import hubunit_shop
-from src.span.csv_tool import extract_csv_headers
-from src.span.examples.span_env import src_span_dir
+from src.stone.csv_tool import extract_csv_headers
+from src.stone.examples.stone_env import src_stone_dir
 from pandas import DataFrame, read_csv
 import csv
 from dataclasses import dataclass
@@ -117,8 +117,8 @@ def must_be_bool_str() -> str:
     return "must_be_bool"
 
 
-def get_span_formats_dir() -> str:
-    return f"{src_span_dir()}/span_formats"
+def get_stone_formats_dir() -> str:
+    return f"{src_stone_dir()}/stone_formats"
 
 
 def jaar_format_00001_acct_v0_0_0() -> str:
@@ -133,7 +133,7 @@ def jaar_format_00003_ideaunit_v0_0_0() -> str:
     return "jaar_format_00003_ideaunit_v0_0_0"
 
 
-def get_span_filenames() -> set[str]:
+def get_stone_filenames() -> set[str]:
     return {
         jaar_format_00001_acct_v0_0_0(),
         jaar_format_00002_membership_v0_0_0(),
@@ -142,76 +142,76 @@ def get_span_filenames() -> set[str]:
 
 
 @dataclass
-class SpanColumn:
+class StoneColumn:
     attribute_key: str
     column_order: int
     sort_order: int = None
 
 
 @dataclass
-class SpanRef:
-    span_name: str = None
+class StoneRef:
+    stone_name: str = None
     atom_category: str = None
-    _spancolumns: dict[str:SpanColumn] = None
+    _stonecolumns: dict[str:StoneColumn] = None
 
-    def set_spancolumn(self, x_spancolumn: SpanColumn):
-        self._spancolumns[x_spancolumn.attribute_key] = x_spancolumn
+    def set_stonecolumn(self, x_stonecolumn: StoneColumn):
+        self._stonecolumns[x_stonecolumn.attribute_key] = x_stonecolumn
 
     def get_headers_list(self) -> list[str]:
-        x_list = list(self._spancolumns.values())
+        x_list = list(self._stonecolumns.values())
         x_list = sorted(x_list, key=lambda x: x.column_order)
-        return [x_spancolumn.attribute_key for x_spancolumn in x_list]
+        return [x_stonecolumn.attribute_key for x_stonecolumn in x_list]
 
-    def get_spancolumn(self, x_attribute_key: str) -> SpanColumn:
-        return self._spancolumns.get(x_attribute_key)
+    def get_stonecolumn(self, x_attribute_key: str) -> StoneColumn:
+        return self._stonecolumns.get(x_attribute_key)
 
 
-def spanref_shop(x_span_name: str, x_atom_category: str) -> SpanRef:
-    return SpanRef(
-        span_name=x_span_name, atom_category=x_atom_category, _spancolumns={}
+def stoneref_shop(x_stone_name: str, x_atom_category: str) -> StoneRef:
+    return StoneRef(
+        stone_name=x_stone_name, atom_category=x_atom_category, _stonecolumns={}
     )
 
 
-def get_spanref(span_name: str) -> SpanRef:
-    spanref_filename = get_json_filename(span_name)
-    spanref_json = open_file(get_span_formats_dir(), spanref_filename)
-    spanref_dict = get_dict_from_json(spanref_json)
-    x_spanref = spanref_shop(span_name, spanref_dict.get(atom_category_str()))
-    x_attributes_dict = spanref_dict.get(attributes_str())
-    x_spancolumns = {}
-    for x_key, x_spancolumn in x_attributes_dict.items():
-        x_column_order = x_spancolumn.get(column_order_str())
-        x_sort_order = x_spancolumn.get(sort_order_str())
-        x_spancolumn = SpanColumn(x_key, x_column_order, x_sort_order)
-        x_spancolumns[x_spancolumn.attribute_key] = x_spancolumn
-    x_spanref._spancolumns = x_spancolumns
-    return x_spanref
+def get_stoneref(stone_name: str) -> StoneRef:
+    stoneref_filename = get_json_filename(stone_name)
+    stoneref_json = open_file(get_stone_formats_dir(), stoneref_filename)
+    stoneref_dict = get_dict_from_json(stoneref_json)
+    x_stoneref = stoneref_shop(stone_name, stoneref_dict.get(atom_category_str()))
+    x_attributes_dict = stoneref_dict.get(attributes_str())
+    x_stonecolumns = {}
+    for x_key, x_stonecolumn in x_attributes_dict.items():
+        x_column_order = x_stonecolumn.get(column_order_str())
+        x_sort_order = x_stonecolumn.get(sort_order_str())
+        x_stonecolumn = StoneColumn(x_key, x_column_order, x_sort_order)
+        x_stonecolumns[x_stonecolumn.attribute_key] = x_stonecolumn
+    x_stoneref._stonecolumns = x_stonecolumns
+    return x_stoneref
 
 
 def get_ascending_bools(sorting_attributes: list[str]) -> list[bool]:
     return [True for _ in sorting_attributes]
 
 
-def _get_headers_list(span_name: str) -> list[str]:
-    return get_spanref(span_name).get_headers_list()
+def _get_headers_list(stone_name: str) -> list[str]:
+    return get_stoneref(stone_name).get_headers_list()
 
 
-def _generate_span_dataframe(d2_list: list[list[str]], span_name: str) -> DataFrame:
-    return DataFrame(d2_list, columns=_get_headers_list(span_name))
+def _generate_stone_dataframe(d2_list: list[list[str]], stone_name: str) -> DataFrame:
+    return DataFrame(d2_list, columns=_get_headers_list(stone_name))
 
 
-def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
+def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_budunit)
-    x_spanref = get_spanref(span_name)
-    category_set = {x_spanref.atom_category}
+    x_stoneref = get_stoneref(stone_name)
+    category_set = {x_stoneref.atom_category}
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
-    sorting_columns = x_spanref.get_headers_list()
+    sorting_columns = x_stoneref.get_headers_list()
     d2_list = []
 
-    if span_name == jaar_format_00001_acct_v0_0_0():
+    if stone_name == jaar_format_00001_acct_v0_0_0():
         d2_list = [
             [
                 x_budunit._real_id,
@@ -222,7 +222,7 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-    elif span_name == jaar_format_00002_membership_v0_0_0():
+    elif stone_name == jaar_format_00002_membership_v0_0_0():
         d2_list = [
             [
                 x_budunit._real_id,
@@ -234,7 +234,7 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-    elif span_name == jaar_format_00003_ideaunit_v0_0_0():
+    elif stone_name == jaar_format_00003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
             pledge_bool = x_atomunit.get_value("pledge")
             pledge_yes_str = ""
@@ -251,43 +251,43 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
                 ]
             )
 
-    x_span = _generate_span_dataframe(d2_list, span_name)
+    x_stone = _generate_stone_dataframe(d2_list, stone_name)
     ascending_bools = get_ascending_bools(sorting_columns)
-    x_span.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
-    x_span.reset_index(inplace=True)
-    x_span.drop(columns=["index"], inplace=True)
+    x_stone.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
+    x_stone.reset_index(inplace=True)
+    x_stone.drop(columns=["index"], inplace=True)
 
-    return x_span
+    return x_stone
 
 
-def save_span_csv(x_spanname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
-    x_dataframe = create_span_df(x_budunit, x_spanname)
+def save_stone_csv(x_stonename: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
+    x_dataframe = create_stone_df(x_budunit, x_stonename)
     x_dataframe.to_csv(create_file_path(x_dir, x_filename), index=False)
 
 
-def open_span_csv(x_file_dir: str, x_filename: str) -> DataFrame:
+def open_stone_csv(x_file_dir: str, x_filename: str) -> DataFrame:
     return read_csv(create_file_path(x_file_dir, x_filename))
 
 
-def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
+def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
     x_changeunit = changeunit_shop()
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        if x_spanname == jaar_format_00001_acct_v0_0_0():
+        if x_stonename == jaar_format_00001_acct_v0_0_0():
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], float(row[3]))
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_spanname == jaar_format_00002_membership_v0_0_0():
+        elif x_stonename == jaar_format_00002_membership_v0_0_0():
             x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], row[3])
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_atomunit.set_arg(title_row[5], float(row[5]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_spanname == jaar_format_00003_ideaunit_v0_0_0():
+        elif x_stonename == jaar_format_00003_ideaunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             # "real_id": "column_order": 0
             # "owner_id": "column_order": 1
@@ -306,7 +306,7 @@ def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
     return x_changeunit
 
 
-def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: str):
+def load_stone_csv(reals_dir: str, x_stonename: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
@@ -317,7 +317,7 @@ def load_span_csv(reals_dir: str, x_spanname: str, x_file_dir: str, x_filename: 
 
     x_hubunit = hubunit_shop(reals_dir, real_id=x_real_id, owner_id=x_owner_id)
     x_hubunit.initialize_gift_voice_files()
-    x_changeunit = create_changeunit(x_csv, x_spanname)
+    x_changeunit = create_changeunit(x_csv, x_stonename)
     x_giftunit = giftunit_shop(x_owner_id, x_real_id)
     x_giftunit.set_changeunit(x_changeunit)
     x_hubunit.save_gift_file(x_giftunit)

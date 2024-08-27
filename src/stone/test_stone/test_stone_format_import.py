@@ -3,11 +3,11 @@ from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.listen.hubunit import hubunit_shop
-from src.span.span import (
+from src.stone.stone import (
     jaar_format_00001_acct_v0_0_0,
     jaar_format_00002_membership_v0_0_0,
     jaar_format_00003_ideaunit_v0_0_0,
-    create_span_df,
+    create_stone_df,
     real_id_str,
     owner_id_str,
     acct_id_str,
@@ -20,20 +20,20 @@ from src.span.span import (
     credit_score_str,
     debtit_vote_str,
     credit_vote_str,
-    get_spanref,
-    save_span_csv,
-    open_span_csv,
-    load_span_csv,
+    get_stoneref,
+    save_stone_csv,
+    open_stone_csv,
+    load_stone_csv,
 )
-from src.span.examples.span_env import (
-    span_examples_dir,
-    span_reals_dir,
-    span_env_setup_cleanup,
+from src.stone.examples.stone_env import (
+    stone_examples_dir,
+    stone_reals_dir,
+    stone_env_setup_cleanup,
 )
 from os.path import exists as os_path_exists
 
 
-def test_open_span_csv_ReturnsObj():
+def test_open_stone_csv_ReturnsObj():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -49,17 +49,17 @@ def test_open_span_csv_ReturnsObj():
     sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
     sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
-    j1_spanname = jaar_format_00001_acct_v0_0_0()
+    j1_stonename = jaar_format_00001_acct_v0_0_0()
     acct_filename = f"{sue_text}_acct_example_01.csv"
-    save_span_csv(j1_spanname, sue_budunit, span_examples_dir(), acct_filename)
+    save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
 
     # WHEN
-    acct_dataframe = open_span_csv(span_examples_dir(), acct_filename)
+    acct_dataframe = open_stone_csv(stone_examples_dir(), acct_filename)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
-    acct_spanref = get_spanref(j1_spanname)
-    assert array_headers == acct_spanref.get_headers_list()
+    acct_stoneref = get_stoneref(j1_stonename)
+    assert array_headers == acct_stoneref.get_headers_list()
     assert acct_dataframe.loc[0, real_id_str()] == music_real_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_text
@@ -81,8 +81,8 @@ def test_open_span_csv_ReturnsObj():
     assert len(acct_dataframe) == 3
 
 
-def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV(
-    span_env_setup_cleanup,
+def test_save_stone_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV(
+    stone_env_setup_cleanup,
 ):
     # ESTABLISH
     sue_text = sue_str()
@@ -99,21 +99,21 @@ def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV(
     sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
     sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
-    j1_spanname = jaar_format_00001_acct_v0_0_0()
+    j1_stonename = jaar_format_00001_acct_v0_0_0()
     acct_filename = f"{sue_text}_acct_example_02.csv"
-    csv_example_path = f_path(span_examples_dir(), acct_filename)
+    csv_example_path = f_path(stone_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
     delete_dir(csv_example_path)
-    save_span_csv(j1_spanname, sue_budunit, span_examples_dir(), acct_filename)
-    music_hubunit = hubunit_shop(span_reals_dir(), music_real_id, owner_id=sue_text)
+    save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
+    music_hubunit = hubunit_shop(stone_reals_dir(), music_real_id, owner_id=sue_text)
     # Open RealUnit and confirm voice BudUnit does not exist
     assert not music_hubunit.voice_file_exists()
 
     # WHEN
-    load_span_csv(
+    load_stone_csv(
         reals_dir=music_hubunit.reals_dir,
-        x_spanname=j1_spanname,
-        x_file_dir=span_examples_dir(),
+        x_stonename=j1_stonename,
+        x_file_dir=stone_examples_dir(),
         x_filename=acct_filename,
     )
 
@@ -138,14 +138,14 @@ def test_save_span_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV(
     assert yao_acctunit.debtit_score == yao_debtit_score
 
 
-# def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
+# def test_create_stone_df_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
 #     # ESTABLISH / WHEN
-#     x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+#     x_stone_name = jaar_format_00003_ideaunit_v0_0_0()
 
 #     # WHEN
-#     ideaunit_format = create_span_df(budunit_v001(), x_span_name)
+#     ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
 
 #     # THEN
 #     array_headers = list(ideaunit_format.columns)
-#     assert array_headers == get_spanref(x_span_name).get_headers_list()
+#     assert array_headers == get_stoneref(x_stone_name).get_headers_list()
 #     assert len(ideaunit_format) == 252
