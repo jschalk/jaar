@@ -1,4 +1,10 @@
-from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
+from src.gift.atom_config import (
+    atom_update,
+    atom_insert,
+    atom_delete,
+    bud_acctunit_text,
+)
+from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
@@ -6,7 +12,7 @@ from src.bud.bud import budunit_shop
 
 def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     # ESTABLISH
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
@@ -35,7 +41,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
 
 def test_create_legible_list_ReturnsObj_acctunit_INSERT_monetary_desc_IsNone():
     # ESTABLISH
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
@@ -62,7 +68,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_monetary_desc_IsNone():
 
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debtit_score():
     # ESTABLISH
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
@@ -91,7 +97,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debtit_scor
 
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score():
     # ESTABLISH
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     credit_score_value = 81
@@ -117,7 +123,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score():
 
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_score():
     # ESTABLISH
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     acct_id_text = "acct_id"
     debtit_score_text = "debtit_score"
     debtit_score_value = 43
@@ -143,7 +149,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_score():
 
 def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     # ESTABLISH
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     acct_id_text = "acct_id"
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_delete())

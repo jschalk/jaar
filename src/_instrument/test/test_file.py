@@ -104,55 +104,49 @@ def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
 def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
-    x_old_name = "x_old"
-    # x_new_name = "x_new"
-    x_old_file_ext = "txt"
-    # x_new_file_ext = "json"
-    x_old_file_name = f"{x_old_name}.{x_old_file_ext}"
-    # x_new_file_name = f"{x_new_name}.{x_new_file_ext}"
-    x_old_file_text = "trying this"
-    x_new_file_text = "look there"
-    print(f"{env_dir=} {x_old_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x_old_file_name, file_text=x_old_file_text)
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
+    swim_text = "swim"
+    swim_file_ext = "txt"
+    swim_file_name = f"{swim_text}.{swim_file_ext}"
+    swim_old_file_text = "swimming is good"
+    swim_new_file_text = "swimming is ok"
+    print(f"{env_dir=} {swim_file_name=}")
+    save_file(dest_dir=env_dir, file_name=swim_file_name, file_text=swim_old_file_text)
+    assert open_file(dest_dir=env_dir, file_name=swim_file_name) == swim_old_file_text
 
     # WHEN
     save_file(
         dest_dir=env_dir,
-        file_name=x_old_file_name,
-        file_text=x_new_file_text,
+        file_name=swim_file_name,
+        file_text=swim_new_file_text,
         replace=None,
     )
 
     # THEN
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_new_file_text
+    assert open_file(dest_dir=env_dir, file_name=swim_file_name) == swim_new_file_text
 
 
-def test_save_file_DoesNotreplaceFile(env_dir_setup_cleanup):
+def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
-    x_old_name = "x_old"
-    # x_new_name = "x_new"
-    x_old_file_ext = "txt"
-    # x_new_file_ext = "json"
-    x_old_file_name = f"{x_old_name}.{x_old_file_ext}"
-    # x_new_file_name = f"{x_new_name}.{x_new_file_ext}"
-    x_old_file_text = "trying this"
-    x_new_file_text = "look there"
-    print(f"{env_dir=} {x_old_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x_old_file_name, file_text=x_old_file_text)
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
+    swim_text = "swim"
+    swim_file_ext = "txt"
+    swim_file_name = f"{swim_text}.{swim_file_ext}"
+    swim_old_file_text = "swimming is good"
+    swim_new_file_text = "swimming is ok"
+    print(f"{env_dir=} {swim_file_name=}")
+    save_file(dest_dir=env_dir, file_name=swim_file_name, file_text=swim_old_file_text)
+    assert open_file(env_dir, swim_file_name) == swim_old_file_text
 
     # WHEN
     save_file(
         dest_dir=env_dir,
-        file_name=x_old_file_name,
-        file_text=x_new_file_text,
+        file_name=swim_file_name,
+        file_text=swim_new_file_text,
         replace=False,
     )
 
     # THEN
-    assert open_file(dest_dir=env_dir, file_name=x_old_file_name) == x_old_file_text
+    assert open_file(env_dir, swim_file_name) == swim_old_file_text
 
 
 def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):

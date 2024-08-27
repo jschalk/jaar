@@ -11,6 +11,8 @@ from src.gift.atom_config import (
     get_normalized_bud_table_build,
     required_args_text,
     optional_args_text,
+    category_text,
+    crud_text_str,
     normal_table_name_text,
     normal_specs_text,
     sqlite_datatype_text,
@@ -73,6 +75,22 @@ def test_bud_idea_healerhold_text_ReturnsObj():
 
 def test_bud_idea_factunit_text_ReturnsObj():
     assert bud_idea_factunit_text() == "bud_idea_factunit"
+
+
+def test_required_args_text_ReturnsObj():
+    assert required_args_text() == "required_args"
+
+
+def test_optional_args_text_ReturnsObj():
+    assert optional_args_text() == "optional_args"
+
+
+def test_category_text_ReturnsObj():
+    assert category_text() == "category"
+
+
+def test_crud_text_str_ReturnsObj():
+    assert crud_text_str() == "crud_text"
 
 
 def test_atom_config_HasCorrect_category():
@@ -300,7 +318,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
 
     # THEN
     assert len(atom_columns) == 107
-    assert atom_columns.get("budunit_UPDATE__credor_respect") == "INTEGER"
+    assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
 
@@ -392,15 +410,15 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     budunit_columns = cat_budunit.get(columns_text)
     assert len(budunit_columns) == 10
     assert budunit_columns.get("uid") is not None
-    assert budunit_columns.get("_max_tree_traverse") is not None
-    assert budunit_columns.get("_monetary_desc") is not None
-    assert budunit_columns.get("_credor_respect") is not None
-    assert budunit_columns.get("_debtor_respect") is not None
-    assert budunit_columns.get("_fund_pool") is not None
-    assert budunit_columns.get("_fund_coin") is not None
-    assert budunit_columns.get("_bit") is not None
-    assert budunit_columns.get("_penny") is not None
-    assert budunit_columns.get("_tally") is not None
+    assert budunit_columns.get("max_tree_traverse") is not None
+    assert budunit_columns.get("monetary_desc") is not None
+    assert budunit_columns.get("credor_respect") is not None
+    assert budunit_columns.get("debtor_respect") is not None
+    assert budunit_columns.get("fund_pool") is not None
+    assert budunit_columns.get("fund_coin") is not None
+    assert budunit_columns.get("bit") is not None
+    assert budunit_columns.get("penny") is not None
+    assert budunit_columns.get("tally") is not None
 
     assert len(cat_acctunit) == 2
     acctunit_columns = cat_acctunit.get(columns_text)

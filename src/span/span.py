@@ -253,7 +253,7 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
                     x_budunit._owner_id,
                     pledge_yes_str,
                     x_atomunit.get_value(parent_road_str()),
-                    x_atomunit.get_value(f"_{mass_str()}"),
+                    x_atomunit.get_value(mass_str()),
                     x_atomunit.get_value(label_str()),
                 ]
             )
@@ -269,8 +269,7 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
 
 def save_span_csv(x_spanname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
     x_dataframe = create_span_df(x_budunit, x_spanname)
-    csv_path = create_file_path(x_dir, x_filename)
-    x_dataframe.to_csv(csv_path, index=False)
+    x_dataframe.to_csv(create_file_path(x_dir, x_filename), index=False)
 
 
 def open_span_csv(x_file_dir: str, x_filename: str) -> DataFrame:
@@ -308,7 +307,7 @@ def create_changeunit(x_csv: str, x_spanname: str) -> ChangeUnit:
                 pledge_bool = True
             x_atomunit.set_arg(title_row[2], pledge_bool)
             x_atomunit.set_arg(title_row[3], row[3])
-            x_atomunit.set_arg("_mass", int(row[4]))
+            x_atomunit.set_arg(title_row[4], int(row[4]))
             x_atomunit.set_arg(title_row[5], row[5])
             x_changeunit.set_atomunit(x_atomunit)
     return x_changeunit

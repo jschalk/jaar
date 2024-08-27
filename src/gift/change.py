@@ -23,6 +23,7 @@ from src.gift.atom_config import (
     bud_idea_range_push_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_reasonunit_text,
+    bud_ideaunit_text,
     budunit_text,
 )
 from src.gift.atom import (
@@ -154,22 +155,22 @@ class ChangeUnit:
         x_atomunit = atomunit_shop(budunit_text(), atom_update())
         if before_bud._max_tree_traverse != after_bud._max_tree_traverse:
             x_atomunit.set_optional_arg(
-                "_max_tree_traverse", after_bud._max_tree_traverse
+                "max_tree_traverse", after_bud._max_tree_traverse
             )
         if before_bud._monetary_desc != after_bud._monetary_desc:
-            x_atomunit.set_optional_arg("_monetary_desc", after_bud._monetary_desc)
+            x_atomunit.set_optional_arg("monetary_desc", after_bud._monetary_desc)
         if before_bud._credor_respect != after_bud._credor_respect:
-            x_atomunit.set_optional_arg("_credor_respect", after_bud._credor_respect)
+            x_atomunit.set_optional_arg("credor_respect", after_bud._credor_respect)
         if before_bud._debtor_respect != after_bud._debtor_respect:
-            x_atomunit.set_optional_arg("_debtor_respect", after_bud._debtor_respect)
+            x_atomunit.set_optional_arg("debtor_respect", after_bud._debtor_respect)
         if before_bud._tally != after_bud._tally:
-            x_atomunit.set_optional_arg("_tally", after_bud._tally)
+            x_atomunit.set_optional_arg("tally", after_bud._tally)
         if before_bud._fund_pool != after_bud._fund_pool:
-            x_atomunit.set_optional_arg("_fund_pool", after_bud._fund_pool)
+            x_atomunit.set_optional_arg("fund_pool", after_bud._fund_pool)
         if before_bud._fund_coin != after_bud._fund_coin:
-            x_atomunit.set_optional_arg("_fund_coin", after_bud._fund_coin)
+            x_atomunit.set_optional_arg("fund_coin", after_bud._fund_coin)
         if before_bud._bit != after_bud._bit:
-            x_atomunit.set_optional_arg("_bit", after_bud._bit)
+            x_atomunit.set_optional_arg("bit", after_bud._bit)
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -348,16 +349,16 @@ class ChangeUnit:
     def add_atomunit_idea_inserts(self, after_bud: BudUnit, insert_idea_roads: set):
         for insert_idea_road in insert_idea_roads:
             insert_ideaunit = after_bud.get_idea_obj(insert_idea_road)
-            x_atomunit = atomunit_shop("bud_ideaunit", atom_insert())
+            x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             x_atomunit.set_required_arg("parent_road", insert_ideaunit._parent_road)
             x_atomunit.set_required_arg("label", insert_ideaunit._label)
-            x_atomunit.set_optional_arg("_addin", insert_ideaunit._addin)
-            x_atomunit.set_optional_arg("_begin", insert_ideaunit._begin)
-            x_atomunit.set_optional_arg("_close", insert_ideaunit._close)
-            x_atomunit.set_optional_arg("_denom", insert_ideaunit._denom)
-            x_atomunit.set_optional_arg("_numor", insert_ideaunit._numor)
-            x_atomunit.set_optional_arg("_morph", insert_ideaunit._morph)
-            x_atomunit.set_optional_arg("_mass", insert_ideaunit._mass)
+            x_atomunit.set_optional_arg("addin", insert_ideaunit._addin)
+            x_atomunit.set_optional_arg("begin", insert_ideaunit._begin)
+            x_atomunit.set_optional_arg("close", insert_ideaunit._close)
+            x_atomunit.set_optional_arg("denom", insert_ideaunit._denom)
+            x_atomunit.set_optional_arg("numor", insert_ideaunit._numor)
+            x_atomunit.set_optional_arg("morph", insert_ideaunit._morph)
+            x_atomunit.set_optional_arg("mass", insert_ideaunit._mass)
             x_atomunit.set_optional_arg("pledge", insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
 
@@ -388,24 +389,26 @@ class ChangeUnit:
         for idea_road in update_roads:
             after_ideaunit = after_bud.get_idea_obj(idea_road)
             before_ideaunit = before_bud.get_idea_obj(idea_road)
-            if optional_args_different("bud_ideaunit", before_ideaunit, after_ideaunit):
-                x_atomunit = atomunit_shop("bud_ideaunit", atom_update())
+            if optional_args_different(
+                bud_ideaunit_text(), before_ideaunit, after_ideaunit
+            ):
+                x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_update())
                 x_atomunit.set_required_arg("parent_road", after_ideaunit._parent_road)
                 x_atomunit.set_required_arg("label", after_ideaunit._label)
                 if before_ideaunit._addin != after_ideaunit._addin:
-                    x_atomunit.set_optional_arg("_addin", after_ideaunit._addin)
+                    x_atomunit.set_optional_arg("addin", after_ideaunit._addin)
                 if before_ideaunit._begin != after_ideaunit._begin:
-                    x_atomunit.set_optional_arg("_begin", after_ideaunit._begin)
+                    x_atomunit.set_optional_arg("begin", after_ideaunit._begin)
                 if before_ideaunit._close != after_ideaunit._close:
-                    x_atomunit.set_optional_arg("_close", after_ideaunit._close)
+                    x_atomunit.set_optional_arg("close", after_ideaunit._close)
                 if before_ideaunit._denom != after_ideaunit._denom:
-                    x_atomunit.set_optional_arg("_denom", after_ideaunit._denom)
+                    x_atomunit.set_optional_arg("denom", after_ideaunit._denom)
                 if before_ideaunit._numor != after_ideaunit._numor:
-                    x_atomunit.set_optional_arg("_numor", after_ideaunit._numor)
+                    x_atomunit.set_optional_arg("numor", after_ideaunit._numor)
                 if before_ideaunit._morph != after_ideaunit._morph:
-                    x_atomunit.set_optional_arg("_morph", after_ideaunit._morph)
+                    x_atomunit.set_optional_arg("morph", after_ideaunit._morph)
                 if before_ideaunit._mass != after_ideaunit._mass:
-                    x_atomunit.set_optional_arg("_mass", after_ideaunit._mass)
+                    x_atomunit.set_optional_arg("mass", after_ideaunit._mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:
                     x_atomunit.set_optional_arg("pledge", after_ideaunit.pledge)
                 self.set_atomunit(x_atomunit)
@@ -517,7 +520,7 @@ class ChangeUnit:
                 delete_idea_road, before_bud._road_delimiter
             )
             x_label = get_terminus_node(delete_idea_road, before_bud._road_delimiter)
-            x_atomunit = atomunit_shop("bud_ideaunit", atom_delete())
+            x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_delete())
             x_atomunit.set_required_arg("parent_road", x_parent_road)
             x_atomunit.set_required_arg("label", x_label)
             self.set_atomunit(x_atomunit)

@@ -173,13 +173,13 @@ def test_create_changeunit_Arg_jaar_format_00003_ideaunit_v0_0_0():
     casa_atomunit.set_arg(parent_road_str(), sue_budunit._real_id)
     casa_atomunit.set_arg(label_str(), casa_text)
     casa_atomunit.set_arg(pledge_str(), False)
-    casa_atomunit.set_arg("_mass", casa_mass)
-    assert casa_atomunit.get_value("_mass") == casa_mass
+    casa_atomunit.set_arg(mass_str(), casa_mass)
+    assert casa_atomunit.get_value(mass_str()) == casa_mass
     clean_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
     clean_atomunit.set_arg(label_str(), clean_text)
     clean_atomunit.set_arg(pledge_str(), True)
-    clean_atomunit.set_arg("_mass", 1)
+    clean_atomunit.set_arg(mass_str(), 1)
     assert ideaunit_changunit.atomunit_exists(casa_atomunit)
     assert ideaunit_changunit.atomunit_exists(clean_atomunit)
     assert len(ideaunit_changunit.get_ordered_atomunits()) == 2

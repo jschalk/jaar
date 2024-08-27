@@ -1,5 +1,6 @@
 from src._road.road import create_road
-from src.gift.atom import atomunit_shop, atom_insert, atom_hx_table_name
+from src.gift.atom_config import atom_insert, atom_hx_table_name, bud_idea_factunit_text
+from src.gift.atom import atomunit_shop
 from src.real.journal_sqlstr import (
     get_atom2change_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
@@ -180,7 +181,7 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     knee_open = 7
 
     # WHEN
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -218,7 +219,7 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5446
+    assert generated_sqlstr.find(end_sqlstr) == 5421
     example_idea_reasonunit_text = (
         "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
     )

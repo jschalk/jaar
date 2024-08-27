@@ -1,7 +1,8 @@
 # from src._instrument.python import x_is_json
 from src._road.jaar_config import get_test_real_id
 from src._road.road import default_road_delimiter_if_none
-from src.gift.atom import atomunit_shop, atom_update, atom_delete, atom_insert
+from src.gift.atom_config import atom_insert, bud_acctunit_text
+from src.gift.atom import atomunit_shop
 from src.gift.translator import Translator, translator_shop
 
 # from src.gift.gift import giftunit_shop, get_init_gift_id_if_None
@@ -91,7 +92,7 @@ def test_Translator_get_in_acct_id_ReturnsObj_NotEqual():
 def test_Translator_translate_acct_id_ReturnsObjWithNoChanges():
     # ESTABLISH
     yao_text = "Yao"
-    x_category = "bud_acctunit"
+    x_category = bud_acctunit_text()
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     acctunit_atom = atomunit_shop(x_category, atom_insert())
@@ -115,7 +116,7 @@ def test_Translator_translate_acct_id_ReturnsObjWithNoChanges():
 def test_Translator_translate_acct_id_ReturnsObjWithChange_acct_id():
     # ESTABLISH
     susan_text = "Susan"
-    x_category = "bud_acctunit"
+    x_category = bud_acctunit_text()
     acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     acctunit_atom = atomunit_shop(x_category, atom_insert())

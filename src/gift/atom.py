@@ -22,6 +22,20 @@ from src.gift.atom_config import (
     get_sorted_required_arg_keys,
     nesting_order_str,
     required_args_text,
+    optional_args_text,
+    category_text,
+    crud_text_str,
+    budunit_text,
+    bud_acctunit_text,
+    bud_acct_membership_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_grouphold_text,
+    bud_idea_range_push_text,
+    bud_idea_healerhold_text,
+    bud_idea_factunit_text,
 )
 from dataclasses import dataclass
 
@@ -85,10 +99,11 @@ class AtomUnit:
         return self._get_category_dict().get(self.crud_text)
 
     def _get_required_args_dict(self) -> dict:
-        return self._get_category_dict().get("required_args")
+        return self._get_category_dict().get(required_args_text())
 
     def _get_optional_args_dict(self) -> dict:
-        return get_empty_dict_if_none(self._get_category_dict().get("optional_args"))
+        x_key = optional_args_text()
+        return get_empty_dict_if_none(self._get_category_dict().get(x_key))
 
     def get_nesting_order_args(self) -> list[str]:
         # When ChangUnit places an AtomUnit in a nested dictionary ChangUnit.atomunits
@@ -132,10 +147,10 @@ class AtomUnit:
         required_args_dict = self.get_required_args_dict()
         optional_args_dict = self.get_optional_args_dict()
         return {
-            "category": self.category,
-            "crud_text": self.crud_text,
-            "required_args": required_args_dict,
-            "optional_args": optional_args_dict,
+            category_text(): self.category,
+            crud_text_str(): self.crud_text,
+            required_args_text(): required_args_dict,
+            optional_args_text(): optional_args_dict,
         }
 
     def get_json(self) -> str:
@@ -159,37 +174,37 @@ def atomunit_shop(
 
 def get_from_json(x_str: str) -> AtomUnit:
     x_dict = get_dict_from_json(x_str)
-    x_atom = atomunit_shop(category=x_dict["category"], crud_text=x_dict["crud_text"])
-    for x_key, x_value in x_dict["required_args"].items():
+    x_atom = atomunit_shop(x_dict[category_text()], x_dict[crud_text_str()])
+    for x_key, x_value in x_dict[required_args_text()].items():
         x_atom.set_required_arg(x_key, x_value)
-    for x_key, x_value in x_dict["optional_args"].items():
+    for x_key, x_value in x_dict[optional_args_text()].items():
         x_atom.set_optional_arg(x_key, x_value)
     return x_atom
 
 
 def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
-    x_arg = "_max_tree_traverse"
+    x_arg = "max_tree_traverse"
     if x_atom.get_value(x_arg) is not None:
         x_bud.set_max_tree_traverse(x_atom.get_value(x_arg))
-    x_arg = "_credor_respect"
+    x_arg = "credor_respect"
     if x_atom.get_value(x_arg) is not None:
         x_bud.set_credor_respect(x_atom.get_value(x_arg))
-    x_arg = "_debtor_respect"
+    x_arg = "debtor_respect"
     if x_atom.get_value(x_arg) is not None:
         x_bud.set_debtor_respect(x_atom.get_value(x_arg))
-    x_arg = "_fund_pool"
+    x_arg = "fund_pool"
     if x_atom.get_value(x_arg) is not None:
         x_bud._fund_pool = x_atom.get_value(x_arg)
-    x_arg = "_fund_coin"
+    x_arg = "fund_coin"
     if x_atom.get_value(x_arg) is not None:
         x_bud._fund_coin = x_atom.get_value(x_arg)
-    x_arg = "_tally"
+    x_arg = "tally"
     if x_atom.get_value(x_arg) is not None:
         x_bud._tally = x_atom.get_value(x_arg)
-    x_arg = "_bit"
+    x_arg = "bit"
     if x_atom.get_value(x_arg) is not None:
         x_bud._bit = x_atom.get_value(x_arg)
-    x_arg = "_penny"
+    x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
         x_bud._penny = x_atom.get_value(x_arg)
 
@@ -237,13 +252,13 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     )
     x_bud.edit_idea_attr(
         road=idea_road,
-        addin=x_atom.get_value("_addin"),
-        begin=x_atom.get_value("_begin"),
-        close=x_atom.get_value("_close"),
-        denom=x_atom.get_value("_denom"),
-        numor=x_atom.get_value("_numor"),
-        morph=x_atom.get_value("_morph"),
-        mass=x_atom.get_value("_mass"),
+        addin=x_atom.get_value("addin"),
+        begin=x_atom.get_value("begin"),
+        close=x_atom.get_value("close"),
+        denom=x_atom.get_value("denom"),
+        numor=x_atom.get_value("numor"),
+        morph=x_atom.get_value("morph"),
+        mass=x_atom.get_value("mass"),
         pledge=x_atom.get_value("pledge"),
     )
 
@@ -252,11 +267,11 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value("label"),
-            _addin=x_atom.get_value("_addin"),
-            _begin=x_atom.get_value("_begin"),
-            _close=x_atom.get_value("_close"),
-            _denom=x_atom.get_value("_denom"),
-            _numor=x_atom.get_value("_numor"),
+            _addin=x_atom.get_value("addin"),
+            _begin=x_atom.get_value("begin"),
+            _close=x_atom.get_value("close"),
+            _denom=x_atom.get_value("denom"),
+            _numor=x_atom.get_value("numor"),
             pledge=x_atom.get_value("pledge"),
         ),
         parent_road=x_atom.get_value("parent_road"),
@@ -502,30 +517,30 @@ def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
-    if x_atom.category == "budunit":
+    if x_atom.category == budunit_text():
         _modify_bud_budunit(x_bud, x_atom)
-    elif x_atom.category == "bud_acct_membership":
+    elif x_atom.category == bud_acct_membership_text():
         _modify_bud_acct_membership(x_bud, x_atom)
-    elif x_atom.category == "bud_ideaunit":
+    elif x_atom.category == bud_ideaunit_text():
         _modify_bud_ideaunit(x_bud, x_atom)
-    elif x_atom.category == "bud_idea_awardlink":
+    elif x_atom.category == bud_idea_awardlink_text():
         _modify_bud_idea_awardlink(x_bud, x_atom)
-    elif x_atom.category == "bud_idea_factunit":
+    elif x_atom.category == bud_idea_factunit_text():
         _modify_bud_idea_factunit(x_bud, x_atom)
-    elif x_atom.category == "bud_idea_reasonunit":
+    elif x_atom.category == bud_idea_reasonunit_text():
         _modify_bud_idea_reasonunit(x_bud, x_atom)
-    elif x_atom.category == "bud_idea_reason_premiseunit":
+    elif x_atom.category == bud_idea_reason_premiseunit_text():
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
-    elif x_atom.category == "bud_idea_grouphold":
+    elif x_atom.category == bud_idea_grouphold_text():
         _modify_bud_idea_grouphold(x_bud, x_atom)
-    elif x_atom.category == "bud_idea_range_push":
+    elif x_atom.category == bud_idea_range_push_text():
         _modify_bud_idea_range_push(x_bud, x_atom)
-    elif x_atom.category == "bud_acctunit":
+    elif x_atom.category == bud_acctunit_text():
         _modify_bud_acctunit(x_bud, x_atom)
 
 
 def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
-    if category == "budunit":
+    if category == budunit_text():
         return (
             x_obj._tally != y_obj._tally
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
@@ -535,15 +550,15 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._fund_pool != y_obj._fund_pool
             or x_obj._fund_coin != y_obj._fund_coin
         )
-    elif category in {"bud_acct_membership"}:
+    elif category in {bud_acct_membership_text()}:
         return (x_obj.credit_vote != y_obj.credit_vote) or (
             x_obj.debtit_vote != y_obj.debtit_vote
         )
-    elif category in {"bud_idea_awardlink"}:
+    elif category in {bud_idea_awardlink_text()}:
         return (x_obj.give_force != y_obj.give_force) or (
             x_obj.take_force != y_obj.take_force
         )
-    elif category == "bud_ideaunit":
+    elif category == bud_ideaunit_text():
         return (
             x_obj._addin != y_obj._addin
             or x_obj._begin != y_obj._begin
@@ -554,21 +569,21 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._mass != y_obj._mass
             or x_obj.pledge != y_obj.pledge
         )
-    elif category == "bud_idea_factunit":
+    elif category == bud_idea_factunit_text():
         return (
             (x_obj.pick != y_obj.pick)
             or (x_obj.open != y_obj.open)
             or (x_obj.nigh != y_obj.nigh)
         )
-    elif category == "bud_idea_reasonunit":
+    elif category == bud_idea_reasonunit_text():
         return x_obj.base_idea_active_requisite != y_obj.base_idea_active_requisite
-    elif category == "bud_idea_reason_premiseunit":
+    elif category == bud_idea_reason_premiseunit_text():
         return (
             x_obj.open != y_obj.open
             or x_obj.nigh != y_obj.nigh
             or x_obj.divisor != y_obj.divisor
         )
-    elif category == "bud_acctunit":
+    elif category == bud_acctunit_text():
         return (x_obj.credit_score != y_obj.credit_score) or (
             x_obj.debtit_score != y_obj.debtit_score
         )

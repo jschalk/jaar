@@ -1,6 +1,22 @@
 from src._instrument.python import get_nested_value
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_delete, atom_insert, atom_update, AtomUnit
+from src.gift.atom import AtomUnit
+from src.gift.atom_config import (
+    atom_delete,
+    atom_insert,
+    atom_update,
+    budunit_text,
+    bud_acctunit_text,
+    bud_acct_membership_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_grouphold_text,
+    bud_idea_range_push_text,
+    bud_idea_healerhold_text,
+    bud_idea_factunit_text,
+)
 from src.gift.change import ChangeUnit
 
 
@@ -12,65 +28,65 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_change.atomunits
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), "budunit"])
 
-    acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "bud_acctunit"])
-    acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_acctunit"])
-    acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_acctunit"])
+    acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), bud_acctunit_text()])
+    acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), bud_acctunit_text()])
+    acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), bud_acctunit_text()])
 
-    x_list = [atom_insert(), "bud_acct_membership"]
+    x_list = [atom_insert(), bud_acct_membership_text()]
     acct_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_acct_membership"]
+    x_list = [atom_update(), bud_acct_membership_text()]
     acct_membership_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_acct_membership"]
+    x_list = [atom_delete(), bud_acct_membership_text()]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_ideaunit"]
+    x_list = [atom_insert(), bud_ideaunit_text()]
     bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_ideaunit"]
+    x_list = [atom_update(), bud_ideaunit_text()]
     bud_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_ideaunit"]
+    x_list = [atom_delete(), bud_ideaunit_text()]
     bud_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_awardlink"]
+    x_list = [atom_insert(), bud_idea_awardlink_text()]
     bud_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_awardlink"]
+    x_list = [atom_update(), bud_idea_awardlink_text()]
     bud_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_awardlink"]
+    x_list = [atom_delete(), bud_idea_awardlink_text()]
     bud_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_reasonunit"]
+    x_list = [atom_insert(), bud_idea_reasonunit_text()]
     bud_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_reasonunit"]
+    x_list = [atom_update(), bud_idea_reasonunit_text()]
     bud_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_reasonunit"]
+    x_list = [atom_delete(), bud_idea_reasonunit_text()]
     bud_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_reason_premiseunit"]
+    x_list = [atom_insert(), bud_idea_reason_premiseunit_text()]
     bud_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_reason_premiseunit"]
+    x_list = [atom_update(), bud_idea_reason_premiseunit_text()]
     bud_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_reason_premiseunit"]
+    x_list = [atom_delete(), bud_idea_reason_premiseunit_text()]
     bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_grouphold"]
+    x_list = [atom_insert(), bud_idea_grouphold_text()]
     bud_idea_grouphold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_grouphold"]
+    x_list = [atom_delete(), bud_idea_grouphold_text()]
     bud_idea_grouphold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_healerhold"]
+    x_list = [atom_insert(), bud_idea_healerhold_text()]
     bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_healerhold"]
+    x_list = [atom_delete(), bud_idea_healerhold_text()]
     bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_range_push"]
+    x_list = [atom_insert(), bud_idea_range_push_text()]
     bud_idea_range_push_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_range_push"]
+    x_list = [atom_delete(), bud_idea_range_push_text()]
     bud_idea_range_push_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_factunit"]
+    x_list = [atom_insert(), bud_idea_factunit_text()]
     bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_factunit"]
+    x_list = [atom_update(), bud_idea_factunit_text()]
     bud_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_factunit"]
+    x_list = [atom_delete(), bud_idea_factunit_text()]
     bud_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
@@ -193,11 +209,11 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
 
 def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: BudUnit):
     optional_args = x_atom.optional_args
-    _tally_text = "_tally"
-    _max_tree_traverse_text = "_max_tree_traverse"
-    _monetary_desc_text = "_monetary_desc"
-    _credor_respect_text = "_credor_respect"
-    _debtor_respect_text = "_debtor_respect"
+    _tally_text = "tally"
+    _max_tree_traverse_text = "max_tree_traverse"
+    _monetary_desc_text = "monetary_desc"
+    _credor_respect_text = "credor_respect"
+    _debtor_respect_text = "debtor_respect"
 
     _max_tree_traverse_value = optional_args.get(_max_tree_traverse_text)
     _monetary_desc_value = optional_args.get(_monetary_desc_text)
@@ -330,14 +346,14 @@ def add_bud_ideaunit_insert_to_legible_list(
 ):
     label_text = "label"
     parent_road_text = "parent_road"
-    _addin_text = "_addin"
-    _begin_text = "_begin"
-    _close_text = "_close"
-    _denom_text = "_denom"
-    _numor_text = "_numor"
-    _problem_bool_text = "_problem_bool"
-    _morph_text = "_morph"
-    _mass_text = "_mass"
+    _addin_text = "addin"
+    _begin_text = "begin"
+    _close_text = "close"
+    _denom_text = "denom"
+    _numor_text = "numor"
+    _problem_bool_text = "problem_bool"
+    _morph_text = "morph"
+    _mass_text = "mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_insert_dict.values():
         for ideaunit_atom in parent_road_dict.values():
@@ -356,21 +372,21 @@ def add_bud_ideaunit_insert_to_legible_list(
                 f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
             )
             if _addin_value is not None:
-                x_str += f"_addin={_addin_value}."
+                x_str += f"addin={_addin_value}."
             if _begin_value is not None:
-                x_str += f"_begin={_begin_value}."
+                x_str += f"begin={_begin_value}."
             if _close_value is not None:
-                x_str += f"_close={_close_value}."
+                x_str += f"close={_close_value}."
             if _denom_value is not None:
-                x_str += f"_denom={_denom_value}."
+                x_str += f"denom={_denom_value}."
             if _numor_value is not None:
-                x_str += f"_numor={_numor_value}."
+                x_str += f"numor={_numor_value}."
             if _problem_bool_value is not None:
-                x_str += f"_problem_bool={_problem_bool_value}."
+                x_str += f"problem_bool={_problem_bool_value}."
             if _morph_value is not None:
-                x_str += f"_morph={_morph_value}."
+                x_str += f"morph={_morph_value}."
             if _mass_value is not None:
-                x_str += f"_mass={_mass_value}."
+                x_str += f"mass={_mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
@@ -382,14 +398,14 @@ def add_bud_ideaunit_update_to_legible_list(
 ):
     label_text = "label"
     parent_road_text = "parent_road"
-    _addin_text = "_addin"
-    _begin_text = "_begin"
-    _close_text = "_close"
-    _denom_text = "_denom"
-    _numor_text = "_numor"
-    _problem_bool_text = "_problem_bool"
-    _morph_text = "_morph"
-    _mass_text = "_mass"
+    _addin_text = "addin"
+    _begin_text = "begin"
+    _close_text = "close"
+    _denom_text = "denom"
+    _numor_text = "numor"
+    _problem_bool_text = "problem_bool"
+    _morph_text = "morph"
+    _mass_text = "mass"
     pledge_text = "pledge"
     for parent_road_dict in ideaunit_update_dict.values():
         for ideaunit_atom in parent_road_dict.values():
@@ -406,21 +422,21 @@ def add_bud_ideaunit_update_to_legible_list(
             pledge_value = ideaunit_atom.get_value(pledge_text)
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
             if _addin_value is not None:
-                x_str += f"_addin={_addin_value}."
+                x_str += f"addin={_addin_value}."
             if _begin_value is not None:
-                x_str += f"_begin={_begin_value}."
+                x_str += f"begin={_begin_value}."
             if _close_value is not None:
-                x_str += f"_close={_close_value}."
+                x_str += f"close={_close_value}."
             if _denom_value is not None:
-                x_str += f"_denom={_denom_value}."
+                x_str += f"denom={_denom_value}."
             if _numor_value is not None:
-                x_str += f"_numor={_numor_value}."
+                x_str += f"numor={_numor_value}."
             if _problem_bool_value is not None:
-                x_str += f"_problem_bool={_problem_bool_value}."
+                x_str += f"problem_bool={_problem_bool_value}."
             if _morph_value is not None:
-                x_str += f"_morph={_morph_value}."
+                x_str += f"morph={_morph_value}."
             if _mass_value is not None:
-                x_str += f"_mass={_mass_value}."
+                x_str += f"mass={_mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 

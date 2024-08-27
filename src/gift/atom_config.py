@@ -67,6 +67,14 @@ def optional_args_text() -> str:
     return "optional_args"
 
 
+def category_text() -> str:
+    return "category"
+
+
+def crud_text_str() -> str:
+    return "crud_text"
+
+
 def budunit_text() -> str:
     return "budunit"
 

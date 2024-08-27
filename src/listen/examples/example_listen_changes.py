@@ -13,7 +13,7 @@ from src.gift.change import ChangeUnit, changeunit_shop
 def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -31,7 +31,7 @@ def get_changeunit_sue_example() -> ChangeUnit:
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
 
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     sue_text = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
     sue_atomunit.set_required_arg("acct_id", sue_text)
@@ -54,7 +54,7 @@ def get_changeunit_example1() -> ChangeUnit:
     x_atomunit.set_optional_arg(x_attribute, 88)
     sue_changeunit.set_atomunit(x_atomunit)
 
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
     x_atomunit.set_required_arg("acct_id", sue_text)
@@ -70,7 +70,7 @@ def get_changeunit_example2() -> ChangeUnit:
     x_attribute = "_credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 77)
 
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
     x_atomunit.set_required_arg("acct_id", sue_text)

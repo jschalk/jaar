@@ -1,4 +1,10 @@
-from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
+from src.gift.atom_config import (
+    atom_update,
+    atom_insert,
+    atom_delete,
+    bud_idea_factunit_text,
+)
+from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
@@ -7,7 +13,7 @@ from src.bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_factunit"
+    category = bud_idea_factunit_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -36,7 +42,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumberArgs()
 def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_factunit"
+    category = bud_idea_factunit_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -71,7 +77,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumberArgs():
 def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_factunit"
+    category = bud_idea_factunit_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -100,7 +106,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumberArgs()
 def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumberArgs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_factunit"
+    category = bud_idea_factunit_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -135,7 +141,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumberArgs():
 def test_create_legible_list_ReturnsObj_idea_factunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_factunit"
+    category = bud_idea_factunit_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")

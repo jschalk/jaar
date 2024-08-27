@@ -1,4 +1,5 @@
 from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
+from src.gift.atom_config import bud_acct_membership_text
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
@@ -7,7 +8,7 @@ from src.bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_membership"
+    category = bud_acct_membership_text()
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     credit_vote_text = "credit_vote"
@@ -37,7 +38,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
 def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debtit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_membership"
+    category = bud_acct_membership_text()
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     credit_vote_text = "credit_vote"
@@ -67,7 +68,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
 def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_membership"
+    category = bud_acct_membership_text()
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     credit_vote_text = "credit_vote"
@@ -94,7 +95,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
 def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_membership"
+    category = bud_acct_membership_text()
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     debtit_vote_text = "debtit_vote"
@@ -121,7 +122,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
 def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_acct_membership"
+    category = bud_acct_membership_text()
     group_id_text = "group_id"
     acct_id_text = "acct_id"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"

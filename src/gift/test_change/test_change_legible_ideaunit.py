@@ -1,23 +1,29 @@
-from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
+from src.gift.atom_config import (
+    atom_update,
+    atom_insert,
+    atom_delete,
+    bud_ideaunit_text,
+)
+from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObj_acctunit_INSERT():
+def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_ideaunit"
+    category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
-    _addin_text = "_addin"
-    _begin_text = "_begin"
-    _close_text = "_close"
-    _denom_text = "_denom"
-    _numor_text = "_numor"
-    _problem_bool_text = "_problem_bool"
-    _morph_text = "_morph"
-    _mass_text = "_mass"
+    _addin_text = "addin"
+    _begin_text = "begin"
+    _close_text = "close"
+    _denom_text = "denom"
+    _numor_text = "numor"
+    _problem_bool_text = "problem_bool"
+    _morph_text = "morph"
+    _mass_text = "mass"
     pledge_text = "pledge"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
@@ -50,25 +56,25 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Created Idea '{label_value}' with parent_road {parent_road_value}. _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._morph={_morph_value}._mass={_mass_value}.pledge={pledge_value}."
+    x_str = f"Created Idea '{label_value}' with parent_road {parent_road_value}. addin={_addin_value}.begin={_begin_value}.close={_close_value}.denom={_denom_value}.numor={_numor_value}.problem_bool={_problem_bool_value}.morph={_morph_value}.mass={_mass_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
+def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_ideaunit"
+    category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
-    _addin_text = "_addin"
-    _begin_text = "_begin"
-    _close_text = "_close"
-    _denom_text = "_denom"
-    _numor_text = "_numor"
-    _problem_bool_text = "_problem_bool"
-    _morph_text = "_morph"
-    _mass_text = "_mass"
+    _addin_text = "addin"
+    _begin_text = "begin"
+    _close_text = "close"
+    _denom_text = "denom"
+    _numor_text = "numor"
+    _problem_bool_text = "problem_bool"
+    _morph_text = "morph"
+    _mass_text = "mass"
     pledge_text = "pledge"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
@@ -101,15 +107,15 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: _addin={_addin_value}._begin={_begin_value}._close={_close_value}._denom={_denom_value}._numor={_numor_value}._problem_bool={_problem_bool_value}._morph={_morph_value}._mass={_mass_value}.pledge={pledge_value}."
+    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: addin={_addin_value}.begin={_begin_value}.close={_close_value}.denom={_denom_value}.numor={_numor_value}.problem_bool={_problem_bool_value}.morph={_morph_value}.mass={_mass_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_DELETE():
+def test_create_legible_list_ReturnsObj_ideaunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_ideaunit"
+    category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     label_value = "clean fridge"
