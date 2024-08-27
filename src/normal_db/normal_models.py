@@ -10,15 +10,15 @@ class Base(DeclarativeBase):
 class BudTable(Base):
     __tablename__ = "bud"
     uid = Column(Integer, primary_key=True)
-    _max_tree_traverse = Column(Integer)
-    _monetary_desc = Column(String)
-    _credor_respect = Column(Integer)
-    _debtor_respect = Column(Integer)
-    _fund_pool = Column(Float)
-    _fund_coin = Column(Float)
-    _bit = Column(Float)
-    _penny = Column(Float)
-    _tally = Column(Integer)
+    max_tree_traverse = Column(Integer)
+    monetary_desc = Column(String)
+    credor_respect = Column(Integer)
+    debtor_respect = Column(Integer)
+    fund_pool = Column(Float)
+    fund_coin = Column(Float)
+    bit = Column(Float)
+    penny = Column(Float)
+    tally = Column(Integer)
 
 
 class AcctUnitTable(Base):
@@ -51,14 +51,14 @@ class IdeaTable(Base):
     uid = Column(Integer, primary_key=True)
     label = Column(String)
     parent_road = Column(String)
-    _addin = Column(Float)
-    _begin = Column(Float)
-    _close = Column(Float)
-    _denom = Column(Integer)
-    _numor = Column(Integer)
-    _problem_bool = Column(Integer)
-    _morph = Column(Integer)
-    _mass = Column(Integer)
+    addin = Column(Float)
+    begin = Column(Float)
+    close = Column(Float)
+    denom = Column(Integer)
+    numor = Column(Integer)
+    problem_bool = Column(Integer)
+    morph = Column(Integer)
+    mass = Column(Integer)
     pledge = Column(Integer)
 
 

@@ -168,28 +168,28 @@ def get_from_json(x_str: str) -> AtomUnit:
 
 
 def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
-    x_arg = "_max_tree_traverse"
+    x_arg = "max_tree_traverse"
     if x_atom.get_value(x_arg) is not None:
         x_bud.set_max_tree_traverse(x_atom.get_value(x_arg))
-    x_arg = "_credor_respect"
+    x_arg = "credor_respect"
     if x_atom.get_value(x_arg) is not None:
         x_bud.set_credor_respect(x_atom.get_value(x_arg))
-    x_arg = "_debtor_respect"
+    x_arg = "debtor_respect"
     if x_atom.get_value(x_arg) is not None:
         x_bud.set_debtor_respect(x_atom.get_value(x_arg))
-    x_arg = "_fund_pool"
+    x_arg = "fund_pool"
     if x_atom.get_value(x_arg) is not None:
         x_bud._fund_pool = x_atom.get_value(x_arg)
-    x_arg = "_fund_coin"
+    x_arg = "fund_coin"
     if x_atom.get_value(x_arg) is not None:
         x_bud._fund_coin = x_atom.get_value(x_arg)
-    x_arg = "_tally"
+    x_arg = "tally"
     if x_atom.get_value(x_arg) is not None:
         x_bud._tally = x_atom.get_value(x_arg)
-    x_arg = "_bit"
+    x_arg = "bit"
     if x_atom.get_value(x_arg) is not None:
         x_bud._bit = x_atom.get_value(x_arg)
-    x_arg = "_penny"
+    x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
         x_bud._penny = x_atom.get_value(x_arg)
 
@@ -237,13 +237,13 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     )
     x_bud.edit_idea_attr(
         road=idea_road,
-        addin=x_atom.get_value("_addin"),
-        begin=x_atom.get_value("_begin"),
-        close=x_atom.get_value("_close"),
-        denom=x_atom.get_value("_denom"),
-        numor=x_atom.get_value("_numor"),
-        morph=x_atom.get_value("_morph"),
-        mass=x_atom.get_value("_mass"),
+        addin=x_atom.get_value("addin"),
+        begin=x_atom.get_value("begin"),
+        close=x_atom.get_value("close"),
+        denom=x_atom.get_value("denom"),
+        numor=x_atom.get_value("numor"),
+        morph=x_atom.get_value("morph"),
+        mass=x_atom.get_value("mass"),
         pledge=x_atom.get_value("pledge"),
     )
 
@@ -252,11 +252,11 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value("label"),
-            _addin=x_atom.get_value("_addin"),
-            _begin=x_atom.get_value("_begin"),
-            _close=x_atom.get_value("_close"),
-            _denom=x_atom.get_value("_denom"),
-            _numor=x_atom.get_value("_numor"),
+            _addin=x_atom.get_value("addin"),
+            _begin=x_atom.get_value("begin"),
+            _close=x_atom.get_value("close"),
+            _denom=x_atom.get_value("denom"),
+            _numor=x_atom.get_value("numor"),
             pledge=x_atom.get_value("pledge"),
         ),
         parent_road=x_atom.get_value("parent_road"),

@@ -40,30 +40,30 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     category = "budunit"
     x_atomunit = atomunit_shop(category, atom_update())
     new1_value = 55
-    new1_arg = "_tally"
+    new1_arg = "tally"
     x_atomunit.set_optional_arg(new1_arg, new1_value)
     new2_value = 66
-    new2_arg = "_max_tree_traverse"
+    new2_arg = "max_tree_traverse"
     x_atomunit.set_optional_arg(new2_arg, new2_value)
     new3_value = 77
-    new3_arg = "_credor_respect"
+    new3_arg = "credor_respect"
     x_atomunit.set_optional_arg(new3_arg, new3_value)
     new4_value = 88
-    new4_arg = "_debtor_respect"
+    new4_arg = "debtor_respect"
     x_atomunit.set_optional_arg(new4_arg, new4_value)
     new9_value = 55550000
-    new9_arg = "_fund_pool"
+    new9_arg = "fund_pool"
     x_atomunit.set_optional_arg(new9_arg, new9_value)
     new8_value = 0.5555
-    new8_arg = "_fund_coin"
+    new8_arg = "fund_coin"
     x_atomunit.set_optional_arg(new8_arg, new8_value)
     sue_changeunit.set_atomunit(x_atomunit)
     new6_value = 0.5
-    new6_arg = "_bit"
+    new6_arg = "bit"
     x_atomunit.set_optional_arg(new6_arg, new6_value)
     sue_changeunit.set_atomunit(x_atomunit)
     new7_value = 0.025
-    new7_arg = "_penny"
+    new7_arg = "penny"
     x_atomunit.set_optional_arg(new7_arg, new7_value)
     sue_changeunit.set_atomunit(x_atomunit)
 
@@ -343,11 +343,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     insert_disc_atomunit = atomunit_shop("bud_ideaunit", atom_insert())
     insert_disc_atomunit.set_required_arg("label", disc_text)
     insert_disc_atomunit.set_required_arg("parent_road", sports_road)
-    # insert_disc_atomunit.set_optional_arg("_addin", x_addin)
-    # insert_disc_atomunit.set_optional_arg("_begin", x_begin)
-    # insert_disc_atomunit.set_optional_arg("_close", x_close)
-    # insert_disc_atomunit.set_optional_arg("_denom", x_denom)
-    # insert_disc_atomunit.set_optional_arg("_numor", x_numor)
+    # insert_disc_atomunit.set_optional_arg("addin", x_addin)
+    # insert_disc_atomunit.set_optional_arg("begin", x_begin)
+    # insert_disc_atomunit.set_optional_arg("close", x_close)
+    # insert_disc_atomunit.set_optional_arg("denom", x_denom)
+    # insert_disc_atomunit.set_optional_arg("numor", x_numor)
     insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
 
     print(f"{insert_disc_atomunit=}")
@@ -383,11 +383,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_Sim
     insert_disc_atomunit = atomunit_shop("bud_ideaunit", atom_update())
     insert_disc_atomunit.set_required_arg("label", ball_text)
     insert_disc_atomunit.set_required_arg("parent_road", sports_road)
-    # insert_disc_atomunit.set_optional_arg("_addin", x_addin)
-    insert_disc_atomunit.set_optional_arg("_begin", x_begin)
-    insert_disc_atomunit.set_optional_arg("_close", x_close)
-    # insert_disc_atomunit.set_optional_arg("_denom", x_denom)
-    # insert_disc_atomunit.set_optional_arg("_numor", x_numor)
+    # insert_disc_atomunit.set_optional_arg("addin", x_addin)
+    insert_disc_atomunit.set_optional_arg("begin", x_begin)
+    insert_disc_atomunit.set_optional_arg("close", x_close)
+    # insert_disc_atomunit.set_optional_arg("denom", x_denom)
+    # insert_disc_atomunit.set_optional_arg("numor", x_numor)
     insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
 
     print(f"{insert_disc_atomunit=}")

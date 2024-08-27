@@ -320,35 +320,35 @@
             "normal_table_name": "idea"
         },
         "optional_args": {
-            "_addin": {
+            "addin": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_begin": {
+            "begin": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_close": {
+            "close": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_denom": {
+            "denom": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_mass": {
+            "mass": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_numor": {
+            "numor": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_problem_bool": {
+            "problem_bool": {
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
-            "_morph": {
+            "morph": {
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
@@ -380,39 +380,39 @@
             "normal_table_name": "bud"
         },
         "optional_args": {
-            "_bit": {
+            "bit": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_credor_respect": {
+            "credor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_debtor_respect": {
+            "debtor_respect": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_fund_coin": {
+            "fund_coin": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_pool": {
+            "fund_pool": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_max_tree_traverse": {
+            "max_tree_traverse": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_monetary_desc": {
+            "monetary_desc": {
                 "python_type": "str",
                 "sqlite_datatype": "TEXT"
             },
-            "_penny": {
+            "penny": {
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_tally": {
+            "tally": {
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }

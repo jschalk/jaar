@@ -37,7 +37,7 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_BudUnitSimpleAttrs():
     # WHEN
     new2_value = 66
     category = "budunit"
-    opt_arg2 = "_max_tree_traverse"
+    opt_arg2 = "max_tree_traverse"
     x_atomunit = atomunit_shop(category, atom_update())
     x_atomunit.set_optional_arg(opt_arg2, new2_value)
     # THEN

@@ -169,14 +169,14 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     # THEN
     x_keylist = [atom_update(), "budunit"]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value("_max_tree_traverse") == x_max_tree_traverse
-    assert xio_atomunit.get_value("_monetary_desc") == x_monetary_desc
-    assert xio_atomunit.get_value("_credor_respect") == x_credor_respect
-    assert xio_atomunit.get_value("_debtor_respect") == x_debtor_respect
-    assert xio_atomunit.get_value("_tally") == x_budunit_tally
-    assert xio_atomunit.get_value("_fund_pool") == x_fund_pool
-    assert xio_atomunit.get_value("_fund_coin") == x_fund_coin
-    assert xio_atomunit.get_value("_bit") == x_bit
+    assert xio_atomunit.get_value("max_tree_traverse") == x_max_tree_traverse
+    assert xio_atomunit.get_value("monetary_desc") == x_monetary_desc
+    assert xio_atomunit.get_value("credor_respect") == x_credor_respect
+    assert xio_atomunit.get_value("debtor_respect") == x_debtor_respect
+    assert xio_atomunit.get_value("tally") == x_budunit_tally
+    assert xio_atomunit.get_value("fund_pool") == x_fund_pool
+    assert xio_atomunit.get_value("fund_coin") == x_fund_coin
+    assert xio_atomunit.get_value("bit") == x_bit
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -427,9 +427,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("label") == music_text
     assert ball_atomunit.get_value("parent_road") == after_sue_bud._real_id
-    assert ball_atomunit.get_value("_begin") == music_begin
-    assert ball_atomunit.get_value("_close") == music_close
-    assert ball_atomunit.get_value("_mass") == music_mass
+    assert ball_atomunit.get_value("begin") == music_begin
+    assert ball_atomunit.get_value("close") == music_close
+    assert ball_atomunit.get_value("mass") == music_mass
     assert ball_atomunit.get_value("pledge") == music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 2
@@ -486,9 +486,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("parent_road") == after_sue_bud._real_id
     assert ball_atomunit.get_value("label") == music_text
-    assert ball_atomunit.get_value("_begin") == after_music_begin
-    assert ball_atomunit.get_value("_close") == after_music_close
-    assert ball_atomunit.get_value("_mass") == after_music_mass
+    assert ball_atomunit.get_value("begin") == after_music_begin
+    assert ball_atomunit.get_value("close") == after_music_close
+    assert ball_atomunit.get_value("mass") == after_music_mass
     assert ball_atomunit.get_value("pledge") == after_music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 1

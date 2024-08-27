@@ -39,8 +39,8 @@ def get_atom_example_ideaunit_knee(real_id: RealID = None) -> AtomUnit:
     x_category = "bud_ideaunit"
     label_text = "label"
     parent_road_text = "parent_road"
-    begin_text = "_begin"
-    close_text = "_close"
+    begin_text = "begin"
+    close_text = "close"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_ideaunit_atomunit.set_required_arg(label_text, knee_text)
     insert_ideaunit_atomunit.set_required_arg(parent_road_text, sports_road)

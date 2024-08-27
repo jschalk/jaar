@@ -38,7 +38,7 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     ex1_changeunit = changeunit_shop()
     attribute_value = 55
     category = "budunit"
-    opt1_arg = "_tally"
+    opt1_arg = "tally"
     optional_args = {opt1_arg: attribute_value}
     required_args = {}
     bud_mass_atomunit = atomunit_shop(
@@ -116,7 +116,7 @@ def test_ChangeUnit_get_atom_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
     budunit_text = "budunit"
-    opt_arg1 = "_tally"
+    opt_arg1 = "tally"
     opt_value = 55
     budunit_atomunit = atomunit_shop(budunit_text, atom_update())
     budunit_atomunit.set_optional_arg(x_key=opt_arg1, x_value=opt_value)
@@ -137,7 +137,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     assert ex1_changeunit.atomunits == {}
 
     # WHEN
-    op2_arg = "_tally"
+    op2_arg = "tally"
     op2_value = 55
     budunit_text = "budunit"
     required_args = {}
@@ -254,7 +254,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 #     # WHEN
 #     opt2_value = 55
 #     category = "budunit"
-#     opt2_arg = "_mass"
+#     opt2_arg = "mass"
 #     mass_atomunit = atomunit_shop(category, atom_update())
 #     mass_atomunit.set_optional_arg(opt2_arg, opt2_value)
 #     ex1_changeunit.set_atomunit(mass_atomunit)
@@ -267,7 +267,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     new2_value = 66
-#     x_attribute = "_max_tree_traverse"
+#     x_attribute = "max_tree_traverse"
 #     required_args = {x_attribute: new2_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, required_args)
 #     ex1_changeunit.set_atomunit(x_atomunit)
@@ -279,7 +279,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     new3_value = 77
-#     x_attribute = "_credor_respect"
+#     x_attribute = "credor_respect"
 #     required_args = {x_attribute: new3_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, required_args)
 #     ex1_changeunit.set_atomunit(x_atomunit)
@@ -289,7 +289,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     new4_value = 88
-#     x_attribute = "_debtor_respect"
+#     x_attribute = "debtor_respect"
 #     required_args = {x_attribute: new4_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, required_args)
 #     ex1_changeunit.set_atomunit(x_atomunit)
@@ -408,7 +408,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
 
     budunit_text = "budunit"
     x_atomunit = atomunit_shop(budunit_text, atom_update())
-    x_attribute = "_credor_respect"
+    x_attribute = "credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 100)
     sue_changeunit.set_atomunit(x_atomunit)
 
@@ -452,7 +452,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStart
     sue_changeunit = changeunit_shop()
     budunit_text = "budunit"
     pool_atomunit = atomunit_shop(budunit_text, atom_update())
-    pool_attribute = "_credor_respect"
+    pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "bud_acctunit"
@@ -492,7 +492,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartin
     sue_changeunit = changeunit_shop()
     budunit_text = "budunit"
     pool_atomunit = atomunit_shop(budunit_text, atom_update())
-    pool_attribute = "_credor_respect"
+    pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "bud_acctunit"
@@ -532,7 +532,7 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumb
     sue_changeunit = changeunit_shop()
     budunit_text = "budunit"
     pool_atomunit = atomunit_shop(budunit_text, atom_update())
-    pool_attribute = "_credor_respect"
+    pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "bud_acctunit"
@@ -572,7 +572,7 @@ def test_ChangeUnit_get_json_ReturnsCorrectObj():
     sue_changeunit = changeunit_shop()
     budunit_text = "budunit"
     pool_atomunit = atomunit_shop(budunit_text, atom_update())
-    pool_attribute = "_credor_respect"
+    pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = "bud_acctunit"
