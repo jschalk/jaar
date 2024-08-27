@@ -151,7 +151,7 @@ def test_create_timeline_config_ReturnsObj():
     cinco_text = "cinco"
     cinco_c400_count = 25
     cinco_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
-    cinco_hour_length = 120
+    cinco_hour_length = 60
     cinco_month_length = 25
     cinco_weekday_list = ["Airday", "Bioday", "Chiday", "Danceday", "Ellday"]
     # months = ["B", "C", "E", "G", "H", "I", "K", "L", "N", "P", "Q", "R", "T", "U", "W"]
@@ -206,9 +206,9 @@ def test_create_timeline_config_ReturnsObj():
     assert x_months_config[14][0] == "Obama"
     assert x_months_config[14][1] == 365
     x_hours_config = cinco_dict.get(hours_config_text())
-    assert len(x_hours_config) == 12
-    assert x_hours_config[0] == ["0hr", 120]
-    assert x_hours_config[4] == ["4hr", 600]
+    assert len(x_hours_config) == 24
+    assert x_hours_config[0] == ["0hr", 60]
+    assert x_hours_config[4] == ["4hr", 300]
     assert cinco_dict.get(yr1_jan1_offset_text()) == cinco_yr1_jan1_offset
 
     # cinco_file_name = f"timeline_config_{cinco_text}.json"
