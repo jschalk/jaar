@@ -1,9 +1,5 @@
-from src._instrument.file import open_file, delete_dir, create_file_path
-from src._instrument.python import (
-    get_dict_from_json,
-    get_nested_value,
-    place_obj_in_dict,
-)
+from src._instrument.file import open_file, create_file_path
+from src._instrument.python import get_dict_from_json
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop
@@ -27,8 +23,6 @@ from src.span.examples.span_env import src_span_dir
 from pandas import DataFrame, read_csv
 import csv
 from dataclasses import dataclass
-from os.path import exists as os_path_exists
-from copy import deepcopy as copy_deepcopy
 
 
 def real_id_str() -> str:
@@ -228,7 +222,6 @@ def create_span_df(x_budunit: BudUnit, span_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-
     elif span_name == jaar_format_00002_membership_v0_0_0():
         d2_list = [
             [
