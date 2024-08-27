@@ -1,4 +1,11 @@
 from src._road.road import create_road
+from src.gift.atom_config import (
+    required_args_text,
+    optional_args_text,
+    category_text,
+    crud_text_str,
+    bud_idea_factunit_text,
+)
 from src.gift.atom import (
     atomunit_shop,
     atom_insert,
@@ -15,7 +22,7 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -33,10 +40,10 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
 
     # THEN
     assert atom_dict == {
-        "category": x_category,
-        "crud_text": atom_insert(),
-        "required_args": {road_text: ball_road, base_text: knee_road},
-        "optional_args": {open_text: knee_open, nigh_text: knee_nigh},
+        category_text(): x_category,
+        crud_text_str(): atom_insert(),
+        required_args_text(): {road_text: ball_road, base_text: knee_road},
+        optional_args_text(): {open_text: knee_open, nigh_text: knee_nigh},
     }
 
 
@@ -48,7 +55,7 @@ def test_AtomUnit_get_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -76,7 +83,7 @@ def test_atomunit_get_from_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
     open_text = "open"

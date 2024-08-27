@@ -23,6 +23,7 @@ from src.gift.atom_config import (
     bud_idea_range_push_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_reasonunit_text,
+    bud_ideaunit_text,
     budunit_text,
 )
 from src.gift.atom import (
@@ -348,7 +349,7 @@ class ChangeUnit:
     def add_atomunit_idea_inserts(self, after_bud: BudUnit, insert_idea_roads: set):
         for insert_idea_road in insert_idea_roads:
             insert_ideaunit = after_bud.get_idea_obj(insert_idea_road)
-            x_atomunit = atomunit_shop("bud_ideaunit", atom_insert())
+            x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             x_atomunit.set_required_arg("parent_road", insert_ideaunit._parent_road)
             x_atomunit.set_required_arg("label", insert_ideaunit._label)
             x_atomunit.set_optional_arg("addin", insert_ideaunit._addin)
@@ -388,8 +389,10 @@ class ChangeUnit:
         for idea_road in update_roads:
             after_ideaunit = after_bud.get_idea_obj(idea_road)
             before_ideaunit = before_bud.get_idea_obj(idea_road)
-            if optional_args_different("bud_ideaunit", before_ideaunit, after_ideaunit):
-                x_atomunit = atomunit_shop("bud_ideaunit", atom_update())
+            if optional_args_different(
+                bud_ideaunit_text(), before_ideaunit, after_ideaunit
+            ):
+                x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_update())
                 x_atomunit.set_required_arg("parent_road", after_ideaunit._parent_road)
                 x_atomunit.set_required_arg("label", after_ideaunit._label)
                 if before_ideaunit._addin != after_ideaunit._addin:
@@ -517,7 +520,7 @@ class ChangeUnit:
                 delete_idea_road, before_bud._road_delimiter
             )
             x_label = get_terminus_node(delete_idea_road, before_bud._road_delimiter)
-            x_atomunit = atomunit_shop("bud_ideaunit", atom_delete())
+            x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_delete())
             x_atomunit.set_required_arg("parent_road", x_parent_road)
             x_atomunit.set_required_arg("label", x_label)
             self.set_atomunit(x_atomunit)

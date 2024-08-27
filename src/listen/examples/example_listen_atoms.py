@@ -1,19 +1,21 @@
 from src._road.jaar_config import get_real_id_if_None
 from src._road.road import create_road, RealID
-from src.gift.atom import (
-    atomunit_shop,
-    atom_delete,
+from src.gift.atom_config import (
     atom_insert,
     atom_update,
-    AtomUnit,
+    atom_delete,
+    bud_idea_factunit_text,
+    bud_ideaunit_text,
+    bud_acctunit_text,
 )
+from src.gift.atom import atomunit_shop, AtomUnit
 from src.gift.change import changeunit_shop, ChangeUnit
 
 
 def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -27,7 +29,7 @@ def get_atom_example_ideaunit_ball(real_id: RealID = None) -> AtomUnit:
     sports_text = "sports"
     sports_road = create_road(real_id, sports_text)
     ball_text = "basketball"
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -43,7 +45,7 @@ def get_atom_example_ideaunit_knee(real_id: RealID = None) -> AtomUnit:
     knee_text = "knee"
     knee_begin = 1
     knee_close = 71
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     begin_text = "begin"
@@ -66,7 +68,7 @@ def get_atom_example_factunit_knee(real_id: RealID = None) -> AtomUnit:
     knee_road = create_road(real_id, knee_text)
     knee_open = 7
     knee_nigh = 23
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -88,7 +90,7 @@ def get_changeunit_sue_example() -> ChangeUnit:
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
 
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     sue_text = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
     sue_atomunit.set_required_arg("acct_id", sue_text)

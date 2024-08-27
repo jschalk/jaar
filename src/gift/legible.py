@@ -1,6 +1,22 @@
 from src._instrument.python import get_nested_value
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_delete, atom_insert, atom_update, AtomUnit
+from src.gift.atom import AtomUnit
+from src.gift.atom_config import (
+    atom_delete,
+    atom_insert,
+    atom_update,
+    budunit_text,
+    bud_acctunit_text,
+    bud_acct_membership_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_grouphold_text,
+    bud_idea_range_push_text,
+    bud_idea_healerhold_text,
+    bud_idea_factunit_text,
+)
 from src.gift.change import ChangeUnit
 
 
@@ -12,65 +28,65 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_change.atomunits
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), "budunit"])
 
-    acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), "bud_acctunit"])
-    acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), "bud_acctunit"])
-    acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), "bud_acctunit"])
+    acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), bud_acctunit_text()])
+    acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), bud_acctunit_text()])
+    acctunit_delete_dict = get_leg_obj(atoms_dict, [atom_delete(), bud_acctunit_text()])
 
-    x_list = [atom_insert(), "bud_acct_membership"]
+    x_list = [atom_insert(), bud_acct_membership_text()]
     acct_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_acct_membership"]
+    x_list = [atom_update(), bud_acct_membership_text()]
     acct_membership_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_acct_membership"]
+    x_list = [atom_delete(), bud_acct_membership_text()]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_ideaunit"]
+    x_list = [atom_insert(), bud_ideaunit_text()]
     bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_ideaunit"]
+    x_list = [atom_update(), bud_ideaunit_text()]
     bud_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_ideaunit"]
+    x_list = [atom_delete(), bud_ideaunit_text()]
     bud_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_awardlink"]
+    x_list = [atom_insert(), bud_idea_awardlink_text()]
     bud_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_awardlink"]
+    x_list = [atom_update(), bud_idea_awardlink_text()]
     bud_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_awardlink"]
+    x_list = [atom_delete(), bud_idea_awardlink_text()]
     bud_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_reasonunit"]
+    x_list = [atom_insert(), bud_idea_reasonunit_text()]
     bud_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_reasonunit"]
+    x_list = [atom_update(), bud_idea_reasonunit_text()]
     bud_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_reasonunit"]
+    x_list = [atom_delete(), bud_idea_reasonunit_text()]
     bud_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_reason_premiseunit"]
+    x_list = [atom_insert(), bud_idea_reason_premiseunit_text()]
     bud_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_reason_premiseunit"]
+    x_list = [atom_update(), bud_idea_reason_premiseunit_text()]
     bud_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_reason_premiseunit"]
+    x_list = [atom_delete(), bud_idea_reason_premiseunit_text()]
     bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_grouphold"]
+    x_list = [atom_insert(), bud_idea_grouphold_text()]
     bud_idea_grouphold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_grouphold"]
+    x_list = [atom_delete(), bud_idea_grouphold_text()]
     bud_idea_grouphold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_healerhold"]
+    x_list = [atom_insert(), bud_idea_healerhold_text()]
     bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_healerhold"]
+    x_list = [atom_delete(), bud_idea_healerhold_text()]
     bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_range_push"]
+    x_list = [atom_insert(), bud_idea_range_push_text()]
     bud_idea_range_push_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_range_push"]
+    x_list = [atom_delete(), bud_idea_range_push_text()]
     bud_idea_range_push_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), "bud_idea_factunit"]
+    x_list = [atom_insert(), bud_idea_factunit_text()]
     bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), "bud_idea_factunit"]
+    x_list = [atom_update(), bud_idea_factunit_text()]
     bud_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), "bud_idea_factunit"]
+    x_list = [atom_delete(), bud_idea_factunit_text()]
     bud_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []

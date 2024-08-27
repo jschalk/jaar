@@ -4,6 +4,17 @@ from src.gift.atom_config import (
     normal_specs_text,
     columns_text,
     sqlite_datatype_text,
+    budunit_text,
+    bud_acctunit_text,
+    bud_acct_membership_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_grouphold_text,
+    bud_idea_range_push_text,
+    bud_idea_healerhold_text,
+    bud_idea_factunit_text,
 )
 from src.normal_db.normal_models import (
     BudTable,
@@ -74,7 +85,7 @@ def test_normalized_table_BudTable_Exists():
 
 def test_normalized_table_AcctUnitTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_acctunit")
+    config_category = get_normalized_bud_table_build().get(bud_acctunit_text())
     mapper = inspect(AcctUnitTable)
     # print_out_expected_class_attribute_declarations(config_category)
 
@@ -100,7 +111,7 @@ def test_normalized_table_AcctUnitTable_Exists():
 
 def test_normalized_table_MemberShipTable_membership_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_acct_membership")
+    config_category = get_normalized_bud_table_build().get(bud_acct_membership_text())
     mapper = inspect(MemberShipTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -113,7 +124,7 @@ def test_normalized_table_MemberShipTable_membership_Exists():
 
 def test_normalized_table_IdeaTable_idea_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_ideaunit")
+    config_category = get_normalized_bud_table_build().get(bud_ideaunit_text())
     mapper = inspect(IdeaTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -126,7 +137,7 @@ def test_normalized_table_IdeaTable_idea_Exists():
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_idea_awardlink")
+    config_category = get_normalized_bud_table_build().get(bud_idea_awardlink_text())
     mapper = inspect(AwardLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -139,7 +150,7 @@ def test_normalized_table_AwardLinkTable_awardlink_Exists():
 
 def test_normalized_table_ReasonTable_reason_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_idea_reasonunit")
+    config_category = get_normalized_bud_table_build().get(bud_idea_reasonunit_text())
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -153,7 +164,7 @@ def test_normalized_table_ReasonTable_reason_Exists():
 def test_normalized_table_PremiseTable_premise_Exists():
     # ESTABLISH
     config_category = get_normalized_bud_table_build().get(
-        "bud_idea_reason_premiseunit"
+        bud_idea_reason_premiseunit_text()
     )
     mapper = inspect(PremiseTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -167,7 +178,7 @@ def test_normalized_table_PremiseTable_premise_Exists():
 
 def test_normalized_table_GroupHoldTable_grouphold_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_idea_grouphold")
+    config_category = get_normalized_bud_table_build().get(bud_idea_grouphold_text())
     mapper = inspect(GroupHoldTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -180,7 +191,7 @@ def test_normalized_table_GroupHoldTable_grouphold_Exists():
 
 def test_normalized_table_HealerHoldTable_healerhold_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_idea_healerhold")
+    config_category = get_normalized_bud_table_build().get(bud_idea_healerhold_text())
     mapper = inspect(HealerHoldTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -193,7 +204,7 @@ def test_normalized_table_HealerHoldTable_healerhold_Exists():
 
 def test_normalized_table_FactTable_fact_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("bud_idea_factunit")
+    config_category = get_normalized_bud_table_build().get(bud_idea_factunit_text())
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_category)
 

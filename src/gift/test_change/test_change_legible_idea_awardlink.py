@@ -1,4 +1,10 @@
-from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
+from src.gift.atom_config import (
+    atom_update,
+    atom_insert,
+    atom_delete,
+    bud_idea_awardlink_text,
+)
+from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
@@ -7,7 +13,7 @@ from src.bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_idea_awardlink_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_awardlink"
+    category = bud_idea_awardlink_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -39,7 +45,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_give_force_take_fo
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
 
-    category = "bud_idea_awardlink"
+    category = bud_idea_awardlink_text()
     group_id_text = "group_id"
     group_id_value = f"{sue_bud._road_delimiter}Swimmers"
     road_text = "road"
@@ -70,7 +76,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_give_force_take_fo
 def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_give_force():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_awardlink"
+    category = bud_idea_awardlink_text()
     group_id_text = "group_id"
     group_id_value = f"{sue_bud._road_delimiter}Swimmers"
     road_text = "road"
@@ -98,7 +104,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_give_force():
 def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_take_force():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_awardlink"
+    category = bud_idea_awardlink_text()
     group_id_text = "group_id"
     group_id_value = f"{sue_bud._road_delimiter}Swimmers"
     road_text = "road"
@@ -126,7 +132,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_take_force():
 def test_create_legible_list_ReturnsObj_idea_awardlink_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_idea_awardlink"
+    category = bud_idea_awardlink_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")

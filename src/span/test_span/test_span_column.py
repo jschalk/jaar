@@ -1,3 +1,4 @@
+from src.gift.atom_config import bud_acctunit_text
 from src.span.span import SpanColumn, SpanRef, spanref_shop
 
 
@@ -29,23 +30,21 @@ def test_SpanRef_Exists():
 def test_spanref_shop_ReturnsObj():
     # ESTABLISH
     x1_span_name = "0001"
-    bud_acctunit_text = "bud_acctunit"
 
     # WHEN
     x_spanref = spanref_shop(
-        x_span_name=x1_span_name, x_atom_category=bud_acctunit_text
+        x_span_name=x1_span_name, x_atom_category=bud_acctunit_text()
     )
 
     # THEN
     assert x_spanref.span_name == x1_span_name
-    assert x_spanref.atom_category == bud_acctunit_text
+    assert x_spanref.atom_category == bud_acctunit_text()
     assert x_spanref._spancolumns == {}
 
 
 def test_SpanColumn_set_spancolumn_SetsAttr():
     # ESTABLISH
-    bud_acctunit_text = "bud_acctunit"
-    x_spanref = spanref_shop("0003", bud_acctunit_text)
+    x_spanref = spanref_shop("0003", bud_acctunit_text())
     x_attribute_key = "1"
     x_column_order = 2
     x_sort_order = 3
@@ -62,8 +61,8 @@ def test_SpanColumn_set_spancolumn_SetsAttr():
 
 def test_SpanColumn_get_spancolumn_ReturnsObj():
     # ESTABLISH
-    bud_acctunit_text = "bud_acctunit"
-    x_spanref = spanref_shop("0003", bud_acctunit_text)
+
+    x_spanref = spanref_shop("0003", bud_acctunit_text())
     x_attribute_key = "1"
     x_column_order = 2
     x_sort_order = 3
@@ -76,8 +75,8 @@ def test_SpanColumn_get_spancolumn_ReturnsObj():
 
 def test_SpanColumn_get_headers_list_ReturnsObj_Scenario0():
     # ESTABLISH
-    bud_acctunit_text = "bud_acctunit"
-    x_spanref = spanref_shop("0003", bud_acctunit_text)
+
+    x_spanref = spanref_shop("0003", bud_acctunit_text())
 
     # WHEN
     x_headers_list = x_spanref.get_headers_list()
@@ -88,8 +87,8 @@ def test_SpanColumn_get_headers_list_ReturnsObj_Scenario0():
 
 def test_SpanColumn_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
-    bud_acctunit_text = "bud_acctunit"
-    x3_spanref = spanref_shop("0003", bud_acctunit_text)
+
+    x3_spanref = spanref_shop("0003", bud_acctunit_text())
     x_attribute_key = "1"
     x_column_order = 2
     x_sort_order = 3
@@ -105,8 +104,8 @@ def test_SpanColumn_get_headers_list_ReturnsObj_Scenario1():
 
 def test_SpanColumn_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
-    bud_acctunit_text = "bud_acctunit"
-    x3_spanref = spanref_shop("0003", bud_acctunit_text)
+
+    x3_spanref = spanref_shop("0003", bud_acctunit_text())
     third_column_str = "third column"
     second_column_str = "second column"
     first_column_str = "first column"
@@ -123,8 +122,8 @@ def test_SpanColumn_get_headers_list_ReturnsObj_Scenario1():
 
 def test_SpanColumn_get_headers_list_ReturnsObj_Scenario2():
     # ESTABLISH
-    bud_acctunit_text = "bud_acctunit"
-    x3_spanref = spanref_shop("0003", bud_acctunit_text)
+
+    x3_spanref = spanref_shop("0003", bud_acctunit_text())
     third_column_str = "third column"
     second_column_str = "second column"
     first_column_str = "first column"

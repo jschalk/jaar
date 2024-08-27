@@ -1,12 +1,13 @@
 from src._road.jaar_config import get_real_id_if_None
 from src._road.road import create_road, RealID
-from src.gift.atom import atomunit_shop, atom_insert, AtomUnit
+from src.gift.atom_config import atom_insert, bud_ideaunit_text
+from src.gift.atom import atomunit_shop, AtomUnit
 
 
 def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -20,7 +21,7 @@ def get_atom_example_ideaunit_ball(real_id: RealID = None) -> AtomUnit:
     sports_text = "sports"
     sports_road = create_road(real_id, sports_text)
     ball_text = "basketball"
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -36,7 +37,7 @@ def get_atom_example_ideaunit_knee(real_id: RealID = None) -> AtomUnit:
     knee_text = "knee"
     knee_begin = 1
     knee_close = 71
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     begin_text = "begin"

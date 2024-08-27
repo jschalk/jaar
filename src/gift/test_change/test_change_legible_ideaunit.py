@@ -1,4 +1,10 @@
-from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
+from src.gift.atom_config import (
+    atom_update,
+    atom_insert,
+    atom_delete,
+    bud_ideaunit_text,
+)
+from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
@@ -7,7 +13,7 @@ from src.bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_ideaunit"
+    category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     _addin_text = "addin"
@@ -58,7 +64,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
 def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_ideaunit"
+    category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     _addin_text = "addin"
@@ -109,7 +115,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
 def test_create_legible_list_ReturnsObj_ideaunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = "bud_ideaunit"
+    category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     label_value = "clean fridge"

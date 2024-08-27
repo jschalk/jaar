@@ -31,7 +31,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
     bob_required_dict = {"acct_id": "huh"}
     bob_optional_dict = {cw_text: bob_acctunit.get_dict().get(cw_text)}
     bob_optional_dict[dw_text] = bob_acctunit.get_dict().get(dw_text)
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
 
     # WHEN
     x_atomunit = atomunit_shop(
@@ -52,7 +52,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
 def test_AtomUnit_set_required_arg_CorrectlySetsAttr():
     # ESTABLISH
     bob_text = "Bob"
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     acctunit_atomunit = atomunit_shop(acctunit_text, atom_insert())
     assert acctunit_atomunit.required_args == {}
 
@@ -67,7 +67,7 @@ def test_AtomUnit_set_required_arg_CorrectlySetsAttr():
 def test_AtomUnit_set_optional_arg_CorrectlySetsAttr():
     # ESTABLISH
     bob_text = "Bob"
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     acctunit_atomunit = atomunit_shop(acctunit_text, atom_insert())
     assert acctunit_atomunit.optional_args == {}
 
@@ -82,7 +82,7 @@ def test_AtomUnit_set_optional_arg_CorrectlySetsAttr():
 def test_AtomUnit_get_value_ReturnsCorrectObj():
     # ESTABLISH
     bob_text = "Bob"
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     acctunit_atomunit = atomunit_shop(acctunit_text, atom_insert())
     acct_id_text = "acct_id"
     acctunit_atomunit.set_required_arg(x_key=acct_id_text, x_value=bob_text)
@@ -93,7 +93,7 @@ def test_AtomUnit_get_value_ReturnsCorrectObj():
 
 def test_AtomUnit_is_optional_args_valid_ReturnsCorrectBoolean():
     # WHEN
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, crud_text=atom_insert())
     assert bob_insert_atomunit.is_optional_args_valid()
 
@@ -121,7 +121,7 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     bob_credit_score = 55
     bob_debtit_score = 66
     bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
 
     # WHEN
     bob_insert_atomunit = atomunit_shop(acctunit_text, crud_text=atom_insert())
@@ -181,7 +181,7 @@ def test_AtomUnit_get_value_ReturnsObj():
     bob_credit_score = 55
     bob_debtit_score = 66
     bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
     acct_id_text = "acct_id"
     cw_text = "credit_score"
@@ -201,7 +201,7 @@ def test_AtomUnit_get_value_ReturnsObj():
 
 def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_DELETE():
     bob_text = "Bob"
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     delete_text = atom_delete()
 
     # WHEN
@@ -224,7 +224,7 @@ def test_AtomUnit_set_atom_order_SetCorrectAttr():
     bob_text = "Bob"
     bob_credit_score = 55
     bob_debtit_score = 66
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
     acct_id_text = "acct_id"
     cw_text = "credit_score"
@@ -244,7 +244,7 @@ def test_AtomUnit_set_arg_SetsAny_required_arg_optional_arg():
     bob_text = "Bob"
     bob_credit_score = 55
     bob_debtit_score = 66
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
     acct_id_text = "acct_id"
     cw_text = "credit_score"

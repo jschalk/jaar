@@ -6,6 +6,8 @@ from src.gift.atom_config import (
     atom_delete,
     bud_acctunit_text,
     bud_acct_membership_text,
+    bud_idea_awardlink_text,
+    bud_ideaunit_text,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import ChangeUnit, changeunit_shop, bud_built_from_change_is_valid
@@ -66,7 +68,7 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
 def test_ChangeUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
-    x_category = "bud_acctunit"
+    x_category = bud_acctunit_text()
     bud_mass_atomunit = atomunit_shop(x_category, atom_update())
 
     # WHEN
@@ -176,7 +178,7 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     bob_optional_dict = {cw_text: bob_acctunit.get_dict().get(cw_text)}
     bob_optional_dict[dw_text] = bob_acctunit.get_dict().get(dw_text)
     print(f"{bob_required_dict=}")
-    acctunit_text = "bud_acctunit"
+    acctunit_text = bud_acctunit_text()
     ex1_changeunit.add_atomunit(
         category=acctunit_text,
         crud_text=atom_insert(),
@@ -232,8 +234,8 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
     assert sue_atoms_list[0] == update_dict.get("budunit")
     z_atom = sue_atoms_list[1]
     print(f"{z_atom=}")
-    print(delete_dict.get("bud_acctunit").keys())
-    zia_acctunit_delete = delete_dict.get("bud_acctunit").get("Zia")
+    print(delete_dict.get(bud_acctunit_text()).keys())
+    zia_acctunit_delete = delete_dict.get(bud_acctunit_text()).get("Zia")
     assert sue_atoms_list[1] == zia_acctunit_delete
     # print(f"{sue_atom_order_dict.keys()=}")
     # # print(f"{sue_atom_order_dict.get(atom_update())=}")
@@ -302,14 +304,13 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = get_changeunit_example1()
     budunit_text = "budunit"
-    bud_acctunit_text = "bud_acctunit"
     update_dict = ex1_changeunit.atomunits.get(atom_update())
     assert len(update_dict.keys()) == 1
     assert update_dict.get(budunit_text) is not None
     print(f"atom_order 28 {ex1_changeunit.atomunits.get(atom_update()).keys()=}")
     delete_dict = ex1_changeunit.atomunits.get(atom_delete())
     assert len(delete_dict.keys()) == 1
-    assert delete_dict.get(bud_acctunit_text) is not None
+    assert delete_dict.get(bud_acctunit_text()) is not None
     print(f"atom_order 26 {ex1_changeunit.atomunits.get(atom_delete()).keys()=}")
 
     # WHEN
@@ -317,8 +318,8 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
 
     # THEN
     assert len(sue_atom_order_list) == 2
-    print(delete_dict.get("bud_acctunit").keys())
-    zia_acctunit_delete = delete_dict.get("bud_acctunit").get("Zia")
+    print(delete_dict.get(bud_acctunit_text()).keys())
+    zia_acctunit_delete = delete_dict.get(bud_acctunit_text()).get("Zia")
     # for atomunit in sue_atom_order_list:
     #     print(f"{atomunit.atom_order=}")
     assert sue_atom_order_list[0] == zia_acctunit_delete
@@ -336,7 +337,7 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_IdeaUnitsSorted():
     sports_text = "sports"
     sports_road = create_road(x_real_id, sports_text)
     knee_text = "knee"
-    x_category = "bud_ideaunit"
+    x_category = bud_ideaunit_text()
     label_text = "label"
     parent_road_text = "parent_road"
     sports_insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -372,7 +373,7 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     sports_road = create_road(x_real_id, sports_text)
     knee_text = "knee"
     knee_road = create_road(sports_road, knee_text)
-    x_category = "bud_idea_awardlink"
+    x_category = bud_idea_awardlink_text()
     road_text = "road"
     group_id_text = "group_id"
     swimmers_text = ",Swimmers"
@@ -412,7 +413,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     x_atomunit.set_optional_arg(x_attribute, 100)
     sue_changeunit.set_atomunit(x_atomunit)
 
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     zia_text = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg("acct_id", zia_text)
@@ -425,7 +426,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
 
 def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scenario2():
     sue_changeunit = changeunit_shop()
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     # WHEN
     yao_text = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
@@ -455,7 +456,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStart
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
@@ -495,7 +496,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartin
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
@@ -535,7 +536,7 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumb
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
@@ -575,7 +576,7 @@ def test_ChangeUnit_get_json_ReturnsCorrectObj():
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)
@@ -600,7 +601,7 @@ def test_ChangeUnit_atomunit_exists_ReturnsCorrectObj():
     farm_changeunit = changeunit_shop()
 
     # WHEN / THEN
-    category = "bud_acctunit"
+    category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg("acct_id", zia_text)

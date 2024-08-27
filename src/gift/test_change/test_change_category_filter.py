@@ -28,7 +28,7 @@ def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_acctunit_insert
     new_changeunit.get_category_sorted_atomunits_list()
     assert len(new_changeunit.get_category_sorted_atomunits_list()) == 1
     sue_insert_dict = new_changeunit.atomunits.get(atom_insert())
-    sue_acctunit_dict = sue_insert_dict.get("bud_acctunit")
+    sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_text())
     bob_atomunit = sue_acctunit_dict.get(bob_text)
     assert bob_atomunit.get_value("acct_id") == bob_text
     assert bob_atomunit.get_value("credit_score") == bob_credit_score

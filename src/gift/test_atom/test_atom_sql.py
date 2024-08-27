@@ -5,6 +5,7 @@ from src.gift.atom import (
     atomunit_shop,
     atom_hx_table_name,
     get_atomunit_from_rowdata,
+    bud_idea_factunit_text,
 )
 from src._instrument.db_tool import get_rowdata, sqlite_connection
 from pytest import raises as pytest_raises
@@ -20,7 +21,7 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     knee_road = create_road("a", knee_text)
 
     # WHEN
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     update_disc_atomunit = atomunit_shop(x_category, atom_update())
     update_disc_atomunit.set_required_arg("base", knee_road)
 
@@ -62,7 +63,7 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
     knee_open = 7
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
     open_text = "open"
@@ -100,7 +101,7 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
     knee_open = 7
-    x_category = "bud_idea_factunit"
+    x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
     open_text = "open"

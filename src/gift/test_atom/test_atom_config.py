@@ -11,6 +11,8 @@ from src.gift.atom_config import (
     get_normalized_bud_table_build,
     required_args_text,
     optional_args_text,
+    category_text,
+    crud_text_str,
     normal_table_name_text,
     normal_specs_text,
     sqlite_datatype_text,
@@ -73,6 +75,22 @@ def test_bud_idea_healerhold_text_ReturnsObj():
 
 def test_bud_idea_factunit_text_ReturnsObj():
     assert bud_idea_factunit_text() == "bud_idea_factunit"
+
+
+def test_required_args_text_ReturnsObj():
+    assert required_args_text() == "required_args"
+
+
+def test_optional_args_text_ReturnsObj():
+    assert optional_args_text() == "optional_args"
+
+
+def test_category_text_ReturnsObj():
+    assert category_text() == "category"
+
+
+def test_crud_text_str_ReturnsObj():
+    assert crud_text_str() == "crud_text"
 
 
 def test_atom_config_HasCorrect_category():
