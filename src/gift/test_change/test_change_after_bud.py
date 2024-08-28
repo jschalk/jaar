@@ -24,6 +24,7 @@ from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
     parent_road_str,
+    label_str,
 )
 from src.gift.change import changeunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
@@ -317,7 +318,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_ideaunit():
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_delete())
     delete_disc_atomunit.set_required_arg(
-        "label", get_terminus_node(disc_road, before_sue_budunit._road_delimiter)
+        label_str(), get_terminus_node(disc_road, before_sue_budunit._road_delimiter)
     )
     print(f"{disc_road=}")
     delete_disc_atomunit.set_required_arg(
@@ -356,7 +357,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
-    insert_disc_atomunit.set_required_arg("label", disc_text)
+    insert_disc_atomunit.set_required_arg(label_str(), disc_text)
     insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
     # insert_disc_atomunit.set_optional_arg("addin", x_addin)
     # insert_disc_atomunit.set_optional_arg("begin", x_begin)
@@ -396,7 +397,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_Sim
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_update())
-    insert_disc_atomunit.set_required_arg("label", ball_text)
+    insert_disc_atomunit.set_required_arg(label_str(), ball_text)
     insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
     # insert_disc_atomunit.set_optional_arg("addin", x_addin)
     insert_disc_atomunit.set_optional_arg("begin", x_begin)

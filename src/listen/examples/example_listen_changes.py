@@ -5,6 +5,7 @@ from src.gift.atom_config import (
     parent_road_str,
     bud_acctunit_text,
     bud_ideaunit_text,
+    label_str,
 )
 from src.gift.atom import (
     AtomUnit,
@@ -20,9 +21,8 @@ def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
     x_category = bud_ideaunit_text()
-    label_text = "label"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_ideaunit_atomunit.set_required_arg(label_text, sports_text)
+    insert_ideaunit_atomunit.set_required_arg(label_str(), sports_text)
     insert_ideaunit_atomunit.set_required_arg(parent_road_str(), real_id)
     return insert_ideaunit_atomunit
 

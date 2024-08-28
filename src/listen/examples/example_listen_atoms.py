@@ -9,6 +9,7 @@ from src.gift.atom_config import (
     bud_acctunit_text,
     acct_id_str,
     parent_road_str,
+    label_str,
 )
 from src.gift.atom import atomunit_shop, AtomUnit
 from src.gift.change import changeunit_shop, ChangeUnit
@@ -18,9 +19,8 @@ def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     real_id = get_real_id_if_None(real_id)
     sports_text = "sports"
     x_category = bud_ideaunit_text()
-    label_text = "label"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_ideaunit_atomunit.set_required_arg(label_text, sports_text)
+    insert_ideaunit_atomunit.set_required_arg(label_str(), sports_text)
     insert_ideaunit_atomunit.set_required_arg(parent_road_str(), real_id)
     return insert_ideaunit_atomunit
 
@@ -31,9 +31,8 @@ def get_atom_example_ideaunit_ball(real_id: RealID = None) -> AtomUnit:
     sports_road = create_road(real_id, sports_text)
     ball_text = "basketball"
     x_category = bud_ideaunit_text()
-    label_text = "label"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_ideaunit_atomunit.set_required_arg(label_text, ball_text)
+    insert_ideaunit_atomunit.set_required_arg(label_str(), ball_text)
     insert_ideaunit_atomunit.set_required_arg(parent_road_str(), sports_road)
     return insert_ideaunit_atomunit
 
@@ -46,11 +45,10 @@ def get_atom_example_ideaunit_knee(real_id: RealID = None) -> AtomUnit:
     knee_begin = 1
     knee_close = 71
     x_category = bud_ideaunit_text()
-    label_text = "label"
     begin_text = "begin"
     close_text = "close"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_ideaunit_atomunit.set_required_arg(label_text, knee_text)
+    insert_ideaunit_atomunit.set_required_arg(label_str(), knee_text)
     insert_ideaunit_atomunit.set_required_arg(parent_road_str(), sports_road)
     insert_ideaunit_atomunit.set_optional_arg(begin_text, knee_begin)
     insert_ideaunit_atomunit.set_optional_arg(close_text, knee_close)

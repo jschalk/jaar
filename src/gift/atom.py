@@ -39,6 +39,7 @@ from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
     parent_road_str,
+    label_str,
 )
 from dataclasses import dataclass
 
@@ -241,7 +242,7 @@ def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
         x_atom.get_value(parent_road_str()),
-        x_atom.get_value("label"),
+        x_atom.get_value(label_str()),
         delimiter=x_bud._road_delimiter,
     )
     x_bud.del_idea_obj(idea_road, del_children=x_atom.get_value("del_children"))
@@ -250,7 +251,7 @@ def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
         x_atom.get_value(parent_road_str()),
-        x_atom.get_value("label"),
+        x_atom.get_value(label_str()),
         delimiter=x_bud._road_delimiter,
     )
     x_bud.edit_idea_attr(
@@ -269,7 +270,7 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
-            _label=x_atom.get_value("label"),
+            _label=x_atom.get_value(label_str()),
             _addin=x_atom.get_value("addin"),
             _begin=x_atom.get_value("begin"),
             _close=x_atom.get_value("close"),

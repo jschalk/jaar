@@ -28,6 +28,7 @@ from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
     parent_road_str,
+    label_str,
 )
 from src.gift.atom import (
     AtomUnit,
@@ -354,7 +355,7 @@ class ChangeUnit:
             insert_ideaunit = after_bud.get_idea_obj(insert_idea_road)
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             x_atomunit.set_required_arg(parent_road_str(), insert_ideaunit._parent_road)
-            x_atomunit.set_required_arg("label", insert_ideaunit._label)
+            x_atomunit.set_required_arg(label_str(), insert_ideaunit._label)
             x_atomunit.set_optional_arg("addin", insert_ideaunit._addin)
             x_atomunit.set_optional_arg("begin", insert_ideaunit._begin)
             x_atomunit.set_optional_arg("close", insert_ideaunit._close)
@@ -399,7 +400,7 @@ class ChangeUnit:
                 x_atomunit.set_required_arg(
                     parent_road_str(), after_ideaunit._parent_road
                 )
-                x_atomunit.set_required_arg("label", after_ideaunit._label)
+                x_atomunit.set_required_arg(label_str(), after_ideaunit._label)
                 if before_ideaunit._addin != after_ideaunit._addin:
                     x_atomunit.set_optional_arg("addin", after_ideaunit._addin)
                 if before_ideaunit._begin != after_ideaunit._begin:
@@ -527,7 +528,7 @@ class ChangeUnit:
             x_label = get_terminus_node(delete_idea_road, before_bud._road_delimiter)
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_delete())
             x_atomunit.set_required_arg(parent_road_str(), x_parent_road)
-            x_atomunit.set_required_arg("label", x_label)
+            x_atomunit.set_required_arg(label_str(), x_label)
             self.set_atomunit(x_atomunit)
 
             delete_ideaunit = before_bud.get_idea_obj(delete_idea_road)

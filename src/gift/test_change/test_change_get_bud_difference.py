@@ -18,6 +18,7 @@ from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
     parent_road_str,
+    label_str,
 )
 from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.change import ChangeUnit, changeunit_shop
@@ -380,12 +381,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
     x_keylist = [atom_delete(), bud_ideaunit_text(), ball_road, street_text]
     street_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == ball_road
-    assert street_atomunit.get_value("label") == street_text
+    assert street_atomunit.get_value(label_str()) == street_text
 
     x_keylist = [atom_delete(), bud_ideaunit_text(), sports_road, ball_text]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == sports_road
-    assert ball_atomunit.get_value("label") == ball_text
+    assert ball_atomunit.get_value(label_str()) == ball_text
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 2
@@ -434,7 +435,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     x_keylist = [atom_insert(), bud_ideaunit_text(), sports_road, disc_text]
     street_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == sports_road
-    assert street_atomunit.get_value("label") == disc_text
+    assert street_atomunit.get_value(label_str()) == disc_text
 
     x_keylist = [
         atom_insert(),
@@ -443,7 +444,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
         music_text,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value("label") == music_text
+    assert ball_atomunit.get_value(label_str()) == music_text
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
     assert ball_atomunit.get_value("begin") == music_begin
     assert ball_atomunit.get_value("close") == music_close
@@ -503,7 +504,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
-    assert ball_atomunit.get_value("label") == music_text
+    assert ball_atomunit.get_value(label_str()) == music_text
     assert ball_atomunit.get_value("begin") == after_music_begin
     assert ball_atomunit.get_value("close") == after_music_close
     assert ball_atomunit.get_value("mass") == after_music_mass
