@@ -25,6 +25,7 @@ from src.gift.atom_config import (
     group_id_str,
     parent_road_str,
     label_str,
+    base_idea_active_requisite_str,
 )
 from src.gift.change import changeunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
@@ -857,7 +858,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_reasonu
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("base", knee_road)
     update_disc_atomunit.set_optional_arg(
-        "base_idea_active_requisite", medical_base_idea_active_requisite
+        base_idea_active_requisite_str(), medical_base_idea_active_requisite
     )
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
@@ -910,7 +911,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_reasonu
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("base", knee_road)
     update_disc_atomunit.set_optional_arg(
-        "base_idea_active_requisite", after_medical_base_idea_active_requisite
+        base_idea_active_requisite_str(), after_medical_base_idea_active_requisite
     )
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()

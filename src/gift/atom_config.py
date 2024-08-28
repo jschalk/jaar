@@ -171,6 +171,10 @@ def pledge_str() -> str:
     return "pledge"
 
 
+def base_idea_active_requisite_str() -> str:
+    return "base_idea_active_requisite"
+
+
 def get_atom_config_file_name() -> str:
     return "atom_config.json"
 

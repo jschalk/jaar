@@ -20,6 +20,7 @@ from src.gift.atom_config import (
     group_id_str,
     parent_road_str,
     label_str,
+    base_idea_active_requisite_str,
 )
 from src.gift.change import ChangeUnit
 
@@ -504,7 +505,7 @@ def add_bud_idea_reasonunit_insert_to_legible_list(
             road_value = idea_reasonunit_atom.get_value("road")
             base_value = idea_reasonunit_atom.get_value("base")
             base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                "base_idea_active_requisite"
+                base_idea_active_requisite_str()
             )
             x_str = (
                 f"ReasonUnit created for idea '{road_value}' with base '{base_value}'."
@@ -524,7 +525,7 @@ def add_bud_idea_reasonunit_update_to_legible_list(
             road_value = idea_reasonunit_atom.get_value("road")
             base_value = idea_reasonunit_atom.get_value("base")
             base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                "base_idea_active_requisite"
+                base_idea_active_requisite_str()
             )
             if base_idea_active_requisite_value is not None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."

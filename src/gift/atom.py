@@ -40,6 +40,7 @@ from src.gift.atom_config import (
     group_id_str,
     parent_road_str,
     label_str,
+    base_idea_active_requisite_str,
 )
 from dataclasses import dataclass
 
@@ -351,7 +352,7 @@ def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: AtomUnit):
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_idea_active_requisite=x_atom.get_value(
-            "base_idea_active_requisite"
+            base_idea_active_requisite_str()
         ),
     )
 
@@ -361,7 +362,7 @@ def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_idea_active_requisite=x_atom.get_value(
-            "base_idea_active_requisite"
+            base_idea_active_requisite_str()
         ),
     )
 

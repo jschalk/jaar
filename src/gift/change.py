@@ -29,6 +29,7 @@ from src.gift.atom_config import (
     group_id_str,
     parent_road_str,
     label_str,
+    base_idea_active_requisite_str,
 )
 from src.gift.atom import (
     AtomUnit,
@@ -563,7 +564,7 @@ class ChangeUnit:
             x_atomunit.set_required_arg("base", after_reasonunit.base)
             if after_reasonunit.base_idea_active_requisite is not None:
                 x_atomunit.set_optional_arg(
-                    "base_idea_active_requisite",
+                    base_idea_active_requisite_str(),
                     after_reasonunit.base_idea_active_requisite,
                 )
             self.set_atomunit(x_atomunit)
@@ -594,7 +595,7 @@ class ChangeUnit:
                     != after_reasonunit.base_idea_active_requisite
                 ):
                     x_atomunit.set_optional_arg(
-                        "base_idea_active_requisite",
+                        base_idea_active_requisite_str(),
                         after_reasonunit.base_idea_active_requisite,
                     )
                 self.set_atomunit(x_atomunit)
