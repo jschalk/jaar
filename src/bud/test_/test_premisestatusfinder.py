@@ -249,7 +249,10 @@ def show_x(
     trace_y: float,
     case_text: str,
     showlegend: bool = False,
-) -> bool:
+    graphics_bool: bool = False,
+) -> float:
+    if not graphics_bool:
+        return
     sought_text = "TRUE" if sought_active else "FALSE"
     sought_status_text = "TRUE" if sought_task_status else "FALSE"
     add_traces(
@@ -260,10 +263,13 @@ def show_x(
         or x_pbsd.get_task_status() != sought_task_status
     ):
         fig.show()
+    return 0.1
 
 
 # for PremiseStatusFinder tests
-def get_fig(pd: float) -> plotly_figure:
+def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
+    if not graphics_bool:
+        return None
     fig = plotly_figure()
     add_trace(
         fig=fig,
@@ -282,11 +288,11 @@ def get_fig(pd: float) -> plotly_figure:
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
-    fig.add_annotation(x=pd + 0.25, y=0.1, text="Expected", showarrow=False)
+    print("return real fig")
     return fig
 
 
-def test_PremiseStatusFinder_get_active_ReturnsCorrectObj():
+def test_PremiseStatusFinder_get_active_ReturnsCorrectObj(graphics_bool):
     """Check scenarios PremiseUnit._active. Plotly graph can be used
     to identify problems. Uncomment entire test once to visualize errors with
     graphical output.
@@ -295,8 +301,9 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj():
     assert premisestatusfinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active()
 
     # # Case B1
+    graph_b = graphics_bool
     pd = 1  # premise_divisor
-    # fig = get_fig(pd)
+    fig = get_fig(pd, graphics_bool)
     caseb1_1 = premisestatusfinder_shop(0.3, 0.7, pd, 0.5, 0.8)
     caseb1_2 = premisestatusfinder_shop(0.3, 0.7, pd, 0.2, 0.5)
     caseb1_3 = premisestatusfinder_shop(0.3, 0.7, pd, 0.4, 0.6)
@@ -308,69 +315,71 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj():
     caseb1_9 = premisestatusfinder_shop(0.3, 0.3, pd, 0.3, 0.3)
     caseb1_10 = premisestatusfinder_shop(0.0, 0.0, pd, 0.0, 0.0)
 
-    # linel = -0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb1_1, fig, linel, "caseb1_1", True)
+    linel = -0.1
+    show_x(sought_active, sought_task, caseb1_1, fig, linel, "caseb1_1", True, graph_b)
     assert caseb1_1.get_active() == sought_active
     assert caseb1_1.get_task_status() == sought_task
-    # linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb1_2, fig, linel, "caseb1_2")
+    linel -= 0.1
+    show_x(sought_active, sought_task, caseb1_2, fig, linel, "caseb1_2", False, graph_b)
     assert caseb1_2.get_active() == sought_active
     assert caseb1_2.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb1_3, fig, linel, "caseb1_3")
+    show_x(sought_active, sought_task, caseb1_3, fig, linel, "caseb1_3", False, graph_b)
     assert caseb1_3.get_active() == sought_active
     assert caseb1_3.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb1_4, fig, linel, "caseb1_4")
+    show_x(sought_active, sought_task, caseb1_4, fig, linel, "caseb1_4", False, graph_b)
     assert caseb1_4.get_active() == sought_active
     assert caseb1_4.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = False
     sought_task = False
-    # show_x(sought_active, sought_task, caseb1_5, fig, linel, "caseb1_5")
+    show_x(sought_active, sought_task, caseb1_5, fig, linel, "caseb1_5", False, graph_b)
     assert caseb1_5.get_active() == sought_active
     assert caseb1_5.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = False
     sought_task = False
-    # show_x(sought_active, sought_task, caseb1_6, fig, linel, "caseb1_6")
+    show_x(sought_active, sought_task, caseb1_6, fig, linel, "caseb1_6", False, graph_b)
     assert caseb1_6.get_active() == sought_active
     assert caseb1_6.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb1_7, fig, linel, "caseb1_7")
+    show_x(sought_active, sought_task, caseb1_7, fig, linel, "caseb1_7", False, graph_b)
     assert caseb1_7.get_active() == sought_active
     assert caseb1_7.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = False
     sought_task = False
-    # show_x(sought_active, sought_task, caseb1_8, fig, linel, "caseb1_8")
+    show_x(sought_active, sought_task, caseb1_8, fig, linel, "caseb1_8", False, graph_b)
     assert caseb1_8.get_active() == sought_active
     assert caseb1_8.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb1_9, fig, linel, "caseb1_9")
+    show_x(sought_active, sought_task, caseb1_9, fig, linel, "caseb1_9", False, graph_b)
     assert caseb1_9.get_active() == sought_active
     assert caseb1_9.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb1_10, fig, linel, "caseb1_10")
+    show_x(
+        sought_active, sought_task, caseb1_10, fig, linel, "caseb1_10", False, graph_b
+    )
     assert caseb1_10.get_active() == sought_active
     assert caseb1_10.get_task_status() == sought_task
 
     # Case B2
-    # linel -= 0.1
+    linel -= 0.1
     caseb2_1 = premisestatusfinder_shop(0.3, 0.7, pd, 0.8, 1.4)
     caseb2_2 = premisestatusfinder_shop(0.3, 0.7, pd, 0.6, 1.2)
     caseb2_3 = premisestatusfinder_shop(0.3, 0.7, pd, 0.6, 1.4)
@@ -381,63 +390,63 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj():
     caseb2_8 = premisestatusfinder_shop(0.7, 0.7, pd, 0.7, 1.2)
     caseb2_9 = premisestatusfinder_shop(0.3, 0.7, pd, 0.9, 1.3)
 
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb2_1, fig, linel, "caseb2_1")
+    show_x(sought_active, sought_task, caseb2_1, fig, linel, "caseb2_1", False, graph_b)
     assert caseb2_1.get_active() == sought_active
     assert caseb2_1.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb2_2, fig, linel, "caseb2_2")
+    show_x(sought_active, sought_task, caseb2_2, fig, linel, "caseb2_2", False, graph_b)
     assert caseb2_2.get_active() == sought_active
     assert caseb2_2.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb2_3, fig, linel, "caseb2_3")
+    show_x(sought_active, sought_task, caseb2_3, fig, linel, "caseb2_3", False, graph_b)
     assert caseb2_3.get_active() == sought_active
     assert caseb2_3.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb2_4, fig, linel, "caseb2_4")
+    show_x(sought_active, sought_task, caseb2_4, fig, linel, "caseb2_4", False, graph_b)
     assert caseb2_4.get_active() == sought_active
     assert caseb2_4.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb2_5, fig, linel, "caseb2_5")
+    show_x(sought_active, sought_task, caseb2_5, fig, linel, "caseb2_5", False, graph_b)
     assert caseb2_5.get_active() == sought_active
     assert caseb2_5.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = False
     sought_task = False
-    # show_x(sought_active, sought_task, caseb2_6, fig, linel, "caseb2_6")
+    show_x(sought_active, sought_task, caseb2_6, fig, linel, "caseb2_6", False, graph_b)
     assert caseb2_6.get_active() == sought_active
     assert caseb2_6.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = False
     sought_task = False
-    # show_x(sought_active, sought_task, caseb2_7, fig, linel, "caseb2_7")
+    show_x(sought_active, sought_task, caseb2_7, fig, linel, "caseb2_7", False, graph_b)
     assert caseb2_7.get_active() == sought_active
     assert caseb2_7.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb2_8, fig, linel, "caseb2_8")
+    show_x(sought_active, sought_task, caseb2_8, fig, linel, "caseb2_8", False, graph_b)
     assert caseb2_8.get_active() == sought_active
     assert caseb2_8.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb2_9, fig, linel, "caseb2_9")
+    show_x(sought_active, sought_task, caseb2_9, fig, linel, "caseb2_9", False, graph_b)
     assert caseb2_9.get_active() == sought_active
     assert caseb2_9.get_task_status() == sought_task
 
     # Case B3
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
     caseb3_1 = premisestatusfinder_shop(0.7, 0.3, pd, 0.2, 0.5)
@@ -448,57 +457,57 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj():
     caseb3_6 = premisestatusfinder_shop(0.7, 0.3, pd, 0.4, 0.6)
     caseb3_7 = premisestatusfinder_shop(0.7, 0.3, pd, 0.3, 0.5)
     caseb3_8 = premisestatusfinder_shop(0.7, 0.3, pd, 0.7, 0.7)
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb3_1, fig, linel, "caseb3_1")
+    show_x(sought_active, sought_task, caseb3_1, fig, linel, "caseb3_1", False, graph_b)
     assert caseb3_1.get_active() == sought_active
     assert caseb3_1.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb3_2, fig, linel, "caseb3_2")
+    show_x(sought_active, sought_task, caseb3_2, fig, linel, "caseb3_2", False, graph_b)
     assert caseb3_2.get_active() == sought_active
     assert caseb3_2.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb3_3, fig, linel, "caseb3_3")
+    show_x(sought_active, sought_task, caseb3_3, fig, linel, "caseb3_3", False, graph_b)
     assert caseb3_3.get_active() == sought_active
     assert caseb3_3.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb3_4, fig, linel, "caseb3_4")
+    show_x(sought_active, sought_task, caseb3_4, fig, linel, "caseb3_4", False, graph_b)
     assert caseb3_4.get_active() == sought_active
     assert caseb3_4.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb3_5, fig, linel, "caseb3_5")
+    show_x(sought_active, sought_task, caseb3_5, fig, linel, "caseb3_5", False, graph_b)
     assert caseb3_5.get_active() == sought_active
     assert caseb3_5.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = False
     sought_task = False
-    # show_x(sought_active, sought_task, caseb3_6, fig, linel, "caseb3_6")
+    show_x(sought_active, sought_task, caseb3_6, fig, linel, "caseb3_6", False, graph_b)
     assert caseb3_6.get_active() == sought_active
     assert caseb3_6.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = False
     sought_task = False
-    # show_x(sought_active, sought_task, caseb3_7, fig, linel, "caseb3_7")
+    show_x(sought_active, sought_task, caseb3_7, fig, linel, "caseb3_7", False, graph_b)
     assert caseb3_7.get_active() == sought_active
     assert caseb3_7.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb3_8, fig, linel, "caseb3_8")
+    show_x(sought_active, sought_task, caseb3_8, fig, linel, "caseb3_8", False, graph_b)
     assert caseb3_8.get_active() == sought_active
     assert caseb3_8.get_task_status() == sought_task
 
     # Case B4
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
     caseb4_1 = premisestatusfinder_shop(0.7, 0.3, pd, 0.6, 1.2)
@@ -507,50 +516,52 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj():
     caseb4_4 = premisestatusfinder_shop(0.7, 0.3, pd, 0.8, 1.2)
     caseb4_5 = premisestatusfinder_shop(0.7, 0.3, pd, 0.2, 1.1)
     caseb4_6 = premisestatusfinder_shop(0.7, 0.3, pd, 0.9, 1.8)
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb4_1, fig, linel, "caseb4_1")
+    show_x(sought_active, sought_task, caseb4_1, fig, linel, "caseb4_1", False, graph_b)
     assert caseb4_1.get_active() == sought_active
     assert caseb4_1.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb4_2, fig, linel, "caseb4_2")
+    show_x(sought_active, sought_task, caseb4_2, fig, linel, "caseb4_2", False, graph_b)
     assert caseb4_2.get_active() == sought_active
     assert caseb4_2.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = True
-    # show_x(sought_active, sought_task, caseb4_3, fig, linel, "caseb4_3")
+    show_x(sought_active, sought_task, caseb4_3, fig, linel, "caseb4_3", False, graph_b)
     assert caseb4_3.get_active() == sought_active
     assert caseb4_3.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb4_4, fig, linel, "caseb4_4")
+    show_x(sought_active, sought_task, caseb4_4, fig, linel, "caseb4_4", False, graph_b)
     assert caseb4_4.get_active() == sought_active
     assert caseb4_4.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb4_5, fig, linel, "caseb4_5")
+    show_x(sought_active, sought_task, caseb4_5, fig, linel, "caseb4_5", False, graph_b)
     assert caseb4_5.get_active() == sought_active
     assert caseb4_5.get_task_status() == sought_task
-    # linel -= 0.1
+    linel -= 0.1
     sought_active = True
     sought_task = False
-    # show_x(sought_active, sought_task, caseb4_6, fig, linel, "caseb4_6")
+    show_x(sought_active, sought_task, caseb4_6, fig, linel, "caseb4_6", False, graph_b)
     assert caseb4_6.get_active() == sought_active
     assert caseb4_6.get_task_status() == sought_task
 
-    # # Bottom divisor line
-    # add_trace(fig, 0.0, pd, linel - 0.2, "Divisor Range", None)
+    # Bottom divisor line
+    _conditional_fig_show(fig, pd, linel, graph_b)
+    assert 1 == 2
 
-    # show_figure = True
-    # if show_figure:
-    #     fig.show()
-    #     assert 1 == 2
+
+def _conditional_fig_show(fig: plotly_figure, pd, linel, graphics_bool: bool):
+    if graphics_bool:
+        add_trace(fig, 0.0, pd, linel - 0.2, "Divisor Range", None)
+        fig.show()
 
 
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_01():
