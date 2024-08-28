@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src._road.jaar_refer import (
     LightSeaGreen_str,
     green_str,
@@ -281,7 +282,7 @@ def add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict):
         add_rect_arrow(fig, cx_src, y0, cx0, y0, red_str(), 2)
 
 
-def get_real_structures0_fig() -> plotly_Figure:
+def get_real_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
     fig = get_real_graphic_base_fig()
     rx0 = 0
     rx1 = 10
@@ -318,5 +319,4 @@ def get_real_structures0_fig() -> plotly_Figure:
             mode="text",
         )
     )
-
-    return fig
+    conditional_fig_show(fig, graphics_bool)

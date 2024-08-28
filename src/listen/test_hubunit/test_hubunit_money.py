@@ -71,7 +71,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     )
 
 
-def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
+def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
@@ -90,7 +90,7 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
     sue_voice_bud.set_idea(dallas_idea, texas_road)
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
     sue_voice_bud.settle_bud()
-    # display_ideatree(sue_voice_bud, mode="Econ").show()
+    display_ideatree(sue_voice_bud, mode="Econ", graphics_bool=graphics_bool)
     sue_hubunit.save_voice_bud(sue_voice_bud)
 
     # WHEN
@@ -103,7 +103,7 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup):
 
 
 def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
-    env_dir_setup_cleanup,
+    env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     sue_text = "Sue"
@@ -124,8 +124,7 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
-    # sue_voice_bud.settle_bud()
-    # display_ideatree(sue_voice_bud, mode="Econ").show()
+    display_ideatree(sue_voice_bud, mode="Econ", graphics_bool=graphics_bool)
     sue_hubunit.save_voice_bud(sue_voice_bud)
     sue_dallas_hubunit = hubunit_shop(env_dir(), None, sue_text, dallas_road)
     sue_elpaso_hubunit = hubunit_shop(env_dir(), None, sue_text, elpaso_road)
@@ -243,7 +242,9 @@ def test_HubUnit_treasury_db_file_conn_RaisesErrorIfMissing_econ_road(
     )
 
 
-def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(env_dir_setup_cleanup):
+def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(
+    env_dir_setup_cleanup, graphics_bool
+):
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_text, None)
@@ -262,7 +263,7 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(env_dir_setup_c
     sue_voice_bud.set_idea(dallas_idea, texas_road)
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
     sue_voice_bud.settle_bud()
-    # display_ideatree(sue_voice_bud, mode="Econ").show()
+    display_ideatree(sue_voice_bud, mode="Econ", graphics_bool=graphics_bool)
     sue_hubunit.save_voice_bud(sue_voice_bud)
 
     dallas_hubunit = hubunit_shop(env_dir(), None, sue_text, dallas_road)

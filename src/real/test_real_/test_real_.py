@@ -203,7 +203,7 @@ def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
     yao_voice_bud.set_idea(dallas_idea, texas_road)
     yao_voice_bud.set_idea(elpaso_idea, texas_road)
-    # display_ideatree(sue_voice_bud.settle_bud(), mode="Econ").show()
+
     sue_hubunit.save_voice_bud(sue_voice_bud)
     yao_hubunit.save_voice_bud(yao_voice_bud)
     sue_file_name = get_json_filename(sue_text)

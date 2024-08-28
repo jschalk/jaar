@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src.real.real_report import (
     get_real_voices_accts_dataframe,
     get_real_voices_accts_plotly_fig,
@@ -16,7 +17,9 @@ from src.real.examples.example_reals import (
 from src.real.examples.real_env import env_dir_setup_cleanup
 
 
-def test_get_real_voices_accts_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_get_real_voices_accts_dataframe_ReturnsCorrectObj(
+    env_dir_setup_cleanup, graphics_bool
+):
     # ESTABLISH
     music_real = create_example_real2()
 
@@ -44,22 +47,21 @@ def test_get_real_voices_accts_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup
     assert x_df.shape[0] == 8
 
 
-def test_get_real_voices_accts_plotly_fig_DisplaysCorrectInfo(env_dir_setup_cleanup):
+def test_get_real_voices_accts_plotly_fig_DisplaysCorrectInfo(
+    env_dir_setup_cleanup, graphics_bool
+):
     # ESTABLISH
     music_real = create_example_real2()
 
     # WHEN
     x_fig = get_real_voices_accts_plotly_fig(music_real)
 
-    # # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()
-    # assert 1 == 2
+    # THEN
+    conditional_fig_show(x_fig, graphics_bool)
 
 
 def test_get_real_actions_accts_dataframe_ReturnsCorrectObj(
-    env_dir_setup_cleanup,
+    env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     music_real = create_example_real2()
@@ -91,7 +93,7 @@ def test_get_real_actions_accts_dataframe_ReturnsCorrectObj(
 
 
 def test_get_real_actions_accts_plotly_fig_DisplaysCorrectInfo(
-    env_dir_setup_cleanup,
+    env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     music_real = create_example_real2()
@@ -100,14 +102,13 @@ def test_get_real_actions_accts_plotly_fig_DisplaysCorrectInfo(
     # WHEN
     x_fig = get_real_actions_accts_plotly_fig(music_real)
 
-    # # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()
-    # assert 1 == 2
+    # THEN
+    conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(
+    env_dir_setup_cleanup, graphics_bool
+):
     # ESTABLISH
     music_real = create_example_real3()
 
@@ -134,17 +135,17 @@ def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanu
     assert x_df.shape[0] == 8
 
 
-def test_get_real_voices_agenda_plotly_fig_DisplaysCorrectInfo(env_dir_setup_cleanup):
+def test_get_real_voices_agenda_plotly_fig_DisplaysCorrectInfo(
+    env_dir_setup_cleanup, graphics_bool
+):
     # ESTABLISH
     music_real = create_example_real3()
 
     # WHEN
     x_fig = get_real_voices_agenda_plotly_fig(music_real)
 
-    # # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()
+    # THEN
+    conditional_fig_show(x_fig, graphics_bool)
 
 
 def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
@@ -176,7 +177,7 @@ def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_clean
 
 
 def test_get_real_actions_agenda_plotly_fig_DisplaysCorrectInfo(
-    env_dir_setup_cleanup,
+    env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     music_real = create_example_real4()
@@ -185,8 +186,5 @@ def test_get_real_actions_agenda_plotly_fig_DisplaysCorrectInfo(
     # WHEN
     x_fig = get_real_actions_agenda_plotly_fig(music_real)
 
-    # # THEN
-    # show_figure = True
-    # if show_figure:
-    #     x_fig.show()
-    # assert 1 == 2
+    # THEN
+    conditional_fig_show(x_fig, graphics_bool)

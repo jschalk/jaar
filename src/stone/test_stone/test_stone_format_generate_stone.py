@@ -9,11 +9,11 @@ from src.gift.atom_config import (
     atom_insert,
 )
 from src.gift.atom import atomunit_shop
-from src.span.span import (
+from src.stone.stone import (
     jaar_format_00001_acct_v0_0_0,
     jaar_format_00002_membership_v0_0_0,
     jaar_format_00003_ideaunit_v0_0_0,
-    create_span_df,
+    create_stone_df,
     create_changeunit,
     real_id_str,
     owner_id_str,
@@ -28,10 +28,10 @@ from src.span.span import (
     credit_score_str,
     debtit_vote_str,
     credit_vote_str,
-    get_spanref,
-    save_span_csv,
+    get_stoneref,
+    save_stone_csv,
 )
-from src.span.examples.span_env import span_examples_dir
+from src.stone.examples.stone_env import stone_examples_dir
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 
@@ -52,12 +52,12 @@ def test_create_changeunit_Arg_jaar_format_00001_acct_v0_0_0():
     sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
     sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
-    x_span_name = jaar_format_00001_acct_v0_0_0()
-    acct_dataframe = create_span_df(sue_budunit, x_span_name)
+    x_stone_name = jaar_format_00001_acct_v0_0_0()
+    acct_dataframe = create_stone_df(sue_budunit, x_stone_name)
     acct_csv = acct_dataframe.to_csv(index=False)
 
     # WHEN
-    sue_acct_changeunit = create_changeunit(acct_csv, x_spanname=x_span_name)
+    sue_acct_changeunit = create_changeunit(acct_csv, x_stonename=x_stone_name)
 
     # THEN
     assert sue_acct_changeunit
@@ -107,13 +107,13 @@ def test_create_changeunit_Arg_jaar_format_00002_membership_v0_0_0():
     bob_acctunit.add_membership(iowa_text, bob_iowa_credit_vote, bob_iowa_debtit_vote)
     yao_acctunit.add_membership(iowa_text, yao_iowa_credit_vote, yao_iowa_debtit_vote)
     yao_acctunit.add_membership(ohio_text, yao_ohio_credit_vote, yao_ohio_debtit_vote)
-    x_span_name = jaar_format_00002_membership_v0_0_0()
-    membership_dataframe = create_span_df(sue_budunit, x_span_name)
+    x_stone_name = jaar_format_00002_membership_v0_0_0()
+    membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
     assert len(membership_dataframe) == 7
     membership_csv = membership_dataframe.to_csv(index=False)
 
     # WHEN
-    membership_changunit = create_changeunit(membership_csv, x_span_name)
+    membership_changunit = create_changeunit(membership_csv, x_stone_name)
 
     # THEN
     assert membership_changunit
@@ -161,12 +161,12 @@ def test_create_changeunit_Arg_jaar_format_00003_ideaunit_v0_0_0():
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    x_span_name = jaar_format_00003_ideaunit_v0_0_0()
-    ideaunit_dataframe = create_span_df(sue_budunit, x_span_name)
+    x_stone_name = jaar_format_00003_ideaunit_v0_0_0()
+    ideaunit_dataframe = create_stone_df(sue_budunit, x_stone_name)
     ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = create_changeunit(ideaunit_csv, x_span_name)
+    ideaunit_changunit = create_changeunit(ideaunit_csv, x_stone_name)
 
     # THEN
     casa_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
@@ -186,14 +186,14 @@ def test_create_changeunit_Arg_jaar_format_00003_ideaunit_v0_0_0():
 
 
 # # Commented out to reduce testing time.
-# # def test_create_span_df_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
+# # def test_create_stone_df_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
 # #     # ESTABLISH / WHEN
-# #     x_span_name = jaar_format_00003_ideaunit_v0_0_0()
+# #     x_stone_name = jaar_format_00003_ideaunit_v0_0_0()
 
 # #     # WHEN
-# #     ideaunit_format = create_span_df(budunit_v001(), x_span_name)
+# #     ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
 
 # #     # THEN
 # #     array_headers = list(ideaunit_format.columns)
-# #     assert array_headers == get_spanref(x_span_name).get_headers_list()
+# #     assert array_headers == get_stoneref(x_stone_name).get_headers_list()
 # #     assert len(ideaunit_format) == 252

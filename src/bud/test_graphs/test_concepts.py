@@ -13,24 +13,13 @@ from src.bud.graphic import (
 )
 
 
-def test_budunit_explanation_ShowsExplanation0BudGraph():
-    # ESTABLISH / WHEN
-    ideatree1 = display_ideatree(get_budunit_with_4_levels())
-    ideatree2 = display_ideatree(get_budunit_with_4_levels_and_2reasons(), "Task")
-    ideatree3 = display_ideatree(get_budunit_x1_3levels_1reason_1facts())
-    budunit_explanation0_fig = budunit_explanation0()
-    budunit_explanation1_fig = budunit_explanation1()
-    budunit_explanation2_fig = budunit_explanation2()
-    budunit_explanation3_fig = budunit_explanation3()
-    budunit_explanation4_fig = budunit_explanation4()
-
-    # # THEN
-    # ideatree0.show()
-    # ideatree1.show()
-    # ideatree2.show()
-    # ideatree3.show()
-    # budunit_explanation0_fig.show()
-    # budunit_explanation1_fig.show()
-    # budunit_explanation2_fig.show()
-    # budunit_explanation3_fig.show()
-    # budunit_explanation4_fig.show()
+def test_budunit_explanation_ShowsExplanation0BudGraph(graphics_bool):
+    # ESTABLISH / WHEN / THEN
+    display_ideatree(get_budunit_with_4_levels(), graphics_bool)
+    display_ideatree(get_budunit_with_4_levels_and_2reasons(), "Task", graphics_bool)
+    display_ideatree(get_budunit_x1_3levels_1reason_1facts(), graphics_bool)
+    budunit_explanation0(graphics_bool)
+    budunit_explanation1(graphics_bool)
+    budunit_explanation2(graphics_bool)
+    budunit_explanation3(graphics_bool)
+    budunit_explanation4(graphics_bool)

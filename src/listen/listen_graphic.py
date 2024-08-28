@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src._road.jaar_config import voice_str, action_str
 from src._road.finance import default_money_magnitude
 from src.bud.bud import BudUnit
@@ -69,239 +70,259 @@ def get_hubunit_base_fig() -> plotly_Figure:
     return fig
 
 
-def get_listen_structures0_fig() -> plotly_Figure:
-    fig = get_hubunit_base_fig()
-    sue_text = "Sue"
-    bob_text = "Bob"
-    yao_text = "Yao"
-    sue_voice_text = f"{sue_text}.{voice_str()}"
-    sue_action_text = f"{sue_text}.{action_str()}"
-    yao_action_text = f"{yao_text}.{action_str()}"
-    bob_action_text = f"{bob_text}.{action_str()}"
-    dir_action_text = f"{action_str()}s directory"
-    dir_voice_text = f"{voice_str()}s directory"
+def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
+    if graphics_bool:
+        sue_text = "Sue"
+        bob_text = "Bob"
+        yao_text = "Yao"
+        fig = get_hubunit_base_fig()
+        sue_voice_text = f"{sue_text}.{voice_str()}"
+        sue_action_text = f"{sue_text}.{action_str()}"
+        yao_action_text = f"{yao_text}.{action_str()}"
+        bob_action_text = f"{bob_text}.{action_str()}"
+        dir_action_text = f"{action_str()}s directory"
+        dir_voice_text = f"{voice_str()}s directory"
 
-    green_text = "Green"
-    med_purple = "MediumPurple"
-    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
-    add_direc_rect(fig, 0.7, 6.7, 6.3, 8.3, dir_voice_text)
-    add_bud_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_action_text, green_text)
-    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_action_text)
-    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_action_text)
-    add_direc_rect(fig, 0.7, 0.7, 6.3, 2.3, dir_action_text)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 5,4 5.5,2", color=med_purple)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3,4 3.5,2", color=med_purple)
-    add_rect_arrow(fig, 1.75, 2, 1.75, 6.8, green_text)
-    add_rect_arrow(fig, 3.43, 2.3, 3.5, 2, med_purple)
-    add_rect_arrow(fig, 5.41, 2.3, 5.5, 2, med_purple)
+        green_text = "Green"
+        med_purple = "MediumPurple"
+        add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+        add_direc_rect(fig, 0.7, 6.7, 6.3, 8.3, dir_voice_text)
+        add_bud_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_action_text, green_text)
+        add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_action_text)
+        add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_action_text)
+        add_direc_rect(fig, 0.7, 0.7, 6.3, 2.3, dir_action_text)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 5,4 5.5,2", color=med_purple)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3,4 3.5,2", color=med_purple)
+        add_rect_arrow(fig, 1.75, 2, 1.75, 6.8, green_text)
+        add_rect_arrow(fig, 3.43, 2.3, 3.5, 2, med_purple)
+        add_rect_arrow(fig, 5.41, 2.3, 5.5, 2, med_purple)
 
-    fig.add_trace(
-        plotly_Scatter(
-            x=[4.0, 4.0],
-            y=[9.0, 8.75],
-            text=[
-                "Reality Bud Listening Structures",
-                "The voice bud listens to other's action buds and builds a new bud from itself and others",
-            ],
-            mode="text",
+        fig.add_trace(
+            plotly_Scatter(
+                x=[4.0, 4.0],
+                y=[9.0, 8.75],
+                text=[
+                    "Reality Bud Listening Structures",
+                    "The voice bud listens to other's action buds and builds a new bud from itself and others",
+                ],
+                mode="text",
+            )
         )
-    )
 
-    return fig
+        conditional_fig_show(fig, graphics_bool)
 
 
-def get_listen_structures1_fig() -> plotly_Figure:
-    fig = get_hubunit_base_fig()
-    sue_text = "Sue"
-    bob_text = "Bob"
-    sue_voice_text = f"{sue_text}.{voice_str()}"
-    dir_voice_text = f"{voice_str()}s dir"
+def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_hubunit_base_fig()
+        sue_text = "Sue"
+        bob_text = "Bob"
+        sue_voice_text = f"{sue_text}.{voice_str()}"
+        dir_voice_text = f"{voice_str()}s dir"
 
-    green_text = "Green"
-    blue_text = "blue"
-    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
-    add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_text)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 5.4,5.2 5.5,5", color=blue_text)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3.4,5.2 3.5,5", color=blue_text)
-    add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_text)
+        green_text = "Green"
+        blue_text = "blue"
+        add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+        add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_text)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 5.4,5.2 5.5,5", color=blue_text)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3.4,5.2 3.5,5", color=blue_text)
+        add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_text)
 
-    sue_duty_text = f"{sue_text} duty"
-    sue_job_text = f"{sue_text} job"
-    d_sue1_p1 = f"Healer = {sue_text} "
-    d_sue1_p2 = "Problem = problem1"
-    d_sue1_p3 = "Econ = project1"
-    d_sue1_p4 = f"Money = {default_money_magnitude()} "
-    d_bob1_p1 = f"Healer = {bob_text} "
-    d_bob1_p2 = "Problem = problem1"
-    d_bob1_p3 = "Econ = project1"
-    d_bob1_p4 = f"Money = {default_money_magnitude()} "
-    d_sue2_p1 = f"Healer = {sue_text} "
-    d_sue2_p2 = "Problem = problem2"
-    d_sue2_p3 = "Project = project3"
-    d_sue2_p4 = f"Money={default_money_magnitude()} "
+        sue_duty_text = f"{sue_text} duty"
+        sue_job_text = f"{sue_text} job"
+        d_sue1_p1 = f"Healer = {sue_text} "
+        d_sue1_p2 = "Problem = problem1"
+        d_sue1_p3 = "Econ = project1"
+        d_sue1_p4 = f"Money = {default_money_magnitude()} "
+        d_bob1_p1 = f"Healer = {bob_text} "
+        d_bob1_p2 = "Problem = problem1"
+        d_bob1_p3 = "Econ = project1"
+        d_bob1_p4 = f"Money = {default_money_magnitude()} "
+        d_sue2_p1 = f"Healer = {sue_text} "
+        d_sue2_p2 = "Problem = problem2"
+        d_sue2_p3 = "Project = project3"
+        d_sue2_p4 = f"Money={default_money_magnitude()} "
 
-    add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
-    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
-    add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
-    add_econ__rect(fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
-    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
-    add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_text)
-    add_econ__rect(fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4)
-    add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
-    add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
-    add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_text)
-    add_econ__rect(fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4)
-
-    green_text = "Green"
-    fig.add_trace(
-        plotly_Scatter(
-            x=[2.0],
-            y=[13],
-            text=["Bud Listening Structures"],
-            mode="text",
+        add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
+        add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
+        add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
+        add_econ__rect(
+            fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
-    )
-
-    return fig
-
-
-def get_listen_structures2_fig() -> plotly_Figure:
-    fig = get_hubunit_base_fig()
-    fig.update_yaxes(range=[-4, 10])
-    sue_text = "Sue"
-    bob_text = "Bob"
-    sue_voice_text = f"{sue_text}.{voice_str()}"
-    sue_action_text = f"{sue_text}.{action_str()}"
-    dir_action_text = f"{action_str()}s dir"
-    dir_voice_text = f"{voice_str()}s dir"
-
-    green_text = "Green"
-    blue_text = "blue"
-    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
-    add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
-    add_bud_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
-    add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_action_text)
-
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_text)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 5.4,5.2 5.5,5", color=blue_text)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3.4,5.2 3.5,5", color=blue_text)
-    add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_text)
-    add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 7.4,0.4 7.5,1", color=blue_text)
-    add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 5.4,0.4 5.5,1", color=blue_text)
-    add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 3.4,0.4 3.5,1", color=blue_text)
-    add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_text)
-
-    sue_duty_text = f"{sue_text} duty"
-    sue_job_text = f"{sue_text} job"
-    d_sue1_p1 = f"Healer = {sue_text} "
-    d_sue1_p2 = "Problem = problem1"
-    d_sue1_p3 = "Econ = project1"
-    d_sue1_p4 = f"Money = {default_money_magnitude()} "
-    d_bob1_p1 = f"Healer = {bob_text} "
-    d_bob1_p2 = "Problem = problem1"
-    d_bob1_p3 = "Econ = project1"
-    d_bob1_p4 = f"Money = {default_money_magnitude()} "
-    d_sue2_p1 = f"Healer = {sue_text} "
-    d_sue2_p2 = "Problem = problem2"
-    d_sue2_p3 = "Project = project3"
-    d_sue2_p4 = f"Money={default_money_magnitude()} "
-
-    add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
-    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
-    add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
-    add_econ__rect(fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
-    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
-    add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_text)
-    add_econ__rect(fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4)
-    add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
-    add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
-    add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_text)
-    add_econ__rect(fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4)
-
-    green_text = "Green"
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5, 5, 5],
-            y=[9, 8.5, 8.0],
-            text=[
-                "Bud Listening Structures",
-                "Flow of Buds to Econs",
-                "(Requires justification by problem and with unique name)",
-            ],
-            mode="text",
+        add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
+        add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
+        add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_text)
+        add_econ__rect(
+            fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
         )
-    )
-
-    return fig
-
-
-def get_listen_structures3_fig() -> plotly_Figure:
-    fig = get_hubunit_base_fig()
-    fig.update_yaxes(range=[-4, 10])
-    sue_text = "Sue"
-    bob_text = "Bob"
-    yao_text = "Yao"
-    sue_voice_text = f"{sue_text}.{voice_str()}"
-    sue_action_text = f"{sue_text}.{action_str()}"
-    dir_action_text = f"{action_str()}s dir"
-    dir_voice_text = f"{voice_str()}s dir"
-
-    green_text = "Green"
-    blue_text = "blue"
-    blue_text = "blue"
-    add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
-    add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
-    add_bud_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
-    add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_action_text)
-
-    add_rect_arrow(fig, 3.85, 3.8, 4, 3.6, blue_text)
-    add_2_curve(fig, path="M 4,3.6 C 4.3,3.4 7.4,2.1 7.5,2", color=blue_text)
-    add_2_curve(fig, path="M 4,3.6 C 4.3,3.4 5.4,2.2 5.5,2", color=blue_text)
-    add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3.4,5.2 3.5,5", color=blue_text)
-    add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_text)
-    # add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 7.4,0.4 7.5,1", color=blue_text)
-    # add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 5.4,0.4 5.5,1", color=blue_text)
-    add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 3.4,0.4 3.5,1", color=blue_text)
-    add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_text)
-
-    sue_duty_text = f"{sue_text} duty"
-    sue_job_text = f"{sue_text} job"
-    bob_job_text = f"{bob_text} job"
-    yao_job_text = f"{yao_text} job"
-    d_sue1_p1 = f"Healer = {sue_text} "
-    d_sue1_p2 = "Problem = problem1"
-    d_sue1_p3 = "Econ = project1"
-    d_sue1_p4 = f"Money = {default_money_magnitude()} "
-
-    add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
-    add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
-    add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
-    add_econ__rect(fig, 2.7, 0.7, 8.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_job_text)
-    add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_job_text)
-
-    green_text = "Green"
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5, 5, 5],
-            y=[9, 8.5, 8.0],
-            text=[
-                "Bud Listening Structures",
-                "Flow of Buds to Econs",
-                "(Requires justification by problem and with unique name)",
-            ],
-            mode="text",
+        add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
+        add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
+        add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_text)
+        add_econ__rect(
+            fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
         )
-    )
 
-    return fig
+        green_text = "Green"
+        fig.add_trace(
+            plotly_Scatter(
+                x=[2.0],
+                y=[13],
+                text=["Bud Listening Structures"],
+                mode="text",
+            )
+        )
+
+        conditional_fig_show(fig, graphics_bool)
 
 
-def fund_explanation0(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
-    fig = display_ideatree(x_bud, mode)
+def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_hubunit_base_fig()
+        fig.update_yaxes(range=[-4, 10])
+        sue_text = "Sue"
+        bob_text = "Bob"
+        sue_voice_text = f"{sue_text}.{voice_str()}"
+        sue_action_text = f"{sue_text}.{action_str()}"
+        dir_action_text = f"{action_str()}s dir"
+        dir_voice_text = f"{voice_str()}s dir"
+
+        green_text = "Green"
+        blue_text = "blue"
+        add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+        add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
+        add_bud_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
+        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_action_text)
+
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_text)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 5.4,5.2 5.5,5", color=blue_text)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3.4,5.2 3.5,5", color=blue_text)
+        add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_text)
+        add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 7.4,0.4 7.5,1", color=blue_text)
+        add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 5.4,0.4 5.5,1", color=blue_text)
+        add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 3.4,0.4 3.5,1", color=blue_text)
+        add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_text)
+
+        sue_duty_text = f"{sue_text} duty"
+        sue_job_text = f"{sue_text} job"
+        d_sue1_p1 = f"Healer = {sue_text} "
+        d_sue1_p2 = "Problem = problem1"
+        d_sue1_p3 = "Econ = project1"
+        d_sue1_p4 = f"Money = {default_money_magnitude()} "
+        d_bob1_p1 = f"Healer = {bob_text} "
+        d_bob1_p2 = "Problem = problem1"
+        d_bob1_p3 = "Econ = project1"
+        d_bob1_p4 = f"Money = {default_money_magnitude()} "
+        d_sue2_p1 = f"Healer = {sue_text} "
+        d_sue2_p2 = "Problem = problem2"
+        d_sue2_p3 = "Project = project3"
+        d_sue2_p4 = f"Money={default_money_magnitude()} "
+
+        add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
+        add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
+        add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
+        add_econ__rect(
+            fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
+        )
+        add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_text)
+        add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_text)
+        add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_text)
+        add_econ__rect(
+            fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
+        )
+        add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_text)
+        add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_text)
+        add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_text)
+        add_econ__rect(
+            fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
+        )
+
+        green_text = "Green"
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5, 5, 5],
+                y=[9, 8.5, 8.0],
+                text=[
+                    "Bud Listening Structures",
+                    "Flow of Buds to Econs",
+                    "(Requires justification by problem and with unique name)",
+                ],
+                mode="text",
+            )
+        )
+
+        conditional_fig_show(fig, graphics_bool)
+
+
+def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_hubunit_base_fig()
+        fig.update_yaxes(range=[-4, 10])
+        sue_text = "Sue"
+        bob_text = "Bob"
+        yao_text = "Yao"
+        sue_voice_text = f"{sue_text}.{voice_str()}"
+        sue_action_text = f"{sue_text}.{action_str()}"
+        dir_action_text = f"{action_str()}s dir"
+        dir_voice_text = f"{voice_str()}s dir"
+
+        green_text = "Green"
+        blue_text = "blue"
+        blue_text = "blue"
+        add_bud_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_text, green_text)
+        add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_text)
+        add_bud_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_action_text, green_text)
+        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_action_text)
+
+        add_rect_arrow(fig, 3.85, 3.8, 4, 3.6, blue_text)
+        add_2_curve(fig, path="M 4,3.6 C 4.3,3.4 7.4,2.1 7.5,2", color=blue_text)
+        add_2_curve(fig, path="M 4,3.6 C 4.3,3.4 5.4,2.2 5.5,2", color=blue_text)
+        add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3.4,5.2 3.5,5", color=blue_text)
+        add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_text)
+        # add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 7.4,0.4 7.5,1", color=blue_text)
+        # add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 5.4,0.4 5.5,1", color=blue_text)
+        add_2_curve(fig, path="M 1.75,-0.8 C 2,-0.2 3.4,0.4 3.5,1", color=blue_text)
+        add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_text)
+
+        sue_duty_text = f"{sue_text} duty"
+        sue_job_text = f"{sue_text} job"
+        bob_job_text = f"{bob_text} job"
+        yao_job_text = f"{yao_text} job"
+        d_sue1_p1 = f"Healer = {sue_text} "
+        d_sue1_p2 = "Problem = problem1"
+        d_sue1_p3 = "Econ = project1"
+        d_sue1_p4 = f"Money = {default_money_magnitude()} "
+
+        add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_text)
+        add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_text)
+        add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_text)
+        add_econ__rect(
+            fig, 2.7, 0.7, 8.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
+        )
+        add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_job_text)
+        add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_job_text)
+
+        green_text = "Green"
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5, 5, 5],
+                y=[9, 8.5, 8.0],
+                text=[
+                    "Bud Listening Structures",
+                    "Flow of Buds to Econs",
+                    "(Requires justification by problem and with unique name)",
+                ],
+                mode="text",
+            )
+        )
+
+        conditional_fig_show(fig, graphics_bool)
+
+
+def fund_explanation0(
+    x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
+) -> plotly_Figure:
+    fig = display_ideatree(x_bud, mode, False)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5, 3])
 
@@ -353,6 +374,7 @@ def fund_explanation0(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
     add_bud_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_text, purple_text)
     add_bud_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_text, purple_text)
 
+    conditional_fig_show(fig, graphics_bool)
     # fig.add_trace(
     #     plotly_Scatter(
     #         x=[1.0],
@@ -361,4 +383,3 @@ def fund_explanation0(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
     #         mode="text",
     #     )
     # )
-    return fig

@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src._road.road import get_parent_road, RoadUnit, is_sub_road
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit
@@ -114,7 +115,9 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
     )
 
 
-def display_ideatree(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
+def display_ideatree(
+    x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
+) -> plotly_Figure:
     """Mode can be None, Task, Econ"""
 
     x_bud.settle_bud()
@@ -135,8 +138,10 @@ def display_ideatree(x_bud: BudUnit, mode: str = None) -> plotly_Figure:
             font_size=20,
             showarrow=False,
         )
-
-    return x_fig
+    if graphics_bool:
+        conditional_fig_show(x_fig, graphics_bool)
+    else:
+        return x_fig
 
 
 def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
@@ -350,7 +355,9 @@ def get_budunit_base_fig() -> plotly_Figure:
     return fig
 
 
-def budunit_explanation0() -> plotly_Figure:
+def budunit_explanation0(graphics_bool) -> plotly_Figure:
+    if not graphics_bool:
+        return
     fig = get_budunit_base_fig()
 
     # Add shapes
@@ -366,10 +373,10 @@ def budunit_explanation0() -> plotly_Figure:
             mode="text",
         )
     )
-    return fig
+    conditional_fig_show(fig, graphics_bool)
 
 
-def budunit_explanation1() -> plotly_Figure:
+def budunit_explanation1(graphics_bool) -> plotly_Figure:
     fig = get_budunit_base_fig()
 
     # Add shapes
@@ -396,11 +403,10 @@ def budunit_explanation1() -> plotly_Figure:
             mode="text",
         )
     )
+    conditional_fig_show(fig, graphics_bool)
 
-    return fig
 
-
-def budunit_explanation2() -> plotly_Figure:
+def budunit_explanation2(graphics_bool) -> plotly_Figure:
     fig = get_budunit_base_fig()
 
     # Add shapes
@@ -422,11 +428,10 @@ def budunit_explanation2() -> plotly_Figure:
             mode="text",
         )
     )
+    conditional_fig_show(fig, graphics_bool)
 
-    return fig
 
-
-def budunit_explanation3() -> plotly_Figure:
+def budunit_explanation3(graphics_bool) -> plotly_Figure:
     fig = get_budunit_base_fig()
 
     # Add shapes
@@ -453,11 +458,10 @@ def budunit_explanation3() -> plotly_Figure:
             mode="text",
         )
     )
+    conditional_fig_show(fig, graphics_bool)
 
-    return fig
 
-
-def budunit_explanation4() -> plotly_Figure:
+def budunit_explanation4(graphics_bool) -> plotly_Figure:
     fig = get_budunit_base_fig()
 
     # Add shapes
@@ -484,5 +488,4 @@ def budunit_explanation4() -> plotly_Figure:
             mode="text",
         )
     )
-
-    return fig
+    conditional_fig_show(fig, graphics_bool)

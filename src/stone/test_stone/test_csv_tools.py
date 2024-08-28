@@ -1,9 +1,9 @@
-from src.span.csv_tool import (
+from src.stone.csv_tool import (
     extract_csv_headers,
     get_csv_real_id_owner_id_metrics,
     create_filtered_csv_dict,
 )
-from src.span.examples.span_env import span_env_setup_cleanup
+from src.stone.examples.stone_env import stone_env_setup_cleanup
 
 
 def test_extract_csv_headers_ReturnsEmptyObj():

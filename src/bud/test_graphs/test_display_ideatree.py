@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src.bud.examples.example_buds import (
     budunit_v001_with_large_agenda,
     get_budunit_with_4_levels,
@@ -13,7 +14,7 @@ from src.bud.graphic import (
 )
 
 
-def test_display_ideatree_Scenario0():
+def test_display_ideatree_Scenario0(graphics_bool):
     # a_bud = get_1node_bud()
     # a_bud = get_2node_bud()
     # a_bud = get_3node_bud()
@@ -24,14 +25,11 @@ def test_display_ideatree_Scenario0():
     a_bud.settle_bud()
     print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
 
-    # WHEN
-    x_fig = display_ideatree(a_bud)
-
-    # # THEN
-    # x_fig.show()
+    # WHEN / THEN
+    x_fig = display_ideatree(a_bud, graphics_bool)
 
 
-def test_display_ideatree_Scenario1_shows_Tasks():
+def test_display_ideatree_Scenario1_shows_Tasks(graphics_bool):
     # a_bud = get_1node_bud()
     # a_bud = get_2node_bud()
     # a_bud = get_3node_bud()
@@ -42,14 +40,11 @@ def test_display_ideatree_Scenario1_shows_Tasks():
     a_bud.settle_bud()
     print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
 
-    # WHEN
-    x_fig = display_ideatree(a_bud, mode="Task")
-
-    # # THEN
-    # x_fig.show()
+    # WHEN / THEN
+    display_ideatree(a_bud, mode="Task", graphics_bool=graphics_bool)
 
 
-def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo():
+def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     # ESTABLISH
     luca_bud = budunit_shop()
     luca_bud.set_credor_respect(500)
@@ -66,11 +61,11 @@ def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo():
     # WHEN
     x_fig = get_bud_accts_plotly_fig(luca_bud)
 
-    # # THEN
-    # x_fig.show()
+    # THEN
+    conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_bud_agenda_plotly_fig_DisplaysCorrectInfo():
+def test_get_bud_agenda_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
     week_text = "weekdays"
@@ -80,5 +75,5 @@ def test_get_bud_agenda_plotly_fig_DisplaysCorrectInfo():
     # WHEN
     x_fig = get_bud_agenda_plotly_fig(yao_bud)
 
-    # # THEN
-    # x_fig.show()
+    # THEN
+    conditional_fig_show(x_fig, graphics_bool)
