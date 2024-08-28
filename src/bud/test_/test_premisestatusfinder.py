@@ -555,7 +555,6 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj(graphics_bool):
 
     # Bottom divisor line
     _conditional_fig_show(fig, pd, linel, graph_b)
-    assert 1 == 2
 
 
 def _conditional_fig_show(fig: plotly_figure, pd, linel, graphics_bool: bool):
