@@ -6,6 +6,8 @@ from src.gift.atom_config import (
     bud_acct_membership_text,
     acct_id_str,
     group_id_str,
+    credit_score_str,
+    debtit_score_str,
 )
 from src.gift.atom import AtomUnit, atomunit_shop
 
@@ -97,13 +99,13 @@ def test_AtomUnit_is_optional_args_valid_ReturnsCorrectBoolean():
     assert bob_insert_atomunit.is_optional_args_valid()
 
     # WHEN
-    bob_insert_atomunit.set_optional_arg("credit_score", 55)
+    bob_insert_atomunit.set_optional_arg(credit_score_str(), 55)
     # THEN
     assert len(bob_insert_atomunit.optional_args) == 1
     assert bob_insert_atomunit.is_optional_args_valid()
 
     # WHEN
-    bob_insert_atomunit.set_optional_arg("debtit_score", 66)
+    bob_insert_atomunit.set_optional_arg(debtit_score_str(), 66)
     # THEN
     assert len(bob_insert_atomunit.optional_args) == 2
     assert bob_insert_atomunit.is_optional_args_valid()
@@ -148,8 +150,8 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
 
     # WHEN
     bob_insert_atomunit.optional_args = {}
-    cw_text = "credit_score"
-    dw_text = "debtit_score"
+    cw_text = credit_score_str()
+    dw_text = debtit_score_str()
     bob_insert_atomunit.set_optional_arg(cw_text, bob_acctunit.get_dict().get(cw_text))
     bob_insert_atomunit.set_optional_arg(dw_text, bob_acctunit.get_dict().get(dw_text))
 
@@ -181,8 +183,8 @@ def test_AtomUnit_get_value_ReturnsObj():
     bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
     acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
-    cw_text = "credit_score"
-    dw_text = "debtit_score"
+    cw_text = credit_score_str()
+    dw_text = debtit_score_str()
     print(f"{bob_acctunit.get_dict()=}")
     # bob_acctunit_dict = {acct_id_str(): bob_acctunit.get_dict().get(acct_id_str())}
     # print(f"{bob_acctunit_dict=}")
@@ -223,8 +225,8 @@ def test_AtomUnit_set_atom_order_SetCorrectAttr():
     bob_debtit_score = 66
     acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
-    cw_text = "credit_score"
-    dw_text = "debtit_score"
+    cw_text = credit_score_str()
+    dw_text = debtit_score_str()
     bob_insert_atomunit.set_required_arg(acct_id_str(), bob_text)
     bob_insert_atomunit.set_optional_arg(cw_text, bob_credit_score)
     bob_insert_atomunit.set_optional_arg(dw_text, bob_debtit_score)
@@ -242,8 +244,8 @@ def test_AtomUnit_set_arg_SetsAny_required_arg_optional_arg():
     bob_debtit_score = 66
     acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
-    cw_text = "credit_score"
-    dw_text = "debtit_score"
+    cw_text = credit_score_str()
+    dw_text = debtit_score_str()
 
     # WHEN
     bob_insert_atomunit.set_arg(acct_id_str(), bob_text)
