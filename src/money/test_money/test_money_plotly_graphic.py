@@ -8,22 +8,11 @@ from src.money.money_graphic import (
 )
 
 
-def test_money_graphics_ExplainThingsWell():
-    # ESTABLISH / WHEN
-    # money_structures0_fig = get_money_structures0_fig()
-    # money_structures1_fig = get_money_structures1_fig()
-    # money_structures2_fig = get_money_structures2_fig()
-    # money_structures3_fig = get_money_structures3_fig()
-    # money_structures4_fig = get_money_structures4_fig()
-    # money_structures5_fig = get_money_structures5_fig()
-
-    # THEN
-    # money_structures0_fig.show()
-    # money_structures1_fig.show()
-    # money_structures2_fig.show()
-    # money_structures3_fig.show()
-    # money_structures4_fig.show()
-    # money_structures5_fig.show()
-
-    # assert 1 == 2
-    pass
+def test_money_graphics_ExplainThingsWell(graphics_bool):
+    # ESTABLISH / WHEN / THEN
+    get_money_structures0_fig(graphics_bool)
+    get_money_structures1_fig(graphics_bool)
+    get_money_structures2_fig(graphics_bool)
+    get_money_structures3_fig(graphics_bool)
+    get_money_structures4_fig(graphics_bool)
+    get_money_structures5_fig(graphics_bool)

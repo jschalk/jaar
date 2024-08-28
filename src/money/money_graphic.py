@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src._road.jaar_refer import (
     LightSeaGreen_str,
     green_str,
@@ -18,7 +19,6 @@ from src._road.jaar_refer import (
     yao_str,
     zia_str,
 )
-from src._road.finance import default_money_magnitude
 from src._road.finance import default_money_magnitude
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
@@ -285,341 +285,362 @@ def add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict):
         add_rect_arrow(fig, cx_src, y0, cx0, y0, red_str(), 2)
 
 
-def get_money_structures0_fig() -> plotly_Figure:
-    fig = get_money_graphic_base_fig()
+def get_money_structures0_fig(graphics_bool: bool) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_money_graphic_base_fig()
 
-    mm = default_money_magnitude()
-    sue1_p1 = f"Healer = {sue_str()} "
-    sue1_p2 = "Problem = problem1"
-    sue1_p3 = "Econ = project1"
-    sue1_p4 = f"Money = {mm} "
+        mm = default_money_magnitude()
+        sue1_p1 = f"Healer = {sue_str()} "
+        sue1_p2 = "Problem = problem1"
+        sue1_p3 = "Econ = project1"
+        sue1_p4 = f"Money = {mm} "
 
-    m_y0 = 8
-    m_y1 = -3
-    add_grants_top(fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm)
-    add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_id=sue_str(), money_amt=mm)
-    add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-    fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5.0, 5.0, 5.0],
-            y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
-            text=[
-                "Econ Money Structure",
-                "Flow of Money to Accts",
-                "Money starts as grants from Healer. Taxs are money coming back to healer.",
-            ],
-            mode="text",
+        m_y0 = 8
+        m_y1 = -3
+        add_grants_top(
+            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm
         )
-    )
-
-    return fig
-
-
-def get_money_structures1_fig() -> plotly_Figure:
-    fig = get_money_graphic_base_fig()
-
-    mm = default_money_magnitude()
-    sue1_p1 = f"Healer = {sue_str()} "
-    sue1_p2 = "Problem = problem1"
-    sue1_p3 = "Econ = project1"
-    sue1_p4 = f"Money = {mm} "
-
-    m_y0 = 8
-    m_y1 = -5
-    add_grants_top(fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm)
-    add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_id=sue_str(), money_amt=mm)
-
-    y_mid = m_y1 + (m_y0 - m_y1) / 2
-    add_rect_arrow(fig, 2, y_mid - 1.5, 2, y_mid + 1.5, green_str())
-    add_rect_arrow(fig, 5, y_mid - 1.5, 5, y_mid + 1.5, green_str())
-    add_rect_arrow(fig, 8, y_mid - 1.5, 8, y_mid + 1.5, green_str())
-
-    add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-    fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5.0, 5.0, 5.0],
-            y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
-            text=[
-                "Econ Money Structure",
-                "Flow of Money to Accts",
-                "Money starts as grants from Healer. Taxs are money coming back to healer.",
-            ],
-            mode="text",
+        add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_id=sue_str(), money_amt=mm)
+        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5.0, 5.0, 5.0],
+                y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
+                text=[
+                    "Econ Money Structure",
+                    "Flow of Money to Accts",
+                    "Money starts as grants from Healer. Taxs are money coming back to healer.",
+                ],
+                mode="text",
+            )
         )
-    )
 
-    return fig
+        conditional_fig_show(fig, graphics_bool)
 
 
-def get_money_structures2_fig() -> plotly_Figure:
-    fig = get_money_graphic_base_fig()
+def get_money_structures1_fig(graphics_bool: bool) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_money_graphic_base_fig()
 
-    mm = default_money_magnitude()
-    sue1_p1 = f"Healer = {sue_str()} "
-    sue1_p2 = "Problem = problem1"
-    sue1_p3 = "Econ = project1"
-    sue1_p4 = f"Money = {mm} "
+        mm = default_money_magnitude()
+        sue1_p1 = f"Healer = {sue_str()} "
+        sue1_p2 = "Problem = problem1"
+        sue1_p3 = "Econ = project1"
+        sue1_p4 = f"Money = {mm} "
 
-    m_y0 = 8
-    m_y1 = -7
-    add_grants_top(fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm)
-    col_y0 = 4
-    col_len = 11
-    add_taxs_column(fig, taxs1_dict(), -1, 8, sue_str(), mm, col_y0, col_len)
-    add_river_row(fig, rivercycle1_dict(), mm, 1, 9, 0, black_str())
-
-    ay0 = 3.88
-    ay1 = ay0 - 2.6
-    bob_src = 2
-    buz_src = 2.75
-    car_src = 3.25
-    ric_src = 4.75
-    sue_src = 5.5
-    xio_src = 6.7
-    yao_src = 7.3
-    zia_src = 8.5
-    bob_dst = 1.3
-    joc_dst = 2.5
-    luc_dst = 4.25
-    mar_dst = 4.75
-    sue_dst = 5.6
-    xio_dst = 6.7
-    yao_dst = 7.3
-    zia_dst = 8.5
-    add_rect_arrow(fig, bob_dst, ay1, bob_src, ay0, green_str(), 2)
-    add_rect_arrow(fig, luc_dst, ay1, bob_src, ay0, green_str(), 2)
-    add_rect_arrow(fig, sue_dst, ay1, bob_src, ay0, green_str(), 2)
-    add_rect_arrow(fig, joc_dst, ay1, buz_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, luc_dst, ay1, buz_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, joc_dst, ay1, car_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, mar_dst, ay1, car_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, luc_dst, ay1, car_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, luc_dst, ay1, sue_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, joc_dst, ay1, sue_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, yao_dst, ay1, sue_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, zia_dst, ay1, sue_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, luc_dst, ay1, xio_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, joc_dst, ay1, xio_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, xio_dst, ay1, yao_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, joc_dst, ay1, yao_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, xio_dst, ay1, zia_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, joc_dst, ay1, zia_src, ay0, green_str(), 1)
-    add_rect_arrow(fig, zia_src, ay1, zia_src, ay0, green_str(), 1)
-
-    add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-    add_econ__rect(fig, -1.9, m_y1, 0.3, m_y0, "", "", "", "")
-    add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
-    fig.update_yaxes(range=[-8, 10])
-    fig.update_xaxes(range=[-3, 10])
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5.0, 5.0, 5.0],
-            y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
-            text=[
-                "Econ Money Structure",
-                "Flow of Money to Accts",
-                "Money starts as grants from Healer. Taxs are money coming back to healer.",
-            ],
-            mode="text",
+        m_y0 = 8
+        m_y1 = -5
+        add_grants_top(
+            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm
         )
-    )
+        add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_id=sue_str(), money_amt=mm)
 
-    return fig
+        y_mid = m_y1 + (m_y0 - m_y1) / 2
+        add_rect_arrow(fig, 2, y_mid - 1.5, 2, y_mid + 1.5, green_str())
+        add_rect_arrow(fig, 5, y_mid - 1.5, 5, y_mid + 1.5, green_str())
+        add_rect_arrow(fig, 8, y_mid - 1.5, 8, y_mid + 1.5, green_str())
 
-
-def get_money_structures3_fig() -> plotly_Figure:
-    fig = get_money_graphic_base_fig()
-
-    mm = default_money_magnitude()
-    sue1_p1 = f"Healer = {sue_str()} "
-    sue1_p2 = "Problem = problem1"
-    sue1_p3 = "Econ = project1"
-    sue1_p4 = f"Money = {mm} "
-
-    m_y0 = 8
-    m_y1 = -7
-    add_grants_top(fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm)
-    col_y0 = 2
-    col_len = 9
-    add_taxs_column(fig, taxs1_dict(), -1, 8, sue_str(), mm, col_y0, col_len)
-    ry0 = 0
-    add_river_row(fig, rivercycle1_dict(), mm, 1, 9, ry0, black_str())
-
-    ry1 = m_y0 - 4
-    y_mid = ry0 + (ry1 - ry0 + 1) / 2
-    add_rect_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
-    add_rect_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
-    add_rect_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
-
-    cx_src = 0
-    cx0 = cx_src + 0.3
-    cx1 = cx0 + 1
-    joc_x2 = cx1 + 0.2
-    joc_y0 = 1.5
-    cy1 = -1
-    cy2 = -0.6
-    cy3 = 0
-    luc_y0 = 0
-    luc_x2 = 3.3
-    mar_y0 = -0.8
-    mar_x2 = 4.0
-    sue_y0 = -2.3
-    sue_x2 = 4.6
-    xio_y0 = -3.3
-    xio_x2 = 5.8
-    yao_y0 = -5
-    yao_x2 = 6.8
-    zia_y0 = -6.2
-    zia_x2 = 7.7
-    coor_dict = {
-        1: {"y0": joc_y0, "x2": joc_x2},
-        2: {"y0": luc_y0, "x2": luc_x2},
-        3: {"y0": mar_y0, "x2": mar_x2},
-        4: {"y0": sue_y0, "x2": sue_x2},
-        5: {"y0": xio_y0, "x2": xio_x2},
-        6: {"y0": yao_y0, "x2": yao_x2},
-        7: {"y0": zia_y0, "x2": zia_x2},
-    }
-
-    add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict)
-
-    add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-    add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
-    # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
-    fig.update_yaxes(range=[-8, 10])
-    fig.update_xaxes(range=[-3, 10])
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5.0, 5.0, 5.0],
-            y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
-            text=[
-                "Econ Money Structure",
-                "Flow of Money to Accts",
-                "Money starts as grants from Healer. Taxs are money coming back to healer.",
-            ],
-            mode="text",
+        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5.0, 5.0, 5.0],
+                y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
+                text=[
+                    "Econ Money Structure",
+                    "Flow of Money to Accts",
+                    "Money starts as grants from Healer. Taxs are money coming back to healer.",
+                ],
+                mode="text",
+            )
         )
-    )
-
-    return fig
+        conditional_fig_show(fig, graphics_bool)
 
 
-def get_money_structures4_fig() -> plotly_Figure:
-    fig = get_money_graphic_base_fig()
+def get_money_structures2_fig(graphics_bool: bool) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_money_graphic_base_fig()
 
-    mm = default_money_magnitude()
-    sue1_p1 = f"Healer = {sue_str()} "
-    sue1_p2 = "Problem = problem1"
-    sue1_p3 = "Econ = project1"
-    sue1_p4 = f"Money = {mm} "
+        mm = default_money_magnitude()
+        sue1_p1 = f"Healer = {sue_str()} "
+        sue1_p2 = "Problem = problem1"
+        sue1_p3 = "Econ = project1"
+        sue1_p4 = f"Money = {mm} "
 
-    m_y0 = 8
-    m_y1 = -7
-    add_grants_top(fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm)
-    tax_x0 = -1
-    col_y0 = 2
-    col_len = 9
-    add_taxs_column(fig, taxs1_dict(), tax_x0, 8, sue_str(), mm, col_y0, col_len)
-    ry0 = 0
-    add_river_row(fig, rivercycle1_dict(), mm, 1, 9, ry0, black_str())
-    add_rect_arrow(fig, tax_x0 + 1.1, ry0 + 0.5, tax_x0 + 2, ry0 + 0.5, red_str(), 5)
-    add_river_row(fig, rivercycle2_dict(), mm, 1, 4, ry0 - 3, LightSeaGreen_str())
-
-    ry1 = m_y0 - 4
-    y_mid = ry0 + (ry1 - ry0 + 1) / 2
-    add_rect_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
-    add_rect_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
-    add_rect_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
-
-    add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-    add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
-    # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
-    fig.update_yaxes(range=[-8, 10])
-    fig.update_xaxes(range=[-3, 10])
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5.0, 5.0, 5.0],
-            y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
-            text=[
-                "Econ Money Structure",
-                "Flow of Money to Accts",
-                "Money starts as grants from Healer. Taxs are money coming back to healer.",
-            ],
-            mode="text",
+        m_y0 = 8
+        m_y1 = -7
+        add_grants_top(
+            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm
         )
-    )
+        col_y0 = 4
+        col_len = 11
+        add_taxs_column(fig, taxs1_dict(), -1, 8, sue_str(), mm, col_y0, col_len)
+        add_river_row(fig, rivercycle1_dict(), mm, 1, 9, 0, black_str())
 
-    return fig
+        ay0 = 3.88
+        ay1 = ay0 - 2.6
+        bob_src = 2
+        buz_src = 2.75
+        car_src = 3.25
+        ric_src = 4.75
+        sue_src = 5.5
+        xio_src = 6.7
+        yao_src = 7.3
+        zia_src = 8.5
+        bob_dst = 1.3
+        joc_dst = 2.5
+        luc_dst = 4.25
+        mar_dst = 4.75
+        sue_dst = 5.6
+        xio_dst = 6.7
+        yao_dst = 7.3
+        zia_dst = 8.5
+        add_rect_arrow(fig, bob_dst, ay1, bob_src, ay0, green_str(), 2)
+        add_rect_arrow(fig, luc_dst, ay1, bob_src, ay0, green_str(), 2)
+        add_rect_arrow(fig, sue_dst, ay1, bob_src, ay0, green_str(), 2)
+        add_rect_arrow(fig, joc_dst, ay1, buz_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, luc_dst, ay1, buz_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, joc_dst, ay1, car_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, mar_dst, ay1, car_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, luc_dst, ay1, car_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, luc_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, joc_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, yao_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, zia_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, luc_dst, ay1, xio_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, joc_dst, ay1, xio_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, xio_dst, ay1, yao_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, joc_dst, ay1, yao_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, xio_dst, ay1, zia_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, joc_dst, ay1, zia_src, ay0, green_str(), 1)
+        add_rect_arrow(fig, zia_src, ay1, zia_src, ay0, green_str(), 1)
 
-
-def get_money_structures5_fig() -> plotly_Figure:
-    fig = get_money_graphic_base_fig()
-
-    mm = default_money_magnitude()
-    sue1_p1 = f"Healer = {sue_str()} "
-    sue1_p2 = "Problem = problem1"
-    sue1_p3 = "Econ = project1"
-    sue1_p4 = f"Money = {mm} "
-
-    m_y0 = 8
-    add_grants_top(fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm)
-
-    tax_x0 = -1
-    col_y0 = 4
-    col_len = 10
-    add_taxs_column(fig, taxs1_dict(), tax_x0, 8, sue_str(), mm, col_y0, col_len)
-    cycle1_y0 = 2
-    ry1 = m_y0 - 4
-    y_mid = cycle1_y0 + (ry1 - cycle1_y0 + 1) / 2
-    add_rect_arrow(fig, 2, y_mid - 0.5, 2, y_mid + 0.5, green_str())
-    add_rect_arrow(fig, 5, y_mid - 0.5, 5, y_mid + 0.5, green_str())
-    add_rect_arrow(fig, 8, y_mid - 0.5, 8, y_mid + 0.5, green_str())
-    add_river_row(fig, rivercycle1_dict(), mm, 1, 9, cycle1_y0, black_str())
-    red_a1_x0 = cycle1_y0 + 0.5
-    add_rect_arrow(fig, tax_x0 + 1.1, red_a1_x0, tax_x0 + 2, red_a1_x0, red_str(), 3)
-    tax1_y0 = cycle1_y0 - 1
-    add_river_row(fig, rivercycle2_dict(), mm, 1, 4, tax1_y0, LightSeaGreen_str())
-
-    cycle2_y0 = cycle1_y0 - 3
-    add_river_row(fig, rivercycle3_dict(), mm, 1, 4, cycle2_y0, black_str())
-    a2y_mid = cycle2_y0 + (cycle1_y0 - cycle2_y0) / 2
-    add_rect_arrow(fig, 1.3, a2y_mid - 0.5, 1.3, a2y_mid + 0.5, green_str())
-    add_rect_arrow(fig, 2.5, a2y_mid - 0.5, 2.5, a2y_mid + 0.5, green_str())
-    add_rect_arrow(fig, 3.7, a2y_mid - 0.5, 3.7, a2y_mid + 0.5, green_str())
-    red_a2_y0 = cycle2_y0 + 0.5
-    taxy0 = cycle2_y0 - 1
-    add_rect_arrow(fig, tax_x0 + 1.1, red_a2_y0, tax_x0 + 2, red_a2_y0, red_str(), 3)
-    add_river_row(fig, rivercycle4_dict(), mm, 1, 2, taxy0, LightSeaGreen_str())
-
-    cycle3_y0 = cycle2_y0 - 3
-    add_river_row(fig, rivercycle4_dict(), mm, 1, 2, cycle3_y0, black_str())
-    a3y_mid = cycle3_y0 + (cycle2_y0 - cycle3_y0) / 2
-    add_rect_arrow(fig, 1.2, a3y_mid - 0.5, 1.2, a3y_mid + 0.5, green_str())
-    add_rect_arrow(fig, 1.8, a3y_mid - 0.5, 1.8, a3y_mid + 0.5, green_str())
-    red_a3_y0 = cycle3_y0 + 0.5
-    add_rect_arrow(fig, tax_x0 + 1.1, red_a3_y0, tax_x0 + 2, red_a3_y0, red_str(), 3)
-
-    m_y1 = -7
-    add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-    add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
-    # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
-    fig.update_yaxes(range=[-8, 10])
-    fig.update_xaxes(range=[-3, 10])
-    fig.add_trace(
-        plotly_Scatter(
-            x=[5.0, 5.0, 5.0],
-            y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
-            text=[
-                "Econ Money Structure",
-                "Flow of Money to Accts",
-                "Money starts as grants from Healer. Taxs are money coming back to healer.",
-            ],
-            mode="text",
+        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_econ__rect(fig, -1.9, m_y1, 0.3, m_y0, "", "", "", "")
+        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        fig.update_yaxes(range=[-8, 10])
+        fig.update_xaxes(range=[-3, 10])
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5.0, 5.0, 5.0],
+                y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
+                text=[
+                    "Econ Money Structure",
+                    "Flow of Money to Accts",
+                    "Money starts as grants from Healer. Taxs are money coming back to healer.",
+                ],
+                mode="text",
+            )
         )
-    )
+        conditional_fig_show(fig, graphics_bool)
 
-    return fig
+
+def get_money_structures3_fig(graphics_bool: bool) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_money_graphic_base_fig()
+
+        mm = default_money_magnitude()
+        sue1_p1 = f"Healer = {sue_str()} "
+        sue1_p2 = "Problem = problem1"
+        sue1_p3 = "Econ = project1"
+        sue1_p4 = f"Money = {mm} "
+
+        m_y0 = 8
+        m_y1 = -7
+        add_grants_top(
+            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm
+        )
+        col_y0 = 2
+        col_len = 9
+        add_taxs_column(fig, taxs1_dict(), -1, 8, sue_str(), mm, col_y0, col_len)
+        ry0 = 0
+        add_river_row(fig, rivercycle1_dict(), mm, 1, 9, ry0, black_str())
+
+        ry1 = m_y0 - 4
+        y_mid = ry0 + (ry1 - ry0 + 1) / 2
+        add_rect_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
+        add_rect_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
+        add_rect_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
+
+        cx_src = 0
+        cx0 = cx_src + 0.3
+        cx1 = cx0 + 1
+        joc_x2 = cx1 + 0.2
+        joc_y0 = 1.5
+        cy1 = -1
+        cy2 = -0.6
+        cy3 = 0
+        luc_y0 = 0
+        luc_x2 = 3.3
+        mar_y0 = -0.8
+        mar_x2 = 4.0
+        sue_y0 = -2.3
+        sue_x2 = 4.6
+        xio_y0 = -3.3
+        xio_x2 = 5.8
+        yao_y0 = -5
+        yao_x2 = 6.8
+        zia_y0 = -6.2
+        zia_x2 = 7.7
+        coor_dict = {
+            1: {"y0": joc_y0, "x2": joc_x2},
+            2: {"y0": luc_y0, "x2": luc_x2},
+            3: {"y0": mar_y0, "x2": mar_x2},
+            4: {"y0": sue_y0, "x2": sue_x2},
+            5: {"y0": xio_y0, "x2": xio_x2},
+            6: {"y0": yao_y0, "x2": yao_x2},
+            7: {"y0": zia_y0, "x2": zia_x2},
+        }
+
+        add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict)
+
+        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
+        fig.update_yaxes(range=[-8, 10])
+        fig.update_xaxes(range=[-3, 10])
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5.0, 5.0, 5.0],
+                y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
+                text=[
+                    "Econ Money Structure",
+                    "Flow of Money to Accts",
+                    "Money starts as grants from Healer. Taxs are money coming back to healer.",
+                ],
+                mode="text",
+            )
+        )
+        conditional_fig_show(fig, graphics_bool)
+
+
+def get_money_structures4_fig(graphics_bool: bool) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_money_graphic_base_fig()
+
+        mm = default_money_magnitude()
+        sue1_p1 = f"Healer = {sue_str()} "
+        sue1_p2 = "Problem = problem1"
+        sue1_p3 = "Econ = project1"
+        sue1_p4 = f"Money = {mm} "
+
+        m_y0 = 8
+        m_y1 = -7
+        add_grants_top(
+            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm
+        )
+        tax_x0 = -1
+        col_y0 = 2
+        col_len = 9
+        add_taxs_column(fig, taxs1_dict(), tax_x0, 8, sue_str(), mm, col_y0, col_len)
+        ry0 = 0
+        add_river_row(fig, rivercycle1_dict(), mm, 1, 9, ry0, black_str())
+        add_rect_arrow(
+            fig, tax_x0 + 1.1, ry0 + 0.5, tax_x0 + 2, ry0 + 0.5, red_str(), 5
+        )
+        add_river_row(fig, rivercycle2_dict(), mm, 1, 4, ry0 - 3, LightSeaGreen_str())
+
+        ry1 = m_y0 - 4
+        y_mid = ry0 + (ry1 - ry0 + 1) / 2
+        add_rect_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
+        add_rect_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
+        add_rect_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
+
+        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
+        fig.update_yaxes(range=[-8, 10])
+        fig.update_xaxes(range=[-3, 10])
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5.0, 5.0, 5.0],
+                y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
+                text=[
+                    "Econ Money Structure",
+                    "Flow of Money to Accts",
+                    "Money starts as grants from Healer. Taxs are money coming back to healer.",
+                ],
+                mode="text",
+            )
+        )
+        conditional_fig_show(fig, graphics_bool)
+
+
+def get_money_structures5_fig(graphics_bool: bool) -> plotly_Figure:
+    if graphics_bool:
+        fig = get_money_graphic_base_fig()
+
+        mm = default_money_magnitude()
+        sue1_p1 = f"Healer = {sue_str()} "
+        sue1_p2 = "Problem = problem1"
+        sue1_p3 = "Econ = project1"
+        sue1_p4 = f"Money = {mm} "
+
+        m_y0 = 8
+        add_grants_top(
+            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm
+        )
+
+        tax_x0 = -1
+        col_y0 = 4
+        col_len = 10
+        add_taxs_column(fig, taxs1_dict(), tax_x0, 8, sue_str(), mm, col_y0, col_len)
+        cycle1_y0 = 2
+        ry1 = m_y0 - 4
+        y_mid = cycle1_y0 + (ry1 - cycle1_y0 + 1) / 2
+        add_rect_arrow(fig, 2, y_mid - 0.5, 2, y_mid + 0.5, green_str())
+        add_rect_arrow(fig, 5, y_mid - 0.5, 5, y_mid + 0.5, green_str())
+        add_rect_arrow(fig, 8, y_mid - 0.5, 8, y_mid + 0.5, green_str())
+        add_river_row(fig, rivercycle1_dict(), mm, 1, 9, cycle1_y0, black_str())
+        red_a1_x0 = cycle1_y0 + 0.5
+        add_rect_arrow(
+            fig, tax_x0 + 1.1, red_a1_x0, tax_x0 + 2, red_a1_x0, red_str(), 3
+        )
+        tax1_y0 = cycle1_y0 - 1
+        add_river_row(fig, rivercycle2_dict(), mm, 1, 4, tax1_y0, LightSeaGreen_str())
+
+        cycle2_y0 = cycle1_y0 - 3
+        add_river_row(fig, rivercycle3_dict(), mm, 1, 4, cycle2_y0, black_str())
+        a2y_mid = cycle2_y0 + (cycle1_y0 - cycle2_y0) / 2
+        add_rect_arrow(fig, 1.3, a2y_mid - 0.5, 1.3, a2y_mid + 0.5, green_str())
+        add_rect_arrow(fig, 2.5, a2y_mid - 0.5, 2.5, a2y_mid + 0.5, green_str())
+        add_rect_arrow(fig, 3.7, a2y_mid - 0.5, 3.7, a2y_mid + 0.5, green_str())
+        red_a2_y0 = cycle2_y0 + 0.5
+        taxy0 = cycle2_y0 - 1
+        add_rect_arrow(
+            fig, tax_x0 + 1.1, red_a2_y0, tax_x0 + 2, red_a2_y0, red_str(), 3
+        )
+        add_river_row(fig, rivercycle4_dict(), mm, 1, 2, taxy0, LightSeaGreen_str())
+
+        cycle3_y0 = cycle2_y0 - 3
+        add_river_row(fig, rivercycle4_dict(), mm, 1, 2, cycle3_y0, black_str())
+        a3y_mid = cycle3_y0 + (cycle2_y0 - cycle3_y0) / 2
+        add_rect_arrow(fig, 1.2, a3y_mid - 0.5, 1.2, a3y_mid + 0.5, green_str())
+        add_rect_arrow(fig, 1.8, a3y_mid - 0.5, 1.8, a3y_mid + 0.5, green_str())
+        red_a3_y0 = cycle3_y0 + 0.5
+        add_rect_arrow(
+            fig, tax_x0 + 1.1, red_a3_y0, tax_x0 + 2, red_a3_y0, red_str(), 3
+        )
+
+        m_y1 = -7
+        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
+        fig.update_yaxes(range=[-8, 10])
+        fig.update_xaxes(range=[-3, 10])
+        fig.add_trace(
+            plotly_Scatter(
+                x=[5.0, 5.0, 5.0],
+                y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
+                text=[
+                    "Econ Money Structure",
+                    "Flow of Money to Accts",
+                    "Money starts as grants from Healer. Taxs are money coming back to healer.",
+                ],
+                mode="text",
+            )
+        )
+        conditional_fig_show(fig, graphics_bool)

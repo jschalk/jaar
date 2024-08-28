@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src.bud.reason_idea import (
     PremiseStatusFinder,
     premisestatusfinder_shop,
@@ -288,7 +289,6 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
-    print("return real fig")
     return fig
 
 
@@ -554,13 +554,13 @@ def test_PremiseStatusFinder_get_active_ReturnsCorrectObj(graphics_bool):
     assert caseb4_6.get_task_status() == sought_task
 
     # Bottom divisor line
-    _conditional_fig_show(fig, pd, linel, graph_b)
+    _add_last_trace_and_show(fig, pd, linel, graph_b)
 
 
-def _conditional_fig_show(fig: plotly_figure, pd, linel, graphics_bool: bool):
+def _add_last_trace_and_show(fig: plotly_figure, pd, linel, graphics_bool: bool):
     if graphics_bool:
         add_trace(fig, 0.0, pd, linel - 0.2, "Divisor Range", None)
-        fig.show()
+        conditional_fig_show(fig, graphics_bool)
 
 
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_01():

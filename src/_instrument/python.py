@@ -1,5 +1,6 @@
 from json import loads as json_loads, dumps as json_dumps
 from copy import deepcopy as copy_deepcopy
+from plotly.graph_objects import Figure as plotly_figure, Scatter as plotly_Scatter
 
 
 def get_empty_dict_if_none(x_dict: dict) -> dict:
@@ -111,3 +112,8 @@ def get_json_from_dict(dict_x: dict) -> str:
 
 def get_dict_from_json(x_json: str) -> dict[str,]:
     return json_loads(x_json)
+
+
+def conditional_fig_show(fig: plotly_figure, graphics_bool: bool):
+    if graphics_bool:
+        fig.show()

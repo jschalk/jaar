@@ -1,3 +1,4 @@
+from src._instrument.python import conditional_fig_show
 from src._road.finance import default_fund_pool
 from src.bud.graphic import display_ideatree
 from src.bud.bud import budunit_shop
@@ -633,7 +634,7 @@ def test_BudUnit_settle_bud_CorrectlySetsEmpty_sum_healerhold_share():
     assert sue_budunit._econ_dict == {}
 
 
-def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share():
+def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share(graphics_bool):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit("Sue")
@@ -695,14 +696,14 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share():
     print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
-    # display_ideatree(sue_bud, "Econ").show()
+    display_ideatree(sue_budunit, "Econ", graphics_bool)
     assert sue_budunit._sum_healerhold_share == 0
     assert oregon_idea._healerhold_ratio == 0
     assert mon_idea._healerhold_ratio == 0
     assert tue_idea._healerhold_ratio == 0
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
+def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit("Sue")
@@ -758,7 +759,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1():
     print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
-    # display_ideatree(sue_bud, "Econ").show()
+    display_ideatree(sue_budunit, "Econ", graphics_bool)
     assert len(sue_budunit._econ_dict) == 0
     assert sue_budunit._econ_dict == {}
 
