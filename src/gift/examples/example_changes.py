@@ -1,6 +1,7 @@
 from src.gift.atom_config import (
     atom_delete,
     atom_update,
+    budunit_text,
     bud_acctunit_text,
     acct_id_str,
 )
@@ -11,8 +12,7 @@ from src.gift.change import ChangeUnit, changeunit_shop
 def get_changeunit_sue_example() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
@@ -28,9 +28,8 @@ def get_changeunit_sue_example() -> ChangeUnit:
 def get_changeunit_example1() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
     tally_name = "tally"
-    x_atomunit = atomunit_shop(budunit_text, atom_update())
+    x_atomunit = atomunit_shop(budunit_text(), atom_update())
     x_atomunit.set_optional_arg(tally_name, 55)
     x_attribute = "max_tree_traverse"
     x_atomunit.set_optional_arg(x_attribute, 66)

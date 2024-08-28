@@ -186,7 +186,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_update(), "budunit"]
+    x_keylist = [atom_update(), budunit_text()]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("max_tree_traverse") == x_max_tree_traverse
     assert xio_atomunit.get_value("monetary_desc") == x_monetary_desc

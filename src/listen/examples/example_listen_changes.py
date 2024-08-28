@@ -30,8 +30,8 @@ def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
 def get_changeunit_sue_example() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    budunit_text = budunit_text()
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "_credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)
@@ -47,9 +47,9 @@ def get_changeunit_sue_example() -> ChangeUnit:
 def get_changeunit_example1() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
+    budunit_text = budunit_text()
     mass_name = "_mass"
-    x_atomunit = atomunit_shop(budunit_text, atom_update())
+    x_atomunit = atomunit_shop(budunit_text(), atom_update())
     x_atomunit.set_optional_arg(mass_name, 55)
     x_attribute = "_max_tree_traverse"
     x_atomunit.set_optional_arg(x_attribute, 66)
@@ -70,8 +70,8 @@ def get_changeunit_example1() -> ChangeUnit:
 def get_changeunit_example2() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
-    x_atomunit = atomunit_shop(budunit_text, atom_update())
+    budunit_text = budunit_text()
+    x_atomunit = atomunit_shop(budunit_text(), atom_update())
     x_attribute = "_credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 77)
 

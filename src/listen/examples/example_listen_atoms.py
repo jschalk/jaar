@@ -10,6 +10,7 @@ from src.gift.atom_config import (
     acct_id_str,
     parent_road_str,
     label_str,
+    budunit_text,
 )
 from src.gift.atom import atomunit_shop, AtomUnit
 from src.gift.change import changeunit_shop, ChangeUnit
@@ -81,8 +82,7 @@ def get_atom_example_factunit_knee(real_id: RealID = None) -> AtomUnit:
 def get_changeunit_sue_example() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 77)
     sue_changeunit.set_atomunit(pool_atomunit)

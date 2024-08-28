@@ -53,7 +53,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     sue_tally = 44
     before_sue_budunit = budunit_shop(sue_text, _tally=sue_tally)
 
-    category = "budunit"
+    category = budunit_text()
     x_atomunit = atomunit_shop(category, atom_update())
     new1_value = 55
     new1_arg = "tally"

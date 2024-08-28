@@ -30,7 +30,7 @@ def get_leg_obj(x_dict: dict, x_keylist) -> any:
 
 def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_change.atomunits
-    budunit_atom = get_leg_obj(atoms_dict, [atom_update(), "budunit"])
+    budunit_atom = get_leg_obj(atoms_dict, [atom_update(), budunit_text()])
 
     acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), bud_acctunit_text()])
     acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), bud_acctunit_text()])

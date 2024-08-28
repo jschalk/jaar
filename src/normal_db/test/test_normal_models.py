@@ -73,7 +73,7 @@ def print_out_expected_class_attribute_declarations(config_category):
 
 def test_normalized_table_BudTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("budunit")
+    config_category = get_normalized_bud_table_build().get(budunit_text())
     mapper = inspect(BudTable)
 
     # WHEN / THEN

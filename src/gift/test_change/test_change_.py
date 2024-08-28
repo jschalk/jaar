@@ -4,6 +4,7 @@ from src.gift.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
+    budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
     bud_idea_awardlink_text,
@@ -43,7 +44,7 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
     attribute_value = 55
-    category = "budunit"
+    category = budunit_text()
     opt1_arg = "tally"
     optional_args = {opt1_arg: attribute_value}
     required_args = {}
@@ -121,16 +122,15 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_text():
 def test_ChangeUnit_get_atom_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
-    budunit_text = "budunit"
     opt_arg1 = "tally"
     opt_value = 55
-    budunit_atomunit = atomunit_shop(budunit_text, atom_update())
+    budunit_atomunit = atomunit_shop(budunit_text(), atom_update())
     budunit_atomunit.set_optional_arg(x_key=opt_arg1, x_value=opt_value)
     ex1_changeunit.set_atomunit(budunit_atomunit)
 
     # WHEN
     gen_atomunit = ex1_changeunit.get_atomunit(
-        atom_update(), category=budunit_text, required_args=[]
+        atom_update(), category=budunit_text(), required_args=[]
     )
 
     # THEN
@@ -145,11 +145,10 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # WHEN
     op2_arg = "tally"
     op2_value = 55
-    budunit_text = "budunit"
     required_args = {}
     optional_args = {op2_arg: op2_value}
     ex1_changeunit.add_atomunit(
-        budunit_text,
+        budunit_text(),
         atom_update(),
         required_args,
         optional_args=optional_args,
@@ -158,9 +157,9 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # THEN
     assert len(ex1_changeunit.atomunits) == 1
     x_update_dict = ex1_changeunit.atomunits.get(atom_update())
-    x_atomunit = x_update_dict.get(budunit_text)
+    x_atomunit = x_update_dict.get(budunit_text())
     assert x_atomunit is not None
-    assert x_atomunit.category == budunit_text
+    assert x_atomunit.category == budunit_text()
 
 
 def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
@@ -233,7 +232,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
     # THEN
     assert len(sue_atoms_list) == 2
-    assert sue_atoms_list[0] == update_dict.get("budunit")
+    assert sue_atoms_list[0] == update_dict.get(budunit_text())
     z_atom = sue_atoms_list[1]
     print(f"{z_atom=}")
     print(delete_dict.get(bud_acctunit_text()).keys())
@@ -257,7 +256,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     opt2_value = 55
-#     category = "budunit"
+#     category = budunit_text()
 #     opt2_arg = "mass"
 #     mass_atomunit = atomunit_shop(category, atom_update())
 #     mass_atomunit.set_optional_arg(opt2_arg, opt2_value)
@@ -305,10 +304,9 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = get_changeunit_example1()
-    budunit_text = "budunit"
     update_dict = ex1_changeunit.atomunits.get(atom_update())
     assert len(update_dict.keys()) == 1
-    assert update_dict.get(budunit_text) is not None
+    assert update_dict.get(budunit_text()) is not None
     print(f"atom_order 28 {ex1_changeunit.atomunits.get(atom_update()).keys()=}")
     delete_dict = ex1_changeunit.atomunits.get(atom_delete())
     assert len(delete_dict.keys()) == 1
@@ -325,7 +323,7 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     # for atomunit in sue_atom_order_list:
     #     print(f"{atomunit.atom_order=}")
     assert sue_atom_order_list[0] == zia_acctunit_delete
-    assert sue_atom_order_list[1] == update_dict.get(budunit_text)
+    assert sue_atom_order_list[1] == update_dict.get(budunit_text())
     # for crud_text, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_text=}")
     #     print(f"{len(atom_list)=}")
@@ -406,8 +404,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     # ESTABLISH
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
-    x_atomunit = atomunit_shop(budunit_text, atom_update())
+    x_atomunit = atomunit_shop(budunit_text(), atom_update())
     x_attribute = "credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 100)
     sue_changeunit.set_atomunit(x_atomunit)
@@ -450,8 +447,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
 def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStartingNumber():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
@@ -490,8 +486,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStart
 def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
@@ -530,8 +525,7 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartin
 def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
@@ -570,8 +564,7 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumb
 def test_ChangeUnit_get_json_ReturnsCorrectObj():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
