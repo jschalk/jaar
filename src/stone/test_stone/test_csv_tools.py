@@ -1,9 +1,9 @@
+from src.gift.atom_config import acct_id_str
 from src.stone.csv_tool import (
     extract_csv_headers,
     get_csv_real_id_owner_id_metrics,
     create_filtered_csv_dict,
 )
-from src.stone.examples.stone_env import stone_env_setup_cleanup
 
 
 def test_extract_csv_headers_ReturnsEmptyObj():
@@ -31,13 +31,12 @@ music56,Sue,Yao,41,37
     # THEN
     real_id_text = "real_id"
     owner_id_text = "owner_id"
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
     assert x_headers == [
         real_id_text,
         owner_id_text,
-        acct_id_text,
+        acct_id_str(),
         credit_score_text,
         debtit_score_text,
     ]

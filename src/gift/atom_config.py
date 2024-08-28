@@ -119,6 +119,58 @@ def bud_idea_factunit_text() -> str:
     return "bud_idea_factunit"
 
 
+def real_id_str() -> str:
+    return "real_id"
+
+
+def owner_id_str() -> str:
+    return "owner_id"
+
+
+def acct_id_str() -> str:
+    return "acct_id"
+
+
+def group_id_str() -> str:
+    return "group_id"
+
+
+def acct_pool_str() -> str:
+    return "acct_pool"
+
+
+def debtit_score_str() -> str:
+    return "debtit_score"
+
+
+def credit_score_str() -> str:
+    return "credit_score"
+
+
+def debtit_vote_str() -> str:
+    return "debtit_vote"
+
+
+def credit_vote_str() -> str:
+    return "credit_vote"
+
+
+def parent_road_str() -> str:
+    return "parent_road"
+
+
+def label_str() -> str:
+    return "label"
+
+
+def mass_str() -> str:
+    return "mass"
+
+
+def pledge_str() -> str:
+    return "pledge"
+
+
 def get_atom_config_file_name() -> str:
     return "atom_config.json"
 
@@ -267,9 +319,8 @@ def get_atom_order(crud_text: str, category: str) -> int:
 
 
 def get_normal_table_name(category: str) -> str:
-    return get_nested_value(
-        get_atom_config_dict(), [category, "normal_specs", "normal_table_name"]
-    )
+    nested_list = [category, normal_specs_text(), normal_table_name_text()]
+    return get_nested_value(get_atom_config_dict(), nested_list)
 
 
 def set_mog(

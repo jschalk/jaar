@@ -1,4 +1,5 @@
 from src._instrument.python import conditional_fig_show
+from src.gift.atom_config import acct_id_str
 from src.real.real_report import (
     get_real_voices_accts_dataframe,
     get_real_voices_accts_plotly_fig,
@@ -29,7 +30,7 @@ def test_get_real_voices_accts_dataframe_ReturnsCorrectObj(
     # THEN
     acctunit_colums = {
         "owner_id",
-        "acct_id",
+        acct_id_str(),
         "credit_score",
         "debtit_score",
         "_memberships",
@@ -73,7 +74,7 @@ def test_get_real_actions_accts_dataframe_ReturnsCorrectObj(
     # THEN
     acctunit_colums = {
         "owner_id",
-        "acct_id",
+        acct_id_str(),
         "credit_score",
         "debtit_score",
         "_memberships",

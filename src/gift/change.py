@@ -25,6 +25,8 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_ideaunit_text,
     budunit_text,
+    acct_id_str,
+    group_id_str,
 )
 from src.gift.atom import (
     AtomUnit,
@@ -195,7 +197,7 @@ class ChangeUnit:
         for insert_acct_id in insert_acct_ids:
             insert_acctunit = after_bud.get_acct(insert_acct_id)
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
-            x_atomunit.set_required_arg("acct_id", insert_acctunit.acct_id)
+            x_atomunit.set_required_arg(acct_id_str(), insert_acctunit.acct_id)
             if insert_acctunit.credit_score is not None:
                 x_atomunit.set_optional_arg(
                     "credit_score", insert_acctunit.credit_score
@@ -221,7 +223,7 @@ class ChangeUnit:
                 bud_acctunit_text(), after_acctunit, before_acctunit
             ):
                 x_atomunit = atomunit_shop(bud_acctunit_text(), atom_update())
-                x_atomunit.set_required_arg("acct_id", after_acctunit.acct_id)
+                x_atomunit.set_required_arg(acct_id_str(), after_acctunit.acct_id)
                 if before_acctunit.credit_score != after_acctunit.credit_score:
                     x_atomunit.set_optional_arg(
                         "credit_score", after_acctunit.credit_score
@@ -238,7 +240,7 @@ class ChangeUnit:
     def add_atomunit_acctunit_deletes(self, before_bud: BudUnit, delete_acct_ids: set):
         for delete_acct_id in delete_acct_ids:
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_delete())
-            x_atomunit.set_required_arg("acct_id", delete_acct_id)
+            x_atomunit.set_required_arg(acct_id_str(), delete_acct_id)
             self.set_atomunit(x_atomunit)
             delete_acctunit = before_bud.get_acct(delete_acct_id)
             non_mirror_group_ids = {
@@ -296,8 +298,8 @@ class ChangeUnit:
         for insert_group_id in insert_membership_group_ids:
             after_membership = after_acctunit.get_membership(insert_group_id)
             x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
-            x_atomunit.set_required_arg("acct_id", after_acct_id)
-            x_atomunit.set_required_arg("group_id", after_membership.group_id)
+            x_atomunit.set_required_arg(acct_id_str(), after_acct_id)
+            x_atomunit.set_required_arg(group_id_str(), after_membership.group_id)
             if after_membership.credit_vote is not None:
                 x_atomunit.set_optional_arg("credit_vote", after_membership.credit_vote)
             if after_membership.debtit_vote is not None:
@@ -311,8 +313,8 @@ class ChangeUnit:
         after_membership: MemberShip,
     ):
         x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_update())
-        x_atomunit.set_required_arg("acct_id", acct_id)
-        x_atomunit.set_required_arg("group_id", after_membership.group_id)
+        x_atomunit.set_required_arg(acct_id_str(), acct_id)
+        x_atomunit.set_required_arg(group_id_str(), after_membership.group_id)
         if after_membership.credit_vote != before_membership.credit_vote:
             x_atomunit.set_optional_arg("credit_vote", after_membership.credit_vote)
         if after_membership.debtit_vote != before_membership.debtit_vote:
@@ -324,8 +326,8 @@ class ChangeUnit:
     ):
         for delete_group_id in before_group_ids:
             x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_delete())
-            x_atomunit.set_required_arg("acct_id", before_acct_id)
-            x_atomunit.set_required_arg("group_id", delete_group_id)
+            x_atomunit.set_required_arg(acct_id_str(), before_acct_id)
+            x_atomunit.set_required_arg(group_id_str(), delete_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunits_ideas(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -706,7 +708,7 @@ class ChangeUnit:
         for insert_grouphold_group_id in insert_grouphold_group_ids:
             x_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_insert())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("group_id", insert_grouphold_group_id)
+            x_atomunit.set_required_arg(group_id_str(), insert_grouphold_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_grouphold_deletes(
@@ -715,7 +717,7 @@ class ChangeUnit:
         for delete_grouphold_group_id in delete_grouphold_group_ids:
             x_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("group_id", delete_grouphold_group_id)
+            x_atomunit.set_required_arg(group_id_str(), delete_grouphold_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_inserts(
@@ -725,7 +727,7 @@ class ChangeUnit:
             after_awardlink = after_ideaunit._awardlinks.get(after_awardlink_group_id)
             x_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_insert())
             x_atomunit.set_required_arg("road", after_ideaunit.get_road())
-            x_atomunit.set_required_arg("group_id", after_awardlink.group_id)
+            x_atomunit.set_required_arg(group_id_str(), after_awardlink.group_id)
             x_atomunit.set_optional_arg("give_force", after_awardlink.give_force)
             x_atomunit.set_optional_arg("take_force", after_awardlink.take_force)
             self.set_atomunit(x_atomunit)
@@ -746,7 +748,7 @@ class ChangeUnit:
             ):
                 x_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_update())
                 x_atomunit.set_required_arg("road", before_ideaunit.get_road())
-                x_atomunit.set_required_arg("group_id", after_awardlink.group_id)
+                x_atomunit.set_required_arg(group_id_str(), after_awardlink.group_id)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_atomunit.set_optional_arg(
                         "give_force", after_awardlink.give_force
@@ -763,7 +765,7 @@ class ChangeUnit:
         for delete_awardlink_group_id in delete_awardlink_group_ids:
             x_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("group_id", delete_awardlink_group_id)
+            x_atomunit.set_required_arg(group_id_str(), delete_awardlink_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_factunit_inserts(

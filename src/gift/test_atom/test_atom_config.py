@@ -30,6 +30,8 @@ from src.gift.atom_config import (
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     get_sorted_required_arg_keys,
+    acct_id_str,
+    group_id_str,
 )
 
 
@@ -298,7 +300,7 @@ def test_get_sorted_required_arg_keys_ReturnsObj_bud_acctunit():
     x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
 
     # THEN
-    assert x_sorted_required_arg_keys == ["acct_id"]
+    assert x_sorted_required_arg_keys == [acct_id_str()]
 
 
 def test_get_sorted_required_arg_keys_ReturnsObj_bud_idea_reason_premiseunit():
@@ -424,11 +426,11 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     acctunit_columns = cat_acctunit.get(columns_text)
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
-    assert acctunit_columns.get("acct_id") is not None
+    assert acctunit_columns.get(acct_id_str()) is not None
     assert acctunit_columns.get("credit_score") is not None
     assert acctunit_columns.get("debtit_score") is not None
 
-    acct_id_dict = acctunit_columns.get("acct_id")
+    acct_id_dict = acctunit_columns.get(acct_id_str())
     assert len(acct_id_dict) == 2
     assert acct_id_dict.get(sqlite_datatype_text()) == "TEXT"
     assert acct_id_dict.get("nullable") is False

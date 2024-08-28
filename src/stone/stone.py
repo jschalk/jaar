@@ -14,6 +14,19 @@ from src.gift.atom_config import (
     bud_idea_grouphold_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    real_id_str,
+    owner_id_str,
+    acct_id_str,
+    group_id_str,
+    acct_pool_str,
+    debtit_score_str,
+    credit_score_str,
+    debtit_vote_str,
+    credit_vote_str,
+    parent_road_str,
+    label_str,
+    mass_str,
+    pledge_str,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
@@ -23,62 +36,6 @@ from src.stone.examples.stone_env import src_stone_dir
 from pandas import DataFrame, read_csv
 import csv
 from dataclasses import dataclass
-
-
-def real_id_str() -> str:
-    return "real_id"
-
-
-def owner_id_str() -> str:
-    return "owner_id"
-
-
-def acct_id_str() -> str:
-    return "acct_id"
-
-
-def group_id_str() -> str:
-    return "group_id"
-
-
-def acct_pool_str() -> str:
-    return "acct_pool"
-
-
-def debtit_score_str() -> str:
-    return "debtit_score"
-
-
-def credit_score_str() -> str:
-    return "credit_score"
-
-
-def debtit_vote_str() -> str:
-    return "debtit_vote"
-
-
-def credit_vote_str() -> str:
-    return "credit_vote"
-
-
-def road_str() -> str:
-    return "road"
-
-
-def parent_road_str() -> str:
-    return "parent_road"
-
-
-def label_str() -> str:
-    return "label"
-
-
-def mass_str() -> str:
-    return "mass"
-
-
-def pledge_str() -> str:
-    return "pledge"
 
 
 def column_order_str() -> str:
@@ -256,7 +213,6 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     x_stone.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
     x_stone.reset_index(inplace=True)
     x_stone.drop(columns=["index"], inplace=True)
-
     return x_stone
 
 
@@ -289,12 +245,6 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
             x_changeunit.set_atomunit(x_atomunit)
         elif x_stonename == jaar_format_00003_ideaunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
-            # "real_id": "column_order": 0
-            # "owner_id": "column_order": 1
-            # "pledge": "column_order": 2
-            # "parent_road":  "column_order": 3,
-            # "mass":  "column_order": 4
-            # "label":  "column_order": 5,
             pledge_bool = False
             if row[2] == "Yes":
                 pledge_bool = True

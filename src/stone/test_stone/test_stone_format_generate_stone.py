@@ -19,7 +19,6 @@ from src.stone.stone import (
     owner_id_str,
     acct_id_str,
     group_id_str,
-    road_str,
     parent_road_str,
     label_str,
     mass_str,

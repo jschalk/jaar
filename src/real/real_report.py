@@ -1,3 +1,4 @@
+from src.gift.atom_config import acct_id_str
 from src.bud.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
@@ -24,7 +25,7 @@ def get_real_voices_accts_dataframe(x_real: RealUnit) -> DataFrame:
 def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "acct_id",
+        acct_id_str(),
         "credit_score",
         "debtit_score",
         "_fund_give",
@@ -80,7 +81,7 @@ def get_real_actions_accts_dataframe(x_real: RealUnit) -> DataFrame:
 def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
-        "acct_id",
+        acct_id_str(),
         "credit_score",
         "debtit_score",
         "_fund_give",

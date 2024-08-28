@@ -34,7 +34,7 @@ def get_changeunit_sue_example() -> ChangeUnit:
     category = bud_acctunit_text()
     sue_text = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
-    sue_atomunit.set_required_arg("acct_id", sue_text)
+    sue_atomunit.set_required_arg(acct_id_str(), sue_text)
     sue_changeunit.set_atomunit(sue_atomunit)
     return sue_changeunit
 
@@ -57,7 +57,7 @@ def get_changeunit_example1() -> ChangeUnit:
     category = bud_acctunit_text()
     sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("acct_id", sue_text)
+    x_atomunit.set_required_arg(acct_id_str(), sue_text)
     sue_changeunit.set_atomunit(x_atomunit)
     return sue_changeunit
 
@@ -73,6 +73,6 @@ def get_changeunit_example2() -> ChangeUnit:
     category = bud_acctunit_text()
     sue_text = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("acct_id", sue_text)
+    x_atomunit.set_required_arg(acct_id_str(), sue_text)
     sue_changeunit.set_atomunit(x_atomunit)
     return sue_changeunit

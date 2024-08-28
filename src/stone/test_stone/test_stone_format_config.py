@@ -90,7 +90,7 @@ def test_get_headers_list_ReturnsObj():
     assert format_00001_headers == [
         "real_id",
         "owner_id",
-        "acct_id",
+        acct_id_str(),
         "credit_score",
         "debtit_score",
     ]

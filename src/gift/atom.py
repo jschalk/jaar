@@ -36,6 +36,8 @@ from src.gift.atom_config import (
     bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    acct_id_str,
+    group_id_str,
 )
 from dataclasses import dataclass
 
@@ -210,14 +212,14 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
-    x_group_id = x_atom.get_value("group_id")
+    x_acct_id = x_atom.get_value(acct_id_str())
+    x_group_id = x_atom.get_value(group_id_str())
     x_bud.get_acct(x_acct_id).delete_membership(x_group_id)
 
 
 def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
-    x_group_id = x_atom.get_value("group_id")
+    x_acct_id = x_atom.get_value(acct_id_str())
+    x_group_id = x_atom.get_value(group_id_str())
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_membership = x_acctunit.get_membership(x_group_id)
     x_credit_vote = x_atom.get_value("credit_vote")
@@ -227,8 +229,8 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
-    x_group_id = x_atom.get_value("group_id")
+    x_acct_id = x_atom.get_value(acct_id_str())
+    x_group_id = x_atom.get_value(group_id_str())
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
     x_acctunit = x_bud.get_acct(x_acct_id)
@@ -284,13 +286,13 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value("group_id"),
+        awardlink_del=x_atom.get_value(group_id_str()),
     )
 
 
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_awardlink = x_idea._awardlinks.get(x_atom.get_value("group_id"))
+    x_awardlink = x_idea._awardlinks.get(x_atom.get_value(group_id_str()))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -302,7 +304,7 @@ def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        group_id=x_atom.get_value("group_id"),
+        group_id=x_atom.get_value(group_id_str()),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -394,12 +396,12 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_idea_grouphold_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.del_grouphold(group_id=x_atom.get_value("group_id"))
+    x_ideaunit._doerunit.del_grouphold(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_grouphold_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value("group_id"))
+    x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_range_push_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -413,12 +415,12 @@ def _modify_bud_idea_range_push_insert(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_bud.del_acctunit(x_atom.get_value("acct_id"))
+    x_bud.del_acctunit(x_atom.get_value(acct_id_str()))
 
 
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
-        acct_id=x_atom.get_value("acct_id"),
+        acct_id=x_atom.get_value(acct_id_str()),
         credit_score=x_atom.get_value("credit_score"),
         debtit_score=x_atom.get_value("debtit_score"),
     )
@@ -427,7 +429,7 @@ def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
-            acct_id=x_atom.get_value("acct_id"),
+            acct_id=x_atom.get_value(acct_id_str()),
             credit_score=x_atom.get_value("credit_score"),
             debtit_score=x_atom.get_value("debtit_score"),
         )
