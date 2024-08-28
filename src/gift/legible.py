@@ -18,6 +18,7 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
+    parent_road_str,
 )
 from src.gift.change import ChangeUnit
 
@@ -347,7 +348,6 @@ def add_bud_ideaunit_insert_to_legible_list(
     legible_list: list[str], ideaunit_insert_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
-    parent_road_text = "parent_road"
     _addin_text = "addin"
     _begin_text = "begin"
     _close_text = "close"
@@ -360,7 +360,7 @@ def add_bud_ideaunit_insert_to_legible_list(
     for parent_road_dict in ideaunit_insert_dict.values():
         for ideaunit_atom in parent_road_dict.values():
             label_value = ideaunit_atom.get_value(label_text)
-            parent_road_value = ideaunit_atom.get_value(parent_road_text)
+            parent_road_value = ideaunit_atom.get_value(parent_road_str())
             _addin_value = ideaunit_atom.get_value(_addin_text)
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
@@ -399,7 +399,6 @@ def add_bud_ideaunit_update_to_legible_list(
     legible_list: list[str], ideaunit_update_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
-    parent_road_text = "parent_road"
     _addin_text = "addin"
     _begin_text = "begin"
     _close_text = "close"
@@ -412,7 +411,7 @@ def add_bud_ideaunit_update_to_legible_list(
     for parent_road_dict in ideaunit_update_dict.values():
         for ideaunit_atom in parent_road_dict.values():
             label_value = ideaunit_atom.get_value(label_text)
-            parent_road_value = ideaunit_atom.get_value(parent_road_text)
+            parent_road_value = ideaunit_atom.get_value(parent_road_str())
             _addin_value = ideaunit_atom.get_value(_addin_text)
             _begin_value = ideaunit_atom.get_value(_begin_text)
             _close_value = ideaunit_atom.get_value(_close_text)
@@ -449,11 +448,10 @@ def add_bud_ideaunit_delete_to_legible_list(
     legible_list: list[str], ideaunit_delete_dict: dict, x_bud: BudUnit
 ):
     label_text = "label"
-    parent_road_text = "parent_road"
     for parent_road_dict in ideaunit_delete_dict.values():
         for ideaunit_atom in parent_road_dict.values():
             label_value = ideaunit_atom.get_value(label_text)
-            parent_road_value = ideaunit_atom.get_value(parent_road_text)
+            parent_road_value = ideaunit_atom.get_value(parent_road_str())
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} was deleted."
             legible_list.append(x_str)
 

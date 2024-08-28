@@ -1,5 +1,11 @@
 from src._road.jaar_config import get_real_id_if_None
 from src._road.road import RealID
+from src.gift.atom_config import (
+    acct_id_str,
+    parent_road_str,
+    bud_acctunit_text,
+    bud_ideaunit_text,
+)
 from src.gift.atom import (
     AtomUnit,
     atom_delete,
@@ -15,10 +21,9 @@ def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     sports_text = "sports"
     x_category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_ideaunit_atomunit.set_required_arg(label_text, sports_text)
-    insert_ideaunit_atomunit.set_required_arg(parent_road_text, real_id)
+    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), real_id)
     return insert_ideaunit_atomunit
 
 

@@ -10,6 +10,7 @@ from src.gift.atom_config import (
     bud_ideaunit_text,
     acct_id_str,
     group_id_str,
+    parent_road_str,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import ChangeUnit, changeunit_shop, bud_built_from_change_is_valid
@@ -339,13 +340,12 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_IdeaUnitsSorted():
     knee_text = "knee"
     x_category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     sports_insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     sports_insert_ideaunit_atomunit.set_required_arg(label_text, sports_text)
-    sports_insert_ideaunit_atomunit.set_required_arg(parent_road_text, x_real_id)
+    sports_insert_ideaunit_atomunit.set_required_arg(parent_road_str(), x_real_id)
     knee_insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     knee_insert_ideaunit_atomunit.set_required_arg(label_text, knee_text)
-    knee_insert_ideaunit_atomunit.set_required_arg(parent_road_text, sports_road)
+    knee_insert_ideaunit_atomunit.set_required_arg(parent_road_str(), sports_road)
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(knee_insert_ideaunit_atomunit)
     x_changeunit.set_atomunit(sports_insert_ideaunit_atomunit)

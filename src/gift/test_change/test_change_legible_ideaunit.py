@@ -3,6 +3,7 @@ from src.gift.atom_config import (
     atom_insert,
     atom_delete,
     bud_ideaunit_text,
+    parent_road_str,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
@@ -15,7 +16,6 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     sue_bud = budunit_shop("Sue")
     category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     _addin_text = "addin"
     _begin_text = "begin"
     _close_text = "close"
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     pledge_value = False
     clean_atomunit = atomunit_shop(category, atom_insert())
     clean_atomunit.set_arg(label_text, label_value)
-    clean_atomunit.set_arg(parent_road_text, parent_road_value)
+    clean_atomunit.set_arg(parent_road_str(), parent_road_value)
     clean_atomunit.set_arg(_addin_text, _addin_value)
     clean_atomunit.set_arg(_begin_text, _begin_value)
     clean_atomunit.set_arg(_close_text, _close_value)
@@ -66,7 +66,6 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     sue_bud = budunit_shop("Sue")
     category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     _addin_text = "addin"
     _begin_text = "begin"
     _close_text = "close"
@@ -89,7 +88,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     pledge_value = False
     clean_atomunit = atomunit_shop(category, atom_update())
     clean_atomunit.set_arg(label_text, label_value)
-    clean_atomunit.set_arg(parent_road_text, parent_road_value)
+    clean_atomunit.set_arg(parent_road_str(), parent_road_value)
     clean_atomunit.set_arg(_addin_text, _addin_value)
     clean_atomunit.set_arg(_begin_text, _begin_value)
     clean_atomunit.set_arg(_close_text, _close_value)
@@ -117,12 +116,11 @@ def test_create_legible_list_ReturnsObj_ideaunit_DELETE():
     sue_bud = budunit_shop("Sue")
     category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
     clean_atomunit = atomunit_shop(category, atom_delete())
     clean_atomunit.set_arg(label_text, label_value)
-    clean_atomunit.set_arg(parent_road_text, parent_road_value)
+    clean_atomunit.set_arg(parent_road_str(), parent_road_value)
 
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(clean_atomunit)

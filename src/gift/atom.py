@@ -38,6 +38,7 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
+    parent_road_str,
 )
 from dataclasses import dataclass
 
@@ -239,7 +240,7 @@ def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
-        x_atom.get_value("parent_road"),
+        x_atom.get_value(parent_road_str()),
         x_atom.get_value("label"),
         delimiter=x_bud._road_delimiter,
     )
@@ -248,7 +249,7 @@ def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
-        x_atom.get_value("parent_road"),
+        x_atom.get_value(parent_road_str()),
         x_atom.get_value("label"),
         delimiter=x_bud._road_delimiter,
     )
@@ -276,7 +277,7 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
             _numor=x_atom.get_value("numor"),
             pledge=x_atom.get_value("pledge"),
         ),
-        parent_road=x_atom.get_value("parent_road"),
+        parent_road=x_atom.get_value(parent_road_str()),
         create_missing_ideas=False,
         filter_out_missing_awardlinks_group_ids=False,
         create_missing_ancestors=False,

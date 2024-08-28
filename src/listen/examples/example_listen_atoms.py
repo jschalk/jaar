@@ -7,6 +7,8 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     bud_ideaunit_text,
     bud_acctunit_text,
+    acct_id_str,
+    parent_road_str,
 )
 from src.gift.atom import atomunit_shop, AtomUnit
 from src.gift.change import changeunit_shop, ChangeUnit
@@ -17,10 +19,9 @@ def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:
     sports_text = "sports"
     x_category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_ideaunit_atomunit.set_required_arg(label_text, sports_text)
-    insert_ideaunit_atomunit.set_required_arg(parent_road_text, real_id)
+    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), real_id)
     return insert_ideaunit_atomunit
 
 
@@ -31,10 +32,9 @@ def get_atom_example_ideaunit_ball(real_id: RealID = None) -> AtomUnit:
     ball_text = "basketball"
     x_category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_ideaunit_atomunit.set_required_arg(label_text, ball_text)
-    insert_ideaunit_atomunit.set_required_arg(parent_road_text, sports_road)
+    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), sports_road)
     return insert_ideaunit_atomunit
 
 
@@ -47,12 +47,11 @@ def get_atom_example_ideaunit_knee(real_id: RealID = None) -> AtomUnit:
     knee_close = 71
     x_category = bud_ideaunit_text()
     label_text = "label"
-    parent_road_text = "parent_road"
     begin_text = "begin"
     close_text = "close"
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_ideaunit_atomunit.set_required_arg(label_text, knee_text)
-    insert_ideaunit_atomunit.set_required_arg(parent_road_text, sports_road)
+    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), sports_road)
     insert_ideaunit_atomunit.set_optional_arg(begin_text, knee_begin)
     insert_ideaunit_atomunit.set_optional_arg(close_text, knee_close)
     return insert_ideaunit_atomunit
