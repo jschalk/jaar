@@ -1,4 +1,4 @@
-from src._instrument.python import get_empty_set_if_none
+from src._instrument.python_tool import get_empty_set_if_none
 from src.bud.group import GroupBox, GroupID
 from src.bud.acct import AcctID
 from dataclasses import dataclass

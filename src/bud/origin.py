@@ -1,6 +1,6 @@
 from contextlib import suppress as contextlib_suppress
 from src.bud.acct import AcctID
-from src._instrument.python import get_empty_dict_if_none
+from src._instrument.python_tool import get_empty_dict_if_none
 from dataclasses import dataclass
 
 

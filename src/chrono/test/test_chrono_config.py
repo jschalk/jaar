@@ -1,5 +1,5 @@
 from src._instrument.file import save_file
-from src._instrument.python import get_json_from_dict
+from src._instrument.python_tool import get_json_from_dict
 from src.chrono.examples.chrono_examples import (
     get_creg_config,
     get_squirt_config,

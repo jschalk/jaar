@@ -1,4 +1,4 @@
-from src._instrument.python import (
+from src._instrument.python_tool import (
     get_json_from_dict,
     get_dict_from_json,
     get_1_if_None,

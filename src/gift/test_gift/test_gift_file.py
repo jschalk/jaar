@@ -1,5 +1,5 @@
 from src._instrument.file import open_file, create_file_path as f_path
-from src._instrument.python import get_dict_from_json
+from src._instrument.python_tool import get_dict_from_json
 from src._road.jaar_config import get_gifts_folder, get_test_real_id as real_id
 from src.gift.change import changeunit_shop
 from src.gift.gift import giftunit_shop, create_giftunit_from_files

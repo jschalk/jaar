@@ -20,7 +20,7 @@ from src.gift.atom import atomunit_shop
 from src.gift.change import ChangeUnit, changeunit_shop, bud_built_from_change_is_valid
 from src.bud.bud import budunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
-from src._instrument.python import x_is_json
+from src._instrument.python_tool import x_is_json
 from pytest import raises as pytest_raises
 
 

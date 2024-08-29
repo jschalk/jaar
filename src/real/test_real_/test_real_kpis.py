@@ -1,4 +1,4 @@
-from src._instrument.python import conditional_fig_show
+from src._instrument.python_tool import conditional_fig_show
 from src.gift.atom_config import acct_id_str
 from src.real.real_report import (
     get_real_voices_accts_dataframe,

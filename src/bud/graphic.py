@@ -1,4 +1,4 @@
-from src._instrument.python import conditional_fig_show
+from src._instrument.python_tool import conditional_fig_show
 from src._road.road import get_parent_road, RoadUnit, is_sub_road
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit

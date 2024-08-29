@@ -1,4 +1,4 @@
-from src._instrument.python import get_empty_dict_if_none
+from src._instrument.python_tool import get_empty_dict_if_none
 from src._road.jaar_config import get_real_id_if_None
 from src._road.road import RealID, AcctID, default_road_delimiter_if_none
 from src.gift.atom_config import acct_id_str
