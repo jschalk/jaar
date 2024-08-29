@@ -103,7 +103,6 @@ def test_save_stone_csv_Arg_stone_format_00001_acct_v0_0_0_SaveToCSV(
     acct_filename = f"{sue_text}_acct_example_02.csv"
     csv_example_path = f_path(stone_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
-    delete_dir(csv_example_path)
     save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
     music_hubunit = hubunit_shop(stone_reals_dir(), music_real_id, owner_id=sue_text)
     # Open RealUnit and confirm voice BudUnit does not exist

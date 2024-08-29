@@ -237,13 +237,13 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00019_ideaunit_v0_0_0():
 
     assert real_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
-    assert parent_road_stonecolumn.column_order == 10
-    assert label_stonecolumn.column_order == 11
-    assert begin_stonecolumn.column_order == 2
-    assert close_stonecolumn.column_order == 3
-    assert addin_stonecolumn.column_order == 4
-    assert numor_stonecolumn.column_order == 5
-    assert denom_stonecolumn.column_order == 6
-    assert morph_stonecolumn.column_order == 7
-    assert gogo_want_stonecolumn.column_order == 8
-    assert stop_want_stonecolumn.column_order == 9
+    assert parent_road_stonecolumn.column_order == 2
+    assert label_stonecolumn.column_order == 3
+    assert begin_stonecolumn.column_order == 4
+    assert close_stonecolumn.column_order == 5
+    assert addin_stonecolumn.column_order == 6
+    assert numor_stonecolumn.column_order == 7
+    assert denom_stonecolumn.column_order == 8
+    assert morph_stonecolumn.column_order == 9
+    assert gogo_want_stonecolumn.column_order == 10
+    assert stop_want_stonecolumn.column_order == 11

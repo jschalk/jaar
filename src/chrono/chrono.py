@@ -227,7 +227,8 @@ def add_stan_ideaunits(
     yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
 
-    x_budunit.set_l1_idea(ideaunit_shop(time_str()))
+    if not x_budunit.idea_exists(time_road):
+        x_budunit.set_l1_idea(ideaunit_shop(time_str()))
     timeline_ideaunit = new_timeline_ideaunit(timeline_text, timeline_c400_count)
     x_budunit.set_idea(timeline_ideaunit, time_road)
     x_budunit.set_idea(stan_c400_leap_ideaunit(), new_road)

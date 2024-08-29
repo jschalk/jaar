@@ -5,6 +5,7 @@ from src.chrono.examples.chrono_examples import (
     get_squirt_config,
     chrono_examples_dir,
     get_example_timeline_config,
+    cinco_str,
 )
 from src.chrono.chrono import (
     C400Constants,
@@ -148,7 +149,6 @@ def test_is_timeline_config_valid_ReturnsObj_CheckElementsRepeat():
 
 def test_create_timeline_config_ReturnsObj():
     # ESTABLISH
-    cinco_text = "cinco"
     cinco_c400_count = 25
     cinco_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
     cinco_hour_length = 60
@@ -180,7 +180,7 @@ def test_create_timeline_config_ReturnsObj():
 
     # WHEN
     cinco_dict = create_timeline_config(
-        timeline_label=cinco_text,
+        timeline_label=cinco_str(),
         c400_count=cinco_c400_count,
         hour_length=cinco_hour_length,
         month_length=cinco_month_length,
@@ -191,7 +191,7 @@ def test_create_timeline_config_ReturnsObj():
 
     # THEN
     assert validate_timeline_config(cinco_dict)
-    assert cinco_dict.get(timeline_label_text()) == cinco_text
+    assert cinco_dict.get(timeline_label_text()) == cinco_str()
     assert cinco_dict.get(c400_config_text()) == cinco_c400_count
     assert cinco_dict.get(weekdays_config_text()) == cinco_weekday_list
     x_months_config = cinco_dict.get(months_config_text())
@@ -211,8 +211,8 @@ def test_create_timeline_config_ReturnsObj():
     assert x_hours_config[4] == ["4hr", 300]
     assert cinco_dict.get(yr1_jan1_offset_text()) == cinco_yr1_jan1_offset
 
-    cinco_file_name = f"timeline_config_{cinco_text}.json"
+    cinco_file_name = f"timeline_config_{cinco_str()}.json"
     cinco_file_text = get_json_from_dict(cinco_dict)
     save_file(chrono_examples_dir(), cinco_file_name, cinco_file_text)
-    x_cinco_config = get_example_timeline_config(cinco_text)
+    x_cinco_config = get_example_timeline_config(cinco_str())
     assert validate_timeline_config(x_cinco_config)

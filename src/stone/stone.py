@@ -33,6 +33,14 @@ from src.gift.atom_config import (
     label_str,
     mass_str,
     pledge_str,
+    begin_str,
+    close_str,
+    addin_str,
+    numor_str,
+    denom_str,
+    morph_str,
+    gogo_want_str,
+    stop_want_str,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
@@ -217,8 +225,30 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
                     x_atomunit.get_value(label_str()),
                 ]
             )
+    elif stone_name == stone_format_00019_ideaunit_v0_0_0():
+        for x_atomunit in sorted_atomunits:
+            d2_list.append(
+                [
+                    x_budunit._real_id,
+                    x_budunit._owner_id,
+                    x_atomunit.get_value(parent_road_str()),
+                    x_atomunit.get_value(label_str()),
+                    x_atomunit.get_value(begin_str()),
+                    x_atomunit.get_value(close_str()),
+                    x_atomunit.get_value(addin_str()),
+                    x_atomunit.get_value(numor_str()),
+                    x_atomunit.get_value(denom_str()),
+                    x_atomunit.get_value(morph_str()),
+                    x_atomunit.get_value(gogo_want_str()),
+                    x_atomunit.get_value(stop_want_str()),
+                ]
+            )
 
     x_stone = _generate_stone_dataframe(d2_list, stone_name)
+    return _sort_dataframe(x_stone, sorting_columns)
+
+
+def _sort_dataframe(x_stone: DataFrame, sorting_columns: list[str]) -> DataFrame:
     ascending_bools = get_ascending_bools(sorting_columns)
     x_stone.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
     x_stone.reset_index(inplace=True)

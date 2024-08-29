@@ -1,4 +1,4 @@
-from src._instrument.file import delete_dir, open_file, create_file_path
+from src._instrument.file import open_file, create_file_path
 from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop

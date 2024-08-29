@@ -1,5 +1,6 @@
 from src._instrument.file import delete_dir
 from pytest import fixture as pytest_fixture
+from os import makedirs as os_makedirs
 
 
 def src_stone_dir() -> str:
@@ -21,6 +22,7 @@ def stone_reals_dir() -> str:
 @pytest_fixture()
 def stone_env_setup_cleanup():
     env_dir = stone_reals_dir()
-    delete_dir(dir=env_dir)
+    delete_dir(env_dir)
+    os_makedirs(env_dir)
     yield env_dir
-    delete_dir(dir=env_dir)
+    delete_dir(env_dir)
