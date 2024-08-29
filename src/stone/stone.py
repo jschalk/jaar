@@ -8,7 +8,7 @@ from src._instrument.python_tool import (
 from src._road.road import RealID, OwnerID
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop
+from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop, AtomUnit
 from src.gift.atom_config import (
     budunit_text,
     bud_acctunit_text,
@@ -178,70 +178,44 @@ def _generate_stone_dataframe(d2_list: list[list[str]], stone_name: str) -> Data
 def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_budunit)
+    x_real_id = x_budunit._real_id
+    x_owner_id = x_budunit._owner_id
     x_stoneref = get_stoneref(stone_name)
-    category_set = {x_stoneref.atom_category}
-    curd_set = {atom_insert()}
-    filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
-
-    sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
-    d2_list = []
-    if stone_name == stone_format_00001_acct_v0_0_0():
-        d2_list = [
-            [
-                x_budunit._real_id,
-                x_budunit._owner_id,
-                x_atomunit.get_value(acct_id_str()),
-                x_atomunit.get_value(credit_score_str()),
-                x_atomunit.get_value(debtit_score_str()),
-            ]
-            for x_atomunit in sorted_atomunits
-        ]
-    elif stone_name == stone_format_00002_membership_v0_0_0():
-        d2_list = [
-            [
-                x_budunit._real_id,
-                x_budunit._owner_id,
-                x_atomunit.get_value(acct_id_str()),
-                x_atomunit.get_value(group_id_str()),
-                x_atomunit.get_value(credit_vote_str()),
-                x_atomunit.get_value(debtit_vote_str()),
-            ]
-            for x_atomunit in sorted_atomunits
-        ]
-    elif stone_name == stone_format_00003_ideaunit_v0_0_0():
-        for x_atomunit in sorted_atomunits:
-            d2_list.append(
-                [
-                    x_budunit._real_id,
-                    x_budunit._owner_id,
-                    x_atomunit.get_value(pledge_str()),
-                    x_atomunit.get_value(parent_road_str()),
-                    x_atomunit.get_value(mass_str()),
-                    x_atomunit.get_value(label_str()),
-                ]
-            )
-    elif stone_name == stone_format_00019_ideaunit_v0_0_0():
-        for x_atomunit in sorted_atomunits:
-            d2_list.append(
-                [
-                    x_budunit._real_id,
-                    x_budunit._owner_id,
-                    x_atomunit.get_value(parent_road_str()),
-                    x_atomunit.get_value(label_str()),
-                    x_atomunit.get_value(begin_str()),
-                    x_atomunit.get_value(close_str()),
-                    x_atomunit.get_value(addin_str()),
-                    x_atomunit.get_value(numor_str()),
-                    x_atomunit.get_value(denom_str()),
-                    x_atomunit.get_value(morph_str()),
-                    x_atomunit.get_value(gogo_want_str()),
-                    x_atomunit.get_value(stop_want_str()),
-                ]
-            )
+    sorted_atomunits = _get_sorted_atom_insert_atomunits(x_changeunit, x_stoneref)
+    d2_list = _create_d2_list(sorted_atomunits, x_stoneref, x_real_id, x_owner_id)
     d2_list = _change_all_pledge_values(d2_list, x_stoneref)
     x_stone = _generate_stone_dataframe(d2_list, stone_name)
     sorting_columns = x_stoneref.get_headers_list()
     return _sort_dataframe(x_stone, sorting_columns)
+
+
+def _get_sorted_atom_insert_atomunits(
+    x_changeunit: ChangeUnit, x_stoneref: StoneRef
+) -> list[AtomUnit]:
+    category_set = {x_stoneref.atom_category}
+    curd_set = {atom_insert()}
+    filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
+    return filtered_change.get_category_sorted_atomunits_list()
+
+
+def _create_d2_list(
+    sorted_atomunits: list[AtomUnit],
+    x_stoneref: StoneRef,
+    x_real_id: RealID,
+    x_owner_id: OwnerID,
+):
+    d2_list = []
+    for x_atomunit in sorted_atomunits:
+        d1_list = []
+        for x_stonecolumn in x_stoneref.get_headers_list():
+            if x_stonecolumn == real_id_str():
+                d1_list.append(x_real_id)
+            elif x_stonecolumn == owner_id_str():
+                d1_list.append(x_owner_id)
+            else:
+                d1_list.append(x_atomunit.get_value(x_stonecolumn))
+        d2_list.append(d1_list)
+    return d2_list
 
 
 def _change_all_pledge_values(d2_list: list[list], x_stoneref: StoneRef) -> list[list]:
