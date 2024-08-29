@@ -67,6 +67,10 @@ def optional_args_text() -> str:
     return "optional_args"
 
 
+def column_order_str() -> str:
+    return "column_order"
+
+
 def category_text() -> str:
     return "category"
 

@@ -18,6 +18,7 @@ from src.gift.atom_config import (
     sqlite_datatype_text,
     python_type_text,
     nesting_order_str,
+    column_order_str,
     budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -90,6 +91,10 @@ def test_optional_args_text_ReturnsObj():
     assert optional_args_text() == "optional_args"
 
 
+def test_column_order_str_ReturnsObj():
+    assert column_order_str() == "column_order"
+
+
 def test_category_text_ReturnsObj():
     assert category_text() == "category"
 
@@ -152,25 +157,22 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
         if category_dict.get(atom_insert()) is not None:
             category_insert = category_dict.get(atom_insert())
             if category_insert.get(atom_order_text) is None:
-                print(
-                    f"Missing from {category} {atom_insert()} {category_insert.get(atom_order_text)=}"
-                )
+                x_text = f"Missing from {category} {atom_insert()} {category_insert.get(atom_order_text)=}"
+                print(x_text)
                 return False
 
         if category_dict.get(atom_update()) is not None:
             category_update = category_dict.get(atom_update())
             if category_update.get(atom_order_text) is None:
-                print(
-                    f"Missing from {category} {atom_update()} {category_update.get(atom_order_text)=}"
-                )
+                x_text = f"Missing from {category} {atom_update()} {category_update.get(atom_order_text)=}"
+                print(x_text)
                 return False
 
         if category_dict.get(atom_delete()) is not None:
             category_delete = category_dict.get(atom_delete())
             if category_delete.get(atom_order_text) is None:
-                print(
-                    f"Missing from {category} {atom_delete()} {category_delete.get(atom_order_text)=}"
-                )
+                x_text = f"Missing from {category} {atom_delete()} {category_delete.get(atom_order_text)=}"
+                print(x_text)
                 return False
 
         treasury_only_text = "treasury_only"
@@ -180,9 +182,8 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
 
         print(f"{category_dict.get(treasury_only_text)=}")
         if category_dict.get(treasury_only_text) not in [True, False]:
-            print(
-                f"{category=} {treasury_only_text} value '{category_dict.get(treasury_only_text)}' not acceptable"
-            )
+            x_text = f"{category=} {treasury_only_text} value '{category_dict.get(treasury_only_text)}' not acceptable"
+            print(x_text)
             return False
 
         if category_dict.get(treasury_only_text) is None:
@@ -263,34 +264,37 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     assert 25 == q_order(atom_update(), budunit_text())
 
 
+def _has_every_element(x_arg, x_dict) -> bool:
+    arg_elements = {python_type_text(), sqlite_datatype_text()}
+    for arg_element in arg_elements:
+        if x_dict.get(arg_element) is None:
+            print(f"{arg_element} failed for {x_arg=}")
+            return False
+    return True
+
+
 def _every_category_dict_has_arg_elements(category_dict: dict) -> bool:
     for required_arg, x_dict in category_dict.get(required_args_text()).items():
-        if x_dict.get(python_type_text()) is None:
-            print(f"python_type_text failed for {required_arg=}")
-            return False
-        if x_dict.get(sqlite_datatype_text()) is None:
-            print(f"sqlite_datatype_text failed for {required_arg=}")
+        if not _has_every_element(required_arg, x_dict):
             return False
     if category_dict.get(optional_args_text()) is not None:
         for optional_arg, x_dict in category_dict.get(optional_args_text()).items():
-            if x_dict.get(python_type_text()) is None:
-                print(f"python_type_text failed for {optional_arg=}")
+            if not _has_every_element(optional_arg, x_dict):
                 return False
-            if x_dict.get(sqlite_datatype_text()) is None:
-                print(f"sqlite_datatype_text failed for {optional_arg=}")
-                return False
+    return True
 
 
 def check_every_arg_dict_has_elements(atom_config_dict):
     for category_key, category_dict in atom_config_dict.items():
         print(f"{category_key=}")
-        _every_category_dict_has_arg_elements(category_dict)
+        assert _every_category_dict_has_arg_elements(category_dict)
     return True
 
 
 def test_atom_config_AllArgsHave_python_type_sqlite_datatype():
     # ESTABLISH / WHEN / THEN
     assert check_every_arg_dict_has_elements(get_atom_config_dict())
+    assert 1 == 2
 
 
 def check_necessary_nesting_order_exists() -> bool:

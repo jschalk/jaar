@@ -1,1 +1,400 @@
-{"bud_acct_membership": {"calculated_attrs": {}, "DELETE": {"atom_order": 23}, "INSERT": {"atom_order": 1}, "normal_specs": {"normal_table_name": "membership"}, "optional_args": {"credit_vote": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "debtit_vote": {"python_type": "int", "sqlite_datatype": "INTEGER"}}, "required_args": {"acct_id": {"nesting_order": 0, "python_type": "AcctID", "sqlite_datatype": "TEXT"}, "group_id": {"nesting_order": 1, "python_type": "GroupID", "sqlite_datatype": "TEXT"}}, "treasury_only": false, "UPDATE": {"atom_order": 10}}, "bud_acctunit": {"calculated_attrs": {}, "DELETE": {"atom_order": 24}, "INSERT": {"atom_order": 0}, "normal_specs": {"normal_table_name": "acctunit"}, "optional_args": {"credit_score": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "debtit_score": {"python_type": "int", "sqlite_datatype": "INTEGER"}}, "required_args": {"acct_id": {"python_type": "AcctID", "sqlite_datatype": "TEXT"}}, "treasury_only": false, "UPDATE": {"atom_order": 9}}, "bud_idea_awardlink": {"calculated_attrs": {}, "DELETE": {"atom_order": 21}, "INSERT": {"atom_order": 3}, "normal_specs": {"normal_table_name": "awardlink"}, "optional_args": {"give_force": {"python_type": "float", "sqlite_datatype": "REAL"}, "take_force": {"python_type": "float", "sqlite_datatype": "REAL"}}, "required_args": {"group_id": {"nesting_order": 1, "python_type": "GroupID", "sqlite_datatype": "TEXT"}, "road": {"nesting_order": 0, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "treasury_only": false, "UPDATE": {"atom_order": 12}}, "bud_idea_factunit": {"calculated_attrs": {}, "DELETE": {"atom_order": 18}, "INSERT": {"atom_order": 6}, "normal_specs": {"normal_table_name": "fact"}, "optional_args": {"nigh": {"python_type": "float", "sqlite_datatype": "REAL"}, "open": {"python_type": "float", "sqlite_datatype": "REAL"}, "pick": {"python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "required_args": {"base": {"nesting_order": 1, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}, "road": {"nesting_order": 0, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "treasury_only": false, "UPDATE": {"atom_order": 13}}, "bud_idea_grouphold": {"calculated_attrs": {}, "DELETE": {"atom_order": 19}, "INSERT": {"atom_order": 4}, "normal_specs": {"normal_table_name": "grouphold"}, "optional_args": {}, "required_args": {"group_id": {"nesting_order": 1, "python_type": "GroupID", "sqlite_datatype": "TEXT"}, "road": {"nesting_order": 0, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "treasury_only": false}, "bud_idea_healerhold": {"calculated_attrs": {}, "DELETE": {"atom_order": 20}, "INSERT": {"atom_order": 5}, "normal_specs": {"normal_table_name": "healerhold"}, "optional_args": {}, "required_args": {"group_id": {"nesting_order": 1, "python_type": "GroupID", "sqlite_datatype": "TEXT"}, "road": {"nesting_order": 0, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "treasury_only": false}, "bud_idea_reason_premiseunit": {"calculated_attrs": {}, "DELETE": {"atom_order": 16}, "INSERT": {"atom_order": 8}, "normal_specs": {"normal_table_name": "premise"}, "optional_args": {"divisor": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "nigh": {"python_type": "float", "sqlite_datatype": "REAL"}, "open": {"python_type": "float", "sqlite_datatype": "REAL"}}, "required_args": {"base": {"nesting_order": 1, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}, "need": {"nesting_order": 2, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}, "road": {"nesting_order": 0, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "treasury_only": false, "UPDATE": {"atom_order": 14}}, "bud_idea_reasonunit": {"calculated_attrs": {}, "DELETE": {"atom_order": 17}, "INSERT": {"atom_order": 7}, "normal_specs": {"normal_table_name": "reason"}, "optional_args": {"base_idea_active_requisite": {"python_type": "bool", "sqlite_datatype": "INTEGER"}}, "required_args": {"base": {"nesting_order": 1, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}, "road": {"nesting_order": 0, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "treasury_only": false, "UPDATE": {"atom_order": 15}}, "bud_ideaunit": {"calculated_attrs": {}, "DELETE": {"atom_order": 22}, "INSERT": {"atom_order": 2}, "normal_specs": {"normal_table_name": "idea"}, "optional_args": {"addin": {"python_type": "float", "sqlite_datatype": "REAL"}, "begin": {"python_type": "float", "sqlite_datatype": "REAL"}, "close": {"python_type": "float", "sqlite_datatype": "REAL"}, "denom": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "mass": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "morph": {"python_type": "bool", "sqlite_datatype": "INTEGER"}, "numor": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "pledge": {"python_type": "bool", "sqlite_datatype": "INTEGER"}, "problem_bool": {"python_type": "bool", "sqlite_datatype": "INTEGER"}}, "required_args": {"label": {"nesting_order": 1, "python_type": "RoadNode", "sqlite_datatype": "TEXT"}, "parent_road": {"nesting_order": 0, "python_type": "RoadUnit", "sqlite_datatype": "TEXT"}}, "treasury_only": false, "UPDATE": {"atom_order": 11}}, "budunit": {"calculated_attrs": {}, "normal_specs": {"normal_table_name": "bud"}, "optional_args": {"bit": {"python_type": "float", "sqlite_datatype": "REAL"}, "credor_respect": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "debtor_respect": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "fund_coin": {"python_type": "float", "sqlite_datatype": "REAL"}, "fund_pool": {"python_type": "float", "sqlite_datatype": "REAL"}, "max_tree_traverse": {"python_type": "int", "sqlite_datatype": "INTEGER"}, "monetary_desc": {"python_type": "str", "sqlite_datatype": "TEXT"}, "penny": {"python_type": "float", "sqlite_datatype": "REAL"}, "tally": {"python_type": "int", "sqlite_datatype": "INTEGER"}}, "required_args": {}, "treasury_only": false, "UPDATE": {"atom_order": 25}}}
+{
+    "bud_acct_membership": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 23
+        },
+        "INSERT": {
+            "atom_order": 1
+        },
+        "normal_specs": {
+            "normal_table_name": "membership"
+        },
+        "optional_args": {
+            "credit_vote": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "debtit_vote": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "required_args": {
+            "acct_id": {
+                "nesting_order": 0,
+                "python_type": "AcctID",
+                "sqlite_datatype": "TEXT"
+            },
+            "group_id": {
+                "nesting_order": 1,
+                "python_type": "GroupID",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 10
+        }
+    },
+    "bud_acctunit": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 24
+        },
+        "INSERT": {
+            "atom_order": 0
+        },
+        "normal_specs": {
+            "normal_table_name": "acctunit"
+        },
+        "optional_args": {
+            "credit_score": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "debtit_score": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "required_args": {
+            "acct_id": {
+                "python_type": "AcctID",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 9
+        }
+    },
+    "bud_idea_awardlink": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 21
+        },
+        "INSERT": {
+            "atom_order": 3
+        },
+        "normal_specs": {
+            "normal_table_name": "awardlink"
+        },
+        "optional_args": {
+            "give_force": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "take_force": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            }
+        },
+        "required_args": {
+            "group_id": {
+                "nesting_order": 1,
+                "python_type": "GroupID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 12
+        }
+    },
+    "bud_idea_factunit": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 18
+        },
+        "INSERT": {
+            "atom_order": 6
+        },
+        "normal_specs": {
+            "normal_table_name": "fact"
+        },
+        "optional_args": {
+            "nigh": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "open": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "pick": {
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "required_args": {
+            "base": {
+                "nesting_order": 1,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 13
+        }
+    },
+    "bud_idea_grouphold": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 19
+        },
+        "INSERT": {
+            "atom_order": 4
+        },
+        "normal_specs": {
+            "normal_table_name": "grouphold"
+        },
+        "optional_args": {},
+        "required_args": {
+            "group_id": {
+                "nesting_order": 1,
+                "python_type": "GroupID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false
+    },
+    "bud_idea_healerhold": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 20
+        },
+        "INSERT": {
+            "atom_order": 5
+        },
+        "normal_specs": {
+            "normal_table_name": "healerhold"
+        },
+        "optional_args": {},
+        "required_args": {
+            "group_id": {
+                "nesting_order": 1,
+                "python_type": "GroupID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false
+    },
+    "bud_idea_reason_premiseunit": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 16
+        },
+        "INSERT": {
+            "atom_order": 8
+        },
+        "normal_specs": {
+            "normal_table_name": "premise"
+        },
+        "optional_args": {
+            "divisor": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "nigh": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "open": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            }
+        },
+        "required_args": {
+            "base": {
+                "nesting_order": 1,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "need": {
+                "nesting_order": 2,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 14
+        }
+    },
+    "bud_idea_reasonunit": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 17
+        },
+        "INSERT": {
+            "atom_order": 7
+        },
+        "normal_specs": {
+            "normal_table_name": "reason"
+        },
+        "optional_args": {
+            "base_idea_active_requisite": {
+                "python_type": "bool",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "required_args": {
+            "base": {
+                "nesting_order": 1,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 15
+        }
+    },
+    "bud_ideaunit": {
+        "calculated_attrs": {},
+        "DELETE": {
+            "atom_order": 22
+        },
+        "INSERT": {
+            "atom_order": 2
+        },
+        "normal_specs": {
+            "normal_table_name": "idea"
+        },
+        "optional_args": {
+            "addin": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "begin": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "close": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "denom": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "mass": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "morph": {
+                "python_type": "bool",
+                "sqlite_datatype": "INTEGER"
+            },
+            "numor": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "pledge": {
+                "python_type": "bool",
+                "sqlite_datatype": "INTEGER"
+            },
+            "problem_bool": {
+                "python_type": "bool",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "required_args": {
+            "label": {
+                "nesting_order": 1,
+                "python_type": "RoadNode",
+                "sqlite_datatype": "TEXT"
+            },
+            "parent_road": {
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 11
+        }
+    },
+    "budunit": {
+        "calculated_attrs": {},
+        "normal_specs": {
+            "normal_table_name": "bud"
+        },
+        "optional_args": {
+            "bit": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "credor_respect": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "debtor_respect": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "fund_coin": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "fund_pool": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "max_tree_traverse": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "monetary_desc": {
+                "python_type": "str",
+                "sqlite_datatype": "TEXT"
+            },
+            "penny": {
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "tally": {
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "required_args": {},
+        "treasury_only": false,
+        "UPDATE": {
+            "atom_order": 25
+        }
+    }
+}
