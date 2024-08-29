@@ -39,6 +39,7 @@ from src.gift.atom_config import (
     group_id_str,
     parent_road_str,
     label_str,
+    pledge_str,
     base_idea_active_requisite_str,
 )
 from dataclasses import dataclass
@@ -263,7 +264,7 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
         numor=x_atom.get_value("numor"),
         morph=x_atom.get_value("morph"),
         mass=x_atom.get_value("mass"),
-        pledge=x_atom.get_value("pledge"),
+        pledge=x_atom.get_value(pledge_str()),
     )
 
 
@@ -276,7 +277,7 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
             _close=x_atom.get_value("close"),
             _denom=x_atom.get_value("denom"),
             _numor=x_atom.get_value("numor"),
-            pledge=x_atom.get_value("pledge"),
+            pledge=x_atom.get_value(pledge_str()),
         ),
         parent_road=x_atom.get_value(parent_road_str()),
         create_missing_ideas=False,

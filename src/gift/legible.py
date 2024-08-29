@@ -20,6 +20,7 @@ from src.gift.atom_config import (
     parent_road_str,
     label_str,
     base_idea_active_requisite_str,
+    pledge_str,
 )
 from src.gift.change import ChangeUnit
 
@@ -342,7 +343,6 @@ def add_bud_ideaunit_insert_to_legible_list(
     _problem_bool_text = "problem_bool"
     _morph_text = "morph"
     _mass_text = "mass"
-    pledge_text = "pledge"
     for parent_road_dict in ideaunit_insert_dict.values():
         for ideaunit_atom in parent_road_dict.values():
             label_value = ideaunit_atom.get_value(label_str())
@@ -355,7 +355,7 @@ def add_bud_ideaunit_insert_to_legible_list(
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _morph_value = ideaunit_atom.get_value(_morph_text)
             _mass_value = ideaunit_atom.get_value(_mass_text)
-            pledge_value = ideaunit_atom.get_value(pledge_text)
+            pledge_value = ideaunit_atom.get_value(pledge_str())
             x_str = (
                 f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
             )
@@ -392,7 +392,7 @@ def add_bud_ideaunit_update_to_legible_list(
     _problem_bool_text = "problem_bool"
     _morph_text = "morph"
     _mass_text = "mass"
-    pledge_text = "pledge"
+
     for parent_road_dict in ideaunit_update_dict.values():
         for ideaunit_atom in parent_road_dict.values():
             label_value = ideaunit_atom.get_value(label_str())
@@ -405,7 +405,7 @@ def add_bud_ideaunit_update_to_legible_list(
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _morph_value = ideaunit_atom.get_value(_morph_text)
             _mass_value = ideaunit_atom.get_value(_mass_text)
-            pledge_value = ideaunit_atom.get_value(pledge_text)
+            pledge_value = ideaunit_atom.get_value(pledge_str())
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
             if _addin_value is not None:
                 x_str += f"addin={_addin_value}."

@@ -211,7 +211,7 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
         ]
     elif stone_name == stone_format_00003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
-            pledge_bool = x_atomunit.get_value("pledge")
+            pledge_bool = x_atomunit.get_value(pledge_str())
             pledge_yes_str = ""
             if pledge_bool:
                 pledge_yes_str = "Yes"

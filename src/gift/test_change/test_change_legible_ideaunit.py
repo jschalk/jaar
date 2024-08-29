@@ -5,6 +5,7 @@ from src.gift.atom_config import (
     bud_ideaunit_text,
     parent_road_str,
     label_str,
+    pledge_str,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
@@ -24,7 +25,6 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     _problem_bool_text = "problem_bool"
     _morph_text = "morph"
     _mass_text = "mass"
-    pledge_text = "pledge"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
     _addin_value = 7
@@ -47,7 +47,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     clean_atomunit.set_arg(_problem_bool_text, _problem_bool_value)
     clean_atomunit.set_arg(_morph_text, _morph_value)
     clean_atomunit.set_arg(_mass_text, _mass_value)
-    clean_atomunit.set_arg(pledge_text, pledge_value)
+    clean_atomunit.set_arg(pledge_str(), pledge_value)
 
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(clean_atomunit)
@@ -73,7 +73,6 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     _problem_bool_text = "problem_bool"
     _morph_text = "morph"
     _mass_text = "mass"
-    pledge_text = "pledge"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
     _addin_value = 7
@@ -96,7 +95,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     clean_atomunit.set_arg(_problem_bool_text, _problem_bool_value)
     clean_atomunit.set_arg(_morph_text, _morph_value)
     clean_atomunit.set_arg(_mass_text, _mass_value)
-    clean_atomunit.set_arg(pledge_text, pledge_value)
+    clean_atomunit.set_arg(pledge_str(), pledge_value)
 
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(clean_atomunit)

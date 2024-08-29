@@ -25,6 +25,7 @@ from src.gift.atom_config import (
     parent_road_str,
     label_str,
     base_idea_active_requisite_str,
+    pledge_str,
 )
 from src.gift.change import changeunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
@@ -364,7 +365,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     # insert_disc_atomunit.set_optional_arg("close", x_close)
     # insert_disc_atomunit.set_optional_arg("denom", x_denom)
     # insert_disc_atomunit.set_optional_arg("numor", x_numor)
-    insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
+    insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
 
     print(f"{insert_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
@@ -404,7 +405,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_Sim
     insert_disc_atomunit.set_optional_arg("close", x_close)
     # insert_disc_atomunit.set_optional_arg("denom", x_denom)
     # insert_disc_atomunit.set_optional_arg("numor", x_numor)
-    insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
+    insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
 
     print(f"{insert_disc_atomunit=}")
     sue_changeunit = changeunit_shop()

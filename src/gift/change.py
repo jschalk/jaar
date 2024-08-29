@@ -28,6 +28,7 @@ from src.gift.atom_config import (
     group_id_str,
     parent_road_str,
     label_str,
+    pledge_str,
     base_idea_active_requisite_str,
 )
 from src.gift.atom import (
@@ -363,7 +364,7 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("numor", insert_ideaunit._numor)
             x_atomunit.set_optional_arg("morph", insert_ideaunit._morph)
             x_atomunit.set_optional_arg("mass", insert_ideaunit._mass)
-            x_atomunit.set_optional_arg("pledge", insert_ideaunit.pledge)
+            x_atomunit.set_optional_arg(pledge_str(), insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
 
             self.add_atomunit_idea_factunit_inserts(
@@ -412,7 +413,7 @@ class ChangeUnit:
                 if before_ideaunit._mass != after_ideaunit._mass:
                     x_atomunit.set_optional_arg("mass", after_ideaunit._mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:
-                    x_atomunit.set_optional_arg("pledge", after_ideaunit.pledge)
+                    x_atomunit.set_optional_arg(pledge_str(), after_ideaunit.pledge)
                 self.set_atomunit(x_atomunit)
 
             # insert / update / delete factunits
