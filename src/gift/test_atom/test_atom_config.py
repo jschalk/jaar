@@ -31,6 +31,14 @@ from src.gift.atom_config import (
     get_sorted_required_arg_keys,
     acct_id_str,
     group_id_str,
+    begin_str,
+    close_str,
+    addin_str,
+    numor_str,
+    denom_str,
+    morph_str,
+    gogo_want_str,
+    stop_want_str,
 )
 
 
@@ -105,6 +113,38 @@ def test_atom_config_HasCorrect_category():
     }
     assert bud_acctunit_text() in category_ref()
     assert is_category_ref("idearoot") is False
+
+
+def test_begin_str_ReturnsObj():
+    assert begin_str() == "begin"
+
+
+def test_close_str_ReturnsObj():
+    assert close_str() == "close"
+
+
+def test_addin_str_ReturnsObj():
+    assert addin_str() == "addin"
+
+
+def test_numor_str_ReturnsObj():
+    assert numor_str() == "numor"
+
+
+def test_denom_str_ReturnsObj():
+    assert denom_str() == "denom"
+
+
+def test_morph_str_ReturnsObj():
+    assert morph_str() == "morph"
+
+
+def test_gogo_want_str_ReturnsObj():
+    assert gogo_want_str() == "gogo_want"
+
+
+def test_stop_want_str_ReturnsObj():
+    assert stop_want_str() == "stop_want"
 
 
 def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):

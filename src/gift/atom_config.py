@@ -167,6 +167,38 @@ def pledge_str() -> str:
     return "pledge"
 
 
+def begin_str() -> str:
+    return "begin"
+
+
+def close_str() -> str:
+    return "close"
+
+
+def addin_str() -> str:
+    return "addin"
+
+
+def numor_str() -> str:
+    return "numor"
+
+
+def denom_str() -> str:
+    return "denom"
+
+
+def morph_str() -> str:
+    return "morph"
+
+
+def gogo_want_str() -> str:
+    return "gogo_want"
+
+
+def stop_want_str() -> str:
+    return "stop_want"
+
+
 def base_idea_active_requisite_str() -> str:
     return "base_idea_active_requisite"
 

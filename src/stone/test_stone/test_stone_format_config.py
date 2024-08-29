@@ -14,6 +14,14 @@ from src.gift.atom_config import (
     credit_score_str,
     debtit_vote_str,
     credit_vote_str,
+    begin_str,
+    close_str,
+    addin_str,
+    numor_str,
+    denom_str,
+    morph_str,
+    gogo_want_str,
+    stop_want_str,
 )
 from src.stone.stone import (
     get_stone_formats_dir,
@@ -21,6 +29,7 @@ from src.stone.stone import (
     jaar_format_00001_acct_v0_0_0,
     jaar_format_00002_membership_v0_0_0,
     jaar_format_00003_ideaunit_v0_0_0,
+    jaar_format_00019_ideaunit_v0_0_0,
     _get_headers_list,
     _generate_stone_dataframe,
     get_stoneref,
@@ -200,3 +209,41 @@ def test_get_stoneref_HasCorrectAttrs_jaar_format_00003_ideaunit_v0_0_0():
     assert label_stonecolumn.column_order == 5
     assert mass_stonecolumn.column_order == 4
     assert pledge_stonecolumn.column_order == 2
+
+
+def test_get_stoneref_HasCorrectAttrs_jaar_format_00019_ideaunit_v0_0_0():
+    # ESTABLISH
+    stone_name = jaar_format_00019_ideaunit_v0_0_0()
+
+    # WHEN
+    format_00019_stoneref = get_stoneref(stone_name)
+
+    # THEN
+    real_id_stonecolumn = format_00019_stoneref.get_stonecolumn(real_id_str())
+    owner_id_stonecolumn = format_00019_stoneref.get_stonecolumn(owner_id_str())
+    parent_road_stonecolumn = format_00019_stoneref.get_stonecolumn(parent_road_str())
+    label_stonecolumn = format_00019_stoneref.get_stonecolumn(label_str())
+    print(f"{format_00019_stoneref._stonecolumns.keys()=}")
+    begin_stonecolumn = format_00019_stoneref.get_stonecolumn(begin_str())
+    close_stonecolumn = format_00019_stoneref.get_stonecolumn(close_str())
+    addin_stonecolumn = format_00019_stoneref.get_stonecolumn(addin_str())
+    numor_stonecolumn = format_00019_stoneref.get_stonecolumn(numor_str())
+    denom_stonecolumn = format_00019_stoneref.get_stonecolumn(denom_str())
+    morph_stonecolumn = format_00019_stoneref.get_stonecolumn(morph_str())
+    gogo_want_stonecolumn = format_00019_stoneref.get_stonecolumn(gogo_want_str())
+    stop_want_stonecolumn = format_00019_stoneref.get_stonecolumn(stop_want_str())
+
+    assert len(format_00019_stoneref._stonecolumns) == 12
+
+    assert real_id_stonecolumn.column_order == 0
+    assert owner_id_stonecolumn.column_order == 1
+    assert parent_road_stonecolumn.column_order == 10
+    assert label_stonecolumn.column_order == 11
+    assert begin_stonecolumn.column_order == 2
+    assert close_stonecolumn.column_order == 3
+    assert addin_stonecolumn.column_order == 4
+    assert numor_stonecolumn.column_order == 5
+    assert denom_stonecolumn.column_order == 6
+    assert morph_stonecolumn.column_order == 7
+    assert gogo_want_stonecolumn.column_order == 8
+    assert stop_want_stonecolumn.column_order == 9

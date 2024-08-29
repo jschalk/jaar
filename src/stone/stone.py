@@ -95,11 +95,16 @@ def jaar_format_00003_ideaunit_v0_0_0() -> str:
     return "jaar_format_00003_ideaunit_v0_0_0"
 
 
+def jaar_format_00019_ideaunit_v0_0_0() -> str:
+    return "jaar_format_00019_ideaunit_v0_0_0"
+
+
 def get_stone_filenames() -> set[str]:
     return {
         jaar_format_00001_acct_v0_0_0(),
         jaar_format_00002_membership_v0_0_0(),
         jaar_format_00003_ideaunit_v0_0_0(),
+        jaar_format_00019_ideaunit_v0_0_0(),
     }
 
 
