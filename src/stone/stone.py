@@ -182,10 +182,9 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     category_set = {x_stoneref.atom_category}
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
-    sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
-    sorting_columns = x_stoneref.get_headers_list()
-    d2_list = []
 
+    sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
+    d2_list = []
     if stone_name == stone_format_00001_acct_v0_0_0():
         d2_list = [
             [
@@ -211,15 +210,11 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
         ]
     elif stone_name == stone_format_00003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
-            pledge_bool = x_atomunit.get_value(pledge_str())
-            pledge_yes_str = ""
-            if pledge_bool:
-                pledge_yes_str = "Yes"
             d2_list.append(
                 [
                     x_budunit._real_id,
                     x_budunit._owner_id,
-                    pledge_yes_str,
+                    x_atomunit.get_value(pledge_str()),
                     x_atomunit.get_value(parent_road_str()),
                     x_atomunit.get_value(mass_str()),
                     x_atomunit.get_value(label_str()),
@@ -243,9 +238,22 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
                     x_atomunit.get_value(stop_want_str()),
                 ]
             )
-
+    d2_list = _change_all_pledge_values(d2_list, x_stoneref)
     x_stone = _generate_stone_dataframe(d2_list, stone_name)
+    sorting_columns = x_stoneref.get_headers_list()
     return _sort_dataframe(x_stone, sorting_columns)
+
+
+def _change_all_pledge_values(d2_list: list[list], x_stoneref: StoneRef) -> list[list]:
+    for x_column_header, x_stonecolumn in x_stoneref._stonecolumns.items():
+        if x_column_header == pledge_str():
+            pledge_column_number = x_stonecolumn.column_order
+            for x_row in d2_list:
+                if x_row[pledge_column_number] is True:
+                    x_row[pledge_column_number] = "Yes"
+                else:
+                    x_row[pledge_column_number] = ""
+    return d2_list
 
 
 def _sort_dataframe(x_stone: DataFrame, sorting_columns: list[str]) -> DataFrame:
