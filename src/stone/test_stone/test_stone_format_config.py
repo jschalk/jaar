@@ -26,10 +26,10 @@ from src.gift.atom_config import (
 from src.stone.stone import (
     get_stone_formats_dir,
     get_stone_filenames,
-    jaar_format_00001_acct_v0_0_0,
-    jaar_format_00002_membership_v0_0_0,
-    jaar_format_00003_ideaunit_v0_0_0,
-    jaar_format_00019_ideaunit_v0_0_0,
+    stone_format_00001_acct_v0_0_0,
+    stone_format_00002_membership_v0_0_0,
+    stone_format_00003_ideaunit_v0_0_0,
+    stone_format_00019_ideaunit_v0_0_0,
     _get_headers_list,
     _generate_stone_dataframe,
     get_stoneref,
@@ -45,11 +45,11 @@ def test_config_str_functions_ReturnObjs():
     assert credit_score_str() == "credit_score"
     assert debtit_vote_str() == "debtit_vote"
     assert credit_vote_str() == "credit_vote"
-    assert jaar_format_00001_acct_v0_0_0() == "jaar_format_00001_acct_v0_0_0"
-    x0002_stone = "jaar_format_00002_membership_v0_0_0"
-    assert jaar_format_00002_membership_v0_0_0() == x0002_stone
-    x0003_stone = "jaar_format_00003_ideaunit_v0_0_0"
-    assert jaar_format_00003_ideaunit_v0_0_0() == x0003_stone
+    assert stone_format_00001_acct_v0_0_0() == "stone_format_00001_acct_v0_0_0"
+    x0002_stone = "stone_format_00002_membership_v0_0_0"
+    assert stone_format_00002_membership_v0_0_0() == x0002_stone
+    x0003_stone = "stone_format_00003_ideaunit_v0_0_0"
+    assert stone_format_00003_ideaunit_v0_0_0() == x0003_stone
 
 
 def test_get_stone_formats_dir_ReturnsObj():
@@ -65,14 +65,14 @@ def test_get_stone_filenames_ReturnsCorrectObj():
     x_filenames = get_stone_filenames()
     # THEN
     print(f"{x_filenames=}")
-    assert jaar_format_00001_acct_v0_0_0() in x_filenames
-    assert jaar_format_00002_membership_v0_0_0() in x_filenames
-    assert jaar_format_00003_ideaunit_v0_0_0() in x_filenames
+    assert stone_format_00001_acct_v0_0_0() in x_filenames
+    assert stone_format_00002_membership_v0_0_0() in x_filenames
+    assert stone_format_00003_ideaunit_v0_0_0() in x_filenames
 
 
 def test_get_stoneref_ReturnsObj():
     # ESTABLISH
-    stone_name_00001 = jaar_format_00001_acct_v0_0_0()
+    stone_name_00001 = stone_format_00001_acct_v0_0_0()
 
     # WHEN
     x_stoneref = get_stoneref(stone_name_00001)
@@ -86,7 +86,7 @@ def test_get_stoneref_ReturnsObj():
 
 def test_get_headers_list_ReturnsObj():
     # ESTABLISH / WHEN
-    format_00001_headers = _get_headers_list(jaar_format_00001_acct_v0_0_0())
+    format_00001_headers = _get_headers_list(stone_format_00001_acct_v0_0_0())
 
     # THEN
     # print(f"{format_00001_headers=}")
@@ -103,9 +103,9 @@ def test__generate_stone_dataframe_ReturnsCorrectObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
-    x_df = _generate_stone_dataframe(empty_d2, jaar_format_00001_acct_v0_0_0())
+    x_df = _generate_stone_dataframe(empty_d2, stone_format_00001_acct_v0_0_0())
     # THEN
-    assert list(x_df.columns) == _get_headers_list(jaar_format_00001_acct_v0_0_0())
+    assert list(x_df.columns) == _get_headers_list(stone_format_00001_acct_v0_0_0())
 
 
 def for_all_stones__generate_stone_dataframe():
@@ -138,9 +138,9 @@ def test_stone_FilesExist():
     assert len(stone_filenames) == len(get_stone_filenames())
 
 
-def test_get_stoneref_HasCorrectAttrs_jaar_format_00001_acct_v0_0_0():
+def test_get_stoneref_HasCorrectAttrs_stone_format_00001_acct_v0_0_0():
     # ESTABLISH
-    stone_name = jaar_format_00001_acct_v0_0_0()
+    stone_name = stone_format_00001_acct_v0_0_0()
 
     # WHEN
     format_00001_stoneref = get_stoneref(stone_name)
@@ -160,9 +160,9 @@ def test_get_stoneref_HasCorrectAttrs_jaar_format_00001_acct_v0_0_0():
     assert debtit_score_stonecolumn.column_order == 4
 
 
-def test_get_stoneref_HasCorrectAttrs_jaar_format_00002_membership_v0_0_0():
+def test_get_stoneref_HasCorrectAttrs_stone_format_00002_membership_v0_0_0():
     # ESTABLISH
-    stone_name = jaar_format_00002_membership_v0_0_0()
+    stone_name = stone_format_00002_membership_v0_0_0()
 
     # WHEN
     format_00002_stoneref = get_stoneref(stone_name)
@@ -184,9 +184,9 @@ def test_get_stoneref_HasCorrectAttrs_jaar_format_00002_membership_v0_0_0():
     assert credit_vote_stonecolumn.column_order == 4
 
 
-def test_get_stoneref_HasCorrectAttrs_jaar_format_00003_ideaunit_v0_0_0():
+def test_get_stoneref_HasCorrectAttrs_stone_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
-    stone_name = jaar_format_00003_ideaunit_v0_0_0()
+    stone_name = stone_format_00003_ideaunit_v0_0_0()
 
     # WHEN
     format_00003_stoneref = get_stoneref(stone_name)
@@ -211,9 +211,9 @@ def test_get_stoneref_HasCorrectAttrs_jaar_format_00003_ideaunit_v0_0_0():
     assert pledge_stonecolumn.column_order == 2
 
 
-def test_get_stoneref_HasCorrectAttrs_jaar_format_00019_ideaunit_v0_0_0():
+def test_get_stoneref_HasCorrectAttrs_stone_format_00019_ideaunit_v0_0_0():
     # ESTABLISH
-    stone_name = jaar_format_00019_ideaunit_v0_0_0()
+    stone_name = stone_format_00019_ideaunit_v0_0_0()
 
     # WHEN
     format_00019_stoneref = get_stoneref(stone_name)

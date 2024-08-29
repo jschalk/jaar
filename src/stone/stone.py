@@ -83,28 +83,28 @@ def get_stone_formats_dir() -> str:
     return f"{src_stone_dir()}/stone_formats"
 
 
-def jaar_format_00001_acct_v0_0_0() -> str:
-    return "jaar_format_00001_acct_v0_0_0"
+def stone_format_00001_acct_v0_0_0() -> str:
+    return "stone_format_00001_acct_v0_0_0"
 
 
-def jaar_format_00002_membership_v0_0_0() -> str:
-    return "jaar_format_00002_membership_v0_0_0"
+def stone_format_00002_membership_v0_0_0() -> str:
+    return "stone_format_00002_membership_v0_0_0"
 
 
-def jaar_format_00003_ideaunit_v0_0_0() -> str:
-    return "jaar_format_00003_ideaunit_v0_0_0"
+def stone_format_00003_ideaunit_v0_0_0() -> str:
+    return "stone_format_00003_ideaunit_v0_0_0"
 
 
-def jaar_format_00019_ideaunit_v0_0_0() -> str:
-    return "jaar_format_00019_ideaunit_v0_0_0"
+def stone_format_00019_ideaunit_v0_0_0() -> str:
+    return "stone_format_00019_ideaunit_v0_0_0"
 
 
 def get_stone_filenames() -> set[str]:
     return {
-        jaar_format_00001_acct_v0_0_0(),
-        jaar_format_00002_membership_v0_0_0(),
-        jaar_format_00003_ideaunit_v0_0_0(),
-        jaar_format_00019_ideaunit_v0_0_0(),
+        stone_format_00001_acct_v0_0_0(),
+        stone_format_00002_membership_v0_0_0(),
+        stone_format_00003_ideaunit_v0_0_0(),
+        stone_format_00019_ideaunit_v0_0_0(),
     }
 
 
@@ -178,7 +178,7 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     sorting_columns = x_stoneref.get_headers_list()
     d2_list = []
 
-    if stone_name == jaar_format_00001_acct_v0_0_0():
+    if stone_name == stone_format_00001_acct_v0_0_0():
         d2_list = [
             [
                 x_budunit._real_id,
@@ -189,7 +189,7 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-    elif stone_name == jaar_format_00002_membership_v0_0_0():
+    elif stone_name == stone_format_00002_membership_v0_0_0():
         d2_list = [
             [
                 x_budunit._real_id,
@@ -201,7 +201,7 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
             ]
             for x_atomunit in sorted_atomunits
         ]
-    elif stone_name == jaar_format_00003_ideaunit_v0_0_0():
+    elif stone_name == stone_format_00003_ideaunit_v0_0_0():
         for x_atomunit in sorted_atomunits:
             pledge_bool = x_atomunit.get_value("pledge")
             pledge_yes_str = ""
@@ -240,20 +240,20 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        if x_stonename == jaar_format_00001_acct_v0_0_0():
+        if x_stonename == stone_format_00001_acct_v0_0_0():
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], float(row[3]))
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == jaar_format_00002_membership_v0_0_0():
+        elif x_stonename == stone_format_00002_membership_v0_0_0():
             x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], row[3])
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_atomunit.set_arg(title_row[5], float(row[5]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == jaar_format_00003_ideaunit_v0_0_0():
+        elif x_stonename == stone_format_00003_ideaunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             pledge_bool = False
             if row[2] == "Yes":
