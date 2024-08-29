@@ -27,46 +27,6 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_parent_road():
     assert create_road(x_idea._parent_road, x_idea._label) == new_roses_road
 
 
-def test_IdeaUnit_find_replace_road_CorrectlyModifies_range_push_RoadUnits():
-    # ESTABLISH Idea with range_push roadunits that will be different
-    casa_text = "casa1"
-    casa_road = create_road(root_label(), casa_text)
-    bloomers_text = "bloomers"
-    bloomers_road = create_road(casa_road, bloomers_text)
-    roses_text = "roses"
-    roses_road = create_road(bloomers_road, roses_text)
-    old_water_text = "water"
-    old_water_road = create_road(root_label(), old_water_text)
-    rain_text = "rain"
-    snow_text = "snow"
-    old_rain_road = create_road(old_water_road, rain_text)
-    old_snow_road = create_road(old_water_road, snow_text)
-    farm_text = "farm"
-    farm_road = create_road(root_label(), farm_text)
-    fertilizer_text = "fertilizer"
-    fertilizer_road = create_road(farm_road, fertilizer_text)
-    farm_road = create_road(root_label(), farm_text)
-    x_idea = ideaunit_shop(roses_text, _parent_road=bloomers_road)
-    x_idea.set_range_push(old_rain_road)
-    x_idea.set_range_push(old_snow_road)
-
-    assert len(x_idea._range_pushs) == 2
-    assert old_rain_road in x_idea._range_pushs
-    assert old_snow_road in x_idea._range_pushs
-
-    # WHEN
-    new_water_text = "h2o"
-    new_water_road = create_road(root_label(), new_water_text)
-    new_rain_road = create_road(new_water_road, rain_text)
-    new_snow_road = create_road(new_water_road, snow_text)
-    x_idea.find_replace_road(old_road=old_water_road, new_road=new_water_road)
-
-    # THEN
-    assert len(x_idea._range_pushs) == 2
-    assert new_rain_road in x_idea._range_pushs
-    assert new_snow_road in x_idea._range_pushs
-
-
 def test_IdeaUnit_find_replace_road_CorrectlyModifies_reasonunits():
     # ESTABLISH Idea with reason that will be different
     casa_text = "casa1"

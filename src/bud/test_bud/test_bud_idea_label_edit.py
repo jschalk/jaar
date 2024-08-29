@@ -188,43 +188,6 @@ def test_bud_edit_idea_label_Modifies_factunits():
     assert factunit_obj.pick == new_rain_road
 
 
-def test_bud_edit_idea_label_ModifiesIdeaUnit_range_pushs():
-    bob_bud = budunit_shop("Bob")
-    casa_text = "casa"
-    casa_road = bob_bud.make_l1_road(casa_text)
-    old_water_text = "water"
-    old_water_road = bob_bud.make_road(casa_road, old_water_text)
-    rain_text = "rain"
-    old_rain_road = bob_bud.make_road(old_water_road, rain_text)
-    mood_text = "mood"
-    mood_road = bob_bud.make_l1_road(mood_text)
-    bob_bud.set_l1_idea(ideaunit_shop(casa_text))
-    bob_bud.set_idea(ideaunit_shop(old_water_text), parent_road=casa_road)
-    bob_bud.set_idea(ideaunit_shop(rain_text), parent_road=old_water_road)
-    bob_bud.set_l1_idea(ideaunit_shop(mood_text))
-
-    bob_bud.edit_idea_attr(road=mood_road, range_push=old_rain_road)
-    mood_idea = bob_bud.get_idea_obj(mood_road)
-    assert old_rain_road in mood_idea._range_pushs
-
-    # WHEN
-    new_water_text = "h2o"
-    new_water_road = bob_bud.make_road(casa_road, new_water_text)
-    new_rain_road = bob_bud.make_road(new_water_road, rain_text)
-    bob_bud.edit_idea_label(old_road=old_water_road, new_label=new_water_text)
-
-    # THEN
-    # for idea_x in bob_bud._idearoot._kids.values():
-    #     print(f"{idea_x._parent_road=} {idea_x._label=}")
-    #     for idea_y in idea_x._kids.values():
-    #         print(f"{idea_y._parent_road=} {idea_y._label=}")
-    #         for idea_z in idea_y._kids.values():
-    #             print(f"{idea_z._parent_road=} {idea_z._label=}")
-    assert old_rain_road != new_rain_road
-    assert old_rain_road not in mood_idea._range_pushs
-    assert new_rain_road in mood_idea._range_pushs
-
-
 def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()

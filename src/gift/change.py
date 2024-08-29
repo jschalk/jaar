@@ -20,7 +20,6 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     bud_idea_grouphold_text,
     bud_idea_healerhold_text,
-    bud_idea_range_push_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_reasonunit_text,
     bud_ideaunit_text,
@@ -371,10 +370,6 @@ class ChangeUnit:
                 ideaunit=insert_ideaunit,
                 insert_factunit_bases=set(insert_ideaunit._factunits.keys()),
             )
-            self.add_atomunit_idea_range_push_inserts(
-                idea_road=insert_idea_road,
-                insert_range_pushs=insert_ideaunit._range_pushs,
-            )
             self.add_atomunit_idea_awardlink_inserts(
                 after_ideaunit=insert_ideaunit,
                 insert_awardlink_group_ids=set(insert_ideaunit._awardlinks.keys()),
@@ -441,18 +436,6 @@ class ChangeUnit:
                 delete_factunit_bases=before_factunit_bases.difference(
                     after_factunit_bases
                 ),
-            )
-
-            # insert / update / delete range_pushs
-            before_range_pushs = before_ideaunit._range_pushs
-            after_range_pushs = after_ideaunit._range_pushs
-            self.add_atomunit_idea_range_push_inserts(
-                idea_road=idea_road,
-                insert_range_pushs=after_range_pushs.difference(before_range_pushs),
-            )
-            self.add_atomunit_idea_range_push_deletes(
-                idea_road=idea_road,
-                delete_range_pushs=before_range_pushs.difference(after_range_pushs),
             )
 
             # insert / update / delete awardunits
@@ -537,10 +520,7 @@ class ChangeUnit:
                 idea_road=delete_idea_road,
                 delete_factunit_bases=set(delete_ideaunit._factunits.keys()),
             )
-            self.add_atomunit_idea_range_push_deletes(
-                idea_road=delete_idea_road,
-                delete_range_pushs=delete_ideaunit._range_pushs,
-            )
+
             self.add_atomunit_idea_awardlink_deletes(
                 idea_road=delete_idea_road,
                 delete_awardlink_group_ids=set(delete_ideaunit._awardlinks.keys()),
@@ -819,24 +799,6 @@ class ChangeUnit:
             x_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
             x_atomunit.set_required_arg("base", delete_factunit_base)
-            self.set_atomunit(x_atomunit)
-
-    def add_atomunit_idea_range_push_inserts(
-        self, idea_road: RoadUnit, insert_range_pushs: set
-    ):
-        for insert_range_push in insert_range_pushs:
-            x_atomunit = atomunit_shop(bud_idea_range_push_text(), atom_insert())
-            x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("range_push", insert_range_push)
-            self.set_atomunit(x_atomunit)
-
-    def add_atomunit_idea_range_push_deletes(
-        self, idea_road: RoadUnit, delete_range_pushs: set
-    ):
-        for delete_range_push in delete_range_pushs:
-            x_atomunit = atomunit_shop(bud_idea_range_push_text(), atom_delete())
-            x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg("range_push", delete_range_push)
             self.set_atomunit(x_atomunit)
 
     def get_ordered_atomunits(self, x_count: int = None) -> dict[int, AtomUnit]:

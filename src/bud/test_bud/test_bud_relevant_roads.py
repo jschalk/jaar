@@ -158,7 +158,6 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     min_days_text = "days in minute_range"
     min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
     min_days_idea = ideaunit_shop(min_days_text)
-    min_days_idea.set_range_push(hour_distance_road)
     yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
@@ -168,10 +167,10 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
 
     # THEN
     print(f"{relevant_roads=}")
-    assert len(relevant_roads) == 4
+    assert len(relevant_roads) == 3
     assert min_range_x_road in relevant_roads
     assert day_distance_road not in relevant_roads
-    assert hour_distance_road in relevant_roads
+    assert hour_distance_road not in relevant_roads
     assert min_days_road in relevant_roads
     assert yao_bud._real_id in relevant_roads
     # min_days_idea = yao_bud.get_idea_obj(min_days_road)

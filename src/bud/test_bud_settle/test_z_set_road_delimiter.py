@@ -205,32 +205,3 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     assert gen_time_factunit.pick == slash_8am_road
 
     assert casa_idea._factunits.get(semicolon_time_road) is None
-
-
-def test_bud_set_road_delimiter_CorrectlyModifies_range_pushs():
-    # ESTABLISH
-    zia_bud = budunit_shop("Zia", "Texas")
-    casa_text = "casa"
-    zia_bud.set_l1_idea(ideaunit_shop(casa_text))
-    semicolon_casa_road = zia_bud.make_l1_road(casa_text)
-    cook_text = "cook"
-    zia_bud.set_idea(ideaunit_shop(cook_text), parent_road=semicolon_casa_road)
-    semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_text)
-
-    # range_push
-    heat_text = "heat numbers"
-    zia_bud.set_l1_idea(ideaunit_shop(heat_text, _begin=0, _close=6))
-    semicolon_heat_road = zia_bud.make_l1_road(heat_text)
-    zia_bud.edit_idea_attr(semicolon_cook_road, range_push=semicolon_heat_road)
-
-    cook_idea = zia_bud.get_idea_obj(semicolon_cook_road)
-    assert semicolon_heat_road in cook_idea._range_pushs
-
-    # WHEN
-    slash_text = "/"
-    zia_bud.set_road_delimiter(slash_text)
-
-    # THEN
-    slash_heat_road = zia_bud.make_l1_road(heat_text)
-    assert semicolon_heat_road not in cook_idea._range_pushs
-    assert slash_heat_road in cook_idea._range_pushs
