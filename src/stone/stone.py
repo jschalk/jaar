@@ -1,5 +1,11 @@
 from src._instrument.file import open_file, create_file_path
-from src._instrument.python_tool import get_dict_from_json, extract_csv_headers
+from src._instrument.python_tool import (
+    get_dict_from_json,
+    extract_csv_headers,
+    get_csv_column1_column2_metrics,
+    create_filtered_csv_dict,
+)
+from src._road.road import RealID, OwnerID
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop
@@ -271,3 +277,15 @@ def load_stone_csv(reals_dir: str, x_stonename: str, x_file_dir: str, x_filename
     x_giftunit.set_changeunit(x_changeunit)
     x_hubunit.save_gift_file(x_giftunit)
     x_hubunit._create_voice_from_gifts()
+
+
+def get_csv_real_id_owner_id_metrics(
+    headerless_csv: str, delimiter: str = None
+) -> dict[RealID, dict[OwnerID, int]]:
+    return get_csv_column1_column2_metrics(headerless_csv, delimiter)
+
+
+def real_id_owner_id_filtered_csv_dict(
+    headerless_csv: str, delimiter: str = None
+) -> dict[RealID, dict[OwnerID, str]]:
+    return create_filtered_csv_dict(headerless_csv, delimiter)

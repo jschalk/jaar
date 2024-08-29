@@ -1,6 +1,6 @@
 from src._instrument.python_tool import extract_csv_headers
 from src.gift.atom_config import acct_id_str
-from src.stone.csv_tool import (
+from src.stone.stone import (
     get_csv_real_id_owner_id_metrics,
     real_id_owner_id_filtered_csv_dict,
 )
