@@ -1,4 +1,4 @@
-from src.gift.atom_config import acct_id_str
+from src.gift.atom_config import acct_id_str, owner_id_str
 from src.bud.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
@@ -17,14 +17,14 @@ def get_real_voices_accts_dataframe(x_real: RealUnit) -> DataFrame:
         voice_bud = x_hubunit.get_voice_bud()
         voice_bud.settle_bud()
         df = get_bud_acctunits_dataframe(voice_bud)
-        df.insert(0, "owner_id", voice_bud._owner_id)
+        df.insert(0, owner_id_str(), voice_bud._owner_id)
         voice_dfs.append(df)
     return pandas_concat(voice_dfs, ignore_index=True)
 
 
 def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
+        owner_id_str(),
         acct_id_str(),
         "credit_score",
         "debtit_score",
@@ -73,14 +73,14 @@ def get_real_actions_accts_dataframe(x_real: RealUnit) -> DataFrame:
         action_bud = x_hubunit.get_action_bud()
         action_bud.settle_bud()
         action_df = get_bud_acctunits_dataframe(action_bud)
-        action_df.insert(0, "owner_id", action_bud._owner_id)
+        action_df.insert(0, owner_id_str(), action_bud._owner_id)
         action_dfs.append(action_df)
     return pandas_concat(action_dfs, ignore_index=True)
 
 
 def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
+        owner_id_str(),
         acct_id_str(),
         "credit_score",
         "debtit_score",
@@ -135,7 +135,7 @@ def get_real_voices_agenda_dataframe(x_real: RealUnit) -> DataFrame:
 
 def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
+        owner_id_str(),
         "fund_ratio",
         "_label",
         "_parent_road",
@@ -194,7 +194,7 @@ def get_real_actions_agenda_dataframe(x_real: RealUnit) -> DataFrame:
 
 def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
+        owner_id_str(),
         "fund_ratio",
         "_label",
         "_parent_road",

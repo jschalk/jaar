@@ -1,3 +1,4 @@
+from src.gift.atom_config import real_id_str
 from src.money.examples.example_credorledgers import example_yao_hubunit
 from src.money.rivercycle import RiverGrade, rivergrade_shop
 
@@ -172,7 +173,7 @@ def test_RiverGrade_get_dict_ReturnsCorrectObj():
     rivergrade_dict = x_rivergrade.get_dict()
 
     # THEN
-    assert rivergrade_dict.get("real_id") == yao_hubunit.real_id
+    assert rivergrade_dict.get(real_id_str()) == yao_hubunit.real_id
     assert rivergrade_dict.get("healer_id") == yao_hubunit.owner_id
     assert rivergrade_dict.get("econ_road") == yao_hubunit.econ_road
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount

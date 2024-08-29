@@ -1,6 +1,6 @@
 from src._instrument.file import dir_files
-from src.gift.atom_config import config_file_dir, bud_acctunit_text
-from src.stone.stone import (
+from src.gift.atom_config import (
+    bud_acctunit_text,
     real_id_str,
     owner_id_str,
     acct_id_str,
@@ -14,12 +14,8 @@ from src.stone.stone import (
     credit_score_str,
     debtit_vote_str,
     credit_vote_str,
-    column_order_str,
-    # must_be_str,
-    # must_be_roadnode_str,
-    # must_be_roadunit_str,
-    # must_be_number_str,
-    # must_be_bool_str,
+)
+from src.stone.stone import (
     get_stone_formats_dir,
     get_stone_filenames,
     jaar_format_00001_acct_v0_0_0,
@@ -34,8 +30,6 @@ from src.stone.examples.stone_env import src_stone_dir
 
 def test_config_str_functions_ReturnObjs():
     # ESTABLISH / WHEN / THEN
-    assert real_id_str() == "real_id"
-    assert owner_id_str() == "owner_id"
     assert acct_id_str() == "acct_id"
     assert acct_pool_str() == "acct_pool"
     assert debtit_score_str() == "debtit_score"
@@ -88,8 +82,8 @@ def test_get_headers_list_ReturnsObj():
     # THEN
     # print(f"{format_00001_headers=}")
     assert format_00001_headers == [
-        "real_id",
-        "owner_id",
+        real_id_str(),
+        owner_id_str(),
         acct_id_str(),
         "credit_score",
         "debtit_score",
