@@ -5,6 +5,9 @@ from src._instrument.python import (
     get_all_nondictionary_objs,
     get_nested_value,
     get_positive_int,
+    extract_csv_headers,
+    get_csv_column1_column2_metrics,
+    create_filtered_csv_dict,
 )
 from pytest import raises as pytest_raises
 
@@ -214,3 +217,142 @@ def test_get_positive_int_ReturnsCorrectObj():
     assert get_positive_int(10.0) == 10
     assert get_positive_int(10.8) == 10
     assert get_positive_int(-10.8) == 0
+
+
+def test_extract_csv_headers_ReturnsEmptyObj():
+    # ESTABLISH
+    x_csv = ""
+
+    # WHEN
+    x_headers = extract_csv_headers(x_csv)
+
+    # THEN
+    assert x_headers == []
+
+
+def test_extract_csv_headers_ReturnsObj():
+    # ESTABLISH
+    x_csv = """x_id,y_id,w_id,u_id,z_id
+music,Sue,Bob,13,29
+music,Sue,Sue,11,23
+music,Sue,Yao,41,37
+"""
+
+    # WHEN
+    x_headers, x_csv = extract_csv_headers(x_csv)
+
+    # THEN
+    x_id_text = "x_id"
+    y_id_text = "y_id"
+    w_id_text = "w_id"
+    u_id_text = "u_id"
+    z_id_text = "z_id"
+    assert x_headers == [
+        x_id_text,
+        y_id_text,
+        w_id_text,
+        u_id_text,
+        z_id_text,
+    ]
+
+
+def test_extract_csv_headers_RemovesHeaders_csv():
+    # ESTABLISH
+    x_csv = """x_id,y_id,w_id,u_id,z_id
+music,Sue,Bob,13,29
+music,Sue,Sue,11,23
+music,Sue,Yao,41,37
+"""
+
+    # WHEN
+    x_headers, new_csv = extract_csv_headers(x_csv)
+
+    # THEN
+    print(f"{new_csv=}")
+    headerless_csv = """music,Sue,Bob,13,29
+music,Sue,Sue,11,23
+music,Sue,Yao,41,37
+"""
+    assert new_csv == headerless_csv
+
+
+def test_get_csv_column1_column2_metrics_ReturnsEmptyObj():
+    # ESTABLISH
+    headerless_csv = ""
+
+    # WHEN
+    x_dict = get_csv_column1_column2_metrics(headerless_csv=headerless_csv)
+
+    # THEN
+    assert x_dict == {}
+
+
+def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario1():
+    # ESTABLISH
+    x_id = "music56"
+    y_id = "Yao"
+    headerless_csv = f"""{x_id},{y_id},Bob,13,29
+"""
+
+    # WHEN
+    x_dict = get_csv_column1_column2_metrics(headerless_csv=headerless_csv)
+
+    # THEN
+    assert x_dict == {x_id: {y_id: 1}}
+
+
+def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario2():
+    # ESTABLISH
+    x_id = "music56"
+    sue_text = "Sue"
+    bob_text = "Bob"
+    headerless_csv = f"""{x_id},{sue_text},Bob,13,29
+{x_id},{sue_text},Sue,11,23
+{x_id},{sue_text},Yao,41,37
+{x_id},{sue_text},Zia,41,37
+{x_id},{bob_text},Yao,41,37
+"""
+
+    # WHEN
+    u_dict = get_csv_column1_column2_metrics(headerless_csv=headerless_csv)
+
+    # THEN
+    # print(f"{u_dict=}")
+
+    assert u_dict != {x_id: {sue_text: 1}}
+    assert u_dict == {x_id: {sue_text: 4, bob_text: 1}}
+
+
+def test_create_filtered_csv_dict_ReturnsObj_Scenario0():
+    # ESTABLISH
+    x_id = "music56"
+    sue_text = "Sue"
+    bob_text = "Bob"
+    headerless_csv = f"""{x_id},{sue_text},Bob,13,29
+{x_id},{sue_text},Sue,11,23
+{x_id},{sue_text},Yao,41,37
+{x_id},{sue_text},Zia,41,37
+{x_id},{bob_text},Yao,41,37
+"""
+
+    # WHEN
+    u_dict = create_filtered_csv_dict(headerless_csv=headerless_csv)
+
+    # THEN
+    # print(f"{u_dict=}")
+    static_sue_csv = f"""{x_id},{sue_text},Bob,13,29
+{x_id},{sue_text},Sue,11,23
+{x_id},{sue_text},Yao,41,37
+{x_id},{sue_text},Zia,41,37
+"""
+    static_bob_csv = f"""{x_id},{bob_text},Yao,41,37
+"""
+    generated_owner_id_dict = u_dict.get(x_id)
+    assert generated_owner_id_dict
+    assert list(generated_owner_id_dict.keys()) == [sue_text, bob_text]
+    generated_bob_csv = generated_owner_id_dict.get(bob_text)
+    assert generated_bob_csv == static_bob_csv
+    generated_sue_csv = generated_owner_id_dict.get(sue_text)
+    assert generated_sue_csv == static_sue_csv
+    owner_id_csv_dict = {sue_text: static_sue_csv, bob_text: static_bob_csv}
+    assert u_dict == {x_id: owner_id_csv_dict}
