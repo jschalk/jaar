@@ -178,9 +178,9 @@ def _generate_stone_dataframe(d2_list: list[list[str]], stone_name: str) -> Data
 def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_budunit)
+    x_stoneref = get_stoneref(stone_name)
     x_real_id = x_budunit._real_id
     x_owner_id = x_budunit._owner_id
-    x_stoneref = get_stoneref(stone_name)
     sorted_atomunits = _get_sorted_atom_insert_atomunits(x_changeunit, x_stoneref)
     d2_list = _create_d2_list(sorted_atomunits, x_stoneref, x_real_id, x_owner_id)
     d2_list = _change_all_pledge_values(d2_list, x_stoneref)

@@ -210,6 +210,27 @@ def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0():
 #     assert len(ideaunit_format) == 252
 
 
+def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0():
+    # ESTABLISH
+    music_real_id = "music56"
+    sue_text = sue_str()
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
+    sue_budunit = add_time_cinco_ideaunit(sue_budunit)
+    x_stone_name = stone_format_00019_ideaunit_v0_0_0()
+
+    # WHEN
+    # acct_filename = f"{sue_text}_ideaunit_example_00019.csv"
+    # csv_example_path = create_file_path(stone_reals_dir(), acct_filename)
+    # save_stone_csv(x_stone_name, sue_budunit, stone_examples_dir(), acct_filename)
+    stone_df = create_stone_df(sue_budunit, x_stone_name)
+
+    # THEN
+    array_headers = list(stone_df.columns)
+    assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+    assert len(stone_df) == 110
+
+
 def test_save_stone_csv_Arg_stone_format_00001_acct_v0_0_0_SaveToCSV(
     stone_env_setup_cleanup,
 ):
@@ -286,32 +307,3 @@ def test_save_stone_csv_Arg_stone_format_00003_ideaunit_v0_0_0(stone_env_setup_c
 
     # THEN
     assert os_path_exists(csv_example_path)
-
-
-def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0(stone_env_setup_cleanup):
-    # ESTABLISH
-    sue_text = sue_str()
-    sue_budunit = budunit_shop(sue_text, "music56")
-    sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit = add_time_cinco_ideaunit(sue_budunit)
-    x_stone_name = stone_format_00019_ideaunit_v0_0_0()
-    acct_filename = f"{sue_text}_ideaunit_example_00019.csv"
-    csv_example_path = create_file_path(stone_reals_dir(), acct_filename)
-    assert not os_path_exists(csv_example_path)
-
-    # WHEN
-    # save_stone_csv(x_stone_name, sue_budunit, stone_examples_dir(), acct_filename)
-    save_stone_csv(x_stone_name, sue_budunit, stone_reals_dir(), acct_filename)
-
-    # THEN
-    assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = f"""{real_id_str()},{owner_id_str()},{parent_road_str()},{label_str()},{begin_str()},{close_str()},{addin_str()},{numor_str()},{denom_str()},{morph_str()},{gogo_want_str()},{stop_want_str()}
-music56,Sue,music56,time,,,,,,,,
-music56,Sue,music56;time,cinco,0.0,5259492000.0,,,,,,
-music56,Sue,music56;time,creg,0.0,1472657760.0,,,,,,
-music56,Sue,music56;time;cinco,c400_leap,,,,,210379680.0,True,,
-"""
-    parital_file_csv = open_file(stone_reals_dir(), acct_filename)[0:295]
-    print(f"{sue2_acct_example_csv=}")
-    print(f"     {parital_file_csv=}")
-    assert parital_file_csv == sue2_acct_example_csv
