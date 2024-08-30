@@ -94,6 +94,8 @@ class IdeaAttrFilter:
     healerhold: HealerHold = None
     begin: float = None
     close: float = None
+    gogo_want: float = None
+    stop_want: float = None
     addin: float = None
     numor: float = None
     denom: float = None
@@ -151,6 +153,8 @@ def ideaattrfilter_shop(
     healerhold: HealerHold = None,
     begin: float = None,
     close: float = None,
+    gogo_want: float = None,
+    stop_want: float = None,
     addin: float = None,
     numor: float = None,
     denom: float = None,
@@ -181,6 +185,8 @@ def ideaattrfilter_shop(
         healerhold=healerhold,
         begin=begin,
         close=close,
+        gogo_want=gogo_want,
+        stop_want=stop_want,
         addin=addin,
         numor=numor,
         denom=denom,
@@ -571,6 +577,10 @@ class IdeaUnit:
             self._begin = idea_attr.begin
         if idea_attr.close is not None:
             self._close = idea_attr.close
+        if idea_attr.gogo_want is not None:
+            self._gogo_want = idea_attr.gogo_want
+        if idea_attr.stop_want is not None:
+            self._stop_want = idea_attr.stop_want
         if idea_attr.addin is not None:
             self._addin = idea_attr.addin
         if idea_attr.numor is not None:
