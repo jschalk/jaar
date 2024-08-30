@@ -340,7 +340,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     assert range_3_to_6_reason._status is None
 
     # WHEN
-    range_5_to_8_fact = factheir_shop(day_road, day_road, open=5, nigh=8)
+    range_5_to_8_fact = factheir_shop(day_road, day_road, fopen=5, fnigh=8)
     range_5_to_8_facts = {range_5_to_8_fact.base: range_5_to_8_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_8_facts)
     # THEN
@@ -348,7 +348,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     assert range_3_to_6_reason._task is True
 
     # WHEN
-    range_5_to_6_fact = factheir_shop(day_road, day_road, open=5, nigh=6)
+    range_5_to_6_fact = factheir_shop(day_road, day_road, fopen=5, fnigh=6)
     range_5_to_6_facts = {range_5_to_6_fact.base: range_5_to_6_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_6_facts)
     # THEN
@@ -356,7 +356,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     assert range_3_to_6_reason._task is False
 
     # WHEN
-    range_0_to_1_fact = factheir_shop(day_road, day_road, open=0, nigh=1)
+    range_0_to_1_fact = factheir_shop(day_road, day_road, fopen=0, fnigh=1)
     range_0_to_1_facts = {range_0_to_1_fact.base: range_0_to_1_fact}
     range_3_to_6_reason.set_status(factheirs=range_0_to_1_facts)
     # THEN

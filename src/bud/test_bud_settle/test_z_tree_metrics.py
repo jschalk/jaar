@@ -138,8 +138,8 @@ def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
     yao_budunit.set_fact(
         base=yao_budunit.make_l1_road("day_minute"),
         pick=yao_budunit.make_l1_road("day_minute"),
-        open=0,
-        nigh=1439,
+        fopen=0,
+        fnigh=1439,
     )
 
     # WHEN

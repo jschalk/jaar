@@ -10,6 +10,8 @@ from src.gift.atom_config import (
     acct_id_str,
     parent_road_str,
     label_str,
+    fopen_str,
+    fnigh_str,
     budunit_text,
 )
 from src.gift.atom import atomunit_shop, AtomUnit
@@ -64,18 +66,16 @@ def get_atom_example_factunit_knee(real_id: RealID = None) -> AtomUnit:
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road(real_id, knee_text)
-    knee_open = 7
-    knee_nigh = 23
+    knee_fopen = 7
+    knee_fnigh = 23
     x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
-    open_text = "open"
-    nigh_text = "nigh"
     insert_factunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_factunit_atomunit.set_required_arg(road_text, ball_road)
     insert_factunit_atomunit.set_required_arg(base_text, knee_road)
-    insert_factunit_atomunit.set_optional_arg(open_text, knee_open)
-    insert_factunit_atomunit.set_optional_arg(nigh_text, knee_nigh)
+    insert_factunit_atomunit.set_optional_arg(fopen_str(), knee_fopen)
+    insert_factunit_atomunit.set_optional_arg(fnigh_str(), knee_fnigh)
     return insert_factunit_atomunit
 
 

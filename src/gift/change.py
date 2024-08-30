@@ -38,6 +38,8 @@ from src.gift.atom_config import (
     mass_str,
     credit_vote_str,
     debtit_vote_str,
+    fopen_str,
+    fnigh_str,
     base_idea_active_requisite_str,
 )
 from src.gift.atom import (
@@ -777,10 +779,10 @@ class ChangeUnit:
             x_atomunit.set_required_arg("base", insert_factunit.base)
             if insert_factunit.pick is not None:
                 x_atomunit.set_optional_arg("pick", insert_factunit.pick)
-            if insert_factunit.open is not None:
-                x_atomunit.set_optional_arg("open", insert_factunit.open)
-            if insert_factunit.nigh is not None:
-                x_atomunit.set_optional_arg("nigh", insert_factunit.nigh)
+            if insert_factunit.fopen is not None:
+                x_atomunit.set_optional_arg(fopen_str(), insert_factunit.fopen)
+            if insert_factunit.fnigh is not None:
+                x_atomunit.set_optional_arg(fnigh_str(), insert_factunit.fnigh)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_factunit_updates(
@@ -800,10 +802,10 @@ class ChangeUnit:
                 x_atomunit.set_required_arg("base", after_factunit.base)
                 if before_factunit.pick != after_factunit.pick:
                     x_atomunit.set_optional_arg("pick", after_factunit.pick)
-                if before_factunit.open != after_factunit.open:
-                    x_atomunit.set_optional_arg("open", after_factunit.open)
-                if before_factunit.nigh != after_factunit.nigh:
-                    x_atomunit.set_optional_arg("nigh", after_factunit.nigh)
+                if before_factunit.fopen != after_factunit.fopen:
+                    x_atomunit.set_optional_arg(fopen_str(), after_factunit.fopen)
+                if before_factunit.fnigh != after_factunit.fnigh:
+                    x_atomunit.set_optional_arg(fnigh_str(), after_factunit.fnigh)
                 self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_factunit_deletes(

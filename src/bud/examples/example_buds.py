@@ -28,15 +28,15 @@ def budunit_v001_with_large_agenda() -> BudUnit:
     weekdays_road = yao_bud.make_l1_road("weekdays")
 
     yao_bud.set_fact(aaron_road, aaron_road)
-    yao_bud.set_fact(ced_week_road, ced_week_road, open=0, nigh=53)
-    yao_bud.set_fact(day_minute_road, day_minute_road, open=0, nigh=1399)
+    yao_bud.set_fact(ced_week_road, ced_week_road, fopen=0, fnigh=53)
+    yao_bud.set_fact(day_minute_road, day_minute_road, fopen=0, fnigh=1399)
     # yao_bud.set_fact(internet, internet)
-    yao_bud.set_fact(month_week_road, month_week_road, open=0, nigh=5)
+    yao_bud.set_fact(month_week_road, month_week_road, fopen=0, fnigh=5)
     yao_bud.set_fact(mood_road, mood_road)
     # yao_bud.set_fact(movie, movie)
     yao_bud.set_fact(nations_road, nations_road)
     yao_bud.set_fact(season_road, season_road)
-    yao_bud.set_fact(year_month_road, year_month_road, open=0, nigh=12)
+    yao_bud.set_fact(year_month_road, year_month_road, fopen=0, fnigh=12)
     # yao_bud.set_fact(water, water)
     yao_bud.set_fact(weekdays_road, weekdays_road)
     return yao_bud
@@ -494,10 +494,10 @@ def yr_print_fact(lh_base, lh_status, premises, factheirs):
 
         for hh in factheirs.values():
             if hh.base == lh_base:
-                if hh.open is not None:
-                    hh_open = f"\topen:{hh.open}"
-                if hh.nigh is not None:
-                    hh_nigh = f"\tnigh:{hh.nigh}"
+                if hh.fopen is not None:
+                    hh_open = f"\topen:{hh.fopen}"
+                if hh.fnigh is not None:
+                    hh_nigh = f"\tnigh:{hh.fnigh}"
                 hh_pick = hh.pick
                 # if hh_pick != "":
                 print(

@@ -211,6 +211,14 @@ def stop_want_str() -> str:
     return "stop_want"
 
 
+def fopen_str() -> str:
+    return "fopen"
+
+
+def fnigh_str() -> str:
+    return "fnigh"
+
+
 def base_idea_active_requisite_str() -> str:
     return "base_idea_active_requisite"
 

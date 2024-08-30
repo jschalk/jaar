@@ -22,6 +22,8 @@ from src.gift.atom_config import (
     begin_str,
     close_str,
     mass_str,
+    fopen_str,
+    fnigh_str,
     base_idea_active_requisite_str,
 )
 from src.gift.atom import atom_insert, atom_update, atom_delete
@@ -688,24 +690,16 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_u
     broken_road = before_sue_bud.make_road(knee_road, broken_text)
     before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
-    before_broken_open = 11
-    before_broken_nigh = 22
-    before_sue_bud.edit_idea_attr(
-        ball_road,
-        factunit=factunit_shop(
-            knee_road, bend_road, before_broken_open, before_broken_nigh
-        ),
-    )
+    before_fopen = 11
+    before_fnigh = 22
+    before_fact = factunit_shop(knee_road, bend_road, before_fopen, before_fnigh)
+    before_sue_bud.edit_idea_attr(ball_road, factunit=before_fact)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_broken_open = 55
-    after_broken_nigh = 66
-    after_sue_bud.edit_idea_attr(
-        ball_road,
-        factunit=factunit_shop(
-            knee_road, broken_road, after_broken_open, after_broken_nigh
-        ),
-    )
+    after_fopen = 55
+    after_fnigh = 66
+    knee_fact = factunit_shop(knee_road, broken_road, after_fopen, after_fnigh)
+    after_sue_bud.edit_idea_attr(ball_road, factunit=knee_fact)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -719,8 +713,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_u
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("pick") == broken_road
-    assert ball_atomunit.get_value("open") == after_broken_open
-    assert ball_atomunit.get_value("nigh") == after_broken_nigh
+    assert ball_atomunit.get_value(fopen_str()) == after_fopen
+    assert ball_atomunit.get_value(fnigh_str()) == after_fnigh
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
@@ -741,17 +735,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_i
     before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_broken_open = 55
-    after_broken_nigh = 66
-    after_sue_bud.edit_idea_attr(
-        road=ball_road,
-        factunit=factunit_shop(
-            base=knee_road,
-            pick=broken_road,
-            open=after_broken_open,
-            nigh=after_broken_nigh,
-        ),
-    )
+    after_fopen = 55
+    after_fnigh = 66
+    after_fact = factunit_shop(knee_road, broken_road, after_fopen, after_fnigh)
+    after_sue_bud.edit_idea_attr(road=ball_road, factunit=after_fact)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -764,8 +751,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_i
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("pick") == broken_road
-    assert ball_atomunit.get_value("open") == after_broken_open
-    assert ball_atomunit.get_value("nigh") == after_broken_nigh
+    assert ball_atomunit.get_value(fopen_str()) == after_fopen
+    assert ball_atomunit.get_value(fnigh_str()) == after_fnigh
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
@@ -788,15 +775,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_d
     after_sue_bud = copy_deepcopy(before_sue_bud)
     before_broken_open = 55
     before_broken_nigh = 66
-    before_sue_bud.edit_idea_attr(
-        road=ball_road,
-        factunit=factunit_shop(
-            base=knee_road,
-            pick=broken_road,
-            open=before_broken_open,
-            nigh=before_broken_nigh,
-        ),
+    before_fact = factunit_shop(
+        base=knee_road,
+        pick=broken_road,
+        fopen=before_broken_open,
+        fnigh=before_broken_nigh,
     )
+    before_sue_bud.edit_idea_attr(road=ball_road, factunit=before_fact)
 
     # WHEN
     sue_changeunit = changeunit_shop()

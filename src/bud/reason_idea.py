@@ -19,36 +19,36 @@ class InvalidReasonException(Exception):
 class FactCore:
     base: RoadUnit
     pick: RoadUnit
-    open: float = None
-    nigh: float = None
+    fopen: float = None
+    fnigh: float = None
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {
             "base": self.base,
             "pick": self.pick,
         }
-        if self.open is not None:
-            x_dict["open"] = self.open
-        if self.nigh is not None:
-            x_dict["nigh"] = self.nigh
+        if self.fopen is not None:
+            x_dict["fopen"] = self.fopen
+        if self.fnigh is not None:
+            x_dict["fnigh"] = self.fnigh
         return x_dict
 
     def set_range_null(self):
-        self.open = None
-        self.nigh = None
+        self.fopen = None
+        self.fnigh = None
 
-    def set_attr(self, pick: RoadUnit = None, open: float = None, nigh: float = None):
+    def set_attr(self, pick: RoadUnit = None, fopen: float = None, fnigh: float = None):
         if pick is not None:
             self.pick = pick
-        if open is not None:
-            self.open = open
-        if nigh is not None:
-            self.nigh = nigh
+        if fopen is not None:
+            self.fopen = fopen
+        if fnigh is not None:
+            self.fnigh = fnigh
 
     def set_pick_to_base(self):
         self.set_attr(pick=self.base)
-        self.open = None
-        self.nigh = None
+        self.fopen = None
+        self.fnigh = None
 
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         self.base = rebuild_road(self.base, old_road, new_road)
@@ -71,19 +71,19 @@ def factunits_get_from_dict(x_dict: dict):
         x_pick = fact_dict["pick"]
 
         try:
-            x_open = fact_dict["open"]
+            x_fopen = fact_dict["fopen"]
         except KeyError:
-            x_open = None
+            x_fopen = None
         try:
-            x_nigh = fact_dict["nigh"]
+            x_fnigh = fact_dict["fnigh"]
         except KeyError:
-            x_nigh = None
+            x_fnigh = None
 
         x_fact = factunit_shop(
             base=x_base,
             pick=x_pick,
-            open=x_open,
-            nigh=x_nigh,
+            fopen=x_fopen,
+            fnigh=x_fnigh,
         )
 
         facts[x_fact.base] = x_fact
@@ -91,26 +91,32 @@ def factunits_get_from_dict(x_dict: dict):
 
 
 def factunit_shop(
-    base: RoadUnit = None, pick: RoadUnit = None, open: float = None, nigh: float = None
+    base: RoadUnit = None,
+    pick: RoadUnit = None,
+    fopen: float = None,
+    fnigh: float = None,
 ) -> FactUnit:
-    return FactUnit(base=base, pick=pick, open=open, nigh=nigh)
+    return FactUnit(base=base, pick=pick, fopen=fopen, fnigh=fnigh)
 
 
 @dataclass
 class FactHeir(FactCore):
     def transform(self, factunit: FactUnit):
-        x_bool = self.open and factunit.open and self.nigh
-        if x_bool and self.open <= factunit.open and self.nigh >= factunit.open:
-            self.open = factunit.open
+        x_bool = self.fopen and factunit.fopen and self.fnigh
+        if x_bool and self.fopen <= factunit.fopen and self.fnigh >= factunit.fopen:
+            self.fopen = factunit.fopen
 
     def is_range(self):
-        return self.open is not None and self.nigh is not None
+        return self.fopen is not None and self.fnigh is not None
 
 
 def factheir_shop(
-    base: RoadUnit = None, pick: RoadUnit = None, open: float = None, nigh: float = None
+    base: RoadUnit = None,
+    pick: RoadUnit = None,
+    fopen: float = None,
+    fnigh: float = None,
 ) -> FactHeir:
-    return FactHeir(base=base, pick=pick, open=open, nigh=nigh)
+    return FactHeir(base=base, pick=pick, fopen=fopen, fnigh=fnigh)
 
 
 class PremiseStatusFinderException(Exception):
@@ -345,14 +351,14 @@ class PremiseUnit:
     def _get_task_status(self, factheir: FactHeir) -> bool:
         x_task = None
         if self._status and self._is_range():
-            x_task = factheir.nigh > self.nigh
+            x_task = factheir.fnigh > self.nigh
         elif self._status and self._is_segregate():
             segr_obj = premisestatusfinder_shop(
                 premise_open=self.open,
                 premise_nigh=self.nigh,
                 premise_divisor=self.divisor,
-                fact_open_full=factheir.open,
-                fact_nigh_full=factheir.nigh,
+                fact_open_full=factheir.fopen,
+                fact_nigh_full=factheir.fnigh,
             )
             x_task = segr_obj.get_task_status()
         elif self._status in [True, False]:
@@ -374,16 +380,16 @@ class PremiseUnit:
             premise_open=self.open,
             premise_nigh=self.nigh,
             premise_divisor=self.divisor,
-            fact_open_full=factheir.open,
-            fact_nigh_full=factheir.nigh,
+            fact_open_full=factheir.fopen,
+            fact_nigh_full=factheir.fnigh,
         )
         return segr_obj.get_active()
 
     def _get_range_status(self, factheir: FactHeir) -> bool:
         return (
-            (self.open <= factheir.open and self.nigh > factheir.open)
-            or (self.open <= factheir.nigh and self.nigh > factheir.nigh)
-            or (self.open >= factheir.open and self.nigh < factheir.nigh)
+            (self.open <= factheir.fopen and self.nigh > factheir.fopen)
+            or (self.open <= factheir.fnigh and self.nigh > factheir.fnigh)
+            or (self.open >= factheir.fopen and self.nigh < factheir.fnigh)
         )
 
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):

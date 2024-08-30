@@ -3,6 +3,8 @@ from src.gift.atom_config import (
     atom_insert,
     atom_delete,
     bud_idea_factunit_text,
+    fnigh_str,
+    fopen_str,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
@@ -51,16 +53,14 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumberArgs():
     base_value = sue_bud.make_road(casa_road, "fridge status")
     pick_text = "pick"
     pick_value = sue_bud.make_road(base_value, "dirty")
-    nigh_text = "nigh"
-    open_text = "open"
-    nigh_value = 13
-    open_value = 17
+    fnigh_value = 13
+    fopen_value = 17
     swim_atomunit = atomunit_shop(category, atom_insert())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(base_text, base_value)
     swim_atomunit.set_arg(pick_text, pick_value)
-    swim_atomunit.set_arg(nigh_text, nigh_value)
-    swim_atomunit.set_arg(open_text, open_value)
+    swim_atomunit.set_arg(fnigh_str(), fnigh_value)
+    swim_atomunit.set_arg(fopen_str(), fopen_value)
     # print(f"{swim_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(swim_atomunit)
@@ -69,7 +69,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumberArgs():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for idea '{road_value}'. Open={open_value}. Nigh={nigh_value}."
+    x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for idea '{road_value}'. fOpen={fopen_value}. fNigh={fnigh_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -115,16 +115,14 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumberArgs():
     base_value = sue_bud.make_road(casa_road, "fridge status")
     pick_text = "pick"
     pick_value = sue_bud.make_road(base_value, "dirty")
-    nigh_text = "nigh"
-    open_text = "open"
-    nigh_value = 13
-    open_value = 17
+    fnigh_value = 13
+    fopen_value = 17
     swim_atomunit = atomunit_shop(category, atom_update())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(base_text, base_value)
     swim_atomunit.set_arg(pick_text, pick_value)
-    swim_atomunit.set_arg(nigh_text, nigh_value)
-    swim_atomunit.set_arg(open_text, open_value)
+    swim_atomunit.set_arg(fnigh_str(), fnigh_value)
+    swim_atomunit.set_arg(fopen_str(), fopen_value)
     # print(f"{swim_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(swim_atomunit)
@@ -133,7 +131,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumberArgs():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for idea '{road_value}'. Open={open_value}. Nigh={nigh_value}."
+    x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for idea '{road_value}'. fOpen={fopen_value}. fNigh={fnigh_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

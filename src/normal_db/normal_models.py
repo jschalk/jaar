@@ -111,6 +111,6 @@ class FactTable(Base):
     uid = Column(Integer, primary_key=True)
     base = Column(String)
     road = Column(String)
-    nigh = Column(Float)
-    open = Column(Float)
+    fnigh = Column(Float)
+    fopen = Column(Float)
     pick = Column(String)

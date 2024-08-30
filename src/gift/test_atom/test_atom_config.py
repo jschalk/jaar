@@ -356,6 +356,24 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
     assert check_necessary_nesting_order_exists()
 
 
+def _get_atom_config_optional_arg_keys(x_cat: str) -> set[str]:
+    optional_args_key_list = [x_cat, optional_args_text()]
+    return set(get_nested_value(get_atom_config_dict(), optional_args_key_list).keys())
+
+
+# def test_get_atom_config_dict_CheckEveryOptionalArgHasUniqueKey():
+#     # ESTABLISH / WHEN
+#     optional_arg_keys = set()
+#     optional_arg_key_count = 0
+#     for atom_category in get_atom_config_dict().keys():
+#         optional_arg_keys.update(_get_atom_config_optional_arg_keys(atom_category))
+#         optional_arg_key_count += len(_get_atom_config_optional_arg_keys(atom_category))
+#         print(f"{atom_category} {_get_atom_config_optional_arg_keys(atom_category)}")
+#     print(f"{optional_arg_key_count=} {len(optional_arg_keys)=}")
+#     print(f"{optional_arg_keys=}")
+#     assert 1 == 2
+
+
 def test_get_sorted_required_arg_keys_ReturnsObj_bud_acctunit():
     # ESTABLISH
     x_category = bud_acctunit_text()
