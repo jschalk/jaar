@@ -163,6 +163,10 @@ def credit_vote_str() -> str:
     return "credit_vote"
 
 
+def road_str() -> str:
+    return "road"
+
+
 def parent_road_str() -> str:
     return "parent_road"
 
@@ -209,6 +213,10 @@ def gogo_want_str() -> str:
 
 def stop_want_str() -> str:
     return "stop_want"
+
+
+def base_str() -> str:
+    return "base"
 
 
 def fopen_str() -> str:
