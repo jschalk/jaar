@@ -1,6 +1,5 @@
 {
     "bud_acct_membership": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 23
         },
@@ -42,7 +41,6 @@
         }
     },
     "bud_acctunit": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 24
         },
@@ -77,7 +75,6 @@
         }
     },
     "bud_idea_awardlink": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 21
         },
@@ -119,7 +116,6 @@
         }
     },
     "bud_idea_factunit": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 18
         },
@@ -166,7 +162,6 @@
         }
     },
     "bud_idea_grouphold": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 19
         },
@@ -194,7 +189,6 @@
         "treasury_only": false
     },
     "bud_idea_healerhold": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 20
         },
@@ -222,7 +216,6 @@
         "treasury_only": false
     },
     "bud_idea_reason_premiseunit": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 16
         },
@@ -275,7 +268,6 @@
         }
     },
     "bud_idea_reasonunit": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 17
         },
@@ -312,7 +304,6 @@
         }
     },
     "bud_ideaunit": {
-        "calculated_attrs": {},
         "DELETE": {
             "atom_order": 22
         },
@@ -389,7 +380,6 @@
         }
     },
     "budunit": {
-        "calculated_attrs": {},
         "normal_specs": {
             "normal_table_name": "bud"
         },

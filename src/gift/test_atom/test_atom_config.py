@@ -190,11 +190,6 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
             print(f"{category=} missing {treasury_only_text}")
             return False
 
-        calculated_attrs_text = "calculated_attrs"
-        if category_dict.get(calculated_attrs_text) is None:
-            print(f"{category=} {calculated_attrs_text} is missing")
-            return False
-
         if category_dict.get(normal_specs_text()) is None:
             print(f"{category=} {normal_specs_text()} is missing")
             return False
