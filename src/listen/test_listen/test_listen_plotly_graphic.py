@@ -1,4 +1,4 @@
-from src._instrument.python import conditional_fig_show
+from src._instrument.python_tool import conditional_fig_show
 from src.listen.examples.example_listen_buds import get_fund_explanation_bud
 from src.listen.listen_graphic import (
     get_listen_structures0_fig,

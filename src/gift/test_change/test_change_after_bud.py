@@ -18,9 +18,20 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_grouphold_text,
-    bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    acct_id_str,
+    group_id_str,
+    parent_road_str,
+    label_str,
+    base_idea_active_requisite_str,
+    pledge_str,
+    begin_str,
+    close_str,
+    credit_vote_str,
+    debtit_vote_str,
+    gogo_want_str,
+    stop_want_str,
 )
 from src.gift.change import changeunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
@@ -49,7 +60,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     sue_tally = 44
     before_sue_budunit = budunit_shop(sue_text, _tally=sue_tally)
 
-    category = "budunit"
+    category = budunit_text()
     x_atomunit = atomunit_shop(category, atom_update())
     new1_value = 55
     new1_arg = "tally"
@@ -112,7 +123,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
 
     category = bud_acctunit_text()
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg("acct_id", zia_text)
+    x_atomunit.set_required_arg(acct_id_str(), zia_text)
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN
@@ -140,7 +151,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     # WHEN
     category = bud_acctunit_text()
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_required_arg("acct_id", zia_text)
+    x_atomunit.set_required_arg(acct_id_str(), zia_text)
     x_credit_score = 55
     x_debtit_score = 66
     x_atomunit.set_optional_arg("credit_score", x_credit_score)
@@ -171,7 +182,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     # WHEN
     category = bud_acctunit_text()
     x_atomunit = atomunit_shop(category, atom_update())
-    x_atomunit.set_required_arg("acct_id", yao_text)
+    x_atomunit.set_required_arg(acct_id_str(), yao_text)
     yao_credit_score = 55
     x_atomunit.set_optional_arg("credit_score", yao_credit_score)
     sue_changeunit.set_atomunit(x_atomunit)
@@ -209,12 +220,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership()
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_text(), atom_delete())
-    yao_atomunit.set_required_arg("group_id", run_text)
-    yao_atomunit.set_required_arg("acct_id", yao_text)
+    yao_atomunit.set_required_arg(group_id_str(), run_text)
+    yao_atomunit.set_required_arg(acct_id_str(), yao_text)
     # print(f"{yao_atomunit=}")
     zia_atomunit = atomunit_shop(bud_acct_membership_text(), atom_delete())
-    zia_atomunit.set_required_arg("group_id", fly_text)
-    zia_atomunit.set_required_arg("acct_id", zia_text)
+    zia_atomunit.set_required_arg(group_id_str(), fly_text)
+    zia_atomunit.set_required_arg(acct_id_str(), zia_text)
     # print(f"{zia_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
@@ -245,8 +256,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership()
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
-    yao_atomunit.set_required_arg("group_id", run_text)
-    yao_atomunit.set_required_arg("acct_id", yao_text)
+    yao_atomunit.set_required_arg(group_id_str(), run_text)
+    yao_atomunit.set_required_arg(acct_id_str(), yao_text)
     yao_run_credit_vote = 17
     yao_atomunit.set_optional_arg("credit_vote", yao_run_credit_vote)
     print(f"{yao_atomunit=}")
@@ -279,12 +290,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership()
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_text(), atom_update())
-    yao_atomunit.set_required_arg("group_id", run_text)
-    yao_atomunit.set_required_arg("acct_id", yao_text)
+    yao_atomunit.set_required_arg(group_id_str(), run_text)
+    yao_atomunit.set_required_arg(acct_id_str(), yao_text)
     new_yao_run_credit_vote = 7
     new_yao_run_debtit_vote = 11
-    yao_atomunit.set_optional_arg("credit_vote", new_yao_run_credit_vote)
-    yao_atomunit.set_optional_arg("debtit_vote", new_yao_run_debtit_vote)
+    yao_atomunit.set_optional_arg(credit_vote_str(), new_yao_run_credit_vote)
+    yao_atomunit.set_optional_arg(debtit_vote_str(), new_yao_run_debtit_vote)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
@@ -314,11 +325,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_ideaunit():
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_delete())
     delete_disc_atomunit.set_required_arg(
-        "label", get_terminus_node(disc_road, before_sue_budunit._road_delimiter)
+        label_str(), get_terminus_node(disc_road, before_sue_budunit._road_delimiter)
     )
     print(f"{disc_road=}")
     delete_disc_atomunit.set_required_arg(
-        "parent_road",
+        parent_road_str(),
         get_parent_road(disc_road, before_sue_budunit._road_delimiter),
     )
     print(f"{delete_disc_atomunit=}")
@@ -347,20 +358,22 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
 
     # WHEN
     # x_addin = 140
-    # x_begin = 1000
-    # x_close = 1700
+    x_gogo_want = 1000
+    x_stop_want = 1700
     # x_denom = 17
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
-    insert_disc_atomunit.set_required_arg("label", disc_text)
-    insert_disc_atomunit.set_required_arg("parent_road", sports_road)
-    # insert_disc_atomunit.set_optional_arg("addin", x_addin)
-    # insert_disc_atomunit.set_optional_arg("begin", x_begin)
-    # insert_disc_atomunit.set_optional_arg("close", x_close)
-    # insert_disc_atomunit.set_optional_arg("denom", x_denom)
-    # insert_disc_atomunit.set_optional_arg("numor", x_numor)
-    insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
+    insert_disc_atomunit.set_required_arg(label_str(), disc_text)
+    insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
+    # insert_disc_atomunit.set_optional_arg(addin_str(), x_addin)
+    # insert_disc_atomunit.set_optional_arg(begin_str(), x_begin)
+    # insert_disc_atomunit.set_optional_arg(close_str(), x_close)
+    # insert_disc_atomunit.set_optional_arg(denom_str(), x_denom)
+    # insert_disc_atomunit.set_optional_arg(numor_str(), x_numor)
+    insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
+    insert_disc_atomunit.set_optional_arg(gogo_want_str(), x_gogo_want)
+    insert_disc_atomunit.set_optional_arg(stop_want_str(), x_stop_want)
 
     print(f"{insert_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
@@ -370,6 +383,9 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     # THEN
     assert after_sue_budunit.idea_exists(ball_road)
     assert after_sue_budunit.idea_exists(disc_road)
+    disc_idea = after_sue_budunit.get_idea_obj(disc_road)
+    assert disc_idea._gogo_want == x_gogo_want
+    assert disc_idea._stop_want == x_stop_want
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_SimpleAttributes():
@@ -381,35 +397,44 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_Sim
     ball_text = "basketball"
     ball_road = before_sue_budunit.make_road(sports_road, ball_text)
     before_sue_budunit.set_idea(ideaunit_shop(ball_text), sports_road)
-    assert before_sue_budunit.get_idea_obj(ball_road)._begin is None
-    assert before_sue_budunit.get_idea_obj(ball_road)._close is None
-    assert before_sue_budunit.get_idea_obj(ball_road).pledge is False
 
-    # WHEN
     # x_addin = 140
     x_begin = 1000
     x_close = 1700
     # x_denom = 17
     # x_numor = 10
+    x_gogo_want = 1222
+    x_stop_want = 1333
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_update())
-    insert_disc_atomunit.set_required_arg("label", ball_text)
-    insert_disc_atomunit.set_required_arg("parent_road", sports_road)
-    # insert_disc_atomunit.set_optional_arg("addin", x_addin)
-    insert_disc_atomunit.set_optional_arg("begin", x_begin)
-    insert_disc_atomunit.set_optional_arg("close", x_close)
-    # insert_disc_atomunit.set_optional_arg("denom", x_denom)
-    # insert_disc_atomunit.set_optional_arg("numor", x_numor)
-    insert_disc_atomunit.set_optional_arg("pledge", x_pledge)
+    insert_disc_atomunit.set_required_arg(label_str(), ball_text)
+    insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
+    # insert_disc_atomunit.set_optional_arg(addin_str(), x_addin)
+    insert_disc_atomunit.set_optional_arg(begin_str(), x_begin)
+    insert_disc_atomunit.set_optional_arg(close_str(), x_close)
+    # insert_disc_atomunit.set_optional_arg(denom_str(), x_denom)
+    # insert_disc_atomunit.set_optional_arg(numor_str(), x_numor)
+    insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
+    insert_disc_atomunit.set_optional_arg(gogo_want_str(), x_gogo_want)
+    insert_disc_atomunit.set_optional_arg(stop_want_str(), x_stop_want)
 
     print(f"{insert_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(insert_disc_atomunit)
+    assert before_sue_budunit.get_idea_obj(ball_road)._begin is None
+    assert before_sue_budunit.get_idea_obj(ball_road)._close is None
+    assert before_sue_budunit.get_idea_obj(ball_road).pledge is False
+    assert before_sue_budunit.get_idea_obj(ball_road)._gogo_want is None
+    assert before_sue_budunit.get_idea_obj(ball_road)._stop_want is None
+
+    # WHEN
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
     assert after_sue_budunit.get_idea_obj(ball_road)._begin == x_begin
     assert after_sue_budunit.get_idea_obj(ball_road)._close == x_close
+    assert after_sue_budunit.get_idea_obj(ball_road)._gogo_want == x_gogo_want
+    assert after_sue_budunit.get_idea_obj(ball_road)._stop_want == x_stop_want
     assert after_sue_budunit.get_idea_obj(ball_road).pledge
 
 
@@ -452,7 +477,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_delete())
     delete_disc_atomunit.set_required_arg("road", disc_road)
-    delete_disc_atomunit.set_required_arg("group_id", fly_text)
+    delete_disc_atomunit.set_required_arg(group_id_str(), fly_text)
     print(f"{delete_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(delete_disc_atomunit)
@@ -490,7 +515,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_update())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("group_id", run_text)
+    update_disc_atomunit.set_required_arg(group_id_str(), run_text)
     update_disc_atomunit.set_optional_arg("give_force", x_give_force)
     update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -529,7 +554,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("group_id", run_text)
+    update_disc_atomunit.set_required_arg(group_id_str(), run_text)
     update_disc_atomunit.set_optional_arg("give_force", x_give_force)
     update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -853,7 +878,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_reasonu
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("base", knee_road)
     update_disc_atomunit.set_optional_arg(
-        "base_idea_active_requisite", medical_base_idea_active_requisite
+        base_idea_active_requisite_str(), medical_base_idea_active_requisite
     )
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
@@ -906,7 +931,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_reasonu
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("base", knee_road)
     update_disc_atomunit.set_optional_arg(
-        "base_idea_active_requisite", after_medical_base_idea_active_requisite
+        base_idea_active_requisite_str(), after_medical_base_idea_active_requisite
     )
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
@@ -975,7 +1000,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_groupho
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("group_id", yao_text)
+    update_disc_atomunit.set_required_arg(group_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
@@ -1005,7 +1030,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_groupho
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_delete())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("group_id", yao_text)
+    update_disc_atomunit.set_required_arg(group_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
     print(f"{before_sue_au.get_idea_obj(ball_road)._doerunit=}")
@@ -1014,66 +1039,6 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_groupho
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
     assert after_ball_ideaunit._doerunit._groupholds == set()
-
-
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_range_push():
-    # ESTABLISH
-    sue_text = "Sue"
-    before_sue_au = budunit_shop(sue_text)
-    day_text = "day"
-    day_road = before_sue_au.make_l1_road(day_text)
-    before_sue_au.set_l1_idea(ideaunit_shop(day_text))
-    sports_text = "sports"
-    sports_road = before_sue_au.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_au.make_road(sports_road, ball_text)
-    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
-    before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_ideaunit._range_pushs == set()
-
-    # WHEN
-    update_disc_atomunit = atomunit_shop(bud_idea_range_push_text(), atom_insert())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("range_push", day_road)
-    sue_changeunit = changeunit_shop()
-    sue_changeunit.set_atomunit(update_disc_atomunit)
-    after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
-
-    # THEN
-    after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._range_pushs != set()
-    assert day_road in after_ball_ideaunit._range_pushs
-
-
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_range_push():
-    # ESTABLISH
-    sue_text = "Sue"
-    before_sue_au = budunit_shop(sue_text)
-    day_text = "day"
-    day_road = before_sue_au.make_l1_road(day_text)
-    before_sue_au.set_l1_idea(ideaunit_shop(day_text))
-    sports_text = "sports"
-    sports_road = before_sue_au.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_au.make_road(sports_road, ball_text)
-    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
-    before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    before_ball_ideaunit.set_range_push(day_road)
-    assert before_ball_ideaunit._range_pushs != set()
-    assert day_road in before_ball_ideaunit._range_pushs
-
-    # WHEN
-    update_disc_atomunit = atomunit_shop(bud_idea_range_push_text(), atom_delete())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("range_push", day_road)
-    sue_changeunit = changeunit_shop()
-    sue_changeunit.set_atomunit(update_disc_atomunit)
-    print(f"{before_sue_au.get_idea_obj(ball_road)._range_pushs=}")
-    after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
-
-    # THEN
-    after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._range_pushs == set()
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():

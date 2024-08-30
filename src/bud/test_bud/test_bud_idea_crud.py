@@ -353,6 +353,18 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_bud._idearoot._kids[casa_text]._begin == 25
     assert sue_bud._idearoot._kids[casa_text]._close == 29
 
+    # gogo_want: float = None,
+    # stop_want: float = None,
+    sue_bud._idearoot._kids[casa_text]._gogo_want = 439
+    x_gogo_want = sue_bud._idearoot._kids[casa_text]._gogo_want
+    assert x_gogo_want == 439
+    sue_bud._idearoot._kids[casa_text]._stop_want = 443
+    x_stop_want = sue_bud._idearoot._kids[casa_text]._stop_want
+    assert x_stop_want == 443
+    sue_bud.edit_idea_attr(road=casa_road, gogo_want=425, stop_want=429)
+    assert sue_bud._idearoot._kids[casa_text]._gogo_want == 425
+    assert sue_bud._idearoot._kids[casa_text]._stop_want == 429
+
     # factunit: factunit_shop = None,
     # sue_bud._idearoot._kids[casa_text]._factunits = None
     assert sue_bud._idearoot._kids[casa_text]._factunits == {}
@@ -405,13 +417,9 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert _awardlinks == {
         "fun": awardlink_shop(group_id="fun", give_force=1, take_force=7)
     }
-    sue_bud.edit_idea_attr(
-        road=casa_road,
-        awardlink=awardlink_shop(group_id="fun", give_force=4, take_force=8),
-    )
-    assert sue_bud._idearoot._kids[casa_text]._awardlinks == {
-        "fun": awardlink_shop(group_id="fun", give_force=4, take_force=8)
-    }
+    x_awardlink = awardlink_shop(group_id="fun", give_force=4, take_force=8)
+    sue_bud.edit_idea_attr(road=casa_road, awardlink=x_awardlink)
+    assert sue_bud._idearoot._kids[casa_text]._awardlinks == {"fun": x_awardlink}
 
     # _is_expanded: dict = None,
     sue_bud._idearoot._kids[casa_text]._is_expanded = "what"
@@ -472,43 +480,6 @@ def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_group_ids_DoNotExist(
         str(excinfo.value)
         == f"Idea cannot edit healerhold because group_id '{sue_text}' does not exist as group in Bud"
     )
-
-
-def test_BudUnit_edit_idea_attr_SetsIdeaUnit_range_push():
-    # ESTABLISH
-    yao_bud = budunit_shop("Yao")
-    day_text = "day"
-    day_road = yao_bud.make_l1_road(day_text)
-    time_text = "time"
-    time_road = yao_bud.make_l1_road(time_text)
-    yao_bud.set_l1_idea(ideaunit_shop(time_text))
-    time_idea = yao_bud.get_idea_obj(time_road)
-    assert not time_idea.range_push_exists(day_road)
-
-    # WHEN
-    yao_bud.edit_idea_attr(time_road, range_push=day_road)
-
-    # THEN
-    assert time_idea.range_push_exists(day_road)
-
-
-def test_BudUnit_edit_idea_attr_DeletesIdeaUnit_range_push():
-    # ESTABLISH
-    yao_bud = budunit_shop("Yao")
-    day_text = "day"
-    day_road = yao_bud.make_l1_road(day_text)
-    time_text = "time"
-    time_road = yao_bud.make_l1_road(time_text)
-    yao_bud.set_l1_idea(ideaunit_shop(time_text))
-    time_idea = yao_bud.get_idea_obj(time_road)
-    yao_bud.edit_idea_attr(time_road, range_push=day_road)
-    assert time_idea.range_push_exists(day_road)
-
-    # WHEN
-    yao_bud.edit_idea_attr(time_road, del_range_push=day_road)
-
-    # THEN
-    assert not time_idea.range_push_exists(day_road)
 
 
 def test_BudUnit_set_idea_MustReorderKidsDictToBeAlphabetical():

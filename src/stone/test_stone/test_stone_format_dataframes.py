@@ -1,12 +1,12 @@
-from src._instrument.file import delete_dir, open_file, create_file_path
+from src._instrument.file import open_file, create_file_path
 from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.stone.stone import (
-    jaar_format_00001_acct_v0_0_0,
-    jaar_format_00002_membership_v0_0_0,
-    jaar_format_00003_ideaunit_v0_0_0,
-    create_stone_df,
+from src.chrono.examples.chrono_examples import (
+    add_time_creg_ideaunit,
+    add_time_cinco_ideaunit,
+)
+from src.gift.atom_config import (
     real_id_str,
     owner_id_str,
     acct_id_str,
@@ -19,15 +19,33 @@ from src.stone.stone import (
     credit_score_str,
     debtit_vote_str,
     credit_vote_str,
+    begin_str,
+    close_str,
+    addin_str,
+    numor_str,
+    denom_str,
+    morph_str,
+    gogo_want_str,
+    stop_want_str,
+)
+from src.stone.stone import (
+    stone_format_00001_acct_v0_0_0,
+    stone_format_00002_membership_v0_0_0,
+    stone_format_00003_ideaunit_v0_0_0,
+    stone_format_00019_ideaunit_v0_0_0,
+    create_stone_df,
     get_stoneref,
     save_stone_csv,
 )
-from src.stone.examples.stone_env import stone_examples_dir
+from src.stone.examples.stone_env import (
+    stone_examples_dir,
+    stone_reals_dir,
+    stone_env_setup_cleanup,
+)
 from os.path import exists as os_path_exists
-from pytest import raises as pytest_raises
 
 
-def test_create_stone_df_Arg_jaar_format_00001_acct_v0_0_0():
+def test_create_stone_df_Arg_stone_format_00001_acct_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -45,7 +63,7 @@ def test_create_stone_df_Arg_jaar_format_00001_acct_v0_0_0():
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
 
     # WHEN
-    x_stone_name = jaar_format_00001_acct_v0_0_0()
+    x_stone_name = stone_format_00001_acct_v0_0_0()
     acct_dataframe = create_stone_df(sue_budunit, x_stone_name)
 
     # THEN
@@ -73,7 +91,7 @@ def test_create_stone_df_Arg_jaar_format_00001_acct_v0_0_0():
     assert len(acct_dataframe) == 3
 
 
-def test_create_stone_df_Arg_jaar_format_00002_membership_v0_0_0():
+def test_create_stone_df_Arg_stone_format_00002_membership_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -102,7 +120,7 @@ def test_create_stone_df_Arg_jaar_format_00002_membership_v0_0_0():
     yao_acctunit.add_membership(ohio_text, yao_ohio_credit_w, yao_ohio_debtit_w)
 
     # WHEN
-    x_stone_name = jaar_format_00002_membership_v0_0_0()
+    x_stone_name = stone_format_00002_membership_v0_0_0()
     membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
 
     # THEN
@@ -140,7 +158,7 @@ def test_create_stone_df_Arg_jaar_format_00002_membership_v0_0_0():
     assert len(membership_dataframe) == 7
 
 
-def test_create_stone_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
+def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -155,7 +173,7 @@ def test_create_stone_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
 
     # WHEN
-    x_stone_name = jaar_format_00003_ideaunit_v0_0_0()
+    x_stone_name = stone_format_00003_ideaunit_v0_0_0()
     ideaunit_format = create_stone_df(sue_budunit, x_stone_name)
 
     # THEN
@@ -179,9 +197,9 @@ def test_create_stone_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
 
 
 # Commented out to reduce testing time.
-# def test_create_stone_df_Arg_jaar_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
+# def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
 #     # ESTABLISH / WHEN
-#     x_stone_name = jaar_format_00003_ideaunit_v0_0_0()
+#     x_stone_name = stone_format_00003_ideaunit_v0_0_0()
 
 #     # WHEN
 #     ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
@@ -192,7 +210,30 @@ def test_create_stone_df_Arg_jaar_format_00003_ideaunit_v0_0_0():
 #     assert len(ideaunit_format) == 252
 
 
-def test_save_stone_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV():
+def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0():
+    # ESTABLISH
+    music_real_id = "music56"
+    sue_text = sue_str()
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
+    sue_budunit = add_time_cinco_ideaunit(sue_budunit)
+    x_stone_name = stone_format_00019_ideaunit_v0_0_0()
+
+    # WHEN
+    # acct_filename = f"{sue_text}_ideaunit_example_00019.csv"
+    # csv_example_path = create_file_path(stone_reals_dir(), acct_filename)
+    # save_stone_csv(x_stone_name, sue_budunit, stone_examples_dir(), acct_filename)
+    stone_df = create_stone_df(sue_budunit, x_stone_name)
+
+    # THEN
+    array_headers = list(stone_df.columns)
+    assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+    assert len(stone_df) == 110
+
+
+def test_save_stone_csv_Arg_stone_format_00001_acct_v0_0_0_SaveToCSV(
+    stone_env_setup_cleanup,
+):
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -208,15 +249,14 @@ def test_save_stone_csv_Arg_jaar_format_00001_acct_v0_0_0_SaveToCSV():
     sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
     sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
-    j1_stonename = jaar_format_00001_acct_v0_0_0()
+    j1_stonename = stone_format_00001_acct_v0_0_0()
     acct_filename = f"{sue_text}_acct_example_00.csv"
-    csv_example_path = create_file_path(stone_examples_dir(), acct_filename)
+    csv_example_path = create_file_path(stone_reals_dir(), acct_filename)
     print(f"{csv_example_path}")
-    delete_dir(csv_example_path)
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
+    save_stone_csv(j1_stonename, sue_budunit, stone_reals_dir(), acct_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
@@ -225,12 +265,12 @@ music56,Sue,Bob,13,29
 music56,Sue,Sue,11,23
 music56,Sue,Yao,41,37
 """
-    assert open_file(stone_examples_dir(), acct_filename) == sue1_acct_example_csv
+    assert open_file(stone_reals_dir(), acct_filename) == sue1_acct_example_csv
 
     # WHEN
     zia_text = "Zia"
     sue_budunit.add_acctunit(zia_text)
-    save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
+    save_stone_csv(j1_stonename, sue_budunit, stone_reals_dir(), acct_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
@@ -240,10 +280,10 @@ music56,Sue,Sue,11,23
 music56,Sue,Yao,41,37
 music56,Sue,Zia,1,1
 """
-    assert open_file(stone_examples_dir(), acct_filename) == sue2_acct_example_csv
+    assert open_file(stone_reals_dir(), acct_filename) == sue2_acct_example_csv
 
 
-def test_save_stone_csv_Arg_jaar_format_00003_ideaunit_v0_0_0():
+def test_save_stone_csv_Arg_stone_format_00003_ideaunit_v0_0_0(stone_env_setup_cleanup):
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -256,15 +296,14 @@ def test_save_stone_csv_Arg_jaar_format_00003_ideaunit_v0_0_0():
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
-    x_stone_name = jaar_format_00003_ideaunit_v0_0_0()
+    x_stone_name = stone_format_00003_ideaunit_v0_0_0()
     ideaunit_format = create_stone_df(sue_budunit, x_stone_name)
-    acct_filename = f"{sue_text}_ideaunit_example_00.csv"
-    csv_example_path = create_file_path(stone_examples_dir(), acct_filename)
-    delete_dir(csv_example_path)
+    acct_filename = f"{sue_text}_ideaunit_example_000.csv"
+    csv_example_path = create_file_path(stone_reals_dir(), acct_filename)
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_stone_csv(x_stone_name, sue_budunit, stone_examples_dir(), acct_filename)
+    save_stone_csv(x_stone_name, sue_budunit, stone_reals_dir(), acct_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)

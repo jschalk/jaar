@@ -12,7 +12,6 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_grouphold_text,
-    bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
 )
@@ -73,7 +72,7 @@ def print_out_expected_class_attribute_declarations(config_category):
 
 def test_normalized_table_BudTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get("budunit")
+    config_category = get_normalized_bud_table_build().get(budunit_text())
     mapper = inspect(BudTable)
 
     # WHEN / THEN

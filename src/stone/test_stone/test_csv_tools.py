@@ -1,20 +1,9 @@
-from src.stone.csv_tool import (
-    extract_csv_headers,
+from src._instrument.python_tool import extract_csv_headers
+from src.gift.atom_config import acct_id_str, real_id_str, owner_id_str
+from src.stone.stone import (
     get_csv_real_id_owner_id_metrics,
-    create_filtered_csv_dict,
+    real_id_owner_id_filtered_csv_dict,
 )
-from src.stone.examples.stone_env import stone_env_setup_cleanup
-
-
-def test_extract_csv_headers_ReturnsEmptyObj():
-    # ESTABLISH
-    x_csv = ""
-
-    # WHEN
-    x_headers = extract_csv_headers(x_csv)
-
-    # THEN
-    assert x_headers == []
 
 
 def test_extract_csv_headers_ReturnsObj():
@@ -29,15 +18,12 @@ music56,Sue,Yao,41,37
     x_headers, x_csv = extract_csv_headers(x_csv)
 
     # THEN
-    real_id_text = "real_id"
-    owner_id_text = "owner_id"
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
     assert x_headers == [
-        real_id_text,
-        owner_id_text,
-        acct_id_text,
+        real_id_str(),
+        owner_id_str(),
+        acct_id_str(),
         credit_score_text,
         debtit_score_text,
     ]
@@ -63,32 +49,7 @@ music56,Sue,Yao,41,37
     assert new_csv == headerless_csv
 
 
-def test_get_csv_real_id_owner_id_list_ReturnsEmptyObj():
-    # ESTABLISH
-    headerless_csv = ""
-
-    # WHEN
-    x_dict = get_csv_real_id_owner_id_metrics(headerless_csv=headerless_csv)
-
-    # THEN
-    assert x_dict == {}
-
-
-def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario1():
-    # ESTABLISH
-    music_real_id = "music56"
-    yao_text = "Yao"
-    headerless_csv = f"""{music_real_id},{yao_text},Bob,13,29
-"""
-
-    # WHEN
-    x_dict = get_csv_real_id_owner_id_metrics(headerless_csv=headerless_csv)
-
-    # THEN
-    assert x_dict == {music_real_id: {yao_text: 1}}
-
-
-def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario2():
+def test_get_csv_real_id_owner_id_metrics_ReturnsObj_Scenario2():
     # ESTABLISH
     music_real_id = "music56"
     sue_text = "Sue"
@@ -110,7 +71,7 @@ def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario2():
     assert u_dict == {music_real_id: {sue_text: 4, bob_text: 1}}
 
 
-def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario2():
+def test_real_id_owner_id_filtered_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     music_real_id = "music56"
     sue_text = "Sue"
@@ -123,29 +84,7 @@ def test_get_csv_real_id_owner_id_list_ReturnsObj_Scenario2():
 """
 
     # WHEN
-    u_dict = get_csv_real_id_owner_id_metrics(headerless_csv=headerless_csv)
-
-    # THEN
-    # print(f"{u_dict=}")
-
-    assert u_dict != {music_real_id: {sue_text: 1}}
-    assert u_dict == {music_real_id: {sue_text: 4, bob_text: 1}}
-
-
-def test_create_filtered_csv_dict_ReturnsObj_Scenario0():
-    # ESTABLISH
-    music_real_id = "music56"
-    sue_text = "Sue"
-    bob_text = "Bob"
-    headerless_csv = f"""{music_real_id},{sue_text},Bob,13,29
-{music_real_id},{sue_text},Sue,11,23
-{music_real_id},{sue_text},Yao,41,37
-{music_real_id},{sue_text},Zia,41,37
-{music_real_id},{bob_text},Yao,41,37
-"""
-
-    # WHEN
-    u_dict = create_filtered_csv_dict(headerless_csv=headerless_csv)
+    u_dict = real_id_owner_id_filtered_csv_dict(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")

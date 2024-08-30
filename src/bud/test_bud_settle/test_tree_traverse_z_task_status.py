@@ -1,4 +1,4 @@
-from src._instrument.python import conditional_fig_show
+from src._instrument.python_tool import conditional_fig_show
 from src._road.finance import default_fund_pool
 from src.bud.graphic import display_ideatree
 from src.bud.bud import budunit_shop

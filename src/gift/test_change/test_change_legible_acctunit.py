@@ -3,6 +3,8 @@ from src.gift.atom_config import (
     atom_insert,
     atom_delete,
     bud_acctunit_text,
+    acct_id_str,
+    group_id_str,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
@@ -13,14 +15,13 @@ from src.bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     # ESTABLISH
     category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
     credit_score_value = 81
     debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(credit_score_text, credit_score_value)
     yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
@@ -42,14 +43,13 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
 def test_create_legible_list_ReturnsObj_acctunit_INSERT_monetary_desc_IsNone():
     # ESTABLISH
     category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
     credit_score_value = 81
     debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(credit_score_text, credit_score_value)
     yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
@@ -69,14 +69,13 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_monetary_desc_IsNone():
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debtit_score():
     # ESTABLISH
     category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     debtit_score_text = "debtit_score"
     credit_score_value = 81
     debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(credit_score_text, credit_score_value)
     yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
@@ -98,12 +97,11 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debtit_scor
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score():
     # ESTABLISH
     category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     credit_score_value = 81
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(credit_score_text, credit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
@@ -124,12 +122,11 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score():
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_score():
     # ESTABLISH
     category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     debtit_score_text = "debtit_score"
     debtit_score_value = 43
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(debtit_score_text, debtit_score_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
@@ -150,10 +147,9 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_score():
 def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     # ESTABLISH
     category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_delete())
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)

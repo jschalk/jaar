@@ -1,5 +1,5 @@
 from src.gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
-from src.gift.atom_config import bud_acct_membership_text
+from src.gift.atom_config import bud_acct_membership_text, acct_id_str, group_id_str
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
@@ -9,8 +9,6 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = bud_acct_membership_text()
-    group_id_text = "group_id"
-    acct_id_text = "acct_id"
     credit_vote_text = "credit_vote"
     debtit_vote_text = "debtit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
@@ -18,8 +16,8 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     credit_vote_value = 81
     debtit_vote_value = 43
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(group_id_text, swim_text)
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(group_id_str(), swim_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(credit_vote_text, credit_vote_value)
     yao_atomunit.set_arg(debtit_vote_text, debtit_vote_value)
     # print(f"{yao_atomunit=}")
@@ -39,8 +37,6 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = bud_acct_membership_text()
-    group_id_text = "group_id"
-    acct_id_text = "acct_id"
     credit_vote_text = "credit_vote"
     debtit_vote_text = "debtit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
@@ -48,8 +44,8 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
     credit_vote_value = 81
     debtit_vote_value = 43
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(group_id_text, swim_text)
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(group_id_str(), swim_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(credit_vote_text, credit_vote_value)
     yao_atomunit.set_arg(debtit_vote_text, debtit_vote_value)
     # print(f"{yao_atomunit=}")
@@ -69,15 +65,13 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = bud_acct_membership_text()
-    group_id_text = "group_id"
-    acct_id_text = "acct_id"
     credit_vote_text = "credit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
     credit_vote_value = 81
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(group_id_text, swim_text)
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(group_id_str(), swim_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(credit_vote_text, credit_vote_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
@@ -96,15 +90,13 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = bud_acct_membership_text()
-    group_id_text = "group_id"
-    acct_id_text = "acct_id"
     debtit_vote_text = "debtit_vote"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
     debtit_vote_value = 43
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(group_id_text, swim_text)
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(group_id_str(), swim_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     yao_atomunit.set_arg(debtit_vote_text, debtit_vote_value)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
@@ -123,13 +115,11 @@ def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = bud_acct_membership_text()
-    group_id_text = "group_id"
-    acct_id_text = "acct_id"
     swim_text = f"{sue_bud._road_delimiter}Swimmers"
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_delete())
-    yao_atomunit.set_arg(group_id_text, swim_text)
-    yao_atomunit.set_arg(acct_id_text, yao_text)
+    yao_atomunit.set_arg(group_id_str(), swim_text)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
     # print(f"{yao_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(yao_atomunit)

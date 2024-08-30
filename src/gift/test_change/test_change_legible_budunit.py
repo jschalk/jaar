@@ -1,4 +1,5 @@
-from src.gift.atom import atomunit_shop, atom_update
+from src.gift.atom_config import atom_update, budunit_text
+from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
@@ -15,7 +16,7 @@ def test_create_legible_list_ReturnsObjEstablishWithEmptyChange():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
     # ESTABLISH
-    category = "budunit"
+    category = budunit_text()
     tally_text = "tally"
     tally_int = 55
     tally_atomunit = atomunit_shop(category, atom_update())
@@ -34,7 +35,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_monetary_desc():
     # ESTABLISH
-    category = "budunit"
+    category = budunit_text()
     _monetary_desc_text = "monetary_desc"
     sue_monetary_desc = "dragon dollars"
     _monetary_desc_atomunit = atomunit_shop(category, atom_update())
@@ -53,7 +54,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_monetary_desc():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     # ESTABLISH
-    category = "budunit"
+    category = budunit_text()
     acct_credor_pool_text = "credor_respect"
     acct_credor_pool_int = 71
     acct_credor_pool_atomunit = atomunit_shop(category, atom_update())
@@ -76,7 +77,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_With_monetary_desc_None():
     # ESTABLISH
-    category = "budunit"
+    category = budunit_text()
     acct_credor_pool_text = "credor_respect"
     acct_credor_pool_int = 71
     acct_credor_pool_atomunit = atomunit_shop(category, atom_update())
@@ -99,7 +100,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Wit
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     # ESTABLISH
-    category = "budunit"
+    category = budunit_text()
     acct_debtor_pool_text = "debtor_respect"
     acct_debtor_pool_int = 78
     acct_debtor_pool_atomunit = atomunit_shop(category, atom_update())
@@ -123,7 +124,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equal_debtor_respect():
     # ESTABLISH
     x_changeunit = changeunit_shop()
-    category = "budunit"
+    category = budunit_text()
     acct_credor_pool_text = "credor_respect"
     acct_debtor_pool_text = "debtor_respect"
     acct_pool_int = 83
@@ -146,7 +147,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse():
     # ESTABLISH
-    category = "budunit"
+    category = budunit_text()
     max_tree_traverse_text = "max_tree_traverse"
     max_tree_traverse_int = 71
     max_tree_traverse_atomunit = atomunit_shop(category, atom_update())

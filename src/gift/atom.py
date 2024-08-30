@@ -1,4 +1,4 @@
-from src._instrument.python import (
+from src._instrument.python_tool import (
     get_empty_dict_if_none,
     get_json_from_dict,
     get_dict_from_json,
@@ -33,9 +33,27 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_grouphold_text,
-    bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    acct_id_str,
+    group_id_str,
+    parent_road_str,
+    label_str,
+    pledge_str,
+    addin_str,
+    begin_str,
+    close_str,
+    denom_str,
+    numor_str,
+    morph_str,
+    gogo_want_str,
+    stop_want_str,
+    mass_str,
+    credit_vote_str,
+    debtit_vote_str,
+    credit_score_str,
+    debtit_score_str,
+    base_idea_active_requisite_str,
 )
 from dataclasses import dataclass
 
@@ -210,35 +228,35 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
-    x_group_id = x_atom.get_value("group_id")
+    x_acct_id = x_atom.get_value(acct_id_str())
+    x_group_id = x_atom.get_value(group_id_str())
     x_bud.get_acct(x_acct_id).delete_membership(x_group_id)
 
 
 def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
-    x_group_id = x_atom.get_value("group_id")
+    x_acct_id = x_atom.get_value(acct_id_str())
+    x_group_id = x_atom.get_value(group_id_str())
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_membership = x_acctunit.get_membership(x_group_id)
-    x_credit_vote = x_atom.get_value("credit_vote")
-    x_debtit_vote = x_atom.get_value("debtit_vote")
+    x_credit_vote = x_atom.get_value(credit_vote_str())
+    x_debtit_vote = x_atom.get_value(debtit_vote_str())
     x_membership.set_credit_vote(x_credit_vote)
     x_membership.set_debtit_vote(x_debtit_vote)
 
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
-    x_group_id = x_atom.get_value("group_id")
-    x_credit_vote = x_atom.get_value("credit_vote")
-    x_debtit_vote = x_atom.get_value("debtit_vote")
+    x_acct_id = x_atom.get_value(acct_id_str())
+    x_group_id = x_atom.get_value(group_id_str())
+    x_credit_vote = x_atom.get_value(credit_vote_str())
+    x_debtit_vote = x_atom.get_value(debtit_vote_str())
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_acctunit.add_membership(x_group_id, x_credit_vote, x_debtit_vote)
 
 
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
-        x_atom.get_value("parent_road"),
-        x_atom.get_value("label"),
+        x_atom.get_value(parent_road_str()),
+        x_atom.get_value(label_str()),
         delimiter=x_bud._road_delimiter,
     )
     x_bud.del_idea_obj(idea_road, del_children=x_atom.get_value("del_children"))
@@ -246,35 +264,39 @@ def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     idea_road = create_road(
-        x_atom.get_value("parent_road"),
-        x_atom.get_value("label"),
+        x_atom.get_value(parent_road_str()),
+        x_atom.get_value(label_str()),
         delimiter=x_bud._road_delimiter,
     )
     x_bud.edit_idea_attr(
         road=idea_road,
-        addin=x_atom.get_value("addin"),
-        begin=x_atom.get_value("begin"),
-        close=x_atom.get_value("close"),
-        denom=x_atom.get_value("denom"),
-        numor=x_atom.get_value("numor"),
-        morph=x_atom.get_value("morph"),
-        mass=x_atom.get_value("mass"),
-        pledge=x_atom.get_value("pledge"),
+        addin=x_atom.get_value(addin_str()),
+        begin=x_atom.get_value(begin_str()),
+        gogo_want=x_atom.get_value(gogo_want_str()),
+        stop_want=x_atom.get_value(stop_want_str()),
+        close=x_atom.get_value(close_str()),
+        denom=x_atom.get_value(denom_str()),
+        numor=x_atom.get_value(numor_str()),
+        morph=x_atom.get_value(morph_str()),
+        mass=x_atom.get_value(mass_str()),
+        pledge=x_atom.get_value(pledge_str()),
     )
 
 
 def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
-            _label=x_atom.get_value("label"),
-            _addin=x_atom.get_value("addin"),
-            _begin=x_atom.get_value("begin"),
-            _close=x_atom.get_value("close"),
-            _denom=x_atom.get_value("denom"),
-            _numor=x_atom.get_value("numor"),
-            pledge=x_atom.get_value("pledge"),
+            _label=x_atom.get_value(label_str()),
+            _addin=x_atom.get_value(addin_str()),
+            _begin=x_atom.get_value(begin_str()),
+            _close=x_atom.get_value(close_str()),
+            _gogo_want=x_atom.get_value(gogo_want_str()),
+            _stop_want=x_atom.get_value(stop_want_str()),
+            _denom=x_atom.get_value(denom_str()),
+            _numor=x_atom.get_value(numor_str()),
+            pledge=x_atom.get_value(pledge_str()),
         ),
-        parent_road=x_atom.get_value("parent_road"),
+        parent_road=x_atom.get_value(parent_road_str()),
         create_missing_ideas=False,
         filter_out_missing_awardlinks_group_ids=False,
         create_missing_ancestors=False,
@@ -284,13 +306,13 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_idea_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value("group_id"),
+        awardlink_del=x_atom.get_value(group_id_str()),
     )
 
 
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_awardlink = x_idea._awardlinks.get(x_atom.get_value("group_id"))
+    x_awardlink = x_idea._awardlinks.get(x_atom.get_value(group_id_str()))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -302,7 +324,7 @@ def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        group_id=x_atom.get_value("group_id"),
+        group_id=x_atom.get_value(group_id_str()),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -347,7 +369,7 @@ def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: AtomUnit):
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_idea_active_requisite=x_atom.get_value(
-            "base_idea_active_requisite"
+            base_idea_active_requisite_str()
         ),
     )
 
@@ -357,7 +379,7 @@ def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_idea_active_requisite=x_atom.get_value(
-            "base_idea_active_requisite"
+            base_idea_active_requisite_str()
         ),
     )
 
@@ -394,42 +416,32 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_idea_grouphold_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.del_grouphold(group_id=x_atom.get_value("group_id"))
+    x_ideaunit._doerunit.del_grouphold(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_grouphold_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value("group_id"))
-
-
-def _modify_bud_idea_range_push_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit.del_range_push(x_atom.get_value("range_push"))
-
-
-def _modify_bud_idea_range_push_insert(x_bud: BudUnit, x_atom: AtomUnit):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit.set_range_push(x_atom.get_value("range_push"))
+    x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_bud.del_acctunit(x_atom.get_value("acct_id"))
+    x_bud.del_acctunit(x_atom.get_value(acct_id_str()))
 
 
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
-        acct_id=x_atom.get_value("acct_id"),
-        credit_score=x_atom.get_value("credit_score"),
-        debtit_score=x_atom.get_value("debtit_score"),
+        acct_id=x_atom.get_value(acct_id_str()),
+        credit_score=x_atom.get_value(credit_score_str()),
+        debtit_score=x_atom.get_value(debtit_score_str()),
     )
 
 
 def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
-            acct_id=x_atom.get_value("acct_id"),
-            credit_score=x_atom.get_value("credit_score"),
-            debtit_score=x_atom.get_value("debtit_score"),
+            acct_id=x_atom.get_value(acct_id_str()),
+            credit_score=x_atom.get_value(credit_score_str()),
+            debtit_score=x_atom.get_value(debtit_score_str()),
         )
     )
 
@@ -500,13 +512,6 @@ def _modify_bud_idea_grouphold(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_grouphold_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_range_push(x_bud: BudUnit, x_atom: AtomUnit):
-    if x_atom.crud_text == atom_delete():
-        _modify_bud_idea_range_push_delete(x_bud, x_atom)
-    elif x_atom.crud_text == atom_insert():
-        _modify_bud_idea_range_push_insert(x_bud, x_atom)
-
-
 def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
         _modify_bud_acctunit_delete(x_bud, x_atom)
@@ -533,8 +538,6 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
     elif x_atom.category == bud_idea_grouphold_text():
         _modify_bud_idea_grouphold(x_bud, x_atom)
-    elif x_atom.category == bud_idea_range_push_text():
-        _modify_bud_idea_range_push(x_bud, x_atom)
     elif x_atom.category == bud_acctunit_text():
         _modify_bud_acctunit(x_bud, x_atom)
 

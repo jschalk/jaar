@@ -1,7 +1,7 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
+from src.gift.atom_config import bud_acctunit_text, acct_id_str
 from src.gift.atom import atom_insert
-from src.gift.atom_config import bud_acctunit_text
 from src.gift.change import changeunit_shop, get_filtered_changeunit
 
 
@@ -30,6 +30,6 @@ def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_acctunit_insert
     sue_insert_dict = new_changeunit.atomunits.get(atom_insert())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_text())
     bob_atomunit = sue_acctunit_dict.get(bob_text)
-    assert bob_atomunit.get_value("acct_id") == bob_text
+    assert bob_atomunit.get_value(acct_id_str()) == bob_text
     assert bob_atomunit.get_value("credit_score") == bob_credit_score
     assert bob_atomunit.get_value("debtit_score") == bob_debtit_score

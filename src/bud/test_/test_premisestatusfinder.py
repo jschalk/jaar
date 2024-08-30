@@ -1,4 +1,4 @@
-from src._instrument.python import conditional_fig_show
+from src._instrument.python_tool import conditional_fig_show
 from src.bud.reason_idea import (
     PremiseStatusFinder,
     premisestatusfinder_shop,

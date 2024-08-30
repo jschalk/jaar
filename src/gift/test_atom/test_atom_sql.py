@@ -1,12 +1,11 @@
 from src._road.road import create_road
-from src.gift.atom import (
+from src.gift.atom_config import (
     atom_update,
     atom_insert,
-    atomunit_shop,
-    atom_hx_table_name,
-    get_atomunit_from_rowdata,
+    budunit_text,
     bud_idea_factunit_text,
 )
+from src.gift.atom import atomunit_shop, atom_hx_table_name, get_atomunit_from_rowdata
 from src._instrument.db_tool import get_rowdata, sqlite_connection
 from pytest import raises as pytest_raises
 
@@ -37,7 +36,7 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
 def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_BudUnitSimpleAttrs():
     # WHEN
     new2_value = 66
-    category = "budunit"
+    category = budunit_text()
     opt_arg2 = "max_tree_traverse"
     x_atomunit = atomunit_shop(category, atom_update())
     x_atomunit.set_optional_arg(opt_arg2, new2_value)

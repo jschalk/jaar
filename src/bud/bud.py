@@ -1,4 +1,4 @@
-from src._instrument.python import (
+from src._instrument.python_tool import (
     get_json_from_dict,
     get_dict_from_json,
     get_1_if_None,
@@ -94,10 +94,6 @@ class _last_gift_idException(Exception):
 
 
 class healerhold_group_id_Exception(Exception):
-    pass
-
-
-class Multiple_range_push_Exception(Exception):
     pass
 
 
@@ -239,7 +235,6 @@ class BudUnit:
                     to_evaluate_road=reason_base,
                     road_type="reasonunit_base",
                 )
-            to_evaluate_list.extend(iter(x_idea._range_pushs))
             forefather_roads = get_forefather_roads(x_road)
             for forefather_road in forefather_roads:
                 self._evaluate_relevancy(
@@ -783,12 +778,12 @@ class BudUnit:
         healerhold: HealerHold = None,
         begin: float = None,
         close: float = None,
+        gogo_want: float = None,
+        stop_want: float = None,
         addin: float = None,
         numor: float = None,
         denom: float = None,
         morph: bool = None,
-        range_push: RoadUnit = None,
-        del_range_push: RoadUnit = None,
         pledge: bool = None,
         factunit: FactUnit = None,
         descendant_pledge_count: int = None,
@@ -821,12 +816,12 @@ class BudUnit:
             healerhold=healerhold,
             begin=begin,
             close=close,
+            gogo_want=gogo_want,
+            stop_want=stop_want,
             addin=addin,
             numor=numor,
             denom=denom,
             morph=morph,
-            range_push=range_push,
-            del_range_push=del_range_push,
             descendant_pledge_count=descendant_pledge_count,
             all_acct_cred=all_acct_cred,
             all_acct_debt=all_acct_debt,
@@ -1023,7 +1018,6 @@ class BudUnit:
         return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
 
     def _init_idea_tree_walk(self):
-        range_push_dict = {}
         idea_list = [self.get_idea_obj(self._real_id)]
         while idea_list != []:
             x_idea = idea_list.pop()
@@ -1032,11 +1026,6 @@ class BudUnit:
                 idea_kid.set_parent_road(x_idea.get_road())
                 idea_kid.set_level(x_idea._level)
                 idea_list.append(idea_kid)
-            for x_range_push in x_idea._range_pushs:
-                if range_push_dict.get(x_range_push):
-                    exception_text = f"Multiple IdeaUnits including ('{x_idea.get_road()}', '{range_push_dict.get(x_range_push)}') have range_push '{x_range_push}'"
-                    raise Multiple_range_push_Exception(exception_text)
-                range_push_dict[x_range_push] = x_idea.get_road()
             self._idea_dict[x_idea.get_road()] = x_idea
             for x_reason_base in x_idea._reasonunits.keys():
                 self._reason_bases.add(x_reason_base)
@@ -1062,16 +1051,6 @@ class BudUnit:
                 self._range_inheritors[r_idea.get_road()] = math_idea.get_road()
             r_idea._transform_gogo_calc_stop_calc()
 
-            for range_push_road in r_idea._range_pushs:
-                range_push_idea = self.get_idea_obj(range_push_road)
-                if range_push_idea._range_evaluated:
-                    self._raise_gogo_calc_stop_calc_exception(range_push_road)
-                range_push_idea._gogo_calc = r_idea._gogo_calc
-                range_push_idea._stop_calc = r_idea._stop_calc
-                range_push_idea._transform_gogo_calc_stop_calc()
-                single_range_idea_list.extend(iter(range_push_idea._kids.values()))
-                math_idea_road = math_idea.get_road()
-                self._range_inheritors[range_push_idea.get_road()] = math_idea_road
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
     def _set_ideaunits_range(self):

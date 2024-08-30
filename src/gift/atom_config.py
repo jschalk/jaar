@@ -1,5 +1,5 @@
 from src._instrument.file import open_file, save_file
-from src._instrument.python import (
+from src._instrument.python_tool import (
     get_json_from_dict,
     get_dict_from_json,
     get_nested_value,
@@ -67,6 +67,10 @@ def optional_args_text() -> str:
     return "optional_args"
 
 
+def column_order_str() -> str:
+    return "column_order"
+
+
 def category_text() -> str:
     return "category"
 
@@ -107,16 +111,108 @@ def bud_idea_grouphold_text() -> str:
     return "bud_idea_grouphold"
 
 
-def bud_idea_range_push_text() -> str:
-    return "bud_idea_range_push"
-
-
 def bud_idea_healerhold_text() -> str:
     return "bud_idea_healerhold"
 
 
 def bud_idea_factunit_text() -> str:
     return "bud_idea_factunit"
+
+
+def real_id_str() -> str:
+    return "real_id"
+
+
+def owner_id_str() -> str:
+    return "owner_id"
+
+
+def credor_respect_str() -> str:
+    return "credor_respect"
+
+
+def debtor_respect_str() -> str:
+    return "debtor_respect"
+
+
+def acct_id_str() -> str:
+    return "acct_id"
+
+
+def group_id_str() -> str:
+    return "group_id"
+
+
+def acct_pool_str() -> str:
+    return "acct_pool"
+
+
+def debtit_score_str() -> str:
+    return "debtit_score"
+
+
+def credit_score_str() -> str:
+    return "credit_score"
+
+
+def debtit_vote_str() -> str:
+    return "debtit_vote"
+
+
+def credit_vote_str() -> str:
+    return "credit_vote"
+
+
+def parent_road_str() -> str:
+    return "parent_road"
+
+
+def label_str() -> str:
+    return "label"
+
+
+def mass_str() -> str:
+    return "mass"
+
+
+def pledge_str() -> str:
+    return "pledge"
+
+
+def begin_str() -> str:
+    return "begin"
+
+
+def close_str() -> str:
+    return "close"
+
+
+def addin_str() -> str:
+    return "addin"
+
+
+def numor_str() -> str:
+    return "numor"
+
+
+def denom_str() -> str:
+    return "denom"
+
+
+def morph_str() -> str:
+    return "morph"
+
+
+def gogo_want_str() -> str:
+    return "gogo_want"
+
+
+def stop_want_str() -> str:
+    return "stop_want"
+
+
+def base_idea_active_requisite_str() -> str:
+    return "base_idea_active_requisite"
 
 
 def get_atom_config_file_name() -> str:
@@ -129,6 +225,22 @@ def config_file_dir() -> str:
 
 def get_atom_config_dict() -> dict:
     return get_dict_from_json(open_file(config_file_dir(), get_atom_config_file_name()))
+
+
+def get_atom_config_required_args(x_cat: str) -> dict:
+    required_args_key_list = [x_cat, required_args_text()]
+    return get_nested_value(get_atom_config_dict(), required_args_key_list)
+
+
+def get_atom_config_optional_args(x_cat: str) -> dict:
+    optional_args_key_list = [x_cat, optional_args_text()]
+    return get_nested_value(get_atom_config_dict(), optional_args_key_list)
+
+
+def get_atom_config_args(x_category: str) -> dict[str, dict]:
+    args_dict = get_atom_config_required_args(x_category)
+    args_dict.update(get_atom_config_optional_args(x_category))
+    return args_dict
 
 
 def get_sorted_required_arg_keys(atom_category: str) -> list[str]:
@@ -267,9 +379,8 @@ def get_atom_order(crud_text: str, category: str) -> int:
 
 
 def get_normal_table_name(category: str) -> str:
-    return get_nested_value(
-        get_atom_config_dict(), [category, "normal_specs", "normal_table_name"]
-    )
+    nested_list = [category, normal_specs_text(), normal_table_name_text()]
+    return get_nested_value(get_atom_config_dict(), nested_list)
 
 
 def set_mog(

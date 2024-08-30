@@ -1,6 +1,7 @@
 from src._instrument.file import open_file, create_file_path as f_path
-from src._instrument.python import get_dict_from_json
+from src._instrument.python_tool import get_dict_from_json
 from src._road.jaar_config import get_gifts_folder, get_test_real_id as real_id
+from src.gift.atom_config import owner_id_str
 from src.gift.change import changeunit_shop
 from src.gift.gift import giftunit_shop, create_giftunit_from_files
 from src.gift.examples.example_atoms import (
@@ -129,7 +130,7 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     gift_file_dict = get_dict_from_json(gift_file_json)
     print(f"{gift_file_dict=}")
     assert gift_file_dict.get("change_atom_numbers") == []
-    assert gift_file_dict.get("owner_id") == sue_text
+    assert gift_file_dict.get(owner_id_str()) == sue_text
     assert gift_file_dict.get("face_id") is None
     print(f"{gift_file_dict.keys()=}")
 

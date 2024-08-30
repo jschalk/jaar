@@ -1,4 +1,4 @@
-from src._instrument.python import get_nested_value
+from src._instrument.python_tool import get_nested_value
 from src.bud.bud import BudUnit
 from src.gift.atom import AtomUnit
 from src.gift.atom_config import (
@@ -13,9 +13,24 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_grouphold_text,
-    bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    acct_id_str,
+    group_id_str,
+    parent_road_str,
+    label_str,
+    base_idea_active_requisite_str,
+    pledge_str,
+    addin_str,
+    begin_str,
+    close_str,
+    denom_str,
+    numor_str,
+    morph_str,
+    credit_vote_str,
+    debtit_vote_str,
+    credor_respect_str,
+    debtor_respect_str,
 )
 from src.gift.change import ChangeUnit
 
@@ -26,7 +41,7 @@ def get_leg_obj(x_dict: dict, x_keylist) -> any:
 
 def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_change.atomunits
-    budunit_atom = get_leg_obj(atoms_dict, [atom_update(), "budunit"])
+    budunit_atom = get_leg_obj(atoms_dict, [atom_update(), budunit_text()])
 
     acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), bud_acctunit_text()])
     acctunit_update_dict = get_leg_obj(atoms_dict, [atom_update(), bud_acctunit_text()])
@@ -76,11 +91,6 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
     x_list = [atom_delete(), bud_idea_healerhold_text()]
     bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
-
-    x_list = [atom_insert(), bud_idea_range_push_text()]
-    bud_idea_range_push_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_range_push_text()]
-    bud_idea_range_push_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), bud_idea_factunit_text()]
     bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -182,15 +192,6 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
             leg_list, bud_idea_healerhold_delete_dict, x_bud
         )
 
-    if bud_idea_range_push_insert_dict is not None:
-        add_bud_idea_range_push_insert_to_legible_list(
-            leg_list, bud_idea_range_push_insert_dict, x_bud
-        )
-    if bud_idea_range_push_delete_dict is not None:
-        add_bud_idea_range_push_delete_to_legible_list(
-            leg_list, bud_idea_range_push_delete_dict, x_bud
-        )
-
     if bud_idea_factunit_insert_dict is not None:
         add_bud_idea_factunit_insert_to_legible_list(
             leg_list, bud_idea_factunit_insert_dict, x_bud
@@ -212,13 +213,10 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     _tally_text = "tally"
     _max_tree_traverse_text = "max_tree_traverse"
     _monetary_desc_text = "monetary_desc"
-    _credor_respect_text = "credor_respect"
-    _debtor_respect_text = "debtor_respect"
-
     _max_tree_traverse_value = optional_args.get(_max_tree_traverse_text)
     _monetary_desc_value = optional_args.get(_monetary_desc_text)
-    _credor_respect_value = optional_args.get(_credor_respect_text)
-    _debtor_respect_value = optional_args.get(_debtor_respect_text)
+    credor_respect_value = optional_args.get(credor_respect_str())
+    debtor_respect_value = optional_args.get(debtor_respect_str())
     _tally_value = optional_args.get(_tally_text)
 
     x_monetary_desc = x_bud._monetary_desc
@@ -226,33 +224,29 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         x_monetary_desc = f"{x_bud._owner_id}'s monetary_desc"
 
     if _max_tree_traverse_value is not None:
-        legible_list.append(
-            f"{x_bud._owner_id}'s maximum number of Bud output evaluations transited to {_max_tree_traverse_value}"
-        )
+        x_text = f"{x_bud._owner_id}'s maximum number of Bud output evaluations transited to {_max_tree_traverse_value}"
+        legible_list.append(x_text)
     if _monetary_desc_value is not None:
-        legible_list.append(
+        x_text = (
             f"{x_bud._owner_id}'s monetary_desc is now called '{_monetary_desc_value}'"
         )
+        legible_list.append(x_text)
     if (
-        _credor_respect_value is not None
-        and _debtor_respect_value is not None
-        and _credor_respect_value == _debtor_respect_value
+        credor_respect_value is not None
+        and debtor_respect_value is not None
+        and credor_respect_value == debtor_respect_value
     ):
-        legible_list.append(
-            f"{x_monetary_desc} total pool is now {_credor_respect_value}"
-        )
-    elif _credor_respect_value is not None:
-        legible_list.append(
-            f"{x_monetary_desc} credor pool is now {_credor_respect_value}"
-        )
-    elif _debtor_respect_value is not None:
-        legible_list.append(
-            f"{x_monetary_desc} debtor pool is now {_debtor_respect_value}"
-        )
+        x_text = f"{x_monetary_desc} total pool is now {credor_respect_value}"
+        legible_list.append(x_text)
+    elif credor_respect_value is not None:
+        x_text = f"{x_monetary_desc} credor pool is now {credor_respect_value}"
+        legible_list.append(x_text)
+    elif debtor_respect_value is not None:
+        x_text = f"{x_monetary_desc} debtor pool is now {debtor_respect_value}"
+        legible_list.append(x_text)
     if _tally_value is not None:
-        legible_list.append(
-            f"{x_bud._owner_id}'s bud tally was transited to {_tally_value}"
-        )
+        x_text = f"{x_bud._owner_id}'s bud tally was transited to {_tally_value}"
+        legible_list.append(x_text)
 
 
 def add_bud_acctunit_insert_to_legible_list(
@@ -262,7 +256,7 @@ def add_bud_acctunit_insert_to_legible_list(
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
     for acctunit_atom in acctunit_dict.values():
-        acct_id = acctunit_atom.get_value("acct_id")
+        acct_id = acctunit_atom.get_value(acct_id_str())
         credit_score_value = acctunit_atom.get_value("credit_score")
         debtit_score_value = acctunit_atom.get_value("debtit_score")
         x_str = f"{acct_id} was added with {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt"
@@ -276,7 +270,7 @@ def add_bud_acctunit_update_to_legible_list(
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
     for acctunit_atom in acctunit_dict.values():
-        acct_id = acctunit_atom.get_value("acct_id")
+        acct_id = acctunit_atom.get_value(acct_id_str())
         credit_score_value = acctunit_atom.get_value("credit_score")
         debtit_score_value = acctunit_atom.get_value("debtit_score")
         if credit_score_value is not None and debtit_score_value is not None:
@@ -294,7 +288,7 @@ def add_bud_acctunit_delete_to_legible_list(
     x_monetary_desc = x_bud._monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
     for acctunit_atom in acctunit_dict.values():
-        acct_id = acctunit_atom.get_value("acct_id")
+        acct_id = acctunit_atom.get_value(acct_id_str())
         x_str = f"{acct_id} was removed from {x_monetary_desc} accts."
         legible_list.append(x_str)
 
@@ -304,11 +298,11 @@ def add_bud_acct_membership_insert_to_legible_list(
 ):
     for acct_membership_dict in acct_membership_insert_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
-            group_id = acct_membership_atom.get_value("group_id")
-            acct_id = acct_membership_atom.get_value("acct_id")
-            credit_vote_value = acct_membership_atom.get_value("credit_vote")
-            debtit_vote_value = acct_membership_atom.get_value("debtit_vote")
-            x_str = f"Group '{group_id}' has new membership {acct_id} with credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
+            group_id = acct_membership_atom.get_value(group_id_str())
+            acct_id = acct_membership_atom.get_value(acct_id_str())
+            credit_vote_value = acct_membership_atom.get_value(credit_vote_str())
+            debtit_vote_value = acct_membership_atom.get_value(debtit_vote_str())
+            x_str = f"Group '{group_id}' has new membership {acct_id} with {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
             legible_list.append(x_str)
 
 
@@ -317,16 +311,16 @@ def add_bud_acct_membership_update_to_legible_list(
 ):
     for acct_membership_dict in acct_membership_update_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
-            group_id = acct_membership_atom.get_value("group_id")
-            acct_id = acct_membership_atom.get_value("acct_id")
-            credit_vote_value = acct_membership_atom.get_value("credit_vote")
-            debtit_vote_value = acct_membership_atom.get_value("debtit_vote")
+            group_id = acct_membership_atom.get_value(group_id_str())
+            acct_id = acct_membership_atom.get_value(acct_id_str())
+            credit_vote_value = acct_membership_atom.get_value(credit_vote_str())
+            debtit_vote_value = acct_membership_atom.get_value(debtit_vote_str())
             if credit_vote_value is not None and debtit_vote_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
+                x_str = f"Group '{group_id}' membership {acct_id} has new {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
             elif credit_vote_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new credit_vote_value{credit_vote_value}."
+                x_str = f"Group '{group_id}' membership {acct_id} has new {credit_vote_str()}_value{credit_vote_value}."
             elif debtit_vote_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new debtit_vote_value={debtit_vote_value}."
+                x_str = f"Group '{group_id}' membership {acct_id} has new {debtit_vote_str()}_value={debtit_vote_value}."
             legible_list.append(x_str)
 
 
@@ -335,8 +329,8 @@ def add_bud_acct_membership_delete_to_legible_list(
 ):
     for acct_membership_dict in acct_membership_delete_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
-            group_id = acct_membership_atom.get_value("group_id")
-            acct_id = acct_membership_atom.get_value("acct_id")
+            group_id = acct_membership_atom.get_value(group_id_str())
+            acct_id = acct_membership_atom.get_value(acct_id_str())
             x_str = f"Group '{group_id}' no longer has membership {acct_id}."
             legible_list.append(x_str)
 
@@ -344,30 +338,22 @@ def add_bud_acct_membership_delete_to_legible_list(
 def add_bud_ideaunit_insert_to_legible_list(
     legible_list: list[str], ideaunit_insert_dict: dict, x_bud: BudUnit
 ):
-    label_text = "label"
-    parent_road_text = "parent_road"
-    _addin_text = "addin"
-    _begin_text = "begin"
-    _close_text = "close"
-    _denom_text = "denom"
-    _numor_text = "numor"
     _problem_bool_text = "problem_bool"
     _morph_text = "morph"
     _mass_text = "mass"
-    pledge_text = "pledge"
     for parent_road_dict in ideaunit_insert_dict.values():
         for ideaunit_atom in parent_road_dict.values():
-            label_value = ideaunit_atom.get_value(label_text)
-            parent_road_value = ideaunit_atom.get_value(parent_road_text)
-            _addin_value = ideaunit_atom.get_value(_addin_text)
-            _begin_value = ideaunit_atom.get_value(_begin_text)
-            _close_value = ideaunit_atom.get_value(_close_text)
-            _denom_value = ideaunit_atom.get_value(_denom_text)
-            _numor_value = ideaunit_atom.get_value(_numor_text)
+            label_value = ideaunit_atom.get_value(label_str())
+            parent_road_value = ideaunit_atom.get_value(parent_road_str())
+            _addin_value = ideaunit_atom.get_value(addin_str())
+            _begin_value = ideaunit_atom.get_value(begin_str())
+            _close_value = ideaunit_atom.get_value(close_str())
+            _denom_value = ideaunit_atom.get_value(denom_str())
+            _numor_value = ideaunit_atom.get_value(numor_str())
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
             _morph_value = ideaunit_atom.get_value(_morph_text)
             _mass_value = ideaunit_atom.get_value(_mass_text)
-            pledge_value = ideaunit_atom.get_value(pledge_text)
+            pledge_value = ideaunit_atom.get_value(pledge_str())
             x_str = (
                 f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
             )
@@ -396,30 +382,21 @@ def add_bud_ideaunit_insert_to_legible_list(
 def add_bud_ideaunit_update_to_legible_list(
     legible_list: list[str], ideaunit_update_dict: dict, x_bud: BudUnit
 ):
-    label_text = "label"
-    parent_road_text = "parent_road"
-    _addin_text = "addin"
-    _begin_text = "begin"
-    _close_text = "close"
-    _denom_text = "denom"
-    _numor_text = "numor"
     _problem_bool_text = "problem_bool"
-    _morph_text = "morph"
     _mass_text = "mass"
-    pledge_text = "pledge"
     for parent_road_dict in ideaunit_update_dict.values():
         for ideaunit_atom in parent_road_dict.values():
-            label_value = ideaunit_atom.get_value(label_text)
-            parent_road_value = ideaunit_atom.get_value(parent_road_text)
-            _addin_value = ideaunit_atom.get_value(_addin_text)
-            _begin_value = ideaunit_atom.get_value(_begin_text)
-            _close_value = ideaunit_atom.get_value(_close_text)
-            _denom_value = ideaunit_atom.get_value(_denom_text)
-            _numor_value = ideaunit_atom.get_value(_numor_text)
+            label_value = ideaunit_atom.get_value(label_str())
+            parent_road_value = ideaunit_atom.get_value(parent_road_str())
+            _addin_value = ideaunit_atom.get_value(addin_str())
+            _begin_value = ideaunit_atom.get_value(begin_str())
+            _close_value = ideaunit_atom.get_value(close_str())
+            _denom_value = ideaunit_atom.get_value(denom_str())
+            _numor_value = ideaunit_atom.get_value(numor_str())
             _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
-            _morph_value = ideaunit_atom.get_value(_morph_text)
+            _morph_value = ideaunit_atom.get_value(morph_str())
             _mass_value = ideaunit_atom.get_value(_mass_text)
-            pledge_value = ideaunit_atom.get_value(pledge_text)
+            pledge_value = ideaunit_atom.get_value(pledge_str())
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
             if _addin_value is not None:
                 x_str += f"addin={_addin_value}."
@@ -446,12 +423,10 @@ def add_bud_ideaunit_update_to_legible_list(
 def add_bud_ideaunit_delete_to_legible_list(
     legible_list: list[str], ideaunit_delete_dict: dict, x_bud: BudUnit
 ):
-    label_text = "label"
-    parent_road_text = "parent_road"
     for parent_road_dict in ideaunit_delete_dict.values():
         for ideaunit_atom in parent_road_dict.values():
-            label_value = ideaunit_atom.get_value(label_text)
-            parent_road_value = ideaunit_atom.get_value(parent_road_text)
+            label_value = ideaunit_atom.get_value(label_str())
+            parent_road_value = ideaunit_atom.get_value(parent_road_str())
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} was deleted."
             legible_list.append(x_str)
 
@@ -461,7 +436,7 @@ def add_bud_idea_awardlink_insert_to_legible_list(
 ):
     for road_dict in idea_awardlink_insert_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            group_id_value = idea_awardlink_atom.get_value("group_id")
+            group_id_value = idea_awardlink_atom.get_value(group_id_str())
             road_value = idea_awardlink_atom.get_value("road")
             give_force_value = idea_awardlink_atom.get_value("give_force")
             take_force_value = idea_awardlink_atom.get_value("take_force")
@@ -474,7 +449,7 @@ def add_bud_idea_awardlink_update_to_legible_list(
 ):
     for road_dict in idea_awardlink_update_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            group_id_value = idea_awardlink_atom.get_value("group_id")
+            group_id_value = idea_awardlink_atom.get_value(group_id_str())
             road_value = idea_awardlink_atom.get_value("road")
             give_force_value = idea_awardlink_atom.get_value("give_force")
             take_force_value = idea_awardlink_atom.get_value("take_force")
@@ -492,7 +467,7 @@ def add_bud_idea_awardlink_delete_to_legible_list(
 ):
     for road_dict in idea_awardlink_delete_dict.values():
         for idea_awardlink_atom in road_dict.values():
-            group_id_value = idea_awardlink_atom.get_value("group_id")
+            group_id_value = idea_awardlink_atom.get_value(group_id_str())
             road_value = idea_awardlink_atom.get_value("road")
             x_str = f"Awardlink for group {group_id_value}, idea '{road_value}' has been deleted."
             legible_list.append(x_str)
@@ -506,7 +481,7 @@ def add_bud_idea_reasonunit_insert_to_legible_list(
             road_value = idea_reasonunit_atom.get_value("road")
             base_value = idea_reasonunit_atom.get_value("base")
             base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                "base_idea_active_requisite"
+                base_idea_active_requisite_str()
             )
             x_str = (
                 f"ReasonUnit created for idea '{road_value}' with base '{base_value}'."
@@ -526,7 +501,7 @@ def add_bud_idea_reasonunit_update_to_legible_list(
             road_value = idea_reasonunit_atom.get_value("road")
             base_value = idea_reasonunit_atom.get_value("base")
             base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                "base_idea_active_requisite"
+                base_idea_active_requisite_str()
             )
             if base_idea_active_requisite_value is not None:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
@@ -629,7 +604,7 @@ def add_bud_idea_grouphold_insert_to_legible_list(
 ):
     for road_dict in idea_grouphold_insert_dict.values():
         for idea_grouphold_atom in road_dict.values():
-            group_id_value = idea_grouphold_atom.get_value("group_id")
+            group_id_value = idea_grouphold_atom.get_value(group_id_str())
             road_value = idea_grouphold_atom.get_value("road")
             x_str = f"grouphold '{group_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
@@ -640,7 +615,7 @@ def add_bud_idea_grouphold_delete_to_legible_list(
 ):
     for road_dict in idea_grouphold_delete_dict.values():
         for idea_grouphold_atom in road_dict.values():
-            group_id_value = idea_grouphold_atom.get_value("group_id")
+            group_id_value = idea_grouphold_atom.get_value(group_id_str())
             road_value = idea_grouphold_atom.get_value("road")
             x_str = f"grouphold '{group_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
@@ -651,7 +626,7 @@ def add_bud_idea_healerhold_insert_to_legible_list(
 ):
     for road_dict in idea_healerhold_insert_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            group_id_value = idea_healerhold_atom.get_value("group_id")
+            group_id_value = idea_healerhold_atom.get_value(group_id_str())
             road_value = idea_healerhold_atom.get_value("road")
             x_str = f"Healerhold '{group_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
@@ -662,31 +637,9 @@ def add_bud_idea_healerhold_delete_to_legible_list(
 ):
     for road_dict in idea_healerhold_delete_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            group_id_value = idea_healerhold_atom.get_value("group_id")
+            group_id_value = idea_healerhold_atom.get_value(group_id_str())
             road_value = idea_healerhold_atom.get_value("road")
             x_str = f"Healerhold '{group_id_value}' deleted for idea '{road_value}'."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_range_push_insert_to_legible_list(
-    legible_list: list[str], idea_range_push_insert_dict: dict, x_bud: BudUnit
-):
-    for road_dict in idea_range_push_insert_dict.values():
-        for idea_range_push_atom in road_dict.values():
-            range_push_value = idea_range_push_atom.get_value("range_push")
-            road_value = idea_range_push_atom.get_value("road")
-            x_str = f"range_push '{range_push_value}' created for idea '{road_value}'."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_range_push_delete_to_legible_list(
-    legible_list: list[str], idea_range_push_delete_dict: dict, x_bud: BudUnit
-):
-    for road_dict in idea_range_push_delete_dict.values():
-        for idea_range_push_atom in road_dict.values():
-            range_push_value = idea_range_push_atom.get_value("range_push")
-            road_value = idea_range_push_atom.get_value("road")
-            x_str = f"range_push '{range_push_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 

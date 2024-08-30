@@ -80,7 +80,6 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     # assert yao_rivergrade.credor_rank_percent == 1.0
     # assert yao_rivergrade.rewards_count == 1
     # assert yao_rivergrade.rewards_magnitude == 500
-    # assert 1 == 2
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario03():
@@ -129,7 +128,6 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     # assert yao_rivergrade.credor_rank_percent == 1.0
     # assert yao_rivergrade.rewards_count == 1
     # assert yao_rivergrade.rewards_magnitude == 500
-    # assert 1 == 2
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario04():
@@ -180,7 +178,6 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     # assert yao_rivergrade.credor_rank_percent == 1.0
     # assert yao_rivergrade.rewards_count == 1
     # assert yao_rivergrade.rewards_magnitude == 500
-    # assert 1 == 2
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario05():

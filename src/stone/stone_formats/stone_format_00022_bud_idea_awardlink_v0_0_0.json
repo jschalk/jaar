@@ -1,0 +1,27 @@
+{
+    "atom_category": "bud_idea_awardlink",
+    "attributes": {
+        "give_force": {
+            "column_order": 5
+        },
+        "group_id": {
+            "column_order": 3,
+            "sort_order": 3
+        },
+        "owner_id": {
+            "column_order": 1,
+            "sort_order": 1
+        },
+        "real_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "road": {
+            "column_order": 2,
+            "sort_order": 2
+        },
+        "take_force": {
+            "column_order": 4
+        }
+    }
+}

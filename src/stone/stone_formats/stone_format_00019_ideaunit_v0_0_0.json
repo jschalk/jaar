@@ -1,0 +1,17 @@
+{
+    "atom_category": "bud_ideaunit",
+    "attributes": {
+        "real_id": {"column_order": 0},
+        "owner_id": {"column_order": 1},
+        "parent_road": {"column_order": 2,"sort_order": 1},
+        "label": {"column_order": 3,"sort_order": 2},
+        "begin":{"column_order": 4},
+        "close":{"column_order": 5},
+        "addin":{"column_order": 6},
+        "numor":{"column_order": 7},
+        "denom":{"column_order": 8},
+        "morph":{"column_order": 9},
+        "gogo_want":{"column_order": 10},
+        "stop_want":{"column_order": 11}
+    }
+}

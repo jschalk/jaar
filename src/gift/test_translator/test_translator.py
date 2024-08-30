@@ -1,7 +1,7 @@
 # from src._instrument.python import x_is_json
 from src._road.jaar_config import get_test_real_id
 from src._road.road import default_road_delimiter_if_none
-from src.gift.atom_config import atom_insert, bud_acctunit_text
+from src.gift.atom_config import atom_insert, bud_acctunit_text, acct_id_str
 from src.gift.atom import atomunit_shop
 from src.gift.translator import Translator, translator_shop
 
@@ -93,22 +93,21 @@ def test_Translator_translate_acct_id_ReturnsObjWithNoChanges():
     # ESTABLISH
     yao_text = "Yao"
     x_category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     acctunit_atom = atomunit_shop(x_category, atom_insert())
-    acctunit_atom.set_required_arg(acct_id_text, yao_text)
+    acctunit_atom.set_required_arg(acct_id_str(), yao_text)
     acctunit_atom.set_optional_arg(credit_score_text, 51)
 
     old_atomunit = copy_deepcopy(acctunit_atom)
     music_translator = translator_shop()
-    assert acctunit_atom.get_value(acct_id_text) == yao_text
+    assert acctunit_atom.get_value(acct_id_str()) == yao_text
     assert acctunit_atom.get_value(credit_score_text) == 51
 
     # WHEN
     translated_atom = music_translator.translate_acct_id(acctunit_atom)
 
     # THEN
-    assert acctunit_atom.get_value(acct_id_text) == yao_text
+    assert acctunit_atom.get_value(acct_id_str()) == yao_text
     assert acctunit_atom.get_value(credit_score_text) == 51
     assert translated_atom == old_atomunit
 
@@ -117,22 +116,21 @@ def test_Translator_translate_acct_id_ReturnsObjWithChange_acct_id():
     # ESTABLISH
     susan_text = "Susan"
     x_category = bud_acctunit_text()
-    acct_id_text = "acct_id"
     credit_score_text = "credit_score"
     acctunit_atom = atomunit_shop(x_category, atom_insert())
-    acctunit_atom.set_required_arg(acct_id_text, susan_text)
+    acctunit_atom.set_required_arg(acct_id_str(), susan_text)
     acctunit_atom.set_optional_arg(credit_score_text, 51)
 
     sue_text = "Sue"
     music_translator = translator_shop()
     music_translator.set_acct_id(sue_text, susan_text)
-    assert acctunit_atom.get_value(acct_id_text) == susan_text
+    assert acctunit_atom.get_value(acct_id_str()) == susan_text
     assert acctunit_atom.get_value(credit_score_text) == 51
 
     # WHEN
     translated_atom = music_translator.translate_acct_id(acctunit_atom)
 
     # THEN
-    assert translated_atom.get_value(acct_id_text) != susan_text
-    assert translated_atom.get_value(acct_id_text) == sue_text
+    assert translated_atom.get_value(acct_id_str()) != susan_text
+    assert translated_atom.get_value(acct_id_str()) == sue_text
     assert translated_atom.get_value(credit_score_text) == 51

@@ -1,4 +1,4 @@
-from src._instrument.python import (
+from src._instrument.python_tool import (
     get_empty_dict_if_none,
     get_0_if_None,
     get_1_if_None,
@@ -94,12 +94,12 @@ class IdeaAttrFilter:
     healerhold: HealerHold = None
     begin: float = None
     close: float = None
+    gogo_want: float = None
+    stop_want: float = None
     addin: float = None
     numor: float = None
     denom: float = None
     morph: bool = None
-    range_push: RoadUnit = None
-    del_range_push: RoadUnit = None
     pledge: bool = None
     factunit: FactUnit = None
     descendant_pledge_count: int = None
@@ -153,12 +153,12 @@ def ideaattrfilter_shop(
     healerhold: HealerHold = None,
     begin: float = None,
     close: float = None,
+    gogo_want: float = None,
+    stop_want: float = None,
     addin: float = None,
     numor: float = None,
     denom: float = None,
     morph: bool = None,
-    range_push: RoadUnit = None,
-    del_range_push: RoadUnit = None,
     pledge: bool = None,
     factunit: FactUnit = None,
     descendant_pledge_count: int = None,
@@ -185,12 +185,12 @@ def ideaattrfilter_shop(
         healerhold=healerhold,
         begin=begin,
         close=close,
+        gogo_want=gogo_want,
+        stop_want=stop_want,
         addin=addin,
         numor=numor,
         denom=denom,
         morph=morph,
-        range_push=range_push,
-        del_range_push=del_range_push,
         pledge=pledge,
         factunit=factunit,
         descendant_pledge_count=descendant_pledge_count,
@@ -230,7 +230,6 @@ class IdeaUnit:
     _morph: bool = None
     _gogo_want: bool = None
     _stop_want: bool = None
-    _range_pushs: set[RoadUnit] = None
     pledge: bool = None
     _originunit: OriginUnit = None
     _problem_bool: bool = None
@@ -511,13 +510,6 @@ class IdeaUnit:
         self._parent_road = replace_road_delimiter(
             self._parent_road, old_delimiter, self._road_delimiter
         )
-        new_range_pushs = set()
-        for old_range_push in self._range_pushs:
-            new_range_push = replace_road_delimiter(
-                old_range_push, old_delimiter, self._road_delimiter
-            )
-            new_range_pushs.add(new_range_push)
-        self._range_pushs = new_range_pushs
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self._reasonunits.items():
@@ -585,6 +577,10 @@ class IdeaUnit:
             self._begin = idea_attr.begin
         if idea_attr.close is not None:
             self._close = idea_attr.close
+        if idea_attr.gogo_want is not None:
+            self._gogo_want = idea_attr.gogo_want
+        if idea_attr.stop_want is not None:
+            self._stop_want = idea_attr.stop_want
         if idea_attr.addin is not None:
             self._addin = idea_attr.addin
         if idea_attr.numor is not None:
@@ -593,10 +589,6 @@ class IdeaUnit:
             self._denom = idea_attr.denom
         if idea_attr.morph is not None:
             self._morph = idea_attr.morph
-        if idea_attr.range_push is not None:
-            self.set_range_push(idea_attr.range_push)
-        if idea_attr.del_range_push is not None:
-            self.del_range_push(idea_attr.del_range_push)
         if idea_attr.descendant_pledge_count is not None:
             self._descendant_pledge_count = idea_attr.descendant_pledge_count
         if idea_attr.all_acct_cred is not None:
@@ -878,15 +870,6 @@ class IdeaUnit:
     def is_math(self) -> bool:
         return self._begin is not None and self._close is not None
 
-    def set_range_push(self, range_push_road: RoadUnit):
-        self._range_pushs.add(range_push_road)
-
-    def range_push_exists(self, range_push_road: RoadUnit) -> bool:
-        return range_push_road in self._range_pushs
-
-    def del_range_push(self, range_push_road: RoadUnit):
-        self._range_pushs.discard(range_push_road)
-
     def awardheir_exists(self) -> bool:
         return self._awardheirs != {}
 
@@ -939,14 +922,6 @@ class IdeaUnit:
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         if is_sub_road(ref_road=self._parent_road, sub_road=old_road):
             self._parent_road = rebuild_road(self._parent_road, old_road, new_road)
-        new_range_pushs_dict = {}
-        for range_push in self._range_pushs:
-            if is_sub_road(range_push, old_road):
-                new_range_push = rebuild_road(range_push, old_road, new_road)
-                new_range_pushs_dict[range_push] = new_range_push
-        for old_range_push, dst_range_push in new_range_pushs_dict.items():
-            self._range_pushs.remove(old_range_push)
-            self._range_pushs.add(dst_range_push)
 
         self._reasonunits == find_replace_road_key_dict(
             dict_x=self._reasonunits, old_road=old_road, new_road=new_road
@@ -1049,7 +1024,6 @@ def ideaunit_shop(
         _denom=_denom,
         _numor=_numor,
         _morph=_morph,
-        _range_pushs=set(),
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
         _originunit=_originunit,

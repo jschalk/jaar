@@ -4,6 +4,7 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
+    add_time_cinco_ideaunit,
     get_creg_min_from_dt,
     get_cregtime_text,
     get_sun,  # "Sunday"
@@ -17,6 +18,8 @@ from src.chrono.examples.chrono_examples import (
     cregtime_ideaunit,
     creg_months_list,
     creg_weekday_ideaunits,
+    creg_str,
+    cinco_str,
 )
 from src.chrono.chrono import (
     day_length,
@@ -586,7 +589,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     clean_road = sue_bud.make_l1_road(clean_text)
     sue_bud.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
     time_road = sue_bud.make_l1_road("time")
-    cregtime_road = sue_bud.make_road(time_road, "creg")
+    cregtime_road = sue_bud.make_road(time_road, creg_str())
     day_road = sue_bud.make_road(cregtime_road, "day")
 
     sue_bud.edit_idea_attr(
@@ -644,7 +647,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     # create gregorian timeline
     add_time_creg_ideaunit(sue_bud)
     time_road = sue_bud.make_l1_road("time")
-    cregtime_road = sue_bud.make_road(time_road, "creg")
+    cregtime_road = sue_bud.make_road(time_road, creg_str())
     creg_idea = sue_bud.get_idea_obj(cregtime_road)
     print(f"{creg_idea._kids.keys()=}")
     daytime_road = sue_bud.make_road(cregtime_road, "day")
@@ -703,7 +706,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     sue_bud.set_l1_idea(ideaunit_shop(casa_text))
     sue_bud.set_idea(ideaunit_shop(laundry_text, pledge=True), casa_road)
     time_road = sue_bud.make_l1_road("time")
-    cregtime_road = sue_bud.make_road(time_road, "creg")
+    cregtime_road = sue_bud.make_road(time_road, creg_str())
     sue_bud.edit_idea_attr(
         road=laundry_road,
         reason_base=cregtime_road,
@@ -763,6 +766,31 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
     # THEN
     assert sue_agenda_dict == {}
+
+
+def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road(time_str())
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    cinco_road = sue_bud.make_road(time_road, cinco_str())
+    creg_year_road = get_year_road(sue_bud, creg_road)
+    cinco_year_road = get_year_road(sue_bud, cinco_road)
+    print(f"{creg_year_road=}")
+    print(f"{cinco_year_road=}")
+    print(f"{sue_bud._idea_dict.keys()=}")
+
+    assert not sue_bud.idea_exists(cinco_year_road)
+    assert sue_bud.idea_exists(creg_year_road)
+
+    # WHEN
+    sue_bud = add_time_cinco_ideaunit(sue_bud)
+
+    # THEN
+    assert sue_bud.idea_exists(cinco_year_road)
+    assert sue_bud.idea_exists(creg_year_road)
 
 
 # def test_get_time_dt_from_min_WorksCorrectly():

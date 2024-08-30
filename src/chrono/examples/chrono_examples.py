@@ -1,5 +1,5 @@
 from src._instrument.file import open_file
-from src._instrument.python import get_dict_from_json
+from src._instrument.python_tool import get_dict_from_json
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit
 from src.chrono.chrono import (
@@ -21,8 +21,20 @@ def chrono_examples_dir() -> str:
     return "src/chrono/examples"
 
 
+def creg_str() -> str:
+    return "creg"
+
+
+def cinco_str() -> str:
+    return "cinco"
+
+
+def get_cinco_config() -> dict:
+    return get_example_timeline_config(cinco_str())
+
+
 def get_creg_config() -> dict:
-    return get_example_timeline_config("creg")
+    return get_example_timeline_config(creg_str())
 
 
 def get_squirt_config() -> dict:
@@ -93,6 +105,10 @@ def creg_hour_label(x_int: int) -> str:
 
 def add_time_creg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     return add_newtimeline_ideaunit(x_budunit, get_creg_config())
+
+
+def add_time_cinco_ideaunit(x_budunit: BudUnit) -> BudUnit:
+    return add_newtimeline_ideaunit(x_budunit, get_cinco_config())
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:

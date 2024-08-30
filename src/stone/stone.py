@@ -1,8 +1,14 @@
 from src._instrument.file import open_file, create_file_path
-from src._instrument.python import get_dict_from_json
+from src._instrument.python_tool import (
+    get_dict_from_json,
+    extract_csv_headers,
+    get_csv_column1_column2_metrics,
+    create_filtered_csv_dict,
+)
+from src._road.road import RealID, OwnerID
 from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop
+from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop, AtomUnit
 from src.gift.atom_config import (
     budunit_text,
     bud_acctunit_text,
@@ -14,71 +20,35 @@ from src.gift.atom_config import (
     bud_idea_grouphold_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    real_id_str,
+    owner_id_str,
+    acct_id_str,
+    group_id_str,
+    acct_pool_str,
+    debtit_score_str,
+    credit_score_str,
+    debtit_vote_str,
+    credit_vote_str,
+    parent_road_str,
+    label_str,
+    mass_str,
+    pledge_str,
+    begin_str,
+    close_str,
+    addin_str,
+    numor_str,
+    denom_str,
+    morph_str,
+    gogo_want_str,
+    stop_want_str,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
 from src.listen.hubunit import hubunit_shop
-from src.stone.csv_tool import extract_csv_headers
 from src.stone.examples.stone_env import src_stone_dir
 from pandas import DataFrame, read_csv
 import csv
 from dataclasses import dataclass
-
-
-def real_id_str() -> str:
-    return "real_id"
-
-
-def owner_id_str() -> str:
-    return "owner_id"
-
-
-def acct_id_str() -> str:
-    return "acct_id"
-
-
-def group_id_str() -> str:
-    return "group_id"
-
-
-def acct_pool_str() -> str:
-    return "acct_pool"
-
-
-def debtit_score_str() -> str:
-    return "debtit_score"
-
-
-def credit_score_str() -> str:
-    return "credit_score"
-
-
-def debtit_vote_str() -> str:
-    return "debtit_vote"
-
-
-def credit_vote_str() -> str:
-    return "credit_vote"
-
-
-def road_str() -> str:
-    return "road"
-
-
-def parent_road_str() -> str:
-    return "parent_road"
-
-
-def label_str() -> str:
-    return "label"
-
-
-def mass_str() -> str:
-    return "mass"
-
-
-def pledge_str() -> str:
-    return "pledge"
 
 
 def column_order_str() -> str:
@@ -121,23 +91,88 @@ def get_stone_formats_dir() -> str:
     return f"{src_stone_dir()}/stone_formats"
 
 
-def jaar_format_00001_acct_v0_0_0() -> str:
-    return "jaar_format_00001_acct_v0_0_0"
+def stone_format_00001_acct_v0_0_0() -> str:
+    return "stone_format_00001_acct_v0_0_0"
 
 
-def jaar_format_00002_membership_v0_0_0() -> str:
-    return "jaar_format_00002_membership_v0_0_0"
+def stone_format_00002_membership_v0_0_0() -> str:
+    return "stone_format_00002_membership_v0_0_0"
 
 
-def jaar_format_00003_ideaunit_v0_0_0() -> str:
-    return "jaar_format_00003_ideaunit_v0_0_0"
+def stone_format_00003_ideaunit_v0_0_0() -> str:
+    return "stone_format_00003_ideaunit_v0_0_0"
+
+
+def stone_format_00019_ideaunit_v0_0_0() -> str:
+    return "stone_format_00019_ideaunit_v0_0_0"
+
+
+# def stone_format_00020_bud_acct_membership_v0_0_0()-> str: return "stone_format_00020_bud_acct_membership_v0_0_0"
+# def stone_format_00021_bud_acctunit_v0_0_0()-> str: return "stone_format_00021_bud_acctunit_v0_0_0"
+# def stone_format_00022_bud_idea_awardlink_v0_0_0()-> str: return "stone_format_00022_bud_idea_awardlink_v0_0_0"
+# def stone_format_00023_bud_idea_factunit_v0_0_0()-> str: return "stone_format_00023_bud_idea_factunit_v0_0_0"
+# def stone_format_00024_bud_idea_grouphold_v0_0_0()-> str: return "stone_format_00024_bud_idea_grouphold_v0_0_0"
+# def stone_format_00025_bud_idea_healerhold_v0_0_0()-> str: return "stone_format_00025_bud_idea_healerhold_v0_0_0"
+# def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0()-> str: return "stone_format_00026_bud_idea_reason_premiseunit_v0_0_0"
+# def stone_format_00027_bud_idea_reasonunit_v0_0_0()-> str: return "stone_format_00027_bud_idea_reasonunit_v0_0_0"
+# def stone_format_00028_bud_ideaunit_v0_0_0()-> str: return "stone_format_00028_bud_ideaunit_v0_0_0"
+# def stone_format_00029_budunit_v0_0_0()-> str: return "stone_format_00029_budunit_v0_0_0"
+def stone_format_00020_bud_acct_membership_v0_0_0() -> str:
+    return "stone_format_00020_bud_acct_membership_v0_0_0"
+
+
+def stone_format_00021_bud_acctunit_v0_0_0() -> str:
+    return "stone_format_00021_bud_acctunit_v0_0_0"
+
+
+def stone_format_00022_bud_idea_awardlink_v0_0_0() -> str:
+    return "stone_format_00022_bud_idea_awardlink_v0_0_0"
+
+
+def stone_format_00023_bud_idea_factunit_v0_0_0() -> str:
+    return "stone_format_00023_bud_idea_factunit_v0_0_0"
+
+
+def stone_format_00024_bud_idea_grouphold_v0_0_0() -> str:
+    return "stone_format_00024_bud_idea_grouphold_v0_0_0"
+
+
+def stone_format_00025_bud_idea_healerhold_v0_0_0() -> str:
+    return "stone_format_00025_bud_idea_healerhold_v0_0_0"
+
+
+def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0() -> str:
+    return "stone_format_00026_bud_idea_reason_premiseunit_v0_0_0"
+
+
+def stone_format_00027_bud_idea_reasonunit_v0_0_0() -> str:
+    return "stone_format_00027_bud_idea_reasonunit_v0_0_0"
+
+
+def stone_format_00028_bud_ideaunit_v0_0_0() -> str:
+    return "stone_format_00028_bud_ideaunit_v0_0_0"
+
+
+def stone_format_00029_budunit_v0_0_0() -> str:
+    return "stone_format_00029_budunit_v0_0_0"
 
 
 def get_stone_filenames() -> set[str]:
     return {
-        jaar_format_00001_acct_v0_0_0(),
-        jaar_format_00002_membership_v0_0_0(),
-        jaar_format_00003_ideaunit_v0_0_0(),
+        stone_format_00001_acct_v0_0_0(),
+        stone_format_00002_membership_v0_0_0(),
+        stone_format_00003_ideaunit_v0_0_0(),
+        stone_format_00019_ideaunit_v0_0_0(),
+        stone_format_00020_bud_acct_membership_v0_0_0(),
+        stone_format_00021_bud_acctunit_v0_0_0(),
+        stone_format_00022_bud_idea_awardlink_v0_0_0(),
+        stone_format_00023_bud_idea_factunit_v0_0_0(),
+        stone_format_00024_bud_idea_grouphold_v0_0_0(),
+        stone_format_00025_bud_idea_healerhold_v0_0_0(),
+        stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
+        stone_format_00027_bud_idea_reasonunit_v0_0_0(),
+        stone_format_00028_bud_ideaunit_v0_0_0(),
+        stone_format_00029_budunit_v0_0_0(),
     }
 
 
@@ -204,59 +239,62 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_budunit)
     x_stoneref = get_stoneref(stone_name)
+    x_real_id = x_budunit._real_id
+    x_owner_id = x_budunit._owner_id
+    sorted_atomunits = _get_sorted_atom_insert_atomunits(x_changeunit, x_stoneref)
+    d2_list = _create_d2_list(sorted_atomunits, x_stoneref, x_real_id, x_owner_id)
+    d2_list = _change_all_pledge_values(d2_list, x_stoneref)
+    x_stone = _generate_stone_dataframe(d2_list, stone_name)
+    sorting_columns = x_stoneref.get_headers_list()
+    return _sort_dataframe(x_stone, sorting_columns)
+
+
+def _get_sorted_atom_insert_atomunits(
+    x_changeunit: ChangeUnit, x_stoneref: StoneRef
+) -> list[AtomUnit]:
     category_set = {x_stoneref.atom_category}
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
-    sorted_atomunits = filtered_change.get_category_sorted_atomunits_list()
-    sorting_columns = x_stoneref.get_headers_list()
+    return filtered_change.get_category_sorted_atomunits_list()
+
+
+def _create_d2_list(
+    sorted_atomunits: list[AtomUnit],
+    x_stoneref: StoneRef,
+    x_real_id: RealID,
+    x_owner_id: OwnerID,
+):
     d2_list = []
+    for x_atomunit in sorted_atomunits:
+        d1_list = []
+        for x_stonecolumn in x_stoneref.get_headers_list():
+            if x_stonecolumn == real_id_str():
+                d1_list.append(x_real_id)
+            elif x_stonecolumn == owner_id_str():
+                d1_list.append(x_owner_id)
+            else:
+                d1_list.append(x_atomunit.get_value(x_stonecolumn))
+        d2_list.append(d1_list)
+    return d2_list
 
-    if stone_name == jaar_format_00001_acct_v0_0_0():
-        d2_list = [
-            [
-                x_budunit._real_id,
-                x_budunit._owner_id,
-                x_atomunit.get_value(acct_id_str()),
-                x_atomunit.get_value(credit_score_str()),
-                x_atomunit.get_value(debtit_score_str()),
-            ]
-            for x_atomunit in sorted_atomunits
-        ]
-    elif stone_name == jaar_format_00002_membership_v0_0_0():
-        d2_list = [
-            [
-                x_budunit._real_id,
-                x_budunit._owner_id,
-                x_atomunit.get_value(acct_id_str()),
-                x_atomunit.get_value(group_id_str()),
-                x_atomunit.get_value(credit_vote_str()),
-                x_atomunit.get_value(debtit_vote_str()),
-            ]
-            for x_atomunit in sorted_atomunits
-        ]
-    elif stone_name == jaar_format_00003_ideaunit_v0_0_0():
-        for x_atomunit in sorted_atomunits:
-            pledge_bool = x_atomunit.get_value("pledge")
-            pledge_yes_str = ""
-            if pledge_bool:
-                pledge_yes_str = "Yes"
-            d2_list.append(
-                [
-                    x_budunit._real_id,
-                    x_budunit._owner_id,
-                    pledge_yes_str,
-                    x_atomunit.get_value(parent_road_str()),
-                    x_atomunit.get_value(mass_str()),
-                    x_atomunit.get_value(label_str()),
-                ]
-            )
 
-    x_stone = _generate_stone_dataframe(d2_list, stone_name)
+def _change_all_pledge_values(d2_list: list[list], x_stoneref: StoneRef) -> list[list]:
+    for x_column_header, x_stonecolumn in x_stoneref._stonecolumns.items():
+        if x_column_header == pledge_str():
+            pledge_column_number = x_stonecolumn.column_order
+            for x_row in d2_list:
+                if x_row[pledge_column_number] is True:
+                    x_row[pledge_column_number] = "Yes"
+                else:
+                    x_row[pledge_column_number] = ""
+    return d2_list
+
+
+def _sort_dataframe(x_stone: DataFrame, sorting_columns: list[str]) -> DataFrame:
     ascending_bools = get_ascending_bools(sorting_columns)
     x_stone.sort_values(sorting_columns, ascending=ascending_bools, inplace=True)
     x_stone.reset_index(inplace=True)
     x_stone.drop(columns=["index"], inplace=True)
-
     return x_stone
 
 
@@ -274,27 +312,21 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        if x_stonename == jaar_format_00001_acct_v0_0_0():
+        if x_stonename == stone_format_00001_acct_v0_0_0():
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], float(row[3]))
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == jaar_format_00002_membership_v0_0_0():
+        elif x_stonename == stone_format_00002_membership_v0_0_0():
             x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], row[3])
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_atomunit.set_arg(title_row[5], float(row[5]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == jaar_format_00003_ideaunit_v0_0_0():
+        elif x_stonename == stone_format_00003_ideaunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
-            # "real_id": "column_order": 0
-            # "owner_id": "column_order": 1
-            # "pledge": "column_order": 2
-            # "parent_road":  "column_order": 3,
-            # "mass":  "column_order": 4
-            # "label":  "column_order": 5,
             pledge_bool = False
             if row[2] == "Yes":
                 pledge_bool = True
@@ -322,3 +354,15 @@ def load_stone_csv(reals_dir: str, x_stonename: str, x_file_dir: str, x_filename
     x_giftunit.set_changeunit(x_changeunit)
     x_hubunit.save_gift_file(x_giftunit)
     x_hubunit._create_voice_from_gifts()
+
+
+def get_csv_real_id_owner_id_metrics(
+    headerless_csv: str, delimiter: str = None
+) -> dict[RealID, dict[OwnerID, int]]:
+    return get_csv_column1_column2_metrics(headerless_csv, delimiter)
+
+
+def real_id_owner_id_filtered_csv_dict(
+    headerless_csv: str, delimiter: str = None
+) -> dict[RealID, dict[OwnerID, str]]:
+    return create_filtered_csv_dict(headerless_csv, delimiter)

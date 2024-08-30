@@ -1,4 +1,4 @@
-from src._instrument.python import conditional_fig_show
+from src._instrument.python_tool import conditional_fig_show
 from src._road.jaar_config import voice_str, action_str
 from src._road.finance import default_money_magnitude
 from src.bud.bud import BudUnit

@@ -1,6 +1,7 @@
-from src._instrument.python import x_is_json
+from src._instrument.python_tool import x_is_json
 from src._road.jaar_config import init_gift_id, get_gifts_folder
 from src._road.road import get_default_real_id_roadnode as root_label
+from src.gift.atom_config import real_id_str, owner_id_str
 from src.gift.change import changeunit_shop
 from src.gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
 from src.gift.examples.example_atoms import get_atom_example_ideaunit_sports
@@ -213,13 +214,10 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     x_dict = farm_giftunit.get_step_dict()
 
     # THEN
-    real_id_text = "real_id"
-    assert x_dict.get(real_id_text) is not None
-    assert x_dict.get(real_id_text) == music_text
-
-    owner_id_text = "owner_id"
-    assert x_dict.get(owner_id_text) is not None
-    assert x_dict.get(owner_id_text) == bob_text
+    assert x_dict.get(real_id_str()) is not None
+    assert x_dict.get(real_id_str()) == music_text
+    assert x_dict.get(owner_id_str()) is not None
+    assert x_dict.get(owner_id_str()) == bob_text
 
     face_id_text = "face_id"
     assert x_dict.get(face_id_text) is not None
@@ -313,9 +311,8 @@ def test_GiftUnit_get_changemetric_dict_ReturnsCorrectObj():
     x_dict = farm_giftunit.get_changemetric_dict()
 
     # THEN
-    owner_id_text = "owner_id"
-    assert x_dict.get(owner_id_text) is not None
-    assert x_dict.get(owner_id_text) == bob_text
+    assert x_dict.get(owner_id_str()) is not None
+    assert x_dict.get(owner_id_str()) == bob_text
 
     face_id_text = "face_id"
     assert x_dict.get(face_id_text) is not None

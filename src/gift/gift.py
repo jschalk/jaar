@@ -1,11 +1,8 @@
 from src._instrument.file import save_file, open_file, create_file_path
-from src._instrument.python import (
-    get_empty_set_if_none,
-    get_json_from_dict,
-    get_dict_from_json,
-)
+from src._instrument.python_tool import get_json_from_dict, get_dict_from_json
 from src._road.jaar_config import get_init_gift_id_if_None, get_json_filename
 from src._road.road import OwnerID, RealID, get_default_real_id_roadnode
+from src.gift.atom_config import real_id_str, owner_id_str
 from src.gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.gift.change import ChangeUnit, changeunit_shop
 from dataclasses import dataclass
@@ -43,8 +40,8 @@ class GiftUnit:
 
     def get_step_dict(self) -> dict[str, any]:
         return {
-            "real_id": self.real_id,
-            "owner_id": self.owner_id,
+            real_id_str(): self.real_id,
+            owner_id_str(): self.owner_id,
             "face_id": self._face_id,
             "change": self._changeunit.get_ordered_atomunits(self._change_start),
         }
@@ -56,7 +53,7 @@ class GiftUnit:
     def get_changemetric_dict(self) -> dict:
         x_dict = self.get_step_dict()
         return {
-            "owner_id": x_dict.get("owner_id"),
+            owner_id_str(): x_dict.get(owner_id_str()),
             "face_id": x_dict.get("face_id"),
             "change_atom_numbers": self.get_change_atom_numbers(x_dict),
         }
@@ -137,8 +134,8 @@ def create_giftunit_from_files(
 ) -> GiftUnit:
     gift_filename = get_json_filename(gift_id)
     gift_dict = get_dict_from_json(open_file(gifts_dir, gift_filename))
-    x_owner_id = gift_dict.get("owner_id")
-    x_real_id = gift_dict.get("real_id")
+    x_owner_id = gift_dict.get(owner_id_str())
+    x_real_id = gift_dict.get(real_id_str())
     x_face_id = gift_dict.get("face_id")
     change_atom_numbers_list = gift_dict.get("change_atom_numbers")
     x_giftunit = giftunit_shop(

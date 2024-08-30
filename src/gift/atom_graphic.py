@@ -11,7 +11,6 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_grouphold_text,
-    bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
 )
@@ -253,7 +252,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
     # bud_idea_healerhold_delete = get_delete_rect(bud_idea_healerhold_text())
     # bud_idea_awardlink_delete = get_delete_rect(bud_idea_awardlink_text())
     # bud_ideaunit_delete = get_delete_rect(bud_ideaunit_text())
-    # budunit_update = get_update_rect("budunit")
+    # budunit_update = get_update_rect(budunit_text())
 
     # WHEN / THEN
 

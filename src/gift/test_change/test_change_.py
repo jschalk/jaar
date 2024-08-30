@@ -4,16 +4,23 @@ from src.gift.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
+    budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
     bud_idea_awardlink_text,
     bud_ideaunit_text,
+    acct_id_str,
+    group_id_str,
+    parent_road_str,
+    label_str,
+    credit_score_str,
+    debtit_score_str,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import ChangeUnit, changeunit_shop, bud_built_from_change_is_valid
 from src.bud.bud import budunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
-from src._instrument.python import x_is_json
+from src._instrument.python_tool import x_is_json
 from pytest import raises as pytest_raises
 
 
@@ -39,7 +46,7 @@ def test_ChangeUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
     attribute_value = 55
-    category = "budunit"
+    category = budunit_text()
     opt1_arg = "tally"
     optional_args = {opt1_arg: attribute_value}
     required_args = {}
@@ -87,7 +94,7 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acctunit_text():
     bob_text = "Bob"
     farm_changeunit = changeunit_shop()
     bob_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
-    bob_atomunit.set_arg("acct_id", bob_text)
+    bob_atomunit.set_arg(acct_id_str(), bob_text)
     assert not farm_changeunit.atomunit_exists(bob_atomunit)
 
     # WHEN
@@ -103,8 +110,8 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_text():
     iowa_text = ";Iowa"
     farm_changeunit = changeunit_shop()
     bob_iowa_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
-    bob_iowa_atomunit.set_arg("group_id", iowa_text)
-    bob_iowa_atomunit.set_arg("acct_id", bob_text)
+    bob_iowa_atomunit.set_arg(group_id_str(), iowa_text)
+    bob_iowa_atomunit.set_arg(acct_id_str(), bob_text)
     assert not farm_changeunit.atomunit_exists(bob_iowa_atomunit)
 
     # WHEN
@@ -117,16 +124,15 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_text():
 def test_ChangeUnit_get_atom_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = changeunit_shop()
-    budunit_text = "budunit"
     opt_arg1 = "tally"
     opt_value = 55
-    budunit_atomunit = atomunit_shop(budunit_text, atom_update())
+    budunit_atomunit = atomunit_shop(budunit_text(), atom_update())
     budunit_atomunit.set_optional_arg(x_key=opt_arg1, x_value=opt_value)
     ex1_changeunit.set_atomunit(budunit_atomunit)
 
     # WHEN
     gen_atomunit = ex1_changeunit.get_atomunit(
-        atom_update(), category=budunit_text, required_args=[]
+        atom_update(), category=budunit_text(), required_args=[]
     )
 
     # THEN
@@ -141,11 +147,10 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # WHEN
     op2_arg = "tally"
     op2_value = 55
-    budunit_text = "budunit"
     required_args = {}
     optional_args = {op2_arg: op2_value}
     ex1_changeunit.add_atomunit(
-        budunit_text,
+        budunit_text(),
         atom_update(),
         required_args,
         optional_args=optional_args,
@@ -154,9 +159,9 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # THEN
     assert len(ex1_changeunit.atomunits) == 1
     x_update_dict = ex1_changeunit.atomunits.get(atom_update())
-    x_atomunit = x_update_dict.get(budunit_text)
+    x_atomunit = x_update_dict.get(budunit_text())
     assert x_atomunit is not None
-    assert x_atomunit.category == budunit_text
+    assert x_atomunit.category == budunit_text()
 
 
 def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
@@ -165,16 +170,14 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     assert ex1_changeunit.atomunits == {}
 
     # WHEN
-    acct_id_text = "acct_id"
     bob_text = "Bob"
     bob_credit_score = 55
     bob_debtit_score = 66
     bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
-    acct_id_text = "acct_id"
-    cw_text = "credit_score"
-    dw_text = "debtit_score"
+    cw_text = credit_score_str()
+    dw_text = debtit_score_str()
     print(f"{bob_acctunit.get_dict()=}")
-    bob_required_dict = {acct_id_text: bob_acctunit.get_dict().get(acct_id_text)}
+    bob_required_dict = {acct_id_str(): bob_acctunit.get_dict().get(acct_id_str())}
     bob_optional_dict = {cw_text: bob_acctunit.get_dict().get(cw_text)}
     bob_optional_dict[dw_text] = bob_acctunit.get_dict().get(dw_text)
     print(f"{bob_required_dict=}")
@@ -231,7 +234,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
     # THEN
     assert len(sue_atoms_list) == 2
-    assert sue_atoms_list[0] == update_dict.get("budunit")
+    assert sue_atoms_list[0] == update_dict.get(budunit_text())
     z_atom = sue_atoms_list[1]
     print(f"{z_atom=}")
     print(delete_dict.get(bud_acctunit_text()).keys())
@@ -255,7 +258,7 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     opt2_value = 55
-#     category = "budunit"
+#     category = budunit_text()
 #     opt2_arg = "mass"
 #     mass_atomunit = atomunit_shop(category, atom_update())
 #     mass_atomunit.set_optional_arg(opt2_arg, opt2_value)
@@ -303,10 +306,9 @@ def test_ChangeUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     # ESTABLISH
     ex1_changeunit = get_changeunit_example1()
-    budunit_text = "budunit"
     update_dict = ex1_changeunit.atomunits.get(atom_update())
     assert len(update_dict.keys()) == 1
-    assert update_dict.get(budunit_text) is not None
+    assert update_dict.get(budunit_text()) is not None
     print(f"atom_order 28 {ex1_changeunit.atomunits.get(atom_update()).keys()=}")
     delete_dict = ex1_changeunit.atomunits.get(atom_delete())
     assert len(delete_dict.keys()) == 1
@@ -323,7 +325,7 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj():
     # for atomunit in sue_atom_order_list:
     #     print(f"{atomunit.atom_order=}")
     assert sue_atom_order_list[0] == zia_acctunit_delete
-    assert sue_atom_order_list[1] == update_dict.get(budunit_text)
+    assert sue_atom_order_list[1] == update_dict.get(budunit_text())
     # for crud_text, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_text=}")
     #     print(f"{len(atom_list)=}")
@@ -338,14 +340,12 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_IdeaUnitsSorted():
     sports_road = create_road(x_real_id, sports_text)
     knee_text = "knee"
     x_category = bud_ideaunit_text()
-    label_text = "label"
-    parent_road_text = "parent_road"
     sports_insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_insert_ideaunit_atomunit.set_required_arg(label_text, sports_text)
-    sports_insert_ideaunit_atomunit.set_required_arg(parent_road_text, x_real_id)
+    sports_insert_ideaunit_atomunit.set_required_arg(label_str(), sports_text)
+    sports_insert_ideaunit_atomunit.set_required_arg(parent_road_str(), x_real_id)
     knee_insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_insert_ideaunit_atomunit.set_required_arg(label_text, knee_text)
-    knee_insert_ideaunit_atomunit.set_required_arg(parent_road_text, sports_road)
+    knee_insert_ideaunit_atomunit.set_required_arg(label_str(), knee_text)
+    knee_insert_ideaunit_atomunit.set_required_arg(parent_road_str(), sports_road)
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(knee_insert_ideaunit_atomunit)
     x_changeunit.set_atomunit(sports_insert_ideaunit_atomunit)
@@ -375,13 +375,12 @@ def test_ChangeUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     knee_road = create_road(sports_road, knee_text)
     x_category = bud_idea_awardlink_text()
     road_text = "road"
-    group_id_text = "group_id"
     swimmers_text = ",Swimmers"
     sports_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_awardlink_atomunit.set_required_arg(group_id_text, swimmers_text)
+    sports_awardlink_atomunit.set_required_arg(group_id_str(), swimmers_text)
     sports_awardlink_atomunit.set_required_arg(road_text, sports_road)
     knee_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_awardlink_atomunit.set_required_arg(group_id_text, swimmers_text)
+    knee_awardlink_atomunit.set_required_arg(group_id_str(), swimmers_text)
     knee_awardlink_atomunit.set_required_arg(road_text, knee_road)
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(knee_awardlink_atomunit)
@@ -407,8 +406,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     # ESTABLISH
     sue_changeunit = changeunit_shop()
 
-    budunit_text = "budunit"
-    x_atomunit = atomunit_shop(budunit_text, atom_update())
+    x_atomunit = atomunit_shop(budunit_text(), atom_update())
     x_attribute = "credor_respect"
     x_atomunit.set_optional_arg(x_attribute, 100)
     sue_changeunit.set_atomunit(x_atomunit)
@@ -416,8 +414,8 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     category = bud_acctunit_text()
     zia_text = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("acct_id", zia_text)
-    x_atomunit.set_arg("credit_score", "70 is the number")
+    x_atomunit.set_arg(acct_id_str(), zia_text)
+    x_atomunit.set_arg(credit_score_str(), "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN/THEN
@@ -430,8 +428,8 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     # WHEN
     yao_text = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("acct_id", yao_text)
-    x_atomunit.set_arg("credit_score", 30)
+    x_atomunit.set_arg(acct_id_str(), yao_text)
+    x_atomunit.set_arg(credit_score_str(), 30)
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
@@ -440,8 +438,8 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     # WHEN
     bob_text = "Bob"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg("acct_id", bob_text)
-    x_atomunit.set_arg("credit_score", "70 is the number")
+    x_atomunit.set_arg(acct_id_str(), bob_text)
+    x_atomunit.set_arg(credit_score_str(), "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
@@ -451,23 +449,22 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
 def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStartingNumber():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credit_score", 70)
+    zia_atomunit.set_arg(acct_id_str(), zia_text)
+    zia_atomunit.set_arg(credit_score_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credit_score", 30)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
+    yao_atomunit.set_arg(credit_score_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -491,23 +488,22 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStart
 def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credit_score", 70)
+    zia_atomunit.set_arg(acct_id_str(), zia_text)
+    zia_atomunit.set_arg(credit_score_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credit_score", 30)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
+    yao_atomunit.set_arg(credit_score_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -531,23 +527,22 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartin
 def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credit_score", 70)
+    zia_atomunit.set_arg(acct_id_str(), zia_text)
+    zia_atomunit.set_arg(credit_score_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credit_score", 30)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
+    yao_atomunit.set_arg(credit_score_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -571,21 +566,20 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumb
 def test_ChangeUnit_get_json_ReturnsCorrectObj():
     # ESTABLISH
     sue_changeunit = changeunit_shop()
-    budunit_text = "budunit"
-    pool_atomunit = atomunit_shop(budunit_text, atom_update())
+    pool_atomunit = atomunit_shop(budunit_text(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_optional_arg(pool_attribute, 100)
     sue_changeunit.set_atomunit(pool_atomunit)
     category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credit_score", 70)
+    zia_atomunit.set_arg(acct_id_str(), zia_text)
+    zia_atomunit.set_arg(credit_score_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg("acct_id", yao_text)
-    yao_atomunit.set_arg("credit_score", 30)
+    yao_atomunit.set_arg(acct_id_str(), yao_text)
+    yao_atomunit.set_arg(credit_score_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     # WHEN
@@ -604,8 +598,8 @@ def test_ChangeUnit_atomunit_exists_ReturnsCorrectObj():
     category = bud_acctunit_text()
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg("acct_id", zia_text)
-    zia_atomunit.set_arg("credit_score", 70)
+    zia_atomunit.set_arg(acct_id_str(), zia_text)
+    zia_atomunit.set_arg(credit_score_str(), 70)
     assert farm_changeunit.atomunit_exists(zia_atomunit) is False
 
     # WHEN

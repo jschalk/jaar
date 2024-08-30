@@ -12,14 +12,22 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_grouphold_text,
-    bud_idea_range_push_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
+    acct_id_str,
+    group_id_str,
+    parent_road_str,
+    label_str,
+    pledge_str,
+    begin_str,
+    close_str,
+    mass_str,
+    base_idea_active_requisite_str,
 )
 from src.gift.atom import atom_insert, atom_update, atom_delete
 from src.gift.change import ChangeUnit, changeunit_shop
 from src.listen.examples.example_listen_buds import get_budunit_with_4_levels
-from src._instrument.python import get_nested_value, get_empty_list_if_None
+from src._instrument.python_tool import get_nested_value, get_empty_list_if_None
 from copy import deepcopy as copy_deepcopy
 
 
@@ -94,7 +102,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     sue_insert_dict = sue_changeunit.atomunits.get(atom_insert())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_text())
     xio_atomunit = sue_acctunit_dict.get(xio_text)
-    assert xio_atomunit.get_value("acct_id") == xio_text
+    assert xio_atomunit.get_value(acct_id_str()) == xio_text
     assert xio_atomunit.get_value("credit_score") == xio_credit_score
     assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
 
@@ -122,7 +130,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete
     xio_atomunit = get_nested_value(
         sue_changeunit.atomunits, [atom_delete(), bud_acctunit_text(), xio_text]
     )
-    assert xio_atomunit.get_value("acct_id") == xio_text
+    assert xio_atomunit.get_value(acct_id_str()) == xio_text
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     print_atomunit_keys(sue_changeunit)
@@ -147,7 +155,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
     # THEN
     x_keylist = [atom_update(), bud_acctunit_text(), xio_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value("acct_id") == xio_text
+    assert xio_atomunit.get_value(acct_id_str()) == xio_text
     assert xio_atomunit.get_value("credit_score") == xio_credit_score
     assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
 
@@ -182,7 +190,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_update(), "budunit"]
+    x_keylist = [atom_update(), budunit_text()]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("max_tree_traverse") == x_max_tree_traverse
     assert xio_atomunit.get_value("monetary_desc") == x_monetary_desc
@@ -228,18 +236,18 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     # THEN
     x_keylist = [atom_insert(), bud_acctunit_text(), yao_text]
     yao_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert yao_atomunit.get_value("acct_id") == yao_text
+    assert yao_atomunit.get_value(acct_id_str()) == yao_text
 
     x_keylist = [atom_insert(), bud_acctunit_text(), zia_text]
     zia_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert zia_atomunit.get_value("acct_id") == zia_text
+    assert zia_atomunit.get_value(acct_id_str()) == zia_text
     print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{zia_atomunit=}")
 
     x_keylist = [atom_insert(), bud_acct_membership_text(), zia_text, run_text]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert run_atomunit.get_value("acct_id") == zia_text
-    assert run_atomunit.get_value("group_id") == run_text
+    assert run_atomunit.get_value(acct_id_str()) == zia_text
+    assert run_atomunit.get_value(group_id_str()) == run_text
     assert run_atomunit.get_value("credit_vote") == zia_run_credit_w
     assert run_atomunit.get_value("debtit_vote") == zia_run_debtit_w
 
@@ -277,14 +285,14 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     # THEN
     # x_keylist = [atom_update(), bud_acctunit_text(), xio_text]
     # xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    # assert xio_atomunit.get_value("acct_id") == xio_text
+    # assert xio_atomunit.get_value(acct_id_str()) == xio_text
     # print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{xio_atomunit=}")
 
     x_keylist = [atom_update(), bud_acct_membership_text(), xio_text, run_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value("acct_id") == xio_text
-    assert xio_atomunit.get_value("group_id") == run_text
+    assert xio_atomunit.get_value(acct_id_str()) == xio_text
+    assert xio_atomunit.get_value(group_id_str()) == run_text
     assert xio_atomunit.get_value("credit_vote") == after_xio_credit_w
     assert xio_atomunit.get_value("debtit_vote") == after_xio_debtit_w
 
@@ -334,8 +342,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
     # THEN
     x_keylist = [atom_delete(), bud_acct_membership_text(), bob_text, fly_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value("acct_id") == bob_text
-    assert xio_atomunit.get_value("group_id") == fly_text
+    assert xio_atomunit.get_value(acct_id_str()) == bob_text
+    assert xio_atomunit.get_value(group_id_str()) == fly_text
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     print_atomunit_keys(sue_changeunit)
@@ -376,13 +384,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
 
     x_keylist = [atom_delete(), bud_ideaunit_text(), ball_road, street_text]
     street_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert street_atomunit.get_value("parent_road") == ball_road
-    assert street_atomunit.get_value("label") == street_text
+    assert street_atomunit.get_value(parent_road_str()) == ball_road
+    assert street_atomunit.get_value(label_str()) == street_text
 
     x_keylist = [atom_delete(), bud_ideaunit_text(), sports_road, ball_text]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value("parent_road") == sports_road
-    assert ball_atomunit.get_value("label") == ball_text
+    assert ball_atomunit.get_value(parent_road_str()) == sports_road
+    assert ball_atomunit.get_value(label_str()) == ball_text
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 2
@@ -430,8 +438,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
 
     x_keylist = [atom_insert(), bud_ideaunit_text(), sports_road, disc_text]
     street_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert street_atomunit.get_value("parent_road") == sports_road
-    assert street_atomunit.get_value("label") == disc_text
+    assert street_atomunit.get_value(parent_road_str()) == sports_road
+    assert street_atomunit.get_value(label_str()) == disc_text
 
     x_keylist = [
         atom_insert(),
@@ -440,12 +448,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
         music_text,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value("label") == music_text
-    assert ball_atomunit.get_value("parent_road") == after_sue_bud._real_id
-    assert ball_atomunit.get_value("begin") == music_begin
-    assert ball_atomunit.get_value("close") == music_close
-    assert ball_atomunit.get_value("mass") == music_mass
-    assert ball_atomunit.get_value("pledge") == music_pledge
+    assert ball_atomunit.get_value(label_str()) == music_text
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
+    assert ball_atomunit.get_value(begin_str()) == music_begin
+    assert ball_atomunit.get_value(close_str()) == music_close
+    assert ball_atomunit.get_value(mass_str()) == music_mass
+    assert ball_atomunit.get_value(pledge_str()) == music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 2
 
@@ -499,12 +507,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
         music_text,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value("parent_road") == after_sue_bud._real_id
-    assert ball_atomunit.get_value("label") == music_text
-    assert ball_atomunit.get_value("begin") == after_music_begin
-    assert ball_atomunit.get_value("close") == after_music_close
-    assert ball_atomunit.get_value("mass") == after_music_mass
-    assert ball_atomunit.get_value("pledge") == after_music_pledge
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
+    assert ball_atomunit.get_value(label_str()) == music_text
+    assert ball_atomunit.get_value(begin_str()) == after_music_begin
+    assert ball_atomunit.get_value(close_str()) == after_music_close
+    assert ball_atomunit.get_value(mass_str()) == after_music_mass
+    assert ball_atomunit.get_value(pledge_str()) == after_music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 1
 
@@ -555,7 +563,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     x_keylist = [atom_delete(), bud_idea_awardlink_text(), disc_road, run_text]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value("group_id") == run_text
+    assert run_atomunit.get_value(group_id_str()) == run_text
 
     assert get_atomunit_total_count(sue_changeunit) == 1
 
@@ -607,9 +615,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     x_keylist = [atom_insert(), bud_idea_awardlink_text(), disc_road, run_text]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value("group_id") == run_text
+    assert run_atomunit.get_value(group_id_str()) == run_text
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value("group_id") == run_text
+    assert run_atomunit.get_value(group_id_str()) == run_text
     assert run_atomunit.get_value("give_force") == after_run_give_force
     assert run_atomunit.get_value("take_force") == after_run_take_force
 
@@ -656,7 +664,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     x_keylist = [atom_update(), bud_idea_awardlink_text(), ball_road, run_text]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("group_id") == run_text
+    assert ball_atomunit.get_value(group_id_str()) == run_text
     assert ball_atomunit.get_value("give_force") == after_give_force
     assert ball_atomunit.get_value("take_force") == after_take_force
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -802,62 +810,6 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_d
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
-    assert get_atomunit_total_count(sue_changeunit) == 1
-
-
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_range_push_insert():
-    # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-
-    after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_sue_bud.edit_idea_attr(road=ball_road, range_push=knee_road)
-
-    # WHEN
-    sue_changeunit = changeunit_shop()
-    sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
-
-    # THEN
-    print(f"{print_atomunit_keys(sue_changeunit)=}")
-    x_keylist = [atom_insert(), bud_idea_range_push_text(), ball_road, knee_road]
-    ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("range_push") == knee_road
-    assert get_atomunit_total_count(sue_changeunit) == 1
-
-
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_range_push_delete():
-    # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-
-    after_sue_bud = copy_deepcopy(before_sue_bud)
-    before_sue_bud.edit_idea_attr(road=ball_road, range_push=knee_road)
-
-    # WHEN
-    sue_changeunit = changeunit_shop()
-    sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
-
-    # THEN
-    print(f"{print_atomunit_keys(sue_changeunit)=}")
-    x_keylist = [atom_delete(), bud_idea_range_push_text(), ball_road, knee_road]
-    ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("range_push") == knee_road
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
@@ -1086,7 +1038,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == medical_road
     assert (
-        ball_atomunit.get_value("base_idea_active_requisite")
+        ball_atomunit.get_value(base_idea_active_requisite_str())
         == after_medical_base_idea_active_requisite
     )
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -1138,7 +1090,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == medical_road
     assert (
-        ball_atomunit.get_value("base_idea_active_requisite")
+        ball_atomunit.get_value(base_idea_active_requisite_str())
         == after_medical_base_idea_active_requisite
     )
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -1218,7 +1170,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("group_id") == xio_text
+    assert ball_atomunit.get_value(group_id_str()) == xio_text
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
@@ -1254,7 +1206,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value("group_id") == xio_text
+    assert ball_atomunit.get_value(group_id_str()) == xio_text
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 

@@ -1,4 +1,4 @@
-from src._instrument.python import get_empty_set_if_none
+from src._instrument.python_tool import get_empty_set_if_none
 from src._road.road import GroupID
 from dataclasses import dataclass
 
