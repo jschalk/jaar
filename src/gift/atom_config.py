@@ -227,6 +227,22 @@ def get_atom_config_dict() -> dict:
     return get_dict_from_json(open_file(config_file_dir(), get_atom_config_file_name()))
 
 
+def get_atom_config_required_args(x_cat: str) -> dict:
+    required_args_key_list = [x_cat, required_args_text()]
+    return get_nested_value(get_atom_config_dict(), required_args_key_list)
+
+
+def get_atom_config_optional_args(x_cat: str) -> dict:
+    optional_args_key_list = [x_cat, optional_args_text()]
+    return get_nested_value(get_atom_config_dict(), optional_args_key_list)
+
+
+def get_atom_config_args(x_category: str) -> dict[str, dict]:
+    args_dict = get_atom_config_required_args(x_category)
+    args_dict.update(get_atom_config_optional_args(x_category))
+    return args_dict
+
+
 def get_sorted_required_arg_keys(atom_category: str) -> list[str]:
     atom_config = get_atom_config_dict()
     atom_category_config = atom_config.get(atom_category)

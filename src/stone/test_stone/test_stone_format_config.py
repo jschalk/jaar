@@ -134,6 +134,7 @@ def test_stone_FilesExist():
 
     # THEN
     stone_filenames = set(stone_files.keys())
+    print(f"{stone_filenames=}")
     assert stone_filenames == get_stone_filenames()
     assert len(stone_filenames) == len(get_stone_filenames())
 

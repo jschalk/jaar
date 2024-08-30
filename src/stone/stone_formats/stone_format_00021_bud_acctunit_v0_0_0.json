@@ -1,0 +1,22 @@
+{
+    "atom_category": "bud_acctunit",
+    "attributes": {
+        "acct_id": {
+            "column_order": 2
+        },
+        "credit_score": {
+            "column_order": 4
+        },
+        "debtit_score": {
+            "column_order": 3
+        },
+        "owner_id": {
+            "column_order": 1,
+            "sort_order": 1
+        },
+        "real_id": {
+            "column_order": 0,
+            "sort_order": 0
+        }
+    }
+}
