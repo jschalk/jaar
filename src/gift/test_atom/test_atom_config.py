@@ -6,6 +6,7 @@ from src.gift.atom_config import (
     category_ref,
     is_category_ref,
     get_atom_config_dict,
+    get_atom_args_category_mapping,
     get_atom_order as q_order,
     set_mog,
     get_flattened_atom_table_build,
@@ -559,3 +560,19 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert stop_want_dict.get(sqlite_datatype_text()) == "REAL"
     assert gogo_want_dict.get("nullable") is True
     assert stop_want_dict.get("nullable") is True
+
+
+def test_get_atom_args_category_mapping_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_atom_args_category_mapping = get_atom_args_category_mapping()
+
+    # THEN
+    assert x_atom_args_category_mapping
+    assert x_atom_args_category_mapping.get(stop_want_str())
+    assert x_atom_args_category_mapping.get(stop_want_str()) == {bud_ideaunit_text()}
+    assert x_atom_args_category_mapping.get(parent_road_str())
+    road_categorys = x_atom_args_category_mapping.get(road_str())
+    assert bud_idea_factunit_text() in road_categorys
+    assert bud_idea_grouphold_text() in road_categorys
+    assert len(road_categorys) == 6
+    assert len(x_atom_args_category_mapping) == 40
