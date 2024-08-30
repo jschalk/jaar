@@ -287,7 +287,7 @@ class IdeaUnit:
             raise ranged_fact_idea_Exception(
                 f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact idea must have _begin, _close attributes"
             )
-        x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.open, x_fact.nigh)
+        x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.fopen, x_fact.fnigh)
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_transformations(x_factheir)
         self._factheirs[x_factheir.base] = x_factheir
@@ -303,9 +303,9 @@ class IdeaUnit:
         for factunit in self._factunits.values():
             if (
                 factunit.base == factheir.base
-                and factunit.nigh is not None
-                and factheir.open is not None
-            ) and factunit.nigh < factheir.open:
+                and factunit.fnigh is not None
+                and factheir.fopen is not None
+            ) and factunit.fnigh < factheir.fopen:
                 delete_factunit = True
 
         if delete_factunit:
@@ -318,16 +318,16 @@ class IdeaUnit:
         return {hc.base: hc.get_dict() for hc in self._factunits.values()}
 
     def set_factunit_to_complete(self, base_factunit: FactUnit):
-        # if a idea is considered a task then a factheir.open attribute can be increased to
-        # a number <= factheir.nigh so the idea no longer is a task. This method finds
-        # the minimal factheir.open to modify idea._task is False. idea_core._factheir cannot be straight up manipulated
+        # if a idea is considered a task then a factheir.fopen attribute can be increased to
+        # a number <= factheir.fnigh so the idea no longer is a task. This method finds
+        # the minimal factheir.fopen to modify idea._task is False. idea_core._factheir cannot be straight up manipulated
         # so it is mandatory that idea._factunit is different.
         # self.set_factunits(base=fact, fact=base, open=premise_nigh, nigh=fact_nigh)
         self._factunits[base_factunit.base] = factunit_shop(
             base=base_factunit.base,
             pick=base_factunit.base,
-            open=base_factunit.nigh,
-            nigh=base_factunit.nigh,
+            fopen=base_factunit.fnigh,
+            fnigh=base_factunit.fnigh,
         )
 
     def del_factunit(self, base: RoadUnit):
@@ -803,8 +803,8 @@ class IdeaUnit:
         self, all_ideas: list, range_root_road: RoadUnit, reason_base: RoadUnit
     ):
         range_root_factheir = self._factheirs.get(range_root_road)
-        old_open = range_root_factheir.open
-        old_nigh = range_root_factheir.nigh
+        old_open = range_root_factheir.fopen
+        old_nigh = range_root_factheir.fnigh
         x_rangeunit = ideas_calculated_range(all_ideas, old_open, old_nigh)
         new_factheir_open = x_rangeunit.gogo
         new_factheir_nigh = x_rangeunit.stop

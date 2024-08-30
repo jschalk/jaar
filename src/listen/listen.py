@@ -148,8 +148,8 @@ def listen_to_speaker_fact(
             listener.set_fact(
                 base=x_factunit.base,
                 pick=x_factunit.pick,
-                open=x_factunit.open,
-                nigh=x_factunit.nigh,
+                fopen=x_factunit.fopen,
+                fnigh=x_factunit.fnigh,
                 create_missing_ideas=True,
             )
 

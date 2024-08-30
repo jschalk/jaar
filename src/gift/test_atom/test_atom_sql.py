@@ -3,6 +3,8 @@ from src.gift.atom_config import (
     atom_update,
     atom_insert,
     budunit_text,
+    fopen_str,
+    fnigh_str,
     bud_idea_factunit_text,
 )
 from src.gift.atom import atomunit_shop, atom_hx_table_name, get_atomunit_from_rowdata
@@ -65,11 +67,10 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
     x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
-    open_text = "open"
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
     update_disc_atomunit.set_required_arg(road_text, ball_road)
     update_disc_atomunit.set_required_arg(base_text, knee_road)
-    update_disc_atomunit.set_optional_arg(open_text, knee_open)
+    update_disc_atomunit.set_optional_arg(fopen_str(), knee_open)
 
     # WHEN
     generated_sqlstr = update_disc_atomunit.get_insert_sqlstr()
@@ -79,7 +80,7 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
 INSERT INTO {atom_hx_table_name()} (
   {x_category}_{atom_insert()}_{road_text}
 , {x_category}_{atom_insert()}_{base_text}
-, {x_category}_{atom_insert()}_{open_text}
+, {x_category}_{atom_insert()}_{fopen_str()}
 )
 VALUES (
   '{ball_road}'
@@ -99,15 +100,14 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
     ball_road = create_road(sports_road, ball_text)
     knee_text = "knee"
     knee_road = create_road("a", knee_text)
-    knee_open = 7
+    knee_fopen = 7
     x_category = bud_idea_factunit_text()
     road_text = "road"
     base_text = "base"
-    open_text = "open"
     x_sqlstr = f"""SELECT
   '{ball_road}' as {x_category}_{atom_insert()}_{road_text}
 , '{knee_road}' as {x_category}_{atom_insert()}_{base_text}
-, {knee_open} as {x_category}_{atom_insert()}_{open_text}
+, {knee_fopen} as {x_category}_{atom_insert()}_{fopen_str()}
 """
     with sqlite_connection(":memory:") as x_conn:
         x_rowdata = get_rowdata(atom_hx_table_name(), x_conn, x_sqlstr)
@@ -119,7 +119,7 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
     update_disc_atomunit.set_required_arg(road_text, ball_road)
     update_disc_atomunit.set_required_arg(base_text, knee_road)
-    update_disc_atomunit.set_optional_arg(open_text, knee_open)
+    update_disc_atomunit.set_optional_arg(fopen_str(), knee_fopen)
     assert update_disc_atomunit.category == x_atomunit.category
     assert update_disc_atomunit.crud_text == x_atomunit.crud_text
     assert update_disc_atomunit.required_args == x_atomunit.required_args

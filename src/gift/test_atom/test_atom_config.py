@@ -32,6 +32,7 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     get_sorted_required_arg_keys,
     parent_road_str,
+    road_str,
     acct_id_str,
     group_id_str,
     begin_str,
@@ -42,6 +43,7 @@ from src.gift.atom_config import (
     morph_str,
     gogo_want_str,
     stop_want_str,
+    base_str,
 )
 
 
@@ -356,6 +358,50 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
     assert check_necessary_nesting_order_exists()
 
 
+def _get_atom_config_optional_arg_keys(x_cat: str) -> set[str]:
+    optional_args_key_list = [x_cat, optional_args_text()]
+    return set(get_nested_value(get_atom_config_dict(), optional_args_key_list).keys())
+
+
+def _get_atom_config_required_arg_keys(x_cat: str) -> set[str]:
+    required_args_key_list = [x_cat, required_args_text()]
+    return set(get_nested_value(get_atom_config_dict(), required_args_key_list).keys())
+
+
+def test_get_atom_config_dict_CheckEveryOptionalArgHasUniqueKey():
+    # ESTABLISH / WHEN
+    optional_arg_keys = set()
+    optional_arg_key_count = 0
+    for atom_category in get_atom_config_dict().keys():
+        new_optional_arg_keys = _get_atom_config_optional_arg_keys(atom_category)
+        optional_arg_key_count += len(new_optional_arg_keys)
+        optional_arg_keys.update(new_optional_arg_keys)
+        # print(f"{atom_category} {_get_atom_config_optional_arg_keys(atom_category)}")
+    print(f"{optional_arg_key_count=} {len(optional_arg_keys)=}")
+    assert optional_arg_key_count == len(optional_arg_keys)
+
+
+def test_get_atom_config_dict_SomeRequiredArgUnique():
+    # ESTABLISH / WHEN
+    required_arg_keys = set()
+    required_arg_key_count = 0
+    for atom_category in get_atom_config_dict().keys():
+        new_required_arg_keys = _get_atom_config_required_arg_keys(atom_category)
+        if road_str() in new_required_arg_keys:
+            new_required_arg_keys.remove(road_str())
+        if base_str() in new_required_arg_keys:
+            new_required_arg_keys.remove(base_str())
+        if acct_id_str() in new_required_arg_keys:
+            new_required_arg_keys.remove(acct_id_str())
+        if group_id_str() in new_required_arg_keys:
+            new_required_arg_keys.remove(group_id_str())
+        print(f"{atom_category} {new_required_arg_keys=}")
+        required_arg_key_count += len(new_required_arg_keys)
+        required_arg_keys.update(new_required_arg_keys)
+    print(f"{required_arg_key_count=} {len(required_arg_keys)=}")
+    assert required_arg_key_count == len(required_arg_keys)
+
+
 def test_get_sorted_required_arg_keys_ReturnsObj_bud_acctunit():
     # ESTABLISH
     x_category = bud_acctunit_text()
@@ -375,7 +421,7 @@ def test_get_sorted_required_arg_keys_ReturnsObj_bud_idea_reason_premiseunit():
     x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
 
     # THEN
-    assert x_sorted_required_arg_keys == ["road", "base", "need"]
+    assert x_sorted_required_arg_keys == [road_str(), base_str(), "need"]
 
 
 def test_get_flattened_atom_table_build_ReturnsCorrectObj():

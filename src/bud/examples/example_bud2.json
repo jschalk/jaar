@@ -593,8 +593,8 @@
             },
             "A;time;gregtime": {
                 "base": "A;time;gregtime",
-                "nigh": 1064130373,
-                "open": 1064128320,
+                "fnigh": 1064130373,
+                "fopen": 1064128320,
                 "pick": "A;time;gregtime"
             },
             "A;WaterExistence": {

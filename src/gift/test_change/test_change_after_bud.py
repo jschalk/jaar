@@ -32,6 +32,8 @@ from src.gift.atom_config import (
     debtit_vote_str,
     gogo_want_str,
     stop_want_str,
+    fopen_str,
+    fnigh_str,
 )
 from src.gift.change import changeunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
@@ -586,14 +588,14 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_factuni
     assert before_ball_idea._factunits == {}
 
     # WHEN
-    broken_open = 55
-    broken_nigh = 66
+    broken_fopen = 55
+    broken_fnigh = 66
     update_disc_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("base", knee_road)
     update_disc_atomunit.set_optional_arg("pick", broken_road)
-    update_disc_atomunit.set_optional_arg("open", broken_open)
-    update_disc_atomunit.set_optional_arg("nigh", broken_nigh)
+    update_disc_atomunit.set_optional_arg(fopen_str(), broken_fopen)
+    update_disc_atomunit.set_optional_arg(fnigh_str(), broken_fnigh)
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
@@ -605,8 +607,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_factuni
     assert after_ball_idea._factunits.get(knee_road) is not None
     assert after_ball_idea._factunits.get(knee_road).base == knee_road
     assert after_ball_idea._factunits.get(knee_road).pick == broken_road
-    assert after_ball_idea._factunits.get(knee_road).open == broken_open
-    assert after_ball_idea._factunits.get(knee_road).nigh == broken_nigh
+    assert after_ball_idea._factunits.get(knee_road).fopen == broken_fopen
+    assert after_ball_idea._factunits.get(knee_road).fnigh == broken_fnigh
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_factunit():
@@ -669,18 +671,18 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_factuni
     assert before_ball_idea._factunits != {}
     assert before_ball_idea._factunits.get(knee_road) is not None
     assert before_ball_idea._factunits.get(knee_road).pick == broken_road
-    assert before_ball_idea._factunits.get(knee_road).open is None
-    assert before_ball_idea._factunits.get(knee_road).nigh is None
+    assert before_ball_idea._factunits.get(knee_road).fopen is None
+    assert before_ball_idea._factunits.get(knee_road).fnigh is None
 
     # WHEN
-    medical_open = 45
-    medical_nigh = 77
+    medical_fopen = 45
+    medical_fnigh = 77
     update_disc_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_update())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg("base", knee_road)
     update_disc_atomunit.set_optional_arg("pick", medical_road)
-    update_disc_atomunit.set_optional_arg("open", medical_open)
-    update_disc_atomunit.set_optional_arg("nigh", medical_nigh)
+    update_disc_atomunit.set_optional_arg(fopen_str(), medical_fopen)
+    update_disc_atomunit.set_optional_arg(fnigh_str(), medical_fnigh)
     # print(f"{update_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
@@ -691,8 +693,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_factuni
     assert after_ball_idea._factunits != {}
     assert after_ball_idea._factunits.get(knee_road) is not None
     assert after_ball_idea._factunits.get(knee_road).pick == medical_road
-    assert after_ball_idea._factunits.get(knee_road).open == medical_open
-    assert after_ball_idea._factunits.get(knee_road).nigh == medical_nigh
+    assert after_ball_idea._factunits.get(knee_road).fopen == medical_fopen
+    assert after_ball_idea._factunits.get(knee_road).fnigh == medical_fnigh
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_reason_premiseunit():

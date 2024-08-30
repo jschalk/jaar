@@ -31,14 +31,14 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     x_idearoot._factunits = {}
     assert not x_idearoot._factunits
     usa_week_road = sue_bud.make_l1_road("nation-state")
-    usa_week_unit = factunit_shop(usa_week_road, usa_week_road, open=608, nigh=610)
+    usa_week_unit = factunit_shop(usa_week_road, usa_week_road, fopen=608, fnigh=610)
     x_idearoot._factunits = {usa_week_unit.base: usa_week_unit}
 
     x_idearoot._factunits = {}
     assert not x_idearoot._factunits
 
     # WHEN
-    sue_bud.set_fact(base=usa_week_road, pick=usa_week_road, open=608, nigh=610)
+    sue_bud.set_fact(base=usa_week_road, pick=usa_week_road, fopen=608, fnigh=610)
 
     # THEN
     assert x_idearoot._factunits is not None
@@ -66,7 +66,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_pick_IsNone():
     weekday_road = sue_bud.make_l1_road("weekdays")
 
     # WHEN
-    sue_bud.set_fact(base=weekday_road, open=5, nigh=7)
+    sue_bud.set_fact(base=weekday_road, fopen=5, fnigh=7)
 
     # THEN
     sunday_bud_fact = factunit_shop(weekday_road, weekday_road, 5, 7)
@@ -78,19 +78,17 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     weekday_road = sue_bud.make_l1_road("weekdays")
-    sue_bud.set_fact(base=weekday_road, open=5, nigh=7)
+    sue_bud.set_fact(base=weekday_road, fopen=5, fnigh=7)
     x_idearoot = sue_bud._idearoot
-    assert x_idearoot._factunits.get(weekday_road) == factunit_shop(
-        weekday_road, weekday_road, 5, 7
-    )
+    x7_factunit = factunit_shop(weekday_road, weekday_road, 5, 7)
+    assert x_idearoot._factunits.get(weekday_road) == x7_factunit
 
     # WHEN
-    sue_bud.set_fact(base=weekday_road, nigh=10)
+    sue_bud.set_fact(base=weekday_road, fnigh=10)
 
     # THEN
-    assert x_idearoot._factunits.get(weekday_road) == factunit_shop(
-        weekday_road, weekday_road, 5, 10
-    )
+    x10_factunit = factunit_shop(weekday_road, weekday_road, 5, 10)
+    assert x_idearoot._factunits.get(weekday_road) == x10_factunit
 
 
 def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIsNotRangeRoot():
@@ -112,11 +110,9 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIs
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        bob_bud.set_fact(base=a1e1_road, pick=a1e1_road, open=20, nigh=23)
-    assert (
-        str(excinfo.value)
-        == f"Non range-root fact:{a1e1_road} can only be set by range-root fact"
-    )
+        bob_bud.set_fact(base=a1e1_road, pick=a1e1_road, fopen=20, fnigh=23)
+    x_text = f"Non range-root fact:{a1e1_road} can only be set by range-root fact"
+    assert str(excinfo.value) == x_text
 
 
 def test_BudUnit_del_fact_CorrectlyModifiesAttr():
@@ -167,7 +163,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     time_road = sue_bud.make_l1_road(time_text)
     # sue_bud.edit_idea_attr(road=c_road, reason_base=time_road, reason_premise=time_road, reason_premise_open=5, reason_premise_nigh=10)
 
-    sue_bud.set_fact(base=time_road, pick=time_road, open=5, nigh=10)
+    sue_bud.set_fact(base=time_road, pick=time_road, fopen=5, fnigh=10)
     print(f"Establish a single ranged fact {sue_bud._idearoot._factunits=}")
     assert len(sue_bud._idearoot._factunits) == 1
 
@@ -179,7 +175,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     place_idea = ideaunit_shop(place_text, _begin=600, _close=800)
     sue_bud.set_l1_idea(place_idea)
     place_road = sue_bud.make_l1_road(place_text)
-    sue_bud.set_fact(base=place_road, pick=place_road, open=5, nigh=10)
+    sue_bud.set_fact(base=place_road, pick=place_road, fopen=5, fnigh=10)
     print(f"When one ranged fact added {sue_bud._idearoot._factunits=}")
     assert len(sue_bud._idearoot._factunits) == 2
 
@@ -211,7 +207,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     sad = "Sad"
     sue_bud.set_idea(ideaunit_shop(happy), parent_road=m_x_road)
     sue_bud.set_idea(ideaunit_shop(sad), parent_road=m_x_road)
-    sue_bud.set_fact(base=time_road, pick=time_road, open=5, nigh=10)
+    sue_bud.set_fact(base=time_road, pick=time_road, fopen=5, fnigh=10)
     sue_bud.set_fact(base=m_x_road, pick=sue_bud.make_road(m_x_road, happy))
     print(
         f"Establish a root ranged fact and non-range fact:\n{sue_bud._idearoot._factunits=}"

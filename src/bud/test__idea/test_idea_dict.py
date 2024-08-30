@@ -142,7 +142,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         pledge=True,
         _problem_bool=x_problem_bool,
     )
-    factunit_x = factunit_shop(base=week_road, pick=week_road, open=5, nigh=59)
+    factunit_x = factunit_shop(base=week_road, pick=week_road, fopen=5, fnigh=59)
     casa_idea.set_factunit(factunit=factunit_x)
     casa_idea._originunit.set_originhold(acct_id="Ray", importance=None)
     casa_idea._originunit.set_originhold(acct_id="Lei", importance=4)

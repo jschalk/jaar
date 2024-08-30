@@ -12,13 +12,13 @@ def test_BudUnit_settle_bud_ChangesIdeaUnit_pledge_task():
     hour_road = yao_bud.make_l1_road(hour_text)
 
     # WHEN
-    yao_bud.set_fact(base=hour_road, pick=hour_road, open=82, nigh=85)
+    yao_bud.set_fact(base=hour_road, pick=hour_road, fopen=82, fnigh=85)
 
     # THEN
     mail_road = yao_bud.make_l1_road("obtain mail")
     idea_dict = yao_bud.get_idea_dict()
     mail_idea = idea_dict.get(mail_road)
-    yao_bud.set_fact(base=hour_road, pick=hour_road, open=82, nigh=95)
+    yao_bud.set_fact(base=hour_road, pick=hour_road, fopen=82, fnigh=95)
     assert mail_idea.pledge is True
     assert mail_idea._task is False
 
@@ -48,7 +48,7 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     sweep_idea = ideaunit_shop(sweep_text, _gogo_want=sweep_gogo_want)
     sweep_idea._stop_want = sweep_stop_want
     zia_bud.set_idea(clean_idea, parent_road=casa_road)
-    zia_bud.set_fact(base=clean_road, pick=clean_road, open=1, nigh=5)
+    zia_bud.set_fact(base=clean_road, pick=clean_road, fopen=1, fnigh=5)
     assert zia_bud._idearoot._factheirs == {}
 
     # WHEN
@@ -76,7 +76,7 @@ def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
     sweep_idea = ideaunit_shop(sweep_text, _addin=2)
     zia_bud.set_idea(clean_idea, parent_road=casa_road)
     zia_bud.set_idea(sweep_idea, parent_road=clean_road)
-    zia_bud.set_fact(sweep_road, sweep_road, open=1, nigh=5)
+    zia_bud.set_fact(sweep_road, sweep_road, fopen=1, fnigh=5)
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
@@ -107,7 +107,7 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     swim_idea = zia_bud.get_idea_obj(swim_road)
     fast_idea = zia_bud.get_idea_obj(fast_road)
     slow_idea = zia_bud.get_idea_obj(slow_road)
-    zia_bud.set_fact(base=earth_road, pick=earth_road, open=1.0, nigh=5.0)
+    zia_bud.set_fact(base=earth_road, pick=earth_road, fopen=1.0, fnigh=5.0)
     assert swim_idea._factheirs == {}
     assert fast_idea._factheirs == {}
     assert slow_idea._factheirs == {}
@@ -164,22 +164,22 @@ def test_BudUnit_settle_bud_FactUnitTransformsFactHeir():
     assert swim_idea._factheirs == {}
 
     # WHEN
-    zia_bud.set_fact(base=earth_road, pick=earth_road, open=1.0, nigh=5.0)
+    zia_bud.set_fact(base=earth_road, pick=earth_road, fopen=1.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN
-    first_earthheir = factheir_shop(earth_road, earth_road, open=1.0, nigh=5.0)
+    first_earthheir = factheir_shop(earth_road, earth_road, fopen=1.0, fnigh=5.0)
     first_earthdict = {first_earthheir.base: first_earthheir}
     assert swim_idea._factheirs == first_earthdict
 
     # WHEN
     # earth_curb = factunit_shop(base=earth_road, pick=earth_road, open=3.0, nigh=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
-    zia_bud.set_fact(base=earth_road, pick=earth_road, open=3.0, nigh=5.0)
+    zia_bud.set_fact(base=earth_road, pick=earth_road, fopen=3.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN
-    after_earthheir = factheir_shop(earth_road, earth_road, open=3.0, nigh=5.0)
+    after_earthheir = factheir_shop(earth_road, earth_road, fopen=3.0, fnigh=5.0)
     after_earthdict = {after_earthheir.base: after_earthheir}
     assert swim_idea._factheirs == after_earthdict
 
@@ -198,9 +198,9 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
     earth_road = sue_bud.make_l1_road(earth_text)
     sue_bud.set_l1_idea(ideaunit_shop(earth_text))
     swim_idea = sue_bud.get_idea_obj(swim_road)
-    first_earthheir = factheir_shop(earth_road, earth_road, open=200.0, nigh=500.0)
+    first_earthheir = factheir_shop(earth_road, earth_road, fopen=200.0, fnigh=500.0)
     first_earthdict = {first_earthheir.base: first_earthheir}
-    sue_bud.set_fact(earth_road, earth_road, open=200.0, nigh=500.0)
+    sue_bud.set_fact(earth_road, earth_road, fopen=200.0, fnigh=500.0)
     assert swim_idea._factheirs == {}
 
     # WHEN
@@ -210,7 +210,7 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
     assert swim_idea._factheirs == first_earthdict
 
     # WHEN
-    earth_curb = factunit_shop(earth_road, earth_road, open=3.0, nigh=4.0)
+    earth_curb = factunit_shop(earth_road, earth_road, fopen=3.0, fnigh=4.0)
     swim_idea.set_factunit(factunit=earth_curb)
     sue_bud.settle_bud()
 
@@ -229,7 +229,7 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     mail_idea = idea_dict.get(yao_bud.make_l1_road(mail_text))
     hour_text = "hour"
     hour_road = yao_bud.make_l1_road(hour_text)
-    yao_bud.set_fact(hour_road, hour_road, open=82, nigh=85)
+    yao_bud.set_fact(hour_road, hour_road, fopen=82, fnigh=85)
     assert mail_idea.pledge
     assert mail_idea._task
 

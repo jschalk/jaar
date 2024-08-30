@@ -603,7 +603,9 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # WHEN
     open_x = 2063971110
     nigh_x1 = 2063971523
-    sue_bud.set_fact(base=cregtime_road, pick=cregtime_road, open=open_x, nigh=nigh_x1)
+    sue_bud.set_fact(
+        base=cregtime_road, pick=cregtime_road, fopen=open_x, fnigh=nigh_x1
+    )
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()
@@ -615,7 +617,9 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # nigh_x2 = 1063971923
     open_x2 = 0
     nigh_x2 = 0
-    sue_bud.set_fact(base=cregtime_road, pick=cregtime_road, open=open_x2, nigh=nigh_x2)
+    sue_bud.set_fact(
+        base=cregtime_road, pick=cregtime_road, fopen=open_x2, fnigh=nigh_x2
+    )
     print(f"YAYA {sue_bud._idearoot._factunits=}")
 
     # THEN
@@ -717,7 +721,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     )
     print("set first fact")
 
-    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, nigh=1064135133)
+    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, fnigh=1064135133)
     print("get 1st agenda dictionary")
     sue_agenda_dict = sue_bud.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")
@@ -728,10 +732,10 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     laundry_premise = laundry_reasonheir.get_premise(cregtime_road)
     laundry_factheir = laundry_idea._factheirs.get(cregtime_road)
     # print(
-    #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.open % 10080=}"
+    #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.fopen % 10080=}"
     # )
     # print(
-    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.nigh % 10080=}"
+    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # print(f"{laundry_reasonheir.base=} {laundry_premise=}")
     # for x_ideaunit in sue_bud._idea_dict.values():
@@ -741,7 +745,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
 
     # WHEN
     print("set 2nd fact")
-    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, nigh=1064136133)
+    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, fnigh=1064136133)
     print("get 2nd agenda dictionary")
     sue_agenda_dict = sue_bud.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")
@@ -751,18 +755,18 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     laundry_premise = laundry_reasonheir.get_premise(cregtime_road)
     laundry_factheir = laundry_idea._factheirs.get(cregtime_road)
     # print(
-    #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.open % 10080=}"
+    #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.fopen % 10080=}"
     # )
     # print(
-    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.nigh % 10080=}"
+    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # for x_ideaunit in sue_bud._idea_dict.values():
     #     if x_ideaunit._label in [laundry_text]:
     #         print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
     #         creg_factheir = x_ideaunit._factheirs.get(cregtime_road)
-    #         print(f"{creg_factheir.open % 10080=}")
-    #         print(f"{creg_factheir.nigh % 10080=}")
+    #         print(f"{creg_factheir.fopen % 10080=}")
+    #         print(f"{creg_factheir.fnigh % 10080=}")
 
     # THEN
     assert sue_agenda_dict == {}

@@ -565,14 +565,14 @@
         "_factunits": {
             "music;day_hour": {
                 "base": "music;day_hour",
-                "nigh": 23,
-                "open": 0,
+                "fnigh": 23,
+                "fopen": 0,
                 "pick": "music;day_hour"
             },
             "music;day_minute": {
                 "base": "music;day_minute",
-                "nigh": 59,
-                "open": 0,
+                "fnigh": 59,
+                "fopen": 0,
                 "pick": "music;day_minute"
             }
         },
@@ -3997,8 +3997,8 @@
                 "_factunits": {
                     "music;day_minute": {
                         "base": "music;day_minute",
-                        "nigh": 59,
-                        "open": 5,
+                        "fnigh": 59,
+                        "fopen": 5,
                         "pick": "music;day_minute"
                     }
                 },

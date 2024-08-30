@@ -31,6 +31,8 @@ from src.gift.atom_config import (
     debtit_vote_str,
     credor_respect_str,
     debtor_respect_str,
+    fnigh_str,
+    fopen_str,
 )
 from src.gift.change import ChangeUnit
 
@@ -649,20 +651,18 @@ def add_bud_idea_factunit_insert_to_legible_list(
     road_text = "road"
     base_text = "base"
     pick_text = "pick"
-    nigh_text = "nigh"
-    open_text = "open"
     for road_dict in idea_factunit_insert_dict.values():
         for idea_factunit_atom in road_dict.values():
             road_value = idea_factunit_atom.get_value(road_text)
             base_value = idea_factunit_atom.get_value(base_text)
             pick_value = idea_factunit_atom.get_value(pick_text)
-            nigh_value = idea_factunit_atom.get_value(nigh_text)
-            open_value = idea_factunit_atom.get_value(open_text)
+            fnigh_value = idea_factunit_atom.get_value(fnigh_str())
+            fopen_value = idea_factunit_atom.get_value(fopen_str())
             x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for idea '{road_value}'."
-            if open_value is not None:
-                x_str += f" Open={open_value}."
-            if nigh_value is not None:
-                x_str += f" Nigh={nigh_value}."
+            if fopen_value is not None:
+                x_str += f" fOpen={fopen_value}."
+            if fnigh_value is not None:
+                x_str += f" fNigh={fnigh_value}."
             legible_list.append(x_str)
 
 
@@ -672,20 +672,18 @@ def add_bud_idea_factunit_update_to_legible_list(
     road_text = "road"
     base_text = "base"
     pick_text = "pick"
-    nigh_text = "nigh"
-    open_text = "open"
     for road_dict in idea_factunit_update_dict.values():
         for idea_factunit_atom in road_dict.values():
             road_value = idea_factunit_atom.get_value(road_text)
             base_value = idea_factunit_atom.get_value(base_text)
             pick_value = idea_factunit_atom.get_value(pick_text)
-            nigh_value = idea_factunit_atom.get_value(nigh_text)
-            open_value = idea_factunit_atom.get_value(open_text)
+            fnigh_value = idea_factunit_atom.get_value(fnigh_str())
+            fopen_value = idea_factunit_atom.get_value(fopen_str())
             x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for idea '{road_value}'."
-            if open_value is not None:
-                x_str += f" Open={open_value}."
-            if nigh_value is not None:
-                x_str += f" Nigh={nigh_value}."
+            if fopen_value is not None:
+                x_str += f" fOpen={fopen_value}."
+            if fnigh_value is not None:
+                x_str += f" fNigh={fnigh_value}."
             legible_list.append(x_str)
 
 

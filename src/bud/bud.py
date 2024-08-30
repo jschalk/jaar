@@ -408,8 +408,8 @@ class BudUnit:
         return [
             fact
             for fact in self._idearoot._factunits.values()
-            if fact.open is not None
-            and fact.nigh is not None
+            if fact.fopen is not None
+            and fact.fnigh is not None
             and self._is_idea_rangeroot(idea_road=fact.base)
         ]
 
@@ -417,8 +417,8 @@ class BudUnit:
         self,
         base: RoadUnit,
         pick: RoadUnit = None,
-        open: float = None,
-        nigh: float = None,
+        fopen: float = None,
+        fnigh: float = None,
         create_missing_ideas: bool = None,
     ):
         pick = base if pick is None else pick
@@ -428,17 +428,17 @@ class BudUnit:
 
         fact_base_idea = self.get_idea_obj(base)
         x_idearoot = self.get_idea_obj(self._real_id)
-        x_open = None
-        if nigh is not None and open is None:
-            x_open = x_idearoot._factunits.get(base).open
+        x_fopen = None
+        if fnigh is not None and fopen is None:
+            x_fopen = x_idearoot._factunits.get(base).fopen
         else:
-            x_open = open
-        x_nigh = None
-        if open is not None and nigh is None:
-            x_nigh = x_idearoot._factunits.get(base).nigh
+            x_fopen = fopen
+        x_fnigh = None
+        if fopen is not None and fnigh is None:
+            x_fnigh = x_idearoot._factunits.get(base).fnigh
         else:
-            x_nigh = nigh
-        x_factunit = factunit_shop(base=base, pick=pick, open=x_open, nigh=x_nigh)
+            x_fnigh = fnigh
+        x_factunit = factunit_shop(base=base, pick=pick, fopen=x_fopen, fnigh=x_fnigh)
 
         if fact_base_idea.is_math() is False:
             x_idearoot.set_factunit(x_factunit)

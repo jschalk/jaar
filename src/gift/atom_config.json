@@ -126,12 +126,12 @@
             "normal_table_name": "fact"
         },
         "optional_args": {
-            "nigh": {
+            "fnigh": {
                 "column_order": 4,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "open": {
+            "fopen": {
                 "column_order": 3,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"

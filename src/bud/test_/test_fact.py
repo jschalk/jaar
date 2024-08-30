@@ -16,31 +16,31 @@ def test_FactUnit_exists():
     sunday_road = create_road(weekday_road, sunday_text)
 
     # WHEN
-    sunday_fact = FactUnit(base=weekday_road, pick=sunday_road, open=1.9, nigh=2.3)
+    sunday_fact = FactUnit(base=weekday_road, pick=sunday_road, fopen=1.9, fnigh=2.3)
 
     # THEN
     print(sunday_fact)
     assert sunday_fact is not None
     assert sunday_fact.base == weekday_road
     assert sunday_fact.pick == sunday_road
-    assert sunday_fact.open == 1.9
-    assert sunday_fact.nigh == 2.3
+    assert sunday_fact.fopen == 1.9
+    assert sunday_fact.fnigh == 2.3
 
 
 def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
     # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
-    weekday_fact = factunit_shop(weekday_road, weekday_road, open=1.0, nigh=5.0)
-    assert weekday_fact.open == 1.0
-    assert weekday_fact.nigh == 5.0
+    weekday_fact = factunit_shop(weekday_road, weekday_road, fopen=1.0, fnigh=5.0)
+    assert weekday_fact.fopen == 1.0
+    assert weekday_fact.fnigh == 5.0
 
     # WHEN
     weekday_fact.set_range_null()
 
     # THEN
-    assert weekday_fact.open is None
-    assert weekday_fact.nigh is None
+    assert weekday_fact.fopen is None
+    assert weekday_fact.fnigh is None
 
 
 def test_FactUnit_set_pick_to_base_SetsAttr_1():
@@ -68,22 +68,22 @@ def test_FactUnit_set_pick_to_base_SetsAttr_2():
     dirty_text = "dirty"
     dirty_road = create_road(root_label(), dirty_text)
     floor_fact = factunit_shop(floor_road, dirty_road, 1, 6)
-    assert floor_fact.open is not None
-    assert floor_fact.nigh is not None
+    assert floor_fact.fopen is not None
+    assert floor_fact.fnigh is not None
 
     # WHEN
     floor_fact.set_pick_to_base()
 
     # THEN
-    assert floor_fact.open is None
-    assert floor_fact.nigh is None
+    assert floor_fact.fopen is None
+    assert floor_fact.fnigh is None
 
 
 def test_FactUnit_set_attr_SetsAttrCorrectly_2():
     # ESTABLISH
     weekday_text = "weekdays"
     weekday_road = create_road(root_label(), weekday_text)
-    weekday_fact = factunit_shop(weekday_road, weekday_road, open=1.0, nigh=5.0)
+    weekday_fact = factunit_shop(weekday_road, weekday_road, fopen=1.0, fnigh=5.0)
 
     # WHEN
     sunday_text = "Sunday"
@@ -93,14 +93,14 @@ def test_FactUnit_set_attr_SetsAttrCorrectly_2():
     assert weekday_fact.pick == sunday_road
 
     # WHEN
-    weekday_fact.set_attr(open=45)
+    weekday_fact.set_attr(fopen=45)
     # THEN
-    assert weekday_fact.open == 45
+    assert weekday_fact.fopen == 45
 
     # WHEN
-    weekday_fact.set_attr(nigh=65)
+    weekday_fact.set_attr(fnigh=65)
     # THEN
-    assert weekday_fact.nigh == 65
+    assert weekday_fact.fnigh == 65
 
 
 def test_FactUnit_get_dict_ReturnsDict():
@@ -109,10 +109,10 @@ def test_FactUnit_get_dict_ReturnsDict():
     weekday_road = create_road(root_label(), weekday_text)
     sunday_text = "Sunday"
     sunday_road = create_road(weekday_road, sunday_text)
-    x_open = 35
-    x_nigh = 50
+    x_fopen = 35
+    x_fnigh = 50
     sunday_fact = factunit_shop(
-        base=weekday_road, pick=sunday_road, open=x_open, nigh=x_nigh
+        base=weekday_road, pick=sunday_road, fopen=x_fopen, fnigh=x_fnigh
     )
     print(sunday_fact)
 
@@ -124,8 +124,8 @@ def test_FactUnit_get_dict_ReturnsDict():
     static_dict = {
         "base": weekday_road,
         "pick": sunday_road,
-        "open": x_open,
-        "nigh": x_nigh,
+        "fopen": x_fopen,
+        "fnigh": x_fnigh,
     }
     assert fact_dict == static_dict
 
@@ -180,44 +180,44 @@ def test_FactHeir_IsModifiedByFactUnit():
     min_road = create_road(root_label(), ced_min_text)
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
     ced_factunit = factunit_shop(min_road, min_road, 20.0, 30.0)
-    assert ced_factheir.open == 10
+    assert ced_factheir.fopen == 10
 
     # WHEN
     ced_factheir.transform(factunit=ced_factunit)
 
     # THEN
-    assert ced_factheir.open == 20
+    assert ced_factheir.fopen == 20
 
     # ESTABLISH
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
     ced_factunit = factunit_shop(min_road, min_road, 30.0, 30.0)
-    assert ced_factheir.open == 10
+    assert ced_factheir.fopen == 10
 
     # WHEN
     ced_factheir.transform(factunit=ced_factunit)
-    assert ced_factheir.open == 30
+    assert ced_factheir.fopen == 30
 
     # ESTABLISH
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
     ced_factunit = factunit_shop(min_road, min_road, 35.0, 57.0)
-    assert ced_factheir.open == 10
+    assert ced_factheir.fopen == 10
 
     # WHEN
     ced_factheir.transform(factunit=ced_factunit)
 
     # THEN
-    assert ced_factheir.open == 10
+    assert ced_factheir.fopen == 10
 
     # ESTABLISH
     ced_factheir = factheir_shop(min_road, min_road, 10.0, 30.0)
     ced_factunit = factunit_shop(min_road, min_road, 5.0, 7.0)
-    assert ced_factheir.open == 10
+    assert ced_factheir.fopen == 10
 
     # WHEN
     ced_factheir.transform(factunit=ced_factunit)
 
     # THEN
-    assert ced_factheir.open == 10
+    assert ced_factheir.fopen == 10
 
 
 def test_FactHeir_is_range_ReturnsRangeStatus():
@@ -230,7 +230,7 @@ def test_FactHeir_is_range_ReturnsRangeStatus():
     assert x_factheir.is_range() is False
 
     # THEN
-    x_factheir = factheir_shop(min_road, pick=min_road, open=10.0, nigh=30.0)
+    x_factheir = factheir_shop(min_road, pick=min_road, fopen=10.0, fnigh=30.0)
     assert x_factheir.is_range() is True
 
 
@@ -246,7 +246,7 @@ def test_factheir_is_range_ReturnsRangeStatus():
     assert x_factheir.is_range() is False
 
     # WHEN
-    x_factheir = factheir_shop(min_road, pick=min_road, open=10.0, nigh=30.0)
+    x_factheir = factheir_shop(min_road, pick=min_road, fopen=10.0, fnigh=30.0)
 
     # THEN
     assert x_factheir.is_range() is True
@@ -276,8 +276,8 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
         weekday_road: {
             "base": weekday_road,
             "pick": sunday_road,
-            "open": None,
-            "nigh": None,
+            "fopen": None,
+            "fnigh": None,
         }
     }
 

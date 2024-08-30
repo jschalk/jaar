@@ -53,6 +53,8 @@ from src.gift.atom_config import (
     debtit_vote_str,
     credit_score_str,
     debtit_score_str,
+    fopen_str,
+    fnigh_str,
     base_idea_active_requisite_str,
 )
 from dataclasses import dataclass
@@ -341,8 +343,8 @@ def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_factunit = x_ideaunit._factunits.get(x_atom.get_value("base"))
     x_factunit.set_attr(
         pick=x_atom.get_value("pick"),
-        open=x_atom.get_value("open"),
-        nigh=x_atom.get_value("nigh"),
+        fopen=x_atom.get_value(fopen_str()),
+        fnigh=x_atom.get_value(fnigh_str()),
     )
     # x_ideaunit.set_factunit(x_factunit)
 
@@ -353,8 +355,8 @@ def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         factunit=factunit_shop(
             base=x_atom.get_value("base"),
             pick=x_atom.get_value("pick"),
-            open=x_atom.get_value("open"),
-            nigh=x_atom.get_value("nigh"),
+            fopen=x_atom.get_value(fopen_str()),
+            fnigh=x_atom.get_value(fnigh_str()),
         ),
     )
 
