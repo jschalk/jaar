@@ -19,6 +19,9 @@ from src.gift.atom_config import (
     parent_road_str,
     label_str,
     pledge_str,
+    begin_str,
+    close_str,
+    mass_str,
     base_idea_active_requisite_str,
 )
 from src.gift.atom import atom_insert, atom_update, atom_delete
@@ -447,9 +450,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(label_str()) == music_text
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
-    assert ball_atomunit.get_value("begin") == music_begin
-    assert ball_atomunit.get_value("close") == music_close
-    assert ball_atomunit.get_value("mass") == music_mass
+    assert ball_atomunit.get_value(begin_str()) == music_begin
+    assert ball_atomunit.get_value(close_str()) == music_close
+    assert ball_atomunit.get_value(mass_str()) == music_mass
     assert ball_atomunit.get_value(pledge_str()) == music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 2
@@ -506,9 +509,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
     assert ball_atomunit.get_value(label_str()) == music_text
-    assert ball_atomunit.get_value("begin") == after_music_begin
-    assert ball_atomunit.get_value("close") == after_music_close
-    assert ball_atomunit.get_value("mass") == after_music_mass
+    assert ball_atomunit.get_value(begin_str()) == after_music_begin
+    assert ball_atomunit.get_value(close_str()) == after_music_close
+    assert ball_atomunit.get_value(mass_str()) == after_music_mass
     assert ball_atomunit.get_value(pledge_str()) == after_music_pledge
 
     assert get_atomunit_total_count(sue_changeunit) == 1
