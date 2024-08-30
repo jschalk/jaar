@@ -26,6 +26,10 @@ from src.gift.atom_config import (
     label_str,
     base_idea_active_requisite_str,
     pledge_str,
+    begin_str,
+    close_str,
+    credit_vote_str,
+    debtit_vote_str,
 )
 from src.gift.change import changeunit_shop
 from src.gift.examples.example_changes import get_changeunit_example1
@@ -288,8 +292,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership()
     yao_atomunit.set_required_arg(acct_id_str(), yao_text)
     new_yao_run_credit_vote = 7
     new_yao_run_debtit_vote = 11
-    yao_atomunit.set_optional_arg("credit_vote", new_yao_run_credit_vote)
-    yao_atomunit.set_optional_arg("debtit_vote", new_yao_run_debtit_vote)
+    yao_atomunit.set_optional_arg(credit_vote_str(), new_yao_run_credit_vote)
+    yao_atomunit.set_optional_arg(debtit_vote_str(), new_yao_run_debtit_vote)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(yao_atomunit)
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
@@ -360,11 +364,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     insert_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
     insert_disc_atomunit.set_required_arg(label_str(), disc_text)
     insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
-    # insert_disc_atomunit.set_optional_arg("addin", x_addin)
-    # insert_disc_atomunit.set_optional_arg("begin", x_begin)
-    # insert_disc_atomunit.set_optional_arg("close", x_close)
-    # insert_disc_atomunit.set_optional_arg("denom", x_denom)
-    # insert_disc_atomunit.set_optional_arg("numor", x_numor)
+    # insert_disc_atomunit.set_optional_arg(addin_str(), x_addin)
+    # insert_disc_atomunit.set_optional_arg(begin_str(), x_begin)
+    # insert_disc_atomunit.set_optional_arg(close_str(), x_close)
+    # insert_disc_atomunit.set_optional_arg(denom_str(), x_denom)
+    # insert_disc_atomunit.set_optional_arg(numor_str(), x_numor)
     insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
 
     print(f"{insert_disc_atomunit=}")
@@ -400,11 +404,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_Sim
     insert_disc_atomunit = atomunit_shop(bud_ideaunit_text(), atom_update())
     insert_disc_atomunit.set_required_arg(label_str(), ball_text)
     insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
-    # insert_disc_atomunit.set_optional_arg("addin", x_addin)
-    insert_disc_atomunit.set_optional_arg("begin", x_begin)
-    insert_disc_atomunit.set_optional_arg("close", x_close)
-    # insert_disc_atomunit.set_optional_arg("denom", x_denom)
-    # insert_disc_atomunit.set_optional_arg("numor", x_numor)
+    # insert_disc_atomunit.set_optional_arg(addin_str(), x_addin)
+    insert_disc_atomunit.set_optional_arg(begin_str(), x_begin)
+    insert_disc_atomunit.set_optional_arg(close_str(), x_close)
+    # insert_disc_atomunit.set_optional_arg(denom_str(), x_denom)
+    # insert_disc_atomunit.set_optional_arg(numor_str(), x_numor)
     insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
 
     print(f"{insert_disc_atomunit=}")

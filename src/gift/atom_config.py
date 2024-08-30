@@ -127,6 +127,14 @@ def owner_id_str() -> str:
     return "owner_id"
 
 
+def credor_respect_str() -> str:
+    return "credor_respect"
+
+
+def debtor_respect_str() -> str:
+    return "debtor_respect"
+
+
 def acct_id_str() -> str:
     return "acct_id"
 

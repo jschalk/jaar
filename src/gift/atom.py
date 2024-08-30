@@ -40,6 +40,17 @@ from src.gift.atom_config import (
     parent_road_str,
     label_str,
     pledge_str,
+    addin_str,
+    begin_str,
+    close_str,
+    denom_str,
+    numor_str,
+    morph_str,
+    mass_str,
+    credit_vote_str,
+    debtit_vote_str,
+    credit_score_str,
+    debtit_score_str,
     base_idea_active_requisite_str,
 )
 from dataclasses import dataclass
@@ -225,8 +236,8 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_group_id = x_atom.get_value(group_id_str())
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_membership = x_acctunit.get_membership(x_group_id)
-    x_credit_vote = x_atom.get_value("credit_vote")
-    x_debtit_vote = x_atom.get_value("debtit_vote")
+    x_credit_vote = x_atom.get_value(credit_vote_str())
+    x_debtit_vote = x_atom.get_value(debtit_vote_str())
     x_membership.set_credit_vote(x_credit_vote)
     x_membership.set_debtit_vote(x_debtit_vote)
 
@@ -234,8 +245,8 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_id = x_atom.get_value(acct_id_str())
     x_group_id = x_atom.get_value(group_id_str())
-    x_credit_vote = x_atom.get_value("credit_vote")
-    x_debtit_vote = x_atom.get_value("debtit_vote")
+    x_credit_vote = x_atom.get_value(credit_vote_str())
+    x_debtit_vote = x_atom.get_value(debtit_vote_str())
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_acctunit.add_membership(x_group_id, x_credit_vote, x_debtit_vote)
 
@@ -257,13 +268,13 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     )
     x_bud.edit_idea_attr(
         road=idea_road,
-        addin=x_atom.get_value("addin"),
-        begin=x_atom.get_value("begin"),
-        close=x_atom.get_value("close"),
-        denom=x_atom.get_value("denom"),
-        numor=x_atom.get_value("numor"),
-        morph=x_atom.get_value("morph"),
-        mass=x_atom.get_value("mass"),
+        addin=x_atom.get_value(addin_str()),
+        begin=x_atom.get_value(begin_str()),
+        close=x_atom.get_value(close_str()),
+        denom=x_atom.get_value(denom_str()),
+        numor=x_atom.get_value(numor_str()),
+        morph=x_atom.get_value(morph_str()),
+        mass=x_atom.get_value(mass_str()),
         pledge=x_atom.get_value(pledge_str()),
     )
 
@@ -272,11 +283,11 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value(label_str()),
-            _addin=x_atom.get_value("addin"),
-            _begin=x_atom.get_value("begin"),
-            _close=x_atom.get_value("close"),
-            _denom=x_atom.get_value("denom"),
-            _numor=x_atom.get_value("numor"),
+            _addin=x_atom.get_value(addin_str()),
+            _begin=x_atom.get_value(begin_str()),
+            _close=x_atom.get_value(close_str()),
+            _denom=x_atom.get_value(denom_str()),
+            _numor=x_atom.get_value(numor_str()),
             pledge=x_atom.get_value(pledge_str()),
         ),
         parent_road=x_atom.get_value(parent_road_str()),
@@ -414,8 +425,8 @@ def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
         acct_id=x_atom.get_value(acct_id_str()),
-        credit_score=x_atom.get_value("credit_score"),
-        debtit_score=x_atom.get_value("debtit_score"),
+        credit_score=x_atom.get_value(credit_score_str()),
+        debtit_score=x_atom.get_value(debtit_score_str()),
     )
 
 
@@ -423,8 +434,8 @@ def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
             acct_id=x_atom.get_value(acct_id_str()),
-            credit_score=x_atom.get_value("credit_score"),
-            debtit_score=x_atom.get_value("debtit_score"),
+            credit_score=x_atom.get_value(credit_score_str()),
+            debtit_score=x_atom.get_value(debtit_score_str()),
         )
     )
 

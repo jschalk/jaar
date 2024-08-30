@@ -29,6 +29,15 @@ from src.gift.atom_config import (
     parent_road_str,
     label_str,
     pledge_str,
+    addin_str,
+    begin_str,
+    close_str,
+    denom_str,
+    numor_str,
+    morph_str,
+    mass_str,
+    credit_vote_str,
+    debtit_vote_str,
     base_idea_active_requisite_str,
 )
 from src.gift.atom import (
@@ -304,9 +313,13 @@ class ChangeUnit:
             x_atomunit.set_required_arg(acct_id_str(), after_acct_id)
             x_atomunit.set_required_arg(group_id_str(), after_membership.group_id)
             if after_membership.credit_vote is not None:
-                x_atomunit.set_optional_arg("credit_vote", after_membership.credit_vote)
+                x_atomunit.set_optional_arg(
+                    credit_vote_str(), after_membership.credit_vote
+                )
             if after_membership.debtit_vote is not None:
-                x_atomunit.set_optional_arg("debtit_vote", after_membership.debtit_vote)
+                x_atomunit.set_optional_arg(
+                    debtit_vote_str(), after_membership.debtit_vote
+                )
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_membership_update(
@@ -319,9 +332,9 @@ class ChangeUnit:
         x_atomunit.set_required_arg(acct_id_str(), acct_id)
         x_atomunit.set_required_arg(group_id_str(), after_membership.group_id)
         if after_membership.credit_vote != before_membership.credit_vote:
-            x_atomunit.set_optional_arg("credit_vote", after_membership.credit_vote)
+            x_atomunit.set_optional_arg(credit_vote_str(), after_membership.credit_vote)
         if after_membership.debtit_vote != before_membership.debtit_vote:
-            x_atomunit.set_optional_arg("debtit_vote", after_membership.debtit_vote)
+            x_atomunit.set_optional_arg(debtit_vote_str(), after_membership.debtit_vote)
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_memberships_delete(
@@ -357,13 +370,13 @@ class ChangeUnit:
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             x_atomunit.set_required_arg(parent_road_str(), insert_ideaunit._parent_road)
             x_atomunit.set_required_arg(label_str(), insert_ideaunit._label)
-            x_atomunit.set_optional_arg("addin", insert_ideaunit._addin)
-            x_atomunit.set_optional_arg("begin", insert_ideaunit._begin)
-            x_atomunit.set_optional_arg("close", insert_ideaunit._close)
-            x_atomunit.set_optional_arg("denom", insert_ideaunit._denom)
-            x_atomunit.set_optional_arg("numor", insert_ideaunit._numor)
-            x_atomunit.set_optional_arg("morph", insert_ideaunit._morph)
-            x_atomunit.set_optional_arg("mass", insert_ideaunit._mass)
+            x_atomunit.set_optional_arg(addin_str(), insert_ideaunit._addin)
+            x_atomunit.set_optional_arg(begin_str(), insert_ideaunit._begin)
+            x_atomunit.set_optional_arg(close_str(), insert_ideaunit._close)
+            x_atomunit.set_optional_arg(denom_str(), insert_ideaunit._denom)
+            x_atomunit.set_optional_arg(numor_str(), insert_ideaunit._numor)
+            x_atomunit.set_optional_arg(morph_str(), insert_ideaunit._morph)
+            x_atomunit.set_optional_arg(mass_str(), insert_ideaunit._mass)
             x_atomunit.set_optional_arg(pledge_str(), insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
 
@@ -399,19 +412,19 @@ class ChangeUnit:
                 )
                 x_atomunit.set_required_arg(label_str(), after_ideaunit._label)
                 if before_ideaunit._addin != after_ideaunit._addin:
-                    x_atomunit.set_optional_arg("addin", after_ideaunit._addin)
+                    x_atomunit.set_optional_arg(addin_str(), after_ideaunit._addin)
                 if before_ideaunit._begin != after_ideaunit._begin:
-                    x_atomunit.set_optional_arg("begin", after_ideaunit._begin)
+                    x_atomunit.set_optional_arg(begin_str(), after_ideaunit._begin)
                 if before_ideaunit._close != after_ideaunit._close:
-                    x_atomunit.set_optional_arg("close", after_ideaunit._close)
+                    x_atomunit.set_optional_arg(close_str(), after_ideaunit._close)
                 if before_ideaunit._denom != after_ideaunit._denom:
-                    x_atomunit.set_optional_arg("denom", after_ideaunit._denom)
+                    x_atomunit.set_optional_arg(denom_str(), after_ideaunit._denom)
                 if before_ideaunit._numor != after_ideaunit._numor:
-                    x_atomunit.set_optional_arg("numor", after_ideaunit._numor)
+                    x_atomunit.set_optional_arg(numor_str(), after_ideaunit._numor)
                 if before_ideaunit._morph != after_ideaunit._morph:
-                    x_atomunit.set_optional_arg("morph", after_ideaunit._morph)
+                    x_atomunit.set_optional_arg(morph_str(), after_ideaunit._morph)
                 if before_ideaunit._mass != after_ideaunit._mass:
-                    x_atomunit.set_optional_arg("mass", after_ideaunit._mass)
+                    x_atomunit.set_optional_arg(mass_str(), after_ideaunit._mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:
                     x_atomunit.set_optional_arg(pledge_str(), after_ideaunit.pledge)
                 self.set_atomunit(x_atomunit)
