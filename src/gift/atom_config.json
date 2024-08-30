@@ -12,21 +12,25 @@
         },
         "optional_args": {
             "credit_vote": {
+                "column_order": 3,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_vote": {
+                "column_order": 2,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             },
             "group_id": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
@@ -50,16 +54,19 @@
         },
         "optional_args": {
             "credit_score": {
+                "column_order": 2,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_score": {
+                "column_order": 1,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
+                "column_order": 0,
                 "python_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             }
@@ -82,21 +89,25 @@
         },
         "optional_args": {
             "give_force": {
+                "column_order": 3,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "take_force": {
+                "column_order": 2,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "required_args": {
             "group_id": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -120,25 +131,30 @@
         },
         "optional_args": {
             "nigh": {
+                "column_order": 4,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "open": {
+                "column_order": 3,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "pick": {
+                "column_order": 2,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
         "required_args": {
             "base": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -163,11 +179,13 @@
         "optional_args": {},
         "required_args": {
             "group_id": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -189,11 +207,13 @@
         "optional_args": {},
         "required_args": {
             "group_id": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -214,30 +234,36 @@
         },
         "optional_args": {
             "divisor": {
+                "column_order": 5,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
+                "column_order": 4,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "open": {
+                "column_order": 3,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "required_args": {
             "base": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "need": {
+                "column_order": 2,
                 "nesting_order": 2,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -261,17 +287,20 @@
         },
         "optional_args": {
             "base_idea_active_requisite": {
+                "column_order": 2,
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "base": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -295,49 +324,60 @@
         },
         "optional_args": {
             "addin": {
+                "column_order": 0,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "begin": {
+                "column_order": 5,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "close": {
+                "column_order": 6,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "denom": {
+                "column_order": 8,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "mass": {
+                "column_order": 3,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
+                "column_order": 9,
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
+                "column_order": 7,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
+                "column_order": 2,
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
+                "column_order": 4,
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "label": {
+                "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "RoadNode",
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
+                "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -355,38 +395,47 @@
         },
         "optional_args": {
             "bit": {
+                "column_order": 4,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "credor_respect": {
+                "column_order": 3,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtor_respect": {
+                "column_order": 2,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "fund_coin": {
+                "column_order": 1,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "fund_pool": {
+                "column_order": 0,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "max_tree_traverse": {
+                "column_order": 5,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "monetary_desc": {
+                "column_order": 8,
                 "python_type": "str",
                 "sqlite_datatype": "TEXT"
             },
             "penny": {
+                "column_order": 6,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "tally": {
+                "column_order": 7,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }

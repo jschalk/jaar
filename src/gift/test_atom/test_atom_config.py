@@ -265,7 +265,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
-    arg_elements = {python_type_text(), sqlite_datatype_text()}
+    arg_elements = {python_type_text(), sqlite_datatype_text(), column_order_str()}
     for arg_element in arg_elements:
         if x_dict.get(arg_element) is None:
             print(f"{arg_element} failed for {x_arg=}")
@@ -294,7 +294,6 @@ def check_every_arg_dict_has_elements(atom_config_dict):
 def test_atom_config_AllArgsHave_python_type_sqlite_datatype():
     # ESTABLISH / WHEN / THEN
     assert check_every_arg_dict_has_elements(get_atom_config_dict())
-    assert 1 == 2
 
 
 def check_necessary_nesting_order_exists() -> bool:
