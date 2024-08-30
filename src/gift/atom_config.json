@@ -315,7 +315,7 @@
         },
         "optional_args": {
             "addin": {
-                "column_order": 0,
+                "column_order": 10,
                 "python_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -333,6 +333,11 @@
                 "column_order": 8,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
+            },
+            "gogo_want": {
+                "column_order": 11,
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "mass": {
                 "column_order": 3,
@@ -358,6 +363,11 @@
                 "column_order": 4,
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
+            },
+            "stop_want": {
+                "column_order": 12,
+                "python_type": "float",
+                "sqlite_datatype": "REAL"
             }
         },
         "required_args": {

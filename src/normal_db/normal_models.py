@@ -55,11 +55,13 @@ class IdeaTable(Base):
     begin = Column(Float)
     close = Column(Float)
     denom = Column(Integer)
+    gogo_want = Column(Float)
     numor = Column(Integer)
     problem_bool = Column(Integer)
     morph = Column(Integer)
     mass = Column(Integer)
     pledge = Column(Integer)
+    stop_want = Column(Float)
 
 
 class AwardLinkTable(Base):

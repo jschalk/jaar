@@ -1,3 +1,4 @@
+from src._instrument.python_tool import get_nested_value
 from src.gift.atom_config import (
     atom_insert,
     atom_delete,
@@ -30,6 +31,7 @@ from src.gift.atom_config import (
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     get_sorted_required_arg_keys,
+    parent_road_str,
     acct_id_str,
     group_id_str,
     begin_str,
@@ -259,6 +261,41 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     assert 25 == q_order(atom_update(), budunit_text())
 
 
+def _get_atom_config_required_args_len(x_cat: str) -> int:
+    required_args_key_list = [x_cat, required_args_text()]
+    return len(get_nested_value(get_atom_config_dict(), required_args_key_list))
+
+
+def _get_atom_config_optional_args_len(x_cat: str) -> int:
+    optional_args_key_list = [x_cat, optional_args_text()]
+    return len(get_nested_value(get_atom_config_dict(), optional_args_key_list))
+
+
+def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
+    # ESTABLISH
+    assert _get_atom_config_required_args_len(budunit_text()) == 0
+    assert _get_atom_config_required_args_len(bud_acctunit_text()) == 1
+    assert _get_atom_config_required_args_len(bud_acct_membership_text()) == 2
+    assert _get_atom_config_required_args_len(bud_ideaunit_text()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_awardlink_text()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_reasonunit_text()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_reason_premiseunit_text()) == 3
+    assert _get_atom_config_required_args_len(bud_idea_grouphold_text()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_healerhold_text()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_factunit_text()) == 2
+
+    assert _get_atom_config_optional_args_len(budunit_text()) == 9
+    assert _get_atom_config_optional_args_len(bud_acctunit_text()) == 2
+    assert _get_atom_config_optional_args_len(bud_acct_membership_text()) == 2
+    assert _get_atom_config_optional_args_len(bud_ideaunit_text()) == 11
+    assert _get_atom_config_optional_args_len(bud_idea_awardlink_text()) == 2
+    assert _get_atom_config_optional_args_len(bud_idea_reasonunit_text()) == 1
+    assert _get_atom_config_optional_args_len(bud_idea_reason_premiseunit_text()) == 3
+    assert _get_atom_config_optional_args_len(bud_idea_grouphold_text()) == 0
+    assert _get_atom_config_optional_args_len(bud_idea_healerhold_text()) == 0
+    assert _get_atom_config_optional_args_len(bud_idea_factunit_text()) == 3
+
+
 def _has_every_element(x_arg, x_dict) -> bool:
     arg_elements = {python_type_text(), sqlite_datatype_text(), column_order_str()}
     for arg_element in arg_elements:
@@ -316,7 +353,6 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
 
     # ESTABLISH
     # grab every atom_config with multiple required args
-
     assert check_necessary_nesting_order_exists()
 
 
@@ -347,7 +383,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 103
+    assert len(atom_columns) == 107
     assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
@@ -460,3 +496,20 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert len(acct_id_dict) == 2
     assert debtit_score_dict.get(sqlite_datatype_text()) == "INTEGER"
     assert debtit_score_dict.get("nullable") is True
+
+    assert len(cat_idea) == 2
+    idea_columns = cat_idea.get(columns_text)
+    assert len(idea_columns) == 14
+    assert idea_columns.get("uid") is not None
+    assert idea_columns.get(parent_road_str()) is not None
+    assert idea_columns.get(begin_str()) is not None
+    assert idea_columns.get(close_str()) is not None
+
+    gogo_want_dict = idea_columns.get(gogo_want_str())
+    stop_want_dict = idea_columns.get(stop_want_str())
+    assert len(gogo_want_dict) == 2
+    assert len(stop_want_dict) == 2
+    assert gogo_want_dict.get(sqlite_datatype_text()) == "REAL"
+    assert stop_want_dict.get(sqlite_datatype_text()) == "REAL"
+    assert gogo_want_dict.get("nullable") is True
+    assert stop_want_dict.get("nullable") is True
