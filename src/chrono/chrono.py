@@ -368,7 +368,7 @@ def get_time_min_from_dt(dt: datetime, yr1_jan1_offset: int) -> int:
 
 
 @dataclass
-class ChronoUnit:
+class ChronoPoint:
     timeline_min: int = None
     weekday_label: RoadUnit = None
     month_label: RoadUnit = None
@@ -382,16 +382,16 @@ class ChronoUnit:
     minute_num: int = None
 
 
-def chronounit_shop(timeline_min: int):
-    return ChronoUnit(timeline_min)
+def chronopoint_shop(timeline_min: int):
+    return ChronoPoint(timeline_min)
 
 
 @dataclass
-class ChronoRange:
+class ChronoUnit:
     timeline_label: RoadUnit = None
     copen: int = None
     cnigh: int = None
 
 
-def chrono_range_shop(timeline_label: str, copen: int, cnigh: int):
-    return ChronoRange(timeline_label=timeline_label, copen=copen, cnigh=cnigh)
+def chronounit_shop(timeline_label: str, copen: int, cnigh: int):
+    return ChronoUnit(timeline_label=timeline_label, copen=copen, cnigh=cnigh)
