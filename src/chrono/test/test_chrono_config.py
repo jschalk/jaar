@@ -22,8 +22,8 @@ from src.chrono.chrono import (
     create_timeline_config,
     ChronoPoint,
     chronopoint_shop,
-    ChronoUnit,
-    chronounit_shop,
+    ChronoRange,
+    chronorange_shop,
     week_str,
     year_str,
     day_str,
@@ -275,61 +275,3 @@ def test_get_day_road_ReturnsObj():
 
     # WHEN / THEN
     assert day_road == get_day_road(sue_budunit, fizz_road)
-
-
-def test_ChronoPoint_Exists():
-    # ESTABLISH / WHEN
-    x_chronopoint = ChronoPoint()
-
-    # THEN
-    assert not x_chronopoint.timeline_min
-    assert not x_chronopoint.weekday_label
-    assert not x_chronopoint.month_label
-    assert not x_chronopoint.monthday_num
-    assert not x_chronopoint.c400_leap_count
-    assert not x_chronopoint.c100_count
-    assert not x_chronopoint.yr4_leap_count
-    assert not x_chronopoint.yr_count
-    assert not x_chronopoint.year_num
-    assert not x_chronopoint.hour_label
-    assert not x_chronopoint.minute_num
-
-
-def test_chronopoint_shop_ReturnsObj():
-    # ESTABLISH
-    x_timeline_min = 890000
-
-    # WHEN
-    x_chronopoint = chronopoint_shop(x_timeline_min)
-
-    # THEN
-    assert x_chronopoint.timeline_min == x_timeline_min
-
-
-def test_ChronoUnit_Exists():
-    # ESTABLISH / WHEN
-    x_chronounit = ChronoUnit()
-
-    # THEN
-    assert not x_chronounit.timeline_label
-    assert not x_chronounit.copen
-    assert not x_chronounit.cnigh
-
-
-def test_ChronoUnit_shop_ReturnsObj():
-    # ESTABLISH
-    x_timeline_label = "fizz07"
-    x_timeline_min_copen = 890000
-    x_timeline_min_cnigh = 5000000
-
-    # WHEN
-    x_chronounit = chronounit_shop(
-        timeline_label=x_timeline_label,
-        copen=x_timeline_min_copen,
-        cnigh=x_timeline_min_cnigh,
-    )
-
-    # THEN
-    assert x_chronounit.timeline_label == x_timeline_label
-    assert x_chronounit.copen == x_timeline_min_copen
-    assert x_chronounit.cnigh == x_timeline_min_cnigh

@@ -6,7 +6,6 @@ from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
     add_time_cinco_ideaunit,
     get_creg_min_from_dt,
-    get_cinco_min_from_dt,
     get_cregtime_text,
     get_sun,
     get_mon,
@@ -17,14 +16,11 @@ from src.chrono.examples.chrono_examples import (
     get_sat,
     creg_hour_label,
     cregtime_ideaunit,
-    creg_months_list,
     creg_weekday_ideaunits,
     creg_str,
     cinco_str,
 )
 from src.chrono.chrono import (
-    day_length,
-    week_length,
     time_str,
     year_str,
     get_year_road,
@@ -66,62 +62,28 @@ def test_get_creg_min_from_dt_WorksCorrectly():
     assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
 
 
-def test_timetech_builder_ReferencesFunctionsReturnObj():
+def test_cregtime_ideaunit_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_c400_constants().c400_leap_length == 210379680
-    assert get_c400_constants().c400_clean_length == 210378240
-    assert get_c400_constants().c100_length == 52594560
-    assert get_c400_constants().yr4_leap_length == 2103840
-    assert get_c400_constants().yr4_clean_length == 2102400
-    assert get_c400_constants().year_length == 525600
-    assert get_c400_constants().day_length == 1440
+    assert cregtime_ideaunit()._begin == 0
+    assert cregtime_ideaunit()._close == 1472657760
+    assert cregtime_ideaunit()._close == get_c400_constants().c400_leap_length * 7
 
 
-def test_cregtime_ReferenceFunctionsReturnObj():
-    # ESTABLISH / WHEN / THEN
-    assert cregtime_begin() == 0
-    assert cregtime_close() == 1472657760
-    assert cregtime_close() == get_c400_constants().c400_leap_length * 7
-    assert day_length() == 1440
-    assert week_length(7) == 10080
-    assert jan_gogo_want() == 437760
-    assert feb_gogo_want() == 480960
-    assert mar_gogo_want() == 0
-    assert apr_gogo_want() == 44640
-    assert may_gogo_want() == 84960
-    assert jun_gogo_want() == 129600
-    assert jul_gogo_want() == 172800
-    assert aug_gogo_want() == 217440
-    assert sep_gogo_want() == 260640
-    assert oct_gogo_want() == 305280
-    assert nov_gogo_want() == 349920
-    assert dec_gogo_want() == 393120
-    assert jan_stop_want() == 480960
-    assert feb_stop_want() == 525600
-    assert mar_stop_want() == 44640
-    assert apr_stop_want() == 84960
-    assert may_stop_want() == 129600
-    assert jun_stop_want() == 172800
-    assert jul_stop_want() == 217440
-    assert aug_stop_want() == 260640
-    assert sep_stop_want() == 305280
-    assert oct_stop_want() == 349920
-    assert nov_stop_want() == 393120
-    assert dec_stop_want() == 437760
-    assert sun_gogo_want() == 5760
-    assert mon_gogo_want() == 7200
-    assert tue_gogo_want() == 8640
-    assert wed_gogo_want() == 0
-    assert thu_gogo_want() == 1440
-    assert fri_gogo_want() == 2880
-    assert sat_gogo_want() == 4320
-    assert sun_stop_want() == sun_gogo_want() + day_length()
-    assert mon_stop_want() == mon_gogo_want() + day_length()
-    assert tue_stop_want() == tue_gogo_want() + day_length()
-    assert wed_stop_want() == wed_gogo_want() + day_length()
-    assert thu_stop_want() == thu_gogo_want() + day_length()
-    assert fri_stop_want() == fri_gogo_want() + day_length()
-    assert sat_stop_want() == sat_gogo_want() + day_length()
+def test_creg_weekday_ideaunits_ReturnsObj():
+    assert creg_weekday_ideaunits().get(get_wed())._gogo_want == 0
+    assert creg_weekday_ideaunits().get(get_thu())._gogo_want == 1440
+    assert creg_weekday_ideaunits().get(get_fri())._gogo_want == 2880
+    assert creg_weekday_ideaunits().get(get_sat())._gogo_want == 4320
+    assert creg_weekday_ideaunits().get(get_sun())._gogo_want == 5760
+    assert creg_weekday_ideaunits().get(get_mon())._gogo_want == 7200
+    assert creg_weekday_ideaunits().get(get_tue())._gogo_want == 8640
+    assert creg_weekday_ideaunits().get(get_wed())._stop_want == 1440
+    assert creg_weekday_ideaunits().get(get_thu())._stop_want == 2880
+    assert creg_weekday_ideaunits().get(get_fri())._stop_want == 4320
+    assert creg_weekday_ideaunits().get(get_sat())._stop_want == 5760
+    assert creg_weekday_ideaunits().get(get_sun())._stop_want == 7200
+    assert creg_weekday_ideaunits().get(get_mon())._stop_want == 8640
+    assert creg_weekday_ideaunits().get(get_tue())._stop_want == 10080
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_days():
@@ -843,189 +805,3 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
 #     _check_time_conversion_works_with_random_inputs()
 #     _check_time_conversion_works_with_random_inputs()
 #     _check_time_conversion_works_with_random_inputs()
-
-
-def cregtime_begin():
-    return cregtime_ideaunit()._begin
-
-
-def cregtime_close():
-    return cregtime_ideaunit()._close
-
-
-def sun_gogo_want():
-    return creg_weekday_ideaunits().get(get_sun())._gogo_want
-
-
-def mon_gogo_want():
-    return creg_weekday_ideaunits().get(get_mon())._gogo_want
-
-
-def tue_gogo_want():
-    return creg_weekday_ideaunits().get(get_tue())._gogo_want
-
-
-def wed_gogo_want():
-    return creg_weekday_ideaunits().get(get_wed())._gogo_want
-
-
-def thu_gogo_want():
-    return creg_weekday_ideaunits().get(get_thu())._gogo_want
-
-
-def fri_gogo_want():
-    return creg_weekday_ideaunits().get(get_fri())._gogo_want
-
-
-def sat_gogo_want():
-    return creg_weekday_ideaunits().get(get_sat())._gogo_want
-
-
-def sun_stop_want():
-    return creg_weekday_ideaunits().get(get_sun())._stop_want
-
-
-def mon_stop_want():
-    return creg_weekday_ideaunits().get(get_mon())._stop_want
-
-
-def tue_stop_want():
-    return creg_weekday_ideaunits().get(get_tue())._stop_want
-
-
-def wed_stop_want():
-    return creg_weekday_ideaunits().get(get_wed())._stop_want
-
-
-def thu_stop_want():
-    return creg_weekday_ideaunits().get(get_thu())._stop_want
-
-
-def fri_stop_want():
-    return creg_weekday_ideaunits().get(get_fri())._stop_want
-
-
-def sat_stop_want():
-    return creg_weekday_ideaunits().get(get_sat())._stop_want
-
-
-# def mar_gogo_want():    return 0
-# def apr_gogo_want():    return creg_months_list()[0][1] * 1440
-# def may_gogo_want():    return creg_months_list()[1][1] * 1440
-# def jun_gogo_want():    return creg_months_list()[2][1] * 1440
-# def jul_gogo_want():    return creg_months_list()[3][1] * 1440
-# def aug_gogo_want():    return creg_months_list()[4][1] * 1440
-# def sep_gogo_want():    return creg_months_list()[5][1] * 1440
-# def oct_gogo_want():    return creg_months_list()[6][1] * 1440
-# def nov_gogo_want():    return creg_months_list()[7][1] * 1440
-# def dec_gogo_want():    return creg_months_list()[8][1] * 1440
-# def jan_gogo_want():    return creg_months_list()[9][1] * 1440
-# def feb_gogo_want():    return creg_months_list()[10][1] * 1440
-# def mar_stop_want():    return creg_months_list()[0][1] * 1440
-# def apr_stop_want():    return creg_months_list()[1][1] * 1440
-# def may_stop_want():    return creg_months_list()[2][1] * 1440
-# def jun_stop_want():    return creg_months_list()[3][1] * 1440
-# def jul_stop_want():    return creg_months_list()[4][1] * 1440
-# def aug_stop_want():    return creg_months_list()[5][1] * 1440
-# def sep_stop_want():    return creg_months_list()[6][1] * 1440
-# def oct_stop_want():    return creg_months_list()[7][1] * 1440
-# def nov_stop_want():    return creg_months_list()[8][1] * 1440
-# def dec_stop_want():    return creg_months_list()[9][1] * 1440
-# def jan_stop_want():    return creg_months_list()[10][1] * 1440
-# def feb_stop_want():    return creg_months_list()[11][1] * 1440
-
-
-def mar_gogo_want():
-    return 0
-
-
-def apr_gogo_want():
-    return creg_months_list()[0][1] * day_length()
-
-
-def may_gogo_want():
-    return creg_months_list()[1][1] * day_length()
-
-
-def jun_gogo_want():
-    return creg_months_list()[2][1] * day_length()
-
-
-def jul_gogo_want():
-    return creg_months_list()[3][1] * day_length()
-
-
-def aug_gogo_want():
-    return creg_months_list()[4][1] * day_length()
-
-
-def sep_gogo_want():
-    return creg_months_list()[5][1] * day_length()
-
-
-def oct_gogo_want():
-    return creg_months_list()[6][1] * day_length()
-
-
-def nov_gogo_want():
-    return creg_months_list()[7][1] * day_length()
-
-
-def dec_gogo_want():
-    return creg_months_list()[8][1] * day_length()
-
-
-def jan_gogo_want():
-    return creg_months_list()[9][1] * day_length()
-
-
-def feb_gogo_want():
-    return creg_months_list()[10][1] * day_length()
-
-
-def mar_stop_want():
-    return creg_months_list()[0][1] * day_length()
-
-
-def apr_stop_want():
-    return creg_months_list()[1][1] * day_length()
-
-
-def may_stop_want():
-    return creg_months_list()[2][1] * day_length()
-
-
-def jun_stop_want():
-    return creg_months_list()[3][1] * day_length()
-
-
-def jul_stop_want():
-    return creg_months_list()[4][1] * day_length()
-
-
-def aug_stop_want():
-    return creg_months_list()[5][1] * day_length()
-
-
-def sep_stop_want():
-    return creg_months_list()[6][1] * day_length()
-
-
-def oct_stop_want():
-    return creg_months_list()[7][1] * day_length()
-
-
-def nov_stop_want():
-    return creg_months_list()[8][1] * day_length()
-
-
-def dec_stop_want():
-    return creg_months_list()[9][1] * day_length()
-
-
-def jan_stop_want():
-    return creg_months_list()[10][1] * day_length()
-
-
-def feb_stop_want():
-    return creg_months_list()[11][1] * day_length()

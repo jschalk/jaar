@@ -387,11 +387,11 @@ def chronopoint_shop(timeline_min: int):
 
 
 @dataclass
-class ChronoUnit:
+class ChronoRange:
     timeline_label: RoadUnit = None
     copen: int = None
     cnigh: int = None
 
 
-def chronounit_shop(timeline_label: str, copen: int, cnigh: int):
-    return ChronoUnit(timeline_label=timeline_label, copen=copen, cnigh=cnigh)
+def chronorange_shop(timeline_label: str, copen: int, cnigh: int):
+    return ChronoRange(timeline_label=timeline_label, copen=copen, cnigh=cnigh)

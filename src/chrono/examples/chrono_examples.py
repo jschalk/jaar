@@ -91,10 +91,6 @@ def creg_weekday_ideaunits() -> dict[str, IdeaUnit]:
     return create_weekday_ideaunits(creg_weekdays_list())
 
 
-def creg_months_list() -> list[list[str, int]]:
-    return get_creg_config().get(months_config_text())
-
-
 def get_cregtime_text():
     return get_creg_config().get(timeline_label_text())
 
