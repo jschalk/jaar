@@ -8,13 +8,13 @@ from src.chrono.examples.chrono_examples import (
     get_creg_min_from_dt,
     get_cinco_min_from_dt,
     get_cregtime_text,
-    get_sun,  # "Sunday"
-    get_mon,  # "Monday"
-    get_tue,  # "Tuesday"
-    get_wed,  # "Wednesday"
-    get_thu,  # "Thursday"
-    get_fri,  # "Friday"
-    get_sat,  # "Saturday"
+    get_sun,
+    get_mon,
+    get_tue,
+    get_wed,
+    get_thu,
+    get_fri,
+    get_sat,
     creg_hour_label,
     cregtime_ideaunit,
     creg_months_list,

@@ -220,7 +220,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     assert ced_factheir.fopen == 10
 
 
-def test_FactHeir_is_range_ReturnsRangeStatus():
+def test_FactHeir_is_range_Returns_is_range_Status():
     # ESTABLISH
     ced_min_text = "ced_minute"
     min_road = create_road(root_label(), ced_min_text)
@@ -234,7 +234,7 @@ def test_FactHeir_is_range_ReturnsRangeStatus():
     assert x_factheir.is_range() is True
 
 
-def test_factheir_is_range_ReturnsRangeStatus():
+def test_factheir_is_range_Returns_is_range_Status():
     # ESTABLISH
     ced_min_text = "ced_minute"
     min_road = create_road(root_label(), ced_min_text)

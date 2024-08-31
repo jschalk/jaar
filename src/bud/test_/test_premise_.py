@@ -65,7 +65,7 @@ def test_PremiseUnit_clear_status_CorrectlySetsAttrs():
     assert casa_premise._status is None
 
 
-def test_PremiseUnit_is_range_CorrectlyIdentifiesRangeStatus():
+def test_PremiseUnit_is_range_IdentifiesStatus():
     # ESTABLISH
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
@@ -73,7 +73,7 @@ def test_PremiseUnit_is_range_CorrectlyIdentifiesRangeStatus():
     # WHEN
     casa_premise = premiseunit_shop(need=casa_road, open=1, nigh=3)
     # THEN
-    assert casa_premise._is_range() is True
+    assert casa_premise._is_range()
 
     # WHEN
     casa_premise = premiseunit_shop(need=casa_road)
@@ -104,7 +104,7 @@ def test_PremiseUnit_is_segregate_CorrectlyIdentifiesSegregateStatus():
     # WHEN
     casa_premise = premiseunit_shop(need=casa_road, divisor=5, open=3, nigh=3)
     # THEN
-    assert casa_premise._is_segregate() is True
+    assert casa_premise._is_segregate()
 
 
 def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
@@ -181,7 +181,7 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultDelim
     assert sea_premise.is_in_lineage(fact_pick=seaside_fact.pick) is False
 
 
-def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForRangePremise():
+def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_rangePremise():
     # ESTABLISH
     yr_text = "ced_year"
     yr_road = create_road(root_label(), yr_text)
@@ -189,13 +189,13 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForRange
 
     # WHEN / THEN
     yr_fact = factheir_shop(base=yr_road, fopen=5, fnigh=11, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     yr_fact = factheir_shop(base=yr_road, fopen=1, fnigh=11, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     yr_fact = factheir_shop(base=yr_road, fopen=8, fnigh=17, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     yr_fact = factheir_shop(base=yr_road, fopen=0, fnigh=2, pick=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
@@ -204,14 +204,14 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForRange
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, fopen=1, fnigh=19, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     # boundary tests
     yr_fact = factheir_shop(base=yr_road, fopen=13, fnigh=19, pick=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, fopen=0, fnigh=3, pick=yr_road)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
 
 def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregatePremise():
@@ -222,13 +222,13 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
 
     # WHEN / THEN
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=5, fnigh=5)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=6, fnigh=6)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=4, fnigh=6)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=3, fnigh=4)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
@@ -244,7 +244,7 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=1, fnigh=4)
-    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is True
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
 
 def test_PremiseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
@@ -257,13 +257,13 @@ def test_PremiseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
     assert wkday_premise._is_range_or_segregate() is False
 
     wkday_premise = premiseunit_shop(need=wkday_road, open=5, nigh=13)
-    assert wkday_premise._is_range_or_segregate() is True
+    assert wkday_premise._is_range_or_segregate()
 
     wkday_premise = premiseunit_shop(need=wkday_road, divisor=17, open=7, nigh=7)
-    assert wkday_premise._is_range_or_segregate() is True
+    assert wkday_premise._is_range_or_segregate()
 
 
-def test_PremiseUnitUnit_get_premise_status_ReturnsCorrect_active():
+def test_PremiseUnitUnit_get_premise_status_Returns_active_Boolean():
     # WHEN assumes fact is in lineage
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -271,13 +271,13 @@ def test_PremiseUnitUnit_get_premise_status_ReturnsCorrect_active():
 
     # WHEN / THEN
     wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road)
-    assert wkday_premise._get_active(factheir=wkday_fact) is True
+    assert wkday_premise._get_active(factheir=wkday_fact)
     # if fact has range but premise does not reqquire range, fact's range does not matter
     wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road, fopen=0, fnigh=2)
-    assert wkday_premise._get_active(factheir=wkday_fact) is True
+    assert wkday_premise._get_active(factheir=wkday_fact)
 
 
-def test_PremiseUnitUnit_get_active_returnsCorrectRanged_active():
+def test_PremiseUnitUnit_get_active_Returns_is_range_active_Boolean():
     # ESTABLISH assumes fact is in lineage
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -290,7 +290,7 @@ def test_PremiseUnitUnit_get_active_returnsCorrectRanged_active():
     assert wkday_premise._get_active(factheir=wkday_fact) is False
 
 
-def test_PremiseUnitUnit_set_status_CorrectlySets_status_WhenFactUnitIsNull():
+def test_PremiseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -307,7 +307,7 @@ def test_PremiseUnitUnit_set_status_CorrectlySets_status_WhenFactUnitIsNull():
     assert premise_2._status is False
 
 
-def test_PremiseUnitUnit_set_status_CorrectlySetsStatusOfSimple():
+def test_PremiseUnitUnit_set_status_SetsAttr_status_OfSimple():
     # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -321,10 +321,10 @@ def test_PremiseUnitUnit_set_status_CorrectlySetsStatusOfSimple():
     wed_premise.set_status(x_factheir=bud_fact)
 
     # THEN
-    assert wed_premise._status is True
+    assert wed_premise._status
 
 
-def test_PremiseUnit_set_status_CorrectlySetsStatus_2():
+def test_PremiseUnit_set_status_SetsAttr_status_Scenario2():
     # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -340,10 +340,10 @@ def test_PremiseUnit_set_status_CorrectlySetsStatus_2():
     wed_after_premise.set_status(x_factheir=wed_fact)
 
     # THEN
-    assert wed_after_premise._status is True
+    assert wed_after_premise._status
 
 
-def test_PremiseUnit_set_status_CorrectlySetsStatus_3():
+def test_PremiseUnit_set_status_SetsAttr_status_Scenario3():
     # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -359,10 +359,10 @@ def test_PremiseUnit_set_status_CorrectlySetsStatus_3():
     wed_premise.set_status(x_factheir=noon_fact)
 
     # THEN
-    assert wed_premise._status is True
+    assert wed_premise._status
 
 
-def test_PremiseUnit_set_status_CorrectlySetsStatus_4():
+def test_PremiseUnit_set_status_SetsAttr_status_Scenario4():
     # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -384,7 +384,7 @@ def test_PremiseUnit_set_status_CorrectlySetsStatus_4():
     assert wed_premise._status is False
 
 
-def test_PremiseUnit_set_status_CorrectlySetsStatus_5():
+def test_PremiseUnit_set_status_SetsAttr_status_Scenario5():
     # ESTABLISH
     wkday_text = "weekday"
     wkday_road = create_road(root_label(), wkday_text)
@@ -405,7 +405,7 @@ def test_PremiseUnit_set_status_CorrectlySetsStatus_5():
     assert wed_sun_premise._status is False
 
 
-def test_PremiseUnit_set_status_CorrectlySetsTimeRangeStatusTrue():
+def test_PremiseUnit_set_status_SetsStatus_status_ScenarioTime():
     # ESTABLISH
     timetech_text = "timetech"
     timetech_road = create_road(root_label(), timetech_text)
@@ -419,10 +419,10 @@ def test_PremiseUnit_set_status_CorrectlySetsTimeRangeStatusTrue():
     hr24_premise.set_status(x_factheir=range_0_to_8_fact)
 
     # THEN
-    assert hr24_premise._status is True
+    assert hr24_premise._status
 
 
-def test_PremiseUnit_set_task_CorrectlySetsTaskBool_01():
+def test_PremiseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -434,7 +434,7 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBool_01():
     assert no_range_premise._get_task_status(factheir=no_range_fact) is False
 
 
-def test_PremiseUnit_set_task_CorrectlySetsTaskBoolRangeTrue():
+def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -443,10 +443,10 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolRangeTrue():
 
     # WHEN / THEN
     range_7_to_41_fact = factheir_shop(hr24_road, hr24_road, fopen=7, fnigh=41)
-    assert range_5_to_31_premise._get_task_status(range_7_to_41_fact) is True
+    assert range_5_to_31_premise._get_task_status(range_7_to_41_fact)
 
 
-def test_PremiseUnit_set_task_CorrectlySetsTaskBoolRangeFalse():
+def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -458,7 +458,7 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolRangeFalse():
     assert range_5_to_31_premise._get_task_status(range_7_to_21_fact) is False
 
 
-def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateFalse_01():
+def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -470,7 +470,7 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateFalse_01():
     assert o0_n0_d5_premise._get_task_status(range_3_to_5_fact) is False
 
 
-def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateFalse_03():
+def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -482,7 +482,7 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateFalse_03():
     assert o0_n0_d5_premise._get_task_status(range_5_to_7_fact) is False
 
 
-def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateTrue_01():
+def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -491,10 +491,10 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateTrue_01():
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_road, hr24_road, fopen=5, fnigh=7)
-    assert o0_n0_d5_premise._get_task_status(range_5_to_7_fact) is True
+    assert o0_n0_d5_premise._get_task_status(range_5_to_7_fact)
 
 
-def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateTrue_02():
+def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -506,7 +506,7 @@ def test_PremiseUnit_set_task_CorrectlySetsTaskBoolSegregateTrue_02():
     assert o0_n0_d5_premise._get_task_status(factheir=range_5_to_5_fact) is False
 
 
-def test_PremiseUnit_set_task_NotNull():
+def test_PremiseUnit_get_task_status_ReturnsObjNotNull():
     # ESTABLISH
     week_text = "weekdays"
     week_road = create_road(root_label(), week_text)
@@ -522,7 +522,7 @@ def test_PremiseUnit_set_task_NotNull():
     assert wed_premise._get_task_status(factheir=factheir) is False
 
 
-def test_PremiseUnit_set_status_CorrectlySetsTimeRangeTaskTrue_v1():
+def test_PremiseUnit_set_status_SetsAttrs_Scenario01():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -535,11 +535,11 @@ def test_PremiseUnit_set_status_CorrectlySetsTimeRangeTaskTrue_v1():
     range_2_to_7_premise.set_status(x_factheir=range_0_to_5_fact)
 
     # THEN
-    assert range_2_to_7_premise._status is True
+    assert range_2_to_7_premise._status
     assert range_2_to_7_premise._task is False
 
 
-def test_PremiseUnit_set_status_CorrectlySetsTimeRangeTaskTrue_v2():
+def test_PremiseUnit_set_status_SetsAttrs_Scenario02():
     # ESTABLISH
     hr24_text = "24hr"
     hr24_road = create_road(root_label(), hr24_text)
@@ -550,8 +550,8 @@ def test_PremiseUnit_set_status_CorrectlySetsTimeRangeTaskTrue_v2():
     # WHEN
     range_2_to_7_premise.set_status(x_factheir=range_0_to_8_fact)
     # THEN
-    assert range_2_to_7_premise._status is True
-    assert range_2_to_7_premise._task is True
+    assert range_2_to_7_premise._status
+    assert range_2_to_7_premise._task
 
     # ESTABLISH
     range_3_to_5_fact = factheir_shop(hr24_road, hr24_road, fopen=3, fnigh=5)
@@ -569,7 +569,7 @@ def test_PremiseUnit_set_status_CorrectlySetsTimeRangeTaskTrue_v2():
     assert range_2_to_7_premise._task is False
 
 
-def test_PremiseUnit_set_status_CorrectlySetsTimeRangeStatusFalse():
+def test_PremiseUnit_set_status_SetsAttrs_Scenario03():
     # ESTABLISH
     timetech_text = "timetech"
     timetech_road = create_road(root_label(), timetech_text)
@@ -617,7 +617,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     week_premise.set_status(x_factheir=bud_fact)
 
     # THEN
-    assert week_premise._status is True
+    assert week_premise._status
 
 
 def test_PremiseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndOpen_Nigh():
