@@ -295,7 +295,7 @@ class IdeaUnit:
     def apply_factunit_transformations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self._factunits.values():
             if factunit.base == factheir.base:
-                factheir.transform(factunit=factunit)
+                factheir.transform(factunit)
         return factheir
 
     def delete_factunit_if_past(self, factheir: FactHeir):

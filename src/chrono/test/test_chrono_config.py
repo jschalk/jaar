@@ -1,5 +1,6 @@
 from src._instrument.file import save_file
 from src._instrument.python_tool import get_json_from_dict
+from src.bud.bud import budunit_shop
 from src.chrono.examples.chrono_examples import (
     get_creg_config,
     get_squirt_config,
@@ -21,6 +22,20 @@ from src.chrono.chrono import (
     create_timeline_config,
     ChronoUnit,
     chronounit_shop,
+    ChronoRange,
+    chrono_range_shop,
+    week_str,
+    year_str,
+    day_str,
+    get_year_road,
+    get_week_road,
+    get_day_road,
+    time_str,
+    c400_leap_str,
+    c400_clean_str,
+    c100_str,
+    yr4_leap_str,
+    yr4_clean_str,
 )
 from copy import deepcopy as copy_deepcopy
 
@@ -221,12 +236,53 @@ def test_create_timeline_config_ReturnsObj():
     assert x_cinco_config == cinco_dict
 
 
+def test_get_year_road_ReturnsObj():
+    # ESTABLISH
+    fizz_text = "fizz34"
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    c400_leap_road = sue_budunit.make_road(fizz_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+
+    # WHEN / THEN
+    assert year_road == get_year_road(sue_budunit, fizz_road)
+
+
+def test_get_week_road_ReturnsObj():
+    # ESTABLISH
+    fizz_text = "fizz34"
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    week_road = sue_budunit.make_road(fizz_road, week_str())
+
+    # WHEN / THEN
+    assert week_road == get_week_road(sue_budunit, fizz_road)
+
+
+def test_get_day_road_ReturnsObj():
+    # ESTABLISH
+    fizz_text = "fizz34"
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    day_road = sue_budunit.make_road(fizz_road, day_str())
+
+    # WHEN / THEN
+    assert day_road == get_day_road(sue_budunit, fizz_road)
+
+
 def test_ChronoUnit_Exists():
     # ESTABLISH / WHEN
     x_chronounit = ChronoUnit()
 
     # THEN
-    assert not x_chronounit.timeline_text
+    assert not x_chronounit.timeline_min
     assert not x_chronounit.weekday_label
     assert not x_chronounit.month_label
     assert not x_chronounit.monthday_num
@@ -241,10 +297,39 @@ def test_ChronoUnit_Exists():
 
 def test_chronounit_shop_ReturnsObj():
     # ESTABLISH
-    x_timeline_text = "music07"
+    x_timeline_min = 890000
 
     # WHEN
-    x_chronounit = chronounit_shop(x_timeline_text)
+    x_chronounit = chronounit_shop(x_timeline_min)
 
     # THEN
-    assert x_chronounit.timeline_text == x_timeline_text
+    assert x_chronounit.timeline_min == x_timeline_min
+
+
+def test_ChronoRange_Exists():
+    # ESTABLISH / WHEN
+    x_chrono_range = ChronoRange()
+
+    # THEN
+    assert not x_chrono_range.timeline_label
+    assert not x_chrono_range.copen
+    assert not x_chrono_range.cnigh
+
+
+def test_ChronoRange_shop_ReturnsObj():
+    # ESTABLISH
+    x_timeline_label = "fizz07"
+    x_timeline_min_copen = 890000
+    x_timeline_min_cnigh = 5000000
+
+    # WHEN
+    x_chrono_range = chrono_range_shop(
+        timeline_label=x_timeline_label,
+        copen=x_timeline_min_copen,
+        cnigh=x_timeline_min_cnigh,
+    )
+
+    # THEN
+    assert x_chrono_range.timeline_label == x_timeline_label
+    assert x_chrono_range.copen == x_timeline_min_copen
+    assert x_chrono_range.cnigh == x_timeline_min_cnigh

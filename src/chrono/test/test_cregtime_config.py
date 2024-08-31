@@ -28,6 +28,8 @@ from src.chrono.chrono import (
     time_str,
     year_str,
     get_year_road,
+    get_week_road,
+    get_day_road,
     stan_c400_leap_ideaunit,
     stan_c400_clean_ideaunit,
     stan_c100_ideaunit,
@@ -209,22 +211,6 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     weeks_idea = sue_budunit.get_idea_obj(weeks_road)
     assert weeks_idea._denom == 10080
     assert not weeks_idea._morph
-
-
-def test_get_year_road_ReturnsObj():
-    # ESTABLISH
-    sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
-    c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
-
-    # WHEN / THEN
-    assert year_road == get_year_road(sue_budunit, creg_road)
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap_road():
