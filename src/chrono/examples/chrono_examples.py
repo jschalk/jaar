@@ -115,5 +115,5 @@ def get_creg_min_from_dt(dt: datetime) -> int:
     return get_time_min_from_dt(dt, get_creg_config().get(yr1_jan1_offset_text()))
 
 
-# def get_cinco_min_from_dt(dt: datetime) -> int:
-#     return get_time_min_from_dt(dt, get_cinco_config().get(yr1_jan1_offset_text()))
+def get_cinco_min_from_dt(dt: datetime) -> int:
+    return get_time_min_from_dt(dt, get_cinco_config().get(yr1_jan1_offset_text()))

@@ -19,6 +19,8 @@ from src.chrono.chrono import (
     yr1_jan1_offset_text,
     validate_timeline_config,
     create_timeline_config,
+    ChronoUnit,
+    chronounit_shop,
 )
 from copy import deepcopy as copy_deepcopy
 
@@ -217,3 +219,32 @@ def test_create_timeline_config_ReturnsObj():
     x_cinco_config = get_example_timeline_config(cinco_str())
     assert validate_timeline_config(x_cinco_config)
     assert x_cinco_config == cinco_dict
+
+
+def test_ChronoUnit_Exists():
+    # ESTABLISH / WHEN
+    x_chronounit = ChronoUnit()
+
+    # THEN
+    assert not x_chronounit.timeline_text
+    assert not x_chronounit.weekday_label
+    assert not x_chronounit.month_label
+    assert not x_chronounit.monthday_num
+    assert not x_chronounit.c400_count
+    assert not x_chronounit.c100_count
+    assert not x_chronounit.yr4_count
+    assert not x_chronounit.yr_count
+    assert not x_chronounit.year_num
+    assert not x_chronounit.hour_label
+    assert not x_chronounit.minute_num
+
+
+def test_chronounit_shop_ReturnsObj():
+    # ESTABLISH
+    x_timeline_text = "music07"
+
+    # WHEN
+    x_chronounit = chronounit_shop(x_timeline_text)
+
+    # THEN
+    assert x_chronounit.timeline_text == x_timeline_text

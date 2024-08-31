@@ -358,3 +358,22 @@ def get_time_min_from_dt(dt: datetime, yr1_jan1_offset: int) -> int:
     ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
     min_time_difference = dt - ce_src
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
+
+
+@dataclass
+class ChronoUnit:
+    timeline_text: str = None
+    weekday_label: str = None
+    month_label: str = None
+    monthday_num: int = None
+    c400_count: int = None
+    c100_count: int = None
+    yr4_count: int = None
+    yr_count: int = None
+    year_num: int = None
+    hour_label: str = None
+    minute_num: int = None
+
+
+def chronounit_shop(timeline_text: str):
+    return ChronoUnit(timeline_text=timeline_text)
