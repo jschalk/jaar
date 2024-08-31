@@ -28,16 +28,8 @@ from src.chrono.chrono import (
     time_str,
     year_str,
     get_year_road,
-    get_week_road,
-    get_day_road,
-    stan_c400_leap_ideaunit,
-    stan_c400_clean_ideaunit,
-    stan_c100_ideaunit,
-    stan_yr4_leap_ideaunit,
-    stan_yr4_clean_ideaunit,
-    stan_year_ideaunit,
-    day_str,  # "day"
-    days_str,  # f"{get_day()}s"
+    day_str,
+    days_str,
     c400_leap_str,
     c400_clean_str,
     c100_str,
@@ -47,6 +39,7 @@ from src.chrono.chrono import (
     hour_str,
     weeks_str,
     week_str,
+    get_c400_constants,
 )
 from datetime import datetime
 
@@ -75,20 +68,20 @@ def test_get_creg_min_from_dt_WorksCorrectly():
 
 def test_timetech_builder_ReferencesFunctionsReturnObj():
     # ESTABLISH / WHEN / THEN
-    assert c400_leap_num() == 210379680
-    assert c400_clean_num() == 210378240
-    assert c100_num() == 52594560
-    assert yr4_leap_num() == 2103840
-    assert yr4_clean_num() == 2102400
-    assert year_num() == 525600
-    assert day_length() == 1440
+    assert get_c400_constants().c400_leap_length == 210379680
+    assert get_c400_constants().c400_clean_length == 210378240
+    assert get_c400_constants().c100_length == 52594560
+    assert get_c400_constants().yr4_leap_length == 2103840
+    assert get_c400_constants().yr4_clean_length == 2102400
+    assert get_c400_constants().year_length == 525600
+    assert get_c400_constants().day_length == 1440
 
 
 def test_cregtime_ReferenceFunctionsReturnObj():
     # ESTABLISH / WHEN / THEN
     assert cregtime_begin() == 0
     assert cregtime_close() == 1472657760
-    assert cregtime_close() == c400_leap_num() * 7
+    assert cregtime_close() == get_c400_constants().c400_leap_length * 7
     assert day_length() == 1440
     assert week_length(7) == 10080
     assert jan_gogo_want() == 437760
@@ -284,18 +277,18 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     assert not sue_budunit.idea_exists(creg_road)
     assert not sue_budunit.idea_exists(year_road)
 
-    jan_road = sue_budunit.make_road(year_road, jan_str())
-    feb_road = sue_budunit.make_road(year_road, feb_str())
-    mar_road = sue_budunit.make_road(year_road, mar_str())
-    apr_road = sue_budunit.make_road(year_road, apr_str())
-    may_road = sue_budunit.make_road(year_road, may_str())
-    jun_road = sue_budunit.make_road(year_road, jun_str())
-    jul_road = sue_budunit.make_road(year_road, jul_str())
-    aug_road = sue_budunit.make_road(year_road, aug_str())
-    sep_road = sue_budunit.make_road(year_road, sep_str())
-    oct_road = sue_budunit.make_road(year_road, oct_str())
-    nov_road = sue_budunit.make_road(year_road, nov_str())
-    dec_road = sue_budunit.make_road(year_road, dec_str())
+    jan_road = sue_budunit.make_road(year_road, "jan")
+    feb_road = sue_budunit.make_road(year_road, "feb")
+    mar_road = sue_budunit.make_road(year_road, "mar")
+    apr_road = sue_budunit.make_road(year_road, "apr")
+    may_road = sue_budunit.make_road(year_road, "may")
+    jun_road = sue_budunit.make_road(year_road, "jun")
+    jul_road = sue_budunit.make_road(year_road, "jul")
+    aug_road = sue_budunit.make_road(year_road, "aug")
+    sep_road = sue_budunit.make_road(year_road, "sep")
+    oct_road = sue_budunit.make_road(year_road, "oct")
+    nov_road = sue_budunit.make_road(year_road, "nov")
+    dec_road = sue_budunit.make_road(year_road, "dec")
     assert not sue_budunit.idea_exists(jan_road)
     assert not sue_budunit.idea_exists(feb_road)
     assert not sue_budunit.idea_exists(mar_road)
@@ -914,78 +907,6 @@ def fri_stop_want():
 
 def sat_stop_want():
     return creg_weekday_ideaunits().get(get_sat())._stop_want
-
-
-def c400_leap_num():
-    return stan_c400_leap_ideaunit()._denom
-
-
-def c400_clean_num():
-    return stan_c400_clean_ideaunit()._denom
-
-
-def c100_num():
-    return stan_c100_ideaunit()._denom
-
-
-def yr4_leap_num():
-    return stan_yr4_leap_ideaunit()._denom
-
-
-def yr4_clean_num():
-    return stan_yr4_clean_ideaunit()._denom
-
-
-def year_num():
-    return stan_year_ideaunit()._denom
-
-
-def mar_str() -> str:
-    return "mar"
-
-
-def apr_str() -> str:
-    return "apr"
-
-
-def may_str() -> str:
-    return "may"
-
-
-def jun_str() -> str:
-    return "jun"
-
-
-def jul_str() -> str:
-    return "jul"
-
-
-def aug_str() -> str:
-    return "aug"
-
-
-def sep_str() -> str:
-    return "sep"
-
-
-def oct_str() -> str:
-    return "oct"
-
-
-def nov_str() -> str:
-    return "nov"
-
-
-def dec_str() -> str:
-    return "dec"
-
-
-def jan_str() -> str:
-    return "jan"
-
-
-def feb_str() -> str:
-    return "feb"
 
 
 # def mar_gogo_want():    return 0

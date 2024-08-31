@@ -1000,21 +1000,13 @@ class BudUnit:
     def get_idea_ranged_kids(
         self, idea_road: str, x_gogo_calc: float = None, x_stop_calc: float = None
     ) -> dict[IdeaUnit]:
-        parent_idea = self.get_idea_obj(idea_road)
-        if x_gogo_calc is None and x_stop_calc is None:
-            x_gogo_calc = parent_idea._gogo_want
-            x_gogo_calc = parent_idea._stop_want
-        elif x_gogo_calc is not None and x_stop_calc is None:
-            x_stop_calc = x_gogo_calc
-
-        idea_list = parent_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
-        return {x_idea._label: x_idea for x_idea in idea_list}
+        x_idea = self.get_idea_obj(idea_road)
+        return x_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
 
     def get_inheritor_idea_list(
         self, math_road: RoadUnit, inheritor_road: RoadUnit
     ) -> list[IdeaUnit]:
-        if is_sub_road(inheritor_road, math_road):
-            idea_roads = all_roadunits_between(math_road, inheritor_road)
+        idea_roads = all_roadunits_between(math_road, inheritor_road)
         return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
 
     def _init_idea_tree_walk(self):
@@ -1022,7 +1014,7 @@ class BudUnit:
         while idea_list != []:
             x_idea = idea_list.pop()
             x_idea.clear_gogo_calc_stop_calc()
-            for idea_kid in x_idea.get_kids_in_range():
+            for idea_kid in x_idea._kids.values():
                 idea_kid.set_parent_road(x_idea.get_road())
                 idea_kid.set_level(x_idea._level)
                 idea_list.append(idea_kid)

@@ -352,16 +352,23 @@ class IdeaUnit:
 
     def get_kids_in_range(self, x_gogo: float = None, x_stop: float = None) -> list:
         if x_gogo is None and x_stop is None:
+            x_gogo = self._gogo_want
+            x_gogo = self._stop_want
+        elif x_gogo is not None and x_stop is None:
+            x_stop = x_gogo
+
+        if x_gogo is None and x_stop is None:
             return self._kids.values()
-        x_list = []
+
+        x_dict = {}
         for x_idea in self._kids.values():
             x_gogo_in_range = x_gogo >= x_idea._gogo_calc and x_gogo < x_idea._stop_calc
             x_stop_in_range = x_stop > x_idea._gogo_calc and x_stop < x_idea._stop_calc
             both_in_range = x_gogo <= x_idea._gogo_calc and x_stop >= x_idea._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_list.append(x_idea)
-        return x_list
+                x_dict[x_idea._label] = x_idea
+        return x_dict
 
     def get_obj_key(self) -> RoadNode:
         return self._label
