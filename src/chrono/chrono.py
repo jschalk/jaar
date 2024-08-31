@@ -366,9 +366,9 @@ class ChronoUnit:
     weekday_label: str = None
     month_label: str = None
     monthday_num: int = None
-    c400_count: int = None
+    c400_leap_count: int = None
     c100_count: int = None
-    yr4_count: int = None
+    yr4_leap_count: int = None
     yr_count: int = None
     year_num: int = None
     hour_label: str = None

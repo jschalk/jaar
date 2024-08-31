@@ -230,9 +230,9 @@ def test_ChronoUnit_Exists():
     assert not x_chronounit.weekday_label
     assert not x_chronounit.month_label
     assert not x_chronounit.monthday_num
-    assert not x_chronounit.c400_count
+    assert not x_chronounit.c400_leap_count
     assert not x_chronounit.c100_count
-    assert not x_chronounit.yr4_count
+    assert not x_chronounit.yr4_leap_count
     assert not x_chronounit.yr_count
     assert not x_chronounit.year_num
     assert not x_chronounit.hour_label
