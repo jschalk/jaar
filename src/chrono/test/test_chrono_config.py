@@ -211,8 +211,9 @@ def test_create_timeline_config_ReturnsObj():
     assert x_hours_config[4] == ["4hr", 300]
     assert cinco_dict.get(yr1_jan1_offset_text()) == cinco_yr1_jan1_offset
 
-    cinco_file_name = f"timeline_config_{cinco_str()}.json"
-    cinco_file_text = get_json_from_dict(cinco_dict)
-    save_file(chrono_examples_dir(), cinco_file_name, cinco_file_text)
+    # cinco_file_name = f"timeline_config_{cinco_str()}.json"
+    # cinco_file_text = get_json_from_dict(cinco_dict)
+    # save_file(chrono_examples_dir(), cinco_file_name, cinco_file_text)
     x_cinco_config = get_example_timeline_config(cinco_str())
     assert validate_timeline_config(x_cinco_config)
+    assert x_cinco_config == cinco_dict

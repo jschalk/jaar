@@ -797,6 +797,38 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_year_road)
 
 
+# def test_get_timeline_date_ReturnsObj():
+#     x_datetime = datetime(1938, 11, 10)
+#     sue_bud = budunit_shop("Sue")
+#     sue_bud = add_time_creg_ideaunit(sue_bud)
+
+#     assert get_creg_min_from_dt(datetime(1938, 11, 10))
+#     assert get_creg_min_from_dt(datetime(1, 1, 1)) == 440640
+#     assert get_creg_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440
+#     assert get_creg_min_from_dt(datetime(1938, 11, 10)) == 1019653920
+#     # assert g_lw.get_time_dt_from_min(
+#     #     min=g_lw.get_creg_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+#     # ) == datetime(2000, 1, 1, 0, 0)
+#     assert get_creg_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
+#     assert get_creg_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
+#     assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
+#     assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+
+#     x_minutes = 1063817280
+#     assert get_creg_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
+#     x_next_day = x_minutes + 1440
+#     assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+
+#     creg_jan1_min = get_creg_min_from_dt(datetime(2000, 1, 1, 0, 0))
+#     cinco_jan1_min = get_cinco_min_from_dt(datetime(7200, 1, 1, 0, 0))
+#     x_difference = cinco_jan1_min - creg_jan1_min
+#     assert x_difference == 0
+#     assert get_cinco_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
+#     assert get_cinco_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
+#     assert get_cinco_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
+#     assert get_cinco_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+
+
 # def test_get_time_dt_from_min_WorksCorrectly():
 #     sue_bud = budunit_shop("Sue")
 #     sue_bud = add_time_creg_ideaunit(sue_bud)

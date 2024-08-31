@@ -112,5 +112,8 @@ def add_time_cinco_ideaunit(x_budunit: BudUnit) -> BudUnit:
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
-    x_yr1_jan1_offset = get_creg_config().get(yr1_jan1_offset_text())
-    return get_time_min_from_dt(dt=dt, yr1_jan1_offset=x_yr1_jan1_offset)
+    return get_time_min_from_dt(dt, get_creg_config().get(yr1_jan1_offset_text()))
+
+
+# def get_cinco_min_from_dt(dt: datetime) -> int:
+#     return get_time_min_from_dt(dt, get_cinco_config().get(yr1_jan1_offset_text()))
