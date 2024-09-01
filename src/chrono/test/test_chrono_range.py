@@ -89,6 +89,16 @@ def test_ChronoRange_Exists():
     assert not x_chronorange._cnigh_hour
     assert not x_chronorange._copen_minute
     assert not x_chronorange._cnigh_minute
+    assert not x_chronorange._copen_c400_count
+    assert not x_chronorange._cnigh_c400_count
+    assert not x_chronorange._copen_c100_count
+    assert not x_chronorange._cnigh_c100_count
+    assert not x_chronorange._copen_yr4_count
+    assert not x_chronorange._cnigh_yr4_count
+    assert not x_chronorange._copen_year_count
+    assert not x_chronorange._cnigh_year_count
+    assert not x_chronorange._copen_year_num
+    assert not x_chronorange._cnigh_year_num
 
 
 def test_ChronoRange_shop_ReturnsObj():
@@ -196,3 +206,82 @@ def test_ChronoRange_set_hour_SetsAttr():
     assert x_chronorange._cnigh_hour == "11-11am"
     assert x_chronorange._copen_minute == 41
     assert x_chronorange._cnigh_minute == 42
+
+
+def test_ChronoRange_set_year_SetsAttr():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronorange = chronorange_shop(sue_bud, creg_road, 1030600100, 2001286200)
+    x_chronorange._set_timeline_idea()
+    assert not x_chronorange._copen_c400_count
+    assert not x_chronorange._cnigh_c400_count
+    assert not x_chronorange._copen_c100_count
+    assert not x_chronorange._cnigh_c100_count
+    assert not x_chronorange._copen_yr4_count
+    assert not x_chronorange._cnigh_yr4_count
+    assert not x_chronorange._copen_year_count
+    assert not x_chronorange._cnigh_year_count
+    assert not x_chronorange._copen_year_num
+    assert not x_chronorange._cnigh_year_num
+
+    # WHEN
+    x_chronorange._set_year()
+
+    # THEN
+    print(f"{x_chronorange._copen_year_num=}")
+    print(f"{x_chronorange._cnigh_year_num=}")
+    assert x_chronorange._copen_c400_count == 4
+    assert x_chronorange._cnigh_c400_count == 9
+    assert x_chronorange._copen_c100_count == 3
+    assert x_chronorange._cnigh_c100_count == 2
+    assert x_chronorange._copen_yr4_count == 14
+    assert x_chronorange._cnigh_yr4_count == 1
+    assert x_chronorange._copen_year_count == 3
+    assert x_chronorange._cnigh_year_count == 1
+    assert x_chronorange._copen_year_num == 1959
+    assert x_chronorange._cnigh_year_num == 3805
+
+
+def test_ChronoRange_calc_timeline_SetsAttrs():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronorange = chronorange_shop(sue_bud, creg_road, 1030600102, 2001286206)
+    assert not x_chronorange._timeline_idea
+    assert not x_chronorange._copen_weekday
+    assert not x_chronorange._cnigh_weekday
+    assert not x_chronorange._copen_monthday
+    assert not x_chronorange._cnigh_monthday
+    assert not x_chronorange._copen_month
+    assert not x_chronorange._cnigh_month
+    assert not x_chronorange._copen_hour
+    assert not x_chronorange._cnigh_hour
+    assert not x_chronorange._copen_minute
+    assert not x_chronorange._cnigh_minute
+    assert not x_chronorange._copen_year_num
+    assert not x_chronorange._cnigh_year_num
+
+    # WHEN
+    x_chronorange.calc_timeline()
+
+    # THEN
+    assert x_chronorange._timeline_idea
+    assert x_chronorange._copen_weekday
+    assert x_chronorange._cnigh_weekday
+    assert x_chronorange._copen_monthday
+    assert x_chronorange._cnigh_monthday
+    assert x_chronorange._copen_month
+    assert x_chronorange._cnigh_month
+    assert x_chronorange._copen_hour
+    assert x_chronorange._cnigh_hour
+    assert x_chronorange._copen_minute
+    assert x_chronorange._cnigh_minute
+    assert x_chronorange._copen_year_num
+    assert x_chronorange._cnigh_year_num
