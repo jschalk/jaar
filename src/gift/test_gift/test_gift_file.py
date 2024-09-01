@@ -179,23 +179,23 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     farm_giftunit.set_change_start(farm_change_start)
     farm_giftunit.set_face(zia_text)
     farm_giftunit.set_face(yao_text)
-    four_int = 4
-    five_int = 5
-    four_atom = get_atom_example_ideaunit_sports()
-    five_atom = get_atom_example_ideaunit_knee()
-    farm_giftunit._changeunit.set_atomunit(four_atom)
-    farm_giftunit._changeunit.set_atomunit(five_atom)
+    int4 = 4
+    int5 = 5
+    sports_atom = get_atom_example_ideaunit_sports()
+    knee_atom = get_atom_example_ideaunit_knee()
+    farm_giftunit._changeunit.set_atomunit(sports_atom)
+    farm_giftunit._changeunit.set_atomunit(knee_atom)
     assert farm_giftunit.gift_file_exists() is False
-    assert farm_giftunit.atom_file_exists(four_int) is False
-    assert farm_giftunit.atom_file_exists(five_int) is False
+    assert farm_giftunit.atom_file_exists(int4) is False
+    assert farm_giftunit.atom_file_exists(int5) is False
 
     # WHEN
     farm_giftunit.save_files()
 
     # THEN
     assert farm_giftunit.gift_file_exists()
-    assert farm_giftunit.atom_file_exists(four_int)
-    assert farm_giftunit.atom_file_exists(five_int)
+    assert farm_giftunit.atom_file_exists(int4)
+    assert farm_giftunit.atom_file_exists(int5)
 
 
 def test_GiftUnit_create_changeunit_from_atom_files_SetsAttr(env_dir_setup_cleanup):
@@ -207,26 +207,26 @@ def test_GiftUnit_create_changeunit_from_atom_files_SetsAttr(env_dir_setup_clean
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
 
     sue_giftunit = giftunit_shop(sue_text, _atoms_dir=sue_atoms_dir)
-    four_int = 4
-    five_int = 5
-    nine_int = 9
-    four_atom = get_atom_example_ideaunit_sports()
-    five_atom = get_atom_example_ideaunit_knee()
-    nine_atom = get_atom_example_ideaunit_ball()
-    sue_giftunit._save_atom_file(four_int, four_atom)
-    sue_giftunit._save_atom_file(five_int, five_atom)
-    sue_giftunit._save_atom_file(nine_int, nine_atom)
+    int4 = 4
+    int5 = 5
+    int9 = 9
+    spor_atom = get_atom_example_ideaunit_sports()
+    knee_atom = get_atom_example_ideaunit_knee()
+    ball_atom = get_atom_example_ideaunit_ball()
+    sue_giftunit._save_atom_file(int4, spor_atom)
+    sue_giftunit._save_atom_file(int5, knee_atom)
+    sue_giftunit._save_atom_file(int9, ball_atom)
     assert sue_giftunit._changeunit == changeunit_shop()
 
     # WHEN
-    atoms_list = [four_int, five_int, nine_int]
+    atoms_list = [int4, int5, int9]
     sue_giftunit._create_changeunit_from_atom_files(atoms_list)
 
     # THEN
     static_changeunit = changeunit_shop()
-    static_changeunit.set_atomunit(four_atom)
-    static_changeunit.set_atomunit(five_atom)
-    static_changeunit.set_atomunit(nine_atom)
+    static_changeunit.set_atomunit(spor_atom)
+    static_changeunit.set_atomunit(knee_atom)
+    static_changeunit.set_atomunit(ball_atom)
     assert sue_giftunit._changeunit != changeunit_shop()
     assert sue_giftunit._changeunit == static_changeunit
 
