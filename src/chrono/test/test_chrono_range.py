@@ -33,7 +33,7 @@ from src.chrono.examples.chrono_examples import (
     get_squirt_config,
     chrono_examples_dir,
     get_example_timeline_config,
-    cinco_str,
+    five_str,
     add_time_creg_ideaunit,
     creg_str,
     get_creg_min_from_dt,

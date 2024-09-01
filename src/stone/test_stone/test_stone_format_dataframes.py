@@ -4,7 +4,7 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
-    add_time_cinco_ideaunit,
+    add_time_five_ideaunit,
 )
 from src.gift.atom_config import (
     real_id_str,
@@ -216,7 +216,7 @@ def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0():
     sue_text = sue_str()
     sue_budunit = budunit_shop(sue_text, music_real_id)
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit = add_time_cinco_ideaunit(sue_budunit)
+    sue_budunit = add_time_five_ideaunit(sue_budunit)
     x_stone_name = stone_format_00019_ideaunit_v0_0_0()
 
     # WHEN

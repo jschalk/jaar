@@ -26,12 +26,12 @@ def creg_str() -> str:
     return "creg"
 
 
-def cinco_str() -> str:
-    return "cinco"
+def five_str() -> str:
+    return "five"
 
 
-def get_cinco_config() -> dict:
-    return get_example_timeline_config(cinco_str())
+def get_five_config() -> dict:
+    return get_example_timeline_config(five_str())
 
 
 def get_creg_config() -> dict:
@@ -104,22 +104,22 @@ def add_time_creg_ideaunit(x_budunit: BudUnit) -> BudUnit:
     return add_newtimeline_ideaunit(x_budunit, get_creg_config())
 
 
-def add_time_cinco_ideaunit(x_budunit: BudUnit) -> BudUnit:
-    return add_newtimeline_ideaunit(x_budunit, get_cinco_config())
+def add_time_five_ideaunit(x_budunit: BudUnit) -> BudUnit:
+    return add_newtimeline_ideaunit(x_budunit, get_five_config())
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
     return get_time_min_from_dt(dt, get_creg_config().get(yr1_jan1_offset_text()))
 
 
-def get_cinco_min_from_dt(dt: datetime) -> int:
-    return get_time_min_from_dt(dt, get_cinco_config().get(yr1_jan1_offset_text()))
+def get_five_min_from_dt(dt: datetime) -> int:
+    return get_time_min_from_dt(dt, get_five_config().get(yr1_jan1_offset_text()))
 
 
-def display_current_creg_cinco_min(graphics_bool: bool):
+def display_current_creg_five_min(graphics_bool: bool):
     current_datetime = datetime.now()
     current_creg = get_creg_min_from_dt(current_datetime)
-    current_cinco = get_cinco_min_from_dt(current_datetime)
+    current_five = get_five_min_from_dt(current_datetime)
 
     curr_text = f"year: {current_datetime.year}"
     curr_text += f", month: {current_datetime.month}"
@@ -128,8 +128,8 @@ def display_current_creg_cinco_min(graphics_bool: bool):
     curr_text += f", minute: {current_datetime.minute}"
     curr_text = f"<b>{curr_text}</b>"
     creg_min_text = f"<b>creg timeline min: {current_creg}</b>"
-    cinco_min_text = f"<b>cinco timeline min: {current_cinco}</b>"
-    curr_list = [curr_text, creg_min_text, cinco_min_text]
+    five_min_text = f"<b>five timeline min: {current_five}</b>"
+    curr_list = [curr_text, creg_min_text, five_min_text]
     xp_list = [1, 1, 1]
     yp_list = [3, 2, 1]
 
