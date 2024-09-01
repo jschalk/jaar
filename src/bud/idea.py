@@ -350,7 +350,9 @@ class IdeaUnit:
         else:
             return self._fund_cease - self._fund_onset
 
-    def get_kids_in_range(self, x_gogo: float = None, x_stop: float = None) -> list:
+    def get_kids_in_range(
+        self, x_gogo: float = None, x_stop: float = None
+    ) -> dict[RoadNode,]:
         if x_gogo is None and x_stop is None:
             x_gogo = self._gogo_want
             x_gogo = self._stop_want

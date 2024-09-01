@@ -434,22 +434,27 @@ class ChronoRange:
         for x_weekday in stop_weekday_dict.keys():
             self._cnigh_weekday = x_weekday
 
-    def _set_monthday(self):
-        pass
-
     def _set_month(self):
         year_road = get_year_road(self.x_budunit, self.time_range_root_road)
         year_idea = self.x_budunit.get_idea_obj(year_road)
         x_idea_dict = self.x_budunit._idea_dict
         idea_list = all_ideas_between(x_idea_dict, self.time_range_root_road, year_road)
-        print(f"{len(idea_list)=}")
         x_rangeunit = ideas_calculated_range(idea_list, self.copen, self.cnigh)
         gogo_month_dict = year_idea.get_kids_in_range(x_rangeunit.gogo)
         stop_month_dict = year_idea.get_kids_in_range(x_rangeunit.stop)
-        for x_month in gogo_month_dict.keys():
-            self._copen_month = x_month
-        for x_month in stop_month_dict.keys():
-            self._cnigh_month = x_month
+        copen_month_idea = None
+        cnigh_month_idea = None
+        for x_monthname, month_idea in gogo_month_dict.items():
+            self._copen_month = x_monthname
+            copen_month_idea = month_idea
+        for x_monthname, month_idea in stop_month_dict.items():
+            self._cnigh_month = x_monthname
+            cnigh_month_idea = month_idea
+
+        self._copen_monthday = x_rangeunit.gogo - copen_month_idea._gogo_calc
+        self._cnigh_monthday = x_rangeunit.stop - cnigh_month_idea._gogo_calc
+        self._copen_monthday = self._copen_monthday // 1440
+        self._cnigh_monthday = self._cnigh_monthday // 1440
 
     def _set_hour(self):
         day_road = get_day_road(self.x_budunit, self.time_range_root_road)
@@ -463,8 +468,10 @@ class ChronoRange:
         for x_hour in stop_hour_dict.keys():
             self._cnigh_hour = x_hour
 
-    def _set_minute(self):
-        return ""
+        self._copen_minute = x_rangeunit.gogo
+        self._cnigh_minute = x_rangeunit.stop
+        self._copen_minute = self._copen_minute % 60
+        self._cnigh_minute = self._cnigh_minute % 60
 
 
 def chronorange_shop(
