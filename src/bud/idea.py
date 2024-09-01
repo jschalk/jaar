@@ -295,7 +295,7 @@ class IdeaUnit:
     def apply_factunit_transformations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self._factunits.values():
             if factunit.base == factheir.base:
-                factheir.transform(factunit=factunit)
+                factheir.transform(factunit)
         return factheir
 
     def delete_factunit_if_past(self, factheir: FactHeir):
@@ -352,16 +352,23 @@ class IdeaUnit:
 
     def get_kids_in_range(self, x_gogo: float = None, x_stop: float = None) -> list:
         if x_gogo is None and x_stop is None:
+            x_gogo = self._gogo_want
+            x_gogo = self._stop_want
+        elif x_gogo is not None and x_stop is None:
+            x_stop = x_gogo
+
+        if x_gogo is None and x_stop is None:
             return self._kids.values()
-        x_list = []
+
+        x_dict = {}
         for x_idea in self._kids.values():
             x_gogo_in_range = x_gogo >= x_idea._gogo_calc and x_gogo < x_idea._stop_calc
             x_stop_in_range = x_stop > x_idea._gogo_calc and x_stop < x_idea._stop_calc
             both_in_range = x_gogo <= x_idea._gogo_calc and x_stop >= x_idea._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_list.append(x_idea)
-        return x_list
+                x_dict[x_idea._label] = x_idea
+        return x_dict
 
     def get_obj_key(self) -> RoadNode:
         return self._label
@@ -792,11 +799,9 @@ class IdeaUnit:
     ):
         for reason_base in self._reasonheirs.keys():
             if range_root_road := range_inheritors.get(reason_base):
-                all_roads = all_roadunits_between(range_root_road, reason_base)
-                all_ideas = []
-                for x_road in all_roads:
-                    x_idea = bud_idea_dict.get(x_road)
-                    all_ideas.append(x_idea)
+                all_ideas = all_ideas_between(
+                    bud_idea_dict, range_root_road, reason_base
+                )
                 self._create_factheir(all_ideas, range_root_road, reason_base)
 
     def _create_factheir(
@@ -1100,6 +1105,13 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True
     else:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else None
+
+
+def all_ideas_between(
+    bud_idea_dict: dict[RoadUnit, IdeaUnit], src_road: RoadUnit, dst_base: RoadUnit
+) -> list[IdeaUnit]:
+    all_roads = all_roadunits_between(src_road, dst_base)
+    return [bud_idea_dict.get(x_road) for x_road in all_roads]
 
 
 def ideas_calculated_range(

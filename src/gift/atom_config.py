@@ -259,6 +259,20 @@ def get_atom_config_args(x_category: str) -> dict[str, dict]:
     return args_dict
 
 
+def get_atom_args_category_mapping() -> dict[str, set[str]]:
+    x_dict = {}
+    for atom_category in get_atom_config_dict().keys():
+        args_set = set(get_atom_config_args(atom_category))
+        for x_arg in args_set:
+            if x_dict.get(x_arg) is None:
+                x_dict[x_arg] = {atom_category}
+            else:
+                x_category_set = x_dict.get(x_arg)
+                x_category_set.add(atom_category)
+                x_dict[x_arg] = x_category_set
+    return x_dict
+
+
 def get_sorted_required_arg_keys(atom_category: str) -> list[str]:
     atom_config = get_atom_config_dict()
     atom_category_config = atom_config.get(atom_category)

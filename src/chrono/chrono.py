@@ -1,7 +1,12 @@
 from src._instrument.python_tool import get_0_if_None, get_dict_from_json
 from src._instrument.file import open_file
-from src._road.road import RoadUnit
-from src.bud.idea import ideaunit_shop, IdeaUnit
+from src._road.road import RoadUnit, RoadNode
+from src.bud.idea import (
+    ideaunit_shop,
+    IdeaUnit,
+    ideas_calculated_range,
+    all_ideas_between,
+)
 from src.bud.bud import BudUnit
 from datetime import datetime
 from dataclasses import dataclass
@@ -179,26 +184,25 @@ def create_week_ideaunits(x_weekdays_list) -> dict[str, IdeaUnit]:
     }
 
 
-def new_timeline_ideaunit(timeline_text: str, c400_count: int) -> IdeaUnit:
-    x_text = timeline_text
+def new_timeline_ideaunit(timeline_label: str, c400_count: int) -> IdeaUnit:
     timeline_length = c400_count * get_c400_constants().c400_leap_length
-    return ideaunit_shop(x_text, _begin=0, _close=timeline_length)
+    return ideaunit_shop(timeline_label, _begin=0, _close=timeline_length)
 
 
 def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
-    timeline_text = timeline_config.get(timeline_label_text())
+    timeline_label = timeline_config.get(timeline_label_text())
     timeline_c400_count = timeline_config.get(c400_config_text())
     timeline_months_list = timeline_config.get(months_config_text())
     timeline_hours_list = timeline_config.get(hours_config_text())
     timeline_wkdays_list = timeline_config.get(weekdays_config_text())
 
     time_road = x_budunit.make_l1_road(time_str())
-    new_road = x_budunit.make_road(time_road, timeline_text)
+    new_road = x_budunit.make_road(time_road, timeline_label)
     day_road = x_budunit.make_road(new_road, day_str())
     week_road = x_budunit.make_road(new_road, week_str())
     year_road = get_year_road(x_budunit, new_road)
 
-    add_stan_ideaunits(x_budunit, time_road, timeline_text, timeline_c400_count)
+    add_stan_ideaunits(x_budunit, time_road, timeline_label, timeline_c400_count)
     add_ideaunits(x_budunit, day_road, create_hour_ideaunits(timeline_hours_list))
     add_ideaunits(x_budunit, new_road, create_week_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, week_road, create_weekday_ideaunits(timeline_wkdays_list))
@@ -216,11 +220,11 @@ def add_ideaunits(
 def add_stan_ideaunits(
     x_budunit: BudUnit,
     time_road: RoadUnit,
-    timeline_text: str,
+    timeline_label: str,
     timeline_c400_count: int,
 ):
     time_road = x_budunit.make_l1_road(time_str())
-    new_road = x_budunit.make_road(time_road, timeline_text)
+    new_road = x_budunit.make_road(time_road, timeline_label)
     c400_leap_road = x_budunit.make_road(new_road, c400_leap_str())
     c400_clean_road = x_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_road = x_budunit.make_road(c400_clean_road, c100_str())
@@ -229,7 +233,7 @@ def add_stan_ideaunits(
 
     if not x_budunit.idea_exists(time_road):
         x_budunit.set_l1_idea(ideaunit_shop(time_str()))
-    timeline_ideaunit = new_timeline_ideaunit(timeline_text, timeline_c400_count)
+    timeline_ideaunit = new_timeline_ideaunit(timeline_label, timeline_c400_count)
     x_budunit.set_idea(timeline_ideaunit, time_road)
     x_budunit.set_idea(stan_c400_leap_ideaunit(), new_road)
     x_budunit.set_idea(stan_c400_clean_ideaunit(), c400_leap_road)
@@ -258,6 +262,14 @@ def get_year_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUni
     yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
     return x_budunit.make_road(yr4_clean_road, year_str())
+
+
+def get_week_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
+    return x_budunit.make_road(time_range_root_road, week_str())
+
+
+def get_day_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
+    return x_budunit.make_road(time_range_root_road, day_str())
 
 
 def hours_config_text() -> str:
@@ -358,3 +370,104 @@ def get_time_min_from_dt(dt: datetime, yr1_jan1_offset: int) -> int:
     ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
     min_time_difference = dt - ce_src
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
+
+
+def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) -> int:
+    c400_len = get_c400_constants().c400_leap_length
+    c400_x0 = timeline_config0.get(c400_config_text())
+    c400_x1 = timeline_config1.get(c400_config_text())
+    offset_x0 = timeline_config0.get(yr1_jan1_offset_text())
+    offset_x1 = timeline_config1.get(yr1_jan1_offset_text())
+    return offset_x0 - offset_x1
+
+
+@dataclass
+class ChronoPoint:
+    timeline_min: int = None
+    weekday_label: RoadNode = None
+    month_label: RoadNode = None
+    monthday_num: int = None
+    c400_leap_count: int = None
+    c100_count: int = None
+    yr4_leap_count: int = None
+    yr_count: int = None
+    year_num: int = None
+    hour_label: RoadNode = None
+    minute_num: int = None
+
+
+def chronopoint_shop(timeline_min: int):
+    return ChronoPoint(timeline_min)
+
+
+@dataclass
+class ChronoRange:
+    x_budunit: BudUnit = None
+    time_range_root_road: RoadUnit = None
+    copen: int = None
+    cnigh: int = None
+    # calculated fields
+    _timeline_idea: IdeaUnit = None
+    _copen_weekday: str = None
+    _cnigh_weekday: str = None
+    _copen_monthday: str = None
+    _cnigh_monthday: str = None
+    _copen_month: str = None
+    _cnigh_month: str = None
+    _copen_hour: str = None
+    _cnigh_hour: str = None
+    _copen_minute: str = None
+    _cnigh_minute: str = None
+
+    def _set_timeline_idea(self):
+        self._timeline_idea = self.x_budunit.get_idea_obj(self.time_range_root_road)
+
+    def _set_weekday(self):
+        week_road = get_week_road(self.x_budunit, self.time_range_root_road)
+        week_idea = self.x_budunit.get_idea_obj(week_road)
+        x_idea_list = [self._timeline_idea, week_idea]
+        x_rangeunit = ideas_calculated_range(x_idea_list, self.copen, self.cnigh)
+        gogo_weekday_dict = week_idea.get_kids_in_range(x_rangeunit.gogo)
+        stop_weekday_dict = week_idea.get_kids_in_range(x_rangeunit.stop)
+        for x_weekday in gogo_weekday_dict.keys():
+            self._copen_weekday = x_weekday
+        for x_weekday in stop_weekday_dict.keys():
+            self._cnigh_weekday = x_weekday
+
+    def _set_monthday(self):
+        pass
+
+    def _set_month(self):
+        year_road = get_year_road(self.x_budunit, self.time_range_root_road)
+        year_idea = self.x_budunit.get_idea_obj(year_road)
+        x_idea_dict = self.x_budunit._idea_dict
+        idea_list = all_ideas_between(x_idea_dict, self.time_range_root_road, year_road)
+        print(f"{len(idea_list)=}")
+        x_rangeunit = ideas_calculated_range(idea_list, self.copen, self.cnigh)
+        gogo_month_dict = year_idea.get_kids_in_range(x_rangeunit.gogo)
+        stop_month_dict = year_idea.get_kids_in_range(x_rangeunit.stop)
+        for x_month in gogo_month_dict.keys():
+            self._copen_month = x_month
+        for x_month in stop_month_dict.keys():
+            self._cnigh_month = x_month
+
+    def _set_hour(self):
+        day_road = get_day_road(self.x_budunit, self.time_range_root_road)
+        day_idea = self.x_budunit.get_idea_obj(day_road)
+        x_idea_list = [self._timeline_idea, day_idea]
+        x_rangeunit = ideas_calculated_range(x_idea_list, self.copen, self.cnigh)
+        gogo_hour_dict = day_idea.get_kids_in_range(x_rangeunit.gogo)
+        stop_hour_dict = day_idea.get_kids_in_range(x_rangeunit.stop)
+        for x_hour in gogo_hour_dict.keys():
+            self._copen_hour = x_hour
+        for x_hour in stop_hour_dict.keys():
+            self._cnigh_hour = x_hour
+
+    def _set_minute(self):
+        return ""
+
+
+def chronorange_shop(
+    x_budunit: BudUnit, time_range_root_road: str, copen: int, cnigh: int
+):
+    return ChronoRange(x_budunit, time_range_root_road, copen=copen, cnigh=cnigh)

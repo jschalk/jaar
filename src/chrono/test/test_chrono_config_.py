@@ -1,5 +1,6 @@
 from src._instrument.file import save_file
 from src._instrument.python_tool import get_json_from_dict
+from src.bud.bud import budunit_shop
 from src.chrono.examples.chrono_examples import (
     get_creg_config,
     get_squirt_config,
@@ -19,6 +20,22 @@ from src.chrono.chrono import (
     yr1_jan1_offset_text,
     validate_timeline_config,
     create_timeline_config,
+    ChronoPoint,
+    chronopoint_shop,
+    ChronoRange,
+    chronorange_shop,
+    week_str,
+    year_str,
+    day_str,
+    get_year_road,
+    get_week_road,
+    get_day_road,
+    time_str,
+    c400_leap_str,
+    c400_clean_str,
+    c100_str,
+    yr4_leap_str,
+    yr4_clean_str,
 )
 from copy import deepcopy as copy_deepcopy
 
@@ -211,8 +228,50 @@ def test_create_timeline_config_ReturnsObj():
     assert x_hours_config[4] == ["4hr", 300]
     assert cinco_dict.get(yr1_jan1_offset_text()) == cinco_yr1_jan1_offset
 
-    cinco_file_name = f"timeline_config_{cinco_str()}.json"
-    cinco_file_text = get_json_from_dict(cinco_dict)
-    save_file(chrono_examples_dir(), cinco_file_name, cinco_file_text)
+    # cinco_file_name = f"timeline_config_{cinco_str()}.json"
+    # cinco_file_text = get_json_from_dict(cinco_dict)
+    # save_file(chrono_examples_dir(), cinco_file_name, cinco_file_text)
     x_cinco_config = get_example_timeline_config(cinco_str())
     assert validate_timeline_config(x_cinco_config)
+    assert x_cinco_config == cinco_dict
+
+
+def test_get_year_road_ReturnsObj():
+    # ESTABLISH
+    fizz_text = "fizz34"
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    c400_leap_road = sue_budunit.make_road(fizz_road, c400_leap_str())
+    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
+    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
+    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
+    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+
+    # WHEN / THEN
+    assert year_road == get_year_road(sue_budunit, fizz_road)
+
+
+def test_get_week_road_ReturnsObj():
+    # ESTABLISH
+    fizz_text = "fizz34"
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    week_road = sue_budunit.make_road(fizz_road, week_str())
+
+    # WHEN / THEN
+    assert week_road == get_week_road(sue_budunit, fizz_road)
+
+
+def test_get_day_road_ReturnsObj():
+    # ESTABLISH
+    fizz_text = "fizz34"
+    sue_budunit = budunit_shop("Sue")
+    time_road = sue_budunit.make_l1_road(time_str())
+    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    day_road = sue_budunit.make_road(fizz_road, day_str())
+
+    # WHEN / THEN
+    assert day_road == get_day_road(sue_budunit, fizz_road)

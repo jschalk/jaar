@@ -1,40 +1,14 @@
+from src._instrument.python_tool import conditional_fig_show
 from src.bud.group import awardlink_shop
 from src.bud.reason_idea import reasonunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.chrono.examples.chrono_examples import (
-    add_time_creg_ideaunit,
-    add_time_cinco_ideaunit,
-    get_creg_min_from_dt,
-    get_cregtime_text,
-    get_sun,  # "Sunday"
-    get_mon,  # "Monday"
-    get_tue,  # "Tuesday"
-    get_wed,  # "Wednesday"
-    get_thu,  # "Thursday"
-    get_fri,  # "Friday"
-    get_sat,  # "Saturday"
-    creg_hour_label,
-    cregtime_ideaunit,
-    creg_months_list,
-    creg_weekday_ideaunits,
-    creg_str,
-    cinco_str,
-)
 from src.chrono.chrono import (
-    day_length,
-    week_length,
     time_str,
     year_str,
     get_year_road,
-    stan_c400_leap_ideaunit,
-    stan_c400_clean_ideaunit,
-    stan_c100_ideaunit,
-    stan_yr4_leap_ideaunit,
-    stan_yr4_clean_ideaunit,
-    stan_year_ideaunit,
-    day_str,  # "day"
-    days_str,  # f"{get_day()}s"
+    day_str,
+    days_str,
     c400_leap_str,
     c400_clean_str,
     c100_str,
@@ -44,88 +18,73 @@ from src.chrono.chrono import (
     hour_str,
     weeks_str,
     week_str,
+    get_c400_constants,
+    get_timeline_min_difference,
+    yr1_jan1_offset_text,
+)
+from src.chrono.examples.chrono_examples import (
+    add_time_creg_ideaunit,
+    add_time_cinco_ideaunit,
+    get_creg_min_from_dt,
+    get_cinco_min_from_dt,
+    get_cregtime_text,
+    get_sun,
+    get_mon,
+    get_tue,
+    get_wed,
+    get_thu,
+    get_fri,
+    get_sat,
+    creg_hour_label,
+    cregtime_ideaunit,
+    creg_weekday_ideaunits,
+    creg_str,
+    cinco_str,
+    get_creg_config,
+    get_cinco_config,
+    display_current_creg_cinco_min,
 )
 from datetime import datetime
 
 
-def test_get_creg_min_from_dt_WorksCorrectly():
-    sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+def test_get_creg_config_ReturnsObj():
+    # ESTABLISH
+    creg_config = get_creg_config()
+    cinco_config = get_cinco_config()
 
-    assert get_creg_min_from_dt(datetime(1938, 11, 10))
-    assert get_creg_min_from_dt(datetime(1, 1, 1)) == 440640
-    assert get_creg_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440
-    assert get_creg_min_from_dt(datetime(1938, 11, 10)) == 1019653920
-    # assert g_lw.get_time_dt_from_min(
-    #     min=g_lw.get_creg_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    # ) == datetime(2000, 1, 1, 0, 0)
-    assert get_creg_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
-    assert get_creg_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
-    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
-    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+    # WHEN
+    creg_offset = creg_config.get(yr1_jan1_offset_text())
+    cinco_offset = cinco_config.get(yr1_jan1_offset_text())
 
-    x_minutes = 1063817280
-    assert get_creg_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
-    x_next_day = x_minutes + 1440
-    assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+    # THEN
+    assert creg_offset == 440640
+    assert cinco_offset == 1683478080
+    c400_len = get_c400_constants().c400_leap_length
+    assert cinco_offset == (c400_len * 8) + 440640
 
 
-def test_timetech_builder_ReferencesFunctionsReturnObj():
+def test_cregtime_ideaunit_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert c400_leap_num() == 210379680
-    assert c400_clean_num() == 210378240
-    assert c100_num() == 52594560
-    assert yr4_leap_num() == 2103840
-    assert yr4_clean_num() == 2102400
-    assert year_num() == 525600
-    assert day_length() == 1440
+    assert cregtime_ideaunit()._begin == 0
+    assert cregtime_ideaunit()._close == 1472657760
+    assert cregtime_ideaunit()._close == get_c400_constants().c400_leap_length * 7
 
 
-def test_cregtime_ReferenceFunctionsReturnObj():
-    # ESTABLISH / WHEN / THEN
-    assert cregtime_begin() == 0
-    assert cregtime_close() == 1472657760
-    assert cregtime_close() == c400_leap_num() * 7
-    assert day_length() == 1440
-    assert week_length(7) == 10080
-    assert jan_gogo_want() == 437760
-    assert feb_gogo_want() == 480960
-    assert mar_gogo_want() == 0
-    assert apr_gogo_want() == 44640
-    assert may_gogo_want() == 84960
-    assert jun_gogo_want() == 129600
-    assert jul_gogo_want() == 172800
-    assert aug_gogo_want() == 217440
-    assert sep_gogo_want() == 260640
-    assert oct_gogo_want() == 305280
-    assert nov_gogo_want() == 349920
-    assert dec_gogo_want() == 393120
-    assert jan_stop_want() == 480960
-    assert feb_stop_want() == 525600
-    assert mar_stop_want() == 44640
-    assert apr_stop_want() == 84960
-    assert may_stop_want() == 129600
-    assert jun_stop_want() == 172800
-    assert jul_stop_want() == 217440
-    assert aug_stop_want() == 260640
-    assert sep_stop_want() == 305280
-    assert oct_stop_want() == 349920
-    assert nov_stop_want() == 393120
-    assert dec_stop_want() == 437760
-    assert sun_gogo_want() == 5760
-    assert mon_gogo_want() == 7200
-    assert tue_gogo_want() == 8640
-    assert wed_gogo_want() == 0
-    assert thu_gogo_want() == 1440
-    assert fri_gogo_want() == 2880
-    assert sat_gogo_want() == 4320
-    assert sun_stop_want() == sun_gogo_want() + day_length()
-    assert mon_stop_want() == mon_gogo_want() + day_length()
-    assert tue_stop_want() == tue_gogo_want() + day_length()
-    assert wed_stop_want() == wed_gogo_want() + day_length()
-    assert thu_stop_want() == thu_gogo_want() + day_length()
-    assert fri_stop_want() == fri_gogo_want() + day_length()
-    assert sat_stop_want() == sat_gogo_want() + day_length()
+def test_creg_weekday_ideaunits_ReturnsObj():
+    assert creg_weekday_ideaunits().get(get_wed())._gogo_want == 0
+    assert creg_weekday_ideaunits().get(get_thu())._gogo_want == 1440
+    assert creg_weekday_ideaunits().get(get_fri())._gogo_want == 2880
+    assert creg_weekday_ideaunits().get(get_sat())._gogo_want == 4320
+    assert creg_weekday_ideaunits().get(get_sun())._gogo_want == 5760
+    assert creg_weekday_ideaunits().get(get_mon())._gogo_want == 7200
+    assert creg_weekday_ideaunits().get(get_tue())._gogo_want == 8640
+    assert creg_weekday_ideaunits().get(get_wed())._stop_want == 1440
+    assert creg_weekday_ideaunits().get(get_thu())._stop_want == 2880
+    assert creg_weekday_ideaunits().get(get_fri())._stop_want == 4320
+    assert creg_weekday_ideaunits().get(get_sat())._stop_want == 5760
+    assert creg_weekday_ideaunits().get(get_sun())._stop_want == 7200
+    assert creg_weekday_ideaunits().get(get_mon())._stop_want == 8640
+    assert creg_weekday_ideaunits().get(get_tue())._stop_want == 10080
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_days():
@@ -210,22 +169,6 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     assert not weeks_idea._morph
 
 
-def test_get_year_road_ReturnsObj():
-    # ESTABLISH
-    sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
-    c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
-
-    # WHEN / THEN
-    assert year_road == get_year_road(sue_budunit, creg_road)
-
-
 def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap_road():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
@@ -297,18 +240,18 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     assert not sue_budunit.idea_exists(creg_road)
     assert not sue_budunit.idea_exists(year_road)
 
-    jan_road = sue_budunit.make_road(year_road, jan_str())
-    feb_road = sue_budunit.make_road(year_road, feb_str())
-    mar_road = sue_budunit.make_road(year_road, mar_str())
-    apr_road = sue_budunit.make_road(year_road, apr_str())
-    may_road = sue_budunit.make_road(year_road, may_str())
-    jun_road = sue_budunit.make_road(year_road, jun_str())
-    jul_road = sue_budunit.make_road(year_road, jul_str())
-    aug_road = sue_budunit.make_road(year_road, aug_str())
-    sep_road = sue_budunit.make_road(year_road, sep_str())
-    oct_road = sue_budunit.make_road(year_road, oct_str())
-    nov_road = sue_budunit.make_road(year_road, nov_str())
-    dec_road = sue_budunit.make_road(year_road, dec_str())
+    jan_road = sue_budunit.make_road(year_road, "jan")
+    feb_road = sue_budunit.make_road(year_road, "feb")
+    mar_road = sue_budunit.make_road(year_road, "mar")
+    apr_road = sue_budunit.make_road(year_road, "apr")
+    may_road = sue_budunit.make_road(year_road, "may")
+    jun_road = sue_budunit.make_road(year_road, "jun")
+    jul_road = sue_budunit.make_road(year_road, "jul")
+    aug_road = sue_budunit.make_road(year_road, "aug")
+    sep_road = sue_budunit.make_road(year_road, "sep")
+    oct_road = sue_budunit.make_road(year_road, "oct")
+    nov_road = sue_budunit.make_road(year_road, "nov")
+    dec_road = sue_budunit.make_road(year_road, "dec")
     assert not sue_budunit.idea_exists(jan_road)
     assert not sue_budunit.idea_exists(feb_road)
     assert not sue_budunit.idea_exists(mar_road)
@@ -797,6 +740,96 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_year_road)
 
 
+def test_get_creg_min_from_dt_ReturnsObj():
+    assert get_creg_min_from_dt(datetime(1938, 11, 10))
+    assert get_creg_min_from_dt(datetime(1, 1, 1)) == 440640
+    assert get_creg_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440
+    assert get_creg_min_from_dt(datetime(1938, 11, 10)) == 1019653920
+    # assert g_lw.get_time_dt_from_min(
+    #     min=g_lw.get_creg_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    # ) == datetime(2000, 1, 1, 0, 0)
+    assert get_creg_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
+    assert get_creg_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
+    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
+    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+
+    x_minutes = 1063817280
+    assert get_creg_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
+    x_next_day = x_minutes + 1440
+    assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+
+
+def test_get_timeline_min_difference_ReturnsObj():
+    # ESTABLISH
+    creg_config = get_creg_config()
+    cinco_config = get_cinco_config()
+
+    # WHEN
+    cinco_creg_diff = get_timeline_min_difference(cinco_config, creg_config)
+    creg_cinco_diff = get_timeline_min_difference(creg_config, cinco_config)
+
+    # THEN
+    c400_len = get_c400_constants().c400_leap_length
+    c400_8x = c400_len * 8
+    assert creg_cinco_diff == -c400_8x
+    assert cinco_creg_diff == c400_8x
+
+
+def test_get_creg_min_from_dt_ReturnsObj_get_cinco_min_from_dt_ReturnsObj(
+    graphics_bool,
+):
+    # ESTABLISH
+    mar1_2000_datetime = datetime(2000, 3, 1)
+
+    # WHEN
+    creg_mar1_2000_len = get_creg_min_from_dt(mar1_2000_datetime)
+    cinco_mar1_2000_len = get_cinco_min_from_dt(mar1_2000_datetime)
+
+    # THEN
+    creg_config = get_creg_config()
+    cinco_config = get_cinco_config()
+    cinco_creg_diff = get_timeline_min_difference(cinco_config, creg_config)
+    c400_len = get_c400_constants().c400_leap_length
+    assert creg_mar1_2000_len == c400_len * 5
+    assert cinco_mar1_2000_len == c400_len * 13
+    assert cinco_mar1_2000_len - creg_mar1_2000_len == c400_len * 8
+    assert cinco_mar1_2000_len - creg_mar1_2000_len == cinco_creg_diff
+
+    display_current_creg_cinco_min(graphics_bool)
+
+
+# def test_get_timeline_date_ReturnsObj():
+#     x_datetime = datetime(1938, 11, 10)
+# sue_bud = budunit_shop("Sue")
+# sue_bud = add_time_creg_ideaunit(sue_bud)
+
+# assert get_creg_min_from_dt(datetime(1938, 11, 10))
+# assert get_creg_min_from_dt(datetime(1, 1, 1)) == 440640
+# assert get_creg_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440
+# assert get_creg_min_from_dt(datetime(1938, 11, 10)) == 1019653920
+# # assert g_lw.get_time_dt_from_min(
+# #     min=g_lw.get_creg_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+# # ) == datetime(2000, 1, 1, 0, 0)
+# assert get_creg_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
+# assert get_creg_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
+# assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
+# assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+
+# x_minutes = 1063817280
+# assert get_creg_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
+# x_next_day = x_minutes + 1440
+# assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+
+# creg_jan1_min = get_creg_min_from_dt(datetime(2000, 1, 1, 0, 0))
+# cinco_jan1_min = get_cinco_min_from_dt(datetime(7200, 1, 1, 0, 0))
+# x_difference = cinco_jan1_min - creg_jan1_min
+# assert x_difference == 0
+# assert get_cinco_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
+# assert get_cinco_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
+# assert get_cinco_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
+# assert get_cinco_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+
+
 # def test_get_time_dt_from_min_WorksCorrectly():
 #     sue_bud = budunit_shop("Sue")
 #     sue_bud = add_time_creg_ideaunit(sue_bud)
@@ -831,261 +864,3 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
 #     _check_time_conversion_works_with_random_inputs()
 #     _check_time_conversion_works_with_random_inputs()
 #     _check_time_conversion_works_with_random_inputs()
-
-
-def cregtime_begin():
-    return cregtime_ideaunit()._begin
-
-
-def cregtime_close():
-    return cregtime_ideaunit()._close
-
-
-def sun_gogo_want():
-    return creg_weekday_ideaunits().get(get_sun())._gogo_want
-
-
-def mon_gogo_want():
-    return creg_weekday_ideaunits().get(get_mon())._gogo_want
-
-
-def tue_gogo_want():
-    return creg_weekday_ideaunits().get(get_tue())._gogo_want
-
-
-def wed_gogo_want():
-    return creg_weekday_ideaunits().get(get_wed())._gogo_want
-
-
-def thu_gogo_want():
-    return creg_weekday_ideaunits().get(get_thu())._gogo_want
-
-
-def fri_gogo_want():
-    return creg_weekday_ideaunits().get(get_fri())._gogo_want
-
-
-def sat_gogo_want():
-    return creg_weekday_ideaunits().get(get_sat())._gogo_want
-
-
-def sun_stop_want():
-    return creg_weekday_ideaunits().get(get_sun())._stop_want
-
-
-def mon_stop_want():
-    return creg_weekday_ideaunits().get(get_mon())._stop_want
-
-
-def tue_stop_want():
-    return creg_weekday_ideaunits().get(get_tue())._stop_want
-
-
-def wed_stop_want():
-    return creg_weekday_ideaunits().get(get_wed())._stop_want
-
-
-def thu_stop_want():
-    return creg_weekday_ideaunits().get(get_thu())._stop_want
-
-
-def fri_stop_want():
-    return creg_weekday_ideaunits().get(get_fri())._stop_want
-
-
-def sat_stop_want():
-    return creg_weekday_ideaunits().get(get_sat())._stop_want
-
-
-def c400_leap_num():
-    return stan_c400_leap_ideaunit()._denom
-
-
-def c400_clean_num():
-    return stan_c400_clean_ideaunit()._denom
-
-
-def c100_num():
-    return stan_c100_ideaunit()._denom
-
-
-def yr4_leap_num():
-    return stan_yr4_leap_ideaunit()._denom
-
-
-def yr4_clean_num():
-    return stan_yr4_clean_ideaunit()._denom
-
-
-def year_num():
-    return stan_year_ideaunit()._denom
-
-
-def mar_str() -> str:
-    return "mar"
-
-
-def apr_str() -> str:
-    return "apr"
-
-
-def may_str() -> str:
-    return "may"
-
-
-def jun_str() -> str:
-    return "jun"
-
-
-def jul_str() -> str:
-    return "jul"
-
-
-def aug_str() -> str:
-    return "aug"
-
-
-def sep_str() -> str:
-    return "sep"
-
-
-def oct_str() -> str:
-    return "oct"
-
-
-def nov_str() -> str:
-    return "nov"
-
-
-def dec_str() -> str:
-    return "dec"
-
-
-def jan_str() -> str:
-    return "jan"
-
-
-def feb_str() -> str:
-    return "feb"
-
-
-# def mar_gogo_want():    return 0
-# def apr_gogo_want():    return creg_months_list()[0][1] * 1440
-# def may_gogo_want():    return creg_months_list()[1][1] * 1440
-# def jun_gogo_want():    return creg_months_list()[2][1] * 1440
-# def jul_gogo_want():    return creg_months_list()[3][1] * 1440
-# def aug_gogo_want():    return creg_months_list()[4][1] * 1440
-# def sep_gogo_want():    return creg_months_list()[5][1] * 1440
-# def oct_gogo_want():    return creg_months_list()[6][1] * 1440
-# def nov_gogo_want():    return creg_months_list()[7][1] * 1440
-# def dec_gogo_want():    return creg_months_list()[8][1] * 1440
-# def jan_gogo_want():    return creg_months_list()[9][1] * 1440
-# def feb_gogo_want():    return creg_months_list()[10][1] * 1440
-# def mar_stop_want():    return creg_months_list()[0][1] * 1440
-# def apr_stop_want():    return creg_months_list()[1][1] * 1440
-# def may_stop_want():    return creg_months_list()[2][1] * 1440
-# def jun_stop_want():    return creg_months_list()[3][1] * 1440
-# def jul_stop_want():    return creg_months_list()[4][1] * 1440
-# def aug_stop_want():    return creg_months_list()[5][1] * 1440
-# def sep_stop_want():    return creg_months_list()[6][1] * 1440
-# def oct_stop_want():    return creg_months_list()[7][1] * 1440
-# def nov_stop_want():    return creg_months_list()[8][1] * 1440
-# def dec_stop_want():    return creg_months_list()[9][1] * 1440
-# def jan_stop_want():    return creg_months_list()[10][1] * 1440
-# def feb_stop_want():    return creg_months_list()[11][1] * 1440
-
-
-def mar_gogo_want():
-    return 0
-
-
-def apr_gogo_want():
-    return creg_months_list()[0][1] * day_length()
-
-
-def may_gogo_want():
-    return creg_months_list()[1][1] * day_length()
-
-
-def jun_gogo_want():
-    return creg_months_list()[2][1] * day_length()
-
-
-def jul_gogo_want():
-    return creg_months_list()[3][1] * day_length()
-
-
-def aug_gogo_want():
-    return creg_months_list()[4][1] * day_length()
-
-
-def sep_gogo_want():
-    return creg_months_list()[5][1] * day_length()
-
-
-def oct_gogo_want():
-    return creg_months_list()[6][1] * day_length()
-
-
-def nov_gogo_want():
-    return creg_months_list()[7][1] * day_length()
-
-
-def dec_gogo_want():
-    return creg_months_list()[8][1] * day_length()
-
-
-def jan_gogo_want():
-    return creg_months_list()[9][1] * day_length()
-
-
-def feb_gogo_want():
-    return creg_months_list()[10][1] * day_length()
-
-
-def mar_stop_want():
-    return creg_months_list()[0][1] * day_length()
-
-
-def apr_stop_want():
-    return creg_months_list()[1][1] * day_length()
-
-
-def may_stop_want():
-    return creg_months_list()[2][1] * day_length()
-
-
-def jun_stop_want():
-    return creg_months_list()[3][1] * day_length()
-
-
-def jul_stop_want():
-    return creg_months_list()[4][1] * day_length()
-
-
-def aug_stop_want():
-    return creg_months_list()[5][1] * day_length()
-
-
-def sep_stop_want():
-    return creg_months_list()[6][1] * day_length()
-
-
-def oct_stop_want():
-    return creg_months_list()[7][1] * day_length()
-
-
-def nov_stop_want():
-    return creg_months_list()[8][1] * day_length()
-
-
-def dec_stop_want():
-    return creg_months_list()[9][1] * day_length()
-
-
-def jan_stop_want():
-    return creg_months_list()[10][1] * day_length()
-
-
-def feb_stop_want():
-    return creg_months_list()[11][1] * day_length()

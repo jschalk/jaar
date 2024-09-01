@@ -29,7 +29,8 @@ def test_get_kids_in_range_GetsCorrectIdeas():
     assert len(mon_idea.get_kids_in_range(x_gogo=5, x_stop=5)) == 1
     assert len(mon_idea.get_kids_in_range(x_gogo=0, x_stop=61)) == 3
     assert len(mon_idea.get_kids_in_range(x_gogo=31, x_stop=31)) == 1
-    assert mon_idea.get_kids_in_range(x_gogo=31, x_stop=31)[0]._label == feb_text
+    assert set(mon_idea.get_kids_in_range(x_gogo=31, x_stop=31).keys()) == {feb_text}
+    assert list(mon_idea.get_kids_in_range(x_gogo=31, x_stop=31).values()) == [feb_idea]
 
 
 def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
