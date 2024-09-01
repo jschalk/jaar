@@ -61,16 +61,16 @@ def test_HubUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_text = "Yao"
     yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
-    five_int = 5
-    assert os_path_exists(yao_hubunit.atom_file_path(five_int)) is False
-    assert yao_hubunit.atom_file_exists(five_int) is False
+    four_int = 4
+    assert os_path_exists(yao_hubunit.atom_file_path(four_int)) is False
+    assert yao_hubunit.atom_file_exists(four_int) is False
 
     # WHEN
-    yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), five_int)
+    yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), four_int)
 
     # THEN
-    assert os_path_exists(yao_hubunit.atom_file_path(five_int))
-    assert yao_hubunit.atom_file_exists(five_int)
+    assert os_path_exists(yao_hubunit.atom_file_path(four_int))
+    assert yao_hubunit.atom_file_exists(four_int)
 
 
 def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):

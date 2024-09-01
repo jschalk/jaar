@@ -15,7 +15,6 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     slash_text = "/"
     x_fund_pool = 9000000
     pnine_float = 0.9
-    pfive_float = 0.5
     pfour_float = 0.4
     sue_hubunit = hubunit_shop(
         env_dir(),
@@ -24,8 +23,8 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
         econ_road=None,
         road_delimiter=slash_text,
         fund_pool=x_fund_pool,
-        fund_coin=pfive_float,
-        bit=pfive_float,
+        fund_coin=pnine_float,
+        bit=pnine_float,
         penny=pfour_float,
     )
 
