@@ -799,11 +799,9 @@ class IdeaUnit:
     ):
         for reason_base in self._reasonheirs.keys():
             if range_root_road := range_inheritors.get(reason_base):
-                all_roads = all_roadunits_between(range_root_road, reason_base)
-                all_ideas = []
-                for x_road in all_roads:
-                    x_idea = bud_idea_dict.get(x_road)
-                    all_ideas.append(x_idea)
+                all_ideas = all_ideas_between(
+                    bud_idea_dict, range_root_road, reason_base
+                )
                 self._create_factheir(all_ideas, range_root_road, reason_base)
 
     def _create_factheir(
@@ -1107,6 +1105,13 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True
     else:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else None
+
+
+def all_ideas_between(
+    bud_idea_dict: dict[RoadUnit, IdeaUnit], src_road: RoadUnit, dst_base: RoadUnit
+) -> list[IdeaUnit]:
+    all_roads = all_roadunits_between(src_road, dst_base)
+    return [bud_idea_dict.get(x_road) for x_road in all_roads]
 
 
 def ideas_calculated_range(

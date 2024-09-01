@@ -1,11 +1,4 @@
 from src.bud.bud import budunit_shop
-from src.chrono.examples.chrono_examples import (
-    get_creg_config,
-    get_squirt_config,
-    chrono_examples_dir,
-    get_example_timeline_config,
-    cinco_str,
-)
 from src.chrono.chrono import (
     C400Constants,
     get_c400_constants,
@@ -35,7 +28,16 @@ from src.chrono.chrono import (
     yr4_leap_str,
     yr4_clean_str,
 )
-from copy import deepcopy as copy_deepcopy
+from src.chrono.examples.chrono_examples import (
+    get_creg_config,
+    get_squirt_config,
+    chrono_examples_dir,
+    get_example_timeline_config,
+    cinco_str,
+    add_time_creg_ideaunit,
+    creg_str,
+    get_creg_min_from_dt,
+)
 
 
 def test_ChronoPoint_Exists():
@@ -72,25 +74,141 @@ def test_ChronoRange_Exists():
     x_chronorange = ChronoRange()
 
     # THEN
-    assert not x_chronorange.timeline_label
+    assert not x_chronorange.x_budunit
+    assert not x_chronorange.time_range_root_road
     assert not x_chronorange.copen
     assert not x_chronorange.cnigh
+    assert not x_chronorange._timeline_idea
+    assert not x_chronorange._copen_weekday
+    assert not x_chronorange._cnigh_weekday
+    assert not x_chronorange._copen_monthday
+    assert not x_chronorange._cnigh_monthday
+    assert not x_chronorange._copen_month
+    assert not x_chronorange._cnigh_month
+    assert not x_chronorange._copen_hour
+    assert not x_chronorange._cnigh_hour
+    assert not x_chronorange._copen_minute
+    assert not x_chronorange._cnigh_minute
 
 
 def test_ChronoRange_shop_ReturnsObj():
     # ESTABLISH
-    x_timeline_label = "fizz07"
+    x_time_range_root_road = "fizz07"
     x_timeline_min_copen = 890000
     x_timeline_min_cnigh = 5000000
+    sue_bud = budunit_shop("Sue")
 
     # WHEN
     x_chronorange = chronorange_shop(
-        timeline_label=x_timeline_label,
+        x_budunit=sue_bud,
+        time_range_root_road=x_time_range_root_road,
         copen=x_timeline_min_copen,
         cnigh=x_timeline_min_cnigh,
     )
 
     # THEN
-    assert x_chronorange.timeline_label == x_timeline_label
+    assert x_chronorange.x_budunit == sue_bud
+    assert x_chronorange.time_range_root_road == x_time_range_root_road
     assert x_chronorange.copen == x_timeline_min_copen
     assert x_chronorange.cnigh == x_timeline_min_cnigh
+
+
+def test_ChronoRange_set_timeline_idea_SetsAttr():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronorange = chronorange_shop(sue_bud, creg_road, 10000000, 10001440)
+    assert not x_chronorange._timeline_idea
+
+    # WHEN
+    x_chronorange._set_timeline_idea()
+
+    # THEN
+    assert x_chronorange._timeline_idea
+
+
+def test_ChronoRange_set_weekday_SetsAttr():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronorange = chronorange_shop(sue_bud, creg_road, 10000000, 10001440)
+    x_chronorange._set_timeline_idea()
+    assert not x_chronorange._copen_weekday
+    assert not x_chronorange._cnigh_weekday
+
+    # WHEN
+    x_chronorange._set_weekday()
+
+    # THEN
+    assert x_chronorange._copen_weekday == "Wednesday"
+    assert x_chronorange._cnigh_weekday == "Thursday"
+
+
+def test_ChronoRange_set_month_SetsAttr():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronorange = chronorange_shop(sue_bud, creg_road, 10000000, 10060000)
+    x_chronorange._set_timeline_idea()
+    assert not x_chronorange._copen_month
+    assert not x_chronorange._cnigh_month
+
+    # WHEN
+    x_chronorange._set_month()
+
+    # THEN
+    assert x_chronorange._copen_month == "mar"
+    assert x_chronorange._cnigh_month == "apr"
+
+
+def test_ChronoRange_set_hour_SetsAttr():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronorange = chronorange_shop(sue_bud, creg_road, 10000000, 10000060)
+    x_chronorange._set_timeline_idea()
+    assert not x_chronorange._copen_hour
+    assert not x_chronorange._copen_hour
+
+    # WHEN
+    x_chronorange._set_hour()
+
+    # THEN
+    assert x_chronorange._copen_hour == "10-10am"
+    assert x_chronorange._cnigh_hour == "11-11am"
+
+
+def test_ChronoRange_set_monthday_SetsAttr():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronorange = chronorange_shop(sue_bud, creg_road, 10000000, 100001440)
+    x_chronorange._set_timeline_idea()
+    assert not x_chronorange._copen_monthday
+    assert not x_chronorange._cnigh_monthday
+
+    # WHEN
+    x_chronorange._set_monthday()
+
+    # THEN
+    assert x_chronorange._copen_monthday == 13
+    assert x_chronorange._cnigh_monthday == 14
+
+
+def test_ChronoRange_set_minute_SetsAttr():
+    assert 1 == 2

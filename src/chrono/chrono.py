@@ -1,7 +1,12 @@
 from src._instrument.python_tool import get_0_if_None, get_dict_from_json
 from src._instrument.file import open_file
-from src._road.road import RoadUnit
-from src.bud.idea import ideaunit_shop, IdeaUnit, ideas_calculated_range
+from src._road.road import RoadUnit, RoadNode
+from src.bud.idea import (
+    ideaunit_shop,
+    IdeaUnit,
+    ideas_calculated_range,
+    all_ideas_between,
+)
 from src.bud.bud import BudUnit
 from datetime import datetime
 from dataclasses import dataclass
@@ -379,15 +384,15 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 @dataclass
 class ChronoPoint:
     timeline_min: int = None
-    weekday_label: RoadUnit = None
-    month_label: RoadUnit = None
+    weekday_label: RoadNode = None
+    month_label: RoadNode = None
     monthday_num: int = None
     c400_leap_count: int = None
     c100_count: int = None
     yr4_leap_count: int = None
     yr_count: int = None
     year_num: int = None
-    hour_label: RoadUnit = None
+    hour_label: RoadNode = None
     minute_num: int = None
 
 
@@ -397,10 +402,72 @@ def chronopoint_shop(timeline_min: int):
 
 @dataclass
 class ChronoRange:
-    timeline_label: RoadUnit = None
+    x_budunit: BudUnit = None
+    time_range_root_road: RoadUnit = None
     copen: int = None
     cnigh: int = None
+    # calculated fields
+    _timeline_idea: IdeaUnit = None
+    _copen_weekday: str = None
+    _cnigh_weekday: str = None
+    _copen_monthday: str = None
+    _cnigh_monthday: str = None
+    _copen_month: str = None
+    _cnigh_month: str = None
+    _copen_hour: str = None
+    _cnigh_hour: str = None
+    _copen_minute: str = None
+    _cnigh_minute: str = None
+
+    def _set_timeline_idea(self):
+        self._timeline_idea = self.x_budunit.get_idea_obj(self.time_range_root_road)
+
+    def _set_weekday(self):
+        week_road = get_week_road(self.x_budunit, self.time_range_root_road)
+        week_idea = self.x_budunit.get_idea_obj(week_road)
+        x_idea_list = [self._timeline_idea, week_idea]
+        x_rangeunit = ideas_calculated_range(x_idea_list, self.copen, self.cnigh)
+        gogo_weekday_dict = week_idea.get_kids_in_range(x_rangeunit.gogo)
+        stop_weekday_dict = week_idea.get_kids_in_range(x_rangeunit.stop)
+        for x_weekday in gogo_weekday_dict.keys():
+            self._copen_weekday = x_weekday
+        for x_weekday in stop_weekday_dict.keys():
+            self._cnigh_weekday = x_weekday
+
+    def _set_monthday(self):
+        pass
+
+    def _set_month(self):
+        year_road = get_year_road(self.x_budunit, self.time_range_root_road)
+        year_idea = self.x_budunit.get_idea_obj(year_road)
+        x_idea_dict = self.x_budunit._idea_dict
+        idea_list = all_ideas_between(x_idea_dict, self.time_range_root_road, year_road)
+        print(f"{len(idea_list)=}")
+        x_rangeunit = ideas_calculated_range(idea_list, self.copen, self.cnigh)
+        gogo_month_dict = year_idea.get_kids_in_range(x_rangeunit.gogo)
+        stop_month_dict = year_idea.get_kids_in_range(x_rangeunit.stop)
+        for x_month in gogo_month_dict.keys():
+            self._copen_month = x_month
+        for x_month in stop_month_dict.keys():
+            self._cnigh_month = x_month
+
+    def _set_hour(self):
+        day_road = get_day_road(self.x_budunit, self.time_range_root_road)
+        day_idea = self.x_budunit.get_idea_obj(day_road)
+        x_idea_list = [self._timeline_idea, day_idea]
+        x_rangeunit = ideas_calculated_range(x_idea_list, self.copen, self.cnigh)
+        gogo_hour_dict = day_idea.get_kids_in_range(x_rangeunit.gogo)
+        stop_hour_dict = day_idea.get_kids_in_range(x_rangeunit.stop)
+        for x_hour in gogo_hour_dict.keys():
+            self._copen_hour = x_hour
+        for x_hour in stop_hour_dict.keys():
+            self._cnigh_hour = x_hour
+
+    def _set_minute(self):
+        return ""
 
 
-def chronorange_shop(timeline_label: str, copen: int, cnigh: int):
-    return ChronoRange(timeline_label=timeline_label, copen=copen, cnigh=cnigh)
+def chronorange_shop(
+    x_budunit: BudUnit, time_range_root_road: str, copen: int, cnigh: int
+):
+    return ChronoRange(x_budunit, time_range_root_road, copen=copen, cnigh=cnigh)

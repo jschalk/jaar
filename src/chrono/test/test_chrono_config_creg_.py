@@ -1,7 +1,27 @@
+from src._instrument.python_tool import conditional_fig_show
 from src.bud.group import awardlink_shop
 from src.bud.reason_idea import reasonunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
+from src.chrono.chrono import (
+    time_str,
+    year_str,
+    get_year_road,
+    day_str,
+    days_str,
+    c400_leap_str,
+    c400_clean_str,
+    c100_str,
+    yr4_leap_str,
+    yr4_clean_str,
+    year_str,
+    hour_str,
+    weeks_str,
+    week_str,
+    get_c400_constants,
+    get_timeline_min_difference,
+    yr1_jan1_offset_text,
+)
 from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
     add_time_cinco_ideaunit,
@@ -22,25 +42,7 @@ from src.chrono.examples.chrono_examples import (
     cinco_str,
     get_creg_config,
     get_cinco_config,
-)
-from src.chrono.chrono import (
-    time_str,
-    year_str,
-    get_year_road,
-    day_str,
-    days_str,
-    c400_leap_str,
-    c400_clean_str,
-    c100_str,
-    yr4_leap_str,
-    yr4_clean_str,
-    year_str,
-    hour_str,
-    weeks_str,
-    week_str,
-    get_c400_constants,
-    get_timeline_min_difference,
-    yr1_jan1_offset_text,
+    display_current_creg_cinco_min,
 )
 from datetime import datetime
 
@@ -773,7 +775,9 @@ def test_get_timeline_min_difference_ReturnsObj():
     assert cinco_creg_diff == c400_8x
 
 
-def test_get_creg_min_from_dt_ReturnsObj_get_cinco_min_from_dt_ReturnsObj():
+def test_get_creg_min_from_dt_ReturnsObj_get_cinco_min_from_dt_ReturnsObj(
+    graphics_bool,
+):
     # ESTABLISH
     mar1_2000_datetime = datetime(2000, 3, 1)
 
@@ -790,6 +794,8 @@ def test_get_creg_min_from_dt_ReturnsObj_get_cinco_min_from_dt_ReturnsObj():
     assert cinco_mar1_2000_len == c400_len * 13
     assert cinco_mar1_2000_len - creg_mar1_2000_len == c400_len * 8
     assert cinco_mar1_2000_len - creg_mar1_2000_len == cinco_creg_diff
+
+    display_current_creg_cinco_min(graphics_bool)
 
 
 # def test_get_timeline_date_ReturnsObj():

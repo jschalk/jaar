@@ -1,5 +1,5 @@
 from src._instrument.file import open_file
-from src._instrument.python_tool import get_dict_from_json
+from src._instrument.python_tool import get_dict_from_json, conditional_fig_show
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit
 from src.chrono.chrono import (
@@ -15,6 +15,7 @@ from src.chrono.chrono import (
     c400_config_text,
 )
 from datetime import datetime
+from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
 def chrono_examples_dir() -> str:
@@ -113,3 +114,30 @@ def get_creg_min_from_dt(dt: datetime) -> int:
 
 def get_cinco_min_from_dt(dt: datetime) -> int:
     return get_time_min_from_dt(dt, get_cinco_config().get(yr1_jan1_offset_text()))
+
+
+def display_current_creg_cinco_min(graphics_bool: bool):
+    current_datetime = datetime.now()
+    current_creg = get_creg_min_from_dt(current_datetime)
+    current_cinco = get_cinco_min_from_dt(current_datetime)
+
+    curr_text = f"year: {current_datetime.year}"
+    curr_text += f", month: {current_datetime.month}"
+    curr_text += f", day: {current_datetime.day}"
+    curr_text += f", hour: {current_datetime.hour}"
+    curr_text += f", minute: {current_datetime.minute}"
+    curr_text = f"<b>{curr_text}</b>"
+    creg_min_text = f"<b>creg timeline min: {current_creg}</b>"
+    cinco_min_text = f"<b>cinco timeline min: {current_cinco}</b>"
+    curr_list = [curr_text, creg_min_text, cinco_min_text]
+    xp_list = [1, 1, 1]
+    yp_list = [3, 2, 1]
+
+    x_fig = plotly_Figure()
+    x_fig.update_xaxes(range=[-6, 8])
+    x_fig.update_yaxes(range=[0, 5])
+    x_font = dict(family="Courier New, monospace", size=45, color="RebeccaPurple")
+    x_fig.update_layout(font=x_font)
+    x1_scatter = plotly_Scatter(x=xp_list, y=yp_list, text=curr_list, mode="text")
+    x_fig.add_trace(x1_scatter)
+    conditional_fig_show(x_fig, graphics_bool)
