@@ -367,6 +367,15 @@ def get_time_min_from_dt(dt: datetime, yr1_jan1_offset: int) -> int:
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
 
 
+def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) -> int:
+    c400_len = get_c400_constants().c400_leap_length
+    c400_x0 = timeline_config0.get(c400_config_text())
+    c400_x1 = timeline_config1.get(c400_config_text())
+    offset_x0 = timeline_config0.get(yr1_jan1_offset_text())
+    offset_x1 = timeline_config1.get(yr1_jan1_offset_text())
+    return offset_x0 - offset_x1
+
+
 @dataclass
 class ChronoPoint:
     timeline_min: int = None

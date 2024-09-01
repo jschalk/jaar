@@ -6,6 +6,7 @@ from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
     add_time_cinco_ideaunit,
     get_creg_min_from_dt,
+    get_cinco_min_from_dt,
     get_cregtime_text,
     get_sun,
     get_mon,
@@ -19,6 +20,8 @@ from src.chrono.examples.chrono_examples import (
     creg_weekday_ideaunits,
     creg_str,
     cinco_str,
+    get_creg_config,
+    get_cinco_config,
 )
 from src.chrono.chrono import (
     time_str,
@@ -36,30 +39,26 @@ from src.chrono.chrono import (
     weeks_str,
     week_str,
     get_c400_constants,
+    get_timeline_min_difference,
+    yr1_jan1_offset_text,
 )
 from datetime import datetime
 
 
-def test_get_creg_min_from_dt_WorksCorrectly():
-    sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+def test_get_creg_config_ReturnsObj():
+    # ESTABLISH
+    creg_config = get_creg_config()
+    cinco_config = get_cinco_config()
 
-    assert get_creg_min_from_dt(datetime(1938, 11, 10))
-    assert get_creg_min_from_dt(datetime(1, 1, 1)) == 440640
-    assert get_creg_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440
-    assert get_creg_min_from_dt(datetime(1938, 11, 10)) == 1019653920
-    # assert g_lw.get_time_dt_from_min(
-    #     min=g_lw.get_creg_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
-    # ) == datetime(2000, 1, 1, 0, 0)
-    assert get_creg_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
-    assert get_creg_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
-    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
-    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+    # WHEN
+    creg_offset = creg_config.get(yr1_jan1_offset_text())
+    cinco_offset = cinco_config.get(yr1_jan1_offset_text())
 
-    x_minutes = 1063817280
-    assert get_creg_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
-    x_next_day = x_minutes + 1440
-    assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+    # THEN
+    assert creg_offset == 440640
+    assert cinco_offset == 1683478080
+    c400_len = get_c400_constants().c400_leap_length
+    assert cinco_offset == (c400_len * 8) + 440640
 
 
 def test_cregtime_ideaunit_ReturnsObj():
@@ -737,6 +736,60 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     # THEN
     assert sue_bud.idea_exists(cinco_year_road)
     assert sue_bud.idea_exists(creg_year_road)
+
+
+def test_get_creg_min_from_dt_ReturnsObj():
+    assert get_creg_min_from_dt(datetime(1938, 11, 10))
+    assert get_creg_min_from_dt(datetime(1, 1, 1)) == 440640
+    assert get_creg_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440
+    assert get_creg_min_from_dt(datetime(1938, 11, 10)) == 1019653920
+    # assert g_lw.get_time_dt_from_min(
+    #     min=g_lw.get_creg_min_from_dt(dt=datetime(2000, 1, 1, 0, 0))
+    # ) == datetime(2000, 1, 1, 0, 0)
+    assert get_creg_min_from_dt(datetime(800, 1, 1, 0, 0)) == 420672960
+    assert get_creg_min_from_dt(datetime(1200, 1, 1, 0, 0)) == 631052640
+    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 0)) == 631664640
+    assert get_creg_min_from_dt(datetime(1201, 3, 1, 0, 20)) == 631664660
+
+    x_minutes = 1063817280
+    assert get_creg_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
+    x_next_day = x_minutes + 1440
+    assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+
+
+def test_get_timeline_min_difference_ReturnsObj():
+    # ESTABLISH
+    creg_config = get_creg_config()
+    cinco_config = get_cinco_config()
+
+    # WHEN
+    cinco_creg_diff = get_timeline_min_difference(cinco_config, creg_config)
+    creg_cinco_diff = get_timeline_min_difference(creg_config, cinco_config)
+
+    # THEN
+    c400_len = get_c400_constants().c400_leap_length
+    c400_8x = c400_len * 8
+    assert creg_cinco_diff == -c400_8x
+    assert cinco_creg_diff == c400_8x
+
+
+def test_get_creg_min_from_dt_ReturnsObj_get_cinco_min_from_dt_ReturnsObj():
+    # ESTABLISH
+    mar1_2000_datetime = datetime(2000, 3, 1)
+
+    # WHEN
+    creg_mar1_2000_len = get_creg_min_from_dt(mar1_2000_datetime)
+    cinco_mar1_2000_len = get_cinco_min_from_dt(mar1_2000_datetime)
+
+    # THEN
+    creg_config = get_creg_config()
+    cinco_config = get_cinco_config()
+    cinco_creg_diff = get_timeline_min_difference(cinco_config, creg_config)
+    c400_len = get_c400_constants().c400_leap_length
+    assert creg_mar1_2000_len == c400_len * 5
+    assert cinco_mar1_2000_len == c400_len * 13
+    assert cinco_mar1_2000_len - creg_mar1_2000_len == c400_len * 8
+    assert cinco_mar1_2000_len - creg_mar1_2000_len == cinco_creg_diff
 
 
 # def test_get_timeline_date_ReturnsObj():
