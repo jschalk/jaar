@@ -1,7 +1,7 @@
 from src._instrument.file import open_file
 from src._instrument.python_tool import get_dict_from_json, conditional_fig_show
 from src.bud.idea import IdeaUnit
-from src.bud.bud import BudUnit
+from src.bud.bud import BudUnit, budunit_shop
 from src.chrono.chrono import (
     create_weekday_ideaunits,
     add_newtimeline_ideaunit,
@@ -13,6 +13,7 @@ from src.chrono.chrono import (
     timeline_label_text,
     yr1_jan1_offset_text,
     c400_config_text,
+    chronounit_shop,
 )
 from datetime import datetime
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
@@ -117,27 +118,65 @@ def get_five_min_from_dt(dt: datetime) -> int:
 
 
 def display_current_creg_five_min(graphics_bool: bool):
-    current_datetime = datetime.now()
-    current_creg = get_creg_min_from_dt(current_datetime)
-    current_five = get_five_min_from_dt(current_datetime)
+    if graphics_bool:
+        current_datetime = datetime.now()
+        current_creg = get_creg_min_from_dt(current_datetime)
+        current_five = get_five_min_from_dt(current_datetime)
 
-    curr_text = f"year: {current_datetime.year}"
-    curr_text += f", month: {current_datetime.month}"
-    curr_text += f", day: {current_datetime.day}"
-    curr_text += f", hour: {current_datetime.hour}"
-    curr_text += f", minute: {current_datetime.minute}"
-    curr_text = f"<b>{curr_text}</b>"
-    creg_min_text = f"<b>creg timeline min: {current_creg}</b>"
-    five_min_text = f"<b>five timeline min: {current_five}</b>"
-    curr_list = [curr_text, creg_min_text, five_min_text]
-    xp_list = [1, 1, 1]
-    yp_list = [3, 2, 1]
+        curr_text = f"year: {current_datetime.year}"
+        curr_text += f", month: {current_datetime.month}"
+        curr_text += f", day: {current_datetime.day}"
+        curr_text += f", hour: {current_datetime.hour}"
+        curr_text += f", minute: {current_datetime.minute}"
+        curr_text = f"<b>{curr_text}</b>"
+        creg_min_text = f"<b>creg timeline min: {current_creg}</b>"
+        five_min_text = f"<b>five timeline min: {current_five}</b>"
+        curr_list = [curr_text, creg_min_text, five_min_text]
+        xp_list = [1, 1, 1]
+        yp_list = [3, 2, 1]
 
-    x_fig = plotly_Figure()
-    x_fig.update_xaxes(range=[-6, 8])
-    x_fig.update_yaxes(range=[0, 5])
-    x_font = dict(family="Courier New, monospace", size=45, color="RebeccaPurple")
-    x_fig.update_layout(font=x_font)
-    x1_scatter = plotly_Scatter(x=xp_list, y=yp_list, text=curr_list, mode="text")
-    x_fig.add_trace(x1_scatter)
-    conditional_fig_show(x_fig, graphics_bool)
+        x_fig = plotly_Figure()
+        x_fig.update_xaxes(range=[-6, 8])
+        x_fig.update_yaxes(range=[0, 5])
+        x_font = dict(family="Courier New, monospace", size=45, color="RebeccaPurple")
+        x_fig.update_layout(font=x_font)
+        x1_scatter = plotly_Scatter(x=xp_list, y=yp_list, text=curr_list, mode="text")
+        x_fig.add_trace(x1_scatter)
+        conditional_fig_show(x_fig, graphics_bool)
+
+
+def display_current_creg_five_time_attrs(graphics_bool: bool):
+    if graphics_bool:
+        current_datetime = datetime.now()
+        sue_bud = budunit_shop("Sue")
+        sue_bud = add_time_creg_ideaunit(sue_bud)
+        sue_bud = add_time_five_ideaunit(sue_bud)
+        time_road = sue_bud.make_l1_road("time")
+        creg_road = sue_bud.make_road(time_road, creg_str())
+        five_road = sue_bud.make_road(time_road, five_str())
+        creg_min = get_creg_min_from_dt(current_datetime)
+        five_min = get_five_min_from_dt(current_datetime)
+        creg_chronounit = chronounit_shop(sue_bud, creg_road, creg_min)
+        five_chronounit = chronounit_shop(sue_bud, five_road, five_min)
+        creg_chronounit.calc_timeline()
+        five_chronounit.calc_timeline()
+        creg_blurb = f"<b>{creg_chronounit.get_blurb()}</b>"
+        five_blurb = f"<b>{five_chronounit.get_blurb()}</b>"
+
+        datetime_str = current_datetime.strftime("%H:%M, %A, %d %m, %Y")
+        dt_text = f"python : {datetime_str}"
+        dt_text = f"<b>{dt_text}</b>"
+        creg_min_text = f"<b>creg timeline min: {creg_min}</b>"
+        five_min_text = f"<b>five timeline min: {five_min}</b>"
+        curr_list = [dt_text, creg_min_text, creg_blurb, five_min_text, five_blurb]
+        xp_list = [1, 1, 1, 1, 1]
+        yp_list = [7, 5, 4, 2, 1]
+
+        x_fig = plotly_Figure()
+        x_fig.update_xaxes(range=[-6, 8])
+        x_fig.update_yaxes(range=[0, 10])
+        x_font = dict(family="Courier New, monospace", size=45, color="RebeccaPurple")
+        x_fig.update_layout(font=x_font)
+        x1_scatter = plotly_Scatter(x=xp_list, y=yp_list, text=curr_list, mode="text")
+        x_fig.add_trace(x1_scatter)
+        conditional_fig_show(x_fig, graphics_bool)

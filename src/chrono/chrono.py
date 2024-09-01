@@ -424,6 +424,7 @@ class ChronoUnit:
 
         self._monthday = open_rangeunit.gogo - month_idea._gogo_calc
         self._monthday = self._monthday // 1440
+        self._monthday += 1
 
     def _set_hour(self):
         day_road = get_day_road(self.x_budunit, self.time_range_root_road)
@@ -476,11 +477,21 @@ class ChronoUnit:
         self._year_num += self._year_count
 
     def calc_timeline(self):
+        self.x_budunit.settle_bud()
         self._set_timeline_idea()
         self._set_weekday()
         self._set_month()
         self._set_hour()
         self._set_year()
+
+    def get_blurb(self) -> str:
+        x_text = f"{self._hour}"
+        x_text += f":{self._minute}"
+        x_text += f", {self._weekday}"
+        x_text += f", {self._monthday}"
+        x_text += f" {self._month}"
+        x_text += f", {self._year_num}"
+        return x_text
 
 
 def chronounit_shop(x_budunit: BudUnit, time_range_root_road: str, x_min: int):

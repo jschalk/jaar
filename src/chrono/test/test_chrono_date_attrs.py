@@ -1,41 +1,15 @@
 from src.bud.bud import budunit_shop
-from src.chrono.chrono import (
-    C400Constants,
-    get_c400_constants,
-    day_length,
-    hours_config_text,
-    weekdays_config_text,
-    months_config_text,
-    timeline_label_text,
-    c400_config_text,
-    yr1_jan1_offset_text,
-    validate_timeline_config,
-    create_timeline_config,
-    ChronoUnit,
-    chronounit_shop,
-    week_str,
-    year_str,
-    day_str,
-    get_year_road,
-    get_week_road,
-    get_day_road,
-    time_str,
-    c400_leap_str,
-    c400_clean_str,
-    c100_str,
-    yr4_leap_str,
-    yr4_clean_str,
-)
+from src.chrono.chrono import ChronoUnit, chronounit_shop
 from src.chrono.examples.chrono_examples import (
-    get_creg_config,
-    get_squirt_config,
-    chrono_examples_dir,
-    get_example_timeline_config,
     five_str,
     add_time_creg_ideaunit,
+    add_time_five_ideaunit,
     creg_str,
     get_creg_min_from_dt,
+    get_five_min_from_dt,
+    display_current_creg_five_time_attrs,
 )
+from datetime import datetime
 
 
 def test_ChronoUnit_Exists():
@@ -130,7 +104,7 @@ def test_ChronoUnit_set_month_SetsAttr():
 
     # THEN
     assert x_chronounit._month == "apr"
-    assert x_chronounit._monthday == 16
+    assert x_chronounit._monthday == 17
 
 
 def test_ChronoUnit_set_hour_SetsAttr():
@@ -185,7 +159,6 @@ def test_ChronoUnit_calc_timeline_SetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     sue_bud = add_time_creg_ideaunit(sue_bud)
-    sue_bud.settle_bud()
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 1030600102)
@@ -208,3 +181,79 @@ def test_ChronoUnit_calc_timeline_SetsAttrs():
     assert x_chronounit._hour
     assert x_chronounit._minute
     assert x_chronounit._year_num
+
+
+def test_ChronoUnit_get_blurb_ReturnsObj():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    x_chronounit = chronounit_shop(sue_bud, creg_road, 1030600102)
+    x_chronounit.calc_timeline()
+    assert x_chronounit._timeline_idea
+    assert x_chronounit._weekday
+    assert x_chronounit._monthday
+    assert x_chronounit._month
+    assert x_chronounit._hour
+    assert x_chronounit._minute
+    assert x_chronounit._year_num
+
+    # WHEN
+    timeline_blurb = x_chronounit.get_blurb()
+
+    # THEN
+    x_text = f"{x_chronounit._hour}"
+    x_text += f":{x_chronounit._minute}"
+    x_text += f", {x_chronounit._weekday}"
+    x_text += f", {x_chronounit._monthday}"
+    x_text += f" {x_chronounit._month}"
+    x_text += f", {x_chronounit._year_num}"
+    assert timeline_blurb == x_text
+
+
+def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_five_ideaunit(sue_bud)
+    time_road = sue_bud.make_l1_road("time")
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    five_road = sue_bud.make_road(time_road, five_str())
+    mar1_2000_datetime = datetime(2000, 3, 1)
+    creg_min = get_creg_min_from_dt(mar1_2000_datetime)
+    five_min = get_five_min_from_dt(mar1_2000_datetime)
+    creg_chronounit = chronounit_shop(sue_bud, creg_road, creg_min)
+    five_chronounit = chronounit_shop(sue_bud, five_road, five_min)
+    assert not creg_chronounit._weekday
+    assert not creg_chronounit._monthday
+    assert not creg_chronounit._month
+    assert not creg_chronounit._hour
+    assert not creg_chronounit._minute
+    assert not creg_chronounit._year_num
+    assert not five_chronounit._weekday
+    assert not five_chronounit._monthday
+    assert not five_chronounit._month
+    assert not five_chronounit._hour
+    assert not five_chronounit._minute
+    assert not five_chronounit._year_num
+
+    # WHEN
+    creg_chronounit.calc_timeline()
+    five_chronounit.calc_timeline()
+
+    # THEN
+    assert creg_chronounit._weekday == "Wednesday"
+    assert creg_chronounit._month == "mar"
+    assert creg_chronounit._monthday == 1
+    assert creg_chronounit._hour == "0-12am"
+    assert creg_chronounit._minute == 0
+    assert creg_chronounit._year_num == 2000
+    assert five_chronounit._weekday == "Bioday"
+    assert five_chronounit._monthday == 1
+    assert five_chronounit._month == "Annita"
+    assert five_chronounit._hour == "0hr"
+    assert five_chronounit._minute == 0
+    assert five_chronounit._year_num == 5200
+
+    display_current_creg_five_time_attrs(graphics_bool)
