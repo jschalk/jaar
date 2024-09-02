@@ -1,4 +1,4 @@
-from src.bud.bud import budunit_shop
+from src.bud.bud import BudUnit, budunit_shop
 from src.chrono.chrono import ChronoUnit, chronounit_shop
 from src.chrono.examples.chrono_examples import (
     five_str,
@@ -103,8 +103,8 @@ def test_ChronoUnit_set_month_SetsAttr():
     x_chronounit._set_month()
 
     # THEN
-    assert x_chronounit._month == "apr"
-    assert x_chronounit._monthday == 17
+    assert x_chronounit._month == "April"
+    assert x_chronounit._monthday == 16
 
 
 def test_ChronoUnit_set_hour_SetsAttr():
@@ -244,16 +244,66 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
 
     # THEN
     assert creg_chronounit._weekday == "Wednesday"
-    assert creg_chronounit._month == "mar"
-    assert creg_chronounit._monthday == 1
+    assert creg_chronounit._month == "March"
+    assert creg_chronounit._monthday == 0
     assert creg_chronounit._hour == "0-12am"
     assert creg_chronounit._minute == 0
     assert creg_chronounit._year_num == 2000
     assert five_chronounit._weekday == "Bioday"
-    assert five_chronounit._monthday == 1
+    assert five_chronounit._monthday == 0
     assert five_chronounit._month == "Annita"
     assert five_chronounit._hour == "0hr"
     assert five_chronounit._minute == 0
     assert five_chronounit._year_num == 5200
 
     display_current_creg_five_time_attrs(graphics_bool)
+
+
+def check_creg_timeline_attr(x_bud: BudUnit, x_datetime: datetime):
+    time_road = x_bud.make_l1_road("time")
+    creg_road = x_bud.make_road(time_road, creg_str())
+    creg_min = get_creg_min_from_dt(x_datetime)
+    creg_chronounit = chronounit_shop(x_bud, creg_road, creg_min)
+    creg_chronounit.calc_timeline()
+    dt_hour = x_datetime.strftime("%H")
+    dt_minute = x_datetime.strftime("%M")
+    dt_weekday = x_datetime.strftime("%A")
+    dt_month = x_datetime.strftime("%B")
+    dt_monthday = x_datetime.strftime("%d")
+    dt_year = x_datetime.strftime("%Y")
+    hour_text = ""
+    hour_int = int(dt_hour)
+    if hour_int == 0:
+        hour_text = f"{hour_int}-12am"
+    elif hour_int < 12:
+        hour_text = f"{hour_int}-{hour_int}am"
+    elif hour_int == 12:
+        hour_text = f"{hour_int}-12pm"
+    else:
+        hour_text = f"{hour_int}-{hour_int%12}pm"
+    print(x_datetime.strftime("%H:%M, %A, %d %B, %Y"))
+    assert creg_chronounit._weekday == dt_weekday
+    assert creg_chronounit._month == dt_month
+    assert creg_chronounit._monthday == int(dt_monthday) - 1
+    assert creg_chronounit._hour == hour_text
+    assert creg_chronounit._minute == int(dt_minute)
+    assert creg_chronounit._year_num == int(dt_year)
+
+
+def test_check_creg_timeline():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    check_creg_timeline_attr(sue_bud, datetime(2000, 3, 1, 0, 21))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 3, 1, 3, 21))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 3, 1, 12, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 3, 1, 13, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 4, 1, 13, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 4, 20, 13, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 4, 28, 13, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 4, 29, 13, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 4, 30, 13, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 5, 1, 13, 00))
+    check_creg_timeline_attr(sue_bud, datetime(2000, 7, 1, 13, 56))
+    check_creg_timeline_attr(sue_bud, datetime(2003, 12, 28, 17, 56))
+    check_creg_timeline_attr(sue_bud, datetime(432, 3, 4, 2, 0))

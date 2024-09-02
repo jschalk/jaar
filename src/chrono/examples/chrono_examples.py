@@ -163,7 +163,7 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         creg_blurb = f"<b>{creg_chronounit.get_blurb()}</b>"
         five_blurb = f"<b>{five_chronounit.get_blurb()}</b>"
 
-        datetime_str = current_datetime.strftime("%H:%M, %A, %d %m, %Y")
+        datetime_str = current_datetime.strftime("%H:%M, %A, %d %B, %Y")
         dt_text = f"python : {datetime_str}"
         dt_text = f"<b>{dt_text}</b>"
         creg_min_text = f"<b>creg timeline min: {creg_min}</b>"

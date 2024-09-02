@@ -27,18 +27,18 @@
         ["23-11pm", 1440]
     ],
     "months_config": [
-        ["mar", 31],
-        ["apr", 59],
-        ["may", 90],
-        ["jun", 120],
-        ["jul", 151],
-        ["aug", 181],
-        ["sep", 212],
-        ["oct", 243],
-        ["nov", 273],
-        ["dec", 304],
-        ["jan", 334],
-        ["feb", 365]
+        ["March", 31],
+        ["April", 61],
+        ["May", 92],
+        ["June", 122],
+        ["July", 153],
+        ["August", 184],
+        ["September", 214],
+        ["October", 245],
+        ["November", 275],
+        ["December", 306],
+        ["January", 337],
+        ["Febuary", 365]
     ],
     "timeline_label": "creg",
     "weekdays_config": [
