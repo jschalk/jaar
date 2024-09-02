@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_idea_awardlink",
+    "atom_categorys": ["bud_idea_awardlink"],
     "attributes": {
         "give_force": {
             "column_order": 5

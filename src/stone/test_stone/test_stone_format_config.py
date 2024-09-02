@@ -79,7 +79,7 @@ def test_get_stoneref_ReturnsObj():
 
     # THEN
     assert x_stoneref.stone_name == stone_name_00001
-    assert x_stoneref.atom_category == bud_acctunit_text()
+    assert x_stoneref.atom_categorys == [bud_acctunit_text()]
     assert x_stoneref._stonecolumns != {}
     assert len(x_stoneref._stonecolumns) == 5
 

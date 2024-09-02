@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_idea_grouphold",
+    "atom_categorys": ["bud_idea_grouphold"],
     "attributes": {
         "group_id": {
             "column_order": 3,

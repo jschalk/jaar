@@ -1,5 +1,5 @@
 {
-    "atom_category": "budunit",
+    "atom_categorys": ["budunit"],
     "attributes": {
         "bit": {
             "column_order": 6

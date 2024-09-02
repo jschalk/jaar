@@ -59,8 +59,8 @@ def sort_order_str() -> str:
     return "sort_order"
 
 
-def atom_category_str() -> str:
-    return "atom_category"
+def atom_categorys_str() -> str:
+    return "atom_categorys"
 
 
 def attributes_str() -> str:
@@ -186,7 +186,7 @@ class StoneColumn:
 @dataclass
 class StoneRef:
     stone_name: str = None
-    atom_category: str = None
+    atom_categorys: str = None
     _stonecolumns: dict[str:StoneColumn] = None
 
     def set_stonecolumn(self, x_stonecolumn: StoneColumn):
@@ -201,9 +201,9 @@ class StoneRef:
         return self._stonecolumns.get(x_attribute_key)
 
 
-def stoneref_shop(x_stone_name: str, x_atom_category: str) -> StoneRef:
+def stoneref_shop(x_stone_name: str, x_atom_categorys: list[str]) -> StoneRef:
     return StoneRef(
-        stone_name=x_stone_name, atom_category=x_atom_category, _stonecolumns={}
+        stone_name=x_stone_name, atom_categorys=x_atom_categorys, _stonecolumns={}
     )
 
 
@@ -211,7 +211,7 @@ def get_stoneref(stone_name: str) -> StoneRef:
     stoneref_filename = get_json_filename(stone_name)
     stoneref_json = open_file(get_stone_formats_dir(), stoneref_filename)
     stoneref_dict = get_dict_from_json(stoneref_json)
-    x_stoneref = stoneref_shop(stone_name, stoneref_dict.get(atom_category_str()))
+    x_stoneref = stoneref_shop(stone_name, stoneref_dict.get(atom_categorys_str()))
     x_attributes_dict = stoneref_dict.get(attributes_str())
     x_stonecolumns = {}
     for x_key, x_stonecolumn in x_attributes_dict.items():
@@ -252,7 +252,7 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
 def _get_sorted_atom_insert_atomunits(
     x_changeunit: ChangeUnit, x_stoneref: StoneRef
 ) -> list[AtomUnit]:
-    category_set = {x_stoneref.atom_category}
+    category_set = set(x_stoneref.atom_categorys)
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     return filtered_change.get_category_sorted_atomunits_list()

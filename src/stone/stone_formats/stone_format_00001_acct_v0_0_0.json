@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_acctunit",
+    "atom_categorys": ["bud_acctunit"],
     "attributes": {
         "acct_id": {
             "column_order": 2,

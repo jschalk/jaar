@@ -11,7 +11,7 @@ from src.gift.atom_config import (
 )
 from src.stone.formatbuilder import create_categorys_stone_format_dict
 from src.stone.stone import (
-    atom_category_str,
+    atom_categorys_str,
     attributes_str,
     sort_order_str,
     get_stone_formats_dir,
@@ -28,7 +28,7 @@ def test_create_categorys_stone_format_dicts_ReturnObj():
     bud_ideaunit_filename = f"stone_format_00028_{bud_ideaunit_text()}_v0_0_0.json"
     assert categorys_stone_format_dict.get(bud_ideaunit_filename)
     bud_ideaunit_dict = categorys_stone_format_dict.get(bud_ideaunit_filename)
-    assert bud_ideaunit_dict.get(atom_category_str()) == bud_ideaunit_text()
+    assert bud_ideaunit_dict.get(atom_categorys_str()) == bud_ideaunit_text()
     assert bud_ideaunit_dict.get(attributes_str())
     bud_ideaunit_attributes = bud_ideaunit_dict.get(attributes_str())
     assert bud_ideaunit_attributes.get(real_id_str())

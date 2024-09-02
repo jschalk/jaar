@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_ideaunit",
+    "atom_categorys": ["bud_ideaunit"],
     "attributes": {
         "real_id": {"column_order": 0},
         "owner_id": {"column_order": 1},
