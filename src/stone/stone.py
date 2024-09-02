@@ -10,170 +10,29 @@ from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop, AtomUnit
 from src.gift.atom_config import (
-    budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
     bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
-    bud_idea_healerhold_text,
-    bud_idea_factunit_text,
     real_id_str,
     owner_id_str,
-    acct_id_str,
-    group_id_str,
-    acct_pool_str,
-    debtit_score_str,
-    credit_score_str,
-    debtit_vote_str,
-    credit_vote_str,
-    parent_road_str,
-    label_str,
-    mass_str,
     pledge_str,
-    begin_str,
-    close_str,
-    addin_str,
-    numor_str,
-    denom_str,
-    morph_str,
-    gogo_want_str,
-    stop_want_str,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
 from src.listen.hubunit import hubunit_shop
-from src.stone.examples.stone_env import src_stone_dir
+from src.stone.stone_config import (
+    get_stone_formats_dir,
+    atom_categorys_str,
+    attributes_str,
+    column_order_str,
+    sort_order_str,
+    stone_format_00001_acct_v0_0_0,
+    stone_format_00002_membership_v0_0_0,
+    stone_format_00003_ideaunit_v0_0_0,
+)
 from pandas import DataFrame, read_csv
 import csv
 from dataclasses import dataclass
-
-
-def column_order_str() -> str:
-    return "column_order"
-
-
-def sort_order_str() -> str:
-    return "sort_order"
-
-
-def atom_categorys_str() -> str:
-    return "atom_categorys"
-
-
-def attributes_str() -> str:
-    return "attributes"
-
-
-def must_be_roadnode_str() -> str:
-    return "must_be_RoadNode"
-
-
-def must_be_roadunit_str() -> str:
-    return "must_be_RoadUnit"
-
-
-def must_be_str() -> str:
-    return "must_be_str"
-
-
-def must_be_number_str() -> str:
-    return "must_be_number"
-
-
-def must_be_bool_str() -> str:
-    return "must_be_bool"
-
-
-def get_stone_formats_dir() -> str:
-    return f"{src_stone_dir()}/stone_formats"
-
-
-def stone_format_00001_acct_v0_0_0() -> str:
-    return "stone_format_00001_acct_v0_0_0"
-
-
-def stone_format_00002_membership_v0_0_0() -> str:
-    return "stone_format_00002_membership_v0_0_0"
-
-
-def stone_format_00003_ideaunit_v0_0_0() -> str:
-    return "stone_format_00003_ideaunit_v0_0_0"
-
-
-def stone_format_00019_ideaunit_v0_0_0() -> str:
-    return "stone_format_00019_ideaunit_v0_0_0"
-
-
-# def stone_format_00020_bud_acct_membership_v0_0_0()-> str: return "stone_format_00020_bud_acct_membership_v0_0_0"
-# def stone_format_00021_bud_acctunit_v0_0_0()-> str: return "stone_format_00021_bud_acctunit_v0_0_0"
-# def stone_format_00022_bud_idea_awardlink_v0_0_0()-> str: return "stone_format_00022_bud_idea_awardlink_v0_0_0"
-# def stone_format_00023_bud_idea_factunit_v0_0_0()-> str: return "stone_format_00023_bud_idea_factunit_v0_0_0"
-# def stone_format_00024_bud_idea_grouphold_v0_0_0()-> str: return "stone_format_00024_bud_idea_grouphold_v0_0_0"
-# def stone_format_00025_bud_idea_healerhold_v0_0_0()-> str: return "stone_format_00025_bud_idea_healerhold_v0_0_0"
-# def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0()-> str: return "stone_format_00026_bud_idea_reason_premiseunit_v0_0_0"
-# def stone_format_00027_bud_idea_reasonunit_v0_0_0()-> str: return "stone_format_00027_bud_idea_reasonunit_v0_0_0"
-# def stone_format_00028_bud_ideaunit_v0_0_0()-> str: return "stone_format_00028_bud_ideaunit_v0_0_0"
-# def stone_format_00029_budunit_v0_0_0()-> str: return "stone_format_00029_budunit_v0_0_0"
-def stone_format_00020_bud_acct_membership_v0_0_0() -> str:
-    return "stone_format_00020_bud_acct_membership_v0_0_0"
-
-
-def stone_format_00021_bud_acctunit_v0_0_0() -> str:
-    return "stone_format_00021_bud_acctunit_v0_0_0"
-
-
-def stone_format_00022_bud_idea_awardlink_v0_0_0() -> str:
-    return "stone_format_00022_bud_idea_awardlink_v0_0_0"
-
-
-def stone_format_00023_bud_idea_factunit_v0_0_0() -> str:
-    return "stone_format_00023_bud_idea_factunit_v0_0_0"
-
-
-def stone_format_00024_bud_idea_grouphold_v0_0_0() -> str:
-    return "stone_format_00024_bud_idea_grouphold_v0_0_0"
-
-
-def stone_format_00025_bud_idea_healerhold_v0_0_0() -> str:
-    return "stone_format_00025_bud_idea_healerhold_v0_0_0"
-
-
-def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0() -> str:
-    return "stone_format_00026_bud_idea_reason_premiseunit_v0_0_0"
-
-
-def stone_format_00027_bud_idea_reasonunit_v0_0_0() -> str:
-    return "stone_format_00027_bud_idea_reasonunit_v0_0_0"
-
-
-def stone_format_00028_bud_ideaunit_v0_0_0() -> str:
-    return "stone_format_00028_bud_ideaunit_v0_0_0"
-
-
-def stone_format_00029_budunit_v0_0_0() -> str:
-    return "stone_format_00029_budunit_v0_0_0"
-
-
-def get_stone_filenames() -> set[str]:
-    return {
-        stone_format_00001_acct_v0_0_0(),
-        stone_format_00002_membership_v0_0_0(),
-        stone_format_00003_ideaunit_v0_0_0(),
-        stone_format_00019_ideaunit_v0_0_0(),
-        stone_format_00020_bud_acct_membership_v0_0_0(),
-        stone_format_00021_bud_acctunit_v0_0_0(),
-        stone_format_00022_bud_idea_awardlink_v0_0_0(),
-        stone_format_00023_bud_idea_factunit_v0_0_0(),
-        stone_format_00024_bud_idea_grouphold_v0_0_0(),
-        stone_format_00025_bud_idea_healerhold_v0_0_0(),
-        stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
-        stone_format_00027_bud_idea_reasonunit_v0_0_0(),
-        stone_format_00028_bud_ideaunit_v0_0_0(),
-        stone_format_00029_budunit_v0_0_0(),
-    }
 
 
 @dataclass

@@ -19,23 +19,13 @@ from src.gift.atom_config import (
     credit_score_str,
     debtit_vote_str,
     credit_vote_str,
-    begin_str,
-    close_str,
-    addin_str,
-    numor_str,
-    denom_str,
-    morph_str,
-    gogo_want_str,
-    stop_want_str,
 )
-from src.stone.stone import (
+from src.stone.stone import create_stone_df, get_stoneref, save_stone_csv
+from src.stone.stone_config import (
     stone_format_00001_acct_v0_0_0,
     stone_format_00002_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00019_ideaunit_v0_0_0,
-    create_stone_df,
-    get_stoneref,
-    save_stone_csv,
 )
 from src.stone.examples.stone_env import (
     stone_examples_dir,
