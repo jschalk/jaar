@@ -27,10 +27,22 @@ from src.stone.stone import _generate_stone_dataframe, get_stoneref, _get_header
 from src.stone.stone_config import (
     get_stone_formats_dir,
     get_stone_filenames,
-    stone_format_00001_acct_v0_0_0,
+    get_stoneref_dict,
     stone_format_00002_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00019_ideaunit_v0_0_0,
+    stone_format_00020_bud_acct_membership_v0_0_0,
+    stone_format_00021_bud_acctunit_v0_0_0,
+    stone_format_00022_bud_idea_awardlink_v0_0_0,
+    stone_format_00023_bud_idea_factunit_v0_0_0,
+    stone_format_00024_bud_idea_grouphold_v0_0_0,
+    stone_format_00025_bud_idea_healerhold_v0_0_0,
+    stone_format_00026_bud_idea_reason_premiseunit_v0_0_0,
+    stone_format_00027_bud_idea_reasonunit_v0_0_0,
+    stone_format_00028_bud_ideaunit_v0_0_0,
+    stone_format_00029_budunit_v0_0_0,
+    get_stong_format_headers,
+    attributes_str,
 )
 from src.stone.examples.stone_env import src_stone_dir
 
@@ -43,7 +55,8 @@ def test_config_str_functions_ReturnObjs():
     assert credit_score_str() == "credit_score"
     assert debtit_vote_str() == "debtit_vote"
     assert credit_vote_str() == "credit_vote"
-    assert stone_format_00001_acct_v0_0_0() == "stone_format_00001_acct_v0_0_0"
+    x0021_stone = "stone_format_00021_bud_acctunit_v0_0_0"
+    assert stone_format_00021_bud_acctunit_v0_0_0() == x0021_stone
     x0002_stone = "stone_format_00002_membership_v0_0_0"
     assert stone_format_00002_membership_v0_0_0() == x0002_stone
     x0003_stone = "stone_format_00003_ideaunit_v0_0_0"
@@ -63,14 +76,14 @@ def test_get_stone_filenames_ReturnsCorrectObj():
     x_filenames = get_stone_filenames()
     # THEN
     print(f"{x_filenames=}")
-    assert stone_format_00001_acct_v0_0_0() in x_filenames
+    assert stone_format_00021_bud_acctunit_v0_0_0() in x_filenames
     assert stone_format_00002_membership_v0_0_0() in x_filenames
     assert stone_format_00003_ideaunit_v0_0_0() in x_filenames
 
 
 def test_get_stoneref_ReturnsObj():
     # ESTABLISH
-    stone_name_00001 = stone_format_00001_acct_v0_0_0()
+    stone_name_00001 = stone_format_00021_bud_acctunit_v0_0_0()
 
     # WHEN
     x_stoneref = get_stoneref(stone_name_00001)
@@ -84,26 +97,66 @@ def test_get_stoneref_ReturnsObj():
 
 def test_get_headers_list_ReturnsObj():
     # ESTABLISH / WHEN
-    format_00001_headers = _get_headers_list(stone_format_00001_acct_v0_0_0())
+    format_00021_headers = _get_headers_list(stone_format_00021_bud_acctunit_v0_0_0())
 
     # THEN
     # print(f"{format_00001_headers=}")
-    assert format_00001_headers == [
+    assert format_00021_headers == [
         real_id_str(),
         owner_id_str(),
         acct_id_str(),
-        "credit_score",
         "debtit_score",
+        "credit_score",
     ]
+
+
+def get_sorted_headers(stone_filename):
+    x_stoneref = get_stoneref_dict(stone_filename)
+    stone_attributes = sorted(x_stoneref.get(attributes_str()).keys())
+    x_text = "".join(f",{x_header}" for x_header in stone_attributes)
+    return x_text[1:]
+
+
+def test_get_sorted_headers_ReturnsObj():
+    # ESTABLISH / WHEN
+    headers = get_sorted_headers(stone_format_00021_bud_acctunit_v0_0_0())
+    # THEN
+    assert headers == "acct_id,credit_score,debtit_score,owner_id,real_id"
+
+    # ESTABLISH / WHEN
+    headers = get_sorted_headers(stone_format_00019_ideaunit_v0_0_0())
+    # THEN
+    idea_headers_text = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,real_id,stop_want"
+    assert headers == idea_headers_text
+
+
+def check_sorted_headers_exist(stone_format_filename: str):
+    sorted_headers = get_sorted_headers(stone_format_filename)
+    print(f"{stone_format_filename=} {sorted_headers=}")
+    assert get_stong_format_headers().get(sorted_headers) == stone_format_filename
+
+
+# def test_get_stong_format_headers_ReturnsObj():
+#     # ESTABLISH / WHEN
+#     x_headers = get_stong_format_headers()
+
+#     # THEN
+#     # print(f"{set(get_stong_format_headers().values())=}")
+#     assert set(get_stong_format_headers().values()) == get_stone_filenames()
+#     for x_stone_filename in get_stone_filenames():
+#         check_sorted_headers_exist(x_stone_filename)
+
+#     assert 1 == 2
 
 
 def test__generate_stone_dataframe_ReturnsCorrectObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
-    x_df = _generate_stone_dataframe(empty_d2, stone_format_00001_acct_v0_0_0())
+    x_df = _generate_stone_dataframe(empty_d2, stone_format_00021_bud_acctunit_v0_0_0())
     # THEN
-    assert list(x_df.columns) == _get_headers_list(stone_format_00001_acct_v0_0_0())
+    headers_list = _get_headers_list(stone_format_00021_bud_acctunit_v0_0_0())
+    assert list(x_df.columns) == headers_list
 
 
 def for_all_stones__generate_stone_dataframe():
@@ -137,9 +190,9 @@ def test_stone_FilesExist():
     assert len(stone_filenames) == len(get_stone_filenames())
 
 
-def test_get_stoneref_HasCorrectAttrs_stone_format_00001_acct_v0_0_0():
+def test_get_stoneref_HasCorrectAttrs_stone_format_00021_bud_acctunit_v0_0_0():
     # ESTABLISH
-    stone_name = stone_format_00001_acct_v0_0_0()
+    stone_name = stone_format_00021_bud_acctunit_v0_0_0()
 
     # WHEN
     format_00001_stoneref = get_stoneref(stone_name)
@@ -155,8 +208,8 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00001_acct_v0_0_0():
     assert real_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
     assert acct_id_stonecolumn.column_order == 2
-    assert credit_score_stonecolumn.column_order == 3
-    assert debtit_score_stonecolumn.column_order == 4
+    assert credit_score_stonecolumn.column_order == 4
+    assert debtit_score_stonecolumn.column_order == 3
 
 
 def test_get_stoneref_HasCorrectAttrs_stone_format_00002_membership_v0_0_0():

@@ -1,12 +1,10 @@
 from src._instrument.file import open_file, create_file_path
 from src._instrument.python_tool import (
-    get_dict_from_json,
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     create_filtered_csv_dict,
 )
 from src._road.road import RealID, OwnerID
-from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop, AtomUnit
 from src.gift.atom_config import (
@@ -22,6 +20,7 @@ from src.gift.gift import giftunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.stone.stone_config import (
     get_stone_formats_dir,
+    get_stoneref_dict,
     atom_categorys_str,
     attributes_str,
     column_order_str,
@@ -67,9 +66,7 @@ def stoneref_shop(x_stone_name: str, x_atom_categorys: list[str]) -> StoneRef:
 
 
 def get_stoneref(stone_name: str) -> StoneRef:
-    stoneref_filename = get_json_filename(stone_name)
-    stoneref_json = open_file(get_stone_formats_dir(), stoneref_filename)
-    stoneref_dict = get_dict_from_json(stoneref_json)
+    stoneref_dict = get_stoneref_dict(stone_name)
     x_stoneref = stoneref_shop(stone_name, stoneref_dict.get(atom_categorys_str()))
     x_attributes_dict = stoneref_dict.get(attributes_str())
     x_stonecolumns = {}
