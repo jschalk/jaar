@@ -162,5 +162,5 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse(
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s maximum number of Bud output evaluations transited to {max_tree_traverse_int}"
+    x_str = f"{sue_bud._owner_id}'s maximum number of Bud evaluations transited to {max_tree_traverse_int}"
     assert legible_list[0] == x_str

@@ -151,7 +151,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
         zia_bud.set_max_tree_traverse(x_int=zia_tree_traverse)
     assert (
         str(excinfo.value)
-        == "set_max_tree_traverse: input '1' must be number that is 2 or greater"
+        == "set_max_tree_traverse: '1' must be number that is 2 or greater"
     )
 
 
@@ -167,7 +167,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
         zia_bud.set_max_tree_traverse(x_int=zia_tree_traverse)
     assert (
         str(excinfo.value)
-        == f"set_max_tree_traverse: input '{zia_tree_traverse}' must be number that is 2 or greater"
+        == f"set_max_tree_traverse: '{zia_tree_traverse}' must be number that is 2 or greater"
     )
 
 

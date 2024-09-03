@@ -207,7 +207,7 @@ class BudUnit:
     def set_max_tree_traverse(self, x_int: int):
         if x_int < 2 or not float(x_int).is_integer():
             raise InvalidBudException(
-                f"set_max_tree_traverse: input '{x_int}' must be number that is 2 or greater"
+                f"set_max_tree_traverse: '{x_int}' must be number that is 2 or greater"
             )
         else:
             self._max_tree_traverse = x_int
@@ -722,7 +722,7 @@ class BudUnit:
         idea_iter_list = [self._idearoot]
         while idea_iter_list != []:
             listed_idea = idea_iter_list.pop()
-            # put all idea_children in idea list
+            # add all idea_children in idea list
             if listed_idea._kids is not None:
                 for idea_kid in listed_idea._kids.values():
                     idea_iter_list.append(idea_kid)

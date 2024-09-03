@@ -47,7 +47,7 @@ def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     acct_csv = acct_dataframe.to_csv(index=False)
 
     # WHEN
-    sue_acct_changeunit = create_changeunit(acct_csv, x_stonename=x_stone_name)
+    sue_acct_changeunit = create_changeunit(acct_csv)
 
     # THEN
     assert sue_acct_changeunit
@@ -103,7 +103,7 @@ def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     membership_csv = membership_dataframe.to_csv(index=False)
 
     # WHEN
-    membership_changunit = create_changeunit(membership_csv, x_stone_name)
+    membership_changunit = create_changeunit(membership_csv)
 
     # THEN
     assert membership_changunit
@@ -128,8 +128,8 @@ def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     yao_iowa_atomunit.set_arg(debtit_vote_str(), yao_iowa_debtit_vote)
     yao_ohio_atomunit.set_arg(debtit_vote_str(), yao_ohio_debtit_vote)
     bob_iowa_atomunit.set_atom_order()
-    print(f"{membership_changunit.get_ordered_atomunits()[2]=}")
-    print(f"{sue_iowa_atomunit=}")
+    # print(f"{membership_changunit.get_ordered_atomunits()[2]=}")
+    # print(f"{sue_iowa_atomunit=}")
     assert membership_changunit.get_ordered_atomunits()[0] == bob_iowa_atomunit
     assert membership_changunit.atomunit_exists(sue_iowa_atomunit)
     assert membership_changunit.atomunit_exists(bob_iowa_atomunit)
@@ -156,7 +156,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = create_changeunit(ideaunit_csv, x_stone_name)
+    ideaunit_changunit = create_changeunit(ideaunit_csv)
 
     # THEN
     casa_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())

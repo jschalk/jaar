@@ -3,6 +3,8 @@ from src._instrument.python_tool import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     create_filtered_csv_dict,
+    create_sorted_concatenated_str,
+    get_positional_dict,
 )
 from src._road.road import RealID, OwnerID
 from src.bud.bud import BudUnit
@@ -14,6 +16,7 @@ from src.gift.atom_config import (
     real_id_str,
     owner_id_str,
     pledge_str,
+    get_atom_args_python_types,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
@@ -28,6 +31,7 @@ from src.stone.stone_config import (
     stone_format_00020_bud_acct_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00021_bud_acctunit_v0_0_0,
+    get_stone_format_headers,
 )
 from pandas import DataFrame, read_csv
 import csv
@@ -163,10 +167,14 @@ def open_stone_csv(x_file_dir: str, x_filename: str) -> DataFrame:
     return read_csv(create_file_path(x_file_dir, x_filename))
 
 
-def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
-    x_changeunit = changeunit_shop()
+def create_changeunit(x_csv: str) -> ChangeUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
+    headers_str = create_sorted_concatenated_str(title_row)
+    x_stonename = get_stone_format_headers().get(headers_str)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
+    x_dict = get_positional_dict(title_row)
+
+    x_changeunit = changeunit_shop()
     for row in x_reader:
         if x_stonename == stone_format_00021_bud_acctunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
@@ -194,7 +202,7 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
     return x_changeunit
 
 
-def load_stone_csv(reals_dir: str, x_stonename: str, x_file_dir: str, x_filename: str):
+def load_stone_csv(reals_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
@@ -205,7 +213,7 @@ def load_stone_csv(reals_dir: str, x_stonename: str, x_file_dir: str, x_filename
 
     x_hubunit = hubunit_shop(reals_dir, real_id=x_real_id, owner_id=x_owner_id)
     x_hubunit.initialize_gift_voice_files()
-    x_changeunit = create_changeunit(x_csv, x_stonename)
+    x_changeunit = create_changeunit(x_csv)
     x_giftunit = giftunit_shop(x_owner_id, x_real_id)
     x_giftunit.set_changeunit(x_changeunit)
     x_hubunit.save_gift_file(x_giftunit)

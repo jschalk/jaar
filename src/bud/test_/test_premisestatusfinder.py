@@ -293,10 +293,7 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
 
 
 def test_PremiseStatusFinder_get_active_ReturnsCorrectObj(graphics_bool):
-    """Check scenarios PremiseUnit._active. Plotly graph can be used
-    to identify problems. Uncomment entire test once to visualize errors with
-    graphical output.
-    """
+    """Check scenarios PremiseUnit._active. Plotly graph can be used to identify problems."""
     # # Case A
     assert premisestatusfinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active()
 

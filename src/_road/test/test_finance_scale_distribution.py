@@ -224,7 +224,7 @@ def test_allot_missing_scale_RaisesErrorWhen_ledgerSummationIsNot_scale_number()
         )
     assert (
         str(excinfo.value)
-        == f"Summation of output allots '{correct_full_scale}' is not equal to scale '{wrong_full_scale}'."
+        == f"Summation of allots '{correct_full_scale}' is not equal to scale '{wrong_full_scale}'."
     )
 
 

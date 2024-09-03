@@ -7,6 +7,8 @@ from src.gift.atom_config import (
     is_category_ref,
     get_atom_config_dict,
     get_atom_args_category_mapping,
+    get_allowed_python_types,
+    get_atom_args_python_types,
     get_atom_order as q_order,
     set_mog,
     get_flattened_atom_table_build,
@@ -46,6 +48,7 @@ from src.gift.atom_config import (
     stop_want_str,
     base_str,
 )
+from copy import deepcopy as copy_deepcopy
 
 
 def test_budunit_text_ReturnsObj():
@@ -576,3 +579,128 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert bud_idea_grouphold_text() in road_categorys
     assert len(road_categorys) == 6
     assert len(x_atom_args_category_mapping) == 41
+
+
+def get_python_type(x_category: str, x_arg: str) -> str:
+    atom_config_dict = get_atom_config_dict()
+    category_dict = atom_config_dict.get(x_category)
+    optional_dict = category_dict.get(optional_args_text())
+    required_dict = category_dict.get(required_args_text())
+    arg_dict = {}
+    if optional_dict.get(x_arg):
+        arg_dict = category_dict.get(optional_args_text()).get(x_arg)
+    if required_dict.get(x_arg):
+        arg_dict = required_dict.get(x_arg)
+    return arg_dict.get(python_type_text())
+
+
+def test_get_python_type_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_python_type(bud_acctunit_text(), acct_id_str()) == "AcctID"
+    assert get_python_type(bud_ideaunit_text(), gogo_want_str()) == "float"
+
+
+def test_get_allowed_python_types_ReturnsObj():
+    # ESTABLISH
+    x_allowed_python_types = {
+        "RoadUnit",
+        "int",
+        "AcctID",
+        "GroupID",
+        "float",
+        "bool",
+        "RoadNode",
+        "str",
+    }
+
+    # WHEN / THEN
+    assert get_allowed_python_types() == x_allowed_python_types
+
+
+def test_get_atom_config_dict_ValidatePythonTypes():
+    # make sure all atom config python types are valid and repeated args are the same
+    # ESTABLISH WHEN / THEN
+    assert all_atom_config_python_types_are_valid(get_allowed_python_types())
+
+
+def all_atom_config_python_types_are_valid(allowed_python_types):
+    x_atom_args_category_mapping = get_atom_args_category_mapping()
+    for x_atom_arg, categorys in x_atom_args_category_mapping.items():
+        old_python_type = None
+        x_python_type = ""
+        for x_category in categorys:
+            x_python_type = get_python_type(x_category, x_atom_arg)
+            # print(f"{x_python_type=} {x_atom_arg=} {x_category=}")
+            if x_python_type not in allowed_python_types:
+                return False
+
+            if old_python_type is None:
+                old_python_type = x_python_type
+            # confirm each atom_arg has same data type in all categorys
+            print(f"{x_python_type=} {old_python_type=} {x_atom_arg=} {x_category=}")
+            if x_python_type != old_python_type:
+                return False
+            old_python_type = copy_deepcopy(x_python_type)
+    return True
+
+
+def all_atom_args_python_types_are_correct(x_python_types) -> bool:
+    x_atom_args_category_mapping = get_atom_args_category_mapping()
+    for x_atom_arg in x_python_types.keys():
+        x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
+        x_category = x_categorys[0]
+        x_python_type = get_python_type(x_category, x_atom_arg)
+        print(f"assert x_python_types.get({x_atom_arg} == {x_python_type}")
+        if x_python_types.get(x_atom_arg) != x_python_type:
+            return False
+    return True
+
+
+def test_get_atom_args_python_types_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_python_types = get_atom_args_python_types()
+
+    # THEN
+    assert all_atom_args_python_types_are_correct(x_python_types)
+    assert x_python_types.keys() == get_atom_args_category_mapping().keys()
+    assert x_python_types.get("credit_vote") == "int"
+    assert x_python_types.get("group_id") == "GroupID"
+    assert x_python_types.get("debtit_vote") == "int"
+    assert x_python_types.get("acct_id") == "AcctID"
+    assert x_python_types.get("debtit_score") == "int"
+    assert x_python_types.get("credit_score") == "int"
+    assert x_python_types.get("road") == "RoadUnit"
+    assert x_python_types.get("give_force") == "float"
+    assert x_python_types.get("take_force") == "float"
+    assert x_python_types.get("fopen") == "float"
+    assert x_python_types.get("fnigh") == "float"
+    assert x_python_types.get("base") == "RoadUnit"
+    assert x_python_types.get("pick") == "RoadUnit"
+    assert x_python_types.get("healer_id") == "GroupID"
+    assert x_python_types.get("open") == "float"
+    assert x_python_types.get("divisor") == "int"
+    assert x_python_types.get("nigh") == "float"
+    assert x_python_types.get("need") == "RoadUnit"
+    assert x_python_types.get("base_idea_active_requisite") == "bool"
+    assert x_python_types.get("label") == "RoadNode"
+    assert x_python_types.get("gogo_want") == "float"
+    assert x_python_types.get("close") == "float"
+    assert x_python_types.get("morph") == "bool"
+    assert x_python_types.get("begin") == "float"
+    assert x_python_types.get("denom") == "int"
+    assert x_python_types.get("pledge") == "bool"
+    assert x_python_types.get("mass") == "int"
+    assert x_python_types.get("addin") == "float"
+    assert x_python_types.get("parent_road") == "RoadUnit"
+    assert x_python_types.get("numor") == "int"
+    assert x_python_types.get("stop_want") == "float"
+    assert x_python_types.get("problem_bool") == "bool"
+    assert x_python_types.get("max_tree_traverse") == "int"
+    assert x_python_types.get("monetary_desc") == "str"
+    assert x_python_types.get("penny") == "float"
+    assert x_python_types.get("tally") == "int"
+    assert x_python_types.get("credor_respect") == "int"
+    assert x_python_types.get("debtor_respect") == "int"
+    assert x_python_types.get("fund_pool") == "float"
+    assert x_python_types.get("bit") == "float"
+    assert x_python_types.get("fund_coin") == "float"

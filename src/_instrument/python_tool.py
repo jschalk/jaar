@@ -94,10 +94,10 @@ def _sub_get_nested_value(x_dict: dict, x_keylist: list) -> any:
 
 def get_all_nondictionary_objs(x_dict: dict) -> dict[str : list[any]]:
     level1_keys = x_dict.keys()
-    output_dict = {}
+    z_dict = {}
     for level1_key in level1_keys:
-        output_dict[level1_key] = []
-        level1_list = output_dict.get(level1_key)
+        z_dict[level1_key] = []
+        level1_list = z_dict.get(level1_key)
         eval_items = list(x_dict.get(level1_key).values())
         while eval_items != []:
             eval_item = eval_items.pop(0)
@@ -105,7 +105,7 @@ def get_all_nondictionary_objs(x_dict: dict) -> dict[str : list[any]]:
                 eval_items.extend(eval_item.values())
             else:
                 level1_list.append(eval_item)
-    return output_dict
+    return z_dict
 
 
 def get_json_from_dict(dict_x: dict) -> str:
@@ -180,4 +180,19 @@ def create_filtered_csv_dict(
             real_owner_csv = real_owner_csv.replace("\r", "")
             place_obj_in_dict(x_dict, [real_id, owner_id], real_owner_csv)
 
+    return x_dict
+
+
+def create_sorted_concatenated_str(y_list: list[str]) -> str:
+    x_list = sorted(y_list)
+    x_text = "".join(f",{x_header}" for x_header in x_list)
+    return x_text[1:]
+
+
+def get_positional_dict(x_list: list[str]) -> dict[str, int]:
+    x_count = 0
+    x_dict = {}
+    for x_element in x_list:
+        x_dict[x_element] = x_count
+        x_count += 1
     return x_dict
