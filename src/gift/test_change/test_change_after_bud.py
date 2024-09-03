@@ -17,6 +17,7 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
+    healer_id_str,
     parent_road_str,
     label_str,
     base_idea_active_requisite_str,
@@ -1036,6 +1037,67 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_groupho
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
     assert after_ball_ideaunit._doerunit._groupholds == set()
+
+
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerhold():
+    # ESTABLISH
+    sue_text = "Sue"
+    before_sue_au = budunit_shop(sue_text)
+    yao_text = "Yao"
+    before_sue_au.add_acctunit(yao_text)
+    sports_text = "sports"
+    sports_road = before_sue_au.make_l1_road(sports_text)
+    ball_text = "basketball"
+    ball_road = before_sue_au.make_road(sports_road, ball_text)
+    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
+    before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
+    assert before_ball_ideaunit._healerhold._healer_ids == set()
+    assert not before_ball_ideaunit._healerhold.healer_id_exists(yao_text)
+
+    # WHEN
+    x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_insert())
+    x_atomunit.set_required_arg("road", ball_road)
+    x_atomunit.set_required_arg(healer_id_str(), yao_text)
+    print(f"{x_atomunit=}")
+    sue_changeunit = changeunit_shop()
+    sue_changeunit.set_atomunit(x_atomunit)
+    after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
+
+    # THEN
+    after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
+    assert after_ball_ideaunit._healerhold._healer_ids != set()
+    assert after_ball_ideaunit._healerhold.healer_id_exists(yao_text)
+
+
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerhold():
+    # ESTABLISH
+    sue_text = "Sue"
+    before_sue_au = budunit_shop(sue_text)
+    yao_text = "Yao"
+    before_sue_au.add_acctunit(yao_text)
+    sports_text = "sports"
+    sports_road = before_sue_au.make_l1_road(sports_text)
+    ball_text = "basketball"
+    ball_road = before_sue_au.make_road(sports_road, ball_text)
+    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
+    before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
+    before_ball_ideaunit._healerhold.set_healer_id(yao_text)
+    assert before_ball_ideaunit._healerhold._healer_ids != set()
+    assert before_ball_ideaunit._healerhold.healer_id_exists(yao_text)
+
+    # WHEN
+    x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_delete())
+    x_atomunit.set_required_arg("road", ball_road)
+    x_atomunit.set_required_arg(healer_id_str(), yao_text)
+    sue_changeunit = changeunit_shop()
+    sue_changeunit.set_atomunit(x_atomunit)
+    print(f"{before_sue_au.get_idea_obj(ball_road)._doerunit=}")
+    after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
+
+    # THEN
+    after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
+    assert after_ball_ideaunit._healerhold._healer_ids == set()
+    assert not after_ball_ideaunit._healerhold.healer_id_exists(yao_text)
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
