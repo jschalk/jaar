@@ -8,6 +8,7 @@ from src._instrument.python_tool import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     create_filtered_csv_dict,
+    get_positional_dict,
 )
 from pytest import raises as pytest_raises
 
@@ -356,3 +357,16 @@ def test_create_filtered_csv_dict_ReturnsObj_Scenario0():
     assert generated_sue_csv == static_sue_csv
     owner_id_csv_dict = {sue_text: static_sue_csv, bob_text: static_bob_csv}
     assert u_dict == {x_id: owner_id_csv_dict}
+
+
+def test_get_positional_dict_ReturnsObj():
+    # ESTABLISH
+    bob_text = "Bob"
+    sue_text = "Sue"
+    yao_text = "Yao"
+    x_list = [bob_text, sue_text, yao_text]
+
+    # WHEN / THEN
+    assert get_positional_dict([]) == {}
+    assert get_positional_dict([bob_text]) == {bob_text: 0}
+    assert get_positional_dict(x_list) == {bob_text: 0, sue_text: 1, yao_text: 2}
