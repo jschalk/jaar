@@ -227,7 +227,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         x_monetary_desc = f"{x_bud._owner_id}'s monetary_desc"
 
     if _max_tree_traverse_value is not None:
-        x_text = f"{x_bud._owner_id}'s maximum number of Bud output evaluations transited to {_max_tree_traverse_value}"
+        x_text = f"{x_bud._owner_id}'s maximum number of Bud evaluations transited to {_max_tree_traverse_value}"
         legible_list.append(x_text)
     if _monetary_desc_value is not None:
         x_text = (

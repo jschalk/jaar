@@ -166,11 +166,12 @@ def open_stone_csv(x_file_dir: str, x_filename: str) -> DataFrame:
 
 
 def create_changeunit(x_csv: str) -> ChangeUnit:
-    x_changeunit = changeunit_shop()
     title_row, headerless_csv = extract_csv_headers(x_csv)
     headers_str = create_sorted_concatenated_str(title_row)
     x_stonename = get_stone_format_headers().get(headers_str)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
+
+    x_changeunit = changeunit_shop()
     for row in x_reader:
         if x_stonename == stone_format_00021_bud_acctunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())

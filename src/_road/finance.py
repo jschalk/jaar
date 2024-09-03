@@ -162,7 +162,7 @@ def _allot_missing_scale(
     allot_sum = sum(ledger.values())
     if ledger != {} and allot_sum != scale_number:
         raise ValueError(
-            f"Summation of output allots '{allot_sum}' is not equal to scale '{scale_number}'."
+            f"Summation of allots '{allot_sum}' is not equal to scale '{scale_number}'."
         )
     return ledger
 
