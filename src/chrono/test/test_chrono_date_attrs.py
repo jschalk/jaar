@@ -8,6 +8,7 @@ from src.chrono.examples.chrono_examples import (
     get_creg_min_from_dt,
     get_five_min_from_dt,
     display_current_creg_five_time_attrs,
+    display_creg_five_squirt_time_attrs,
 )
 from datetime import datetime
 
@@ -257,6 +258,7 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     assert five_chronounit._year_num == 5200
 
     display_current_creg_five_time_attrs(graphics_bool)
+    display_creg_five_squirt_time_attrs(graphics_bool)
 
 
 def check_creg_timeline_attr(x_bud: BudUnit, x_datetime: datetime):
@@ -282,6 +284,8 @@ def check_creg_timeline_attr(x_bud: BudUnit, x_datetime: datetime):
     else:
         hour_text = f"{hour_int}-{hour_int%12}pm"
     print(x_datetime.strftime("%H:%M, %A, %d %B, %Y"))
+    if creg_chronounit._month in {"January", "February"}:
+        dt_year = int(dt_year) - 1
     assert creg_chronounit._weekday == dt_weekday
     assert creg_chronounit._month == dt_month
     assert creg_chronounit._monthday == int(dt_monthday) - 1
@@ -306,4 +310,5 @@ def test_check_creg_timeline():
     check_creg_timeline_attr(sue_bud, datetime(2000, 5, 1, 13, 00))
     check_creg_timeline_attr(sue_bud, datetime(2000, 7, 1, 13, 56))
     check_creg_timeline_attr(sue_bud, datetime(2003, 12, 28, 17, 56))
+    check_creg_timeline_attr(sue_bud, datetime(2003, 2, 28, 17, 56))
     check_creg_timeline_attr(sue_bud, datetime(432, 3, 4, 2, 0))

@@ -251,7 +251,7 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     assert year_idea._stop_calc == 525600
 
     jan_road = sue_budunit.make_road(year_road, "January")
-    feb_road = sue_budunit.make_road(year_road, "Febuary")
+    feb_road = sue_budunit.make_road(year_road, "February")
     mar_road = sue_budunit.make_road(year_road, "March")
     apr_road = sue_budunit.make_road(year_road, "April")
     may_road = sue_budunit.make_road(year_road, "May")

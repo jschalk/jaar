@@ -195,6 +195,7 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     timeline_months_list = timeline_config.get(months_config_text())
     timeline_hours_list = timeline_config.get(hours_config_text())
     timeline_wkdays_list = timeline_config.get(weekdays_config_text())
+    timeline_offset = timeline_config.get(yr1_jan1_offset_text())
 
     time_road = x_budunit.make_l1_road(time_str())
     new_road = x_budunit.make_road(time_road, timeline_label)
@@ -207,6 +208,8 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     add_ideaunits(x_budunit, new_road, create_week_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, week_road, create_weekday_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
+    offset_idea = ideaunit_shop(yr1_jan1_offset_text(), _addin=timeline_offset)
+    x_budunit.set_idea(offset_idea, new_road)
     return x_budunit
 
 
@@ -368,10 +371,19 @@ def _hour_config(hour_num, hours_count, hour_length) -> list[str, int]:
     return [hour_str, hour_stop]
 
 
-def get_time_min_from_dt(dt: datetime, yr1_jan1_offset: int) -> int:
+def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
     ce_src = datetime(1, 1, 1, 0, 0, 0, 0)
     min_time_difference = dt - ce_src
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
+
+
+def get_min_from_dt(
+    x_bud: BudUnit, timeline_road: RoadUnit, x_datetime: datetime
+) -> int:
+    offset_road = x_bud.make_road(timeline_road, yr1_jan1_offset_text())
+    offset_idea = x_bud.get_idea_obj(offset_road)
+    offset_amount = offset_idea._addin
+    return get_min_from_dt_offset(x_datetime, offset_amount)
 
 
 def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) -> int:

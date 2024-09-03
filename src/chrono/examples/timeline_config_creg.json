@@ -38,7 +38,7 @@
         ["November", 275],
         ["December", 306],
         ["January", 337],
-        ["Febuary", 365]
+        ["February", 365]
     ],
     "timeline_label": "creg",
     "weekdays_config": [

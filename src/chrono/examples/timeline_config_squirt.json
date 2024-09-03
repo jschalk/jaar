@@ -50,7 +50,7 @@
         ["paw_paws", 360],
         ["a_claw", 365]
     ],
-    "timeline_label": "sqruit",
+    "timeline_label": "squirt",
     "weekdays_config": [
         "Oneday",
         "Twoday",
@@ -58,5 +58,5 @@
         "FourDay",
         "FiveDay"
     ],
-    "yr1_jan1_offset": 440640
+    "yr1_jan1_offset": 1440000
 }

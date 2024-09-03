@@ -21,6 +21,7 @@ from src.chrono.chrono import (
     get_c400_constants,
     get_timeline_min_difference,
     yr1_jan1_offset_text,
+    get_min_from_dt,
 )
 from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
@@ -241,7 +242,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     assert not sue_budunit.idea_exists(year_road)
 
     jan_road = sue_budunit.make_road(year_road, "January")
-    feb_road = sue_budunit.make_road(year_road, "Febuary")
+    feb_road = sue_budunit.make_road(year_road, "February")
     mar_road = sue_budunit.make_road(year_road, "March")
     apr_road = sue_budunit.make_road(year_road, "April")
     may_road = sue_budunit.make_road(year_road, "May")
@@ -723,14 +724,20 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     time_road = sue_bud.make_l1_road(time_str())
     creg_road = sue_bud.make_road(time_road, creg_str())
     five_road = sue_bud.make_road(time_road, five_str())
+    creg_yr1_jan1_offset_road = sue_bud.make_road(creg_road, yr1_jan1_offset_text())
+    five_yr1_jan1_offset_road = sue_bud.make_road(five_road, yr1_jan1_offset_text())
     creg_year_road = get_year_road(sue_bud, creg_road)
     five_year_road = get_year_road(sue_bud, five_road)
     print(f"{creg_year_road=}")
     print(f"{five_year_road=}")
-    print(f"{sue_bud._idea_dict.keys()=}")
+    # print(f"{sue_bud._idea_dict.keys()=}")
 
     assert not sue_bud.idea_exists(five_year_road)
     assert sue_bud.idea_exists(creg_year_road)
+    assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
+    creg_offset_idea = sue_bud.get_idea_obj(creg_yr1_jan1_offset_road)
+    assert creg_offset_idea._addin == get_creg_config().get(yr1_jan1_offset_text())
+    assert not sue_bud.idea_exists(five_yr1_jan1_offset_road)
 
     # WHEN
     sue_bud = add_time_five_ideaunit(sue_bud)
@@ -738,6 +745,10 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     # THEN
     assert sue_bud.idea_exists(five_year_road)
     assert sue_bud.idea_exists(creg_year_road)
+    assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
+    assert sue_bud.idea_exists(five_yr1_jan1_offset_road)
+    five_offset_idea = sue_bud.get_idea_obj(five_yr1_jan1_offset_road)
+    assert five_offset_idea._addin == get_five_config().get(yr1_jan1_offset_text())
 
 
 def test_get_creg_min_from_dt_ReturnsObj():
@@ -757,6 +768,24 @@ def test_get_creg_min_from_dt_ReturnsObj():
     assert get_creg_min_from_dt(datetime(2022, 10, 29, 0, 0)) == x_minutes
     x_next_day = x_minutes + 1440
     assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
+
+
+def test_get_min_from_dt_ReturnsObj():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    x_datetime = datetime(2022, 10, 30, 0, 0)
+    time_road = sue_bud.make_l1_road(time_str())
+    creg_road = sue_bud.make_road(time_road, creg_str())
+
+    # WHEN
+    creg_min = get_min_from_dt(sue_bud, creg_road, x_datetime)
+
+    # THEN
+    print(f"                        {creg_min=}")
+    print(f"{get_creg_min_from_dt(x_datetime)=}")
+    assert creg_min == get_creg_min_from_dt(x_datetime)
 
 
 def test_get_timeline_min_difference_ReturnsObj():
