@@ -1,6 +1,7 @@
 from src._instrument.file import create_file_path as f_path
 from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.bud import budunit_shop
+from src.bud.examples.example_buds import budunit_v001
 from src.gift.atom_config import (
     real_id_str,
     owner_id_str,
@@ -127,14 +128,17 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     assert yao_acctunit.debtit_score == yao_debtit_score
 
 
-# def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
-#     # ESTABLISH / WHEN
-#     x_stone_name = stone_format_00003_ideaunit_v0_0_0()
+def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
+    big_volume,
+):
+    if big_volume:
+        # ESTABLISH / WHEN
+        x_stone_name = stone_format_00003_ideaunit_v0_0_0()
 
-#     # WHEN
-#     ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
+        # WHEN
+        ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
 
-#     # THEN
-#     array_headers = list(ideaunit_format.columns)
-#     assert array_headers == get_stoneref(x_stone_name).get_headers_list()
-#     assert len(ideaunit_format) == 252
+        # THEN
+        array_headers = list(ideaunit_format.columns)
+        assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+        assert len(ideaunit_format) == 251
