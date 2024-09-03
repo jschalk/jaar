@@ -7,6 +7,7 @@ from src.gift.atom_config import (
     is_category_ref,
     get_atom_config_dict,
     get_atom_args_category_mapping,
+    get_allowed_python_types,
     get_atom_args_python_types,
     get_atom_order as q_order,
     set_mog,
@@ -599,10 +600,9 @@ def test_get_python_type_ReturnsObj():
     assert get_python_type(bud_ideaunit_text(), gogo_want_str()) == "float"
 
 
-def test_get_atom_config_dict_ValidatePythonTypes():
-    # make sure all atom config python types are valid and repeated args are the same
+def test_get_allowed_python_types_ReturnsObj():
     # ESTABLISH
-    allowed_python_types = {
+    x_allowed_python_types = {
         "RoadUnit",
         "int",
         "AcctID",
@@ -614,7 +614,13 @@ def test_get_atom_config_dict_ValidatePythonTypes():
     }
 
     # WHEN / THEN
-    assert all_atom_config_python_types_are_valid(allowed_python_types)
+    assert get_allowed_python_types() == x_allowed_python_types
+
+
+def test_get_atom_config_dict_ValidatePythonTypes():
+    # make sure all atom config python types are valid and repeated args are the same
+    # ESTABLISH WHEN / THEN
+    assert all_atom_config_python_types_are_valid(get_allowed_python_types())
 
 
 def all_atom_config_python_types_are_valid(allowed_python_types):

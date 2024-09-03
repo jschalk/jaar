@@ -277,6 +277,19 @@ def get_atom_args_category_mapping() -> dict[str, set[str]]:
     return x_dict
 
 
+def get_allowed_python_types() -> set[str]:
+    return {
+        "RoadUnit",
+        "int",
+        "AcctID",
+        "GroupID",
+        "float",
+        "bool",
+        "RoadNode",
+        "str",
+    }
+
+
 def get_atom_args_python_types() -> dict[str, str]:
     return {
         "credit_vote": "int",

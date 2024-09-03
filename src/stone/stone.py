@@ -4,6 +4,7 @@ from src._instrument.python_tool import (
     get_csv_column1_column2_metrics,
     create_filtered_csv_dict,
     create_sorted_concatenated_str,
+    get_positional_dict,
 )
 from src._road.road import RealID, OwnerID
 from src.bud.bud import BudUnit
@@ -15,6 +16,7 @@ from src.gift.atom_config import (
     real_id_str,
     owner_id_str,
     pledge_str,
+    get_atom_args_python_types,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
@@ -170,6 +172,7 @@ def create_changeunit(x_csv: str) -> ChangeUnit:
     headers_str = create_sorted_concatenated_str(title_row)
     x_stonename = get_stone_format_headers().get(headers_str)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
+    x_dict = get_positional_dict(title_row)
 
     x_changeunit = changeunit_shop()
     for row in x_reader:
