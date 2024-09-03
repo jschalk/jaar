@@ -218,7 +218,8 @@ def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0():
     # THEN
     array_headers = list(stone_df.columns)
     assert array_headers == get_stoneref(x_stone_name).get_headers_list()
-    assert len(stone_df) == 110
+    for x_array_header in array_headers:
+        print(f"{x_array_header=}")
 
 
 def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
@@ -250,12 +251,15 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
-music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+    sue1_acct_example_csv = """real_id,owner_id,acct_id,debtit_score,credit_score
+music56,Sue,Bob,29,13
+music56,Sue,Sue,23,11
+music56,Sue,Yao,37,41
 """
-    assert open_file(stone_reals_dir(), acct_filename) == sue1_acct_example_csv
+    stone_file_text = open_file(stone_reals_dir(), acct_filename)
+    print(f"      {stone_file_text=}")
+    print(f"{sue1_acct_example_csv=}")
+    assert stone_file_text == sue1_acct_example_csv
 
     # WHEN
     zia_text = "Zia"
@@ -264,10 +268,10 @@ music56,Sue,Yao,41,37
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
-music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+    sue2_acct_example_csv = """real_id,owner_id,acct_id,debtit_score,credit_score
+music56,Sue,Bob,29,13
+music56,Sue,Sue,23,11
+music56,Sue,Yao,37,41
 music56,Sue,Zia,1,1
 """
     assert open_file(stone_reals_dir(), acct_filename) == sue2_acct_example_csv

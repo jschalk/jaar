@@ -25,9 +25,9 @@ from src.stone.stone_config import (
     attributes_str,
     column_order_str,
     sort_order_str,
-    stone_format_00001_acct_v0_0_0,
     stone_format_00002_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
+    stone_format_00021_bud_acctunit_v0_0_0,
 )
 from pandas import DataFrame, read_csv
 import csv
@@ -168,7 +168,7 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        if x_stonename == stone_format_00001_acct_v0_0_0():
+        if x_stonename == stone_format_00021_bud_acctunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], float(row[3]))
