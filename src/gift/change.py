@@ -26,6 +26,7 @@ from src.gift.atom_config import (
     budunit_text,
     acct_id_str,
     group_id_str,
+    healer_id_str,
     parent_road_str,
     label_str,
     pledge_str,
@@ -398,6 +399,10 @@ class ChangeUnit:
                 idea_road=insert_idea_road,
                 insert_grouphold_group_ids=insert_ideaunit._doerunit._groupholds,
             )
+            self.add_atomunit_idea_healerhold_insert(
+                idea_road=insert_idea_road,
+                insert_healerhold_healer_ids=insert_ideaunit._healerhold._healer_ids,
+            )
 
     def add_atomunit_idea_updates(
         self, before_bud: BudUnit, after_bud: BudUnit, update_roads: set
@@ -520,6 +525,22 @@ class ChangeUnit:
                 ),
             )
 
+            # insert / update / delete healerholds
+            before_healerholds_healer_ids = set(before_ideaunit._healerhold._healer_ids)
+            after_healerholds_healer_ids = set(after_ideaunit._healerhold._healer_ids)
+            self.add_atomunit_idea_healerhold_insert(
+                idea_road=idea_road,
+                insert_healerhold_healer_ids=after_healerholds_healer_ids.difference(
+                    before_healerholds_healer_ids
+                ),
+            )
+            self.add_atomunit_idea_healerhold_deletes(
+                idea_road=idea_road,
+                delete_healerhold_healer_ids=before_healerholds_healer_ids.difference(
+                    after_healerholds_healer_ids
+                ),
+            )
+
     def add_atomunit_idea_deletes(self, before_bud: BudUnit, delete_idea_roads: set):
         for delete_idea_road in delete_idea_roads:
             x_parent_road = get_parent_road(
@@ -548,6 +569,10 @@ class ChangeUnit:
             self.add_atomunit_idea_grouphold_deletes(
                 idea_road=delete_idea_road,
                 delete_grouphold_group_ids=delete_ideaunit._doerunit._groupholds,
+            )
+            self.add_atomunit_idea_healerhold_deletes(
+                idea_road=delete_idea_road,
+                delete_healerhold_healer_ids=delete_ideaunit._healerhold._healer_ids,
             )
 
     def add_atomunit_idea_reasonunit_inserts(
@@ -719,6 +744,24 @@ class ChangeUnit:
             x_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
             x_atomunit.set_required_arg(group_id_str(), delete_grouphold_group_id)
+            self.set_atomunit(x_atomunit)
+
+    def add_atomunit_idea_healerhold_insert(
+        self, idea_road: RoadUnit, insert_healerhold_healer_ids: set
+    ):
+        for insert_healerhold_healer_id in insert_healerhold_healer_ids:
+            x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_insert())
+            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(healer_id_str(), insert_healerhold_healer_id)
+            self.set_atomunit(x_atomunit)
+
+    def add_atomunit_idea_healerhold_deletes(
+        self, idea_road: RoadUnit, delete_healerhold_healer_ids: set
+    ):
+        for delete_healerhold_healer_id in delete_healerhold_healer_ids:
+            x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_delete())
+            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(healer_id_str(), delete_healerhold_healer_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_inserts(
