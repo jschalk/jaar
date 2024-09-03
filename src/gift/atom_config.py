@@ -277,6 +277,52 @@ def get_atom_args_category_mapping() -> dict[str, set[str]]:
     return x_dict
 
 
+def get_atom_args_python_types() -> dict[str, str]:
+    return {
+        "credit_vote": "int",
+        "group_id": "GroupID",
+        "debtit_vote": "int",
+        "acct_id": "AcctID",
+        "debtit_score": "int",
+        "credit_score": "int",
+        "road": "RoadUnit",
+        "give_force": "float",
+        "take_force": "float",
+        "fopen": "float",
+        "fnigh": "float",
+        "base": "RoadUnit",
+        "pick": "RoadUnit",
+        "healer_id": "GroupID",
+        "open": "float",
+        "divisor": "int",
+        "nigh": "float",
+        "need": "RoadUnit",
+        "base_idea_active_requisite": "bool",
+        "label": "RoadNode",
+        "gogo_want": "float",
+        "close": "float",
+        "morph": "bool",
+        "begin": "float",
+        "denom": "int",
+        "pledge": "bool",
+        "mass": "int",
+        "addin": "float",
+        "parent_road": "RoadUnit",
+        "numor": "int",
+        "stop_want": "float",
+        "problem_bool": "bool",
+        "max_tree_traverse": "int",
+        "monetary_desc": "str",
+        "penny": "float",
+        "tally": "int",
+        "credor_respect": "int",
+        "debtor_respect": "int",
+        "fund_pool": "float",
+        "bit": "float",
+        "fund_coin": "float",
+    }
+
+
 def get_sorted_required_arg_keys(atom_category: str) -> list[str]:
     atom_config = get_atom_config_dict()
     atom_category_config = atom_config.get(atom_category)
