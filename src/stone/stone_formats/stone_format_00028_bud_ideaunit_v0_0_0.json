@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_ideaunit",
+    "atom_categorys": ["bud_ideaunit"],
     "attributes": {
         "addin": {
             "column_order": 12

@@ -1,179 +1,37 @@
 from src._instrument.file import open_file, create_file_path
 from src._instrument.python_tool import (
-    get_dict_from_json,
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     create_filtered_csv_dict,
 )
 from src._road.road import RealID, OwnerID
-from src._road.jaar_config import get_json_filename
 from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop, AtomUnit
 from src.gift.atom_config import (
-    budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
     bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
-    bud_idea_healerhold_text,
-    bud_idea_factunit_text,
     real_id_str,
     owner_id_str,
-    acct_id_str,
-    group_id_str,
-    acct_pool_str,
-    debtit_score_str,
-    credit_score_str,
-    debtit_vote_str,
-    credit_vote_str,
-    parent_road_str,
-    label_str,
-    mass_str,
     pledge_str,
-    begin_str,
-    close_str,
-    addin_str,
-    numor_str,
-    denom_str,
-    morph_str,
-    gogo_want_str,
-    stop_want_str,
 )
 from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
 from src.gift.gift import giftunit_shop
 from src.listen.hubunit import hubunit_shop
-from src.stone.examples.stone_env import src_stone_dir
+from src.stone.stone_config import (
+    get_stone_formats_dir,
+    get_stoneref_dict,
+    atom_categorys_str,
+    attributes_str,
+    column_order_str,
+    sort_order_str,
+    stone_format_00020_bud_acct_membership_v0_0_0,
+    stone_format_00003_ideaunit_v0_0_0,
+    stone_format_00021_bud_acctunit_v0_0_0,
+)
 from pandas import DataFrame, read_csv
 import csv
 from dataclasses import dataclass
-
-
-def column_order_str() -> str:
-    return "column_order"
-
-
-def sort_order_str() -> str:
-    return "sort_order"
-
-
-def atom_category_str() -> str:
-    return "atom_category"
-
-
-def attributes_str() -> str:
-    return "attributes"
-
-
-def must_be_roadnode_str() -> str:
-    return "must_be_RoadNode"
-
-
-def must_be_roadunit_str() -> str:
-    return "must_be_RoadUnit"
-
-
-def must_be_str() -> str:
-    return "must_be_str"
-
-
-def must_be_number_str() -> str:
-    return "must_be_number"
-
-
-def must_be_bool_str() -> str:
-    return "must_be_bool"
-
-
-def get_stone_formats_dir() -> str:
-    return f"{src_stone_dir()}/stone_formats"
-
-
-def stone_format_00001_acct_v0_0_0() -> str:
-    return "stone_format_00001_acct_v0_0_0"
-
-
-def stone_format_00002_membership_v0_0_0() -> str:
-    return "stone_format_00002_membership_v0_0_0"
-
-
-def stone_format_00003_ideaunit_v0_0_0() -> str:
-    return "stone_format_00003_ideaunit_v0_0_0"
-
-
-def stone_format_00019_ideaunit_v0_0_0() -> str:
-    return "stone_format_00019_ideaunit_v0_0_0"
-
-
-# def stone_format_00020_bud_acct_membership_v0_0_0()-> str: return "stone_format_00020_bud_acct_membership_v0_0_0"
-# def stone_format_00021_bud_acctunit_v0_0_0()-> str: return "stone_format_00021_bud_acctunit_v0_0_0"
-# def stone_format_00022_bud_idea_awardlink_v0_0_0()-> str: return "stone_format_00022_bud_idea_awardlink_v0_0_0"
-# def stone_format_00023_bud_idea_factunit_v0_0_0()-> str: return "stone_format_00023_bud_idea_factunit_v0_0_0"
-# def stone_format_00024_bud_idea_grouphold_v0_0_0()-> str: return "stone_format_00024_bud_idea_grouphold_v0_0_0"
-# def stone_format_00025_bud_idea_healerhold_v0_0_0()-> str: return "stone_format_00025_bud_idea_healerhold_v0_0_0"
-# def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0()-> str: return "stone_format_00026_bud_idea_reason_premiseunit_v0_0_0"
-# def stone_format_00027_bud_idea_reasonunit_v0_0_0()-> str: return "stone_format_00027_bud_idea_reasonunit_v0_0_0"
-# def stone_format_00028_bud_ideaunit_v0_0_0()-> str: return "stone_format_00028_bud_ideaunit_v0_0_0"
-# def stone_format_00029_budunit_v0_0_0()-> str: return "stone_format_00029_budunit_v0_0_0"
-def stone_format_00020_bud_acct_membership_v0_0_0() -> str:
-    return "stone_format_00020_bud_acct_membership_v0_0_0"
-
-
-def stone_format_00021_bud_acctunit_v0_0_0() -> str:
-    return "stone_format_00021_bud_acctunit_v0_0_0"
-
-
-def stone_format_00022_bud_idea_awardlink_v0_0_0() -> str:
-    return "stone_format_00022_bud_idea_awardlink_v0_0_0"
-
-
-def stone_format_00023_bud_idea_factunit_v0_0_0() -> str:
-    return "stone_format_00023_bud_idea_factunit_v0_0_0"
-
-
-def stone_format_00024_bud_idea_grouphold_v0_0_0() -> str:
-    return "stone_format_00024_bud_idea_grouphold_v0_0_0"
-
-
-def stone_format_00025_bud_idea_healerhold_v0_0_0() -> str:
-    return "stone_format_00025_bud_idea_healerhold_v0_0_0"
-
-
-def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0() -> str:
-    return "stone_format_00026_bud_idea_reason_premiseunit_v0_0_0"
-
-
-def stone_format_00027_bud_idea_reasonunit_v0_0_0() -> str:
-    return "stone_format_00027_bud_idea_reasonunit_v0_0_0"
-
-
-def stone_format_00028_bud_ideaunit_v0_0_0() -> str:
-    return "stone_format_00028_bud_ideaunit_v0_0_0"
-
-
-def stone_format_00029_budunit_v0_0_0() -> str:
-    return "stone_format_00029_budunit_v0_0_0"
-
-
-def get_stone_filenames() -> set[str]:
-    return {
-        stone_format_00001_acct_v0_0_0(),
-        stone_format_00002_membership_v0_0_0(),
-        stone_format_00003_ideaunit_v0_0_0(),
-        stone_format_00019_ideaunit_v0_0_0(),
-        stone_format_00020_bud_acct_membership_v0_0_0(),
-        stone_format_00021_bud_acctunit_v0_0_0(),
-        stone_format_00022_bud_idea_awardlink_v0_0_0(),
-        stone_format_00023_bud_idea_factunit_v0_0_0(),
-        stone_format_00024_bud_idea_grouphold_v0_0_0(),
-        stone_format_00025_bud_idea_healerhold_v0_0_0(),
-        stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
-        stone_format_00027_bud_idea_reasonunit_v0_0_0(),
-        stone_format_00028_bud_ideaunit_v0_0_0(),
-        stone_format_00029_budunit_v0_0_0(),
-    }
 
 
 @dataclass
@@ -186,7 +44,7 @@ class StoneColumn:
 @dataclass
 class StoneRef:
     stone_name: str = None
-    atom_category: str = None
+    atom_categorys: str = None
     _stonecolumns: dict[str:StoneColumn] = None
 
     def set_stonecolumn(self, x_stonecolumn: StoneColumn):
@@ -201,17 +59,15 @@ class StoneRef:
         return self._stonecolumns.get(x_attribute_key)
 
 
-def stoneref_shop(x_stone_name: str, x_atom_category: str) -> StoneRef:
+def stoneref_shop(x_stone_name: str, x_atom_categorys: list[str]) -> StoneRef:
     return StoneRef(
-        stone_name=x_stone_name, atom_category=x_atom_category, _stonecolumns={}
+        stone_name=x_stone_name, atom_categorys=x_atom_categorys, _stonecolumns={}
     )
 
 
 def get_stoneref(stone_name: str) -> StoneRef:
-    stoneref_filename = get_json_filename(stone_name)
-    stoneref_json = open_file(get_stone_formats_dir(), stoneref_filename)
-    stoneref_dict = get_dict_from_json(stoneref_json)
-    x_stoneref = stoneref_shop(stone_name, stoneref_dict.get(atom_category_str()))
+    stoneref_dict = get_stoneref_dict(stone_name)
+    x_stoneref = stoneref_shop(stone_name, stoneref_dict.get(atom_categorys_str()))
     x_attributes_dict = stoneref_dict.get(attributes_str())
     x_stonecolumns = {}
     for x_key, x_stonecolumn in x_attributes_dict.items():
@@ -252,7 +108,7 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
 def _get_sorted_atom_insert_atomunits(
     x_changeunit: ChangeUnit, x_stoneref: StoneRef
 ) -> list[AtomUnit]:
-    category_set = {x_stoneref.atom_category}
+    category_set = set(x_stoneref.atom_categorys)
     curd_set = {atom_insert()}
     filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
     return filtered_change.get_category_sorted_atomunits_list()
@@ -312,13 +168,13 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        if x_stonename == stone_format_00001_acct_v0_0_0():
+        if x_stonename == stone_format_00021_bud_acctunit_v0_0_0():
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], float(row[3]))
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == stone_format_00002_membership_v0_0_0():
+        elif x_stonename == stone_format_00020_bud_acct_membership_v0_0_0():
             x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], row[3])

@@ -40,7 +40,7 @@ def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
     yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
     yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
     year_road = sue_budunit.make_road(yr4_clean_road, year_str())
-    jan_road = sue_budunit.make_road(year_road, "jan")
+    jan_road = sue_budunit.make_road(year_road, "January")
 
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     assert sue_budunit._range_inheritors == {}
@@ -250,40 +250,40 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     assert year_idea._gogo_calc == 0
     assert year_idea._stop_calc == 525600
 
-    jan_road = sue_budunit.make_road(year_road, "jan")
-    feb_road = sue_budunit.make_road(year_road, "feb")
-    mar_road = sue_budunit.make_road(year_road, "mar")
-    apr_road = sue_budunit.make_road(year_road, "apr")
-    may_road = sue_budunit.make_road(year_road, "may")
-    jun_road = sue_budunit.make_road(year_road, "jun")
-    jul_road = sue_budunit.make_road(year_road, "jul")
-    aug_road = sue_budunit.make_road(year_road, "aug")
-    sep_road = sue_budunit.make_road(year_road, "sep")
-    oct_road = sue_budunit.make_road(year_road, "oct")
-    nov_road = sue_budunit.make_road(year_road, "nov")
-    dec_road = sue_budunit.make_road(year_road, "dec")
-    assert sue_budunit.get_idea_obj(jan_road)._gogo_calc == 437760
-    assert sue_budunit.get_idea_obj(feb_road)._gogo_calc == 480960
+    jan_road = sue_budunit.make_road(year_road, "January")
+    feb_road = sue_budunit.make_road(year_road, "February")
+    mar_road = sue_budunit.make_road(year_road, "March")
+    apr_road = sue_budunit.make_road(year_road, "April")
+    may_road = sue_budunit.make_road(year_road, "May")
+    jun_road = sue_budunit.make_road(year_road, "June")
+    jul_road = sue_budunit.make_road(year_road, "July")
+    aug_road = sue_budunit.make_road(year_road, "August")
+    sep_road = sue_budunit.make_road(year_road, "September")
+    oct_road = sue_budunit.make_road(year_road, "October")
+    nov_road = sue_budunit.make_road(year_road, "November")
+    dec_road = sue_budunit.make_road(year_road, "December")
+    assert sue_budunit.get_idea_obj(jan_road)._gogo_calc == 440640
+    assert sue_budunit.get_idea_obj(feb_road)._gogo_calc == 485280
     assert sue_budunit.get_idea_obj(mar_road)._gogo_calc == 0
     assert sue_budunit.get_idea_obj(apr_road)._gogo_calc == 44640
-    assert sue_budunit.get_idea_obj(may_road)._gogo_calc == 84960
-    assert sue_budunit.get_idea_obj(jun_road)._gogo_calc == 129600
-    assert sue_budunit.get_idea_obj(jul_road)._gogo_calc == 172800
-    assert sue_budunit.get_idea_obj(aug_road)._gogo_calc == 217440
-    assert sue_budunit.get_idea_obj(sep_road)._gogo_calc == 260640
-    assert sue_budunit.get_idea_obj(oct_road)._gogo_calc == 305280
-    assert sue_budunit.get_idea_obj(nov_road)._gogo_calc == 349920
-    assert sue_budunit.get_idea_obj(dec_road)._gogo_calc == 393120
+    assert sue_budunit.get_idea_obj(may_road)._gogo_calc == 87840
+    assert sue_budunit.get_idea_obj(jun_road)._gogo_calc == 132480
+    assert sue_budunit.get_idea_obj(jul_road)._gogo_calc == 175680
+    assert sue_budunit.get_idea_obj(aug_road)._gogo_calc == 220320
+    assert sue_budunit.get_idea_obj(sep_road)._gogo_calc == 264960
+    assert sue_budunit.get_idea_obj(oct_road)._gogo_calc == 308160
+    assert sue_budunit.get_idea_obj(nov_road)._gogo_calc == 352800
+    assert sue_budunit.get_idea_obj(dec_road)._gogo_calc == 396000
 
-    assert sue_budunit.get_idea_obj(jan_road)._stop_calc == 480960
+    assert sue_budunit.get_idea_obj(jan_road)._stop_calc == 485280
     assert sue_budunit.get_idea_obj(feb_road)._stop_calc == 525600
     assert sue_budunit.get_idea_obj(mar_road)._stop_calc == 44640
-    assert sue_budunit.get_idea_obj(apr_road)._stop_calc == 84960
-    assert sue_budunit.get_idea_obj(may_road)._stop_calc == 129600
-    assert sue_budunit.get_idea_obj(jun_road)._stop_calc == 172800
-    assert sue_budunit.get_idea_obj(jul_road)._stop_calc == 217440
-    assert sue_budunit.get_idea_obj(aug_road)._stop_calc == 260640
-    assert sue_budunit.get_idea_obj(sep_road)._stop_calc == 305280
-    assert sue_budunit.get_idea_obj(oct_road)._stop_calc == 349920
-    assert sue_budunit.get_idea_obj(nov_road)._stop_calc == 393120
-    assert sue_budunit.get_idea_obj(dec_road)._stop_calc == 437760
+    assert sue_budunit.get_idea_obj(apr_road)._stop_calc == 87840
+    assert sue_budunit.get_idea_obj(may_road)._stop_calc == 132480
+    assert sue_budunit.get_idea_obj(jun_road)._stop_calc == 175680
+    assert sue_budunit.get_idea_obj(jul_road)._stop_calc == 220320
+    assert sue_budunit.get_idea_obj(aug_road)._stop_calc == 264960
+    assert sue_budunit.get_idea_obj(sep_road)._stop_calc == 308160
+    assert sue_budunit.get_idea_obj(oct_road)._stop_calc == 352800
+    assert sue_budunit.get_idea_obj(nov_road)._stop_calc == 396000
+    assert sue_budunit.get_idea_obj(dec_road)._stop_calc == 440640

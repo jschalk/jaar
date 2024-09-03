@@ -1,5 +1,5 @@
 {
-    "atom_category": "bud_idea_reasonunit",
+    "atom_categorys": ["bud_idea_reasonunit"],
     "attributes": {
         "base": {
             "column_order": 3,

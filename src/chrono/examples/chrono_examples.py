@@ -6,7 +6,7 @@ from src.chrono.chrono import (
     create_weekday_ideaunits,
     add_newtimeline_ideaunit,
     new_timeline_ideaunit,
-    get_time_min_from_dt,
+    get_min_from_dt_offset,
     hours_config_text,
     weekdays_config_text,
     months_config_text,
@@ -109,12 +109,20 @@ def add_time_five_ideaunit(x_budunit: BudUnit) -> BudUnit:
     return add_newtimeline_ideaunit(x_budunit, get_five_config())
 
 
+def add_time_squirt_ideaunit(x_budunit: BudUnit) -> BudUnit:
+    return add_newtimeline_ideaunit(x_budunit, get_squirt_config())
+
+
 def get_creg_min_from_dt(dt: datetime) -> int:
-    return get_time_min_from_dt(dt, get_creg_config().get(yr1_jan1_offset_text()))
+    return get_min_from_dt_offset(dt, get_creg_config().get(yr1_jan1_offset_text()))
 
 
 def get_five_min_from_dt(dt: datetime) -> int:
-    return get_time_min_from_dt(dt, get_five_config().get(yr1_jan1_offset_text()))
+    return get_min_from_dt_offset(dt, get_five_config().get(yr1_jan1_offset_text()))
+
+
+def get_squirt_min_from_dt(dt: datetime) -> int:
+    return get_min_from_dt_offset(dt, get_squirt_config().get(yr1_jan1_offset_text()))
 
 
 def display_current_creg_five_min(graphics_bool: bool):
@@ -163,7 +171,7 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         creg_blurb = f"<b>{creg_chronounit.get_blurb()}</b>"
         five_blurb = f"<b>{five_chronounit.get_blurb()}</b>"
 
-        datetime_str = current_datetime.strftime("%H:%M, %A, %d %m, %Y")
+        datetime_str = current_datetime.strftime("%H:%M, %A, %d %B, %Y")
         dt_text = f"python : {datetime_str}"
         dt_text = f"<b>{dt_text}</b>"
         creg_min_text = f"<b>creg timeline min: {creg_min}</b>"
@@ -175,6 +183,58 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         x_fig = plotly_Figure()
         x_fig.update_xaxes(range=[-6, 8])
         x_fig.update_yaxes(range=[0, 10])
+        x_font = dict(family="Courier New, monospace", size=45, color="RebeccaPurple")
+        x_fig.update_layout(font=x_font)
+        x1_scatter = plotly_Scatter(x=xp_list, y=yp_list, text=curr_list, mode="text")
+        x_fig.add_trace(x1_scatter)
+        conditional_fig_show(x_fig, graphics_bool)
+
+
+def display_creg_five_squirt_time_attrs(graphics_bool: bool):
+    if graphics_bool:
+        current_datetime = datetime(2031, 2, 17, 7, 47)
+        sue_bud = budunit_shop("Sue")
+        sue_bud = add_time_creg_ideaunit(sue_bud)
+        sue_bud = add_time_five_ideaunit(sue_bud)
+        sue_bud = add_time_squirt_ideaunit(sue_bud)
+        time_road = sue_bud.make_l1_road("time")
+        creg_road = sue_bud.make_road(time_road, creg_str())
+        five_road = sue_bud.make_road(time_road, five_str())
+        squirt_road = sue_bud.make_road(time_road, "squirt")
+        creg_min = get_creg_min_from_dt(current_datetime)
+        five_min = get_five_min_from_dt(current_datetime)
+        squirt_min = get_squirt_min_from_dt(current_datetime)
+        creg_chronounit = chronounit_shop(sue_bud, creg_road, creg_min)
+        five_chronounit = chronounit_shop(sue_bud, five_road, five_min)
+        squirt_chronounit = chronounit_shop(sue_bud, squirt_road, squirt_min)
+        creg_chronounit.calc_timeline()
+        five_chronounit.calc_timeline()
+        squirt_chronounit.calc_timeline()
+        creg_blurb = f"<b>{creg_chronounit.get_blurb()}</b>"
+        five_blurb = f"<b>{five_chronounit.get_blurb()}</b>"
+        squirt_blurb = f"<b>{squirt_chronounit.get_blurb()}</b>"
+
+        datetime_str = current_datetime.strftime("%H:%M, %A, %d %B, %Y")
+        dt_text = f"python : {datetime_str}"
+        dt_text = f"<b>{dt_text}</b>"
+        creg_min_text = f"<b>creg timeline min: {creg_min}</b>"
+        five_min_text = f"<b>five timeline min: {five_min}</b>"
+        squirt_min_text = f"<b>squirt timeline min: {squirt_min}</b>"
+        curr_list = [
+            dt_text,
+            creg_min_text,
+            creg_blurb,
+            five_min_text,
+            five_blurb,
+            squirt_min_text,
+            squirt_blurb,
+        ]
+        xp_list = [1, 1, 1, 1, 1, 1, 1]
+        yp_list = [7, 5, 4, 2, 1, -1, -2]
+
+        x_fig = plotly_Figure()
+        x_fig.update_xaxes(range=[-6, 8])
+        x_fig.update_yaxes(range=[-5, 10])
         x_font = dict(family="Courier New, monospace", size=45, color="RebeccaPurple")
         x_fig.update_layout(font=x_font)
         x1_scatter = plotly_Scatter(x=xp_list, y=yp_list, text=curr_list, mode="text")

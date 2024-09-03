@@ -456,7 +456,7 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_bud._idearoot._kids[casa_text]._problem_bool == x_problem_bool
 
 
-def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_group_ids_DoNotExist():
+def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_healer_ids_DoNotExist():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     casa_text = "casa"

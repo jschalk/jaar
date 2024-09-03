@@ -1,7 +1,7 @@
 {
-    "atom_category": "bud_idea_healerhold",
+    "atom_categorys": ["bud_idea_healerhold"],
     "attributes": {
-        "group_id": {
+        "healer_id": {
             "column_order": 3,
             "sort_order": 3
         },

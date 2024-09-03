@@ -23,7 +23,7 @@ def test_StoneRef_Exists():
 
     # THEN
     assert not x_stoneref.stone_name
-    assert not x_stoneref.atom_category
+    assert not x_stoneref.atom_categorys
     assert not x_stoneref._stonecolumns
 
 
@@ -33,12 +33,12 @@ def test_stoneref_shop_ReturnsObj():
 
     # WHEN
     x_stoneref = stoneref_shop(
-        x_stone_name=x1_stone_name, x_atom_category=bud_acctunit_text()
+        x_stone_name=x1_stone_name, x_atom_categorys=[bud_acctunit_text()]
     )
 
     # THEN
     assert x_stoneref.stone_name == x1_stone_name
-    assert x_stoneref.atom_category == bud_acctunit_text()
+    assert x_stoneref.atom_categorys == [bud_acctunit_text()]
     assert x_stoneref._stonecolumns == {}
 
 

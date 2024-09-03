@@ -1,14 +1,14 @@
 {
-    "atom_category": "bud_idea_factunit",
+    "atom_categorys": ["bud_idea_factunit"],
     "attributes": {
         "base": {
             "column_order": 3,
             "sort_order": 3
         },
-        "nigh": {
+        "fnigh": {
             "column_order": 6
         },
-        "open": {
+        "fopen": {
             "column_order": 5
         },
         "owner_id": {

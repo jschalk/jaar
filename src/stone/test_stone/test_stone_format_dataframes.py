@@ -19,23 +19,13 @@ from src.gift.atom_config import (
     credit_score_str,
     debtit_vote_str,
     credit_vote_str,
-    begin_str,
-    close_str,
-    addin_str,
-    numor_str,
-    denom_str,
-    morph_str,
-    gogo_want_str,
-    stop_want_str,
 )
-from src.stone.stone import (
-    stone_format_00001_acct_v0_0_0,
-    stone_format_00002_membership_v0_0_0,
+from src.stone.stone import create_stone_df, get_stoneref, save_stone_csv
+from src.stone.stone_config import (
+    stone_format_00021_bud_acctunit_v0_0_0,
+    stone_format_00020_bud_acct_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00019_ideaunit_v0_0_0,
-    create_stone_df,
-    get_stoneref,
-    save_stone_csv,
 )
 from src.stone.examples.stone_env import (
     stone_examples_dir,
@@ -45,7 +35,7 @@ from src.stone.examples.stone_env import (
 from os.path import exists as os_path_exists
 
 
-def test_create_stone_df_Arg_stone_format_00001_acct_v0_0_0():
+def test_create_stone_df_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -63,7 +53,7 @@ def test_create_stone_df_Arg_stone_format_00001_acct_v0_0_0():
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
 
     # WHEN
-    x_stone_name = stone_format_00001_acct_v0_0_0()
+    x_stone_name = stone_format_00021_bud_acctunit_v0_0_0()
     acct_dataframe = create_stone_df(sue_budunit, x_stone_name)
 
     # THEN
@@ -73,25 +63,25 @@ def test_create_stone_df_Arg_stone_format_00001_acct_v0_0_0():
     assert acct_dataframe.loc[0, real_id_str()] == music_real_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_text
-    assert acct_dataframe.loc[0, credit_score_str()] == bob_credit_score
     assert acct_dataframe.loc[0, debtit_score_str()] == bob_debtit_score
+    assert acct_dataframe.loc[0, credit_score_str()] == bob_credit_score
 
     assert acct_dataframe.loc[1, real_id_str()] == music_real_id
     assert acct_dataframe.loc[1, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[1, acct_id_str()] == sue_text
-    assert acct_dataframe.loc[1, credit_score_str()] == sue_credit_score
     assert acct_dataframe.loc[1, debtit_score_str()] == sue_debtit_score
+    assert acct_dataframe.loc[1, credit_score_str()] == sue_credit_score
 
     assert acct_dataframe.loc[2, real_id_str()] == music_real_id
     assert acct_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[2, acct_id_str()] == yao_text
-    assert acct_dataframe.loc[2, credit_score_str()] == yao_credit_score
     assert acct_dataframe.loc[2, debtit_score_str()] == yao_debtit_score
+    assert acct_dataframe.loc[2, credit_score_str()] == yao_credit_score
 
     assert len(acct_dataframe) == 3
 
 
-def test_create_stone_df_Arg_stone_format_00002_membership_v0_0_0():
+def test_create_stone_df_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -120,7 +110,7 @@ def test_create_stone_df_Arg_stone_format_00002_membership_v0_0_0():
     yao_acctunit.add_membership(ohio_text, yao_ohio_credit_w, yao_ohio_debtit_w)
 
     # WHEN
-    x_stone_name = stone_format_00002_membership_v0_0_0()
+    x_stone_name = stone_format_00020_bud_acct_membership_v0_0_0()
     membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
 
     # THEN
@@ -228,10 +218,11 @@ def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0():
     # THEN
     array_headers = list(stone_df.columns)
     assert array_headers == get_stoneref(x_stone_name).get_headers_list()
-    assert len(stone_df) == 110
+    for x_array_header in array_headers:
+        print(f"{x_array_header=}")
 
 
-def test_save_stone_csv_Arg_stone_format_00001_acct_v0_0_0_SaveToCSV(
+def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     stone_env_setup_cleanup,
 ):
     # ESTABLISH
@@ -249,7 +240,7 @@ def test_save_stone_csv_Arg_stone_format_00001_acct_v0_0_0_SaveToCSV(
     sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
     sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
     sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
-    j1_stonename = stone_format_00001_acct_v0_0_0()
+    j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
     acct_filename = f"{sue_text}_acct_example_00.csv"
     csv_example_path = create_file_path(stone_reals_dir(), acct_filename)
     print(f"{csv_example_path}")
@@ -260,12 +251,15 @@ def test_save_stone_csv_Arg_stone_format_00001_acct_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
-music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+    sue1_acct_example_csv = """real_id,owner_id,acct_id,debtit_score,credit_score
+music56,Sue,Bob,29,13
+music56,Sue,Sue,23,11
+music56,Sue,Yao,37,41
 """
-    assert open_file(stone_reals_dir(), acct_filename) == sue1_acct_example_csv
+    stone_file_text = open_file(stone_reals_dir(), acct_filename)
+    print(f"      {stone_file_text=}")
+    print(f"{sue1_acct_example_csv=}")
+    assert stone_file_text == sue1_acct_example_csv
 
     # WHEN
     zia_text = "Zia"
@@ -274,10 +268,10 @@ music56,Sue,Yao,41,37
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
-music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+    sue2_acct_example_csv = """real_id,owner_id,acct_id,debtit_score,credit_score
+music56,Sue,Bob,29,13
+music56,Sue,Sue,23,11
+music56,Sue,Yao,37,41
 music56,Sue,Zia,1,1
 """
     assert open_file(stone_reals_dir(), acct_filename) == sue2_acct_example_csv

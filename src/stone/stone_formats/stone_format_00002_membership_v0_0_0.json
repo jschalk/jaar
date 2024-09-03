@@ -1,15 +1,9 @@
 {
-    "atom_category": "bud_acct_membership",
+    "atom_categorys": ["bud_acct_membership"],
     "attributes": {
         "acct_id": {
             "column_order": 2,
             "sort_order": 0
-        },
-        "credit_vote": {
-            "column_order": 4
-        },
-        "debtit_vote": {
-            "column_order": 5
         },
         "group_id": {
             "column_order": 3,

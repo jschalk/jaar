@@ -102,7 +102,7 @@ class GroupHoldTable(Base):
 class HealerHoldTable(Base):
     __tablename__ = "healerhold"
     uid = Column(Integer, primary_key=True)
-    group_id = Column(String)
+    healer_id = Column(String)
     road = Column(String)
 
 

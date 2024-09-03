@@ -1,4 +1,4 @@
-real_id,owner_id,acct_id,credit_score,debtit_score
-music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+real_id,owner_id,acct_id,debtit_score,credit_score
+music56,Sue,Bob,29,13
+music56,Sue,Sue,23,11
+music56,Sue,Yao,37,41

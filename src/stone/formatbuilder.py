@@ -6,7 +6,7 @@ from src.gift.atom_config import (
     nesting_order_str,
     get_atom_config_args,
 )
-from src.stone.stone import atom_category_str, attributes_str, sort_order_str
+from src.stone.stone import atom_categorys_str, attributes_str, sort_order_str
 
 
 def create_categorys_stone_format_dict() -> dict:
@@ -31,7 +31,7 @@ def create_categorys_stone_format_dict() -> dict:
             attributes_dict[x_arg] = stone_dict
 
         stone_format = {
-            atom_category_str(): x_atom_category,
+            atom_categorys_str(): [x_atom_category],
             attributes_str(): attributes_dict,
         }
         x_dict[stone_filename] = stone_format
