@@ -37,6 +37,7 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
+    healer_id_str,
     parent_road_str,
     label_str,
     pledge_str,
@@ -426,6 +427,16 @@ def _modify_bud_idea_grouphold_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value(group_id_str()))
 
 
+def _modify_bud_idea_healerhold_delete(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
+    x_ideaunit._healerhold.del_healer_id(x_atom.get_value(healer_id_str()))
+
+
+def _modify_bud_idea_healerhold_insert(x_bud: BudUnit, x_atom: AtomUnit):
+    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
+    x_ideaunit._healerhold.set_healer_id(x_atom.get_value(healer_id_str()))
+
+
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.del_acctunit(x_atom.get_value(acct_id_str()))
 
@@ -514,6 +525,13 @@ def _modify_bud_idea_grouphold(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_grouphold_insert(x_bud, x_atom)
 
 
+def _modify_bud_idea_healerhold(x_bud: BudUnit, x_atom: AtomUnit):
+    if x_atom.crud_text == atom_delete():
+        _modify_bud_idea_healerhold_delete(x_bud, x_atom)
+    elif x_atom.crud_text == atom_insert():
+        _modify_bud_idea_healerhold_insert(x_bud, x_atom)
+
+
 def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
         _modify_bud_acctunit_delete(x_bud, x_atom)
@@ -538,6 +556,8 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reasonunit(x_bud, x_atom)
     elif x_atom.category == bud_idea_reason_premiseunit_text():
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
+    elif x_atom.category == bud_idea_healerhold_text():
+        _modify_bud_idea_healerhold(x_bud, x_atom)
     elif x_atom.category == bud_idea_grouphold_text():
         _modify_bud_idea_grouphold(x_bud, x_atom)
     elif x_atom.category == bud_acctunit_text():
