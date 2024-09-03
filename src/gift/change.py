@@ -399,10 +399,10 @@ class ChangeUnit:
                 idea_road=insert_idea_road,
                 insert_grouphold_group_ids=insert_ideaunit._doerunit._groupholds,
             )
-            # self.add_atomunit_idea_healerhold_insert(
-            #     idea_road=insert_idea_road,
-            #     insert_healerhold_healer_ids=insert_ideaunit._healerhold._healer_ids,
-            # )
+            self.add_atomunit_idea_healerhold_insert(
+                idea_road=insert_idea_road,
+                insert_healerhold_healer_ids=insert_ideaunit._healerhold._healer_ids,
+            )
 
     def add_atomunit_idea_updates(
         self, before_bud: BudUnit, after_bud: BudUnit, update_roads: set
@@ -570,10 +570,10 @@ class ChangeUnit:
                 idea_road=delete_idea_road,
                 delete_grouphold_group_ids=delete_ideaunit._doerunit._groupholds,
             )
-            # self.add_atomunit_idea_healerhold_deletes(
-            #     idea_road=delete_idea_road,
-            #     delete_healerhold_healer_ids=delete_ideaunit._doerunit._healerholds,
-            # )
+            self.add_atomunit_idea_healerhold_deletes(
+                idea_road=delete_idea_road,
+                delete_healerhold_healer_ids=delete_ideaunit._healerhold._healer_ids,
+            )
 
     def add_atomunit_idea_reasonunit_inserts(
         self, after_ideaunit: IdeaUnit, insert_reasonunit_bases: set
