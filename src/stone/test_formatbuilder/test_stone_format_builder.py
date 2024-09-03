@@ -19,7 +19,7 @@ from src.stone.stone import (
 )
 
 
-def test_create_categorys_stone_format_dicts_ReturnObj():
+def test_create_categorys_stone_format_dicts_ReturnObj(rebuild_bool):
     # ESTABLISH / WHEN
     categorys_stone_format_dict = create_categorys_stone_format_dict()
     # print(f"{categorys_stone_format_dict=}")
@@ -49,13 +49,11 @@ def test_create_categorys_stone_format_dicts_ReturnObj():
 
     assert parent_road_dict == {column_order_str(): 2, sort_order_str(): 2}
     assert label_dict == {column_order_str(): 3, sort_order_str(): 3}
+    rebuild_format_jsons(rebuild_bool)
 
-    # healer_filename = "stone_format_00025_bud_idea_healerhold_v0_0_0.json"
-    # healer_hold_dict = create_categorys_stone_format_dict().get(healer_filename)
-    # print(f"{healer_hold_dict=}")
-    # stone_json = get_json_from_dict(healer_hold_dict)
-    # save_file(get_stone_formats_dir(), healer_filename, stone_json)
 
-    # for x_filename, stone_format_dict in create_categorys_stone_format_dict().items():
-    #     stone_json = get_json_from_dict(stone_format_dict)
-    #     save_file(get_stone_formats_dir(), x_filename, stone_json)
+def rebuild_format_jsons(x_rebuild_format_jsons: bool):
+    if x_rebuild_format_jsons:
+        for x_filename, stone_format in create_categorys_stone_format_dict().items():
+            stone_json = get_json_from_dict(stone_format)
+            save_file(get_stone_formats_dir(), x_filename, stone_json)
