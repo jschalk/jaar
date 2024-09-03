@@ -638,18 +638,24 @@ def all_atom_config_python_types_are_valid(allowed_python_types):
     return True
 
 
+def all_atom_args_python_types_are_correct(x_python_types) -> bool:
+    x_atom_args_category_mapping = get_atom_args_category_mapping()
+    for x_atom_arg in x_python_types.keys():
+        x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
+        x_category = x_categorys[0]
+        x_python_type = get_python_type(x_category, x_atom_arg)
+        print(f"assert x_python_types.get({x_atom_arg} == {x_python_type}")
+        if x_python_types.get(x_atom_arg) != x_python_type:
+            return False
+    return True
+
+
 def test_get_atom_args_python_types_ReturnsObj():
     # ESTABLISH / WHEN
     x_python_types = get_atom_args_python_types()
-    x_atom_args_category_mapping = get_atom_args_category_mapping()
 
     # THEN
-    # for x_atom_arg in x_python_types.keys():
-    #     x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
-    #     x_category = x_categorys[0]
-    #     x_python_type = get_python_type(x_category, x_atom_arg)
-    #     print(f"assert x_python_types.get({x_atom_arg} == {x_python_type}")
-    #     assert x_python_types.get(x_atom_arg) == x_python_type
+    assert all_atom_args_python_types_are_correct(x_python_types)
     assert x_python_types.keys() == get_atom_args_category_mapping().keys()
     assert x_python_types.get("credit_vote") == "int"
     assert x_python_types.get("group_id") == "GroupID"
