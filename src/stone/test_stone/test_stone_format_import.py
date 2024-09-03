@@ -104,12 +104,7 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     assert not music_hubunit.voice_file_exists()
 
     # WHEN
-    load_stone_csv(
-        reals_dir=music_hubunit.reals_dir,
-        x_stonename=j1_stonename,
-        x_file_dir=stone_examples_dir(),
-        x_filename=acct_filename,
-    )
+    load_stone_csv(music_hubunit.reals_dir, stone_examples_dir(), acct_filename)
 
     # THEN
     # assert voice Budunit now exists

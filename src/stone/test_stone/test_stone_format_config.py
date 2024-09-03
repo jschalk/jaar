@@ -1,3 +1,4 @@
+from src._instrument.python_tool import create_sorted_concatenated_str
 from src._instrument.file import dir_files
 from src.gift.atom_config import (
     bud_acctunit_text,
@@ -111,9 +112,8 @@ def test_get_headers_list_ReturnsObj():
 
 def get_sorted_headers(stone_filename):
     x_stoneref = get_stoneref_dict(stone_filename)
-    stone_attributes = sorted(x_stoneref.get(attributes_str()).keys())
-    x_text = "".join(f",{x_header}" for x_header in stone_attributes)
-    return x_text[1:]
+    stone_attributes = list(x_stoneref.get(attributes_str()).keys())
+    return create_sorted_concatenated_str(stone_attributes)
 
 
 def test_get_sorted_headers_ReturnsObj():
@@ -129,10 +129,10 @@ def test_get_sorted_headers_ReturnsObj():
     assert headers == idea_headers_text
 
 
-def check_sorted_headers_exist(stone_format_filename: str):
+def check_sorted_headers_exist(stone_format_filename: str, x_headers: dict):
     sorted_headers = get_sorted_headers(stone_format_filename)
     print(f"{stone_format_filename=} {sorted_headers=}")
-    assert get_stone_format_headers().get(sorted_headers) == stone_format_filename
+    assert x_headers.get(sorted_headers) == stone_format_filename
 
 
 def test_get_stone_format_headers_ReturnsObj():
@@ -141,10 +141,10 @@ def test_get_stone_format_headers_ReturnsObj():
 
     # THEN
     # print(f"{set(get_stone_format_headers().values())=}")
-    assert len(get_stone_format_headers()) == len(get_stone_filenames())
-    assert set(get_stone_format_headers().values()) == get_stone_filenames()
+    assert len(x_headers) == len(get_stone_filenames())
+    assert set(x_headers.values()) == get_stone_filenames()
     for x_stone_filename in get_stone_filenames():
-        check_sorted_headers_exist(x_stone_filename)
+        check_sorted_headers_exist(x_stone_filename, x_headers)
 
 
 def test__generate_stone_dataframe_ReturnsCorrectObj():

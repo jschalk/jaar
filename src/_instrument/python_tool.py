@@ -181,3 +181,9 @@ def create_filtered_csv_dict(
             place_obj_in_dict(x_dict, [real_id, owner_id], real_owner_csv)
 
     return x_dict
+
+
+def create_sorted_concatenated_str(y_list: list[str]) -> str:
+    x_list = sorted(y_list)
+    x_text = "".join(f",{x_header}" for x_header in x_list)
+    return x_text[1:]

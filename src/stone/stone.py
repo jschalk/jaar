@@ -3,6 +3,7 @@ from src._instrument.python_tool import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     create_filtered_csv_dict,
+    create_sorted_concatenated_str,
 )
 from src._road.road import RealID, OwnerID
 from src.bud.bud import BudUnit
@@ -28,6 +29,7 @@ from src.stone.stone_config import (
     stone_format_00020_bud_acct_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00021_bud_acctunit_v0_0_0,
+    get_stone_format_headers,
 )
 from pandas import DataFrame, read_csv
 import csv
@@ -163,9 +165,11 @@ def open_stone_csv(x_file_dir: str, x_filename: str) -> DataFrame:
     return read_csv(create_file_path(x_file_dir, x_filename))
 
 
-def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
+def create_changeunit(x_csv: str) -> ChangeUnit:
     x_changeunit = changeunit_shop()
     title_row, headerless_csv = extract_csv_headers(x_csv)
+    headers_str = create_sorted_concatenated_str(title_row)
+    x_stonename = get_stone_format_headers().get(headers_str)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
         if x_stonename == stone_format_00021_bud_acctunit_v0_0_0():
@@ -194,7 +198,7 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
     return x_changeunit
 
 
-def load_stone_csv(reals_dir: str, x_stonename: str, x_file_dir: str, x_filename: str):
+def load_stone_csv(reals_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
@@ -205,7 +209,7 @@ def load_stone_csv(reals_dir: str, x_stonename: str, x_file_dir: str, x_filename
 
     x_hubunit = hubunit_shop(reals_dir, real_id=x_real_id, owner_id=x_owner_id)
     x_hubunit.initialize_gift_voice_files()
-    x_changeunit = create_changeunit(x_csv, x_stonename)
+    x_changeunit = create_changeunit(x_csv)
     x_giftunit = giftunit_shop(x_owner_id, x_real_id)
     x_giftunit.set_changeunit(x_changeunit)
     x_hubunit.save_gift_file(x_giftunit)
