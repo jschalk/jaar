@@ -23,7 +23,7 @@ from src.gift.atom_config import (
 from src.stone.stone import create_stone_df, get_stoneref, save_stone_csv
 from src.stone.stone_config import (
     stone_format_00021_bud_acctunit_v0_0_0,
-    stone_format_00002_membership_v0_0_0,
+    stone_format_00020_bud_acct_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00019_ideaunit_v0_0_0,
 )
@@ -81,7 +81,7 @@ def test_create_stone_df_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     assert len(acct_dataframe) == 3
 
 
-def test_create_stone_df_Arg_stone_format_00002_membership_v0_0_0():
+def test_create_stone_df_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -110,7 +110,7 @@ def test_create_stone_df_Arg_stone_format_00002_membership_v0_0_0():
     yao_acctunit.add_membership(ohio_text, yao_ohio_credit_w, yao_ohio_debtit_w)
 
     # WHEN
-    x_stone_name = stone_format_00002_membership_v0_0_0()
+    x_stone_name = stone_format_00020_bud_acct_membership_v0_0_0()
     membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
 
     # THEN

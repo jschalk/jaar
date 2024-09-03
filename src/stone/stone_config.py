@@ -129,18 +129,18 @@ def get_stone_filenames() -> set[str]:
     }
 
 
-def get_stong_format_headers() -> dict[str, list[str]]:
+def get_stone_format_headers() -> dict[str, list[str]]:
     return {
         "acct_id,owner_id,real_id": stone_format_00001_acct_v0_0_0(),
-        "00002": stone_format_00002_membership_v0_0_0(),
+        "acct_id,group_id,owner_id,real_id": stone_format_00002_membership_v0_0_0(),
         "label,mass,owner_id,parent_road,pledge,real_id": stone_format_00003_ideaunit_v0_0_0(),
         "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,real_id,stop_want": stone_format_00019_ideaunit_v0_0_0(),
         "acct_id,credit_vote,debtit_vote,group_id,owner_id,real_id": stone_format_00020_bud_acct_membership_v0_0_0(),
         "acct_id,credit_score,debtit_score,owner_id,real_id": stone_format_00021_bud_acctunit_v0_0_0(),
         "give_force,group_id,owner_id,real_id,road,take_force": stone_format_00022_bud_idea_awardlink_v0_0_0(),
-        "base,nigh,open,owner_id,pick,real_id,road": stone_format_00023_bud_idea_factunit_v0_0_0(),
+        "base,fnigh,fopen,owner_id,pick,real_id,road": stone_format_00023_bud_idea_factunit_v0_0_0(),
         "group_id,owner_id,real_id,road": stone_format_00024_bud_idea_grouphold_v0_0_0(),
-        "00025": stone_format_00025_bud_idea_healerhold_v0_0_0(),
+        "healer_id,owner_id,real_id,road": stone_format_00025_bud_idea_healerhold_v0_0_0(),
         "base,divisor,need,nigh,open,owner_id,real_id,road": stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
         "base,base_idea_active_requisite,owner_id,real_id,road": stone_format_00027_bud_idea_reasonunit_v0_0_0(),
         "addin,begin,close,denom,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,real_id,stop_want": stone_format_00028_bud_ideaunit_v0_0_0(),

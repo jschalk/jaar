@@ -200,7 +200,7 @@
         },
         "optional_args": {},
         "required_args": {
-            "group_id": {
+            "healer_id": {
                 "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "GroupID",

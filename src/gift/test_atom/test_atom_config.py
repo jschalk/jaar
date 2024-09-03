@@ -575,4 +575,4 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert bud_idea_factunit_text() in road_categorys
     assert bud_idea_grouphold_text() in road_categorys
     assert len(road_categorys) == 6
-    assert len(x_atom_args_category_mapping) == 40
+    assert len(x_atom_args_category_mapping) == 41

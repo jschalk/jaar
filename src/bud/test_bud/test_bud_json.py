@@ -117,7 +117,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     yao_acctunit = sue_bud.get_acct(yao_text)
     yao_acctunit.add_membership(run_text)
     run_healerhold = healerhold_shop()
-    run_healerhold.set_group_id(x_group_id=run_text)
+    run_healerhold.set_healer_id(x_healer_id=run_text)
     sue_bud.edit_idea_attr(road=sue_bud._real_id, healerhold=run_healerhold)
 
     # WHEN
@@ -220,7 +220,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     idearoot_healerhold = idearoot_dict["_healerhold"]
     print(f"{idearoot_healerhold=}")
     assert len(idearoot_healerhold) == 1
-    assert x_idearoot._healerhold.any_group_id_exists()
+    assert x_idearoot._healerhold.any_healer_id_exists()
     assert x_idearoot._problem_bool
 
 

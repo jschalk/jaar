@@ -28,7 +28,6 @@ from src.stone.stone_config import (
     get_stone_formats_dir,
     get_stone_filenames,
     get_stoneref_dict,
-    stone_format_00002_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00019_ideaunit_v0_0_0,
     stone_format_00020_bud_acct_membership_v0_0_0,
@@ -41,7 +40,7 @@ from src.stone.stone_config import (
     stone_format_00027_bud_idea_reasonunit_v0_0_0,
     stone_format_00028_bud_ideaunit_v0_0_0,
     stone_format_00029_budunit_v0_0_0,
-    get_stong_format_headers,
+    get_stone_format_headers,
     attributes_str,
 )
 from src.stone.examples.stone_env import src_stone_dir
@@ -55,10 +54,10 @@ def test_config_str_functions_ReturnObjs():
     assert credit_score_str() == "credit_score"
     assert debtit_vote_str() == "debtit_vote"
     assert credit_vote_str() == "credit_vote"
-    x0021_stone = "stone_format_00021_bud_acctunit_v0_0_0"
-    assert stone_format_00021_bud_acctunit_v0_0_0() == x0021_stone
-    x0002_stone = "stone_format_00002_membership_v0_0_0"
-    assert stone_format_00002_membership_v0_0_0() == x0002_stone
+    x00021_stone = "stone_format_00021_bud_acctunit_v0_0_0"
+    assert stone_format_00021_bud_acctunit_v0_0_0() == x00021_stone
+    x00020_stone = "stone_format_00020_bud_acct_membership_v0_0_0"
+    assert stone_format_00020_bud_acct_membership_v0_0_0() == x00020_stone
     x0003_stone = "stone_format_00003_ideaunit_v0_0_0"
     assert stone_format_00003_ideaunit_v0_0_0() == x0003_stone
 
@@ -77,19 +76,19 @@ def test_get_stone_filenames_ReturnsCorrectObj():
     # THEN
     print(f"{x_filenames=}")
     assert stone_format_00021_bud_acctunit_v0_0_0() in x_filenames
-    assert stone_format_00002_membership_v0_0_0() in x_filenames
+    assert stone_format_00020_bud_acct_membership_v0_0_0() in x_filenames
     assert stone_format_00003_ideaunit_v0_0_0() in x_filenames
 
 
 def test_get_stoneref_ReturnsObj():
     # ESTABLISH
-    stone_name_00001 = stone_format_00021_bud_acctunit_v0_0_0()
+    stone_name_00021 = stone_format_00021_bud_acctunit_v0_0_0()
 
     # WHEN
-    x_stoneref = get_stoneref(stone_name_00001)
+    x_stoneref = get_stoneref(stone_name_00021)
 
     # THEN
-    assert x_stoneref.stone_name == stone_name_00001
+    assert x_stoneref.stone_name == stone_name_00021
     assert x_stoneref.atom_categorys == [bud_acctunit_text()]
     assert x_stoneref._stonecolumns != {}
     assert len(x_stoneref._stonecolumns) == 5
@@ -133,20 +132,19 @@ def test_get_sorted_headers_ReturnsObj():
 def check_sorted_headers_exist(stone_format_filename: str):
     sorted_headers = get_sorted_headers(stone_format_filename)
     print(f"{stone_format_filename=} {sorted_headers=}")
-    assert get_stong_format_headers().get(sorted_headers) == stone_format_filename
+    assert get_stone_format_headers().get(sorted_headers) == stone_format_filename
 
 
-# def test_get_stong_format_headers_ReturnsObj():
-#     # ESTABLISH / WHEN
-#     x_headers = get_stong_format_headers()
+def test_get_stone_format_headers_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_headers = get_stone_format_headers()
 
-#     # THEN
-#     # print(f"{set(get_stong_format_headers().values())=}")
-#     assert set(get_stong_format_headers().values()) == get_stone_filenames()
-#     for x_stone_filename in get_stone_filenames():
-#         check_sorted_headers_exist(x_stone_filename)
-
-#     assert 1 == 2
+    # THEN
+    # print(f"{set(get_stone_format_headers().values())=}")
+    assert len(get_stone_format_headers()) == len(get_stone_filenames())
+    assert set(get_stone_format_headers().values()) == get_stone_filenames()
+    for x_stone_filename in get_stone_filenames():
+        check_sorted_headers_exist(x_stone_filename)
 
 
 def test__generate_stone_dataframe_ReturnsCorrectObj():
@@ -212,28 +210,28 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00021_bud_acctunit_v0_0_0():
     assert debtit_score_stonecolumn.column_order == 3
 
 
-def test_get_stoneref_HasCorrectAttrs_stone_format_00002_membership_v0_0_0():
+def test_get_stoneref_HasCorrectAttrs_stone_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
-    stone_name = stone_format_00002_membership_v0_0_0()
+    stone_name = stone_format_00020_bud_acct_membership_v0_0_0()
 
     # WHEN
-    format_00002_stoneref = get_stoneref(stone_name)
+    format_00021_stoneref = get_stoneref(stone_name)
 
     # THEN
-    real_id_stonecolumn = format_00002_stoneref.get_stonecolumn(real_id_str())
-    owner_id_stonecolumn = format_00002_stoneref.get_stonecolumn(owner_id_str())
-    acct_id_stonecolumn = format_00002_stoneref.get_stonecolumn(acct_id_str())
-    group_id_stonecolumn = format_00002_stoneref.get_stonecolumn(group_id_str())
-    credit_vote_stonecolumn = format_00002_stoneref.get_stonecolumn(credit_vote_str())
-    debtit_vote_stonecolumn = format_00002_stoneref.get_stonecolumn(debtit_vote_str())
-    assert len(format_00002_stoneref._stonecolumns) == 6
+    real_id_stonecolumn = format_00021_stoneref.get_stonecolumn(real_id_str())
+    owner_id_stonecolumn = format_00021_stoneref.get_stonecolumn(owner_id_str())
+    acct_id_stonecolumn = format_00021_stoneref.get_stonecolumn(acct_id_str())
+    group_id_stonecolumn = format_00021_stoneref.get_stonecolumn(group_id_str())
+    credit_vote_stonecolumn = format_00021_stoneref.get_stonecolumn(credit_vote_str())
+    debtit_vote_stonecolumn = format_00021_stoneref.get_stonecolumn(debtit_vote_str())
+    assert len(format_00021_stoneref._stonecolumns) == 6
 
     assert real_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
     assert acct_id_stonecolumn.column_order == 2
     assert group_id_stonecolumn.column_order == 3
-    assert debtit_vote_stonecolumn.column_order == 5
-    assert credit_vote_stonecolumn.column_order == 4
+    assert debtit_vote_stonecolumn.column_order == 4
+    assert credit_vote_stonecolumn.column_order == 5
 
 
 def test_get_stoneref_HasCorrectAttrs_stone_format_00003_ideaunit_v0_0_0():

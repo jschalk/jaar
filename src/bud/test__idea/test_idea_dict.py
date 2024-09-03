@@ -50,13 +50,13 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
     # WHEN
     sue_text = "Sue"
     zia_text = "Zia"
-    healerhold_dict = {"healerhold_group_ids": [sue_text, zia_text]}
+    healerhold_dict = {"healerhold_healer_ids": [sue_text, zia_text]}
     ideaunit_dict = {healerhold_key: healerhold_dict}
 
     # THEN
     static_healerhold = healerhold_shop()
-    static_healerhold.set_group_id(x_group_id=sue_text)
-    static_healerhold.set_group_id(x_group_id=zia_text)
+    static_healerhold.set_healer_id(x_healer_id=sue_text)
+    static_healerhold.set_healer_id(x_healer_id=zia_text)
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) is not None
     assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
 

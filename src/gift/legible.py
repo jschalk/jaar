@@ -17,6 +17,7 @@ from src.gift.atom_config import (
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
+    healer_id_str,
     parent_road_str,
     label_str,
     base_idea_active_requisite_str,
@@ -628,9 +629,9 @@ def add_bud_idea_healerhold_insert_to_legible_list(
 ):
     for road_dict in idea_healerhold_insert_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            group_id_value = idea_healerhold_atom.get_value(group_id_str())
+            healer_id_value = idea_healerhold_atom.get_value(healer_id_str())
             road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{group_id_value}' created for idea '{road_value}'."
+            x_str = f"Healerhold '{healer_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -639,9 +640,9 @@ def add_bud_idea_healerhold_delete_to_legible_list(
 ):
     for road_dict in idea_healerhold_delete_dict.values():
         for idea_healerhold_atom in road_dict.values():
-            group_id_value = idea_healerhold_atom.get_value(group_id_str())
+            healer_id_value = idea_healerhold_atom.get_value(healer_id_str())
             road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{group_id_value}' deleted for idea '{road_value}'."
+            x_str = f"Healerhold '{healer_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 

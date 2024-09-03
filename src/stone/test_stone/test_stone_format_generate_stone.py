@@ -21,7 +21,7 @@ from src.gift.atom import atomunit_shop
 from src.stone.stone import create_stone_df, create_changeunit
 from src.stone.stone_config import (
     stone_format_00021_bud_acctunit_v0_0_0,
-    stone_format_00002_membership_v0_0_0,
+    stone_format_00020_bud_acct_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
 )
 
@@ -70,7 +70,7 @@ def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     assert len(sue_acct_changeunit.get_ordered_atomunits()) == 3
 
 
-def test_create_changeunit_Arg_stone_format_00002_membership_v0_0_0():
+def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     sue_text = sue_str()
     bob_text = bob_str()
@@ -97,7 +97,7 @@ def test_create_changeunit_Arg_stone_format_00002_membership_v0_0_0():
     bob_acctunit.add_membership(iowa_text, bob_iowa_credit_vote, bob_iowa_debtit_vote)
     yao_acctunit.add_membership(iowa_text, yao_iowa_credit_vote, yao_iowa_debtit_vote)
     yao_acctunit.add_membership(ohio_text, yao_ohio_credit_vote, yao_ohio_debtit_vote)
-    x_stone_name = stone_format_00002_membership_v0_0_0()
+    x_stone_name = stone_format_00020_bud_acct_membership_v0_0_0()
     membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
     assert len(membership_dataframe) == 7
     membership_csv = membership_dataframe.to_csv(index=False)

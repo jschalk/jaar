@@ -795,9 +795,9 @@ class BudUnit:
         problem_bool: bool = None,
     ):
         if healerhold is not None:
-            for x_group_id in healerhold._group_ids:
-                if self.get_acctunit_group_ids_dict().get(x_group_id) is None:
-                    exception_text = f"Idea cannot edit healerhold because group_id '{x_group_id}' does not exist as group in Bud"
+            for x_healer_id in healerhold._healer_ids:
+                if self.get_acctunit_group_ids_dict().get(x_healer_id) is None:
+                    exception_text = f"Idea cannot edit healerhold because group_id '{x_healer_id}' does not exist as group in Bud"
                     raise healerhold_group_id_Exception(exception_text)
 
         x_ideaattrfilter = ideaattrfilter_shop(
@@ -1088,7 +1088,7 @@ class BudUnit:
             x_idea_obj._all_acct_cred = group_everyone
             x_idea_obj._all_acct_debt = group_everyone
 
-            if x_idea_obj._healerhold.any_group_id_exists():
+            if x_idea_obj._healerhold.any_healer_id_exists():
                 econ_justified_by_problem = False
                 healerhold_count += 1
                 self._sum_healerhold_share += x_idea_obj.get_fund_share()
@@ -1305,14 +1305,14 @@ class BudUnit:
             else:
                 x_sum = self._sum_healerhold_share
                 x_idea._healerhold_ratio = x_idea.get_fund_share() / x_sum
-            if self._econs_justified and x_idea._healerhold.any_group_id_exists():
+            if self._econs_justified and x_idea._healerhold.any_healer_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
     def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
-            for x_group_id in x_econ_idea._healerhold._group_ids:
-                x_groupbox = self.get_groupbox(x_group_id)
+            for x_healer_id in x_econ_idea._healerhold._healer_ids:
+                x_groupbox = self.get_groupbox(x_healer_id)
                 for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
                         _healers_dict[x_acct_id] = {x_econ_road: x_econ_idea}

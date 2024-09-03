@@ -25,7 +25,7 @@ from src.stone.stone_config import (
     attributes_str,
     column_order_str,
     sort_order_str,
-    stone_format_00002_membership_v0_0_0,
+    stone_format_00020_bud_acct_membership_v0_0_0,
     stone_format_00003_ideaunit_v0_0_0,
     stone_format_00021_bud_acctunit_v0_0_0,
 )
@@ -174,7 +174,7 @@ def create_changeunit(x_csv: str, x_stonename: str) -> ChangeUnit:
             x_atomunit.set_arg(title_row[3], float(row[3]))
             x_atomunit.set_arg(title_row[4], float(row[4]))
             x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == stone_format_00002_membership_v0_0_0():
+        elif x_stonename == stone_format_00020_bud_acct_membership_v0_0_0():
             x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
             x_atomunit.set_arg(title_row[2], row[2])
             x_atomunit.set_arg(title_row[3], row[3])

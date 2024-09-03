@@ -31,7 +31,7 @@ def create_categorys_stone_format_dict() -> dict:
             attributes_dict[x_arg] = stone_dict
 
         stone_format = {
-            atom_categorys_str(): x_atom_category,
+            atom_categorys_str(): [x_atom_category],
             attributes_str(): attributes_dict,
         }
         x_dict[stone_filename] = stone_format
