@@ -154,7 +154,11 @@ class AtomUnit:
         return set(self.optional_args.keys()).issubset(set(optional_args_dict.keys()))
 
     def is_valid(self) -> bool:
-        return self.is_required_args_valid() and self.is_optional_args_valid()
+        return (
+            self.is_required_args_valid()
+            and self.is_optional_args_valid()
+            and (self.required_args != {} or self.optional_args != {})
+        )
 
     def get_value(self, arg_key: str) -> any:
         required_value = self.required_args.get(arg_key)
@@ -716,7 +720,7 @@ class AtomRow:
             for x_arg in x_args:
                 if self.__dict__[x_arg]:
                     x_atom.set_arg(x_arg, self.__dict__[x_arg])
-            if x_atom.is_valid() and len(x_atom.get_all_args_in_list()) > 0:
+            if x_atom.is_valid() > 0:
                 x_list.append(x_atom)
         return x_list
 

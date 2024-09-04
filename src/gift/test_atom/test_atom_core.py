@@ -4,6 +4,7 @@ from src.gift.atom_config import (
     atom_delete,
     bud_acctunit_text,
     bud_acct_membership_text,
+    budunit_text,
     acct_id_str,
     group_id_str,
     credit_score_str,
@@ -216,6 +217,22 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_DELETE():
     # THEN
     assert bob_delete_atomunit.is_required_args_valid()
     assert bob_delete_atomunit.is_valid()
+
+
+def test_AtomUnit_is_valid_ReturnsCorrectBoolean_budunit():
+    # ESTABLISH / WHEN
+    bob_update_atomunit = atomunit_shop(budunit_text(), atom_insert())
+
+    # THEN
+    assert bob_update_atomunit.is_required_args_valid()
+    assert bob_update_atomunit.is_valid() is False
+
+    # WHEN
+    bob_update_atomunit.set_optional_arg("max_tree_traverse", 14)
+
+    # THEN
+    assert bob_update_atomunit.is_required_args_valid()
+    assert bob_update_atomunit.is_valid()
 
 
 def test_AtomUnit_set_atom_order_SetCorrectAttr():
