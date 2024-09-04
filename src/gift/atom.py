@@ -702,8 +702,9 @@ class AtomRow:
                     self.__dict__[x_arg] = str(x_value)
                 elif python_type == "bool":
                     self.__dict__[x_arg] = bool(x_value)
-                else:
-                    print(f"{x_arg=} {python_type=}")
+                elif python_type == "int":
+                    self.__dict__[x_arg] = int(x_value)
+                elif python_type == "float":
                     self.__dict__[x_arg] = float(x_value)
 
     def get_atomunits(self) -> list[AtomUnit]:
