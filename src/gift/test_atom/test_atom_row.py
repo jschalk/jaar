@@ -119,14 +119,18 @@ def test_AtomRow_set_python_types_SetsAttr():
     x_parent_road = "fizz_buzz"
     x_label = "buzzziy"
     x_monetary_desc = "boullons"
+    x_morph_text = "True"
+    x_morph_bool = True
     x_atomrow.parent_road = x_parent_road
     x_atomrow.label = x_label
     x_atomrow.monetary_desc = x_monetary_desc
+    x_atomrow.morph = x_morph_text
     four_int = 4
     assert x_atomrow.close != four_int
     assert x_atomrow.parent_road == x_parent_road
     assert x_atomrow.label == x_label
     assert x_atomrow.monetary_desc == x_monetary_desc
+    assert x_atomrow.morph == x_morph_text
 
     # WHEN
     x_atomrow._set_python_types()
@@ -136,6 +140,7 @@ def test_AtomRow_set_python_types_SetsAttr():
     assert x_atomrow.parent_road == x_parent_road
     assert x_atomrow.label == x_label
     assert x_atomrow.monetary_desc == x_monetary_desc
+    assert x_atomrow.morph == x_morph_bool
 
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario0():

@@ -700,6 +700,8 @@ class AtomRow:
                     self.__dict__[x_arg] = RoadNode(x_value)
                 elif python_type == "str":
                     self.__dict__[x_arg] = str(x_value)
+                elif python_type == "bool":
+                    self.__dict__[x_arg] = bool(x_value)
                 else:
                     print(f"{x_arg=} {python_type=}")
                     self.__dict__[x_arg] = float(x_value)
