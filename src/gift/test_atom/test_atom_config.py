@@ -183,21 +183,6 @@ def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
                 print(x_text)
                 return False
 
-        treasury_only_text = "treasury_only"
-        if category_dict.get(treasury_only_text) is None:
-            print(f"{category=} missing {treasury_only_text}")
-            return False
-
-        print(f"{category_dict.get(treasury_only_text)=}")
-        if category_dict.get(treasury_only_text) not in [True, False]:
-            x_text = f"{category=} {treasury_only_text} value '{category_dict.get(treasury_only_text)}' not acceptable"
-            print(x_text)
-            return False
-
-        if category_dict.get(treasury_only_text) is None:
-            print(f"{category=} missing {treasury_only_text}")
-            return False
-
         if category_dict.get(normal_specs_text()) is None:
             print(f"{category=} {normal_specs_text()} is missing")
             return False
