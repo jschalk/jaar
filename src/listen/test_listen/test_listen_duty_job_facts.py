@@ -72,7 +72,7 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     zia_job = get_example_zia_speaker()
     zia_job.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     clean_ideaunit = zia_job.get_idea_obj(clean_road())
-    clean_ideaunit._doerunit.set_grouphold(yao_text)
+    clean_ideaunit._teamunit.set_teamlink(yao_text)
     sue_texas_hubunit.save_job_bud(zia_job)
 
     new_yao_job = create_listen_basis(yao_duty)
@@ -271,7 +271,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #         sweep_road, reason_base=status_road, reason_premise=dirty_road
 #     )
 #     sweep_idea = sue_speaker.get_idea_obj(sweep_road)
-#     sweep_idea._doerunit.set_grouphold(yao_text)
+#     sweep_idea._teamunit.set_teamlink(yao_text)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_job_bud(sue_text, sue_speaker.get_json(), True)

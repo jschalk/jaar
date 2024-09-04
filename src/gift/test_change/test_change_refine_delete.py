@@ -12,7 +12,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     acct_id_str,
@@ -42,7 +42,7 @@ from src.gift.examples.example_changes import get_changeunit_example1
 # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit(): assert 1==2
 # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_awardlink(): assert 1==2
 # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_factunit(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_grouphold(): assert 1==2
+# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_teamlink(): assert 1==2
 # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_healerhold(): assert 1==2
 # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit(): assert 1==2
 # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reasonunit(): assert 1==2
@@ -73,7 +73,7 @@ from src.gift.examples.example_changes import get_changeunit_example1
 #     assert 1 == 2
 
 
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_grouphold():
+# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_teamlink():
 #     assert 1 == 2
 
 

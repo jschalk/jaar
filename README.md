@@ -128,7 +128,7 @@ x_dict = {
     "bud_acct_membership":          {"required_args": {"acct_id": {},"group_id": {},},      "optional_args": {"credit_vote": {},"debtit_vote": {},},},
     "bud_acctunit":                 {"required_args": {"acct_id": {},},                     "optional_args": {"credit_score": {},"debtit_score": {},},},
     "bud_idea_awardlink":           {"required_args": {"road": {},"group_id": {},},         "optional_args": {"give_force": {},"take_force": {},},},
-    "bud_idea_grouphold":           {"required_args": {"road": {},"group_id": {},},         "optional_args": {},},
+    "bud_idea_teamlink":           {"required_args": {"road": {},"group_id": {},},         "optional_args": {},},
     "bud_idea_factunit":            {"required_args": {"road": {},"base": {},},             "optional_args": {"fnigh": {},"fopen": {},"pick": {},},},
     "bud_idea_reason_premiseunit":  {"required_args": {"road": {},"base": {},"need": {},},  "optional_args": {"divisor": {},"nigh": {},"open": {},},},
     "bud_idea_reasonunit":          {"required_args": {"road": {},"base": {},},             "optional_args": {"base_idea_active_requisite": {},},},

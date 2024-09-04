@@ -24,12 +24,12 @@ from src._road.road import (
     find_replace_road_key_dict,
 )
 from src.bud.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
-from src.bud.reason_doer import (
-    DoerUnit,
-    DoerHeir,
-    doerunit_shop,
-    doerheir_shop,
-    doerunit_get_from_dict,
+from src.bud.reason_team import (
+    TeamUnit,
+    TeamHeir,
+    teamunit_shop,
+    teamheir_shop,
+    teamunit_get_from_dict,
 )
 from src.bud.reason_idea import (
     FactCore,
@@ -90,7 +90,7 @@ class IdeaAttrFilter:
     reason_del_premise_base: RoadUnit = None
     reason_del_premise_need: RoadUnit = None
     reason_base_idea_active_requisite: str = None
-    doerunit: DoerUnit = None
+    teamunit: TeamUnit = None
     healerhold: HealerHold = None
     begin: float = None
     close: float = None
@@ -149,7 +149,7 @@ def ideaattrfilter_shop(
     reason_del_premise_base: RoadUnit = None,
     reason_del_premise_need: RoadUnit = None,
     reason_base_idea_active_requisite: str = None,
-    doerunit: DoerUnit = None,
+    teamunit: TeamUnit = None,
     healerhold: HealerHold = None,
     begin: float = None,
     close: float = None,
@@ -181,7 +181,7 @@ def ideaattrfilter_shop(
         reason_del_premise_base=reason_del_premise_base,
         reason_del_premise_need=reason_del_premise_need,
         reason_base_idea_active_requisite=reason_base_idea_active_requisite,
-        doerunit=doerunit,
+        teamunit=teamunit,
         healerhold=healerhold,
         begin=begin,
         close=close,
@@ -217,8 +217,8 @@ class IdeaUnit:
     _awardlines: dict[GroupID, AwardLine] = None  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None  # Calculated field
-    _doerunit: DoerUnit = None
-    _doerheir: DoerHeir = None  # Calculated field
+    _teamunit: TeamUnit = None
+    _teamheir: TeamHeir = None  # Calculated field
     _factunits: dict[RoadUnit, FactUnit] = None
     _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
     _healerhold: HealerHold = None
@@ -578,8 +578,8 @@ class IdeaUnit:
                 base=idea_attr.reason_base,
                 base_idea_active_requisite=idea_attr.reason_base_idea_active_requisite,
             )
-        if idea_attr.doerunit is not None:
-            self._doerunit = idea_attr.doerunit
+        if idea_attr.teamunit is not None:
+            self._teamunit = idea_attr.teamunit
         if idea_attr.healerhold is not None:
             self._healerhold = idea_attr.healerhold
         if idea_attr.begin is not None:
@@ -789,10 +789,10 @@ class IdeaUnit:
             active_bool
             and bud_groupboxs != {}
             and bud_owner_id is not None
-            and self._doerheir._groupholds != {}
+            and self._teamheir._teamlinks != {}
         ):
-            self._doerheir.set_owner_id_doer(bud_groupboxs, bud_owner_id)
-            if self._doerheir._owner_id_doer is False:
+            self._teamheir.set_owner_id_team(bud_groupboxs, bud_owner_id)
+            if self._teamheir._owner_id_team is False:
                 active_bool = False
         return active_bool
 
@@ -891,8 +891,8 @@ class IdeaUnit:
             x_dict["_kids"] = self.get_kids_dict()
         if self._reasonunits not in [{}, None]:
             x_dict["_reasonunits"] = self.get_reasonunits_dict()
-        if self._doerunit not in [None, doerunit_shop()]:
-            x_dict["_doerunit"] = self.get_doerunit_dict()
+        if self._teamunit not in [None, teamunit_shop()]:
+            x_dict["_teamunit"] = self.get_teamunit_dict()
         if self._healerhold not in [None, healerhold_shop()]:
             x_dict["_healerhold"] = self._healerhold.get_dict()
         if self._awardlinks not in [{}, None]:
@@ -938,24 +938,24 @@ class IdeaUnit:
             dict_x=self._factunits, old_road=old_road, new_road=new_road
         )
 
-    def set_doerunit_empty_if_none(self):
-        if self._doerunit is None:
-            self._doerunit = doerunit_shop()
+    def set_teamunit_empty_if_none(self):
+        if self._teamunit is None:
+            self._teamunit = teamunit_shop()
 
-    def set_doerheir(
+    def set_teamheir(
         self,
-        parent_doerheir: DoerHeir,
+        parent_teamheir: TeamHeir,
         bud_groupboxs: dict[GroupID, GroupBox],
     ):
-        self._doerheir = doerheir_shop()
-        self._doerheir.set_groupholds(
-            parent_doerheir=parent_doerheir,
-            doerunit=self._doerunit,
+        self._teamheir = teamheir_shop()
+        self._teamheir.set_teamlinks(
+            parent_teamheir=parent_teamheir,
+            teamunit=self._teamunit,
             bud_groupboxs=bud_groupboxs,
         )
 
-    def get_doerunit_dict(self) -> dict:
-        return self._doerunit.get_dict()
+    def get_teamunit_dict(self) -> dict:
+        return self._teamunit.get_dict()
 
 
 def ideaunit_shop(
@@ -969,8 +969,8 @@ def ideaunit_shop(
     _awardlines: dict[GroupID, AwardLink] = None,  # Calculated field
     _reasonunits: dict[RoadUnit, ReasonUnit] = None,
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None,  # Calculated field
-    _doerunit: DoerUnit = None,
-    _doerheir: DoerHeir = None,  # Calculated field
+    _teamunit: TeamUnit = None,
+    _teamheir: TeamHeir = None,  # Calculated field
     _factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
     _healerhold: HealerHold = None,
@@ -1018,8 +1018,8 @@ def ideaunit_shop(
         _awardlines=get_empty_dict_if_none(_awardlines),
         _reasonunits=get_empty_dict_if_none(_reasonunits),
         _reasonheirs=get_empty_dict_if_none(_reasonheirs),
-        _doerunit=_doerunit,
-        _doerheir=_doerheir,
+        _teamunit=_teamunit,
+        _teamheir=_teamheir,
         _factunits=get_empty_dict_if_none(_factunits),
         _factheirs=get_empty_dict_if_none(_factheirs),
         _healerhold=_healerhold,
@@ -1057,7 +1057,7 @@ def ideaunit_shop(
         x_ideakid.set_label(_label=_bud_real_id)
     else:
         x_ideakid.set_label(_label=_label)
-    x_ideakid.set_doerunit_empty_if_none()
+    x_ideakid.set_teamunit_empty_if_none()
     x_ideakid.set_originunit_empty_if_none()
     return x_ideakid
 
@@ -1069,11 +1069,11 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else None
         )
-    elif dict_key == "_doerunit":
+    elif dict_key == "_teamunit":
         return (
-            doerunit_get_from_dict(x_dict[dict_key])
+            teamunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
-            else doerunit_shop()
+            else teamunit_shop()
         )
     elif dict_key == "_healerhold":
         return (

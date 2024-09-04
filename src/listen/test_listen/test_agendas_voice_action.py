@@ -27,7 +27,7 @@ from src.listen.examples.example_listen import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_groupholdIsSet(
+def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_teamlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -79,8 +79,8 @@ def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
     zia_action.add_acctunit(yao_text, debtit_score=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._doerunit.set_grouphold(yao_text)
-    cook_ideaunit._doerunit.set_grouphold(yao_text)
+    clean_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit._teamunit.set_teamlink(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_bud(zia_action)
     new_yao_action = create_listen_basis(yao_voice)
@@ -181,8 +181,8 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
     zia_action.add_acctunit(yao_text, debtit_score=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._doerunit.set_grouphold(yao_text)
-    cook_ideaunit._doerunit.set_grouphold(yao_text)
+    clean_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit._teamunit.set_teamlink(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_bud(zia_action)
 
@@ -193,7 +193,7 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
     vacuum_road = sue_action.make_l1_road(vacuum_text)
     sue_action.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = sue_action.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._doerunit.set_grouphold(yao_text)
+    vacuum_ideaunit._teamunit.set_teamlink(yao_text)
 
     egg_text = "egg first"
     egg_road = sue_action.make_l1_road(egg_text)
@@ -260,8 +260,8 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
     zia_action.add_acctunit(yao_text, debtit_score=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._doerunit.set_grouphold(yao_text)
-    cook_ideaunit._doerunit.set_grouphold(yao_text)
+    clean_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit._teamunit.set_teamlink(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_bud(zia_action)
 
@@ -308,8 +308,8 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     zia_action.add_acctunit(yao_text, debtit_score=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
-    clean_ideaunit._doerunit.set_grouphold(yao_text)
-    cook_ideaunit._doerunit.set_grouphold(yao_text)
+    clean_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit._teamunit.set_teamlink(yao_text)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_bud(zia_action)
 
@@ -319,7 +319,7 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     vacuum_road = yao_old_action.make_l1_road(vacuum_text)
     yao_old_action.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
     vacuum_ideaunit = yao_old_action.get_idea_obj(vacuum_road)
-    vacuum_ideaunit._doerunit.set_grouphold(yao_text)
+    vacuum_ideaunit._teamunit.set_teamlink(yao_text)
     yao_hubunit.save_action_bud(yao_old_action)
 
     # WHEN

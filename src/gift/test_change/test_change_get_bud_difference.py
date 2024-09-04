@@ -11,7 +11,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     acct_id_str,
@@ -1126,7 +1126,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_insert():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_insert():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1140,7 +1140,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._doerunit.set_grouphold(xio_text)
+    after_ball_ideaunit._teamunit.set_teamlink(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1150,7 +1150,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_grouphold_text(),
+        bud_idea_teamlink_text(),
         ball_road,
         xio_text,
     ]
@@ -1160,7 +1160,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_delete():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_delete():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1172,11 +1172,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit._doerunit.set_grouphold(xio_text)
+    before_ball_ideaunit._teamunit.set_teamlink(xio_text)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._doerunit.del_grouphold(xio_text)
+    after_ball_ideaunit._teamunit.del_teamlink(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1186,7 +1186,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_grouphold_
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_grouphold_text(),
+        bud_idea_teamlink_text(),
         ball_road,
         xio_text,
     ]
@@ -1356,7 +1356,7 @@ def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     ball_road = after_sue_bud.make_road(sports_road, ball_text)
     after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._doerunit.set_grouphold(xio_text)
+    after_ball_ideaunit._teamunit.set_teamlink(xio_text)
 
     before_sue_bud = budunit_shop(sue_text)
     sue1_changeunit = changeunit_shop()

@@ -12,7 +12,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     acct_id_str,
@@ -981,7 +981,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_reasonu
     assert after_ball_idea.get_reasonunit(knee_road) is None
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_grouphold():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_teamlink():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
@@ -993,10 +993,10 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_groupho
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_ideaunit._doerunit._groupholds == set()
+    assert before_ball_ideaunit._teamunit._teamlinks == set()
 
     # WHEN
-    update_disc_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_insert())
+    update_disc_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg(group_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
@@ -1005,11 +1005,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_groupho
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._doerunit._groupholds != set()
-    assert after_ball_ideaunit._doerunit.get_grouphold(yao_text) is not None
+    assert after_ball_ideaunit._teamunit._teamlinks != set()
+    assert after_ball_ideaunit._teamunit.get_teamlink(yao_text) is not None
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_grouphold():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_teamlink():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
@@ -1021,22 +1021,22 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_groupho
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    before_ball_ideaunit._doerunit.set_grouphold(yao_text)
-    assert before_ball_ideaunit._doerunit._groupholds != set()
-    assert before_ball_ideaunit._doerunit.get_grouphold(yao_text) is not None
+    before_ball_ideaunit._teamunit.set_teamlink(yao_text)
+    assert before_ball_ideaunit._teamunit._teamlinks != set()
+    assert before_ball_ideaunit._teamunit.get_teamlink(yao_text) is not None
 
     # WHEN
-    update_disc_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_delete())
+    update_disc_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_delete())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg(group_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
-    print(f"{before_sue_au.get_idea_obj(ball_road)._doerunit=}")
+    print(f"{before_sue_au.get_idea_obj(ball_road)._teamunit=}")
     after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._doerunit._groupholds == set()
+    assert after_ball_ideaunit._teamunit._teamlinks == set()
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerhold():
@@ -1091,7 +1091,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerh
     x_atomunit.set_required_arg(healer_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(x_atomunit)
-    print(f"{before_sue_au.get_idea_obj(ball_road)._doerunit=}")
+    print(f"{before_sue_au.get_idea_obj(ball_road)._teamunit=}")
     after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
 
     # THEN

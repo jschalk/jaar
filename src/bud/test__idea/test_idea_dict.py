@@ -7,7 +7,7 @@ from src.bud.reason_idea import (
     factunit_shop,
     premiseunit_shop,
 )
-from src.bud.reason_doer import doerunit_shop
+from src.bud.reason_team import teamunit_shop
 from src.bud.origin import originunit_shop
 from src.bud.idea import ideaunit_shop, get_obj_from_idea_dict
 
@@ -122,7 +122,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     x1_awardlinks = {biker_group_id: biker_get_dict, flyer_group_id: flyer_get_dict}
     sue_text = "Sue"
     yao_text = "Yao"
-    sue_doerunit = doerunit_shop({sue_text: -1, yao_text: -1})
+    sue_teamunit = teamunit_shop({sue_text: -1, yao_text: -1})
     yao_healerhold = healerhold_shop({yao_text})
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
@@ -136,7 +136,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _level=1,
         _reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
-        _doerunit=sue_doerunit,
+        _teamunit=sue_teamunit,
         _healerhold=yao_healerhold,
         _active=True,
         pledge=True,
@@ -175,7 +175,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_reasonunits"] == casa_idea.get_reasonunits_dict()
     assert casa_dict["_awardlinks"] == casa_idea.get_awardlinks_dict()
     assert casa_dict["_awardlinks"] == x1_awardlinks
-    assert casa_dict["_doerunit"] == sue_doerunit.get_dict()
+    assert casa_dict["_teamunit"] == sue_teamunit.get_dict()
     assert casa_dict["_healerhold"] == yao_healerhold.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
     assert casa_dict["_mass"] == casa_idea._mass
@@ -222,8 +222,8 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     yao_text = "Yao"
     casa_idea.set_awardlink(awardlink_shop(yao_text))
 
-    x_doerunit = casa_idea._doerunit
-    x_doerunit.set_grouphold(group_id=yao_text)
+    x_teamunit = casa_idea._teamunit
+    x_teamunit.set_teamlink(group_id=yao_text)
 
     x_originunit = casa_idea._originunit
     x_originunit.set_originhold(yao_text, 1)
@@ -235,7 +235,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_idea.pledge
     assert casa_idea._factunits is not None
     assert casa_idea._awardlinks is not None
-    assert casa_idea._doerunit is not None
+    assert casa_idea._teamunit is not None
     assert casa_idea._originunit is not None
     assert casa_idea._kids != {}
 
@@ -247,7 +247,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_dict.get("pledge")
     assert casa_dict.get("_factunits") is not None
     assert casa_dict.get("_awardlinks") is not None
-    assert casa_dict.get("_doerunit") is not None
+    assert casa_dict.get("_teamunit") is not None
     assert casa_dict.get("_originunit") is not None
     assert casa_dict.get("_kids") is not None
 
@@ -259,7 +259,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_idea.pledge is False
     assert casa_idea._factunits == {}
     assert casa_idea._awardlinks == {}
-    assert casa_idea._doerunit == doerunit_shop()
+    assert casa_idea._teamunit == teamunit_shop()
     assert casa_idea._healerhold == healerhold_shop()
     assert casa_idea._originunit == originunit_shop()
     assert casa_idea._kids == {}
@@ -272,7 +272,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_dict.get("pledge") is None
     assert casa_dict.get("_factunits") is None
     assert casa_dict.get("_awardlinks") is None
-    assert casa_dict.get("_doerunit") is None
+    assert casa_dict.get("_teamunit") is None
     assert casa_dict.get("_healerhold") is None
     assert casa_dict.get("_originunit") is None
     assert casa_dict.get("_kids") is None

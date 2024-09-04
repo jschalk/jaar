@@ -157,32 +157,6 @@
             "atom_order": 13
         }
     },
-    "bud_idea_grouphold": {
-        "DELETE": {
-            "atom_order": 19
-        },
-        "INSERT": {
-            "atom_order": 4
-        },
-        "normal_specs": {
-            "normal_table_name": "grouphold"
-        },
-        "optional_args": {},
-        "required_args": {
-            "group_id": {
-                "column_order": 1,
-                "nesting_order": 1,
-                "python_type": "GroupID",
-                "sqlite_datatype": "TEXT"
-            },
-            "road": {
-                "column_order": 0,
-                "nesting_order": 0,
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            }
-        }
-    },
     "bud_idea_healerhold": {
         "DELETE": {
             "atom_order": 20
@@ -293,6 +267,32 @@
         },
         "UPDATE": {
             "atom_order": 15
+        }
+    },
+    "bud_idea_teamlink": {
+        "DELETE": {
+            "atom_order": 19
+        },
+        "INSERT": {
+            "atom_order": 4
+        },
+        "normal_specs": {
+            "normal_table_name": "teamlink"
+        },
+        "optional_args": {},
+        "required_args": {
+            "group_id": {
+                "column_order": 1,
+                "nesting_order": 1,
+                "python_type": "GroupID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "column_order": 0,
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
         }
     },
     "bud_ideaunit": {
