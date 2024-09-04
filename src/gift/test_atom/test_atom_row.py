@@ -112,6 +112,32 @@ def test_AtomRow_delete_atom_category_SetsAttr():
     assert not x_atomrow.atom_category_exists(bud_acct_membership_text())
 
 
+def test_AtomRow_set_python_types_SetsAttr():
+    # ESTABLISH
+    x_atomrow = atomrow_shop({bud_acctunit_text()}, atom_insert())
+    x_atomrow.close = "4"
+    x_parent_road = "fizz_buzz"
+    x_label = "buzzziy"
+    x_monetary_desc = "boullons"
+    x_atomrow.parent_road = x_parent_road
+    x_atomrow.label = x_label
+    x_atomrow.monetary_desc = x_monetary_desc
+    four_int = 4
+    assert x_atomrow.close != four_int
+    assert x_atomrow.parent_road == x_parent_road
+    assert x_atomrow.label == x_label
+    assert x_atomrow.monetary_desc == x_monetary_desc
+
+    # WHEN
+    x_atomrow._set_python_types()
+
+    # THEN
+    assert x_atomrow.close == four_int
+    assert x_atomrow.parent_road == x_parent_road
+    assert x_atomrow.label == x_label
+    assert x_atomrow.monetary_desc == x_monetary_desc
+
+
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario0():
     # ESTABLISH
     x_category = bud_acctunit_text()
@@ -156,3 +182,23 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Fails():
 
     # THEN
     assert len(x_atomunits) == 0
+
+
+def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario2():
+    # ESTABLISH
+    x_category = bud_acctunit_text()
+    x_atomrow = atomrow_shop({x_category}, atom_insert())
+    x_atomrow.acct_id = "Bob"
+    four_text = "4"
+    x_atomrow.credit_score = four_text
+
+    # WHEN
+    x_atomunits = x_atomrow.get_atomunits()
+
+    # THEN
+    assert len(x_atomunits) == 1
+    static_atom = atomunit_shop(x_category, atom_insert())
+    static_atom.set_arg(acct_id_str(), "Bob")
+    four_int = 4
+    static_atom.set_arg("credit_score", four_int)
+    assert x_atomunits[0] == static_atom

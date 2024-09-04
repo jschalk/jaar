@@ -22,6 +22,7 @@ from src.gift.atom_config import (
     is_category_ref,
     get_atom_config_args,
     get_sorted_required_arg_keys,
+    get_atom_args_python_types,
     nesting_order_str,
     required_args_text,
     optional_args_text,
@@ -686,7 +687,25 @@ class AtomRow:
     def delete_atom_category(self, atom_category: str):
         self._atom_categorys.remove(atom_category)
 
+    def _set_python_types(self):
+        for x_arg, python_type in get_atom_args_python_types().items():
+            if x_value := self.__dict__.get(x_arg):
+                if python_type == "AcctID":
+                    self.__dict__[x_arg] = AcctID(x_value)
+                elif python_type == "GroupID":
+                    self.__dict__[x_arg] = GroupID(x_value)
+                elif python_type == "RoadUnit":
+                    self.__dict__[x_arg] = RoadUnit(x_value)
+                elif python_type == "RoadNode":
+                    self.__dict__[x_arg] = RoadNode(x_value)
+                elif python_type == "str":
+                    self.__dict__[x_arg] = str(x_value)
+                else:
+                    print(f"{x_arg=} {python_type=}")
+                    self.__dict__[x_arg] = float(x_value)
+
     def get_atomunits(self) -> list[AtomUnit]:
+        self._set_python_types()
         x_list = []
         for x_category in category_ref():
             x_atom = atomunit_shop(x_category, self._crud_command)
