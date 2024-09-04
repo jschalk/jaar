@@ -2,7 +2,7 @@ from src._instrument.python_tool import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
 from src.bud.group import awardlink_shop
 from src.bud.healer import healerhold_shop
-from src.bud.reason_doer import doerunit_shop
+from src.bud.reason_team import teamunit_shop
 from src.bud.reason_idea import factunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import (
@@ -84,13 +84,13 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert yao_bud_originhold["importance"] == 1
 
 
-def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
+def test_BudUnit_get_dict_ReturnsDictWith_idearoot_teamunit():
     # ESTABLISH
     run_text = "runners"
     sue_bud = budunit_shop("Sue")
-    x_doerunit = doerunit_shop()
-    x_doerunit.set_grouphold(group_id=run_text)
-    sue_bud.edit_idea_attr(sue_bud._real_id, doerunit=x_doerunit)
+    x_teamunit = teamunit_shop()
+    x_teamunit.set_teamlink(group_id=run_text)
+    sue_bud.edit_idea_attr(sue_bud._real_id, teamunit=x_teamunit)
     root_idea = sue_bud.get_idea_obj(sue_bud._real_id)
     x_gogo_want = 5
     x_stop_want = 11
@@ -102,8 +102,8 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_doerunit():
     idearoot_dict = bud_dict.get("_idearoot")
 
     # THEN
-    assert idearoot_dict["_doerunit"] == x_doerunit.get_dict()
-    assert idearoot_dict["_doerunit"] == {"_groupholds": [run_text]}
+    assert idearoot_dict["_teamunit"] == x_teamunit.get_dict()
+    assert idearoot_dict["_teamunit"] == {"_teamlinks": [run_text]}
     assert idearoot_dict.get("_gogo_want") == x_gogo_want
     assert idearoot_dict.get("_stop_want") == x_stop_want
 
@@ -128,7 +128,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     assert idearoot_dict["_healerhold"] == run_healerhold.get_dict()
 
 
-def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
+def test_BudUnit_get_dict_ReturnsDictWith_ideakid_TeamUnit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
@@ -140,9 +140,9 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
     morn_text = "morning"
     morn_road = sue_bud.make_l1_road(morn_text)
     sue_bud.set_l1_idea(ideaunit_shop(morn_text))
-    x_doerunit = doerunit_shop()
-    x_doerunit.set_grouphold(group_id=run_text)
-    sue_bud.edit_idea_attr(doerunit=x_doerunit, road=morn_road)
+    x_teamunit = teamunit_shop()
+    x_teamunit.set_teamlink(group_id=run_text)
+    sue_bud.edit_idea_attr(teamunit=x_teamunit, road=morn_road)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -150,11 +150,11 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_DoerUnit():
 
     # THEN
     _kids = "_kids"
-    _doerunit = "_doerunit"
+    _teamunit = "_teamunit"
 
-    doer_dict_x = idearoot_dict[_kids][morn_text][_doerunit]
-    assert doer_dict_x == x_doerunit.get_dict()
-    assert doer_dict_x == {"_groupholds": [run_text]}
+    team_dict_x = idearoot_dict[_kids][morn_text][_teamunit]
+    assert team_dict_x == x_teamunit.get_dict()
+    assert team_dict_x == {"_teamlinks": [run_text]}
 
 
 def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
@@ -323,12 +323,12 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     xio_acctunit = zia_bud.get_acct(xio_text)
     sue_acctunit.add_membership(run_text)
     xio_acctunit.add_membership(run_text)
-    run_doerunit = doerunit_shop()
-    run_doerunit.set_grouphold(group_id=run_text)
-    zia_bud.edit_idea_attr(zia_bud._real_id, doerunit=run_doerunit)
-    xio_doerunit = doerunit_shop()
-    xio_doerunit.set_grouphold(group_id=xio_text)
-    zia_bud.edit_idea_attr(shave_road, doerunit=xio_doerunit)
+    run_teamunit = teamunit_shop()
+    run_teamunit.set_teamlink(group_id=run_text)
+    zia_bud.edit_idea_attr(zia_bud._real_id, teamunit=run_teamunit)
+    xio_teamunit = teamunit_shop()
+    xio_teamunit.set_teamlink(group_id=xio_text)
+    zia_bud.edit_idea_attr(shave_road, teamunit=xio_teamunit)
     zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(xio_text))
     zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
     zia_bud.edit_idea_attr(zia_bud._real_id, awardlink=awardlink_shop(sue_text))
@@ -378,8 +378,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_idearoot._parent_road == ""
     assert json_idearoot._parent_road == zia_bud._idearoot._parent_road
     assert json_idearoot._reasonunits == {}
-    assert json_idearoot._doerunit == zia_bud._idearoot._doerunit
-    assert json_idearoot._doerunit == run_doerunit
+    assert json_idearoot._teamunit == zia_bud._idearoot._teamunit
+    assert json_idearoot._teamunit == run_teamunit
     assert json_idearoot._fund_coin == 8
     assert json_idearoot._fund_coin == zia_fund_coin
     assert len(json_idearoot._factunits) == 1
@@ -400,8 +400,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     json_shave_idea = json_bud.get_idea_obj(shave_road)
     zia_shave_idea = zia_bud.get_idea_obj(shave_road)
     assert len(json_shave_idea._reasonunits) == 1
-    assert json_shave_idea._doerunit == zia_shave_idea._doerunit
-    assert json_shave_idea._doerunit == xio_doerunit
+    assert json_shave_idea._teamunit == zia_shave_idea._teamunit
+    assert json_shave_idea._teamunit == xio_teamunit
     assert json_shave_idea._originunit == zia_shave_idea._originunit
     print(f"{json_shave_idea._healerhold=}")
     assert json_shave_idea._healerhold == zia_shave_idea._healerhold

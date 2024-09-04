@@ -30,7 +30,7 @@ def test_add_voice_pledge_Addspledgegift(env_dir_setup_cleanup):
     assert new_sue_voice.idea_exists(clean_road)
 
 
-def test_add_voice_pledge_SetsvoiceBudpledgeIdea_grouphold(env_dir_setup_cleanup):
+def test_add_voice_pledge_SetsvoiceBudpledgeIdea_teamlink(env_dir_setup_cleanup):
     # ESTABLISH
     sue_text = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_text)
@@ -42,14 +42,14 @@ def test_add_voice_pledge_SetsvoiceBudpledgeIdea_grouphold(env_dir_setup_cleanup
 
     # WHEN
     bob_text = "Bob"
-    add_voice_pledge(sue_hubunit, clean_road, x_grouphold=bob_text)
+    add_voice_pledge(sue_hubunit, clean_road, x_teamlink=bob_text)
 
     # THEN
     new_sue_voice = sue_hubunit.get_voice_bud()
     assert new_sue_voice.idea_exists(clean_road)
     clean_idea = new_sue_voice.get_idea_obj(clean_road)
-    print(f"{clean_idea._doerunit._groupholds=}")
-    assert clean_idea._doerunit.grouphold_exists(bob_text)
+    print(f"{clean_idea._teamunit._teamlinks=}")
+    assert clean_idea._teamunit.teamlink_exists(bob_text)
 
 
 def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):

@@ -7,7 +7,7 @@ from src.bud.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
 )
-from src.bud.reason_doer import doerunit_shop
+from src.bud.reason_team import teamunit_shop
 from src.bud.examples.bud_env import get_bud_examples_dir as env_dir
 
 
@@ -367,9 +367,9 @@ def get_budunit_laundry_example1() -> BudUnit:
     amos_bud.edit_idea_attr(
         road=laundry_task_road, reason_base=basket_road, reason_premise=b_smel_road
     )
-    cali_doerunit = doerunit_shop()
-    cali_doerunit.set_grouphold(cali_text)
-    amos_bud.edit_idea_attr(road=laundry_task_road, doerunit=cali_doerunit)
+    cali_teamunit = teamunit_shop()
+    cali_teamunit.set_teamlink(cali_text)
+    amos_bud.edit_idea_attr(road=laundry_task_road, teamunit=cali_teamunit)
     # print(f"{basket_road=}")
     # print(f"{amos_bud._real_id=}")
     amos_bud.set_fact(base=basket_road, pick=b_full_road)

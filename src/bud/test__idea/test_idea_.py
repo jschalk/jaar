@@ -6,7 +6,7 @@ from src._road.road import (
 )
 from src.bud.healer import healerhold_shop
 from src.bud.group import awardlink_shop
-from src.bud.reason_doer import doerunit_shop
+from src.bud.reason_team import teamunit_shop
 from src.bud.origin import originunit_shop
 from src.bud.idea import IdeaUnit, ideaunit_shop
 
@@ -20,8 +20,8 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._uid is None
     assert x_ideaunit._reasonunits is None
     assert x_ideaunit._reasonheirs is None  # calculated field
-    assert x_ideaunit._doerunit is None
-    assert x_ideaunit._doerheir is None  # calculated field
+    assert x_ideaunit._teamunit is None
+    assert x_ideaunit._teamheir is None  # calculated field
     assert x_ideaunit._factunits is None
     assert x_ideaunit._factheirs is None  # calculated field
     assert x_ideaunit._awardlinks is None
@@ -96,8 +96,8 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._fund_cease is None
     assert x_ideaunit._reasonunits == {}
     assert x_ideaunit._reasonheirs == {}
-    assert x_ideaunit._doerunit == doerunit_shop()
-    assert x_ideaunit._doerheir is None
+    assert x_ideaunit._teamunit == teamunit_shop()
+    assert x_ideaunit._teamheir is None
     assert x_ideaunit._originunit == originunit_shop()
     assert x_ideaunit._road_delimiter == default_road_delimiter_if_none()
     assert x_ideaunit._root is False

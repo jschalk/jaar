@@ -4,7 +4,7 @@ from src._instrument.python_tool import (
     get_dict_from_json,
 )
 from src._instrument.db_tool import create_insert_sqlstr, RowData
-from src._road.road import create_road
+from src._road.road import create_road, RoadNode, RoadUnit, GroupID, AcctID
 from src.bud.reason_idea import factunit_shop
 from src.bud.acct import acctunit_shop
 from src.bud.group import awardlink_shop
@@ -12,6 +12,7 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import BudUnit
 from src.gift.atom_config import (
     get_category_from_dict,
+    category_ref,
     atom_delete,
     atom_insert,
     atom_update,
@@ -19,6 +20,7 @@ from src.gift.atom_config import (
     get_atom_order,
     get_atom_config_dict,
     is_category_ref,
+    get_atom_config_args,
     get_sorted_required_arg_keys,
     nesting_order_str,
     required_args_text,
@@ -32,7 +34,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     acct_id_str,
@@ -57,6 +59,7 @@ from src.gift.atom_config import (
     fopen_str,
     fnigh_str,
     base_idea_active_requisite_str,
+    CRUD_command,
 )
 from dataclasses import dataclass
 
@@ -417,14 +420,14 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
     )
 
 
-def _modify_bud_idea_grouphold_delete(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_idea_teamlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.del_grouphold(group_id=x_atom.get_value(group_id_str()))
+    x_ideaunit._teamunit.del_teamlink(group_id=x_atom.get_value(group_id_str()))
 
 
-def _modify_bud_idea_grouphold_insert(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_idea_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._doerunit.set_grouphold(group_id=x_atom.get_value(group_id_str()))
+    x_ideaunit._teamunit.set_teamlink(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_healerhold_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -518,11 +521,11 @@ def _modify_bud_idea_reason_premiseunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reason_premiseunit_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_grouphold(x_bud: BudUnit, x_atom: AtomUnit):
+def _modify_bud_idea_teamlink(x_bud: BudUnit, x_atom: AtomUnit):
     if x_atom.crud_text == atom_delete():
-        _modify_bud_idea_grouphold_delete(x_bud, x_atom)
+        _modify_bud_idea_teamlink_delete(x_bud, x_atom)
     elif x_atom.crud_text == atom_insert():
-        _modify_bud_idea_grouphold_insert(x_bud, x_atom)
+        _modify_bud_idea_teamlink_insert(x_bud, x_atom)
 
 
 def _modify_bud_idea_healerhold(x_bud: BudUnit, x_atom: AtomUnit):
@@ -558,8 +561,8 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
     elif x_atom.category == bud_idea_healerhold_text():
         _modify_bud_idea_healerhold(x_bud, x_atom)
-    elif x_atom.category == bud_idea_grouphold_text():
-        _modify_bud_idea_grouphold(x_bud, x_atom)
+    elif x_atom.category == bud_idea_teamlink_text():
+        _modify_bud_idea_teamlink(x_bud, x_atom)
     elif x_atom.category == bud_acctunit_text():
         _modify_bud_acctunit(x_bud, x_atom)
 
@@ -626,3 +629,75 @@ def get_atomunit_from_rowdata(x_rowdata: RowData) -> AtomUnit:
         arg_key = x_columnname[front_len:]
         x_atom.set_arg(x_key=arg_key, x_value=x_value)
     return x_atom
+
+
+@dataclass
+class AtomRow:
+    _atom_categorys: set[str] = None
+    _crud_command: CRUD_command = None
+    acct_id: AcctID = None
+    addin: float = None
+    base: RoadUnit = None
+    base_idea_active_requisite: bool = None
+    begin: float = None
+    bit: float = None
+    close: float = None
+    credit_score: int = None
+    credit_vote: int = None
+    credor_respect: int = None
+    debtit_score: int = None
+    debtit_vote: int = None
+    debtor_respect: int = None
+    denom: int = None
+    divisor: int = None
+    fnigh: float = None
+    fopen: float = None
+    fund_coin: float = None
+    fund_pool: float = None
+    give_force: float = None
+    gogo_want: float = None
+    group_id: GroupID = None
+    healer_id: GroupID = None
+    label: RoadNode = None
+    mass: int = None
+    max_tree_traverse: int = None
+    monetary_desc: str = None
+    morph: bool = None
+    need: RoadUnit = None
+    nigh: float = None
+    numor: int = None
+    open: float = None
+    parent_road: RoadUnit = None
+    penny: float = None
+    pick: RoadUnit = None
+    pledge: bool = None
+    problem_bool: bool = None
+    road: RoadUnit = None
+    stop_want: float = None
+    take_force: float = None
+    tally: int = None
+
+    def set_atom_category(self, atom_category: str):
+        self._atom_categorys.add(atom_category)
+
+    def atom_category_exists(self, atom_category: str) -> bool:
+        return atom_category in self._atom_categorys
+
+    def delete_atom_category(self, atom_category: str):
+        self._atom_categorys.remove(atom_category)
+
+    def get_atomunits(self) -> list[AtomUnit]:
+        x_list = []
+        for x_category in category_ref():
+            x_atom = atomunit_shop(x_category, self._crud_command)
+            x_args = get_atom_config_args(x_category)
+            for x_arg in x_args:
+                if self.__dict__[x_arg]:
+                    x_atom.set_arg(x_arg, self.__dict__[x_arg])
+            if x_atom.is_valid() and len(x_atom.get_all_args_in_list()) > 0:
+                x_list.append(x_atom)
+        return x_list
+
+
+def atomrow_shop(atom_categorys: set[str], crud_command: CRUD_command) -> AtomRow:
+    return AtomRow(_atom_categorys=atom_categorys, _crud_command=crud_command)

@@ -107,8 +107,8 @@ def bud_idea_reason_premiseunit_text() -> str:
     return "bud_idea_reason_premiseunit"
 
 
-def bud_idea_grouphold_text() -> str:
-    return "bud_idea_grouphold"
+def bud_idea_teamlink_text() -> str:
+    return "bud_idea_teamlink"
 
 
 def bud_idea_healerhold_text() -> str:

@@ -6,7 +6,7 @@ from src.bud.reason_idea import (
     premiseunit_shop,
     factheir_shop,
 )
-from src.bud.reason_doer import doerunit_shop, doerheir_shop
+from src.bud.reason_team import teamunit_shop, teamheir_shop
 from src.bud.idea import ideaunit_shop
 
 
@@ -328,38 +328,38 @@ def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
     assert clean_idea._active_hx == {0: False}
 
 
-def test_IdeaUnit_set_doerunit_empty_if_none():
+def test_IdeaUnit_set_teamunit_empty_if_none():
     # ESTABLISH
     run_text = "run"
     run_idea = ideaunit_shop(run_text)
-    run_idea._doerunit = None
-    assert run_idea._doerunit is None
+    run_idea._teamunit = None
+    assert run_idea._teamunit is None
 
     # WHEN
-    run_idea.set_doerunit_empty_if_none()
+    run_idea.set_teamunit_empty_if_none()
 
     # THEN
-    assert run_idea._doerunit is not None
-    assert run_idea._doerunit == doerunit_shop()
+    assert run_idea._teamunit is not None
+    assert run_idea._teamunit == teamunit_shop()
 
 
-def test_IdeaUnit_set_doerheir_CorrectlySetsAttr():
+def test_IdeaUnit_set_teamheir_CorrectlySetsAttr():
     # ESTABLISH
     swim_text = "swimmers"
     sport_text = "sports"
     sport_idea = ideaunit_shop(sport_text)
-    sport_idea._doerunit.set_grouphold(group_id=swim_text)
-    # assert sport_idea._doerheir is None
+    sport_idea._teamunit.set_teamlink(group_id=swim_text)
+    # assert sport_idea._teamheir is None
 
     # WHEN
-    sport_idea.set_doerheir(parent_doerheir=None, bud_groupboxs=None)
+    sport_idea.set_teamheir(parent_teamheir=None, bud_groupboxs=None)
 
     # THEN
-    assert sport_idea._doerheir is not None
-    swim_doerunit = doerunit_shop()
-    swim_doerunit.set_grouphold(group_id=swim_text)
-    swim_doerheir = doerheir_shop()
-    swim_doerheir.set_groupholds(
-        doerunit=swim_doerunit, parent_doerheir=None, bud_groupboxs=None
+    assert sport_idea._teamheir is not None
+    swim_teamunit = teamunit_shop()
+    swim_teamunit.set_teamlink(group_id=swim_text)
+    swim_teamheir = teamheir_shop()
+    swim_teamheir.set_teamlinks(
+        teamunit=swim_teamunit, parent_teamheir=None, bud_groupboxs=None
     )
-    assert sport_idea._doerheir == swim_doerheir
+    assert sport_idea._teamheir == swim_teamheir

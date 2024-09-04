@@ -92,8 +92,8 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class GroupHoldTable(Base):
-    __tablename__ = "grouphold"
+class TeamlinkTable(Base):
+    __tablename__ = "teamlink"
     uid = Column(Integer, primary_key=True)
     group_id = Column(String)
     road = Column(String)

@@ -11,7 +11,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
 )
@@ -23,7 +23,7 @@ from src.normal_db.normal_models import (
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
-    GroupHoldTable,
+    TeamlinkTable,
     HealerHoldTable,
     FactTable,
 )
@@ -175,16 +175,16 @@ def test_normalized_table_PremiseTable_premise_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_GroupHoldTable_grouphold_Exists():
+def test_normalized_table_TeamlinkTable_teamlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_idea_grouphold_text())
-    mapper = inspect(GroupHoldTable)
+    config_category = get_normalized_bud_table_build().get(bud_idea_teamlink_text())
+    mapper = inspect(TeamlinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "grouphold"
-    assert config_table_name == GroupHoldTable.__tablename__
+    assert config_table_name == "teamlink"
+    assert config_table_name == TeamlinkTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 

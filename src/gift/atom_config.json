@@ -35,7 +35,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 10
         }
@@ -69,7 +68,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 9
         }
@@ -110,7 +108,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 12
         }
@@ -156,37 +153,9 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 13
         }
-    },
-    "bud_idea_grouphold": {
-        "DELETE": {
-            "atom_order": 19
-        },
-        "INSERT": {
-            "atom_order": 4
-        },
-        "normal_specs": {
-            "normal_table_name": "grouphold"
-        },
-        "optional_args": {},
-        "required_args": {
-            "group_id": {
-                "column_order": 1,
-                "nesting_order": 1,
-                "python_type": "GroupID",
-                "sqlite_datatype": "TEXT"
-            },
-            "road": {
-                "column_order": 0,
-                "nesting_order": 0,
-                "python_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
-            }
-        },
-        "treasury_only": false
     },
     "bud_idea_healerhold": {
         "DELETE": {
@@ -212,8 +181,7 @@
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "treasury_only": false
+        }
     },
     "bud_idea_reason_premiseunit": {
         "DELETE": {
@@ -262,7 +230,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 14
         }
@@ -298,9 +265,34 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 15
+        }
+    },
+    "bud_idea_teamlink": {
+        "DELETE": {
+            "atom_order": 19
+        },
+        "INSERT": {
+            "atom_order": 4
+        },
+        "normal_specs": {
+            "normal_table_name": "teamlink"
+        },
+        "optional_args": {},
+        "required_args": {
+            "group_id": {
+                "column_order": 1,
+                "nesting_order": 1,
+                "python_type": "GroupID",
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "column_order": 0,
+                "nesting_order": 0,
+                "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            }
         }
     },
     "bud_ideaunit": {
@@ -384,7 +376,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 11
         }
@@ -441,7 +432,6 @@
             }
         },
         "required_args": {},
-        "treasury_only": false,
         "UPDATE": {
             "atom_order": 25
         }

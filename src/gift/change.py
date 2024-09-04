@@ -18,7 +18,7 @@ from src.gift.atom_config import (
     bud_acct_membership_text,
     bud_idea_awardlink_text,
     bud_idea_factunit_text,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     bud_idea_healerhold_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_reasonunit_text,
@@ -395,9 +395,9 @@ class ChangeUnit:
                 after_ideaunit=insert_ideaunit,
                 insert_reasonunit_bases=set(insert_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_grouphold_insert(
+            self.add_atomunit_idea_teamlink_insert(
                 idea_road=insert_idea_road,
-                insert_grouphold_group_ids=insert_ideaunit._doerunit._groupholds,
+                insert_teamlink_group_ids=insert_ideaunit._teamunit._teamlinks,
             )
             self.add_atomunit_idea_healerhold_insert(
                 idea_road=insert_idea_road,
@@ -509,19 +509,19 @@ class ChangeUnit:
             # update reasonunits_permises update_premise
             # update reasonunits_permises delete_premise
 
-            # insert / update / delete groupholds
-            before_groupholds_group_ids = set(before_ideaunit._doerunit._groupholds)
-            after_groupholds_group_ids = set(after_ideaunit._doerunit._groupholds)
-            self.add_atomunit_idea_grouphold_insert(
+            # insert / update / delete teamlinks
+            before_teamlinks_group_ids = set(before_ideaunit._teamunit._teamlinks)
+            after_teamlinks_group_ids = set(after_ideaunit._teamunit._teamlinks)
+            self.add_atomunit_idea_teamlink_insert(
                 idea_road=idea_road,
-                insert_grouphold_group_ids=after_groupholds_group_ids.difference(
-                    before_groupholds_group_ids
+                insert_teamlink_group_ids=after_teamlinks_group_ids.difference(
+                    before_teamlinks_group_ids
                 ),
             )
-            self.add_atomunit_idea_grouphold_deletes(
+            self.add_atomunit_idea_teamlink_deletes(
                 idea_road=idea_road,
-                delete_grouphold_group_ids=before_groupholds_group_ids.difference(
-                    after_groupholds_group_ids
+                delete_teamlink_group_ids=before_teamlinks_group_ids.difference(
+                    after_teamlinks_group_ids
                 ),
             )
 
@@ -566,9 +566,9 @@ class ChangeUnit:
                 before_ideaunit=delete_ideaunit,
                 delete_reasonunit_bases=set(delete_ideaunit._reasonunits.keys()),
             )
-            self.add_atomunit_idea_grouphold_deletes(
+            self.add_atomunit_idea_teamlink_deletes(
                 idea_road=delete_idea_road,
-                delete_grouphold_group_ids=delete_ideaunit._doerunit._groupholds,
+                delete_teamlink_group_ids=delete_ideaunit._teamunit._teamlinks,
             )
             self.add_atomunit_idea_healerhold_deletes(
                 idea_road=delete_idea_road,
@@ -728,22 +728,22 @@ class ChangeUnit:
             x_atomunit.set_required_arg("need", delete_premise_need)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_grouphold_insert(
-        self, idea_road: RoadUnit, insert_grouphold_group_ids: set
+    def add_atomunit_idea_teamlink_insert(
+        self, idea_road: RoadUnit, insert_teamlink_group_ids: set
     ):
-        for insert_grouphold_group_id in insert_grouphold_group_ids:
-            x_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_insert())
+        for insert_teamlink_group_id in insert_teamlink_group_ids:
+            x_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_insert())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg(group_id_str(), insert_grouphold_group_id)
+            x_atomunit.set_required_arg(group_id_str(), insert_teamlink_group_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_grouphold_deletes(
-        self, idea_road: RoadUnit, delete_grouphold_group_ids: set
+    def add_atomunit_idea_teamlink_deletes(
+        self, idea_road: RoadUnit, delete_teamlink_group_ids: set
     ):
-        for delete_grouphold_group_id in delete_grouphold_group_ids:
-            x_atomunit = atomunit_shop(bud_idea_grouphold_text(), atom_delete())
+        for delete_teamlink_group_id in delete_teamlink_group_ids:
+            x_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg(group_id_str(), delete_grouphold_group_id)
+            x_atomunit.set_required_arg(group_id_str(), delete_teamlink_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_healerhold_insert(

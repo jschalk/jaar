@@ -1,7 +1,7 @@
 from src.gift.atom_config import (
     atom_insert,
     atom_delete,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     group_id_str,
 )
 from src.gift.atom import atomunit_shop
@@ -10,10 +10,10 @@ from src.gift.legible import create_legible_list
 from src.bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObj_idea_grouphold_INSERT():
+def test_create_legible_list_ReturnsObj_idea_teamlink_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_idea_grouphold_text()
+    category = bud_idea_teamlink_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -29,15 +29,15 @@ def test_create_legible_list_ReturnsObj_idea_grouphold_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"grouphold '{group_id_value}' created for idea '{road_value}'."
+    x_str = f"teamlink '{group_id_value}' created for idea '{road_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_idea_grouphold_DELETE():
+def test_create_legible_list_ReturnsObj_idea_teamlink_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_idea_grouphold_text()
+    category = bud_idea_teamlink_text()
     road_text = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -53,6 +53,6 @@ def test_create_legible_list_ReturnsObj_idea_grouphold_DELETE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"grouphold '{group_id_value}' deleted for idea '{road_value}'."
+    x_str = f"teamlink '{group_id_value}' deleted for idea '{road_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

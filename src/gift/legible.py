@@ -12,7 +12,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
-    bud_idea_grouphold_text,
+    bud_idea_teamlink_text,
     bud_idea_healerhold_text,
     bud_idea_factunit_text,
     acct_id_str,
@@ -85,10 +85,10 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), bud_idea_reason_premiseunit_text()]
     bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_grouphold_text()]
-    bud_idea_grouphold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_grouphold_text()]
-    bud_idea_grouphold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_idea_teamlink_text()]
+    bud_idea_teamlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_idea_teamlink_text()]
+    bud_idea_teamlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), bud_idea_healerhold_text()]
     bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -177,13 +177,13 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
             leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
         )
 
-    if bud_idea_grouphold_insert_dict is not None:
-        add_bud_idea_grouphold_insert_to_legible_list(
-            leg_list, bud_idea_grouphold_insert_dict, x_bud
+    if bud_idea_teamlink_insert_dict is not None:
+        add_bud_idea_teamlink_insert_to_legible_list(
+            leg_list, bud_idea_teamlink_insert_dict, x_bud
         )
-    if bud_idea_grouphold_delete_dict is not None:
-        add_bud_idea_grouphold_delete_to_legible_list(
-            leg_list, bud_idea_grouphold_delete_dict, x_bud
+    if bud_idea_teamlink_delete_dict is not None:
+        add_bud_idea_teamlink_delete_to_legible_list(
+            leg_list, bud_idea_teamlink_delete_dict, x_bud
         )
 
     if bud_idea_healerhold_insert_dict is not None:
@@ -602,25 +602,25 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_bud_idea_grouphold_insert_to_legible_list(
-    legible_list: list[str], idea_grouphold_insert_dict: dict, x_bud: BudUnit
+def add_bud_idea_teamlink_insert_to_legible_list(
+    legible_list: list[str], idea_teamlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_grouphold_insert_dict.values():
-        for idea_grouphold_atom in road_dict.values():
-            group_id_value = idea_grouphold_atom.get_value(group_id_str())
-            road_value = idea_grouphold_atom.get_value("road")
-            x_str = f"grouphold '{group_id_value}' created for idea '{road_value}'."
+    for road_dict in idea_teamlink_insert_dict.values():
+        for idea_teamlink_atom in road_dict.values():
+            group_id_value = idea_teamlink_atom.get_value(group_id_str())
+            road_value = idea_teamlink_atom.get_value("road")
+            x_str = f"teamlink '{group_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_grouphold_delete_to_legible_list(
-    legible_list: list[str], idea_grouphold_delete_dict: dict, x_bud: BudUnit
+def add_bud_idea_teamlink_delete_to_legible_list(
+    legible_list: list[str], idea_teamlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_grouphold_delete_dict.values():
-        for idea_grouphold_atom in road_dict.values():
-            group_id_value = idea_grouphold_atom.get_value(group_id_str())
-            road_value = idea_grouphold_atom.get_value("road")
-            x_str = f"grouphold '{group_id_value}' deleted for idea '{road_value}'."
+    for road_dict in idea_teamlink_delete_dict.values():
+        for idea_teamlink_atom in road_dict.values():
+            group_id_value = idea_teamlink_atom.get_value(group_id_str())
+            road_value = idea_teamlink_atom.get_value("road")
+            x_str = f"teamlink '{group_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 
