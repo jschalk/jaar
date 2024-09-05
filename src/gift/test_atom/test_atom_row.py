@@ -1,6 +1,7 @@
 from src.gift.atom_config import (
     bud_acctunit_text,
     bud_acct_membership_text,
+    bud_ideaunit_text,
     atom_insert,
     atom_delete,
     acct_id_str,
@@ -177,7 +178,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario1():
     assert x_atomunits[0] == static_atom
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Fails():
+def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_NSERT_Fails():
     # ESTABLISH
     x_category = bud_acctunit_text()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
@@ -189,7 +190,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Fails():
     assert len(x_atomunits) == 0
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario2():
+def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     # ESTABLISH
     x_category = bud_acctunit_text()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
@@ -207,3 +208,39 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario2():
     four_int = 4
     static_atom.set_arg("credit_score", four_int)
     assert x_atomunits[0] == static_atom
+
+
+def test_AtomRow_get_atomunits_ReturnsObjIfCategoryIsCorrect():
+    # ESTABLISH
+    x_atomrow = atomrow_shop(set(), atom_insert())
+    x_atomrow.acct_id = "Bob"
+    four_text = "4"
+    x_atomrow.credit_score = four_text
+    assert len(x_atomrow.get_atomunits()) == 0
+
+    # WHEN / THEN
+    x_atomrow.set_atom_category(bud_acct_membership_text())
+    assert len(x_atomrow.get_atomunits()) == 0
+
+    # THEN
+    x_atomrow.set_atom_category(bud_acctunit_text())
+    assert len(x_atomrow.get_atomunits()) == 1
+
+
+def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
+    # ESTABLISH
+    x_atomrow = atomrow_shop({bud_ideaunit_text()}, atom_insert())
+    x_atomrow.parent_road = "music78"
+    x_atomrow.label = "casa"
+    x_atomrow.pledge = False
+    assert len(x_atomrow.get_atomunits()) == 1
+
+    # WHEN / THEN
+    x_atomunit = x_atomrow.get_atomunits()[0]
+
+    # THEN
+    static_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    static_atomunit.set_arg("parent_road", "music78")
+    static_atomunit.set_arg("label", "casa")
+    static_atomunit.set_arg("pledge", False)
+    assert x_atomunit == static_atomunit

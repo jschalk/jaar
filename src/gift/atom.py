@@ -693,7 +693,8 @@ class AtomRow:
 
     def _set_python_types(self):
         for x_arg, python_type in get_atom_args_python_types().items():
-            if x_value := self.__dict__.get(x_arg):
+            x_value = self.__dict__.get(x_arg)
+            if x_value != None:
                 if python_type == "AcctID":
                     self.__dict__[x_arg] = AcctID(x_value)
                 elif python_type == "GroupID":
@@ -714,11 +715,11 @@ class AtomRow:
     def get_atomunits(self) -> list[AtomUnit]:
         self._set_python_types()
         x_list = []
-        for x_category in category_ref():
+        for x_category in self._atom_categorys:
             x_atom = atomunit_shop(x_category, self._crud_command)
             x_args = get_atom_config_args(x_category)
             for x_arg in x_args:
-                if self.__dict__[x_arg]:
+                if self.__dict__[x_arg] != None:
                     x_atom.set_arg(x_arg, self.__dict__[x_arg])
             if x_atom.is_valid() > 0:
                 x_list.append(x_atom)
