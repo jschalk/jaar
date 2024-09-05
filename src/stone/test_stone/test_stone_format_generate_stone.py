@@ -195,3 +195,41 @@ def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit
         array_headers = list(ideaunit_format.columns)
         assert array_headers == get_stoneref(x_stone_name).get_headers_list()
         assert len(ideaunit_format) == 251
+
+
+def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
+    # ESTABLISH
+    sue_text = sue_str()
+    bob_text = bob_str()
+    music_real_id = "music56"
+    sue_budunit = budunit_shop(sue_text, music_real_id)
+    casa_text = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_mass = 31
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    clean_text = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_text)
+    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    x_stone_name = stone_format_00003_ideaunit_v0_0_0()
+    ideaunit_dataframe = create_stone_df(sue_budunit, x_stone_name)
+    ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
+
+    # WHEN
+    ideaunit_changunit = create_changeunit(ideaunit_csv)
+
+    # THEN
+    casa_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    casa_atomunit.set_arg(parent_road_str(), sue_budunit._real_id)
+    casa_atomunit.set_arg(label_str(), casa_text)
+    casa_atomunit.set_arg(pledge_str(), False)
+    casa_atomunit.set_arg(mass_str(), casa_mass)
+    print(f"{casa_atomunit=}")
+    assert casa_atomunit.get_value(mass_str()) == casa_mass
+    clean_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    clean_atomunit.set_arg(parent_road_str(), casa_road)
+    clean_atomunit.set_arg(label_str(), clean_text)
+    clean_atomunit.set_arg(pledge_str(), True)
+    clean_atomunit.set_arg(mass_str(), 1)
+    assert ideaunit_changunit.atomunit_exists(casa_atomunit)
+    assert ideaunit_changunit.atomunit_exists(clean_atomunit)
+    assert len(ideaunit_changunit.get_ordered_atomunits()) == 2

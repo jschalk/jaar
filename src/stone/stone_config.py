@@ -60,6 +60,10 @@ def stone_format_00019_ideaunit_v0_0_0() -> str:
     return "stone_format_00019_ideaunit_v0_0_0"
 
 
+def stone_format_00036_problem_healer_v0_0_0() -> str:
+    return "stone_format_00036_problem_healer_v0_0_0"
+
+
 # def stone_format_00020_bud_acct_membership_v0_0_0()-> str: return "stone_format_00020_bud_acct_membership_v0_0_0"
 # def stone_format_00021_bud_acctunit_v0_0_0()-> str: return "stone_format_00021_bud_acctunit_v0_0_0"
 # def stone_format_00022_bud_idea_awardlink_v0_0_0()-> str: return "stone_format_00022_bud_idea_awardlink_v0_0_0"
@@ -126,6 +130,7 @@ def get_stone_filenames() -> set[str]:
         stone_format_00027_bud_idea_reasonunit_v0_0_0(),
         stone_format_00028_bud_ideaunit_v0_0_0(),
         stone_format_00029_budunit_v0_0_0(),
+        stone_format_00036_problem_healer_v0_0_0(),
     }
 
 
@@ -145,6 +150,7 @@ def get_stone_format_headers() -> dict[str, list[str]]:
         "base,base_idea_active_requisite,owner_id,real_id,road": stone_format_00027_bud_idea_reasonunit_v0_0_0(),
         "addin,begin,close,denom,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,real_id,stop_want": stone_format_00028_bud_ideaunit_v0_0_0(),
         "bit,credor_respect,debtor_respect,fund_coin,fund_pool,max_tree_traverse,monetary_desc,owner_id,penny,real_id,tally": stone_format_00029_budunit_v0_0_0(),
+        "healer_id,label,owner_id,parent_road,problem_bool,real_id": stone_format_00036_problem_healer_v0_0_0(),
     }
 
 

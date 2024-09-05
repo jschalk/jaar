@@ -141,10 +141,10 @@ def test_get_stone_format_headers_ReturnsObj():
 
     # THEN
     # print(f"{set(get_stone_format_headers().values())=}")
-    assert len(x_headers) == len(get_stone_filenames())
-    assert set(x_headers.values()) == get_stone_filenames()
     for x_stone_filename in get_stone_filenames():
         check_sorted_headers_exist(x_stone_filename, x_headers)
+    assert len(x_headers) == len(get_stone_filenames())
+    assert set(x_headers.values()) == get_stone_filenames()
 
 
 def test__generate_stone_dataframe_ReturnsCorrectObj():
