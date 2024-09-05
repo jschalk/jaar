@@ -639,7 +639,7 @@ def all_atom_config_python_types_are_valid(allowed_python_types):
             print(f"{x_python_type=} {old_python_type=} {x_atom_arg=} {x_category=}")
             if x_python_type != old_python_type:
                 return False
-            old_python_type = copy_deepcopy(x_python_type)
+            old_python_type = x_python_type
     return True
 
 
