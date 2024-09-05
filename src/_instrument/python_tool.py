@@ -125,21 +125,17 @@ def extract_csv_headers(x_csv: str, delimiter: str = None) -> tuple[list[str], s
     x_reader = csv_reader(x_csv.splitlines(), delimiter=",")
 
     title_row = None
-    x_count = 0
     si = io_StringIO()
     new_csv_writer = csv_writer(si, delimiter=",")
-    for row in x_reader:
+    for x_count, row in enumerate(x_reader):
         if x_count == 0:
             title_row = row
         else:
             new_csv_writer.writerow(row)
-        x_count += 1
     x_list = []
     if title_row is None:
         return x_list
-    for column_num in range(len(title_row)):
-        x_list.append(title_row[column_num])
-
+    x_list.extend(title_row[column_num] for column_num in range(len(title_row)))
     x_csv = si.getvalue()
     y_csv = x_csv.replace("\r", "")
     return x_list, y_csv
@@ -166,9 +162,9 @@ def create_filtered_csv_dict(
     io_dict = {}
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        real_owner_io = get_nested_value(io_dict, [row[0], row[1]], True)
-        if not real_owner_io:
-            real_owner_io = io_StringIO()
+        real_owner_io = (
+            get_nested_value(io_dict, [row[0], row[1]], True) or io_StringIO()
+        )
         new_csv_writer = csv_writer(real_owner_io, delimiter=",")
         new_csv_writer.writerow(row)
         place_obj_in_dict(io_dict, [row[0], row[1]], real_owner_io)
@@ -190,9 +186,4 @@ def create_sorted_concatenated_str(y_list: list[str]) -> str:
 
 
 def get_positional_dict(x_list: list[str]) -> dict[str, int]:
-    x_count = 0
-    x_dict = {}
-    for x_element in x_list:
-        x_dict[x_element] = x_count
-        x_count += 1
-    return x_dict
+    return {x_element: x_count for x_count, x_element in enumerate(x_list)}

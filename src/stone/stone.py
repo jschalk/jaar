@@ -8,7 +8,13 @@ from src._instrument.python_tool import (
 )
 from src._road.road import RealID, OwnerID
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_insert, atom_update, atom_delete, atomunit_shop, AtomUnit
+from src.gift.atom import (
+    atom_insert,
+    atom_delete,
+    atomunit_shop,
+    AtomUnit,
+    atomrow_shop,
+)
 from src.gift.atom_config import (
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -167,37 +173,26 @@ def open_stone_csv(x_file_dir: str, x_filename: str) -> DataFrame:
     return read_csv(create_file_path(x_file_dir, x_filename))
 
 
-def create_changeunit(x_csv: str) -> ChangeUnit:
-    title_row, headerless_csv = extract_csv_headers(x_csv)
+def get_csv_stoneref(title_row: list[str]) -> StoneRef:
     headers_str = create_sorted_concatenated_str(title_row)
     x_stonename = get_stone_format_headers().get(headers_str)
+    return get_stoneref(x_stonename)
+
+
+def create_changeunit(x_csv: str) -> ChangeUnit:
+    title_row, headerless_csv = extract_csv_headers(x_csv)
+    x_stoneref = get_csv_stoneref(title_row)
+
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(title_row)
-
     x_changeunit = changeunit_shop()
     for row in x_reader:
-        if x_stonename == stone_format_00021_bud_acctunit_v0_0_0():
-            x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
-            x_atomunit.set_arg(title_row[2], row[2])
-            x_atomunit.set_arg(title_row[3], float(row[3]))
-            x_atomunit.set_arg(title_row[4], float(row[4]))
-            x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == stone_format_00020_bud_acct_membership_v0_0_0():
-            x_atomunit = atomunit_shop(bud_acct_membership_text(), atom_insert())
-            x_atomunit.set_arg(title_row[2], row[2])
-            x_atomunit.set_arg(title_row[3], row[3])
-            x_atomunit.set_arg(title_row[4], float(row[4]))
-            x_atomunit.set_arg(title_row[5], float(row[5]))
-            x_changeunit.set_atomunit(x_atomunit)
-        elif x_stonename == stone_format_00003_ideaunit_v0_0_0():
-            x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
-            pledge_bool = False
-            if row[2] == "Yes":
-                pledge_bool = True
-            x_atomunit.set_arg(title_row[2], pledge_bool)
-            x_atomunit.set_arg(title_row[3], row[3])
-            x_atomunit.set_arg(title_row[4], int(row[4]))
-            x_atomunit.set_arg(title_row[5], row[5])
+        x_atomrow = atomrow_shop(x_stoneref.atom_categorys, atom_insert())
+        for x_header in title_row:
+            if header_index := x_dict.get(x_header):
+                x_atomrow.__dict__[x_header] = row[header_index]
+
+        for x_atomunit in x_atomrow.get_atomunits():
             x_changeunit.set_atomunit(x_atomunit)
     return x_changeunit
 

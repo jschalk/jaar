@@ -357,8 +357,7 @@ def _get_atom_config_required_arg_keys(x_cat: str) -> set[str]:
     return set(get_nested_value(get_atom_config_dict(), required_args_key_list).keys())
 
 
-def test_get_atom_config_dict_CheckEveryOptionalArgHasUniqueKey():
-    # ESTABLISH / WHEN
+def unique_optional_args():
     optional_arg_keys = set()
     optional_arg_key_count = 0
     for atom_category in get_atom_config_dict().keys():
@@ -366,12 +365,19 @@ def test_get_atom_config_dict_CheckEveryOptionalArgHasUniqueKey():
         optional_arg_key_count += len(new_optional_arg_keys)
         optional_arg_keys.update(new_optional_arg_keys)
         # print(f"{atom_category} {_get_atom_config_optional_arg_keys(atom_category)}")
+    return optional_arg_keys, optional_arg_key_count
+
+
+def test_get_atom_config_dict_CheckEveryOptionalArgHasUniqueKey():
+    # ESTABLISH / WHEN
+    optional_arg_keys, optional_arg_key_count = unique_optional_args()
+
+    # THEN
     print(f"{optional_arg_key_count=} {len(optional_arg_keys)=}")
     assert optional_arg_key_count == len(optional_arg_keys)
 
 
-def test_get_atom_config_dict_SomeRequiredArgUnique():
-    # ESTABLISH / WHEN
+def unique_required_args():
     required_arg_keys = set()
     required_arg_key_count = 0
     for atom_category in get_atom_config_dict().keys():
@@ -387,6 +393,14 @@ def test_get_atom_config_dict_SomeRequiredArgUnique():
         print(f"{atom_category} {new_required_arg_keys=}")
         required_arg_key_count += len(new_required_arg_keys)
         required_arg_keys.update(new_required_arg_keys)
+    return required_arg_keys, required_arg_key_count
+
+
+def test_get_atom_config_dict_SomeRequiredArgAreUnique():
+    # ESTABLISH / WHEN
+    required_arg_keys, required_arg_key_count = unique_required_args()
+
+    # THEN
     print(f"{required_arg_key_count=} {len(required_arg_keys)=}")
     assert required_arg_key_count == len(required_arg_keys)
 
@@ -625,7 +639,7 @@ def all_atom_config_python_types_are_valid(allowed_python_types):
             print(f"{x_python_type=} {old_python_type=} {x_atom_arg=} {x_category=}")
             if x_python_type != old_python_type:
                 return False
-            old_python_type = copy_deepcopy(x_python_type)
+            old_python_type = x_python_type
     return True
 
 

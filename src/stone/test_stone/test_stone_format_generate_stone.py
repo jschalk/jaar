@@ -1,6 +1,7 @@
 from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
+from src.bud.examples.example_buds import budunit_v001
 from src.gift.atom_config import (
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -18,7 +19,7 @@ from src.gift.atom_config import (
     credit_vote_str,
 )
 from src.gift.atom import atomunit_shop
-from src.stone.stone import create_stone_df, create_changeunit
+from src.stone.stone import create_stone_df, create_changeunit, get_stoneref
 from src.stone.stone_config import (
     stone_format_00021_bud_acctunit_v0_0_0,
     stone_format_00020_bud_acct_membership_v0_0_0,
@@ -65,6 +66,7 @@ def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     # print(
     #     f"{sue_acct_changeunit.atomunits.get(atom_insert()).get(bud_acctunit_text()).get(sue_text)=}"
     # )
+    print(f"{sue_atomunit=}")
     assert sue_acct_changeunit.atomunit_exists(sue_atomunit)
     assert sue_acct_changeunit.atomunit_exists(bob_atomunit)
     assert len(sue_acct_changeunit.get_ordered_atomunits()) == 3
@@ -101,6 +103,7 @@ def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
     assert len(membership_dataframe) == 7
     membership_csv = membership_dataframe.to_csv(index=False)
+    print(f"{membership_csv=}")
 
     # WHEN
     membership_changunit = create_changeunit(membership_csv)
@@ -130,6 +133,7 @@ def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     bob_iowa_atomunit.set_atom_order()
     # print(f"{membership_changunit.get_ordered_atomunits()[2]=}")
     # print(f"{sue_iowa_atomunit=}")
+    assert len(membership_changunit.get_ordered_atomunits()) == 7
     assert membership_changunit.get_ordered_atomunits()[0] == bob_iowa_atomunit
     assert membership_changunit.atomunit_exists(sue_iowa_atomunit)
     assert membership_changunit.atomunit_exists(bob_iowa_atomunit)
@@ -164,6 +168,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     casa_atomunit.set_arg(label_str(), casa_text)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
+    print(f"{casa_atomunit=}")
     assert casa_atomunit.get_value(mass_str()) == casa_mass
     clean_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
@@ -175,16 +180,18 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     assert len(ideaunit_changunit.get_ordered_atomunits()) == 2
 
 
-# # Commented out to reduce testing time.
-# def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
-#     # ESTABLISH / WHEN
-#     x_stone_name = stone_format_00003_ideaunit_v0_0_0()
+def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
+    big_volume,
+):
+    # sourcery skip: no-conditionals-in-tests
+    if big_volume:
+        # ESTABLISH / WHEN
+        x_stone_name = stone_format_00003_ideaunit_v0_0_0()
 
-#     # WHEN
-#     ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
+        # WHEN
+        ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
 
-#     # THEN
-#     array_headers = list(ideaunit_format.columns)
-#     assert array_headers == get_stoneref(x_stone_name).get_headers_list()
-#     assert len(ideaunit_format) == 251
-#     assert 1 == 2
+        # THEN
+        array_headers = list(ideaunit_format.columns)
+        assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+        assert len(ideaunit_format) == 251

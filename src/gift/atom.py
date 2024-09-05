@@ -22,6 +22,7 @@ from src.gift.atom_config import (
     is_category_ref,
     get_atom_config_args,
     get_sorted_required_arg_keys,
+    get_atom_args_python_types,
     nesting_order_str,
     required_args_text,
     optional_args_text,
@@ -153,7 +154,11 @@ class AtomUnit:
         return set(self.optional_args.keys()).issubset(set(optional_args_dict.keys()))
 
     def is_valid(self) -> bool:
-        return self.is_required_args_valid() and self.is_optional_args_valid()
+        return (
+            self.is_required_args_valid()
+            and self.is_optional_args_valid()
+            and (self.required_args != {} or self.optional_args != {})
+        )
 
     def get_value(self, arg_key: str) -> any:
         required_value = self.required_args.get(arg_key)
@@ -686,15 +691,37 @@ class AtomRow:
     def delete_atom_category(self, atom_category: str):
         self._atom_categorys.remove(atom_category)
 
+    def _set_python_types(self):
+        for x_arg, python_type in get_atom_args_python_types().items():
+            x_value = self.__dict__.get(x_arg)
+            if x_value != None:
+                if python_type == "AcctID":
+                    self.__dict__[x_arg] = AcctID(x_value)
+                elif python_type == "GroupID":
+                    self.__dict__[x_arg] = GroupID(x_value)
+                elif python_type == "RoadUnit":
+                    self.__dict__[x_arg] = RoadUnit(x_value)
+                elif python_type == "RoadNode":
+                    self.__dict__[x_arg] = RoadNode(x_value)
+                elif python_type == "str":
+                    self.__dict__[x_arg] = str(x_value)
+                elif python_type == "bool":
+                    self.__dict__[x_arg] = bool(x_value)
+                elif python_type == "int":
+                    self.__dict__[x_arg] = int(x_value)
+                elif python_type == "float":
+                    self.__dict__[x_arg] = float(x_value)
+
     def get_atomunits(self) -> list[AtomUnit]:
+        self._set_python_types()
         x_list = []
-        for x_category in category_ref():
+        for x_category in self._atom_categorys:
             x_atom = atomunit_shop(x_category, self._crud_command)
             x_args = get_atom_config_args(x_category)
             for x_arg in x_args:
-                if self.__dict__[x_arg]:
+                if self.__dict__[x_arg] != None:
                     x_atom.set_arg(x_arg, self.__dict__[x_arg])
-            if x_atom.is_valid() and len(x_atom.get_all_args_in_list()) > 0:
+            if x_atom.is_valid() > 0:
                 x_list.append(x_atom)
         return x_list
 
