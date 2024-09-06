@@ -2,17 +2,6 @@ from src.bud.group import awardlink_shop
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.bud_tool import (
-    budunit_exists,
-    bud_acctunit_exists,
-    bud_acct_membership_exists,
-    bud_ideaunit_exists,
-    bud_idea_awardlink_exists,
-    bud_idea_reasonunit_exists,
-    bud_idea_reason_premiseunit_exists as premiseunit_exists,
-    bud_idea_teamlink_exists,
-    bud_idea_healerlink_exists,
-    bud_idea_factunit_exists,
-    budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
     bud_ideaunit_text,
@@ -23,7 +12,7 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
 )
-from src.gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
+from src.gift.atom import atom_delete, atomunit_shop
 from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
@@ -126,11 +115,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
     sweep_atom = atomunit_shop(bud_ideaunit_text(), atom_delete())
     sweep_atom.set_arg(parent_road_str(), clean_road)
     sweep_atom.set_arg(label_str(), sweep_text)
-    assert not bud_ideaunit_exists(sue_bud, {road_str(): casa_road})
-    assert not bud_ideaunit_exists(sue_bud, {road_str(): clean_road})
-    assert not bud_ideaunit_exists(sue_bud, {road_str(): sweep_road})
-
-    # WHEN /  THEN
     assert not _sift_atomunit(sue_bud, casa_atom)
     assert not _sift_atomunit(sue_bud, clean_atom)
     assert not _sift_atomunit(sue_bud, sweep_atom)
