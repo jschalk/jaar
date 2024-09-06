@@ -1,14 +1,13 @@
 from src._instrument.python_tool import get_json_from_dict
 from src._instrument.file import save_file
+from src.bud.bud_tool import bud_ideaunit_text
 from src.gift.atom_config import (
-    bud_ideaunit_text,
     parent_road_str,
     label_str,
     gogo_want_str,
     real_id_str,
     owner_id_str,
     column_order_str,
-    bud_idea_healerlink_text,
 )
 from src.stone.formatbuilder import create_categorys_stone_format_dict
 from src.stone.stone import (

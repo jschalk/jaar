@@ -1,6 +1,7 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.gift.atom_config import bud_acctunit_text, acct_id_str
+from src.bud.bud_tool import bud_acctunit_text
+from src.gift.atom_config import acct_id_str
 from src.gift.atom import atom_insert
 from src.gift.change import changeunit_shop, get_filtered_changeunit
 

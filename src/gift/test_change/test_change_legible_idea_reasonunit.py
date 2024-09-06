@@ -1,8 +1,8 @@
+from src.bud.bud_tool import bud_idea_reasonunit_text
 from src.gift.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
-    bud_idea_reasonunit_text,
     base_idea_active_requisite_str,
 )
 from src.gift.atom import atomunit_shop

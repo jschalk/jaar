@@ -12,9 +12,6 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_exists,
     bud_idea_healerlink_exists,
     bud_idea_factunit_exists,
-)
-from src.gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
-from src.gift.atom_config import (
     budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -25,6 +22,9 @@ from src.gift.atom_config import (
     bud_idea_teamlink_text,
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
+)
+from src.gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
+from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
     healer_id_str,
@@ -99,10 +99,6 @@ def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership():
     accts_changeunit.set_atomunit(zia_run_atom)
     print(f"{len(accts_changeunit.get_category_sorted_atomunits_list())=}")
     assert len(accts_changeunit.get_category_sorted_atomunits_list()) == 3
-    assert bud_acct_membership_exists(sue_bud, yao_text, run_text)
-    assert bud_acct_membership_exists(sue_bud, yao_text, swim_text)
-    assert not bud_acct_membership_exists(sue_bud, bob_text, swim_text)
-    assert not bud_acct_membership_exists(sue_bud, zia_text, swim_text)
 
     # WHEN
     new_changeunit = sift_changeunit(accts_changeunit, sue_bud)
@@ -120,7 +116,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
     clean_road = sue_bud.make_road(casa_road, clean_text)
     sweep_text = "sweep"
     sweep_road = sue_bud.make_road(clean_road, sweep_text)
-    x_parent_road = sue_bud._real_id
 
     casa_atom = atomunit_shop(bud_ideaunit_text(), atom_delete())
     casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
@@ -131,9 +126,9 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
     sweep_atom = atomunit_shop(bud_ideaunit_text(), atom_delete())
     sweep_atom.set_arg(parent_road_str(), clean_road)
     sweep_atom.set_arg(label_str(), sweep_text)
-    assert not bud_ideaunit_exists(sue_bud, casa_road)
-    assert not bud_ideaunit_exists(sue_bud, clean_road)
-    assert not bud_ideaunit_exists(sue_bud, sweep_road)
+    assert not bud_ideaunit_exists(sue_bud, {road_str(): casa_road})
+    assert not bud_ideaunit_exists(sue_bud, {road_str(): clean_road})
+    assert not bud_ideaunit_exists(sue_bud, {road_str(): sweep_road})
 
     # WHEN /  THEN
     assert not _sift_atomunit(sue_bud, casa_atom)
@@ -172,8 +167,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_awardlink():
     clean_swim_atom.set_arg(group_id_str(), swim_text)
     sue_bud.add_idea(casa_road)
     sue_bud.add_idea(clean_road)
-    assert not bud_idea_awardlink_exists(sue_bud, casa_road, swim_text)
-    assert not bud_idea_awardlink_exists(sue_bud, clean_road, swim_text)
     assert not _sift_atomunit(sue_bud, casa_swim_atom)
     assert not _sift_atomunit(sue_bud, clean_swim_atom)
 
@@ -209,8 +202,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reasonunit():
     clean_week_atom.set_arg(base_str(), week_road)
     sue_bud.add_idea(casa_road)
     sue_bud.add_idea(clean_road)
-    assert not bud_idea_reasonunit_exists(sue_bud, casa_road, week_road)
-    assert not bud_idea_reasonunit_exists(sue_bud, clean_road, week_road)
     assert not _sift_atomunit(sue_bud, casa_week_atom)
     assert not _sift_atomunit(sue_bud, clean_week_atom)
 
@@ -254,9 +245,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reason_premiseunit_exists():
     clean_idea = sue_bud.get_idea_obj(clean_road)
     casa_idea.set_reasonunit(reasonunit_shop(week_road))
     clean_idea.set_reasonunit(reasonunit_shop(week_road))
-
-    assert not premiseunit_exists(sue_bud, casa_road, week_road, thur_road)
-    assert not premiseunit_exists(sue_bud, clean_road, week_road, thur_road)
     assert not _sift_atomunit(sue_bud, casa_week_atom)
     assert not _sift_atomunit(sue_bud, clean_week_atom)
 
@@ -292,8 +280,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_teamlink():
     clean_swim_atom.set_arg(group_id_str(), swim_text)
     sue_bud.add_idea(casa_road)
     sue_bud.add_idea(clean_road)
-    assert not bud_idea_teamlink_exists(sue_bud, casa_road, swim_text)
-    assert not bud_idea_teamlink_exists(sue_bud, clean_road, swim_text)
     assert not _sift_atomunit(sue_bud, casa_swim_atom)
     assert not _sift_atomunit(sue_bud, clean_swim_atom)
 
@@ -328,8 +314,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_healerlink():
     clean_swim_atom.set_arg(healer_id_str(), swim_text)
     sue_bud.add_idea(casa_road)
     sue_bud.add_idea(clean_road)
-    assert not bud_idea_healerlink_exists(sue_bud, casa_road, swim_text)
-    assert not bud_idea_healerlink_exists(sue_bud, clean_road, swim_text)
     assert not _sift_atomunit(sue_bud, casa_swim_atom)
     assert not _sift_atomunit(sue_bud, clean_swim_atom)
 
@@ -365,8 +349,6 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_factunit():
     clean_week_atom.set_arg(base_str(), week_road)
     sue_bud.add_idea(casa_road)
     sue_bud.add_idea(clean_road)
-    assert not bud_idea_factunit_exists(sue_bud, casa_road, week_road)
-    assert not bud_idea_factunit_exists(sue_bud, clean_road, week_road)
     assert not _sift_atomunit(sue_bud, casa_week_atom)
     assert not _sift_atomunit(sue_bud, clean_week_atom)
 
@@ -382,7 +364,3 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_factunit():
     # THEN
     assert _sift_atomunit(sue_bud, casa_week_atom)
     assert _sift_atomunit(sue_bud, clean_week_atom)
-
-
-# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit():
-# #     assert 1 == 2

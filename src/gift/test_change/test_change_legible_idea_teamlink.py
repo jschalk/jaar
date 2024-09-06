@@ -1,9 +1,5 @@
-from src.gift.atom_config import (
-    atom_insert,
-    atom_delete,
-    bud_idea_teamlink_text,
-    group_id_str,
-)
+from src.bud.bud_tool import bud_idea_teamlink_text
+from src.gift.atom_config import atom_insert, atom_delete, group_id_str
 from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
 from src.gift.legible import create_legible_list
