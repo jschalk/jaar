@@ -149,9 +149,10 @@ class AtomUnit:
         return required_args_dict.keys() == self.required_args.keys()
 
     def is_optional_args_valid(self) -> bool:
-        if self.crud_text not in {atom_delete(), atom_insert(), atom_update()}:
+        if self.crud_text == atom_delete() and self.optional_args == {}:
+            return True
+        if self.crud_text not in {atom_insert(), atom_update()}:
             return False
-
         optional_args_dict = self._get_optional_args_dict()
         return set(self.optional_args.keys()).issubset(set(optional_args_dict.keys()))
 

@@ -701,5 +701,5 @@ def add_bud_idea_factunit_delete_to_legible_list(
             road_value = idea_factunit_atom.get_value(road_text)
             base_value = idea_factunit_atom.get_value(base_text)
             pick_value = idea_factunit_atom.get_value(pick_text)
-            x_str = f"FactUnit '{pick_value}' deleted from base '{base_value}' for idea '{road_value}'."
+            x_str = f"FactUnit base '{base_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
