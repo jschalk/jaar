@@ -13,16 +13,7 @@ from src.bud.group import MemberShip, GroupID
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit, budunit_shop
 from src.bud.bud_tool import (
-    budunit_exists,
-    bud_acctunit_exists as acctunit_exists,
-    bud_acct_membership_exists as membership_exists,
-    bud_ideaunit_exists as ideaunit_exists,
-    bud_idea_awardlink_exists as awardlink_exists,
-    bud_idea_reasonunit_exists as reasonunit_exists,
-    bud_idea_reason_premiseunit_exists as premiseunit_exists,
-    bud_idea_teamlink_exists as teamlink_exists,
-    bud_idea_healerlink_exists as healerlink_exists,
-    bud_idea_factunit_exists as factunit_exists,
+    bud_attr_exists,
     budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -56,7 +47,7 @@ from src.gift.atom_config import (
     fopen_str,
     fnigh_str,
     base_idea_active_requisite_str,
-    get_sorted_required_arg_keys,
+    get_atom_config_required_args,
 )
 from src.gift.atom import (
     AtomUnit,
@@ -936,103 +927,18 @@ def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
 
     x_crud_delete = atom_delete()
     x_crud_insert = atom_insert()
-    if x_atom.category == bud_acctunit_text():
-        args_dict = {}
-        for required_arg in get_sorted_required_arg_keys(x_atom.category):
-            args_dict[required_arg] = x_atom.get_value(required_arg)
-        print(f"{args_dict=}")
+    args_dict = {}
+    for required_arg in get_atom_config_required_args(x_atom.category):
+        args_dict[required_arg] = x_atom.get_value(required_arg)
+    x_parent_road = args_dict.get(parent_road_str())
+    x_label = args_dict.get(label_str())
+    if x_parent_road != None and x_label != None:
+        args_dict[road_str()] = x_bud.make_road(x_parent_road, x_label)
 
-        x_acct_id = x_atom.get_value(acct_id_str())
-        x_exists = acctunit_exists(x_bud, x_acct_id)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            print("huh")
-
-    elif x_atom.category == bud_acct_membership_text():
-        x_acct_id = x_atom.get_value(acct_id_str())
-        x_group_id = x_atom.get_value(group_id_str())
-        x_exists = membership_exists(x_bud, x_acct_id, x_group_id)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
-
-    elif x_atom.category == bud_ideaunit_text():
-        x_parent_road = x_atom.get_value(parent_road_str())
-        x_label = x_atom.get_value(label_str())
-        x_road = x_bud.make_road(x_parent_road, x_label)
-        x_exists = ideaunit_exists(x_bud, x_road)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
-
-    elif x_atom.category == bud_idea_awardlink_text():
-        x_road = x_atom.get_value(road_str())
-        x_group_id = x_atom.get_value(group_id_str())
-        x_exists = awardlink_exists(x_bud, x_road, x_group_id)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
-    elif x_atom.category == bud_idea_teamlink_text():
-        x_road = x_atom.get_value(road_str())
-        x_group_id = x_atom.get_value(group_id_str())
-        x_exists = teamlink_exists(x_bud, x_road, x_group_id)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
-    elif x_atom.category == bud_idea_healerlink_text():
-        x_road = x_atom.get_value(road_str())
-        x_healer_id = x_atom.get_value(healer_id_str())
-        x_exists = healerlink_exists(x_bud, x_road, x_healer_id)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
-    elif x_atom.category == bud_idea_reasonunit_text():
-        x_road = x_atom.get_value(road_str())
-        x_base = x_atom.get_value(base_str())
-        x_exists = reasonunit_exists(x_bud, x_road, x_base)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
-    elif x_atom.category == bud_idea_reason_premiseunit_text():
-        x_road = x_atom.get_value(road_str())
-        x_base = x_atom.get_value(base_str())
-        x_need = x_atom.get_value("need")
-        x_exists = premiseunit_exists(x_bud, x_road, x_base, x_need)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
-    elif x_atom.category == bud_idea_factunit_text():
-        x_road = x_atom.get_value(road_str())
-        x_base = x_atom.get_value(base_str())
-        x_exists = factunit_exists(x_bud, x_road, x_base)
-        if x_atom.crud_text == x_crud_delete:
-            if x_exists:
-                return x_atom
-        elif x_atom.crud_text == x_crud_insert:
-            if not x_exists:
-                print("huh")
+    x_exists = bud_attr_exists(x_atom.category, x_bud, args_dict)
+    if x_atom.crud_text == x_crud_delete and x_exists:
+        return x_atom
+    elif x_atom.crud_text == x_crud_insert:
+        print("huh")
 
     return None
