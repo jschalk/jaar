@@ -483,6 +483,9 @@ class ReasonCore:
             delimiter=self.delimiter,
         )
 
+    def premise_exists(self, x_need: RoadUnit) -> bool:
+        return self.premises.get(x_need) != None
+
     def get_premise(self, premise: RoadUnit) -> PremiseUnit:
         return self.premises.get(premise)
 

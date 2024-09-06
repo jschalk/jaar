@@ -314,6 +314,9 @@ class IdeaUnit:
     def set_factunit(self, factunit: FactUnit):
         self._factunits[factunit.base] = factunit
 
+    def factunit_exists(self, x_base: RoadUnit) -> bool:
+        return self._factunits.get(x_base) != None
+
     def get_factunits_dict(self) -> dict[RoadUnit, FactUnit]:
         return {hc.base: hc.get_dict() for hc in self._factunits.values()}
 
@@ -746,9 +749,15 @@ class IdeaUnit:
         except KeyError as e:
             raise (f"Cannot delete awardlink '{group_id}'.") from e
 
+    def awardlink_exists(self, x_group_id: GroupID) -> bool:
+        return self._awardlinks.get(x_group_id) != None
+
     def set_reasonunit(self, reason: ReasonUnit):
         reason.delimiter = self._road_delimiter
         self._reasonunits[reason.base] = reason
+
+    def reasonunit_exists(self, x_base: RoadUnit) -> bool:
+        return self._reasonunits.get(x_base) != None
 
     def get_reasonunit(self, base: RoadUnit) -> ReasonUnit:
         return self._reasonunits.get(base)
