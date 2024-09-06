@@ -21,7 +21,7 @@ from src.bud.bud_tool import (
     bud_idea_reasonunit_exists as reasonunit_exists,
     bud_idea_reason_premiseunit_exists as reason_premiseunit_exists,
     bud_idea_teamlink_exists as teamlink_exists,
-    bud_idea_healerhold_exists as healerhold_exists,
+    bud_idea_healerlink_exists as healerlink_exists,
     bud_idea_factunit_exists as factunit_exists,
 )
 from src.gift.atom_config import (
@@ -31,7 +31,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_factunit_text,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_reasonunit_text,
     bud_ideaunit_text,
@@ -412,9 +412,9 @@ class ChangeUnit:
                 idea_road=insert_idea_road,
                 insert_teamlink_group_ids=insert_ideaunit._teamunit._teamlinks,
             )
-            self.add_atomunit_idea_healerhold_insert(
+            self.add_atomunit_idea_healerlink_insert(
                 idea_road=insert_idea_road,
-                insert_healerhold_healer_ids=insert_ideaunit._healerhold._healer_ids,
+                insert_healerlink_healer_ids=insert_ideaunit._healerlink._healer_ids,
             )
 
     def add_atomunit_idea_updates(
@@ -538,19 +538,19 @@ class ChangeUnit:
                 ),
             )
 
-            # insert / update / delete healerholds
-            before_healerholds_healer_ids = set(before_ideaunit._healerhold._healer_ids)
-            after_healerholds_healer_ids = set(after_ideaunit._healerhold._healer_ids)
-            self.add_atomunit_idea_healerhold_insert(
+            # insert / update / delete healerlinks
+            before_healerlinks_healer_ids = set(before_ideaunit._healerlink._healer_ids)
+            after_healerlinks_healer_ids = set(after_ideaunit._healerlink._healer_ids)
+            self.add_atomunit_idea_healerlink_insert(
                 idea_road=idea_road,
-                insert_healerhold_healer_ids=after_healerholds_healer_ids.difference(
-                    before_healerholds_healer_ids
+                insert_healerlink_healer_ids=after_healerlinks_healer_ids.difference(
+                    before_healerlinks_healer_ids
                 ),
             )
-            self.add_atomunit_idea_healerhold_deletes(
+            self.add_atomunit_idea_healerlink_deletes(
                 idea_road=idea_road,
-                delete_healerhold_healer_ids=before_healerholds_healer_ids.difference(
-                    after_healerholds_healer_ids
+                delete_healerlink_healer_ids=before_healerlinks_healer_ids.difference(
+                    after_healerlinks_healer_ids
                 ),
             )
 
@@ -583,9 +583,9 @@ class ChangeUnit:
                 idea_road=delete_idea_road,
                 delete_teamlink_group_ids=delete_ideaunit._teamunit._teamlinks,
             )
-            self.add_atomunit_idea_healerhold_deletes(
+            self.add_atomunit_idea_healerlink_deletes(
                 idea_road=delete_idea_road,
-                delete_healerhold_healer_ids=delete_ideaunit._healerhold._healer_ids,
+                delete_healerlink_healer_ids=delete_ideaunit._healerlink._healer_ids,
             )
 
     def add_atomunit_idea_reasonunit_inserts(
@@ -759,22 +759,22 @@ class ChangeUnit:
             x_atomunit.set_required_arg(group_id_str(), delete_teamlink_group_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_healerhold_insert(
-        self, idea_road: RoadUnit, insert_healerhold_healer_ids: set
+    def add_atomunit_idea_healerlink_insert(
+        self, idea_road: RoadUnit, insert_healerlink_healer_ids: set
     ):
-        for insert_healerhold_healer_id in insert_healerhold_healer_ids:
-            x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_insert())
+        for insert_healerlink_healer_id in insert_healerlink_healer_ids:
+            x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_insert())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg(healer_id_str(), insert_healerhold_healer_id)
+            x_atomunit.set_required_arg(healer_id_str(), insert_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_healerhold_deletes(
-        self, idea_road: RoadUnit, delete_healerhold_healer_ids: set
+    def add_atomunit_idea_healerlink_deletes(
+        self, idea_road: RoadUnit, delete_healerlink_healer_ids: set
     ):
-        for delete_healerhold_healer_id in delete_healerhold_healer_ids:
-            x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_delete())
+        for delete_healerlink_healer_id in delete_healerlink_healer_ids:
+            x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg(healer_id_str(), delete_healerhold_healer_id)
+            x_atomunit.set_required_arg(healer_id_str(), delete_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_inserts(
@@ -983,10 +983,10 @@ def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         elif x_atom.crud_text == x_crud_insert:
             if not x_exists:
                 print("huh")
-    elif x_atom.category == bud_idea_healerhold_text():
+    elif x_atom.category == bud_idea_healerlink_text():
         x_road = x_atom.get_value(road_str())
         x_healer_id = x_atom.get_value(healer_id_str())
-        x_exists = healerhold_exists(x_bud, x_road, x_healer_id)
+        x_exists = healerlink_exists(x_bud, x_road, x_healer_id)
         if x_atom.crud_text == x_crud_delete:
             if x_exists:
                 return x_atom
@@ -998,6 +998,6 @@ def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     # elif x_atom.category == bud_idea_awardlink_text()
     # elif x_atom.category == bud_idea_factunit_text()
     # elif x_atom.category == bud_idea_teamlink_text()
-    # elif x_atom.category == bud_idea_healerhold_text()
+    # elif x_atom.category == bud_idea_healerlink_text()
     # elif x_atom.category == bud_idea_reason_premiseunit_text()
     # elif x_atom.category == bud_idea_reasonunit_text()

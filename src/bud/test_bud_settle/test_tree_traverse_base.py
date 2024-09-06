@@ -48,15 +48,15 @@ def test_BudUnit_pre_tree_traverse_attrs_CorrectlySetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     x_econ_justifed = False
-    x_sum_healerhold_share = 140
+    x_sum_healerlink_share = 140
     sue_bud._econs_justified = x_econ_justifed
     sue_bud._econs_buildable = "swimmers"
-    sue_bud._sum_healerhold_share = x_sum_healerhold_share
+    sue_bud._sum_healerlink_share = x_sum_healerlink_share
     sue_bud._econ_dict = {"run": "run"}
     sue_bud._healers_dict = {"run": "run"}
     assert sue_bud._econs_justified == x_econ_justifed
     assert sue_bud._econs_buildable
-    assert sue_bud._sum_healerhold_share == x_sum_healerhold_share
+    assert sue_bud._sum_healerlink_share == x_sum_healerlink_share
     assert sue_bud._econ_dict != {}
     assert sue_bud._healers_dict != {}
 
@@ -67,7 +67,7 @@ def test_BudUnit_pre_tree_traverse_attrs_CorrectlySetsAttrs():
     assert sue_bud._econs_justified != x_econ_justifed
     assert sue_bud._econs_justified
     assert sue_bud._econs_buildable is False
-    assert sue_bud._sum_healerhold_share == 0
+    assert sue_bud._sum_healerlink_share == 0
     assert not sue_bud._econ_dict
     assert not sue_bud._healers_dict
 

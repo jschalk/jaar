@@ -10,7 +10,7 @@ from src.bud.bud_tool import (
     bud_idea_reasonunit_exists,
     bud_idea_reason_premiseunit_exists,
     bud_idea_teamlink_exists,
-    bud_idea_healerhold_exists,
+    bud_idea_healerlink_exists,
     bud_idea_factunit_exists,
 )
 from src.gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
@@ -23,7 +23,7 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text as premiseunit_exists,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
@@ -303,7 +303,7 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_teamlink():
     assert _sift_atomunit(sue_bud, clean_swim_atom)
 
 
-def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_healerhold():
+def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_healerlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
@@ -312,28 +312,28 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_healerhold():
     clean_road = sue_bud.make_road(casa_road, clean_text)
     swim_text = "Swim"
 
-    casa_swim_atom = atomunit_shop(bud_idea_healerhold_text(), atom_delete())
+    casa_swim_atom = atomunit_shop(bud_idea_healerlink_text(), atom_delete())
     casa_swim_atom.set_arg(road_str(), casa_road)
     casa_swim_atom.set_arg(healer_id_str(), swim_text)
-    clean_swim_atom = atomunit_shop(bud_idea_healerhold_text(), atom_delete())
+    clean_swim_atom = atomunit_shop(bud_idea_healerlink_text(), atom_delete())
     clean_swim_atom.set_arg(road_str(), clean_road)
     clean_swim_atom.set_arg(healer_id_str(), swim_text)
     sue_bud.add_idea(casa_road)
     sue_bud.add_idea(clean_road)
-    assert not bud_idea_healerhold_exists(sue_bud, casa_road, swim_text)
-    assert not bud_idea_healerhold_exists(sue_bud, clean_road, swim_text)
+    assert not bud_idea_healerlink_exists(sue_bud, casa_road, swim_text)
+    assert not bud_idea_healerlink_exists(sue_bud, clean_road, swim_text)
     assert not _sift_atomunit(sue_bud, casa_swim_atom)
     assert not _sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(casa_road)._healerhold.set_healer_id(swim_text)
+    sue_bud.get_idea_obj(casa_road)._healerlink.set_healer_id(swim_text)
 
     # THEN
     assert _sift_atomunit(sue_bud, casa_swim_atom)
     assert not _sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(clean_road)._healerhold.set_healer_id(swim_text)
+    sue_bud.get_idea_obj(clean_road)._healerlink.set_healer_id(swim_text)
     # THEN
     assert _sift_atomunit(sue_bud, casa_swim_atom)
     assert _sift_atomunit(sue_bud, clean_swim_atom)

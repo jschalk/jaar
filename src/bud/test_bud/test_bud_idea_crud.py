@@ -1,5 +1,5 @@
 from src._road.road import default_road_delimiter_if_none
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.examples.example_buds import get_budunit_with_4_levels
 from src.bud.group import awardlink_shop
 from src.bud.idea import ideaunit_shop
@@ -435,17 +435,17 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     sue_bud.edit_idea_attr(road=casa_road, pledge=True)
     assert sue_bud._idearoot._kids[casa_text].pledge is True
 
-    # _healerhold:
-    sue_bud._idearoot._kids[casa_text]._healerhold = "fun3rol"
-    src_healerhold = sue_bud._idearoot._kids[casa_text]._healerhold
-    assert src_healerhold == "fun3rol"
+    # _healerlink:
+    sue_bud._idearoot._kids[casa_text]._healerlink = "fun3rol"
+    src_healerlink = sue_bud._idearoot._kids[casa_text]._healerlink
+    assert src_healerlink == "fun3rol"
     sue_text = "Sue"
     yao_text = "Yao"
-    x_healerhold = healerhold_shop({sue_text, yao_text})
+    x_healerlink = healerlink_shop({sue_text, yao_text})
     sue_bud.add_acctunit(sue_text)
     sue_bud.add_acctunit(yao_text)
-    sue_bud.edit_idea_attr(road=casa_road, healerhold=x_healerhold)
-    assert sue_bud._idearoot._kids[casa_text]._healerhold == x_healerhold
+    sue_bud.edit_idea_attr(road=casa_road, healerlink=x_healerlink)
+    assert sue_bud._idearoot._kids[casa_text]._healerlink == x_healerlink
 
     # _problem_bool: bool
     sue_bud._idearoot._kids[casa_text]._problem_bool = "fun3rol"
@@ -456,7 +456,7 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_bud._idearoot._kids[casa_text]._problem_bool == x_problem_bool
 
 
-def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_healer_ids_DoNotExist():
+def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerlink_healer_ids_DoNotExist():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     casa_text = "casa"
@@ -473,12 +473,12 @@ def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerhold_healer_ids_DoNotExist
 
     # WHEN / THEN
     sue_text = "Sue"
-    x_healerhold = healerhold_shop({sue_text})
+    x_healerlink = healerlink_shop({sue_text})
     with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_idea_attr(road=casa_road, healerhold=x_healerhold)
+        yao_bud.edit_idea_attr(road=casa_road, healerlink=x_healerlink)
     assert (
         str(excinfo.value)
-        == f"Idea cannot edit healerhold because group_id '{sue_text}' does not exist as group in Bud"
+        == f"Idea cannot edit healerlink because group_id '{sue_text}' does not exist as group in Bud"
     )
 
 

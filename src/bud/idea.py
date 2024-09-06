@@ -23,7 +23,7 @@ from src._road.road import (
     rebuild_road,
     find_replace_road_key_dict,
 )
-from src.bud.healer import HealerHold, healerhold_shop, healerhold_get_from_dict
+from src.bud.healer import HealerLink, healerlink_shop, healerlink_get_from_dict
 from src.bud.reason_team import (
     TeamUnit,
     TeamHeir,
@@ -91,7 +91,7 @@ class IdeaAttrFilter:
     reason_del_premise_need: RoadUnit = None
     reason_base_idea_active_requisite: str = None
     teamunit: TeamUnit = None
-    healerhold: HealerHold = None
+    healerlink: HealerLink = None
     begin: float = None
     close: float = None
     gogo_want: float = None
@@ -150,7 +150,7 @@ def ideaattrfilter_shop(
     reason_del_premise_need: RoadUnit = None,
     reason_base_idea_active_requisite: str = None,
     teamunit: TeamUnit = None,
-    healerhold: HealerHold = None,
+    healerlink: HealerLink = None,
     begin: float = None,
     close: float = None,
     gogo_want: float = None,
@@ -182,7 +182,7 @@ def ideaattrfilter_shop(
         reason_del_premise_need=reason_del_premise_need,
         reason_base_idea_active_requisite=reason_base_idea_active_requisite,
         teamunit=teamunit,
-        healerhold=healerhold,
+        healerlink=healerlink,
         begin=begin,
         close=close,
         gogo_want=gogo_want,
@@ -221,7 +221,7 @@ class IdeaUnit:
     _teamheir: TeamHeir = None  # Calculated field
     _factunits: dict[RoadUnit, FactUnit] = None
     _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
-    _healerhold: HealerHold = None
+    _healerlink: HealerLink = None
     _begin: float = None
     _close: float = None
     _addin: float = None
@@ -251,7 +251,7 @@ class IdeaUnit:
     _is_expanded: bool = None
     _active_hx: dict[int, bool] = None
     _road_delimiter: str = None
-    _healerhold_ratio: float = None
+    _healerlink_ratio: float = None
 
     def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
         base_reasonunit_exists = self.base_reasonunit_exists(necessary_base)
@@ -583,8 +583,8 @@ class IdeaUnit:
             )
         if idea_attr.teamunit is not None:
             self._teamunit = idea_attr.teamunit
-        if idea_attr.healerhold is not None:
-            self._healerhold = idea_attr.healerhold
+        if idea_attr.healerlink is not None:
+            self._healerlink = idea_attr.healerlink
         if idea_attr.begin is not None:
             self._begin = idea_attr.begin
         if idea_attr.close is not None:
@@ -902,8 +902,8 @@ class IdeaUnit:
             x_dict["_reasonunits"] = self.get_reasonunits_dict()
         if self._teamunit not in [None, teamunit_shop()]:
             x_dict["_teamunit"] = self.get_teamunit_dict()
-        if self._healerhold not in [None, healerhold_shop()]:
-            x_dict["_healerhold"] = self._healerhold.get_dict()
+        if self._healerlink not in [None, healerlink_shop()]:
+            x_dict["_healerlink"] = self._healerlink.get_dict()
         if self._awardlinks not in [{}, None]:
             x_dict["_awardlinks"] = self.get_awardlinks_dict()
         if self._originunit not in [None, originunit_shop()]:
@@ -982,7 +982,7 @@ def ideaunit_shop(
     _teamheir: TeamHeir = None,  # Calculated field
     _factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
-    _healerhold: HealerHold = None,
+    _healerlink: HealerLink = None,
     _begin: float = None,
     _close: float = None,
     _gogo_want: float = None,
@@ -1011,10 +1011,10 @@ def ideaunit_shop(
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
     _road_delimiter: str = None,
-    _healerhold_ratio: float = None,
+    _healerlink_ratio: float = None,
 ) -> IdeaUnit:
     _bud_real_id = root_label() if _bud_real_id is None else _bud_real_id
-    _healerhold = healerhold_shop() if _healerhold is None else _healerhold
+    _healerlink = healerlink_shop() if _healerlink is None else _healerlink
 
     x_ideakid = IdeaUnit(
         _label=None,
@@ -1031,7 +1031,7 @@ def ideaunit_shop(
         _teamheir=_teamheir,
         _factunits=get_empty_dict_if_none(_factunits),
         _factheirs=get_empty_dict_if_none(_factheirs),
-        _healerhold=_healerhold,
+        _healerlink=_healerlink,
         _begin=_begin,
         _close=_close,
         _gogo_want=_gogo_want,
@@ -1060,7 +1060,7 @@ def ideaunit_shop(
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_none(_active_hx),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _healerhold_ratio=get_0_if_None(_healerhold_ratio),
+        _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_ideakid._root:
         x_ideakid.set_label(_label=_bud_real_id)
@@ -1084,11 +1084,11 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else teamunit_shop()
         )
-    elif dict_key == "_healerhold":
+    elif dict_key == "_healerlink":
         return (
-            healerhold_get_from_dict(x_dict[dict_key])
+            healerlink_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
-            else healerhold_shop()
+            else healerlink_shop()
         )
     elif dict_key == "_originunit":
         return (

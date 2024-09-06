@@ -1,7 +1,7 @@
 from src._instrument.python_tool import x_is_json, get_dict_from_json
 from src._road.road import default_road_delimiter_if_none
 from src.bud.group import awardlink_shop
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.reason_team import teamunit_shop
 from src.bud.reason_idea import factunit_shop
 from src.bud.idea import ideaunit_shop
@@ -108,7 +108,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_teamunit():
     assert idearoot_dict.get("_stop_want") == x_stop_want
 
 
-def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
+def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_text = "Yao"
@@ -116,16 +116,16 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerhold():
     run_text = ";runners"
     yao_acctunit = sue_bud.get_acct(yao_text)
     yao_acctunit.add_membership(run_text)
-    run_healerhold = healerhold_shop()
-    run_healerhold.set_healer_id(x_healer_id=run_text)
-    sue_bud.edit_idea_attr(road=sue_bud._real_id, healerhold=run_healerhold)
+    run_healerlink = healerlink_shop()
+    run_healerlink.set_healer_id(x_healer_id=run_text)
+    sue_bud.edit_idea_attr(road=sue_bud._real_id, healerlink=run_healerlink)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
     idearoot_dict = bud_dict.get("_idearoot")
 
     # THEN
-    assert idearoot_dict["_healerhold"] == run_healerhold.get_dict()
+    assert idearoot_dict["_healerlink"] == run_healerlink.get_dict()
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_ideakid_TeamUnit():
@@ -174,8 +174,8 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     zia_bud.add_acctunit(yao_text)
     yao_acctunit = zia_bud.get_acct(yao_text)
     yao_acctunit.add_membership(run_text)
-    run_healerhold = healerhold_shop({run_text})
-    zia_bud.edit_idea_attr(road=zia_bud._real_id, healerhold=run_healerhold)
+    run_healerlink = healerlink_shop({run_text})
+    zia_bud.edit_idea_attr(road=zia_bud._real_id, healerlink=run_healerlink)
     zia_bud.edit_idea_attr(road=zia_bud._real_id, problem_bool=True)
 
     # WHEN
@@ -217,10 +217,10 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
     assert len(shave_factunits) == len(x_idearoot._kids[shave_text]._factunits)
-    idearoot_healerhold = idearoot_dict["_healerhold"]
-    print(f"{idearoot_healerhold=}")
-    assert len(idearoot_healerhold) == 1
-    assert x_idearoot._healerhold.any_healer_id_exists()
+    idearoot_healerlink = idearoot_dict["_healerlink"]
+    print(f"{idearoot_healerlink=}")
+    assert len(idearoot_healerlink) == 1
+    assert x_idearoot._healerlink.any_healer_id_exists()
     assert x_idearoot._problem_bool
 
 
@@ -332,9 +332,9 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(xio_text))
     zia_bud.edit_idea_attr(shave_road, awardlink=awardlink_shop(sue_text))
     zia_bud.edit_idea_attr(zia_bud._real_id, awardlink=awardlink_shop(sue_text))
-    # add healerhold to shave ideaunit
-    run_healerhold = healerhold_shop({run_text})
-    zia_bud.edit_idea_attr(shave_road, healerhold=run_healerhold)
+    # add healerlink to shave ideaunit
+    run_healerlink = healerlink_shop({run_text})
+    zia_bud.edit_idea_attr(shave_road, healerlink=run_healerlink)
     shave_idea = zia_bud.get_idea_obj(shave_road)
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -403,8 +403,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_shave_idea._teamunit == zia_shave_idea._teamunit
     assert json_shave_idea._teamunit == xio_teamunit
     assert json_shave_idea._originunit == zia_shave_idea._originunit
-    print(f"{json_shave_idea._healerhold=}")
-    assert json_shave_idea._healerhold == zia_shave_idea._healerhold
+    print(f"{json_shave_idea._healerlink=}")
+    assert json_shave_idea._healerlink == zia_shave_idea._healerlink
     assert len(json_shave_idea._awardlinks) == 2
     assert len(json_shave_idea._factunits) == 1
     assert zia_shave_idea._problem_bool

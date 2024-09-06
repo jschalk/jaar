@@ -69,7 +69,7 @@ def stone_format_00036_problem_healer_v0_0_0() -> str:
 # def stone_format_00022_bud_idea_awardlink_v0_0_0()-> str: return "stone_format_00022_bud_idea_awardlink_v0_0_0"
 # def stone_format_00023_bud_idea_factunit_v0_0_0()-> str: return "stone_format_00023_bud_idea_factunit_v0_0_0"
 # def stone_format_00024_bud_idea_teamlink_v0_0_0()-> str: return "stone_format_00024_bud_idea_teamlink_v0_0_0"
-# def stone_format_00025_bud_idea_healerhold_v0_0_0()-> str: return "stone_format_00025_bud_idea_healerhold_v0_0_0"
+# def stone_format_00025_bud_idea_healerlink_v0_0_0()-> str: return "stone_format_00025_bud_idea_healerlink_v0_0_0"
 # def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0()-> str: return "stone_format_00026_bud_idea_reason_premiseunit_v0_0_0"
 # def stone_format_00027_bud_idea_reasonunit_v0_0_0()-> str: return "stone_format_00027_bud_idea_reasonunit_v0_0_0"
 # def stone_format_00028_bud_ideaunit_v0_0_0()-> str: return "stone_format_00028_bud_ideaunit_v0_0_0"
@@ -94,8 +94,8 @@ def stone_format_00024_bud_idea_teamlink_v0_0_0() -> str:
     return "stone_format_00024_bud_idea_teamlink_v0_0_0"
 
 
-def stone_format_00025_bud_idea_healerhold_v0_0_0() -> str:
-    return "stone_format_00025_bud_idea_healerhold_v0_0_0"
+def stone_format_00025_bud_idea_healerlink_v0_0_0() -> str:
+    return "stone_format_00025_bud_idea_healerlink_v0_0_0"
 
 
 def stone_format_00026_bud_idea_reason_premiseunit_v0_0_0() -> str:
@@ -125,7 +125,7 @@ def get_stone_filenames() -> set[str]:
         stone_format_00022_bud_idea_awardlink_v0_0_0(),
         stone_format_00023_bud_idea_factunit_v0_0_0(),
         stone_format_00024_bud_idea_teamlink_v0_0_0(),
-        stone_format_00025_bud_idea_healerhold_v0_0_0(),
+        stone_format_00025_bud_idea_healerlink_v0_0_0(),
         stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
         stone_format_00027_bud_idea_reasonunit_v0_0_0(),
         stone_format_00028_bud_ideaunit_v0_0_0(),
@@ -145,7 +145,7 @@ def get_stone_format_headers() -> dict[str, list[str]]:
         "give_force,group_id,owner_id,real_id,road,take_force": stone_format_00022_bud_idea_awardlink_v0_0_0(),
         "base,fnigh,fopen,owner_id,pick,real_id,road": stone_format_00023_bud_idea_factunit_v0_0_0(),
         "group_id,owner_id,real_id,road": stone_format_00024_bud_idea_teamlink_v0_0_0(),
-        "healer_id,owner_id,real_id,road": stone_format_00025_bud_idea_healerhold_v0_0_0(),
+        "healer_id,owner_id,real_id,road": stone_format_00025_bud_idea_healerlink_v0_0_0(),
         "base,divisor,need,nigh,open,owner_id,real_id,road": stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
         "base,base_idea_active_requisite,owner_id,real_id,road": stone_format_00027_bud_idea_reasonunit_v0_0_0(),
         "addin,begin,close,denom,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,real_id,stop_want": stone_format_00028_bud_ideaunit_v0_0_0(),

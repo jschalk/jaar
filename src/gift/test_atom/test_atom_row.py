@@ -3,7 +3,7 @@ from src.gift.atom_config import (
     bud_acctunit_text,
     bud_acct_membership_text,
     bud_ideaunit_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     atom_insert,
     atom_delete,
     acct_id_str,
@@ -252,7 +252,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
     # ESTABLISH
-    x_categorys = {bud_ideaunit_text(), bud_idea_healerhold_text()}
+    x_categorys = {bud_ideaunit_text(), bud_idea_healerlink_text()}
     x_atomrow = atomrow_shop(x_categorys, atom_insert())
     x_atomrow.parent_road = "music78"
     x_atomrow.label = "casa"
@@ -269,7 +269,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
     y_idea_atomunit.set_arg("label", "casa")
     y_idea_atomunit.set_arg("pledge", False)
     assert y_idea_atomunit in x_atomunits
-    healerhold_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_insert())
-    healerhold_atomunit.set_arg("road", "music78;casa")
-    healerhold_atomunit.set_arg("healer_id", "Bob")
-    assert healerhold_atomunit in x_atomunits
+    healerlink_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_insert())
+    healerlink_atomunit.set_arg("road", "music78;casa")
+    healerlink_atomunit.set_arg("healer_id", "Bob")
+    assert healerlink_atomunit in x_atomunits

@@ -59,12 +59,12 @@ def bud_idea_teamlink_exists(
     )
 
 
-def bud_idea_healerhold_exists(
+def bud_idea_healerlink_exists(
     x_bud: BudUnit, x_road: RoadUnit, x_healer_id: GroupID
 ) -> bool:
     return bool(
         bud_ideaunit_exists(x_bud, x_road)
-        and x_bud.get_idea_obj(x_road)._healerhold.healer_id_exists(x_healer_id)
+        and x_bud.get_idea_obj(x_road)._healerlink.healer_id_exists(x_healer_id)
     )
 
 

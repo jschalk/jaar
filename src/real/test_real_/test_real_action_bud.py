@@ -1,4 +1,4 @@
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.listen.hubunit import hubunit_shop
@@ -47,7 +47,7 @@ def test_RealUnit_generate_action_bud_ReturnsRegeneratedObj(env_dir_setup_cleanu
     assert after_sue_bud.acct_exists(bob_text) is False
 
 
-def test_RealUnit_generate_action_bud_SetsCorrectFileWithout_healerhold(
+def test_RealUnit_generate_action_bud_SetsCorrectFileWithout_healerlink(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -71,7 +71,7 @@ def test_RealUnit_generate_action_bud_SetsCorrectFileWithout_healerhold(
     assert after_bob_action_bud.acct_exists(sue_text)
 
 
-def test_RealUnit_generate_action_bud_SetsFileWith_healerhold(env_dir_setup_cleanup):
+def test_RealUnit_generate_action_bud_SetsFileWith_healerlink(env_dir_setup_cleanup):
     # ESTABLISH
     music_real = realunit_shop("music", get_test_reals_dir(), True)
 
@@ -89,7 +89,7 @@ def test_RealUnit_generate_action_bud_SetsFileWith_healerhold(env_dir_setup_clea
     texas_road = bob_voice_bud.make_l1_road(texas_text)
     elpaso_text = "el paso"
     elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({bob_text}))
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=healerlink_shop({bob_text}))
     bob_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     bob_voice_bud.set_idea(elpaso_idea, texas_road)
     bob_hubunit.save_voice_bud(bob_voice_bud)
@@ -119,7 +119,7 @@ def test_RealUnit_generate_all_action_buds_SetsCorrectFiles(
     texas_road = bob_voice_bud.make_l1_road(texas_text)
     elpaso_text = "el paso"
     elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({bob_text}))
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=healerlink_shop({bob_text}))
 
     bob_voice_bud = bob_hubunit.get_voice_bud()
     bob_voice_bud.add_acctunit(bob_text)

@@ -10,7 +10,7 @@ from src.bud.bud_tool import (
     bud_idea_reasonunit_exists,
     bud_idea_reason_premiseunit_exists as premiseunit_exists,
     bud_idea_teamlink_exists,
-    bud_idea_healerhold_exists,
+    bud_idea_healerlink_exists,
     bud_idea_factunit_exists,
 )
 
@@ -224,7 +224,7 @@ def test_bud_idea_teamlink_exists_ReturnsObj():
     assert not bud_idea_teamlink_exists(sue_bud, clean_road, swim_text)
 
 
-def test_bud_idea_healerhold_exists_ReturnsObj():
+def test_bud_idea_healerlink_exists_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
@@ -235,20 +235,20 @@ def test_bud_idea_healerhold_exists_ReturnsObj():
     swim_text = "Swim"
 
     # WHEN / THEN
-    assert not bud_idea_healerhold_exists(None, None, None)
-    assert not bud_idea_healerhold_exists(sue_bud, None, None)
-    assert not bud_idea_healerhold_exists(sue_bud, root_road, swim_text)
-    assert not bud_idea_healerhold_exists(sue_bud, casa_road, swim_text)
-    assert not bud_idea_healerhold_exists(sue_bud, clean_road, swim_text)
+    assert not bud_idea_healerlink_exists(None, None, None)
+    assert not bud_idea_healerlink_exists(sue_bud, None, None)
+    assert not bud_idea_healerlink_exists(sue_bud, root_road, swim_text)
+    assert not bud_idea_healerlink_exists(sue_bud, casa_road, swim_text)
+    assert not bud_idea_healerlink_exists(sue_bud, clean_road, swim_text)
 
     # WHEN
-    sue_bud._idearoot._healerhold.set_healer_id(swim_text)
+    sue_bud._idearoot._healerlink.set_healer_id(swim_text)
 
     # THEN
-    assert not bud_idea_healerhold_exists(sue_bud, None, None)
-    assert bud_idea_healerhold_exists(sue_bud, root_road, swim_text)
-    assert not bud_idea_healerhold_exists(sue_bud, casa_road, swim_text)
-    assert not bud_idea_healerhold_exists(sue_bud, clean_road, swim_text)
+    assert not bud_idea_healerlink_exists(sue_bud, None, None)
+    assert bud_idea_healerlink_exists(sue_bud, root_road, swim_text)
+    assert not bud_idea_healerlink_exists(sue_bud, casa_road, swim_text)
+    assert not bud_idea_healerlink_exists(sue_bud, clean_road, swim_text)
 
 
 def test_bud_idea_factunit_exists_ReturnsObj():

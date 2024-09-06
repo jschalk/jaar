@@ -2,7 +2,7 @@ from src._instrument.python_tool import conditional_fig_show
 from src._road.finance import default_fund_pool
 from src.bud.graphic import display_ideatree
 from src.bud.bud import budunit_shop
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_with7amCleanTableReason,
@@ -620,21 +620,21 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
     assert from_list_get_active(mat_road, yao_budunit._idea_dict)
 
 
-def test_BudUnit_settle_bud_CorrectlySetsEmpty_sum_healerhold_share():
+def test_BudUnit_settle_bud_CorrectlySetsEmpty_sum_healerlink_share():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    assert sue_budunit._sum_healerhold_share == 0
+    assert sue_budunit._sum_healerlink_share == 0
     assert sue_budunit._econ_dict == {}
 
     # WHEN
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._sum_healerhold_share == 0
+    assert sue_budunit._sum_healerlink_share == 0
     assert sue_budunit._econ_dict == {}
 
 
-def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share(graphics_bool):
+def test_BudUnit_settle_bud_CorrectlySets_sum_healerlink_share(graphics_bool):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit("Sue")
@@ -642,38 +642,38 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share(graphics_bool):
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-    sue_healerhold = healerhold_shop({"Sue"})
+    sue_healerlink = healerlink_shop({"Sue"})
     sue_budunit.edit_idea_attr(
-        oregon_road, problem_bool=True, healerhold=sue_healerhold
+        oregon_road, problem_bool=True, healerlink=sue_healerlink
     )
     oregon_idea = sue_budunit.get_idea_obj(oregon_road)
     print(f"{oregon_idea._fund_ratio=}")
-    assert sue_budunit._sum_healerhold_share == 0
-    assert oregon_idea._healerhold_ratio == 0
+    assert sue_budunit._sum_healerlink_share == 0
+    assert oregon_idea._healerlink_ratio == 0
 
     # WHEN
     sue_budunit.settle_bud()
     # THEN
-    assert sue_budunit._sum_healerhold_share == 0.038461539 * default_fund_pool()
-    assert oregon_idea._healerhold_ratio == 1
+    assert sue_budunit._sum_healerlink_share == 0.038461539 * default_fund_pool()
+    assert oregon_idea._healerlink_ratio == 1
 
     # WHEN
     week_road = sue_budunit.make_l1_road("weekdays")
     sue_budunit.edit_idea_attr(week_road, problem_bool=True)
     mon_road = sue_budunit.make_road(week_road, "Monday")
-    sue_budunit.edit_idea_attr(mon_road, healerhold=sue_healerhold)
+    sue_budunit.edit_idea_attr(mon_road, healerlink=sue_healerlink)
     mon_idea = sue_budunit.get_idea_obj(mon_road)
     # print(f"{mon_idea._problem_bool=} {mon_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
-    assert sue_budunit._sum_healerhold_share != 0.038461539 * default_fund_pool()
-    assert sue_budunit._sum_healerhold_share == 0.06923077 * default_fund_pool()
-    assert oregon_idea._healerhold_ratio == 0.5555555571604938
-    assert mon_idea._healerhold_ratio == 0.4444444428395062
+    assert sue_budunit._sum_healerlink_share != 0.038461539 * default_fund_pool()
+    assert sue_budunit._sum_healerlink_share == 0.06923077 * default_fund_pool()
+    assert oregon_idea._healerlink_ratio == 0.5555555571604938
+    assert mon_idea._healerlink_ratio == 0.4444444428395062
 
     # WHEN
     tue_road = sue_budunit.make_road(week_road, "Tuesday")
-    sue_budunit.edit_idea_attr(tue_road, healerhold=sue_healerhold)
+    sue_budunit.edit_idea_attr(tue_road, healerlink=sue_healerlink)
     tue_idea = sue_budunit.get_idea_obj(tue_road)
     # print(f"{tue_idea._problem_bool=} {tue_idea._fund_ratio=}")
     # sat_road = sue_budunit.make_road(week_road, "Saturday")
@@ -683,24 +683,24 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerhold_share(graphics_bool):
 
     # THEN
     assert (
-        sue_budunit._sum_healerhold_share != 0.06923076923076923 * default_fund_pool()
+        sue_budunit._sum_healerlink_share != 0.06923076923076923 * default_fund_pool()
     )
-    assert sue_budunit._sum_healerhold_share == 0.100000001 * default_fund_pool()
-    assert oregon_idea._healerhold_ratio == 0.38461538615384616
-    assert mon_idea._healerhold_ratio == 0.3076923069230769
-    assert tue_idea._healerhold_ratio == 0.3076923069230769
+    assert sue_budunit._sum_healerlink_share == 0.100000001 * default_fund_pool()
+    assert oregon_idea._healerlink_ratio == 0.38461538615384616
+    assert mon_idea._healerlink_ratio == 0.3076923069230769
+    assert tue_idea._healerlink_ratio == 0.3076923069230769
 
     # WHEN
-    sue_budunit.edit_idea_attr(week_road, healerhold=sue_healerhold)
+    sue_budunit.edit_idea_attr(week_road, healerlink=sue_healerlink)
     week_idea = sue_budunit.get_idea_obj(week_road)
     print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
     display_ideatree(sue_budunit, "Econ", graphics_bool)
-    assert sue_budunit._sum_healerhold_share == 0
-    assert oregon_idea._healerhold_ratio == 0
-    assert mon_idea._healerhold_ratio == 0
-    assert tue_idea._healerhold_ratio == 0
+    assert sue_budunit._sum_healerlink_share == 0
+    assert oregon_idea._healerlink_ratio == 0
+    assert mon_idea._healerlink_ratio == 0
+    assert tue_idea._healerlink_ratio == 0
 
 
 def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
@@ -711,9 +711,9 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-    sue_healerhold = healerhold_shop({"Sue"})
+    sue_healerlink = healerlink_shop({"Sue"})
     sue_budunit.edit_idea_attr(
-        oregon_road, problem_bool=True, healerhold=sue_healerhold
+        oregon_road, problem_bool=True, healerlink=sue_healerlink
     )
     assert len(sue_budunit._econ_dict) == 0
     assert sue_budunit._econ_dict.get(oregon_road) is None
@@ -728,7 +728,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     week_road = sue_budunit.make_l1_road("weekdays")
     sue_budunit.edit_idea_attr(week_road, problem_bool=True)
     mon_road = sue_budunit.make_road(week_road, "Monday")
-    sue_budunit.edit_idea_attr(mon_road, healerhold=sue_healerhold)
+    sue_budunit.edit_idea_attr(mon_road, healerlink=sue_healerlink)
     # mon_idea = sue_budunit.get_idea_obj(mon_road)
     # print(f"{mon_idea._problem_bool=} {mon_idea._fund_ratio=}")
     sue_budunit.settle_bud()
@@ -739,7 +739,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
 
     # WHEN
     tue_road = sue_budunit.make_road(week_road, "Tuesday")
-    sue_budunit.edit_idea_attr(tue_road, healerhold=sue_healerhold)
+    sue_budunit.edit_idea_attr(tue_road, healerlink=sue_healerlink)
     # tue_idea = sue_budunit.get_idea_obj(tue_road)
     # print(f"{tue_idea._problem_bool=} {tue_idea._fund_ratio=}")
     # sat_road = sue_budunit.make_road(week_road, "Saturday")
@@ -754,7 +754,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     assert sue_budunit._econ_dict.get(tue_road) is not None
 
     # WHEN
-    sue_budunit.edit_idea_attr(week_road, healerhold=sue_healerhold)
+    sue_budunit.edit_idea_attr(week_road, healerlink=sue_healerlink)
     week_idea = sue_budunit.get_idea_obj(week_road)
     print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
@@ -782,12 +782,12 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
 #     nation_road = sue_budunit.make_l1_road("nation-state")
 #     usa_road = sue_budunit.make_road(nation_road, "USA")
 #     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-#     sue_healerhold = healerhold_shop({sue_text})
-#     sue_budunit.edit_idea_attr(oregon_road, problem_bool=True, healerhold=sue_healerhold)
+#     sue_healerlink = healerlink_shop({sue_text})
+#     sue_budunit.edit_idea_attr(oregon_road, problem_bool=True, healerlink=sue_healerlink)
 
 #     week_road = sue_budunit.make_l1_road("weekdays")
-#     bob_healerhold = healerhold_shop({bob_text})
-#     sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerhold=bob_healerhold)
+#     bob_healerlink = healerlink_shop({bob_text})
+#     sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerlink=bob_healerlink)
 #     assert sue_budunit._healers_dict == {}
 
 #     # WHEN
@@ -819,14 +819,14 @@ def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-    sue_healerhold = healerhold_shop({sue_text})
+    sue_healerlink = healerlink_shop({sue_text})
     sue_budunit.edit_idea_attr(
-        oregon_road, problem_bool=True, healerhold=sue_healerhold
+        oregon_road, problem_bool=True, healerlink=sue_healerlink
     )
 
     week_road = sue_budunit.make_l1_road("weekdays")
-    bob_healerhold = healerhold_shop({bob_text})
-    sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerhold=bob_healerhold)
+    bob_healerlink = healerlink_shop({bob_text})
+    sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerlink=bob_healerlink)
     assert sue_budunit._healers_dict == {}
 
     # WHEN
@@ -858,14 +858,14 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-    sue_healerhold = healerhold_shop({sue_text})
+    sue_healerlink = healerlink_shop({sue_text})
     sue_budunit.edit_idea_attr(
-        oregon_road, problem_bool=True, healerhold=sue_healerhold
+        oregon_road, problem_bool=True, healerlink=sue_healerlink
     )
 
     week_road = sue_budunit.make_l1_road("weekdays")
-    bob_healerhold = healerhold_shop({bob_text})
-    sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerhold=bob_healerhold)
+    bob_healerlink = healerlink_shop({bob_text})
+    sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerlink=bob_healerlink)
 
     # WHEN
     sue_budunit.settle_bud()
@@ -894,8 +894,8 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
     bend_text = "Be/nd"
     bend_road = sue_budunit.make_road(oregon_road, bend_text)
     sue_budunit.set_idea(ideaunit_shop(bend_text), oregon_road)
-    sue_healerhold = healerhold_shop({sue_text})
-    sue_budunit.edit_idea_attr(bend_road, problem_bool=True, healerhold=sue_healerhold)
+    sue_healerlink = healerlink_shop({sue_text})
+    sue_budunit.edit_idea_attr(bend_road, problem_bool=True, healerlink=sue_healerlink)
     assert sue_budunit._econs_buildable
 
     # WHEN

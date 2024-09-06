@@ -157,7 +157,7 @@
             "atom_order": 13
         }
     },
-    "bud_idea_healerhold": {
+    "bud_idea_healerlink": {
         "DELETE": {
             "atom_order": 20
         },
@@ -165,7 +165,7 @@
             "atom_order": 5
         },
         "normal_specs": {
-            "normal_table_name": "healerhold"
+            "normal_table_name": "healerlink"
         },
         "optional_args": {},
         "required_args": {

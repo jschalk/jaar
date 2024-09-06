@@ -4,7 +4,7 @@ from src._road.road import (
     create_road,
     default_road_delimiter_if_none,
 )
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.group import awardlink_shop
 from src.bud.reason_team import teamunit_shop
 from src.bud.origin import originunit_shop
@@ -39,7 +39,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._stop_want is None
     assert x_ideaunit.pledge is None
     assert x_ideaunit._problem_bool is None
-    assert x_ideaunit._healerhold is None
+    assert x_ideaunit._healerlink is None
     # calculated_fields
     assert x_ideaunit._range_evaluated is None
     assert x_ideaunit._gogo_calc is None
@@ -56,7 +56,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._fund_cease is None
     assert x_ideaunit._root is None
     assert x_ideaunit._bud_real_id is None
-    assert x_ideaunit._healerhold_ratio is None
+    assert x_ideaunit._healerlink_ratio is None
 
 
 def test_ideaunit_shop_WithNoParametersReturnsObj():
@@ -85,7 +85,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._is_expanded is True
     assert x_ideaunit._factheirs == {}
     assert x_ideaunit._factunits == {}
-    assert x_ideaunit._healerhold == healerhold_shop()
+    assert x_ideaunit._healerlink == healerlink_shop()
     assert x_ideaunit._gogo_calc is None
     assert x_ideaunit._stop_calc is None
     assert x_ideaunit._level is None
@@ -103,7 +103,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._root is False
     assert x_ideaunit._all_acct_cred is None
     assert x_ideaunit._all_acct_debt is None
-    assert x_ideaunit._healerhold_ratio == 0
+    assert x_ideaunit._healerlink_ratio == 0
 
 
 def test_ideaunit_shop_Allows_massToBeZero():
@@ -127,17 +127,17 @@ def test_ideaunit_shop_Allows_doesNotAllow_massToBeNegative():
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
     # ESTABLISH
-    x_healerhold = healerhold_shop({"Sue", "Yao"})
+    x_healerlink = healerlink_shop({"Sue", "Yao"})
     x_problem_bool = True
     x_fund_coin = 88
 
     # WHEN
     x_ideaunit = ideaunit_shop(
-        _healerhold=x_healerhold, _problem_bool=x_problem_bool, _fund_coin=x_fund_coin
+        _healerlink=x_healerlink, _problem_bool=x_problem_bool, _fund_coin=x_fund_coin
     )
 
     # THEN
-    assert x_ideaunit._healerhold == x_healerhold
+    assert x_ideaunit._healerlink == x_healerlink
     assert x_ideaunit._problem_bool == x_problem_bool
     assert x_ideaunit._fund_coin == x_fund_coin
 

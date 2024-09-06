@@ -31,7 +31,7 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_factunit_text,
     get_sorted_required_arg_keys,
     parent_road_str,
@@ -83,8 +83,8 @@ def test_bud_idea_teamlink_text_ReturnsObj():
     assert bud_idea_teamlink_text() == "bud_idea_teamlink"
 
 
-def test_bud_idea_healerhold_text_ReturnsObj():
-    assert bud_idea_healerhold_text() == "bud_idea_healerhold"
+def test_bud_idea_healerlink_text_ReturnsObj():
+    assert bud_idea_healerlink_text() == "bud_idea_healerlink"
 
 
 def test_bud_idea_factunit_text_ReturnsObj():
@@ -121,7 +121,7 @@ def test_atom_config_HasCorrect_category():
         bud_idea_reasonunit_text(),
         bud_idea_reason_premiseunit_text(),
         bud_idea_teamlink_text(),
-        bud_idea_healerhold_text(),
+        bud_idea_healerlink_text(),
         bud_idea_factunit_text(),
     }
     assert bud_acctunit_text() in category_ref()
@@ -202,7 +202,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     # set_mog(atom_insert(), bud_ideaunit_text(), 2)
     # set_mog(atom_insert(), bud_idea_awardlink_text(), 3)
     # set_mog(atom_insert(), bud_idea_teamlink_text(), 4)
-    # set_mog(atom_insert(), bud_idea_healerhold_text(), 5)
+    # set_mog(atom_insert(), bud_idea_healerlink_text(), 5)
     # set_mog(atom_insert(), bud_idea_factunit_text(), 6)
     # set_mog(atom_insert(), bud_idea_reasonunit_text(), 7)
     # set_mog(atom_insert(), bud_idea_reason_premiseunit_text(), 8)
@@ -217,7 +217,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     # set_mog(atom_delete(), bud_idea_reasonunit_text(), 17)
     # set_mog(atom_delete(), bud_idea_factunit_text(), 18)
     # set_mog(atom_delete(), bud_idea_teamlink_text(), 19)
-    # set_mog(atom_delete(), bud_idea_healerhold_text(), 20)
+    # set_mog(atom_delete(), bud_idea_healerlink_text(), 20)
     # set_mog(atom_delete(), bud_idea_awardlink_text(), 21)
     # set_mog(atom_delete(), bud_ideaunit_text(), 22)
     # set_mog(atom_delete(), bud_acct_membership_text(), 23)
@@ -229,7 +229,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     assert 2 == q_order(atom_insert(), bud_ideaunit_text())
     assert 3 == q_order(atom_insert(), bud_idea_awardlink_text())
     assert 4 == q_order(atom_insert(), bud_idea_teamlink_text())
-    assert 5 == q_order(atom_insert(), bud_idea_healerhold_text())
+    assert 5 == q_order(atom_insert(), bud_idea_healerlink_text())
     assert 6 == q_order(atom_insert(), bud_idea_factunit_text())
     assert 7 == q_order(atom_insert(), bud_idea_reasonunit_text())
     assert 8 == q_order(atom_insert(), bud_idea_reason_premiseunit_text())
@@ -244,7 +244,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     assert 17 == q_order(atom_delete(), bud_idea_reasonunit_text())
     assert 18 == q_order(atom_delete(), bud_idea_factunit_text())
     assert 19 == q_order(atom_delete(), bud_idea_teamlink_text())
-    assert 20 == q_order(atom_delete(), bud_idea_healerhold_text())
+    assert 20 == q_order(atom_delete(), bud_idea_healerlink_text())
     assert 21 == q_order(atom_delete(), bud_idea_awardlink_text())
     assert 22 == q_order(atom_delete(), bud_ideaunit_text())
     assert 23 == q_order(atom_delete(), bud_acct_membership_text())
@@ -272,7 +272,7 @@ def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
     assert _get_atom_config_required_args_len(bud_idea_reasonunit_text()) == 2
     assert _get_atom_config_required_args_len(bud_idea_reason_premiseunit_text()) == 3
     assert _get_atom_config_required_args_len(bud_idea_teamlink_text()) == 2
-    assert _get_atom_config_required_args_len(bud_idea_healerhold_text()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_healerlink_text()) == 2
     assert _get_atom_config_required_args_len(bud_idea_factunit_text()) == 2
 
     assert _get_atom_config_optional_args_len(budunit_text()) == 9
@@ -283,7 +283,7 @@ def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
     assert _get_atom_config_optional_args_len(bud_idea_reasonunit_text()) == 1
     assert _get_atom_config_optional_args_len(bud_idea_reason_premiseunit_text()) == 3
     assert _get_atom_config_optional_args_len(bud_idea_teamlink_text()) == 0
-    assert _get_atom_config_optional_args_len(bud_idea_healerhold_text()) == 0
+    assert _get_atom_config_optional_args_len(bud_idea_healerlink_text()) == 0
     assert _get_atom_config_optional_args_len(bud_idea_factunit_text()) == 3
 
 
@@ -452,7 +452,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     cat_reason = nx.get(bud_idea_reasonunit_text())
     cat_premise = nx.get(bud_idea_reason_premiseunit_text())
     cat_teamlink = nx.get(bud_idea_teamlink_text())
-    cat_healerhold = nx.get(bud_idea_healerhold_text())
+    cat_healerlink = nx.get(bud_idea_healerlink_text())
     cat_fact = nx.get(bud_idea_factunit_text())
 
     assert cat_budunit is not None
@@ -463,7 +463,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert cat_reason is not None
     assert cat_premise is not None
     assert cat_teamlink is not None
-    assert cat_healerhold is not None
+    assert cat_healerlink is not None
     assert cat_fact is not None
 
     normal_specs_budunit = cat_budunit.get(normal_specs_text())
@@ -474,7 +474,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     normal_specs_reason = cat_reason.get(normal_specs_text())
     normal_specs_premise = cat_premise.get(normal_specs_text())
     normal_specs_teamlink = cat_teamlink.get(normal_specs_text())
-    normal_specs_healerhold = cat_healerhold.get(normal_specs_text())
+    normal_specs_healerlink = cat_healerlink.get(normal_specs_text())
     normal_specs_fact = cat_fact.get(normal_specs_text())
 
     columns_text = "columns"
@@ -488,7 +488,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert normal_specs_reason is not None
     assert normal_specs_premise is not None
     assert normal_specs_teamlink is not None
-    assert normal_specs_healerhold is not None
+    assert normal_specs_healerlink is not None
     assert normal_specs_fact is not None
 
     table_name_budunit = normal_specs_budunit.get(normal_table_name_text())
@@ -499,7 +499,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     table_name_reason = normal_specs_reason.get(normal_table_name_text())
     table_name_premise = normal_specs_premise.get(normal_table_name_text())
     table_name_teamlink = normal_specs_teamlink.get(normal_table_name_text())
-    table_name_healerhold = normal_specs_healerhold.get(normal_table_name_text())
+    table_name_healerlink = normal_specs_healerlink.get(normal_table_name_text())
     table_name_fact = normal_specs_fact.get(normal_table_name_text())
 
     assert table_name_budunit == "bud"
@@ -510,7 +510,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert table_name_reason == "reason"
     assert table_name_premise == "premise"
     assert table_name_teamlink == "teamlink"
-    assert table_name_healerhold == "healerhold"
+    assert table_name_healerlink == "healerlink"
     assert table_name_fact == "fact"
 
     assert len(cat_budunit) == 2

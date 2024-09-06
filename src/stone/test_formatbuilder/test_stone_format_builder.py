@@ -8,7 +8,7 @@ from src.gift.atom_config import (
     real_id_str,
     owner_id_str,
     column_order_str,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
 )
 from src.stone.formatbuilder import create_categorys_stone_format_dict
 from src.stone.stone import (

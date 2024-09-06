@@ -12,7 +12,7 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
@@ -1196,7 +1196,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_d
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold_insert_IdeaUnitUpdate():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_insert_IdeaUnitUpdate():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1210,7 +1210,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._healerhold.set_healer_id(xio_text)
+    after_ball_ideaunit._healerlink.set_healer_id(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1220,7 +1220,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerhold_text(),
+        bud_idea_healerlink_text(),
         ball_road,
         xio_text,
     ]
@@ -1230,7 +1230,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold_insert_IdeaUnitInsert():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_insert_IdeaUnitInsert():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1244,7 +1244,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._healerhold.set_healer_id(xio_text)
+    after_ball_ideaunit._healerlink.set_healer_id(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1254,7 +1254,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerhold_text(),
+        bud_idea_healerlink_text(),
         ball_road,
         xio_text,
     ]
@@ -1265,7 +1265,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     assert get_atomunit_total_count(sue_changeunit) == 3
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold_delete_IdeaUnitUpdate():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_delete_IdeaUnitUpdate():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1277,11 +1277,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit._healerhold.set_healer_id(xio_text)
+    before_ball_ideaunit._healerlink.set_healer_id(xio_text)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._healerhold.del_healer_id(xio_text)
+    after_ball_ideaunit._healerlink.del_healer_id(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1291,7 +1291,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerhold_text(),
+        bud_idea_healerlink_text(),
         ball_road,
         xio_text,
     ]
@@ -1304,7 +1304,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
-def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold_delete_IdeaUnitDelete():
+def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_delete_IdeaUnitDelete():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_bud = budunit_shop(sue_text)
@@ -1316,7 +1316,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit._healerhold.set_healer_id(xio_text)
+    before_ball_ideaunit._healerlink.set_healer_id(xio_text)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.del_idea_obj(ball_road)
@@ -1329,7 +1329,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerhold
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerhold_text(),
+        bud_idea_healerlink_text(),
         ball_road,
         xio_text,
     ]

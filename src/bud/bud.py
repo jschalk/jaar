@@ -45,7 +45,7 @@ from src._road.road import (
 )
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.bud.group import AwardLink, GroupID, GroupBox, groupbox_shop, membership_shop
-from src.bud.healer import HealerHold
+from src.bud.healer import HealerLink
 from src.bud.reason_idea import FactUnit, FactUnit, ReasonUnit, RoadUnit, factunit_shop
 from src.bud.reason_team import TeamUnit
 from src.bud.tree_metrics import TreeMetrics, treemetrics_shop
@@ -93,7 +93,7 @@ class _last_gift_idException(Exception):
     pass
 
 
-class healerhold_group_id_Exception(Exception):
+class healerlink_group_id_Exception(Exception):
     pass
 
 
@@ -127,7 +127,7 @@ class BudUnit:
     _rational: bool = None
     _econs_justified: bool = None
     _econs_buildable: bool = None
-    _sum_healerhold_share: float = None
+    _sum_healerlink_share: float = None
     _groupboxs: dict[GroupID, GroupBox] = None
     _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
@@ -775,7 +775,7 @@ class BudUnit:
         reason_del_premise_need: RoadUnit = None,
         reason_base_idea_active_requisite: str = None,
         teamunit: TeamUnit = None,
-        healerhold: HealerHold = None,
+        healerlink: HealerLink = None,
         begin: float = None,
         close: float = None,
         gogo_want: float = None,
@@ -794,11 +794,11 @@ class BudUnit:
         is_expanded: bool = None,
         problem_bool: bool = None,
     ):
-        if healerhold is not None:
-            for x_healer_id in healerhold._healer_ids:
+        if healerlink is not None:
+            for x_healer_id in healerlink._healer_ids:
                 if self.get_acctunit_group_ids_dict().get(x_healer_id) is None:
-                    exception_text = f"Idea cannot edit healerhold because group_id '{x_healer_id}' does not exist as group in Bud"
-                    raise healerhold_group_id_Exception(exception_text)
+                    exception_text = f"Idea cannot edit healerlink because group_id '{x_healer_id}' does not exist as group in Bud"
+                    raise healerlink_group_id_Exception(exception_text)
 
         x_ideaattrfilter = ideaattrfilter_shop(
             mass=mass,
@@ -813,7 +813,7 @@ class BudUnit:
             reason_del_premise_need=reason_del_premise_need,
             reason_base_idea_active_requisite=reason_base_idea_active_requisite,
             teamunit=teamunit,
-            healerhold=healerhold,
+            healerlink=healerlink,
             begin=begin,
             close=close,
             gogo_want=gogo_want,
@@ -1056,7 +1056,7 @@ class BudUnit:
         group_everyone = None
         ancestor_roads = get_ancestor_roads(road=road)
         econ_justified_by_problem = True
-        healerhold_count = 0
+        healerlink_count = 0
 
         while ancestor_roads != []:
             youngest_road = ancestor_roads.pop(0)
@@ -1088,14 +1088,14 @@ class BudUnit:
             x_idea_obj._all_acct_cred = group_everyone
             x_idea_obj._all_acct_debt = group_everyone
 
-            if x_idea_obj._healerhold.any_healer_id_exists():
+            if x_idea_obj._healerlink.any_healer_id_exists():
                 econ_justified_by_problem = False
-                healerhold_count += 1
-                self._sum_healerhold_share += x_idea_obj.get_fund_share()
+                healerlink_count += 1
+                self._sum_healerlink_share += x_idea_obj.get_fund_share()
             if x_idea_obj._problem_bool:
                 econ_justified_by_problem = True
 
-        if econ_justified_by_problem is False or healerhold_count > 1:
+        if econ_justified_by_problem is False or healerlink_count > 1:
             if econ_exceptions:
                 exception_text = f"IdeaUnit '{road}' cannot sponsor ancestor econs."
                 raise Exception_econs_justified(exception_text)
@@ -1198,7 +1198,7 @@ class BudUnit:
     def _pre_tree_traverse_attrs(self):
         self._econs_justified = True
         self._econs_buildable = False
-        self._sum_healerhold_share = 0
+        self._sum_healerlink_share = 0
         self._econ_dict = {}
         self._healers_dict = {}
 
@@ -1212,7 +1212,7 @@ class BudUnit:
         while not self._rational and self._tree_traverse_count < max_count:
             self._set_all_ideaunits_active_status_distribute_funds(econ_exceptions)
         self._after_all_tree_traverses_set_cred_debt()
-        self._after_all_tree_traverses_set_healerhold_share()
+        self._after_all_tree_traverses_set_healerlink_share()
 
     def _set_all_ideaunits_active_status_distribute_funds(self, econ_exceptions):
         self._pre_tree_traverse_attrs()
@@ -1291,27 +1291,27 @@ class BudUnit:
         self._allot_groupboxs_fund()
         self._set_acctunits_fund_agenda_ratios()
 
-    def _after_all_tree_traverses_set_healerhold_share(self):
+    def _after_all_tree_traverses_set_healerlink_share(self):
         self._set_econ_dict()
         self._healers_dict = self._get_healers_dict()
         self._econs_buildable = self._get_buildable_econs()
 
     def _set_econ_dict(self):
         if self._econs_justified is False:
-            self._sum_healerhold_share = 0
+            self._sum_healerlink_share = 0
         for x_idea in self._idea_dict.values():
-            if self._sum_healerhold_share == 0:
-                x_idea._healerhold_ratio = 0
+            if self._sum_healerlink_share == 0:
+                x_idea._healerlink_ratio = 0
             else:
-                x_sum = self._sum_healerhold_share
-                x_idea._healerhold_ratio = x_idea.get_fund_share() / x_sum
-            if self._econs_justified and x_idea._healerhold.any_healer_id_exists():
+                x_sum = self._sum_healerlink_share
+                x_idea._healerlink_ratio = x_idea.get_fund_share() / x_sum
+            if self._econs_justified and x_idea._healerlink.any_healer_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
     def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
-            for x_healer_id in x_econ_idea._healerhold._healer_ids:
+            for x_healer_id in x_econ_idea._healerlink._healer_ids:
                 x_groupbox = self.get_groupbox(x_healer_id)
                 for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
@@ -1447,7 +1447,7 @@ def budunit_shop(
         _penny=default_penny_if_none(_penny),
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
-        _sum_healerhold_share=get_0_if_None(),
+        _sum_healerlink_share=get_0_if_None(),
         _offtrack_kids_mass_set=set(),
         _reason_bases=set(),
         _range_inheritors={},
@@ -1517,7 +1517,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _problem_bool=get_obj_from_idea_dict(idearoot_dict, "_problem_bool"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
         _teamunit=get_obj_from_idea_dict(idearoot_dict, "_teamunit"),
-        _healerhold=get_obj_from_idea_dict(idearoot_dict, "_healerhold"),
+        _healerlink=get_obj_from_idea_dict(idearoot_dict, "_healerlink"),
         _factunits=get_obj_from_idea_dict(idearoot_dict, "_factunits"),
         _awardlinks=get_obj_from_idea_dict(idearoot_dict, "_awardlinks"),
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
@@ -1559,7 +1559,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _problem_bool=get_obj_from_idea_dict(idea_dict, "_problem_bool"),
             _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
             _teamunit=get_obj_from_idea_dict(idea_dict, "_teamunit"),
-            _healerhold=get_obj_from_idea_dict(idea_dict, "_healerhold"),
+            _healerlink=get_obj_from_idea_dict(idea_dict, "_healerlink"),
             _originunit=get_obj_from_idea_dict(idea_dict, "_originunit"),
             _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),
             _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),

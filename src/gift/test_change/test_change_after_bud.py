@@ -13,7 +13,7 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
@@ -1039,7 +1039,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_teamlin
     assert after_ball_ideaunit._teamunit._teamlinks == set()
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerhold():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerlink():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
@@ -1051,11 +1051,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerh
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_ideaunit._healerhold._healer_ids == set()
-    assert not before_ball_ideaunit._healerhold.healer_id_exists(yao_text)
+    assert before_ball_ideaunit._healerlink._healer_ids == set()
+    assert not before_ball_ideaunit._healerlink.healer_id_exists(yao_text)
 
     # WHEN
-    x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_insert())
+    x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_insert())
     x_atomunit.set_required_arg("road", ball_road)
     x_atomunit.set_required_arg(healer_id_str(), yao_text)
     print(f"{x_atomunit=}")
@@ -1065,11 +1065,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerh
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._healerhold._healer_ids != set()
-    assert after_ball_ideaunit._healerhold.healer_id_exists(yao_text)
+    assert after_ball_ideaunit._healerlink._healer_ids != set()
+    assert after_ball_ideaunit._healerlink.healer_id_exists(yao_text)
 
 
-def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerhold():
+def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerlink():
     # ESTABLISH
     sue_text = "Sue"
     before_sue_au = budunit_shop(sue_text)
@@ -1081,12 +1081,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerh
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    before_ball_ideaunit._healerhold.set_healer_id(yao_text)
-    assert before_ball_ideaunit._healerhold._healer_ids != set()
-    assert before_ball_ideaunit._healerhold.healer_id_exists(yao_text)
+    before_ball_ideaunit._healerlink.set_healer_id(yao_text)
+    assert before_ball_ideaunit._healerlink._healer_ids != set()
+    assert before_ball_ideaunit._healerlink.healer_id_exists(yao_text)
 
     # WHEN
-    x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_delete())
+    x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_delete())
     x_atomunit.set_required_arg("road", ball_road)
     x_atomunit.set_required_arg(healer_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
@@ -1096,8 +1096,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerh
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._healerhold._healer_ids == set()
-    assert not after_ball_ideaunit._healerhold.healer_id_exists(yao_text)
+    assert after_ball_ideaunit._healerlink._healer_ids == set()
+    assert not after_ball_ideaunit._healerlink.healer_id_exists(yao_text)
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
