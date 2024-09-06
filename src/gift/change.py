@@ -922,9 +922,10 @@ def sift_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
 
 
 def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
-    args_dict = {}
-    for required_arg in get_atom_config_required_args(x_atom.category):
-        args_dict[required_arg] = x_atom.get_value(required_arg)
+    args_dict = {
+        required_arg: x_atom.get_value(required_arg)
+        for required_arg in get_atom_config_required_args(x_atom.category)
+    }
     x_parent_road = args_dict.get(parent_road_str())
     x_label = args_dict.get(label_str())
     if x_parent_road != None and x_label != None:
@@ -933,7 +934,7 @@ def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     x_exists = bud_attr_exists(x_atom.category, x_bud, args_dict)
     if x_atom.crud_text == atom_delete() and x_exists:
         return x_atom
-    elif x_atom.crud_text == atom_insert():
-        print("huh")
+    elif x_atom.crud_text == atom_insert() and not x_exists:
+        return x_atom
 
     return None
