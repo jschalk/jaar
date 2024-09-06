@@ -23,10 +23,6 @@ def atom_delete() -> CRUD_command:
     return "DELETE"
 
 
-def atom_upsert() -> CRUD_command:
-    return "UPSERT"
-
-
 def atom_hx_table_name() -> str:
     return "atom_hx"
 

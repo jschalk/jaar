@@ -7,7 +7,6 @@ from src.bud.bud_tool import (
 from src.gift.atom_config import (
     atom_insert,
     atom_delete,
-    atom_upsert,
     acct_id_str,
     group_id_str,
     credit_score_str,
@@ -177,23 +176,6 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     # THEN
     assert bob_insert_atomunit.is_required_args_valid()
     assert bob_insert_atomunit.is_valid()
-
-
-def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_UPSERT():
-    # ESTABLISH
-    bob_text = "Bob"
-    bob_upsert_atomunit = atomunit_shop(bud_acctunit_text(), atom_upsert())
-    assert not bob_upsert_atomunit.is_required_args_valid()
-    assert bob_upsert_atomunit.is_optional_args_valid()
-    assert not bob_upsert_atomunit.is_valid()
-
-    # WHEN
-    bob_upsert_atomunit.set_required_arg(acct_id_str(), bob_text)
-
-    # THEN
-    assert bob_upsert_atomunit.is_required_args_valid()
-    assert bob_upsert_atomunit.is_optional_args_valid()
-    assert bob_upsert_atomunit.is_valid()
 
 
 def test_AtomUnit_get_value_ReturnsObj():

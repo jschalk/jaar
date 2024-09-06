@@ -28,7 +28,6 @@ from src.gift.atom_config import (
     atom_delete,
     atom_insert,
     atom_update,
-    atom_upsert,
     atom_hx_table_name,
     get_atom_order,
     get_atom_config_dict,
@@ -144,12 +143,7 @@ class AtomUnit:
         ]
 
     def is_required_args_valid(self) -> bool:
-        if self.crud_text not in {
-            atom_delete(),
-            atom_insert(),
-            atom_update(),
-            atom_upsert(),
-        }:
+        if self.crud_text not in {atom_delete(), atom_insert(), atom_update()}:
             return False
         required_args_dict = self._get_required_args_dict()
         return required_args_dict.keys() == self.required_args.keys()
@@ -157,7 +151,7 @@ class AtomUnit:
     def is_optional_args_valid(self) -> bool:
         if self.crud_text == atom_delete() and self.optional_args == {}:
             return True
-        if self.crud_text not in {atom_insert(), atom_update(), atom_upsert()}:
+        if self.crud_text not in {atom_insert(), atom_update()}:
             return False
         optional_args_dict = self._get_optional_args_dict()
         return set(self.optional_args.keys()).issubset(set(optional_args_dict.keys()))

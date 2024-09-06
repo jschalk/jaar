@@ -15,7 +15,6 @@ from src.gift.atom_config import (
     atom_insert,
     atom_delete,
     atom_update,
-    atom_upsert,
     category_ref,
     is_category_ref,
     get_atom_config_dict,
@@ -80,10 +79,6 @@ def test_atom_update_ReturnsObj():
 
 def test_atom_delete_ReturnsObj():
     assert atom_delete() == "DELETE"
-
-
-def test_atom_upsert_ReturnsObj():
-    assert atom_upsert() == "UPSERT"
 
 
 def test_crud_text_str_ReturnsObj():
