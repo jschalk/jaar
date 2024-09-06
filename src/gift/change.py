@@ -41,6 +41,7 @@ from src.gift.atom_config import (
     healer_id_str,
     parent_road_str,
     label_str,
+    road_str,
     pledge_str,
     addin_str,
     begin_str,
@@ -955,6 +956,37 @@ def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         x_label = x_atom.get_value(label_str())
         x_road = x_bud.make_road(x_parent_road, x_label)
         x_exists = ideaunit_exists(x_bud, x_road)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+
+    elif x_atom.category == bud_idea_awardlink_text():
+        x_road = x_atom.get_value(road_str())
+        x_group_id = x_atom.get_value(group_id_str())
+        x_exists = awardlink_exists(x_bud, x_road, x_group_id)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_teamlink_text():
+        x_road = x_atom.get_value(road_str())
+        x_group_id = x_atom.get_value(group_id_str())
+        x_exists = teamlink_exists(x_bud, x_road, x_group_id)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_healerhold_text():
+        x_road = x_atom.get_value(road_str())
+        x_healer_id = x_atom.get_value(healer_id_str())
+        x_exists = healerhold_exists(x_bud, x_road, x_healer_id)
         if x_atom.crud_text == x_crud_delete:
             if x_exists:
                 return x_atom
