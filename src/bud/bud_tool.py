@@ -115,3 +115,35 @@ def bud_idea_factunit_exists(
         bud_ideaunit_exists(x_bud, x_road)
         and x_bud.get_idea_obj(x_road).factunit_exists(x_base)
     )
+
+
+def bud_attr_exists(
+    x_category: str, x_bud: BudUnit, required_args: dict[str, any]
+) -> bool:
+    x_acct_id = required_args.get("acct_id")
+    x_group_id = required_args.get("group_id")
+    x_healer_id = required_args.get("healer_id")
+    x_road = required_args.get("road")
+    x_base = required_args.get("base")
+    x_need = required_args.get("need")
+    if x_category == budunit_text():
+        return budunit_exists(x_bud)
+    elif x_category == bud_acctunit_text():
+        return bud_acctunit_exists(x_bud, x_acct_id)
+    elif x_category == bud_acct_membership_text():
+        return bud_acct_membership_exists(x_bud, x_acct_id, x_group_id)
+    elif x_category == bud_ideaunit_text():
+        return bud_ideaunit_exists(x_bud, x_road)
+    elif x_category == bud_idea_awardlink_text():
+        return bud_idea_awardlink_exists(x_bud, x_road, x_group_id)
+    elif x_category == bud_idea_reasonunit_text():
+        return bud_idea_reasonunit_exists(x_bud, x_road, x_base)
+    elif x_category == bud_idea_reason_premiseunit_text():
+        return bud_idea_reason_premiseunit_exists(x_bud, x_road, x_base, x_need)
+    elif x_category == bud_idea_teamlink_text():
+        return bud_idea_teamlink_exists(x_bud, x_road, x_group_id)
+    elif x_category == bud_idea_healerlink_text():
+        return bud_idea_healerlink_exists(x_bud, x_road, x_healer_id)
+    elif x_category == bud_idea_factunit_text():
+        return bud_idea_factunit_exists(x_bud, x_road, x_base)
+    return True
