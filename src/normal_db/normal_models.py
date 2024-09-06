@@ -99,8 +99,8 @@ class TeamlinkTable(Base):
     road = Column(String)
 
 
-class HealerHoldTable(Base):
-    __tablename__ = "healerhold"
+class HealerLinkTable(Base):
+    __tablename__ = "healerlink"
     uid = Column(Integer, primary_key=True)
     healer_id = Column(String)
     road = Column(String)

@@ -1,5 +1,5 @@
 from src._road.road import get_default_real_id_roadnode as root_label, create_road
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.group import awardlink_shop
 from src.bud.reason_idea import (
     reasonunit_shop,
@@ -41,24 +41,24 @@ def test_get_obj_from_idea_dict_ReturnsCorrectObj():
     assert get_obj_from_idea_dict({}, field_text) == {}
 
 
-def test_get_obj_from_idea_dict_ReturnsCorrect_HealerHold():
+def test_get_obj_from_idea_dict_ReturnsCorrect_HealerLink():
     # ESTABLISH
     # WHEN / THEN
-    healerhold_key = "_healerhold"
-    assert get_obj_from_idea_dict({}, healerhold_key) == healerhold_shop()
+    healerlink_key = "_healerlink"
+    assert get_obj_from_idea_dict({}, healerlink_key) == healerlink_shop()
 
     # WHEN
     sue_text = "Sue"
     zia_text = "Zia"
-    healerhold_dict = {"healerhold_healer_ids": [sue_text, zia_text]}
-    ideaunit_dict = {healerhold_key: healerhold_dict}
+    healerlink_dict = {"healerlink_healer_ids": [sue_text, zia_text]}
+    ideaunit_dict = {healerlink_key: healerlink_dict}
 
     # THEN
-    static_healerhold = healerhold_shop()
-    static_healerhold.set_healer_id(x_healer_id=sue_text)
-    static_healerhold.set_healer_id(x_healer_id=zia_text)
-    assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) is not None
-    assert get_obj_from_idea_dict(ideaunit_dict, healerhold_key) == static_healerhold
+    static_healerlink = healerlink_shop()
+    static_healerlink.set_healer_id(x_healer_id=sue_text)
+    static_healerlink.set_healer_id(x_healer_id=zia_text)
+    assert get_obj_from_idea_dict(ideaunit_dict, healerlink_key) is not None
+    assert get_obj_from_idea_dict(ideaunit_dict, healerlink_key) == static_healerlink
 
 
 def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
@@ -123,7 +123,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     sue_text = "Sue"
     yao_text = "Yao"
     sue_teamunit = teamunit_shop({sue_text: -1, yao_text: -1})
-    yao_healerhold = healerhold_shop({yao_text})
+    yao_healerlink = healerlink_shop({yao_text})
     casa_text = "casa"
     casa_road = create_road(root_label(), casa_text)
     x_problem_bool = True
@@ -137,7 +137,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
         _teamunit=sue_teamunit,
-        _healerhold=yao_healerhold,
+        _healerlink=yao_healerlink,
         _active=True,
         pledge=True,
         _problem_bool=x_problem_bool,
@@ -176,7 +176,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_awardlinks"] == casa_idea.get_awardlinks_dict()
     assert casa_dict["_awardlinks"] == x1_awardlinks
     assert casa_dict["_teamunit"] == sue_teamunit.get_dict()
-    assert casa_dict["_healerhold"] == yao_healerhold.get_dict()
+    assert casa_dict["_healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
     assert casa_dict["_mass"] == casa_idea._mass
     assert casa_dict["_label"] == casa_idea._label
@@ -260,7 +260,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_idea._factunits == {}
     assert casa_idea._awardlinks == {}
     assert casa_idea._teamunit == teamunit_shop()
-    assert casa_idea._healerhold == healerhold_shop()
+    assert casa_idea._healerlink == healerlink_shop()
     assert casa_idea._originunit == originunit_shop()
     assert casa_idea._kids == {}
 
@@ -273,6 +273,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_dict.get("_factunits") is None
     assert casa_dict.get("_awardlinks") is None
     assert casa_dict.get("_teamunit") is None
-    assert casa_dict.get("_healerhold") is None
+    assert casa_dict.get("_healerlink") is None
     assert casa_dict.get("_originunit") is None
     assert casa_dict.get("_kids") is None

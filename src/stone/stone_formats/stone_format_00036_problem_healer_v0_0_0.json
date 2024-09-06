@@ -1,5 +1,5 @@
 {
-    "atom_categorys": ["bud_ideaunit", "bud_idea_healerhold"],
+    "atom_categorys": ["bud_ideaunit", "bud_idea_healerlink"],
     "attributes": {
         "label": {
             "column_order": 3,

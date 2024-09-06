@@ -1,6 +1,6 @@
 from src._instrument.file import delete_dir, save_file, open_file
 from src._instrument.db_tool import check_connection
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.graphic import display_ideatree
 from src.listen.hubunit import hubunit_shop, treasury_file_name
@@ -29,8 +29,8 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     sue_voice_bud.set_idea(ideaunit_shop(dallas_text), texas_road)
-    sue_voice_bud.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
-    sue_voice_bud.edit_idea_attr(dallas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_bud.edit_idea_attr(texas_road, healerlink=healerlink_shop({sue_text}))
+    sue_voice_bud.edit_idea_attr(dallas_road, healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.settle_bud()
     assert sue_voice_bud._econs_justified is False
     sue_hubunit.save_voice_bud(sue_voice_bud)
@@ -56,7 +56,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     texas_text = "Tex/as"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
-    sue_voice_bud.edit_idea_attr(texas_road, healerhold=healerhold_shop({sue_text}))
+    sue_voice_bud.edit_idea_attr(texas_road, healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.settle_bud()
     assert sue_voice_bud._econs_justified
     assert sue_voice_bud._econs_buildable is False
@@ -85,8 +85,8 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     elpaso_text = "el paso"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
-    dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
+    dallas_idea = ideaunit_shop(dallas_text, _healerlink=healerlink_shop({sue_text}))
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.set_idea(dallas_idea, texas_road)
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
     sue_voice_bud.settle_bud()
@@ -118,11 +118,11 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
-    dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
+    dallas_idea = ideaunit_shop(dallas_text, _healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.set_idea(dallas_idea, texas_road)
     elpaso_text = "el paso"
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
     display_ideatree(sue_voice_bud, mode="Econ", graphics_bool=graphics_bool)
     sue_hubunit.save_voice_bud(sue_voice_bud)
@@ -258,8 +258,8 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(
     elpaso_text = "el paso"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
-    dallas_idea = ideaunit_shop(dallas_text, _healerhold=healerhold_shop({sue_text}))
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=healerhold_shop({sue_text}))
+    dallas_idea = ideaunit_shop(dallas_text, _healerlink=healerlink_shop({sue_text}))
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.set_idea(dallas_idea, texas_road)
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
     sue_voice_bud.settle_bud()

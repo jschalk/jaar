@@ -36,7 +36,7 @@ from src.stone.stone_config import (
     stone_format_00022_bud_idea_awardlink_v0_0_0,
     stone_format_00023_bud_idea_factunit_v0_0_0,
     stone_format_00024_bud_idea_teamlink_v0_0_0,
-    stone_format_00025_bud_idea_healerhold_v0_0_0,
+    stone_format_00025_bud_idea_healerlink_v0_0_0,
     stone_format_00026_bud_idea_reason_premiseunit_v0_0_0,
     stone_format_00027_bud_idea_reasonunit_v0_0_0,
     stone_format_00028_bud_ideaunit_v0_0_0,

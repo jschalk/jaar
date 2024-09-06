@@ -1,4 +1,4 @@
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.real.real import RealUnit, realunit_shop
@@ -24,12 +24,12 @@ from src.real.examples.real_env import get_test_reals_dir
 #     yao_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
 #     dallas_text = "dallas"
 #     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
-#     dallas_healerhold = healerhold_shop({yao_text})
-#     dallas_idea = ideaunit_shop(dallas_text, _healerhold=dallas_healerhold)
+#     dallas_healerlink = healerlink_shop({yao_text})
+#     dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
 #     elpaso_text = "el paso"
 #     elpaso_road = yao_voice_bud.make_road(texas_road, elpaso_text)
-#     elpaso_healerhold = healerhold_shop({yao_text})
-#     elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
+#     elpaso_healerlink = healerlink_shop({yao_text})
+#     elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
 
 #     yao_voice_bud.set_idea(dallas_idea, texas_road)
 #     yao_voice_bud.set_idea(elpaso_idea, texas_road)
@@ -90,12 +90,12 @@ def create_example_real2() -> RealUnit:
     zia_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
-    dallas_healerhold = healerhold_shop({yao_text, zia_text})
-    dallas_idea = ideaunit_shop(dallas_text, _healerhold=dallas_healerhold)
+    dallas_healerlink = healerlink_shop({yao_text, zia_text})
+    dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
     elpaso_text = "el paso"
     elpaso_road = yao_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_healerhold = healerhold_shop({yao_text})
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
+    elpaso_healerlink = healerlink_shop({yao_text})
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
 
     yao_voice_bud.set_idea(dallas_idea, texas_road)
     yao_voice_bud.set_idea(elpaso_idea, texas_road)
@@ -222,12 +222,12 @@ def create_example_real4() -> RealUnit:
     zia_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
-    dallas_healerhold = healerhold_shop({yao_text, zia_text})
-    dallas_idea = ideaunit_shop(dallas_text, _healerhold=dallas_healerhold)
+    dallas_healerlink = healerlink_shop({yao_text, zia_text})
+    dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
     elpaso_text = "el paso"
     elpaso_road = yao_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_healerhold = healerhold_shop({yao_text})
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
+    elpaso_healerlink = healerlink_shop({yao_text})
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
 
     yao_voice_bud.set_idea(dallas_idea, texas_road)
     yao_voice_bud.set_idea(elpaso_idea, texas_road)

@@ -43,7 +43,7 @@ def test_BudUnit_Exists():
     assert x_bud._rational is None
     assert x_bud._econs_justified is None
     assert x_bud._econs_buildable is None
-    assert x_bud._sum_healerhold_share is None
+    assert x_bud._sum_healerlink_share is None
     assert x_bud._offtrack_kids_mass_set is None
     assert x_bud._offtrack_fund is None
     assert x_bud._reason_bases is None
@@ -96,7 +96,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._rational is False
     assert x_bud._econs_justified is False
     assert x_bud._econs_buildable is False
-    assert x_bud._sum_healerhold_share == 0
+    assert x_bud._sum_healerlink_share == 0
     assert x_bud._offtrack_kids_mass_set == set()
     assert not x_bud._offtrack_fund
     assert x_bud._reason_bases == set()

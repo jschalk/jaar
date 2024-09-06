@@ -1,10 +1,11 @@
 from src._road.road import get_default_real_id_roadnode as root_label, create_road
-from src.bud.group import awardheir_shop
+from src.bud.group import awardheir_shop, awardlink_shop
 from src.bud.reason_idea import (
     reasonunit_shop,
     reasonheir_shop,
     premiseunit_shop,
     factheir_shop,
+    factunit_shop,
 )
 from src.bud.reason_team import teamunit_shop, teamheir_shop
 from src.bud.idea import ideaunit_shop
@@ -37,6 +38,34 @@ def test_IdeaUnit_get_fund_share_ReturnsObj():
     texas_idea._fund_onset = 3
     texas_idea._fund_cease = 14
     assert texas_idea.get_fund_share() == 11
+
+
+def test_IdeaUnit_set_awardlink_SetsAttr():
+    # ESTABLISH
+    biker_text = "bikers2"
+    sport_text = "sport"
+    sport_ideaunit = ideaunit_shop(sport_text)
+    assert not sport_ideaunit._awardlinks.get(biker_text)
+
+    # WHEN
+    sport_ideaunit.set_awardlink(awardlink_shop(biker_text))
+
+    # THEN
+    assert sport_ideaunit._awardlinks.get(biker_text)
+
+
+def test_IdeaUnit_awardlink_exists_ReturnsObj():
+    # ESTABLISH
+    biker_text = "bikers2"
+    sport_text = "sport"
+    sport_ideaunit = ideaunit_shop(sport_text)
+    assert not sport_ideaunit.awardlink_exists(biker_text)
+
+    # WHEN
+    sport_ideaunit.set_awardlink(awardlink_shop(biker_text))
+
+    # THEN
+    assert sport_ideaunit.awardlink_exists(biker_text)
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -199,6 +228,37 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     assert ball_idea._factheirs == {tue_road: tue_factheir, week_road: week_factheir}
 
 
+def test_IdeaUnit_set_reasonunit_SetsAttr():
+    # ESTABLISH
+    clean_text = "clean"
+    clean_idea = ideaunit_shop(clean_text)
+    dirty_text = "dirty"
+    assert not clean_idea._reasonunits.get(dirty_text)
+
+    # WHEN
+    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_text))
+
+    # THEN
+    assert clean_idea._reasonunits.get(dirty_text)
+    x_reasonunit = clean_idea.get_reasonunit(base=dirty_text)
+    assert x_reasonunit is not None
+    assert x_reasonunit.base == dirty_text
+
+
+def test_IdeaUnit_reasonunit_exists_ReturnsCorrectObj():
+    # ESTABLISH
+    clean_text = "clean"
+    clean_idea = ideaunit_shop(clean_text)
+    dirty_text = "dirty"
+    assert not clean_idea.reasonunit_exists(dirty_text)
+
+    # WHEN
+    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_text))
+
+    # THEN
+    assert clean_idea.reasonunit_exists(dirty_text)
+
+
 def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
     # ESTABLISH
     clean_text = "clean"
@@ -270,6 +330,34 @@ def test_IdeaUnit_set_active_attrs_IfFullactive_hxResetToTrue():
     clean_idea.set_active_attrs(tree_traverse_count=0)
     # THEN
     assert clean_idea._active_hx == {0: True}
+
+
+def test_IdeaUnit_set_factunit_SetsAttr():
+    # ESTABLISH
+    clean_text = "clean"
+    clean_idea = ideaunit_shop(clean_text)
+    dirty_text = "dirty"
+    assert not clean_idea._factunits.get(dirty_text)
+
+    # WHEN
+    clean_idea.set_factunit(factunit_shop(base=dirty_text))
+
+    # THEN
+    assert clean_idea._factunits.get(dirty_text)
+
+
+def test_IdeaUnit_factunit_exists_ReturnsCorrectObj():
+    # ESTABLISH
+    clean_text = "clean"
+    clean_idea = ideaunit_shop(clean_text)
+    dirty_text = "dirty"
+    assert not clean_idea.factunit_exists(dirty_text)
+
+    # WHEN
+    clean_idea.set_factunit(factunit_shop(base=dirty_text))
+
+    # THEN
+    assert clean_idea.factunit_exists(dirty_text)
 
 
 # def test_IdeaUnit_set_active_attrs_IfFullactive_hxResetToFalse():

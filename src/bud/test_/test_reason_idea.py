@@ -399,6 +399,20 @@ def test_ReasonCore_set_premise_CorrectlySetsPremise():
     assert day_reason.premises == premises
 
 
+def test_ReasonCore_premise_exists_ReturnsObj():
+    # ESTABLISH
+    day_text = "day"
+    day_road = create_road(root_label(), day_text)
+    day_reason = reasoncore_shop(base=day_road)
+    assert not day_reason.premise_exists(day_road)
+
+    # WHEN
+    day_reason.set_premise(day_road, open=3, nigh=6)
+
+    # THEN
+    assert day_reason.premise_exists(day_road)
+
+
 def test_ReasonCore_get_single_premis_ReturnsCorrectObj():
     # ESTABLISH
     day_road = create_road(root_label(), "day")

@@ -12,6 +12,18 @@ from src.bud.acct import MemberShip, AcctID, AcctUnit
 from src.bud.group import MemberShip, GroupID
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit, budunit_shop
+from src.bud.bud_tool import (
+    budunit_exists,
+    bud_acctunit_exists as acctunit_exists,
+    bud_acct_membership_exists as membership_exists,
+    bud_ideaunit_exists as ideaunit_exists,
+    bud_idea_awardlink_exists as awardlink_exists,
+    bud_idea_reasonunit_exists as reasonunit_exists,
+    bud_idea_reason_premiseunit_exists as premiseunit_exists,
+    bud_idea_teamlink_exists as teamlink_exists,
+    bud_idea_healerlink_exists as healerlink_exists,
+    bud_idea_factunit_exists as factunit_exists,
+)
 from src.gift.atom_config import (
     CRUD_command,
     bud_acctunit_text,
@@ -19,7 +31,7 @@ from src.gift.atom_config import (
     bud_idea_awardlink_text,
     bud_idea_factunit_text,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_reasonunit_text,
     bud_ideaunit_text,
@@ -29,6 +41,8 @@ from src.gift.atom_config import (
     healer_id_str,
     parent_road_str,
     label_str,
+    road_str,
+    base_str,
     pledge_str,
     addin_str,
     begin_str,
@@ -399,9 +413,9 @@ class ChangeUnit:
                 idea_road=insert_idea_road,
                 insert_teamlink_group_ids=insert_ideaunit._teamunit._teamlinks,
             )
-            self.add_atomunit_idea_healerhold_insert(
+            self.add_atomunit_idea_healerlink_insert(
                 idea_road=insert_idea_road,
-                insert_healerhold_healer_ids=insert_ideaunit._healerhold._healer_ids,
+                insert_healerlink_healer_ids=insert_ideaunit._healerlink._healer_ids,
             )
 
     def add_atomunit_idea_updates(
@@ -525,19 +539,19 @@ class ChangeUnit:
                 ),
             )
 
-            # insert / update / delete healerholds
-            before_healerholds_healer_ids = set(before_ideaunit._healerhold._healer_ids)
-            after_healerholds_healer_ids = set(after_ideaunit._healerhold._healer_ids)
-            self.add_atomunit_idea_healerhold_insert(
+            # insert / update / delete healerlinks
+            before_healerlinks_healer_ids = set(before_ideaunit._healerlink._healer_ids)
+            after_healerlinks_healer_ids = set(after_ideaunit._healerlink._healer_ids)
+            self.add_atomunit_idea_healerlink_insert(
                 idea_road=idea_road,
-                insert_healerhold_healer_ids=after_healerholds_healer_ids.difference(
-                    before_healerholds_healer_ids
+                insert_healerlink_healer_ids=after_healerlinks_healer_ids.difference(
+                    before_healerlinks_healer_ids
                 ),
             )
-            self.add_atomunit_idea_healerhold_deletes(
+            self.add_atomunit_idea_healerlink_deletes(
                 idea_road=idea_road,
-                delete_healerhold_healer_ids=before_healerholds_healer_ids.difference(
-                    after_healerholds_healer_ids
+                delete_healerlink_healer_ids=before_healerlinks_healer_ids.difference(
+                    after_healerlinks_healer_ids
                 ),
             )
 
@@ -570,9 +584,9 @@ class ChangeUnit:
                 idea_road=delete_idea_road,
                 delete_teamlink_group_ids=delete_ideaunit._teamunit._teamlinks,
             )
-            self.add_atomunit_idea_healerhold_deletes(
+            self.add_atomunit_idea_healerlink_deletes(
                 idea_road=delete_idea_road,
-                delete_healerhold_healer_ids=delete_ideaunit._healerhold._healer_ids,
+                delete_healerlink_healer_ids=delete_ideaunit._healerlink._healer_ids,
             )
 
     def add_atomunit_idea_reasonunit_inserts(
@@ -746,22 +760,22 @@ class ChangeUnit:
             x_atomunit.set_required_arg(group_id_str(), delete_teamlink_group_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_healerhold_insert(
-        self, idea_road: RoadUnit, insert_healerhold_healer_ids: set
+    def add_atomunit_idea_healerlink_insert(
+        self, idea_road: RoadUnit, insert_healerlink_healer_ids: set
     ):
-        for insert_healerhold_healer_id in insert_healerhold_healer_ids:
-            x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_insert())
+        for insert_healerlink_healer_id in insert_healerlink_healer_ids:
+            x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_insert())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg(healer_id_str(), insert_healerhold_healer_id)
+            x_atomunit.set_required_arg(healer_id_str(), insert_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
-    def add_atomunit_idea_healerhold_deletes(
-        self, idea_road: RoadUnit, delete_healerhold_healer_ids: set
+    def add_atomunit_idea_healerlink_deletes(
+        self, idea_road: RoadUnit, delete_healerlink_healer_ids: set
     ):
-        for delete_healerhold_healer_id in delete_healerhold_healer_ids:
-            x_atomunit = atomunit_shop(bud_idea_healerhold_text(), atom_delete())
+        for delete_healerlink_healer_id in delete_healerlink_healer_ids:
+            x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_delete())
             x_atomunit.set_required_arg("road", idea_road)
-            x_atomunit.set_required_arg(healer_id_str(), delete_healerhold_healer_id)
+            x_atomunit.set_required_arg(healer_id_str(), delete_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_idea_awardlink_inserts(
@@ -904,3 +918,115 @@ def get_filtered_changeunit(
         if x_atomunit.crud_text in curd_set and x_atomunit.category in category_set:
             new_changeunit.set_atomunit(x_atomunit)
     return new_changeunit
+
+
+def sift_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
+    new_changeunit = changeunit_shop()
+    for x_atom in x_changeunit.get_sorted_atomunits():
+        sifted_atom = _sift_atomunit(x_bud, x_atom)
+        if sifted_atom != None:
+            new_changeunit.set_atomunit(x_atom)
+    return new_changeunit
+
+
+def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
+    if not x_atom.is_valid():
+        raise Exception(f"AtomUnit {x_atom=} is not valid")
+
+    x_crud_delete = atom_delete()
+    x_crud_insert = atom_insert
+    if x_atom.category == bud_acctunit_text():
+        x_acct_id = x_atom.get_value(acct_id_str())
+        x_exists = acctunit_exists(x_bud, x_acct_id)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            print("huh")
+
+    elif x_atom.category == bud_acct_membership_text():
+        x_acct_id = x_atom.get_value(acct_id_str())
+        x_group_id = x_atom.get_value(group_id_str())
+        x_exists = membership_exists(x_bud, x_acct_id, x_group_id)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+
+    elif x_atom.category == bud_ideaunit_text():
+        x_parent_road = x_atom.get_value(parent_road_str())
+        x_label = x_atom.get_value(label_str())
+        x_road = x_bud.make_road(x_parent_road, x_label)
+        x_exists = ideaunit_exists(x_bud, x_road)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+
+    elif x_atom.category == bud_idea_awardlink_text():
+        x_road = x_atom.get_value(road_str())
+        x_group_id = x_atom.get_value(group_id_str())
+        x_exists = awardlink_exists(x_bud, x_road, x_group_id)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_teamlink_text():
+        x_road = x_atom.get_value(road_str())
+        x_group_id = x_atom.get_value(group_id_str())
+        x_exists = teamlink_exists(x_bud, x_road, x_group_id)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_healerlink_text():
+        x_road = x_atom.get_value(road_str())
+        x_healer_id = x_atom.get_value(healer_id_str())
+        x_exists = healerlink_exists(x_bud, x_road, x_healer_id)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_reasonunit_text():
+        x_road = x_atom.get_value(road_str())
+        x_base = x_atom.get_value(base_str())
+        x_exists = reasonunit_exists(x_bud, x_road, x_base)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_reason_premiseunit_text():
+        x_road = x_atom.get_value(road_str())
+        x_base = x_atom.get_value(base_str())
+        x_need = x_atom.get_value("need")
+        x_exists = premiseunit_exists(x_bud, x_road, x_base, x_need)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_factunit_text():
+        x_road = x_atom.get_value(road_str())
+        x_base = x_atom.get_value(base_str())
+        x_exists = factunit_exists(x_bud, x_road, x_base)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+
+    return None

@@ -5,7 +5,7 @@ from src._road.finance import (
 )
 from src._road.jaar_config import get_gifts_folder, get_json_filename
 from src._road.road import default_road_delimiter_if_none
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
 from src.listen.hubunit import hubunit_shop
 from src.real.real import RealUnit, realunit_shop
@@ -192,12 +192,12 @@ def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
     dallas_text = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
-    dallas_healerhold = healerhold_shop({sue_text, yao_text})
-    dallas_idea = ideaunit_shop(dallas_text, _healerhold=dallas_healerhold)
+    dallas_healerlink = healerlink_shop({sue_text, yao_text})
+    dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
     elpaso_text = "el paso"
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_healerhold = healerhold_shop({sue_text})
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerhold=elpaso_healerhold)
+    elpaso_healerlink = healerlink_shop({sue_text})
+    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
 
     sue_voice_bud.set_idea(dallas_idea, texas_road)
     sue_voice_bud.set_idea(elpaso_idea, texas_road)

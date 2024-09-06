@@ -1,4 +1,4 @@
-from src.bud.healer import healerhold_shop
+from src.bud.healer import healerlink_shop
 from src.bud.idea import IdeaAttrFilter, ideaattrfilter_shop
 
 
@@ -16,7 +16,7 @@ def test_IdeaAttrFilter_Exists():
     assert new_obj.reason_del_premise_need is None
     assert new_obj.reason_base_idea_active_requisite is None
     assert new_obj.teamunit is None
-    assert new_obj.healerhold is None
+    assert new_obj.healerlink is None
     assert new_obj.begin is None
     assert new_obj.close is None
     assert new_obj.addin is None
@@ -59,10 +59,10 @@ def test_IdeaAttrFilter_CorrectlyCalculatesPremiseRanges():
 
 def test_ideaattrfilter_shop_ReturnsCorrectObj():
     # ESTABLISH
-    sue_healerhold = healerhold_shop({"Sue", "Yim"})
+    sue_healerlink = healerlink_shop({"Sue", "Yim"})
 
     # WHEN
-    x_ideaattrfilter = ideaattrfilter_shop(healerhold=sue_healerhold)
+    x_ideaattrfilter = ideaattrfilter_shop(healerlink=sue_healerlink)
 
     # THEN
-    assert x_ideaattrfilter.healerhold == sue_healerhold
+    assert x_ideaattrfilter.healerlink == sue_healerlink

@@ -111,8 +111,8 @@ def bud_idea_teamlink_text() -> str:
     return "bud_idea_teamlink"
 
 
-def bud_idea_healerhold_text() -> str:
-    return "bud_idea_healerhold"
+def bud_idea_healerlink_text() -> str:
+    return "bud_idea_healerlink"
 
 
 def bud_idea_factunit_text() -> str:

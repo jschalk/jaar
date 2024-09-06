@@ -12,7 +12,7 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_factunit_text,
 )
 from src.normal_db.normal_models import (
@@ -24,7 +24,7 @@ from src.normal_db.normal_models import (
     ReasonTable,
     PremiseTable,
     TeamlinkTable,
-    HealerHoldTable,
+    HealerLinkTable,
     FactTable,
 )
 from sqlalchemy import inspect
@@ -188,16 +188,16 @@ def test_normalized_table_TeamlinkTable_teamlink_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_HealerHoldTable_healerhold_Exists():
+def test_normalized_table_HealerLinkTable_healerlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_idea_healerhold_text())
-    mapper = inspect(HealerHoldTable)
+    config_category = get_normalized_bud_table_build().get(bud_idea_healerlink_text())
+    mapper = inspect(HealerLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
-    assert config_table_name == "healerhold"
-    assert config_table_name == HealerHoldTable.__tablename__
+    assert config_table_name == "healerlink"
+    assert config_table_name == HealerLinkTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 

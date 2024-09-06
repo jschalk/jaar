@@ -13,7 +13,7 @@ from src.gift.atom_config import (
     bud_idea_reasonunit_text,
     bud_idea_reason_premiseunit_text,
     bud_idea_teamlink_text,
-    bud_idea_healerhold_text,
+    bud_idea_healerlink_text,
     bud_idea_factunit_text,
     acct_id_str,
     group_id_str,
@@ -90,10 +90,10 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), bud_idea_teamlink_text()]
     bud_idea_teamlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_healerhold_text()]
-    bud_idea_healerhold_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_healerhold_text()]
-    bud_idea_healerhold_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_idea_healerlink_text()]
+    bud_idea_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_idea_healerlink_text()]
+    bud_idea_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), bud_idea_factunit_text()]
     bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -186,13 +186,13 @@ def create_legible_list(x_change: ChangeUnit, x_bud: BudUnit) -> list[str]:
             leg_list, bud_idea_teamlink_delete_dict, x_bud
         )
 
-    if bud_idea_healerhold_insert_dict is not None:
-        add_bud_idea_healerhold_insert_to_legible_list(
-            leg_list, bud_idea_healerhold_insert_dict, x_bud
+    if bud_idea_healerlink_insert_dict is not None:
+        add_bud_idea_healerlink_insert_to_legible_list(
+            leg_list, bud_idea_healerlink_insert_dict, x_bud
         )
-    if bud_idea_healerhold_delete_dict is not None:
-        add_bud_idea_healerhold_delete_to_legible_list(
-            leg_list, bud_idea_healerhold_delete_dict, x_bud
+    if bud_idea_healerlink_delete_dict is not None:
+        add_bud_idea_healerlink_delete_to_legible_list(
+            leg_list, bud_idea_healerlink_delete_dict, x_bud
         )
 
     if bud_idea_factunit_insert_dict is not None:
@@ -624,25 +624,25 @@ def add_bud_idea_teamlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_idea_healerhold_insert_to_legible_list(
-    legible_list: list[str], idea_healerhold_insert_dict: dict, x_bud: BudUnit
+def add_bud_idea_healerlink_insert_to_legible_list(
+    legible_list: list[str], idea_healerlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_healerhold_insert_dict.values():
-        for idea_healerhold_atom in road_dict.values():
-            healer_id_value = idea_healerhold_atom.get_value(healer_id_str())
-            road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{healer_id_value}' created for idea '{road_value}'."
+    for road_dict in idea_healerlink_insert_dict.values():
+        for idea_healerlink_atom in road_dict.values():
+            healer_id_value = idea_healerlink_atom.get_value(healer_id_str())
+            road_value = idea_healerlink_atom.get_value("road")
+            x_str = f"HealerLink '{healer_id_value}' created for idea '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_healerhold_delete_to_legible_list(
-    legible_list: list[str], idea_healerhold_delete_dict: dict, x_bud: BudUnit
+def add_bud_idea_healerlink_delete_to_legible_list(
+    legible_list: list[str], idea_healerlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_healerhold_delete_dict.values():
-        for idea_healerhold_atom in road_dict.values():
-            healer_id_value = idea_healerhold_atom.get_value(healer_id_str())
-            road_value = idea_healerhold_atom.get_value("road")
-            x_str = f"Healerhold '{healer_id_value}' deleted for idea '{road_value}'."
+    for road_dict in idea_healerlink_delete_dict.values():
+        for idea_healerlink_atom in road_dict.values():
+            healer_id_value = idea_healerlink_atom.get_value(healer_id_str())
+            road_value = idea_healerlink_atom.get_value("road")
+            x_str = f"HealerLink '{healer_id_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)
 
 
