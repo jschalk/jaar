@@ -8,7 +8,7 @@ from src.bud.bud_tool import (
     bud_ideaunit_exists,
     bud_idea_awardlink_exists,
     bud_idea_reasonunit_exists,
-    bud_idea_reason_premiseunit_exists,
+    bud_idea_reason_premiseunit_exists as premiseunit_exists,
     bud_idea_teamlink_exists,
     bud_idea_healerlink_exists,
     bud_idea_factunit_exists,
@@ -21,7 +21,7 @@ from src.gift.atom_config import (
     bud_ideaunit_text,
     bud_idea_awardlink_text,
     bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text as premiseunit_exists,
+    bud_idea_reason_premiseunit_text,
     bud_idea_teamlink_text,
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
@@ -31,16 +31,7 @@ from src.gift.atom_config import (
     parent_road_str,
     label_str,
     road_str,
-    base_idea_active_requisite_str,
-    pledge_str,
-    begin_str,
-    close_str,
-    credit_vote_str,
-    debtit_vote_str,
-    gogo_want_str,
-    stop_want_str,
-    fopen_str,
-    fnigh_str,
+    base_str,
 )
 from src.gift.change import changeunit_shop, sift_changeunit, _sift_atomunit
 from src.gift.examples.example_changes import get_changeunit_example1
@@ -200,71 +191,88 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_awardlink():
     assert _sift_atomunit(sue_bud, clean_swim_atom)
 
 
-# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reasonunit():
-#     sue_bud = budunit_shop("Sue")
-#     casa_text = "casa"
-#     casa_road = sue_bud.make_l1_road(casa_text)
-#     clean_text = "clean"
-#     clean_road = sue_bud.make_road(casa_road, clean_text)
-#     root_road = sue_bud._real_id
-#     week_text = "week"
-#     week_road = sue_bud.make_l1_road(week_text)
+def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reasonunit():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_bud.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_text)
+    week_text = "week"
+    week_road = sue_bud.make_l1_road(week_text)
 
-#     # WHEN / THEN
-#     assert not bud_idea_reasonunit_exists(None, None, None)
-#     assert not bud_idea_reasonunit_exists(sue_bud, None, None)
-#     assert not bud_idea_reasonunit_exists(sue_bud, root_road, week_road)
-#     assert not bud_idea_reasonunit_exists(sue_bud, casa_road, week_road)
-#     assert not bud_idea_reasonunit_exists(sue_bud, clean_road, week_road)
+    casa_week_atom = atomunit_shop(bud_idea_reasonunit_text(), atom_delete())
+    casa_week_atom.set_arg(road_str(), casa_road)
+    casa_week_atom.set_arg(base_str(), week_road)
+    clean_week_atom = atomunit_shop(bud_idea_reasonunit_text(), atom_delete())
+    clean_week_atom.set_arg(road_str(), clean_road)
+    clean_week_atom.set_arg(base_str(), week_road)
+    sue_bud.add_idea(casa_road)
+    sue_bud.add_idea(clean_road)
+    assert not bud_idea_reasonunit_exists(sue_bud, casa_road, week_road)
+    assert not bud_idea_reasonunit_exists(sue_bud, clean_road, week_road)
+    assert not _sift_atomunit(sue_bud, casa_week_atom)
+    assert not _sift_atomunit(sue_bud, clean_week_atom)
 
-#     # WHEN
-#     sue_bud.add_idea(week_road)
-#     sue_bud._idearoot.set_reasonunit(reasonunit_shop(week_road))
+    # WHEN
+    sue_bud.get_idea_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
 
-#     # THEN
-#     assert not bud_idea_reasonunit_exists(sue_bud, None, None)
-#     assert bud_idea_reasonunit_exists(sue_bud, root_road, week_road)
-#     assert not bud_idea_reasonunit_exists(sue_bud, casa_road, week_road)
-#     assert not bud_idea_reasonunit_exists(sue_bud, clean_road, week_road)
+    # THEN
+    assert _sift_atomunit(sue_bud, casa_week_atom)
+    assert not _sift_atomunit(sue_bud, clean_week_atom)
+
+    # WHEN
+    sue_bud.get_idea_obj(clean_road).set_reasonunit(reasonunit_shop(week_road))
+    # THEN
+    assert _sift_atomunit(sue_bud, casa_week_atom)
+    assert _sift_atomunit(sue_bud, clean_week_atom)
 
 
-# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reason_premiseunit():
-#     sue_bud = budunit_shop("Sue")
-#     casa_text = "casa"
-#     casa_road = sue_bud.make_l1_road(casa_text)
-#     clean_text = "clean"
-#     clean_road = sue_bud.make_road(casa_road, clean_text)
-#     root_road = sue_bud._real_id
-#     week_text = "week"
-#     week_road = sue_bud.make_l1_road(week_text)
-#     thur_road = sue_bud.make_road(week_road, "thur")
+def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reason_premiseunit_exists():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_bud.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_text)
+    week_text = "week"
+    week_road = sue_bud.make_l1_road(week_text)
+    thur_text = "thur"
+    thur_road = sue_bud.make_road(week_road, thur_text)
 
-#     # WHEN / THEN
-#     assert not premiseunit_exists(None, None, None, None)
-#     assert not premiseunit_exists(sue_bud, None, None, None)
-#     assert not premiseunit_exists(sue_bud, root_road, week_road, thur_road)
-#     assert not premiseunit_exists(sue_bud, casa_road, week_road, thur_road)
-#     assert not premiseunit_exists(sue_bud, clean_road, week_road, thur_road)
+    casa_week_atom = atomunit_shop(bud_idea_reason_premiseunit_text(), atom_delete())
+    casa_week_atom.set_arg(road_str(), casa_road)
+    casa_week_atom.set_arg(base_str(), week_road)
+    casa_week_atom.set_arg("need", thur_road)
+    clean_week_atom = atomunit_shop(bud_idea_reason_premiseunit_text(), atom_delete())
+    clean_week_atom.set_arg(road_str(), clean_road)
+    clean_week_atom.set_arg(base_str(), week_road)
+    clean_week_atom.set_arg("need", thur_road)
+    sue_bud.add_idea(casa_road)
+    sue_bud.add_idea(clean_road)
+    casa_idea = sue_bud.get_idea_obj(casa_road)
+    clean_idea = sue_bud.get_idea_obj(clean_road)
+    casa_idea.set_reasonunit(reasonunit_shop(week_road))
+    clean_idea.set_reasonunit(reasonunit_shop(week_road))
 
-#     # WHEN
-#     sue_bud.add_idea(week_road)
-#     sue_bud._idearoot.set_reasonunit(reasonunit_shop(week_road))
+    assert not premiseunit_exists(sue_bud, casa_road, week_road, thur_road)
+    assert not premiseunit_exists(sue_bud, clean_road, week_road, thur_road)
+    assert not _sift_atomunit(sue_bud, casa_week_atom)
+    assert not _sift_atomunit(sue_bud, clean_week_atom)
 
-#     # THEN
-#     assert not premiseunit_exists(sue_bud, None, None, None)
-#     assert not premiseunit_exists(sue_bud, root_road, week_road, thur_road)
-#     assert not premiseunit_exists(sue_bud, casa_road, week_road, thur_road)
-#     assert not premiseunit_exists(sue_bud, clean_road, week_road, thur_road)
+    # WHEN
+    casa_idea.get_reasonunit(week_road).set_premise(thur_road)
 
-#     # WHEN
-#     sue_bud.add_idea(thur_road)
-#     sue_bud._idearoot.get_reasonunit(week_road).set_premise(thur_road)
+    # THEN
+    assert _sift_atomunit(sue_bud, casa_week_atom)
+    assert not _sift_atomunit(sue_bud, clean_week_atom)
 
-#     # THEN
-#     assert not premiseunit_exists(sue_bud, None, None, None)
-#     assert premiseunit_exists(sue_bud, root_road, week_road, thur_road)
-#     assert not premiseunit_exists(sue_bud, casa_road, week_road, thur_road)
-#     assert not premiseunit_exists(sue_bud, clean_road, week_road, thur_road)
+    # WHEN
+    clean_idea.get_reasonunit(week_road).set_premise(thur_road)
+
+    # THEN
+    assert _sift_atomunit(sue_bud, casa_week_atom)
+    assert _sift_atomunit(sue_bud, clean_week_atom)
 
 
 def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_teamlink():
@@ -339,45 +347,42 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_healerlink():
     assert _sift_atomunit(sue_bud, clean_swim_atom)
 
 
-# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_factunit():
-#     sue_bud = budunit_shop("Sue")
-#     casa_text = "casa"
-#     casa_road = sue_bud.make_l1_road(casa_text)
-#     clean_text = "clean"
-#     clean_road = sue_bud.make_road(casa_road, clean_text)
-#     root_road = sue_bud._real_id
-#     week_text = "week"
-#     week_road = sue_bud.make_l1_road(week_text)
+def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_factunit():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_bud.make_l1_road(casa_text)
+    clean_text = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_text)
+    week_text = "week"
+    week_road = sue_bud.make_l1_road(week_text)
 
-#     # WHEN / THEN
-#     assert not bud_idea_factunit_exists(None, None, None)
-#     assert not bud_idea_factunit_exists(sue_bud, None, None)
-#     assert not bud_idea_factunit_exists(sue_bud, root_road, week_road)
-#     assert not bud_idea_factunit_exists(sue_bud, casa_road, week_road)
-#     assert not bud_idea_factunit_exists(sue_bud, clean_road, week_road)
+    casa_week_atom = atomunit_shop(bud_idea_factunit_text(), atom_delete())
+    casa_week_atom.set_arg(road_str(), casa_road)
+    casa_week_atom.set_arg(base_str(), week_road)
+    clean_week_atom = atomunit_shop(bud_idea_factunit_text(), atom_delete())
+    clean_week_atom.set_arg(road_str(), clean_road)
+    clean_week_atom.set_arg(base_str(), week_road)
+    sue_bud.add_idea(casa_road)
+    sue_bud.add_idea(clean_road)
+    assert not bud_idea_factunit_exists(sue_bud, casa_road, week_road)
+    assert not bud_idea_factunit_exists(sue_bud, clean_road, week_road)
+    assert not _sift_atomunit(sue_bud, casa_week_atom)
+    assert not _sift_atomunit(sue_bud, clean_week_atom)
 
-#     # WHEN
-#     sue_bud.add_idea(week_road)
-#     sue_bud._idearoot.set_factunit(factunit_shop(week_road))
+    # WHEN
+    sue_bud.get_idea_obj(casa_road).set_factunit(factunit_shop(week_road))
 
-#     # THEN
-#     assert not bud_idea_factunit_exists(sue_bud, None, None)
-#     assert bud_idea_factunit_exists(sue_bud, root_road, week_road)
-#     assert not bud_idea_factunit_exists(sue_bud, casa_road, week_road)
-#     assert not bud_idea_factunit_exists(sue_bud, clean_road, week_road)
+    # THEN
+    assert _sift_atomunit(sue_bud, casa_week_atom)
+    assert not _sift_atomunit(sue_bud, clean_week_atom)
 
-
-# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_factunit():
-# #     assert 1 == 2
+    # WHEN
+    sue_bud.get_idea_obj(clean_road).set_factunit(factunit_shop(week_road))
+    # THEN
+    assert _sift_atomunit(sue_bud, casa_week_atom)
+    assert _sift_atomunit(sue_bud, clean_week_atom)
 
 
 # # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit():
-# #     assert 1 == 2
-
-
-# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reasonunit():
-# #     assert 1 == 2
-
-
-# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_ideaunit():
 # #     assert 1 == 2

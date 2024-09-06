@@ -19,7 +19,7 @@ from src.bud.bud_tool import (
     bud_ideaunit_exists as ideaunit_exists,
     bud_idea_awardlink_exists as awardlink_exists,
     bud_idea_reasonunit_exists as reasonunit_exists,
-    bud_idea_reason_premiseunit_exists as reason_premiseunit_exists,
+    bud_idea_reason_premiseunit_exists as premiseunit_exists,
     bud_idea_teamlink_exists as teamlink_exists,
     bud_idea_healerlink_exists as healerlink_exists,
     bud_idea_factunit_exists as factunit_exists,
@@ -42,6 +42,7 @@ from src.gift.atom_config import (
     parent_road_str,
     label_str,
     road_str,
+    base_str,
     pledge_str,
     addin_str,
     begin_str,
@@ -929,6 +930,9 @@ def sift_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
 
 
 def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
+    if not x_atom.is_valid():
+        raise Exception(f"AtomUnit {x_atom=} is not valid")
+
     x_crud_delete = atom_delete()
     x_crud_insert = atom_insert
     if x_atom.category == bud_acctunit_text():
@@ -993,11 +997,36 @@ def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         elif x_atom.crud_text == x_crud_insert:
             if not x_exists:
                 print("huh")
-    return None
+    elif x_atom.category == bud_idea_reasonunit_text():
+        x_road = x_atom.get_value(road_str())
+        x_base = x_atom.get_value(base_str())
+        x_exists = reasonunit_exists(x_bud, x_road, x_base)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_reason_premiseunit_text():
+        x_road = x_atom.get_value(road_str())
+        x_base = x_atom.get_value(base_str())
+        x_need = x_atom.get_value("need")
+        x_exists = premiseunit_exists(x_bud, x_road, x_base, x_need)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    elif x_atom.category == bud_idea_factunit_text():
+        x_road = x_atom.get_value(road_str())
+        x_base = x_atom.get_value(base_str())
+        x_exists = factunit_exists(x_bud, x_road, x_base)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
 
-    # elif x_atom.category == bud_idea_awardlink_text()
-    # elif x_atom.category == bud_idea_factunit_text()
-    # elif x_atom.category == bud_idea_teamlink_text()
-    # elif x_atom.category == bud_idea_healerlink_text()
-    # elif x_atom.category == bud_idea_reason_premiseunit_text()
-    # elif x_atom.category == bud_idea_reasonunit_text()
+    return None
