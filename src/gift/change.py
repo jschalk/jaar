@@ -921,39 +921,51 @@ def get_filtered_changeunit(
 def refine_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
     new_changeunit = changeunit_shop()
     for x_atom in x_changeunit.get_sorted_atomunits():
-        _refine_atomunit(x_bud, x_atom, new_changeunit)
+        sifted_atom = _refine_atomunit(x_bud, x_atom)
+        if sifted_atom != None:
+            new_changeunit.set_atomunit(x_atom)
     return new_changeunit
 
 
-def _refine_atomunit(x_bud: BudUnit, x_atom: AtomUnit, new_changeunit: ChangeUnit):
+def _refine_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     x_crud_delete = atom_delete()
     x_crud_insert = atom_insert
     if x_atom.category == bud_acctunit_text():
         x_acct_id = x_atom.get_value(acct_id_str())
-        x_acctunit_exists = acctunit_exists(x_bud, x_acct_id)
+        x_exists = acctunit_exists(x_bud, x_acct_id)
         if x_atom.crud_text == x_crud_delete:
-            if x_acctunit_exists:
-                new_changeunit.set_atomunit(x_atom)
+            if x_exists:
+                return x_atom
         elif x_atom.crud_text == x_crud_insert:
             print("huh")
 
     elif x_atom.category == bud_acct_membership_text():
         x_acct_id = x_atom.get_value(acct_id_str())
         x_group_id = x_atom.get_value(group_id_str())
-        x_membership_exists = membership_exists(x_bud, x_acct_id, x_group_id)
+        x_exists = membership_exists(x_bud, x_acct_id, x_group_id)
         if x_atom.crud_text == x_crud_delete:
-            if x_membership_exists:
-                new_changeunit.set_atomunit(x_atom)
+            if x_exists:
+                return x_atom
         elif x_atom.crud_text == x_crud_insert:
-            if not x_membership_exists:
+            if not x_exists:
                 print("huh")
 
-    # elif x_atom.category == bud_acctunit_text()
-    # elif x_atom.category == bud_acct_membership_text()
+    elif x_atom.category == bud_ideaunit_text():
+        x_parent_road = x_atom.get_value(parent_road_str())
+        x_label = x_atom.get_value(label_str())
+        x_road = x_bud.make_road(x_parent_road, x_label)
+        x_exists = ideaunit_exists(x_bud, x_road)
+        if x_atom.crud_text == x_crud_delete:
+            if x_exists:
+                return x_atom
+        elif x_atom.crud_text == x_crud_insert:
+            if not x_exists:
+                print("huh")
+    return None
+
     # elif x_atom.category == bud_idea_awardlink_text()
     # elif x_atom.category == bud_idea_factunit_text()
     # elif x_atom.category == bud_idea_teamlink_text()
     # elif x_atom.category == bud_idea_healerhold_text()
     # elif x_atom.category == bud_idea_reason_premiseunit_text()
     # elif x_atom.category == bud_idea_reasonunit_text()
-    # elif x_atom.category == bud_ideaunit_text()
