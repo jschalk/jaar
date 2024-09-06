@@ -15,6 +15,7 @@ from src.gift.atom_config import (
     atom_insert,
     atom_delete,
     atom_update,
+    atom_upsert,
     category_ref,
     is_category_ref,
     get_atom_config_dict,
@@ -67,6 +68,22 @@ def test_column_order_str_ReturnsObj():
 
 def test_category_text_ReturnsObj():
     assert category_text() == "category"
+
+
+def test_atom_insert_ReturnsObj():
+    assert atom_insert() == "INSERT"
+
+
+def test_atom_update_ReturnsObj():
+    assert atom_update() == "UPDATE"
+
+
+def test_atom_delete_ReturnsObj():
+    assert atom_delete() == "DELETE"
+
+
+def test_atom_upsert_ReturnsObj():
+    assert atom_upsert() == "UPSERT"
 
 
 def test_crud_text_str_ReturnsObj():

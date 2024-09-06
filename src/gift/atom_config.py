@@ -23,6 +23,10 @@ def atom_delete() -> CRUD_command:
     return "DELETE"
 
 
+def atom_upsert() -> CRUD_command:
+    return "UPSERT"
+
+
 def atom_hx_table_name() -> str:
     return "atom_hx"
 
@@ -412,11 +416,8 @@ def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
 
 
 def save_atom_config_file(atom_config_dict):
-    save_file(
-        dest_dir=config_file_dir(),
-        file_name=get_atom_config_file_name(),
-        file_text=get_json_from_dict(atom_config_dict),
-    )
+    x_file_text = get_json_from_dict(atom_config_dict)
+    save_file(config_file_dir(), get_atom_config_file_name(), x_file_text)
 
 
 def category_ref() -> set:
