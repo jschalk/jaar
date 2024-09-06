@@ -1,4 +1,4 @@
-from src.gift.atom_config import bud_acctunit_text
+from src.bud.bud_tool import bud_acctunit_text
 from src.stone.stone import StoneColumn, StoneRef, stoneref_shop
 
 

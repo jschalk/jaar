@@ -1,8 +1,8 @@
+from src.bud.bud_tool import bud_ideaunit_text
 from src.gift.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
-    bud_ideaunit_text,
     parent_road_str,
     label_str,
     pledge_str,

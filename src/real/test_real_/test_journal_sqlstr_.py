@@ -1,10 +1,6 @@
 from src._road.road import create_road
-from src.gift.atom_config import (
-    fopen_str,
-    atom_insert,
-    atom_hx_table_name,
-    bud_idea_factunit_text,
-)
+from src.bud.bud_tool import bud_idea_factunit_text
+from src.gift.atom_config import fopen_str, atom_insert, atom_hx_table_name
 from src.gift.atom import atomunit_shop
 from src.real.journal_sqlstr import (
     get_atom2change_table_create_sqlstr,

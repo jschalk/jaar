@@ -12,9 +12,6 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_exists,
     bud_idea_healerlink_exists,
     bud_idea_factunit_exists,
-)
-from src.gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
-from src.gift.atom_config import (
     budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -25,6 +22,9 @@ from src.gift.atom_config import (
     bud_idea_teamlink_text,
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
+)
+from src.gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
+from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
     healer_id_str,
@@ -382,7 +382,3 @@ def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_factunit():
     # THEN
     assert _sift_atomunit(sue_bud, casa_week_atom)
     assert _sift_atomunit(sue_bud, clean_week_atom)
-
-
-# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit():
-# #     assert 1 == 2

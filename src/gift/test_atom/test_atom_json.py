@@ -1,10 +1,10 @@
 from src._road.road import create_road
+from src.bud.bud_tool import bud_idea_factunit_text
 from src.gift.atom_config import (
     required_args_text,
     optional_args_text,
     category_text,
     crud_text_str,
-    bud_idea_factunit_text,
 )
 from src.gift.atom import (
     atomunit_shop,

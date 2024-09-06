@@ -1,8 +1,8 @@
+from src.bud.bud_tool import bud_idea_factunit_text
 from src.gift.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
-    bud_idea_factunit_text,
     fnigh_str,
     fopen_str,
 )

@@ -1,7 +1,8 @@
 # from src._instrument.python import x_is_json
 from src._road.jaar_config import get_test_real_id
 from src._road.road import default_road_delimiter_if_none
-from src.gift.atom_config import atom_insert, bud_acctunit_text, acct_id_str
+from src.bud.bud_tool import bud_acctunit_text
+from src.gift.atom_config import atom_insert, acct_id_str
 from src.gift.atom import atomunit_shop
 from src.gift.translator import Translator, translator_shop
 

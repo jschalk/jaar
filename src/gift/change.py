@@ -23,19 +23,19 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_exists as teamlink_exists,
     bud_idea_healerlink_exists as healerlink_exists,
     bud_idea_factunit_exists as factunit_exists,
+    budunit_text,
+    bud_acctunit_text,
+    bud_acct_membership_text,
+    bud_ideaunit_text,
+    bud_idea_awardlink_text,
+    bud_idea_reasonunit_text,
+    bud_idea_reason_premiseunit_text,
+    bud_idea_teamlink_text,
+    bud_idea_healerlink_text,
+    bud_idea_factunit_text,
 )
 from src.gift.atom_config import (
     CRUD_command,
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_idea_awardlink_text,
-    bud_idea_factunit_text,
-    bud_idea_teamlink_text,
-    bud_idea_healerlink_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_reasonunit_text,
-    bud_ideaunit_text,
-    budunit_text,
     acct_id_str,
     group_id_str,
     healer_id_str,
@@ -56,6 +56,7 @@ from src.gift.atom_config import (
     fopen_str,
     fnigh_str,
     base_idea_active_requisite_str,
+    get_sorted_required_arg_keys,
 )
 from src.gift.atom import (
     AtomUnit,
@@ -934,8 +935,13 @@ def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         raise Exception(f"AtomUnit {x_atom=} is not valid")
 
     x_crud_delete = atom_delete()
-    x_crud_insert = atom_insert
+    x_crud_insert = atom_insert()
     if x_atom.category == bud_acctunit_text():
+        args_dict = {}
+        for required_arg in get_sorted_required_arg_keys(x_atom.category):
+            args_dict[required_arg] = x_atom.get_value(required_arg)
+        print(f"{args_dict=}")
+
         x_acct_id = x_atom.get_value(acct_id_str())
         x_exists = acctunit_exists(x_bud, x_acct_id)
         if x_atom.crud_text == x_crud_delete:

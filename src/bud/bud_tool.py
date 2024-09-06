@@ -2,6 +2,46 @@ from src._road.road import RoadUnit, AcctID, GroupID
 from src.bud.bud import BudUnit
 
 
+def budunit_text() -> str:
+    return "budunit"
+
+
+def bud_acctunit_text() -> str:
+    return "bud_acctunit"
+
+
+def bud_acct_membership_text() -> str:
+    return "bud_acct_membership"
+
+
+def bud_ideaunit_text() -> str:
+    return "bud_ideaunit"
+
+
+def bud_idea_awardlink_text() -> str:
+    return "bud_idea_awardlink"
+
+
+def bud_idea_reasonunit_text() -> str:
+    return "bud_idea_reasonunit"
+
+
+def bud_idea_reason_premiseunit_text() -> str:
+    return "bud_idea_reason_premiseunit"
+
+
+def bud_idea_teamlink_text() -> str:
+    return "bud_idea_teamlink"
+
+
+def bud_idea_healerlink_text() -> str:
+    return "bud_idea_healerlink"
+
+
+def bud_idea_factunit_text() -> str:
+    return "bud_idea_factunit"
+
+
 def budunit_exists(x_bud: BudUnit) -> bool:
     return x_bud is not None
 
