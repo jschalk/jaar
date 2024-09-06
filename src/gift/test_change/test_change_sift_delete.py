@@ -40,7 +40,7 @@ from src.gift.atom_config import (
     fopen_str,
     fnigh_str,
 )
-from src.gift.change import changeunit_shop, refine_changeunit, _refine_atomunit
+from src.gift.change import changeunit_shop, sift_changeunit, _sift_atomunit
 from src.gift.examples.example_changes import get_changeunit_example1
 
 
@@ -48,18 +48,18 @@ from src.gift.examples.example_changes import get_changeunit_example1
 # multiple atoms of delete, and remove those that are not necessary
 
 
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_awardlink(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_factunit(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_teamlink(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_healerhold(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reasonunit(): assert 1==2
-# def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_ideaunit(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_awardlink(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_factunit(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_teamlink(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_healerhold(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reasonunit(): assert 1==2
+# def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_ideaunit(): assert 1==2
 
 
-def test_refine_changeunit_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit():
+def test_sift_changeunit_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit():
     # ESTABLISH changeunit with 2 acctunits, changeunit DELETE 3 changeunits,
     # assert changeunit has 3 atoms
     bob_text = "Bob"
@@ -83,13 +83,13 @@ def test_refine_changeunit_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit():
     assert len(sue_bud._accts) == 2
 
     # WHEN
-    new_changeunit = refine_changeunit(accts_changeunit, sue_bud)
+    new_changeunit = sift_changeunit(accts_changeunit, sue_bud)
 
     # THEN
     assert len(new_changeunit.get_sorted_atomunits()) == 2
 
 
-def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership():
+def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership():
     # ESTABLISH changeunit with 2 acctunits, changeunit DELETE 3 changeunits,
     # assert changeunit has 3 atoms
     bob_text = "Bob"
@@ -127,13 +127,13 @@ def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership():
     assert not bud_acct_membership_exists(sue_bud, zia_text, swim_text)
 
     # WHEN
-    new_changeunit = refine_changeunit(accts_changeunit, sue_bud)
+    new_changeunit = sift_changeunit(accts_changeunit, sue_bud)
 
     # THEN
     assert len(new_changeunit.get_category_sorted_atomunits_list()) == 1
 
 
-def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
+def test_sift_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
@@ -158,26 +158,26 @@ def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
     assert not bud_ideaunit_exists(sue_bud, sweep_road)
 
     # WHEN /  THEN
-    assert not _refine_atomunit(sue_bud, casa_atom)
-    assert not _refine_atomunit(sue_bud, clean_atom)
-    assert not _refine_atomunit(sue_bud, sweep_atom)
+    assert not _sift_atomunit(sue_bud, casa_atom)
+    assert not _sift_atomunit(sue_bud, clean_atom)
+    assert not _sift_atomunit(sue_bud, sweep_atom)
 
     # WHEN
     sue_bud.add_idea(casa_road)
     # THEN
-    assert _refine_atomunit(sue_bud, casa_atom)
-    assert not _refine_atomunit(sue_bud, clean_atom)
-    assert not _refine_atomunit(sue_bud, sweep_atom)
+    assert _sift_atomunit(sue_bud, casa_atom)
+    assert not _sift_atomunit(sue_bud, clean_atom)
+    assert not _sift_atomunit(sue_bud, sweep_atom)
 
     # WHEN
     sue_bud.add_idea(clean_road)
     # THEN
-    assert _refine_atomunit(sue_bud, casa_atom)
-    assert _refine_atomunit(sue_bud, clean_atom)
-    assert not _refine_atomunit(sue_bud, sweep_atom)
+    assert _sift_atomunit(sue_bud, casa_atom)
+    assert _sift_atomunit(sue_bud, clean_atom)
+    assert not _sift_atomunit(sue_bud, sweep_atom)
 
 
-# def test_refine_atom_SetsChangeUnitAtomUnit_bud_idea_awardlink():
+# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_awardlink():
 #     # ESTABLISH
 #     sue_bud = budunit_shop("Sue")
 #     casa_text = "casa"
@@ -204,7 +204,7 @@ def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
 #     assert not bud_idea_awardlink_exists(sue_bud, clean_road, swim_text)
 
 
-# def test_refine_atom_SetsChangeUnitAtomUnit_bud_idea_reasonunit():
+# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reasonunit():
 #     sue_bud = budunit_shop("Sue")
 #     casa_text = "casa"
 #     casa_road = sue_bud.make_l1_road(casa_text)
@@ -232,7 +232,7 @@ def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
 #     assert not bud_idea_reasonunit_exists(sue_bud, clean_road, week_road)
 
 
-# def test_refine_atom_SetsChangeUnitAtomUnit_bud_idea_reason_premiseunit():
+# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_reason_premiseunit():
 #     sue_bud = budunit_shop("Sue")
 #     casa_text = "casa"
 #     casa_road = sue_bud.make_l1_road(casa_text)
@@ -271,7 +271,7 @@ def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
 #     assert not premiseunit_exists(sue_bud, clean_road, week_road, thur_road)
 
 
-# def test_refine_atom_SetsChangeUnitAtomUnit_bud_idea_teamlink():
+# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_teamlink():
 #     # ESTABLISH
 #     sue_bud = budunit_shop("Sue")
 #     casa_text = "casa"
@@ -298,7 +298,7 @@ def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
 #     assert not bud_idea_teamlink_exists(sue_bud, clean_road, swim_text)
 
 
-# def test_refine_atom_SetsChangeUnitAtomUnit_bud_idea_healerhold():
+# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_healerhold():
 #     # ESTABLISH
 #     sue_bud = budunit_shop("Sue")
 #     casa_text = "casa"
@@ -325,7 +325,7 @@ def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
 #     assert not bud_idea_healerhold_exists(sue_bud, clean_road, swim_text)
 
 
-# def test_refine_atom_SetsChangeUnitAtomUnit_bud_idea_factunit():
+# def test_sift_atom_SetsChangeUnitAtomUnit_bud_idea_factunit():
 #     sue_bud = budunit_shop("Sue")
 #     casa_text = "casa"
 #     casa_road = sue_bud.make_l1_road(casa_text)
@@ -353,29 +353,29 @@ def test_refine_atom_SetsChangeUnitAtomUnit_bud_ideaunit():
 #     assert not bud_idea_factunit_exists(sue_bud, clean_road, week_road)
 
 
-# # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_awardlink():
+# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_awardlink():
 # #     assert 1 == 2
 
 
-# # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_factunit():
+# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_factunit():
 # #     assert 1 == 2
 
 
-# # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_teamlink():
+# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_teamlink():
 # #     assert 1 == 2
 
 
-# # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_healerhold():
+# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_healerhold():
 # #     assert 1 == 2
 
 
-# # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit():
+# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reason_premiseunit():
 # #     assert 1 == 2
 
 
-# # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reasonunit():
+# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_idea_reasonunit():
 # #     assert 1 == 2
 
 
-# # def test_refine_ReturnsObjWithoutUnecessaryDELETE_bud_ideaunit():
+# # def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_ideaunit():
 # #     assert 1 == 2

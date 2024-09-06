@@ -918,16 +918,16 @@ def get_filtered_changeunit(
     return new_changeunit
 
 
-def refine_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
+def sift_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
     new_changeunit = changeunit_shop()
     for x_atom in x_changeunit.get_sorted_atomunits():
-        sifted_atom = _refine_atomunit(x_bud, x_atom)
+        sifted_atom = _sift_atomunit(x_bud, x_atom)
         if sifted_atom != None:
             new_changeunit.set_atomunit(x_atom)
     return new_changeunit
 
 
-def _refine_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
+def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     x_crud_delete = atom_delete()
     x_crud_insert = atom_insert
     if x_atom.category == bud_acctunit_text():
