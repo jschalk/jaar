@@ -194,6 +194,23 @@ def bud_idea_factunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> 
     return x_bud.get_idea_obj(x_road)._factunits.get(x_base)
 
 
+def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) -> any:
+    if x_category == bud_acctunit_text():
+        return bud_acctunit_get_obj(x_bud, required_args)
+    elif x_category == bud_acct_membership_text():
+        return bud_acct_membership_get_obj(x_bud, required_args)
+    elif x_category == bud_ideaunit_text():
+        return bud_ideaunit_get_obj(x_bud, required_args)
+    elif x_category == bud_idea_awardlink_text():
+        return bud_idea_awardlink_get_obj(x_bud, required_args)
+    elif x_category == bud_idea_reasonunit_text():
+        return bud_idea_reasonunit_get_obj(x_bud, required_args)
+    elif x_category == bud_idea_reason_premiseunit_text():
+        return bud_idea_reason_premiseunit_get_obj(x_bud, required_args)
+    elif x_category == bud_idea_factunit_text():
+        return bud_idea_factunit_get_obj(x_bud, required_args)
+
+
 def bud_attr_different(
     x_category: str, x_bud: BudUnit, required_args: dict[str, any]
 ) -> bool:
