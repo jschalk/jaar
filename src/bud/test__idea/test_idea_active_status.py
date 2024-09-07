@@ -68,6 +68,21 @@ def test_IdeaUnit_awardlink_exists_ReturnsObj():
     assert sport_ideaunit.awardlink_exists(biker_text)
 
 
+def test_IdeaUnit_get_awardlink_ReturnsObj():
+    # ESTABLISH
+    biker_text = "bikers2"
+    sport_text = "sport"
+    sport_ideaunit = ideaunit_shop(sport_text)
+    sport_ideaunit.set_awardlink(awardlink_shop(biker_text))
+
+    # WHEN
+    biker_awardlink = sport_ideaunit.get_awardlink(biker_text)
+
+    # THEN
+    assert biker_awardlink
+    assert biker_awardlink.group_id == biker_text
+
+
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
     # ESTABLISH
     biker_give_force = 12

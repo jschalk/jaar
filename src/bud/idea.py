@@ -743,6 +743,9 @@ class IdeaUnit:
     def set_awardlink(self, awardlink: AwardLink):
         self._awardlinks[awardlink.group_id] = awardlink
 
+    def get_awardlink(self, group_id: GroupID) -> AwardLink:
+        return self._awardlinks.get(group_id)
+
     def del_awardlink(self, group_id: GroupID):
         try:
             self._awardlinks.pop(group_id)
