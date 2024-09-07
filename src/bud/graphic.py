@@ -148,9 +148,9 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     column_header_list = [
         "acct_id",
         "_credor_respect",
-        "credit_score",
+        "credit_belief",
         "_debtor_respect",
-        "debtit_score",
+        "debtit_belief",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -168,9 +168,9 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
             values=[
                 df.acct_id,
                 df._credor_respect,
-                df.credit_score,
+                df.credit_belief,
                 df._debtor_respect,
-                df.debtit_score,
+                df.debtit_belief,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,

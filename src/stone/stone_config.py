@@ -141,7 +141,7 @@ def get_stone_format_headers() -> dict[str, list[str]]:
         "label,mass,owner_id,parent_road,pledge,real_id": stone_format_00003_ideaunit_v0_0_0(),
         "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,real_id,stop_want": stone_format_00019_ideaunit_v0_0_0(),
         "acct_id,credit_vote,debtit_vote,group_id,owner_id,real_id": stone_format_00020_bud_acct_membership_v0_0_0(),
-        "acct_id,credit_score,debtit_score,owner_id,real_id": stone_format_00021_bud_acctunit_v0_0_0(),
+        "acct_id,credit_belief,debtit_belief,owner_id,real_id": stone_format_00021_bud_acctunit_v0_0_0(),
         "give_force,group_id,owner_id,real_id,road,take_force": stone_format_00022_bud_idea_awardlink_v0_0_0(),
         "base,fnigh,fopen,owner_id,pick,real_id,road": stone_format_00023_bud_idea_factunit_v0_0_0(),
         "group_id,owner_id,real_id,road": stone_format_00024_bud_idea_teamlink_v0_0_0(),

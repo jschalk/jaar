@@ -23,10 +23,10 @@ def test_AtomRow_exists():
     assert x_atomrow.begin is None
     assert x_atomrow.bit is None
     assert x_atomrow.close is None
-    assert x_atomrow.credit_score is None
+    assert x_atomrow.credit_belief is None
     assert x_atomrow.credit_vote is None
     assert x_atomrow.credor_respect is None
-    assert x_atomrow.debtit_score is None
+    assert x_atomrow.debtit_belief is None
     assert x_atomrow.debtit_vote is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
@@ -167,7 +167,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario1():
     x_category = bud_acctunit_text()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
     x_atomrow.acct_id = "Bob"
-    x_atomrow.credit_score = 5
+    x_atomrow.credit_belief = 5
 
     # WHEN
     x_atomunits = x_atomrow.get_atomunits()
@@ -176,7 +176,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario1():
     assert len(x_atomunits) == 1
     static_atom = atomunit_shop(x_category, atom_insert())
     static_atom.set_arg(acct_id_str(), "Bob")
-    static_atom.set_arg("credit_score", 5)
+    static_atom.set_arg("credit_belief", 5)
     assert x_atomunits[0] == static_atom
 
 
@@ -198,7 +198,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     x_atomrow = atomrow_shop({x_category}, atom_insert())
     x_atomrow.acct_id = "Bob"
     four_text = "4"
-    x_atomrow.credit_score = four_text
+    x_atomrow.credit_belief = four_text
 
     # WHEN
     x_atomunits = x_atomrow.get_atomunits()
@@ -208,7 +208,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     static_atom = atomunit_shop(x_category, atom_insert())
     static_atom.set_arg(acct_id_str(), "Bob")
     four_int = 4
-    static_atom.set_arg("credit_score", four_int)
+    static_atom.set_arg("credit_belief", four_int)
     assert x_atomunits[0] == static_atom
 
 
@@ -217,7 +217,7 @@ def test_AtomRow_get_atomunits_ReturnsObjIfCategoryIsCorrect():
     x_atomrow = atomrow_shop(set(), atom_insert())
     x_atomrow.acct_id = "Bob"
     four_text = "4"
-    x_atomrow.credit_score = four_text
+    x_atomrow.credit_belief = four_text
     assert len(x_atomrow.get_atomunits()) == 0
 
     # WHEN / THEN

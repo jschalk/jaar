@@ -19,8 +19,8 @@
                 }
             },
             "acct_id": "A a ron Jones",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "America": {
             "_memberships": {
@@ -46,8 +46,8 @@
                 }
             },
             "acct_id": "America",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Anna": {
             "_memberships": {
@@ -68,8 +68,8 @@
                 }
             },
             "acct_id": "Anna",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Benjamin Stoddert": {
             "_memberships": {
@@ -95,8 +95,8 @@
                 }
             },
             "acct_id": "Benjamin Stoddert",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Bob302": {
             "_memberships": {
@@ -122,8 +122,8 @@
                 }
             },
             "acct_id": "Bob302",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Chuck Lee": {
             "_memberships": {
@@ -149,8 +149,8 @@
                 }
             },
             "acct_id": "Chuck Lee",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Ernesto Chavez": {
             "_memberships": {
@@ -171,8 +171,8 @@
                 }
             },
             "acct_id": "Ernesto Chavez",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Jacque Chirac": {
             "_memberships": {
@@ -193,8 +193,8 @@
                 }
             },
             "acct_id": "Jacque Chirac",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Jane Randolph": {
             "_memberships": {
@@ -215,8 +215,8 @@
                 }
             },
             "acct_id": "Jane Randolph",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Maria Reynolds": {
             "_memberships": {
@@ -237,8 +237,8 @@
                 }
             },
             "acct_id": "Maria Reynolds",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Martha Doubs": {
             "_memberships": {
@@ -264,8 +264,8 @@
                 }
             },
             "acct_id": "Martha Doubs",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Mikayla": {
             "_memberships": {
@@ -291,8 +291,8 @@
                 }
             },
             "acct_id": "Mikayla",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Norberto": {
             "_memberships": {
@@ -313,8 +313,8 @@
                 }
             },
             "acct_id": "Norberto",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Perrison": {
             "_memberships": {
@@ -340,8 +340,8 @@
                 }
             },
             "acct_id": "Perrison",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Philipa": {
             "_memberships": {
@@ -367,8 +367,8 @@
                 }
             },
             "acct_id": "Philipa",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Prashant": {
             "_memberships": {
@@ -389,8 +389,8 @@
                 }
             },
             "acct_id": "Prashant",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Renee Elise Goldsberry": {
             "_memberships": {
@@ -441,8 +441,8 @@
                 }
             },
             "acct_id": "Renee Elise Goldsberry",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Sam zamora": {
             "_memberships": {
@@ -468,8 +468,8 @@
                 }
             },
             "acct_id": "Sam zamora",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Shadwell Harris": {
             "_memberships": {
@@ -490,8 +490,8 @@
                 }
             },
             "acct_id": "Shadwell Harris",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Thomas OSU": {
             "_memberships": {
@@ -512,8 +512,8 @@
                 }
             },
             "acct_id": "Thomas OSU",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Travis Fox": {
             "_memberships": {
@@ -534,8 +534,8 @@
                 }
             },
             "acct_id": "Travis Fox",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "WIlliam Wallace": {
             "_memberships": {
@@ -556,8 +556,8 @@
                 }
             },
             "acct_id": "WIlliam Wallace",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         }
     },
     "_bit": 1,

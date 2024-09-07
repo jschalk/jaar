@@ -511,12 +511,12 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    yao_credit_score = 3
-    yao_debtit_score = 2
-    zia_credit_score = 4
-    zia_debtit_score = 5
-    yao_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
-    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    yao_credit_belief = 3
+    yao_debtit_belief = 2
+    zia_credit_belief = 4
+    zia_debtit_belief = 5
+    yao_bud.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
+    yao_bud.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     x_idearoot = yao_bud.get_idea_obj(yao_bud._real_id)
     x_idearoot.set_awardlink(awardlink_shop(yao_text))
     x_idearoot.set_awardlink(awardlink_shop(zia_text))
@@ -545,10 +545,10 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     assert not xio_groupbox.membership_exists(xio_text)
     yao_membership = xio_groupbox.get_membership(yao_text)
     zia_membership = xio_groupbox.get_membership(zia_text)
-    assert yao_membership.credit_vote == yao_credit_score
-    assert zia_membership.credit_vote == zia_credit_score
-    assert yao_membership.debtit_vote == yao_debtit_score
-    assert zia_membership.debtit_vote == zia_debtit_score
+    assert yao_membership.credit_vote == yao_credit_belief
+    assert zia_membership.credit_vote == zia_credit_belief
+    assert yao_membership.debtit_vote == yao_debtit_belief
+    assert zia_membership.debtit_vote == zia_debtit_belief
 
 
 def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():

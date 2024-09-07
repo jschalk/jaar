@@ -111,12 +111,12 @@ def acct_pool_str() -> str:
     return "acct_pool"
 
 
-def debtit_score_str() -> str:
-    return "debtit_score"
+def debtit_belief_str() -> str:
+    return "debtit_belief"
 
 
-def credit_score_str() -> str:
-    return "credit_score"
+def credit_belief_str() -> str:
+    return "credit_belief"
 
 
 def debtit_vote_str() -> str:
@@ -256,8 +256,8 @@ def get_atom_args_python_types() -> dict[str, str]:
         "group_id": "GroupID",
         "debtit_vote": "int",
         "acct_id": "AcctID",
-        "debtit_score": "int",
-        "credit_score": "int",
+        "debtit_belief": "int",
+        "credit_belief": "int",
         "road": "RoadUnit",
         "give_force": "float",
         "take_force": "float",

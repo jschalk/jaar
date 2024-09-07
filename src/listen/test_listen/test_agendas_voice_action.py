@@ -34,10 +34,10 @@ def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_teamlinkIsSet(
     yao_text = "Yao"
     yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     zia_pool = 87
-    yao_voice.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    yao_voice.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     yao_voice.set_acct_respect(zia_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     yao_hubunit.save_voice_bud(yao_voice)
@@ -45,7 +45,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_teamlinkIsSet(
     zia_action = budunit_shop(zia_text)
     zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_text, debtit_score=12)
+    zia_action.add_acctunit(yao_text, debtit_belief=12)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_text)
     zia_hubunit.save_action_bud(zia_action)
 
@@ -65,10 +65,10 @@ def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
     yao_text = "Yao"
     yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     zia_pool = 87
-    yao_voice.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    yao_voice.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     yao_voice.set_acct_respect(zia_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
     yao_hubunit.save_voice_bud(yao_voice)
@@ -76,7 +76,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
     zia_action = budunit_shop(zia_text)
     zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_text, debtit_score=12)
+    zia_action.add_acctunit(yao_text, debtit_belief=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
     clean_ideaunit._teamunit.set_teamlink(yao_text)
@@ -94,7 +94,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
     assert len(new_yao_action.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToBudWithDetailsDecidedBy_debtit_score(
+def test_listen_to_agendas_voice_action_AddsTasksToBudWithDetailsDecidedBy_debtit_belief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -133,13 +133,13 @@ def test_listen_to_agendas_voice_action_AddsTasksToBudWithDetailsDecidedBy_debti
     new_cook_idea = new_yao_action1.get_idea_obj(cook_road())
     zia_acctunit = new_yao_action1.get_acct(zia_text)
     bob_acctunit = new_yao_action1.get_acct(bob_text)
-    assert zia_acctunit.debtit_score < bob_acctunit.debtit_score
+    assert zia_acctunit.debtit_belief < bob_acctunit.debtit_belief
     assert new_cook_idea.get_reasonunit(eat_road()) is None
 
-    yao_zia_debtit_score = 15
-    yao_bob_debtit_score = 5
-    yao_voice.add_acctunit(zia_text, None, yao_zia_debtit_score)
-    yao_voice.add_acctunit(bob_text, None, yao_bob_debtit_score)
+    yao_zia_debtit_belief = 15
+    yao_bob_debtit_belief = 5
+    yao_voice.add_acctunit(zia_text, None, yao_zia_debtit_belief)
+    yao_voice.add_acctunit(bob_text, None, yao_bob_debtit_belief)
     yao_voice.set_acct_respect(100)
     new_yao_action2 = create_listen_basis(yao_voice)
     assert new_yao_action2.idea_exists(cook_road()) is False
@@ -152,7 +152,7 @@ def test_listen_to_agendas_voice_action_AddsTasksToBudWithDetailsDecidedBy_debti
     new_cook_idea = new_yao_action2.get_idea_obj(cook_road())
     zia_acctunit = new_yao_action2.get_acct(zia_text)
     bob_acctunit = new_yao_action2.get_acct(bob_text)
-    assert zia_acctunit.debtit_score > bob_acctunit.debtit_score
+    assert zia_acctunit.debtit_belief > bob_acctunit.debtit_belief
     zia_eat_reasonunit = zia_cook_ideaunit.get_reasonunit(eat_road())
     assert new_cook_idea.get_reasonunit(eat_road()) == zia_eat_reasonunit
 
@@ -162,13 +162,13 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
     yao_text = "Yao"
     yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     sue_text = "Sue"
-    sue_credit_score = 57
-    sue_debtit_score = 51
-    yao_voice.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_voice.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    sue_credit_belief = 57
+    sue_debtit_belief = 51
+    yao_voice.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_voice.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
     yao_pool = 92
     yao_voice.set_acct_respect(yao_pool)
     yao_hubunit = hubunit_shop(env_dir(), None, yao_text)
@@ -178,7 +178,7 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
     zia_action = budunit_shop(zia_text)
     zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_text, debtit_score=12)
+    zia_action.add_acctunit(yao_text, debtit_belief=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
     clean_ideaunit._teamunit.set_teamlink(yao_text)
@@ -188,7 +188,7 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
 
     sue_action = budunit_shop(sue_text)
     sue_action.set_max_tree_traverse(5)
-    zia_action.add_acctunit(yao_text, debtit_score=12)
+    zia_action.add_acctunit(yao_text, debtit_belief=12)
     vacuum_text = "vacuum"
     vacuum_road = sue_action.make_l1_road(vacuum_text)
     sue_action.set_l1_idea(ideaunit_shop(vacuum_text, pledge=True))
@@ -227,10 +227,10 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
     assert len(new_yao_action.get_agenda_dict()) == 2
     zia_acctunit = new_yao_action.get_acct(zia_text)
     sue_acctunit = new_yao_action.get_acct(sue_text)
-    print(f"{sue_acctunit.debtit_score=}")
-    print(f"{sue_acctunit._irrational_debtit_score=}")
-    assert zia_acctunit._irrational_debtit_score == 0
-    assert sue_acctunit._irrational_debtit_score == 51
+    print(f"{sue_acctunit.debtit_belief=}")
+    print(f"{sue_acctunit._irrational_debtit_belief=}")
+    assert zia_acctunit._irrational_debtit_belief == 0
+    assert sue_acctunit._irrational_debtit_belief == 51
 
 
 def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
@@ -244,12 +244,12 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
     yao_voice = budunit_shop(yao_text)
     zia_text = "Zia"
     sue_text = "Sue"
-    zia_credit_score = 47
-    sue_credit_score = 57
-    zia_debtit_score = 41
-    sue_debtit_score = 51
-    yao_voice.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_voice.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    zia_credit_belief = 47
+    sue_credit_belief = 57
+    zia_debtit_belief = 41
+    sue_debtit_belief = 51
+    yao_voice.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_voice.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
     yao_pool = 92
     yao_voice.set_acct_respect(yao_pool)
     yao_hubunit.save_voice_bud(yao_voice)
@@ -257,7 +257,7 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
     zia_action = budunit_shop(zia_text)
     zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_text, debtit_score=12)
+    zia_action.add_acctunit(yao_text, debtit_belief=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
     clean_ideaunit._teamunit.set_teamlink(yao_text)
@@ -274,10 +274,10 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
     assert len(new_yao_action.get_agenda_dict()) == 2
     zia_acctunit = new_yao_action.get_acct(zia_text)
     sue_acctunit = new_yao_action.get_acct(sue_text)
-    print(f"{sue_acctunit.debtit_score=}")
-    print(f"{sue_acctunit._inallocable_debtit_score=}")
-    assert zia_acctunit._inallocable_debtit_score == 0
-    assert sue_acctunit._inallocable_debtit_score == 51
+    print(f"{sue_acctunit.debtit_belief=}")
+    print(f"{sue_acctunit._inallocable_debtit_belief=}")
+    assert zia_acctunit._inallocable_debtit_belief == 0
+    assert sue_acctunit._inallocable_debtit_belief == 51
 
 
 def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
@@ -287,13 +287,13 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     yao_text = "Yao"
     yao_voice = budunit_shop(yao_text)
     yao_text = "Yao"
-    yao_credit_score = 57
-    yao_debtit_score = 51
-    yao_voice.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    yao_credit_belief = 57
+    yao_debtit_belief = 51
+    yao_voice.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
-    yao_voice.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
+    yao_voice.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     yao_pool = 87
     yao_voice.set_acct_respect(yao_pool)
     # save yao without task to dutys
@@ -305,7 +305,7 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     zia_action = budunit_shop(zia_text)
     zia_action.set_idea(ideaunit_shop(clean_text(), pledge=True), casa_road())
     zia_action.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_text, debtit_score=12)
+    zia_action.add_acctunit(yao_text, debtit_belief=12)
     clean_ideaunit = zia_action.get_idea_obj(clean_road())
     cook_ideaunit = zia_action.get_idea_obj(cook_road())
     clean_ideaunit._teamunit.set_teamlink(yao_text)

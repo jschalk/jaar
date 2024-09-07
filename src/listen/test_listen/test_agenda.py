@@ -43,8 +43,8 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     before_yao_budunit = budunit_shop(yao_text)
     zia_text = "Zia"
     before_yao_budunit.add_acctunit(zia_text)
-    yao_acct_debtit_score = 77
-    before_yao_budunit.set_acct_respect(yao_acct_debtit_score)
+    yao_acct_debtit_belief = 77
+    before_yao_budunit.set_acct_respect(yao_acct_debtit_belief)
     clean_text = "clean"
     zia_clean_ideaunit = ideaunit_shop(clean_text, pledge=True)
     zia_clean_ideaunit._teamunit.set_teamlink(yao_text)
@@ -65,7 +65,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     yao_clean_ideaunit = after_yao_budunit.get_idea_obj(clean_road)
     print(f"{yao_clean_ideaunit._mass=}")
     assert yao_clean_ideaunit._mass != zia_clean_ideaunit._mass
-    assert yao_clean_ideaunit._mass == yao_acct_debtit_score
+    assert yao_clean_ideaunit._mass == yao_acct_debtit_belief
     assert after_yao_budunit == before_yao_budunit
     assert len(after_yao_budunit.get_agenda_dict()) == 1
 
@@ -76,8 +76,8 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     before_yao_budunit = budunit_shop(yao_text)
     zia_text = "Zia"
     before_yao_budunit.add_acctunit(zia_text)
-    yao_debtit_score = 77
-    before_yao_budunit.set_acct_respect(yao_debtit_score)
+    yao_debtit_belief = 77
+    before_yao_budunit.set_acct_respect(yao_debtit_belief)
     zia_budunit = budunit_shop(zia_text)
     zia_budunit.add_acctunit(yao_text)
     clean_text = "clean"
@@ -99,11 +99,11 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     yao_clean_ideaunit = after_yao_budunit.get_idea_obj(clean_road)
     print(f"{yao_clean_ideaunit._mass=}")
     assert yao_clean_ideaunit._mass != zia_clean_ideaunit._mass
-    assert yao_clean_ideaunit._mass == yao_debtit_score
+    assert yao_clean_ideaunit._mass == yao_debtit_belief
     after_casa_ideaunit = after_yao_budunit.get_idea_obj(casa_road)
     print(f"{after_casa_ideaunit._mass=}")
     assert after_casa_ideaunit._mass != 1
-    assert after_casa_ideaunit._mass == yao_debtit_score
+    assert after_casa_ideaunit._mass == yao_debtit_belief
     assert after_yao_budunit == before_yao_budunit
     assert len(after_yao_budunit.get_agenda_dict()) == 1
 
@@ -114,8 +114,8 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBud():
     before_yao_budunit = budunit_shop(yao_text)
     zia_text = "Zia"
     before_yao_budunit.add_acctunit(zia_text)
-    yao_debtit_score = 55
-    before_yao_budunit.set_acct_respect(yao_debtit_score)
+    yao_debtit_belief = 55
+    before_yao_budunit.set_acct_respect(yao_debtit_belief)
 
     zia_text = "Zia"
     zia_budunit = budunit_shop(zia_text)
@@ -170,8 +170,8 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUni
     before_yao_budunit = budunit_shop(yao_text)
     zia_text = "Zia"
     before_yao_budunit.add_acctunit(zia_text)
-    yao_debtit_score = 55
-    before_yao_budunit.set_acct_respect(yao_debtit_score)
+    yao_debtit_belief = 55
+    before_yao_budunit.set_acct_respect(yao_debtit_belief)
     zia_text = "Zia"
     zia_budunit = budunit_shop(zia_text)
     zia_budunit.add_acctunit(yao_text)
@@ -228,13 +228,13 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     yao_text = "Yao"
     yao_duty = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     sue_text = "Sue"
-    sue_credit_score = 57
-    sue_debtit_score = 51
-    yao_duty.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_duty.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    sue_credit_belief = 57
+    sue_debtit_belief = 51
+    yao_duty.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_duty.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
     yao_pool = 92
     yao_duty.set_acct_respect(yao_pool)
 
@@ -272,8 +272,8 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
 
     # WHEN
     yao_job = create_empty_bud(yao_duty, yao_text)
-    yao_job.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_job.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    yao_job.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_job.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
     yao_job.set_acct_respect(yao_pool)
     yao_job = listen_to_speaker_agenda(yao_job, sue_budunit)
     yao_job.settle_bud()
@@ -283,10 +283,10 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     assert len(yao_job.get_agenda_dict()) == 0
     zia_acctunit = yao_job.get_acct(zia_text)
     sue_acctunit = yao_job.get_acct(sue_text)
-    print(f"{sue_acctunit.debtit_score=}")
-    print(f"{sue_acctunit._irrational_debtit_score=}")
-    assert zia_acctunit._irrational_debtit_score == 0
-    assert sue_acctunit._irrational_debtit_score == 51
+    print(f"{sue_acctunit.debtit_belief=}")
+    print(f"{sue_acctunit._irrational_debtit_belief=}")
+    assert zia_acctunit._irrational_debtit_belief == 0
+    assert sue_acctunit._irrational_debtit_belief == 51
 
 
 def test_listen_to_speaker_agenda_ProcessesBarrenBud():
@@ -294,21 +294,21 @@ def test_listen_to_speaker_agenda_ProcessesBarrenBud():
     yao_text = "Yao"
     yao_duty = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     sue_text = "Sue"
-    sue_credit_score = 57
-    sue_debtit_score = 51
-    yao_duty.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_duty.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    sue_credit_belief = 57
+    sue_debtit_belief = 51
+    yao_duty.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_duty.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
     yao_pool = 92
     yao_duty.set_acct_respect(yao_pool)
 
     # WHEN
     sue_job = create_empty_bud(yao_duty, sue_text)
     yao_job = create_empty_bud(yao_duty, yao_text)
-    yao_job.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_job.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    yao_job.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_job.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
     yao_job.set_acct_respect(yao_pool)
     yao_job = listen_to_speaker_agenda(yao_job, speaker=sue_job)
 
@@ -317,9 +317,9 @@ def test_listen_to_speaker_agenda_ProcessesBarrenBud():
     assert len(yao_job.get_agenda_dict()) == 0
     zia_acctunit = yao_job.get_acct(zia_text)
     sue_acctunit = yao_job.get_acct(sue_text)
-    print(f"{sue_acctunit.debtit_score=}")
-    print(f"{sue_acctunit._irrational_debtit_score=}")
-    assert zia_acctunit._irrational_debtit_score == 0
-    assert zia_acctunit._inallocable_debtit_score == 0
-    assert sue_acctunit._irrational_debtit_score == 0
-    assert sue_acctunit._inallocable_debtit_score == 51
+    print(f"{sue_acctunit.debtit_belief=}")
+    print(f"{sue_acctunit._irrational_debtit_belief=}")
+    assert zia_acctunit._irrational_debtit_belief == 0
+    assert zia_acctunit._inallocable_debtit_belief == 0
+    assert sue_acctunit._irrational_debtit_belief == 0
+    assert sue_acctunit._inallocable_debtit_belief == 51

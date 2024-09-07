@@ -262,9 +262,9 @@ def add_bud_acctunit_insert_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value(acct_id_str())
-        credit_score_value = acctunit_atom.get_value("credit_score")
-        debtit_score_value = acctunit_atom.get_value("debtit_score")
-        x_str = f"{acct_id} was added with {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt"
+        credit_belief_value = acctunit_atom.get_value("credit_belief")
+        debtit_belief_value = acctunit_atom.get_value("debtit_belief")
+        x_str = f"{acct_id} was added with {credit_belief_value} {x_monetary_desc} cred and {debtit_belief_value} {x_monetary_desc} debt"
         legible_list.append(x_str)
 
 
@@ -276,14 +276,14 @@ def add_bud_acctunit_update_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value(acct_id_str())
-        credit_score_value = acctunit_atom.get_value("credit_score")
-        debtit_score_value = acctunit_atom.get_value("debtit_score")
-        if credit_score_value is not None and debtit_score_value is not None:
-            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt."
-        elif credit_score_value is not None:
-            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred."
-        elif debtit_score_value is not None:
-            x_str = f"{acct_id} now has {debtit_score_value} {x_monetary_desc} debt."
+        credit_belief_value = acctunit_atom.get_value("credit_belief")
+        debtit_belief_value = acctunit_atom.get_value("debtit_belief")
+        if credit_belief_value is not None and debtit_belief_value is not None:
+            x_str = f"{acct_id} now has {credit_belief_value} {x_monetary_desc} cred and {debtit_belief_value} {x_monetary_desc} debt."
+        elif credit_belief_value is not None:
+            x_str = f"{acct_id} now has {credit_belief_value} {x_monetary_desc} cred."
+        elif debtit_belief_value is not None:
+            x_str = f"{acct_id} now has {debtit_belief_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
 

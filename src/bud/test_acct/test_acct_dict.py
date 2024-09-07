@@ -48,10 +48,10 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
 
-    bob_credit_score = 13
-    bob_debtit_score = 17
-    bob_acctunit.set_credit_score(bob_credit_score)
-    bob_acctunit.set_debtit_score(bob_debtit_score)
+    bob_credit_belief = 13
+    bob_debtit_belief = 17
+    bob_acctunit.set_credit_belief(bob_credit_belief)
+    bob_acctunit.set_debtit_belief(bob_debtit_belief)
 
     print(f"{bob_text}")
 
@@ -68,8 +68,8 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "acct_id": bob_text,
-        "credit_score": bob_credit_score,
-        "debtit_score": bob_debtit_score,
+        "credit_belief": bob_credit_belief,
+        "debtit_belief": bob_debtit_belief,
         "_memberships": {
             bob_text: {"group_id": bob_text, "credit_vote": 1, "debtit_vote": 1},
             run_text: {"group_id": run_text, "credit_vote": 1, "debtit_vote": 1},
@@ -82,14 +82,14 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
 
-    bob_credit_score = 13
-    bob_debtit_score = 17
-    bob_acctunit.set_credit_score(bob_credit_score)
-    bob_acctunit.set_debtit_score(bob_debtit_score)
-    bob_irrational_debtit_score = 87
-    bob_inallocable_debtit_score = 97
-    bob_acctunit.add_irrational_debtit_score(bob_irrational_debtit_score)
-    bob_acctunit.add_inallocable_debtit_score(bob_inallocable_debtit_score)
+    bob_credit_belief = 13
+    bob_debtit_belief = 17
+    bob_acctunit.set_credit_belief(bob_credit_belief)
+    bob_acctunit.set_debtit_belief(bob_debtit_belief)
+    bob_irrational_debtit_belief = 87
+    bob_inallocable_debtit_belief = 97
+    bob_acctunit.add_irrational_debtit_belief(bob_irrational_debtit_belief)
+    bob_acctunit.add_inallocable_debtit_belief(bob_inallocable_debtit_belief)
 
     bob_fund_give = 55
     bob_fund_take = 47
@@ -119,11 +119,11 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "acct_id": bob_text,
-        "credit_score": bob_credit_score,
-        "debtit_score": bob_debtit_score,
+        "credit_belief": bob_credit_belief,
+        "debtit_belief": bob_debtit_belief,
         "_memberships": bob_acctunit.get_memberships_dict(),
-        "_irrational_debtit_score": bob_irrational_debtit_score,
-        "_inallocable_debtit_score": bob_inallocable_debtit_score,
+        "_irrational_debtit_belief": bob_irrational_debtit_belief,
+        "_inallocable_debtit_belief": bob_inallocable_debtit_belief,
         "_fund_give": bob_fund_give,
         "_fund_take": bob_fund_take,
         "_fund_agenda_give": bob_fund_agenda_give,
@@ -137,17 +137,17 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsZerp()
     # ESTABLISH
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
-    assert bob_acctunit._irrational_debtit_score == 0
-    assert bob_acctunit._inallocable_debtit_score == 0
+    assert bob_acctunit._irrational_debtit_belief == 0
+    assert bob_acctunit._inallocable_debtit_belief == 0
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debtit_score = "_irrational_debtit_score"
-    x_inallocable_debtit_score = "_inallocable_debtit_score"
-    assert x_dict.get(x_irrational_debtit_score) is None
-    assert x_dict.get(x_inallocable_debtit_score) is None
+    x_irrational_debtit_belief = "_irrational_debtit_belief"
+    x_inallocable_debtit_belief = "_inallocable_debtit_belief"
+    assert x_dict.get(x_irrational_debtit_belief) is None
+    assert x_dict.get(x_inallocable_debtit_belief) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -155,19 +155,19 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNumber
     # ESTABLISH
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
-    bob_irrational_debtit_score = 87
-    bob_inallocable_debtit_score = 97
-    bob_acctunit.add_irrational_debtit_score(bob_irrational_debtit_score)
-    bob_acctunit.add_inallocable_debtit_score(bob_inallocable_debtit_score)
+    bob_irrational_debtit_belief = 87
+    bob_inallocable_debtit_belief = 97
+    bob_acctunit.add_irrational_debtit_belief(bob_irrational_debtit_belief)
+    bob_acctunit.add_inallocable_debtit_belief(bob_inallocable_debtit_belief)
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debtit_score = "_irrational_debtit_score"
-    x_inallocable_debtit_score = "_inallocable_debtit_score"
-    assert x_dict.get(x_irrational_debtit_score) == bob_irrational_debtit_score
-    assert x_dict.get(x_inallocable_debtit_score) == bob_inallocable_debtit_score
+    x_irrational_debtit_belief = "_irrational_debtit_belief"
+    x_inallocable_debtit_belief = "_inallocable_debtit_belief"
+    assert x_dict.get(x_irrational_debtit_belief) == bob_irrational_debtit_belief
+    assert x_dict.get(x_inallocable_debtit_belief) == bob_inallocable_debtit_belief
     assert len(x_dict.keys()) == 12
 
 
@@ -175,17 +175,17 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNone()
     # ESTABLISH
     bob_text = "Bob"
     bob_acctunit = acctunit_shop(bob_text)
-    bob_acctunit._irrational_debtit_score = None
-    bob_acctunit._inallocable_debtit_score = None
+    bob_acctunit._irrational_debtit_belief = None
+    bob_acctunit._inallocable_debtit_belief = None
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debtit_score = "_irrational_debtit_score"
-    x_inallocable_debtit_score = "_inallocable_debtit_score"
-    assert x_dict.get(x_irrational_debtit_score) is None
-    assert x_dict.get(x_inallocable_debtit_score) is None
+    x_irrational_debtit_belief = "_irrational_debtit_belief"
+    x_inallocable_debtit_belief = "_inallocable_debtit_belief"
+    assert x_dict.get(x_irrational_debtit_belief) is None
+    assert x_dict.get(x_inallocable_debtit_belief) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -249,18 +249,18 @@ def test_acctunits_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
 def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteData():
     # ESTABLISH
     yao_text = "Yao"
-    yao_credit_score = 13
-    yao_debtit_score = 17
-    yao_irrational_debtit_score = 87
-    yao_inallocable_debtit_score = 97
+    yao_credit_belief = 13
+    yao_debtit_belief = 17
+    yao_irrational_debtit_belief = 87
+    yao_inallocable_debtit_belief = 97
     yao_json_dict = {
         yao_text: {
             "acct_id": yao_text,
-            "credit_score": yao_credit_score,
-            "debtit_score": yao_debtit_score,
+            "credit_belief": yao_credit_belief,
+            "debtit_belief": yao_debtit_belief,
             "_memberships": {},
-            "_irrational_debtit_score": yao_irrational_debtit_score,
-            "_inallocable_debtit_score": yao_inallocable_debtit_score,
+            "_irrational_debtit_belief": yao_irrational_debtit_belief,
+            "_inallocable_debtit_belief": yao_inallocable_debtit_belief,
         }
     }
     yao_json_text = get_json_from_dict(dict_x=yao_json_dict)
@@ -274,7 +274,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
     yao_acctunit = yao_obj_dict[yao_text]
 
     assert yao_acctunit.acct_id == yao_text
-    assert yao_acctunit.credit_score == yao_credit_score
-    assert yao_acctunit.debtit_score == yao_debtit_score
-    assert yao_acctunit._irrational_debtit_score == yao_irrational_debtit_score
-    assert yao_acctunit._inallocable_debtit_score == yao_inallocable_debtit_score
+    assert yao_acctunit.credit_belief == yao_credit_belief
+    assert yao_acctunit.debtit_belief == yao_debtit_belief
+    assert yao_acctunit._irrational_debtit_belief == yao_irrational_debtit_belief
+    assert yao_acctunit._inallocable_debtit_belief == yao_inallocable_debtit_belief

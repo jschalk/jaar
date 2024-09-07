@@ -219,13 +219,13 @@ class ChangeUnit:
             insert_acctunit = after_bud.get_acct(insert_acct_id)
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
             x_atomunit.set_required_arg(acct_id_str(), insert_acctunit.acct_id)
-            if insert_acctunit.credit_score is not None:
+            if insert_acctunit.credit_belief is not None:
                 x_atomunit.set_optional_arg(
-                    "credit_score", insert_acctunit.credit_score
+                    "credit_belief", insert_acctunit.credit_belief
                 )
-            if insert_acctunit.debtit_score is not None:
+            if insert_acctunit.debtit_belief is not None:
                 x_atomunit.set_optional_arg(
-                    "debtit_score", insert_acctunit.debtit_score
+                    "debtit_belief", insert_acctunit.debtit_belief
                 )
             self.set_atomunit(x_atomunit)
             all_group_ids = set(insert_acctunit._memberships.keys())
@@ -245,13 +245,13 @@ class ChangeUnit:
             ):
                 x_atomunit = atomunit_shop(bud_acctunit_text(), atom_update())
                 x_atomunit.set_required_arg(acct_id_str(), after_acctunit.acct_id)
-                if before_acctunit.credit_score != after_acctunit.credit_score:
+                if before_acctunit.credit_belief != after_acctunit.credit_belief:
                     x_atomunit.set_optional_arg(
-                        "credit_score", after_acctunit.credit_score
+                        "credit_belief", after_acctunit.credit_belief
                     )
-                if before_acctunit.debtit_score != after_acctunit.debtit_score:
+                if before_acctunit.debtit_belief != after_acctunit.debtit_belief:
                     x_atomunit.set_optional_arg(
-                        "debtit_score", after_acctunit.debtit_score
+                        "debtit_belief", after_acctunit.debtit_belief
                     )
                 self.set_atomunit(x_atomunit)
             self.add_atomunit_acctunit_update_memberships(

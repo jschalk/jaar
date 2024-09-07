@@ -4,10 +4,10 @@
         "acct_id": {
             "column_order": 2
         },
-        "credit_score": {
+        "credit_belief": {
             "column_order": 4
         },
-        "debtit_score": {
+        "debtit_belief": {
             "column_order": 3
         },
         "owner_id": {

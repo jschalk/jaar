@@ -9,8 +9,8 @@ from src.gift.atom_config import (
     atom_delete,
     acct_id_str,
     group_id_str,
-    credit_score_str,
-    debtit_score_str,
+    credit_belief_str,
+    debtit_belief_str,
 )
 from src.gift.atom import AtomUnit, atomunit_shop
 
@@ -30,11 +30,11 @@ def test_AtomUnit_exists():
 def test_atomunit_shop_ReturnsCorrectObj():
     # ESTABLISH
     bob_text = "Bob"
-    bob_credit_score = 55
-    bob_debtit_score = 66
-    bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
-    cw_text = "_credit_score"
-    dw_text = "_debtit_score"
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
+    bob_acctunit = acctunit_shop(bob_text, bob_credit_belief, bob_debtit_belief)
+    cw_text = "_credit_belief"
+    dw_text = "_debtit_belief"
     bob_required_dict = {acct_id_str(): "huh"}
     bob_optional_dict = {cw_text: bob_acctunit.get_dict().get(cw_text)}
     bob_optional_dict[dw_text] = bob_acctunit.get_dict().get(dw_text)
@@ -102,13 +102,13 @@ def test_AtomUnit_is_optional_args_valid_ReturnsCorrectBoolean():
     assert bob_insert_atomunit.is_optional_args_valid()
 
     # WHEN
-    bob_insert_atomunit.set_optional_arg(credit_score_str(), 55)
+    bob_insert_atomunit.set_optional_arg(credit_belief_str(), 55)
     # THEN
     assert len(bob_insert_atomunit.optional_args) == 1
     assert bob_insert_atomunit.is_optional_args_valid()
 
     # WHEN
-    bob_insert_atomunit.set_optional_arg(debtit_score_str(), 66)
+    bob_insert_atomunit.set_optional_arg(debtit_belief_str(), 66)
     # THEN
     assert len(bob_insert_atomunit.optional_args) == 2
     assert bob_insert_atomunit.is_optional_args_valid()
@@ -122,9 +122,9 @@ def test_AtomUnit_is_optional_args_valid_ReturnsCorrectBoolean():
 
 def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     bob_text = "Bob"
-    bob_credit_score = 55
-    bob_debtit_score = 66
-    bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
+    bob_acctunit = acctunit_shop(bob_text, bob_credit_belief, bob_debtit_belief)
     acctunit_text = bud_acctunit_text()
 
     # WHEN
@@ -153,8 +153,8 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
 
     # WHEN
     bob_insert_atomunit.optional_args = {}
-    cw_text = credit_score_str()
-    dw_text = debtit_score_str()
+    cw_text = credit_belief_str()
+    dw_text = debtit_belief_str()
     bob_insert_atomunit.set_optional_arg(cw_text, bob_acctunit.get_dict().get(cw_text))
     bob_insert_atomunit.set_optional_arg(dw_text, bob_acctunit.get_dict().get(dw_text))
 
@@ -181,13 +181,13 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
 def test_AtomUnit_get_value_ReturnsObj():
     # ESTABLISH
     bob_text = "Bob"
-    bob_credit_score = 55
-    bob_debtit_score = 66
-    bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
+    bob_acctunit = acctunit_shop(bob_text, bob_credit_belief, bob_debtit_belief)
     acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
-    cw_text = credit_score_str()
-    dw_text = debtit_score_str()
+    cw_text = credit_belief_str()
+    dw_text = debtit_belief_str()
     print(f"{bob_acctunit.get_dict()=}")
     # bob_acctunit_dict = {acct_id_str(): bob_acctunit.get_dict().get(acct_id_str())}
     # print(f"{bob_acctunit_dict=}")
@@ -197,8 +197,8 @@ def test_AtomUnit_get_value_ReturnsObj():
     assert bob_insert_atomunit.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_atomunit.get_value(cw_text) == bob_credit_score
-    assert bob_insert_atomunit.get_value(dw_text) == bob_debtit_score
+    assert bob_insert_atomunit.get_value(cw_text) == bob_credit_belief
+    assert bob_insert_atomunit.get_value(dw_text) == bob_debtit_belief
 
 
 def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_DELETE():
@@ -240,41 +240,41 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_budunit():
 def test_AtomUnit_set_atom_order_SetCorrectAttr():
     # ESTABLISH
     bob_text = "Bob"
-    bob_credit_score = 55
-    bob_debtit_score = 66
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
     acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
-    cw_text = credit_score_str()
-    dw_text = debtit_score_str()
+    cw_text = credit_belief_str()
+    dw_text = debtit_belief_str()
     bob_insert_atomunit.set_required_arg(acct_id_str(), bob_text)
-    bob_insert_atomunit.set_optional_arg(cw_text, bob_credit_score)
-    bob_insert_atomunit.set_optional_arg(dw_text, bob_debtit_score)
+    bob_insert_atomunit.set_optional_arg(cw_text, bob_credit_belief)
+    bob_insert_atomunit.set_optional_arg(dw_text, bob_debtit_belief)
     assert bob_insert_atomunit.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_atomunit.get_value(cw_text) == bob_credit_score
-    assert bob_insert_atomunit.get_value(dw_text) == bob_debtit_score
+    assert bob_insert_atomunit.get_value(cw_text) == bob_credit_belief
+    assert bob_insert_atomunit.get_value(dw_text) == bob_debtit_belief
 
 
 def test_AtomUnit_set_arg_SetsAny_required_arg_optional_arg():
     # ESTABLISH
     bob_text = "Bob"
-    bob_credit_score = 55
-    bob_debtit_score = 66
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
     acctunit_text = bud_acctunit_text()
     bob_insert_atomunit = atomunit_shop(acctunit_text, atom_insert())
-    cw_text = credit_score_str()
-    dw_text = debtit_score_str()
+    cw_text = credit_belief_str()
+    dw_text = debtit_belief_str()
 
     # WHEN
     bob_insert_atomunit.set_arg(acct_id_str(), bob_text)
-    bob_insert_atomunit.set_arg(cw_text, bob_credit_score)
-    bob_insert_atomunit.set_arg(dw_text, bob_debtit_score)
+    bob_insert_atomunit.set_arg(cw_text, bob_credit_belief)
+    bob_insert_atomunit.set_arg(dw_text, bob_debtit_belief)
 
     # THEN
     assert bob_insert_atomunit.get_value(acct_id_str()) == bob_text
-    assert bob_insert_atomunit.get_value(cw_text) == bob_credit_score
-    assert bob_insert_atomunit.get_value(dw_text) == bob_debtit_score
+    assert bob_insert_atomunit.get_value(cw_text) == bob_credit_belief
+    assert bob_insert_atomunit.get_value(dw_text) == bob_debtit_belief
     assert bob_insert_atomunit.get_value(acct_id_str()) == bob_text
     assert bob_insert_atomunit.is_valid()
 

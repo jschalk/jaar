@@ -96,9 +96,9 @@ def get_example_yao_bud() -> BudUnit:
     bob_text = "Bob"
     yao_speaker = budunit_shop(yao_text, get_default_real_id_roadnode())
     yao_speaker.set_idea(ideaunit_shop(run_text()), casa_road())
-    yao_speaker.add_acctunit(yao_text, debtit_score=10)
-    yao_speaker.add_acctunit(zia_text, debtit_score=30)
-    yao_speaker.add_acctunit(bob_text, debtit_score=40)
+    yao_speaker.add_acctunit(yao_text, debtit_belief=10)
+    yao_speaker.add_acctunit(zia_text, debtit_belief=30)
+    yao_speaker.add_acctunit(bob_text, debtit_belief=40)
     yao_speaker.set_acct_respect(80)
     return yao_speaker
 
@@ -264,7 +264,7 @@ def get_example_yao_voice_with_3_healers():
 
 # def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
 #     # ESTABLISH
-#     # yao0_voice with 3 debotors of different credit_scores
+#     # yao0_voice with 3 debotors of different credit_beliefs
 #     # yao_job1 with 1 task, fact that doesn't make that task active
 #     # yao_job2 with 2 tasks, one is equal fact that makes task active
 #     # yao_job3 with 1 new task, fact stays with it
@@ -313,7 +313,7 @@ def get_example_yao_voice_with_3_healers():
 #     yao_action = yao_iowa_hubunit.get_action_bud()
 #     yao_action.settle_bud()
 #     assert yao_action._accts.keys() == yao_voice0._accts.keys()
-#     assert yao_action.get_acct(yao_text)._irrational_debtit_score == 0
+#     assert yao_action.get_acct(yao_text)._irrational_debtit_belief == 0
 #     yao_action_accts = yao_action.get_dict().get("_accts")
 #     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
 #     yao_action_bob = yao_action_accts.get("Bob")
@@ -338,7 +338,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    # yao0_voice with 3 debotors of different credit_scores
+    # yao0_voice with 3 debotors of different credit_beliefs
     # yao_job1 with 1 task, fact that doesn't make that task active
     # yao_job2 with 2 tasks, one is equal fact that makes task active
     # yao_job3 with 1 new task, fact stays with it
@@ -390,7 +390,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_action = yao_iowa_hubunit.get_action_bud()
     yao_action.settle_bud()
     assert yao_action._accts.keys() == yao_voice0._accts.keys()
-    assert yao_action.get_acct(yao_text)._irrational_debtit_score == 0
+    assert yao_action.get_acct(yao_text)._irrational_debtit_belief == 0
     yao_action_accts = yao_action.get_dict().get("_accts")
     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
     yao_action_bob = yao_action_accts.get("Bob")

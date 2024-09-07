@@ -126,7 +126,7 @@ PUT conflicts in
 
 x_dict = {
     "bud_acct_membership":          {"required_args": {"acct_id","group_id"},       "optional_args": {"credit_vote","debtit_vote"},
-    "bud_acctunit":                 {"required_args": {"acct_id",},                 "optional_args": {"credit_score","debtit_score"},
+    "bud_acctunit":                 {"required_args": {"acct_id",},                 "optional_args": {"credit_belief","debtit_belief"},
 each stone will either have bud_acctunit as a category or not. that will decide if the atom is created. 
     "bud_idea_awardlink":           {"required_args": {"road","group_id",},         "optional_args": {"give_force","take_force"},
     "bud_idea_teamlink":            {"required_args": {"road","group_id",},         "optional_args",

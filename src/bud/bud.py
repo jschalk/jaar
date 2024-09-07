@@ -319,10 +319,12 @@ class BudUnit:
         self._accts.pop(acct_id)
 
     def add_acctunit(
-        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
+        self, acct_id: AcctID, credit_belief: int = None, debtit_belief: int = None
     ):
         x_road_delimiter = self._road_delimiter
-        acctunit = acctunit_shop(acct_id, credit_score, debtit_score, x_road_delimiter)
+        acctunit = acctunit_shop(
+            acct_id, credit_belief, debtit_belief, x_road_delimiter
+        )
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
@@ -338,15 +340,15 @@ class BudUnit:
         return self.get_acct(acct_id) is not None
 
     def edit_acctunit(
-        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
+        self, acct_id: AcctID, credit_belief: int = None, debtit_belief: int = None
     ):
         if self._accts.get(acct_id) is None:
             raise AcctMissingException(f"AcctUnit '{acct_id}' does not exist.")
         x_acctunit = self.get_acct(acct_id)
-        if credit_score is not None:
-            x_acctunit.set_credit_score(credit_score)
-        if debtit_score is not None:
-            x_acctunit.set_debtit_score(debtit_score)
+        if credit_belief is not None:
+            x_acctunit.set_credit_belief(credit_belief)
+        if debtit_belief is not None:
+            x_acctunit.set_debtit_belief(debtit_belief)
         self.set_acctunit(x_acctunit)
 
     def clear_acctunits_memberships(self):
@@ -383,8 +385,8 @@ class BudUnit:
         for x_acctunit in self._accts.values():
             x_membership = membership_shop(
                 group_id=x_group_id,
-                credit_vote=x_acctunit.credit_score,
-                debtit_vote=x_acctunit.debtit_score,
+                credit_vote=x_acctunit.credit_belief,
+                debtit_vote=x_acctunit.debtit_belief,
                 _acct_id=x_acctunit.acct_id,
             )
             x_groupbox.set_membership(x_membership)
@@ -862,18 +864,18 @@ class BudUnit:
         credit_ledger = {}
         debtit_ledger = {}
         for x_acctunit in self._accts.values():
-            credit_ledger[x_acctunit.acct_id] = x_acctunit.credit_score
-            debtit_ledger[x_acctunit.acct_id] = x_acctunit.debtit_score
+            credit_ledger[x_acctunit.acct_id] = x_acctunit.credit_belief
+            debtit_ledger[x_acctunit.acct_id] = x_acctunit.debtit_belief
         return credit_ledger, debtit_ledger
 
     def _allot_offtrack_fund(self):
         self._add_to_acctunits_fund_give_take(self._offtrack_fund)
 
-    def get_acctunits_credit_score_sum(self) -> float:
-        return sum(acctunit.get_credit_score() for acctunit in self._accts.values())
+    def get_acctunits_credit_belief_sum(self) -> float:
+        return sum(acctunit.get_credit_belief() for acctunit in self._accts.values())
 
-    def get_acctunits_debtit_score_sum(self) -> float:
-        return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
+    def get_acctunits_debtit_belief_sum(self) -> float:
+        return sum(acctunit.get_debtit_belief() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -938,8 +940,8 @@ class BudUnit:
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
-        x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
-        x_acctunit_debtit_score_sum = self.get_acctunits_debtit_score_sum()
+        x_acctunit_credit_belief_sum = self.get_acctunits_credit_belief_sum()
+        x_acctunit_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
         for x_acctunit in self._accts.values():
@@ -949,8 +951,8 @@ class BudUnit:
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_acctunit_total_credit_score=x_acctunit_credit_score_sum,
-                bud_acctunit_total_debtit_score=x_acctunit_debtit_score_sum,
+                bud_acctunit_total_credit_belief=x_acctunit_credit_belief_sum,
+                bud_acctunit_total_debtit_belief=x_acctunit_debtit_belief_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):

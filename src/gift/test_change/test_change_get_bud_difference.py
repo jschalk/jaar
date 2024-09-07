@@ -91,9 +91,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     before_sue_bud = budunit_shop(sue_text)
     after_sue_bud = copy_deepcopy(before_sue_bud)
     xio_text = "Xio"
-    xio_credit_score = 33
-    xio_debtit_score = 44
-    xio_acctunit = acctunit_shop(xio_text, xio_credit_score, xio_debtit_score)
+    xio_credit_belief = 33
+    xio_debtit_belief = 44
+    xio_acctunit = acctunit_shop(xio_text, xio_credit_belief, xio_debtit_belief)
     after_sue_bud.set_acctunit(xio_acctunit, auto_set_membership=False)
 
     # WHEN
@@ -108,8 +108,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_text())
     xio_atomunit = sue_acctunit_dict.get(xio_text)
     assert xio_atomunit.get_value(acct_id_str()) == xio_text
-    assert xio_atomunit.get_value("credit_score") == xio_credit_score
-    assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
+    assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
+    assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -149,9 +149,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
     after_sue_bud = copy_deepcopy(before_sue_bud)
     xio_text = "Xio"
     before_sue_bud.add_acctunit(xio_text)
-    xio_credit_score = 33
-    xio_debtit_score = 44
-    after_sue_bud.add_acctunit(xio_text, xio_credit_score, xio_debtit_score)
+    xio_credit_belief = 33
+    xio_debtit_belief = 44
+    after_sue_bud.add_acctunit(xio_text, xio_credit_belief, xio_debtit_belief)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -161,8 +161,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
     x_keylist = [atom_update(), bud_acctunit_text(), xio_text]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value(acct_id_str()) == xio_text
-    assert xio_atomunit.get_value("credit_score") == xio_credit_score
-    assert xio_atomunit.get_value("debtit_score") == xio_debtit_score
+    assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
+    assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 1

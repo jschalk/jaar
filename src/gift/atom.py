@@ -57,8 +57,8 @@ from src.gift.atom_config import (
     mass_str,
     credit_vote_str,
     debtit_vote_str,
-    credit_score_str,
-    debtit_score_str,
+    credit_belief_str,
+    debtit_belief_str,
     fopen_str,
     fnigh_str,
     base_idea_active_requisite_str,
@@ -455,8 +455,8 @@ def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
         acct_id=x_atom.get_value(acct_id_str()),
-        credit_score=x_atom.get_value(credit_score_str()),
-        debtit_score=x_atom.get_value(debtit_score_str()),
+        credit_belief=x_atom.get_value(credit_belief_str()),
+        debtit_belief=x_atom.get_value(debtit_belief_str()),
     )
 
 
@@ -464,8 +464,8 @@ def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
             acct_id=x_atom.get_value(acct_id_str()),
-            credit_score=x_atom.get_value(credit_score_str()),
-            debtit_score=x_atom.get_value(debtit_score_str()),
+            credit_belief=x_atom.get_value(credit_belief_str()),
+            debtit_belief=x_atom.get_value(debtit_belief_str()),
         )
     )
 
@@ -620,8 +620,8 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.divisor != y_obj.divisor
         )
     elif category == bud_acctunit_text():
-        return (x_obj.credit_score != y_obj.credit_score) or (
-            x_obj.debtit_score != y_obj.debtit_score
+        return (x_obj.credit_belief != y_obj.credit_belief) or (
+            x_obj.debtit_belief != y_obj.debtit_belief
         )
 
 
@@ -650,10 +650,10 @@ class AtomRow:
     begin: float = None
     bit: float = None
     close: float = None
-    credit_score: int = None
+    credit_belief: int = None
     credit_vote: int = None
     credor_respect: int = None
-    debtit_score: int = None
+    debtit_belief: int = None
     debtit_vote: int = None
     debtor_respect: int = None
     denom: int = None

@@ -13,9 +13,9 @@ def test_get_debtors_roll_ReturnsObj():
     yao_text = "Yao"
     yao_duty = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
-    yao_duty.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
+    yao_duty.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     yao_duty.settle_bud()
 
     # WHEN
@@ -26,18 +26,18 @@ def test_get_debtors_roll_ReturnsObj():
     assert yao_roll == [zia_acctunit]
 
 
-def test_get_debtors_roll_ReturnsObjIgnoresZero_debtit_score():
+def test_get_debtors_roll_ReturnsObjIgnoresZero_debtit_belief():
     # ESTABLISH
     yao_text = "Yao"
     yao_duty = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     wei_text = "Wei"
-    wei_credit_score = 67
-    wei_debtit_score = 0
-    yao_duty.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_duty.add_acctunit(wei_text, wei_credit_score, wei_debtit_score)
+    wei_credit_belief = 67
+    wei_debtit_belief = 0
+    yao_duty.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_duty.add_acctunit(wei_text, wei_credit_belief, wei_debtit_belief)
     yao_duty.settle_bud()
 
     # WHEN
@@ -53,13 +53,13 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     sue_text = "Sue"
-    sue_credit_score = 57
-    sue_debtit_score = 51
-    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
-    yao_bud.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    sue_credit_belief = 57
+    sue_debtit_belief = 51
+    yao_bud.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_bud.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
     yao_pool = 92
     yao_bud.set_acct_respect(yao_pool)
 
@@ -74,8 +74,8 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
 
     # ESTABLISH
     bob_text = "Bob"
-    bob_debtit_score = 75
-    yao_bud.add_acctunit(bob_text, 0, bob_debtit_score)
+    bob_debtit_belief = 75
+    yao_bud.add_acctunit(bob_text, 0, bob_debtit_belief)
     bob_acct = yao_bud.get_acct(bob_text)
 
     # WHEN
@@ -86,22 +86,22 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     assert ordered_accts2 == [bob_acct, sue_acct, zia_acct]
 
 
-def test_get_ordered_debtors_roll_DoesNotReturnZero_debtit_score():
+def test_get_ordered_debtors_roll_DoesNotReturnZero_debtit_belief():
     # ESTABLISH
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_debtit_score = 41
+    zia_debtit_belief = 41
     sue_text = "Sue"
-    sue_debtit_score = 51
+    sue_debtit_belief = 51
     yao_pool = 92
     yao_bud.set_acct_respect(yao_pool)
     bob_text = "Bob"
-    bob_debtit_score = 75
+    bob_debtit_belief = 75
     xio_text = "Xio"
-    yao_bud.add_acctunit(zia_text, 0, zia_debtit_score)
-    yao_bud.add_acctunit(sue_text, 0, sue_debtit_score)
-    yao_bud.add_acctunit(bob_text, 0, bob_debtit_score)
+    yao_bud.add_acctunit(zia_text, 0, zia_debtit_belief)
+    yao_bud.add_acctunit(sue_text, 0, sue_debtit_belief)
+    yao_bud.add_acctunit(bob_text, 0, bob_debtit_belief)
     yao_bud.add_acctunit(yao_text, 0, 0)
     yao_bud.add_acctunit(xio_text, 0, 0)
 

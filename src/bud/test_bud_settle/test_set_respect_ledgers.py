@@ -172,8 +172,8 @@ def test_BudUnit_set_respect_ledgers_ResetAcctUnitsAttrs():
     zia_acctunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=zia_1,
         fund_agenda_ratio_take_sum=zia_2,
-        bud_acctunit_total_credit_score=zia_3,
-        bud_acctunit_total_debtit_score=zia_4,
+        bud_acctunit_total_credit_belief=zia_3,
+        bud_acctunit_total_debtit_belief=zia_4,
     )
     yao_1 = 0.2
     yao_2 = 0.5
@@ -182,8 +182,8 @@ def test_BudUnit_set_respect_ledgers_ResetAcctUnitsAttrs():
     yao_acctunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=yao_1,
         fund_agenda_ratio_take_sum=yao_2,
-        bud_acctunit_total_credit_score=yao_3,
-        bud_acctunit_total_debtit_score=yao_4,
+        bud_acctunit_total_credit_belief=yao_3,
+        bud_acctunit_total_debtit_belief=yao_4,
     )
     assert zia_acctunit._fund_agenda_ratio_give == 0.125
     assert zia_acctunit._fund_agenda_ratio_take == 0.44

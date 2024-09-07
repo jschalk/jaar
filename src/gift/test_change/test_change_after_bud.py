@@ -152,10 +152,10 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     category = bud_acctunit_text()
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_required_arg(acct_id_str(), zia_text)
-    x_credit_score = 55
-    x_debtit_score = 66
-    x_atomunit.set_optional_arg("credit_score", x_credit_score)
-    x_atomunit.set_optional_arg("debtit_score", x_debtit_score)
+    x_credit_belief = 55
+    x_debtit_belief = 66
+    x_atomunit.set_optional_arg("credit_belief", x_credit_belief)
+    x_atomunit.set_optional_arg("debtit_belief", x_debtit_belief)
     sue_changeunit.set_atomunit(x_atomunit)
     print(f"{sue_changeunit.atomunits.keys()=}")
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
@@ -165,8 +165,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     zia_acctunit = after_sue_budunit.get_acct(zia_text)
     assert yao_acctunit is not None
     assert zia_acctunit is not None
-    assert zia_acctunit.credit_score == x_credit_score
-    assert zia_acctunit.debtit_score == x_debtit_score
+    assert zia_acctunit.credit_belief == x_credit_belief
+    assert zia_acctunit.debtit_belief == x_debtit_belief
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
@@ -177,21 +177,21 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     before_sue_budunit = budunit_shop(sue_text)
     yao_text = "Yao"
     before_sue_budunit.add_acctunit(yao_text)
-    assert before_sue_budunit.get_acct(yao_text).credit_score == 1
+    assert before_sue_budunit.get_acct(yao_text).credit_belief == 1
 
     # WHEN
     category = bud_acctunit_text()
     x_atomunit = atomunit_shop(category, atom_update())
     x_atomunit.set_required_arg(acct_id_str(), yao_text)
-    yao_credit_score = 55
-    x_atomunit.set_optional_arg("credit_score", yao_credit_score)
+    yao_credit_belief = 55
+    x_atomunit.set_optional_arg("credit_belief", yao_credit_belief)
     sue_changeunit.set_atomunit(x_atomunit)
     print(f"{sue_changeunit.atomunits.keys()=}")
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
     yao_acct = after_sue_budunit.get_acct(yao_text)
-    assert yao_acct.credit_score == yao_credit_score
+    assert yao_acct.credit_belief == yao_credit_belief
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():

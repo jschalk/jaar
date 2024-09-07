@@ -26,8 +26,8 @@ def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         acct_id_str(),
-        "credit_score",
-        "debtit_score",
+        "credit_belief",
+        "debtit_belief",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -43,8 +43,8 @@ def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
             values=[
                 df.owner_id,
                 df.acct_id,
-                df.credit_score,
-                df.debtit_score,
+                df.credit_belief,
+                df.debtit_belief,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,
@@ -82,8 +82,8 @@ def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         acct_id_str(),
-        "credit_score",
-        "debtit_score",
+        "credit_belief",
+        "debtit_belief",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -99,8 +99,8 @@ def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
             values=[
                 df.owner_id,
                 df.acct_id,
-                df.credit_score,
-                df.debtit_score,
+                df.credit_belief,
+                df.debtit_belief,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,

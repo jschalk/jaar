@@ -26,8 +26,8 @@ class AcctUnitTable(Base):
 
     uid = Column(Integer, primary_key=True)
     acct_id = Column(String)
-    credit_score = Column(Integer)
-    debtit_score = Column(Integer)
+    credit_belief = Column(Integer)
+    debtit_belief = Column(Integer)
 
 
 # class GroupTable(Base):

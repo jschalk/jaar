@@ -11,8 +11,8 @@ from src.gift.atom_config import (
     mass_str,
     pledge_str,
     acct_pool_str,
-    debtit_score_str,
-    credit_score_str,
+    debtit_belief_str,
+    credit_belief_str,
     debtit_vote_str,
     credit_vote_str,
     begin_str,
@@ -51,8 +51,8 @@ def test_config_str_functions_ReturnObjs():
     # ESTABLISH / WHEN / THEN
     assert acct_id_str() == "acct_id"
     assert acct_pool_str() == "acct_pool"
-    assert debtit_score_str() == "debtit_score"
-    assert credit_score_str() == "credit_score"
+    assert debtit_belief_str() == "debtit_belief"
+    assert credit_belief_str() == "credit_belief"
     assert debtit_vote_str() == "debtit_vote"
     assert credit_vote_str() == "credit_vote"
     x00021_stone = "stone_format_00021_bud_acctunit_v0_0_0"
@@ -105,8 +105,8 @@ def test_get_headers_list_ReturnsObj():
         real_id_str(),
         owner_id_str(),
         acct_id_str(),
-        "debtit_score",
-        "credit_score",
+        "debtit_belief",
+        "credit_belief",
     ]
 
 
@@ -120,7 +120,7 @@ def test_get_sorted_headers_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers(stone_format_00021_bud_acctunit_v0_0_0())
     # THEN
-    assert headers == "acct_id,credit_score,debtit_score,owner_id,real_id"
+    assert headers == "acct_id,credit_belief,debtit_belief,owner_id,real_id"
 
     # ESTABLISH / WHEN
     headers = get_sorted_headers(stone_format_00019_ideaunit_v0_0_0())
@@ -199,15 +199,19 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00021_bud_acctunit_v0_0_0():
     real_id_stonecolumn = format_00001_stoneref.get_stonecolumn(real_id_str())
     owner_id_stonecolumn = format_00001_stoneref.get_stonecolumn(owner_id_str())
     acct_id_stonecolumn = format_00001_stoneref.get_stonecolumn(acct_id_str())
-    credit_score_stonecolumn = format_00001_stoneref.get_stonecolumn(credit_score_str())
-    debtit_score_stonecolumn = format_00001_stoneref.get_stonecolumn(debtit_score_str())
+    credit_belief_stonecolumn = format_00001_stoneref.get_stonecolumn(
+        credit_belief_str()
+    )
+    debtit_belief_stonecolumn = format_00001_stoneref.get_stonecolumn(
+        debtit_belief_str()
+    )
     assert len(format_00001_stoneref._stonecolumns) == 5
 
     assert real_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
     assert acct_id_stonecolumn.column_order == 2
-    assert credit_score_stonecolumn.column_order == 4
-    assert debtit_score_stonecolumn.column_order == 3
+    assert credit_belief_stonecolumn.column_order == 4
+    assert debtit_belief_stonecolumn.column_order == 3
 
 
 def test_get_stoneref_HasCorrectAttrs_stone_format_00020_bud_acct_membership_v0_0_0():

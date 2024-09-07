@@ -10,44 +10,44 @@ def test_get_credorledger_ReturnsCorrectObj():
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
-    yao_credit_score = 8
-    bob_credit_score = 48
-    sue_credit_score = 66
+    yao_credit_belief = 8
+    bob_credit_belief = 48
+    sue_credit_belief = 66
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_acctunit(bob_text, yao_credit_score)
-    yao_bud.add_acctunit(sue_text, bob_credit_score)
-    yao_bud.add_acctunit(yao_text, sue_credit_score)
+    yao_bud.add_acctunit(bob_text, yao_credit_belief)
+    yao_bud.add_acctunit(sue_text, bob_credit_belief)
+    yao_bud.add_acctunit(yao_text, sue_credit_belief)
 
     # WHEN
     yao_credorledger = get_credorledger(yao_bud)
 
     # THEN
     assert len(yao_credorledger) == 3
-    assert yao_credorledger.get(bob_text) == yao_credit_score
-    assert yao_credorledger.get(sue_text) == bob_credit_score
-    assert yao_credorledger.get(yao_text) == sue_credit_score
+    assert yao_credorledger.get(bob_text) == yao_credit_belief
+    assert yao_credorledger.get(sue_text) == bob_credit_belief
+    assert yao_credorledger.get(yao_text) == sue_credit_belief
 
 
-def test_get_credorledger_ReturnsCorrectObjWithNoEmpty_credit_score():
+def test_get_credorledger_ReturnsCorrectObjWithNoEmpty_credit_belief():
     # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
-    yao_credit_score = 8
-    bob_credit_score = 0
-    sue_credit_score = 66
+    yao_credit_belief = 8
+    bob_credit_belief = 0
+    sue_credit_belief = 66
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_acctunit(bob_text, bob_credit_score)
-    yao_bud.add_acctunit(sue_text, sue_credit_score)
-    yao_bud.add_acctunit(yao_text, yao_credit_score)
+    yao_bud.add_acctunit(bob_text, bob_credit_belief)
+    yao_bud.add_acctunit(sue_text, sue_credit_belief)
+    yao_bud.add_acctunit(yao_text, yao_credit_belief)
 
     # WHEN
     yao_credorledger = get_credorledger(yao_bud)
 
     # THEN
     assert yao_credorledger.get(bob_text) is None
-    assert yao_credorledger.get(sue_text) == sue_credit_score
-    assert yao_credorledger.get(yao_text) == yao_credit_score
+    assert yao_credorledger.get(sue_text) == sue_credit_belief
+    assert yao_credorledger.get(yao_text) == yao_credit_belief
     assert len(yao_credorledger) == 2
 
 
@@ -56,44 +56,44 @@ def test_get_debtorledger_ReturnsCorrectObj():
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
-    yao_debtit_score = 8
-    bob_debtit_score = 48
-    sue_debtit_score = 66
+    yao_debtit_belief = 8
+    bob_debtit_belief = 48
+    sue_debtit_belief = 66
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_acctunit(bob_text, 2, bob_debtit_score)
-    yao_bud.add_acctunit(sue_text, 2, sue_debtit_score)
-    yao_bud.add_acctunit(yao_text, 2, yao_debtit_score)
+    yao_bud.add_acctunit(bob_text, 2, bob_debtit_belief)
+    yao_bud.add_acctunit(sue_text, 2, sue_debtit_belief)
+    yao_bud.add_acctunit(yao_text, 2, yao_debtit_belief)
 
     # WHEN
     yao_debtorledger = get_debtorledger(yao_bud)
 
     # THEN
     assert len(yao_debtorledger) == 3
-    assert yao_debtorledger.get(bob_text) == bob_debtit_score
-    assert yao_debtorledger.get(sue_text) == sue_debtit_score
-    assert yao_debtorledger.get(yao_text) == yao_debtit_score
+    assert yao_debtorledger.get(bob_text) == bob_debtit_belief
+    assert yao_debtorledger.get(sue_text) == sue_debtit_belief
+    assert yao_debtorledger.get(yao_text) == yao_debtit_belief
 
 
-def test_get_debtorledger_ReturnsCorrectObjWithNoEmpty_debtit_score():
+def test_get_debtorledger_ReturnsCorrectObjWithNoEmpty_debtit_belief():
     # ESTABLISH
     yao_text = "Yao"
     bob_text = "Bob"
     sue_text = "Sue"
-    yao_debtit_score = 8
-    bob_debtit_score = 48
-    sue_debtit_score = 0
+    yao_debtit_belief = 8
+    bob_debtit_belief = 48
+    sue_debtit_belief = 0
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_acctunit(bob_text, 2, bob_debtit_score)
-    yao_bud.add_acctunit(sue_text, 2, sue_debtit_score)
-    yao_bud.add_acctunit(yao_text, 2, yao_debtit_score)
+    yao_bud.add_acctunit(bob_text, 2, bob_debtit_belief)
+    yao_bud.add_acctunit(sue_text, 2, sue_debtit_belief)
+    yao_bud.add_acctunit(yao_text, 2, yao_debtit_belief)
 
     # WHEN
     yao_debtorledger = get_debtorledger(yao_bud)
 
     # THEN
-    assert yao_debtorledger.get(bob_text) == bob_debtit_score
+    assert yao_debtorledger.get(bob_text) == bob_debtit_belief
     assert yao_debtorledger.get(sue_text) is None
-    assert yao_debtorledger.get(yao_text) == yao_debtit_score
+    assert yao_debtorledger.get(yao_text) == yao_debtit_belief
     assert len(yao_debtorledger) == 2
 
 
@@ -156,13 +156,13 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_text = "Sue"
     yao_text = "Yao"
-    bob_debtit_score = 38
-    sue_debtit_score = 56
-    yao_debtit_score = 6
+    bob_debtit_belief = 38
+    sue_debtit_belief = 56
+    yao_debtit_belief = 6
     bob_bud = budunit_shop(bob_text)
-    bob_bud.add_acctunit(bob_text, 2, bob_debtit_score)
-    bob_bud.add_acctunit(sue_text, 2, sue_debtit_score)
-    bob_bud.add_acctunit(yao_text, 2, yao_debtit_score)
+    bob_bud.add_acctunit(bob_text, 2, bob_debtit_belief)
+    bob_bud.add_acctunit(sue_text, 2, sue_debtit_belief)
+    bob_bud.add_acctunit(yao_text, 2, yao_debtit_belief)
     bob_debtorledger = get_debtorledger(bob_bud)
     assert bob_riverrun.tax_dues_unpaid() is False
 
@@ -189,13 +189,13 @@ def test_RiverRun_acct_has_tax_due_ReturnsCorrectBool():
     yao_text = "Yao"
     sue_text = "Sue"
     zia_text = "Zia"
-    yao_debtit_score = 6
-    bob_debtit_score = 38
-    sue_debtit_score = 56
+    yao_debtit_belief = 6
+    bob_debtit_belief = 38
+    sue_debtit_belief = 56
     bob_bud = budunit_shop(bob_text)
-    bob_bud.add_acctunit(bob_text, 2, bob_debtit_score)
-    bob_bud.add_acctunit(sue_text, 2, sue_debtit_score)
-    bob_bud.add_acctunit(yao_text, 2, yao_debtit_score)
+    bob_bud.add_acctunit(bob_text, 2, bob_debtit_belief)
+    bob_bud.add_acctunit(sue_text, 2, sue_debtit_belief)
+    bob_bud.add_acctunit(yao_text, 2, yao_debtit_belief)
     bob_debtorledger = get_debtorledger(bob_bud)
     assert bob_riverrun.acct_has_tax_due(bob_text) is False
     assert bob_riverrun.acct_has_tax_due(sue_text) is False
@@ -244,13 +244,13 @@ def test_RiverRun_get_acct_tax_due_ReturnsCorrectObj():
     sue_text = "Sue"
     yao_text = "Yao"
     zia_text = "Zia"
-    bob_debtit_score = 38
-    sue_debtit_score = 56
-    yao_debtit_score = 6
+    bob_debtit_belief = 38
+    sue_debtit_belief = 56
+    yao_debtit_belief = 6
     bob_bud = budunit_shop(bob_text)
-    bob_bud.add_acctunit(bob_text, 2, bob_debtit_score)
-    bob_bud.add_acctunit(sue_text, 2, sue_debtit_score)
-    bob_bud.add_acctunit(yao_text, 2, yao_debtit_score)
+    bob_bud.add_acctunit(bob_text, 2, bob_debtit_belief)
+    bob_bud.add_acctunit(sue_text, 2, sue_debtit_belief)
+    bob_bud.add_acctunit(yao_text, 2, yao_debtit_belief)
     bob_debtorledger = get_debtorledger(bob_bud)
     assert bob_riverrun.acct_has_tax_due(bob_text) is False
     assert bob_riverrun.get_acct_tax_due(bob_text) == 0
@@ -278,13 +278,13 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_text = "Sue"
     yao_text = "Yao"
-    bob_debtit_score = 38
-    sue_debtit_score = 56
-    yao_debtit_score = 6
+    bob_debtit_belief = 38
+    sue_debtit_belief = 56
+    yao_debtit_belief = 6
     bob_bud = budunit_shop(bob_text)
-    bob_bud.add_acctunit(bob_text, 2, bob_debtit_score)
-    bob_bud.add_acctunit(sue_text, 2, sue_debtit_score)
-    bob_bud.add_acctunit(yao_text, 2, yao_debtit_score)
+    bob_bud.add_acctunit(bob_text, 2, bob_debtit_belief)
+    bob_bud.add_acctunit(sue_text, 2, sue_debtit_belief)
+    bob_bud.add_acctunit(yao_text, 2, yao_debtit_belief)
     bob_debtorledger = get_debtorledger(bob_bud)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_acct_tax_due(bob_text) == 380, 0

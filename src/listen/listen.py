@@ -31,16 +31,16 @@ def _ingest_perspective_agenda(listener: BudUnit, agenda: list[IdeaUnit]) -> Bud
     return listener
 
 
-def _allocate_irrational_debtit_score(listener: BudUnit, speaker_owner_id: OwnerID):
+def _allocate_irrational_debtit_belief(listener: BudUnit, speaker_owner_id: OwnerID):
     speaker_acctunit = listener.get_acct(speaker_owner_id)
-    speaker_debtit_score = speaker_acctunit.debtit_score
-    speaker_acctunit.add_irrational_debtit_score(speaker_debtit_score)
+    speaker_debtit_belief = speaker_acctunit.debtit_belief
+    speaker_acctunit.add_irrational_debtit_belief(speaker_debtit_belief)
     return listener
 
 
-def _allocate_inallocable_debtit_score(listener: BudUnit, speaker_owner_id: OwnerID):
+def _allocate_inallocable_debtit_belief(listener: BudUnit, speaker_owner_id: OwnerID):
     speaker_acctunit = listener.get_acct(speaker_owner_id)
-    speaker_acctunit.add_inallocable_debtit_score(speaker_acctunit.debtit_score)
+    speaker_acctunit.add_inallocable_debtit_belief(speaker_acctunit.debtit_belief)
     return listener
 
 
@@ -112,13 +112,13 @@ def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:
     return [
         x_acctunit
         for x_acctunit in x_duty._accts.values()
-        if x_acctunit.debtit_score != 0
+        if x_acctunit.debtit_belief != 0
     ]
 
 
 def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
     accts_ordered_list = get_debtors_roll(x_bud)
-    accts_ordered_list.sort(key=lambda x: (x.debtit_score, x.acct_id), reverse=True)
+    accts_ordered_list.sort(key=lambda x: (x.debtit_belief, x.acct_id), reverse=True)
     return accts_ordered_list
 
 
@@ -161,15 +161,15 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
         )
     perspective_bud = get_speaker_perspective(speaker, listener._owner_id)
     if perspective_bud._rational is False:
-        return _allocate_irrational_debtit_score(listener, speaker._owner_id)
+        return _allocate_irrational_debtit_belief(listener, speaker._owner_id)
     if listener._debtor_respect is None:
-        return _allocate_inallocable_debtit_score(listener, speaker._owner_id)
+        return _allocate_inallocable_debtit_belief(listener, speaker._owner_id)
     if listener._owner_id != speaker._owner_id:
         agenda = generate_perspective_agenda(perspective_bud)
     else:
         agenda = list(perspective_bud.get_all_pledges().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_debtit_score(listener, speaker._owner_id)
+        return _allocate_inallocable_debtit_belief(listener, speaker._owner_id)
     return _ingest_perspective_agenda(listener, agenda)
 
 

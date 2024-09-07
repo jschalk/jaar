@@ -975,7 +975,7 @@ def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
     for groupbox_x in x_bud._groupboxs.values():
         groupbox_x.clear_fund_give_take()
         # for membership_x in groupbox_x._accts.values():
-        #     print(f"{groupbox_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_score=} {membership__fund_take:t:.6f} {membership_x.} ")
+        #     print(f"{groupbox_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_belief=} {membership__fund_take:t:.6f} {membership_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud._accts.values():
@@ -1142,9 +1142,9 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    sue_acctunit = acctunit_shop(sue_text, 0.5, debtit_score=2)
-    bob_acctunit = acctunit_shop(bob_text, 1.5, debtit_score=3)
-    zia_acctunit = acctunit_shop(zia_text, 8, debtit_score=5)
+    sue_acctunit = acctunit_shop(sue_text, 0.5, debtit_belief=2)
+    bob_acctunit = acctunit_shop(bob_text, 1.5, debtit_belief=3)
+    zia_acctunit = acctunit_shop(zia_text, 8, debtit_belief=5)
     yao_bud.set_acctunit(sue_acctunit)
     yao_bud.set_acctunit(bob_acctunit)
     yao_bud.set_acctunit(zia_acctunit)

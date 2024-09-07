@@ -30,10 +30,10 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     yao_text = "Yao"
     yao_duty = budunit_shop(yao_text)
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     zia_pool = 87
-    yao_duty.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    yao_duty.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     yao_duty.set_acct_respect(zia_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
@@ -60,11 +60,11 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     # ESTABLISH
     yao_text = "Yao"
     yao_duty = budunit_shop(yao_text)
-    yao_credit_score = 47
-    yao_debtit_score = 41
+    yao_credit_belief = 47
+    yao_debtit_belief = 41
     yao_pool = 87
     zia_text = "Zia"
-    yao_duty.add_acctunit(zia_text, yao_credit_score, yao_debtit_score)
+    yao_duty.add_acctunit(zia_text, yao_credit_belief, yao_debtit_belief)
     yao_duty.set_acct_respect(yao_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
@@ -222,16 +222,16 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
     assert yao_duty.get_fact(eat_road()) is None
     zia_acctunit = new_yao_job1.get_acct(zia_text)
     bob_acctunit = new_yao_job1.get_acct(bob_text)
-    assert zia_acctunit.debtit_score < bob_acctunit.debtit_score
+    assert zia_acctunit.debtit_belief < bob_acctunit.debtit_belief
     assert bob_job.get_fact(eat_road()).pick == hungry_road()
     assert zia_job.get_fact(eat_road()).pick == eat_road()
     assert new_yao_job1.get_fact(eat_road()).pick == hungry_road()
 
     # WHEN
-    yao_zia_debtit_score = 15
-    yao_bob_debtit_score = 5
-    yao_duty.add_acctunit(zia_text, None, yao_zia_debtit_score)
-    yao_duty.add_acctunit(bob_text, None, yao_bob_debtit_score)
+    yao_zia_debtit_belief = 15
+    yao_bob_debtit_belief = 5
+    yao_duty.add_acctunit(zia_text, None, yao_zia_debtit_belief)
+    yao_duty.add_acctunit(bob_text, None, yao_bob_debtit_belief)
     yao_duty.set_acct_respect(100)
     new_yao_job2 = create_listen_basis(yao_duty)
     listen_to_agendas_duty_job(new_yao_job2, sue_texas_hubunit)
@@ -240,7 +240,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
     # THEN
     zia_acctunit = new_yao_job2.get_acct(zia_text)
     bob_acctunit = new_yao_job2.get_acct(bob_text)
-    assert zia_acctunit.debtit_score > bob_acctunit.debtit_score
+    assert zia_acctunit.debtit_belief > bob_acctunit.debtit_belief
     assert bob_job.get_fact(eat_road()).pick == hungry_road()
     assert zia_job.get_fact(eat_road()).pick == eat_road()
     assert new_yao_job2.get_fact(eat_road()).pick == eat_road()

@@ -15,8 +15,8 @@ from src.gift.atom_config import (
     group_id_str,
     parent_road_str,
     label_str,
-    credit_score_str,
-    debtit_score_str,
+    credit_belief_str,
+    debtit_belief_str,
 )
 from src.gift.atom import atomunit_shop
 from src.gift.change import ChangeUnit, changeunit_shop, bud_built_from_change_is_valid
@@ -173,11 +173,11 @@ def test_ChangeUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
 
     # WHEN
     bob_text = "Bob"
-    bob_credit_score = 55
-    bob_debtit_score = 66
-    bob_acctunit = acctunit_shop(bob_text, bob_credit_score, bob_debtit_score)
-    cw_text = credit_score_str()
-    dw_text = debtit_score_str()
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
+    bob_acctunit = acctunit_shop(bob_text, bob_credit_belief, bob_debtit_belief)
+    cw_text = credit_belief_str()
+    dw_text = debtit_belief_str()
     print(f"{bob_acctunit.get_dict()=}")
     bob_required_dict = {acct_id_str(): bob_acctunit.get_dict().get(acct_id_str())}
     bob_optional_dict = {cw_text: bob_acctunit.get_dict().get(cw_text)}
@@ -417,7 +417,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     zia_text = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg(acct_id_str(), zia_text)
-    x_atomunit.set_arg(credit_score_str(), "70 is the number")
+    x_atomunit.set_arg(credit_belief_str(), "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # WHEN/THEN
@@ -431,7 +431,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     yao_text = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg(acct_id_str(), yao_text)
-    x_atomunit.set_arg(credit_score_str(), 30)
+    x_atomunit.set_arg(credit_belief_str(), 30)
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
@@ -441,7 +441,7 @@ def test_bud_built_from_change_is_valid_ReturnsCorrectObjEstablishWithNoBud_scen
     bob_text = "Bob"
     x_atomunit = atomunit_shop(category, atom_insert())
     x_atomunit.set_arg(acct_id_str(), bob_text)
-    x_atomunit.set_arg(credit_score_str(), "70 is the number")
+    x_atomunit.set_arg(credit_belief_str(), "70 is the number")
     sue_changeunit.set_atomunit(x_atomunit)
 
     # THEN
@@ -459,14 +459,14 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStart
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg(acct_id_str(), zia_text)
-    zia_atomunit.set_arg(credit_score_str(), 70)
+    zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(acct_id_str(), yao_text)
-    yao_atomunit.set_arg(credit_score_str(), 30)
+    yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -498,14 +498,14 @@ def test_ChangeUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartin
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg(acct_id_str(), zia_text)
-    zia_atomunit.set_arg(credit_score_str(), 70)
+    zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(acct_id_str(), yao_text)
-    yao_atomunit.set_arg(credit_score_str(), 30)
+    yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -537,14 +537,14 @@ def test_ChangeUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumb
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg(acct_id_str(), zia_text)
-    zia_atomunit.set_arg(credit_score_str(), 70)
+    zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(acct_id_str(), yao_text)
-    yao_atomunit.set_arg(credit_score_str(), 30)
+    yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
@@ -576,12 +576,12 @@ def test_ChangeUnit_get_json_ReturnsCorrectObj():
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg(acct_id_str(), zia_text)
-    zia_atomunit.set_arg(credit_score_str(), 70)
+    zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_changeunit.set_atomunit(zia_atomunit)
     yao_text = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
     yao_atomunit.set_arg(acct_id_str(), yao_text)
-    yao_atomunit.set_arg(credit_score_str(), 30)
+    yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_changeunit.set_atomunit(yao_atomunit)
 
     # WHEN
@@ -601,7 +601,7 @@ def test_ChangeUnit_atomunit_exists_ReturnsCorrectObj():
     zia_text = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg(acct_id_str(), zia_text)
-    zia_atomunit.set_arg(credit_score_str(), 70)
+    zia_atomunit.set_arg(credit_belief_str(), 70)
     assert farm_changeunit.atomunit_exists(zia_atomunit) is False
 
     # WHEN

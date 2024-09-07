@@ -8,8 +8,8 @@ def get_bud_acctunits_dataframe(x_bud: BudUnit) -> DataFrame:
         return DataFrame(
             columns=[
                 "acct_id",
-                "credit_score",
-                "debtit_score",
+                "credit_belief",
+                "debtit_belief",
                 "_fund_give",
                 "_fund_take",
                 "_fund_agenda_give",

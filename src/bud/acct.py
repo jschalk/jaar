@@ -36,19 +36,19 @@ class AcctCore:
 @dataclass
 class AcctUnit(AcctCore):
     """This represents the BudUnit._owner_id's opinion of the AcctUnit.acct_id
-    AcctUnit.credit_score represents how much credit_score the _owner_id projects to the acct_id
-    AcctUnit.debtit_score represents how much debtit_score the _owner_id projects to the acct_id
+    AcctUnit.credit_belief represents how much credit_belief the _owner_id projects to the acct_id
+    AcctUnit.debtit_belief represents how much debtit_belief the _owner_id projects to the acct_id
     """
 
-    credit_score: int = None
-    debtit_score: int = None
+    credit_belief: int = None
+    debtit_belief: int = None
     # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
     _memberships: dict[AcctID, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
-    _irrational_debtit_score: int = None  # set by listening process
-    _inallocable_debtit_score: int = None  # set by listening process
+    _irrational_debtit_belief: int = None  # set by listening process
+    _inallocable_debtit_belief: int = None  # set by listening process
     # set by Bud.settle_bud()
     _fund_give: float = None
     _fund_take: float = None
@@ -60,27 +60,27 @@ class AcctUnit(AcctCore):
     def set_bit(self, x_bit: float):
         self._bit = x_bit
 
-    def set_credor_debtit_score(
+    def set_credor_debtit_belief(
         self,
-        credit_score: float = None,
-        debtit_score: float = None,
+        credit_belief: float = None,
+        debtit_belief: float = None,
     ):
-        if credit_score is not None:
-            self.set_credit_score(credit_score)
-        if debtit_score is not None:
-            self.set_debtit_score(debtit_score)
+        if credit_belief is not None:
+            self.set_credit_belief(credit_belief)
+        if debtit_belief is not None:
+            self.set_debtit_belief(debtit_belief)
 
-    def set_credit_score(self, credit_score: int):
-        self.credit_score = credit_score
+    def set_credit_belief(self, credit_belief: int):
+        self.credit_belief = credit_belief
 
-    def set_debtit_score(self, debtit_score: int):
-        self.debtit_score = debtit_score
+    def set_debtit_belief(self, debtit_belief: int):
+        self.debtit_belief = debtit_belief
 
-    def get_credit_score(self):
-        return get_1_if_None(self.credit_score)
+    def get_credit_belief(self):
+        return get_1_if_None(self.credit_belief)
 
-    def get_debtit_score(self):
-        return get_1_if_None(self.debtit_score)
+    def get_debtit_belief(self):
+        return get_1_if_None(self.debtit_belief)
 
     def clear_fund_give_take(self):
         self._fund_give = 0
@@ -90,15 +90,15 @@ class AcctUnit(AcctCore):
         self._fund_agenda_ratio_give = 0
         self._fund_agenda_ratio_take = 0
 
-    def add_irrational_debtit_score(self, x_irrational_debtit_score: float):
-        self._irrational_debtit_score += x_irrational_debtit_score
+    def add_irrational_debtit_belief(self, x_irrational_debtit_belief: float):
+        self._irrational_debtit_belief += x_irrational_debtit_belief
 
-    def add_inallocable_debtit_score(self, x_inallocable_debtit_score: float):
-        self._inallocable_debtit_score += x_inallocable_debtit_score
+    def add_inallocable_debtit_belief(self, x_inallocable_debtit_belief: float):
+        self._inallocable_debtit_belief += x_inallocable_debtit_belief
 
     def reset_listen_calculated_attrs(self):
-        self._irrational_debtit_score = 0
-        self._inallocable_debtit_score = 0
+        self._irrational_debtit_belief = 0
+        self._inallocable_debtit_belief = 0
 
     def add_fund_give(self, fund_give: float):
         self._fund_give += fund_give
@@ -128,19 +128,21 @@ class AcctUnit(AcctCore):
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        bud_acctunit_total_credit_score: float,
-        bud_acctunit_total_debtit_score: float,
+        bud_acctunit_total_credit_belief: float,
+        bud_acctunit_total_debtit_belief: float,
     ):
-        total_credit_score = bud_acctunit_total_credit_score
+        total_credit_belief = bud_acctunit_total_credit_belief
         ratio_give_sum = fund_agenda_ratio_give_sum
         self._fund_agenda_ratio_give = (
-            self.get_credit_score() / total_credit_score
+            self.get_credit_belief() / total_credit_belief
             if fund_agenda_ratio_give_sum == 0
             else self._fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
-            total_debtit_score = bud_acctunit_total_debtit_score
-            self._fund_agenda_ratio_take = self.get_debtit_score() / total_debtit_score
+            total_debtit_belief = bud_acctunit_total_debtit_belief
+            self._fund_agenda_ratio_take = (
+                self.get_debtit_belief() / total_debtit_belief
+            )
         else:
             ratio_take_sum = fund_agenda_ratio_take_sum
             self._fund_agenda_ratio_take = self._fund_agenda_take / ratio_take_sum
@@ -213,14 +215,14 @@ class AcctUnit(AcctCore):
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
             "acct_id": self.acct_id,
-            "credit_score": self.credit_score,
-            "debtit_score": self.debtit_score,
+            "credit_belief": self.credit_belief,
+            "debtit_belief": self.debtit_belief,
             "_memberships": self.get_memberships_dict(),
         }
-        if self._irrational_debtit_score not in [None, 0]:
-            x_dict["_irrational_debtit_score"] = self._irrational_debtit_score
-        if self._inallocable_debtit_score not in [None, 0]:
-            x_dict["_inallocable_debtit_score"] = self._inallocable_debtit_score
+        if self._irrational_debtit_belief not in [None, 0]:
+            x_dict["_irrational_debtit_belief"] = self._irrational_debtit_belief
+        if self._inallocable_debtit_belief not in [None, 0]:
+            x_dict["_inallocable_debtit_belief"] = self._inallocable_debtit_belief
 
         if all_attrs:
             self._all_attrs_necessary_in_dict(x_dict)
@@ -253,36 +255,36 @@ def acctunits_get_from_dict(
 
 def acctunit_get_from_dict(acctunit_dict: dict, _road_delimiter: str) -> AcctUnit:
     x_acct_id = acctunit_dict["acct_id"]
-    x_credit_score = acctunit_dict["credit_score"]
-    x_debtit_score = acctunit_dict["debtit_score"]
+    x_credit_belief = acctunit_dict["credit_belief"]
+    x_debtit_belief = acctunit_dict["debtit_belief"]
     x_memberships_dict = acctunit_dict["_memberships"]
     x_acctunit = acctunit_shop(
-        x_acct_id, x_credit_score, x_debtit_score, _road_delimiter
+        x_acct_id, x_credit_belief, x_debtit_belief, _road_delimiter
     )
     x_acctunit._memberships = memberships_get_from_dict(x_memberships_dict, x_acct_id)
-    _irrational_debtit_score = acctunit_dict.get("_irrational_debtit_score", 0)
-    _inallocable_debtit_score = acctunit_dict.get("_inallocable_debtit_score", 0)
-    x_acctunit.add_irrational_debtit_score(get_0_if_None(_irrational_debtit_score))
-    x_acctunit.add_inallocable_debtit_score(get_0_if_None(_inallocable_debtit_score))
+    _irrational_debtit_belief = acctunit_dict.get("_irrational_debtit_belief", 0)
+    _inallocable_debtit_belief = acctunit_dict.get("_inallocable_debtit_belief", 0)
+    x_acctunit.add_irrational_debtit_belief(get_0_if_None(_irrational_debtit_belief))
+    x_acctunit.add_inallocable_debtit_belief(get_0_if_None(_inallocable_debtit_belief))
 
     return x_acctunit
 
 
 def acctunit_shop(
     acct_id: AcctID,
-    credit_score: int = None,
-    debtit_score: int = None,
+    credit_belief: int = None,
+    debtit_belief: int = None,
     _road_delimiter: str = None,
     _bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
-        credit_score=get_1_if_None(credit_score),
-        debtit_score=get_1_if_None(debtit_score),
+        credit_belief=get_1_if_None(credit_belief),
+        debtit_belief=get_1_if_None(debtit_belief),
         _memberships={},
         _credor_pool=0,
         _debtor_pool=0,
-        _irrational_debtit_score=0,
-        _inallocable_debtit_score=0,
+        _irrational_debtit_belief=0,
+        _inallocable_debtit_belief=0,
         _fund_give=0,
         _fund_take=0,
         _fund_agenda_give=0,
