@@ -292,9 +292,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
         plotly_Scatter(
             x=[2.0],
             y=[13],
-            text=[
-                "Periodic Table of AtomUnits",
-            ],
+            text=["Periodic Table of AtomUnits"],
             mode="text",
         )
     )
