@@ -23,7 +23,6 @@ from src.gift.atom_config import (
     base_str,
 )
 from src.gift.change import changeunit_shop, sift_changeunit, _sift_atomunit
-from src.gift.examples.example_changes import get_changeunit_example1
 
 
 def test_sift_changeunit_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():

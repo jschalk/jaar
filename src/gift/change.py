@@ -898,7 +898,6 @@ def bud_built_from_change_is_valid(x_change: ChangeUnit, x_bud: BudUnit = None) 
         x_bud.settle_bud()
     except Exception:
         return False
-
     return True
 
 
