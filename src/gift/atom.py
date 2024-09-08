@@ -11,6 +11,7 @@ from src.bud.group import awardlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import BudUnit
 from src.bud.bud_tool import (
+    bud_attr_exists,
     budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -21,9 +22,11 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_text,
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
+    bud_get_obj,
 )
 from src.gift.atom_config import (
     get_category_from_dict,
+    get_atom_config_required_args,
     category_ref,
     atom_delete,
     atom_insert,
@@ -44,6 +47,7 @@ from src.gift.atom_config import (
     group_id_str,
     healer_id_str,
     parent_road_str,
+    road_str,
     label_str,
     pledge_str,
     addin_str,
@@ -733,3 +737,31 @@ class AtomRow:
 
 def atomrow_shop(atom_categorys: set[str], crud_command: CRUD_command) -> AtomRow:
     return AtomRow(_atom_categorys=atom_categorys, _crud_command=crud_command)
+
+
+def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
+    x_category = x_atom.category
+    required_args = get_atom_config_required_args(x_category)
+    args_dict = {req_arg: x_atom.get_value(req_arg) for req_arg in required_args}
+    x_parent_road = args_dict.get(parent_road_str())
+    x_label = args_dict.get(label_str())
+    if x_parent_road != None and x_label != None:
+        args_dict[road_str()] = x_bud.make_road(x_parent_road, x_label)
+
+    x_exists = bud_attr_exists(x_category, x_bud, args_dict)
+    if x_atom.crud_text == atom_delete() and x_exists:
+        return x_atom
+    elif x_atom.crud_text == atom_insert() and not x_exists:
+        return x_atom
+    elif x_atom.crud_text == atom_insert() and x_exists:
+        x_bud_obj = bud_get_obj(x_category, x_bud, args_dict)
+        x_optional_args = x_atom.get_optional_args_dict()
+        update_atom = atomunit_shop(x_category, atom_update(), x_atom.required_args)
+        for optional_arg in x_optional_args:
+            optional_value = x_atom.get_value(optional_arg)
+            if x_bud_obj.__dict__.get(optional_arg) != optional_value:
+                update_atom.set_arg(optional_arg, optional_value)
+
+        if update_atom.get_optional_args_dict() != {}:
+            return update_atom
+    return None

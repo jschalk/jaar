@@ -60,6 +60,7 @@ from src.gift.atom import (
     atom_insert,
     atom_update,
     optional_args_different,
+    sift_atomunit,
 )
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
@@ -916,35 +917,7 @@ def get_filtered_changeunit(
 def sift_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
     new_changeunit = changeunit_shop()
     for x_atom in x_changeunit.get_sorted_atomunits():
-        sifted_atom = _sift_atomunit(x_bud, x_atom)
+        sifted_atom = sift_atomunit(x_bud, x_atom)
         if sifted_atom != None:
             new_changeunit.set_atomunit(sifted_atom)
     return new_changeunit
-
-
-def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
-    x_category = x_atom.category
-    required_args = get_atom_config_required_args(x_category)
-    args_dict = {req_arg: x_atom.get_value(req_arg) for req_arg in required_args}
-    x_parent_road = args_dict.get(parent_road_str())
-    x_label = args_dict.get(label_str())
-    if x_parent_road != None and x_label != None:
-        args_dict[road_str()] = x_bud.make_road(x_parent_road, x_label)
-
-    x_exists = bud_attr_exists(x_category, x_bud, args_dict)
-    if x_atom.crud_text == atom_delete() and x_exists:
-        return x_atom
-    elif x_atom.crud_text == atom_insert() and not x_exists:
-        return x_atom
-    elif x_atom.crud_text == atom_insert() and x_exists:
-        x_bud_obj = bud_get_obj(x_category, x_bud, args_dict)
-        x_optional_args = x_atom.get_optional_args_dict()
-        update_atom = atomunit_shop(x_category, atom_update(), x_atom.required_args)
-        for optional_arg in x_optional_args:
-            optional_value = x_atom.get_value(optional_arg)
-            if x_bud_obj.__dict__.get(optional_arg) != optional_value:
-                update_atom.set_arg(optional_arg, optional_value)
-
-        if update_atom.get_optional_args_dict() != {}:
-            return update_atom
-    return None
