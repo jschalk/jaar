@@ -4,7 +4,7 @@ from src._instrument.python_tool import (
     get_dict_from_json,
 )
 from src._instrument.db_tool import create_insert_sqlstr, RowData
-from src._road.road import create_road, RoadNode, RoadUnit, GroupID, AcctID
+from src._road.road import create_road, RoadNode, RoadUnit, GroupID, AcctID, is_roadnode
 from src.bud.reason_idea import factunit_shop
 from src.bud.acct import acctunit_shop
 from src.bud.group import awardlink_shop
@@ -741,20 +741,24 @@ def atomrow_shop(atom_categorys: set[str], crud_command: CRUD_command) -> AtomRo
 
 def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     x_category = x_atom.category
-    required_args = get_atom_config_required_args(x_category)
-    args_dict = {req_arg: x_atom.get_value(req_arg) for req_arg in required_args}
-    x_parent_road = args_dict.get(parent_road_str())
-    x_label = args_dict.get(label_str())
+    config_req_args = get_atom_config_required_args(x_category)
+    x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
+    x_parent_road = x_atom_reqs.get(parent_road_str())
+    x_label = x_atom_reqs.get(label_str())
     if x_parent_road != None and x_label != None:
-        args_dict[road_str()] = x_bud.make_road(x_parent_road, x_label)
+        x_atom_reqs[road_str()] = x_bud.make_road(x_parent_road, x_label)
+        x_road_delimiter = x_bud._road_delimiter
+        is_idearoot_road = is_roadnode(x_atom_reqs.get(road_str()), x_road_delimiter)
+        if is_idearoot_road is True:
+            return None
 
-    x_exists = bud_attr_exists(x_category, x_bud, args_dict)
+    x_exists = bud_attr_exists(x_category, x_bud, x_atom_reqs)
     if x_atom.crud_text == atom_delete() and x_exists:
         return x_atom
     elif x_atom.crud_text == atom_insert() and not x_exists:
         return x_atom
     elif x_atom.crud_text == atom_insert() and x_exists:
-        x_bud_obj = bud_get_obj(x_category, x_bud, args_dict)
+        x_bud_obj = bud_get_obj(x_category, x_bud, x_atom_reqs)
         x_optional_args = x_atom.get_optional_args_dict()
         update_atom = atomunit_shop(x_category, atom_update(), x_atom.required_args)
         for optional_arg in x_optional_args:

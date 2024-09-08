@@ -10,6 +10,7 @@ class RoadNode(str):
     """A string presentation of a tree node. Nodes cannot contain RoadUnit delimiter"""
 
     def is_node(self, delimiter: str = None) -> bool:
+        print(f"{self=} {delimiter=}")
         return self.find(default_road_delimiter_if_none(delimiter)) == -1
 
 
@@ -232,9 +233,8 @@ class ValidateRoadNodeException(Exception):
 
 
 def is_roadnode(x_roadnode: RoadNode, x_delimiter: str):
-    if str(type(x_roadnode)) == "<class 'str'>":
-        x_roadnode = RoadNode(x_roadnode)
-        return x_roadnode.is_node(delimiter=x_delimiter)
+    x_roadnode = RoadNode(x_roadnode)
+    return x_roadnode.is_node(delimiter=x_delimiter)
 
 
 def validate_roadnode(
