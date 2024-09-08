@@ -12,7 +12,7 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
 )
-from src.gift.atom import atom_insert, atomunit_shop
+from src.gift.atom import atom_insert, atom_update, atomunit_shop
 from src.gift.atom_config import (
     acct_id_str,
     group_id_str,
@@ -21,43 +21,45 @@ from src.gift.atom_config import (
     label_str,
     road_str,
     base_str,
+    credit_belief_str,
+    debtit_belief_str,
 )
 from src.gift.change import changeunit_shop, sift_changeunit, _sift_atomunit
 
 
-# def test_sift_changeunit_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():
-#     # ESTABLISH changeunit with 2 acctunits, changeunit INSERT 3 changeunits,
-#     # assert changeunit has 3 atoms
-#     bob_text = "Bob"
-#     yao_text = "Yao"
-#     zia_text = "Zia"
-#     sue_bud = budunit_shop("Sue")
-#     sue_bud.add_acctunit(yao_text)
-#     sue_bud.add_acctunit(bob_text)
+def test_sift_changeunit_ReturnsObjUPDATEAtomUnit_bud_acctunit():
+    # ESTABLISH
+    bob_text = "Bob"
+    yao_text = "Yao"
+    old_bob_credit_belief = 34
+    new_bob_credit_belief = 7
+    sue_bud = budunit_shop("Sue")
+    sue_bud.add_acctunit(bob_text, old_bob_credit_belief)
+    sue_bud.add_acctunit(yao_text)
 
-#     accts_changeunit = changeunit_shop()
-#     bob_atom = atomunit_shop(bud_acctunit_text(), atom_insert())
-#     bob_atom.set_arg(acct_id_str(), bob_text)
-#     yao_atom = atomunit_shop(bud_acctunit_text(), atom_insert())
-#     yao_atom.set_arg(acct_id_str(), yao_text)
-#     zia_atom = atomunit_shop(bud_acctunit_text(), atom_insert())
-#     zia_atom.set_arg(acct_id_str(), zia_text)
-#     accts_changeunit.set_atomunit(bob_atom)
-#     accts_changeunit.set_atomunit(yao_atom)
-#     accts_changeunit.set_atomunit(zia_atom)
-#     assert len(accts_changeunit.get_sorted_atomunits()) == 3
-#     assert len(sue_bud._accts) == 2
+    accts_changeunit = changeunit_shop()
+    bob_atom = atomunit_shop(bud_acctunit_text(), atom_insert())
+    bob_atom.set_arg(acct_id_str(), bob_text)
+    bob_atom.set_arg(credit_belief_str(), new_bob_credit_belief)
+    yao_atom = atomunit_shop(bud_acctunit_text(), atom_insert())
+    yao_atom.set_arg(acct_id_str(), yao_text)
+    accts_changeunit.set_atomunit(bob_atom)
+    accts_changeunit.set_atomunit(yao_atom)
+    assert len(accts_changeunit.get_sorted_atomunits()) == 2
 
-#     # WHEN
-#     new_changeunit = sift_changeunit(accts_changeunit, sue_bud)
+    # WHEN
+    new_changeunit = sift_changeunit(accts_changeunit, sue_bud)
 
-#     # THEN
-#     assert len(new_changeunit.get_sorted_atomunits()) == 1
+    # THEN
+    assert len(new_changeunit.get_sorted_atomunits()) == 1
+    new_atomunit = new_changeunit.get_sorted_atomunits()[0]
+    assert new_atomunit.crud_text == atom_update()
+    new_optional_args = new_atomunit.get_optional_args_dict()
+    assert new_optional_args == {credit_belief_str(): new_bob_credit_belief}
 
 
-# def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
-#     # ESTABLISH changeunit with 2 acctunits, changeunit INSERT 3 changeunits,
-#     # assert changeunit has 3 atoms
+# def test_sift_changeunit_ReturnsObjUPDATEAtomUnit_bud_acctunit():
+#     # ESTABLISH
 #     bob_text = "Bob"
 #     yao_text = "Yao"
 #     zia_text = "Zia"
@@ -65,7 +67,6 @@ from src.gift.change import changeunit_shop, sift_changeunit, _sift_atomunit
 #     sue_bud.add_acctunit(yao_text)
 #     sue_bud.add_acctunit(bob_text)
 #     yao_acctunit = sue_bud.get_acct(yao_text)
-#     run_text = ";run"
 #     run_text = ";run"
 #     yao_acctunit.add_membership(run_text)
 #     print(f"{yao_acctunit._memberships.keys()=}")
