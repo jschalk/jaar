@@ -19,8 +19,8 @@
                 }
             },
             "acct_id": "A a ron Jones",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "America": {
             "_memberships": {
@@ -46,8 +46,8 @@
                 }
             },
             "acct_id": "America",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Anna": {
             "_memberships": {
@@ -68,8 +68,8 @@
                 }
             },
             "acct_id": "Anna",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Benjamin Stoddert": {
             "_memberships": {
@@ -95,8 +95,8 @@
                 }
             },
             "acct_id": "Benjamin Stoddert",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Bob302": {
             "_memberships": {
@@ -122,8 +122,8 @@
                 }
             },
             "acct_id": "Bob302",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Chuck Lee": {
             "_memberships": {
@@ -149,8 +149,8 @@
                 }
             },
             "acct_id": "Chuck Lee",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Ernesto Chavez": {
             "_memberships": {
@@ -171,8 +171,8 @@
                 }
             },
             "acct_id": "Ernesto Chavez",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Jacque Chirac": {
             "_memberships": {
@@ -193,8 +193,8 @@
                 }
             },
             "acct_id": "Jacque Chirac",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Jane Randolph": {
             "_memberships": {
@@ -215,8 +215,8 @@
                 }
             },
             "acct_id": "Jane Randolph",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Maria Reynolds": {
             "_memberships": {
@@ -237,8 +237,8 @@
                 }
             },
             "acct_id": "Maria Reynolds",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Martha Doubs": {
             "_memberships": {
@@ -264,8 +264,8 @@
                 }
             },
             "acct_id": "Martha Doubs",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Mikayla": {
             "_memberships": {
@@ -291,8 +291,8 @@
                 }
             },
             "acct_id": "Mikayla",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Norberto": {
             "_memberships": {
@@ -313,8 +313,8 @@
                 }
             },
             "acct_id": "Norberto",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Perrison": {
             "_memberships": {
@@ -340,8 +340,8 @@
                 }
             },
             "acct_id": "Perrison",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Philipa": {
             "_memberships": {
@@ -367,8 +367,8 @@
                 }
             },
             "acct_id": "Philipa",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Prashant": {
             "_memberships": {
@@ -389,8 +389,8 @@
                 }
             },
             "acct_id": "Prashant",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Renee Elise Goldsberry": {
             "_memberships": {
@@ -441,8 +441,8 @@
                 }
             },
             "acct_id": "Renee Elise Goldsberry",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Sam zamora": {
             "_memberships": {
@@ -468,8 +468,8 @@
                 }
             },
             "acct_id": "Sam zamora",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Shadwell Harris": {
             "_memberships": {
@@ -490,8 +490,8 @@
                 }
             },
             "acct_id": "Shadwell Harris",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Thomas OSU": {
             "_memberships": {
@@ -512,8 +512,8 @@
                 }
             },
             "acct_id": "Thomas OSU",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "Travis Fox": {
             "_memberships": {
@@ -534,8 +534,8 @@
                 }
             },
             "acct_id": "Travis Fox",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         },
         "WIlliam Wallace": {
             "_memberships": {
@@ -556,13 +556,13 @@
                 }
             },
             "acct_id": "WIlliam Wallace",
-            "credit_score": 1,
-            "debtit_score": 1
+            "credit_belief": 1,
+            "debtit_belief": 1
         }
     },
     "_bit": 1,
     "_idearoot": {
-        "_factunits": {
+        "factunits": {
             "music;day_hour": {
                 "base": "music;day_hour",
                 "fnigh": 23,
@@ -582,17 +582,17 @@
                 "_kids": {
                     "interesting": {
                         "_label": "interesting",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 262
                     },
                     "not interesting": {
                         "_label": "not interesting",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 263
                     }
                 },
                 "_label": "Aaron Donald things effected by him",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 261
             },
             "ACME": {
@@ -604,8 +604,8 @@
                             "Employee Intruction manuel.": {
                                 "_is_expanded": false,
                                 "_label": "Employee Intruction manuel.",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -635,8 +635,8 @@
                                 "_kids": {
                                     "Accomplish Fall 2021 training": {
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -664,15 +664,15 @@
                                     }
                                 },
                                 "_label": "Know Abuse Prevention and Reporting guildlines",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 106
                             },
                             "Know Discrimination Harassment Bully guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 training": {
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -699,7 +699,7 @@
                                     }
                                 },
                                 "_label": "Know Discrimination Harassment Bully guildlines",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 107
                             },
                             "PC1025 Identifying and Supporting houseless Youth": {
@@ -707,8 +707,8 @@
                                     "Accomplish Fall 2021 training": {
                                         "_is_expanded": false,
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -736,7 +736,7 @@
                                     }
                                 },
                                 "_label": "PC1025 Identifying and Supporting houseless Youth",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 109
                             },
                             "PC1026 Rick Management and Hazard Communication": {
@@ -744,12 +744,12 @@
                                     "Accomplish Fall 2021 training": {
                                         "_is_expanded": false,
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 122
                                     }
                                 },
                                 "_label": "PC1026 Rick Management and Hazard Communication",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 112
                             },
                             "PC1027 Adult Sexual Misconduct: Staff to Student/ IX": {
@@ -757,8 +757,8 @@
                                     "Accomplish Fall 2021 training": {
                                         "_is_expanded": false,
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -786,7 +786,7 @@
                                     }
                                 },
                                 "_label": "PC1027 Adult Sexual Misconduct: Staff to Student/ IX",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 108
                             },
                             "PC1029 Information Security Awareness Training": {
@@ -794,8 +794,8 @@
                                     "Accomplish Fall 2021 training": {
                                         "_is_expanded": false,
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -823,7 +823,7 @@
                                     }
                                 },
                                 "_label": "PC1029 Information Security Awareness Training",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 111
                             },
                             "PRM1003 ACME OSHA COVID-19 Rick Reduction Training": {
@@ -831,8 +831,8 @@
                                     "Accomplish Fall 2021 training": {
                                         "_is_expanded": false,
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -860,15 +860,15 @@
                                     }
                                 },
                                 "_label": "PRM1003 ACME OSHA COVID-19 Rick Reduction Training",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 110
                             },
                             "PRM1005 ACME Staff  and Safety": {
                                 "_kids": {
                                     "Accomplish Fall 2021 training": {
                                         "_label": "Accomplish Fall 2021 training",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -895,12 +895,12 @@
                                     }
                                 },
                                 "_label": "PRM1005 ACME Staff  and Safety",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 105
                             }
                         },
                         "_label": "ACME Employee Responsiblities",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 102
                     },
                     "IT DEPT": {
@@ -911,8 +911,8 @@
                                         "_kids": {
                                             "check emails": {
                                                 "_label": "check emails",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;day_minute": {
                                                         "base": "music;day_minute",
                                                         "premises": {
@@ -931,28 +931,28 @@
                                                 "_kids": {
                                                     "MECHANISM2": {
                                                         "_label": "MECHANISM2",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 171
                                                     },
                                                     "MECHANISM3": {
                                                         "_label": "MECHANISM3",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 172
                                                     },
                                                     "MECHANISM5": {
                                                         "_label": "MECHANISM5",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 173
                                                     },
                                                     "MECHANISM7": {
                                                         "_label": "MECHANISM7",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 170
                                                     }
                                                 },
                                                 "_label": "check mechanisms",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;day_minute": {
                                                         "base": "music;day_minute",
                                                         "premises": {
@@ -969,8 +969,8 @@
                                             }
                                         },
                                         "_label": "check ETLs ran correctly",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -986,8 +986,8 @@
                                     },
                                     "dress to slightly impress": {
                                         "_label": "dress to slightly impress",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -1005,8 +1005,8 @@
                                     "go to employment": {
                                         "_is_expanded": false,
                                         "_label": "go to employment",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -1023,8 +1023,8 @@
                                     }
                                 },
                                 "_label": "IT DEPT off-hours responsiblities",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1042,8 +1042,8 @@
                                 "_kids": {
                                     "Add items to Azure DevOps": {
                                         "_label": "Add items to Azure DevOps",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -1060,8 +1060,8 @@
                                     },
                                     "consider management perspective": {
                                         "_label": "consider management perspective",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -1080,8 +1080,8 @@
                                         "_kids": {
                                             "Datawarehouse Expertise acquisition": {
                                                 "_label": "Datawarehouse Expertise acquisition",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;day_minute": {
                                                         "base": "music;day_minute",
                                                         "premises": {
@@ -1100,28 +1100,28 @@
                                                 "_kids": {
                                                     "MECHANISM2": {
                                                         "_label": "MECHANISM2",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 176
                                                     },
                                                     "MECHANISM7": {
                                                         "_label": "MECHANISM7",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 175
                                                     },
                                                     "WPRD": {
                                                         "_label": "WPRD",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 177
                                                     },
                                                     "WPRDD": {
                                                         "_label": "WPRDD",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 174
                                                     }
                                                 },
                                                 "_label": "dev quantification script \"TIMOTHY\"",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;day_minute": {
                                                         "base": "music;day_minute",
                                                         "premises": {
@@ -1138,8 +1138,8 @@
                                             },
                                             "go to daily stand-up ": {
                                                 "_label": "go to daily stand-up ",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;day_minute": {
                                                         "base": "music;day_minute",
                                                         "premises": {
@@ -1156,13 +1156,13 @@
                                             }
                                         },
                                         "_label": "Datawarehouse",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 135
                                     },
                                     "IT DEPT general": {
                                         "_label": "IT DEPT general",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -1178,8 +1178,8 @@
                                     },
                                     "Keep track of Chatroom conversations": {
                                         "_label": "Keep track of Chatroom conversations",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -1198,8 +1198,8 @@
                                         "_kids": {
                                             "check for access": {
                                                 "_label": "check for access",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;day_minute": {
                                                         "base": "music;day_minute",
                                                         "premises": {
@@ -1215,8 +1215,8 @@
                                             }
                                         },
                                         "_label": "Synergy",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -1232,8 +1232,8 @@
                                     }
                                 },
                                 "_label": "IT DEPT regular hours responsiblities",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1250,8 +1250,8 @@
                             }
                         },
                         "_label": "IT DEPT",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;day_minute": {
                                 "base": "music;day_minute",
                                 "premises": {
@@ -1267,7 +1267,7 @@
                     }
                 },
                 "_label": "ACME",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 100
             },
             "Asset management": {
@@ -1284,8 +1284,8 @@
                                                 "_kids": {
                                                     "be reponsible for rent": {
                                                         "_label": "be reponsible for rent",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Nation-States": {
                                                                 "base": "music;Nation-States",
                                                                 "premises": {
@@ -1299,8 +1299,8 @@
                                                     },
                                                     "flat": {
                                                         "_label": "flat",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Nation-States": {
                                                                 "base": "music;Nation-States",
                                                                 "premises": {
@@ -1316,8 +1316,8 @@
                                                         "_kids": {
                                                             "maybe watch a video": {
                                                                 "_label": "maybe watch a video",
-                                                                "_mass": 1,
-                                                                "_reasonunits": {
+                                                                "mass": 1,
+                                                                "reasonunits": {
                                                                     "music;Internet": {
                                                                         "base": "music;Internet",
                                                                         "premises": {
@@ -1331,8 +1331,8 @@
                                                             }
                                                         },
                                                         "_label": "go for parent_road",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Nation-States": {
                                                                 "base": "music;Nation-States",
                                                                 "premises": {
@@ -1346,8 +1346,8 @@
                                                     },
                                                     "gym time": {
                                                         "_label": "gym time",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Moods": {
                                                                 "base": "music;Moods",
                                                                 "premises": {
@@ -1361,8 +1361,8 @@
                                                     }
                                                 },
                                                 "_label": "flats",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;Nation-States": {
                                                         "base": "music;Nation-States",
                                                         "premises": {
@@ -1378,8 +1378,8 @@
                                                 "_kids": {
                                                     "browsing": {
                                                         "_label": "browsing",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Nation-States": {
                                                                 "base": "music;Nation-States",
                                                                 "premises": {
@@ -1393,8 +1393,8 @@
                                                     },
                                                     "picnic": {
                                                         "_label": "picnic",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Seasons": {
                                                                 "base": "music;Seasons",
                                                                 "premises": {
@@ -1408,8 +1408,8 @@
                                                     },
                                                     "street soccer": {
                                                         "_label": "street soccer",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Nation-States": {
                                                                 "base": "music;Nation-States",
                                                                 "premises": {
@@ -1423,8 +1423,8 @@
                                                     },
                                                     "swimming": {
                                                         "_label": "swimming",
-                                                        "_mass": 1,
-                                                        "_reasonunits": {
+                                                        "mass": 1,
+                                                        "reasonunits": {
                                                             "music;Nation-States": {
                                                                 "base": "music;Nation-States",
                                                                 "premises": {
@@ -1438,8 +1438,8 @@
                                                     }
                                                 },
                                                 "_label": "PSU Sports",
-                                                "_mass": 1,
-                                                "_reasonunits": {
+                                                "mass": 1,
+                                                "reasonunits": {
                                                     "music;Nation-States": {
                                                         "base": "music;Nation-States",
                                                         "premises": {
@@ -1453,8 +1453,8 @@
                                             }
                                         },
                                         "_label": "downtown",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;Nation-States": {
                                                 "base": "music;Nation-States",
                                                 "premises": {
@@ -1468,8 +1468,8 @@
                                     }
                                 },
                                 "_label": "portland sovereignty",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Nation-States": {
                                         "base": "music;Nation-States",
                                         "premises": {
@@ -1483,8 +1483,8 @@
                             },
                             "texas sovereignty": {
                                 "_label": "texas sovereignty",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Nation-States": {
                                         "base": "music;Nation-States",
                                         "premises": {
@@ -1498,8 +1498,8 @@
                             }
                         },
                         "_label": "American sovereignty",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Nation-States": {
                                 "base": "music;Nation-States",
                                 "premises": {
@@ -1513,8 +1513,8 @@
                     },
                     "French sovereignty": {
                         "_label": "French sovereignty",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Nation-States": {
                                 "base": "music;Nation-States",
                                 "premises": {
@@ -1528,31 +1528,31 @@
                     }
                 },
                 "_label": "Asset management",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 199
             },
             "Bob Dylan Root": {
                 "_kids": {
                     "Aint me Babe": {
                         "_label": "Aint me Babe",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 270
                     },
                     "tangled up in blue": {
                         "_label": "tangled up in blue",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 271
                     }
                 },
                 "_label": "Bob Dylan Root",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 269
             },
             "casa": {
                 "_is_expanded": false,
                 "_kids": {
                     "call high school friend": {
-                        "_awardlinks": {
+                        "awardlinks": {
                             "Perrison": {
                                 "give_force": 1.0,
                                 "group_id": "Perrison",
@@ -1560,8 +1560,8 @@
                             }
                         },
                         "_label": "call high school friend",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;day_minute": {
                                 "base": "music;day_minute",
                                 "premises": {
@@ -1589,8 +1589,8 @@
                     },
                     "check up on old family friends": {
                         "_label": "check up on old family friends",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Moods": {
                                 "base": "music;Moods",
                                 "premises": {
@@ -1606,7 +1606,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "check cat water": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1614,8 +1614,8 @@
                                     }
                                 },
                                 "_label": "check cat water",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1648,8 +1648,8 @@
                             },
                             "check humidifer": {
                                 "_label": "check humidifer",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1673,7 +1673,7 @@
                                 "pledge": true
                             },
                             "clean baby seats": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1681,8 +1681,8 @@
                                     }
                                 },
                                 "_label": "clean baby seats",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1717,7 +1717,7 @@
                                 "pledge": true
                             },
                             "clean bathroom": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1725,8 +1725,8 @@
                                     }
                                 },
                                 "_label": "clean bathroom",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1750,7 +1750,7 @@
                                 "pledge": true
                             },
                             "clean cat poo": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1758,8 +1758,8 @@
                                     }
                                 },
                                 "_label": "clean cat poo",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1791,7 +1791,7 @@
                                 "pledge": true
                             },
                             "clean humidifiers": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1799,8 +1799,8 @@
                                     }
                                 },
                                 "_label": "clean humidifiers",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1832,7 +1832,7 @@
                                 "pledge": true
                             },
                             "clean sheets couch blankets": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     "Perrison": {
                                         "give_force": 1.0,
                                         "group_id": "Perrison",
@@ -1840,8 +1840,8 @@
                                     }
                                 },
                                 "_label": "clean sheets couch blankets",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;ced_week": {
                                         "base": "music;ced_week",
                                         "premises": {
@@ -1884,7 +1884,7 @@
                                 "pledge": true
                             },
                             "clean table": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1892,8 +1892,8 @@
                                     }
                                 },
                                 "_label": "clean table",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1925,7 +1925,7 @@
                                 "pledge": true
                             },
                             "deep clean play mat": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1933,8 +1933,8 @@
                                     }
                                 },
                                 "_label": "deep clean play mat",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -1977,7 +1977,7 @@
                                 "pledge": true
                             },
                             "empty roomba": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -1985,8 +1985,8 @@
                                     }
                                 },
                                 "_label": "empty roomba",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2018,7 +2018,7 @@
                                 "pledge": true
                             },
                             "empty roomba Friday": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2026,8 +2026,8 @@
                                     }
                                 },
                                 "_label": "empty roomba Friday",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2059,7 +2059,7 @@
                                 "pledge": true
                             },
                             "laundry monday": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2067,8 +2067,8 @@
                                     }
                                 },
                                 "_label": "laundry monday",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2100,7 +2100,7 @@
                                 "pledge": true
                             },
                             "laundry saturday": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     "Travis Fox": {
                                         "give_force": 1.0,
                                         "group_id": "Travis Fox",
@@ -2108,8 +2108,8 @@
                                     }
                                 },
                                 "_label": "laundry saturday",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2141,7 +2141,7 @@
                                 "pledge": true
                             },
                             "laundry wednesday": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     "America": {
                                         "give_force": 1.0,
                                         "group_id": "America",
@@ -2149,8 +2149,8 @@
                                     }
                                 },
                                 "_label": "laundry wednesday",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2183,8 +2183,8 @@
                             },
                             "morning cookery clean-up": {
                                 "_label": "morning cookery clean-up",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2207,7 +2207,7 @@
                                 "_uid": 150
                             },
                             "prepare_bed clean bedroom": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2215,8 +2215,8 @@
                                     }
                                 },
                                 "_label": "prepare_bed clean bedroom",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2240,7 +2240,7 @@
                                 "pledge": true
                             },
                             "roomba bedroom": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2248,8 +2248,8 @@
                                     }
                                 },
                                 "_label": "roomba bedroom",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2281,7 +2281,7 @@
                                 "pledge": true
                             },
                             "roomba bedroom Friday": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2289,8 +2289,8 @@
                                     }
                                 },
                                 "_label": "roomba bedroom Friday",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2322,7 +2322,7 @@
                                 "pledge": true
                             },
                             "roomba living area": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2330,8 +2330,8 @@
                                     }
                                 },
                                 "_label": "roomba living area",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2363,7 +2363,7 @@
                                 "pledge": true
                             },
                             "roomba living area thur": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2371,8 +2371,8 @@
                                     }
                                 },
                                 "_label": "roomba living area thur",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2404,7 +2404,7 @@
                                 "pledge": true
                             },
                             "roomba maintenance": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2412,8 +2412,8 @@
                                     }
                                 },
                                 "_label": "roomba maintenance",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2445,7 +2445,7 @@
                                 "pledge": true
                             },
                             "wipe down play mat2": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2453,8 +2453,8 @@
                                     }
                                 },
                                 "_label": "wipe down play mat2",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2487,8 +2487,8 @@
                             }
                         },
                         "_label": "cleaning",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Nation-States": {
                                 "base": "music;Nation-States",
                                 "premises": {
@@ -2503,7 +2503,7 @@
                     "exercise": {
                         "_kids": {
                             "5 push-ups": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2511,8 +2511,8 @@
                                     }
                                 },
                                 "_label": "5 push-ups",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2528,7 +2528,7 @@
                                 "pledge": true
                             },
                             "check protein for week is adequate": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2536,8 +2536,8 @@
                                     }
                                 },
                                 "_label": "check protein for week is adequate",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2553,7 +2553,7 @@
                                 "pledge": true
                             },
                             "clip nails": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2561,8 +2561,8 @@
                                     }
                                 },
                                 "_label": "clip nails",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2586,7 +2586,7 @@
                                 "pledge": true
                             },
                             "cook veggies every morning": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2594,8 +2594,8 @@
                                     }
                                 },
                                 "_label": "cook veggies every morning",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2611,7 +2611,7 @@
                                 "pledge": true
                             },
                             "daily exercise 20min": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2622,8 +2622,8 @@
                                 "_kids": {
                                     "I do not be desperate for of I have to exercise": {
                                         "_label": "I do not be desperate for of I have to exercise",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -2639,8 +2639,8 @@
                                     }
                                 },
                                 "_label": "daily exercise 20min",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2658,7 +2658,7 @@
                             "mass training": {
                                 "_kids": {
                                     "bike or something": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             ";Family": {
                                                 "give_force": 1.0,
                                                 "group_id": ";Family",
@@ -2666,8 +2666,8 @@
                                             }
                                         },
                                         "_label": "bike or something",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -2691,7 +2691,7 @@
                                         "pledge": true
                                     },
                                     "chest and arms (mon)": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             ";Family": {
                                                 "give_force": 1.0,
                                                 "group_id": ";Family",
@@ -2703,19 +2703,19 @@
                                             "bi and triceps exercises": {
                                                 "_is_expanded": false,
                                                 "_label": "bi and triceps exercises",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 130
                                             },
                                             "chest  exercises": {
                                                 "_is_expanded": false,
                                                 "_label": "chest  exercises",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 129
                                             }
                                         },
                                         "_label": "chest and arms (mon)",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -2740,8 +2740,8 @@
                                     },
                                     "core and squats": {
                                         "_label": "core and squats",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -2764,7 +2764,7 @@
                                         "_uid": 179
                                     },
                                     "core lower back": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             ";Family": {
                                                 "give_force": 1.0,
                                                 "group_id": ";Family",
@@ -2772,8 +2772,8 @@
                                             }
                                         },
                                         "_label": "core lower back",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -2797,7 +2797,7 @@
                                         "pledge": true
                                     },
                                     "rest": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             ";Family": {
                                                 "give_force": 1.0,
                                                 "group_id": ";Family",
@@ -2806,8 +2806,8 @@
                                         },
                                         "_is_expanded": false,
                                         "_label": "rest",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;weekdays": {
                                                 "base": "music;weekdays",
                                                 "premises": {
@@ -2820,7 +2820,7 @@
                                         "_uid": 94
                                     },
                                     "shoulders and upper back": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             ";Family": {
                                                 "give_force": 1.0,
                                                 "group_id": ";Family",
@@ -2832,19 +2832,19 @@
                                             "shoulder exercises": {
                                                 "_is_expanded": false,
                                                 "_label": "shoulder exercises",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 131
                                             },
                                             "upper back exercises": {
                                                 "_is_expanded": false,
                                                 "_label": "upper back exercises",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 132
                                             }
                                         },
                                         "_label": "shoulders and upper back",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -2868,7 +2868,7 @@
                                         "pledge": true
                                     },
                                     "squats hamstrings and calves": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             ";Family": {
                                                 "give_force": 1.0,
                                                 "group_id": ";Family",
@@ -2876,8 +2876,8 @@
                                             }
                                         },
                                         "_label": "squats hamstrings and calves",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;day_minute": {
                                                 "base": "music;day_minute",
                                                 "premises": {
@@ -2902,11 +2902,11 @@
                                     }
                                 },
                                 "_label": "mass training",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 81
                             },
                             "morning multivitamin": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2914,8 +2914,8 @@
                                     }
                                 },
                                 "_label": "morning multivitamin",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2932,8 +2932,8 @@
                             },
                             "night multivitamin": {
                                 "_label": "night multivitamin",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2948,7 +2948,7 @@
                                 "_uid": 230
                             },
                             "flossing teeth": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2956,8 +2956,8 @@
                                     }
                                 },
                                 "_label": "flossing teeth",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -2984,7 +2984,7 @@
                                 "pledge": true
                             },
                             "clean ears": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -2992,8 +2992,8 @@
                                     }
                                 },
                                 "_label": "clean ears",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3020,7 +3020,7 @@
                                 "pledge": true
                             },
                             "shampooing": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -3028,8 +3028,8 @@
                                     }
                                 },
                                 "_label": "shampooing",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3053,7 +3053,7 @@
                                 "pledge": true
                             },
                             "straight back for 45 secs": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -3061,8 +3061,8 @@
                                     }
                                 },
                                 "_label": "straight back for 45 secs",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3078,7 +3078,7 @@
                                 "pledge": true
                             },
                             "trim beard": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -3086,8 +3086,8 @@
                                     }
                                 },
                                 "_label": "trim beard",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3112,14 +3112,14 @@
                             }
                         },
                         "_label": "exercise",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 147
                     },
                     "Financial Ops": {
                         "_is_expanded": false,
                         "_kids": {
                             "be reponsible for rent": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     "Perrison": {
                                         "give_force": 1.0,
                                         "group_id": "Perrison",
@@ -3127,8 +3127,8 @@
                                     }
                                 },
                                 "_label": "be reponsible for rent",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3152,7 +3152,7 @@
                                 "pledge": true
                             },
                             "be responsible for expenses card": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -3160,8 +3160,8 @@
                                     }
                                 },
                                 "_label": "be responsible for expenses card",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3185,7 +3185,7 @@
                                 "pledge": true
                             },
                             "be responsible for utilities": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -3193,8 +3193,8 @@
                                     }
                                 },
                                 "_label": "be responsible for utilities",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3218,7 +3218,7 @@
                                 "pledge": true
                             },
                             "set resturant bucks for the week": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -3226,8 +3226,8 @@
                                     }
                                 },
                                 "_label": "set resturant bucks for the week",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3252,11 +3252,11 @@
                             }
                         },
                         "_label": "Financial Ops",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 148
                     },
                     "Housing": {
-                        "_awardlinks": {
+                        "awardlinks": {
                             ";OceanVista Apt": {
                                 "give_force": 1.0,
                                 "group_id": ";OceanVista Apt",
@@ -3267,36 +3267,36 @@
                         "_kids": {
                             "Bike Garage": {
                                 "_label": "Bike Garage",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 185
                             },
                             "Bike Gym": {
                                 "_label": "Bike Gym",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 184
                             },
                             "Flat": {
                                 "_kids": {
                                     "bathroom #2": {
                                         "_label": "bathroom #2",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 196
                                     },
                                     "bedroom #1": {
                                         "_kids": {
                                             "big bathroom": {
                                                 "_label": "big bathroom",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 195
                                             },
                                             "closet": {
                                                 "_label": "closet",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 194
                                             }
                                         },
                                         "_label": "bedroom #1",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 191
                                     },
                                     "bedroom #2": {
@@ -3304,7 +3304,7 @@
                                             "bed area": {
                                                 "_kids": {
                                                     "heater maintenance": {
-                                                        "_awardlinks": {
+                                                        "awardlinks": {
                                                             "Norberto": {
                                                                 "give_force": 1.0,
                                                                 "group_id": "Norberto",
@@ -3312,74 +3312,74 @@
                                                             }
                                                         },
                                                         "_label": "heater maintenance",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 198
                                                     }
                                                 },
                                                 "_label": "bed area",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 197
                                             },
                                             "closet": {
                                                 "_label": "closet",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 193
                                             }
                                         },
                                         "_label": "bedroom #2",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 192
                                     },
                                     "cookery": {
                                         "_label": "cookery",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 189
                                     },
                                     "dining area": {
                                         "_label": "dining area",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 190
                                     },
                                     "maintenance": {
                                         "_label": "maintenance",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 187
                                     },
                                     "nursery": {
                                         "_label": "nursery",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 188
                                     }
                                 },
                                 "_label": "Flat",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 181
                             },
-                            "Mass Lifting Gym": {
-                                "_label": "Mass Lifting Gym",
-                                "_mass": 1,
+                            "Lifting Gym": {
+                                "_label": "Lifting Gym",
+                                "mass": 1,
                                 "_uid": 183
                             },
                             "Playing in nurserys": {
                                 "_label": "Playing in nurserys",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 186
                             },
                             "Pool": {
                                 "_label": "Pool",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 182
                             }
                         },
                         "_label": "Housing",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 180
                     },
                     "keep up with friends": {
                         "_is_expanded": false,
                         "_label": "keep up with friends",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Internet": {
                                 "base": "music;Internet",
                                 "premises": {
@@ -3395,7 +3395,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "clip fingernails": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     "America": {
                                         "give_force": 1.0,
                                         "group_id": "America",
@@ -3403,8 +3403,8 @@
                                     }
                                 },
                                 "_label": "clip fingernails",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;ced_week": {
                                         "base": "music;ced_week",
                                         "premises": {
@@ -3447,7 +3447,7 @@
                                 "pledge": true
                             },
                             "get rid of toy get new toy": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Family": {
                                         "give_force": 1.0,
                                         "group_id": ";Family",
@@ -3455,8 +3455,8 @@
                                     }
                                 },
                                 "_label": "get rid of toy get new toy",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3492,8 +3492,8 @@
                             },
                             "going to get them": {
                                 "_label": "going to get them",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;day_minute": {
                                         "base": "music;day_minute",
                                         "premises": {
@@ -3518,8 +3518,8 @@
                             }
                         },
                         "_label": "responsible for kids",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Nation-States": {
                                 "base": "music;Nation-States",
                                 "premises": {
@@ -3532,7 +3532,7 @@
                         "_uid": 144
                     },
                     "say hi to birds": {
-                        "_awardlinks": {
+                        "awardlinks": {
                             ";Family": {
                                 "give_force": 1.0,
                                 "group_id": ";Family",
@@ -3540,8 +3540,8 @@
                             }
                         },
                         "_label": "say hi to birds",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;day_minute": {
                                 "base": "music;day_minute",
                                 "premises": {
@@ -3566,29 +3566,29 @@
                     }
                 },
                 "_label": "casa",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 2
             },
             "ced_day": {
-                "_begin": 0,
-                "_close": 80000,
+                "begin": 0,
+                "close": 80000,
                 "_label": "ced_day",
-                "_mass": 40
+                "mass": 40
             },
             "ced_week": {
-                "_begin": 0,
-                "_close": 110000,
+                "begin": 0,
+                "close": 110000,
                 "_label": "ced_week",
-                "_mass": 40
+                "mass": 40
             },
             "ced_year": {
-                "_begin": 0,
-                "_close": 2100,
+                "begin": 0,
+                "close": 2100,
                 "_label": "ced_year",
-                "_mass": 40
+                "mass": 40
             },
             "D&B": {
-                "_awardlinks": {
+                "awardlinks": {
                     ";Climate Death": {
                         "give_force": 1.0,
                         "group_id": ";Climate Death",
@@ -3608,7 +3608,7 @@
                 "_is_expanded": false,
                 "_kids": {
                     "Aarons friends are desperate for of housing support": {
-                        "_awardlinks": {
+                        "awardlinks": {
                             "Renee Elise Goldsberry": {
                                 "give_force": 1.0,
                                 "group_id": "Renee Elise Goldsberry",
@@ -3618,7 +3618,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "Ask Chuck monthly what I can do": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     "Renee Elise Goldsberry": {
                                         "give_force": 1.0,
                                         "group_id": "Renee Elise Goldsberry",
@@ -3626,8 +3626,8 @@
                                     }
                                 },
                                 "_label": "Ask Chuck monthly what I can do",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Aaron Donald things effected by him": {
                                         "base": "music;Aaron Donald things effected by him",
                                         "premises": {
@@ -3641,8 +3641,8 @@
                             }
                         },
                         "_label": "Aarons friends are desperate for of housing support",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Aaron Donald things effected by him": {
                                 "base": "music;Aaron Donald things effected by him",
                                 "premises": {
@@ -3655,7 +3655,7 @@
                         "_uid": 99
                     },
                     "develop D&B software": {
-                        "_awardlinks": {
+                        "awardlinks": {
                             ";hurt by us dollar": {
                                 "give_force": 1.0,
                                 "group_id": ";hurt by us dollar",
@@ -3665,8 +3665,8 @@
                         "_kids": {
                             "test program": {
                                 "_label": "test program",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Aaron Donald things effected by him": {
                                         "base": "music;Aaron Donald things effected by him",
                                         "premises": {
@@ -3699,8 +3699,8 @@
                             }
                         },
                         "_label": "develop D&B software",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Aaron Donald things effected by him": {
                                 "base": "music;Aaron Donald things effected by him",
                                 "premises": {
@@ -3716,7 +3716,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "donate to influential people that are pro-Climate Death": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Climate Death": {
                                         "give_force": 1.0,
                                         "group_id": ";Climate Death",
@@ -3724,8 +3724,8 @@
                                     }
                                 },
                                 "_label": "donate to influential people that are pro-Climate Death",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Aaron Donald things effected by him": {
                                         "base": "music;Aaron Donald things effected by him",
                                         "premises": {
@@ -3769,8 +3769,8 @@
                             }
                         },
                         "_label": "donate to pro-climate committees",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Aaron Donald things effected by him": {
                                 "base": "music;Aaron Donald things effected by him",
                                 "premises": {
@@ -3784,8 +3784,8 @@
                     },
                     "late_night_go_to_sleep": {
                         "_label": "late_night_go_to_sleep",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Aaron Donald things effected by him": {
                                 "base": "music;Aaron Donald things effected by him",
                                 "premises": {
@@ -3802,7 +3802,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "sympathetic receptive to David": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     "Renee Elise Goldsberry": {
                                         "give_force": 1.0,
                                         "group_id": "Renee Elise Goldsberry",
@@ -3811,7 +3811,7 @@
                                 },
                                 "_kids": {
                                     "be available for phone call": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             "Renee Elise Goldsberry": {
                                                 "give_force": 1.0,
                                                 "group_id": "Renee Elise Goldsberry",
@@ -3819,8 +3819,8 @@
                                             }
                                         },
                                         "_label": "be available for phone call",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;Aaron Donald things effected by him": {
                                                 "base": "music;Aaron Donald things effected by him",
                                                 "premises": {
@@ -3844,7 +3844,7 @@
                                         "pledge": true
                                     },
                                     "call David and discuss methodology": {
-                                        "_awardlinks": {
+                                        "awardlinks": {
                                             ";Climate Death": {
                                                 "give_force": 1.0,
                                                 "group_id": ";Climate Death",
@@ -3857,8 +3857,8 @@
                                             }
                                         },
                                         "_label": "call David and discuss methodology",
-                                        "_mass": 1,
-                                        "_reasonunits": {
+                                        "mass": 1,
+                                        "reasonunits": {
                                             "music;Aaron Donald things effected by him": {
                                                 "base": "music;Aaron Donald things effected by him",
                                                 "premises": {
@@ -3894,8 +3894,8 @@
                                     }
                                 },
                                 "_label": "sympathetic receptive to David",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Aaron Donald things effected by him": {
                                         "base": "music;Aaron Donald things effected by him",
                                         "premises": {
@@ -3909,8 +3909,8 @@
                             }
                         },
                         "_label": "sympathetic receptive",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Aaron Donald things effected by him": {
                                 "base": "music;Aaron Donald things effected by him",
                                 "premises": {
@@ -3926,7 +3926,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "write letters about Climate Death to congressman": {
-                                "_awardlinks": {
+                                "awardlinks": {
                                     ";Climate Death": {
                                         "give_force": 1.0,
                                         "group_id": ";Climate Death",
@@ -3934,8 +3934,8 @@
                                     }
                                 },
                                 "_label": "write letters about Climate Death to congressman",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Aaron Donald things effected by him": {
                                         "base": "music;Aaron Donald things effected by him",
                                         "premises": {
@@ -3957,8 +3957,8 @@
                             }
                         },
                         "_label": "write letters to reps",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Aaron Donald things effected by him": {
                                 "base": "music;Aaron Donald things effected by him",
                                 "premises": {
@@ -3972,8 +3972,8 @@
                     }
                 },
                 "_label": "D&B",
-                "_mass": 1,
-                "_reasonunits": {
+                "mass": 1,
+                "reasonunits": {
                     "music;Aaron Donald things effected by him": {
                         "base": "music;Aaron Donald things effected by him",
                         "premises": {
@@ -3986,15 +3986,15 @@
                 "_uid": 96
             },
             "day_hour": {
-                "_begin": 0,
-                "_close": 23,
+                "begin": 0,
+                "close": 23,
                 "_label": "day_hour",
-                "_mass": 40
+                "mass": 40
             },
             "day_minute": {
-                "_begin": 0,
-                "_close": 1439,
-                "_factunits": {
+                "begin": 0,
+                "close": 1439,
+                "factunits": {
                     "music;day_minute": {
                         "base": "music;day_minute",
                         "fnigh": 59,
@@ -4003,7 +4003,7 @@
                     }
                 },
                 "_label": "day_minute",
-                "_mass": 40
+                "mass": 40
             },
             "Freelancing": {
                 "_is_expanded": false,
@@ -4011,8 +4011,8 @@
                     "Submit hours on website": {
                         "_is_expanded": false,
                         "_label": "Submit hours on website",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;day_minute": {
                                 "base": "music;day_minute",
                                 "premises": {
@@ -4037,8 +4037,8 @@
                     }
                 },
                 "_label": "Freelancing",
-                "_mass": 1,
-                "_reasonunits": {
+                "mass": 1,
+                "reasonunits": {
                     "music;day_minute": {
                         "base": "music;day_minute",
                         "premises": {
@@ -4059,112 +4059,112 @@
                         "_kids": {
                             "PSU Ultimate": {
                                 "_label": "PSU Ultimate",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 254
                             }
                         },
                         "_label": "AOL AIM",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 253
                     },
                     "Faaceboook": {
                         "_label": "Faaceboook",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 251
                     },
                     "Github": {
                         "_label": "Github",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 252
                     },
                     "Youtube": {
                         "_label": "Youtube",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 255
                     }
                 },
                 "_label": "Internet",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 250
             },
             "month_day": {
-                "_begin": 1,
-                "_close": 31,
+                "begin": 1,
+                "close": 31,
                 "_label": "month_day",
-                "_mass": 40
+                "mass": 40
             },
             "month_week": {
-                "_begin": 1,
-                "_close": 5,
+                "begin": 1,
+                "close": 5,
                 "_kids": {
                     "1st week": {
-                        "_gogo_want": 1,
+                        "gogo_want": 1,
                         "_label": "1st week",
-                        "_mass": 40,
-                        "_stop_want": 2
+                        "mass": 40,
+                        "stop_want": 2
                     },
                     "2nd week": {
-                        "_gogo_want": 2,
+                        "gogo_want": 2,
                         "_label": "2nd week",
-                        "_mass": 40,
-                        "_stop_want": 3
+                        "mass": 40,
+                        "stop_want": 3
                     },
                     "3rd week": {
-                        "_gogo_want": 3,
+                        "gogo_want": 3,
                         "_label": "3rd week",
-                        "_mass": 40,
-                        "_stop_want": 4
+                        "mass": 40,
+                        "stop_want": 4
                     },
                     "4th week": {
-                        "_gogo_want": 4,
+                        "gogo_want": 4,
                         "_label": "4th week",
-                        "_mass": 40,
-                        "_stop_want": 5
+                        "mass": 40,
+                        "stop_want": 5
                     },
                     "5th week": {
-                        "_gogo_want": 5,
+                        "gogo_want": 5,
                         "_label": "5th week",
-                        "_mass": 40,
-                        "_stop_want": 6
+                        "mass": 40,
+                        "stop_want": 6
                     }
                 },
                 "_label": "month_week",
-                "_mass": 40
+                "mass": 40
             },
             "Moods": {
                 "_kids": {
                     "Bllod Meridan by Cormac": {
                         "_label": "Bllod Meridan by Cormac",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 265
                     },
                     "Happy": {
                         "_kids": {
                             "Happy - angerish": {
                                 "_label": "Happy - angerish",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 267
                             }
                         },
                         "_label": "Happy",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 266
                     },
                     "hungry": {
                         "_label": "hungry",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 268
                     }
                 },
                 "_label": "Moods",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 264
             },
             "Nation-States": {
                 "_kids": {
                     "France2": {
                         "_label": "France2",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 235
                     },
                     "USA": {
@@ -4177,79 +4177,79 @@
                                                 "_kids": {
                                                     "library": {
                                                         "_label": "library",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 244
                                                     },
                                                     "Park Squares": {
                                                         "_label": "Park Squares",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 241
                                                     },
                                                     "Pool": {
                                                         "_label": "Pool",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 242
                                                     },
                                                     "Stott Field": {
                                                         "_label": "Stott Field",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 243
                                                     }
                                                 },
                                                 "_label": "PSU",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 240
                                             },
                                             "Southpark Apt": {
                                                 "_kids": {
                                                     "10th floor gaarden": {
                                                         "_label": "10th floor gaarden",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 246
                                                     },
                                                     "Apt X4XX": {
                                                         "_label": "Apt X4XX",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 247
                                                     },
                                                     "Gym": {
                                                         "_label": "Gym",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 248
                                                     },
                                                     "Office": {
                                                         "_label": "Office",
-                                                        "_mass": 1,
+                                                        "mass": 1,
                                                         "_uid": 249
                                                     }
                                                 },
                                                 "_label": "Southpark Apt",
-                                                "_mass": 1,
+                                                "mass": 1,
                                                 "_uid": 245
                                             }
                                         },
                                         "_label": "Downtown",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 239
                                     }
                                 },
                                 "_label": "Portland OR",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 237
                             },
                             "Texas": {
                                 "_label": "Texas",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 238
                             }
                         },
                         "_label": "USA",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 236
                     }
                 },
                 "_label": "Nation-States",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 234
             },
             "No Movie playing": {
@@ -4257,46 +4257,46 @@
                 "_kids": {
                     "Big Lewbowski": {
                         "_label": "Big Lewbowski",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 273
                     },
                     "Star Wars Episode IV": {
                         "_label": "Star Wars Episode IV",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 274
                     }
                 },
                 "_label": "No Movie playing",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 272
             },
             "Seasons": {
                 "_kids": {
                     "Summer": {
                         "_label": "Summer",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 276
                     }
                 },
                 "_label": "Seasons",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 275
             },
             "Tired Status": {
                 "_kids": {
                     "Not tired": {
                         "_label": "Not tired",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 278
                     },
                     "Tired": {
                         "_label": "Tired",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 279
                     }
                 },
                 "_label": "Tired Status",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 277
             },
             "Ultimate Frisbee": {
@@ -4304,8 +4304,8 @@
                 "_kids": {
                     "check on community": {
                         "_label": "check on community",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Moods": {
                                 "base": "music;Moods",
                                 "premises": {
@@ -4319,8 +4319,8 @@
                     },
                     "contemplate the disc": {
                         "_label": "contemplate the disc",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;No Movie playing": {
                                 "base": "music;No Movie playing",
                                 "premises": {
@@ -4336,8 +4336,8 @@
                         "_kids": {
                             "check PSU mini": {
                                 "_label": "check PSU mini",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;Moods": {
                                         "base": "music;Moods",
                                         "premises": {
@@ -4351,8 +4351,8 @@
                             }
                         },
                         "_label": "playing ultimate",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;Moods": {
                                 "base": "music;Moods",
                                 "premises": {
@@ -4366,8 +4366,8 @@
                     },
                     "relaxing": {
                         "_label": "relaxing",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;No Movie playing": {
                                 "base": "music;No Movie playing",
                                 "premises": {
@@ -4381,8 +4381,8 @@
                     }
                 },
                 "_label": "Ultimate Frisbee",
-                "_mass": 1,
-                "_reasonunits": {
+                "mass": 1,
+                "reasonunits": {
                     "music;Moods": {
                         "base": "music;Moods",
                         "premises": {
@@ -4401,8 +4401,8 @@
                         "_kids": {
                             "animate": {
                                 "_label": "animate",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;WaterExistence": {
                                         "base": "music;WaterExistence",
                                         "premises": {
@@ -4416,8 +4416,8 @@
                             },
                             "bike around": {
                                 "_label": "bike around",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;WaterExistence": {
                                         "base": "music;WaterExistence",
                                         "premises": {
@@ -4431,8 +4431,8 @@
                             },
                             "Go climbing at east Circuit": {
                                 "_label": "Go climbing at east Circuit",
-                                "_mass": 1,
-                                "_reasonunits": {
+                                "mass": 1,
+                                "reasonunits": {
                                     "music;WaterExistence": {
                                         "base": "music;WaterExistence",
                                         "premises": {
@@ -4446,8 +4446,8 @@
                             }
                         },
                         "_label": "Existance in Williamette watershed",
-                        "_mass": 1,
-                        "_reasonunits": {
+                        "mass": 1,
+                        "reasonunits": {
                             "music;WaterExistence": {
                                 "base": "music;WaterExistence",
                                 "premises": {
@@ -4461,7 +4461,7 @@
                     }
                 },
                 "_label": "Water Living",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 223
             },
             "WaterExistence": {
@@ -4472,155 +4472,155 @@
                                 "_kids": {
                                     "flat": {
                                         "_label": "flat",
-                                        "_mass": 1,
+                                        "mass": 1,
                                         "_uid": 260
                                     }
                                 },
                                 "_label": "East Side of Watershed",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 258
                             },
                             "West side of Watershed": {
                                 "_label": "West side of Watershed",
-                                "_mass": 1,
+                                "mass": 1,
                                 "_uid": 259
                             }
                         },
                         "_label": "Williamette WaterShed",
-                        "_mass": 1,
+                        "mass": 1,
                         "_uid": 257
                     }
                 },
                 "_label": "WaterExistence",
-                "_mass": 1,
+                "mass": 1,
                 "_uid": 256
             },
             "weekdays": {
                 "_kids": {
                     "Friday": {
                         "_label": "Friday",
-                        "_mass": 40
+                        "mass": 40
                     },
                     "Monday": {
                         "_label": "Monday",
-                        "_mass": 20
+                        "mass": 20
                     },
                     "Saturday": {
                         "_label": "Saturday",
-                        "_mass": 50
+                        "mass": 50
                     },
                     "Sunday": {
                         "_label": "Sunday",
-                        "_mass": 20
+                        "mass": 20
                     },
                     "Thursday": {
                         "_label": "Thursday",
-                        "_mass": 30
+                        "mass": 30
                     },
                     "Tuesday": {
                         "_label": "Tuesday",
-                        "_mass": 20
+                        "mass": 20
                     },
                     "Wednesday": {
                         "_label": "Wednesday",
-                        "_mass": 20
+                        "mass": 20
                     }
                 },
                 "_label": "weekdays",
-                "_mass": 40
+                "mass": 40
             },
             "year_month": {
-                "_begin": 1,
-                "_close": 13,
+                "begin": 1,
+                "close": 13,
                 "_kids": {
                     "April": {
-                        "_gogo_want": 4,
+                        "gogo_want": 4,
                         "_label": "April",
-                        "_mass": 40,
-                        "_stop_want": 5
+                        "mass": 40,
+                        "stop_want": 5
                     },
                     "August": {
-                        "_gogo_want": 8,
+                        "gogo_want": 8,
                         "_label": "August",
-                        "_mass": 40,
-                        "_stop_want": 9
+                        "mass": 40,
+                        "stop_want": 9
                     },
                     "December": {
-                        "_gogo_want": 12,
+                        "gogo_want": 12,
                         "_label": "December",
-                        "_mass": 40,
-                        "_stop_want": 13
+                        "mass": 40,
+                        "stop_want": 13
                     },
                     "February": {
-                        "_gogo_want": 2,
+                        "gogo_want": 2,
                         "_label": "February",
-                        "_mass": 40,
-                        "_stop_want": 3
+                        "mass": 40,
+                        "stop_want": 3
                     },
                     "January": {
-                        "_gogo_want": 1,
+                        "gogo_want": 1,
                         "_label": "January",
-                        "_mass": 40,
-                        "_stop_want": 2
+                        "mass": 40,
+                        "stop_want": 2
                     },
                     "July": {
-                        "_gogo_want": 7,
+                        "gogo_want": 7,
                         "_label": "July",
-                        "_mass": 40,
-                        "_stop_want": 8
+                        "mass": 40,
+                        "stop_want": 8
                     },
                     "June": {
-                        "_gogo_want": 6,
+                        "gogo_want": 6,
                         "_label": "June",
-                        "_mass": 40,
-                        "_stop_want": 7
+                        "mass": 40,
+                        "stop_want": 7
                     },
                     "March": {
-                        "_gogo_want": 3,
+                        "gogo_want": 3,
                         "_label": "March",
-                        "_mass": 40,
-                        "_stop_want": 4
+                        "mass": 40,
+                        "stop_want": 4
                     },
                     "May": {
-                        "_gogo_want": 5,
+                        "gogo_want": 5,
                         "_label": "May",
-                        "_mass": 40,
-                        "_stop_want": 6
+                        "mass": 40,
+                        "stop_want": 6
                     },
                     "November": {
-                        "_gogo_want": 11,
+                        "gogo_want": 11,
                         "_label": "November",
-                        "_mass": 40,
-                        "_stop_want": 12
+                        "mass": 40,
+                        "stop_want": 12
                     },
                     "October": {
-                        "_gogo_want": 10,
+                        "gogo_want": 10,
                         "_label": "October",
-                        "_mass": 40,
-                        "_stop_want": 11
+                        "mass": 40,
+                        "stop_want": 11
                     },
                     "September": {
-                        "_gogo_want": 9,
+                        "gogo_want": 9,
                         "_label": "September",
-                        "_mass": 40,
-                        "_stop_want": 10
+                        "mass": 40,
+                        "stop_want": 10
                     }
                 },
                 "_label": "year_month",
-                "_mass": 40
+                "mass": 40
             },
             "year_week": {
-                "_begin": 0,
-                "_close": 52,
+                "begin": 0,
+                "close": 52,
                 "_label": "year_week",
-                "_mass": 40
+                "mass": 40
             }
         },
         "_label": "music",
-        "_mass": 1,
+        "mass": 1,
         "_uid": 1
     },
-    "_mass": 1,
+    "mass": 1,
     "_max_tree_traverse": 2,
     "_originunit": {
         "_originholds": {}

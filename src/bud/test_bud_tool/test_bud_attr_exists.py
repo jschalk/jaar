@@ -45,7 +45,7 @@ def test_bud_acctunit_exists_ReturnsObj():
     # WHEN
     sue_bud.add_acctunit(yao_text)
 
-    #  THEN
+    # THEN
     assert bud_acctunit_exists(sue_bud, required_args)
 
 
@@ -244,7 +244,7 @@ def test_bud_idea_teamlink_exists_ReturnsObj():
     assert not bud_idea_teamlink_exists(sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot._teamunit.set_teamlink(swim_text)
+    sue_bud._idearoot.teamunit.set_teamlink(swim_text)
 
     # THEN
     assert not bud_idea_teamlink_exists(sue_bud, {})
@@ -274,7 +274,7 @@ def test_bud_idea_healerlink_exists_ReturnsObj():
     assert not bud_idea_healerlink_exists(sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot._healerlink.set_healer_id(swim_text)
+    sue_bud._idearoot.healerlink.set_healer_id(swim_text)
 
     # THEN
     assert not bud_idea_healerlink_exists(sue_bud, {})
@@ -333,7 +333,7 @@ def test_bud_attr_exists_ReturnsObj_bud_acctunit():
     # WHEN
     sue_bud.add_acctunit(yao_text)
 
-    #  THEN
+    # THEN
     assert bud_attr_exists(bud_acctunit_text(), sue_bud, x_required_args)
 
 
@@ -534,7 +534,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot._teamunit.set_teamlink(swim_text)
+    sue_bud._idearoot.teamunit.set_teamlink(swim_text)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})
@@ -565,7 +565,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_healerlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot._healerlink.set_healer_id(swim_text)
+    sue_bud._idearoot.healerlink.set_healer_id(swim_text)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})

@@ -142,12 +142,12 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     yao_bud = budunit_shop(_owner_id=yao_text)
     min_range_x_text = "a_minute_range"
     min_range_x_road = yao_bud.make_l1_road(min_range_x_text)
-    min_range_idea = ideaunit_shop(min_range_x_text, _begin=0, _close=2880)
+    min_range_idea = ideaunit_shop(min_range_x_text, begin=0, close=2880)
     yao_bud.set_l1_idea(min_range_idea)
 
     day_distance_text = "day_1ce"
     day_distance_road = yao_bud.make_l1_road(day_distance_text)
-    day_distance_idea = ideaunit_shop(day_distance_text, _begin=0, _close=1440)
+    day_distance_idea = ideaunit_shop(day_distance_text, begin=0, close=1440)
     yao_bud.set_l1_idea(day_distance_idea)
 
     hour_distance_text = "hour_distance"
@@ -182,7 +182,7 @@ def test_BudUnit_get_inheritor_idea_list_ReturnsObj_Scenario0():
     tech_road = yao_budunit.make_l1_road("tech")
     week_text = "week"
     week_road = yao_budunit.make_road(tech_road, week_text)
-    yao_budunit.set_idea(ideaunit_shop(week_text, _begin=0, _close=10800), tech_road)
+    yao_budunit.set_idea(ideaunit_shop(week_text, begin=0, close=10800), tech_road)
     mon_text = "Monday"
     mon_road = yao_budunit.make_road(week_road, mon_text)
     yao_budunit.set_idea(ideaunit_shop(mon_text), week_road)

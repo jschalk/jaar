@@ -66,9 +66,9 @@ def get_example_zia_speaker() -> BudUnit:
     zia_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     zia_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     yao_text = "Yao"
-    zia_speaker.add_acctunit(yao_text, debtit_score=12)
+    zia_speaker.add_acctunit(yao_text, debtit_belief=12)
     cook_ideaunit = zia_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_text)
     zia_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
@@ -84,9 +84,9 @@ def get_example_bob_speaker() -> BudUnit:
     bob_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     bob_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     yao_text = "Yao"
-    bob_speaker.add_acctunit(yao_text, debtit_score=12)
+    bob_speaker.add_acctunit(yao_text, debtit_belief=12)
     cook_ideaunit = bob_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_text)
     bob_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
@@ -100,15 +100,15 @@ def get_example_yao_speaker() -> BudUnit:
     zia_text = "Zia"
     bob_text = "Bob"
     yao_speaker = budunit_shop(yao_text)
-    yao_speaker.add_acctunit(yao_text, debtit_score=12)
-    yao_speaker.add_acctunit(zia_text, debtit_score=36)
-    yao_speaker.add_acctunit(bob_text, debtit_score=48)
+    yao_speaker.add_acctunit(yao_text, debtit_belief=12)
+    yao_speaker.add_acctunit(zia_text, debtit_belief=36)
+    yao_speaker.add_acctunit(bob_text, debtit_belief=48)
     yao_speaker.set_acct_respect(100)
     yao_speaker.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
     yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_text)
     yao_speaker.edit_idea_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )

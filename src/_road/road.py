@@ -232,9 +232,8 @@ class ValidateRoadNodeException(Exception):
 
 
 def is_roadnode(x_roadnode: RoadNode, x_delimiter: str):
-    if str(type(x_roadnode)) == "<class 'str'>":
-        x_roadnode = RoadNode(x_roadnode)
-        return x_roadnode.is_node(delimiter=x_delimiter)
+    x_roadnode = RoadNode(x_roadnode)
+    return x_roadnode.is_node(delimiter=x_delimiter)
 
 
 def validate_roadnode(

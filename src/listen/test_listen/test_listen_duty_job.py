@@ -96,9 +96,9 @@ def get_example_yao_bud() -> BudUnit:
     bob_text = "Bob"
     yao_speaker = budunit_shop(yao_text, get_default_real_id_roadnode())
     yao_speaker.set_idea(ideaunit_shop(run_text()), casa_road())
-    yao_speaker.add_acctunit(yao_text, debtit_score=10)
-    yao_speaker.add_acctunit(zia_text, debtit_score=30)
-    yao_speaker.add_acctunit(bob_text, debtit_score=40)
+    yao_speaker.add_acctunit(yao_text, debtit_belief=10)
+    yao_speaker.add_acctunit(zia_text, debtit_belief=30)
+    yao_speaker.add_acctunit(bob_text, debtit_belief=40)
     yao_speaker.set_acct_respect(80)
     return yao_speaker
 
@@ -112,7 +112,7 @@ def get_example_yao_job1_speaker() -> BudUnit:
     yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
     return yao_speaker
@@ -127,7 +127,7 @@ def get_example_yao_job2_speaker() -> BudUnit:
     yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
 
@@ -249,12 +249,12 @@ def get_example_yao_voice_with_3_healers():
     yao_text = yao_voice.get_acct("Yao").acct_id
     bob_text = yao_voice.get_acct("Bob").acct_id
     zia_text = yao_voice.get_acct("Zia").acct_id
-    iowa_idea = ideaunit_shop(get_iowa_text(), _problem_bool=True)
-    ohio_idea = ideaunit_shop(get_ohio_text(), _problem_bool=True)
-    utah_idea = ideaunit_shop(get_utah_text(), _problem_bool=True)
-    iowa_idea._healerlink.set_healer_id(get_yao_iowa_hubunit().owner_id)
-    ohio_idea._healerlink.set_healer_id(get_yao_ohio_hubunit().owner_id)
-    utah_idea._healerlink.set_healer_id(get_zia_utah_hubunit().owner_id)
+    iowa_idea = ideaunit_shop(get_iowa_text(), problem_bool=True)
+    ohio_idea = ideaunit_shop(get_ohio_text(), problem_bool=True)
+    utah_idea = ideaunit_shop(get_utah_text(), problem_bool=True)
+    iowa_idea.healerlink.set_healer_id(get_yao_iowa_hubunit().owner_id)
+    ohio_idea.healerlink.set_healer_id(get_yao_ohio_hubunit().owner_id)
+    utah_idea.healerlink.set_healer_id(get_zia_utah_hubunit().owner_id)
     yao_voice.set_idea(iowa_idea, get_usa_road())
     yao_voice.set_idea(ohio_idea, get_usa_road())
     yao_voice.set_idea(utah_idea, get_usa_road())
@@ -264,7 +264,7 @@ def get_example_yao_voice_with_3_healers():
 
 # def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
 #     # ESTABLISH
-#     # yao0_voice with 3 debotors of different credit_scores
+#     # yao0_voice with 3 debotors of different credit_beliefs
 #     # yao_job1 with 1 task, fact that doesn't make that task active
 #     # yao_job2 with 2 tasks, one is equal fact that makes task active
 #     # yao_job3 with 1 new task, fact stays with it
@@ -313,7 +313,7 @@ def get_example_yao_voice_with_3_healers():
 #     yao_action = yao_iowa_hubunit.get_action_bud()
 #     yao_action.settle_bud()
 #     assert yao_action._accts.keys() == yao_voice0._accts.keys()
-#     assert yao_action.get_acct(yao_text)._irrational_debtit_score == 0
+#     assert yao_action.get_acct(yao_text)._irrational_debtit_belief == 0
 #     yao_action_accts = yao_action.get_dict().get("_accts")
 #     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
 #     yao_action_bob = yao_action_accts.get("Bob")
@@ -330,7 +330,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_action.idea_exists(cook_road())
 #     assert yao_action.idea_exists(clean_road())
 #     assert yao_action.idea_exists(run_road()) is False
-#     assert len(yao_action._idearoot._factunits) == 2
+#     assert len(yao_action._idearoot.factunits) == 2
 #     assert yao_action != yao_voice0
 
 
@@ -338,7 +338,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    # yao0_voice with 3 debotors of different credit_scores
+    # yao0_voice with 3 debotors of different credit_beliefs
     # yao_job1 with 1 task, fact that doesn't make that task active
     # yao_job2 with 2 tasks, one is equal fact that makes task active
     # yao_job3 with 1 new task, fact stays with it
@@ -390,7 +390,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_action = yao_iowa_hubunit.get_action_bud()
     yao_action.settle_bud()
     assert yao_action._accts.keys() == yao_voice0._accts.keys()
-    assert yao_action.get_acct(yao_text)._irrational_debtit_score == 0
+    assert yao_action.get_acct(yao_text)._irrational_debtit_belief == 0
     yao_action_accts = yao_action.get_dict().get("_accts")
     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
     yao_action_bob = yao_action_accts.get("Bob")
@@ -413,7 +413,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_action.get_fact(get_location_road()) is not None
     assert yao_action.get_fact(get_location_road()).pick == get_in_ocean_road()
     assert len(yao_action.get_agenda_dict()) == 1
-    assert len(yao_action._idearoot._factunits) == 1
+    assert len(yao_action._idearoot.factunits) == 1
     assert yao_action != yao_voice0
 
 

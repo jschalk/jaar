@@ -69,6 +69,18 @@ def test_category_text_ReturnsObj():
     assert category_text() == "category"
 
 
+def test_atom_insert_ReturnsObj():
+    assert atom_insert() == "INSERT"
+
+
+def test_atom_update_ReturnsObj():
+    assert atom_update() == "UPDATE"
+
+
+def test_atom_delete_ReturnsObj():
+    assert atom_delete() == "DELETE"
+
+
 def test_crud_text_str_ReturnsObj():
     assert crud_text_str() == "crud_text"
 
@@ -496,17 +508,17 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
     assert acctunit_columns.get(acct_id_str()) is not None
-    assert acctunit_columns.get("credit_score") is not None
-    assert acctunit_columns.get("debtit_score") is not None
+    assert acctunit_columns.get("credit_belief") is not None
+    assert acctunit_columns.get("debtit_belief") is not None
 
     acct_id_dict = acctunit_columns.get(acct_id_str())
     assert len(acct_id_dict) == 2
     assert acct_id_dict.get(sqlite_datatype_text()) == "TEXT"
     assert acct_id_dict.get("nullable") is False
-    debtit_score_dict = acctunit_columns.get("debtit_score")
+    debtit_belief_dict = acctunit_columns.get("debtit_belief")
     assert len(acct_id_dict) == 2
-    assert debtit_score_dict.get(sqlite_datatype_text()) == "INTEGER"
-    assert debtit_score_dict.get("nullable") is True
+    assert debtit_belief_dict.get(sqlite_datatype_text()) == "INTEGER"
+    assert debtit_belief_dict.get("nullable") is True
 
     assert len(cat_idea) == 2
     idea_columns = cat_idea.get(columns_text)
@@ -632,10 +644,10 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("begin") == "float"
     assert x_python_types.get("bit") == "float"
     assert x_python_types.get("close") == "float"
-    assert x_python_types.get("credit_score") == "int"
+    assert x_python_types.get("credit_belief") == "int"
     assert x_python_types.get("credit_vote") == "int"
     assert x_python_types.get("credor_respect") == "int"
-    assert x_python_types.get("debtit_score") == "int"
+    assert x_python_types.get("debtit_belief") == "int"
     assert x_python_types.get("debtit_vote") == "int"
     assert x_python_types.get("debtor_respect") == "int"
     assert x_python_types.get("denom") == "int"

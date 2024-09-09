@@ -58,25 +58,25 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
 
     auto_text = "auto"
     auto_road = yao_budunit.make_l1_road(auto_text)
-    auto_idea = ideaunit_shop(auto_text, _mass=10)
+    auto_idea = ideaunit_shop(auto_text, mass=10)
     yao_budunit.set_l1_idea(auto_idea)
 
     barn_text = "barn"
     barn_road = yao_budunit.make_l1_road(barn_text)
-    barn_idea = ideaunit_shop(barn_text, _mass=60)
+    barn_idea = ideaunit_shop(barn_text, mass=60)
     yao_budunit.set_l1_idea(barn_idea)
     lamb_text = "lambs"
     lamb_road = yao_budunit.make_road(barn_road, lamb_text)
-    lamb_idea = ideaunit_shop(lamb_text, _mass=1)
+    lamb_idea = ideaunit_shop(lamb_text, mass=1)
     yao_budunit.set_idea(lamb_idea, parent_road=barn_road)
     duck_text = "ducks"
     duck_road = yao_budunit.make_road(barn_road, duck_text)
-    duck_idea = ideaunit_shop(duck_text, _mass=2)
+    duck_idea = ideaunit_shop(duck_text, mass=2)
     yao_budunit.set_idea(duck_idea, parent_road=barn_road)
 
     coal_text = "coal"
     coal_road = yao_budunit.make_l1_road(coal_text)
-    coal_idea = ideaunit_shop(coal_text, _mass=30)
+    coal_idea = ideaunit_shop(coal_text, mass=30)
     yao_budunit.set_l1_idea(coal_idea)
 
     assert yao_budunit._idearoot._fund_onset is None
@@ -128,14 +128,14 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario0():
 
     status_text = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_text)
-    sue_bud.set_idea(ideaunit_shop(status_text, _mass=0), casa_road)
+    sue_bud.set_idea(ideaunit_shop(status_text, mass=0), casa_road)
 
     non_text = "not clean"
     yes_text = "yes clean"
     non_road = sue_bud.make_road(status_road, non_text)
     yes_road = sue_bud.make_road(status_road, yes_text)
     sue_bud.set_idea(ideaunit_shop(non_text), status_road)
-    sue_bud.set_idea(ideaunit_shop(yes_text, _mass=2), status_road)
+    sue_bud.set_idea(ideaunit_shop(yes_text, mass=2), status_road)
 
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio is None
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio is None
@@ -170,7 +170,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario1():
     sue_bud.set_idea(ideaunit_shop(status_text), casa_road)
 
     status_idea = sue_bud.get_idea_obj(status_road)
-    print(f"{status_idea._mass=}")
+    print(f"{status_idea.mass=}")
     print("This should raise error: 'Ideaunit._'")
 
     clean_text = "clean"
@@ -179,9 +179,9 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario1():
     mod_text = "moderately"
     dirty_text = "dirty"
 
-    sue_bud.set_idea(ideaunit_shop(clean_text, _mass=0), status_road)
+    sue_bud.set_idea(ideaunit_shop(clean_text, mass=0), status_road)
     sue_bud.set_idea(ideaunit_shop(very_text), clean_road)
-    sue_bud.set_idea(ideaunit_shop(mod_text, _mass=2), clean_road)
+    sue_bud.set_idea(ideaunit_shop(mod_text, mass=2), clean_road)
     sue_bud.set_idea(ideaunit_shop(dirty_text), clean_road)
 
     very_road = sue_bud.make_road(clean_road, very_text)
@@ -215,23 +215,23 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFund
     sue_budunit.add_acctunit(yao_text)
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _mass=1)
+    casa_idea = ideaunit_shop(casa_text, mass=1)
 
     swim_text = "swimming"
     swim_road = sue_budunit.make_road(casa_road, swim_text)
-    swim_idea = ideaunit_shop(swim_text, _mass=8)
+    swim_idea = ideaunit_shop(swim_text, mass=8)
 
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    clean_idea = ideaunit_shop(clean_text, _mass=2)
+    clean_idea = ideaunit_shop(clean_text, mass=2)
     sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _mass=0)
+    sweep_idea = ideaunit_shop(sweep_text, mass=0)
     vaccum_text = "vaccum"
     vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
-    vaccum_idea = ideaunit_shop(vaccum_text, _mass=0)
+    vaccum_idea = ideaunit_shop(vaccum_text, mass=0)
 
     sue_budunit.set_l1_idea(casa_idea)
     sue_budunit.set_idea(swim_idea, casa_road)
@@ -395,7 +395,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_ta
     sue_bud.set_acctunit(acctunit_shop(sue_text))
     sue_awardlink = awardlink_shop(sue_text, give_force=37)
     x_idearoot.set_awardlink(sue_awardlink)
-    assert len(x_idearoot._awardlinks) == 4
+    assert len(x_idearoot.awardlinks) == 4
     assert len(sue_bud.get_acctunit_group_ids_dict()) == 4
 
     # WHEN
@@ -538,7 +538,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fun
     swim_idea.set_awardlink(xio_awardlink)
 
     # no awardlinks attached to this one
-    x_bud.set_l1_idea(ideaunit_shop("hunt", _mass=3))
+    x_bud.set_l1_idea(ideaunit_shop("hunt", mass=3))
 
     # WHEN
     x_bud.settle_bud()
@@ -546,13 +546,13 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fun
     # THEN
     x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
     with pytest_raises(Exception) as excinfo:
-        x_idearoot._awardlinks[yao_text]
+        x_idearoot.awardlinks[yao_text]
     assert str(excinfo.value) == f"'{yao_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_idearoot._awardlinks[zia_text]
+        x_idearoot.awardlinks[zia_text]
     assert str(excinfo.value) == f"'{zia_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_idearoot._awardlinks[xio_text]
+        x_idearoot.awardlinks[xio_text]
     assert str(excinfo.value) == f"'{xio_text}'"
     with pytest_raises(Exception) as excinfo:
         x_idearoot._kids["hunt"]._awardheirs[yao_text]
@@ -600,7 +600,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
     sue_bud._idearoot.set_awardlink(yao_awardlink)
     sue_bud._idearoot.set_awardlink(zia_awardlink)
     sue_bud._idearoot.set_awardlink(Xio_awardlink)
-    assert len(sue_bud._idearoot._awardlinks) == 3
+    assert len(sue_bud._idearoot.awardlinks) == 3
 
     # WHEN
     idea_dict = sue_bud.get_idea_dict()
@@ -853,7 +853,7 @@ def test_BudUnit_settle_bud_CorrectlySetsPartGroupedLWAcctUnitBud_fund():
 
     # no awardlinks attached to this one
     hunt_text = "hunt"
-    yao_bud.set_l1_idea(ideaunit_shop(hunt_text, _mass=3))
+    yao_bud.set_l1_idea(ideaunit_shop(hunt_text, mass=3))
 
     # WHEN
     yao_bud.settle_bud()
@@ -975,7 +975,7 @@ def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
     for groupbox_x in x_bud._groupboxs.values():
         groupbox_x.clear_fund_give_take()
         # for membership_x in groupbox_x._accts.values():
-        #     print(f"{groupbox_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_score=} {membership__fund_take:t:.6f} {membership_x.} ")
+        #     print(f"{groupbox_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_belief=} {membership__fund_take:t:.6f} {membership_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud._accts.values():
@@ -1142,9 +1142,9 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     sue_text = "Sue"
     bob_text = "Bob"
     zia_text = "Zia"
-    sue_acctunit = acctunit_shop(sue_text, 0.5, debtit_score=2)
-    bob_acctunit = acctunit_shop(bob_text, 1.5, debtit_score=3)
-    zia_acctunit = acctunit_shop(zia_text, 8, debtit_score=5)
+    sue_acctunit = acctunit_shop(sue_text, 0.5, debtit_belief=2)
+    bob_acctunit = acctunit_shop(bob_text, 1.5, debtit_belief=3)
+    zia_acctunit = acctunit_shop(zia_text, 8, debtit_belief=5)
     yao_bud.set_acctunit(sue_acctunit)
     yao_bud.set_acctunit(bob_acctunit)
     yao_bud.set_acctunit(zia_acctunit)
@@ -1203,10 +1203,10 @@ def test_BudUnit_settle_bud_CreatesGroupBoxWith_budunit_v001():
     # THEN
     # print(f"{len(idea_dict)=}")
     db_idea = idea_dict.get(yao_bud.make_l1_road("D&B"))
-    assert len(db_idea._awardlinks) == 3
+    assert len(db_idea.awardlinks) == 3
     # for idea_key in idea_dict:
     #     print(f"{idea_key=}")
     #     if idea._label == "D&B":
-    #         print(f"{idea._label=} {idea._awardlinks=}")
-    #         db_awardlink_len = len(idea._awardlinks)
+    #         print(f"{idea._label=} {idea.awardlinks=}")
+    #         db_awardlink_len = len(idea.awardlinks)
     # assert db_awardlink_len == 3

@@ -206,33 +206,33 @@ def ideaattrfilter_shop(
 @dataclass
 class IdeaUnit:
     _label: RoadNode = None
-    _mass: int = None
+    mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
     _bud_real_id: RealID = None
     _uid: int = None  # Calculated field?
-    _awardlinks: dict[GroupID, AwardLink] = None
+    awardlinks: dict[GroupID, AwardLink] = None
     _awardheirs: dict[GroupID, AwardHeir] = None  # Calculated field
     _awardlines: dict[GroupID, AwardLine] = None  # Calculated field
-    _reasonunits: dict[RoadUnit, ReasonUnit] = None
+    reasonunits: dict[RoadUnit, ReasonUnit] = None
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None  # Calculated field
-    _teamunit: TeamUnit = None
+    teamunit: TeamUnit = None
     _teamheir: TeamHeir = None  # Calculated field
-    _factunits: dict[RoadUnit, FactUnit] = None
+    factunits: dict[RoadUnit, FactUnit] = None
     _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
-    _healerlink: HealerLink = None
-    _begin: float = None
-    _close: float = None
-    _addin: float = None
-    _denom: int = None
-    _numor: int = None
-    _morph: bool = None
-    _gogo_want: bool = None
-    _stop_want: bool = None
+    healerlink: HealerLink = None
+    begin: float = None
+    close: float = None
+    addin: float = None
+    denom: int = None
+    numor: int = None
+    morph: bool = None
+    gogo_want: bool = None
+    stop_want: bool = None
     pledge: bool = None
     _originunit: OriginUnit = None
-    _problem_bool: bool = None
+    problem_bool: bool = None
     # Calculated fields
     _range_evaluated: bool = None
     _gogo_calc: float = None
@@ -258,7 +258,7 @@ class IdeaUnit:
         return self.pledge and self._active and base_reasonunit_exists
 
     def base_reasonunit_exists(self, necessary_base: RoadUnit = None) -> bool:
-        x_reasons = self._reasonunits.values()
+        x_reasons = self.reasonunits.values()
         x_base = necessary_base
         return x_base is None or any(reason.base == x_base for reason in x_reasons)
 
@@ -281,8 +281,8 @@ class IdeaUnit:
             x_fact.base == self.get_road()
             and self._gogo_calc is not None
             and self._stop_calc is not None
-            and self._begin is None
-            and self._close is None
+            and self.begin is None
+            and self.close is None
         ):
             raise ranged_fact_idea_Exception(
                 f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact idea must have _begin, _close attributes"
@@ -293,14 +293,14 @@ class IdeaUnit:
         self._factheirs[x_factheir.base] = x_factheir
 
     def apply_factunit_transformations(self, factheir: FactHeir) -> FactHeir:
-        for factunit in self._factunits.values():
+        for factunit in self.factunits.values():
             if factunit.base == factheir.base:
                 factheir.transform(factunit)
         return factheir
 
     def delete_factunit_if_past(self, factheir: FactHeir):
         delete_factunit = False
-        for factunit in self._factunits.values():
+        for factunit in self.factunits.values():
             if (
                 factunit.base == factheir.base
                 and factunit.fnigh is not None
@@ -309,16 +309,16 @@ class IdeaUnit:
                 delete_factunit = True
 
         if delete_factunit:
-            del self._factunits[factunit.base]
+            del self.factunits[factunit.base]
 
     def set_factunit(self, factunit: FactUnit):
-        self._factunits[factunit.base] = factunit
+        self.factunits[factunit.base] = factunit
 
     def factunit_exists(self, x_base: RoadUnit) -> bool:
-        return self._factunits.get(x_base) != None
+        return self.factunits.get(x_base) != None
 
     def get_factunits_dict(self) -> dict[RoadUnit, FactUnit]:
-        return {hc.base: hc.get_dict() for hc in self._factunits.values()}
+        return {hc.base: hc.get_dict() for hc in self.factunits.values()}
 
     def set_factunit_to_complete(self, base_factunit: FactUnit):
         # if a idea is considered a task then a factheir.fopen attribute can be increased to
@@ -326,7 +326,7 @@ class IdeaUnit:
         # the minimal factheir.fopen to modify idea._task is False. idea_core._factheir cannot be straight up manipulated
         # so it is mandatory that idea._factunit is different.
         # self.set_factunits(base=fact, fact=base, open=premise_nigh, nigh=fact_nigh)
-        self._factunits[base_factunit.base] = factunit_shop(
+        self.factunits[base_factunit.base] = factunit_shop(
             base=base_factunit.base,
             pick=base_factunit.base,
             fopen=base_factunit.fnigh,
@@ -334,7 +334,7 @@ class IdeaUnit:
         )
 
     def del_factunit(self, base: RoadUnit):
-        self._factunits.pop(base)
+        self.factunits.pop(base)
 
     def set_fund_attr(
         self,
@@ -357,8 +357,8 @@ class IdeaUnit:
         self, x_gogo: float = None, x_stop: float = None
     ) -> dict[RoadNode,]:
         if x_gogo is None and x_stop is None:
-            x_gogo = self._gogo_want
-            x_gogo = self._stop_want
+            x_gogo = self.gogo_want
+            x_gogo = self.stop_want
         elif x_gogo is not None and x_stop is None:
             x_stop = x_gogo
 
@@ -443,7 +443,7 @@ class IdeaUnit:
             )
             self._awardheirs[awardheir.group_id] = awardheir
 
-        for ib in self._awardlinks.values():
+        for ib in self.awardlinks.values():
             awardheir = awardheir_shop(
                 group_id=ib.group_id,
                 give_force=ib.give_force,
@@ -524,7 +524,7 @@ class IdeaUnit:
         )
 
         new_reasonunits = {}
-        for reasonunit_road, reasonunit_obj in self._reasonunits.items():
+        for reasonunit_road, reasonunit_obj in self.reasonunits.items():
             new_reasonunit_road = replace_road_delimiter(
                 road=reasonunit_road,
                 old_delimiter=old_delimiter,
@@ -532,10 +532,10 @@ class IdeaUnit:
             )
             reasonunit_obj.set_delimiter(self._road_delimiter)
             new_reasonunits[new_reasonunit_road] = reasonunit_obj
-        self._reasonunits = new_reasonunits
+        self.reasonunits = new_reasonunits
 
         new_factunits = {}
-        for factunit_road, factunit_obj in self._factunits.items():
+        for factunit_road, factunit_obj in self.factunits.items():
             new_base_road = replace_road_delimiter(
                 road=factunit_road,
                 old_delimiter=old_delimiter,
@@ -549,7 +549,7 @@ class IdeaUnit:
             )
             factunit_obj.set_attr(pick=new_pick_road)
             new_factunits[new_base_road] = factunit_obj
-        self._factunits = new_factunits
+        self.factunits = new_factunits
 
     def set_originunit_empty_if_none(self):
         if self._originunit is None:
@@ -560,7 +560,7 @@ class IdeaUnit:
 
     def _set_attrs_to_ideaunit(self, idea_attr: IdeaAttrFilter):
         if idea_attr.mass is not None:
-            self._mass = idea_attr.mass
+            self.mass = idea_attr.mass
         if idea_attr.uid is not None:
             self._uid = idea_attr.uid
         if idea_attr.reason is not None:
@@ -582,25 +582,25 @@ class IdeaUnit:
                 base_idea_active_requisite=idea_attr.reason_base_idea_active_requisite,
             )
         if idea_attr.teamunit is not None:
-            self._teamunit = idea_attr.teamunit
+            self.teamunit = idea_attr.teamunit
         if idea_attr.healerlink is not None:
-            self._healerlink = idea_attr.healerlink
+            self.healerlink = idea_attr.healerlink
         if idea_attr.begin is not None:
-            self._begin = idea_attr.begin
+            self.begin = idea_attr.begin
         if idea_attr.close is not None:
-            self._close = idea_attr.close
+            self.close = idea_attr.close
         if idea_attr.gogo_want is not None:
-            self._gogo_want = idea_attr.gogo_want
+            self.gogo_want = idea_attr.gogo_want
         if idea_attr.stop_want is not None:
-            self._stop_want = idea_attr.stop_want
+            self.stop_want = idea_attr.stop_want
         if idea_attr.addin is not None:
-            self._addin = idea_attr.addin
+            self.addin = idea_attr.addin
         if idea_attr.numor is not None:
-            self._numor = idea_attr.numor
+            self.numor = idea_attr.numor
         if idea_attr.denom is not None:
-            self._denom = idea_attr.denom
+            self.denom = idea_attr.denom
         if idea_attr.morph is not None:
-            self._morph = idea_attr.morph
+            self.morph = idea_attr.morph
         if idea_attr.descendant_pledge_count is not None:
             self._descendant_pledge_count = idea_attr.descendant_pledge_count
         if idea_attr.all_acct_cred is not None:
@@ -618,7 +618,7 @@ class IdeaUnit:
         if idea_attr.factunit is not None:
             self.set_factunit(idea_attr.factunit)
         if idea_attr.problem_bool is not None:
-            self._problem_bool = idea_attr.problem_bool
+            self.problem_bool = idea_attr.problem_bool
 
         self._del_reasonunit_all_cases(
             base=idea_attr.reason_del_premise_base,
@@ -628,12 +628,12 @@ class IdeaUnit:
 
     def _set_addin_to_zero_if_any_transformations_exist(self):
         if (
-            self._begin is not None
-            and self._close is not None
-            and (self._numor is not None or self._denom is not None)
-            and self._addin is None
+            self.begin is not None
+            and self.close is not None
+            and (self.numor is not None or self.denom is not None)
+            and self.addin is None
         ):
-            self._addin = 0
+            self.addin = 0
 
     def clear_gogo_calc_stop_calc(self):
         self._range_evaluated = False
@@ -641,25 +641,25 @@ class IdeaUnit:
         self._stop_calc = None
 
     def _transform_gogo_calc_stop_calc(self):
-        r_idea_numor = get_1_if_None(self._numor)
-        r_idea_denom = get_1_if_None(self._denom)
-        r_idea_addin = get_0_if_None(self._addin)
+        r_idea_numor = get_1_if_None(self.numor)
+        r_idea_denom = get_1_if_None(self.denom)
+        r_idea_addin = get_0_if_None(self.addin)
 
         if self._gogo_calc is None or self._stop_calc is None:
             pass
-        elif self._gogo_want != None and self._stop_want != None:
-            stop_want_less_than_gogo_calc = self._stop_want < self._gogo_calc
-            gogo_want_greater_than_stop_calc = self._gogo_want > self._stop_calc
+        elif self.gogo_want != None and self.stop_want != None:
+            stop_want_less_than_gogo_calc = self.stop_want < self._gogo_calc
+            gogo_want_greater_than_stop_calc = self.gogo_want > self._stop_calc
             if stop_want_less_than_gogo_calc or gogo_want_greater_than_stop_calc:
                 self._gogo_calc = None
                 self._stop_calc = None
             else:
-                self._gogo_calc = max(self._gogo_calc, self._gogo_want)
-                self._stop_calc = min(self._stop_calc, self._stop_want)
-        elif get_False_if_None(self._morph):
+                self._gogo_calc = max(self._gogo_calc, self.gogo_want)
+                self._stop_calc = min(self._stop_calc, self.stop_want)
+        elif get_False_if_None(self.morph):
             x_gogo = self._gogo_calc
             x_stop = self._stop_calc
-            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, self._denom)
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, self.denom)
             self._gogo_calc = x_rangeunit.gogo
             self._stop_calc = x_rangeunit.stop
         else:
@@ -672,7 +672,7 @@ class IdeaUnit:
     def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
         if base is not None and premise is not None:
             self.del_reasonunit_premise(base=base, premise=premise)
-            if len(self._reasonunits[base].premises) == 0:
+            if len(self.reasonunits[base].premises) == 0:
                 self.del_reasonunit_base(base=base)
 
     def set_reason_base_idea_active_requisite(
@@ -689,10 +689,10 @@ class IdeaUnit:
     def _get_or_create_reasonunit(self, base: RoadUnit) -> ReasonUnit:
         x_reasonunit = None
         try:
-            x_reasonunit = self._reasonunits[base]
+            x_reasonunit = self.reasonunits[base]
         except Exception:
             x_reasonunit = reasonunit_shop(base, delimiter=self._road_delimiter)
-            self._reasonunits[base] = x_reasonunit
+            self.reasonunits[base] = x_reasonunit
         return x_reasonunit
 
     def set_reason_premise(
@@ -708,12 +708,12 @@ class IdeaUnit:
 
     def del_reasonunit_base(self, base: RoadUnit):
         try:
-            self._reasonunits.pop(base)
+            self.reasonunits.pop(base)
         except KeyError as e:
             raise InvalidIdeaException(f"No ReasonUnit at '{base}'") from e
 
     def del_reasonunit_premise(self, base: RoadUnit, premise: RoadUnit):
-        reason_unit = self._reasonunits[base]
+        reason_unit = self.reasonunits[base]
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, idea_kid):
@@ -738,29 +738,32 @@ class IdeaUnit:
         self._kids = {}
 
     def get_kids_mass_sum(self) -> float:
-        return sum(x_kid._mass for x_kid in self._kids.values())
+        return sum(x_kid.mass for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
-        self._awardlinks[awardlink.group_id] = awardlink
+        self.awardlinks[awardlink.group_id] = awardlink
+
+    def get_awardlink(self, group_id: GroupID) -> AwardLink:
+        return self.awardlinks.get(group_id)
 
     def del_awardlink(self, group_id: GroupID):
         try:
-            self._awardlinks.pop(group_id)
+            self.awardlinks.pop(group_id)
         except KeyError as e:
             raise (f"Cannot delete awardlink '{group_id}'.") from e
 
     def awardlink_exists(self, x_group_id: GroupID) -> bool:
-        return self._awardlinks.get(x_group_id) != None
+        return self.awardlinks.get(x_group_id) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.delimiter = self._road_delimiter
-        self._reasonunits[reason.base] = reason
+        self.reasonunits[reason.base] = reason
 
     def reasonunit_exists(self, x_base: RoadUnit) -> bool:
-        return self._reasonunits.get(x_base) != None
+        return self.reasonunits.get(x_base) != None
 
     def get_reasonunit(self, base: RoadUnit) -> ReasonUnit:
-        return self._reasonunits.get(base)
+        return self.reasonunits.get(base)
 
     def set_reasonheirs_status(self):
         self.clear_reasonheirs_status()
@@ -840,7 +843,7 @@ class IdeaUnit:
         self, reasonheirs: dict[RoadUnit, ReasonHeir]
     ) -> dict[RoadUnit, ReasonHeir]:
         new_reasonheirs = deepcopy(reasonheirs)
-        new_reasonheirs |= self._reasonunits
+        new_reasonheirs |= self.reasonunits
         return new_reasonheirs
 
     def set_reasonheirs(
@@ -860,7 +863,7 @@ class IdeaUnit:
 
     def set_idearoot_inherit_reasonheirs(self):
         self._reasonheirs = {}
-        for x_reasonunit in self._reasonunits.values():
+        for x_reasonunit in self.reasonunits.values():
             new_reasonheir = reasonheir_shop(x_reasonunit.base)
             new_reasonheir.inherit_from_reasonheir(x_reasonunit)
             self._reasonheirs[new_reasonheir.base] = new_reasonheir
@@ -869,13 +872,13 @@ class IdeaUnit:
         return self._reasonheirs.get(base)
 
     def get_reasonunits_dict(self):
-        return {base: reason.get_dict() for base, reason in self._reasonunits.items()}
+        return {base: reason.get_dict() for base, reason in self.reasonunits.items()}
 
     def get_kids_dict(self) -> dict[GroupID,]:
         return {c_road: kid.get_dict() for c_road, kid in self._kids.items()}
 
     def get_awardlinks_dict(self) -> dict[GroupID, dict]:
-        x_awardlinks = self._awardlinks.items()
+        x_awardlinks = self.awardlinks.items()
         return {
             x_group_id: awardlink.get_dict() for x_group_id, awardlink in x_awardlinks
         }
@@ -884,13 +887,13 @@ class IdeaUnit:
         return self._kids == {}
 
     def is_math(self) -> bool:
-        return self._begin is not None and self._close is not None
+        return self.begin is not None and self.close is not None
 
     def awardheir_exists(self) -> bool:
         return self._awardheirs != {}
 
     def get_dict(self) -> dict[str, str]:
-        x_dict = {"_mass": self._mass}
+        x_dict = {"mass": self.mass}
 
         if self._label is not None:
             x_dict["_label"] = self._label
@@ -898,38 +901,38 @@ class IdeaUnit:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
             x_dict["_kids"] = self.get_kids_dict()
-        if self._reasonunits not in [{}, None]:
-            x_dict["_reasonunits"] = self.get_reasonunits_dict()
-        if self._teamunit not in [None, teamunit_shop()]:
-            x_dict["_teamunit"] = self.get_teamunit_dict()
-        if self._healerlink not in [None, healerlink_shop()]:
-            x_dict["_healerlink"] = self._healerlink.get_dict()
-        if self._awardlinks not in [{}, None]:
-            x_dict["_awardlinks"] = self.get_awardlinks_dict()
+        if self.reasonunits not in [{}, None]:
+            x_dict["reasonunits"] = self.get_reasonunits_dict()
+        if self.teamunit not in [None, teamunit_shop()]:
+            x_dict["teamunit"] = self.get_teamunit_dict()
+        if self.healerlink not in [None, healerlink_shop()]:
+            x_dict["healerlink"] = self.healerlink.get_dict()
+        if self.awardlinks not in [{}, None]:
+            x_dict["awardlinks"] = self.get_awardlinks_dict()
         if self._originunit not in [None, originunit_shop()]:
             x_dict["_originunit"] = self.get_originunit_dict()
-        if self._begin is not None:
-            x_dict["_begin"] = self._begin
-        if self._close is not None:
-            x_dict["_close"] = self._close
-        if self._addin is not None:
-            x_dict["_addin"] = self._addin
-        if self._numor is not None:
-            x_dict["_numor"] = self._numor
-        if self._denom is not None:
-            x_dict["_denom"] = self._denom
-        if self._morph is not None:
-            x_dict["_morph"] = self._morph
-        if self._gogo_want is not None:
-            x_dict["_gogo_want"] = self._gogo_want
-        if self._stop_want is not None:
-            x_dict["_stop_want"] = self._stop_want
+        if self.begin is not None:
+            x_dict["begin"] = self.begin
+        if self.close is not None:
+            x_dict["close"] = self.close
+        if self.addin is not None:
+            x_dict["addin"] = self.addin
+        if self.numor is not None:
+            x_dict["numor"] = self.numor
+        if self.denom is not None:
+            x_dict["denom"] = self.denom
+        if self.morph is not None:
+            x_dict["morph"] = self.morph
+        if self.gogo_want is not None:
+            x_dict["gogo_want"] = self.gogo_want
+        if self.stop_want is not None:
+            x_dict["stop_want"] = self.stop_want
         if self.pledge:
             x_dict["pledge"] = self.pledge
-        if self._problem_bool:
-            x_dict["_problem_bool"] = self._problem_bool
-        if self._factunits not in [{}, None]:
-            x_dict["_factunits"] = self.get_factunits_dict()
+        if self.problem_bool:
+            x_dict["problem_bool"] = self.problem_bool
+        if self.factunits not in [{}, None]:
+            x_dict["factunits"] = self.get_factunits_dict()
         if self._is_expanded is False:
             x_dict["_is_expanded"] = self._is_expanded
 
@@ -939,17 +942,17 @@ class IdeaUnit:
         if is_sub_road(ref_road=self._parent_road, sub_road=old_road):
             self._parent_road = rebuild_road(self._parent_road, old_road, new_road)
 
-        self._reasonunits == find_replace_road_key_dict(
-            dict_x=self._reasonunits, old_road=old_road, new_road=new_road
+        self.reasonunits == find_replace_road_key_dict(
+            dict_x=self.reasonunits, old_road=old_road, new_road=new_road
         )
 
-        self._factunits == find_replace_road_key_dict(
-            dict_x=self._factunits, old_road=old_road, new_road=new_road
+        self.factunits == find_replace_road_key_dict(
+            dict_x=self.factunits, old_road=old_road, new_road=new_road
         )
 
     def set_teamunit_empty_if_none(self):
-        if self._teamunit is None:
-            self._teamunit = teamunit_shop()
+        if self.teamunit is None:
+            self.teamunit = teamunit_shop()
 
     def set_teamheir(
         self,
@@ -959,12 +962,12 @@ class IdeaUnit:
         self._teamheir = teamheir_shop()
         self._teamheir.set_teamlinks(
             parent_teamheir=parent_teamheir,
-            teamunit=self._teamunit,
+            teamunit=self.teamunit,
             bud_groupboxs=bud_groupboxs,
         )
 
     def get_teamunit_dict(self) -> dict:
-        return self._teamunit.get_dict()
+        return self.teamunit.get_dict()
 
 
 def ideaunit_shop(
@@ -972,30 +975,30 @@ def ideaunit_shop(
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,
-    _mass: int = 1,
-    _awardlinks: dict[GroupID, AwardLink] = None,
+    mass: int = 1,
+    awardlinks: dict[GroupID, AwardLink] = None,
     _awardheirs: dict[GroupID, AwardHeir] = None,  # Calculated field
     _awardlines: dict[GroupID, AwardLink] = None,  # Calculated field
-    _reasonunits: dict[RoadUnit, ReasonUnit] = None,
+    reasonunits: dict[RoadUnit, ReasonUnit] = None,
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None,  # Calculated field
-    _teamunit: TeamUnit = None,
+    teamunit: TeamUnit = None,
     _teamheir: TeamHeir = None,  # Calculated field
-    _factunits: dict[FactUnit] = None,
+    factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
-    _healerlink: HealerLink = None,
-    _begin: float = None,
-    _close: float = None,
-    _gogo_want: float = None,
-    _stop_want: float = None,
-    _addin: float = None,
-    _denom: int = None,
-    _numor: int = None,
-    _morph: bool = None,
+    healerlink: HealerLink = None,
+    begin: float = None,
+    close: float = None,
+    gogo_want: float = None,
+    stop_want: float = None,
+    addin: float = None,
+    denom: int = None,
+    numor: int = None,
+    morph: bool = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
     _bud_real_id: RealID = None,
-    _problem_bool: bool = None,
+    problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
     _fund_ratio: float = None,
@@ -1014,34 +1017,34 @@ def ideaunit_shop(
     _healerlink_ratio: float = None,
 ) -> IdeaUnit:
     _bud_real_id = root_label() if _bud_real_id is None else _bud_real_id
-    _healerlink = healerlink_shop() if _healerlink is None else _healerlink
+    x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_ideakid = IdeaUnit(
         _label=None,
         _uid=_uid,
         _parent_road=_parent_road,
         _kids=get_empty_dict_if_none(_kids),
-        _mass=get_positive_int(_mass),
-        _awardlinks=get_empty_dict_if_none(_awardlinks),
+        mass=get_positive_int(mass),
+        awardlinks=get_empty_dict_if_none(awardlinks),
         _awardheirs=get_empty_dict_if_none(_awardheirs),
         _awardlines=get_empty_dict_if_none(_awardlines),
-        _reasonunits=get_empty_dict_if_none(_reasonunits),
+        reasonunits=get_empty_dict_if_none(reasonunits),
         _reasonheirs=get_empty_dict_if_none(_reasonheirs),
-        _teamunit=_teamunit,
+        teamunit=teamunit,
         _teamheir=_teamheir,
-        _factunits=get_empty_dict_if_none(_factunits),
+        factunits=get_empty_dict_if_none(factunits),
         _factheirs=get_empty_dict_if_none(_factheirs),
-        _healerlink=_healerlink,
-        _begin=_begin,
-        _close=_close,
-        _gogo_want=_gogo_want,
-        _stop_want=_stop_want,
-        _addin=_addin,
-        _denom=_denom,
-        _numor=_numor,
-        _morph=_morph,
+        healerlink=x_healerlink,
+        begin=begin,
+        close=close,
+        gogo_want=gogo_want,
+        stop_want=stop_want,
+        addin=addin,
+        denom=denom,
+        numor=numor,
+        morph=morph,
         pledge=get_False_if_None(pledge),
-        _problem_bool=get_False_if_None(_problem_bool),
+        problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         _root=get_False_if_None(_root),
         _bud_real_id=_bud_real_id,
@@ -1072,19 +1075,19 @@ def ideaunit_shop(
 
 
 def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
-    if dict_key == "_reasonunits":
+    if dict_key == "reasonunits":
         return (
             reasons_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else None
         )
-    elif dict_key == "_teamunit":
+    elif dict_key == "teamunit":
         return (
             teamunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else teamunit_shop()
         )
-    elif dict_key == "_healerlink":
+    elif dict_key == "healerlink":
         return (
             healerlink_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
@@ -1096,13 +1099,13 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else originunit_shop()
         )
-    elif dict_key == "_factunits":
+    elif dict_key == "factunits":
         return (
             factunits_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else factunits_get_from_dict({})
         )
-    elif dict_key == "_awardlinks":
+    elif dict_key == "awardlinks":
         return (
             awardlinks_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
@@ -1110,7 +1113,7 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         )
     elif dict_key in {"_kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}
-    elif dict_key in {"pledge", "_problem_bool"}:
+    elif dict_key in {"pledge", "problem_bool"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else False
     elif dict_key in {"_is_expanded"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True
@@ -1129,14 +1132,14 @@ def ideas_calculated_range(
     idea_list: list[IdeaUnit], x_gogo: float, x_stop: float
 ) -> RangeUnit:
     for x_idea in idea_list:
-        if x_idea._addin:
-            x_gogo += get_0_if_None(x_idea._addin)
-            x_stop += get_0_if_None(x_idea._addin)
-        if (x_idea._numor or x_idea._denom) and not x_idea._morph:
-            x_gogo *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
-            x_stop *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
-        if x_idea._denom and x_idea._morph:
-            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, x_idea._denom)
+        if x_idea.addin:
+            x_gogo += get_0_if_None(x_idea.addin)
+            x_stop += get_0_if_None(x_idea.addin)
+        if (x_idea.numor or x_idea.denom) and not x_idea.morph:
+            x_gogo *= get_1_if_None(x_idea.numor) / get_1_if_None(x_idea.denom)
+            x_stop *= get_1_if_None(x_idea.numor) / get_1_if_None(x_idea.denom)
+        if x_idea.denom and x_idea.morph:
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, x_idea.denom)
             x_gogo = x_rangeunit.gogo
             x_stop = x_rangeunit.stop
     return RangeUnit(x_gogo, x_stop)

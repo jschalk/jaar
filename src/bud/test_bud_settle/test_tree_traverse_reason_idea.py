@@ -28,10 +28,10 @@ def test_BudUnit_ReasonUnits_create():
 
     # THEN
     casa_idea = sue_bud.get_idea_obj(casa_road)
-    assert casa_idea._reasonunits is not None
-    print(casa_idea._reasonunits)
-    assert casa_idea._reasonunits[weekday_road] is not None
-    assert casa_idea._reasonunits[weekday_road] == casa_wk_reason
+    assert casa_idea.reasonunits is not None
+    print(casa_idea.reasonunits)
+    assert casa_idea.reasonunits[weekday_road] is not None
+    assert casa_idea.reasonunits[weekday_road] == casa_wk_reason
 
 
 def test_BudUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
@@ -51,7 +51,7 @@ def test_BudUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
 
     # THEN
     casa_idea = sue_bud.get_idea_obj(casa_road)
-    week_reasonunit = casa_idea._reasonunits.get(week_road)
+    week_reasonunit = casa_idea.reasonunits.get(week_road)
     assert week_reasonunit.delimiter != slash_text
     assert week_reasonunit.delimiter == sue_bud._road_delimiter
 
@@ -80,7 +80,7 @@ def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
     # THEN
     casa_idea = bob_bud.get_idea_obj(casa_road)
     assert casa_idea._road_delimiter == slash_text
-    week_reasonunit = casa_idea._reasonunits.get(week_road)
+    week_reasonunit = casa_idea.reasonunits.get(week_road)
     assert week_reasonunit.delimiter != ","
     assert week_reasonunit.delimiter == bob_bud._road_delimiter
 
@@ -107,10 +107,10 @@ def test_BudUnit_set_reasonunits_status():
 
     # THEN
     casa_idea = sue_bud.get_idea_obj(casa_road)
-    assert casa_idea._reasonunits is not None
-    print(casa_idea._reasonunits)
-    assert casa_idea._reasonunits[weekday_road] is not None
-    assert casa_idea._reasonunits[weekday_road] == casa_wk_reason
+    assert casa_idea.reasonunits is not None
+    print(casa_idea.reasonunits)
+    assert casa_idea.reasonunits[weekday_road] is not None
+    assert casa_idea.reasonunits[weekday_road] == casa_wk_reason
 
 
 def test_agenda_returned_WhenNoReasonsExist():
@@ -153,10 +153,10 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     print(f"{casa_wk_build_reasonunit.base=}")
     sue_bud.edit_idea_attr(casa_road, reason=casa_wk_build_reasonunit)
     casa_idea = sue_bud.get_idea_obj(casa_road)
-    assert casa_idea._reasonunits != {}
-    # print(casa_idea._reasonunits)
-    assert casa_idea._reasonunits[week_road] is not None
-    assert casa_idea._reasonunits[week_road] == casa_wk_build_reasonunit
+    assert casa_idea.reasonunits != {}
+    # print(casa_idea.reasonunits)
+    assert casa_idea.reasonunits[week_road] is not None
+    assert casa_idea.reasonunits[week_road] == casa_wk_build_reasonunit
     weekdays_str = "weekdays"
     try:
         casa_idea._reasonheirs[week_road]
@@ -343,17 +343,17 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
 
     # THEN
     casa_idea1 = sue_bud.get_idea_obj(casa_road)
-    assert casa_idea1._reasonunits is not None
-    print(casa_idea1._reasonunits)
-    assert casa_idea1._reasonunits[week_road] is not None
-    assert casa_idea1._reasonunits[week_road].premises[wed_road].open is None
-    assert casa_idea1._reasonunits[week_road].premises[wed_road].nigh is None
+    assert casa_idea1.reasonunits is not None
+    print(casa_idea1.reasonunits)
+    assert casa_idea1.reasonunits[week_road] is not None
+    assert casa_idea1.reasonunits[week_road].premises[wed_road].open is None
+    assert casa_idea1.reasonunits[week_road].premises[wed_road].nigh is None
 
     casa_wk_reason1 = reasonunit_shop(week_road)
     casa_wk_reason1.set_premise(premise=wed_road)
     print(f" {type(casa_wk_reason1.base)=}")
     print(f" {casa_wk_reason1.base=}")
-    assert casa_idea1._reasonunits[week_road] == casa_wk_reason1
+    assert casa_idea1.reasonunits[week_road] == casa_wk_reason1
 
     # ESTABLISH
     divisor_x = 34
@@ -371,8 +371,8 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     )
 
     # THEN
-    assert casa_idea1._reasonunits[week_road].premises[wed_road].open == 12
-    assert casa_idea1._reasonunits[week_road].premises[wed_road].nigh == 12
+    assert casa_idea1.reasonunits[week_road].premises[wed_road].open == 12
+    assert casa_idea1.reasonunits[week_road].premises[wed_road].nigh == 12
 
     wed_premise2 = premiseunit_shop(
         need=wed_road, divisor=divisor_x, open=open_x, nigh=nigh_x
@@ -382,7 +382,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     )
     print(f"{type(casa_wk_reason2.base)=}")
     print(f"{casa_wk_reason2.base=}")
-    assert casa_idea1._reasonunits[week_road] == casa_wk_reason2
+    assert casa_idea1.reasonunits[week_road] == casa_wk_reason2
 
     # WHEN
     thu_text = "Thursday"
@@ -397,7 +397,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     )
 
     # THEN
-    assert len(casa_idea1._reasonunits[week_road].premises) == 2
+    assert len(casa_idea1.reasonunits[week_road].premises) == 2
 
 
 def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
@@ -409,8 +409,8 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
     time_road = sue_bud.make_l1_road(time_text)
     week_text = "week"
     week_road = sue_bud.make_road(time_road, week_text)
-    sue_bud.set_l1_idea(ideaunit_shop(time_text, _begin=100, _close=2000))
-    sue_bud.set_idea(ideaunit_shop(week_text, _denom=7), parent_road=time_road)
+    sue_bud.set_l1_idea(ideaunit_shop(time_text, begin=100, close=2000))
+    sue_bud.set_idea(ideaunit_shop(week_text, denom=7), parent_road=time_road)
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -424,10 +424,10 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
 
     # THEN
     casa_idea1 = sue_bud.get_idea_obj(casa_road)
-    assert casa_idea1._reasonunits[time_road] is not None
-    assert casa_idea1._reasonunits[time_road].premises[week_road].divisor == 7
-    assert casa_idea1._reasonunits[time_road].premises[week_road].open == 2
-    assert casa_idea1._reasonunits[time_road].premises[week_road].nigh == 5
+    assert casa_idea1.reasonunits[time_road] is not None
+    assert casa_idea1.reasonunits[time_road].premises[week_road].divisor == 7
+    assert casa_idea1.reasonunits[time_road].premises[week_road].open == 2
+    assert casa_idea1.reasonunits[time_road].premises[week_road].nigh == 5
 
 
 def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh():
@@ -439,8 +439,8 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh()
     time_road = sue_bud.make_l1_road(time)
     rus_war = "rus_war"
     rus_war_road = sue_bud.make_road(time_road, rus_war)
-    sue_bud.set_idea(ideaunit_shop(time, _begin=100, _close=2000), sue_bud._real_id)
-    sue_bud.set_idea(ideaunit_shop(rus_war, _begin=22, _close=34), time_road)
+    sue_bud.set_idea(ideaunit_shop(time, begin=100, close=2000), sue_bud._real_id)
+    sue_bud.set_idea(ideaunit_shop(rus_war, begin=22, close=34), time_road)
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -454,10 +454,10 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh()
 
     # THEN
     casa_idea1 = sue_bud.get_idea_obj(casa_road)
-    assert casa_idea1._reasonunits[time_road] is not None
-    assert casa_idea1._reasonunits[time_road].premises[rus_war_road].divisor is None
-    assert casa_idea1._reasonunits[time_road].premises[rus_war_road].open == 22
-    assert casa_idea1._reasonunits[time_road].premises[rus_war_road].nigh == 34
+    assert casa_idea1.reasonunits[time_road] is not None
+    assert casa_idea1.reasonunits[time_road].premises[rus_war_road].divisor is None
+    assert casa_idea1.reasonunits[time_road].premises[rus_war_road].open == 22
+    assert casa_idea1.reasonunits[time_road].premises[rus_war_road].nigh == 34
 
 
 def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_PremiseUnits():
@@ -477,7 +477,7 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
         reason_premise=thu_road,
     )
     casa_idea1 = sue_bud.get_idea_obj(casa_road)
-    assert len(casa_idea1._reasonunits[weekday_road].premises) == 2
+    assert len(casa_idea1.reasonunits[weekday_road].premises) == 2
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -487,7 +487,7 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
     )
 
     # THEN
-    assert len(casa_idea1._reasonunits[weekday_road].premises) == 1
+    assert len(casa_idea1.reasonunits[weekday_road].premises) == 1
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -498,9 +498,9 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
 
     # THEN
     with pytest_raises(KeyError) as excinfo:
-        casa_idea1._reasonunits[weekday_road]
+        casa_idea1.reasonunits[weekday_road]
     assert str(excinfo.value) == f"'{weekday_road}'"
-    assert casa_idea1._reasonunits == {}
+    assert casa_idea1.reasonunits == {}
 
 
 def test_BudUnit_ReasonUnits_del_reason_premise_UncoupledMethod2():
@@ -509,7 +509,7 @@ def test_BudUnit_ReasonUnits_del_reason_premise_UncoupledMethod2():
     casa_road = sue_bud.make_l1_road("casa")
     weekdays_road = sue_bud.make_l1_road("weekdays")
     casa_idea1 = sue_bud.get_idea_obj(casa_road)
-    assert len(casa_idea1._reasonunits) == 0
+    assert len(casa_idea1.reasonunits) == 0
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
@@ -530,7 +530,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
     sue_bud.set_idea(ideaunit_shop(commute_text), sue_bud._real_id)
     sue_bud.settle_bud()  # set tree metrics
     commute_idea = sue_bud.get_idea_obj(commute_road)
-    assert len(commute_idea._reasonunits) == 0
+    assert len(commute_idea.reasonunits) == 0
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -540,8 +540,8 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
     )
 
     # THEN
-    assert len(commute_idea._reasonunits) == 1
-    reasonunit_casa = commute_idea._reasonunits.get(casa_road)
+    assert len(commute_idea.reasonunits) == 1
+    reasonunit_casa = commute_idea.reasonunits.get(casa_road)
     assert reasonunit_casa.base == casa_road
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.base_idea_active_requisite is True
@@ -554,8 +554,8 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
     )
 
     # THEN
-    assert len(commute_idea._reasonunits) == 1
-    reasonunit_casa = commute_idea._reasonunits.get(casa_road)
+    assert len(commute_idea.reasonunits) == 1
+    reasonunit_casa = commute_idea.reasonunits.get(casa_road)
     assert reasonunit_casa.base == casa_road
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.base_idea_active_requisite is False
@@ -568,8 +568,8 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
     )
 
     # THEN
-    assert len(commute_idea._reasonunits) == 1
-    reasonunit_casa = commute_idea._reasonunits.get(casa_road)
+    assert len(commute_idea.reasonunits) == 1
+    reasonunit_casa = commute_idea.reasonunits.get(casa_road)
     assert reasonunit_casa.base == casa_road
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.base_idea_active_requisite is None

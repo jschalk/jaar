@@ -8,8 +8,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_UnitDoe
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    assert not root_idea._begin
-    assert not root_idea._close
+    assert not root_idea.begin
+    assert not root_idea.close
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -17,8 +17,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_UnitDoe
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert not root_idea._begin
-    assert not root_idea._close
+    assert not root_idea.begin
+    assert not root_idea.close
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -44,8 +44,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_SimpleN
     yao_bud.edit_idea_attr(yao_bud._real_id, begin=time0_begin, close=time0_close)
     yao_bud._init_idea_tree_walk()
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -53,8 +53,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_SimpleN
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert root_idea._gogo_calc == time0_begin
     assert root_idea._stop_calc == time0_close
 
@@ -73,9 +73,9 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     )
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
-    assert root_idea._denom == time0_denom
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
+    assert root_idea.denom == time0_denom
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -83,8 +83,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert root_idea._gogo_calc == time0_begin / time0_denom
     assert root_idea._stop_calc == time0_close / time0_denom
     assert root_idea._gogo_calc == 2
@@ -107,10 +107,10 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     )
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
-    assert root_idea._numor == time0_numor
-    assert root_idea._denom == time0_denom
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
+    assert root_idea.numor == time0_numor
+    assert root_idea.denom == time0_denom
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -118,8 +118,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert root_idea._gogo_calc == (time0_begin * time0_numor) / time0_denom
     assert root_idea._stop_calc == (time0_close * time0_numor) / time0_denom
     assert root_idea._gogo_calc == 14
@@ -140,9 +140,9 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     )
     yao_bud._init_idea_tree_walk()
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
-    assert root_idea._addin == time0_addin
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
+    assert root_idea.addin == time0_addin
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -150,8 +150,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert root_idea._gogo_calc == time0_begin + time0_addin
     assert root_idea._stop_calc == time0_close + time0_addin
     assert root_idea._gogo_calc == 13
@@ -174,10 +174,10 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     )
     yao_bud._init_idea_tree_walk()
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
-    assert root_idea._denom == time0_denom
-    assert root_idea._addin == time0_addin
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
+    assert root_idea.denom == time0_denom
+    assert root_idea.addin == time0_addin
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -185,8 +185,8 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert root_idea._gogo_calc == (time0_begin + time0_addin) / time0_denom
     assert root_idea._stop_calc == (time0_close + time0_addin) / time0_denom
     assert root_idea._gogo_calc == 22
@@ -200,7 +200,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     time0_road = yao_bud.make_l1_road(time0_text)
     time0_begin = 7
     time0_close = 31
-    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
     time1_text = "time1"
@@ -211,10 +211,10 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
-    assert time0_idea._begin == time0_begin
-    assert time0_idea._close == time0_close
-    assert time1_idea._begin != time0_begin
-    assert time1_idea._close != time0_close
+    assert time0_idea.begin == time0_begin
+    assert time0_idea.close == time0_close
+    assert time1_idea.begin != time0_begin
+    assert time1_idea.close != time0_close
     assert not time1_idea._gogo_calc
     assert not time1_idea._stop_calc
     assert yao_bud._range_inheritors == {}
@@ -223,10 +223,10 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert time1_idea._begin != time0_begin
-    assert time1_idea._close != time0_close
-    assert not time1_idea._begin
-    assert not time1_idea._close
+    assert time1_idea.begin != time0_begin
+    assert time1_idea.close != time0_close
+    assert not time1_idea.begin
+    assert not time1_idea.close
     assert time1_idea._gogo_calc == time0_begin
     assert time1_idea._stop_calc == time0_close
     assert yao_bud._range_inheritors == {time1_road: time0_road}
@@ -239,22 +239,22 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     time0_road = yao_bud.make_l1_road(time0_text)
     time0_begin = 14
     time0_close = 35
-    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
     time1_text = "time1"
     time1_denom = 7
     time1_road = yao_bud.make_road(time0_road, time1_text)
-    yao_bud.set_idea(ideaunit_shop(time1_text, _denom=time1_denom), time0_road)
+    yao_bud.set_idea(ideaunit_shop(time1_text, denom=time1_denom), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
-    assert time0_idea._begin == time0_begin
-    assert time0_idea._close == time0_close
-    assert time1_idea._begin != time0_begin
-    assert time1_idea._close != time0_close
+    assert time0_idea.begin == time0_begin
+    assert time0_idea.close == time0_close
+    assert time1_idea.begin != time0_begin
+    assert time1_idea.close != time0_close
     assert not time1_idea._gogo_calc
     assert not time1_idea._stop_calc
 
@@ -262,8 +262,8 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert not time1_idea._begin
-    assert not time1_idea._close
+    assert not time1_idea.begin
+    assert not time1_idea.close
     assert time1_idea._gogo_calc == time0_begin / time1_denom
     assert time1_idea._stop_calc == time0_close / time1_denom
     assert time1_idea._gogo_calc == 2
@@ -277,24 +277,24 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     time0_road = yao_bud.make_l1_road(time0_text)
     time0_begin = 14
     time0_close = 35
-    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
     time1_text = "time1"
     time1_denom = 7
     time1_numor = 3
     time1_road = yao_bud.make_road(time0_road, time1_text)
-    temp_idea = ideaunit_shop(time1_text, _numor=time1_numor, _denom=time1_denom)
+    temp_idea = ideaunit_shop(time1_text, numor=time1_numor, denom=time1_denom)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
-    assert time0_idea._begin == time0_begin
-    assert time0_idea._close == time0_close
-    assert time1_idea._begin != time0_begin
-    assert time1_idea._close != time0_close
+    assert time0_idea.begin == time0_begin
+    assert time0_idea.close == time0_close
+    assert time1_idea.begin != time0_begin
+    assert time1_idea.close != time0_close
     assert not time1_idea._gogo_calc
     assert not time1_idea._stop_calc
 
@@ -302,8 +302,8 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert not time1_idea._begin
-    assert not time1_idea._close
+    assert not time1_idea.begin
+    assert not time1_idea.close
     assert time1_idea._gogo_calc == (time0_begin * time1_numor) / time1_denom
     assert time1_idea._stop_calc == (time0_close * time1_numor) / time1_denom
     assert time1_idea._gogo_calc == 6
@@ -317,24 +317,24 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     time0_road = yao_bud.make_l1_road(time0_text)
     time0_begin = 3
     time0_close = 7
-    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
     time1_text = "time1"
     time1_addin = 5
     time1_road = yao_bud.make_road(time0_road, time1_text)
-    temp_idea = ideaunit_shop(time1_text, _addin=time1_addin)
+    temp_idea = ideaunit_shop(time1_text, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
-    assert time0_idea._begin == time0_begin
-    assert time0_idea._close == time0_close
-    assert time1_idea._begin != time0_begin
-    assert time1_idea._close != time0_close
-    assert time1_idea._addin == time1_addin
+    assert time0_idea.begin == time0_begin
+    assert time0_idea.close == time0_close
+    assert time1_idea.begin != time0_begin
+    assert time1_idea.close != time0_close
+    assert time1_idea.addin == time1_addin
     assert not time1_idea._gogo_calc
     assert not time1_idea._stop_calc
 
@@ -342,8 +342,8 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert not time1_idea._begin
-    assert not time1_idea._close
+    assert not time1_idea.begin
+    assert not time1_idea.close
     assert time1_idea._gogo_calc == time0_idea._gogo_calc + time1_addin
     assert time1_idea._stop_calc == time0_idea._stop_calc + time1_addin
     assert time1_idea._gogo_calc == 8
@@ -357,7 +357,7 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     time0_road = yao_bud.make_l1_road(time0_text)
     time0_begin = 3
     time0_close = 7
-    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
     time1_text = "time1"
@@ -366,18 +366,18 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     time2_text = "time2"
     time2_road = yao_bud.make_road(time1_road, time2_text)
     time2_addin = 5
-    x_time2_idea = ideaunit_shop(time2_text, _addin=time2_addin)
+    x_time2_idea = ideaunit_shop(time2_text, addin=time2_addin)
     yao_bud.set_idea(x_time2_idea, time1_road)
     time2_idea = yao_bud.get_idea_obj(time2_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
-    assert time0_idea._begin == time0_begin
-    assert time0_idea._close == time0_close
-    assert time2_idea._begin != time0_begin
-    assert time2_idea._close != time0_close
-    assert time2_idea._addin == time2_addin
+    assert time0_idea.begin == time0_begin
+    assert time0_idea.close == time0_close
+    assert time2_idea.begin != time0_begin
+    assert time2_idea.close != time0_close
+    assert time2_idea.addin == time2_addin
     assert not time2_idea._gogo_calc
     assert not time2_idea._stop_calc
     assert yao_bud._range_inheritors == {}
@@ -386,8 +386,8 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert not time2_idea._begin
-    assert not time2_idea._close
+    assert not time2_idea.begin
+    assert not time2_idea.close
     assert time2_idea._gogo_calc == time0_idea._gogo_calc + time2_addin
     assert time2_idea._stop_calc == time0_idea._stop_calc + time2_addin
     assert time2_idea._gogo_calc == 8
@@ -402,25 +402,25 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     time0_road = yao_bud.make_l1_road(time0_text)
     time0_begin = 21
     time0_close = 35
-    time0_idea = ideaunit_shop(time0_text, _begin=time0_begin, _close=time0_close)
+    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
     time1_text = "time1"
     time1_addin = 70
     time1_denom = 7
     time1_road = yao_bud.make_road(time0_road, time1_text)
-    temp_idea = ideaunit_shop(time1_text, _denom=time1_denom, _addin=time1_addin)
+    temp_idea = ideaunit_shop(time1_text, denom=time1_denom, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
-    assert time0_idea._begin == time0_begin
-    assert time0_idea._close == time0_close
-    assert time1_idea._begin != time0_begin
-    assert time1_idea._close != time0_close
-    assert time1_idea._addin == time1_addin
+    assert time0_idea.begin == time0_begin
+    assert time0_idea.close == time0_close
+    assert time1_idea.begin != time0_begin
+    assert time1_idea.close != time0_close
+    assert time1_idea.addin == time1_addin
     assert not time1_idea._gogo_calc
     assert not time1_idea._stop_calc
 
@@ -428,8 +428,8 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     yao_bud._set_ideaunits_range()
 
     # THEN
-    assert not time1_idea._begin
-    assert not time1_idea._close
+    assert not time1_idea.begin
+    assert not time1_idea.close
     assert time1_idea._gogo_calc == (time0_idea._gogo_calc + time1_addin) / time1_denom
     assert time1_idea._stop_calc == (time0_idea._stop_calc + time1_addin) / time1_denom
     assert time1_idea._gogo_calc == 13

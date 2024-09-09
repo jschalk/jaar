@@ -89,8 +89,8 @@ def test_RealUnit_generate_action_bud_SetsFileWith_healerlink(env_dir_setup_clea
     texas_road = bob_voice_bud.make_l1_road(texas_text)
     elpaso_text = "el paso"
     elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=healerlink_shop({bob_text}))
-    bob_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    elpaso_idea = ideaunit_shop(elpaso_text, healerlink=healerlink_shop({bob_text}))
+    bob_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     bob_voice_bud.set_idea(elpaso_idea, texas_road)
     bob_hubunit.save_voice_bud(bob_voice_bud)
     after_bob_action_bud = music_real.generate_action_bud(bob_text)
@@ -119,18 +119,18 @@ def test_RealUnit_generate_all_action_buds_SetsCorrectFiles(
     texas_road = bob_voice_bud.make_l1_road(texas_text)
     elpaso_text = "el paso"
     elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_text)
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=healerlink_shop({bob_text}))
+    elpaso_idea = ideaunit_shop(elpaso_text, healerlink=healerlink_shop({bob_text}))
 
     bob_voice_bud = bob_hubunit.get_voice_bud()
     bob_voice_bud.add_acctunit(bob_text)
-    bob_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    bob_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     bob_voice_bud.set_idea(elpaso_idea, texas_road)
     bob_hubunit.save_voice_bud(bob_voice_bud)
 
     sue_voice_bud = sue_hubunit.get_voice_bud()
     sue_voice_bud.add_acctunit(sue_text)
     sue_voice_bud.add_acctunit(bob_text)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     sue_voice_bud.set_idea(elpaso_idea, texas_road)
     sue_hubunit.save_voice_bud(sue_voice_bud)
 

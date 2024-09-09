@@ -18,6 +18,7 @@ def test_BudUnit_Exists():
     # ESTABLISH /  WHEN
     x_bud = BudUnit()
 
+    # THEN
     assert x_bud
     assert x_bud._real_id is None
     assert x_bud._owner_id is None
@@ -35,7 +36,7 @@ def test_BudUnit_Exists():
     assert x_bud._debtor_respect is None
     assert x_bud._last_gift_id is None
     assert x_bud._originunit is None
-
+    # calculated attr
     assert x_bud._idea_dict is None
     assert x_bud._econ_dict is None
     assert x_bud._healers_dict is None
@@ -71,6 +72,8 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _bit=x_bit,
         _penny=x_penny,
     )
+
+    # THEN
     assert x_bud
     assert x_bud._owner_id == sue_text
     assert x_bud._real_id == iowa_real_id
@@ -87,8 +90,8 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._credor_respect == validate_respect_num()
     assert x_bud._debtor_respect == validate_respect_num()
     assert not x_bud._last_gift_id
+    # calculated attr
     assert x_bud._originunit == originunit_shop()
-
     assert x_bud._idea_dict == {}
     assert x_bud._econ_dict == {}
     assert x_bud._healers_dict == {}
@@ -109,6 +112,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     # ESTABLISH / WHEN
     x_bud = budunit_shop()
 
+    # THEN
     assert x_bud._owner_id == ""
     assert x_bud._real_id == root_label()
     assert x_bud._road_delimiter == default_road_delimiter_if_none()

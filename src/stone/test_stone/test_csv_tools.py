@@ -8,7 +8,7 @@ from src.stone.stone import (
 
 def test_extract_csv_headers_ReturnsObj():
     # ESTABLISH
-    x_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
+    x_csv = """real_id,owner_id,acct_id,credit_belief,debtit_belief
 music56,Sue,Bob,13,29
 music56,Sue,Sue,11,23
 music56,Sue,Yao,41,37
@@ -18,20 +18,20 @@ music56,Sue,Yao,41,37
     x_headers, x_csv = extract_csv_headers(x_csv)
 
     # THEN
-    credit_score_text = "credit_score"
-    debtit_score_text = "debtit_score"
+    credit_belief_text = "credit_belief"
+    debtit_belief_text = "debtit_belief"
     assert x_headers == [
         real_id_str(),
         owner_id_str(),
         acct_id_str(),
-        credit_score_text,
-        debtit_score_text,
+        credit_belief_text,
+        debtit_belief_text,
     ]
 
 
 def test_extract_csv_headers_RemovesHeaders_csv():
     # ESTABLISH
-    x_csv = """real_id,owner_id,acct_id,credit_score,debtit_score
+    x_csv = """real_id,owner_id,acct_id,credit_belief,debtit_belief
 music56,Sue,Bob,13,29
 music56,Sue,Sue,11,23
 music56,Sue,Yao,41,37

@@ -41,11 +41,11 @@ def _get_color_for_ideaunit_trace(x_ideaunit: IdeaUnit, mode: str) -> str:
     elif mode == "Task":
         return "Red" if x_ideaunit.pledge else "Pink"
     elif mode == "Econ":
-        if x_ideaunit._problem_bool and x_ideaunit._healerlink.any_healer_id_exists():
+        if x_ideaunit.problem_bool and x_ideaunit.healerlink.any_healer_id_exists():
             return "Purple"
-        elif x_ideaunit._healerlink.any_healer_id_exists():
+        elif x_ideaunit.healerlink.any_healer_id_exists():
             return "Blue"
-        elif x_ideaunit._problem_bool:
+        elif x_ideaunit.problem_bool:
             return "Red"
         else:
             return "Pink"
@@ -148,9 +148,9 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     column_header_list = [
         "acct_id",
         "_credor_respect",
-        "credit_score",
+        "credit_belief",
         "_debtor_respect",
-        "debtit_score",
+        "debtit_belief",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -168,9 +168,9 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
             values=[
                 df.acct_id,
                 df._credor_respect,
-                df.credit_score,
+                df.credit_belief,
                 df._debtor_respect,
-                df.debtit_score,
+                df.debtit_belief,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,

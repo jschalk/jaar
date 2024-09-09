@@ -266,8 +266,8 @@ def test_BudUnit_settle_bud_SetsIdeaUnitAttr_awardlinks():
 
     street_text = "streets"
     sue_bud.set_idea(ideaunit_shop(street_text), parent_road=swim_road)
-    assert sue_bud._idearoot._awardlinks in (None, {})
-    assert len(sue_bud._idearoot._kids[swim_text]._awardlinks) == 3
+    assert sue_bud._idearoot.awardlinks in (None, {})
+    assert len(sue_bud._idearoot._kids[swim_text].awardlinks) == 3
 
     # WHEN
     sue_bud.settle_bud()
@@ -277,13 +277,13 @@ def test_BudUnit_settle_bud_SetsIdeaUnitAttr_awardlinks():
     swim_idea = sue_bud._idea_dict.get(swim_road)
     street_idea = sue_bud._idea_dict.get(sue_bud.make_road(swim_road, street_text))
 
-    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea.awardlinks) == 3
     assert len(swim_idea._awardheirs) == 3
-    assert street_idea._awardlinks in (None, {})
+    assert street_idea.awardlinks in (None, {})
     assert len(street_idea._awardheirs) == 3
 
     print(f"{len(sue_bud._idea_dict)}")
-    print(f"{swim_idea._awardlinks}")
+    print(f"{swim_idea.awardlinks}")
     print(f"{swim_idea._awardheirs}")
     print(f"{swim_idea._awardheirs}")
     assert len(sue_bud._idearoot._kids["swim"]._awardheirs) == 3
@@ -339,24 +339,24 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
     yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
 
-    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea.awardlinks) == 3
     assert len(swim_idea._awardheirs) == 0
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea.awardlinks) == 3
     assert len(swim_idea._awardheirs) == 3
     yao_bud.edit_idea_attr(swim_road, awardlink_del=yao_text)
-    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea.awardlinks) == 2
     assert len(swim_idea._awardheirs) == 3
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea.awardlinks) == 2
     assert len(swim_idea._awardheirs) == 2
 
 
@@ -391,9 +391,9 @@ def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadU
     # WHEN
     time_text = "timeline"
     time_road = yao_bud.make_l1_road(time_text)
-    yao_bud.set_l1_idea(ideaunit_shop(time_text, _begin=0, _close=700))
+    yao_bud.set_l1_idea(ideaunit_shop(time_text, begin=0, close=700))
     weeks_text = "weeks"
-    yao_bud.set_idea(ideaunit_shop(weeks_text, _denom=7), time_road)
+    yao_bud.set_idea(ideaunit_shop(weeks_text, denom=7), time_road)
 
     # THEN
     assert len(yao_bud.get_idea_tree_ordered_road_list()) == 3
@@ -404,7 +404,7 @@ def test_BudUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_text = "Texas"
-    sue_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     casa_text = "casa"
     sue_bud.set_l1_idea(ideaunit_shop(casa_text))
 
@@ -450,7 +450,7 @@ def test_BudUnit_settle_bud_WhenIdeaRootHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _mass=0)
+    casa_idea = ideaunit_shop(casa_text, mass=0)
     sue_budunit.set_l1_idea(casa_idea)
     assert sue_budunit._offtrack_kids_mass_set == set()
 
@@ -473,23 +473,23 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _mass=1)
+    casa_idea = ideaunit_shop(casa_text, mass=1)
 
     swim_text = "swimming"
     swim_road = sue_budunit.make_road(casa_road, swim_text)
-    swim_idea = ideaunit_shop(swim_text, _mass=8)
+    swim_idea = ideaunit_shop(swim_text, mass=8)
 
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    clean_idea = ideaunit_shop(clean_text, _mass=2)
+    clean_idea = ideaunit_shop(clean_text, mass=2)
     sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _mass=0)
+    sweep_idea = ideaunit_shop(sweep_text, mass=0)
     vaccum_text = "vaccum"
     vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
-    vaccum_idea = ideaunit_shop(vaccum_text, _mass=0)
+    vaccum_idea = ideaunit_shop(vaccum_text, mass=0)
 
     sue_budunit.set_l1_idea(casa_idea)
     sue_budunit.set_idea(swim_idea, casa_road)
@@ -511,12 +511,12 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     yao_text = "Yao"
     yao_bud = budunit_shop(yao_text)
     zia_text = "Zia"
-    yao_credit_score = 3
-    yao_debtit_score = 2
-    zia_credit_score = 4
-    zia_debtit_score = 5
-    yao_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
-    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    yao_credit_belief = 3
+    yao_debtit_belief = 2
+    zia_credit_belief = 4
+    zia_debtit_belief = 5
+    yao_bud.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
+    yao_bud.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     x_idearoot = yao_bud.get_idea_obj(yao_bud._real_id)
     x_idearoot.set_awardlink(awardlink_shop(yao_text))
     x_idearoot.set_awardlink(awardlink_shop(zia_text))
@@ -545,10 +545,10 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     assert not xio_groupbox.membership_exists(xio_text)
     yao_membership = xio_groupbox.get_membership(yao_text)
     zia_membership = xio_groupbox.get_membership(zia_text)
-    assert yao_membership.credit_vote == yao_credit_score
-    assert zia_membership.credit_vote == zia_credit_score
-    assert yao_membership.debtit_vote == yao_debtit_score
-    assert zia_membership.debtit_vote == zia_debtit_score
+    assert yao_membership.credit_vote == yao_credit_belief
+    assert zia_membership.credit_vote == zia_credit_belief
+    assert yao_membership.debtit_vote == yao_debtit_belief
+    assert zia_membership.debtit_vote == zia_debtit_belief
 
 
 def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():
@@ -640,12 +640,12 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     week_text = "week"
     week_road = yao_bud.make_l1_road(week_text)
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, _addin=week_addin)
+    week_idea = ideaunit_shop(week_text, begin=10, close=15, addin=week_addin)
     yao_bud.set_l1_idea(week_idea)
     tue_text = "Tue"
     tue_road = yao_bud.make_road(week_road, tue_text)
     tue_addin = 100
-    yao_bud.set_idea(ideaunit_shop(tue_text, _addin=tue_addin), week_road)
+    yao_bud.set_idea(ideaunit_shop(tue_text, addin=tue_addin), week_road)
     x_real_id = yao_bud._real_id
     yao_bud.edit_idea_attr(x_real_id, reason_base=tue_road, reason_premise=tue_road)
 
@@ -690,12 +690,12 @@ def test_BudUnit_settle_bud_SetsIdeaUnit_factheir_With_range_factheirs():
     week_text = "week"
     week_road = yao_bud.make_l1_road(week_text)
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, _addin=week_addin)
+    week_idea = ideaunit_shop(week_text, begin=10, close=15, addin=week_addin)
     yao_bud.set_l1_idea(week_idea)
     tue_text = "Tue"
     tue_road = yao_bud.make_road(week_road, tue_text)
     tue_addin = 100
-    yao_bud.set_idea(ideaunit_shop(tue_text, _addin=tue_addin), week_road)
+    yao_bud.set_idea(ideaunit_shop(tue_text, addin=tue_addin), week_road)
     ball_text = "ball"
     ball_road = yao_bud.make_l1_road(ball_text)
     yao_bud.set_l1_idea(ideaunit_shop(ball_text))

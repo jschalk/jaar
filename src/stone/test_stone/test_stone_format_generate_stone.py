@@ -15,8 +15,8 @@ from src.gift.atom_config import (
     pledge_str,
     label_str,
     mass_str,
-    debtit_score_str,
-    credit_score_str,
+    debtit_belief_str,
+    credit_belief_str,
     debtit_vote_str,
     credit_vote_str,
 )
@@ -34,17 +34,17 @@ def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     sue_text = sue_str()
     bob_text = bob_str()
     yao_text = yao_str()
-    sue_credit_score = 11
-    bob_credit_score = 13
-    yao_credit_score = 41
-    sue_debtit_score = 23
-    bob_debtit_score = 29
-    yao_debtit_score = 37
+    sue_credit_belief = 11
+    bob_credit_belief = 13
+    yao_credit_belief = 41
+    sue_debtit_belief = 23
+    bob_debtit_belief = 29
+    yao_debtit_belief = 37
     music_real_id = "music56"
     sue_budunit = budunit_shop(sue_text, music_real_id)
-    sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
-    sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
-    sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    sue_budunit.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
+    sue_budunit.add_acctunit(bob_text, bob_credit_belief, bob_debtit_belief)
+    sue_budunit.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
     x_stone_name = stone_format_00021_bud_acctunit_v0_0_0()
     acct_dataframe = create_stone_df(sue_budunit, x_stone_name)
     acct_csv = acct_dataframe.to_csv(index=False)
@@ -56,13 +56,13 @@ def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     assert sue_acct_changeunit
     sue_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
     sue_atomunit.set_arg(acct_id_str(), sue_text)
-    sue_atomunit.set_arg(credit_score_str(), sue_credit_score)
-    sue_atomunit.set_arg(debtit_score_str(), sue_debtit_score)
+    sue_atomunit.set_arg(credit_belief_str(), sue_credit_belief)
+    sue_atomunit.set_arg(debtit_belief_str(), sue_debtit_belief)
     sue_atomunit.set_atom_order()
     bob_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
     bob_atomunit.set_arg(acct_id_str(), bob_text)
-    bob_atomunit.set_arg(credit_score_str(), bob_credit_score)
-    bob_atomunit.set_arg(debtit_score_str(), bob_debtit_score)
+    bob_atomunit.set_arg(credit_belief_str(), bob_credit_belief)
+    bob_atomunit.set_arg(debtit_belief_str(), bob_debtit_belief)
     bob_atomunit.set_atom_order()
     # print(f"{sue_acct_changeunit.get_ordered_dict()=}")
     # print(
@@ -153,7 +153,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, mass=casa_mass))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
@@ -208,7 +208,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, mass=casa_mass))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)

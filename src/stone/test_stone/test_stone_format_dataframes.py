@@ -15,8 +15,8 @@ from src.gift.atom_config import (
     label_str,
     mass_str,
     pledge_str,
-    debtit_score_str,
-    credit_score_str,
+    debtit_belief_str,
+    credit_belief_str,
     debtit_vote_str,
     credit_vote_str,
 )
@@ -40,17 +40,17 @@ def test_create_stone_df_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     sue_text = sue_str()
     bob_text = bob_str()
     yao_text = yao_str()
-    sue_credit_score = 11
-    bob_credit_score = 13
-    yao_credit_score = 41
-    sue_debtit_score = 23
-    bob_debtit_score = 29
-    yao_debtit_score = 37
+    sue_credit_belief = 11
+    bob_credit_belief = 13
+    yao_credit_belief = 41
+    sue_debtit_belief = 23
+    bob_debtit_belief = 29
+    yao_debtit_belief = 37
     music_real_id = "music56"
     sue_budunit = budunit_shop(sue_text, music_real_id)
-    sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
-    sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
-    sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    sue_budunit.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
+    sue_budunit.add_acctunit(bob_text, bob_credit_belief, bob_debtit_belief)
+    sue_budunit.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
 
     # WHEN
     x_stone_name = stone_format_00021_bud_acctunit_v0_0_0()
@@ -63,20 +63,20 @@ def test_create_stone_df_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     assert acct_dataframe.loc[0, real_id_str()] == music_real_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_text
-    assert acct_dataframe.loc[0, debtit_score_str()] == bob_debtit_score
-    assert acct_dataframe.loc[0, credit_score_str()] == bob_credit_score
+    assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
+    assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
 
     assert acct_dataframe.loc[1, real_id_str()] == music_real_id
     assert acct_dataframe.loc[1, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[1, acct_id_str()] == sue_text
-    assert acct_dataframe.loc[1, debtit_score_str()] == sue_debtit_score
-    assert acct_dataframe.loc[1, credit_score_str()] == sue_credit_score
+    assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
+    assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
 
     assert acct_dataframe.loc[2, real_id_str()] == music_real_id
     assert acct_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[2, acct_id_str()] == yao_text
-    assert acct_dataframe.loc[2, debtit_score_str()] == yao_debtit_score
-    assert acct_dataframe.loc[2, credit_score_str()] == yao_credit_score
+    assert acct_dataframe.loc[2, debtit_belief_str()] == yao_debtit_belief
+    assert acct_dataframe.loc[2, credit_belief_str()] == yao_credit_belief
 
     assert len(acct_dataframe) == 3
 
@@ -157,7 +157,7 @@ def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0():
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, mass=casa_mass))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
@@ -229,17 +229,17 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     sue_text = sue_str()
     bob_text = bob_str()
     yao_text = yao_str()
-    sue_credit_score = 11
-    bob_credit_score = 13
-    yao_credit_score = 41
-    sue_debtit_score = 23
-    bob_debtit_score = 29
-    yao_debtit_score = 37
+    sue_credit_belief = 11
+    bob_credit_belief = 13
+    yao_credit_belief = 41
+    sue_debtit_belief = 23
+    bob_debtit_belief = 29
+    yao_debtit_belief = 37
     music_real_id = "music56"
     sue_budunit = budunit_shop(sue_text, music_real_id)
-    sue_budunit.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
-    sue_budunit.add_acctunit(bob_text, bob_credit_score, bob_debtit_score)
-    sue_budunit.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    sue_budunit.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
+    sue_budunit.add_acctunit(bob_text, bob_credit_belief, bob_debtit_belief)
+    sue_budunit.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
     j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
     acct_filename = f"{sue_text}_acct_example_00.csv"
     csv_example_path = create_file_path(stone_reals_dir(), acct_filename)
@@ -251,7 +251,7 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_acct_example_csv = """real_id,owner_id,acct_id,debtit_score,credit_score
+    sue1_acct_example_csv = """real_id,owner_id,acct_id,debtit_belief,credit_belief
 music56,Sue,Bob,29,13
 music56,Sue,Sue,23,11
 music56,Sue,Yao,37,41
@@ -268,7 +268,7 @@ music56,Sue,Yao,37,41
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """real_id,owner_id,acct_id,debtit_score,credit_score
+    sue2_acct_example_csv = """real_id,owner_id,acct_id,debtit_belief,credit_belief
 music56,Sue,Bob,29,13
 music56,Sue,Sue,23,11
 music56,Sue,Yao,37,41
@@ -286,7 +286,7 @@ def test_save_stone_csv_Arg_stone_format_00003_ideaunit_v0_0_0(stone_env_setup_c
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, mass=casa_mass))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)

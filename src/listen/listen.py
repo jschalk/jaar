@@ -18,7 +18,7 @@ class Missing_debtor_respectException(Exception):
 
 
 def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
-    for x_factunit in perspective_bud._idearoot._factunits.values():
+    for x_factunit in perspective_bud._idearoot.factunits.values():
         x_factunit.set_pick_to_base()
     return list(perspective_bud.get_agenda_dict().values())
 
@@ -31,16 +31,16 @@ def _ingest_perspective_agenda(listener: BudUnit, agenda: list[IdeaUnit]) -> Bud
     return listener
 
 
-def _allocate_irrational_debtit_score(listener: BudUnit, speaker_owner_id: OwnerID):
+def _allocate_irrational_debtit_belief(listener: BudUnit, speaker_owner_id: OwnerID):
     speaker_acctunit = listener.get_acct(speaker_owner_id)
-    speaker_debtit_score = speaker_acctunit.debtit_score
-    speaker_acctunit.add_irrational_debtit_score(speaker_debtit_score)
+    speaker_debtit_belief = speaker_acctunit.debtit_belief
+    speaker_acctunit.add_irrational_debtit_belief(speaker_debtit_belief)
     return listener
 
 
-def _allocate_inallocable_debtit_score(listener: BudUnit, speaker_owner_id: OwnerID):
+def _allocate_inallocable_debtit_belief(listener: BudUnit, speaker_owner_id: OwnerID):
     speaker_acctunit = listener.get_acct(speaker_owner_id)
-    speaker_acctunit.add_inallocable_debtit_score(speaker_acctunit.debtit_score)
+    speaker_acctunit.add_inallocable_debtit_belief(speaker_acctunit.debtit_belief)
     return listener
 
 
@@ -52,10 +52,10 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_id: OwnerID):
 def generate_ingest_list(
     item_list: list[IdeaUnit], debtor_amount: float, bit: float
 ) -> list[IdeaUnit]:
-    idea_ledger = {x_idea.get_road(): x_idea._mass for x_idea in item_list}
+    idea_ledger = {x_idea.get_road(): x_idea.mass for x_idea in item_list}
     mass_allot = allot_scale(idea_ledger, debtor_amount, bit)
     for x_ideaunit in item_list:
-        x_ideaunit._mass = mass_allot.get(x_ideaunit.get_road())
+        x_ideaunit.mass = mass_allot.get(x_ideaunit.get_road())
     return item_list
 
 
@@ -70,7 +70,7 @@ def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):
         listener=listener,
         replace_mass_list=mass_data.replace_mass_list,
         add_to_mass_list=mass_data.add_to_mass_list,
-        x_mass=ingest_ideaunit._mass,
+        x_mass=ingest_ideaunit.mass,
     )
 
 
@@ -105,25 +105,25 @@ def _add_and_replace_ideaunit_masss(
         listener.edit_idea_attr(idea_road, mass=x_mass)
     for idea_road in add_to_mass_list:
         x_ideaunit = listener.get_idea_obj(idea_road)
-        x_ideaunit._mass += x_mass
+        x_ideaunit.mass += x_mass
 
 
 def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:
     return [
         x_acctunit
         for x_acctunit in x_duty._accts.values()
-        if x_acctunit.debtit_score != 0
+        if x_acctunit.debtit_belief != 0
     ]
 
 
 def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
     accts_ordered_list = get_debtors_roll(x_bud)
-    accts_ordered_list.sort(key=lambda x: (x.debtit_score, x.acct_id), reverse=True)
+    accts_ordered_list.sort(key=lambda x: (x.debtit_belief, x.acct_id), reverse=True)
     return accts_ordered_list
 
 
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
-    for x_factunit in src_listener._idearoot._factunits.values():
+    for x_factunit in src_listener._idearoot.factunits.values():
         base_road = x_factunit.base
         pick_road = x_factunit.pick
         if dst_listener.idea_exists(base_road) is False:
@@ -161,15 +161,15 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
         )
     perspective_bud = get_speaker_perspective(speaker, listener._owner_id)
     if perspective_bud._rational is False:
-        return _allocate_irrational_debtit_score(listener, speaker._owner_id)
+        return _allocate_irrational_debtit_belief(listener, speaker._owner_id)
     if listener._debtor_respect is None:
-        return _allocate_inallocable_debtit_score(listener, speaker._owner_id)
+        return _allocate_inallocable_debtit_belief(listener, speaker._owner_id)
     if listener._owner_id != speaker._owner_id:
         agenda = generate_perspective_agenda(perspective_bud)
     else:
         agenda = list(perspective_bud.get_all_pledges().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_debtit_score(listener, speaker._owner_id)
+        return _allocate_inallocable_debtit_belief(listener, speaker._owner_id)
     return _ingest_perspective_agenda(listener, agenda)
 
 
@@ -291,7 +291,7 @@ def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
             listener.set_idea(x_idea, x_idea._parent_road)
         if listener.get_fact(x_idea.get_road()) is False:
             listener.set_idea(x_idea, x_idea._parent_road)
-    for x_fact_road, x_fact_unit in job._idearoot._factunits.items():
+    for x_fact_road, x_fact_unit in job._idearoot.factunits.items():
         listener._idearoot.set_factunit(x_fact_unit)
     listener.settle_bud()
 

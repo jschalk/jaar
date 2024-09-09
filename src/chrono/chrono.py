@@ -66,46 +66,46 @@ def day_length() -> int:
 
 def stan_c400_leap_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().c400_leap_length
-    return ideaunit_shop(c400_leap_str(), _denom=x_denom, _morph=True)
+    return ideaunit_shop(c400_leap_str(), denom=x_denom, morph=True)
 
 
 def stan_c400_clean_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().c400_clean_length
-    return ideaunit_shop(c400_clean_str(), _denom=x_denom, _morph=True)
+    return ideaunit_shop(c400_clean_str(), denom=x_denom, morph=True)
 
 
 def stan_c100_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().c100_length
-    return ideaunit_shop(c100_str(), _denom=x_denom, _morph=True)
+    return ideaunit_shop(c100_str(), denom=x_denom, morph=True)
 
 
 def stan_yr4_leap_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().yr4_leap_length
-    return ideaunit_shop(yr4_leap_str(), _denom=x_denom, _morph=True)
+    return ideaunit_shop(yr4_leap_str(), denom=x_denom, morph=True)
 
 
 def stan_yr4_clean_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().yr4_clean_length
-    return ideaunit_shop(yr4_clean_str(), _denom=x_denom, _morph=True)
+    return ideaunit_shop(yr4_clean_str(), denom=x_denom, morph=True)
 
 
 def stan_year_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().year_length
-    return ideaunit_shop(year_str(), _denom=x_denom, _morph=True)
+    return ideaunit_shop(year_str(), denom=x_denom, morph=True)
 
 
 def stan_day_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().day_length
-    return ideaunit_shop(day_str(), _denom=x_denom, _morph=True)
+    return ideaunit_shop(day_str(), denom=x_denom, morph=True)
 
 
 def stan_days_ideaunit() -> IdeaUnit:
     x_denom = get_c400_constants().day_length
-    return ideaunit_shop(days_str(), _denom=x_denom)
+    return ideaunit_shop(days_str(), denom=x_denom)
 
 
 def _get_morph_idea(x_text: str, x_denom: int) -> IdeaUnit:
-    return ideaunit_shop(x_text, _denom=x_denom, _morph=True)
+    return ideaunit_shop(x_text, denom=x_denom, morph=True)
 
 
 def week_length(x_int: int) -> int:
@@ -141,8 +141,8 @@ def create_weekday_ideaunits(x_weekdays: list[str]) -> dict[str, IdeaUnit]:
     for x_weekday_num in range(len(x_weekdays)):
         x_idea = ideaunit_shop(
             x_weekdays[x_weekday_num],
-            _gogo_want=x_weekday_num * day_length(),
-            _stop_want=(x_weekday_num + 1) * day_length(),
+            gogo_want=x_weekday_num * day_length(),
+            stop_want=(x_weekday_num + 1) * day_length(),
         )
         x_dict[x_weekdays[x_weekday_num]] = x_idea
     return x_dict
@@ -156,7 +156,7 @@ def create_month_ideaunits(x_months_list: list[list[str, int]]) -> dict[str, Ide
         x_month_days = x_month_list[1]
         x_gogo = current_day * day_length()
         x_stop = x_month_days * day_length()
-        x_idea = ideaunit_shop(x_month_str, _gogo_want=x_gogo, _stop_want=x_stop)
+        x_idea = ideaunit_shop(x_month_str, gogo_want=x_gogo, stop_want=x_stop)
         x_dict[x_month_str] = x_idea
         current_day = x_month_days
     return x_dict
@@ -168,7 +168,7 @@ def create_hour_ideaunits(x_hours_list: list[str]) -> dict[str, IdeaUnit]:
     for x_hour_list in x_hours_list:
         x_hour_str = x_hour_list[0]
         x_stop = x_hour_list[1]
-        x_idea = ideaunit_shop(x_hour_str, _gogo_want=current_min, _stop_want=x_stop)
+        x_idea = ideaunit_shop(x_hour_str, gogo_want=current_min, stop_want=x_stop)
         x_dict[x_hour_str] = x_idea
         current_min = x_stop
     return x_dict
@@ -179,14 +179,14 @@ def create_week_ideaunits(x_weekdays_list) -> dict[str, IdeaUnit]:
     week_text = "week"
     weeks_text = f"{week_text}s"
     return {
-        week_text: ideaunit_shop(week_text, _denom=x_week_lenth, _morph=True),
-        weeks_text: ideaunit_shop(weeks_text, _denom=x_week_lenth),
+        week_text: ideaunit_shop(week_text, denom=x_week_lenth, morph=True),
+        weeks_text: ideaunit_shop(weeks_text, denom=x_week_lenth),
     }
 
 
 def new_timeline_ideaunit(timeline_label: str, c400_count: int) -> IdeaUnit:
     timeline_length = c400_count * get_c400_constants().c400_leap_length
-    return ideaunit_shop(timeline_label, _begin=0, _close=timeline_length)
+    return ideaunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
 def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
@@ -208,7 +208,7 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     add_ideaunits(x_budunit, new_road, create_week_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, week_road, create_weekday_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
-    offset_idea = ideaunit_shop(yr1_jan1_offset_text(), _addin=timeline_offset)
+    offset_idea = ideaunit_shop(yr1_jan1_offset_text(), addin=timeline_offset)
     x_budunit.set_idea(offset_idea, new_road)
     return x_budunit
 
@@ -382,7 +382,7 @@ def get_min_from_dt(
 ) -> int:
     offset_road = x_bud.make_road(timeline_road, yr1_jan1_offset_text())
     offset_idea = x_bud.get_idea_obj(offset_road)
-    offset_amount = offset_idea._addin
+    offset_amount = offset_idea.addin
     return get_min_from_dt_offset(x_datetime, offset_amount)
 
 

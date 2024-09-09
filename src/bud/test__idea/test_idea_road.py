@@ -45,10 +45,10 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_reasonunits():
     premises_x = {premise_x.need: premise_x}
     reason_x = reasonunit_shop(old_water_road, premises=premises_x)
     reasons_x = {reason_x.base: reason_x}
-    x_idea = ideaunit_shop(roses_text, _reasonunits=reasons_x)
+    x_idea = ideaunit_shop(roses_text, reasonunits=reasons_x)
     # check asserts
-    assert x_idea._reasonunits.get(old_water_road) is not None
-    old_water_rain_reason = x_idea._reasonunits[old_water_road]
+    assert x_idea.reasonunits.get(old_water_road) is not None
+    old_water_rain_reason = x_idea.reasonunits[old_water_road]
     assert old_water_rain_reason.base == old_water_road
     assert old_water_rain_reason.premises.get(old_rain_road) is not None
     water_rain_l_premise = old_water_rain_reason.premises[old_rain_road]
@@ -57,13 +57,13 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_reasonunits():
     # WHEN
     new_water_text = "h2o"
     new_water_road = create_road(root_label(), new_water_text)
-    assert x_idea._reasonunits.get(new_water_road) is None
+    assert x_idea.reasonunits.get(new_water_road) is None
     x_idea.find_replace_road(old_road=old_water_road, new_road=new_water_road)
 
     # THEN
-    assert x_idea._reasonunits.get(old_water_road) is None
-    assert x_idea._reasonunits.get(new_water_road) is not None
-    new_water_rain_reason = x_idea._reasonunits[new_water_road]
+    assert x_idea.reasonunits.get(old_water_road) is None
+    assert x_idea.reasonunits.get(new_water_road) is not None
+    new_water_rain_reason = x_idea.reasonunits[new_water_road]
     assert new_water_rain_reason.base == new_water_road
     new_rain_road = create_road(new_water_road, rain_text)
     assert new_water_rain_reason.premises.get(old_rain_road) is None
@@ -71,8 +71,8 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_reasonunits():
     new_water_rain_l_premise = new_water_rain_reason.premises[new_rain_road]
     assert new_water_rain_l_premise.need == new_rain_road
 
-    print(f"{len(x_idea._reasonunits)=}")
-    reason_obj = x_idea._reasonunits.get(new_water_road)
+    print(f"{len(x_idea.reasonunits)=}")
+    reason_obj = x_idea.reasonunits.get(new_water_road)
     assert reason_obj is not None
 
     print(f"{len(reason_obj.premises)=}")
@@ -91,28 +91,28 @@ def test_IdeaUnit_find_replace_road_CorrectlyModifies_factunits():
 
     factunit_x = factunit_shop(base=old_water_road, pick=old_rain_road)
     factunits_x = {factunit_x.base: factunit_x}
-    x_idea = ideaunit_shop(roses_text, _factunits=factunits_x)
-    assert x_idea._factunits[old_water_road] is not None
-    old_water_rain_factunit = x_idea._factunits[old_water_road]
+    x_idea = ideaunit_shop(roses_text, factunits=factunits_x)
+    assert x_idea.factunits[old_water_road] is not None
+    old_water_rain_factunit = x_idea.factunits[old_water_road]
     assert old_water_rain_factunit.base == old_water_road
     assert old_water_rain_factunit.pick == old_rain_road
 
     # WHEN
     new_water_text = "h2o"
     new_water_road = create_road(root_label(), new_water_text)
-    assert x_idea._factunits.get(new_water_road) is None
+    assert x_idea.factunits.get(new_water_road) is None
     x_idea.find_replace_road(old_road=old_water_road, new_road=new_water_road)
 
     # THEN
-    assert x_idea._factunits.get(old_water_road) is None
-    assert x_idea._factunits.get(new_water_road) is not None
-    new_water_rain_factunit = x_idea._factunits[new_water_road]
+    assert x_idea.factunits.get(old_water_road) is None
+    assert x_idea.factunits.get(new_water_road) is not None
+    new_water_rain_factunit = x_idea.factunits[new_water_road]
     assert new_water_rain_factunit.base == new_water_road
     new_rain_road = create_road(new_water_road, rain_text)
     assert new_water_rain_factunit.pick == new_rain_road
 
-    print(f"{len(x_idea._factunits)=}")
-    factunit_obj = x_idea._factunits.get(new_water_road)
+    print(f"{len(x_idea.factunits)=}")
+    factunit_obj = x_idea.factunits.get(new_water_road)
     assert factunit_obj is not None
     assert factunit_obj.base == new_water_road
     assert factunit_obj.pick == new_rain_road

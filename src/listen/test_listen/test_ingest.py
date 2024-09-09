@@ -2,26 +2,26 @@ from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.listen.listen import (
     generate_ingest_list,
-    _allocate_irrational_debtit_score,
+    _allocate_irrational_debtit_belief,
     generate_perspective_agenda,
 )
 
 
-def test_allocate_irrational_debtit_score_CorrectlySetsBudAttr():
+def test_allocate_irrational_debtit_belief_CorrectlySetsBudAttr():
     yao_text = "Yao"
     zia_text = "Zia"
-    zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_credit_belief = 47
+    zia_debtit_belief = 41
     yao_bud = budunit_shop(yao_text)
-    yao_bud.add_acctunit(zia_text, zia_credit_score, zia_debtit_score)
+    yao_bud.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
     zia_acctunit = yao_bud.get_acct(zia_text)
-    assert zia_acctunit._irrational_debtit_score == 0
+    assert zia_acctunit._irrational_debtit_belief == 0
 
     # WHEN
-    _allocate_irrational_debtit_score(yao_bud, zia_text)
+    _allocate_irrational_debtit_belief(yao_bud, zia_text)
 
     # THEN
-    assert zia_acctunit._irrational_debtit_score == zia_debtit_score
+    assert zia_acctunit._irrational_debtit_belief == zia_debtit_belief
 
 
 def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
@@ -78,7 +78,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     clean_road = zia_budunit.make_l1_road(clean_text)
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     assert ingested_list[0] == clean_ideaunit
-    assert ingested_list[0]._mass == zia_debtor_pool
+    assert ingested_list[0].mass == zia_debtor_pool
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v2():
@@ -108,7 +108,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     cook_ideaunit = zia_budunit.get_idea_obj(cook_road)
     assert ingested_list[0] == cook_ideaunit
-    assert ingested_list[0]._mass == 16.0
+    assert ingested_list[0].mass == 16.0
     assert ingested_list == [cook_ideaunit, clean_ideaunit]
 
 
@@ -119,7 +119,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     clean_text = "clean"
     cook_text = "cook"
     zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, _mass=3, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, mass=3, pledge=True))
     zia_debtor_pool = 32
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -137,8 +137,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     cook_ideaunit = zia_budunit.get_idea_obj(cook_road)
     assert ingested_list == [cook_ideaunit, clean_ideaunit]
-    assert ingested_list[0]._mass == 24.0
-    assert ingested_list[1]._mass == 8.0
+    assert ingested_list[0].mass == 24.0
+    assert ingested_list[1].mass == 8.0
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v4():
@@ -148,7 +148,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     clean_text = "clean"
     cook_text = "cook"
     zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, _mass=2, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, mass=2, pledge=True))
     zia_debtor_pool = 32
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -165,6 +165,6 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     cook_road = zia_budunit.make_l1_road(cook_text)
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     cook_ideaunit = zia_budunit.get_idea_obj(cook_road)
-    assert ingested_list[0]._mass == 22
-    assert ingested_list[1]._mass == 10
+    assert ingested_list[0].mass == 22
+    assert ingested_list[1].mass == 10
     assert ingested_list == [cook_ideaunit, clean_ideaunit]

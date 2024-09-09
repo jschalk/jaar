@@ -262,9 +262,9 @@ def add_bud_acctunit_insert_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value(acct_id_str())
-        credit_score_value = acctunit_atom.get_value("credit_score")
-        debtit_score_value = acctunit_atom.get_value("debtit_score")
-        x_str = f"{acct_id} was added with {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt"
+        credit_belief_value = acctunit_atom.get_value("credit_belief")
+        debtit_belief_value = acctunit_atom.get_value("debtit_belief")
+        x_str = f"{acct_id} was added with {credit_belief_value} {x_monetary_desc} cred and {debtit_belief_value} {x_monetary_desc} debt"
         legible_list.append(x_str)
 
 
@@ -276,14 +276,14 @@ def add_bud_acctunit_update_to_legible_list(
 
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value(acct_id_str())
-        credit_score_value = acctunit_atom.get_value("credit_score")
-        debtit_score_value = acctunit_atom.get_value("debtit_score")
-        if credit_score_value is not None and debtit_score_value is not None:
-            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred and {debtit_score_value} {x_monetary_desc} debt."
-        elif credit_score_value is not None:
-            x_str = f"{acct_id} now has {credit_score_value} {x_monetary_desc} cred."
-        elif debtit_score_value is not None:
-            x_str = f"{acct_id} now has {debtit_score_value} {x_monetary_desc} debt."
+        credit_belief_value = acctunit_atom.get_value("credit_belief")
+        debtit_belief_value = acctunit_atom.get_value("debtit_belief")
+        if credit_belief_value is not None and debtit_belief_value is not None:
+            x_str = f"{acct_id} now has {credit_belief_value} {x_monetary_desc} cred and {debtit_belief_value} {x_monetary_desc} debt."
+        elif credit_belief_value is not None:
+            x_str = f"{acct_id} now has {credit_belief_value} {x_monetary_desc} cred."
+        elif debtit_belief_value is not None:
+            x_str = f"{acct_id} now has {debtit_belief_value} {x_monetary_desc} debt."
         legible_list.append(x_str)
 
 
@@ -393,32 +393,32 @@ def add_bud_ideaunit_update_to_legible_list(
         for ideaunit_atom in parent_road_dict.values():
             label_value = ideaunit_atom.get_value(label_str())
             parent_road_value = ideaunit_atom.get_value(parent_road_str())
-            _addin_value = ideaunit_atom.get_value(addin_str())
-            _begin_value = ideaunit_atom.get_value(begin_str())
-            _close_value = ideaunit_atom.get_value(close_str())
-            _denom_value = ideaunit_atom.get_value(denom_str())
-            _numor_value = ideaunit_atom.get_value(numor_str())
-            _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
-            _morph_value = ideaunit_atom.get_value(morph_str())
-            _mass_value = ideaunit_atom.get_value(_mass_text)
+            addin_value = ideaunit_atom.get_value(addin_str())
+            begin_value = ideaunit_atom.get_value(begin_str())
+            close_value = ideaunit_atom.get_value(close_str())
+            denom_value = ideaunit_atom.get_value(denom_str())
+            numor_value = ideaunit_atom.get_value(numor_str())
+            problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
+            morph_value = ideaunit_atom.get_value(morph_str())
+            mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_str())
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
-            if _addin_value is not None:
-                x_str += f"addin={_addin_value}."
-            if _begin_value is not None:
-                x_str += f"begin={_begin_value}."
-            if _close_value is not None:
-                x_str += f"close={_close_value}."
-            if _denom_value is not None:
-                x_str += f"denom={_denom_value}."
-            if _numor_value is not None:
-                x_str += f"numor={_numor_value}."
-            if _problem_bool_value is not None:
-                x_str += f"problem_bool={_problem_bool_value}."
-            if _morph_value is not None:
-                x_str += f"morph={_morph_value}."
-            if _mass_value is not None:
-                x_str += f"mass={_mass_value}."
+            if addin_value is not None:
+                x_str += f"addin={addin_value}."
+            if begin_value is not None:
+                x_str += f"begin={begin_value}."
+            if close_value is not None:
+                x_str += f"close={close_value}."
+            if denom_value is not None:
+                x_str += f"denom={denom_value}."
+            if numor_value is not None:
+                x_str += f"numor={numor_value}."
+            if problem_bool_value is not None:
+                x_str += f"problem_bool={problem_bool_value}."
+            if morph_value is not None:
+                x_str += f"morph={morph_value}."
+            if mass_value is not None:
+                x_str += f"mass={mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 
@@ -701,5 +701,5 @@ def add_bud_idea_factunit_delete_to_legible_list(
             road_value = idea_factunit_atom.get_value(road_text)
             base_value = idea_factunit_atom.get_value(base_text)
             pick_value = idea_factunit_atom.get_value(pick_text)
-            x_str = f"FactUnit '{pick_value}' deleted from base '{base_value}' for idea '{road_value}'."
+            x_str = f"FactUnit base '{base_value}' deleted for idea '{road_value}'."
             legible_list.append(x_str)

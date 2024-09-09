@@ -146,8 +146,8 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
     semicolon_casa_road = zia_bud.make_l1_road(casa_text)
     zia_bud.edit_idea_attr(road=semicolon_casa_road, reason=semicolon_time_reasonunit)
     casa_idea = zia_bud.get_idea_obj(semicolon_casa_road)
-    assert casa_idea._reasonunits.get(semicolon_time_road) is not None
-    gen_time_reasonunit = casa_idea._reasonunits.get(semicolon_time_road)
+    assert casa_idea.reasonunits.get(semicolon_time_road) is not None
+    gen_time_reasonunit = casa_idea.reasonunits.get(semicolon_time_road)
     assert gen_time_reasonunit.premises.get(semicolon_8am_road) is not None
 
     # WHEN
@@ -161,11 +161,11 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
     casa_idea = zia_bud.get_idea_obj(slash_casa_road)
     slash_time_road = zia_bud.make_l1_road(time_text)
     slash_8am_road = zia_bud.make_road(slash_time_road, _8am_text)
-    assert casa_idea._reasonunits.get(slash_time_road) is not None
-    gen_time_reasonunit = casa_idea._reasonunits.get(slash_time_road)
+    assert casa_idea.reasonunits.get(slash_time_road) is not None
+    gen_time_reasonunit = casa_idea.reasonunits.get(slash_time_road)
     assert gen_time_reasonunit.premises.get(slash_8am_road) is not None
 
-    assert casa_idea._reasonunits.get(semicolon_time_road) is None
+    assert casa_idea.reasonunits.get(semicolon_time_road) is None
     assert gen_time_reasonunit.premises.get(semicolon_8am_road) is None
 
 
@@ -183,9 +183,9 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     semicolon_casa_road = zia_bud.make_l1_road(casa_text)
     zia_bud.edit_idea_attr(semicolon_casa_road, factunit=semicolon_time_factunit)
     casa_idea = zia_bud.get_idea_obj(semicolon_casa_road)
-    print(f"{casa_idea._factunits=} {semicolon_time_road=}")
-    assert casa_idea._factunits.get(semicolon_time_road) is not None
-    gen_time_factunit = casa_idea._factunits.get(semicolon_time_road)
+    print(f"{casa_idea.factunits=} {semicolon_time_road=}")
+    assert casa_idea.factunits.get(semicolon_time_road) is not None
+    gen_time_factunit = casa_idea.factunits.get(semicolon_time_road)
 
     # WHEN
     slash_text = "/"
@@ -197,11 +197,11 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
     casa_idea = zia_bud.get_idea_obj(slash_casa_road)
     slash_time_road = zia_bud.make_l1_road(time_text)
     slash_8am_road = zia_bud.make_road(slash_time_road, _8am_text)
-    assert casa_idea._factunits.get(slash_time_road) is not None
-    gen_time_factunit = casa_idea._factunits.get(slash_time_road)
+    assert casa_idea.factunits.get(slash_time_road) is not None
+    gen_time_factunit = casa_idea.factunits.get(slash_time_road)
     assert gen_time_factunit.base is not None
     assert gen_time_factunit.base == slash_time_road
     assert gen_time_factunit.pick is not None
     assert gen_time_factunit.pick == slash_8am_road
 
-    assert casa_idea._factunits.get(semicolon_time_road) is None
+    assert casa_idea.factunits.get(semicolon_time_road) is None

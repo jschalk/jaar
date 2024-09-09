@@ -12,13 +12,13 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
     luca_bud.set_credor_respect(500)
     luca_bud.set_debtor_respect(400)
     yao_text = "Yao"
-    yao_credit_score = 66
-    yao_debtit_score = 77
-    luca_bud.add_acctunit(yao_text, yao_credit_score, yao_debtit_score)
+    yao_credit_belief = 66
+    yao_debtit_belief = 77
+    luca_bud.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
     sue_text = "Sue"
-    sue_credit_score = 434
-    sue_debtit_score = 323
-    luca_bud.add_acctunit(sue_text, sue_credit_score, sue_debtit_score)
+    sue_credit_belief = 434
+    sue_debtit_belief = 323
+    luca_bud.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
 
     # WHEN
     x_df = get_bud_acctunits_dataframe(luca_bud)
@@ -26,8 +26,8 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
     # THEN
     acctunit_colums = {
         "acct_id",
-        "credit_score",
-        "debtit_score",
+        "credit_belief",
+        "debtit_belief",
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -52,8 +52,8 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectEmptyDataFrame():
     # THEN
     acctunit_colums = {
         "acct_id",
-        "credit_score",
-        "debtit_score",
+        "credit_belief",
+        "debtit_belief",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -84,12 +84,12 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
         "fund_ratio",
         "_label",
         "_parent_road",
-        "_begin",
-        "_close",
-        "_addin",
-        "_denom",
-        "_numor",
-        "_morph",
+        "begin",
+        "close",
+        "addin",
+        "denom",
+        "numor",
+        "morph",
     }
     print(f"{set(x_df.columns)=}")
 
@@ -112,12 +112,12 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
         "fund_ratio",
         "_label",
         "_parent_road",
-        "_begin",
-        "_close",
-        "_addin",
-        "_denom",
-        "_numor",
-        "_morph",
+        "begin",
+        "close",
+        "addin",
+        "denom",
+        "numor",
+        "morph",
     }
     print(f"{set(x_df.columns)=}")
 

@@ -10,14 +10,14 @@ def test_bud_edit_idea_attr_CorrectlySetsTeamUnit():
     run_road = xio_bud.make_l1_road(run_text)
     xio_bud.set_l1_idea(ideaunit_shop(run_text))
     run_idea = xio_bud.get_idea_obj(run_road)
-    assert run_idea._teamunit == teamunit_shop()
+    assert run_idea.teamunit == teamunit_shop()
 
     # WHEN
     x_teamunit = teamunit_shop()
     xio_bud.edit_idea_attr(teamunit=x_teamunit, road=run_road)
 
     # THEN
-    assert run_idea._teamunit == x_teamunit
+    assert run_idea.teamunit == x_teamunit
 
 
 def test_bud_idearoot_teamunit_CorrectlySets_idea_teamheir():
@@ -26,7 +26,7 @@ def test_bud_idearoot_teamunit_CorrectlySets_idea_teamheir():
 
     yao_bud = budunit_shop("Yao")
     yao_bud.edit_idea_attr(teamunit=x_teamunit, road=yao_bud._real_id)
-    assert yao_bud._idearoot._teamunit == x_teamunit
+    assert yao_bud._idearoot.teamunit == x_teamunit
     assert yao_bud._idearoot._teamheir is None
 
     # WHEN
@@ -52,7 +52,7 @@ def test_bud_ideakid_teamunit_EmptyCorrectlySets_idea_teamheir():
     bob_bud.set_l1_idea(ideaunit_shop(run_text))
     bob_bud.edit_idea_attr(run_road, teamunit=x_teamunit)
     run_idea = bob_bud.get_idea_obj(run_road)
-    assert run_idea._teamunit == x_teamunit
+    assert run_idea.teamunit == x_teamunit
     assert run_idea._teamheir is None
 
     # WHEN
@@ -85,7 +85,7 @@ def test_bud_ideakid_teamunit_EmptyCorrectlySets_idea_teamheir():
     bob_bud.set_l1_idea(ideaunit_shop(run_text))
     bob_bud.edit_idea_attr(run_road, teamunit=x_teamunit)
     run_idea = bob_bud.get_idea_obj(run_road)
-    assert run_idea._teamunit == x_teamunit
+    assert run_idea.teamunit == x_teamunit
     assert run_idea._teamheir is None
 
     # WHEN
@@ -131,7 +131,7 @@ def test_bud_ideakid_teamunit_CorrectlySets_grandchild_idea_teamheir():
     sue_bud.edit_idea_attr(swim_road, teamunit=x_teamunit)
     # print(sue_bud.make_road(four_road=}\n{morn_road=))
     four_idea = sue_bud.get_idea_obj(four_road)
-    assert four_idea._teamunit == teamunit_shop()
+    assert four_idea.teamunit == teamunit_shop()
     assert four_idea._teamheir is None
 
     # WHEN
@@ -168,7 +168,7 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Teamunit():
     swim_teamunit.set_teamlink(group_id=zoa_text)
     sue1_bud.edit_idea_attr(swim_road, teamunit=swim_teamunit)
     sue1_bud_swim_idea = sue1_bud.get_idea_obj(swim_road)
-    sue1_bud_swim_teamlinks = sue1_bud_swim_idea._teamunit._teamlinks
+    sue1_bud_swim_teamlinks = sue1_bud_swim_idea.teamunit._teamlinks
     assert len(sue1_bud_swim_teamlinks) == 2
 
     # WHEN
@@ -177,7 +177,7 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Teamunit():
     filtered_idea = sue2_bud._get_filtered_awardlinks_idea(sue1_bud_swim_idea)
 
     # THEN
-    filtered_swim_teamlinks = filtered_idea._teamunit._teamlinks
+    filtered_swim_teamlinks = filtered_idea.teamunit._teamlinks
     assert len(filtered_swim_teamlinks) == 1
     assert list(filtered_swim_teamlinks) == [xia_text]
 
@@ -201,7 +201,7 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     swim_teamunit.set_teamlink(group_id=zoa_text)
     sue1_bud.edit_idea_attr(swim_road, teamunit=swim_teamunit)
     sue1_bud_swim_idea = sue1_bud.get_idea_obj(swim_road)
-    sue1_bud_swim_teamlinks = sue1_bud_swim_idea._teamunit._teamlinks
+    sue1_bud_swim_teamlinks = sue1_bud_swim_idea.teamunit._teamlinks
     assert len(sue1_bud_swim_teamlinks) == 2
 
     # WHEN
@@ -213,6 +213,6 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
 
     # THEN
     sue2_bud_swim_idea = sue2_bud.get_idea_obj(swim_road)
-    sue2_bud_swim_teamlinks = sue2_bud_swim_idea._teamunit._teamlinks
+    sue2_bud_swim_teamlinks = sue2_bud_swim_idea.teamunit._teamlinks
     assert len(sue2_bud_swim_teamlinks) == 1
     assert list(sue2_bud_swim_teamlinks) == [xia_text]

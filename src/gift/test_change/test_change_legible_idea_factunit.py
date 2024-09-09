@@ -146,12 +146,9 @@ def test_create_legible_list_ReturnsObj_idea_factunit_DELETE():
     base_text = "base"
     casa_road = sue_bud.make_l1_road("casa")
     base_value = sue_bud.make_road(casa_road, "fridge status")
-    pick_text = "pick"
-    pick_value = sue_bud.make_road(base_value, "dirty")
     swim_atomunit = atomunit_shop(category, atom_delete())
     swim_atomunit.set_arg(road_text, road_value)
     swim_atomunit.set_arg(base_text, base_value)
-    swim_atomunit.set_arg(pick_text, pick_value)
     # print(f"{swim_atomunit=}")
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(swim_atomunit)
@@ -160,6 +157,6 @@ def test_create_legible_list_ReturnsObj_idea_factunit_DELETE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"FactUnit '{pick_value}' deleted from base '{base_value}' for idea '{road_value}'."
+    x_str = f"FactUnit base '{base_value}' deleted for idea '{road_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

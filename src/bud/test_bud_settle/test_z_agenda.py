@@ -109,8 +109,8 @@ def test_BudUnit_get_agenda_dict_With7amItemExample():
     x_bud.set_fact(day24hr_road, day24hr_road, day24hr_open, day24hr_nigh, True)
 
     # THEN
-    print(x_bud._idearoot._factunits[day24hr_road])
-    print(x_bud.get_idea_obj(clean_road)._reasonunits)
+    print(x_bud._idearoot.factunits[day24hr_road])
+    print(x_bud.get_idea_obj(clean_road).reasonunits)
     print(x_bud.get_idea_obj(clean_road)._active)
     agenda_dict = x_bud.get_agenda_dict()
     print(f"{len(agenda_dict)=} {agenda_dict.keys()=}")
@@ -233,9 +233,9 @@ def test_BudUnit_get_agenda_dict_BudUnitCanFilterOnBase_budunit_v001_with_large_
 
     # for agenda_item in yao_bud.get_agenda_dict():
     #     print(
-    #         f"{agenda_item._parent_road=} {agenda_item._label} {len(agenda_item._reasonunits)=}"
+    #         f"{agenda_item._parent_road=} {agenda_item._label} {len(agenda_item.reasonunits)=}"
     #     )
-    #     for reason in agenda_item._reasonunits.values():
+    #     for reason in agenda_item.reasonunits.values():
     #         if reason.base == weekdays:
     #             print(f"         {weekdays}")
 
@@ -262,7 +262,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     day_road = zia_bud.make_road(time_road, day_text)
 
     zia_bud.set_l1_idea(ideaunit_shop(run_text, pledge=True))
-    zia_bud.set_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
+    zia_bud.set_idea(ideaunit_shop(day_text, begin=0, close=500), time_road)
     zia_bud.edit_idea_attr(
         road=run_road,
         reason_base=day_road,
@@ -272,7 +272,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     )
     zia_bud.set_fact(base=day_road, pick=day_road, fopen=30, fnigh=87)
     zia_bud.get_agenda_dict()
-    run_reasonunits = zia_bud._idearoot._kids[run_text]._reasonunits[day_road]
+    run_reasonunits = zia_bud._idearoot._kids[run_text].reasonunits[day_road]
     print(f"{run_reasonunits=}")
     print(f"{run_reasonunits.premises[day_road]._status=}")
     print(f"{run_reasonunits.premises[day_road]._task=}")
@@ -303,7 +303,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     day_road = zia_bud.make_road(time_road, day_text)
 
     zia_bud.set_l1_idea(ideaunit_shop(run_text, pledge=True))
-    zia_bud.set_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
+    zia_bud.set_idea(ideaunit_shop(day_text, begin=0, close=500), time_road)
     zia_bud.edit_idea_attr(
         road=run_road,
         reason_base=day_road,
@@ -324,13 +324,13 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     zia_bud.set_fact(base=day_road, pick=day_road, fopen=401, fnigh=402)
     assert len(zia_bud.get_agenda_dict()) == 1
     # print(f"{run_idea._factheirs=}")
-    print(f"{run_idea._factunits=}")
+    print(f"{run_idea.factunits=}")
 
     # WHEN
     zia_bud.set_agenda_task_complete(task_road=run_road, base=day_road)
 
     # THEN
-    print(f"{run_idea._factunits=}")
+    print(f"{run_idea.factunits=}")
     # print(f"{run_idea._factheirs=}")
     assert len(zia_bud.get_agenda_dict()) == 0
 
@@ -367,7 +367,7 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     #         pledge_true_count += 1
     #         # if idea.pledge is False:
     #         #     print(f"pledge is false {idea._label}")
-    #         # for reason in idea._reasonunits.values():
+    #         # for reason in idea.reasonunits.values():
     #         #     assert reason._status in (True, False)
     # assert pledge_true_count > 0
 
@@ -528,7 +528,7 @@ def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
     sweep_idea = zia_bud.get_idea_obj(sweep_road)
     yao_text = "Yao"
     zia_bud.add_acctunit(yao_text)
-    sweep_idea._teamunit.set_teamlink(yao_text)
+    sweep_idea.teamunit.set_teamlink(yao_text)
     print(f"{sweep_idea}")
     agenda_dict = zia_bud.get_agenda_dict()
     assert agenda_dict.get(clean_road) is not None

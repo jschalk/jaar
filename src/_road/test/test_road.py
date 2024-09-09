@@ -27,6 +27,7 @@ from src._road.road import (
     validate_roadnode,
     roadunit_valid_dir_path,
     all_roadunits_between,
+    is_roadnode,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -415,13 +416,24 @@ def test_Roadnode_exists():
 
 def test_Roadnode_is_node_ReturnsCorrectBool():
     # WHEN / THEN
-    x_roadnode = RoadNode("")
-    assert x_roadnode.is_node()
+    assert RoadNode("").is_node()
 
     # WHEN / THEN
     x_s = default_road_delimiter_if_none()
     x_roadnode = RoadNode(f"casa{x_s}kitchen")
     assert x_roadnode.is_node() is False
+
+
+def test_is_roadnode_ReturnsObj():
+    # ESTABLISH
+    x_s = default_road_delimiter_if_none()
+
+    # WHEN / THEN
+    assert is_roadnode("", x_delimiter=x_s)
+    assert is_roadnode("casa", x_delimiter=x_s)
+    assert not is_roadnode(f"ZZ{x_s}casa", x_s)
+    assert not is_roadnode(RoadUnit(f"ZZ{x_s}casa"), x_s)
+    assert is_roadnode(RoadUnit(f"ZZ"), x_s)
 
 
 def test_get_diff_road_ReturnsCorrectObj():

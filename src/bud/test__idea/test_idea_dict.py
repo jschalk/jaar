@@ -28,7 +28,7 @@ def test_get_obj_from_idea_dict_ReturnsCorrectObj():
     assert get_obj_from_idea_dict({field_text: False}, field_text) is False
 
     # ESTABLISH
-    field_text = "_problem_bool"
+    field_text = "problem_bool"
     # WHEN / THEN
     assert get_obj_from_idea_dict({field_text: True}, field_text)
     assert get_obj_from_idea_dict({}, field_text) is False
@@ -44,7 +44,7 @@ def test_get_obj_from_idea_dict_ReturnsCorrectObj():
 def test_get_obj_from_idea_dict_ReturnsCorrect_HealerLink():
     # ESTABLISH
     # WHEN / THEN
-    healerlink_key = "_healerlink"
+    healerlink_key = "healerlink"
     assert get_obj_from_idea_dict({}, healerlink_key) == healerlink_shop()
 
     # WHEN
@@ -130,17 +130,17 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     casa_idea = ideaunit_shop(
         _parent_road=casa_road,
         _kids=None,
-        _awardlinks=biker_and_flyer_awardlinks,
-        _mass=30,
+        awardlinks=biker_and_flyer_awardlinks,
+        mass=30,
         _label=casa_text,
         _level=1,
-        _reasonunits=x1_reasonunits,
+        reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
-        _teamunit=sue_teamunit,
-        _healerlink=yao_healerlink,
+        teamunit=sue_teamunit,
+        healerlink=yao_healerlink,
         _active=True,
         pledge=True,
-        _problem_bool=x_problem_bool,
+        problem_bool=x_problem_bool,
     )
     factunit_x = factunit_shop(base=week_road, pick=week_road, fopen=5, fnigh=59)
     casa_idea.set_factunit(factunit=factunit_x)
@@ -154,14 +154,14 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     x_morph = 16
     x_gogo_want = 81
     x_stop_want = 87
-    casa_idea._begin = x_begin
-    casa_idea._close = x_close
-    casa_idea._addin = x_addin
-    casa_idea._denom = x_denom
-    casa_idea._numor = x_numor
-    casa_idea._morph = x_morph
-    casa_idea._gogo_want = x_gogo_want
-    casa_idea._stop_want = x_stop_want
+    casa_idea.begin = x_begin
+    casa_idea.close = x_close
+    casa_idea.addin = x_addin
+    casa_idea.denom = x_denom
+    casa_idea.numor = x_numor
+    casa_idea.morph = x_morph
+    casa_idea.gogo_want = x_gogo_want
+    casa_idea.stop_want = x_stop_want
     casa_idea._uid = 17
     casa_idea.add_kid(ideaunit_shop("paper"))
 
@@ -172,28 +172,28 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict is not None
     assert len(casa_dict["_kids"]) == 1
     assert casa_dict["_kids"] == casa_idea.get_kids_dict()
-    assert casa_dict["_reasonunits"] == casa_idea.get_reasonunits_dict()
-    assert casa_dict["_awardlinks"] == casa_idea.get_awardlinks_dict()
-    assert casa_dict["_awardlinks"] == x1_awardlinks
-    assert casa_dict["_teamunit"] == sue_teamunit.get_dict()
-    assert casa_dict["_healerlink"] == yao_healerlink.get_dict()
+    assert casa_dict["reasonunits"] == casa_idea.get_reasonunits_dict()
+    assert casa_dict["awardlinks"] == casa_idea.get_awardlinks_dict()
+    assert casa_dict["awardlinks"] == x1_awardlinks
+    assert casa_dict["teamunit"] == sue_teamunit.get_dict()
+    assert casa_dict["healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
-    assert casa_dict["_mass"] == casa_idea._mass
+    assert casa_dict["mass"] == casa_idea.mass
     assert casa_dict["_label"] == casa_idea._label
     assert casa_dict["_uid"] == casa_idea._uid
-    assert casa_dict["_begin"] == casa_idea._begin
-    assert casa_dict["_close"] == casa_idea._close
-    assert casa_dict["_numor"] == casa_idea._numor
-    assert casa_dict["_denom"] == casa_idea._denom
-    assert casa_dict["_morph"] == casa_idea._morph
-    assert casa_dict["_gogo_want"] == casa_idea._gogo_want
-    assert casa_dict["_stop_want"] == casa_idea._stop_want
+    assert casa_dict["begin"] == casa_idea.begin
+    assert casa_dict["close"] == casa_idea.close
+    assert casa_dict["numor"] == casa_idea.numor
+    assert casa_dict["denom"] == casa_idea.denom
+    assert casa_dict["morph"] == casa_idea.morph
+    assert casa_dict["gogo_want"] == casa_idea.gogo_want
+    assert casa_dict["stop_want"] == casa_idea.stop_want
     assert casa_dict["pledge"] == casa_idea.pledge
-    assert casa_dict["_problem_bool"] == casa_idea._problem_bool
-    assert casa_dict["_problem_bool"] == x_problem_bool
+    assert casa_dict["problem_bool"] == casa_idea.problem_bool
+    assert casa_dict["problem_bool"] == x_problem_bool
     assert casa_idea._is_expanded
     assert casa_dict.get("_is_expanded") is None
-    assert len(casa_dict["_factunits"]) == len(casa_idea.get_factunits_dict())
+    assert len(casa_dict["factunits"]) == len(casa_idea.get_factunits_dict())
 
 
 def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
@@ -205,7 +205,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {"_mass": 1}
+    assert casa_dict == {"mass": 1}
 
 
 def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
@@ -222,7 +222,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     yao_text = "Yao"
     casa_idea.set_awardlink(awardlink_shop(yao_text))
 
-    x_teamunit = casa_idea._teamunit
+    x_teamunit = casa_idea.teamunit
     x_teamunit.set_teamlink(group_id=yao_text)
 
     x_originunit = casa_idea._originunit
@@ -233,9 +233,9 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
 
     assert not casa_idea._is_expanded
     assert casa_idea.pledge
-    assert casa_idea._factunits is not None
-    assert casa_idea._awardlinks is not None
-    assert casa_idea._teamunit is not None
+    assert casa_idea.factunits is not None
+    assert casa_idea.awardlinks is not None
+    assert casa_idea.teamunit is not None
     assert casa_idea._originunit is not None
     assert casa_idea._kids != {}
 
@@ -245,9 +245,9 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     # THEN
     assert casa_dict.get("_is_expanded") is False
     assert casa_dict.get("pledge")
-    assert casa_dict.get("_factunits") is not None
-    assert casa_dict.get("_awardlinks") is not None
-    assert casa_dict.get("_teamunit") is not None
+    assert casa_dict.get("factunits") is not None
+    assert casa_dict.get("awardlinks") is not None
+    assert casa_dict.get("teamunit") is not None
     assert casa_dict.get("_originunit") is not None
     assert casa_dict.get("_kids") is not None
 
@@ -257,10 +257,10 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     casa_idea = ideaunit_shop()
     assert casa_idea._is_expanded
     assert casa_idea.pledge is False
-    assert casa_idea._factunits == {}
-    assert casa_idea._awardlinks == {}
-    assert casa_idea._teamunit == teamunit_shop()
-    assert casa_idea._healerlink == healerlink_shop()
+    assert casa_idea.factunits == {}
+    assert casa_idea.awardlinks == {}
+    assert casa_idea.teamunit == teamunit_shop()
+    assert casa_idea.healerlink == healerlink_shop()
     assert casa_idea._originunit == originunit_shop()
     assert casa_idea._kids == {}
 
@@ -270,9 +270,9 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     # THEN
     assert casa_dict.get("_is_expanded") is None
     assert casa_dict.get("pledge") is None
-    assert casa_dict.get("_factunits") is None
-    assert casa_dict.get("_awardlinks") is None
-    assert casa_dict.get("_teamunit") is None
-    assert casa_dict.get("_healerlink") is None
+    assert casa_dict.get("factunits") is None
+    assert casa_dict.get("awardlinks") is None
+    assert casa_dict.get("teamunit") is None
+    assert casa_dict.get("healerlink") is None
     assert casa_dict.get("_originunit") is None
     assert casa_dict.get("_kids") is None

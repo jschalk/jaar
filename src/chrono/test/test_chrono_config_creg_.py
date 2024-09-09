@@ -66,26 +66,26 @@ def test_get_creg_config_ReturnsObj():
 
 def test_cregtime_ideaunit_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert cregtime_ideaunit()._begin == 0
-    assert cregtime_ideaunit()._close == 1472657760
-    assert cregtime_ideaunit()._close == get_c400_constants().c400_leap_length * 7
+    assert cregtime_ideaunit().begin == 0
+    assert cregtime_ideaunit().close == 1472657760
+    assert cregtime_ideaunit().close == get_c400_constants().c400_leap_length * 7
 
 
 def test_creg_weekday_ideaunits_ReturnsObj():
-    assert creg_weekday_ideaunits().get(get_wed())._gogo_want == 0
-    assert creg_weekday_ideaunits().get(get_thu())._gogo_want == 1440
-    assert creg_weekday_ideaunits().get(get_fri())._gogo_want == 2880
-    assert creg_weekday_ideaunits().get(get_sat())._gogo_want == 4320
-    assert creg_weekday_ideaunits().get(get_sun())._gogo_want == 5760
-    assert creg_weekday_ideaunits().get(get_mon())._gogo_want == 7200
-    assert creg_weekday_ideaunits().get(get_tue())._gogo_want == 8640
-    assert creg_weekday_ideaunits().get(get_wed())._stop_want == 1440
-    assert creg_weekday_ideaunits().get(get_thu())._stop_want == 2880
-    assert creg_weekday_ideaunits().get(get_fri())._stop_want == 4320
-    assert creg_weekday_ideaunits().get(get_sat())._stop_want == 5760
-    assert creg_weekday_ideaunits().get(get_sun())._stop_want == 7200
-    assert creg_weekday_ideaunits().get(get_mon())._stop_want == 8640
-    assert creg_weekday_ideaunits().get(get_tue())._stop_want == 10080
+    assert creg_weekday_ideaunits().get(get_wed()).gogo_want == 0
+    assert creg_weekday_ideaunits().get(get_thu()).gogo_want == 1440
+    assert creg_weekday_ideaunits().get(get_fri()).gogo_want == 2880
+    assert creg_weekday_ideaunits().get(get_sat()).gogo_want == 4320
+    assert creg_weekday_ideaunits().get(get_sun()).gogo_want == 5760
+    assert creg_weekday_ideaunits().get(get_mon()).gogo_want == 7200
+    assert creg_weekday_ideaunits().get(get_tue()).gogo_want == 8640
+    assert creg_weekday_ideaunits().get(get_wed()).stop_want == 1440
+    assert creg_weekday_ideaunits().get(get_thu()).stop_want == 2880
+    assert creg_weekday_ideaunits().get(get_fri()).stop_want == 4320
+    assert creg_weekday_ideaunits().get(get_sat()).stop_want == 5760
+    assert creg_weekday_ideaunits().get(get_sun()).stop_want == 7200
+    assert creg_weekday_ideaunits().get(get_mon()).stop_want == 8640
+    assert creg_weekday_ideaunits().get(get_tue()).stop_want == 10080
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_days():
@@ -110,16 +110,16 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_days():
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(creg_road)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
-    assert creg_idea._begin == 0
-    assert creg_idea._close == 1472657760
+    assert creg_idea.begin == 0
+    assert creg_idea.close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
-    assert day_idea._denom == 1440
-    assert day_idea._morph
+    assert day_idea.denom == 1440
+    assert day_idea.morph
     assert sue_budunit.idea_exists(days_road)
     days_idea = sue_budunit.get_idea_obj(days_road)
-    assert days_idea._denom == 1440
-    assert not days_idea._morph
+    assert days_idea.denom == 1440
+    assert not days_idea.morph
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
@@ -153,10 +153,10 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     # THEN
     assert sue_budunit.idea_exists(week_road)
     week_idea = sue_budunit.get_idea_obj(week_road)
-    assert not week_idea._gogo_want
-    assert not week_idea._stop_want
-    assert week_idea._denom == 10080
-    assert week_idea._morph
+    assert not week_idea.gogo_want
+    assert not week_idea.stop_want
+    assert week_idea.denom == 10080
+    assert week_idea.morph
     assert sue_budunit.idea_exists(sun_road)
     assert sue_budunit.idea_exists(mon_road)
     assert sue_budunit.idea_exists(tue_road)
@@ -166,8 +166,8 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     assert sue_budunit.idea_exists(sat_road)
     assert sue_budunit.idea_exists(weeks_road)
     weeks_idea = sue_budunit.get_idea_obj(weeks_road)
-    assert weeks_idea._denom == 10080
-    assert not weeks_idea._morph
+    assert weeks_idea.denom == 10080
+    assert not weeks_idea.morph
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap_road():
@@ -190,45 +190,45 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap_road():
     # THEN
     assert sue_budunit.idea_exists(c400_leap_road)
     c400_leap_idea = sue_budunit.get_idea_obj(c400_leap_road)
-    assert not c400_leap_idea._gogo_want
-    assert not c400_leap_idea._stop_want
-    assert c400_leap_idea._denom == 210379680
-    assert c400_leap_idea._morph
+    assert not c400_leap_idea.gogo_want
+    assert not c400_leap_idea.stop_want
+    assert c400_leap_idea.denom == 210379680
+    assert c400_leap_idea.morph
 
     assert sue_budunit.idea_exists(c400_clean_road)
     c400_clean_idea = sue_budunit.get_idea_obj(c400_clean_road)
-    assert not c400_clean_idea._gogo_want
-    assert not c400_clean_idea._stop_want
-    assert c400_clean_idea._denom == 210378240
-    assert c400_clean_idea._morph
+    assert not c400_clean_idea.gogo_want
+    assert not c400_clean_idea.stop_want
+    assert c400_clean_idea.denom == 210378240
+    assert c400_clean_idea.morph
 
     assert sue_budunit.idea_exists(c100_road)
     c100_idea = sue_budunit.get_idea_obj(c100_road)
-    assert not c100_idea._gogo_want
-    assert not c100_idea._stop_want
-    assert c100_idea._denom == 52594560
-    assert c100_idea._morph
+    assert not c100_idea.gogo_want
+    assert not c100_idea.stop_want
+    assert c100_idea.denom == 52594560
+    assert c100_idea.morph
 
     assert sue_budunit.idea_exists(yr4_leap_road)
     yr4_leap_idea = sue_budunit.get_idea_obj(yr4_leap_road)
-    assert not yr4_leap_idea._gogo_want
-    assert not yr4_leap_idea._stop_want
-    assert yr4_leap_idea._denom == 2103840
-    assert yr4_leap_idea._morph
+    assert not yr4_leap_idea.gogo_want
+    assert not yr4_leap_idea.stop_want
+    assert yr4_leap_idea.denom == 2103840
+    assert yr4_leap_idea.morph
 
     assert sue_budunit.idea_exists(yr4_clean_road)
     yr4_clean_idea = sue_budunit.get_idea_obj(yr4_clean_road)
-    assert not yr4_clean_idea._gogo_want
-    assert not yr4_clean_idea._stop_want
-    assert yr4_clean_idea._denom == 2102400
-    assert yr4_clean_idea._morph
+    assert not yr4_clean_idea.gogo_want
+    assert not yr4_clean_idea.stop_want
+    assert yr4_clean_idea.denom == 2102400
+    assert yr4_clean_idea.morph
 
     assert sue_budunit.idea_exists(year_road)
     year_idea = sue_budunit.get_idea_obj(year_road)
-    assert not year_idea._gogo_want
-    assert not year_idea._stop_want
-    assert year_idea._denom == 525600
-    assert year_idea._morph
+    assert not year_idea.gogo_want
+    assert not year_idea.stop_want
+    assert year_idea.denom == 525600
+    assert year_idea.morph
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_years():
@@ -275,7 +275,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     assert sue_budunit.idea_exists(year_road)
 
     year_idea = sue_budunit.get_idea_obj(year_road)
-    # assert year_idea._morph
+    # assert year_idea.morph
     assert sue_budunit.idea_exists(jan_road)
     assert sue_budunit.idea_exists(feb_road)
     assert sue_budunit.idea_exists(mar_road)
@@ -288,31 +288,31 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     assert sue_budunit.idea_exists(oct_road)
     assert sue_budunit.idea_exists(nov_road)
     assert sue_budunit.idea_exists(dec_road)
-    assert sue_budunit.get_idea_obj(jan_road)._gogo_want == 440640
-    assert sue_budunit.get_idea_obj(feb_road)._gogo_want == 485280
-    assert sue_budunit.get_idea_obj(mar_road)._gogo_want == 0
-    assert sue_budunit.get_idea_obj(apr_road)._gogo_want == 44640
-    assert sue_budunit.get_idea_obj(may_road)._gogo_want == 87840
-    assert sue_budunit.get_idea_obj(jun_road)._gogo_want == 132480
-    assert sue_budunit.get_idea_obj(jul_road)._gogo_want == 175680
-    assert sue_budunit.get_idea_obj(aug_road)._gogo_want == 220320
-    assert sue_budunit.get_idea_obj(sep_road)._gogo_want == 264960
-    assert sue_budunit.get_idea_obj(oct_road)._gogo_want == 308160
-    assert sue_budunit.get_idea_obj(nov_road)._gogo_want == 352800
-    assert sue_budunit.get_idea_obj(dec_road)._gogo_want == 396000
+    assert sue_budunit.get_idea_obj(jan_road).gogo_want == 440640
+    assert sue_budunit.get_idea_obj(feb_road).gogo_want == 485280
+    assert sue_budunit.get_idea_obj(mar_road).gogo_want == 0
+    assert sue_budunit.get_idea_obj(apr_road).gogo_want == 44640
+    assert sue_budunit.get_idea_obj(may_road).gogo_want == 87840
+    assert sue_budunit.get_idea_obj(jun_road).gogo_want == 132480
+    assert sue_budunit.get_idea_obj(jul_road).gogo_want == 175680
+    assert sue_budunit.get_idea_obj(aug_road).gogo_want == 220320
+    assert sue_budunit.get_idea_obj(sep_road).gogo_want == 264960
+    assert sue_budunit.get_idea_obj(oct_road).gogo_want == 308160
+    assert sue_budunit.get_idea_obj(nov_road).gogo_want == 352800
+    assert sue_budunit.get_idea_obj(dec_road).gogo_want == 396000
 
-    assert sue_budunit.get_idea_obj(jan_road)._stop_want == 485280
-    assert sue_budunit.get_idea_obj(feb_road)._stop_want == 525600
-    assert sue_budunit.get_idea_obj(mar_road)._stop_want == 44640
-    assert sue_budunit.get_idea_obj(apr_road)._stop_want == 87840
-    assert sue_budunit.get_idea_obj(may_road)._stop_want == 132480
-    assert sue_budunit.get_idea_obj(jun_road)._stop_want == 175680
-    assert sue_budunit.get_idea_obj(jul_road)._stop_want == 220320
-    assert sue_budunit.get_idea_obj(aug_road)._stop_want == 264960
-    assert sue_budunit.get_idea_obj(sep_road)._stop_want == 308160
-    assert sue_budunit.get_idea_obj(oct_road)._stop_want == 352800
-    assert sue_budunit.get_idea_obj(nov_road)._stop_want == 396000
-    assert sue_budunit.get_idea_obj(dec_road)._stop_want == 440640
+    assert sue_budunit.get_idea_obj(jan_road).stop_want == 485280
+    assert sue_budunit.get_idea_obj(feb_road).stop_want == 525600
+    assert sue_budunit.get_idea_obj(mar_road).stop_want == 44640
+    assert sue_budunit.get_idea_obj(apr_road).stop_want == 87840
+    assert sue_budunit.get_idea_obj(may_road).stop_want == 132480
+    assert sue_budunit.get_idea_obj(jun_road).stop_want == 175680
+    assert sue_budunit.get_idea_obj(jul_road).stop_want == 220320
+    assert sue_budunit.get_idea_obj(aug_road).stop_want == 264960
+    assert sue_budunit.get_idea_obj(sep_road).stop_want == 308160
+    assert sue_budunit.get_idea_obj(oct_road).stop_want == 352800
+    assert sue_budunit.get_idea_obj(nov_road).stop_want == 396000
+    assert sue_budunit.get_idea_obj(dec_road).stop_want == 440640
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
@@ -337,16 +337,16 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(creg_road)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
-    assert creg_idea._begin == 0
-    assert creg_idea._close == 1472657760
+    assert creg_idea.begin == 0
+    assert creg_idea.close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
-    assert day_idea._denom == 1440
-    assert day_idea._morph
+    assert day_idea.denom == 1440
+    assert day_idea.morph
     assert sue_budunit.idea_exists(days_road)
     days_idea = sue_budunit.get_idea_obj(days_road)
-    assert days_idea._denom == 1440
-    assert not days_idea._morph
+    assert days_idea.denom == 1440
+    assert not days_idea.morph
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
@@ -420,10 +420,10 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(creg_road)
     assert sue_budunit.idea_exists(day_road)
-    # assert sue_budunit.get_idea_obj(hour_road)._denom == 60
-    # assert sue_budunit.get_idea_obj(hour_road)._morph
-    # assert not sue_budunit.get_idea_obj(hour_road)._gogo_want
-    # assert not sue_budunit.get_idea_obj(hour_road)._stop_want
+    # assert sue_budunit.get_idea_obj(hour_road).denom == 60
+    # assert sue_budunit.get_idea_obj(hour_road).morph
+    # assert not sue_budunit.get_idea_obj(hour_road).gogo_want
+    # assert not sue_budunit.get_idea_obj(hour_road).stop_want
     assert sue_budunit.idea_exists(hr_00_road)
     assert sue_budunit.idea_exists(hr_01_road)
     assert sue_budunit.idea_exists(hr_02_road)
@@ -448,54 +448,54 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert sue_budunit.idea_exists(hr_21_road)
     assert sue_budunit.idea_exists(hr_22_road)
     assert sue_budunit.idea_exists(hr_23_road)
-    assert sue_budunit.get_idea_obj(hr_00_road)._gogo_want == 0
-    assert sue_budunit.get_idea_obj(hr_01_road)._gogo_want == 60
-    assert sue_budunit.get_idea_obj(hr_02_road)._gogo_want == 120
-    assert sue_budunit.get_idea_obj(hr_03_road)._gogo_want == 180
-    assert sue_budunit.get_idea_obj(hr_04_road)._gogo_want == 240
-    assert sue_budunit.get_idea_obj(hr_05_road)._gogo_want == 300
-    assert sue_budunit.get_idea_obj(hr_06_road)._gogo_want == 360
-    assert sue_budunit.get_idea_obj(hr_07_road)._gogo_want == 420
-    assert sue_budunit.get_idea_obj(hr_08_road)._gogo_want == 480
-    assert sue_budunit.get_idea_obj(hr_09_road)._gogo_want == 540
-    assert sue_budunit.get_idea_obj(hr_10_road)._gogo_want == 600
-    assert sue_budunit.get_idea_obj(hr_11_road)._gogo_want == 660
-    assert sue_budunit.get_idea_obj(hr_12_road)._gogo_want == 720
-    assert sue_budunit.get_idea_obj(hr_13_road)._gogo_want == 780
-    assert sue_budunit.get_idea_obj(hr_14_road)._gogo_want == 840
-    assert sue_budunit.get_idea_obj(hr_15_road)._gogo_want == 900
-    assert sue_budunit.get_idea_obj(hr_16_road)._gogo_want == 960
-    assert sue_budunit.get_idea_obj(hr_17_road)._gogo_want == 1020
-    assert sue_budunit.get_idea_obj(hr_18_road)._gogo_want == 1080
-    assert sue_budunit.get_idea_obj(hr_19_road)._gogo_want == 1140
-    assert sue_budunit.get_idea_obj(hr_20_road)._gogo_want == 1200
-    assert sue_budunit.get_idea_obj(hr_21_road)._gogo_want == 1260
-    assert sue_budunit.get_idea_obj(hr_22_road)._gogo_want == 1320
-    assert sue_budunit.get_idea_obj(hr_23_road)._gogo_want == 1380
-    assert sue_budunit.get_idea_obj(hr_00_road)._stop_want == 60
-    assert sue_budunit.get_idea_obj(hr_01_road)._stop_want == 120
-    assert sue_budunit.get_idea_obj(hr_02_road)._stop_want == 180
-    assert sue_budunit.get_idea_obj(hr_03_road)._stop_want == 240
-    assert sue_budunit.get_idea_obj(hr_04_road)._stop_want == 300
-    assert sue_budunit.get_idea_obj(hr_05_road)._stop_want == 360
-    assert sue_budunit.get_idea_obj(hr_06_road)._stop_want == 420
-    assert sue_budunit.get_idea_obj(hr_07_road)._stop_want == 480
-    assert sue_budunit.get_idea_obj(hr_08_road)._stop_want == 540
-    assert sue_budunit.get_idea_obj(hr_09_road)._stop_want == 600
-    assert sue_budunit.get_idea_obj(hr_10_road)._stop_want == 660
-    assert sue_budunit.get_idea_obj(hr_11_road)._stop_want == 720
-    assert sue_budunit.get_idea_obj(hr_12_road)._stop_want == 780
-    assert sue_budunit.get_idea_obj(hr_13_road)._stop_want == 840
-    assert sue_budunit.get_idea_obj(hr_14_road)._stop_want == 900
-    assert sue_budunit.get_idea_obj(hr_15_road)._stop_want == 960
-    assert sue_budunit.get_idea_obj(hr_16_road)._stop_want == 1020
-    assert sue_budunit.get_idea_obj(hr_17_road)._stop_want == 1080
-    assert sue_budunit.get_idea_obj(hr_18_road)._stop_want == 1140
-    assert sue_budunit.get_idea_obj(hr_19_road)._stop_want == 1200
-    assert sue_budunit.get_idea_obj(hr_20_road)._stop_want == 1260
-    assert sue_budunit.get_idea_obj(hr_21_road)._stop_want == 1320
-    assert sue_budunit.get_idea_obj(hr_22_road)._stop_want == 1380
-    assert sue_budunit.get_idea_obj(hr_23_road)._stop_want == 1440
+    assert sue_budunit.get_idea_obj(hr_00_road).gogo_want == 0
+    assert sue_budunit.get_idea_obj(hr_01_road).gogo_want == 60
+    assert sue_budunit.get_idea_obj(hr_02_road).gogo_want == 120
+    assert sue_budunit.get_idea_obj(hr_03_road).gogo_want == 180
+    assert sue_budunit.get_idea_obj(hr_04_road).gogo_want == 240
+    assert sue_budunit.get_idea_obj(hr_05_road).gogo_want == 300
+    assert sue_budunit.get_idea_obj(hr_06_road).gogo_want == 360
+    assert sue_budunit.get_idea_obj(hr_07_road).gogo_want == 420
+    assert sue_budunit.get_idea_obj(hr_08_road).gogo_want == 480
+    assert sue_budunit.get_idea_obj(hr_09_road).gogo_want == 540
+    assert sue_budunit.get_idea_obj(hr_10_road).gogo_want == 600
+    assert sue_budunit.get_idea_obj(hr_11_road).gogo_want == 660
+    assert sue_budunit.get_idea_obj(hr_12_road).gogo_want == 720
+    assert sue_budunit.get_idea_obj(hr_13_road).gogo_want == 780
+    assert sue_budunit.get_idea_obj(hr_14_road).gogo_want == 840
+    assert sue_budunit.get_idea_obj(hr_15_road).gogo_want == 900
+    assert sue_budunit.get_idea_obj(hr_16_road).gogo_want == 960
+    assert sue_budunit.get_idea_obj(hr_17_road).gogo_want == 1020
+    assert sue_budunit.get_idea_obj(hr_18_road).gogo_want == 1080
+    assert sue_budunit.get_idea_obj(hr_19_road).gogo_want == 1140
+    assert sue_budunit.get_idea_obj(hr_20_road).gogo_want == 1200
+    assert sue_budunit.get_idea_obj(hr_21_road).gogo_want == 1260
+    assert sue_budunit.get_idea_obj(hr_22_road).gogo_want == 1320
+    assert sue_budunit.get_idea_obj(hr_23_road).gogo_want == 1380
+    assert sue_budunit.get_idea_obj(hr_00_road).stop_want == 60
+    assert sue_budunit.get_idea_obj(hr_01_road).stop_want == 120
+    assert sue_budunit.get_idea_obj(hr_02_road).stop_want == 180
+    assert sue_budunit.get_idea_obj(hr_03_road).stop_want == 240
+    assert sue_budunit.get_idea_obj(hr_04_road).stop_want == 300
+    assert sue_budunit.get_idea_obj(hr_05_road).stop_want == 360
+    assert sue_budunit.get_idea_obj(hr_06_road).stop_want == 420
+    assert sue_budunit.get_idea_obj(hr_07_road).stop_want == 480
+    assert sue_budunit.get_idea_obj(hr_08_road).stop_want == 540
+    assert sue_budunit.get_idea_obj(hr_09_road).stop_want == 600
+    assert sue_budunit.get_idea_obj(hr_10_road).stop_want == 660
+    assert sue_budunit.get_idea_obj(hr_11_road).stop_want == 720
+    assert sue_budunit.get_idea_obj(hr_12_road).stop_want == 780
+    assert sue_budunit.get_idea_obj(hr_13_road).stop_want == 840
+    assert sue_budunit.get_idea_obj(hr_14_road).stop_want == 900
+    assert sue_budunit.get_idea_obj(hr_15_road).stop_want == 960
+    assert sue_budunit.get_idea_obj(hr_16_road).stop_want == 1020
+    assert sue_budunit.get_idea_obj(hr_17_road).stop_want == 1080
+    assert sue_budunit.get_idea_obj(hr_18_road).stop_want == 1140
+    assert sue_budunit.get_idea_obj(hr_19_road).stop_want == 1200
+    assert sue_budunit.get_idea_obj(hr_20_road).stop_want == 1260
+    assert sue_budunit.get_idea_obj(hr_21_road).stop_want == 1320
+    assert sue_budunit.get_idea_obj(hr_22_road).stop_want == 1380
+    assert sue_budunit.get_idea_obj(hr_23_road).stop_want == 1440
 
 
 # def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
@@ -564,7 +564,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     sue_bud.set_fact(
         base=cregtime_road, pick=cregtime_road, fopen=open_x2, fnigh=nigh_x2
     )
-    print(f"YAYA {sue_bud._idearoot._factunits=}")
+    print(f"YAYA {sue_bud._idearoot.factunits=}")
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()
@@ -617,8 +617,8 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert len(sue_bud._accts) == 0
     assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
     assert len(sue_bud._idearoot._kids) == 1
-    assert sue_bud.get_idea_obj(daytime_road)._denom == 1440
-    assert sue_bud.get_idea_obj(daytime_road)._morph
+    assert sue_bud.get_idea_obj(daytime_road).denom == 1440
+    assert sue_bud.get_idea_obj(daytime_road).morph
     print(f"{sweep_idea.get_road()=}")
 
     # ESTABLISH
@@ -632,7 +632,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert sue_bud.get_idea_obj(sweep_road) is not None
     assert sue_bud.get_idea_obj(sweep_road)._label == sweep_text
     assert sue_bud.get_idea_obj(sweep_road).pledge
-    assert len(sue_bud.get_idea_obj(sweep_road)._reasonunits) == 2
+    assert len(sue_bud.get_idea_obj(sweep_road).reasonunits) == 2
     assert sue_bud.get_idea_obj(clean_things_road) is not None
     assert sue_bud.get_idea_obj(cookery_room_road) is not None
     assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
@@ -684,7 +684,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     # print(f"{laundry_reasonheir.base=} {laundry_premise=}")
     # for x_ideaunit in sue_bud._idea_dict.values():
     #     if x_ideaunit._label in [laundry_text]:
-    #         print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")
+    #         print(f"{x_ideaunit._label=} {x_ideaunit.begin=} {x_ideaunit.close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
 
     # WHEN
@@ -706,7 +706,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     # )
     # for x_ideaunit in sue_bud._idea_dict.values():
     #     if x_ideaunit._label in [laundry_text]:
-    #         print(f"{x_ideaunit._label=} {x_ideaunit._begin=} {x_ideaunit._close=}")
+    #         print(f"{x_ideaunit._label=} {x_ideaunit.begin=} {x_ideaunit.close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
     #         creg_factheir = x_ideaunit._factheirs.get(cregtime_road)
     #         print(f"{creg_factheir.fopen % 10080=}")
@@ -736,7 +736,7 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_year_road)
     assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
     creg_offset_idea = sue_bud.get_idea_obj(creg_yr1_jan1_offset_road)
-    assert creg_offset_idea._addin == get_creg_config().get(yr1_jan1_offset_text())
+    assert creg_offset_idea.addin == get_creg_config().get(yr1_jan1_offset_text())
     assert not sue_bud.idea_exists(five_yr1_jan1_offset_road)
 
     # WHEN
@@ -748,7 +748,7 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
     assert sue_bud.idea_exists(five_yr1_jan1_offset_road)
     five_offset_idea = sue_bud.get_idea_obj(five_yr1_jan1_offset_road)
-    assert five_offset_idea._addin == get_five_config().get(yr1_jan1_offset_text())
+    assert five_offset_idea.addin == get_five_config().get(yr1_jan1_offset_text())
 
 
 def test_get_creg_min_from_dt_ReturnsObj():

@@ -51,13 +51,13 @@ def budunit_v002() -> BudUnit:
 def get_budunit_with_4_levels() -> BudUnit:
     sue_bud = budunit_shop("Sue")
     casa_text = "casa"
-    sue_bud.set_l1_idea(ideaunit_shop(casa_text, _mass=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(casa_text, mass=30, pledge=True))
     cat_text = "cat have dinner"
-    sue_bud.set_l1_idea(ideaunit_shop(cat_text, _mass=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(cat_text, mass=30, pledge=True))
 
     week_text = "weekdays"
     week_road = sue_bud.make_l1_road(week_text)
-    idea_kid_weekdays = ideaunit_shop(week_text, _mass=40)
+    idea_kid_weekdays = ideaunit_shop(week_text, mass=40)
     sue_bud.set_l1_idea(idea_kid_weekdays)
     sun_text = "Sunday"
     mon_text = "Monday"
@@ -66,32 +66,32 @@ def get_budunit_with_4_levels() -> BudUnit:
     thu_text = "Thursday"
     fri_text = "Friday"
     sat_text = "Saturday"
-    sue_bud.set_idea(ideaunit_shop(sun_text, _mass=20), week_road)
-    sue_bud.set_idea(ideaunit_shop(mon_text, _mass=20), week_road)
-    sue_bud.set_idea(ideaunit_shop(tue_text, _mass=20), week_road)
-    sue_bud.set_idea(ideaunit_shop(wed_text, _mass=20), week_road)
-    sue_bud.set_idea(ideaunit_shop(thu_text, _mass=30), week_road)
-    sue_bud.set_idea(ideaunit_shop(fri_text, _mass=40), week_road)
-    sue_bud.set_idea(ideaunit_shop(sat_text, _mass=50), week_road)
+    sue_bud.set_idea(ideaunit_shop(sun_text, mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(mon_text, mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(tue_text, mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(wed_text, mass=20), week_road)
+    sue_bud.set_idea(ideaunit_shop(thu_text, mass=30), week_road)
+    sue_bud.set_idea(ideaunit_shop(fri_text, mass=40), week_road)
+    sue_bud.set_idea(ideaunit_shop(sat_text, mass=50), week_road)
 
     states_text = "nation-state"
     states_road = sue_bud.make_l1_road(states_text)
-    idea_kid_states = ideaunit_shop(states_text, _mass=30)
+    idea_kid_states = ideaunit_shop(states_text, mass=30)
     sue_bud.set_l1_idea(idea_kid_states)
     usa_text = "USA"
     usa_road = sue_bud.make_road(states_road, usa_text)
     france_text = "France"
     brazil_text = "Brazil"
-    idea_grandkid_usa = ideaunit_shop(usa_text, _mass=50)
-    idea_grandkid_france = ideaunit_shop(france_text, _mass=50)
-    idea_grandkid_brazil = ideaunit_shop(brazil_text, _mass=50)
+    idea_grandkid_usa = ideaunit_shop(usa_text, mass=50)
+    idea_grandkid_france = ideaunit_shop(france_text, mass=50)
+    idea_grandkid_brazil = ideaunit_shop(brazil_text, mass=50)
     sue_bud.set_idea(idea_grandkid_france, states_road)
     sue_bud.set_idea(idea_grandkid_brazil, states_road)
     sue_bud.set_idea(idea_grandkid_usa, states_road)
     texas_text = "Texas"
     oregon_text = "Oregon"
-    idea_grandgrandkid_usa_texas = ideaunit_shop(texas_text, _mass=50)
-    idea_grandgrandkid_usa_oregon = ideaunit_shop(oregon_text, _mass=50)
+    idea_grandgrandkid_usa_texas = ideaunit_shop(texas_text, mass=50)
+    idea_grandgrandkid_usa_oregon = ideaunit_shop(oregon_text, mass=50)
     sue_bud.set_idea(idea_grandgrandkid_usa_texas, usa_road)
     sue_bud.set_idea(idea_grandgrandkid_usa_oregon, usa_road)
     return sue_bud
@@ -144,7 +144,7 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
 
     day24hr_text = "24hr day"
     day24hr_road = sue_bud.make_road(time_road, day24hr_text)
-    day24hr_idea = ideaunit_shop(day24hr_text, _begin=0.0, _close=24.0)
+    day24hr_idea = ideaunit_shop(day24hr_text, begin=0.0, close=24.0)
 
     am_text = "am"
     am_road = sue_bud.make_road(day24hr_road, am_text)
@@ -152,11 +152,11 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     n1_text = "1"
     n2_text = "2"
     n3_text = "3"
-    am_idea = ideaunit_shop(am_text, _gogo_want=0, _stop_want=12)
-    pm_idea = ideaunit_shop(pm_text, _gogo_want=12, _stop_want=24)
-    n1_idea = ideaunit_shop(n1_text, _gogo_want=1, _stop_want=2)
-    n2_idea = ideaunit_shop(n2_text, _gogo_want=2, _stop_want=3)
-    n3_idea = ideaunit_shop(n3_text, _gogo_want=3, _stop_want=4)
+    am_idea = ideaunit_shop(am_text, gogo_want=0, stop_want=12)
+    pm_idea = ideaunit_shop(pm_text, gogo_want=12, stop_want=24)
+    n1_idea = ideaunit_shop(n1_text, gogo_want=1, stop_want=2)
+    n2_idea = ideaunit_shop(n2_text, gogo_want=2, stop_want=3)
+    n3_idea = ideaunit_shop(n3_text, gogo_want=3, stop_want=4)
 
     sue_bud.set_l1_idea(time_idea)
     sue_bud.set_idea(day24hr_idea, time_road)
@@ -226,11 +226,11 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     zia_bud = budunit_shop("Zia", _real_id=tiger_text)
     shave_text = "shave"
     shave_road = zia_bud.make_l1_road(shave_text)
-    idea_kid_shave = ideaunit_shop(shave_text, _mass=30, pledge=True)
+    idea_kid_shave = ideaunit_shop(shave_text, mass=30, pledge=True)
     zia_bud.set_l1_idea(idea_kid_shave)
     week_text = "weekdays"
     week_road = zia_bud.make_l1_road(week_text)
-    week_idea = ideaunit_shop(week_text, _mass=40)
+    week_idea = ideaunit_shop(week_text, mass=40)
     zia_bud.set_l1_idea(week_idea)
 
     sun_text = "Sunday"
@@ -239,8 +239,8 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     church_road = zia_bud.make_road(sun_road, church_text)
     mon_text = "Monday"
     mon_road = zia_bud.make_road(week_road, mon_text)
-    idea_grandkidU = ideaunit_shop(sun_text, _mass=20)
-    idea_grandkidM = ideaunit_shop(mon_text, _mass=20)
+    idea_grandkidU = ideaunit_shop(sun_text, mass=20)
+    idea_grandkidM = ideaunit_shop(mon_text, mass=20)
     zia_bud.set_idea(idea_grandkidU, week_road)
     zia_bud.set_idea(idea_grandkidM, week_road)
 
@@ -430,7 +430,7 @@ def yr_print_idea_base_info(idea, filter: bool):
 
 def yr_elucidation(idea):
     str1 = f"'{yr_d(idea._parent_road)}' idea"
-    str2 = f" has ReasonU:{yr_x(idea._reasonunits)} LH:{yr_x(idea._reasonheirs)}"
+    str2 = f" has ReasonU:{yr_x(idea.reasonunits)} LH:{yr_x(idea._reasonheirs)}"
     str3 = f" {str(type(idea))}"
     str4 = " "
     if str(type(idea)).find(".idea.IdeaUnit'>") > 0:
@@ -448,8 +448,8 @@ def yr_elucidation(idea):
         for base in hh_wo_matched_reason:
             print(f"Facts that don't matter to this Idea: {base}")
 
-    # if idea._reasonunits is not None:
-    #     for lu in idea._reasonunits.values():
+    # if idea.reasonunits is not None:
+    #     for lu in idea.reasonunits.values():
     #         print(f"  ReasonUnit   '{lu.base}' premises: {len(lu.premises)} ")
     if idea._reasonheirs is not None:
         filter_x = True

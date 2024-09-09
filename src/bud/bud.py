@@ -227,7 +227,7 @@ class BudUnit:
         while to_evaluate_list != []:
             x_road = to_evaluate_list.pop()
             x_idea = self.get_idea_obj(x_road)
-            for reasonunit_obj in x_idea._reasonunits.values():
+            for reasonunit_obj in x_idea.reasonunits.values():
                 reason_base = reasonunit_obj.base
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -319,10 +319,12 @@ class BudUnit:
         self._accts.pop(acct_id)
 
     def add_acctunit(
-        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
+        self, acct_id: AcctID, credit_belief: int = None, debtit_belief: int = None
     ):
         x_road_delimiter = self._road_delimiter
-        acctunit = acctunit_shop(acct_id, credit_score, debtit_score, x_road_delimiter)
+        acctunit = acctunit_shop(
+            acct_id, credit_belief, debtit_belief, x_road_delimiter
+        )
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
@@ -338,15 +340,15 @@ class BudUnit:
         return self.get_acct(acct_id) is not None
 
     def edit_acctunit(
-        self, acct_id: AcctID, credit_score: int = None, debtit_score: int = None
+        self, acct_id: AcctID, credit_belief: int = None, debtit_belief: int = None
     ):
         if self._accts.get(acct_id) is None:
             raise AcctMissingException(f"AcctUnit '{acct_id}' does not exist.")
         x_acctunit = self.get_acct(acct_id)
-        if credit_score is not None:
-            x_acctunit.set_credit_score(credit_score)
-        if debtit_score is not None:
-            x_acctunit.set_debtit_score(debtit_score)
+        if credit_belief is not None:
+            x_acctunit.set_credit_belief(credit_belief)
+        if debtit_belief is not None:
+            x_acctunit.set_debtit_belief(debtit_belief)
         self.set_acctunit(x_acctunit)
 
     def clear_acctunits_memberships(self):
@@ -383,8 +385,8 @@ class BudUnit:
         for x_acctunit in self._accts.values():
             x_membership = membership_shop(
                 group_id=x_group_id,
-                credit_vote=x_acctunit.credit_score,
-                debtit_vote=x_acctunit.debtit_score,
+                credit_vote=x_acctunit.credit_belief,
+                debtit_vote=x_acctunit.debtit_belief,
                 _acct_id=x_acctunit.acct_id,
             )
             x_groupbox.set_membership(x_membership)
@@ -407,7 +409,7 @@ class BudUnit:
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
             fact
-            for fact in self._idearoot._factunits.values()
+            for fact in self._idearoot.factunits.values()
             if fact.fopen is not None
             and fact.fnigh is not None
             and self._is_idea_rangeroot(idea_road=fact.base)
@@ -430,12 +432,12 @@ class BudUnit:
         x_idearoot = self.get_idea_obj(self._real_id)
         x_fopen = None
         if fnigh is not None and fopen is None:
-            x_fopen = x_idearoot._factunits.get(base).fopen
+            x_fopen = x_idearoot.factunits.get(base).fopen
         else:
             x_fopen = fopen
         x_fnigh = None
         if fopen is not None and fnigh is None:
-            x_fnigh = x_idearoot._factunits.get(base).fnigh
+            x_fnigh = x_idearoot.factunits.get(base).fnigh
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(base=base, pick=pick, fopen=x_fopen, fnigh=x_fnigh)
@@ -461,7 +463,7 @@ class BudUnit:
             x_idearoot.set_factunit(x_factunit)
 
     def get_fact(self, base: RoadUnit) -> FactUnit:
-        return self._idearoot._factunits.get(base)
+        return self._idearoot.factunits.get(base)
 
     def del_fact(self, base: RoadUnit):
         self._idearoot.del_factunit(base)
@@ -475,15 +477,15 @@ class BudUnit:
             raise Exception_econs_justified(exception_text)
 
         x_ideas = self._idea_dict.values()
-        return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea._problem_bool}
+        return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea.problem_bool}
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_node(
             level=self._idearoot._level,
-            reasons=self._idearoot._reasonunits,
-            awardlinks=self._idearoot._awardlinks,
+            reasons=self._idearoot.reasonunits,
+            awardlinks=self._idearoot.awardlinks,
             uid=self._idearoot._uid,
             pledge=self._idearoot.pledge,
             idea_road=self._idearoot.get_road(),
@@ -502,8 +504,8 @@ class BudUnit:
         idea_kid._level = parent_idea._level + 1
         tree_metrics.evaluate_node(
             level=idea_kid._level,
-            reasons=idea_kid._reasonunits,
-            awardlinks=idea_kid._awardlinks,
+            reasons=idea_kid.reasonunits,
+            awardlinks=idea_kid.awardlinks,
             uid=idea_kid._uid,
             pledge=idea_kid.pledge,
             idea_road=idea_kid.get_road(),
@@ -544,7 +546,7 @@ class BudUnit:
         missing_bases = {}
         for base, base_count in reason_bases.items():
             try:
-                self._idearoot._factunits[base]
+                self._idearoot.factunits[base]
             except KeyError:
                 missing_bases[base] = base_count
         return missing_bases
@@ -554,7 +556,7 @@ class BudUnit:
     ) -> IdeaUnit:
         x_label = get_terminus_node(idea_road, self._road_delimiter)
         x_parent_road = get_parent_road(idea_road, self._road_delimiter)
-        x_ideaunit = ideaunit_shop(x_label, _mass=mass)
+        x_ideaunit = ideaunit_shop(x_label, mass=mass)
         if pledge:
             x_ideaunit.pledge = True
         self.set_idea(x_ideaunit, x_parent_road)
@@ -622,10 +624,10 @@ class BudUnit:
             for adoptee_label in adoptees:
                 adoptee_road = self.make_road(parent_road, adoptee_label)
                 adoptee_idea = self.get_idea_obj(adoptee_road)
-                mass_sum += adoptee_idea._mass
+                mass_sum += adoptee_idea.mass
                 new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
                 self.set_idea(adoptee_idea, new_adoptee_parent_road)
-                self.edit_idea_attr(new_adoptee_parent_road, mass=adoptee_idea._mass)
+                self.edit_idea_attr(new_adoptee_parent_road, mass=adoptee_idea.mass)
                 self.del_idea_obj(adoptee_road)
 
             if bundling:
@@ -637,27 +639,27 @@ class BudUnit:
     def _get_filtered_awardlinks_idea(self, x_idea: IdeaUnit) -> IdeaUnit:
         _awardlinks_to_delete = [
             _awardlink_group_id
-            for _awardlink_group_id in x_idea._awardlinks.keys()
+            for _awardlink_group_id in x_idea.awardlinks.keys()
             if self.get_acctunit_group_ids_dict().get(_awardlink_group_id) is None
         ]
         for _awardlink_group_id in _awardlinks_to_delete:
-            x_idea._awardlinks.pop(_awardlink_group_id)
+            x_idea.awardlinks.pop(_awardlink_group_id)
 
-        if x_idea._teamunit is not None:
+        if x_idea.teamunit is not None:
             _teamlinks_to_delete = [
                 _teamlink_group_id
-                for _teamlink_group_id in x_idea._teamunit._teamlinks
+                for _teamlink_group_id in x_idea.teamunit._teamlinks
                 if self.get_acctunit_group_ids_dict().get(_teamlink_group_id) is None
             ]
             for _teamlink_group_id in _teamlinks_to_delete:
-                x_idea._teamunit.del_teamlink(_teamlink_group_id)
+                x_idea.teamunit.del_teamlink(_teamlink_group_id)
         return x_idea
 
     def _create_missing_ideas(self, road):
         self._init_idea_tree_walk()
         posted_idea = self.get_idea_obj(road)
 
-        for reason_x in posted_idea._reasonunits.values():
+        for reason_x in posted_idea.reasonunits.values():
             self._create_ideakid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
                 self._create_ideakid_if_empty(road=premise_x.need)
@@ -737,9 +739,9 @@ class BudUnit:
     def _set_ideaattrfilter_premise_ranges(self, x_ideaattrfilter: IdeaAttrFilter):
         premise_idea = self.get_idea_obj(x_ideaattrfilter.get_premise_need())
         x_ideaattrfilter.set_premise_range_attributes_influenced_by_premise_idea(
-            premise_open=premise_idea._begin,
-            premise_nigh=premise_idea._close,
-            premise_denom=premise_idea._denom,
+            premise_open=premise_idea.begin,
+            premise_nigh=premise_idea.close,
+            premise_denom=premise_idea.denom,
         )
 
     def edit_reason(
@@ -854,7 +856,7 @@ class BudUnit:
 
     def set_agenda_task_complete(self, task_road: RoadUnit, base: RoadUnit):
         pledge_item = self.get_idea_obj(task_road)
-        pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
+        pledge_item.set_factunit_to_complete(self._idearoot.factunits[base])
 
     def get_credit_ledger_debtit_ledger(
         self,
@@ -862,18 +864,18 @@ class BudUnit:
         credit_ledger = {}
         debtit_ledger = {}
         for x_acctunit in self._accts.values():
-            credit_ledger[x_acctunit.acct_id] = x_acctunit.credit_score
-            debtit_ledger[x_acctunit.acct_id] = x_acctunit.debtit_score
+            credit_ledger[x_acctunit.acct_id] = x_acctunit.credit_belief
+            debtit_ledger[x_acctunit.acct_id] = x_acctunit.debtit_belief
         return credit_ledger, debtit_ledger
 
     def _allot_offtrack_fund(self):
         self._add_to_acctunits_fund_give_take(self._offtrack_fund)
 
-    def get_acctunits_credit_score_sum(self) -> float:
-        return sum(acctunit.get_credit_score() for acctunit in self._accts.values())
+    def get_acctunits_credit_belief_sum(self) -> float:
+        return sum(acctunit.get_credit_belief() for acctunit in self._accts.values())
 
-    def get_acctunits_debtit_score_sum(self) -> float:
-        return sum(acctunit.get_debtit_score() for acctunit in self._accts.values())
+    def get_acctunits_debtit_belief_sum(self) -> float:
+        return sum(acctunit.get_debtit_belief() for acctunit in self._accts.values())
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -938,8 +940,8 @@ class BudUnit:
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
-        x_acctunit_credit_score_sum = self.get_acctunits_credit_score_sum()
-        x_acctunit_debtit_score_sum = self.get_acctunits_debtit_score_sum()
+        x_acctunit_credit_belief_sum = self.get_acctunits_credit_belief_sum()
+        x_acctunit_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
         for x_acctunit in self._accts.values():
@@ -949,8 +951,8 @@ class BudUnit:
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_acctunit_total_credit_score=x_acctunit_credit_score_sum,
-                bud_acctunit_total_debtit_score=x_acctunit_debtit_score_sum,
+                bud_acctunit_total_credit_belief=x_acctunit_credit_belief_sum,
+                bud_acctunit_total_debtit_belief=x_acctunit_debtit_belief_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):
@@ -1019,7 +1021,7 @@ class BudUnit:
                 idea_kid.set_level(x_idea._level)
                 idea_list.append(idea_kid)
             self._idea_dict[x_idea.get_road()] = x_idea
-            for x_reason_base in x_idea._reasonunits.keys():
+            for x_reason_base in x_idea.reasonunits.keys():
                 self._reason_bases.add(x_reason_base)
 
     def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
@@ -1033,8 +1035,8 @@ class BudUnit:
             if r_idea._range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_idea.get_road())
             if r_idea.is_math():
-                r_idea._gogo_calc = r_idea._begin
-                r_idea._stop_calc = r_idea._close
+                r_idea._gogo_calc = r_idea.begin
+                r_idea._stop_calc = r_idea.close
             else:
                 parent_road = get_parent_road(r_idea.get_road())
                 parent_idea = self.get_idea_obj(parent_road)
@@ -1088,11 +1090,11 @@ class BudUnit:
             x_idea_obj._all_acct_cred = group_everyone
             x_idea_obj._all_acct_debt = group_everyone
 
-            if x_idea_obj._healerlink.any_healer_id_exists():
+            if x_idea_obj.healerlink.any_healer_id_exists():
                 econ_justified_by_problem = False
                 healerlink_count += 1
                 self._sum_healerlink_share += x_idea_obj.get_fund_share()
-            if x_idea_obj._problem_bool:
+            if x_idea_obj.problem_bool:
                 econ_justified_by_problem = True
 
         if econ_justified_by_problem is False or healerlink_count > 1:
@@ -1102,7 +1104,7 @@ class BudUnit:
             self._econs_justified = False
 
     def _set_root_attributes(self, econ_exceptions: bool):
-        self._idearoot.set_factheirs(self._idearoot._factunits)
+        self._idearoot.set_factheirs(self._idearoot.factunits)
         self._idearoot.set_idearoot_inherit_reasonheirs()
         self._idearoot.set_teamheir(None, self._groupboxs)
         self._idearoot.inherit_awardheirs()
@@ -1121,7 +1123,7 @@ class BudUnit:
             self._tree_traverse_count == 1
             and not self._idearoot.is_kidless()
             and self._idearoot.get_kids_mass_sum() == 0
-            and self._idearoot._mass != 0
+            and self._idearoot.mass != 0
         ):
             self._offtrack_kids_mass_set.add(self._idearoot.get_road())
 
@@ -1153,7 +1155,7 @@ class BudUnit:
             self._allot_fund_share(idea=idea_kid)
         if (
             self._tree_traverse_count == 1
-            and idea_kid._mass != 0
+            and idea_kid.mass != 0
             and idea_kid.is_kidless() is False
             and idea_kid.get_kids_mass_sum() == 0
         ):
@@ -1224,7 +1226,7 @@ class BudUnit:
 
     def _execute_tree_traverse(self, econ_exceptions: bool = False):
         x_idearoot_kids_items = self._idearoot._kids.items()
-        kids_ledger = {x_road: kid._mass for x_road, kid in x_idearoot_kids_items}
+        kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
         alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self._fund_coin)
         x_idearoot_kid_fund_onset = None
@@ -1252,7 +1254,7 @@ class BudUnit:
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
             kids_items = parent_idea._kids.items()
-            x_ledger = {x_road: idea_kid._mass for x_road, idea_kid in kids_items}
+            x_ledger = {x_road: idea_kid.mass for x_road, idea_kid in kids_items}
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self._fund_coin)
 
@@ -1305,13 +1307,13 @@ class BudUnit:
             else:
                 x_sum = self._sum_healerlink_share
                 x_idea._healerlink_ratio = x_idea.get_fund_share() / x_sum
-            if self._econs_justified and x_idea._healerlink.any_healer_id_exists():
+            if self._econs_justified and x_idea.healerlink.any_healer_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
     def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
-            for x_healer_id in x_econ_idea._healerlink._healer_ids:
+            for x_healer_id in x_econ_idea.healerlink._healer_ids:
                 x_groupbox = self.get_groupbox(x_healer_id)
                 for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
@@ -1350,19 +1352,19 @@ class BudUnit:
                 if len(anc_list) == 1:
                     list_x.append(road)
                 elif len(anc_list) == 2:
-                    if self._idearoot._begin is None and self._idearoot._close is None:
+                    if self._idearoot.begin is None and self._idearoot.close is None:
                         list_x.append(road)
                 else:
                     parent_idea = self.get_idea_obj(road=anc_list[1])
-                    if parent_idea._begin is None and parent_idea._close is None:
+                    if parent_idea.begin is None and parent_idea.close is None:
                         list_x.append(road)
 
         return list_x
 
     def get_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
-        if self._idearoot._factunits is not None:
-            for fact_road, fact_obj in self._idearoot._factunits.items():
+        if self._idearoot.factunits is not None:
+            for fact_road, fact_obj in self._idearoot.factunits.items():
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
@@ -1506,20 +1508,20 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _parent_road="",
         _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
-        _mass=get_obj_from_idea_dict(idearoot_dict, "_mass"),
-        _begin=get_obj_from_idea_dict(idearoot_dict, "_begin"),
-        _close=get_obj_from_idea_dict(idearoot_dict, "_close"),
-        _numor=get_obj_from_idea_dict(idearoot_dict, "_numor"),
-        _denom=get_obj_from_idea_dict(idearoot_dict, "_denom"),
-        _morph=get_obj_from_idea_dict(idearoot_dict, "_morph"),
-        _gogo_want=get_obj_from_idea_dict(idearoot_dict, "_gogo_want"),
-        _stop_want=get_obj_from_idea_dict(idearoot_dict, "_stop_want"),
-        _problem_bool=get_obj_from_idea_dict(idearoot_dict, "_problem_bool"),
-        _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
-        _teamunit=get_obj_from_idea_dict(idearoot_dict, "_teamunit"),
-        _healerlink=get_obj_from_idea_dict(idearoot_dict, "_healerlink"),
-        _factunits=get_obj_from_idea_dict(idearoot_dict, "_factunits"),
-        _awardlinks=get_obj_from_idea_dict(idearoot_dict, "_awardlinks"),
+        mass=get_obj_from_idea_dict(idearoot_dict, "mass"),
+        begin=get_obj_from_idea_dict(idearoot_dict, "begin"),
+        close=get_obj_from_idea_dict(idearoot_dict, "close"),
+        numor=get_obj_from_idea_dict(idearoot_dict, "numor"),
+        denom=get_obj_from_idea_dict(idearoot_dict, "denom"),
+        morph=get_obj_from_idea_dict(idearoot_dict, "morph"),
+        gogo_want=get_obj_from_idea_dict(idearoot_dict, "gogo_want"),
+        stop_want=get_obj_from_idea_dict(idearoot_dict, "stop_want"),
+        problem_bool=get_obj_from_idea_dict(idearoot_dict, "problem_bool"),
+        reasonunits=get_obj_from_idea_dict(idearoot_dict, "reasonunits"),
+        teamunit=get_obj_from_idea_dict(idearoot_dict, "teamunit"),
+        healerlink=get_obj_from_idea_dict(idearoot_dict, "healerlink"),
+        factunits=get_obj_from_idea_dict(idearoot_dict, "factunits"),
+        awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
         _bud_real_id=x_bud._real_id,
@@ -1546,23 +1548,23 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             to_evaluate_idea_dicts.append(kid_dict)
         x_ideakid = ideaunit_shop(
             _label=get_obj_from_idea_dict(idea_dict, "_label"),
-            _mass=get_obj_from_idea_dict(idea_dict, "_mass"),
+            mass=get_obj_from_idea_dict(idea_dict, "mass"),
             _uid=get_obj_from_idea_dict(idea_dict, "_uid"),
-            _begin=get_obj_from_idea_dict(idea_dict, "_begin"),
-            _close=get_obj_from_idea_dict(idea_dict, "_close"),
-            _numor=get_obj_from_idea_dict(idea_dict, "_numor"),
-            _denom=get_obj_from_idea_dict(idea_dict, "_denom"),
-            _morph=get_obj_from_idea_dict(idea_dict, "_morph"),
-            _gogo_want=get_obj_from_idea_dict(idea_dict, "_gogo_want"),
-            _stop_want=get_obj_from_idea_dict(idea_dict, "_stop_want"),
+            begin=get_obj_from_idea_dict(idea_dict, "begin"),
+            close=get_obj_from_idea_dict(idea_dict, "close"),
+            numor=get_obj_from_idea_dict(idea_dict, "numor"),
+            denom=get_obj_from_idea_dict(idea_dict, "denom"),
+            morph=get_obj_from_idea_dict(idea_dict, "morph"),
+            gogo_want=get_obj_from_idea_dict(idea_dict, "gogo_want"),
+            stop_want=get_obj_from_idea_dict(idea_dict, "stop_want"),
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
-            _problem_bool=get_obj_from_idea_dict(idea_dict, "_problem_bool"),
-            _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
-            _teamunit=get_obj_from_idea_dict(idea_dict, "_teamunit"),
-            _healerlink=get_obj_from_idea_dict(idea_dict, "_healerlink"),
+            problem_bool=get_obj_from_idea_dict(idea_dict, "problem_bool"),
+            reasonunits=get_obj_from_idea_dict(idea_dict, "reasonunits"),
+            teamunit=get_obj_from_idea_dict(idea_dict, "teamunit"),
+            healerlink=get_obj_from_idea_dict(idea_dict, "healerlink"),
             _originunit=get_obj_from_idea_dict(idea_dict, "_originunit"),
-            _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),
-            _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),
+            awardlinks=get_obj_from_idea_dict(idea_dict, "awardlinks"),
+            factunits=get_obj_from_idea_dict(idea_dict, "factunits"),
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
         )
         x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])

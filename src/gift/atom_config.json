@@ -50,12 +50,12 @@
             "normal_table_name": "acctunit"
         },
         "optional_args": {
-            "credit_score": {
+            "credit_belief": {
                 "column_order": 2,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "debtit_score": {
+            "debtit_belief": {
                 "column_order": 1,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"

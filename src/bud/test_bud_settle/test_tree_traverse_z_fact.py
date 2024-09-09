@@ -41,12 +41,12 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     clean_road = zia_bud.make_road(casa_road, clean_text)
     clean_begin = -3
     clean_close = 7
-    clean_idea = ideaunit_shop(clean_text, _begin=clean_begin, _close=clean_close)
+    clean_idea = ideaunit_shop(clean_text, begin=clean_begin, close=clean_close)
     sweep_text = "sweep"
     sweep_gogo_want = -2
     sweep_stop_want = 1
-    sweep_idea = ideaunit_shop(sweep_text, _gogo_want=sweep_gogo_want)
-    sweep_idea._stop_want = sweep_stop_want
+    sweep_idea = ideaunit_shop(sweep_text, gogo_want=sweep_gogo_want)
+    sweep_idea.stop_want = sweep_stop_want
     zia_bud.set_idea(clean_idea, parent_road=casa_road)
     zia_bud.set_fact(base=clean_road, pick=clean_road, fopen=1, fnigh=5)
     assert zia_bud._idearoot._factheirs == {}
@@ -70,10 +70,10 @@ def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
     clean_road = zia_bud.make_road(casa_road, clean_text)
     clean_begin = -3
     clean_close = 7
-    clean_idea = ideaunit_shop(clean_text, _begin=clean_begin, _close=clean_close)
+    clean_idea = ideaunit_shop(clean_text, begin=clean_begin, close=clean_close)
     sweep_text = "sweep"
     sweep_road = zia_bud.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _addin=2)
+    sweep_idea = ideaunit_shop(sweep_text, addin=2)
     zia_bud.set_idea(clean_idea, parent_road=casa_road)
     zia_bud.set_idea(sweep_idea, parent_road=clean_road)
     zia_bud.set_fact(sweep_road, sweep_road, fopen=1, fnigh=5)
@@ -216,7 +216,7 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
 
     # THEN
     assert swim_idea._factheirs == first_earthdict
-    assert swim_idea._factunits == {}
+    assert swim_idea.factunits == {}
 
 
 def test_BudUnit_settle_bud_SetsTaskAsComplete():
@@ -224,7 +224,7 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
     mail_text = "obtain mail"
     assert yao_bud is not None
-    assert len(yao_bud._idearoot._kids[mail_text]._reasonunits) == 1
+    assert len(yao_bud._idearoot._kids[mail_text].reasonunits) == 1
     idea_dict = yao_bud.get_idea_dict()
     mail_idea = idea_dict.get(yao_bud.make_l1_road(mail_text))
     hour_text = "hour"

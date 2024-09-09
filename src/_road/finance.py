@@ -20,7 +20,7 @@ class RespectNum(float):
 
 
 class BitNum(float):
-    """Smallest Unit of credit_score or debtit_score (RespectNum) ala 'the slightest bit of respect!'"""
+    """Smallest Unit of credit_belief or debtit_belief (RespectNum) ala 'the slightest bit of respect!'"""
 
     pass
 
@@ -167,11 +167,11 @@ def _allot_missing_scale(
     return ledger
 
 
-def _calc_allot_value(obj, total_credit_score, scale_number, grain_unit):
-    if total_credit_score == 0:
+def _calc_allot_value(obj, total_credit_belief, scale_number, grain_unit):
+    if total_credit_belief == 0:
         return 0
-    # Determine the allot based on credit_score
-    allot_amt = (obj / total_credit_score) * scale_number
+    # Determine the allot based on credit_belief
+    allot_amt = (obj / total_credit_belief) * scale_number
     # Adjust to the nearest grain unit
     return round(allot_amt / grain_unit) * grain_unit
 
@@ -179,10 +179,10 @@ def _calc_allot_value(obj, total_credit_score, scale_number, grain_unit):
 def _create_allot_dict(
     ledger: dict[str, float], scale_number: float, grain_unit: float
 ) -> dict[str, float]:
-    # Calculate the total credit_score
-    total_credit_score = sum(ledger.values())
+    # Calculate the total credit_belief
+    total_credit_belief = sum(ledger.values())
     return {
-        x_key: _calc_allot_value(x_obj, total_credit_score, scale_number, grain_unit)
+        x_key: _calc_allot_value(x_obj, total_credit_belief, scale_number, grain_unit)
         for x_key, x_obj in ledger.items()
     }
 
@@ -191,7 +191,7 @@ def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float
     """
     allots the scale_number among ledger with float values with a resolution of the grain unit.
 
-    :param ledger: Dictionary of str key with 'credit_score' attribute.
+    :param ledger: Dictionary of str key with 'credit_belief' attribute.
     :param scale_number: The total number to allot.
     :param grain_unit: The smallest unit of distribution.
     :raises ValueError: If the scale number is not a multiple of the grain unit.

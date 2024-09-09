@@ -24,6 +24,7 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_text,
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
+    bud_get_obj,
 )
 from src.gift.atom_config import (
     CRUD_command,
@@ -48,6 +49,7 @@ from src.gift.atom_config import (
     fnigh_str,
     base_idea_active_requisite_str,
     get_atom_config_required_args,
+    get_atom_config_optional_args,
 )
 from src.gift.atom import (
     AtomUnit,
@@ -58,6 +60,7 @@ from src.gift.atom import (
     atom_insert,
     atom_update,
     optional_args_different,
+    sift_atomunit,
 )
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
@@ -90,8 +93,8 @@ class ChangeUnit:
                 x_list = sorted(
                     x_list, key=lambda x: x.required_args.get(parent_road_str())
                 )
-            if x_list[0].required_args.get("road") is not None:
-                x_list = sorted(x_list, key=lambda x: x.required_args.get("road"))
+            if x_list[0].required_args.get(road_str()) is not None:
+                x_list = sorted(x_list, key=lambda x: x.required_args.get(road_str()))
             ordered_list.extend(x_list)
         return ordered_list
 
@@ -219,13 +222,13 @@ class ChangeUnit:
             insert_acctunit = after_bud.get_acct(insert_acct_id)
             x_atomunit = atomunit_shop(bud_acctunit_text(), atom_insert())
             x_atomunit.set_required_arg(acct_id_str(), insert_acctunit.acct_id)
-            if insert_acctunit.credit_score is not None:
+            if insert_acctunit.credit_belief is not None:
                 x_atomunit.set_optional_arg(
-                    "credit_score", insert_acctunit.credit_score
+                    "credit_belief", insert_acctunit.credit_belief
                 )
-            if insert_acctunit.debtit_score is not None:
+            if insert_acctunit.debtit_belief is not None:
                 x_atomunit.set_optional_arg(
-                    "debtit_score", insert_acctunit.debtit_score
+                    "debtit_belief", insert_acctunit.debtit_belief
                 )
             self.set_atomunit(x_atomunit)
             all_group_ids = set(insert_acctunit._memberships.keys())
@@ -245,13 +248,13 @@ class ChangeUnit:
             ):
                 x_atomunit = atomunit_shop(bud_acctunit_text(), atom_update())
                 x_atomunit.set_required_arg(acct_id_str(), after_acctunit.acct_id)
-                if before_acctunit.credit_score != after_acctunit.credit_score:
+                if before_acctunit.credit_belief != after_acctunit.credit_belief:
                     x_atomunit.set_optional_arg(
-                        "credit_score", after_acctunit.credit_score
+                        "credit_belief", after_acctunit.credit_belief
                     )
-                if before_acctunit.debtit_score != after_acctunit.debtit_score:
+                if before_acctunit.debtit_belief != after_acctunit.debtit_belief:
                     x_atomunit.set_optional_arg(
-                        "debtit_score", after_acctunit.debtit_score
+                        "debtit_belief", after_acctunit.debtit_belief
                     )
                 self.set_atomunit(x_atomunit)
             self.add_atomunit_acctunit_update_memberships(
@@ -379,35 +382,35 @@ class ChangeUnit:
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             x_atomunit.set_required_arg(parent_road_str(), insert_ideaunit._parent_road)
             x_atomunit.set_required_arg(label_str(), insert_ideaunit._label)
-            x_atomunit.set_optional_arg(addin_str(), insert_ideaunit._addin)
-            x_atomunit.set_optional_arg(begin_str(), insert_ideaunit._begin)
-            x_atomunit.set_optional_arg(close_str(), insert_ideaunit._close)
-            x_atomunit.set_optional_arg(denom_str(), insert_ideaunit._denom)
-            x_atomunit.set_optional_arg(numor_str(), insert_ideaunit._numor)
-            x_atomunit.set_optional_arg(morph_str(), insert_ideaunit._morph)
-            x_atomunit.set_optional_arg(mass_str(), insert_ideaunit._mass)
+            x_atomunit.set_optional_arg(addin_str(), insert_ideaunit.addin)
+            x_atomunit.set_optional_arg(begin_str(), insert_ideaunit.begin)
+            x_atomunit.set_optional_arg(close_str(), insert_ideaunit.close)
+            x_atomunit.set_optional_arg(denom_str(), insert_ideaunit.denom)
+            x_atomunit.set_optional_arg(numor_str(), insert_ideaunit.numor)
+            x_atomunit.set_optional_arg(morph_str(), insert_ideaunit.morph)
+            x_atomunit.set_optional_arg(mass_str(), insert_ideaunit.mass)
             x_atomunit.set_optional_arg(pledge_str(), insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
 
             self.add_atomunit_idea_factunit_inserts(
                 ideaunit=insert_ideaunit,
-                insert_factunit_bases=set(insert_ideaunit._factunits.keys()),
+                insert_factunit_bases=set(insert_ideaunit.factunits.keys()),
             )
             self.add_atomunit_idea_awardlink_inserts(
                 after_ideaunit=insert_ideaunit,
-                insert_awardlink_group_ids=set(insert_ideaunit._awardlinks.keys()),
+                insert_awardlink_group_ids=set(insert_ideaunit.awardlinks.keys()),
             )
             self.add_atomunit_idea_reasonunit_inserts(
                 after_ideaunit=insert_ideaunit,
-                insert_reasonunit_bases=set(insert_ideaunit._reasonunits.keys()),
+                insert_reasonunit_bases=set(insert_ideaunit.reasonunits.keys()),
             )
             self.add_atomunit_idea_teamlink_insert(
                 idea_road=insert_idea_road,
-                insert_teamlink_group_ids=insert_ideaunit._teamunit._teamlinks,
+                insert_teamlink_group_ids=insert_ideaunit.teamunit._teamlinks,
             )
             self.add_atomunit_idea_healerlink_insert(
                 idea_road=insert_idea_road,
-                insert_healerlink_healer_ids=insert_ideaunit._healerlink._healer_ids,
+                insert_healerlink_healer_ids=insert_ideaunit.healerlink._healer_ids,
             )
 
     def add_atomunit_idea_updates(
@@ -424,27 +427,27 @@ class ChangeUnit:
                     parent_road_str(), after_ideaunit._parent_road
                 )
                 x_atomunit.set_required_arg(label_str(), after_ideaunit._label)
-                if before_ideaunit._addin != after_ideaunit._addin:
-                    x_atomunit.set_optional_arg(addin_str(), after_ideaunit._addin)
-                if before_ideaunit._begin != after_ideaunit._begin:
-                    x_atomunit.set_optional_arg(begin_str(), after_ideaunit._begin)
-                if before_ideaunit._close != after_ideaunit._close:
-                    x_atomunit.set_optional_arg(close_str(), after_ideaunit._close)
-                if before_ideaunit._denom != after_ideaunit._denom:
-                    x_atomunit.set_optional_arg(denom_str(), after_ideaunit._denom)
-                if before_ideaunit._numor != after_ideaunit._numor:
-                    x_atomunit.set_optional_arg(numor_str(), after_ideaunit._numor)
-                if before_ideaunit._morph != after_ideaunit._morph:
-                    x_atomunit.set_optional_arg(morph_str(), after_ideaunit._morph)
-                if before_ideaunit._mass != after_ideaunit._mass:
-                    x_atomunit.set_optional_arg(mass_str(), after_ideaunit._mass)
+                if before_ideaunit.addin != after_ideaunit.addin:
+                    x_atomunit.set_optional_arg(addin_str(), after_ideaunit.addin)
+                if before_ideaunit.begin != after_ideaunit.begin:
+                    x_atomunit.set_optional_arg(begin_str(), after_ideaunit.begin)
+                if before_ideaunit.close != after_ideaunit.close:
+                    x_atomunit.set_optional_arg(close_str(), after_ideaunit.close)
+                if before_ideaunit.denom != after_ideaunit.denom:
+                    x_atomunit.set_optional_arg(denom_str(), after_ideaunit.denom)
+                if before_ideaunit.numor != after_ideaunit.numor:
+                    x_atomunit.set_optional_arg(numor_str(), after_ideaunit.numor)
+                if before_ideaunit.morph != after_ideaunit.morph:
+                    x_atomunit.set_optional_arg(morph_str(), after_ideaunit.morph)
+                if before_ideaunit.mass != after_ideaunit.mass:
+                    x_atomunit.set_optional_arg(mass_str(), after_ideaunit.mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:
                     x_atomunit.set_optional_arg(pledge_str(), after_ideaunit.pledge)
                 self.set_atomunit(x_atomunit)
 
             # insert / update / delete factunits
-            before_factunit_bases = set(before_ideaunit._factunits.keys())
-            after_factunit_bases = set(after_ideaunit._factunits.keys())
+            before_factunit_bases = set(before_ideaunit.factunits.keys())
+            after_factunit_bases = set(after_ideaunit.factunits.keys())
             self.add_atomunit_idea_factunit_inserts(
                 ideaunit=after_ideaunit,
                 insert_factunit_bases=after_factunit_bases.difference(
@@ -466,8 +469,8 @@ class ChangeUnit:
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_group_ids = set(before_ideaunit._awardlinks.keys())
-            after_awardlinks_group_ids = set(after_ideaunit._awardlinks.keys())
+            before_awardlinks_group_ids = set(before_ideaunit.awardlinks.keys())
+            after_awardlinks_group_ids = set(after_ideaunit.awardlinks.keys())
             self.add_atomunit_idea_awardlink_inserts(
                 after_ideaunit=after_ideaunit,
                 insert_awardlink_group_ids=after_awardlinks_group_ids.difference(
@@ -489,8 +492,8 @@ class ChangeUnit:
             )
 
             # insert / update / delete reasonunits
-            before_reasonunit_bases = set(before_ideaunit._reasonunits.keys())
-            after_reasonunit_bases = set(after_ideaunit._reasonunits.keys())
+            before_reasonunit_bases = set(before_ideaunit.reasonunits.keys())
+            after_reasonunit_bases = set(after_ideaunit.reasonunits.keys())
             self.add_atomunit_idea_reasonunit_inserts(
                 after_ideaunit=after_ideaunit,
                 insert_reasonunit_bases=after_reasonunit_bases.difference(
@@ -516,8 +519,8 @@ class ChangeUnit:
             # update reasonunits_permises delete_premise
 
             # insert / update / delete teamlinks
-            before_teamlinks_group_ids = set(before_ideaunit._teamunit._teamlinks)
-            after_teamlinks_group_ids = set(after_ideaunit._teamunit._teamlinks)
+            before_teamlinks_group_ids = set(before_ideaunit.teamunit._teamlinks)
+            after_teamlinks_group_ids = set(after_ideaunit.teamunit._teamlinks)
             self.add_atomunit_idea_teamlink_insert(
                 idea_road=idea_road,
                 insert_teamlink_group_ids=after_teamlinks_group_ids.difference(
@@ -532,8 +535,8 @@ class ChangeUnit:
             )
 
             # insert / update / delete healerlinks
-            before_healerlinks_healer_ids = set(before_ideaunit._healerlink._healer_ids)
-            after_healerlinks_healer_ids = set(after_ideaunit._healerlink._healer_ids)
+            before_healerlinks_healer_ids = set(before_ideaunit.healerlink._healer_ids)
+            after_healerlinks_healer_ids = set(after_ideaunit.healerlink._healer_ids)
             self.add_atomunit_idea_healerlink_insert(
                 idea_road=idea_road,
                 insert_healerlink_healer_ids=after_healerlinks_healer_ids.difference(
@@ -561,24 +564,24 @@ class ChangeUnit:
             delete_ideaunit = before_bud.get_idea_obj(delete_idea_road)
             self.add_atomunit_idea_factunit_deletes(
                 idea_road=delete_idea_road,
-                delete_factunit_bases=set(delete_ideaunit._factunits.keys()),
+                delete_factunit_bases=set(delete_ideaunit.factunits.keys()),
             )
 
             self.add_atomunit_idea_awardlink_deletes(
                 idea_road=delete_idea_road,
-                delete_awardlink_group_ids=set(delete_ideaunit._awardlinks.keys()),
+                delete_awardlink_group_ids=set(delete_ideaunit.awardlinks.keys()),
             )
             self.add_atomunit_idea_reasonunit_deletes(
                 before_ideaunit=delete_ideaunit,
-                delete_reasonunit_bases=set(delete_ideaunit._reasonunits.keys()),
+                delete_reasonunit_bases=set(delete_ideaunit.reasonunits.keys()),
             )
             self.add_atomunit_idea_teamlink_deletes(
                 idea_road=delete_idea_road,
-                delete_teamlink_group_ids=delete_ideaunit._teamunit._teamlinks,
+                delete_teamlink_group_ids=delete_ideaunit.teamunit._teamlinks,
             )
             self.add_atomunit_idea_healerlink_deletes(
                 idea_road=delete_idea_road,
-                delete_healerlink_healer_ids=delete_ideaunit._healerlink._healer_ids,
+                delete_healerlink_healer_ids=delete_ideaunit.healerlink._healer_ids,
             )
 
     def add_atomunit_idea_reasonunit_inserts(
@@ -587,7 +590,7 @@ class ChangeUnit:
         for insert_reasonunit_base in insert_reasonunit_bases:
             after_reasonunit = after_ideaunit.get_reasonunit(insert_reasonunit_base)
             x_atomunit = atomunit_shop(bud_idea_reasonunit_text(), atom_insert())
-            x_atomunit.set_required_arg("road", after_ideaunit.get_road())
+            x_atomunit.set_required_arg(road_str(), after_ideaunit.get_road())
             x_atomunit.set_required_arg("base", after_reasonunit.base)
             if after_reasonunit.base_idea_active_requisite is not None:
                 x_atomunit.set_optional_arg(
@@ -615,7 +618,7 @@ class ChangeUnit:
                 bud_idea_reasonunit_text(), before_reasonunit, after_reasonunit
             ):
                 x_atomunit = atomunit_shop(bud_idea_reasonunit_text(), atom_update())
-                x_atomunit.set_required_arg("road", before_ideaunit.get_road())
+                x_atomunit.set_required_arg(road_str(), before_ideaunit.get_road())
                 x_atomunit.set_required_arg("base", after_reasonunit.base)
                 if (
                     before_reasonunit.base_idea_active_requisite
@@ -657,7 +660,7 @@ class ChangeUnit:
     ):
         for delete_reasonunit_base in delete_reasonunit_bases:
             x_atomunit = atomunit_shop(bud_idea_reasonunit_text(), atom_delete())
-            x_atomunit.set_required_arg("road", before_ideaunit.get_road())
+            x_atomunit.set_required_arg(road_str(), before_ideaunit.get_road())
             x_atomunit.set_required_arg("base", delete_reasonunit_base)
             self.set_atomunit(x_atomunit)
 
@@ -679,7 +682,7 @@ class ChangeUnit:
             x_atomunit = atomunit_shop(
                 bud_idea_reason_premiseunit_text(), atom_insert()
             )
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg("base", after_reasonunit.base)
             x_atomunit.set_required_arg("need", after_premiseunit.need)
             if after_premiseunit.open is not None:
@@ -708,7 +711,7 @@ class ChangeUnit:
                 x_atomunit = atomunit_shop(
                     bud_idea_reason_premiseunit_text(), atom_update()
                 )
-                x_atomunit.set_required_arg("road", idea_road)
+                x_atomunit.set_required_arg(road_str(), idea_road)
                 x_atomunit.set_required_arg("base", before_reasonunit.base)
                 x_atomunit.set_required_arg("need", after_premiseunit.need)
                 if after_premiseunit.open != before_premiseunit.open:
@@ -729,7 +732,7 @@ class ChangeUnit:
             x_atomunit = atomunit_shop(
                 bud_idea_reason_premiseunit_text(), atom_delete()
             )
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg("base", reasonunit_base)
             x_atomunit.set_required_arg("need", delete_premise_need)
             self.set_atomunit(x_atomunit)
@@ -739,7 +742,7 @@ class ChangeUnit:
     ):
         for insert_teamlink_group_id in insert_teamlink_group_ids:
             x_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_insert())
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg(group_id_str(), insert_teamlink_group_id)
             self.set_atomunit(x_atomunit)
 
@@ -748,7 +751,7 @@ class ChangeUnit:
     ):
         for delete_teamlink_group_id in delete_teamlink_group_ids:
             x_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_delete())
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg(group_id_str(), delete_teamlink_group_id)
             self.set_atomunit(x_atomunit)
 
@@ -757,7 +760,7 @@ class ChangeUnit:
     ):
         for insert_healerlink_healer_id in insert_healerlink_healer_ids:
             x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_insert())
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg(healer_id_str(), insert_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
@@ -766,7 +769,7 @@ class ChangeUnit:
     ):
         for delete_healerlink_healer_id in delete_healerlink_healer_ids:
             x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_delete())
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg(healer_id_str(), delete_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
@@ -774,9 +777,9 @@ class ChangeUnit:
         self, after_ideaunit: IdeaUnit, insert_awardlink_group_ids: set
     ):
         for after_awardlink_group_id in insert_awardlink_group_ids:
-            after_awardlink = after_ideaunit._awardlinks.get(after_awardlink_group_id)
+            after_awardlink = after_ideaunit.awardlinks.get(after_awardlink_group_id)
             x_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_insert())
-            x_atomunit.set_required_arg("road", after_ideaunit.get_road())
+            x_atomunit.set_required_arg(road_str(), after_ideaunit.get_road())
             x_atomunit.set_required_arg(group_id_str(), after_awardlink.group_id)
             x_atomunit.set_optional_arg("give_force", after_awardlink.give_force)
             x_atomunit.set_optional_arg("take_force", after_awardlink.take_force)
@@ -789,15 +792,13 @@ class ChangeUnit:
         update_awardlink_group_ids: set,
     ):
         for update_awardlink_group_id in update_awardlink_group_ids:
-            before_awardlink = before_ideaunit._awardlinks.get(
-                update_awardlink_group_id
-            )
-            after_awardlink = after_ideaunit._awardlinks.get(update_awardlink_group_id)
+            before_awardlink = before_ideaunit.awardlinks.get(update_awardlink_group_id)
+            after_awardlink = after_ideaunit.awardlinks.get(update_awardlink_group_id)
             if optional_args_different(
                 bud_idea_awardlink_text(), before_awardlink, after_awardlink
             ):
                 x_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_update())
-                x_atomunit.set_required_arg("road", before_ideaunit.get_road())
+                x_atomunit.set_required_arg(road_str(), before_ideaunit.get_road())
                 x_atomunit.set_required_arg(group_id_str(), after_awardlink.group_id)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_atomunit.set_optional_arg(
@@ -814,7 +815,7 @@ class ChangeUnit:
     ):
         for delete_awardlink_group_id in delete_awardlink_group_ids:
             x_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_delete())
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg(group_id_str(), delete_awardlink_group_id)
             self.set_atomunit(x_atomunit)
 
@@ -822,9 +823,9 @@ class ChangeUnit:
         self, ideaunit: IdeaUnit, insert_factunit_bases: set
     ):
         for insert_factunit_base in insert_factunit_bases:
-            insert_factunit = ideaunit._factunits.get(insert_factunit_base)
+            insert_factunit = ideaunit.factunits.get(insert_factunit_base)
             x_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_insert())
-            x_atomunit.set_required_arg("road", ideaunit.get_road())
+            x_atomunit.set_required_arg(road_str(), ideaunit.get_road())
             x_atomunit.set_required_arg("base", insert_factunit.base)
             if insert_factunit.pick is not None:
                 x_atomunit.set_optional_arg("pick", insert_factunit.pick)
@@ -841,13 +842,13 @@ class ChangeUnit:
         update_factunit_bases: set,
     ):
         for update_factunit_base in update_factunit_bases:
-            before_factunit = before_ideaunit._factunits.get(update_factunit_base)
-            after_factunit = after_ideaunit._factunits.get(update_factunit_base)
+            before_factunit = before_ideaunit.factunits.get(update_factunit_base)
+            after_factunit = after_ideaunit.factunits.get(update_factunit_base)
             if optional_args_different(
                 bud_idea_factunit_text(), before_factunit, after_factunit
             ):
                 x_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_update())
-                x_atomunit.set_required_arg("road", before_ideaunit.get_road())
+                x_atomunit.set_required_arg(road_str(), before_ideaunit.get_road())
                 x_atomunit.set_required_arg("base", after_factunit.base)
                 if before_factunit.pick != after_factunit.pick:
                     x_atomunit.set_optional_arg("pick", after_factunit.pick)
@@ -862,7 +863,7 @@ class ChangeUnit:
     ):
         for delete_factunit_base in delete_factunit_bases:
             x_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_delete())
-            x_atomunit.set_required_arg("road", idea_road)
+            x_atomunit.set_required_arg(road_str(), idea_road)
             x_atomunit.set_required_arg("base", delete_factunit_base)
             self.set_atomunit(x_atomunit)
 
@@ -898,7 +899,6 @@ def bud_built_from_change_is_valid(x_change: ChangeUnit, x_bud: BudUnit = None) 
         x_bud.settle_bud()
     except Exception:
         return False
-
     return True
 
 
@@ -915,25 +915,7 @@ def get_filtered_changeunit(
 def sift_changeunit(x_changeunit: ChangeUnit, x_bud: BudUnit) -> ChangeUnit:
     new_changeunit = changeunit_shop()
     for x_atom in x_changeunit.get_sorted_atomunits():
-        sifted_atom = _sift_atomunit(x_bud, x_atom)
+        sifted_atom = sift_atomunit(x_bud, x_atom)
         if sifted_atom != None:
-            new_changeunit.set_atomunit(x_atom)
+            new_changeunit.set_atomunit(sifted_atom)
     return new_changeunit
-
-
-def _sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
-    args_dict = {}
-    for required_arg in get_atom_config_required_args(x_atom.category):
-        args_dict[required_arg] = x_atom.get_value(required_arg)
-    x_parent_road = args_dict.get(parent_road_str())
-    x_label = args_dict.get(label_str())
-    if x_parent_road != None and x_label != None:
-        args_dict[road_str()] = x_bud.make_road(x_parent_road, x_label)
-
-    x_exists = bud_attr_exists(x_atom.category, x_bud, args_dict)
-    if x_atom.crud_text == atom_delete() and x_exists:
-        return x_atom
-    elif x_atom.crud_text == atom_insert():
-        print("huh")
-
-    return None

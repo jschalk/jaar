@@ -6,7 +6,7 @@ from pytest import raises as pytest_raises
 def test_get_kids_in_range_GetsCorrectIdeas():
     # ESTABLISH
     mon_text = "months"
-    mon_idea = ideaunit_shop(mon_text, _begin=0, _close=366)
+    mon_idea = ideaunit_shop(mon_text, begin=0, close=366)
     jan_text = "Jan"
     feb_text = "Feb"
     mar_text = "Mar"
@@ -190,10 +190,10 @@ def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     nation_road = create_road(root_label(), nation_text)
     nation_idea = ideaunit_shop(nation_text, _parent_road=root_label())
     usa_text = "USA"
-    usa_idea = ideaunit_shop(usa_text, _mass=0, _parent_road=nation_road)
+    usa_idea = ideaunit_shop(usa_text, mass=0, _parent_road=nation_road)
     nation_idea.add_kid(usa_idea)
     france_text = "France"
-    france_idea = ideaunit_shop(france_text, _mass=0, _parent_road=nation_road)
+    france_idea = ideaunit_shop(france_text, mass=0, _parent_road=nation_road)
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN
@@ -201,7 +201,7 @@ def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
 
     # WHEN
     france_text = "France"
-    france_idea = ideaunit_shop(france_text, _mass=3, _parent_road=nation_road)
+    france_idea = ideaunit_shop(france_text, mass=3, _parent_road=nation_road)
     nation_idea.add_kid(france_idea)
 
     # WHEN / THEN

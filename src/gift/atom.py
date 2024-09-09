@@ -4,13 +4,14 @@ from src._instrument.python_tool import (
     get_dict_from_json,
 )
 from src._instrument.db_tool import create_insert_sqlstr, RowData
-from src._road.road import create_road, RoadNode, RoadUnit, GroupID, AcctID
+from src._road.road import create_road, RoadNode, RoadUnit, GroupID, AcctID, is_roadnode
 from src.bud.reason_idea import factunit_shop
 from src.bud.acct import acctunit_shop
 from src.bud.group import awardlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import BudUnit
 from src.bud.bud_tool import (
+    bud_attr_exists,
     budunit_text,
     bud_acctunit_text,
     bud_acct_membership_text,
@@ -21,9 +22,11 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_text,
     bud_idea_healerlink_text,
     bud_idea_factunit_text,
+    bud_get_obj,
 )
 from src.gift.atom_config import (
     get_category_from_dict,
+    get_atom_config_required_args,
     category_ref,
     atom_delete,
     atom_insert,
@@ -44,6 +47,7 @@ from src.gift.atom_config import (
     group_id_str,
     healer_id_str,
     parent_road_str,
+    road_str,
     label_str,
     pledge_str,
     addin_str,
@@ -57,8 +61,8 @@ from src.gift.atom_config import (
     mass_str,
     credit_vote_str,
     debtit_vote_str,
-    credit_score_str,
-    debtit_score_str,
+    credit_belief_str,
+    debtit_belief_str,
     fopen_str,
     fnigh_str,
     base_idea_active_requisite_str,
@@ -149,9 +153,10 @@ class AtomUnit:
         return required_args_dict.keys() == self.required_args.keys()
 
     def is_optional_args_valid(self) -> bool:
-        if self.crud_text not in {atom_delete(), atom_insert(), atom_update()}:
+        if self.crud_text == atom_delete() and self.optional_args == {}:
+            return True
+        if self.crud_text not in {atom_insert(), atom_update()}:
             return False
-
         optional_args_dict = self._get_optional_args_dict()
         return set(self.optional_args.keys()).issubset(set(optional_args_dict.keys()))
 
@@ -300,13 +305,13 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value(label_str()),
-            _addin=x_atom.get_value(addin_str()),
-            _begin=x_atom.get_value(begin_str()),
-            _close=x_atom.get_value(close_str()),
-            _gogo_want=x_atom.get_value(gogo_want_str()),
-            _stop_want=x_atom.get_value(stop_want_str()),
-            _denom=x_atom.get_value(denom_str()),
-            _numor=x_atom.get_value(numor_str()),
+            addin=x_atom.get_value(addin_str()),
+            begin=x_atom.get_value(begin_str()),
+            close=x_atom.get_value(close_str()),
+            gogo_want=x_atom.get_value(gogo_want_str()),
+            stop_want=x_atom.get_value(stop_want_str()),
+            denom=x_atom.get_value(denom_str()),
+            numor=x_atom.get_value(numor_str()),
             pledge=x_atom.get_value(pledge_str()),
         ),
         parent_road=x_atom.get_value(parent_road_str()),
@@ -325,7 +330,7 @@ def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_awardlink = x_idea._awardlinks.get(x_atom.get_value(group_id_str()))
+    x_awardlink = x_idea.awardlinks.get(x_atom.get_value(group_id_str()))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -351,7 +356,7 @@ def _modify_bud_idea_factunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_factunit = x_ideaunit._factunits.get(x_atom.get_value("base"))
+    x_factunit = x_ideaunit.factunits.get(x_atom.get_value("base"))
     x_factunit.set_attr(
         pick=x_atom.get_value("pick"),
         fopen=x_atom.get_value(fopen_str()),
@@ -429,22 +434,22 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_idea_teamlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._teamunit.del_teamlink(group_id=x_atom.get_value(group_id_str()))
+    x_ideaunit.teamunit.del_teamlink(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._teamunit.set_teamlink(group_id=x_atom.get_value(group_id_str()))
+    x_ideaunit.teamunit.set_teamlink(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._healerlink.del_healer_id(x_atom.get_value(healer_id_str()))
+    x_ideaunit.healerlink.del_healer_id(x_atom.get_value(healer_id_str()))
 
 
 def _modify_bud_idea_healerlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._healerlink.set_healer_id(x_atom.get_value(healer_id_str()))
+    x_ideaunit.healerlink.set_healer_id(x_atom.get_value(healer_id_str()))
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -454,8 +459,8 @@ def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
         acct_id=x_atom.get_value(acct_id_str()),
-        credit_score=x_atom.get_value(credit_score_str()),
-        debtit_score=x_atom.get_value(debtit_score_str()),
+        credit_belief=x_atom.get_value(credit_belief_str()),
+        debtit_belief=x_atom.get_value(debtit_belief_str()),
     )
 
 
@@ -463,8 +468,8 @@ def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
             acct_id=x_atom.get_value(acct_id_str()),
-            credit_score=x_atom.get_value(credit_score_str()),
-            debtit_score=x_atom.get_value(debtit_score_str()),
+            credit_belief=x_atom.get_value(credit_belief_str()),
+            debtit_belief=x_atom.get_value(debtit_belief_str()),
         )
     )
 
@@ -595,13 +600,13 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
         )
     elif category == bud_ideaunit_text():
         return (
-            x_obj._addin != y_obj._addin
-            or x_obj._begin != y_obj._begin
-            or x_obj._close != y_obj._close
-            or x_obj._denom != y_obj._denom
-            or x_obj._numor != y_obj._numor
-            or x_obj._morph != y_obj._morph
-            or x_obj._mass != y_obj._mass
+            x_obj.addin != y_obj.addin
+            or x_obj.begin != y_obj.begin
+            or x_obj.close != y_obj.close
+            or x_obj.denom != y_obj.denom
+            or x_obj.numor != y_obj.numor
+            or x_obj.morph != y_obj.morph
+            or x_obj.mass != y_obj.mass
             or x_obj.pledge != y_obj.pledge
         )
     elif category == bud_idea_factunit_text():
@@ -619,8 +624,8 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.divisor != y_obj.divisor
         )
     elif category == bud_acctunit_text():
-        return (x_obj.credit_score != y_obj.credit_score) or (
-            x_obj.debtit_score != y_obj.debtit_score
+        return (x_obj.credit_belief != y_obj.credit_belief) or (
+            x_obj.debtit_belief != y_obj.debtit_belief
         )
 
 
@@ -649,10 +654,10 @@ class AtomRow:
     begin: float = None
     bit: float = None
     close: float = None
-    credit_score: int = None
+    credit_belief: int = None
     credit_vote: int = None
     credor_respect: int = None
-    debtit_score: int = None
+    debtit_belief: int = None
     debtit_vote: int = None
     debtor_respect: int = None
     denom: int = None
@@ -732,3 +737,38 @@ class AtomRow:
 
 def atomrow_shop(atom_categorys: set[str], crud_command: CRUD_command) -> AtomRow:
     return AtomRow(_atom_categorys=atom_categorys, _crud_command=crud_command)
+
+
+def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
+    x_category = x_atom.category
+    config_req_args = get_atom_config_required_args(x_category)
+    x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
+    x_parent_road = x_atom_reqs.get(parent_road_str())
+    x_label = x_atom_reqs.get(label_str())
+    if x_parent_road != None and x_label != None:
+        x_atom_reqs[road_str()] = x_bud.make_road(x_parent_road, x_label)
+        x_road_delimiter = x_bud._road_delimiter
+        is_idearoot_road = is_roadnode(x_atom_reqs.get(road_str()), x_road_delimiter)
+        if is_idearoot_road is True:
+            return None
+
+    x_exists = bud_attr_exists(x_category, x_bud, x_atom_reqs)
+
+    if x_atom.crud_text == atom_delete() and x_exists:
+        return x_atom
+    elif x_atom.crud_text == atom_insert() and not x_exists:
+        return x_atom
+    elif x_atom.crud_text == atom_insert() and x_exists:
+        x_bud_obj = bud_get_obj(x_category, x_bud, x_atom_reqs)
+        x_optional_args = x_atom.get_optional_args_dict()
+        update_atom = atomunit_shop(x_category, atom_update(), x_atom.required_args)
+        for optional_arg in x_optional_args:
+            optional_value = x_atom.get_value(optional_arg)
+            obj_value = x_bud_obj.__dict__[optional_arg]
+            print(f"{optional_arg=} {optional_value=} {obj_value=}")
+            if obj_value != optional_value:
+                update_atom.set_arg(optional_arg, optional_value)
+
+        if update_atom.get_optional_args_dict() != {}:
+            return update_atom
+    return None

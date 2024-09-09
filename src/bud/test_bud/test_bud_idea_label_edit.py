@@ -160,8 +160,8 @@ def test_bud_edit_idea_label_Modifies_factunits():
     yao_bud.set_fact(base=old_water_road, pick=old_rain_road)
 
     idea_x = yao_bud.get_idea_obj(roses_road)
-    assert yao_bud._idearoot._factunits[old_water_road] is not None
-    old_water_rain_factunit = yao_bud._idearoot._factunits[old_water_road]
+    assert yao_bud._idearoot.factunits[old_water_road] is not None
+    old_water_rain_factunit = yao_bud._idearoot.factunits[old_water_road]
     assert old_water_rain_factunit.base == old_water_road
     assert old_water_rain_factunit.pick == old_rain_road
 
@@ -169,20 +169,20 @@ def test_bud_edit_idea_label_Modifies_factunits():
     new_water_text = "h2o"
     new_water_road = yao_bud.make_l1_road(new_water_text)
     yao_bud.set_l1_idea(ideaunit_shop(new_water_text))
-    assert yao_bud._idearoot._factunits.get(new_water_road) is None
+    assert yao_bud._idearoot.factunits.get(new_water_road) is None
     yao_bud.edit_idea_label(old_road=old_water_road, new_label=new_water_text)
 
     # THEN
-    assert yao_bud._idearoot._factunits.get(old_water_road) is None
-    assert yao_bud._idearoot._factunits.get(new_water_road) is not None
-    new_water_rain_factunit = yao_bud._idearoot._factunits[new_water_road]
+    assert yao_bud._idearoot.factunits.get(old_water_road) is None
+    assert yao_bud._idearoot.factunits.get(new_water_road) is not None
+    new_water_rain_factunit = yao_bud._idearoot.factunits[new_water_road]
     assert new_water_rain_factunit.base == new_water_road
     new_rain_road = yao_bud.make_road(new_water_road, rain_text)
     assert new_water_rain_factunit.pick == new_rain_road
 
-    assert yao_bud._idearoot._factunits.get(new_water_road)
-    factunit_obj = yao_bud._idearoot._factunits.get(new_water_road)
-    # for factunit_key, factunit_obj in yao_bud._idearoot._factunits.items():
+    assert yao_bud._idearoot.factunits.get(new_water_road)
+    factunit_obj = yao_bud._idearoot.factunits.get(new_water_road)
+    # for factunit_key, factunit_obj in yao_bud._idearoot.factunits.items():
     #     assert factunit_key == new_water_road
     assert factunit_obj.base == new_water_road
     assert factunit_obj.pick == new_rain_road
@@ -198,10 +198,10 @@ def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
     casa_idea = sue_bud.get_idea_obj(sue_bud.make_l1_road("casa"))
     # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.need: wed_premise})
     # nation_reason = reasonunit_shop(nationstate, premises={usa_premise.need: usa_premise})
-    assert len(casa_idea._reasonunits) == 2
-    assert casa_idea._reasonunits.get(old_weekday_road) is not None
+    assert len(casa_idea.reasonunits) == 2
+    assert casa_idea.reasonunits.get(old_weekday_road) is not None
     wednesday_idea = sue_bud.get_idea_obj(old_weekday_road)
-    casa_weekday_reason = casa_idea._reasonunits.get(old_weekday_road)
+    casa_weekday_reason = casa_idea.reasonunits.get(old_weekday_road)
     assert casa_weekday_reason.premises.get(old_wednesday_road) is not None
     assert (
         casa_weekday_reason.premises.get(old_wednesday_road).need == old_wednesday_road
@@ -209,28 +209,28 @@ def test_bud_edit_idea_label_ModifiesIdeaReasonUnitsScenario1():
     new_weekday_text = "days of week"
     new_weekday_road = sue_bud.make_l1_road(new_weekday_text)
     new_wednesday_road = sue_bud.make_road(new_weekday_road, wednesday_text)
-    assert casa_idea._reasonunits.get(new_weekday_text) is None
+    assert casa_idea.reasonunits.get(new_weekday_text) is None
 
     # WHEN
-    # for key_x, reason_x in casa_idea._reasonunits.items():
+    # for key_x, reason_x in casa_idea.reasonunits.items():
     #     print(f"Before {key_x=} {reason_x.base=}")
     print(f"BEFORE {wednesday_idea._label=}")
     print(f"BEFORE {wednesday_idea._parent_road=}")
     sue_bud.edit_idea_label(old_road=old_weekday_road, new_label=new_weekday_text)
-    # for key_x, reason_x in casa_idea._reasonunits.items():
+    # for key_x, reason_x in casa_idea.reasonunits.items():
     #     print(f"AFTER {key_x=} {reason_x.base=}")
     print(f"AFTER {wednesday_idea._label=}")
     print(f"AFTER {wednesday_idea._parent_road=}")
 
     # THEN
-    assert casa_idea._reasonunits.get(new_weekday_road) is not None
-    assert casa_idea._reasonunits.get(old_weekday_road) is None
-    casa_weekday_reason = casa_idea._reasonunits.get(new_weekday_road)
+    assert casa_idea.reasonunits.get(new_weekday_road) is not None
+    assert casa_idea.reasonunits.get(old_weekday_road) is None
+    casa_weekday_reason = casa_idea.reasonunits.get(new_weekday_road)
     assert casa_weekday_reason.premises.get(new_wednesday_road) is not None
     assert (
         casa_weekday_reason.premises.get(new_wednesday_road).need == new_wednesday_road
     )
-    assert len(casa_idea._reasonunits) == 2
+    assert len(casa_idea.reasonunits) == 2
 
 
 def test_bud_set_owner_id_CorrectlyModifiesBoth():
