@@ -125,7 +125,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerlink():
     idearoot_dict = bud_dict.get("_idearoot")
 
     # THEN
-    assert idearoot_dict["_healerlink"] == run_healerlink.get_dict()
+    assert idearoot_dict["healerlink"] == run_healerlink.get_dict()
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_ideakid_TeamUnit():
@@ -217,10 +217,10 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
     assert len(shave_factunits) == len(x_idearoot._kids[shave_text]._factunits)
-    idearoot_healerlink = idearoot_dict["_healerlink"]
+    idearoot_healerlink = idearoot_dict["healerlink"]
     print(f"{idearoot_healerlink=}")
     assert len(idearoot_healerlink) == 1
-    assert x_idearoot._healerlink.any_healer_id_exists()
+    assert x_idearoot.healerlink.any_healer_id_exists()
     assert x_idearoot.problem_bool
 
 
@@ -403,8 +403,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_shave_idea._teamunit == zia_shave_idea._teamunit
     assert json_shave_idea._teamunit == xio_teamunit
     assert json_shave_idea._originunit == zia_shave_idea._originunit
-    print(f"{json_shave_idea._healerlink=}")
-    assert json_shave_idea._healerlink == zia_shave_idea._healerlink
+    print(f"{json_shave_idea.healerlink=}")
+    assert json_shave_idea.healerlink == zia_shave_idea.healerlink
     assert len(json_shave_idea._awardlinks) == 2
     assert len(json_shave_idea._factunits) == 1
     assert zia_shave_idea.problem_bool

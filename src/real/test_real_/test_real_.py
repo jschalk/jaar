@@ -193,11 +193,11 @@ def test_RealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     dallas_text = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerlink = healerlink_shop({sue_text, yao_text})
-    dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
+    dallas_idea = ideaunit_shop(dallas_text, healerlink=dallas_healerlink)
     elpaso_text = "el paso"
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_text)
     elpaso_healerlink = healerlink_shop({sue_text})
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
+    elpaso_idea = ideaunit_shop(elpaso_text, healerlink=elpaso_healerlink)
 
     sue_voice_bud.set_idea(dallas_idea, texas_road)
     sue_voice_bud.set_idea(elpaso_idea, texas_road)

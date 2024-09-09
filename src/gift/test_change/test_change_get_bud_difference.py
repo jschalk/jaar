@@ -1212,7 +1212,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._healerlink.set_healer_id(xio_text)
+    after_ball_ideaunit.healerlink.set_healer_id(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1246,7 +1246,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._healerlink.set_healer_id(xio_text)
+    after_ball_ideaunit.healerlink.set_healer_id(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1279,11 +1279,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit._healerlink.set_healer_id(xio_text)
+    before_ball_ideaunit.healerlink.set_healer_id(xio_text)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._healerlink.del_healer_id(xio_text)
+    after_ball_ideaunit.healerlink.del_healer_id(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1318,7 +1318,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit._healerlink.set_healer_id(xio_text)
+    before_ball_ideaunit.healerlink.set_healer_id(xio_text)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.del_idea_obj(ball_road)

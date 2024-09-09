@@ -44,7 +44,7 @@ def test_get_obj_from_idea_dict_ReturnsCorrectObj():
 def test_get_obj_from_idea_dict_ReturnsCorrect_HealerLink():
     # ESTABLISH
     # WHEN / THEN
-    healerlink_key = "_healerlink"
+    healerlink_key = "healerlink"
     assert get_obj_from_idea_dict({}, healerlink_key) == healerlink_shop()
 
     # WHEN
@@ -137,7 +137,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
         _teamunit=sue_teamunit,
-        _healerlink=yao_healerlink,
+        healerlink=yao_healerlink,
         _active=True,
         pledge=True,
         problem_bool=x_problem_bool,
@@ -176,7 +176,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_awardlinks"] == casa_idea.get_awardlinks_dict()
     assert casa_dict["_awardlinks"] == x1_awardlinks
     assert casa_dict["_teamunit"] == sue_teamunit.get_dict()
-    assert casa_dict["_healerlink"] == yao_healerlink.get_dict()
+    assert casa_dict["healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
     assert casa_dict["mass"] == casa_idea.mass
     assert casa_dict["_label"] == casa_idea._label
@@ -260,7 +260,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_idea._factunits == {}
     assert casa_idea._awardlinks == {}
     assert casa_idea._teamunit == teamunit_shop()
-    assert casa_idea._healerlink == healerlink_shop()
+    assert casa_idea.healerlink == healerlink_shop()
     assert casa_idea._originunit == originunit_shop()
     assert casa_idea._kids == {}
 
@@ -273,6 +273,6 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_dict.get("_factunits") is None
     assert casa_dict.get("_awardlinks") is None
     assert casa_dict.get("_teamunit") is None
-    assert casa_dict.get("_healerlink") is None
+    assert casa_dict.get("healerlink") is None
     assert casa_dict.get("_originunit") is None
     assert casa_dict.get("_kids") is None

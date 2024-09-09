@@ -111,7 +111,7 @@ def bud_idea_healerlink_exists(x_bud: BudUnit, required_args: dict[str, any]) ->
     x_road = required_args.get("road")
     return bool(
         bud_ideaunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road)._healerlink.healer_id_exists(x_healer_id)
+        and x_bud.get_idea_obj(x_road).healerlink.healer_id_exists(x_healer_id)
     )
 
 

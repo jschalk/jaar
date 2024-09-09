@@ -410,7 +410,7 @@ class ChangeUnit:
             )
             self.add_atomunit_idea_healerlink_insert(
                 idea_road=insert_idea_road,
-                insert_healerlink_healer_ids=insert_ideaunit._healerlink._healer_ids,
+                insert_healerlink_healer_ids=insert_ideaunit.healerlink._healer_ids,
             )
 
     def add_atomunit_idea_updates(
@@ -535,8 +535,8 @@ class ChangeUnit:
             )
 
             # insert / update / delete healerlinks
-            before_healerlinks_healer_ids = set(before_ideaunit._healerlink._healer_ids)
-            after_healerlinks_healer_ids = set(after_ideaunit._healerlink._healer_ids)
+            before_healerlinks_healer_ids = set(before_ideaunit.healerlink._healer_ids)
+            after_healerlinks_healer_ids = set(after_ideaunit.healerlink._healer_ids)
             self.add_atomunit_idea_healerlink_insert(
                 idea_road=idea_road,
                 insert_healerlink_healer_ids=after_healerlinks_healer_ids.difference(
@@ -581,7 +581,7 @@ class ChangeUnit:
             )
             self.add_atomunit_idea_healerlink_deletes(
                 idea_road=delete_idea_road,
-                delete_healerlink_healer_ids=delete_ideaunit._healerlink._healer_ids,
+                delete_healerlink_healer_ids=delete_ideaunit.healerlink._healer_ids,
             )
 
     def add_atomunit_idea_reasonunit_inserts(

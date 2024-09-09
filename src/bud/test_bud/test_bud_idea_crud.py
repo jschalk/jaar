@@ -436,8 +436,8 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_bud._idearoot._kids[casa_text].pledge is True
 
     # _healerlink:
-    sue_bud._idearoot._kids[casa_text]._healerlink = "fun3rol"
-    src_healerlink = sue_bud._idearoot._kids[casa_text]._healerlink
+    sue_bud._idearoot._kids[casa_text].healerlink = "fun3rol"
+    src_healerlink = sue_bud._idearoot._kids[casa_text].healerlink
     assert src_healerlink == "fun3rol"
     sue_text = "Sue"
     yao_text = "Yao"
@@ -445,7 +445,7 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     sue_bud.add_acctunit(sue_text)
     sue_bud.add_acctunit(yao_text)
     sue_bud.edit_idea_attr(road=casa_road, healerlink=x_healerlink)
-    assert sue_bud._idearoot._kids[casa_text]._healerlink == x_healerlink
+    assert sue_bud._idearoot._kids[casa_text].healerlink == x_healerlink
 
     # _problem_bool: bool
     sue_bud._idearoot._kids[casa_text].problem_bool = "fun3rol"

@@ -221,7 +221,7 @@ class IdeaUnit:
     _teamheir: TeamHeir = None  # Calculated field
     _factunits: dict[RoadUnit, FactUnit] = None
     _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
-    _healerlink: HealerLink = None
+    healerlink: HealerLink = None
     begin: float = None
     close: float = None
     addin: float = None
@@ -584,7 +584,7 @@ class IdeaUnit:
         if idea_attr.teamunit is not None:
             self._teamunit = idea_attr.teamunit
         if idea_attr.healerlink is not None:
-            self._healerlink = idea_attr.healerlink
+            self.healerlink = idea_attr.healerlink
         if idea_attr.begin is not None:
             self.begin = idea_attr.begin
         if idea_attr.close is not None:
@@ -905,8 +905,8 @@ class IdeaUnit:
             x_dict["_reasonunits"] = self.get_reasonunits_dict()
         if self._teamunit not in [None, teamunit_shop()]:
             x_dict["_teamunit"] = self.get_teamunit_dict()
-        if self._healerlink not in [None, healerlink_shop()]:
-            x_dict["_healerlink"] = self._healerlink.get_dict()
+        if self.healerlink not in [None, healerlink_shop()]:
+            x_dict["healerlink"] = self.healerlink.get_dict()
         if self._awardlinks not in [{}, None]:
             x_dict["_awardlinks"] = self.get_awardlinks_dict()
         if self._originunit not in [None, originunit_shop()]:
@@ -985,7 +985,7 @@ def ideaunit_shop(
     _teamheir: TeamHeir = None,  # Calculated field
     _factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
-    _healerlink: HealerLink = None,
+    healerlink: HealerLink = None,
     begin: float = None,
     close: float = None,
     gogo_want: float = None,
@@ -1017,7 +1017,7 @@ def ideaunit_shop(
     _healerlink_ratio: float = None,
 ) -> IdeaUnit:
     _bud_real_id = root_label() if _bud_real_id is None else _bud_real_id
-    _healerlink = healerlink_shop() if _healerlink is None else _healerlink
+    x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_ideakid = IdeaUnit(
         _label=None,
@@ -1034,7 +1034,7 @@ def ideaunit_shop(
         _teamheir=_teamheir,
         _factunits=get_empty_dict_if_none(_factunits),
         _factheirs=get_empty_dict_if_none(_factheirs),
-        _healerlink=_healerlink,
+        healerlink=x_healerlink,
         begin=begin,
         close=close,
         gogo_want=gogo_want,
@@ -1087,7 +1087,7 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else teamunit_shop()
         )
-    elif dict_key == "_healerlink":
+    elif dict_key == "healerlink":
         return (
             healerlink_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None

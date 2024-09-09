@@ -25,11 +25,11 @@ from src.real.examples.real_env import get_test_reals_dir
 #     dallas_text = "dallas"
 #     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
 #     dallas_healerlink = healerlink_shop({yao_text})
-#     dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
+#     dallas_idea = ideaunit_shop(dallas_text, healerlink=dallas_healerlink)
 #     elpaso_text = "el paso"
 #     elpaso_road = yao_voice_bud.make_road(texas_road, elpaso_text)
 #     elpaso_healerlink = healerlink_shop({yao_text})
-#     elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
+#     elpaso_idea = ideaunit_shop(elpaso_text, healerlink=elpaso_healerlink)
 
 #     yao_voice_bud.set_idea(dallas_idea, texas_road)
 #     yao_voice_bud.set_idea(elpaso_idea, texas_road)
@@ -91,11 +91,11 @@ def create_example_real2() -> RealUnit:
     dallas_text = "dallas"
     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerlink = healerlink_shop({yao_text, zia_text})
-    dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
+    dallas_idea = ideaunit_shop(dallas_text, healerlink=dallas_healerlink)
     elpaso_text = "el paso"
     elpaso_road = yao_voice_bud.make_road(texas_road, elpaso_text)
     elpaso_healerlink = healerlink_shop({yao_text})
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
+    elpaso_idea = ideaunit_shop(elpaso_text, healerlink=elpaso_healerlink)
 
     yao_voice_bud.set_idea(dallas_idea, texas_road)
     yao_voice_bud.set_idea(elpaso_idea, texas_road)
@@ -223,11 +223,11 @@ def create_example_real4() -> RealUnit:
     dallas_text = "dallas"
     dallas_road = yao_voice_bud.make_road(texas_road, dallas_text)
     dallas_healerlink = healerlink_shop({yao_text, zia_text})
-    dallas_idea = ideaunit_shop(dallas_text, _healerlink=dallas_healerlink)
+    dallas_idea = ideaunit_shop(dallas_text, healerlink=dallas_healerlink)
     elpaso_text = "el paso"
     elpaso_road = yao_voice_bud.make_road(texas_road, elpaso_text)
     elpaso_healerlink = healerlink_shop({yao_text})
-    elpaso_idea = ideaunit_shop(elpaso_text, _healerlink=elpaso_healerlink)
+    elpaso_idea = ideaunit_shop(elpaso_text, healerlink=elpaso_healerlink)
 
     yao_voice_bud.set_idea(dallas_idea, texas_road)
     yao_voice_bud.set_idea(elpaso_idea, texas_road)

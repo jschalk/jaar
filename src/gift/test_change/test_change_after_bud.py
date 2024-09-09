@@ -1053,8 +1053,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerl
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_ideaunit._healerlink._healer_ids == set()
-    assert not before_ball_ideaunit._healerlink.healer_id_exists(yao_text)
+    assert before_ball_ideaunit.healerlink._healer_ids == set()
+    assert not before_ball_ideaunit.healerlink.healer_id_exists(yao_text)
 
     # WHEN
     x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_insert())
@@ -1067,8 +1067,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerl
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._healerlink._healer_ids != set()
-    assert after_ball_ideaunit._healerlink.healer_id_exists(yao_text)
+    assert after_ball_ideaunit.healerlink._healer_ids != set()
+    assert after_ball_ideaunit.healerlink.healer_id_exists(yao_text)
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerlink():
@@ -1083,9 +1083,9 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerl
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    before_ball_ideaunit._healerlink.set_healer_id(yao_text)
-    assert before_ball_ideaunit._healerlink._healer_ids != set()
-    assert before_ball_ideaunit._healerlink.healer_id_exists(yao_text)
+    before_ball_ideaunit.healerlink.set_healer_id(yao_text)
+    assert before_ball_ideaunit.healerlink._healer_ids != set()
+    assert before_ball_ideaunit.healerlink.healer_id_exists(yao_text)
 
     # WHEN
     x_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_delete())
@@ -1098,8 +1098,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerl
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._healerlink._healer_ids == set()
-    assert not after_ball_ideaunit._healerlink.healer_id_exists(yao_text)
+    assert after_ball_ideaunit.healerlink._healer_ids == set()
+    assert not after_ball_ideaunit.healerlink.healer_id_exists(yao_text)
 
 
 def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():

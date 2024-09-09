@@ -1090,7 +1090,7 @@ class BudUnit:
             x_idea_obj._all_acct_cred = group_everyone
             x_idea_obj._all_acct_debt = group_everyone
 
-            if x_idea_obj._healerlink.any_healer_id_exists():
+            if x_idea_obj.healerlink.any_healer_id_exists():
                 econ_justified_by_problem = False
                 healerlink_count += 1
                 self._sum_healerlink_share += x_idea_obj.get_fund_share()
@@ -1307,13 +1307,13 @@ class BudUnit:
             else:
                 x_sum = self._sum_healerlink_share
                 x_idea._healerlink_ratio = x_idea.get_fund_share() / x_sum
-            if self._econs_justified and x_idea._healerlink.any_healer_id_exists():
+            if self._econs_justified and x_idea.healerlink.any_healer_id_exists():
                 self._econ_dict[x_idea.get_road()] = x_idea
 
     def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
         _healers_dict = {}
         for x_econ_road, x_econ_idea in self._econ_dict.items():
-            for x_healer_id in x_econ_idea._healerlink._healer_ids:
+            for x_healer_id in x_econ_idea.healerlink._healer_ids:
                 x_groupbox = self.get_groupbox(x_healer_id)
                 for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
@@ -1519,7 +1519,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         problem_bool=get_obj_from_idea_dict(idearoot_dict, "problem_bool"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
         _teamunit=get_obj_from_idea_dict(idearoot_dict, "_teamunit"),
-        _healerlink=get_obj_from_idea_dict(idearoot_dict, "_healerlink"),
+        healerlink=get_obj_from_idea_dict(idearoot_dict, "healerlink"),
         _factunits=get_obj_from_idea_dict(idearoot_dict, "_factunits"),
         _awardlinks=get_obj_from_idea_dict(idearoot_dict, "_awardlinks"),
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
@@ -1561,7 +1561,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             problem_bool=get_obj_from_idea_dict(idea_dict, "problem_bool"),
             _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
             _teamunit=get_obj_from_idea_dict(idea_dict, "_teamunit"),
-            _healerlink=get_obj_from_idea_dict(idea_dict, "_healerlink"),
+            healerlink=get_obj_from_idea_dict(idea_dict, "healerlink"),
             _originunit=get_obj_from_idea_dict(idea_dict, "_originunit"),
             _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),
             _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),

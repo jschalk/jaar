@@ -444,12 +444,12 @@ def _modify_bud_idea_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._healerlink.del_healer_id(x_atom.get_value(healer_id_str()))
+    x_ideaunit.healerlink.del_healer_id(x_atom.get_value(healer_id_str()))
 
 
 def _modify_bud_idea_healerlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._healerlink.set_healer_id(x_atom.get_value(healer_id_str()))
+    x_ideaunit.healerlink.set_healer_id(x_atom.get_value(healer_id_str()))
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
