@@ -10,7 +10,6 @@ class RoadNode(str):
     """A string presentation of a tree node. Nodes cannot contain RoadUnit delimiter"""
 
     def is_node(self, delimiter: str = None) -> bool:
-        print(f"{self=} {delimiter=}")
         return self.find(default_road_delimiter_if_none(delimiter)) == -1
 
 
