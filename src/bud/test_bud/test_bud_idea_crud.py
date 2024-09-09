@@ -448,12 +448,12 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_bud._idearoot._kids[casa_text]._healerlink == x_healerlink
 
     # _problem_bool: bool
-    sue_bud._idearoot._kids[casa_text]._problem_bool = "fun3rol"
-    src_problem_bool = sue_bud._idearoot._kids[casa_text]._problem_bool
+    sue_bud._idearoot._kids[casa_text].problem_bool = "fun3rol"
+    src_problem_bool = sue_bud._idearoot._kids[casa_text].problem_bool
     assert src_problem_bool == "fun3rol"
     x_problem_bool = True
     sue_bud.edit_idea_attr(road=casa_road, problem_bool=x_problem_bool)
-    assert sue_bud._idearoot._kids[casa_text]._problem_bool == x_problem_bool
+    assert sue_bud._idearoot._kids[casa_text].problem_bool == x_problem_bool
 
 
 def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerlink_healer_ids_DoNotExist():

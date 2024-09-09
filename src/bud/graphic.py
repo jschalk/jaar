@@ -41,11 +41,11 @@ def _get_color_for_ideaunit_trace(x_ideaunit: IdeaUnit, mode: str) -> str:
     elif mode == "Task":
         return "Red" if x_ideaunit.pledge else "Pink"
     elif mode == "Econ":
-        if x_ideaunit._problem_bool and x_ideaunit._healerlink.any_healer_id_exists():
+        if x_ideaunit.problem_bool and x_ideaunit._healerlink.any_healer_id_exists():
             return "Purple"
         elif x_ideaunit._healerlink.any_healer_id_exists():
             return "Blue"
-        elif x_ideaunit._problem_bool:
+        elif x_ideaunit.problem_bool:
             return "Red"
         else:
             return "Pink"

@@ -477,7 +477,7 @@ class BudUnit:
             raise Exception_econs_justified(exception_text)
 
         x_ideas = self._idea_dict.values()
-        return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea._problem_bool}
+        return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea.problem_bool}
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
@@ -1094,7 +1094,7 @@ class BudUnit:
                 econ_justified_by_problem = False
                 healerlink_count += 1
                 self._sum_healerlink_share += x_idea_obj.get_fund_share()
-            if x_idea_obj._problem_bool:
+            if x_idea_obj.problem_bool:
                 econ_justified_by_problem = True
 
         if econ_justified_by_problem is False or healerlink_count > 1:
@@ -1516,7 +1516,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         morph=get_obj_from_idea_dict(idearoot_dict, "morph"),
         gogo_want=get_obj_from_idea_dict(idearoot_dict, "gogo_want"),
         stop_want=get_obj_from_idea_dict(idearoot_dict, "stop_want"),
-        _problem_bool=get_obj_from_idea_dict(idearoot_dict, "_problem_bool"),
+        problem_bool=get_obj_from_idea_dict(idearoot_dict, "problem_bool"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
         _teamunit=get_obj_from_idea_dict(idearoot_dict, "_teamunit"),
         _healerlink=get_obj_from_idea_dict(idearoot_dict, "_healerlink"),
@@ -1558,7 +1558,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             gogo_want=get_obj_from_idea_dict(idea_dict, "gogo_want"),
             stop_want=get_obj_from_idea_dict(idea_dict, "stop_want"),
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
-            _problem_bool=get_obj_from_idea_dict(idea_dict, "_problem_bool"),
+            problem_bool=get_obj_from_idea_dict(idea_dict, "problem_bool"),
             _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
             _teamunit=get_obj_from_idea_dict(idea_dict, "_teamunit"),
             _healerlink=get_obj_from_idea_dict(idea_dict, "_healerlink"),

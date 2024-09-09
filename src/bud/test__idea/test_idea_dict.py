@@ -28,7 +28,7 @@ def test_get_obj_from_idea_dict_ReturnsCorrectObj():
     assert get_obj_from_idea_dict({field_text: False}, field_text) is False
 
     # ESTABLISH
-    field_text = "_problem_bool"
+    field_text = "problem_bool"
     # WHEN / THEN
     assert get_obj_from_idea_dict({field_text: True}, field_text)
     assert get_obj_from_idea_dict({}, field_text) is False
@@ -140,7 +140,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _healerlink=yao_healerlink,
         _active=True,
         pledge=True,
-        _problem_bool=x_problem_bool,
+        problem_bool=x_problem_bool,
     )
     factunit_x = factunit_shop(base=week_road, pick=week_road, fopen=5, fnigh=59)
     casa_idea.set_factunit(factunit=factunit_x)
@@ -189,8 +189,8 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["gogo_want"] == casa_idea.gogo_want
     assert casa_dict["stop_want"] == casa_idea.stop_want
     assert casa_dict["pledge"] == casa_idea.pledge
-    assert casa_dict["_problem_bool"] == casa_idea._problem_bool
-    assert casa_dict["_problem_bool"] == x_problem_bool
+    assert casa_dict["problem_bool"] == casa_idea.problem_bool
+    assert casa_dict["problem_bool"] == x_problem_bool
     assert casa_idea._is_expanded
     assert casa_dict.get("_is_expanded") is None
     assert len(casa_dict["_factunits"]) == len(casa_idea.get_factunits_dict())

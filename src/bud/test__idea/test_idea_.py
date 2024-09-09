@@ -38,7 +38,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit.gogo_want is None
     assert x_ideaunit.stop_want is None
     assert x_ideaunit.pledge is None
-    assert x_ideaunit._problem_bool is None
+    assert x_ideaunit.problem_bool is None
     assert x_ideaunit._healerlink is None
     # calculated_fields
     assert x_ideaunit._range_evaluated is None
@@ -77,7 +77,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit.denom is None
     assert x_ideaunit.morph is None
     assert x_ideaunit.pledge is False
-    assert x_ideaunit._problem_bool is False
+    assert x_ideaunit.problem_bool is False
     assert x_ideaunit._descendant_pledge_count is None
     assert x_ideaunit._awardlines == {}
     assert x_ideaunit._awardlinks == {}
@@ -133,12 +133,12 @@ def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():
 
     # WHEN
     x_ideaunit = ideaunit_shop(
-        _healerlink=x_healerlink, _problem_bool=x_problem_bool, _fund_coin=x_fund_coin
+        _healerlink=x_healerlink, problem_bool=x_problem_bool, _fund_coin=x_fund_coin
     )
 
     # THEN
     assert x_ideaunit._healerlink == x_healerlink
-    assert x_ideaunit._problem_bool == x_problem_bool
+    assert x_ideaunit.problem_bool == x_problem_bool
     assert x_ideaunit._fund_coin == x_fund_coin
 
 

@@ -232,7 +232,7 @@ class IdeaUnit:
     stop_want: bool = None
     pledge: bool = None
     _originunit: OriginUnit = None
-    _problem_bool: bool = None
+    problem_bool: bool = None
     # Calculated fields
     _range_evaluated: bool = None
     _gogo_calc: float = None
@@ -618,7 +618,7 @@ class IdeaUnit:
         if idea_attr.factunit is not None:
             self.set_factunit(idea_attr.factunit)
         if idea_attr.problem_bool is not None:
-            self._problem_bool = idea_attr.problem_bool
+            self.problem_bool = idea_attr.problem_bool
 
         self._del_reasonunit_all_cases(
             base=idea_attr.reason_del_premise_base,
@@ -929,8 +929,8 @@ class IdeaUnit:
             x_dict["stop_want"] = self.stop_want
         if self.pledge:
             x_dict["pledge"] = self.pledge
-        if self._problem_bool:
-            x_dict["_problem_bool"] = self._problem_bool
+        if self.problem_bool:
+            x_dict["problem_bool"] = self.problem_bool
         if self._factunits not in [{}, None]:
             x_dict["_factunits"] = self.get_factunits_dict()
         if self._is_expanded is False:
@@ -998,7 +998,7 @@ def ideaunit_shop(
     _originunit: OriginUnit = None,
     _root: bool = None,
     _bud_real_id: RealID = None,
-    _problem_bool: bool = None,
+    problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
     _fund_ratio: float = None,
@@ -1044,7 +1044,7 @@ def ideaunit_shop(
         numor=numor,
         morph=morph,
         pledge=get_False_if_None(pledge),
-        _problem_bool=get_False_if_None(_problem_bool),
+        problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         _root=get_False_if_None(_root),
         _bud_real_id=_bud_real_id,
@@ -1113,7 +1113,7 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         )
     elif dict_key in {"_kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}
-    elif dict_key in {"pledge", "_problem_bool"}:
+    elif dict_key in {"pledge", "problem_bool"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else False
     elif dict_key in {"_is_expanded"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True

@@ -27,7 +27,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_justified_IsFalse(
     texas_road = sue_voice_bud.make_l1_road(texas_text)
     dallas_text = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     sue_voice_bud.set_idea(ideaunit_shop(dallas_text), texas_road)
     sue_voice_bud.edit_idea_attr(texas_road, healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.edit_idea_attr(dallas_road, healerlink=healerlink_shop({sue_text}))
@@ -55,7 +55,7 @@ def test_HubUnit_get_econ_roads_RaisesErrorWhen__econs_buildable_IsFalse(
     sue_voice_bud.add_acctunit(sue_text)
     texas_text = "Tex/as"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     sue_voice_bud.edit_idea_attr(texas_road, healerlink=healerlink_shop({sue_text}))
     sue_voice_bud.settle_bud()
     assert sue_voice_bud._econs_justified
@@ -80,7 +80,7 @@ def test_HubUnit_get_econ_roads_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     sue_voice_bud.add_acctunit(sue_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     dallas_text = "dallas"
     elpaso_text = "el paso"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
@@ -115,7 +115,7 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     sue_voice_bud.add_acctunit(bob_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     dallas_text = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)
     dallas_idea = ideaunit_shop(dallas_text, _healerlink=healerlink_shop({sue_text}))
@@ -253,7 +253,7 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(
     sue_voice_bud.add_acctunit(sue_text)
     texas_text = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_text)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     dallas_text = "dallas"
     elpaso_text = "el paso"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_text)

@@ -404,7 +404,7 @@ def test_BudUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_text = "Texas"
-    sue_bud.set_l1_idea(ideaunit_shop(texas_text, _problem_bool=True))
+    sue_bud.set_l1_idea(ideaunit_shop(texas_text, problem_bool=True))
     casa_text = "casa"
     sue_bud.set_l1_idea(ideaunit_shop(casa_text))
 

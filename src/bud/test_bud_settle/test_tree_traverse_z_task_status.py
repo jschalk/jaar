@@ -663,7 +663,7 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerlink_share(graphics_bool):
     mon_road = sue_budunit.make_road(week_road, "Monday")
     sue_budunit.edit_idea_attr(mon_road, healerlink=sue_healerlink)
     mon_idea = sue_budunit.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._fund_ratio=}")
+    # print(f"{mon_idea.problem_bool=} {mon_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
     assert sue_budunit._sum_healerlink_share != 0.038461539 * default_fund_pool()
@@ -675,10 +675,10 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerlink_share(graphics_bool):
     tue_road = sue_budunit.make_road(week_road, "Tuesday")
     sue_budunit.edit_idea_attr(tue_road, healerlink=sue_healerlink)
     tue_idea = sue_budunit.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._fund_ratio=}")
+    # print(f"{tue_idea.problem_bool=} {tue_idea._fund_ratio=}")
     # sat_road = sue_budunit.make_road(week_road, "Saturday")
     # sat_idea = sue_budunit.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._fund_ratio=}")
+    # print(f"{sat_idea.problem_bool=} {sat_idea._fund_ratio=}")
     sue_budunit.settle_bud()
 
     # THEN
@@ -693,7 +693,7 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerlink_share(graphics_bool):
     # WHEN
     sue_budunit.edit_idea_attr(week_road, healerlink=sue_healerlink)
     week_idea = sue_budunit.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
+    print(f"{week_idea._label=} {week_idea.problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
     display_ideatree(sue_budunit, "Econ", graphics_bool)
@@ -730,7 +730,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     mon_road = sue_budunit.make_road(week_road, "Monday")
     sue_budunit.edit_idea_attr(mon_road, healerlink=sue_healerlink)
     # mon_idea = sue_budunit.get_idea_obj(mon_road)
-    # print(f"{mon_idea._problem_bool=} {mon_idea._fund_ratio=}")
+    # print(f"{mon_idea.problem_bool=} {mon_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
     assert len(sue_budunit._econ_dict) == 2
@@ -741,10 +741,10 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     tue_road = sue_budunit.make_road(week_road, "Tuesday")
     sue_budunit.edit_idea_attr(tue_road, healerlink=sue_healerlink)
     # tue_idea = sue_budunit.get_idea_obj(tue_road)
-    # print(f"{tue_idea._problem_bool=} {tue_idea._fund_ratio=}")
+    # print(f"{tue_idea.problem_bool=} {tue_idea._fund_ratio=}")
     # sat_road = sue_budunit.make_road(week_road, "Saturday")
     # sat_idea = sue_budunit.get_idea_obj(sat_road)
-    # print(f"{sat_idea._problem_bool=} {sat_idea._fund_ratio=}")
+    # print(f"{sat_idea.problem_bool=} {sat_idea._fund_ratio=}")
     sue_budunit.settle_bud()
 
     # THEN
@@ -756,7 +756,7 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     # WHEN
     sue_budunit.edit_idea_attr(week_road, healerlink=sue_healerlink)
     week_idea = sue_budunit.get_idea_obj(week_road)
-    print(f"{week_idea._label=} {week_idea._problem_bool=} {week_idea._fund_ratio=}")
+    print(f"{week_idea._label=} {week_idea.problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
     display_ideatree(sue_budunit, "Econ", graphics_bool)

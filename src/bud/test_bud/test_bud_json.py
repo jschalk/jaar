@@ -221,7 +221,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     print(f"{idearoot_healerlink=}")
     assert len(idearoot_healerlink) == 1
     assert x_idearoot._healerlink.any_healer_id_exists()
-    assert x_idearoot._problem_bool
+    assert x_idearoot.problem_bool
 
 
 def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
@@ -310,7 +310,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_road = zia_bud.make_l1_road(shave_text)
     shave_idea_y1 = zia_bud.get_idea_obj(shave_road)
     shave_idea_y1._originunit.set_originhold(acct_id="Sue", importance=4.3)
-    shave_idea_y1._problem_bool = True
+    shave_idea_y1.problem_bool = True
     # print(f"{shave_road=}")
     # print(f"{json_shave_idea._label=} {json_shave_idea._parent_road=}")
 
@@ -407,8 +407,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_shave_idea._healerlink == zia_shave_idea._healerlink
     assert len(json_shave_idea._awardlinks) == 2
     assert len(json_shave_idea._factunits) == 1
-    assert zia_shave_idea._problem_bool
-    assert json_shave_idea._problem_bool == zia_shave_idea._problem_bool
+    assert zia_shave_idea.problem_bool
+    assert json_shave_idea.problem_bool == zia_shave_idea.problem_bool
     assert json_shave_idea.gogo_want == zia_shave_idea.gogo_want
     assert json_shave_idea.stop_want == zia_shave_idea.stop_want
 

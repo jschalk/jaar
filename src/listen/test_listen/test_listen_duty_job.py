@@ -249,9 +249,9 @@ def get_example_yao_voice_with_3_healers():
     yao_text = yao_voice.get_acct("Yao").acct_id
     bob_text = yao_voice.get_acct("Bob").acct_id
     zia_text = yao_voice.get_acct("Zia").acct_id
-    iowa_idea = ideaunit_shop(get_iowa_text(), _problem_bool=True)
-    ohio_idea = ideaunit_shop(get_ohio_text(), _problem_bool=True)
-    utah_idea = ideaunit_shop(get_utah_text(), _problem_bool=True)
+    iowa_idea = ideaunit_shop(get_iowa_text(), problem_bool=True)
+    ohio_idea = ideaunit_shop(get_ohio_text(), problem_bool=True)
+    utah_idea = ideaunit_shop(get_utah_text(), problem_bool=True)
     iowa_idea._healerlink.set_healer_id(get_yao_iowa_hubunit().owner_id)
     ohio_idea._healerlink.set_healer_id(get_yao_ohio_hubunit().owner_id)
     utah_idea._healerlink.set_healer_id(get_zia_utah_hubunit().owner_id)
