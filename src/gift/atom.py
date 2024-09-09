@@ -753,7 +753,6 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
             return None
 
     x_exists = bud_attr_exists(x_category, x_bud, x_atom_reqs)
-    print(f"{x_atom.crud_text=} {x_exists=}")
 
     if x_atom.crud_text == atom_delete() and x_exists:
         return x_atom
@@ -765,10 +764,11 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         update_atom = atomunit_shop(x_category, atom_update(), x_atom.required_args)
         for optional_arg in x_optional_args:
             optional_value = x_atom.get_value(optional_arg)
-            if x_bud_obj.__dict__.get(optional_arg) != optional_value:
+            obj_value = x_bud_obj.__dict__[optional_arg]
+            print(f"{optional_arg=} {optional_value=} {obj_value=}")
+            if obj_value != optional_value:
                 update_atom.set_arg(optional_arg, optional_value)
 
         if update_atom.get_optional_args_dict() != {}:
-            print(f"{update_atom=}")
             return update_atom
     return None
