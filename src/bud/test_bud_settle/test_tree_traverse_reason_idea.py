@@ -409,8 +409,8 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
     time_road = sue_bud.make_l1_road(time_text)
     week_text = "week"
     week_road = sue_bud.make_road(time_road, week_text)
-    sue_bud.set_l1_idea(ideaunit_shop(time_text, _begin=100, _close=2000))
-    sue_bud.set_idea(ideaunit_shop(week_text, _denom=7), parent_road=time_road)
+    sue_bud.set_l1_idea(ideaunit_shop(time_text, begin=100, close=2000))
+    sue_bud.set_idea(ideaunit_shop(week_text, denom=7), parent_road=time_road)
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -439,8 +439,8 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh()
     time_road = sue_bud.make_l1_road(time)
     rus_war = "rus_war"
     rus_war_road = sue_bud.make_road(time_road, rus_war)
-    sue_bud.set_idea(ideaunit_shop(time, _begin=100, _close=2000), sue_bud._real_id)
-    sue_bud.set_idea(ideaunit_shop(rus_war, _begin=22, _close=34), time_road)
+    sue_bud.set_idea(ideaunit_shop(time, begin=100, close=2000), sue_bud._real_id)
+    sue_bud.set_idea(ideaunit_shop(rus_war, begin=22, close=34), time_road)
 
     # WHEN
     sue_bud.edit_idea_attr(

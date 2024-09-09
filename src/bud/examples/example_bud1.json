@@ -3570,20 +3570,20 @@
                 "_uid": 2
             },
             "ced_day": {
-                "_begin": 0,
-                "_close": 80000,
+                "begin": 0,
+                "close": 80000,
                 "_label": "ced_day",
                 "mass": 40
             },
             "ced_week": {
-                "_begin": 0,
-                "_close": 110000,
+                "begin": 0,
+                "close": 110000,
                 "_label": "ced_week",
                 "mass": 40
             },
             "ced_year": {
-                "_begin": 0,
-                "_close": 2100,
+                "begin": 0,
+                "close": 2100,
                 "_label": "ced_year",
                 "mass": 40
             },
@@ -3986,14 +3986,14 @@
                 "_uid": 96
             },
             "day_hour": {
-                "_begin": 0,
-                "_close": 23,
+                "begin": 0,
+                "close": 23,
                 "_label": "day_hour",
                 "mass": 40
             },
             "day_minute": {
-                "_begin": 0,
-                "_close": 1439,
+                "begin": 0,
+                "close": 1439,
                 "_factunits": {
                     "music;day_minute": {
                         "base": "music;day_minute",
@@ -4088,44 +4088,44 @@
                 "_uid": 250
             },
             "month_day": {
-                "_begin": 1,
-                "_close": 31,
+                "begin": 1,
+                "close": 31,
                 "_label": "month_day",
                 "mass": 40
             },
             "month_week": {
-                "_begin": 1,
-                "_close": 5,
+                "begin": 1,
+                "close": 5,
                 "_kids": {
                     "1st week": {
-                        "_gogo_want": 1,
+                        "gogo_want": 1,
                         "_label": "1st week",
                         "mass": 40,
-                        "_stop_want": 2
+                        "stop_want": 2
                     },
                     "2nd week": {
-                        "_gogo_want": 2,
+                        "gogo_want": 2,
                         "_label": "2nd week",
                         "mass": 40,
-                        "_stop_want": 3
+                        "stop_want": 3
                     },
                     "3rd week": {
-                        "_gogo_want": 3,
+                        "gogo_want": 3,
                         "_label": "3rd week",
                         "mass": 40,
-                        "_stop_want": 4
+                        "stop_want": 4
                     },
                     "4th week": {
-                        "_gogo_want": 4,
+                        "gogo_want": 4,
                         "_label": "4th week",
                         "mass": 40,
-                        "_stop_want": 5
+                        "stop_want": 5
                     },
                     "5th week": {
-                        "_gogo_want": 5,
+                        "gogo_want": 5,
                         "_label": "5th week",
                         "mass": 40,
-                        "_stop_want": 6
+                        "stop_want": 6
                     }
                 },
                 "_label": "month_week",
@@ -4530,88 +4530,88 @@
                 "mass": 40
             },
             "year_month": {
-                "_begin": 1,
-                "_close": 13,
+                "begin": 1,
+                "close": 13,
                 "_kids": {
                     "April": {
-                        "_gogo_want": 4,
+                        "gogo_want": 4,
                         "_label": "April",
                         "mass": 40,
-                        "_stop_want": 5
+                        "stop_want": 5
                     },
                     "August": {
-                        "_gogo_want": 8,
+                        "gogo_want": 8,
                         "_label": "August",
                         "mass": 40,
-                        "_stop_want": 9
+                        "stop_want": 9
                     },
                     "December": {
-                        "_gogo_want": 12,
+                        "gogo_want": 12,
                         "_label": "December",
                         "mass": 40,
-                        "_stop_want": 13
+                        "stop_want": 13
                     },
                     "February": {
-                        "_gogo_want": 2,
+                        "gogo_want": 2,
                         "_label": "February",
                         "mass": 40,
-                        "_stop_want": 3
+                        "stop_want": 3
                     },
                     "January": {
-                        "_gogo_want": 1,
+                        "gogo_want": 1,
                         "_label": "January",
                         "mass": 40,
-                        "_stop_want": 2
+                        "stop_want": 2
                     },
                     "July": {
-                        "_gogo_want": 7,
+                        "gogo_want": 7,
                         "_label": "July",
                         "mass": 40,
-                        "_stop_want": 8
+                        "stop_want": 8
                     },
                     "June": {
-                        "_gogo_want": 6,
+                        "gogo_want": 6,
                         "_label": "June",
                         "mass": 40,
-                        "_stop_want": 7
+                        "stop_want": 7
                     },
                     "March": {
-                        "_gogo_want": 3,
+                        "gogo_want": 3,
                         "_label": "March",
                         "mass": 40,
-                        "_stop_want": 4
+                        "stop_want": 4
                     },
                     "May": {
-                        "_gogo_want": 5,
+                        "gogo_want": 5,
                         "_label": "May",
                         "mass": 40,
-                        "_stop_want": 6
+                        "stop_want": 6
                     },
                     "November": {
-                        "_gogo_want": 11,
+                        "gogo_want": 11,
                         "_label": "November",
                         "mass": 40,
-                        "_stop_want": 12
+                        "stop_want": 12
                     },
                     "October": {
-                        "_gogo_want": 10,
+                        "gogo_want": 10,
                         "_label": "October",
                         "mass": 40,
-                        "_stop_want": 11
+                        "stop_want": 11
                     },
                     "September": {
-                        "_gogo_want": 9,
+                        "gogo_want": 9,
                         "_label": "September",
                         "mass": 40,
-                        "_stop_want": 10
+                        "stop_want": 10
                     }
                 },
                 "_label": "year_month",
                 "mass": 40
             },
             "year_week": {
-                "_begin": 0,
-                "_close": 52,
+                "begin": 0,
+                "close": 52,
                 "_label": "year_week",
                 "mass": 40
             }

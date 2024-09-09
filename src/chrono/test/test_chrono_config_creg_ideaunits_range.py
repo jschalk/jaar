@@ -76,11 +76,11 @@ def test_BudUnit_set_ideaunits_range_Sets_day_idea_gogo_calc_stop_calc():
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(creg_road)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
-    assert creg_idea._begin == 0
-    assert creg_idea._close == 1472657760
+    assert creg_idea.begin == 0
+    assert creg_idea.close == 1472657760
     assert sue_budunit.idea_exists(day_road)
     day_idea = sue_budunit.get_idea_obj(day_road)
-    assert day_idea._denom == 1440
+    assert day_idea.denom == 1440
     assert not day_idea._gogo_calc
     assert not day_idea._stop_calc
 
@@ -102,7 +102,7 @@ def test_BudUnit_set_ideaunits_range_Sets_days_idea_gogo_calc_stop_calc():
     sue_budunit._init_idea_tree_walk()
     assert sue_budunit.idea_exists(days_road)
     days_idea = sue_budunit.get_idea_obj(days_road)
-    assert days_idea._denom == 1440
+    assert days_idea.denom == 1440
     assert not days_idea._gogo_calc
     assert not days_idea._stop_calc
 
@@ -110,7 +110,7 @@ def test_BudUnit_set_ideaunits_range_Sets_days_idea_gogo_calc_stop_calc():
     sue_budunit._set_ideaunits_range()
 
     # THEN
-    assert days_idea._denom == 1440
+    assert days_idea.denom == 1440
     assert days_idea._gogo_calc == 0
     assert days_idea._stop_calc == 1022679
 
@@ -140,12 +140,12 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     assert sue_budunit.idea_exists(fri_road)
     assert sue_budunit.idea_exists(sat_road)
     weeks_idea = sue_budunit.get_idea_obj(weeks_road)
-    assert weeks_idea._denom == 10080
+    assert weeks_idea.denom == 10080
     assert not weeks_idea._gogo_calc
     assert not weeks_idea._stop_calc
     assert sue_budunit.idea_exists(week_road)
     week_idea = sue_budunit.get_idea_obj(week_road)
-    assert week_idea._denom == 10080
+    assert week_idea.denom == 10080
     assert not week_idea._gogo_calc
     assert not week_idea._stop_calc
 
@@ -153,7 +153,7 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     sue_budunit._set_ideaunits_range()
 
     # THEN
-    assert weeks_idea._denom == 10080
+    assert weeks_idea.denom == 10080
     assert weeks_idea._gogo_calc == 0
     assert weeks_idea._stop_calc == 146097
     assert week_idea._gogo_calc == 0
@@ -190,7 +190,7 @@ def test_BudUnit_set_ideaunits_range_Sets_c400_idea_gogo_calc_stop_calc():
     print(f"    {c400_leap_road=}")
     assert sue_budunit.idea_exists(c400_leap_road)
     c400_leap_idea = sue_budunit.get_idea_obj(c400_leap_road)
-    # assert year_idea._morph
+    # assert year_idea.morph
     assert not c400_leap_idea._gogo_calc
     assert not c400_leap_idea._stop_calc
 
@@ -198,7 +198,7 @@ def test_BudUnit_set_ideaunits_range_Sets_c400_idea_gogo_calc_stop_calc():
     sue_budunit._set_ideaunits_range()
 
     # THEN
-    # assert year_idea._denom == 525600
+    # assert year_idea.denom == 525600
     # assert year_idea._gogo_calc == 0
     # assert year_idea._stop_calc == 525600
     difference_between_mar1_jan1 = 86400
@@ -223,7 +223,7 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     print(f"    {year_road=}")
     assert sue_budunit.idea_exists(year_road)
     year_idea = sue_budunit.get_idea_obj(year_road)
-    # assert year_idea._morph
+    # assert year_idea.morph
     assert not year_idea._gogo_calc
     assert not year_idea._stop_calc
 
@@ -246,7 +246,7 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     assert sue_budunit.get_idea_obj(yr4_clean_road)._stop_calc == 2102400
     assert sue_budunit.get_idea_obj(year_road)._stop_calc == 525600
 
-    assert year_idea._denom == 525600
+    assert year_idea.denom == 525600
     assert year_idea._gogo_calc == 0
     assert year_idea._stop_calc == 525600
 

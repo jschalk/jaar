@@ -391,9 +391,9 @@ def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadU
     # WHEN
     time_text = "timeline"
     time_road = yao_bud.make_l1_road(time_text)
-    yao_bud.set_l1_idea(ideaunit_shop(time_text, _begin=0, _close=700))
+    yao_bud.set_l1_idea(ideaunit_shop(time_text, begin=0, close=700))
     weeks_text = "weeks"
-    yao_bud.set_idea(ideaunit_shop(weeks_text, _denom=7), time_road)
+    yao_bud.set_idea(ideaunit_shop(weeks_text, denom=7), time_road)
 
     # THEN
     assert len(yao_bud.get_idea_tree_ordered_road_list()) == 3
@@ -640,7 +640,7 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     week_text = "week"
     week_road = yao_bud.make_l1_road(week_text)
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, addin=week_addin)
+    week_idea = ideaunit_shop(week_text, begin=10, close=15, addin=week_addin)
     yao_bud.set_l1_idea(week_idea)
     tue_text = "Tue"
     tue_road = yao_bud.make_road(week_road, tue_text)
@@ -690,7 +690,7 @@ def test_BudUnit_settle_bud_SetsIdeaUnit_factheir_With_range_factheirs():
     week_text = "week"
     week_road = yao_bud.make_l1_road(week_text)
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, addin=week_addin)
+    week_idea = ideaunit_shop(week_text, begin=10, close=15, addin=week_addin)
     yao_bud.set_l1_idea(week_idea)
     tue_text = "Tue"
     tue_road = yao_bud.make_road(week_road, tue_text)

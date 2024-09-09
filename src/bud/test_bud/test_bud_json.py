@@ -94,8 +94,8 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_teamunit():
     root_idea = sue_bud.get_idea_obj(sue_bud._real_id)
     x_gogo_want = 5
     x_stop_want = 11
-    root_idea._gogo_want = x_gogo_want
-    root_idea._stop_want = x_stop_want
+    root_idea.gogo_want = x_gogo_want
+    root_idea.stop_want = x_stop_want
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -104,8 +104,8 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_teamunit():
     # THEN
     assert idearoot_dict["_teamunit"] == x_teamunit.get_dict()
     assert idearoot_dict["_teamunit"] == {"_teamlinks": [run_text]}
-    assert idearoot_dict.get("_gogo_want") == x_gogo_want
-    assert idearoot_dict.get("_stop_want") == x_stop_want
+    assert idearoot_dict.get("gogo_want") == x_gogo_want
+    assert idearoot_dict.get("stop_want") == x_stop_want
 
 
 def test_BudUnit_get_dict_ReturnsDictWith_idearoot_healerlink():
@@ -338,8 +338,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_idea = zia_bud.get_idea_obj(shave_road)
     zia_gogo_want = 75
     zia_stop_want = 77
-    shave_idea._gogo_want = zia_gogo_want
-    shave_idea._stop_want = zia_stop_want
+    shave_idea.gogo_want = zia_gogo_want
+    shave_idea.stop_want = zia_stop_want
 
     yao_text = "Yao"
     zia_bud._originunit.set_originhold(yao_text, 1)
@@ -409,8 +409,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert len(json_shave_idea._factunits) == 1
     assert zia_shave_idea._problem_bool
     assert json_shave_idea._problem_bool == zia_shave_idea._problem_bool
-    assert json_shave_idea._gogo_want == zia_shave_idea._gogo_want
-    assert json_shave_idea._stop_want == zia_shave_idea._stop_want
+    assert json_shave_idea.gogo_want == zia_shave_idea.gogo_want
+    assert json_shave_idea.stop_want == zia_shave_idea.stop_want
 
     assert len(json_bud._originunit._originholds) == 1
     assert json_bud._originunit == zia_bud._originunit
@@ -424,8 +424,8 @@ def test_budunit_get_from_json_ReturnsCorrectIdeaRoot():
     root_idea = zia_bud._idearoot
     zia_gogo_want = 75
     zia_stop_want = 77
-    root_idea._gogo_want = zia_gogo_want
-    root_idea._stop_want = zia_stop_want
+    root_idea.gogo_want = zia_gogo_want
+    root_idea.stop_want = zia_stop_want
 
     # WHEN
     x_json = zia_bud.get_json()
@@ -434,8 +434,8 @@ def test_budunit_get_from_json_ReturnsCorrectIdeaRoot():
 
     # THEN
     json_idearoot = json_bud.get_idea_obj(zia_bud._real_id)
-    assert json_idearoot._gogo_want == zia_gogo_want
-    assert json_idearoot._stop_want == zia_stop_want
+    assert json_idearoot.gogo_want == zia_gogo_want
+    assert json_idearoot.stop_want == zia_stop_want
 
 
 def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_Example():

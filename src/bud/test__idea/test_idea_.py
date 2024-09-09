@@ -29,14 +29,14 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._awardheirs is None  # calculated field'
     assert x_ideaunit._originunit is None
     assert x_ideaunit._road_delimiter is None
-    assert x_ideaunit._begin is None
-    assert x_ideaunit._close is None
+    assert x_ideaunit.begin is None
+    assert x_ideaunit.close is None
     assert x_ideaunit.addin is None
-    assert x_ideaunit._numor is None
-    assert x_ideaunit._denom is None
-    assert x_ideaunit._morph is None
-    assert x_ideaunit._gogo_want is None
-    assert x_ideaunit._stop_want is None
+    assert x_ideaunit.numor is None
+    assert x_ideaunit.denom is None
+    assert x_ideaunit.morph is None
+    assert x_ideaunit.gogo_want is None
+    assert x_ideaunit.stop_want is None
     assert x_ideaunit.pledge is None
     assert x_ideaunit._problem_bool is None
     assert x_ideaunit._healerlink is None
@@ -70,12 +70,12 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._label is None
     assert x_ideaunit._bud_real_id == root_label()
     assert x_ideaunit._uid is None
-    assert x_ideaunit._begin is None
-    assert x_ideaunit._close is None
+    assert x_ideaunit.begin is None
+    assert x_ideaunit.close is None
     assert x_ideaunit.addin is None
-    assert x_ideaunit._numor is None
-    assert x_ideaunit._denom is None
-    assert x_ideaunit._morph is None
+    assert x_ideaunit.numor is None
+    assert x_ideaunit.denom is None
+    assert x_ideaunit.morph is None
     assert x_ideaunit.pledge is False
     assert x_ideaunit._problem_bool is False
     assert x_ideaunit._descendant_pledge_count is None
@@ -172,12 +172,12 @@ def test_ideaunit_shop_ReturnsObjWithParameters():
     # WHEN
     sport_text = "sport"
     sport_idea = ideaunit_shop(
-        sport_text, _gogo_want=sport_gogo_want, _stop_want=sport_stop_want
+        sport_text, gogo_want=sport_gogo_want, stop_want=sport_stop_want
     )
 
     # THEN
-    assert sport_idea._gogo_want == sport_gogo_want
-    assert sport_idea._stop_want == sport_stop_want
+    assert sport_idea.gogo_want == sport_gogo_want
+    assert sport_idea.stop_want == sport_stop_want
 
 
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():
@@ -268,15 +268,15 @@ def test_IdeaUnit_is_math_ReturnsObj():
     swim_idea = ideaunit_shop(swim_text)
     assert not swim_idea.is_math()
     # WHEN
-    swim_idea._begin = 9
+    swim_idea.begin = 9
     # THEN
     assert not swim_idea.is_math()
     # WHEN
-    swim_idea._close = 10
+    swim_idea.close = 10
     # THEN
     assert swim_idea.is_math()
     # WHEN
-    swim_idea._begin = None
+    swim_idea.begin = None
     # THEN
     assert not swim_idea.is_math()
 
@@ -305,12 +305,12 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_denom():
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom)
+    time_idea = ideaunit_shop(time_text, denom=time_denom)
     init_gogo_calc = 21
     init_stop_calc = 42
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert not time_idea._range_evaluated
     assert time_idea._gogo_calc
     assert time_idea._stop_calc
@@ -330,12 +330,12 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_FullRan
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 22
     init_stop_calc = 45
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc
     assert time_idea._stop_calc
 
@@ -353,12 +353,12 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_Partial
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 24
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc
     assert time_idea._stop_calc
 
@@ -376,12 +376,12 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_Partial
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 22
     init_stop_calc = 25
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc
     assert time_idea._stop_calc
 
@@ -399,16 +399,16 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
     stop_want = 40
-    time_idea._gogo_want = gogo_want
-    time_idea._stop_want = stop_want
+    time_idea.gogo_want = gogo_want
+    time_idea.stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 
@@ -426,16 +426,16 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
     stop_want = 50
-    time_idea._gogo_want = gogo_want
-    time_idea._stop_want = stop_want
+    time_idea.gogo_want = gogo_want
+    time_idea.stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 
@@ -453,16 +453,16 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
     stop_want = 40
-    time_idea._gogo_want = gogo_want
-    time_idea._stop_want = stop_want
+    time_idea.gogo_want = gogo_want
+    time_idea.stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 
@@ -480,16 +480,16 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
     stop_want = 50
-    time_idea._gogo_want = gogo_want
-    time_idea._stop_want = stop_want
+    time_idea.gogo_want = gogo_want
+    time_idea.stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 
@@ -507,16 +507,16 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
     stop_want = 15
-    time_idea._gogo_want = gogo_want
-    time_idea._stop_want = stop_want
+    time_idea.gogo_want = gogo_want
+    time_idea.stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 
@@ -532,16 +532,16 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 60
     stop_want = 65
-    time_idea._gogo_want = gogo_want
-    time_idea._stop_want = stop_want
+    time_idea.gogo_want = gogo_want
+    time_idea.stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 
@@ -557,16 +557,16 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
     # ESTABLISH
     time_text = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, _denom=time_denom, _morph=True)
+    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
     init_gogo_calc = None
     init_stop_calc = None
     gogo_want = 21
     stop_want = 45
-    time_idea._gogo_want = gogo_want
-    time_idea._stop_want = stop_want
+    time_idea.gogo_want = gogo_want
+    time_idea.stop_want = stop_want
     time_idea._gogo_calc = init_gogo_calc
     time_idea._stop_calc = init_stop_calc
-    time_idea._denom = time_denom
+    time_idea.denom = time_denom
     assert time_idea._gogo_calc == init_gogo_calc
     assert time_idea._stop_calc == init_stop_calc
 

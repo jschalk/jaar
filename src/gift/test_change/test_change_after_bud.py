@@ -384,8 +384,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_ideaunit():
     assert after_sue_budunit.idea_exists(ball_road)
     assert after_sue_budunit.idea_exists(disc_road)
     disc_idea = after_sue_budunit.get_idea_obj(disc_road)
-    assert disc_idea._gogo_want == x_gogo_want
-    assert disc_idea._stop_want == x_stop_want
+    assert disc_idea.gogo_want == x_gogo_want
+    assert disc_idea.stop_want == x_stop_want
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_SimpleAttributes():
@@ -421,20 +421,20 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_ideaunit_Sim
     print(f"{insert_disc_atomunit=}")
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(insert_disc_atomunit)
-    assert before_sue_budunit.get_idea_obj(ball_road)._begin is None
-    assert before_sue_budunit.get_idea_obj(ball_road)._close is None
+    assert before_sue_budunit.get_idea_obj(ball_road).begin is None
+    assert before_sue_budunit.get_idea_obj(ball_road).close is None
     assert before_sue_budunit.get_idea_obj(ball_road).pledge is False
-    assert before_sue_budunit.get_idea_obj(ball_road)._gogo_want is None
-    assert before_sue_budunit.get_idea_obj(ball_road)._stop_want is None
+    assert before_sue_budunit.get_idea_obj(ball_road).gogo_want is None
+    assert before_sue_budunit.get_idea_obj(ball_road).stop_want is None
 
     # WHEN
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    assert after_sue_budunit.get_idea_obj(ball_road)._begin == x_begin
-    assert after_sue_budunit.get_idea_obj(ball_road)._close == x_close
-    assert after_sue_budunit.get_idea_obj(ball_road)._gogo_want == x_gogo_want
-    assert after_sue_budunit.get_idea_obj(ball_road)._stop_want == x_stop_want
+    assert after_sue_budunit.get_idea_obj(ball_road).begin == x_begin
+    assert after_sue_budunit.get_idea_obj(ball_road).close == x_close
+    assert after_sue_budunit.get_idea_obj(ball_road).gogo_want == x_gogo_want
+    assert after_sue_budunit.get_idea_obj(ball_road).stop_want == x_stop_want
     assert after_sue_budunit.get_idea_obj(ball_road).pledge
 
 

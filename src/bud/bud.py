@@ -739,9 +739,9 @@ class BudUnit:
     def _set_ideaattrfilter_premise_ranges(self, x_ideaattrfilter: IdeaAttrFilter):
         premise_idea = self.get_idea_obj(x_ideaattrfilter.get_premise_need())
         x_ideaattrfilter.set_premise_range_attributes_influenced_by_premise_idea(
-            premise_open=premise_idea._begin,
-            premise_nigh=premise_idea._close,
-            premise_denom=premise_idea._denom,
+            premise_open=premise_idea.begin,
+            premise_nigh=premise_idea.close,
+            premise_denom=premise_idea.denom,
         )
 
     def edit_reason(
@@ -1035,8 +1035,8 @@ class BudUnit:
             if r_idea._range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_idea.get_road())
             if r_idea.is_math():
-                r_idea._gogo_calc = r_idea._begin
-                r_idea._stop_calc = r_idea._close
+                r_idea._gogo_calc = r_idea.begin
+                r_idea._stop_calc = r_idea.close
             else:
                 parent_road = get_parent_road(r_idea.get_road())
                 parent_idea = self.get_idea_obj(parent_road)
@@ -1352,11 +1352,11 @@ class BudUnit:
                 if len(anc_list) == 1:
                     list_x.append(road)
                 elif len(anc_list) == 2:
-                    if self._idearoot._begin is None and self._idearoot._close is None:
+                    if self._idearoot.begin is None and self._idearoot.close is None:
                         list_x.append(road)
                 else:
                     parent_idea = self.get_idea_obj(road=anc_list[1])
-                    if parent_idea._begin is None and parent_idea._close is None:
+                    if parent_idea.begin is None and parent_idea.close is None:
                         list_x.append(road)
 
         return list_x
@@ -1509,13 +1509,13 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
         mass=get_obj_from_idea_dict(idearoot_dict, "mass"),
-        _begin=get_obj_from_idea_dict(idearoot_dict, "_begin"),
-        _close=get_obj_from_idea_dict(idearoot_dict, "_close"),
-        _numor=get_obj_from_idea_dict(idearoot_dict, "_numor"),
-        _denom=get_obj_from_idea_dict(idearoot_dict, "_denom"),
-        _morph=get_obj_from_idea_dict(idearoot_dict, "_morph"),
-        _gogo_want=get_obj_from_idea_dict(idearoot_dict, "_gogo_want"),
-        _stop_want=get_obj_from_idea_dict(idearoot_dict, "_stop_want"),
+        begin=get_obj_from_idea_dict(idearoot_dict, "begin"),
+        close=get_obj_from_idea_dict(idearoot_dict, "close"),
+        numor=get_obj_from_idea_dict(idearoot_dict, "numor"),
+        denom=get_obj_from_idea_dict(idearoot_dict, "denom"),
+        morph=get_obj_from_idea_dict(idearoot_dict, "morph"),
+        gogo_want=get_obj_from_idea_dict(idearoot_dict, "gogo_want"),
+        stop_want=get_obj_from_idea_dict(idearoot_dict, "stop_want"),
         _problem_bool=get_obj_from_idea_dict(idearoot_dict, "_problem_bool"),
         _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
         _teamunit=get_obj_from_idea_dict(idearoot_dict, "_teamunit"),
@@ -1550,13 +1550,13 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             _label=get_obj_from_idea_dict(idea_dict, "_label"),
             mass=get_obj_from_idea_dict(idea_dict, "mass"),
             _uid=get_obj_from_idea_dict(idea_dict, "_uid"),
-            _begin=get_obj_from_idea_dict(idea_dict, "_begin"),
-            _close=get_obj_from_idea_dict(idea_dict, "_close"),
-            _numor=get_obj_from_idea_dict(idea_dict, "_numor"),
-            _denom=get_obj_from_idea_dict(idea_dict, "_denom"),
-            _morph=get_obj_from_idea_dict(idea_dict, "_morph"),
-            _gogo_want=get_obj_from_idea_dict(idea_dict, "_gogo_want"),
-            _stop_want=get_obj_from_idea_dict(idea_dict, "_stop_want"),
+            begin=get_obj_from_idea_dict(idea_dict, "begin"),
+            close=get_obj_from_idea_dict(idea_dict, "close"),
+            numor=get_obj_from_idea_dict(idea_dict, "numor"),
+            denom=get_obj_from_idea_dict(idea_dict, "denom"),
+            morph=get_obj_from_idea_dict(idea_dict, "morph"),
+            gogo_want=get_obj_from_idea_dict(idea_dict, "gogo_want"),
+            stop_want=get_obj_from_idea_dict(idea_dict, "stop_want"),
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
             _problem_bool=get_obj_from_idea_dict(idea_dict, "_problem_bool"),
             _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),

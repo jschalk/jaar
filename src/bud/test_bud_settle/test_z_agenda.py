@@ -262,7 +262,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     day_road = zia_bud.make_road(time_road, day_text)
 
     zia_bud.set_l1_idea(ideaunit_shop(run_text, pledge=True))
-    zia_bud.set_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
+    zia_bud.set_idea(ideaunit_shop(day_text, begin=0, close=500), time_road)
     zia_bud.edit_idea_attr(
         road=run_road,
         reason_base=day_road,
@@ -303,7 +303,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     day_road = zia_bud.make_road(time_road, day_text)
 
     zia_bud.set_l1_idea(ideaunit_shop(run_text, pledge=True))
-    zia_bud.set_idea(ideaunit_shop(day_text, _begin=0, _close=500), time_road)
+    zia_bud.set_idea(ideaunit_shop(day_text, begin=0, close=500), time_road)
     zia_bud.edit_idea_attr(
         road=run_road,
         reason_base=day_road,

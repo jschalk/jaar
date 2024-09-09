@@ -222,14 +222,14 @@ class IdeaUnit:
     _factunits: dict[RoadUnit, FactUnit] = None
     _factheirs: dict[RoadUnit, FactHeir] = None  # Calculated field
     _healerlink: HealerLink = None
-    _begin: float = None
-    _close: float = None
+    begin: float = None
+    close: float = None
     addin: float = None
-    _denom: int = None
-    _numor: int = None
-    _morph: bool = None
-    _gogo_want: bool = None
-    _stop_want: bool = None
+    denom: int = None
+    numor: int = None
+    morph: bool = None
+    gogo_want: bool = None
+    stop_want: bool = None
     pledge: bool = None
     _originunit: OriginUnit = None
     _problem_bool: bool = None
@@ -281,8 +281,8 @@ class IdeaUnit:
             x_fact.base == self.get_road()
             and self._gogo_calc is not None
             and self._stop_calc is not None
-            and self._begin is None
-            and self._close is None
+            and self.begin is None
+            and self.close is None
         ):
             raise ranged_fact_idea_Exception(
                 f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact idea must have _begin, _close attributes"
@@ -357,8 +357,8 @@ class IdeaUnit:
         self, x_gogo: float = None, x_stop: float = None
     ) -> dict[RoadNode,]:
         if x_gogo is None and x_stop is None:
-            x_gogo = self._gogo_want
-            x_gogo = self._stop_want
+            x_gogo = self.gogo_want
+            x_gogo = self.stop_want
         elif x_gogo is not None and x_stop is None:
             x_stop = x_gogo
 
@@ -586,21 +586,21 @@ class IdeaUnit:
         if idea_attr.healerlink is not None:
             self._healerlink = idea_attr.healerlink
         if idea_attr.begin is not None:
-            self._begin = idea_attr.begin
+            self.begin = idea_attr.begin
         if idea_attr.close is not None:
-            self._close = idea_attr.close
+            self.close = idea_attr.close
         if idea_attr.gogo_want is not None:
-            self._gogo_want = idea_attr.gogo_want
+            self.gogo_want = idea_attr.gogo_want
         if idea_attr.stop_want is not None:
-            self._stop_want = idea_attr.stop_want
+            self.stop_want = idea_attr.stop_want
         if idea_attr.addin is not None:
             self.addin = idea_attr.addin
         if idea_attr.numor is not None:
-            self._numor = idea_attr.numor
+            self.numor = idea_attr.numor
         if idea_attr.denom is not None:
-            self._denom = idea_attr.denom
+            self.denom = idea_attr.denom
         if idea_attr.morph is not None:
-            self._morph = idea_attr.morph
+            self.morph = idea_attr.morph
         if idea_attr.descendant_pledge_count is not None:
             self._descendant_pledge_count = idea_attr.descendant_pledge_count
         if idea_attr.all_acct_cred is not None:
@@ -628,9 +628,9 @@ class IdeaUnit:
 
     def _set_addin_to_zero_if_any_transformations_exist(self):
         if (
-            self._begin is not None
-            and self._close is not None
-            and (self._numor is not None or self._denom is not None)
+            self.begin is not None
+            and self.close is not None
+            and (self.numor is not None or self.denom is not None)
             and self.addin is None
         ):
             self.addin = 0
@@ -641,25 +641,25 @@ class IdeaUnit:
         self._stop_calc = None
 
     def _transform_gogo_calc_stop_calc(self):
-        r_idea_numor = get_1_if_None(self._numor)
-        r_idea_denom = get_1_if_None(self._denom)
+        r_idea_numor = get_1_if_None(self.numor)
+        r_idea_denom = get_1_if_None(self.denom)
         r_idea_addin = get_0_if_None(self.addin)
 
         if self._gogo_calc is None or self._stop_calc is None:
             pass
-        elif self._gogo_want != None and self._stop_want != None:
-            stop_want_less_than_gogo_calc = self._stop_want < self._gogo_calc
-            gogo_want_greater_than_stop_calc = self._gogo_want > self._stop_calc
+        elif self.gogo_want != None and self.stop_want != None:
+            stop_want_less_than_gogo_calc = self.stop_want < self._gogo_calc
+            gogo_want_greater_than_stop_calc = self.gogo_want > self._stop_calc
             if stop_want_less_than_gogo_calc or gogo_want_greater_than_stop_calc:
                 self._gogo_calc = None
                 self._stop_calc = None
             else:
-                self._gogo_calc = max(self._gogo_calc, self._gogo_want)
-                self._stop_calc = min(self._stop_calc, self._stop_want)
-        elif get_False_if_None(self._morph):
+                self._gogo_calc = max(self._gogo_calc, self.gogo_want)
+                self._stop_calc = min(self._stop_calc, self.stop_want)
+        elif get_False_if_None(self.morph):
             x_gogo = self._gogo_calc
             x_stop = self._stop_calc
-            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, self._denom)
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, self.denom)
             self._gogo_calc = x_rangeunit.gogo
             self._stop_calc = x_rangeunit.stop
         else:
@@ -887,7 +887,7 @@ class IdeaUnit:
         return self._kids == {}
 
     def is_math(self) -> bool:
-        return self._begin is not None and self._close is not None
+        return self.begin is not None and self.close is not None
 
     def awardheir_exists(self) -> bool:
         return self._awardheirs != {}
@@ -911,22 +911,22 @@ class IdeaUnit:
             x_dict["_awardlinks"] = self.get_awardlinks_dict()
         if self._originunit not in [None, originunit_shop()]:
             x_dict["_originunit"] = self.get_originunit_dict()
-        if self._begin is not None:
-            x_dict["_begin"] = self._begin
-        if self._close is not None:
-            x_dict["_close"] = self._close
+        if self.begin is not None:
+            x_dict["begin"] = self.begin
+        if self.close is not None:
+            x_dict["close"] = self.close
         if self.addin is not None:
             x_dict["addin"] = self.addin
-        if self._numor is not None:
-            x_dict["_numor"] = self._numor
-        if self._denom is not None:
-            x_dict["_denom"] = self._denom
-        if self._morph is not None:
-            x_dict["_morph"] = self._morph
-        if self._gogo_want is not None:
-            x_dict["_gogo_want"] = self._gogo_want
-        if self._stop_want is not None:
-            x_dict["_stop_want"] = self._stop_want
+        if self.numor is not None:
+            x_dict["numor"] = self.numor
+        if self.denom is not None:
+            x_dict["denom"] = self.denom
+        if self.morph is not None:
+            x_dict["morph"] = self.morph
+        if self.gogo_want is not None:
+            x_dict["gogo_want"] = self.gogo_want
+        if self.stop_want is not None:
+            x_dict["stop_want"] = self.stop_want
         if self.pledge:
             x_dict["pledge"] = self.pledge
         if self._problem_bool:
@@ -986,14 +986,14 @@ def ideaunit_shop(
     _factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
     _healerlink: HealerLink = None,
-    _begin: float = None,
-    _close: float = None,
-    _gogo_want: float = None,
-    _stop_want: float = None,
+    begin: float = None,
+    close: float = None,
+    gogo_want: float = None,
+    stop_want: float = None,
     addin: float = None,
-    _denom: int = None,
-    _numor: int = None,
-    _morph: bool = None,
+    denom: int = None,
+    numor: int = None,
+    morph: bool = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
@@ -1035,14 +1035,14 @@ def ideaunit_shop(
         _factunits=get_empty_dict_if_none(_factunits),
         _factheirs=get_empty_dict_if_none(_factheirs),
         _healerlink=_healerlink,
-        _begin=_begin,
-        _close=_close,
-        _gogo_want=_gogo_want,
-        _stop_want=_stop_want,
+        begin=begin,
+        close=close,
+        gogo_want=gogo_want,
+        stop_want=stop_want,
         addin=addin,
-        _denom=_denom,
-        _numor=_numor,
-        _morph=_morph,
+        denom=denom,
+        numor=numor,
+        morph=morph,
         pledge=get_False_if_None(pledge),
         _problem_bool=get_False_if_None(_problem_bool),
         _originunit=_originunit,
@@ -1135,11 +1135,11 @@ def ideas_calculated_range(
         if x_idea.addin:
             x_gogo += get_0_if_None(x_idea.addin)
             x_stop += get_0_if_None(x_idea.addin)
-        if (x_idea._numor or x_idea._denom) and not x_idea._morph:
-            x_gogo *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
-            x_stop *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
-        if x_idea._denom and x_idea._morph:
-            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, x_idea._denom)
+        if (x_idea.numor or x_idea.denom) and not x_idea.morph:
+            x_gogo *= get_1_if_None(x_idea.numor) / get_1_if_None(x_idea.denom)
+            x_stop *= get_1_if_None(x_idea.numor) / get_1_if_None(x_idea.denom)
+        if x_idea.denom and x_idea.morph:
+            x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, x_idea.denom)
             x_gogo = x_rangeunit.gogo
             x_stop = x_rangeunit.stop
     return RangeUnit(x_gogo, x_stop)

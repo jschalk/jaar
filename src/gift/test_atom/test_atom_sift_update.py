@@ -108,21 +108,30 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     sue_bud.add_idea(casa_road)
 
     sue_addin = 23
-    # sue_begin = 37
-    # sue_close = 43
-    # sue_denom = 47
-    # sue_gogo_want = 59
+    sue_begin = 37
+    sue_close = 43
+    sue_denom = 47
+    sue_gogo_want = 59
     sue_mass = 67
-    # sue_morph = 79
-    # sue_numor = 83
-    # sue_pledge = 97
-    # # sue_problem_bool = 44
-    # sue_stop_want = 107
+    sue_morph = 79
+    sue_numor = 83
+    sue_pledge = 97
+    sue_problem_bool = True
+    sue_stop_want = 107
     old_casa_atom = atomunit_shop(bud_ideaunit_text(), atom_insert())
     old_casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
     old_casa_atom.set_arg(label_str(), casa_text)
-    old_casa_atom.set_arg(mass_str(), sue_mass)
     old_casa_atom.set_arg(addin_str(), sue_addin)
+    old_casa_atom.set_arg(begin_str(), sue_begin)
+    old_casa_atom.set_arg(close_str(), sue_close)
+    old_casa_atom.set_arg(denom_str(), sue_denom)
+    old_casa_atom.set_arg(gogo_want_str(), sue_gogo_want)
+    old_casa_atom.set_arg(mass_str(), sue_mass)
+    old_casa_atom.set_arg(morph_str(), sue_morph)
+    old_casa_atom.set_arg(numor_str(), sue_numor)
+    old_casa_atom.set_arg(pledge_str(), sue_pledge)
+    # old_casa_atom.set_arg("problem_bool", sue_pledge)
+    old_casa_atom.set_arg(stop_want_str(), sue_stop_want)
     # THEN
     new_casa_atom = sift_atomunit(sue_bud, old_casa_atom)
 
@@ -132,16 +141,16 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     assert new_casa_atom.get_optional_args_dict()
     zia_optional_args = new_casa_atom.get_optional_args_dict()
     assert zia_optional_args.get(addin_str()) == sue_addin
-    # assert zia_optional_args.get(begin_str()) == sue_begin
-    # assert zia_optional_args.get(close_str()) == sue_close
-    # assert zia_optional_args.get(denom_str()) == sue_denom
-    # assert zia_optional_args.get(gogo_want_str()) == sue_gogo_want
+    assert zia_optional_args.get(begin_str()) == sue_begin
+    assert zia_optional_args.get(close_str()) == sue_close
+    assert zia_optional_args.get(denom_str()) == sue_denom
+    assert zia_optional_args.get(gogo_want_str()) == sue_gogo_want
     assert zia_optional_args.get(mass_str()) == sue_mass
-    # assert zia_optional_args.get(morph_str()) == sue_morph
-    # assert zia_optional_args.get(numor_str()) == sue_numor
-    # assert zia_optional_args.get(pledge_str()) == sue_pledge
-    # # assert zia_optional_args.get(problem_bool_str()) == sue_problem_bool
-    # assert zia_optional_args.get(stop_want_str()) == sue_stop_want
+    assert zia_optional_args.get(morph_str()) == sue_morph
+    assert zia_optional_args.get(numor_str()) == sue_numor
+    assert zia_optional_args.get(pledge_str()) == sue_pledge
+    # assert zia_optional_args.get("problem_bool") == sue_problem_bool
+    assert zia_optional_args.get(stop_want_str()) == sue_stop_want
 
 
 # def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_awardlink():

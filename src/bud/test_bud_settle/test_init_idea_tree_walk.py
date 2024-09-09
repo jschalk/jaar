@@ -9,8 +9,8 @@ def test_BudUnit_init_idea_tree_walk_Scenario0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    assert not root_idea._begin
-    assert not root_idea._close
+    assert not root_idea.begin
+    assert not root_idea.close
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert yao_bud._idea_dict == {}
@@ -20,8 +20,8 @@ def test_BudUnit_init_idea_tree_walk_Scenario0():
     yao_bud._init_idea_tree_walk()
 
     # THEN
-    assert not root_idea._begin
-    assert not root_idea._close
+    assert not root_idea.begin
+    assert not root_idea.close
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert yao_bud._idea_dict == {root_idea.get_road(): root_idea}
@@ -35,8 +35,8 @@ def test_BudUnit_init_idea_tree_walk_Scenario1():
     time0_close = 31
     yao_bud.edit_idea_attr(yao_bud._real_id, begin=time0_begin, close=time0_close)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -44,8 +44,8 @@ def test_BudUnit_init_idea_tree_walk_Scenario1():
     yao_bud._init_idea_tree_walk()
 
     # THEN
-    assert root_idea._begin == time0_begin
-    assert root_idea._close == time0_close
+    assert root_idea.begin == time0_begin
+    assert root_idea.close == time0_close
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
 
@@ -74,8 +74,8 @@ def test_BudUnit_init_idea_tree_walk_Clears_gogo_calc_stop_calc():
     sue_bud._init_idea_tree_walk()
 
     # THEN
-    assert not root_idea._begin
-    assert not root_idea._close
+    assert not root_idea.begin
+    assert not root_idea.close
     assert not texas_idea._range_evaluated
     assert not texas_idea._gogo_calc
     assert not texas_idea._stop_calc

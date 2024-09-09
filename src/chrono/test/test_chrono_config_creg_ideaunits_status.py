@@ -221,7 +221,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
     weeks_road = sue_budunit.make_road(creg_road, weeks_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
-    print(f"{creg_idea._begin=} {creg_idea._close=}")
+    print(f"{creg_idea.begin=} {creg_idea.close=}")
     # weeks_idea = sue_budunit.get_idea_obj(weeks_road)
     sue_budunit._set_ideaunits_range()
     casa_text = "casa"
@@ -377,11 +377,11 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
 
 
 def wed_gogo_want():
-    return creg_weekday_ideaunits().get(get_wed())._gogo_want
+    return creg_weekday_ideaunits().get(get_wed()).gogo_want
 
 
 def thu_gogo_want():
-    return creg_weekday_ideaunits().get(get_thu())._gogo_want
+    return creg_weekday_ideaunits().get(get_thu()).gogo_want
 
 
 def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_2000():

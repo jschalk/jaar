@@ -383,11 +383,11 @@ class ChangeUnit:
             x_atomunit.set_required_arg(parent_road_str(), insert_ideaunit._parent_road)
             x_atomunit.set_required_arg(label_str(), insert_ideaunit._label)
             x_atomunit.set_optional_arg(addin_str(), insert_ideaunit.addin)
-            x_atomunit.set_optional_arg(begin_str(), insert_ideaunit._begin)
-            x_atomunit.set_optional_arg(close_str(), insert_ideaunit._close)
-            x_atomunit.set_optional_arg(denom_str(), insert_ideaunit._denom)
-            x_atomunit.set_optional_arg(numor_str(), insert_ideaunit._numor)
-            x_atomunit.set_optional_arg(morph_str(), insert_ideaunit._morph)
+            x_atomunit.set_optional_arg(begin_str(), insert_ideaunit.begin)
+            x_atomunit.set_optional_arg(close_str(), insert_ideaunit.close)
+            x_atomunit.set_optional_arg(denom_str(), insert_ideaunit.denom)
+            x_atomunit.set_optional_arg(numor_str(), insert_ideaunit.numor)
+            x_atomunit.set_optional_arg(morph_str(), insert_ideaunit.morph)
             x_atomunit.set_optional_arg(mass_str(), insert_ideaunit.mass)
             x_atomunit.set_optional_arg(pledge_str(), insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
@@ -429,16 +429,16 @@ class ChangeUnit:
                 x_atomunit.set_required_arg(label_str(), after_ideaunit._label)
                 if before_ideaunit.addin != after_ideaunit.addin:
                     x_atomunit.set_optional_arg(addin_str(), after_ideaunit.addin)
-                if before_ideaunit._begin != after_ideaunit._begin:
-                    x_atomunit.set_optional_arg(begin_str(), after_ideaunit._begin)
-                if before_ideaunit._close != after_ideaunit._close:
-                    x_atomunit.set_optional_arg(close_str(), after_ideaunit._close)
-                if before_ideaunit._denom != after_ideaunit._denom:
-                    x_atomunit.set_optional_arg(denom_str(), after_ideaunit._denom)
-                if before_ideaunit._numor != after_ideaunit._numor:
-                    x_atomunit.set_optional_arg(numor_str(), after_ideaunit._numor)
-                if before_ideaunit._morph != after_ideaunit._morph:
-                    x_atomunit.set_optional_arg(morph_str(), after_ideaunit._morph)
+                if before_ideaunit.begin != after_ideaunit.begin:
+                    x_atomunit.set_optional_arg(begin_str(), after_ideaunit.begin)
+                if before_ideaunit.close != after_ideaunit.close:
+                    x_atomunit.set_optional_arg(close_str(), after_ideaunit.close)
+                if before_ideaunit.denom != after_ideaunit.denom:
+                    x_atomunit.set_optional_arg(denom_str(), after_ideaunit.denom)
+                if before_ideaunit.numor != after_ideaunit.numor:
+                    x_atomunit.set_optional_arg(numor_str(), after_ideaunit.numor)
+                if before_ideaunit.morph != after_ideaunit.morph:
+                    x_atomunit.set_optional_arg(morph_str(), after_ideaunit.morph)
                 if before_ideaunit.mass != after_ideaunit.mass:
                     x_atomunit.set_optional_arg(mass_str(), after_ideaunit.mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:

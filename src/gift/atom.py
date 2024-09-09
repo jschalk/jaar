@@ -306,12 +306,12 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value(label_str()),
             addin=x_atom.get_value(addin_str()),
-            _begin=x_atom.get_value(begin_str()),
-            _close=x_atom.get_value(close_str()),
-            _gogo_want=x_atom.get_value(gogo_want_str()),
-            _stop_want=x_atom.get_value(stop_want_str()),
-            _denom=x_atom.get_value(denom_str()),
-            _numor=x_atom.get_value(numor_str()),
+            begin=x_atom.get_value(begin_str()),
+            close=x_atom.get_value(close_str()),
+            gogo_want=x_atom.get_value(gogo_want_str()),
+            stop_want=x_atom.get_value(stop_want_str()),
+            denom=x_atom.get_value(denom_str()),
+            numor=x_atom.get_value(numor_str()),
             pledge=x_atom.get_value(pledge_str()),
         ),
         parent_road=x_atom.get_value(parent_road_str()),
@@ -601,11 +601,11 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
     elif category == bud_ideaunit_text():
         return (
             x_obj.addin != y_obj.addin
-            or x_obj._begin != y_obj._begin
-            or x_obj._close != y_obj._close
-            or x_obj._denom != y_obj._denom
-            or x_obj._numor != y_obj._numor
-            or x_obj._morph != y_obj._morph
+            or x_obj.begin != y_obj.begin
+            or x_obj.close != y_obj.close
+            or x_obj.denom != y_obj.denom
+            or x_obj.numor != y_obj.numor
+            or x_obj.morph != y_obj.morph
             or x_obj.mass != y_obj.mass
             or x_obj.pledge != y_obj.pledge
         )

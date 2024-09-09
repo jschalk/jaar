@@ -41,12 +41,12 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     clean_road = zia_bud.make_road(casa_road, clean_text)
     clean_begin = -3
     clean_close = 7
-    clean_idea = ideaunit_shop(clean_text, _begin=clean_begin, _close=clean_close)
+    clean_idea = ideaunit_shop(clean_text, begin=clean_begin, close=clean_close)
     sweep_text = "sweep"
     sweep_gogo_want = -2
     sweep_stop_want = 1
-    sweep_idea = ideaunit_shop(sweep_text, _gogo_want=sweep_gogo_want)
-    sweep_idea._stop_want = sweep_stop_want
+    sweep_idea = ideaunit_shop(sweep_text, gogo_want=sweep_gogo_want)
+    sweep_idea.stop_want = sweep_stop_want
     zia_bud.set_idea(clean_idea, parent_road=casa_road)
     zia_bud.set_fact(base=clean_road, pick=clean_road, fopen=1, fnigh=5)
     assert zia_bud._idearoot._factheirs == {}
@@ -70,7 +70,7 @@ def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
     clean_road = zia_bud.make_road(casa_road, clean_text)
     clean_begin = -3
     clean_close = 7
-    clean_idea = ideaunit_shop(clean_text, _begin=clean_begin, _close=clean_close)
+    clean_idea = ideaunit_shop(clean_text, begin=clean_begin, close=clean_close)
     sweep_text = "sweep"
     sweep_road = zia_bud.make_road(clean_road, sweep_text)
     sweep_idea = ideaunit_shop(sweep_text, addin=2)

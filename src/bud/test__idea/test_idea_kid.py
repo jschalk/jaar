@@ -6,7 +6,7 @@ from pytest import raises as pytest_raises
 def test_get_kids_in_range_GetsCorrectIdeas():
     # ESTABLISH
     mon_text = "months"
-    mon_idea = ideaunit_shop(mon_text, _begin=0, _close=366)
+    mon_idea = ideaunit_shop(mon_text, begin=0, close=366)
     jan_text = "Jan"
     feb_text = "Feb"
     mar_text = "Mar"

@@ -122,12 +122,12 @@ def test_get_real_voices_agenda_dataframe_ReturnsCorrectObj(
         "fund_ratio",
         "_label",
         "_parent_road",
-        "_begin",
-        "_close",
+        "begin",
+        "close",
         "addin",
-        "_denom",
-        "_numor",
-        "_morph",
+        "denom",
+        "numor",
+        "morph",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -163,12 +163,12 @@ def test_get_real_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_clean
         "fund_ratio",
         "_label",
         "_parent_road",
-        "_begin",
-        "_close",
+        "begin",
+        "close",
         "addin",
-        "_denom",
-        "_numor",
-        "_morph",
+        "denom",
+        "numor",
+        "morph",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

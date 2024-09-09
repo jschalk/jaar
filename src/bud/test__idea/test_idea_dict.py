@@ -154,14 +154,14 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     x_morph = 16
     x_gogo_want = 81
     x_stop_want = 87
-    casa_idea._begin = x_begin
-    casa_idea._close = x_close
+    casa_idea.begin = x_begin
+    casa_idea.close = x_close
     casa_idea.addin = x_addin
-    casa_idea._denom = x_denom
-    casa_idea._numor = x_numor
-    casa_idea._morph = x_morph
-    casa_idea._gogo_want = x_gogo_want
-    casa_idea._stop_want = x_stop_want
+    casa_idea.denom = x_denom
+    casa_idea.numor = x_numor
+    casa_idea.morph = x_morph
+    casa_idea.gogo_want = x_gogo_want
+    casa_idea.stop_want = x_stop_want
     casa_idea._uid = 17
     casa_idea.add_kid(ideaunit_shop("paper"))
 
@@ -181,13 +181,13 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["mass"] == casa_idea.mass
     assert casa_dict["_label"] == casa_idea._label
     assert casa_dict["_uid"] == casa_idea._uid
-    assert casa_dict["_begin"] == casa_idea._begin
-    assert casa_dict["_close"] == casa_idea._close
-    assert casa_dict["_numor"] == casa_idea._numor
-    assert casa_dict["_denom"] == casa_idea._denom
-    assert casa_dict["_morph"] == casa_idea._morph
-    assert casa_dict["_gogo_want"] == casa_idea._gogo_want
-    assert casa_dict["_stop_want"] == casa_idea._stop_want
+    assert casa_dict["begin"] == casa_idea.begin
+    assert casa_dict["close"] == casa_idea.close
+    assert casa_dict["numor"] == casa_idea.numor
+    assert casa_dict["denom"] == casa_idea.denom
+    assert casa_dict["morph"] == casa_idea.morph
+    assert casa_dict["gogo_want"] == casa_idea.gogo_want
+    assert casa_dict["stop_want"] == casa_idea.stop_want
     assert casa_dict["pledge"] == casa_idea.pledge
     assert casa_dict["_problem_bool"] == casa_idea._problem_bool
     assert casa_dict["_problem_bool"] == x_problem_bool

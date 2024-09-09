@@ -343,27 +343,27 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 
     # begin: float = None,
     # close: float = None,
-    sue_bud._idearoot._kids[casa_text]._begin = 39
-    x_begin = sue_bud._idearoot._kids[casa_text]._begin
+    sue_bud._idearoot._kids[casa_text].begin = 39
+    x_begin = sue_bud._idearoot._kids[casa_text].begin
     assert x_begin == 39
-    sue_bud._idearoot._kids[casa_text]._close = 43
-    x_close = sue_bud._idearoot._kids[casa_text]._close
+    sue_bud._idearoot._kids[casa_text].close = 43
+    x_close = sue_bud._idearoot._kids[casa_text].close
     assert x_close == 43
     sue_bud.edit_idea_attr(road=casa_road, begin=25, close=29)
-    assert sue_bud._idearoot._kids[casa_text]._begin == 25
-    assert sue_bud._idearoot._kids[casa_text]._close == 29
+    assert sue_bud._idearoot._kids[casa_text].begin == 25
+    assert sue_bud._idearoot._kids[casa_text].close == 29
 
     # gogo_want: float = None,
     # stop_want: float = None,
-    sue_bud._idearoot._kids[casa_text]._gogo_want = 439
-    x_gogo_want = sue_bud._idearoot._kids[casa_text]._gogo_want
+    sue_bud._idearoot._kids[casa_text].gogo_want = 439
+    x_gogo_want = sue_bud._idearoot._kids[casa_text].gogo_want
     assert x_gogo_want == 439
-    sue_bud._idearoot._kids[casa_text]._stop_want = 443
-    x_stop_want = sue_bud._idearoot._kids[casa_text]._stop_want
+    sue_bud._idearoot._kids[casa_text].stop_want = 443
+    x_stop_want = sue_bud._idearoot._kids[casa_text].stop_want
     assert x_stop_want == 443
     sue_bud.edit_idea_attr(road=casa_road, gogo_want=425, stop_want=429)
-    assert sue_bud._idearoot._kids[casa_text]._gogo_want == 425
-    assert sue_bud._idearoot._kids[casa_text]._stop_want == 429
+    assert sue_bud._idearoot._kids[casa_text].gogo_want == 425
+    assert sue_bud._idearoot._kids[casa_text].stop_want == 429
 
     # factunit: factunit_shop = None,
     # sue_bud._idearoot._kids[casa_text]._factunits = None
@@ -463,13 +463,13 @@ def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerlink_healer_ids_DoNotExist
     casa_road = yao_bud.make_l1_road(casa_text)
     yao_bud.set_l1_idea(ideaunit_shop(casa_text))
     day_text = "day_range"
-    day_idea = ideaunit_shop(day_text, _begin=44, _close=110)
+    day_idea = ideaunit_shop(day_text, begin=44, close=110)
     day_road = yao_bud.make_l1_road(day_text)
     yao_bud.set_l1_idea(day_idea)
 
     casa_idea = yao_bud.get_idea_obj(casa_road)
-    assert casa_idea._begin is None
-    assert casa_idea._close is None
+    assert casa_idea.begin is None
+    assert casa_idea.close is None
 
     # WHEN / THEN
     sue_text = "Sue"

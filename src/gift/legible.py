@@ -393,32 +393,32 @@ def add_bud_ideaunit_update_to_legible_list(
         for ideaunit_atom in parent_road_dict.values():
             label_value = ideaunit_atom.get_value(label_str())
             parent_road_value = ideaunit_atom.get_value(parent_road_str())
-            _addin_value = ideaunit_atom.get_value(addin_str())
-            _begin_value = ideaunit_atom.get_value(begin_str())
-            _close_value = ideaunit_atom.get_value(close_str())
-            _denom_value = ideaunit_atom.get_value(denom_str())
-            _numor_value = ideaunit_atom.get_value(numor_str())
-            _problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
-            _morph_value = ideaunit_atom.get_value(morph_str())
-            _mass_value = ideaunit_atom.get_value(_mass_text)
+            addin_value = ideaunit_atom.get_value(addin_str())
+            begin_value = ideaunit_atom.get_value(begin_str())
+            close_value = ideaunit_atom.get_value(close_str())
+            denom_value = ideaunit_atom.get_value(denom_str())
+            numor_value = ideaunit_atom.get_value(numor_str())
+            problem_bool_value = ideaunit_atom.get_value(_problem_bool_text)
+            morph_value = ideaunit_atom.get_value(morph_str())
+            mass_value = ideaunit_atom.get_value(_mass_text)
             pledge_value = ideaunit_atom.get_value(pledge_str())
             x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
-            if _addin_value is not None:
-                x_str += f"addin={_addin_value}."
-            if _begin_value is not None:
-                x_str += f"begin={_begin_value}."
-            if _close_value is not None:
-                x_str += f"close={_close_value}."
-            if _denom_value is not None:
-                x_str += f"denom={_denom_value}."
-            if _numor_value is not None:
-                x_str += f"numor={_numor_value}."
-            if _problem_bool_value is not None:
-                x_str += f"problem_bool={_problem_bool_value}."
-            if _morph_value is not None:
-                x_str += f"morph={_morph_value}."
-            if _mass_value is not None:
-                x_str += f"mass={_mass_value}."
+            if addin_value is not None:
+                x_str += f"addin={addin_value}."
+            if begin_value is not None:
+                x_str += f"begin={begin_value}."
+            if close_value is not None:
+                x_str += f"close={close_value}."
+            if denom_value is not None:
+                x_str += f"denom={denom_value}."
+            if numor_value is not None:
+                x_str += f"numor={numor_value}."
+            if problem_bool_value is not None:
+                x_str += f"problem_bool={problem_bool_value}."
+            if morph_value is not None:
+                x_str += f"morph={morph_value}."
+            if mass_value is not None:
+                x_str += f"mass={mass_value}."
             if pledge_value is not None:
                 x_str += f"pledge={pledge_value}."
 

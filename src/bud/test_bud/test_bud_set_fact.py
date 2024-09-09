@@ -95,15 +95,15 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIs
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     time_text = "time"
-    time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
+    time_idea = ideaunit_shop(time_text, begin=0, close=140)
     bob_bud.set_l1_idea(time_idea)
     time_road = bob_bud.make_l1_road(time_text)
     a1st = "age1st"
     a1st_road = bob_bud.make_road(time_road, a1st)
-    a1st_idea = ideaunit_shop(a1st, _begin=0, _close=20)
+    a1st_idea = ideaunit_shop(a1st, begin=0, close=20)
     bob_bud.set_idea(a1st_idea, parent_road=time_road)
     a1e1st_text = "a1_era1st"
-    a1e1st_idea = ideaunit_shop(a1e1st_text, _begin=20, _close=30)
+    a1e1st_idea = ideaunit_shop(a1e1st_text, begin=20, close=30)
     bob_bud.set_idea(a1e1st_idea, parent_road=a1st_road)
     a1e1_road = bob_bud.make_road(a1st_road, a1e1st_text)
     assert bob_bud._idearoot._factunits in (None, {})
@@ -153,7 +153,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     # ESTABLISH a single ranged fact
     sue_bud = budunit_shop("Sue")
     time_text = "time"
-    time_idea = ideaunit_shop(time_text, _begin=0, _close=140)
+    time_idea = ideaunit_shop(time_text, begin=0, close=140)
     sue_bud.set_l1_idea(time_idea)
 
     clean_text = "clean"
@@ -172,7 +172,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
 
     # WHEN one ranged fact added
     place_text = "place_x"
-    place_idea = ideaunit_shop(place_text, _begin=600, _close=800)
+    place_idea = ideaunit_shop(place_text, begin=600, close=800)
     sue_bud.set_l1_idea(place_idea)
     place_road = sue_bud.make_l1_road(place_text)
     sue_bud.set_fact(base=place_road, pick=place_road, fopen=5, fnigh=10)
@@ -198,7 +198,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     # ESTABLISH a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
     sue_bud = budunit_shop("Sue")
     time_text = "time"
-    sue_bud.set_l1_idea(ideaunit_shop(time_text, _begin=0, _close=140))
+    sue_bud.set_l1_idea(ideaunit_shop(time_text, begin=0, close=140))
     time_road = sue_bud.make_l1_road(time_text)
     mood_x = "mood_x"
     sue_bud.set_l1_idea(ideaunit_shop(mood_x))

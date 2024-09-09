@@ -84,12 +84,12 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
         "fund_ratio",
         "_label",
         "_parent_road",
-        "_begin",
-        "_close",
+        "begin",
+        "close",
         "addin",
-        "_denom",
-        "_numor",
-        "_morph",
+        "denom",
+        "numor",
+        "morph",
     }
     print(f"{set(x_df.columns)=}")
 
@@ -112,12 +112,12 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
         "fund_ratio",
         "_label",
         "_parent_road",
-        "_begin",
-        "_close",
+        "begin",
+        "close",
         "addin",
-        "_denom",
-        "_numor",
-        "_morph",
+        "denom",
+        "numor",
+        "morph",
     }
     print(f"{set(x_df.columns)=}")
 

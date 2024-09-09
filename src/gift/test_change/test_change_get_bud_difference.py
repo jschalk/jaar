@@ -427,8 +427,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     after_sue_bud.set_l1_idea(
         ideaunit_shop(
             music_text,
-            _begin=music_begin,
-            _close=music_close,
+            begin=music_begin,
+            close=music_close,
             mass=music_mass,
             pledge=music_pledge,
         )
@@ -478,8 +478,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     before_sue_bud.set_l1_idea(
         ideaunit_shop(
             music_text,
-            _begin=before_music_begin,
-            _close=before_music_close,
+            begin=before_music_begin,
+            close=before_music_close,
             mass=before_music_mass,
             pledge=before_music_pledge,
         )

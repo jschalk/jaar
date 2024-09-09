@@ -31,12 +31,12 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
                 "fund_ratio",
                 "_label",
                 "_parent_road",
-                "_begin",
-                "_close",
+                "begin",
+                "close",
                 "addin",
-                "_denom",
-                "_numor",
-                "_morph",
+                "denom",
+                "numor",
+                "morph",
             ]
         )
     x_idea_list = []
@@ -46,12 +46,12 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
             "fund_ratio": x_idea._fund_ratio,
             "_label": x_idea._label,
             "_parent_road": x_idea._parent_road,
-            "_begin": x_idea._begin,
-            "_close": x_idea._close,
+            "begin": x_idea.begin,
+            "close": x_idea.close,
             "addin": x_idea.addin,
-            "_denom": x_idea._denom,
-            "_numor": x_idea._numor,
-            "_morph": x_idea._morph,
+            "denom": x_idea.denom,
+            "numor": x_idea.numor,
+            "morph": x_idea.morph,
         }
         x_idea_list.append(idea_dict)
     return DataFrame(x_idea_list)

@@ -144,7 +144,7 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
 
     day24hr_text = "24hr day"
     day24hr_road = sue_bud.make_road(time_road, day24hr_text)
-    day24hr_idea = ideaunit_shop(day24hr_text, _begin=0.0, _close=24.0)
+    day24hr_idea = ideaunit_shop(day24hr_text, begin=0.0, close=24.0)
 
     am_text = "am"
     am_road = sue_bud.make_road(day24hr_road, am_text)
@@ -152,11 +152,11 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     n1_text = "1"
     n2_text = "2"
     n3_text = "3"
-    am_idea = ideaunit_shop(am_text, _gogo_want=0, _stop_want=12)
-    pm_idea = ideaunit_shop(pm_text, _gogo_want=12, _stop_want=24)
-    n1_idea = ideaunit_shop(n1_text, _gogo_want=1, _stop_want=2)
-    n2_idea = ideaunit_shop(n2_text, _gogo_want=2, _stop_want=3)
-    n3_idea = ideaunit_shop(n3_text, _gogo_want=3, _stop_want=4)
+    am_idea = ideaunit_shop(am_text, gogo_want=0, stop_want=12)
+    pm_idea = ideaunit_shop(pm_text, gogo_want=12, stop_want=24)
+    n1_idea = ideaunit_shop(n1_text, gogo_want=1, stop_want=2)
+    n2_idea = ideaunit_shop(n2_text, gogo_want=2, stop_want=3)
+    n3_idea = ideaunit_shop(n3_text, gogo_want=3, stop_want=4)
 
     sue_bud.set_l1_idea(time_idea)
     sue_bud.set_idea(day24hr_idea, time_road)
