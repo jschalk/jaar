@@ -640,12 +640,12 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     week_text = "week"
     week_road = yao_bud.make_l1_road(week_text)
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, _addin=week_addin)
+    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, addin=week_addin)
     yao_bud.set_l1_idea(week_idea)
     tue_text = "Tue"
     tue_road = yao_bud.make_road(week_road, tue_text)
     tue_addin = 100
-    yao_bud.set_idea(ideaunit_shop(tue_text, _addin=tue_addin), week_road)
+    yao_bud.set_idea(ideaunit_shop(tue_text, addin=tue_addin), week_road)
     x_real_id = yao_bud._real_id
     yao_bud.edit_idea_attr(x_real_id, reason_base=tue_road, reason_premise=tue_road)
 
@@ -690,12 +690,12 @@ def test_BudUnit_settle_bud_SetsIdeaUnit_factheir_With_range_factheirs():
     week_text = "week"
     week_road = yao_bud.make_l1_road(week_text)
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, _addin=week_addin)
+    week_idea = ideaunit_shop(week_text, _begin=10, _close=15, addin=week_addin)
     yao_bud.set_l1_idea(week_idea)
     tue_text = "Tue"
     tue_road = yao_bud.make_road(week_road, tue_text)
     tue_addin = 100
-    yao_bud.set_idea(ideaunit_shop(tue_text, _addin=tue_addin), week_road)
+    yao_bud.set_idea(ideaunit_shop(tue_text, addin=tue_addin), week_road)
     ball_text = "ball"
     ball_road = yao_bud.make_l1_road(ball_text)
     yao_bud.set_l1_idea(ideaunit_shop(ball_text))

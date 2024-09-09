@@ -156,7 +156,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     x_stop_want = 87
     casa_idea._begin = x_begin
     casa_idea._close = x_close
-    casa_idea._addin = x_addin
+    casa_idea.addin = x_addin
     casa_idea._denom = x_denom
     casa_idea._numor = x_numor
     casa_idea._morph = x_morph

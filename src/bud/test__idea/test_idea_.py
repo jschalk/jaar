@@ -31,7 +31,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._road_delimiter is None
     assert x_ideaunit._begin is None
     assert x_ideaunit._close is None
-    assert x_ideaunit._addin is None
+    assert x_ideaunit.addin is None
     assert x_ideaunit._numor is None
     assert x_ideaunit._denom is None
     assert x_ideaunit._morph is None
@@ -72,7 +72,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._uid is None
     assert x_ideaunit._begin is None
     assert x_ideaunit._close is None
-    assert x_ideaunit._addin is None
+    assert x_ideaunit.addin is None
     assert x_ideaunit._numor is None
     assert x_ideaunit._denom is None
     assert x_ideaunit._morph is None

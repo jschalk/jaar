@@ -208,7 +208,7 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     add_ideaunits(x_budunit, new_road, create_week_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, week_road, create_weekday_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
-    offset_idea = ideaunit_shop(yr1_jan1_offset_text(), _addin=timeline_offset)
+    offset_idea = ideaunit_shop(yr1_jan1_offset_text(), addin=timeline_offset)
     x_budunit.set_idea(offset_idea, new_road)
     return x_budunit
 
@@ -382,7 +382,7 @@ def get_min_from_dt(
 ) -> int:
     offset_road = x_bud.make_road(timeline_road, yr1_jan1_offset_text())
     offset_idea = x_bud.get_idea_obj(offset_road)
-    offset_amount = offset_idea._addin
+    offset_amount = offset_idea.addin
     return get_min_from_dt_offset(x_datetime, offset_amount)
 
 

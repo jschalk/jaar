@@ -736,7 +736,7 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_year_road)
     assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
     creg_offset_idea = sue_bud.get_idea_obj(creg_yr1_jan1_offset_road)
-    assert creg_offset_idea._addin == get_creg_config().get(yr1_jan1_offset_text())
+    assert creg_offset_idea.addin == get_creg_config().get(yr1_jan1_offset_text())
     assert not sue_bud.idea_exists(five_yr1_jan1_offset_road)
 
     # WHEN
@@ -748,7 +748,7 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
     assert sue_bud.idea_exists(five_yr1_jan1_offset_road)
     five_offset_idea = sue_bud.get_idea_obj(five_yr1_jan1_offset_road)
-    assert five_offset_idea._addin == get_five_config().get(yr1_jan1_offset_text())
+    assert five_offset_idea.addin == get_five_config().get(yr1_jan1_offset_text())
 
 
 def test_get_creg_min_from_dt_ReturnsObj():

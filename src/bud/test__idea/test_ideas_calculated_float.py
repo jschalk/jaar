@@ -27,7 +27,7 @@ def test_ideas_calculated_range_ReturnsObj_1IdeaUnit_addin():
     # ESTABLISH
     week_text = "week"
     week_addin = 5
-    week_idea = ideaunit_shop(week_text, _addin=week_addin)
+    week_idea = ideaunit_shop(week_text, addin=week_addin)
     old_gogo = 3
     old_stop = 8
     old_rangeunit = RangeUnit(old_gogo, old_stop)
@@ -48,9 +48,9 @@ def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_addin():
     # ESTABLISH
     week_text = "week"
     week_addin = 5
-    week_idea = ideaunit_shop(week_text, _addin=week_addin)
+    week_idea = ideaunit_shop(week_text, addin=week_addin)
     tue_addin = 7
-    tue_idea = ideaunit_shop("Tue", _addin=tue_addin)
+    tue_idea = ideaunit_shop("Tue", addin=tue_addin)
     old_gogo = 3
     old_stop = 8
     old_rangeunit = RangeUnit(old_gogo, old_stop)

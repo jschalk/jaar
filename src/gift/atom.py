@@ -305,7 +305,7 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
             _label=x_atom.get_value(label_str()),
-            _addin=x_atom.get_value(addin_str()),
+            addin=x_atom.get_value(addin_str()),
             _begin=x_atom.get_value(begin_str()),
             _close=x_atom.get_value(close_str()),
             _gogo_want=x_atom.get_value(gogo_want_str()),
@@ -600,7 +600,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
         )
     elif category == bud_ideaunit_text():
         return (
-            x_obj._addin != y_obj._addin
+            x_obj.addin != y_obj.addin
             or x_obj._begin != y_obj._begin
             or x_obj._close != y_obj._close
             or x_obj._denom != y_obj._denom

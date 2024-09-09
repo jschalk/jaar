@@ -382,7 +382,7 @@ class ChangeUnit:
             x_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
             x_atomunit.set_required_arg(parent_road_str(), insert_ideaunit._parent_road)
             x_atomunit.set_required_arg(label_str(), insert_ideaunit._label)
-            x_atomunit.set_optional_arg(addin_str(), insert_ideaunit._addin)
+            x_atomunit.set_optional_arg(addin_str(), insert_ideaunit.addin)
             x_atomunit.set_optional_arg(begin_str(), insert_ideaunit._begin)
             x_atomunit.set_optional_arg(close_str(), insert_ideaunit._close)
             x_atomunit.set_optional_arg(denom_str(), insert_ideaunit._denom)
@@ -427,8 +427,8 @@ class ChangeUnit:
                     parent_road_str(), after_ideaunit._parent_road
                 )
                 x_atomunit.set_required_arg(label_str(), after_ideaunit._label)
-                if before_ideaunit._addin != after_ideaunit._addin:
-                    x_atomunit.set_optional_arg(addin_str(), after_ideaunit._addin)
+                if before_ideaunit.addin != after_ideaunit.addin:
+                    x_atomunit.set_optional_arg(addin_str(), after_ideaunit.addin)
                 if before_ideaunit._begin != after_ideaunit._begin:
                     x_atomunit.set_optional_arg(begin_str(), after_ideaunit._begin)
                 if before_ideaunit._close != after_ideaunit._close:

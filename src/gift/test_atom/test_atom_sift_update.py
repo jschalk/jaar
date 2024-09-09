@@ -107,7 +107,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     casa_road = sue_bud.make_l1_road(casa_text)
     sue_bud.add_idea(casa_road)
 
-    # sue_addin = 23
+    sue_addin = 23
     # sue_begin = 37
     # sue_close = 43
     # sue_denom = 47
@@ -122,6 +122,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     old_casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
     old_casa_atom.set_arg(label_str(), casa_text)
     old_casa_atom.set_arg(mass_str(), sue_mass)
+    old_casa_atom.set_arg(addin_str(), sue_addin)
     # THEN
     new_casa_atom = sift_atomunit(sue_bud, old_casa_atom)
 
@@ -130,7 +131,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     assert new_casa_atom.crud_text == atom_update()
     assert new_casa_atom.get_optional_args_dict()
     zia_optional_args = new_casa_atom.get_optional_args_dict()
-    # assert zia_optional_args.get(addin_str()) == sue_addin
+    assert zia_optional_args.get(addin_str()) == sue_addin
     # assert zia_optional_args.get(begin_str()) == sue_begin
     # assert zia_optional_args.get(close_str()) == sue_close
     # assert zia_optional_args.get(denom_str()) == sue_denom

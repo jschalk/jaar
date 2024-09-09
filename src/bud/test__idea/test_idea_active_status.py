@@ -211,12 +211,12 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     week_open = 3
     week_nigh = 7
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _parent_road=root_label(), _addin=week_addin)
+    week_idea = ideaunit_shop(week_text, _parent_road=root_label(), addin=week_addin)
     week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
     tue_text = "Tue"
     tue_road = create_road(week_road, tue_text)
     tue_addin = 100
-    tue_idea = ideaunit_shop(tue_text, _parent_road=week_road, _addin=tue_addin)
+    tue_idea = ideaunit_shop(tue_text, _parent_road=week_road, addin=tue_addin)
     ball_text = "ball"
     ball_road = create_road(root_label(), ball_text)
     ball_idea = ideaunit_shop(ball_text)

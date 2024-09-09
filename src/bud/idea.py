@@ -224,7 +224,7 @@ class IdeaUnit:
     _healerlink: HealerLink = None
     _begin: float = None
     _close: float = None
-    _addin: float = None
+    addin: float = None
     _denom: int = None
     _numor: int = None
     _morph: bool = None
@@ -594,7 +594,7 @@ class IdeaUnit:
         if idea_attr.stop_want is not None:
             self._stop_want = idea_attr.stop_want
         if idea_attr.addin is not None:
-            self._addin = idea_attr.addin
+            self.addin = idea_attr.addin
         if idea_attr.numor is not None:
             self._numor = idea_attr.numor
         if idea_attr.denom is not None:
@@ -631,9 +631,9 @@ class IdeaUnit:
             self._begin is not None
             and self._close is not None
             and (self._numor is not None or self._denom is not None)
-            and self._addin is None
+            and self.addin is None
         ):
-            self._addin = 0
+            self.addin = 0
 
     def clear_gogo_calc_stop_calc(self):
         self._range_evaluated = False
@@ -643,7 +643,7 @@ class IdeaUnit:
     def _transform_gogo_calc_stop_calc(self):
         r_idea_numor = get_1_if_None(self._numor)
         r_idea_denom = get_1_if_None(self._denom)
-        r_idea_addin = get_0_if_None(self._addin)
+        r_idea_addin = get_0_if_None(self.addin)
 
         if self._gogo_calc is None or self._stop_calc is None:
             pass
@@ -915,8 +915,8 @@ class IdeaUnit:
             x_dict["_begin"] = self._begin
         if self._close is not None:
             x_dict["_close"] = self._close
-        if self._addin is not None:
-            x_dict["_addin"] = self._addin
+        if self.addin is not None:
+            x_dict["addin"] = self.addin
         if self._numor is not None:
             x_dict["_numor"] = self._numor
         if self._denom is not None:
@@ -990,7 +990,7 @@ def ideaunit_shop(
     _close: float = None,
     _gogo_want: float = None,
     _stop_want: float = None,
-    _addin: float = None,
+    addin: float = None,
     _denom: int = None,
     _numor: int = None,
     _morph: bool = None,
@@ -1039,7 +1039,7 @@ def ideaunit_shop(
         _close=_close,
         _gogo_want=_gogo_want,
         _stop_want=_stop_want,
-        _addin=_addin,
+        addin=addin,
         _denom=_denom,
         _numor=_numor,
         _morph=_morph,
@@ -1132,9 +1132,9 @@ def ideas_calculated_range(
     idea_list: list[IdeaUnit], x_gogo: float, x_stop: float
 ) -> RangeUnit:
     for x_idea in idea_list:
-        if x_idea._addin:
-            x_gogo += get_0_if_None(x_idea._addin)
-            x_stop += get_0_if_None(x_idea._addin)
+        if x_idea.addin:
+            x_gogo += get_0_if_None(x_idea.addin)
+            x_stop += get_0_if_None(x_idea.addin)
         if (x_idea._numor or x_idea._denom) and not x_idea._morph:
             x_gogo *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)
             x_stop *= get_1_if_None(x_idea._numor) / get_1_if_None(x_idea._denom)

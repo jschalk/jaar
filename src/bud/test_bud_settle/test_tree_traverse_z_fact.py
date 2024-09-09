@@ -73,7 +73,7 @@ def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
     clean_idea = ideaunit_shop(clean_text, _begin=clean_begin, _close=clean_close)
     sweep_text = "sweep"
     sweep_road = zia_bud.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _addin=2)
+    sweep_idea = ideaunit_shop(sweep_text, addin=2)
     zia_bud.set_idea(clean_idea, parent_road=casa_road)
     zia_bud.set_idea(sweep_idea, parent_road=clean_road)
     zia_bud.set_fact(sweep_road, sweep_road, fopen=1, fnigh=5)
