@@ -1,6 +1,7 @@
-from src._road.road import RoadUnit, AcctID, GroupID
 from src.bud.acct import AcctUnit
-from src.bud.group import MemberShip
+from src.bud.group import MemberShip, AwardLink
+from src.bud.idea import IdeaUnit
+from src.bud.reason_idea import ReasonUnit, FactUnit, PremiseUnit
 from src.bud.bud import BudUnit
 
 
@@ -162,18 +163,22 @@ def bud_acct_membership_get_obj(
     return x_bud.get_acct(x_acct_id).get_membership(x_group_id)
 
 
-def bud_ideaunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_ideaunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> IdeaUnit:
     x_road = required_args.get("road")
     return x_bud.get_idea_obj(x_road)
 
 
-def bud_idea_awardlink_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_idea_awardlink_get_obj(
+    x_bud: BudUnit, required_args: dict[str, any]
+) -> AwardLink:
     x_road = required_args.get("road")
     x_group_id = required_args.get("group_id")
     return x_bud.get_idea_obj(x_road).get_awardlink(x_group_id)
 
 
-def bud_idea_reasonunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_idea_reasonunit_get_obj(
+    x_bud: BudUnit, required_args: dict[str, any]
+) -> ReasonUnit:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
     return x_bud.get_idea_obj(x_road).get_reasonunit(x_base)
@@ -181,14 +186,16 @@ def bud_idea_reasonunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -
 
 def bud_idea_reason_premiseunit_get_obj(
     x_bud: BudUnit, required_args: dict[str, any]
-) -> bool:
+) -> PremiseUnit:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
     x_need = required_args.get("need")
     return x_bud.get_idea_obj(x_road).get_reasonunit(x_base).get_premise(x_need)
 
 
-def bud_idea_factunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_idea_factunit_get_obj(
+    x_bud: BudUnit, required_args: dict[str, any]
+) -> FactUnit:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
     return x_bud.get_idea_obj(x_road).factunits.get(x_base)
