@@ -45,13 +45,13 @@ def test_IdeaUnit_set_awardlink_SetsAttr():
     biker_text = "bikers2"
     sport_text = "sport"
     sport_ideaunit = ideaunit_shop(sport_text)
-    assert not sport_ideaunit._awardlinks.get(biker_text)
+    assert not sport_ideaunit.awardlinks.get(biker_text)
 
     # WHEN
     sport_ideaunit.set_awardlink(awardlink_shop(biker_text))
 
     # THEN
-    assert sport_ideaunit._awardlinks.get(biker_text)
+    assert sport_ideaunit.awardlinks.get(biker_text)
 
 
 def test_IdeaUnit_awardlink_exists_ReturnsObj():
@@ -180,8 +180,8 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesChanges():
     run_premises = {run_premise.need: run_premise}
     run_reasonunit = reasonunit_shop(base=run_road, premises=run_premises)
     run_reasonunits = {run_reasonunit.base: run_reasonunit}
-    ball_idea = ideaunit_shop(ball_text, _reasonunits=run_reasonunits)
-    assert ball_idea._reasonunits != {}
+    ball_idea = ideaunit_shop(ball_text, reasonunits=run_reasonunits)
+    assert ball_idea.reasonunits != {}
 
     # WHEN
     ball_idea.set_reasonheirs(reasonheirs={}, bud_idea_dict={})
@@ -248,13 +248,13 @@ def test_IdeaUnit_set_reasonunit_SetsAttr():
     clean_text = "clean"
     clean_idea = ideaunit_shop(clean_text)
     dirty_text = "dirty"
-    assert not clean_idea._reasonunits.get(dirty_text)
+    assert not clean_idea.reasonunits.get(dirty_text)
 
     # WHEN
     clean_idea.set_reasonunit(reasonunit_shop(base=dirty_text))
 
     # THEN
-    assert clean_idea._reasonunits.get(dirty_text)
+    assert clean_idea.reasonunits.get(dirty_text)
     x_reasonunit = clean_idea.get_reasonunit(base=dirty_text)
     assert x_reasonunit is not None
     assert x_reasonunit.base == dirty_text
@@ -352,13 +352,13 @@ def test_IdeaUnit_set_factunit_SetsAttr():
     clean_text = "clean"
     clean_idea = ideaunit_shop(clean_text)
     dirty_text = "dirty"
-    assert not clean_idea._factunits.get(dirty_text)
+    assert not clean_idea.factunits.get(dirty_text)
 
     # WHEN
     clean_idea.set_factunit(factunit_shop(base=dirty_text))
 
     # THEN
-    assert clean_idea._factunits.get(dirty_text)
+    assert clean_idea.factunits.get(dirty_text)
 
 
 def test_IdeaUnit_factunit_exists_ReturnsCorrectObj():
@@ -435,15 +435,15 @@ def test_IdeaUnit_set_teamunit_empty_if_none():
     # ESTABLISH
     run_text = "run"
     run_idea = ideaunit_shop(run_text)
-    run_idea._teamunit = None
-    assert run_idea._teamunit is None
+    run_idea.teamunit = None
+    assert run_idea.teamunit is None
 
     # WHEN
     run_idea.set_teamunit_empty_if_none()
 
     # THEN
-    assert run_idea._teamunit is not None
-    assert run_idea._teamunit == teamunit_shop()
+    assert run_idea.teamunit is not None
+    assert run_idea.teamunit == teamunit_shop()
 
 
 def test_IdeaUnit_set_teamheir_CorrectlySetsAttr():
@@ -451,7 +451,7 @@ def test_IdeaUnit_set_teamheir_CorrectlySetsAttr():
     swim_text = "swimmers"
     sport_text = "sports"
     sport_idea = ideaunit_shop(sport_text)
-    sport_idea._teamunit.set_teamlink(group_id=swim_text)
+    sport_idea.teamunit.set_teamlink(group_id=swim_text)
     # assert sport_idea._teamheir is None
 
     # WHEN

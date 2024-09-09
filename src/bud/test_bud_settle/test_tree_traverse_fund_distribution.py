@@ -395,7 +395,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_ta
     sue_bud.set_acctunit(acctunit_shop(sue_text))
     sue_awardlink = awardlink_shop(sue_text, give_force=37)
     x_idearoot.set_awardlink(sue_awardlink)
-    assert len(x_idearoot._awardlinks) == 4
+    assert len(x_idearoot.awardlinks) == 4
     assert len(sue_bud.get_acctunit_group_ids_dict()) == 4
 
     # WHEN
@@ -546,13 +546,13 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fun
     # THEN
     x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
     with pytest_raises(Exception) as excinfo:
-        x_idearoot._awardlinks[yao_text]
+        x_idearoot.awardlinks[yao_text]
     assert str(excinfo.value) == f"'{yao_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_idearoot._awardlinks[zia_text]
+        x_idearoot.awardlinks[zia_text]
     assert str(excinfo.value) == f"'{zia_text}'"
     with pytest_raises(Exception) as excinfo:
-        x_idearoot._awardlinks[xio_text]
+        x_idearoot.awardlinks[xio_text]
     assert str(excinfo.value) == f"'{xio_text}'"
     with pytest_raises(Exception) as excinfo:
         x_idearoot._kids["hunt"]._awardheirs[yao_text]
@@ -600,7 +600,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
     sue_bud._idearoot.set_awardlink(yao_awardlink)
     sue_bud._idearoot.set_awardlink(zia_awardlink)
     sue_bud._idearoot.set_awardlink(Xio_awardlink)
-    assert len(sue_bud._idearoot._awardlinks) == 3
+    assert len(sue_bud._idearoot.awardlinks) == 3
 
     # WHEN
     idea_dict = sue_bud.get_idea_dict()
@@ -1203,10 +1203,10 @@ def test_BudUnit_settle_bud_CreatesGroupBoxWith_budunit_v001():
     # THEN
     # print(f"{len(idea_dict)=}")
     db_idea = idea_dict.get(yao_bud.make_l1_road("D&B"))
-    assert len(db_idea._awardlinks) == 3
+    assert len(db_idea.awardlinks) == 3
     # for idea_key in idea_dict:
     #     print(f"{idea_key=}")
     #     if idea._label == "D&B":
-    #         print(f"{idea._label=} {idea._awardlinks=}")
-    #         db_awardlink_len = len(idea._awardlinks)
+    #         print(f"{idea._label=} {idea.awardlinks=}")
+    #         db_awardlink_len = len(idea.awardlinks)
     # assert db_awardlink_len == 3

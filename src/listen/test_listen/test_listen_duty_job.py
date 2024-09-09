@@ -112,7 +112,7 @@ def get_example_yao_job1_speaker() -> BudUnit:
     yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
     return yao_speaker
@@ -127,7 +127,7 @@ def get_example_yao_job2_speaker() -> BudUnit:
     yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
     yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit._teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_text)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
 
@@ -330,7 +330,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_action.idea_exists(cook_road())
 #     assert yao_action.idea_exists(clean_road())
 #     assert yao_action.idea_exists(run_road()) is False
-#     assert len(yao_action._idearoot._factunits) == 2
+#     assert len(yao_action._idearoot.factunits) == 2
 #     assert yao_action != yao_voice0
 
 
@@ -413,7 +413,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_action.get_fact(get_location_road()) is not None
     assert yao_action.get_fact(get_location_road()).pick == get_in_ocean_road()
     assert len(yao_action.get_agenda_dict()) == 1
-    assert len(yao_action._idearoot._factunits) == 1
+    assert len(yao_action._idearoot.factunits) == 1
     assert yao_action != yao_voice0
 
 

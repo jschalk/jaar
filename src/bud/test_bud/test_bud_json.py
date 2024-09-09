@@ -102,8 +102,8 @@ def test_BudUnit_get_dict_ReturnsDictWith_idearoot_teamunit():
     idearoot_dict = bud_dict.get("_idearoot")
 
     # THEN
-    assert idearoot_dict["_teamunit"] == x_teamunit.get_dict()
-    assert idearoot_dict["_teamunit"] == {"_teamlinks": [run_text]}
+    assert idearoot_dict["teamunit"] == x_teamunit.get_dict()
+    assert idearoot_dict["teamunit"] == {"_teamlinks": [run_text]}
     assert idearoot_dict.get("gogo_want") == x_gogo_want
     assert idearoot_dict.get("stop_want") == x_stop_want
 
@@ -150,7 +150,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_ideakid_TeamUnit():
 
     # THEN
     _kids = "_kids"
-    _teamunit = "_teamunit"
+    _teamunit = "teamunit"
 
     team_dict_x = idearoot_dict[_kids][morn_text][_teamunit]
     assert team_dict_x == x_teamunit.get_dict()
@@ -213,10 +213,10 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 
     shave_text = "shave"
     shave_dict = idearoot_dict[_kids][shave_text]
-    shave_factunits = shave_dict["_factunits"]
+    shave_factunits = shave_dict["factunits"]
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
-    assert len(shave_factunits) == len(x_idearoot._kids[shave_text]._factunits)
+    assert len(shave_factunits) == len(x_idearoot._kids[shave_text].factunits)
     idearoot_healerlink = idearoot_dict["healerlink"]
     print(f"{idearoot_healerlink=}")
     assert len(idearoot_healerlink) == 1
@@ -257,13 +257,13 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
 
     kids = idearoot_dict[_kids]
     day_min_dict = kids[day_min_text]
-    day_min_factunits_dict = day_min_dict["_factunits"]
+    day_min_factunits_dict = day_min_dict["factunits"]
     day_min_idea_x = yao_bud.get_idea_obj(day_min_road)
     print(f"{day_min_factunits_dict=}")
     assert len(day_min_factunits_dict) == 1
-    assert len(day_min_factunits_dict) == len(day_min_idea_x._factunits)
+    assert len(day_min_factunits_dict) == len(day_min_idea_x.factunits)
 
-    _reasonunits = "_reasonunits"
+    _reasonunits = "reasonunits"
     cont_text = "Freelancing"
     ulti_text = "Ultimate Frisbee"
     cont_road = yao_bud.make_l1_road(cont_text)
@@ -272,8 +272,8 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     ulti_idea = yao_bud.get_idea_obj(ulti_road)
     cont_reasonunits_dict = idearoot_dict[_kids][cont_text][_reasonunits]
     ulti_reasonunits_dict = idearoot_dict[_kids][ulti_text][_reasonunits]
-    assert len(cont_reasonunits_dict) == len(cont_idea._reasonunits)
-    assert len(ulti_reasonunits_dict) == len(ulti_idea._reasonunits)
+    assert len(cont_reasonunits_dict) == len(cont_idea.reasonunits)
+    assert len(ulti_reasonunits_dict) == len(ulti_idea.reasonunits)
     originunit_text = "_originunit"
     originholds_text = "_originholds"
     assert len(bud_dict[originunit_text][originholds_text])
@@ -377,13 +377,13 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     json_idearoot = json_bud._idearoot
     assert json_idearoot._parent_road == ""
     assert json_idearoot._parent_road == zia_bud._idearoot._parent_road
-    assert json_idearoot._reasonunits == {}
-    assert json_idearoot._teamunit == zia_bud._idearoot._teamunit
-    assert json_idearoot._teamunit == run_teamunit
+    assert json_idearoot.reasonunits == {}
+    assert json_idearoot.teamunit == zia_bud._idearoot.teamunit
+    assert json_idearoot.teamunit == run_teamunit
     assert json_idearoot._fund_coin == 8
     assert json_idearoot._fund_coin == zia_fund_coin
-    assert len(json_idearoot._factunits) == 1
-    assert len(json_idearoot._awardlinks) == 1
+    assert len(json_idearoot.factunits) == 1
+    assert len(json_idearoot.awardlinks) == 1
 
     assert len(json_bud._idearoot._kids) == 2
 
@@ -399,14 +399,14 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
     json_shave_idea = json_bud.get_idea_obj(shave_road)
     zia_shave_idea = zia_bud.get_idea_obj(shave_road)
-    assert len(json_shave_idea._reasonunits) == 1
-    assert json_shave_idea._teamunit == zia_shave_idea._teamunit
-    assert json_shave_idea._teamunit == xio_teamunit
+    assert len(json_shave_idea.reasonunits) == 1
+    assert json_shave_idea.teamunit == zia_shave_idea.teamunit
+    assert json_shave_idea.teamunit == xio_teamunit
     assert json_shave_idea._originunit == zia_shave_idea._originunit
     print(f"{json_shave_idea.healerlink=}")
     assert json_shave_idea.healerlink == zia_shave_idea.healerlink
-    assert len(json_shave_idea._awardlinks) == 2
-    assert len(json_shave_idea._factunits) == 1
+    assert len(json_shave_idea.awardlinks) == 2
+    assert len(json_shave_idea.factunits) == 1
     assert zia_shave_idea.problem_bool
     assert json_shave_idea.problem_bool == zia_shave_idea.problem_bool
     assert json_shave_idea.gogo_want == zia_shave_idea.gogo_want

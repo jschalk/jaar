@@ -145,7 +145,7 @@ def test_bud_idea_factunit_get_obj_ReturnsObj():
     x_obj = bud_idea_factunit_get_obj(sue_bud, required_args)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_idea_obj(casa_road)._factunits.get(week_road)
+    assert x_obj == sue_bud.get_idea_obj(casa_road).factunits.get(week_road)
 
 
 def test_bud_get_obj_ReturnsObj_bud_acctunit_get_obj():
@@ -269,4 +269,4 @@ def test_bud_get_obj_ReturnsObj_bud_idea_factunit_get_obj():
     x_obj = bud_get_obj(bud_idea_factunit_text(), sue_bud, required_args)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_idea_obj(casa_road)._factunits.get(week_road)
+    assert x_obj == sue_bud.get_idea_obj(casa_road).factunits.get(week_road)

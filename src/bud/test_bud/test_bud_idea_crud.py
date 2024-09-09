@@ -179,7 +179,7 @@ def test_BudUnit_set_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
 
     # THEN
     casa_idea = bob_bud.get_idea_obj(casa_road)
-    assert casa_idea._reasonunits.get(week_road) is not None
+    assert casa_idea.reasonunits.get(week_road) is not None
 
 
 def test_BudUnit_set_idea_CanCreateMissingIdeaUnits():
@@ -366,20 +366,18 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_bud._idearoot._kids[casa_text].stop_want == 429
 
     # factunit: factunit_shop = None,
-    # sue_bud._idearoot._kids[casa_text]._factunits = None
-    assert sue_bud._idearoot._kids[casa_text]._factunits == {}
+    # sue_bud._idearoot._kids[casa_text].factunits = None
+    assert sue_bud._idearoot._kids[casa_text].factunits == {}
     wkdays_road = sue_bud.make_l1_road("weekdays")
     fact_road = sue_bud.make_road(wkdays_road, "Sunday")
     factunit_x = factunit_shop(base=fact_road, pick=fact_road)
 
-    casa_factunits = sue_bud._idearoot._kids[casa_text]._factunits
+    casa_factunits = sue_bud._idearoot._kids[casa_text].factunits
     print(f"{casa_factunits=}")
     sue_bud.edit_idea_attr(road=casa_road, factunit=factunit_x)
-    casa_factunits = sue_bud._idearoot._kids[casa_text]._factunits
+    casa_factunits = sue_bud._idearoot._kids[casa_text].factunits
     print(f"{casa_factunits=}")
-    assert sue_bud._idearoot._kids[casa_text]._factunits == {
-        factunit_x.base: factunit_x
-    }
+    assert sue_bud._idearoot._kids[casa_text].factunits == {factunit_x.base: factunit_x}
 
     # _descendant_pledge_count: int = None,
     sue_bud._idearoot._kids[casa_text]._descendant_pledge_count = 81
@@ -410,16 +408,16 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert _all_acct_debt_new == 59
 
     # _awardlink: dict = None,
-    sue_bud._idearoot._kids[casa_text]._awardlinks = {
+    sue_bud._idearoot._kids[casa_text].awardlinks = {
         "fun": awardlink_shop(group_id="fun", give_force=1, take_force=7)
     }
-    _awardlinks = sue_bud._idearoot._kids[casa_text]._awardlinks
+    _awardlinks = sue_bud._idearoot._kids[casa_text].awardlinks
     assert _awardlinks == {
         "fun": awardlink_shop(group_id="fun", give_force=1, take_force=7)
     }
     x_awardlink = awardlink_shop(group_id="fun", give_force=4, take_force=8)
     sue_bud.edit_idea_attr(road=casa_road, awardlink=x_awardlink)
-    assert sue_bud._idearoot._kids[casa_text]._awardlinks == {"fun": x_awardlink}
+    assert sue_bud._idearoot._kids[casa_text].awardlinks == {"fun": x_awardlink}
 
     # _is_expanded: dict = None,
     sue_bud._idearoot._kids[casa_text]._is_expanded = "what"
@@ -683,8 +681,8 @@ def test_BudUnit_edit_idea_attr_DeletesIdeaUnit_awardlinks():
     yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
     yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
 
-    assert len(swim_idea._awardlinks) == 3
-    assert len(yao_bud._idearoot._kids[swim_text]._awardlinks) == 3
+    assert len(swim_idea.awardlinks) == 3
+    assert len(yao_bud._idearoot._kids[swim_text].awardlinks) == 3
 
     # WHEN
     yao_bud.edit_idea_attr(swim_road, awardlink_del=yao_text)
@@ -692,10 +690,10 @@ def test_BudUnit_edit_idea_attr_DeletesIdeaUnit_awardlinks():
     # THEN
     swim_idea = yao_bud.get_idea_obj(swim_road)
     print(f"{swim_idea._label=}")
-    print(f"{swim_idea._awardlinks=}")
+    print(f"{swim_idea.awardlinks=}")
     print(f"{swim_idea._awardheirs=}")
 
-    assert len(yao_bud._idearoot._kids[swim_text]._awardlinks) == 2
+    assert len(yao_bud._idearoot._kids[swim_text].awardlinks) == 2
 
 
 def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks():
@@ -716,7 +714,7 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks()
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(xia_text))
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
     x1_bud_swim_idea = x1_bud.get_idea_obj(swim_road)
-    assert len(x1_bud_swim_idea._awardlinks) == 2
+    assert len(x1_bud_swim_idea.awardlinks) == 2
     bob_bud = budunit_shop(bob_text)
     bob_bud.add_acctunit(xia_text)
 
@@ -724,8 +722,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_awardlinks()
     filtered_idea = bob_bud._get_filtered_awardlinks_idea(x1_bud_swim_idea)
 
     # THEN
-    assert len(filtered_idea._awardlinks) == 1
-    assert list(filtered_idea._awardlinks.keys()) == [xia_text]
+    assert len(filtered_idea.awardlinks) == 1
+    assert list(filtered_idea.awardlinks.keys()) == [xia_text]
 
 
 def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
@@ -746,7 +744,7 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(xia_text))
     x1_bud.edit_idea_attr(swim_road, awardlink=awardlink_shop(zoa_text))
     x1_bud_swim_idea = x1_bud.get_idea_obj(swim_road)
-    assert len(x1_bud_swim_idea._awardlinks) == 2
+    assert len(x1_bud_swim_idea.awardlinks) == 2
 
     # WHEN
     bob_bud = budunit_shop(bob_text)
@@ -755,8 +753,8 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
 
     # THEN
     bob_bud_swim_idea = bob_bud.get_idea_obj(swim_road)
-    assert len(bob_bud_swim_idea._awardlinks) == 1
-    assert list(bob_bud_swim_idea._awardlinks.keys()) == [xia_text]
+    assert len(bob_bud_swim_idea.awardlinks) == 1
+    assert list(bob_bud_swim_idea.awardlinks.keys()) == [xia_text]
 
 
 def test_BudUnit_get_idea_obj_ReturnsIdea():

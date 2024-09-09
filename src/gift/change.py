@@ -394,19 +394,19 @@ class ChangeUnit:
 
             self.add_atomunit_idea_factunit_inserts(
                 ideaunit=insert_ideaunit,
-                insert_factunit_bases=set(insert_ideaunit._factunits.keys()),
+                insert_factunit_bases=set(insert_ideaunit.factunits.keys()),
             )
             self.add_atomunit_idea_awardlink_inserts(
                 after_ideaunit=insert_ideaunit,
-                insert_awardlink_group_ids=set(insert_ideaunit._awardlinks.keys()),
+                insert_awardlink_group_ids=set(insert_ideaunit.awardlinks.keys()),
             )
             self.add_atomunit_idea_reasonunit_inserts(
                 after_ideaunit=insert_ideaunit,
-                insert_reasonunit_bases=set(insert_ideaunit._reasonunits.keys()),
+                insert_reasonunit_bases=set(insert_ideaunit.reasonunits.keys()),
             )
             self.add_atomunit_idea_teamlink_insert(
                 idea_road=insert_idea_road,
-                insert_teamlink_group_ids=insert_ideaunit._teamunit._teamlinks,
+                insert_teamlink_group_ids=insert_ideaunit.teamunit._teamlinks,
             )
             self.add_atomunit_idea_healerlink_insert(
                 idea_road=insert_idea_road,
@@ -446,8 +446,8 @@ class ChangeUnit:
                 self.set_atomunit(x_atomunit)
 
             # insert / update / delete factunits
-            before_factunit_bases = set(before_ideaunit._factunits.keys())
-            after_factunit_bases = set(after_ideaunit._factunits.keys())
+            before_factunit_bases = set(before_ideaunit.factunits.keys())
+            after_factunit_bases = set(after_ideaunit.factunits.keys())
             self.add_atomunit_idea_factunit_inserts(
                 ideaunit=after_ideaunit,
                 insert_factunit_bases=after_factunit_bases.difference(
@@ -469,8 +469,8 @@ class ChangeUnit:
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_group_ids = set(before_ideaunit._awardlinks.keys())
-            after_awardlinks_group_ids = set(after_ideaunit._awardlinks.keys())
+            before_awardlinks_group_ids = set(before_ideaunit.awardlinks.keys())
+            after_awardlinks_group_ids = set(after_ideaunit.awardlinks.keys())
             self.add_atomunit_idea_awardlink_inserts(
                 after_ideaunit=after_ideaunit,
                 insert_awardlink_group_ids=after_awardlinks_group_ids.difference(
@@ -492,8 +492,8 @@ class ChangeUnit:
             )
 
             # insert / update / delete reasonunits
-            before_reasonunit_bases = set(before_ideaunit._reasonunits.keys())
-            after_reasonunit_bases = set(after_ideaunit._reasonunits.keys())
+            before_reasonunit_bases = set(before_ideaunit.reasonunits.keys())
+            after_reasonunit_bases = set(after_ideaunit.reasonunits.keys())
             self.add_atomunit_idea_reasonunit_inserts(
                 after_ideaunit=after_ideaunit,
                 insert_reasonunit_bases=after_reasonunit_bases.difference(
@@ -519,8 +519,8 @@ class ChangeUnit:
             # update reasonunits_permises delete_premise
 
             # insert / update / delete teamlinks
-            before_teamlinks_group_ids = set(before_ideaunit._teamunit._teamlinks)
-            after_teamlinks_group_ids = set(after_ideaunit._teamunit._teamlinks)
+            before_teamlinks_group_ids = set(before_ideaunit.teamunit._teamlinks)
+            after_teamlinks_group_ids = set(after_ideaunit.teamunit._teamlinks)
             self.add_atomunit_idea_teamlink_insert(
                 idea_road=idea_road,
                 insert_teamlink_group_ids=after_teamlinks_group_ids.difference(
@@ -564,20 +564,20 @@ class ChangeUnit:
             delete_ideaunit = before_bud.get_idea_obj(delete_idea_road)
             self.add_atomunit_idea_factunit_deletes(
                 idea_road=delete_idea_road,
-                delete_factunit_bases=set(delete_ideaunit._factunits.keys()),
+                delete_factunit_bases=set(delete_ideaunit.factunits.keys()),
             )
 
             self.add_atomunit_idea_awardlink_deletes(
                 idea_road=delete_idea_road,
-                delete_awardlink_group_ids=set(delete_ideaunit._awardlinks.keys()),
+                delete_awardlink_group_ids=set(delete_ideaunit.awardlinks.keys()),
             )
             self.add_atomunit_idea_reasonunit_deletes(
                 before_ideaunit=delete_ideaunit,
-                delete_reasonunit_bases=set(delete_ideaunit._reasonunits.keys()),
+                delete_reasonunit_bases=set(delete_ideaunit.reasonunits.keys()),
             )
             self.add_atomunit_idea_teamlink_deletes(
                 idea_road=delete_idea_road,
-                delete_teamlink_group_ids=delete_ideaunit._teamunit._teamlinks,
+                delete_teamlink_group_ids=delete_ideaunit.teamunit._teamlinks,
             )
             self.add_atomunit_idea_healerlink_deletes(
                 idea_road=delete_idea_road,
@@ -777,7 +777,7 @@ class ChangeUnit:
         self, after_ideaunit: IdeaUnit, insert_awardlink_group_ids: set
     ):
         for after_awardlink_group_id in insert_awardlink_group_ids:
-            after_awardlink = after_ideaunit._awardlinks.get(after_awardlink_group_id)
+            after_awardlink = after_ideaunit.awardlinks.get(after_awardlink_group_id)
             x_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_insert())
             x_atomunit.set_required_arg(road_str(), after_ideaunit.get_road())
             x_atomunit.set_required_arg(group_id_str(), after_awardlink.group_id)
@@ -792,10 +792,8 @@ class ChangeUnit:
         update_awardlink_group_ids: set,
     ):
         for update_awardlink_group_id in update_awardlink_group_ids:
-            before_awardlink = before_ideaunit._awardlinks.get(
-                update_awardlink_group_id
-            )
-            after_awardlink = after_ideaunit._awardlinks.get(update_awardlink_group_id)
+            before_awardlink = before_ideaunit.awardlinks.get(update_awardlink_group_id)
+            after_awardlink = after_ideaunit.awardlinks.get(update_awardlink_group_id)
             if optional_args_different(
                 bud_idea_awardlink_text(), before_awardlink, after_awardlink
             ):
@@ -825,7 +823,7 @@ class ChangeUnit:
         self, ideaunit: IdeaUnit, insert_factunit_bases: set
     ):
         for insert_factunit_base in insert_factunit_bases:
-            insert_factunit = ideaunit._factunits.get(insert_factunit_base)
+            insert_factunit = ideaunit.factunits.get(insert_factunit_base)
             x_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_insert())
             x_atomunit.set_required_arg(road_str(), ideaunit.get_road())
             x_atomunit.set_required_arg("base", insert_factunit.base)
@@ -844,8 +842,8 @@ class ChangeUnit:
         update_factunit_bases: set,
     ):
         for update_factunit_base in update_factunit_bases:
-            before_factunit = before_ideaunit._factunits.get(update_factunit_base)
-            after_factunit = after_ideaunit._factunits.get(update_factunit_base)
+            before_factunit = before_ideaunit.factunits.get(update_factunit_base)
+            after_factunit = after_ideaunit.factunits.get(update_factunit_base)
             if optional_args_different(
                 bud_idea_factunit_text(), before_factunit, after_factunit
             ):

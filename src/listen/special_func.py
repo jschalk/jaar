@@ -13,7 +13,7 @@ def create_pledge(
     if pledge_road is not None and get_terminus_node(pledge_road) != "":
         x_idea = x_bud.get_idea_obj(pledge_road, if_missing_create=True)
         x_idea.pledge = True
-        x_idea._teamunit.set_teamlink(x_teamlink)
+        x_idea.teamunit.set_teamlink(x_teamlink)
 
         if x_teamlink is not None and x_bud.acct_exists(x_teamlink) is False:
             x_bud.add_acctunit(x_teamlink)

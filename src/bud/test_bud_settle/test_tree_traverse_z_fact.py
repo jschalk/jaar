@@ -216,7 +216,7 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
 
     # THEN
     assert swim_idea._factheirs == first_earthdict
-    assert swim_idea._factunits == {}
+    assert swim_idea.factunits == {}
 
 
 def test_BudUnit_settle_bud_SetsTaskAsComplete():
@@ -224,7 +224,7 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
     mail_text = "obtain mail"
     assert yao_bud is not None
-    assert len(yao_bud._idearoot._kids[mail_text]._reasonunits) == 1
+    assert len(yao_bud._idearoot._kids[mail_text].reasonunits) == 1
     idea_dict = yao_bud.get_idea_dict()
     mail_idea = idea_dict.get(yao_bud.make_l1_road(mail_text))
     hour_text = "hour"

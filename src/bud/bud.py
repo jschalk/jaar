@@ -227,7 +227,7 @@ class BudUnit:
         while to_evaluate_list != []:
             x_road = to_evaluate_list.pop()
             x_idea = self.get_idea_obj(x_road)
-            for reasonunit_obj in x_idea._reasonunits.values():
+            for reasonunit_obj in x_idea.reasonunits.values():
                 reason_base = reasonunit_obj.base
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -409,7 +409,7 @@ class BudUnit:
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
             fact
-            for fact in self._idearoot._factunits.values()
+            for fact in self._idearoot.factunits.values()
             if fact.fopen is not None
             and fact.fnigh is not None
             and self._is_idea_rangeroot(idea_road=fact.base)
@@ -432,12 +432,12 @@ class BudUnit:
         x_idearoot = self.get_idea_obj(self._real_id)
         x_fopen = None
         if fnigh is not None and fopen is None:
-            x_fopen = x_idearoot._factunits.get(base).fopen
+            x_fopen = x_idearoot.factunits.get(base).fopen
         else:
             x_fopen = fopen
         x_fnigh = None
         if fopen is not None and fnigh is None:
-            x_fnigh = x_idearoot._factunits.get(base).fnigh
+            x_fnigh = x_idearoot.factunits.get(base).fnigh
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(base=base, pick=pick, fopen=x_fopen, fnigh=x_fnigh)
@@ -463,7 +463,7 @@ class BudUnit:
             x_idearoot.set_factunit(x_factunit)
 
     def get_fact(self, base: RoadUnit) -> FactUnit:
-        return self._idearoot._factunits.get(base)
+        return self._idearoot.factunits.get(base)
 
     def del_fact(self, base: RoadUnit):
         self._idearoot.del_factunit(base)
@@ -484,8 +484,8 @@ class BudUnit:
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_node(
             level=self._idearoot._level,
-            reasons=self._idearoot._reasonunits,
-            awardlinks=self._idearoot._awardlinks,
+            reasons=self._idearoot.reasonunits,
+            awardlinks=self._idearoot.awardlinks,
             uid=self._idearoot._uid,
             pledge=self._idearoot.pledge,
             idea_road=self._idearoot.get_road(),
@@ -504,8 +504,8 @@ class BudUnit:
         idea_kid._level = parent_idea._level + 1
         tree_metrics.evaluate_node(
             level=idea_kid._level,
-            reasons=idea_kid._reasonunits,
-            awardlinks=idea_kid._awardlinks,
+            reasons=idea_kid.reasonunits,
+            awardlinks=idea_kid.awardlinks,
             uid=idea_kid._uid,
             pledge=idea_kid.pledge,
             idea_road=idea_kid.get_road(),
@@ -546,7 +546,7 @@ class BudUnit:
         missing_bases = {}
         for base, base_count in reason_bases.items():
             try:
-                self._idearoot._factunits[base]
+                self._idearoot.factunits[base]
             except KeyError:
                 missing_bases[base] = base_count
         return missing_bases
@@ -639,27 +639,27 @@ class BudUnit:
     def _get_filtered_awardlinks_idea(self, x_idea: IdeaUnit) -> IdeaUnit:
         _awardlinks_to_delete = [
             _awardlink_group_id
-            for _awardlink_group_id in x_idea._awardlinks.keys()
+            for _awardlink_group_id in x_idea.awardlinks.keys()
             if self.get_acctunit_group_ids_dict().get(_awardlink_group_id) is None
         ]
         for _awardlink_group_id in _awardlinks_to_delete:
-            x_idea._awardlinks.pop(_awardlink_group_id)
+            x_idea.awardlinks.pop(_awardlink_group_id)
 
-        if x_idea._teamunit is not None:
+        if x_idea.teamunit is not None:
             _teamlinks_to_delete = [
                 _teamlink_group_id
-                for _teamlink_group_id in x_idea._teamunit._teamlinks
+                for _teamlink_group_id in x_idea.teamunit._teamlinks
                 if self.get_acctunit_group_ids_dict().get(_teamlink_group_id) is None
             ]
             for _teamlink_group_id in _teamlinks_to_delete:
-                x_idea._teamunit.del_teamlink(_teamlink_group_id)
+                x_idea.teamunit.del_teamlink(_teamlink_group_id)
         return x_idea
 
     def _create_missing_ideas(self, road):
         self._init_idea_tree_walk()
         posted_idea = self.get_idea_obj(road)
 
-        for reason_x in posted_idea._reasonunits.values():
+        for reason_x in posted_idea.reasonunits.values():
             self._create_ideakid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
                 self._create_ideakid_if_empty(road=premise_x.need)
@@ -856,7 +856,7 @@ class BudUnit:
 
     def set_agenda_task_complete(self, task_road: RoadUnit, base: RoadUnit):
         pledge_item = self.get_idea_obj(task_road)
-        pledge_item.set_factunit_to_complete(self._idearoot._factunits[base])
+        pledge_item.set_factunit_to_complete(self._idearoot.factunits[base])
 
     def get_credit_ledger_debtit_ledger(
         self,
@@ -1021,7 +1021,7 @@ class BudUnit:
                 idea_kid.set_level(x_idea._level)
                 idea_list.append(idea_kid)
             self._idea_dict[x_idea.get_road()] = x_idea
-            for x_reason_base in x_idea._reasonunits.keys():
+            for x_reason_base in x_idea.reasonunits.keys():
                 self._reason_bases.add(x_reason_base)
 
     def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
@@ -1104,7 +1104,7 @@ class BudUnit:
             self._econs_justified = False
 
     def _set_root_attributes(self, econ_exceptions: bool):
-        self._idearoot.set_factheirs(self._idearoot._factunits)
+        self._idearoot.set_factheirs(self._idearoot.factunits)
         self._idearoot.set_idearoot_inherit_reasonheirs()
         self._idearoot.set_teamheir(None, self._groupboxs)
         self._idearoot.inherit_awardheirs()
@@ -1363,8 +1363,8 @@ class BudUnit:
 
     def get_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
-        if self._idearoot._factunits is not None:
-            for fact_road, fact_obj in self._idearoot._factunits.items():
+        if self._idearoot.factunits is not None:
+            for fact_road, fact_obj in self._idearoot.factunits.items():
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
@@ -1517,11 +1517,11 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         gogo_want=get_obj_from_idea_dict(idearoot_dict, "gogo_want"),
         stop_want=get_obj_from_idea_dict(idearoot_dict, "stop_want"),
         problem_bool=get_obj_from_idea_dict(idearoot_dict, "problem_bool"),
-        _reasonunits=get_obj_from_idea_dict(idearoot_dict, "_reasonunits"),
-        _teamunit=get_obj_from_idea_dict(idearoot_dict, "_teamunit"),
+        reasonunits=get_obj_from_idea_dict(idearoot_dict, "reasonunits"),
+        teamunit=get_obj_from_idea_dict(idearoot_dict, "teamunit"),
         healerlink=get_obj_from_idea_dict(idearoot_dict, "healerlink"),
-        _factunits=get_obj_from_idea_dict(idearoot_dict, "_factunits"),
-        _awardlinks=get_obj_from_idea_dict(idearoot_dict, "_awardlinks"),
+        factunits=get_obj_from_idea_dict(idearoot_dict, "factunits"),
+        awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
         _bud_real_id=x_bud._real_id,
@@ -1559,12 +1559,12 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             stop_want=get_obj_from_idea_dict(idea_dict, "stop_want"),
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
             problem_bool=get_obj_from_idea_dict(idea_dict, "problem_bool"),
-            _reasonunits=get_obj_from_idea_dict(idea_dict, "_reasonunits"),
-            _teamunit=get_obj_from_idea_dict(idea_dict, "_teamunit"),
+            reasonunits=get_obj_from_idea_dict(idea_dict, "reasonunits"),
+            teamunit=get_obj_from_idea_dict(idea_dict, "teamunit"),
             healerlink=get_obj_from_idea_dict(idea_dict, "healerlink"),
             _originunit=get_obj_from_idea_dict(idea_dict, "_originunit"),
-            _awardlinks=get_obj_from_idea_dict(idea_dict, "_awardlinks"),
-            _factunits=get_obj_from_idea_dict(idea_dict, "_factunits"),
+            awardlinks=get_obj_from_idea_dict(idea_dict, "awardlinks"),
+            factunits=get_obj_from_idea_dict(idea_dict, "factunits"),
             _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
         )
         x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_text])

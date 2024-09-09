@@ -266,8 +266,8 @@ def test_BudUnit_settle_bud_SetsIdeaUnitAttr_awardlinks():
 
     street_text = "streets"
     sue_bud.set_idea(ideaunit_shop(street_text), parent_road=swim_road)
-    assert sue_bud._idearoot._awardlinks in (None, {})
-    assert len(sue_bud._idearoot._kids[swim_text]._awardlinks) == 3
+    assert sue_bud._idearoot.awardlinks in (None, {})
+    assert len(sue_bud._idearoot._kids[swim_text].awardlinks) == 3
 
     # WHEN
     sue_bud.settle_bud()
@@ -277,13 +277,13 @@ def test_BudUnit_settle_bud_SetsIdeaUnitAttr_awardlinks():
     swim_idea = sue_bud._idea_dict.get(swim_road)
     street_idea = sue_bud._idea_dict.get(sue_bud.make_road(swim_road, street_text))
 
-    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea.awardlinks) == 3
     assert len(swim_idea._awardheirs) == 3
-    assert street_idea._awardlinks in (None, {})
+    assert street_idea.awardlinks in (None, {})
     assert len(street_idea._awardheirs) == 3
 
     print(f"{len(sue_bud._idea_dict)}")
-    print(f"{swim_idea._awardlinks}")
+    print(f"{swim_idea.awardlinks}")
     print(f"{swim_idea._awardheirs}")
     print(f"{swim_idea._awardheirs}")
     assert len(sue_bud._idearoot._kids["swim"]._awardheirs) == 3
@@ -339,24 +339,24 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_zia)
     yao_bud.edit_idea_attr(swim_road, awardlink=awardlink_Xio)
 
-    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea.awardlinks) == 3
     assert len(swim_idea._awardheirs) == 0
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert len(swim_idea._awardlinks) == 3
+    assert len(swim_idea.awardlinks) == 3
     assert len(swim_idea._awardheirs) == 3
     yao_bud.edit_idea_attr(swim_road, awardlink_del=yao_text)
-    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea.awardlinks) == 2
     assert len(swim_idea._awardheirs) == 3
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert len(swim_idea._awardlinks) == 2
+    assert len(swim_idea.awardlinks) == 2
     assert len(swim_idea._awardheirs) == 2
 
 

@@ -102,7 +102,7 @@ def bud_idea_teamlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> b
     x_road = required_args.get("road")
     return bool(
         bud_ideaunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road)._teamunit.teamlink_exists(x_group_id)
+        and x_bud.get_idea_obj(x_road).teamunit.teamlink_exists(x_group_id)
     )
 
 
@@ -191,7 +191,7 @@ def bud_idea_reason_premiseunit_get_obj(
 def bud_idea_factunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
-    return x_bud.get_idea_obj(x_road)._factunits.get(x_base)
+    return x_bud.get_idea_obj(x_road).factunits.get(x_base)
 
 
 def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) -> any:

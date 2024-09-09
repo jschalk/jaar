@@ -18,7 +18,7 @@ class Missing_debtor_respectException(Exception):
 
 
 def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
-    for x_factunit in perspective_bud._idearoot._factunits.values():
+    for x_factunit in perspective_bud._idearoot.factunits.values():
         x_factunit.set_pick_to_base()
     return list(perspective_bud.get_agenda_dict().values())
 
@@ -123,7 +123,7 @@ def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
 
 
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
-    for x_factunit in src_listener._idearoot._factunits.values():
+    for x_factunit in src_listener._idearoot.factunits.values():
         base_road = x_factunit.base
         pick_road = x_factunit.pick
         if dst_listener.idea_exists(base_road) is False:
@@ -291,7 +291,7 @@ def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
             listener.set_idea(x_idea, x_idea._parent_road)
         if listener.get_fact(x_idea.get_road()) is False:
             listener.set_idea(x_idea, x_idea._parent_road)
-    for x_fact_road, x_fact_unit in job._idearoot._factunits.items():
+    for x_fact_road, x_fact_unit in job._idearoot.factunits.items():
         listener._idearoot.set_factunit(x_fact_unit)
     listener.settle_bud()
 

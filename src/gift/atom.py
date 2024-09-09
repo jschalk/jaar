@@ -330,7 +330,7 @@ def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_awardlink = x_idea._awardlinks.get(x_atom.get_value(group_id_str()))
+    x_awardlink = x_idea.awardlinks.get(x_atom.get_value(group_id_str()))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -356,7 +356,7 @@ def _modify_bud_idea_factunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_factunit = x_ideaunit._factunits.get(x_atom.get_value("base"))
+    x_factunit = x_ideaunit.factunits.get(x_atom.get_value("base"))
     x_factunit.set_attr(
         pick=x_atom.get_value("pick"),
         fopen=x_atom.get_value(fopen_str()),
@@ -434,12 +434,12 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_idea_teamlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._teamunit.del_teamlink(group_id=x_atom.get_value(group_id_str()))
+    x_ideaunit.teamunit.del_teamlink(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("road"))
-    x_ideaunit._teamunit.set_teamlink(group_id=x_atom.get_value(group_id_str()))
+    x_ideaunit.teamunit.set_teamlink(group_id=x_atom.get_value(group_id_str()))
 
 
 def _modify_bud_idea_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):

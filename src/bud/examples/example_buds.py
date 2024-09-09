@@ -430,7 +430,7 @@ def yr_print_idea_base_info(idea, filter: bool):
 
 def yr_elucidation(idea):
     str1 = f"'{yr_d(idea._parent_road)}' idea"
-    str2 = f" has ReasonU:{yr_x(idea._reasonunits)} LH:{yr_x(idea._reasonheirs)}"
+    str2 = f" has ReasonU:{yr_x(idea.reasonunits)} LH:{yr_x(idea._reasonheirs)}"
     str3 = f" {str(type(idea))}"
     str4 = " "
     if str(type(idea)).find(".idea.IdeaUnit'>") > 0:
@@ -448,8 +448,8 @@ def yr_elucidation(idea):
         for base in hh_wo_matched_reason:
             print(f"Facts that don't matter to this Idea: {base}")
 
-    # if idea._reasonunits is not None:
-    #     for lu in idea._reasonunits.values():
+    # if idea.reasonunits is not None:
+    #     for lu in idea.reasonunits.values():
     #         print(f"  ReasonUnit   '{lu.base}' premises: {len(lu.premises)} ")
     if idea._reasonheirs is not None:
         filter_x = True

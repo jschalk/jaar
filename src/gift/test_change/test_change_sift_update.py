@@ -270,14 +270,14 @@ def test_sift_changeunit_ReturnsObjUPDATEAtomUnit_bud_acctunit():
 #     assert  sift_atomunit(sue_bud, clean_swim_atom)
 
 #     # WHEN
-#     sue_bud.get_idea_obj(casa_road)._teamunit.set_teamlink(swim_text)
+#     sue_bud.get_idea_obj(casa_road).teamunit.set_teamlink(swim_text)
 
 #     # THEN
 #     assert not  sift_atomunit(sue_bud, casa_swim_atom)
 #     assert  sift_atomunit(sue_bud, clean_swim_atom)
 
 #     # WHEN
-#     sue_bud.get_idea_obj(clean_road)._teamunit.set_teamlink(swim_text)
+#     sue_bud.get_idea_obj(clean_road).teamunit.set_teamlink(swim_text)
 #     # THEN
 #     assert not  sift_atomunit(sue_bud, casa_swim_atom)
 #     assert not  sift_atomunit(sue_bud, clean_swim_atom)

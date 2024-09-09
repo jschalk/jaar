@@ -564,7 +564,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     sue_bud.set_fact(
         base=cregtime_road, pick=cregtime_road, fopen=open_x2, fnigh=nigh_x2
     )
-    print(f"YAYA {sue_bud._idearoot._factunits=}")
+    print(f"YAYA {sue_bud._idearoot.factunits=}")
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()
@@ -632,7 +632,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert sue_bud.get_idea_obj(sweep_road) is not None
     assert sue_bud.get_idea_obj(sweep_road)._label == sweep_text
     assert sue_bud.get_idea_obj(sweep_road).pledge
-    assert len(sue_bud.get_idea_obj(sweep_road)._reasonunits) == 2
+    assert len(sue_bud.get_idea_obj(sweep_road).reasonunits) == 2
     assert sue_bud.get_idea_obj(clean_things_road) is not None
     assert sue_bud.get_idea_obj(cookery_room_road) is not None
     assert sue_bud.get_idea_obj(cookery_dirty_road) is not None

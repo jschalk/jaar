@@ -18,13 +18,13 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit.mass is None
     assert x_ideaunit._label is None
     assert x_ideaunit._uid is None
-    assert x_ideaunit._reasonunits is None
+    assert x_ideaunit.reasonunits is None
     assert x_ideaunit._reasonheirs is None  # calculated field
-    assert x_ideaunit._teamunit is None
+    assert x_ideaunit.teamunit is None
     assert x_ideaunit._teamheir is None  # calculated field
-    assert x_ideaunit._factunits is None
+    assert x_ideaunit.factunits is None
     assert x_ideaunit._factheirs is None  # calculated field
-    assert x_ideaunit._awardlinks is None
+    assert x_ideaunit.awardlinks is None
     assert x_ideaunit._awardlines is None  # calculated field'
     assert x_ideaunit._awardheirs is None  # calculated field'
     assert x_ideaunit._originunit is None
@@ -80,11 +80,11 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit.problem_bool is False
     assert x_ideaunit._descendant_pledge_count is None
     assert x_ideaunit._awardlines == {}
-    assert x_ideaunit._awardlinks == {}
+    assert x_ideaunit.awardlinks == {}
     assert x_ideaunit._awardheirs == {}
     assert x_ideaunit._is_expanded is True
     assert x_ideaunit._factheirs == {}
-    assert x_ideaunit._factunits == {}
+    assert x_ideaunit.factunits == {}
     assert x_ideaunit.healerlink == healerlink_shop()
     assert x_ideaunit._gogo_calc is None
     assert x_ideaunit._stop_calc is None
@@ -94,9 +94,9 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._fund_coin == default_fund_coin_if_none()
     assert x_ideaunit._fund_onset is None
     assert x_ideaunit._fund_cease is None
-    assert x_ideaunit._reasonunits == {}
+    assert x_ideaunit.reasonunits == {}
     assert x_ideaunit._reasonheirs == {}
-    assert x_ideaunit._teamunit == teamunit_shop()
+    assert x_ideaunit.teamunit == teamunit_shop()
     assert x_ideaunit._teamheir is None
     assert x_ideaunit._originunit == originunit_shop()
     assert x_ideaunit._road_delimiter == default_road_delimiter_if_none()
@@ -158,10 +158,10 @@ def test_ideaunit_shop_ReturnsObjWith_awardlinks():
 
     # WHEN
     sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, _awardlinks=x_awardlinks)
+    sport_idea = ideaunit_shop(_label=sport_text, awardlinks=x_awardlinks)
 
     # THEN
-    assert sport_idea._awardlinks == x_awardlinks
+    assert sport_idea.awardlinks == x_awardlinks
 
 
 def test_ideaunit_shop_ReturnsObjWithParameters():

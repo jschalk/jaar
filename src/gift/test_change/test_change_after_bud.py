@@ -471,8 +471,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     before_sue_budunit.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_text))
     before_sue_budunit.edit_idea_attr(disc_road, awardlink=awardlink_shop(run_text))
     before_sue_budunit.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_text))
-    assert len(before_sue_budunit.get_idea_obj(ball_road)._awardlinks) == 2
-    assert len(before_sue_budunit.get_idea_obj(disc_road)._awardlinks) == 2
+    assert len(before_sue_budunit.get_idea_obj(ball_road).awardlinks) == 2
+    assert len(before_sue_budunit.get_idea_obj(disc_road).awardlinks) == 2
 
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_idea_awardlink_text(), atom_delete())
@@ -484,8 +484,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_awardli
     after_sue_budunit = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    assert len(after_sue_budunit.get_idea_obj(ball_road)._awardlinks) == 2
-    assert len(after_sue_budunit.get_idea_obj(disc_road)._awardlinks) == 1
+    assert len(after_sue_budunit.get_idea_obj(ball_road).awardlinks) == 2
+    assert len(after_sue_budunit.get_idea_obj(disc_road).awardlinks) == 1
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardlink():
@@ -506,7 +506,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     ball_road = before_sue_budunit.make_road(sports_road, ball_text)
     before_sue_budunit.set_idea(ideaunit_shop(ball_text), sports_road)
     before_sue_budunit.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
-    run_awardlink = before_sue_budunit.get_idea_obj(ball_road)._awardlinks.get(run_text)
+    run_awardlink = before_sue_budunit.get_idea_obj(ball_road).awardlinks.get(run_text)
     assert run_awardlink.give_force == 1
     assert run_awardlink.take_force == 1
 
@@ -524,7 +524,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_awardli
     after_sue_au = sue_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    run_awardlink = after_sue_au.get_idea_obj(ball_road)._awardlinks.get(run_text)
+    run_awardlink = after_sue_au.get_idea_obj(ball_road).awardlinks.get(run_text)
     print(f"{run_awardlink.give_force=}")
     assert run_awardlink.give_force == x_give_force
     assert run_awardlink.take_force == x_take_force
@@ -547,7 +547,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
     ball_road = before_sue_budunit.make_road(sports_road, ball_text)
     before_sue_budunit.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_idea = before_sue_budunit.get_idea_obj(ball_road)
-    assert before_ball_idea._awardlinks.get(run_text) is None
+    assert before_ball_idea.awardlinks.get(run_text) is None
 
     # WHEN
     x_give_force = 55
@@ -564,7 +564,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_awardli
 
     # THEN
     after_ball_idea = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_idea._awardlinks.get(run_text) is not None
+    assert after_ball_idea.awardlinks.get(run_text) is not None
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_factunit():
@@ -583,7 +583,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_factuni
     before_sue_au.set_l1_idea(ideaunit_shop(knee_text))
     before_sue_au.set_idea(ideaunit_shop(broken_text), knee_road)
     before_ball_idea = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_idea._factunits == {}
+    assert before_ball_idea.factunits == {}
 
     # WHEN
     broken_fopen = 55
@@ -601,12 +601,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_factuni
 
     # THEN
     after_ball_idea = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_idea._factunits != {}
-    assert after_ball_idea._factunits.get(knee_road) is not None
-    assert after_ball_idea._factunits.get(knee_road).base == knee_road
-    assert after_ball_idea._factunits.get(knee_road).pick == broken_road
-    assert after_ball_idea._factunits.get(knee_road).fopen == broken_fopen
-    assert after_ball_idea._factunits.get(knee_road).fnigh == broken_fnigh
+    assert after_ball_idea.factunits != {}
+    assert after_ball_idea.factunits.get(knee_road) is not None
+    assert after_ball_idea.factunits.get(knee_road).base == knee_road
+    assert after_ball_idea.factunits.get(knee_road).pick == broken_road
+    assert after_ball_idea.factunits.get(knee_road).fopen == broken_fopen
+    assert after_ball_idea.factunits.get(knee_road).fnigh == broken_fnigh
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_factunit():
@@ -628,8 +628,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_factuni
         road=ball_road, factunit=factunit_shop(base=knee_road, pick=broken_road)
     )
     before_ball_idea = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_idea._factunits != {}
-    assert before_ball_idea._factunits.get(knee_road) is not None
+    assert before_ball_idea.factunits != {}
+    assert before_ball_idea.factunits.get(knee_road) is not None
 
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_idea_factunit_text(), atom_delete())
@@ -642,7 +642,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_factuni
 
     # THEN
     after_ball_idea = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_idea._factunits == {}
+    assert after_ball_idea.factunits == {}
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_factunit():
@@ -666,11 +666,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_factuni
     before_knee_factunit = factunit_shop(knee_road, broken_road)
     before_sue_au.edit_idea_attr(ball_road, factunit=before_knee_factunit)
     before_ball_idea = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_idea._factunits != {}
-    assert before_ball_idea._factunits.get(knee_road) is not None
-    assert before_ball_idea._factunits.get(knee_road).pick == broken_road
-    assert before_ball_idea._factunits.get(knee_road).fopen is None
-    assert before_ball_idea._factunits.get(knee_road).fnigh is None
+    assert before_ball_idea.factunits != {}
+    assert before_ball_idea.factunits.get(knee_road) is not None
+    assert before_ball_idea.factunits.get(knee_road).pick == broken_road
+    assert before_ball_idea.factunits.get(knee_road).fopen is None
+    assert before_ball_idea.factunits.get(knee_road).fnigh is None
 
     # WHEN
     medical_fopen = 45
@@ -688,11 +688,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_factuni
 
     # THEN
     after_ball_idea = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_idea._factunits != {}
-    assert after_ball_idea._factunits.get(knee_road) is not None
-    assert after_ball_idea._factunits.get(knee_road).pick == medical_road
-    assert after_ball_idea._factunits.get(knee_road).fopen == medical_fopen
-    assert after_ball_idea._factunits.get(knee_road).fnigh == medical_fnigh
+    assert after_ball_idea.factunits != {}
+    assert after_ball_idea.factunits.get(knee_road) is not None
+    assert after_ball_idea.factunits.get(knee_road).pick == medical_road
+    assert after_ball_idea.factunits.get(knee_road).fopen == medical_fopen
+    assert after_ball_idea.factunits.get(knee_road).fnigh == medical_fnigh
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_reason_premiseunit():
@@ -714,7 +714,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_idea_reason_
         ball_road, reason_base=knee_road, reason_premise=broken_road
     )
     before_ball_idea = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_idea._reasonunits != {}
+    assert before_ball_idea.reasonunits != {}
     before_knee_reasonunit = before_ball_idea.get_reasonunit(knee_road)
     assert before_knee_reasonunit is not None
     broken_premiseunit = before_knee_reasonunit.get_premise(broken_road)
@@ -995,7 +995,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_teamlin
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    assert before_ball_ideaunit._teamunit._teamlinks == set()
+    assert before_ball_ideaunit.teamunit._teamlinks == set()
 
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_insert())
@@ -1007,8 +1007,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_teamlin
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._teamunit._teamlinks != set()
-    assert after_ball_ideaunit._teamunit.get_teamlink(yao_text) is not None
+    assert after_ball_ideaunit.teamunit._teamlinks != set()
+    assert after_ball_ideaunit.teamunit.get_teamlink(yao_text) is not None
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_teamlink():
@@ -1023,9 +1023,9 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_teamlin
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_road)
-    before_ball_ideaunit._teamunit.set_teamlink(yao_text)
-    assert before_ball_ideaunit._teamunit._teamlinks != set()
-    assert before_ball_ideaunit._teamunit.get_teamlink(yao_text) is not None
+    before_ball_ideaunit.teamunit.set_teamlink(yao_text)
+    assert before_ball_ideaunit.teamunit._teamlinks != set()
+    assert before_ball_ideaunit.teamunit.get_teamlink(yao_text) is not None
 
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_idea_teamlink_text(), atom_delete())
@@ -1033,12 +1033,12 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_teamlin
     update_disc_atomunit.set_required_arg(group_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(update_disc_atomunit)
-    print(f"{before_sue_au.get_idea_obj(ball_road)._teamunit=}")
+    print(f"{before_sue_au.get_idea_obj(ball_road).teamunit=}")
     after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_road)
-    assert after_ball_ideaunit._teamunit._teamlinks == set()
+    assert after_ball_ideaunit.teamunit._teamlinks == set()
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_idea_healerlink():
@@ -1093,7 +1093,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_idea_healerl
     x_atomunit.set_required_arg(healer_id_str(), yao_text)
     sue_changeunit = changeunit_shop()
     sue_changeunit.set_atomunit(x_atomunit)
-    print(f"{before_sue_au.get_idea_obj(ball_road)._teamunit=}")
+    print(f"{before_sue_au.get_idea_obj(ball_road).teamunit=}")
     after_sue_au = sue_changeunit.get_edited_bud(before_sue_au)
 
     # THEN

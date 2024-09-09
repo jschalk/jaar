@@ -244,7 +244,7 @@ def test_bud_idea_teamlink_exists_ReturnsObj():
     assert not bud_idea_teamlink_exists(sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot._teamunit.set_teamlink(swim_text)
+    sue_bud._idearoot.teamunit.set_teamlink(swim_text)
 
     # THEN
     assert not bud_idea_teamlink_exists(sue_bud, {})
@@ -534,7 +534,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot._teamunit.set_teamlink(swim_text)
+    sue_bud._idearoot.teamunit.set_teamlink(swim_text)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})

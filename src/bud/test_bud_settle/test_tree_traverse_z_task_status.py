@@ -102,10 +102,10 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_idea = sue_budunit.get_idea_obj(casa_road)
-    print(f"{sue_budunit._owner_id=} {len(casa_idea._reasonunits)=}")
-    # print(f"{casa_idea._reasonunits=}")
-    print(f"{sue_budunit._owner_id=} {len(sue_budunit._idearoot._factunits)=}")
-    # print(f"{sue_budunit._idearoot._factunits=}")
+    print(f"{sue_budunit._owner_id=} {len(casa_idea.reasonunits)=}")
+    # print(f"{casa_idea.reasonunits=}")
+    print(f"{sue_budunit._owner_id=} {len(sue_budunit._idearoot.factunits)=}")
+    # print(f"{sue_budunit._idearoot.factunits=}")
 
     sue_budunit.settle_bud()
     assert sue_budunit._idea_dict
@@ -184,7 +184,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     # assert usa_premise._status == w_need._status
     # assert week_reasonheir.premises == week_reasonheir.premises
 
-    # assert casa_idea._reasonunits == x1_reasonunits
+    # assert casa_idea.reasonunits == x1_reasonunits
 
     # print("iterate through every idea...")
     # for x_idea in idea_dict:
@@ -193,7 +193,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
 
     #     # print("")
     #     # print(f"{x_idea._label=}")
-    #     # print(f"{len(x_idea._reasonunits)=}")
+    #     # print(f"{len(x_idea.reasonunits)=}")
     #     print(
     #         f"  {x_idea._label} iterate through every reasonheir... {len(x_idea._reasonheirs)=} {x_idea._label=}"
     #     )
@@ -251,12 +251,12 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     # set facts as 8am to 10am
     day24hr_open = 8.0
     day24hr_nigh = 10.0
-    print(sue_budunit._idearoot._factunits[day24hr_road])
+    print(sue_budunit._idearoot.factunits[day24hr_road])
     sue_budunit.set_fact(
         base=day24hr_base, pick=day24hr_pick, fopen=day24hr_open, fnigh=day24hr_nigh
     )
-    print(sue_budunit._idearoot._factunits[day24hr_road])
-    print(sue_budunit._idearoot._kids[house_text]._kids[clean_text]._reasonunits)
+    print(sue_budunit._idearoot.factunits[day24hr_road])
+    print(sue_budunit._idearoot._kids[house_text]._kids[clean_text].reasonunits)
     # sue_budunit._idearoot._kids["housemanagement"]._kids[clean_text]._active = None
 
     # THEN
@@ -305,10 +305,10 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     ulty_road = yao_budunit.make_l1_road(ulty_text)
 
     # if yao_budunit._idearoot._kids["Ultimate Frisbee"]._label == "Ultimate Frisbee":
-    assert yao_budunit._idearoot._kids[ulty_text]._reasonunits is not None
+    assert yao_budunit._idearoot._kids[ulty_text].reasonunits is not None
     assert yao_budunit._owner_id is not None
 
-    # for fact in yao_budunit._idearoot._factunits.values():
+    # for fact in yao_budunit._idearoot.factunits.values():
     #     print(f"{fact=}")
 
     # WHEN
@@ -329,7 +329,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     #     )
     #     # print(f"{idea._label=}")
     #     if idea._label == laundry_text:
-    #         for reason in idea._reasonunits.values():
+    #         for reason in idea.reasonunits.values():
     #             print(f"{idea._label=} {reason.base=}")  # {reason.premises=}")
     # assert idea._active is False
     assert yao_budunit._idea_dict.get(laundry_road)._active is False
@@ -400,10 +400,10 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     mt_reasonheir = reasonheir_shop(week_road, premises=mt_premises, _status=False)
     x_idearoot = yao_budunit.get_idea_obj(yao_budunit._real_id)
     x_idearoot.set_reasonunit(reason=mt_reasonunit)
-    # print(f"{yao_budunit._reasonunits[week_road].base=}")
-    # print(f"{yao_budunit._reasonunits[week_road].premises[mon_road].need=}")
-    # print(f"{yao_budunit._reasonunits[week_road].premises[tue_road].need=}")
-    week_reasonunit = x_idearoot._reasonunits[week_road]
+    # print(f"{yao_budunit.reasonunits[week_road].base=}")
+    # print(f"{yao_budunit.reasonunits[week_road].premises[mon_road].need=}")
+    # print(f"{yao_budunit.reasonunits[week_road].premises[tue_road].need=}")
+    week_reasonunit = x_idearoot.reasonunits[week_road]
     print(f"{week_reasonunit.premises=}")
     premise_mon = week_reasonunit.premises.get(mon_road)
     premise_tue = week_reasonunit.premises.get(tue_road)
@@ -476,8 +476,8 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
         cleaning_road, "clean sheets couch blankets"
     )
     clean_sheet_idea = yao_budunit.get_idea_obj(clean_couch_road)
-    # print(f"{clean_sheet_idea._reasonunits.values()=}")
-    ced_week_reason = clean_sheet_idea._reasonunits.get(ced_week_base)
+    # print(f"{clean_sheet_idea.reasonunits.values()=}")
+    ced_week_reason = clean_sheet_idea.reasonunits.get(ced_week_base)
     ced_week_premise = ced_week_reason.premises.get(ced_week_base)
     print(
         f"{clean_sheet_idea._label=} {ced_week_reason.base=} {ced_week_premise.need=}"
@@ -486,7 +486,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     premise_divisor = ced_week_premise.divisor
     premise_open = ced_week_premise.open
     premise_nigh = ced_week_premise.nigh
-    # print(f"{idea._reasonunits=}")
+    # print(f"{idea.reasonunits=}")
     assert clean_sheet_idea._active is False
 
     # for idea in idea_dict:
@@ -512,7 +512,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     print(
         f"Nation-states set and also fact set: {ced_week_base=} with {ced_week_open=} and {ced_week_open=}"
     )
-    print(f"{yao_budunit._idearoot._factunits=}")
+    print(f"{yao_budunit._idearoot.factunits=}")
     yao_budunit.settle_bud()
 
     # THEN
@@ -523,7 +523,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     clean_couch_text = "clean sheets couch blankets"
     clean_couch_road = yao_budunit.make_road(cleaning_road, clean_couch_text)
     clean_couch_idea = yao_budunit.get_idea_obj(road=clean_couch_road)
-    week_reason = clean_couch_idea._reasonunits.get(week_road)
+    week_reason = clean_couch_idea.reasonunits.get(week_road)
     week_premise = week_reason.premises.get(week_road)
     print(f"{clean_couch_idea._label=} {week_reason.base=} {week_premise=}")
     assert week_premise.divisor == 6 and week_premise.open == 1
@@ -616,7 +616,7 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
 
     # THEN
     print(f"{len(idea_dict)=}")
-    print(f"{len(yao_budunit._idearoot._factunits)=}")
+    print(f"{len(yao_budunit._idearoot.factunits)=}")
     assert from_list_get_active(mat_road, yao_budunit._idea_dict)
 
 

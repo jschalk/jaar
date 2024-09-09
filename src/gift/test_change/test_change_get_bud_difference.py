@@ -646,7 +646,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     ball_road = before_sue_au.make_road(sports_road, ball_text)
     before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
     before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
-    run_awardlink = before_sue_au.get_idea_obj(ball_road)._awardlinks.get(run_text)
+    run_awardlink = before_sue_au.get_idea_obj(ball_road).awardlinks.get(run_text)
 
     after_sue_bud = copy_deepcopy(before_sue_au)
     after_give_force = 55
@@ -1142,7 +1142,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_i
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._teamunit.set_teamlink(xio_text)
+    after_ball_ideaunit.teamunit.set_teamlink(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1174,11 +1174,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_d
     ball_road = before_sue_bud.make_road(sports_road, ball_text)
     before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit._teamunit.set_teamlink(xio_text)
+    before_ball_ideaunit.teamunit.set_teamlink(xio_text)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._teamunit.del_teamlink(xio_text)
+    after_ball_ideaunit.teamunit.del_teamlink(xio_text)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1358,7 +1358,7 @@ def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     ball_road = after_sue_bud.make_road(sports_road, ball_text)
     after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit._teamunit.set_teamlink(xio_text)
+    after_ball_ideaunit.teamunit.set_teamlink(xio_text)
 
     before_sue_bud = budunit_shop(sue_text)
     sue1_changeunit = changeunit_shop()
