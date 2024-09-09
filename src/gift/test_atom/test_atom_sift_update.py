@@ -100,38 +100,47 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
     assert zia_optional_args == {debtit_vote_str(): zia_run_debtit_vote}
 
 
-# def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
-#     # ESTABLISH
-#     sue_bud = budunit_shop("Sue")
-#     casa_text = "casa"
-#     casa_road = sue_bud.make_l1_road(casa_text)
-#     sue_bud.add_idea(casa_road)
+def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_bud.make_l1_road(casa_text)
+    sue_bud.add_idea(casa_road)
 
-#     # sue_addin = 55
-#     # sue_begin = 55
-#     # sue_close = 55
-#     # sue_denom = 55
-#     # sue_gogo_want = 55
-#     sue_mass = 7
-#     # sue_morph = 44
-#     # sue_numor = 44
-#     # sue_pledge = 44
-#     # sue_problem_bool = 44
-#     # sue_stop_want = 44
-#     old_casa_atom = atomunit_shop(bud_ideaunit_text(), atom_insert())
-#     old_casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
-#     old_casa_atom.set_arg(label_str(), casa_text)
-#     old_casa_atom.set_arg(mass_str(), sue_mass)
-#     # THEN
-#     new_casa_atom = sift_atomunit(sue_bud, old_casa_atom)
+    # sue_addin = 23
+    # sue_begin = 37
+    # sue_close = 43
+    # sue_denom = 47
+    # sue_gogo_want = 59
+    sue_mass = 67
+    # sue_morph = 79
+    # sue_numor = 83
+    # sue_pledge = 97
+    # # sue_problem_bool = 44
+    # sue_stop_want = 107
+    old_casa_atom = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    old_casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
+    old_casa_atom.set_arg(label_str(), casa_text)
+    old_casa_atom.set_arg(mass_str(), sue_mass)
+    # THEN
+    new_casa_atom = sift_atomunit(sue_bud, old_casa_atom)
 
-#     # THEN
-#     assert new_casa_atom
-#     assert new_casa_atom.crud_text == atom_update()
-#     assert new_casa_atom.get_optional_args_dict()
-#     zia_optional_args = new_casa_atom.get_optional_args_dict()
-#     assert zia_optional_args == {mass_str(): sue_mass}
-#     assert 1 == 2
+    # THEN
+    assert new_casa_atom
+    assert new_casa_atom.crud_text == atom_update()
+    assert new_casa_atom.get_optional_args_dict()
+    zia_optional_args = new_casa_atom.get_optional_args_dict()
+    # assert zia_optional_args.get(addin_str()) == sue_addin
+    # assert zia_optional_args.get(begin_str()) == sue_begin
+    # assert zia_optional_args.get(close_str()) == sue_close
+    # assert zia_optional_args.get(denom_str()) == sue_denom
+    # assert zia_optional_args.get(gogo_want_str()) == sue_gogo_want
+    assert zia_optional_args.get(mass_str()) == sue_mass
+    # assert zia_optional_args.get(morph_str()) == sue_morph
+    # assert zia_optional_args.get(numor_str()) == sue_numor
+    # assert zia_optional_args.get(pledge_str()) == sue_pledge
+    # # assert zia_optional_args.get(problem_bool_str()) == sue_problem_bool
+    # assert zia_optional_args.get(stop_want_str()) == sue_stop_want
 
 
 # def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_awardlink():
