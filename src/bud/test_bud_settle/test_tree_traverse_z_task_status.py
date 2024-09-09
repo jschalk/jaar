@@ -158,7 +158,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     print(f"\nlook at {casa_idea.get_road()=}")
     assert casa_idea._parent_road == sue_budunit._real_id
     assert casa_idea._kids == {}
-    assert casa_idea._mass == 30
+    assert casa_idea.mass == 30
     assert casa_idea._label == casa_text
     assert casa_idea._level == 1
     assert casa_idea._active

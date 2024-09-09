@@ -78,7 +78,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     clean_road = zia_budunit.make_l1_road(clean_text)
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     assert ingested_list[0] == clean_ideaunit
-    assert ingested_list[0]._mass == zia_debtor_pool
+    assert ingested_list[0].mass == zia_debtor_pool
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v2():
@@ -108,7 +108,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     cook_ideaunit = zia_budunit.get_idea_obj(cook_road)
     assert ingested_list[0] == cook_ideaunit
-    assert ingested_list[0]._mass == 16.0
+    assert ingested_list[0].mass == 16.0
     assert ingested_list == [cook_ideaunit, clean_ideaunit]
 
 
@@ -119,7 +119,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     clean_text = "clean"
     cook_text = "cook"
     zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, _mass=3, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, mass=3, pledge=True))
     zia_debtor_pool = 32
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -137,8 +137,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     cook_ideaunit = zia_budunit.get_idea_obj(cook_road)
     assert ingested_list == [cook_ideaunit, clean_ideaunit]
-    assert ingested_list[0]._mass == 24.0
-    assert ingested_list[1]._mass == 8.0
+    assert ingested_list[0].mass == 24.0
+    assert ingested_list[1].mass == 8.0
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v4():
@@ -148,7 +148,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     clean_text = "clean"
     cook_text = "cook"
     zia_budunit.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
-    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, _mass=2, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_text, mass=2, pledge=True))
     zia_debtor_pool = 32
     zia_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -165,6 +165,6 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     cook_road = zia_budunit.make_l1_road(cook_text)
     clean_ideaunit = zia_budunit.get_idea_obj(clean_road)
     cook_ideaunit = zia_budunit.get_idea_obj(cook_road)
-    assert ingested_list[0]._mass == 22
-    assert ingested_list[1]._mass == 10
+    assert ingested_list[0].mass == 22
+    assert ingested_list[1].mass == 10
     assert ingested_list == [cook_ideaunit, clean_ideaunit]

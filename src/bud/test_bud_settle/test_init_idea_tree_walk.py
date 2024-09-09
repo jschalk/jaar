@@ -110,7 +110,7 @@ def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     casa_road = sue_bud.make_l1_road("casa")
     cleaning_road = sue_bud.make_road(casa_road, "cleaning")
     clean_cookery_text = "clean_cookery"
-    clean_cookery_idea = ideaunit_shop(clean_cookery_text, _mass=40, pledge=True)
+    clean_cookery_idea = ideaunit_shop(clean_cookery_text, mass=40, pledge=True)
 
     buildings_text = "buildings"
     buildings_road = sue_bud.make_l1_road(buildings_text)

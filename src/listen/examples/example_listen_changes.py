@@ -37,7 +37,7 @@ def get_changeunit_example1() -> ChangeUnit:
     sue_changeunit = changeunit_shop()
 
     budunit_text = budunit_text()
-    mass_name = "_mass"
+    mass_name = "mass"
     x_atomunit = atomunit_shop(budunit_text(), atom_update())
     x_atomunit.set_optional_arg(mass_name, 55)
     x_attribute = "_max_tree_traverse"

@@ -556,7 +556,7 @@ class BudUnit:
     ) -> IdeaUnit:
         x_label = get_terminus_node(idea_road, self._road_delimiter)
         x_parent_road = get_parent_road(idea_road, self._road_delimiter)
-        x_ideaunit = ideaunit_shop(x_label, _mass=mass)
+        x_ideaunit = ideaunit_shop(x_label, mass=mass)
         if pledge:
             x_ideaunit.pledge = True
         self.set_idea(x_ideaunit, x_parent_road)
@@ -624,10 +624,10 @@ class BudUnit:
             for adoptee_label in adoptees:
                 adoptee_road = self.make_road(parent_road, adoptee_label)
                 adoptee_idea = self.get_idea_obj(adoptee_road)
-                mass_sum += adoptee_idea._mass
+                mass_sum += adoptee_idea.mass
                 new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
                 self.set_idea(adoptee_idea, new_adoptee_parent_road)
-                self.edit_idea_attr(new_adoptee_parent_road, mass=adoptee_idea._mass)
+                self.edit_idea_attr(new_adoptee_parent_road, mass=adoptee_idea.mass)
                 self.del_idea_obj(adoptee_road)
 
             if bundling:
@@ -1123,7 +1123,7 @@ class BudUnit:
             self._tree_traverse_count == 1
             and not self._idearoot.is_kidless()
             and self._idearoot.get_kids_mass_sum() == 0
-            and self._idearoot._mass != 0
+            and self._idearoot.mass != 0
         ):
             self._offtrack_kids_mass_set.add(self._idearoot.get_road())
 
@@ -1155,7 +1155,7 @@ class BudUnit:
             self._allot_fund_share(idea=idea_kid)
         if (
             self._tree_traverse_count == 1
-            and idea_kid._mass != 0
+            and idea_kid.mass != 0
             and idea_kid.is_kidless() is False
             and idea_kid.get_kids_mass_sum() == 0
         ):
@@ -1226,7 +1226,7 @@ class BudUnit:
 
     def _execute_tree_traverse(self, econ_exceptions: bool = False):
         x_idearoot_kids_items = self._idearoot._kids.items()
-        kids_ledger = {x_road: kid._mass for x_road, kid in x_idearoot_kids_items}
+        kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
         alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self._fund_coin)
         x_idearoot_kid_fund_onset = None
@@ -1254,7 +1254,7 @@ class BudUnit:
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
             kids_items = parent_idea._kids.items()
-            x_ledger = {x_road: idea_kid._mass for x_road, idea_kid in kids_items}
+            x_ledger = {x_road: idea_kid.mass for x_road, idea_kid in kids_items}
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self._fund_coin)
 
@@ -1508,7 +1508,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _parent_road="",
         _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
-        _mass=get_obj_from_idea_dict(idearoot_dict, "_mass"),
+        mass=get_obj_from_idea_dict(idearoot_dict, "mass"),
         _begin=get_obj_from_idea_dict(idearoot_dict, "_begin"),
         _close=get_obj_from_idea_dict(idearoot_dict, "_close"),
         _numor=get_obj_from_idea_dict(idearoot_dict, "_numor"),
@@ -1548,7 +1548,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             to_evaluate_idea_dicts.append(kid_dict)
         x_ideakid = ideaunit_shop(
             _label=get_obj_from_idea_dict(idea_dict, "_label"),
-            _mass=get_obj_from_idea_dict(idea_dict, "_mass"),
+            mass=get_obj_from_idea_dict(idea_dict, "mass"),
             _uid=get_obj_from_idea_dict(idea_dict, "_uid"),
             _begin=get_obj_from_idea_dict(idea_dict, "_begin"),
             _close=get_obj_from_idea_dict(idea_dict, "_close"),

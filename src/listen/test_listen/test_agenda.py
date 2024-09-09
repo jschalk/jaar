@@ -63,9 +63,9 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     # THEN
     clean_road = zia_budunit.make_l1_road(clean_text)
     yao_clean_ideaunit = after_yao_budunit.get_idea_obj(clean_road)
-    print(f"{yao_clean_ideaunit._mass=}")
-    assert yao_clean_ideaunit._mass != zia_clean_ideaunit._mass
-    assert yao_clean_ideaunit._mass == yao_acct_debtit_belief
+    print(f"{yao_clean_ideaunit.mass=}")
+    assert yao_clean_ideaunit.mass != zia_clean_ideaunit.mass
+    assert yao_clean_ideaunit.mass == yao_acct_debtit_belief
     assert after_yao_budunit == before_yao_budunit
     assert len(after_yao_budunit.get_agenda_dict()) == 1
 
@@ -97,13 +97,13 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     # THEN
     clean_road = zia_budunit.make_road(casa_road, clean_text)
     yao_clean_ideaunit = after_yao_budunit.get_idea_obj(clean_road)
-    print(f"{yao_clean_ideaunit._mass=}")
-    assert yao_clean_ideaunit._mass != zia_clean_ideaunit._mass
-    assert yao_clean_ideaunit._mass == yao_debtit_belief
+    print(f"{yao_clean_ideaunit.mass=}")
+    assert yao_clean_ideaunit.mass != zia_clean_ideaunit.mass
+    assert yao_clean_ideaunit.mass == yao_debtit_belief
     after_casa_ideaunit = after_yao_budunit.get_idea_obj(casa_road)
-    print(f"{after_casa_ideaunit._mass=}")
-    assert after_casa_ideaunit._mass != 1
-    assert after_casa_ideaunit._mass == yao_debtit_belief
+    print(f"{after_casa_ideaunit.mass=}")
+    assert after_casa_ideaunit.mass != 1
+    assert after_casa_ideaunit.mass == yao_debtit_belief
     assert after_yao_budunit == before_yao_budunit
     assert len(after_yao_budunit.get_agenda_dict()) == 1
 
@@ -149,19 +149,19 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBud():
     after_clean_ideaunit = after_yao_budunit.get_idea_obj(clean_road)
     after_casa_ideaunit = after_yao_budunit.get_idea_obj(casa_road)
     after_fly_ideaunit = after_yao_budunit.get_idea_obj(fly_road)
-    print(f"{after_clean_ideaunit._mass=}")
-    assert after_clean_ideaunit._mass != yao_clean_ideaunit._mass
-    assert after_clean_ideaunit._mass == 19
-    print(f"{after_cook_ideaunit._mass=}")
-    assert after_cook_ideaunit._mass != yao_cook_ideaunit._mass
-    assert after_cook_ideaunit._mass == 18
-    print(f"{after_casa_ideaunit._mass=}")
-    assert after_casa_ideaunit._mass != 1
-    assert after_casa_ideaunit._mass == 37
+    print(f"{after_clean_ideaunit.mass=}")
+    assert after_clean_ideaunit.mass != yao_clean_ideaunit.mass
+    assert after_clean_ideaunit.mass == 19
+    print(f"{after_cook_ideaunit.mass=}")
+    assert after_cook_ideaunit.mass != yao_cook_ideaunit.mass
+    assert after_cook_ideaunit.mass == 18
+    print(f"{after_casa_ideaunit.mass=}")
+    assert after_casa_ideaunit.mass != 1
+    assert after_casa_ideaunit.mass == 37
     assert after_yao_budunit == before_yao_budunit
     assert len(after_yao_budunit.get_agenda_dict()) == 3
-    assert after_fly_ideaunit._mass != 1
-    assert after_fly_ideaunit._mass == 18
+    assert after_fly_ideaunit.mass != 1
+    assert after_fly_ideaunit.mass == 18
 
 
 def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUnitAlreadyExists():
@@ -208,19 +208,19 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUni
     after_dish_ideaunit = after_yao_budunit.get_idea_obj(dish_road)
     after_casa_ideaunit = after_yao_budunit.get_idea_obj(casa_road)
     after_fly_ideaunit = after_yao_budunit.get_idea_obj(fly_road)
-    print(f"{after_dish_ideaunit._mass=}")
-    assert after_dish_ideaunit._mass != yao_dish_ideaunit._mass
-    assert after_dish_ideaunit._mass == 1018
-    print(f"{after_cook_ideaunit._mass=}")
-    assert after_cook_ideaunit._mass != yao_cook_ideaunit._mass
-    assert after_cook_ideaunit._mass == 19
-    print(f"{after_casa_ideaunit._mass=}")
-    assert after_casa_ideaunit._mass != 1
-    assert after_casa_ideaunit._mass == 38
+    print(f"{after_dish_ideaunit.mass=}")
+    assert after_dish_ideaunit.mass != yao_dish_ideaunit.mass
+    assert after_dish_ideaunit.mass == 1018
+    print(f"{after_cook_ideaunit.mass=}")
+    assert after_cook_ideaunit.mass != yao_cook_ideaunit.mass
+    assert after_cook_ideaunit.mass == 19
+    print(f"{after_casa_ideaunit.mass=}")
+    assert after_casa_ideaunit.mass != 1
+    assert after_casa_ideaunit.mass == 38
     assert after_yao_budunit == before_yao_budunit
     assert len(after_yao_budunit.get_agenda_dict()) == 3
-    assert after_fly_ideaunit._mass != 1
-    assert after_fly_ideaunit._mass == 18
+    assert after_fly_ideaunit.mass != 1
+    assert after_fly_ideaunit.mass == 18
 
 
 def test_listen_to_speaker_agenda_ProcessesIrrationalBud():

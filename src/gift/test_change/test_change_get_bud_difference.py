@@ -429,7 +429,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
             music_text,
             _begin=music_begin,
             _close=music_close,
-            _mass=music_mass,
+            mass=music_mass,
             pledge=music_pledge,
         )
     )
@@ -480,7 +480,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
             music_text,
             _begin=before_music_begin,
             _close=before_music_close,
-            _mass=before_music_mass,
+            mass=before_music_mass,
             pledge=before_music_pledge,
         )
     )

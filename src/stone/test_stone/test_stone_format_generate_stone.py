@@ -153,7 +153,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, mass=casa_mass))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
@@ -208,7 +208,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, _mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_text, mass=casa_mass))
     clean_text = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
     sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)

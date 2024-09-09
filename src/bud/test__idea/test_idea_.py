@@ -15,7 +15,7 @@ def test_IdeaUnit_Exists():
     x_ideaunit = IdeaUnit()
     assert x_ideaunit
     assert x_ideaunit._kids is None
-    assert x_ideaunit._mass is None
+    assert x_ideaunit.mass is None
     assert x_ideaunit._label is None
     assert x_ideaunit._uid is None
     assert x_ideaunit._reasonunits is None
@@ -66,7 +66,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     # THEN
     assert x_ideaunit
     assert x_ideaunit._kids == {}
-    assert x_ideaunit._mass == 1
+    assert x_ideaunit.mass == 1
     assert x_ideaunit._label is None
     assert x_ideaunit._bud_real_id == root_label()
     assert x_ideaunit._uid is None
@@ -110,19 +110,19 @@ def test_ideaunit_shop_Allows_massToBeZero():
     # ESTABLISH
     zero_int = 0
     # WHEN
-    x_ideaunit = ideaunit_shop("run", _mass=zero_int)
+    x_ideaunit = ideaunit_shop("run", mass=zero_int)
     # THEN
-    assert x_ideaunit._mass == zero_int
+    assert x_ideaunit.mass == zero_int
 
 
 def test_ideaunit_shop_Allows_doesNotAllow_massToBeNegative():
     # ESTABLISH
     negative_int = -4
     # WHEN
-    x_ideaunit = ideaunit_shop("run", _mass=negative_int)
+    x_ideaunit = ideaunit_shop("run", mass=negative_int)
     # THEN
     zero_int = 0
-    assert x_ideaunit._mass == zero_int
+    assert x_ideaunit.mass == zero_int
 
 
 def test_ideaunit_shop_NonNoneParametersReturnsCorrectObj():

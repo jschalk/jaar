@@ -606,7 +606,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._denom != y_obj._denom
             or x_obj._numor != y_obj._numor
             or x_obj._morph != y_obj._morph
-            or x_obj._mass != y_obj._mass
+            or x_obj.mass != y_obj.mass
             or x_obj.pledge != y_obj.pledge
         )
     elif category == bud_idea_factunit_text():

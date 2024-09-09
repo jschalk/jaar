@@ -131,7 +131,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _parent_road=casa_road,
         _kids=None,
         _awardlinks=biker_and_flyer_awardlinks,
-        _mass=30,
+        mass=30,
         _label=casa_text,
         _level=1,
         _reasonunits=x1_reasonunits,
@@ -178,7 +178,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["_teamunit"] == sue_teamunit.get_dict()
     assert casa_dict["_healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["_originunit"] == casa_idea.get_originunit_dict()
-    assert casa_dict["_mass"] == casa_idea._mass
+    assert casa_dict["mass"] == casa_idea.mass
     assert casa_dict["_label"] == casa_idea._label
     assert casa_dict["_uid"] == casa_idea._uid
     assert casa_dict["_begin"] == casa_idea._begin
@@ -205,7 +205,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {"_mass": 1}
+    assert casa_dict == {"mass": 1}
 
 
 def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():

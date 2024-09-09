@@ -85,7 +85,7 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
     nia_text = "Nia"
     nia_bud = budunit_shop(nia_text, _tally=10)
     weekdays = "weekdays"
-    nia_bud.set_l1_idea(ideaunit_shop(weekdays, _mass=40))
+    nia_bud.set_l1_idea(ideaunit_shop(weekdays, mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
 
     # WHEN/THEN

@@ -52,10 +52,10 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_id: OwnerID):
 def generate_ingest_list(
     item_list: list[IdeaUnit], debtor_amount: float, bit: float
 ) -> list[IdeaUnit]:
-    idea_ledger = {x_idea.get_road(): x_idea._mass for x_idea in item_list}
+    idea_ledger = {x_idea.get_road(): x_idea.mass for x_idea in item_list}
     mass_allot = allot_scale(idea_ledger, debtor_amount, bit)
     for x_ideaunit in item_list:
-        x_ideaunit._mass = mass_allot.get(x_ideaunit.get_road())
+        x_ideaunit.mass = mass_allot.get(x_ideaunit.get_road())
     return item_list
 
 
@@ -70,7 +70,7 @@ def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):
         listener=listener,
         replace_mass_list=mass_data.replace_mass_list,
         add_to_mass_list=mass_data.add_to_mass_list,
-        x_mass=ingest_ideaunit._mass,
+        x_mass=ingest_ideaunit.mass,
     )
 
 
@@ -105,7 +105,7 @@ def _add_and_replace_ideaunit_masss(
         listener.edit_idea_attr(idea_road, mass=x_mass)
     for idea_road in add_to_mass_list:
         x_ideaunit = listener.get_idea_obj(idea_road)
-        x_ideaunit._mass += x_mass
+        x_ideaunit.mass += x_mass
 
 
 def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:

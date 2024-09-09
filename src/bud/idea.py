@@ -206,7 +206,7 @@ def ideaattrfilter_shop(
 @dataclass
 class IdeaUnit:
     _label: RoadNode = None
-    _mass: int = None
+    mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
@@ -560,7 +560,7 @@ class IdeaUnit:
 
     def _set_attrs_to_ideaunit(self, idea_attr: IdeaAttrFilter):
         if idea_attr.mass is not None:
-            self._mass = idea_attr.mass
+            self.mass = idea_attr.mass
         if idea_attr.uid is not None:
             self._uid = idea_attr.uid
         if idea_attr.reason is not None:
@@ -738,7 +738,7 @@ class IdeaUnit:
         self._kids = {}
 
     def get_kids_mass_sum(self) -> float:
-        return sum(x_kid._mass for x_kid in self._kids.values())
+        return sum(x_kid.mass for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
         self._awardlinks[awardlink.group_id] = awardlink
@@ -893,7 +893,7 @@ class IdeaUnit:
         return self._awardheirs != {}
 
     def get_dict(self) -> dict[str, str]:
-        x_dict = {"_mass": self._mass}
+        x_dict = {"mass": self.mass}
 
         if self._label is not None:
             x_dict["_label"] = self._label
@@ -975,7 +975,7 @@ def ideaunit_shop(
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,
-    _mass: int = 1,
+    mass: int = 1,
     _awardlinks: dict[GroupID, AwardLink] = None,
     _awardheirs: dict[GroupID, AwardHeir] = None,  # Calculated field
     _awardlines: dict[GroupID, AwardLink] = None,  # Calculated field
@@ -1024,7 +1024,7 @@ def ideaunit_shop(
         _uid=_uid,
         _parent_road=_parent_road,
         _kids=get_empty_dict_if_none(_kids),
-        _mass=get_positive_int(_mass),
+        mass=get_positive_int(mass),
         _awardlinks=get_empty_dict_if_none(_awardlinks),
         _awardheirs=get_empty_dict_if_none(_awardheirs),
         _awardlines=get_empty_dict_if_none(_awardlines),

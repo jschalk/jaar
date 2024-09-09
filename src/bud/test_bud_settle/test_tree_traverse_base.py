@@ -450,7 +450,7 @@ def test_BudUnit_settle_bud_WhenIdeaRootHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _mass=0)
+    casa_idea = ideaunit_shop(casa_text, mass=0)
     sue_budunit.set_l1_idea(casa_idea)
     assert sue_budunit._offtrack_kids_mass_set == set()
 
@@ -473,23 +473,23 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit = budunit_shop("Sue")
     casa_text = "casa"
     casa_road = sue_budunit.make_l1_road(casa_text)
-    casa_idea = ideaunit_shop(casa_text, _mass=1)
+    casa_idea = ideaunit_shop(casa_text, mass=1)
 
     swim_text = "swimming"
     swim_road = sue_budunit.make_road(casa_road, swim_text)
-    swim_idea = ideaunit_shop(swim_text, _mass=8)
+    swim_idea = ideaunit_shop(swim_text, mass=8)
 
     clean_text = "cleaning"
     clean_road = sue_budunit.make_road(casa_road, clean_text)
-    clean_idea = ideaunit_shop(clean_text, _mass=2)
+    clean_idea = ideaunit_shop(clean_text, mass=2)
     sue_budunit.set_idea(ideaunit_shop(clean_text), casa_road)
 
     sweep_text = "sweep"
     sweep_road = sue_budunit.make_road(clean_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _mass=0)
+    sweep_idea = ideaunit_shop(sweep_text, mass=0)
     vaccum_text = "vaccum"
     vaccum_road = sue_budunit.make_road(clean_road, vaccum_text)
-    vaccum_idea = ideaunit_shop(vaccum_text, _mass=0)
+    vaccum_idea = ideaunit_shop(vaccum_text, mass=0)
 
     sue_budunit.set_l1_idea(casa_idea)
     sue_budunit.set_idea(swim_idea, casa_road)

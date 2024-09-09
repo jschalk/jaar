@@ -388,7 +388,7 @@ class ChangeUnit:
             x_atomunit.set_optional_arg(denom_str(), insert_ideaunit._denom)
             x_atomunit.set_optional_arg(numor_str(), insert_ideaunit._numor)
             x_atomunit.set_optional_arg(morph_str(), insert_ideaunit._morph)
-            x_atomunit.set_optional_arg(mass_str(), insert_ideaunit._mass)
+            x_atomunit.set_optional_arg(mass_str(), insert_ideaunit.mass)
             x_atomunit.set_optional_arg(pledge_str(), insert_ideaunit.pledge)
             self.set_atomunit(x_atomunit)
 
@@ -439,8 +439,8 @@ class ChangeUnit:
                     x_atomunit.set_optional_arg(numor_str(), after_ideaunit._numor)
                 if before_ideaunit._morph != after_ideaunit._morph:
                     x_atomunit.set_optional_arg(morph_str(), after_ideaunit._morph)
-                if before_ideaunit._mass != after_ideaunit._mass:
-                    x_atomunit.set_optional_arg(mass_str(), after_ideaunit._mass)
+                if before_ideaunit.mass != after_ideaunit.mass:
+                    x_atomunit.set_optional_arg(mass_str(), after_ideaunit.mass)
                 if before_ideaunit.pledge != after_ideaunit.pledge:
                     x_atomunit.set_optional_arg(pledge_str(), after_ideaunit.pledge)
                 self.set_atomunit(x_atomunit)

@@ -135,7 +135,7 @@ def test_BudUnit_add_idea_SetsAttr_Scenario1():
 
     # THEN
     casa_ideaunit = bob_budunit.get_idea_obj(casa_road)
-    assert casa_ideaunit._mass == casa_mass
+    assert casa_ideaunit.mass == casa_mass
     assert casa_ideaunit.pledge
 
 
@@ -151,7 +151,7 @@ def test_BudUnit_add_idea_ReturnsObj():
 
     # THEN
     assert casa_ideaunit._label == "casa"
-    assert casa_ideaunit._mass == casa_mass
+    assert casa_ideaunit.mass == casa_mass
 
 
 def test_BudUnit_set_idea_CorrectlyAddsIdeaObjWithNonstandard_delimiter():
@@ -327,10 +327,10 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     casa_text = "casa"
     casa_road = sue_bud.make_l1_road(casa_text)
     print(f"{casa_road=}")
-    old_mass = sue_bud._idearoot._kids[casa_text]._mass
+    old_mass = sue_bud._idearoot._kids[casa_text].mass
     assert old_mass == 30
     sue_bud.edit_idea_attr(road=casa_road, mass=23)
-    new_mass = sue_bud._idearoot._kids[casa_text]._mass
+    new_mass = sue_bud._idearoot._kids[casa_text].mass
     assert new_mass == 23
 
     # uid: int = None,
@@ -559,23 +559,23 @@ def test_BudUnit_set_idea_bundling_SetsNewParentWithMassEqualToSumOfAdoptedIdeas
     bob_bud = budunit_shop("Bob")
     sports_text = "sports"
     sports_road = bob_bud.make_l1_road(sports_text)
-    bob_bud.set_l1_idea(ideaunit_shop(sports_text, _mass=2))
+    bob_bud.set_l1_idea(ideaunit_shop(sports_text, mass=2))
     swim_text = "swim"
     swim_mass = 3
-    bob_bud.set_idea(ideaunit_shop(swim_text, _mass=swim_mass), sports_road)
+    bob_bud.set_idea(ideaunit_shop(swim_text, mass=swim_mass), sports_road)
     hike_text = "hike"
     hike_mass = 5
-    bob_bud.set_idea(ideaunit_shop(hike_text, _mass=hike_mass), sports_road)
+    bob_bud.set_idea(ideaunit_shop(hike_text, mass=hike_mass), sports_road)
     bball_text = "bball"
     bball_mass = 7
-    bob_bud.set_idea(ideaunit_shop(bball_text, _mass=bball_mass), sports_road)
+    bob_bud.set_idea(ideaunit_shop(bball_text, mass=bball_mass), sports_road)
 
     sports_swim_road = bob_bud.make_road(sports_road, swim_text)
     sports_hike_road = bob_bud.make_road(sports_road, hike_text)
     sports_bball_road = bob_bud.make_road(sports_road, bball_text)
-    assert bob_bud.get_idea_obj(sports_swim_road)._mass == swim_mass
-    assert bob_bud.get_idea_obj(sports_hike_road)._mass == hike_mass
-    assert bob_bud.get_idea_obj(sports_bball_road)._mass == bball_mass
+    assert bob_bud.get_idea_obj(sports_swim_road).mass == swim_mass
+    assert bob_bud.get_idea_obj(sports_hike_road).mass == hike_mass
+    assert bob_bud.get_idea_obj(sports_bball_road).mass == bball_mass
     summer_text = "summer"
     summer_road = bob_bud.make_road(sports_road, summer_text)
     summer_swim_road = bob_bud.make_road(summer_road, swim_text)
@@ -594,9 +594,9 @@ def test_BudUnit_set_idea_bundling_SetsNewParentWithMassEqualToSumOfAdoptedIdeas
     )
 
     # THEN
-    assert bob_bud.get_idea_obj(summer_road)._mass == swim_mass + hike_mass
-    assert bob_bud.get_idea_obj(summer_swim_road)._mass == swim_mass
-    assert bob_bud.get_idea_obj(summer_hike_road)._mass == hike_mass
+    assert bob_bud.get_idea_obj(summer_road).mass == swim_mass + hike_mass
+    assert bob_bud.get_idea_obj(summer_swim_road).mass == swim_mass
+    assert bob_bud.get_idea_obj(summer_hike_road).mass == hike_mass
     assert bob_bud.idea_exists(summer_bball_road) is False
     assert bob_bud.idea_exists(sports_swim_road) is False
     assert bob_bud.idea_exists(sports_hike_road) is False
@@ -607,23 +607,23 @@ def test_BudUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState():
     bob_bud = budunit_shop("Bob")
     sports_text = "sports"
     sports_road = bob_bud.make_l1_road(sports_text)
-    bob_bud.set_l1_idea(ideaunit_shop(sports_text, _mass=2))
+    bob_bud.set_l1_idea(ideaunit_shop(sports_text, mass=2))
     swim_text = "swim"
     swim_mass = 3
-    bob_bud.set_idea(ideaunit_shop(swim_text, _mass=swim_mass), sports_road)
+    bob_bud.set_idea(ideaunit_shop(swim_text, mass=swim_mass), sports_road)
     hike_text = "hike"
     hike_mass = 5
-    bob_bud.set_idea(ideaunit_shop(hike_text, _mass=hike_mass), sports_road)
+    bob_bud.set_idea(ideaunit_shop(hike_text, mass=hike_mass), sports_road)
     bball_text = "bball"
     bball_mass = 7
-    bob_bud.set_idea(ideaunit_shop(bball_text, _mass=bball_mass), sports_road)
+    bob_bud.set_idea(ideaunit_shop(bball_text, mass=bball_mass), sports_road)
 
     sports_swim_road = bob_bud.make_road(sports_road, swim_text)
     sports_hike_road = bob_bud.make_road(sports_road, hike_text)
     sports_bball_road = bob_bud.make_road(sports_road, bball_text)
-    assert bob_bud.get_idea_obj(sports_swim_road)._mass == swim_mass
-    assert bob_bud.get_idea_obj(sports_hike_road)._mass == hike_mass
-    assert bob_bud.get_idea_obj(sports_bball_road)._mass == bball_mass
+    assert bob_bud.get_idea_obj(sports_swim_road).mass == swim_mass
+    assert bob_bud.get_idea_obj(sports_hike_road).mass == hike_mass
+    assert bob_bud.get_idea_obj(sports_bball_road).mass == bball_mass
     summer_text = "summer"
     summer_road = bob_bud.make_road(sports_road, summer_text)
     summer_swim_road = bob_bud.make_road(summer_road, swim_text)
@@ -638,9 +638,9 @@ def test_BudUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState():
         adoptees=[swim_text, hike_text],
         bundling=True,
     )
-    assert bob_bud.get_idea_obj(summer_road)._mass == swim_mass + hike_mass
-    assert bob_bud.get_idea_obj(summer_swim_road)._mass == swim_mass
-    assert bob_bud.get_idea_obj(summer_hike_road)._mass == hike_mass
+    assert bob_bud.get_idea_obj(summer_road).mass == swim_mass + hike_mass
+    assert bob_bud.get_idea_obj(summer_swim_road).mass == swim_mass
+    assert bob_bud.get_idea_obj(summer_hike_road).mass == hike_mass
     assert bob_bud.idea_exists(summer_bball_road) is False
     assert bob_bud.idea_exists(sports_swim_road) is False
     assert bob_bud.idea_exists(sports_hike_road) is False
@@ -654,9 +654,9 @@ def test_BudUnit_del_idea_obj_DeletingBundledIdeaReturnsIdeasToOriginalState():
     sports_swim_idea = bob_bud.get_idea_obj(sports_swim_road)
     sports_hike_idea = bob_bud.get_idea_obj(sports_hike_road)
     sports_bball_idea = bob_bud.get_idea_obj(sports_bball_road)
-    assert sports_swim_idea._mass == swim_mass
-    assert sports_hike_idea._mass == hike_mass
-    assert sports_bball_idea._mass == bball_mass
+    assert sports_swim_idea.mass == swim_mass
+    assert sports_hike_idea.mass == hike_mass
+    assert sports_bball_idea.mass == bball_mass
 
 
 def test_BudUnit_edit_idea_attr_DeletesIdeaUnit_awardlinks():

@@ -70,7 +70,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     _kids = "_kids"
     assert x_idearoot._label == yao_bud._real_id
     assert idearoot_dict["_label"] == x_idearoot._label
-    assert idearoot_dict["_mass"] == x_idearoot._mass
+    assert idearoot_dict["mass"] == x_idearoot.mass
     assert len(idearoot_dict[_kids]) == len(x_idearoot._kids)
 
     originunit_text = "_originunit"
@@ -395,7 +395,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     sunday_text = "Sunday"
     sunday_road = json_bud.make_road(weekday_road, sunday_text)
     sunday_idea = json_bud.get_idea_obj(sunday_road)
-    assert sunday_idea._mass == 20
+    assert sunday_idea.mass == 20
 
     json_shave_idea = json_bud.get_idea_obj(shave_road)
     zia_shave_idea = zia_bud.get_idea_obj(shave_road)
@@ -495,8 +495,8 @@ def test_budunit_get_from_json_ExportsBudUnit_mass():
     x1_bud = budunit_v001()
     x1_bud._tally = 15
     assert x1_bud._tally == 15
-    assert x1_bud._idearoot._mass != x1_bud._tally
-    assert x1_bud._idearoot._mass == 1
+    assert x1_bud._idearoot.mass != x1_bud._tally
+    assert x1_bud._idearoot.mass == 1
 
     # WHEN
     x2_bud = budunit_get_from_json(x1_bud.get_json())
@@ -504,8 +504,8 @@ def test_budunit_get_from_json_ExportsBudUnit_mass():
     # THEN
     assert x1_bud._tally == 15
     assert x1_bud._tally == x2_bud._tally
-    assert x1_bud._idearoot._mass == 1
-    assert x1_bud._idearoot._mass == x2_bud._idearoot._mass
+    assert x1_bud._idearoot.mass == 1
+    assert x1_bud._idearoot.mass == x2_bud._idearoot.mass
     assert x1_bud._idearoot._kids == x2_bud._idearoot._kids
 
 
