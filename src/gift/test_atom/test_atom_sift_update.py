@@ -130,7 +130,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     old_casa_atom.set_arg(morph_str(), sue_morph)
     old_casa_atom.set_arg(numor_str(), sue_numor)
     old_casa_atom.set_arg(pledge_str(), sue_pledge)
-    # old_casa_atom.set_arg("problem_bool", sue_pledge)
+    old_casa_atom.set_arg("problem_bool", sue_problem_bool)
     old_casa_atom.set_arg(stop_want_str(), sue_stop_want)
     # THEN
     new_casa_atom = sift_atomunit(sue_bud, old_casa_atom)
@@ -149,42 +149,37 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     assert zia_optional_args.get(morph_str()) == sue_morph
     assert zia_optional_args.get(numor_str()) == sue_numor
     assert zia_optional_args.get(pledge_str()) == sue_pledge
-    # assert zia_optional_args.get("problem_bool") == sue_problem_bool
+    assert zia_optional_args.get("problem_bool") == sue_problem_bool
     assert zia_optional_args.get(stop_want_str()) == sue_stop_want
 
 
-# def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_awardlink():
-#     # ESTABLISH
-#     sue_bud = budunit_shop("Sue")
-#     casa_text = "casa"
-#     casa_road = sue_bud.make_l1_road(casa_text)
-#     clean_text = "clean"
-#     clean_road = sue_bud.make_road(casa_road, clean_text)
-#     swim_text = "Swim"
+def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_awardlink():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    casa_text = "casa"
+    casa_road = sue_bud.make_l1_road(casa_text)
+    sue_bud.add_idea(casa_road)
+    run_text = ";run"
+    zia_run_give_force = 72
+    zia_run_take_force = 76
+    sue_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(run_text, 2, 3))
 
-#     casa_swim_atom = atomunit_shop(bud_idea_awardlink_text(), atom_update())
-#     casa_swim_atom.set_arg(road_str(), casa_road)
-#     casa_swim_atom.set_arg(group_id_str(), swim_text)
-#     clean_swim_atom = atomunit_shop(bud_idea_awardlink_text(), atom_update())
-#     clean_swim_atom.set_arg(road_str(), clean_road)
-#     clean_swim_atom.set_arg(group_id_str(), swim_text)
-#     sue_bud.add_idea(casa_road)
-#     sue_bud.add_idea(clean_road)
-#     assert sift_atomunit(sue_bud, casa_swim_atom)
-#     assert sift_atomunit(sue_bud, clean_swim_atom)
+    zia_atom = atomunit_shop(bud_idea_awardlink_text(), atom_insert())
+    zia_atom.set_arg(road_str(), casa_road)
+    zia_atom.set_arg(group_id_str(), run_text)
+    zia_atom.set_arg("give_force", zia_run_give_force)
+    zia_atom.set_arg("take_force", zia_run_take_force)
 
-#     # WHEN
-#     sue_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(swim_text))
+    # WHEN
+    new_zia_atomunit = sift_atomunit(sue_bud, zia_atom)
 
-#     # THEN
-#     assert not sift_atomunit(sue_bud, casa_swim_atom)
-#     assert sift_atomunit(sue_bud, clean_swim_atom)
-
-#     # WHEN
-#     sue_bud.get_idea_obj(clean_road).set_awardlink(awardlink_shop(swim_text))
-#     # THEN
-#     assert not sift_atomunit(sue_bud, casa_swim_atom)
-#     assert not sift_atomunit(sue_bud, clean_swim_atom)
+    # THEN
+    assert new_zia_atomunit
+    assert new_zia_atomunit.crud_text == atom_update()
+    assert new_zia_atomunit.get_optional_args_dict() != {}
+    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
+    assert zia_optional_args.get("give_force") == zia_run_give_force
+    assert zia_optional_args.get("take_force") == zia_run_take_force
 
 
 # def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reasonunit():
@@ -264,6 +259,33 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
 #     # THEN
 #     assert not sift_atomunit(sue_bud, casa_week_atom)
 #     assert not sift_atomunit(sue_bud, clean_week_atom)
+
+
+# # def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_teamlink():
+# def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_teamlink():
+#     # ESTABLISH
+#     sue_bud = budunit_shop("Sue")
+#     casa_text = "casa"
+#     casa_road = sue_bud.make_l1_road(casa_text)
+#     sue_bud.add_idea(casa_road)
+#     run_text = ";run"
+#     zia_run_give_force = 72
+#     zia_run_take_force = 76
+#     sue_bud.get_idea_obj(casa_road).teamunit.set_teamlink(run_text)
+#     zia_atom = atomunit_shop(bud_idea_teamlink_text(), atom_insert())
+#     zia_atom.set_arg(road_str(), casa_road)
+#     zia_atom.set_arg(group_id_str(), run_text)
+
+#     # WHEN
+#     new_zia_atomunit = sift_atomunit(sue_bud, zia_atom)
+
+#     # THEN
+#     assert new_zia_atomunit
+#     assert new_zia_atomunit.crud_text == atom_update()
+#     assert new_zia_atomunit.get_optional_args_dict() != {}
+#     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
+#     assert zia_optional_args.get("give_force") == zia_run_give_force
+#     assert zia_optional_args.get("take_force") == zia_run_take_force
 
 
 # def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_teamlink():
