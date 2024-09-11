@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_codespace_gift_dir() -> str:
-    return "src/gift"
+    return "src/change"
 
 
 def get_gift_examples_dir():
