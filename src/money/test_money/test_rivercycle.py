@@ -1,5 +1,5 @@
 from src.bud.bud import budunit_shop
-from src.listen.hubunit import hubunit_shop
+from src.hear.hubunit import hubunit_shop
 from src.money.examples.example_credorledgers import (
     example_yao_credorledger,
     example_bob_credorledger,

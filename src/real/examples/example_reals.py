@@ -1,6 +1,6 @@
 from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
-from src.listen.hubunit import hubunit_shop
+from src.hear.hubunit import hubunit_shop
 from src.real.real import RealUnit, realunit_shop
 from src.real.examples.real_env import get_test_reals_dir
 

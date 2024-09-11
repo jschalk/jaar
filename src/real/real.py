@@ -3,12 +3,12 @@ from src._road.jaar_config import get_gifts_folder
 from src._road.finance import default_bit_if_none, default_penny_if_none
 from src._road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, RealID
 from src.bud.bud import BudUnit
-from src.listen.basis_buds import get_default_action_bud
-from src.listen.hubunit import hubunit_shop, HubUnit
-from src.listen.listen import (
-    listen_to_speaker_agenda,
-    listen_to_debtors_roll_voice_action,
-    listen_to_debtors_roll_duty_job,
+from src.hear.basis_buds import get_default_action_bud
+from src.hear.hubunit import hubunit_shop, HubUnit
+from src.hear.hear import (
+    hear_to_speaker_agenda,
+    hear_to_debtors_roll_voice_action,
+    hear_to_debtors_roll_duty_job,
     create_job_file_from_duty_file,
 )
 from src.real.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
@@ -151,8 +151,8 @@ class RealUnit:
 
     # action bud management
     def generate_action_bud(self, owner_id: OwnerID) -> BudUnit:
-        listener_hubunit = self._get_hubunit(owner_id)
-        x_voice = listener_hubunit.get_voice_bud()
+        hearer_hubunit = self._get_hubunit(owner_id)
+        x_voice = hearer_hubunit.get_voice_bud()
         x_voice.settle_bud()
         x_action = get_default_action_bud(x_voice)
         for healer_id, healer_dict in x_voice._healers_dict.items():
@@ -179,18 +179,18 @@ class RealUnit:
                 econ_hubunit.save_duty_bud(x_voice)
                 create_job_file_from_duty_file(econ_hubunit, owner_id)
                 x_job = econ_hubunit.get_job_bud(owner_id)
-                listen_to_speaker_agenda(x_action, x_job)
+                hear_to_speaker_agenda(x_action, x_job)
 
         # if nothing has come from voice->duty->job->action pipeline use voice->action pipeline
         x_action.settle_bud()
         if len(x_action._idea_dict) == 1:
             # pipeline_voice_action_str()
-            listen_to_debtors_roll_voice_action(listener_hubunit)
-            listener_hubunit.open_file_action()
+            hear_to_debtors_roll_voice_action(hearer_hubunit)
+            hearer_hubunit.open_file_action()
             x_action.settle_bud()
         if len(x_action._idea_dict) == 1:
             x_action = x_voice
-        listener_hubunit.save_action_bud(x_action)
+        hearer_hubunit.save_action_bud(x_action)
 
         return self.get_action_file_bud(owner_id)
 

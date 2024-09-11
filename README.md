@@ -7,12 +7,12 @@ repo: https://github.com/jschalk/jaar
 
 JAAR Version 0.0.0
 
-`jaar` is a python library for listening to the climate of a community.
+`jaar` is a python library for hearing to the climate of a community.
 
 ## 0.0 About jaar
 
-`jaar` is a python library for listening to the climate of a community. Individual 
-positions are aggregated by a listener into a coherant agenda that can include pledges 
+`jaar` is a python library for hearing to the climate of a community. Individual 
+positions are aggregated by a hearer into a coherant agenda that can include pledges 
 to do and pledges of states of existence. Listening and acting on it.
 
 A agents's agenda in the community is built by the the massed intreprtation of
