@@ -1,5 +1,5 @@
 from src._instrument.file import delete_dir
-from src._road.jaar_config import init_gift_id, get_test_real_id as real_id
+from src._road.jaar_config import init_gift_id, get_test_tribe_id as tribe_id
 from src.hear.hubunit import hubunit_shop
 from src.hear.examples.example_hear_gifts import sue_2atomunits_giftunit
 from src.hear.examples.hear_env import (
@@ -18,7 +18,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     pfour_float = 0.4
     sue_hubunit = hubunit_shop(
         env_dir(),
-        real_id(),
+        tribe_id(),
         sue_str,
         econ_road=None,
         road_delimiter=slash_str,
@@ -32,7 +32,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     sue_default_voice = sue_hubunit.default_voice_bud()
 
     # THEN
-    assert sue_default_voice._real_id == sue_hubunit.real_id
+    assert sue_default_voice._tribe_id == sue_hubunit.tribe_id
     assert sue_default_voice._owner_id == sue_hubunit.owner_id
     assert sue_default_voice._road_delimiter == sue_hubunit.road_delimiter
     assert sue_default_voice._fund_pool == sue_hubunit.fund_pool
@@ -44,7 +44,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
 def test_HubUnit_delete_voice_file_DeletesvoiceFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     assert sue_hubunit.voice_file_exists()
 
@@ -60,7 +60,7 @@ def test_HubUnit_create_initial_gift_files_from_default_CorrectlySavesGiftUnitFi
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
     assert os_path_exists(init_gift_file_path) is False
@@ -79,7 +79,7 @@ def test_HubUnit_create_voice_from_gifts_CreatesvoiceFileFromGiftFiles(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
     sue_hubunit._create_initial_gift_files_from_default()
@@ -100,7 +100,7 @@ def test_HubUnit_create_initial_gift_and_voice_files_CreatesGiftFilesAndvoiceFil
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
     assert os_path_exists(init_gift_file_path) is False
@@ -121,7 +121,7 @@ def test_HubUnit_create_initial_gift_files_from_voice_SavesOnlyGiftFiles(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_voice_bud = sue_hubunit.default_voice_bud()
     bob_str = "Bob"
     sue_voice_bud.add_acctunit(bob_str)
@@ -144,7 +144,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str, bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str, bit=seven_int)
     assert sue_hubunit.voice_file_exists() is False
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_id()}.json"
     delete_dir(sue_hubunit.gifts_dir())
@@ -155,7 +155,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
 
     # THEN
     voice_bud = sue_hubunit.get_voice_bud()
-    assert voice_bud._real_id == real_id()
+    assert voice_bud._tribe_id == tribe_id()
     assert voice_bud._owner_id == sue_str
     assert voice_bud._bit == seven_int
     assert os_path_exists(init_gift_file_path)
@@ -167,7 +167,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str, bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str, bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     assert sue_hubunit.voice_file_exists()
     sue_hubunit.delete_voice_file()
@@ -180,7 +180,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
 
     # THEN
     voice_bud = sue_hubunit.get_voice_bud()
-    assert voice_bud._real_id == real_id()
+    assert voice_bud._tribe_id == tribe_id()
     assert voice_bud._owner_id == sue_str
     assert voice_bud._bit == seven_int
     assert os_path_exists(init_gift_file_path)
@@ -192,7 +192,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str, bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str, bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     sue_voice_bud = sue_hubunit.get_voice_bud()
     bob_str = "Bob"
@@ -207,7 +207,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
     sue_hubunit.initialize_gift_voice_files()
 
     # THEN
-    assert sue_voice_bud._real_id == real_id()
+    assert sue_voice_bud._tribe_id == tribe_id()
     assert sue_voice_bud._owner_id == sue_str
     assert sue_voice_bud._bit == seven_int
     assert sue_voice_bud.acct_exists(bob_str)
@@ -219,11 +219,11 @@ def test_HubUnit_append_gifts_to_voice_file_AddsgiftsTovoiceFile(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_hubunit.initialize_gift_voice_files()
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
     voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud._real_id=}")
+    print(f"{voice_bud._tribe_id=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"

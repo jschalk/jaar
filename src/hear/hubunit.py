@@ -17,8 +17,8 @@ from src._road.jaar_config import (
     get_rootpart_of_econ_dir,
     treasury_file_name,
     get_gifts_folder,
-    get_real_id_if_None,
-    get_test_reals_dir,
+    get_tribe_id_if_None,
+    get_test_tribes_dir,
     get_init_gift_id_if_None,
     get_json_filename,
     init_gift_id,
@@ -32,7 +32,7 @@ from src._road.finance import (
 )
 from src._road.road import (
     OwnerID,
-    RealID,
+    TribeID,
     RoadNode,
     RoadUnit,
     rebuild_road,
@@ -97,8 +97,8 @@ def get_econ_grades_dir(x_econ_dir: str) -> str:
 @dataclass
 class HubUnit:
     owner_id: OwnerID = None
-    reals_dir: str = None
-    real_id: str = None
+    tribes_dir: str = None
+    tribe_id: str = None
     econ_road: RoadUnit = None
     road_delimiter: str = None
     fund_pool: float = None
@@ -107,11 +107,11 @@ class HubUnit:
     penny: float = None
     econ_money_magnitude: float = None
 
-    def real_dir(self) -> str:
-        return f_path(self.reals_dir, self.real_id)
+    def tribe_dir(self) -> str:
+        return f_path(self.tribes_dir, self.tribe_id)
 
     def owners_dir(self) -> str:
-        return f"{self.real_dir()}/owners"
+        return f"{self.tribe_dir()}/owners"
 
     def owner_dir(self) -> str:
         return f_path(self.owners_dir(), self.owner_id)
@@ -184,7 +184,7 @@ class HubUnit:
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             _owner_id=self.owner_id,
-            _real_id=self.real_id,
+            _tribe_id=self.tribe_id,
             _road_delimiter=self.road_delimiter,
             _fund_pool=self.fund_pool,
             _fund_coin=self.fund_coin,
@@ -238,7 +238,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_id, self.real_id)
+        x_bud = budunit_shop(self.owner_id, self.tribe_id)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = dir_files(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -493,8 +493,8 @@ class HubUnit:
 
     def dw_speaker_bud(self, speaker_id: OwnerID) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            reals_dir=self.reals_dir,
-            real_id=self.real_id,
+            tribes_dir=self.tribes_dir,
+            tribe_id=self.tribe_id,
             owner_id=speaker_id,
             road_delimiter=self.road_delimiter,
             bit=self.bit,
@@ -513,8 +513,8 @@ class HubUnit:
 
     def rj_speaker_bud(self, healer_id: OwnerID, speaker_id: OwnerID) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            reals_dir=self.reals_dir,
-            real_id=self.real_id,
+            tribes_dir=self.tribes_dir,
+            tribe_id=self.tribe_id,
             owner_id=healer_id,
             econ_road=self.econ_road,
             road_delimiter=self.road_delimiter,
@@ -573,8 +573,8 @@ class HubUnit:
 
 
 def hubunit_shop(
-    reals_dir: str,
-    real_id: RealID,
+    tribes_dir: str,
+    tribe_id: TribeID,
     owner_id: OwnerID = None,
     econ_road: RoadUnit = None,
     road_delimiter: str = None,
@@ -584,12 +584,12 @@ def hubunit_shop(
     penny: float = None,
     econ_money_magnitude: float = None,
 ) -> HubUnit:
-    reals_dir = get_test_reals_dir() if reals_dir is None else reals_dir
-    real_id = get_real_id_if_None(real_id)
+    tribes_dir = get_test_tribes_dir() if tribes_dir is None else tribes_dir
+    tribe_id = get_tribe_id_if_None(tribe_id)
 
     return HubUnit(
-        reals_dir=reals_dir,
-        real_id=real_id,
+        tribes_dir=tribes_dir,
+        tribe_id=tribe_id,
         owner_id=validate_roadnode(owner_id, road_delimiter),
         econ_road=econ_road,
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
@@ -603,6 +603,6 @@ def hubunit_shop(
 
 def get_econ_path(x_hubunit: HubUnit, x_road: RoadNode) -> str:
     econ_root = get_rootpart_of_econ_dir()
-    x_road = rebuild_road(x_road, x_hubunit.real_id, econ_root)
+    x_road = rebuild_road(x_road, x_hubunit.tribe_id, econ_root)
     x_list = get_all_road_nodes(x_road, x_hubunit.road_delimiter)
     return f"{x_hubunit.econs_dir()}{get_directory_path(x_list=[*x_list])}"

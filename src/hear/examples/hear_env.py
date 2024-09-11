@@ -1,7 +1,7 @@
 from src._instrument.file import delete_dir
 from src._road.road import (
     create_road_from_nodes,
-    get_default_real_id_roadnode,
+    get_default_tribe_id_roadnode,
     RoadUnit,
 )
 from src.hear.hubunit import HubUnit, hubunit_shop
@@ -29,18 +29,18 @@ def env_dir_setup_cleanup():
 
 
 def get_texas_road() -> RoadUnit:
-    real_id = get_default_real_id_roadnode()
+    tribe_id = get_default_tribe_id_roadnode()
     nation_str = "nation-state"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_road_from_nodes([real_id, nation_str, usa_str, texas_str])
+    return create_road_from_nodes([tribe_id, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
-    real_id = get_default_real_id_roadnode()
+    tribe_id = get_default_tribe_id_roadnode()
     return hubunit_shop(
         get_hear_temp_env_dir(),
-        real_id,
+        tribe_id,
         owner_id="Sue",
         econ_road=get_texas_road(),
         # pipeline_duty_job_str(),
@@ -48,18 +48,18 @@ def get_texas_hubunit() -> HubUnit:
 
 
 def get_dakota_road() -> RoadUnit:
-    real_id = get_default_real_id_roadnode()
+    tribe_id = get_default_tribe_id_roadnode()
     nation_str = "nation-state"
     usa_str = "USA"
     dakota_str = "Dakota"
-    return create_road_from_nodes([real_id, nation_str, usa_str, dakota_str])
+    return create_road_from_nodes([tribe_id, nation_str, usa_str, dakota_str])
 
 
 def get_dakota_hubunit() -> HubUnit:
-    real_id = get_default_real_id_roadnode()
+    tribe_id = get_default_tribe_id_roadnode()
     return hubunit_shop(
         get_hear_temp_env_dir(),
-        real_id,
+        tribe_id,
         owner_id="Sue",
         econ_road=get_dakota_road(),
         # pipeline_duty_job_str(),

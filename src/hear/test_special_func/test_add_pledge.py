@@ -1,4 +1,4 @@
-from src._road.road import get_default_real_id_roadnode as root_label
+from src._road.road import get_default_tribe_id_roadnode as root_label
 from src.hear.hubunit import hubunit_shop
 from src.hear.special_func import add_voice_pledge, add_voice_fact
 from src.hear.examples.hear_env import (

@@ -79,8 +79,8 @@ def crud_str_str() -> str:
     return "crud_str"
 
 
-def real_id_str() -> str:
-    return "real_id"
+def tribe_id_str() -> str:
+    return "tribe_id"
 
 
 def owner_id_str() -> str:

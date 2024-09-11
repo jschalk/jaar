@@ -1,4 +1,4 @@
-real_id,owner_id,parent_road,label,begin,close,addin,numor,denom,morph,gogo_want,stop_want
+tribe_id,owner_id,parent_road,label,begin,close,addin,numor,denom,morph,gogo_want,stop_want
 music56,Sue,music56,time,,,,,,,,
 music56,Sue,music56;time,five,0.0,5259492000.0,,,,,,
 music56,Sue,music56;time,creg,0.0,1472657760.0,,,,,,

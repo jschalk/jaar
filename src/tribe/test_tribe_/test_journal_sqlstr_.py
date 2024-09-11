@@ -2,7 +2,7 @@ from src._road.road import create_road
 from src.bud.bud_tool import bud_idea_factunit_str
 from src.change.atom_config import fopen_str, atom_insert, atom_hx_table_name
 from src.change.atom import atomunit_shop
-from src.real.journal_sqlstr import (
+from src.tribe.journal_sqlstr import (
     get_atom2change_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
     get_atom_hx_table_insert_sqlstr,

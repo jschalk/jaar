@@ -1,8 +1,8 @@
 from src._instrument.file import save_file, open_file, create_file_path
 from src._instrument.python_tool import get_json_from_dict, get_dict_from_json
 from src._road.jaar_config import get_init_gift_id_if_None, get_json_filename
-from src._road.road import OwnerID, RealID, get_default_real_id_roadnode
-from src.change.atom_config import real_id_str, owner_id_str
+from src._road.road import OwnerID, TribeID, get_default_tribe_id_roadnode
+from src.change.atom_config import tribe_id_str, owner_id_str
 from src.change.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.change.change import ChangeUnit, changeunit_shop
 from dataclasses import dataclass
@@ -11,7 +11,7 @@ from os.path import exists as os_path_exists
 
 @dataclass
 class GiftUnit:
-    real_id: RealID = None
+    tribe_id: TribeID = None
     owner_id: OwnerID = None
     _gift_id: int = None
     _face_id: OwnerID = None
@@ -40,7 +40,7 @@ class GiftUnit:
 
     def get_step_dict(self) -> dict[str, any]:
         return {
-            real_id_str(): self.real_id,
+            tribe_id_str(): self.tribe_id,
             owner_id_str(): self.owner_id,
             "face_id": self._face_id,
             "change": self._changeunit.get_ordered_atomunits(self._change_start),
@@ -104,7 +104,7 @@ class GiftUnit:
 
 def giftunit_shop(
     owner_id: OwnerID,
-    real_id: RealID = None,
+    tribe_id: TribeID = None,
     _gift_id: int = None,
     _face_id: OwnerID = None,
     _changeunit: ChangeUnit = None,
@@ -113,9 +113,9 @@ def giftunit_shop(
     _atoms_dir: str = None,
 ):
     _changeunit = changeunit_shop() if _changeunit is None else _changeunit
-    real_id = get_default_real_id_roadnode() if real_id is None else real_id
+    tribe_id = get_default_tribe_id_roadnode() if tribe_id is None else tribe_id
     x_giftunit = GiftUnit(
-        real_id=real_id,
+        tribe_id=tribe_id,
         owner_id=owner_id,
         _gift_id=get_init_gift_id_if_None(_gift_id),
         _face_id=_face_id,
@@ -135,12 +135,12 @@ def create_giftunit_from_files(
     gift_filename = get_json_filename(gift_id)
     gift_dict = get_dict_from_json(open_file(gifts_dir, gift_filename))
     x_owner_id = gift_dict.get(owner_id_str())
-    x_real_id = gift_dict.get(real_id_str())
+    x_tribe_id = gift_dict.get(tribe_id_str())
     x_face_id = gift_dict.get("face_id")
     change_atom_numbers_list = gift_dict.get("change_atom_numbers")
     x_giftunit = giftunit_shop(
         owner_id=x_owner_id,
-        real_id=x_real_id,
+        tribe_id=x_tribe_id,
         _gift_id=gift_id,
         _face_id=x_face_id,
         _atoms_dir=atoms_dir,

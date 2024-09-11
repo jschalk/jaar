@@ -1,4 +1,9 @@
-from src._road.road import RoadUnit, create_road, get_default_real_id_roadnode, RoadNode
+from src._road.road import (
+    RoadUnit,
+    create_road,
+    get_default_tribe_id_roadnode,
+    RoadNode,
+)
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import BudUnit, budunit_shop
 from src.hear.hubunit import hubunit_shop, HubUnit
@@ -51,7 +56,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), casa_str())
+    return create_road(get_default_tribe_id_roadnode(), casa_str())
 
 
 def cook_road() -> RoadUnit:
@@ -94,7 +99,7 @@ def get_example_yao_bud() -> BudUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = budunit_shop(yao_str, get_default_real_id_roadnode())
+    yao_speaker = budunit_shop(yao_str, get_default_tribe_id_roadnode())
     yao_speaker.set_idea(ideaunit_shop(run_str()), casa_road())
     yao_speaker.add_acctunit(yao_str, debtit_belief=10)
     yao_speaker.add_acctunit(zia_str, debtit_belief=30)
@@ -152,7 +157,7 @@ def get_example_yao_job3_speaker() -> BudUnit:
 
 
 def get_usa_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), "USA")
+    return create_road(get_default_tribe_id_roadnode(), "USA")
 
 
 def get_iowa_str() -> RoadNode:
@@ -196,11 +201,11 @@ def get_utah_road() -> RoadUnit:
 
 
 def get_swim_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), get_swim_str())
+    return create_road(get_default_tribe_id_roadnode(), get_swim_str())
 
 
 def get_location_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), get_location_str())
+    return create_road(get_default_tribe_id_roadnode(), get_location_str())
 
 
 def get_in_ocean_road() -> RoadUnit:
@@ -214,8 +219,8 @@ def get_on_land_road() -> RoadUnit:
 def get_yao_ohio_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        reals_dir=env_dir(),
-        real_id=yao_bud._real_id,
+        tribes_dir=env_dir(),
+        tribe_id=yao_bud._tribe_id,
         owner_id=yao_bud._owner_id,
         econ_road=get_ohio_road(),
         # pipeline_voice_action_str(),
@@ -225,8 +230,8 @@ def get_yao_ohio_hubunit() -> HubUnit:
 def get_yao_iowa_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        reals_dir=env_dir(),
-        real_id=yao_bud._real_id,
+        tribes_dir=env_dir(),
+        tribe_id=yao_bud._tribe_id,
         owner_id=yao_bud._owner_id,
         econ_road=get_iowa_road(),
         # pipeline_voice_action_str(),
@@ -236,8 +241,8 @@ def get_yao_iowa_hubunit() -> HubUnit:
 def get_zia_utah_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        reals_dir=env_dir(),
-        real_id=yao_bud._real_id,
+        tribes_dir=env_dir(),
+        tribe_id=yao_bud._tribe_id,
         owner_id="Zia",
         econ_road=get_utah_road(),
         # pipeline_voice_action_str(),

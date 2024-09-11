@@ -365,7 +365,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_ta
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    x_idearoot = sue_bud.get_idea_obj(sue_bud._real_id)
+    x_idearoot = sue_bud.get_idea_obj(sue_bud._tribe_id)
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
@@ -544,7 +544,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fun
     x_bud.settle_bud()
 
     # THEN
-    x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
+    x_idearoot = x_bud.get_idea_obj(x_bud._tribe_id)
     with pytest_raises(Exception) as excinfo:
         x_idearoot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -607,7 +607,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # THEN
     print(f"{idea_dict.keys()=}")
-    idea_bob = idea_dict.get(sue_bud._real_id)
+    idea_bob = idea_dict.get(sue_bud._tribe_id)
     assert len(idea_bob._awardheirs) == 3
 
     bheir_yao = idea_bob._awardheirs.get(yao_str)
@@ -655,9 +655,9 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=sue_awardlink)
-    yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=bob_awardlink)
-    yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=zia_awardlink)
+    yao_bud.edit_idea_attr(yao_bud._tribe_id, awardlink=sue_awardlink)
+    yao_bud.edit_idea_attr(yao_bud._tribe_id, awardlink=bob_awardlink)
+    yao_bud.edit_idea_attr(yao_bud._tribe_id, awardlink=zia_awardlink)
 
     sue_acctunit = yao_bud.get_acct(sue_str)
     bob_acctunit = yao_bud.get_acct(bob_str)

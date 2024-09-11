@@ -1,6 +1,6 @@
 from src._instrument.file import open_file, create_file_path as f_path
 from src._instrument.python_tool import get_dict_from_json
-from src._road.jaar_config import get_gifts_folder, get_test_real_id as real_id
+from src._road.jaar_config import get_gifts_folder, get_test_tribe_id as tribe_id
 from src.change.atom_config import owner_id_str
 from src.change.change import changeunit_shop
 from src.change.gift import giftunit_shop, create_giftunit_from_files
@@ -10,7 +10,7 @@ from src.change.examples.example_atoms import (
     get_atom_example_ideaunit_ball,
 )
 from src.change.examples.gift_env import (
-    get_gift_temp_env_dir as reals_dir,
+    get_gift_temp_env_dir as tribes_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -18,8 +18,8 @@ from os.path import exists as os_path_exists
 
 def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -48,8 +48,8 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -75,8 +75,8 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -102,8 +102,8 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_gift_id = 2
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -137,8 +137,8 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_gifts_dir = f_path(sue_owner_dir, get_gifts_folder())
@@ -163,8 +163,8 @@ def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -200,8 +200,8 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
 
 def test_GiftUnit_create_changeunit_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -233,8 +233,8 @@ def test_GiftUnit_create_changeunit_from_atom_files_SetsAttr(env_dir_setup_clean
 
 def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_real_dir = f_path(reals_dir(), real_id())
-    x_owners_dir = f_path(x_real_dir, "owners")
+    x_tribe_dir = f_path(tribes_dir(), tribe_id())
+    x_owners_dir = f_path(x_tribe_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")

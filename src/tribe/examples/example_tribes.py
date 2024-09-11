@@ -1,16 +1,16 @@
 from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
 from src.hear.hubunit import hubunit_shop
-from src.real.real import RealUnit, realunit_shop
-from src.real.examples.real_env import get_test_reals_dir
+from src.tribe.tribe import TribeUnit, tribeunit_shop
+from src.tribe.examples.tribe_env import get_test_tribes_dir
 
 
-# def create_example_real1(graphics_bool) -> RealUnit:
+# def create_example_tribe1(graphics_bool) -> TribeUnit:
 #     # ESTABLISH
 #     music_str = "music"
-#     music_real = realunit_shop(music_str, get_test_reals_dir(), in_memory_journal=True)
+#     music_tribe = tribeunit_shop(music_str, get_test_tribes_dir(), in_memory_journal=True)
 #     yao_str = "Yao"
-#     music_real.init_owner_econs(yao_str)
+#     music_tribe.init_owner_econs(yao_str)
 #     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
 #     yao_voice_bud = yao_hubunit.get_voice_bud()
 
@@ -35,8 +35,8 @@ from src.real.examples.real_env import get_test_reals_dir
 #     yao_voice_bud.set_idea(elpaso_idea, texas_road)
 #     display_ideatree(yao_voice_bud.settle_bud(), mode="Econ", graphics_bool=graphics_bool)
 #     x_hubunit = hubunit_shop(
-#         reals_dir=yao_hubunit.reals_dir,
-#         real_id=yao_hubunit.real_id,
+#         tribes_dir=yao_hubunit.tribes_dir,
+#         tribe_id=yao_hubunit.tribe_id,
 #         owner_id=yao_hubunit.owner_id,
 #         econ_road=None,
 #         road_delimiter=yao_hubunit.road_delimiter,
@@ -46,24 +46,26 @@ from src.real.examples.real_env import get_test_reals_dir
 #     yao_hubunit.create_voice_treasury_db_files()
 
 #     # WHEN
-#     music_real._set_all_healer_dutys(yao_str)
+#     music_tribe._set_all_healer_dutys(yao_str)
 
-#     return music_real
+#     return music_tribe
 
 
-def create_example_real2() -> RealUnit:
+def create_example_tribe2() -> TribeUnit:
     # ESTABLISH
     music_str = "music"
-    music_real = realunit_shop(music_str, get_test_reals_dir(), in_memory_journal=True)
+    music_tribe = tribeunit_shop(
+        music_str, get_test_tribes_dir(), in_memory_journal=True
+    )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_real.init_owner_econs(yao_str)
+    music_tribe.init_owner_econs(yao_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
-    music_real.init_owner_econs(wei_str)
-    music_real.init_owner_econs(zia_str)
+    music_tribe.init_owner_econs(wei_str)
+    music_tribe.init_owner_econs(zia_str)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -109,23 +111,25 @@ def create_example_real2() -> RealUnit:
     yao_hubunit.create_voice_treasury_db_files()
     wei_hubunit.create_voice_treasury_db_files()
     zia_hubunit.create_voice_treasury_db_files()
-    music_real._set_all_healer_dutys(yao_str)
-    music_real._set_all_healer_dutys(wei_str)
-    music_real._set_all_healer_dutys(zia_str)
+    music_tribe._set_all_healer_dutys(yao_str)
+    music_tribe._set_all_healer_dutys(wei_str)
+    music_tribe._set_all_healer_dutys(zia_str)
 
-    return music_real
+    return music_tribe
 
 
-def create_example_real3() -> RealUnit:
+def create_example_tribe3() -> TribeUnit:
     # ESTABLISH
     music_str = "music"
-    music_real = realunit_shop(music_str, get_test_reals_dir(), in_memory_journal=True)
+    music_tribe = tribeunit_shop(
+        music_str, get_test_tribes_dir(), in_memory_journal=True
+    )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_real.init_owner_econs(yao_str)
-    music_real.init_owner_econs(wei_str)
-    music_real.init_owner_econs(zia_str)
+    music_tribe.init_owner_econs(yao_str)
+    music_tribe.init_owner_econs(wei_str)
+    music_tribe.init_owner_econs(zia_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
@@ -158,19 +162,21 @@ def create_example_real3() -> RealUnit:
     wei_hubunit.save_voice_bud(wei_voice_bud)
     zia_hubunit.save_voice_bud(zia_voice_bud)
 
-    return music_real
+    return music_tribe
 
 
-def create_example_real4() -> RealUnit:
+def create_example_tribe4() -> TribeUnit:
     # ESTABLISH
     music_str = "music"
-    music_real = realunit_shop(music_str, get_test_reals_dir(), in_memory_journal=True)
+    music_tribe = tribeunit_shop(
+        music_str, get_test_tribes_dir(), in_memory_journal=True
+    )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_real.init_owner_econs(yao_str)
-    music_real.init_owner_econs(wei_str)
-    music_real.init_owner_econs(zia_str)
+    music_tribe.init_owner_econs(yao_str)
+    music_tribe.init_owner_econs(wei_str)
+    music_tribe.init_owner_econs(zia_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
@@ -240,4 +246,4 @@ def create_example_real4() -> RealUnit:
     wei_hubunit.save_voice_bud(wei_voice_bud)
     zia_hubunit.save_voice_bud(zia_voice_bud)
 
-    return music_real
+    return music_tribe

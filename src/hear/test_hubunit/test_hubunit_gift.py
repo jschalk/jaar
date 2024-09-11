@@ -1,5 +1,5 @@
 from src._instrument.file import open_file, dir_files, delete_dir, set_dir, save_file
-from src._road.jaar_config import init_gift_id, get_test_real_id as real_id
+from src._road.jaar_config import init_gift_id, get_test_tribe_id as tribe_id
 from src.change.gift import giftunit_shop, get_json_filename
 from src.hear.hubunit import hubunit_shop
 from src.hear.examples.example_hear_atoms import get_atom_example_ideaunit_knee
@@ -21,7 +21,7 @@ from copy import deepcopy as copy_deepcopy
 def test_HubUnit_get_max_gift_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
 
     # WHEN / THEN
     delete_dir(sue_hubunit.gifts_dir())
@@ -41,7 +41,7 @@ def test_HubUnit_get_max_gift_file_number_ReturnsCorrectObj(env_dir_setup_cleanu
 def test_HubUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     assert sue_hubunit.gift_file_exists(None) is False
     assert sue_hubunit.gift_file_exists(0) is False
     six_int = 6
@@ -59,7 +59,7 @@ def test_HubUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_HubUnit_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     two_int = 2
     six_int = 6
     two_filename = get_json_filename(two_int)
@@ -91,7 +91,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_atoms_dir_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     x_gift_id = 6
     six_filename = get_json_filename(x_gift_id)
     sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
@@ -116,7 +116,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_gifts_dir_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     x_gift_id = 6
     six_filename = get_json_filename(x_gift_id)
     sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
@@ -141,7 +141,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_owner_id_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     x_gift_id = 6
     six_filename = get_json_filename(x_gift_id)
     sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
@@ -168,7 +168,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIf_replace_IsFalse(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     x_gift_id = 0
     six_filename = get_json_filename(x_gift_id)
     sue_giftunit = giftunit_shop(
@@ -197,7 +197,7 @@ def test_HubUnit_validate_giftunit_ReturnsObjWithAttributesFixed(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     two_int = 2
     two_filename = get_json_filename(two_int)
     sue_gift2_path = f"{sue_hubunit.gifts_dir()}/{two_filename}"
@@ -230,7 +230,7 @@ def test_HubUnit_save_gift_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     next_int = sue_hubunit._get_next_gift_file_number()
     next_filename = get_json_filename(next_int)
     sue_gift2_path = f"{sue_hubunit.gifts_dir()}/{next_filename}"
@@ -256,7 +256,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesE
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
 
     # WHEN
     delete_dir(sue_hubunit.gifts_dir())
@@ -277,7 +277,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExi
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     delete_dir(sue_hubunit.gifts_dir())
 
     zero_giftunit = get_sue_giftunit()
@@ -304,7 +304,7 @@ def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     yao_str = "Yao"
     x0_giftunit = sue_hubunit._default_giftunit()
     x0_giftunit.set_face(yao_str)
@@ -331,7 +331,7 @@ def test_HubUnit_get_giftunit_RaisesExceptionWhenFileDoesNotExist(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     yao_str = "Yao"
     x0_giftunit = sue_hubunit._default_giftunit()
     x0_giftunit.set_face(yao_str)
@@ -355,7 +355,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     six_int = 6
     sue_giftunit = giftunit_shop(
         owner_id=sue_str,
@@ -368,7 +368,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
     assert sue_hubunit.gift_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
 
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)
 
     print(f"{dir_files(sue_hubunit.atoms_dir())}")
@@ -388,7 +388,7 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     delete_dir(sue_hubunit.gifts_dir())
     delete_dir(sue_hubunit.atoms_dir())
     set_dir(sue_hubunit.gifts_dir())
@@ -409,7 +409,7 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
 def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue2_giftunit = sue_2atomunits_giftunit()
     sue2_giftunit._atoms_dir = f"{sue_hubunit.econs_dir()}/swimming"
     sue2_giftunit._gifts_dir = f"{sue_hubunit.econs_dir()}/swimming"
@@ -430,7 +430,7 @@ def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
 def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     two_int = 2
     three_int = 3
     print(f"{sue_hubunit.gift_file_path(two_int)=}")
@@ -441,7 +441,7 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
     )
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)
     assert sue_hubunit.gift_file_exists(two_int)
     assert sue_hubunit.gift_file_exists(three_int) is False
@@ -460,7 +460,7 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
 def test_HubUnit_merge_any_gifts_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
     voice_bud._last_gift_id is None
@@ -477,12 +477,12 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_hubunit.save_gift_file(sue_1atomunits_giftunit())
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud._real_id=}")
-    print(f"{sue_hubunit.real_id=}")
+    print(f"{voice_bud._tribe_id=}")
+    print(f"{sue_hubunit.tribe_id=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"
@@ -502,11 +502,11 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), real_id(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id(), sue_str)
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud._real_id=}")
+    print(f"{voice_bud._tribe_id=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"

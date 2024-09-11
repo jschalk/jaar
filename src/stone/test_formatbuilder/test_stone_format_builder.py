@@ -5,7 +5,7 @@ from src.change.atom_config import (
     parent_road_str,
     label_str,
     gogo_want_str,
-    real_id_str,
+    tribe_id_str,
     owner_id_str,
     column_order_str,
 )
@@ -31,11 +31,11 @@ def test_create_categorys_stone_format_dicts_ReturnObj(rebuild_bool):
     assert bud_ideaunit_dict.get(atom_categorys_str()) == [bud_ideaunit_str()]
     assert bud_ideaunit_dict.get(attributes_str())
     bud_ideaunit_attributes = bud_ideaunit_dict.get(attributes_str())
-    assert bud_ideaunit_attributes.get(real_id_str())
+    assert bud_ideaunit_attributes.get(tribe_id_str())
     assert bud_ideaunit_attributes.get(owner_id_str())
-    real_id_dict = bud_ideaunit_attributes.get(real_id_str())
+    tribe_id_dict = bud_ideaunit_attributes.get(tribe_id_str())
     owner_id_dict = bud_ideaunit_attributes.get(owner_id_str())
-    assert real_id_dict == {column_order_str(): 0, sort_order_str(): 0}
+    assert tribe_id_dict == {column_order_str(): 0, sort_order_str(): 0}
     assert owner_id_dict == {column_order_str(): 1, sort_order_str(): 1}
 
     assert bud_ideaunit_attributes.get(parent_road_str())

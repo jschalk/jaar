@@ -163,7 +163,7 @@ class ChangeUnit:
         return get_nested_value(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud._owner_id, after_bud._real_id)
+        before_bud = budunit_shop(after_bud._owner_id, after_bud._tribe_id)
         self.add_all_different_atomunits(before_bud, after_bud)
 
     def add_all_different_atomunits(self, before_bud: BudUnit, after_bud: BudUnit):

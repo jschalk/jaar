@@ -130,7 +130,7 @@ def test_agenda_returned_WhenNoReasonsExist():
 def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    print(f"{sue_bud._real_id=}")
+    print(f"{sue_bud._tribe_id=}")
     print(f"{sue_bud._idearoot._label=}")
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
@@ -439,7 +439,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Nigh()
     time_road = sue_bud.make_l1_road(time)
     rus_war = "rus_war"
     rus_war_road = sue_bud.make_road(time_road, rus_war)
-    sue_bud.set_idea(ideaunit_shop(time, begin=100, close=2000), sue_bud._real_id)
+    sue_bud.set_idea(ideaunit_shop(time, begin=100, close=2000), sue_bud._tribe_id)
     sue_bud.set_idea(ideaunit_shop(rus_war, begin=22, close=34), time_road)
 
     # WHEN
@@ -527,7 +527,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
 
     commute_str = "commute to casa"
     commute_road = sue_bud.make_l1_road(commute_str)
-    sue_bud.set_idea(ideaunit_shop(commute_str), sue_bud._real_id)
+    sue_bud.set_idea(ideaunit_shop(commute_str), sue_bud._tribe_id)
     sue_bud.settle_bud()  # set tree metrics
     commute_idea = sue_bud.get_idea_obj(commute_road)
     assert len(commute_idea.reasonunits) == 0
@@ -607,7 +607,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     # 5.2. idea(...,casa).active = False
     commute_str = "commute to casa"
     commute_road = sue_bud.make_l1_road(commute_str)
-    sue_bud.set_idea(ideaunit_shop(commute_str), sue_bud._real_id)
+    sue_bud.set_idea(ideaunit_shop(commute_str), sue_bud._tribe_id)
     sue_bud.edit_idea_attr(
         road=commute_road,
         reason_base=casa_road,

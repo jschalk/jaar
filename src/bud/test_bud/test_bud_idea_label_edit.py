@@ -2,7 +2,7 @@ from src.bud.bud import budunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.examples.example_buds import get_budunit_with_4_levels_and_2reasons_2facts
 from pytest import raises as pytest_raises
-from src._road.road import get_default_real_id_roadnode as root_label
+from src._road.road import get_default_tribe_id_roadnode as root_label
 
 
 def test_BudUnit_edit_idea_label_FailsWhenIdeaDoesNotExist():
@@ -22,7 +22,7 @@ def test_BudUnit_edit_idea_label_FailsWhenIdeaDoesNotExist():
     assert str(excinfo.value) == f"Idea old_road='{no_idea_road}' does not exist"
 
 
-def test_BudUnit_edit_idea_label_RaisesErrorForLevel0IdeaWhen_real_id_isNone():
+def test_BudUnit_edit_idea_label_RaisesErrorForLevel0IdeaWhen_tribe_id_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_str)
@@ -34,30 +34,30 @@ def test_BudUnit_edit_idea_label_RaisesErrorForLevel0IdeaWhen_real_id_isNone():
     yao_bud.set_l1_idea(ideaunit_shop(casa_str))
     yao_bud.set_idea(ideaunit_shop(swim_str), parent_road=casa_road)
     assert yao_bud._owner_id == yao_str
-    assert yao_bud._idearoot._label == yao_bud._real_id
+    assert yao_bud._idearoot._label == yao_bud._tribe_id
     casa_idea = yao_bud.get_idea_obj(casa_road)
-    assert casa_idea._parent_road == yao_bud._real_id
+    assert casa_idea._parent_road == yao_bud._tribe_id
     swim_idea = yao_bud.get_idea_obj(swim_road)
     assert swim_idea._parent_road == casa_road
 
     # WHEN
     moon_str = "moon"
-    yao_bud.edit_idea_label(old_road=yao_bud._real_id, new_label=moon_str)
+    yao_bud.edit_idea_label(old_road=yao_bud._tribe_id, new_label=moon_str)
 
     # THEN
     # with pytest_raises(Exception) as excinfo:
     #     moon_str = "moon"
-    #     yao_bud.edit_idea_label(old_road=yao_bud._real_id, new_label=moon_str)
+    #     yao_bud.edit_idea_label(old_road=yao_bud._tribe_id, new_label=moon_str)
     # assert (
     #     str(excinfo.value)
-    #     == f"Cannot set idearoot to string other than '{yao_bud._real_id}'"
+    #     == f"Cannot set idearoot to string other than '{yao_bud._tribe_id}'"
     # )
 
     assert yao_bud._idearoot._label != moon_str
-    assert yao_bud._idearoot._label == yao_bud._real_id
+    assert yao_bud._idearoot._label == yao_bud._tribe_id
 
 
-def test_BudUnit_edit_idea_label_RaisesErrorForLevel0When_real_id_IsDifferent():
+def test_BudUnit_edit_idea_label_RaisesErrorForLevel0When_tribe_id_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_str)
@@ -68,11 +68,11 @@ def test_BudUnit_edit_idea_label_RaisesErrorForLevel0When_real_id_IsDifferent():
     yao_bud.set_l1_idea(ideaunit_shop(casa_str))
     yao_bud.set_idea(ideaunit_shop(swim_str), parent_road=casa_road)
     sun_str = "sun"
-    yao_bud._real_id = sun_str
-    yao_bud._idearoot._bud_real_id = sun_str
+    yao_bud._tribe_id = sun_str
+    yao_bud._idearoot._bud_tribe_id = sun_str
     assert yao_bud._owner_id == yao_str
-    assert yao_bud._real_id == sun_str
-    assert yao_bud._idearoot._bud_real_id == sun_str
+    assert yao_bud._tribe_id == sun_str
+    assert yao_bud._idearoot._bud_tribe_id == sun_str
     assert yao_bud._idearoot._label == root_label()
     casa_idea = yao_bud.get_idea_obj(casa_road)
     assert casa_idea._parent_road == root_label()
@@ -237,7 +237,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud._owner_id == "Sue"
-    assert sue_bud._idearoot._label == sue_bud._real_id
+    assert sue_bud._idearoot._label == sue_bud._tribe_id
     # mid_label1 = "Yao"
     # sue_bud.edit_idea_label(old_road=old_label, new_label=mid_label1)
     # assert sue_bud._owner_id == old_label
@@ -249,7 +249,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_bud._owner_id == bob_str
-    assert sue_bud._idearoot._label == sue_bud._real_id
+    assert sue_bud._idearoot._label == sue_bud._tribe_id
 
 
 def test_bud_edit_idea_label_RaisesErrorIfdelimiterIsInLabel():

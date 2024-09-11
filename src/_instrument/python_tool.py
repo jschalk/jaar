@@ -162,19 +162,19 @@ def create_filtered_csv_dict(
     io_dict = {}
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        real_owner_io = (
+        tribe_owner_io = (
             get_nested_value(io_dict, [row[0], row[1]], True) or io_StringIO()
         )
-        new_csv_writer = csv_writer(real_owner_io, delimiter=",")
+        new_csv_writer = csv_writer(tribe_owner_io, delimiter=",")
         new_csv_writer.writerow(row)
-        place_obj_in_dict(io_dict, [row[0], row[1]], real_owner_io)
+        place_obj_in_dict(io_dict, [row[0], row[1]], tribe_owner_io)
 
     x_dict = {}
-    for real_id, owner_id_dict in io_dict.items():
+    for tribe_id, owner_id_dict in io_dict.items():
         for owner_id, io_function in owner_id_dict.items():
-            real_owner_csv = io_function.getvalue()
-            real_owner_csv = real_owner_csv.replace("\r", "")
-            place_obj_in_dict(x_dict, [real_id, owner_id], real_owner_csv)
+            tribe_owner_csv = io_function.getvalue()
+            tribe_owner_csv = tribe_owner_csv.replace("\r", "")
+            place_obj_in_dict(x_dict, [tribe_id, owner_id], tribe_owner_csv)
 
     return x_dict
 

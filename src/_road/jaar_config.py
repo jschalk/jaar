@@ -1,13 +1,13 @@
-def get_test_real_id():
+def get_test_tribe_id():
     return "music_45"
 
 
-def get_real_id_if_None(real_id: str = None):
-    return get_test_real_id() if real_id is None else real_id
+def get_tribe_id_if_None(tribe_id: str = None):
+    return get_test_tribe_id() if tribe_id is None else tribe_id
 
 
-def get_test_reals_dir():
-    return "src/real/examples/reals"
+def get_test_tribes_dir():
+    return "src/tribe/examples/tribes"
 
 
 def get_gifts_folder() -> str:

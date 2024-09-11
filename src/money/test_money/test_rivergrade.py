@@ -1,4 +1,4 @@
-from src.change.atom_config import real_id_str
+from src.change.atom_config import tribe_id_str
 from src.money.examples.example_credorledgers import example_yao_hubunit
 from src.money.rivercycle import RiverGrade, rivergrade_shop
 
@@ -173,7 +173,7 @@ def test_RiverGrade_get_dict_ReturnsCorrectObj():
     rivergrade_dict = x_rivergrade.get_dict()
 
     # THEN
-    assert rivergrade_dict.get(real_id_str()) == yao_hubunit.real_id
+    assert rivergrade_dict.get(tribe_id_str()) == yao_hubunit.tribe_id
     assert rivergrade_dict.get("healer_id") == yao_hubunit.owner_id
     assert rivergrade_dict.get("econ_road") == yao_hubunit.econ_road
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
@@ -209,5 +209,5 @@ def test_RiverGrade_get_json_ReturnsCorrectObj():
     # THEN
     assert (
         rivergrade_json
-        == """{"real_id": "ex_econ04", "healer_id": "Yao", "econ_road": null, "tax_bill_amount": null, "grant_amount": null, "debtor_rank_num": null, "credor_rank_num": null, "tax_paid_amount": null, "tax_paid_bool": null, "tax_paid_rank_num": null, "tax_paid_rank_percent": null, "debtor_count": 101, "credor_count": 103, "debtor_rank_percent": null, "credor_rank_percent": null, "rewards_count": null, "rewards_magnitude": null}"""
+        == """{"tribe_id": "ex_econ04", "healer_id": "Yao", "econ_road": null, "tax_bill_amount": null, "grant_amount": null, "debtor_rank_num": null, "credor_rank_num": null, "tax_paid_amount": null, "tax_paid_bool": null, "tax_paid_rank_num": null, "tax_paid_rank_percent": null, "debtor_count": 101, "credor_count": 103, "debtor_rank_percent": null, "credor_rank_percent": null, "rewards_count": null, "rewards_magnitude": null}"""
     )

@@ -2,7 +2,7 @@ from src._road.road import (
     default_road_delimiter_if_none,
     create_road_from_nodes,
     create_road,
-    get_default_real_id_roadnode as root_label,
+    get_default_tribe_id_roadnode as root_label,
 )
 from src._road.finance import (
     default_bit_if_none,
@@ -12,9 +12,9 @@ from src._road.finance import (
 )
 from src._road.jaar_config import (
     get_gifts_folder,
-    get_test_reals_dir,
+    get_test_tribes_dir,
     get_rootpart_of_econ_dir,
-    get_real_id_if_None,
+    get_tribe_id_if_None,
 )
 from src.bud.bud import budunit_shop
 from src.hear.hubunit import HubUnit, hubunit_shop, get_econ_path
@@ -31,7 +31,7 @@ def test_get_econ_path_ReturnsCorrectObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    sue_hubunit = hubunit_shop(None, real_id=peru_str, owner_id=sue_str)
+    sue_hubunit = hubunit_shop(None, tribe_id=peru_str, owner_id=sue_str)
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"
@@ -71,8 +71,8 @@ def test_HubUnit_Exists():
     x_hubunit = HubUnit()
 
     # THEN
-    assert x_hubunit.reals_dir is None
-    assert x_hubunit.real_id is None
+    assert x_hubunit.tribes_dir is None
+    assert x_hubunit.tribe_id is None
     assert x_hubunit.owner_id is None
     assert x_hubunit.econ_road is None
     assert x_hubunit.road_delimiter is None
@@ -99,8 +99,8 @@ def test_HubUnit_RaisesError_econ_road_DoesNotExist():
 
 def test_hubunit_shop_ReturnsCorrectObj():
     # ESTABLISH
-    x_reals_dir = "src/real/examples"
-    x_real_id = "music"
+    x_tribes_dir = "src/tribe/examples"
+    x_tribe_id = "music"
     sue_str = "Sue"
     x_road_delimiter = "/"
     x_fund_pool = 13000
@@ -111,8 +111,8 @@ def test_hubunit_shop_ReturnsCorrectObj():
 
     # WHEN
     x_hubunit = hubunit_shop(
-        reals_dir=x_reals_dir,
-        real_id=x_real_id,
+        tribes_dir=x_tribes_dir,
+        tribe_id=x_tribe_id,
         owner_id=sue_str,
         econ_road=None,
         road_delimiter=x_road_delimiter,
@@ -124,8 +124,8 @@ def test_hubunit_shop_ReturnsCorrectObj():
     )
 
     # THEN
-    assert x_hubunit.reals_dir == x_reals_dir
-    assert x_hubunit.real_id == x_real_id
+    assert x_hubunit.tribes_dir == x_tribes_dir
+    assert x_hubunit.tribe_id == x_tribe_id
     assert x_hubunit.owner_id == sue_str
     assert x_hubunit.road_delimiter == x_road_delimiter
     assert x_hubunit.fund_pool == x_fund_pool
@@ -133,8 +133,8 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.bit == x_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.econ_money_magnitude == x_money_magnitude
-    assert x_hubunit.real_dir() == f"{x_reals_dir}/{x_real_id}"
-    assert x_hubunit.owners_dir() == f"{x_hubunit.real_dir()}/owners"
+    assert x_hubunit.tribe_dir() == f"{x_tribes_dir}/{x_tribe_id}"
+    assert x_hubunit.owners_dir() == f"{x_hubunit.tribe_dir()}/owners"
     assert x_hubunit.owner_dir() == f"{x_hubunit.owners_dir()}/{sue_str}"
     assert x_hubunit.econs_dir() == f"{x_hubunit.owner_dir()}/econs"
     assert x_hubunit.atoms_dir() == f"{x_hubunit.owner_dir()}/atoms"
@@ -163,16 +163,18 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     sue_hubunit = hubunit_shop(None, None, sue_str, texas_road)
 
     # THEN
-    assert sue_hubunit.reals_dir == get_test_reals_dir()
-    assert sue_hubunit.real_id == get_real_id_if_None()
-    assert sue_hubunit.real_dir() == f"{get_test_reals_dir()}/{get_real_id_if_None()}"
+    assert sue_hubunit.tribes_dir == get_test_tribes_dir()
+    assert sue_hubunit.tribe_id == get_tribe_id_if_None()
+    assert (
+        sue_hubunit.tribe_dir() == f"{get_test_tribes_dir()}/{get_tribe_id_if_None()}"
+    )
     assert sue_hubunit.owner_id == sue_str
     assert sue_hubunit.road_delimiter == default_road_delimiter_if_none()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_none()
     assert sue_hubunit.bit == default_bit_if_none()
     assert sue_hubunit.penny == default_penny_if_none()
-    assert sue_hubunit.owners_dir() == f"{sue_hubunit.real_dir()}/owners"
+    assert sue_hubunit.owners_dir() == f"{sue_hubunit.tribe_dir()}/owners"
     x_hubunit = hubunit_shop(None, None, sue_str)
     assert sue_hubunit.econ_road == texas_road
     assert sue_hubunit.econ_dir() == get_econ_path(x_hubunit, texas_road)
@@ -284,8 +286,8 @@ def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_id
-    real_id = root_label()
-    sue_hubunit = hubunit_shop(env_dir(), real_id, sue_str, None)
+    tribe_id = root_label()
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id, sue_str, None)
 
     print(f"{sue_hubunit.voice_file_path()=}")
     assert sue_hubunit.voice_file_exists() is False
@@ -303,8 +305,8 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_action_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    real_id = root_label()
-    sue_hubunit = hubunit_shop(env_dir(), real_id, sue_str, None)
+    tribe_id = root_label()
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id, sue_str, None)
 
     # WHEN / THEN
     yao_str = "Yao"
@@ -338,8 +340,8 @@ def test_HubUnit_save_action_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_id
 
-    real_id = root_label()
-    sue_hubunit = hubunit_shop(env_dir(), real_id, sue_str, None)
+    tribe_id = root_label()
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id, sue_str, None)
 
     print(f"{sue_hubunit.action_path()=}")
     assert sue_hubunit.action_file_exists() is False
@@ -384,8 +386,8 @@ def test_HubUnit_save_action_bud_RaisesErrorWhenBud_action_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    real_id = root_label()
-    sue_hubunit = hubunit_shop(env_dir(), real_id, sue_str, None)
+    tribe_id = root_label()
+    sue_hubunit = hubunit_shop(env_dir(), tribe_id, sue_str, None)
 
     # WHEN / THEN
     yao_str = "Yao"

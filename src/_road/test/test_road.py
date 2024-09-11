@@ -16,7 +16,7 @@ from src._road.road import (
     road_validate,
     get_ancestor_roads,
     get_forefather_roads,
-    get_default_real_id_roadnode as root_label,
+    get_default_tribe_id_roadnode as root_label,
     create_road_from_nodes,
     create_road,
     get_diff_road,
@@ -80,18 +80,18 @@ def test_road_is_sub_road_correctlyReturnsBool():
 
 def test_road_road_validate_correctlyReturnsRoadUnit():
     x_s = default_road_delimiter_if_none()
-    _real_id = "x"
-    casa_road = f"{_real_id}{x_s}casa"
-    clean_road = f"{_real_id}{x_s}clean"
-    fun_road = f"{_real_id}{x_s}fun"
-    assert road_validate(None, x_s, _real_id) == ""
-    assert road_validate("", x_s, _real_id) == ""
-    assert road_validate(f"{_real_id}{x_s}casa", x_s, _real_id) == casa_road
-    assert road_validate(f"A{x_s}casa", x_s, _real_id) == casa_road
-    assert road_validate(f"{x_s}clean", x_s, _real_id) == clean_road
-    assert road_validate(f"clean{x_s}fun", x_s, _real_id) == fun_road
-    assert road_validate("clean", x_s, _real_id) == _real_id
-    assert road_validate(f"AA{x_s}casa", x_s, _real_id) == casa_road
+    _tribe_id = "x"
+    casa_road = f"{_tribe_id}{x_s}casa"
+    clean_road = f"{_tribe_id}{x_s}clean"
+    fun_road = f"{_tribe_id}{x_s}fun"
+    assert road_validate(None, x_s, _tribe_id) == ""
+    assert road_validate("", x_s, _tribe_id) == ""
+    assert road_validate(f"{_tribe_id}{x_s}casa", x_s, _tribe_id) == casa_road
+    assert road_validate(f"A{x_s}casa", x_s, _tribe_id) == casa_road
+    assert road_validate(f"{x_s}clean", x_s, _tribe_id) == clean_road
+    assert road_validate(f"clean{x_s}fun", x_s, _tribe_id) == fun_road
+    assert road_validate("clean", x_s, _tribe_id) == _tribe_id
+    assert road_validate(f"AA{x_s}casa", x_s, _tribe_id) == casa_road
 
 
 def test_road_create_road_ReturnsCorrectRoadUnitWith_delimiter():
@@ -357,7 +357,7 @@ def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     assert x_roads == texas_forefather_roads
 
 
-def test_road_get_default_real_id_roadnode_ReturnsCorrectObj():
+def test_road_get_default_tribe_id_roadnode_ReturnsCorrectObj():
     assert root_label() == "ZZ"
 
 

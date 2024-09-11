@@ -106,9 +106,9 @@ def test_sift_changeunit_ReturnsObjUPDATEAtomUnit_bud_acctunit():
 
 #     root_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
 #     root_atom.set_arg(parent_road_str(), "")
-#     root_atom.set_arg(label_str(), sue_bud._real_id)
+#     root_atom.set_arg(label_str(), sue_bud._tribe_id)
 #     casa_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
-#     casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
+#     casa_atom.set_arg(parent_road_str(), sue_bud._tribe_id)
 #     casa_atom.set_arg(label_str(), casa_str)
 #     clean_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
 #     clean_atom.set_arg(parent_road_str(), casa_road)

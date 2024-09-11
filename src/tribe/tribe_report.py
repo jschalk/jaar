@@ -3,14 +3,14 @@ from src.bud.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )
-from src.real.real import RealUnit
+from src.tribe.tribe import TribeUnit
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
 
 
-def get_real_voices_accts_dataframe(x_real: RealUnit) -> DataFrame:
+def get_tribe_voices_accts_dataframe(x_tribe: TribeUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_real.get_owner_hubunits()
+    owner_hubunits = x_tribe.get_owner_hubunits()
     # for all owners get voice
     voice_dfs = []
     for x_hubunit in owner_hubunits.values():
@@ -22,7 +22,7 @@ def get_real_voices_accts_dataframe(x_real: RealUnit) -> DataFrame:
     return pandas_concat(voice_dfs, ignore_index=True)
 
 
-def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
+def get_tribe_voices_accts_plotly_fig(x_tribe: TribeUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         acct_id_str(),
@@ -33,7 +33,7 @@ def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "_fund_agenda_give",
         "_fund_agenda_take",
     ]
-    df = get_real_voices_accts_dataframe(x_real)
+    df = get_tribe_voices_accts_dataframe(x_tribe)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -56,7 +56,7 @@ def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"Real '{x_real.real_id}', voice accts metrics"
+    fig_title = f"Tribe '{x_tribe.tribe_id}', voice accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -64,9 +64,9 @@ def get_real_voices_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     return fig
 
 
-def get_real_actions_accts_dataframe(x_real: RealUnit) -> DataFrame:
+def get_tribe_actions_accts_dataframe(x_tribe: TribeUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_real.get_owner_hubunits()
+    owner_hubunits = x_tribe.get_owner_hubunits()
     # for all owners get action
     action_dfs = []
     for x_hubunit in owner_hubunits.values():
@@ -78,7 +78,7 @@ def get_real_actions_accts_dataframe(x_real: RealUnit) -> DataFrame:
     return pandas_concat(action_dfs, ignore_index=True)
 
 
-def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
+def get_tribe_actions_accts_plotly_fig(x_tribe: TribeUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         acct_id_str(),
@@ -89,7 +89,7 @@ def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "_fund_agenda_give",
         "_fund_agenda_take",
     ]
-    df = get_real_actions_accts_dataframe(x_real)
+    df = get_tribe_actions_accts_dataframe(x_tribe)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -112,7 +112,7 @@ def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"Real '{x_real.real_id}', action accts metrics"
+    fig_title = f"Tribe '{x_tribe.tribe_id}', action accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -120,9 +120,9 @@ def get_real_actions_accts_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     return fig
 
 
-def get_real_voices_agenda_dataframe(x_real: RealUnit) -> DataFrame:
+def get_tribe_voices_agenda_dataframe(x_tribe: TribeUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_real.get_owner_hubunits()
+    owner_hubunits = x_tribe.get_owner_hubunits()
     # for all owners get voice
     voice_dfs = []
     for x_hubunit in owner_hubunits.values():
@@ -133,7 +133,7 @@ def get_real_voices_agenda_dataframe(x_real: RealUnit) -> DataFrame:
     return pandas_concat(voice_dfs, ignore_index=True)
 
 
-def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
+def get_tribe_voices_agenda_plotly_fig(x_tribe: TribeUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         "fund_ratio",
@@ -146,7 +146,7 @@ def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "numor",
         "morph",
     ]
-    df = get_real_voices_agenda_dataframe(x_real)
+    df = get_tribe_voices_agenda_dataframe(x_tribe)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -171,7 +171,7 @@ def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"Real '{x_real.real_id}', voice agenda metrics"
+    fig_title = f"Tribe '{x_tribe.tribe_id}', voice agenda metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -179,9 +179,9 @@ def get_real_voices_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     return fig
 
 
-def get_real_actions_agenda_dataframe(x_real: RealUnit) -> DataFrame:
+def get_tribe_actions_agenda_dataframe(x_tribe: TribeUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_real.get_owner_hubunits()
+    owner_hubunits = x_tribe.get_owner_hubunits()
     # for all owners get action
     action_dfs = []
     for x_hubunit in owner_hubunits.values():
@@ -192,7 +192,7 @@ def get_real_actions_agenda_dataframe(x_real: RealUnit) -> DataFrame:
     return pandas_concat(action_dfs, ignore_index=True)
 
 
-def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
+def get_tribe_actions_agenda_plotly_fig(x_tribe: TribeUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         "fund_ratio",
@@ -205,7 +205,7 @@ def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
         "numor",
         "morph",
     ]
-    df = get_real_actions_agenda_dataframe(x_real)
+    df = get_tribe_actions_agenda_dataframe(x_tribe)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -230,7 +230,7 @@ def get_real_actions_agenda_plotly_fig(x_real: RealUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"Real '{x_real.real_id}', action agenda metrics"
+    fig_title = f"Tribe '{x_tribe.tribe_id}', action agenda metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)

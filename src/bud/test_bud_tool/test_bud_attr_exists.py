@@ -86,7 +86,7 @@ def test_bud_ideaunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
     sweep_road = sue_bud.make_road(clean_road, "sweep")
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     root_required_args = {"road": root_road}
     casa_required_args = {"road": casa_road}
     clean_required_args = {"road": clean_road}
@@ -126,9 +126,9 @@ def test_bud_idea_awardlink_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     swim_str = "Swim"
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     root_required_args = {"road": root_road, "group_id": swim_str}
     casa_required_args = {"road": casa_road, "group_id": swim_str}
     clean_required_args = {"road": clean_road, "group_id": swim_str}
@@ -156,7 +156,7 @@ def test_bud_idea_reasonunit_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     root_required_args = {"road": root_road, "base": week_road}
@@ -187,7 +187,7 @@ def test_bud_idea_reason_premiseunit_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
@@ -230,7 +230,7 @@ def test_bud_idea_teamlink_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     swim_str = "Swim"
     root_required_args = {"road": root_road, "group_id": swim_str}
     casa_required_args = {"road": casa_road, "group_id": swim_str}
@@ -260,7 +260,7 @@ def test_bud_idea_healerlink_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     swim_str = "Swim"
     root_required_args = {"road": root_road, "healer_id": swim_str}
     casa_required_args = {"road": casa_road, "healer_id": swim_str}
@@ -289,7 +289,7 @@ def test_bud_idea_factunit_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     root_required_args = {"road": root_road, "base": week_road}
@@ -375,7 +375,7 @@ def test_bud_attr_exists_ReturnsObj_bud_ideaunit():
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
     sweep_road = sue_bud.make_road(clean_road, "sweep")
-    x_parent_road = sue_bud._real_id
+    x_parent_road = sue_bud._tribe_id
     root_required_args = {"road": x_parent_road}
     casa_required_args = {"road": casa_road}
     clean_required_args = {"road": clean_road}
@@ -416,7 +416,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_awardlink():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     swim_str = "Swim"
     x_category = bud_idea_awardlink_str()
     root_required_args = {"road": root_road, "group_id": swim_str}
@@ -446,7 +446,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reasonunit():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     x_category = bud_idea_reasonunit_str()
@@ -477,7 +477,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reason_premiseunit():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
@@ -519,7 +519,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     swim_str = "Swim"
     x_category = bud_idea_teamlink_str()
     root_required_args = {"road": root_road, "group_id": swim_str}
@@ -550,7 +550,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_healerlink():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     swim_str = "Swim"
     x_category = bud_idea_healerlink_str()
     root_required_args = {"road": root_road, "healer_id": swim_str}
@@ -580,7 +580,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_factunit():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._real_id
+    root_road = sue_bud._tribe_id
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     x_category = bud_idea_factunit_str()

@@ -1,4 +1,4 @@
-from src._road.road import RoadUnit, create_road, get_default_real_id_roadnode
+from src._road.road import RoadUnit, create_road, get_default_tribe_id_roadnode
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop, BudUnit
 
@@ -32,7 +32,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), casa_str())
+    return create_road(get_default_tribe_id_roadnode(), casa_str())
 
 
 def cook_road() -> RoadUnit:

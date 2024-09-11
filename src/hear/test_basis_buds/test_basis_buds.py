@@ -37,7 +37,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     # THEN
     assert yao_empty_job._owner_id != yao_voice._owner_id
     assert yao_empty_job._owner_id == zia_str
-    assert yao_empty_job._real_id == yao_voice._real_id
+    assert yao_empty_job._tribe_id == yao_voice._tribe_id
     assert yao_empty_job._last_gift_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
@@ -81,7 +81,7 @@ def test_create_hear_basis_ReturnsCorrectObj():
 
     # THEN
     assert yao_basis_job._owner_id == yao_duty._owner_id
-    assert yao_basis_job._real_id == yao_duty._real_id
+    assert yao_basis_job._tribe_id == yao_duty._tribe_id
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
     assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
@@ -134,8 +134,8 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     default_action_bud.settle_bud()
     assert default_action_bud._owner_id == sue_budunit._owner_id
     assert default_action_bud._owner_id == sue_str
-    assert default_action_bud._real_id == sue_budunit._real_id
-    assert default_action_bud._real_id == blue_str
+    assert default_action_bud._tribe_id == sue_budunit._tribe_id
+    assert default_action_bud._tribe_id == blue_str
     assert default_action_bud._road_delimiter == slash_str
     assert default_action_bud._fund_pool == sue_acct_pool
     assert default_action_bud._fund_coin == x_fund_coin
