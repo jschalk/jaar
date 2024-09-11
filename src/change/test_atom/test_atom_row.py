@@ -5,8 +5,8 @@ from src.bud.bud_tool import (
     bud_ideaunit_str,
     bud_idea_healerlink_str,
 )
-from src.gift.atom_config import atom_insert, atom_delete, acct_id_str
-from src.gift.atom import AtomRow, atomrow_shop, atomunit_shop
+from src.change.atom_config import atom_insert, atom_delete, acct_id_str
+from src.change.atom import AtomRow, atomrow_shop, atomunit_shop
 
 
 def test_AtomRow_exists():

@@ -4,7 +4,7 @@ from src.bud.bud_tool import (
     bud_acct_membership_str,
     budunit_str,
 )
-from src.gift.atom_config import (
+from src.change.atom_config import (
     atom_insert,
     atom_delete,
     acct_id_str,
@@ -12,7 +12,7 @@ from src.gift.atom_config import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.gift.atom import AtomUnit, atomunit_shop
+from src.change.atom import AtomUnit, atomunit_shop
 
 
 def test_AtomUnit_exists():

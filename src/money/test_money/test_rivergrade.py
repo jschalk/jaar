@@ -1,4 +1,4 @@
-from src.gift.atom_config import real_id_str
+from src.change.atom_config import real_id_str
 from src.money.examples.example_credorledgers import example_yao_hubunit
 from src.money.rivercycle import RiverGrade, rivergrade_shop
 

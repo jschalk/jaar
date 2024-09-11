@@ -1,13 +1,13 @@
 from src.bud.bud_tool import bud_idea_reasonunit_str
-from src.gift.atom_config import (
+from src.change.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
     base_idea_active_requisite_str,
 )
-from src.gift.atom import atomunit_shop
-from src.gift.change import changeunit_shop
-from src.gift.legible import create_legible_list
+from src.change.atom import atomunit_shop
+from src.change.change import changeunit_shop
+from src.change.legible import create_legible_list
 from src.bud.bud import budunit_shop
 
 

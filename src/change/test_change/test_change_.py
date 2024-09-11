@@ -7,7 +7,7 @@ from src.bud.bud_tool import (
     bud_ideaunit_str,
     bud_idea_awardlink_str,
 )
-from src.gift.atom_config import (
+from src.change.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
@@ -18,10 +18,14 @@ from src.gift.atom_config import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.gift.atom import atomunit_shop
-from src.gift.change import ChangeUnit, changeunit_shop, bud_built_from_change_is_valid
+from src.change.atom import atomunit_shop
+from src.change.change import (
+    ChangeUnit,
+    changeunit_shop,
+    bud_built_from_change_is_valid,
+)
 from src.bud.bud import budunit_shop
-from src.gift.examples.example_changes import get_changeunit_example1
+from src.change.examples.example_changes import get_changeunit_example1
 from src._instrument.python_tool import x_is_json
 from pytest import raises as pytest_raises
 

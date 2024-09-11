@@ -15,8 +15,8 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
-from src.gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
-from src.gift.atom_config import (
+from src.change.atom import atom_update, atom_delete, atom_insert, atomunit_shop
+from src.change.atom_config import (
     acct_id_str,
     group_id_str,
     healer_id_str,
@@ -33,8 +33,8 @@ from src.gift.atom_config import (
     fopen_str,
     fnigh_str,
 )
-from src.gift.change import changeunit_shop
-from src.gift.examples.example_changes import get_changeunit_example1
+from src.change.change import changeunit_shop
+from src.change.examples.example_changes import get_changeunit_example1
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_SimplestScenario():

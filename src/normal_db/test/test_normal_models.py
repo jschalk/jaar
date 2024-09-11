@@ -10,7 +10,7 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
-from src.gift.atom_config import (
+from src.change.atom_config import (
     get_normalized_bud_table_build,
     normal_table_name_str,
     normal_specs_str,

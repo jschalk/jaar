@@ -10,13 +10,13 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
-from src.gift.atom_config import (
+from src.change.atom_config import (
     atom_insert,
     atom_delete,
     atom_update,
     get_normal_table_name,
 )
-from src.gift.atom import atomunit_shop, AtomUnit
+from src.change.atom import atomunit_shop, AtomUnit
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from dataclasses import dataclass
 

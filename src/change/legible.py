@@ -12,8 +12,8 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
-from src.gift.atom import AtomUnit
-from src.gift.atom_config import (
+from src.change.atom import AtomUnit
+from src.change.atom_config import (
     atom_delete,
     atom_insert,
     atom_update,
@@ -37,7 +37,7 @@ from src.gift.atom_config import (
     fnigh_str,
     fopen_str,
 )
-from src.gift.change import ChangeUnit
+from src.change.change import ChangeUnit
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:

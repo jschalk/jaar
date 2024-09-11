@@ -6,7 +6,7 @@ from src._instrument.python_tool import (
 from src._road.finance import allot_scale
 from src._road.road import AcctID, OwnerID
 from src.bud.bud import BudUnit
-from src.gift.atom_config import real_id_str
+from src.change.atom_config import real_id_str
 from src.listen.hubunit import HubUnit
 from dataclasses import dataclass
 

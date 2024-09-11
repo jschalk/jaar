@@ -1,11 +1,11 @@
 from src._instrument.python_tool import x_is_json
 from src._road.jaar_config import init_gift_id, get_gifts_folder
 from src._road.road import get_default_real_id_roadnode as root_label
-from src.gift.atom_config import real_id_str, owner_id_str
-from src.gift.change import changeunit_shop
-from src.gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
-from src.gift.examples.example_atoms import get_atom_example_ideaunit_sports
-from src.gift.examples.example_changes import get_changeunit_sue_example
+from src.change.atom_config import real_id_str, owner_id_str
+from src.change.change import changeunit_shop
+from src.change.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
+from src.change.examples.example_atoms import get_atom_example_ideaunit_sports
+from src.change.examples.example_changes import get_changeunit_sue_example
 
 
 def test_get_gifts_folder_ReturnsCorrectObj():

@@ -1,9 +1,9 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.bud_tool import bud_acctunit_str
-from src.gift.atom_config import acct_id_str
-from src.gift.atom import atom_insert
-from src.gift.change import changeunit_shop, get_filtered_changeunit
+from src.change.atom_config import acct_id_str
+from src.change.atom import atom_insert
+from src.change.change import changeunit_shop, get_filtered_changeunit
 
 
 def test_ChangeUnit_get_filtered_changeunit_ReturnsObjFilteredBy_acctunit_insert():

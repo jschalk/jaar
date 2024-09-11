@@ -1,8 +1,8 @@
 from src._road.jaar_config import get_real_id_if_None
 from src._road.road import create_road, RealID
 from src.bud.bud_tool import bud_ideaunit_str
-from src.gift.atom_config import atom_insert, parent_road_str, label_str
-from src.gift.atom import atomunit_shop, AtomUnit
+from src.change.atom_config import atom_insert, parent_road_str, label_str
+from src.change.atom import atomunit_shop, AtomUnit
 
 
 def get_atom_example_ideaunit_sports(real_id: RealID = None) -> AtomUnit:

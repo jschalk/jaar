@@ -12,8 +12,8 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
-from src.gift.atom import atom_insert, atom_update, atomunit_shop, sift_atomunit
-from src.gift.atom_config import (
+from src.change.atom import atom_insert, atom_update, atomunit_shop, sift_atomunit
+from src.change.atom_config import (
     acct_id_str,
     group_id_str,
     healer_id_str,
@@ -24,7 +24,7 @@ from src.gift.atom_config import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.gift.change import changeunit_shop, sift_changeunit
+from src.change.change import changeunit_shop, sift_changeunit
 
 
 def test_sift_changeunit_ReturnsObjUPDATEAtomUnit_bud_acctunit():

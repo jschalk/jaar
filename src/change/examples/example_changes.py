@@ -1,7 +1,7 @@
 from src.bud.bud_tool import budunit_str, bud_acctunit_str
-from src.gift.atom_config import atom_delete, atom_update, acct_id_str
-from src.gift.atom import atomunit_shop
-from src.gift.change import ChangeUnit, changeunit_shop
+from src.change.atom_config import atom_delete, atom_update, acct_id_str
+from src.change.atom import atomunit_shop
+from src.change.change import ChangeUnit, changeunit_shop
 
 
 def get_changeunit_sue_example() -> ChangeUnit:

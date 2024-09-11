@@ -24,7 +24,7 @@ from src.bud.bud_tool import (
     bud_idea_factunit_str,
     bud_get_obj,
 )
-from src.gift.atom_config import (
+from src.change.atom_config import (
     get_category_from_dict,
     get_atom_config_required_args,
     category_ref,

@@ -2,13 +2,13 @@
 from src._road.jaar_config import get_test_real_id
 from src._road.road import default_road_delimiter_if_none
 from src.bud.bud_tool import bud_acctunit_str
-from src.gift.atom_config import atom_insert, acct_id_str
-from src.gift.atom import atomunit_shop
-from src.gift.translator import Translator, translator_shop
+from src.change.atom_config import atom_insert, acct_id_str
+from src.change.atom import atomunit_shop
+from src.change.translator import Translator, translator_shop
 
-# from src.gift.gift import giftunit_shop, get_init_gift_id_if_None
-# from src.gift.examples.example_atoms import get_atom_example_ideaunit_sports
-# from src.gift.examples.example_changes import get_changeunit_sue_example
+# from src.change.gift import giftunit_shop, get_init_gift_id_if_None
+# from src.change.examples.example_atoms import get_atom_example_ideaunit_sports
+# from src.change.examples.example_changes import get_changeunit_sue_example
 from copy import deepcopy as copy_deepcopy
 
 

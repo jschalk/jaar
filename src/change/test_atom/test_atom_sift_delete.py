@@ -12,8 +12,8 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
-from src.gift.atom import atom_delete, atomunit_shop, sift_atomunit
-from src.gift.atom_config import (
+from src.change.atom import atom_delete, atomunit_shop, sift_atomunit
+from src.change.atom_config import (
     acct_id_str,
     group_id_str,
     healer_id_str,

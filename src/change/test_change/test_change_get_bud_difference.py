@@ -15,7 +15,7 @@ from src.bud.bud_tool import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
-from src.gift.atom_config import (
+from src.change.atom_config import (
     acct_id_str,
     group_id_str,
     healer_id_str,
@@ -29,8 +29,8 @@ from src.gift.atom_config import (
     fnigh_str,
     base_idea_active_requisite_str,
 )
-from src.gift.atom import atom_insert, atom_update, atom_delete
-from src.gift.change import ChangeUnit, changeunit_shop
+from src.change.atom import atom_insert, atom_update, atom_delete
+from src.change.change import ChangeUnit, changeunit_shop
 from src.listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src._instrument.python_tool import get_nested_value, get_empty_list_if_None
 from copy import deepcopy as copy_deepcopy

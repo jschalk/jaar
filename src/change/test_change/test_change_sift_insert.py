@@ -1,8 +1,8 @@
 from src.bud.bud import budunit_shop
 from src.bud.bud_tool import bud_acctunit_str, bud_acct_membership_str
-from src.gift.atom import atom_insert, atomunit_shop
-from src.gift.atom_config import acct_id_str, group_id_str
-from src.gift.change import changeunit_shop, sift_changeunit
+from src.change.atom import atom_insert, atomunit_shop
+from src.change.atom_config import acct_id_str, group_id_str
+from src.change.change import changeunit_shop, sift_changeunit
 
 
 def test_sift_changeunit_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():
