@@ -1,7 +1,7 @@
 from src._road.road import create_road
 from src.bud.bud_tool import bud_idea_factunit_str
-from src.change.atom_config import fopen_str, atom_insert, atom_hx_table_name
-from src.change.atom import atomunit_shop
+from src.gift.atom_config import fopen_str, atom_insert, atom_hx_table_name
+from src.gift.atom import atomunit_shop
 from src.tribe.journal_sqlstr import (
     get_atom2change_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS atom_hx (
         "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3411
+    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3423
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -219,12 +219,12 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5375
+    assert generated_sqlstr.find(end_sqlstr) == 5401
     example_idea_reasonunit_str = (
         "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3443
+    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3455
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

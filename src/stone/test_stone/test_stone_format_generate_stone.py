@@ -7,7 +7,7 @@ from src.bud.bud_tool import (
     bud_ideaunit_str,
 )
 from src.bud.examples.example_buds import budunit_v001
-from src.change.atom_config import (
+from src.gift.atom_config import (
     atom_insert,
     acct_id_str,
     group_id_str,
@@ -20,7 +20,7 @@ from src.change.atom_config import (
     debtit_vote_str,
     credit_vote_str,
 )
-from src.change.atom import atomunit_shop
+from src.gift.atom import atomunit_shop
 from src.stone.stone import create_stone_df, create_changeunit, get_stoneref
 from src.stone.stone_config import (
     stone_format_00021_bud_acctunit_v0_0_0,

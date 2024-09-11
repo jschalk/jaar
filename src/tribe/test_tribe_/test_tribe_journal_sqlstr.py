@@ -1,4 +1,4 @@
-# from src.change.atom import atom_hx_table_name
+# from src.gift.atom import atom_hx_table_name
 # from src._instrument.sqlite import check_table_column_existence
 # from src.tribe.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.tribe.tribe import tribeunit_shop

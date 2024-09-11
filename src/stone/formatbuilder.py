@@ -1,4 +1,4 @@
-from src.change.atom_config import (
+from src.gift.atom_config import (
     get_atom_config_dict,
     tribe_id_str,
     owner_id_str,

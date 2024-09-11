@@ -1,4 +1,4 @@
-from src.change.atom_config import acct_id_str, owner_id_str
+from src.gift.atom_config import acct_id_str, owner_id_str
 from src.bud.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,

@@ -1,7 +1,7 @@
 from src._instrument.python_tool import create_sorted_concatenated_str
 from src._instrument.file import dir_files
 from src.bud.bud_tool import bud_acctunit_str
-from src.change.atom_config import (
+from src.gift.atom_config import (
     tribe_id_str,
     owner_id_str,
     acct_id_str,
@@ -125,7 +125,7 @@ def test_get_sorted_headers_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers(stone_format_00019_ideaunit_v0_0_0())
     # THEN
-    idea_headers_str = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,tribe_id,stop_want"
+    idea_headers_str = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,stop_want,tribe_id"
     assert headers == idea_headers_str
 
 

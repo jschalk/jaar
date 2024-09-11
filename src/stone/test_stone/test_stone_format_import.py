@@ -1,7 +1,7 @@
 from src._instrument.file import create_file_path as f_path
 from src.bud.bud import budunit_shop
 from src.bud.examples.example_buds import budunit_v001
-from src.change.atom_config import (
+from src.gift.atom_config import (
     tribe_id_str,
     owner_id_str,
     acct_id_str,
