@@ -4,8 +4,8 @@ from src._road.road import RoadUnit, RoadNode
 from src.bud.idea import (
     ideaunit_shop,
     IdeaUnit,
-    ideas_calculated_range,
-    all_ideas_between,
+    ideas_calculated_range as calc_range,
+    all_ideas_between as all_between,
 )
 from src.bud.bud import BudUnit
 from datetime import datetime
@@ -417,7 +417,7 @@ class ChronoUnit:
         week_road = get_week_road(self.x_budunit, self.time_range_root_road)
         week_idea = self.x_budunit.get_idea_obj(week_road)
         x_idea_list = [self._timeline_idea, week_idea]
-        open_rangeunit = ideas_calculated_range(x_idea_list, self.x_min, self.x_min)
+        open_rangeunit = calc_range(x_idea_list, self.x_min, self.x_min)
         open_weekday_dict = week_idea.get_kids_in_range(open_rangeunit.gogo)
         for x_weekday in open_weekday_dict.keys():
             self._weekday = x_weekday
@@ -426,8 +426,8 @@ class ChronoUnit:
         year_road = get_year_road(self.x_budunit, self.time_range_root_road)
         year_idea = self.x_budunit.get_idea_obj(year_road)
         x_idea_dict = self.x_budunit._idea_dict
-        idea_list = all_ideas_between(x_idea_dict, self.time_range_root_road, year_road)
-        open_rangeunit = ideas_calculated_range(idea_list, self.x_min, self.x_min)
+        idea_list = all_between(x_idea_dict, self.time_range_root_road, year_road)
+        open_rangeunit = calc_range(idea_list, self.x_min, self.x_min)
         gogo_month_dict = year_idea.get_kids_in_range(open_rangeunit.gogo)
         month_idea = None
         for x_monthname, month_idea in gogo_month_dict.items():
@@ -441,7 +441,7 @@ class ChronoUnit:
         day_road = get_day_road(self.x_budunit, self.time_range_root_road)
         day_idea = self.x_budunit.get_idea_obj(day_road)
         x_idea_list = [self._timeline_idea, day_idea]
-        rangeunit = ideas_calculated_range(x_idea_list, self.x_min, self.x_min)
+        rangeunit = calc_range(x_idea_list, self.x_min, self.x_min)
         hour_dict = day_idea.get_kids_in_range(rangeunit.gogo)
         for x_hour, hour_idea in hour_dict.items():
             self._hour = x_hour
@@ -451,35 +451,27 @@ class ChronoUnit:
 
     def _set_year(self):
         c400_constants = get_c400_constants()
+        x_time_road = self.time_range_root_road
+        x_idea_dict = self.x_budunit._idea_dict
         # count 400 year blocks
         self._c400_count = self.x_min // c400_constants.c400_leap_length
 
         # count 100 year blocks
-        c400_clean_road = get_c400_clean_road(self.x_budunit, self.time_range_root_road)
-        c400_clean_idea_list = all_ideas_between(
-            self.x_budunit._idea_dict, self.time_range_root_road, c400_clean_road
-        )
-        c400_clean_range = ideas_calculated_range(
-            c400_clean_idea_list, self.x_min, self.x_min
-        )
+        c400_clean_road = get_c400_clean_road(self.x_budunit, x_time_road)
+        c400_clean_idea_list = all_between(x_idea_dict, x_time_road, c400_clean_road)
+        c400_clean_range = calc_range(c400_clean_idea_list, self.x_min, self.x_min)
         self._c100_count = c400_clean_range.gogo // c400_constants.c100_length
 
         # count 4 year blocks
-        c100_road = get_c100_road(self.x_budunit, self.time_range_root_road)
-        c100_idea_list = all_ideas_between(
-            self.x_budunit._idea_dict, self.time_range_root_road, c100_road
-        )
-        c100_range = ideas_calculated_range(c100_idea_list, self.x_min, self.x_min)
+        c100_road = get_c100_road(self.x_budunit, x_time_road)
+        c100_idea_list = all_between(x_idea_dict, x_time_road, c100_road)
+        c100_range = calc_range(c100_idea_list, self.x_min, self.x_min)
         self._yr4_count = c100_range.gogo // c400_constants.yr4_leap_length
 
         # count 1 year blocks
-        yr4_clean_road = get_yr4_clean_road(self.x_budunit, self.time_range_root_road)
-        yr4_clean_ideas = all_ideas_between(
-            self.x_budunit._idea_dict, self.time_range_root_road, yr4_clean_road
-        )
-        yr4_clean_range = ideas_calculated_range(
-            yr4_clean_ideas, self.x_min, self.x_min
-        )
+        yr4_clean_road = get_yr4_clean_road(self.x_budunit, x_time_road)
+        yr4_clean_ideas = all_between(x_idea_dict, x_time_road, yr4_clean_road)
+        yr4_clean_range = calc_range(yr4_clean_ideas, self.x_min, self.x_min)
         self._year_count = yr4_clean_range.gogo // c400_constants.year_length
 
         self._year_num = self._c400_count * 400
