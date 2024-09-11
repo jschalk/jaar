@@ -200,7 +200,7 @@ def get_atom_config_file_name() -> str:
 
 
 def config_file_dir() -> str:
-    return f"{os_getcwd()}/src/gift"
+    return f"{os_getcwd()}/src/change"
 
 
 def get_atom_config_dict() -> dict:
