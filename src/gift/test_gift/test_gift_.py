@@ -42,14 +42,14 @@ def test_GiftUnit_exists():
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
 
     # WHEN
-    farm_giftunit = giftunit_shop(owner_id=bob_text)
+    farm_giftunit = giftunit_shop(owner_id=bob_str)
 
     # THEN
     assert farm_giftunit.real_id == root_label()
-    assert farm_giftunit.owner_id == bob_text
+    assert farm_giftunit.owner_id == bob_str
     assert farm_giftunit._gift_id == 0
     assert farm_giftunit._face_id is None
     assert farm_giftunit._changeunit == changeunit_shop()
@@ -60,21 +60,21 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     bob_gift_id = 13
-    sue_text = "Sue"
+    sue_str = "Sue"
     bob_changeunit = get_changeunit_sue_example()
     bob_change_start = 6
     bob_gifts_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
-    music_text = "music"
+    music_str = "music"
 
     # WHEN
     farm_giftunit = giftunit_shop(
-        real_id=music_text,
-        owner_id=bob_text,
+        real_id=music_str,
+        owner_id=bob_str,
         _gift_id=bob_gift_id,
-        _face_id=sue_text,
+        _face_id=sue_str,
         _changeunit=bob_changeunit,
         _change_start=bob_change_start,
         _gifts_dir=bob_gifts_dir,
@@ -82,10 +82,10 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     )
 
     # THEN
-    assert farm_giftunit.real_id == music_text
-    assert farm_giftunit.owner_id == bob_text
+    assert farm_giftunit.real_id == music_str
+    assert farm_giftunit.owner_id == bob_str
     assert farm_giftunit._gift_id == bob_gift_id
-    assert farm_giftunit._face_id == sue_text
+    assert farm_giftunit._face_id == sue_str
     assert farm_giftunit._changeunit == bob_changeunit
     assert farm_giftunit._change_start == bob_change_start
     assert farm_giftunit._gifts_dir == bob_gifts_dir
@@ -94,52 +94,52 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
     # ESTABLISH
-    bob_text = "Bob"
-    yao_text = "Yao"
+    bob_str = "Bob"
+    yao_str = "Yao"
 
     # WHEN
-    farm_giftunit = giftunit_shop(owner_id=bob_text, _face_id=yao_text)
+    farm_giftunit = giftunit_shop(owner_id=bob_str, _face_id=yao_str)
 
     # THEN
-    assert farm_giftunit.owner_id == bob_text
-    assert farm_giftunit._face_id == yao_text
+    assert farm_giftunit.owner_id == bob_str
+    assert farm_giftunit._face_id == yao_str
 
 
 def test_GiftUnit_set_face_SetsAttribute():
     # ESTABLISH
-    bob_text = "Bob"
-    farm_giftunit = giftunit_shop(owner_id=bob_text)
-    sue_text = "Sue"
+    bob_str = "Bob"
+    farm_giftunit = giftunit_shop(owner_id=bob_str)
+    sue_str = "Sue"
     assert farm_giftunit._face_id is None
-    assert farm_giftunit._face_id != sue_text
+    assert farm_giftunit._face_id != sue_str
 
     # WHEN
-    farm_giftunit.set_face(sue_text)
+    farm_giftunit.set_face(sue_str)
 
     # THEN
-    assert farm_giftunit._face_id == sue_text
+    assert farm_giftunit._face_id == sue_str
 
 
 def test_GiftUnit_del_face_SetsAttribute():
     # ESTABLISH
-    bob_text = "Bob"
-    farm_giftunit = giftunit_shop(owner_id=bob_text)
-    yao_text = "Yao"
-    farm_giftunit.set_face(yao_text)
-    assert farm_giftunit._face_id == yao_text
+    bob_str = "Bob"
+    farm_giftunit = giftunit_shop(owner_id=bob_str)
+    yao_str = "Yao"
+    farm_giftunit.set_face(yao_str)
+    assert farm_giftunit._face_id == yao_str
 
     # WHEN
     farm_giftunit.del_face()
 
     # THEN
-    assert farm_giftunit._face_id != yao_text
+    assert farm_giftunit._face_id != yao_str
     assert farm_giftunit._face_id is None
 
 
 def test_GiftUnit_set_changeunit_SetsAttribute():
     # ESTABLISH
-    bob_text = "Bob"
-    farm_giftunit = giftunit_shop(owner_id=bob_text)
+    bob_str = "Bob"
+    farm_giftunit = giftunit_shop(owner_id=bob_str)
     assert farm_giftunit._changeunit == changeunit_shop()
 
     # WHEN
@@ -153,8 +153,8 @@ def test_GiftUnit_set_changeunit_SetsAttribute():
 
 def test_GiftUnit_set_change_start_SetsAttribute():
     # ESTABLISH
-    bob_text = "Bob"
-    farm_giftunit = giftunit_shop(bob_text)
+    bob_str = "Bob"
+    farm_giftunit = giftunit_shop(bob_str)
     assert farm_giftunit._change_start == 0
 
     # WHEN
@@ -167,9 +167,9 @@ def test_GiftUnit_set_change_start_SetsAttribute():
 
 def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     farm_changeunit = changeunit_shop()
-    farm_giftunit = giftunit_shop(owner_id=bob_text)
+    farm_giftunit = giftunit_shop(owner_id=bob_str)
     farm_giftunit.set_changeunit(farm_changeunit)
 
     # WHEN
@@ -188,10 +188,10 @@ def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
 
 def test_GiftUnit_del_changeunit_SetsAttribute():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     farm_changeunit = changeunit_shop()
     farm_changeunit.set_atomunit(get_atom_example_ideaunit_sports())
-    farm_giftunit = giftunit_shop(owner_id=bob_text, _changeunit=farm_changeunit)
+    farm_giftunit = giftunit_shop(owner_id=bob_str, _changeunit=farm_changeunit)
     assert farm_giftunit._changeunit != changeunit_shop()
     assert farm_giftunit._changeunit == farm_changeunit
 
@@ -204,45 +204,45 @@ def test_GiftUnit_del_changeunit_SetsAttribute():
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     # ESTABLISH
-    bob_text = "Bob"
-    sue_text = "Sue"
-    music_text = "music"
-    farm_giftunit = giftunit_shop(real_id=music_text, owner_id=bob_text)
-    farm_giftunit.set_face(sue_text)
+    bob_str = "Bob"
+    sue_str = "Sue"
+    music_str = "music"
+    farm_giftunit = giftunit_shop(real_id=music_str, owner_id=bob_str)
+    farm_giftunit.set_face(sue_str)
 
     # WHEN
     x_dict = farm_giftunit.get_step_dict()
 
     # THEN
     assert x_dict.get(real_id_str()) is not None
-    assert x_dict.get(real_id_str()) == music_text
+    assert x_dict.get(real_id_str()) == music_str
     assert x_dict.get(owner_id_str()) is not None
-    assert x_dict.get(owner_id_str()) == bob_text
+    assert x_dict.get(owner_id_str()) == bob_str
 
-    face_id_text = "face_id"
-    assert x_dict.get(face_id_text) is not None
-    assert x_dict.get(face_id_text) == sue_text
+    face_id_str = "face_id"
+    assert x_dict.get(face_id_str) is not None
+    assert x_dict.get(face_id_str) == sue_str
 
-    change_text = "change"
-    assert x_dict.get(change_text) is not None
-    assert x_dict.get(change_text) == changeunit_shop().get_ordered_atomunits()
-    assert x_dict.get(change_text) == {}
+    change_str = "change"
+    assert x_dict.get(change_str) is not None
+    assert x_dict.get(change_str) == changeunit_shop().get_ordered_atomunits()
+    assert x_dict.get(change_str) == {}
 
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithChangePopulated():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     sue_changeunit = get_changeunit_sue_example()
-    farm_giftunit = giftunit_shop(bob_text, _changeunit=sue_changeunit)
+    farm_giftunit = giftunit_shop(bob_str, _changeunit=sue_changeunit)
 
     # WHEN
     x_dict = farm_giftunit.get_step_dict()
 
     # THEN
-    change_text = "change"
-    assert x_dict.get(change_text) is not None
-    assert x_dict.get(change_text) == sue_changeunit.get_ordered_atomunits()
-    sue_atomunits_dict = x_dict.get(change_text)
+    change_str = "change"
+    assert x_dict.get(change_str) is not None
+    assert x_dict.get(change_str) == sue_changeunit.get_ordered_atomunits()
+    sue_atomunits_dict = x_dict.get(change_str)
     print(f"{len(sue_changeunit.get_sorted_atomunits())=}")
     print(f"{sue_atomunits_dict.keys()=}")
     # print(f"{sue_atomunits_dict.get(0)=}")
@@ -253,23 +253,23 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithChangePopulated():
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
     farm_giftunit = giftunit_shop(
-        bob_text, _changeunit=sue_changeunit, _change_start=farm_change_start
+        bob_str, _changeunit=sue_changeunit, _change_start=farm_change_start
     )
 
     # WHEN
     x_dict = farm_giftunit.get_step_dict()
 
     # THEN
-    change_text = "change"
-    assert x_dict.get(change_text) is not None
-    assert x_dict.get(change_text) == sue_changeunit.get_ordered_atomunits(
+    change_str = "change"
+    assert x_dict.get(change_str) is not None
+    assert x_dict.get(change_str) == sue_changeunit.get_ordered_atomunits(
         farm_change_start
     )
-    sue_atomunits_dict = x_dict.get(change_text)
+    sue_atomunits_dict = x_dict.get(change_str)
     print(f"{len(sue_changeunit.get_sorted_atomunits())=}")
     print(f"{sue_atomunits_dict.keys()=}")
     # print(f"{sue_atomunits_dict.get(0)=}")
@@ -280,14 +280,14 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_change_start():
 
 def test_GiftUnit_get_change_atom_numbers_ReturnsCorrectObj():
     # ESTABLISH
-    bob_text = "Bob"
-    yao_text = "Yao"
+    bob_str = "Bob"
+    yao_str = "Yao"
     sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
-    farm_giftunit = giftunit_shop(bob_text)
+    farm_giftunit = giftunit_shop(bob_str)
     farm_giftunit.set_changeunit(sue_changeunit)
     farm_giftunit.set_change_start(farm_change_start)
-    farm_giftunit.set_face(yao_text)
+    farm_giftunit.set_face(yao_str)
     farm_dict = farm_giftunit.get_step_dict()
 
     # WHEN
@@ -298,48 +298,48 @@ def test_GiftUnit_get_change_atom_numbers_ReturnsCorrectObj():
 
 def test_GiftUnit_get_changemetric_dict_ReturnsCorrectObj():
     # ESTABLISH
-    bob_text = "Bob"
-    yao_text = "Yao"
+    bob_str = "Bob"
+    yao_str = "Yao"
     sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
-    farm_giftunit = giftunit_shop(bob_text)
+    farm_giftunit = giftunit_shop(bob_str)
     farm_giftunit.set_changeunit(sue_changeunit)
     farm_giftunit.set_change_start(farm_change_start)
-    farm_giftunit.set_face(yao_text)
+    farm_giftunit.set_face(yao_str)
 
     # WHEN
     x_dict = farm_giftunit.get_changemetric_dict()
 
     # THEN
     assert x_dict.get(owner_id_str()) is not None
-    assert x_dict.get(owner_id_str()) == bob_text
+    assert x_dict.get(owner_id_str()) == bob_str
 
-    face_id_text = "face_id"
-    assert x_dict.get(face_id_text) is not None
-    assert x_dict.get(face_id_text) == yao_text
+    face_id_str = "face_id"
+    assert x_dict.get(face_id_str) is not None
+    assert x_dict.get(face_id_str) == yao_str
 
-    change_atom_numbers_text = "change_atom_numbers"
-    assert x_dict.get(change_atom_numbers_text) is not None
-    assert x_dict.get(change_atom_numbers_text) == [7, 8]
+    change_atom_numbers_str = "change_atom_numbers"
+    assert x_dict.get(change_atom_numbers_str) is not None
+    assert x_dict.get(change_atom_numbers_str) == [7, 8]
 
-    change_min_text = "change_min"
-    assert x_dict.get(change_min_text) is None
-    change_max_text = "change_max"
-    assert x_dict.get(change_max_text) is None
+    change_min_str = "change_min"
+    assert x_dict.get(change_min_str) is None
+    change_max_str = "change_max"
+    assert x_dict.get(change_max_str) is None
 
 
 def test_GiftUnit_get_changemetric_json_ReturnsCorrectObj():
     # ESTABLISH
-    bob_text = "Bob"
-    sue_text = "Sue"
-    yao_text = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
     sue_changeunit = get_changeunit_sue_example()
     farm_change_start = 7
-    farm_giftunit = giftunit_shop(bob_text)
+    farm_giftunit = giftunit_shop(bob_str)
     farm_giftunit.set_changeunit(sue_changeunit)
     farm_giftunit.set_change_start(farm_change_start)
-    farm_giftunit.set_face(sue_text)
-    farm_giftunit.set_face(yao_text)
+    farm_giftunit.set_face(sue_str)
+    farm_giftunit.set_face(yao_str)
 
     # WHEN
     farm_json = farm_giftunit.get_changemetric_json()

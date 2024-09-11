@@ -12,8 +12,8 @@ def test_ideas_calculated_range_ReturnsObj_EmptyList():
 
 def test_ideas_calculated_range_ReturnsObj_EmptyIdeaUnit():
     # ESTABLISH
-    week_text = "week"
-    week_idea = ideaunit_shop(week_text)
+    week_str = "week"
+    week_idea = ideaunit_shop(week_str)
     x_rangeunit = RangeUnit(3, 8)
 
     # WHEN / THEN
@@ -25,9 +25,9 @@ def test_ideas_calculated_range_ReturnsObj_EmptyIdeaUnit():
 
 def test_ideas_calculated_range_ReturnsObj_1IdeaUnit_addin():
     # ESTABLISH
-    week_text = "week"
+    week_str = "week"
     week_addin = 5
-    week_idea = ideaunit_shop(week_text, addin=week_addin)
+    week_idea = ideaunit_shop(week_str, addin=week_addin)
     old_gogo = 3
     old_stop = 8
     old_rangeunit = RangeUnit(old_gogo, old_stop)
@@ -46,9 +46,9 @@ def test_ideas_calculated_range_ReturnsObj_1IdeaUnit_addin():
 
 def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_addin():
     # ESTABLISH
-    week_text = "week"
+    week_str = "week"
     week_addin = 5
-    week_idea = ideaunit_shop(week_text, addin=week_addin)
+    week_idea = ideaunit_shop(week_str, addin=week_addin)
     tue_addin = 7
     tue_idea = ideaunit_shop("Tue", addin=tue_addin)
     old_gogo = 3
@@ -69,9 +69,9 @@ def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_addin():
 
 def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_numor():
     # ESTABLISH
-    week_text = "week"
+    week_str = "week"
     week_numor = 5
-    week_idea = ideaunit_shop(week_text, numor=week_numor)
+    week_idea = ideaunit_shop(week_str, numor=week_numor)
     tue_numor = 10
     tue_idea = ideaunit_shop("Tue", numor=tue_numor)
     old_gogo = 3
@@ -93,9 +93,9 @@ def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_numor():
 
 def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_denom():
     # ESTABLISH
-    week_text = "week"
+    week_str = "week"
     week_denom = 5
-    week_idea = ideaunit_shop(week_text, denom=week_denom)
+    week_idea = ideaunit_shop(week_str, denom=week_denom)
     tue_denom = 2
     tue_idea = ideaunit_shop("Tue", denom=tue_denom)
     old_gogo = 30
@@ -120,9 +120,9 @@ def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_denom():
 
 def test_ideas_calculated_range_ReturnsObj_2IdeaUnit_denom_morph():
     # ESTABLISH
-    week_text = "week"
+    week_str = "week"
     week_denom = 50
-    week_idea = ideaunit_shop(week_text, denom=week_denom, morph=True)
+    week_idea = ideaunit_shop(week_str, denom=week_denom, morph=True)
     tue_denom = 20
     tue_idea = ideaunit_shop("Tue", denom=tue_denom, morph=True)
     old_gogo = 175

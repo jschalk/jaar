@@ -31,27 +31,27 @@ def atom_mstr_table_name() -> str:
     return "atom_mstr"
 
 
-def normal_specs_text() -> str:
+def normal_specs_str() -> str:
     return "normal_specs"
 
 
-def normal_table_name_text() -> str:
+def normal_table_name_str() -> str:
     return "normal_table_name"
 
 
-def columns_text() -> str:
+def columns_str() -> str:
     return "columns"
 
 
-def sqlite_datatype_text() -> str:
+def sqlite_datatype_str() -> str:
     return "sqlite_datatype"
 
 
-def python_type_text() -> str:
+def python_type_str() -> str:
     return "python_type"
 
 
-def nullable_text() -> str:
+def nullable_str() -> str:
     return "nullable"
 
 
@@ -59,11 +59,11 @@ def nesting_order_str() -> str:
     return "nesting_order"
 
 
-def required_args_text() -> str:
+def required_args_str() -> str:
     return "required_args"
 
 
-def optional_args_text() -> str:
+def optional_args_str() -> str:
     return "optional_args"
 
 
@@ -71,12 +71,12 @@ def column_order_str() -> str:
     return "column_order"
 
 
-def category_text() -> str:
+def category_str() -> str:
     return "category"
 
 
-def crud_text_str() -> str:
-    return "crud_text"
+def crud_str_str() -> str:
+    return "crud_str"
 
 
 def real_id_str() -> str:
@@ -208,12 +208,12 @@ def get_atom_config_dict() -> dict:
 
 
 def get_atom_config_required_args(x_cat: str) -> dict:
-    required_args_key_list = [x_cat, required_args_text()]
+    required_args_key_list = [x_cat, required_args_str()]
     return get_nested_value(get_atom_config_dict(), required_args_key_list)
 
 
 def get_atom_config_optional_args(x_cat: str) -> dict:
-    optional_args_key_list = [x_cat, optional_args_text()]
+    optional_args_key_list = [x_cat, optional_args_str()]
     return get_nested_value(get_atom_config_dict(), optional_args_key_list)
 
 
@@ -299,7 +299,7 @@ def get_atom_args_python_types() -> dict[str, str]:
 def get_sorted_required_arg_keys(atom_category: str) -> list[str]:
     atom_config = get_atom_config_dict()
     atom_category_config = atom_config.get(atom_category)
-    atom_required_args_config = atom_category_config.get(required_args_text())
+    atom_required_args_config = atom_category_config.get(required_args_str())
     if len(atom_required_args_config) == 1:
         return list(atom_required_args_config.keys())
     nesting_order_dict = {
@@ -322,8 +322,8 @@ def get_flattened_atom_table_build() -> dict[str, any]:
         catergory_update = category_dict.get(atom_update())
         catergory_delete = category_dict.get(atom_delete())
         if catergory_insert is not None:
-            required_args = category_dict.get(required_args_text())
-            optional_args = category_dict.get(optional_args_text())
+            required_args = category_dict.get(required_args_str())
+            optional_args = category_dict.get(optional_args_str())
             for required_arg, x_value in required_args.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
@@ -341,8 +341,8 @@ def get_flattened_atom_table_build() -> dict[str, any]:
                     x_value,
                 )
         if catergory_update is not None:
-            required_args = category_dict.get(required_args_text())
-            optional_args = category_dict.get(optional_args_text())
+            required_args = category_dict.get(required_args_str())
+            optional_args = category_dict.get(optional_args_str())
             for required_arg, x_value in required_args.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
@@ -360,7 +360,7 @@ def get_flattened_atom_table_build() -> dict[str, any]:
                     x_value,
                 )
         if catergory_delete is not None:
-            required_args = category_dict.get(required_args_text())
+            required_args = category_dict.get(required_args_str())
             for required_arg, x_value in required_args.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
@@ -379,68 +379,68 @@ def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
         normal_tables_dict[x_category] = {}
         normal_table_dict = normal_tables_dict.get(x_category)
 
-        normal_table_dict[columns_text()] = {}
-        normal_columns_dict = normal_table_dict.get(columns_text())
+        normal_table_dict[columns_str()] = {}
+        normal_columns_dict = normal_table_dict.get(columns_str())
         normal_columns_dict["uid"] = {
-            sqlite_datatype_text(): "INTEGER",
-            nullable_text(): False,
+            sqlite_datatype_str(): "INTEGER",
+            nullable_str(): False,
             "primary_key": True,
         }
-        required_args = category_dict.get(required_args_text())
-        optional_args = category_dict.get(optional_args_text())
+        required_args = category_dict.get(required_args_str())
+        optional_args = category_dict.get(optional_args_str())
         if required_args is not None:
             for required_arg, x_value in required_args.items():
                 normal_columns_dict[required_arg] = {
-                    sqlite_datatype_text(): x_value.get(sqlite_datatype_text()),
-                    nullable_text(): False,
+                    sqlite_datatype_str(): x_value.get(sqlite_datatype_str()),
+                    nullable_str(): False,
                 }
 
         if optional_args is not None:
             for optional_arg, x_value in optional_args.items():
                 normal_columns_dict[optional_arg] = {
-                    sqlite_datatype_text(): x_value.get(sqlite_datatype_text()),
-                    nullable_text(): True,
+                    sqlite_datatype_str(): x_value.get(sqlite_datatype_str()),
+                    nullable_str(): True,
                 }
 
-        normal_table_dict[normal_specs_text()] = {}
-        normal_specs_dict = normal_table_dict.get(normal_specs_text())
-        config_normal_dict = category_dict.get(normal_specs_text())
-        table_name = config_normal_dict.get(normal_table_name_text())
-        normal_specs_dict[normal_table_name_text()] = table_name
+        normal_table_dict[normal_specs_str()] = {}
+        normal_specs_dict = normal_table_dict.get(normal_specs_str())
+        config_normal_dict = category_dict.get(normal_specs_str())
+        table_name = config_normal_dict.get(normal_table_name_str())
+        normal_specs_dict[normal_table_name_str()] = table_name
 
     return normal_tables_dict
 
 
 def save_atom_config_file(atom_config_dict):
-    x_file_text = get_json_from_dict(atom_config_dict)
-    save_file(config_file_dir(), get_atom_config_file_name(), x_file_text)
+    x_file_str = get_json_from_dict(atom_config_dict)
+    save_file(config_file_dir(), get_atom_config_file_name(), x_file_str)
 
 
 def category_ref() -> set:
     return get_atom_config_dict().keys()
 
 
-def is_category_ref(category_text: str) -> bool:
-    return category_text in category_ref()
+def is_category_ref(category_str: str) -> bool:
+    return category_str in category_ref()
 
 
-def get_atom_order(crud_text: str, category: str) -> int:
-    return get_nested_value(get_atom_config_dict(), [category, crud_text, "atom_order"])
+def get_atom_order(crud_str: str, category: str) -> int:
+    return get_nested_value(get_atom_config_dict(), [category, crud_str, "atom_order"])
 
 
 def get_normal_table_name(category: str) -> str:
-    nested_list = [category, normal_specs_text(), normal_table_name_text()]
+    nested_list = [category, normal_specs_str(), normal_table_name_str()]
     return get_nested_value(get_atom_config_dict(), nested_list)
 
 
 def set_mog(
-    crud_text: str,
+    crud_str: str,
     category: str,
     atom_order_int: int,
 ) -> int:
     atom_config_dict = get_atom_config_dict()
     category_dict = atom_config_dict.get(category)
-    crud_dict = category_dict.get(crud_text)
+    crud_dict = category_dict.get(crud_str)
     crud_dict["atom_order"] = atom_order_int
     save_atom_config_file(atom_config_dict)
 

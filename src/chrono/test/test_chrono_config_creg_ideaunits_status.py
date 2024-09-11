@@ -3,7 +3,7 @@ from src.bud.bud import budunit_shop
 from src.chrono.examples.chrono_examples import (
     get_creg_min_from_dt,
     add_time_creg_ideaunit,
-    get_cregtime_text,
+    get_cregtime_str,
     get_wed,
     get_thu,
     creg_weekday_ideaunits,
@@ -23,18 +23,18 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -47,18 +47,18 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=day_road,
@@ -81,18 +81,18 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario2():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=day_road,
@@ -114,18 +114,18 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_idea_Scenario0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     days_road = sue_budunit.make_road(creg_road, days_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # days_idea = sue_budunit.get_idea_obj(days_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=days_road,
@@ -150,18 +150,18 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     week_road = sue_budunit.make_road(creg_road, week_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=week_road,
@@ -184,18 +184,18 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     week_road = sue_budunit.make_road(creg_road, week_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=week_road,
@@ -217,19 +217,19 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     weeks_road = sue_budunit.make_road(creg_road, weeks_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
     print(f"{creg_idea.begin=} {creg_idea.close=}")
     # weeks_idea = sue_budunit.get_idea_obj(weeks_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=weeks_road,
@@ -251,18 +251,18 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     year_road = get_year_road(sue_budunit, creg_road)
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=year_road,
@@ -293,19 +293,19 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     year_road = get_year_road(sue_budunit, creg_road)
 
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=year_road,
@@ -328,19 +328,19 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     year_road = get_year_road(sue_budunit, creg_road)
 
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=year_road,
@@ -388,7 +388,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     year_road = get_year_road(sue_budunit, creg_road)
     week_road = sue_budunit.make_road(creg_road, week_str())
     # sun_road = sue_budunit.make_road(week_road, get_sun())
@@ -402,12 +402,12 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=wed_road,
@@ -515,7 +515,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     year_road = get_year_road(sue_budunit, creg_road)
     week_road = sue_budunit.make_road(creg_road, week_str())
     # sun_road = sue_budunit.make_road(week_road, get_sun())
@@ -529,12 +529,12 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
     sue_budunit._set_ideaunits_range()
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_text)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
-    sue_budunit.set_idea(ideaunit_shop(clean_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
     sue_budunit.edit_idea_attr(
         clean_road,
         reason_base=wed_road,

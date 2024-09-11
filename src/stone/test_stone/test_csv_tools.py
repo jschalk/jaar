@@ -18,14 +18,14 @@ music56,Sue,Yao,41,37
     x_headers, x_csv = extract_csv_headers(x_csv)
 
     # THEN
-    credit_belief_text = "credit_belief"
-    debtit_belief_text = "debtit_belief"
+    credit_belief_str = "credit_belief"
+    debtit_belief_str = "debtit_belief"
     assert x_headers == [
         real_id_str(),
         owner_id_str(),
         acct_id_str(),
-        credit_belief_text,
-        debtit_belief_text,
+        credit_belief_str,
+        debtit_belief_str,
     ]
 
 
@@ -52,13 +52,13 @@ music56,Sue,Yao,41,37
 def test_get_csv_real_id_owner_id_metrics_ReturnsObj_Scenario2():
     # ESTABLISH
     music_real_id = "music56"
-    sue_text = "Sue"
-    bob_text = "Bob"
-    headerless_csv = f"""{music_real_id},{sue_text},Bob,13,29
-{music_real_id},{sue_text},Sue,11,23
-{music_real_id},{sue_text},Yao,41,37
-{music_real_id},{sue_text},Zia,41,37
-{music_real_id},{bob_text},Yao,41,37
+    sue_str = "Sue"
+    bob_str = "Bob"
+    headerless_csv = f"""{music_real_id},{sue_str},Bob,13,29
+{music_real_id},{sue_str},Sue,11,23
+{music_real_id},{sue_str},Yao,41,37
+{music_real_id},{sue_str},Zia,41,37
+{music_real_id},{bob_str},Yao,41,37
 """
 
     # WHEN
@@ -67,20 +67,20 @@ def test_get_csv_real_id_owner_id_metrics_ReturnsObj_Scenario2():
     # THEN
     # print(f"{u_dict=}")
 
-    assert u_dict != {music_real_id: {sue_text: 1}}
-    assert u_dict == {music_real_id: {sue_text: 4, bob_text: 1}}
+    assert u_dict != {music_real_id: {sue_str: 1}}
+    assert u_dict == {music_real_id: {sue_str: 4, bob_str: 1}}
 
 
 def test_real_id_owner_id_filtered_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     music_real_id = "music56"
-    sue_text = "Sue"
-    bob_text = "Bob"
-    headerless_csv = f"""{music_real_id},{sue_text},Bob,13,29
-{music_real_id},{sue_text},Sue,11,23
-{music_real_id},{sue_text},Yao,41,37
-{music_real_id},{sue_text},Zia,41,37
-{music_real_id},{bob_text},Yao,41,37
+    sue_str = "Sue"
+    bob_str = "Bob"
+    headerless_csv = f"""{music_real_id},{sue_str},Bob,13,29
+{music_real_id},{sue_str},Sue,11,23
+{music_real_id},{sue_str},Yao,41,37
+{music_real_id},{sue_str},Zia,41,37
+{music_real_id},{bob_str},Yao,41,37
 """
 
     # WHEN
@@ -88,19 +88,19 @@ def test_real_id_owner_id_filtered_csv_dict_ReturnsObj_Scenario0():
 
     # THEN
     # print(f"{u_dict=}")
-    static_sue_csv = f"""{music_real_id},{sue_text},Bob,13,29
-{music_real_id},{sue_text},Sue,11,23
-{music_real_id},{sue_text},Yao,41,37
-{music_real_id},{sue_text},Zia,41,37
+    static_sue_csv = f"""{music_real_id},{sue_str},Bob,13,29
+{music_real_id},{sue_str},Sue,11,23
+{music_real_id},{sue_str},Yao,41,37
+{music_real_id},{sue_str},Zia,41,37
 """
-    static_bob_csv = f"""{music_real_id},{bob_text},Yao,41,37
+    static_bob_csv = f"""{music_real_id},{bob_str},Yao,41,37
 """
     generated_owner_id_dict = u_dict.get(music_real_id)
     assert generated_owner_id_dict
-    assert list(generated_owner_id_dict.keys()) == [sue_text, bob_text]
-    generated_bob_csv = generated_owner_id_dict.get(bob_text)
+    assert list(generated_owner_id_dict.keys()) == [sue_str, bob_str]
+    generated_bob_csv = generated_owner_id_dict.get(bob_str)
     assert generated_bob_csv == static_bob_csv
-    generated_sue_csv = generated_owner_id_dict.get(sue_text)
+    generated_sue_csv = generated_owner_id_dict.get(sue_str)
     assert generated_sue_csv == static_sue_csv
-    owner_id_csv_dict = {sue_text: static_sue_csv, bob_text: static_bob_csv}
+    owner_id_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
     assert u_dict == {music_real_id: owner_id_csv_dict}

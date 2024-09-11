@@ -106,50 +106,50 @@ def test_riverrun_shop_ReturnsCorrectObjWithoutArgs():
 def test_RiverRun_set_econ_credorledger_SetsAttr():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
-    yao_text = "Yao"
+    yao_str = "Yao"
     yao_credit_belief = 500
     x_riverrun = riverrun_shop(yao_hubunit)
     assert x_riverrun.econ_credorledgers == {}
 
     # WHEN
     x_riverrun.set_econ_credorledger(
-        owner_id=yao_text, acct_id=yao_text, acct_credit_belief=yao_credit_belief
+        owner_id=yao_str, acct_id=yao_str, acct_credit_belief=yao_credit_belief
     )
 
     # THEN
-    assert x_riverrun.econ_credorledgers == {yao_text: {yao_text: yao_credit_belief}}
+    assert x_riverrun.econ_credorledgers == {yao_str: {yao_str: yao_credit_belief}}
 
 
 def test_RiverRun_delete_econ_credorledgers_owner_SetsAttr():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
-    yao_text = "Yao"
-    bob_text = "Bob"
-    sue_text = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, 1)
-    x_riverrun.set_econ_credorledger(bob_text, bob_text, 1)
-    x_riverrun.set_econ_credorledger(bob_text, sue_text, 1)
+    x_riverrun.set_econ_credorledger(yao_str, yao_str, 1)
+    x_riverrun.set_econ_credorledger(bob_str, bob_str, 1)
+    x_riverrun.set_econ_credorledger(bob_str, sue_str, 1)
     assert x_riverrun.econ_credorledgers == {
-        yao_text: {yao_text: 1},
-        bob_text: {bob_text: 1, sue_text: 1},
+        yao_str: {yao_str: 1},
+        bob_str: {bob_str: 1, sue_str: 1},
     }
 
     # WHEN
-    x_riverrun.delete_econ_credorledgers_owner(bob_text)
+    x_riverrun.delete_econ_credorledgers_owner(bob_str)
 
     # THEN
-    assert x_riverrun.econ_credorledgers == {yao_text: {yao_text: 1}}
+    assert x_riverrun.econ_credorledgers == {yao_str: {yao_str: 1}}
 
 
 def test_RiverRun_get_all_econ_credorledger_acct_ids_ReturnsCorrectObj():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
-    yao_text = "Yao"
-    bob_text = "Bob"
-    sue_text = "Sue"
-    zia_text = "Zia"
-    xio_text = "Xio"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    zia_str = "Zia"
+    xio_str = "Xio"
     x_riverrun = riverrun_shop(yao_hubunit)
 
     # WHEN
@@ -158,20 +158,20 @@ def test_RiverRun_get_all_econ_credorledger_acct_ids_ReturnsCorrectObj():
     assert all_accts_ids == set()
 
     # WHEN
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, 1)
-    x_riverrun.set_econ_credorledger(yao_text, bob_text, 1)
+    x_riverrun.set_econ_credorledger(yao_str, yao_str, 1)
+    x_riverrun.set_econ_credorledger(yao_str, bob_str, 1)
     all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     # THEN
-    assert all_accts_ids == {yao_text, bob_text}
+    assert all_accts_ids == {yao_str, bob_str}
 
     # WHEN
-    x_riverrun.set_econ_credorledger(zia_text, bob_text, 1)
+    x_riverrun.set_econ_credorledger(zia_str, bob_str, 1)
     all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     # THEN
-    assert all_accts_ids == {yao_text, bob_text, zia_text}
+    assert all_accts_ids == {yao_str, bob_str, zia_str}
 
     # WHEN
-    x_riverrun.set_econ_credorledger(xio_text, sue_text, 1)
+    x_riverrun.set_econ_credorledger(xio_str, sue_str, 1)
     all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
     # THEN
-    assert all_accts_ids == {yao_text, bob_text, zia_text, xio_text, sue_text}
+    assert all_accts_ids == {yao_str, bob_str, zia_str, xio_str, sue_str}

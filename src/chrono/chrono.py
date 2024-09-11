@@ -104,8 +104,8 @@ def stan_days_ideaunit() -> IdeaUnit:
     return ideaunit_shop(days_str(), denom=x_denom)
 
 
-def _get_morph_idea(x_text: str, x_denom: int) -> IdeaUnit:
-    return ideaunit_shop(x_text, denom=x_denom, morph=True)
+def _get_morph_idea(x_str: str, x_denom: int) -> IdeaUnit:
+    return ideaunit_shop(x_str, denom=x_denom, morph=True)
 
 
 def week_length(x_int: int) -> int:
@@ -176,11 +176,11 @@ def create_hour_ideaunits(x_hours_list: list[str]) -> dict[str, IdeaUnit]:
 
 def create_week_ideaunits(x_weekdays_list) -> dict[str, IdeaUnit]:
     x_week_lenth = week_length(len(x_weekdays_list))
-    week_text = "week"
-    weeks_text = f"{week_text}s"
+    week_str = "week"
+    weeks_str = f"{week_str}s"
     return {
-        week_text: ideaunit_shop(week_text, denom=x_week_lenth, morph=True),
-        weeks_text: ideaunit_shop(weeks_text, denom=x_week_lenth),
+        week_str: ideaunit_shop(week_str, denom=x_week_lenth, morph=True),
+        weeks_str: ideaunit_shop(weeks_str, denom=x_week_lenth),
     }
 
 
@@ -190,12 +190,12 @@ def new_timeline_ideaunit(timeline_label: str, c400_count: int) -> IdeaUnit:
 
 
 def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
-    timeline_label = timeline_config.get(timeline_label_text())
-    timeline_c400_count = timeline_config.get(c400_config_text())
-    timeline_months_list = timeline_config.get(months_config_text())
-    timeline_hours_list = timeline_config.get(hours_config_text())
-    timeline_wkdays_list = timeline_config.get(weekdays_config_text())
-    timeline_offset = timeline_config.get(yr1_jan1_offset_text())
+    timeline_label = timeline_config.get(timeline_label_str())
+    timeline_c400_count = timeline_config.get(c400_config_str())
+    timeline_months_list = timeline_config.get(months_config_str())
+    timeline_hours_list = timeline_config.get(hours_config_str())
+    timeline_wkdays_list = timeline_config.get(weekdays_config_str())
+    timeline_offset = timeline_config.get(yr1_jan1_offset_str())
 
     time_road = x_budunit.make_l1_road(time_str())
     new_road = x_budunit.make_road(time_road, timeline_label)
@@ -208,7 +208,7 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     add_ideaunits(x_budunit, new_road, create_week_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, week_road, create_weekday_ideaunits(timeline_wkdays_list))
     add_ideaunits(x_budunit, year_road, create_month_ideaunits(timeline_months_list))
-    offset_idea = ideaunit_shop(yr1_jan1_offset_text(), addin=timeline_offset)
+    offset_idea = ideaunit_shop(yr1_jan1_offset_str(), addin=timeline_offset)
     x_budunit.set_idea(offset_idea, new_road)
     return x_budunit
 
@@ -277,54 +277,54 @@ def get_day_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit
     return x_budunit.make_road(time_range_root_road, day_str())
 
 
-def hours_config_text() -> str:
+def hours_config_str() -> str:
     return "hours_config"
 
 
-def weekdays_config_text() -> str:
+def weekdays_config_str() -> str:
     return "weekdays_config"
 
 
-def months_config_text() -> str:
+def months_config_str() -> str:
     return "months_config"
 
 
-def timeline_label_text() -> str:
+def timeline_label_str() -> str:
     return "timeline_label"
 
 
-def c400_config_text() -> str:
+def c400_config_str() -> str:
     return "c400_config"
 
 
-def yr1_jan1_offset_text() -> str:
+def yr1_jan1_offset_str() -> str:
     return "yr1_jan1_offset"
 
 
 def validate_timeline_config(config_dict: dict) -> bool:
     config_elements = [
-        hours_config_text(),
-        weekdays_config_text(),
-        months_config_text(),
-        timeline_label_text(),
-        c400_config_text(),
-        yr1_jan1_offset_text(),
+        hours_config_str(),
+        weekdays_config_str(),
+        months_config_str(),
+        timeline_label_str(),
+        c400_config_str(),
+        yr1_jan1_offset_str(),
     ]
     for config_key in config_elements:
         config_element = config_dict.get(config_key)
         len_elements = {
-            hours_config_text(),
-            weekdays_config_text(),
-            months_config_text(),
+            hours_config_str(),
+            weekdays_config_str(),
+            months_config_str(),
         }
         if config_element is None:
             return False
         elif config_key in len_elements and len(config_element) == 0:
             return False
-        elif config_key in {weekdays_config_text()}:
+        elif config_key in {weekdays_config_str()}:
             if _duplicate_exists(config_element):
                 return False
-        elif config_key in {months_config_text(), hours_config_text()}:
+        elif config_key in {months_config_str(), hours_config_str()}:
             str_list = [x_config[0] for x_config in config_element]
             if _duplicate_exists(str_list):
                 return False
@@ -350,12 +350,12 @@ def create_timeline_config(
     hours_range = range(hours_count)
     hour_config = [_hour_config(x, hours_count, hour_length) for x in hours_range]
     return {
-        hours_config_text(): hour_config,
-        weekdays_config_text(): weekday_list,
-        months_config_text(): month_config,
-        timeline_label_text(): timeline_label,
-        c400_config_text(): c400_count,
-        yr1_jan1_offset_text(): get_0_if_None(yr1_jan1_offset),
+        hours_config_str(): hour_config,
+        weekdays_config_str(): weekday_list,
+        months_config_str(): month_config,
+        timeline_label_str(): timeline_label,
+        c400_config_str(): c400_count,
+        yr1_jan1_offset_str(): get_0_if_None(yr1_jan1_offset),
     }
 
 
@@ -380,15 +380,15 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
 def get_min_from_dt(
     x_bud: BudUnit, timeline_road: RoadUnit, x_datetime: datetime
 ) -> int:
-    offset_road = x_bud.make_road(timeline_road, yr1_jan1_offset_text())
+    offset_road = x_bud.make_road(timeline_road, yr1_jan1_offset_str())
     offset_idea = x_bud.get_idea_obj(offset_road)
     offset_amount = offset_idea.addin
     return get_min_from_dt_offset(x_datetime, offset_amount)
 
 
 def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) -> int:
-    offset_x0 = timeline_config0.get(yr1_jan1_offset_text())
-    offset_x1 = timeline_config1.get(yr1_jan1_offset_text())
+    offset_x0 = timeline_config0.get(yr1_jan1_offset_str())
+    offset_x1 = timeline_config1.get(yr1_jan1_offset_str())
     return offset_x0 - offset_x1
 
 
@@ -496,13 +496,13 @@ class ChronoUnit:
         self._set_year()
 
     def get_blurb(self) -> str:
-        x_text = f"{self._hour}"
-        x_text += f":{self._minute}"
-        x_text += f", {self._weekday}"
-        x_text += f", {self._monthday}"
-        x_text += f" {self._month}"
-        x_text += f", {self._year_num}"
-        return x_text
+        x_str = f"{self._hour}"
+        x_str += f":{self._minute}"
+        x_str += f", {self._weekday}"
+        x_str += f", {self._monthday}"
+        x_str += f" {self._month}"
+        x_str += f", {self._year_num}"
+        return x_str
 
 
 def chronounit_shop(x_budunit: BudUnit, time_range_root_road: str, x_min: int):

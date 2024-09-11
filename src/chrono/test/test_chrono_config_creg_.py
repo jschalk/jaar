@@ -20,7 +20,7 @@ from src.chrono.chrono import (
     week_str,
     get_c400_constants,
     get_timeline_min_difference,
-    yr1_jan1_offset_text,
+    yr1_jan1_offset_str,
     get_min_from_dt,
 )
 from src.chrono.examples.chrono_examples import (
@@ -28,7 +28,7 @@ from src.chrono.examples.chrono_examples import (
     add_time_five_ideaunit,
     get_creg_min_from_dt,
     get_five_min_from_dt,
-    get_cregtime_text,
+    get_cregtime_str,
     get_sun,
     get_mon,
     get_tue,
@@ -54,8 +54,8 @@ def test_get_creg_config_ReturnsObj():
     five_config = get_five_config()
 
     # WHEN
-    creg_offset = creg_config.get(yr1_jan1_offset_text())
-    five_offset = five_config.get(yr1_jan1_offset_text())
+    creg_offset = creg_config.get(yr1_jan1_offset_str())
+    five_offset = five_config.get(yr1_jan1_offset_str())
 
     # THEN
     assert creg_offset == 440640
@@ -92,7 +92,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_days():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     days_road = sue_budunit.make_road(creg_road, days_str())
     print(f"{time_road=}")
@@ -126,7 +126,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     week_road = sue_budunit.make_road(creg_road, week_str())
     sun_road = sue_budunit.make_road(week_road, get_sun())
     mon_road = sue_budunit.make_road(week_road, get_mon())
@@ -174,7 +174,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap_road():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
     c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
@@ -235,7 +235,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     year_road = get_year_road(sue_budunit, creg_road)
 
     assert not sue_budunit.idea_exists(creg_road)
@@ -319,7 +319,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     days_road = sue_budunit.make_road(creg_road, days_str())
     print(f"{time_road=}")
@@ -353,7 +353,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_text())
+    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     hour_road = sue_budunit.make_road(day_road, hour_str())
     hr_00_road = sue_budunit.make_road(day_road, creg_hour_label(0))
@@ -527,11 +527,11 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
 
 def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # ESTABLISH
-    sue_text = "Sue"
-    sue_bud = add_time_creg_ideaunit(budunit_shop(sue_text))
-    clean_text = "clean"
-    clean_road = sue_bud.make_l1_road(clean_text)
-    sue_bud.set_l1_idea(ideaunit_shop(clean_text, pledge=True))
+    sue_str = "Sue"
+    sue_bud = add_time_creg_ideaunit(budunit_shop(sue_str))
+    clean_str = "clean"
+    clean_road = sue_bud.make_l1_road(clean_str)
+    sue_bud.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
     time_road = sue_bud.make_l1_road("time")
     cregtime_road = sue_bud.make_road(time_road, creg_str())
     day_road = sue_bud.make_road(cregtime_road, "day")
@@ -579,18 +579,18 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert len(sue_bud._accts) == 0
     assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
 
-    clean_things_text = "cleaning things"
-    clean_things_road = sue_bud.make_l1_road(clean_things_text)
-    sweep_text = "sweep"
-    sweep_road = sue_bud.make_road(clean_things_road, sweep_text)
-    sweep_idea = ideaunit_shop(sweep_text, _parent_road=clean_things_road)
+    clean_things_str = "cleaning things"
+    clean_things_road = sue_bud.make_l1_road(clean_things_str)
+    sweep_str = "sweep"
+    sweep_road = sue_bud.make_road(clean_things_road, sweep_str)
+    sweep_idea = ideaunit_shop(sweep_str, _parent_road=clean_things_road)
     print(f"{sweep_idea.get_road()=}")
-    house_text = "house"
-    house_road = sue_bud.make_l1_road(house_text)
-    cookery_room_text = "cookery room"
-    cookery_room_road = sue_bud.make_road(house_road, cookery_room_text)
-    cookery_dirty_text = "dirty"
-    cookery_dirty_road = sue_bud.make_road(cookery_room_road, cookery_dirty_text)
+    house_str = "house"
+    house_road = sue_bud.make_l1_road(house_str)
+    cookery_room_str = "cookery room"
+    cookery_room_road = sue_bud.make_road(house_road, cookery_room_str)
+    cookery_dirty_str = "dirty"
+    cookery_dirty_road = sue_bud.make_road(cookery_room_road, cookery_dirty_str)
 
     # create gregorian timeline
     add_time_creg_ideaunit(sue_bud)
@@ -610,8 +610,8 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     daytime_reason.set_premise(premise=daytime_road, open=open_8am, nigh=nigh_8am)
     sweep_idea.set_reasonunit(reason=daytime_reason)
 
-    family_text = ",family"
-    awardlink_z = awardlink_shop(group_id=family_text)
+    family_str = ",family"
+    awardlink_z = awardlink_shop(group_id=family_str)
     sweep_idea.set_awardlink(awardlink_z)
 
     assert len(sue_bud._accts) == 0
@@ -630,14 +630,14 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
 
     print(f"{sweep_idea.get_road()=}")
     assert sue_bud.get_idea_obj(sweep_road) is not None
-    assert sue_bud.get_idea_obj(sweep_road)._label == sweep_text
+    assert sue_bud.get_idea_obj(sweep_road)._label == sweep_str
     assert sue_bud.get_idea_obj(sweep_road).pledge
     assert len(sue_bud.get_idea_obj(sweep_road).reasonunits) == 2
     assert sue_bud.get_idea_obj(clean_things_road) is not None
     assert sue_bud.get_idea_obj(cookery_room_road) is not None
     assert sue_bud.get_idea_obj(cookery_dirty_road) is not None
     assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
-    assert sue_bud.get_acctunit_group_ids_dict().get(family_text) is None
+    assert sue_bud.get_acctunit_group_ids_dict().get(family_str) is None
 
     assert len(sue_bud._idearoot._kids) == 3
 
@@ -647,12 +647,12 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     sue_bud = budunit_shop("Sue")
     add_time_creg_ideaunit(sue_bud)
 
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    laundry_text = "do_laundry"
-    laundry_road = sue_bud.make_road(casa_road, laundry_text)
-    sue_bud.set_l1_idea(ideaunit_shop(casa_text))
-    sue_bud.set_idea(ideaunit_shop(laundry_text, pledge=True), casa_road)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    laundry_str = "do_laundry"
+    laundry_road = sue_bud.make_road(casa_road, laundry_str)
+    sue_bud.set_l1_idea(ideaunit_shop(casa_str))
+    sue_bud.set_idea(ideaunit_shop(laundry_str, pledge=True), casa_road)
     time_road = sue_bud.make_l1_road("time")
     cregtime_road = sue_bud.make_road(time_road, creg_str())
     sue_bud.edit_idea_attr(
@@ -683,7 +683,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     # )
     # print(f"{laundry_reasonheir.base=} {laundry_premise=}")
     # for x_ideaunit in sue_bud._idea_dict.values():
-    #     if x_ideaunit._label in [laundry_text]:
+    #     if x_ideaunit._label in [laundry_str]:
     #         print(f"{x_ideaunit._label=} {x_ideaunit.begin=} {x_ideaunit.close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
 
@@ -705,7 +705,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # for x_ideaunit in sue_bud._idea_dict.values():
-    #     if x_ideaunit._label in [laundry_text]:
+    #     if x_ideaunit._label in [laundry_str]:
     #         print(f"{x_ideaunit._label=} {x_ideaunit.begin=} {x_ideaunit.close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
     #         creg_factheir = x_ideaunit._factheirs.get(cregtime_road)
@@ -724,8 +724,8 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     time_road = sue_bud.make_l1_road(time_str())
     creg_road = sue_bud.make_road(time_road, creg_str())
     five_road = sue_bud.make_road(time_road, five_str())
-    creg_yr1_jan1_offset_road = sue_bud.make_road(creg_road, yr1_jan1_offset_text())
-    five_yr1_jan1_offset_road = sue_bud.make_road(five_road, yr1_jan1_offset_text())
+    creg_yr1_jan1_offset_road = sue_bud.make_road(creg_road, yr1_jan1_offset_str())
+    five_yr1_jan1_offset_road = sue_bud.make_road(five_road, yr1_jan1_offset_str())
     creg_year_road = get_year_road(sue_bud, creg_road)
     five_year_road = get_year_road(sue_bud, five_road)
     print(f"{creg_year_road=}")
@@ -736,7 +736,7 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_year_road)
     assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
     creg_offset_idea = sue_bud.get_idea_obj(creg_yr1_jan1_offset_road)
-    assert creg_offset_idea.addin == get_creg_config().get(yr1_jan1_offset_text())
+    assert creg_offset_idea.addin == get_creg_config().get(yr1_jan1_offset_str())
     assert not sue_bud.idea_exists(five_yr1_jan1_offset_road)
 
     # WHEN
@@ -748,7 +748,7 @@ def test_add_newtimeline_ideaunit_CorrectlyAddsMultiple_timelines():
     assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
     assert sue_bud.idea_exists(five_yr1_jan1_offset_road)
     five_offset_idea = sue_bud.get_idea_obj(five_yr1_jan1_offset_road)
-    assert five_offset_idea.addin == get_five_config().get(yr1_jan1_offset_text())
+    assert five_offset_idea.addin == get_five_config().get(yr1_jan1_offset_str())
 
 
 def test_get_creg_min_from_dt_ReturnsObj():

@@ -1,6 +1,6 @@
 from src._instrument.db_tool import (
     sqlite_bool,
-    sqlite_text,
+    sqlite_str,
     sqlite_null,
     create_insert_sqlstr,
     RowData,
@@ -24,22 +24,22 @@ def test_sqlite_bool_ReturnsCorrectObj():
     assert sqlite_bool(x_int=None) == "NULL"
 
 
-def test_sqlite_text_ReturnsCorrectObj():
-    assert sqlite_text(True) == "TRUE"
-    assert sqlite_text(False) == "FALSE"
+def test_sqlite_str_ReturnsCorrectObj():
+    assert sqlite_str(True) == "TRUE"
+    assert sqlite_str(False) == "FALSE"
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
-        sqlite_text("Bob")
+        sqlite_str("Bob")
     assert str(excinfo.value) == "function requires boolean"
 
 
 def test_sqlite_create_insert_sqlstr_ReturnsCorrectObj():
     # ESTABLISH
     x_table = "kubo_trains"
-    eagle_id_text = "eagle_id"
-    train_id_text = "train_id"
-    train_color_text = "train_color"
-    x_columns = [eagle_id_text, train_id_text, train_color_text]
+    eagle_id_str = "eagle_id"
+    train_id_str = "train_id"
+    train_color_str = "train_color"
+    x_columns = [eagle_id_str, train_id_str, train_color_str]
     eagle_id_value = 47
     train_id_value = "TR34"
     train_color_value = "red"
@@ -51,9 +51,9 @@ def test_sqlite_create_insert_sqlstr_ReturnsCorrectObj():
     # THEN
     example_sqlstr = f"""
 INSERT INTO {x_table} (
-  {eagle_id_text}
-, {train_id_text}
-, {train_color_text}
+  {eagle_id_str}
+, {train_id_str}
+, {train_color_str}
 )
 VALUES (
   {eagle_id_value}

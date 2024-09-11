@@ -16,8 +16,8 @@ def test_BudUnit_set_credor_respect_CorrectlySetsAttr():
 
 def test_BudUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
     # ESTABLISH
-    zia_text = "Zia"
-    zia_bud = budunit_shop(zia_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(zia_str)
     x_credor_respect = 23
     zia_bud.set_credor_respect(x_credor_respect)
     assert zia_bud._bit == 1
@@ -29,14 +29,14 @@ def test_BudUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
         zia_bud.set_credor_respect(new_credor_respect)
     assert (
         str(excinfo.value)
-        == f"Bud '{zia_text}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{zia_bud._bit}'"
+        == f"Bud '{zia_str}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{zia_bud._bit}'"
     )
 
 
 def test_BudUnit_set_debtor_respect_CorrectlySetsInt():
     # ESTABLISH
-    zia_text = "Zia"
-    zia_bud = budunit_shop(_owner_id=zia_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(_owner_id=zia_str)
     zia_debtor_respect = 13
     assert zia_bud._debtor_respect != zia_debtor_respect
 
@@ -48,8 +48,8 @@ def test_BudUnit_set_debtor_respect_CorrectlySetsInt():
 
 def test_BudUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     # ESTABLISH
-    zia_text = "Zia"
-    zia_bud = budunit_shop(zia_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(zia_str)
     x_debtor_respect = 23
     zia_bud.set_debtor_respect(x_debtor_respect)
     assert zia_bud._bit == 1
@@ -61,18 +61,18 @@ def test_BudUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
         zia_bud.set_debtor_respect(new_debtor_respect)
     assert (
         str(excinfo.value)
-        == f"Bud '{zia_text}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{zia_bud._bit}'"
+        == f"Bud '{zia_str}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{zia_bud._bit}'"
     )
 
 
 def test_BudUnit_set_acct_respect_CorrectlySetsAttrs():
     # ESTABLISH
-    zia_text = "Zia"
+    zia_str = "Zia"
     old_credor_respect = 77
     old_debtor_respect = 88
     old_fund_pool = 99
-    zia_text = "Zia"
-    zia_bud = budunit_shop(zia_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(zia_str)
     zia_bud.set_credor_respect(old_credor_respect)
     zia_bud.set_debtor_respect(old_debtor_respect)
     zia_bud.set_fund_pool(old_fund_pool)

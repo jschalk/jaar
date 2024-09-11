@@ -181,8 +181,8 @@ def create_filtered_csv_dict(
 
 def create_sorted_concatenated_str(y_list: list[str]) -> str:
     x_list = sorted(y_list)
-    x_text = "".join(f",{x_header}" for x_header in x_list)
-    return x_text[1:]
+    x_str = "".join(f",{x_header}" for x_header in x_list)
+    return x_str[1:]
 
 
 def get_positional_dict(x_list: list[str]) -> dict[str, int]:

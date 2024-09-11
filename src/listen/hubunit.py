@@ -143,19 +143,19 @@ class HubUnit:
     def action_path(self) -> str:
         return f_path(self.action_dir(), self.action_file_name())
 
-    def save_file_voice(self, file_text: str, replace: bool):
+    def save_file_voice(self, file_str: str, replace: bool):
         save_file(
             dest_dir=self.voice_dir(),
             file_name=self.voice_file_name(),
-            file_text=file_text,
+            file_str=file_str,
             replace=replace,
         )
 
-    def save_file_action(self, file_text: str, replace: bool):
+    def save_file_action(self, file_str: str, replace: bool):
         save_file(
             dest_dir=self.action_dir(),
             file_name=self.action_file_name(),
-            file_text=file_text,
+            file_str=file_str,
             replace=replace,
         )
 
@@ -244,8 +244,8 @@ class HubUnit:
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
 
             for x_atom_filename in sorted_atom_filenames:
-                x_file_text = x_atom_files.get(x_atom_filename)
-                x_atom = atomunit_get_from_json(x_file_text)
+                x_file_str = x_atom_files.get(x_atom_filename)
+                x_atom = atomunit_get_from_json(x_file_str)
                 modify_bud_with_atomunit(x_bud, x_atom)
         return x_bud
 

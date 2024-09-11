@@ -17,15 +17,15 @@ from src.bud.bud import budunit_shop
 def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    week_text = "weekdays"
-    week_road = sue_budunit.make_l1_road(week_text)
-    sun_text = "Sunday"
-    sun_road = sue_budunit.make_road(week_road, sun_text)
+    week_str = "weekdays"
+    week_road = sue_budunit.make_l1_road(week_str)
+    sun_str = "Sunday"
+    sun_road = sue_budunit.make_road(week_road, sun_str)
 
     # for idea in sue_budunit._idea_dict.values():
     #     print(f"{casa_road=} {idea.get_road()=}")
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
     assert sue_budunit.get_idea_obj(casa_road)._active is None
 
     # WHEN
@@ -44,12 +44,12 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
 def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    week_text = "weekdays"
-    week_road = sue_budunit.make_l1_road(week_text)
-    sun_text = "Wednesday"
-    sun_road = sue_budunit.make_road(week_road, sun_text)
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
+    week_str = "weekdays"
+    week_road = sue_budunit.make_l1_road(week_str)
+    sun_str = "Wednesday"
+    sun_road = sue_budunit.make_road(week_road, sun_str)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
 
     # WHEN
     sue_budunit.set_fact(base=week_road, pick=sun_road)
@@ -61,10 +61,10 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     assert sue_budunit._idea_dict.get(casa_road)._active is False
 
     # WHEN
-    states_text = "nation-state"
-    states_road = sue_budunit.make_l1_road(states_text)
-    usa_text = "USA"
-    usa_road = sue_budunit.make_road(states_road, usa_text)
+    states_str = "nation-state"
+    states_road = sue_budunit.make_l1_road(states_str)
+    usa_str = "USA"
+    usa_road = sue_budunit.make_road(states_road, usa_str)
     sue_budunit.set_fact(base=states_road, pick=usa_road)
 
     # THEN
@@ -74,8 +74,8 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     assert sue_budunit._idea_dict.get(casa_road)._active
 
     # WHEN
-    france_text = "France"
-    france_road = sue_budunit.make_road(states_road, france_text)
+    france_str = "France"
+    france_road = sue_budunit.make_road(states_road, france_str)
     sue_budunit.set_fact(base=states_road, pick=france_road)
 
     # THEN
@@ -88,19 +88,19 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
 def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    week_text = "weekdays"
-    week_road = sue_budunit.make_l1_road(week_text)
-    wed_text = "Wednesday"
-    wed_road = sue_budunit.make_road(week_road, wed_text)
-    state_text = "nation-state"
-    state_road = sue_budunit.make_l1_road(state_text)
-    france_text = "France"
-    france_road = sue_budunit.make_road(state_road, france_text)
+    week_str = "weekdays"
+    week_road = sue_budunit.make_l1_road(week_str)
+    wed_str = "Wednesday"
+    wed_road = sue_budunit.make_road(week_road, wed_str)
+    state_str = "nation-state"
+    state_road = sue_budunit.make_l1_road(state_str)
+    france_str = "France"
+    france_road = sue_budunit.make_road(state_road, france_str)
     sue_budunit.set_fact(base=week_road, pick=wed_road)
     sue_budunit.set_fact(base=state_road, pick=france_road)
 
-    casa_text = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_budunit.make_l1_road(casa_str)
     casa_idea = sue_budunit.get_idea_obj(casa_road)
     print(f"{sue_budunit._owner_id=} {len(casa_idea.reasonunits)=}")
     # print(f"{casa_idea.reasonunits=}")
@@ -111,10 +111,10 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     assert sue_budunit._idea_dict
     assert len(sue_budunit._idea_dict) == 17
 
-    usa_text = "USA"
-    usa_road = sue_budunit.make_road(state_road, usa_text)
-    oregon_text = "Oregon"
-    oregon_road = sue_budunit.make_road(usa_road, oregon_text)
+    usa_str = "USA"
+    usa_road = sue_budunit.make_road(state_road, usa_str)
+    oregon_str = "Oregon"
+    oregon_road = sue_budunit.make_road(usa_road, oregon_str)
 
     wed = premiseunit_shop(need=wed_road)
     wed._status = True
@@ -159,7 +159,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     assert casa_idea._parent_road == sue_budunit._real_id
     assert casa_idea._kids == {}
     assert casa_idea.mass == 30
-    assert casa_idea._label == casa_text
+    assert casa_idea._label == casa_str
     assert casa_idea._level == 1
     assert casa_idea._active
     assert casa_idea.pledge
@@ -222,17 +222,17 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     # ESTABLISH
     sue_budunit = get_budunit_with7amCleanTableReason()
     sue_budunit.settle_bud()
-    house_text = "housemanagement"
-    house_road = sue_budunit.make_l1_road(house_text)
-    clean_text = "clean table"
-    clean_road = sue_budunit.make_road(house_road, clean_text)
+    house_str = "housemanagement"
+    house_road = sue_budunit.make_l1_road(house_str)
+    clean_str = "clean table"
+    clean_road = sue_budunit.make_road(house_road, clean_str)
     assert sue_budunit._idea_dict.get(clean_road)._active is False
 
     # set facts as midnight to 8am
-    time_text = "timetech"
-    time_road = sue_budunit.make_l1_road(time_text)
-    day24hr_text = "24hr day"
-    day24hr_road = sue_budunit.make_road(time_road, day24hr_text)
+    time_str = "timetech"
+    time_road = sue_budunit.make_l1_road(time_str)
+    day24hr_str = "24hr day"
+    day24hr_road = sue_budunit.make_road(time_road, day24hr_str)
     day24hr_base = day24hr_road
     day24hr_pick = day24hr_road
     day24hr_open = 0.0
@@ -256,8 +256,8 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
         base=day24hr_base, pick=day24hr_pick, fopen=day24hr_open, fnigh=day24hr_nigh
     )
     print(sue_budunit._idearoot.factunits[day24hr_road])
-    print(sue_budunit._idearoot._kids[house_text]._kids[clean_text].reasonunits)
-    # sue_budunit._idearoot._kids["housemanagement"]._kids[clean_text]._active = None
+    print(sue_budunit._idearoot._kids[house_str]._kids[clean_str].reasonunits)
+    # sue_budunit._idearoot._kids["housemanagement"]._kids[clean_str]._active = None
 
     # THEN
     sue_budunit.settle_bud()
@@ -283,29 +283,29 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     print(f"{yao_budunit.get_reason_bases()=}")
     # day_hour = f"{yao_budunit._real_id},day_hour"
     # yao_budunit.set_fact(base=day_hour, pick=day_hour, open=0, nigh=23)
-    day_min_text = "day_minute"
-    day_min_road = yao_budunit.make_l1_road(day_min_text)
+    day_min_str = "day_minute"
+    day_min_road = yao_budunit.make_l1_road(day_min_str)
     yao_budunit.set_fact(base=day_min_road, pick=day_min_road, fopen=0, fnigh=1439)
 
-    mood_text = "Moods"
-    mood_road = yao_budunit.make_l1_road(mood_text)
+    mood_str = "Moods"
+    mood_road = yao_budunit.make_l1_road(mood_str)
     yao_budunit.set_fact(base=mood_road, pick=mood_road)
     print(f"{yao_budunit.get_reason_bases()=}")
 
-    yr_mon_text = "year_month"
-    yr_mon_road = yao_budunit.make_l1_road(yr_mon_text)
+    yr_mon_str = "year_month"
+    yr_mon_road = yao_budunit.make_l1_road(yr_mon_str)
     yao_budunit.set_fact(base=yr_mon_road, pick=yr_mon_road)
-    inter_text = "Internet"
-    inter_road = yao_budunit.make_l1_road(inter_text)
+    inter_str = "Internet"
+    inter_road = yao_budunit.make_l1_road(inter_str)
     yao_budunit.set_fact(base=inter_road, pick=inter_road)
     assert yao_budunit is not None
     # print(f"{yao_budunit._owner_id=}")
     # print(f"{len(yao_budunit._idearoot._kids)=}")
-    ulty_text = "Ultimate Frisbee"
-    ulty_road = yao_budunit.make_l1_road(ulty_text)
+    ulty_str = "Ultimate Frisbee"
+    ulty_road = yao_budunit.make_l1_road(ulty_str)
 
     # if yao_budunit._idearoot._kids["Ultimate Frisbee"]._label == "Ultimate Frisbee":
-    assert yao_budunit._idearoot._kids[ulty_text].reasonunits is not None
+    assert yao_budunit._idearoot._kids[ulty_str].reasonunits is not None
     assert yao_budunit._owner_id is not None
 
     # for fact in yao_budunit._idearoot.factunits.values():
@@ -317,10 +317,10 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     # THEN
     # print(f"{str(type(idea))=}")
     # print(f"{len(idea_dict)=}")
-    laundry_text = "laundry monday"
+    laundry_str = "laundry monday"
     casa_road = yao_budunit.make_l1_road("casa")
     cleaning_road = yao_budunit.make_road(casa_road, "cleaning")
-    laundry_road = yao_budunit.make_road(cleaning_road, laundry_text)
+    laundry_road = yao_budunit.make_road(cleaning_road, laundry_str)
 
     # for idea in idea_dict:
     #     assert (
@@ -328,17 +328,17 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     #         or str(type(idea)).find(".idea.IdeaUnit'>") > 0
     #     )
     #     # print(f"{idea._label=}")
-    #     if idea._label == laundry_text:
+    #     if idea._label == laundry_str:
     #         for reason in idea.reasonunits.values():
     #             print(f"{idea._label=} {reason.base=}")  # {reason.premises=}")
     # assert idea._active is False
     assert yao_budunit._idea_dict.get(laundry_road)._active is False
 
     # WHEN
-    week_text = "weekdays"
-    week_road = yao_budunit.make_l1_road(week_text)
-    mon_text = "Monday"
-    mon_road = yao_budunit.make_road(week_road, mon_text)
+    week_str = "weekdays"
+    week_road = yao_budunit.make_l1_road(week_str)
+    mon_str = "Monday"
+    mon_road = yao_budunit.make_road(week_road, mon_str)
     yao_budunit.set_fact(base=week_road, pick=mon_road)
     yao_budunit.settle_bud()
 
@@ -350,29 +350,29 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     # ESTABLISH
     yao_budunit = budunit_v001()
 
-    day_hr_text = "day_hour"
-    day_hr_road = yao_budunit.make_l1_road(day_hr_text)
+    day_hr_str = "day_hour"
+    day_hr_road = yao_budunit.make_l1_road(day_hr_str)
     yao_budunit.set_fact(base=day_hr_road, pick=day_hr_road, fopen=0, fnigh=23)
-    day_min_text = "day_minute"
-    day_min_road = yao_budunit.make_l1_road(day_min_text)
+    day_min_str = "day_minute"
+    day_min_road = yao_budunit.make_l1_road(day_min_str)
     yao_budunit.set_fact(base=day_min_road, pick=day_min_road, fopen=0, fnigh=59)
-    mon_wk_text = "month_week"
-    mon_wk_road = yao_budunit.make_l1_road(mon_wk_text)
+    mon_wk_str = "month_week"
+    mon_wk_road = yao_budunit.make_l1_road(mon_wk_str)
     yao_budunit.set_fact(base=mon_wk_road, pick=mon_wk_road)
-    nation_text = "Nation-States"
-    nation_road = yao_budunit.make_l1_road(nation_text)
+    nation_str = "Nation-States"
+    nation_road = yao_budunit.make_l1_road(nation_str)
     yao_budunit.set_fact(base=nation_road, pick=nation_road)
-    mood_text = "Moods"
-    mood_road = yao_budunit.make_l1_road(mood_text)
+    mood_str = "Moods"
+    mood_road = yao_budunit.make_l1_road(mood_str)
     yao_budunit.set_fact(base=mood_road, pick=mood_road)
-    aaron_text = "Aaron Donald things effected by him"
-    aaron_road = yao_budunit.make_l1_road(aaron_text)
+    aaron_str = "Aaron Donald things effected by him"
+    aaron_road = yao_budunit.make_l1_road(aaron_str)
     yao_budunit.set_fact(base=aaron_road, pick=aaron_road)
-    inter_text = "Internet"
-    inter_road = yao_budunit.make_l1_road(inter_text)
+    inter_str = "Internet"
+    inter_road = yao_budunit.make_l1_road(inter_str)
     yao_budunit.set_fact(base=inter_road, pick=inter_road)
-    yr_mon_text = "year_month"
-    yr_mon_road = yao_budunit.make_l1_road(yr_mon_text)
+    yr_mon_str = "year_month"
+    yr_mon_road = yao_budunit.make_l1_road(yr_mon_str)
     yao_budunit.set_fact(base=yr_mon_road, pick=yr_mon_road, fopen=0, fnigh=1000)
 
     yao_budunit.settle_bud()
@@ -380,12 +380,12 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     # for missing_fact, count in missing_facts.items():
     #     print(f"{missing_fact=} {count=}")
 
-    week_text = "weekdays"
-    week_road = yao_budunit.make_l1_road(week_text)
-    mon_text = "Monday"
-    mon_road = yao_budunit.make_road(week_road, mon_text)
-    tue_text = "Tuesday"
-    tue_road = yao_budunit.make_road(week_road, tue_text)
+    week_str = "weekdays"
+    week_road = yao_budunit.make_l1_road(week_str)
+    mon_str = "Monday"
+    mon_road = yao_budunit.make_road(week_road, mon_str)
+    tue_str = "Tuesday"
+    tue_road = yao_budunit.make_road(week_road, tue_str)
     mon_premise_x = premiseunit_shop(need=mon_road)
     mon_premise_x._status = False
     mon_premise_x._task = False
@@ -424,16 +424,16 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     assert gen_week_reasonheir.premises == mt_reasonheir.premises
     assert gen_week_reasonheir == mt_reasonheir
 
-    casa_text = "casa"
-    casa_road = yao_budunit.make_l1_road(casa_text)
-    bird_text = "say hi to birds"
-    bird_road = yao_budunit.make_road(casa_road, bird_text)
+    casa_str = "casa"
+    casa_road = yao_budunit.make_l1_road(casa_str)
+    bird_str = "say hi to birds"
+    bird_road = yao_budunit.make_road(casa_road, bird_str)
     assert from_list_get_active(bird_road, idea_dict) is False
 
     # yao_budunit.set_fact(base=week_road, pick=mon_road)
     # idea_dict = yao_budunit.get_idea_dict()
-    # casa_idea = x_idearoot._kids[casa_text]
-    # twee_idea = casa_idea._kids[bird_text]
+    # casa_idea = x_idearoot._kids[casa_str]
+    # twee_idea = casa_idea._kids[bird_str]
     # print(f"{len(x_idearoot._reasonheirs)=}")
     # print(f"{len(casa_idea._reasonheirs)=}")
     # print(f"{len(twee_idea._reasonheirs)=}")
@@ -452,10 +452,10 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
 def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_budunit_v001():
     # ESTABLISH
     yao_budunit = budunit_v001()
-    day_text = "day_hour"
-    day_road = yao_budunit.make_l1_road(day_text)
-    min_text = "day_minute"
-    min_road = yao_budunit.make_l1_road(day_text)
+    day_str = "day_hour"
+    day_road = yao_budunit.make_l1_road(day_str)
+    min_str = "day_minute"
+    min_road = yao_budunit.make_l1_road(day_str)
 
     # WHEN
     yao_budunit.set_fact(base=day_road, pick=day_road, fopen=0, fnigh=23)
@@ -506,8 +506,8 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     yao_budunit.set_fact(
         base=ced_week_base, pick=ced_week_base, fopen=ced_week_open, fnigh=ced_week_open
     )
-    nation_text = "Nation-States"
-    nation_road = yao_budunit.make_l1_road(nation_text)
+    nation_str = "Nation-States"
+    nation_road = yao_budunit.make_l1_road(nation_str)
     yao_budunit.set_fact(base=nation_road, pick=nation_road)
     print(
         f"Nation-states set and also fact set: {ced_week_base=} with {ced_week_open=} and {ced_week_open=}"
@@ -516,12 +516,12 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     yao_budunit.settle_bud()
 
     # THEN
-    week_text = "ced_week"
-    week_road = yao_budunit.make_l1_road(week_text)
+    week_str = "ced_week"
+    week_road = yao_budunit.make_l1_road(week_str)
     casa_road = yao_budunit.make_l1_road("casa")
     cleaning_road = yao_budunit.make_road(casa_road, "cleaning")
-    clean_couch_text = "clean sheets couch blankets"
-    clean_couch_road = yao_budunit.make_road(cleaning_road, clean_couch_text)
+    clean_couch_str = "clean sheets couch blankets"
+    clean_couch_road = yao_budunit.make_road(cleaning_road, clean_couch_str)
     clean_couch_idea = yao_budunit.get_idea_obj(road=clean_couch_road)
     week_reason = clean_couch_idea.reasonunits.get(week_road)
     week_premise = week_reason.premises.get(week_road)
@@ -573,34 +573,34 @@ def test_BudUnit_settle_bud_EveryIdeaHasActiveStatus_budunit_v001():
 def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
     # ESTABLISH
     yao_budunit = budunit_v001()
-    minute_text = "day_minute"
-    minute_road = yao_budunit.make_l1_road(minute_text)
+    minute_str = "day_minute"
+    minute_road = yao_budunit.make_l1_road(minute_str)
     yao_budunit.set_fact(base=minute_road, pick=minute_road, fopen=0, fnigh=1399)
-    month_text = "month_week"
-    month_road = yao_budunit.make_l1_road(month_text)
+    month_str = "month_week"
+    month_road = yao_budunit.make_l1_road(month_str)
     yao_budunit.set_fact(base=month_road, pick=month_road)
-    nations_text = "Nation-States"
-    nations_road = yao_budunit.make_l1_road(nations_text)
+    nations_str = "Nation-States"
+    nations_road = yao_budunit.make_l1_road(nations_str)
     yao_budunit.set_fact(base=nations_road, pick=nations_road)
-    mood_text = "Moods"
-    mood_road = yao_budunit.make_l1_road(mood_text)
+    mood_str = "Moods"
+    mood_road = yao_budunit.make_l1_road(mood_str)
     yao_budunit.set_fact(base=mood_road, pick=mood_road)
-    aaron_text = "Aaron Donald things effected by him"
-    aaron_road = yao_budunit.make_l1_road(aaron_text)
+    aaron_str = "Aaron Donald things effected by him"
+    aaron_road = yao_budunit.make_l1_road(aaron_str)
     yao_budunit.set_fact(base=aaron_road, pick=aaron_road)
-    internet_text = "Internet"
-    internet_road = yao_budunit.make_l1_road(internet_text)
+    internet_str = "Internet"
+    internet_road = yao_budunit.make_l1_road(internet_str)
     yao_budunit.set_fact(base=internet_road, pick=internet_road)
-    weekdays_text = "weekdays"
-    weekdays_road = yao_budunit.make_l1_road(weekdays_text)
+    weekdays_str = "weekdays"
+    weekdays_road = yao_budunit.make_l1_road(weekdays_str)
     yao_budunit.set_fact(base=weekdays_road, pick=weekdays_road)
     idea_dict = yao_budunit.get_idea_dict()
     print(f"{len(idea_dict)=}")
 
-    casa_text = "casa"
-    casa_road = yao_budunit.make_l1_road(casa_text)
-    clean_text = "cleaning"
-    clean_road = yao_budunit.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = yao_budunit.make_l1_road(casa_str)
+    clean_str = "cleaning"
+    clean_road = yao_budunit.make_road(casa_road, clean_str)
     mat_label = "deep clean play mat"
     mat_road = yao_budunit.make_road(clean_road, mat_label)
     assert from_list_get_active(mat_road, idea_dict) is False
@@ -766,11 +766,11 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
 
 # def test_bud_metrics_CorrectlySets_healers_dict():
 #     # ESTABLISH
-#     sue_text = "Sue"
-#     bob_text = "Bob"
+#     sue_str = "Sue"
+#     bob_str = "Bob"
 #     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-#     sue_budunit.add_acctunit(sue_text)
-#     sue_budunit.add_acctunit(bob_text)
+#     sue_budunit.add_acctunit(sue_str)
+#     sue_budunit.add_acctunit(bob_str)
 #     assert sue_budunit._healers_dict == {}
 
 #     # WHEN
@@ -782,11 +782,11 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
 #     nation_road = sue_budunit.make_l1_road("nation-state")
 #     usa_road = sue_budunit.make_road(nation_road, "USA")
 #     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-#     sue_healerlink = healerlink_shop({sue_text})
+#     sue_healerlink = healerlink_shop({sue_str})
 #     sue_budunit.edit_idea_attr(oregon_road, problem_bool=True, healerlink=sue_healerlink)
 
 #     week_road = sue_budunit.make_l1_road("weekdays")
-#     bob_healerlink = healerlink_shop({bob_text})
+#     bob_healerlink = healerlink_shop({bob_str})
 #     sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerlink=bob_healerlink)
 #     assert sue_budunit._healers_dict == {}
 
@@ -796,18 +796,18 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
 #     # THEN
 #     assert len(sue_budunit._healers_dict) == 2
 #     week_idea = sue_budunit.get_idea_obj(week_road)
-#     assert sue_budunit._healers_dict.get(bob_text) == {week_road: week_idea}
+#     assert sue_budunit._healers_dict.get(bob_str) == {week_road: week_idea}
 #     oregon_idea = sue_budunit.get_idea_obj(oregon_road)
-#     assert sue_budunit._healers_dict.get(sue_text) == {oregon_road: oregon_idea}
+#     assert sue_budunit._healers_dict.get(sue_str) == {oregon_road: oregon_idea}
 
 
 def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     # ESTABLISH
-    sue_text = "Sue"
-    bob_text = "Bob"
+    sue_str = "Sue"
+    bob_str = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_acctunit(sue_text)
-    sue_budunit.add_acctunit(bob_text)
+    sue_budunit.add_acctunit(sue_str)
+    sue_budunit.add_acctunit(bob_str)
     assert sue_budunit._healers_dict == {}
 
     # WHEN
@@ -819,13 +819,13 @@ def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-    sue_healerlink = healerlink_shop({sue_text})
+    sue_healerlink = healerlink_shop({sue_str})
     sue_budunit.edit_idea_attr(
         oregon_road, problem_bool=True, healerlink=sue_healerlink
     )
 
     week_road = sue_budunit.make_l1_road("weekdays")
-    bob_healerlink = healerlink_shop({bob_text})
+    bob_healerlink = healerlink_shop({bob_str})
     sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerlink=bob_healerlink)
     assert sue_budunit._healers_dict == {}
 
@@ -835,18 +835,18 @@ def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     # THEN
     assert len(sue_budunit._healers_dict) == 2
     week_idea = sue_budunit.get_idea_obj(week_road)
-    assert sue_budunit._healers_dict.get(bob_text) == {week_road: week_idea}
+    assert sue_budunit._healers_dict.get(bob_str) == {week_road: week_idea}
     oregon_idea = sue_budunit.get_idea_obj(oregon_road)
-    assert sue_budunit._healers_dict.get(sue_text) == {oregon_road: oregon_idea}
+    assert sue_budunit._healers_dict.get(sue_str) == {oregon_road: oregon_idea}
 
 
 def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
     # ESTABLISH
-    sue_text = "Sue"
-    bob_text = "Bob"
+    sue_str = "Sue"
+    bob_str = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_acctunit(sue_text)
-    sue_budunit.add_acctunit(bob_text)
+    sue_budunit.add_acctunit(sue_str)
+    sue_budunit.add_acctunit(bob_str)
     assert sue_budunit._econs_buildable is False
 
     # WHEN
@@ -858,13 +858,13 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-    sue_healerlink = healerlink_shop({sue_text})
+    sue_healerlink = healerlink_shop({sue_str})
     sue_budunit.edit_idea_attr(
         oregon_road, problem_bool=True, healerlink=sue_healerlink
     )
 
     week_road = sue_budunit.make_l1_road("weekdays")
-    bob_healerlink = healerlink_shop({bob_text})
+    bob_healerlink = healerlink_shop({bob_str})
     sue_budunit.edit_idea_attr(week_road, problem_bool=True, healerlink=bob_healerlink)
 
     # WHEN
@@ -875,11 +875,11 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
 
 def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
     # ESTABLISH
-    sue_text = "Sue"
-    bob_text = "Bob"
+    sue_str = "Sue"
+    bob_str = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-    sue_budunit.add_acctunit(sue_text)
-    sue_budunit.add_acctunit(bob_text)
+    sue_budunit.add_acctunit(sue_str)
+    sue_budunit.add_acctunit(bob_str)
     assert sue_budunit._econs_buildable is False
 
     # WHEN
@@ -891,10 +891,10 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
     nation_road = sue_budunit.make_l1_road("nation-state")
     usa_road = sue_budunit.make_road(nation_road, "USA")
     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-    bend_text = "Be/nd"
-    bend_road = sue_budunit.make_road(oregon_road, bend_text)
-    sue_budunit.set_idea(ideaunit_shop(bend_text), oregon_road)
-    sue_healerlink = healerlink_shop({sue_text})
+    bend_str = "Be/nd"
+    bend_road = sue_budunit.make_road(oregon_road, bend_str)
+    sue_budunit.set_idea(ideaunit_shop(bend_str), oregon_road)
+    sue_healerlink = healerlink_shop({sue_str})
     sue_budunit.edit_idea_attr(bend_road, problem_bool=True, healerlink=sue_healerlink)
     assert sue_budunit._econs_buildable
 

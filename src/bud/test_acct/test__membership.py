@@ -24,23 +24,23 @@ def test_GroupID_exists():
 
 def test_GroupCore_exists():
     # ESTABLISH
-    swim_text = ";swimmers"
+    swim_str = ";swimmers"
     # WHEN
-    swim_groupcore = GroupCore(group_id=swim_text)
+    swim_groupcore = GroupCore(group_id=swim_str)
     # THEN
     assert swim_groupcore is not None
-    assert swim_groupcore.group_id == swim_text
+    assert swim_groupcore.group_id == swim_str
 
 
 def test_MemberShip_exists():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
 
     # WHEN
-    swim_membership = MemberShip(group_id=swim_text)
+    swim_membership = MemberShip(group_id=swim_str)
 
     # THEN
-    assert swim_membership.group_id == swim_text
+    assert swim_membership.group_id == swim_str
     assert swim_membership.credit_vote == 1.0
     assert swim_membership.debtit_vote == 1.0
     assert swim_membership._credor_pool is None
@@ -56,13 +56,13 @@ def test_MemberShip_exists():
 
 def test_membership_shop_ReturnsCorrectObj():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     swim_credit_vote = 3.0
     swim_debtit_vote = 5.0
 
     # WHEN
     swim_membership = membership_shop(
-        group_id=swim_text,
+        group_id=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
     )
@@ -83,39 +83,39 @@ def test_membership_shop_ReturnsCorrectObj():
 
 def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
     # ESTABLISH
-    swim_text = ",swim"
-    yao_text = "Yao"
+    swim_str = ",swim"
+    yao_str = "Yao"
 
     # WHEN
-    swim_membership = membership_shop(swim_text, _acct_id=yao_text)
+    swim_membership = membership_shop(swim_str, _acct_id=yao_str)
 
     # THEN
-    assert swim_membership._acct_id == yao_text
+    assert swim_membership._acct_id == yao_str
 
 
 # def test_MemberShip_set_group_id_RaisesErrorIf_group_id_IsNotAcctIDAndIsRoadNode():
 #     # ESTABLISH
-#     slash_text = "/"
-#     # bob_text = f"Bob{slash_text}Texas"
-#     bob_text = "Bob"
-#     # swim_text = f"{slash_text}swim"
-#     swim_text = ",swim"
+#     slash_str = "/"
+#     # bob_str = f"Bob{slash_str}Texas"
+#     bob_str = "Bob"
+#     # swim_str = f"{slash_str}swim"
+#     swim_str = ",swim"
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         membership_shop(swim_text, _acct_id=bob_text, _road_delimiter=slash_text)
+#         membership_shop(swim_str, _acct_id=bob_str, _road_delimiter=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{swim_text}' needs to not be a RoadNode. Must contain delimiter: '{slash_text}'"
+#         == f"'{swim_str}' needs to not be a RoadNode. Must contain delimiter: '{slash_str}'"
 #     )
 
 
 def test_MemberShip_set_credit_vote_SetsAttr():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     old_credit_vote = 3.0
     swim_debtit_vote = 5.0
-    swim_membership = membership_shop(swim_text, old_credit_vote, swim_debtit_vote)
+    swim_membership = membership_shop(swim_str, old_credit_vote, swim_debtit_vote)
     assert swim_membership.credit_vote == old_credit_vote
     assert swim_membership.debtit_vote == swim_debtit_vote
 
@@ -130,10 +130,10 @@ def test_MemberShip_set_credit_vote_SetsAttr():
 
 def test_MemberShip_set_credit_vote_HandlesNoneParameter():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     old_credit_vote = 3.0
     swim_debtit_vote = 5.0
-    swim_membership = membership_shop(swim_text, old_credit_vote, swim_debtit_vote)
+    swim_membership = membership_shop(swim_str, old_credit_vote, swim_debtit_vote)
     assert swim_membership.credit_vote == old_credit_vote
     assert swim_membership.debtit_vote == swim_debtit_vote
 
@@ -147,10 +147,10 @@ def test_MemberShip_set_credit_vote_HandlesNoneParameter():
 
 def test_MemberShip_set_debtit_vote_SetsAttr():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     swim_credit_vote = 3.0
     old_debtit_vote = 5.0
-    swim_membership = membership_shop(swim_text, swim_credit_vote, old_debtit_vote)
+    swim_membership = membership_shop(swim_str, swim_credit_vote, old_debtit_vote)
     assert swim_membership.credit_vote == swim_credit_vote
     assert swim_membership.debtit_vote == old_debtit_vote
 
@@ -165,10 +165,10 @@ def test_MemberShip_set_debtit_vote_SetsAttr():
 
 def test_MemberShip_set_debtit_vote_DoesNotSetsAttrNone():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     swim_credit_vote = 3.0
     old_debtit_vote = 5.0
-    swim_membership = membership_shop(swim_text, swim_credit_vote, old_debtit_vote)
+    swim_membership = membership_shop(swim_str, swim_credit_vote, old_debtit_vote)
     assert swim_membership.credit_vote == swim_credit_vote
     assert swim_membership.debtit_vote == old_debtit_vote
 
@@ -182,11 +182,11 @@ def test_MemberShip_set_debtit_vote_DoesNotSetsAttrNone():
 
 def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     swim_credit_vote = 3.0
     swim_debtit_vote = 5.0
     swim_membership = membership_shop(
-        group_id=swim_text,
+        group_id=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
     )
@@ -207,49 +207,49 @@ def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
 def test_membership_get_from_dict_ReturnsObj():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     swim_credit_vote = 3.0
     swim_debtit_vote = 5.0
-    yao_text = "Yao"
+    yao_str = "Yao"
     before_swim_membership = membership_shop(
-        group_id=swim_text,
+        group_id=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
-        _acct_id=yao_text,
+        _acct_id=yao_str,
     )
     swim_membership_dict = before_swim_membership.get_dict()
 
     # WHEN
-    after_swim_membership = membership_get_from_dict(swim_membership_dict, yao_text)
+    after_swim_membership = membership_get_from_dict(swim_membership_dict, yao_str)
 
     # THEN
     assert before_swim_membership == after_swim_membership
-    assert after_swim_membership.group_id == swim_text
+    assert after_swim_membership.group_id == swim_str
 
 
 def test_memberships_get_from_dict_ReturnsObj():
     # ESTABLISH
-    swim_text = ",swim"
+    swim_str = ",swim"
     swim_credit_vote = 3.0
     swim_debtit_vote = 5.0
-    yao_text = "Yao"
+    yao_str = "Yao"
     before_swim_membership = membership_shop(
-        group_id=swim_text,
+        group_id=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
-        _acct_id=yao_text,
+        _acct_id=yao_str,
     )
-    before_swim_memberships_objs = {swim_text: before_swim_membership}
-    swim_memberships_dict = {swim_text: before_swim_membership.get_dict()}
+    before_swim_memberships_objs = {swim_str: before_swim_membership}
+    swim_memberships_dict = {swim_str: before_swim_membership.get_dict()}
 
     # WHEN
     after_swim_memberships_objs = memberships_get_from_dict(
-        swim_memberships_dict, yao_text
+        swim_memberships_dict, yao_str
     )
 
     # THEN
     assert before_swim_memberships_objs == after_swim_memberships_objs
-    assert after_swim_memberships_objs.get(swim_text) == before_swim_membership
+    assert after_swim_memberships_objs.get(swim_str) == before_swim_membership
 
 
 def test_MemberShip_clear_fund_give_take_SetsAttrCorrectly():
@@ -282,26 +282,26 @@ def test_MemberShip_clear_fund_give_take_SetsAttrCorrectly():
 
 def test_AwardLink_exists():
     # ESTABLISH
-    bikers_text = "bikers"
+    bikers_str = "bikers"
 
     # WHEN
-    bikers_awardlink = AwardLink(group_id=bikers_text)
+    bikers_awardlink = AwardLink(group_id=bikers_str)
 
     # THEN
-    assert bikers_awardlink.group_id == bikers_text
+    assert bikers_awardlink.group_id == bikers_str
     assert bikers_awardlink.give_force == 1.0
     assert bikers_awardlink.take_force == 1.0
 
 
 def test_awardlink_shop_ReturnsCorrectObj():
     # ESTABLISH
-    bikers_text = "bikers"
+    bikers_str = "bikers"
     bikers_give_force = 3.0
     bikers_take_force = 5.0
 
     # WHEN
     bikers_awardlink = awardlink_shop(
-        group_id=bikers_text,
+        group_id=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
@@ -325,30 +325,30 @@ def test_AwardHeir_exists():
 
 def test_awardheir_shop_ReturnsObj():
     # ESTABLISH
-    bikers_text = "bikers"
+    bikers_str = "bikers"
     bikers_give_force = 3.0
     bikers_take_force = 6.0
 
     # WHEN
     x_awardheir = awardheir_shop(
-        group_id=bikers_text,
+        group_id=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
 
     # WHEN
-    assert x_awardheir.group_id == bikers_text
+    assert x_awardheir.group_id == bikers_str
     assert x_awardheir.give_force == bikers_give_force
     assert x_awardheir.take_force == bikers_take_force
 
 
 def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
-    bikers_text = "bikers"
+    bikers_str = "bikers"
     bikers_give_force = 3.0
     bikers_take_force = 5.0
     bikers_awardlink = awardlink_shop(
-        group_id=bikers_text,
+        group_id=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
@@ -369,9 +369,9 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
 
 def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
     # ESTABLISH
-    teacher_text = "teachers"
+    teacher_str = "teachers"
     teacher_awardlink = awardlink_shop(
-        group_id=teacher_text, give_force=103, take_force=155
+        group_id=teacher_str, give_force=103, take_force=155
     )
     teacher_dict = teacher_awardlink.get_dict()
     awardlinks_dict = {teacher_awardlink.group_id: teacher_dict}
@@ -393,50 +393,50 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
 
 def test_AwardLine_exists():
     # ESTABLISH
-    bikers_text = "bikers"
+    bikers_str = "bikers"
     bikers_fund_give = 0.33
     bikers_fund_take = 0.55
 
     # WHEN
     bikers_awardline = AwardLine(
-        group_id=bikers_text,
+        group_id=bikers_str,
         _fund_give=bikers_fund_give,
         _fund_take=bikers_fund_take,
     )
 
     # THEN
-    assert bikers_awardline.group_id == bikers_text
+    assert bikers_awardline.group_id == bikers_str
     assert bikers_awardline._fund_give == bikers_fund_give
     assert bikers_awardline._fund_take == bikers_fund_take
 
 
 def test_awardline_shop_ReturnsCorrectObj_exists():
     # ESTABLISH
-    bikers_text = "bikers"
-    bikers_text = bikers_text
+    bikers_str = "bikers"
+    bikers_str = bikers_str
     bikers_fund_give = 0.33
     bikers_fund_take = 0.55
 
     # WHEN
     biker_awardline = awardline_shop(
-        group_id=bikers_text,
+        group_id=bikers_str,
         _fund_give=bikers_fund_give,
         _fund_take=bikers_fund_take,
     )
 
     assert biker_awardline is not None
-    assert biker_awardline.group_id == bikers_text
+    assert biker_awardline.group_id == bikers_str
     assert biker_awardline._fund_give == bikers_fund_give
     assert biker_awardline._fund_take == bikers_fund_take
 
 
 def test_AwardLine_add_fund_give_take_CorrectlyModifiesAttr():
     # ESTABLISH
-    bikers_text = "bikers"
+    bikers_str = "bikers"
     bikers_awardline = awardline_shop(
-        group_id=bikers_text, _fund_give=0.33, _fund_take=0.55
+        group_id=bikers_str, _fund_give=0.33, _fund_take=0.55
     )
-    assert bikers_awardline.group_id == bikers_text
+    assert bikers_awardline.group_id == bikers_str
     assert bikers_awardline._fund_give == 0.33
     assert bikers_awardline._fund_take == 0.55
 

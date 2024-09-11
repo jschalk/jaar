@@ -49,14 +49,14 @@ def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     luca_bud = budunit_shop()
     luca_bud.set_credor_respect(500)
     luca_bud.set_debtor_respect(400)
-    yao_text = "Yao"
+    yao_str = "Yao"
     yao_credit_belief = 66
     yao_debtit_belief = 77
-    luca_bud.add_acctunit(yao_text, yao_credit_belief, yao_debtit_belief)
-    sue_text = "Sue"
+    luca_bud.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
+    sue_str = "Sue"
     sue_credit_belief = 434
     sue_debtit_belief = 323
-    luca_bud.add_acctunit(sue_text, sue_credit_belief, sue_debtit_belief)
+    luca_bud.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
 
     # WHEN
     x_fig = get_bud_accts_plotly_fig(luca_bud)
@@ -68,8 +68,8 @@ def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo(graphics_bool):
 def test_get_bud_agenda_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
-    week_text = "weekdays"
-    week_road = yao_bud.make_l1_road(week_text)
+    week_str = "weekdays"
+    week_road = yao_bud.make_l1_road(week_str)
     assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN

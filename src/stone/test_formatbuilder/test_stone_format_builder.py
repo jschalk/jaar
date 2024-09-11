@@ -1,6 +1,6 @@
 from src._instrument.python_tool import get_json_from_dict
 from src._instrument.file import save_file
-from src.bud.bud_tool import bud_ideaunit_text
+from src.bud.bud_tool import bud_ideaunit_str
 from src.gift.atom_config import (
     parent_road_str,
     label_str,
@@ -25,10 +25,10 @@ def test_create_categorys_stone_format_dicts_ReturnObj(rebuild_bool):
 
     # THEN
     assert len(categorys_stone_format_dict) == 10
-    bud_ideaunit_filename = f"stone_format_00028_{bud_ideaunit_text()}_v0_0_0.json"
+    bud_ideaunit_filename = f"stone_format_00028_{bud_ideaunit_str()}_v0_0_0.json"
     assert categorys_stone_format_dict.get(bud_ideaunit_filename)
     bud_ideaunit_dict = categorys_stone_format_dict.get(bud_ideaunit_filename)
-    assert bud_ideaunit_dict.get(atom_categorys_str()) == [bud_ideaunit_text()]
+    assert bud_ideaunit_dict.get(atom_categorys_str()) == [bud_ideaunit_str()]
     assert bud_ideaunit_dict.get(attributes_str())
     bud_ideaunit_attributes = bud_ideaunit_dict.get(attributes_str())
     assert bud_ideaunit_attributes.get(real_id_str())

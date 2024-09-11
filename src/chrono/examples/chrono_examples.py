@@ -7,12 +7,12 @@ from src.chrono.chrono import (
     add_newtimeline_ideaunit,
     new_timeline_ideaunit,
     get_min_from_dt_offset,
-    hours_config_text,
-    weekdays_config_text,
-    months_config_text,
-    timeline_label_text,
-    yr1_jan1_offset_text,
-    c400_config_text,
+    hours_config_str,
+    weekdays_config_str,
+    months_config_str,
+    timeline_label_str,
+    yr1_jan1_offset_str,
+    c400_config_str,
     chronounit_shop,
 )
 from datetime import datetime
@@ -49,8 +49,8 @@ def get_example_timeline_config(timeline_label: str) -> dict:
 
 
 def cregtime_ideaunit() -> IdeaUnit:
-    c400_count = get_creg_config().get(c400_config_text())
-    return new_timeline_ideaunit(get_cregtime_text(), c400_count)
+    c400_count = get_creg_config().get(c400_config_str())
+    return new_timeline_ideaunit(get_cregtime_str(), c400_count)
 
 
 def get_wed():
@@ -82,19 +82,19 @@ def get_tue():
 
 
 def creg_hours_list() -> list[list[str, int]]:
-    return get_creg_config().get(hours_config_text())
+    return get_creg_config().get(hours_config_str())
 
 
 def creg_weekdays_list() -> list[str]:
-    return get_creg_config().get(weekdays_config_text())
+    return get_creg_config().get(weekdays_config_str())
 
 
 def creg_weekday_ideaunits() -> dict[str, IdeaUnit]:
     return create_weekday_ideaunits(creg_weekdays_list())
 
 
-def get_cregtime_text():
-    return get_creg_config().get(timeline_label_text())
+def get_cregtime_str():
+    return get_creg_config().get(timeline_label_str())
 
 
 def creg_hour_label(x_int: int) -> str:
@@ -114,15 +114,15 @@ def add_time_squirt_ideaunit(x_budunit: BudUnit) -> BudUnit:
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_creg_config().get(yr1_jan1_offset_text()))
+    return get_min_from_dt_offset(dt, get_creg_config().get(yr1_jan1_offset_str()))
 
 
 def get_five_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_five_config().get(yr1_jan1_offset_text()))
+    return get_min_from_dt_offset(dt, get_five_config().get(yr1_jan1_offset_str()))
 
 
 def get_squirt_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_squirt_config().get(yr1_jan1_offset_text()))
+    return get_min_from_dt_offset(dt, get_squirt_config().get(yr1_jan1_offset_str()))
 
 
 def display_current_creg_five_min(graphics_bool: bool):
@@ -131,15 +131,15 @@ def display_current_creg_five_min(graphics_bool: bool):
         current_creg = get_creg_min_from_dt(current_datetime)
         current_five = get_five_min_from_dt(current_datetime)
 
-        curr_text = f"year: {current_datetime.year}"
-        curr_text += f", month: {current_datetime.month}"
-        curr_text += f", day: {current_datetime.day}"
-        curr_text += f", hour: {current_datetime.hour}"
-        curr_text += f", minute: {current_datetime.minute}"
-        curr_text = f"<b>{curr_text}</b>"
-        creg_min_text = f"<b>creg timeline min: {current_creg}</b>"
-        five_min_text = f"<b>five timeline min: {current_five}</b>"
-        curr_list = [curr_text, creg_min_text, five_min_text]
+        curr_str = f"year: {current_datetime.year}"
+        curr_str += f", month: {current_datetime.month}"
+        curr_str += f", day: {current_datetime.day}"
+        curr_str += f", hour: {current_datetime.hour}"
+        curr_str += f", minute: {current_datetime.minute}"
+        curr_str = f"<b>{curr_str}</b>"
+        creg_min_str = f"<b>creg timeline min: {current_creg}</b>"
+        five_min_str = f"<b>five timeline min: {current_five}</b>"
+        curr_list = [curr_str, creg_min_str, five_min_str]
         xp_list = [1, 1, 1]
         yp_list = [3, 2, 1]
 
@@ -172,11 +172,11 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         five_blurb = f"<b>{five_chronounit.get_blurb()}</b>"
 
         datetime_str = current_datetime.strftime("%H:%M, %A, %d %B, %Y")
-        dt_text = f"python : {datetime_str}"
-        dt_text = f"<b>{dt_text}</b>"
-        creg_min_text = f"<b>creg timeline min: {creg_min}</b>"
-        five_min_text = f"<b>five timeline min: {five_min}</b>"
-        curr_list = [dt_text, creg_min_text, creg_blurb, five_min_text, five_blurb]
+        dt_str = f"python : {datetime_str}"
+        dt_str = f"<b>{dt_str}</b>"
+        creg_min_str = f"<b>creg timeline min: {creg_min}</b>"
+        five_min_str = f"<b>five timeline min: {five_min}</b>"
+        curr_list = [dt_str, creg_min_str, creg_blurb, five_min_str, five_blurb]
         xp_list = [1, 1, 1, 1, 1]
         yp_list = [7, 5, 4, 2, 1]
 
@@ -215,18 +215,18 @@ def display_creg_five_squirt_time_attrs(graphics_bool: bool):
         squirt_blurb = f"<b>{squirt_chronounit.get_blurb()}</b>"
 
         datetime_str = current_datetime.strftime("%H:%M, %A, %d %B, %Y")
-        dt_text = f"python : {datetime_str}"
-        dt_text = f"<b>{dt_text}</b>"
-        creg_min_text = f"<b>creg timeline min: {creg_min}</b>"
-        five_min_text = f"<b>five timeline min: {five_min}</b>"
-        squirt_min_text = f"<b>squirt timeline min: {squirt_min}</b>"
+        dt_str = f"python : {datetime_str}"
+        dt_str = f"<b>{dt_str}</b>"
+        creg_min_str = f"<b>creg timeline min: {creg_min}</b>"
+        five_min_str = f"<b>five timeline min: {five_min}</b>"
+        squirt_min_str = f"<b>squirt timeline min: {squirt_min}</b>"
         curr_list = [
-            dt_text,
-            creg_min_text,
+            dt_str,
+            creg_min_str,
             creg_blurb,
-            five_min_text,
+            five_min_str,
             five_blurb,
-            squirt_min_text,
+            squirt_min_str,
             squirt_blurb,
         ]
         xp_list = [1, 1, 1, 1, 1, 1, 1]

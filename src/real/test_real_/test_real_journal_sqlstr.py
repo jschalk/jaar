@@ -16,8 +16,8 @@
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     music_text = "music"
-#     music_real = realunit_shop(music_text, get_test_reals_dir())
+#     music_str = "music"
+#     music_real = realunit_shop(music_str, get_test_reals_dir())
 #     # with music_real.get_journal_conn() as journal_conn:
 #     #     assert check_table_column_existence({atom_hx_table_name()}, journal_conn)
 #     #     assert get_row_count(journal_conn, atom_hx_table_name()) == 0

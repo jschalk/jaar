@@ -39,10 +39,10 @@ def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     sue_bud = get_budunit_with_4_levels()
 
     # WHEN
-    week_text = "weekdays"
-    week_road = sue_bud.make_l1_road(week_text)
-    sun_text = "Sunday"
-    sun_road = sue_bud.make_road(week_road, sun_text)
+    week_str = "weekdays"
+    week_road = sue_bud.make_l1_road(week_str)
+    sun_str = "Sunday"
+    sun_road = sue_bud.make_road(week_road, sun_str)
     sun_dict = {sun_road}
     relevant_roads = sue_bud._get_relevant_roads(sun_dict)
 
@@ -55,21 +55,21 @@ def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
 def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     # ESTABLISH
     sue_bud = budunit_shop(_owner_id="Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    floor_text = "mop floor"
-    floor_road = sue_bud.make_road(casa_road, floor_text)
-    floor_idea = ideaunit_shop(floor_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    floor_str = "mop floor"
+    floor_road = sue_bud.make_road(casa_road, floor_str)
+    floor_idea = ideaunit_shop(floor_str)
     sue_bud.set_idea(floor_idea, parent_road=casa_road)
 
-    unim_text = "unimportant"
-    unim_road = sue_bud.make_l1_road(unim_text)
-    unim_idea = ideaunit_shop(unim_text)
+    unim_str = "unimportant"
+    unim_road = sue_bud.make_l1_road(unim_str)
+    unim_idea = ideaunit_shop(unim_str)
     sue_bud.set_idea(unim_idea, parent_road=sue_bud._real_id)
 
-    status_text = "cleaniness status"
-    status_road = sue_bud.make_road(casa_road, status_text)
-    status_idea = ideaunit_shop(status_text)
+    status_str = "cleaniness status"
+    status_road = sue_bud.make_road(casa_road, status_str)
+    status_idea = ideaunit_shop(status_str)
     sue_bud.set_idea(status_idea, parent_road=casa_road)
     floor_reason = reasonunit_shop(base=status_road)
     floor_reason.set_premise(premise=status_road)
@@ -89,28 +89,28 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
 def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     # ESTABLISH
     x_bud = get_budunit_mop_example1()
-    casa_text = "casa"
-    casa_road = x_bud.make_l1_road(casa_text)
-    floor_text = "mop floor"
-    floor_road = x_bud.make_road(casa_road, floor_text)
+    casa_str = "casa"
+    casa_road = x_bud.make_l1_road(casa_str)
+    floor_str = "mop floor"
+    floor_road = x_bud.make_road(casa_road, floor_str)
 
-    unim_text = "unimportant"
-    unim_road = x_bud.make_l1_road(unim_text)
+    unim_str = "unimportant"
+    unim_road = x_bud.make_l1_road(unim_str)
 
-    status_text = "cleaniness status"
-    status_road = x_bud.make_road(casa_road, status_text)
+    status_str = "cleaniness status"
+    status_road = x_bud.make_road(casa_road, status_str)
 
-    clean_text = "clean"
-    clean_road = x_bud.make_road(status_road, clean_text)
+    clean_str = "clean"
+    clean_road = x_bud.make_road(status_road, clean_str)
 
-    very_much_text = "very_much"
-    very_much_road = x_bud.make_road(clean_road, very_much_text)
+    very_much_str = "very_much"
+    very_much_road = x_bud.make_road(clean_road, very_much_str)
 
-    moderately_text = "moderately"
-    moderately_road = x_bud.make_road(clean_road, moderately_text)
+    moderately_str = "moderately"
+    moderately_road = x_bud.make_road(clean_road, moderately_str)
 
-    dirty_text = "dirty"
-    dirty_road = x_bud.make_road(status_road, dirty_text)
+    dirty_str = "dirty"
+    dirty_road = x_bud.make_road(status_road, dirty_str)
 
     # WHEN
     floor_dict = {floor_road}
@@ -138,26 +138,26 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
 
 def test_BudUnit_get_relevant_roads_ReturnSimple():
     # ESTABLISH
-    yao_text = "Yao"
-    yao_bud = budunit_shop(_owner_id=yao_text)
-    min_range_x_text = "a_minute_range"
-    min_range_x_road = yao_bud.make_l1_road(min_range_x_text)
-    min_range_idea = ideaunit_shop(min_range_x_text, begin=0, close=2880)
+    yao_str = "Yao"
+    yao_bud = budunit_shop(_owner_id=yao_str)
+    min_range_x_str = "a_minute_range"
+    min_range_x_road = yao_bud.make_l1_road(min_range_x_str)
+    min_range_idea = ideaunit_shop(min_range_x_str, begin=0, close=2880)
     yao_bud.set_l1_idea(min_range_idea)
 
-    day_distance_text = "day_1ce"
-    day_distance_road = yao_bud.make_l1_road(day_distance_text)
-    day_distance_idea = ideaunit_shop(day_distance_text, begin=0, close=1440)
+    day_distance_str = "day_1ce"
+    day_distance_road = yao_bud.make_l1_road(day_distance_str)
+    day_distance_idea = ideaunit_shop(day_distance_str, begin=0, close=1440)
     yao_bud.set_l1_idea(day_distance_idea)
 
-    hour_distance_text = "hour_distance"
-    hour_distance_road = yao_bud.make_l1_road(hour_distance_text)
-    hour_distance_idea = ideaunit_shop(hour_distance_text)
+    hour_distance_str = "hour_distance"
+    hour_distance_road = yao_bud.make_l1_road(hour_distance_str)
+    hour_distance_idea = ideaunit_shop(hour_distance_str)
     yao_bud.set_l1_idea(hour_distance_idea)
 
-    min_days_text = "days in minute_range"
-    min_days_road = yao_bud.make_road(min_range_x_road, min_days_text)
-    min_days_idea = ideaunit_shop(min_days_text)
+    min_days_str = "days in minute_range"
+    min_days_road = yao_bud.make_road(min_range_x_road, min_days_str)
+    min_days_idea = ideaunit_shop(min_days_str)
     yao_bud.set_idea(min_days_idea, parent_road=min_range_x_road)
 
     # WHEN
@@ -180,12 +180,12 @@ def test_BudUnit_get_inheritor_idea_list_ReturnsObj_Scenario0():
     # ESTABLISH
     yao_budunit = budunit_shop("Yao")
     tech_road = yao_budunit.make_l1_road("tech")
-    week_text = "week"
-    week_road = yao_budunit.make_road(tech_road, week_text)
-    yao_budunit.set_idea(ideaunit_shop(week_text, begin=0, close=10800), tech_road)
-    mon_text = "Monday"
-    mon_road = yao_budunit.make_road(week_road, mon_text)
-    yao_budunit.set_idea(ideaunit_shop(mon_text), week_road)
+    week_str = "week"
+    week_road = yao_budunit.make_road(tech_road, week_str)
+    yao_budunit.set_idea(ideaunit_shop(week_str, begin=0, close=10800), tech_road)
+    mon_str = "Monday"
+    mon_road = yao_budunit.make_road(week_road, mon_str)
+    yao_budunit.set_idea(ideaunit_shop(mon_str), week_road)
     yao_budunit.settle_bud()
 
     # WHEN

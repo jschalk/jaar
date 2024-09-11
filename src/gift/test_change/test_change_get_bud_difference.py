@@ -4,16 +4,16 @@ from src.bud.idea import ideaunit_shop
 from src.bud.reason_idea import factunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.bud_tool import (
-    budunit_text,
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_teamlink_text,
-    bud_idea_healerlink_text,
-    bud_idea_factunit_text,
+    budunit_str,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
 )
 from src.gift.atom_config import (
     acct_id_str,
@@ -87,13 +87,13 @@ def test_ChangeUnit_create_atomunits_CorrectHandlesEmptyBuds():
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    xio_text = "Xio"
+    xio_str = "Xio"
     xio_credit_belief = 33
     xio_debtit_belief = 44
-    xio_acctunit = acctunit_shop(xio_text, xio_credit_belief, xio_debtit_belief)
+    xio_acctunit = acctunit_shop(xio_str, xio_credit_belief, xio_debtit_belief)
     after_sue_bud.set_acctunit(xio_acctunit, auto_set_membership=False)
 
     # WHEN
@@ -101,13 +101,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    assert (
-        len(sue_changeunit.atomunits.get(atom_insert()).get(bud_acctunit_text())) == 1
-    )
+    assert len(sue_changeunit.atomunits.get(atom_insert()).get(bud_acctunit_str())) == 1
     sue_insert_dict = sue_changeunit.atomunits.get(atom_insert())
-    sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_text())
-    xio_atomunit = sue_acctunit_dict.get(xio_text)
-    assert xio_atomunit.get_value(acct_id_str()) == xio_text
+    sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_str())
+    xio_atomunit = sue_acctunit_dict.get(xio_str)
+    assert xio_atomunit.get_value(acct_id_str()) == xio_str
     assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
     assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
 
@@ -117,15 +115,15 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
     before_sue_bud.add_acctunit("Yao")
     before_sue_bud.add_acctunit("Zia")
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
 
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -133,9 +131,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete
 
     # THEN
     xio_atomunit = get_nested_value(
-        sue_changeunit.atomunits, [atom_delete(), bud_acctunit_text(), xio_text]
+        sue_changeunit.atomunits, [atom_delete(), bud_acctunit_str(), xio_str]
     )
-    assert xio_atomunit.get_value(acct_id_str()) == xio_text
+    assert xio_atomunit.get_value(acct_id_str()) == xio_str
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     print_atomunit_keys(sue_changeunit)
@@ -144,23 +142,23 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
     xio_credit_belief = 33
     xio_debtit_belief = 44
-    after_sue_bud.add_acctunit(xio_text, xio_credit_belief, xio_debtit_belief)
+    after_sue_bud.add_acctunit(xio_str, xio_credit_belief, xio_debtit_belief)
 
     # WHEN
     sue_changeunit = changeunit_shop()
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_update(), bud_acctunit_text(), xio_text]
+    x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_id_str()) == xio_text
+    assert xio_atomunit.get_value(acct_id_str()) == xio_str
     assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
     assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
 
@@ -170,8 +168,8 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_attrs_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
     after_sue_bud = copy_deepcopy(before_sue_bud)
     x_budunit_tally = 55
     x_fund_pool = 8000000
@@ -195,7 +193,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_update(), budunit_text()]
+    x_keylist = [atom_update(), budunit_str()]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("max_tree_traverse") == x_max_tree_traverse
     assert xio_atomunit.get_value("monetary_desc") == x_monetary_desc
@@ -212,47 +210,47 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    yao_text = "Yao"
-    zia_text = "Zia"
-    temp_yao_acctunit = acctunit_shop(yao_text)
-    temp_zia_acctunit = acctunit_shop(zia_text)
+    yao_str = "Yao"
+    zia_str = "Zia"
+    temp_yao_acctunit = acctunit_shop(yao_str)
+    temp_zia_acctunit = acctunit_shop(zia_str)
     after_sue_bud.set_acctunit(temp_yao_acctunit, auto_set_membership=False)
     after_sue_bud.set_acctunit(temp_zia_acctunit, auto_set_membership=False)
-    after_yao_acctunit = after_sue_bud.get_acct(yao_text)
-    after_zia_acctunit = after_sue_bud.get_acct(zia_text)
-    run_text = ";runners"
+    after_yao_acctunit = after_sue_bud.get_acct(yao_str)
+    after_zia_acctunit = after_sue_bud.get_acct(zia_str)
+    run_str = ";runners"
     zia_run_credit_w = 77
     zia_run_debtit_w = 88
-    after_zia_acctunit.add_membership(run_text, zia_run_credit_w, zia_run_debtit_w)
+    after_zia_acctunit.add_membership(run_str, zia_run_credit_w, zia_run_debtit_w)
     print(f"{after_sue_bud.get_acctunit_group_ids_dict()=}")
 
     # WHEN
     sue_changeunit = changeunit_shop()
-    print(f"{after_sue_bud.get_acct(zia_text)._memberships=}")
+    print(f"{after_sue_bud.get_acct(zia_str)._memberships=}")
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
     # print(f"{sue_changeunit.atomunits.get(atom_insert()).keys()=}")
     # print(
-    #     sue_changeunit.atomunits.get(atom_insert()).get(bud_acct_membership_text()).keys()
+    #     sue_changeunit.atomunits.get(atom_insert()).get(bud_acct_membership_str()).keys()
     # )
 
     # THEN
-    x_keylist = [atom_insert(), bud_acctunit_text(), yao_text]
+    x_keylist = [atom_insert(), bud_acctunit_str(), yao_str]
     yao_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert yao_atomunit.get_value(acct_id_str()) == yao_text
+    assert yao_atomunit.get_value(acct_id_str()) == yao_str
 
-    x_keylist = [atom_insert(), bud_acctunit_text(), zia_text]
+    x_keylist = [atom_insert(), bud_acctunit_str(), zia_str]
     zia_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert zia_atomunit.get_value(acct_id_str()) == zia_text
+    assert zia_atomunit.get_value(acct_id_str()) == zia_str
     print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{zia_atomunit=}")
 
-    x_keylist = [atom_insert(), bud_acct_membership_text(), zia_text, run_text]
+    x_keylist = [atom_insert(), bud_acct_membership_str(), zia_str, run_str]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert run_atomunit.get_value(acct_id_str()) == zia_text
-    assert run_atomunit.get_value(group_id_str()) == run_text
+    assert run_atomunit.get_value(acct_id_str()) == zia_str
+    assert run_atomunit.get_value(group_id_str()) == run_str
     assert run_atomunit.get_value("credit_vote") == zia_run_credit_w
     assert run_atomunit.get_value("debtit_vote") == zia_run_debtit_w
 
@@ -266,38 +264,38 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    zia_text = "Zia"
-    before_sue_bud.add_acctunit(xio_text)
-    before_sue_bud.add_acctunit(zia_text)
-    run_text = ";runners"
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    zia_str = "Zia"
+    before_sue_bud.add_acctunit(xio_str)
+    before_sue_bud.add_acctunit(zia_str)
+    run_str = ";runners"
     before_xio_credit_w = 77
     before_xio_debtit_w = 88
-    before_xio_acct = before_sue_bud.get_acct(xio_text)
-    before_xio_acct.add_membership(run_text, before_xio_credit_w, before_xio_debtit_w)
+    before_xio_acct = before_sue_bud.get_acct(xio_str)
+    before_xio_acct.add_membership(run_str, before_xio_credit_w, before_xio_debtit_w)
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_xio_acctunit = after_sue_bud.get_acct(xio_text)
+    after_xio_acctunit = after_sue_bud.get_acct(xio_str)
     after_xio_credit_w = 55
     after_xio_debtit_w = 66
-    after_xio_acctunit.add_membership(run_text, after_xio_credit_w, after_xio_debtit_w)
+    after_xio_acctunit.add_membership(run_str, after_xio_credit_w, after_xio_debtit_w)
 
     # WHEN
     sue_changeunit = changeunit_shop()
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    # x_keylist = [atom_update(), bud_acctunit_text(), xio_text]
+    # x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
     # xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    # assert xio_atomunit.get_value(acct_id_str()) == xio_text
+    # assert xio_atomunit.get_value(acct_id_str()) == xio_str
     # print(f"\n{sue_changeunit.atomunits=}")
     # print(f"\n{xio_atomunit=}")
 
-    x_keylist = [atom_update(), bud_acct_membership_text(), xio_text, run_text]
+    x_keylist = [atom_update(), bud_acct_membership_str(), xio_str, run_str]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_id_str()) == xio_text
-    assert xio_atomunit.get_value(group_id_str()) == run_text
+    assert xio_atomunit.get_value(acct_id_str()) == xio_str
+    assert xio_atomunit.get_value(group_id_str()) == run_str
     assert xio_atomunit.get_value("credit_vote") == after_xio_credit_w
     assert xio_atomunit.get_value("debtit_vote") == after_xio_debtit_w
 
@@ -307,48 +305,48 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    zia_text = "Zia"
-    bob_text = "Bob"
-    before_sue_bud.add_acctunit(xio_text)
-    before_sue_bud.add_acctunit(zia_text)
-    before_sue_bud.add_acctunit(bob_text)
-    before_xio_acctunit = before_sue_bud.get_acct(xio_text)
-    before_zia_acctunit = before_sue_bud.get_acct(zia_text)
-    before_bob_acctunit = before_sue_bud.get_acct(bob_text)
-    run_text = ";runners"
-    before_xio_acctunit.add_membership(run_text)
-    before_zia_acctunit.add_membership(run_text)
-    fly_text = ";flyers"
-    before_xio_acctunit.add_membership(fly_text)
-    before_zia_acctunit.add_membership(fly_text)
-    before_bob_acctunit.add_membership(fly_text)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    zia_str = "Zia"
+    bob_str = "Bob"
+    before_sue_bud.add_acctunit(xio_str)
+    before_sue_bud.add_acctunit(zia_str)
+    before_sue_bud.add_acctunit(bob_str)
+    before_xio_acctunit = before_sue_bud.get_acct(xio_str)
+    before_zia_acctunit = before_sue_bud.get_acct(zia_str)
+    before_bob_acctunit = before_sue_bud.get_acct(bob_str)
+    run_str = ";runners"
+    before_xio_acctunit.add_membership(run_str)
+    before_zia_acctunit.add_membership(run_str)
+    fly_str = ";flyers"
+    before_xio_acctunit.add_membership(fly_str)
+    before_zia_acctunit.add_membership(fly_str)
+    before_bob_acctunit.add_membership(fly_str)
     before_group_ids_dict = before_sue_bud.get_acctunit_group_ids_dict()
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_xio_acctunit = after_sue_bud.get_acct(xio_text)
-    after_zia_acctunit = after_sue_bud.get_acct(zia_text)
-    after_bob_acctunit = after_sue_bud.get_acct(bob_text)
-    after_xio_acctunit.delete_membership(run_text)
-    after_zia_acctunit.delete_membership(run_text)
-    after_bob_acctunit.delete_membership(fly_text)
+    after_xio_acctunit = after_sue_bud.get_acct(xio_str)
+    after_zia_acctunit = after_sue_bud.get_acct(zia_str)
+    after_bob_acctunit = after_sue_bud.get_acct(bob_str)
+    after_xio_acctunit.delete_membership(run_str)
+    after_zia_acctunit.delete_membership(run_str)
+    after_bob_acctunit.delete_membership(fly_str)
     after_group_ids_dict = after_sue_bud.get_acctunit_group_ids_dict()
-    assert len(before_group_ids_dict.get(fly_text)) == 3
-    assert len(before_group_ids_dict.get(run_text)) == 2
-    assert len(after_group_ids_dict.get(fly_text)) == 2
-    assert after_group_ids_dict.get(run_text) is None
+    assert len(before_group_ids_dict.get(fly_str)) == 3
+    assert len(before_group_ids_dict.get(run_str)) == 2
+    assert len(after_group_ids_dict.get(fly_str)) == 2
+    assert after_group_ids_dict.get(run_str) is None
 
     # WHEN
     sue_changeunit = changeunit_shop()
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_delete(), bud_acct_membership_text(), bob_text, fly_text]
+    x_keylist = [atom_delete(), bud_acct_membership_str(), bob_str, fly_str]
     xio_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_id_str()) == bob_text
-    assert xio_atomunit.get_value(group_id_str()) == fly_text
+    assert xio_atomunit.get_value(acct_id_str()) == bob_str
+    assert xio_atomunit.get_value(group_id_str()) == fly_str
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     print_atomunit_keys(sue_changeunit)
@@ -360,21 +358,21 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    street_text = "street ball"
-    street_road = before_sue_bud.make_road(ball_road, street_text)
-    before_sue_bud.set_idea(ideaunit_shop(street_text), ball_road)
-    disc_text = "Ultimate Disc"
-    disc_road = before_sue_bud.make_road(sports_road, disc_text)
-    music_text = "music"
-    before_sue_bud.set_l1_idea(ideaunit_shop(music_text))
-    before_sue_bud.set_idea(ideaunit_shop(disc_text), sports_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    street_str = "street ball"
+    street_road = before_sue_bud.make_road(ball_road, street_str)
+    before_sue_bud.set_idea(ideaunit_shop(street_str), ball_road)
+    disc_str = "Ultimate Disc"
+    disc_road = before_sue_bud.make_road(sports_road, disc_str)
+    music_str = "music"
+    before_sue_bud.set_l1_idea(ideaunit_shop(music_str))
+    before_sue_bud.set_idea(ideaunit_shop(disc_str), sports_road)
     # create after without ball_idea and street_idea
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.del_idea_obj(ball_road)
@@ -384,18 +382,18 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
     sue_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_category = bud_ideaunit_text()
+    x_category = bud_ideaunit_str()
     print(f"{sue_changeunit.atomunits.get(atom_delete()).get(x_category).keys()=}")
 
-    x_keylist = [atom_delete(), bud_ideaunit_text(), ball_road, street_text]
+    x_keylist = [atom_delete(), bud_ideaunit_str(), ball_road, street_str]
     street_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == ball_road
-    assert street_atomunit.get_value(label_str()) == street_text
+    assert street_atomunit.get_value(label_str()) == street_str
 
-    x_keylist = [atom_delete(), bud_ideaunit_text(), sports_road, ball_text]
+    x_keylist = [atom_delete(), bud_ideaunit_str(), sports_road, ball_str]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == sports_road
-    assert ball_atomunit.get_value(label_str()) == ball_text
+    assert ball_atomunit.get_value(label_str()) == ball_str
 
     print(f"{get_atomunit_total_count(sue_changeunit)=}")
     assert get_atomunit_total_count(sue_changeunit) == 2
@@ -403,30 +401,30 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    street_text = "street ball"
-    street_road = before_sue_bud.make_road(ball_road, street_text)
-    before_sue_bud.set_idea(ideaunit_shop(street_text), ball_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    street_str = "street ball"
+    street_road = before_sue_bud.make_road(ball_road, street_str)
+    before_sue_bud.set_idea(ideaunit_shop(street_str), ball_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    disc_text = "Ultimate Disc"
-    disc_road = after_sue_bud.make_road(sports_road, disc_text)
-    after_sue_bud.set_idea(ideaunit_shop(disc_text), sports_road)
-    music_text = "music"
+    disc_str = "Ultimate Disc"
+    disc_road = after_sue_bud.make_road(sports_road, disc_str)
+    after_sue_bud.set_idea(ideaunit_shop(disc_str), sports_road)
+    music_str = "music"
     music_begin = 34
     music_close = 78
     music_mass = 55
     music_pledge = True
-    music_road = after_sue_bud.make_l1_road(music_text)
+    music_road = after_sue_bud.make_l1_road(music_str)
     after_sue_bud.set_l1_idea(
         ideaunit_shop(
-            music_text,
+            music_str,
             begin=music_begin,
             close=music_close,
             mass=music_mass,
@@ -441,19 +439,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     # THEN
     print_atomunit_keys(sue_changeunit)
 
-    x_keylist = [atom_insert(), bud_ideaunit_text(), sports_road, disc_text]
+    x_keylist = [atom_insert(), bud_ideaunit_str(), sports_road, disc_str]
     street_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == sports_road
-    assert street_atomunit.get_value(label_str()) == disc_text
+    assert street_atomunit.get_value(label_str()) == disc_str
 
     x_keylist = [
         atom_insert(),
-        bud_ideaunit_text(),
+        bud_ideaunit_str(),
         after_sue_bud._real_id,
-        music_text,
+        music_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value(label_str()) == music_text
+    assert ball_atomunit.get_value(label_str()) == music_str
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
     assert ball_atomunit.get_value(begin_str()) == music_begin
     assert ball_atomunit.get_value(close_str()) == music_close
@@ -465,19 +463,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    music_text = "music"
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    music_str = "music"
     before_music_begin = 34
     before_music_close = 78
     before_music_mass = 55
     before_music_pledge = True
-    music_road = before_sue_bud.make_l1_road(music_text)
+    music_road = before_sue_bud.make_l1_road(music_str)
     before_sue_bud.set_l1_idea(
         ideaunit_shop(
-            music_text,
+            music_str,
             begin=before_music_begin,
             close=before_music_close,
             mass=before_music_mass,
@@ -507,13 +505,13 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
 
     x_keylist = [
         atom_update(),
-        bud_ideaunit_text(),
+        bud_ideaunit_str(),
         after_sue_bud._real_id,
-        music_text,
+        music_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._real_id
-    assert ball_atomunit.get_value(label_str()) == music_text
+    assert ball_atomunit.get_value(label_str()) == music_str
     assert ball_atomunit.get_value(begin_str()) == after_music_begin
     assert ball_atomunit.get_value(close_str()) == after_music_close
     assert ball_atomunit.get_value(mass_str()) == after_music_mass
@@ -524,39 +522,39 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_au = budunit_shop(sue_text)
-    xio_text = "Xio"
-    zia_text = "Zia"
-    bob_text = "Bob"
-    before_sue_au.add_acctunit(xio_text)
-    before_sue_au.add_acctunit(zia_text)
-    before_sue_au.add_acctunit(bob_text)
-    xio_acctunit = before_sue_au.get_acct(xio_text)
-    zia_acctunit = before_sue_au.get_acct(zia_text)
-    bob_acctunit = before_sue_au.get_acct(bob_text)
-    run_text = ";runners"
-    xio_acctunit.add_membership(run_text)
-    zia_acctunit.add_membership(run_text)
-    fly_text = ";flyers"
-    xio_acctunit.add_membership(fly_text)
-    zia_acctunit.add_membership(fly_text)
-    bob_acctunit.add_membership(fly_text)
-    sports_text = "sports"
-    sports_road = before_sue_au.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_au.make_road(sports_road, ball_text)
-    disc_text = "Ultimate Disc"
-    disc_road = before_sue_au.make_road(sports_road, disc_text)
-    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
-    before_sue_au.set_idea(ideaunit_shop(disc_text), sports_road)
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_text))
-    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(run_text))
-    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_text))
+    sue_str = "Sue"
+    before_sue_au = budunit_shop(sue_str)
+    xio_str = "Xio"
+    zia_str = "Zia"
+    bob_str = "Bob"
+    before_sue_au.add_acctunit(xio_str)
+    before_sue_au.add_acctunit(zia_str)
+    before_sue_au.add_acctunit(bob_str)
+    xio_acctunit = before_sue_au.get_acct(xio_str)
+    zia_acctunit = before_sue_au.get_acct(zia_str)
+    bob_acctunit = before_sue_au.get_acct(bob_str)
+    run_str = ";runners"
+    xio_acctunit.add_membership(run_str)
+    zia_acctunit.add_membership(run_str)
+    fly_str = ";flyers"
+    xio_acctunit.add_membership(fly_str)
+    zia_acctunit.add_membership(fly_str)
+    bob_acctunit.add_membership(fly_str)
+    sports_str = "sports"
+    sports_road = before_sue_au.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_au.make_road(sports_road, ball_str)
+    disc_str = "Ultimate Disc"
+    disc_road = before_sue_au.make_road(sports_road, disc_str)
+    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_au.set_idea(ideaunit_shop(disc_str), sports_road)
+    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_str))
+    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_str))
 
     after_sue_bud = copy_deepcopy(before_sue_au)
-    after_sue_bud.edit_idea_attr(disc_road, awardlink_del=run_text)
+    after_sue_bud.edit_idea_attr(disc_road, awardlink_del=run_str)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -565,49 +563,49 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     # THEN
     print(f"{print_atomunit_keys(sue_changeunit)=}")
 
-    x_keylist = [atom_delete(), bud_idea_awardlink_text(), disc_road, run_text]
+    x_keylist = [atom_delete(), bud_idea_awardlink_str(), disc_road, run_str]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value(group_id_str()) == run_text
+    assert run_atomunit.get_value(group_id_str()) == run_str
 
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_au = budunit_shop(sue_text)
-    xio_text = "Xio"
-    zia_text = "Zia"
-    bob_text = "Bob"
-    before_sue_au.add_acctunit(xio_text)
-    before_sue_au.add_acctunit(zia_text)
-    before_sue_au.add_acctunit(bob_text)
-    xio_acctunit = before_sue_au.get_acct(xio_text)
-    zia_acctunit = before_sue_au.get_acct(zia_text)
-    bob_acctunit = before_sue_au.get_acct(bob_text)
-    run_text = ";runners"
-    xio_acctunit.add_membership(run_text)
-    zia_acctunit.add_membership(run_text)
-    fly_text = ";flyers"
-    xio_acctunit.add_membership(fly_text)
-    zia_acctunit.add_membership(fly_text)
-    bob_acctunit.add_membership(fly_text)
-    sports_text = "sports"
-    sports_road = before_sue_au.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_au.make_road(sports_road, ball_text)
-    disc_text = "Ultimate Disc"
-    disc_road = before_sue_au.make_road(sports_road, disc_text)
-    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
-    before_sue_au.set_idea(ideaunit_shop(disc_text), sports_road)
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
-    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_text))
+    sue_str = "Sue"
+    before_sue_au = budunit_shop(sue_str)
+    xio_str = "Xio"
+    zia_str = "Zia"
+    bob_str = "Bob"
+    before_sue_au.add_acctunit(xio_str)
+    before_sue_au.add_acctunit(zia_str)
+    before_sue_au.add_acctunit(bob_str)
+    xio_acctunit = before_sue_au.get_acct(xio_str)
+    zia_acctunit = before_sue_au.get_acct(zia_str)
+    bob_acctunit = before_sue_au.get_acct(bob_str)
+    run_str = ";runners"
+    xio_acctunit.add_membership(run_str)
+    zia_acctunit.add_membership(run_str)
+    fly_str = ";flyers"
+    xio_acctunit.add_membership(fly_str)
+    zia_acctunit.add_membership(fly_str)
+    bob_acctunit.add_membership(fly_str)
+    sports_str = "sports"
+    sports_road = before_sue_au.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_au.make_road(sports_road, ball_str)
+    disc_str = "Ultimate Disc"
+    disc_road = before_sue_au.make_road(sports_road, disc_str)
+    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_au.set_idea(ideaunit_shop(disc_str), sports_road)
+    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_str))
     after_sue_au = copy_deepcopy(before_sue_au)
-    after_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_text))
+    after_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_str))
     after_run_give_force = 44
     after_run_take_force = 66
-    x_awardlink = awardlink_shop(run_text, after_run_give_force, after_run_take_force)
+    x_awardlink = awardlink_shop(run_str, after_run_give_force, after_run_take_force)
     after_sue_au.edit_idea_attr(disc_road, awardlink=x_awardlink)
 
     # WHEN
@@ -617,12 +615,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     # THEN
     print(f"{print_atomunit_keys(sue_changeunit)=}")
 
-    x_keylist = [atom_insert(), bud_idea_awardlink_text(), disc_road, run_text]
+    x_keylist = [atom_insert(), bud_idea_awardlink_str(), disc_road, run_str]
     run_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value(group_id_str()) == run_text
+    assert run_atomunit.get_value(group_id_str()) == run_str
     assert run_atomunit.get_value("road") == disc_road
-    assert run_atomunit.get_value(group_id_str()) == run_text
+    assert run_atomunit.get_value(group_id_str()) == run_str
     assert run_atomunit.get_value("give_force") == after_run_give_force
     assert run_atomunit.get_value("take_force") == after_run_take_force
 
@@ -631,22 +629,22 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_au = budunit_shop(sue_text)
-    xio_text = "Xio"
-    zia_text = "Zia"
-    before_sue_au.add_acctunit(xio_text)
-    before_sue_au.add_acctunit(zia_text)
-    xio_acctunit = before_sue_au.get_acct(xio_text)
-    run_text = ";runners"
-    xio_acctunit.add_membership(run_text)
-    sports_text = "sports"
-    sports_road = before_sue_au.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_au.make_road(sports_road, ball_text)
-    before_sue_au.set_idea(ideaunit_shop(ball_text), sports_road)
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_text))
-    run_awardlink = before_sue_au.get_idea_obj(ball_road).awardlinks.get(run_text)
+    sue_str = "Sue"
+    before_sue_au = budunit_shop(sue_str)
+    xio_str = "Xio"
+    zia_str = "Zia"
+    before_sue_au.add_acctunit(xio_str)
+    before_sue_au.add_acctunit(zia_str)
+    xio_acctunit = before_sue_au.get_acct(xio_str)
+    run_str = ";runners"
+    xio_acctunit.add_membership(run_str)
+    sports_str = "sports"
+    sports_road = before_sue_au.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_au.make_road(sports_road, ball_str)
+    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_str))
+    run_awardlink = before_sue_au.get_idea_obj(ball_road).awardlinks.get(run_str)
 
     after_sue_bud = copy_deepcopy(before_sue_au)
     after_give_force = 55
@@ -654,7 +652,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     after_sue_bud.edit_idea_attr(
         ball_road,
         awardlink=awardlink_shop(
-            group_id=run_text,
+            group_id=run_str,
             give_force=after_give_force,
             take_force=after_take_force,
         ),
@@ -666,10 +664,10 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
     # THEN
     print(f"{print_atomunit_keys(sue_changeunit)=}")
 
-    x_keylist = [atom_update(), bud_idea_awardlink_text(), ball_road, run_text]
+    x_keylist = [atom_update(), bud_idea_awardlink_str(), ball_road, run_str]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value(group_id_str()) == run_text
+    assert ball_atomunit.get_value(group_id_str()) == run_str
     assert ball_atomunit.get_value("give_force") == after_give_force
     assert ball_atomunit.get_value("take_force") == after_take_force
     assert get_atomunit_total_count(sue_changeunit) == 1
@@ -677,22 +675,22 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    bend_text = "bendable"
-    bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
-    broken_text = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    bend_str = "bendable"
+    bend_road = before_sue_bud.make_road(knee_road, bend_str)
+    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
+    broken_str = "broke cartilage"
+    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
     before_fopen = 11
     before_fnigh = 22
     before_fact = factunit_shop(knee_road, bend_road, before_fopen, before_fnigh)
@@ -711,7 +709,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_u
     # THEN
     print(f"{print_atomunit_keys(sue_changeunit)=}")
 
-    x_keylist = [atom_update(), bud_idea_factunit_text(), ball_road, knee_road]
+    x_keylist = [atom_update(), bud_idea_factunit_str(), ball_road, knee_road]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
@@ -723,19 +721,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_u
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    broken_text = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    broken_str = "broke cartilage"
+    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_fopen = 55
@@ -749,7 +747,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_i
 
     # THEN
     print(f"{print_atomunit_keys(sue_changeunit)=}")
-    x_keylist = [atom_insert(), bud_idea_factunit_text(), ball_road, knee_road]
+    x_keylist = [atom_insert(), bud_idea_factunit_str(), ball_road, knee_road]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
@@ -761,19 +759,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_i
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    broken_text = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    broken_str = "broke cartilage"
+    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     before_broken_open = 55
@@ -792,7 +790,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_d
 
     # THEN
     print(f"{print_atomunit_keys(sue_changeunit)=}")
-    x_keylist = [atom_delete(), bud_idea_factunit_text(), ball_road, knee_road]
+    x_keylist = [atom_delete(), bud_idea_factunit_str(), ball_road, knee_road]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
@@ -803,22 +801,22 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_d
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    broken_text = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
-    bend_text = "bend"
-    bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    broken_str = "broke cartilage"
+    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    bend_str = "bend"
+    bend_road = before_sue_bud.make_road(knee_road, bend_str)
+    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
     before_sue_bud.edit_idea_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
@@ -844,7 +842,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_reason_premiseunit_text(),
+        bud_idea_reason_premiseunit_str(),
         ball_road,
         knee_road,
         broken_road,
@@ -861,22 +859,22 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    broken_text = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
-    bend_text = "bend"
-    bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    broken_str = "broke cartilage"
+    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    bend_str = "bend"
+    bend_road = before_sue_bud.make_road(knee_road, bend_str)
+    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
     before_sue_bud.edit_idea_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
@@ -906,7 +904,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_reason_premiseunit_text(),
+        bud_idea_reason_premiseunit_str(),
         ball_road,
         knee_road,
         broken_road,
@@ -920,22 +918,22 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    broken_text = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_text)
-    before_sue_bud.set_idea(ideaunit_shop(broken_text), knee_road)
-    bend_text = "bend"
-    bend_road = before_sue_bud.make_road(knee_road, bend_text)
-    before_sue_bud.set_idea(ideaunit_shop(bend_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    broken_str = "broke cartilage"
+    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    bend_str = "bend"
+    bend_road = before_sue_bud.make_road(knee_road, bend_str)
+    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
     before_sue_bud.edit_idea_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
@@ -972,7 +970,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_update(),
-        bud_idea_reason_premiseunit_text(),
+        bud_idea_reason_premiseunit_str(),
         ball_road,
         knee_road,
         broken_road,
@@ -989,19 +987,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_pre
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    medical_text = "get medical attention"
-    medical_road = before_sue_bud.make_road(knee_road, medical_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.set_idea(ideaunit_shop(medical_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    medical_str = "get medical attention"
+    medical_road = before_sue_bud.make_road(knee_road, medical_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_medical_base_idea_active_requisite = False
@@ -1018,7 +1016,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_reasonunit_text(),
+        bud_idea_reasonunit_str(),
         ball_road,
         medical_road,
     ]
@@ -1034,19 +1032,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_update():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    medical_text = "get medical attention"
-    medical_road = before_sue_bud.make_road(knee_road, medical_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.set_idea(ideaunit_shop(medical_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    medical_str = "get medical attention"
+    medical_road = before_sue_bud.make_road(knee_road, medical_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_road)
     before_medical_base_idea_active_requisite = True
     before_sue_bud.edit_idea_attr(
         road=ball_road,
@@ -1070,7 +1068,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_update(),
-        bud_idea_reasonunit_text(),
+        bud_idea_reasonunit_str(),
         ball_road,
         medical_road,
     ]
@@ -1086,19 +1084,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
-    knee_text = "knee"
-    knee_road = before_sue_bud.make_l1_road(knee_text)
-    medical_text = "get medical attention"
-    medical_road = before_sue_bud.make_road(knee_road, medical_text)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_text))
-    before_sue_bud.set_idea(ideaunit_shop(medical_text), knee_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    knee_str = "knee"
+    knee_road = before_sue_bud.make_l1_road(knee_str)
+    medical_str = "get medical attention"
+    medical_road = before_sue_bud.make_road(knee_road, medical_str)
+    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_road)
     before_medical_base_idea_active_requisite = True
     before_sue_bud.edit_idea_attr(
         road=ball_road,
@@ -1118,7 +1116,7 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_reasonunit_text(),
+        bud_idea_reasonunit_str(),
         ball_road,
         medical_road,
     ]
@@ -1130,19 +1128,19 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_insert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.teamunit.set_teamlink(xio_text)
+    after_ball_ideaunit.teamunit.set_teamlink(xio_str)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1152,33 +1150,33 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_i
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_teamlink_text(),
+        bud_idea_teamlink_str(),
         ball_road,
-        xio_text,
+        xio_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value(group_id_str()) == xio_text
+    assert ball_atomunit.get_value(group_id_str()) == xio_str
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_delete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit.teamunit.set_teamlink(xio_text)
+    before_ball_ideaunit.teamunit.set_teamlink(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.teamunit.del_teamlink(xio_text)
+    after_ball_ideaunit.teamunit.del_teamlink(xio_str)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1188,31 +1186,31 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_d
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_teamlink_text(),
+        bud_idea_teamlink_str(),
         ball_road,
-        xio_text,
+        xio_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value(group_id_str()) == xio_text
+    assert ball_atomunit.get_value(group_id_str()) == xio_str
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_insert_IdeaUnitUpdate():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.healerlink.set_healer_id(xio_text)
+    after_ball_ideaunit.healerlink.set_healer_id(xio_str)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1222,31 +1220,31 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerlink_text(),
+        bud_idea_healerlink_str(),
         ball_road,
-        xio_text,
+        xio_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_text
+    assert ball_atomunit.get_value(healer_id_str()) == xio_str
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_insert_IdeaUnitInsert():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    after_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.healerlink.set_healer_id(xio_text)
+    after_ball_ideaunit.healerlink.set_healer_id(xio_str)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1256,34 +1254,34 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerlink_text(),
+        bud_idea_healerlink_str(),
         ball_road,
-        xio_text,
+        xio_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist, True)
     assert ball_atomunit
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_text
+    assert ball_atomunit.get_value(healer_id_str()) == xio_str
     assert get_atomunit_total_count(sue_changeunit) == 3
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_delete_IdeaUnitUpdate():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit.healerlink.set_healer_id(xio_text)
+    before_ball_ideaunit.healerlink.set_healer_id(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.healerlink.del_healer_id(xio_text)
+    after_ball_ideaunit.healerlink.del_healer_id(xio_str)
 
     # WHEN
     sue_changeunit = changeunit_shop()
@@ -1293,32 +1291,32 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerlink_text(),
+        bud_idea_healerlink_str(),
         ball_road,
-        xio_text,
+        xio_str,
     ]
     ball_atomunit = get_nested_value(
         sue_changeunit.atomunits, x_keylist, if_missing_return_None=True
     )
     assert ball_atomunit
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_text
+    assert ball_atomunit.get_value(healer_id_str()) == xio_str
     assert get_atomunit_total_count(sue_changeunit) == 1
 
 
 def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_delete_IdeaUnitDelete():
     # ESTABLISH
-    sue_text = "Sue"
-    before_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    before_sue_bud.add_acctunit(xio_text)
-    sports_text = "sports"
-    sports_road = before_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = before_sue_bud.make_road(sports_road, ball_text)
-    before_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    sue_str = "Sue"
+    before_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    before_sue_bud.add_acctunit(xio_str)
+    sports_str = "sports"
+    sports_road = before_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = before_sue_bud.make_road(sports_road, ball_str)
+    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit.healerlink.set_healer_id(xio_text)
+    before_ball_ideaunit.healerlink.set_healer_id(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.del_idea_obj(ball_road)
@@ -1331,36 +1329,36 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink
     print(f"{print_atomunit_keys(sue_changeunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerlink_text(),
+        bud_idea_healerlink_str(),
         ball_road,
-        xio_text,
+        xio_str,
     ]
     ball_atomunit = get_nested_value(
         sue_changeunit.atomunits, x_keylist, if_missing_return_None=True
     )
     assert ball_atomunit
     assert ball_atomunit.get_value("road") == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_text
+    assert ball_atomunit.get_value(healer_id_str()) == xio_str
     assert get_atomunit_total_count(sue_changeunit) == 2
 
 
 def test_ChangeUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     # ESTABLISH
-    sue_text = "Sue"
+    sue_str = "Sue"
 
-    after_sue_bud = budunit_shop(sue_text)
-    xio_text = "Xio"
-    temp_xio_acctunit = acctunit_shop(xio_text)
+    after_sue_bud = budunit_shop(sue_str)
+    xio_str = "Xio"
+    temp_xio_acctunit = acctunit_shop(xio_str)
     after_sue_bud.set_acctunit(temp_xio_acctunit, auto_set_membership=False)
-    sports_text = "sports"
-    sports_road = after_sue_bud.make_l1_road(sports_text)
-    ball_text = "basketball"
-    ball_road = after_sue_bud.make_road(sports_road, ball_text)
-    after_sue_bud.set_idea(ideaunit_shop(ball_text), sports_road)
+    sports_str = "sports"
+    sports_road = after_sue_bud.make_l1_road(sports_str)
+    ball_str = "basketball"
+    ball_road = after_sue_bud.make_road(sports_road, ball_str)
+    after_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.teamunit.set_teamlink(xio_text)
+    after_ball_ideaunit.teamunit.set_teamlink(xio_str)
 
-    before_sue_bud = budunit_shop(sue_text)
+    before_sue_bud = budunit_shop(sue_str)
     sue1_changeunit = changeunit_shop()
     sue1_changeunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
     print(f"{sue1_changeunit.get_ordered_atomunits()}")

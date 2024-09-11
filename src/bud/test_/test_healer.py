@@ -3,8 +3,8 @@ from src.bud.healer import HealerLink, healerlink_shop, healerlink_get_from_dict
 
 def test_HealerLink_exists():
     # ESTABLISH
-    run_text = ";runners"
-    run_healer_ids = {run_text}
+    run_str = ";runners"
+    run_healer_ids = {run_str}
 
     # WHEN
     x_healerlink = HealerLink(_healer_ids=run_healer_ids)
@@ -16,8 +16,8 @@ def test_HealerLink_exists():
 
 def test_healerlink_shop_ReturnsCorrectWithCorrectAttributes_v1():
     # ESTABLISH
-    run_text = ";runners"
-    run_healer_ids = {run_text}
+    run_str = ";runners"
+    run_healer_ids = {run_str}
 
     # WHEN
     x_healerlink = healerlink_shop(_healer_ids=run_healer_ids)
@@ -59,8 +59,8 @@ def test_HealerLink_set_healer_id_CorrectlySets_healer_ids_v1():
     assert len(x_healerlink._healer_ids) == 0
 
     # WHEN
-    yao_text = "Yao"
-    x_healerlink.set_healer_id(x_healer_id=yao_text)
+    yao_str = "Yao"
+    x_healerlink.set_healer_id(x_healer_id=yao_str)
 
     # THEN
     assert len(x_healerlink._healer_ids) == 1
@@ -69,14 +69,14 @@ def test_HealerLink_set_healer_id_CorrectlySets_healer_ids_v1():
 def test_HealerLink_del_healer_id_CorrectlyDeletes_healer_ids_v1():
     # ESTABLISH
     x_healerlink = healerlink_shop()
-    yao_text = "Yao"
-    sue_text = "Sue"
-    x_healerlink.set_healer_id(x_healer_id=yao_text)
-    x_healerlink.set_healer_id(x_healer_id=sue_text)
+    yao_str = "Yao"
+    sue_str = "Sue"
+    x_healerlink.set_healer_id(x_healer_id=yao_str)
+    x_healerlink.set_healer_id(x_healer_id=sue_str)
     assert len(x_healerlink._healer_ids) == 2
 
     # WHEN
-    x_healerlink.del_healer_id(x_healer_id=sue_text)
+    x_healerlink.del_healer_id(x_healer_id=sue_str)
 
     # THEN
     assert len(x_healerlink._healer_ids) == 1
@@ -85,17 +85,17 @@ def test_HealerLink_del_healer_id_CorrectlyDeletes_healer_ids_v1():
 def test_HealerLink_healer_id_exists_ReturnsCorrectObj():
     # ESTABLISH
     x_healerlink = healerlink_shop()
-    yao_text = "Yao"
-    sue_text = "Sue"
-    assert x_healerlink.healer_id_exists(yao_text) is False
-    assert x_healerlink.healer_id_exists(sue_text) is False
+    yao_str = "Yao"
+    sue_str = "Sue"
+    assert x_healerlink.healer_id_exists(yao_str) is False
+    assert x_healerlink.healer_id_exists(sue_str) is False
 
     # WHEN
-    x_healerlink.set_healer_id(x_healer_id=yao_text)
+    x_healerlink.set_healer_id(x_healer_id=yao_str)
 
     # THEN
-    assert x_healerlink.healer_id_exists(yao_text)
-    assert x_healerlink.healer_id_exists(sue_text) is False
+    assert x_healerlink.healer_id_exists(yao_str)
+    assert x_healerlink.healer_id_exists(sue_str) is False
 
 
 def test_HealerLink_any_healer_id_exists_ReturnsCorrectObj():
@@ -104,21 +104,21 @@ def test_HealerLink_any_healer_id_exists_ReturnsCorrectObj():
     assert x_healerlink.any_healer_id_exists() is False
 
     # WHEN / THEN
-    sue_text = "Sue"
-    x_healerlink.set_healer_id(x_healer_id=sue_text)
+    sue_str = "Sue"
+    x_healerlink.set_healer_id(x_healer_id=sue_str)
     assert x_healerlink.any_healer_id_exists()
 
     # WHEN / THEN
-    yao_text = "Yao"
-    x_healerlink.set_healer_id(x_healer_id=yao_text)
+    yao_str = "Yao"
+    x_healerlink.set_healer_id(x_healer_id=yao_str)
     assert x_healerlink.any_healer_id_exists()
 
     # WHEN / THEN
-    x_healerlink.del_healer_id(x_healer_id=yao_text)
+    x_healerlink.del_healer_id(x_healer_id=yao_str)
     assert x_healerlink.any_healer_id_exists()
 
     # WHEN / THEN
-    x_healerlink.del_healer_id(x_healer_id=sue_text)
+    x_healerlink.del_healer_id(x_healer_id=sue_str)
     assert x_healerlink.any_healer_id_exists() is False
 
 
@@ -130,11 +130,11 @@ def test_healerlink_get_from_dict_ReturnsCorrectObj():
     assert healerlink_get_from_dict(empty_dict) == healerlink_shop()
 
     # WHEN / THEN
-    sue_text = "Sue"
-    yao_text = "Yao"
+    sue_str = "Sue"
+    yao_str = "Yao"
     static_healerlink = healerlink_shop()
-    static_healerlink.set_healer_id(x_healer_id=sue_text)
-    static_healerlink.set_healer_id(x_healer_id=yao_text)
+    static_healerlink.set_healer_id(x_healer_id=sue_str)
+    static_healerlink.set_healer_id(x_healer_id=yao_str)
 
-    sue_dict = {"healerlink_healer_ids": [sue_text, yao_text]}
+    sue_dict = {"healerlink_healer_ids": [sue_str, yao_str]}
     assert healerlink_get_from_dict(sue_dict) == static_healerlink

@@ -12,16 +12,16 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_exists,
     bud_idea_healerlink_exists,
     bud_idea_factunit_exists,
-    budunit_text,
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_teamlink_text,
-    bud_idea_healerlink_text,
-    bud_idea_factunit_text,
+    budunit_str,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
     bud_attr_exists,
 )
 
@@ -34,16 +34,16 @@ def test_budunit_exists_ReturnsObj():
 
 def test_bud_acctunit_exists_ReturnsObj():
     # ESTABLISH
-    yao_text = "Yao"
+    yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
-    required_args = {"acct_id": yao_text}
+    required_args = {"acct_id": yao_str}
 
     # WHEN / THEN
     assert not bud_acctunit_exists(None, {})
     assert not bud_acctunit_exists(sue_bud, required_args)
 
     # WHEN
-    sue_bud.add_acctunit(yao_text)
+    sue_bud.add_acctunit(yao_str)
 
     # THEN
     assert bud_acctunit_exists(sue_bud, required_args)
@@ -51,29 +51,29 @@ def test_bud_acctunit_exists_ReturnsObj():
 
 def test_bud_acct_membership_exists_ReturnsObj():
     # ESTABLISH
-    yao_text = "Yao"
-    swim_text = ";swim"
+    yao_str = "Yao"
+    swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    required_args = {"acct_id": yao_text, "group_id": swim_text}
+    required_args = {"acct_id": yao_str, "group_id": swim_str}
 
     # WHEN / THEN
     assert not bud_acct_membership_exists(None, {})
     assert not bud_acct_membership_exists(sue_bud, required_args)
 
     # WHEN
-    sue_bud.add_acctunit(yao_text)
+    sue_bud.add_acctunit(yao_str)
     # THEN
     assert not bud_acct_membership_exists(sue_bud, required_args)
 
     # WHEN
-    yao_idea = sue_bud.get_acct(yao_text)
+    yao_idea = sue_bud.get_acct(yao_str)
     yao_idea.add_membership(";run")
     # THEN
     assert not bud_acct_membership_exists(sue_bud, required_args)
 
     # WHEN
-    yao_idea = sue_bud.get_acct(yao_text)
-    yao_idea.add_membership(swim_text)
+    yao_idea = sue_bud.get_acct(yao_str)
+    yao_idea.add_membership(swim_str)
     # THEN
     assert bud_acct_membership_exists(sue_bud, required_args)
 
@@ -81,10 +81,10 @@ def test_bud_acct_membership_exists_ReturnsObj():
 def test_bud_ideaunit_exists_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     sweep_road = sue_bud.make_road(clean_road, "sweep")
     root_road = sue_bud._real_id
     root_required_args = {"road": root_road}
@@ -122,16 +122,16 @@ def test_bud_ideaunit_exists_ReturnsObj():
 def test_bud_idea_awardlink_exists_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    swim_text = "Swim"
+    swim_str = "Swim"
     root_road = sue_bud._real_id
-    root_required_args = {"road": root_road, "group_id": swim_text}
-    casa_required_args = {"road": casa_road, "group_id": swim_text}
-    clean_required_args = {"road": clean_road, "group_id": swim_text}
+    root_required_args = {"road": root_road, "group_id": swim_str}
+    casa_required_args = {"road": casa_road, "group_id": swim_str}
+    clean_required_args = {"road": clean_road, "group_id": swim_str}
 
     # WHEN / THEN
     assert not bud_idea_awardlink_exists(None, {})
@@ -141,7 +141,7 @@ def test_bud_idea_awardlink_exists_ReturnsObj():
     assert not bud_idea_awardlink_exists(sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot.set_awardlink(awardlink_shop(swim_text))
+    sue_bud._idearoot.set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert not bud_idea_awardlink_exists(sue_bud, {})
@@ -152,13 +152,13 @@ def test_bud_idea_awardlink_exists_ReturnsObj():
 
 def test_bud_idea_reasonunit_exists_ReturnsObj():
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(week_text)
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(week_str)
     root_required_args = {"road": root_road, "base": week_road}
     casa_required_args = {"road": casa_road, "base": week_road}
     clean_required_args = {"road": clean_road, "base": week_road}
@@ -183,13 +183,13 @@ def test_bud_idea_reasonunit_exists_ReturnsObj():
 
 def test_bud_idea_reason_premiseunit_exists_ReturnsObj():
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(week_text)
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
     root_required_args = {"road": root_road, "base": week_road, "need": thur_road}
     casa_required_args = {"road": casa_road, "base": week_road, "need": thur_road}
@@ -226,15 +226,15 @@ def test_bud_idea_reason_premiseunit_exists_ReturnsObj():
 def test_bud_idea_teamlink_exists_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    swim_text = "Swim"
-    root_required_args = {"road": root_road, "group_id": swim_text}
-    casa_required_args = {"road": casa_road, "group_id": swim_text}
-    clean_required_args = {"road": clean_road, "group_id": swim_text}
+    swim_str = "Swim"
+    root_required_args = {"road": root_road, "group_id": swim_str}
+    casa_required_args = {"road": casa_road, "group_id": swim_str}
+    clean_required_args = {"road": clean_road, "group_id": swim_str}
 
     # WHEN / THEN
     assert not bud_idea_teamlink_exists(None, {})
@@ -244,7 +244,7 @@ def test_bud_idea_teamlink_exists_ReturnsObj():
     assert not bud_idea_teamlink_exists(sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot.teamunit.set_teamlink(swim_text)
+    sue_bud._idearoot.teamunit.set_teamlink(swim_str)
 
     # THEN
     assert not bud_idea_teamlink_exists(sue_bud, {})
@@ -256,15 +256,15 @@ def test_bud_idea_teamlink_exists_ReturnsObj():
 def test_bud_idea_healerlink_exists_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    swim_text = "Swim"
-    root_required_args = {"road": root_road, "healer_id": swim_text}
-    casa_required_args = {"road": casa_road, "healer_id": swim_text}
-    clean_required_args = {"road": clean_road, "healer_id": swim_text}
+    swim_str = "Swim"
+    root_required_args = {"road": root_road, "healer_id": swim_str}
+    casa_required_args = {"road": casa_road, "healer_id": swim_str}
+    clean_required_args = {"road": clean_road, "healer_id": swim_str}
 
     # WHEN / THEN
     assert not bud_idea_healerlink_exists(None, {})
@@ -274,7 +274,7 @@ def test_bud_idea_healerlink_exists_ReturnsObj():
     assert not bud_idea_healerlink_exists(sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot.healerlink.set_healer_id(swim_text)
+    sue_bud._idearoot.healerlink.set_healer_id(swim_str)
 
     # THEN
     assert not bud_idea_healerlink_exists(sue_bud, {})
@@ -285,13 +285,13 @@ def test_bud_idea_healerlink_exists_ReturnsObj():
 
 def test_bud_idea_factunit_exists_ReturnsObj():
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(week_text)
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(week_str)
     root_required_args = {"road": root_road, "base": week_road}
     casa_required_args = {"road": casa_road, "base": week_road}
     clean_required_args = {"road": clean_road, "base": week_road}
@@ -316,53 +316,53 @@ def test_bud_idea_factunit_exists_ReturnsObj():
 
 def test_bud_attr_exists_ReturnsObj_budunit():
     # ESTABLISH / WHEN / THEN
-    assert not bud_attr_exists(budunit_text(), None, {})
-    assert bud_attr_exists(budunit_text(), budunit_shop("Sue"), {})
+    assert not bud_attr_exists(budunit_str(), None, {})
+    assert bud_attr_exists(budunit_str(), budunit_shop("Sue"), {})
 
 
 def test_bud_attr_exists_ReturnsObj_bud_acctunit():
     # ESTABLISH
-    yao_text = "Yao"
+    yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
-    x_required_args = {"acct_id": yao_text}
+    x_required_args = {"acct_id": yao_str}
 
     # WHEN / THEN
-    assert not bud_attr_exists(bud_acctunit_text(), None, {})
-    assert not bud_attr_exists(bud_acctunit_text(), sue_bud, x_required_args)
+    assert not bud_attr_exists(bud_acctunit_str(), None, {})
+    assert not bud_attr_exists(bud_acctunit_str(), sue_bud, x_required_args)
 
     # WHEN
-    sue_bud.add_acctunit(yao_text)
+    sue_bud.add_acctunit(yao_str)
 
     # THEN
-    assert bud_attr_exists(bud_acctunit_text(), sue_bud, x_required_args)
+    assert bud_attr_exists(bud_acctunit_str(), sue_bud, x_required_args)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_acct_membership():
     # ESTABLISH
-    yao_text = "Yao"
-    swim_text = ";swim"
+    yao_str = "Yao"
+    swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    x_required_args = {"acct_id": yao_text, "group_id": swim_text}
-    x_category = bud_acct_membership_text()
+    x_required_args = {"acct_id": yao_str, "group_id": swim_str}
+    x_category = bud_acct_membership_str()
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
     assert not bud_attr_exists(x_category, sue_bud, x_required_args)
 
     # WHEN
-    sue_bud.add_acctunit(yao_text)
+    sue_bud.add_acctunit(yao_str)
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, x_required_args)
 
     # WHEN
-    yao_idea = sue_bud.get_acct(yao_text)
+    yao_idea = sue_bud.get_acct(yao_str)
     yao_idea.add_membership(";run")
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, x_required_args)
 
     # WHEN
-    yao_idea = sue_bud.get_acct(yao_text)
-    yao_idea.add_membership(swim_text)
+    yao_idea = sue_bud.get_acct(yao_str)
+    yao_idea.add_membership(swim_str)
     # THEN
     assert bud_attr_exists(x_category, sue_bud, x_required_args)
 
@@ -370,17 +370,17 @@ def test_bud_attr_exists_ReturnsObj_bud_acct_membership():
 def test_bud_attr_exists_ReturnsObj_bud_ideaunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     sweep_road = sue_bud.make_road(clean_road, "sweep")
     x_parent_road = sue_bud._real_id
     root_required_args = {"road": x_parent_road}
     casa_required_args = {"road": casa_road}
     clean_required_args = {"road": clean_road}
     sweep_required_args = {"road": sweep_road}
-    x_category = bud_ideaunit_text()
+    x_category = bud_ideaunit_str()
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -412,16 +412,16 @@ def test_bud_attr_exists_ReturnsObj_bud_ideaunit():
 def test_bud_attr_exists_ReturnsObj_bud_idea_awardlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    swim_text = "Swim"
-    x_category = bud_idea_awardlink_text()
-    root_required_args = {"road": root_road, "group_id": swim_text}
-    casa_required_args = {"road": casa_road, "group_id": swim_text}
-    clean_required_args = {"road": clean_road, "group_id": swim_text}
+    swim_str = "Swim"
+    x_category = bud_idea_awardlink_str()
+    root_required_args = {"road": root_road, "group_id": swim_str}
+    casa_required_args = {"road": casa_road, "group_id": swim_str}
+    clean_required_args = {"road": clean_road, "group_id": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -431,7 +431,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_awardlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot.set_awardlink(awardlink_shop(swim_text))
+    sue_bud._idearoot.set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})
@@ -442,14 +442,14 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_awardlink():
 
 def test_bud_attr_exists_ReturnsObj_bud_idea_reasonunit():
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(week_text)
-    x_category = bud_idea_reasonunit_text()
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(week_str)
+    x_category = bud_idea_reasonunit_str()
     root_required_args = {"road": root_road, "base": week_road}
     casa_required_args = {"road": casa_road, "base": week_road}
     clean_required_args = {"road": clean_road, "base": week_road}
@@ -473,15 +473,15 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reasonunit():
 
 def test_bud_attr_exists_ReturnsObj_bud_idea_reason_premiseunit():
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(week_text)
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
-    x_category = bud_idea_reason_premiseunit_text()
+    x_category = bud_idea_reason_premiseunit_str()
     root_required_args = {"road": root_road, "base": week_road, "need": thur_road}
     casa_required_args = {"road": casa_road, "base": week_road, "need": thur_road}
     clean_required_args = {"road": clean_road, "base": week_road, "need": thur_road}
@@ -515,16 +515,16 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reason_premiseunit():
 def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    swim_text = "Swim"
-    x_category = bud_idea_teamlink_text()
-    root_required_args = {"road": root_road, "group_id": swim_text}
-    casa_required_args = {"road": casa_road, "group_id": swim_text}
-    clean_required_args = {"road": clean_road, "group_id": swim_text}
+    swim_str = "Swim"
+    x_category = bud_idea_teamlink_str()
+    root_required_args = {"road": root_road, "group_id": swim_str}
+    casa_required_args = {"road": casa_road, "group_id": swim_str}
+    clean_required_args = {"road": clean_road, "group_id": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -534,7 +534,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot.teamunit.set_teamlink(swim_text)
+    sue_bud._idearoot.teamunit.set_teamlink(swim_str)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})
@@ -546,16 +546,16 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
 def test_bud_attr_exists_ReturnsObj_bud_idea_healerlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    swim_text = "Swim"
-    x_category = bud_idea_healerlink_text()
-    root_required_args = {"road": root_road, "healer_id": swim_text}
-    casa_required_args = {"road": casa_road, "healer_id": swim_text}
-    clean_required_args = {"road": clean_road, "healer_id": swim_text}
+    swim_str = "Swim"
+    x_category = bud_idea_healerlink_str()
+    root_required_args = {"road": root_road, "healer_id": swim_str}
+    casa_required_args = {"road": casa_road, "healer_id": swim_str}
+    clean_required_args = {"road": clean_road, "healer_id": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -565,7 +565,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_healerlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_required_args)
 
     # WHEN
-    sue_bud._idearoot.healerlink.set_healer_id(swim_text)
+    sue_bud._idearoot.healerlink.set_healer_id(swim_str)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})
@@ -576,14 +576,14 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_healerlink():
 
 def test_bud_attr_exists_ReturnsObj_bud_idea_factunit():
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._real_id
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(week_text)
-    x_category = bud_idea_factunit_text()
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(week_str)
+    x_category = bud_idea_factunit_str()
     root_required_args = {"road": root_road, "base": week_road}
     casa_required_args = {"road": casa_road, "base": week_road}
     clean_required_args = {"road": clean_road, "base": week_road}

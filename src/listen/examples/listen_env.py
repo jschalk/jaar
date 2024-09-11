@@ -30,10 +30,10 @@ def env_dir_setup_cleanup():
 
 def get_texas_road() -> RoadUnit:
     real_id = get_default_real_id_roadnode()
-    nation_text = "nation-state"
-    usa_text = "USA"
-    texas_text = "Texas"
-    return create_road_from_nodes([real_id, nation_text, usa_text, texas_text])
+    nation_str = "nation-state"
+    usa_str = "USA"
+    texas_str = "Texas"
+    return create_road_from_nodes([real_id, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
@@ -43,16 +43,16 @@ def get_texas_hubunit() -> HubUnit:
         real_id,
         owner_id="Sue",
         econ_road=get_texas_road(),
-        # pipeline_duty_job_text(),
+        # pipeline_duty_job_str(),
     )
 
 
 def get_dakota_road() -> RoadUnit:
     real_id = get_default_real_id_roadnode()
-    nation_text = "nation-state"
-    usa_text = "USA"
-    dakota_text = "Dakota"
-    return create_road_from_nodes([real_id, nation_text, usa_text, dakota_text])
+    nation_str = "nation-state"
+    usa_str = "USA"
+    dakota_str = "Dakota"
+    return create_road_from_nodes([real_id, nation_str, usa_str, dakota_str])
 
 
 def get_dakota_hubunit() -> HubUnit:
@@ -62,5 +62,5 @@ def get_dakota_hubunit() -> HubUnit:
         real_id,
         owner_id="Sue",
         econ_road=get_dakota_road(),
-        # pipeline_duty_job_text(),
+        # pipeline_duty_job_str(),
     )

@@ -1,6 +1,6 @@
 from src._instrument.python_tool import create_sorted_concatenated_str
 from src._instrument.file import dir_files
-from src.bud.bud_tool import bud_acctunit_text
+from src.bud.bud_tool import bud_acctunit_str
 from src.gift.atom_config import (
     real_id_str,
     owner_id_str,
@@ -90,7 +90,7 @@ def test_get_stoneref_ReturnsObj():
 
     # THEN
     assert x_stoneref.stone_name == stone_name_00021
-    assert x_stoneref.atom_categorys == [bud_acctunit_text()]
+    assert x_stoneref.atom_categorys == [bud_acctunit_str()]
     assert x_stoneref._stonecolumns != {}
     assert len(x_stoneref._stonecolumns) == 5
 
@@ -125,8 +125,8 @@ def test_get_sorted_headers_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers(stone_format_00019_ideaunit_v0_0_0())
     # THEN
-    idea_headers_text = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,real_id,stop_want"
-    assert headers == idea_headers_text
+    idea_headers_str = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,real_id,stop_want"
+    assert headers == idea_headers_str
 
 
 def check_sorted_headers_exist(stone_format_filename: str, x_headers: dict):

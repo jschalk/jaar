@@ -12,15 +12,15 @@ def sqlite_bool(x_int: int) -> bool:
     return "NULL" if x_int is None else x_int == 1
 
 
-def sqlite_text(x_bool: any) -> str:
+def sqlite_str(x_bool: any) -> str:
     """python_bool_to_SQLITE_bool"""
     if x_bool is True:
-        x_text = "TRUE"
+        x_str = "TRUE"
     elif not x_bool:
-        x_text = "FALSE"
+        x_str = "FALSE"
     else:
         raise TypeError("function requires boolean")
-    return x_text
+    return x_str
 
 
 def sqlite_to_python(query_value) -> str:

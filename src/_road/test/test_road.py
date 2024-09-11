@@ -63,12 +63,12 @@ def test_RoadUnit_exists():
 
 def test_road_is_sub_road_correctlyReturnsBool():
     # WHEN
-    casa_text = "casa"
-    casa_road = f"{root_label()}{default_road_delimiter_if_none()}{casa_text}"
-    cleaning_text = "cleaning"
-    cleaning_road = f"{casa_road}{default_road_delimiter_if_none()}{cleaning_text}"
-    laundrys_text = "laundrys"
-    laundrys_road = f"{cleaning_road}{default_road_delimiter_if_none()}{laundrys_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{default_road_delimiter_if_none()}{casa_str}"
+    cleaning_str = "cleaning"
+    cleaning_road = f"{casa_road}{default_road_delimiter_if_none()}{cleaning_str}"
+    laundrys_str = "laundrys"
+    laundrys_road = f"{cleaning_road}{default_road_delimiter_if_none()}{laundrys_str}"
     print(f"{cleaning_road=}")
     print(f"{laundrys_road=}")
 
@@ -96,24 +96,22 @@ def test_road_road_validate_correctlyReturnsRoadUnit():
 
 def test_road_create_road_ReturnsCorrectRoadUnitWith_delimiter():
     # ESTABLISH
-    rose_text = "rose"
+    rose_str = "rose"
     semicolon_delimiter = ";"
-    semicolon_delimiter_rose_road = f"{root_label()}{semicolon_delimiter}{rose_text}"
-    assert create_road(root_label(), rose_text) == semicolon_delimiter_rose_road
+    semicolon_delimiter_rose_road = f"{root_label()}{semicolon_delimiter}{rose_str}"
+    assert create_road(root_label(), rose_str) == semicolon_delimiter_rose_road
 
     # WHEN
     slash_delimiter = "/"
-    slash_delimiter_rose_road = f"{root_label()}{slash_delimiter}{rose_text}"
-    generated_rose_road = create_road(
-        root_label(), rose_text, delimiter=slash_delimiter
-    )
+    slash_delimiter_rose_road = f"{root_label()}{slash_delimiter}{rose_str}"
+    generated_rose_road = create_road(root_label(), rose_str, delimiter=slash_delimiter)
 
     # THEN
     assert generated_rose_road != semicolon_delimiter_rose_road
     assert generated_rose_road == slash_delimiter_rose_road
 
     # WHEN
-    brackets_road = create_road(root_label(), rose_text, delimiter=slash_delimiter)
+    brackets_road = create_road(root_label(), rose_str, delimiter=slash_delimiter)
 
     # THEN
     assert generated_rose_road == brackets_road
@@ -122,104 +120,104 @@ def test_road_create_road_ReturnsCorrectRoadUnitWith_delimiter():
 
 def test_road_rebuild_road_ReturnsCorrectRoadUnit():
     # ESTABLISH
-    casa_text = "casa"
-    casa_road = create_road(root_label(), casa_text)
-    bloomers_text = "bloomers"
-    bloomers_road = create_road(casa_road, bloomers_text)
-    greenery_text = "greenery"
-    greenery_road = create_road(casa_road, greenery_text)
-    roses_text = "roses"
-    old_roses_road = create_road(bloomers_road, roses_text)
-    new_roses_road = create_road(greenery_road, roses_text)
+    casa_str = "casa"
+    casa_road = create_road(root_label(), casa_str)
+    bloomers_str = "bloomers"
+    bloomers_road = create_road(casa_road, bloomers_str)
+    greenery_str = "greenery"
+    greenery_road = create_road(casa_road, greenery_str)
+    roses_str = "roses"
+    old_roses_road = create_road(bloomers_road, roses_str)
+    new_roses_road = create_road(greenery_road, roses_str)
 
     print(f"{rebuild_road(old_roses_road, bloomers_road, greenery_road)}")
 
     # WHEN / THEN
     assert rebuild_road(bloomers_road, bloomers_road, bloomers_road) == bloomers_road
     assert rebuild_road(old_roses_road, bloomers_road, greenery_road) == new_roses_road
-    assert rebuild_road(old_roses_road, "random_text", greenery_road) == old_roses_road
+    assert rebuild_road(old_roses_road, "random_str", greenery_road) == old_roses_road
 
 
 def test_road_get_all_road_nodes_ReturnsRoadNodes():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
-    bloomers_text = "bloomers"
-    bloomers_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}"
-    roses_text = "roses"
-    roses_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}{x_s}{roses_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    roses_str = "roses"
+    roses_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN/THENs
     root_list = [root_label()]
     assert get_all_road_nodes(road=root_label()) == root_list
-    casa_list = [root_label(), casa_text]
+    casa_list = [root_label(), casa_str]
     assert get_all_road_nodes(road=casa_road) == casa_list
-    bloomers_list = [root_label(), casa_text, bloomers_text]
+    bloomers_list = [root_label(), casa_str, bloomers_str]
     assert get_all_road_nodes(road=bloomers_road) == bloomers_list
-    roses_list = [root_label(), casa_text, bloomers_text, roses_text]
+    roses_list = [root_label(), casa_str, bloomers_str, roses_str]
     assert get_all_road_nodes(road=roses_road) == roses_list
 
 
 def test_road_get_terminus_node_ReturnsRoadNode():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
-    bloomers_text = "bloomers"
-    bloomers_road = f"{casa_road}{x_s}{bloomers_text}"
-    roses_text = "roses"
-    roses_road = f"{bloomers_road}{x_s}{roses_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
+    roses_str = "roses"
+    roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN/THENs
     assert get_terminus_node(road=root_label()) == root_label()
-    assert get_terminus_node(road=casa_road) == casa_text
-    assert get_terminus_node(road=bloomers_road) == bloomers_text
-    assert get_terminus_node(road=roses_road) == roses_text
+    assert get_terminus_node(road=casa_road) == casa_str
+    assert get_terminus_node(road=bloomers_road) == bloomers_str
+    assert get_terminus_node(road=roses_road) == roses_str
 
 
 def test_road_get_terminus_node_ReturnsRoadNodeWhenNonDefaultDelimiter():
     # ESTABLISH
-    casa_text = "casa"
-    bloomers_text = "bloomers"
-    roses_text = "roses"
-    slash_text = default_road_delimiter_if_none()
-    slash_casa_road = f"{root_label()}{slash_text}{casa_text}"
-    slash_bloomers_road = f"{slash_casa_road}{slash_text}{bloomers_text}"
-    slash_roses_road = f"{slash_bloomers_road}{slash_text}{roses_text}"
+    casa_str = "casa"
+    bloomers_str = "bloomers"
+    roses_str = "roses"
+    slash_str = default_road_delimiter_if_none()
+    slash_casa_road = f"{root_label()}{slash_str}{casa_str}"
+    slash_bloomers_road = f"{slash_casa_road}{slash_str}{bloomers_str}"
+    slash_roses_road = f"{slash_bloomers_road}{slash_str}{roses_str}"
 
     # WHEN/THENs
-    assert get_terminus_node(root_label(), slash_text) == root_label()
-    assert get_terminus_node(slash_casa_road, slash_text) == casa_text
-    assert get_terminus_node(slash_bloomers_road, slash_text) == bloomers_text
-    assert get_terminus_node(slash_roses_road, slash_text) == roses_text
+    assert get_terminus_node(root_label(), slash_str) == root_label()
+    assert get_terminus_node(slash_casa_road, slash_str) == casa_str
+    assert get_terminus_node(slash_bloomers_road, slash_str) == bloomers_str
+    assert get_terminus_node(slash_roses_road, slash_str) == roses_str
 
 
 def test_road_get_root_node_from_road_ReturnsRoadNode():
     # ESTABLISH
-    casa_text = "casa"
-    casa_road = create_road(root_label(), casa_text)
-    bloomers_text = "bloomers"
-    bloomers_road = create_road(casa_road, bloomers_text)
-    roses_text = "roses"
-    roses_road = create_road(casa_text, roses_text)
+    casa_str = "casa"
+    casa_road = create_road(root_label(), casa_str)
+    bloomers_str = "bloomers"
+    bloomers_road = create_road(casa_road, bloomers_str)
+    roses_str = "roses"
+    roses_road = create_road(casa_str, roses_str)
 
     # WHEN/THENs
     assert get_root_node_from_road(root_label()) == root_label()
     assert get_root_node_from_road(casa_road) == root_label()
     assert get_root_node_from_road(bloomers_road) == root_label()
-    assert get_root_node_from_road(roses_road) == casa_text
+    assert get_root_node_from_road(roses_road) == casa_str
 
 
 def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
-    bloomers_text = "bloomers"
-    bloomers_road = f"{casa_road}{x_s}{bloomers_text}"
-    roses_text = "roses"
-    roses_road = f"{bloomers_road}{x_s}{roses_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
+    roses_str = "roses"
+    roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN/THENs
     assert get_parent_road(root_label(), x_s) == ""
@@ -231,12 +229,12 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
 def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
     # ESTABLISH
     x_s = "/"
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
-    bloomers_text = "bloomers"
-    bloomers_road = f"{casa_road}{x_s}{bloomers_text}"
-    roses_text = "roses"
-    roses_road = f"{bloomers_road}{x_s}{roses_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
+    roses_str = "roses"
+    roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN/THENs
     assert get_parent_road(root_label(), x_s) == ""
@@ -248,15 +246,15 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
 def test_road_create_road_without_root_node_ReturnsCorrectObj():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
-    casa_without_root_road = f"{x_s}{casa_text}"
-    bloomers_text = "bloomers"
-    bloomers_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}"
-    bloomers_without_root_road = f"{x_s}{casa_text}{x_s}{bloomers_text}"
-    roses_text = "roses"
-    roses_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}{x_s}{roses_text}"
-    roses_without_root_road = f"{x_s}{casa_text}{x_s}{bloomers_text}{x_s}{roses_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
+    casa_without_root_road = f"{x_s}{casa_str}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_without_root_road = f"{x_s}{casa_str}{x_s}{bloomers_str}"
+    roses_str = "roses"
+    roses_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_without_root_road = f"{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN/THENs
     assert create_road_without_root_node(road=root_label()) == x_s
@@ -308,12 +306,12 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
 def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    nation_text = "nation-state"
-    nation_road = f"{root_label()}{x_s}{nation_text}"
-    usa_text = "USA"
-    usa_road = f"{nation_road}{x_s}{usa_text}"
-    texas_text = "Texas"
-    texas_road = f"{usa_road}{x_s}{texas_text}"
+    nation_str = "nation-state"
+    nation_road = f"{root_label()}{x_s}{nation_str}"
+    usa_str = "USA"
+    usa_road = f"{nation_road}{x_s}{usa_str}"
+    texas_str = "Texas"
+    texas_road = f"{usa_road}{x_s}{texas_str}"
 
     # WHEN
     x_roads = get_ancestor_roads(road=texas_road)
@@ -338,12 +336,12 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
 def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    nation_text = "nation-state"
-    nation_road = f"{root_label()}{x_s}{nation_text}"
-    usa_text = "USA"
-    usa_road = f"{nation_road}{x_s}{usa_text}"
-    texas_text = "Texas"
-    texas_road = f"{usa_road}{x_s}{texas_text}"
+    nation_str = "nation-state"
+    nation_road = f"{root_label()}{x_s}{nation_str}"
+    usa_str = "USA"
+    usa_road = f"{nation_road}{x_s}{usa_str}"
+    texas_str = "Texas"
+    texas_road = f"{usa_road}{x_s}{texas_str}"
 
     # WHEN
     x_roads = get_forefather_roads(road=texas_road)
@@ -367,14 +365,14 @@ def test_road_create_road_from_nodes_ReturnsCorrectObj():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
     root_list = get_all_road_nodes(root_label())
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
     casa_list = get_all_road_nodes(casa_road)
-    bloomers_text = "bloomers"
-    bloomers_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}"
     bloomers_list = get_all_road_nodes(bloomers_road)
-    roses_text = "roses"
-    roses_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}{x_s}{roses_text}"
+    roses_str = "roses"
+    roses_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
     roses_list = get_all_road_nodes(roses_road)
 
     # WHEN / THEN
@@ -387,31 +385,31 @@ def test_road_create_road_from_nodes_ReturnsCorrectObj():
 def test_road_create_road_ReturnsCorrectObj():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
-    bloomers_text = "bloomers"
-    bloomers_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}"
-    roses_text = "roses"
-    roses_road = f"{root_label()}{x_s}{casa_text}{x_s}{bloomers_text}{x_s}{roses_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    roses_str = "roses"
+    roses_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN / THEN
     assert root_label() == create_road(None, root_label())
     assert root_label() == create_road("", root_label())
-    assert casa_road == create_road(root_label(), casa_text)
-    assert bloomers_road == create_road(casa_road, bloomers_text)
-    assert roses_road == create_road(bloomers_road, roses_text)
+    assert casa_road == create_road(root_label(), casa_str)
+    assert bloomers_road == create_road(casa_road, bloomers_str)
+    assert roses_road == create_road(bloomers_road, roses_str)
     assert roses_road == create_road(roses_road, None)
 
 
 def test_Roadnode_exists():
     # ESTABLISH
-    empty_text = ""
+    empty_str = ""
 
     # WHEN
-    new_obj = RoadNode(empty_text)
+    new_obj = RoadNode(empty_str)
 
     # THEN
-    assert new_obj == empty_text
+    assert new_obj == empty_str
 
 
 def test_Roadnode_is_node_ReturnsCorrectBool():
@@ -439,19 +437,19 @@ def test_is_roadnode_ReturnsObj():
 def test_get_diff_road_ReturnsCorrectObj():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    casa_text = "casa"
-    casa_road = f"{root_label()}{x_s}{casa_text}"
-    bloomers_text = "bloomers"
-    bloomers_road = f"{casa_road}{x_s}{bloomers_text}"
-    roses_text = "roses"
-    roses_road = f"{bloomers_road}{x_s}{roses_text}"
+    casa_str = "casa"
+    casa_road = f"{root_label()}{x_s}{casa_str}"
+    bloomers_str = "bloomers"
+    bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
+    roses_str = "roses"
+    roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN / THEN
     print(f"{casa_road=}")
     print(f"{bloomers_road=}")
-    assert get_diff_road(bloomers_road, casa_road) == bloomers_text
-    assert get_diff_road(roses_road, bloomers_road) == roses_text
-    bloomers_rose_road = create_road(bloomers_text, roses_text)
+    assert get_diff_road(bloomers_road, casa_road) == bloomers_str
+    assert get_diff_road(roses_road, bloomers_road) == roses_str
+    bloomers_rose_road = create_road(bloomers_str, roses_str)
     print(f"{bloomers_rose_road=}")
     assert get_diff_road(roses_road, casa_road) == bloomers_rose_road
 
@@ -459,16 +457,16 @@ def test_get_diff_road_ReturnsCorrectObj():
 def test_is_heir_road_CorrectlyIdentifiesHeirs():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
-    usa_text = "USA"
-    usa_road = f"{root_label()}{x_s}Nation-States{x_s}{usa_text}"
-    texas_text = "Texas"
-    texas_road = f"{usa_road}{x_s}{texas_text}"
-    # earth_text = "earth"
-    # earth_road = f"{earth_text}"
-    # sea_text = "sea"
-    # sea_road = f"{earth_road}{x_s}{sea_text}"
-    # seaside_text = "seaside"
-    # seaside_road = f"{earth_road}{x_s}{seaside_text}"
+    usa_str = "USA"
+    usa_road = f"{root_label()}{x_s}Nation-States{x_s}{usa_str}"
+    texas_str = "Texas"
+    texas_road = f"{usa_road}{x_s}{texas_str}"
+    # earth_str = "earth"
+    # earth_road = f"{earth_str}"
+    # sea_str = "sea"
+    # sea_road = f"{earth_road}{x_s}{sea_str}"
+    # seaside_str = "seaside"
+    # seaside_road = f"{earth_road}{x_s}{seaside_str}"
 
     # WHEN / THEN
     assert is_heir_road(src=usa_road, heir=usa_road)
@@ -479,10 +477,10 @@ def test_is_heir_road_CorrectlyIdentifiesHeirs():
 
 def test_replace_road_delimiter_ReturnsNewObj():
     # ESTABLISH
-    casa_text = "casa"
-    gen_casa_road = create_road(root_label(), casa_text)
+    casa_str = "casa"
+    gen_casa_road = create_road(root_label(), casa_str)
     semicolon_delimiter = default_road_delimiter_if_none()
-    semicolon_delimiter_casa_road = f"{root_label()}{semicolon_delimiter}{casa_text}"
+    semicolon_delimiter_casa_road = f"{root_label()}{semicolon_delimiter}{casa_str}"
     assert semicolon_delimiter == ";"
     assert gen_casa_road == semicolon_delimiter_casa_road
 
@@ -493,18 +491,16 @@ def test_replace_road_delimiter_ReturnsNewObj():
     )
 
     # THEN
-    slash_delimiter_casa_road = f"{root_label()}{slash_delimiter}{casa_text}"
+    slash_delimiter_casa_road = f"{root_label()}{slash_delimiter}{casa_str}"
     assert gen_casa_road == slash_delimiter_casa_road
 
 
 def test_replace_road_delimiter_CorrectlyRaisesError():
     # ESTABLISH
-    cooker_text = "cooker/cleaner"
-    gen_cooker_road = create_road(root_label(), cooker_text)
+    cooker_str = "cooker/cleaner"
+    gen_cooker_road = create_road(root_label(), cooker_str)
     semicolon_delimiter = default_road_delimiter_if_none()
-    semicolon_delimiter_cooker_road = (
-        f"{root_label()}{semicolon_delimiter}{cooker_text}"
-    )
+    semicolon_delimiter_cooker_road = f"{root_label()}{semicolon_delimiter}{cooker_str}"
     assert semicolon_delimiter == ";"
     assert gen_cooker_road == semicolon_delimiter_cooker_road
 
@@ -524,12 +520,10 @@ def test_replace_road_delimiter_CorrectlyRaisesError():
 
 def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
     # ESTABLISH
-    cooker_text = "/cooker"
-    cleaner_text = "cleaner"
+    cooker_str = "/cooker"
+    cleaner_str = "cleaner"
     semicolon_delimiter = default_road_delimiter_if_none()
-    semicolon_delimiter_cooker_road = (
-        f"{cooker_text}{semicolon_delimiter}{cleaner_text}"
-    )
+    semicolon_delimiter_cooker_road = f"{cooker_str}{semicolon_delimiter}{cleaner_str}"
     assert semicolon_delimiter == ";"
 
     # WHEN / THEN
@@ -548,11 +542,11 @@ def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
 
 def test_HealerID_exists():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     # WHEN
-    bob_healer_id = HealerID(bob_text)
+    bob_healer_id = HealerID(bob_str)
     # THEN
-    assert bob_healer_id == bob_text
+    assert bob_healer_id == bob_str
     assert (
         inspect_getdoc(bob_healer_id)
         == "A RoadNode used to identify a Problem's Healer"
@@ -561,11 +555,11 @@ def test_HealerID_exists():
 
 def test_OwnerID_exists():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     # WHEN
-    bob_owner_id = OwnerID(bob_text)
+    bob_owner_id = OwnerID(bob_str)
     # THEN
-    assert bob_owner_id == bob_text
+    assert bob_owner_id == bob_str
     assert (
         inspect_getdoc(bob_owner_id)
         == "A RoadNode used to identify a BudUnit's owner_id"
@@ -574,11 +568,11 @@ def test_OwnerID_exists():
 
 def test_AcctID_exists():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
     # WHEN
-    bob_acct_id = AcctID(bob_text)
+    bob_acct_id = AcctID(bob_str)
     # THEN
-    assert bob_acct_id == bob_text
+    assert bob_acct_id == bob_str
     assert (
         inspect_getdoc(bob_acct_id)
         == "Every AcctID object is OwnerID, must follow OwnerID format."
@@ -587,48 +581,48 @@ def test_AcctID_exists():
 
 def test_validate_roadnode_RaisesErrorWhenNotRoadNode():
     # ESTABLISH
-    bob_text = "Bob, Tom"
-    slash_text = "/"
-    assert bob_text == validate_roadnode(bob_text, x_delimiter=slash_text)
+    bob_str = "Bob, Tom"
+    slash_str = "/"
+    assert bob_str == validate_roadnode(bob_str, x_delimiter=slash_str)
 
     # WHEN
-    comma_text = ","
+    comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_text == validate_roadnode(bob_text, x_delimiter=comma_text)
+        bob_str == validate_roadnode(bob_str, x_delimiter=comma_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_text}' needs to be a RoadNode. Cannot contain delimiter: '{comma_text}'"
+        == f"'{bob_str}' needs to be a RoadNode. Cannot contain delimiter: '{comma_str}'"
     )
 
 
 def test_validate_roadnode_RaisesErrorWhenRoadNode():
     # ESTABLISH
-    slash_text = "/"
-    bob_text = f"Bob{slash_text}Tom"
-    assert bob_text == validate_roadnode(
-        bob_text, x_delimiter=slash_text, not_roadnode_required=True
+    slash_str = "/"
+    bob_str = f"Bob{slash_str}Tom"
+    assert bob_str == validate_roadnode(
+        bob_str, x_delimiter=slash_str, not_roadnode_required=True
     )
 
     # WHEN
-    comma_text = ","
+    comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_text == validate_roadnode(
-            bob_text, x_delimiter=comma_text, not_roadnode_required=True
+        bob_str == validate_roadnode(
+            bob_str, x_delimiter=comma_str, not_roadnode_required=True
         )
     assert (
         str(excinfo.value)
-        == f"'{bob_text}' needs to not be a RoadNode. Must contain delimiter: '{comma_text}'"
+        == f"'{bob_str}' needs to not be a RoadNode. Must contain delimiter: '{comma_str}'"
     )
 
 
 def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_delimiter():
     # ESTABLISH
-    comma_text = ","
+    comma_str = ","
     # WHEN / THEN
-    assert roadunit_valid_dir_path("run", delimiter=comma_text)
-    assert roadunit_valid_dir_path("run,sport", delimiter=comma_text)
+    assert roadunit_valid_dir_path("run", delimiter=comma_str)
+    assert roadunit_valid_dir_path("run,sport", delimiter=comma_str)
     print(f"{platform_system()=}")
-    sport_question_valid_bool = roadunit_valid_dir_path("run,sport?", comma_text)
+    sport_question_valid_bool = roadunit_valid_dir_path("run,sport?", comma_str)
     assert (
         platform_system() == "Windows" and sport_question_valid_bool is False
     ) or platform_system() == "Linux"
@@ -636,18 +630,18 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_delimiter():
 
 def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_delimiter():
     # ESTABLISH
-    question_text = "?"
-    sport_text = "sport"
-    run_text = "run,"
-    lap_text = "lap"
-    sport_road = create_road(sport_text, delimiter=question_text)
-    run_road = create_road(sport_road, run_text, delimiter=question_text)
-    lap_road = create_road(run_road, lap_text, delimiter=question_text)
-    assert lap_road == f"{sport_road}?{run_text}?{lap_text}"
+    question_str = "?"
+    sport_str = "sport"
+    run_str = "run,"
+    lap_str = "lap"
+    sport_road = create_road(sport_str, delimiter=question_str)
+    run_road = create_road(sport_road, run_str, delimiter=question_str)
+    lap_road = create_road(run_road, lap_str, delimiter=question_str)
+    assert lap_road == f"{sport_road}?{run_str}?{lap_str}"
 
-    assert roadunit_valid_dir_path(sport_road, delimiter=question_text)
-    assert roadunit_valid_dir_path(run_road, delimiter=question_text)
-    assert roadunit_valid_dir_path(lap_road, delimiter=question_text)
+    assert roadunit_valid_dir_path(sport_road, delimiter=question_str)
+    assert roadunit_valid_dir_path(run_road, delimiter=question_str)
+    assert roadunit_valid_dir_path(lap_road, delimiter=question_str)
     assert (
         platform_system() == "Windows"
         and roadunit_valid_dir_path(lap_road, delimiter=",") is False
@@ -656,18 +650,18 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_delimiter():
 
 def test_roadunit_valid_dir_path_ReturnsCorrectObjWhereSlashNotDelimiterEdgeCases():
     # ESTABLISH
-    question_text = "?"
-    sport_text = "sport"
-    run_text = "run/swim"
-    lap_text = "lap"
-    sport_road = create_road(sport_text, delimiter=question_text)
-    run_road = create_road(sport_road, run_text, delimiter=question_text)
-    lap_road = create_road(run_road, lap_text, delimiter=question_text)
-    assert lap_road == f"{sport_road}?{run_text}?{lap_text}"
+    question_str = "?"
+    sport_str = "sport"
+    run_str = "run/swim"
+    lap_str = "lap"
+    sport_road = create_road(sport_str, delimiter=question_str)
+    run_road = create_road(sport_road, run_str, delimiter=question_str)
+    lap_road = create_road(run_road, lap_str, delimiter=question_str)
+    assert lap_road == f"{sport_road}?{run_str}?{lap_str}"
 
-    assert roadunit_valid_dir_path(sport_road, delimiter=question_text)
-    assert roadunit_valid_dir_path(run_road, delimiter=question_text) is False
-    assert roadunit_valid_dir_path(lap_road, delimiter=question_text) is False
+    assert roadunit_valid_dir_path(sport_road, delimiter=question_str)
+    assert roadunit_valid_dir_path(run_road, delimiter=question_str) is False
+    assert roadunit_valid_dir_path(lap_road, delimiter=question_str) is False
     assert roadunit_valid_dir_path(lap_road, delimiter=",") is False
 
 
@@ -678,13 +672,13 @@ def test_GroupID_exists():
 
 
 def test_all_roadunits_between_ReturnsObj():
-    casa_text = "casa"
-    sport_text = "sport"
-    run_text = "run/swim"
-    lap_text = "lap"
-    sport_road = create_road(casa_text, sport_text)
-    run_road = create_road(sport_road, run_text)
-    lap_road = create_road(run_road, lap_text)
+    casa_str = "casa"
+    sport_str = "sport"
+    run_str = "run/swim"
+    lap_str = "lap"
+    sport_road = create_road(casa_str, sport_str)
+    run_road = create_road(sport_road, run_str)
+    lap_road = create_road(run_road, lap_str)
 
     assert all_roadunits_between(sport_road, sport_road) == [sport_road]
     assert all_roadunits_between(sport_road, run_road) == [sport_road, run_road]

@@ -11,12 +11,12 @@ from src.bud.bud import budunit_shop
 def test_BudUnit_ReasonUnits_create():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    weekday_text = "weekdays"
-    weekday_road = sue_bud.make_l1_road(weekday_text)
-    wed_text = "Wednesday"
-    wed_road = sue_bud.make_road(weekday_road, wed_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    weekday_str = "weekdays"
+    weekday_road = sue_bud.make_l1_road(weekday_str)
+    wed_str = "Wednesday"
+    wed_road = sue_bud.make_road(weekday_road, wed_str)
 
     wed_premise = premiseunit_shop(need=wed_road)
     casa_wk_reason = reasonunit_shop(weekday_road, {wed_premise.need: wed_premise})
@@ -41,10 +41,10 @@ def test_BudUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
     week_road = sue_bud.make_l1_road("weekdays")
     wed_road = sue_bud.make_road(week_road, "Wednesday")
 
-    slash_text = "/"
-    before_week_reason = reasonunit_shop(week_road, delimiter=slash_text)
+    slash_str = "/"
+    before_week_reason = reasonunit_shop(week_road, delimiter=slash_str)
     before_week_reason.set_premise(wed_road)
-    assert before_week_reason.delimiter == slash_text
+    assert before_week_reason.delimiter == slash_str
 
     # WHEN
     sue_bud.edit_idea_attr(casa_road, reason=before_week_reason)
@@ -52,26 +52,26 @@ def test_BudUnit_edit_idea_attr_reasonunit_CorrectlySets_delimiter():
     # THEN
     casa_idea = sue_bud.get_idea_obj(casa_road)
     week_reasonunit = casa_idea.reasonunits.get(week_road)
-    assert week_reasonunit.delimiter != slash_text
+    assert week_reasonunit.delimiter != slash_str
     assert week_reasonunit.delimiter == sue_bud._road_delimiter
 
 
 def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
     # ESTABLISH
-    slash_text = "/"
-    bob_bud = budunit_shop("Bob", _road_delimiter=slash_text)
-    casa_text = "casa"
-    week_text = "week"
-    wed_text = "Wednesday"
-    casa_road = bob_bud.make_l1_road(casa_text)
-    week_road = bob_bud.make_l1_road(week_text)
-    wed_road = bob_bud.make_road(week_road, wed_text)
-    bob_bud.set_l1_idea(ideaunit_shop(casa_text))
-    bob_bud.set_l1_idea(ideaunit_shop(week_text))
-    bob_bud.set_idea(ideaunit_shop(wed_text), week_road)
+    slash_str = "/"
+    bob_bud = budunit_shop("Bob", _road_delimiter=slash_str)
+    casa_str = "casa"
+    week_str = "week"
+    wed_str = "Wednesday"
+    casa_road = bob_bud.make_l1_road(casa_str)
+    week_road = bob_bud.make_l1_road(week_str)
+    wed_road = bob_bud.make_road(week_road, wed_str)
+    bob_bud.set_l1_idea(ideaunit_shop(casa_str))
+    bob_bud.set_l1_idea(ideaunit_shop(week_str))
+    bob_bud.set_idea(ideaunit_shop(wed_str), week_road)
     print(f"{bob_bud._idearoot._kids.keys()=}")
     wed_idea = bob_bud.get_idea_obj(wed_road)
-    assert wed_idea._road_delimiter == slash_text
+    assert wed_idea._road_delimiter == slash_str
     assert wed_idea._road_delimiter == bob_bud._road_delimiter
 
     # WHEN
@@ -79,7 +79,7 @@ def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
 
     # THEN
     casa_idea = bob_bud.get_idea_obj(casa_road)
-    assert casa_idea._road_delimiter == slash_text
+    assert casa_idea._road_delimiter == slash_str
     week_reasonunit = casa_idea.reasonunits.get(week_road)
     assert week_reasonunit.delimiter != ","
     assert week_reasonunit.delimiter == bob_bud._road_delimiter
@@ -88,12 +88,12 @@ def test_BudUnit_edit_idea_attr_reason_base_CorrectlySets_delimiter():
 def test_BudUnit_set_reasonunits_status():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    weekday_text = "weekdays"
-    weekday_road = sue_bud.make_l1_road(weekday_text)
-    wed_text = "Wednesday"
-    wed_road = sue_bud.make_road(weekday_road, wed_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    weekday_str = "weekdays"
+    weekday_road = sue_bud.make_l1_road(weekday_str)
+    wed_str = "Wednesday"
+    wed_road = sue_bud.make_road(weekday_road, wed_str)
 
     wed_premise = premiseunit_shop(need=wed_road)
     casa_wk_reason = reasonunit_shop(
@@ -132,12 +132,12 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     sue_bud = get_budunit_with_4_levels()
     print(f"{sue_bud._real_id=}")
     print(f"{sue_bud._idearoot._label=}")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
     week_label = "weekdays"
     week_road = sue_bud.make_l1_road(week_label)
-    wed_text = "Wednesday"
-    wed_road = sue_bud.make_road(week_road, wed_text)
+    wed_str = "Wednesday"
+    wed_road = sue_bud.make_road(week_road, wed_str)
 
     wed_premise = premiseunit_shop(need=wed_road)
     wed_premise._status = False
@@ -187,12 +187,12 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
 def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     # ESTABLISH
     a4_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = a4_bud.make_l1_road(casa_text)
-    week_text = "weekdays"
-    week_road = a4_bud.make_l1_road(week_text)
-    wed_text = "Wednesday"
-    wed_road = a4_bud.make_road(week_road, wed_text)
+    casa_str = "casa"
+    casa_road = a4_bud.make_l1_road(casa_str)
+    week_str = "weekdays"
+    week_road = a4_bud.make_l1_road(week_str)
+    wed_str = "Wednesday"
+    wed_road = a4_bud.make_road(week_road, wed_str)
 
     wed_premise = premiseunit_shop(need=wed_road)
     wed_premise._status = False
@@ -209,18 +209,18 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     a4_bud.edit_idea_attr(casa_road, reason=casa_wk_build_reasonunit)
 
     # WHEN
-    rla_text = "hp"
-    rla_road = a4_bud.make_road(casa_road, rla_text)
-    a4_bud.set_idea(ideaunit_shop(rla_text), parent_road=rla_road)
-    cost_text = "cost_quantification"
-    cost_road = a4_bud.make_road(rla_road, cost_text)
-    a4_bud.set_idea(ideaunit_shop(cost_text), parent_road=cost_road)
+    rla_str = "hp"
+    rla_road = a4_bud.make_road(casa_road, rla_str)
+    a4_bud.set_idea(ideaunit_shop(rla_str), parent_road=rla_road)
+    cost_str = "cost_quantification"
+    cost_road = a4_bud.make_road(rla_road, cost_str)
+    a4_bud.set_idea(ideaunit_shop(cost_str), parent_road=cost_road)
     a4_bud.settle_bud()
 
     # THEN
-    casa_idea = a4_bud._idearoot._kids[casa_text]
-    rla_idea = casa_idea._kids[rla_text]
-    cost_idea = rla_idea._kids[cost_text]
+    casa_idea = a4_bud._idearoot._kids[casa_str]
+    rla_idea = casa_idea._kids[rla_str]
+    cost_idea = rla_idea._kids[cost_str]
 
     # 1
     casa_wk_calc_reasonheir = casa_idea._reasonheirs[week_road]
@@ -255,12 +255,12 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
 
 def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = a4_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = a4_bud.make_l1_road(casa_str)
     week_label = "weekdays"
     week_road = a4_bud.make_l1_road(week_label)
-    wed_text = "Wednesday"
-    wed_road = a4_bud.make_road(week_road, wed_text)
+    wed_str = "Wednesday"
+    wed_road = a4_bud.make_road(week_road, wed_str)
 
     wed_premise = premiseunit_shop(need=wed_road)
     wed_premise._status = False
@@ -274,16 +274,16 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
         _base_idea_active_value=True,
     )
     a4_bud.edit_idea_attr(casa_road, reason=casa_wk_build_reasonunit)
-    rla_text = "hp"
-    rla_road = a4_bud.make_road(casa_road, rla_text)
-    a4_bud.set_idea(ideaunit_shop(rla_text), parent_road=rla_road)
-    cost_text = "cost_quantification"
-    cost_road = a4_bud.make_road(rla_road, cost_text)
-    a4_bud.set_idea(ideaunit_shop(cost_text), parent_road=cost_road)
+    rla_str = "hp"
+    rla_road = a4_bud.make_road(casa_road, rla_str)
+    a4_bud.set_idea(ideaunit_shop(rla_str), parent_road=rla_road)
+    cost_str = "cost_quantification"
+    cost_road = a4_bud.make_road(rla_road, cost_str)
+    a4_bud.set_idea(ideaunit_shop(cost_str), parent_road=cost_road)
 
-    casa_idea = a4_bud._idearoot.get_kid(casa_text)
-    rla_idea = casa_idea.get_kid(rla_text)
-    cost_idea = rla_idea.get_kid(cost_text)
+    casa_idea = a4_bud._idearoot.get_kid(casa_str)
+    rla_idea = casa_idea.get_kid(rla_str)
+    cost_idea = rla_idea.get_kid(cost_str)
 
     assert a4_bud._idearoot._reasonheirs == {}
     assert casa_idea._reasonheirs == {}
@@ -329,12 +329,12 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
 def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    week_text = "weekdays"
-    week_road = sue_bud.make_l1_road(week_text)
-    wed_text = "Wednesday"
-    wed_road = sue_bud.make_road(week_road, wed_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    week_str = "weekdays"
+    week_road = sue_bud.make_l1_road(week_str)
+    wed_str = "Wednesday"
+    wed_road = sue_bud.make_road(week_road, wed_str)
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -385,8 +385,8 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     assert casa_idea1.reasonunits[week_road] == casa_wk_reason2
 
     # WHEN
-    thu_text = "Thursday"
-    thu_road = sue_bud.make_road(week_road, thu_text)
+    thu_str = "Thursday"
+    thu_road = sue_bud.make_road(week_road, thu_str)
     sue_bud.edit_idea_attr(
         road=casa_road,
         reason_base=week_road,
@@ -403,14 +403,14 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
 def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    time_text = "time"
-    time_road = sue_bud.make_l1_road(time_text)
-    week_text = "week"
-    week_road = sue_bud.make_road(time_road, week_text)
-    sue_bud.set_l1_idea(ideaunit_shop(time_text, begin=100, close=2000))
-    sue_bud.set_idea(ideaunit_shop(week_text, denom=7), parent_road=time_road)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    time_str = "time"
+    time_road = sue_bud.make_l1_road(time_str)
+    week_str = "week"
+    week_road = sue_bud.make_road(time_road, week_str)
+    sue_bud.set_l1_idea(ideaunit_shop(time_str, begin=100, close=2000))
+    sue_bud.set_idea(ideaunit_shop(week_str, denom=7), parent_road=time_road)
 
     # WHEN
     sue_bud.edit_idea_attr(
@@ -522,12 +522,12 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_base_idea_active_requisite_AnyId
     # must be 1 of 3: bool: True, bool: False, str="Set to Ignore"
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
 
-    commute_text = "commute to casa"
-    commute_road = sue_bud.make_l1_road(commute_text)
-    sue_bud.set_idea(ideaunit_shop(commute_text), sue_bud._real_id)
+    commute_str = "commute to casa"
+    commute_road = sue_bud.make_l1_road(commute_str)
+    sue_bud.set_idea(ideaunit_shop(commute_str), sue_bud._real_id)
     sue_bud.settle_bud()  # set tree metrics
     commute_idea = sue_bud.get_idea_obj(commute_road)
     assert len(commute_idea.reasonunits) == 0
@@ -581,14 +581,14 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     # 2. idea(...,weekdays,wednesday) exists
     # 3. idea(...,weekdays,thursday) exists
     sue_bud = get_budunit_with_4_levels()
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    weekdays_text = "weekdays"
-    weekdays_road = sue_bud.make_l1_road(weekdays_text)
-    wed_text = "Wednesday"
-    wed_road = sue_bud.make_road(weekdays_road, wed_text)
-    thu_text = "Thursday"
-    thu_road = sue_bud.make_road(weekdays_road, thu_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    weekdays_str = "weekdays"
+    weekdays_road = sue_bud.make_l1_road(weekdays_str)
+    wed_str = "Wednesday"
+    wed_road = sue_bud.make_road(weekdays_road, wed_str)
+    thu_str = "Thursday"
+    thu_road = sue_bud.make_road(weekdays_road, thu_str)
 
     # 4. idea(...,casa) with
     # 4.1 ReasonUnit: base=weekdays_road, need=thu_road
@@ -605,9 +605,9 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     # 5. idea(...,commute to casa) with
     # 5.1. ReasonUnit: idea(base=...,casa) has .base_idea_active_requisite = True
     # 5.2. idea(...,casa).active = False
-    commute_text = "commute to casa"
-    commute_road = sue_bud.make_l1_road(commute_text)
-    sue_bud.set_idea(ideaunit_shop(commute_text), sue_bud._real_id)
+    commute_str = "commute to casa"
+    commute_road = sue_bud.make_l1_road(commute_str)
+    sue_bud.set_idea(ideaunit_shop(commute_str), sue_bud._real_id)
     sue_bud.edit_idea_attr(
         road=commute_road,
         reason_base=casa_road,

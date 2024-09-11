@@ -1,4 +1,4 @@
-from src.bud.bud_tool import bud_ideaunit_text
+from src.bud.bud_tool import bud_ideaunit_str
 from src.gift.atom_config import (
     atom_update,
     atom_insert,
@@ -23,8 +23,8 @@ from src.bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_ideaunit_text()
-    _problem_bool_text = "problem_bool"
+    category = bud_ideaunit_str()
+    _problem_bool_str = "problem_bool"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
     addin_value = 7
@@ -44,7 +44,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     clean_atomunit.set_arg(close_str(), close_value)
     clean_atomunit.set_arg(denom_str(), denom_value)
     clean_atomunit.set_arg(numor_str(), numor_value)
-    clean_atomunit.set_arg(_problem_bool_text, problem_bool_value)
+    clean_atomunit.set_arg(_problem_bool_str, problem_bool_value)
     clean_atomunit.set_arg(morph_str(), morph_value)
     clean_atomunit.set_arg(mass_str(), mass_value)
     clean_atomunit.set_arg(pledge_str(), pledge_value)
@@ -64,8 +64,8 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
 def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_ideaunit_text()
-    _problem_bool_text = "problem_bool"
+    category = bud_ideaunit_str()
+    _problem_bool_str = "problem_bool"
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
     addin_value = 7
@@ -85,7 +85,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     clean_atomunit.set_arg(close_str(), close_value)
     clean_atomunit.set_arg(denom_str(), denom_value)
     clean_atomunit.set_arg(numor_str(), numor_value)
-    clean_atomunit.set_arg(_problem_bool_text, problem_bool_value)
+    clean_atomunit.set_arg(_problem_bool_str, problem_bool_value)
     clean_atomunit.set_arg(morph_str(), morph_value)
     clean_atomunit.set_arg(mass_str(), mass_value)
     clean_atomunit.set_arg(pledge_str(), pledge_value)
@@ -105,7 +105,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
 def test_create_legible_list_ReturnsObj_ideaunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_ideaunit_text()
+    category = bud_ideaunit_str()
     label_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
     clean_atomunit = atomunit_shop(category, atom_delete())

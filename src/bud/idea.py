@@ -228,6 +228,8 @@ class IdeaUnit:
     pledge: bool = None
     _originunit: OriginUnit = None
     problem_bool: bool = None
+    _road_delimiter: str = None
+    _is_expanded: bool = None
     # Calculated fields
     _active: bool = None
     _active_hx: dict[int, bool] = None
@@ -243,15 +245,13 @@ class IdeaUnit:
     _fund_onset: FundNum = None
     _fund_cease: FundNum = None
     _healerlink_ratio: float = None
+    _level: int = None
     _range_evaluated: bool = None
     _reasonheirs: dict[RoadUnit, ReasonHeir] = None
     _task: bool = None
     _teamheir: TeamHeir = None
     _gogo_calc: float = None
     _stop_calc: float = None
-    _level: int = None
-    _is_expanded: bool = None
-    _road_delimiter: str = None
 
     def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
         base_reasonunit_exists = self.base_reasonunit_exists(necessary_base)

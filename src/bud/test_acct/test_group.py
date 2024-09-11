@@ -11,12 +11,12 @@ from pytest import raises as pytest_raises
 
 def test_GroupBox_exists():
     # ESTABLISH
-    swim_text = ";swimmers"
+    swim_str = ";swimmers"
     # WHEN
-    swim_groupbox = GroupBox(group_id=swim_text)
+    swim_groupbox = GroupBox(group_id=swim_str)
     # THEN
     assert swim_groupbox is not None
-    assert swim_groupbox.group_id == swim_text
+    assert swim_groupbox.group_id == swim_str
     assert swim_groupbox._memberships is None
     assert swim_groupbox._fund_give is None
     assert swim_groupbox._fund_take is None
@@ -30,18 +30,18 @@ def test_GroupBox_exists():
 
 def test_groupbox_shop_ReturnsCorrectObj():
     # ESTABLISH
-    swim_text = ";swimmers"
+    swim_str = ";swimmers"
     nation_road = create_road(root_label(), "nation-states")
     usa_road = create_road(nation_road, "USA")
 
     # WHEN
-    swim_groupbox = groupbox_shop(group_id=swim_text)
+    swim_groupbox = groupbox_shop(group_id=swim_str)
 
     # THEN
-    print(f"{swim_text}")
+    print(f"{swim_str}")
     assert swim_groupbox is not None
     assert swim_groupbox.group_id is not None
-    assert swim_groupbox.group_id == swim_text
+    assert swim_groupbox.group_id == swim_str
     assert swim_groupbox._memberships == {}
     assert swim_groupbox._fund_give == 0
     assert swim_groupbox._fund_take == 0
@@ -55,44 +55,44 @@ def test_groupbox_shop_ReturnsCorrectObj():
 
 def test_groupbox_shop_ReturnsCorrectObj_road_delimiter():
     # ESTABLISH
-    swim_text = "/swimmers"
-    slash_text = "/"
+    swim_str = "/swimmers"
+    slash_str = "/"
     x_fund_coin = 7
 
     # WHEN
     swim_groupbox = groupbox_shop(
-        group_id=swim_text, _road_delimiter=slash_text, _fund_coin=x_fund_coin
+        group_id=swim_str, _road_delimiter=slash_str, _fund_coin=x_fund_coin
     )
 
     # THEN
-    assert swim_groupbox._road_delimiter == slash_text
+    assert swim_groupbox._road_delimiter == slash_str
     assert swim_groupbox._fund_coin == x_fund_coin
 
 
 # def test_GroupBox_set_group_id_RaisesErrorIfParameterContains_road_delimiter_And_acct_mirror_True():
 #     # ESTABLISH
-#     slash_text = "/"
-#     bob_text = f"Bob{slash_text}Texas"
+#     slash_str = "/"
+#     bob_str = f"Bob{slash_str}Texas"
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         groupbox_shop(bob_text, _acct_mirror=True, _road_delimiter=slash_text)
+#         groupbox_shop(bob_str, _acct_mirror=True, _road_delimiter=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_text}' needs to be a RoadNode. Cannot contain delimiter: '{slash_text}'"
+#         == f"'{bob_str}' needs to be a RoadNode. Cannot contain delimiter: '{slash_str}'"
 #     )
 
 
 def test_GroupBox_set_membership_CorrectlySetsAttr():
     # ESTABLISH
-    yao_text = "Yao"
-    sue_text = "Sue"
-    swim_text = ";swimmers"
-    yao_swim_membership = membership_shop(swim_text)
-    sue_swim_membership = membership_shop(swim_text)
-    yao_swim_membership._acct_id = yao_text
-    sue_swim_membership._acct_id = sue_text
-    swimmers_groupbox = groupbox_shop(swim_text)
+    yao_str = "Yao"
+    sue_str = "Sue"
+    swim_str = ";swimmers"
+    yao_swim_membership = membership_shop(swim_str)
+    sue_swim_membership = membership_shop(swim_str)
+    yao_swim_membership._acct_id = yao_str
+    sue_swim_membership._acct_id = sue_str
+    swimmers_groupbox = groupbox_shop(swim_str)
 
     # WHEN
     swimmers_groupbox.set_membership(yao_swim_membership)
@@ -108,19 +108,19 @@ def test_GroupBox_set_membership_CorrectlySetsAttr():
 
 def test_GroupBox_set_membership_SetsAttr_credor_pool_debtor_pool():
     # ESTABLISH
-    yao_text = "Yao"
-    sue_text = "Sue"
-    ohio_text = ";Ohio"
-    yao_ohio_membership = membership_shop(ohio_text)
-    sue_ohio_membership = membership_shop(ohio_text)
-    yao_ohio_membership._acct_id = yao_text
-    yao_ohio_membership._acct_id = yao_text
-    sue_ohio_membership._acct_id = sue_text
+    yao_str = "Yao"
+    sue_str = "Sue"
+    ohio_str = ";Ohio"
+    yao_ohio_membership = membership_shop(ohio_str)
+    sue_ohio_membership = membership_shop(ohio_str)
+    yao_ohio_membership._acct_id = yao_str
+    yao_ohio_membership._acct_id = yao_str
+    sue_ohio_membership._acct_id = sue_str
     yao_ohio_membership._credor_pool = 66
     sue_ohio_membership._credor_pool = 22
     yao_ohio_membership._debtor_pool = 6600
     sue_ohio_membership._debtor_pool = 2200
-    ohio_groupbox = groupbox_shop(ohio_text)
+    ohio_groupbox = groupbox_shop(ohio_str)
     assert ohio_groupbox._credor_pool == 0
     assert ohio_groupbox._debtor_pool == 0
 
@@ -139,35 +139,35 @@ def test_GroupBox_set_membership_SetsAttr_credor_pool_debtor_pool():
 
 def test_GroupBox_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
     # ESTABLISH
-    yao_text = "Yao"
-    ohio_text = ";Ohio"
-    iowa_text = ";Iowa"
-    yao_ohio_membership = membership_shop(ohio_text)
-    yao_ohio_membership._acct_id = yao_text
-    yao_ohio_membership._acct_id = yao_text
+    yao_str = "Yao"
+    ohio_str = ";Ohio"
+    iowa_str = ";Iowa"
+    yao_ohio_membership = membership_shop(ohio_str)
+    yao_ohio_membership._acct_id = yao_str
+    yao_ohio_membership._acct_id = yao_str
     yao_ohio_membership._credor_pool = 66
     yao_ohio_membership._debtor_pool = 6600
-    iowa_groupbox = groupbox_shop(iowa_text)
+    iowa_groupbox = groupbox_shop(iowa_str)
 
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
         iowa_groupbox.set_membership(yao_ohio_membership)
     assert (
         str(excinfo.value)
-        == f"GroupBox.group_id={iowa_text} cannot set membership.group_id={ohio_text}"
+        == f"GroupBox.group_id={iowa_str} cannot set membership.group_id={ohio_str}"
     )
 
 
 def test_GroupBox_set_membership_RaisesErrorIf_acct_id_IsNone():
     # ESTABLISH
-    ohio_text = ";Ohio"
-    ohio_groupbox = groupbox_shop(ohio_text)
-    yao_ohio_membership = membership_shop(ohio_text)
+    ohio_str = ";Ohio"
+    ohio_groupbox = groupbox_shop(ohio_str)
+    yao_ohio_membership = membership_shop(ohio_str)
     assert yao_ohio_membership._acct_id is None
 
     with pytest_raises(Exception) as excinfo:
         ohio_groupbox.set_membership(yao_ohio_membership)
     assert (
         str(excinfo.value)
-        == f"membership group_id={ohio_text} cannot be set when _acct_id is None."
+        == f"membership group_id={ohio_str} cannot be set when _acct_id is None."
     )

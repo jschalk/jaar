@@ -9,7 +9,7 @@ from src._road.road import RoadUnit
 # from src._instrument.sqlite import (
 #     sqlite_bool,
 #     sqlite_null,
-#     sqlite_text,
+#     sqlite_str,
 #     sqlite_to_python,
 # )
 # from dataclasses import dataclass

@@ -2,10 +2,7 @@ from src._instrument.python_tool import conditional_fig_show
 from src._road.road import get_parent_road, RoadUnit, is_sub_road
 from src.bud.idea import IdeaUnit
 from src.bud.bud import BudUnit
-from src.bud.report import (
-    get_bud_acctunits_dataframe,
-    get_bud_agenda_dataframe,
-)
+from src.bud.report import get_bud_acctunits_dataframe, get_bud_agenda_dataframe
 from plotly.graph_objects import (
     Figure as plotly_Figure,
     Scatter as plotly_Scatter,
@@ -109,10 +106,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
     x_title += f" (Items: {len(x_bud._idea_dict)})"
     x_title += f" (_sum_healerlink_share: {x_bud._sum_healerlink_share})"
     x_title += f" (_econs_justified: {x_bud._econs_justified})"
-    x_fig.update_layout(
-        title_text=x_title,
-        font_size=12,
-    )
+    x_fig.update_layout(title_text=x_title, font_size=12)
 
 
 def display_ideatree(
@@ -224,7 +218,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     return fig
 
 
-def add_rect_text(fig, x, y, text):
+def add_rect_str(fig, x, y, text):
     fig.add_annotation(
         xref="paper",
         yref="paper",
@@ -242,7 +236,7 @@ def create_idea_rect(
     level,
     level_width0,
     level_width1,
-    display_text,
+    display_str,
     show_red: bool = False,
 ):
     level_bump = level * 0.125
@@ -270,7 +264,7 @@ def create_idea_rect(
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text=display_text)
+    add_rect_str(fig, x=text_x, y=text_y, text=display_str)
 
 
 def add_group_rect(
@@ -280,7 +274,7 @@ def add_group_rect(
     level,
     level_width0,
     level_width1,
-    display_text,
+    display_str,
 ):
     # shape_x0 = base_width
     # shape_x1 = 1 - base_width
@@ -309,7 +303,7 @@ def add_group_rect(
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text=display_text)
+    add_rect_str(fig, x=text_x, y=text_y, text=display_str)
 
 
 def add_people_rect(
@@ -319,7 +313,7 @@ def add_people_rect(
     level,
     level_width0,
     level_width1,
-    display_text,
+    display_str,
 ):
     level_bump = level * 0.125
     home_form_x0 = base_width
@@ -345,7 +339,7 @@ def add_people_rect(
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text=display_text)
+    add_rect_str(fig, x=text_x, y=text_y, text=display_str)
 
 
 def get_budunit_base_fig() -> plotly_Figure:

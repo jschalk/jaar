@@ -204,13 +204,13 @@ def test_ChronoUnit_get_blurb_ReturnsObj():
     timeline_blurb = x_chronounit.get_blurb()
 
     # THEN
-    x_text = f"{x_chronounit._hour}"
-    x_text += f":{x_chronounit._minute}"
-    x_text += f", {x_chronounit._weekday}"
-    x_text += f", {x_chronounit._monthday}"
-    x_text += f" {x_chronounit._month}"
-    x_text += f", {x_chronounit._year_num}"
-    assert timeline_blurb == x_text
+    x_str = f"{x_chronounit._hour}"
+    x_str += f":{x_chronounit._minute}"
+    x_str += f", {x_chronounit._weekday}"
+    x_str += f", {x_chronounit._monthday}"
+    x_str += f" {x_chronounit._month}"
+    x_str += f", {x_chronounit._year_num}"
+    assert timeline_blurb == x_str
 
 
 def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
@@ -273,23 +273,23 @@ def check_creg_timeline_attr(x_bud: BudUnit, x_datetime: datetime):
     dt_month = x_datetime.strftime("%B")
     dt_monthday = x_datetime.strftime("%d")
     dt_year = x_datetime.strftime("%Y")
-    hour_text = ""
+    hour_str = ""
     hour_int = int(dt_hour)
     if hour_int == 0:
-        hour_text = f"{hour_int}-12am"
+        hour_str = f"{hour_int}-12am"
     elif hour_int < 12:
-        hour_text = f"{hour_int}-{hour_int}am"
+        hour_str = f"{hour_int}-{hour_int}am"
     elif hour_int == 12:
-        hour_text = f"{hour_int}-12pm"
+        hour_str = f"{hour_int}-12pm"
     else:
-        hour_text = f"{hour_int}-{hour_int%12}pm"
+        hour_str = f"{hour_int}-{hour_int%12}pm"
     print(x_datetime.strftime("%H:%M, %A, %d %B, %Y"))
     if creg_chronounit._month in {"January", "February"}:
         dt_year = int(dt_year) - 1
     assert creg_chronounit._weekday == dt_weekday
     assert creg_chronounit._month == dt_month
     assert creg_chronounit._monthday == int(dt_monthday) - 1
-    assert creg_chronounit._hour == hour_text
+    assert creg_chronounit._hour == hour_str
     assert creg_chronounit._minute == int(dt_minute)
     assert creg_chronounit._year_num == int(dt_year)
 

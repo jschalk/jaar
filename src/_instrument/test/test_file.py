@@ -42,12 +42,12 @@ def test_save_file_SetsFile(env_dir_setup_cleanup):
     x_name = "fizz_buzz"
     x_file_ext = "txt"
     x_file_name = f"{x_name}.{x_file_ext}"
-    x_file_text = "trying this"
+    x_file_str = "trying this"
     print(f"{env_dir=} {x_file_name=}")
     assert not os_path_exist(create_file_path(env_dir, x_file_name))
 
     # WHEN
-    save_file(dest_dir=env_dir, file_name=x_file_name, file_text=x_file_text)
+    save_file(dest_dir=env_dir, file_name=x_file_name, file_str=x_file_str)
 
     # THEN
     assert os_path_exist(create_file_path(env_dir, x_file_name))
@@ -64,15 +64,15 @@ def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_file_name(
     x2_file_ext = "json"
     x1_file_name = f"{x1_name}.{x1_file_ext}"
     x2_file_name = f"{x2_name}.{x2_file_ext}"
-    x1_file_text = "trying this"
-    x2_file_text = "look there"
+    x1_file_str = "trying this"
+    x2_file_str = "look there"
     print(f"{env_dir=} {x1_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
-    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
+    save_file(dest_dir=env_dir, file_name=x1_file_name, file_str=x1_file_str)
+    save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN / THEN
-    assert open_file(dest_dir=env_dir, file_name=x1_file_name) == x1_file_text
-    assert open_file(dest_dir=env_dir, file_name=x2_file_name) == x2_file_text
+    assert open_file(dest_dir=env_dir, file_name=x1_file_name) == x1_file_str
+    assert open_file(dest_dir=env_dir, file_name=x2_file_name) == x2_file_str
 
 
 def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
@@ -86,67 +86,67 @@ def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
     x2_file_ext = "json"
     x1_file_name = f"{x1_name}.{x1_file_ext}"
     x2_file_name = f"{x2_name}.{x2_file_ext}"
-    x1_file_text = "trying this"
-    x2_file_text = "look there"
+    x1_file_str = "trying this"
+    x2_file_str = "look there"
     x1_file_path = f"{env_dir}/{x1_file_name}"
     x2_file_path = f"{env_dir}/{x2_file_name}"
 
     print(f"{env_dir=} {x1_file_name=}")
     print(f"{env_dir=} {x1_file_name=}")
-    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
-    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
+    save_file(dest_dir=env_dir, file_name=x1_file_name, file_str=x1_file_str)
+    save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN / THEN
-    assert open_file(dest_dir=x1_file_path, file_name=None) == x1_file_text
-    assert open_file(dest_dir=x2_file_path, file_name=None) == x2_file_text
+    assert open_file(dest_dir=x1_file_path, file_name=None) == x1_file_str
+    assert open_file(dest_dir=x2_file_path, file_name=None) == x2_file_str
 
 
 def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
-    swim_text = "swim"
+    swim_str = "swim"
     swim_file_ext = "txt"
-    swim_file_name = f"{swim_text}.{swim_file_ext}"
-    swim_old_file_text = "swimming is good"
-    swim_new_file_text = "swimming is ok"
+    swim_file_name = f"{swim_str}.{swim_file_ext}"
+    swim_old_file_str = "swimming is good"
+    swim_new_file_str = "swimming is ok"
     print(f"{env_dir=} {swim_file_name=}")
-    save_file(dest_dir=env_dir, file_name=swim_file_name, file_text=swim_old_file_text)
-    assert open_file(dest_dir=env_dir, file_name=swim_file_name) == swim_old_file_text
+    save_file(dest_dir=env_dir, file_name=swim_file_name, file_str=swim_old_file_str)
+    assert open_file(dest_dir=env_dir, file_name=swim_file_name) == swim_old_file_str
 
     # WHEN
     save_file(
         dest_dir=env_dir,
         file_name=swim_file_name,
-        file_text=swim_new_file_text,
+        file_str=swim_new_file_str,
         replace=None,
     )
 
     # THEN
-    assert open_file(dest_dir=env_dir, file_name=swim_file_name) == swim_new_file_text
+    assert open_file(dest_dir=env_dir, file_name=swim_file_name) == swim_new_file_str
 
 
 def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
-    swim_text = "swim"
+    swim_str = "swim"
     swim_file_ext = "txt"
-    swim_file_name = f"{swim_text}.{swim_file_ext}"
-    swim_old_file_text = "swimming is good"
-    swim_new_file_text = "swimming is ok"
+    swim_file_name = f"{swim_str}.{swim_file_ext}"
+    swim_old_file_str = "swimming is good"
+    swim_new_file_str = "swimming is ok"
     print(f"{env_dir=} {swim_file_name=}")
-    save_file(dest_dir=env_dir, file_name=swim_file_name, file_text=swim_old_file_text)
-    assert open_file(env_dir, swim_file_name) == swim_old_file_text
+    save_file(dest_dir=env_dir, file_name=swim_file_name, file_str=swim_old_file_str)
+    assert open_file(env_dir, swim_file_name) == swim_old_file_str
 
     # WHEN
     save_file(
         dest_dir=env_dir,
         file_name=swim_file_name,
-        file_text=swim_new_file_text,
+        file_str=swim_new_file_str,
         replace=False,
     )
 
     # THEN
-    assert open_file(env_dir, swim_file_name) == swim_old_file_text
+    assert open_file(env_dir, swim_file_name) == swim_old_file_str
 
 
 def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
@@ -154,18 +154,18 @@ def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "x1.txt"
     x2_file_name = "x2.txt"
-    x1_file_text = "trying this"
-    x2_file_text = "look there"
-    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
-    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
+    x1_file_str = "trying this"
+    x2_file_str = "look there"
+    save_file(dest_dir=env_dir, file_name=x1_file_name, file_str=x1_file_str)
+    save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN
     files_dict = dir_files(dir_path=env_dir)
 
     # THEN
     assert len(files_dict) == 2
-    assert files_dict.get(x1_file_name) == x1_file_text
-    assert files_dict.get(x2_file_name) == x2_file_text
+    assert files_dict.get(x1_file_name) == x1_file_str
+    assert files_dict.get(x2_file_name) == x2_file_str
 
 
 def test_dir_files_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
@@ -177,17 +177,17 @@ def test_dir_files_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
     x2_file_ext = "json"
     x1_file_name = f"{x1_name}.{x1_file_ext}"
     x2_file_name = f"{x2_name}.{x2_file_ext}"
-    x1_file_text = "trying this"
-    x2_file_text = "look there"
-    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
-    save_file(dest_dir=env_dir, file_name=x2_file_name, file_text=x2_file_text)
+    x1_file_str = "trying this"
+    x2_file_str = "look there"
+    save_file(dest_dir=env_dir, file_name=x1_file_name, file_str=x1_file_str)
+    save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN
     files_dict = dir_files(dir_path=env_dir, delete_extensions=True)
 
     # THEN
-    assert files_dict.get(x1_name) == x1_file_text
-    assert files_dict.get(x2_name) == x2_file_text
+    assert files_dict.get(x1_name) == x1_file_str
+    assert files_dict.get(x2_name) == x2_file_str
 
 
 def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
@@ -199,17 +199,17 @@ def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
     x2_file_ext = "json"
     x1_file_name = f"{x1_name}.{x1_file_ext}"
     x2_file_name = f"{x2_name}.{x2_file_ext}"
-    x1_file_text = "trying this"
-    x2_file_text = "look there"
+    x1_file_str = "trying this"
+    x2_file_str = "look there"
     save_file(
         dest_dir=f"{env_dir}/{x1_name}",
         file_name=x1_file_name,
-        file_text=x1_file_text,
+        file_str=x1_file_str,
     )
     save_file(
         dest_dir=f"{env_dir}/{x2_name}",
         file_name=x2_file_name,
-        file_text=x2_file_text,
+        file_str=x2_file_str,
     )
 
     # WHEN
@@ -226,16 +226,16 @@ def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
     x1_name = "x1"
     x1_file_ext = "txt"
     x1_file_name = f"{x1_name}.{x1_file_ext}"
-    x1_file_text = "trying this"
-    save_file(dest_dir=env_dir, file_name=x1_file_name, file_text=x1_file_text)
+    x1_file_str = "trying this"
+    save_file(dest_dir=env_dir, file_name=x1_file_name, file_str=x1_file_str)
     x2_name = "x2"
     x2_file_ext = "json"
     x2_file_name = f"{x2_name}.{x2_file_ext}"
-    x2_file_text = "look there"
+    x2_file_str = "look there"
     save_file(
         dest_dir=f"{env_dir}/{x2_name}",
         file_name=x2_file_name,
-        file_text=x2_file_text,
+        file_str=x2_file_str,
     )
 
     # WHEN
@@ -271,9 +271,9 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegers_v0(env_dir_setup_clean
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "1.json"
     x2_file_name = "2.json"
-    x_file_text = "file text"
-    save_file(env_dir, x1_file_name, x_file_text)
-    save_file(env_dir, x2_file_name, x_file_text)
+    x_file_str = "file text"
+    save_file(env_dir, x1_file_name, x_file_str)
+    save_file(env_dir, x2_file_name, x_file_str)
 
     # WHEN
     files_dict = get_integer_filenames(env_dir, 0)
@@ -293,12 +293,12 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersWithCorrectExtension(
     x2_file_name = "2.json"
     txt1_file_name = "1.txt"
     txt3_file_name = "3.txt"
-    x_file_text = "file text"
-    save_file(env_dir, z_file_name, x_file_text)
-    save_file(env_dir, x1_file_name, x_file_text)
-    save_file(env_dir, x2_file_name, x_file_text)
-    save_file(env_dir, txt1_file_name, x_file_text)
-    save_file(env_dir, txt3_file_name, x_file_text)
+    x_file_str = "file text"
+    save_file(env_dir, z_file_name, x_file_str)
+    save_file(env_dir, x1_file_name, x_file_str)
+    save_file(env_dir, x2_file_name, x_file_str)
+    save_file(env_dir, txt1_file_name, x_file_str)
+    save_file(env_dir, txt3_file_name, x_file_str)
 
     # WHEN
     files_dict = get_integer_filenames(env_dir, 0)
@@ -323,13 +323,13 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThan_min_integer
     x3_file_name = "3.json"
     txt1_file_name = "1.txt"
     txt3_file_name = "3.txt"
-    x_file_text = "file text"
-    save_file(env_dir, z_file_name, x_file_text)
-    save_file(env_dir, x1_file_name, x_file_text)
-    save_file(env_dir, x2_file_name, x_file_text)
-    save_file(env_dir, x3_file_name, x_file_text)
-    save_file(env_dir, txt1_file_name, x_file_text)
-    save_file(env_dir, txt3_file_name, x_file_text)
+    x_file_str = "file text"
+    save_file(env_dir, z_file_name, x_file_str)
+    save_file(env_dir, x1_file_name, x_file_str)
+    save_file(env_dir, x2_file_name, x_file_str)
+    save_file(env_dir, x3_file_name, x_file_str)
+    save_file(env_dir, txt1_file_name, x_file_str)
+    save_file(env_dir, txt3_file_name, x_file_str)
 
     # WHEN
     assert get_integer_filenames(env_dir, 2) == {2, 3}
@@ -352,23 +352,23 @@ def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(
 
 def test_get_directory_path_ReturnsCorrectObj():
     # ESTABLISH
-    texas_text = "texas"
-    dallas_text = "dallas"
-    elpaso_text = "el paso"
-    kern_text = "kern"
+    texas_str = "texas"
+    dallas_str = "dallas"
+    elpaso_str = "el paso"
+    kern_str = "kern"
 
     # WHEN
-    texas_path = get_directory_path([texas_text])
-    dallas_path = get_directory_path([texas_text, dallas_text])
-    elpaso_path = get_directory_path([texas_text, elpaso_text])
-    kern_path = get_directory_path([texas_text, elpaso_text, kern_text])
+    texas_path = get_directory_path([texas_str])
+    dallas_path = get_directory_path([texas_str, dallas_str])
+    elpaso_path = get_directory_path([texas_str, elpaso_str])
+    kern_path = get_directory_path([texas_str, elpaso_str, kern_str])
 
     # THEN
     assert "" == get_directory_path()
-    assert texas_path == f"/{texas_text}"
-    assert dallas_path == f"/{texas_text}/{dallas_text}"
-    assert elpaso_path == f"/{texas_text}/{elpaso_text}"
-    assert kern_path == f"/{texas_text}/{elpaso_text}/{kern_text}"
+    assert texas_path == f"/{texas_str}"
+    assert dallas_path == f"/{texas_str}/{dallas_str}"
+    assert elpaso_path == f"/{texas_str}/{elpaso_str}"
+    assert kern_path == f"/{texas_str}/{elpaso_str}/{kern_str}"
 
 
 def test_is_path_valid_ReturnsCorrectObj():
@@ -422,13 +422,13 @@ def test_get_all_dirs_with_file_ReturnsCorrectDirectorys(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "x1.txt"
-    x1_file_text = "trying this"
+    x1_file_str = "trying this"
     iowa_rel_dir = "iowa/dallas"
     ohio_rel_dir = "ohio/elpaso"
     iowa_dir = f"{env_dir}/{iowa_rel_dir}"
     ohio_dir = f"{env_dir}/{ohio_rel_dir}"
-    save_file(dest_dir=iowa_dir, file_name=x1_file_name, file_text=x1_file_text)
-    save_file(dest_dir=ohio_dir, file_name=x1_file_name, file_text=x1_file_text)
+    save_file(dest_dir=iowa_dir, file_name=x1_file_name, file_str=x1_file_str)
+    save_file(dest_dir=ohio_dir, file_name=x1_file_name, file_str=x1_file_str)
 
     # WHEN
     directory_set = get_all_dirs_with_file(x_file_name=x1_file_name, x_dir=env_dir)

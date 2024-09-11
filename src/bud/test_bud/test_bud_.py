@@ -54,7 +54,7 @@ def test_BudUnit_Exists():
 
 def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # ESTABLISH
-    sue_text = "Sue"
+    sue_str = "Sue"
     iowa_real_id = "Iowa"
     slash_road_delimiter = "/"
     x_fund_pool = 555
@@ -64,7 +64,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
 
     # WHEN
     x_bud = budunit_shop(
-        _owner_id=sue_text,
+        _owner_id=sue_str,
         _real_id=iowa_real_id,
         _road_delimiter=slash_road_delimiter,
         _fund_pool=x_fund_pool,
@@ -75,7 +75,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
 
     # THEN
     assert x_bud
-    assert x_bud._owner_id == sue_text
+    assert x_bud._owner_id == sue_str
     assert x_bud._real_id == iowa_real_id
     assert x_bud._tally == 1
     assert x_bud._accts == {}
@@ -132,8 +132,8 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
 def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
     # ESTABLISH
-    zia_text = "Zia"
-    zia_bud = budunit_shop(_owner_id=zia_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(_owner_id=zia_str)
     assert zia_bud._max_tree_traverse == 3
 
     # WHEN
@@ -145,8 +145,8 @@ def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
 
 def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     # ESTABLISH
-    zia_text = "Zia"
-    zia_bud = budunit_shop(_owner_id=zia_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(_owner_id=zia_str)
     assert zia_bud._max_tree_traverse == 3
     zia_tree_traverse = 1
 
@@ -161,8 +161,8 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     # ESTABLISH
-    zia_text = "Zia"
-    zia_bud = budunit_shop(_owner_id=zia_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(_owner_id=zia_str)
     assert zia_bud._max_tree_traverse == 3
 
     # WHEN/THEN
@@ -177,10 +177,10 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
     # ESTABLISH
-    real_id_text = "Sun"
+    real_id_str = "Sun"
     slash_road_delimiter = "/"
-    sue_text = "Sue"
-    sue_bud = budunit_shop(sue_text, real_id_text, _road_delimiter=slash_road_delimiter)
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str, real_id_str, _road_delimiter=slash_road_delimiter)
     assert sue_bud._road_delimiter == slash_road_delimiter
 
     # WHEN
@@ -193,15 +193,15 @@ def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
-    real_id_text = "Sun"
+    real_id_str = "Sun"
     slash_road_delimiter = "/"
-    sue_text = "Sue"
-    sue_bud = budunit_shop(sue_text, real_id_text, _road_delimiter=slash_road_delimiter)
-    casa_text = "casa"
-    v1_casa_road = sue_bud.make_l1_road(casa_text)
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str, real_id_str, _road_delimiter=slash_road_delimiter)
+    casa_str = "casa"
+    v1_casa_road = sue_bud.make_l1_road(casa_str)
 
     # WHEN
-    v2_casa_road = sue_bud.make_l1_road(casa_text)
+    v2_casa_road = sue_bud.make_l1_road(casa_str)
 
     # THEN
     assert v1_casa_road == v2_casa_road

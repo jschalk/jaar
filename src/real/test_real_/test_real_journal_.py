@@ -18,14 +18,14 @@ from pytest import raises as pytest_raises
 
 def test_RealUnit_get_journal_db_path_ReturnsCorrectObj():
     # ESTABLISH
-    music_text = "music"
-    music_real = RealUnit(real_id=music_text, reals_dir=get_test_reals_dir())
+    music_str = "music"
+    music_real = RealUnit(real_id=music_str, reals_dir=get_test_reals_dir())
 
     # WHEN
     x_journal_db_path = music_real.get_journal_db_path()
 
     # THEN
-    x_real_dir = f"{get_test_reals_dir()}/{music_text}"
+    x_real_dir = f"{get_test_reals_dir()}/{music_str}"
     journal_file_name = "journal.db"
     assert x_journal_db_path == f"{x_real_dir}/{journal_file_name}"
 
@@ -34,8 +34,8 @@ def test_RealUnit_create_journal_db_CreatesDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    music_text = "music"
-    music_real = realunit_shop(real_id=music_text, reals_dir=get_test_reals_dir())
+    music_str = "music"
+    music_real = realunit_shop(real_id=music_str, reals_dir=get_test_reals_dir())
     assert os_path_exists(music_real.get_journal_db_path())
     delete_dir(music_real.get_journal_db_path())
     assert os_path_exists(music_real.get_journal_db_path()) is False
@@ -51,35 +51,35 @@ def test_RealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    music_text = "music"
-    music_real = realunit_shop(real_id=music_text, reals_dir=get_test_reals_dir())
+    music_str = "music"
+    music_real = realunit_shop(real_id=music_str, reals_dir=get_test_reals_dir())
     delete_dir(dir=music_real.get_journal_db_path())  # clear out any treasury.db file
     music_real._create_journal_db()
     assert os_path_exists(music_real.get_journal_db_path())
 
     # SETUP
-    x_file_text = "Texas Dallas ElPaso"
+    x_file_str = "Texas Dallas ElPaso"
     db_file = "journal.db"
-    save_file(music_real._real_dir, db_file, file_text=x_file_text, replace=True)
+    save_file(music_real._real_dir, db_file, file_str=x_file_str, replace=True)
     assert os_path_exists(music_real.get_journal_db_path())
-    assert open_file(music_real._real_dir, file_name=db_file) == x_file_text
+    assert open_file(music_real._real_dir, file_name=db_file) == x_file_str
 
     # WHEN
     music_real._create_journal_db()
     # THEN
-    assert open_file(music_real._real_dir, file_name=db_file) == x_file_text
+    assert open_file(music_real._real_dir, file_name=db_file) == x_file_str
 
     # # WHEN
     # music_real._create_journal_db(overwrite=True)
     # # THEN
-    # assert open_file(music_real._real_dir, file_name=db_file) != x_file_text
+    # assert open_file(music_real._real_dir, file_name=db_file) != x_file_str
 
 
 def test_RealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     # ESTABLISH
-    music_text = "music"
+    music_str = "music"
     music_real = realunit_shop(
-        real_id=music_text, reals_dir=get_test_reals_dir(), in_memory_journal=True
+        real_id=music_str, reals_dir=get_test_reals_dir(), in_memory_journal=True
     )
 
     music_real._journal_db = None
@@ -120,8 +120,8 @@ def test_real_set_real_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
 
     # THEN
     # grab config.json
-    config_text = open_file(dest_dir="src/real", file_name="journal_db_check.json")
-    config_dict = get_dict_from_json(config_text)
+    config_str = open_file(dest_dir="src/real", file_name="journal_db_check.json")
+    config_dict = get_dict_from_json(config_str)
     tables_dict = get_nested_value(config_dict, ["tables"])
     print(f"{tables_dict=}")
 

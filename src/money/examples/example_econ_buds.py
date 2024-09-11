@@ -20,19 +20,19 @@ def get_Jnode2node_bud() -> BudUnit:
 def get_2node_bud(real_id: RealID = None) -> BudUnit:
     if real_id is None:
         real_id = temp_real_id()
-    a_text = "A"
-    b_text = "B"
-    x_bud = budunit_shop(_owner_id=a_text)
+    a_str = "A"
+    b_str = "B"
+    x_bud = budunit_shop(_owner_id=a_str)
     x_bud.set_real_id(real_id)
-    idea_b = ideaunit_shop(b_text)
+    idea_b = ideaunit_shop(b_str)
     x_bud.set_idea(idea_b, parent_road=temp_real_id())
     x_bud.settle_bud()
     return x_bud
 
 
 def get_3node_bud() -> BudUnit:
-    a_text = "A"
-    x_bud = budunit_shop(a_text)
+    a_str = "A"
+    x_bud = budunit_shop(a_str)
     x_bud.set_real_id(temp_real_id())
     x_bud.set_l1_idea(ideaunit_shop("B"))
     x_bud.set_l1_idea(ideaunit_shop("C"))
@@ -41,8 +41,8 @@ def get_3node_bud() -> BudUnit:
 
 
 def get_3node_D_E_F_bud() -> BudUnit:
-    d_text = "D"
-    x_bud = budunit_shop(d_text)
+    d_str = "D"
+    x_bud = budunit_shop(d_str)
     x_bud.set_real_id(temp_real_id())
     x_bud.set_l1_idea(ideaunit_shop("E"))
     x_bud.set_l1_idea(ideaunit_shop("F"))
