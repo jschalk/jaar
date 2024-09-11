@@ -2,13 +2,13 @@ from src.bud.group import awardlink_shop
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
 from src.bud.bud import budunit_shop
 from src.bud.bud_tool import (
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_factunit_text,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_factunit_str,
     bud_idea_reasonunit_get_obj,
     bud_idea_reason_premiseunit_get_obj as premiseunit_get_obj,
     bud_idea_factunit_get_obj,
@@ -42,12 +42,12 @@ from src.gift.atom_config import (
 def test_sift_atom_ReturnsNoneIfGivenAtomUnitIsUPDATE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_idea(casa_road)
-    casa_atom = atomunit_shop(bud_ideaunit_text(), atom_update())
+    casa_atom = atomunit_shop(bud_ideaunit_str(), atom_update())
     casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
-    casa_atom.set_arg(label_str(), casa_text)
+    casa_atom.set_arg(label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
     new_casa_atom = sift_atomunit(sue_bud, casa_atom)
@@ -58,13 +58,13 @@ def test_sift_atom_ReturnsNoneIfGivenAtomUnitIsUPDATE():
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acctunit():
     # ESTABLISH
-    zia_text = "Zia"
+    zia_str = "Zia"
     zia_debtit_belief = 51
     sue_bud = budunit_shop("Sue")
-    sue_bud.add_acctunit(zia_text)
+    sue_bud.add_acctunit(zia_str)
 
-    zia_atom = atomunit_shop(bud_acctunit_text(), atom_insert())
-    zia_atom.set_arg(acct_id_str(), zia_text)
+    zia_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
+    zia_atom.set_arg(acct_id_str(), zia_str)
     zia_atom.set_arg(debtit_belief_str(), zia_debtit_belief)
 
     # WHEN
@@ -72,7 +72,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acctunit():
 
     # THEN
     assert new_zia_atomunit
-    assert new_zia_atomunit.crud_text == atom_update()
+    assert new_zia_atomunit.crud_str == atom_update()
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
     assert zia_optional_args == {debtit_belief_str(): 51}
@@ -80,16 +80,16 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acctunit():
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
     # ESTABLISH
-    zia_text = "Zia"
-    run_text = ";run"
+    zia_str = "Zia"
+    run_str = ";run"
     zia_run_debtit_vote = 76
     sue_bud = budunit_shop("Sue")
-    sue_bud.add_acctunit(zia_text)
-    sue_bud.get_acct(zia_text).add_membership(run_text)
+    sue_bud.add_acctunit(zia_str)
+    sue_bud.get_acct(zia_str).add_membership(run_str)
 
-    zia_atom = atomunit_shop(bud_acct_membership_text(), atom_insert())
-    zia_atom.set_arg(acct_id_str(), zia_text)
-    zia_atom.set_arg(group_id_str(), run_text)
+    zia_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
+    zia_atom.set_arg(acct_id_str(), zia_str)
+    zia_atom.set_arg(group_id_str(), run_str)
     zia_atom.set_arg(debtit_vote_str(), zia_run_debtit_vote)
 
     # WHEN
@@ -97,7 +97,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
 
     # THEN
     assert new_zia_atomunit
-    assert new_zia_atomunit.crud_text == atom_update()
+    assert new_zia_atomunit.crud_str == atom_update()
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
     assert zia_optional_args == {debtit_vote_str(): zia_run_debtit_vote}
@@ -106,8 +106,8 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_idea(casa_road)
 
     sue_addin = 23
@@ -121,9 +121,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     sue_pledge = 97
     sue_problem_bool = True
     sue_stop_want = 107
-    old_casa_atom = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    old_casa_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
     old_casa_atom.set_arg(parent_road_str(), sue_bud._real_id)
-    old_casa_atom.set_arg(label_str(), casa_text)
+    old_casa_atom.set_arg(label_str(), casa_str)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)
@@ -140,7 +140,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
 
     # THEN
     assert new_casa_atom
-    assert new_casa_atom.crud_text == atom_update()
+    assert new_casa_atom.crud_str == atom_update()
     assert new_casa_atom.get_optional_args_dict()
     zia_optional_args = new_casa_atom.get_optional_args_dict()
     assert zia_optional_args.get(addin_str()) == sue_addin
@@ -159,17 +159,17 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_awardlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_idea(casa_road)
-    run_text = ";run"
+    run_str = ";run"
     zia_run_give_force = 72
     zia_run_take_force = 76
-    sue_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(run_text, 2, 3))
+    sue_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(run_str, 2, 3))
 
-    zia_atom = atomunit_shop(bud_idea_awardlink_text(), atom_insert())
+    zia_atom = atomunit_shop(bud_idea_awardlink_str(), atom_insert())
     zia_atom.set_arg(road_str(), casa_road)
-    zia_atom.set_arg(group_id_str(), run_text)
+    zia_atom.set_arg(group_id_str(), run_str)
     zia_atom.set_arg("give_force", zia_run_give_force)
     zia_atom.set_arg("take_force", zia_run_take_force)
 
@@ -178,7 +178,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_awardlink():
 
     # THEN
     assert new_zia_atomunit
-    assert new_zia_atomunit.crud_text == atom_update()
+    assert new_zia_atomunit.crud_str == atom_update()
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
     assert zia_optional_args.get("give_force") == zia_run_give_force
@@ -188,15 +188,15 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_awardlink():
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reasonunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_idea(casa_road)
     sue_bud.get_idea_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
 
     new_base_idea_active_requisite = True
-    casa_atom = atomunit_shop(bud_idea_reasonunit_text(), atom_insert())
+    casa_atom = atomunit_shop(bud_idea_reasonunit_str(), atom_insert())
     casa_atom.set_arg(road_str(), casa_road)
     casa_atom.set_arg(base_str(), week_road)
     casa_atom.set_arg(base_idea_active_requisite_str(), new_base_idea_active_requisite)
@@ -210,7 +210,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reasonunit():
 
     # THEN
     assert new_zia_atomunit
-    assert new_zia_atomunit.crud_text == atom_update()
+    assert new_zia_atomunit.crud_str == atom_update()
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
     zia_requisite_value = zia_optional_args.get(base_idea_active_requisite_str())
@@ -220,14 +220,14 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reasonunit():
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reason_premiseunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    clean_text = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_text)
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(week_text)
-    thur_text = "thur"
-    thur_road = sue_bud.make_road(week_road, thur_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    clean_str = "clean"
+    clean_road = sue_bud.make_road(casa_road, clean_str)
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(week_str)
+    thur_str = "thur"
+    thur_road = sue_bud.make_road(week_road, thur_str)
     sue_bud.add_idea(clean_road)
     sue_bud.get_idea_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
     clean_idea = sue_bud.get_idea_obj(clean_road)
@@ -235,7 +235,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reason_premiseunit():
     clean_idea.get_reasonunit(week_road).set_premise(thur_road)
 
     thur_divisor = 39
-    thur_atom = atomunit_shop(bud_idea_reason_premiseunit_text(), atom_insert())
+    thur_atom = atomunit_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     thur_atom.set_arg(road_str(), clean_road)
     thur_atom.set_arg(base_str(), week_road)
     thur_atom.set_arg("need", thur_road)
@@ -251,7 +251,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reason_premiseunit():
 
     # THEN
     assert new_zia_atomunit
-    assert new_zia_atomunit.crud_text == atom_update()
+    assert new_zia_atomunit.crud_str == atom_update()
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
     assert zia_optional_args.get("divisor") == thur_divisor
@@ -260,15 +260,15 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_reason_premiseunit():
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_factunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    casa_text = "casa"
-    casa_road = sue_bud.make_l1_road(casa_text)
-    week_text = "week"
-    week_road = sue_bud.make_l1_road(casa_text)
+    casa_str = "casa"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    week_str = "week"
+    week_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_idea(casa_road)
     sue_bud.get_idea_obj(casa_road).set_factunit(factunit_shop(week_road))
 
     casa_fopen = 32
-    casa_atom = atomunit_shop(bud_idea_factunit_text(), atom_insert())
+    casa_atom = atomunit_shop(bud_idea_factunit_str(), atom_insert())
     casa_atom.set_arg(road_str(), casa_road)
     casa_atom.set_arg(base_str(), week_road)
     casa_atom.set_arg(fopen_str(), casa_fopen)
@@ -282,7 +282,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_idea_factunit():
 
     # THEN
     assert new_zia_atomunit
-    assert new_zia_atomunit.crud_text == atom_update()
+    assert new_zia_atomunit.crud_str == atom_update()
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
     assert zia_optional_args.get(fopen_str()) == casa_fopen

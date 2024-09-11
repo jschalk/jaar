@@ -157,8 +157,8 @@ def test_ideaunit_shop_ReturnsObjWith_awardlinks():
     }
 
     # WHEN
-    sport_text = "sport"
-    sport_idea = ideaunit_shop(_label=sport_text, awardlinks=x_awardlinks)
+    sport_str = "sport"
+    sport_idea = ideaunit_shop(_label=sport_str, awardlinks=x_awardlinks)
 
     # THEN
     assert sport_idea.awardlinks == x_awardlinks
@@ -170,9 +170,9 @@ def test_ideaunit_shop_ReturnsObjWithParameters():
     sport_stop_want = 13
 
     # WHEN
-    sport_text = "sport"
+    sport_str = "sport"
     sport_idea = ideaunit_shop(
-        sport_text, gogo_want=sport_gogo_want, stop_want=sport_stop_want
+        sport_str, gogo_want=sport_gogo_want, stop_want=sport_stop_want
     )
 
     # THEN
@@ -182,47 +182,47 @@ def test_ideaunit_shop_ReturnsObjWithParameters():
 
 def test_IdeaUnit_get_obj_key_ReturnsCorrectObj():
     # ESTABLISH
-    round_text = "round_things"
-    round_road = create_road(root_label(), round_text)
-    ball_text = "ball"
+    round_str = "round_things"
+    round_road = create_road(root_label(), round_str)
+    ball_str = "ball"
 
     # WHEN
-    ball_idea = ideaunit_shop(_label=ball_text, _parent_road=round_road)
+    ball_idea = ideaunit_shop(_label=ball_str, _parent_road=round_road)
 
     # THEN
-    assert ball_idea.get_obj_key() == ball_text
+    assert ball_idea.get_obj_key() == ball_str
 
 
 def test_IdeaUnit_get_road_ReturnsCorrectObj():
     # ESTABLISH
-    round_text = "round_things"
-    slash_text = "/"
-    round_road = create_road(root_label(), round_text, delimiter=slash_text)
-    ball_text = "ball"
+    round_str = "round_things"
+    slash_str = "/"
+    round_road = create_road(root_label(), round_str, delimiter=slash_str)
+    ball_str = "ball"
 
     # WHEN
     ball_idea = ideaunit_shop(
-        ball_text, _parent_road=round_road, _road_delimiter=slash_text
+        ball_str, _parent_road=round_road, _road_delimiter=slash_str
     )
 
     # THEN
-    ball_road = create_road(round_road, ball_text, delimiter=slash_text)
+    ball_road = create_road(round_road, ball_str, delimiter=slash_str)
     assert ball_idea.get_road() == ball_road
 
 
 def test_IdeaUnit_set_parent_road_SetsAttr():
     # ESTABLISH
-    round_text = "round_things"
-    slash_text = "/"
-    round_road = create_road(root_label(), round_text, delimiter=slash_text)
-    ball_text = "ball"
+    round_str = "round_things"
+    slash_str = "/"
+    round_road = create_road(root_label(), round_str, delimiter=slash_str)
+    ball_str = "ball"
     ball_idea = ideaunit_shop(
-        ball_text, _parent_road=round_road, _road_delimiter=slash_text
+        ball_str, _parent_road=round_road, _road_delimiter=slash_str
     )
     assert ball_idea._parent_road == round_road
 
     # WHEN
-    sports_road = create_road(root_label(), "sports", delimiter=slash_text)
+    sports_road = create_road(root_label(), "sports", delimiter=slash_str)
     ball_idea.set_parent_road(parent_road=sports_road)
 
     # THEN
@@ -231,8 +231,8 @@ def test_IdeaUnit_set_parent_road_SetsAttr():
 
 def test_IdeaUnit_clear_descendant_pledge_count_ClearsCorrectly():
     # ESTABLISH
-    ball_text = "ball"
-    ball_idea = ideaunit_shop(ball_text, _descendant_pledge_count=55)
+    ball_str = "ball"
+    ball_idea = ideaunit_shop(ball_str, _descendant_pledge_count=55)
     assert ball_idea._descendant_pledge_count == 55
 
     # WHEN
@@ -244,8 +244,8 @@ def test_IdeaUnit_clear_descendant_pledge_count_ClearsCorrectly():
 
 def test_IdeaUnit_add_to_descendant_pledge_count_CorrectlyAdds():
     # ESTABLISH
-    ball_text = "ball"
-    ball_idea = ideaunit_shop(ball_text, _descendant_pledge_count=55)
+    ball_str = "ball"
+    ball_idea = ideaunit_shop(ball_str, _descendant_pledge_count=55)
     ball_idea.clear_descendant_pledge_count()
     assert ball_idea._descendant_pledge_count is None
 
@@ -264,8 +264,8 @@ def test_IdeaUnit_add_to_descendant_pledge_count_CorrectlyAdds():
 
 def test_IdeaUnit_is_math_ReturnsObj():
     # ESTABLISH
-    swim_text = "swim"
-    swim_idea = ideaunit_shop(swim_text)
+    swim_str = "swim"
+    swim_idea = ideaunit_shop(swim_str)
     assert not swim_idea.is_math()
     # WHEN
     swim_idea.begin = 9
@@ -283,8 +283,8 @@ def test_IdeaUnit_is_math_ReturnsObj():
 
 def test_IdeaUnit_clear_gogo_calc_stop_calc_SetsAttr():
     # ESTABLISH
-    time_text = "time"
-    time_idea = ideaunit_shop(time_text)
+    time_str = "time"
+    time_idea = ideaunit_shop(time_str)
     time_idea._range_evaluated = True
     time_idea._gogo_calc = 3
     time_idea._stop_calc = 4
@@ -303,9 +303,9 @@ def test_IdeaUnit_clear_gogo_calc_stop_calc_SetsAttr():
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_denom():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom)
+    time_idea = ideaunit_shop(time_str, denom=time_denom)
     init_gogo_calc = 21
     init_stop_calc = 42
     time_idea._gogo_calc = init_gogo_calc
@@ -328,9 +328,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_denom():
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_FullRangeCovered():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 22
     init_stop_calc = 45
     time_idea._gogo_calc = init_gogo_calc
@@ -351,9 +351,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_FullRan
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_PartialRangeCovered():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 24
     time_idea._gogo_calc = init_gogo_calc
@@ -374,9 +374,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_Partial
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_PartialRangeCovered():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 22
     init_stop_calc = 25
     time_idea._gogo_calc = init_gogo_calc
@@ -397,9 +397,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_Partial
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario0_NoFilter():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
@@ -424,9 +424,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_FilterBoth():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
@@ -451,9 +451,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_FilterLeft():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
@@ -478,9 +478,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario2_FilterRight():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
@@ -505,9 +505,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsLeft():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
@@ -530,9 +530,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsRight():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 60
@@ -555,9 +555,9 @@ def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Sce
 
 def test_IdeaUnit_transform_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario4_None():
     # ESTABLISH
-    time_text = "time"
+    time_str = "time"
     time_denom = 7
-    time_idea = ideaunit_shop(time_text, denom=time_denom, morph=True)
+    time_idea = ideaunit_shop(time_str, denom=time_denom, morph=True)
     init_gogo_calc = None
     init_stop_calc = None
     gogo_want = 21

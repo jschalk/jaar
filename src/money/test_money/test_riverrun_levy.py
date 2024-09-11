@@ -5,64 +5,64 @@ from src.money.riverrun import riverrun_shop
 def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario01():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
-    yao_text = "Yao"
+    yao_str = "Yao"
     yao_tax_due = 222
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_acct_tax_due(yao_text, yao_tax_due)
+    x_riverrun.set_acct_tax_due(yao_str, yao_tax_due)
 
     yao_paid = 500
-    x_cycleledger = {yao_text: yao_paid}
-    assert x_riverrun.get_acct_tax_due(yao_text) == yao_tax_due
-    assert x_cycleledger.get(yao_text) == yao_paid
+    x_cycleledger = {yao_str: yao_paid}
+    assert x_riverrun.get_acct_tax_due(yao_str) == yao_tax_due
+    assert x_cycleledger.get(yao_str) == yao_paid
 
     # WHEN
     y_cycleledger, tax_got = x_riverrun.levy_tax_dues(x_cycleledger)
 
     # THEN
-    assert x_riverrun.get_acct_tax_due(yao_text) == 0
+    assert x_riverrun.get_acct_tax_due(yao_str) == 0
     assert tax_got == 222
-    assert y_cycleledger.get(yao_text) == yao_paid - yao_tax_due
+    assert y_cycleledger.get(yao_str) == yao_paid - yao_tax_due
 
 
 def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario02():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
-    yao_text = "Yao"
-    bob_text = "Bob"
+    yao_str = "Yao"
+    bob_str = "Bob"
     yao_tax_due = 222
     bob_tax_due = 127
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_acct_tax_due(yao_text, yao_tax_due)
-    x_riverrun.set_acct_tax_due(bob_text, bob_tax_due)
+    x_riverrun.set_acct_tax_due(yao_str, yao_tax_due)
+    x_riverrun.set_acct_tax_due(bob_str, bob_tax_due)
 
     yao_paid = 500
     bob_paid = 100
-    x_cycleledger = {yao_text: yao_paid, bob_text: bob_paid}
-    assert x_riverrun.get_acct_tax_due(yao_text) == yao_tax_due
-    assert x_riverrun.get_acct_tax_due(bob_text) == bob_tax_due
-    assert x_cycleledger.get(yao_text) == yao_paid
-    assert x_cycleledger.get(bob_text) == bob_paid
+    x_cycleledger = {yao_str: yao_paid, bob_str: bob_paid}
+    assert x_riverrun.get_acct_tax_due(yao_str) == yao_tax_due
+    assert x_riverrun.get_acct_tax_due(bob_str) == bob_tax_due
+    assert x_cycleledger.get(yao_str) == yao_paid
+    assert x_cycleledger.get(bob_str) == bob_paid
 
     # WHEN
     y_cycleledger, tax_got = x_riverrun.levy_tax_dues(x_cycleledger)
 
     # THEN
-    assert x_riverrun.get_acct_tax_due(yao_text) == 0
-    assert x_riverrun.get_acct_tax_due(bob_text) == 27
-    assert y_cycleledger.get(yao_text) == yao_paid - yao_tax_due
-    assert y_cycleledger.get(bob_text) is None
+    assert x_riverrun.get_acct_tax_due(yao_str) == 0
+    assert x_riverrun.get_acct_tax_due(bob_str) == 27
+    assert y_cycleledger.get(yao_str) == yao_paid - yao_tax_due
+    assert y_cycleledger.get(bob_str) is None
     assert tax_got == 322
 
 
 def test_RiverRun_cycle_payees_vary_ReturnsCorrectObj():
     # ESTABLISH
-    yao_text = "Yao"
+    yao_str = "Yao"
     x_riverrun = riverrun_shop(example_yao_hubunit())
     # WHEN / THEN
     assert x_riverrun._cycle_payees_vary() is False
 
-    x_riverrun._cycle_payees_prev = {yao_text}
-    assert x_riverrun._cycle_payees_prev == {yao_text}
+    x_riverrun._cycle_payees_prev = {yao_str}
+    assert x_riverrun._cycle_payees_prev == {yao_str}
     assert x_riverrun._cycle_payees_curr == set()
 
     # WHEN / THEN
@@ -71,7 +71,7 @@ def test_RiverRun_cycle_payees_vary_ReturnsCorrectObj():
 
 def test_RiverRun_cycles_vary_ReturnsCorrectObj():
     # ESTABLISH
-    yao_text = "Yao"
+    yao_str = "Yao"
     yao_tax_got = 5
     x_riverrun = riverrun_shop(example_yao_hubunit())
     assert x_riverrun._cycle_payees_vary() is False
@@ -79,7 +79,7 @@ def test_RiverRun_cycles_vary_ReturnsCorrectObj():
     assert x_riverrun.cycles_vary() is False
 
     # WHEN
-    x_riverrun._cycle_payees_prev = {yao_text}
+    x_riverrun._cycle_payees_prev = {yao_str}
     # THEN
     assert x_riverrun._cycle_payees_vary()
     assert x_riverrun._tax_gotten() is False
@@ -93,7 +93,7 @@ def test_RiverRun_cycles_vary_ReturnsCorrectObj():
     assert x_riverrun.cycles_vary()
 
     # WHEN
-    x_riverrun._cycle_payees_curr = {yao_text}
+    x_riverrun._cycle_payees_curr = {yao_str}
     # THEN
     assert x_riverrun._cycle_payees_vary() is False
     assert x_riverrun._tax_gotten()

@@ -7,41 +7,41 @@ from os.path import exists as os_path_exists
 def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_texas_hubunit()
-    yao_text = "Yao"
+    yao_str = "Yao"
     yao_credit_belief = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credit_belief)
-    x_riverrun.set_tax_dues({yao_text: 1})
+    x_riverrun.set_econ_credorledger(yao_str, yao_str, yao_credit_belief)
+    x_riverrun.set_tax_dues({yao_str: 1})
     x_riverrun.calc_metrics()
-    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_text)) is False
+    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str)) is False
 
     # WHEN
-    x_riverrun._save_rivergrade_file(yao_text)
+    x_riverrun._save_rivergrade_file(yao_str)
 
     # THEN
-    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_text))
+    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str))
 
 
 def test_RiverRun_save_rivergrade_files_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_texas_hubunit()
-    yao_text = "Yao"
-    bob_text = "Bob"
-    sue_text = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
     yao_credit_belief = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_text, yao_text, yao_credit_belief)
-    x_riverrun.set_econ_credorledger(yao_text, bob_text, 1)
-    x_riverrun.set_tax_dues({yao_text: 1, sue_text: 1})
+    x_riverrun.set_econ_credorledger(yao_str, yao_str, yao_credit_belief)
+    x_riverrun.set_econ_credorledger(yao_str, bob_str, 1)
+    x_riverrun.set_tax_dues({yao_str: 1, sue_str: 1})
     x_riverrun.calc_metrics()
-    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_text)) is False
-    assert os_path_exists(x_riverrun.hubunit.grade_path(bob_text)) is False
-    assert os_path_exists(x_riverrun.hubunit.grade_path(sue_text)) is False
+    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str)) is False
+    assert os_path_exists(x_riverrun.hubunit.grade_path(bob_str)) is False
+    assert os_path_exists(x_riverrun.hubunit.grade_path(sue_str)) is False
 
     # WHEN
     x_riverrun.save_rivergrade_files()
 
     # THEN
-    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_text))
-    assert os_path_exists(x_riverrun.hubunit.grade_path(bob_text))
-    # assert os_path_exists(x_riverrun.hubunit.grade_path(sue_text))
+    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str))
+    assert os_path_exists(x_riverrun.hubunit.grade_path(bob_str))
+    # assert os_path_exists(x_riverrun.hubunit.grade_path(sue_str))

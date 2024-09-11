@@ -30,10 +30,10 @@ def env_dir_setup_cleanup():
 
 
 def get_texas_road() -> RoadUnit:
-    naton_text = "nation-state"
-    usa_text = "usa"
-    texas_text = "texas"
-    return create_road_from_nodes([naton_text, usa_text, texas_text])
+    naton_str = "nation-state"
+    usa_str = "usa"
+    texas_str = "texas"
+    return create_road_from_nodes([naton_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:

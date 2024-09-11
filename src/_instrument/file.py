@@ -63,7 +63,7 @@ def copy_dir(src_dir: str, dest_dir: str):
         shutil_copytree(src=src_dir, dst=dest_dir)
 
 
-def save_file(dest_dir: str, file_name: str, file_text: str, replace: bool = None):
+def save_file(dest_dir: str, file_name: str, file_str: str, replace: bool = None):
     replace = True if replace is None else replace
     if not os_path_exists(path=dest_dir):
         os_makedirs(dest_dir)
@@ -71,7 +71,7 @@ def save_file(dest_dir: str, file_name: str, file_text: str, replace: bool = Non
     file_path = create_file_path(dest_dir, file_name)
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
-            f.write(file_text)
+            f.write(file_str)
             f.close()
 
 
@@ -112,21 +112,21 @@ def dir_files(
         dict_key = None
         file_name = None
         file_path = None
-        file_text = None
+        file_str = None
         obj_path = create_file_path(dir_path, obj_name)
         if os_path_isfile(obj_path) and include_files:
             file_name = obj_name
             file_path = create_file_path(dir_path, file_name)
-            file_text = open_file(dest_dir=dir_path, file_name=file_name)
+            file_str = open_file(dest_dir=dir_path, file_name=file_name)
             dict_key = (
                 os_path_splitext(file_name)[0] if delete_extensions else file_name
             )
-            dict_x[dict_key] = file_text
+            dict_x[dict_key] = file_str
 
         if os_path_isdir(obj_path) and include_dirs:
             dict_key = obj_name
-            file_text = True
-            dict_x[dict_key] = file_text
+            file_str = True
+            dict_x[dict_key] = file_str
     return dict_x
 
 

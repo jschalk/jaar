@@ -1,9 +1,9 @@
 from src._road.road import create_road
 from src.bud.bud_tool import (
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_ideaunit_text,
-    bud_idea_healerlink_text,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_ideaunit_str,
+    bud_idea_healerlink_str,
 )
 from src.gift.atom_config import atom_insert, atom_delete, acct_id_str
 from src.gift.atom import AtomRow, atomrow_shop, atomunit_shop
@@ -61,7 +61,7 @@ def test_AtomRow_exists():
 
 def test_atomrow_shop_ReturnObj():
     # ESTABLISH
-    x_atom_categorys = {bud_acctunit_text()}
+    x_atom_categorys = {bud_acctunit_str()}
 
     # WHEN
     x_atomrow = atomrow_shop(x_atom_categorys, atom_insert())
@@ -73,44 +73,44 @@ def test_atomrow_shop_ReturnObj():
 
 def test_AtomRow_set_atom_category_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({bud_acctunit_text()}, atom_insert())
-    assert bud_acct_membership_text() not in x_atomrow._atom_categorys
+    x_atomrow = atomrow_shop({bud_acctunit_str()}, atom_insert())
+    assert bud_acct_membership_str() not in x_atomrow._atom_categorys
 
     # WHEN
-    x_atomrow.set_atom_category(bud_acct_membership_text())
+    x_atomrow.set_atom_category(bud_acct_membership_str())
 
     # THEN
-    assert bud_acct_membership_text() in x_atomrow._atom_categorys
+    assert bud_acct_membership_str() in x_atomrow._atom_categorys
 
 
 def test_AtomRow_atom_category_exists_ReturnsObj():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), atom_insert())
-    assert not x_atomrow.atom_category_exists(bud_acctunit_text())
-    assert not x_atomrow.atom_category_exists(bud_acct_membership_text())
+    assert not x_atomrow.atom_category_exists(bud_acctunit_str())
+    assert not x_atomrow.atom_category_exists(bud_acct_membership_str())
 
     # WHEN
-    x_atomrow.set_atom_category(bud_acct_membership_text())
+    x_atomrow.set_atom_category(bud_acct_membership_str())
 
     # THEN
-    assert not x_atomrow.atom_category_exists(bud_acctunit_text())
-    assert x_atomrow.atom_category_exists(bud_acct_membership_text())
+    assert not x_atomrow.atom_category_exists(bud_acctunit_str())
+    assert x_atomrow.atom_category_exists(bud_acct_membership_str())
 
 
 def test_AtomRow_delete_atom_category_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({bud_acctunit_text()}, atom_insert())
-    x_atomrow.set_atom_category(bud_acctunit_text())
-    x_atomrow.set_atom_category(bud_acct_membership_text())
-    assert x_atomrow.atom_category_exists(bud_acctunit_text())
-    assert x_atomrow.atom_category_exists(bud_acct_membership_text())
+    x_atomrow = atomrow_shop({bud_acctunit_str()}, atom_insert())
+    x_atomrow.set_atom_category(bud_acctunit_str())
+    x_atomrow.set_atom_category(bud_acct_membership_str())
+    assert x_atomrow.atom_category_exists(bud_acctunit_str())
+    assert x_atomrow.atom_category_exists(bud_acct_membership_str())
 
     # WHEN
-    x_atomrow.delete_atom_category(bud_acct_membership_text())
+    x_atomrow.delete_atom_category(bud_acct_membership_str())
 
     # THEN
-    assert x_atomrow.atom_category_exists(bud_acctunit_text())
-    assert not x_atomrow.atom_category_exists(bud_acct_membership_text())
+    assert x_atomrow.atom_category_exists(bud_acctunit_str())
+    assert not x_atomrow.atom_category_exists(bud_acct_membership_str())
 
 
 def test_AtomRow_set_python_types_SetsAttr():
@@ -120,18 +120,18 @@ def test_AtomRow_set_python_types_SetsAttr():
     x_parent_road = "fizz_buzz"
     x_label = "buzzziy"
     x_monetary_desc = "boullons"
-    x_morph_text = "True"
+    x_morph_str = "True"
     x_morph_bool = True
     x_atomrow.parent_road = x_parent_road
     x_atomrow.label = x_label
     x_atomrow.monetary_desc = x_monetary_desc
-    x_atomrow.morph = x_morph_text
+    x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
     assert x_atomrow.parent_road == x_parent_road
     assert x_atomrow.label == x_label
     assert x_atomrow.monetary_desc == x_monetary_desc
-    assert x_atomrow.morph == x_morph_text
+    assert x_atomrow.morph == x_morph_str
     assert not x_atomrow.road
 
     # WHEN
@@ -146,9 +146,9 @@ def test_AtomRow_set_python_types_SetsAttr():
     assert x_atomrow.road == create_road(x_parent_road, x_label)
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario0():
+def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
     # ESTABLISH
-    x_category = bud_acctunit_text()
+    x_category = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
     x_atomrow.acct_id = "Bob"
 
@@ -162,9 +162,9 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario0():
     assert x_atomunits[0] == static_atom
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario1():
+def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
     # ESTABLISH
-    x_category = bud_acctunit_text()
+    x_category = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
     x_atomrow.acct_id = "Bob"
     x_atomrow.credit_belief = 5
@@ -182,7 +182,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_text_INSERT_Scenario1():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_NSERT_Fails():
     # ESTABLISH
-    x_category = bud_acctunit_text()
+    x_category = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
 
     # WHEN
@@ -194,11 +194,11 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_NSERT_Fails():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     # ESTABLISH
-    x_category = bud_acctunit_text()
+    x_category = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
     x_atomrow.acct_id = "Bob"
-    four_text = "4"
-    x_atomrow.credit_belief = four_text
+    four_str = "4"
+    x_atomrow.credit_belief = four_str
 
     # WHEN
     x_atomunits = x_atomrow.get_atomunits()
@@ -216,22 +216,22 @@ def test_AtomRow_get_atomunits_ReturnsObjIfCategoryIsCorrect():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), atom_insert())
     x_atomrow.acct_id = "Bob"
-    four_text = "4"
-    x_atomrow.credit_belief = four_text
+    four_str = "4"
+    x_atomrow.credit_belief = four_str
     assert len(x_atomrow.get_atomunits()) == 0
 
     # WHEN / THEN
-    x_atomrow.set_atom_category(bud_acct_membership_text())
+    x_atomrow.set_atom_category(bud_acct_membership_str())
     assert len(x_atomrow.get_atomunits()) == 0
 
     # THEN
-    x_atomrow.set_atom_category(bud_acctunit_text())
+    x_atomrow.set_atom_category(bud_acctunit_str())
     assert len(x_atomrow.get_atomunits()) == 1
 
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
     # ESTABLISH
-    x_atomrow = atomrow_shop({bud_ideaunit_text()}, atom_insert())
+    x_atomrow = atomrow_shop({bud_ideaunit_str()}, atom_insert())
     x_atomrow.parent_road = "music78"
     x_atomrow.label = "casa"
     x_atomrow.pledge = False
@@ -241,7 +241,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
     x_atomunit = x_atomrow.get_atomunits()[0]
 
     # THEN
-    static_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    static_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())
     static_atomunit.set_arg("parent_road", "music78")
     static_atomunit.set_arg("label", "casa")
     static_atomunit.set_arg("pledge", False)
@@ -250,7 +250,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
     # ESTABLISH
-    x_categorys = {bud_ideaunit_text(), bud_idea_healerlink_text()}
+    x_categorys = {bud_ideaunit_str(), bud_idea_healerlink_str()}
     x_atomrow = atomrow_shop(x_categorys, atom_insert())
     x_atomrow.parent_road = "music78"
     x_atomrow.label = "casa"
@@ -262,12 +262,12 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_ideaunit_INSERT_pledge_False():
 
     # THEN
     assert len(x_atomunits) == 2
-    y_idea_atomunit = atomunit_shop(bud_ideaunit_text(), atom_insert())
+    y_idea_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())
     y_idea_atomunit.set_arg("parent_road", "music78")
     y_idea_atomunit.set_arg("label", "casa")
     y_idea_atomunit.set_arg("pledge", False)
     assert y_idea_atomunit in x_atomunits
-    healerlink_atomunit = atomunit_shop(bud_idea_healerlink_text(), atom_insert())
+    healerlink_atomunit = atomunit_shop(bud_idea_healerlink_str(), atom_insert())
     healerlink_atomunit.set_arg("road", "music78;casa")
     healerlink_atomunit.set_arg("healer_id", "Bob")
     assert healerlink_atomunit in x_atomunits

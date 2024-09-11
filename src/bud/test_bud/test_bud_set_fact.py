@@ -94,25 +94,25 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
 def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIsNotRangeRoot():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
-    time_text = "time"
-    time_idea = ideaunit_shop(time_text, begin=0, close=140)
+    time_str = "time"
+    time_idea = ideaunit_shop(time_str, begin=0, close=140)
     bob_bud.set_l1_idea(time_idea)
-    time_road = bob_bud.make_l1_road(time_text)
+    time_road = bob_bud.make_l1_road(time_str)
     a1st = "age1st"
     a1st_road = bob_bud.make_road(time_road, a1st)
     a1st_idea = ideaunit_shop(a1st, begin=0, close=20)
     bob_bud.set_idea(a1st_idea, parent_road=time_road)
-    a1e1st_text = "a1_era1st"
-    a1e1st_idea = ideaunit_shop(a1e1st_text, begin=20, close=30)
+    a1e1st_str = "a1_era1st"
+    a1e1st_idea = ideaunit_shop(a1e1st_str, begin=20, close=30)
     bob_bud.set_idea(a1e1st_idea, parent_road=a1st_road)
-    a1e1_road = bob_bud.make_road(a1st_road, a1e1st_text)
+    a1e1_road = bob_bud.make_road(a1st_road, a1e1st_str)
     assert bob_bud._idearoot.factunits in (None, {})
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         bob_bud.set_fact(base=a1e1_road, pick=a1e1_road, fopen=20, fnigh=23)
-    x_text = f"Non range-root fact:{a1e1_road} can only be set by range-root fact"
-    assert str(excinfo.value) == x_text
+    x_str = f"Non range-root fact:{a1e1_road} can only be set by range-root fact"
+    assert str(excinfo.value) == x_str
 
 
 def test_BudUnit_del_fact_CorrectlyModifiesAttr():
@@ -135,10 +135,10 @@ def test_BudUnit_del_fact_CorrectlyModifiesAttr():
 def test_BudUnit_get_fact_ReturnsFactUnit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    situations_text = "situations"
-    situations_road = sue_bud.make_l1_road(situations_text)
-    climate_text = "climate"
-    climate_road = sue_bud.make_road(situations_road, climate_text)
+    situations_str = "situations"
+    situations_road = sue_bud.make_l1_road(situations_str)
+    climate_str = "climate"
+    climate_road = sue_bud.make_road(situations_road, climate_str)
     sue_bud.set_fact(situations_road, climate_road, create_missing_ideas=True)
 
     # WHEN
@@ -152,15 +152,15 @@ def test_BudUnit_get_fact_ReturnsFactUnit():
 def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     # ESTABLISH a single ranged fact
     sue_bud = budunit_shop("Sue")
-    time_text = "time"
-    time_idea = ideaunit_shop(time_text, begin=0, close=140)
+    time_str = "time"
+    time_idea = ideaunit_shop(time_str, begin=0, close=140)
     sue_bud.set_l1_idea(time_idea)
 
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text, pledge=True)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str, pledge=True)
     sue_bud.set_l1_idea(clean_idea)
-    c_road = sue_bud.make_l1_road(clean_text)
-    time_road = sue_bud.make_l1_road(time_text)
+    c_road = sue_bud.make_l1_road(clean_str)
+    time_road = sue_bud.make_l1_road(time_str)
     # sue_bud.edit_idea_attr(road=c_road, reason_base=time_road, reason_premise=time_road, reason_premise_open=5, reason_premise_nigh=10)
 
     sue_bud.set_fact(base=time_road, pick=time_road, fopen=5, fnigh=10)
@@ -171,10 +171,10 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     assert len(sue_bud._get_rangeroot_factunits()) == 1
 
     # WHEN one ranged fact added
-    place_text = "place_x"
-    place_idea = ideaunit_shop(place_text, begin=600, close=800)
+    place_str = "place_x"
+    place_idea = ideaunit_shop(place_str, begin=600, close=800)
     sue_bud.set_l1_idea(place_idea)
-    place_road = sue_bud.make_l1_road(place_text)
+    place_road = sue_bud.make_l1_road(place_str)
     sue_bud.set_fact(base=place_road, pick=place_road, fopen=5, fnigh=10)
     print(f"When one ranged fact added {sue_bud._idearoot.factunits=}")
     assert len(sue_bud._idearoot.factunits) == 2
@@ -197,9 +197,9 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
 def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     # ESTABLISH a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
     sue_bud = budunit_shop("Sue")
-    time_text = "time"
-    sue_bud.set_l1_idea(ideaunit_shop(time_text, begin=0, close=140))
-    time_road = sue_bud.make_l1_road(time_text)
+    time_str = "time"
+    sue_bud.set_l1_idea(ideaunit_shop(time_str, begin=0, close=140))
+    time_road = sue_bud.make_l1_road(time_str)
     mood_x = "mood_x"
     sue_bud.set_l1_idea(ideaunit_shop(mood_x))
     m_x_road = sue_bud.make_l1_road(mood_x)
@@ -222,16 +222,16 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
 def test_BudUnit_set_fact_create_missing_ideas_CreatesBaseAndFact():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    situations_text = "situations"
-    situations_road = sue_bud.make_l1_road(situations_text)
-    climate_text = "climate"
-    climate_road = sue_bud.make_road(situations_road, climate_text)
-    assert sue_bud._idearoot.get_kid(situations_text) is None
+    situations_str = "situations"
+    situations_road = sue_bud.make_l1_road(situations_str)
+    climate_str = "climate"
+    climate_road = sue_bud.make_road(situations_road, climate_str)
+    assert sue_bud._idearoot.get_kid(situations_str) is None
 
     # WHEN
     sue_bud.set_fact(situations_road, climate_road, create_missing_ideas=True)
 
     # THEN
-    assert sue_bud._idearoot.get_kid(situations_text) is not None
+    assert sue_bud._idearoot.get_kid(situations_str) is not None
     assert sue_bud.get_idea_obj(situations_road) is not None
     assert sue_bud.get_idea_obj(climate_road) is not None

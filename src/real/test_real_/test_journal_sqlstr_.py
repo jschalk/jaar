@@ -1,5 +1,5 @@
 from src._road.road import create_road
-from src.bud.bud_tool import bud_idea_factunit_text
+from src.bud.bud_tool import bud_idea_factunit_str
 from src.gift.atom_config import fopen_str, atom_insert, atom_hx_table_name
 from src.gift.atom import atomunit_shop
 from src.real.journal_sqlstr import (
@@ -114,19 +114,19 @@ CREATE TABLE IF NOT EXISTS road_ref (
 
 def test_get_road_ref_table_single_insert_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
-    music_text = "Music"
-    slash_text = "/"
-    texas_road = create_road(music_text, "texas", delimiter=slash_text)
+    music_str = "Music"
+    slash_str = "/"
+    texas_road = create_road(music_str, "texas", delimiter=slash_str)
 
     # WHEN
-    generate_sqlstr = get_road_ref_table_single_insert_sqlstr(texas_road, slash_text)
+    generate_sqlstr = get_road_ref_table_single_insert_sqlstr(texas_road, slash_str)
 
     # THEN
     example_sqlstr = f"""
 INSERT OR IGNORE INTO road_ref (road, delimiter) 
 VALUES (
   '{texas_road}'
-, '{slash_text}'
+, '{slash_str}'
 )
 ;"""
     assert example_sqlstr == generate_sqlstr
@@ -134,18 +134,18 @@ VALUES (
 
 def test_get_road_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
-    music_text = "Music"
-    slash_text = "/"
-    texas_road = create_road(music_text, "texas", delimiter=slash_text)
+    music_str = "Music"
+    slash_str = "/"
+    texas_road = create_road(music_str, "texas", delimiter=slash_str)
 
     # WHEN
-    generate_sqlstr = get_road_ref_table_row_id_select_sqlstr(texas_road, slash_text)
+    generate_sqlstr = get_road_ref_table_row_id_select_sqlstr(texas_road, slash_str)
 
     # THEN
     example_sqlstr = f"""
 SELECT rowid FROM road_ref  
 WHERE road = '{texas_road}' 
-  AND delimiter = '{slash_text}'
+  AND delimiter = '{slash_str}'
 )
 ;"""
     assert example_sqlstr == generate_sqlstr
@@ -164,37 +164,37 @@ CREATE TABLE IF NOT EXISTS atom_hx (
 
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    example_idea_reasonunit_text = (
+    example_idea_reasonunit_str = (
         "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
     )
-    assert generated_sqlstr.find(example_idea_reasonunit_text) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_text) == 3411
+    assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
+    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3411
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     # WHEN
-    sports_text = "sports"
-    sports_road = create_road("a", sports_text)
-    ball_text = "basketball"
-    ball_road = create_road(sports_road, ball_text)
-    knee_text = "knee"
-    knee_road = create_road("a", knee_text)
+    sports_str = "sports"
+    sports_road = create_road("a", sports_str)
+    ball_str = "basketball"
+    ball_road = create_road(sports_road, ball_str)
+    knee_str = "knee"
+    knee_road = create_road("a", knee_str)
     knee_fopen = 7
 
     # WHEN
-    x_category = bud_idea_factunit_text()
-    road_text = "road"
-    base_text = "base"
+    x_category = bud_idea_factunit_str()
+    road_str = "road"
+    base_str = "base"
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
-    update_disc_atomunit.set_required_arg(road_text, ball_road)
-    update_disc_atomunit.set_required_arg(base_text, knee_road)
+    update_disc_atomunit.set_required_arg(road_str, ball_road)
+    update_disc_atomunit.set_required_arg(base_str, knee_road)
     update_disc_atomunit.set_optional_arg(fopen_str(), knee_fopen)
 
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_table_name()} (
-  {x_category}_{atom_insert()}_{road_text}
-, {x_category}_{atom_insert()}_{base_text}
+  {x_category}_{atom_insert()}_{road_str}
+, {x_category}_{atom_insert()}_{base_str}
 , {x_category}_{atom_insert()}_{fopen_str()}
 )
 VALUES (
@@ -220,11 +220,11 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
     assert generated_sqlstr.find(end_sqlstr) == 5375
-    example_idea_reasonunit_text = (
+    example_idea_reasonunit_str = (
         "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
     )
-    assert generated_sqlstr.find(example_idea_reasonunit_text) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_text) == 3443
+    assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
+    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3443
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

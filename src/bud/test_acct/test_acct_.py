@@ -6,16 +6,16 @@ from pytest import raises as pytest_raises
 
 def test_AcctUnit_exists():
     # ESTABLISH
-    bob_text = "Bob"
+    bob_str = "Bob"
 
     # WHEN
-    bob_acctunit = AcctUnit(bob_text)
+    bob_acctunit = AcctUnit(bob_str)
 
     # THEN
-    print(f"{bob_text}")
+    print(f"{bob_str}")
     assert bob_acctunit is not None
     assert bob_acctunit.acct_id is not None
-    assert bob_acctunit.acct_id == bob_text
+    assert bob_acctunit.acct_id == bob_str
     assert bob_acctunit.credit_belief is None
     assert bob_acctunit.debtit_belief is None
     # calculated fields
@@ -37,36 +37,36 @@ def test_AcctUnit_set_acct_id_CorrectlySetsAttr():
     x_acctunit = AcctUnit()
 
     # WHEN
-    bob_text = "Bob"
-    x_acctunit.set_acct_id(bob_text)
+    bob_str = "Bob"
+    x_acctunit.set_acct_id(bob_str)
 
     # THEN
-    assert x_acctunit.acct_id == bob_text
+    assert x_acctunit.acct_id == bob_str
 
 
 def test_AcctUnit_set_acct_id_RaisesErrorIfParameterContains_road_delimiter():
     # ESTABLISH
-    slash_text = "/"
-    texas_text = f"Texas{slash_text}Arkansas"
+    slash_str = "/"
+    texas_str = f"Texas{slash_str}Arkansas"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acctunit_shop(acct_id=texas_text, _road_delimiter=slash_text)
+        acctunit_shop(acct_id=texas_str, _road_delimiter=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_text}' needs to be a RoadNode. Cannot contain delimiter: '{slash_text}'"
+        == f"'{texas_str}' needs to be a RoadNode. Cannot contain delimiter: '{slash_str}'"
     )
 
 
 def test_acctunit_shop_CorrectlySetsAttributes():
     # WHEN
-    yao_text = "Yao"
+    yao_str = "Yao"
 
     # WHEN
-    yao_acctunit = acctunit_shop(acct_id=yao_text)
+    yao_acctunit = acctunit_shop(acct_id=yao_str)
 
     # THEN
-    assert yao_acctunit.acct_id == yao_text
+    assert yao_acctunit.acct_id == yao_str
     assert yao_acctunit.credit_belief == 1
     assert yao_acctunit.debtit_belief == 1
     # calculated fields
@@ -87,13 +87,13 @@ def test_acctunit_shop_CorrectlySetsAttributes():
 
 def test_acctunit_shop_CorrectlySetsAttributes_road_delimiter():
     # ESTABLISH
-    slash_text = "/"
+    slash_str = "/"
 
     # WHEN
-    yao_acctunit = acctunit_shop("Yao", _road_delimiter=slash_text)
+    yao_acctunit = acctunit_shop("Yao", _road_delimiter=slash_str)
 
     # THEN
-    assert yao_acctunit._road_delimiter == slash_text
+    assert yao_acctunit._road_delimiter == slash_str
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_bit():

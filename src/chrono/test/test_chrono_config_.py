@@ -12,12 +12,12 @@ from src.chrono.chrono import (
     C400Constants,
     get_c400_constants,
     day_length,
-    hours_config_text,
-    weekdays_config_text,
-    months_config_text,
-    timeline_label_text,
-    c400_config_text,
-    yr1_jan1_offset_text,
+    hours_config_str,
+    weekdays_config_str,
+    months_config_str,
+    timeline_label_str,
+    c400_config_str,
+    yr1_jan1_offset_str,
     validate_timeline_config,
     create_timeline_config,
     week_str,
@@ -82,54 +82,54 @@ def test_is_timeline_config_valid_ReturnsObj_CheckElementsExist():
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
     assert validate_timeline_config(creg_config)
-    creg_config.pop(hours_config_text())
+    creg_config.pop(hours_config_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(weekdays_config_text())
+    creg_config.pop(weekdays_config_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(months_config_text())
+    creg_config.pop(months_config_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(timeline_label_text())
+    creg_config.pop(timeline_label_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(c400_config_text())
+    creg_config.pop(c400_config_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(yr1_jan1_offset_text())
+    creg_config.pop(yr1_jan1_offset_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[hours_config_text()] = []
+    creg_config[hours_config_str()] = []
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[months_config_text()] = []
+    creg_config[months_config_str()] = []
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[weekdays_config_text()] = []
+    creg_config[weekdays_config_str()] = []
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[yr1_jan1_offset_text()] = None
+    creg_config[yr1_jan1_offset_str()] = None
     assert not validate_timeline_config(creg_config)
-    creg_config[yr1_jan1_offset_text()] = 0
+    creg_config[yr1_jan1_offset_str()] = 0
     assert validate_timeline_config(creg_config)
 
 
@@ -140,23 +140,23 @@ def test_is_timeline_config_valid_ReturnsObj_CheckElementsRepeat():
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[months_config_text()] = [["x_str", 30], ["y_str", 180], ["x_str", 365]]
+    creg_config[months_config_str()] = [["x_str", 30], ["y_str", 180], ["x_str", 365]]
     assert not validate_timeline_config(creg_config)
-    creg_config[months_config_text()] = [["x_str", 30], ["y_str", 180], ["z_str", 365]]
+    creg_config[months_config_str()] = [["x_str", 30], ["y_str", 180], ["z_str", 365]]
     assert validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[hours_config_text()] = [["x_str", 30], ["y_str", 180], ["x_str", 1440]]
+    creg_config[hours_config_str()] = [["x_str", 30], ["y_str", 180], ["x_str", 1440]]
     assert not validate_timeline_config(creg_config)
-    creg_config[hours_config_text()] = [["x_str", 30], ["y_str", 180], ["z_str", 1440]]
+    creg_config[hours_config_str()] = [["x_str", 30], ["y_str", 180], ["z_str", 1440]]
     assert validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[weekdays_config_text()] = ["x_str", "y_str", "x_str"]
+    creg_config[weekdays_config_str()] = ["x_str", "y_str", "x_str"]
     assert not validate_timeline_config(creg_config)
-    creg_config[weekdays_config_text()] = ["x_str", "y_str", "z_str"]
+    creg_config[weekdays_config_str()] = ["x_str", "y_str", "z_str"]
     assert validate_timeline_config(creg_config)
 
 
@@ -204,10 +204,10 @@ def test_create_timeline_config_ReturnsObj():
 
     # THEN
     assert validate_timeline_config(five_dict)
-    assert five_dict.get(timeline_label_text()) == five_str()
-    assert five_dict.get(c400_config_text()) == five_c400_count
-    assert five_dict.get(weekdays_config_text()) == five_weekday_list
-    x_months_config = five_dict.get(months_config_text())
+    assert five_dict.get(timeline_label_str()) == five_str()
+    assert five_dict.get(c400_config_str()) == five_c400_count
+    assert five_dict.get(weekdays_config_str()) == five_weekday_list
+    x_months_config = five_dict.get(months_config_str())
     gen_months = [mon_config[0] for mon_config in x_months_config]
     assert gen_months == five_months_list
     assert x_months_config[0][0] == "Annita"
@@ -218,15 +218,15 @@ def test_create_timeline_config_ReturnsObj():
     assert x_months_config[13][1] == 350
     assert x_months_config[14][0] == "Obama"
     assert x_months_config[14][1] == 365
-    x_hours_config = five_dict.get(hours_config_text())
+    x_hours_config = five_dict.get(hours_config_str())
     assert len(x_hours_config) == 24
     assert x_hours_config[0] == ["0hr", 60]
     assert x_hours_config[4] == ["4hr", 300]
-    assert five_dict.get(yr1_jan1_offset_text()) == five_yr1_jan1_offset
+    assert five_dict.get(yr1_jan1_offset_str()) == five_yr1_jan1_offset
 
     # five_file_name = f"timeline_config_{five_str()}.json"
-    # five_file_text = get_json_from_dict(five_dict)
-    # save_file(chrono_examples_dir(), five_file_name, five_file_text)
+    # five_file_str = get_json_from_dict(five_dict)
+    # save_file(chrono_examples_dir(), five_file_name, five_file_str)
     x_five_config = get_example_timeline_config(five_str())
     assert validate_timeline_config(x_five_config)
     assert x_five_config == five_dict
@@ -234,10 +234,10 @@ def test_create_timeline_config_ReturnsObj():
 
 def test_get_year_road_ReturnsObj():
     # ESTABLISH
-    fizz_text = "fizz34"
+    fizz_str = "fizz34"
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    fizz_road = sue_budunit.make_road(time_road, fizz_str)
     c400_leap_road = sue_budunit.make_road(fizz_road, c400_leap_str())
     c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_road = sue_budunit.make_road(c400_clean_road, c100_str())
@@ -251,10 +251,10 @@ def test_get_year_road_ReturnsObj():
 
 def test_get_week_road_ReturnsObj():
     # ESTABLISH
-    fizz_text = "fizz34"
+    fizz_str = "fizz34"
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    fizz_road = sue_budunit.make_road(time_road, fizz_str)
     week_road = sue_budunit.make_road(fizz_road, week_str())
 
     # WHEN / THEN
@@ -263,10 +263,10 @@ def test_get_week_road_ReturnsObj():
 
 def test_get_day_road_ReturnsObj():
     # ESTABLISH
-    fizz_text = "fizz34"
+    fizz_str = "fizz34"
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
-    fizz_road = sue_budunit.make_road(time_road, fizz_text)
+    fizz_road = sue_budunit.make_road(time_road, fizz_str)
     day_road = sue_budunit.make_road(fizz_road, day_str())
 
     # WHEN / THEN

@@ -196,16 +196,16 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
 def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simple0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    time0_text = "time0"
-    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_str = "time0"
+    time0_road = yao_bud.make_l1_road(time0_str)
     time0_begin = 7
     time0_close = 31
-    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
+    time0_idea = ideaunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
-    time1_text = "time1"
-    time1_road = yao_bud.make_road(time0_road, time1_text)
-    yao_bud.set_idea(ideaunit_shop(time1_text), time0_road)
+    time1_str = "time1"
+    time1_road = yao_bud.make_road(time0_road, time1_str)
+    yao_bud.set_idea(ideaunit_shop(time1_str), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
@@ -235,17 +235,17 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
 def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_NodeWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    time0_text = "time0"
-    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_str = "time0"
+    time0_road = yao_bud.make_l1_road(time0_str)
     time0_begin = 14
     time0_close = 35
-    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
+    time0_idea = ideaunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
-    time1_text = "time1"
+    time1_str = "time1"
     time1_denom = 7
-    time1_road = yao_bud.make_road(time0_road, time1_text)
-    yao_bud.set_idea(ideaunit_shop(time1_text, denom=time1_denom), time0_road)
+    time1_road = yao_bud.make_road(time0_road, time1_str)
+    yao_bud.set_idea(ideaunit_shop(time1_str, denom=time1_denom), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
     yao_bud._init_idea_tree_walk()
@@ -273,18 +273,18 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
 def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_NodeWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    time0_text = "time0"
-    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_str = "time0"
+    time0_road = yao_bud.make_l1_road(time0_str)
     time0_begin = 14
     time0_close = 35
-    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
+    time0_idea = ideaunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
-    time1_text = "time1"
+    time1_str = "time1"
     time1_denom = 7
     time1_numor = 3
-    time1_road = yao_bud.make_road(time0_road, time1_text)
-    temp_idea = ideaunit_shop(time1_text, numor=time1_numor, denom=time1_denom)
+    time1_road = yao_bud.make_road(time0_road, time1_str)
+    temp_idea = ideaunit_shop(time1_str, numor=time1_numor, denom=time1_denom)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
@@ -313,17 +313,17 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
 def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_NodeWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    time0_text = "time0"
-    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_str = "time0"
+    time0_road = yao_bud.make_l1_road(time0_str)
     time0_begin = 3
     time0_close = 7
-    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
+    time0_idea = ideaunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
-    time1_text = "time1"
+    time1_str = "time1"
     time1_addin = 5
-    time1_road = yao_bud.make_road(time0_road, time1_text)
-    temp_idea = ideaunit_shop(time1_text, addin=time1_addin)
+    time1_road = yao_bud.make_road(time0_road, time1_str)
+    temp_idea = ideaunit_shop(time1_str, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
@@ -353,20 +353,20 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
 def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_calc_NodeWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    time0_text = "time0"
-    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_str = "time0"
+    time0_road = yao_bud.make_l1_road(time0_str)
     time0_begin = 3
     time0_close = 7
-    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
+    time0_idea = ideaunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
-    time1_text = "time1"
-    time1_road = yao_bud.make_road(time0_road, time1_text)
+    time1_str = "time1"
+    time1_road = yao_bud.make_road(time0_road, time1_str)
     yao_bud.add_idea(time1_road)
-    time2_text = "time2"
-    time2_road = yao_bud.make_road(time1_road, time2_text)
+    time2_str = "time2"
+    time2_road = yao_bud.make_road(time1_road, time2_str)
     time2_addin = 5
-    x_time2_idea = ideaunit_shop(time2_text, addin=time2_addin)
+    x_time2_idea = ideaunit_shop(time2_str, addin=time2_addin)
     yao_bud.set_idea(x_time2_idea, time1_road)
     time2_idea = yao_bud.get_idea_obj(time2_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
@@ -398,18 +398,18 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
 def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_NodeWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    time0_text = "time0"
-    time0_road = yao_bud.make_l1_road(time0_text)
+    time0_str = "time0"
+    time0_road = yao_bud.make_l1_road(time0_str)
     time0_begin = 21
     time0_close = 35
-    time0_idea = ideaunit_shop(time0_text, begin=time0_begin, close=time0_close)
+    time0_idea = ideaunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_idea(time0_idea)
 
-    time1_text = "time1"
+    time1_str = "time1"
     time1_addin = 70
     time1_denom = 7
-    time1_road = yao_bud.make_road(time0_road, time1_text)
-    temp_idea = ideaunit_shop(time1_text, denom=time1_denom, addin=time1_addin)
+    time1_road = yao_bud.make_road(time0_road, time1_str)
+    temp_idea = ideaunit_shop(time1_str, denom=time1_denom, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
     root_idea = yao_bud.get_idea_obj(yao_bud._real_id)

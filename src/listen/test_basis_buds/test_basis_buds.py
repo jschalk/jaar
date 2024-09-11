@@ -10,33 +10,33 @@ from src.listen.basis_buds import (
 
 def test_create_empty_bud_ReturnsCorrectObj():
     # ESTABLISH
-    yao_text = "Yao"
-    slash_text = "/"
+    yao_str = "Yao"
+    slash_str = "/"
     penny_float = 0.7
-    yao_voice = budunit_shop(yao_text, _road_delimiter=slash_text, _penny=penny_float)
+    yao_voice = budunit_shop(yao_str, _road_delimiter=slash_str, _penny=penny_float)
     yao_voice.set_l1_idea(ideaunit_shop("Iowa"))
-    zia_text = "Zia"
+    zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
     zia_credor_pool = 87
     zia_debtor_pool = 81
-    yao_voice.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_voice.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     zia_irrational_debtit_belief = 11
     zia_inallocable_debtit_belief = 22
-    duty_zia_acctunit = yao_voice.get_acct(zia_text)
+    duty_zia_acctunit = yao_voice.get_acct(zia_str)
     duty_zia_acctunit.add_irrational_debtit_belief(zia_irrational_debtit_belief)
     duty_zia_acctunit.add_inallocable_debtit_belief(zia_inallocable_debtit_belief)
-    zia_acctunit = yao_voice.get_acct(zia_text)
-    zia_acctunit.add_membership(f"{slash_text}swimmers")
+    zia_acctunit = yao_voice.get_acct(zia_str)
+    zia_acctunit.add_membership(f"{slash_str}swimmers")
     yao_voice.set_credor_respect(zia_credor_pool)
     yao_voice.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
-    yao_empty_job = create_empty_bud(yao_voice, x_owner_id=zia_text)
+    yao_empty_job = create_empty_bud(yao_voice, x_owner_id=zia_str)
 
     # THEN
     assert yao_empty_job._owner_id != yao_voice._owner_id
-    assert yao_empty_job._owner_id == zia_text
+    assert yao_empty_job._owner_id == zia_str
     assert yao_empty_job._real_id == yao_voice._real_id
     assert yao_empty_job._last_gift_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
@@ -56,23 +56,23 @@ def test_create_empty_bud_ReturnsCorrectObj():
 
 def test_create_listen_basis_ReturnsCorrectObj():
     # ESTABLISH
-    yao_text = "Yao"
-    slash_text = "/"
-    yao_duty = budunit_shop(yao_text, _road_delimiter=slash_text)
+    yao_str = "Yao"
+    slash_str = "/"
+    yao_duty = budunit_shop(yao_str, _road_delimiter=slash_str)
     yao_duty.set_l1_idea(ideaunit_shop("Iowa"))
-    zia_text = "Zia"
+    zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
     zia_credor_pool = 8700
     zia_debtor_pool = 8100
-    yao_duty.add_acctunit(zia_text, zia_credit_belief, zia_debtit_belief)
+    yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     zia_irrational_debtit_belief = 11
     zia_inallocable_debtit_belief = 22
-    duty_zia_acctunit = yao_duty.get_acct(zia_text)
+    duty_zia_acctunit = yao_duty.get_acct(zia_str)
     duty_zia_acctunit.add_irrational_debtit_belief(zia_irrational_debtit_belief)
     duty_zia_acctunit.add_inallocable_debtit_belief(zia_inallocable_debtit_belief)
-    zia_acctunit = yao_duty.get_acct(zia_text)
-    zia_acctunit.add_membership(f"{slash_text}swimmers")
+    zia_acctunit = yao_duty.get_acct(zia_str)
+    zia_acctunit.add_membership(f"{slash_str}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
     yao_duty.set_debtor_respect(zia_debtor_pool)
 
@@ -94,7 +94,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     yao_basis_job.settle_bud()
     assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
     assert len(yao_basis_job._idea_dict) == 1
-    job_zia_acctunit = yao_basis_job.get_acct(zia_text)
+    job_zia_acctunit = yao_basis_job.get_acct(zia_str)
     assert (
         yao_basis_job.get_acctunits_dict().keys()
         == yao_duty.get_acctunits_dict().keys()
@@ -105,26 +105,26 @@ def test_create_listen_basis_ReturnsCorrectObj():
 
 def test_get_default_action_bud_ReturnsCorrectObj():
     # ESTABLISH
-    sue_text = "Sue"
-    blue_text = "blue"
-    slash_text = "/"
+    sue_str = "Sue"
+    blue_str = "blue"
+    slash_str = "/"
     x_fund_pool = 99000
     x_fund_coin = 80
     x_bit = 5
     sue_acct_pool = 800
-    casa_text = "casa"
-    bob_text = "Bob"
+    casa_str = "casa"
+    bob_str = "Bob"
     last_gift_id = 7
     sue_max_tree_traverse = 9
     sue_budunit = budunit_shop(
-        sue_text, blue_text, slash_text, x_fund_pool, x_fund_coin, x_bit
+        sue_str, blue_str, slash_str, x_fund_pool, x_fund_coin, x_bit
     )
     sue_budunit.set_last_gift_id(last_gift_id)
-    sue_budunit.add_acctunit(bob_text, 3, 4)
-    bob_acctunit = sue_budunit.get_acct(bob_text)
-    bob_acctunit.add_membership(f"{slash_text}swimmers")
+    sue_budunit.add_acctunit(bob_str, 3, 4)
+    bob_acctunit = sue_budunit.get_acct(bob_str)
+    bob_acctunit.add_membership(f"{slash_str}swimmers")
     sue_budunit.set_acct_respect(sue_acct_pool)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_text))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
@@ -133,10 +133,10 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     # THEN
     default_action_bud.settle_bud()
     assert default_action_bud._owner_id == sue_budunit._owner_id
-    assert default_action_bud._owner_id == sue_text
+    assert default_action_bud._owner_id == sue_str
     assert default_action_bud._real_id == sue_budunit._real_id
-    assert default_action_bud._real_id == blue_text
-    assert default_action_bud._road_delimiter == slash_text
+    assert default_action_bud._real_id == blue_str
+    assert default_action_bud._road_delimiter == slash_str
     assert default_action_bud._fund_pool == sue_acct_pool
     assert default_action_bud._fund_coin == x_fund_coin
     assert default_action_bud._bit == x_bit

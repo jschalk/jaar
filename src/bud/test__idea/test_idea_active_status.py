@@ -13,8 +13,8 @@ from src.bud.idea import ideaunit_shop
 
 def test_IdeaUnit_clear_all_acct_cred_debt_ClearsCorrectly():
     # ESTABLISH
-    ball_text = "ball"
-    ball_idea = ideaunit_shop(ball_text, _all_acct_cred=55, _all_acct_debt=33)
+    ball_str = "ball"
+    ball_idea = ideaunit_shop(ball_str, _all_acct_cred=55, _all_acct_debt=33)
     assert ball_idea._all_acct_cred == 55
     assert ball_idea._all_acct_debt == 33
 
@@ -28,8 +28,8 @@ def test_IdeaUnit_clear_all_acct_cred_debt_ClearsCorrectly():
 
 def test_IdeaUnit_get_fund_share_ReturnsObj():
     # ESTABLISH
-    texas_text = "texas"
-    texas_idea = ideaunit_shop(texas_text, root_label())
+    texas_str = "texas"
+    texas_idea = ideaunit_shop(texas_str, root_label())
 
     # WHEN / THEN
     assert texas_idea.get_fund_share() == 0
@@ -42,55 +42,55 @@ def test_IdeaUnit_get_fund_share_ReturnsObj():
 
 def test_IdeaUnit_set_awardlink_SetsAttr():
     # ESTABLISH
-    biker_text = "bikers2"
-    sport_text = "sport"
-    sport_ideaunit = ideaunit_shop(sport_text)
-    assert not sport_ideaunit.awardlinks.get(biker_text)
+    biker_str = "bikers2"
+    sport_str = "sport"
+    sport_ideaunit = ideaunit_shop(sport_str)
+    assert not sport_ideaunit.awardlinks.get(biker_str)
 
     # WHEN
-    sport_ideaunit.set_awardlink(awardlink_shop(biker_text))
+    sport_ideaunit.set_awardlink(awardlink_shop(biker_str))
 
     # THEN
-    assert sport_ideaunit.awardlinks.get(biker_text)
+    assert sport_ideaunit.awardlinks.get(biker_str)
 
 
 def test_IdeaUnit_awardlink_exists_ReturnsObj():
     # ESTABLISH
-    biker_text = "bikers2"
-    sport_text = "sport"
-    sport_ideaunit = ideaunit_shop(sport_text)
-    assert not sport_ideaunit.awardlink_exists(biker_text)
+    biker_str = "bikers2"
+    sport_str = "sport"
+    sport_ideaunit = ideaunit_shop(sport_str)
+    assert not sport_ideaunit.awardlink_exists(biker_str)
 
     # WHEN
-    sport_ideaunit.set_awardlink(awardlink_shop(biker_text))
+    sport_ideaunit.set_awardlink(awardlink_shop(biker_str))
 
     # THEN
-    assert sport_ideaunit.awardlink_exists(biker_text)
+    assert sport_ideaunit.awardlink_exists(biker_str)
 
 
 def test_IdeaUnit_get_awardlink_ReturnsObj():
     # ESTABLISH
-    biker_text = "bikers2"
-    sport_text = "sport"
-    sport_ideaunit = ideaunit_shop(sport_text)
-    sport_ideaunit.set_awardlink(awardlink_shop(biker_text))
+    biker_str = "bikers2"
+    sport_str = "sport"
+    sport_ideaunit = ideaunit_shop(sport_str)
+    sport_ideaunit.set_awardlink(awardlink_shop(biker_str))
 
     # WHEN
-    biker_awardlink = sport_ideaunit.get_awardlink(biker_text)
+    biker_awardlink = sport_ideaunit.get_awardlink(biker_str)
 
     # THEN
     assert biker_awardlink
-    assert biker_awardlink.group_id == biker_text
+    assert biker_awardlink.group_id == biker_str
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
     # ESTABLISH
     biker_give_force = 12
     biker_take_force = 15
-    biker_text = "bikers2"
-    biker_awardheir = awardheir_shop(biker_text, biker_give_force, biker_take_force)
-    swim_text = "swimmers"
-    swim_group_id = swim_text
+    biker_str = "bikers2"
+    biker_awardheir = awardheir_shop(biker_str, biker_give_force, biker_take_force)
+    swim_str = "swimmers"
+    swim_group_id = swim_str
     swim_give_force = 29
     swim_take_force = 32
     swim_awardheir = awardheir_shop(swim_group_id, swim_give_force, swim_take_force)
@@ -98,14 +98,14 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
         swim_awardheir.group_id: swim_awardheir,
         biker_awardheir.group_id: biker_awardheir,
     }
-    sport_text = "sport"
-    sport_idea = ideaunit_shop(sport_text, _awardheirs=x_awardheirs)
+    sport_str = "sport"
+    sport_idea = ideaunit_shop(sport_str, _awardheirs=x_awardheirs)
     assert sport_idea._fund_coin == 1
     assert len(sport_idea._awardheirs) == 2
-    swim_awardheir = sport_idea._awardheirs.get(swim_text)
+    swim_awardheir = sport_idea._awardheirs.get(swim_str)
     assert not swim_awardheir._fund_give
     assert not swim_awardheir._fund_take
-    biker_awardheir = sport_idea._awardheirs.get(biker_text)
+    biker_awardheir = sport_idea._awardheirs.get(biker_str)
     assert not biker_awardheir._fund_give
     assert not biker_awardheir._fund_take
 
@@ -116,24 +116,24 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
 
     # THEN
     print(f"{len(sport_idea._awardheirs)=}")
-    swim_awardheir = sport_idea._awardheirs.get(swim_text)
+    swim_awardheir = sport_idea._awardheirs.get(swim_str)
     assert swim_awardheir._fund_give == 516
     assert swim_awardheir._fund_take == 496
-    biker_awardheir = sport_idea._awardheirs.get(biker_text)
+    biker_awardheir = sport_idea._awardheirs.get(biker_str)
     assert biker_awardheir._fund_give == 213
     assert biker_awardheir._fund_take == 233
 
 
 def test_IdeaUnit_awardheir_exists_ReturnsObj():
     # ESTABLISH
-    biker_text = "bikers2"
-    biker_awardheir = awardheir_shop(biker_text)
-    sport_text = "sport"
-    sport_ideaunit = ideaunit_shop(sport_text)
+    biker_str = "bikers2"
+    biker_awardheir = awardheir_shop(biker_str)
+    sport_str = "sport"
+    sport_ideaunit = ideaunit_shop(sport_str)
     assert not sport_ideaunit.awardheir_exists()
 
     # WHEN
-    sport_ideaunit._awardheirs[biker_text] = biker_awardheir
+    sport_ideaunit._awardheirs[biker_str] = biker_awardheir
 
     # THEN
     assert sport_ideaunit.awardheir_exists()
@@ -141,8 +141,8 @@ def test_IdeaUnit_awardheir_exists_ReturnsObj():
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues():
     # ESTABLISH /WHEN
-    sport_text = "sport"
-    sport_idea = ideaunit_shop(sport_text)
+    sport_str = "sport"
+    sport_idea = ideaunit_shop(sport_str)
 
     # WHEN / THEN
     # does not crash with empty set
@@ -151,11 +151,11 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues(
 
 def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsChanges():
     # ESTABLISH
-    ball_text = "ball"
-    ball_road = create_road(ball_text)
-    run_text = "run"
-    run_road = create_road(ball_road, run_text)
-    ball_idea = ideaunit_shop(ball_text)
+    ball_str = "ball"
+    ball_road = create_road(ball_str)
+    run_str = "run"
+    run_road = create_road(ball_road, run_str)
+    ball_idea = ideaunit_shop(ball_str)
     run_premise = premiseunit_shop(need=run_road, open=0, nigh=7)
     run_premises = {run_premise.need: run_premise}
     reasonheir = reasonheir_shop(run_road, premises=run_premises)
@@ -172,15 +172,15 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsChanges():
 
 def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesChanges():
     # ESTABLISH
-    ball_text = "ball"
-    ball_road = create_road(ball_text)
-    run_text = "run"
-    run_road = create_road(ball_road, run_text)
+    ball_str = "ball"
+    ball_road = create_road(ball_str)
+    run_str = "run"
+    run_road = create_road(ball_road, run_str)
     run_premise = premiseunit_shop(need=run_road, open=0, nigh=7)
     run_premises = {run_premise.need: run_premise}
     run_reasonunit = reasonunit_shop(base=run_road, premises=run_premises)
     run_reasonunits = {run_reasonunit.base: run_reasonunit}
-    ball_idea = ideaunit_shop(ball_text, reasonunits=run_reasonunits)
+    ball_idea = ideaunit_shop(ball_str, reasonunits=run_reasonunits)
     assert ball_idea.reasonunits != {}
 
     # WHEN
@@ -206,20 +206,20 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNoParameters():
 
 def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
-    week_text = "week"
-    week_road = create_road(root_label(), week_text)
+    week_str = "week"
+    week_road = create_road(root_label(), week_str)
     week_open = 3
     week_nigh = 7
     week_addin = 10
-    week_idea = ideaunit_shop(week_text, _parent_road=root_label(), addin=week_addin)
+    week_idea = ideaunit_shop(week_str, _parent_road=root_label(), addin=week_addin)
     week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
-    tue_text = "Tue"
-    tue_road = create_road(week_road, tue_text)
+    tue_str = "Tue"
+    tue_road = create_road(week_road, tue_str)
     tue_addin = 100
-    tue_idea = ideaunit_shop(tue_text, _parent_road=week_road, addin=tue_addin)
-    ball_text = "ball"
-    ball_road = create_road(root_label(), ball_text)
-    ball_idea = ideaunit_shop(ball_text)
+    tue_idea = ideaunit_shop(tue_str, _parent_road=week_road, addin=tue_addin)
+    ball_str = "ball"
+    ball_road = create_road(root_label(), ball_str)
+    ball_idea = ideaunit_shop(ball_str)
     ball_idea._set_factheir(week_factheir)
     tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
     x_bud_idea_dict = {week_idea.get_road(): week_idea, tue_idea.get_road(): tue_idea}
@@ -245,79 +245,79 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
 
 def test_IdeaUnit_set_reasonunit_SetsAttr():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    dirty_text = "dirty"
-    assert not clean_idea.reasonunits.get(dirty_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
+    dirty_str = "dirty"
+    assert not clean_idea.reasonunits.get(dirty_str)
 
     # WHEN
-    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_text))
+    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_str))
 
     # THEN
-    assert clean_idea.reasonunits.get(dirty_text)
-    x_reasonunit = clean_idea.get_reasonunit(base=dirty_text)
+    assert clean_idea.reasonunits.get(dirty_str)
+    x_reasonunit = clean_idea.get_reasonunit(base=dirty_str)
     assert x_reasonunit is not None
-    assert x_reasonunit.base == dirty_text
+    assert x_reasonunit.base == dirty_str
 
 
 def test_IdeaUnit_reasonunit_exists_ReturnsCorrectObj():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    dirty_text = "dirty"
-    assert not clean_idea.reasonunit_exists(dirty_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
+    dirty_str = "dirty"
+    assert not clean_idea.reasonunit_exists(dirty_str)
 
     # WHEN
-    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_text))
+    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_str))
 
     # THEN
-    assert clean_idea.reasonunit_exists(dirty_text)
+    assert clean_idea.reasonunit_exists(dirty_str)
 
 
 def test_IdeaUnit_get_reasonunit_ReturnsCorrectObj():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    dirty_text = "dirty"
-    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_text))
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
+    dirty_str = "dirty"
+    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_str))
 
     # WHEN
-    x_reasonunit = clean_idea.get_reasonunit(base=dirty_text)
+    x_reasonunit = clean_idea.get_reasonunit(base=dirty_str)
 
     # THEN
     assert x_reasonunit is not None
-    assert x_reasonunit.base == dirty_text
+    assert x_reasonunit.base == dirty_str
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsCorrectObj():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    dirty_text = "dirty"
-    reason_heir_x = reasonheir_shop(base=dirty_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
+    dirty_str = "dirty"
+    reason_heir_x = reasonheir_shop(base=dirty_str)
     reason_heirs_x = {reason_heir_x.base: reason_heir_x}
     clean_idea.set_reasonheirs(reasonheirs=reason_heirs_x, bud_idea_dict={})
 
     # WHEN
-    reason_heir_z = clean_idea.get_reasonheir(base=dirty_text)
+    reason_heir_z = clean_idea.get_reasonheir(base=dirty_str)
 
     # THEN
     assert reason_heir_z is not None
-    assert reason_heir_z.base == dirty_text
+    assert reason_heir_z.base == dirty_str
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsNone():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    dirty_text = "dirty"
-    reason_heir_x = reasonheir_shop(dirty_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
+    dirty_str = "dirty"
+    reason_heir_x = reasonheir_shop(dirty_str)
     reason_heirs_x = {reason_heir_x.base: reason_heir_x}
     clean_idea.set_reasonheirs(reasonheirs=reason_heirs_x, bud_idea_dict={})
 
     # WHEN
-    test6_text = "test6"
-    reason_heir_test6 = clean_idea.get_reasonheir(base=test6_text)
+    test6_str = "test6"
+    reason_heir_test6 = clean_idea.get_reasonheir(base=test6_str)
 
     # THEN
     assert reason_heir_test6 is None
@@ -325,8 +325,8 @@ def test_IdeaUnit_get_reasonheir_ReturnsNone():
 
 def test_IdeaUnit_set_active_attrs_SetsNullactive_hxToNonEmpty():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
     assert clean_idea._active_hx == {}
 
     # WHEN
@@ -337,8 +337,8 @@ def test_IdeaUnit_set_active_attrs_SetsNullactive_hxToNonEmpty():
 
 def test_IdeaUnit_set_active_attrs_IfFullactive_hxResetToTrue():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
     clean_idea._active_hx = {0: True, 4: False}
     assert clean_idea._active_hx != {0: True}
     # WHEN
@@ -349,36 +349,36 @@ def test_IdeaUnit_set_active_attrs_IfFullactive_hxResetToTrue():
 
 def test_IdeaUnit_set_factunit_SetsAttr():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    dirty_text = "dirty"
-    assert not clean_idea.factunits.get(dirty_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
+    dirty_str = "dirty"
+    assert not clean_idea.factunits.get(dirty_str)
 
     # WHEN
-    clean_idea.set_factunit(factunit_shop(base=dirty_text))
+    clean_idea.set_factunit(factunit_shop(base=dirty_str))
 
     # THEN
-    assert clean_idea.factunits.get(dirty_text)
+    assert clean_idea.factunits.get(dirty_str)
 
 
 def test_IdeaUnit_factunit_exists_ReturnsCorrectObj():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
-    dirty_text = "dirty"
-    assert not clean_idea.factunit_exists(dirty_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
+    dirty_str = "dirty"
+    assert not clean_idea.factunit_exists(dirty_str)
 
     # WHEN
-    clean_idea.set_factunit(factunit_shop(base=dirty_text))
+    clean_idea.set_factunit(factunit_shop(base=dirty_str))
 
     # THEN
-    assert clean_idea.factunit_exists(dirty_text)
+    assert clean_idea.factunit_exists(dirty_str)
 
 
 # def test_IdeaUnit_set_active_attrs_IfFullactive_hxResetToFalse():
 #     # ESTABLISH
-# clean_text = "clean"
-# clean_idea = ideaunit_shop(clean_text)
+# clean_str = "clean"
+# clean_idea = ideaunit_shop(clean_str)
 #     clean_idea.set_reason_premise(
 #         base="testing1,sec",
 #         premise="testing1,sec,next",
@@ -396,8 +396,8 @@ def test_IdeaUnit_factunit_exists_ReturnsCorrectObj():
 
 def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
     # ESTABLISH
-    clean_text = "clean"
-    clean_idea = ideaunit_shop(clean_text)
+    clean_str = "clean"
+    clean_idea = ideaunit_shop(clean_str)
     assert clean_idea._active_hx == {}
 
     # WHEN
@@ -433,8 +433,8 @@ def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
 
 def test_IdeaUnit_set_teamunit_empty_if_none():
     # ESTABLISH
-    run_text = "run"
-    run_idea = ideaunit_shop(run_text)
+    run_str = "run"
+    run_idea = ideaunit_shop(run_str)
     run_idea.teamunit = None
     assert run_idea.teamunit is None
 
@@ -448,10 +448,10 @@ def test_IdeaUnit_set_teamunit_empty_if_none():
 
 def test_IdeaUnit_set_teamheir_CorrectlySetsAttr():
     # ESTABLISH
-    swim_text = "swimmers"
-    sport_text = "sports"
-    sport_idea = ideaunit_shop(sport_text)
-    sport_idea.teamunit.set_teamlink(group_id=swim_text)
+    swim_str = "swimmers"
+    sport_str = "sports"
+    sport_idea = ideaunit_shop(sport_str)
+    sport_idea.teamunit.set_teamlink(group_id=swim_str)
     # assert sport_idea._teamheir is None
 
     # WHEN
@@ -460,7 +460,7 @@ def test_IdeaUnit_set_teamheir_CorrectlySetsAttr():
     # THEN
     assert sport_idea._teamheir is not None
     swim_teamunit = teamunit_shop()
-    swim_teamunit.set_teamlink(group_id=swim_text)
+    swim_teamunit.set_teamlink(group_id=swim_str)
     swim_teamheir = teamheir_shop()
     swim_teamheir.set_teamlinks(
         teamunit=swim_teamunit, parent_teamheir=None, bud_groupboxs=None

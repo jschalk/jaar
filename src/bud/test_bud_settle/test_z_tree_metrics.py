@@ -64,13 +64,13 @@ def test_BudUnit_get_tree_set_all_idea_uids_unique():
 
 def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
     # ESTABLISH
-    zia_text = "Zia"
-    zia_bud = budunit_shop(_owner_id=zia_text)
-    swim_text = "swim"
-    sports_text = "sports"
-    zia_bud.set_l1_idea(ideaunit_shop(swim_text, _uid=None))
-    zia_bud.set_l1_idea(ideaunit_shop(sports_text, _uid=2))
-    swim_road = zia_bud.make_l1_road(swim_text)
+    zia_str = "Zia"
+    zia_bud = budunit_shop(_owner_id=zia_str)
+    swim_str = "swim"
+    sports_str = "sports"
+    zia_bud.set_l1_idea(ideaunit_shop(swim_str, _uid=None))
+    zia_bud.set_l1_idea(ideaunit_shop(sports_str, _uid=2))
+    swim_road = zia_bud.make_l1_road(swim_str)
     assert zia_bud.get_idea_obj(swim_road)._uid is None
 
     # WHEN
@@ -82,8 +82,8 @@ def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
 
 def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
     # ESTABLISH
-    nia_text = "Nia"
-    nia_bud = budunit_shop(nia_text, _tally=10)
+    nia_str = "Nia"
+    nia_bud = budunit_shop(nia_str, _tally=10)
     weekdays = "weekdays"
     nia_bud.set_l1_idea(ideaunit_shop(weekdays, mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
@@ -151,33 +151,33 @@ def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
 
 def test_BudUnit_3AdvocatesNoideaunit_shop():
     # ESTABLISH
-    yao_text = "Yao"
-    sue_text = "Sue"
-    zia_text = "Zia"
+    yao_str = "Yao"
+    sue_str = "Sue"
+    zia_str = "Zia"
 
     zia_budunit = budunit_shop("Zia")
-    yao_acctunit = acctunit_shop(acct_id=yao_text)
-    sue_acctunit = acctunit_shop(acct_id=sue_text)
-    zia_acctunit = acctunit_shop(acct_id=zia_text)
+    yao_acctunit = acctunit_shop(acct_id=yao_str)
+    sue_acctunit = acctunit_shop(acct_id=sue_str)
+    zia_acctunit = acctunit_shop(acct_id=zia_str)
     # print(f"{yao=}")
     zia_budunit.set_acctunit(yao_acctunit)
     zia_budunit.set_acctunit(sue_acctunit)
     zia_budunit.set_acctunit(zia_acctunit)
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_text, give_force=10))
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_text, give_force=10))
-    zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_text, give_force=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(yao_str, give_force=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(sue_str, give_force=10))
+    zia_budunit._idearoot.set_awardlink(awardlink_shop(zia_str, give_force=10))
 
     # WHEN
     assert zia_budunit.get_awardlinks_metrics() is not None
     accts_metrics = zia_budunit.get_awardlinks_metrics()
 
     # THEN
-    awardlink_yao = accts_metrics[yao_text]
-    awardlink_sue = accts_metrics[sue_text]
-    awardlink_zia = accts_metrics[zia_text]
+    awardlink_yao = accts_metrics[yao_str]
+    awardlink_sue = accts_metrics[sue_str]
+    awardlink_zia = accts_metrics[zia_str]
     assert awardlink_yao.group_id is not None
     assert awardlink_sue.group_id is not None
     assert awardlink_zia.group_id is not None
-    assert awardlink_yao.group_id == yao_text
-    assert awardlink_sue.group_id == sue_text
-    assert awardlink_zia.group_id == zia_text
+    assert awardlink_yao.group_id == yao_str
+    assert awardlink_sue.group_id == sue_str
+    assert awardlink_zia.group_id == zia_str

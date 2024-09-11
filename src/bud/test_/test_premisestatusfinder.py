@@ -161,9 +161,9 @@ def add_trace(
     trace_name: str,
     x_color: str = None,
     showlegend: bool = False,
-    case_text: str = "",
-    sought_text: str = "",
-    sought_status_text: str = "",
+    case_str: str = "",
+    sought_str: str = "",
+    sought_status_str: str = "",
     premise_divisor: float = 0,
 ) -> plotly_figure:
     x_end = x_int if x_end is None else x_end
@@ -180,12 +180,12 @@ def add_trace(
         )
     )
     fig.add_annotation(
-        x=premise_divisor + 0.15, y=y_int, text=sought_text, showarrow=False
+        x=premise_divisor + 0.15, y=y_int, text=sought_str, showarrow=False
     )
     fig.add_annotation(
-        x=premise_divisor + 0.4, y=y_int, text=sought_status_text, showarrow=False
+        x=premise_divisor + 0.4, y=y_int, text=sought_status_str, showarrow=False
     )
-    fig.add_annotation(x=-0.1, y=y_int, text=case_text, showarrow=False)
+    fig.add_annotation(x=-0.1, y=y_int, text=case_str, showarrow=False)
 
 
 # for PremiseStatusFinder tests
@@ -194,21 +194,21 @@ def add_traces(
     x_pbsd: PremiseStatusFinder,
     y_int: int,
     showlegend: bool = False,
-    case_text: str = "",
-    sought_text: str = "",
-    sought_status_text: str = "",
+    case_str: str = "",
+    sought_str: str = "",
+    sought_status_str: str = "",
     premise_divisor: float = 1,
 ) -> plotly_figure:
-    fact_text = "FactUnit Remaiinder range"
-    premise_text = "Premise Range"
-    blue_text = "Blue"
-    pink_text = "Pink"
+    fact_str = "FactUnit Remaiinder range"
+    premise_str = "Premise Range"
+    blue_str = "Blue"
+    pink_str = "Pink"
     sl = showlegend
     if x_pbsd.po() <= x_pbsd.pn():
-        add_trace(fig, x_pbsd.po(), x_pbsd.pn(), y_int, premise_text, blue_text, sl)
+        add_trace(fig, x_pbsd.po(), x_pbsd.pn(), y_int, premise_str, blue_str, sl)
     else:
-        add_trace(fig, 0, x_pbsd.pn(), y_int, premise_text, blue_text, sl)
-        add_trace(fig, x_pbsd.po(), x_pbsd.pd(), y_int, premise_text, blue_text, sl)
+        add_trace(fig, 0, x_pbsd.pn(), y_int, premise_str, blue_str, sl)
+        add_trace(fig, x_pbsd.po(), x_pbsd.pd(), y_int, premise_str, blue_str, sl)
 
     if x_pbsd.bo() <= x_pbsd.bn():
         add_trace(
@@ -216,12 +216,12 @@ def add_traces(
             x_pbsd.bo(),
             x_pbsd.bn(),
             y_int,
-            fact_text,
-            pink_text,
+            fact_str,
+            pink_str,
             sl,
-            case_text=case_text,
-            sought_text=sought_text,
-            sought_status_text=sought_status_text,
+            case_str=case_str,
+            sought_str=sought_str,
+            sought_status_str=sought_status_str,
             premise_divisor=premise_divisor,
         )
     else:
@@ -230,15 +230,15 @@ def add_traces(
             0,
             x_pbsd.bn(),
             y_int,
-            fact_text,
-            pink_text,
+            fact_str,
+            pink_str,
             sl,
-            case_text=case_text,
-            sought_text=sought_text,
-            sought_status_text=sought_status_text,
+            case_str=case_str,
+            sought_str=sought_str,
+            sought_status_str=sought_status_str,
             premise_divisor=premise_divisor,
         )
-        add_trace(fig, x_pbsd.bo(), x_pbsd.pd(), y_int, fact_text, pink_text, sl)
+        add_trace(fig, x_pbsd.bo(), x_pbsd.pd(), y_int, fact_str, pink_str, sl)
 
 
 # for PremiseStatusFinder tests
@@ -248,16 +248,16 @@ def show_x(
     x_pbsd: PremiseStatusFinder,
     fig: plotly_figure,
     trace_y: float,
-    case_text: str,
+    case_str: str,
     showlegend: bool = False,
     graphics_bool: bool = False,
 ) -> float:
     if not graphics_bool:
         return
-    sought_text = "TRUE" if sought_active else "FALSE"
-    sought_status_text = "TRUE" if sought_task_status else "FALSE"
+    sought_str = "TRUE" if sought_active else "FALSE"
+    sought_status_str = "TRUE" if sought_task_status else "FALSE"
     add_traces(
-        fig, x_pbsd, trace_y, showlegend, case_text, sought_text, sought_status_text, 1
+        fig, x_pbsd, trace_y, showlegend, case_str, sought_str, sought_status_str, 1
     )
     if (
         x_pbsd.get_active() != sought_active
@@ -280,9 +280,9 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
         trace_name="Divisor Range",
         x_color=None,
         showlegend=True,
-        case_text="Case",
-        sought_text="active",
-        sought_status_text="Task Status",
+        case_str="Case",
+        sought_str="active",
+        sought_status_str="Task Status",
         premise_divisor=pd,
     )
     fig_title = "When Fact.range < Premise_divisor: Premise.active Checks."

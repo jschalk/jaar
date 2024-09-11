@@ -28,28 +28,28 @@ def test_IdeaUnit_set_label_get_default_real_id_roadnode_DoesNotRaisesError():
 
 def test_IdeaUnit_set_label_DoesNotRaisesError():
     # ESTABLISH
-    el_paso_text = "El Paso"
-    x_idearoot = ideaunit_shop(_root=True, _bud_real_id=el_paso_text)
+    el_paso_str = "El Paso"
+    x_idearoot = ideaunit_shop(_root=True, _bud_real_id=el_paso_str)
 
     # WHEN
-    x_idearoot.set_label(_label=el_paso_text)
+    x_idearoot.set_label(_label=el_paso_str)
 
     # THEN
-    assert x_idearoot._label == el_paso_text
+    assert x_idearoot._label == el_paso_str
 
 
 def test_IdeaUnit_set_label_DoesRaisesError():
     # ESTABLISH
-    el_paso_text = "El Paso"
-    x_idearoot = ideaunit_shop(_root=True, _bud_real_id=el_paso_text)
+    el_paso_str = "El Paso"
+    x_idearoot = ideaunit_shop(_root=True, _bud_real_id=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        casa_text = "casa"
-        x_idearoot.set_label(_label=casa_text)
+        casa_str = "casa"
+        x_idearoot.set_label(_label=casa_str)
     assert (
         str(excinfo.value)
-        == f"Cannot set idearoot to string different than '{el_paso_text}'"
+        == f"Cannot set idearoot to string different than '{el_paso_str}'"
     )
 
 
@@ -59,8 +59,8 @@ def test_IdeaUnit_set_label_RaisesErrorWhen_bud_real_id_IsNone():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        casa_text = "casa"
-        x_idearoot.set_label(_label=casa_text)
+        casa_str = "casa"
+        x_idearoot.set_label(_label=casa_str)
     assert (
         str(excinfo.value)
         == f"Cannot set idearoot to string different than '{root_label()}'"

@@ -10,130 +10,130 @@ from src.listen.examples.listen_env import (
 )
 
 
-def casa_text() -> str:
+def casa_str() -> str:
     return "casa"
 
 
-def cook_text() -> str:
+def cook_str() -> str:
     return "cook"
 
 
-def eat_text() -> str:
+def eat_str() -> str:
     return "eat"
 
 
-def hungry_text() -> str:
+def hungry_str() -> str:
     return "hungry"
 
 
-def full_text() -> str:
+def full_str() -> str:
     return "full"
 
 
-def sanitation_text():
+def sanitation_str():
     return "sanitation"
 
 
-def clean_text():
+def clean_str():
     return "clean"
 
 
-def dirty_text():
+def dirty_str():
     return "dirty"
 
 
-def sweep_text():
+def sweep_str():
     return "sweep"
 
 
-def run_text():
+def run_str():
     return "run"
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), casa_text())
+    return create_road(get_default_real_id_roadnode(), casa_str())
 
 
 def cook_road() -> RoadUnit:
-    return create_road(casa_road(), cook_text())
+    return create_road(casa_road(), cook_str())
 
 
 def eat_road() -> RoadUnit:
-    return create_road(casa_road(), eat_text())
+    return create_road(casa_road(), eat_str())
 
 
 def hungry_road() -> RoadUnit:
-    return create_road(eat_road(), hungry_text())
+    return create_road(eat_road(), hungry_str())
 
 
 def full_road() -> RoadUnit:
-    return create_road(eat_road(), full_text())
+    return create_road(eat_road(), full_str())
 
 
 def sanitation_road() -> RoadUnit:
-    return create_road(casa_road(), sanitation_text())
+    return create_road(casa_road(), sanitation_str())
 
 
 def clean_road() -> RoadUnit:
-    return create_road(sanitation_road(), clean_text())
+    return create_road(sanitation_road(), clean_str())
 
 
 def dirty_road() -> RoadUnit:
-    return create_road(sanitation_road(), dirty_text())
+    return create_road(sanitation_road(), dirty_str())
 
 
 def sweep_road() -> RoadUnit:
-    return create_road(casa_road(), sweep_text())
+    return create_road(casa_road(), sweep_str())
 
 
 def run_road() -> RoadUnit:
-    return create_road(casa_road(), run_text())
+    return create_road(casa_road(), run_str())
 
 
 def get_example_yao_bud() -> BudUnit:
-    yao_text = "Yao"
-    zia_text = "Zia"
-    bob_text = "Bob"
-    yao_speaker = budunit_shop(yao_text, get_default_real_id_roadnode())
-    yao_speaker.set_idea(ideaunit_shop(run_text()), casa_road())
-    yao_speaker.add_acctunit(yao_text, debtit_belief=10)
-    yao_speaker.add_acctunit(zia_text, debtit_belief=30)
-    yao_speaker.add_acctunit(bob_text, debtit_belief=40)
+    yao_str = "Yao"
+    zia_str = "Zia"
+    bob_str = "Bob"
+    yao_speaker = budunit_shop(yao_str, get_default_real_id_roadnode())
+    yao_speaker.set_idea(ideaunit_shop(run_str()), casa_road())
+    yao_speaker.add_acctunit(yao_str, debtit_belief=10)
+    yao_speaker.add_acctunit(zia_str, debtit_belief=30)
+    yao_speaker.add_acctunit(bob_str, debtit_belief=40)
     yao_speaker.set_acct_respect(80)
     return yao_speaker
 
 
 def get_example_yao_job1_speaker() -> BudUnit:
-    yao_text = "Yao"
+    yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_idea_obj(run_road())
     yao_speaker.set_acct_respect(40)
-    yao_speaker.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
-    yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
+    yao_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
+    yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_road())
+    yao_speaker.set_idea(ideaunit_shop(full_str()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit.teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_str)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
     return yao_speaker
 
 
 def get_example_yao_job2_speaker() -> BudUnit:
-    yao_text = "Yao"
+    yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_idea_obj(run_road())
     yao_speaker.set_acct_respect(30)
-    yao_speaker.set_idea(ideaunit_shop(cook_text(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(hungry_text()), eat_road())
-    yao_speaker.set_idea(ideaunit_shop(full_text()), eat_road())
+    yao_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
+    yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_road())
+    yao_speaker.set_idea(ideaunit_shop(full_str()), eat_road())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit.teamunit.set_teamlink(yao_text)
+    cook_ideaunit.teamunit.set_teamlink(yao_str)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
 
-    yao_speaker.set_idea(ideaunit_shop(sweep_text(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(dirty_text()), sanitation_road())
-    yao_speaker.set_idea(ideaunit_shop(clean_text()), sanitation_road())
+    yao_speaker.set_idea(ideaunit_shop(sweep_str(), pledge=True), casa_road())
+    yao_speaker.set_idea(ideaunit_shop(dirty_str()), sanitation_road())
+    yao_speaker.set_idea(ideaunit_shop(clean_str()), sanitation_road())
     yao_speaker.edit_reason(sweep_road(), sanitation_road(), dirty_road())
     yao_speaker.set_fact(sweep_road(), dirty_road())
     return yao_speaker
@@ -143,9 +143,9 @@ def get_example_yao_job3_speaker() -> BudUnit:
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_idea_obj(run_road())
     yao_speaker.set_acct_respect(10)
-    yao_speaker.set_idea(ideaunit_shop(sweep_text(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(dirty_text()), sanitation_road())
-    yao_speaker.set_idea(ideaunit_shop(clean_text()), sanitation_road())
+    yao_speaker.set_idea(ideaunit_shop(sweep_str(), pledge=True), casa_road())
+    yao_speaker.set_idea(ideaunit_shop(dirty_str()), sanitation_road())
+    yao_speaker.set_idea(ideaunit_shop(clean_str()), sanitation_road())
     yao_speaker.edit_reason(sweep_road(), sanitation_road(), dirty_road())
     yao_speaker.set_fact(sweep_road(), dirty_road())
     return yao_speaker
@@ -155,60 +155,60 @@ def get_usa_road() -> RoadUnit:
     return create_road(get_default_real_id_roadnode(), "USA")
 
 
-def get_iowa_text() -> RoadNode:
+def get_iowa_str() -> RoadNode:
     return "Iowa"
 
 
-def get_ohio_text() -> RoadNode:
+def get_ohio_str() -> RoadNode:
     return "Ohio"
 
 
-def get_utah_text() -> RoadNode:
+def get_utah_str() -> RoadNode:
     return "Utah"
 
 
-def get_swim_text() -> RoadNode:
+def get_swim_str() -> RoadNode:
     return "swim"
 
 
-def get_location_text() -> RoadNode:
+def get_location_str() -> RoadNode:
     return "location"
 
 
-def get_in_ocean_text() -> RoadNode:
+def get_in_ocean_str() -> RoadNode:
     return "in_ocean"
 
 
-def get_on_land_text() -> RoadNode:
+def get_on_land_str() -> RoadNode:
     return "on_land"
 
 
 def get_iowa_road() -> RoadUnit:
-    return create_road(get_usa_road(), get_iowa_text())
+    return create_road(get_usa_road(), get_iowa_str())
 
 
 def get_ohio_road() -> RoadUnit:
-    return create_road(get_usa_road(), get_ohio_text())
+    return create_road(get_usa_road(), get_ohio_str())
 
 
 def get_utah_road() -> RoadUnit:
-    return create_road(get_usa_road(), get_utah_text())
+    return create_road(get_usa_road(), get_utah_str())
 
 
 def get_swim_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), get_swim_text())
+    return create_road(get_default_real_id_roadnode(), get_swim_str())
 
 
 def get_location_road() -> RoadUnit:
-    return create_road(get_default_real_id_roadnode(), get_location_text())
+    return create_road(get_default_real_id_roadnode(), get_location_str())
 
 
 def get_in_ocean_road() -> RoadUnit:
-    return create_road(get_location_road(), get_in_ocean_text())
+    return create_road(get_location_road(), get_in_ocean_str())
 
 
 def get_on_land_road() -> RoadUnit:
-    return create_road(get_location_road(), get_on_land_text())
+    return create_road(get_location_road(), get_on_land_str())
 
 
 def get_yao_ohio_hubunit() -> HubUnit:
@@ -218,7 +218,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
         real_id=yao_bud._real_id,
         owner_id=yao_bud._owner_id,
         econ_road=get_ohio_road(),
-        # pipeline_voice_action_text(),
+        # pipeline_voice_action_str(),
     )
 
 
@@ -229,7 +229,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
         real_id=yao_bud._real_id,
         owner_id=yao_bud._owner_id,
         econ_road=get_iowa_road(),
-        # pipeline_voice_action_text(),
+        # pipeline_voice_action_str(),
     )
 
 
@@ -240,18 +240,18 @@ def get_zia_utah_hubunit() -> HubUnit:
         real_id=yao_bud._real_id,
         owner_id="Zia",
         econ_road=get_utah_road(),
-        # pipeline_voice_action_text(),
+        # pipeline_voice_action_str(),
     )
 
 
 def get_example_yao_voice_with_3_healers():
     yao_voice = get_example_yao_bud()
-    yao_text = yao_voice.get_acct("Yao").acct_id
-    bob_text = yao_voice.get_acct("Bob").acct_id
-    zia_text = yao_voice.get_acct("Zia").acct_id
-    iowa_idea = ideaunit_shop(get_iowa_text(), problem_bool=True)
-    ohio_idea = ideaunit_shop(get_ohio_text(), problem_bool=True)
-    utah_idea = ideaunit_shop(get_utah_text(), problem_bool=True)
+    yao_str = yao_voice.get_acct("Yao").acct_id
+    bob_str = yao_voice.get_acct("Bob").acct_id
+    zia_str = yao_voice.get_acct("Zia").acct_id
+    iowa_idea = ideaunit_shop(get_iowa_str(), problem_bool=True)
+    ohio_idea = ideaunit_shop(get_ohio_str(), problem_bool=True)
+    utah_idea = ideaunit_shop(get_utah_str(), problem_bool=True)
     iowa_idea.healerlink.set_healer_id(get_yao_iowa_hubunit().owner_id)
     ohio_idea.healerlink.set_healer_id(get_yao_ohio_hubunit().owner_id)
     utah_idea.healerlink.set_healer_id(get_zia_utah_hubunit().owner_id)
@@ -271,10 +271,10 @@ def get_example_yao_voice_with_3_healers():
 
 #     yao_voice0 = get_example_yao_voice_with_3_healers()
 #     yao_voice0.del_idea_obj(run_road())
-#     yao_voice0.set_l1_idea(ideaunit_shop(get_location_text()))
-#     yao_voice0.set_idea(ideaunit_shop(get_in_ocean_text()), get_location_road())
-#     yao_voice0.set_idea(ideaunit_shop(get_on_land_text()), get_location_road())
-#     yao_voice0.set_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
+#     yao_voice0.set_l1_idea(ideaunit_shop(get_location_str()))
+#     yao_voice0.set_idea(ideaunit_shop(get_in_ocean_str()), get_location_road())
+#     yao_voice0.set_idea(ideaunit_shop(get_on_land_str()), get_location_road())
+#     yao_voice0.set_l1_idea(ideaunit_shop(get_swim_str(), pledge=True))
 #     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
 #     yao_voice0.settle_bud()
 #     assert yao_voice0._econ_dict.get(get_iowa_road())
@@ -283,7 +283,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert len(yao_voice0._econ_dict) == 3
 #     print(f"{yao_voice0._idea_dict.keys()=}")
 
-#     yao_text = yao_voice0._owner_id
+#     yao_str = yao_voice0._owner_id
 #     yao_job1 = get_example_yao_job1_speaker()
 #     yao_job2 = get_example_yao_job2_speaker()
 #     yao_job3 = get_example_yao_job3_speaker()
@@ -293,17 +293,17 @@ def get_example_yao_voice_with_3_healers():
 #     # delete_dir(yao_iowa_hubunit.owners_dir())
 #     assert yao_iowa_hubunit.voice_file_exists() is False
 #     assert yao_iowa_hubunit.action_file_exists() is False
-#     assert yao_iowa_hubunit.job_file_exists(yao_text) is False
-#     assert yao_ohio_hubunit.job_file_exists(yao_text) is False
-#     assert zia_utah_hubunit.job_file_exists(yao_text) is False
+#     assert yao_iowa_hubunit.job_file_exists(yao_str) is False
+#     assert yao_ohio_hubunit.job_file_exists(yao_str) is False
+#     assert zia_utah_hubunit.job_file_exists(yao_str) is False
 #     yao_iowa_hubunit.save_voice_bud(yao_voice0)
 #     yao_iowa_hubunit.save_job_bud(yao_job1)
 #     yao_ohio_hubunit.save_job_bud(yao_job2)
 #     zia_utah_hubunit.save_job_bud(yao_job3)
 #     assert yao_iowa_hubunit.voice_file_exists()
-#     assert yao_iowa_hubunit.job_file_exists(yao_text)
-#     assert yao_ohio_hubunit.job_file_exists(yao_text)
-#     assert zia_utah_hubunit.job_file_exists(yao_text)
+#     assert yao_iowa_hubunit.job_file_exists(yao_str)
+#     assert yao_ohio_hubunit.job_file_exists(yao_str)
+#     assert zia_utah_hubunit.job_file_exists(yao_str)
 
 #     # WHEN
 #     assert yao_iowa_hubunit.action_file_exists() is False
@@ -313,7 +313,7 @@ def get_example_yao_voice_with_3_healers():
 #     yao_action = yao_iowa_hubunit.get_action_bud()
 #     yao_action.settle_bud()
 #     assert yao_action._accts.keys() == yao_voice0._accts.keys()
-#     assert yao_action.get_acct(yao_text)._irrational_debtit_belief == 0
+#     assert yao_action.get_acct(yao_str)._irrational_debtit_belief == 0
 #     yao_action_accts = yao_action.get_dict().get("_accts")
 #     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
 #     yao_action_bob = yao_action_accts.get("Bob")
@@ -344,10 +344,10 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     # yao_job3 with 1 new task, fact stays with it
 
     yao_voice0 = get_example_yao_voice_with_3_healers()
-    yao_voice0.set_l1_idea(ideaunit_shop(get_location_text()))
-    yao_voice0.set_idea(ideaunit_shop(get_in_ocean_text()), get_location_road())
-    yao_voice0.set_idea(ideaunit_shop(get_on_land_text()), get_location_road())
-    yao_voice0.set_l1_idea(ideaunit_shop(get_swim_text(), pledge=True))
+    yao_voice0.set_l1_idea(ideaunit_shop(get_location_str()))
+    yao_voice0.set_idea(ideaunit_shop(get_in_ocean_str()), get_location_road())
+    yao_voice0.set_idea(ideaunit_shop(get_on_land_str()), get_location_road())
+    yao_voice0.set_l1_idea(ideaunit_shop(get_swim_str(), pledge=True))
     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
     yao_voice0.set_fact(get_location_road(), get_in_ocean_road())
     print(f"{yao_voice0.get_fact(get_location_road())=}")
@@ -359,7 +359,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert len(yao_voice0._econ_dict) == 3
     # print(f"{yao_voice0._idea_dict.keys()=}")
 
-    yao_text = yao_voice0._owner_id
+    yao_str = yao_voice0._owner_id
     yao_job1 = get_example_yao_job1_speaker()
     yao_job2 = get_example_yao_job2_speaker()
     yao_job3 = get_example_yao_job3_speaker()
@@ -369,18 +369,18 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     # delete_dir(yao_iowa_hubunit.owners_dir())
     assert yao_iowa_hubunit.voice_file_exists() is False
     assert yao_iowa_hubunit.action_file_exists() is False
-    assert yao_iowa_hubunit.job_file_exists(yao_text) is False
-    assert yao_ohio_hubunit.job_file_exists(yao_text) is False
-    assert zia_utah_hubunit.job_file_exists(yao_text) is False
+    assert yao_iowa_hubunit.job_file_exists(yao_str) is False
+    assert yao_ohio_hubunit.job_file_exists(yao_str) is False
+    assert zia_utah_hubunit.job_file_exists(yao_str) is False
     print(f"{yao_voice0.get_fact(get_location_road())=}")
     yao_iowa_hubunit.save_voice_bud(yao_voice0)
     # yao_iowa_hubunit.save_job_bud(yao_job1)
     # yao_ohio_hubunit.save_job_bud(yao_job2)
     # zia_utah_hubunit.save_job_bud(yao_job3)
     assert yao_iowa_hubunit.voice_file_exists()
-    assert yao_iowa_hubunit.job_file_exists(yao_text) is False
-    assert yao_ohio_hubunit.job_file_exists(yao_text) is False
-    assert zia_utah_hubunit.job_file_exists(yao_text) is False
+    assert yao_iowa_hubunit.job_file_exists(yao_str) is False
+    assert yao_ohio_hubunit.job_file_exists(yao_str) is False
+    assert zia_utah_hubunit.job_file_exists(yao_str) is False
 
     # WHEN
     assert yao_iowa_hubunit.action_file_exists() is False
@@ -390,7 +390,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_action = yao_iowa_hubunit.get_action_bud()
     yao_action.settle_bud()
     assert yao_action._accts.keys() == yao_voice0._accts.keys()
-    assert yao_action.get_acct(yao_text)._irrational_debtit_belief == 0
+    assert yao_action.get_acct(yao_str)._irrational_debtit_belief == 0
     yao_action_accts = yao_action.get_dict().get("_accts")
     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
     yao_action_bob = yao_action_accts.get("Bob")
@@ -419,18 +419,18 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
 
 def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_duty = budunit_shop(yao_text)
+    yao_str = "Yao"
+    yao_duty = budunit_shop(yao_str)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
-    assert sue_texas_hubunit.job_file_exists(yao_text) is False
+    assert sue_texas_hubunit.job_file_exists(yao_str) is False
 
     # WHEN
-    create_job_file_from_duty_file(sue_texas_hubunit, yao_text)
+    create_job_file_from_duty_file(sue_texas_hubunit, yao_str)
 
     # ESTABLISH
-    assert sue_texas_hubunit.job_file_exists(yao_text)
-    yao_job = sue_texas_hubunit.get_job_bud(yao_text)
+    assert sue_texas_hubunit.job_file_exists(yao_str)
+    yao_job = sue_texas_hubunit.get_job_bud(yao_str)
     assert yao_job._owner_id is not None
-    assert yao_job._owner_id == yao_text
+    assert yao_job._owner_id == yao_str
     assert yao_job.get_dict() == yao_duty.get_dict()

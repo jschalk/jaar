@@ -16,8 +16,8 @@ from os.path import exists as os_path_exists
 
 def test_HubUnit_atom_file_name_ReturnsCorrectObj():
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     one_int = 1
 
     # WHEN
@@ -29,8 +29,8 @@ def test_HubUnit_atom_file_name_ReturnsCorrectObj():
 
 def test_HubUnit_atom_file_path_ReturnsCorrectObj():
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     one_int = 1
 
     # WHEN
@@ -43,8 +43,8 @@ def test_HubUnit_atom_file_path_ReturnsCorrectObj():
 
 def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     one_int = 1
     assert os_path_exists(yao_hubunit.atom_file_path(one_int)) is False
 
@@ -59,8 +59,8 @@ def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
 
 def test_HubUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     four_int = 4
     assert os_path_exists(yao_hubunit.atom_file_path(four_int)) is False
     assert yao_hubunit.atom_file_exists(four_int) is False
@@ -75,8 +75,8 @@ def test_HubUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_hubunit.atom_file_exists(ten_int)
@@ -90,8 +90,8 @@ def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
 
 def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_hubunit.atom_file_exists(ten_int)
@@ -104,8 +104,8 @@ def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObjWhenDirIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
 
     # WHEN / THEN
     assert yao_hubunit.get_max_atom_file_number() is None
@@ -113,8 +113,8 @@ def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObjWhenDirIsEmpty(
 
 def test_HubUnit_get_next_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     # WHEN / THEN
     assert yao_hubunit._get_next_atom_file_number() == 0
 
@@ -128,8 +128,8 @@ def test_HubUnit_get_next_atom_file_number_ReturnsCorrectObj(env_dir_setup_clean
 
 def test_HubUnit_save_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_hubunit.get_max_atom_file_number() == ten_int
@@ -152,14 +152,14 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
 
     # WHEN
     yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_bud._owner_id == yao_text
+    assert yao_bud._owner_id == yao_str
     assert yao_bud._real_id == yao_hubunit.real_id
     assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
     assert yao_bud._fund_pool == yao_hubunit.fund_pool
@@ -171,8 +171,8 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
 
     # save atom files
     sports_atom = get_atom_example_ideaunit_sports(yao_hubunit.real_id)
@@ -182,11 +182,11 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
     yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_bud._owner_id == yao_text
+    assert yao_bud._owner_id == yao_str
     assert yao_bud._real_id == yao_hubunit.real_id
     assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
-    sports_text = "sports"
-    sports_road = yao_bud.make_l1_road(sports_text)
+    sports_str = "sports"
+    sports_road = yao_bud.make_l1_road(sports_str)
 
     assert yao_bud.idea_exists(sports_road)
 
@@ -195,8 +195,8 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    yao_text = "Yao"
-    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_text)
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(reals_dir(), real_id(), yao_str)
 
     # save atom files
     x_real_id = yao_hubunit.real_id
@@ -210,10 +210,10 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_bud._owner_id == yao_text
+    assert yao_bud._owner_id == yao_str
     assert yao_bud._real_id == yao_hubunit.real_id
     assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
-    sports_text = "sports"
-    sports_road = yao_bud.make_l1_road(sports_text)
+    sports_str = "sports"
+    sports_road = yao_bud.make_l1_road(sports_str)
 
     assert yao_bud.idea_exists(sports_road)

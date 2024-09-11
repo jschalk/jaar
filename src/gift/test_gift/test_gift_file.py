@@ -20,8 +20,8 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_str = "Sue"
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
     two_int = 2
     six_int = 6
@@ -31,7 +31,7 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     sue_atom6_path = f_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
-    farm_giftunit = giftunit_shop(sue_text, _atoms_dir=sue_atoms_dir)
+    farm_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     assert os_path_exists(sue_atom2_path) is False
     assert os_path_exists(sue_atom6_path) is False
 
@@ -50,8 +50,8 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_str = "Sue"
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
     two_int = 2
     six_int = 6
@@ -61,7 +61,7 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     sue_atom6_path = f_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
-    farm_giftunit = giftunit_shop(sue_text, _atoms_dir=sue_atoms_dir)
+    farm_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     assert os_path_exists(sue_atom2_path) is False
     assert farm_giftunit.atom_file_exists(two_int) is False
 
@@ -77,8 +77,8 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_str = "Sue"
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
     two_int = 2
     six_int = 6
@@ -88,7 +88,7 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     sue_atom6_path = f_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
-    farm_giftunit = giftunit_shop(sue_text, _atoms_dir=sue_atoms_dir)
+    farm_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     sports_atom = get_atom_example_ideaunit_sports()
     farm_giftunit._save_atom_file(two_int, sports_atom)
     assert farm_giftunit.atom_file_exists(two_int)
@@ -104,9 +104,9 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
+    sue_str = "Sue"
     sue_gift_id = 2
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_gifts_dir = f_path(sue_owner_dir, get_gifts_folder())
     two_int = 2
     six_int = 6
@@ -116,7 +116,7 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     sue_gift6_path = f_path(sue_gifts_dir, six_filename)
     print(f"{sue_gift2_path=}")
     print(f"{sue_gift6_path=}")
-    farm_giftunit = giftunit_shop(sue_text, None, sue_gift_id, _gifts_dir=sue_gifts_dir)
+    farm_giftunit = giftunit_shop(sue_str, None, sue_gift_id, _gifts_dir=sue_gifts_dir)
     assert os_path_exists(sue_gift2_path) is False
     assert os_path_exists(sue_gift6_path) is False
 
@@ -130,7 +130,7 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     gift_file_dict = get_dict_from_json(gift_file_json)
     print(f"{gift_file_dict=}")
     assert gift_file_dict.get("change_atom_numbers") == []
-    assert gift_file_dict.get(owner_id_str()) == sue_text
+    assert gift_file_dict.get(owner_id_str()) == sue_str
     assert gift_file_dict.get("face_id") is None
     print(f"{gift_file_dict.keys()=}")
 
@@ -139,8 +139,8 @@ def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_str = "Sue"
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_gifts_dir = f_path(sue_owner_dir, get_gifts_folder())
     two_int = 2
     six_int = 6
@@ -150,7 +150,7 @@ def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     sue_gift6_path = f_path(sue_gifts_dir, six_filename)
     print(f"{sue_gift2_path=}")
     print(f"{sue_gift6_path=}")
-    farm_giftunit = giftunit_shop(sue_text, _gifts_dir=sue_gifts_dir)
+    farm_giftunit = giftunit_shop(sue_str, _gifts_dir=sue_gifts_dir)
     assert os_path_exists(sue_gift2_path) is False
     assert farm_giftunit.gift_file_exists() is False
 
@@ -165,20 +165,20 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_str = "Sue"
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
     sue_gifts_dir = f_path(sue_owner_dir, get_gifts_folder())
 
-    zia_text = "Zia"
-    yao_text = "Yao"
+    zia_str = "Zia"
+    yao_str = "Yao"
     farm_change_start = 4
     farm_giftunit = giftunit_shop(
-        sue_text, _atoms_dir=sue_atoms_dir, _gifts_dir=sue_gifts_dir
+        sue_str, _atoms_dir=sue_atoms_dir, _gifts_dir=sue_gifts_dir
     )
     farm_giftunit.set_change_start(farm_change_start)
-    farm_giftunit.set_face(zia_text)
-    farm_giftunit.set_face(yao_text)
+    farm_giftunit.set_face(zia_str)
+    farm_giftunit.set_face(yao_str)
     int4 = 4
     int5 = 5
     sports_atom = get_atom_example_ideaunit_sports()
@@ -202,11 +202,11 @@ def test_GiftUnit_create_changeunit_from_atom_files_SetsAttr(env_dir_setup_clean
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_str = "Sue"
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
 
-    sue_giftunit = giftunit_shop(sue_text, _atoms_dir=sue_atoms_dir)
+    sue_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     int4 = 4
     int5 = 5
     int9 = 9
@@ -235,18 +235,18 @@ def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_real_dir = f_path(reals_dir(), real_id())
     x_owners_dir = f_path(x_real_dir, "owners")
-    sue_text = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_text)
+    sue_str = "Sue"
+    sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
     sue_gifts_dir = f_path(sue_owner_dir, get_gifts_folder())
 
-    yao_text = "Yao"
+    yao_str = "Yao"
     sue_change_start = 4
     src_sue_giftunit = giftunit_shop(
-        sue_text, _atoms_dir=sue_atoms_dir, _gifts_dir=sue_gifts_dir
+        sue_str, _atoms_dir=sue_atoms_dir, _gifts_dir=sue_gifts_dir
     )
     src_sue_giftunit.set_change_start(sue_change_start)
-    src_sue_giftunit.set_face(yao_text)
+    src_sue_giftunit.set_face(yao_str)
     sports_atom = get_atom_example_ideaunit_sports()
     knee_atom = get_atom_example_ideaunit_knee()
     ball_atom = get_atom_example_ideaunit_ball()

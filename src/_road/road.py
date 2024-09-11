@@ -253,8 +253,8 @@ def validate_roadnode(
 
 def roadunit_valid_dir_path(x_roadunit: RoadUnit, delimiter: str) -> bool:
     x_road_nodes = get_all_road_nodes(x_roadunit, delimiter)
-    slash_text = "/"
-    x_road_os_path = create_road_from_nodes(x_road_nodes, delimiter=slash_text)
+    slash_str = "/"
+    x_road_os_path = create_road_from_nodes(x_road_nodes, delimiter=slash_str)
     parts = pathlib_Path(x_road_os_path).parts
     if len(parts) != len(x_road_nodes):
         return False

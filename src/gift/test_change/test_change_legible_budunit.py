@@ -1,4 +1,4 @@
-from src.bud.bud_tool import budunit_text
+from src.bud.bud_tool import budunit_str
 from src.gift.atom_config import atom_update
 from src.gift.atom import atomunit_shop
 from src.gift.change import changeunit_shop
@@ -17,11 +17,11 @@ def test_create_legible_list_ReturnsObjEstablishWithEmptyChange():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
     # ESTABLISH
-    category = budunit_text()
-    tally_text = "tally"
+    category = budunit_str()
+    tally_str = "tally"
     tally_int = 55
     tally_atomunit = atomunit_shop(category, atom_update())
-    tally_atomunit.set_arg(tally_text, tally_int)
+    tally_atomunit.set_arg(tally_str, tally_int)
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(tally_atomunit)
     sue_bud = budunit_shop("Sue")
@@ -36,11 +36,11 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_monetary_desc():
     # ESTABLISH
-    category = budunit_text()
-    _monetary_desc_text = "monetary_desc"
+    category = budunit_str()
+    _monetary_desc_str = "monetary_desc"
     sue_monetary_desc = "dragon dollars"
     _monetary_desc_atomunit = atomunit_shop(category, atom_update())
-    _monetary_desc_atomunit.set_arg(_monetary_desc_text, sue_monetary_desc)
+    _monetary_desc_atomunit.set_arg(_monetary_desc_str, sue_monetary_desc)
     x_changeunit = changeunit_shop()
     x_changeunit.set_atomunit(_monetary_desc_atomunit)
     sue_bud = budunit_shop("Sue")
@@ -55,11 +55,11 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_monetary_desc():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     # ESTABLISH
-    category = budunit_text()
-    acct_credor_pool_text = "credor_respect"
+    category = budunit_str()
+    acct_credor_pool_str = "credor_respect"
     acct_credor_pool_int = 71
     acct_credor_pool_atomunit = atomunit_shop(category, atom_update())
-    acct_credor_pool_atomunit.set_arg(acct_credor_pool_text, acct_credor_pool_int)
+    acct_credor_pool_atomunit.set_arg(acct_credor_pool_str, acct_credor_pool_int)
 
     print(f"{acct_credor_pool_atomunit=}")
     x_changeunit = changeunit_shop()
@@ -78,11 +78,11 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_With_monetary_desc_None():
     # ESTABLISH
-    category = budunit_text()
-    acct_credor_pool_text = "credor_respect"
+    category = budunit_str()
+    acct_credor_pool_str = "credor_respect"
     acct_credor_pool_int = 71
     acct_credor_pool_atomunit = atomunit_shop(category, atom_update())
-    acct_credor_pool_atomunit.set_arg(acct_credor_pool_text, acct_credor_pool_int)
+    acct_credor_pool_atomunit.set_arg(acct_credor_pool_str, acct_credor_pool_int)
 
     print(f"{acct_credor_pool_atomunit=}")
     x_changeunit = changeunit_shop()
@@ -101,11 +101,11 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Wit
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     # ESTABLISH
-    category = budunit_text()
-    acct_debtor_pool_text = "debtor_respect"
+    category = budunit_str()
+    acct_debtor_pool_str = "debtor_respect"
     acct_debtor_pool_int = 78
     acct_debtor_pool_atomunit = atomunit_shop(category, atom_update())
-    acct_debtor_pool_atomunit.set_arg(acct_debtor_pool_text, acct_debtor_pool_int)
+    acct_debtor_pool_atomunit.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
 
     print(f"{acct_debtor_pool_atomunit=}")
     x_changeunit = changeunit_shop()
@@ -125,13 +125,13 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equal_debtor_respect():
     # ESTABLISH
     x_changeunit = changeunit_shop()
-    category = budunit_text()
-    acct_credor_pool_text = "credor_respect"
-    acct_debtor_pool_text = "debtor_respect"
+    category = budunit_str()
+    acct_credor_pool_str = "credor_respect"
+    acct_debtor_pool_str = "debtor_respect"
     acct_pool_int = 83
     budunit_atomunit = atomunit_shop(category, atom_update())
-    budunit_atomunit.set_arg(acct_credor_pool_text, acct_pool_int)
-    budunit_atomunit.set_arg(acct_debtor_pool_text, acct_pool_int)
+    budunit_atomunit.set_arg(acct_credor_pool_str, acct_pool_int)
+    budunit_atomunit.set_arg(acct_debtor_pool_str, acct_pool_int)
     x_changeunit.set_atomunit(budunit_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_monetary_desc = "dragon dollars"
@@ -148,11 +148,11 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse():
     # ESTABLISH
-    category = budunit_text()
-    max_tree_traverse_text = "max_tree_traverse"
+    category = budunit_str()
+    max_tree_traverse_str = "max_tree_traverse"
     max_tree_traverse_int = 71
     max_tree_traverse_atomunit = atomunit_shop(category, atom_update())
-    max_tree_traverse_atomunit.set_arg(max_tree_traverse_text, max_tree_traverse_int)
+    max_tree_traverse_atomunit.set_arg(max_tree_traverse_str, max_tree_traverse_int)
 
     print(f"{max_tree_traverse_atomunit=}")
     x_changeunit = changeunit_shop()

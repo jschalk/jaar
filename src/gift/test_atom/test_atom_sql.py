@@ -1,5 +1,5 @@
 from src._road.road import create_road
-from src.bud.bud_tool import budunit_text, bud_idea_factunit_text
+from src.bud.bud_tool import budunit_str, bud_idea_factunit_str
 from src.gift.atom_config import atom_update, atom_insert, fopen_str, fnigh_str
 from src.gift.atom import atomunit_shop, atom_hx_table_name, get_atomunit_from_rowdata
 from src._instrument.db_tool import get_rowdata, sqlite_connection
@@ -8,15 +8,15 @@ from pytest import raises as pytest_raises
 
 def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     # WHEN
-    sports_text = "sports"
-    sports_road = create_road("a", sports_text)
-    ball_text = "basketball"
-    ball_road = create_road(sports_road, ball_text)
-    knee_text = "knee"
-    knee_road = create_road("a", knee_text)
+    sports_str = "sports"
+    sports_road = create_road("a", sports_str)
+    ball_str = "basketball"
+    ball_road = create_road(sports_road, ball_str)
+    knee_str = "knee"
+    knee_road = create_road("a", knee_str)
 
     # WHEN
-    x_category = bud_idea_factunit_text()
+    x_category = bud_idea_factunit_str()
     update_disc_atomunit = atomunit_shop(x_category, atom_update())
     update_disc_atomunit.set_required_arg("base", knee_road)
 
@@ -32,7 +32,7 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
 def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_BudUnitSimpleAttrs():
     # WHEN
     new2_value = 66
-    category = budunit_text()
+    category = budunit_str()
     opt_arg2 = "max_tree_traverse"
     x_atomunit = atomunit_shop(category, atom_update())
     x_atomunit.set_optional_arg(opt_arg2, new2_value)
@@ -51,19 +51,19 @@ VALUES (
 
 def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
     # ESTABLISH
-    sports_text = "sports"
-    sports_road = create_road("a", sports_text)
-    ball_text = "basketball"
-    ball_road = create_road(sports_road, ball_text)
-    knee_text = "knee"
-    knee_road = create_road("a", knee_text)
+    sports_str = "sports"
+    sports_road = create_road("a", sports_str)
+    ball_str = "basketball"
+    ball_road = create_road(sports_road, ball_str)
+    knee_str = "knee"
+    knee_road = create_road("a", knee_str)
     knee_open = 7
-    x_category = bud_idea_factunit_text()
-    road_text = "road"
-    base_text = "base"
+    x_category = bud_idea_factunit_str()
+    road_str = "road"
+    base_str = "base"
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
-    update_disc_atomunit.set_required_arg(road_text, ball_road)
-    update_disc_atomunit.set_required_arg(base_text, knee_road)
+    update_disc_atomunit.set_required_arg(road_str, ball_road)
+    update_disc_atomunit.set_required_arg(base_str, knee_road)
     update_disc_atomunit.set_optional_arg(fopen_str(), knee_open)
 
     # WHEN
@@ -72,8 +72,8 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_table_name()} (
-  {x_category}_{atom_insert()}_{road_text}
-, {x_category}_{atom_insert()}_{base_text}
+  {x_category}_{atom_insert()}_{road_str}
+, {x_category}_{atom_insert()}_{base_str}
 , {x_category}_{atom_insert()}_{fopen_str()}
 )
 VALUES (
@@ -88,19 +88,19 @@ VALUES (
 
 def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
     # ESTABLISH
-    sports_text = "sports"
-    sports_road = create_road("a", sports_text)
-    ball_text = "basketball"
-    ball_road = create_road(sports_road, ball_text)
-    knee_text = "knee"
-    knee_road = create_road("a", knee_text)
+    sports_str = "sports"
+    sports_road = create_road("a", sports_str)
+    ball_str = "basketball"
+    ball_road = create_road(sports_road, ball_str)
+    knee_str = "knee"
+    knee_road = create_road("a", knee_str)
     knee_fopen = 7
-    x_category = bud_idea_factunit_text()
-    road_text = "road"
-    base_text = "base"
+    x_category = bud_idea_factunit_str()
+    road_str = "road"
+    base_str = "base"
     x_sqlstr = f"""SELECT
-  '{ball_road}' as {x_category}_{atom_insert()}_{road_text}
-, '{knee_road}' as {x_category}_{atom_insert()}_{base_text}
+  '{ball_road}' as {x_category}_{atom_insert()}_{road_str}
+, '{knee_road}' as {x_category}_{atom_insert()}_{base_str}
 , {knee_fopen} as {x_category}_{atom_insert()}_{fopen_str()}
 """
     with sqlite_connection(":memory:") as x_conn:
@@ -111,10 +111,10 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
 
     # THEN
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
-    update_disc_atomunit.set_required_arg(road_text, ball_road)
-    update_disc_atomunit.set_required_arg(base_text, knee_road)
+    update_disc_atomunit.set_required_arg(road_str, ball_road)
+    update_disc_atomunit.set_required_arg(base_str, knee_road)
     update_disc_atomunit.set_optional_arg(fopen_str(), knee_fopen)
     assert update_disc_atomunit.category == x_atomunit.category
-    assert update_disc_atomunit.crud_text == x_atomunit.crud_text
+    assert update_disc_atomunit.crud_str == x_atomunit.crud_str
     assert update_disc_atomunit.required_args == x_atomunit.required_args
     assert update_disc_atomunit.optional_args == x_atomunit.optional_args

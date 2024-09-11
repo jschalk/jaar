@@ -54,12 +54,12 @@ def test_BudUnit_init_idea_tree_walk_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     root_idea = sue_bud.get_idea_obj(sue_bud._real_id)
-    states_text = "nation-state"
-    states_road = sue_bud.make_l1_road(states_text)
-    usa_text = "USA"
-    usa_road = sue_bud.make_road(states_road, usa_text)
-    texas_text = "Texas"
-    texas_road = sue_bud.make_road(usa_road, texas_text)
+    states_str = "nation-state"
+    states_road = sue_bud.make_l1_road(states_str)
+    usa_str = "USA"
+    usa_road = sue_bud.make_road(states_road, usa_str)
+    texas_str = "Texas"
+    texas_road = sue_bud.make_road(usa_road, texas_str)
     texas_idea = sue_bud.get_idea_obj(texas_road)
     texas_idea._gogo_calc = 7
     texas_idea._stop_calc = 11
@@ -84,10 +84,10 @@ def test_BudUnit_init_idea_tree_walk_Clears_gogo_calc_stop_calc():
 def test_BudUnit_init_idea_tree_walk_Sets_reason_bases():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    states_text = "nation-state"
-    states_road = sue_bud.make_l1_road(states_text)
-    polis_text = "polis"
-    polis_road = sue_bud.make_l1_road(polis_text)
+    states_str = "nation-state"
+    states_road = sue_bud.make_l1_road(states_str)
+    polis_str = "polis"
+    polis_road = sue_bud.make_l1_road(polis_str)
     sue_bud.add_idea(polis_road)
     sue_bud.add_idea(states_road)
     sue_bud.edit_idea_attr(
@@ -109,15 +109,15 @@ def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     sue_bud = get_budunit_with_4_levels()
     casa_road = sue_bud.make_l1_road("casa")
     cleaning_road = sue_bud.make_road(casa_road, "cleaning")
-    clean_cookery_text = "clean_cookery"
-    clean_cookery_idea = ideaunit_shop(clean_cookery_text, mass=40, pledge=True)
+    clean_cookery_str = "clean_cookery"
+    clean_cookery_idea = ideaunit_shop(clean_cookery_str, mass=40, pledge=True)
 
-    buildings_text = "buildings"
-    buildings_road = sue_bud.make_l1_road(buildings_text)
-    cookery_room_text = "cookery"
-    cookery_room_road = sue_bud.make_road(buildings_road, cookery_room_text)
-    cookery_dirty_text = "dirty"
-    cookery_dirty_road = sue_bud.make_road(cookery_room_road, cookery_dirty_text)
+    buildings_str = "buildings"
+    buildings_road = sue_bud.make_l1_road(buildings_str)
+    cookery_room_str = "cookery"
+    cookery_room_road = sue_bud.make_road(buildings_road, cookery_room_str)
+    cookery_dirty_str = "dirty"
+    cookery_dirty_road = sue_bud.make_road(cookery_room_road, cookery_dirty_str)
     cookery_reasonunit = reasonunit_shop(base=cookery_room_road)
     cookery_reasonunit.set_premise(premise=cookery_dirty_road)
     clean_cookery_idea.set_reasonunit(cookery_reasonunit)

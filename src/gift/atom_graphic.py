@@ -1,14 +1,14 @@
 from src.bud.bud_tool import (
-    budunit_text,
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_teamlink_text,
-    bud_idea_healerlink_text,
-    bud_idea_factunit_text,
+    budunit_str,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
 )
 from src.gift.atom_config import (
     atom_insert,
@@ -29,7 +29,7 @@ class AtomPlotlyShape:
     level: float = None
     level_width0: float = None
     level_width1: float = None
-    display_text: str = None
+    display_str: str = None
     color: str = None
 
     def set_attrs(self):
@@ -38,7 +38,7 @@ class AtomPlotlyShape:
         self.level = 0
         self.level_width0 = 0.1
         self.level_width1 = 0.9
-        self.display_text = f"{get_normal_table_name(self.x_atomunit.category)} {self.x_atomunit.crud_text} Order: {self.x_atomunit.atom_order}"
+        self.display_str = f"{get_normal_table_name(self.x_atomunit.category)} {self.x_atomunit.crud_str} Order: {self.x_atomunit.atom_order}"
 
     def set_level(self, x_level, x_width0, x_width1, color=None):
         self.level = x_level
@@ -71,7 +71,7 @@ def get_delete_rect(category: str) -> AtomPlotlyShape:
     return atom_rect
 
 
-def add_rect_text(fig, x, y, text):
+def add_rect_str(fig, x, y, text):
     fig.add_annotation(
         xref="paper",
         yref="paper",
@@ -110,7 +110,7 @@ def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text=atomplotyshape.display_text)
+    add_rect_str(fig, x=text_x, y=text_y, text=atomplotyshape.display_str)
 
 
 def add_groupboxs_circle(fig: plotly_Figure):
@@ -138,7 +138,7 @@ def add_groupboxs_circle(fig: plotly_Figure):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text="GroupBoxs")
+    add_rect_str(fig, x=text_x, y=text_y, text="GroupBoxs")
 
 
 def add_different_ideas_circle(fig: plotly_Figure):
@@ -166,7 +166,7 @@ def add_different_ideas_circle(fig: plotly_Figure):
     )
     text_y = shape_y1 - 0.01
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_text(fig, x=text_x, y=text_y, text="Different Ideas")
+    add_rect_str(fig, x=text_x, y=text_y, text="Different Ideas")
 
 
 def get_atomunit_base_fig() -> plotly_Figure:
@@ -179,51 +179,51 @@ def get_atomunit_base_fig() -> plotly_Figure:
 def atomunit_periodic_table0() -> plotly_Figure:
     fig = get_atomunit_base_fig()
 
-    premise_text = bud_idea_reason_premiseunit_text()
-    bud_acctunit_insert = get_insert_rect(bud_acctunit_text())
-    bud_acct_membership_insert = get_insert_rect(bud_acct_membership_text())
-    bud_ideaunit_insert = get_insert_rect(bud_ideaunit_text())
-    bud_idea_awardlink_insert = get_insert_rect(bud_idea_awardlink_text())
-    bud_idea_teamlink_insert = get_insert_rect(bud_idea_teamlink_text())
-    bud_idea_healerlink_insert = get_insert_rect(bud_idea_healerlink_text())
-    bud_idea_factunit_insert = get_insert_rect(bud_idea_factunit_text())
-    bud_idea_reasonunit_insert = get_insert_rect(bud_idea_reasonunit_text())
-    bud_idea_reason_premiseunit_insert = get_insert_rect(premise_text)
-    bud_acctunit_update = get_update_rect(bud_acctunit_text())
-    bud_acct_membership_update = get_update_rect(bud_acct_membership_text())
-    bud_ideaunit_update = get_update_rect(bud_ideaunit_text())
-    bud_idea_awardlink_update = get_update_rect(bud_idea_awardlink_text())
-    bud_idea_factunit_update = get_update_rect(bud_idea_factunit_text())
-    bud_idea_reason_premiseunit_update = get_update_rect(premise_text)
-    bud_idea_reasonunit_update = get_update_rect(bud_idea_reasonunit_text())
-    bud_idea_reason_premiseunit_delete = get_delete_rect(premise_text)
-    bud_idea_reasonunit_delete = get_delete_rect(bud_idea_reasonunit_text())
-    bud_idea_factunit_delete = get_delete_rect(bud_idea_factunit_text())
-    bud_idea_teamlink_delete = get_delete_rect(bud_idea_teamlink_text())
-    bud_idea_healerlink_delete = get_delete_rect(bud_idea_healerlink_text())
-    bud_idea_awardlink_delete = get_delete_rect(bud_idea_awardlink_text())
-    bud_ideaunit_delete = get_delete_rect(bud_ideaunit_text())
-    bud_acct_membership_delete = get_delete_rect(bud_acct_membership_text())
-    bud_acctunit_delete = get_delete_rect(bud_acctunit_text())
-    budunit_update = get_update_rect(budunit_text())
+    premise_str = bud_idea_reason_premiseunit_str()
+    bud_acctunit_insert = get_insert_rect(bud_acctunit_str())
+    bud_acct_membership_insert = get_insert_rect(bud_acct_membership_str())
+    bud_ideaunit_insert = get_insert_rect(bud_ideaunit_str())
+    bud_idea_awardlink_insert = get_insert_rect(bud_idea_awardlink_str())
+    bud_idea_teamlink_insert = get_insert_rect(bud_idea_teamlink_str())
+    bud_idea_healerlink_insert = get_insert_rect(bud_idea_healerlink_str())
+    bud_idea_factunit_insert = get_insert_rect(bud_idea_factunit_str())
+    bud_idea_reasonunit_insert = get_insert_rect(bud_idea_reasonunit_str())
+    bud_idea_reason_premiseunit_insert = get_insert_rect(premise_str)
+    bud_acctunit_update = get_update_rect(bud_acctunit_str())
+    bud_acct_membership_update = get_update_rect(bud_acct_membership_str())
+    bud_ideaunit_update = get_update_rect(bud_ideaunit_str())
+    bud_idea_awardlink_update = get_update_rect(bud_idea_awardlink_str())
+    bud_idea_factunit_update = get_update_rect(bud_idea_factunit_str())
+    bud_idea_reason_premiseunit_update = get_update_rect(premise_str)
+    bud_idea_reasonunit_update = get_update_rect(bud_idea_reasonunit_str())
+    bud_idea_reason_premiseunit_delete = get_delete_rect(premise_str)
+    bud_idea_reasonunit_delete = get_delete_rect(bud_idea_reasonunit_str())
+    bud_idea_factunit_delete = get_delete_rect(bud_idea_factunit_str())
+    bud_idea_teamlink_delete = get_delete_rect(bud_idea_teamlink_str())
+    bud_idea_healerlink_delete = get_delete_rect(bud_idea_healerlink_str())
+    bud_idea_awardlink_delete = get_delete_rect(bud_idea_awardlink_str())
+    bud_ideaunit_delete = get_delete_rect(bud_ideaunit_str())
+    bud_acct_membership_delete = get_delete_rect(bud_acct_membership_str())
+    bud_acctunit_delete = get_delete_rect(bud_acctunit_str())
+    budunit_update = get_update_rect(budunit_str())
 
-    green_text = "Green"
-    bud_acctunit_insert.set_level(0, 0, 0.25, green_text)
-    bud_acctunit_update.set_level(0, 0.25, 0.75, green_text)
-    bud_acctunit_delete.set_level(0, 0.75, 1, green_text)
-    bud_acct_membership_insert.set_level(1, 0, 0.3, green_text)
-    bud_acct_membership_update.set_level(1, 0.3, 0.7, green_text)
-    bud_acct_membership_delete.set_level(1, 0.7, 1, green_text)
+    green_str = "Green"
+    bud_acctunit_insert.set_level(0, 0, 0.25, green_str)
+    bud_acctunit_update.set_level(0, 0.25, 0.75, green_str)
+    bud_acctunit_delete.set_level(0, 0.75, 1, green_str)
+    bud_acct_membership_insert.set_level(1, 0, 0.3, green_str)
+    bud_acct_membership_update.set_level(1, 0.3, 0.7, green_str)
+    bud_acct_membership_delete.set_level(1, 0.7, 1, green_str)
     bud_idea_healerlink_insert.set_level(3, 0.2, 0.4)
     bud_idea_healerlink_delete.set_level(3, 0.6, 0.8)
     bud_idea_teamlink_insert.set_level(4, 0.2, 0.4)
     bud_idea_teamlink_delete.set_level(4, 0.6, 0.8)
-    bud_idea_awardlink_insert.set_level(5, 0.2, 0.4, green_text)
-    bud_idea_awardlink_update.set_level(5, 0.4, 0.6, green_text)
-    bud_idea_awardlink_delete.set_level(5, 0.6, 0.8, green_text)
-    bud_ideaunit_insert.set_level(6, 0, 0.3, green_text)
-    bud_ideaunit_update.set_level(6, 0.3, 0.7, green_text)
-    bud_ideaunit_delete.set_level(6, 0.7, 1, green_text)
+    bud_idea_awardlink_insert.set_level(5, 0.2, 0.4, green_str)
+    bud_idea_awardlink_update.set_level(5, 0.4, 0.6, green_str)
+    bud_idea_awardlink_delete.set_level(5, 0.6, 0.8, green_str)
+    bud_ideaunit_insert.set_level(6, 0, 0.3, green_str)
+    bud_ideaunit_update.set_level(6, 0.3, 0.7, green_str)
+    bud_ideaunit_delete.set_level(6, 0.7, 1, green_str)
     bud_idea_reasonunit_insert.set_level(7, 0.2, 0.4)
     bud_idea_reasonunit_update.set_level(7, 0.4, 0.6)
     bud_idea_reasonunit_delete.set_level(7, 0.6, 0.8)
@@ -233,28 +233,28 @@ def atomunit_periodic_table0() -> plotly_Figure:
     bud_idea_factunit_insert.set_level(9, 0.2, 0.4)
     bud_idea_factunit_update.set_level(9, 0.4, 0.6)
     bud_idea_factunit_delete.set_level(9, 0.6, 0.8)
-    budunit_update.set_level(-2, 0, 1, green_text)
+    budunit_update.set_level(-2, 0, 1, green_str)
 
-    # bud_ideaunit_insert = get_insert_rect(bud_ideaunit_text())
-    # bud_idea_awardlink_insert = get_insert_rect(bud_idea_awardlink_text())
-    # bud_idea_teamlink_insert = get_insert_rect(bud_idea_teamlink_text())
-    # bud_idea_healerlink_insert = get_insert_rect(bud_idea_healerlink_text())
-    # bud_idea_factunit_insert = get_insert_rect(bud_idea_factunit_text())
-    # bud_idea_reasonunit_insert = get_insert_rect(bud_idea_reasonunit_text())
-    # bud_idea_reason_premiseunit_insert = get_insert_rect(premise_text)
-    # bud_ideaunit_update = get_update_rect(bud_ideaunit_text())
-    # bud_idea_awardlink_update = get_update_rect(bud_idea_awardlink_text())
-    # bud_idea_factunit_update = get_update_rect(bud_idea_factunit_text())
-    # bud_idea_reason_premiseunit_update = get_update_rect(premise_text)
-    # bud_idea_reasonunit_update = get_update_rect(bud_idea_reasonunit_text())
-    # bud_idea_reason_premiseunit_delete = get_delete_rect(premise_text)
-    # bud_idea_reasonunit_delete = get_delete_rect(bud_idea_reasonunit_text())
-    # bud_idea_factunit_delete = get_delete_rect(bud_idea_factunit_text())
-    # bud_idea_teamlink_delete = get_delete_rect(bud_idea_teamlink_text())
-    # bud_idea_healerlink_delete = get_delete_rect(bud_idea_healerlink_text())
-    # bud_idea_awardlink_delete = get_delete_rect(bud_idea_awardlink_text())
-    # bud_ideaunit_delete = get_delete_rect(bud_ideaunit_text())
-    # budunit_update = get_update_rect(budunit_text())
+    # bud_ideaunit_insert = get_insert_rect(bud_ideaunit_str())
+    # bud_idea_awardlink_insert = get_insert_rect(bud_idea_awardlink_str())
+    # bud_idea_teamlink_insert = get_insert_rect(bud_idea_teamlink_str())
+    # bud_idea_healerlink_insert = get_insert_rect(bud_idea_healerlink_str())
+    # bud_idea_factunit_insert = get_insert_rect(bud_idea_factunit_str())
+    # bud_idea_reasonunit_insert = get_insert_rect(bud_idea_reasonunit_str())
+    # bud_idea_reason_premiseunit_insert = get_insert_rect(premise_str)
+    # bud_ideaunit_update = get_update_rect(bud_ideaunit_str())
+    # bud_idea_awardlink_update = get_update_rect(bud_idea_awardlink_str())
+    # bud_idea_factunit_update = get_update_rect(bud_idea_factunit_str())
+    # bud_idea_reason_premiseunit_update = get_update_rect(premise_str)
+    # bud_idea_reasonunit_update = get_update_rect(bud_idea_reasonunit_str())
+    # bud_idea_reason_premiseunit_delete = get_delete_rect(premise_str)
+    # bud_idea_reasonunit_delete = get_delete_rect(bud_idea_reasonunit_str())
+    # bud_idea_factunit_delete = get_delete_rect(bud_idea_factunit_str())
+    # bud_idea_teamlink_delete = get_delete_rect(bud_idea_teamlink_str())
+    # bud_idea_healerlink_delete = get_delete_rect(bud_idea_healerlink_str())
+    # bud_idea_awardlink_delete = get_delete_rect(bud_idea_awardlink_str())
+    # bud_ideaunit_delete = get_delete_rect(bud_ideaunit_str())
+    # budunit_update = get_update_rect(budunit_str())
 
     # WHEN / THEN
 

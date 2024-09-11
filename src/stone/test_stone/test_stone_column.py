@@ -1,4 +1,4 @@
-from src.bud.bud_tool import bud_acctunit_text
+from src.bud.bud_tool import bud_acctunit_str
 from src.stone.stone import StoneColumn, StoneRef, stoneref_shop
 
 
@@ -33,18 +33,18 @@ def test_stoneref_shop_ReturnsObj():
 
     # WHEN
     x_stoneref = stoneref_shop(
-        x_stone_name=x1_stone_name, x_atom_categorys=[bud_acctunit_text()]
+        x_stone_name=x1_stone_name, x_atom_categorys=[bud_acctunit_str()]
     )
 
     # THEN
     assert x_stoneref.stone_name == x1_stone_name
-    assert x_stoneref.atom_categorys == [bud_acctunit_text()]
+    assert x_stoneref.atom_categorys == [bud_acctunit_str()]
     assert x_stoneref._stonecolumns == {}
 
 
 def test_StoneColumn_set_stonecolumn_SetsAttr():
     # ESTABLISH
-    x_stoneref = stoneref_shop("0003", bud_acctunit_text())
+    x_stoneref = stoneref_shop("0003", bud_acctunit_str())
     x_attribute_key = "1"
     x_column_order = 2
     x_sort_order = 3
@@ -62,7 +62,7 @@ def test_StoneColumn_set_stonecolumn_SetsAttr():
 def test_StoneColumn_get_stonecolumn_ReturnsObj():
     # ESTABLISH
 
-    x_stoneref = stoneref_shop("0003", bud_acctunit_text())
+    x_stoneref = stoneref_shop("0003", bud_acctunit_str())
     x_attribute_key = "1"
     x_column_order = 2
     x_sort_order = 3
@@ -76,7 +76,7 @@ def test_StoneColumn_get_stonecolumn_ReturnsObj():
 def test_StoneColumn_get_headers_list_ReturnsObj_Scenario0():
     # ESTABLISH
 
-    x_stoneref = stoneref_shop("0003", bud_acctunit_text())
+    x_stoneref = stoneref_shop("0003", bud_acctunit_str())
 
     # WHEN
     x_headers_list = x_stoneref.get_headers_list()
@@ -88,7 +88,7 @@ def test_StoneColumn_get_headers_list_ReturnsObj_Scenario0():
 def test_StoneColumn_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
-    x3_stoneref = stoneref_shop("0003", bud_acctunit_text())
+    x3_stoneref = stoneref_shop("0003", bud_acctunit_str())
     x_attribute_key = "1"
     x_column_order = 2
     x_sort_order = 3
@@ -105,7 +105,7 @@ def test_StoneColumn_get_headers_list_ReturnsObj_Scenario1():
 def test_StoneColumn_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
-    x3_stoneref = stoneref_shop("0003", bud_acctunit_text())
+    x3_stoneref = stoneref_shop("0003", bud_acctunit_str())
     third_column_str = "third column"
     second_column_str = "second column"
     first_column_str = "first column"
@@ -123,7 +123,7 @@ def test_StoneColumn_get_headers_list_ReturnsObj_Scenario1():
 def test_StoneColumn_get_headers_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
-    x3_stoneref = stoneref_shop("0003", bud_acctunit_text())
+    x3_stoneref = stoneref_shop("0003", bud_acctunit_str())
     third_column_str = "third column"
     second_column_str = "second column"
     first_column_str = "first column"

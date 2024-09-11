@@ -1,15 +1,15 @@
 from src._instrument.python_tool import get_nested_value
 from src.bud.bud_tool import (
-    budunit_text,
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_teamlink_text,
-    bud_idea_healerlink_text,
-    bud_idea_factunit_text,
+    budunit_str,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
 )
 from src.gift.atom_config import (
     atom_insert,
@@ -25,14 +25,14 @@ from src.gift.atom_config import (
     set_mog,
     get_flattened_atom_table_build,
     get_normalized_bud_table_build,
-    required_args_text,
-    optional_args_text,
-    category_text,
-    crud_text_str,
-    normal_table_name_text,
-    normal_specs_text,
-    sqlite_datatype_text,
-    python_type_text,
+    required_args_str,
+    optional_args_str,
+    category_str,
+    crud_str_str,
+    normal_table_name_str,
+    normal_specs_str,
+    sqlite_datatype_str,
+    python_type_str,
     nesting_order_str,
     column_order_str,
     get_sorted_required_arg_keys,
@@ -53,20 +53,20 @@ from src.gift.atom_config import (
 from copy import deepcopy as copy_deepcopy
 
 
-def test_required_args_text_ReturnsObj():
-    assert required_args_text() == "required_args"
+def test_required_args_str_ReturnsObj():
+    assert required_args_str() == "required_args"
 
 
-def test_optional_args_text_ReturnsObj():
-    assert optional_args_text() == "optional_args"
+def test_optional_args_str_ReturnsObj():
+    assert optional_args_str() == "optional_args"
 
 
 def test_column_order_str_ReturnsObj():
     assert column_order_str() == "column_order"
 
 
-def test_category_text_ReturnsObj():
-    assert category_text() == "category"
+def test_category_str_ReturnsObj():
+    assert category_str() == "category"
 
 
 def test_atom_insert_ReturnsObj():
@@ -81,24 +81,24 @@ def test_atom_delete_ReturnsObj():
     assert atom_delete() == "DELETE"
 
 
-def test_crud_text_str_ReturnsObj():
-    assert crud_text_str() == "crud_text"
+def test_crud_str_str_ReturnsObj():
+    assert crud_str_str() == "crud_str"
 
 
 def test_atom_config_HasCorrect_category():
     assert category_ref() == {
-        budunit_text(),
-        bud_acctunit_text(),
-        bud_acct_membership_text(),
-        bud_ideaunit_text(),
-        bud_idea_awardlink_text(),
-        bud_idea_reasonunit_text(),
-        bud_idea_reason_premiseunit_text(),
-        bud_idea_teamlink_text(),
-        bud_idea_healerlink_text(),
-        bud_idea_factunit_text(),
+        budunit_str(),
+        bud_acctunit_str(),
+        bud_acct_membership_str(),
+        bud_ideaunit_str(),
+        bud_idea_awardlink_str(),
+        bud_idea_reasonunit_str(),
+        bud_idea_reason_premiseunit_str(),
+        bud_idea_teamlink_str(),
+        bud_idea_healerlink_str(),
+        bud_idea_factunit_str(),
     }
-    assert bud_acctunit_text() in category_ref()
+    assert bud_acctunit_str() in category_ref()
     assert is_category_ref("idearoot") is False
 
 
@@ -134,135 +134,135 @@ def test_stop_want_str_ReturnsObj():
     assert stop_want_str() == "stop_want"
 
 
-def check_every_crud_dict_has_element(atom_config_dict, atom_order_text):
+def check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
     for category, category_dict in atom_config_dict.items():
         if category_dict.get(atom_insert()) is not None:
             category_insert = category_dict.get(atom_insert())
-            if category_insert.get(atom_order_text) is None:
-                x_text = f"Missing from {category} {atom_insert()} {category_insert.get(atom_order_text)=}"
-                print(x_text)
+            if category_insert.get(atom_order_str) is None:
+                x_str = f"Missing from {category} {atom_insert()} {category_insert.get(atom_order_str)=}"
+                print(x_str)
                 return False
 
         if category_dict.get(atom_update()) is not None:
             category_update = category_dict.get(atom_update())
-            if category_update.get(atom_order_text) is None:
-                x_text = f"Missing from {category} {atom_update()} {category_update.get(atom_order_text)=}"
-                print(x_text)
+            if category_update.get(atom_order_str) is None:
+                x_str = f"Missing from {category} {atom_update()} {category_update.get(atom_order_str)=}"
+                print(x_str)
                 return False
 
         if category_dict.get(atom_delete()) is not None:
             category_delete = category_dict.get(atom_delete())
-            if category_delete.get(atom_order_text) is None:
-                x_text = f"Missing from {category} {atom_delete()} {category_delete.get(atom_order_text)=}"
-                print(x_text)
+            if category_delete.get(atom_order_str) is None:
+                x_str = f"Missing from {category} {atom_delete()} {category_delete.get(atom_order_str)=}"
+                print(x_str)
                 return False
 
-        if category_dict.get(normal_specs_text()) is None:
-            print(f"{category=} {normal_specs_text()} is missing")
+        if category_dict.get(normal_specs_str()) is None:
+            print(f"{category=} {normal_specs_str()} is missing")
             return False
     return True
 
 
 def test_get_atom_config_dict_EveryCrudOperationHasChangeOrderGroup():
     # ESTABLISH
-    atom_order_text = "atom_order"
-    mog = atom_order_text
+    atom_order_str = "atom_order"
+    mog = atom_order_str
 
     # WHEN / THEN
-    assert check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_text)
+    assert check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_str)
     # # Simple script for editing atom_config.json
-    # set_mog(atom_insert(), bud_acctunit_text(), 0)
-    # set_mog(atom_insert(), bud_acct_membership_text(), 1)
-    # set_mog(atom_insert(), bud_ideaunit_text(), 2)
-    # set_mog(atom_insert(), bud_idea_awardlink_text(), 3)
-    # set_mog(atom_insert(), bud_idea_teamlink_text(), 4)
-    # set_mog(atom_insert(), bud_idea_healerlink_text(), 5)
-    # set_mog(atom_insert(), bud_idea_factunit_text(), 6)
-    # set_mog(atom_insert(), bud_idea_reasonunit_text(), 7)
-    # set_mog(atom_insert(), bud_idea_reason_premiseunit_text(), 8)
-    # set_mog(atom_update(), bud_acctunit_text(), 9)
-    # set_mog(atom_update(), bud_acct_membership_text(), 10)
-    # set_mog(atom_update(), bud_ideaunit_text(), 11)
-    # set_mog(atom_update(), bud_idea_awardlink_text(), 12)
-    # set_mog(atom_update(), bud_idea_factunit_text(), 13)
-    # set_mog(atom_update(), bud_idea_reason_premiseunit_text(), 14)
-    # set_mog(atom_update(), bud_idea_reasonunit_text(), 15)
-    # set_mog(atom_delete(), bud_idea_reason_premiseunit_text(), 16)
-    # set_mog(atom_delete(), bud_idea_reasonunit_text(), 17)
-    # set_mog(atom_delete(), bud_idea_factunit_text(), 18)
-    # set_mog(atom_delete(), bud_idea_teamlink_text(), 19)
-    # set_mog(atom_delete(), bud_idea_healerlink_text(), 20)
-    # set_mog(atom_delete(), bud_idea_awardlink_text(), 21)
-    # set_mog(atom_delete(), bud_ideaunit_text(), 22)
-    # set_mog(atom_delete(), bud_acct_membership_text(), 23)
-    # set_mog(atom_delete(), bud_acctunit_text(), 24)
-    # set_mog(atom_update(), budunit_text(), 25)
+    # set_mog(atom_insert(), bud_acctunit_str(), 0)
+    # set_mog(atom_insert(), bud_acct_membership_str(), 1)
+    # set_mog(atom_insert(), bud_ideaunit_str(), 2)
+    # set_mog(atom_insert(), bud_idea_awardlink_str(), 3)
+    # set_mog(atom_insert(), bud_idea_teamlink_str(), 4)
+    # set_mog(atom_insert(), bud_idea_healerlink_str(), 5)
+    # set_mog(atom_insert(), bud_idea_factunit_str(), 6)
+    # set_mog(atom_insert(), bud_idea_reasonunit_str(), 7)
+    # set_mog(atom_insert(), bud_idea_reason_premiseunit_str(), 8)
+    # set_mog(atom_update(), bud_acctunit_str(), 9)
+    # set_mog(atom_update(), bud_acct_membership_str(), 10)
+    # set_mog(atom_update(), bud_ideaunit_str(), 11)
+    # set_mog(atom_update(), bud_idea_awardlink_str(), 12)
+    # set_mog(atom_update(), bud_idea_factunit_str(), 13)
+    # set_mog(atom_update(), bud_idea_reason_premiseunit_str(), 14)
+    # set_mog(atom_update(), bud_idea_reasonunit_str(), 15)
+    # set_mog(atom_delete(), bud_idea_reason_premiseunit_str(), 16)
+    # set_mog(atom_delete(), bud_idea_reasonunit_str(), 17)
+    # set_mog(atom_delete(), bud_idea_factunit_str(), 18)
+    # set_mog(atom_delete(), bud_idea_teamlink_str(), 19)
+    # set_mog(atom_delete(), bud_idea_healerlink_str(), 20)
+    # set_mog(atom_delete(), bud_idea_awardlink_str(), 21)
+    # set_mog(atom_delete(), bud_ideaunit_str(), 22)
+    # set_mog(atom_delete(), bud_acct_membership_str(), 23)
+    # set_mog(atom_delete(), bud_acctunit_str(), 24)
+    # set_mog(atom_update(), budunit_str(), 25)
 
-    assert 0 == q_order(atom_insert(), bud_acctunit_text())
-    assert 1 == q_order(atom_insert(), bud_acct_membership_text())
-    assert 2 == q_order(atom_insert(), bud_ideaunit_text())
-    assert 3 == q_order(atom_insert(), bud_idea_awardlink_text())
-    assert 4 == q_order(atom_insert(), bud_idea_teamlink_text())
-    assert 5 == q_order(atom_insert(), bud_idea_healerlink_text())
-    assert 6 == q_order(atom_insert(), bud_idea_factunit_text())
-    assert 7 == q_order(atom_insert(), bud_idea_reasonunit_text())
-    assert 8 == q_order(atom_insert(), bud_idea_reason_premiseunit_text())
-    assert 9 == q_order(atom_update(), bud_acctunit_text())
-    assert 10 == q_order(atom_update(), bud_acct_membership_text())
-    assert 11 == q_order(atom_update(), bud_ideaunit_text())
-    assert 12 == q_order(atom_update(), bud_idea_awardlink_text())
-    assert 13 == q_order(atom_update(), bud_idea_factunit_text())
-    assert 14 == q_order(atom_update(), bud_idea_reason_premiseunit_text())
-    assert 15 == q_order(atom_update(), bud_idea_reasonunit_text())
-    assert 16 == q_order(atom_delete(), bud_idea_reason_premiseunit_text())
-    assert 17 == q_order(atom_delete(), bud_idea_reasonunit_text())
-    assert 18 == q_order(atom_delete(), bud_idea_factunit_text())
-    assert 19 == q_order(atom_delete(), bud_idea_teamlink_text())
-    assert 20 == q_order(atom_delete(), bud_idea_healerlink_text())
-    assert 21 == q_order(atom_delete(), bud_idea_awardlink_text())
-    assert 22 == q_order(atom_delete(), bud_ideaunit_text())
-    assert 23 == q_order(atom_delete(), bud_acct_membership_text())
-    assert 24 == q_order(atom_delete(), bud_acctunit_text())
-    assert 25 == q_order(atom_update(), budunit_text())
+    assert 0 == q_order(atom_insert(), bud_acctunit_str())
+    assert 1 == q_order(atom_insert(), bud_acct_membership_str())
+    assert 2 == q_order(atom_insert(), bud_ideaunit_str())
+    assert 3 == q_order(atom_insert(), bud_idea_awardlink_str())
+    assert 4 == q_order(atom_insert(), bud_idea_teamlink_str())
+    assert 5 == q_order(atom_insert(), bud_idea_healerlink_str())
+    assert 6 == q_order(atom_insert(), bud_idea_factunit_str())
+    assert 7 == q_order(atom_insert(), bud_idea_reasonunit_str())
+    assert 8 == q_order(atom_insert(), bud_idea_reason_premiseunit_str())
+    assert 9 == q_order(atom_update(), bud_acctunit_str())
+    assert 10 == q_order(atom_update(), bud_acct_membership_str())
+    assert 11 == q_order(atom_update(), bud_ideaunit_str())
+    assert 12 == q_order(atom_update(), bud_idea_awardlink_str())
+    assert 13 == q_order(atom_update(), bud_idea_factunit_str())
+    assert 14 == q_order(atom_update(), bud_idea_reason_premiseunit_str())
+    assert 15 == q_order(atom_update(), bud_idea_reasonunit_str())
+    assert 16 == q_order(atom_delete(), bud_idea_reason_premiseunit_str())
+    assert 17 == q_order(atom_delete(), bud_idea_reasonunit_str())
+    assert 18 == q_order(atom_delete(), bud_idea_factunit_str())
+    assert 19 == q_order(atom_delete(), bud_idea_teamlink_str())
+    assert 20 == q_order(atom_delete(), bud_idea_healerlink_str())
+    assert 21 == q_order(atom_delete(), bud_idea_awardlink_str())
+    assert 22 == q_order(atom_delete(), bud_ideaunit_str())
+    assert 23 == q_order(atom_delete(), bud_acct_membership_str())
+    assert 24 == q_order(atom_delete(), bud_acctunit_str())
+    assert 25 == q_order(atom_update(), budunit_str())
 
 
 def _get_atom_config_required_args_len(x_cat: str) -> int:
-    required_args_key_list = [x_cat, required_args_text()]
+    required_args_key_list = [x_cat, required_args_str()]
     return len(get_nested_value(get_atom_config_dict(), required_args_key_list))
 
 
 def _get_atom_config_optional_args_len(x_cat: str) -> int:
-    optional_args_key_list = [x_cat, optional_args_text()]
+    optional_args_key_list = [x_cat, optional_args_str()]
     return len(get_nested_value(get_atom_config_dict(), optional_args_key_list))
 
 
 def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
     # ESTABLISH
-    assert _get_atom_config_required_args_len(budunit_text()) == 0
-    assert _get_atom_config_required_args_len(bud_acctunit_text()) == 1
-    assert _get_atom_config_required_args_len(bud_acct_membership_text()) == 2
-    assert _get_atom_config_required_args_len(bud_ideaunit_text()) == 2
-    assert _get_atom_config_required_args_len(bud_idea_awardlink_text()) == 2
-    assert _get_atom_config_required_args_len(bud_idea_reasonunit_text()) == 2
-    assert _get_atom_config_required_args_len(bud_idea_reason_premiseunit_text()) == 3
-    assert _get_atom_config_required_args_len(bud_idea_teamlink_text()) == 2
-    assert _get_atom_config_required_args_len(bud_idea_healerlink_text()) == 2
-    assert _get_atom_config_required_args_len(bud_idea_factunit_text()) == 2
+    assert _get_atom_config_required_args_len(budunit_str()) == 0
+    assert _get_atom_config_required_args_len(bud_acctunit_str()) == 1
+    assert _get_atom_config_required_args_len(bud_acct_membership_str()) == 2
+    assert _get_atom_config_required_args_len(bud_ideaunit_str()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_awardlink_str()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_reasonunit_str()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_reason_premiseunit_str()) == 3
+    assert _get_atom_config_required_args_len(bud_idea_teamlink_str()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_healerlink_str()) == 2
+    assert _get_atom_config_required_args_len(bud_idea_factunit_str()) == 2
 
-    assert _get_atom_config_optional_args_len(budunit_text()) == 9
-    assert _get_atom_config_optional_args_len(bud_acctunit_text()) == 2
-    assert _get_atom_config_optional_args_len(bud_acct_membership_text()) == 2
-    assert _get_atom_config_optional_args_len(bud_ideaunit_text()) == 11
-    assert _get_atom_config_optional_args_len(bud_idea_awardlink_text()) == 2
-    assert _get_atom_config_optional_args_len(bud_idea_reasonunit_text()) == 1
-    assert _get_atom_config_optional_args_len(bud_idea_reason_premiseunit_text()) == 3
-    assert _get_atom_config_optional_args_len(bud_idea_teamlink_text()) == 0
-    assert _get_atom_config_optional_args_len(bud_idea_healerlink_text()) == 0
-    assert _get_atom_config_optional_args_len(bud_idea_factunit_text()) == 3
+    assert _get_atom_config_optional_args_len(budunit_str()) == 9
+    assert _get_atom_config_optional_args_len(bud_acctunit_str()) == 2
+    assert _get_atom_config_optional_args_len(bud_acct_membership_str()) == 2
+    assert _get_atom_config_optional_args_len(bud_ideaunit_str()) == 11
+    assert _get_atom_config_optional_args_len(bud_idea_awardlink_str()) == 2
+    assert _get_atom_config_optional_args_len(bud_idea_reasonunit_str()) == 1
+    assert _get_atom_config_optional_args_len(bud_idea_reason_premiseunit_str()) == 3
+    assert _get_atom_config_optional_args_len(bud_idea_teamlink_str()) == 0
+    assert _get_atom_config_optional_args_len(bud_idea_healerlink_str()) == 0
+    assert _get_atom_config_optional_args_len(bud_idea_factunit_str()) == 3
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
-    arg_elements = {python_type_text(), sqlite_datatype_text(), column_order_str()}
+    arg_elements = {python_type_str(), sqlite_datatype_str(), column_order_str()}
     for arg_element in arg_elements:
         if x_dict.get(arg_element) is None:
             print(f"{arg_element} failed for {x_arg=}")
@@ -271,11 +271,11 @@ def _has_every_element(x_arg, x_dict) -> bool:
 
 
 def _every_category_dict_has_arg_elements(category_dict: dict) -> bool:
-    for required_arg, x_dict in category_dict.get(required_args_text()).items():
+    for required_arg, x_dict in category_dict.get(required_args_str()).items():
         if not _has_every_element(required_arg, x_dict):
             return False
-    if category_dict.get(optional_args_text()) is not None:
-        for optional_arg, x_dict in category_dict.get(optional_args_text()).items():
+    if category_dict.get(optional_args_str()) is not None:
+        for optional_arg, x_dict in category_dict.get(optional_args_str()).items():
             if not _has_every_element(optional_arg, x_dict):
                 return False
     return True
@@ -297,7 +297,7 @@ def check_necessary_nesting_order_exists() -> bool:
     atom_config = get_atom_config_dict()
     multi_required_arg_dict = {}
     for atom_key, atom_value in atom_config.items():
-        required_args = atom_value.get(required_args_text())
+        required_args = atom_value.get(required_args_str())
         if len(required_args) > 1:
             multi_required_arg_dict[atom_key] = required_args
     # print(f"{multi_required_arg_dict.keys()=}")
@@ -322,12 +322,12 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
 
 
 def _get_atom_config_optional_arg_keys(x_cat: str) -> set[str]:
-    optional_args_key_list = [x_cat, optional_args_text()]
+    optional_args_key_list = [x_cat, optional_args_str()]
     return set(get_nested_value(get_atom_config_dict(), optional_args_key_list).keys())
 
 
 def _get_atom_config_required_arg_keys(x_cat: str) -> set[str]:
-    required_args_key_list = [x_cat, required_args_text()]
+    required_args_key_list = [x_cat, required_args_str()]
     return set(get_nested_value(get_atom_config_dict(), required_args_key_list).keys())
 
 
@@ -381,7 +381,7 @@ def test_get_atom_config_dict_SomeRequiredArgAreUnique():
 
 def test_get_sorted_required_arg_keys_ReturnsObj_bud_acctunit():
     # ESTABLISH
-    x_category = bud_acctunit_text()
+    x_category = bud_acctunit_str()
 
     # WHEN
     x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
@@ -392,7 +392,7 @@ def test_get_sorted_required_arg_keys_ReturnsObj_bud_acctunit():
 
 def test_get_sorted_required_arg_keys_ReturnsObj_bud_idea_reason_premiseunit():
     # ESTABLISH
-    x_category = bud_idea_reason_premiseunit_text()
+    x_category = bud_idea_reason_premiseunit_str()
 
     # WHEN
     x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
@@ -418,16 +418,16 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
 
     # THEN
     assert len(nx) == 10
-    cat_budunit = nx.get(budunit_text())
-    cat_acctunit = nx.get(bud_acctunit_text())
-    cat_membership = nx.get(bud_acct_membership_text())
-    cat_idea = nx.get(bud_ideaunit_text())
-    cat_awardlink = nx.get(bud_idea_awardlink_text())
-    cat_reason = nx.get(bud_idea_reasonunit_text())
-    cat_premise = nx.get(bud_idea_reason_premiseunit_text())
-    cat_teamlink = nx.get(bud_idea_teamlink_text())
-    cat_healerlink = nx.get(bud_idea_healerlink_text())
-    cat_fact = nx.get(bud_idea_factunit_text())
+    cat_budunit = nx.get(budunit_str())
+    cat_acctunit = nx.get(bud_acctunit_str())
+    cat_membership = nx.get(bud_acct_membership_str())
+    cat_idea = nx.get(bud_ideaunit_str())
+    cat_awardlink = nx.get(bud_idea_awardlink_str())
+    cat_reason = nx.get(bud_idea_reasonunit_str())
+    cat_premise = nx.get(bud_idea_reason_premiseunit_str())
+    cat_teamlink = nx.get(bud_idea_teamlink_str())
+    cat_healerlink = nx.get(bud_idea_healerlink_str())
+    cat_fact = nx.get(bud_idea_factunit_str())
 
     assert cat_budunit is not None
     assert cat_acctunit is not None
@@ -440,20 +440,20 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert cat_healerlink is not None
     assert cat_fact is not None
 
-    normal_specs_budunit = cat_budunit.get(normal_specs_text())
-    normal_specs_acctunit = cat_acctunit.get(normal_specs_text())
-    normal_specs_membership = cat_membership.get(normal_specs_text())
-    normal_specs_idea = cat_idea.get(normal_specs_text())
-    normal_specs_awardlink = cat_awardlink.get(normal_specs_text())
-    normal_specs_reason = cat_reason.get(normal_specs_text())
-    normal_specs_premise = cat_premise.get(normal_specs_text())
-    normal_specs_teamlink = cat_teamlink.get(normal_specs_text())
-    normal_specs_healerlink = cat_healerlink.get(normal_specs_text())
-    normal_specs_fact = cat_fact.get(normal_specs_text())
+    normal_specs_budunit = cat_budunit.get(normal_specs_str())
+    normal_specs_acctunit = cat_acctunit.get(normal_specs_str())
+    normal_specs_membership = cat_membership.get(normal_specs_str())
+    normal_specs_idea = cat_idea.get(normal_specs_str())
+    normal_specs_awardlink = cat_awardlink.get(normal_specs_str())
+    normal_specs_reason = cat_reason.get(normal_specs_str())
+    normal_specs_premise = cat_premise.get(normal_specs_str())
+    normal_specs_teamlink = cat_teamlink.get(normal_specs_str())
+    normal_specs_healerlink = cat_healerlink.get(normal_specs_str())
+    normal_specs_fact = cat_fact.get(normal_specs_str())
 
-    columns_text = "columns"
+    columns_str = "columns"
     print(f"{cat_budunit.keys()=}")
-    print(f"{normal_specs_text()=}")
+    print(f"{normal_specs_str()=}")
     assert normal_specs_budunit is not None
     assert normal_specs_acctunit is not None
     assert normal_specs_membership is not None
@@ -465,16 +465,16 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert normal_specs_healerlink is not None
     assert normal_specs_fact is not None
 
-    table_name_budunit = normal_specs_budunit.get(normal_table_name_text())
-    table_name_acctunit = normal_specs_acctunit.get(normal_table_name_text())
-    table_name_membership = normal_specs_membership.get(normal_table_name_text())
-    table_name_idea = normal_specs_idea.get(normal_table_name_text())
-    table_name_awardlink = normal_specs_awardlink.get(normal_table_name_text())
-    table_name_reason = normal_specs_reason.get(normal_table_name_text())
-    table_name_premise = normal_specs_premise.get(normal_table_name_text())
-    table_name_teamlink = normal_specs_teamlink.get(normal_table_name_text())
-    table_name_healerlink = normal_specs_healerlink.get(normal_table_name_text())
-    table_name_fact = normal_specs_fact.get(normal_table_name_text())
+    table_name_budunit = normal_specs_budunit.get(normal_table_name_str())
+    table_name_acctunit = normal_specs_acctunit.get(normal_table_name_str())
+    table_name_membership = normal_specs_membership.get(normal_table_name_str())
+    table_name_idea = normal_specs_idea.get(normal_table_name_str())
+    table_name_awardlink = normal_specs_awardlink.get(normal_table_name_str())
+    table_name_reason = normal_specs_reason.get(normal_table_name_str())
+    table_name_premise = normal_specs_premise.get(normal_table_name_str())
+    table_name_teamlink = normal_specs_teamlink.get(normal_table_name_str())
+    table_name_healerlink = normal_specs_healerlink.get(normal_table_name_str())
+    table_name_fact = normal_specs_fact.get(normal_table_name_str())
 
     assert table_name_budunit == "bud"
     assert table_name_acctunit == "acctunit"
@@ -488,9 +488,9 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert table_name_fact == "fact"
 
     assert len(cat_budunit) == 2
-    assert cat_budunit.get(columns_text) is not None
+    assert cat_budunit.get(columns_str) is not None
 
-    budunit_columns = cat_budunit.get(columns_text)
+    budunit_columns = cat_budunit.get(columns_str)
     assert len(budunit_columns) == 10
     assert budunit_columns.get("uid") is not None
     assert budunit_columns.get("max_tree_traverse") is not None
@@ -504,7 +504,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert budunit_columns.get("tally") is not None
 
     assert len(cat_acctunit) == 2
-    acctunit_columns = cat_acctunit.get(columns_text)
+    acctunit_columns = cat_acctunit.get(columns_str)
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
     assert acctunit_columns.get(acct_id_str()) is not None
@@ -513,15 +513,15 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
 
     acct_id_dict = acctunit_columns.get(acct_id_str())
     assert len(acct_id_dict) == 2
-    assert acct_id_dict.get(sqlite_datatype_text()) == "TEXT"
+    assert acct_id_dict.get(sqlite_datatype_str()) == "TEXT"
     assert acct_id_dict.get("nullable") is False
     debtit_belief_dict = acctunit_columns.get("debtit_belief")
     assert len(acct_id_dict) == 2
-    assert debtit_belief_dict.get(sqlite_datatype_text()) == "INTEGER"
+    assert debtit_belief_dict.get(sqlite_datatype_str()) == "INTEGER"
     assert debtit_belief_dict.get("nullable") is True
 
     assert len(cat_idea) == 2
-    idea_columns = cat_idea.get(columns_text)
+    idea_columns = cat_idea.get(columns_str)
     assert len(idea_columns) == 14
     assert idea_columns.get("uid") is not None
     assert idea_columns.get(parent_road_str()) is not None
@@ -532,8 +532,8 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     stop_want_dict = idea_columns.get(stop_want_str())
     assert len(gogo_want_dict) == 2
     assert len(stop_want_dict) == 2
-    assert gogo_want_dict.get(sqlite_datatype_text()) == "REAL"
-    assert stop_want_dict.get(sqlite_datatype_text()) == "REAL"
+    assert gogo_want_dict.get(sqlite_datatype_str()) == "REAL"
+    assert stop_want_dict.get(sqlite_datatype_str()) == "REAL"
     assert gogo_want_dict.get("nullable") is True
     assert stop_want_dict.get("nullable") is True
 
@@ -545,11 +545,11 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     # THEN
     assert x_atom_args_category_mapping
     assert x_atom_args_category_mapping.get(stop_want_str())
-    assert x_atom_args_category_mapping.get(stop_want_str()) == {bud_ideaunit_text()}
+    assert x_atom_args_category_mapping.get(stop_want_str()) == {bud_ideaunit_str()}
     assert x_atom_args_category_mapping.get(parent_road_str())
     road_categorys = x_atom_args_category_mapping.get(road_str())
-    assert bud_idea_factunit_text() in road_categorys
-    assert bud_idea_teamlink_text() in road_categorys
+    assert bud_idea_factunit_str() in road_categorys
+    assert bud_idea_teamlink_str() in road_categorys
     assert len(road_categorys) == 6
     assert len(x_atom_args_category_mapping) == 41
 
@@ -557,20 +557,20 @@ def test_get_atom_args_category_mapping_ReturnsObj():
 def get_python_type(x_category: str, x_arg: str) -> str:
     atom_config_dict = get_atom_config_dict()
     category_dict = atom_config_dict.get(x_category)
-    optional_dict = category_dict.get(optional_args_text())
-    required_dict = category_dict.get(required_args_text())
+    optional_dict = category_dict.get(optional_args_str())
+    required_dict = category_dict.get(required_args_str())
     arg_dict = {}
     if optional_dict.get(x_arg):
-        arg_dict = category_dict.get(optional_args_text()).get(x_arg)
+        arg_dict = category_dict.get(optional_args_str()).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
-    return arg_dict.get(python_type_text())
+    return arg_dict.get(python_type_str())
 
 
 def test_get_python_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_python_type(bud_acctunit_text(), acct_id_str()) == "AcctID"
-    assert get_python_type(bud_ideaunit_text(), gogo_want_str()) == "float"
+    assert get_python_type(bud_acctunit_str(), acct_id_str()) == "AcctID"
+    assert get_python_type(bud_ideaunit_str(), gogo_want_str()) == "float"
 
 
 def test_get_allowed_python_types_ReturnsObj():

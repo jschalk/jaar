@@ -184,7 +184,7 @@ class RealUnit:
         # if nothing has come from voice->duty->job->action pipeline use voice->action pipeline
         x_action.settle_bud()
         if len(x_action._idea_dict) == 1:
-            # pipeline_voice_action_text()
+            # pipeline_voice_action_str()
             listen_to_debtors_roll_voice_action(listener_hubunit)
             listener_hubunit.open_file_action()
             x_action.settle_bud()

@@ -1,21 +1,21 @@
 from src.bud.bud_tool import (
-    budunit_text,
-    bud_acctunit_text,
-    bud_acct_membership_text,
-    bud_ideaunit_text,
-    bud_idea_awardlink_text,
-    bud_idea_reasonunit_text,
-    bud_idea_reason_premiseunit_text,
-    bud_idea_teamlink_text,
-    bud_idea_healerlink_text,
-    bud_idea_factunit_text,
+    budunit_str,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
 )
 from src.gift.atom_config import (
     get_normalized_bud_table_build,
-    normal_table_name_text,
-    normal_specs_text,
-    columns_text,
-    sqlite_datatype_text,
+    normal_table_name_str,
+    normal_specs_str,
+    columns_str,
+    sqlite_datatype_str,
 )
 from src.normal_db.normal_models import (
     BudTable,
@@ -33,34 +33,34 @@ from sqlalchemy import inspect
 
 
 def get_config_table_name(config_category) -> str:
-    config_specs_dict = config_category.get(normal_specs_text())
-    return config_specs_dict.get(normal_table_name_text())
+    config_specs_dict = config_category.get(normal_specs_str())
+    return config_specs_dict.get(normal_table_name_str())
 
 
 def all_columns_are_as_config_requires(mapper, config_category):
     config_table_name = get_config_table_name(config_category)
-    config_columns = config_category.get(columns_text())
+    config_columns = config_category.get(columns_str())
 
     for config_column, column_dict in config_columns.items():
         table_column = mapper.columns.get(config_column)
-        failed_assert_text = f"{config_column=} is missing from {config_table_name=}"
-        assert table_column is not None, failed_assert_text
-        config_type = column_dict.get(sqlite_datatype_text())
+        failed_assert_str = f"{config_column=} is missing from {config_table_name=}"
+        assert table_column is not None, failed_assert_str
+        config_type = column_dict.get(sqlite_datatype_str())
         if config_type == "TEXT":
             config_type = "VARCHAR"
         elif config_type == "REAL":
             config_type = "FLOAT"
-        failed_assert_text = f"Table '{config_table_name}' {config_column=} {str(table_column.type)==config_type=}"
-        assert str(table_column.type) == config_type, failed_assert_text
+        failed_assert_str = f"Table '{config_table_name}' {config_column=} {str(table_column.type)==config_type=}"
+        assert str(table_column.type) == config_type, failed_assert_str
 
 
 def print_out_expected_class_attribute_declarations(config_category):
     config_table_name = get_config_table_name(config_category)
-    config_columns = config_category.get(columns_text())
+    config_columns = config_category.get(columns_str())
 
     print(f"Table {config_table_name}")
     for config_column, column_dict in config_columns.items():
-        declare_type = column_dict.get(sqlite_datatype_text())
+        declare_type = column_dict.get(sqlite_datatype_str())
         if declare_type == "TEXT":
             declare_type = "String"
         elif declare_type == "INTEGER":
@@ -74,7 +74,7 @@ def print_out_expected_class_attribute_declarations(config_category):
 
 def test_normalized_table_BudTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(budunit_text())
+    config_category = get_normalized_bud_table_build().get(budunit_str())
     mapper = inspect(BudTable)
 
     # WHEN / THEN
@@ -86,7 +86,7 @@ def test_normalized_table_BudTable_Exists():
 
 def test_normalized_table_AcctUnitTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_acctunit_text())
+    config_category = get_normalized_bud_table_build().get(bud_acctunit_str())
     mapper = inspect(AcctUnitTable)
     # print_out_expected_class_attribute_declarations(config_category)
 
@@ -112,7 +112,7 @@ def test_normalized_table_AcctUnitTable_Exists():
 
 def test_normalized_table_MemberShipTable_membership_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_acct_membership_text())
+    config_category = get_normalized_bud_table_build().get(bud_acct_membership_str())
     mapper = inspect(MemberShipTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -125,7 +125,7 @@ def test_normalized_table_MemberShipTable_membership_Exists():
 
 def test_normalized_table_IdeaTable_idea_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_ideaunit_text())
+    config_category = get_normalized_bud_table_build().get(bud_ideaunit_str())
     mapper = inspect(IdeaTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -138,7 +138,7 @@ def test_normalized_table_IdeaTable_idea_Exists():
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_idea_awardlink_text())
+    config_category = get_normalized_bud_table_build().get(bud_idea_awardlink_str())
     mapper = inspect(AwardLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -151,7 +151,7 @@ def test_normalized_table_AwardLinkTable_awardlink_Exists():
 
 def test_normalized_table_ReasonTable_reason_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_idea_reasonunit_text())
+    config_category = get_normalized_bud_table_build().get(bud_idea_reasonunit_str())
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -165,7 +165,7 @@ def test_normalized_table_ReasonTable_reason_Exists():
 def test_normalized_table_PremiseTable_premise_Exists():
     # ESTABLISH
     config_category = get_normalized_bud_table_build().get(
-        bud_idea_reason_premiseunit_text()
+        bud_idea_reason_premiseunit_str()
     )
     mapper = inspect(PremiseTable)
     print_out_expected_class_attribute_declarations(config_category)
@@ -179,7 +179,7 @@ def test_normalized_table_PremiseTable_premise_Exists():
 
 def test_normalized_table_TeamlinkTable_teamlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_idea_teamlink_text())
+    config_category = get_normalized_bud_table_build().get(bud_idea_teamlink_str())
     mapper = inspect(TeamlinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -192,7 +192,7 @@ def test_normalized_table_TeamlinkTable_teamlink_Exists():
 
 def test_normalized_table_HealerLinkTable_healerlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_idea_healerlink_text())
+    config_category = get_normalized_bud_table_build().get(bud_idea_healerlink_str())
     mapper = inspect(HealerLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
@@ -205,7 +205,7 @@ def test_normalized_table_HealerLinkTable_healerlink_Exists():
 
 def test_normalized_table_FactTable_fact_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_idea_factunit_text())
+    config_category = get_normalized_bud_table_build().get(bud_idea_factunit_str())
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_category)
 

@@ -24,34 +24,34 @@ from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scat
 
 
 def add_river_rect(
-    fig: plotly_Figure, x0, y0, x1, y1, display_text, x_color=None, money_supply=None
+    fig: plotly_Figure, x0, y0, x1, y1, display_str, x_color=None, money_supply=None
 ):
     if x_color is None:
         x_color = LightSeaGreen_str()
     line_dict = dict(color=x_color, width=4)
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    add_rect_text(fig, x0, y1, display_text)
+    add_rect_str(fig, x0, y1, display_str)
     if money_supply is not None:
         money_percent = f"{int(((x1 - x0) * 12.5))}%"
-        add_rect_text(fig, x0, y1 - 0.2, str(money_percent))
+        add_rect_str(fig, x0, y1 - 0.2, str(money_percent))
         money_amt = round((((x1 - x0) * 12.5) / 100) * money_supply)
-        add_rect_text(fig, x0, y1 - 0.4, str(money_amt))
+        add_rect_str(fig, x0, y1 - 0.4, str(money_amt))
 
 
 def add_column_rect(
-    fig: plotly_Figure, x0, y0, x1, y1, display_text, x_color=None, money_supply=None
+    fig: plotly_Figure, x0, y0, x1, y1, display_str, x_color=None, money_supply=None
 ):
     if x_color is None:
         x_color = purple_str()
     line_dict = dict(color=x_color, width=4)
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
     if money_supply is None:
-        add_rect_text(fig, x0, y0, display_text)
+        add_rect_str(fig, x0, y0, display_str)
     if money_supply is not None:
-        money_percent = f"{display_text} {int(((y0 - y1) * 12.5))}%"
-        add_rect_text(fig, x0, y0, str(money_percent))
+        money_percent = f"{display_str} {int(((y0 - y1) * 12.5))}%"
+        add_rect_str(fig, x0, y0, str(money_percent))
         money_amt = round((((y0 - y1) * 12.5) / 100) * money_supply)
-        add_rect_text(fig, x0, y0 - 0.2, str(money_amt))
+        add_rect_str(fig, x0, y0 - 0.2, str(money_amt))
 
 
 def add_river_row(fig, grants_dict: dict, money_amt, row_x0, row_x1, y0, color=None):
@@ -77,14 +77,14 @@ def add_river_col(fig, num_dict: dict, money_amt, x0, y0, c_len):
 
 
 def add_grants_top(fig, grants_dict: dict, t_y0: int, healer_id, money_amt):
-    grants_text = f"{healer_id} Grants"
+    grants_str = f"{healer_id} Grants"
     dy0 = t_y0 - 1.2
     dy1 = t_y0 - 1.6
     dy2 = t_y0 - 2.2
     dy3 = t_y0 - 3
     ey0 = t_y0 - 0.8
     ey1 = t_y0 - 1.2
-    add_river_rect(fig, 1.0, t_y0 - 1, 2.0, t_y0, grants_text, green_str())
+    add_river_rect(fig, 1.0, t_y0 - 1, 2.0, t_y0, grants_str, green_str())
     add_river_row(fig, grants_dict, money_amt, 1, 9, t_y0 - 4)
     add_2_curve(fig, path=f"M 1.75,{dy0} C 2,{dy1} 7.4,{dy2} 9,{dy3}", color=blue_str())
     add_2_curve(fig, path=f"M 1.75,{dy0} C 2,{dy1} 1.2,{dy2} 1,{dy3}", color=blue_str())
@@ -92,14 +92,14 @@ def add_grants_top(fig, grants_dict: dict, t_y0: int, healer_id, money_amt):
 
 
 def add_taxs_bottom(fig, taxs_dict, b_y0: int, healer_id: str, money_amt: int):
-    taxs_text = f"{healer_id} Taxs"
+    taxs_str = f"{healer_id} Taxs"
     cy0 = b_y0 + 1.2
     cy1 = b_y0 + 1.6
     cy2 = b_y0 + 2.2
     cy3 = b_y0 + 3
     ay0 = b_y0 + 0.8
     ay1 = b_y0 + 1.2
-    add_river_rect(fig, 1.0, b_y0, 2.0, b_y0 + 1, taxs_text, darkred_str())
+    add_river_rect(fig, 1.0, b_y0, 2.0, b_y0 + 1, taxs_str, darkred_str())
     add_river_row(fig, taxs_dict, money_amt, 1, 9, y0=b_y0 + 3, color=purple_str())
     add_2_curve(fig, path=f"M 1.75,{cy0} C 2,{cy1} 7.4,{cy2} 9,{cy3}", color=red_str())
     add_2_curve(fig, path=f"M 1.75,{cy0} C 2,{cy1} 1.2,{cy2} 1,{cy3}", color=red_str())
@@ -116,7 +116,7 @@ def add_taxs_column(
     col_y0: float,
     col_len: float,
 ):
-    taxs_text = f"{healer_id} Taxs"
+    taxs_str = f"{healer_id} Taxs"
     cx0 = b_x0 - 0.2
     cx1 = b_x0 - 0.8
     cx2 = b_x0 - 0.4
@@ -125,7 +125,7 @@ def add_taxs_column(
     cy4 = b_y0 - 1
     cy5 = cy4 - 1
     cy6 = col_y0 + 1
-    add_river_rect(fig, b_x0, b_y0 - 1, b_x0 + 1, b_y0, taxs_text, darkred_str())
+    add_river_rect(fig, b_x0, b_y0 - 1, b_x0 + 1, b_y0, taxs_str, darkred_str())
     add_river_col(fig, taxs_dict, money_amt, b_x0, col_y0, c_len=col_len)
     z1_path = f"M {cx0},{cy4} C {cx2},{cy5} {cx2},{cy6} {b_x0},{col_y0}"
     z2_path = f"M {cx0},{cy4} C {cx1},{cy5} {cx1},{cy2} {b_x0},{cy1}"
@@ -137,10 +137,10 @@ def add_taxs_column(
     add_rect_arrow(fig, ax0, ay0, ax1, cy4, red_str())
 
 
-def add_rivercycle(fig: plotly_Figure, x0, y0, x1, y1, display_text):
+def add_rivercycle(fig: plotly_Figure, x0, y0, x1, y1, display_str):
     line_dict = dict(color=LightSeaGreen_str(), width=2, dash="dot")
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    add_rect_text(fig, x0, y1, display_text)
+    add_rect_str(fig, x0, y1, display_str)
 
 
 def add_econ__rect(
@@ -162,17 +162,17 @@ def add_econ__rect(
     line_dict = dict(color=color, width=2, dash="dot")
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
     mid_x0 = x0 + ((x1 - x0) / 2)
-    add_econ_text(fig, mid_x0, y1 - 0.2, text1)
-    add_econ_text(fig, mid_x0, y1 - 0.5, text2)
-    add_econ_text(fig, mid_x0, y1 - 0.8, text3)
-    add_econ_text(fig, mid_x0, y1 - 1.1, text4)
+    add_econ_str(fig, mid_x0, y1 - 0.2, text1)
+    add_econ_str(fig, mid_x0, y1 - 0.5, text2)
+    add_econ_str(fig, mid_x0, y1 - 0.8, text3)
+    add_econ_str(fig, mid_x0, y1 - 1.1, text4)
 
 
-def add_econ_text(fig, x0, y0, text):
+def add_econ_str(fig, x0, y0, text):
     fig.add_annotation(x=x0, y=y0, text=text, showarrow=False, align="left")
 
 
-def add_rect_text(fig, x0, y0, text):
+def add_rect_str(fig, x0, y0, text):
     x_margin = 0.3
     fig.add_annotation(
         x=x0 + x_margin, y=y0 - x_margin, text=text, showarrow=False, align="left"

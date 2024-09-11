@@ -14,31 +14,31 @@ from src.bud.idea import ideaunit_shop, get_obj_from_idea_dict
 
 def test_get_obj_from_idea_dict_ReturnsCorrectObj():
     # ESTABLISH
-    field_text = "_is_expanded"
+    field_str = "_is_expanded"
     # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: True}, field_text)
-    assert get_obj_from_idea_dict({}, field_text)
-    assert get_obj_from_idea_dict({field_text: False}, field_text) is False
+    assert get_obj_from_idea_dict({field_str: True}, field_str)
+    assert get_obj_from_idea_dict({}, field_str)
+    assert get_obj_from_idea_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_text = "pledge"
+    field_str = "pledge"
     # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: True}, field_text)
-    assert get_obj_from_idea_dict({}, field_text) is False
-    assert get_obj_from_idea_dict({field_text: False}, field_text) is False
+    assert get_obj_from_idea_dict({field_str: True}, field_str)
+    assert get_obj_from_idea_dict({}, field_str) is False
+    assert get_obj_from_idea_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_text = "problem_bool"
+    field_str = "problem_bool"
     # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: True}, field_text)
-    assert get_obj_from_idea_dict({}, field_text) is False
-    assert get_obj_from_idea_dict({field_text: False}, field_text) is False
+    assert get_obj_from_idea_dict({field_str: True}, field_str)
+    assert get_obj_from_idea_dict({}, field_str) is False
+    assert get_obj_from_idea_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_text = "_kids"
+    field_str = "_kids"
     # WHEN / THEN
-    assert get_obj_from_idea_dict({field_text: {}}, field_text) == {}
-    assert get_obj_from_idea_dict({}, field_text) == {}
+    assert get_obj_from_idea_dict({field_str: {}}, field_str) == {}
+    assert get_obj_from_idea_dict({}, field_str) == {}
 
 
 def test_get_obj_from_idea_dict_ReturnsCorrect_HealerLink():
@@ -48,29 +48,29 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerLink():
     assert get_obj_from_idea_dict({}, healerlink_key) == healerlink_shop()
 
     # WHEN
-    sue_text = "Sue"
-    zia_text = "Zia"
-    healerlink_dict = {"healerlink_healer_ids": [sue_text, zia_text]}
+    sue_str = "Sue"
+    zia_str = "Zia"
+    healerlink_dict = {"healerlink_healer_ids": [sue_str, zia_str]}
     ideaunit_dict = {healerlink_key: healerlink_dict}
 
     # THEN
     static_healerlink = healerlink_shop()
-    static_healerlink.set_healer_id(x_healer_id=sue_text)
-    static_healerlink.set_healer_id(x_healer_id=zia_text)
+    static_healerlink.set_healer_id(x_healer_id=sue_str)
+    static_healerlink.set_healer_id(x_healer_id=zia_str)
     assert get_obj_from_idea_dict(ideaunit_dict, healerlink_key) is not None
     assert get_obj_from_idea_dict(ideaunit_dict, healerlink_key) == static_healerlink
 
 
 def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
-    week_text = "weekdays"
-    week_road = create_road(root_label(), week_text)
-    wed_text = "Wednesday"
-    wed_road = create_road(week_road, wed_text)
-    states_text = "nation-state"
-    states_road = create_road(root_label(), states_text)
-    usa_text = "USA"
-    usa_road = create_road(states_road, usa_text)
+    week_str = "weekdays"
+    week_road = create_road(root_label(), week_str)
+    wed_str = "Wednesday"
+    wed_road = create_road(week_road, wed_str)
+    states_str = "nation-state"
+    states_road = create_road(root_label(), states_str)
+    usa_str = "USA"
+    usa_road = create_road(states_road, usa_str)
 
     wed_premise = premiseunit_shop(need=wed_road)
     wed_premise._status = True
@@ -120,19 +120,19 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         "take_force": flyer_awardlink.take_force,
     }
     x1_awardlinks = {biker_group_id: biker_get_dict, flyer_group_id: flyer_get_dict}
-    sue_text = "Sue"
-    yao_text = "Yao"
-    sue_teamunit = teamunit_shop({sue_text: -1, yao_text: -1})
-    yao_healerlink = healerlink_shop({yao_text})
-    casa_text = "casa"
-    casa_road = create_road(root_label(), casa_text)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    sue_teamunit = teamunit_shop({sue_str: -1, yao_str: -1})
+    yao_healerlink = healerlink_shop({yao_str})
+    casa_str = "casa"
+    casa_road = create_road(root_label(), casa_str)
     x_problem_bool = True
     casa_idea = ideaunit_shop(
         _parent_road=casa_road,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,
-        _label=casa_text,
+        _label=casa_str,
         _level=1,
         reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
@@ -213,23 +213,23 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_idea = ideaunit_shop()
     casa_idea._is_expanded = False
     casa_idea.pledge = True
-    ignore_text = "ignore"
+    ignore_str = "ignore"
 
-    a_text = "a"
-    a_road = create_road(root_label(), a_text)
+    a_str = "a"
+    a_road = create_road(root_label(), a_str)
     casa_idea.set_factunit(factunit_shop(a_road, a_road))
 
-    yao_text = "Yao"
-    casa_idea.set_awardlink(awardlink_shop(yao_text))
+    yao_str = "Yao"
+    casa_idea.set_awardlink(awardlink_shop(yao_str))
 
     x_teamunit = casa_idea.teamunit
-    x_teamunit.set_teamlink(group_id=yao_text)
+    x_teamunit.set_teamlink(group_id=yao_str)
 
     x_originunit = casa_idea._originunit
-    x_originunit.set_originhold(yao_text, 1)
+    x_originunit.set_originhold(yao_str, 1)
 
-    clean_text = "clean"
-    casa_idea.add_kid(ideaunit_shop(clean_text))
+    clean_str = "clean"
+    casa_idea.add_kid(ideaunit_shop(clean_str))
 
     assert not casa_idea._is_expanded
     assert casa_idea.pledge

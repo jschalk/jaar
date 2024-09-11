@@ -7,24 +7,24 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsAllChildren():
     yao_budunit = budunit_shop("Yao")
     time_road = yao_budunit.make_l1_road("time")
     tech_road = yao_budunit.make_road(time_road, "tech")
-    week_text = "week"
-    week_road = yao_budunit.make_road(tech_road, week_text)
-    week_idea = ideaunit_shop(week_text, begin=0, close=10800)
+    week_str = "week"
+    week_road = yao_budunit.make_road(tech_road, week_str)
+    week_idea = ideaunit_shop(week_str, begin=0, close=10800)
     yao_budunit.set_idea(week_idea, tech_road)
-    mon_text = "Monday"
-    tue_text = "Tuesday"
-    wed_text = "Wednesday"
-    thu_text = "Thursday"
-    fri_text = "Friday"
-    sat_text = "Saturday"
-    sun_text = "Sunday"
-    mon_idea = ideaunit_shop(mon_text, gogo_want=1440 * 0, stop_want=1440 * 1)
-    tue_idea = ideaunit_shop(tue_text, gogo_want=1440 * 1, stop_want=1440 * 2)
-    wed_idea = ideaunit_shop(wed_text, gogo_want=1440 * 2, stop_want=1440 * 3)
-    thu_idea = ideaunit_shop(thu_text, gogo_want=1440 * 3, stop_want=1440 * 4)
-    fri_idea = ideaunit_shop(fri_text, gogo_want=1440 * 4, stop_want=1440 * 5)
-    sat_idea = ideaunit_shop(sat_text, gogo_want=1440 * 5, stop_want=1440 * 6)
-    sun_idea = ideaunit_shop(sun_text, gogo_want=1440 * 6, stop_want=1440 * 7)
+    mon_str = "Monday"
+    tue_str = "Tuesday"
+    wed_str = "Wednesday"
+    thu_str = "Thursday"
+    fri_str = "Friday"
+    sat_str = "Saturday"
+    sun_str = "Sunday"
+    mon_idea = ideaunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
+    tue_idea = ideaunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
+    wed_idea = ideaunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
+    thu_idea = ideaunit_shop(thu_str, gogo_want=1440 * 3, stop_want=1440 * 4)
+    fri_idea = ideaunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
+    sat_idea = ideaunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
+    sun_idea = ideaunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
     yao_budunit.set_idea(mon_idea, week_road)
     yao_budunit.set_idea(tue_idea, week_road)
     yao_budunit.set_idea(wed_idea, week_road)
@@ -46,24 +46,24 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario1():
     yao_budunit = budunit_shop("Yao")
     time_road = yao_budunit.make_l1_road("time")
     tech_road = yao_budunit.make_road(time_road, "tech")
-    week_text = "week"
-    week_road = yao_budunit.make_road(tech_road, week_text)
-    week_idea = ideaunit_shop(week_text, begin=0, close=10800)
+    week_str = "week"
+    week_road = yao_budunit.make_road(tech_road, week_str)
+    week_idea = ideaunit_shop(week_str, begin=0, close=10800)
     yao_budunit.set_idea(week_idea, tech_road)
-    mon_text = "Monday"
-    tue_text = "Tuesday"
-    wed_text = "Wednesday"
-    thu_text = "Thursday"
-    fri_text = "Friday"
-    sat_text = "Saturday"
-    sun_text = "Sunday"
-    mon_idea = ideaunit_shop(mon_text, gogo_want=1440 * 0, stop_want=1440 * 1)
-    tue_idea = ideaunit_shop(tue_text, gogo_want=1440 * 1, stop_want=1440 * 2)
-    wed_idea = ideaunit_shop(wed_text, gogo_want=1440 * 2, stop_want=1440 * 3)
-    thu_idea = ideaunit_shop(thu_text, gogo_want=1440 * 3, stop_want=1440 * 4)
-    fri_idea = ideaunit_shop(fri_text, gogo_want=1440 * 4, stop_want=1440 * 5)
-    sat_idea = ideaunit_shop(sat_text, gogo_want=1440 * 5, stop_want=1440 * 6)
-    sun_idea = ideaunit_shop(sun_text, gogo_want=1440 * 6, stop_want=1440 * 7)
+    mon_str = "Monday"
+    tue_str = "Tuesday"
+    wed_str = "Wednesday"
+    thu_str = "Thursday"
+    fri_str = "Friday"
+    sat_str = "Saturday"
+    sun_str = "Sunday"
+    mon_idea = ideaunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
+    tue_idea = ideaunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
+    wed_idea = ideaunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
+    thu_idea = ideaunit_shop(thu_str, gogo_want=1440 * 3, stop_want=1440 * 4)
+    fri_idea = ideaunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
+    sat_idea = ideaunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
+    sun_idea = ideaunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
     yao_budunit.set_idea(mon_idea, week_road)
     yao_budunit.set_idea(tue_idea, week_road)
     yao_budunit.set_idea(wed_idea, week_road)
@@ -93,24 +93,24 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():
     yao_budunit = budunit_shop("Yao")
     time_road = yao_budunit.make_l1_road("time")
     tech_road = yao_budunit.make_road(time_road, "tech")
-    week_text = "week"
-    week_road = yao_budunit.make_road(tech_road, week_text)
-    week_idea = ideaunit_shop(week_text, begin=0, close=10800)
+    week_str = "week"
+    week_road = yao_budunit.make_road(tech_road, week_str)
+    week_idea = ideaunit_shop(week_str, begin=0, close=10800)
     yao_budunit.set_idea(week_idea, tech_road)
-    mon_text = "Monday"
-    tue_text = "Tuesday"
-    wed_text = "Wednesday"
-    thu_text = "Thursday"
-    fri_text = "Friday"
-    sat_text = "Saturday"
-    sun_text = "Sunday"
-    mon_idea = ideaunit_shop(mon_text, gogo_want=1440 * 0, stop_want=1440 * 1)
-    tue_idea = ideaunit_shop(tue_text, gogo_want=1440 * 1, stop_want=1440 * 2)
-    wed_idea = ideaunit_shop(wed_text, gogo_want=1440 * 2, stop_want=1440 * 3)
-    thu_idea = ideaunit_shop(thu_text, gogo_want=1440 * 3, stop_want=1440 * 4)
-    fri_idea = ideaunit_shop(fri_text, gogo_want=1440 * 4, stop_want=1440 * 5)
-    sat_idea = ideaunit_shop(sat_text, gogo_want=1440 * 5, stop_want=1440 * 6)
-    sun_idea = ideaunit_shop(sun_text, gogo_want=1440 * 6, stop_want=1440 * 7)
+    mon_str = "Monday"
+    tue_str = "Tuesday"
+    wed_str = "Wednesday"
+    thu_str = "Thursday"
+    fri_str = "Friday"
+    sat_str = "Saturday"
+    sun_str = "Sunday"
+    mon_idea = ideaunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
+    tue_idea = ideaunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
+    wed_idea = ideaunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
+    thu_idea = ideaunit_shop(thu_str, gogo_want=1440 * 3, stop_want=1440 * 4)
+    fri_idea = ideaunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
+    sat_idea = ideaunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
+    sun_idea = ideaunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
     yao_budunit.set_idea(mon_idea, week_road)
     yao_budunit.set_idea(tue_idea, week_road)
     yao_budunit.set_idea(wed_idea, week_road)
@@ -131,24 +131,24 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario3():
     yao_budunit = budunit_shop("Yao")
     time_road = yao_budunit.make_l1_road("time")
     tech_road = yao_budunit.make_road(time_road, "tech")
-    week_text = "week"
-    week_road = yao_budunit.make_road(tech_road, week_text)
-    week_idea = ideaunit_shop(week_text, begin=0, close=10800)
+    week_str = "week"
+    week_road = yao_budunit.make_road(tech_road, week_str)
+    week_idea = ideaunit_shop(week_str, begin=0, close=10800)
     yao_budunit.set_idea(week_idea, tech_road)
-    mon_text = "Monday"
-    tue_text = "Tuesday"
-    wed_text = "Wednesday"
-    thu_text = "Thursday"
-    fri_text = "Friday"
-    sat_text = "Saturday"
-    sun_text = "Sunday"
-    mon_idea = ideaunit_shop(mon_text, gogo_want=1440 * 0, stop_want=1440 * 1)
-    tue_idea = ideaunit_shop(tue_text, gogo_want=1440 * 1, stop_want=1440 * 2)
-    wed_idea = ideaunit_shop(wed_text, gogo_want=1440 * 2, stop_want=1440 * 3)
-    thu_idea = ideaunit_shop(thu_text, gogo_want=1440 * 3, stop_want=1440 * 4)
-    fri_idea = ideaunit_shop(fri_text, gogo_want=1440 * 4, stop_want=1440 * 5)
-    sat_idea = ideaunit_shop(sat_text, gogo_want=1440 * 5, stop_want=1440 * 6)
-    sun_idea = ideaunit_shop(sun_text, gogo_want=1440 * 6, stop_want=1440 * 7)
+    mon_str = "Monday"
+    tue_str = "Tuesday"
+    wed_str = "Wednesday"
+    thu_str = "Thursday"
+    fri_str = "Friday"
+    sat_str = "Saturday"
+    sun_str = "Sunday"
+    mon_idea = ideaunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
+    tue_idea = ideaunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
+    wed_idea = ideaunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
+    thu_idea = ideaunit_shop(thu_str, gogo_want=1440 * 3, stop_want=1440 * 4)
+    fri_idea = ideaunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
+    sat_idea = ideaunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
+    sun_idea = ideaunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
     yao_budunit.set_idea(mon_idea, week_road)
     yao_budunit.set_idea(tue_idea, week_road)
     yao_budunit.set_idea(wed_idea, week_road)
@@ -163,8 +163,8 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario3():
     assert len(yao_budunit.get_idea_ranged_kids(week_road, 1440)) == 1
 
     # ESTABLISH
-    weekday_text = "weekday"
-    weekdays_idea = ideaunit_shop(weekday_text, gogo_want=0, stop_want=1440 * 5)
+    weekday_str = "weekday"
+    weekdays_idea = ideaunit_shop(weekday_str, gogo_want=0, stop_want=1440 * 5)
     yao_budunit.set_idea(weekdays_idea, week_road)
 
     # WHEN
