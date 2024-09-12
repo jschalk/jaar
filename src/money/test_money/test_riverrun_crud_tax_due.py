@@ -1,5 +1,5 @@
 from src.bud.bud import budunit_shop
-from src.hear.hubunit import hubunit_shop
+from src.listen.hubunit import hubunit_shop
 from src.money.rivercycle import get_credorledger, get_debtorledger
 from src.money.riverrun import riverrun_shop
 from src.money.examples.example_credorledgers import example_yao_hubunit

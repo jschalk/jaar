@@ -1,7 +1,7 @@
 from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.hear.hubunit import hubunit_shop
+from src.listen.hubunit import hubunit_shop
 from src.pecun.pecun import pecununit_shop
 from src.pecun.examples.pecun_env import get_test_pecuns_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists

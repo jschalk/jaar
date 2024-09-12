@@ -226,7 +226,7 @@ def test_AcctUnit_add_inallocable_debtit_belief_SetsAttrCorrectly():
     assert bob_acctunit._inallocable_debtit_belief == bob_int1 + bob_int2
 
 
-def test_AcctUnit_reset_hear_calculated_attrs_SetsAttrCorrectly():
+def test_AcctUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
     bob_int1 = 11
@@ -237,7 +237,7 @@ def test_AcctUnit_reset_hear_calculated_attrs_SetsAttrCorrectly():
     assert bob_acctunit._inallocable_debtit_belief == bob_int2
 
     # WHEN
-    bob_acctunit.reset_hear_calculated_attrs()
+    bob_acctunit.reset_listen_calculated_attrs()
 
     # THEN
     assert bob_acctunit._irrational_debtit_belief == 0

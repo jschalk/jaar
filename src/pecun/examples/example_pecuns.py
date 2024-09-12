@@ -1,6 +1,6 @@
 from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
-from src.hear.hubunit import hubunit_shop
+from src.listen.hubunit import hubunit_shop
 from src.pecun.pecun import PecunUnit, pecununit_shop
 from src.pecun.examples.pecun_env import get_test_pecuns_dir
 

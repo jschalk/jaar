@@ -7,7 +7,7 @@ from src._road.jaar_config import get_gifts_folder, get_json_filename
 from src._road.road import default_road_delimiter_if_none
 from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
-from src.hear.hubunit import hubunit_shop
+from src.listen.hubunit import hubunit_shop
 from src.pecun.pecun import PecunUnit, pecununit_shop
 from src.pecun.examples.pecun_env import get_test_pecuns_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists, isdir as os_path_isdir

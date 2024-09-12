@@ -7,7 +7,7 @@ from src._road.finance import allot_scale
 from src._road.road import AcctID, OwnerID
 from src.bud.bud import BudUnit
 from src.gift.atom_config import pecun_id_str
-from src.hear.hubunit import HubUnit
+from src.listen.hubunit import HubUnit
 from dataclasses import dataclass
 
 

@@ -4,21 +4,21 @@ workspace {
 */
 
     model {
-        activeperson = person "Active Person" "Ready to hear, judge, lead."
+        activeperson = person "Active Person" "Ready to listen, judge, lead."
         jaar = person "Datastore and procedures" "Connect to others."
         interface = softwareSystem "Interface" "Listening to needs, judging metrics, leading with bud."
-        hearer = softwareSystem "Listens to others" "Goes to Econ and hears"
-        judger = softwareSystem "Metrics to judge" "Who is heared to and who is a healer"
+        listener = softwareSystem "Listens to others" "Goes to Econ and listens"
+        judger = softwareSystem "Metrics to judge" "Who is listened to and who is a healer"
         leader = softwareSystem "bud" "What should be done by whom"
 
 
         activeperson -> interface "connection"
         interface -> leader "leads"
         interface -> judger "judges"
-        interface -> hearer "hears"
+        interface -> listener "listens"
         leader -> jaar "11leads"
         judger -> jaar "11judges"
-        hearer -> jaar "11hears"
+        listener -> jaar "11listens"
 
 
         }

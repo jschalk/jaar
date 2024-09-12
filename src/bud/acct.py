@@ -47,8 +47,8 @@ class AcctUnit(AcctCore):
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
-    _irrational_debtit_belief: int = None  # set by hearing process
-    _inallocable_debtit_belief: int = None  # set by hearing process
+    _irrational_debtit_belief: int = None  # set by listening process
+    _inallocable_debtit_belief: int = None  # set by listening process
     # set by Bud.settle_bud()
     _fund_give: float = None
     _fund_take: float = None
@@ -96,7 +96,7 @@ class AcctUnit(AcctCore):
     def add_inallocable_debtit_belief(self, x_inallocable_debtit_belief: float):
         self._inallocable_debtit_belief += x_inallocable_debtit_belief
 
-    def reset_hear_calculated_attrs(self):
+    def reset_listen_calculated_attrs(self):
         self._irrational_debtit_belief = 0
         self._inallocable_debtit_belief = 0
 
