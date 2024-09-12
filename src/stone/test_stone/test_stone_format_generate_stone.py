@@ -21,7 +21,7 @@ from src.gift.atom_config import (
     credit_vote_str,
 )
 from src.gift.atom import atomunit_shop
-from src.stone.stone import create_stone_df, create_changeunit, get_stoneref
+from src.stone.stone import create_stone_df, make_changeunit, get_stoneref
 from src.stone.stone_config import (
     stone_format_00021_bud_acctunit_v0_0_0,
     stone_format_00020_bud_acct_membership_v0_0_0,
@@ -29,7 +29,7 @@ from src.stone.stone_config import (
 )
 
 
-def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
+def test_make_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -50,7 +50,7 @@ def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     acct_csv = acct_dataframe.to_csv(index=False)
 
     # WHEN
-    sue_acct_changeunit = create_changeunit(acct_csv)
+    sue_acct_changeunit = make_changeunit(acct_csv)
 
     # THEN
     assert sue_acct_changeunit
@@ -74,7 +74,7 @@ def test_create_changeunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     assert len(sue_acct_changeunit.get_ordered_atomunits()) == 3
 
 
-def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
+def test_make_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -108,7 +108,7 @@ def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     print(f"{membership_csv=}")
 
     # WHEN
-    membership_changunit = create_changeunit(membership_csv)
+    membership_changunit = make_changeunit(membership_csv)
 
     # THEN
     assert membership_changunit
@@ -144,7 +144,7 @@ def test_create_changeunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     assert len(membership_changunit.get_ordered_atomunits()) == 7
 
 
-def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
+def test_make_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -162,7 +162,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = create_changeunit(ideaunit_csv)
+    ideaunit_changunit = make_changeunit(ideaunit_csv)
 
     # THEN
     casa_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())
@@ -199,7 +199,7 @@ def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit
         assert len(ideaunit_format) == 251
 
 
-def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
+def test_make_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -217,7 +217,7 @@ def test_create_changeunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = create_changeunit(ideaunit_csv)
+    ideaunit_changunit = make_changeunit(ideaunit_csv)
 
     # THEN
     casa_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())

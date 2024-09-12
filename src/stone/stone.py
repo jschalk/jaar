@@ -10,7 +10,12 @@ from src._road.road import TribeID, OwnerID
 from src.bud.bud import BudUnit
 from src.gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
 from src.gift.atom_config import tribe_id_str, owner_id_str, pledge_str
-from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
+from src.gift.change import (
+    changeunit_shop,
+    get_filtered_changeunit,
+    ChangeUnit,
+    sift_changeunit,
+)
 from src.gift.gift import giftunit_shop
 from src.hear.hubunit import hubunit_shop
 from src.stone.stone_config import (
@@ -165,7 +170,7 @@ def get_csv_stoneref(title_row: list[str]) -> StoneRef:
     return get_stoneref(x_stonename)
 
 
-def create_changeunit(x_csv: str) -> ChangeUnit:
+def make_changeunit(x_csv: str) -> ChangeUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_stoneref = get_csv_stoneref(title_row)
 
@@ -192,9 +197,10 @@ def load_stone_csv(tribes_dir: str, x_file_dir: str, x_filename: str):
         x_tribe_id = row[0]
         x_owner_id = row[1]
 
-    x_hubunit = hubunit_shop(tribes_dir, tribe_id=x_tribe_id, owner_id=x_owner_id)
+    x_hubunit = hubunit_shop(tribes_dir, x_tribe_id, x_owner_id)
     x_hubunit.initialize_gift_voice_files()
-    x_changeunit = create_changeunit(x_csv)
+    x_changeunit = make_changeunit(x_csv)
+    # x_changeunit = sift_changeunit(x_changeunit)
     x_giftunit = giftunit_shop(x_owner_id, x_tribe_id)
     x_giftunit.set_changeunit(x_changeunit)
     x_hubunit.save_gift_file(x_giftunit)
