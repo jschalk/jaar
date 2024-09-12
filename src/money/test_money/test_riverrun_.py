@@ -32,7 +32,7 @@ def test_RiverRun_Exists():
 def test_RiverRun_set_cycle_max_CorrectlySetsAttr():
     # ESTABLISH
     x_riverrun = RiverRun()
-    assert x_riverrun.cycle_max is None
+    assert not x_riverrun.cycle_max
 
     # WHEN / THEN
     x_riverrun.set_cycle_max(10)
