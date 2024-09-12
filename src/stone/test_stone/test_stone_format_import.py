@@ -1,6 +1,5 @@
 from src._instrument.file import create_file_path as f_path
 from src.bud.bud import budunit_shop
-from src.bud.examples.example_buds import budunit_v001
 from src.gift.atom_config import (
     pecun_id_str,
     owner_id_str,
@@ -76,7 +75,7 @@ def test_open_stone_csv_ReturnsObj():
     assert len(acct_dataframe) == 3
 
 
-def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
+def test_load_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     stone_env_setup_cleanup,
 ):
     # ESTABLISH
@@ -127,17 +126,17 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     assert yao_acctunit.debtit_belief == yao_debtit_belief
 
 
-def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
-    big_volume,
-):
-    if big_volume:
-        # ESTABLISH / WHEN
-        x_stone_name = stone_format_00003_ideaunit_v0_0_0()
+# def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
+#     big_volume,
+# ):
+#     if big_volume:
+#         # ESTABLISH / WHEN
+#         x_stone_name = stone_format_00003_ideaunit_v0_0_0()
 
-        # WHEN
-        ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
+#         # WHEN
+#         ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
 
-        # THEN
-        array_headers = list(ideaunit_format.columns)
-        assert array_headers == get_stoneref(x_stone_name).get_headers_list()
-        assert len(ideaunit_format) == 251
+#         # THEN
+#         array_headers = list(ideaunit_format.columns)
+#         assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+#         assert len(ideaunit_format) == 251

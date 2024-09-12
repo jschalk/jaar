@@ -1,5 +1,4 @@
 from src._instrument.file import open_file, create_file_path
-from src._road.jaar_refer import sue_str, bob_str, yao_str
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
 from src.chrono.examples.chrono_examples import (
@@ -183,20 +182,6 @@ def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0():
     assert ideaunit_format.loc[1, label_str()] == clean_str
     assert ideaunit_format.loc[1, mass_str()] == 1
     assert len(ideaunit_format) == 2
-
-
-# Commented out to reduce testing time.
-# def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001():
-#     # ESTABLISH / WHEN
-#     x_stone_name = stone_format_00003_ideaunit_v0_0_0()
-
-#     # WHEN
-#     ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
-
-#     # THEN
-#     array_headers = list(ideaunit_format.columns)
-#     assert array_headers == get_stoneref(x_stone_name).get_headers_list()
-#     assert len(ideaunit_format) == 252
 
 
 def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0():
