@@ -1,6 +1,6 @@
 from src._road.road import (
     create_road,
-    get_default_tribe_id_roadnode as root_label,
+    get_default_pecun_id_roadnode as root_label,
 )
 from src.hear.hubunit import hubunit_shop
 from src.hear.examples.example_hear_buds import get_budunit_with_4_levels

@@ -7,7 +7,7 @@ from src._road.finance import (
 )
 from src.bud.bud import budunit_shop, BudUnit
 from src._road.road import (
-    get_default_tribe_id_roadnode as root_label,
+    get_default_pecun_id_roadnode as root_label,
     default_road_delimiter_if_none,
 )
 from src.bud.origin import originunit_shop
@@ -20,7 +20,7 @@ def test_BudUnit_Exists():
 
     # THEN
     assert x_bud
-    assert x_bud._tribe_id is None
+    assert x_bud._pecun_id is None
     assert x_bud._owner_id is None
     assert x_bud._tally is None
     assert x_bud._accts is None
@@ -55,7 +55,7 @@ def test_BudUnit_Exists():
 def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_tribe_id = "Iowa"
+    iowa_pecun_id = "Iowa"
     slash_road_delimiter = "/"
     x_fund_pool = 555
     x_fund_coin = 7
@@ -65,7 +65,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # WHEN
     x_bud = budunit_shop(
         _owner_id=sue_str,
-        _tribe_id=iowa_tribe_id,
+        _pecun_id=iowa_pecun_id,
         _road_delimiter=slash_road_delimiter,
         _fund_pool=x_fund_pool,
         _fund_coin=x_fund_coin,
@@ -76,7 +76,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # THEN
     assert x_bud
     assert x_bud._owner_id == sue_str
-    assert x_bud._tribe_id == iowa_tribe_id
+    assert x_bud._pecun_id == iowa_pecun_id
     assert x_bud._tally == 1
     assert x_bud._accts == {}
     assert x_bud._idearoot is not None
@@ -114,7 +114,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud._owner_id == ""
-    assert x_bud._tribe_id == root_label()
+    assert x_bud._pecun_id == root_label()
     assert x_bud._road_delimiter == default_road_delimiter_if_none()
     assert x_bud._fund_pool == validate_fund_pool()
     assert x_bud._fund_coin == default_fund_coin_if_none()
@@ -125,7 +125,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud._idearoot._root
     assert x_bud._idearoot._uid == 1
     assert x_bud._idearoot._level == 0
-    assert x_bud._idearoot._bud_tribe_id == x_bud._tribe_id
+    assert x_bud._idearoot._bud_pecun_id == x_bud._pecun_id
     assert x_bud._idearoot._road_delimiter == x_bud._road_delimiter
     assert x_bud._idearoot._parent_road == ""
 
@@ -177,10 +177,10 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
     # ESTABLISH
-    tribe_id_str = "Sun"
+    pecun_id_str = "Sun"
     slash_road_delimiter = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, tribe_id_str, _road_delimiter=slash_road_delimiter)
+    sue_bud = budunit_shop(sue_str, pecun_id_str, _road_delimiter=slash_road_delimiter)
     assert sue_bud._road_delimiter == slash_road_delimiter
 
     # WHEN
@@ -193,10 +193,10 @@ def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
-    tribe_id_str = "Sun"
+    pecun_id_str = "Sun"
     slash_road_delimiter = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, tribe_id_str, _road_delimiter=slash_road_delimiter)
+    sue_bud = budunit_shop(sue_str, pecun_id_str, _road_delimiter=slash_road_delimiter)
     casa_str = "casa"
     v1_casa_road = sue_bud.make_l1_road(casa_str)
 

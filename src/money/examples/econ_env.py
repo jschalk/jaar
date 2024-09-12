@@ -5,16 +5,16 @@ from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 
 
-def temp_tribe_id():
+def temp_pecun_id():
     return "ex_econ04"
 
 
-def temp_tribe_dir():
-    return f"{temp_tribes_dir()}/{temp_tribe_id()}"
+def temp_pecun_dir():
+    return f"{temp_pecuns_dir()}/{temp_pecun_id()}"
 
 
-def temp_tribes_dir():
-    return "src/money/examples/tribes"
+def temp_pecuns_dir():
+    return "src/money/examples/pecuns"
 
 
 def temp_owner_id():
@@ -23,7 +23,7 @@ def temp_owner_id():
 
 @pytest_fixture()
 def env_dir_setup_cleanup():
-    env_dir = temp_tribes_dir()
+    env_dir = temp_pecuns_dir()
     delete_dir(env_dir)
     yield env_dir
     delete_dir(env_dir)
@@ -38,17 +38,17 @@ def get_texas_road() -> RoadUnit:
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        temp_tribes_dir(), temp_tribe_id(), temp_owner_id(), get_texas_road()
+        temp_pecuns_dir(), temp_pecun_id(), temp_owner_id(), get_texas_road()
     )
 
 
-# def modify_tribe_id_example_econ(
-#     econ_obj: MoneyUnit, src_hubunit: HubUnit, dst_hubunit: HubUnit, new_tribe_id
+# def modify_pecun_id_example_econ(
+#     econ_obj: MoneyUnit, src_hubunit: HubUnit, dst_hubunit: HubUnit, new_pecun_id
 # ):
 #     src_dir = src_hubunit.econ_dir()
 #     dst_dir = dst_hubunit.econ_dir()
 #     os_rename(src=src_dir, dst=dst_dir)
-#     econ_obj.set_tribe_id(tribe_id=new_tribe_id)
+#     econ_obj.set_pecun_id(pecun_id=new_pecun_id)
 #     econ_obj.econ_dir = dst_dir
 
 
@@ -56,14 +56,14 @@ class InvalideconCopyException(Exception):
     pass
 
 
-def copy_evaluation_econ(src_tribe_id: str, dest_tribe_id: str):
+def copy_evaluation_econ(src_pecun_id: str, dest_pecun_id: str):
     base_dir = "src/money/examples/econs"
-    new_dir = f"{base_dir}/{dest_tribe_id}"
+    new_dir = f"{base_dir}/{dest_pecun_id}"
     if os_path_exists(new_dir):
         raise InvalideconCopyException(
             f"Cannot copy econ to '{new_dir}' directory because '{new_dir}' exists."
         )
     # base_dir = econ_obj.hubunit.econ_dir()
-    src_dir = f"{base_dir}/{src_tribe_id}"
-    dest_dir = f"{base_dir}/{dest_tribe_id}"
+    src_dir = f"{base_dir}/{src_pecun_id}"
+    dest_dir = f"{base_dir}/{dest_pecun_id}"
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

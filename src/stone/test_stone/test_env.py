@@ -1,7 +1,7 @@
 from src.stone.examples.stone_env import (
     stone_examples_dir,
     src_stone_examples_dir,
-    stone_tribes_dir,
+    stone_pecuns_dir,
 )
 
 
@@ -15,6 +15,6 @@ def test_stone_examples_dir_ReturnsObj():
     assert stone_examples_dir() == f"{src_stone_examples_dir()}/stone_examples"
 
 
-def test_stone_tribes_dir_ReturnsObj():
+def test_stone_pecuns_dir_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert stone_tribes_dir() == f"{src_stone_examples_dir()}/tribes"
+    assert stone_pecuns_dir() == f"{src_stone_examples_dir()}/pecuns"

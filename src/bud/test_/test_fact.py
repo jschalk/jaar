@@ -5,7 +5,7 @@ from src.bud.reason_idea import (
     FactCore,
     factunits_get_from_dict,
 )
-from src._road.road import get_default_tribe_id_roadnode as root_label, create_road
+from src._road.road import get_default_pecun_id_roadnode as root_label, create_road
 
 
 def test_FactUnit_exists():

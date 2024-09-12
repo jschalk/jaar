@@ -1,13 +1,13 @@
-def get_test_tribe_id():
+def get_test_pecun_id():
     return "music_45"
 
 
-def get_tribe_id_if_None(tribe_id: str = None):
-    return get_test_tribe_id() if tribe_id is None else tribe_id
+def get_pecun_id_if_None(pecun_id: str = None):
+    return get_test_pecun_id() if pecun_id is None else pecun_id
 
 
-def get_test_tribes_dir():
-    return "src/tribe/examples/tribes"
+def get_test_pecuns_dir():
+    return "src/pecun/examples/pecuns"
 
 
 def get_gifts_folder() -> str:

@@ -86,12 +86,12 @@
             "give_force": {
                 "column_order": 3,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "take_force": {
                 "column_order": 2,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             }
         },
         "required_args": {
@@ -126,12 +126,12 @@
             "fnigh": {
                 "column_order": 4,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "fopen": {
                 "column_order": 3,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "pick": {
                 "column_order": 2,
@@ -202,12 +202,12 @@
             "nigh": {
                 "column_order": 4,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "open": {
                 "column_order": 3,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             }
         },
         "required_args": {
@@ -309,17 +309,17 @@
             "addin": {
                 "column_order": 10,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "begin": {
                 "column_order": 5,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "close": {
                 "column_order": 6,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "denom": {
                 "column_order": 8,
@@ -329,7 +329,7 @@
             "gogo_want": {
                 "column_order": 11,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "mass": {
                 "column_order": 3,
@@ -359,7 +359,7 @@
             "stop_want": {
                 "column_order": 12,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             }
         },
         "required_args": {
@@ -388,7 +388,7 @@
             "bit": {
                 "column_order": 4,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "credor_respect": {
                 "column_order": 3,
@@ -403,12 +403,12 @@
             "fund_coin": {
                 "column_order": 1,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "fund_pool": {
                 "column_order": 0,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "max_tree_traverse": {
                 "column_order": 5,
@@ -423,7 +423,7 @@
             "penny": {
                 "column_order": 6,
                 "python_type": "float",
-                "sqlite_datatype": "TRIBE"
+                "sqlite_datatype": "PECUN"
             },
             "tally": {
                 "column_order": 7,

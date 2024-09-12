@@ -1,7 +1,7 @@
 from src._instrument.python_tool import x_is_json
 from src._road.jaar_config import init_gift_id, get_gifts_folder
-from src._road.road import get_default_tribe_id_roadnode as root_label
-from src.gift.atom_config import tribe_id_str, owner_id_str
+from src._road.road import get_default_pecun_id_roadnode as root_label
+from src.gift.atom_config import pecun_id_str, owner_id_str
 from src.gift.change import changeunit_shop
 from src.gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
 from src.gift.examples.example_atoms import get_atom_example_ideaunit_sports
@@ -30,7 +30,7 @@ def test_GiftUnit_exists():
     x_giftunit = GiftUnit()
 
     # THEN
-    assert x_giftunit.tribe_id is None
+    assert x_giftunit.pecun_id is None
     assert x_giftunit.owner_id is None
     assert x_giftunit._gift_id is None
     assert x_giftunit._face_id is None
@@ -48,7 +48,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
     farm_giftunit = giftunit_shop(owner_id=bob_str)
 
     # THEN
-    assert farm_giftunit.tribe_id == root_label()
+    assert farm_giftunit.pecun_id == root_label()
     assert farm_giftunit.owner_id == bob_str
     assert farm_giftunit._gift_id == 0
     assert farm_giftunit._face_id is None
@@ -71,7 +71,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
 
     # WHEN
     farm_giftunit = giftunit_shop(
-        tribe_id=music_str,
+        pecun_id=music_str,
         owner_id=bob_str,
         _gift_id=bob_gift_id,
         _face_id=sue_str,
@@ -82,7 +82,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     )
 
     # THEN
-    assert farm_giftunit.tribe_id == music_str
+    assert farm_giftunit.pecun_id == music_str
     assert farm_giftunit.owner_id == bob_str
     assert farm_giftunit._gift_id == bob_gift_id
     assert farm_giftunit._face_id == sue_str
@@ -207,15 +207,15 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     bob_str = "Bob"
     sue_str = "Sue"
     music_str = "music"
-    farm_giftunit = giftunit_shop(tribe_id=music_str, owner_id=bob_str)
+    farm_giftunit = giftunit_shop(pecun_id=music_str, owner_id=bob_str)
     farm_giftunit.set_face(sue_str)
 
     # WHEN
     x_dict = farm_giftunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(tribe_id_str()) is not None
-    assert x_dict.get(tribe_id_str()) == music_str
+    assert x_dict.get(pecun_id_str()) is not None
+    assert x_dict.get(pecun_id_str()) == music_str
     assert x_dict.get(owner_id_str()) is not None
     assert x_dict.get(owner_id_str()) == bob_str
 

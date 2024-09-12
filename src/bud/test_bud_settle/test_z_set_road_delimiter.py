@@ -1,4 +1,4 @@
-from src._road.road import create_road, get_default_tribe_id_roadnode as root_label
+from src._road.road import create_road, get_default_pecun_id_roadnode as root_label
 from src.bud.reason_idea import reasonunit_shop, factunit_shop
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
@@ -6,28 +6,28 @@ from src.bud.examples.example_buds import get_budunit_with_4_levels
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_set_tribe_id_CorrectlySetsAttr():
+def test_BudUnit_set_pecun_id_CorrectlySetsAttr():
     # ESTABLISH
-    tribe_id_str = "Sun"
+    pecun_id_str = "Sun"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
-    assert sue_bud._tribe_id == root_label()
+    assert sue_bud._pecun_id == root_label()
 
     # WHEN
-    sue_bud.set_tribe_id(tribe_id=tribe_id_str)
+    sue_bud.set_pecun_id(pecun_id=pecun_id_str)
 
     # THEN
-    assert sue_bud._tribe_id == tribe_id_str
+    assert sue_bud._pecun_id == pecun_id_str
 
 
-def test_BudUnit_set_idea_CorrectlySets_bud_tribe_id_AND_fund_coin():
+def test_BudUnit_set_idea_CorrectlySets_bud_pecun_id_AND_fund_coin():
     # ESTABLISH'
     x_fund_coin = 500
     sue_bud = get_budunit_with_4_levels()
     sue_bud._fund_coin = x_fund_coin
-    bud_tribe_id = "Texas"
-    sue_bud.set_tribe_id(bud_tribe_id)
-    assert sue_bud._tribe_id == bud_tribe_id
+    bud_pecun_id = "Texas"
+    sue_bud.set_pecun_id(bud_pecun_id)
+    assert sue_bud._pecun_id == bud_pecun_id
 
     casa_road = sue_bud.make_l1_road("casa")
     clean_road = sue_bud.make_road(casa_road, "cleaning")
@@ -39,11 +39,11 @@ def test_BudUnit_set_idea_CorrectlySets_bud_tribe_id_AND_fund_coin():
 
     # THEN
     cookery_idea = sue_bud.get_idea_obj(cookery_road)
-    assert cookery_idea._bud_tribe_id == bud_tribe_id
+    assert cookery_idea._bud_pecun_id == bud_pecun_id
     assert cookery_idea._fund_coin == x_fund_coin
 
 
-def test_bud_set_tribe_id_CorrectlySetsAttr():
+def test_bud_set_pecun_id_CorrectlySetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_str)
@@ -54,25 +54,25 @@ def test_bud_set_tribe_id_CorrectlySetsAttr():
     yao_bud.set_l1_idea(ideaunit_shop(casa_str))
     yao_bud.set_idea(ideaunit_shop(swim_str), parent_road=old_casa_road)
     assert yao_bud._owner_id == yao_str
-    assert yao_bud._idearoot._label == yao_bud._tribe_id
+    assert yao_bud._idearoot._label == yao_bud._pecun_id
     casa_idea = yao_bud.get_idea_obj(old_casa_road)
-    assert casa_idea._parent_road == yao_bud._tribe_id
+    assert casa_idea._parent_road == yao_bud._pecun_id
     swim_idea = yao_bud.get_idea_obj(old_swim_road)
     assert swim_idea._parent_road == old_casa_road
-    assert yao_bud._tribe_id == yao_bud._tribe_id
+    assert yao_bud._pecun_id == yao_bud._pecun_id
 
     # WHEN
-    tribe_id_str = "Sun"
-    yao_bud.set_tribe_id(tribe_id=tribe_id_str)
+    pecun_id_str = "Sun"
+    yao_bud.set_pecun_id(pecun_id=pecun_id_str)
 
     # THEN
     new_casa_road = yao_bud.make_l1_road(casa_str)
     swim_str = "swim"
     new_swim_road = yao_bud.make_road(new_casa_road, swim_str)
-    assert yao_bud._tribe_id == tribe_id_str
-    assert yao_bud._idearoot._label == tribe_id_str
+    assert yao_bud._pecun_id == pecun_id_str
+    assert yao_bud._idearoot._label == pecun_id_str
     casa_idea = yao_bud.get_idea_obj(new_casa_road)
-    assert casa_idea._parent_road == tribe_id_str
+    assert casa_idea._parent_road == pecun_id_str
     swim_idea = yao_bud.get_idea_obj(new_swim_road)
     assert swim_idea._parent_road == new_casa_road
 
@@ -112,7 +112,7 @@ def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
     semicolon_str = ";"
     assert zia_bud._road_delimiter == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
-    # print(f"{zia_bud._tribe_id=} {zia_bud._idearoot._label=} {casa_road=}")
+    # print(f"{zia_bud._pecun_id=} {zia_bud._idearoot._label=} {casa_road=}")
     # print(f"{cook_idea._parent_road=} {cook_idea._label=}")
     # semicolon_casa_idea = zia_bud.get_idea_obj(semicolon_casa_road)
     # print(f"{semicolon_casa_idea._parent_road=} {semicolon_casa_idea._label=}")
@@ -124,8 +124,8 @@ def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
 
     # THEN
     assert cook_idea.get_road() != semicolon_cook_road
-    zia_tribe_id = zia_bud._tribe_id
-    slash_casa_road = create_road(zia_tribe_id, casa_str, delimiter=slash_str)
+    zia_pecun_id = zia_bud._pecun_id
+    slash_casa_road = create_road(zia_pecun_id, casa_str, delimiter=slash_str)
     slash_cook_road = create_road(slash_casa_road, cook_str, delimiter=slash_str)
     assert cook_idea.get_road() == slash_cook_road
 

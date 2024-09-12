@@ -138,7 +138,7 @@ def add_rivercycle(fig: plotly_Figure, x0, y0, x1, y1, display_str):
     add_rect_str(fig, x0, y1, display_str)
 
 
-def add_tribe__rect(
+def add_pecun__rect(
     fig: plotly_Figure,
     x0,
     y0,
@@ -203,7 +203,7 @@ def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None, width=None)
     )
 
 
-def get_tribe_graphic_base_fig() -> plotly_Figure:
+def get_pecun_graphic_base_fig() -> plotly_Figure:
     fig = plotly_Figure()
     fig.update_xaxes(range=[0, 10])
     fig.update_yaxes(range=[0, 10])
@@ -282,8 +282,8 @@ def add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict):
         add_rect_arrow(fig, cx_src, y0, cx0, y0, red_str(), 2)
 
 
-def get_tribe_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
-    fig = get_tribe_graphic_base_fig()
+def get_pecun_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
+    fig = get_pecun_graphic_base_fig()
     rx0 = 0
     rx1 = 10
     ry0 = 0
@@ -304,7 +304,7 @@ def get_tribe_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
     sue1_p2 = ""
     sue1_p3 = ""
     sue1_p4 = ""
-    add_tribe__rect(fig, rx0, ry0, rx1, ry1, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+    add_pecun__rect(fig, rx0, ry0, rx1, ry1, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
     fig.update_xaxes(range=[rx0 - 1, rx1 + 1])
     fig.update_yaxes(range=[ry0 - 1, ry1 + 1])
     fig.add_trace(
@@ -312,7 +312,7 @@ def get_tribe_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
             x=[5.0, 5.0, 5.0],
             y=[ry0 + 1.5, ry0 + 1, ry0 + 0.5],
             text=[
-                "Tribeity Structure",
+                "Pecunity Structure",
                 "Flow of voiceing to Doing",
                 "We all have an interior life where we voice. And then there is what we do.",
             ],

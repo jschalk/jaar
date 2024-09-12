@@ -46,7 +46,7 @@ def test_sift_atom_ReturnsNoneIfGivenAtomUnitIsUPDATE():
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_idea(casa_road)
     casa_atom = atomunit_shop(bud_ideaunit_str(), atom_update())
-    casa_atom.set_arg(parent_road_str(), sue_bud._tribe_id)
+    casa_atom.set_arg(parent_road_str(), sue_bud._pecun_id)
     casa_atom.set_arg(label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
@@ -122,7 +122,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_ideaunit():
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
-    old_casa_atom.set_arg(parent_road_str(), sue_bud._tribe_id)
+    old_casa_atom.set_arg(parent_road_str(), sue_bud._pecun_id)
     old_casa_atom.set_arg(label_str(), casa_str)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)

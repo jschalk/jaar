@@ -29,7 +29,7 @@ from src._road.road import (
     get_terminus_node,
     get_root_node_from_road,
     get_ancestor_roads,
-    get_default_tribe_id_roadnode,
+    get_default_pecun_id_roadnode,
     get_all_road_nodes,
     get_forefather_roads,
     create_road,
@@ -40,7 +40,7 @@ from src._road.road import (
     OwnerID,
     AcctID,
     HealerID,
-    TribeID,
+    PecunID,
     roadunit_valid_dir_path,
 )
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
@@ -103,7 +103,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    _tribe_id: TribeID = None
+    _pecun_id: PecunID = None
     _owner_id: OwnerID = None
     _last_gift_id: int = None
     _tally: float = None
@@ -177,10 +177,10 @@ class BudUnit:
             terminus_node=terminus_node,
             delimiter=self._road_delimiter,
         )
-        return road_validate(x_road, self._road_delimiter, self._tribe_id)
+        return road_validate(x_road, self._road_delimiter, self._pecun_id)
 
     def make_l1_road(self, l1_node: RoadNode):
-        return self.make_road(self._tribe_id, l1_node)
+        return self.make_road(self._pecun_id, l1_node)
 
     def set_road_delimiter(self, new_road_delimiter: str):
         self.settle_bud()
@@ -195,13 +195,13 @@ class BudUnit:
             for x_idea in self._idea_dict.values():
                 x_idea.set_road_delimiter(self._road_delimiter)
 
-    def set_tribe_id(self, tribe_id: str):
-        old_tribe_id = copy_deepcopy(self._tribe_id)
+    def set_pecun_id(self, pecun_id: str):
+        old_pecun_id = copy_deepcopy(self._pecun_id)
         self.settle_bud()
         for idea_obj in self._idea_dict.values():
-            idea_obj._bud_tribe_id = tribe_id
-        self._tribe_id = tribe_id
-        self.edit_idea_label(old_road=old_tribe_id, new_label=self._tribe_id)
+            idea_obj._bud_pecun_id = pecun_id
+        self._pecun_id = pecun_id
+        self.edit_idea_label(old_road=old_pecun_id, new_label=self._pecun_id)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -398,7 +398,7 @@ class BudUnit:
         return all_group_ids.difference(x_acctunit_group_ids)
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
-        if self._tribe_id == idea_road:
+        if self._pecun_id == idea_road:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where idearoot is rangeroot"
             )
@@ -429,7 +429,7 @@ class BudUnit:
             self._create_ideakid_if_empty(road=pick)
 
         fact_base_idea = self.get_idea_obj(base)
-        x_idearoot = self.get_idea_obj(self._tribe_id)
+        x_idearoot = self.get_idea_obj(self._pecun_id)
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_idearoot.factunits.get(base).fopen
@@ -573,7 +573,7 @@ class BudUnit:
     ):
         self.set_idea(
             idea_kid=idea_kid,
-            parent_road=self._tribe_id,
+            parent_road=self._pecun_id,
             create_missing_ideas=create_missing_ideas,
             filter_out_missing_awardlinks_group_ids=filter_out_missing_awardlinks_group_ids,
             adoptees=adoptees,
@@ -601,8 +601,8 @@ class BudUnit:
             raise InvalidBudException(exception_str)
 
         idea_kid._road_delimiter = self._road_delimiter
-        if idea_kid._bud_tribe_id != self._tribe_id:
-            idea_kid._bud_tribe_id = self._tribe_id
+        if idea_kid._bud_pecun_id != self._pecun_id:
+            idea_kid._bud_pecun_id = self._pecun_id
         if idea_kid._fund_coin != self._fund_coin:
             idea_kid._fund_coin = self._fund_coin
         if not filter_out_missing_awardlinks_group_ids:
@@ -1012,7 +1012,7 @@ class BudUnit:
         return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
 
     def _init_idea_tree_walk(self):
-        idea_list = [self.get_idea_obj(self._tribe_id)]
+        idea_list = [self.get_idea_obj(self._pecun_id)]
         while idea_list != []:
             x_idea = idea_list.pop()
             x_idea.clear_gogo_calc_stop_calc()
@@ -1385,7 +1385,7 @@ class BudUnit:
             "_bit": self._bit,
             "_penny": self._penny,
             "_owner_id": self._owner_id,
-            "_tribe_id": self._tribe_id,
+            "_pecun_id": self._pecun_id,
             "_max_tree_traverse": self._max_tree_traverse,
             "_road_delimiter": self._road_delimiter,
             "_idearoot": self._idearoot.get_dict(),
@@ -1421,7 +1421,7 @@ class BudUnit:
 
 def budunit_shop(
     _owner_id: OwnerID = None,
-    _tribe_id: TribeID = None,
+    _pecun_id: PecunID = None,
     _road_delimiter: str = None,
     _fund_pool: FundNum = None,
     _fund_coin: FundCoin = None,
@@ -1430,11 +1430,11 @@ def budunit_shop(
     _tally: float = None,
 ) -> BudUnit:
     _owner_id = "" if _owner_id is None else _owner_id
-    _tribe_id = get_default_tribe_id_roadnode() if _tribe_id is None else _tribe_id
+    _pecun_id = get_default_pecun_id_roadnode() if _pecun_id is None else _pecun_id
     x_bud = BudUnit(
         _owner_id=_owner_id,
         _tally=get_1_if_None(_tally),
-        _tribe_id=_tribe_id,
+        _pecun_id=_pecun_id,
         _accts=get_empty_dict_if_none(None),
         _groupboxs={},
         _idea_dict=get_empty_dict_if_none(None),
@@ -1458,7 +1458,7 @@ def budunit_shop(
         _root=True,
         _uid=1,
         _level=0,
-        _bud_tribe_id=x_bud._tribe_id,
+        _bud_pecun_id=x_bud._pecun_id,
         _road_delimiter=x_bud._road_delimiter,
         _fund_coin=x_bud._fund_coin,
         _parent_road="",
@@ -1478,8 +1478,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
     x_bud._tally = obj_from_bud_dict(bud_dict, "_tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "_max_tree_traverse"))
-    x_bud._tribe_id = obj_from_bud_dict(bud_dict, "_tribe_id")
-    x_bud._idearoot._label = obj_from_bud_dict(bud_dict, "_tribe_id")
+    x_bud._pecun_id = obj_from_bud_dict(bud_dict, "_pecun_id")
+    x_bud._idearoot._label = obj_from_bud_dict(bud_dict, "_pecun_id")
     bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")
     x_bud._road_delimiter = default_road_delimiter_if_none(bud_road_delimiter)
     x_bud._fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "_fund_pool"))
@@ -1504,7 +1504,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     idearoot_dict = bud_dict.get("_idearoot")
     x_bud._idearoot = ideaunit_shop(
         _root=True,
-        _label=x_bud._tribe_id,
+        _label=x_bud._pecun_id,
         _parent_road="",
         _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
@@ -1524,7 +1524,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
-        _bud_tribe_id=x_bud._tribe_id,
+        _bud_pecun_id=x_bud._pecun_id,
         _fund_coin=default_fund_coin_if_none(x_bud._fund_coin),
     )
     create_idearoot_kids_from_dict(x_bud, idearoot_dict)
@@ -1535,7 +1535,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
     parent_road_str = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
     for x_dict in get_obj_from_idea_dict(idearoot_dict, "_kids").values():
-        x_dict[parent_road_str] = x_bud._tribe_id
+        x_dict[parent_road_str] = x_bud._pecun_id
         to_evaluate_idea_dicts.append(x_dict)
 
     while to_evaluate_idea_dicts != []:

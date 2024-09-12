@@ -1,5 +1,5 @@
-from src._road.jaar_config import get_tribe_id_if_None
-from src._road.road import TribeID
+from src._road.jaar_config import get_pecun_id_if_None
+from src._road.road import PecunID
 from src.bud.bud_tool import bud_acctunit_str, bud_ideaunit_str
 from src.gift.atom_config import acct_id_str, parent_road_str, label_str
 from src.gift.atom import (
@@ -12,13 +12,13 @@ from src.gift.atom import (
 from src.gift.change import ChangeUnit, changeunit_shop
 
 
-def get_atom_example_ideaunit_sports(tribe_id: TribeID = None) -> AtomUnit:
-    tribe_id = get_tribe_id_if_None(tribe_id)
+def get_atom_example_ideaunit_sports(pecun_id: PecunID = None) -> AtomUnit:
+    pecun_id = get_pecun_id_if_None(pecun_id)
     sports_str = "sports"
     x_category = bud_ideaunit_str()
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_ideaunit_atomunit.set_required_arg(label_str(), sports_str)
-    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), tribe_id)
+    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), pecun_id)
     return insert_ideaunit_atomunit
 
 

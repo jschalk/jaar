@@ -2,7 +2,7 @@ from src._instrument.file import create_file_path as f_path
 from src.bud.bud import budunit_shop
 from src.bud.examples.example_buds import budunit_v001
 from src.gift.atom_config import (
-    tribe_id_str,
+    pecun_id_str,
     owner_id_str,
     acct_id_str,
     debtit_belief_str,
@@ -23,7 +23,7 @@ from src.stone.stone_config import (
 )
 from src.stone.examples.stone_env import (
     stone_examples_dir,
-    stone_tribes_dir,
+    stone_pecuns_dir,
     stone_env_setup_cleanup,
 )
 
@@ -39,8 +39,8 @@ def test_open_stone_csv_ReturnsObj():
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    music_tribe_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_tribe_id)
+    music_pecun_id = "music56"
+    sue_budunit = budunit_shop(sue_str, music_pecun_id)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -55,19 +55,19 @@ def test_open_stone_csv_ReturnsObj():
     array_headers = list(acct_dataframe.columns)
     acct_stoneref = get_stoneref(j1_stonename)
     assert array_headers == acct_stoneref.get_headers_list()
-    assert acct_dataframe.loc[0, tribe_id_str()] == music_tribe_id
+    assert acct_dataframe.loc[0, pecun_id_str()] == music_pecun_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_str
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
 
-    assert acct_dataframe.loc[1, tribe_id_str()] == music_tribe_id
+    assert acct_dataframe.loc[1, pecun_id_str()] == music_pecun_id
     assert acct_dataframe.loc[1, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[1, acct_id_str()] == sue_str
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
 
-    assert acct_dataframe.loc[2, tribe_id_str()] == music_tribe_id
+    assert acct_dataframe.loc[2, pecun_id_str()] == music_pecun_id
     assert acct_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[2, acct_id_str()] == yao_str
     assert acct_dataframe.loc[2, credit_belief_str()] == yao_credit_belief
@@ -89,8 +89,8 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    music_tribe_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_tribe_id)
+    music_pecun_id = "music56"
+    sue_budunit = budunit_shop(sue_str, music_pecun_id)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -99,12 +99,12 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     csv_example_path = f_path(stone_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
     save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
-    music_hubunit = hubunit_shop(stone_tribes_dir(), music_tribe_id, owner_id=sue_str)
-    # Open TribeUnit and confirm voice BudUnit does not exist
+    music_hubunit = hubunit_shop(stone_pecuns_dir(), music_pecun_id, owner_id=sue_str)
+    # Open PecunUnit and confirm voice BudUnit does not exist
     assert not music_hubunit.voice_file_exists()
 
     # WHEN
-    load_stone_csv(music_hubunit.tribes_dir, stone_examples_dir(), acct_filename)
+    load_stone_csv(music_hubunit.pecuns_dir, stone_examples_dir(), acct_filename)
 
     # THEN
     # assert voice Budunit now exists

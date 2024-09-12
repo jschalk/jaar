@@ -1,31 +1,31 @@
 from src._instrument.python_tool import conditional_fig_show
 from src.gift.atom_config import acct_id_str, owner_id_str
-from src.tribe.tribe_report import (
-    get_tribe_voices_accts_dataframe,
-    get_tribe_voices_accts_plotly_fig,
-    get_tribe_actions_accts_dataframe,
-    get_tribe_actions_accts_plotly_fig,
-    get_tribe_voices_agenda_dataframe,
-    get_tribe_voices_agenda_plotly_fig,
-    get_tribe_actions_agenda_dataframe,
-    get_tribe_actions_agenda_plotly_fig,
+from src.pecun.pecun_report import (
+    get_pecun_voices_accts_dataframe,
+    get_pecun_voices_accts_plotly_fig,
+    get_pecun_actions_accts_dataframe,
+    get_pecun_actions_accts_plotly_fig,
+    get_pecun_voices_agenda_dataframe,
+    get_pecun_voices_agenda_plotly_fig,
+    get_pecun_actions_agenda_dataframe,
+    get_pecun_actions_agenda_plotly_fig,
 )
-from src.tribe.examples.example_tribes import (
-    create_example_tribe2,
-    create_example_tribe3,
-    create_example_tribe4,
+from src.pecun.examples.example_pecuns import (
+    create_example_pecun2,
+    create_example_pecun3,
+    create_example_pecun4,
 )
-from src.tribe.examples.tribe_env import env_dir_setup_cleanup
+from src.pecun.examples.pecun_env import env_dir_setup_cleanup
 
 
-def test_get_tribe_voices_accts_dataframe_ReturnsCorrectObj(
+def test_get_pecun_voices_accts_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_tribe = create_example_tribe2()
+    music_pecun = create_example_pecun2()
 
     # WHEN
-    x_df = get_tribe_voices_accts_dataframe(music_tribe)
+    x_df = get_pecun_voices_accts_dataframe(music_pecun)
 
     # THEN
     acctunit_colums = {
@@ -48,28 +48,28 @@ def test_get_tribe_voices_accts_dataframe_ReturnsCorrectObj(
     assert x_df.shape[0] == 8
 
 
-def test_get_tribe_voices_accts_plotly_fig_DisplaysCorrectInfo(
+def test_get_pecun_voices_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_tribe = create_example_tribe2()
+    music_pecun = create_example_pecun2()
 
     # WHEN
-    x_fig = get_tribe_voices_accts_plotly_fig(music_tribe)
+    x_fig = get_pecun_voices_accts_plotly_fig(music_pecun)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_tribe_actions_accts_dataframe_ReturnsCorrectObj(
+def test_get_pecun_actions_accts_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_tribe = create_example_tribe2()
-    music_tribe.generate_all_action_buds()
+    music_pecun = create_example_pecun2()
+    music_pecun.generate_all_action_buds()
 
     # WHEN
-    x_df = get_tribe_actions_accts_dataframe(music_tribe)
+    x_df = get_pecun_actions_accts_dataframe(music_pecun)
 
     # THEN
     acctunit_colums = {
@@ -93,28 +93,28 @@ def test_get_tribe_actions_accts_dataframe_ReturnsCorrectObj(
     assert set(x_df.columns) == acctunit_colums
 
 
-def test_get_tribe_actions_accts_plotly_fig_DisplaysCorrectInfo(
+def test_get_pecun_actions_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_tribe = create_example_tribe2()
-    music_tribe.generate_all_action_buds()
+    music_pecun = create_example_pecun2()
+    music_pecun.generate_all_action_buds()
 
     # WHEN
-    x_fig = get_tribe_actions_accts_plotly_fig(music_tribe)
+    x_fig = get_pecun_actions_accts_plotly_fig(music_pecun)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_tribe_voices_agenda_dataframe_ReturnsCorrectObj(
+def test_get_pecun_voices_agenda_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_tribe = create_example_tribe3()
+    music_pecun = create_example_pecun3()
 
     # WHEN
-    x_df = get_tribe_voices_agenda_dataframe(music_tribe)
+    x_df = get_pecun_voices_agenda_dataframe(music_pecun)
 
     # THEN
     agenda_colums = {
@@ -136,26 +136,26 @@ def test_get_tribe_voices_agenda_dataframe_ReturnsCorrectObj(
     assert x_df.shape[0] == 8
 
 
-def test_get_tribe_voices_agenda_plotly_fig_DisplaysCorrectInfo(
+def test_get_pecun_voices_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_tribe = create_example_tribe3()
+    music_pecun = create_example_pecun3()
 
     # WHEN
-    x_fig = get_tribe_voices_agenda_plotly_fig(music_tribe)
+    x_fig = get_pecun_voices_agenda_plotly_fig(music_pecun)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_tribe_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_get_pecun_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    music_tribe = create_example_tribe4()
-    music_tribe.generate_all_action_buds()
+    music_pecun = create_example_pecun4()
+    music_pecun.generate_all_action_buds()
 
     # WHEN
-    x_df = get_tribe_actions_agenda_dataframe(music_tribe)
+    x_df = get_pecun_actions_agenda_dataframe(music_pecun)
 
     # THEN
     agenda_colums = {
@@ -177,15 +177,15 @@ def test_get_tribe_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_clea
     assert x_df.shape[0] in [8, 9]
 
 
-def test_get_tribe_actions_agenda_plotly_fig_DisplaysCorrectInfo(
+def test_get_pecun_actions_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_tribe = create_example_tribe4()
-    music_tribe.generate_all_action_buds()
+    music_pecun = create_example_pecun4()
+    music_pecun.generate_all_action_buds()
 
     # WHEN
-    x_fig = get_tribe_actions_agenda_plotly_fig(music_tribe)
+    x_fig = get_pecun_actions_agenda_plotly_fig(music_pecun)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

@@ -1,5 +1,5 @@
-from src._road.jaar_config import get_tribe_id_if_None
-from src._road.road import create_road, TribeID
+from src._road.jaar_config import get_pecun_id_if_None
+from src._road.road import create_road, PecunID
 from src.bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -20,20 +20,20 @@ from src.gift.atom import atomunit_shop, AtomUnit
 from src.gift.change import changeunit_shop, ChangeUnit
 
 
-def get_atom_example_ideaunit_sports(tribe_id: TribeID = None) -> AtomUnit:
-    tribe_id = get_tribe_id_if_None(tribe_id)
+def get_atom_example_ideaunit_sports(pecun_id: PecunID = None) -> AtomUnit:
+    pecun_id = get_pecun_id_if_None(pecun_id)
     sports_str = "sports"
     x_category = bud_ideaunit_str()
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_ideaunit_atomunit.set_required_arg(label_str(), sports_str)
-    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), tribe_id)
+    insert_ideaunit_atomunit.set_required_arg(parent_road_str(), pecun_id)
     return insert_ideaunit_atomunit
 
 
-def get_atom_example_ideaunit_ball(tribe_id: TribeID = None) -> AtomUnit:
-    tribe_id = get_tribe_id_if_None(tribe_id)
+def get_atom_example_ideaunit_ball(pecun_id: PecunID = None) -> AtomUnit:
+    pecun_id = get_pecun_id_if_None(pecun_id)
     sports_str = "sports"
-    sports_road = create_road(tribe_id, sports_str)
+    sports_road = create_road(pecun_id, sports_str)
     ball_str = "basketball"
     x_category = bud_ideaunit_str()
     insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -42,10 +42,10 @@ def get_atom_example_ideaunit_ball(tribe_id: TribeID = None) -> AtomUnit:
     return insert_ideaunit_atomunit
 
 
-def get_atom_example_ideaunit_knee(tribe_id: TribeID = None) -> AtomUnit:
-    tribe_id = get_tribe_id_if_None(tribe_id)
+def get_atom_example_ideaunit_knee(pecun_id: PecunID = None) -> AtomUnit:
+    pecun_id = get_pecun_id_if_None(pecun_id)
     sports_str = "sports"
-    sports_road = create_road(tribe_id, sports_str)
+    sports_road = create_road(pecun_id, sports_str)
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
@@ -60,14 +60,14 @@ def get_atom_example_ideaunit_knee(tribe_id: TribeID = None) -> AtomUnit:
     return insert_ideaunit_atomunit
 
 
-def get_atom_example_factunit_knee(tribe_id: TribeID = None) -> AtomUnit:
-    tribe_id = get_tribe_id_if_None(tribe_id)
+def get_atom_example_factunit_knee(pecun_id: PecunID = None) -> AtomUnit:
+    pecun_id = get_pecun_id_if_None(pecun_id)
     sports_str = "sports"
-    sports_road = create_road(tribe_id, sports_str)
+    sports_road = create_road(pecun_id, sports_str)
     ball_str = "basketball"
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
-    knee_road = create_road(tribe_id, knee_str)
+    knee_road = create_road(pecun_id, knee_str)
     knee_fopen = 7
     knee_fnigh = 23
     x_category = bud_idea_factunit_str()

@@ -1,6 +1,6 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.reason_idea import reasonunit_shop, premiseunit_shop, factunit_shop
-from src._road.road import get_default_tribe_id_roadnode as root_label, create_road
+from src._road.road import get_default_pecun_id_roadnode as root_label, create_road
 
 
 def test_IdeaUnit_find_replace_road_CorrectlyModifies_parent_road():

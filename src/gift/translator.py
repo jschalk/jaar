@@ -1,6 +1,6 @@
 from src._instrument.python_tool import get_empty_dict_if_none
-from src._road.jaar_config import get_tribe_id_if_None
-from src._road.road import TribeID, AcctID, default_road_delimiter_if_none
+from src._road.jaar_config import get_pecun_id_if_None
+from src._road.road import PecunID, AcctID, default_road_delimiter_if_none
 from src.gift.atom_config import acct_id_str
 from src.gift.atom import AtomUnit
 from dataclasses import dataclass
@@ -9,7 +9,7 @@ from copy import deepcopy as copy_deepcopy
 
 @dataclass
 class Translator:
-    in_tribe_id: TribeID = None
+    in_pecun_id: PecunID = None
     in_acct_ids: dict[AcctID, AcctID] = None
     in_road_delimiter: str = None
 
@@ -33,10 +33,10 @@ class Translator:
         return in_atomunit
 
 
-def translator_shop(in_tribe_id: TribeID = None):
-    in_tribe_id = get_tribe_id_if_None(in_tribe_id)
+def translator_shop(in_pecun_id: PecunID = None):
+    in_pecun_id = get_pecun_id_if_None(in_pecun_id)
     return Translator(
-        in_tribe_id=in_tribe_id,
+        in_pecun_id=in_pecun_id,
         in_acct_ids=get_empty_dict_if_none(None),
         in_road_delimiter=default_road_delimiter_if_none(),
     )

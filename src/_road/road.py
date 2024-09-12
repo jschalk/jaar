@@ -13,7 +13,7 @@ class RoadNode(str):
         return self.find(default_road_delimiter_if_none(delimiter)) == -1
 
 
-class TribeID(RoadNode):  # Created to help track the concept
+class PecunID(RoadNode):  # Created to help track the concept
     pass
 
 
@@ -185,7 +185,7 @@ def get_forefather_roads(road: RoadUnit) -> dict[RoadUnit]:
     return {a_road: None for a_road in ancestor_roads}
 
 
-def get_default_tribe_id_roadnode() -> TribeID:
+def get_default_pecun_id_roadnode() -> PecunID:
     return "ZZ"
 
 
