@@ -1,6 +1,6 @@
 from src._road.finance import default_fund_coin_if_none
 from src._road.road import (
-    get_default_pecun_id_roadnode as root_label,
+    get_default_fiscal_id_roadnode as root_label,
     create_road,
     default_road_delimiter_if_none,
 )
@@ -55,7 +55,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._fund_onset is None
     assert x_ideaunit._fund_cease is None
     assert x_ideaunit._root is None
-    assert x_ideaunit._bud_pecun_id is None
+    assert x_ideaunit._bud_fiscal_id is None
     assert x_ideaunit._healerlink_ratio is None
 
 
@@ -68,7 +68,7 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._kids == {}
     assert x_ideaunit.mass == 1
     assert x_ideaunit._label is None
-    assert x_ideaunit._bud_pecun_id == root_label()
+    assert x_ideaunit._bud_fiscal_id == root_label()
     assert x_ideaunit._uid is None
     assert x_ideaunit.begin is None
     assert x_ideaunit.close is None

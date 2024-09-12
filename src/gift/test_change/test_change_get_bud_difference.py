@@ -447,12 +447,12 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     x_keylist = [
         atom_insert(),
         bud_ideaunit_str(),
-        after_sue_bud._pecun_id,
+        after_sue_bud._fiscal_id,
         music_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(label_str()) == music_str
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._pecun_id
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._fiscal_id
     assert ball_atomunit.get_value(begin_str()) == music_begin
     assert ball_atomunit.get_value(close_str()) == music_close
     assert ball_atomunit.get_value(mass_str()) == music_mass
@@ -506,11 +506,11 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     x_keylist = [
         atom_update(),
         bud_ideaunit_str(),
-        after_sue_bud._pecun_id,
+        after_sue_bud._fiscal_id,
         music_str,
     ]
     ball_atomunit = get_nested_value(sue_changeunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._pecun_id
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._fiscal_id
     assert ball_atomunit.get_value(label_str()) == music_str
     assert ball_atomunit.get_value(begin_str()) == after_music_begin
     assert ball_atomunit.get_value(close_str()) == after_music_close

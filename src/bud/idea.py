@@ -11,12 +11,12 @@ from src._road.road import (
     RoadUnit,
     RoadNode,
     is_sub_road,
-    get_default_pecun_id_roadnode as root_label,
+    get_default_fiscal_id_roadnode as root_label,
     all_roadunits_between,
     create_road as road_create_road,
     default_road_delimiter_if_none,
     replace_road_delimiter,
-    PecunID,
+    FiscalID,
     AcctID,
     GroupID,
     RoadUnit,
@@ -210,7 +210,7 @@ class IdeaUnit:
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
-    _bud_pecun_id: PecunID = None
+    _bud_fiscal_id: FiscalID = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupID, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -498,13 +498,13 @@ class IdeaUnit:
         if (
             self._root
             and _label is not None
-            and _label != self._bud_pecun_id
-            and self._bud_pecun_id is not None
+            and _label != self._bud_fiscal_id
+            and self._bud_fiscal_id is not None
         ):
             raise Idea_root_LabelNotEmptyException(
-                f"Cannot set idearoot to string different than '{self._bud_pecun_id}'"
+                f"Cannot set idearoot to string different than '{self._bud_fiscal_id}'"
             )
-        elif self._root and self._bud_pecun_id is None:
+        elif self._root and self._bud_fiscal_id is None:
             self._label = root_label()
         # elif _label is not None:
         else:
@@ -997,7 +997,7 @@ def ideaunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
-    _bud_pecun_id: PecunID = None,
+    _bud_fiscal_id: FiscalID = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -1016,7 +1016,7 @@ def ideaunit_shop(
     _road_delimiter: str = None,
     _healerlink_ratio: float = None,
 ) -> IdeaUnit:
-    _bud_pecun_id = root_label() if _bud_pecun_id is None else _bud_pecun_id
+    _bud_fiscal_id = root_label() if _bud_fiscal_id is None else _bud_fiscal_id
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_ideakid = IdeaUnit(
@@ -1047,7 +1047,7 @@ def ideaunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         _root=get_False_if_None(_root),
-        _bud_pecun_id=_bud_pecun_id,
+        _bud_fiscal_id=_bud_fiscal_id,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1066,7 +1066,7 @@ def ideaunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_ideakid._root:
-        x_ideakid.set_label(_label=_bud_pecun_id)
+        x_ideakid.set_label(_label=_bud_fiscal_id)
     else:
         x_ideakid.set_label(_label=_label)
     x_ideakid.set_teamunit_empty_if_none()

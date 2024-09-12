@@ -1,5 +1,5 @@
 # from src._instrument.python import x_is_json
-from src._road.jaar_config import get_test_pecun_id
+from src._road.jaar_config import get_test_fiscal_id
 from src._road.road import default_road_delimiter_if_none
 from src.bud.bud_tool import bud_acctunit_str
 from src.gift.atom_config import atom_insert, acct_id_str
@@ -17,7 +17,7 @@ def test_Translator_Exists():
     x_translator = Translator()
 
     # THEN
-    assert x_translator.in_pecun_id is None
+    assert x_translator.in_fiscal_id is None
     assert x_translator.in_acct_ids is None
     assert x_translator.in_road_delimiter is None
 
@@ -27,7 +27,7 @@ def test_translator_shop_WithOutParametersReturnsObj():
     music_translator = translator_shop()
 
     # THEN
-    assert music_translator.in_pecun_id == get_test_pecun_id()
+    assert music_translator.in_fiscal_id == get_test_fiscal_id()
     assert music_translator.in_acct_ids == {}
     assert music_translator.in_road_delimiter == default_road_delimiter_if_none()
 
@@ -38,7 +38,7 @@ def test_translator_shop_WithParametersReturnsObj():
 
     # WHEN
     music_translator = translator_shop(music_str)
-    assert music_translator.in_pecun_id == music_str
+    assert music_translator.in_fiscal_id == music_str
     assert music_translator.in_acct_ids == {}
 
 

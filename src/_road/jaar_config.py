@@ -1,13 +1,13 @@
-def get_test_pecun_id():
+def get_test_fiscal_id():
     return "music_45"
 
 
-def get_pecun_id_if_None(pecun_id: str = None):
-    return get_test_pecun_id() if pecun_id is None else pecun_id
+def get_fiscal_id_if_None(fiscal_id: str = None):
+    return get_test_fiscal_id() if fiscal_id is None else fiscal_id
 
 
-def get_test_pecuns_dir():
-    return "src/pecun/examples/pecuns"
+def get_test_fiscals_dir():
+    return "src/fiscal/examples/fiscals"
 
 
 def get_gifts_folder() -> str:

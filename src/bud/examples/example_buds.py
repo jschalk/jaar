@@ -44,7 +44,7 @@ def budunit_v001_with_large_agenda() -> BudUnit:
 
 def budunit_v002() -> BudUnit:
     bob_bud = budunit_get_from_json(open_file(env_dir(), "example_bud2.json"))
-    print(f"{bob_bud._pecun_id=} {bob_bud._road_delimiter=}")
+    print(f"{bob_bud._fiscal_id=} {bob_bud._road_delimiter=}")
     return bob_bud
 
 
@@ -223,7 +223,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
 
 def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     tiger_str = "tiger"
-    zia_bud = budunit_shop("Zia", _pecun_id=tiger_str)
+    zia_bud = budunit_shop("Zia", _fiscal_id=tiger_str)
     shave_str = "shave"
     shave_road = zia_bud.make_l1_road(shave_str)
     idea_kid_shave = ideaunit_shop(shave_str, mass=30, pledge=True)
@@ -371,7 +371,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     cali_teamunit.set_teamlink(cali_str)
     amos_bud.edit_idea_attr(road=laundry_task_road, teamunit=cali_teamunit)
     # print(f"{basket_road=}")
-    # print(f"{amos_bud._pecun_id=}")
+    # print(f"{amos_bud._fiscal_id=}")
     amos_bud.set_fact(base=basket_road, pick=b_full_road)
 
     return amos_bud

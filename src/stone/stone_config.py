@@ -136,21 +136,21 @@ def get_stone_filenames() -> set[str]:
 
 def get_stone_format_headers() -> dict[str, list[str]]:
     return {
-        "acct_id,owner_id,pecun_id": stone_format_00001_acct_v0_0_0(),
-        "acct_id,group_id,owner_id,pecun_id": stone_format_00002_membership_v0_0_0(),
-        "label,mass,owner_id,parent_road,pecun_id,pledge": stone_format_00003_ideaunit_v0_0_0(),
-        "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,pecun_id,stop_want": stone_format_00019_ideaunit_v0_0_0(),
-        "acct_id,credit_vote,debtit_vote,group_id,owner_id,pecun_id": stone_format_00020_bud_acct_membership_v0_0_0(),
-        "acct_id,credit_belief,debtit_belief,owner_id,pecun_id": stone_format_00021_bud_acctunit_v0_0_0(),
-        "give_force,group_id,owner_id,pecun_id,road,take_force": stone_format_00022_bud_idea_awardlink_v0_0_0(),
-        "base,fnigh,fopen,owner_id,pecun_id,pick,road": stone_format_00023_bud_idea_factunit_v0_0_0(),
-        "group_id,owner_id,pecun_id,road": stone_format_00024_bud_idea_teamlink_v0_0_0(),
-        "healer_id,owner_id,pecun_id,road": stone_format_00025_bud_idea_healerlink_v0_0_0(),
-        "base,divisor,need,nigh,open,owner_id,pecun_id,road": stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
-        "base,base_idea_active_requisite,owner_id,pecun_id,road": stone_format_00027_bud_idea_reasonunit_v0_0_0(),
-        "addin,begin,close,denom,gogo_want,label,mass,morph,numor,owner_id,parent_road,pecun_id,pledge,problem_bool,stop_want": stone_format_00028_bud_ideaunit_v0_0_0(),
-        "bit,credor_respect,debtor_respect,fund_coin,fund_pool,max_tree_traverse,monetary_desc,owner_id,pecun_id,penny,tally": stone_format_00029_budunit_v0_0_0(),
-        "healer_id,label,owner_id,parent_road,pecun_id,problem_bool": stone_format_00036_problem_healer_v0_0_0(),
+        "acct_id,fiscal_id,owner_id": stone_format_00001_acct_v0_0_0(),
+        "acct_id,fiscal_id,group_id,owner_id": stone_format_00002_membership_v0_0_0(),
+        "fiscal_id,label,mass,owner_id,parent_road,pledge": stone_format_00003_ideaunit_v0_0_0(),
+        "addin,begin,close,denom,fiscal_id,gogo_want,label,morph,numor,owner_id,parent_road,stop_want": stone_format_00019_ideaunit_v0_0_0(),
+        "acct_id,credit_vote,debtit_vote,fiscal_id,group_id,owner_id": stone_format_00020_bud_acct_membership_v0_0_0(),
+        "acct_id,credit_belief,debtit_belief,fiscal_id,owner_id": stone_format_00021_bud_acctunit_v0_0_0(),
+        "fiscal_id,give_force,group_id,owner_id,road,take_force": stone_format_00022_bud_idea_awardlink_v0_0_0(),
+        "base,fiscal_id,fnigh,fopen,owner_id,pick,road": stone_format_00023_bud_idea_factunit_v0_0_0(),
+        "fiscal_id,group_id,owner_id,road": stone_format_00024_bud_idea_teamlink_v0_0_0(),
+        "fiscal_id,healer_id,owner_id,road": stone_format_00025_bud_idea_healerlink_v0_0_0(),
+        "base,divisor,fiscal_id,need,nigh,open,owner_id,road": stone_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
+        "base,base_idea_active_requisite,fiscal_id,owner_id,road": stone_format_00027_bud_idea_reasonunit_v0_0_0(),
+        "addin,begin,close,denom,fiscal_id,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": stone_format_00028_bud_ideaunit_v0_0_0(),
+        "bit,credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,monetary_desc,owner_id,penny,tally": stone_format_00029_budunit_v0_0_0(),
+        "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": stone_format_00036_problem_healer_v0_0_0(),
     }
 
 

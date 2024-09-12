@@ -1,6 +1,6 @@
 from src.gift.atom_config import (
     get_atom_config_dict,
-    pecun_id_str,
+    fiscal_id_str,
     owner_id_str,
     column_order_str,
     nesting_order_str,
@@ -16,7 +16,7 @@ def create_categorys_stone_format_dict() -> dict:
     for x_atom_category in atom_config_dict.keys():
         stone_filename = f"stone_format_{x_count:05}_{x_atom_category}_v0_0_0.json"
         attributes_dict = {
-            pecun_id_str(): {column_order_str(): 0, sort_order_str(): 0},
+            fiscal_id_str(): {column_order_str(): 0, sort_order_str(): 0},
             owner_id_str(): {column_order_str(): 1, sort_order_str(): 1},
         }
         args_dict = get_atom_config_args(x_atom_category)

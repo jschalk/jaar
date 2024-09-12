@@ -2,7 +2,7 @@ from src._instrument.python_tool import create_sorted_concatenated_str
 from src._instrument.file import dir_files
 from src.bud.bud_tool import bud_acctunit_str
 from src.gift.atom_config import (
-    pecun_id_str,
+    fiscal_id_str,
     owner_id_str,
     acct_id_str,
     group_id_str,
@@ -102,7 +102,7 @@ def test_get_headers_list_ReturnsObj():
     # THEN
     # print(f"{format_00001_headers=}")
     assert format_00021_headers == [
-        pecun_id_str(),
+        fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
         "debtit_belief",
@@ -120,12 +120,12 @@ def test_get_sorted_headers_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers(stone_format_00021_bud_acctunit_v0_0_0())
     # THEN
-    assert headers == "acct_id,credit_belief,debtit_belief,owner_id,pecun_id"
+    assert headers == "acct_id,credit_belief,debtit_belief,fiscal_id,owner_id"
 
     # ESTABLISH / WHEN
     headers = get_sorted_headers(stone_format_00019_ideaunit_v0_0_0())
     # THEN
-    idea_headers_str = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,pecun_id,stop_want"
+    idea_headers_str = "addin,begin,close,denom,fiscal_id,gogo_want,label,morph,numor,owner_id,parent_road,stop_want"
     assert headers == idea_headers_str
 
 
@@ -196,7 +196,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00021_bud_acctunit_v0_0_0():
     format_00001_stoneref = get_stoneref(stone_name)
 
     # THEN
-    pecun_id_stonecolumn = format_00001_stoneref.get_stonecolumn(pecun_id_str())
+    fiscal_id_stonecolumn = format_00001_stoneref.get_stonecolumn(fiscal_id_str())
     owner_id_stonecolumn = format_00001_stoneref.get_stonecolumn(owner_id_str())
     acct_id_stonecolumn = format_00001_stoneref.get_stonecolumn(acct_id_str())
     credit_belief_stonecolumn = format_00001_stoneref.get_stonecolumn(
@@ -207,7 +207,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00021_bud_acctunit_v0_0_0():
     )
     assert len(format_00001_stoneref._stonecolumns) == 5
 
-    assert pecun_id_stonecolumn.column_order == 0
+    assert fiscal_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
     assert acct_id_stonecolumn.column_order == 2
     assert credit_belief_stonecolumn.column_order == 4
@@ -222,7 +222,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00020_bud_acct_membership_v0_
     format_00021_stoneref = get_stoneref(stone_name)
 
     # THEN
-    pecun_id_stonecolumn = format_00021_stoneref.get_stonecolumn(pecun_id_str())
+    fiscal_id_stonecolumn = format_00021_stoneref.get_stonecolumn(fiscal_id_str())
     owner_id_stonecolumn = format_00021_stoneref.get_stonecolumn(owner_id_str())
     acct_id_stonecolumn = format_00021_stoneref.get_stonecolumn(acct_id_str())
     group_id_stonecolumn = format_00021_stoneref.get_stonecolumn(group_id_str())
@@ -230,7 +230,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00020_bud_acct_membership_v0_
     debtit_vote_stonecolumn = format_00021_stoneref.get_stonecolumn(debtit_vote_str())
     assert len(format_00021_stoneref._stonecolumns) == 6
 
-    assert pecun_id_stonecolumn.column_order == 0
+    assert fiscal_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
     assert acct_id_stonecolumn.column_order == 2
     assert group_id_stonecolumn.column_order == 3
@@ -246,7 +246,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00003_ideaunit_v0_0_0():
     format_00003_stoneref = get_stoneref(stone_name)
 
     # THEN
-    pecun_id_stonecolumn = format_00003_stoneref.get_stonecolumn(pecun_id_str())
+    fiscal_id_stonecolumn = format_00003_stoneref.get_stonecolumn(fiscal_id_str())
     owner_id_stonecolumn = format_00003_stoneref.get_stonecolumn(owner_id_str())
     parent_road_stonecolumn = format_00003_stoneref.get_stonecolumn(parent_road_str())
     label_stonecolumn = format_00003_stoneref.get_stonecolumn(label_str())
@@ -257,7 +257,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00003_ideaunit_v0_0_0():
     pledge_stonecolumn = format_00003_stoneref.get_stonecolumn(pledge_str())
     assert len(format_00003_stoneref._stonecolumns) == 6
 
-    assert pecun_id_stonecolumn.column_order == 0
+    assert fiscal_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
     assert parent_road_stonecolumn.column_order == 3
     assert label_stonecolumn.column_order == 5
@@ -273,7 +273,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00019_ideaunit_v0_0_0():
     format_00019_stoneref = get_stoneref(stone_name)
 
     # THEN
-    pecun_id_stonecolumn = format_00019_stoneref.get_stonecolumn(pecun_id_str())
+    fiscal_id_stonecolumn = format_00019_stoneref.get_stonecolumn(fiscal_id_str())
     owner_id_stonecolumn = format_00019_stoneref.get_stonecolumn(owner_id_str())
     parent_road_stonecolumn = format_00019_stoneref.get_stonecolumn(parent_road_str())
     label_stonecolumn = format_00019_stoneref.get_stonecolumn(label_str())
@@ -289,7 +289,7 @@ def test_get_stoneref_HasCorrectAttrs_stone_format_00019_ideaunit_v0_0_0():
 
     assert len(format_00019_stoneref._stonecolumns) == 12
 
-    assert pecun_id_stonecolumn.column_order == 0
+    assert fiscal_id_stonecolumn.column_order == 0
     assert owner_id_stonecolumn.column_order == 1
     assert parent_road_stonecolumn.column_order == 2
     assert label_stonecolumn.column_order == 3

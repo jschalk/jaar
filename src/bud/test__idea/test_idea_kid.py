@@ -1,4 +1,4 @@
-from src._road.road import get_default_pecun_id_roadnode as root_label, create_road
+from src._road.road import get_default_fiscal_id_roadnode as root_label, create_road
 from src.bud.idea import ideaunit_shop
 from pytest import raises as pytest_raises
 

@@ -1,5 +1,5 @@
 from src.bud.idea import ideaunit_shop
-from src._road.road import get_default_pecun_id_roadnode as root_label
+from src._road.road import get_default_fiscal_id_roadnode as root_label
 from pytest import raises as pytest_raises
 
 
@@ -15,7 +15,7 @@ def test_ideaunit_shop_With_root_TrueReturnsObj():
     assert x_idearoot._root is True
 
 
-def test_IdeaUnit_set_label_get_default_pecun_id_roadnode_DoesNotRaisesError():
+def test_IdeaUnit_set_label_get_default_fiscal_id_roadnode_DoesNotRaisesError():
     # ESTABLISH
     x_idearoot = ideaunit_shop(_root=True)
 
@@ -29,7 +29,7 @@ def test_IdeaUnit_set_label_get_default_pecun_id_roadnode_DoesNotRaisesError():
 def test_IdeaUnit_set_label_DoesNotRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_idearoot = ideaunit_shop(_root=True, _bud_pecun_id=el_paso_str)
+    x_idearoot = ideaunit_shop(_root=True, _bud_fiscal_id=el_paso_str)
 
     # WHEN
     x_idearoot.set_label(_label=el_paso_str)
@@ -41,7 +41,7 @@ def test_IdeaUnit_set_label_DoesNotRaisesError():
 def test_IdeaUnit_set_label_DoesRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_idearoot = ideaunit_shop(_root=True, _bud_pecun_id=el_paso_str)
+    x_idearoot = ideaunit_shop(_root=True, _bud_fiscal_id=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -53,7 +53,7 @@ def test_IdeaUnit_set_label_DoesRaisesError():
     )
 
 
-def test_IdeaUnit_set_label_RaisesErrorWhen_bud_pecun_id_IsNone():
+def test_IdeaUnit_set_label_RaisesErrorWhen_bud_fiscal_id_IsNone():
     # ESTABLISH
     x_idearoot = ideaunit_shop(_root=True)
 

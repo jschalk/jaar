@@ -163,7 +163,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     sue_bud.set_idea(email_idea, parent_road=casa_road)
 
     # test root status:
-    x_idearoot = sue_bud.get_idea_obj(sue_bud._pecun_id)
+    x_idearoot = sue_bud.get_idea_obj(sue_bud._fiscal_id)
     assert x_idearoot._descendant_pledge_count is None
     assert x_idearoot._all_acct_cred is None
     assert x_idearoot._all_acct_debt is None
@@ -371,7 +371,7 @@ def test_BudUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():
     # THEN
     assert len(ordered_node_list) == 17
     x_1st_road_in_ordered_list = sue_bud.get_idea_tree_ordered_road_list()[0]
-    assert x_1st_road_in_ordered_list == sue_bud._pecun_id
+    assert x_1st_road_in_ordered_list == sue_bud._fiscal_id
     x_8th_road_in_ordered_list = sue_bud.get_idea_tree_ordered_road_list()[9]
     assert x_8th_road_in_ordered_list == sue_bud.make_l1_road(week_str)
 
@@ -380,7 +380,7 @@ def test_BudUnit_get_idea_tree_ordered_road_list_ReturnsCorrectObj():
 
     # THEN
     y_1st_road_in_ordered_list = y_bud.get_idea_tree_ordered_road_list()[0]
-    assert y_1st_road_in_ordered_list == sue_bud._pecun_id
+    assert y_1st_road_in_ordered_list == sue_bud._fiscal_id
 
 
 def test_BudUnit_get_idea_tree_ordered_road_list_CorrectlyFiltersRangedIdeaRoadUnits():
@@ -457,7 +457,7 @@ def test_BudUnit_settle_bud_WhenIdeaRootHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_mass_set == {sue_budunit._pecun_id}
+    assert sue_budunit._offtrack_kids_mass_set == {sue_budunit._fiscal_id}
 
     # WHEN
     sue_budunit.edit_idea_attr(casa_road, mass=2)
@@ -516,7 +516,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     zia_debtit_belief = 5
     yao_bud.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     yao_bud.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    x_idearoot = yao_bud.get_idea_obj(yao_bud._pecun_id)
+    x_idearoot = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     x_idearoot.set_awardlink(awardlink_shop(yao_str))
     x_idearoot.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -645,8 +645,8 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     tue_road = yao_bud.make_road(week_road, tue_str)
     tue_addin = 100
     yao_bud.set_idea(ideaunit_shop(tue_str, addin=tue_addin), week_road)
-    x_pecun_id = yao_bud._pecun_id
-    yao_bud.edit_idea_attr(x_pecun_id, reason_base=tue_road, reason_premise=tue_road)
+    x_fiscal_id = yao_bud._fiscal_id
+    yao_bud.edit_idea_attr(x_fiscal_id, reason_base=tue_road, reason_premise=tue_road)
 
     week_open = 3
     week_nigh = 7
@@ -675,7 +675,7 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     # tue_open = 113
     # tue_nigh = 117
     # tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
-    # root_idea = yao_bud.get_idea_obj(yao_bud._pecun_id)
+    # root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     # print(f"{week_road=} {root_idea._factheirs.keys()=}")
     # assert root_idea._factheirs.get(week_road) == week_factheir
     # assert len(root_idea._factheirs) == 2

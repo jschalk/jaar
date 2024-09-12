@@ -48,7 +48,7 @@ def all_columns_are_as_config_requires(mapper, config_category):
         config_type = column_dict.get(sqlite_datatype_str())
         if config_type == "TEXT":
             config_type = "VARCHAR"
-        elif config_type == "PECUN":
+        elif config_type == "FISCAL":
             config_type = "FLOAT"
         failed_assert_str = f"Table '{config_table_name}' {config_column=} {str(table_column.type)==config_type=}"
         assert str(table_column.type) == config_type, failed_assert_str
@@ -65,7 +65,7 @@ def print_out_expected_class_attribute_declarations(config_category):
             declare_type = "String"
         elif declare_type == "INTEGER":
             declare_type = "Integer"
-        elif declare_type == "PECUN":
+        elif declare_type == "FISCAL":
             declare_type = "Float"
         if config_column == "uid":
             declare_type = "Integer, primary_key=True"

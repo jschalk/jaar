@@ -79,8 +79,8 @@ def crud_str_str() -> str:
     return "crud_str"
 
 
-def pecun_id_str() -> str:
-    return "pecun_id"
+def fiscal_id_str() -> str:
+    return "fiscal_id"
 
 
 def owner_id_str() -> str:

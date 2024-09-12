@@ -1,16 +1,16 @@
 from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
 from src.listen.hubunit import hubunit_shop
-from src.pecun.pecun import PecunUnit, pecununit_shop
-from src.pecun.examples.pecun_env import get_test_pecuns_dir
+from src.fiscal.fiscal import FiscalUnit, fiscalunit_shop
+from src.fiscal.examples.fiscal_env import get_test_fiscals_dir
 
 
-# def create_example_pecun1(graphics_bool) -> PecunUnit:
+# def create_example_fiscal1(graphics_bool) -> FiscalUnit:
 #     # ESTABLISH
 #     music_str = "music"
-#     music_pecun = pecununit_shop(music_str, get_test_pecuns_dir(), in_memory_journal=True)
+#     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir(), in_memory_journal=True)
 #     yao_str = "Yao"
-#     music_pecun.init_owner_econs(yao_str)
+#     music_fiscal.init_owner_econs(yao_str)
 #     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
 #     yao_voice_bud = yao_hubunit.get_voice_bud()
 
@@ -35,8 +35,8 @@ from src.pecun.examples.pecun_env import get_test_pecuns_dir
 #     yao_voice_bud.set_idea(elpaso_idea, texas_road)
 #     display_ideatree(yao_voice_bud.settle_bud(), mode="Econ", graphics_bool=graphics_bool)
 #     x_hubunit = hubunit_shop(
-#         pecuns_dir=yao_hubunit.pecuns_dir,
-#         pecun_id=yao_hubunit.pecun_id,
+#         fiscals_dir=yao_hubunit.fiscals_dir,
+#         fiscal_id=yao_hubunit.fiscal_id,
 #         owner_id=yao_hubunit.owner_id,
 #         econ_road=None,
 #         road_delimiter=yao_hubunit.road_delimiter,
@@ -46,26 +46,26 @@ from src.pecun.examples.pecun_env import get_test_pecuns_dir
 #     yao_hubunit.create_voice_treasury_db_files()
 
 #     # WHEN
-#     music_pecun._set_all_healer_dutys(yao_str)
+#     music_fiscal._set_all_healer_dutys(yao_str)
 
-#     return music_pecun
+#     return music_fiscal
 
 
-def create_example_pecun2() -> PecunUnit:
+def create_example_fiscal2() -> FiscalUnit:
     # ESTABLISH
     music_str = "music"
-    music_pecun = pecununit_shop(
-        music_str, get_test_pecuns_dir(), in_memory_journal=True
+    music_fiscal = fiscalunit_shop(
+        music_str, get_test_fiscals_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_pecun.init_owner_econs(yao_str)
+    music_fiscal.init_owner_econs(yao_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
-    music_pecun.init_owner_econs(wei_str)
-    music_pecun.init_owner_econs(zia_str)
+    music_fiscal.init_owner_econs(wei_str)
+    music_fiscal.init_owner_econs(zia_str)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -111,25 +111,25 @@ def create_example_pecun2() -> PecunUnit:
     yao_hubunit.create_voice_treasury_db_files()
     wei_hubunit.create_voice_treasury_db_files()
     zia_hubunit.create_voice_treasury_db_files()
-    music_pecun._set_all_healer_dutys(yao_str)
-    music_pecun._set_all_healer_dutys(wei_str)
-    music_pecun._set_all_healer_dutys(zia_str)
+    music_fiscal._set_all_healer_dutys(yao_str)
+    music_fiscal._set_all_healer_dutys(wei_str)
+    music_fiscal._set_all_healer_dutys(zia_str)
 
-    return music_pecun
+    return music_fiscal
 
 
-def create_example_pecun3() -> PecunUnit:
+def create_example_fiscal3() -> FiscalUnit:
     # ESTABLISH
     music_str = "music"
-    music_pecun = pecununit_shop(
-        music_str, get_test_pecuns_dir(), in_memory_journal=True
+    music_fiscal = fiscalunit_shop(
+        music_str, get_test_fiscals_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_pecun.init_owner_econs(yao_str)
-    music_pecun.init_owner_econs(wei_str)
-    music_pecun.init_owner_econs(zia_str)
+    music_fiscal.init_owner_econs(yao_str)
+    music_fiscal.init_owner_econs(wei_str)
+    music_fiscal.init_owner_econs(zia_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
@@ -162,21 +162,21 @@ def create_example_pecun3() -> PecunUnit:
     wei_hubunit.save_voice_bud(wei_voice_bud)
     zia_hubunit.save_voice_bud(zia_voice_bud)
 
-    return music_pecun
+    return music_fiscal
 
 
-def create_example_pecun4() -> PecunUnit:
+def create_example_fiscal4() -> FiscalUnit:
     # ESTABLISH
     music_str = "music"
-    music_pecun = pecununit_shop(
-        music_str, get_test_pecuns_dir(), in_memory_journal=True
+    music_fiscal = fiscalunit_shop(
+        music_str, get_test_fiscals_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_pecun.init_owner_econs(yao_str)
-    music_pecun.init_owner_econs(wei_str)
-    music_pecun.init_owner_econs(zia_str)
+    music_fiscal.init_owner_econs(yao_str)
+    music_fiscal.init_owner_econs(wei_str)
+    music_fiscal.init_owner_econs(zia_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
@@ -246,4 +246,4 @@ def create_example_pecun4() -> PecunUnit:
     wei_hubunit.save_voice_bud(wei_voice_bud)
     zia_hubunit.save_voice_bud(zia_voice_bud)
 
-    return music_pecun
+    return music_fiscal

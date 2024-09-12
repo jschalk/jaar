@@ -1,4 +1,4 @@
-from src._road.road import get_default_pecun_id_roadnode as root_label
+from src._road.road import get_default_fiscal_id_roadnode as root_label
 from src.listen.hubunit import hubunit_shop
 from src.listen.special_func import add_voice_pledge, add_voice_fact
 from src.listen.examples.listen_env import (

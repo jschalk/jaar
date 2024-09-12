@@ -16,7 +16,7 @@
         "problem_bool": {
             "column_order": 6
         },
-        "pecun_id": {
+        "fiscal_id": {
             "column_order": 0,
             "sort_order": 0
         },

@@ -1,6 +1,6 @@
 from src._road.road import (
     create_road,
-    get_default_pecun_id_roadnode as root_label,
+    get_default_fiscal_id_roadnode as root_label,
 )
 from src.listen.hubunit import hubunit_shop
 from src.listen.examples.example_listen_buds import get_budunit_with_4_levels

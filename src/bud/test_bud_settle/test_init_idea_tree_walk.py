@@ -8,7 +8,7 @@ from pytest import raises as pytest_raises
 def test_BudUnit_init_idea_tree_walk_Scenario0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_idea = yao_bud.get_idea_obj(yao_bud._pecun_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     assert not root_idea.begin
     assert not root_idea.close
     assert not root_idea._gogo_calc
@@ -33,8 +33,8 @@ def test_BudUnit_init_idea_tree_walk_Scenario1():
     yao_bud = budunit_shop("Yao")
     time0_begin = 7
     time0_close = 31
-    yao_bud.edit_idea_attr(yao_bud._pecun_id, begin=time0_begin, close=time0_close)
-    root_idea = yao_bud.get_idea_obj(yao_bud._pecun_id)
+    yao_bud.edit_idea_attr(yao_bud._fiscal_id, begin=time0_begin, close=time0_close)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     assert root_idea.begin == time0_begin
     assert root_idea.close == time0_close
     assert not root_idea._gogo_calc
@@ -53,7 +53,7 @@ def test_BudUnit_init_idea_tree_walk_Scenario1():
 def test_BudUnit_init_idea_tree_walk_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_idea = sue_bud.get_idea_obj(sue_bud._pecun_id)
+    root_idea = sue_bud.get_idea_obj(sue_bud._fiscal_id)
     states_str = "nation-state"
     states_road = sue_bud.make_l1_road(states_str)
     usa_str = "USA"

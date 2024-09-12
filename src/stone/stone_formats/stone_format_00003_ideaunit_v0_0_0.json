@@ -15,7 +15,7 @@
         "pledge": {
             "column_order": 2
         },
-        "pecun_id": {
+        "fiscal_id": {
             "column_order": 0
         },
         "mass": {

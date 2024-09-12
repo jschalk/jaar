@@ -100,7 +100,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaRoadUnit():
     # WHEN/THEN
     train_road = create_road_from_nodes(
         [
-            yao_bud._pecun_id,
+            yao_bud._fiscal_id,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Prevention and Reporting guildlines",

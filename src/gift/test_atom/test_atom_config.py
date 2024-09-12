@@ -532,8 +532,8 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     stop_want_dict = idea_columns.get(stop_want_str())
     assert len(gogo_want_dict) == 2
     assert len(stop_want_dict) == 2
-    assert gogo_want_dict.get(sqlite_datatype_str()) == "PECUN"
-    assert stop_want_dict.get(sqlite_datatype_str()) == "PECUN"
+    assert gogo_want_dict.get(sqlite_datatype_str()) == "FISCAL"
+    assert stop_want_dict.get(sqlite_datatype_str()) == "FISCAL"
     assert gogo_want_dict.get("nullable") is True
     assert stop_want_dict.get("nullable") is True
 

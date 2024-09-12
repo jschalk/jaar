@@ -1,16 +1,16 @@
 from src._road.road import OwnerID, AcctID
 from src.bud.bud import budunit_shop
 from src.listen.hubunit import HubUnit, hubunit_shop
-from src.money.examples.econ_env import temp_pecuns_dir, temp_pecun_id, get_texas_road
+from src.money.examples.econ_env import temp_fiscals_dir, temp_fiscal_id, get_texas_road
 from src.money.rivercycle import get_credorledger
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(temp_pecuns_dir(), temp_pecun_id(), "Yao")
+    return hubunit_shop(temp_fiscals_dir(), temp_fiscal_id(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(temp_pecuns_dir(), temp_pecun_id(), "Yao", get_texas_road())
+    return hubunit_shop(temp_fiscals_dir(), temp_fiscal_id(), "Yao", get_texas_road())
 
 
 def example_yao_credorledger() -> dict[str, float]:
