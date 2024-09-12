@@ -125,7 +125,7 @@ def test_get_sorted_headers_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers(stone_format_00019_ideaunit_v0_0_0())
     # THEN
-    idea_headers_str = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,stop_want,pecun_id"
+    idea_headers_str = "addin,begin,close,denom,gogo_want,label,morph,numor,owner_id,parent_road,pecun_id,stop_want"
     assert headers == idea_headers_str
 
 
