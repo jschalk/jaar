@@ -3,9 +3,9 @@ from src._road.jaar_config import get_gifts_folder
 from src._road.finance import default_bit_if_none, default_penny_if_none
 from src._road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.bud.bud import BudUnit
-from src.listen.basis_buds import get_default_action_bud
-from src.listen.hubunit import hubunit_shop, HubUnit
-from src.listen.listen import (
+from src.d_listen.basis_buds import get_default_action_bud
+from src.d_listen.hubunit import hubunit_shop, HubUnit
+from src.d_listen.listen import (
     listen_to_speaker_agenda,
     listen_to_debtors_roll_voice_action,
     listen_to_debtors_roll_duty_job,

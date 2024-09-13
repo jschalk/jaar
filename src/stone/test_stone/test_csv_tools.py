@@ -1,5 +1,5 @@
 from src._instrument.python_tool import extract_csv_headers
-from src.gift.atom_config import acct_id_str, fiscal_id_str, owner_id_str
+from src.change.atom_config import acct_id_str, fiscal_id_str, owner_id_str
 from src.stone.stone import (
     get_csv_fiscal_id_owner_id_metrics,
     fiscal_id_owner_id_nested_csv_dict,

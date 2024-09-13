@@ -1,7 +1,7 @@
 from src._instrument.python_tool import get_json_from_dict
 from src._instrument.file import save_file
 from src.bud.bud_tool import bud_ideaunit_str
-from src.gift.atom_config import (
+from src.change.atom_config import (
     parent_road_str,
     label_str,
     gogo_want_str,
