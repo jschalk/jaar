@@ -98,18 +98,18 @@ def test_load_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     csv_example_path = f_path(stone_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
     save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
-    music_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
+    sue_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
     # Open FiscalUnit and confirm voice BudUnit does not exist
-    assert not music_hubunit.voice_file_exists()
+    assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_stone_csv(music_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
+    load_stone_csv(sue_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
 
     # THEN
     # assert voice Budunit now exists
-    assert music_hubunit.voice_file_exists()
+    assert sue_hubunit.voice_file_exists()
     # assert voice Budunit acctunit now exists
-    sue_voice = music_hubunit.get_voice_bud()
+    sue_voice = sue_hubunit.get_voice_bud()
     assert sue_voice.acct_exists(sue_str)
     assert sue_voice.acct_exists(bob_str)
     assert sue_voice.acct_exists(yao_str)
@@ -149,18 +149,18 @@ def test_load_stone_csv_csvToVoice(
     csv_example_path = f_path(stone_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
     save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
-    music_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
+    sue_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
     # Open FiscalUnit and confirm voice BudUnit does not exist
-    assert not music_hubunit.voice_file_exists()
+    assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_stone_csv(music_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
+    load_stone_csv(sue_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
 
     # THEN
     # assert voice Budunit now exists
-    assert music_hubunit.voice_file_exists()
+    assert sue_hubunit.voice_file_exists()
     # assert voice Budunit acctunit now exists
-    sue_voice = music_hubunit.get_voice_bud()
+    sue_voice = sue_hubunit.get_voice_bud()
     assert sue_voice.acct_exists(sue_str)
     assert sue_voice.acct_exists(bob_str)
     assert sue_voice.acct_exists(yao_str)
@@ -175,6 +175,50 @@ def test_load_stone_csv_csvToVoice(
     assert sue_acctunit.debtit_belief == sue_debtit_belief
     assert bob_acctunit.debtit_belief == bob_debtit_belief
     assert yao_acctunit.debtit_belief == yao_debtit_belief
+
+
+# def test_load_stone_csv_csvToVoice(
+#     stone_env_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     sue_str = "Sue"
+#     bob_str = "Bob"
+#     music_fiscal_id = "music56"
+#     sue_budunit = budunit_shop(sue_str, music_fiscal_id)
+#     sue_budunit.add_acctunit(sue_str)
+#     sue_budunit.add_acctunit(bob_str)
+#     j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
+#     acct_filename = f"{sue_str}_acct_example_02.csv"
+#     csv_example_path = f_path(stone_examples_dir(), acct_filename)
+#     print(f"{csv_example_path}")
+#     save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
+#     sue_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
+#     sue_hubunit.save_voice_bud(budunit_shop(sue_str, music_fiscal_id))
+#     sue_hubunit._create_initial_gift_files_from_voice()
+#     old_sue_voice = sue_hubunit.get_voice_bud()
+#     old_sue_voice.add_acctunit(sue_str)
+#     sue_hubunit.save_voice_bud(old_sue_voice)
+
+#     sue_hubunit.initialize_gift_voice_files()
+#     # Open FiscalUnit and confirm voice BudUnit does not exist
+#     assert sue_hubunit.voice_file_exists()
+#     assert sue_hubunit.get_voice_bud().acct_exists(sue_str)
+#     assert not sue_hubunit.get_voice_bud().acct_exists(bob_str)
+#     assert sue_hubunit.get_max_gift_file_number() == 3
+
+#     # WHEN
+#     load_stone_csv(sue_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
+
+#     # THEN
+#     # assert voice Budunit acctunit now exists
+#     new_sue_voice = sue_hubunit.get_voice_bud()
+#     assert new_sue_voice.acct_exists(sue_str)
+#     assert new_sue_voice.acct_exists(bob_str)
+#     # assert voice Budunit acctunit.credit_belief is correct
+#     sue_acctunit = new_sue_voice.get_acct(sue_str)
+#     bob_acctunit = new_sue_voice.get_acct(bob_str)
+#     assert sue_hubunit.get_max_gift_file_number() != 3
+#     assert 1 == 2
 
 
 # def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(

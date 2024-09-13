@@ -185,6 +185,20 @@ def make_changeunit(x_csv: str) -> ChangeUnit:
     return x_changeunit
 
 
+def _load_individual_stone_csv(
+    complete_csv: str, fiscals_dir: str, x_fiscal_id: FiscalID, x_owner_id: OwnerID
+):
+    x_hubunit = hubunit_shop(fiscals_dir, x_fiscal_id, x_owner_id)
+    x_hubunit.initialize_gift_voice_files()
+    x_voice = x_hubunit.get_voice_bud()
+    x_changeunit = make_changeunit(complete_csv)
+    # x_changeunit = sift_changeunit(x_changeunit, x_voice)
+    x_giftunit = giftunit_shop(x_owner_id, x_fiscal_id)
+    x_giftunit.set_changeunit(x_changeunit)
+    x_hubunit.save_gift_file(x_giftunit)
+    x_hubunit._create_voice_from_gifts()
+
+
 def load_stone_csv(fiscals_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
@@ -192,15 +206,9 @@ def load_stone_csv(fiscals_dir: str, x_file_dir: str, x_filename: str):
     for x_fiscal_id, fiscal_dict in nested_csv.items():
         for x_owner_id, owner_csv in fiscal_dict.items():
             complete_csv = add_headers_to_csv(headers_list, owner_csv)
-            x_changeunit = make_changeunit(complete_csv)
-            x_hubunit = hubunit_shop(fiscals_dir, x_fiscal_id, x_owner_id)
-            x_hubunit.initialize_gift_voice_files()
-            x_voice = x_hubunit.get_voice_bud()
-            x_changeunit = sift_changeunit(x_changeunit, x_voice)
-            x_giftunit = giftunit_shop(x_owner_id, x_fiscal_id)
-            x_giftunit.set_changeunit(x_changeunit)
-            x_hubunit.save_gift_file(x_giftunit)
-            x_hubunit._create_voice_from_gifts()
+            _load_individual_stone_csv(
+                complete_csv, fiscals_dir, x_fiscal_id, x_owner_id
+            )
 
 
 def get_csv_fiscal_id_owner_id_metrics(
