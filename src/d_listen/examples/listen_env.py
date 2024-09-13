@@ -9,7 +9,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_codespace_listen_dir() -> str:
-    return "src/listen"
+    return "src/d_listen"
 
 
 def get_listen_examples_dir():
