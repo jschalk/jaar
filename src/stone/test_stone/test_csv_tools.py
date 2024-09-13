@@ -2,7 +2,7 @@ from src._instrument.python_tool import extract_csv_headers
 from src.gift.atom_config import acct_id_str, fiscal_id_str, owner_id_str
 from src.stone.stone import (
     get_csv_fiscal_id_owner_id_metrics,
-    fiscal_id_owner_id_filtered_csv_dict,
+    fiscal_id_owner_id_nested_csv_dict,
 )
 
 
@@ -71,7 +71,7 @@ def test_get_csv_fiscal_id_owner_id_metrics_ReturnsObj_Scenario2():
     assert u_dict == {music_fiscal_id: {sue_str: 4, bob_str: 1}}
 
 
-def test_fiscal_id_owner_id_filtered_csv_dict_ReturnsObj_Scenario0():
+def test_fiscal_id_owner_id_nested_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     music_fiscal_id = "music56"
     sue_str = "Sue"
@@ -84,7 +84,7 @@ def test_fiscal_id_owner_id_filtered_csv_dict_ReturnsObj_Scenario0():
 """
 
     # WHEN
-    u_dict = fiscal_id_owner_id_filtered_csv_dict(headerless_csv=headerless_csv)
+    u_dict = fiscal_id_owner_id_nested_csv_dict(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")

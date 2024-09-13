@@ -7,8 +7,9 @@ from src._instrument.python_tool import (
     get_positive_int,
     extract_csv_headers,
     get_csv_column1_column2_metrics,
-    create_filtered_csv_dict,
+    create_l2nested_csv_dict,
     get_positional_dict,
+    add_headers_to_csv,
 )
 from pytest import raises as pytest_raises
 
@@ -324,7 +325,7 @@ def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario2():
     assert u_dict == {x_id: {sue_str: 4, bob_str: 1}}
 
 
-def test_create_filtered_csv_dict_ReturnsObj_Scenario0():
+def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     x_id = "music56"
     sue_str = "Sue"
@@ -337,7 +338,7 @@ def test_create_filtered_csv_dict_ReturnsObj_Scenario0():
 """
 
     # WHEN
-    u_dict = create_filtered_csv_dict(headerless_csv=headerless_csv)
+    u_dict = create_l2nested_csv_dict(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")
@@ -359,6 +360,54 @@ def test_create_filtered_csv_dict_ReturnsObj_Scenario0():
     assert u_dict == {x_id: owner_id_csv_dict}
 
 
+def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
+    # ESTABLISH
+    music3_id = "music3"
+    music4_id = "music4"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    headerless_csv = f"""{music3_id},{sue_str},Bob,13,29
+{music4_id},{sue_str},Sue,11,23
+{music4_id},{sue_str},Yao,41,37
+{music4_id},{sue_str},Zia,41,37
+{music4_id},{bob_str},Yao,41,37
+"""
+
+    # WHEN
+    filtered_dict = create_l2nested_csv_dict(headerless_csv=headerless_csv)
+
+    # THEN
+    # print(f"{u_dict=}")
+    music3_sue_csv = f"""{music3_id},{sue_str},Bob,13,29
+"""
+    music4_sue_csv = f"""{music4_id},{sue_str},Sue,11,23
+{music4_id},{sue_str},Yao,41,37
+{music4_id},{sue_str},Zia,41,37
+"""
+    static_bob_csv = f"""{music4_id},{bob_str},Yao,41,37
+"""
+    music3_dict = filtered_dict.get(music3_id)
+    music4_dict = filtered_dict.get(music4_id)
+    assert music3_dict
+    assert music4_dict
+    assert list(music3_dict.keys()) == [sue_str]
+    assert list(music4_dict.keys()) == [sue_str, bob_str]
+    generated_bob_csv = music4_dict.get(bob_str)
+    assert generated_bob_csv == static_bob_csv
+    generated3_sue_csv = music3_dict.get(sue_str)
+    generated4_sue_csv = music4_dict.get(sue_str)
+    print(f"{generated3_sue_csv=}")
+    print(f"{generated4_sue_csv=}")
+    assert generated3_sue_csv == music3_sue_csv
+    assert generated4_sue_csv == music4_sue_csv
+    owner_id3_csv_dict = {sue_str: music3_sue_csv}
+    owner_id4_csv_dict = {sue_str: music4_sue_csv, bob_str: static_bob_csv}
+    assert filtered_dict == {
+        music3_id: owner_id3_csv_dict,
+        music4_id: owner_id4_csv_dict,
+    }
+
+
 def test_get_positional_dict_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
@@ -370,3 +419,28 @@ def test_get_positional_dict_ReturnsObj():
     assert get_positional_dict([]) == {}
     assert get_positional_dict([bob_str]) == {bob_str: 0}
     assert get_positional_dict(x_list) == {bob_str: 0, sue_str: 1, yao_str: 2}
+
+
+def test_add_headers_to_csv_ReturnsObj():
+    # ESTABLISH
+    swim_text = "swim"
+    six_text = "six"
+    seven_text = "seven"
+    headers = [swim_text, six_text, seven_text]
+    headerless_csv = f"""Bob,13,29
+Sue,11,23
+Yao,41,37
+Zia,41,37
+Yao,41,37
+"""
+
+    # WHEN
+    gen_csv = add_headers_to_csv(headers, headerless_csv)
+
+    # THEN
+    assert gen_csv
+    assert (
+        gen_csv
+        == f"""{swim_text},{six_text},{seven_text}
+{headerless_csv}"""
+    )

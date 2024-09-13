@@ -132,13 +132,22 @@ def extract_csv_headers(x_csv: str, delimiter: str = None) -> tuple[list[str], s
             title_row = row
         else:
             new_csv_writer.writerow(row)
-    x_list = []
+    headers_list = []
     if title_row is None:
-        return x_list
-    x_list.extend(title_row[column_num] for column_num in range(len(title_row)))
+        return headers_list
+    headers_list.extend(title_row[column_num] for column_num in range(len(title_row)))
     x_csv = si.getvalue()
     y_csv = x_csv.replace("\r", "")
-    return x_list, y_csv
+    return headers_list, y_csv
+
+
+def add_headers_to_csv(
+    headers_list: list[str], headersless_csv: str, delimiter: str = None
+) -> str:
+    if delimiter is None:
+        delimiter = ","
+    header_str = delimiter.join(str(header) for header in headers_list)
+    return f"{header_str}\n{headersless_csv}"
 
 
 def get_csv_column1_column2_metrics(
@@ -156,7 +165,7 @@ def get_csv_column1_column2_metrics(
     return y_dict
 
 
-def create_filtered_csv_dict(
+def create_l2nested_csv_dict(
     headerless_csv: str, delimiter: str = None
 ) -> dict[str, dict[str, str]]:
     io_dict = {}

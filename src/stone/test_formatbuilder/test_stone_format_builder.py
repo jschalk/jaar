@@ -10,12 +10,8 @@ from src.gift.atom_config import (
     column_order_str,
 )
 from src.stone.formatbuilder import create_categorys_stone_format_dict
-from src.stone.stone import (
-    atom_categorys_str,
-    attributes_str,
-    sort_order_str,
-    get_stone_formats_dir,
-)
+from src.stone.stone import atom_categorys_str, attributes_str, sort_order_str
+from src.stone.stone_config import get_stone_formats_dir
 
 
 def test_create_categorys_stone_format_dicts_ReturnObj(rebuild_bool):
