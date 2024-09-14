@@ -45,13 +45,13 @@ from src.bud.bud import (
     get_from_json as budunit_get_from_json,
     budunit_shop,
 )
-from src.change.atom import (
+from src.delta.atom import (
     AtomUnit,
     get_from_json as atomunit_get_from_json,
     modify_bud_with_atomunit,
 )
 from src.d_listen.basis_buds import get_default_action_bud
-from src.change.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
+from src.delta.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -281,8 +281,8 @@ class HubUnit:
             x_giftunit._gift_id = self._get_next_gift_file_number()
         if x_giftunit.owner_id != self.owner_id:
             x_giftunit.owner_id = self.owner_id
-        if x_giftunit._change_start != self._get_next_atom_file_number():
-            x_giftunit._change_start = self._get_next_atom_file_number()
+        if x_giftunit._delta_start != self._get_next_atom_file_number():
+            x_giftunit._delta_start = self._get_next_atom_file_number()
         return x_giftunit
 
     def save_gift_file(
@@ -327,8 +327,8 @@ class HubUnit:
 
     def create_save_gift_file(self, before_bud: BudUnit, after_bud: BudUnit):
         new_giftunit = self._default_giftunit()
-        new_changeunit = new_giftunit._changeunit
-        new_changeunit.add_all_different_atomunits(before_bud, after_bud)
+        new_deltaunit = new_giftunit._deltaunit
+        new_deltaunit.add_all_different_atomunits(before_bud, after_bud)
         self.save_gift_file(new_giftunit)
 
     def get_giftunit(self, gift_id: int) -> GiftUnit:
@@ -348,7 +348,7 @@ class HubUnit:
 
         for gift_int in gift_ints:
             x_gift = self.get_giftunit(gift_int)
-            new_bud = x_gift._changeunit.get_edited_bud(x_bud)
+            new_bud = x_gift._deltaunit.get_edited_bud(x_bud)
         return new_bud
 
     def _create_initial_gift_files_from_default(self):
@@ -358,7 +358,7 @@ class HubUnit:
             _gifts_dir=self.gifts_dir(),
             _atoms_dir=self.atoms_dir(),
         )
-        x_giftunit._changeunit.add_all_different_atomunits(
+        x_giftunit._deltaunit.add_all_different_atomunits(
             before_bud=self.default_voice_bud(),
             after_bud=self.default_voice_bud(),
         )
@@ -374,7 +374,7 @@ class HubUnit:
 
     def _create_initial_gift_files_from_voice(self):
         x_giftunit = self._default_giftunit()
-        x_giftunit._changeunit.add_all_different_atomunits(
+        x_giftunit._deltaunit.add_all_different_atomunits(
             before_bud=self.default_voice_bud(),
             after_bud=self.get_voice_bud(),
         )

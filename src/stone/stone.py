@@ -9,15 +9,15 @@ from src._instrument.python_tool import (
 )
 from src._road.road import FiscalID, OwnerID
 from src.bud.bud import BudUnit
-from src.change.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
-from src.change.atom_config import fiscal_id_str, owner_id_str, pledge_str
-from src.change.change import (
-    changeunit_shop,
-    get_filtered_changeunit,
-    ChangeUnit,
-    sift_changeunit,
+from src.delta.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
+from src.delta.atom_config import fiscal_id_str, owner_id_str, pledge_str
+from src.delta.delta import (
+    deltaunit_shop,
+    get_filtered_deltaunit,
+    DeltaUnit,
+    sift_deltaunit,
 )
-from src.change.gift import giftunit_shop
+from src.delta.gift import giftunit_shop
 from src.d_listen.hubunit import hubunit_shop
 from src.stone.stone_config import (
     get_stoneref_dict,
@@ -90,26 +90,26 @@ def _generate_stone_dataframe(d2_list: list[list[str]], stone_name: str) -> Data
 
 
 def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
-    x_changeunit = changeunit_shop()
-    x_changeunit.add_all_atomunits(x_budunit)
+    x_deltaunit = deltaunit_shop()
+    x_deltaunit.add_all_atomunits(x_budunit)
     x_stoneref = get_stoneref(stone_name)
     x_fiscal_id = x_budunit._fiscal_id
     x_owner_id = x_budunit._owner_id
-    sorted_atomunits = _get_sorted_atom_insert_atomunits(x_changeunit, x_stoneref)
+    sorted_atomunits = _get_sorted_atom_insert_atomunits(x_deltaunit, x_stoneref)
     d2_list = _create_d2_list(sorted_atomunits, x_stoneref, x_fiscal_id, x_owner_id)
-    d2_list = _change_all_pledge_values(d2_list, x_stoneref)
+    d2_list = _delta_all_pledge_values(d2_list, x_stoneref)
     x_stone = _generate_stone_dataframe(d2_list, stone_name)
     sorting_columns = x_stoneref.get_headers_list()
     return _sort_dataframe(x_stone, sorting_columns)
 
 
 def _get_sorted_atom_insert_atomunits(
-    x_changeunit: ChangeUnit, x_stoneref: StoneRef
+    x_deltaunit: DeltaUnit, x_stoneref: StoneRef
 ) -> list[AtomUnit]:
     category_set = set(x_stoneref.atom_categorys)
     curd_set = {atom_insert()}
-    filtered_change = get_filtered_changeunit(x_changeunit, category_set, curd_set)
-    return filtered_change.get_category_sorted_atomunits_list()
+    filtered_delta = get_filtered_deltaunit(x_deltaunit, category_set, curd_set)
+    return filtered_delta.get_category_sorted_atomunits_list()
 
 
 def _create_d2_list(
@@ -132,7 +132,7 @@ def _create_d2_list(
     return d2_list
 
 
-def _change_all_pledge_values(d2_list: list[list], x_stoneref: StoneRef) -> list[list]:
+def _delta_all_pledge_values(d2_list: list[list], x_stoneref: StoneRef) -> list[list]:
     for x_column_header, x_stonecolumn in x_stoneref._stonecolumns.items():
         if x_column_header == pledge_str():
             pledge_column_number = x_stonecolumn.column_order
@@ -167,13 +167,13 @@ def get_csv_stoneref(title_row: list[str]) -> StoneRef:
     return get_stoneref(x_stonename)
 
 
-def make_changeunit(x_csv: str) -> ChangeUnit:
+def make_deltaunit(x_csv: str) -> DeltaUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_stoneref = get_csv_stoneref(title_row)
 
     x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(title_row)
-    x_changeunit = changeunit_shop()
+    x_deltaunit = deltaunit_shop()
     for row in x_reader:
         x_atomrow = atomrow_shop(x_stoneref.atom_categorys, atom_insert())
         for x_header in title_row:
@@ -181,8 +181,8 @@ def make_changeunit(x_csv: str) -> ChangeUnit:
                 x_atomrow.__dict__[x_header] = row[header_index]
 
         for x_atomunit in x_atomrow.get_atomunits():
-            x_changeunit.set_atomunit(x_atomunit)
-    return x_changeunit
+            x_deltaunit.set_atomunit(x_atomunit)
+    return x_deltaunit
 
 
 def _load_individual_stone_csv(
@@ -191,10 +191,10 @@ def _load_individual_stone_csv(
     x_hubunit = hubunit_shop(fiscals_dir, x_fiscal_id, x_owner_id)
     x_hubunit.initialize_gift_voice_files()
     x_voice = x_hubunit.get_voice_bud()
-    x_changeunit = make_changeunit(complete_csv)
-    # x_changeunit = sift_changeunit(x_changeunit, x_voice)
+    x_deltaunit = make_deltaunit(complete_csv)
+    # x_deltaunit = sift_deltaunit(x_deltaunit, x_voice)
     x_giftunit = giftunit_shop(x_owner_id, x_fiscal_id)
-    x_giftunit.set_changeunit(x_changeunit)
+    x_giftunit.set_deltaunit(x_deltaunit)
     x_hubunit.save_gift_file(x_giftunit)
     x_hubunit._create_voice_from_gifts()
 

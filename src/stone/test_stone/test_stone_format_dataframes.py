@@ -5,7 +5,7 @@ from src.chrono.examples.chrono_examples import (
     add_time_creg_ideaunit,
     add_time_five_ideaunit,
 )
-from src.change.atom_config import (
+from src.delta.atom_config import (
     fiscal_id_str,
     owner_id_str,
     acct_id_str,

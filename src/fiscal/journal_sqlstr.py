@@ -1,9 +1,9 @@
-from src.change.atom_config import (
+from src.delta.atom_config import (
     get_flattened_atom_table_build,
     atom_hx_table_name,
     atom_mstr_table_name,
 )
-from src.change.atom import AtomUnit
+from src.delta.atom import AtomUnit
 from src._road.road import RoadUnit
 
 # from src._instrument.sqlite import (
@@ -55,38 +55,38 @@ CREATE TABLE IF NOT EXISTS {atom_mstr_table_name()} (
     return x_str
 
 
-def get_atom2change_table_create_sqlstr() -> str:
+def get_atom2delta_table_create_sqlstr() -> str:
     return """
-CREATE TABLE atom2change
+CREATE TABLE atom2delta
 (
   atom_rowid INT NOT NULL
-, change_rowid INT NOT NULL
-, UNIQUE(atom_rowid, change_rowid)
+, delta_rowid INT NOT NULL
+, UNIQUE(atom_rowid, delta_rowid)
 , CONSTRAINT atom_fk FOREIGN KEY (atom_rowid) REFERENCES atom_mstr (rowid)
-, CONSTRAINT change_fk FOREIGN KEY (change_rowid) REFERENCES change_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
 )
 ;"""
 
 
-def get_change_table_create_sqlstr() -> str:
+def get_delta_table_create_sqlstr() -> str:
     return """
-CREATE TABLE IF NOT EXISTS change_mstr (
+CREATE TABLE IF NOT EXISTS delta_mstr (
   author_owner_id VARCHAR(255) NOT NULL
-, author_change_number INT NOT NULL
-, UNIQUE(author_owner_id, author_change_number)
+, author_delta_number INT NOT NULL
+, UNIQUE(author_owner_id, author_delta_number)
 )
 ;"""
 
 
-def get_change2gift_table_create_sqlstr() -> str:
+def get_delta2gift_table_create_sqlstr() -> str:
     return """
-CREATE TABLE change2gift
+CREATE TABLE delta2gift
 (
-  change_rowid INT NOT NULL
+  delta_rowid INT NOT NULL
 , gift_rowid INT NOT NULL
-, UNIQUE(change_rowid, gift_rowid)
-, CONSTRAINT atom_fk FOREIGN KEY (change_rowid) REFERENCES change_mstr (rowid)
-, CONSTRAINT change_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
+, UNIQUE(delta_rowid, gift_rowid)
+, CONSTRAINT atom_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
 )
 ;"""
 
@@ -108,7 +108,7 @@ CREATE TABLE gift2owner
   gift_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
 , UNIQUE(gift_rowid, owner_rowid)
-, CONSTRAINT change_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""
@@ -156,9 +156,9 @@ WHERE road = '{road}'
 def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     list_x = [get_atom_hx_table_create_sqlstr()]
     list_x.append(get_atom_mstr_table_create_sqlstr())
-    list_x.append(get_atom2change_table_create_sqlstr())
-    list_x.append(get_change_table_create_sqlstr())
-    list_x.append(get_change2gift_table_create_sqlstr())
+    list_x.append(get_atom2delta_table_create_sqlstr())
+    list_x.append(get_delta_table_create_sqlstr())
+    list_x.append(get_delta2gift_table_create_sqlstr())
     list_x.append(get_gift_table_create_sqlstr())
     list_x.append(get_gift2owner_table_create_sqlstr())
     list_x.append(get_owner_mstr_table_create_sqlstr())

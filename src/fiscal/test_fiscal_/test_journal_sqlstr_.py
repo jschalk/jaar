@@ -1,15 +1,15 @@
 from src._road.road import create_road
 from src.bud.bud_tool import bud_idea_factunit_str
-from src.change.atom_config import fopen_str, atom_insert, atom_hx_table_name
-from src.change.atom import atomunit_shop
+from src.delta.atom_config import fopen_str, atom_insert, atom_hx_table_name
+from src.delta.atom import atomunit_shop
 from src.fiscal.journal_sqlstr import (
-    get_atom2change_table_create_sqlstr,
+    get_atom2delta_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
     get_atom_hx_table_insert_sqlstr,
     get_atom_mstr_table_create_sqlstr,
     get_create_table_if_not_exist_sqlstrs,
-    get_change2gift_table_create_sqlstr,
-    get_change_table_create_sqlstr,
+    get_delta2gift_table_create_sqlstr,
+    get_delta_table_create_sqlstr,
     get_gift_table_create_sqlstr,
     get_gift2owner_table_create_sqlstr,
     get_owner_mstr_table_create_sqlstr,
@@ -19,31 +19,31 @@ from src.fiscal.journal_sqlstr import (
 )
 
 
-def test_get_change_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_delta_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE IF NOT EXISTS change_mstr (
+CREATE TABLE IF NOT EXISTS delta_mstr (
   author_owner_id VARCHAR(255) NOT NULL
-, author_change_number INT NOT NULL
-, UNIQUE(author_owner_id, author_change_number)
+, author_delta_number INT NOT NULL
+, UNIQUE(author_owner_id, author_delta_number)
 )
 ;"""
-    assert example_sqlstr == get_change_table_create_sqlstr()
+    assert example_sqlstr == get_delta_table_create_sqlstr()
 
 
-def test_get_atom2change_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_atom2delta_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE atom2change
+CREATE TABLE atom2delta
 (
   atom_rowid INT NOT NULL
-, change_rowid INT NOT NULL
-, UNIQUE(atom_rowid, change_rowid)
+, delta_rowid INT NOT NULL
+, UNIQUE(atom_rowid, delta_rowid)
 , CONSTRAINT atom_fk FOREIGN KEY (atom_rowid) REFERENCES atom_mstr (rowid)
-, CONSTRAINT change_fk FOREIGN KEY (change_rowid) REFERENCES change_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
 )
 ;"""
-    assert example_sqlstr == get_atom2change_table_create_sqlstr()
+    assert example_sqlstr == get_atom2delta_table_create_sqlstr()
 
 
 def test_get_gift_table_create_sqlstr_ReturnsCorrectStr():
@@ -58,19 +58,19 @@ CREATE TABLE IF NOT EXISTS gift_mstr (
     assert example_sqlstr == get_gift_table_create_sqlstr()
 
 
-def test_get_change2gift_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_delta2gift_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE change2gift
+CREATE TABLE delta2gift
 (
-  change_rowid INT NOT NULL
+  delta_rowid INT NOT NULL
 , gift_rowid INT NOT NULL
-, UNIQUE(change_rowid, gift_rowid)
-, CONSTRAINT atom_fk FOREIGN KEY (change_rowid) REFERENCES change_mstr (rowid)
-, CONSTRAINT change_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
+, UNIQUE(delta_rowid, gift_rowid)
+, CONSTRAINT atom_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
 )
 ;"""
-    assert example_sqlstr == get_change2gift_table_create_sqlstr()
+    assert example_sqlstr == get_delta2gift_table_create_sqlstr()
 
 
 def test_get_gift2owner_table_create_sqlstr_ReturnsCorrectStr():
@@ -81,7 +81,7 @@ CREATE TABLE gift2owner
   gift_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
 , UNIQUE(gift_rowid, owner_rowid)
-, CONSTRAINT change_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""

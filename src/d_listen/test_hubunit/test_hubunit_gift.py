@@ -1,6 +1,6 @@
 from src._instrument.file import open_file, dir_files, delete_dir, set_dir, save_file
 from src._road.jaar_config import init_gift_id, get_test_fiscal_id as fiscal_id
-from src.change.gift import giftunit_shop, get_json_filename
+from src.delta.gift import giftunit_shop, get_json_filename
 from src.d_listen.hubunit import hubunit_shop
 from src.d_listen.examples.example_listen_atoms import get_atom_example_ideaunit_knee
 from src.d_listen.examples.example_listen_gifts import (
@@ -84,7 +84,7 @@ def test_HubUnit_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     assert sue_hubunit.gift_file_exists(two_int)
     assert sue_hubunit.gift_file_exists(six_int) is False
     two_file_json = open_file(sue_hubunit.gifts_dir(), two_filename)
-    assert two_file_json == sue_giftunit.get_changemetric_json()
+    assert two_file_json == sue_giftunit.get_deltametric_json()
 
 
 def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_atoms_dir_IsWrong(
@@ -363,7 +363,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
     )
-    sue_giftunit._changeunit.set_atomunit(get_atom_example_ideaunit_knee())
+    sue_giftunit._deltaunit.set_atomunit(get_atom_example_ideaunit_knee())
     zero_int = 0
     assert sue_hubunit.gift_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
