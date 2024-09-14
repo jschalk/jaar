@@ -1,7 +1,7 @@
 {
     "atom_categorys": ["bud_ideaunit"],
     "attributes": {
-        "real_id": {"column_order": 0},
+        "fiscal_id": {"column_order": 0},
         "owner_id": {"column_order": 1},
         "parent_road": {"column_order": 2,"sort_order": 1},
         "label": {"column_order": 3,"sort_order": 2},

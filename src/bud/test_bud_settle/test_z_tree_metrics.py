@@ -83,7 +83,7 @@ def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
 def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
     # ESTABLISH
     nia_str = "Nia"
-    nia_bud = budunit_shop(nia_str, _tally=10)
+    nia_bud = budunit_shop(nia_str, tally=10)
     weekdays = "weekdays"
     nia_bud.set_l1_idea(ideaunit_shop(weekdays, mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
@@ -100,7 +100,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaRoadUnit():
     # WHEN/THEN
     train_road = create_road_from_nodes(
         [
-            yao_bud._real_id,
+            yao_bud._fiscal_id,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Prevention and Reporting guildlines",

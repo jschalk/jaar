@@ -7,7 +7,7 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBudUnit():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     assert not root_idea.begin
     assert not root_idea.close
     assert not root_idea._gogo_calc
@@ -26,7 +26,7 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_UnitDoe
 def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_DoesNotErrorWhenNoMathNodes():
     # ESTABLISH
     yao_bud = get_budunit_with_4_levels_and_2reasons()
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     assert not root_idea._gogo_calc
 
     # WHEM
@@ -41,9 +41,9 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_SimpleN
     yao_bud = budunit_shop("Yao")
     time0_begin = 7
     time0_close = 31
-    yao_bud.edit_idea_attr(yao_bud._real_id, begin=time0_begin, close=time0_close)
+    yao_bud.edit_idea_attr(yao_bud._fiscal_id, begin=time0_begin, close=time0_close)
     yao_bud._init_idea_tree_walk()
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     assert root_idea.begin == time0_begin
     assert root_idea.close == time0_close
     assert not root_idea._gogo_calc
@@ -66,12 +66,12 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     time0_close = 21
     time0_denom = 3
     yao_bud.edit_idea_attr(
-        yao_bud._real_id,
+        yao_bud._fiscal_id,
         begin=time0_begin,
         close=time0_close,
         denom=time0_denom,
     )
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert root_idea.begin == time0_begin
     assert root_idea.close == time0_close
@@ -99,13 +99,13 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     time0_numor = 7
     time0_denom = 3
     yao_bud.edit_idea_attr(
-        yao_bud._real_id,
+        yao_bud._fiscal_id,
         begin=time0_begin,
         close=time0_close,
         numor=time0_numor,
         denom=time0_denom,
     )
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert root_idea.begin == time0_begin
     assert root_idea.close == time0_close
@@ -133,13 +133,13 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     time0_close = 18
     time0_addin = 7
     yao_bud.edit_idea_attr(
-        yao_bud._real_id,
+        yao_bud._fiscal_id,
         begin=time0_begin,
         close=time0_close,
         addin=time0_addin,
     )
     yao_bud._init_idea_tree_walk()
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     assert root_idea.begin == time0_begin
     assert root_idea.close == time0_close
     assert root_idea.addin == time0_addin
@@ -166,14 +166,14 @@ def test_BudUnit_set_ideaunits_range_SetsInitialIdea_gogo_calc_stop_calc_NodeWit
     time0_denom = 3
     time0_addin = 60
     yao_bud.edit_idea_attr(
-        yao_bud._real_id,
+        yao_bud._fiscal_id,
         begin=time0_begin,
         close=time0_close,
         denom=time0_denom,
         addin=time0_addin,
     )
     yao_bud._init_idea_tree_walk()
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     assert root_idea.begin == time0_begin
     assert root_idea.close == time0_close
     assert root_idea.denom == time0_denom
@@ -207,7 +207,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Simp
     time1_road = yao_bud.make_road(time0_road, time1_str)
     yao_bud.set_idea(ideaunit_shop(time1_str), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
@@ -247,7 +247,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     time1_road = yao_bud.make_road(time0_road, time1_str)
     yao_bud.set_idea(ideaunit_shop(time1_str, denom=time1_denom), time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
@@ -287,7 +287,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     temp_idea = ideaunit_shop(time1_str, numor=time1_numor, denom=time1_denom)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
@@ -326,7 +326,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     temp_idea = ideaunit_shop(time1_str, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
@@ -369,7 +369,7 @@ def test_BudUnit_set_ideaunits_range_Sets2LevelsDescendentIdea_gogo_calc_stop_ca
     x_time2_idea = ideaunit_shop(time2_str, addin=time2_addin)
     yao_bud.set_idea(x_time2_idea, time1_road)
     time2_idea = yao_bud.get_idea_obj(time2_road)
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
@@ -412,7 +412,7 @@ def test_BudUnit_set_ideaunits_range_SetsDescendentIdea_gogo_calc_stop_calc_Node
     temp_idea = ideaunit_shop(time1_str, denom=time1_denom, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_road)
     time1_idea = yao_bud.get_idea_obj(time1_road)
-    root_idea = yao_bud.get_idea_obj(yao_bud._real_id)
+    root_idea = yao_bud.get_idea_obj(yao_bud._fiscal_id)
     yao_bud._init_idea_tree_walk()
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc

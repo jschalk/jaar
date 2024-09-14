@@ -29,7 +29,7 @@ from src._road.road import (
     get_terminus_node,
     get_root_node_from_road,
     get_ancestor_roads,
-    get_default_real_id_roadnode,
+    get_default_fiscal_id_roadnode,
     get_all_road_nodes,
     get_forefather_roads,
     create_road,
@@ -40,7 +40,7 @@ from src._road.road import (
     OwnerID,
     AcctID,
     HealerID,
-    RealID,
+    FiscalID,
     roadunit_valid_dir_path,
 )
 from src.bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
@@ -103,21 +103,21 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    _real_id: RealID = None
+    _fiscal_id: FiscalID = None
     _owner_id: OwnerID = None
     _last_gift_id: int = None
-    _tally: float = None
+    tally: float = None
     _accts: dict[AcctID, AcctUnit] = None
     _idearoot: IdeaUnit = None
-    _max_tree_traverse: int = None
+    max_tree_traverse: int = None
     _road_delimiter: str = None
-    _fund_pool: FundNum = None
-    _fund_coin: FundCoin = None
-    _bit: BitNum = None
-    _penny: PennyNum = None
-    _monetary_desc: str = None
-    _credor_respect: int = None
-    _debtor_respect: int = None
+    fund_pool: FundNum = None
+    fund_coin: FundCoin = None
+    bit: BitNum = None
+    penny: PennyNum = None
+    monetary_desc: str = None
+    credor_respect: int = None
+    debtor_respect: int = None
     _originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _idea_dict: dict[RoadUnit, IdeaUnit] = None
@@ -145,10 +145,10 @@ class BudUnit:
         self._last_gift_id = x_last_gift_id
 
     def set_monetary_desc(self, x_monetary_desc: str):
-        self._monetary_desc = x_monetary_desc
+        self.monetary_desc = x_monetary_desc
 
     def set_fund_pool(self, x_fund_pool):
-        self._fund_pool = validate_fund_pool(x_fund_pool)
+        self.fund_pool = validate_fund_pool(x_fund_pool)
 
     def set_acct_respect(self, x_acct_pool: int):
         self.set_credor_respect(x_acct_pool)
@@ -156,16 +156,16 @@ class BudUnit:
         self.set_fund_pool(x_acct_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
-        if valid_finance_ratio(new_credor_respect, self._bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
+        if valid_finance_ratio(new_credor_respect, self.bit) is False:
+            exception_str = f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.bit}'"
             raise _bit_RatioException(exception_str)
-        self._credor_respect = new_credor_respect
+        self.credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
-        if valid_finance_ratio(new_debtor_respect, self._bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
+        if valid_finance_ratio(new_debtor_respect, self.bit) is False:
+            exception_str = f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.bit}'"
             raise _bit_RatioException(exception_str)
-        self._debtor_respect = new_debtor_respect
+        self.debtor_respect = new_debtor_respect
 
     def make_road(
         self,
@@ -177,10 +177,10 @@ class BudUnit:
             terminus_node=terminus_node,
             delimiter=self._road_delimiter,
         )
-        return road_validate(x_road, self._road_delimiter, self._real_id)
+        return road_validate(x_road, self._road_delimiter, self._fiscal_id)
 
     def make_l1_road(self, l1_node: RoadNode):
-        return self.make_road(self._real_id, l1_node)
+        return self.make_road(self._fiscal_id, l1_node)
 
     def set_road_delimiter(self, new_road_delimiter: str):
         self.settle_bud()
@@ -195,13 +195,13 @@ class BudUnit:
             for x_idea in self._idea_dict.values():
                 x_idea.set_road_delimiter(self._road_delimiter)
 
-    def set_real_id(self, real_id: str):
-        old_real_id = copy_deepcopy(self._real_id)
+    def set_fiscal_id(self, fiscal_id: str):
+        old_fiscal_id = copy_deepcopy(self._fiscal_id)
         self.settle_bud()
         for idea_obj in self._idea_dict.values():
-            idea_obj._bud_real_id = real_id
-        self._real_id = real_id
-        self.edit_idea_label(old_road=old_real_id, new_label=self._real_id)
+            idea_obj._bud_fiscal_id = fiscal_id
+        self._fiscal_id = fiscal_id
+        self.edit_idea_label(old_road=old_fiscal_id, new_label=self._fiscal_id)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -210,7 +210,7 @@ class BudUnit:
                 f"set_max_tree_traverse: '{x_int}' must be number that is 2 or greater"
             )
         else:
-            self._max_tree_traverse = x_int
+            self.max_tree_traverse = x_int
 
     def _get_relevant_roads(self, roads: dict[RoadUnit,]) -> set[RoadUnit]:
         to_evaluate_list = []
@@ -330,8 +330,8 @@ class BudUnit:
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
         if x_acctunit._road_delimiter != self._road_delimiter:
             x_acctunit._road_delimiter = self._road_delimiter
-        if x_acctunit._bit != self._bit:
-            x_acctunit._bit = self._bit
+        if x_acctunit._bit != self.bit:
+            x_acctunit._bit = self.bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
             x_acctunit.add_membership(x_acctunit.acct_id)
         self._accts[x_acctunit.acct_id] = x_acctunit
@@ -371,7 +371,7 @@ class BudUnit:
         return x_dict
 
     def set_groupbox(self, x_groupbox: GroupBox):
-        x_groupbox._fund_coin = self._fund_coin
+        x_groupbox._fund_coin = self.fund_coin
         self._groupboxs[x_groupbox.group_id] = x_groupbox
 
     def groupbox_exists(self, group_id: GroupID) -> bool:
@@ -398,7 +398,7 @@ class BudUnit:
         return all_group_ids.difference(x_acctunit_group_ids)
 
     def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
-        if self._real_id == idea_road:
+        if self._fiscal_id == idea_road:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where idearoot is rangeroot"
             )
@@ -429,7 +429,7 @@ class BudUnit:
             self._create_ideakid_if_empty(road=pick)
 
         fact_base_idea = self.get_idea_obj(base)
-        x_idearoot = self.get_idea_obj(self._real_id)
+        x_idearoot = self.get_idea_obj(self._fiscal_id)
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_idearoot.factunits.get(base).fopen
@@ -573,7 +573,7 @@ class BudUnit:
     ):
         self.set_idea(
             idea_kid=idea_kid,
-            parent_road=self._real_id,
+            parent_road=self._fiscal_id,
             create_missing_ideas=create_missing_ideas,
             filter_out_missing_awardlinks_group_ids=filter_out_missing_awardlinks_group_ids,
             adoptees=adoptees,
@@ -601,10 +601,10 @@ class BudUnit:
             raise InvalidBudException(exception_str)
 
         idea_kid._road_delimiter = self._road_delimiter
-        if idea_kid._bud_real_id != self._real_id:
-            idea_kid._bud_real_id = self._real_id
-        if idea_kid._fund_coin != self._fund_coin:
-            idea_kid._fund_coin = self._fund_coin
+        if idea_kid._bud_fiscal_id != self._fiscal_id:
+            idea_kid._bud_fiscal_id = self._fiscal_id
+        if idea_kid._fund_coin != self.fund_coin:
+            idea_kid._fund_coin = self.fund_coin
         if not filter_out_missing_awardlinks_group_ids:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_road(parent_road=parent_road)
@@ -879,8 +879,8 @@ class BudUnit:
 
     def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self.fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self.fund_coin)
         for x_acct_id, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
         for x_acct_id, acct_fund_take in fund_take_allot.items():
@@ -888,8 +888,8 @@ class BudUnit:
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self._fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self._fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self.fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self.fund_coin)
         for x_acct_id, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_id).add_fund_agenda_give(acct_fund_give)
         for x_acct_id, acct_fund_take in fund_take_allot.items():
@@ -1012,7 +1012,7 @@ class BudUnit:
         return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
 
     def _init_idea_tree_walk(self):
-        idea_list = [self.get_idea_obj(self._real_id)]
+        idea_list = [self.get_idea_obj(self._fiscal_id)]
         while idea_list != []:
             x_idea = idea_list.pop()
             x_idea.clear_gogo_calc_stop_calc()
@@ -1111,7 +1111,7 @@ class BudUnit:
         self._idearoot.clear_awardlines()
         tt_count = self._tree_traverse_count
         self._idearoot.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
-        self._idearoot.set_fund_attr(0, self._fund_pool, self._fund_pool)
+        self._idearoot.set_fund_attr(0, self.fund_pool, self.fund_pool)
         self._idearoot.set_awardheirs_fund_give_fund_take()
         self._idearoot.set_ancestor_pledge_count(0, False)
         self._idearoot.clear_descendant_pledge_count()
@@ -1143,7 +1143,7 @@ class BudUnit:
         idea_kid.clear_awardlines()
         tt_count = self._tree_traverse_count
         idea_kid.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
-        idea_kid.set_fund_attr(fund_onset, fund_cease, self._fund_pool)
+        idea_kid.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
         idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
         idea_kid.clear_descendant_pledge_count()
@@ -1177,11 +1177,11 @@ class BudUnit:
                 self.set_groupbox(x_groupbox)
 
     def _set_respect_ledgers(self):
-        self._credor_respect = validate_respect_num(self._credor_respect)
-        self._debtor_respect = validate_respect_num(self._debtor_respect)
+        self.credor_respect = validate_respect_num(self.credor_respect)
+        self.debtor_respect = validate_respect_num(self.debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
-        debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
+        credor_allot = allot_scale(credor_ledger, self.credor_respect, self.bit)
+        debtor_allot = allot_scale(debtor_ledger, self.debtor_respect, self.bit)
         for x_acct_id, acct_credor_pool in credor_allot.items():
             self.get_acct(x_acct_id).set_credor_pool(acct_credor_pool)
         for x_acct_id, acct_debtor_pool in debtor_allot.items():
@@ -1210,7 +1210,7 @@ class BudUnit:
         self._set_ideaunits_range()
         self._set_respect_ledgers()
 
-        max_count = self._max_tree_traverse
+        max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
             self._set_all_ideaunits_active_status_distribute_funds(econ_exceptions)
         self._after_all_tree_traverses_set_cred_debt()
@@ -1228,7 +1228,7 @@ class BudUnit:
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
-        alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self._fund_coin)
+        alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self.fund_coin)
         x_idearoot_kid_fund_onset = None
         x_idearoot_kid_fund_cease = None
 
@@ -1256,7 +1256,7 @@ class BudUnit:
             kids_items = parent_idea._kids.items()
             x_ledger = {x_road: idea_kid.mass for x_road, idea_kid in kids_items}
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
-            alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self._fund_coin)
+            alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_coin)
 
             if parent_idea._kids is not None:
                 fund_onset = None
@@ -1379,21 +1379,21 @@ class BudUnit:
         x_dict = {
             "_accts": self.get_acctunits_dict(),
             "_originunit": self._originunit.get_dict(),
-            "_tally": self._tally,
-            "_fund_pool": self._fund_pool,
-            "_fund_coin": self._fund_coin,
-            "_bit": self._bit,
-            "_penny": self._penny,
+            "tally": self.tally,
+            "fund_pool": self.fund_pool,
+            "fund_coin": self.fund_coin,
+            "bit": self.bit,
+            "penny": self.penny,
             "_owner_id": self._owner_id,
-            "_real_id": self._real_id,
-            "_max_tree_traverse": self._max_tree_traverse,
+            "_fiscal_id": self._fiscal_id,
+            "max_tree_traverse": self.max_tree_traverse,
             "_road_delimiter": self._road_delimiter,
             "_idearoot": self._idearoot.get_dict(),
         }
-        if self._credor_respect is not None:
-            x_dict["_credor_respect"] = self._credor_respect
-        if self._debtor_respect is not None:
-            x_dict["_debtor_respect"] = self._debtor_respect
+        if self.credor_respect is not None:
+            x_dict["credor_respect"] = self.credor_respect
+        if self.debtor_respect is not None:
+            x_dict["debtor_respect"] = self.debtor_respect
         if self._last_gift_id is not None:
             x_dict["_last_gift_id"] = self._last_gift_id
 
@@ -1421,32 +1421,32 @@ class BudUnit:
 
 def budunit_shop(
     _owner_id: OwnerID = None,
-    _real_id: RealID = None,
+    _fiscal_id: FiscalID = None,
     _road_delimiter: str = None,
-    _fund_pool: FundNum = None,
-    _fund_coin: FundCoin = None,
-    _bit: BitNum = None,
-    _penny: PennyNum = None,
-    _tally: float = None,
+    fund_pool: FundNum = None,
+    fund_coin: FundCoin = None,
+    bit: BitNum = None,
+    penny: PennyNum = None,
+    tally: float = None,
 ) -> BudUnit:
     _owner_id = "" if _owner_id is None else _owner_id
-    _real_id = get_default_real_id_roadnode() if _real_id is None else _real_id
+    _fiscal_id = get_default_fiscal_id_roadnode() if _fiscal_id is None else _fiscal_id
     x_bud = BudUnit(
         _owner_id=_owner_id,
-        _tally=get_1_if_None(_tally),
-        _real_id=_real_id,
+        tally=get_1_if_None(tally),
+        _fiscal_id=_fiscal_id,
         _accts=get_empty_dict_if_none(None),
         _groupboxs={},
         _idea_dict=get_empty_dict_if_none(None),
         _econ_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _credor_respect=validate_respect_num(),
-        _debtor_respect=validate_respect_num(),
-        _fund_pool=validate_fund_pool(_fund_pool),
-        _fund_coin=default_fund_coin_if_none(_fund_coin),
-        _bit=default_bit_if_none(_bit),
-        _penny=default_penny_if_none(_penny),
+        credor_respect=validate_respect_num(),
+        debtor_respect=validate_respect_num(),
+        fund_pool=validate_fund_pool(fund_pool),
+        fund_coin=default_fund_coin_if_none(fund_coin),
+        bit=default_bit_if_none(bit),
+        penny=default_penny_if_none(penny),
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
         _sum_healerlink_share=get_0_if_None(),
@@ -1458,9 +1458,9 @@ def budunit_shop(
         _root=True,
         _uid=1,
         _level=0,
-        _bud_real_id=x_bud._real_id,
+        _bud_fiscal_id=x_bud._fiscal_id,
         _road_delimiter=x_bud._road_delimiter,
-        _fund_coin=x_bud._fund_coin,
+        _fund_coin=x_bud.fund_coin,
         _parent_road="",
     )
     x_bud.set_max_tree_traverse(3)
@@ -1476,20 +1476,20 @@ def get_from_json(x_bud_json: str) -> BudUnit:
 def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud = budunit_shop()
     x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
-    x_bud._tally = obj_from_bud_dict(bud_dict, "_tally")
-    x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "_max_tree_traverse"))
-    x_bud._real_id = obj_from_bud_dict(bud_dict, "_real_id")
-    x_bud._idearoot._label = obj_from_bud_dict(bud_dict, "_real_id")
+    x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
+    x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
+    x_bud._fiscal_id = obj_from_bud_dict(bud_dict, "_fiscal_id")
+    x_bud._idearoot._label = obj_from_bud_dict(bud_dict, "_fiscal_id")
     bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")
     x_bud._road_delimiter = default_road_delimiter_if_none(bud_road_delimiter)
-    x_bud._fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "_fund_pool"))
-    x_bud._fund_coin = default_fund_coin_if_none(
-        obj_from_bud_dict(bud_dict, "_fund_coin")
+    x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
+    x_bud.fund_coin = default_fund_coin_if_none(
+        obj_from_bud_dict(bud_dict, "fund_coin")
     )
-    x_bud._bit = default_bit_if_none(obj_from_bud_dict(bud_dict, "_bit"))
-    x_bud._penny = default_penny_if_none(obj_from_bud_dict(bud_dict, "_penny"))
-    x_bud._credor_respect = obj_from_bud_dict(bud_dict, "_credor_respect")
-    x_bud._debtor_respect = obj_from_bud_dict(bud_dict, "_debtor_respect")
+    x_bud.bit = default_bit_if_none(obj_from_bud_dict(bud_dict, "bit"))
+    x_bud.penny = default_penny_if_none(obj_from_bud_dict(bud_dict, "penny"))
+    x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
+    x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
     x_bud._last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
     x_road_delimiter = x_bud._road_delimiter
     x_accts = obj_from_bud_dict(bud_dict, "_accts", x_road_delimiter).values()
@@ -1504,7 +1504,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     idearoot_dict = bud_dict.get("_idearoot")
     x_bud._idearoot = ideaunit_shop(
         _root=True,
-        _label=x_bud._real_id,
+        _label=x_bud._fiscal_id,
         _parent_road="",
         _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
@@ -1524,8 +1524,8 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
-        _bud_real_id=x_bud._real_id,
-        _fund_coin=default_fund_coin_if_none(x_bud._fund_coin),
+        _bud_fiscal_id=x_bud._fiscal_id,
+        _fund_coin=default_fund_coin_if_none(x_bud.fund_coin),
     )
     create_idearoot_kids_from_dict(x_bud, idearoot_dict)
 
@@ -1535,7 +1535,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
     parent_road_str = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
     for x_dict in get_obj_from_idea_dict(idearoot_dict, "_kids").values():
-        x_dict[parent_road_str] = x_bud._real_id
+        x_dict[parent_road_str] = x_bud._fiscal_id
         to_evaluate_idea_dicts.append(x_dict)
 
     while to_evaluate_idea_dicts != []:

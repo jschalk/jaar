@@ -27,7 +27,7 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
 def test_BudUnit_set_acct_DoesNotSet_acct_id_membership():
     # ESTABLISH
     x_bit = 5
-    yao_bud = budunit_shop("Yao", _bit=x_bit)
+    yao_bud = budunit_shop("Yao", bit=x_bit)
     zia_str = "Zia"
 
     # WHEN
@@ -40,7 +40,7 @@ def test_BudUnit_set_acct_DoesNotSet_acct_id_membership():
 def test_BudUnit_set_acct_DoesSet_acct_id_membership():
     # ESTABLISH
     x_bit = 5
-    yao_bud = budunit_shop("Yao", _bit=x_bit)
+    yao_bud = budunit_shop("Yao", bit=x_bit)
     zia_str = "Zia"
 
     # WHEN
@@ -56,7 +56,7 @@ def test_BudUnit_set_acct_DoesSet_acct_id_membership():
 def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
     # ESTABLISH
     x_bit = 5
-    yao_bud = budunit_shop("Yao", _bit=x_bit)
+    yao_bud = budunit_shop("Yao", bit=x_bit)
     zia_str = "Zia"
     ohio_str = ";Ohio"
     zia_ohio_credit_w = 33
@@ -79,7 +79,7 @@ def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
 def test_BudUnit_add_acctunit_CorrectlySets_accts():
     # ESTABLISH
     x_bit = 6
-    yao_bud = budunit_shop("Yao", _bit=x_bit)
+    yao_bud = budunit_shop("Yao", bit=x_bit)
     zia_str = "Zia"
     sue_str = "Sue"
     xio_str = "Xio"

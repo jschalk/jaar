@@ -2,27 +2,29 @@ from src._instrument.file import open_file, create_file_path
 from src._instrument.python_tool import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
-    create_filtered_csv_dict,
+    create_l2nested_csv_dict,
     create_sorted_concatenated_str,
     get_positional_dict,
+    add_headers_to_csv,
 )
-from src._road.road import RealID, OwnerID
+from src._road.road import FiscalID, OwnerID
 from src.bud.bud import BudUnit
-from src.gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
-from src.gift.atom_config import real_id_str, owner_id_str, pledge_str
-from src.gift.change import changeunit_shop, get_filtered_changeunit, ChangeUnit
-from src.gift.gift import giftunit_shop
-from src.listen.hubunit import hubunit_shop
+from src.change.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
+from src.change.atom_config import fiscal_id_str, owner_id_str, pledge_str
+from src.change.change import (
+    changeunit_shop,
+    get_filtered_changeunit,
+    ChangeUnit,
+    sift_changeunit,
+)
+from src.change.gift import giftunit_shop
+from src.d_listen.hubunit import hubunit_shop
 from src.stone.stone_config import (
-    get_stone_formats_dir,
     get_stoneref_dict,
     atom_categorys_str,
     attributes_str,
     column_order_str,
     sort_order_str,
-    stone_format_00020_bud_acct_membership_v0_0_0,
-    stone_format_00003_ideaunit_v0_0_0,
-    stone_format_00021_bud_acctunit_v0_0_0,
     get_stone_format_headers,
 )
 from pandas import DataFrame, read_csv
@@ -91,10 +93,10 @@ def create_stone_df(x_budunit: BudUnit, stone_name: str) -> DataFrame:
     x_changeunit = changeunit_shop()
     x_changeunit.add_all_atomunits(x_budunit)
     x_stoneref = get_stoneref(stone_name)
-    x_real_id = x_budunit._real_id
+    x_fiscal_id = x_budunit._fiscal_id
     x_owner_id = x_budunit._owner_id
     sorted_atomunits = _get_sorted_atom_insert_atomunits(x_changeunit, x_stoneref)
-    d2_list = _create_d2_list(sorted_atomunits, x_stoneref, x_real_id, x_owner_id)
+    d2_list = _create_d2_list(sorted_atomunits, x_stoneref, x_fiscal_id, x_owner_id)
     d2_list = _change_all_pledge_values(d2_list, x_stoneref)
     x_stone = _generate_stone_dataframe(d2_list, stone_name)
     sorting_columns = x_stoneref.get_headers_list()
@@ -113,15 +115,15 @@ def _get_sorted_atom_insert_atomunits(
 def _create_d2_list(
     sorted_atomunits: list[AtomUnit],
     x_stoneref: StoneRef,
-    x_real_id: RealID,
+    x_fiscal_id: FiscalID,
     x_owner_id: OwnerID,
 ):
     d2_list = []
     for x_atomunit in sorted_atomunits:
         d1_list = []
         for x_stonecolumn in x_stoneref.get_headers_list():
-            if x_stonecolumn == real_id_str():
-                d1_list.append(x_real_id)
+            if x_stonecolumn == fiscal_id_str():
+                d1_list.append(x_fiscal_id)
             elif x_stonecolumn == owner_id_str():
                 d1_list.append(x_owner_id)
             else:
@@ -165,7 +167,7 @@ def get_csv_stoneref(title_row: list[str]) -> StoneRef:
     return get_stoneref(x_stonename)
 
 
-def create_changeunit(x_csv: str) -> ChangeUnit:
+def make_changeunit(x_csv: str) -> ChangeUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_stoneref = get_csv_stoneref(title_row)
 
@@ -183,31 +185,39 @@ def create_changeunit(x_csv: str) -> ChangeUnit:
     return x_changeunit
 
 
-def load_stone_csv(reals_dir: str, x_file_dir: str, x_filename: str):
-    x_csv = open_file(x_file_dir, x_filename)
-    title_row, headerless_csv = extract_csv_headers(x_csv)
-    x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
-
-    for row in x_reader:
-        x_real_id = row[0]
-        x_owner_id = row[1]
-
-    x_hubunit = hubunit_shop(reals_dir, real_id=x_real_id, owner_id=x_owner_id)
+def _load_individual_stone_csv(
+    complete_csv: str, fiscals_dir: str, x_fiscal_id: FiscalID, x_owner_id: OwnerID
+):
+    x_hubunit = hubunit_shop(fiscals_dir, x_fiscal_id, x_owner_id)
     x_hubunit.initialize_gift_voice_files()
-    x_changeunit = create_changeunit(x_csv)
-    x_giftunit = giftunit_shop(x_owner_id, x_real_id)
+    x_voice = x_hubunit.get_voice_bud()
+    x_changeunit = make_changeunit(complete_csv)
+    # x_changeunit = sift_changeunit(x_changeunit, x_voice)
+    x_giftunit = giftunit_shop(x_owner_id, x_fiscal_id)
     x_giftunit.set_changeunit(x_changeunit)
     x_hubunit.save_gift_file(x_giftunit)
     x_hubunit._create_voice_from_gifts()
 
 
-def get_csv_real_id_owner_id_metrics(
+def load_stone_csv(fiscals_dir: str, x_file_dir: str, x_filename: str):
+    x_csv = open_file(x_file_dir, x_filename)
+    headers_list, headerless_csv = extract_csv_headers(x_csv)
+    nested_csv = fiscal_id_owner_id_nested_csv_dict(headerless_csv, delimiter=",")
+    for x_fiscal_id, fiscal_dict in nested_csv.items():
+        for x_owner_id, owner_csv in fiscal_dict.items():
+            complete_csv = add_headers_to_csv(headers_list, owner_csv)
+            _load_individual_stone_csv(
+                complete_csv, fiscals_dir, x_fiscal_id, x_owner_id
+            )
+
+
+def get_csv_fiscal_id_owner_id_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[RealID, dict[OwnerID, int]]:
+) -> dict[FiscalID, dict[OwnerID, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
-def real_id_owner_id_filtered_csv_dict(
+def fiscal_id_owner_id_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[RealID, dict[OwnerID, str]]:
-    return create_filtered_csv_dict(headerless_csv, delimiter)
+) -> dict[FiscalID, dict[OwnerID, str]]:
+    return create_l2nested_csv_dict(headerless_csv, delimiter)

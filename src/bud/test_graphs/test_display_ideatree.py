@@ -23,7 +23,7 @@ def test_display_ideatree_Scenario0(graphics_bool):
     a_bud = get_budunit_with_4_levels()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
+    print(f"Bud {a_bud._fiscal_id}: Nodes ({len(a_bud._idea_dict)})")
 
     # WHEN / THEN
     x_fig = display_ideatree(a_bud, graphics_bool)
@@ -38,7 +38,7 @@ def test_display_ideatree_Scenario1_shows_Tasks(graphics_bool):
     a_bud = get_budunit_laundry_example1()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud._real_id}: Nodes ({len(a_bud._idea_dict)})")
+    print(f"Bud {a_bud._fiscal_id}: Nodes ({len(a_bud._idea_dict)})")
 
     # WHEN / THEN
     display_ideatree(a_bud, mode="Task", graphics_bool=graphics_bool)

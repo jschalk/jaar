@@ -54,7 +54,7 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
 
 def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     # ESTABLISH
-    yao_budunit = budunit_shop("Yao", _tally=10)
+    yao_budunit = budunit_shop("Yao", tally=10)
 
     auto_str = "auto"
     auto_road = yao_budunit.make_l1_road(auto_str)
@@ -147,7 +147,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario0():
     sue_bud.settle_bud()
 
     # THEN
-    print(f"{sue_bud._fund_pool=}")
+    print(f"{sue_bud.fund_pool=}")
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio == 0.5
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio == 0.5
     assert sue_bud.get_idea_obj(status_road)._fund_ratio == 0.0
@@ -199,7 +199,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario1():
     sue_bud.settle_bud()
 
     # THEN
-    print(f"{sue_bud._fund_pool=}")
+    print(f"{sue_bud.fund_pool=}")
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio == 0.5
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio == 0.25
     assert sue_bud.get_idea_obj(status_road)._fund_ratio == 0.25
@@ -254,7 +254,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFund
     sue_budunit.settle_bud()
 
     # THEN
-    print(f"{sue_budunit._fund_pool=}")
+    print(f"{sue_budunit.fund_pool=}")
     clean_fund_ratio = 0.2
     assert sue_budunit.get_idea_obj(casa_road)._fund_ratio == 1
     assert sue_budunit.get_idea_obj(swim_road)._fund_ratio == 0.8
@@ -365,7 +365,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_ta
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    x_idearoot = sue_bud.get_idea_obj(sue_bud._real_id)
+    x_idearoot = sue_bud.get_idea_obj(sue_bud._fiscal_id)
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
@@ -544,7 +544,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fun
     x_bud.settle_bud()
 
     # THEN
-    x_idearoot = x_bud.get_idea_obj(x_bud._real_id)
+    x_idearoot = x_bud.get_idea_obj(x_bud._fiscal_id)
     with pytest_raises(Exception) as excinfo:
         x_idearoot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -607,7 +607,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # THEN
     print(f"{idea_dict.keys()=}")
-    idea_bob = idea_dict.get(sue_bud._real_id)
+    idea_bob = idea_dict.get(sue_bud._fiscal_id)
     assert len(idea_bob._awardheirs) == 3
 
     bheir_yao = idea_bob._awardheirs.get(yao_str)
@@ -655,9 +655,9 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=sue_awardlink)
-    yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=bob_awardlink)
-    yao_bud.edit_idea_attr(yao_bud._real_id, awardlink=zia_awardlink)
+    yao_bud.edit_idea_attr(yao_bud._fiscal_id, awardlink=sue_awardlink)
+    yao_bud.edit_idea_attr(yao_bud._fiscal_id, awardlink=bob_awardlink)
+    yao_bud.edit_idea_attr(yao_bud._fiscal_id, awardlink=zia_awardlink)
 
     sue_acctunit = yao_bud.get_acct(sue_str)
     bob_acctunit = yao_bud.get_acct(bob_str)

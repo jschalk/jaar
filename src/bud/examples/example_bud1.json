@@ -560,7 +560,7 @@
             "debtit_belief": 1
         }
     },
-    "_bit": 1,
+    "bit": 1,
     "_idearoot": {
         "factunits": {
             "music;day_hour": {
@@ -4621,12 +4621,12 @@
         "_uid": 1
     },
     "mass": 1,
-    "_max_tree_traverse": 2,
+    "max_tree_traverse": 2,
     "_originunit": {
         "_originholds": {}
     },
     "_owner_id": "Yao",
-    "_penny": 1,
-    "_real_id": "music",
+    "penny": 1,
+    "_fiscal_id": "music",
     "_road_delimiter": ";"
 }

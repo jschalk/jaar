@@ -1,21 +1,17 @@
 from src._instrument.python_tool import get_json_from_dict
 from src._instrument.file import save_file
 from src.bud.bud_tool import bud_ideaunit_str
-from src.gift.atom_config import (
+from src.change.atom_config import (
     parent_road_str,
     label_str,
     gogo_want_str,
-    real_id_str,
+    fiscal_id_str,
     owner_id_str,
     column_order_str,
 )
 from src.stone.formatbuilder import create_categorys_stone_format_dict
-from src.stone.stone import (
-    atom_categorys_str,
-    attributes_str,
-    sort_order_str,
-    get_stone_formats_dir,
-)
+from src.stone.stone import atom_categorys_str, attributes_str, sort_order_str
+from src.stone.stone_config import get_stone_formats_dir
 
 
 def test_create_categorys_stone_format_dicts_ReturnObj(rebuild_bool):
@@ -31,11 +27,11 @@ def test_create_categorys_stone_format_dicts_ReturnObj(rebuild_bool):
     assert bud_ideaunit_dict.get(atom_categorys_str()) == [bud_ideaunit_str()]
     assert bud_ideaunit_dict.get(attributes_str())
     bud_ideaunit_attributes = bud_ideaunit_dict.get(attributes_str())
-    assert bud_ideaunit_attributes.get(real_id_str())
+    assert bud_ideaunit_attributes.get(fiscal_id_str())
     assert bud_ideaunit_attributes.get(owner_id_str())
-    real_id_dict = bud_ideaunit_attributes.get(real_id_str())
+    fiscal_id_dict = bud_ideaunit_attributes.get(fiscal_id_str())
     owner_id_dict = bud_ideaunit_attributes.get(owner_id_str())
-    assert real_id_dict == {column_order_str(): 0, sort_order_str(): 0}
+    assert fiscal_id_dict == {column_order_str(): 0, sort_order_str(): 0}
     assert owner_id_dict == {column_order_str(): 1, sort_order_str(): 1}
 
     assert bud_ideaunit_attributes.get(parent_road_str())

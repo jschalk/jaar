@@ -12,7 +12,7 @@ def test_BudUnit_set_idea_RaisesErrorWhen_parent_road_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     invalid_rootnode_swim_road = "swimming"
-    assert invalid_rootnode_swim_road != zia_bud._real_id
+    assert invalid_rootnode_swim_road != zia_bud._fiscal_id
     casa_str = "casa"
 
     # WHEN/THEN
@@ -69,7 +69,7 @@ def test_BudUnit_set_idea_CorrectlySetsAttr():
     assert not zia_bud._idearoot._kids.get(casa_str)
 
     # WHEN
-    zia_bud.set_idea(ideaunit_shop(casa_str), parent_road=zia_bud._real_id)
+    zia_bud.set_idea(ideaunit_shop(casa_str), parent_road=zia_bud._fiscal_id)
 
     # THEN
     print(f"{zia_bud._idearoot._kids.keys()=}")
@@ -84,7 +84,7 @@ def test_BudUnit_idea_exists_ReturnsObj():
     assert zia_bud.idea_exists(casa_road) is False
 
     # WHEN
-    zia_bud.set_idea(ideaunit_shop(casa_str), parent_road=zia_bud._real_id)
+    zia_bud.set_idea(ideaunit_shop(casa_str), parent_road=zia_bud._fiscal_id)
 
     # THEN
     assert zia_bud.idea_exists(casa_road)
@@ -203,7 +203,7 @@ def test_BudUnit_set_idea_CanCreateMissingIdeaUnits():
 def test_BudUnit_del_idea_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_road = sue_bud._real_id
+    root_road = sue_bud._fiscal_id
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -253,7 +253,7 @@ def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_idea_obj(new_sunday_road)
     new_sunday_idea = sue_bud.get_idea_obj(new_sunday_road)
-    assert new_sunday_idea._parent_road == sue_bud._real_id
+    assert new_sunday_idea._parent_road == sue_bud._fiscal_id
 
 
 def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -782,11 +782,11 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
     assert week_idea._label == week_str
 
     # WHEN
-    root_idea = sue_bud.get_idea_obj(road=sue_bud._real_id)
+    root_idea = sue_bud.get_idea_obj(road=sue_bud._fiscal_id)
 
     # THEN
     assert root_idea is not None
-    assert root_idea._label == sue_bud._real_id
+    assert root_idea._label == sue_bud._fiscal_id
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -824,7 +824,7 @@ def test_BudUnit_idea_exists_ReturnsCorrectBool():
     # WHEN/THEN
     assert sue_bud.idea_exists("") is False
     assert sue_bud.idea_exists(None) is False
-    assert sue_bud.idea_exists(sue_bud._real_id)
+    assert sue_bud.idea_exists(sue_bud._fiscal_id)
     assert sue_bud.idea_exists(cat_road)
     assert sue_bud.idea_exists(week_road)
     assert sue_bud.idea_exists(casa_road)
@@ -869,8 +869,8 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_idea = ideaunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_idea = ideaunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_idea = ideaunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_idea._parent_road = bob_budunit._real_id
-    week_idea._parent_road = bob_budunit._real_id
+    casa_idea._parent_road = bob_budunit._fiscal_id
+    week_idea._parent_road = bob_budunit._fiscal_id
     wed_idea._parent_road = week_road
     bob_budunit.set_l1_idea(casa_idea)
     bob_budunit.set_l1_idea(week_idea)
@@ -926,8 +926,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_idea = ideaunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_idea = ideaunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_idea = ideaunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_idea._parent_road = bob_budunit._real_id
-    week_idea._parent_road = bob_budunit._real_id
+    casa_idea._parent_road = bob_budunit._fiscal_id
+    week_idea._parent_road = bob_budunit._fiscal_id
     wed_idea._parent_road = week_road
     bob_budunit.set_l1_idea(casa_idea)
     bob_budunit.set_l1_idea(week_idea)

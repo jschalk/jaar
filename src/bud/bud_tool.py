@@ -202,43 +202,18 @@ def bud_idea_factunit_get_obj(
 
 
 def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) -> any:
-    if x_category == bud_acctunit_str():
-        return bud_acctunit_get_obj(x_bud, required_args)
-    elif x_category == bud_acct_membership_str():
-        return bud_acct_membership_get_obj(x_bud, required_args)
-    elif x_category == bud_ideaunit_str():
-        return bud_ideaunit_get_obj(x_bud, required_args)
-    elif x_category == bud_idea_awardlink_str():
-        return bud_idea_awardlink_get_obj(x_bud, required_args)
-    elif x_category == bud_idea_reasonunit_str():
-        return bud_idea_reasonunit_get_obj(x_bud, required_args)
-    elif x_category == bud_idea_reason_premiseunit_str():
-        return bud_idea_reason_premiseunit_get_obj(x_bud, required_args)
-    elif x_category == bud_idea_factunit_str():
-        return bud_idea_factunit_get_obj(x_bud, required_args)
+    if x_category == budunit_str():
+        return x_bud
 
-
-def bud_attr_different(
-    x_category: str, x_bud: BudUnit, required_args: dict[str, any]
-) -> bool:
-    # if x_category == budunit_str():
-    #     return budunit_exists(x_bud)
-    # elif x_category == bud_acctunit_str():
-    #     return bud_acctunit_exists(x_bud, required_args)
-    # elif x_category == bud_acct_membership_str():
-    #     return bud_acct_membership_exists(x_bud, required_args)
-    # elif x_category == bud_ideaunit_str():
-    #     return bud_ideaunit_exists(x_bud, required_args)
-    # elif x_category == bud_idea_awardlink_str():
-    #     return bud_idea_awardlink_exists(x_bud, required_args)
-    # elif x_category == bud_idea_reasonunit_str():
-    #     return bud_idea_reasonunit_exists(x_bud, required_args)
-    # elif x_category == bud_idea_reason_premiseunit_str():
-    #     return bud_idea_reason_premiseunit_exists(x_bud, required_args)
-    # elif x_category == bud_idea_teamlink_str():
-    #     return bud_idea_teamlink_exists(x_bud, required_args)
-    # elif x_category == bud_idea_healerlink_str():
-    #     return bud_idea_healerlink_exists(x_bud, required_args)
-    # elif x_category == bud_idea_factunit_str():
-    #     return bud_idea_factunit_exists(x_bud, required_args)
-    return True
+    x_categorys = {
+        bud_acctunit_str(): bud_acctunit_get_obj,
+        bud_acct_membership_str(): bud_acct_membership_get_obj,
+        bud_ideaunit_str(): bud_ideaunit_get_obj,
+        bud_idea_awardlink_str(): bud_idea_awardlink_get_obj,
+        bud_idea_reasonunit_str(): bud_idea_reasonunit_get_obj,
+        bud_idea_reason_premiseunit_str(): bud_idea_reason_premiseunit_get_obj,
+        bud_idea_factunit_str(): bud_idea_factunit_get_obj,
+    }
+    x_func = x_categorys.get(x_category)
+    if x_func:
+        return x_func(x_bud, required_args)

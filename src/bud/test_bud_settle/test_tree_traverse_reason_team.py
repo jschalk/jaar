@@ -25,7 +25,7 @@ def test_bud_idearoot_teamunit_CorrectlySets_idea_teamheir():
     x_teamunit = teamunit_shop()
 
     yao_bud = budunit_shop("Yao")
-    yao_bud.edit_idea_attr(teamunit=x_teamunit, road=yao_bud._real_id)
+    yao_bud.edit_idea_attr(teamunit=x_teamunit, road=yao_bud._fiscal_id)
     assert yao_bud._idearoot.teamunit == x_teamunit
     assert yao_bud._idearoot._teamheir is None
 
@@ -161,8 +161,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyFiltersIdea_Teamunit():
     casa_road = sue1_bud.make_l1_road(casa_str)
     swim_str = "swim"
     swim_road = sue1_bud.make_l1_road(swim_str)
-    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_road=sue1_bud._real_id)
-    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_road=sue1_bud._real_id)
+    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_road=sue1_bud._fiscal_id)
+    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_road=sue1_bud._fiscal_id)
     swim_teamunit = teamunit_shop()
     swim_teamunit.set_teamlink(group_id=xia_str)
     swim_teamunit.set_teamlink(group_id=zoa_str)
@@ -194,8 +194,8 @@ def test_BudUnit_set_idea_CorrectlyFiltersIdea_awardlinks():
     casa_road = sue1_bud.make_l1_road(casa_str)
     swim_str = "swim"
     swim_road = sue1_bud.make_l1_road(swim_str)
-    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_road=sue1_bud._real_id)
-    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_road=sue1_bud._real_id)
+    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_road=sue1_bud._fiscal_id)
+    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_road=sue1_bud._fiscal_id)
     swim_teamunit = teamunit_shop()
     swim_teamunit.set_teamlink(group_id=xia_str)
     swim_teamunit.set_teamlink(group_id=zoa_str)

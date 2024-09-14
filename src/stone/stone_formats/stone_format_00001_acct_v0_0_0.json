@@ -8,7 +8,7 @@
         "owner_id": {
             "column_order": 1
         },
-        "real_id": {
+        "fiscal_id": {
             "column_order": 0
         }
     }

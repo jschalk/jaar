@@ -1,4 +1,4 @@
-from src._road.road import get_default_real_id_roadnode as root_label, create_road
+from src._road.road import get_default_fiscal_id_roadnode as root_label, create_road
 from src.bud.group import awardheir_shop, awardlink_shop
 from src.bud.reason_idea import (
     reasonunit_shop,
