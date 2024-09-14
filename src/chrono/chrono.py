@@ -1,6 +1,6 @@
 from src._instrument.python_tool import get_0_if_None, get_dict_from_json
 from src._instrument.file import open_file
-from src._road.road import RoadUnit, RoadNode
+from src._road.road import RoadUnit
 from src.bud.idea import (
     ideaunit_shop,
     IdeaUnit,
