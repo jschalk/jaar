@@ -14,7 +14,7 @@ def temp_fiscal_dir():
 
 
 def temp_fiscals_dir():
-    return "src/keep/examples/fiscals"
+    return "src/s6_keep/examples/fiscals"
 
 
 def temp_owner_id():
