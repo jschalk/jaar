@@ -4,12 +4,12 @@ from src._road.road import (
     get_default_fiscal_id_roadnode,
     RoadUnit,
 )
-from src.d_listen.hubunit import HubUnit, hubunit_shop
+from src.listen.hubunit import HubUnit, hubunit_shop
 from pytest import fixture as pytest_fixture
 
 
 def get_codespace_listen_dir() -> str:
-    return "src/d_listen"
+    return "src/listen"
 
 
 def get_listen_examples_dir():

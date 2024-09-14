@@ -1,12 +1,12 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.d_listen.listen import (
+from src.listen.listen import (
     create_listen_basis,
     listen_to_facts_duty_job,
     listen_to_agendas_duty_job,
 )
-from src.d_listen.examples.listen_env import get_texas_hubunit, env_dir_setup_cleanup
-from src.d_listen.examples.example_listen import (
+from src.listen.examples.listen_env import get_texas_hubunit, env_dir_setup_cleanup
+from src.listen.examples.example_listen import (
     casa_str,
     cook_str,
     eat_str,

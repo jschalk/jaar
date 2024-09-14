@@ -1,6 +1,6 @@
 from src.bud.healer import healerlink_shop
 from src.bud.idea import ideaunit_shop
-from src.d_listen.hubunit import hubunit_shop
+from src.listen.hubunit import hubunit_shop
 from src.fiscal.fiscal import FiscalUnit, fiscalunit_shop
 from src.fiscal.examples.fiscal_env import get_test_fiscals_dir
 

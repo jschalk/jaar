@@ -1,6 +1,6 @@
 from src._instrument.python_tool import conditional_fig_show
-from src.d_listen.examples.example_listen_buds import get_fund_explanation_bud
-from src.d_listen.listen_graphic import (
+from src.listen.examples.example_listen_buds import get_fund_explanation_bud
+from src.listen.listen_graphic import (
     get_listen_structures0_fig,
     get_listen_structures1_fig,
     get_listen_structures2_fig,

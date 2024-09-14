@@ -1,12 +1,12 @@
 from src._instrument.file import dir_files as file_dir_files
-from src.d_listen.hubunit import hubunit_shop
-from src.d_listen.examples.example_listen_atoms import (
+from src.listen.hubunit import hubunit_shop
+from src.listen.examples.example_listen_atoms import (
     get_atom_example_factunit_knee,
     get_atom_example_ideaunit_sports,
     get_atom_example_ideaunit_ball,
     get_atom_example_ideaunit_knee,
 )
-from src.d_listen.examples.listen_env import (
+from src.listen.examples.listen_env import (
     get_listen_temp_env_dir as fiscals_dir,
     get_default_fiscal_id_roadnode as fiscal_id,
     env_dir_setup_cleanup,

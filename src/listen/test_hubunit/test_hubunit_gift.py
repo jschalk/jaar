@@ -1,16 +1,16 @@
 from src._instrument.file import open_file, dir_files, delete_dir, set_dir, save_file
 from src._road.jaar_config import init_gift_id, get_test_fiscal_id as fiscal_id
 from src.gift.gift import giftunit_shop, get_json_filename
-from src.d_listen.hubunit import hubunit_shop
-from src.d_listen.examples.example_listen_atoms import get_atom_example_ideaunit_knee
-from src.d_listen.examples.example_listen_gifts import (
+from src.listen.hubunit import hubunit_shop
+from src.listen.examples.example_listen_atoms import get_atom_example_ideaunit_knee
+from src.listen.examples.example_listen_gifts import (
     get_sue_giftunit,
     sue_1atomunits_giftunit,
     sue_2atomunits_giftunit,
     sue_3atomunits_giftunit,
     sue_4atomunits_giftunit,
 )
-from src.d_listen.examples.listen_env import (
+from src.listen.examples.listen_env import (
     env_dir_setup_cleanup,
     get_listen_temp_env_dir as env_dir,
 )

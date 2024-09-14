@@ -1,6 +1,6 @@
 from src.bud.idea import ideaunit_shop
 from src.bud.bud import budunit_shop
-from src.d_listen.listen import listen_to_speaker_agenda, create_empty_bud
+from src.listen.listen import listen_to_speaker_agenda, create_empty_bud
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 

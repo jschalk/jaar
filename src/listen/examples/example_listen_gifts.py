@@ -1,5 +1,5 @@
 from src.gift.gift import giftunit_shop, GiftUnit
-from src.d_listen.examples.example_listen_atoms import (
+from src.listen.examples.example_listen_atoms import (
     get_atom_example_factunit_knee,
     get_atom_example_ideaunit_ball,
     get_atom_example_ideaunit_knee,
