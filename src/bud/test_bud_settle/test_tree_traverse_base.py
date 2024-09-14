@@ -46,28 +46,28 @@ def test_BudUnit_clear_settle_attrs_CorrectlySetsAttrs():
 def test_BudUnit_pre_tree_traverse_attrs_CorrectlySetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    x_econ_justifed = False
+    x_keep_justifed = False
     x_sum_healerlink_share = 140
-    sue_bud._econs_justified = x_econ_justifed
-    sue_bud._econs_buildable = "swimmers"
+    sue_bud._keeps_justified = x_keep_justifed
+    sue_bud._keeps_buildable = "swimmers"
     sue_bud._sum_healerlink_share = x_sum_healerlink_share
-    sue_bud._econ_dict = {"run": "run"}
+    sue_bud._keep_dict = {"run": "run"}
     sue_bud._healers_dict = {"run": "run"}
-    assert sue_bud._econs_justified == x_econ_justifed
-    assert sue_bud._econs_buildable
+    assert sue_bud._keeps_justified == x_keep_justifed
+    assert sue_bud._keeps_buildable
     assert sue_bud._sum_healerlink_share == x_sum_healerlink_share
-    assert sue_bud._econ_dict != {}
+    assert sue_bud._keep_dict != {}
     assert sue_bud._healers_dict != {}
 
     # WHEN
     sue_bud._pre_tree_traverse_attrs()
 
     # THEN
-    assert sue_bud._econs_justified != x_econ_justifed
-    assert sue_bud._econs_justified
-    assert sue_bud._econs_buildable is False
+    assert sue_bud._keeps_justified != x_keep_justifed
+    assert sue_bud._keeps_justified
+    assert sue_bud._keeps_buildable is False
     assert sue_bud._sum_healerlink_share == 0
-    assert not sue_bud._econ_dict
+    assert not sue_bud._keep_dict
     assert not sue_bud._healers_dict
 
 
@@ -411,7 +411,7 @@ def test_BudUnit_get_idea_dict_ReturnsCorrectObjWhenSingle():
     problems_dict = sue_bud.get_idea_dict(problem=True)
 
     # THEN
-    assert sue_bud._econs_justified
+    assert sue_bud._keeps_justified
     texas_road = sue_bud.make_l1_road(texas_str)
     texas_idea = sue_bud.get_idea_obj(texas_road)
     assert len(problems_dict) == 1

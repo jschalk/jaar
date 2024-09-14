@@ -143,7 +143,7 @@ def add_rivercycle(fig: plotly_Figure, x0, y0, x1, y1, display_str):
     add_rect_str(fig, x0, y1, display_str)
 
 
-def add_econ__rect(
+def add_keep__rect(
     fig: plotly_Figure,
     x0,
     y0,
@@ -162,13 +162,13 @@ def add_econ__rect(
     line_dict = dict(color=color, width=2, dash="dot")
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
     mid_x0 = x0 + ((x1 - x0) / 2)
-    add_econ_str(fig, mid_x0, y1 - 0.2, text1)
-    add_econ_str(fig, mid_x0, y1 - 0.5, text2)
-    add_econ_str(fig, mid_x0, y1 - 0.8, text3)
-    add_econ_str(fig, mid_x0, y1 - 1.1, text4)
+    add_keep_str(fig, mid_x0, y1 - 0.2, text1)
+    add_keep_str(fig, mid_x0, y1 - 0.5, text2)
+    add_keep_str(fig, mid_x0, y1 - 0.8, text3)
+    add_keep_str(fig, mid_x0, y1 - 1.1, text4)
 
 
-def add_econ_str(fig, x0, y0, text):
+def add_keep_str(fig, x0, y0, text):
     fig.add_annotation(x=x0, y=y0, text=text, showarrow=False, align="left")
 
 
@@ -206,7 +206,7 @@ def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None, width=None)
     )
 
 
-def get_money_graphic_base_fig() -> plotly_Figure:
+def get_keep_graphic_base_fig() -> plotly_Figure:
     fig = plotly_Figure()
     fig.update_xaxes(range=[0, 10])
     fig.update_yaxes(range=[0, 10])
@@ -285,14 +285,14 @@ def add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict):
         add_rect_arrow(fig, cx_src, y0, cx0, y0, red_str(), 2)
 
 
-def get_money_structures0_fig(graphics_bool: bool) -> plotly_Figure:
+def get_protect_structures0_fig(graphics_bool: bool) -> plotly_Figure:
     if graphics_bool:
-        fig = get_money_graphic_base_fig()
+        fig = get_keep_graphic_base_fig()
 
         mm = default_money_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Econ = project1"
+        sue1_p3 = "Keep = project1"
         sue1_p4 = f"Money = {mm} "
 
         m_y0 = 8
@@ -301,14 +301,14 @@ def get_money_structures0_fig(graphics_bool: bool) -> plotly_Figure:
             fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), money_amt=mm
         )
         add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_id=sue_str(), money_amt=mm)
-        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
         fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.add_trace(
             plotly_Scatter(
                 x=[5.0, 5.0, 5.0],
                 y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
                 text=[
-                    "Econ Money Structure",
+                    "Keep Money Structure",
                     "Flow of Money to Accts",
                     "Money starts as grants from Healer. Taxs are money coming back to healer.",
                 ],
@@ -319,14 +319,14 @@ def get_money_structures0_fig(graphics_bool: bool) -> plotly_Figure:
         conditional_fig_show(fig, graphics_bool)
 
 
-def get_money_structures1_fig(graphics_bool: bool) -> plotly_Figure:
+def get_protect_structures1_fig(graphics_bool: bool) -> plotly_Figure:
     if graphics_bool:
-        fig = get_money_graphic_base_fig()
+        fig = get_keep_graphic_base_fig()
 
         mm = default_money_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Econ = project1"
+        sue1_p3 = "Keep = project1"
         sue1_p4 = f"Money = {mm} "
 
         m_y0 = 8
@@ -341,14 +341,14 @@ def get_money_structures1_fig(graphics_bool: bool) -> plotly_Figure:
         add_rect_arrow(fig, 5, y_mid - 1.5, 5, y_mid + 1.5, green_str())
         add_rect_arrow(fig, 8, y_mid - 1.5, 8, y_mid + 1.5, green_str())
 
-        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
         fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.add_trace(
             plotly_Scatter(
                 x=[5.0, 5.0, 5.0],
                 y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
                 text=[
-                    "Econ Money Structure",
+                    "Keep Money Structure",
                     "Flow of Money to Accts",
                     "Money starts as grants from Healer. Taxs are money coming back to healer.",
                 ],
@@ -358,14 +358,14 @@ def get_money_structures1_fig(graphics_bool: bool) -> plotly_Figure:
         conditional_fig_show(fig, graphics_bool)
 
 
-def get_money_structures2_fig(graphics_bool: bool) -> plotly_Figure:
+def get_protect_structures2_fig(graphics_bool: bool) -> plotly_Figure:
     if graphics_bool:
-        fig = get_money_graphic_base_fig()
+        fig = get_keep_graphic_base_fig()
 
         mm = default_money_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Econ = project1"
+        sue1_p3 = "Keep = project1"
         sue1_p4 = f"Money = {mm} "
 
         m_y0 = 8
@@ -418,9 +418,9 @@ def get_money_structures2_fig(graphics_bool: bool) -> plotly_Figure:
         add_rect_arrow(fig, joc_dst, ay1, zia_src, ay0, green_str(), 1)
         add_rect_arrow(fig, zia_src, ay1, zia_src, ay0, green_str(), 1)
 
-        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_econ__rect(fig, -1.9, m_y1, 0.3, m_y0, "", "", "", "")
-        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep__rect(fig, -1.9, m_y1, 0.3, m_y0, "", "", "", "")
+        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])
         fig.add_trace(
@@ -428,7 +428,7 @@ def get_money_structures2_fig(graphics_bool: bool) -> plotly_Figure:
                 x=[5.0, 5.0, 5.0],
                 y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
                 text=[
-                    "Econ Money Structure",
+                    "Keep Money Structure",
                     "Flow of Money to Accts",
                     "Money starts as grants from Healer. Taxs are money coming back to healer.",
                 ],
@@ -438,14 +438,14 @@ def get_money_structures2_fig(graphics_bool: bool) -> plotly_Figure:
         conditional_fig_show(fig, graphics_bool)
 
 
-def get_money_structures3_fig(graphics_bool: bool) -> plotly_Figure:
+def get_protect_structures3_fig(graphics_bool: bool) -> plotly_Figure:
     if graphics_bool:
-        fig = get_money_graphic_base_fig()
+        fig = get_keep_graphic_base_fig()
 
         mm = default_money_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Econ = project1"
+        sue1_p3 = "Keep = project1"
         sue1_p4 = f"Money = {mm} "
 
         m_y0 = 8
@@ -497,8 +497,8 @@ def get_money_structures3_fig(graphics_bool: bool) -> plotly_Figure:
 
         add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict)
 
-        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])
@@ -507,7 +507,7 @@ def get_money_structures3_fig(graphics_bool: bool) -> plotly_Figure:
                 x=[5.0, 5.0, 5.0],
                 y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
                 text=[
-                    "Econ Money Structure",
+                    "Keep Money Structure",
                     "Flow of Money to Accts",
                     "Money starts as grants from Healer. Taxs are money coming back to healer.",
                 ],
@@ -517,14 +517,14 @@ def get_money_structures3_fig(graphics_bool: bool) -> plotly_Figure:
         conditional_fig_show(fig, graphics_bool)
 
 
-def get_money_structures4_fig(graphics_bool: bool) -> plotly_Figure:
+def get_protect_structures4_fig(graphics_bool: bool) -> plotly_Figure:
     if graphics_bool:
-        fig = get_money_graphic_base_fig()
+        fig = get_keep_graphic_base_fig()
 
         mm = default_money_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Econ = project1"
+        sue1_p3 = "Keep = project1"
         sue1_p4 = f"Money = {mm} "
 
         m_y0 = 8
@@ -549,8 +549,8 @@ def get_money_structures4_fig(graphics_bool: bool) -> plotly_Figure:
         add_rect_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
         add_rect_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
 
-        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])
@@ -559,7 +559,7 @@ def get_money_structures4_fig(graphics_bool: bool) -> plotly_Figure:
                 x=[5.0, 5.0, 5.0],
                 y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
                 text=[
-                    "Econ Money Structure",
+                    "Keep Money Structure",
                     "Flow of Money to Accts",
                     "Money starts as grants from Healer. Taxs are money coming back to healer.",
                 ],
@@ -569,14 +569,14 @@ def get_money_structures4_fig(graphics_bool: bool) -> plotly_Figure:
         conditional_fig_show(fig, graphics_bool)
 
 
-def get_money_structures5_fig(graphics_bool: bool) -> plotly_Figure:
+def get_protect_structures5_fig(graphics_bool: bool) -> plotly_Figure:
     if graphics_bool:
-        fig = get_money_graphic_base_fig()
+        fig = get_keep_graphic_base_fig()
 
         mm = default_money_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Econ = project1"
+        sue1_p3 = "Keep = project1"
         sue1_p4 = f"Money = {mm} "
 
         m_y0 = 8
@@ -626,8 +626,8 @@ def get_money_structures5_fig(graphics_bool: bool) -> plotly_Figure:
         )
 
         m_y1 = -7
-        add_econ__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_econ__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])
@@ -636,7 +636,7 @@ def get_money_structures5_fig(graphics_bool: bool) -> plotly_Figure:
                 x=[5.0, 5.0, 5.0],
                 y=[m_y0 + 1.5, m_y0 + 1, m_y0 + 0.5],
                 text=[
-                    "Econ Money Structure",
+                    "Keep Money Structure",
                     "Flow of Money to Accts",
                     "Money starts as grants from Healer. Taxs are money coming back to healer.",
                 ],

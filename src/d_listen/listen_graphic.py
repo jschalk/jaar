@@ -20,7 +20,7 @@ def add_direc_rect(fig: plotly_Figure, x0, y0, x1, y1, display_str):
     add_rect_str(fig, x0, y1, display_str)
 
 
-def add_econ__rect(
+def add_keep__rect(
     fig: plotly_Figure, x0, y0, x1, y1, text1=None, text2=None, text3=None, text4=None
 ):
     line_dict = dict(color="LightSeaGreen", width=2, dash="dot")
@@ -133,11 +133,11 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_job_str = f"{sue_str} job"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
-        d_sue1_p3 = "Econ = project1"
+        d_sue1_p3 = "Keep = project1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
         d_bob1_p1 = f"Healer = {bob_str} "
         d_bob1_p2 = "Problem = problem1"
-        d_bob1_p3 = "Econ = project1"
+        d_bob1_p3 = "Keep = project1"
         d_bob1_p4 = f"Money = {default_money_magnitude()} "
         d_sue2_p1 = f"Healer = {sue_str} "
         d_sue2_p2 = "Problem = problem2"
@@ -147,19 +147,19 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
         add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
-        add_econ__rect(
+        add_keep__rect(
             fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
         add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_str)
         add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_str)
         add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_str)
-        add_econ__rect(
+        add_keep__rect(
             fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
         )
         add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_str)
         add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_str)
         add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_str)
-        add_econ__rect(
+        add_keep__rect(
             fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
         )
 
@@ -207,11 +207,11 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_job_str = f"{sue_str} job"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
-        d_sue1_p3 = "Econ = project1"
+        d_sue1_p3 = "Keep = project1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
         d_bob1_p1 = f"Healer = {bob_str} "
         d_bob1_p2 = "Problem = problem1"
-        d_bob1_p3 = "Econ = project1"
+        d_bob1_p3 = "Keep = project1"
         d_bob1_p4 = f"Money = {default_money_magnitude()} "
         d_sue2_p1 = f"Healer = {sue_str} "
         d_sue2_p2 = "Problem = problem2"
@@ -221,19 +221,19 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
         add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
-        add_econ__rect(
+        add_keep__rect(
             fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
         add_bud_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_str)
         add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_str)
         add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_str)
-        add_econ__rect(
+        add_keep__rect(
             fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
         )
         add_bud_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_str)
         add_bud_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_str)
         add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_str)
-        add_econ__rect(
+        add_keep__rect(
             fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
         )
 
@@ -244,7 +244,7 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
                 y=[9, 8.5, 8.0],
                 text=[
                     "Bud Listening Structures",
-                    "Flow of Buds to Econs",
+                    "Flow of Buds to Keeps",
                     "(Requires justification by problem and with unique name)",
                 ],
                 mode="text",
@@ -290,13 +290,13 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         yao_job_str = f"{yao_str} job"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
-        d_sue1_p3 = "Econ = project1"
+        d_sue1_p3 = "Keep = project1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
 
         add_bud_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
         add_bud_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
-        add_econ__rect(
+        add_keep__rect(
             fig, 2.7, 0.7, 8.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
         add_bud_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_job_str)
@@ -309,7 +309,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
                 y=[9, 8.5, 8.0],
                 text=[
                     "Bud Listening Structures",
-                    "Flow of Buds to Econs",
+                    "Flow of Buds to Keeps",
                     "(Requires justification by problem and with unique name)",
                 ],
                 mode="text",
@@ -342,7 +342,7 @@ def fund_explanation0(
     add_rect_arrow(fig, 4, -1.1, 3.1, -1.1, blue_str)
     add_bud_rect(fig, 4, -3.2, 5, -2.8, teamunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
-    add_econ__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
+    add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
     groupbox_str = "GroupBox"
     orange_str = "orange"
     add_bud_rect(fig, 5.5, -0.2, 6.25, 0.4, groupbox_str, orange_str)

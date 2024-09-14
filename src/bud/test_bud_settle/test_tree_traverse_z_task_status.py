@@ -624,14 +624,14 @@ def test_BudUnit_settle_bud_CorrectlySetsEmpty_sum_healerlink_share():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     assert sue_budunit._sum_healerlink_share == 0
-    assert sue_budunit._econ_dict == {}
+    assert sue_budunit._keep_dict == {}
 
     # WHEN
     sue_budunit.settle_bud()
 
     # THEN
     assert sue_budunit._sum_healerlink_share == 0
-    assert sue_budunit._econ_dict == {}
+    assert sue_budunit._keep_dict == {}
 
 
 def test_BudUnit_settle_bud_CorrectlySets_sum_healerlink_share(graphics_bool):
@@ -696,14 +696,14 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerlink_share(graphics_bool):
     print(f"{week_idea._label=} {week_idea.problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
-    display_ideatree(sue_budunit, "Econ", graphics_bool)
+    display_ideatree(sue_budunit, "Keep", graphics_bool)
     assert sue_budunit._sum_healerlink_share == 0
     assert oregon_idea._healerlink_ratio == 0
     assert mon_idea._healerlink_ratio == 0
     assert tue_idea._healerlink_ratio == 0
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
+def test_BudUnit_settle_bud_CorrectlySets_keep_dict_v1(graphics_bool):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit("Sue")
@@ -715,14 +715,14 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     sue_budunit.edit_idea_attr(
         oregon_road, problem_bool=True, healerlink=sue_healerlink
     )
-    assert len(sue_budunit._econ_dict) == 0
-    assert sue_budunit._econ_dict.get(oregon_road) is None
+    assert len(sue_budunit._keep_dict) == 0
+    assert sue_budunit._keep_dict.get(oregon_road) is None
 
     # WHEN
     sue_budunit.settle_bud()
     # THEN
-    assert len(sue_budunit._econ_dict) == 1
-    assert sue_budunit._econ_dict.get(oregon_road) is not None
+    assert len(sue_budunit._keep_dict) == 1
+    assert sue_budunit._keep_dict.get(oregon_road) is not None
 
     # WHEN
     week_road = sue_budunit.make_l1_road("weekdays")
@@ -733,9 +733,9 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     # print(f"{mon_idea.problem_bool=} {mon_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
-    assert len(sue_budunit._econ_dict) == 2
-    assert sue_budunit._econ_dict.get(oregon_road) is not None
-    assert sue_budunit._econ_dict.get(mon_road) is not None
+    assert len(sue_budunit._keep_dict) == 2
+    assert sue_budunit._keep_dict.get(oregon_road) is not None
+    assert sue_budunit._keep_dict.get(mon_road) is not None
 
     # WHEN
     tue_road = sue_budunit.make_road(week_road, "Tuesday")
@@ -748,10 +748,10 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     sue_budunit.settle_bud()
 
     # THEN
-    assert len(sue_budunit._econ_dict) == 3
-    assert sue_budunit._econ_dict.get(oregon_road) is not None
-    assert sue_budunit._econ_dict.get(mon_road) is not None
-    assert sue_budunit._econ_dict.get(tue_road) is not None
+    assert len(sue_budunit._keep_dict) == 3
+    assert sue_budunit._keep_dict.get(oregon_road) is not None
+    assert sue_budunit._keep_dict.get(mon_road) is not None
+    assert sue_budunit._keep_dict.get(tue_road) is not None
 
     # WHEN
     sue_budunit.edit_idea_attr(week_road, healerlink=sue_healerlink)
@@ -759,9 +759,9 @@ def test_BudUnit_settle_bud_CorrectlySets_econ_dict_v1(graphics_bool):
     print(f"{week_idea._label=} {week_idea.problem_bool=} {week_idea._fund_ratio=}")
     sue_budunit.settle_bud()
     # THEN
-    display_ideatree(sue_budunit, "Econ", graphics_bool)
-    assert len(sue_budunit._econ_dict) == 0
-    assert sue_budunit._econ_dict == {}
+    display_ideatree(sue_budunit, "Keep", graphics_bool)
+    assert len(sue_budunit._keep_dict) == 0
+    assert sue_budunit._keep_dict == {}
 
 
 # def test_bud_metrics_CorrectlySets_healers_dict():
@@ -840,19 +840,19 @@ def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     assert sue_budunit._healers_dict.get(sue_str) == {oregon_road: oregon_idea}
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_buildable_True():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit(sue_str)
     sue_budunit.add_acctunit(bob_str)
-    assert sue_budunit._econs_buildable is False
+    assert sue_budunit._keeps_buildable is False
 
     # WHEN
     sue_budunit.settle_bud()
     # THEN
-    assert sue_budunit._econs_buildable
+    assert sue_budunit._keeps_buildable
 
     # ESTABLISH
     nation_road = sue_budunit.make_l1_road("nation-state")
@@ -870,22 +870,22 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_True():
     # WHEN
     sue_budunit.settle_bud()
     # THEN
-    assert sue_budunit._econs_buildable
+    assert sue_budunit._keeps_buildable
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_buildable_False():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit(sue_str)
     sue_budunit.add_acctunit(bob_str)
-    assert sue_budunit._econs_buildable is False
+    assert sue_budunit._keeps_buildable is False
 
     # WHEN
     sue_budunit.settle_bud()
     # THEN
-    assert sue_budunit._econs_buildable
+    assert sue_budunit._keeps_buildable
 
     # ESTABLISH
     nation_road = sue_budunit.make_l1_road("nation-state")
@@ -896,9 +896,9 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_buildable_False():
     sue_budunit.set_idea(ideaunit_shop(bend_str), oregon_road)
     sue_healerlink = healerlink_shop({sue_str})
     sue_budunit.edit_idea_attr(bend_road, problem_bool=True, healerlink=sue_healerlink)
-    assert sue_budunit._econs_buildable
+    assert sue_budunit._keeps_buildable
 
     # WHEN
     sue_budunit.settle_bud()
     # THEN
-    assert sue_budunit._econs_buildable is False
+    assert sue_budunit._keeps_buildable is False

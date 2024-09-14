@@ -159,13 +159,13 @@ def add_fiscal__rect(
     line_dict = dict(color=color, width=2, dash="dot")
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
     mid_x0 = x0 + ((x1 - x0) / 2)
-    add_econ_str(fig, mid_x0, y1 - 0.2, text1)
-    add_econ_str(fig, mid_x0, y1 - 0.5, text2)
-    add_econ_str(fig, mid_x0, y1 - 0.8, text3)
-    add_econ_str(fig, mid_x0, y1 - 1.1, text4)
+    add_keep_str(fig, mid_x0, y1 - 0.2, text1)
+    add_keep_str(fig, mid_x0, y1 - 0.5, text2)
+    add_keep_str(fig, mid_x0, y1 - 0.8, text3)
+    add_keep_str(fig, mid_x0, y1 - 1.1, text4)
 
 
-def add_econ_str(fig, x0, y0, text):
+def add_keep_str(fig, x0, y0, text):
     fig.add_annotation(x=x0, y=y0, text=text, showarrow=False, align="left")
 
 

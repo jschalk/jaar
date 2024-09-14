@@ -6,7 +6,7 @@ from pytest import fixture as pytest_fixture
 
 
 def temp_fiscal_id():
-    return "ex_econ04"
+    return "ex_keep04"
 
 
 def temp_fiscal_dir():
@@ -14,7 +14,7 @@ def temp_fiscal_dir():
 
 
 def temp_fiscals_dir():
-    return "src/e_judge/examples/fiscals"
+    return "src/keep/examples/fiscals"
 
 
 def temp_owner_id():
@@ -42,28 +42,28 @@ def get_texas_hubunit() -> HubUnit:
     )
 
 
-# def modify_fiscal_id_example_econ(
-#     econ_obj: MoneyUnit, src_hubunit: HubUnit, dst_hubunit: HubUnit, new_fiscal_id
+# def modify_fiscal_id_example_keep(
+#     keep_obj: MoneyUnit, src_hubunit: HubUnit, dst_hubunit: HubUnit, new_fiscal_id
 # ):
-#     src_dir = src_hubunit.econ_dir()
-#     dst_dir = dst_hubunit.econ_dir()
+#     src_dir = src_hubunit.keep_dir()
+#     dst_dir = dst_hubunit.keep_dir()
 #     os_rename(src=src_dir, dst=dst_dir)
-#     econ_obj.set_fiscal_id(fiscal_id=new_fiscal_id)
-#     econ_obj.econ_dir = dst_dir
+#     keep_obj.set_fiscal_id(fiscal_id=new_fiscal_id)
+#     keep_obj.keep_dir = dst_dir
 
 
-class InvalideconCopyException(Exception):
+class InvalidkeepCopyException(Exception):
     pass
 
 
-def copy_evaluation_econ(src_fiscal_id: str, dest_fiscal_id: str):
-    base_dir = "src/e_judge/examples/econs"
+def copy_evaluation_keep(src_fiscal_id: str, dest_fiscal_id: str):
+    base_dir = "src/keep/examples/keeps"
     new_dir = f"{base_dir}/{dest_fiscal_id}"
     if os_path_exists(new_dir):
-        raise InvalideconCopyException(
-            f"Cannot copy econ to '{new_dir}' directory because '{new_dir}' exists."
+        raise InvalidkeepCopyException(
+            f"Cannot copy keep to '{new_dir}' directory because '{new_dir}' exists."
         )
-    # base_dir = econ_obj.hubunit.econ_dir()
+    # base_dir = keep_obj.hubunit.keep_dir()
     src_dir = f"{base_dir}/{src_fiscal_id}"
     dest_dir = f"{base_dir}/{dest_fiscal_id}"
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

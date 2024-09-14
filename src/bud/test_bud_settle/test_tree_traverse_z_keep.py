@@ -5,44 +5,44 @@ from src.bud.bud import budunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenBudUnitEmpty():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenBudUnitEmpty():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified
+    assert sue_bud._keeps_justified
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenThereAreNotAny():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenThereAreNotAny():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified
+    assert sue_bud._keeps_justified
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleIdeaUnit_healerlink_any_group_id_exists_IsTrue():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenSingleIdeaUnit_healerlink_any_group_id_exists_IsTrue():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     sue_bud.set_l1_idea(ideaunit_shop("Texas", healerlink=healerlink_shop({"Yao"})))
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleProblemAndEcon():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenSingleProblemAndKeep():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -51,16 +51,16 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenSingleProblemAndEc
     sue_bud.set_l1_idea(
         ideaunit_shop("Texas", healerlink=yao_healerlink, problem_bool=True)
     )
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified
+    assert sue_bud._keeps_justified
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelAboveProblem():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenKeepIsLevelAboveProblem():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -72,16 +72,16 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelAbovePr
     sue_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
     ep_str = "El Paso"
     sue_bud.set_idea(ideaunit_shop(ep_str, healerlink=yao_healerlink), texas_road)
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified
+    assert sue_bud._keeps_justified
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelBelowProblem():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_str = "Texas"
@@ -89,16 +89,16 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenEconIsLevelBelowPr
     yao_healerlink = healerlink_shop({"Yao"})
     sue_bud.set_l1_idea(ideaunit_shop(texas_str, healerlink=yao_healerlink))
     sue_bud.set_idea(ideaunit_shop("El Paso", problem_bool=True), texas_road)
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
 
-def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenEconIsLevelBelowProblem():
+def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_str = "Texas"
@@ -108,18 +108,18 @@ def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenEconIsLevelBelowProblem():
     sue_bud.set_l1_idea(texas_idea)
     elpaso_idea = ideaunit_shop("El Paso", problem_bool=True)
     sue_bud.set_idea(elpaso_idea, texas_road)
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        sue_bud.settle_bud(econ_exceptions=True)
+        sue_bud.settle_bud(keep_exceptions=True)
     assert (
         str(excinfo.value)
-        == f"IdeaUnit '{elpaso_idea.get_road()}' cannot sponsor ancestor econs."
+        == f"IdeaUnit '{elpaso_idea.get_road()}' cannot sponsor ancestor keeps."
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenTwoEconsAreOneTheEqualLine():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenTwoKeepsAreOneTheEqualLine():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})
@@ -129,16 +129,16 @@ def test_BudUnit_settle_bud_CorrectlySets_econs_justified_WhenTwoEconsAreOneTheE
     sue_bud.set_l1_idea(texas_idea)
     elpaso_idea = ideaunit_shop("El Paso", healerlink=yao_healerlink, problem_bool=True)
     sue_bud.set_idea(elpaso_idea, texas_road)
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
 
-def test_BudUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
+def test_BudUnit_get_idea_dict_RaisesErrorWhen_keeps_justified_IsFalse():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})
@@ -149,12 +149,12 @@ def test_BudUnit_get_idea_dict_RaisesErrorWhen_econs_justified_IsFalse():
     elpaso_idea = ideaunit_shop("El Paso", healerlink=yao_healerlink, problem_bool=True)
     sue_bud.set_idea(elpaso_idea, texas_road)
     sue_bud.settle_bud()
-    assert sue_bud._econs_justified is False
+    assert sue_bud._keeps_justified is False
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_idea_dict(problem=True)
     assert (
         str(excinfo.value)
-        == f"Cannot return problem set because _econs_justified={sue_bud._econs_justified}."
+        == f"Cannot return problem set because _keeps_justified={sue_bud._keeps_justified}."
     )

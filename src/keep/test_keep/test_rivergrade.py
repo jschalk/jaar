@@ -1,6 +1,6 @@
 from src.gift.atom_config import fiscal_id_str
-from src.e_judge.examples.example_credorledgers import example_yao_hubunit
-from src.e_judge.rivercycle import RiverGrade, rivergrade_shop
+from src.keep.examples.example_credorledgers import example_yao_hubunit
+from src.keep.rivercycle import RiverGrade, rivergrade_shop
 
 
 def test_RiverGrade_Exists():
@@ -175,7 +175,7 @@ def test_RiverGrade_get_dict_ReturnsCorrectObj():
     # THEN
     assert rivergrade_dict.get(fiscal_id_str()) == yao_hubunit.fiscal_id
     assert rivergrade_dict.get("healer_id") == yao_hubunit.owner_id
-    assert rivergrade_dict.get("econ_road") == yao_hubunit.econ_road
+    assert rivergrade_dict.get("keep_road") == yao_hubunit.keep_road
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
     assert rivergrade_dict.get("grant_amount") == x_grant_amount
     assert rivergrade_dict.get("debtor_rank_num") == x_debtor_rank_num
@@ -209,5 +209,5 @@ def test_RiverGrade_get_json_ReturnsCorrectObj():
     # THEN
     assert (
         rivergrade_json
-        == """{"fiscal_id": "ex_econ04", "healer_id": "Yao", "econ_road": null, "tax_bill_amount": null, "grant_amount": null, "debtor_rank_num": null, "credor_rank_num": null, "tax_paid_amount": null, "tax_paid_bool": null, "tax_paid_rank_num": null, "tax_paid_rank_percent": null, "debtor_count": 101, "credor_count": 103, "debtor_rank_percent": null, "credor_rank_percent": null, "rewards_count": null, "rewards_magnitude": null}"""
+        == """{"fiscal_id": "ex_keep04", "healer_id": "Yao", "keep_road": null, "tax_bill_amount": null, "grant_amount": null, "debtor_rank_num": null, "credor_rank_num": null, "tax_paid_amount": null, "tax_paid_bool": null, "tax_paid_rank_num": null, "tax_paid_rank_percent": null, "debtor_count": 101, "credor_count": 103, "debtor_rank_percent": null, "credor_rank_percent": null, "rewards_count": null, "rewards_magnitude": null}"""
     )

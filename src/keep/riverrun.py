@@ -8,7 +8,7 @@ from src._instrument.python_tool import (
 from src._road.jaar_config import get_json_filename
 from src._road.finance import allot_scale
 from src._road.road import AcctID, OwnerID
-from src.e_judge.rivercycle import (
+from src.keep.rivercycle import (
     RiverGrade,
     rivergrade_shop,
     create_init_rivercycle,
@@ -22,7 +22,7 @@ from dataclasses import dataclass
 class RiverRun:
     hubunit: HubUnit = None
     number: int = None
-    econ_credorledgers: dict[OwnerID : dict[AcctID, float]] = None
+    keep_credorledgers: dict[OwnerID : dict[AcctID, float]] = None
     tax_dues: dict[AcctID, float] = None
     cycle_max: int = None
     # calculated fields
@@ -40,21 +40,21 @@ class RiverRun:
     def set_cycle_max(self, x_cycle_max: int):
         self.cycle_max = get_positive_int(x_cycle_max)
 
-    def set_econ_credorledger(
+    def set_keep_credorledger(
         self, owner_id: OwnerID, acct_id: AcctID, acct_credit_belief: float
     ):
         place_obj_in_dict(
-            x_dict=self.econ_credorledgers,
+            x_dict=self.keep_credorledgers,
             x_keylist=[owner_id, acct_id],
             x_obj=acct_credit_belief,
         )
 
-    def delete_econ_credorledgers_owner(self, owner_id: OwnerID):
-        self.econ_credorledgers.pop(owner_id)
+    def delete_keep_credorledgers_owner(self, owner_id: OwnerID):
+        self.keep_credorledgers.pop(owner_id)
 
-    def get_all_econ_credorledger_acct_ids(self):
+    def get_all_keep_credorledger_acct_ids(self):
         x_set = set()
-        for owner_id, owner_dict in self.econ_credorledgers.items():
+        for owner_id, owner_dict in self.keep_credorledgers.items():
             if owner_id not in x_set:
                 x_set.add(owner_id)
             for acct_id in owner_dict.keys():
@@ -85,7 +85,7 @@ class RiverRun:
         return len(self.tax_dues) != 0
 
     def set_tax_dues(self, debtorledger: dict[AcctID, float]):
-        x_amount = self.hubunit.econ_money_magnitude
+        x_amount = self.hubunit.keep_money_magnitude
         self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.penny)
 
     def acct_has_tax_due(self, x_acct_id: AcctID) -> bool:
@@ -160,7 +160,7 @@ class RiverRun:
 
     def set_all_initial_rivergrades(self):
         self._rivergrades = {}
-        all_acct_ids = self.get_all_econ_credorledger_acct_ids()
+        all_acct_ids = self.get_all_keep_credorledger_acct_ids()
         for acct_id in all_acct_ids:
             self.set_initial_rivergrade(acct_id)
 
@@ -177,7 +177,7 @@ class RiverRun:
         self.set_all_initial_rivergrades()
 
         self._cycle_count = 0
-        x_rivercyle = create_init_rivercycle(self.hubunit, self.econ_credorledgers)
+        x_rivercyle = create_init_rivercycle(self.hubunit, self.keep_credorledgers)
         x_cyclelegder = x_rivercyle.create_cylceledger()
         self._cycle_payees_curr = set(x_cyclelegder.keys())
         x_cyclelegder, tax_got_curr = self.levy_tax_dues(x_cyclelegder)
@@ -198,13 +198,13 @@ class RiverRun:
         tax_dues_accts = set(self.tax_dues.keys())
         tax_yields_accts = set(self._tax_yields.keys())
         self._debtor_count = len(tax_dues_accts.union(tax_yields_accts))
-        self._credor_count = len(self.econ_credorledgers.get(self.hubunit.owner_id))
+        self._credor_count = len(self.keep_credorledgers.get(self.hubunit.owner_id))
 
     def _set_grants(self):
-        grant_credorledger = self.econ_credorledgers.get(self.hubunit.owner_id)
+        grant_credorledger = self.keep_credorledgers.get(self.hubunit.owner_id)
         self._grants = allot_scale(
             ledger=grant_credorledger,
-            scale_number=self.hubunit.econ_money_magnitude,
+            scale_number=self.hubunit.keep_money_magnitude,
             grain_unit=self.hubunit.penny,
         )
 
@@ -235,14 +235,14 @@ class RiverRun:
 def riverrun_shop(
     hubunit: HubUnit,
     number: int = None,
-    econ_credorledgers: dict[OwnerID : dict[AcctID, float]] = None,
+    keep_credorledgers: dict[OwnerID : dict[AcctID, float]] = None,
     tax_dues: dict[AcctID, float] = None,
     cycle_max: int = None,
 ):
     x_riverun = RiverRun(
         hubunit=hubunit,
         number=get_0_if_None(number),
-        econ_credorledgers=get_empty_dict_if_none(econ_credorledgers),
+        keep_credorledgers=get_empty_dict_if_none(keep_credorledgers),
         tax_dues=get_empty_dict_if_none(tax_dues),
         _rivergrades={},
         _grants={},

@@ -63,7 +63,7 @@ class FiscalUnit:
                 fiscals_dir=self.fiscals_dir,
                 fiscal_id=self.fiscal_id,
                 owner_id=x_owner_id,
-                econ_road=None,
+                keep_road=None,
                 road_delimiter=self._road_delimiter,
                 bit=self._bit,
             )
@@ -110,12 +110,12 @@ class FiscalUnit:
             owner_id=owner_id,
             fiscal_id=self.fiscal_id,
             fiscals_dir=self.fiscals_dir,
-            econ_road=None,
+            keep_road=None,
             road_delimiter=self._road_delimiter,
             bit=self._bit,
         )
 
-    def init_owner_econs(self, owner_id: OwnerID):
+    def init_owner_keeps(self, owner_id: OwnerID):
         x_hubunit = self._get_hubunit(owner_id)
         x_hubunit.initialize_gift_voice_files()
         x_hubunit.initialize_action_file(self.get_owner_voice_from_file(owner_id))
@@ -131,21 +131,21 @@ class FiscalUnit:
                 self.fiscals_dir,
                 self.fiscal_id,
                 healer_id,
-                econ_road=None,
+                keep_road=None,
                 # "duty_job",
                 road_delimiter=self._road_delimiter,
                 bit=self._bit,
             )
-            for econ_road in healer_dict.keys():
-                self._set_owner_duty(healer_hubunit, econ_road, x_voice)
+            for keep_road in healer_dict.keys():
+                self._set_owner_duty(healer_hubunit, keep_road, x_voice)
 
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
-        econ_road: RoadUnit,
+        keep_road: RoadUnit,
         voice_bud: BudUnit,
     ):
-        healer_hubunit.econ_road = econ_road
+        healer_hubunit.keep_road = keep_road
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(voice_bud)
 
@@ -160,25 +160,25 @@ class FiscalUnit:
                 fiscals_dir=self.fiscals_dir,
                 fiscal_id=self.fiscal_id,
                 owner_id=healer_id,
-                econ_road=None,
+                keep_road=None,
                 # "duty_job",
                 road_delimiter=self._road_delimiter,
                 bit=self._bit,
             )
             healer_hubunit.create_voice_treasury_db_files()
-            for econ_road in healer_dict.keys():
-                econ_hubunit = hubunit_shop(
+            for keep_road in healer_dict.keys():
+                keep_hubunit = hubunit_shop(
                     fiscals_dir=self.fiscals_dir,
                     fiscal_id=self.fiscal_id,
                     owner_id=healer_id,
-                    econ_road=econ_road,
+                    keep_road=keep_road,
                     # "duty_job",
                     road_delimiter=self._road_delimiter,
                     bit=self._bit,
                 )
-                econ_hubunit.save_duty_bud(x_voice)
-                create_job_file_from_duty_file(econ_hubunit, owner_id)
-                x_job = econ_hubunit.get_job_bud(owner_id)
+                keep_hubunit.save_duty_bud(x_voice)
+                create_job_file_from_duty_file(keep_hubunit, owner_id)
+                x_job = keep_hubunit.get_job_bud(owner_id)
                 listen_to_speaker_agenda(x_action, x_job)
 
         # if nothing has come from voice->duty->job->action pipeline use voice->action pipeline

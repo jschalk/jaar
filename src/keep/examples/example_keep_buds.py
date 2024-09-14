@@ -1,5 +1,5 @@
 from src.bud.bud import BudUnit, budunit_shop, ideaunit_shop, FiscalID
-from src.e_judge.examples.econ_env import temp_fiscal_id
+from src.keep.examples.keep_env import temp_fiscal_id
 
 
 def get_1node_bud() -> BudUnit:

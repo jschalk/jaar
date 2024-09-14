@@ -107,17 +107,17 @@ def test_StoneColumn_get_headers_list_ReturnsObj_Scenario1():
 
     x3_stoneref = stoneref_shop("0003", bud_acctunit_str())
     third_column_str = "third column"
-    second_column_str = "second column"
+    skeepd_column_str = "skeepd column"
     first_column_str = "first column"
     x3_stoneref.set_stonecolumn(StoneColumn(third_column_str, column_order=2))
-    x3_stoneref.set_stonecolumn(StoneColumn(second_column_str, column_order=1))
+    x3_stoneref.set_stonecolumn(StoneColumn(skeepd_column_str, column_order=1))
     x3_stoneref.set_stonecolumn(StoneColumn(first_column_str, column_order=0))
 
     # WHEN
     x_headers_list = x3_stoneref.get_headers_list()
 
     # THEN
-    assert x_headers_list == [first_column_str, second_column_str, third_column_str]
+    assert x_headers_list == [first_column_str, skeepd_column_str, third_column_str]
 
 
 def test_StoneColumn_get_headers_list_ReturnsObj_Scenario2():
@@ -125,11 +125,11 @@ def test_StoneColumn_get_headers_list_ReturnsObj_Scenario2():
 
     x3_stoneref = stoneref_shop("0003", bud_acctunit_str())
     third_column_str = "third column"
-    second_column_str = "second column"
+    skeepd_column_str = "skeepd column"
     first_column_str = "first column"
     fouth_column_str = "fourth column"
     x3_stoneref.set_stonecolumn(StoneColumn(third_column_str, column_order=2))
-    x3_stoneref.set_stonecolumn(StoneColumn(second_column_str, column_order=1))
+    x3_stoneref.set_stonecolumn(StoneColumn(skeepd_column_str, column_order=1))
     x3_stoneref.set_stonecolumn(StoneColumn(first_column_str, column_order=0))
     x3_stoneref.set_stonecolumn(StoneColumn(fouth_column_str, column_order=3))
 
@@ -139,7 +139,7 @@ def test_StoneColumn_get_headers_list_ReturnsObj_Scenario2():
     # THEN
     assert x_headers_list == [
         first_column_str,
-        second_column_str,
+        skeepd_column_str,
         third_column_str,
         fouth_column_str,
     ]

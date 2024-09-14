@@ -121,7 +121,7 @@ def test_fiscalunit_shop_SetsFiscalsDirs(env_dir_setup_cleanup):
     assert music_fiscal._owners_dir == f"{music_fiscal._fiscal_dir}/owners"
 
 
-def test_FiscalUnit_init_owner_econs_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
+def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
     slash_str = "/"
@@ -142,7 +142,7 @@ def test_FiscalUnit_init_owner_econs_CorrectlySetsDirAndFiles(env_dir_setup_clea
     assert os_path_exists(sue_hubunit.action_path()) is False
 
     # WHEN
-    music_fiscal.init_owner_econs(sue_str)
+    music_fiscal.init_owner_keeps(sue_str)
 
     # THEN
     print(f"{get_test_fiscals_dir()=}")
@@ -156,7 +156,7 @@ def test_FiscalUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_cl
         music_str, get_test_fiscals_dir(), in_memory_journal=True
     )
     sue_str = "Sue"
-    music_fiscal.init_owner_econs(sue_str)
+    music_fiscal.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(None, music_str, sue_str, None)
     bob_str = "Bob"
     sue_voice = sue_hubunit.get_voice_bud()
@@ -181,8 +181,8 @@ def test_FiscalUnit__set_all_healer_dutys_CorrectlySetsdutys(
     )
     sue_str = "Sue"
     yao_str = "Yao"
-    music_fiscal.init_owner_econs(sue_str)
-    music_fiscal.init_owner_econs(yao_str)
+    music_fiscal.init_owner_keeps(sue_str)
+    music_fiscal.init_owner_keeps(yao_str)
     sue_hubunit = hubunit_shop(None, music_str, sue_str, None)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     sue_voice_bud = sue_hubunit.get_voice_bud()
@@ -258,8 +258,8 @@ def test_FiscalUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     assert len(music_fiscal.get_owner_hubunits()) == 0
 
     # WHEN
-    music_fiscal.init_owner_econs(sue_str)
-    music_fiscal.init_owner_econs(yao_str)
+    music_fiscal.init_owner_keeps(sue_str)
+    music_fiscal.init_owner_keeps(yao_str)
     music_all_owners = music_fiscal.get_owner_hubunits()
 
     # THEN
@@ -267,7 +267,7 @@ def test_FiscalUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         fiscals_dir=music_fiscal.fiscals_dir,
         fiscal_id=music_fiscal.fiscal_id,
         owner_id=sue_str,
-        econ_road=None,
+        keep_road=None,
         road_delimiter=music_fiscal._road_delimiter,
         fund_coin=music_fiscal._fund_coin,
         bit=music_fiscal._bit,
@@ -276,7 +276,7 @@ def test_FiscalUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         fiscals_dir=music_fiscal.fiscals_dir,
         fiscal_id=music_fiscal.fiscal_id,
         owner_id=yao_str,
-        econ_road=None,
+        keep_road=None,
         road_delimiter=music_fiscal._road_delimiter,
         fund_coin=music_fiscal._fund_coin,
         bit=music_fiscal._bit,

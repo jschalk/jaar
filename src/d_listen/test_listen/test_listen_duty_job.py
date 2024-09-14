@@ -222,7 +222,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
         fiscals_dir=env_dir(),
         fiscal_id=yao_bud._fiscal_id,
         owner_id=yao_bud._owner_id,
-        econ_road=get_ohio_road(),
+        keep_road=get_ohio_road(),
         # pipeline_voice_action_str(),
     )
 
@@ -233,7 +233,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
         fiscals_dir=env_dir(),
         fiscal_id=yao_bud._fiscal_id,
         owner_id=yao_bud._owner_id,
-        econ_road=get_iowa_road(),
+        keep_road=get_iowa_road(),
         # pipeline_voice_action_str(),
     )
 
@@ -244,7 +244,7 @@ def get_zia_utah_hubunit() -> HubUnit:
         fiscals_dir=env_dir(),
         fiscal_id=yao_bud._fiscal_id,
         owner_id="Zia",
-        econ_road=get_utah_road(),
+        keep_road=get_utah_road(),
         # pipeline_voice_action_str(),
     )
 
@@ -282,10 +282,10 @@ def get_example_yao_voice_with_3_healers():
 #     yao_voice0.set_l1_idea(ideaunit_shop(get_swim_str(), pledge=True))
 #     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
 #     yao_voice0.settle_bud()
-#     assert yao_voice0._econ_dict.get(get_iowa_road())
-#     assert yao_voice0._econ_dict.get(get_ohio_road())
-#     assert yao_voice0._econ_dict.get(get_utah_road())
-#     assert len(yao_voice0._econ_dict) == 3
+#     assert yao_voice0._keep_dict.get(get_iowa_road())
+#     assert yao_voice0._keep_dict.get(get_ohio_road())
+#     assert yao_voice0._keep_dict.get(get_utah_road())
+#     assert len(yao_voice0._keep_dict) == 3
 #     print(f"{yao_voice0._idea_dict.keys()=}")
 
 #     yao_str = yao_voice0._owner_id
@@ -357,11 +357,11 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_voice0.set_fact(get_location_road(), get_in_ocean_road())
     print(f"{yao_voice0.get_fact(get_location_road())=}")
     yao_voice0.del_idea_obj(run_road())
-    assert yao_voice0._econ_dict.get(get_iowa_road())
-    assert yao_voice0._econ_dict.get(get_ohio_road())
-    assert yao_voice0._econ_dict.get(get_utah_road())
+    assert yao_voice0._keep_dict.get(get_iowa_road())
+    assert yao_voice0._keep_dict.get(get_ohio_road())
+    assert yao_voice0._keep_dict.get(get_utah_road())
     yao_voice0.settle_bud()
-    assert len(yao_voice0._econ_dict) == 3
+    assert len(yao_voice0._keep_dict) == 3
     # print(f"{yao_voice0._idea_dict.keys()=}")
 
     yao_str = yao_voice0._owner_id

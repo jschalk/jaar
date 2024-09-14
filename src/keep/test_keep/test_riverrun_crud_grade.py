@@ -1,6 +1,6 @@
-from src.e_judge.rivercycle import rivergrade_shop
-from src.e_judge.riverrun import riverrun_shop
-from src.e_judge.examples.example_credorledgers import example_yao_hubunit
+from src.keep.rivercycle import rivergrade_shop
+from src.keep.riverrun import riverrun_shop
+from src.keep.examples.example_credorledgers import example_yao_hubunit
 
 
 def test_RiverRun_set_initial_rivergrade_SetsAttr():
@@ -74,11 +74,11 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
     zia_str = "Zia"
     xio_str = "Xio"
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_str, yao_str, 1)
-    x_riverrun.set_econ_credorledger(yao_str, bob_str, 1)
-    x_riverrun.set_econ_credorledger(zia_str, bob_str, 1)
-    x_riverrun.set_econ_credorledger(xio_str, sue_str, 1)
-    all_accts_ids = x_riverrun.get_all_econ_credorledger_acct_ids()
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, 1)
+    x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
+    x_riverrun.set_keep_credorledger(zia_str, bob_str, 1)
+    x_riverrun.set_keep_credorledger(xio_str, sue_str, 1)
+    all_accts_ids = x_riverrun.get_all_keep_credorledger_acct_ids()
     assert all_accts_ids == {yao_str, bob_str, zia_str, xio_str, sue_str}
     assert x_riverrun._rivergrades_is_empty()
     assert x_riverrun.rivergrade_exists(yao_str) is False
@@ -104,10 +104,10 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlyOverWritesPrevious():
     zia_str = "Zia"
     xio_str = "Xio"
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_str, yao_str, 1)
-    x_riverrun.set_econ_credorledger(yao_str, bob_str, 1)
-    x_riverrun.set_econ_credorledger(zia_str, bob_str, 1)
-    x_riverrun.set_econ_credorledger(xio_str, sue_str, 1)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, 1)
+    x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
+    x_riverrun.set_keep_credorledger(zia_str, bob_str, 1)
+    x_riverrun.set_keep_credorledger(xio_str, sue_str, 1)
     x_riverrun.set_all_initial_rivergrades()
     assert x_riverrun.rivergrade_exists(yao_str)
     assert x_riverrun.rivergrade_exists(bob_str)
@@ -116,7 +116,7 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlyOverWritesPrevious():
     assert x_riverrun.rivergrade_exists(sue_str)
 
     # WHEN
-    x_riverrun.delete_econ_credorledgers_owner(xio_str)
+    x_riverrun.delete_keep_credorledgers_owner(xio_str)
     x_riverrun.set_all_initial_rivergrades()
 
     # THEN

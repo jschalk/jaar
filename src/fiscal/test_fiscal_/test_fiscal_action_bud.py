@@ -15,7 +15,7 @@ def test_FiscalUnit_generate_action_bud_Sets_action_BudFile(env_dir_setup_cleanu
     sue_hubunit = hubunit_shop(None, music_str, sue_str, None)
     x_sue_action_path = f"{music_fiscal._owners_dir}/{sue_str}/action/{sue_str}.json"
     assert os_path_exists(x_sue_action_path) is False
-    music_fiscal.init_owner_econs(sue_str)
+    music_fiscal.init_owner_keeps(sue_str)
     assert sue_hubunit.action_path() == x_sue_action_path
     assert os_path_exists(x_sue_action_path)
 
@@ -32,7 +32,7 @@ def test_FiscalUnit_generate_action_bud_ReturnsRegeneratedObj(env_dir_setup_clea
     # ESTABLISH
     music_fiscal = fiscalunit_shop("music", get_test_fiscals_dir(), True)
     sue_str = "Sue"
-    music_fiscal.init_owner_econs(sue_str)
+    music_fiscal.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(
         music_fiscal.fiscals_dir, music_fiscal.fiscal_id, sue_str, None
     )
@@ -55,7 +55,7 @@ def test_FiscalUnit_generate_action_bud_SetsCorrectFileWithout_healerlink(
     # ESTABLISH
     music_fiscal = fiscalunit_shop("music", get_test_fiscals_dir(), True)
     bob_str = "Bob"
-    music_fiscal.init_owner_econs(bob_str)
+    music_fiscal.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
         music_fiscal.fiscals_dir, music_fiscal.fiscal_id, bob_str, None
     )
@@ -80,7 +80,7 @@ def test_FiscalUnit_generate_action_bud_SetsFileWith_healerlink(env_dir_setup_cl
     music_fiscal = fiscalunit_shop("music", get_test_fiscals_dir(), True)
 
     bob_str = "Bob"
-    music_fiscal.init_owner_econs(bob_str)
+    music_fiscal.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
         music_fiscal.fiscals_dir, music_fiscal.fiscal_id, bob_str, None
     )
@@ -113,10 +113,10 @@ def test_FiscalUnit_generate_all_action_buds_SetsCorrectFiles(
 
     bob_str = "Bob"
     sue_str = "Sue"
-    music_fiscal.init_owner_econs(bob_str)
+    music_fiscal.init_owner_keeps(bob_str)
     fiscals_dir = music_fiscal.fiscals_dir
     bob_hubunit = hubunit_shop(fiscals_dir, music_fiscal.fiscal_id, bob_str, None)
-    music_fiscal.init_owner_econs(sue_str)
+    music_fiscal.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(fiscals_dir, music_fiscal.fiscal_id, sue_str, None)
     bob_voice_bud = music_fiscal.generate_action_bud(bob_str)
     sue_voice_bud = music_fiscal.generate_action_bud(sue_str)

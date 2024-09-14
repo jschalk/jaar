@@ -207,8 +207,8 @@ def test_HubUnit_validate_giftunit_ReturnsObjWithAttributesFixed(
     invalid_sue_giftunit = giftunit_shop(
         owner_id="Bob",
         _gift_id=sue_hubunit._get_next_gift_file_number() - 5,
-        _atoms_dir=f"{sue_hubunit.econs_dir()}/swimming",
-        _gifts_dir=f"{sue_hubunit.econs_dir()}/swimming",
+        _atoms_dir=f"{sue_hubunit.keeps_dir()}/swimming",
+        _gifts_dir=f"{sue_hubunit.keeps_dir()}/swimming",
     )
     valid_giftunit = sue_hubunit.validate_giftunit(invalid_sue_giftunit)
 
@@ -241,8 +241,8 @@ def test_HubUnit_save_gift_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     invalid_sue_giftunit = giftunit_shop(
         owner_id="Bob",
         _gift_id=sue_hubunit._get_next_gift_file_number() - 5,
-        _atoms_dir=f"{sue_hubunit.econs_dir()}/swimming",
-        _gifts_dir=f"{sue_hubunit.econs_dir()}/swimming",
+        _atoms_dir=f"{sue_hubunit.keeps_dir()}/swimming",
+        _gifts_dir=f"{sue_hubunit.keeps_dir()}/swimming",
     )
     sue_hubunit.save_gift_file(invalid_sue_giftunit)
 
@@ -411,8 +411,8 @@ def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str)
     sue2_giftunit = sue_2atomunits_giftunit()
-    sue2_giftunit._atoms_dir = f"{sue_hubunit.econs_dir()}/swimming"
-    sue2_giftunit._gifts_dir = f"{sue_hubunit.econs_dir()}/swimming"
+    sue2_giftunit._atoms_dir = f"{sue_hubunit.keeps_dir()}/swimming"
+    sue2_giftunit._gifts_dir = f"{sue_hubunit.keeps_dir()}/swimming"
     sue2_giftunit.owner_id = "Bob"
     sue2_giftunit._gift_id = sue_hubunit._get_next_gift_file_number() - 5
     prev_sue2_giftunit = copy_deepcopy(sue2_giftunit)

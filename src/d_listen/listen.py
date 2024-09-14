@@ -249,11 +249,11 @@ def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
     voice.settle_bud()
     new_action.settle_bud()
 
-    for x_healer_id, econ_dict in voice._healers_dict.items():
+    for x_healer_id, keep_dict in voice._healers_dict.items():
         listener_id = listener_hubunit.owner_id
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.owner_id = x_healer_id
-        _pick_econ_jobs_and_listen(listener_id, econ_dict, healer_hubunit, new_action)
+        _pick_keep_jobs_and_listen(listener_id, keep_dict, healer_hubunit, new_action)
 
     if new_action.get_dict() == pre_action_dict:
         agenda = list(voice.get_agenda_dict().values())
@@ -263,26 +263,26 @@ def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
     listener_hubunit.save_action_bud(new_action)
 
 
-def _pick_econ_jobs_and_listen(
+def _pick_keep_jobs_and_listen(
     listener_id: OwnerID,
-    econ_dict: dict[RoadUnit],
+    keep_dict: dict[RoadUnit],
     healer_hubunit: HubUnit,
     new_action: BudUnit,
 ):
-    for econ_path in econ_dict:
-        healer_hubunit.econ_road = econ_path
-        pick_econ_job_and_listen(listener_id, healer_hubunit, new_action)
+    for keep_path in keep_dict:
+        healer_hubunit.keep_road = keep_path
+        pick_keep_job_and_listen(listener_id, healer_hubunit, new_action)
 
 
-def pick_econ_job_and_listen(
+def pick_keep_job_and_listen(
     listener_owner_id: OwnerID, healer_hubunit: HubUnit, new_action: BudUnit
 ):
     listener_id = listener_owner_id
     if healer_hubunit.job_file_exists(listener_id):
-        econ_job = healer_hubunit.get_job_bud(listener_id)
+        keep_job = healer_hubunit.get_job_bud(listener_id)
     else:
-        econ_job = create_empty_bud(new_action, new_action._owner_id)
-    listen_to_job_agenda(new_action, econ_job)
+        keep_job = create_empty_bud(new_action, new_action._owner_id)
+    listen_to_job_agenda(new_action, keep_job)
 
 
 def listen_to_job_agenda(listener: BudUnit, job: BudUnit):

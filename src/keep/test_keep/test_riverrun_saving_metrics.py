@@ -1,6 +1,6 @@
-from src.e_judge.riverrun import riverrun_shop
-from src.e_judge.examples.econ_env import env_dir_setup_cleanup
-from src.e_judge.examples.example_credorledgers import example_yao_texas_hubunit
+from src.keep.riverrun import riverrun_shop
+from src.keep.examples.keep_env import env_dir_setup_cleanup
+from src.keep.examples.example_credorledgers import example_yao_texas_hubunit
 from os.path import exists as os_path_exists
 
 
@@ -10,7 +10,7 @@ def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup)
     yao_str = "Yao"
     yao_credit_belief = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_str, yao_str, yao_credit_belief)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
     x_riverrun.set_tax_dues({yao_str: 1})
     x_riverrun.calc_metrics()
     assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str)) is False
@@ -30,8 +30,8 @@ def test_RiverRun_save_rivergrade_files_CorrectlySavesFile(env_dir_setup_cleanup
     sue_str = "Sue"
     yao_credit_belief = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_econ_credorledger(yao_str, yao_str, yao_credit_belief)
-    x_riverrun.set_econ_credorledger(yao_str, bob_str, 1)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
+    x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
     x_riverrun.set_tax_dues({yao_str: 1, sue_str: 1})
     x_riverrun.calc_metrics()
     assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str)) is False

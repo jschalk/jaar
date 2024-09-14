@@ -1,8 +1,8 @@
 from src.bud.bud import budunit_shop
 from src.d_listen.hubunit import hubunit_shop
-from src.e_judge.rivercycle import get_credorledger, get_debtorledger
-from src.e_judge.riverrun import riverrun_shop
-from src.e_judge.examples.example_credorledgers import example_yao_hubunit
+from src.keep.rivercycle import get_credorledger, get_debtorledger
+from src.keep.riverrun import riverrun_shop
+from src.keep.examples.example_credorledgers import example_yao_hubunit
 
 
 def test_get_credorledger_ReturnsCorrectObj():
@@ -151,7 +151,7 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, econ_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -183,7 +183,7 @@ def test_RiverRun_acct_has_tax_due_ReturnsCorrectBool():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, econ_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
@@ -218,7 +218,7 @@ def test_RiverRun_delete_tax_due_SetsAttr():
     bob_money_amount = 88
     bob_penny = 11
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, econ_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
@@ -238,7 +238,7 @@ def test_RiverRun_get_acct_tax_due_ReturnsCorrectObj():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, econ_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -273,7 +273,7 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, econ_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"

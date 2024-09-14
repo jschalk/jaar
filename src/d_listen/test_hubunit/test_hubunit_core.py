@@ -13,11 +13,11 @@ from src._road.finance import (
 from src._road.jaar_config import (
     get_gifts_folder,
     get_test_fiscals_dir,
-    get_rootpart_of_econ_dir,
+    get_rootpart_of_keep_dir,
     get_fiscal_id_if_None,
 )
 from src.bud.bud import budunit_shop
-from src.d_listen.hubunit import HubUnit, hubunit_shop, get_econ_path
+from src.d_listen.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.d_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.d_listen.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,
@@ -27,7 +27,7 @@ from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
 
 
-def test_get_econ_path_ReturnsCorrectObj():
+def test_get_keep_path_ReturnsCorrectObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
@@ -36,20 +36,20 @@ def test_get_econ_path_ReturnsCorrectObj():
     dallas_str = "dallas"
     elpaso_str = "el paso"
     kern_str = "kern"
-    idearoot = get_rootpart_of_econ_dir()
+    idearoot = get_rootpart_of_keep_dir()
     texas_road = create_road_from_nodes([idearoot, texas_str])
     dallas_road = create_road_from_nodes([idearoot, texas_str, dallas_str])
     elpaso_road = create_road_from_nodes([idearoot, texas_str, elpaso_str])
     kern_road = create_road_from_nodes([idearoot, texas_str, elpaso_str, kern_str])
 
     # WHEN
-    texas_path = get_econ_path(sue_hubunit, texas_road)
-    dallas_path = get_econ_path(sue_hubunit, dallas_road)
-    elpaso_path = get_econ_path(sue_hubunit, elpaso_road)
-    kern_path = get_econ_path(sue_hubunit, kern_road)
+    texas_path = get_keep_path(sue_hubunit, texas_road)
+    dallas_path = get_keep_path(sue_hubunit, dallas_road)
+    elpaso_path = get_keep_path(sue_hubunit, elpaso_road)
+    kern_path = get_keep_path(sue_hubunit, kern_road)
 
     # THEN
-    idearoot_dir = f"{sue_hubunit.econs_dir()}/{get_rootpart_of_econ_dir()}"
+    idearoot_dir = f"{sue_hubunit.keeps_dir()}/{get_rootpart_of_keep_dir()}"
     print(f"{kern_road=}")
     print(f"{idearoot_dir=}")
     assert texas_path == f"{idearoot_dir}/{texas_str}"
@@ -61,9 +61,9 @@ def test_get_econ_path_ReturnsCorrectObj():
     diff_root_texas_road = create_road_from_nodes([peru_str, texas_str])
     diff_root_dallas_road = create_road_from_nodes([peru_str, texas_str, dallas_str])
     diff_root_elpaso_road = create_road_from_nodes([peru_str, texas_str, elpaso_str])
-    assert texas_path == get_econ_path(sue_hubunit, diff_root_texas_road)
-    assert dallas_path == get_econ_path(sue_hubunit, diff_root_dallas_road)
-    assert elpaso_path == get_econ_path(sue_hubunit, diff_root_elpaso_road)
+    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
+    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
+    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
 
 
 def test_HubUnit_Exists():
@@ -74,26 +74,26 @@ def test_HubUnit_Exists():
     assert x_hubunit.fiscals_dir is None
     assert x_hubunit.fiscal_id is None
     assert x_hubunit.owner_id is None
-    assert x_hubunit.econ_road is None
+    assert x_hubunit.keep_road is None
     assert x_hubunit.road_delimiter is None
     assert x_hubunit.fund_pool is None
     assert x_hubunit.fund_coin is None
     assert x_hubunit.bit is None
     assert x_hubunit.penny is None
-    assert x_hubunit.econ_money_magnitude is None
+    assert x_hubunit.keep_money_magnitude is None
 
 
-def test_HubUnit_RaisesError_econ_road_DoesNotExist():
+def test_HubUnit_RaisesError_keep_road_DoesNotExist():
     # ESTABLISH
     bob_str = "Bob"
     bob_hubunit = HubUnit(bob_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        bob_hubunit.econ_dir()
+        bob_hubunit.keep_dir()
     assert (
         str(excinfo.value)
-        == f"HubUnit '{bob_str}' cannot save to econ_dir because it does not have econ_road."
+        == f"HubUnit '{bob_str}' cannot save to keep_dir because it does not have keep_road."
     )
 
 
@@ -114,13 +114,13 @@ def test_hubunit_shop_ReturnsCorrectObj():
         fiscals_dir=x_fiscals_dir,
         fiscal_id=x_fiscal_id,
         owner_id=sue_str,
-        econ_road=None,
+        keep_road=None,
         road_delimiter=x_road_delimiter,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
         bit=x_bit,
         penny=x_penny,
-        econ_money_magnitude=x_money_magnitude,
+        keep_money_magnitude=x_money_magnitude,
     )
 
     # THEN
@@ -132,11 +132,11 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.fund_coin == x_fund_coin
     assert x_hubunit.bit == x_bit
     assert x_hubunit.penny == x_penny
-    assert x_hubunit.econ_money_magnitude == x_money_magnitude
+    assert x_hubunit.keep_money_magnitude == x_money_magnitude
     assert x_hubunit.fiscal_dir() == f"{x_fiscals_dir}/{x_fiscal_id}"
     assert x_hubunit.owners_dir() == f"{x_hubunit.fiscal_dir()}/owners"
     assert x_hubunit.owner_dir() == f"{x_hubunit.owners_dir()}/{sue_str}"
-    assert x_hubunit.econs_dir() == f"{x_hubunit.owner_dir()}/econs"
+    assert x_hubunit.keeps_dir() == f"{x_hubunit.owner_dir()}/keeps"
     assert x_hubunit.atoms_dir() == f"{x_hubunit.owner_dir()}/atoms"
     assert x_hubunit.voice_dir() == f"{x_hubunit.owner_dir()}/voice"
     assert x_hubunit.action_dir() == f"{x_hubunit.owner_dir()}/action"
@@ -177,12 +177,12 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.penny == default_penny_if_none()
     assert sue_hubunit.owners_dir() == f"{sue_hubunit.fiscal_dir()}/owners"
     x_hubunit = hubunit_shop(None, None, sue_str)
-    assert sue_hubunit.econ_road == texas_road
-    assert sue_hubunit.econ_dir() == get_econ_path(x_hubunit, texas_road)
+    assert sue_hubunit.keep_road == texas_road
+    assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_road)
     bob_str = "Bob"
-    assert sue_hubunit.dutys_dir() == f"{sue_hubunit.econ_dir()}/dutys"
-    assert sue_hubunit.jobs_dir() == f"{sue_hubunit.econ_dir()}/jobs"
-    assert sue_hubunit.grades_dir() == f"{sue_hubunit.econ_dir()}/grades"
+    assert sue_hubunit.dutys_dir() == f"{sue_hubunit.keep_dir()}/dutys"
+    assert sue_hubunit.jobs_dir() == f"{sue_hubunit.keep_dir()}/jobs"
+    assert sue_hubunit.grades_dir() == f"{sue_hubunit.keep_dir()}/grades"
     sue_dutys_dir = sue_hubunit.dutys_dir()
     sue_jobs_dir = sue_hubunit.jobs_dir()
     sue_grades_dir = sue_hubunit.grades_dir()
@@ -190,7 +190,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.job_path(bob_str) == f"{sue_jobs_dir}/{bob_str}.json"
     assert sue_hubunit.grade_path(bob_str) == f"{sue_grades_dir}/{bob_str}.json"
     treasury_file_name = "treasury.db"
-    treasury_file_path = f"{sue_hubunit.econ_dir()}/{treasury_file_name}"
+    treasury_file_path = f"{sue_hubunit.keep_dir()}/{treasury_file_name}"
     assert sue_hubunit.treasury_file_name() == treasury_file_name
     assert sue_hubunit.treasury_db_path() == treasury_file_path
 

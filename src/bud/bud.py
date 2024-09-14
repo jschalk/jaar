@@ -81,7 +81,7 @@ class AcctMissingException(Exception):
     pass
 
 
-class Exception_econs_justified(Exception):
+class Exception_keeps_justified(Exception):
     pass
 
 
@@ -121,12 +121,12 @@ class BudUnit:
     _originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _idea_dict: dict[RoadUnit, IdeaUnit] = None
-    _econ_dict: dict[RoadUnit, IdeaUnit] = None
+    _keep_dict: dict[RoadUnit, IdeaUnit] = None
     _healers_dict: dict[HealerID, dict[RoadUnit, IdeaUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
-    _econs_justified: bool = None
-    _econs_buildable: bool = None
+    _keeps_justified: bool = None
+    _keeps_buildable: bool = None
     _sum_healerlink_share: float = None
     _groupboxs: dict[GroupID, GroupBox] = None
     _offtrack_kids_mass_set: set[RoadUnit] = None
@@ -472,9 +472,9 @@ class BudUnit:
         self.settle_bud()
         if not problem:
             return self._idea_dict
-        if self._econs_justified is False:
-            exception_str = f"Cannot return problem set because _econs_justified={self._econs_justified}."
-            raise Exception_econs_justified(exception_str)
+        if self._keeps_justified is False:
+            exception_str = f"Cannot return problem set because _keeps_justified={self._keeps_justified}."
+            raise Exception_keeps_justified(exception_str)
 
         x_ideas = self._idea_dict.values()
         return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea.problem_bool}
@@ -1052,12 +1052,12 @@ class BudUnit:
             if x_idea.is_math():
                 self._distribute_math_attrs(x_idea)
 
-    def _set_ancestors_metrics(self, road: RoadUnit, econ_exceptions: bool = False):
+    def _set_ancestors_metrics(self, road: RoadUnit, keep_exceptions: bool = False):
         task_count = 0
         child_awardlines = None
         group_everyone = None
         ancestor_roads = get_ancestor_roads(road=road)
-        econ_justified_by_problem = True
+        keep_justified_by_problem = True
         healerlink_count = 0
 
         while ancestor_roads != []:
@@ -1091,19 +1091,19 @@ class BudUnit:
             x_idea_obj._all_acct_debt = group_everyone
 
             if x_idea_obj.healerlink.any_healer_id_exists():
-                econ_justified_by_problem = False
+                keep_justified_by_problem = False
                 healerlink_count += 1
                 self._sum_healerlink_share += x_idea_obj.get_fund_share()
             if x_idea_obj.problem_bool:
-                econ_justified_by_problem = True
+                keep_justified_by_problem = True
 
-        if econ_justified_by_problem is False or healerlink_count > 1:
-            if econ_exceptions:
-                exception_str = f"IdeaUnit '{road}' cannot sponsor ancestor econs."
-                raise Exception_econs_justified(exception_str)
-            self._econs_justified = False
+        if keep_justified_by_problem is False or healerlink_count > 1:
+            if keep_exceptions:
+                exception_str = f"IdeaUnit '{road}' cannot sponsor ancestor keeps."
+                raise Exception_keeps_justified(exception_str)
+            self._keeps_justified = False
 
-    def _set_root_attributes(self, econ_exceptions: bool):
+    def _set_root_attributes(self, keep_exceptions: bool):
         self._idearoot.set_factheirs(self._idearoot.factunits)
         self._idearoot.set_idearoot_inherit_reasonheirs()
         self._idearoot.set_teamheir(None, self._groupboxs)
@@ -1117,7 +1117,7 @@ class BudUnit:
         self._idearoot.clear_descendant_pledge_count()
         self._idearoot.clear_all_acct_cred_debt()
         if self._idearoot.is_kidless():
-            self._set_ancestors_metrics(self._idearoot.get_road(), econ_exceptions)
+            self._set_ancestors_metrics(self._idearoot.get_road(), keep_exceptions)
             self._allot_fund_share(idea=self._idearoot)
         if (
             self._tree_traverse_count == 1
@@ -1133,7 +1133,7 @@ class BudUnit:
         fund_onset: float,
         fund_cease: float,
         parent_idea: IdeaUnit,
-        econ_exceptions: bool,
+        keep_exceptions: bool,
     ):
         idea_kid.set_factheirs(parent_idea._factheirs)
         idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
@@ -1151,7 +1151,7 @@ class BudUnit:
 
         if idea_kid.is_kidless():
             # set idea's ancestor metrics using bud root as common source
-            self._set_ancestors_metrics(idea_kid.get_road(), econ_exceptions)
+            self._set_ancestors_metrics(idea_kid.get_road(), keep_exceptions)
             self._allot_fund_share(idea=idea_kid)
         if (
             self._tree_traverse_count == 1
@@ -1198,13 +1198,13 @@ class BudUnit:
         self._range_inheritors = {}
 
     def _pre_tree_traverse_attrs(self):
-        self._econs_justified = True
-        self._econs_buildable = False
+        self._keeps_justified = True
+        self._keeps_buildable = False
         self._sum_healerlink_share = 0
-        self._econ_dict = {}
+        self._keep_dict = {}
         self._healers_dict = {}
 
-    def settle_bud(self, econ_exceptions: bool = False):
+    def settle_bud(self, keep_exceptions: bool = False):
         self._clear_settle_attrs()
         self._init_idea_tree_walk()
         self._set_ideaunits_range()
@@ -1212,19 +1212,19 @@ class BudUnit:
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._set_all_ideaunits_active_status_distribute_funds(econ_exceptions)
+            self._set_all_ideaunits_active_status_distribute_funds(keep_exceptions)
         self._after_all_tree_traverses_set_cred_debt()
         self._after_all_tree_traverses_set_healerlink_share()
 
-    def _set_all_ideaunits_active_status_distribute_funds(self, econ_exceptions):
+    def _set_all_ideaunits_active_status_distribute_funds(self, keep_exceptions):
         self._pre_tree_traverse_attrs()
         self._pre_tree_traverse_cred_debt_reset()
-        self._set_root_attributes(econ_exceptions)
-        self._execute_tree_traverse(econ_exceptions)
+        self._set_root_attributes(keep_exceptions)
+        self._execute_tree_traverse(keep_exceptions)
         self._check_if_any_idea_active_status_has_altered()
         self._tree_traverse_count += 1
 
-    def _execute_tree_traverse(self, econ_exceptions: bool = False):
+    def _execute_tree_traverse(self, keep_exceptions: bool = False):
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
@@ -1246,7 +1246,7 @@ class BudUnit:
                 fund_onset=x_idearoot_kid_fund_onset,
                 fund_cease=x_idearoot_kid_fund_cease,
                 parent_idea=self._idearoot,
-                econ_exceptions=econ_exceptions,
+                keep_exceptions=keep_exceptions,
             )
             cache_idea_list.append(idea_kid)
 
@@ -1273,7 +1273,7 @@ class BudUnit:
                         fund_onset=fund_onset,
                         fund_cease=fund_cease,
                         parent_idea=parent_idea,
-                        econ_exceptions=econ_exceptions,
+                        keep_exceptions=keep_exceptions,
                     )
                     cache_idea_list.append(idea_kid)
 
@@ -1294,12 +1294,12 @@ class BudUnit:
         self._set_acctunits_fund_agenda_ratios()
 
     def _after_all_tree_traverses_set_healerlink_share(self):
-        self._set_econ_dict()
+        self._set_keep_dict()
         self._healers_dict = self._get_healers_dict()
-        self._econs_buildable = self._get_buildable_econs()
+        self._keeps_buildable = self._get_buildable_keeps()
 
-    def _set_econ_dict(self):
-        if self._econs_justified is False:
+    def _set_keep_dict(self):
+        if self._keeps_justified is False:
             self._sum_healerlink_share = 0
         for x_idea in self._idea_dict.values():
             if self._sum_healerlink_share == 0:
@@ -1307,26 +1307,26 @@ class BudUnit:
             else:
                 x_sum = self._sum_healerlink_share
                 x_idea._healerlink_ratio = x_idea.get_fund_share() / x_sum
-            if self._econs_justified and x_idea.healerlink.any_healer_id_exists():
-                self._econ_dict[x_idea.get_road()] = x_idea
+            if self._keeps_justified and x_idea.healerlink.any_healer_id_exists():
+                self._keep_dict[x_idea.get_road()] = x_idea
 
     def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
         _healers_dict = {}
-        for x_econ_road, x_econ_idea in self._econ_dict.items():
-            for x_healer_id in x_econ_idea.healerlink._healer_ids:
+        for x_keep_road, x_keep_idea in self._keep_dict.items():
+            for x_healer_id in x_keep_idea.healerlink._healer_ids:
                 x_groupbox = self.get_groupbox(x_healer_id)
                 for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
-                        _healers_dict[x_acct_id] = {x_econ_road: x_econ_idea}
+                        _healers_dict[x_acct_id] = {x_keep_road: x_keep_idea}
                     else:
                         healer_dict = _healers_dict.get(x_acct_id)
-                        healer_dict[x_econ_road] = x_econ_idea
+                        healer_dict[x_keep_road] = x_keep_idea
         return _healers_dict
 
-    def _get_buildable_econs(self) -> bool:
+    def _get_buildable_keeps(self) -> bool:
         return all(
-            roadunit_valid_dir_path(econ_road, self._road_delimiter) != False
-            for econ_road in self._econ_dict.keys()
+            roadunit_valid_dir_path(keep_road, self._road_delimiter) != False
+            for keep_road in self._keep_dict.keys()
         )
 
     def _pre_tree_traverse_cred_debt_reset(self):
@@ -1438,7 +1438,7 @@ def budunit_shop(
         _accts=get_empty_dict_if_none(None),
         _groupboxs={},
         _idea_dict=get_empty_dict_if_none(None),
-        _econ_dict=get_empty_dict_if_none(None),
+        _keep_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         credor_respect=validate_respect_num(),
@@ -1447,8 +1447,8 @@ def budunit_shop(
         fund_coin=default_fund_coin_if_none(fund_coin),
         bit=default_bit_if_none(bit),
         penny=default_penny_if_none(penny),
-        _econs_justified=get_False_if_None(),
-        _econs_buildable=get_False_if_None(),
+        _keeps_justified=get_False_if_None(),
+        _keeps_buildable=get_False_if_None(),
         _sum_healerlink_share=get_0_if_None(),
         _offtrack_kids_mass_set=set(),
         _reason_bases=set(),

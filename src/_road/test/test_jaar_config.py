@@ -1,7 +1,7 @@
 from src._road.jaar_config import (
     voice_str,
     action_str,
-    get_rootpart_of_econ_dir,
+    get_rootpart_of_keep_dir,
     treasury_file_name,
     max_tree_traverse_default,
     default_river_blocks_count,
@@ -16,9 +16,9 @@ def test_action_str():
     assert action_str() == "action"
 
 
-def test_get_rootpart_of_econ_dir_ReturnsCorrectObj():
+def test_get_rootpart_of_keep_dir_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert get_rootpart_of_econ_dir() == "idearoot"
+    assert get_rootpart_of_keep_dir() == "idearoot"
 
 
 def test_treasury_file_name_ReturnsObj() -> str:

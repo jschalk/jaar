@@ -42,7 +42,7 @@ def get_texas_hubunit() -> HubUnit:
         get_listen_temp_env_dir(),
         fiscal_id,
         owner_id="Sue",
-        econ_road=get_texas_road(),
+        keep_road=get_texas_road(),
         # pipeline_duty_job_str(),
     )
 
@@ -61,6 +61,6 @@ def get_dakota_hubunit() -> HubUnit:
         get_listen_temp_env_dir(),
         fiscal_id,
         owner_id="Sue",
-        econ_road=get_dakota_road(),
+        keep_road=get_dakota_road(),
         # pipeline_duty_job_str(),
     )

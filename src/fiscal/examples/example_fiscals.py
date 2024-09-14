@@ -10,7 +10,7 @@ from src.fiscal.examples.fiscal_env import get_test_fiscals_dir
 #     music_str = "music"
 #     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir(), in_memory_journal=True)
 #     yao_str = "Yao"
-#     music_fiscal.init_owner_econs(yao_str)
+#     music_fiscal.init_owner_keeps(yao_str)
 #     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
 #     yao_voice_bud = yao_hubunit.get_voice_bud()
 
@@ -33,12 +33,12 @@ from src.fiscal.examples.fiscal_env import get_test_fiscals_dir
 
 #     yao_voice_bud.set_idea(dallas_idea, texas_road)
 #     yao_voice_bud.set_idea(elpaso_idea, texas_road)
-#     display_ideatree(yao_voice_bud.settle_bud(), mode="Econ", graphics_bool=graphics_bool)
+#     display_ideatree(yao_voice_bud.settle_bud(), mode="Keep", graphics_bool=graphics_bool)
 #     x_hubunit = hubunit_shop(
 #         fiscals_dir=yao_hubunit.fiscals_dir,
 #         fiscal_id=yao_hubunit.fiscal_id,
 #         owner_id=yao_hubunit.owner_id,
-#         econ_road=None,
+#         keep_road=None,
 #         road_delimiter=yao_hubunit.road_delimiter,
 #         bit=yao_hubunit.bit,
 #     )
@@ -60,12 +60,12 @@ def create_example_fiscal2() -> FiscalUnit:
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_fiscal.init_owner_econs(yao_str)
+    music_fiscal.init_owner_keeps(yao_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
-    music_fiscal.init_owner_econs(wei_str)
-    music_fiscal.init_owner_econs(zia_str)
+    music_fiscal.init_owner_keeps(wei_str)
+    music_fiscal.init_owner_keeps(zia_str)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -127,9 +127,9 @@ def create_example_fiscal3() -> FiscalUnit:
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_fiscal.init_owner_econs(yao_str)
-    music_fiscal.init_owner_econs(wei_str)
-    music_fiscal.init_owner_econs(zia_str)
+    music_fiscal.init_owner_keeps(yao_str)
+    music_fiscal.init_owner_keeps(wei_str)
+    music_fiscal.init_owner_keeps(zia_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
@@ -174,9 +174,9 @@ def create_example_fiscal4() -> FiscalUnit:
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_fiscal.init_owner_econs(yao_str)
-    music_fiscal.init_owner_econs(wei_str)
-    music_fiscal.init_owner_econs(zia_str)
+    music_fiscal.init_owner_keeps(yao_str)
+    music_fiscal.init_owner_keeps(wei_str)
+    music_fiscal.init_owner_keeps(zia_str)
     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
     wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
     zia_hubunit = hubunit_shop(None, music_str, zia_str, None)

@@ -12,7 +12,7 @@ from src.d_listen.examples.listen_env import (
 from os.path import exists as os_path_exists
 
 
-def test_HubUnit_create_econ_dir_if_missing_CreatesDirectory(env_dir_setup_cleanup):
+def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
@@ -22,13 +22,13 @@ def test_HubUnit_create_econ_dir_if_missing_CreatesDirectory(env_dir_setup_clean
     texas_str = "Texas"
     texas_road = create_road(usa_road, texas_str)
     sue_hubunit = hubunit_shop(env_dir(), None, sue_str, texas_road)
-    assert os_path_exists(sue_hubunit.econ_dir()) is False
+    assert os_path_exists(sue_hubunit.keep_dir()) is False
 
     # WHEN
-    sue_hubunit.create_econ_dir_if_missing()
+    sue_hubunit.create_keep_dir_if_missing()
 
     # THEN
-    assert os_path_exists(sue_hubunit.econ_dir())
+    assert os_path_exists(sue_hubunit.keep_dir())
 
 
 def test_HubUnit_save_duty_bud_CorrectlySavesFile(env_dir_setup_cleanup):

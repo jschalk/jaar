@@ -46,7 +46,7 @@ def grades_folder() -> str:
     return "grades"
 
 
-def get_rootpart_of_econ_dir() -> str:
+def get_rootpart_of_keep_dir() -> str:
     return "idearoot"
 
 

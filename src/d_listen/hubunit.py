@@ -14,7 +14,7 @@ from src._road.jaar_config import (
     dutys_str,
     jobs_str,
     grades_folder,
-    get_rootpart_of_econ_dir,
+    get_rootpart_of_keep_dir,
     treasury_file_name,
     get_gifts_folder,
     get_fiscal_id_if_None,
@@ -74,24 +74,24 @@ class GiftFileMissingException(Exception):
     pass
 
 
-class get_econ_roadsException(Exception):
+class get_keep_roadsException(Exception):
     pass
 
 
-class _econ_roadMissingException(Exception):
+class _keep_roadMissingException(Exception):
     pass
 
 
-def get_econ_dutys_dir(x_econ_dir: str) -> str:
-    return f_path(x_econ_dir, dutys_str())
+def get_keep_dutys_dir(x_keep_dir: str) -> str:
+    return f_path(x_keep_dir, dutys_str())
 
 
-def get_econ_jobs_dir(x_econ_dir: str) -> str:
-    return f_path(x_econ_dir, jobs_str())
+def get_keep_jobs_dir(x_keep_dir: str) -> str:
+    return f_path(x_keep_dir, jobs_str())
 
 
-def get_econ_grades_dir(x_econ_dir: str) -> str:
-    return f_path(x_econ_dir, grades_folder())
+def get_keep_grades_dir(x_keep_dir: str) -> str:
+    return f_path(x_keep_dir, grades_folder())
 
 
 @dataclass
@@ -99,13 +99,13 @@ class HubUnit:
     owner_id: OwnerID = None
     fiscals_dir: str = None
     fiscal_id: str = None
-    econ_road: RoadUnit = None
+    keep_road: RoadUnit = None
     road_delimiter: str = None
     fund_pool: float = None
     fund_coin: float = None
     bit: float = None
     penny: float = None
-    econ_money_magnitude: float = None
+    keep_money_magnitude: float = None
 
     def fiscal_dir(self) -> str:
         return f_path(self.fiscals_dir, self.fiscal_id)
@@ -116,8 +116,8 @@ class HubUnit:
     def owner_dir(self) -> str:
         return f_path(self.owners_dir(), self.owner_id)
 
-    def econs_dir(self) -> str:
-        return f"{self.owner_dir()}/econs"
+    def keeps_dir(self) -> str:
+        return f"{self.owner_dir()}/keeps"
 
     def atoms_dir(self) -> str:
         return f"{self.owner_dir()}/atoms"
@@ -396,15 +396,15 @@ class HubUnit:
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
 
-    def econ_dir(self) -> str:
-        if self.econ_road is None:
-            raise _econ_roadMissingException(
-                f"HubUnit '{self.owner_id}' cannot save to econ_dir because it does not have econ_road."
+    def keep_dir(self) -> str:
+        if self.keep_road is None:
+            raise _keep_roadMissingException(
+                f"HubUnit '{self.owner_id}' cannot save to keep_dir because it does not have keep_road."
             )
-        return get_econ_path(self, self.econ_road)
+        return get_keep_path(self, self.keep_road)
 
-    def create_econ_dir_if_missing(self):
-        set_dir(self.econ_dir())
+    def create_keep_dir_if_missing(self):
+        set_dir(self.keep_dir())
 
     def owner_file_name(self, owner_id: OwnerID) -> str:
         return get_json_filename(owner_id)
@@ -413,7 +413,7 @@ class HubUnit:
         return treasury_file_name()
 
     def treasury_db_path(self) -> str:
-        return f_path(self.econ_dir(), treasury_file_name())
+        return f_path(self.keep_dir(), treasury_file_name())
 
     def duty_path(self, owner_id: OwnerID) -> str:
         return f_path(self.dutys_dir(), self.owner_file_name(owner_id))
@@ -425,13 +425,13 @@ class HubUnit:
         return f"{self.grades_dir()}/{self.owner_file_name(owner_id)}"
 
     def dutys_dir(self) -> str:
-        return get_econ_dutys_dir(self.econ_dir())
+        return get_keep_dutys_dir(self.keep_dir())
 
     def jobs_dir(self) -> str:
-        return get_econ_jobs_dir(self.econ_dir())
+        return get_keep_jobs_dir(self.keep_dir())
 
     def grades_dir(self) -> str:
-        return get_econ_grades_dir(self.econ_dir())
+        return get_keep_grades_dir(self.keep_dir())
 
     def get_jobs_dir_file_names_list(self) -> list[str]:
         try:
@@ -516,7 +516,7 @@ class HubUnit:
             fiscals_dir=self.fiscals_dir,
             fiscal_id=self.fiscal_id,
             owner_id=healer_id,
-            econ_road=self.econ_road,
+            keep_road=self.keep_road,
             road_delimiter=self.road_delimiter,
             bit=self.bit,
         )
@@ -526,30 +526,30 @@ class HubUnit:
         speaker_job = self.rj_speaker_bud(healer_id, speaker_id)
         return self.get_perspective_bud(speaker_job)
 
-    def get_econ_roads(self) -> set[RoadUnit]:
+    def get_keep_roads(self) -> set[RoadUnit]:
         x_voice_bud = self.get_voice_bud()
         x_voice_bud.settle_bud()
-        if x_voice_bud._econs_justified is False:
-            x_str = f"Cannot get_econ_roads from '{self.owner_id}' voice bud because 'BudUnit._econs_justified' is False."
-            raise get_econ_roadsException(x_str)
-        if x_voice_bud._econs_buildable is False:
-            x_str = f"Cannot get_econ_roads from '{self.owner_id}' voice bud because 'BudUnit._econs_buildable' is False."
-            raise get_econ_roadsException(x_str)
+        if x_voice_bud._keeps_justified is False:
+            x_str = f"Cannot get_keep_roads from '{self.owner_id}' voice bud because 'BudUnit._keeps_justified' is False."
+            raise get_keep_roadsException(x_str)
+        if x_voice_bud._keeps_buildable is False:
+            x_str = f"Cannot get_keep_roads from '{self.owner_id}' voice bud because 'BudUnit._keeps_buildable' is False."
+            raise get_keep_roadsException(x_str)
         owner_healer_dict = x_voice_bud._healers_dict.get(self.owner_id)
         if owner_healer_dict is None:
             return get_empty_set_if_none(None)
-        econ_roads = x_voice_bud._healers_dict.get(self.owner_id).keys()
-        return get_empty_set_if_none(econ_roads)
+        keep_roads = x_voice_bud._healers_dict.get(self.owner_id).keys()
+        return get_empty_set_if_none(keep_roads)
 
     def save_all_voice_dutys(self):
         voice = self.get_voice_bud()
-        for x_econ_road in self.get_econ_roads():
-            self.econ_road = x_econ_road
+        for x_keep_road in self.get_keep_roads():
+            self.keep_road = x_keep_road
             self.save_duty_bud(voice)
-        self.econ_road = None
+        self.keep_road = None
 
     def create_treasury_db_file(self):
-        self.create_econ_dir_if_missing()
+        self.create_keep_dir_if_missing()
         with sqlite3_connect(self.treasury_db_path()) as conn:
             pass
 
@@ -557,32 +557,32 @@ class HubUnit:
         return os_path_exists(self.treasury_db_path())
 
     def treasury_db_file_conn(self) -> Connection:
-        if self.econ_road is None:
-            raise _econ_roadMissingException(
-                f"hubunit cannot connect to treasury_db_file because econ_road is {self.econ_road}"
+        if self.keep_road is None:
+            raise _keep_roadMissingException(
+                f"hubunit cannot connect to treasury_db_file because keep_road is {self.keep_road}"
             )
         if self.treasury_db_file_exists() is False:
             self.create_treasury_db_file()
         return sqlite_connection(self.treasury_db_path())
 
     def create_voice_treasury_db_files(self):
-        for x_econ_road in self.get_econ_roads():
-            self.econ_road = x_econ_road
+        for x_keep_road in self.get_keep_roads():
+            self.keep_road = x_keep_road
             self.create_treasury_db_file()
-        self.econ_road = None
+        self.keep_road = None
 
 
 def hubunit_shop(
     fiscals_dir: str,
     fiscal_id: FiscalID,
     owner_id: OwnerID = None,
-    econ_road: RoadUnit = None,
+    keep_road: RoadUnit = None,
     road_delimiter: str = None,
     fund_pool: float = None,
     fund_coin: float = None,
     bit: float = None,
     penny: float = None,
-    econ_money_magnitude: float = None,
+    keep_money_magnitude: float = None,
 ) -> HubUnit:
     fiscals_dir = get_test_fiscals_dir() if fiscals_dir is None else fiscals_dir
     fiscal_id = get_fiscal_id_if_None(fiscal_id)
@@ -591,18 +591,18 @@ def hubunit_shop(
         fiscals_dir=fiscals_dir,
         fiscal_id=fiscal_id,
         owner_id=validate_roadnode(owner_id, road_delimiter),
-        econ_road=econ_road,
+        keep_road=keep_road,
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_none(fund_coin),
         bit=default_bit_if_none(bit),
         penny=default_penny_if_none(penny),
-        econ_money_magnitude=default_money_magnitude_if_none(econ_money_magnitude),
+        keep_money_magnitude=default_money_magnitude_if_none(keep_money_magnitude),
     )
 
 
-def get_econ_path(x_hubunit: HubUnit, x_road: RoadNode) -> str:
-    econ_root = get_rootpart_of_econ_dir()
-    x_road = rebuild_road(x_road, x_hubunit.fiscal_id, econ_root)
+def get_keep_path(x_hubunit: HubUnit, x_road: RoadNode) -> str:
+    keep_root = get_rootpart_of_keep_dir()
+    x_road = rebuild_road(x_road, x_hubunit.fiscal_id, keep_root)
     x_list = get_all_road_nodes(x_road, x_hubunit.road_delimiter)
-    return f"{x_hubunit.econs_dir()}{get_directory_path(x_list=[*x_list])}"
+    return f"{x_hubunit.keeps_dir()}{get_directory_path(x_list=[*x_list])}"
