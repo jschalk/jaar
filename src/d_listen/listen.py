@@ -24,7 +24,7 @@ def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
 
 
 def _ingest_perspective_agenda(listener: BudUnit, agenda: list[IdeaUnit]) -> BudUnit:
-    debtor_amount = listener._debtor_respect
+    debtor_amount = listener.debtor_respect
     ingest_list = generate_ingest_list(agenda, debtor_amount, listener.bit)
     for ingest_ideaunit in ingest_list:
         _ingest_single_ideaunit(listener, ingest_ideaunit)
@@ -162,7 +162,7 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     perspective_bud = get_speaker_perspective(speaker, listener._owner_id)
     if perspective_bud._rational is False:
         return _allocate_irrational_debtit_belief(listener, speaker._owner_id)
-    if listener._debtor_respect is None:
+    if listener.debtor_respect is None:
         return _allocate_inallocable_debtit_belief(listener, speaker._owner_id)
     if listener._owner_id != speaker._owner_id:
         agenda = generate_perspective_agenda(perspective_bud)
@@ -223,7 +223,7 @@ def listen_to_facts_voice_action(new_action: BudUnit, listener_hubunit: HubUnit)
 def listen_to_debtors_roll_voice_action(listener_hubunit: HubUnit) -> BudUnit:
     voice = listener_hubunit.get_voice_bud()
     new_bud = create_listen_basis(voice)
-    if voice._debtor_respect is None:
+    if voice.debtor_respect is None:
         return new_bud
     listen_to_agendas_voice_action(new_bud, listener_hubunit)
     listen_to_facts_voice_action(new_bud, listener_hubunit)
@@ -235,7 +235,7 @@ def listen_to_debtors_roll_duty_job(
 ) -> BudUnit:
     duty = healer_hubunit.get_duty_bud(listener_id)
     new_duty = create_listen_basis(duty)
-    if duty._debtor_respect is None:
+    if duty.debtor_respect is None:
         return new_duty
     listen_to_agendas_duty_job(new_duty, healer_hubunit)
     listen_to_facts_duty_job(new_duty, healer_hubunit)

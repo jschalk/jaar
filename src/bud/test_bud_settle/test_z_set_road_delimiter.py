@@ -24,7 +24,7 @@ def test_BudUnit_set_idea_CorrectlySets_bud_fiscal_id_AND_fund_coin():
     # ESTABLISH'
     x_fund_coin = 500
     sue_bud = get_budunit_with_4_levels()
-    sue_bud._fund_coin = x_fund_coin
+    sue_bud.fund_coin = x_fund_coin
     bud_fiscal_id = "Texas"
     sue_bud.set_fiscal_id(bud_fiscal_id)
     assert sue_bud._fiscal_id == bud_fiscal_id
@@ -80,7 +80,7 @@ def test_bud_set_fiscal_id_CorrectlySetsAttr():
 def test_bud_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnIdea_label():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
-    print(f"{zia_bud._max_tree_traverse=}")
+    print(f"{zia_bud.max_tree_traverse=}")
     casa_str = "casa"
     casa_road = zia_bud.make_l1_road(casa_str)
     zia_bud.set_l1_idea(ideaunit_shop(casa_str))

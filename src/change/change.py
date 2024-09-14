@@ -179,22 +179,22 @@ class ChangeUnit:
         if not optional_args_different(budunit_str(), before_bud, after_bud):
             return
         x_atomunit = atomunit_shop(budunit_str(), atom_update())
-        if before_bud._max_tree_traverse != after_bud._max_tree_traverse:
+        if before_bud.max_tree_traverse != after_bud.max_tree_traverse:
             x_atomunit.set_optional_arg(
-                "max_tree_traverse", after_bud._max_tree_traverse
+                "max_tree_traverse", after_bud.max_tree_traverse
             )
-        if before_bud._monetary_desc != after_bud._monetary_desc:
-            x_atomunit.set_optional_arg("monetary_desc", after_bud._monetary_desc)
-        if before_bud._credor_respect != after_bud._credor_respect:
-            x_atomunit.set_optional_arg("credor_respect", after_bud._credor_respect)
-        if before_bud._debtor_respect != after_bud._debtor_respect:
-            x_atomunit.set_optional_arg("debtor_respect", after_bud._debtor_respect)
-        if before_bud._tally != after_bud._tally:
-            x_atomunit.set_optional_arg("tally", after_bud._tally)
-        if before_bud._fund_pool != after_bud._fund_pool:
-            x_atomunit.set_optional_arg("fund_pool", after_bud._fund_pool)
-        if before_bud._fund_coin != after_bud._fund_coin:
-            x_atomunit.set_optional_arg("fund_coin", after_bud._fund_coin)
+        if before_bud.monetary_desc != after_bud.monetary_desc:
+            x_atomunit.set_optional_arg("monetary_desc", after_bud.monetary_desc)
+        if before_bud.credor_respect != after_bud.credor_respect:
+            x_atomunit.set_optional_arg("credor_respect", after_bud.credor_respect)
+        if before_bud.debtor_respect != after_bud.debtor_respect:
+            x_atomunit.set_optional_arg("debtor_respect", after_bud.debtor_respect)
+        if before_bud.tally != after_bud.tally:
+            x_atomunit.set_optional_arg("tally", after_bud.tally)
+        if before_bud.fund_pool != after_bud.fund_pool:
+            x_atomunit.set_optional_arg("fund_pool", after_bud.fund_pool)
+        if before_bud.fund_coin != after_bud.fund_coin:
+            x_atomunit.set_optional_arg("fund_coin", after_bud.fund_coin)
         if before_bud.bit != after_bud.bit:
             x_atomunit.set_optional_arg("bit", after_bud.bit)
         self.set_atomunit(x_atomunit)

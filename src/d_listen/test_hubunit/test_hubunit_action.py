@@ -136,8 +136,8 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     sue_bud = budunit_shop(
         sue_str,
         root_label(),
-        _fund_pool=sue_fund_pool,
-        _fund_coin=sue_fund_coin,
+        fund_pool=sue_fund_pool,
+        fund_coin=sue_fund_coin,
         bit=sue_bit,
     )
     sue_hubunit.initialize_action_file(sue_bud)
@@ -163,8 +163,8 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     action_bud = budunit_get_from_json(action_file_str)
     assert action_bud._fiscal_id == root_label()
     assert action_bud._owner_id == sue_str
-    assert action_bud._fund_pool == sue_fund_pool
-    assert action_bud._fund_coin == sue_fund_coin
+    assert action_bud.fund_pool == sue_fund_pool
+    assert action_bud.fund_coin == sue_fund_coin
     assert action_bud.bit == sue_bit
 
 

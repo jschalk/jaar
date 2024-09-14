@@ -97,13 +97,13 @@ def test_BudUnit_set_respect_ledgers_SetsAttr_scenario1():
     # THEN
     assert yao_acctunit._credor_pool != 0
     assert yao_acctunit._debtor_pool != 0
-    assert yao_acctunit._credor_pool == sue_budunit._credor_respect
-    assert yao_acctunit._debtor_pool == sue_budunit._debtor_respect
+    assert yao_acctunit._credor_pool == sue_budunit.credor_respect
+    assert yao_acctunit._debtor_pool == sue_budunit.debtor_respect
     yao_membership = yao_acctunit.get_membership(yao_str)
     assert yao_membership._credor_pool != 0
     assert yao_membership._debtor_pool != 0
-    assert yao_membership._credor_pool == sue_budunit._credor_respect
-    assert yao_membership._debtor_pool == sue_budunit._debtor_respect
+    assert yao_membership._credor_pool == sue_budunit.credor_respect
+    assert yao_membership._debtor_pool == sue_budunit.debtor_respect
     assert yao_membership._credor_pool == 1000000000
     assert yao_membership._debtor_pool == 1000000000
     yao_groupbox = sue_budunit.get_groupbox(yao_str)
@@ -137,15 +137,15 @@ def test_BudUnit_set_respect_ledgers_SetsAttr_scenario2():
     yao_yao_membership = yao_acctunit.get_membership(yao_str)
     assert yao_yao_membership._credor_pool != 0
     assert yao_yao_membership._debtor_pool != 0
-    assert yao_yao_membership._credor_pool == sue_budunit._credor_respect * 0.25
-    assert yao_yao_membership._debtor_pool == sue_budunit._debtor_respect * 0.8
+    assert yao_yao_membership._credor_pool == sue_budunit.credor_respect * 0.25
+    assert yao_yao_membership._debtor_pool == sue_budunit.debtor_respect * 0.8
     assert yao_yao_membership._credor_pool == 250000000
     assert yao_yao_membership._debtor_pool == 800000000
     yao_ohio_membership = yao_acctunit.get_membership(ohio_str)
     assert yao_ohio_membership._credor_pool != 0
     assert yao_ohio_membership._debtor_pool != 0
-    assert yao_ohio_membership._credor_pool == sue_budunit._credor_respect * 0.75
-    assert yao_ohio_membership._debtor_pool == sue_budunit._debtor_respect * 0.2
+    assert yao_ohio_membership._credor_pool == sue_budunit.credor_respect * 0.75
+    assert yao_ohio_membership._debtor_pool == sue_budunit.debtor_respect * 0.2
     assert yao_ohio_membership._credor_pool == 750000000
     assert yao_ohio_membership._debtor_pool == 200000000
     assert len(sue_budunit._groupboxs) == 2

@@ -50,7 +50,7 @@ def test_BudUnit_set_groupbox_SetsAttr_Scenario0():
 def test_BudUnit_set_groupbox_Sets_road_fund_coin():
     # ESTABLISH
     x_fund_coin = 5
-    bob_bud = budunit_shop("Bob", _fund_coin=x_fund_coin)
+    bob_bud = budunit_shop("Bob", fund_coin=x_fund_coin)
     run_str = ";Run"
     assert not bob_bud._groupboxs.get(run_str)
 

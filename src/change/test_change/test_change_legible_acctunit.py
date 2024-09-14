@@ -29,7 +29,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} was added with {credit_belief_value} {sue_bud._monetary_desc} cred and {debtit_belief_value} {sue_bud._monetary_desc} debt"
+    x_str = f"{yao_str} was added with {credit_belief_value} {sue_bud.monetary_desc} cred and {debtit_belief_value} {sue_bud.monetary_desc} debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -83,7 +83,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief_debtit_bel
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} now has {credit_belief_value} {sue_bud._monetary_desc} cred and {debtit_belief_value} {sue_bud._monetary_desc} debt."
+    x_str = f"{yao_str} now has {credit_belief_value} {sue_bud.monetary_desc} cred and {debtit_belief_value} {sue_bud.monetary_desc} debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -108,7 +108,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} now has {credit_belief_value} {sue_bud._monetary_desc} cred."
+    x_str = f"{yao_str} now has {credit_belief_value} {sue_bud.monetary_desc} cred."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -133,7 +133,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_belief():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} now has {debtit_belief_value} {sue_bud._monetary_desc} debt."
+    x_str = f"{yao_str} now has {debtit_belief_value} {sue_bud.monetary_desc} debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -155,6 +155,6 @@ def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     legible_list = create_legible_list(x_changeunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} was removed from {sue_bud._monetary_desc} accts."
+    x_str = f"{yao_str} was removed from {sue_bud.monetary_desc} accts."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

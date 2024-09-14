@@ -13,7 +13,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     yao_str = "Yao"
     slash_str = "/"
     penny_float = 0.7
-    yao_voice = budunit_shop(yao_str, _road_delimiter=slash_str, _penny=penny_float)
+    yao_voice = budunit_shop(yao_str, _road_delimiter=slash_str, penny=penny_float)
     yao_voice.set_l1_idea(ideaunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
@@ -41,15 +41,15 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job._last_gift_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
-    assert yao_empty_job._fund_pool == yao_voice._fund_pool
-    assert yao_empty_job._fund_coin == yao_voice._fund_coin
+    assert yao_empty_job.fund_pool == yao_voice.fund_pool
+    assert yao_empty_job.fund_coin == yao_voice.fund_coin
     assert yao_empty_job.bit == yao_voice.bit
-    assert yao_empty_job._penny == yao_voice._penny
-    assert yao_empty_job._monetary_desc is None
-    assert yao_empty_job._credor_respect != yao_voice._credor_respect
-    assert yao_empty_job._credor_respect == validate_respect_num()
-    assert yao_empty_job._debtor_respect != yao_voice._debtor_respect
-    assert yao_empty_job._debtor_respect == validate_respect_num()
+    assert yao_empty_job.penny == yao_voice.penny
+    assert yao_empty_job.monetary_desc is None
+    assert yao_empty_job.credor_respect != yao_voice.credor_respect
+    assert yao_empty_job.credor_respect == validate_respect_num()
+    assert yao_empty_job.debtor_respect != yao_voice.debtor_respect
+    assert yao_empty_job.debtor_respect == validate_respect_num()
     yao_empty_job.settle_bud()
     assert yao_empty_job._accts == {}
 
@@ -85,12 +85,12 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
     assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
-    assert yao_basis_job._fund_pool == yao_duty._fund_pool
-    assert yao_basis_job._fund_coin == yao_duty._fund_coin
+    assert yao_basis_job.fund_pool == yao_duty.fund_pool
+    assert yao_basis_job.fund_coin == yao_duty.fund_coin
     assert yao_basis_job.bit == yao_duty.bit
-    assert yao_basis_job._monetary_desc == yao_duty._monetary_desc
-    assert yao_basis_job._credor_respect == yao_duty._credor_respect
-    assert yao_basis_job._debtor_respect == yao_duty._debtor_respect
+    assert yao_basis_job.monetary_desc == yao_duty.monetary_desc
+    assert yao_basis_job.credor_respect == yao_duty.credor_respect
+    assert yao_basis_job.debtor_respect == yao_duty.debtor_respect
     yao_basis_job.settle_bud()
     assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
     assert len(yao_basis_job._idea_dict) == 1
@@ -137,11 +137,11 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     assert default_action_bud._fiscal_id == sue_budunit._fiscal_id
     assert default_action_bud._fiscal_id == blue_str
     assert default_action_bud._road_delimiter == slash_str
-    assert default_action_bud._fund_pool == sue_acct_pool
-    assert default_action_bud._fund_coin == x_fund_coin
+    assert default_action_bud.fund_pool == sue_acct_pool
+    assert default_action_bud.fund_coin == x_fund_coin
     assert default_action_bud.bit == x_bit
-    assert default_action_bud._credor_respect == default_respect_num()
-    assert default_action_bud._debtor_respect == default_respect_num()
-    assert default_action_bud._max_tree_traverse == sue_max_tree_traverse
+    assert default_action_bud.credor_respect == default_respect_num()
+    assert default_action_bud.debtor_respect == default_respect_num()
+    assert default_action_bud.max_tree_traverse == sue_max_tree_traverse
     assert len(default_action_bud.get_acctunits_dict()) == 1
     assert len(default_action_bud._idea_dict) == 1

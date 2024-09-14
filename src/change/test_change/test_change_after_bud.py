@@ -44,11 +44,11 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_SimplestScenario():
     # WHEN
     sue_str = "Sue"
     sue_tally = 55
-    before_sue_budunit = budunit_shop(sue_str, _tally=sue_tally)
+    before_sue_budunit = budunit_shop(sue_str, tally=sue_tally)
     after_sue_budunit = ex1_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    assert after_sue_budunit._tally == sue_tally
+    assert after_sue_budunit.tally == sue_tally
     assert after_sue_budunit == before_sue_budunit
 
 
@@ -58,7 +58,7 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     sue_str = "Sue"
 
     sue_tally = 44
-    before_sue_budunit = budunit_shop(sue_str, _tally=sue_tally)
+    before_sue_budunit = budunit_shop(sue_str, tally=sue_tally)
 
     category = budunit_str()
     x_atomunit = atomunit_shop(category, atom_update())
@@ -95,19 +95,19 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
 
     # THEN
     print(f"{sue_changeunit.atomunits.keys()=}")
-    assert after_sue_budunit._max_tree_traverse == new2_value
-    assert after_sue_budunit._credor_respect == new3_value
-    assert after_sue_budunit._debtor_respect == new4_value
-    assert after_sue_budunit._tally == new1_value
-    assert after_sue_budunit._tally != before_sue_budunit._tally
-    assert after_sue_budunit._fund_pool == new9_value
-    assert after_sue_budunit._fund_pool != before_sue_budunit._fund_pool
-    assert after_sue_budunit._fund_coin == new8_value
-    assert after_sue_budunit._fund_coin != before_sue_budunit._fund_coin
+    assert after_sue_budunit.max_tree_traverse == new2_value
+    assert after_sue_budunit.credor_respect == new3_value
+    assert after_sue_budunit.debtor_respect == new4_value
+    assert after_sue_budunit.tally == new1_value
+    assert after_sue_budunit.tally != before_sue_budunit.tally
+    assert after_sue_budunit.fund_pool == new9_value
+    assert after_sue_budunit.fund_pool != before_sue_budunit.fund_pool
+    assert after_sue_budunit.fund_coin == new8_value
+    assert after_sue_budunit.fund_coin != before_sue_budunit.fund_coin
     assert after_sue_budunit.bit == new6_value
     assert after_sue_budunit.bit != before_sue_budunit.bit
-    assert after_sue_budunit._penny == new7_value
-    assert after_sue_budunit._penny != before_sue_budunit._penny
+    assert after_sue_budunit.penny == new7_value
+    assert after_sue_budunit.penny != before_sue_budunit.penny
 
 
 def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
@@ -1121,10 +1121,10 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     fly_str = ";flyers"
     yao_acctunit.add_membership(fly_str)
     bob_acctunit.add_membership(fly_str)
-    assert before_sue_budunit._tally != 55
-    assert before_sue_budunit._max_tree_traverse != 66
-    assert before_sue_budunit._credor_respect != 77
-    assert before_sue_budunit._debtor_respect != 88
+    assert before_sue_budunit.tally != 55
+    assert before_sue_budunit.max_tree_traverse != 66
+    assert before_sue_budunit.credor_respect != 77
+    assert before_sue_budunit.debtor_respect != 88
     assert before_sue_budunit.acct_exists(yao_str)
     assert before_sue_budunit.acct_exists(zia_str)
     assert yao_acctunit.get_membership(fly_str) is not None
@@ -1135,9 +1135,9 @@ def test_ChangeUnit_get_changeunit_example1_ContainsAtomUnits():
     after_sue_budunit = ex1_changeunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    assert after_sue_budunit._tally == 55
-    assert after_sue_budunit._max_tree_traverse == 66
-    assert after_sue_budunit._credor_respect == 77
-    assert after_sue_budunit._debtor_respect == 88
+    assert after_sue_budunit.tally == 55
+    assert after_sue_budunit.max_tree_traverse == 66
+    assert after_sue_budunit.credor_respect == 77
+    assert after_sue_budunit.debtor_respect == 88
     assert after_sue_budunit.acct_exists(yao_str)
     assert after_sue_budunit.acct_exists(zia_str) is False

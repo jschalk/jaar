@@ -179,9 +179,9 @@ def test_ChangeUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_
     x_monetary_desc = "dragon dollars"
     x_credor_respect = 770
     x_debtor_respect = 880
-    after_sue_bud._tally = x_budunit_tally
-    after_sue_bud._fund_pool = x_fund_pool
-    after_sue_bud._fund_coin = x_fund_coin
+    after_sue_bud.tally = x_budunit_tally
+    after_sue_bud.fund_pool = x_fund_pool
+    after_sue_bud.fund_coin = x_fund_coin
     after_sue_bud.bit = x_bit
     after_sue_bud.set_max_tree_traverse(x_max_tree_traverse)
     after_sue_bud.set_monetary_desc(x_monetary_desc)

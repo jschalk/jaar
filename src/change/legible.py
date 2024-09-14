@@ -224,7 +224,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     debtor_respect_value = optional_args.get(debtor_respect_str())
     _tally_value = optional_args.get(_tally_str)
 
-    x_monetary_desc = x_bud._monetary_desc
+    x_monetary_desc = x_bud.monetary_desc
     if x_monetary_desc is None:
         x_monetary_desc = f"{x_bud._owner_id}'s monetary_desc"
 
@@ -257,7 +257,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
 def add_bud_acctunit_insert_to_legible_list(
     legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_bud._monetary_desc
+    x_monetary_desc = x_bud.monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
     for acctunit_atom in acctunit_dict.values():
@@ -271,7 +271,7 @@ def add_bud_acctunit_insert_to_legible_list(
 def add_bud_acctunit_update_to_legible_list(
     legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_bud._monetary_desc
+    x_monetary_desc = x_bud.monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
 
     for acctunit_atom in acctunit_dict.values():
@@ -290,7 +290,7 @@ def add_bud_acctunit_update_to_legible_list(
 def add_bud_acctunit_delete_to_legible_list(
     legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
-    x_monetary_desc = x_bud._monetary_desc
+    x_monetary_desc = x_bud.monetary_desc
     x_monetary_desc = "monetary_desc" if x_monetary_desc is None else x_monetary_desc
     for acctunit_atom in acctunit_dict.values():
         acct_id = acctunit_atom.get_value(acct_id_str())

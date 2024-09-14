@@ -35,10 +35,10 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     assert sue_default_voice._fiscal_id == sue_hubunit.fiscal_id
     assert sue_default_voice._owner_id == sue_hubunit.owner_id
     assert sue_default_voice._road_delimiter == sue_hubunit.road_delimiter
-    assert sue_default_voice._fund_pool == sue_hubunit.fund_pool
-    assert sue_default_voice._fund_coin == sue_hubunit.fund_coin
+    assert sue_default_voice.fund_pool == sue_hubunit.fund_pool
+    assert sue_default_voice.fund_coin == sue_hubunit.fund_coin
     assert sue_default_voice.bit == sue_hubunit.bit
-    assert sue_default_voice._penny == sue_hubunit.penny
+    assert sue_default_voice.penny == sue_hubunit.penny
 
 
 def test_HubUnit_delete_voice_file_DeletesvoiceFile(env_dir_setup_cleanup):

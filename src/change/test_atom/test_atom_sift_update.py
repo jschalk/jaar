@@ -57,48 +57,48 @@ def test_sift_atom_ReturnsNoneIfGivenAtomUnitIsUPDATE():
     assert not new_casa_atom
 
 
-# def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
-#     # ESTABLISH
-#     sue_bud = budunit_shop("Sue")
-#     sue_bit = 34
-#     sue_credor_respect = 44
-#     sue_debtor_respect = 54
-#     sue_fund_coin = 66
-#     sue_fund_pool = 69
-#     sue_max_tree_traverse = 72
-#     sue_monetary_desc = "huh"
-#     sue_penny = 2
-#     sue_tally = 100
-#     zia_atom = atomunit_shop(budunit_str(), atom_insert())
-#     zia_atom.set_arg("bit", sue_bit)
-#     zia_atom.set_arg("credor_respect", sue_credor_respect)
-#     zia_atom.set_arg("debtor_respect", sue_debtor_respect)
-#     zia_atom.set_arg("fund_coin", sue_fund_coin)
-#     zia_atom.set_arg("fund_pool", sue_fund_pool)
-#     zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
-#     zia_atom.set_arg("monetary_desc", sue_monetary_desc)
-#     zia_atom.set_arg("penny", sue_penny)
-#     zia_atom.set_arg("tally", sue_tally)
+def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bit = 34
+    sue_credor_respect = 44
+    sue_debtor_respect = 54
+    sue_fund_coin = 66
+    sue_fund_pool = 69
+    sue_max_tree_traverse = 72
+    sue_monetary_desc = "huh"
+    sue_penny = 2
+    sue_tally = 100
+    zia_atom = atomunit_shop(budunit_str(), atom_insert())
+    zia_atom.set_arg("bit", sue_bit)
+    zia_atom.set_arg("credor_respect", sue_credor_respect)
+    zia_atom.set_arg("debtor_respect", sue_debtor_respect)
+    zia_atom.set_arg("fund_coin", sue_fund_coin)
+    zia_atom.set_arg("fund_pool", sue_fund_pool)
+    zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
+    zia_atom.set_arg("monetary_desc", sue_monetary_desc)
+    zia_atom.set_arg("penny", sue_penny)
+    zia_atom.set_arg("tally", sue_tally)
 
-#     # WHEN
-#     new_zia_atomunit = sift_atomunit(sue_bud, zia_atom)
+    # WHEN
+    new_zia_atomunit = sift_atomunit(sue_bud, zia_atom)
 
-#     # THEN
-#     assert new_zia_atomunit
-#     assert new_zia_atomunit.crud_str == atom_update()
-#     assert new_zia_atomunit.get_optional_args_dict() != {}
-#     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-#     assert zia_optional_args == {
-#         "bit": sue_bit,
-#         "credor_respect": sue_credor_respect,
-#         "debtor_respect": sue_debtor_respect,
-#         "fund_coin": sue_fund_coin,
-#         "fund_pool": sue_fund_pool,
-#         "max_tree_traverse": sue_max_tree_traverse,
-#         "monetary_desc": sue_monetary_desc,
-#         "penny": sue_penny,
-#         "tally": sue_tally,
-#     }
+    # THEN
+    assert new_zia_atomunit
+    assert new_zia_atomunit.crud_str == atom_update()
+    assert new_zia_atomunit.get_optional_args_dict() != {}
+    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
+    assert zia_optional_args == {
+        "bit": sue_bit,
+        "credor_respect": sue_credor_respect,
+        "debtor_respect": sue_debtor_respect,
+        "fund_coin": sue_fund_coin,
+        "fund_pool": sue_fund_pool,
+        "max_tree_traverse": sue_max_tree_traverse,
+        "monetary_desc": sue_monetary_desc,
+        "penny": sue_penny,
+        "tally": sue_tally,
+    }
 
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acctunit():

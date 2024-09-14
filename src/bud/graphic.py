@@ -151,8 +151,8 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
         "_fund_agenda_take",
     ]
     df = get_bud_acctunits_dataframe(x_bud)
-    df.insert(1, "_credor_respect", x_bud._credor_respect)
-    df.insert(4, "_debtor_respect", x_bud._debtor_respect)
+    df.insert(1, "_credor_respect", x_bud.credor_respect)
+    df.insert(4, "_debtor_respect", x_bud.debtor_respect)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )

@@ -31,11 +31,11 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     yao_str = "Yao"
     yao_bud._originunit.set_originhold(yao_str, 1)
     yao_fund_pool = 23000
-    yao_bud._fund_pool = yao_fund_pool
+    yao_bud.fund_pool = yao_fund_pool
     yao_fund_coin = 23
-    yao_bud._fund_coin = yao_fund_coin
+    yao_bud.fund_coin = yao_fund_coin
     bud_tally = 23
-    yao_bud._tally = bud_tally
+    yao_bud.tally = bud_tally
     x_credor_respect = 22
     x_debtor_respect = 44
     yao_bud.set_credor_respect(x_credor_respect)
@@ -52,14 +52,14 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["_owner_id"] == yao_bud._owner_id
     assert bud_dict["_fiscal_id"] == yao_bud._fiscal_id
-    assert bud_dict["_tally"] == yao_bud._tally
-    assert bud_dict["_tally"] == bud_tally
-    assert bud_dict["_fund_pool"] == yao_fund_pool
-    assert bud_dict["_fund_coin"] == yao_fund_coin
-    assert bud_dict["_max_tree_traverse"] == yao_bud._max_tree_traverse
+    assert bud_dict["tally"] == yao_bud.tally
+    assert bud_dict["tally"] == bud_tally
+    assert bud_dict["fund_pool"] == yao_fund_pool
+    assert bud_dict["fund_coin"] == yao_fund_coin
+    assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
     assert bud_dict["_road_delimiter"] == yao_bud._road_delimiter
-    assert bud_dict["_credor_respect"] == yao_bud._credor_respect
-    assert bud_dict["_debtor_respect"] == yao_bud._debtor_respect
+    assert bud_dict["credor_respect"] == yao_bud.credor_respect
+    assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
     assert bud_dict["_last_gift_id"] == yao_bud._last_gift_id
     assert len(bud_dict["_accts"]) == len(yao_bud._accts)
     assert len(bud_dict["_accts"]) != 12
@@ -161,13 +161,13 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     x_fund_pool = 66000
-    zia_bud._fund_pool = x_fund_pool
+    zia_bud.fund_pool = x_fund_pool
     x_fund_coin = 66
-    zia_bud._fund_coin = x_fund_coin
+    zia_bud.fund_coin = x_fund_coin
     x_bit = 7
     zia_bud.bit = x_bit
     x_penny = 0.3
-    zia_bud._penny = x_penny
+    zia_bud.penny = x_penny
     override_str = "override"
     yao_str = "Yao"
     run_str = ";runners"
@@ -190,13 +190,13 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 
     assert bud_dict["_owner_id"] == zia_bud._owner_id
     assert bud_dict["_fiscal_id"] == zia_bud._fiscal_id
-    assert bud_dict["_tally"] == zia_bud._tally
-    assert bud_dict["_fund_pool"] == zia_bud._fund_pool
-    assert bud_dict["_fund_coin"] == zia_bud._fund_coin
+    assert bud_dict["tally"] == zia_bud.tally
+    assert bud_dict["fund_pool"] == zia_bud.fund_pool
+    assert bud_dict["fund_coin"] == zia_bud.fund_coin
     assert bud_dict["bit"] == zia_bud.bit
-    assert bud_dict["_penny"] == zia_bud._penny
-    assert bud_dict["_credor_respect"] == zia_bud._credor_respect
-    assert bud_dict["_debtor_respect"] == zia_bud._debtor_respect
+    assert bud_dict["penny"] == zia_bud.penny
+    assert bud_dict["credor_respect"] == zia_bud.credor_respect
+    assert bud_dict["debtor_respect"] == zia_bud.debtor_respect
     # with pytest_raises(Exception) as excinfo:
     #     bud_dict["_credor_respect"]
     # assert str(excinfo.value) == "'_credor_respect'"
@@ -246,9 +246,9 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     _kids = "_kids"
     assert bud_dict["_owner_id"] == yao_bud._owner_id
     assert bud_dict["_fiscal_id"] == yao_bud._fiscal_id
-    assert bud_dict["_tally"] == yao_bud._tally
-    assert bud_dict["_max_tree_traverse"] == 2
-    assert bud_dict["_max_tree_traverse"] == yao_bud._max_tree_traverse
+    assert bud_dict["tally"] == yao_bud.tally
+    assert bud_dict["max_tree_traverse"] == 2
+    assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
     assert bud_dict["_road_delimiter"] == yao_bud._road_delimiter
 
     x_idearoot = yao_bud._idearoot
@@ -292,13 +292,13 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     tiger_fiscal_id = "tiger"
     zia_bud.set_fiscal_id(tiger_fiscal_id)
     zia_fund_pool = 80000
-    zia_bud._fund_pool = zia_fund_pool
+    zia_bud.fund_pool = zia_fund_pool
     zia_fund_coin = 8
-    zia_bud._fund_coin = zia_fund_coin
+    zia_bud.fund_coin = zia_fund_coin
     zia_bit = 5
     zia_bud.bit = zia_bit
     zia_penny = 2
-    zia_bud._penny = zia_penny
+    zia_bud.penny = zia_penny
     zia_credor_respect = 200
     zia_debtor_respect = 200
     zia_bud.set_credor_respect(zia_credor_respect)
@@ -355,21 +355,21 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_bud._owner_id is not None
     assert json_bud._owner_id == zia_bud._owner_id
     assert json_bud._fiscal_id == zia_bud._fiscal_id
-    assert json_bud._fund_pool == zia_fund_pool
-    assert json_bud._fund_pool == zia_bud._fund_pool
-    assert json_bud._fund_coin == zia_fund_coin
-    assert json_bud._fund_coin == zia_bud._fund_coin
+    assert json_bud.fund_pool == zia_fund_pool
+    assert json_bud.fund_pool == zia_bud.fund_pool
+    assert json_bud.fund_coin == zia_fund_coin
+    assert json_bud.fund_coin == zia_bud.fund_coin
     assert json_bud.bit == zia_bit
     assert json_bud.bit == zia_bud.bit
-    assert json_bud._penny == zia_penny
-    assert json_bud._penny == zia_bud._penny
-    assert json_bud._max_tree_traverse == 23
-    assert json_bud._max_tree_traverse == zia_bud._max_tree_traverse
+    assert json_bud.penny == zia_penny
+    assert json_bud.penny == zia_bud.penny
+    assert json_bud.max_tree_traverse == 23
+    assert json_bud.max_tree_traverse == zia_bud.max_tree_traverse
     assert json_bud._road_delimiter == zia_bud._road_delimiter
-    assert json_bud._credor_respect == zia_bud._credor_respect
-    assert json_bud._debtor_respect == zia_bud._debtor_respect
-    assert json_bud._credor_respect == zia_credor_respect
-    assert json_bud._debtor_respect == zia_debtor_respect
+    assert json_bud.credor_respect == zia_bud.credor_respect
+    assert json_bud.debtor_respect == zia_bud.debtor_respect
+    assert json_bud.credor_respect == zia_credor_respect
+    assert json_bud.debtor_respect == zia_debtor_respect
     assert json_bud._last_gift_id == zia_bud._last_gift_id
     assert json_bud._last_gift_id == zia_last_gift_id
     # assert json_bud._groups == zia_bud._groups
@@ -493,17 +493,17 @@ def test_budunit_get_from_json_ReturnsCorrectObj_road_delimiter_GroupExample():
 def test_budunit_get_from_json_ExportsBudUnit_mass():
     # ESTABLISH
     x1_bud = budunit_v001()
-    x1_bud._tally = 15
-    assert x1_bud._tally == 15
-    assert x1_bud._idearoot.mass != x1_bud._tally
+    x1_bud.tally = 15
+    assert x1_bud.tally == 15
+    assert x1_bud._idearoot.mass != x1_bud.tally
     assert x1_bud._idearoot.mass == 1
 
     # WHEN
     x2_bud = budunit_get_from_json(x1_bud.get_json())
 
     # THEN
-    assert x1_bud._tally == 15
-    assert x1_bud._tally == x2_bud._tally
+    assert x1_bud.tally == 15
+    assert x1_bud.tally == x2_bud.tally
     assert x1_bud._idearoot.mass == 1
     assert x1_bud._idearoot.mass == x2_bud._idearoot.mass
     assert x1_bud._idearoot._kids == x2_bud._idearoot._kids

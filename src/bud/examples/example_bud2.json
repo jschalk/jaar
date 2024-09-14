@@ -560,7 +560,7 @@
             "debtit_belief": 1
         }
     },
-    "_bit": 1,
+    "bit": 1,
     "_idearoot": {
         "factunits": {
             "A;Aaron Donald things effected by him": {
@@ -5422,12 +5422,12 @@
         "_uid": 1
     },
     "mass": 1,
-    "_max_tree_traverse": 20,
+    "max_tree_traverse": 20,
     "_originunit": {
         "_originholds": {}
     },
     "_owner_id": "Bob",
-    "_penny": 1,
+    "penny": 1,
     "_fiscal_id": "A",
     "_road_delimiter": ";"
 }

@@ -645,7 +645,7 @@ def test_BudUnit_settle_bud_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
 
     # WHEN
     # hack bud to set _max_tree_traverse = 1 (not allowed, should be 2 or more)
-    sue_bud._max_tree_traverse = 1
+    sue_bud.max_tree_traverse = 1
     sue_bud.settle_bud()
 
     # THEN
@@ -655,7 +655,7 @@ def test_BudUnit_settle_bud_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
 def test_BudUnit_tree_traverse_count_SetByTotalNumberOfTreeTraversesEndsStatusIsDetected():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    assert sue_bud._max_tree_traverse != 2
+    assert sue_bud.max_tree_traverse != 2
 
     # WHEN
     sue_bud.settle_bud()

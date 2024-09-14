@@ -186,10 +186,10 @@ class HubUnit:
             _owner_id=self.owner_id,
             _fiscal_id=self.fiscal_id,
             _road_delimiter=self.road_delimiter,
-            _fund_pool=self.fund_pool,
-            _fund_coin=self.fund_coin,
+            fund_pool=self.fund_pool,
+            fund_coin=self.fund_coin,
             bit=self.bit,
-            _penny=self.penny,
+            penny=self.penny,
         )
         x_budunit._last_gift_id = init_gift_id()
         return x_budunit

@@ -22,18 +22,18 @@ def test_BudUnit_Exists():
     assert x_bud
     assert x_bud._fiscal_id is None
     assert x_bud._owner_id is None
-    assert x_bud._tally is None
+    assert x_bud.tally is None
     assert x_bud._accts is None
     assert x_bud._idearoot is None
-    assert x_bud._max_tree_traverse is None
+    assert x_bud.max_tree_traverse is None
     assert x_bud._road_delimiter is None
-    assert x_bud._fund_pool is None
-    assert x_bud._fund_coin is None
+    assert x_bud.fund_pool is None
+    assert x_bud.fund_coin is None
     assert x_bud.bit is None
-    assert x_bud._penny is None
-    assert x_bud._monetary_desc is None
-    assert x_bud._credor_respect is None
-    assert x_bud._debtor_respect is None
+    assert x_bud.penny is None
+    assert x_bud.monetary_desc is None
+    assert x_bud.credor_respect is None
+    assert x_bud.debtor_respect is None
     assert x_bud._last_gift_id is None
     assert x_bud._originunit is None
     # calculated attr
@@ -67,28 +67,28 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _owner_id=sue_str,
         _fiscal_id=iowa_fiscal_id,
         _road_delimiter=slash_road_delimiter,
-        _fund_pool=x_fund_pool,
-        _fund_coin=x_fund_coin,
+        fund_pool=x_fund_pool,
+        fund_coin=x_fund_coin,
         bit=x_bit,
-        _penny=x_penny,
+        penny=x_penny,
     )
 
     # THEN
     assert x_bud
     assert x_bud._owner_id == sue_str
     assert x_bud._fiscal_id == iowa_fiscal_id
-    assert x_bud._tally == 1
+    assert x_bud.tally == 1
     assert x_bud._accts == {}
     assert x_bud._idearoot is not None
-    assert x_bud._max_tree_traverse == 3
+    assert x_bud.max_tree_traverse == 3
     assert x_bud._road_delimiter == slash_road_delimiter
-    assert x_bud._fund_pool == x_fund_pool
-    assert x_bud._fund_coin == x_fund_coin
+    assert x_bud.fund_pool == x_fund_pool
+    assert x_bud.fund_coin == x_fund_coin
     assert x_bud.bit == x_bit
-    assert x_bud._penny == x_penny
-    assert not x_bud._monetary_desc
-    assert x_bud._credor_respect == validate_respect_num()
-    assert x_bud._debtor_respect == validate_respect_num()
+    assert x_bud.penny == x_penny
+    assert not x_bud.monetary_desc
+    assert x_bud.credor_respect == validate_respect_num()
+    assert x_bud.debtor_respect == validate_respect_num()
     assert not x_bud._last_gift_id
     # calculated attr
     assert x_bud._originunit == originunit_shop()
@@ -116,11 +116,11 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud._owner_id == ""
     assert x_bud._fiscal_id == root_label()
     assert x_bud._road_delimiter == default_road_delimiter_if_none()
-    assert x_bud._fund_pool == validate_fund_pool()
-    assert x_bud._fund_coin == default_fund_coin_if_none()
+    assert x_bud.fund_pool == validate_fund_pool()
+    assert x_bud.fund_coin == default_fund_coin_if_none()
     assert x_bud.bit == default_bit_if_none()
-    assert x_bud._penny == default_penny_if_none()
-    assert x_bud._idearoot._fund_coin == x_bud._fund_coin
+    assert x_bud.penny == default_penny_if_none()
+    assert x_bud._idearoot._fund_coin == x_bud.fund_coin
     assert x_bud._idearoot._road_delimiter == x_bud._road_delimiter
     assert x_bud._idearoot._root
     assert x_bud._idearoot._uid == 1
@@ -134,20 +134,20 @@ def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
     # ESTABLISH
     zia_str = "Zia"
     zia_bud = budunit_shop(_owner_id=zia_str)
-    assert zia_bud._max_tree_traverse == 3
+    assert zia_bud.max_tree_traverse == 3
 
     # WHEN
     zia_bud.set_max_tree_traverse(x_int=11)
 
     # THEN
-    assert zia_bud._max_tree_traverse == 11
+    assert zia_bud.max_tree_traverse == 11
 
 
 def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     # ESTABLISH
     zia_str = "Zia"
     zia_bud = budunit_shop(_owner_id=zia_str)
-    assert zia_bud._max_tree_traverse == 3
+    assert zia_bud.max_tree_traverse == 3
     zia_tree_traverse = 1
 
     # WHEN/THEN
@@ -163,7 +163,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     # ESTABLISH
     zia_str = "Zia"
     zia_bud = budunit_shop(_owner_id=zia_str)
-    assert zia_bud._max_tree_traverse == 3
+    assert zia_bud.max_tree_traverse == 3
 
     # WHEN/THEN
     zia_tree_traverse = 3.5
@@ -211,13 +211,13 @@ def test_BudUnit_set_monetary_desc_SetsAttrCorrectly():
     # ESTABLISH
     sue_bud = budunit_shop("Sue", "Texas")
     sue_monetary_desc = "Folos"
-    assert sue_bud._monetary_desc != sue_monetary_desc
+    assert sue_bud.monetary_desc != sue_monetary_desc
 
     # WHEN
     sue_bud.set_monetary_desc(sue_monetary_desc)
 
     # THEN
-    assert sue_bud._monetary_desc == sue_monetary_desc
+    assert sue_bud.monetary_desc == sue_monetary_desc
 
 
 def test_BudUnit_set_last_gift_id_SetsAttrCorrectly():
@@ -268,10 +268,10 @@ def test_BudUnit_set_fund_pool_CorrectlySetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue", "Texas")
     sue_fund_pool = 99000
-    assert sue_bud._fund_pool == validate_fund_pool()
+    assert sue_bud.fund_pool == validate_fund_pool()
 
     # WHEN
     sue_bud.set_fund_pool(sue_fund_pool)
 
     # THEN
-    assert sue_bud._fund_pool == 99000
+    assert sue_bud.fund_pool == 99000

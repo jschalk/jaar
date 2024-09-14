@@ -162,8 +162,8 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
     assert yao_bud._owner_id == yao_str
     assert yao_bud._fiscal_id == yao_hubunit.fiscal_id
     assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
-    assert yao_bud._fund_pool == yao_hubunit.fund_pool
-    assert yao_bud._fund_coin == yao_hubunit.fund_coin
+    assert yao_bud.fund_pool == yao_hubunit.fund_pool
+    assert yao_bud.fund_coin == yao_hubunit.fund_coin
     assert yao_bud.bit == yao_hubunit.bit
 
 

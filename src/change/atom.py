@@ -230,19 +230,19 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
         x_bud.set_debtor_respect(x_atom.get_value(x_arg))
     x_arg = "fund_pool"
     if x_atom.get_value(x_arg) is not None:
-        x_bud._fund_pool = x_atom.get_value(x_arg)
+        x_bud.fund_pool = x_atom.get_value(x_arg)
     x_arg = "fund_coin"
     if x_atom.get_value(x_arg) is not None:
-        x_bud._fund_coin = x_atom.get_value(x_arg)
+        x_bud.fund_coin = x_atom.get_value(x_arg)
     x_arg = "tally"
     if x_atom.get_value(x_arg) is not None:
-        x_bud._tally = x_atom.get_value(x_arg)
+        x_bud.tally = x_atom.get_value(x_arg)
     x_arg = "bit"
     if x_atom.get_value(x_arg) is not None:
         x_bud.bit = x_atom.get_value(x_arg)
     x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
-        x_bud._penny = x_atom.get_value(x_arg)
+        x_bud.penny = x_atom.get_value(x_arg)
 
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -582,13 +582,13 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
 def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
     if category == budunit_str():
         return (
-            x_obj._tally != y_obj._tally
-            or x_obj._max_tree_traverse != y_obj._max_tree_traverse
-            or x_obj._credor_respect != y_obj._credor_respect
-            or x_obj._debtor_respect != y_obj._debtor_respect
+            x_obj.tally != y_obj.tally
+            or x_obj.max_tree_traverse != y_obj.max_tree_traverse
+            or x_obj.credor_respect != y_obj.credor_respect
+            or x_obj.debtor_respect != y_obj.debtor_respect
             or x_obj.bit != y_obj.bit
-            or x_obj._fund_pool != y_obj._fund_pool
-            or x_obj._fund_coin != y_obj._fund_coin
+            or x_obj.fund_pool != y_obj.fund_pool
+            or x_obj.fund_coin != y_obj.fund_coin
         )
     elif category in {bud_acct_membership_str()}:
         return (x_obj.credit_vote != y_obj.credit_vote) or (

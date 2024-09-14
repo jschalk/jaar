@@ -54,7 +54,7 @@ def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
 
 def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     # ESTABLISH
-    yao_budunit = budunit_shop("Yao", _tally=10)
+    yao_budunit = budunit_shop("Yao", tally=10)
 
     auto_str = "auto"
     auto_road = yao_budunit.make_l1_road(auto_str)
@@ -147,7 +147,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario0():
     sue_bud.settle_bud()
 
     # THEN
-    print(f"{sue_bud._fund_pool=}")
+    print(f"{sue_bud.fund_pool=}")
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio == 0.5
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio == 0.5
     assert sue_bud.get_idea_obj(status_road)._fund_ratio == 0.0
@@ -199,7 +199,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario1():
     sue_bud.settle_bud()
 
     # THEN
-    print(f"{sue_bud._fund_pool=}")
+    print(f"{sue_bud.fund_pool=}")
     assert sue_bud.get_idea_obj(casa_road)._fund_ratio == 0.5
     assert sue_bud.get_idea_obj(floor_road)._fund_ratio == 0.25
     assert sue_bud.get_idea_obj(status_road)._fund_ratio == 0.25
@@ -254,7 +254,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFund
     sue_budunit.settle_bud()
 
     # THEN
-    print(f"{sue_budunit._fund_pool=}")
+    print(f"{sue_budunit.fund_pool=}")
     clean_fund_ratio = 0.2
     assert sue_budunit.get_idea_obj(casa_road)._fund_ratio == 1
     assert sue_budunit.get_idea_obj(swim_road)._fund_ratio == 0.8

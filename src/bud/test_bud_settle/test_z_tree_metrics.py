@@ -83,7 +83,7 @@ def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
 def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaRoadUnit():
     # ESTABLISH
     nia_str = "Nia"
-    nia_bud = budunit_shop(nia_str, _tally=10)
+    nia_bud = budunit_shop(nia_str, tally=10)
     weekdays = "weekdays"
     nia_bud.set_l1_idea(ideaunit_shop(weekdays, mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
