@@ -1,5 +1,5 @@
-from src.money.examples.example_credorledgers import example_yao_hubunit
-from src.money.riverrun import riverrun_shop
+from src.e_judge.examples.example_credorledgers import example_yao_hubunit
+from src.e_judge.riverrun import riverrun_shop
 
 
 def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario01():

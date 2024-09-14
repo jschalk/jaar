@@ -1,8 +1,8 @@
 from src.bud.bud import budunit_shop
 from src.d_listen.hubunit import hubunit_shop
-from src.money.rivercycle import get_debtorledger
-from src.money.riverrun import riverrun_shop
-from src.money.examples.example_credorledgers import example_yao_hubunit
+from src.e_judge.rivercycle import get_debtorledger
+from src.e_judge.riverrun import riverrun_shop
+from src.e_judge.examples.example_credorledgers import example_yao_hubunit
 
 
 def test_RiverRun_set_acct_tax_yield_SetsAttr():

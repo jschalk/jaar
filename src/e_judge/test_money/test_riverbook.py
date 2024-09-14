@@ -1,6 +1,6 @@
 from src.bud.bud import budunit_shop
 from src.d_listen.hubunit import hubunit_shop
-from src.money.rivercycle import (
+from src.e_judge.rivercycle import (
     RiverBook,
     riverbook_shop,
     create_riverbook,

@@ -1,6 +1,6 @@
-from src.money.riverrun import riverrun_shop
-from src.money.examples.econ_env import env_dir_setup_cleanup
-from src.money.examples.example_credorledgers import example_yao_texas_hubunit
+from src.e_judge.riverrun import riverrun_shop
+from src.e_judge.examples.econ_env import env_dir_setup_cleanup
+from src.e_judge.examples.example_credorledgers import example_yao_texas_hubunit
 from os.path import exists as os_path_exists
 
 

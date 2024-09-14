@@ -8,7 +8,7 @@ from src._instrument.python_tool import (
 from src._road.jaar_config import get_json_filename
 from src._road.finance import allot_scale
 from src._road.road import AcctID, OwnerID
-from src.money.rivercycle import (
+from src.e_judge.rivercycle import (
     RiverGrade,
     rivergrade_shop,
     create_init_rivercycle,

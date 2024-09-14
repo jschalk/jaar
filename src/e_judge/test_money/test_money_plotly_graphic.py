@@ -1,4 +1,4 @@
-from src.money.money_graphic import (
+from src.e_judge.money_graphic import (
     get_money_structures0_fig,
     get_money_structures1_fig,
     get_money_structures2_fig,

@@ -1,11 +1,11 @@
 from src.bud.bud import budunit_shop
 from src.d_listen.hubunit import hubunit_shop
-from src.money.examples.example_credorledgers import (
+from src.e_judge.examples.example_credorledgers import (
     example_yao_credorledger,
     example_bob_credorledger,
     example_zia_credorledger,
 )
-from src.money.rivercycle import (
+from src.e_judge.rivercycle import (
     get_credorledger,
     create_riverbook,
     RiverCycle,

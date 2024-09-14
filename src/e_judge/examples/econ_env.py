@@ -14,7 +14,7 @@ def temp_fiscal_dir():
 
 
 def temp_fiscals_dir():
-    return "src/money/examples/fiscals"
+    return "src/e_judge/examples/fiscals"
 
 
 def temp_owner_id():
@@ -57,7 +57,7 @@ class InvalideconCopyException(Exception):
 
 
 def copy_evaluation_econ(src_fiscal_id: str, dest_fiscal_id: str):
-    base_dir = "src/money/examples/econs"
+    base_dir = "src/e_judge/examples/econs"
     new_dir = f"{base_dir}/{dest_fiscal_id}"
     if os_path_exists(new_dir):
         raise InvalideconCopyException(

@@ -1,9 +1,9 @@
-from src.money.examples.example_credorledgers import (
+from src.e_judge.examples.example_credorledgers import (
     example_yao_bob_zia_credorledgers,
     example_yao_bob_zia_tax_dues,
     example_yao_hubunit,
 )
-from src.money.riverrun import RiverRun, riverrun_shop
+from src.e_judge.riverrun import RiverRun, riverrun_shop
 
 
 def test_RiverRun_Exists():

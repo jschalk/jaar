@@ -1,6 +1,6 @@
 from src.change.atom_config import fiscal_id_str
-from src.money.examples.example_credorledgers import example_yao_hubunit
-from src.money.rivercycle import RiverGrade, rivergrade_shop
+from src.e_judge.examples.example_credorledgers import example_yao_hubunit
+from src.e_judge.rivercycle import RiverGrade, rivergrade_shop
 
 
 def test_RiverGrade_Exists():

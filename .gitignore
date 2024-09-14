@@ -136,5 +136,5 @@ cython_debug/
 
 # local testing
 main_cli_app2.py
-src/money/examples/econs/ex4/
-src/money/examples/econs/ex6/
+src/e_judge/examples/econs/ex4/
+src/e_judge/examples/econs/ex6/
