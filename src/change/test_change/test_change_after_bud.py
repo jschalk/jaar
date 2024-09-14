@@ -104,8 +104,8 @@ def test_ChangeUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     assert after_sue_budunit._fund_pool != before_sue_budunit._fund_pool
     assert after_sue_budunit._fund_coin == new8_value
     assert after_sue_budunit._fund_coin != before_sue_budunit._fund_coin
-    assert after_sue_budunit._bit == new6_value
-    assert after_sue_budunit._bit != before_sue_budunit._bit
+    assert after_sue_budunit.bit == new6_value
+    assert after_sue_budunit.bit != before_sue_budunit.bit
     assert after_sue_budunit._penny == new7_value
     assert after_sue_budunit._penny != before_sue_budunit._penny
 

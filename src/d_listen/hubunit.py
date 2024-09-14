@@ -188,7 +188,7 @@ class HubUnit:
             _road_delimiter=self.road_delimiter,
             _fund_pool=self.fund_pool,
             _fund_coin=self.fund_coin,
-            _bit=self.bit,
+            bit=self.bit,
             _penny=self.penny,
         )
         x_budunit._last_gift_id = init_gift_id()

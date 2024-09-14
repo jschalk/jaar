@@ -239,7 +239,7 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
         x_bud._tally = x_atom.get_value(x_arg)
     x_arg = "bit"
     if x_atom.get_value(x_arg) is not None:
-        x_bud._bit = x_atom.get_value(x_arg)
+        x_bud.bit = x_atom.get_value(x_arg)
     x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
         x_bud._penny = x_atom.get_value(x_arg)
@@ -586,7 +586,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj._max_tree_traverse != y_obj._max_tree_traverse
             or x_obj._credor_respect != y_obj._credor_respect
             or x_obj._debtor_respect != y_obj._debtor_respect
-            or x_obj._bit != y_obj._bit
+            or x_obj.bit != y_obj.bit
             or x_obj._fund_pool != y_obj._fund_pool
             or x_obj._fund_coin != y_obj._fund_coin
         )

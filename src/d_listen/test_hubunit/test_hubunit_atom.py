@@ -164,7 +164,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
     assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
     assert yao_bud._fund_pool == yao_hubunit.fund_pool
     assert yao_bud._fund_coin == yao_hubunit.fund_coin
-    assert yao_bud._bit == yao_hubunit.bit
+    assert yao_bud.bit == yao_hubunit.bit
 
 
 def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(

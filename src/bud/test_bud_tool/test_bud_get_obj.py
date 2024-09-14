@@ -20,7 +20,6 @@ from src.bud.bud_tool import (
     bud_idea_teamlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
-    bud_attr_different,
 )
 
 
@@ -146,6 +145,20 @@ def test_bud_idea_factunit_get_obj_ReturnsObj():
     # THEN
     assert x_obj
     assert x_obj == sue_bud.get_idea_obj(casa_road).factunits.get(week_road)
+
+
+def test_bud_get_obj_ReturnsObj_BudUnit():
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_bud = budunit_shop("Sue")
+    required_args = {"acct_id": yao_str}
+    sue_bud.add_acctunit(yao_str)
+
+    # WHEN
+    x_obj = bud_get_obj(budunit_str(), sue_bud, required_args)
+    # THEN
+    assert x_obj
+    assert x_obj == sue_bud
 
 
 def test_bud_get_obj_ReturnsObj_bud_acctunit_get_obj():

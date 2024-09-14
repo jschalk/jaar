@@ -138,7 +138,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
         root_label(),
         _fund_pool=sue_fund_pool,
         _fund_coin=sue_fund_coin,
-        _bit=sue_bit,
+        bit=sue_bit,
     )
     sue_hubunit.initialize_action_file(sue_bud)
     assert sue_hubunit.action_file_exists()
@@ -165,7 +165,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     assert action_bud._owner_id == sue_str
     assert action_bud._fund_pool == sue_fund_pool
     assert action_bud._fund_coin == sue_fund_coin
-    assert action_bud._bit == sue_bit
+    assert action_bud.bit == sue_bit
 
 
 def test_HubUnit_initialize_action_file_CreatesDirsAndFiles(env_dir_setup_cleanup):

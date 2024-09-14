@@ -29,7 +29,7 @@ def test_BudUnit_Exists():
     assert x_bud._road_delimiter is None
     assert x_bud._fund_pool is None
     assert x_bud._fund_coin is None
-    assert x_bud._bit is None
+    assert x_bud.bit is None
     assert x_bud._penny is None
     assert x_bud._monetary_desc is None
     assert x_bud._credor_respect is None
@@ -69,7 +69,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _road_delimiter=slash_road_delimiter,
         _fund_pool=x_fund_pool,
         _fund_coin=x_fund_coin,
-        _bit=x_bit,
+        bit=x_bit,
         _penny=x_penny,
     )
 
@@ -84,7 +84,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._road_delimiter == slash_road_delimiter
     assert x_bud._fund_pool == x_fund_pool
     assert x_bud._fund_coin == x_fund_coin
-    assert x_bud._bit == x_bit
+    assert x_bud.bit == x_bit
     assert x_bud._penny == x_penny
     assert not x_bud._monetary_desc
     assert x_bud._credor_respect == validate_respect_num()
@@ -118,7 +118,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud._road_delimiter == default_road_delimiter_if_none()
     assert x_bud._fund_pool == validate_fund_pool()
     assert x_bud._fund_coin == default_fund_coin_if_none()
-    assert x_bud._bit == default_bit_if_none()
+    assert x_bud.bit == default_bit_if_none()
     assert x_bud._penny == default_penny_if_none()
     assert x_bud._idearoot._fund_coin == x_bud._fund_coin
     assert x_bud._idearoot._road_delimiter == x_bud._road_delimiter

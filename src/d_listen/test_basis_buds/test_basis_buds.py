@@ -43,7 +43,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job._road_delimiter == yao_voice._road_delimiter
     assert yao_empty_job._fund_pool == yao_voice._fund_pool
     assert yao_empty_job._fund_coin == yao_voice._fund_coin
-    assert yao_empty_job._bit == yao_voice._bit
+    assert yao_empty_job.bit == yao_voice.bit
     assert yao_empty_job._penny == yao_voice._penny
     assert yao_empty_job._monetary_desc is None
     assert yao_empty_job._credor_respect != yao_voice._credor_respect
@@ -87,7 +87,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job._road_delimiter == yao_duty._road_delimiter
     assert yao_basis_job._fund_pool == yao_duty._fund_pool
     assert yao_basis_job._fund_coin == yao_duty._fund_coin
-    assert yao_basis_job._bit == yao_duty._bit
+    assert yao_basis_job.bit == yao_duty.bit
     assert yao_basis_job._monetary_desc == yao_duty._monetary_desc
     assert yao_basis_job._credor_respect == yao_duty._credor_respect
     assert yao_basis_job._debtor_respect == yao_duty._debtor_respect
@@ -139,7 +139,7 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     assert default_action_bud._road_delimiter == slash_str
     assert default_action_bud._fund_pool == sue_acct_pool
     assert default_action_bud._fund_coin == x_fund_coin
-    assert default_action_bud._bit == x_bit
+    assert default_action_bud.bit == x_bit
     assert default_action_bud._credor_respect == default_respect_num()
     assert default_action_bud._debtor_respect == default_respect_num()
     assert default_action_bud._max_tree_traverse == sue_max_tree_traverse

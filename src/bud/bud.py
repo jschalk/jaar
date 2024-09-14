@@ -113,7 +113,7 @@ class BudUnit:
     _road_delimiter: str = None
     _fund_pool: FundNum = None
     _fund_coin: FundCoin = None
-    _bit: BitNum = None
+    bit: BitNum = None
     _penny: PennyNum = None
     _monetary_desc: str = None
     _credor_respect: int = None
@@ -156,14 +156,14 @@ class BudUnit:
         self.set_fund_pool(x_acct_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
-        if valid_finance_ratio(new_credor_respect, self._bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self._bit}'"
+        if valid_finance_ratio(new_credor_respect, self.bit) is False:
+            exception_str = f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.bit}'"
             raise _bit_RatioException(exception_str)
         self._credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
-        if valid_finance_ratio(new_debtor_respect, self._bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self._bit}'"
+        if valid_finance_ratio(new_debtor_respect, self.bit) is False:
+            exception_str = f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.bit}'"
             raise _bit_RatioException(exception_str)
         self._debtor_respect = new_debtor_respect
 
@@ -330,8 +330,8 @@ class BudUnit:
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
         if x_acctunit._road_delimiter != self._road_delimiter:
             x_acctunit._road_delimiter = self._road_delimiter
-        if x_acctunit._bit != self._bit:
-            x_acctunit._bit = self._bit
+        if x_acctunit._bit != self.bit:
+            x_acctunit._bit = self.bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
             x_acctunit.add_membership(x_acctunit.acct_id)
         self._accts[x_acctunit.acct_id] = x_acctunit
@@ -1180,8 +1180,8 @@ class BudUnit:
         self._credor_respect = validate_respect_num(self._credor_respect)
         self._debtor_respect = validate_respect_num(self._debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        credor_allot = allot_scale(credor_ledger, self._credor_respect, self._bit)
-        debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self._bit)
+        credor_allot = allot_scale(credor_ledger, self._credor_respect, self.bit)
+        debtor_allot = allot_scale(debtor_ledger, self._debtor_respect, self.bit)
         for x_acct_id, acct_credor_pool in credor_allot.items():
             self.get_acct(x_acct_id).set_credor_pool(acct_credor_pool)
         for x_acct_id, acct_debtor_pool in debtor_allot.items():
@@ -1382,7 +1382,7 @@ class BudUnit:
             "_tally": self._tally,
             "_fund_pool": self._fund_pool,
             "_fund_coin": self._fund_coin,
-            "_bit": self._bit,
+            "bit": self.bit,
             "_penny": self._penny,
             "_owner_id": self._owner_id,
             "_fiscal_id": self._fiscal_id,
@@ -1425,7 +1425,7 @@ def budunit_shop(
     _road_delimiter: str = None,
     _fund_pool: FundNum = None,
     _fund_coin: FundCoin = None,
-    _bit: BitNum = None,
+    bit: BitNum = None,
     _penny: PennyNum = None,
     _tally: float = None,
 ) -> BudUnit:
@@ -1445,7 +1445,7 @@ def budunit_shop(
         _debtor_respect=validate_respect_num(),
         _fund_pool=validate_fund_pool(_fund_pool),
         _fund_coin=default_fund_coin_if_none(_fund_coin),
-        _bit=default_bit_if_none(_bit),
+        bit=default_bit_if_none(bit),
         _penny=default_penny_if_none(_penny),
         _econs_justified=get_False_if_None(),
         _econs_buildable=get_False_if_None(),
@@ -1486,7 +1486,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud._fund_coin = default_fund_coin_if_none(
         obj_from_bud_dict(bud_dict, "_fund_coin")
     )
-    x_bud._bit = default_bit_if_none(obj_from_bud_dict(bud_dict, "_bit"))
+    x_bud.bit = default_bit_if_none(obj_from_bud_dict(bud_dict, "bit"))
     x_bud._penny = default_penny_if_none(obj_from_bud_dict(bud_dict, "_penny"))
     x_bud._credor_respect = obj_from_bud_dict(bud_dict, "_credor_respect")
     x_bud._debtor_respect = obj_from_bud_dict(bud_dict, "_debtor_respect")

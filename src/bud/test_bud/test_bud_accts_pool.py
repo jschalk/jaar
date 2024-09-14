@@ -20,7 +20,7 @@ def test_BudUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
     zia_bud = budunit_shop(zia_str)
     x_credor_respect = 23
     zia_bud.set_credor_respect(x_credor_respect)
-    assert zia_bud._bit == 1
+    assert zia_bud.bit == 1
     assert zia_bud._credor_respect == x_credor_respect
 
     # WHEN
@@ -29,7 +29,7 @@ def test_BudUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
         zia_bud.set_credor_respect(new_credor_respect)
     assert (
         str(excinfo.value)
-        == f"Bud '{zia_str}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{zia_bud._bit}'"
+        == f"Bud '{zia_str}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{zia_bud.bit}'"
     )
 
 
@@ -52,7 +52,7 @@ def test_BudUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     zia_bud = budunit_shop(zia_str)
     x_debtor_respect = 23
     zia_bud.set_debtor_respect(x_debtor_respect)
-    assert zia_bud._bit == 1
+    assert zia_bud.bit == 1
     assert zia_bud._debtor_respect == x_debtor_respect
 
     # WHEN
@@ -61,7 +61,7 @@ def test_BudUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
         zia_bud.set_debtor_respect(new_debtor_respect)
     assert (
         str(excinfo.value)
-        == f"Bud '{zia_str}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{zia_bud._bit}'"
+        == f"Bud '{zia_str}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{zia_bud.bit}'"
     )
 
 

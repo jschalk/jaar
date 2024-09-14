@@ -195,8 +195,8 @@ class ChangeUnit:
             x_atomunit.set_optional_arg("fund_pool", after_bud._fund_pool)
         if before_bud._fund_coin != after_bud._fund_coin:
             x_atomunit.set_optional_arg("fund_coin", after_bud._fund_coin)
-        if before_bud._bit != after_bud._bit:
-            x_atomunit.set_optional_arg("bit", after_bud._bit)
+        if before_bud.bit != after_bud.bit:
+            x_atomunit.set_optional_arg("bit", after_bud.bit)
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):

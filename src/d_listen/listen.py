@@ -25,7 +25,7 @@ def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
 
 def _ingest_perspective_agenda(listener: BudUnit, agenda: list[IdeaUnit]) -> BudUnit:
     debtor_amount = listener._debtor_respect
-    ingest_list = generate_ingest_list(agenda, debtor_amount, listener._bit)
+    ingest_list = generate_ingest_list(agenda, debtor_amount, listener.bit)
     for ingest_ideaunit in ingest_list:
         _ingest_single_ideaunit(listener, ingest_ideaunit)
     return listener

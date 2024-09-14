@@ -165,7 +165,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     x_fund_coin = 66
     zia_bud._fund_coin = x_fund_coin
     x_bit = 7
-    zia_bud._bit = x_bit
+    zia_bud.bit = x_bit
     x_penny = 0.3
     zia_bud._penny = x_penny
     override_str = "override"
@@ -193,7 +193,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert bud_dict["_tally"] == zia_bud._tally
     assert bud_dict["_fund_pool"] == zia_bud._fund_pool
     assert bud_dict["_fund_coin"] == zia_bud._fund_coin
-    assert bud_dict["_bit"] == zia_bud._bit
+    assert bud_dict["bit"] == zia_bud.bit
     assert bud_dict["_penny"] == zia_bud._penny
     assert bud_dict["_credor_respect"] == zia_bud._credor_respect
     assert bud_dict["_debtor_respect"] == zia_bud._debtor_respect
@@ -296,7 +296,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     zia_fund_coin = 8
     zia_bud._fund_coin = zia_fund_coin
     zia_bit = 5
-    zia_bud._bit = zia_bit
+    zia_bud.bit = zia_bit
     zia_penny = 2
     zia_bud._penny = zia_penny
     zia_credor_respect = 200
@@ -359,8 +359,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_bud._fund_pool == zia_bud._fund_pool
     assert json_bud._fund_coin == zia_fund_coin
     assert json_bud._fund_coin == zia_bud._fund_coin
-    assert json_bud._bit == zia_bit
-    assert json_bud._bit == zia_bud._bit
+    assert json_bud.bit == zia_bit
+    assert json_bud.bit == zia_bud.bit
     assert json_bud._penny == zia_penny
     assert json_bud._penny == zia_bud._penny
     assert json_bud._max_tree_traverse == 23

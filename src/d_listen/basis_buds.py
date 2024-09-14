@@ -12,7 +12,7 @@ def create_empty_bud(ref_bud: BudUnit, x_owner_id: OwnerID = None) -> BudUnit:
     x_road_delimiter = ref_bud._road_delimiter
     x_fund_pool = ref_bud._fund_pool
     x_fund_coin = ref_bud._fund_coin
-    x_bit = ref_bud._bit
+    x_bit = ref_bud.bit
     x_penny = ref_bud._penny
     return budunit_shop(
         _owner_id=x_owner_id,
@@ -20,7 +20,7 @@ def create_empty_bud(ref_bud: BudUnit, x_owner_id: OwnerID = None) -> BudUnit:
         _road_delimiter=x_road_delimiter,
         _fund_pool=x_fund_pool,
         _fund_coin=x_fund_coin,
-        _bit=x_bit,
+        bit=x_bit,
         _penny=x_penny,
     )
 
