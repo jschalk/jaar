@@ -1321,8 +1321,8 @@
                                                                     "music;Internet": {
                                                                         "base": "music;Internet",
                                                                         "premises": {
-                                                                            "music;Internet;Youtube": {
-                                                                                "need": "music;Internet;Youtube"
+                                                                            "music;Internet;YahooVideo": {
+                                                                                "need": "music;Internet;YahooVideo"
                                                                             }
                                                                         }
                                                                     }
@@ -4077,8 +4077,8 @@
                         "mass": 1,
                         "_uid": 252
                     },
-                    "Youtube": {
-                        "_label": "Youtube",
+                    "YahooVideo": {
+                        "_label": "YahooVideo",
                         "mass": 1,
                         "_uid": 255
                     }

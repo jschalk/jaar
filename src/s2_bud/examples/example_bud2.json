@@ -1267,8 +1267,8 @@
                                                                     "A;Internet": {
                                                                         "base": "A;Internet",
                                                                         "premises": {
-                                                                            "A;Internet,Youtube": {
-                                                                                "need": "A;Internet,Youtube"
+                                                                            "A;Internet,YahooVideo": {
+                                                                                "need": "A;Internet,YahooVideo"
                                                                             }
                                                                         }
                                                                     }
@@ -3567,8 +3567,8 @@
                         "mass": 1,
                         "_uid": 252
                     },
-                    "Youtube": {
-                        "_label": "Youtube",
+                    "YahooVideo": {
+                        "_label": "YahooVideo",
                         "mass": 1,
                         "_uid": 255
                     }
