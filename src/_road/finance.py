@@ -149,9 +149,9 @@ def _allot_missing_scale(
     if missing_scale != 0:
         x_count = 0
         for x_key, x_float in sorted(ledger.items(), key=lambda kv: (-kv[1], kv[0])):
-            delta_scale = missing_scale_list[x_count]
-            changes_ledger_list.append([x_key, x_float + delta_scale])
-            missing_scale -= delta_scale
+            difference_scale = missing_scale_list[x_count]
+            changes_ledger_list.append([x_key, x_float + difference_scale])
+            missing_scale -= difference_scale
             if missing_scale == 0:
                 break
             x_count += 1
