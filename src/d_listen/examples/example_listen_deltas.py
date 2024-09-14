@@ -1,15 +1,15 @@
 from src._road.jaar_config import get_fiscal_id_if_None
 from src._road.road import FiscalID
 from src.bud.bud_tool import bud_acctunit_str, bud_ideaunit_str
-from src.delta.atom_config import acct_id_str, parent_road_str, label_str
-from src.delta.atom import (
+from src.gift.atom_config import acct_id_str, parent_road_str, label_str
+from src.gift.atom import (
     AtomUnit,
     atom_delete,
     atom_update,
     atom_insert,
     atomunit_shop,
 )
-from src.delta.delta import DeltaUnit, deltaunit_shop
+from src.gift.delta import DeltaUnit, deltaunit_shop
 
 
 def get_atom_example_ideaunit_sports(fiscal_id: FiscalID = None) -> AtomUnit:

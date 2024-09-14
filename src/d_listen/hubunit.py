@@ -45,13 +45,13 @@ from src.bud.bud import (
     get_from_json as budunit_get_from_json,
     budunit_shop,
 )
-from src.delta.atom import (
+from src.gift.atom import (
     AtomUnit,
     get_from_json as atomunit_get_from_json,
     modify_bud_with_atomunit,
 )
 from src.d_listen.basis_buds import get_default_action_bud
-from src.delta.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
+from src.gift.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass

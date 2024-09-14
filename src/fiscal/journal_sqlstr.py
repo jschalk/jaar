@@ -1,9 +1,9 @@
-from src.delta.atom_config import (
+from src.gift.atom_config import (
     get_flattened_atom_table_build,
     atom_hx_table_name,
     atom_mstr_table_name,
 )
-from src.delta.atom import AtomUnit
+from src.gift.atom import AtomUnit
 from src._road.road import RoadUnit
 
 # from src._instrument.sqlite import (

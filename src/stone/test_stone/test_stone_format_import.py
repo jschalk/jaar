@@ -1,6 +1,6 @@
 from src._instrument.file import create_file_path as f_path
 from src.bud.bud import budunit_shop
-from src.delta.atom_config import (
+from src.gift.atom_config import (
     fiscal_id_str,
     owner_id_str,
     acct_id_str,

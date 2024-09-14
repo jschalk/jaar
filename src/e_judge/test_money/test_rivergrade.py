@@ -1,4 +1,4 @@
-from src.delta.atom_config import fiscal_id_str
+from src.gift.atom_config import fiscal_id_str
 from src.e_judge.examples.example_credorledgers import example_yao_hubunit
 from src.e_judge.rivercycle import RiverGrade, rivergrade_shop
 

@@ -1,5 +1,5 @@
 from src._instrument.python_tool import conditional_fig_show
-from src.delta.atom_config import acct_id_str, owner_id_str
+from src.gift.atom_config import acct_id_str, owner_id_str
 from src.fiscal.fiscal_report import (
     get_fiscal_voices_accts_dataframe,
     get_fiscal_voices_accts_plotly_fig,
