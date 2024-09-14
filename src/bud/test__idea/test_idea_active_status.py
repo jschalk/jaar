@@ -149,7 +149,7 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues(
     sport_idea.set_awardheirs_fund_give_fund_take()
 
 
-def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsChanges():
+def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     # ESTABLISH
     ball_str = "ball"
     ball_road = create_road(ball_str)
@@ -170,7 +170,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsChanges():
     assert id(ball_idea._reasonheirs) != id(reasonheirs)
 
 
-def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesChanges():
+def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     # ESTABLISH
     ball_str = "ball"
     ball_road = create_road(ball_str)
