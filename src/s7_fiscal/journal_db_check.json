@@ -1,0 +1,38 @@
+{
+    "tables": {
+        "atom2delta": {
+            "columns": {}
+        },
+        "atom_mstr": {
+            "columns": {}
+        },
+        "atom_hx": {
+            "columns": {}
+        },
+        "delta2gift": {
+            "columns": {}
+        },
+        "delta_mstr": {
+            "columns": {}
+        },
+        "gift_mstr": {
+            "columns": {}
+        },
+        "gift2owner": {
+            "columns": {
+                "owner_id": {}
+            }
+        },
+        "owner_mstr": {
+            "columns": {
+                "owner_id": {}
+            }
+        },
+        "road_ref": {
+            "columns": {
+                "delimiter": {},
+                "road": {}
+            }
+        }
+    }
+}
