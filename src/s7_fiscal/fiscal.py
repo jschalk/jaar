@@ -3,6 +3,7 @@ from src.s1_road.jaar_config import get_gifts_folder
 from src.s1_road.finance import default_bit_if_none, default_penny_if_none
 from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.s2_bud.bud import BudUnit
+from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.s5_listen.basis_buds import get_default_action_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
 from src.s5_listen.listen import (
@@ -30,6 +31,7 @@ class FiscalUnit:
 
     fiscal_id: FiscalID
     fiscals_dir: str
+    timeline: TimeLineUnit = None
     _fiscal_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
@@ -205,15 +207,19 @@ class FiscalUnit:
 def fiscalunit_shop(
     fiscal_id: FiscalID,
     fiscals_dir: str,
+    timeline: TimeLineUnit = None,
     in_memory_journal: bool = None,
     _road_delimiter: str = None,
     _fund_coin: float = None,
     _bit: float = None,
     _penny: float = None,
 ) -> FiscalUnit:
+    if timeline is None:
+        timeline = timelineunit_shop()
     fiscal_x = FiscalUnit(
         fiscal_id=fiscal_id,
         fiscals_dir=fiscals_dir,
+        timeline=timeline,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _fund_coin=default_bit_if_none(_fund_coin),
         _bit=default_bit_if_none(_bit),

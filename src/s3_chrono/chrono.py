@@ -10,6 +10,7 @@ from src.s2_bud.idea import (
 from src.s2_bud.bud import BudUnit
 from datetime import datetime
 from dataclasses import dataclass
+from os import getcwd as os_getcwd
 
 
 def c400_leap_str():
@@ -499,3 +500,40 @@ class ChronoUnit:
 
 def chronounit_shop(x_budunit: BudUnit, time_range_root_road: str, x_min: int):
     return ChronoUnit(x_budunit, time_range_root_road, x_min=x_min)
+
+
+def config_file_dir() -> str:
+    return f"{os_getcwd()}/src/s3_chrono"
+
+
+def get_default_timeline_config_file_name() -> str:
+    return "default_timeline_config.json"
+
+
+def get_default_timeline_config_dict() -> dict:
+    x_filename = get_default_timeline_config_file_name()
+    return get_dict_from_json(open_file(config_file_dir(), x_filename))
+
+
+@dataclass
+class TimeLineUnit:
+    c400_config: int = None
+    hours_config: list[list[str, int]] = None
+    months_config: list[list[str, int]] = None
+    timeline_label: str = None
+    weekdays_config: list[str] = None
+    yr1_jan1_offset: int = None
+
+
+def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
+    if timeline_config == None:
+        timeline_config = get_default_timeline_config_dict()
+    x_timelineunit = TimeLineUnit(
+        c400_config=timeline_config.get(c400_config_str()),
+        hours_config=timeline_config.get(hours_config_str()),
+        months_config=timeline_config.get(months_config_str()),
+        timeline_label=timeline_config.get(timeline_label_str()),
+        weekdays_config=timeline_config.get(weekdays_config_str()),
+        yr1_jan1_offset=timeline_config.get(yr1_jan1_offset_str()),
+    )
+    return x_timelineunit

@@ -3,6 +3,7 @@ from src.s0_instrument.python_tool import get_json_from_dict
 from src.s2_bud.bud import budunit_shop
 from src.s3_chrono.examples.chrono_examples import (
     get_creg_config,
+    get_five_config,
     get_squirt_config,
     chrono_examples_dir,
     get_example_timeline_config,
@@ -20,6 +21,8 @@ from src.s3_chrono.chrono import (
     yr1_jan1_offset_str,
     validate_timeline_config,
     create_timeline_config,
+    TimeLineUnit,
+    timelineunit_shop,
     week_str,
     year_str,
     day_str,
@@ -271,3 +274,41 @@ def test_get_day_road_ReturnsObj():
 
     # WHEN / THEN
     assert day_road == get_day_road(sue_budunit, fizz_road)
+
+
+def test_TimeLineUnit_Exists():
+    # ESTABLISH / WHEN
+    x_timelineunit = TimeLineUnit()
+
+    # THEN
+    assert x_timelineunit
+    assert not x_timelineunit.c400_config
+    assert not x_timelineunit.hours_config
+    assert not x_timelineunit.months_config
+    assert not x_timelineunit.timeline_label
+    assert not x_timelineunit.weekdays_config
+    assert not x_timelineunit.yr1_jan1_offset
+
+
+def test_timelineunit_shop_ReturnsObj_Default():
+    # ESTABLISH
+    creg_config = get_creg_config()
+
+    # WHEN
+    x_timelineunit = timelineunit_shop()
+
+    # THEN
+    creg_c400_config = creg_config.get(c400_config_str())
+    creg_hours_config = creg_config.get(hours_config_str())
+    creg_months_config = creg_config.get(months_config_str())
+    creg_timeline_label = creg_config.get(timeline_label_str())
+    creg_weekdays_config = creg_config.get(weekdays_config_str())
+    creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
+
+    assert x_timelineunit
+    assert x_timelineunit.c400_config == creg_c400_config
+    assert x_timelineunit.hours_config == creg_hours_config
+    assert x_timelineunit.months_config == creg_months_config
+    assert x_timelineunit.timeline_label == creg_timeline_label
+    assert x_timelineunit.weekdays_config == creg_weekdays_config
+    assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
