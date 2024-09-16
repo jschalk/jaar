@@ -80,7 +80,7 @@ def test_HubUnit_Exists():
     assert x_hubunit.fund_coin is None
     assert x_hubunit.bit is None
     assert x_hubunit.penny is None
-    assert x_hubunit.keep_money_magnitude is None
+    assert x_hubunit.keep_point_magnitude is None
 
 
 def test_HubUnit_RaisesError_keep_road_DoesNotExist():
@@ -120,7 +120,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
         fund_coin=x_fund_coin,
         bit=x_bit,
         penny=x_penny,
-        keep_money_magnitude=x_money_magnitude,
+        keep_point_magnitude=x_money_magnitude,
     )
 
     # THEN
@@ -132,7 +132,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.fund_coin == x_fund_coin
     assert x_hubunit.bit == x_bit
     assert x_hubunit.penny == x_penny
-    assert x_hubunit.keep_money_magnitude == x_money_magnitude
+    assert x_hubunit.keep_point_magnitude == x_money_magnitude
     assert x_hubunit.fiscal_dir() == f"{x_fiscals_dir}/{x_fiscal_id}"
     assert x_hubunit.owners_dir() == f"{x_hubunit.fiscal_dir()}/owners"
     assert x_hubunit.owner_dir() == f"{x_hubunit.owners_dir()}/{sue_str}"

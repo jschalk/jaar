@@ -105,7 +105,7 @@ class HubUnit:
     fund_coin: float = None
     bit: float = None
     penny: float = None
-    keep_money_magnitude: float = None
+    keep_point_magnitude: float = None
 
     def fiscal_dir(self) -> str:
         return f_path(self.fiscals_dir, self.fiscal_id)
@@ -582,7 +582,7 @@ def hubunit_shop(
     fund_coin: float = None,
     bit: float = None,
     penny: float = None,
-    keep_money_magnitude: float = None,
+    keep_point_magnitude: float = None,
 ) -> HubUnit:
     fiscals_dir = get_test_fiscals_dir() if fiscals_dir is None else fiscals_dir
     fiscal_id = get_fiscal_id_if_None(fiscal_id)
@@ -597,7 +597,7 @@ def hubunit_shop(
         fund_coin=default_fund_coin_if_none(fund_coin),
         bit=default_bit_if_none(bit),
         penny=default_penny_if_none(penny),
-        keep_money_magnitude=default_money_magnitude_if_none(keep_money_magnitude),
+        keep_point_magnitude=default_money_magnitude_if_none(keep_point_magnitude),
     )
 
 

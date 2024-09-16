@@ -41,16 +41,16 @@ def test_create_riverbook_ReturnsCorrectObj():
     yao_bud.add_acctunit(yao_str)
     yao_bud.add_acctunit(sue_str)
     yao_hubunit = hubunit_shop(None, None, yao_str)
-    yao_book_money_amount = 500
+    yao_book_point_amount = 500
 
     # WHEN
     yao_credorledger = get_credorledger(yao_bud)
     yao_riverbook = create_riverbook(
-        yao_hubunit, yao_str, yao_credorledger, yao_book_money_amount
+        yao_hubunit, yao_str, yao_credorledger, yao_book_point_amount
     )
 
     # THEN
     assert yao_riverbook.hubunit == yao_hubunit
     assert yao_riverbook.owner_id == yao_str
     assert yao_riverbook._rivergrants == {yao_str: 250, sue_str: 250}
-    assert sum(yao_riverbook._rivergrants.values()) == yao_book_money_amount
+    assert sum(yao_riverbook._rivergrants.values()) == yao_book_point_amount

@@ -59,7 +59,7 @@ def test_RiverRun_reset_tax_yields_CorrectlySetsAttr():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -85,7 +85,7 @@ def test_RiverRun_acct_has_tax_yield_ReturnsCorrectBool():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
@@ -118,7 +118,7 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
     bob_money_amount = 88
     bob_penny = 11
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
@@ -138,7 +138,7 @@ def test_RiverRun_get_acct_tax_yield_ReturnsCorrectObj():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -171,7 +171,7 @@ def test_RiverRun_add_acct_tax_yield_ReturnsCorrectObj():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -203,7 +203,7 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     bob_money_amount = 1000
     bob_penny = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_money_magnitude=bob_money_amount
+        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -221,16 +221,16 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 0
 
     # WHEN
-    excess_payer_money, tax_got = bob_riverrun.levy_tax_due(bob_str, 5)
+    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 5)
     # THEN
-    assert excess_payer_money == 0
+    assert excess_payer_points == 0
     assert bob_riverrun.get_acct_tax_due(bob_str) == 375
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 5
 
     # WHEN
-    excess_payer_money, tax_got = bob_riverrun.levy_tax_due(bob_str, 375)
+    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 375)
     # THEN
-    assert excess_payer_money == 0
+    assert excess_payer_points == 0
     assert bob_riverrun.get_acct_tax_due(bob_str) == 0
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 380
 
@@ -238,9 +238,9 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_due(sue_str) == 560
     assert bob_riverrun.get_acct_tax_yield(sue_str) == 0
     # WHEN
-    excess_payer_money, tax_got = bob_riverrun.levy_tax_due(sue_str, 1000)
+    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(sue_str, 1000)
     # THEN
-    assert excess_payer_money == 440
+    assert excess_payer_points == 440
     assert bob_riverrun.get_acct_tax_due(sue_str) == 0
     assert bob_riverrun.get_acct_tax_yield(sue_str) == 560
 
@@ -249,9 +249,9 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_due(zia_str) == 0
     assert bob_riverrun.get_acct_tax_yield(zia_str) == 0
     # WHEN
-    excess_payer_money, tax_got = bob_riverrun.levy_tax_due(zia_str, 1000)
+    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(zia_str, 1000)
     # THEN
-    assert excess_payer_money == 1000
+    assert excess_payer_points == 1000
     assert bob_riverrun.get_acct_tax_due(zia_str) == 0
     assert bob_riverrun.get_acct_tax_yield(zia_str) == 0
 
@@ -259,9 +259,9 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_due(yao_str) == 60
     assert bob_riverrun.get_acct_tax_yield(yao_str) == 0
     # WHEN
-    excess_payer_money, tax_got = bob_riverrun.levy_tax_due(yao_str, 81)
+    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(yao_str, 81)
     # THEN
-    assert excess_payer_money == 21
+    assert excess_payer_points == 21
     assert bob_riverrun.get_acct_tax_due(yao_str) == 0
     assert bob_riverrun.get_acct_tax_yield(yao_str) == 60
 

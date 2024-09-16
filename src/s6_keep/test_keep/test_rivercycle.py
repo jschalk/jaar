@@ -46,9 +46,9 @@ def test_RiverCylce_set_complete_riverbook_CorrectlySetsAttr():
     one_int = 1
     yao_hubunit = hubunit_shop(None, None, "Yao")
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
-    bob_book_money_amount = 555
+    bob_book_point_amount = 555
     bob_str = "Bob"
-    bob_riverbook = create_riverbook(yao_hubunit, bob_str, {}, bob_book_money_amount)
+    bob_riverbook = create_riverbook(yao_hubunit, bob_str, {}, bob_book_point_amount)
     assert one_rivercycle.riverbooks == {}
 
     # WHEN
@@ -66,16 +66,16 @@ def test_RiverCylce_set_riverbook_CorrectlySetsAttr():
     bob_str = "Bob"
     keep_credorledger = {bob_str: {yao_str: 75, bob_str: 25}}
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int, keep_credorledger)
-    bob_book_money_amount = 500
+    bob_book_point_amount = 500
     assert one_rivercycle.riverbooks == {}
 
     # WHEN
-    one_rivercycle.set_riverbook(bob_str, bob_book_money_amount)
+    one_rivercycle.set_riverbook(bob_str, bob_book_point_amount)
 
     # THEN
     bob_credorledger = keep_credorledger.get(bob_str)
     bob_riverbook = create_riverbook(
-        yao_hubunit, bob_str, bob_credorledger, bob_book_money_amount
+        yao_hubunit, bob_str, bob_credorledger, bob_book_point_amount
     )
     assert one_rivercycle.riverbooks == {bob_str: bob_riverbook}
 
@@ -87,14 +87,14 @@ def test_RiverCylce_create_cylceledger_ReturnsCorrectObjOneRiverBook():
     one_int = 1
     yao_credorledger = {yao_str: {yao_str: 334.0}}
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int, yao_credorledger)
-    book_money_amount = 450
-    one_rivercycle.set_riverbook(yao_str, book_money_amount)
+    book_point_amount = 450
+    one_rivercycle.set_riverbook(yao_str, book_point_amount)
 
     # WHEN
     one_cylceledger = one_rivercycle.create_cylceledger()
 
     # THEN
-    assert one_cylceledger == {yao_str: book_money_amount}
+    assert one_cylceledger == {yao_str: book_point_amount}
 
 
 def test_RiverCylce_create_cylceledger_ReturnsCorrectObjTwoRiverBooks():
@@ -108,17 +108,17 @@ def test_RiverCylce_create_cylceledger_ReturnsCorrectObjTwoRiverBooks():
         bob_str: {yao_str: 49, bob_str: 51},
     }
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int, keep_credorledgers)
-    yao_book_money_amount = 500
-    bob_book_money_amount = 100000
-    one_rivercycle.set_riverbook(yao_str, yao_book_money_amount)
-    one_rivercycle.set_riverbook(bob_str, bob_book_money_amount)
+    yao_book_point_amount = 500
+    bob_book_point_amount = 100000
+    one_rivercycle.set_riverbook(yao_str, yao_book_point_amount)
+    one_rivercycle.set_riverbook(bob_str, bob_book_point_amount)
 
     # WHEN
     one_cylceledger = one_rivercycle.create_cylceledger()
 
     # THEN
-    yao_money = (yao_book_money_amount * 0.75) + (bob_book_money_amount * 0.49)
-    bob_money = (yao_book_money_amount * 0.25) + (bob_book_money_amount * 0.51)
+    yao_money = (yao_book_point_amount * 0.75) + (bob_book_point_amount * 0.49)
+    bob_money = (yao_book_point_amount * 0.25) + (bob_book_point_amount * 0.51)
     assert one_cylceledger == {yao_str: yao_money, bob_str: bob_money}
 
 

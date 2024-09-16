@@ -67,12 +67,12 @@ class RiverRun:
         tax_got_total = 0
         for payee, payee_amount in cycleledger.items():
             if self.acct_has_tax_due(payee):
-                excess_payer_money, tax_got = self.levy_tax_due(payee, payee_amount)
+                excess_payer_points, tax_got = self.levy_tax_due(payee, payee_amount)
                 tax_got_total += tax_got
-                if excess_payer_money == 0:
+                if excess_payer_points == 0:
                     delete_from_cycleledger.append(payee)
                 else:
-                    cycleledger[payee] = excess_payer_money
+                    cycleledger[payee] = excess_payer_points
 
         for payee_to_delete in delete_from_cycleledger:
             cycleledger.pop(payee_to_delete)
@@ -85,7 +85,7 @@ class RiverRun:
         return len(self.tax_dues) != 0
 
     def set_tax_dues(self, debtorledger: dict[AcctID, float]):
-        x_amount = self.hubunit.keep_money_magnitude
+        x_amount = self.hubunit.keep_point_magnitude
         self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.penny)
 
     def acct_has_tax_due(self, x_acct_id: AcctID) -> bool:
@@ -98,19 +98,19 @@ class RiverRun:
     def delete_tax_due(self, x_acct_id: AcctID):
         self.tax_dues.pop(x_acct_id)
 
-    def levy_tax_due(self, x_acct_id: AcctID, payer_money: float) -> float:
+    def levy_tax_due(self, x_acct_id: AcctID, payer_points: float) -> float:
         if self.acct_has_tax_due(x_acct_id) is False:
-            return payer_money, 0
+            return payer_points, 0
         x_tax_due = self.get_acct_tax_due(x_acct_id)
-        if x_tax_due > payer_money:
-            left_over_pay = x_tax_due - payer_money
+        if x_tax_due > payer_points:
+            left_over_pay = x_tax_due - payer_points
             self.set_acct_tax_due(x_acct_id, left_over_pay)
-            self.add_acct_tax_yield(x_acct_id, payer_money)
-            return 0, payer_money
+            self.add_acct_tax_yield(x_acct_id, payer_points)
+            return 0, payer_points
         else:
             self.delete_tax_due(x_acct_id)
             self.add_acct_tax_yield(x_acct_id, x_tax_due)
-            return payer_money - x_tax_due, x_tax_due
+            return payer_points - x_tax_due, x_tax_due
 
     def get_ledger_dict(self) -> dict[AcctID, float]:
         return self.tax_dues
@@ -204,7 +204,7 @@ class RiverRun:
         grant_credorledger = self.keep_credorledgers.get(self.hubunit.owner_id)
         self._grants = allot_scale(
             ledger=grant_credorledger,
-            scale_number=self.hubunit.keep_money_magnitude,
+            scale_number=self.hubunit.keep_point_magnitude,
             grain_unit=self.hubunit.penny,
         )
 

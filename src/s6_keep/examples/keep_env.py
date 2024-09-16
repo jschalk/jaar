@@ -42,16 +42,6 @@ def get_texas_hubunit() -> HubUnit:
     )
 
 
-# def modify_fiscal_id_example_keep(
-#     keep_obj: MoneyUnit, src_hubunit: HubUnit, dst_hubunit: HubUnit, new_fiscal_id
-# ):
-#     src_dir = src_hubunit.keep_dir()
-#     dst_dir = dst_hubunit.keep_dir()
-#     os_rename(src=src_dir, dst=dst_dir)
-#     keep_obj.set_fiscal_id(fiscal_id=new_fiscal_id)
-#     keep_obj.keep_dir = dst_dir
-
-
 class InvalidkeepCopyException(Exception):
     pass
 
