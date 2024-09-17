@@ -1,8 +1,10 @@
+from src.s1_road.road import FiscalID, OwnerID
 from src.s2_bud.acct import AcctUnit
 from src.s2_bud.group import MemberShip, AwardLink
 from src.s2_bud.idea import IdeaUnit
 from src.s2_bud.reason_idea import ReasonUnit, FactUnit, PremiseUnit
 from src.s2_bud.bud import BudUnit
+from dataclasses import dataclass
 
 
 def budunit_str() -> str:
@@ -217,3 +219,17 @@ def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) 
     x_func = x_categorys.get(x_category)
     if x_func:
         return x_func(x_bud, required_args)
+
+
+@dataclass
+class BudEvent:
+    fiscal_id: FiscalID = None
+    owner_id: OwnerID = None
+    timestamp: int = None
+    _bud: BudUnit = None
+    _money_magnitude: int = None
+    _money_desc: str = None
+
+
+def budevent_shop(fiscal_id: FiscalID, owner_id: OwnerID) -> BudEvent:
+    return BudEvent(fiscal_id=fiscal_id, owner_id=owner_id)
