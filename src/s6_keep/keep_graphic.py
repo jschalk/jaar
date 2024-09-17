@@ -292,7 +292,7 @@ def get_protect_structures0_fig(graphics_bool: bool) -> plotly_Figure:
         mm = default_point_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Keep = project1"
+        sue1_p3 = "Keep = keep1"
         sue1_p4 = f"Point = {mm} "
 
         m_y0 = 8
@@ -326,7 +326,7 @@ def get_protect_structures1_fig(graphics_bool: bool) -> plotly_Figure:
         mm = default_point_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Keep = project1"
+        sue1_p3 = "Keep = keep1"
         sue1_p4 = f"Point = {mm} "
 
         m_y0 = 8
@@ -365,7 +365,7 @@ def get_protect_structures2_fig(graphics_bool: bool) -> plotly_Figure:
         mm = default_point_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Keep = project1"
+        sue1_p3 = "Keep = keep1"
         sue1_p4 = f"Point = {mm} "
 
         m_y0 = 8
@@ -445,7 +445,7 @@ def get_protect_structures3_fig(graphics_bool: bool) -> plotly_Figure:
         mm = default_point_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Keep = project1"
+        sue1_p3 = "Keep = keep1"
         sue1_p4 = f"Point = {mm} "
 
         m_y0 = 8
@@ -524,7 +524,7 @@ def get_protect_structures4_fig(graphics_bool: bool) -> plotly_Figure:
         mm = default_point_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Keep = project1"
+        sue1_p3 = "Keep = keep1"
         sue1_p4 = f"Point = {mm} "
 
         m_y0 = 8
@@ -576,7 +576,7 @@ def get_protect_structures5_fig(graphics_bool: bool) -> plotly_Figure:
         mm = default_point_magnitude()
         sue1_p1 = f"Healer = {sue_str()} "
         sue1_p2 = "Problem = problem1"
-        sue1_p3 = "Keep = project1"
+        sue1_p3 = "Keep = keep1"
         sue1_p4 = f"Point = {mm} "
 
         m_y0 = 8

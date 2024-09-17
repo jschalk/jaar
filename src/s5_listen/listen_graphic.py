@@ -83,15 +83,15 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_job_str = f"{sue_str} job"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
-        d_sue1_p3 = "Keep = project1"
+        d_sue1_p3 = "Keep = keep1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
         d_bob1_p1 = f"Healer = {bob_str} "
         d_bob1_p2 = "Problem = problem1"
-        d_bob1_p3 = "Keep = project1"
+        d_bob1_p3 = "Keep = keep1"
         d_bob1_p4 = f"Money = {default_money_magnitude()} "
         d_sue2_p1 = f"Healer = {sue_str} "
         d_sue2_p2 = "Problem = problem2"
-        d_sue2_p3 = "Project = project3"
+        d_sue2_p3 = "Keep = keep3"
         d_sue2_p4 = f"Money={default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
@@ -157,15 +157,15 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_job_str = f"{sue_str} job"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
-        d_sue1_p3 = "Keep = project1"
+        d_sue1_p3 = "Keep = keep1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
         d_bob1_p1 = f"Healer = {bob_str} "
         d_bob1_p2 = "Problem = problem1"
-        d_bob1_p3 = "Keep = project1"
+        d_bob1_p3 = "Keep = keep1"
         d_bob1_p4 = f"Money = {default_money_magnitude()} "
         d_sue2_p1 = f"Healer = {sue_str} "
         d_sue2_p2 = "Problem = problem2"
-        d_sue2_p3 = "Project = project3"
+        d_sue2_p3 = "Keep = keep3"
         d_sue2_p4 = f"Money={default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
@@ -240,7 +240,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         yao_job_str = f"{yao_str} job"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
-        d_sue1_p3 = "Keep = project1"
+        d_sue1_p3 = "Keep = keep1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
