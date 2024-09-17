@@ -16,7 +16,7 @@ class BudTable(Base):
     debtor_respect = Column(Integer)
     fund_pool = Column(Float)
     fund_coin = Column(Float)
-    bit = Column(Float)
+    respect_bit = Column(Float)
     penny = Column(Float)
     tally = Column(Integer)
 

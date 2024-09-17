@@ -1,5 +1,5 @@
 from src.s1_road.finance import (
-    default_bit_if_none,
+    default_respect_bit_if_none,
     default_penny_if_none,
     default_fund_coin_if_none,
     validate_fund_pool,
@@ -29,7 +29,7 @@ def test_BudUnit_Exists():
     assert x_bud._road_delimiter is None
     assert x_bud.fund_pool is None
     assert x_bud.fund_coin is None
-    assert x_bud.bit is None
+    assert x_bud.respect_bit is None
     assert x_bud.penny is None
     assert x_bud.monetary_desc is None
     assert x_bud.credor_respect is None
@@ -59,7 +59,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     slash_road_delimiter = "/"
     x_fund_pool = 555
     x_fund_coin = 7
-    x_bit = 5
+    x_respect_bit = 5
     x_penny = 1
 
     # WHEN
@@ -69,7 +69,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
         _road_delimiter=slash_road_delimiter,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
-        bit=x_bit,
+        respect_bit=x_respect_bit,
         penny=x_penny,
     )
 
@@ -84,7 +84,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._road_delimiter == slash_road_delimiter
     assert x_bud.fund_pool == x_fund_pool
     assert x_bud.fund_coin == x_fund_coin
-    assert x_bud.bit == x_bit
+    assert x_bud.respect_bit == x_respect_bit
     assert x_bud.penny == x_penny
     assert not x_bud.monetary_desc
     assert x_bud.credor_respect == validate_respect_num()
@@ -118,7 +118,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud._road_delimiter == default_road_delimiter_if_none()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_none()
-    assert x_bud.bit == default_bit_if_none()
+    assert x_bud.respect_bit == default_respect_bit_if_none()
     assert x_bud.penny == default_penny_if_none()
     assert x_bud._idearoot._fund_coin == x_bud.fund_coin
     assert x_bud._idearoot._road_delimiter == x_bud._road_delimiter
@@ -275,3 +275,22 @@ def test_BudUnit_set_fund_pool_CorrectlySetsAttr():
 
     # THEN
     assert sue_bud.fund_pool == 99000
+
+
+def test_BudUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
+    # ESTABLISH
+    zia_str = "Zia"
+    zia_bud = budunit_shop(zia_str)
+    x_fund_pool = 23
+    zia_bud.set_fund_pool(x_fund_pool)
+    assert zia_bud.fund_coin == 1
+    assert zia_bud.fund_pool == x_fund_pool
+
+    # WHEN
+    new_fund_pool = 13.5
+    with pytest_raises(Exception) as excinfo:
+        zia_bud.set_fund_pool(new_fund_pool)
+    assert (
+        str(excinfo.value)
+        == f"Bud '{zia_str}' cannot set fund_pool='{new_fund_pool}'. It is not divisible by fund_coin '{zia_bud.fund_coin}'"
+    )

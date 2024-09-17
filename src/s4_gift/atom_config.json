@@ -385,7 +385,7 @@
             "normal_table_name": "bud"
         },
         "optional_args": {
-            "bit": {
+            "respect_bit": {
                 "column_order": 4,
                 "python_type": "float",
                 "sqlite_datatype": "FISCAL"

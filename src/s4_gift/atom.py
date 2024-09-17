@@ -244,9 +244,9 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     x_arg = "tally"
     if x_atom.get_value(x_arg) is not None:
         x_bud.tally = x_atom.get_value(x_arg)
-    x_arg = "bit"
+    x_arg = "respect_bit"
     if x_atom.get_value(x_arg) is not None:
-        x_bud.bit = x_atom.get_value(x_arg)
+        x_bud.respect_bit = x_atom.get_value(x_arg)
     x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
         x_bud.penny = x_atom.get_value(x_arg)
@@ -593,7 +593,7 @@ def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.max_tree_traverse != y_obj.max_tree_traverse
             or x_obj.credor_respect != y_obj.credor_respect
             or x_obj.debtor_respect != y_obj.debtor_respect
-            or x_obj.bit != y_obj.bit
+            or x_obj.respect_bit != y_obj.respect_bit
             or x_obj.fund_pool != y_obj.fund_pool
             or x_obj.fund_coin != y_obj.fund_coin
         )
@@ -659,7 +659,7 @@ class AtomRow:
     base: RoadUnit = None
     base_idea_active_requisite: bool = None
     begin: float = None
-    bit: float = None
+    respect_bit: float = None
     close: float = None
     credit_belief: int = None
     credit_vote: int = None

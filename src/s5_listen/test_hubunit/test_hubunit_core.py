@@ -5,7 +5,7 @@ from src.s1_road.road import (
     get_default_fiscal_id_roadnode as root_label,
 )
 from src.s1_road.finance import (
-    default_bit_if_none,
+    default_respect_bit_if_none,
     default_penny_if_none,
     default_fund_coin_if_none,
     validate_fund_pool,
@@ -78,7 +78,7 @@ def test_HubUnit_Exists():
     assert x_hubunit.road_delimiter is None
     assert x_hubunit.fund_pool is None
     assert x_hubunit.fund_coin is None
-    assert x_hubunit.bit is None
+    assert x_hubunit.respect_bit is None
     assert x_hubunit.penny is None
     assert x_hubunit.keep_point_magnitude is None
 
@@ -105,7 +105,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     x_road_delimiter = "/"
     x_fund_pool = 13000
     x_fund_coin = 13
-    x_bit = 9
+    x_respect_bit = 9
     x_penny = 3
     x_money_magnitude = 900
 
@@ -118,7 +118,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
         road_delimiter=x_road_delimiter,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
-        bit=x_bit,
+        respect_bit=x_respect_bit,
         penny=x_penny,
         keep_point_magnitude=x_money_magnitude,
     )
@@ -130,7 +130,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.road_delimiter == x_road_delimiter
     assert x_hubunit.fund_pool == x_fund_pool
     assert x_hubunit.fund_coin == x_fund_coin
-    assert x_hubunit.bit == x_bit
+    assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
     assert x_hubunit.fiscal_dir() == f"{x_fiscals_dir}/{x_fiscal_id}"
@@ -173,7 +173,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.road_delimiter == default_road_delimiter_if_none()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_none()
-    assert sue_hubunit.bit == default_bit_if_none()
+    assert sue_hubunit.respect_bit == default_respect_bit_if_none()
     assert sue_hubunit.penny == default_penny_if_none()
     assert sue_hubunit.owners_dir() == f"{sue_hubunit.fiscal_dir()}/owners"
     x_hubunit = hubunit_shop(None, None, sue_str)

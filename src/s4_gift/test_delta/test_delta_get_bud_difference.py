@@ -174,7 +174,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     x_budunit_tally = 55
     x_fund_pool = 8000000
     x_fund_coin = 8
-    x_bit = 5
+    x_respect_bit = 5
     x_max_tree_traverse = 66
     x_monetary_desc = "dragon dollars"
     x_credor_respect = 770
@@ -182,7 +182,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     after_sue_bud.tally = x_budunit_tally
     after_sue_bud.fund_pool = x_fund_pool
     after_sue_bud.fund_coin = x_fund_coin
-    after_sue_bud.bit = x_bit
+    after_sue_bud.respect_bit = x_respect_bit
     after_sue_bud.set_max_tree_traverse(x_max_tree_traverse)
     after_sue_bud.set_monetary_desc(x_monetary_desc)
     after_sue_bud.set_credor_respect(x_credor_respect)
@@ -202,7 +202,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     assert xio_atomunit.get_value("tally") == x_budunit_tally
     assert xio_atomunit.get_value("fund_pool") == x_fund_pool
     assert xio_atomunit.get_value("fund_coin") == x_fund_coin
-    assert xio_atomunit.get_value("bit") == x_bit
+    assert xio_atomunit.get_value("respect_bit") == x_respect_bit
 
     print(f"{get_atomunit_total_count(sue_deltaunit)=}")
     assert get_atomunit_total_count(sue_deltaunit) == 1

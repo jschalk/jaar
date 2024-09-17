@@ -26,7 +26,7 @@ from src.s1_road.jaar_config import (
 from src.s1_road.finance import (
     default_fund_coin_if_none,
     validate_fund_pool,
-    default_bit_if_none,
+    default_respect_bit_if_none,
     default_penny_if_none,
     default_money_magnitude_if_none,
 )
@@ -103,7 +103,7 @@ class HubUnit:
     road_delimiter: str = None
     fund_pool: float = None
     fund_coin: float = None
-    bit: float = None
+    respect_bit: float = None
     penny: float = None
     keep_point_magnitude: float = None
 
@@ -188,7 +188,7 @@ class HubUnit:
             _road_delimiter=self.road_delimiter,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
-            bit=self.bit,
+            respect_bit=self.respect_bit,
             penny=self.penny,
         )
         x_budunit._last_gift_id = init_gift_id()
@@ -497,7 +497,7 @@ class HubUnit:
             fiscal_id=self.fiscal_id,
             owner_id=speaker_id,
             road_delimiter=self.road_delimiter,
-            bit=self.bit,
+            respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_action_bud()
 
@@ -518,7 +518,7 @@ class HubUnit:
             owner_id=healer_id,
             keep_road=self.keep_road,
             road_delimiter=self.road_delimiter,
-            bit=self.bit,
+            respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_job_bud(speaker_id)
 
@@ -580,7 +580,7 @@ def hubunit_shop(
     road_delimiter: str = None,
     fund_pool: float = None,
     fund_coin: float = None,
-    bit: float = None,
+    respect_bit: float = None,
     penny: float = None,
     keep_point_magnitude: float = None,
 ) -> HubUnit:
@@ -595,7 +595,7 @@ def hubunit_shop(
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_none(fund_coin),
-        bit=default_bit_if_none(bit),
+        respect_bit=default_respect_bit_if_none(respect_bit),
         penny=default_penny_if_none(penny),
         keep_point_magnitude=default_money_magnitude_if_none(keep_point_magnitude),
     )

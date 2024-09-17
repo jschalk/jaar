@@ -40,7 +40,7 @@ from src.s7_fiscal.examples.fiscal_env import get_test_fiscals_dir
 #         owner_id=yao_hubunit.owner_id,
 #         keep_road=None,
 #         road_delimiter=yao_hubunit.road_delimiter,
-#         bit=yao_hubunit.bit,
+#         respect_bit=yao_hubunit.respect_bit,
 #     )
 #     x_hubunit.save_voice_bud(yao_voice_bud)
 #     yao_hubunit.create_voice_treasury_db_files()

@@ -1,4 +1,9 @@
-from src.s0_instrument.python_tool import conditional_fig_show
+from src.s0_instrument.python_tool import (
+    conditional_fig_show,
+    add_simp_rect,
+    add_rect_arrow,
+    add_keep__rect,
+)
 from src.s1_road.road import get_parent_road, RoadUnit, is_sub_road
 from src.s2_bud.idea import IdeaUnit
 from src.s2_bud.bud import BudUnit
@@ -482,4 +487,62 @@ def budunit_explanation4(graphics_bool) -> plotly_Figure:
             mode="text",
         )
     )
+    conditional_fig_show(fig, graphics_bool)
+
+
+def fund_explanation0(
+    x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
+) -> plotly_Figure:
+    fig = display_ideatree(x_bud, mode, False)
+    fig.update_xaxes(range=[-1, 11])
+    fig.update_yaxes(range=[-5, 3])
+
+    green_str = "Green"
+    blue_str = "blue"
+    blue_str = "blue"
+    d_sue1_p1 = "How fund is distributed."
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at AcctUnits"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
+    d_sue1_p4 = f"Money = {x_bud.fund_pool} "
+    teamunit_str = "      Awardlinks"
+    add_simp_rect(fig, 2, -0.3, 3, 0.3, teamunit_str)
+    add_rect_arrow(fig, 2, 0.1, 1.2, 0.1, green_str)
+    add_rect_arrow(fig, 2, -0.1, 1.2, -0.1, blue_str)
+    add_simp_rect(fig, 4, -1.2, 5, -0.8, teamunit_str)
+    add_rect_arrow(fig, 4, -0.9, 3.1, -0.9, green_str)
+    add_rect_arrow(fig, 4, -1.1, 3.1, -1.1, blue_str)
+    add_simp_rect(fig, 4, -3.2, 5, -2.8, teamunit_str)
+    add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
+    add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
+    groupbox_str = "GroupBox"
+    orange_str = "orange"
+    add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupbox_str, orange_str)
+    add_simp_rect(fig, 5.5, -0.8, 6.25, -0.2, groupbox_str, orange_str)
+    add_simp_rect(fig, 5.5, -1.4, 6.25, -0.8, groupbox_str, orange_str)
+    add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_str)
+    add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_str)
+    add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_str)
+    add_rect_arrow(fig, 5.5, 0.1, 3, 0.1, green_str)
+    add_rect_arrow(fig, 5.5, -0.1, 3, -0.1, blue_str)
+    add_rect_arrow(fig, 5.5, -0.9, 5, -0.9, green_str)
+    add_rect_arrow(fig, 5.5, -1.1, 5, -1.1, blue_str)
+    add_rect_arrow(fig, 5.5, -1.3, 5, -2.9, green_str)
+    membership_str = "membership"
+    darkred_str = "DarkRed"
+    add_simp_rect(fig, 7, 0.4, 7.75, 1, membership_str, darkred_str)
+    add_simp_rect(fig, 7, -0.2, 7.75, 0.4, membership_str, darkred_str)
+    add_simp_rect(fig, 7, -0.8, 7.75, -0.2, membership_str, darkred_str)
+    add_simp_rect(fig, 7, -1.4, 7.75, -0.8, membership_str, darkred_str)
+    add_rect_arrow(fig, 7, -0.4, 6.25, -0.4, blue_str)
+    add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_str)
+    add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_str)
+    add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_str)
+    acctunit_str = "acctunit"
+    purple_str = "purple"
+    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, acctunit_str, purple_str)
+    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, acctunit_str, purple_str)
+    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, acctunit_str, purple_str)
+    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_str, purple_str)
+    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, purple_str)
+
     conditional_fig_show(fig, graphics_bool)

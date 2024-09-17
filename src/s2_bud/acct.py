@@ -9,7 +9,7 @@ from src.s1_road.road import (
     validate_roadnode,
     is_roadnode,
 )
-from src.s1_road.finance import default_bit_if_none, RespectNum, allot_scale
+from src.s1_road.finance import default_respect_bit_if_none, RespectNum, allot_scale
 from src.s2_bud.group import (
     GroupID,
     MemberShip,
@@ -31,7 +31,7 @@ class Bad_acct_idMemberShipException(Exception):
 class AcctCore:
     acct_id: AcctID = None
     _road_delimiter: str = None
-    _bit: float = None
+    _respect_bit: float = None
 
     def set_acct_id(self, x_acct_id: AcctID):
         self.acct_id = validate_roadnode(x_acct_id, self._road_delimiter)
@@ -61,8 +61,8 @@ class AcctUnit(AcctCore):
     _fund_agenda_ratio_give: float = None
     _fund_agenda_ratio_take: float = None
 
-    def set_bit(self, x_bit: float):
-        self._bit = x_bit
+    def set_respect_bit(self, x_respect_bit: float):
+        self._respect_bit = x_respect_bit
 
     def set_credor_debtit_belief(
         self,
@@ -192,7 +192,7 @@ class AcctUnit(AcctCore):
             x_membership.group_id: x_membership.credit_vote
             for x_membership in self._memberships.values()
         }
-        allot_dict = allot_scale(ledger_dict, self._credor_pool, self._bit)
+        allot_dict = allot_scale(ledger_dict, self._credor_pool, self._respect_bit)
         for x_group_id, group_credor_pool in allot_dict.items():
             self.get_membership(x_group_id)._credor_pool = group_credor_pool
 
@@ -202,7 +202,7 @@ class AcctUnit(AcctCore):
             x_membership.group_id: x_membership.debtit_vote
             for x_membership in self._memberships.values()
         }
-        allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._bit)
+        allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._respect_bit)
         for x_group_id, group_debtor_pool in allot_dict.items():
             self.get_membership(x_group_id)._debtor_pool = group_debtor_pool
 
@@ -279,7 +279,7 @@ def acctunit_shop(
     credit_belief: int = None,
     debtit_belief: int = None,
     _road_delimiter: str = None,
-    _bit: float = None,
+    _respect_bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
         credit_belief=get_1_if_None(credit_belief),
@@ -296,7 +296,7 @@ def acctunit_shop(
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _bit=default_bit_if_none(_bit),
+        _respect_bit=default_respect_bit_if_none(_respect_bit),
     )
     x_acctunit.set_acct_id(x_acct_id=acct_id)
     return x_acctunit

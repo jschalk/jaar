@@ -82,7 +82,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     x_atomunit.set_optional_arg(new8_arg, new8_value)
     sue_deltaunit.set_atomunit(x_atomunit)
     new6_value = 0.5
-    new6_arg = "bit"
+    new6_arg = "respect_bit"
     x_atomunit.set_optional_arg(new6_arg, new6_value)
     sue_deltaunit.set_atomunit(x_atomunit)
     new7_value = 0.025
@@ -104,8 +104,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     assert after_sue_budunit.fund_pool != before_sue_budunit.fund_pool
     assert after_sue_budunit.fund_coin == new8_value
     assert after_sue_budunit.fund_coin != before_sue_budunit.fund_coin
-    assert after_sue_budunit.bit == new6_value
-    assert after_sue_budunit.bit != before_sue_budunit.bit
+    assert after_sue_budunit.respect_bit == new6_value
+    assert after_sue_budunit.respect_bit != before_sue_budunit.respect_bit
     assert after_sue_budunit.penny == new7_value
     assert after_sue_budunit.penny != before_sue_budunit.penny
 

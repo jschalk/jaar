@@ -43,7 +43,7 @@ def test_BudUnit_clear_settle_attrs_CorrectlySetsAttrs():
     assert sue_bud._range_inheritors == {}
 
 
-def test_BudUnit_pre_tree_traverse_attrs_CorrectlySetsAttrs():
+def test_BudUnit_clear_bud_keep_attrs_CorrectlySetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     x_keep_justifed = False
@@ -60,7 +60,7 @@ def test_BudUnit_pre_tree_traverse_attrs_CorrectlySetsAttrs():
     assert sue_bud._healers_dict != {}
 
     # WHEN
-    sue_bud._pre_tree_traverse_attrs()
+    sue_bud._clear_bud_keep_attrs()
 
     # THEN
     assert sue_bud._keeps_justified != x_keep_justifed

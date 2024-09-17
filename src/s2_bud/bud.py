@@ -8,11 +8,12 @@ from src.s0_instrument.python_tool import (
 )
 from src.s1_road.finance import (
     valid_finance_ratio,
-    default_bit_if_none,
+    default_respect_bit_if_none,
     default_penny_if_none,
     default_fund_coin_if_none,
     validate_fund_pool,
     BitNum,
+    RespectNum,
     PennyNum,
     FundCoin,
     FundNum,
@@ -125,11 +126,11 @@ class BudUnit:
     _road_delimiter: str = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
-    bit: BitNum = None
     penny: PennyNum = None
     monetary_desc: str = None
-    credor_respect: int = None
-    debtor_respect: int = None
+    respect_bit: BitNum = None
+    credor_respect: RespectNum = None
+    debtor_respect: RespectNum = None
     _originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _idea_dict: dict[RoadUnit, IdeaUnit] = None
@@ -160,6 +161,10 @@ class BudUnit:
         self.monetary_desc = x_monetary_desc
 
     def set_fund_pool(self, x_fund_pool):
+        if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
+            exception_str = f"Bud '{self._owner_id}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_coin '{self.fund_coin}'"
+            raise _bit_RatioException(exception_str)
+
         self.fund_pool = validate_fund_pool(x_fund_pool)
 
     def set_acct_respect(self, x_acct_pool: int):
@@ -168,14 +173,14 @@ class BudUnit:
         self.set_fund_pool(x_acct_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
-        if valid_finance_ratio(new_credor_respect, self.bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set _credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.bit}'"
+        if valid_finance_ratio(new_credor_respect, self.respect_bit) is False:
+            exception_str = f"Bud '{self._owner_id}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.respect_bit}'"
             raise _bit_RatioException(exception_str)
         self.credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
-        if valid_finance_ratio(new_debtor_respect, self.bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set _debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.bit}'"
+        if valid_finance_ratio(new_debtor_respect, self.respect_bit) is False:
+            exception_str = f"Bud '{self._owner_id}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.respect_bit}'"
             raise _bit_RatioException(exception_str)
         self.debtor_respect = new_debtor_respect
 
@@ -342,8 +347,8 @@ class BudUnit:
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
         if x_acctunit._road_delimiter != self._road_delimiter:
             x_acctunit._road_delimiter = self._road_delimiter
-        if x_acctunit._bit != self.bit:
-            x_acctunit._bit = self.bit
+        if x_acctunit._respect_bit != self.respect_bit:
+            x_acctunit._respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
             x_acctunit.add_membership(x_acctunit.acct_id)
         self._accts[x_acctunit.acct_id] = x_acctunit
@@ -1115,7 +1120,7 @@ class BudUnit:
                 raise Exception_keeps_justified(exception_str)
             self._keeps_justified = False
 
-    def _set_root_attributes(self, keep_exceptions: bool):
+    def _set_idearoot_fund_and_active_status_related_attrs(self, keep_exceptions: bool):
         self._idearoot.set_factheirs(self._idearoot.factunits)
         self._idearoot.set_idearoot_inherit_reasonheirs()
         self._idearoot.set_teamheir(None, self._groupboxs)
@@ -1192,8 +1197,8 @@ class BudUnit:
         self.credor_respect = validate_respect_num(self.credor_respect)
         self.debtor_respect = validate_respect_num(self.debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        credor_allot = allot_scale(credor_ledger, self.credor_respect, self.bit)
-        debtor_allot = allot_scale(debtor_ledger, self.debtor_respect, self.bit)
+        credor_allot = allot_scale(credor_ledger, self.credor_respect, self.respect_bit)
+        debtor_allot = allot_scale(debtor_ledger, self.debtor_respect, self.respect_bit)
         for x_acct_id, acct_credor_pool in credor_allot.items():
             self.get_acct(x_acct_id).set_credor_pool(acct_credor_pool)
         for x_acct_id, acct_debtor_pool in debtor_allot.items():
@@ -1209,7 +1214,7 @@ class BudUnit:
         self._reason_bases = set()
         self._range_inheritors = {}
 
-    def _pre_tree_traverse_attrs(self):
+    def _clear_bud_keep_attrs(self):
         self._keeps_justified = True
         self._keeps_buildable = False
         self._sum_healerlink_share = 0
@@ -1224,19 +1229,21 @@ class BudUnit:
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._set_all_ideaunits_active_status_distribute_funds(keep_exceptions)
-        self._after_all_tree_traverses_set_cred_debt()
-        self._after_all_tree_traverses_set_healerlink_share()
+            self._set_ideatree_fund_and_active_status_related_attrs(keep_exceptions)
+            self._tree_traverse_count += 1
+        self._set_acctunit_fund_related_attrs()
+        self._set_bud_keep_attrs()
 
-    def _set_all_ideaunits_active_status_distribute_funds(self, keep_exceptions):
-        self._pre_tree_traverse_attrs()
-        self._pre_tree_traverse_cred_debt_reset()
-        self._set_root_attributes(keep_exceptions)
-        self._execute_tree_traverse(keep_exceptions)
+    def _set_ideatree_fund_and_active_status_related_attrs(self, keep_exceptions):
+        self._clear_bud_keep_attrs()
+        self._clear_acctunit_fund_related_attrs()
+        self._set_idearoot_fund_and_active_status_related_attrs(keep_exceptions)
+        self._set_ideakids_fund_and_active_status_related_attrs(keep_exceptions)
         self._check_if_any_idea_active_status_has_altered()
-        self._tree_traverse_count += 1
 
-    def _execute_tree_traverse(self, keep_exceptions: bool = False):
+    def _set_ideakids_fund_and_active_status_related_attrs(
+        self, keep_exceptions: bool = False
+    ):
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
@@ -1298,14 +1305,14 @@ class BudUnit:
         if any_idea_active_status_has_altered is False:
             self._rational = True
 
-    def _after_all_tree_traverses_set_cred_debt(self):
+    def _set_acctunit_fund_related_attrs(self):
         self.set_offtrack_fund()
         self._allot_offtrack_fund()
         self._allot_fund_bud_agenda()
         self._allot_groupboxs_fund()
         self._set_acctunits_fund_agenda_ratios()
 
-    def _after_all_tree_traverses_set_healerlink_share(self):
+    def _set_bud_keep_attrs(self):
         self._set_keep_dict()
         self._healers_dict = self._get_healers_dict()
         self._keeps_buildable = self._get_buildable_keeps()
@@ -1341,7 +1348,7 @@ class BudUnit:
             for keep_road in self._keep_dict.keys()
         )
 
-    def _pre_tree_traverse_cred_debt_reset(self):
+    def _clear_acctunit_fund_related_attrs(self):
         self._reset_groupboxs_fund_give_take()
         self._reset_acctunit_fund_give_take()
 
@@ -1394,7 +1401,7 @@ class BudUnit:
             "tally": self.tally,
             "fund_pool": self.fund_pool,
             "fund_coin": self.fund_coin,
-            "bit": self.bit,
+            "respect_bit": self.respect_bit,
             "penny": self.penny,
             "_owner_id": self._owner_id,
             "_fiscal_id": self._fiscal_id,
@@ -1437,7 +1444,7 @@ def budunit_shop(
     _road_delimiter: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
-    bit: BitNum = None,
+    respect_bit: BitNum = None,
     penny: PennyNum = None,
     tally: float = None,
 ) -> BudUnit:
@@ -1457,7 +1464,7 @@ def budunit_shop(
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_none(fund_coin),
-        bit=default_bit_if_none(bit),
+        respect_bit=default_respect_bit_if_none(respect_bit),
         penny=default_penny_if_none(penny),
         _keeps_justified=get_False_if_None(),
         _keeps_buildable=get_False_if_None(),
@@ -1498,7 +1505,9 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.fund_coin = default_fund_coin_if_none(
         obj_from_bud_dict(bud_dict, "fund_coin")
     )
-    x_bud.bit = default_bit_if_none(obj_from_bud_dict(bud_dict, "bit"))
+    x_bud.respect_bit = default_respect_bit_if_none(
+        obj_from_bud_dict(bud_dict, "respect_bit")
+    )
     x_bud.penny = default_penny_if_none(obj_from_bud_dict(bud_dict, "penny"))
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")

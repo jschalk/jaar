@@ -24,7 +24,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
         road_delimiter=slash_str,
         fund_pool=x_fund_pool,
         fund_coin=pnine_float,
-        bit=pnine_float,
+        respect_bit=pnine_float,
         penny=pfour_float,
     )
 
@@ -37,7 +37,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     assert sue_default_voice._road_delimiter == sue_hubunit.road_delimiter
     assert sue_default_voice.fund_pool == sue_hubunit.fund_pool
     assert sue_default_voice.fund_coin == sue_hubunit.fund_coin
-    assert sue_default_voice.bit == sue_hubunit.bit
+    assert sue_default_voice.respect_bit == sue_hubunit.respect_bit
     assert sue_default_voice.penny == sue_hubunit.penny
 
 
@@ -144,7 +144,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str, bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str, respect_bit=seven_int)
     assert sue_hubunit.voice_file_exists() is False
     init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_id()}.json"
     delete_dir(sue_hubunit.gifts_dir())
@@ -157,7 +157,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
     voice_bud = sue_hubunit.get_voice_bud()
     assert voice_bud._fiscal_id == fiscal_id()
     assert voice_bud._owner_id == sue_str
-    assert voice_bud.bit == seven_int
+    assert voice_bud.respect_bit == seven_int
     assert os_path_exists(init_gift_file_path)
 
 
@@ -167,7 +167,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str, bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     assert sue_hubunit.voice_file_exists()
     sue_hubunit.delete_voice_file()
@@ -182,7 +182,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
     voice_bud = sue_hubunit.get_voice_bud()
     assert voice_bud._fiscal_id == fiscal_id()
     assert voice_bud._owner_id == sue_str
-    assert voice_bud.bit == seven_int
+    assert voice_bud.respect_bit == seven_int
     assert os_path_exists(init_gift_file_path)
 
 
@@ -192,7 +192,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str, bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     sue_voice_bud = sue_hubunit.get_voice_bud()
     bob_str = "Bob"
@@ -209,7 +209,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
     # THEN
     assert sue_voice_bud._fiscal_id == fiscal_id()
     assert sue_voice_bud._owner_id == sue_str
-    assert sue_voice_bud.bit == seven_int
+    assert sue_voice_bud.respect_bit == seven_int
     assert sue_voice_bud.acct_exists(bob_str)
     assert os_path_exists(init_gift_file_path)
 

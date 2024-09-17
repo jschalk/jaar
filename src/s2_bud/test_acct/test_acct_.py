@@ -1,5 +1,5 @@
 from src.s1_road.road import default_road_delimiter_if_none
-from src.s1_road.finance import default_bit_if_none
+from src.s1_road.finance import default_respect_bit_if_none
 from src.s2_bud.acct import AcctUnit, acctunit_shop
 from pytest import raises as pytest_raises
 
@@ -29,7 +29,7 @@ def test_AcctUnit_exists():
     assert bob_acctunit._fund_agenda_give is None
     assert bob_acctunit._fund_agenda_take is None
     assert bob_acctunit._road_delimiter is None
-    assert bob_acctunit._bit is None
+    assert bob_acctunit._respect_bit is None
 
 
 def test_AcctUnit_set_acct_id_CorrectlySetsAttr():
@@ -82,7 +82,7 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     assert yao_acctunit._fund_agenda_ratio_give == 0
     assert yao_acctunit._fund_agenda_ratio_take == 0
     assert yao_acctunit._road_delimiter == default_road_delimiter_if_none()
-    assert yao_acctunit._bit == default_bit_if_none()
+    assert yao_acctunit._respect_bit == default_respect_bit_if_none()
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_road_delimiter():
@@ -96,28 +96,28 @@ def test_acctunit_shop_CorrectlySetsAttributes_road_delimiter():
     assert yao_acctunit._road_delimiter == slash_str
 
 
-def test_acctunit_shop_CorrectlySetsAttributes_bit():
+def test_acctunit_shop_CorrectlySetsAttributes_respect_bit():
     # ESTABLISH
-    bit_float = 00.45
+    respect_bit_float = 00.45
 
     # WHEN
-    yao_acctunit = acctunit_shop("Yao", _bit=bit_float)
+    yao_acctunit = acctunit_shop("Yao", _respect_bit=respect_bit_float)
 
     # THEN
-    assert yao_acctunit._bit == 1
+    assert yao_acctunit._respect_bit == 1
 
 
-def test_AcctUnit_set_bit_CorrectlySetsAttribute():
+def test_AcctUnit_set_respect_bit_CorrectlySetsAttribute():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
-    assert bob_acctunit._bit == 1
+    assert bob_acctunit._respect_bit == 1
 
     # WHEN
-    x_bit = 5
-    bob_acctunit.set_bit(x_bit)
+    x_respect_bit = 5
+    bob_acctunit.set_respect_bit(x_respect_bit)
 
     # THEN
-    assert bob_acctunit._bit == x_bit
+    assert bob_acctunit._respect_bit == x_respect_bit
 
 
 def test_AcctUnit_set_credit_belief_CorrectlySetsAttribute():

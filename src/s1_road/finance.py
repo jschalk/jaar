@@ -45,8 +45,12 @@ def default_fund_coin_if_none(fund_coin: FundCoin = None) -> FundCoin:
     return get_1_if_None(fund_coin)
 
 
+def get_whole_grainunit_ratio(num: float, grainunit: float) -> float:
+    return grainunit * int(num / grainunit)
+
+
 def trim_fund_coin_excess(num: float, fund_coin: FundCoin) -> float:
-    return fund_coin * int(num / fund_coin)
+    return get_whole_grainunit_ratio(num, fund_coin)
 
 
 def default_fund_pool() -> FundNum:
@@ -69,12 +73,12 @@ def valid_finance_ratio(big_number: float, small_number: float) -> bool:
 #     return max(get_1_if_None(x_fund_pool), default_fund_coin_if_none())
 
 
-def default_bit_if_none(bit: BitNum = None) -> BitNum:
+def default_respect_bit_if_none(bit: BitNum = None) -> BitNum:
     return max(get_1_if_None(bit), 1)
 
 
 def trim_bit_excess(num: float, bit: BitNum) -> float:
-    return trim_fund_coin_excess(num, bit)
+    return get_whole_grainunit_ratio(num, bit)
 
 
 def default_respect_num() -> RespectNum:
@@ -83,7 +87,7 @@ def default_respect_num() -> RespectNum:
 
 def validate_respect_num(x_respect_num: RespectNum = None) -> RespectNum:
     x_respect_num = default_respect_num() if x_respect_num is None else x_respect_num
-    return max(x_respect_num, default_bit_if_none(x_respect_num))
+    return max(x_respect_num, default_respect_bit_if_none(x_respect_num))
 
 
 def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
@@ -91,7 +95,7 @@ def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
 
 
 def trim_penny_excess(num: MoneyUnit, penny: PennyNum) -> MoneyUnit:
-    return trim_fund_coin_excess(num, penny)
+    return get_whole_grainunit_ratio(num, penny)
 
 
 def default_money_magnitude() -> MoneyUnit:
