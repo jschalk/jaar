@@ -1120,7 +1120,7 @@ class BudUnit:
                 raise Exception_keeps_justified(exception_str)
             self._keeps_justified = False
 
-    def _set_root_attributes(self, keep_exceptions: bool):
+    def _set_idearoot_fund_and_active_status_related_attrs(self, keep_exceptions: bool):
         self._idearoot.set_factheirs(self._idearoot.factunits)
         self._idearoot.set_idearoot_inherit_reasonheirs()
         self._idearoot.set_teamheir(None, self._groupboxs)
@@ -1214,7 +1214,7 @@ class BudUnit:
         self._reason_bases = set()
         self._range_inheritors = {}
 
-    def _pre_tree_traverse_attrs(self):
+    def _clear_bud_keep_attrs(self):
         self._keeps_justified = True
         self._keeps_buildable = False
         self._sum_healerlink_share = 0
@@ -1229,19 +1229,21 @@ class BudUnit:
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._set_all_ideaunits_active_status_distribute_funds(keep_exceptions)
-        self._after_all_tree_traverses_set_cred_debt()
-        self._after_all_tree_traverses_set_healerlink_share()
+            self._set_ideatree_fund_and_active_status_related_attrs(keep_exceptions)
+            self._tree_traverse_count += 1
+        self._set_acctunit_fund_related_attrs()
+        self._set_bud_keep_attrs()
 
-    def _set_all_ideaunits_active_status_distribute_funds(self, keep_exceptions):
-        self._pre_tree_traverse_attrs()
-        self._pre_tree_traverse_cred_debt_reset()
-        self._set_root_attributes(keep_exceptions)
-        self._execute_tree_traverse(keep_exceptions)
+    def _set_ideatree_fund_and_active_status_related_attrs(self, keep_exceptions):
+        self._clear_bud_keep_attrs()
+        self._clear_acctunit_fund_related_attrs()
+        self._set_idearoot_fund_and_active_status_related_attrs(keep_exceptions)
+        self._set_ideakids_fund_and_active_status_related_attrs(keep_exceptions)
         self._check_if_any_idea_active_status_has_altered()
-        self._tree_traverse_count += 1
 
-    def _execute_tree_traverse(self, keep_exceptions: bool = False):
+    def _set_ideakids_fund_and_active_status_related_attrs(
+        self, keep_exceptions: bool = False
+    ):
         x_idearoot_kids_items = self._idearoot._kids.items()
         kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
         root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
@@ -1303,14 +1305,14 @@ class BudUnit:
         if any_idea_active_status_has_altered is False:
             self._rational = True
 
-    def _after_all_tree_traverses_set_cred_debt(self):
+    def _set_acctunit_fund_related_attrs(self):
         self.set_offtrack_fund()
         self._allot_offtrack_fund()
         self._allot_fund_bud_agenda()
         self._allot_groupboxs_fund()
         self._set_acctunits_fund_agenda_ratios()
 
-    def _after_all_tree_traverses_set_healerlink_share(self):
+    def _set_bud_keep_attrs(self):
         self._set_keep_dict()
         self._healers_dict = self._get_healers_dict()
         self._keeps_buildable = self._get_buildable_keeps()
@@ -1346,7 +1348,7 @@ class BudUnit:
             for keep_road in self._keep_dict.keys()
         )
 
-    def _pre_tree_traverse_cred_debt_reset(self):
+    def _clear_acctunit_fund_related_attrs(self):
         self._reset_groupboxs_fund_give_take()
         self._reset_acctunit_fund_give_take()
 
