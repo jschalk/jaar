@@ -63,14 +63,14 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     clean_str = "clean"
     zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
     zia_debtor_pool = 78
-    zia_bit = 2
+    zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 1
 
     # WHEN
     ingested_list = generate_ingest_list(
         item_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        bit=zia_bit,
+        respect_bit=zia_resepect_bit,
     )
 
     # THEN
@@ -90,14 +90,14 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
     zia_budunit.set_l1_idea(ideaunit_shop(cook_str, pledge=True))
     zia_debtor_pool = 32
-    zia_bit = 2
+    zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
         item_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        bit=zia_bit,
+        respect_bit=zia_resepect_bit,
     )
 
     # THEN
@@ -121,14 +121,14 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
     zia_budunit.set_l1_idea(ideaunit_shop(cook_str, mass=3, pledge=True))
     zia_debtor_pool = 32
-    zia_bit = 2
+    zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
         item_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        bit=zia_bit,
+        respect_bit=zia_resepect_bit,
     )
 
     # THEN
@@ -150,14 +150,14 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
     zia_budunit.set_l1_idea(ideaunit_shop(cook_str, mass=2, pledge=True))
     zia_debtor_pool = 32
-    zia_bit = 2
+    zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
         item_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        bit=zia_bit,
+        respect_bit=zia_resepect_bit,
     )
 
     # THEN

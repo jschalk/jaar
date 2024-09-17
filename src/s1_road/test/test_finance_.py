@@ -10,7 +10,7 @@ from src.s1_road.finance import (
     default_respect_num,
     validate_respect_num,
     default_fund_coin_if_none,
-    default_bit_if_none,
+    default_respect_bit_if_none,
     default_penny_if_none,
     trim_fund_coin_excess,
     trim_bit_excess,
@@ -31,12 +31,12 @@ def test_BitNum_exists():
     assert inspect_getdoc(y_BitNum) == inspect_str
 
 
-def test_default_bit_if_none_ReturnsCorrectObj():
+def test_default_respect_bit_if_none_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert default_bit_if_none() == 1
-    assert default_bit_if_none(None) == 1
-    assert default_bit_if_none(5) == 5
-    assert default_bit_if_none(0.03) == 1
+    assert default_respect_bit_if_none() == 1
+    assert default_respect_bit_if_none(None) == 1
+    assert default_respect_bit_if_none(5) == 5
+    assert default_respect_bit_if_none(0.03) == 1
 
 
 def test_trim_bit_excess_ReturnsCorrectedFloat():
@@ -162,7 +162,7 @@ def test_validate_respect_num_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert validate_respect_num() == default_respect_num()
     assert validate_respect_num(None) == default_respect_num()
-    assert validate_respect_num(0.5) == default_bit_if_none()
+    assert validate_respect_num(0.5) == default_respect_bit_if_none()
     assert validate_respect_num(0.5) == 1
     assert (
         validate_respect_num(default_fund_coin_if_none() - 0.01)

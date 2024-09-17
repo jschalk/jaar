@@ -70,7 +70,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     sue_penny = 2
     sue_tally = 100
     zia_atom = atomunit_shop(budunit_str(), atom_insert())
-    zia_atom.set_arg("bit", sue_bit)
+    zia_atom.set_arg("respect_bit", sue_bit)
     zia_atom.set_arg("credor_respect", sue_credor_respect)
     zia_atom.set_arg("debtor_respect", sue_debtor_respect)
     zia_atom.set_arg("fund_coin", sue_fund_coin)
@@ -89,7 +89,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
     assert zia_optional_args == {
-        "bit": sue_bit,
+        "respect_bit": sue_bit,
         "credor_respect": sue_credor_respect,
         "debtor_respect": sue_debtor_respect,
         "fund_coin": sue_fund_coin,

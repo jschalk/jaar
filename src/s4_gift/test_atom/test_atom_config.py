@@ -499,7 +499,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert budunit_columns.get("debtor_respect") is not None
     assert budunit_columns.get("fund_pool") is not None
     assert budunit_columns.get("fund_coin") is not None
-    assert budunit_columns.get("bit") is not None
+    assert budunit_columns.get("respect_bit") is not None
     assert budunit_columns.get("penny") is not None
     assert budunit_columns.get("tally") is not None
 
@@ -642,7 +642,7 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("base") == "RoadUnit"
     assert x_python_types.get("base_idea_active_requisite") == "bool"
     assert x_python_types.get("begin") == "float"
-    assert x_python_types.get("bit") == "float"
+    assert x_python_types.get("respect_bit") == "float"
     assert x_python_types.get("close") == "float"
     assert x_python_types.get("credit_belief") == "int"
     assert x_python_types.get("credit_vote") == "int"

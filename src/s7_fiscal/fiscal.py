@@ -1,7 +1,7 @@
 from src.s0_instrument.file import set_dir, delete_dir, dir_files
 from src.s0_instrument.python_tool import get_0_if_None
 from src.s1_road.jaar_config import get_gifts_folder
-from src.s1_road.finance import default_bit_if_none, default_penny_if_none
+from src.s1_road.finance import default_respect_bit_if_none, default_penny_if_none
 from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.s2_bud.bud import BudUnit
 from src.s2_bud.bud_tool import BudEvent
@@ -42,7 +42,7 @@ class FiscalUnit:
     _gifts_dir: str = None
     _road_delimiter: str = None
     _fund_coin: float = None
-    _bit: float = None
+    _respect_bit: float = None
     _penny: float = None
 
     # directory setup
@@ -71,7 +71,7 @@ class FiscalUnit:
                 owner_id=x_owner_id,
                 keep_road=None,
                 road_delimiter=self._road_delimiter,
-                bit=self._bit,
+                respect_bit=self._respect_bit,
             )
             for x_owner_id in x_owner_ids
         }
@@ -118,7 +118,7 @@ class FiscalUnit:
             fiscals_dir=self.fiscals_dir,
             keep_road=None,
             road_delimiter=self._road_delimiter,
-            bit=self._bit,
+            respect_bit=self._respect_bit,
         )
 
     def init_owner_keeps(self, owner_id: OwnerID):
@@ -140,7 +140,7 @@ class FiscalUnit:
                 keep_road=None,
                 # "duty_job",
                 road_delimiter=self._road_delimiter,
-                bit=self._bit,
+                respect_bit=self._respect_bit,
             )
             for keep_road in healer_dict.keys():
                 self._set_owner_duty(healer_hubunit, keep_road, x_voice)
@@ -169,7 +169,7 @@ class FiscalUnit:
                 keep_road=None,
                 # "duty_job",
                 road_delimiter=self._road_delimiter,
-                bit=self._bit,
+                respect_bit=self._respect_bit,
             )
             healer_hubunit.create_voice_treasury_db_files()
             for keep_road in healer_dict.keys():
@@ -180,7 +180,7 @@ class FiscalUnit:
                     keep_road=keep_road,
                     # "duty_job",
                     road_delimiter=self._road_delimiter,
-                    bit=self._bit,
+                    respect_bit=self._respect_bit,
                 )
                 keep_hubunit.save_duty_bud(x_voice)
                 create_job_file_from_duty_file(keep_hubunit, owner_id)
@@ -216,7 +216,7 @@ def fiscalunit_shop(
     in_memory_journal: bool = None,
     _road_delimiter: str = None,
     _fund_coin: float = None,
-    _bit: float = None,
+    _respect_bit: float = None,
     _penny: float = None,
 ) -> FiscalUnit:
     if timeline is None:
@@ -228,8 +228,8 @@ def fiscalunit_shop(
         current_time=get_0_if_None(current_time),
         budevents={},
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
-        _fund_coin=default_bit_if_none(_fund_coin),
-        _bit=default_bit_if_none(_bit),
+        _fund_coin=default_respect_bit_if_none(_fund_coin),
+        _respect_bit=default_respect_bit_if_none(_respect_bit),
         _penny=default_penny_if_none(_penny),
     )
     fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)

@@ -109,6 +109,7 @@ def test_BudUnit_fund_flow(graphics_bool):
     sue_bud.add_idea(dinner_road, mass=30, pledge=True)
 
     # WHEN / THEN
+    # fund_explanation0(sue_bud, "Task", True)
     fund_explanation0(sue_bud, "Task", graphics_bool)
 
-    assert 1 == 2
+    # assert 1 == 2

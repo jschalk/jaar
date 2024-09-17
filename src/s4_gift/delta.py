@@ -195,8 +195,8 @@ class DeltaUnit:
             x_atomunit.set_optional_arg("fund_pool", after_bud.fund_pool)
         if before_bud.fund_coin != after_bud.fund_coin:
             x_atomunit.set_optional_arg("fund_coin", after_bud.fund_coin)
-        if before_bud.bit != after_bud.bit:
-            x_atomunit.set_optional_arg("bit", after_bud.bit)
+        if before_bud.respect_bit != after_bud.respect_bit:
+            x_atomunit.set_optional_arg("respect_bit", after_bud.respect_bit)
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):

@@ -1,6 +1,6 @@
 from src.s1_road.finance import (
     default_fund_coin_if_none,
-    default_bit_if_none,
+    default_respect_bit_if_none,
     default_penny_if_none,
 )
 from src.s1_road.jaar_config import get_gifts_folder, get_json_filename
@@ -31,7 +31,7 @@ def test_FiscalUnit_exists(env_dir_setup_cleanup):
     assert not music_fiscal._gifts_dir
     assert not music_fiscal._road_delimiter
     assert not music_fiscal._fund_coin
-    assert not music_fiscal._bit
+    assert not music_fiscal._respect_bit
     assert not music_fiscal._penny
 
 
@@ -54,7 +54,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnit(env_dir_setup_cleanup):
     assert music_fiscal._gifts_dir is not None
     assert music_fiscal._road_delimiter == default_road_delimiter_if_none()
     assert music_fiscal._fund_coin == default_fund_coin_if_none()
-    assert music_fiscal._bit == default_bit_if_none()
+    assert music_fiscal._respect_bit == default_respect_bit_if_none()
     assert music_fiscal._penny == default_penny_if_none()
 
 
@@ -63,7 +63,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnitWith_road_delimiter(env_dir_setup_clea
     music_str = "music"
     slash_str = "/"
     x_fund_coin = 7.0
-    x_bit = 9
+    x_respect_bit = 9
     x_penny = 3
     x_current_time = 78000000
 
@@ -75,7 +75,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnitWith_road_delimiter(env_dir_setup_clea
         in_memory_journal=True,
         _road_delimiter=slash_str,
         _fund_coin=x_fund_coin,
-        _bit=x_bit,
+        _respect_bit=x_respect_bit,
         _penny=x_penny,
     )
 
@@ -83,7 +83,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnitWith_road_delimiter(env_dir_setup_clea
     assert music_fiscal.current_time == x_current_time
     assert music_fiscal._road_delimiter == slash_str
     assert music_fiscal._fund_coin == x_fund_coin
-    assert music_fiscal._bit == x_bit
+    assert music_fiscal._respect_bit == x_respect_bit
     assert music_fiscal._penny == x_penny
 
 
@@ -140,18 +140,18 @@ def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_clea
     music_str = "music"
     slash_str = "/"
     x_fund_coin = 4
-    x_bit = 5
+    x_respect_bit = 5
     music_fiscal = fiscalunit_shop(
         music_str,
         get_test_fiscals_dir(),
         _road_delimiter=slash_str,
         _fund_coin=x_fund_coin,
-        _bit=x_bit,
+        _respect_bit=x_respect_bit,
         in_memory_journal=True,
     )
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(
-        None, music_str, sue_str, None, bit=x_bit, fund_coin=x_fund_coin
+        None, music_str, sue_str, None, respect_bit=x_respect_bit, fund_coin=x_fund_coin
     )
     assert os_path_exists(sue_hubunit.action_path()) is False
 
@@ -284,7 +284,7 @@ def test_FiscalUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         keep_road=None,
         road_delimiter=music_fiscal._road_delimiter,
         fund_coin=music_fiscal._fund_coin,
-        bit=music_fiscal._bit,
+        respect_bit=music_fiscal._respect_bit,
     )
     yao_hubunit = hubunit_shop(
         fiscals_dir=music_fiscal.fiscals_dir,
@@ -293,7 +293,7 @@ def test_FiscalUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         keep_road=None,
         road_delimiter=music_fiscal._road_delimiter,
         fund_coin=music_fiscal._fund_coin,
-        bit=music_fiscal._bit,
+        respect_bit=music_fiscal._respect_bit,
     )
     assert music_all_owners.get(sue_str) == sue_hubunit
     assert music_all_owners.get(yao_str) == yao_hubunit

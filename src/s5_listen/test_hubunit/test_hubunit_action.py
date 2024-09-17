@@ -131,14 +131,14 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
         None,
         fund_pool=sue_fund_pool,
         fund_coin=sue_fund_coin,
-        bit=sue_bit,
+        respect_bit=sue_bit,
     )
     sue_bud = budunit_shop(
         sue_str,
         root_label(),
         fund_pool=sue_fund_pool,
         fund_coin=sue_fund_coin,
-        bit=sue_bit,
+        respect_bit=sue_bit,
     )
     sue_hubunit.initialize_action_file(sue_bud)
     assert sue_hubunit.action_file_exists()
@@ -165,7 +165,7 @@ def test_HubUnit_initialize_action_file_CorrectlyDoesNotOverwrite(
     assert action_bud._owner_id == sue_str
     assert action_bud.fund_pool == sue_fund_pool
     assert action_bud.fund_coin == sue_fund_coin
-    assert action_bud.bit == sue_bit
+    assert action_bud.respect_bit == sue_bit
 
 
 def test_HubUnit_initialize_action_file_CreatesDirsAndFiles(env_dir_setup_cleanup):

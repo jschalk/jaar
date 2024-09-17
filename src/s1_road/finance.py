@@ -73,7 +73,7 @@ def valid_finance_ratio(big_number: float, small_number: float) -> bool:
 #     return max(get_1_if_None(x_fund_pool), default_fund_coin_if_none())
 
 
-def default_bit_if_none(bit: BitNum = None) -> BitNum:
+def default_respect_bit_if_none(bit: BitNum = None) -> BitNum:
     return max(get_1_if_None(bit), 1)
 
 
@@ -87,7 +87,7 @@ def default_respect_num() -> RespectNum:
 
 def validate_respect_num(x_respect_num: RespectNum = None) -> RespectNum:
     x_respect_num = default_respect_num() if x_respect_num is None else x_respect_num
-    return max(x_respect_num, default_bit_if_none(x_respect_num))
+    return max(x_respect_num, default_respect_bit_if_none(x_respect_num))
 
 
 def default_penny_if_none(penny: PennyNum = None) -> PennyNum:

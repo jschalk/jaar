@@ -21,7 +21,7 @@ def test_AtomRow_exists():
     assert x_atomrow.base is None
     assert x_atomrow.base_idea_active_requisite is None
     assert x_atomrow.begin is None
-    assert x_atomrow.bit is None
+    assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
     assert x_atomrow.credit_belief is None
     assert x_atomrow.credit_vote is None

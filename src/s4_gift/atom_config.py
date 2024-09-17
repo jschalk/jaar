@@ -291,7 +291,7 @@ def get_atom_args_python_types() -> dict[str, str]:
         "credor_respect": "int",
         "debtor_respect": "int",
         "fund_pool": "float",
-        "bit": "float",
+        "respect_bit": "float",
         "fund_coin": "float",
     }
 
