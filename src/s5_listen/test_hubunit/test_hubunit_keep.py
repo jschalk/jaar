@@ -2,7 +2,7 @@ from src.s0_instrument.file import delete_dir, save_file, open_file
 from src.s0_instrument.db_tool import check_connection
 from src.s2_bud.healer import healerlink_shop
 from src.s2_bud.idea import ideaunit_shop
-from src.s2_bud.graphic import display_ideatree
+from src.s2_bud.bud_graphics import display_ideatree
 from src.s5_listen.hubunit import hubunit_shop, treasury_file_name
 from src.s5_listen.examples.listen_env import (
     env_dir_setup_cleanup,

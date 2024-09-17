@@ -1,6 +1,6 @@
 from src.s0_instrument.python_tool import conditional_fig_show
 from src.s1_road.finance import default_fund_pool
-from src.s2_bud.graphic import display_ideatree
+from src.s2_bud.bud_graphics import display_ideatree
 from src.s2_bud.bud import budunit_shop
 from src.s2_bud.healer import healerlink_shop
 from src.s2_bud.examples.example_buds import (

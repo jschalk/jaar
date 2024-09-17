@@ -3,7 +3,7 @@ from src.s2_bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_x1_3levels_1reason_1facts,
 )
-from src.s2_bud.graphic import (
+from src.s2_bud.bud_graphics import (
     display_ideatree,
     budunit_explanation0,
     budunit_explanation1,
