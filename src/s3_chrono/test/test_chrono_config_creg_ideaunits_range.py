@@ -25,7 +25,7 @@ from src.s3_chrono.chrono import (
 )
 
 
-def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
+def test_BudUnit_set_idea_dict_SetsAll_range_inheritors():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -46,8 +46,8 @@ def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
     assert sue_budunit._range_inheritors == {}
 
     # WHEN
-    sue_budunit._init_idea_tree_walk()
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_idea_dict()
+    sue_budunit._set_ideatree_range_attrs()
 
     # THEN
     print(f"{sue_budunit._range_inheritors=}")
@@ -65,14 +65,14 @@ def test_BudUnit_init_idea_tree_walk_SetsAll_range_inheritors():
     assert jan_road in sue_budunit._range_inheritors
 
 
-def test_BudUnit_set_ideaunits_range_Sets_day_idea_gogo_calc_stop_calc():
+def test_BudUnit_set_ideatree_range_attrs_Sets_day_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit._init_idea_tree_walk()
+    sue_budunit._set_idea_dict()
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(creg_road)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
@@ -85,21 +85,21 @@ def test_BudUnit_set_ideaunits_range_Sets_day_idea_gogo_calc_stop_calc():
     assert not day_idea._stop_calc
 
     # WHEN
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
 
     # THEN
     assert day_idea._gogo_calc == 0
     assert day_idea._stop_calc == 1440
 
 
-def test_BudUnit_set_ideaunits_range_Sets_days_idea_gogo_calc_stop_calc():
+def test_BudUnit_set_ideatree_range_attrs_Sets_days_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
     creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     days_road = sue_budunit.make_road(creg_road, days_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit._init_idea_tree_walk()
+    sue_budunit._set_idea_dict()
     assert sue_budunit.idea_exists(days_road)
     days_idea = sue_budunit.get_idea_obj(days_road)
     assert days_idea.denom == 1440
@@ -107,7 +107,7 @@ def test_BudUnit_set_ideaunits_range_Sets_days_idea_gogo_calc_stop_calc():
     assert not days_idea._stop_calc
 
     # WHEN
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
 
     # THEN
     assert days_idea.denom == 1440
@@ -115,7 +115,7 @@ def test_BudUnit_set_ideaunits_range_Sets_days_idea_gogo_calc_stop_calc():
     assert days_idea._stop_calc == 1022679
 
 
-def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
+def test_BudUnit_set_ideatree_range_attrs_Sets_weeks_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -130,7 +130,7 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     fri_road = sue_budunit.make_road(week_road, get_fri())
     sat_road = sue_budunit.make_road(week_road, get_sat())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit._init_idea_tree_walk()
+    sue_budunit._set_idea_dict()
     assert sue_budunit.idea_exists(weeks_road)
     assert sue_budunit.idea_exists(sun_road)
     assert sue_budunit.idea_exists(mon_road)
@@ -150,7 +150,7 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     assert not week_idea._stop_calc
 
     # WHEN
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
 
     # THEN
     assert weeks_idea.denom == 10080
@@ -174,7 +174,7 @@ def test_BudUnit_set_ideaunits_range_Sets_weeks_idea_gogo_calc_stop_calc():
     assert sue_budunit.get_idea_obj(sat_road)._stop_calc == 5760
 
 
-def test_BudUnit_set_ideaunits_range_Sets_c400_idea_gogo_calc_stop_calc():
+def test_BudUnit_set_ideatree_range_attrs_Sets_c400_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -186,7 +186,7 @@ def test_BudUnit_set_ideaunits_range_Sets_c400_idea_gogo_calc_stop_calc():
     # yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
     # year_road = sue_budunit.make_road(yr4_clean_road, year_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit._init_idea_tree_walk()
+    sue_budunit._set_idea_dict()
     print(f"    {c400_leap_road=}")
     assert sue_budunit.idea_exists(c400_leap_road)
     c400_leap_idea = sue_budunit.get_idea_obj(c400_leap_road)
@@ -195,7 +195,7 @@ def test_BudUnit_set_ideaunits_range_Sets_c400_idea_gogo_calc_stop_calc():
     assert not c400_leap_idea._stop_calc
 
     # WHEN
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
 
     # THEN
     # assert year_idea.denom == 525600
@@ -207,7 +207,7 @@ def test_BudUnit_set_ideaunits_range_Sets_c400_idea_gogo_calc_stop_calc():
     assert 1472657760 % sue_budunit.get_idea_obj(c400_leap_road)._stop_calc == 0
 
 
-def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
+def test_BudUnit_set_ideatree_range_attrs_Sets_years_idea_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -219,7 +219,7 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
     year_road = sue_budunit.make_road(yr4_clean_road, year_str())
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit._init_idea_tree_walk()
+    sue_budunit._set_idea_dict()
     print(f"    {year_road=}")
     assert sue_budunit.idea_exists(year_road)
     year_idea = sue_budunit.get_idea_obj(year_road)
@@ -228,7 +228,7 @@ def test_BudUnit_set_ideaunits_range_Sets_years_idea_gogo_calc_stop_calc():
     assert not year_idea._stop_calc
 
     # WHEN
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
 
     # THEN
     assert sue_budunit.get_idea_obj(creg_road)._gogo_calc == 0

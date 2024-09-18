@@ -216,8 +216,7 @@ def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) 
         bud_idea_reason_premiseunit_str(): bud_idea_reason_premiseunit_get_obj,
         bud_idea_factunit_str(): bud_idea_factunit_get_obj,
     }
-    x_func = x_categorys.get(x_category)
-    if x_func:
+    if x_func := x_categorys.get(x_category):
         return x_func(x_bud, required_args)
 
 

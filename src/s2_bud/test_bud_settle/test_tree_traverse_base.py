@@ -9,7 +9,7 @@ from src.s2_bud.bud import budunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_clear_settle_attrs_CorrectlySetsAttrs():
+def test_BudUnit_clear_idea_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     x_rational = True
@@ -29,7 +29,7 @@ def test_BudUnit_clear_settle_attrs_CorrectlySetsAttrs():
     assert sue_bud._range_inheritors != {}
 
     # WHEN
-    sue_bud._clear_settle_attrs()
+    sue_bud._clear_idea_dict_and_bud_obj_settle_attrs()
 
     # THEN
     assert sue_bud._rational != x_rational
