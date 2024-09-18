@@ -1148,7 +1148,6 @@ class BudUnit:
         root_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         root_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
         root_idea.set_awardheirs_fund_give_fund_take()
-        root_idea.set_ancestor_pledge_count(0, False)
 
     def _set_kids_attributes(
         self,
@@ -1162,8 +1161,6 @@ class BudUnit:
         tt_count = self._tree_traverse_count
         x_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
-        ancestor_pledge_count = parent_idea._ancestor_pledge_count
-        x_idea.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
 
     def _allot_fund_share(self, idea: IdeaUnit):
         if idea.awardheir_exists():
