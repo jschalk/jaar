@@ -427,7 +427,7 @@ def test_add_headers_to_csv_ReturnsObj():
     six_text = "six"
     seven_text = "seven"
     headers = [swim_text, six_text, seven_text]
-    headerless_csv = f"""Bob,13,29
+    headerless_csv = """Bob,13,29
 Sue,11,23
 Yao,41,37
 Zia,41,37
