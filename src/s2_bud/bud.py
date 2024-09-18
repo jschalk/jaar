@@ -673,7 +673,7 @@ class BudUnit:
         return x_idea
 
     def _create_missing_ideas(self, road):
-        self._init_idea_tree_walk()
+        self._set_idea_dict()
         posted_idea = self.get_idea_obj(road)
 
         for reason_x in posted_idea.reasonunits.values():
@@ -1028,7 +1028,7 @@ class BudUnit:
         idea_roads = all_roadunits_between(math_road, inheritor_road)
         return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
 
-    def _init_idea_tree_walk(self):
+    def _set_idea_dict(self):
         idea_list = [self.get_idea_obj(self._fiscal_id)]
         while idea_list != []:
             x_idea = idea_list.pop()
@@ -1064,32 +1064,31 @@ class BudUnit:
 
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 
-    def _set_ideaunits_range(self):
+    def _set_ideatree_range_attrs(self):
         for x_idea in self._idea_dict.values():
             if x_idea.is_math():
                 self._distribute_math_attrs(x_idea)
 
     def _set_ancestors_metrics(self, road: RoadUnit, keep_exceptions: bool = False):
-        task_count = 0
+        x_descendant_pledge_count = 0
         child_awardlines = None
         group_everyone = None
-        ancestor_roads = get_ancestor_roads(road=road)
+        ancestor_roads = get_ancestor_roads(road)
         keep_justified_by_problem = True
         healerlink_count = 0
 
         while ancestor_roads != []:
             youngest_road = ancestor_roads.pop(0)
-            # _set_non_root_ancestor_metrics(youngest_road, task_count, group_everyone)
-            x_idea_obj = self.get_idea_obj(road=youngest_road)
-            x_idea_obj.add_to_descendant_pledge_count(task_count)
+            x_idea_obj = self.get_idea_obj(youngest_road)
+            x_idea_obj.add_to_descendant_pledge_count(x_descendant_pledge_count)
             if x_idea_obj.is_kidless():
                 x_idea_obj.set_kidless_awardlines()
                 child_awardlines = x_idea_obj._awardlines
             else:
-                x_idea_obj.set_awardlines(child_awardlines=child_awardlines)
+                x_idea_obj.set_awardlines(child_awardlines)
 
             if x_idea_obj._task:
-                task_count += 1
+                x_descendant_pledge_count += 1
 
             if (
                 group_everyone != False
@@ -1120,63 +1119,57 @@ class BudUnit:
                 raise Exception_keeps_justified(exception_str)
             self._keeps_justified = False
 
-    def _set_idearoot_fund_and_active_status_related_attrs(self, keep_exceptions: bool):
-        self._idearoot.set_factheirs(self._idearoot.factunits)
-        self._idearoot.set_idearoot_inherit_reasonheirs()
-        self._idearoot.set_teamheir(None, self._groupboxs)
-        self._idearoot.inherit_awardheirs()
-        self._idearoot.clear_awardlines()
+    def _set_idearoot_fund_and_active_status_attrs(
+        self, x_idea: IdeaUnit, keep_exceptions: bool
+    ):
+        x_idea.set_factheirs(x_idea.factunits)
+        x_idea.set_idearoot_inherit_reasonheirs()
+        x_idea.set_teamheir(None, self._groupboxs)
+        x_idea.inherit_awardheirs()
+        x_idea.clear_awardlines()
         tt_count = self._tree_traverse_count
-        self._idearoot.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
-        self._idearoot.set_fund_attr(0, self.fund_pool, self.fund_pool)
-        self._idearoot.set_awardheirs_fund_give_fund_take()
-        self._idearoot.set_ancestor_pledge_count(0, False)
-        self._idearoot.clear_descendant_pledge_count()
-        self._idearoot.clear_all_acct_cred_debt()
-        if self._idearoot.is_kidless():
-            self._set_ancestors_metrics(self._idearoot.get_road(), keep_exceptions)
-            self._allot_fund_share(idea=self._idearoot)
-        if (
-            self._tree_traverse_count == 1
-            and not self._idearoot.is_kidless()
-            and self._idearoot.get_kids_mass_sum() == 0
-            and self._idearoot.mass != 0
-        ):
-            self._offtrack_kids_mass_set.add(self._idearoot.get_road())
+        x_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
+        x_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
+        x_idea.set_awardheirs_fund_give_fund_take()
+        x_idea.set_ancestor_pledge_count(0, False)
+        x_idea.clear_descendant_pledge_count()
+        x_idea.clear_all_acct_cred_debt()
+        if x_idea.is_kidless():
+            self._set_ancestors_metrics(x_idea.get_road(), keep_exceptions)
+            self._allot_fund_share(x_idea)
+
+        if self._tree_traverse_count == 1:
+            self._evaluate_if_offtrack_mass(x_idea)
 
     def _set_kids_attributes(
         self,
-        idea_kid: IdeaUnit,
+        x_idea: IdeaUnit,
         fund_onset: float,
         fund_cease: float,
         parent_idea: IdeaUnit,
         keep_exceptions: bool,
     ):
-        idea_kid.set_factheirs(parent_idea._factheirs)
-        idea_kid.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
-        idea_kid.set_range_factheirs(self._idea_dict, self._range_inheritors)
-        idea_kid.set_teamheir(parent_idea._teamheir, self._groupboxs)
-        idea_kid.inherit_awardheirs(parent_idea._awardheirs)
-        idea_kid.clear_awardlines()
+        x_idea.set_factheirs(parent_idea._factheirs)
+        x_idea.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
+        x_idea.set_range_factheirs(self._idea_dict, self._range_inheritors)
+        x_idea.set_teamheir(parent_idea._teamheir, self._groupboxs)
+        x_idea.inherit_awardheirs(parent_idea._awardheirs)
+        x_idea.clear_awardlines()
         tt_count = self._tree_traverse_count
-        idea_kid.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
-        idea_kid.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
+        x_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
+        x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
         ancestor_pledge_count = parent_idea._ancestor_pledge_count
-        idea_kid.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
-        idea_kid.clear_descendant_pledge_count()
-        idea_kid.clear_all_acct_cred_debt()
+        x_idea.set_ancestor_pledge_count(ancestor_pledge_count, parent_idea.pledge)
+        x_idea.clear_descendant_pledge_count()
+        x_idea.clear_all_acct_cred_debt()
 
-        if idea_kid.is_kidless():
+        if x_idea.is_kidless():
             # set idea's ancestor metrics using bud root as common source
-            self._set_ancestors_metrics(idea_kid.get_road(), keep_exceptions)
-            self._allot_fund_share(idea=idea_kid)
-        if (
-            self._tree_traverse_count == 1
-            and idea_kid.mass != 0
-            and idea_kid.is_kidless() is False
-            and idea_kid.get_kids_mass_sum() == 0
-        ):
-            self._offtrack_kids_mass_set.add(idea_kid.get_road())
+            self._set_ancestors_metrics(x_idea.get_road(), keep_exceptions)
+            self._allot_fund_share(x_idea)
+
+        if self._tree_traverse_count == 1:
+            self._evaluate_if_offtrack_mass(x_idea)
 
     def _allot_fund_share(self, idea: IdeaUnit):
         if idea.awardheir_exists():
@@ -1193,7 +1186,7 @@ class BudUnit:
                 x_groupbox.set_membership(x_membership)
                 self.set_groupbox(x_groupbox)
 
-    def _set_respect_ledgers(self):
+    def _set_acctunit_groupbox_respect_ledgers(self):
         self.credor_respect = validate_respect_num(self.credor_respect)
         self.debtor_respect = validate_respect_num(self.debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -1206,10 +1199,10 @@ class BudUnit:
         self._create_groupboxs_metrics()
         self._reset_acctunit_fund_give_take()
 
-    def _clear_settle_attrs(self):
+    def _clear_idea_dict_and_bud_obj_settle_attrs(self):
+        self._idea_dict = {self._idearoot.get_road(): self._idearoot}
         self._rational = False
         self._tree_traverse_count = 0
-        self._idea_dict = {self._idearoot.get_road(): self._idearoot}
         self._offtrack_kids_mass_set = set()
         self._reason_bases = set()
         self._range_inheritors = {}
@@ -1222,14 +1215,15 @@ class BudUnit:
         self._healers_dict = {}
 
     def settle_bud(self, keep_exceptions: bool = False):
-        self._clear_settle_attrs()
-        self._init_idea_tree_walk()
-        self._set_ideaunits_range()
-        self._set_respect_ledgers()
+        self._clear_idea_dict_and_bud_obj_settle_attrs()
+        self._set_idea_dict()
+        self._set_ideatree_range_attrs()
+        self._set_acctunit_groupbox_respect_ledgers()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
             self._set_ideatree_fund_and_active_status_related_attrs(keep_exceptions)
+            self._set_rational_attr()
             self._tree_traverse_count += 1
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
@@ -1237,34 +1231,33 @@ class BudUnit:
     def _set_ideatree_fund_and_active_status_related_attrs(self, keep_exceptions):
         self._clear_bud_keep_attrs()
         self._clear_acctunit_fund_related_attrs()
-        self._set_idearoot_fund_and_active_status_related_attrs(keep_exceptions)
-        self._set_ideakids_fund_and_active_status_related_attrs(keep_exceptions)
-        self._check_if_any_idea_active_status_has_altered()
+        self._set_idearoot_fund_and_active_status_attrs(self._idearoot, keep_exceptions)
+        self._set_ideakids_fund_and_active_status_attrs(self._idearoot, keep_exceptions)
 
-    def _set_ideakids_fund_and_active_status_related_attrs(
-        self, keep_exceptions: bool = False
+    def _set_ideakids_fund_and_active_status_attrs(
+        self, root_idea: IdeaUnit, keep_exceptions: bool = False
     ):
-        x_idearoot_kids_items = self._idearoot._kids.items()
+        x_idearoot_kids_items = root_idea._kids.items()
         kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
-        root_fund_num = self._idearoot._fund_cease - self._idearoot._fund_onset
+        root_fund_num = root_idea._fund_cease - root_idea._fund_onset
         alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self.fund_coin)
         x_idearoot_kid_fund_onset = None
         x_idearoot_kid_fund_cease = None
 
         cache_idea_list = []
-        for kid_label, idea_kid in self._idearoot._kids.items():
+        for kid_label, idea_kid in root_idea._kids.items():
             kid_fund_num = alloted_fund_num.get(kid_label)
             if x_idearoot_kid_fund_onset is None:
-                x_idearoot_kid_fund_onset = self._idearoot._fund_onset
-                x_idearoot_kid_fund_cease = self._idearoot._fund_onset + kid_fund_num
+                x_idearoot_kid_fund_onset = root_idea._fund_onset
+                x_idearoot_kid_fund_cease = root_idea._fund_onset + kid_fund_num
             else:
                 x_idearoot_kid_fund_onset = x_idearoot_kid_fund_cease
                 x_idearoot_kid_fund_cease += kid_fund_num
             self._set_kids_attributes(
-                idea_kid=idea_kid,
+                x_idea=idea_kid,
                 fund_onset=x_idearoot_kid_fund_onset,
                 fund_cease=x_idearoot_kid_fund_cease,
-                parent_idea=self._idearoot,
+                parent_idea=root_idea,
                 keep_exceptions=keep_exceptions,
             )
             cache_idea_list.append(idea_kid)
@@ -1288,7 +1281,7 @@ class BudUnit:
                         fund_onset = fund_cease
                         fund_cease += alloted_fund_num.get(idea_kid._label)
                     self._set_kids_attributes(
-                        idea_kid=idea_kid,
+                        x_idea=idea_kid,
                         fund_onset=fund_onset,
                         fund_cease=fund_cease,
                         parent_idea=parent_idea,
@@ -1296,7 +1289,7 @@ class BudUnit:
                     )
                     cache_idea_list.append(idea_kid)
 
-    def _check_if_any_idea_active_status_has_altered(self):
+    def _set_rational_attr(self):
         any_idea_active_status_has_altered = False
         for idea in self._idea_dict.values():
             if idea._active_hx.get(self._tree_traverse_count) is not None:
@@ -1311,6 +1304,14 @@ class BudUnit:
         self._allot_fund_bud_agenda()
         self._allot_groupboxs_fund()
         self._set_acctunits_fund_agenda_ratios()
+
+    def _evaluate_if_offtrack_mass(self, x_idea: IdeaUnit):
+        if (
+            not x_idea.is_kidless()
+            and x_idea.get_kids_mass_sum() == 0
+            and x_idea.mass != 0
+        ):
+            self._offtrack_kids_mass_set.add(x_idea.get_road())
 
     def _set_bud_keep_attrs(self):
         self._set_keep_dict()

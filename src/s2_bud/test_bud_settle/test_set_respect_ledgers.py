@@ -47,20 +47,20 @@ def test_create_groupboxs_metrics_SetsAttrScenario1():
     assert yao_groupbox._debtor_pool == 44
 
 
-def test_BudUnit_set_respect_ledgers_SetsAttr_scenario0():
+def test_BudUnit_set_acctunit_groupbox_respect_ledgers_SetsAttr_scenario0():
     # ESTABLISH
     sue_str = "Sue"
     sue_budunit = budunit_shop(sue_str)
     assert sue_budunit._groupboxs == {}
 
     # WHEN
-    sue_budunit._set_respect_ledgers()
+    sue_budunit._set_acctunit_groupbox_respect_ledgers()
 
     # THEN
     assert sue_budunit._groupboxs == {}
 
 
-def test_BudUnit_set_respect_ledgers_Clears_groups():
+def test_BudUnit_set_acctunit_groupbox_respect_ledgers_Clears_groups():
     # ESTABLISH
     sue_str = "Sue"
     sue_budunit = budunit_shop(sue_str)
@@ -70,14 +70,14 @@ def test_BudUnit_set_respect_ledgers_Clears_groups():
     assert sue_budunit._groupboxs != {}
 
     # WHEN
-    sue_budunit._set_respect_ledgers()
+    sue_budunit._set_acctunit_groupbox_respect_ledgers()
 
     # THEN
     assert sue_budunit._groups != {}
     assert sue_budunit._groupboxs == {}
 
 
-def test_BudUnit_set_respect_ledgers_SetsAttr_scenario1():
+def test_BudUnit_set_acctunit_groupbox_respect_ledgers_SetsAttr_scenario1():
     # ESTABLISH
     sue_str = "Sue"
     sue_budunit = budunit_shop(sue_str)
@@ -92,7 +92,7 @@ def test_BudUnit_set_respect_ledgers_SetsAttr_scenario1():
     # assert sue_budunit._groupboxs == {}
 
     # WHEN
-    sue_budunit._set_respect_ledgers()
+    sue_budunit._set_acctunit_groupbox_respect_ledgers()
 
     # THEN
     assert yao_acctunit._credor_pool != 0
@@ -111,7 +111,7 @@ def test_BudUnit_set_respect_ledgers_SetsAttr_scenario1():
     assert yao_membership == groupbox_yao_membership
 
 
-def test_BudUnit_set_respect_ledgers_SetsAttr_scenario2():
+def test_BudUnit_set_acctunit_groupbox_respect_ledgers_SetsAttr_scenario2():
     # ESTABLISH
     sue_str = "Sue"
     sue_budunit = budunit_shop(sue_str)
@@ -127,7 +127,7 @@ def test_BudUnit_set_respect_ledgers_SetsAttr_scenario2():
     assert yao_acctunit.get_membership(yao_str)._debtor_pool == 0
 
     # WHEN
-    sue_budunit._set_respect_ledgers()
+    sue_budunit._set_acctunit_groupbox_respect_ledgers()
 
     # THEN
     assert sue_budunit.get_acct(yao_str)._credor_pool != 0
@@ -153,7 +153,7 @@ def test_BudUnit_set_respect_ledgers_SetsAttr_scenario2():
     assert len(ohio_groupbox._memberships) == 1
 
 
-def test_BudUnit_set_respect_ledgers_ResetAcctUnitsAttrs():
+def test_BudUnit_set_acctunit_groupbox_respect_ledgers_ResetAcctUnitsAttrs():
     # ESTABLISH
     sue_str = "Sue"
     sue_budunit = budunit_shop(sue_str)
@@ -191,7 +191,7 @@ def test_BudUnit_set_respect_ledgers_ResetAcctUnitsAttrs():
     assert yao_acctunit._fund_agenda_ratio_take == 0.44
 
     # WHEN
-    sue_budunit._set_respect_ledgers()
+    sue_budunit._set_acctunit_groupbox_respect_ledgers()
 
     # THEN
     assert zia_acctunit._fund_agenda_ratio_give == 0

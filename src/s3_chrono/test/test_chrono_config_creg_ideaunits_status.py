@@ -28,7 +28,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario0():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -52,7 +52,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -86,7 +86,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario2():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # day_idea = sue_budunit.get_idea_obj(day_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -119,7 +119,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_idea_Scenario0():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # days_idea = sue_budunit.get_idea_obj(days_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -155,7 +155,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -189,7 +189,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -223,7 +223,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
     creg_idea = sue_budunit.get_idea_obj(creg_road)
     print(f"{creg_idea.begin=} {creg_idea.close=}")
     # weeks_idea = sue_budunit.get_idea_obj(weeks_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -256,7 +256,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -299,7 +299,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -334,7 +334,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     creg_idea = sue_budunit.get_idea_obj(creg_road)
     # year_idea = sue_budunit.get_idea_obj(year_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -401,7 +401,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
@@ -528,7 +528,7 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     # creg_idea = sue_budunit.get_idea_obj(creg_road)
     # week_idea = sue_budunit.get_idea_obj(week_road)
-    sue_budunit._set_ideaunits_range()
+    sue_budunit._set_ideatree_range_attrs()
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     clean_str = "clean"
