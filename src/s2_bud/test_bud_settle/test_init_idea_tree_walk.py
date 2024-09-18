@@ -1,7 +1,7 @@
 from src.s2_bud.examples.example_buds import get_budunit_with_4_levels
 from src.s2_bud.reason_idea import reasonunit_shop
 from src.s2_bud.idea import ideaunit_shop
-from src.s2_bud.bud import budunit_shop
+from src.s2_bud.bud import budunit_shop, get_sorted_idea_list
 from pytest import raises as pytest_raises
 
 
@@ -129,3 +129,35 @@ def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
 
     # THEN
     assert sue_bud.idea_exists(buildings_road)
+
+
+def test_get_sorted_idea_list_ReturnsObj():
+    # ESTABLISH
+    sue_bud = get_budunit_with_4_levels()
+    casa_road = sue_bud.make_l1_road("casa")
+    cat_road = sue_bud.make_l1_road("cat have dinner")
+    week_road = sue_bud.make_l1_road("weekdays")
+    sun_road = sue_bud.make_road(week_road, "Sunday")
+    mon_road = sue_bud.make_road(week_road, "Monday")
+    tue_road = sue_bud.make_road(week_road, "Tuesday")
+    wed_road = sue_bud.make_road(week_road, "Wednesday")
+    thu_road = sue_bud.make_road(week_road, "Thursday")
+    fri_road = sue_bud.make_road(week_road, "Friday")
+    sat_road = sue_bud.make_road(week_road, "Saturday")
+    states_road = sue_bud.make_l1_road("nation-state")
+    usa_road = sue_bud.make_road(states_road, "USA")
+    france_road = sue_bud.make_road(states_road, "France")
+    brazil_road = sue_bud.make_road(states_road, "Brazil")
+    texas_road = sue_bud.make_road(usa_road, "Texas")
+    oregon_road = sue_bud.make_road(usa_road, "Oregon")
+    sue_bud._set_idea_dict()
+
+    # WHEN
+    x_sorted_idea_list = get_sorted_idea_list(list(sue_bud._idea_dict.values()))
+
+    # THEN
+    assert x_sorted_idea_list is not None
+    assert len(x_sorted_idea_list) == 17
+    assert x_sorted_idea_list[0] == sue_bud._idearoot
+    assert x_sorted_idea_list[1] == sue_bud.get_idea_obj(casa_road)
+    assert x_sorted_idea_list[11] == sue_bud.get_idea_obj(mon_road)

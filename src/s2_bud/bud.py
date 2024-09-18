@@ -1143,10 +1143,7 @@ class BudUnit:
             x_idea.clear_all_acct_cred_debt()
 
     def _set_idearoot_fund_and_active_status_attrs(self, root_idea: IdeaUnit):
-        root_idea.set_factheirs(root_idea.factunits)
         root_idea.set_idearoot_inherit_reasonheirs()
-        root_idea.set_teamheir(None, self._groupboxs)
-        root_idea.inherit_awardheirs()
         tt_count = self._tree_traverse_count
         root_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         root_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
@@ -1160,11 +1157,8 @@ class BudUnit:
         fund_cease: float,
         parent_idea: IdeaUnit,
     ):
-        x_idea.set_factheirs(parent_idea._factheirs)
         x_idea.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
         x_idea.set_range_factheirs(self._idea_dict, self._range_inheritors)
-        x_idea.set_teamheir(parent_idea._teamheir, self._groupboxs)
-        x_idea.inherit_awardheirs(parent_idea._awardheirs)
         tt_count = self._tree_traverse_count
         x_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
@@ -1214,6 +1208,18 @@ class BudUnit:
         self._keep_dict = {}
         self._healers_dict = {}
 
+    def _set_ideatree_factheirs(self):
+        for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
+            if x_idea._root:
+                x_idea.set_factheirs(x_idea.factunits)
+                x_idea.set_teamheir(None, self._groupboxs)
+                x_idea.inherit_awardheirs()
+            else:
+                parent_idea = self.get_idea_obj(x_idea._parent_road)
+                x_idea.set_factheirs(parent_idea._factheirs)
+                x_idea.set_teamheir(parent_idea._teamheir, self._groupboxs)
+                x_idea.inherit_awardheirs(parent_idea._awardheirs)
+
     def settle_bud(self, keep_exceptions: bool = False):
         self._clear_idea_dict_and_bud_obj_settle_attrs()
         self._set_idea_dict()
@@ -1221,6 +1227,7 @@ class BudUnit:
         self._set_acctunit_groupbox_respect_ledgers()
         self._clear_acctunit_fund_attrs()
         self._clear_bud_keep_attrs()
+        self._set_ideatree_factheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
@@ -1610,3 +1617,8 @@ def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:
         x_bud = get_from_dict(bud_dict=budunit_dict)
         budunits[x_bud._owner_id] = x_bud
     return budunits
+
+
+def get_sorted_idea_list(x_list: list[IdeaUnit]) -> list[IdeaUnit]:
+    x_list.sort(key=lambda x: x.get_road(), reverse=False)
+    return x_list
