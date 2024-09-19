@@ -1076,7 +1076,7 @@ class BudUnit:
             ):
                 self._offtrack_kids_mass_set.add(x_idea.get_road())
 
-    def _set_ideatree_funds(self, keep_exceptions):
+    def _set_groupbox_acctunit_funds(self, keep_exceptions):
         for x_idea in self._idea_dict.values():
             x_idea.set_awardheirs_fund_give_fund_take()
             if x_idea.is_kidless():
@@ -1143,23 +1143,11 @@ class BudUnit:
             x_idea.clear_descendant_pledge_count()
             x_idea.clear_all_acct_cred_debt()
 
-    def _set_idearoot_fund_and_active_status_attrs(self, root_idea: IdeaUnit):
-        tt_count = self._tree_traverse_count
-        root_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
-        root_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
-
-    def _set_kids_attributes(
-        self,
-        x_idea: IdeaUnit,
-        fund_onset: float,
-        fund_cease: float,
-        parent_idea: IdeaUnit,
-    ):
+    def _set_kids_active_status_attrs(self, x_idea: IdeaUnit, parent_idea: IdeaUnit):
         x_idea.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
         x_idea.set_range_factheirs(self._idea_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
         x_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
-        x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
 
     def _allot_fund_share(self, idea: IdeaUnit):
         if idea.awardheir_exists():
@@ -1196,8 +1184,6 @@ class BudUnit:
         self._offtrack_kids_mass_set = set()
         self._reason_bases = set()
         self._range_inheritors = {}
-
-    def _clear_bud_keep_attrs(self):
         self._keeps_justified = True
         self._keeps_buildable = False
         self._sum_healerlink_share = 0
@@ -1225,50 +1211,34 @@ class BudUnit:
         self._set_ideatree_range_attrs()
         self._set_acctunit_groupbox_respect_ledgers()
         self._clear_acctunit_fund_attrs()
-        self._clear_bud_keep_attrs()
+        self._clear_ideatree_fund_and_active_status_attrs()
         self._set_ideatree_factheirs_teamheirs_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._set_ideatree_fund_and_active_status_related_attrs()
+            self._set_ideatree_active_status_attrs()
             self._set_rational_attr()
             self._tree_traverse_count += 1
 
-        self._set_ideatree_funds(keep_exceptions)
+        self._set_ideatree_fund_attrs(self._idearoot)
+        self._set_groupbox_acctunit_funds(keep_exceptions)
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
 
-    def _set_ideatree_fund_and_active_status_related_attrs(self):
-        self._clear_ideatree_fund_and_active_status_attrs()
-        self._set_idearoot_fund_and_active_status_attrs(self._idearoot)
-        self._set_ideakids_fund_and_active_status_attrs(self._idearoot)
-
-    def _set_ideakids_fund_and_active_status_attrs(self, root_idea: IdeaUnit):
-        x_idearoot_kids_items = root_idea._kids.items()
-        kids_ledger = {x_road: kid.mass for x_road, kid in x_idearoot_kids_items}
-        root_fund_num = root_idea._fund_cease - root_idea._fund_onset
-        alloted_fund_num = allot_scale(kids_ledger, root_fund_num, self.fund_coin)
-        x_idearoot_kid_fund_onset = None
-        x_idearoot_kid_fund_cease = None
-
-        cache_idea_list = []
-        for kid_label, idea_kid in root_idea._kids.items():
-            kid_fund_num = alloted_fund_num.get(kid_label)
-            if x_idearoot_kid_fund_onset is None:
-                x_idearoot_kid_fund_onset = root_idea._fund_onset
-                x_idearoot_kid_fund_cease = root_idea._fund_onset + kid_fund_num
+    def _set_ideatree_active_status_attrs(self):
+        for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
+            if x_idea._root:
+                tt_count = self._tree_traverse_count
+                root_idea = self._idearoot
+                root_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
             else:
-                x_idearoot_kid_fund_onset = x_idearoot_kid_fund_cease
-                x_idearoot_kid_fund_cease += kid_fund_num
-            self._set_kids_attributes(
-                x_idea=idea_kid,
-                fund_onset=x_idearoot_kid_fund_onset,
-                fund_cease=x_idearoot_kid_fund_cease,
-                parent_idea=root_idea,
-            )
-            cache_idea_list.append(idea_kid)
+                parent_idea = self.get_idea_obj(x_idea._parent_road)
+                self._set_kids_active_status_attrs(x_idea, parent_idea)
 
+    def _set_ideatree_fund_attrs(self, root_idea: IdeaUnit):
+        root_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
         # no function recursion, recursion by iterateing over list that can be added to by iterations
+        cache_idea_list = [root_idea]
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
             kids_items = parent_idea._kids.items()
@@ -1276,23 +1246,17 @@ class BudUnit:
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_coin)
 
-            if parent_idea._kids is not None:
-                fund_onset = None
-                fund_cease = None
-                for idea_kid in parent_idea._kids.values():
-                    if fund_onset is None:
-                        fund_onset = parent_idea._fund_onset
-                        fund_cease = fund_onset + alloted_fund_num.get(idea_kid._label)
-                    else:
-                        fund_onset = fund_cease
-                        fund_cease += alloted_fund_num.get(idea_kid._label)
-                    self._set_kids_attributes(
-                        x_idea=idea_kid,
-                        fund_onset=fund_onset,
-                        fund_cease=fund_cease,
-                        parent_idea=parent_idea,
-                    )
-                    cache_idea_list.append(idea_kid)
+            fund_onset = None
+            fund_cease = None
+            for x_idea in parent_idea._kids.values():
+                if fund_onset is None:
+                    fund_onset = parent_idea._fund_onset
+                    fund_cease = fund_onset + alloted_fund_num.get(x_idea._label)
+                else:
+                    fund_onset = fund_cease
+                    fund_cease += alloted_fund_num.get(x_idea._label)
+                x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
+                cache_idea_list.append(x_idea)
 
     def _set_rational_attr(self):
         any_idea_active_status_has_altered = False
