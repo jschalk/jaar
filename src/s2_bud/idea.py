@@ -240,7 +240,6 @@ class IdeaUnit:
     _active_hx: dict[int, bool] = None
     _all_acct_cred: bool = None
     _all_acct_debt: bool = None
-    _ancestor_pledge_count: int = None
     _awardheirs: dict[GroupID, AwardHeir] = None
     _awardlines: dict[GroupID, AwardLine] = None
     _descendant_pledge_count: int = None
@@ -423,13 +422,6 @@ class IdeaUnit:
     def clear_all_acct_cred_debt(self):
         self._all_acct_cred = None
         self._all_acct_debt = None
-
-    def set_ancestor_pledge_count(
-        self, parent_ancestor_pledge_count: int, parent_pledge: bool
-    ):
-        x_int = 0
-        x_int = 1 if parent_pledge else 0
-        self._ancestor_pledge_count = parent_ancestor_pledge_count + x_int
 
     def set_level(self, parent_level):
         self._level = parent_level + 1
@@ -1012,7 +1004,6 @@ def ideaunit_shop(
     _fund_cease: FundNum = None,
     _task: bool = None,
     _active: bool = None,
-    _ancestor_pledge_count: int = None,
     _descendant_pledge_count: int = None,
     _all_acct_cred: bool = None,
     _all_acct_debt: bool = None,
@@ -1061,7 +1052,6 @@ def ideaunit_shop(
         _fund_cease=_fund_cease,
         _task=_task,
         _active=_active,
-        _ancestor_pledge_count=_ancestor_pledge_count,
         _descendant_pledge_count=_descendant_pledge_count,
         _all_acct_cred=_all_acct_cred,
         _all_acct_debt=_all_acct_debt,
