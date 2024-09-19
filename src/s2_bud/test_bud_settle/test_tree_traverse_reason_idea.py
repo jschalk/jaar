@@ -130,58 +130,42 @@ def test_agenda_returned_WhenNoReasonsExist():
 def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    print(f"{sue_bud._fiscal_id=}")
-    print(f"{sue_bud._idearoot._label=}")
-    casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    week_label = "weekdays"
-    week_road = sue_bud.make_l1_road(week_label)
-    wed_str = "Wednesday"
-    wed_road = sue_bud.make_road(week_road, wed_str)
-
-    wed_premise = premiseunit_shop(need=wed_road)
-    wed_premise._status = False
-    wed_premise._task = False
-    premises = {wed_premise.need: wed_premise}
-    casa_wk_build_reasonunit = reasonunit_shop(week_road, premises=premises)
-    casa_wk_built_reasonheir = reasonheir_shop(
-        base=week_road,
-        premises=premises,
-        _status=False,
-        _base_idea_active_value=True,
-    )
-    print(f"{casa_wk_build_reasonunit.base=}")
+    casa_road = sue_bud.make_l1_road("casa")
+    week_road = sue_bud.make_l1_road("weekdays")
+    tue_road = sue_bud.make_road(week_road, "Tuesday")
+    casa_wk_build_reasonunit = reasonunit_shop(week_road)
+    casa_wk_build_reasonunit.set_premise(tue_road)
     sue_bud.edit_idea_attr(casa_road, reason=casa_wk_build_reasonunit)
     casa_idea = sue_bud.get_idea_obj(casa_road)
     assert casa_idea.reasonunits != {}
-    # print(casa_idea.reasonunits)
-    assert casa_idea.reasonunits[week_road] is not None
-    assert casa_idea.reasonunits[week_road] == casa_wk_build_reasonunit
-    weekdays_str = "weekdays"
-    try:
-        casa_idea._reasonheirs[week_road]
-    except KeyError as e:
-        assert str(e) == f"'{sue_bud.make_l1_road(weekdays_str)}'"
+    assert casa_idea.get_reasonunit(week_road)
+    assert casa_idea.get_reasonunit(week_road) == casa_wk_build_reasonunit
+    assert not casa_idea.get_reasonheir(week_road)
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    casa_wk_cal_reasonheir = casa_idea._reasonheirs[week_road]
-    print(f"{len(casa_wk_cal_reasonheir.premises)=}")
-    assert len(casa_wk_cal_reasonheir.premises) == 1
-    premise_wed = casa_wk_cal_reasonheir.premises.get(wed_road)
-    wed_task = casa_wk_built_reasonheir.premises.get(premise_wed.need)._task
-    assert premise_wed._task == wed_task
-    assert premise_wed == casa_wk_built_reasonheir.premises[premise_wed.need]
-    # for premise in casa_wk_cal_reasonheir.premises.values():
-    #     # assert premise_task == casa_wk_built_reasonheir.premises[premise.need]._task
-    #     assert (
-    #         premise._task == casa_wk_built_reasonheir.premises[premise.need]._task
-    #     )
-    #     assert premise == casa_wk_built_reasonheir.premises[premise.need]
-    assert casa_wk_cal_reasonheir.premises == casa_wk_built_reasonheir.premises
-    assert casa_wk_cal_reasonheir == casa_wk_built_reasonheir
+    assert casa_idea.get_reasonheir(week_road)
+    assert len(casa_idea.get_reasonheir(week_road).premises) == 1
+    assert casa_idea.get_reasonheir(week_road).get_premise(tue_road)
+    premise_tue = casa_idea.get_reasonheir(week_road).get_premise(tue_road)
+    tue_premise = premiseunit_shop(need=tue_road)
+    tue_premise._status = False
+    tue_premise._task = False
+    premises = {tue_premise.need: tue_premise}
+    built_week_reasonheir = reasonheir_shop(
+        base=week_road,
+        premises=premises,
+        _status=False,
+        _base_idea_active_value=True,
+    )
+    tue_task = built_week_reasonheir.premises.get(premise_tue.need)._task
+    assert premise_tue._task == tue_task
+    assert premise_tue == built_week_reasonheir.premises[premise_tue.need]
+    week_reasonheir = casa_idea.get_reasonheir(week_road)
+    assert week_reasonheir.premises == built_week_reasonheir.premises
+    assert casa_idea.get_reasonheir(week_road) == built_week_reasonheir
 
 
 def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():

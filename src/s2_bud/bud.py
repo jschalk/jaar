@@ -1076,8 +1076,9 @@ class BudUnit:
             ):
                 self._offtrack_kids_mass_set.add(x_idea.get_road())
 
-    def _distribute_ideatree_funds(self, keep_exceptions):
+    def _set_ideatree_funds(self, keep_exceptions):
         for x_idea in self._idea_dict.values():
+            x_idea.set_awardheirs_fund_give_fund_take()
             if x_idea.is_kidless():
                 self._set_ancestors_pledge_fund_keep_attrs(
                     x_idea.get_road(), keep_exceptions
@@ -1143,11 +1144,9 @@ class BudUnit:
             x_idea.clear_all_acct_cred_debt()
 
     def _set_idearoot_fund_and_active_status_attrs(self, root_idea: IdeaUnit):
-        root_idea.set_idearoot_inherit_reasonheirs()
         tt_count = self._tree_traverse_count
         root_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
         root_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
-        root_idea.set_awardheirs_fund_give_fund_take()
 
     def _set_kids_attributes(
         self,
@@ -1205,17 +1204,20 @@ class BudUnit:
         self._keep_dict = {}
         self._healers_dict = {}
 
-    def _set_ideatree_factheirs(self):
+    def _set_ideatree_factheirs_teamheirs_awardheirs(self):
         for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
             if x_idea._root:
                 x_idea.set_factheirs(x_idea.factunits)
+                x_idea.set_idearoot_inherit_reasonheirs()
                 x_idea.set_teamheir(None, self._groupboxs)
                 x_idea.inherit_awardheirs()
+                x_idea.set_awardheirs_fund_give_fund_take()
             else:
                 parent_idea = self.get_idea_obj(x_idea._parent_road)
                 x_idea.set_factheirs(parent_idea._factheirs)
                 x_idea.set_teamheir(parent_idea._teamheir, self._groupboxs)
                 x_idea.inherit_awardheirs(parent_idea._awardheirs)
+                x_idea.set_awardheirs_fund_give_fund_take()
 
     def settle_bud(self, keep_exceptions: bool = False):
         self._clear_idea_dict_and_bud_obj_settle_attrs()
@@ -1224,7 +1226,7 @@ class BudUnit:
         self._set_acctunit_groupbox_respect_ledgers()
         self._clear_acctunit_fund_attrs()
         self._clear_bud_keep_attrs()
-        self._set_ideatree_factheirs()
+        self._set_ideatree_factheirs_teamheirs_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
@@ -1232,7 +1234,7 @@ class BudUnit:
             self._set_rational_attr()
             self._tree_traverse_count += 1
 
-        self._distribute_ideatree_funds(keep_exceptions)
+        self._set_ideatree_funds(keep_exceptions)
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
 
