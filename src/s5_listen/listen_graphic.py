@@ -1,4 +1,4 @@
-from src.s0_instrument.python_tool import (
+from src.s0_instrument.plotly_tool import (
     conditional_fig_show,
     add_simp_rect,
     add_direc_rect,

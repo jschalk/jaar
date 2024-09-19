@@ -1,4 +1,4 @@
-from src.s0_instrument.python_tool import (
+from src.s0_instrument.plotly_tool import (
     conditional_fig_show,
     add_simp_rect,
     add_rect_arrow,
@@ -495,16 +495,22 @@ def fund_explanation0(
 ) -> plotly_Figure:
     fig = display_ideatree(x_bud, mode, False)
     fig.update_xaxes(range=[-1, 11])
-    fig.update_yaxes(range=[-5, 3])
+    fig.update_yaxes(range=[-5.5, 3])
 
     green_str = "Green"
     blue_str = "blue"
     blue_str = "blue"
-    d_sue1_p1 = "How fund is distributed."
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at AcctUnits"
-    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
-    d_sue1_p4 = f"Money = {x_bud.fund_pool} "
+    d_sue1_title = "How fund is distributed."
     teamunit_str = "      Awardlinks"
+    add_rect_arrow(fig, 0.6, -0.1, 0.1, -0.1, "Purple")
+    add_rect_arrow(fig, 0.6, -0.8, 0.1, -0.1, "Purple")
+    add_rect_arrow(fig, 1.8, -1.1, 1.2, -1.1, "Purple")
+    add_rect_arrow(fig, 1.8, -2.4, 1.2, -1.1, "Purple")
+    add_rect_arrow(fig, 2.7, -1.1, 2.2, -1.1, "Purple")
+    add_rect_arrow(fig, 2.7, -1.6, 2.2, -1.1, "Purple")
+    add_rect_arrow(fig, 2.7, -3.1, 2.2, -3.1, "Purple")
+    add_rect_arrow(fig, 2.7, -3.6, 2.2, -3.1, "Purple")
+
     add_simp_rect(fig, 2, -0.3, 3, 0.3, teamunit_str)
     add_rect_arrow(fig, 2, 0.1, 1.2, 0.1, green_str)
     add_rect_arrow(fig, 2, -0.1, 1.2, -0.1, blue_str)
@@ -513,7 +519,77 @@ def fund_explanation0(
     add_rect_arrow(fig, 4, -1.1, 3.1, -1.1, blue_str)
     add_simp_rect(fig, 4, -3.2, 5, -2.8, teamunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
-    add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
+    add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_title, "", "", "")
+    d_sue1_p0 = "Fund Source is IdeaRoot. Each Idea fund range calculated by mass "
+    d_sue1_p1 = "IdeaRoot Fund ranges: Black arrows. Sum of childless Idea's funds equal idearoot's fund "
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at AcctUnits"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
+    d_sue1_p4 = f"fund_pool = {x_bud.fund_pool} "
+    fig.add_trace(
+        plotly_Scatter(
+            x=[4, 4, 4, 4, 4],
+            y=[2, 1.75, 1.50, 1.25, 1],
+            text=[d_sue1_p0, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4],
+            mode="text",
+        )
+    )
+    fund_t0 = "BudUnit.fund_pool"
+    fund_t1_0 = "IdeaUnit._fund_onset"
+    fund_t1_1 = "IdeaUnit._fund_cease"
+    fund_t2_0 = "AwardHeir._fund_give"
+    fund_t2_1 = "AwardHeir._fund_take"
+
+    fund_trace3_0 = "GroupBox._fund_give"
+    fund_trace3_1 = "GroupBox._fund_take"
+    fund_trace3_2 = "GroupBox._fund_agenda_give"
+    fund_trace3_3 = "GroupBox._fund_agenda_take"
+
+    fund_trace4_0 = "MemberShip._fund_give"
+    fund_trace4_1 = "MemberShip._fund_take"
+    fund_trace4_2 = "MemberShip._fund_agenda_give"
+    fund_trace4_3 = "MemberShip._fund_agenda_take"
+
+    fund_trace5_0 = "AcctUnit._fund_give"
+    fund_trace5_1 = "AcctUnit._fund_take"
+    fund_trace5_2 = "AcctUnit._fund_agenda_give"
+    fund_trace5_3 = "AcctUnit._fund_agenda_take"
+
+    tracex_list = [fund_t0, fund_t1_0, fund_t1_1, fund_t2_0, fund_t2_1]
+    fig.add_trace(
+        plotly_Scatter(
+            y=[-5, -4.85, -5.15, -4.85, -5.15],
+            x=[0, 2, 2, 4, 4],
+            text=tracex_list,
+            mode="text",
+        )
+    )
+    trace3_list = [fund_trace3_0, fund_trace3_1, fund_trace3_2, fund_trace3_3]
+    fig.add_trace(
+        plotly_Scatter(
+            y=[-4.65, -4.85, -5.15, -5.35],
+            x=[6, 6, 6, 6],
+            text=trace3_list,
+            mode="text",
+        )
+    )
+    trace4_list = [fund_trace4_0, fund_trace4_1, fund_trace4_2, fund_trace4_3]
+    fig.add_trace(
+        plotly_Scatter(
+            y=[-4.65, -4.85, -5.15, -5.35],
+            x=[8, 8, 8, 8],
+            text=trace4_list,
+            mode="text",
+        )
+    )
+    trace5_list = [fund_trace5_0, fund_trace5_1, fund_trace5_2, fund_trace5_3]
+    fig.add_trace(
+        plotly_Scatter(
+            y=[-4.65, -4.85, -5.15, -5.35],
+            x=[10, 10, 10, 10],
+            text=trace5_list,
+            mode="text",
+        )
+    )
     groupbox_str = "GroupBox"
     orange_str = "orange"
     add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupbox_str, orange_str)
@@ -539,10 +615,10 @@ def fund_explanation0(
     add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_str)
     acctunit_str = "acctunit"
     purple_str = "purple"
-    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, acctunit_str, purple_str)
-    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, acctunit_str, purple_str)
-    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, acctunit_str, purple_str)
-    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_str, purple_str)
-    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, purple_str)
+    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, "gold")
 
     conditional_fig_show(fig, graphics_bool)

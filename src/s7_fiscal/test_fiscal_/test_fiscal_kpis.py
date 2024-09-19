@@ -1,4 +1,4 @@
-from src.s0_instrument.python_tool import conditional_fig_show
+from src.s0_instrument.plotly_tool import conditional_fig_show
 from src.s4_gift.atom_config import acct_id_str, owner_id_str
 from src.s7_fiscal.fiscal_report import (
     get_fiscal_voices_accts_dataframe,

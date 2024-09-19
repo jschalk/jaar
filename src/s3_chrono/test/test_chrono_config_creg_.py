@@ -1,4 +1,4 @@
-from src.s0_instrument.python_tool import conditional_fig_show
+from src.s0_instrument.plotly_tool import conditional_fig_show
 from src.s2_bud.group import awardlink_shop
 from src.s2_bud.reason_idea import reasonunit_shop
 from src.s2_bud.idea import ideaunit_shop
