@@ -501,7 +501,7 @@ def fund_explanation0(
     blue_str = "blue"
     blue_str = "blue"
     d_sue1_title = "How fund is distributed."
-    teamunit_str = "      Awardlinks"
+    teamunit_str = "      AwardHeirs"
     add_rect_arrow(fig, 0.6, -0.1, 0.1, -0.1, "Purple")
     add_rect_arrow(fig, 0.6, -0.8, 0.1, -0.1, "Purple")
     add_rect_arrow(fig, 1.8, -1.1, 1.2, -1.1, "Purple")
@@ -533,6 +533,37 @@ def fund_explanation0(
             mode="text",
         )
     )
+    groupbox_str = "GroupBox"
+    orange_str = "orange"
+    add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupbox_str, orange_str)
+    add_simp_rect(fig, 5.5, -0.8, 6.25, -0.2, groupbox_str, orange_str)
+    add_simp_rect(fig, 5.5, -1.4, 6.25, -0.8, groupbox_str, orange_str)
+    add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_str)
+    add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_str)
+    add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_str)
+    add_rect_arrow(fig, 5.5, 0.1, 3, 0.1, green_str)
+    add_rect_arrow(fig, 5.5, -0.1, 3, -0.1, blue_str)
+    add_rect_arrow(fig, 5.5, -0.9, 5, -0.9, green_str)
+    add_rect_arrow(fig, 5.5, -1.1, 5, -1.1, blue_str)
+    add_rect_arrow(fig, 5.5, -1.3, 5, -2.9, green_str)
+    membership_str = "membership"
+    darkred_str = "DarkRed"
+    add_simp_rect(fig, 7, 0.4, 7.75, 1, membership_str, darkred_str)
+    add_simp_rect(fig, 7, -0.2, 7.75, 0.4, membership_str, darkred_str)
+    add_simp_rect(fig, 7, -0.8, 7.75, -0.2, membership_str, darkred_str)
+    add_simp_rect(fig, 7, -1.4, 7.75, -0.8, membership_str, darkred_str)
+    add_rect_arrow(fig, 7, -0.4, 6.25, -0.4, blue_str)
+    add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_str)
+    add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_str)
+    add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_str)
+    acctunit_str = "acctunit"
+    purple_str = "purple"
+    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, "gold")
+
     fund_t0 = "BudUnit.fund_pool"
     fund_t1_0 = "IdeaUnit._fund_onset"
     fund_t1_1 = "IdeaUnit._fund_cease"
@@ -590,35 +621,5 @@ def fund_explanation0(
             mode="text",
         )
     )
-    groupbox_str = "GroupBox"
-    orange_str = "orange"
-    add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupbox_str, orange_str)
-    add_simp_rect(fig, 5.5, -0.8, 6.25, -0.2, groupbox_str, orange_str)
-    add_simp_rect(fig, 5.5, -1.4, 6.25, -0.8, groupbox_str, orange_str)
-    add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_str)
-    add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_str)
-    add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_str)
-    add_rect_arrow(fig, 5.5, 0.1, 3, 0.1, green_str)
-    add_rect_arrow(fig, 5.5, -0.1, 3, -0.1, blue_str)
-    add_rect_arrow(fig, 5.5, -0.9, 5, -0.9, green_str)
-    add_rect_arrow(fig, 5.5, -1.1, 5, -1.1, blue_str)
-    add_rect_arrow(fig, 5.5, -1.3, 5, -2.9, green_str)
-    membership_str = "membership"
-    darkred_str = "DarkRed"
-    add_simp_rect(fig, 7, 0.4, 7.75, 1, membership_str, darkred_str)
-    add_simp_rect(fig, 7, -0.2, 7.75, 0.4, membership_str, darkred_str)
-    add_simp_rect(fig, 7, -0.8, 7.75, -0.2, membership_str, darkred_str)
-    add_simp_rect(fig, 7, -1.4, 7.75, -0.8, membership_str, darkred_str)
-    add_rect_arrow(fig, 7, -0.4, 6.25, -0.4, blue_str)
-    add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_str)
-    add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_str)
-    add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_str)
-    acctunit_str = "acctunit"
-    purple_str = "purple"
-    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, "gold")
 
     conditional_fig_show(fig, graphics_bool)
