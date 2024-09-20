@@ -153,14 +153,14 @@ def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_clea
     sue_hubunit = hubunit_shop(
         None, music_str, sue_str, None, respect_bit=x_respect_bit, fund_coin=x_fund_coin
     )
-    assert os_path_exists(sue_hubunit.action_path()) is False
+    assert os_path_exists(sue_hubunit.final_path()) is False
 
     # WHEN
     music_fiscal.init_owner_keeps(sue_str)
 
     # THEN
     print(f"{get_test_fiscals_dir()=}")
-    assert os_path_exists(sue_hubunit.action_path())
+    assert os_path_exists(sue_hubunit.final_path())
 
 
 def test_FiscalUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_cleanup):

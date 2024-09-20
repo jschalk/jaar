@@ -64,21 +64,21 @@ def get_fiscal_voices_accts_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     return fig
 
 
-def get_fiscal_actions_accts_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
+def get_fiscal_finals_accts_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
     # get list of all owner paths
     owner_hubunits = x_fiscal.get_owner_hubunits()
-    # for all owners get action
-    action_dfs = []
+    # for all owners get final
+    final_dfs = []
     for x_hubunit in owner_hubunits.values():
-        action_bud = x_hubunit.get_action_bud()
-        action_bud.settle_bud()
-        action_df = get_bud_acctunits_dataframe(action_bud)
-        action_df.insert(0, owner_id_str(), action_bud._owner_id)
-        action_dfs.append(action_df)
-    return pandas_concat(action_dfs, ignore_index=True)
+        final_bud = x_hubunit.get_final_bud()
+        final_bud.settle_bud()
+        final_df = get_bud_acctunits_dataframe(final_bud)
+        final_df.insert(0, owner_id_str(), final_bud._owner_id)
+        final_dfs.append(final_df)
+    return pandas_concat(final_dfs, ignore_index=True)
 
 
-def get_fiscal_actions_accts_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
+def get_fiscal_finals_accts_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         acct_id_str(),
@@ -89,7 +89,7 @@ def get_fiscal_actions_accts_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
         "_fund_agenda_give",
         "_fund_agenda_take",
     ]
-    df = get_fiscal_actions_accts_dataframe(x_fiscal)
+    df = get_fiscal_finals_accts_dataframe(x_fiscal)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -112,7 +112,7 @@ def get_fiscal_actions_accts_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"Fiscal '{x_fiscal.fiscal_id}', action accts metrics"
+    fig_title = f"Fiscal '{x_fiscal.fiscal_id}', final accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -179,20 +179,20 @@ def get_fiscal_voices_agenda_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     return fig
 
 
-def get_fiscal_actions_agenda_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
+def get_fiscal_finals_agenda_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
     # get list of all owner paths
     owner_hubunits = x_fiscal.get_owner_hubunits()
-    # for all owners get action
-    action_dfs = []
+    # for all owners get final
+    final_dfs = []
     for x_hubunit in owner_hubunits.values():
-        action_bud = x_hubunit.get_action_bud()
-        action_bud.settle_bud()
-        action_df = get_bud_agenda_dataframe(action_bud)
-        action_dfs.append(action_df)
-    return pandas_concat(action_dfs, ignore_index=True)
+        final_bud = x_hubunit.get_final_bud()
+        final_bud.settle_bud()
+        final_df = get_bud_agenda_dataframe(final_bud)
+        final_dfs.append(final_df)
+    return pandas_concat(final_dfs, ignore_index=True)
 
 
-def get_fiscal_actions_agenda_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
+def get_fiscal_finals_agenda_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     column_header_list = [
         owner_id_str(),
         "fund_ratio",
@@ -205,7 +205,7 @@ def get_fiscal_actions_agenda_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
         "numor",
         "morph",
     ]
-    df = get_fiscal_actions_agenda_dataframe(x_fiscal)
+    df = get_fiscal_finals_agenda_dataframe(x_fiscal)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -230,7 +230,7 @@ def get_fiscal_actions_agenda_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"Fiscal '{x_fiscal.fiscal_id}', action agenda metrics"
+    fig_title = f"Fiscal '{x_fiscal.fiscal_id}', final agenda metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)

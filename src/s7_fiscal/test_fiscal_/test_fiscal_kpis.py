@@ -3,12 +3,12 @@ from src.s4_gift.atom_config import acct_id_str, owner_id_str
 from src.s7_fiscal.fiscal_report import (
     get_fiscal_voices_accts_dataframe,
     get_fiscal_voices_accts_plotly_fig,
-    get_fiscal_actions_accts_dataframe,
-    get_fiscal_actions_accts_plotly_fig,
+    get_fiscal_finals_accts_dataframe,
+    get_fiscal_finals_accts_plotly_fig,
     get_fiscal_voices_agenda_dataframe,
     get_fiscal_voices_agenda_plotly_fig,
-    get_fiscal_actions_agenda_dataframe,
-    get_fiscal_actions_agenda_plotly_fig,
+    get_fiscal_finals_agenda_dataframe,
+    get_fiscal_finals_agenda_plotly_fig,
 )
 from src.s7_fiscal.examples.example_fiscals import (
     create_example_fiscal2,
@@ -61,15 +61,15 @@ def test_get_fiscal_voices_accts_plotly_fig_DisplaysCorrectInfo(
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_fiscal_actions_accts_dataframe_ReturnsCorrectObj(
+def test_get_fiscal_finals_accts_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     music_fiscal = create_example_fiscal2()
-    music_fiscal.generate_all_action_buds()
+    music_fiscal.generate_all_final_buds()
 
     # WHEN
-    x_df = get_fiscal_actions_accts_dataframe(music_fiscal)
+    x_df = get_fiscal_finals_accts_dataframe(music_fiscal)
 
     # THEN
     acctunit_colums = {
@@ -93,15 +93,15 @@ def test_get_fiscal_actions_accts_dataframe_ReturnsCorrectObj(
     assert set(x_df.columns) == acctunit_colums
 
 
-def test_get_fiscal_actions_accts_plotly_fig_DisplaysCorrectInfo(
+def test_get_fiscal_finals_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     music_fiscal = create_example_fiscal2()
-    music_fiscal.generate_all_action_buds()
+    music_fiscal.generate_all_final_buds()
 
     # WHEN
-    x_fig = get_fiscal_actions_accts_plotly_fig(music_fiscal)
+    x_fig = get_fiscal_finals_accts_plotly_fig(music_fiscal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -149,13 +149,13 @@ def test_get_fiscal_voices_agenda_plotly_fig_DisplaysCorrectInfo(
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_fiscal_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_get_fiscal_finals_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     music_fiscal = create_example_fiscal4()
-    music_fiscal.generate_all_action_buds()
+    music_fiscal.generate_all_final_buds()
 
     # WHEN
-    x_df = get_fiscal_actions_agenda_dataframe(music_fiscal)
+    x_df = get_fiscal_finals_agenda_dataframe(music_fiscal)
 
     # THEN
     agenda_colums = {
@@ -177,15 +177,15 @@ def test_get_fiscal_actions_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cle
     assert x_df.shape[0] in [8, 9]
 
 
-def test_get_fiscal_actions_agenda_plotly_fig_DisplaysCorrectInfo(
+def test_get_fiscal_finals_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     music_fiscal = create_example_fiscal4()
-    music_fiscal.generate_all_action_buds()
+    music_fiscal.generate_all_final_buds()
 
     # WHEN
-    x_fig = get_fiscal_actions_agenda_plotly_fig(music_fiscal)
+    x_fig = get_fiscal_finals_agenda_plotly_fig(music_fiscal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

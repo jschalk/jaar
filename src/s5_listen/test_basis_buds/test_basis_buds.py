@@ -4,7 +4,7 @@ from src.s2_bud.bud import budunit_shop
 from src.s5_listen.basis_buds import (
     create_empty_bud,
     create_listen_basis,
-    get_default_action_bud,
+    get_default_final_bud,
 )
 
 
@@ -103,7 +103,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert job_zia_acctunit._inallocable_debtit_belief == 0
 
 
-def test_get_default_action_bud_ReturnsCorrectObj():
+def test_get_default_final_bud_ReturnsCorrectObj():
     # ESTABLISH
     sue_str = "Sue"
     blue_str = "blue"
@@ -128,20 +128,20 @@ def test_get_default_action_bud_ReturnsCorrectObj():
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
-    default_action_bud = get_default_action_bud(sue_budunit)
+    default_final_bud = get_default_final_bud(sue_budunit)
 
     # THEN
-    default_action_bud.settle_bud()
-    assert default_action_bud._owner_id == sue_budunit._owner_id
-    assert default_action_bud._owner_id == sue_str
-    assert default_action_bud._fiscal_id == sue_budunit._fiscal_id
-    assert default_action_bud._fiscal_id == blue_str
-    assert default_action_bud._road_delimiter == slash_str
-    assert default_action_bud.fund_pool == sue_acct_pool
-    assert default_action_bud.fund_coin == x_fund_coin
-    assert default_action_bud.respect_bit == x_respect_bit
-    assert default_action_bud.credor_respect == default_respect_num()
-    assert default_action_bud.debtor_respect == default_respect_num()
-    assert default_action_bud.max_tree_traverse == sue_max_tree_traverse
-    assert len(default_action_bud.get_acctunits_dict()) == 1
-    assert len(default_action_bud._idea_dict) == 1
+    default_final_bud.settle_bud()
+    assert default_final_bud._owner_id == sue_budunit._owner_id
+    assert default_final_bud._owner_id == sue_str
+    assert default_final_bud._fiscal_id == sue_budunit._fiscal_id
+    assert default_final_bud._fiscal_id == blue_str
+    assert default_final_bud._road_delimiter == slash_str
+    assert default_final_bud.fund_pool == sue_acct_pool
+    assert default_final_bud.fund_coin == x_fund_coin
+    assert default_final_bud.respect_bit == x_respect_bit
+    assert default_final_bud.credor_respect == default_respect_num()
+    assert default_final_bud.debtor_respect == default_respect_num()
+    assert default_final_bud.max_tree_traverse == sue_max_tree_traverse
+    assert len(default_final_bud.get_acctunits_dict()) == 1
+    assert len(default_final_bud._idea_dict) == 1

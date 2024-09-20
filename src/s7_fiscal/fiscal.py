@@ -6,11 +6,11 @@ from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, 
 from src.s2_bud.bud import BudUnit
 from src.s2_bud.bud_tool import BudEvent
 from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop
-from src.s5_listen.basis_buds import get_default_action_bud
+from src.s5_listen.basis_buds import get_default_final_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
 from src.s5_listen.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_voice_action,
+    listen_to_debtors_roll_voice_final,
     listen_to_debtors_roll_duty_job,
     create_job_file_from_duty_file,
 )
@@ -25,10 +25,10 @@ class FiscalUnit:
     pipeline1: gifts->voice
     pipeline2: voice->dutys
     pipeline3: duty->job
-    pipeline4: job->action
-    pipeline5: voice->action (direct)
-    pipeline6: voice->job->action (through jobs)
-    pipeline7: gifts->action (could be 5 of 6)
+    pipeline4: job->final
+    pipeline5: voice->final (direct)
+    pipeline6: voice->job->final (through jobs)
+    pipeline7: gifts->final (could be 5 of 6)
     """
 
     fiscal_id: FiscalID
@@ -124,7 +124,7 @@ class FiscalUnit:
     def init_owner_keeps(self, owner_id: OwnerID):
         x_hubunit = self._get_hubunit(owner_id)
         x_hubunit.initialize_gift_voice_files()
-        x_hubunit.initialize_action_file(self.get_owner_voice_from_file(owner_id))
+        x_hubunit.initialize_final_file(self.get_owner_voice_from_file(owner_id))
 
     def get_owner_voice_from_file(self, owner_id: OwnerID) -> BudUnit:
         return self._get_hubunit(owner_id).get_voice_bud()
@@ -155,12 +155,12 @@ class FiscalUnit:
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(voice_bud)
 
-    # action bud management
-    def generate_action_bud(self, owner_id: OwnerID) -> BudUnit:
+    # final bud management
+    def generate_final_bud(self, owner_id: OwnerID) -> BudUnit:
         listener_hubunit = self._get_hubunit(owner_id)
         x_voice = listener_hubunit.get_voice_bud()
         x_voice.settle_bud()
-        x_action = get_default_action_bud(x_voice)
+        x_final = get_default_final_bud(x_voice)
         for healer_id, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 fiscals_dir=self.fiscals_dir,
@@ -185,27 +185,27 @@ class FiscalUnit:
                 keep_hubunit.save_duty_bud(x_voice)
                 create_job_file_from_duty_file(keep_hubunit, owner_id)
                 x_job = keep_hubunit.get_job_bud(owner_id)
-                listen_to_speaker_agenda(x_action, x_job)
+                listen_to_speaker_agenda(x_final, x_job)
 
-        # if nothing has come from voice->duty->job->action pipeline use voice->action pipeline
-        x_action.settle_bud()
-        if len(x_action._idea_dict) == 1:
-            # pipeline_voice_action_str()
-            listen_to_debtors_roll_voice_action(listener_hubunit)
-            listener_hubunit.open_file_action()
-            x_action.settle_bud()
-        if len(x_action._idea_dict) == 1:
-            x_action = x_voice
-        listener_hubunit.save_action_bud(x_action)
+        # if nothing has come from voice->duty->job->final pipeline use voice->final pipeline
+        x_final.settle_bud()
+        if len(x_final._idea_dict) == 1:
+            # pipeline_voice_final_str()
+            listen_to_debtors_roll_voice_final(listener_hubunit)
+            listener_hubunit.open_file_final()
+            x_final.settle_bud()
+        if len(x_final._idea_dict) == 1:
+            x_final = x_voice
+        listener_hubunit.save_final_bud(x_final)
 
-        return self.get_action_file_bud(owner_id)
+        return self.get_final_file_bud(owner_id)
 
-    def generate_all_action_buds(self):
+    def generate_all_final_buds(self):
         for x_owner_id in self._get_owner_folder_names():
-            self.generate_action_bud(x_owner_id)
+            self.generate_final_bud(x_owner_id)
 
-    def get_action_file_bud(self, owner_id: OwnerID) -> BudUnit:
-        return self._get_hubunit(owner_id).get_action_bud()
+    def get_final_file_bud(self, owner_id: OwnerID) -> BudUnit:
+        return self._get_hubunit(owner_id).get_final_bud()
 
 
 def fiscalunit_shop(
