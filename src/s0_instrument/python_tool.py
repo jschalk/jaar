@@ -190,3 +190,14 @@ def create_sorted_concatenated_str(y_list: list[str]) -> str:
 
 def get_positional_dict(x_list: list[str]) -> dict[str, int]:
     return {x_element: x_count for x_count, x_element in enumerate(x_list)}
+
+
+def create_csv(x_headers: list[str], x2d_array: list[list]) -> str:
+    x2d_array.insert(0, x_headers)
+    si = io_StringIO()
+    new_csv_writer = csv_writer(si, delimiter=",")
+    for row in x2d_array:
+        new_csv_writer.writerow(row)
+    x_csv = si.getvalue()
+    y_csv = x_csv.replace("\r", "")
+    return y_csv
