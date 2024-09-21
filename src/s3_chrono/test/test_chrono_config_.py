@@ -23,6 +23,7 @@ from src.s3_chrono.chrono import (
     validate_timeline_config,
     create_timeline_config,
     get_default_timeline_config_dict,
+    TimeLinePoint,
     TimeLineUnit,
     timelineunit_shop,
     week_str,
@@ -39,6 +40,11 @@ from src.s3_chrono.chrono import (
     yr4_clean_str,
 )
 from copy import deepcopy as copy_deepcopy
+
+
+def test_TimeLinePoint_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert TimeLinePoint(4) == 4
 
 
 def test_C400Constants_Exists():

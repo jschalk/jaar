@@ -7,8 +7,8 @@ from src.s1_road.jaar_config import get_gifts_folder, get_json_filename
 from src.s1_road.road import default_road_delimiter_if_none
 from src.s2_bud.healer import healerlink_shop
 from src.s2_bud.idea import ideaunit_shop
-from src.s2_bud.bud_tool import budevent_shop
 from src.s3_chrono.chrono import timelineunit_shop, get_min_from_dt
+from src.s3_chrono.bud_event import ownerbudevent_shop
 from src.s5_listen.hubunit import hubunit_shop
 from src.s7_fiscal.fiscal import FiscalUnit, fiscalunit_shop
 from src.s7_fiscal.examples.fiscal_env import (
@@ -24,7 +24,7 @@ def test_FiscalUnit_exists(env_dir_setup_cleanup):
     assert music_fiscal.fiscal_id == music_str
     assert not music_fiscal.timeline
     assert not music_fiscal.current_time
-    assert not music_fiscal.budevents
+    assert not music_fiscal.ownerbudevents
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     assert not music_fiscal._owners_dir
     assert not music_fiscal._journal_db
@@ -48,7 +48,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnit(env_dir_setup_cleanup):
     assert music_fiscal.fiscal_id == music_str
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
-    assert music_fiscal.budevents == {}
+    assert music_fiscal.ownerbudevents == {}
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     assert music_fiscal._owners_dir is not None
     assert music_fiscal._gifts_dir is not None

@@ -13,6 +13,10 @@ from dataclasses import dataclass
 from os import getcwd as os_getcwd
 
 
+class TimeLinePoint(int):
+    pass
+
+
 def c400_leap_str():
     return "c400_leap"
 

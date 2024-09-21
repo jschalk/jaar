@@ -1,11 +1,17 @@
 from src.s0_instrument.file import set_dir, delete_dir, dir_files
 from src.s0_instrument.python_tool import get_0_if_None
 from src.s1_road.jaar_config import get_gifts_folder
-from src.s1_road.finance import default_respect_bit_if_none, default_penny_if_none
+from src.s1_road.finance import (
+    default_respect_bit_if_none,
+    default_penny_if_none,
+    PennyNum,
+    FundCoin,
+    BitNum,
+)
 from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.s2_bud.bud import BudUnit
-from src.s2_bud.bud_tool import BudEvent
 from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop
+from src.s3_chrono.bud_event import OwnerBudEvent
 from src.s5_listen.basis_buds import get_default_final_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
 from src.s5_listen.listen import (
@@ -35,15 +41,15 @@ class FiscalUnit:
     fiscals_dir: str
     timeline: TimeLineUnit = None
     current_time: int = None
-    budevents: list[int, BudEvent] = None
+    ownerbudevents: list[int, OwnerBudEvent] = None
     _fiscal_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
     _gifts_dir: str = None
     _road_delimiter: str = None
-    _fund_coin: float = None
-    _respect_bit: float = None
-    _penny: float = None
+    _fund_coin: FundCoin = None
+    _respect_bit: BitNum = None
+    _penny: PennyNum = None
 
     # directory setup
     def _set_fiscal_dirs(self, in_memory_journal: bool = None):
@@ -226,7 +232,7 @@ def fiscalunit_shop(
         fiscals_dir=fiscals_dir,
         timeline=timeline,
         current_time=get_0_if_None(current_time),
-        budevents={},
+        ownerbudevents={},
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _fund_coin=default_respect_bit_if_none(_fund_coin),
         _respect_bit=default_respect_bit_if_none(_respect_bit),
