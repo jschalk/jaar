@@ -235,7 +235,10 @@ def budevent_shop(fiscal_id: FiscalID, owner_id: OwnerID) -> BudEvent:
     return BudEvent(fiscal_id=fiscal_id, owner_id=owner_id)
 
 
-def get_bud_outlay_array(x_bud: BudUnit) -> list[list]:
+def get_bud_outlay_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
+    if settle_bud:
+        x_bud.settle_bud()
+
     x_list = []
     for x_acct in x_bud._accts.values():
         x_list.append([x_acct.acct_id, x_acct._fund_take, x_acct._fund_give])
@@ -243,7 +246,7 @@ def get_bud_outlay_array(x_bud: BudUnit) -> list[list]:
     return x_list
 
 
-def get_bud_outlay_csv(x_bud: BudUnit) -> str:
-    x_outlay_array = get_bud_outlay_array(x_bud)
+def get_bud_outlay_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
+    x_outlay_array = get_bud_outlay_array(x_bud, settle_bud)
     x_headers = ["acct_id", "fund_take", "fund_give"]
     return create_csv(x_headers, x_outlay_array)

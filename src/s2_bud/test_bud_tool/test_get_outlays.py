@@ -86,3 +86,40 @@ def test_get_bud_outlay_csv_ReturnsObj_ScenarioMultipleAcctUnit():
 """
     print(f"{example_csv_str=}")
     assert bud_outlay_csv_str == example_csv_str
+
+
+def test_get_bud_outlay_csv_ReturnsObj_settle_bud_True():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    yao_str = "Yao"
+    bob_str = "Bob"
+    xio_str = "Xio"
+    zia_str = "Zia"
+    sue_bud.add_acctunit(yao_str)
+    sue_bud.add_acctunit(bob_str)
+    sue_bud.add_acctunit(xio_str)
+    sue_bud.add_acctunit(zia_str)
+    empty_outlay = f"""acct_id,fund_take,fund_give
+{bob_str},0,0
+{xio_str},0,0
+{yao_str},0,0
+{zia_str},0,0
+"""
+    assert empty_outlay == get_bud_outlay_csv(sue_bud)
+
+    # WHEN
+    bud_outlay_csv_str = get_bud_outlay_csv(sue_bud, settle_bud=True)
+
+    # THEN
+    print(f"{bud_outlay_csv_str=}")
+    print("")
+    q_fund_give = int(sue_bud.fund_pool * 0.25)
+    q_fund_take = int(sue_bud.fund_pool * 0.25)
+    example_csv_str = f"""acct_id,fund_take,fund_give
+{bob_str},{q_fund_take},{q_fund_give}
+{xio_str},{q_fund_take},{q_fund_give}
+{yao_str},{q_fund_take},{q_fund_give}
+{zia_str},{q_fund_take},{q_fund_give}
+"""
+    print(f"{example_csv_str=}")
+    assert bud_outlay_csv_str == example_csv_str
