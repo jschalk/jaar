@@ -18,13 +18,13 @@ from src.s7_fiscal.examples.fiscal_env import (
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 
 
-def test_FiscalUnit_exists(env_dir_setup_cleanup):
+def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     music_str = "music"
     music_fiscal = FiscalUnit(fiscal_id=music_str, fiscals_dir=get_test_fiscals_dir())
     assert music_fiscal.fiscal_id == music_str
     assert not music_fiscal.timeline
     assert not music_fiscal.current_time
-    assert not music_fiscal.ownerbudevents
+    assert not music_fiscal.bud_history
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     assert not music_fiscal._owners_dir
     assert not music_fiscal._journal_db
@@ -48,7 +48,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnit(env_dir_setup_cleanup):
     assert music_fiscal.fiscal_id == music_str
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
-    assert music_fiscal.ownerbudevents == {}
+    assert music_fiscal.bud_history == {}
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     assert music_fiscal._owners_dir is not None
     assert music_fiscal._gifts_dir is not None
