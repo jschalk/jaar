@@ -21,6 +21,7 @@ from src.s3_chrono.chrono import (
     get_c400_constants,
     get_timeline_min_difference,
     yr1_jan1_offset_str,
+    monthday_distortion_str,
     get_min_from_dt,
 )
 from src.s3_chrono.examples.chrono_examples import (
@@ -62,6 +63,8 @@ def test_get_creg_config_ReturnsObj():
     assert five_offset == 1683478080
     c400_len = get_c400_constants().c400_leap_length
     assert five_offset == (c400_len * 8) + 440640
+    assert creg_config.get(monthday_distortion_str()) == 1
+    assert five_config.get(monthday_distortion_str()) == 0
 
 
 def test_cregtime_ideaunit_ReturnsObj():
@@ -109,17 +112,14 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_days():
     # THEN
     assert sue_budunit.idea_exists(time_road)
     assert sue_budunit.idea_exists(creg_road)
-    creg_idea = sue_budunit.get_idea_obj(creg_road)
-    assert creg_idea.begin == 0
-    assert creg_idea.close == 1472657760
     assert sue_budunit.idea_exists(day_road)
-    day_idea = sue_budunit.get_idea_obj(day_road)
-    assert day_idea.denom == 1440
-    assert day_idea.morph
     assert sue_budunit.idea_exists(days_road)
-    days_idea = sue_budunit.get_idea_obj(days_road)
-    assert days_idea.denom == 1440
-    assert not days_idea.morph
+    assert sue_budunit.get_idea_obj(creg_road).begin == 0
+    assert sue_budunit.get_idea_obj(creg_road).close == 1472657760
+    assert sue_budunit.get_idea_obj(day_road).denom == 1440
+    assert sue_budunit.get_idea_obj(day_road).morph
+    assert sue_budunit.get_idea_obj(days_road).denom == 1440
+    assert sue_budunit.get_idea_obj(days_road).morph is None
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
@@ -152,11 +152,10 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
 
     # THEN
     assert sue_budunit.idea_exists(week_road)
-    week_idea = sue_budunit.get_idea_obj(week_road)
-    assert not week_idea.gogo_want
-    assert not week_idea.stop_want
-    assert week_idea.denom == 10080
-    assert week_idea.morph
+    assert sue_budunit.get_idea_obj(week_road).gogo_want is None
+    assert sue_budunit.get_idea_obj(week_road).stop_want is None
+    assert sue_budunit.get_idea_obj(week_road).denom == 10080
+    assert sue_budunit.get_idea_obj(week_road).morph
     assert sue_budunit.idea_exists(sun_road)
     assert sue_budunit.idea_exists(mon_road)
     assert sue_budunit.idea_exists(tue_road)
@@ -165,9 +164,8 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_weeks():
     assert sue_budunit.idea_exists(fri_road)
     assert sue_budunit.idea_exists(sat_road)
     assert sue_budunit.idea_exists(weeks_road)
-    weeks_idea = sue_budunit.get_idea_obj(weeks_road)
-    assert weeks_idea.denom == 10080
-    assert not weeks_idea.morph
+    assert sue_budunit.get_idea_obj(weeks_road).denom == 10080
+    assert sue_budunit.get_idea_obj(weeks_road).morph is None
 
 
 def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap_road():
@@ -288,6 +286,19 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_years():
     assert sue_budunit.idea_exists(oct_road)
     assert sue_budunit.idea_exists(nov_road)
     assert sue_budunit.idea_exists(dec_road)
+    assert sue_budunit.get_idea_obj(jan_road).addin == 1440
+    assert sue_budunit.get_idea_obj(feb_road).addin == 1440
+    assert sue_budunit.get_idea_obj(mar_road).addin == 1440
+    assert sue_budunit.get_idea_obj(apr_road).addin == 1440
+    assert sue_budunit.get_idea_obj(may_road).addin == 1440
+    assert sue_budunit.get_idea_obj(jun_road).addin == 1440
+    assert sue_budunit.get_idea_obj(jul_road).addin == 1440
+    assert sue_budunit.get_idea_obj(aug_road).addin == 1440
+    assert sue_budunit.get_idea_obj(sep_road).addin == 1440
+    assert sue_budunit.get_idea_obj(oct_road).addin == 1440
+    assert sue_budunit.get_idea_obj(nov_road).addin == 1440
+    assert sue_budunit.get_idea_obj(dec_road).addin == 1440
+
     assert sue_budunit.get_idea_obj(jan_road).gogo_want == 440640
     assert sue_budunit.get_idea_obj(feb_road).gogo_want == 485280
     assert sue_budunit.get_idea_obj(mar_road).gogo_want == 0
@@ -349,7 +360,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert not days_idea.morph
 
 
-def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
+def test_add_time_creg_ideaunit_ReturnsObjWith_hours():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     time_road = sue_budunit.make_l1_road(time_str())
@@ -496,6 +507,32 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_c400_leap():
     assert sue_budunit.get_idea_obj(hr_21_road).stop_want == 1320
     assert sue_budunit.get_idea_obj(hr_22_road).stop_want == 1380
     assert sue_budunit.get_idea_obj(hr_23_road).stop_want == 1440
+
+
+def test_add_time_creg_ideaunit_ReturnsObjWith_offset_IdeaUnits():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud.settle_bud()
+    time_road = sue_bud.make_l1_road(time_str())
+    creg_road = sue_bud.make_road(time_road, creg_str())
+    five_road = sue_bud.make_road(time_road, five_str())
+    creg_yr1_jan1_offset_road = sue_bud.make_road(creg_road, yr1_jan1_offset_str())
+    five_yr1_jan1_offset_road = sue_bud.make_road(five_road, yr1_jan1_offset_str())
+
+    assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
+    creg_yr1_offset_idea = sue_bud.get_idea_obj(creg_yr1_jan1_offset_road)
+    assert creg_yr1_offset_idea.addin == get_creg_config().get(yr1_jan1_offset_str())
+    assert not sue_bud.idea_exists(five_yr1_jan1_offset_road)
+
+    # WHEN
+    sue_bud = add_time_five_ideaunit(sue_bud)
+
+    # THEN
+    assert sue_bud.idea_exists(creg_yr1_jan1_offset_road)
+    assert sue_bud.idea_exists(five_yr1_jan1_offset_road)
+    five_yr1_offset_idea = sue_bud.get_idea_obj(five_yr1_jan1_offset_road)
+    assert five_yr1_offset_idea.addin == get_five_config().get(yr1_jan1_offset_str())
 
 
 # def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario2():

@@ -105,7 +105,8 @@ def test_ChronoUnit_set_month_SetsAttr():
 
     # THEN
     assert x_chronounit._month == "April"
-    assert x_chronounit._monthday == 16
+    # assert x_chronounit._monthday == 16
+    assert x_chronounit._monthday == 17
 
 
 def test_ChronoUnit_set_hour_SetsAttr():
@@ -246,7 +247,7 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     # THEN
     assert creg_chronounit._weekday == "Wednesday"
     assert creg_chronounit._month == "March"
-    assert creg_chronounit._monthday == 0
+    assert creg_chronounit._monthday == 1
     assert creg_chronounit._hour == "0-12am"
     assert creg_chronounit._minute == 0
     assert creg_chronounit._year_num == 2000
@@ -288,7 +289,8 @@ def check_creg_timeline_attr(x_bud: BudUnit, x_datetime: datetime):
         dt_year = int(dt_year) - 1
     assert creg_chronounit._weekday == dt_weekday
     assert creg_chronounit._month == dt_month
-    assert creg_chronounit._monthday == int(dt_monthday) - 1
+    # assert creg_chronounit._monthday == int(dt_monthday) - 1
+    assert creg_chronounit._monthday == int(dt_monthday)
     assert creg_chronounit._hour == hour_str
     assert creg_chronounit._minute == int(dt_minute)
     assert creg_chronounit._year_num == int(dt_year)
