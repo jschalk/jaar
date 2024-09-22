@@ -542,6 +542,17 @@ class TimeLineUnit:
     weekdays_config: list[str] = None
     yr1_jan1_offset: int = None
 
+    def get_dict(self) -> dict:
+        return {
+            "c400_config": self.c400_config,
+            "hours_config": self.hours_config,
+            "months_config": self.months_config,
+            "monthday_distortion": self.monthday_distortion,
+            "timeline_label": self.timeline_label,
+            "weekdays_config": self.weekdays_config,
+            "yr1_jan1_offset": self.yr1_jan1_offset,
+        }
+
 
 def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
     if timeline_config == None:

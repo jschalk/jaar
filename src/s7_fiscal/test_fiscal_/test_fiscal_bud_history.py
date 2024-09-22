@@ -1,4 +1,12 @@
+from src.s1_road.road import default_road_delimiter_if_none
+from src.s1_road.finance import (
+    default_fund_coin_if_none,
+    default_respect_bit_if_none,
+    default_penny_if_none,
+)
+from src.s3_chrono.chrono import get_default_timeline_config_dict
 from src.s3_chrono.bud_event import ownerbudevents_shop
+from src.s4_gift.atom_config import owner_id_str, fiscal_id_str
 from src.s7_fiscal.fiscal import fiscalunit_shop
 from src.s7_fiscal.examples.fiscal_env import (
     get_test_fiscals_dir,
@@ -100,7 +108,7 @@ def test_FiscalUnit_add_ownerbudevent_SetsAttr():
     assert music_fiscal.get_ownerbudevents(bob_str) == bob_ownerbudevents
 
 
-def test_FiscalUnit_get_ownerbudevents_dict_ReturnsObj():
+def test_FiscalUnit_get_dict_ReturnsObj():
     # ESTABLISH
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
@@ -117,12 +125,22 @@ def test_FiscalUnit_get_ownerbudevents_dict_ReturnsObj():
     music_fiscal.add_ownerbudevent(sue_str, sue_x7_timestamp, sue_x7_magnitude)
 
     # WHEN
-    x_ownerbudevents_dict = music_fiscal.get_ownerbudevents_dict()
+    x_dict = music_fiscal.get_dict()
 
     # THEN
-    assert x_ownerbudevents_dict == {
+    assert x_dict.get(fiscal_id_str()) == music_str
+    assert x_dict.get("timeline") == get_default_timeline_config_dict()
+    assert x_dict.get("current_time") == 0
+    assert x_dict.get("road_delimiter") == default_road_delimiter_if_none()
+    assert x_dict.get("fund_coin") == default_fund_coin_if_none()
+    assert x_dict.get("respect_bit") == default_respect_bit_if_none()
+    assert x_dict.get("penny") == default_penny_if_none()
+    assert x_dict.get("bud_history") == music_fiscal._get_bud_history_dict()
+    assert x_dict == {
         "fiscal_id": music_str,
-        "ownerbudevents": {
+        "current_time": 0,
+        "timeline": get_default_timeline_config_dict(),
+        "bud_history": {
             sue_str: {
                 "owner_id": sue_str,
                 "events": {
@@ -135,4 +153,8 @@ def test_FiscalUnit_get_ownerbudevents_dict_ReturnsObj():
                 "events": {bob_x0_timestamp: {"money_magnitude": bob_x0_magnitude}},
             },
         },
+        "road_delimiter": default_road_delimiter_if_none(),
+        "fund_coin": default_fund_coin_if_none(),
+        "respect_bit": default_respect_bit_if_none(),
+        "penny": default_penny_if_none(),
     }

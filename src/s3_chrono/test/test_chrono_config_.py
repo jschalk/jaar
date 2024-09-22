@@ -346,3 +346,15 @@ def test_timelineunit_shop_ReturnsObj_Default():
     assert x_timelineunit.timeline_label == creg_timeline_label
     assert x_timelineunit.weekdays_config == creg_weekdays_config
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
+
+
+def test_TimeLineUnit_get_dict_ReturnsObj():
+    # ESTABLISH
+    x_timelineunit = timelineunit_shop()
+
+    # WHEN
+    x_config = x_timelineunit.get_dict()
+
+    # THEN
+    assert x_config
+    assert x_config == get_creg_config()

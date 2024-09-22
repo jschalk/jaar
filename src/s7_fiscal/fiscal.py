@@ -234,10 +234,16 @@ class FiscalUnit:
         x_ownerbudevents = self.get_ownerbudevents(x_owner_id)
         x_ownerbudevents.add_event(x_timestamp, x_money_magnitude)
 
-    def get_ownerbudevents_dict(self) -> dict:
+    def get_dict(self) -> dict:
         return {
             "fiscal_id": self.fiscal_id,
-            "ownerbudevents": self._get_bud_history_dict(),
+            "timeline": self.timeline.get_dict(),
+            "current_time": self.current_time,
+            "bud_history": self._get_bud_history_dict(),
+            "road_delimiter": self._road_delimiter,
+            "fund_coin": self._fund_coin,
+            "respect_bit": self._respect_bit,
+            "penny": self._penny,
         }
 
     def _get_bud_history_dict(self):
