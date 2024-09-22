@@ -263,7 +263,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
             "_inallocable_debtit_belief": yao_inallocable_debtit_belief,
         }
     }
-    yao_json_str = get_json_from_dict(dict_x=yao_json_dict)
+    yao_json_str = get_json_from_dict(yao_json_dict)
     assert x_is_json(yao_json_str)
 
     # WHEN

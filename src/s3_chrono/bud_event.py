@@ -49,10 +49,10 @@ class OwnerBudEvents:
         self.events.pop(x_timestamp)
 
     def get_2d_array(self) -> list[list]:
-        x_list = []
-        for x_event in self.events.values():
-            x_list.append([self.owner_id, x_event.timestamp, x_event.money_magnitude])
-        return x_list
+        return [
+            [self.owner_id, x_event.timestamp, x_event.money_magnitude]
+            for x_event in self.events.values()
+        ]
 
     def get_headers(self) -> list:
         return ["owner_id", "timestamp", "money_magnitude"]
@@ -61,11 +61,32 @@ class OwnerBudEvents:
         return {"owner_id": self.owner_id, "events": self._get_events_dict()}
 
     def _get_events_dict(self) -> dict:
-        x_dict = {}
-        for x_event in self.events.values():
-            x_dict[x_event.timestamp] = {"money_magnitude": x_event.money_magnitude}
-        return x_dict
+        return {
+            x_event.timestamp: x_event.get_dict() for x_event in self.events.values()
+        }
 
 
 def ownerbudevents_shop(owner_id: OwnerID) -> OwnerBudEvents:
     return OwnerBudEvents(owner_id=owner_id, events={}, _sum_acct_outlays={})
+
+
+def get_ownerbudevent_from_dict(x_dict: dict) -> OwnerBudEvent:
+    x_timestamp = x_dict.get("timestamp")
+    x_money_magnitude = x_dict.get("money_magnitude")
+    return ownerbudevent_shop(x_timestamp, x_money_magnitude)
+
+
+def get_ownerbudevents_from_dict(x_dict: dict) -> OwnerBudEvents:
+    x_owner_id = x_dict.get("owner_id")
+    x_ownerbudevents = ownerbudevents_shop(x_owner_id)
+    x_ownerbudevents.events = get_events_from_dict(x_dict.get("events"))
+    return x_ownerbudevents
+
+
+def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint:OwnerBudEvent]:
+    x_dict = {}
+    for x_event in events_dict.values():
+        x_timestamp = x_event.get("timestamp")
+        x_money_magnitude = x_event.get("money_magnitude")
+        x_dict[x_timestamp] = ownerbudevent_shop(x_timestamp, x_money_magnitude)
+    return x_dict

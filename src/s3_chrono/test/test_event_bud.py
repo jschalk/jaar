@@ -3,6 +3,8 @@ from src.s3_chrono.bud_event import (
     ownerbudevent_shop,
     OwnerBudEvents,
     ownerbudevents_shop,
+    get_ownerbudevent_from_dict,
+    get_ownerbudevents_from_dict,
 )
 
 
@@ -239,3 +241,52 @@ def test_OwnerBudEvents_get_dict_ReturnsObj_Scenario1():
             x7_timestamp: {"money_magnitude": x7_magnitude},
         },
     }
+
+
+def test_get_ownerbudevent_from_dict_ReturnsObj():
+    # ESTABLISH
+    t4_timestamp = 4
+    t4_magnitude = 55
+    t4_ownerbudevent = ownerbudevent_shop(t4_timestamp, t4_magnitude)
+    t4_dict = t4_ownerbudevent.get_dict()
+    assert t4_dict == {"timestamp": t4_timestamp, "money_magnitude": t4_magnitude}
+
+    # WHEN
+    x_ownerbudevent = get_ownerbudevent_from_dict(t4_dict)
+
+    # THEN
+    assert x_ownerbudevent
+    assert x_ownerbudevent.timestamp == t4_timestamp
+    assert x_ownerbudevent.money_magnitude == t4_magnitude
+    assert x_ownerbudevent == t4_ownerbudevent
+
+
+def test_OwnerBudEvents_get_dict_ReturnsObj_Scenario1():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_ownerbudevents = ownerbudevents_shop(sue_str)
+    x4_timestamp = 4
+    x4_magnitude = 55
+    x7_timestamp = 7
+    x7_magnitude = 66
+    sue_ownerbudevents.add_event(x4_timestamp, x4_magnitude)
+    sue_ownerbudevents.add_event(x7_timestamp, x7_magnitude)
+    sue_events_dict = sue_ownerbudevents.get_dict()
+    assert sue_events_dict == {
+        "owner_id": sue_str,
+        "events": {
+            x4_timestamp: {"timestamp": x4_timestamp, "money_magnitude": x4_magnitude},
+            x7_timestamp: {"timestamp": x7_timestamp, "money_magnitude": x7_magnitude},
+        },
+    }
+
+    # WHEN
+    x_ownerbudevents = get_ownerbudevents_from_dict(sue_events_dict)
+
+    # THEN
+    assert x_ownerbudevents
+    assert x_ownerbudevents.owner_id == sue_str
+    assert x_ownerbudevents.get_event(x4_timestamp) != None
+    assert x_ownerbudevents.get_event(x7_timestamp) != None
+    assert x_ownerbudevents.events == sue_ownerbudevents.events
+    assert x_ownerbudevents == sue_ownerbudevents

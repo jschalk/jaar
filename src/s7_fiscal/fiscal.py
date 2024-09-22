@@ -1,5 +1,9 @@
 from src.s0_instrument.file import set_dir, delete_dir, dir_files
-from src.s0_instrument.python_tool import get_0_if_None
+from src.s0_instrument.python_tool import (
+    get_0_if_None,
+    get_dict_from_json,
+    get_json_from_dict,
+)
 from src.s1_road.jaar_config import get_gifts_folder
 from src.s1_road.finance import (
     default_respect_bit_if_none,
@@ -11,7 +15,12 @@ from src.s1_road.finance import (
 from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.s2_bud.bud import BudUnit
 from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop, TimeLinePoint
-from src.s3_chrono.bud_event import OwnerBudEvent, OwnerBudEvents, ownerbudevents_shop
+from src.s3_chrono.bud_event import (
+    OwnerBudEvent,
+    OwnerBudEvents,
+    ownerbudevents_shop,
+    get_ownerbudevents_from_dict,
+)
 from src.s5_listen.basis_buds import get_default_final_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
 from src.s5_listen.listen import (
@@ -246,16 +255,19 @@ class FiscalUnit:
             "penny": self._penny,
         }
 
+    def get_json(self) -> str:
+        return get_json_from_dict(self.get_dict())
+
     def _get_bud_history_dict(self):
-        x_dict = {}
-        for x_event in self.bud_history.values():
-            x_dict[x_event.owner_id] = x_event.get_dict()
-        return x_dict
+        return {
+            x_event.owner_id: x_event.get_dict()
+            for x_event in self.bud_history.values()
+        }
 
 
 def fiscalunit_shop(
     fiscal_id: FiscalID,
-    fiscals_dir: str,
+    fiscals_dir: str = None,
     timeline: TimeLineUnit = None,
     current_time: int = None,
     in_memory_journal: bool = None,
@@ -277,5 +289,30 @@ def fiscalunit_shop(
         _respect_bit=default_respect_bit_if_none(_respect_bit),
         _penny=default_penny_if_none(_penny),
     )
-    fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
+    if fiscal_x.fiscals_dir is not None:
+        fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
     return fiscal_x
+
+
+def get_from_json(x_fiscal_json: str) -> FiscalUnit:
+    return get_from_dict(get_dict_from_json(x_fiscal_json))
+
+
+def get_from_dict(fiscal_dict: dict) -> FiscalUnit:
+    x_fiscal_id = fiscal_dict.get("fiscal_id")
+    x_fiscal = fiscalunit_shop(x_fiscal_id, None)
+    x_fiscal.timeline = timelineunit_shop(fiscal_dict.get("timeline"))
+    x_fiscal.current_time = fiscal_dict.get("current_time")
+    x_fiscal._road_delimiter = fiscal_dict.get("road_delimiter")
+    x_fiscal._fund_coin = fiscal_dict.get("fund_coin")
+    x_fiscal._respect_bit = fiscal_dict.get("respect_bit")
+    x_fiscal._penny = fiscal_dict.get("penny")
+    x_fiscal.bud_history = _get_bud_history_from_dict(fiscal_dict.get("bud_history"))
+    return x_fiscal
+
+
+def _get_bud_history_from_dict(bud_history_dict: dict) -> dict[OwnerID, OwnerBudEvents]:
+    return {
+        x_owner_id: get_ownerbudevents_from_dict(ownerbudevents_dict)
+        for x_owner_id, ownerbudevents_dict in bud_history_dict.items()
+    }

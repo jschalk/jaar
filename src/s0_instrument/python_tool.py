@@ -107,8 +107,8 @@ def get_all_nondictionary_objs(x_dict: dict) -> dict[str : list[any]]:
     return z_dict
 
 
-def get_json_from_dict(dict_x: dict) -> str:
-    return json_dumps(obj=dict_x)
+def get_json_from_dict(x_dict: dict) -> str:
+    return json_dumps(obj=x_dict)
 
 
 def get_dict_from_json(x_json: str) -> dict[str,]:
@@ -199,5 +199,4 @@ def create_csv(x_headers: list[str], x2d_array: list[list]) -> str:
     for row in x2d_array:
         new_csv_writer.writerow(row)
     x_csv = si.getvalue()
-    y_csv = x_csv.replace("\r", "")
-    return y_csv
+    return x_csv.replace("\r", "")

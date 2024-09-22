@@ -35,27 +35,39 @@ def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     assert not music_fiscal._penny
 
 
-def test_fiscalunit_shop_ReturnsFiscalUnit(env_dir_setup_cleanup):
+def test_fiscalunit_shop_ReturnsFiscalUnit():
     # ESTABLISH
     music_str = "music"
 
     # WHEN
-    music_fiscal = fiscalunit_shop(
-        fiscal_id=music_str, fiscals_dir=get_test_fiscals_dir(), in_memory_journal=True
-    )
+    music_fiscal = fiscalunit_shop(fiscal_id=music_str)
 
     # THEN
     assert music_fiscal.fiscal_id == music_str
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
     assert music_fiscal.bud_history == {}
-    assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
-    assert music_fiscal._owners_dir is not None
-    assert music_fiscal._gifts_dir is not None
+    assert music_fiscal.fiscals_dir is None
+    assert music_fiscal._owners_dir is None
+    assert music_fiscal._gifts_dir is None
     assert music_fiscal._road_delimiter == default_road_delimiter_if_none()
     assert music_fiscal._fund_coin == default_fund_coin_if_none()
     assert music_fiscal._respect_bit == default_respect_bit_if_none()
     assert music_fiscal._penny == default_penny_if_none()
+
+
+def test_fiscalunit_shop_ReturnsFiscalUnitWith_fiscals_dir(env_dir_setup_cleanup):
+    # ESTABLISH
+    music_str = "music"
+
+    # WHEN
+    music_fiscal = fiscalunit_shop(music_str, fiscals_dir=get_test_fiscals_dir())
+
+    # THEN
+    assert music_fiscal.fiscal_id == music_str
+    assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
+    assert music_fiscal._owners_dir is not None
+    assert music_fiscal._gifts_dir is not None
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnitWith_road_delimiter(env_dir_setup_cleanup):

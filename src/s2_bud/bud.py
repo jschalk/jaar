@@ -1197,13 +1197,12 @@ class BudUnit:
                 x_idea.set_idearoot_inherit_reasonheirs()
                 x_idea.set_teamheir(None, self._groupboxs)
                 x_idea.inherit_awardheirs()
-                x_idea.set_awardheirs_fund_give_fund_take()
             else:
                 parent_idea = self.get_idea_obj(x_idea._parent_road)
                 x_idea.set_factheirs(parent_idea._factheirs)
                 x_idea.set_teamheir(parent_idea._teamheir, self._groupboxs)
                 x_idea.inherit_awardheirs(parent_idea._awardheirs)
-                x_idea.set_awardheirs_fund_give_fund_take()
+            x_idea.set_awardheirs_fund_give_fund_take()
 
     def settle_bud(self, keep_exceptions: bool = False):
         self._clear_idea_dict_and_bud_obj_settle_attrs()
@@ -1381,8 +1380,7 @@ class BudUnit:
         return x_dict
 
     def get_json(self) -> str:
-        x_dict = self.get_dict()
-        return get_json_from_dict(dict_x=x_dict)
+        return get_json_from_dict(self.get_dict())
 
     def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
         idea_kid.pledge = True
