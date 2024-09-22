@@ -47,6 +47,19 @@ def test_OwnerBudEvent_get_array_ReturnsObj():
     assert x_array == [y_timestamp, y_magnitude]
 
 
+def test_OwnerBudEvent_get_dict_ReturnsObj():
+    # ESTABLISH
+    t4_timestamp = 4
+    t4_magnitude = 55
+    t4_ownerbudevent = ownerbudevent_shop(t4_timestamp, t4_magnitude)
+
+    # WHEN
+    t4_dict = t4_ownerbudevent.get_dict()
+
+    # THEN
+    assert t4_dict == {"timestamp": t4_timestamp, "money_magnitude": t4_magnitude}
+
+
 def test_OwnerBudEvents_Exists():
     # ESTABLISH / WHEN
     x_ownerbudevents = OwnerBudEvents()
@@ -202,3 +215,27 @@ def test_OwnerBudEvents_get_headers_ReturnsObj():
 
     # THEN
     assert sue_headers_list == ["owner_id", "timestamp", "money_magnitude"]
+
+
+def test_OwnerBudEvents_get_dict_ReturnsObj_Scenario1():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_ownerbudevents = ownerbudevents_shop(sue_str)
+    x4_timestamp = 4
+    x4_magnitude = 55
+    x7_timestamp = 7
+    x7_magnitude = 66
+    sue_ownerbudevents.add_event(x4_timestamp, x4_magnitude)
+    sue_ownerbudevents.add_event(x7_timestamp, x7_magnitude)
+
+    # WHEN
+    sue_events_dict = sue_ownerbudevents.get_dict()
+
+    # THEN
+    assert sue_events_dict == {
+        "owner_id": sue_str,
+        "events": {
+            x4_timestamp: {"money_magnitude": x4_magnitude},
+            x7_timestamp: {"money_magnitude": x7_magnitude},
+        },
+    }

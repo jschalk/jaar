@@ -10,8 +10,8 @@ from src.s1_road.finance import (
 )
 from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.s2_bud.bud import BudUnit
-from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop
-from src.s3_chrono.bud_event import OwnerBudEvent, OwnerBudEvents
+from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop, TimeLinePoint
+from src.s3_chrono.bud_event import OwnerBudEvent, OwnerBudEvents, ownerbudevents_shop
 from src.s5_listen.basis_buds import get_default_final_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
 from src.s5_listen.listen import (
@@ -225,6 +225,26 @@ class FiscalUnit:
 
     def del_ownerbudevents(self, x_owner_id: OwnerID):
         self.bud_history.pop(x_owner_id)
+
+    def add_ownerbudevent(
+        self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
+    ):
+        if self.ownerbudevents_exists(x_owner_id) is False:
+            self.set_ownerbudevent(ownerbudevents_shop(x_owner_id))
+        x_ownerbudevents = self.get_ownerbudevents(x_owner_id)
+        x_ownerbudevents.add_event(x_timestamp, x_money_magnitude)
+
+    def get_ownerbudevents_dict(self) -> dict:
+        return {
+            "fiscal_id": self.fiscal_id,
+            "ownerbudevents": self._get_bud_history_dict(),
+        }
+
+    def _get_bud_history_dict(self):
+        x_dict = {}
+        for x_event in self.bud_history.values():
+            x_dict[x_event.owner_id] = x_event.get_dict()
+        return x_dict
 
 
 def fiscalunit_shop(

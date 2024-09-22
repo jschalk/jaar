@@ -14,6 +14,9 @@ class OwnerBudEvent:
     def get_array(self) -> list[int]:
         return [self.timestamp, self.money_magnitude]
 
+    def get_dict(self) -> dict[str,]:
+        return {"timestamp": self.timestamp, "money_magnitude": self.money_magnitude}
+
 
 def ownerbudevent_shop(
     x_timestamp: TimeLinePoint, x_money_magnitude: int
@@ -53,6 +56,15 @@ class OwnerBudEvents:
 
     def get_headers(self) -> list:
         return ["owner_id", "timestamp", "money_magnitude"]
+
+    def get_dict(self) -> dict:
+        return {"owner_id": self.owner_id, "events": self._get_events_dict()}
+
+    def _get_events_dict(self) -> dict:
+        x_dict = {}
+        for x_event in self.events.values():
+            x_dict[x_event.timestamp] = {"money_magnitude": x_event.money_magnitude}
+        return x_dict
 
 
 def ownerbudevents_shop(owner_id: OwnerID) -> OwnerBudEvents:
