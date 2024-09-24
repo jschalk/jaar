@@ -431,7 +431,7 @@ def test_is_roadnode_ReturnsObj():
     assert is_roadnode("casa", x_delimiter=x_s)
     assert not is_roadnode(f"ZZ{x_s}casa", x_s)
     assert not is_roadnode(RoadUnit(f"ZZ{x_s}casa"), x_s)
-    assert is_roadnode(RoadUnit(f"ZZ"), x_s)
+    assert is_roadnode(RoadUnit("ZZ"), x_s)
 
 
 def test_get_diff_road_ReturnsCorrectObj():

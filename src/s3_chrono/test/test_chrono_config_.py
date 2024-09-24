@@ -1,5 +1,6 @@
 from src.s0_instrument.file import save_file
 from src.s0_instrument.python_tool import get_json_from_dict
+from src.s1_road.finance import TimeLinePoint
 from src.s2_bud.bud import budunit_shop
 from src.s3_chrono.examples.chrono_examples import (
     get_creg_config,
@@ -23,7 +24,6 @@ from src.s3_chrono.chrono import (
     validate_timeline_config,
     create_timeline_config,
     get_default_timeline_config_dict,
-    TimeLinePoint,
     TimeLineUnit,
     timelineunit_shop,
     week_str,

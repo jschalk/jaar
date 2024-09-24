@@ -1,13 +1,12 @@
-from src.s1_road.finance import FundNum
+from src.s0_instrument.python_tool import get_empty_dict_if_none
+from src.s1_road.finance import FundNum, TimeLinePoint
 from src.s1_road.road import AcctID
 from src.s1_road.road import OwnerID
-from src.s2_bud.bud import BudUnit
-from src.s3_chrono.chrono import TimeLinePoint
 from dataclasses import dataclass
 
 
 @dataclass
-class BudEvent:
+class OutlayEvent:
     timestamp: TimeLinePoint = None
     money_magnitude: int = None
     _net_outlays: dict[AcctID, FundNum] = None
@@ -20,33 +19,37 @@ class BudEvent:
         return {"timestamp": self.timestamp, "money_magnitude": self.money_magnitude}
 
 
-def budevent_shop(
+def outlayevent_shop(
     x_timestamp: TimeLinePoint,
     x_money_magnitude: int,
     net_outlays: dict[AcctID, FundNum] = None,
-) -> BudEvent:
-    return BudEvent(x_timestamp, money_magnitude=x_money_magnitude)
+) -> OutlayEvent:
+    return OutlayEvent(
+        x_timestamp,
+        money_magnitude=x_money_magnitude,
+        _net_outlays=get_empty_dict_if_none(net_outlays),
+    )
 
 
 @dataclass
-class BudLog:
+class OutlayLog:
     owner_id: OwnerID = None
-    events: dict[TimeLinePoint:BudEvent] = None
+    events: dict[TimeLinePoint:OutlayEvent] = None
     _sum_money_magnitude: int = None
     _sum_acct_outlays: int = None
     _timestamp_min: TimeLinePoint = None
     _timestamp_max: TimeLinePoint = None
 
-    def set_event(self, x_event: BudEvent):
+    def set_event(self, x_event: OutlayEvent):
         self.events[x_event.timestamp] = x_event
 
     def add_event(self, x_timestamp: TimeLinePoint, x_money_magnitude: int):
-        self.set_event(budevent_shop(x_timestamp, x_money_magnitude))
+        self.set_event(outlayevent_shop(x_timestamp, x_money_magnitude))
 
     def event_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return self.events.get(x_timestamp) != None
 
-    def get_event(self, x_timestamp: TimeLinePoint) -> BudEvent:
+    def get_event(self, x_timestamp: TimeLinePoint) -> OutlayEvent:
         return self.events.get(x_timestamp)
 
     def del_event(self, x_timestamp: TimeLinePoint):
@@ -70,27 +73,27 @@ class BudLog:
         }
 
 
-def budlog_shop(owner_id: OwnerID) -> BudLog:
-    return BudLog(owner_id=owner_id, events={}, _sum_acct_outlays={})
+def outlaylog_shop(owner_id: OwnerID) -> OutlayLog:
+    return OutlayLog(owner_id=owner_id, events={}, _sum_acct_outlays={})
 
 
-def get_budevent_from_dict(x_dict: dict) -> BudEvent:
+def get_outlayevent_from_dict(x_dict: dict) -> OutlayEvent:
     x_timestamp = x_dict.get("timestamp")
     x_money_magnitude = x_dict.get("money_magnitude")
-    return budevent_shop(x_timestamp, x_money_magnitude)
+    return outlayevent_shop(x_timestamp, x_money_magnitude)
 
 
-def get_budlog_from_dict(x_dict: dict) -> BudLog:
+def get_outlaylog_from_dict(x_dict: dict) -> OutlayLog:
     x_owner_id = x_dict.get("owner_id")
-    x_budlog = budlog_shop(x_owner_id)
-    x_budlog.events = get_events_from_dict(x_dict.get("events"))
-    return x_budlog
+    x_outlaylog = outlaylog_shop(x_owner_id)
+    x_outlaylog.events = get_events_from_dict(x_dict.get("events"))
+    return x_outlaylog
 
 
-def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint:BudEvent]:
+def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint:OutlayEvent]:
     x_dict = {}
     for x_event in events_dict.values():
         x_timestamp = x_event.get("timestamp")
         x_money_magnitude = x_event.get("money_magnitude")
-        x_dict[x_timestamp] = budevent_shop(x_timestamp, x_money_magnitude)
+        x_dict[x_timestamp] = outlayevent_shop(x_timestamp, x_money_magnitude)
     return x_dict

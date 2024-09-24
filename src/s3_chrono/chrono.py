@@ -13,10 +13,6 @@ from dataclasses import dataclass
 from os import getcwd as os_getcwd
 
 
-class TimeLinePoint(int):
-    pass
-
-
 def c400_leap_str():
     return "c400_leap"
 
@@ -555,9 +551,9 @@ class TimeLineUnit:
 
 
 def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
-    if timeline_config == None:
+    if timeline_config is None:
         timeline_config = get_default_timeline_config_dict()
-    x_timelineunit = TimeLineUnit(
+    return TimeLineUnit(
         c400_config=timeline_config.get(c400_config_str()),
         hours_config=timeline_config.get(hours_config_str()),
         months_config=timeline_config.get(months_config_str()),
@@ -566,4 +562,3 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
         weekdays_config=timeline_config.get(weekdays_config_str()),
         yr1_jan1_offset=timeline_config.get(yr1_jan1_offset_str()),
     )
-    return x_timelineunit

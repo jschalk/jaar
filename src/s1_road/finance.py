@@ -37,6 +37,10 @@ class FundCoin(float):
     pass
 
 
+class TimeLinePoint(int):
+    pass
+
+
 class missing_base_residual_Exception(Exception):
     pass
 
