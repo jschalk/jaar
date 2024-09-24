@@ -16,10 +16,10 @@ from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, 
 from src.s2_bud.bud import BudUnit
 from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop, TimeLinePoint
 from src.s3_chrono.bud_event import (
-    OwnerBudEvent,
-    OwnerBudEvents,
-    ownerbudevents_shop,
-    get_ownerbudevents_from_dict,
+    BudEvent,
+    BudLog,
+    budlog_shop,
+    get_budlog_from_dict,
 )
 from src.s5_listen.basis_buds import get_default_final_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
@@ -50,7 +50,7 @@ class FiscalUnit:
     fiscals_dir: str
     timeline: TimeLineUnit = None
     current_time: int = None
-    bud_history: dict[OwnerID, OwnerBudEvents] = None
+    bud_history: dict[OwnerID, BudLog] = None
     _fiscal_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
@@ -223,25 +223,25 @@ class FiscalUnit:
         return self._get_hubunit(owner_id).get_final_bud()
 
     # bud_history
-    def set_ownerbudevent(self, x_ownerbudevents: OwnerBudEvents):
-        self.bud_history[x_ownerbudevents.owner_id] = x_ownerbudevents
+    def set_budevent(self, x_budlog: BudLog):
+        self.bud_history[x_budlog.owner_id] = x_budlog
 
-    def ownerbudevents_exists(self, x_owner_id: OwnerID) -> bool:
+    def budlog_exists(self, x_owner_id: OwnerID) -> bool:
         return self.bud_history.get(x_owner_id) != None
 
-    def get_ownerbudevents(self, x_owner_id: OwnerID) -> OwnerBudEvents:
+    def get_budlog(self, x_owner_id: OwnerID) -> BudLog:
         return self.bud_history.get(x_owner_id)
 
-    def del_ownerbudevents(self, x_owner_id: OwnerID):
+    def del_budlog(self, x_owner_id: OwnerID):
         self.bud_history.pop(x_owner_id)
 
-    def add_ownerbudevent(
+    def add_budevent(
         self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
     ):
-        if self.ownerbudevents_exists(x_owner_id) is False:
-            self.set_ownerbudevent(ownerbudevents_shop(x_owner_id))
-        x_ownerbudevents = self.get_ownerbudevents(x_owner_id)
-        x_ownerbudevents.add_event(x_timestamp, x_money_magnitude)
+        if self.budlog_exists(x_owner_id) is False:
+            self.set_budevent(budlog_shop(x_owner_id))
+        x_budlog = self.get_budlog(x_owner_id)
+        x_budlog.add_event(x_timestamp, x_money_magnitude)
 
     def get_dict(self) -> dict:
         return {
@@ -311,8 +311,8 @@ def get_from_dict(fiscal_dict: dict) -> FiscalUnit:
     return x_fiscal
 
 
-def _get_bud_history_from_dict(bud_history_dict: dict) -> dict[OwnerID, OwnerBudEvents]:
+def _get_bud_history_from_dict(bud_history_dict: dict) -> dict[OwnerID, BudLog]:
     return {
-        x_owner_id: get_ownerbudevents_from_dict(ownerbudevents_dict)
-        for x_owner_id, ownerbudevents_dict in bud_history_dict.items()
+        x_owner_id: get_budlog_from_dict(budlog_dict)
+        for x_owner_id, budlog_dict in bud_history_dict.items()
     }

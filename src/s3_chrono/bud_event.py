@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class OwnerBudEvent:
+class BudEvent:
     timestamp: TimeLinePoint = None
     money_magnitude: int = None
     _bud: BudUnit = None
@@ -18,31 +18,29 @@ class OwnerBudEvent:
         return {"timestamp": self.timestamp, "money_magnitude": self.money_magnitude}
 
 
-def ownerbudevent_shop(
-    x_timestamp: TimeLinePoint, x_money_magnitude: int
-) -> OwnerBudEvent:
-    return OwnerBudEvent(x_timestamp, money_magnitude=x_money_magnitude)
+def budevent_shop(x_timestamp: TimeLinePoint, x_money_magnitude: int) -> BudEvent:
+    return BudEvent(x_timestamp, money_magnitude=x_money_magnitude)
 
 
 @dataclass
-class OwnerBudEvents:
+class BudLog:
     owner_id: OwnerID = None
-    events: dict[TimeLinePoint:OwnerBudEvent] = None
+    events: dict[TimeLinePoint:BudEvent] = None
     _sum_money_magnitude: int = None
     _sum_acct_outlays: int = None
     _timestamp_min: TimeLinePoint = None
     _timestamp_max: TimeLinePoint = None
 
-    def set_event(self, x_event: OwnerBudEvent):
+    def set_event(self, x_event: BudEvent):
         self.events[x_event.timestamp] = x_event
 
     def add_event(self, x_timestamp: TimeLinePoint, x_money_magnitude: int):
-        self.set_event(ownerbudevent_shop(x_timestamp, x_money_magnitude))
+        self.set_event(budevent_shop(x_timestamp, x_money_magnitude))
 
     def event_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return self.events.get(x_timestamp) != None
 
-    def get_event(self, x_timestamp: TimeLinePoint) -> OwnerBudEvent:
+    def get_event(self, x_timestamp: TimeLinePoint) -> BudEvent:
         return self.events.get(x_timestamp)
 
     def del_event(self, x_timestamp: TimeLinePoint):
@@ -66,27 +64,27 @@ class OwnerBudEvents:
         }
 
 
-def ownerbudevents_shop(owner_id: OwnerID) -> OwnerBudEvents:
-    return OwnerBudEvents(owner_id=owner_id, events={}, _sum_acct_outlays={})
+def budlog_shop(owner_id: OwnerID) -> BudLog:
+    return BudLog(owner_id=owner_id, events={}, _sum_acct_outlays={})
 
 
-def get_ownerbudevent_from_dict(x_dict: dict) -> OwnerBudEvent:
+def get_budevent_from_dict(x_dict: dict) -> BudEvent:
     x_timestamp = x_dict.get("timestamp")
     x_money_magnitude = x_dict.get("money_magnitude")
-    return ownerbudevent_shop(x_timestamp, x_money_magnitude)
+    return budevent_shop(x_timestamp, x_money_magnitude)
 
 
-def get_ownerbudevents_from_dict(x_dict: dict) -> OwnerBudEvents:
+def get_budlog_from_dict(x_dict: dict) -> BudLog:
     x_owner_id = x_dict.get("owner_id")
-    x_ownerbudevents = ownerbudevents_shop(x_owner_id)
-    x_ownerbudevents.events = get_events_from_dict(x_dict.get("events"))
-    return x_ownerbudevents
+    x_budlog = budlog_shop(x_owner_id)
+    x_budlog.events = get_events_from_dict(x_dict.get("events"))
+    return x_budlog
 
 
-def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint:OwnerBudEvent]:
+def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint:BudEvent]:
     x_dict = {}
     for x_event in events_dict.values():
         x_timestamp = x_event.get("timestamp")
         x_money_magnitude = x_event.get("money_magnitude")
-        x_dict[x_timestamp] = ownerbudevent_shop(x_timestamp, x_money_magnitude)
+        x_dict[x_timestamp] = budevent_shop(x_timestamp, x_money_magnitude)
     return x_dict
