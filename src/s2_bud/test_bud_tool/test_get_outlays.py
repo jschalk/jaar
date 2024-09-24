@@ -1,5 +1,9 @@
 from src.s2_bud.bud import budunit_shop
-from src.s2_bud.bud_tool import get_bud_outlay_array, get_bud_outlay_csv
+from src.s2_bud.bud_tool import (
+    get_bud_outlay_array,
+    get_bud_outlay_csv,
+    get_bud_settle_net_dict,
+)
 
 
 def test_get_bud_outlay_array_ReturnsObj_ScenarioZeroAcctUnits():
@@ -123,3 +127,67 @@ def test_get_bud_outlay_csv_ReturnsObj_settle_bud_True():
 """
     print(f"{example_csv_str=}")
     assert bud_outlay_csv_str == example_csv_str
+
+
+def test_get_bud_net_outlay_dict_ReturnsObj_ScenarioMultipleAcctUnit():
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_fund_give = 42
+    yao_fund_take = 23
+    bob_str = "Bob"
+    bob_fund_give = 17
+    bob_fund_take = 23
+    zia_str = "Zia"
+    sue_bud = budunit_shop("Sue")
+    sue_bud.add_acctunit(yao_str)
+    sue_bud.add_acctunit(bob_str)
+    sue_bud.add_acctunit(zia_str)
+    sue_bud.get_acct(yao_str)._fund_give = yao_fund_give
+    sue_bud.get_acct(yao_str)._fund_take = yao_fund_take
+    sue_bud.get_acct(bob_str)._fund_give = bob_fund_give
+    sue_bud.get_acct(bob_str)._fund_take = bob_fund_take
+
+    # WHEN
+    bud_net_outlay_dict = get_bud_settle_net_dict(sue_bud)
+
+    # THEN
+    print(f"{bud_net_outlay_dict=}")
+    print("")
+    example_net_outlay_dict = {
+        bob_str: bob_fund_give - bob_fund_take,
+        yao_str: yao_fund_give - yao_fund_take,
+    }
+    print(f"{example_net_outlay_dict=}")
+    assert example_net_outlay_dict == bud_net_outlay_dict
+
+
+def test_get_bud_outlay_csv_ReturnsObj_settle_bud_True():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    yao_str = "Yao"
+    bob_str = "Bob"
+    xio_str = "Xio"
+    zia_str = "Zia"
+    sue_bud.add_acctunit(yao_str, 13, 5)
+    sue_bud.add_acctunit(bob_str, 5, 7)
+    sue_bud.add_acctunit(xio_str, 2, 3)
+    sue_bud.add_acctunit(zia_str, 0, 0)
+    assert get_bud_settle_net_dict(sue_bud) == {}
+
+    # WHEN
+    sue_bud_settle_net_dict = get_bud_settle_net_dict(sue_bud, settle_bud=True)
+
+    # THEN
+    print(f"{sue_bud_settle_net_dict=}")
+    print("")
+    example_net_outlay_dict = {
+        bob_str: -216666667,
+        yao_str: 316666667,
+        xio_str: -100000000,
+    }
+    print(f"{example_net_outlay_dict=}")
+    assert sue_bud_settle_net_dict.get(yao_str) != None
+    assert sue_bud_settle_net_dict.get(bob_str) != None
+    assert sue_bud_settle_net_dict.get(xio_str) != None
+    assert sue_bud_settle_net_dict.get(zia_str) is None
+    assert sue_bud_settle_net_dict == example_net_outlay_dict

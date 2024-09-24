@@ -1,3 +1,5 @@
+from src.s2_bud.bud import budunit_shop
+from src.s2_bud.bud_tool import get_bud_settle_net_dict
 from src.s3_chrono.bud_event import (
     BudEvent,
     budevent_shop,
@@ -16,8 +18,8 @@ def test_BudEvent_Exists():
     assert x_budevent
     assert not x_budevent.timestamp
     assert not x_budevent.money_magnitude
-    assert not x_budevent._bud
-    assert not x_budevent._money_desc
+    assert not x_budevent._net_outlays
+    assert not x_budevent._tender_desc
 
 
 def test_budevent_shop_ReturnsObj():
@@ -32,8 +34,25 @@ def test_budevent_shop_ReturnsObj():
     assert x_budevent
     assert x_budevent.timestamp == y_timestamp
     assert x_budevent.money_magnitude == y_magnitude
-    assert not x_budevent._bud
-    assert not x_budevent._money_desc
+    assert not x_budevent._net_outlays
+    assert not x_budevent._tender_desc
+
+
+def test_budevent_shop_ReturnsObjWith_net_outlays():
+    # ESTABLISH
+    y_timestamp = 4
+    y_magnitude = 55
+    y_net_outlays = {"Sue": -4}
+
+    # WHEN
+    x_budevent = budevent_shop(y_timestamp, y_magnitude, y_net_outlays)
+
+    # THEN
+    assert x_budevent
+    assert x_budevent.timestamp == y_timestamp
+    assert x_budevent.money_magnitude == y_magnitude
+    assert not x_budevent._net_outlays
+    assert not x_budevent._tender_desc
 
 
 def test_BudEvent_get_array_ReturnsObj():
@@ -219,7 +238,7 @@ def test_BudLog_get_headers_ReturnsObj():
     assert sue_headers_list == ["owner_id", "timestamp", "money_magnitude"]
 
 
-def test_BudLog_get_dict_ReturnsObj_Scenario1():
+def test_BudLog_get_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     sue_budlog = budlog_shop(sue_str)
@@ -237,8 +256,8 @@ def test_BudLog_get_dict_ReturnsObj_Scenario1():
     assert sue_events_dict == {
         "owner_id": sue_str,
         "events": {
-            x4_timestamp: {"money_magnitude": x4_magnitude},
-            x7_timestamp: {"money_magnitude": x7_magnitude},
+            x4_timestamp: {"money_magnitude": x4_magnitude, "timestamp": x4_timestamp},
+            x7_timestamp: {"money_magnitude": x7_magnitude, "timestamp": x7_timestamp},
         },
     }
 

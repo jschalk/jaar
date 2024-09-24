@@ -1,4 +1,6 @@
 from src.s0_instrument.python_tool import create_csv
+from src.s1_road.finance import FundNum, get_net
+from src.s1_road.road import AcctID
 from src.s2_bud.acct import AcctUnit
 from src.s2_bud.group import MemberShip, AwardLink
 from src.s2_bud.idea import IdeaUnit
@@ -223,9 +225,10 @@ def get_bud_outlay_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
     if settle_bud:
         x_bud.settle_bud()
 
-    x_list = []
-    for x_acct in x_bud._accts.values():
-        x_list.append([x_acct.acct_id, x_acct._fund_take, x_acct._fund_give])
+    x_list = [
+        [x_acct.acct_id, x_acct._fund_take, x_acct._fund_give]
+        for x_acct in x_bud._accts.values()
+    ]
     x_list.sort(key=lambda y: y[0], reverse=False)
     return x_list
 
@@ -234,3 +237,17 @@ def get_bud_outlay_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
     x_outlay_array = get_bud_outlay_array(x_bud, settle_bud)
     x_headers = ["acct_id", "fund_take", "fund_give"]
     return create_csv(x_headers, x_outlay_array)
+
+
+def get_bud_settle_net_dict(
+    x_bud: BudUnit, settle_bud: bool = None
+) -> dict[AcctID, FundNum]:
+    if settle_bud:
+        x_bud.settle_bud()
+
+    x_dict = {}
+    for x_acct in x_bud._accts.values():
+        settle_net = get_net(x_acct._fund_give, x_acct._fund_take)
+        if settle_net != 0:
+            x_dict[x_acct.acct_id] = settle_net
+    return x_dict

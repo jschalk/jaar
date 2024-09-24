@@ -16,8 +16,10 @@ from src.s1_road.finance import (
     trim_bit_excess,
     trim_penny_excess,
     valid_finance_ratio,
+    get_net,
 )
 from inspect import getdoc as inspect_getdoc
+from pytest import raises as pytest_raises
 
 
 def test_BitNum_exists():
@@ -180,3 +182,27 @@ def test_valid_finance_ratio_ReturnsObj():
     assert valid_finance_ratio(10.1, 0.1) is False
     inspect_str = """Checks that big_number is wholly divisible by small_number"""
     assert inspect_getdoc(valid_finance_ratio) == inspect_str
+
+
+def test_get_net_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_net(x_give=5, x_take=6) == -1
+    assert get_net(x_give=55, x_take=6) == 49
+    assert get_net(x_give=55, x_take=None) == 55
+    assert get_net(x_give=None, x_take=44) == -44
+    assert get_net(x_give=None, x_take=None) == 0
+
+    with pytest_raises(Exception) as excinfo:
+        get_net(x_give=-1, x_take=14)
+    assert str(excinfo.value) == "get_net x_give=-1. Only non-negative numbers allowed."
+
+    with pytest_raises(Exception) as excinfo:
+        get_net(x_give=15, x_take=-5)
+    assert str(excinfo.value) == "get_net x_take=-5. Only non-negative numbers allowed."
+
+    with pytest_raises(Exception) as excinfo:
+        get_net(x_give=-4, x_take=-5)
+    assert (
+        str(excinfo.value)
+        == "get_net x_give=-4 and x_take=-5. Only non-negative numbers allowed."
+    )

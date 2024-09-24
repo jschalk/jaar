@@ -1,3 +1,5 @@
+from src.s1_road.finance import FundNum
+from src.s1_road.road import AcctID
 from src.s1_road.road import OwnerID
 from src.s2_bud.bud import BudUnit
 from src.s3_chrono.chrono import TimeLinePoint
@@ -8,8 +10,8 @@ from dataclasses import dataclass
 class BudEvent:
     timestamp: TimeLinePoint = None
     money_magnitude: int = None
-    _bud: BudUnit = None
-    _money_desc: str = None
+    _net_outlays: dict[AcctID, FundNum] = None
+    _tender_desc: str = None
 
     def get_array(self) -> list[int]:
         return [self.timestamp, self.money_magnitude]
@@ -18,7 +20,11 @@ class BudEvent:
         return {"timestamp": self.timestamp, "money_magnitude": self.money_magnitude}
 
 
-def budevent_shop(x_timestamp: TimeLinePoint, x_money_magnitude: int) -> BudEvent:
+def budevent_shop(
+    x_timestamp: TimeLinePoint,
+    x_money_magnitude: int,
+    net_outlays: dict[AcctID, FundNum] = None,
+) -> BudEvent:
     return BudEvent(x_timestamp, money_magnitude=x_money_magnitude)
 
 
