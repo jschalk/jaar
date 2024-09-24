@@ -7,8 +7,8 @@ from src.s1_road.jaar_config import get_gifts_folder, get_json_filename
 from src.s1_road.road import default_road_delimiter_if_none
 from src.s2_bud.healer import healerlink_shop
 from src.s2_bud.idea import ideaunit_shop
-from src.s2_bud.bud_tool import budevent_shop
 from src.s3_chrono.chrono import timelineunit_shop, get_min_from_dt
+from src.s3_chrono.bud_event import budevent_shop
 from src.s5_listen.hubunit import hubunit_shop
 from src.s7_fiscal.fiscal import FiscalUnit, fiscalunit_shop
 from src.s7_fiscal.examples.fiscal_env import (
@@ -18,13 +18,13 @@ from src.s7_fiscal.examples.fiscal_env import (
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 
 
-def test_FiscalUnit_exists(env_dir_setup_cleanup):
+def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     music_str = "music"
     music_fiscal = FiscalUnit(fiscal_id=music_str, fiscals_dir=get_test_fiscals_dir())
     assert music_fiscal.fiscal_id == music_str
     assert not music_fiscal.timeline
     assert not music_fiscal.current_time
-    assert not music_fiscal.budevents
+    assert not music_fiscal.bud_history
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     assert not music_fiscal._owners_dir
     assert not music_fiscal._journal_db
@@ -35,27 +35,39 @@ def test_FiscalUnit_exists(env_dir_setup_cleanup):
     assert not music_fiscal._penny
 
 
-def test_fiscalunit_shop_ReturnsFiscalUnit(env_dir_setup_cleanup):
+def test_fiscalunit_shop_ReturnsFiscalUnit():
     # ESTABLISH
     music_str = "music"
 
     # WHEN
-    music_fiscal = fiscalunit_shop(
-        fiscal_id=music_str, fiscals_dir=get_test_fiscals_dir(), in_memory_journal=True
-    )
+    music_fiscal = fiscalunit_shop(fiscal_id=music_str)
 
     # THEN
     assert music_fiscal.fiscal_id == music_str
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
-    assert music_fiscal.budevents == {}
-    assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
-    assert music_fiscal._owners_dir is not None
-    assert music_fiscal._gifts_dir is not None
+    assert music_fiscal.bud_history == {}
+    assert music_fiscal.fiscals_dir is None
+    assert music_fiscal._owners_dir is None
+    assert music_fiscal._gifts_dir is None
     assert music_fiscal._road_delimiter == default_road_delimiter_if_none()
     assert music_fiscal._fund_coin == default_fund_coin_if_none()
     assert music_fiscal._respect_bit == default_respect_bit_if_none()
     assert music_fiscal._penny == default_penny_if_none()
+
+
+def test_fiscalunit_shop_ReturnsFiscalUnitWith_fiscals_dir(env_dir_setup_cleanup):
+    # ESTABLISH
+    music_str = "music"
+
+    # WHEN
+    music_fiscal = fiscalunit_shop(music_str, fiscals_dir=get_test_fiscals_dir())
+
+    # THEN
+    assert music_fiscal.fiscal_id == music_str
+    assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
+    assert music_fiscal._owners_dir is not None
+    assert music_fiscal._gifts_dir is not None
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnitWith_road_delimiter(env_dir_setup_cleanup):
@@ -153,14 +165,14 @@ def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_clea
     sue_hubunit = hubunit_shop(
         None, music_str, sue_str, None, respect_bit=x_respect_bit, fund_coin=x_fund_coin
     )
-    assert os_path_exists(sue_hubunit.action_path()) is False
+    assert os_path_exists(sue_hubunit.final_path()) is False
 
     # WHEN
     music_fiscal.init_owner_keeps(sue_str)
 
     # THEN
     print(f"{get_test_fiscals_dir()=}")
-    assert os_path_exists(sue_hubunit.action_path())
+    assert os_path_exists(sue_hubunit.final_path())
 
 
 def test_FiscalUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_cleanup):

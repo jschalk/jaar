@@ -39,9 +39,9 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
     return x_listen
 
 
-def get_default_action_bud(voice: BudUnit) -> BudUnit:
-    default_action_bud = create_listen_basis(voice)
-    default_action_bud._last_gift_id = voice._last_gift_id
-    default_action_bud.credor_respect = None
-    default_action_bud.debtor_respect = None
-    return default_action_bud
+def get_default_final_bud(voice: BudUnit) -> BudUnit:
+    default_final_bud = create_listen_basis(voice)
+    default_final_bud._last_gift_id = voice._last_gift_id
+    default_final_bud.credor_respect = None
+    default_final_bud.debtor_respect = None
+    return default_final_bud

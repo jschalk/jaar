@@ -1,6 +1,6 @@
 from src.s1_road.jaar_config import (
     voice_str,
-    action_str,
+    final_str,
     get_rootpart_of_keep_dir,
     treasury_file_name,
     max_tree_traverse_default,
@@ -12,8 +12,8 @@ def test_voice_str():
     assert voice_str() == "voice"
 
 
-def test_action_str():
-    assert action_str() == "action"
+def test_final_str():
+    assert final_str() == "final"
 
 
 def test_get_rootpart_of_keep_dir_ReturnsCorrectObj():

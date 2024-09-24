@@ -50,6 +50,7 @@
         ["paw_paws", 360],
         ["a_claw", 365]
     ],
+    "monthday_distortion": 0,
     "timeline_label": "squirt",
     "weekdays_config": [
         "Oneday",

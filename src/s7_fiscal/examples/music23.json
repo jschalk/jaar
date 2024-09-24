@@ -1,0 +1,76 @@
+{
+    "fiscal_id": "music23",
+    "timeline": {
+        "c400_config": 7,
+        "hours_config": [
+            ["0-12am", 60],
+            ["1-1am", 120],
+            ["2-2am", 180],
+            ["3-3am", 240],
+            ["4-4am", 300],
+            ["5-5am", 360],
+            ["6-6am", 420],
+            ["7-7am", 480],
+            ["8-8am", 540],
+            ["9-9am", 600],
+            ["10-10am", 660],
+            ["11-11am", 720],
+            ["12-12pm", 780],
+            ["13-1pm", 840],
+            ["14-2pm", 900],
+            ["15-3pm", 960],
+            ["16-4pm", 1020],
+            ["17-5pm", 1080],
+            ["18-6pm", 1140],
+            ["19-7pm", 1200],
+            ["20-8pm", 1260],
+            ["21-9pm", 1320],
+            ["22-10pm", 1380],
+            ["23-11pm", 1440]
+        ],
+        "months_config": [
+            ["March", 31],
+            ["April", 61],
+            ["May", 92],
+            ["June", 122],
+            ["July", 153],
+            ["August", 184],
+            ["September", 214],
+            ["October", 245],
+            ["November", 275],
+            ["December", 306],
+            ["January", 337],
+            ["February", 365]
+        ],
+        "monthday_distortion": 1,
+        "timeline_label": "sue casa",
+        "weekdays_config": [
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Monday",
+            "Tuesday"
+        ],
+        "yr1_jan1_offset": 440640
+    },
+    "current_time": 23,
+    "bud_history": {
+        "Bob": {
+            "owner_id": "Bob",
+            "events": {"702": {"timestamp": 702, "money_magnitude": 33}}
+        },
+        "Sue": {
+            "owner_id": "Sue",
+            "events": {
+                "4": {"timestamp": 4, "money_magnitude": 55},
+                "7": {"timestamp": 7, "money_magnitude": 66}
+            }
+        }
+    },
+    "road_delimiter": "/",
+    "fund_coin": 0.3,
+    "respect_bit": 0.5,
+    "penny": 0.8
+}

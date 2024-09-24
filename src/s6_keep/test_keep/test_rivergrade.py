@@ -207,7 +207,24 @@ def test_RiverGrade_get_json_ReturnsCorrectObj():
     rivergrade_json = x_rivergrade.get_json()
 
     # THEN
-    assert (
-        rivergrade_json
-        == """{"fiscal_id": "ex_keep04", "healer_id": "Yao", "keep_road": null, "tax_bill_amount": null, "grant_amount": null, "debtor_rank_num": null, "credor_rank_num": null, "tax_paid_amount": null, "tax_paid_bool": null, "tax_paid_rank_num": null, "tax_paid_rank_percent": null, "debtor_count": 101, "credor_count": 103, "debtor_rank_percent": null, "credor_rank_percent": null, "rewards_count": null, "rewards_magnitude": null}"""
-    )
+    static_json = """{
+  "credor_count": 103,
+  "credor_rank_num": null,
+  "credor_rank_percent": null,
+  "debtor_count": 101,
+  "debtor_rank_num": null,
+  "debtor_rank_percent": null,
+  "fiscal_id": "ex_keep04",
+  "grant_amount": null,
+  "healer_id": "Yao",
+  "keep_road": null,
+  "rewards_count": null,
+  "rewards_magnitude": null,
+  "tax_bill_amount": null,
+  "tax_paid_amount": null,
+  "tax_paid_bool": null,
+  "tax_paid_rank_num": null,
+  "tax_paid_rank_percent": null
+}"""
+
+    assert rivergrade_json == static_json

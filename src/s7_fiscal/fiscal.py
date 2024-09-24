@@ -1,16 +1,31 @@
 from src.s0_instrument.file import set_dir, delete_dir, dir_files
-from src.s0_instrument.python_tool import get_0_if_None
+from src.s0_instrument.python_tool import (
+    get_0_if_None,
+    get_dict_from_json,
+    get_json_from_dict,
+)
 from src.s1_road.jaar_config import get_gifts_folder
-from src.s1_road.finance import default_respect_bit_if_none, default_penny_if_none
+from src.s1_road.finance import (
+    default_respect_bit_if_none,
+    default_penny_if_none,
+    PennyNum,
+    FundCoin,
+    BitNum,
+)
 from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.s2_bud.bud import BudUnit
-from src.s2_bud.bud_tool import BudEvent
-from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop
-from src.s5_listen.basis_buds import get_default_action_bud
+from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop, TimeLinePoint
+from src.s3_chrono.bud_event import (
+    BudEvent,
+    BudLog,
+    budlog_shop,
+    get_budlog_from_dict,
+)
+from src.s5_listen.basis_buds import get_default_final_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
 from src.s5_listen.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_voice_action,
+    listen_to_debtors_roll_voice_final,
     listen_to_debtors_roll_duty_job,
     create_job_file_from_duty_file,
 )
@@ -25,25 +40,25 @@ class FiscalUnit:
     pipeline1: gifts->voice
     pipeline2: voice->dutys
     pipeline3: duty->job
-    pipeline4: job->action
-    pipeline5: voice->action (direct)
-    pipeline6: voice->job->action (through jobs)
-    pipeline7: gifts->action (could be 5 of 6)
+    pipeline4: job->final
+    pipeline5: voice->final (direct)
+    pipeline6: voice->job->final (through jobs)
+    pipeline7: gifts->final (could be 5 of 6)
     """
 
     fiscal_id: FiscalID
     fiscals_dir: str
     timeline: TimeLineUnit = None
     current_time: int = None
-    budevents: list[int, BudEvent] = None
+    bud_history: dict[OwnerID, BudLog] = None
     _fiscal_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
     _gifts_dir: str = None
     _road_delimiter: str = None
-    _fund_coin: float = None
-    _respect_bit: float = None
-    _penny: float = None
+    _fund_coin: FundCoin = None
+    _respect_bit: BitNum = None
+    _penny: PennyNum = None
 
     # directory setup
     def _set_fiscal_dirs(self, in_memory_journal: bool = None):
@@ -124,7 +139,7 @@ class FiscalUnit:
     def init_owner_keeps(self, owner_id: OwnerID):
         x_hubunit = self._get_hubunit(owner_id)
         x_hubunit.initialize_gift_voice_files()
-        x_hubunit.initialize_action_file(self.get_owner_voice_from_file(owner_id))
+        x_hubunit.initialize_final_file(self.get_owner_voice_from_file(owner_id))
 
     def get_owner_voice_from_file(self, owner_id: OwnerID) -> BudUnit:
         return self._get_hubunit(owner_id).get_voice_bud()
@@ -155,12 +170,12 @@ class FiscalUnit:
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(voice_bud)
 
-    # action bud management
-    def generate_action_bud(self, owner_id: OwnerID) -> BudUnit:
+    # final bud management
+    def generate_final_bud(self, owner_id: OwnerID) -> BudUnit:
         listener_hubunit = self._get_hubunit(owner_id)
         x_voice = listener_hubunit.get_voice_bud()
         x_voice.settle_bud()
-        x_action = get_default_action_bud(x_voice)
+        x_final = get_default_final_bud(x_voice)
         for healer_id, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 fiscals_dir=self.fiscals_dir,
@@ -185,32 +200,74 @@ class FiscalUnit:
                 keep_hubunit.save_duty_bud(x_voice)
                 create_job_file_from_duty_file(keep_hubunit, owner_id)
                 x_job = keep_hubunit.get_job_bud(owner_id)
-                listen_to_speaker_agenda(x_action, x_job)
+                listen_to_speaker_agenda(x_final, x_job)
 
-        # if nothing has come from voice->duty->job->action pipeline use voice->action pipeline
-        x_action.settle_bud()
-        if len(x_action._idea_dict) == 1:
-            # pipeline_voice_action_str()
-            listen_to_debtors_roll_voice_action(listener_hubunit)
-            listener_hubunit.open_file_action()
-            x_action.settle_bud()
-        if len(x_action._idea_dict) == 1:
-            x_action = x_voice
-        listener_hubunit.save_action_bud(x_action)
+        # if nothing has come from voice->duty->job->final pipeline use voice->final pipeline
+        x_final.settle_bud()
+        if len(x_final._idea_dict) == 1:
+            # pipeline_voice_final_str()
+            listen_to_debtors_roll_voice_final(listener_hubunit)
+            listener_hubunit.open_file_final()
+            x_final.settle_bud()
+        if len(x_final._idea_dict) == 1:
+            x_final = x_voice
+        listener_hubunit.save_final_bud(x_final)
 
-        return self.get_action_file_bud(owner_id)
+        return self.get_final_file_bud(owner_id)
 
-    def generate_all_action_buds(self):
+    def generate_all_final_buds(self):
         for x_owner_id in self._get_owner_folder_names():
-            self.generate_action_bud(x_owner_id)
+            self.generate_final_bud(x_owner_id)
 
-    def get_action_file_bud(self, owner_id: OwnerID) -> BudUnit:
-        return self._get_hubunit(owner_id).get_action_bud()
+    def get_final_file_bud(self, owner_id: OwnerID) -> BudUnit:
+        return self._get_hubunit(owner_id).get_final_bud()
+
+    # bud_history
+    def set_budevent(self, x_budlog: BudLog):
+        self.bud_history[x_budlog.owner_id] = x_budlog
+
+    def budlog_exists(self, x_owner_id: OwnerID) -> bool:
+        return self.bud_history.get(x_owner_id) != None
+
+    def get_budlog(self, x_owner_id: OwnerID) -> BudLog:
+        return self.bud_history.get(x_owner_id)
+
+    def del_budlog(self, x_owner_id: OwnerID):
+        self.bud_history.pop(x_owner_id)
+
+    def add_budevent(
+        self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
+    ):
+        if self.budlog_exists(x_owner_id) is False:
+            self.set_budevent(budlog_shop(x_owner_id))
+        x_budlog = self.get_budlog(x_owner_id)
+        x_budlog.add_event(x_timestamp, x_money_magnitude)
+
+    def get_dict(self) -> dict:
+        return {
+            "fiscal_id": self.fiscal_id,
+            "timeline": self.timeline.get_dict(),
+            "current_time": self.current_time,
+            "bud_history": self._get_bud_history_dict(),
+            "road_delimiter": self._road_delimiter,
+            "fund_coin": self._fund_coin,
+            "respect_bit": self._respect_bit,
+            "penny": self._penny,
+        }
+
+    def get_json(self) -> str:
+        return get_json_from_dict(self.get_dict())
+
+    def _get_bud_history_dict(self):
+        return {
+            x_event.owner_id: x_event.get_dict()
+            for x_event in self.bud_history.values()
+        }
 
 
 def fiscalunit_shop(
     fiscal_id: FiscalID,
-    fiscals_dir: str,
+    fiscals_dir: str = None,
     timeline: TimeLineUnit = None,
     current_time: int = None,
     in_memory_journal: bool = None,
@@ -226,11 +283,36 @@ def fiscalunit_shop(
         fiscals_dir=fiscals_dir,
         timeline=timeline,
         current_time=get_0_if_None(current_time),
-        budevents={},
+        bud_history={},
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _fund_coin=default_respect_bit_if_none(_fund_coin),
         _respect_bit=default_respect_bit_if_none(_respect_bit),
         _penny=default_penny_if_none(_penny),
     )
-    fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
+    if fiscal_x.fiscals_dir is not None:
+        fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
     return fiscal_x
+
+
+def get_from_json(x_fiscal_json: str) -> FiscalUnit:
+    return get_from_dict(get_dict_from_json(x_fiscal_json))
+
+
+def get_from_dict(fiscal_dict: dict) -> FiscalUnit:
+    x_fiscal_id = fiscal_dict.get("fiscal_id")
+    x_fiscal = fiscalunit_shop(x_fiscal_id, None)
+    x_fiscal.timeline = timelineunit_shop(fiscal_dict.get("timeline"))
+    x_fiscal.current_time = fiscal_dict.get("current_time")
+    x_fiscal._road_delimiter = fiscal_dict.get("road_delimiter")
+    x_fiscal._fund_coin = fiscal_dict.get("fund_coin")
+    x_fiscal._respect_bit = fiscal_dict.get("respect_bit")
+    x_fiscal._penny = fiscal_dict.get("penny")
+    x_fiscal.bud_history = _get_bud_history_from_dict(fiscal_dict.get("bud_history"))
+    return x_fiscal
+
+
+def _get_bud_history_from_dict(bud_history_dict: dict) -> dict[OwnerID, BudLog]:
+    return {
+        x_owner_id: get_budlog_from_dict(budlog_dict)
+        for x_owner_id, budlog_dict in bud_history_dict.items()
+    }

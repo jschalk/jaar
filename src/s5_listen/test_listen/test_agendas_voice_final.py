@@ -3,7 +3,7 @@ from src.s1_road.jaar_config import get_json_filename
 from src.s2_bud.idea import ideaunit_shop
 from src.s2_bud.bud import budunit_shop
 from src.s5_listen.hubunit import hubunit_shop
-from src.s5_listen.listen import create_listen_basis, listen_to_agendas_voice_action
+from src.s5_listen.listen import create_listen_basis, listen_to_agendas_voice_final
 from src.s5_listen.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,
     env_dir_setup_cleanup,
@@ -27,7 +27,7 @@ from src.s5_listen.examples.example_listen import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_teamlinkIsSet(
+def test_listen_to_agendas_voice_final_AddsTasksToBudWhenNo_teamlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -42,25 +42,25 @@ def test_listen_to_agendas_voice_action_AddsTasksToBudWhenNo_teamlinkIsSet(
     yao_hubunit = hubunit_shop(env_dir(), None, yao_str)
     yao_hubunit.save_voice_bud(yao_voice)
 
-    zia_action = budunit_shop(zia_str)
-    zia_action.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
-    zia_action.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_str, debtit_belief=12)
+    zia_final = budunit_shop(zia_str)
+    zia_final.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
+    zia_final.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
+    zia_final.add_acctunit(yao_str, debtit_belief=12)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_str)
-    zia_hubunit.save_action_bud(zia_action)
+    zia_hubunit.save_final_bud(zia_final)
 
-    new_yao_action = create_listen_basis(yao_voice)
-    assert len(new_yao_action.get_agenda_dict()) == 0
+    new_yao_final = create_listen_basis(yao_voice)
+    assert len(new_yao_final.get_agenda_dict()) == 0
 
     # WHEN
-    print(f"{len(new_yao_action.get_idea_dict())=}")
-    listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
+    print(f"{len(new_yao_final.get_idea_dict())=}")
+    listen_to_agendas_voice_final(new_yao_final, yao_hubunit)
 
     # THEN
-    assert len(new_yao_action.get_agenda_dict()) == 2
+    assert len(new_yao_final.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
+def test_listen_to_agendas_voice_final_AddsTasksToBud(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_voice = budunit_shop(yao_str)
@@ -73,66 +73,66 @@ def test_listen_to_agendas_voice_action_AddsTasksToBud(env_dir_setup_cleanup):
     yao_hubunit = hubunit_shop(env_dir(), None, yao_str)
     yao_hubunit.save_voice_bud(yao_voice)
 
-    zia_action = budunit_shop(zia_str)
-    zia_action.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
-    zia_action.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_str, debtit_belief=12)
-    clean_ideaunit = zia_action.get_idea_obj(clean_road())
-    cook_ideaunit = zia_action.get_idea_obj(cook_road())
+    zia_final = budunit_shop(zia_str)
+    zia_final.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
+    zia_final.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
+    zia_final.add_acctunit(yao_str, debtit_belief=12)
+    clean_ideaunit = zia_final.get_idea_obj(clean_road())
+    cook_ideaunit = zia_final.get_idea_obj(cook_road())
     clean_ideaunit.teamunit.set_teamlink(yao_str)
     cook_ideaunit.teamunit.set_teamlink(yao_str)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_str)
-    zia_hubunit.save_action_bud(zia_action)
-    new_yao_action = create_listen_basis(yao_voice)
-    assert len(new_yao_action.get_agenda_dict()) == 0
+    zia_hubunit.save_final_bud(zia_final)
+    new_yao_final = create_listen_basis(yao_voice)
+    assert len(new_yao_final.get_agenda_dict()) == 0
 
     # WHEN
-    print(f"{len(new_yao_action.get_idea_dict())=}")
-    listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
+    print(f"{len(new_yao_final.get_idea_dict())=}")
+    listen_to_agendas_voice_final(new_yao_final, yao_hubunit)
 
     # THEN
-    assert len(new_yao_action.get_agenda_dict()) == 2
+    assert len(new_yao_final.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_voice_action_AddsTasksToBudWithDetailsDecidedBy_debtit_belief(
+def test_listen_to_agendas_voice_final_AddsTasksToBudWithDetailsDecidedBy_debtit_belief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    zia_action = get_example_zia_speaker()
-    bob_action = get_example_bob_speaker()
-    bob_action.edit_idea_attr(
+    zia_final = get_example_zia_speaker()
+    bob_final = get_example_bob_speaker()
+    bob_final.edit_idea_attr(
         road=cook_road(),
         reason_del_premise_base=eat_road(),
         reason_del_premise_need=hungry_road(),
     )
-    bob_cook_ideaunit = bob_action.get_idea_obj(cook_road())
-    zia_cook_ideaunit = zia_action.get_idea_obj(cook_road())
+    bob_cook_ideaunit = bob_final.get_idea_obj(cook_road())
+    zia_cook_ideaunit = zia_final.get_idea_obj(cook_road())
     assert bob_cook_ideaunit != zia_cook_ideaunit
     assert len(zia_cook_ideaunit.reasonunits) == 1
     assert len(bob_cook_ideaunit.reasonunits) == 0
-    zia_str = zia_action._owner_id
-    bob_str = bob_action._owner_id
+    zia_str = zia_final._owner_id
+    bob_str = bob_final._owner_id
     zia_hubunit = hubunit_shop(env_dir(), None, zia_str)
     bob_hubunit = hubunit_shop(env_dir(), None, bob_str)
-    zia_hubunit.save_action_bud(zia_action)
-    bob_hubunit.save_action_bud(bob_action)
+    zia_hubunit.save_final_bud(zia_final)
+    bob_hubunit.save_final_bud(bob_final)
 
     yao_voice = get_example_yao_speaker()
     yao_str = yao_voice._owner_id
     yao_hubunit = hubunit_shop(env_dir(), None, yao_str)
     yao_hubunit.save_voice_bud(yao_voice)
 
-    new_yao_action1 = create_listen_basis(yao_voice)
-    assert new_yao_action1.idea_exists(cook_road()) is False
+    new_yao_final1 = create_listen_basis(yao_voice)
+    assert new_yao_final1.idea_exists(cook_road()) is False
 
     # WHEN
-    listen_to_agendas_voice_action(new_yao_action1, yao_hubunit)
+    listen_to_agendas_voice_final(new_yao_final1, yao_hubunit)
 
     # THEN
-    assert new_yao_action1.idea_exists(cook_road())
-    new_cook_idea = new_yao_action1.get_idea_obj(cook_road())
-    zia_acctunit = new_yao_action1.get_acct(zia_str)
-    bob_acctunit = new_yao_action1.get_acct(bob_str)
+    assert new_yao_final1.idea_exists(cook_road())
+    new_cook_idea = new_yao_final1.get_idea_obj(cook_road())
+    zia_acctunit = new_yao_final1.get_acct(zia_str)
+    bob_acctunit = new_yao_final1.get_acct(bob_str)
     assert zia_acctunit.debtit_belief < bob_acctunit.debtit_belief
     assert new_cook_idea.get_reasonunit(eat_road()) is None
 
@@ -141,23 +141,23 @@ def test_listen_to_agendas_voice_action_AddsTasksToBudWithDetailsDecidedBy_debti
     yao_voice.add_acctunit(zia_str, None, yao_zia_debtit_belief)
     yao_voice.add_acctunit(bob_str, None, yao_bob_debtit_belief)
     yao_voice.set_acct_respect(100)
-    new_yao_action2 = create_listen_basis(yao_voice)
-    assert new_yao_action2.idea_exists(cook_road()) is False
+    new_yao_final2 = create_listen_basis(yao_voice)
+    assert new_yao_final2.idea_exists(cook_road()) is False
 
     # WHEN
-    listen_to_agendas_voice_action(new_yao_action2, yao_hubunit)
+    listen_to_agendas_voice_final(new_yao_final2, yao_hubunit)
 
     # THEN
-    assert new_yao_action2.idea_exists(cook_road())
-    new_cook_idea = new_yao_action2.get_idea_obj(cook_road())
-    zia_acctunit = new_yao_action2.get_acct(zia_str)
-    bob_acctunit = new_yao_action2.get_acct(bob_str)
+    assert new_yao_final2.idea_exists(cook_road())
+    new_cook_idea = new_yao_final2.get_idea_obj(cook_road())
+    zia_acctunit = new_yao_final2.get_acct(zia_str)
+    bob_acctunit = new_yao_final2.get_acct(bob_str)
     assert zia_acctunit.debtit_belief > bob_acctunit.debtit_belief
     zia_eat_reasonunit = zia_cook_ideaunit.get_reasonunit(eat_road())
     assert new_cook_idea.get_reasonunit(eat_road()) == zia_eat_reasonunit
 
 
-def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cleanup):
+def test_listen_to_agendas_voice_final_ProcessesIrrationalBud(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_voice = budunit_shop(yao_str)
@@ -175,65 +175,65 @@ def test_listen_to_agendas_voice_action_ProcessesIrrationalBud(env_dir_setup_cle
     yao_hubunit.save_voice_bud(yao_voice)
 
     zia_str = "Zia"
-    zia_action = budunit_shop(zia_str)
-    zia_action.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
-    zia_action.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_str, debtit_belief=12)
-    clean_ideaunit = zia_action.get_idea_obj(clean_road())
-    cook_ideaunit = zia_action.get_idea_obj(cook_road())
+    zia_final = budunit_shop(zia_str)
+    zia_final.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
+    zia_final.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
+    zia_final.add_acctunit(yao_str, debtit_belief=12)
+    clean_ideaunit = zia_final.get_idea_obj(clean_road())
+    cook_ideaunit = zia_final.get_idea_obj(cook_road())
     clean_ideaunit.teamunit.set_teamlink(yao_str)
     cook_ideaunit.teamunit.set_teamlink(yao_str)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_str)
-    zia_hubunit.save_action_bud(zia_action)
+    zia_hubunit.save_final_bud(zia_final)
 
-    sue_action = budunit_shop(sue_str)
-    sue_action.set_max_tree_traverse(5)
-    zia_action.add_acctunit(yao_str, debtit_belief=12)
+    sue_final = budunit_shop(sue_str)
+    sue_final.set_max_tree_traverse(5)
+    zia_final.add_acctunit(yao_str, debtit_belief=12)
     vacuum_str = "vacuum"
-    vacuum_road = sue_action.make_l1_road(vacuum_str)
-    sue_action.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
-    vacuum_ideaunit = sue_action.get_idea_obj(vacuum_road)
+    vacuum_road = sue_final.make_l1_road(vacuum_str)
+    sue_final.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
+    vacuum_ideaunit = sue_final.get_idea_obj(vacuum_road)
     vacuum_ideaunit.teamunit.set_teamlink(yao_str)
 
     egg_str = "egg first"
-    egg_road = sue_action.make_l1_road(egg_str)
-    sue_action.set_l1_idea(ideaunit_shop(egg_str))
+    egg_road = sue_final.make_l1_road(egg_str)
+    sue_final.set_l1_idea(ideaunit_shop(egg_str))
     chicken_str = "chicken first"
-    chicken_road = sue_action.make_l1_road(chicken_str)
-    sue_action.set_l1_idea(ideaunit_shop(chicken_str))
+    chicken_road = sue_final.make_l1_road(chicken_str)
+    sue_final.set_l1_idea(ideaunit_shop(chicken_str))
     # set egg pledge is True when chicken first is False
-    sue_action.edit_idea_attr(
+    sue_final.edit_idea_attr(
         road=egg_road,
         pledge=True,
         reason_base=chicken_road,
         reason_base_idea_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
-    sue_action.edit_idea_attr(
+    sue_final.edit_idea_attr(
         road=chicken_road,
         pledge=True,
         reason_base=egg_road,
         reason_base_idea_active_requisite=False,
     )
     sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
-    sue_hubunit.save_action_bud(sue_action)
+    sue_hubunit.save_final_bud(sue_final)
 
     # WHEN
-    new_yao_action = create_listen_basis(yao_voice)
-    listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
+    new_yao_final = create_listen_basis(yao_voice)
+    listen_to_agendas_voice_final(new_yao_final, yao_hubunit)
 
     # THEN irrational bud is ignored
-    assert len(new_yao_action.get_agenda_dict()) != 3
-    assert len(new_yao_action.get_agenda_dict()) == 2
-    zia_acctunit = new_yao_action.get_acct(zia_str)
-    sue_acctunit = new_yao_action.get_acct(sue_str)
+    assert len(new_yao_final.get_agenda_dict()) != 3
+    assert len(new_yao_final.get_agenda_dict()) == 2
+    zia_acctunit = new_yao_final.get_acct(zia_str)
+    sue_acctunit = new_yao_final.get_acct(sue_str)
     print(f"{sue_acctunit.debtit_belief=}")
     print(f"{sue_acctunit._irrational_debtit_belief=}")
     assert zia_acctunit._irrational_debtit_belief == 0
     assert sue_acctunit._irrational_debtit_belief == 51
 
 
-def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
+def test_listen_to_agendas_voice_final_ProcessesMissingDebtorBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -254,33 +254,33 @@ def test_listen_to_agendas_voice_action_ProcessesMissingDebtorBud(
     yao_voice.set_acct_respect(yao_pool)
     yao_hubunit.save_voice_bud(yao_voice)
 
-    zia_action = budunit_shop(zia_str)
-    zia_action.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
-    zia_action.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_str, debtit_belief=12)
-    clean_ideaunit = zia_action.get_idea_obj(clean_road())
-    cook_ideaunit = zia_action.get_idea_obj(cook_road())
+    zia_final = budunit_shop(zia_str)
+    zia_final.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
+    zia_final.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
+    zia_final.add_acctunit(yao_str, debtit_belief=12)
+    clean_ideaunit = zia_final.get_idea_obj(clean_road())
+    cook_ideaunit = zia_final.get_idea_obj(cook_road())
     clean_ideaunit.teamunit.set_teamlink(yao_str)
     cook_ideaunit.teamunit.set_teamlink(yao_str)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_str)
-    zia_hubunit.save_action_bud(zia_action)
+    zia_hubunit.save_final_bud(zia_final)
 
     # WHEN
-    new_yao_action = create_listen_basis(yao_voice)
-    listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
+    new_yao_final = create_listen_basis(yao_voice)
+    listen_to_agendas_voice_final(new_yao_final, yao_hubunit)
 
     # THEN irrational bud is ignored
-    assert len(new_yao_action.get_agenda_dict()) != 3
-    assert len(new_yao_action.get_agenda_dict()) == 2
-    zia_acctunit = new_yao_action.get_acct(zia_str)
-    sue_acctunit = new_yao_action.get_acct(sue_str)
+    assert len(new_yao_final.get_agenda_dict()) != 3
+    assert len(new_yao_final.get_agenda_dict()) == 2
+    zia_acctunit = new_yao_final.get_acct(zia_str)
+    sue_acctunit = new_yao_final.get_acct(sue_str)
     print(f"{sue_acctunit.debtit_belief=}")
     print(f"{sue_acctunit._inallocable_debtit_belief=}")
     assert zia_acctunit._inallocable_debtit_belief == 0
     assert sue_acctunit._inallocable_debtit_belief == 51
 
 
-def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
+def test_listen_to_agendas_voice_final_ListensToOwner_voice_AndNotOwner_final(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -300,32 +300,32 @@ def test_listen_to_agendas_voice_action_ListensToOwner_voice_AndNotOwner_action(
     yao_hubunit = hubunit_shop(env_dir(), None, yao_str)
     yao_hubunit.save_voice_bud(yao_voice)
 
-    # Save Zia to action
+    # Save Zia to final
     zia_str = "Zia"
-    zia_action = budunit_shop(zia_str)
-    zia_action.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
-    zia_action.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    zia_action.add_acctunit(yao_str, debtit_belief=12)
-    clean_ideaunit = zia_action.get_idea_obj(clean_road())
-    cook_ideaunit = zia_action.get_idea_obj(cook_road())
+    zia_final = budunit_shop(zia_str)
+    zia_final.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
+    zia_final.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
+    zia_final.add_acctunit(yao_str, debtit_belief=12)
+    clean_ideaunit = zia_final.get_idea_obj(clean_road())
+    cook_ideaunit = zia_final.get_idea_obj(cook_road())
     clean_ideaunit.teamunit.set_teamlink(yao_str)
     cook_ideaunit.teamunit.set_teamlink(yao_str)
     zia_hubunit = hubunit_shop(env_dir(), None, zia_str)
-    zia_hubunit.save_action_bud(zia_action)
+    zia_hubunit.save_final_bud(zia_final)
 
     # save yao with task to dutys
-    yao_old_action = budunit_shop(yao_str)
+    yao_old_final = budunit_shop(yao_str)
     vacuum_str = "vacuum"
-    vacuum_road = yao_old_action.make_l1_road(vacuum_str)
-    yao_old_action.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
-    vacuum_ideaunit = yao_old_action.get_idea_obj(vacuum_road)
+    vacuum_road = yao_old_final.make_l1_road(vacuum_str)
+    yao_old_final.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
+    vacuum_ideaunit = yao_old_final.get_idea_obj(vacuum_road)
     vacuum_ideaunit.teamunit.set_teamlink(yao_str)
-    yao_hubunit.save_action_bud(yao_old_action)
+    yao_hubunit.save_final_bud(yao_old_final)
 
     # WHEN
-    new_yao_action = create_listen_basis(yao_voice)
-    listen_to_agendas_voice_action(new_yao_action, yao_hubunit)
+    new_yao_final = create_listen_basis(yao_voice)
+    listen_to_agendas_voice_final(new_yao_final, yao_hubunit)
 
     # THEN irrational bud is ignored
-    assert len(new_yao_action.get_agenda_dict()) != 3
-    assert len(new_yao_action.get_agenda_dict()) == 2
+    assert len(new_yao_final.get_agenda_dict()) != 3
+    assert len(new_yao_final.get_agenda_dict()) == 2

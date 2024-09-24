@@ -1,5 +1,6 @@
 from src.s0_instrument.file import open_file
-from src.s0_instrument.python_tool import get_dict_from_json, conditional_fig_show
+from src.s0_instrument.plotly_tool import conditional_fig_show
+from src.s0_instrument.python_tool import get_dict_from_json
 from src.s2_bud.idea import IdeaUnit
 from src.s2_bud.bud import BudUnit, budunit_shop
 from src.s3_chrono.chrono import (

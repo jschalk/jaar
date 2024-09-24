@@ -30,8 +30,8 @@ def voice_str() -> str:
     return "voice"
 
 
-def action_str() -> str:
-    return "action"
+def final_str() -> str:
+    return "final"
 
 
 def jobs_str() -> str:

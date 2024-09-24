@@ -23,6 +23,7 @@
         ["White", 365]
 
     ],
+    "monthday_distortion": 0,
     "timeline_label": "Lizzy9",
     "weekdays_config": [
         "Red",

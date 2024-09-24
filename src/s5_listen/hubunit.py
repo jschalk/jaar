@@ -50,7 +50,7 @@ from src.s4_gift.atom import (
     get_from_json as atomunit_get_from_json,
     modify_bud_with_atomunit,
 )
-from src.s5_listen.basis_buds import get_default_action_bud
+from src.s5_listen.basis_buds import get_default_final_bud
 from src.s4_gift.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
@@ -62,7 +62,7 @@ class Invalid_voice_Exception(Exception):
     pass
 
 
-class Invalid_action_Exception(Exception):
+class Invalid_final_Exception(Exception):
     pass
 
 
@@ -128,8 +128,8 @@ class HubUnit:
     def voice_dir(self) -> str:
         return f"{self.owner_dir()}/voice"
 
-    def action_dir(self) -> str:
-        return f"{self.owner_dir()}/action"
+    def final_dir(self) -> str:
+        return f"{self.owner_dir()}/final"
 
     def voice_file_name(self) -> str:
         return get_json_filename(self.owner_id)
@@ -137,11 +137,11 @@ class HubUnit:
     def voice_file_path(self) -> str:
         return f_path(self.voice_dir(), self.voice_file_name())
 
-    def action_file_name(self) -> str:
+    def final_file_name(self) -> str:
         return get_json_filename(self.owner_id)
 
-    def action_path(self) -> str:
-        return f_path(self.action_dir(), self.action_file_name())
+    def final_path(self) -> str:
+        return f_path(self.final_dir(), self.final_file_name())
 
     def save_file_voice(self, file_str: str, replace: bool):
         save_file(
@@ -151,10 +151,10 @@ class HubUnit:
             replace=replace,
         )
 
-    def save_file_action(self, file_str: str, replace: bool):
+    def save_file_final(self, file_str: str, replace: bool):
         save_file(
-            dest_dir=self.action_dir(),
-            file_name=self.action_file_name(),
+            dest_dir=self.final_dir(),
+            file_name=self.final_file_name(),
             file_str=file_str,
             replace=replace,
         )
@@ -162,8 +162,8 @@ class HubUnit:
     def voice_file_exists(self) -> bool:
         return os_path_exists(self.voice_file_path())
 
-    def action_file_exists(self) -> bool:
-        return os_path_exists(self.action_path())
+    def final_file_exists(self) -> bool:
+        return os_path_exists(self.final_path())
 
     def open_file_voice(self) -> str:
         return open_file(self.voice_dir(), self.voice_file_name())
@@ -197,8 +197,8 @@ class HubUnit:
     def delete_voice_file(self):
         delete_dir(self.voice_file_path())
 
-    def open_file_action(self) -> str:
-        return open_file(self.action_dir(), self.action_file_name())
+    def open_file_final(self) -> str:
+        return open_file(self.final_dir(), self.final_file_name())
 
     def get_max_atom_file_number(self) -> int:
         if not os_path_exists(self.atoms_dir()):
@@ -447,16 +447,16 @@ class HubUnit:
         x_file_name = self.owner_file_name(x_bud._owner_id)
         save_file(self.jobs_dir(), x_file_name, x_bud.get_json())
 
-    def save_action_bud(self, x_bud: BudUnit):
+    def save_final_bud(self, x_bud: BudUnit):
         if x_bud._owner_id != self.owner_id:
-            raise Invalid_action_Exception(
-                f"BudUnit with owner_id '{x_bud._owner_id}' cannot be saved as owner_id '{self.owner_id}''s action bud."
+            raise Invalid_final_Exception(
+                f"BudUnit with owner_id '{x_bud._owner_id}' cannot be saved as owner_id '{self.owner_id}''s final bud."
             )
-        self.save_file_action(x_bud.get_json(), True)
+        self.save_file_final(x_bud.get_json(), True)
 
-    def initialize_action_file(self, voice: BudUnit):
-        if self.action_file_exists() is False:
-            self.save_action_bud(get_default_action_bud(voice))
+    def initialize_final_file(self, voice: BudUnit):
+        if self.final_file_exists() is False:
+            self.save_final_bud(get_default_final_bud(voice))
 
     def duty_file_exists(self, owner_id: OwnerID) -> bool:
         return os_path_exists(self.duty_path(owner_id))
@@ -476,10 +476,10 @@ class HubUnit:
         file_content = open_file(self.jobs_dir(), self.owner_file_name(owner_id))
         return budunit_get_from_json(file_content)
 
-    def get_action_bud(self) -> BudUnit:
-        if self.action_file_exists() is False:
+    def get_final_bud(self) -> BudUnit:
+        if self.final_file_exists() is False:
             return None
-        file_content = self.open_file_action()
+        file_content = self.open_file_final()
         return budunit_get_from_json(file_content)
 
     def delete_duty_file(self, owner_id: OwnerID):
@@ -499,7 +499,7 @@ class HubUnit:
             road_delimiter=self.road_delimiter,
             respect_bit=self.respect_bit,
         )
-        return speaker_hubunit.get_action_bud()
+        return speaker_hubunit.get_final_bud()
 
     def get_perspective_bud(self, speaker: BudUnit) -> BudUnit:
         # get copy of bud without any metrics

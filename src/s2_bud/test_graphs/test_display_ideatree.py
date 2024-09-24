@@ -1,4 +1,4 @@
-from src.s0_instrument.python_tool import conditional_fig_show
+from src.s0_instrument.plotly_tool import conditional_fig_show
 from src.s2_bud.examples.example_buds import (
     budunit_v001_with_large_agenda,
     get_budunit_with_4_levels,
@@ -109,7 +109,4 @@ def test_BudUnit_fund_flow(graphics_bool):
     sue_bud.add_idea(dinner_road, mass=30, pledge=True)
 
     # WHEN / THEN
-    # fund_explanation0(sue_bud, "Task", True)
     fund_explanation0(sue_bud, "Task", graphics_bool)
-
-    # assert 1 == 2

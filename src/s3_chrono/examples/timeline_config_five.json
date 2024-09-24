@@ -43,6 +43,7 @@
         ["Ninon", 350],
         ["Obama", 365]
     ],
+    "monthday_distortion": 0,
     "timeline_label": "five",
     "weekdays_config": ["Airday", "Bioday", "Chiday", "Danceday", "Ellday"],
     "yr1_jan1_offset": 1683478080
