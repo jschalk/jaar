@@ -1318,11 +1318,11 @@
                                                                 "_label": "maybe watch a video",
                                                                 "mass": 1,
                                                                 "reasonunits": {
-                                                                    "music;Internet": {
-                                                                        "base": "music;Internet",
+                                                                    "music;Interweb": {
+                                                                        "base": "music;Interweb",
                                                                         "premises": {
-                                                                            "music;Internet;YahooVideo": {
-                                                                                "need": "music;Internet;YahooVideo"
+                                                                            "music;Interweb;YahooVideo": {
+                                                                                "need": "music;Interweb;YahooVideo"
                                                                             }
                                                                         }
                                                                     }
@@ -3380,11 +3380,11 @@
                         "_label": "keep up with friends",
                         "mass": 1,
                         "reasonunits": {
-                            "music;Internet": {
-                                "base": "music;Internet",
+                            "music;Interweb": {
+                                "base": "music;Interweb",
                                 "premises": {
-                                    "music;Internet;Faaceboook": {
-                                        "need": "music;Internet;Faaceboook"
+                                    "music;Interweb;Faaceboook": {
+                                        "need": "music;Interweb;Faaceboook"
                                     }
                                 }
                             }
@@ -4052,7 +4052,7 @@
                 },
                 "_uid": 103
             },
-            "Internet": {
+            "Interweb": {
                 "_is_expanded": false,
                 "_kids": {
                     "AOL AIM": {
@@ -4083,7 +4083,7 @@
                         "_uid": 255
                     }
                 },
-                "_label": "Internet",
+                "_label": "Interweb",
                 "mass": 1,
                 "_uid": 250
             },

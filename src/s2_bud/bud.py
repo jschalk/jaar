@@ -127,7 +127,7 @@ class BudUnit:
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
     penny: PennyNum = None
-    monetary_desc: str = None
+    tender_desc: str = None
     respect_bit: BitNum = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
@@ -157,8 +157,8 @@ class BudUnit:
             raise _last_gift_idException(exception_str)
         self._last_gift_id = x_last_gift_id
 
-    def set_monetary_desc(self, x_monetary_desc: str):
-        self.monetary_desc = x_monetary_desc
+    def set_tender_desc(self, x_tender_desc: str):
+        self.tender_desc = x_tender_desc
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:

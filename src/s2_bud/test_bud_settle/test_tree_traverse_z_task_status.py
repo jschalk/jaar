@@ -295,7 +295,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     yr_mon_str = "year_month"
     yr_mon_road = yao_budunit.make_l1_road(yr_mon_str)
     yao_budunit.set_fact(base=yr_mon_road, pick=yr_mon_road)
-    inter_str = "Internet"
+    inter_str = "Interweb"
     inter_road = yao_budunit.make_l1_road(inter_str)
     yao_budunit.set_fact(base=inter_road, pick=inter_road)
     assert yao_budunit is not None
@@ -368,7 +368,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     aaron_str = "Aaron Donald things effected by him"
     aaron_road = yao_budunit.make_l1_road(aaron_str)
     yao_budunit.set_fact(base=aaron_road, pick=aaron_road)
-    inter_str = "Internet"
+    inter_str = "Interweb"
     inter_road = yao_budunit.make_l1_road(inter_str)
     yao_budunit.set_fact(base=inter_road, pick=inter_road)
     yr_mon_str = "year_month"
@@ -588,9 +588,9 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
     aaron_str = "Aaron Donald things effected by him"
     aaron_road = yao_budunit.make_l1_road(aaron_str)
     yao_budunit.set_fact(base=aaron_road, pick=aaron_road)
-    internet_str = "Internet"
-    internet_road = yao_budunit.make_l1_road(internet_str)
-    yao_budunit.set_fact(base=internet_road, pick=internet_road)
+    interweb_str = "Interweb"
+    interweb_road = yao_budunit.make_l1_road(interweb_str)
+    yao_budunit.set_fact(base=interweb_road, pick=interweb_road)
     weekdays_str = "weekdays"
     weekdays_road = yao_budunit.make_l1_road(weekdays_str)
     yao_budunit.set_fact(base=weekdays_road, pick=weekdays_road)

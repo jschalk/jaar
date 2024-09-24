@@ -30,7 +30,7 @@ def budunit_v001_with_large_agenda() -> BudUnit:
     yao_bud.set_fact(aaron_road, aaron_road)
     yao_bud.set_fact(ced_week_road, ced_week_road, fopen=0, fnigh=53)
     yao_bud.set_fact(day_minute_road, day_minute_road, fopen=0, fnigh=1399)
-    # yao_bud.set_fact(internet, internet)
+    # yao_bud.set_fact(interweb, interweb)
     yao_bud.set_fact(month_week_road, month_week_road, fopen=0, fnigh=5)
     yao_bud.set_fact(mood_road, mood_road)
     # yao_bud.set_fact(movie, movie)

@@ -42,7 +42,7 @@ def test_AtomRow_exists():
     assert x_atomrow.label is None
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
-    assert x_atomrow.monetary_desc is None
+    assert x_atomrow.tender_desc is None
     assert x_atomrow.morph is None
     assert x_atomrow.need is None
     assert x_atomrow.nigh is None
@@ -119,18 +119,18 @@ def test_AtomRow_set_python_types_SetsAttr():
     x_atomrow.close = "4"
     x_parent_road = "fizz_buzz"
     x_label = "buzzziy"
-    x_monetary_desc = "boullons"
+    x_tender_desc = "boullons"
     x_morph_str = "True"
     x_morph_bool = True
     x_atomrow.parent_road = x_parent_road
     x_atomrow.label = x_label
-    x_atomrow.monetary_desc = x_monetary_desc
+    x_atomrow.tender_desc = x_tender_desc
     x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
     assert x_atomrow.parent_road == x_parent_road
     assert x_atomrow.label == x_label
-    assert x_atomrow.monetary_desc == x_monetary_desc
+    assert x_atomrow.tender_desc == x_tender_desc
     assert x_atomrow.morph == x_morph_str
     assert not x_atomrow.road
 
@@ -141,7 +141,7 @@ def test_AtomRow_set_python_types_SetsAttr():
     assert x_atomrow.close == four_int
     assert x_atomrow.parent_road == x_parent_road
     assert x_atomrow.label == x_label
-    assert x_atomrow.monetary_desc == x_monetary_desc
+    assert x_atomrow.tender_desc == x_tender_desc
     assert x_atomrow.morph == x_morph_bool
     assert x_atomrow.road == create_road(x_parent_road, x_label)
 
