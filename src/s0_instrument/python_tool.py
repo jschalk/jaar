@@ -108,7 +108,7 @@ def get_all_nondictionary_objs(x_dict: dict) -> dict[str : list[any]]:
 
 
 def get_json_from_dict(x_dict: dict) -> str:
-    return json_dumps(obj=x_dict)
+    return json_dumps(obj=x_dict, indent=2, sort_keys=True)
 
 
 def get_dict_from_json(x_json: str) -> dict[str,]:
