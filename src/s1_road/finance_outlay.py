@@ -1,7 +1,11 @@
-from src.s0_instrument.python_tool import get_empty_dict_if_none, get_0_if_None
+from src.s0_instrument.python_tool import (
+    get_empty_dict_if_none,
+    get_0_if_None,
+    get_json_from_dict,
+    get_dict_from_json,
+)
 from src.s1_road.finance import FundNum, TimeLinePoint
-from src.s1_road.road import AcctID
-from src.s1_road.road import OwnerID
+from src.s1_road.road import AcctID, OwnerID
 from dataclasses import dataclass
 
 
@@ -29,17 +33,13 @@ class OutlayEvent:
         self._net_outlays.pop(x_acct_id)
 
     def calc_magnitude(self):
-        x_debt_outlay_sum = 0
-        x_cred_outlay_sum = 0
-        for net_outlay in self._net_outlays.values():
-            if net_outlay > 0:
-                x_cred_outlay_sum += net_outlay
-            else:
-                x_debt_outlay_sum += net_outlay
-        if x_cred_outlay_sum + x_debt_outlay_sum != 0:
-            exception_text = f"magnitude cannot be calculated: debt_outlay={x_debt_outlay_sum}, cred_outlay={x_cred_outlay_sum}"
+        net_outlays = self._net_outlays.values()
+        x_cred_sum = sum(net_outlay for net_outlay in net_outlays if net_outlay > 0)
+        x_debt_sum = sum(net_outlay for net_outlay in net_outlays if net_outlay < 0)
+        if x_cred_sum + x_debt_sum != 0:
+            exception_text = f"magnitude cannot be calculated: debt_outlay={x_debt_sum}, cred_outlay={x_cred_sum}"
             raise calc_magnitudeException(exception_text)
-        self._magnitude = x_cred_outlay_sum
+        self._magnitude = x_cred_sum
 
     def get_array(self) -> list[int]:
         return [self.timestamp, self._magnitude]
@@ -49,6 +49,9 @@ class OutlayEvent:
         if self._net_outlays:
             x_dict["net_outlays"] = self._net_outlays
         return x_dict
+
+    def get_json(self) -> dict[str,]:
+        return get_json_from_dict(self.get_dict())
 
 
 def outlayevent_shop(
@@ -114,6 +117,10 @@ def get_outlayevent_from_dict(x_dict: dict) -> OutlayEvent:
     x_magnitude = x_dict.get("magnitude")
     x_net_outlays = x_dict.get("net_outlays")
     return outlayevent_shop(x_timestamp, x_magnitude, x_net_outlays)
+
+
+def get_outlayevent_from_json(x_json: str) -> OutlayEvent:
+    return get_outlayevent_from_dict(get_dict_from_json(x_json))
 
 
 def get_outlaylog_from_dict(x_dict: dict) -> OutlayLog:
