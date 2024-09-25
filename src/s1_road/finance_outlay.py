@@ -5,8 +5,7 @@ from src.s0_instrument.python_tool import (
     get_dict_from_json,
 )
 from src.s1_road.finance import FundNum, TimeLinePoint
-from src.s1_road.road import AcctID
-from src.s1_road.road import OwnerID
+from src.s1_road.road import AcctID, OwnerID
 from dataclasses import dataclass
 
 
