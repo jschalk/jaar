@@ -4,6 +4,7 @@ from src.s1_road.finance_outlay import (
     OutlayLog,
     outlaylog_shop,
     get_outlayevent_from_dict,
+    get_outlayevent_from_json,
     get_outlaylog_from_dict,
 )
 from pytest import raises as pytest_raises
@@ -212,6 +213,28 @@ def test_OutlayEvent_get_dict_ReturnsObjWith_net_outlays():
     }
 
 
+def test_OutlayEvent_get_json_ReturnsObj():
+    # ESTABLISH
+    t4_timestamp = 4
+    t4_magnitude = 55
+    t4_net_outlays = {"Sue": -4}
+    t4_outlayevent = outlayevent_shop(t4_timestamp, t4_magnitude, t4_net_outlays)
+
+    # WHEN
+    t4_json = t4_outlayevent.get_json()
+
+    # THEN
+    static_t4_json = """{
+  "magnitude": 55,
+  "net_outlays": {
+    "Sue": -4
+  },
+  "timestamp": 4
+}"""
+    print(f"{t4_json=}")
+    assert t4_json == static_t4_json
+
+
 def test_get_outlayevent_from_dict_ReturnsObj_Sccenario0():
     # ESTABLISH
     t4_timestamp = 4
@@ -240,6 +263,25 @@ def test_get_outlayevent_from_dict_ReturnsObj_Scenario1():
 
     # WHEN
     x_outlayevent = get_outlayevent_from_dict(t4_dict)
+
+    # THEN
+    assert x_outlayevent
+    assert x_outlayevent.timestamp == t4_timestamp
+    assert x_outlayevent._magnitude == t4_magnitude
+    assert x_outlayevent._net_outlays == t4_net_outlays
+    assert x_outlayevent == t4_outlayevent
+
+
+def test_get_outlayevent_from_json_ReturnsObj():
+    # ESTABLISH
+    t4_timestamp = 4
+    t4_magnitude = 55
+    t4_net_outlays = {"Sue": -4}
+    t4_outlayevent = outlayevent_shop(t4_timestamp, t4_magnitude, t4_net_outlays)
+    t4_json = t4_outlayevent.get_json()
+
+    # WHEN
+    x_outlayevent = get_outlayevent_from_json(t4_json)
 
     # THEN
     assert x_outlayevent
