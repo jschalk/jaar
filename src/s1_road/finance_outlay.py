@@ -1,8 +1,12 @@
-from src.s0_instrument.python_tool import get_empty_dict_if_none
+from src.s0_instrument.python_tool import get_empty_dict_if_none, get_0_if_None
 from src.s1_road.finance import FundNum, TimeLinePoint
 from src.s1_road.road import AcctID
 from src.s1_road.road import OwnerID
 from dataclasses import dataclass
+
+
+class calc_magnitudeException(Exception):
+    pass
 
 
 @dataclass
@@ -24,6 +28,19 @@ class OutlayEvent:
     def del_net_outlay(self, x_acct_id: AcctID):
         self._net_outlays.pop(x_acct_id)
 
+    def calc_magnitude(self):
+        x_debt_outlay_sum = 0
+        x_cred_outlay_sum = 0
+        for net_outlay in self._net_outlays.values():
+            if net_outlay > 0:
+                x_cred_outlay_sum += net_outlay
+            else:
+                x_debt_outlay_sum += net_outlay
+        if x_cred_outlay_sum + x_debt_outlay_sum != 0:
+            exception_text = f"magnitude cannot be calculated: debt_outlay={x_debt_outlay_sum}, cred_outlay={x_cred_outlay_sum}"
+            raise calc_magnitudeException(exception_text)
+        self._magnitude = x_cred_outlay_sum
+
     def get_array(self) -> list[int]:
         return [self.timestamp, self._magnitude]
 
@@ -36,12 +53,12 @@ class OutlayEvent:
 
 def outlayevent_shop(
     x_timestamp: TimeLinePoint,
-    x_magnitude: FundNum,
+    x_magnitude: FundNum = None,
     net_outlays: dict[AcctID, FundNum] = None,
 ) -> OutlayEvent:
     return OutlayEvent(
         x_timestamp,
-        _magnitude=x_magnitude,
+        _magnitude=get_0_if_None(x_magnitude),
         _net_outlays=get_empty_dict_if_none(net_outlays),
     )
 

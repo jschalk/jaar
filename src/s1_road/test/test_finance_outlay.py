@@ -6,6 +6,7 @@ from src.s1_road.finance_outlay import (
     get_outlayevent_from_dict,
     get_outlaylog_from_dict,
 )
+from pytest import raises as pytest_raises
 
 
 def test_OutlayEvent_Exists():
@@ -23,15 +24,14 @@ def test_OutlayEvent_Exists():
 def test_outlayevent_shop_ReturnsObj():
     # ESTABLISH
     y_timestamp = 4
-    y_magnitude = 55
 
     # WHEN
-    x_outlayevent = outlayevent_shop(y_timestamp, y_magnitude)
+    x_outlayevent = outlayevent_shop(y_timestamp)
 
     # THEN
     assert x_outlayevent
     assert x_outlayevent.timestamp == y_timestamp
-    assert x_outlayevent._magnitude == y_magnitude
+    assert x_outlayevent._magnitude == 0
     assert not x_outlayevent._net_outlays
     assert not x_outlayevent._tender_desc
 
@@ -133,6 +133,65 @@ def test_OutlayEvent_get_dict_ReturnsObj():
 
     # THEN
     assert t4_dict == {"timestamp": t4_timestamp, "magnitude": t4_magnitude}
+
+
+def test_OutlayEvent_calc_magnitude_SetsAttr_Scenario0():
+    # ESTABLISH
+    t4_timestamp = 4
+    t4_outlayevent = outlayevent_shop(t4_timestamp)
+    assert t4_outlayevent._magnitude == 0
+
+    # WHEN
+    t4_outlayevent.calc_magnitude()
+
+    # THEN
+    assert t4_outlayevent._magnitude == 0
+
+
+def test_OutlayEvent_calc_magnitude_SetsAttr_Scenario1():
+    # ESTABLISH
+    t4_timestamp = 4
+    t4_net_outlays = {"Sue": -4, "Yao": 2, "Zia": 2}
+
+    t4_outlayevent = outlayevent_shop(t4_timestamp, net_outlays=t4_net_outlays)
+    assert t4_outlayevent._magnitude == 0
+
+    # WHEN
+    t4_outlayevent.calc_magnitude()
+
+    # THEN
+    assert t4_outlayevent._magnitude == 4
+
+
+def test_OutlayEvent_calc_magnitude_SetsAttr_Scenario2():
+    # ESTABLISH
+    t4_timestamp = 4
+    t4_net_outlays = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
+
+    t4_outlayevent = outlayevent_shop(t4_timestamp, net_outlays=t4_net_outlays)
+    assert t4_outlayevent._magnitude == 0
+
+    # WHEN
+    t4_outlayevent.calc_magnitude()
+
+    # THEN
+    assert t4_outlayevent._magnitude == 20
+
+
+def test_OutlayEvent_calc_magnitude_SetsAttr_Scenario3_RaisesError():
+    # ESTABLISH
+    t4_timestamp = 4
+    bob_outlay = -13
+    sue_outlay = -3
+    yao_outlay = 100
+    t4_net_outlays = {"Bob": bob_outlay, "Sue": sue_outlay, "Yao": yao_outlay}
+    t4_outlayevent = outlayevent_shop(t4_timestamp, net_outlays=t4_net_outlays)
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        t4_outlayevent.calc_magnitude()
+    exception_str = f"magnitude cannot be calculated: debt_outlay={bob_outlay+sue_outlay}, cred_outlay={yao_outlay}"
+    assert str(excinfo.value) == exception_str
 
 
 def test_OutlayEvent_get_dict_ReturnsObjWith_net_outlays():
