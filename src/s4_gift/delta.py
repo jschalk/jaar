@@ -183,8 +183,8 @@ class DeltaUnit:
             x_atomunit.set_optional_arg(
                 "max_tree_traverse", after_bud.max_tree_traverse
             )
-        if before_bud.monetary_desc != after_bud.monetary_desc:
-            x_atomunit.set_optional_arg("monetary_desc", after_bud.monetary_desc)
+        if before_bud.tender_desc != after_bud.tender_desc:
+            x_atomunit.set_optional_arg("tender_desc", after_bud.tender_desc)
         if before_bud.credor_respect != after_bud.credor_respect:
             x_atomunit.set_optional_arg("credor_respect", after_bud.credor_respect)
         if before_bud.debtor_respect != after_bud.debtor_respect:

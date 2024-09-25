@@ -176,7 +176,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     x_fund_coin = 8
     x_respect_bit = 5
     x_max_tree_traverse = 66
-    x_monetary_desc = "dragon dollars"
+    x_tender_desc = "dragon dollars"
     x_credor_respect = 770
     x_debtor_respect = 880
     after_sue_bud.tally = x_budunit_tally
@@ -184,7 +184,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     after_sue_bud.fund_coin = x_fund_coin
     after_sue_bud.respect_bit = x_respect_bit
     after_sue_bud.set_max_tree_traverse(x_max_tree_traverse)
-    after_sue_bud.set_monetary_desc(x_monetary_desc)
+    after_sue_bud.set_tender_desc(x_tender_desc)
     after_sue_bud.set_credor_respect(x_credor_respect)
     after_sue_bud.set_debtor_respect(x_debtor_respect)
 
@@ -196,7 +196,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     x_keylist = [atom_update(), budunit_str()]
     xio_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("max_tree_traverse") == x_max_tree_traverse
-    assert xio_atomunit.get_value("monetary_desc") == x_monetary_desc
+    assert xio_atomunit.get_value("tender_desc") == x_tender_desc
     assert xio_atomunit.get_value("credor_respect") == x_credor_respect
     assert xio_atomunit.get_value("debtor_respect") == x_debtor_respect
     assert xio_atomunit.get_value("tally") == x_budunit_tally

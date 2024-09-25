@@ -11,15 +11,16 @@ from src.s1_road.finance import (
     PennyNum,
     FundCoin,
     BitNum,
+    TimeLinePoint,
 )
 from src.s1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.s2_bud.bud import BudUnit
-from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop, TimeLinePoint
-from src.s3_chrono.bud_event import (
-    BudEvent,
-    BudLog,
-    budlog_shop,
-    get_budlog_from_dict,
+from src.s3_chrono.chrono import TimeLineUnit, timelineunit_shop
+from src.s1_road.finance_outlay import (
+    OutlayEvent,
+    OutlayLog,
+    outlaylog_shop,
+    get_outlaylog_from_dict,
 )
 from src.s5_listen.basis_buds import get_default_final_bud
 from src.s5_listen.hubunit import hubunit_shop, HubUnit
@@ -50,7 +51,7 @@ class FiscalUnit:
     fiscals_dir: str
     timeline: TimeLineUnit = None
     current_time: int = None
-    bud_history: dict[OwnerID, BudLog] = None
+    bud_history: dict[OwnerID, OutlayLog] = None
     _fiscal_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
@@ -223,25 +224,25 @@ class FiscalUnit:
         return self._get_hubunit(owner_id).get_final_bud()
 
     # bud_history
-    def set_budevent(self, x_budlog: BudLog):
-        self.bud_history[x_budlog.owner_id] = x_budlog
+    def set_outlayevent(self, x_outlaylog: OutlayLog):
+        self.bud_history[x_outlaylog.owner_id] = x_outlaylog
 
-    def budlog_exists(self, x_owner_id: OwnerID) -> bool:
+    def outlaylog_exists(self, x_owner_id: OwnerID) -> bool:
         return self.bud_history.get(x_owner_id) != None
 
-    def get_budlog(self, x_owner_id: OwnerID) -> BudLog:
+    def get_outlaylog(self, x_owner_id: OwnerID) -> OutlayLog:
         return self.bud_history.get(x_owner_id)
 
-    def del_budlog(self, x_owner_id: OwnerID):
+    def del_outlaylog(self, x_owner_id: OwnerID):
         self.bud_history.pop(x_owner_id)
 
-    def add_budevent(
+    def add_outlayevent(
         self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
     ):
-        if self.budlog_exists(x_owner_id) is False:
-            self.set_budevent(budlog_shop(x_owner_id))
-        x_budlog = self.get_budlog(x_owner_id)
-        x_budlog.add_event(x_timestamp, x_money_magnitude)
+        if self.outlaylog_exists(x_owner_id) is False:
+            self.set_outlayevent(outlaylog_shop(x_owner_id))
+        x_outlaylog = self.get_outlaylog(x_owner_id)
+        x_outlaylog.add_event(x_timestamp, x_money_magnitude)
 
     def get_dict(self) -> dict:
         return {
@@ -311,8 +312,8 @@ def get_from_dict(fiscal_dict: dict) -> FiscalUnit:
     return x_fiscal
 
 
-def _get_bud_history_from_dict(bud_history_dict: dict) -> dict[OwnerID, BudLog]:
+def _get_bud_history_from_dict(bud_history_dict: dict) -> dict[OwnerID, OutlayLog]:
     return {
-        x_owner_id: get_budlog_from_dict(budlog_dict)
-        for x_owner_id, budlog_dict in bud_history_dict.items()
+        x_owner_id: get_outlaylog_from_dict(outlaylog_dict)
+        for x_owner_id, outlaylog_dict in bud_history_dict.items()
     }

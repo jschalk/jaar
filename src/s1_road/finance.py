@@ -1,4 +1,4 @@
-from src.s0_instrument.python_tool import get_1_if_None
+from src.s0_instrument.python_tool import get_1_if_None, get_0_if_None
 
 
 class MoneyUnit(float):
@@ -37,7 +37,15 @@ class FundCoin(float):
     pass
 
 
+class TimeLinePoint(int):
+    pass
+
+
 class missing_base_residual_Exception(Exception):
+    pass
+
+
+class get_net_Exception(Exception):
     pass
 
 
@@ -219,3 +227,18 @@ def allot_scale(ledger: dict[str, float], scale_number: float, grain_unit: float
     for x_key in zero_values:
         allot_dict[x_key] = 0
     return allot_dict
+
+
+def get_net(x_give: float, x_take: float) -> float:
+    x_give = get_0_if_None(x_give)
+    x_take = get_0_if_None(x_take)
+    if x_give < 0 or x_take < 0:
+        if x_give < 0 and x_take >= 0:
+            parameters_text = f"get_net x_give={x_give}."
+        elif x_give >= 0:
+            parameters_text = f"get_net x_take={x_take}."
+        else:
+            parameters_text = f"get_net x_give={x_give} and x_take={x_take}."
+        exception_text = f"{parameters_text} Only non-negative numbers allowed."
+        raise get_net_Exception(exception_text)
+    return x_give - x_take

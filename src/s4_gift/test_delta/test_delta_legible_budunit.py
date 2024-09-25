@@ -34,22 +34,22 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_monetary_desc():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tender_desc():
     # ESTABLISH
     category = budunit_str()
-    _monetary_desc_str = "monetary_desc"
-    sue_monetary_desc = "dragon dollars"
-    _monetary_desc_atomunit = atomunit_shop(category, atom_update())
-    _monetary_desc_atomunit.set_arg(_monetary_desc_str, sue_monetary_desc)
+    _tender_desc_str = "tender_desc"
+    sue_tender_desc = "dragon dollars"
+    _tender_desc_atomunit = atomunit_shop(category, atom_update())
+    _tender_desc_atomunit.set_arg(_tender_desc_str, sue_tender_desc)
     x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(_monetary_desc_atomunit)
+    x_deltaunit.set_atomunit(_tender_desc_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s monetary_desc is now called '{sue_monetary_desc}'"
+    x_str = f"{sue_bud._owner_id}'s tender_desc is now called '{sue_tender_desc}'"
     assert legible_list[0] == x_str
 
 
@@ -65,18 +65,18 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(acct_credor_pool_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_monetary_desc = "dragon dollars"
-    sue_bud.set_monetary_desc(sue_monetary_desc)
+    sue_tender_desc = "dragon dollars"
+    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_monetary_desc} credor pool is now {acct_credor_pool_int}"
+    x_str = f"{sue_tender_desc} credor pool is now {acct_credor_pool_int}"
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_With_monetary_desc_None():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_With_tender_desc_None():
     # ESTABLISH
     category = budunit_str()
     acct_credor_pool_str = "credor_respect"
@@ -94,7 +94,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Wit
 
     # THEN
     x_str = (
-        f"{sue_bud._owner_id}'s monetary_desc credor pool is now {acct_credor_pool_int}"
+        f"{sue_bud._owner_id}'s tender_desc credor pool is now {acct_credor_pool_int}"
     )
     assert legible_list[0] == x_str
 
@@ -111,14 +111,14 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(acct_debtor_pool_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_monetary_desc = "dragon dollars"
-    sue_bud.set_monetary_desc(sue_monetary_desc)
+    sue_tender_desc = "dragon dollars"
+    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_monetary_desc} debtor pool is now {acct_debtor_pool_int}"
+    x_str = f"{sue_tender_desc} debtor pool is now {acct_debtor_pool_int}"
     assert legible_list[0] == x_str
 
 
@@ -134,14 +134,14 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
     budunit_atomunit.set_arg(acct_debtor_pool_str, acct_pool_int)
     x_deltaunit.set_atomunit(budunit_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_monetary_desc = "dragon dollars"
-    sue_bud.set_monetary_desc(sue_monetary_desc)
+    sue_tender_desc = "dragon dollars"
+    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_monetary_desc} total pool is now {acct_pool_int}"
+    x_str = f"{sue_tender_desc} total pool is now {acct_pool_int}"
     assert len(legible_list) == 1
     assert legible_list[0] == x_str
 

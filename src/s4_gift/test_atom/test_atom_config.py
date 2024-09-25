@@ -494,7 +494,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert len(budunit_columns) == 10
     assert budunit_columns.get("uid") is not None
     assert budunit_columns.get("max_tree_traverse") is not None
-    assert budunit_columns.get("monetary_desc") is not None
+    assert budunit_columns.get("tender_desc") is not None
     assert budunit_columns.get("credor_respect") is not None
     assert budunit_columns.get("debtor_respect") is not None
     assert budunit_columns.get("fund_pool") is not None
@@ -663,7 +663,7 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("label") == "RoadNode"
     assert x_python_types.get("mass") == "int"
     assert x_python_types.get("max_tree_traverse") == "int"
-    assert x_python_types.get("monetary_desc") == "str"
+    assert x_python_types.get("tender_desc") == "str"
     assert x_python_types.get("morph") == "bool"
     assert x_python_types.get("need") == "RoadUnit"
     assert x_python_types.get("nigh") == "float"

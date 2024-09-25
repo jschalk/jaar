@@ -31,7 +31,7 @@ def test_BudUnit_Exists():
     assert x_bud.fund_coin is None
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
-    assert x_bud.monetary_desc is None
+    assert x_bud.tender_desc is None
     assert x_bud.credor_respect is None
     assert x_bud.debtor_respect is None
     assert x_bud._last_gift_id is None
@@ -86,7 +86,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.fund_coin == x_fund_coin
     assert x_bud.respect_bit == x_respect_bit
     assert x_bud.penny == x_penny
-    assert not x_bud.monetary_desc
+    assert not x_bud.tender_desc
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
     assert not x_bud._last_gift_id
@@ -207,17 +207,17 @@ def test_BudUnit_make_road_ReturnsCorrectObj():
     assert v1_casa_road == v2_casa_road
 
 
-def test_BudUnit_set_monetary_desc_SetsAttrCorrectly():
+def test_BudUnit_set_tender_desc_SetsAttrCorrectly():
     # ESTABLISH
     sue_bud = budunit_shop("Sue", "Texas")
-    sue_monetary_desc = "Folos"
-    assert sue_bud.monetary_desc != sue_monetary_desc
+    sue_tender_desc = "Folos"
+    assert sue_bud.tender_desc != sue_tender_desc
 
     # WHEN
-    sue_bud.set_monetary_desc(sue_monetary_desc)
+    sue_bud.set_tender_desc(sue_tender_desc)
 
     # THEN
-    assert sue_bud.monetary_desc == sue_monetary_desc
+    assert sue_bud.tender_desc == sue_tender_desc
 
 
 def test_BudUnit_set_last_gift_id_SetsAttrCorrectly():

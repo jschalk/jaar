@@ -19,7 +19,7 @@
         "max_tree_traverse": {
             "column_order": 7
         },
-        "monetary_desc": {
+        "tender_desc": {
             "column_order": 10
         },
         "owner_id": {

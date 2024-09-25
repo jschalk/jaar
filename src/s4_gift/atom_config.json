@@ -415,7 +415,7 @@
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "monetary_desc": {
+            "tender_desc": {
                 "column_order": 8,
                 "python_type": "str",
                 "sqlite_datatype": "TEXT"

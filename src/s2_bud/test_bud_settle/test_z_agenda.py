@@ -158,15 +158,15 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     mood_road = yao_bud.make_l1_road(mood_str)
     aaron_str = "Aaron Donald things effected by him"
     aaron_road = yao_bud.make_l1_road(aaron_str)
-    # internet_str = "Internet"
-    # internet_road = yao_bud.make_l1_road(internet_str)
+    # interweb_str = "Interweb"
+    # interweb_road = yao_bud.make_l1_road(interweb_str)
     year_month_str = "year_month"
     year_month_road = yao_bud.make_l1_road(year_month_str)
     yao_bud.set_fact(base=month_week_road, pick=month_week_road)
     yao_bud.set_fact(base=nations_road, pick=nations_road)
     yao_bud.set_fact(base=mood_road, pick=mood_road)
     yao_bud.set_fact(base=aaron_road, pick=aaron_road)
-    # yao_bud.set_fact(base=internet_road, pick=internet_road)
+    # yao_bud.set_fact(base=interweb_road, pick=interweb_road)
     yao_bud.set_fact(base=year_month_road, pick=year_month_road)
     # season_str = "Seasons"
     # season_road = yao_bud.make_l1_road(season_str)
