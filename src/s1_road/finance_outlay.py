@@ -33,17 +33,13 @@ class OutlayEvent:
         self._net_outlays.pop(x_acct_id)
 
     def calc_magnitude(self):
-        x_debt_outlay_sum = 0
-        x_cred_outlay_sum = 0
-        for net_outlay in self._net_outlays.values():
-            if net_outlay > 0:
-                x_cred_outlay_sum += net_outlay
-            else:
-                x_debt_outlay_sum += net_outlay
-        if x_cred_outlay_sum + x_debt_outlay_sum != 0:
-            exception_text = f"magnitude cannot be calculated: debt_outlay={x_debt_outlay_sum}, cred_outlay={x_cred_outlay_sum}"
+        net_outlays = self._net_outlays.values()
+        x_cred_sum = sum(net_outlay for net_outlay in net_outlays if net_outlay > 0)
+        x_debt_sum = sum(net_outlay for net_outlay in net_outlays if net_outlay < 0)
+        if x_cred_sum + x_debt_sum != 0:
+            exception_text = f"magnitude cannot be calculated: debt_outlay={x_debt_sum}, cred_outlay={x_cred_sum}"
             raise calc_magnitudeException(exception_text)
-        self._magnitude = x_cred_outlay_sum
+        self._magnitude = x_cred_sum
 
     def get_array(self) -> list[int]:
         return [self.timestamp, self._magnitude]

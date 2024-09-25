@@ -29,6 +29,13 @@ from src.s1_road.finance import (
     default_respect_bit_if_none,
     default_penny_if_none,
     default_money_magnitude_if_none,
+    TimeLinePoint,
+)
+from src.s1_road.finance_outlay import (
+    OutlayEvent,
+    OutlayLog,
+    outlaylog_shop,
+    get_outlayevent_from_json,
 )
 from src.s1_road.road import (
     OwnerID,
@@ -130,6 +137,9 @@ class HubUnit:
 
     def final_dir(self) -> str:
         return f"{self.owner_dir()}/final"
+
+    def outlays_dir(self) -> str:
+        return f"{self.owner_dir()}/outlays"
 
     def voice_file_name(self) -> str:
         return get_json_filename(self.owner_id)
@@ -395,6 +405,39 @@ class HubUnit:
         voice_bud = self._merge_any_gifts(voice_bud)
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
+
+    def outlay_dir(self, x_timestamp: TimeLinePoint) -> str:
+        return f"{self.outlays_dir()}/{x_timestamp}"
+
+    def outlay_file_name(self) -> str:
+        return "outlay.json"
+
+    def outlay_file_path(self, x_timestamp: TimeLinePoint) -> str:
+        return f_path(self.outlay_dir(x_timestamp), self.outlay_file_name())
+
+    def _save_valid_outlay_file(self, x_outlay: OutlayEvent):
+        x_outlay.calc_magnitude()
+        save_file(
+            self.outlay_dir(x_outlay.timestamp),
+            self.outlay_file_name(),
+            x_outlay.get_json(),
+            replace=False,
+        )
+
+    def outlay_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
+        return os_path_exists(self.outlay_file_path(x_timestamp))
+
+    def delete_outlay_file(self, x_timestamp: TimeLinePoint):
+        delete_dir(self.outlay_file_path(x_timestamp))
+
+    def get_outlaylog(self) -> OutlayLog:
+        x_outlaylog = outlaylog_shop(self.owner_id)
+        x_dirs = dir_files(self.outlays_dir(), include_dirs=True, include_files=False)
+        for x_outlay_folder_name in x_dirs.keys():
+            x_outlay_dir = self.outlay_dir(x_outlay_folder_name)
+            x_json = open_file(x_outlay_dir, self.outlay_file_name())
+            x_outlaylog.set_event(get_outlayevent_from_json(x_json))
+        return x_outlaylog
 
     def keep_dir(self) -> str:
         if self.keep_road is None:
