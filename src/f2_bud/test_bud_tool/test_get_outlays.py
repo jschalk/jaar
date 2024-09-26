@@ -2,7 +2,7 @@ from src.f2_bud.bud import budunit_shop
 from src.f2_bud.bud_tool import (
     get_bud_outlay_array,
     get_bud_outlay_csv,
-    get_bud_settle_net_dict,
+    get_bud_settle_acct_net_dict,
 )
 
 
@@ -148,7 +148,7 @@ def test_get_bud_net_outlay_dict_ReturnsObj_ScenarioMultipleAcctUnit():
     sue_bud.get_acct(bob_str)._fund_take = bob_fund_take
 
     # WHEN
-    bud_net_outlay_dict = get_bud_settle_net_dict(sue_bud)
+    bud_net_outlay_dict = get_bud_settle_acct_net_dict(sue_bud)
 
     # THEN
     print(f"{bud_net_outlay_dict=}")
@@ -172,10 +172,10 @@ def test_get_bud_outlay_csv_ReturnsObj_settle_bud_True():
     sue_bud.add_acctunit(bob_str, 5, 7)
     sue_bud.add_acctunit(xio_str, 2, 3)
     sue_bud.add_acctunit(zia_str, 0, 0)
-    assert get_bud_settle_net_dict(sue_bud) == {}
+    assert get_bud_settle_acct_net_dict(sue_bud) == {}
 
     # WHEN
-    sue_bud_settle_net_dict = get_bud_settle_net_dict(sue_bud, settle_bud=True)
+    sue_bud_settle_net_dict = get_bud_settle_acct_net_dict(sue_bud, settle_bud=True)
 
     # THEN
     print(f"{sue_bud_settle_net_dict=}")

@@ -239,7 +239,7 @@ def get_bud_outlay_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
     return create_csv(x_headers, x_outlay_array)
 
 
-def get_bud_settle_net_dict(
+def get_bud_settle_acct_net_dict(
     x_bud: BudUnit, settle_bud: bool = None
 ) -> dict[AcctID, FundNum]:
     if settle_bud:

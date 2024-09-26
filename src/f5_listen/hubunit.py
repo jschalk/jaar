@@ -33,6 +33,7 @@ from src.f1_road.finance import (
 )
 from src.f1_road.finance_outlay import (
     OutlayEvent,
+    outlayevent_shop,
     OutlayLog,
     outlaylog_shop,
     get_outlayevent_from_json,
@@ -47,11 +48,8 @@ from src.f1_road.road import (
     validate_roadnode,
     default_road_delimiter_if_none,
 )
-from src.f2_bud.bud import (
-    BudUnit,
-    get_from_json as budunit_get_from_json,
-    budunit_shop,
-)
+from src.f2_bud.bud import BudUnit, get_from_json as budunit_get_from_json, budunit_shop
+from src.f2_bud.bud_tool import get_bud_settle_acct_net_dict
 from src.f4_gift.atom import (
     AtomUnit,
     get_from_json as atomunit_get_from_json,
@@ -431,6 +429,11 @@ class HubUnit:
     def outlay_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return os_path_exists(self.outlay_file_path(x_timestamp))
 
+    def get_outlay_file(self, x_timestamp: TimeLinePoint) -> OutlayEvent:
+        if self.outlay_file_exists(x_timestamp):
+            x_json = open_file(self.timepoint_dir(x_timestamp), self.outlay_file_name())
+            return get_outlayevent_from_json(x_json)
+
     def delete_outlay_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.outlay_file_path(x_timestamp))
 
@@ -438,9 +441,8 @@ class HubUnit:
         x_outlaylog = outlaylog_shop(self.owner_id)
         x_dirs = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
         for x_outlay_folder_name in x_dirs.keys():
-            x_timepoint_dir = self.timepoint_dir(x_outlay_folder_name)
-            x_json = open_file(x_timepoint_dir, self.outlay_file_name())
-            x_outlaylog.set_event(get_outlayevent_from_json(x_json))
+            x_outlayevent = self.get_outlay_file(x_outlay_folder_name)
+            x_outlaylog.set_event(x_outlayevent)
         return x_outlaylog
 
     def budpoint_file_name(self) -> str:
@@ -467,8 +469,20 @@ class HubUnit:
     def budpoint_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return os_path_exists(self.budpoint_file_path(x_timestamp))
 
+    def get_budpoint_file(self, x_timestamp: TimeLinePoint) -> BudUnit:
+        if self.budpoint_file_exists(x_timestamp):
+            timepoint_dir = self.timepoint_dir(x_timestamp)
+            file_content = open_file(timepoint_dir, self.budpoint_file_name())
+            return budunit_get_from_json(file_content)
+
     def delete_budpoint_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_timestamp))
+
+    def save_budpoint_file(self, x_timestamp: TimeLinePoint, x_budpoint: BudUnit):
+        self._save_valid_budpoint_file(x_timestamp, x_budpoint)
+        x_net_outlays = get_bud_settle_acct_net_dict(x_budpoint)
+        x_outlayevent = outlayevent_shop(x_timestamp, net_outlays=x_net_outlays)
+        self._save_valid_outlay_file(x_outlayevent)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:

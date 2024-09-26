@@ -2,6 +2,7 @@ from src.f5_listen.hubunit import hubunit_shop
 from src.f5_listen.examples.example_listen_buds import (
     get_budunit_with_4_levels,
     get_budunit_irrational_example,
+    get_budunit_3_acct,
 )
 from src.f5_listen.examples.example_listen_outlays import (
     get_outlayevent_55_example,
@@ -86,7 +87,7 @@ def test_HubUnit_save_valid_outlay_file_RaisesError(env_dir_setup_cleanup):
     assert str(excinfo.value) == exception_text
 
 
-def test_HubUnit_outlay_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_HubUnit_outlay_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
@@ -99,6 +100,19 @@ def test_HubUnit_outlay_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
     # THEN
     assert yao_hubunit.outlay_file_exists(t55_timestamp)
+
+
+def test_HubUnit_get_outlay_file_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
+    t55_outlay = get_outlayevent_55_example()
+    t55_timestamp = t55_outlay.timestamp
+    yao_hubunit._save_valid_outlay_file(t55_outlay)
+    assert yao_hubunit.outlay_file_exists(t55_timestamp)
+
+    # WHEN / THEN
+    assert yao_hubunit.get_outlay_file(t55_timestamp) == t55_outlay
 
 
 def test_HubUnit_delete_outlay_file_DeletesFile(env_dir_setup_cleanup):
@@ -193,7 +207,7 @@ def test_HubUnit_save_valid_budpoint_file_RaisesError(env_dir_setup_cleanup):
     assert str(excinfo.value) == exception_text
 
 
-def test_HubUnit_budpoint_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_HubUnit_budpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
@@ -206,6 +220,22 @@ def test_HubUnit_budpoint_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
     # THEN
     assert yao_hubunit.budpoint_file_exists(t55_timestamp)
+
+
+def test_HubUnit_get_budpoint_file_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
+    t55_timestamp = 55
+    t55_budpoint = get_budunit_with_4_levels()
+    yao_hubunit._save_valid_budpoint_file(t55_timestamp, t55_budpoint)
+    assert yao_hubunit.budpoint_file_exists(t55_timestamp)
+
+    # WHEN
+    file_budpoint = yao_hubunit.get_budpoint_file(t55_timestamp)
+
+    # THEN
+    assert file_budpoint.get_dict() == t55_budpoint.get_dict()
 
 
 def test_HubUnit_delete_budpoint_file_DeletesFile(env_dir_setup_cleanup):
@@ -222,3 +252,26 @@ def test_HubUnit_delete_budpoint_file_DeletesFile(env_dir_setup_cleanup):
 
     # THEN
     assert yao_hubunit.budpoint_file_exists(t55_timestamp) is False
+
+
+def test_HubUnit_save_budpoint_file_Sets_outlay_file(env_dir_setup_cleanup):
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
+    t55_budpoint = get_budunit_3_acct()
+    t55_timestamp = 55
+    assert yao_hubunit.budpoint_file_exists(t55_timestamp) is False
+    assert yao_hubunit.outlay_file_exists(t55_timestamp) is False
+
+    # WHEN
+    yao_hubunit.save_budpoint_file(t55_timestamp, t55_budpoint)
+
+    # THEN
+    assert yao_hubunit.budpoint_file_exists(t55_timestamp)
+    assert yao_hubunit.outlay_file_exists(t55_timestamp)
+    t55_outlay = yao_hubunit.get_outlay_file(t55_timestamp)
+    assert t55_outlay.timestamp == t55_timestamp
+    assert t55_outlay._magnitude == 283333333
+    assert t55_outlay.get_net_outlay("Sue") == 77380952
+    assert t55_outlay.get_net_outlay("Yao") == -283333333
+    assert t55_outlay.get_net_outlay("Zia") == 205952381
