@@ -1,3 +1,4 @@
+from src.f1_road.finance import default_fund_pool
 from src.f5_listen.hubunit import hubunit_shop
 from src.f5_listen.examples.example_listen_buds import (
     get_budunit_with_4_levels,
@@ -271,6 +272,7 @@ def test_HubUnit_save_budpoint_file_Sets_outlay_file(env_dir_setup_cleanup):
     assert yao_hubunit.outlay_file_exists(t55_timestamp)
     t55_outlay = yao_hubunit.get_outlay_file(t55_timestamp)
     assert t55_outlay.timestamp == t55_timestamp
+    assert t55_outlay.purview == default_fund_pool()
     assert t55_outlay._magnitude == 283333333
     assert t55_outlay.get_net_outlay("Sue") == 77380952
     assert t55_outlay.get_net_outlay("Yao") == -283333333
