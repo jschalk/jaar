@@ -91,6 +91,10 @@ class _save_valid_budpoint_Exception(Exception):
     pass
 
 
+class calc_timepoint_outlays_Exception(Exception):
+    pass
+
+
 def get_keep_dutys_dir(x_keep_dir: str) -> str:
     return f_path(x_keep_dir, dutys_str())
 
@@ -423,7 +427,7 @@ class HubUnit:
             self.timepoint_dir(x_outlay.timestamp),
             self.outlay_file_name(),
             x_outlay.get_json(),
-            replace=False,
+            replace=True,
         )
 
     def outlay_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
@@ -463,7 +467,7 @@ class HubUnit:
             self.timepoint_dir(x_timestamp),
             self.budpoint_file_name(),
             x_budpoint.get_json(),
-            replace=False,
+            replace=True,
         )
 
     def budpoint_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
@@ -478,10 +482,19 @@ class HubUnit:
     def delete_budpoint_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_timestamp))
 
-    def save_budpoint_file(self, x_timestamp: TimeLinePoint, x_budpoint: BudUnit):
+    def calc_timepoint_outlays(self, x_timestamp: TimeLinePoint):
+        if self.budpoint_file_exists(x_timestamp) is False:
+            exception_str = f"Cannot calculate timepoint {x_timestamp} outlays without saved BudPoint file"
+            raise calc_timepoint_outlays_Exception(exception_str)
+        x_budpoint = self.get_budpoint_file(x_timestamp)
+        if self.outlay_file_exists(x_timestamp):
+            x_outlayevent = self.get_outlay_file(x_timestamp)
+            x_budpoint.set_fund_pool(x_outlayevent.purview)
+        else:
+            x_outlayevent = outlayevent_shop(x_timestamp)
+        x_net_outlays = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_outlayevent._net_outlays = x_net_outlays
         self._save_valid_budpoint_file(x_timestamp, x_budpoint)
-        x_net_outlays = get_bud_settle_acct_net_dict(x_budpoint)
-        x_outlayevent = outlayevent_shop(x_timestamp, net_outlays=x_net_outlays)
         self._save_valid_outlay_file(x_outlayevent)
 
     def keep_dir(self) -> str:

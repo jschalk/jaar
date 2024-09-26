@@ -8,6 +8,7 @@ from src.f5_listen.examples.example_listen_buds import (
 from src.f5_listen.examples.example_listen_outlays import (
     get_outlayevent_55_example,
     get_outlayevent_66_example,
+    get_outlayevent_88_example,
     get_outlayevent_invalid_example,
 )
 from src.f5_listen.examples.listen_env import (
@@ -255,17 +256,19 @@ def test_HubUnit_delete_budpoint_file_DeletesFile(env_dir_setup_cleanup):
     assert yao_hubunit.budpoint_file_exists(t55_timestamp) is False
 
 
-def test_HubUnit_save_budpoint_file_Sets_outlay_file(env_dir_setup_cleanup):
+def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario0(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
-    t55_budpoint = get_budunit_3_acct()
     t55_timestamp = 55
-    assert yao_hubunit.budpoint_file_exists(t55_timestamp) is False
+    yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
+    yao_hubunit._save_valid_budpoint_file(t55_timestamp, get_budunit_3_acct())
+    assert yao_hubunit.budpoint_file_exists(t55_timestamp)
     assert yao_hubunit.outlay_file_exists(t55_timestamp) is False
 
     # WHEN
-    yao_hubunit.save_budpoint_file(t55_timestamp, t55_budpoint)
+    yao_hubunit.calc_timepoint_outlays(t55_timestamp)
 
     # THEN
     assert yao_hubunit.budpoint_file_exists(t55_timestamp)
@@ -277,3 +280,57 @@ def test_HubUnit_save_budpoint_file_Sets_outlay_file(env_dir_setup_cleanup):
     assert t55_outlay.get_net_outlay("Sue") == 77380952
     assert t55_outlay.get_net_outlay("Yao") == -283333333
     assert t55_outlay.get_net_outlay("Zia") == 205952381
+
+
+def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario1(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    yao_str = "Yao"
+    t88_outlay = get_outlayevent_88_example()
+    t88_timestamp = t88_outlay.timestamp
+    yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
+    yao_hubunit._save_valid_budpoint_file(t88_timestamp, get_budunit_3_acct())
+    yao_hubunit._save_valid_outlay_file(t88_outlay)
+    assert yao_hubunit.budpoint_file_exists(t88_timestamp)
+    assert yao_hubunit.outlay_file_exists(t88_timestamp)
+    before_t88_outlay = yao_hubunit.get_outlay_file(t88_timestamp)
+    assert before_t88_outlay.timestamp == t88_timestamp
+    assert before_t88_outlay.purview == 800
+    assert before_t88_outlay._magnitude == 0
+    assert not before_t88_outlay.get_net_outlay("Sue")
+    assert not before_t88_outlay.get_net_outlay("Yao")
+    assert not before_t88_outlay.get_net_outlay("Zia")
+
+    # WHEN
+    yao_hubunit.calc_timepoint_outlays(t88_timestamp)
+
+    # THEN
+    assert yao_hubunit.budpoint_file_exists(t88_timestamp)
+    yao_budpoint = yao_hubunit.get_budpoint_file(t88_timestamp)
+    assert yao_hubunit.outlay_file_exists(t88_timestamp)
+    after_t88_outlay = yao_hubunit.get_outlay_file(t88_timestamp)
+    assert after_t88_outlay.timestamp == t88_timestamp
+    assert after_t88_outlay.purview == 800
+    assert after_t88_outlay.purview == yao_budpoint.fund_pool
+    assert after_t88_outlay.get_net_outlay("Sue") == 62
+    assert after_t88_outlay.get_net_outlay("Yao") == -227
+    assert after_t88_outlay.get_net_outlay("Zia") == 165
+    assert after_t88_outlay._magnitude == 227
+
+
+def test_HubUnit_calc_timepoint_outlays_RaisesException(env_dir_setup_cleanup):
+    # ESTABLISH
+    yao_str = "Yao"
+    t88_outlay = get_outlayevent_88_example()
+    t88_timestamp = t88_outlay.timestamp
+    yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
+    yao_hubunit._save_valid_outlay_file(t88_outlay)
+    assert yao_hubunit.budpoint_file_exists(t88_timestamp) is False
+    assert yao_hubunit.outlay_file_exists(t88_timestamp)
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        yao_hubunit.calc_timepoint_outlays(t88_timestamp)
+    exception_str = f"Cannot calculate timepoint {t88_timestamp} outlays without saved BudPoint file"
+    assert str(excinfo.value) == exception_str

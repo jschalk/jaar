@@ -14,6 +14,13 @@ def get_outlayevent_66_example() -> OutlayEvent:
     return t66_outlayevent
 
 
+def get_outlayevent_88_example() -> OutlayEvent:
+    t88_timestamp = 88
+    t88_outlayevent = outlayevent_shop(t88_timestamp)
+    t88_outlayevent.purview = 800
+    return t88_outlayevent
+
+
 def get_outlayevent_invalid_example() -> OutlayEvent:
     t55_timestamp = 55
     t55_outlayevent = outlayevent_shop(t55_timestamp)
