@@ -256,7 +256,7 @@ def test_HubUnit_delete_budpoint_file_DeletesFile(env_dir_setup_cleanup):
     assert yao_hubunit.budpoint_file_exists(t55_timestamp) is False
 
 
-def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario0(
+def test_HubUnit_calc_timepoint_outlay_Sets_outlay_file_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -268,7 +268,7 @@ def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario0(
     assert yao_hubunit.outlay_file_exists(t55_timestamp) is False
 
     # WHEN
-    yao_hubunit.calc_timepoint_outlays(t55_timestamp)
+    yao_hubunit.calc_timepoint_outlay(t55_timestamp)
 
     # THEN
     assert yao_hubunit.budpoint_file_exists(t55_timestamp)
@@ -282,7 +282,7 @@ def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario0(
     assert t55_outlay.get_net_outlay("Zia") == 205952381
 
 
-def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario1(
+def test_HubUnit_calc_timepoint_outlay_Sets_outlay_file_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -303,7 +303,7 @@ def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario1(
     assert not before_t88_outlay.get_net_outlay("Zia")
 
     # WHEN
-    yao_hubunit.calc_timepoint_outlays(t88_timestamp)
+    yao_hubunit.calc_timepoint_outlay(t88_timestamp)
 
     # THEN
     assert yao_hubunit.budpoint_file_exists(t88_timestamp)
@@ -319,7 +319,7 @@ def test_HubUnit_calc_timepoint_outlays_Sets_outlay_file_Scenario1(
     assert after_t88_outlay._magnitude == 227
 
 
-def test_HubUnit_calc_timepoint_outlays_RaisesException(env_dir_setup_cleanup):
+def test_HubUnit_calc_timepoint_outlay_RaisesException(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     t88_outlay = get_outlayevent_88_example()
@@ -331,6 +331,6 @@ def test_HubUnit_calc_timepoint_outlays_RaisesException(env_dir_setup_cleanup):
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        yao_hubunit.calc_timepoint_outlays(t88_timestamp)
+        yao_hubunit.calc_timepoint_outlay(t88_timestamp)
     exception_str = f"Cannot calculate timepoint {t88_timestamp} outlays without saved BudPoint file"
     assert str(excinfo.value) == exception_str

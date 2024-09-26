@@ -91,7 +91,7 @@ class _save_valid_budpoint_Exception(Exception):
     pass
 
 
-class calc_timepoint_outlays_Exception(Exception):
+class calc_timepoint_outlay_Exception(Exception):
     pass
 
 
@@ -482,10 +482,10 @@ class HubUnit:
     def delete_budpoint_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_timestamp))
 
-    def calc_timepoint_outlays(self, x_timestamp: TimeLinePoint):
+    def calc_timepoint_outlay(self, x_timestamp: TimeLinePoint):
         if self.budpoint_file_exists(x_timestamp) is False:
             exception_str = f"Cannot calculate timepoint {x_timestamp} outlays without saved BudPoint file"
-            raise calc_timepoint_outlays_Exception(exception_str)
+            raise calc_timepoint_outlay_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_timestamp)
         if self.outlay_file_exists(x_timestamp):
             x_outlayevent = self.get_outlay_file(x_timestamp)
