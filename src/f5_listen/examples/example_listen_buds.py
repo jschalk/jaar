@@ -139,3 +139,46 @@ def get_fund_explanation_bud() -> BudUnit:
     # sue_bud.set_idea(idea_grandgrandkid_usa_texas, usa_road)
     # sue_bud.set_idea(idea_grandgrandkid_usa_oregon, usa_road)
     return sue_bud
+
+
+def get_budunit_irrational_example() -> BudUnit:
+    # this bud has no conclusive agenda because 2 pledge ideas are in contradiction
+    # "egg first" is true when "chicken first" is false
+    # "chicken first" is true when "egg first" is true
+    # Step 0: if chicken._active is True, egg._active is set to False
+    # Step 1: if egg._active is False, chicken._active is set to False
+    # Step 2: if chicken._active is False, egg._active is set to True
+    # Step 3: if egg._active is True, chicken._active is set to True
+    # Step 4: back to step 0.
+    # after hatter_bud.settle_bud these should be true:
+    # 1. hatter_bud._irrational is True
+    # 2. hatter_bud._tree_traverse_count = hatter_bud.max_tree_traverse
+
+    hatter_bud = budunit_shop("Mad Hatter")
+    hatter_bud.set_max_tree_traverse(3)
+
+    egg_str = "egg first"
+    egg_road = hatter_bud.make_l1_road(egg_str)
+    hatter_bud.add_idea(egg_road)
+
+    chicken_str = "chicken first"
+    chicken_road = hatter_bud.make_l1_road(chicken_str)
+    hatter_bud.add_idea(chicken_road)
+
+    # set egg pledge is True when chicken first is False
+    hatter_bud.edit_idea_attr(
+        road=egg_road,
+        pledge=True,
+        reason_base=chicken_road,
+        reason_base_idea_active_requisite=True,
+    )
+
+    # set chick pledge is True when egg first is False
+    hatter_bud.edit_idea_attr(
+        road=chicken_road,
+        pledge=True,
+        reason_base=egg_road,
+        reason_base_idea_active_requisite=False,
+    )
+
+    return hatter_bud

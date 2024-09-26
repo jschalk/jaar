@@ -140,7 +140,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.atoms_dir() == f"{x_hubunit.owner_dir()}/atoms"
     assert x_hubunit.voice_dir() == f"{x_hubunit.owner_dir()}/voice"
     assert x_hubunit.final_dir() == f"{x_hubunit.owner_dir()}/final"
-    assert x_hubunit.outlays_dir() == f"{x_hubunit.owner_dir()}/outlays"
+    assert x_hubunit.timeline_dir() == f"{x_hubunit.owner_dir()}/timeline"
     assert x_hubunit.gifts_dir() == f"{x_hubunit.owner_dir()}/{get_gifts_folder()}"
     assert x_hubunit.voice_file_name() == f"{sue_str}.json"
     x_voice_file_path = f"{x_hubunit.voice_dir()}/{x_hubunit.voice_file_name()}"

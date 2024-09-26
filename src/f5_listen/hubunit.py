@@ -89,6 +89,10 @@ class _keep_roadMissingException(Exception):
     pass
 
 
+class _save_valid_budpoint_Exception(Exception):
+    pass
+
+
 def get_keep_dutys_dir(x_keep_dir: str) -> str:
     return f_path(x_keep_dir, dutys_str())
 
@@ -138,8 +142,8 @@ class HubUnit:
     def final_dir(self) -> str:
         return f"{self.owner_dir()}/final"
 
-    def outlays_dir(self) -> str:
-        return f"{self.owner_dir()}/outlays"
+    def timeline_dir(self) -> str:
+        return f"{self.owner_dir()}/timeline"
 
     def voice_file_name(self) -> str:
         return get_json_filename(self.owner_id)
@@ -406,19 +410,19 @@ class HubUnit:
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
 
-    def outlay_dir(self, x_timestamp: TimeLinePoint) -> str:
-        return f"{self.outlays_dir()}/{x_timestamp}"
+    def timepoint_dir(self, x_timestamp: TimeLinePoint) -> str:
+        return f"{self.timeline_dir()}/{x_timestamp}"
 
     def outlay_file_name(self) -> str:
         return "outlay.json"
 
     def outlay_file_path(self, x_timestamp: TimeLinePoint) -> str:
-        return f_path(self.outlay_dir(x_timestamp), self.outlay_file_name())
+        return f_path(self.timepoint_dir(x_timestamp), self.outlay_file_name())
 
     def _save_valid_outlay_file(self, x_outlay: OutlayEvent):
         x_outlay.calc_magnitude()
         save_file(
-            self.outlay_dir(x_outlay.timestamp),
+            self.timepoint_dir(x_outlay.timestamp),
             self.outlay_file_name(),
             x_outlay.get_json(),
             replace=False,
@@ -432,12 +436,39 @@ class HubUnit:
 
     def get_outlaylog(self) -> OutlayLog:
         x_outlaylog = outlaylog_shop(self.owner_id)
-        x_dirs = dir_files(self.outlays_dir(), include_dirs=True, include_files=False)
+        x_dirs = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
         for x_outlay_folder_name in x_dirs.keys():
-            x_outlay_dir = self.outlay_dir(x_outlay_folder_name)
-            x_json = open_file(x_outlay_dir, self.outlay_file_name())
+            x_timepoint_dir = self.timepoint_dir(x_outlay_folder_name)
+            x_json = open_file(x_timepoint_dir, self.outlay_file_name())
             x_outlaylog.set_event(get_outlayevent_from_json(x_json))
         return x_outlaylog
+
+    def budpoint_file_name(self) -> str:
+        return "budpoint.json"
+
+    def budpoint_file_path(self, x_timestamp: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_timestamp), self.budpoint_file_name())
+
+    def _save_valid_budpoint_file(
+        self, x_timestamp: TimeLinePoint, x_budpoint: BudUnit
+    ):
+        x_budpoint.settle_bud()
+        if x_budpoint._rational is False:
+            raise _save_valid_budpoint_Exception(
+                "BudPoint could not be saved BudUnit._rational is False"
+            )
+        save_file(
+            self.timepoint_dir(x_timestamp),
+            self.budpoint_file_name(),
+            x_budpoint.get_json(),
+            replace=False,
+        )
+
+    def budpoint_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
+        return os_path_exists(self.budpoint_file_path(x_timestamp))
+
+    def delete_budpoint_file(self, x_timestamp: TimeLinePoint):
+        delete_dir(self.budpoint_file_path(x_timestamp))
 
     def keep_dir(self) -> str:
         if self.keep_road is None:
