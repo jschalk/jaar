@@ -1,4 +1,4 @@
-from src.f1_road.finance_outlay import outlaylog_shop
+from src.f1_road.finance_tran import outlaylog_shop
 from src.f7_fiscal.fiscal import fiscalunit_shop
 from src.f7_fiscal.examples.fiscal_env import get_test_fiscals_dir
 

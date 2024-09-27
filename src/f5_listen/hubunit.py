@@ -31,7 +31,7 @@ from src.f1_road.finance import (
     default_money_magnitude_if_none,
     TimeLinePoint,
 )
-from src.f1_road.finance_outlay import (
+from src.f1_road.finance_tran import (
     OutlayEvent,
     outlayevent_shop,
     OutlayLog,

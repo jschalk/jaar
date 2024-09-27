@@ -1,4 +1,4 @@
-from src.f1_road.finance_outlay import outlayevent_shop, OutlayEvent
+from src.f1_road.finance_tran import outlayevent_shop, OutlayEvent
 
 
 def get_outlayevent_55_example() -> OutlayEvent:

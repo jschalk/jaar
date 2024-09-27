@@ -16,7 +16,7 @@ from src.f1_road.finance import (
 from src.f1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.f2_bud.bud import BudUnit
 from src.f3_chrono.chrono import TimeLineUnit, timelineunit_shop
-from src.f1_road.finance_outlay import (
+from src.f1_road.finance_tran import (
     OutlayEvent,
     OutlayLog,
     outlaylog_shop,
