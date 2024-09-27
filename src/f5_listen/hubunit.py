@@ -443,11 +443,15 @@ class HubUnit:
 
     def get_outlaylog(self) -> OutlayLog:
         x_outlaylog = outlaylog_shop(self.owner_id)
-        x_dirs = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
-        for x_outlay_folder_name in x_dirs.keys():
+        x_dirs = self._get_timepoint_dirs()
+        for x_outlay_folder_name in x_dirs:
             x_outlayevent = self.get_outlay_file(x_outlay_folder_name)
             x_outlaylog.set_event(x_outlayevent)
         return x_outlaylog
+
+    def _get_timepoint_dirs(self) -> list[str]:
+        x_dict = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
+        return list(x_dict.keys())
 
     def budpoint_file_name(self) -> str:
         return "budpoint.json"
@@ -496,6 +500,10 @@ class HubUnit:
         x_outlayevent._net_outlays = x_net_outlays
         self._save_valid_budpoint_file(x_timestamp, x_budpoint)
         self._save_valid_outlay_file(x_outlayevent)
+
+    def calc_timepoint_outlays(self):
+        for x_timepoint in self._get_timepoint_dirs():
+            self.calc_timepoint_outlay(x_timepoint)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:
