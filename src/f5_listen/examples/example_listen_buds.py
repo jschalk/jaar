@@ -182,3 +182,22 @@ def get_budunit_irrational_example() -> BudUnit:
     )
 
     return hatter_bud
+
+
+def get_budunit_3_acct() -> BudUnit:
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    zia_str = "Zia"
+    sue_credit_belief = 5
+    yao_credit_belief = 2
+    zia_credit_belief = 33
+    sue_debtit_belief = 1
+    yao_debtit_belief = 7
+    zia_debtit_belief = 13
+    bob_bud = budunit_shop(bob_str)
+    bob_bud.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
+    bob_bud.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
+    bob_bud.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+
+    return bob_bud

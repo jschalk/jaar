@@ -33,6 +33,7 @@ from src.f1_road.finance import (
 )
 from src.f1_road.finance_outlay import (
     OutlayEvent,
+    outlayevent_shop,
     OutlayLog,
     outlaylog_shop,
     get_outlayevent_from_json,
@@ -47,11 +48,8 @@ from src.f1_road.road import (
     validate_roadnode,
     default_road_delimiter_if_none,
 )
-from src.f2_bud.bud import (
-    BudUnit,
-    get_from_json as budunit_get_from_json,
-    budunit_shop,
-)
+from src.f2_bud.bud import BudUnit, get_from_json as budunit_get_from_json, budunit_shop
+from src.f2_bud.bud_tool import get_bud_settle_acct_net_dict
 from src.f4_gift.atom import (
     AtomUnit,
     get_from_json as atomunit_get_from_json,
@@ -90,6 +88,10 @@ class _keep_roadMissingException(Exception):
 
 
 class _save_valid_budpoint_Exception(Exception):
+    pass
+
+
+class calc_timepoint_outlay_Exception(Exception):
     pass
 
 
@@ -425,23 +427,31 @@ class HubUnit:
             self.timepoint_dir(x_outlay.timestamp),
             self.outlay_file_name(),
             x_outlay.get_json(),
-            replace=False,
+            replace=True,
         )
 
     def outlay_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return os_path_exists(self.outlay_file_path(x_timestamp))
+
+    def get_outlay_file(self, x_timestamp: TimeLinePoint) -> OutlayEvent:
+        if self.outlay_file_exists(x_timestamp):
+            x_json = open_file(self.timepoint_dir(x_timestamp), self.outlay_file_name())
+            return get_outlayevent_from_json(x_json)
 
     def delete_outlay_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.outlay_file_path(x_timestamp))
 
     def get_outlaylog(self) -> OutlayLog:
         x_outlaylog = outlaylog_shop(self.owner_id)
-        x_dirs = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
-        for x_outlay_folder_name in x_dirs.keys():
-            x_timepoint_dir = self.timepoint_dir(x_outlay_folder_name)
-            x_json = open_file(x_timepoint_dir, self.outlay_file_name())
-            x_outlaylog.set_event(get_outlayevent_from_json(x_json))
+        x_dirs = self._get_timepoint_dirs()
+        for x_outlay_folder_name in x_dirs:
+            x_outlayevent = self.get_outlay_file(x_outlay_folder_name)
+            x_outlaylog.set_event(x_outlayevent)
         return x_outlaylog
+
+    def _get_timepoint_dirs(self) -> list[str]:
+        x_dict = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
+        return list(x_dict.keys())
 
     def budpoint_file_name(self) -> str:
         return "budpoint.json"
@@ -461,14 +471,39 @@ class HubUnit:
             self.timepoint_dir(x_timestamp),
             self.budpoint_file_name(),
             x_budpoint.get_json(),
-            replace=False,
+            replace=True,
         )
 
     def budpoint_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return os_path_exists(self.budpoint_file_path(x_timestamp))
 
+    def get_budpoint_file(self, x_timestamp: TimeLinePoint) -> BudUnit:
+        if self.budpoint_file_exists(x_timestamp):
+            timepoint_dir = self.timepoint_dir(x_timestamp)
+            file_content = open_file(timepoint_dir, self.budpoint_file_name())
+            return budunit_get_from_json(file_content)
+
     def delete_budpoint_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_timestamp))
+
+    def calc_timepoint_outlay(self, x_timestamp: TimeLinePoint):
+        if self.budpoint_file_exists(x_timestamp) is False:
+            exception_str = f"Cannot calculate timepoint {x_timestamp} outlays without saved BudPoint file"
+            raise calc_timepoint_outlay_Exception(exception_str)
+        x_budpoint = self.get_budpoint_file(x_timestamp)
+        if self.outlay_file_exists(x_timestamp):
+            x_outlayevent = self.get_outlay_file(x_timestamp)
+            x_budpoint.set_fund_pool(x_outlayevent.purview)
+        else:
+            x_outlayevent = outlayevent_shop(x_timestamp)
+        x_net_outlays = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_outlayevent._net_outlays = x_net_outlays
+        self._save_valid_budpoint_file(x_timestamp, x_budpoint)
+        self._save_valid_outlay_file(x_outlayevent)
+
+    def calc_timepoint_outlays(self):
+        for x_timepoint in self._get_timepoint_dirs():
+            self.calc_timepoint_outlay(x_timepoint)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:
