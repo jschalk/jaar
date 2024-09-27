@@ -237,9 +237,8 @@ class BudUnit:
             to_evaluate_hx_dict[x_road] = "to_evaluate"
         evaluated_roads = set()
 
-        # tree_metrics = self.get_tree_metrics()
         # while roads_to_evaluate != [] and count_x <= tree_metrics.node_count:
-        # transited because count_x might be wrong thing to measure
+        # Why count_x? because count_x might be wrong thing to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
             x_road = to_evaluate_list.pop()
@@ -1060,7 +1059,7 @@ class BudUnit:
                 r_idea._gogo_calc = parent_idea._gogo_calc
                 r_idea._stop_calc = parent_idea._stop_calc
                 self._range_inheritors[r_idea.get_road()] = math_idea.get_road()
-            r_idea._transform_gogo_calc_stop_calc()
+            r_idea._mold_gogo_calc_stop_calc()
 
             single_range_idea_list.extend(iter(r_idea._kids.values()))
 

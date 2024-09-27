@@ -62,7 +62,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_give_force_take_fo
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+    x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -89,7 +89,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_give_force():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
+    x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -116,7 +116,7 @@ def test_create_legible_list_ReturnsObj_idea_awardlink_UPDATE_take_force():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
+    x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

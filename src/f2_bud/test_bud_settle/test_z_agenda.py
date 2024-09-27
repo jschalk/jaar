@@ -436,7 +436,6 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     #     f"       {segr_obj.fact_open_full=}         {segr_obj.fact_nigh_full=} \tdifference:{segr_obj.fact_nigh_full-segr_obj.fact_open_full}"
     # )
 
-    # # print(f"  {segr_obj.premise_open_trans=}  {segr_obj.premise_nigh_trans=}")
     # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
     assert get_tasks_count(pledge_idea_list) == 64
 

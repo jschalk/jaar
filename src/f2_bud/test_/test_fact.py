@@ -183,7 +183,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     assert ced_factheir.fopen == 10
 
     # WHEN
-    ced_factheir.transform(factunit=ced_factunit)
+    ced_factheir.mold(factunit=ced_factunit)
 
     # THEN
     assert ced_factheir.fopen == 20
@@ -194,7 +194,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     assert ced_factheir.fopen == 10
 
     # WHEN
-    ced_factheir.transform(factunit=ced_factunit)
+    ced_factheir.mold(factunit=ced_factunit)
     assert ced_factheir.fopen == 30
 
     # ESTABLISH
@@ -203,7 +203,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     assert ced_factheir.fopen == 10
 
     # WHEN
-    ced_factheir.transform(factunit=ced_factunit)
+    ced_factheir.mold(factunit=ced_factunit)
 
     # THEN
     assert ced_factheir.fopen == 10
@@ -214,7 +214,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     assert ced_factheir.fopen == 10
 
     # WHEN
-    ced_factheir.transform(factunit=ced_factunit)
+    ced_factheir.mold(factunit=ced_factunit)
 
     # THEN
     assert ced_factheir.fopen == 10

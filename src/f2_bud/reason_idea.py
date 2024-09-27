@@ -101,7 +101,7 @@ def factunit_shop(
 
 @dataclass
 class FactHeir(FactCore):
-    def transform(self, factunit: FactUnit):
+    def mold(self, factunit: FactUnit):
         x_bool = self.fopen and factunit.fopen and self.fnigh
         if x_bool and self.fopen <= factunit.fopen and self.fnigh >= factunit.fopen:
             self.fopen = factunit.fopen
@@ -191,7 +191,7 @@ class PremiseStatusFinder:
         return bool(
             (
                 self.get_active()
-                and get_collasped_factrange_active(
+                and get_collasped_fact_range_active(
                     self.premise_open,
                     self.premise_nigh,
                     self.premise_divisor,
@@ -242,7 +242,7 @@ def get_range_less_than_divisor_active(bo, bn, po, pn):
     return x_bool
 
 
-def get_collasped_factrange_active(
+def get_collasped_fact_range_active(
     premise_open: float,
     premise_nigh: float,
     premise_divisor: float,

@@ -293,13 +293,13 @@ class IdeaUnit:
             )
         x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.fopen, x_fact.fnigh)
         self.delete_factunit_if_past(x_factheir)
-        x_factheir = self.apply_factunit_transformations(x_factheir)
+        x_factheir = self.apply_factunit_moldations(x_factheir)
         self._factheirs[x_factheir.base] = x_factheir
 
-    def apply_factunit_transformations(self, factheir: FactHeir) -> FactHeir:
+    def apply_factunit_moldations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self.factunits.values():
             if factunit.base == factheir.base:
-                factheir.transform(factunit)
+                factheir.mold(factunit)
         return factheir
 
     def delete_factunit_if_past(self, factheir: FactHeir):
@@ -621,9 +621,9 @@ class IdeaUnit:
             base=idea_attr.reason_del_premise_base,
             premise=idea_attr.reason_del_premise_need,
         )
-        self._set_addin_to_zero_if_any_transformations_exist()
+        self._set_addin_to_zero_if_any_moldations_exist()
 
-    def _set_addin_to_zero_if_any_transformations_exist(self):
+    def _set_addin_to_zero_if_any_moldations_exist(self):
         if (
             self.begin is not None
             and self.close is not None
@@ -637,7 +637,7 @@ class IdeaUnit:
         self._gogo_calc = None
         self._stop_calc = None
 
-    def _transform_gogo_calc_stop_calc(self):
+    def _mold_gogo_calc_stop_calc(self):
         r_idea_numor = get_1_if_None(self.numor)
         r_idea_denom = get_1_if_None(self.denom)
         r_idea_addin = get_0_if_None(self.addin)
