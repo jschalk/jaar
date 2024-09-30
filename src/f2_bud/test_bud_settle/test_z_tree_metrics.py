@@ -103,7 +103,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaRoadUnit():
             yao_bud._fiscal_id,
             "ACME",
             "ACME Employee Responsiblities",
-            "Know Abuse Prevention and Reporting guildlines",
+            "Know Abuse Deterrence and Reporting guildlines",
             "Accomplish Fall 2021 training",
         ]
     )

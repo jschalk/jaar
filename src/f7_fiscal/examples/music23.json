@@ -59,11 +59,11 @@
     "bud_history": {
         "Bob": {
             "owner_id": "Bob",
-            "events": {"702": {"timestamp": 702, "money_magnitude": 33}}
+            "episodes": {"702": {"timestamp": 702, "money_magnitude": 33}}
         },
         "Sue": {
             "owner_id": "Sue",
-            "events": {
+            "episodes": {
                 "4": {"timestamp": 4, "money_magnitude": 55},
                 "7": {"timestamp": 7, "money_magnitude": 66}
             }

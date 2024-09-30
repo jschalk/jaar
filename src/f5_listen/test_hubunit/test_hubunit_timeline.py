@@ -6,10 +6,10 @@ from src.f5_listen.examples.example_listen_buds import (
     get_budunit_3_acct,
 )
 from src.f5_listen.examples.example_listen_outlays import (
-    get_outlayevent_55_example,
-    get_outlayevent_66_example,
-    get_outlayevent_88_example,
-    get_outlayevent_invalid_example,
+    get_outlayepisode_55_example,
+    get_outlayepisode_66_example,
+    get_outlayepisode_88_example,
+    get_outlayepisode_invalid_example,
 )
 from src.f5_listen.examples.listen_env import (
     get_listen_temp_env_dir as fiscals_dir,
@@ -65,7 +65,7 @@ def test_HubUnit_save_valid_outlay_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
-    t55_outlay = get_outlayevent_55_example()
+    t55_outlay = get_outlayepisode_55_example()
     t55_timestamp = t55_outlay.timestamp
     assert os_path_exists(yao_hubunit.outlay_file_path(t55_timestamp)) is False
 
@@ -80,7 +80,7 @@ def test_HubUnit_save_valid_outlay_file_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
-    t_outlay = get_outlayevent_invalid_example()
+    t_outlay = get_outlayepisode_invalid_example()
 
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
@@ -93,7 +93,7 @@ def test_HubUnit_outlay_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
-    t55_outlay = get_outlayevent_55_example()
+    t55_outlay = get_outlayepisode_55_example()
     t55_timestamp = t55_outlay.timestamp
     assert yao_hubunit.outlay_file_exists(t55_timestamp) is False
 
@@ -108,7 +108,7 @@ def test_HubUnit_get_outlay_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
-    t55_outlay = get_outlayevent_55_example()
+    t55_outlay = get_outlayepisode_55_example()
     t55_timestamp = t55_outlay.timestamp
     yao_hubunit._save_valid_outlay_file(t55_outlay)
     assert yao_hubunit.outlay_file_exists(t55_timestamp)
@@ -121,7 +121,7 @@ def test_HubUnit_delete_outlay_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
-    t55_outlay = get_outlayevent_55_example()
+    t55_outlay = get_outlayepisode_55_example()
     t55_timestamp = t55_outlay.timestamp
     yao_hubunit._save_valid_outlay_file(t55_outlay)
     assert yao_hubunit.outlay_file_exists(t55_timestamp)
@@ -137,19 +137,19 @@ def test_HubUnit_get_outlaylog_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
-    t55_outlay = get_outlayevent_55_example()
-    t66_outlay = get_outlayevent_66_example()
+    t55_outlay = get_outlayepisode_55_example()
+    t66_outlay = get_outlayepisode_66_example()
     t55_timestamp = t55_outlay.timestamp
     t66_timestamp = t66_outlay.timestamp
     yao_hubunit._save_valid_outlay_file(t55_outlay)
-    assert yao_hubunit.get_outlaylog().event_exists(t55_timestamp)
-    assert yao_hubunit.get_outlaylog().event_exists(t66_timestamp) is False
+    assert yao_hubunit.get_outlaylog().episode_exists(t55_timestamp)
+    assert yao_hubunit.get_outlaylog().episode_exists(t66_timestamp) is False
     yao_hubunit._save_valid_outlay_file(t66_outlay)
 
     # WHEN / THEN
-    assert yao_hubunit.get_outlaylog().event_exists(t55_timestamp)
-    assert yao_hubunit.get_outlaylog().event_exists(t66_timestamp)
-    assert yao_hubunit.get_outlaylog().get_event(t66_timestamp).get_net_outlay("Sue")
+    assert yao_hubunit.get_outlaylog().episode_exists(t55_timestamp)
+    assert yao_hubunit.get_outlaylog().episode_exists(t66_timestamp)
+    assert yao_hubunit.get_outlaylog().get_episode(t66_timestamp).get_net_outlay("Sue")
 
 
 def test_HubUnit_budpoint_file_name_ReturnsObj():
@@ -287,7 +287,7 @@ def test_HubUnit_calc_timepoint_outlay_Sets_outlay_file_Scenario1(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    t88_outlay = get_outlayevent_88_example()
+    t88_outlay = get_outlayepisode_88_example()
     t88_timestamp = t88_outlay.timestamp
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
     yao_hubunit._save_valid_budpoint_file(t88_timestamp, get_budunit_3_acct())
@@ -322,7 +322,7 @@ def test_HubUnit_calc_timepoint_outlay_Sets_outlay_file_Scenario1(
 def test_HubUnit_calc_timepoint_outlay_RaisesException(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    t88_outlay = get_outlayevent_88_example()
+    t88_outlay = get_outlayepisode_88_example()
     t88_timestamp = t88_outlay.timestamp
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
     yao_hubunit._save_valid_outlay_file(t88_outlay)
@@ -341,8 +341,8 @@ def test_HubUnit_calc_timepoint_outlays_Sets_outlay_files_Scenario0(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    t66_outlay = get_outlayevent_66_example()
-    t88_outlay = get_outlayevent_88_example()
+    t66_outlay = get_outlayepisode_66_example()
+    t88_outlay = get_outlayepisode_88_example()
     t66_timestamp = t66_outlay.timestamp
     t88_timestamp = t88_outlay.timestamp
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)

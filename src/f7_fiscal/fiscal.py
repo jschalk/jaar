@@ -17,7 +17,7 @@ from src.f1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, 
 from src.f2_bud.bud import BudUnit
 from src.f3_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f1_road.finance_tran import (
-    OutlayEvent,
+    OutlayEpisode,
     OutlayLog,
     outlaylog_shop,
     get_outlaylog_from_dict,
@@ -242,7 +242,7 @@ class FiscalUnit:
         if self.outlaylog_exists(x_owner_id) is False:
             self.set_outlaylog(outlaylog_shop(x_owner_id))
         x_outlaylog = self.get_outlaylog(x_owner_id)
-        x_outlaylog.add_event(x_timestamp, x_money_magnitude)
+        x_outlaylog.add_episode(x_timestamp, x_money_magnitude)
 
     def get_dict(self) -> dict:
         return {
@@ -261,8 +261,8 @@ class FiscalUnit:
 
     def _get_bud_history_dict(self):
         return {
-            x_event.owner_id: x_event.get_dict()
-            for x_event in self.bud_history.values()
+            x_episode.owner_id: x_episode.get_dict()
+            for x_episode in self.bud_history.values()
         }
 
 

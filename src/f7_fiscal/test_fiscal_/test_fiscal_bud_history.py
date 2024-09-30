@@ -89,9 +89,9 @@ def test_FiscalUnit_add_outlaylog_SetsAttr():
     # THEN
     assert music_fiscal.bud_history != {}
     sue_outlaylog = outlaylog_shop(sue_str)
-    sue_outlaylog.add_event(sue_x4_timestamp, sue_x4_magnitude)
-    sue_outlaylog.add_event(sue_x7_timestamp, sue_x7_magnitude)
+    sue_outlaylog.add_episode(sue_x4_timestamp, sue_x4_magnitude)
+    sue_outlaylog.add_episode(sue_x7_timestamp, sue_x7_magnitude)
     bob_outlaylog = outlaylog_shop(bob_str)
-    bob_outlaylog.add_event(bob_x0_timestamp, bob_x0_magnitude)
+    bob_outlaylog.add_episode(bob_x0_timestamp, bob_x0_magnitude)
     assert music_fiscal.get_outlaylog(sue_str) == sue_outlaylog
     assert music_fiscal.get_outlaylog(bob_str) == bob_outlaylog

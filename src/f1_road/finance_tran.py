@@ -14,7 +14,7 @@ class calc_magnitudeException(Exception):
 
 
 @dataclass
-class OutlayEvent:
+class OutlayEpisode:
     timestamp: TimeLinePoint = None
     purview: FundNum = None
     _magnitude: FundNum = None
@@ -54,16 +54,16 @@ class OutlayEvent:
         return get_json_from_dict(self.get_dict())
 
 
-def outlayevent_shop(
+def outlayepisode_shop(
     x_timestamp: TimeLinePoint,
     x_purview: FundNum = None,
     net_outlays: dict[AcctID, FundNum] = None,
     x_magnitude: FundNum = None,
-) -> OutlayEvent:
+) -> OutlayEpisode:
     if x_purview is None:
         x_purview = default_fund_pool()
 
-    return OutlayEvent(
+    return OutlayEpisode(
         timestamp=x_timestamp,
         purview=x_purview,
         _net_outlays=get_empty_dict_if_none(net_outlays),
@@ -74,73 +74,74 @@ def outlayevent_shop(
 @dataclass
 class OutlayLog:
     owner_id: OwnerID = None
-    events: dict[TimeLinePoint, OutlayEvent] = None
-    _sum_outlayevent_purview: FundNum = None
+    episodes: dict[TimeLinePoint, OutlayEpisode] = None
+    _sum_outlayepisode_purview: FundNum = None
     _sum_acct_outlays: int = None
     _timestamp_min: TimeLinePoint = None
     _timestamp_max: TimeLinePoint = None
 
-    def set_event(self, x_event: OutlayEvent):
-        self.events[x_event.timestamp] = x_event
+    def set_episode(self, x_episode: OutlayEpisode):
+        self.episodes[x_episode.timestamp] = x_episode
 
-    def add_event(self, x_timestamp: TimeLinePoint, x_purview: FundNum):
-        self.set_event(outlayevent_shop(x_timestamp, x_purview))
+    def add_episode(self, x_timestamp: TimeLinePoint, x_purview: FundNum):
+        self.set_episode(outlayepisode_shop(x_timestamp, x_purview))
 
-    def event_exists(self, x_timestamp: TimeLinePoint) -> bool:
-        return self.events.get(x_timestamp) != None
+    def episode_exists(self, x_timestamp: TimeLinePoint) -> bool:
+        return self.episodes.get(x_timestamp) != None
 
-    def get_event(self, x_timestamp: TimeLinePoint) -> OutlayEvent:
-        return self.events.get(x_timestamp)
+    def get_episode(self, x_timestamp: TimeLinePoint) -> OutlayEpisode:
+        return self.episodes.get(x_timestamp)
 
-    def del_event(self, x_timestamp: TimeLinePoint):
-        self.events.pop(x_timestamp)
+    def del_episode(self, x_timestamp: TimeLinePoint):
+        self.episodes.pop(x_timestamp)
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_id, x_event.timestamp, x_event.purview]
-            for x_event in self.events.values()
+            [self.owner_id, x_episode.timestamp, x_episode.purview]
+            for x_episode in self.episodes.values()
         ]
 
     def get_headers(self) -> list:
         return ["owner_id", "timestamp", "purview"]
 
     def get_dict(self) -> dict:
-        return {"owner_id": self.owner_id, "events": self._get_events_dict()}
+        return {"owner_id": self.owner_id, "episodes": self._get_episodes_dict()}
 
-    def _get_events_dict(self) -> dict:
+    def _get_episodes_dict(self) -> dict:
         return {
-            x_event.timestamp: x_event.get_dict() for x_event in self.events.values()
+            x_episode.timestamp: x_episode.get_dict()
+            for x_episode in self.episodes.values()
         }
 
 
 def outlaylog_shop(owner_id: OwnerID) -> OutlayLog:
-    return OutlayLog(owner_id=owner_id, events={}, _sum_acct_outlays={})
+    return OutlayLog(owner_id=owner_id, episodes={}, _sum_acct_outlays={})
 
 
-def get_outlayevent_from_dict(x_dict: dict) -> OutlayEvent:
+def get_outlayepisode_from_dict(x_dict: dict) -> OutlayEpisode:
     x_timestamp = x_dict.get("timestamp")
     x_purview = x_dict.get("purview")
     x_net_outlays = x_dict.get("net_outlays")
     x_magnitude = x_dict.get("magnitude")
-    return outlayevent_shop(x_timestamp, x_purview, x_net_outlays, x_magnitude)
+    return outlayepisode_shop(x_timestamp, x_purview, x_net_outlays, x_magnitude)
 
 
-def get_outlayevent_from_json(x_json: str) -> OutlayEvent:
-    return get_outlayevent_from_dict(get_dict_from_json(x_json))
+def get_outlayepisode_from_json(x_json: str) -> OutlayEpisode:
+    return get_outlayepisode_from_dict(get_dict_from_json(x_json))
 
 
 def get_outlaylog_from_dict(x_dict: dict) -> OutlayLog:
     x_owner_id = x_dict.get("owner_id")
     x_outlaylog = outlaylog_shop(x_owner_id)
-    x_outlaylog.events = get_events_from_dict(x_dict.get("events"))
+    x_outlaylog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
     return x_outlaylog
 
 
-def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint, OutlayEvent]:
+def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, OutlayEpisode]:
     x_dict = {}
-    for x_event_dict in events_dict.values():
-        x_outlay_event = get_outlayevent_from_dict(x_event_dict)
-        x_dict[x_outlay_event.timestamp] = x_outlay_event
+    for x_episode_dict in episodes_dict.values():
+        x_outlay_episode = get_outlayepisode_from_dict(x_episode_dict)
+        x_dict[x_outlay_episode.timestamp] = x_outlay_episode
     return x_dict
 
 
