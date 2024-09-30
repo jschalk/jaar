@@ -3,6 +3,7 @@ from src.f0_instrument.python_tool import (
     get_0_if_None,
     get_json_from_dict,
     get_dict_from_json,
+    place_obj_in_dict,
 )
 from src.f1_road.finance import FundNum, TimeLinePoint, default_fund_pool
 from src.f1_road.road import AcctID, OwnerID, FiscalID
@@ -150,7 +151,37 @@ class TranBook:
     fiscal_id: FiscalID = None
     tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
     tender_desc: str = None
-    _accts_net: dict[AcctID, FundNum] = None
+    _accts_net: dict[OwnerID, dict[AcctID, FundNum]] = None
+
+    def set_tranlog(
+        self,
+        x_owner_id: OwnerID,
+        x_acct_id: AcctID,
+        x_timestamp: TimeLinePoint,
+        x_amount: FundNum,
+    ):
+        x_keylist = [x_owner_id, x_acct_id, x_timestamp]
+        place_obj_in_dict(self.tranlogs, x_keylist, x_amount)
+
+    def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
+        owners_accts_net_dict = {}
+        for owner_id, owner_dict in self.tranlogs.items():
+            for acct_id, acct_dict in owner_dict.items():
+                if owners_accts_net_dict.get(owner_id) is None:
+                    owners_accts_net_dict[owner_id] = {}
+                owner_net_dict = owners_accts_net_dict.get(owner_id)
+                owner_net_dict[acct_id] = sum(acct_dict.values())
+        return owners_accts_net_dict
+
+    def get_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
+        accts_net_dict = {}
+        for owner_dict in self.tranlogs.values():
+            for acct_id, acct_dict in owner_dict.items():
+                if accts_net_dict.get(acct_id) is None:
+                    accts_net_dict[acct_id] = sum(acct_dict.values())
+                else:
+                    accts_net_dict[acct_id] += sum(acct_dict.values())
+        return accts_net_dict
 
     def get_dict(
         self,

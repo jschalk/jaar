@@ -57,6 +57,180 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
     assert x_tranbook._accts_net == {}
 
 
+def test_TranBook_set_tranlog_SetsAttr():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    assert x_tranbook.tranlogs == {}
+
+    # WHEN
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_timestamp = 5505
+    t55_yao_amount = -55
+    x_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+
+    # THEN
+    assert x_tranbook.tranlogs != {}
+    assert x_tranbook.tranlogs == {sue_str: {yao_str: {t55_timestamp: t55_yao_amount}}}
+
+    # WHEN
+    bob_str = "Bob"
+    t55_bob_amount = 600
+    x_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+
+    # THEN
+    assert x_tranbook.tranlogs != {}
+    assert x_tranbook.tranlogs == {
+        sue_str: {
+            yao_str: {t55_timestamp: t55_yao_amount},
+            bob_str: {t55_timestamp: t55_bob_amount},
+        }
+    }
+
+    # WHEN
+    t66_timestamp = 6606
+    t66_yao_amount = -66
+    x_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+
+    # THEN
+    assert x_tranbook.tranlogs != {}
+    assert x_tranbook.tranlogs == {
+        sue_str: {
+            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
+            bob_str: {t55_timestamp: t55_bob_amount},
+        }
+    }
+
+    # WHEN
+    t77_timestamp = 7707
+    t77_yao_amount = -77
+    x_tranbook.set_tranlog(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+
+    # THEN
+    print(f"{x_tranbook.tranlogs=}")
+    assert x_tranbook.tranlogs != {}
+    assert x_tranbook.tranlogs == {
+        sue_str: {
+            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
+            bob_str: {t55_timestamp: t55_bob_amount},
+        },
+        yao_str: {yao_str: {t77_timestamp: t77_yao_amount}},
+    }
+
+
+def test_TranBook_get_owners_accts_net_SetsAttr_Scenario0():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_timestamp = 5505
+    t55_bob_amount = 600
+    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    assert music23_tranbook.tranlogs == {
+        sue_str: {bob_str: {t55_timestamp: t55_bob_amount}}
+    }
+
+    # WHEN
+    music23_accts_net = music23_tranbook.get_owners_accts_net()
+
+    # THEN
+    assert music23_accts_net
+    assert music23_accts_net == {sue_str: {bob_str: t55_bob_amount}}
+
+
+def test_TranBook_get_owners_accts_net_SetsAttr_Scenario1():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    t55_timestamp = 5505
+    t55_yao_amount = -55
+    t55_bob_amount = 600
+    t66_timestamp = 6606
+    t66_yao_amount = -66
+    music23_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    music23_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    assert music23_tranbook.tranlogs == {
+        sue_str: {
+            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
+            bob_str: {t55_timestamp: t55_bob_amount},
+        }
+    }
+
+    # WHEN
+    music23_accts_net = music23_tranbook.get_owners_accts_net()
+
+    # THEN
+    assert music23_accts_net
+    assert music23_accts_net == {
+        sue_str: {yao_str: t55_yao_amount + t66_yao_amount, bob_str: t55_bob_amount}
+    }
+
+
+def test_TranBook_get_accts_net_SetsAttr_Scenario0():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_timestamp = 5505
+    t55_bob_amount = 600
+    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    assert music23_tranbook.tranlogs == {
+        sue_str: {bob_str: {t55_timestamp: t55_bob_amount}}
+    }
+
+    # WHEN
+    music23_accts_net = music23_tranbook.get_accts_net()
+
+    # THEN
+    assert music23_accts_net
+    assert music23_accts_net == {bob_str: t55_bob_amount}
+
+
+def test_TranBook_get_accts_net_SetsAttr_Scenario1():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    t55_timestamp = 5505
+    t55_yao_amount = -55
+    t55_bob_amount = 600
+    t66_timestamp = 6606
+    t66_yao_amount = -66
+    t77_timestamp = 7707
+    t77_yao_amount = -77
+    music23_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    music23_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+
+    music23_tranbook.set_tranlog(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    assert music23_tranbook.tranlogs == {
+        sue_str: {
+            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
+            bob_str: {t55_timestamp: t55_bob_amount},
+        },
+        yao_str: {yao_str: {t77_timestamp: t77_yao_amount}},
+    }
+
+    # WHEN
+    music23_accts_net = music23_tranbook.get_accts_net()
+
+    # THEN
+    assert music23_accts_net
+    assert music23_accts_net == {
+        yao_str: t55_yao_amount + t66_yao_amount + t77_yao_amount,
+        bob_str: t55_bob_amount,
+    }
+
+
 # def test_TranBook_get_dict_ReturnsObj():
 #     # ESTABLISH
 #     music23_str = "music23"
