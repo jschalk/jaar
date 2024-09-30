@@ -5,7 +5,7 @@ from src.f0_instrument.python_tool import (
     get_dict_from_json,
 )
 from src.f1_road.finance import FundNum, TimeLinePoint, default_fund_pool
-from src.f1_road.road import AcctID, OwnerID
+from src.f1_road.road import AcctID, OwnerID, FiscalID
 from dataclasses import dataclass
 
 
@@ -74,7 +74,7 @@ def outlayevent_shop(
 @dataclass
 class OutlayLog:
     owner_id: OwnerID = None
-    events: dict[TimeLinePoint:OutlayEvent] = None
+    events: dict[TimeLinePoint, OutlayEvent] = None
     _sum_outlayevent_purview: FundNum = None
     _sum_acct_outlays: int = None
     _timestamp_min: TimeLinePoint = None
@@ -136,9 +136,43 @@ def get_outlaylog_from_dict(x_dict: dict) -> OutlayLog:
     return x_outlaylog
 
 
-def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint:OutlayEvent]:
+def get_events_from_dict(events_dict: dict) -> dict[TimeLinePoint, OutlayEvent]:
     x_dict = {}
     for x_event_dict in events_dict.values():
         x_outlay_event = get_outlayevent_from_dict(x_event_dict)
         x_dict[x_outlay_event.timestamp] = x_outlay_event
     return x_dict
+
+
+@dataclass
+class TranBook:
+    fiscal_id: FiscalID = None
+    tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
+    tender_desc: str = None
+    _accts_net: dict[AcctID, FundNum] = None
+
+    def get_dict(
+        self,
+    ) -> dict[FiscalID, dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]]]:
+        return {"fiscal_id": self.fiscal_id}
+
+
+def tranbook_shop(
+    x_fiscal_id: FiscalID,
+    x_tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
+    x_tender_desc: str = None,
+):
+    return TranBook(
+        fiscal_id=x_fiscal_id,
+        tranlogs=get_empty_dict_if_none(x_tranlogs),
+        tender_desc=x_tender_desc,
+        _accts_net={},
+    )
+
+
+def get_tranbook_from_dict():
+    pass
+
+
+def get_tranbook_from_json():
+    pass
