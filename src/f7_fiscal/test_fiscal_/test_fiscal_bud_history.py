@@ -12,7 +12,7 @@ def test_FiscalUnit_set_outlaylog_SetsAttr():
     # WHEN
     sue_str = "Sue"
     sue_outlaylog = outlaylog_shop(sue_str)
-    music_fiscal.set_outlayevent(sue_outlaylog)
+    music_fiscal.set_outlaylog(sue_outlaylog)
 
     # THEN
     assert music_fiscal.bud_history != {}
@@ -28,7 +28,7 @@ def test_FiscalUnit_outlaylog_exists_ReturnsObj():
 
     # WHEN
     sue_outlaylog = outlaylog_shop(sue_str)
-    music_fiscal.set_outlayevent(sue_outlaylog)
+    music_fiscal.set_outlaylog(sue_outlaylog)
 
     # THEN
     assert music_fiscal.outlaylog_exists(sue_str)
@@ -40,7 +40,7 @@ def test_FiscalUnit_get_outlaylog_ReturnsObj():
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
     sue_str = "Sue"
     sue_outlaylog = outlaylog_shop(sue_str)
-    music_fiscal.set_outlayevent(sue_outlaylog)
+    music_fiscal.set_outlaylog(sue_outlaylog)
     assert music_fiscal.outlaylog_exists(sue_str)
 
     # WHEN
@@ -57,7 +57,7 @@ def test_FiscalUnit_del_outlaylog_SetsAttr():
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
     sue_str = "Sue"
     sue_outlaylog = outlaylog_shop(sue_str)
-    music_fiscal.set_outlayevent(sue_outlaylog)
+    music_fiscal.set_outlaylog(sue_outlaylog)
     assert music_fiscal.outlaylog_exists(sue_str)
 
     # WHEN
@@ -67,7 +67,7 @@ def test_FiscalUnit_del_outlaylog_SetsAttr():
     assert music_fiscal.outlaylog_exists(sue_str) is False
 
 
-def test_FiscalUnit_add_outlayevent_SetsAttr():
+def test_FiscalUnit_add_outlaylog_SetsAttr():
     # ESTABLISH
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
@@ -82,9 +82,9 @@ def test_FiscalUnit_add_outlayevent_SetsAttr():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlayevent(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
 
     # THEN
     assert music_fiscal.bud_history != {}

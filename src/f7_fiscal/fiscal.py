@@ -224,7 +224,7 @@ class FiscalUnit:
         return self._get_hubunit(owner_id).get_final_bud()
 
     # bud_history
-    def set_outlayevent(self, x_outlaylog: OutlayLog):
+    def set_outlaylog(self, x_outlaylog: OutlayLog):
         self.bud_history[x_outlaylog.owner_id] = x_outlaylog
 
     def outlaylog_exists(self, x_owner_id: OwnerID) -> bool:
@@ -236,11 +236,11 @@ class FiscalUnit:
     def del_outlaylog(self, x_owner_id: OwnerID):
         self.bud_history.pop(x_owner_id)
 
-    def add_outlayevent(
+    def add_outlaylog(
         self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
     ):
         if self.outlaylog_exists(x_owner_id) is False:
-            self.set_outlayevent(outlaylog_shop(x_owner_id))
+            self.set_outlaylog(outlaylog_shop(x_owner_id))
         x_outlaylog = self.get_outlaylog(x_owner_id)
         x_outlaylog.add_event(x_timestamp, x_money_magnitude)
 
