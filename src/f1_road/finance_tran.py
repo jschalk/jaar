@@ -4,6 +4,7 @@ from src.f0_instrument.python_tool import (
     get_json_from_dict,
     get_dict_from_json,
     place_obj_in_dict,
+    create_csv,
 )
 from src.f1_road.finance import FundNum, TimeLinePoint, default_fund_pool
 from src.f1_road.road import AcctID, OwnerID, FiscalID
@@ -173,20 +174,31 @@ class TranBook:
                 owner_net_dict[acct_id] = sum(acct_dict.values())
         return owners_accts_net_dict
 
-    def get_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
+    def get_accts_net_dict(self) -> dict[AcctID, FundNum]:
         accts_net_dict = {}
         for owner_dict in self.tranlogs.values():
-            for acct_id, acct_dict in owner_dict.items():
+            for acct_id, acct_dict in sorted(owner_dict.items()):
                 if accts_net_dict.get(acct_id) is None:
                     accts_net_dict[acct_id] = sum(acct_dict.values())
                 else:
                     accts_net_dict[acct_id] += sum(acct_dict.values())
         return accts_net_dict
 
-    def get_dict(
-        self,
-    ) -> dict[FiscalID, dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]]]:
-        return {"fiscal_id": self.fiscal_id}
+    def _get_accts_headers(self) -> list:
+        return ["acct_id", "net_amount"]
+
+    def _get_accts_net_array(self) -> list[list]:
+        x_items = self.get_accts_net_dict().items()
+        return [[acct_id, net_amount] for acct_id, net_amount in x_items]
+
+    def get_accts_net_csv(self) -> str:
+        print(f"{self._get_accts_net_array()=}")
+        return create_csv(self._get_accts_headers(), self._get_accts_net_array())
+
+    # def get_dict(
+    #     self,
+    # ) -> dict[FiscalID, dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]]]:
+    #     return {"fiscal_id": self.fiscal_id}
 
 
 def tranbook_shop(
