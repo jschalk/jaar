@@ -1,4 +1,4 @@
-from src.f0_instrument.python_tool import x_is_json
+from src.f0_instrument.dict_tool import x_is_json
 from src.f1_road.jaar_config import init_gift_id, get_gifts_folder
 from src.f1_road.road import get_default_fiscal_id_roadnode as root_label
 from src.f4_gift.atom_config import fiscal_id_str, owner_id_str

@@ -1,4 +1,4 @@
-from src.f0_instrument.python_tool import get_empty_dict_if_none, get_0_if_None
+from src.f0_instrument.dict_tool import get_empty_dict_if_none, get_0_if_None
 from src.f1_road.road import GroupID
 from src.f2_bud.reason_idea import ReasonUnit, RoadUnit
 from src.f2_bud.group import AwardLink

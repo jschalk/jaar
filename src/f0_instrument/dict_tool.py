@@ -200,3 +200,13 @@ def create_csv(x_headers: list[str], x2d_array: list[list]) -> str:
         new_csv_writer.writerow(row)
     x_csv = si.getvalue()
     return x_csv.replace("\r", "")
+
+
+def is_sunny(x_dict: dict) -> bool:
+    keys_with_dict_values = set()
+    x_levels_values = {}
+    for x_key, x_value in x_dict.items():
+        if str(type(x_value)) == "<class 'dict'>":
+            keys_with_dict_values.add(x_key)
+        print(f"{type(x_value)=}")
+    return len(keys_with_dict_values) <= 1

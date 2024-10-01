@@ -5,7 +5,7 @@ from src.f2_bud.acct import (
     acctunit_get_from_dict,
     acctunits_get_from_dict,
 )
-from src.f0_instrument.python_tool import x_is_json, get_json_from_dict
+from src.f0_instrument.dict_tool import x_is_json, get_json_from_dict
 from pytest import raises as pytest_raises
 
 

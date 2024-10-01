@@ -1,4 +1,4 @@
-from src.f0_instrument.python_tool import (
+from src.f0_instrument.dict_tool import (
     get_1_if_None,
     add_dict_if_missing,
     place_obj_in_dict,
@@ -10,6 +10,7 @@ from src.f0_instrument.python_tool import (
     create_l2nested_csv_dict,
     get_positional_dict,
     add_headers_to_csv,
+    is_sunny,
 )
 from pytest import raises as pytest_raises
 
@@ -444,3 +445,25 @@ Yao,41,37
         == f"""{swim_text},{six_text},{seven_text}
 {headerless_csv}"""
     )
+
+
+# def test_get_values_by_level_loop_ReturnsObj():
+#     assert 1 == 2
+
+
+def test_is_sunny_ReturnsObj_Scenario0():
+    # ESTABLISH / WHEN / THEN
+    assert is_sunny({})
+    assert is_sunny({"Sue": {}})
+    assert is_sunny({"Sue": {}, "Bob": {}}) is False
+    assert is_sunny({"swim": 155, "Sue": {}, "Bob": {}}) is False
+    assert is_sunny({"swim": 155, "Sue": {}})
+
+
+# def test_is_sunny_ReturnsObj_Scenario1():
+#     # ESTABLISH / WHEN / THEN
+#     assert is_sunny({"casa": {"clean": "Bob"}})
+#     assert is_sunny({"casa": {"clean": {"Bob": 13}}})
+#     assert is_sunny({"casa": {"clean": {"Bob": 13}, "swim": {}}}) is False
+#     assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": {"clean": 14}})
+#     assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": {"swim": 14}}) is False

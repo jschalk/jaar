@@ -8,7 +8,7 @@ from src.f0_instrument.file import (
     set_dir,
     get_integer_filenames,
 )
-from src.f0_instrument.python_tool import get_empty_set_if_none
+from src.f0_instrument.dict_tool import get_empty_set_if_none
 from src.f0_instrument.db_tool import sqlite_connection
 from src.f1_road.jaar_config import (
     dutys_str,
