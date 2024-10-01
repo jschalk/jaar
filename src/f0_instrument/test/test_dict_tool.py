@@ -11,7 +11,10 @@ from src.f0_instrument.dict_tool import (
     get_positional_dict,
     add_headers_to_csv,
     get_nested_dict_keys_by_level,
+    get_nested_keys_by_level,
+    get_nested_dict_key_by_level,
     is_sunny,
+    create_2d_array_from_sunny_dict,
 )
 from pytest import raises as pytest_raises
 
@@ -121,6 +124,7 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
 
 
 def test_get_nested_value_RaisesReadableException():
+    # ESTABLISH
     y_dict = {}
     sports_str = "sports"
     run_str = "running"
@@ -448,6 +452,33 @@ Yao,41,37
     )
 
 
+def test_is_sunny_ReturnsObj():
+    # ESTABLISH
+    casa_str = "casa"
+    sue_str = "Sue"
+
+    # WHEN / THEN
+    assert is_sunny({})
+    assert is_sunny({sue_str: {}})
+    assert is_sunny({sue_str: {}, "Bob": {}}) is False
+    assert is_sunny({"swim": 155, sue_str: {}, "Bob": {}}) is False
+    assert is_sunny({"swim": 155, sue_str: {}})
+    assert is_sunny({casa_str: {"clean": "Bob"}})
+    assert is_sunny({casa_str: {"clean": {"Bob": 13}}})
+    assert is_sunny({casa_str: {"clean": {"Bob": 13}, "swim": {}}}) is False
+    assert is_sunny({casa_str: {"clean": {"Bob": 13}}, "school": 14})
+    assert is_sunny({casa_str: {"clean": {"Bob": 3}}, "school": {"clean": 1}}) is False
+    assert is_sunny({casa_str: {"school": {sue_str: {1: {}}}}})
+    assert is_sunny({casa_str: {"clean": {"Bob": 13}, "school": {"swim": 14}}}) is False
+
+    # No duplicate keys paired to dictionarys
+    assert is_sunny({casa_str: {"school": {casa_str: {1: {}}}}}) is False
+
+    # No duplicate keys off levels
+    assert is_sunny({casa_str: {"school": {casa_str: {1: {}}}}}) is False
+    assert is_sunny({casa_str: {"school": {casa_str: 1}}}) is False
+
+
 def test_get_nested_dict_keys_by_level_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
@@ -467,16 +498,90 @@ def test_get_nested_dict_keys_by_level_ReturnsObj():
     }
 
 
-def test_is_sunny_ReturnsObj_Scenario0():
+def test_get_nested_keys_by_level_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    yao_str = "yao"
+    swim_str = "Swim"
+
+    #  WHEN / THEN
+    assert get_nested_keys_by_level({}) == {}
+    assert get_nested_keys_by_level({sue_str: 1}) == {0: {sue_str}}
+    assert get_nested_keys_by_level({sue_str: {}}) == {0: {sue_str}}
+    x2_dict = {sue_str: {}, bob_str: {}}
+    assert get_nested_keys_by_level(x2_dict) == {0: {sue_str, bob_str}}
+    x3_dict = {swim_str: 155, sue_str: {}, bob_str: {}}
+    assert get_nested_keys_by_level(x3_dict) == {0: {swim_str, sue_str, bob_str}}
+    x4_dict = {swim_str: 155, sue_str: {"zia": {}}, bob_str: {yao_str: {swim_str: 1}}}
+    assert get_nested_keys_by_level(x4_dict) == {
+        0: {sue_str, bob_str, swim_str},
+        1: {"zia", yao_str},
+        2: {swim_str},
+    }
+
+
+def test_get_nested_dict_key_by_level_RaisesError_is_sunny_IsFalse():
     # ESTABLISH / WHEN / THEN
-    assert is_sunny({})
-    assert is_sunny({"Sue": {}})
-    assert is_sunny({"Sue": {}, "Bob": {}}) is False
-    assert is_sunny({"swim": 155, "Sue": {}, "Bob": {}}) is False
-    assert is_sunny({"swim": 155, "Sue": {}})
-    assert is_sunny({"casa": {"clean": "Bob"}})
-    assert is_sunny({"casa": {"clean": {"Bob": 13}}})
-    assert is_sunny({"casa": {"clean": {"Bob": 13}, "swim": {}}}) is False
-    assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": 14})
-    assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": {"clean": 14}}) is False
-    assert is_sunny({"casa": {"clean": {"Bob": 13}, "school": {"swim": 14}}}) is False
+    with pytest_raises(Exception) as excinfo:
+        get_nested_dict_key_by_level({"Sue": {}, "Bob": {}})
+    exception_text = "dictionary is not sunny."
+    assert str(excinfo.value) == exception_text
+
+
+def test_get_nested_dict_key_by_level_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+
+    #  WHEN / THEN
+    assert get_nested_dict_key_by_level({}) == []
+    assert get_nested_dict_key_by_level({"Sue": {}}) == [sue_str]
+    x4_dict = {"swim": 155, sue_str: {bob_str: {"yao": {}}}}
+    assert get_nested_dict_key_by_level(x4_dict) == [sue_str, bob_str, "yao"]
+
+
+def test_create_2d_array_from_sunny_dict_RaisesError_is_sunny_IsFalse():
+    # ESTABLISH / WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        create_2d_array_from_sunny_dict({"Sue": {}, "Bob": {}})
+    exception_text = "dictionary is not sunny."
+    assert str(excinfo.value) == exception_text
+
+
+# def test_create_2d_array_from_sunny_dict_ReturnsObj_Scenario0_Simple():
+#     # ESTABLISH
+#     assert create_2d_array_from_sunny_dict({}) == [[]]
+#     assert create_2d_array_from_sunny_dict({"Sue": {}}) == [["Sue"], [None]]
+#     x0_2d_array = [["swim", "Sue"], [155, None]]
+#     assert create_2d_array_from_sunny_dict({"swim": 155, "Sue": {}}) == x0_2d_array
+#     assert create_2d_array_from_sunny_dict({"casa": {"clean": "Bob"}})
+#     assert create_2d_array_from_sunny_dict({"casa": {"clean": {"Bob": 13}}})
+#     assert create_2d_array_from_sunny_dict(
+#         {"casa": {"clean": {"Bob": 13}}, "school": 14}
+#     )
+
+
+# def test_create_2d_array_from_sunny_dict_ReturnsObj_Scenario1():
+#     # ESTABLISH
+#     swim_text = "swim"
+#     six_text = "six"
+#     seven_text = "seven"
+#     headers = [swim_text, six_text, seven_text]
+#     headerless_csv = """Bob,13,29
+# Sue,11,23
+# Yao,41,37
+# Zia,41,37
+# Yao,41,37
+# """
+
+#     # WHEN
+#     gen_csv = add_headers_to_csv(headers, headerless_csv)
+
+#     # THEN
+#     assert gen_csv
+#     assert (
+#         gen_csv
+#         == f"""{swim_text},{six_text},{seven_text}
+# {headerless_csv}"""
+#     )

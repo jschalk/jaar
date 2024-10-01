@@ -66,6 +66,10 @@ class NestedValueException(Exception):
     pass
 
 
+class is_sunny_Exception(Exception):
+    pass
+
+
 def get_nested_value(
     x_dict: dict, x_keylist: list, if_missing_return_None: bool = False
 ) -> any:
@@ -204,7 +208,23 @@ def create_csv(x_headers: list[str], x2d_array: list[list]) -> str:
 
 
 def get_nested_dict_keys_by_level(x_dict: dict) -> dict[int, set]:
-    values_by_level = {}
+    keys_by_level = {}
+    queue = deque([(x_dict, 0)])  # Store (dictionary, current_level)
+    while queue:
+        current_dict, level = queue.popleft()  # Pop the next item from the queue
+        # Traverse the current dictionary
+        for key, value in current_dict.items():
+            if isinstance(value, dict):
+                # If value is a dictionary, add it to the queue for further processing
+                queue.append((value, level + 1))
+                if level not in keys_by_level:
+                    keys_by_level[level] = set()
+                keys_by_level[level].add(key)
+    return keys_by_level
+
+
+def get_nested_keys_by_level(x_dict: dict) -> dict[int, set]:
+    keys_by_level = {}
     # Queue for traversing the dictionary
     queue = deque([(x_dict, 0)])  # Store (dictionary, current_level)
     while queue:
@@ -214,12 +234,41 @@ def get_nested_dict_keys_by_level(x_dict: dict) -> dict[int, set]:
             if isinstance(value, dict):
                 # If value is a dictionary, add it to the queue for further processing
                 queue.append((value, level + 1))
-                if level not in values_by_level:
-                    values_by_level[level] = set()
-                values_by_level[level].add(key)
-    return values_by_level
+            if level not in keys_by_level:
+                keys_by_level[level] = set()
+            keys_by_level[level].add(key)
+    return keys_by_level
 
 
 def is_sunny(x_dict: dict) -> bool:
+    key_set_by_level = get_nested_dict_keys_by_level(x_dict).values()
+    one_dict_per_level = all(len(x_key_set) <= 1 for x_key_set in key_set_by_level)
+    if not one_dict_per_level:
+        return False
+    prev_keys = set()
+    for x_set in get_nested_keys_by_level(x_dict).values():
+        if prev_keys.intersection(x_set) != set():
+            return False
+        prev_keys = prev_keys.union(x_set)
+    return True
+
+
+def get_nested_dict_key_by_level(x_dict: dict) -> list:
+    if is_sunny(x_dict) is False:
+        raise is_sunny_Exception("dictionary is not sunny.")
     key_set_by_level = get_nested_dict_keys_by_level(x_dict)
-    return all(len(x_key_set) <= 1 for x_key_set in key_set_by_level.values())
+    ordered_keys = sorted(key_set_by_level.keys())
+    return [max(key_set_by_level[key]) for key in ordered_keys]
+
+
+def create_2d_array_from_sunny_dict(x_dict: dict) -> list[list]:
+    dict_key_by_level = get_nested_dict_key_by_level(x_dict)
+    x_rows = []
+    level_count = len(dict_key_by_level)
+    to_eval_dicts = [[x_dict, 0, []]]
+    while to_eval_dicts != []:
+        x_list = to_eval_dicts.pop()
+        if x_list[1] == level_count:
+            pass
+
+    return [dict_key_by_level]
