@@ -2,6 +2,7 @@ from json import loads as json_loads, dumps as json_dumps
 from copy import deepcopy as copy_deepcopy
 from csv import reader as csv_reader, writer as csv_writer
 from io import StringIO as io_StringIO
+from collections import deque
 
 
 def get_empty_dict_if_none(x_dict: dict) -> dict:
@@ -202,11 +203,23 @@ def create_csv(x_headers: list[str], x2d_array: list[list]) -> str:
     return x_csv.replace("\r", "")
 
 
+def get_nested_dict_keys_by_level(x_dict: dict) -> dict[int, set]:
+    values_by_level = {}
+    # Queue for traversing the dictionary
+    queue = deque([(x_dict, 0)])  # Store (dictionary, current_level)
+    while queue:
+        current_dict, level = queue.popleft()  # Pop the next item from the queue
+        # Traverse the current dictionary
+        for key, value in current_dict.items():
+            if isinstance(value, dict):
+                # If value is a dictionary, add it to the queue for further processing
+                queue.append((value, level + 1))
+                if level not in values_by_level:
+                    values_by_level[level] = set()
+                values_by_level[level].add(key)
+    return values_by_level
+
+
 def is_sunny(x_dict: dict) -> bool:
-    keys_with_dict_values = set()
-    x_levels_values = {}
-    for x_key, x_value in x_dict.items():
-        if str(type(x_value)) == "<class 'dict'>":
-            keys_with_dict_values.add(x_key)
-        print(f"{type(x_value)=}")
-    return len(keys_with_dict_values) <= 1
+    key_set_by_level = get_nested_dict_keys_by_level(x_dict)
+    return all(len(x_key_set) <= 1 for x_key_set in key_set_by_level.values())

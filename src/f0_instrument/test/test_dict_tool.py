@@ -10,6 +10,7 @@ from src.f0_instrument.dict_tool import (
     create_l2nested_csv_dict,
     get_positional_dict,
     add_headers_to_csv,
+    get_nested_dict_keys_by_level,
     is_sunny,
 )
 from pytest import raises as pytest_raises
@@ -447,8 +448,23 @@ Yao,41,37
     )
 
 
-# def test_get_values_by_level_loop_ReturnsObj():
-#     assert 1 == 2
+def test_get_nested_dict_keys_by_level_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+
+    #  WHEN / THEN
+    assert get_nested_dict_keys_by_level({}) == {}
+    assert get_nested_dict_keys_by_level({sue_str: {}}) == {0: {sue_str}}
+    x2_dict = {sue_str: {}, bob_str: {}}
+    assert get_nested_dict_keys_by_level(x2_dict) == {0: {sue_str, bob_str}}
+    x3_dict = {"swim": 155, sue_str: {}, bob_str: {}}
+    assert get_nested_dict_keys_by_level(x3_dict) == {0: {sue_str, bob_str}}
+    x4_dict = {"swim": 155, sue_str: {"zia": {}}, bob_str: {"yao": {}}}
+    assert get_nested_dict_keys_by_level(x4_dict) == {
+        0: {sue_str, bob_str},
+        1: {"zia", "yao"},
+    }
 
 
 def test_is_sunny_ReturnsObj_Scenario0():
@@ -458,12 +474,9 @@ def test_is_sunny_ReturnsObj_Scenario0():
     assert is_sunny({"Sue": {}, "Bob": {}}) is False
     assert is_sunny({"swim": 155, "Sue": {}, "Bob": {}}) is False
     assert is_sunny({"swim": 155, "Sue": {}})
-
-
-# def test_is_sunny_ReturnsObj_Scenario1():
-#     # ESTABLISH / WHEN / THEN
-#     assert is_sunny({"casa": {"clean": "Bob"}})
-#     assert is_sunny({"casa": {"clean": {"Bob": 13}}})
-#     assert is_sunny({"casa": {"clean": {"Bob": 13}, "swim": {}}}) is False
-#     assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": {"clean": 14}})
-#     assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": {"swim": 14}}) is False
+    assert is_sunny({"casa": {"clean": "Bob"}})
+    assert is_sunny({"casa": {"clean": {"Bob": 13}}})
+    assert is_sunny({"casa": {"clean": {"Bob": 13}, "swim": {}}}) is False
+    assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": 14})
+    assert is_sunny({"casa": {"clean": {"Bob": 13}}, "school": {"clean": 14}}) is False
+    assert is_sunny({"casa": {"clean": {"Bob": 13}, "school": {"swim": 14}}}) is False
