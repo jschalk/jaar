@@ -13,8 +13,8 @@ from src.f0_instrument.dict_tool import (
     get_nested_dict_keys_by_level,
     get_nested_keys_by_level,
     get_nested_dict_key_by_level,
-    is_sunny,
-    create_2d_array_from_sunny_dict,
+    is_2d_with_unique_keys,
+    create_2d_array_from_2d_with_unique_keys_dict,
 )
 from pytest import raises as pytest_raises
 
@@ -452,31 +452,43 @@ Yao,41,37
     )
 
 
-def test_is_sunny_ReturnsObj():
+def test_is_2d_with_unique_keys_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
     sue_str = "Sue"
 
     # WHEN / THEN
-    assert is_sunny({})
-    assert is_sunny({sue_str: {}})
-    assert is_sunny({sue_str: {}, "Bob": {}}) is False
-    assert is_sunny({"swim": 155, sue_str: {}, "Bob": {}}) is False
-    assert is_sunny({"swim": 155, sue_str: {}})
-    assert is_sunny({casa_str: {"clean": "Bob"}})
-    assert is_sunny({casa_str: {"clean": {"Bob": 13}}})
-    assert is_sunny({casa_str: {"clean": {"Bob": 13}, "swim": {}}}) is False
-    assert is_sunny({casa_str: {"clean": {"Bob": 13}}, "school": 14})
-    assert is_sunny({casa_str: {"clean": {"Bob": 3}}, "school": {"clean": 1}}) is False
-    assert is_sunny({casa_str: {"school": {sue_str: {1: {}}}}})
-    assert is_sunny({casa_str: {"clean": {"Bob": 13}, "school": {"swim": 14}}}) is False
+    assert is_2d_with_unique_keys({})
+    assert is_2d_with_unique_keys({sue_str: {}})
+    assert is_2d_with_unique_keys({sue_str: {}, "Bob": {}}) is False
+    assert is_2d_with_unique_keys({"swim": 155, sue_str: {}, "Bob": {}}) is False
+    assert is_2d_with_unique_keys({"swim": 155, sue_str: {}})
+    assert is_2d_with_unique_keys({casa_str: {"clean": "Bob"}})
+    assert is_2d_with_unique_keys({casa_str: {"clean": {"Bob": 13}}})
+    assert (
+        is_2d_with_unique_keys({casa_str: {"clean": {"Bob": 13}, "swim": {}}}) is False
+    )
+    assert is_2d_with_unique_keys({casa_str: {"clean": {"Bob": 13}}, "school": 14})
+    assert (
+        is_2d_with_unique_keys(
+            {casa_str: {"clean": {"Bob": 3}}, "school": {"clean": 1}}
+        )
+        is False
+    )
+    assert is_2d_with_unique_keys({casa_str: {"school": {sue_str: {1: {}}}}})
+    assert (
+        is_2d_with_unique_keys(
+            {casa_str: {"clean": {"Bob": 13}, "school": {"swim": 14}}}
+        )
+        is False
+    )
 
     # No duplicate keys paired to dictionarys
-    assert is_sunny({casa_str: {"school": {casa_str: {1: {}}}}}) is False
+    assert is_2d_with_unique_keys({casa_str: {"school": {casa_str: {1: {}}}}}) is False
 
     # No duplicate keys off levels
-    assert is_sunny({casa_str: {"school": {casa_str: {1: {}}}}}) is False
-    assert is_sunny({casa_str: {"school": {casa_str: 1}}}) is False
+    assert is_2d_with_unique_keys({casa_str: {"school": {casa_str: {1: {}}}}}) is False
+    assert is_2d_with_unique_keys({casa_str: {"school": {casa_str: 1}}}) is False
 
 
 def test_get_nested_dict_keys_by_level_ReturnsObj():
@@ -521,11 +533,11 @@ def test_get_nested_keys_by_level_ReturnsObj():
     }
 
 
-def test_get_nested_dict_key_by_level_RaisesError_is_sunny_IsFalse():
+def test_get_nested_dict_key_by_level_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         get_nested_dict_key_by_level({"Sue": {}, "Bob": {}})
-    exception_text = "dictionary is not sunny."
+    exception_text = "dictionary is not 2d_with_unique_keys."
     assert str(excinfo.value) == exception_text
 
 
@@ -541,28 +553,33 @@ def test_get_nested_dict_key_by_level_ReturnsObj():
     assert get_nested_dict_key_by_level(x4_dict) == [sue_str, bob_str, "yao"]
 
 
-def test_create_2d_array_from_sunny_dict_RaisesError_is_sunny_IsFalse():
+def test_create_2d_array_from_2d_with_unique_keys_dict_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        create_2d_array_from_sunny_dict({"Sue": {}, "Bob": {}})
-    exception_text = "dictionary is not sunny."
+        create_2d_array_from_2d_with_unique_keys_dict({"Sue": {}, "Bob": {}})
+    exception_text = "dictionary is not 2d_with_unique_keys."
     assert str(excinfo.value) == exception_text
 
 
-# def test_create_2d_array_from_sunny_dict_ReturnsObj_Scenario0_Simple():
+# def test_create_2d_array_from_2d_with_unique_keys_dict_ReturnsObj_Scenario0_Simple():
 #     # ESTABLISH
-#     assert create_2d_array_from_sunny_dict({}) == [[]]
-#     assert create_2d_array_from_sunny_dict({"Sue": {}}) == [["Sue"], [None]]
+#     sue_str = "Sue"
+#     x1_int = 1
+
+#     # WHEN / THEN
+#     assert create_2d_array_from_2d_with_unique_keys_dict({}) == [[]]
+#     assert create_2d_array_from_2d_with_unique_keys_dict({sue_str: x1_int}) == [[sue_str], [x1_int]]
+#     assert create_2d_array_from_2d_with_unique_keys_dict({sue_str: x1_int}) == [[sue_str], [x1_int]]
 #     x0_2d_array = [["swim", "Sue"], [155, None]]
-#     assert create_2d_array_from_sunny_dict({"swim": 155, "Sue": {}}) == x0_2d_array
-#     assert create_2d_array_from_sunny_dict({"casa": {"clean": "Bob"}})
-#     assert create_2d_array_from_sunny_dict({"casa": {"clean": {"Bob": 13}}})
-#     assert create_2d_array_from_sunny_dict(
+#     assert create_2d_array_from_2d_with_unique_keys_dict({"swim": 155, "Sue": {}}) == x0_2d_array
+#     assert create_2d_array_from_2d_with_unique_keys_dict({"casa": {"clean": "Bob"}})
+#     assert create_2d_array_from_2d_with_unique_keys_dict({"casa": {"clean": {"Bob": 13}}})
+#     assert create_2d_array_from_2d_with_unique_keys_dict(
 #         {"casa": {"clean": {"Bob": 13}}, "school": 14}
 #     )
 
 
-# def test_create_2d_array_from_sunny_dict_ReturnsObj_Scenario1():
+# def test_create_2d_array_from_2d_with_unique_keys_dict_ReturnsObj_Scenario1():
 #     # ESTABLISH
 #     swim_text = "swim"
 #     six_text = "six"
@@ -585,3 +602,4 @@ def test_create_2d_array_from_sunny_dict_RaisesError_is_sunny_IsFalse():
 #         == f"""{swim_text},{six_text},{seven_text}
 # {headerless_csv}"""
 #     )
+#     assert 1 == 2

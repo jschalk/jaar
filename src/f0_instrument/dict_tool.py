@@ -66,7 +66,7 @@ class NestedValueException(Exception):
     pass
 
 
-class is_sunny_Exception(Exception):
+class is_2d_with_unique_keys_Exception(Exception):
     pass
 
 
@@ -240,7 +240,7 @@ def get_nested_keys_by_level(x_dict: dict) -> dict[int, set]:
     return keys_by_level
 
 
-def is_sunny(x_dict: dict) -> bool:
+def is_2d_with_unique_keys(x_dict: dict) -> bool:
     key_set_by_level = get_nested_dict_keys_by_level(x_dict).values()
     one_dict_per_level = all(len(x_key_set) <= 1 for x_key_set in key_set_by_level)
     if not one_dict_per_level:
@@ -254,21 +254,28 @@ def is_sunny(x_dict: dict) -> bool:
 
 
 def get_nested_dict_key_by_level(x_dict: dict) -> list:
-    if is_sunny(x_dict) is False:
-        raise is_sunny_Exception("dictionary is not sunny.")
+    if is_2d_with_unique_keys(x_dict) is False:
+        raise is_2d_with_unique_keys_Exception("dictionary is not 2d_with_unique_keys.")
     key_set_by_level = get_nested_dict_keys_by_level(x_dict)
     ordered_keys = sorted(key_set_by_level.keys())
     return [max(key_set_by_level[key]) for key in ordered_keys]
 
 
-def create_2d_array_from_sunny_dict(x_dict: dict) -> list[list]:
+def create_2d_array_from_2d_with_unique_keys_dict(x_dict: dict) -> list[list]:
     dict_key_by_level = get_nested_dict_key_by_level(x_dict)
     x_rows = []
     level_count = len(dict_key_by_level)
-    to_eval_dicts = [[x_dict, 0, []]]
+    to_eval_dicts = [[x_dict, 0, {}]]
+    table_rows = []
     while to_eval_dicts != []:
-        x_list = to_eval_dicts.pop()
-        if x_list[1] == level_count:
-            pass
+        y0_list = to_eval_dicts.pop()
+        y0_dict = y0_list[0]
+        y0_level = y0_list[1]
+        y0_ancestor_attrs = y0_list[2]
+        for y0_key, y0_value in y0_dict.items():
+            y0_ancestor_attrs[y0_key] = y0_value
+        # if y0_level == level_count:
+        #     for
+        #     table_rows.append(y0_ancestor_attrs)
 
-    return [dict_key_by_level]
+    return table_rows
